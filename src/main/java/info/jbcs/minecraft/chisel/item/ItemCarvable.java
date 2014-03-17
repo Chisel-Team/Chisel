@@ -1,8 +1,8 @@
 package info.jbcs.minecraft.chisel.item;
 
-import info.jbcs.minecraft.chisel.Carvable;
 import info.jbcs.minecraft.chisel.CarvableVariation;
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.api.Carvable;
 import info.jbcs.minecraft.utilities.General;
 
 import java.util.List;

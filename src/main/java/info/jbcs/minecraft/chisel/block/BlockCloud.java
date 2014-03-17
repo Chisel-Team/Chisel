@@ -10,7 +10,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCloud extends BlockMarble {
+public class BlockCloud extends BlockCarvable {
 
 	public BlockCloud() {
 		super(Material.ice);

@@ -28,7 +28,7 @@ public class SlotChiselSelection extends Slot {
 
 	@Override public void onPickupFromSlot(EntityPlayer player,ItemStack itemstack) {
 		ItemStack stack=player.inventory.getItemStack();
-		ItemStack crafted=selInventory.items[InventoryChiselSelection.normalSlots];
+		ItemStack crafted=selInventory.inventory[InventoryChiselSelection.normalSlots];
 		
 		if(stack==null){
 			if(crafted!=null && crafted.stackSize>0) crafted.stackSize--;
@@ -40,9 +40,9 @@ public class SlotChiselSelection extends Slot {
 
 			player.inventory.setItemStack(null);
 
-			if(selInventory.items[InventoryChiselSelection.normalSlots]==null) return;
+			if(selInventory.inventory[InventoryChiselSelection.normalSlots]==null) return;
 
-			player.inventory.setItemStack(new ItemStack(itemstack.getItem(), selInventory.items[InventoryChiselSelection.normalSlots].stackSize, itemstack.getItemDamage()));
+			player.inventory.setItemStack(new ItemStack(itemstack.getItem(), selInventory.inventory[InventoryChiselSelection.normalSlots].stackSize, itemstack.getItemDamage()));
 			selInventory.setInventorySlotContents(InventoryChiselSelection.normalSlots,null);
 		}
 		

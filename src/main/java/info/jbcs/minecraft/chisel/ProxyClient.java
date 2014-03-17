@@ -2,7 +2,6 @@ package info.jbcs.minecraft.chisel;
 
 import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
 import info.jbcs.minecraft.chisel.entity.EntityCloudInABottle;
-import info.jbcs.minecraft.chisel.item.ItemChiselRenderer;
 import info.jbcs.minecraft.chisel.render.BlockAdvancedMarbleRenderer;
 import info.jbcs.minecraft.chisel.render.BlockCarpetRenderer;
 import info.jbcs.minecraft.chisel.render.BlockEldritchRenderer;
@@ -13,7 +12,8 @@ import info.jbcs.minecraft.chisel.render.BlockNoCTMRenderer;
 import info.jbcs.minecraft.chisel.render.BlockRoadLineRenderer;
 import info.jbcs.minecraft.chisel.render.BlockSnakeStoneRenderer;
 import info.jbcs.minecraft.chisel.render.BlockSpikesRenderer;
-import info.jbcs.minecraft.utilities.BlockTexturedOreRenderer;
+import info.jbcs.minecraft.chisel.render.BlockTexturedOreRenderer;
+import info.jbcs.minecraft.chisel.render.ItemChiselRenderer;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;

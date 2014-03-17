@@ -12,7 +12,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockMarbleBookshelf extends BlockMarble {
+public class BlockMarbleBookshelf extends BlockCarvable {
 
 	public BlockMarbleBookshelf() {
 		super();

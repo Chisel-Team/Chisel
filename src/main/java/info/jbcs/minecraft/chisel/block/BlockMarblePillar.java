@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockMarblePillar extends BlockMarble{
+public class BlockMarblePillar extends BlockCarvable{
 	public IIcon sides[]=new IIcon[6];
 	
 	public BlockMarblePillar(Material m) {

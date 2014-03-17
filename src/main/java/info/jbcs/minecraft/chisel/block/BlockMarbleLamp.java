@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class BlockMarbleLamp extends BlockMarble {
+public class BlockMarbleLamp extends BlockCarvable {
 	BlockMarbleLamp blockUnpowered;
 	BlockMarbleLamp blockPowered;
 	boolean powered;

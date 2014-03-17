@@ -5,15 +5,15 @@ import net.minecraft.block.Block;
 import net.minecraft.util.IIcon;
 
 public class CarvableVariation {
-	String					blockName;
+	public String					blockName;
 	public String					description;
-	int						metadata;
+	public int						metadata;
 	public int						kind;
 
-	Block					block;
-	int						blockMeta;
+	public Block					block;
+	public int						blockMeta;
 
-	String					texture;
+	public String					texture;
 
 	public IIcon					icon;
 	public IIcon					iconTop;

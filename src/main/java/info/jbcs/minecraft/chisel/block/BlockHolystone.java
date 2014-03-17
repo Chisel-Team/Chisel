@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockHolystone extends BlockMarble{
+public class BlockHolystone extends BlockCarvable{
 	public IIcon iconStar;
 	
 	public BlockHolystone(Material m) {

@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 
-public class BlockConcrete extends BlockMarble {
+public class BlockConcrete extends BlockCarvable {
 
 	public BlockConcrete() {
 		super();

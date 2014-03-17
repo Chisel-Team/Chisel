@@ -68,14 +68,4 @@ public class GuiChisel extends GuiContainer {
 		GeneralClient.bind(texture);
 		drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
 	}
-
-	@Override
-	public void initGui() {
-		super.initGui();
-	}
-
-	@Override
-	protected void actionPerformed(GuiButton guibutton) {
-		super.actionPerformed(guibutton);
-	}
 }

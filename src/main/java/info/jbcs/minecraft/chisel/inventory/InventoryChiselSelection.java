@@ -2,25 +2,31 @@ package info.jbcs.minecraft.chisel.inventory;
 
 import info.jbcs.minecraft.chisel.item.ItemChisel;
 import info.jbcs.minecraft.utilities.General;
-import info.jbcs.minecraft.utilities.InventoryStatic;
 
 import java.util.ArrayList;
 
+import pl.asie.lib.block.InventoryBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class InventoryChiselSelection extends InventoryStatic {
+public class InventoryChiselSelection extends InventoryBase {
 	ItemStack chisel = null;
 	final static int normalSlots=32;
 	int activeVariations=0;
 	ContainerChisel container;
 	
 	public InventoryChiselSelection(ItemStack c) {
-		super(normalSlots+1);
+		super();
 
 		chisel = c;
+	}
+
+	@Override
+	public int getSizeInventory() {
+		return normalSlots+1;
 	}
 
 	@Override
@@ -33,23 +39,19 @@ public class InventoryChiselSelection extends InventoryStatic {
 		return true;
 	}
 
-	@Override
-	public void onInventoryChanged() {
-	}
-
 	public void clearItems() {
 		activeVariations=0;
 		for (int i = 0; i < normalSlots; i++) {
-			items[i] = null;
+			inventory[i] = null;
 		}
 	}
 
 	public ItemStack getStackInSpecialSlot() {
-		return items[normalSlots];
+		return inventory[normalSlots];
 	}
 
 	public void updateItems() {
-		ItemStack chiseledItem = items[normalSlots];
+		ItemStack chiseledItem = inventory[normalSlots];
 
 		clearItems();
 
@@ -68,7 +70,7 @@ public class InventoryChiselSelection extends InventoryStatic {
 		
 		activeVariations=0;
 		while(activeVariations<normalSlots && activeVariations<list.size()){
-			items[activeVariations]=list.get(activeVariations);
+			inventory[activeVariations]=list.get(activeVariations);
 			activeVariations++;
 		}
 				
@@ -95,5 +97,10 @@ public class InventoryChiselSelection extends InventoryStatic {
 		}
 		
 		return i==normalSlots;
+	}
+
+	@Override
+	public void onInventoryUpdate(int slot) {
+		
 	}
 }

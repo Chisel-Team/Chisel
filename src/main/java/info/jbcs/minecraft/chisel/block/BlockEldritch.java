@@ -3,7 +3,7 @@ package info.jbcs.minecraft.chisel.block;
 import info.jbcs.minecraft.chisel.Chisel;
 
 
-public class BlockEldritch extends BlockMarble {
+public class BlockEldritch extends BlockCarvable {
 
 	public BlockEldritch() {
 		super();

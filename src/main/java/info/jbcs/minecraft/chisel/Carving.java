@@ -32,11 +32,11 @@ public class Carving {
 	public static Carving needle=new Carving();
 	
 	String key(Item item,int metadata){
-		return Item.getIdFromItem(item)+"|"+metadata;
+		return item.getUnlocalizedName()+"|"+metadata;
 	}
 	
 	String key(Block block, int metadata){
-		return Block.getIdFromBlock(block)+"|"+metadata;
+		return block.getUnlocalizedName()+"|"+metadata;
 	}
 	
 	public boolean isVariationOfSameClass(Block target,int metadata1, Block block2, int metadata2){

@@ -60,7 +60,7 @@ public class CarvableHelper {
 	}
 
 	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta) {
-		if (variations.size() > 15)
+		if (variations.size() >= 16)
 			return;
 
 		if(blockName==null && block!=null) blockName=block.getLocalizedName();
@@ -250,11 +250,24 @@ public class CarvableHelper {
 	void register(Block block, String name) {
 		register(block, name, ItemCarvable.class);
 	}
-
+	
+	void register(Block block, String name, int metaBegin, int metaEnd) {
+		register(block, name, metaBegin, metaEnd, ItemCarvable.class);
+	}
+	
 	void register(Block block, String name, Class cl) {
-		block.setBlockName(name);
-		GameRegistry.registerBlock(block, cl, name);
+		register(block, name, 0, 15, cl);
+	}
+	
+	private boolean hasRegisteredBlock = false;
 
+	void register(Block block, String name, int metaBegin, int metaEnd, Class cl) {
+		block.setBlockName(name);
+		if(!hasRegisteredBlock) {
+			GameRegistry.registerBlock(block, cl, name);
+			hasRegisteredBlock = true;
+		}
+		
 		if (block instanceof BlockMarbleSlab) {
 			BlockMarbleSlab slab = (BlockMarbleSlab) block;
 			GameRegistry.registerBlock(slab.top, cl, name + ".top");
@@ -266,8 +279,6 @@ public class CarvableHelper {
 			if (block instanceof BlockMarbleSlab && ((BlockMarbleSlab) block).isBottom) {
 				BlockMarbleSlab slab = (BlockMarbleSlab) block;
 				slab.top.setHarvestLevel("chisel", 0, variation.metadata);
-				
-				slab.top.setHardness(slab.blockHardness).setResistance(slab.blockResistance);
 				
 				if(! forbidChiseling){
 					Carving.chisel.addVariation(name + ".top", slab.top, variation.metadata, 0);
@@ -370,9 +381,6 @@ public class CarvableHelper {
 
 	public void registerSubBlocks(Block block, CreativeTabs tabs, List list) {
 		for (CarvableVariation variation : variations) {
-			if ((!Chisel.overrideVanillaBlocks) && variation.block != null)
-				continue;
-
 			list.add(new ItemStack(block, 1, variation.metadata));
 		}
 	}

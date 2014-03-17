@@ -1,9 +1,9 @@
 package info.jbcs.minecraft.chisel.block;
 
-import info.jbcs.minecraft.chisel.Carvable;
 import info.jbcs.minecraft.chisel.CarvableHelper;
 import info.jbcs.minecraft.chisel.CarvableVariation;
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.api.Carvable;
 import info.jbcs.minecraft.chisel.render.BlockMarbleStairsRenderer;
 
 import java.util.List;

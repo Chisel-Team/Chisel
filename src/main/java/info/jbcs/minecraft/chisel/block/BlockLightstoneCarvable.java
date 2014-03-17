@@ -8,7 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
-public class BlockLightstoneCarvable extends BlockMarble {
+public class BlockLightstoneCarvable extends BlockCarvable {
 	public BlockLightstoneCarvable() {
 		super(Material.glass);
 	}
