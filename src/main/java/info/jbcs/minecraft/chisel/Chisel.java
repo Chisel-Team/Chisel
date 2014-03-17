@@ -129,8 +129,8 @@ public class Chisel {
 	public static BlockSpikes				blockSpiketrap;
 	
 	// 1.7
-	public static BlockCarvableGlass[]		blockStainedGlass = new BlockCarvableGlass[16];
-	public static BlockCarvablePane[]		blockStainedGlassPane = new BlockCarvablePane[16];
+	public static BlockCarvableGlass[]		blockStainedGlass = new BlockCarvableGlass[4];
+	public static BlockCarvablePane[]		blockStainedGlassPane = new BlockCarvablePane[8];
 	
 	public static CreativeTabs				tabChisel;
 	
@@ -1129,7 +1129,7 @@ public class Chisel {
 	    blockFactory.carverHelper.register(blockFactory, "blockFactory");
 	    
 	    // 1.7! Let's go! Let's go-go!
-	    /*
+
 	    String[] sGNames = new String[]{
 	    		"White", "Orange", "Magenta", "Light Blue",
 	    		"Yellow", "Lime", "Pink", "Gray",
@@ -1138,21 +1138,53 @@ public class Chisel {
 	    };
 	    
 	    for(int i = 0; i < 16; i++) {
-	    	String odName = "stainedGlass" + sGNames[i].replaceAll(" ", "");
+	    	String blockName = "chisel.stainedGlass" + sGNames[i].replaceAll(" ", "");
+	    	String oreName = "stainedGlass" + sGNames[i].replaceAll(" ", "");
 	    	String texName = "glassdyed/" + sGNames[i].toLowerCase().replaceAll(" ", "") + "-";
-	    	int glassPrefix = 0;
-	    	int glassId = i;
-	    	blockStainedGlass[glassId] = (BlockCarvableGlass) new BlockCarvableGlass().setHardness(0.3F).setStepSound(Block.soundTypeGlass);
-	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " Stained Glass", glassPrefix + 0, Blocks.stained_glass, i);
-	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " Bubble Stained Glass", glassPrefix + 1, texName + "bubble");
-	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " Stained Glass Panel", glassPrefix + 2, texName + "panel");
-	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " Fancy Stained Glass Panel", glassPrefix + 3, texName + "panel-fancy");
-	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " Small Stained Glass", glassPrefix + 4, texName + "quad");
-	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " Small Fancy Stained Glass", glassPrefix + 5, texName + "quad-fancy");
-	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " Borderless Stained Glass", glassPrefix + 6, texName + "transparent");
-		   	blockStainedGlass[glassId].carverHelper.register(blockStainedGlass[glassId], "stainedGlass."+glassId, glassPrefix, glassPrefix+7);
+	    	int glassPrefix = (i & 3) << 2;
+	    	int glassId = i >> 2;
+	    	if(glassPrefix == 0) {
+	    		blockStainedGlass[glassId] = (BlockCarvableGlass) new BlockCarvableGlass().setStained(true).setHardness(0.3F).setStepSound(Block.soundTypeGlass).setBlockName("Stained Glass");
+	    		blockStainedGlass[glassId].carverHelper.registerBlock(blockStainedGlass[glassId], blockName);
+	    		blockStainedGlass[glassId].carverHelper.blockName = "Stained Glass";
+	    	}
+	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " bubble glass", glassPrefix + 0, texName + "bubble");
+	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " glass panel", glassPrefix + 1, texName + "panel");
+	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " fancy glass panel", glassPrefix + 2, texName + "panel-fancy");
+	    	blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " borderless glass", glassPrefix + 3, texName + "transparent");
+	    	OreDictionary.registerOre(oreName, new ItemStack(Blocks.stained_glass, 1, i));
+	    	Carving.chisel.registerOre(blockName, oreName);
+	    	for(CarvableVariation cv: blockStainedGlass[glassId].carverHelper.variations) {
+	    		if(cv.metadata < glassPrefix || cv.metadata >= glassPrefix+4) continue;
+	    		blockStainedGlass[glassId].carverHelper.registerVariation(blockName, cv, blockStainedGlass[glassId], cv.metadata);
+	    	}
 	    }
-	    */
+	    
+	    for(int i = 0; i < 16; i++) {
+	    	String blockName = "chisel.stainedGlassPane" + sGNames[i].replaceAll(" ", "");
+	    	String oreName = "stainedGlassPane" + sGNames[i].replaceAll(" ", "");
+	    	String texName = "glasspanedyed/" + sGNames[i].toLowerCase().replaceAll(" ", "") + "-";
+	    	int glassPrefix = (i & 1) << 3;
+	    	int glassId = i >> 1;
+	    	if(glassPrefix == 0) {
+	    		blockStainedGlassPane[glassId] = (BlockCarvablePane) new BlockCarvablePane(Material.glass, false).setStained(true).setHardness(0.3F).setStepSound(Block.soundTypeGlass).setBlockName("Stained Glass Pane");
+	    		blockStainedGlassPane[glassId].carverHelper.registerBlock(blockStainedGlassPane[glassId], blockName);
+	    		blockStainedGlassPane[glassId].carverHelper.blockName = "Stained Glass Pane";
+	    	}
+	    	blockStainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " bubble glass", glassPrefix + 0, texName + "bubble");
+	    	blockStainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " glass panel", glassPrefix + 1, texName + "panel");
+	    	blockStainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " fancy glass panel", glassPrefix + 2, texName + "panel-fancy");
+	    	blockStainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " borderless glass", glassPrefix + 3, texName + "transparent");
+	    	blockStainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " quadrant glass", glassPrefix + 4, texName + "quad");
+	    	blockStainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " fancy quadrant glass", glassPrefix + 5, texName + "quad-fancy");
+	    	OreDictionary.registerOre(oreName, new ItemStack(Blocks.stained_glass_pane, 1, i));
+	    	Carving.chisel.registerOre(blockName, oreName);
+	    	for(CarvableVariation cv: blockStainedGlassPane[glassId].carverHelper.variations) {
+	    		if(cv.metadata < glassPrefix || cv.metadata >= glassPrefix+8) continue;
+	    		blockStainedGlassPane[glassId].carverHelper.registerVariation(blockName, cv, blockStainedGlassPane[glassId], cv.metadata);
+	    	}
+	    }
+	    
 	    Blocks.stone.setHarvestLevel("chisel", 0, 0);
 	    
 		proxy.preInit();

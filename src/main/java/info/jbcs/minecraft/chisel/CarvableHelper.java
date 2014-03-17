@@ -1,6 +1,7 @@
 package info.jbcs.minecraft.chisel;
 
 import info.jbcs.minecraft.chisel.CarvableVariation.CarvableVariationCTM;
+import info.jbcs.minecraft.chisel.block.BlockCarvableGlass;
 import info.jbcs.minecraft.chisel.block.BlockMarbleSlab;
 import info.jbcs.minecraft.chisel.item.ItemCarvable;
 import info.jbcs.minecraft.chisel.render.CTM;
@@ -251,26 +252,21 @@ public class CarvableHelper {
 		register(block, name, ItemCarvable.class);
 	}
 	
-	void register(Block block, String name, int metaBegin, int metaEnd) {
-		register(block, name, metaBegin, metaEnd, ItemCarvable.class);
+	void registerBlock(Block block, String name) {
+		registerBlock(block, name, ItemCarvable.class);
 	}
 	
-	void register(Block block, String name, Class cl) {
-		register(block, name, 0, 15, cl);
-	}
-	
-	private boolean hasRegisteredBlock = false;
-
-	void register(Block block, String name, int metaBegin, int metaEnd, Class cl) {
+	void registerBlock(Block block, String name, Class cl) {
 		block.setBlockName(name);
-		if(!hasRegisteredBlock) {
-			GameRegistry.registerBlock(block, cl, name);
-			hasRegisteredBlock = true;
-		}
+		GameRegistry.registerBlock(block, cl, "chisel." + name);
+		chiselBlocks.add(block);
+	}
+
+	void register(Block block, String name, Class cl) {
+		registerBlock(block, name, cl);
 		
 		if (block instanceof BlockMarbleSlab) {
 			BlockMarbleSlab slab = (BlockMarbleSlab) block;
-			GameRegistry.registerBlock(slab.top, cl, name + ".top");
 		}
 
 		for (CarvableVariation variation : variations) {
@@ -286,12 +282,9 @@ public class CarvableHelper {
 				}
 			}
 		}
-
-		chiselBlocks.add(block);
 	}
 
 	public void registerVariation(String name, CarvableVariation variation, Block block, int blockMeta) {
-		
 		LanguageRegistry.addName(new ItemStack(block, 1, blockMeta), 
 			Chisel.blockDescriptions?
 				variation.blockName:

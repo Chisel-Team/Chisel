@@ -7,6 +7,8 @@ import info.jbcs.minecraft.chisel.api.Carvable;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -17,7 +19,8 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockCarvable extends Block implements Carvable {
 	public CarvableHelper carverHelper;
-
+	private boolean isAlpha;
+	
 	public BlockCarvable() {
 		this(Material.rock);
 	}
@@ -29,6 +32,18 @@ public class BlockCarvable extends Block implements Carvable {
 
 		setCreativeTab(Chisel.tabChisel);
 	}
+
+	public BlockCarvable setStained(boolean a) {
+		this.isAlpha = a;
+		return this;
+	}
+	
+	@Override
+    @SideOnly(Side.CLIENT)
+    public int getRenderBlockPass()
+    {
+        return isAlpha ? 1 : 0;
+    }
 
 	@Override
 	public IIcon getIcon(int side, int metadata) {

@@ -8,6 +8,8 @@ import info.jbcs.minecraft.chisel.render.BlockMarblePaneRenderer;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
@@ -18,7 +20,8 @@ import net.minecraft.util.IIcon;
 
 public class BlockCarvablePane extends BlockPane implements Carvable {
 	public CarvableHelper carverHelper;
-
+	private boolean isAlpha;
+	
 	public BlockCarvablePane(Material material, boolean drops) {
 		super("", "", material, drops);
 		
@@ -27,8 +30,18 @@ public class BlockCarvablePane extends BlockPane implements Carvable {
 		setCreativeTab(Chisel.tabChisel);
 	}
 
+	public BlockCarvablePane setStained(boolean a) {
+		this.isAlpha = a;
+		return this;
+	}
 
-
+	@Override
+    @SideOnly(Side.CLIENT)
+    public int getRenderBlockPass()
+    {
+        return isAlpha ? 1 : 0;
+    }
+	
 	@Override
 	public int getRenderType() {
 		return BlockMarblePaneRenderer.id;

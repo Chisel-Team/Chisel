@@ -7,6 +7,8 @@ import info.jbcs.minecraft.chisel.api.Carvable;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,7 +18,8 @@ import net.minecraft.util.IIcon;
 
 public class BlockCarvableGlass extends BlockGlass implements Carvable {
 	public CarvableHelper carverHelper;
-
+	private boolean isAlpha = false;
+	
 	public BlockCarvableGlass() {
 		super(Material.glass, false);
 
@@ -25,6 +28,11 @@ public class BlockCarvableGlass extends BlockGlass implements Carvable {
 		setCreativeTab(Chisel.tabChisel);
 	}
 
+	public BlockCarvableGlass setStained(boolean a) {
+		this.isAlpha = a;
+		return this;
+	}
+	
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
@@ -59,4 +67,11 @@ public class BlockCarvableGlass extends BlockGlass implements Carvable {
 	public CarvableVariation getVariation(int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
+	
+	@Override
+    @SideOnly(Side.CLIENT)
+    public int getRenderBlockPass()
+    {
+        return isAlpha ? 1 : 0;
+    }
 }

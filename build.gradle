@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.5.1"
+version = "1.5.2"
 group= "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "chisel"
 
 dependencies {
-    compile files("mods/AsieLib-0.1.7.jar")
+    compile files("mods/AsieLib-0.1.8.jar")
 }
 
 minecraft {

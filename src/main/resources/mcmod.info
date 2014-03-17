@@ -3,7 +3,7 @@
   "modid": "chisel",
   "name": "Chisel",
   "description": "Adds a chisel item that lets you carve blocks like cobblestone or sandstone. Adds two new blocks to world generation: marble and limestone, which can be be carved and crafted into many various building materials.",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "credits": "This mod uses a lot of textures from the Painterly pack: http://painterlypack.net/. Also one stone variation is designed to look like a block from Doku.",
   "logoFile": "",
   "mcversion": "1.7.2",

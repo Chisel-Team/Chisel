@@ -36,16 +36,12 @@ public class RenderBlocksCTM extends RenderBlocks {
         tessellator = Tessellator.instance;
         tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
         
-        tessellator.xOffset+=x;
-        tessellator.yOffset+=y;
-        tessellator.zOffset+=z;
+        tessellator.addTranslation(x, y, z);
         
         boolean res=super.renderStandardBlock(block, x, y, z);
         
-        tessellator.xOffset-=x;
-        tessellator.yOffset-=y;
-        tessellator.zOffset-=z;
-
+        tessellator.addTranslation(-x, -y, -z);
+        
         return res;
     }
     

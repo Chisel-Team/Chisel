@@ -11,19 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class Carving {
-	class CarvingGroup{
-		public CarvingGroup(String n) {
-			name=n;
-		}
-
-		String name;
-		String className;
-		String sound;
-		String oreName;
-		
-		ArrayList<CarvingVariation> variations=new ArrayList<CarvingVariation>();
-	};
-	
 	HashMap<String,CarvingGroup> carvingGroupsByName=new HashMap<String,CarvingGroup>();
 	HashMap<String,CarvingGroup> carvingGroupsByOre=new HashMap<String,CarvingGroup>();
 	HashMap<String,CarvingGroup> carvingGroupsByVariation=new HashMap<String,CarvingGroup>();
@@ -105,6 +92,7 @@ public class Carving {
 	public CarvingGroup getGroup(Block block,int metadata) {
 		if(block.equals(Blocks.stone)) block=Blocks.stonebrick;
 		
+		// Check name first
 		CarvingGroup res;
 		
 		if((res=carvingGroupsByOre.get(OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(block,1,metadata)))))!=null)

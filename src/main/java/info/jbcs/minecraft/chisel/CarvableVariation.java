@@ -29,5 +29,4 @@ public class CarvableVariation {
 	static class CarvableVariationCTM {
 		TextureSubmap	seams[]	= new TextureSubmap[3];
 	}
-
 }
