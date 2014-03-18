@@ -2,6 +2,7 @@ package info.jbcs.minecraft.chisel.block;
 
 import info.jbcs.minecraft.chisel.CarvableHelper;
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.ChiselBlocks;
 
 import java.util.Random;
 
@@ -19,12 +20,12 @@ public class BlockMarbleIceStairs extends BlockMarbleStairs {
 
 	@Override
 	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6) {
-		Chisel.blockIce.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
+		ChiselBlocks.blockIce.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
 	}
 
 	@Override
 	public int quantityDropped(Random par1Random) {
-		return Chisel.blockIce.quantityDropped(par1Random);
+		return ChiselBlocks.blockIce.quantityDropped(par1Random);
 	}
 	@Override
 	public int damageDropped(int i) {
@@ -33,7 +34,7 @@ public class BlockMarbleIceStairs extends BlockMarbleStairs {
 	
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		Chisel.blockIce.updateTick(par1World, par2, par3, par4, par5Random);
+		ChiselBlocks.blockIce.updateTick(par1World, par2, par3, par4, par5Random);
 	}
 
 	@Override

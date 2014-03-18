@@ -19,11 +19,11 @@ public class Carving {
 	public static Carving needle=new Carving();
 	
 	String key(Item item,int metadata){
-		return item.getUnlocalizedName()+"|"+metadata;
+		return Item.itemRegistry.getNameForObject(item)+"|"+metadata;
 	}
 	
 	String key(Block block, int metadata){
-		return block.getUnlocalizedName()+"|"+metadata;
+		return Block.blockRegistry.getNameForObject(block)+"|"+metadata;
 	}
 	
 	public boolean isVariationOfSameClass(Block target,int metadata1, Block block2, int metadata2){

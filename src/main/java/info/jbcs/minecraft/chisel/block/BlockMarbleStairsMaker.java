@@ -22,15 +22,15 @@ public class BlockMarbleStairsMaker {
 		blockBase=base;
 	}
 	
-	public void create(){
-		create(null);
+	public void create(String name){
+		create(null, name);
 	}
 	
-	public void create(BlockMarbleStairsMakerCreator creator){
+	public void create(BlockMarbleStairsMakerCreator creator, String name){
 		blocks=new BlockMarbleStairs[carverHelper.variations.size()/2];
 		
 		for(int i=0;i<blocks.length;i++){
-			String n=blockName+"."+i;
+			String n=name+"."+i;
 			blocks[i]=creator==null?
 				new BlockMarbleStairs(blockBase, i*2, carverHelper):
 				creator.create(blockBase, i*2, carverHelper);
@@ -42,7 +42,7 @@ public class BlockMarbleStairsMaker {
 				CarvableVariation variation=carverHelper.variations.get(i*2+meta);
 				
 				for(int j=0;j<8;j++)
-					carverHelper.registerVariation(blockName+".orientation."+j,variation,blocks[i],j+meta*8);
+					carverHelper.registerVariation(name+".orientation."+j,variation,blocks[i],j+meta*8);
 
 				CraftingManager.getInstance().addRecipe(new ItemStack(blocks[i], 4, meta*8), new Object[] { "*  ", "** ", "***", '*', new ItemStack(blockBase, 1, i*2+meta)});
 			}

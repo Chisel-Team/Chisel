@@ -4,13 +4,11 @@ import info.jbcs.minecraft.chisel.CarvableHelper;
 import info.jbcs.minecraft.chisel.Carving;
 import info.jbcs.minecraft.chisel.CarvingVariation;
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.ChiselBlocks;
 import info.jbcs.minecraft.chisel.GeneralChiselClient;
 import info.jbcs.minecraft.chisel.Packets;
 import info.jbcs.minecraft.utilities.General;
-import info.jbcs.minecraft.utilities.packets.PacketData;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
@@ -71,6 +69,8 @@ public class ItemChisel extends ItemTool {
 	
     @Override
 	public boolean onBlockStartBreak(ItemStack stack, final int x, final int y, final int z, EntityPlayer player){
+    	if(!Chisel.enableChiseling) return true;
+    	
 		World world=player.worldObj;
 		Block block = world.getBlock(x, y, z);
 		int blockMeta=world.getBlockMetadata(x,y,z);
@@ -86,7 +86,11 @@ public class ItemChisel extends ItemTool {
 
 		boolean chiselHasBlockInside=true;
 		
+		boolean noReplace = false;
+		
 		if(chiselTarget==null){
+			chiselHasBlockInside=false;
+			
 			Long useTime=chiselUseTime.get(player.getCommandSenderName());
 			String loc=chiselUseLocation.get(player.getCommandSenderName());
 			
@@ -94,65 +98,76 @@ public class ItemChisel extends ItemTool {
 				long cooldown=20;
 				long time=world.getWorldInfo().getWorldTotalTime();
 				
-				if(time>useTime-cooldown && time<useTime+cooldown)
-					return true;					
-				
+				//if(time>useTime-cooldown && time<useTime+cooldown) noReplace = true;		
 			}
 			
 			CarvingVariation[] variations=carving.getVariations(block, blockMeta);
-			if(variations==null || variations.length<2) return true;
-			
-			int index=random.nextInt(variations.length-1);
-			if(variations[index].equals(block) && variations[index].meta==blockMeta){
-				index++;
-				if(index>=variations.length) index=0;
+			if(variations==null || variations.length<2) noReplace = true;
+			else {
+				int index=random.nextInt(variations.length-1);
+				while (variations[index].block.equals(block) && variations[index].damage==blockMeta){
+					index++;
+					if(index>=variations.length) index=0;
+				}
+				CarvingVariation var=variations[index];
+				chiselTarget=new ItemStack(var.block,1,var.damage);
 			}
-			CarvingVariation var=variations[index];
-			chiselTarget=new ItemStack(var.block,1,var.damage);
+		}
+		Item result = null;
+		int targetMeta = 0;
+		
+		if(!noReplace) {
+			Item target = chiselTarget.getItem();
 			
-			chiselHasBlockInside=false;
+			targetMeta=chiselTarget.getItemDamage();
+	
+			boolean match = carving.isVariationOfSameClass(Block.getBlockFromItem(target),targetMeta,block,blockMeta);
+			result = target;
+			
+			/* special case: stone can be carved to cobble and bricks */
+			if(Chisel.chiselStoneToCobbleBricks) {
+				if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ChiselBlocks.blockCobblestone))
+					match=true;
+				if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ChiselBlocks.stoneBrick))
+					match=true;
+			}
+			if(match == false) noReplace = true;
 		}
 		
-		Item target = chiselTarget.getItem();
+		int updateValue = 2;
 		
-		int targetMeta=chiselTarget.getItemDamage();
-
-		boolean match=carving.isVariationOfSameClass(Block.getBlockFromItem(target),targetMeta,block,blockMeta);
-		Item result = target;
+		if(noReplace) {
+			result = Item.getItemFromBlock(block);
+			targetMeta = blockMeta;
+		}
+		if(Block.getBlockFromItem(result).equals(block) && targetMeta == blockMeta) updateValue |= 4;
+		//if(Block.getBlockFromItem(result) == null) return true;
 		
-		
-		/* special case: stone can be carved to cobble and bricks */
-		if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(Chisel.blockCobblestone))
-			match=true;
-		if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(Chisel.stoneBrick))
-			match=true;
-		
-		if(!match) return true;
-		if(result.equals(block) && targetMeta == blockMeta) return true;
-		
-		if(! world.isRemote || chiselHasBlockInside) 
-			world.setBlock(x, y, z, Block.getBlockFromItem(result), chiselTarget.getItemDamage(), 2);
+		if(! world.isRemote || chiselHasBlockInside) {
+			System.out.println("Changing to " + Item.itemRegistry.getNameForObject(result) + ":" + chiselTarget.getItemDamage());
+			world.setBlock(x, y, z, Block.getBlockFromItem(result), targetMeta, updateValue);
+		}
 		
 		switch(FMLCommonHandler.instance().getEffectiveSide()){
-		case SERVER:
-			chiselUseTime.put(player.getCommandSenderName(), world.getWorldInfo().getWorldTotalTime());
-			chiselUseLocation.put(player.getCommandSenderName(),x+"|"+y+"|"+z);
-			
-			try {
-				Packet packet = Chisel.packet.create(Packets.CHISELED).writeInt(x).writeInt(y).writeInt(z);
-				Chisel.packet.sendToAllAround(packet, new TargetPoint(player.dimension, x, y, z, 30.0f));
-			} catch(Exception e) { e.printStackTrace(); }
-			break;
-			
-		case CLIENT:
-			if(chiselHasBlockInside){
-				String sound=carving.getVariationSound(result, chiselTarget.getItemDamage());
-				GeneralChiselClient.spawnChiselEffect(x, y, z, sound);
-			}
-			break;
-			
-		default:
-			break;
+			case SERVER:
+				chiselUseTime.put(player.getCommandSenderName(), world.getWorldInfo().getWorldTotalTime());
+				chiselUseLocation.put(player.getCommandSenderName(),x+"|"+y+"|"+z);
+				
+				try {
+					Packet packet = Chisel.packet.create(Packets.CHISELED).writeInt(x).writeInt(y).writeInt(z);
+					Chisel.packet.sendToAllAround(packet, new TargetPoint(player.dimension, x, y, z, 30.0f));
+				} catch(Exception e) { e.printStackTrace(); }
+				break;
+				
+			case CLIENT:
+				if(chiselHasBlockInside){
+					String sound=carving.getVariationSound(result, chiselTarget.getItemDamage());
+					GeneralChiselClient.spawnChiselEffect(x, y, z, sound);
+				}
+				break;
+				
+			default:
+				break;
 		} 
 		
 		stack.damageItem(1, player);

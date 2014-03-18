@@ -1,6 +1,7 @@
 package info.jbcs.minecraft.chisel.entity;
 
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.ChiselBlocks;
 import info.jbcs.minecraft.chisel.GeneralChiselClient;
 import info.jbcs.minecraft.utilities.General;
 import net.minecraft.block.Block;
@@ -91,10 +92,10 @@ public class EntityBallOMoss extends EntityThrowable  {
 			resBlock = Blocks.mossy_cobblestone;
 		} else if(block.equals(Blocks.cobblestone_wall) && meta==0){
 			resMeta=1;
-		} else if(block.equals(Chisel.blockCobblestone)){
-			resBlock=Chisel.blockCobblestoneMossy;
-		} else if(block.equals(Chisel.blockTemple)){
-			resBlock=Chisel.blockTempleMossy;
+		} else if(block.equals(ChiselBlocks.blockCobblestone)){
+			resBlock=ChiselBlocks.blockCobblestoneMossy;
+		} else if(block.equals(ChiselBlocks.blockTemple)){
+			resBlock=ChiselBlocks.blockTempleMossy;
 		}
 		
 		if(resBlock.equals(block) && resMeta==meta) return;

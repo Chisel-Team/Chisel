@@ -1,13 +1,8 @@
 package info.jbcs.minecraft.chisel;
 
-import info.jbcs.minecraft.utilities.General;
-import info.jbcs.minecraft.utilities.packets.PacketData;
-import info.jbcs.minecraft.utilities.packets.PacketHandler;
-
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 
+import info.jbcs.minecraft.utilities.General;
 import pl.asie.lib.network.MessageHandlerBase;
 import pl.asie.lib.network.Packet;
 import net.minecraft.block.Block;

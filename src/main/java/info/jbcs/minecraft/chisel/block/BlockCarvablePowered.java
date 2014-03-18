@@ -3,8 +3,8 @@ package info.jbcs.minecraft.chisel.block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockPoweredMarble extends BlockCarvable {
-	public BlockPoweredMarble(Material m) {
+public class BlockCarvablePowered extends BlockCarvable {
+	public BlockCarvablePowered(Material m) {
 		super(m);
 	}
 

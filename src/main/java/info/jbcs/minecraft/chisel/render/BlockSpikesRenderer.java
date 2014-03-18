@@ -1,6 +1,7 @@
 package info.jbcs.minecraft.chisel.render;
 
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.ChiselBlocks;
 import info.jbcs.minecraft.utilities.Drawing;
 
 import java.util.Random;
@@ -66,7 +67,7 @@ public class BlockSpikesRenderer implements ISimpleBlockRenderingHandler {
 		renderer.renderStandardBlock(block, x, y, z);
 		
 		Tessellator tessellator=Tessellator.instance;
-		IIcon icon=Chisel.blockSpiketrap.iconSpike;
+		IIcon icon=ChiselBlocks.blockSpiketrap.iconSpike;
 //		Icon icon=Chisel.blockSpiketrap.iconBase;
 			
 		double h=0.85;
