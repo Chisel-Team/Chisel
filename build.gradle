@@ -21,8 +21,15 @@ version = "1.5.3"
 group= "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "chisel"
 
+repositories {
+    maven {
+        name = "shinonome"
+        url = "http://maven.shinonome.ch/"
+    }
+}
+
 dependencies {
-    compile files("mods/AsieLib-0.1.8.jar")
+    compile 'pl.asie.lib:AsieLib:0.1.9:deobf'
 }
 
 minecraft {
