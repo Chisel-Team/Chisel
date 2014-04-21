@@ -1,0 +1,11 @@
+# Key localizations
+
+# Item localizations
+item.chisel.name=Chisel
+item.ballMoss.name=Ball O' Moss
+item.cloudBottle.name=Cloud In A Bottle
+
+# Block localizations
+
+# Creative Tab localizations
+itemGroup.tabChisel=Chisel Blocks

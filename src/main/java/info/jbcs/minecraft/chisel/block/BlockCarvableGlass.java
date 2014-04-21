@@ -1,9 +1,9 @@
 package info.jbcs.minecraft.chisel.block;
 
-import info.jbcs.minecraft.chisel.CarvableHelper;
-import info.jbcs.minecraft.chisel.CarvableVariation;
+import info.jbcs.minecraft.chisel.api.ICarvable;
+import info.jbcs.minecraft.chisel.carving.CarvableHelper;
+import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.Chisel;
-import info.jbcs.minecraft.chisel.api.Carvable;
 
 import java.util.List;
 
@@ -16,59 +16,69 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 
-public class BlockCarvableGlass extends BlockGlass implements Carvable {
-	public CarvableHelper carverHelper;
-	private boolean isAlpha = false;
-	
-	public BlockCarvableGlass() {
-		super(Material.glass, false);
+public class BlockCarvableGlass extends BlockGlass implements ICarvable
+{
+    public CarvableHelper carverHelper;
+    private boolean isAlpha = false;
 
-		carverHelper = new CarvableHelper();
+    public BlockCarvableGlass()
+    {
+        super(Material.glass, false);
 
-		setCreativeTab(Chisel.tabChisel);
-	}
+        carverHelper = new CarvableHelper();
 
-	public BlockCarvableGlass setStained(boolean a) {
-		this.isAlpha = a;
-		return this;
-	}
-	
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
-	@Override
-	public int getRenderType() {
-		return Chisel.RenderCTMId;
-	}
-	
-	@Override
-	public IIcon getIcon(int side, int metadata) {
-		return carverHelper.getIcon(side, metadata);
-	}
-
-	@Override
-	public int damageDropped(int i) {
-		return i;
-	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister register) {
-		carverHelper.registerBlockIcons("Chisel",this,register);
-	}
-
-    @Override
-	public void getSubBlocks(Item item, CreativeTabs tabs, List list){
-		carverHelper.registerSubBlocks(this,tabs,list);
+        setCreativeTab(Chisel.tabChisel);
     }
 
-	@Override
-	public CarvableVariation getVariation(int metadata) {
-		return carverHelper.getVariation(metadata);
-	}
-	
-	@Override
+    public BlockCarvableGlass setStained(boolean a)
+    {
+        this.isAlpha = a;
+        return this;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
+
+    @Override
+    public int getRenderType()
+    {
+        return Chisel.RenderCTMId;
+    }
+
+    @Override
+    public IIcon getIcon(int side, int metadata)
+    {
+        return carverHelper.getIcon(side, metadata);
+    }
+
+    @Override
+    public int damageDropped(int i)
+    {
+        return i;
+    }
+
+    @Override
+    public void registerBlockIcons(IIconRegister register)
+    {
+        carverHelper.registerBlockIcons("Chisel", this, register);
+    }
+
+    @Override
+    public void getSubBlocks(Item item, CreativeTabs tabs, List list)
+    {
+        carverHelper.registerSubBlocks(this, tabs, list);
+    }
+
+    @Override
+    public CarvableVariation getVariation(int metadata)
+    {
+        return carverHelper.getVariation(metadata);
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public int getRenderBlockPass()
     {

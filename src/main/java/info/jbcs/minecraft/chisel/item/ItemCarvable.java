@@ -1,8 +1,8 @@
 package info.jbcs.minecraft.chisel.item;
 
-import info.jbcs.minecraft.chisel.CarvableVariation;
+import info.jbcs.minecraft.chisel.api.ICarvable;
+import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.Chisel;
-import info.jbcs.minecraft.chisel.api.Carvable;
 import info.jbcs.minecraft.utilities.General;
 
 import java.util.List;
@@ -14,44 +14,50 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-public class ItemCarvable extends ItemBlock {
+public class ItemCarvable extends ItemBlock
+{
 
-	public ItemCarvable(Block block) {
-		super(block);
-		setMaxDamage(0);
-		setHasSubtypes(true);
-	}
-
-	@Override
-	public int getMetadata(int i) {
-		return i;
-	}
-
-	@Override
-	public String getUnlocalizedName(ItemStack itemstack) {
-		return "item." + Block.getBlockFromItem(this).getUnlocalizedName() + "." + itemstack.getItemDamage();
-	}
-	
-    @Override
-	public IIcon getIconFromDamage(int damage) {
-        return Block.getBlockFromItem(this).getIcon(2,damage);
+    public ItemCarvable(Block block)
+    {
+        super(block);
+        setMaxDamage(0);
+        setHasSubtypes(true);
     }
 
     @Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List lines, boolean advancedTooltips) {
-    	if(! Chisel.blockDescriptions) return;
-    	
-    	Item item=General.getItem(stack);
-    	if(item==null) return;
-    	
-    	Block block = Block.getBlockFromItem(this);
-    	if(! (block instanceof Carvable)) return;
-    	
-    	Carvable carvable=(Carvable) block;
-    	CarvableVariation var=carvable.getVariation(stack.getItemDamage());
-    	if(var==null) return;
-    	
-    	lines.add(var.description);
+    public int getMetadata(int i)
+    {
+        return i;
+    }
+
+    @Override
+    public String getUnlocalizedName(ItemStack itemstack)
+    {
+        return "item." + Block.getBlockFromItem(this).getUnlocalizedName() + "." + itemstack.getItemDamage();
+    }
+
+    @Override
+    public IIcon getIconFromDamage(int damage)
+    {
+        return Block.getBlockFromItem(this).getIcon(2, damage);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List lines, boolean advancedTooltips)
+    {
+        if(!Chisel.blockDescriptions) return;
+
+        Item item = General.getItem(stack);
+        if(item == null) return;
+
+        Block block = Block.getBlockFromItem(this);
+        if(!(block instanceof ICarvable)) return;
+
+        ICarvable carvable = (ICarvable) block;
+        CarvableVariation var = carvable.getVariation(stack.getItemDamage());
+        if(var == null) return;
+
+        lines.add(var.description);
     }
 
 }
