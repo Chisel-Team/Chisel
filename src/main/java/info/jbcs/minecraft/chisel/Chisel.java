@@ -3,6 +3,7 @@ package info.jbcs.minecraft.chisel;
 import info.jbcs.minecraft.chisel.carving.Carving;
 import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
 import info.jbcs.minecraft.chisel.entity.EntityCloudInABottle;
+import info.jbcs.minecraft.chisel.entity.EntitySmashingRock;
 import info.jbcs.minecraft.chisel.inventory.ContainerChisel;
 import info.jbcs.minecraft.chisel.client.gui.GuiChisel;
 import info.jbcs.minecraft.chisel.inventory.InventoryChiselSelection;
@@ -12,15 +13,10 @@ import info.jbcs.minecraft.chisel.item.ItemCloudInABottle;
 
 import java.io.File;
 
-import net.minecraft.block.Block;
+import info.jbcs.minecraft.chisel.item.ItemSmashingRock;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.world.World;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.MinecraftForge;
@@ -49,6 +45,7 @@ public class Chisel
     public static Item itemIceshard;
     public static ItemCloudInABottle itemCloudInABottle;
     public static ItemBallOMoss itemBallOMoss;
+    public static ItemSmashingRock smashingRock;
 
     public static CreativeTabs tabChisel;
 
@@ -125,6 +122,13 @@ public class Chisel
             GameRegistry.registerItem(itemBallOMoss, "ballomoss");
         }
 
+        if(featureEnabled("smashingRock"))
+        {
+            smashingRock = (ItemSmashingRock) new ItemSmashingRock().setTextureName("Chisel:smashingrock").setCreativeTab(CreativeTabs.tabTools);
+            EntityRegistry.registerModEntity(EntitySmashingRock.class, "SmashingRock", 2, this, 40, 1, true);
+            GameRegistry.registerItem(smashingRock, "smashingrock");
+        }
+
         concreteVelocity = config.get("general", "concreteVelocity", 0.45, "Traversing concrete roads, players will acceleration to this velocity. For reference, normal running speed is about 0.28. Set to 0 to disable acceleration.").getDouble(0.45);
         particlesTickrate = config.get("client", "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
         oldPillars = config.get("client", "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
@@ -169,8 +173,8 @@ public class Chisel
         });
 
 
-        GameRegistry.registerWorldGenerator(new MarbleWorldGenerator(ChiselBlocks.blockMarble, 32, config.get("worldgen", "marbleAmount", 8, "Amount of marble to generate in the world; use 0 for none").getInt(8)), 1000);
-        GameRegistry.registerWorldGenerator(new MarbleWorldGenerator(ChiselBlocks.blockLimestone, 32, config.get("worldgen", "limestoneAmount", 4, "Amount of limestone to generate in the world; use 0 for none").getInt(4)), 1000);
+        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockMarble, 32, config.get("worldgen", "marbleAmount", 8, "Amount of marble to generate in the world; use 0 for none").getInt(8)), 1000);
+        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockLimestone, 32, config.get("worldgen", "limestoneAmount", 4, "Amount of limestone to generate in the world; use 0 for none").getInt(4)), 1000);
 
         proxy.init();
 

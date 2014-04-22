@@ -10,20 +10,20 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityBallOMoss extends EntityThrowable
+public class EntitySmashingRock extends EntityThrowable
 {
 
-    public EntityBallOMoss(World par1World)
+    public EntitySmashingRock(World par1World)
     {
         super(par1World);
     }
 
-    public EntityBallOMoss(World par1World, EntityLivingBase par2EntityLiving)
+    public EntitySmashingRock(World par1World, EntityLivingBase par2EntityLiving)
     {
         super(par1World, par2EntityLiving);
     }
 
-    public EntityBallOMoss(World par1World, double x, double y, double z)
+    public EntitySmashingRock(World par1World, double x, double y, double z)
     {
         super(par1World, x, y, z);
     }
@@ -63,8 +63,8 @@ public class EntityBallOMoss extends EntityThrowable
         {
             worldObj.playSound(x, y, z, "chisel:squash", 1.0f, 1.0f, false);
 
-            for(int i = 0; i < 32; i++)
-                GeneralChiselClient.spawnBallOMossFX(worldObj, posX, posY, posZ);
+            //for(int i = 0; i < 32; i++)
+            //    GeneralChiselClient.spawn
 
             return;
         }
@@ -84,7 +84,7 @@ public class EntityBallOMoss extends EntityThrowable
                         continue;
 
                     if(!worldObj.isRemote)
-                        turnToMoss(worldObj, x + xx, y + yy, z + zz);
+                        smash(worldObj, x + xx, y + yy, z + zz);
                 }
             }
         }
@@ -92,28 +92,25 @@ public class EntityBallOMoss extends EntityThrowable
     }
 
 
-    public static void turnToMoss(World world, int x, int y, int z)
+    public static void smash(World world, int x, int y, int z)
     {
         Block block = world.getBlock(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
         Block resBlock = block;
         int resMeta = meta;
 
-        if(block.equals(Blocks.cobblestone))
+        if(block.equals(Blocks.stone))
         {
-            resBlock = Blocks.mossy_cobblestone;
-        } else if(block.equals(Blocks.cobblestone_wall) && meta == 0)
+            resBlock = Blocks.cobblestone;
+        } else if(block.equals(Blocks.stonebrick) && meta == 0)
         {
-            resMeta = 1;
-        } else if(block.equals(ChiselBlocks.blockCobblestone))
+            resMeta = 2;
+        } else if(block.equals(Blocks.cobblestone))
         {
-            resBlock = ChiselBlocks.blockCobblestoneMossy;
-        } else if(block.equals(ChiselBlocks.blockTemple))
+            resBlock = Blocks.sand;
+        } else if(block.equals(Blocks.sand))
         {
-            resBlock = ChiselBlocks.blockTempleMossy;
-        } else if(block.equals(Blocks.stonebrick))
-        {
-            resMeta = 1;
+            resBlock = Blocks.gravel;
         }
 
         if(resBlock.equals(block) && resMeta == meta)

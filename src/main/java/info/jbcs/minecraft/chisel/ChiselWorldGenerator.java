@@ -8,12 +8,12 @@ import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
 
-public class MarbleWorldGenerator implements IWorldGenerator
+public class ChiselWorldGenerator implements IWorldGenerator
 {
     WorldGenMinable gen;
     int amount;
 
-    public MarbleWorldGenerator(Block id, int count, int am)
+    public ChiselWorldGenerator(Block id, int count, int am)
     {
         gen = new WorldGenMinable(id, count);
         amount = am;
