@@ -144,7 +144,6 @@ public class ItemChisel extends ItemTool
 
         if(!world.isRemote || chiselHasBlockInside)
         {
-            System.out.println("Changing to " + Item.itemRegistry.getNameForObject(result) + ":" + chiselTarget.getItemDamage());
             world.setBlock(x, y, z, Block.getBlockFromItem(result), targetMeta, updateValue);
         }
 

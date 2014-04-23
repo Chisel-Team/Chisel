@@ -105,6 +105,15 @@ public class Chisel
         config = new Configuration(configFile);
         config.load();
 
+        tabChisel = new CreativeTabs("tabChisel")
+        {
+            @Override
+            public Item getTabIconItem()
+            {
+                return chisel;
+            }
+        };
+
         chisel = (ItemChisel) new ItemChisel(Carving.chisel).setTextureName("chisel:chisel").setCreativeTab(CreativeTabs.tabTools);
         GameRegistry.registerItem(chisel, "chisel");
 
@@ -133,19 +142,10 @@ public class Chisel
         particlesTickrate = config.get("client", "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
         oldPillars = config.get("client", "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
         disableCTM = !config.get("client", "connectedTextures", true, "Enable connected textures").getBoolean(true);
-        blockDescriptions = config.get("client", "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.").getBoolean(true);
+        blockDescriptions = config.get("cslient", "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.").getBoolean(true);
         chiselStoneToCobbleBricks = config.get("general", "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left-click.").getBoolean(true);
         enableChiseling = config.get("general", "enableChiselingLeftClicking", false, "Change blocks to another block using the Chisel and left-click.").getBoolean(false);
         ghostCloud = config.get("general", "doesCloudRenderLikeGhost", true).getBoolean(true);
-
-        tabChisel = new CreativeTabs("tabChisel")
-        {
-            @Override
-            public Item getTabIconItem()
-            {
-                return chisel;
-            }
-        };
 
         ChiselBlocks.load();
 

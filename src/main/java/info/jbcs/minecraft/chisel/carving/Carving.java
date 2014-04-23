@@ -132,7 +132,8 @@ public class Carving
         CarvingGroup group = getGroup(name);
 
         CarvingGroup blockGroup = carvingGroupsByVariation.get(key(block, metadata));
-        if(blockGroup != null || blockGroup == group) return null;
+        if(blockGroup != null || blockGroup == group)
+            return null;
 
         CarvingVariation variation = new CarvingVariation(block, metadata, order);
         group.variations.add(variation);

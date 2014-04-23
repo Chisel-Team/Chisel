@@ -15,9 +15,6 @@ public class ItemMarbleSlab extends ItemCarvable
         super(block);
     }
 
-    /**
-     * Returns true if the given ItemBlock can be placed on the given side of the given block position.
-     */
     @Override
     public boolean func_150936_a(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack)
     {
@@ -48,10 +45,8 @@ public class ItemMarbleSlab extends ItemCarvable
         Block targetBlock = world.getBlock(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
 
-        if((targetBlock.equals(block) || targetBlock.equals(block.top)) && meta == stack.getItemDamage())
-            return true;
+        return (targetBlock.equals(block) || targetBlock.equals(block.top)) && meta == stack.getItemDamage() || world.canPlaceEntityOnSide(block, x, y, z, false, side, (Entity) null, stack);
 
-        return world.canPlaceEntityOnSide(block, x, y, z, false, side, (Entity) null, stack);
     }
 
 
