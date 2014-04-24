@@ -109,7 +109,9 @@ public class ItemMarbleSlab extends ItemCarvable
         if(side != 0 && (side == 1 || hy <= 0.5D))
             return true;
 
-        world.setBlock(x, y, z, block.top, meta, 2);
+
+        //TODO allow top slabs
+        //world.setBlock(x, y, z, block.top, meta, 2);
         return true;
     }
 }

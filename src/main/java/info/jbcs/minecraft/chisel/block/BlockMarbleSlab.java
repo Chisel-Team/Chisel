@@ -116,7 +116,8 @@ public class BlockMarbleSlab extends BlockCarvable
     @Override
     public void getSubBlocks(Item block, CreativeTabs tabs, List list)
     {
-        if(isBottom) super.getSubBlocks(block, tabs, list);
+        if(isBottom)
+            super.getSubBlocks(block, tabs, list);
     }
 
 }

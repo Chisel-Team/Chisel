@@ -13,6 +13,7 @@ public class BlockLavastone extends BlockMarbleTexturedOre
     public BlockLavastone(Material mat, String baseIcon)
     {
         super(mat, baseIcon);
+        setLightLevel(1F);
     }
 
     @Override
