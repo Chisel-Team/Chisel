@@ -37,7 +37,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
 
-@Mod(modid = "chisel", name = "Chisel", version = "1.5.4a")
+@Mod(modid = "chisel", name = "Chisel", version = "1.5.4b")
 public class Chisel
 {
     public static ItemChisel chisel;
