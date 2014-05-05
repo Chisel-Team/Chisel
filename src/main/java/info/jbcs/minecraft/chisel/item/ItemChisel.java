@@ -33,7 +33,7 @@ public class ItemChisel extends ItemTool
     {
         super(1, ToolMaterial.IRON, CarvableHelper.getChiselBlockSet());
 
-        maxStackSize = 1;
+        setMaxStackSize(1);
         setMaxDamage(500);
         efficiencyOnProperMaterial = 100f;
         setUnlocalizedName("chisel");
