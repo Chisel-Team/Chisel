@@ -125,13 +125,13 @@ public class ChiselModCompatibility
             }
         };
 
-        new ClassBlockCompat("mariculture.core.Core", "oreBlocks")
+        new ClassBlockCompat("mariculture.core.Core", "limestone")
         {
             @Override
             void action()
             {
-                Carving.chisel.addVariation("limestone", block, 3, 99);
-                block.setHarvestLevel("chisel", 0, 3);
+                Carving.chisel.addVariation("limestone", block, 0, 99);
+                block.setHarvestLevel("chisel", 0, 0);
             }
         };
         new ClassBlockCompat("emasher.core.EmasherCore", "limestone")
