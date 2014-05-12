@@ -60,12 +60,10 @@ public class BlockMarbleIce extends BlockIce implements ICarvable
     @Override
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
     {
-        if(!Chisel.dropIceShards)
-        {
-            super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
-            return;
-        }
+        super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
+        return;
 
+        /*
         par2EntityPlayer.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1);
         par2EntityPlayer.addExhaustion(0.025F);
 
@@ -80,23 +78,8 @@ public class BlockMarbleIce extends BlockIce implements ICarvable
             {
                 this.dropBlockAsItem(par1World, par3, par4, par5, itemstack);
             }
-        } else
-        {
-            int i1 = EnchantmentHelper.getFortuneModifier(par2EntityPlayer);
-            this.dropBlockAsItem(par1World, par3, par4, par5, par6, i1);
         }
-    }
-
-    @Override
-    public Item getItemDropped(int par1, Random par2Random, int par3)
-    {
-        return Chisel.dropIceShards ? Chisel.itemIceshard : null;
-    }
-
-    @Override
-    public int quantityDropped(Random par1Random)
-    {
-        return Chisel.dropIceShards ? 1 + par1Random.nextInt(5) : 0;
+        */
     }
 
     @Override

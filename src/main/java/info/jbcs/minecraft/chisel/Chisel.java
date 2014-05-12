@@ -37,7 +37,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
 
-@Mod(modid = "chisel", name = "Chisel", version = "1.5.4b")
+@Mod(modid = "chisel", name = "Chisel", version = "1.5.4c")
 public class Chisel
 {
     public static ItemChisel chisel;
@@ -50,7 +50,6 @@ public class Chisel
     public static CreativeTabs tabChisel;
 
     public static boolean configExists;
-    public static boolean dropIceShards;
     public static boolean oldPillars;
     public static boolean disableCTM;
     public static double concreteVelocity;
