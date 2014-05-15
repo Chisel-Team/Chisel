@@ -1,0 +1,11 @@
+# Key localizations
+
+# Item localizations
+item.chisel.name=Стамеска
+item.ballMoss.name=Шарик мха
+item.cloudBottle.name=Облако в бутылке
+
+# Block localizations
+
+# Creative Tab localizations
+itemGroup.tabChisel=Chisel Blocks
