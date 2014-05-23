@@ -152,9 +152,6 @@ public class CarvableHelper
         if(variation == null)
             return null;
 
-//		if(variation.kind!=CTMX)
-//			return null;
-
         return variation;
     }
 

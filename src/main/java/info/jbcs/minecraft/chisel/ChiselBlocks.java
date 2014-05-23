@@ -568,6 +568,7 @@ public class ChiselBlocks
         if(Chisel.featureEnabled("netherBrick"))
         {
             blockNetherBrick = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("netherBrick", Blocks.nether_brick, 0, 0);
             //blockNetherBrick.carverHelper.addVariation("Nether brick", 0, Blocks.nether_brick);
             blockNetherBrick.carverHelper.addVariation("Blue nether brick", 1, "netherbrick/a1-netherbrick-brinstar");
             blockNetherBrick.carverHelper.addVariation("Spattered nether brick", 2, "netherbrick/a1-netherbrick-classicspatter");
@@ -1033,6 +1034,7 @@ public class ChiselBlocks
         {
             blockDirt = (BlockCarvable) new BlockCarvable(Material.ground).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("dirt.default");
             blockDirt.carverHelper.setBlockName("Dirt");
+            Carving.chisel.addVariation("dirt", Blocks.dirt, 0, 0);
             //blockDirt.carverHelper.addVariation("Dirt", 0, Blocks.dirt);
             blockDirt.carverHelper.addVariation("Dirt bricks in disarray", 1, "dirt/bricks");
             blockDirt.carverHelper.addVariation("Dirt bricks imitating nether brick design", 2, "dirt/netherbricks");

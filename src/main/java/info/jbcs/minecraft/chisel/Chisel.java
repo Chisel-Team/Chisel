@@ -37,12 +37,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
 
-@Mod(modid = "chisel", name = "Chisel", version = "1.5.4c")
+@Mod(modid = "chisel", name = "Chisel", version = "1.5.4d")
 public class Chisel
 {
     public static ItemChisel chisel;
-    //	public static ItemChisel				needle;
-    public static Item itemIceshard;
+    //	public static ItemChisel needle;
     public static ItemCloudInABottle itemCloudInABottle;
     public static ItemBallOMoss itemBallOMoss;
     public static ItemSmashingRock smashingRock;
@@ -56,6 +55,7 @@ public class Chisel
     public static int particlesTickrate;
     public static boolean blockDescriptions;
     public static boolean ghostCloud;
+    public static boolean iceMelt;
 
     public static final StepSoundEx soundHolystoneFootstep = new StepSoundEx("chisel:holystone", "chisel:holystone", "chisel:holystone", 1.0f);
     public static final StepSoundEx soundTempleFootstep = new StepSoundEx("dig.stone", "chisel:temple-footstep", "dig.stone", 1.0f);
@@ -145,6 +145,7 @@ public class Chisel
         chiselStoneToCobbleBricks = config.get("general", "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left-click.").getBoolean(true);
         enableChiseling = config.get("general", "enableChiselingLeftClicking", false, "Change blocks to another block using the Chisel and left-click.").getBoolean(false);
         ghostCloud = config.get("general", "doesCloudRenderLikeGhost", true).getBoolean(true);
+        //iceMelt = config.get("general", "doesIceMeltIntoWater", true).getBoolean(true);
 
         ChiselBlocks.load();
 

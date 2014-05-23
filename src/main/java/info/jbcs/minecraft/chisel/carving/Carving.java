@@ -174,7 +174,8 @@ public class Carving
     public String getVariationSound(Item item, int metadata)
     {
         CarvingGroup blockGroup = carvingGroupsByVariation.get(key(item, metadata));
-        if(blockGroup == null || blockGroup.sound == null) return "chisel:chisel";
+        if(blockGroup == null || blockGroup.sound == null)
+            return "chisel:chisel";
 
         return blockGroup.sound;
     }

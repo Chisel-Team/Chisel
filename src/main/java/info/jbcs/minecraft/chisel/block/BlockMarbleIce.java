@@ -27,9 +27,7 @@ public class BlockMarbleIce extends BlockIce implements ICarvable
     public BlockMarbleIce()
     {
         super();
-
         carverHelper = new CarvableHelper();
-
         setCreativeTab(Chisel.tabChisel);
     }
 
@@ -61,15 +59,11 @@ public class BlockMarbleIce extends BlockIce implements ICarvable
     public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6)
     {
         super.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
-        return;
 
-        /*
         par2EntityPlayer.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(this)], 1);
         par2EntityPlayer.addExhaustion(0.025F);
 
-        if(par1World.isRemote)
-            return;
-
+/*
         if(this.canSilkHarvest(par1World, par2EntityPlayer, par3, par4, par5, par6) && EnchantmentHelper.getSilkTouchModifier(par2EntityPlayer))
         {
             ItemStack itemstack = this.createStackedBlock(par6);
