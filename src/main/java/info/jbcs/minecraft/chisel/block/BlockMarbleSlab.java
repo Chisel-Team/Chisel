@@ -1,8 +1,7 @@
 package info.jbcs.minecraft.chisel.block;
 
-import java.util.List;
-import java.util.Random;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -13,8 +12,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockMarbleSlab extends BlockCarvable
 {
@@ -39,9 +39,7 @@ public class BlockMarbleSlab extends BlockCarvable
     public BlockMarbleSlab(BlockMarbleSlab bottomBlock)
     {
         super();
-
         setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
-
         master = bottomBlock.master;
         bottom = bottomBlock;
         top = this;
