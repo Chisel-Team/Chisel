@@ -1,29 +1,6 @@
 package info.jbcs.minecraft.chisel;
 
-import info.jbcs.minecraft.chisel.block.BlockCarvable;
-import info.jbcs.minecraft.chisel.block.BlockCarvableGlass;
-import info.jbcs.minecraft.chisel.block.BlockCarvablePane;
-import info.jbcs.minecraft.chisel.block.BlockCarvablePowered;
-import info.jbcs.minecraft.chisel.block.BlockCloud;
-import info.jbcs.minecraft.chisel.block.BlockConcrete;
-import info.jbcs.minecraft.chisel.block.BlockEldritch;
-import info.jbcs.minecraft.chisel.block.BlockHolystone;
-import info.jbcs.minecraft.chisel.block.BlockLavastone;
-import info.jbcs.minecraft.chisel.block.BlockLightstoneCarvable;
-import info.jbcs.minecraft.chisel.block.BlockMarbleBookshelf;
-import info.jbcs.minecraft.chisel.block.BlockMarbleCarpet;
-import info.jbcs.minecraft.chisel.block.BlockMarbleIce;
-import info.jbcs.minecraft.chisel.block.BlockMarbleIceStairs;
-import info.jbcs.minecraft.chisel.block.BlockMarblePillar;
-import info.jbcs.minecraft.chisel.block.BlockMarbleSlab;
-import info.jbcs.minecraft.chisel.block.BlockMarbleStairs;
-import info.jbcs.minecraft.chisel.block.BlockMarbleStairsMaker;
-import info.jbcs.minecraft.chisel.block.BlockMarbleStairsMakerCreator;
-import info.jbcs.minecraft.chisel.block.BlockMarbleWall;
-import info.jbcs.minecraft.chisel.block.BlockRoadLine;
-import info.jbcs.minecraft.chisel.block.BlockSnakestone;
-import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
-import info.jbcs.minecraft.chisel.block.BlockSpikes;
+import info.jbcs.minecraft.chisel.block.*;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.carving.Carving;
@@ -444,7 +421,7 @@ public class ChiselBlocks
 
         if(Chisel.featureEnabled("ironBlock"))
         {
-            blockIron = (BlockCarvable) new BlockCarvable().setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
+            blockIron = (BlockBeaconBase) new BlockBeaconBase().setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
             Carving.chisel.addVariation("iron", Blocks.iron_block, 0, 0);
             blockIron.carverHelper.addVariation("Large iron ingots", 1, "iron/terrain-iron-largeingot");
             blockIron.carverHelper.addVariation("Small iron ingots", 2, "iron/terrain-iron-smallingot");
@@ -467,7 +444,7 @@ public class ChiselBlocks
 
         if(Chisel.featureEnabled("goldBlock"))
         {
-            blockGold = (BlockCarvable) new BlockCarvable().setHardness(3F).setResistance(10F).setStepSound(Block.soundTypeMetal);
+            blockGold = (BlockBeaconBase) new BlockBeaconBase().setHardness(3F).setResistance(10F).setStepSound(Block.soundTypeMetal);
             Carving.chisel.addVariation("gold", Blocks.gold_block, 0, 0);
             blockGold.carverHelper.addVariation("Large golden ingots", 1, "gold/terrain-gold-largeingot");
             blockGold.carverHelper.addVariation("Small golden ingots", 2, "gold/terrain-gold-smallingot");
@@ -489,7 +466,7 @@ public class ChiselBlocks
 
         if(Chisel.featureEnabled("diamondBlock"))
         {
-            blockDiamond = (BlockCarvable) new BlockCarvable().setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
+            blockDiamond = (BlockBeaconBase) new BlockBeaconBase().setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
             Carving.chisel.addVariation("diamond", Blocks.diamond_block, 0, 0);
             blockDiamond.carverHelper.addVariation("Embossed diamond block", 1, "diamond/terrain-diamond-embossed");
             blockDiamond.carverHelper.addVariation("Diamond block with panel", 2, "diamond/terrain-diamond-gem");
@@ -548,7 +525,7 @@ public class ChiselBlocks
 
         if(Chisel.featureEnabled("emeraldBlock"))
         {
-            blockEmerald = (BlockCarvable) new BlockCarvable().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
+            blockEmerald = (BlockBeaconBase) new BlockBeaconBase().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
             Carving.chisel.addVariation("emerald", Blocks.emerald_block, 0, 0);
             blockEmerald.carverHelper.addVariation("Emerald panel", 1, "emerald/a1-blockemerald-emeraldpanel");
             blockEmerald.carverHelper.addVariation("Classic emerald panel", 2, "emerald/a1-blockemerald-emeraldpanelclassic");
