@@ -36,7 +36,7 @@ import net.minecraftforge.common.config.Configuration;
 import java.io.File;
 
 
-@Mod(modid = "chisel", name = "Chisel", version = "1.5.4d")
+@Mod(modid = "chisel", name = "Chisel", version = "1.5.4e")
 public class Chisel
 {
     public static ItemChisel chisel;
