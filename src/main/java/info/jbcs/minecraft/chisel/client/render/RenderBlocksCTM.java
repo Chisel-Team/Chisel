@@ -129,13 +129,6 @@ public class RenderBlocksCTM extends RenderBlocks
         tessellator.addVertexWithUV(X[index], Y[index], Z[index], U[index], V[index]);
     }
 
-    //IIcon i = rendererOld.overrideBlockTexture;
-
-    //tessellator.addVertexWithUV(bx, by, bz, i.getMinU(), i.getMinV());
-    //tessellator.addVertexWithUV(bx, by, bz, flip ? i.getMaxU() : i.getMinU(), flip ? i.getMinV() : i.getMaxV());
-    //tessellator.addVertexWithUV(bx, by, bz, i.getMaxU(), i.getMaxV());
-    //tessellator.addVertexWithUV(bx, by, bz, flip ? i.getMinU() : i.getMaxU(), flip ? i.getMaxV() : i.getMinV());
-
     @Override
     public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon)
     {
