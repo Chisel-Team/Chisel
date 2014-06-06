@@ -129,77 +129,156 @@ public class RenderBlocksCTM extends RenderBlocks
         tessellator.addVertexWithUV(X[index], Y[index], Z[index], U[index], V[index]);
     }
 
+    //IIcon i = rendererOld.overrideBlockTexture;
+
+    //tessellator.addVertexWithUV(bx, by, bz, i.getMinU(), i.getMinV());
+    //tessellator.addVertexWithUV(bx, by, bz, flip ? i.getMaxU() : i.getMinU(), flip ? i.getMinV() : i.getMaxV());
+    //tessellator.addVertexWithUV(bx, by, bz, i.getMaxU(), i.getMaxV());
+    //tessellator.addVertexWithUV(bx, by, bz, flip ? i.getMinU() : i.getMaxU(), flip ? i.getMaxV() : i.getMinV());
+
     @Override
     public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon)
     {
-        int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 4);
+        if(rendererOld != null && rendererOld.hasOverrideBlockTexture())
+        {
+            IIcon i = rendererOld.overrideBlockTexture;
 
-        setupSides(1, 0, 4, 5, 14, 19, 17, 23, 9);
-        side(1, 14, 9, 23, tex[0], false);
-        side(23, 9, 17, 5, tex[1], false);
-        side(9, 19, 4, 17, tex[3], false);
-        side(14, 0, 19, 9, tex[2], false);
+            tessellator.addVertexWithUV(0.0, 1.0, 0.0, i.getMinU(), i.getMinV());
+            tessellator.addVertexWithUV(0.0, 0.0, 0.0, i.getMinU(), i.getMaxV());
+            tessellator.addVertexWithUV(0.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
+            tessellator.addVertexWithUV(0.0, 1.0, 1.0, i.getMaxU(), i.getMinV());
+        }
+        else
+        {
+            int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 4);
+
+            setupSides(1, 0, 4, 5, 14, 19, 17, 23, 9);
+            side(1, 14, 9, 23, tex[0], false);
+            side(23, 9, 17, 5, tex[1], false);
+            side(9, 19, 4, 17, tex[3], false);
+            side(14, 0, 19, 9, tex[2], false);
+        }
     }
 
     @Override
     public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon)
     {
-        int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 5);
+        if(rendererOld != null && rendererOld.hasOverrideBlockTexture())
+        {
+            IIcon i = rendererOld.overrideBlockTexture;
 
-        setupSides(3, 2, 6, 7, 15, 25, 16, 21, 11);
-        side(11, 21, 3, 15, tex[3], false);
-        side(16, 7, 21, 11, tex[2], false);
-        side(25, 11, 15, 2, tex[1], false);
-        side(6, 16, 11, 25, tex[0], false);
+            tessellator.addVertexWithUV(1.0, 1.0, 1.0, i.getMaxU(), i.getMinV());
+            tessellator.addVertexWithUV(1.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
+            tessellator.addVertexWithUV(1.0, 0.0, 0.0, i.getMinU(), i.getMaxV());
+            tessellator.addVertexWithUV(1.0, 1.0, 0.0, i.getMinU(), i.getMinV());
+        }
+        else
+        {
+            int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 5);
+
+            setupSides(3, 2, 6, 7, 15, 25, 16, 21, 11);
+            side(11, 21, 3, 15, tex[3], false);
+            side(16, 7, 21, 11, tex[2], false);
+            side(25, 11, 15, 2, tex[1], false);
+            side(6, 16, 11, 25, tex[0], false);
+        }
     }
 
     @Override
     public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon)
     {
-        int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 2);
+        if(rendererOld != null && rendererOld.hasOverrideBlockTexture())
+        {
+            IIcon i = rendererOld.overrideBlockTexture;
 
-        setupSides(2, 3, 0, 1, 15, 18, 14, 22, 8);
-        side(2, 15, 8, 22, tex[0], false);
-        side(15, 3, 18, 8, tex[2], false);
-        side(8, 18, 0, 14, tex[3], false);
-        side(22, 8, 14, 1, tex[1], false);
+            tessellator.addVertexWithUV(1.0, 1.0, 0.0, i.getMaxU(), i.getMinV());
+            tessellator.addVertexWithUV(1.0, 0.0, 0.0, i.getMaxU(), i.getMaxV());
+            tessellator.addVertexWithUV(0.0, 0.0, 0.0, i.getMinU(), i.getMaxV());
+            tessellator.addVertexWithUV(0.0, 1.0, 0.0, i.getMinU(), i.getMinV());
+        }
+        else
+        {
+            int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 2);
+
+            setupSides(2, 3, 0, 1, 15, 18, 14, 22, 8);
+            side(2, 15, 8, 22, tex[0], false);
+            side(15, 3, 18, 8, tex[2], false);
+            side(8, 18, 0, 14, tex[3], false);
+            side(22, 8, 14, 1, tex[1], false);
+        }
     }
 
 
     @Override
     public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon)
     {
-        int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 3);
+        if(rendererOld != null && rendererOld.hasOverrideBlockTexture())
+        {
+            IIcon i = rendererOld.overrideBlockTexture;
 
-        setupSides(4, 7, 6, 5, 20, 16, 24, 17, 10);
-        side(17, 4, 20, 10, tex[2], false);
-        side(5, 17, 10, 24, tex[0], false);
-        side(24, 10, 16, 6, tex[1], false);
-        side(10, 20, 7, 16, tex[3], false);
+            tessellator.addVertexWithUV(0.0, 1.0, 1.0, i.getMinU(), i.getMinV());
+            tessellator.addVertexWithUV(0.0, 0.0, 1.0, i.getMinU(), i.getMaxV());
+            tessellator.addVertexWithUV(1.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
+            tessellator.addVertexWithUV(1.0, 1.0, 1.0, i.getMaxU(), i.getMinV());
+        }
+        else
+        {
+            int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 3);
+
+            setupSides(4, 7, 6, 5, 20, 16, 24, 17, 10);
+            side(17, 4, 20, 10, tex[2], false);
+            side(5, 17, 10, 24, tex[0], false);
+            side(24, 10, 16, 6, tex[1], false);
+            side(10, 20, 7, 16, tex[3], false);
+        }
     }
 
     @Override
     public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon)
     {
-        int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 0);
+        if(rendererOld != null && rendererOld.hasOverrideBlockTexture())
+        {
+            IIcon i = rendererOld.overrideBlockTexture;
 
-        setupSides(0, 3, 7, 4, 18, 21, 20, 19, 13);
-        side(13, 21, 7, 20, tex[3], true);
-        side(19, 13, 20, 4, tex[2], true);
-        side(0, 18, 13, 19, tex[0], true);
-        side(18, 3, 21, 13, tex[1], true);
+            tessellator.addVertexWithUV(0.0, 0.0, 1.0, i.getMinU(), i.getMaxV());
+            tessellator.addVertexWithUV(0.0, 0.0, 0.0, i.getMinU(), i.getMinV());
+            tessellator.addVertexWithUV(1.0, 0.0, 0.0, i.getMaxU(), i.getMinV());
+            tessellator.addVertexWithUV(1.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
+        }
+        else
+        {
+            int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 0);
+
+            setupSides(0, 3, 7, 4, 18, 21, 20, 19, 13);
+            side(13, 21, 7, 20, tex[3], true);
+            side(19, 13, 20, 4, tex[2], true);
+            side(0, 18, 13, 19, tex[0], true);
+            side(18, 3, 21, 13, tex[1], true);
+        }
     }
 
     @Override
     public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon)
     {
-        int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 1);
+        if(rendererOld != null && rendererOld.hasOverrideBlockTexture())
+        {
+            IIcon i = rendererOld.overrideBlockTexture;
 
-        setupSides(2, 1, 5, 6, 22, 23, 24, 25, 12);
-        side(12, 24, 6, 25, tex[3], false);
-        side(22, 12, 25, 2, tex[1], false);
-        side(1, 23, 12, 22, tex[0], false);
-        side(23, 5, 24, 12, tex[2], false);
+            tessellator.addVertexWithUV(0.0, 1.0, 0.0, i.getMinU(), i.getMinV());
+            tessellator.addVertexWithUV(0.0, 1.0, 1.0, i.getMinU(), i.getMaxV());
+            tessellator.addVertexWithUV(1.0, 1.0, 1.0, i.getMaxU(), i.getMaxV());
+            tessellator.addVertexWithUV(1.0, 1.0, 0.0, i.getMaxU(), i.getMinV());
+        }
+        else
+        {
+            int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 1);
+
+            setupSides(2, 1, 5, 6, 22, 23, 24, 25, 12);
+            side(12, 24, 6, 25, tex[3], false);
+            side(22, 12, 25, 2, tex[1], false);
+            side(1, 23, 12, 22, tex[0], false);
+            side(23, 5, 24, 12, tex[2], false);
+        }
     }
 
     void resetVertices()
