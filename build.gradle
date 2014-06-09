@@ -1,5 +1,13 @@
 buildscript {
+
+
     repositories {
+
+        maven {
+            name 'CB Maven FS'
+            url "http://chickenbones.net/maven/"
+        }
+
         mavenCentral()
         maven {
             name = "forge"
@@ -13,12 +21,13 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
+
 }
 
 apply plugin: 'forge'
 
 version = "1.5.4d"
-group= "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Chisel"
 
 minecraft {
@@ -33,7 +42,7 @@ processResources
                 include 'mcmod.info'
 
                 // replace version and mcversion
-                expand 'version':project.version, 'mcversion':project.minecraft.version
+                expand 'version': project.version, 'mcversion': project.minecraft.version
             }
 
             // copy everything else, thats not the mcmod.info

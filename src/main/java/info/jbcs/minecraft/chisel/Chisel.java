@@ -36,7 +36,7 @@ import net.minecraftforge.common.config.Configuration;
 import java.io.File;
 
 
-@Mod(modid = "chisel", name = "Chisel", version = "1.5.4e")
+@Mod(modid = "chisel", name = "Chisel", version = "1.5.4e", dependencies = "after:ForgeMicroblock;")
 public class Chisel
 {
     public static ItemChisel chisel;
@@ -46,6 +46,8 @@ public class Chisel
     public static ItemSmashingRock smashingRock;
 
     public static CreativeTabs tabChisel;
+
+    public static boolean multipartLoaded = false;
 
     public static boolean configExists;
     public static boolean oldPillars;

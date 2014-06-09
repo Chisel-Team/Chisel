@@ -81,7 +81,8 @@ public class CTM
 
     public static int getTexture(IBlockAccess world, int x, int y, int z, int side)
     {
-        if(world == null) return 0;
+        if(world == null)
+            return 0;
 
         int texture = 0;
         Block block = world.getBlock(x, y, z);
@@ -283,11 +284,8 @@ public class CTM
                 break;
         }
 
-        return
-                world.getBlock(x, y, z).equals(block) &&
-                        world.getBlockMetadata(x, y, z) == meta &&
-                        (!world.getBlock(x2, y2, z2).equals(block) || world.getBlockMetadata(x2, y2, z2) != meta)
-                ;
+        return world.getBlock(x, y, z).equals(block) && world.getBlockMetadata(x, y, z) == meta && (!world.getBlock(x2, y2, z2).equals(block) || world.getBlockMetadata(x2, y2, z2) != meta);
+
     }
 
 

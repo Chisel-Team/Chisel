@@ -1,5 +1,7 @@
 package info.jbcs.minecraft.chisel;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import info.jbcs.minecraft.chisel.block.*;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
@@ -9,10 +11,10 @@ import info.jbcs.minecraft.chisel.item.ItemMarbleSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ChiselBlocks
 {
@@ -97,6 +99,12 @@ public class ChiselBlocks
             blockMarble.carverHelper.register(blockMarble, "marble");
             OreDictionary.registerOre("blockMarble", blockMarble);
             Carving.chisel.registerOre("marble", "blockMarble");
+
+            if(Chisel.multipartLoaded)
+            {
+            //    for(int i = 0; i < 16; i++)
+            //        MicroMaterialRegistry.registerMaterial(new BlockMicroMaterial(blockMarble, i), "blockMarble" + i);
+            }
 
             blockMarbleSlab = (BlockMarbleSlab) new BlockMarbleSlab(blockMarble).setHardness(2.0F).setResistance(10F);
             blockMarbleSlab.carverHelper.setBlockName("Marble Slab");
@@ -416,6 +424,7 @@ public class ChiselBlocks
         {
             blockRoadLine = (BlockRoadLine) new BlockRoadLine().setStepSound(Block.soundTypeStone).setHardness(0.01F).setBlockName("roadLine");
             GameRegistry.registerBlock(blockRoadLine, ItemCarvable.class, "roadLine");
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockRoadLine, 8, 0), new Object[]{"wrw", "wrw", "wrw", ('w'), "dyeWhite", ('r'), Items.redstone}));
             LanguageRegistry.addName(new ItemStack(blockRoadLine, 1, 0), "Road lines");
         }
 
