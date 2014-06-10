@@ -1020,7 +1020,7 @@ public class ChiselBlocks
         {
             blockDirt = (BlockCarvable) new BlockCarvable(Material.ground).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("dirt.default");
             blockDirt.carverHelper.setBlockName("Dirt");
-            Carving.chisel.addVariation("dirt", Blocks.dirt, 0, 0);
+            Carving.chisel.addVariation("blockDirt", Blocks.dirt, 0, 0);
             //blockDirt.carverHelper.addVariation("Dirt", 0, Blocks.dirt);
             blockDirt.carverHelper.addVariation("Dirt bricks in disarray", 1, "dirt/bricks");
             blockDirt.carverHelper.addVariation("Dirt bricks imitating nether brick design", 2, "dirt/netherbricks");
