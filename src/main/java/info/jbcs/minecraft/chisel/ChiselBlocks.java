@@ -63,6 +63,7 @@ public class ChiselBlocks
     public static BlockCarvable blockTemple;
     public static BlockCarvable blockTempleMossy;
     public static BlockCarvable blockFactory;
+    public static BlockCarvablePane blockPaperwall;
 
     public static BlockSnakestone blockSnakestone;
     public static BlockSnakestone blockSandSnakestone;
@@ -102,8 +103,8 @@ public class ChiselBlocks
 
             if(Chisel.multipartLoaded)
             {
-            //    for(int i = 0; i < 16; i++)
-            //        MicroMaterialRegistry.registerMaterial(new BlockMicroMaterial(blockMarble, i), "blockMarble" + i);
+                //    for(int i = 0; i < 16; i++)
+                //        MicroMaterialRegistry.registerMaterial(new BlockMicroMaterial(blockMarble, i), "blockMarble" + i);
             }
 
             blockMarbleSlab = (BlockMarbleSlab) new BlockMarbleSlab(blockMarble).setHardness(2.0F).setResistance(10F);
@@ -1177,9 +1178,21 @@ public class ChiselBlocks
             Carving.chisel.registerOre(blockName, oreName);
             for(CarvableVariation cv : blockStainedGlassPane[glassId].carverHelper.variations)
             {
-                if(cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 8) continue;
+                if(cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 8)
+                    continue;
                 blockStainedGlassPane[glassId].carverHelper.registerVariation(blockName, cv, blockStainedGlassPane[glassId], cv.metadata);
             }
+        }
+
+        if(Chisel.featureEnabled("paperWall"))
+        {
+            //blockPaperwall = (BlockCarvablePane) new BlockCarvablePane(Material.ground, true).setCreativeTab(Chisel.tabChisel).setHardness(2.0F).setResistance(10F);
+            //blockFactory.carverHelper.setBlockName("Paperwall");
+            //blockFactory.carverHelper.addVariation("Basic paperwall", 0, "paper/basic");
+
+
+            //blockTempleMossy.carverHelper.register(blockPaperwall, "paperwall");
+
         }
 
         Blocks.stone.setHarvestLevel("chisel", 0, 0);

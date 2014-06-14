@@ -1,14 +1,11 @@
 package info.jbcs.minecraft.chisel.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
-import info.jbcs.minecraft.chisel.Chisel;
-
-import java.util.List;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,6 +13,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+
+import java.util.List;
 
 public class BlockCarvable extends Block implements ICarvable
 {
@@ -30,9 +29,7 @@ public class BlockCarvable extends Block implements ICarvable
     public BlockCarvable(Material m)
     {
         super(m);
-
         carverHelper = new CarvableHelper();
-
         setCreativeTab(Chisel.tabChisel);
     }
 

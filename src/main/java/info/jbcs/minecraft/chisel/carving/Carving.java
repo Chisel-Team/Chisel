@@ -1,14 +1,14 @@
 package info.jbcs.minecraft.chisel.carving;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class Carving
 {
@@ -105,7 +105,7 @@ public class Carving
         // Check name first
         CarvingGroup res;
 
-        if((res = carvingGroupsByOre.get(OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(block, 1, metadata))))) != null)
+        if((res = carvingGroupsByOre.get(OreDictionary.getOreIDs(new ItemStack(block, 1, metadata)))) != null)
             return res;
 
         if((res = carvingGroupsByVariation.get(key(block, metadata))) != null)

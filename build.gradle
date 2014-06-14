@@ -3,11 +3,6 @@ buildscript {
 
     repositories {
 
-        maven {
-            name 'CB Maven FS'
-            url "http://chickenbones.net/maven/"
-        }
-
         mavenCentral()
         maven {
             name = "forge"
@@ -26,12 +21,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.5.4d"
+version = "1.5.4f"
 group = "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Chisel"
 
 minecraft {
-    version = "1.7.2-10.12.0.1056"
+    version = "1.7.2-10.12.2.1124"
     assetDir = "eclipse/assets"
 }
 
