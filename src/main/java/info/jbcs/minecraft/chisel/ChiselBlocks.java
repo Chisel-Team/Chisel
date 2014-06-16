@@ -652,6 +652,31 @@ public class ChiselBlocks
             Carving.chisel.addVariation("stoneBrick", blockSnakestone, 13, 17);
         }
 
+        if(Chisel.featureEnabled("dirt"))
+        {
+            blockDirt = (BlockCarvable) new BlockCarvable(Material.ground).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("dirt.default");
+            Carving.chisel.addVariation("blockDirt", Blocks.dirt, 0, 0);
+            blockDirt.carverHelper.setBlockName("Dirt");
+            //blockDirt.carverHelper.addVariation("Dirt", 0, Blocks.dirt);
+            blockDirt.carverHelper.addVariation("Dirt bricks in disarray", 0, "dirt/bricks");
+            blockDirt.carverHelper.addVariation("Dirt bricks imitating nether brick design", 1, "dirt/netherbricks");
+            blockDirt.carverHelper.addVariation("Dirt bricks", 2, "dirt/bricks3");
+            blockDirt.carverHelper.addVariation("Cobbledirt", 3, "dirt/cobble");
+            blockDirt.carverHelper.addVariation("Reinforced cobbledirt", 4, "dirt/reinforced");
+            blockDirt.carverHelper.addVariation("Reinforced dirt", 5, "dirt/dirt-reinforced");
+            blockDirt.carverHelper.addVariation("Happy dirt", 6, "dirt/happy");
+            blockDirt.carverHelper.addVariation("Large dirt bricks", 7, "dirt/bricks2");
+            blockDirt.carverHelper.addVariation("Large dirt bricks on top of dirt", 8, "dirt/bricks+dirt2");
+            blockDirt.carverHelper.addVariation("Horizontal dirt", 9, "dirt/hor");
+            blockDirt.carverHelper.addVariation("Vertical dirt", 10, "dirt/vert");
+            blockDirt.carverHelper.addVariation("Dirt layers", 11, "dirt/layers");
+            blockDirt.carverHelper.addVariation("Crumbling dirt", 12, "dirt/vertical");
+            blockDirt.carverHelper.register(blockDirt, "blockDirt");
+            blockDirt.setHarvestLevel("shovel", 0);
+            OreDictionary.registerOre("blockDirt", blockDirt);
+            Carving.chisel.registerOre("blockDirt", "blockDirt");
+        }
+
         if(Chisel.featureEnabled("ice"))
         {
             blockIce = (BlockMarbleIce) new BlockMarbleIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
@@ -1017,30 +1042,7 @@ public class ChiselBlocks
             Carving.chisel.registerOre("blockTyrian", "blockTyrian");
         }
 
-        if(Chisel.featureEnabled("dirt"))
-        {
-            blockDirt = (BlockCarvable) new BlockCarvable(Material.ground).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("dirt.default");
-            blockDirt.carverHelper.setBlockName("Dirt");
-            Carving.chisel.addVariation("blockDirt", Blocks.dirt, 0, 0);
-            //blockDirt.carverHelper.addVariation("Dirt", 0, Blocks.dirt);
-            blockDirt.carverHelper.addVariation("Dirt bricks in disarray", 1, "dirt/bricks");
-            blockDirt.carverHelper.addVariation("Dirt bricks imitating nether brick design", 2, "dirt/netherbricks");
-            blockDirt.carverHelper.addVariation("Dirt bricks", 3, "dirt/bricks3");
-            blockDirt.carverHelper.addVariation("Cobbledirt", 4, "dirt/cobble");
-            blockDirt.carverHelper.addVariation("Reinforced cobbledirt", 5, "dirt/reinforced");
-            blockDirt.carverHelper.addVariation("Reinforced dirt", 6, "dirt/dirt-reinforced");
-            blockDirt.carverHelper.addVariation("Happy dirt", 7, "dirt/happy");
-            blockDirt.carverHelper.addVariation("Large dirt bricks", 8, "dirt/bricks2");
-            blockDirt.carverHelper.addVariation("Large dirt bricks on top of dirt", 9, "dirt/bricks+dirt2");
-            blockDirt.carverHelper.addVariation("Horizontal dirt", 10, "dirt/hor");
-            blockDirt.carverHelper.addVariation("Vertical dirt", 11, "dirt/vert");
-            blockDirt.carverHelper.addVariation("Dirt layers", 12, "dirt/layers");
-            blockDirt.carverHelper.addVariation("Crumbling dirt", 13, "dirt/vertical");
-            blockDirt.carverHelper.register(blockDirt, "blockDirt");
-            blockDirt.setHarvestLevel("shovel", 0);
-            OreDictionary.registerOre("blockDirt", blockDirt);
-            Carving.chisel.registerOre("blockDirt", "blockDirt");
-        }
+
 
         if(Chisel.featureEnabled("templeBlock"))
         {
