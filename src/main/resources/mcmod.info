@@ -3,7 +3,7 @@
   "modid": "chisel",
   "name": "Chisel",
   "description": "A mod that adds in many fancy blocks for decoration, which are crafted utilising the Chisel.",
-  "version": "1.5.4f",
+  "version": "1.5.4g",
   "credits": "This mod uses a lot of textures from the Painterly pack: http://painterlypack.net/. Also one stone variation is designed to look like a block from Doku. Oh, and asie for porting the mod to 1.7.2",
   "logoFile": "",
   "mcversion": "1.7.2",
