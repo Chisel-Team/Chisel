@@ -53,7 +53,8 @@ public class Carving
     public String getOre(Block block, int metadata)
     {
         CarvingGroup group = getGroup(block, metadata);
-        if(group == null) return null;
+        if(group == null)
+            return null;
 
         return group.oreName;
     }
@@ -61,10 +62,12 @@ public class Carving
     public ArrayList<ItemStack> getItems(ItemStack chiseledItem)
     {
         ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+
         int damage = chiseledItem.getItemDamage();
 
         CarvingGroup group = getGroup(Block.getBlockFromItem(chiseledItem.getItem()), damage);
-        if(group == null) return items;
+        if(group == null)
+            return items;
 
         HashMap<String, Integer> mapping = new HashMap<String, Integer>();
 
@@ -100,13 +103,17 @@ public class Carving
 
     public CarvingGroup getGroup(Block block, int metadata)
     {
-        if(block.equals(Blocks.stone)) block = Blocks.stonebrick;
+        if(block.equals(Blocks.stone))
+            block = Blocks.stonebrick;
 
         // Check name first
         CarvingGroup res;
+        int i = OreDictionary.getOreID(block.getUnlocalizedName());
+        if(i < 1)
+            return null;
 
-        if((res = carvingGroupsByOre.get(OreDictionary.getOreIDs(new ItemStack(block, 1, metadata)))) != null)
-            return res;
+        //if((res = carvingGroupsByOre.get(OreDictionary.getOreIDs(new ItemStack(block, 1, metadata)))) != null)
+        //    return res;
 
         if((res = carvingGroupsByVariation.get(key(block, metadata))) != null)
             return res;
