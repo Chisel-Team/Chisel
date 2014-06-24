@@ -325,8 +325,6 @@ public class CarvableHelper
 
     public void registerVariation(String name, CarvableVariation variation, Block block, int blockMeta)
     {
-        //TODO- this goes bye-bye!
-        //LanguageRegistry.addName(new ItemStack(block, 1, blockMeta), Chisel.blockDescriptions ? variation.blockName : variation.description);
         //TODO Multipart registry goes here
 
         if(forbidChiseling)

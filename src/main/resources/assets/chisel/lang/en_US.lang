@@ -8,6 +8,119 @@ item.cloudBottle.name=Cloud In A Bottle
 # Block localizations
 # Have fun! ~zombiepig333
 
+#Marble Blocks
+tile.marbleChisel.name=Marble
+tile.marbleChisel.0.desc=Raw Marble
+tile.marbleChisel.1.desc=Marble Brick
+tile.marbleChisel.2.desc=Classic Marble Panel
+tile.marbleChisel.3.desc=Ornate Marble Panel
+tile.marbleChisel.4.desc=Marble Panel
+tile.marbleChisel.5.desc=Marble Block
+tile.marbleChisel.6.desc=Dark Creeper Marble
+tile.marbleChisel.7.desc=Light Creeper Marble
+tile.marbleChisel.8.desc=Carved Marble
+tile.marbleChisel.9.desc=Radial Carved Marble
+tile.marbleChisel.10.desc=Marble with Dent
+tile.marbleChisel.11.desc=Marble with Large Dent
+tile.marbleChisel.12.desc=Marble Tiles
+tile.marbleChisel.13.desc=Arranged Marble Tiles
+tile.marbleChisel.14.desc=Fancy Marble Tiles
+tile.marbleChisel.15.desc=Marble Blocks
+
+#Marble Slabs
+tile.marbleSlab.name=Marble Slab
+tile.marbleSlab.0.desc=Raw Marble Slab
+tile.marbleSlab.1.desc=Marble Brick Slab
+tile.marbleSlab.2.desc=Classic Marble Panel Slab
+tile.marbleSlab.3.desc=Ornate Marble Panel Slab
+tile.marbleSlab.4.desc=Marble Panel Slab
+tile.marbleSlab.5.desc=Marble Block Slab
+tile.marbleSlab.6.desc=Dark Creeper Marble Slab
+tile.marbleSlab.7.desc=Light Creeper Marble Slab
+tile.marbleSlab.8.desc=Carved Marble Slab
+tile.marbleSlab.9.desc=Radial Carved Marble Slab
+tile.marbleSlab.10.desc=Marble Slab with Dent
+tile.marbleSlab.11.desc=Marble Slab with Large Dent
+tile.marbleSlab.12.desc=Marble Tiles Slab
+tile.marbleSlab.13.desc=Arranged Marble Tiles Slab
+tile.marbleSlab.14.desc=Fancy Marble Tiles Slab
+tile.marbleSlab.15.desc=Marble Blocks Slab
+
+#Marble Pillars (old)
+tile.marblePillar.name=Marble Pillar
+tile.marblePillarOld.0.desc=Marble Pillar
+tile.marblePillarOld.1.desc=Marble Pillar Capstone
+tile.marblePillarOld.2.desc=Marble Pillar Base
+tile.marblePillarOld.3.desc=Small Marble Pillar
+tile.marblePillarOld.4.desc=Carved Marble Pillar
+tile.marblePillarOld.5.desc=Ornamental Marble Pillar
+tile.marblePillarOld.6.desc=Greek Marble Pillar
+tile.marblePillarOld.7.desc=Plain Marble Pillar
+tile.marblePillarOld.8.desc=Greek Marble Pillar Capstone
+tile.marblePillarOld.9.desc=Plain Marble Pillar Capstone
+tile.marblePillarOld.10.desc=Greek Marble Pillar Base
+tile.marblePillarOld.11.desc=Plain Marble Pillar Base
+tile.marblePillarOld.12.desc=Greek Marble Pillar Ornate Capstone
+tile.marblePillarOld.13.desc=Plain Marble Pillar Ornate Capstone
+tile.marblePillarOld.14.desc=Greek Marble Pillar Ornate Base
+tile.marblePillarOld.15.desc=Plain Marble Pillar Ornate Base
+
+#Marble Pillars (current)
+tile.marblePillar.0.desc=Marble Pillar
+tile.marblePillar.1.desc=Original Marble Pillar
+tile.marblePillar.2.desc=Simplistic Marble Pillar
+tile.marblePillar.3.desc=Convex Marble Pillar
+tile.marblePillar.4.desc=Rough Marble Pillar
+tile.marblePillar.5.desc=Greek Marble Pillar with Ornate Capstone
+tile.marblePillar.6.desc=Greek Marble Pillar
+tile.marblePillar.7.desc=Greek Marble Pillar with Plain Capstone
+tile.marblePillar.8.desc=Plain Marble Pillar with Ornate Capstone
+tile.marblePillar.9.desc=Plain Marble Pillar with Greek Capstone
+tile.marblePillar.10.desc=Plain Marble Pillar
+tile.marblePillar.11.desc=Wide Marble Pillar with Ornate Capstone
+tile.marblePillar.12.desc=Wide Marble Pillar with Greek Capstone
+tile.marblePillar.13.desc=Wide Marble Pillar with Plain Capstone
+tile.marblePillar.14.desc=Carved Pillar Capstone
+tile.marblePillar.15.desc=Ornamental Pillar Capstone
+
+#Marble Slabs (old)
+tile.marblePillarSlab.name=Marble Pillar Slab
+tile.marblePillarSlabOld.0.desc=Marble Pillar Slab
+tile.marblePillarSlabOld.1.desc=Marble Pllar Capstone Slab
+tile.marblePillarSlabOld.2.desc=Marble Pillar Base Slab
+tile.marblePillarSlabOld.3.desc=Small Marble Pillar Slab
+tile.marblePillarSlabOld.4.desc=Carved Marble Pillar Slab
+tile.marblePillarSlabOld.5.desc=Ornamental Marble Pillar Slab
+tile.marblePillarSlabOld.6.desc=Greek Marble Pillar Slab
+tile.marblePillarSlabOld.7.desc=Plain Marble Pillar Slab
+tile.marblePillarSlabOld.8.desc=Greek Marble Pillar capstone Slab
+tile.marblePillarSlabOld.9.desc=Plain Marble Pillar capstone Slab
+tile.marblePillarSlabOld.10.desc=Greek Marble Pillar Base Slab
+tile.marblePillarSlabOld.11.desc=Plain Marble Pillar Base Slab
+tile.marblePillarSlabOld.12.desc=Greek Marble Pillar ornate capstone Slab
+tile.marblePillarSlabOld.13.desc=Plain Marble Pillar ornate capstone Slab
+tile.marblePillarSlabOld.14.desc=Greek Marble Pillar ornate Base Slab
+tile.marblePillarSlabOld.15.desc=Plain Marble Pillar ornate Base Slab
+
+#Marble Slabs (current)
+tile.marblePillarSlab.0.desc=Marble Pillar Slab
+tile.marblePillarSlab.1.desc=Original Marble Pillar Slab
+tile.marblePillarSlab.2.desc=Simplistic Marble Pillar Slab
+tile.marblePillarSlab.3.desc=Convex Marble Pillar Slab
+tile.marblePillarSlab.4.desc=Rough Marble Pillar Slab
+tile.marblePillarSlab.5.desc=Greek Marble Pillar Slab with Ornate Capstone
+tile.marblePillarSlab.6.desc=Greek Marble Pillar Slab
+tile.marblePillarSlab.7.desc=Greek Marble Pillar Slab with Plain Capstone
+tile.marblePillarSlab.8.desc=Plain Marble Pillar Slab with Ornate Capstone
+tile.marblePillarSlab.9.desc=Plain Marble Pillar Slab with Greek Capstone
+tile.marblePillarSlab.10.desc=Plain Marble Pillar Slab
+tile.marblePillarSlab.11.desc=Wide Marble Pillar Slab with Ornate Capstone
+tile.marblePillarSlab.12.desc=Wide Marble Pillar Slab with Greek Capstone
+tile.marblePillarSlab.13.desc=Wide Marble Pillar Slab with Plain Capstone
+tile.marblePillarSlab.14.desc=Carved Pillar Capstone Slab
+tile.marblePillarSlab.15.desc=Ornamental Pillar Capstone Slab
+
+
 #Factory Blocks
 tile.blockFactory.name=Factory Block
 tile.blockFactory.0.desc=Rusty Metal Plate with Dotted Pattern
