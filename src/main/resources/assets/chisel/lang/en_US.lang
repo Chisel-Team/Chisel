@@ -6,6 +6,28 @@ item.ballMoss.name=Ball O' Moss
 item.cloudBottle.name=Cloud In A Bottle
 
 # Block localizations
+# Have fun! ~zombiepig333
+
+#Factory Blocks
+tile.blockFactory.name=Factory Block
+tile.blockFactory.0.desc=Rusty Metal Plate with Dotted Pattern
+tile.blockFactory.1.desc=Rusty Metal Plate
+tile.blockFactory.2.desc=Very Rusty Metal Plate
+tile.blockFactory.3.desc=A Metal Plate with Little Rust
+tile.blockFactory.4.desc=Wireframe
+tile.blockFactory.5.desc=Wireframe in a Shade of Purple
+tile.blockFactory.6.desc=Yellow-Black Hazard Block
+tile.blockFactory.7.desc=Orange-White Hazard Block
+tile.blockFactory.8.desc=Fancy Circuit Block
+tile.blockFactory.9.desc=Fancy Metal Box
+tile.blockFactory.10.desc=Fancy Circuit Block with Gold Plating
+tile.blockFactory.11.desc=Rusty Purple Block with Gold Plating
+tile.blockFactory.12.desc=Shiny Metal Construction Block
+tile.blockFactory.13.desc=Weared Metal Wall with Openings for Ventilation
+tile.blockFactory.14.desc=Rusty Metal Plates
+tile.blockFactory.15.desc=Weared Metal Column
 
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
+
+

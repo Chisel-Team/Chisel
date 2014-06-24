@@ -30,11 +30,12 @@ public class ItemCarvable extends ItemBlock
         return i;
     }
 
-    @Override
+    //TODO- to fix some, one must break some
+    /*@Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
         return "item." + Block.getBlockFromItem(this).getUnlocalizedName() + "." + itemstack.getItemDamage();
-    }
+    }*/
 
     @Override
     public IIcon getIconFromDamage(int damage)

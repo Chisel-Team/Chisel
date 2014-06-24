@@ -17,6 +17,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -324,7 +325,8 @@ public class CarvableHelper
 
     public void registerVariation(String name, CarvableVariation variation, Block block, int blockMeta)
     {
-        LanguageRegistry.addName(new ItemStack(block, 1, blockMeta), Chisel.blockDescriptions ? variation.blockName : variation.description);
+        //TODO- this goes bye-bye!
+        //LanguageRegistry.addName(new ItemStack(block, 1, blockMeta), Chisel.blockDescriptions ? variation.blockName : variation.description);
         //TODO Multipart registry goes here
 
         if(forbidChiseling)
@@ -432,7 +434,7 @@ public class CarvableHelper
         return world.getBlock(x, y, z).equals(block) && world.getBlockMetadata(x, y, z) == meta;
     }
 
-    public void setBlockName(String name)
+    public void setChiselBlockName(String name)
     {
         blockName = name;
     }
