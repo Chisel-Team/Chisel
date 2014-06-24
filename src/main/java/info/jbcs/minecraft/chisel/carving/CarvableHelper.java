@@ -1,5 +1,7 @@
 package info.jbcs.minecraft.chisel.carving;
 
+import info.jbcs.minecraft.chisel.ChiselBlocks;
+import info.jbcs.minecraft.chisel.block.BlockMarbleStairs;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.block.BlockMarbleSlab;
@@ -326,7 +328,6 @@ public class CarvableHelper
     public void registerVariation(String name, CarvableVariation variation, Block block, int blockMeta)
     {
         //TODO Multipart registry goes here
-
         if(forbidChiseling)
             return;
 
@@ -423,6 +424,9 @@ public class CarvableHelper
     {
         for(CarvableVariation variation : variations)
         {
+            if(variation.metadata == 1){
+                System.out.println(variation.description);
+            }
             list.add(new ItemStack(block, 1, variation.metadata));
         }
     }
