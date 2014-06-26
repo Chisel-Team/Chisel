@@ -480,18 +480,18 @@ public class ChiselBlocks
         {
             blockDiamond = (BlockBeaconBase) new BlockBeaconBase().setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
             Carving.chisel.addVariation("diamond", Blocks.diamond_block, 0, 0);
-            blockDiamond.carverHelper.addVariation("Embossed diamond block", 1, "diamond/terrain-diamond-embossed");
-            blockDiamond.carverHelper.addVariation("Diamond block with panel", 2, "diamond/terrain-diamond-gem");
-            blockDiamond.carverHelper.addVariation("Diamond cells", 3, "diamond/terrain-diamond-cells");
-            blockDiamond.carverHelper.addVariation("Diamonds in purple obsidian", 4, "diamond/terrain-diamond-space");
-            blockDiamond.carverHelper.addVariation("Diamonds in obsidian", 5, "diamond/terrain-diamond-spaceblack");
-            blockDiamond.carverHelper.addVariation("Diamond block simple", 6, "diamond/terrain-diamond-simple");
-            blockDiamond.carverHelper.addVariation("Bismuth", 7, "diamond/a1-blockdiamond-bismuth");
-            blockDiamond.carverHelper.addVariation("Crushed diamond", 8, "diamond/a1-blockdiamond-crushed");
-            blockDiamond.carverHelper.addVariation("Small diamond blocks", 9, "diamond/a1-blockdiamond-four");
-            blockDiamond.carverHelper.addVariation("Small ornate diamond blocks", 10, "diamond/a1-blockdiamond-fourornate");
-            blockDiamond.carverHelper.addVariation("Zelda diamond block", 11, "diamond/a1-blockdiamond-zelda");
-            blockDiamond.carverHelper.addVariation("Diamond block with ornate layer", 12, "diamond/a1-blockdiamond-ornatelayer");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.0.desc"), 1, "diamond/terrain-diamond-embossed");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.1.desc"), 2, "diamond/terrain-diamond-gem");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.2.desc"), 3, "diamond/terrain-diamond-cells");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.3.desc"), 4, "diamond/terrain-diamond-space");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.4.desc"), 5, "diamond/terrain-diamond-spaceblack");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.5.desc"), 6, "diamond/terrain-diamond-simple");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.6.desc"), 7, "diamond/a1-blockdiamond-bismuth");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.7.desc"), 8, "diamond/a1-blockdiamond-crushed");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.8.desc"), 9, "diamond/a1-blockdiamond-four");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.9.desc"), 10, "diamond/a1-blockdiamond-fourornate");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.10.desc"), 11, "diamond/a1-blockdiamond-zelda");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.11.desc"), 12, "diamond/a1-blockdiamond-ornatelayer");
             blockDiamond.carverHelper.register(blockDiamond, "diamond");
             Carving.chisel.registerOre("diamond", "blockDiamond");
         }
@@ -1043,7 +1043,6 @@ public class ChiselBlocks
             OreDictionary.registerOre("blockTyrian", blockTyrian);
             Carving.chisel.registerOre("blockTyrian", "blockTyrian");
         }
-
 
 
         if(Chisel.featureEnabled("templeBlock"))

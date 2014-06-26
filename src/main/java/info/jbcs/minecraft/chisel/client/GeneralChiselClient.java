@@ -128,8 +128,8 @@ public class GeneralChiselClient
             Minecraft.getMinecraft().effectRenderer.addEffect(res);
         }
     }
-    public static
- void spawnBallOMossFX(World world, double x, double y, double z)
+
+    public static void spawnBallOMossFX(World world, double x, double y, double z)
     {
         if(Chisel.particlesTickrate == 0 || tick++ % Chisel.particlesTickrate == 0)
         {

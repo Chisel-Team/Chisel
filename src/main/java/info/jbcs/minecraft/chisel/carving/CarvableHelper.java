@@ -1,31 +1,26 @@
 package info.jbcs.minecraft.chisel.carving;
 
-import info.jbcs.minecraft.chisel.ChiselBlocks;
-import info.jbcs.minecraft.chisel.block.BlockMarbleStairs;
-import info.jbcs.minecraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
+import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.block.BlockMarbleSlab;
-import info.jbcs.minecraft.chisel.item.ItemCarvable;
+import info.jbcs.minecraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
 import info.jbcs.minecraft.chisel.client.render.CTM;
 import info.jbcs.minecraft.chisel.client.render.TextureSubmap;
+import info.jbcs.minecraft.chisel.item.ItemCarvable;
 import info.jbcs.minecraft.utilities.GeneralClient;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockPane;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockPane;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class CarvableHelper
 {
@@ -424,8 +419,10 @@ public class CarvableHelper
     {
         for(CarvableVariation variation : variations)
         {
-            if(variation.metadata == 1){
-                System.out.println(variation.description);
+
+            if(variation.metadata == 1)
+            {
+                //    System.out.println(variation.description);
             }
             list.add(new ItemStack(block, 1, variation.metadata));
         }
