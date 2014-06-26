@@ -10,6 +10,23 @@ item.cloudBottle.name=Cloud In A Bottle
 
 #Cobblestone Blocks
 chisel.tile.cobblestone.name=Cobblestone
+chisel.tile.cobblestone.0.desc=Aligned cobblestone bricks
+chisel.tile.cobblestone.1.desc=Detailed cobblestone bricks
+chisel.tile.cobblestone.2.desc=Small cobblestone bricks
+chisel.tile.cobblestone.3.desc=Large cobblestone tiles
+chisel.tile.cobblestone.4.desc=Small cobblestone tiles
+chisel.tile.cobblestone.5.desc=French cobblestone tiles
+chisel.tile.cobblestone.6.desc=French cobblestone tiles
+chisel.tile.cobblestone.7.desc=Creeper cobblestone tiles
+chisel.tile.cobblestone.8.desc=Damaged cobblestone tiles
+chisel.tile.cobblestone.9.desc=Huge cobblestone tiles
+chisel.tile.cobblestone.10.desc=Cobblestone with creeper panel
+chisel.tile.cobblestone.11.desc=Cobblestone with dent
+chisel.tile.cobblestone.12.desc=Cobblestone with panel
+chisel.tile.cobblestone.13.desc=Cobblestone with light panel
+chisel.tile.cobblestone.14.desc=Cobblestone with dark panel
+
+#Sandstone Blocks
 
 #Marble Blocks
 chisel.tile.marble.name=Marble
