@@ -152,6 +152,7 @@ chisel.tile.marbleStairs.5.name=Marble Stairs
 chisel.tile.marbleStairs.6.name=Marble Stairs
 chisel.tile.marbleStairs.7.name=Marble Stairs
 
+#These are bugged.... so sad :,(
 chisel.tile.marbleStairs.0.desc=Raw Marble Stairs
 chisel.tile.marbleStairs.1.desc=Marble Brick Stairs
 chisel.tile.marbleStairs.2.desc=Classic Marble Panel Stairs
@@ -219,6 +220,7 @@ chisel.tile.limestoneStairs.5.name=Limestone Stairs
 chisel.tile.limestoneStairs.6.name=Limestone Stairs
 chisel.tile.limestoneStairs.7.name=Limestone Stairs
 
+#These are bugged.... so sad :,(
 chisel.tile.limestoneStairs.0.desc=Limestone Stairs
 chisel.tile.limestoneStairs.1.desc=Small Limestone Tiled Stairs
 chisel.tile.limestoneStairs.2.desc=French Limestone Tiled Stairs
@@ -257,18 +259,78 @@ chisel.tile.blockFactory.15.desc=Weared Metal Column
 
 #Diamond blocks
 chisel.tile.diamond.name=Diamond Block
-chisel.tile.diamond.0.desc=Embossed diamond block
-chisel.tile.diamond.1.desc=Diamond block with panel
-chisel.tile.diamond.2.desc=Diamond cells
-chisel.tile.diamond.3.desc=Diamonds in purple obsidian
-chisel.tile.diamond.4.desc=Diamonds in obsidian
-chisel.tile.diamond.5.desc=Diamond block simple
+chisel.tile.diamond.0.desc=Embossed Diamond Block
+chisel.tile.diamond.1.desc=Diamond Block with Panel
+chisel.tile.diamond.2.desc=Diamond Cells
+chisel.tile.diamond.3.desc=Diamonds in Purple Obsidian
+chisel.tile.diamond.4.desc=Diamonds in Obsidian
+chisel.tile.diamond.5.desc=Simple Diamond Block
 chisel.tile.diamond.6.desc=Bismuth
-chisel.tile.diamond.7.desc=Crushed diamond
-chisel.tile.diamond.8.desc=Small diamond blocks
-chisel.tile.diamond.9.desc=Small ornate diamond blocks
-chisel.tile.diamond.10.desc=Zelda diamond block
-chisel.tile.diamond.11.desc=Diamond block with ornate layer
+chisel.tile.diamond.7.desc=Crushed Diamond
+chisel.tile.diamond.8.desc=Small Diamond Blocks
+chisel.tile.diamond.9.desc=Small Ornate Diamond Blocks
+chisel.tile.diamond.10.desc=Zelda Diamond Block
+chisel.tile.diamond.11.desc=Diamond Block with Ornate Layer
+
+#Snakestone
+chisel.tile.snakestoneSand.name=Sand Snakestone
+
+#Glass blocks
+chisel.tile.glass.name=Glass
+chisel.tile.glass.1.desc=Bubble glass
+chisel.tile.glass.2.desc=Chinese glass
+chisel.tile.glass.3.desc=Japanese(?) glass
+chisel.tile.glass.4.desc=Dungeon glass
+chisel.tile.glass.5.desc=Light glass
+chisel.tile.glass.6.desc=Borderless glass
+chisel.tile.glass.7.desc=Ornate steel glass
+chisel.tile.glass.8.desc=Screen
+chisel.tile.glass.9.desc=Shale glass
+chisel.tile.glass.10.desc=Steel frame glass
+chisel.tile.glass.11.desc=Stone frame glass
+chisel.tile.glass.12.desc=Streak glass
+chisel.tile.glass.13.desc=Thick grid glass
+chisel.tile.glass.14.desc=Thin grid glass
+chisel.tile.glass.15.desc=Modern Iron Fence
+
+#Sandstone
+chisel.tile.sandstone.name=Sandstone
+chisel.tile.sandstone.1.desc=Chiseled Sandstone
+chisel.tile.sandstone.2.desc=Smooth Sandstone
+chisel.tile.sandstone.3.desc=Faded sandstone
+chisel.tile.sandstone.4.desc=Sandstone pillar
+chisel.tile.sandstone.5.desc=Sandstone pillar capstone
+chisel.tile.sandstone.6.desc=Small sandstone pillar
+chisel.tile.sandstone.7.desc=Sandstone pillar base
+chisel.tile.sandstone.8.desc=Smooth & flat sandstone
+chisel.tile.sandstone.9.desc=Smooth sandstone pillar capstone
+chisel.tile.sandstone.10.desc=Small smooth sandstone pillar
+chisel.tile.sandstone.11.desc=Smooth sandstone pillar base
+chisel.tile.sandstone.12.desc=Sandstone block
+chisel.tile.sandstone.13.desc=Small sandstone blocks
+chisel.tile.sandstone.14.desc=Sandstone mosaic
+chisel.tile.sandstone.15.desc=Stacked sandstone tiles
+
+#Sandstone scribbles
+chisel.tile.sandstoneScribbles.name=Sandstone scribbles
+chisel.tile.sandstoneScribbles.desc=Sandstone scribbles
+
+#Concrete
+chisel.tile.blockConcrete.name=Concrete
+chisel.tile.blockConcrete.0.desc=Concrete
+chisel.tile.blockConcrete.1.desc=Concrete block
+chisel.tile.blockConcrete.2.desc=Concrete double slab
+chisel.tile.blockConcrete.3.desc=Small concrete blocks
+chisel.tile.blockConcrete.4.desc=Weathered concrete
+chisel.tile.blockConcrete.5.desc=Weathered concrete block
+chisel.tile.blockConcrete.6.desc=Weathered concrete double slab
+chisel.tile.blockConcrete.7.desc=Small weathered blocks
+chisel.tile.blockConcrete.8.desc=Partly weathered concrete
+chisel.tile.blockConcrete.9.desc=Partly weathered concrete block
+chisel.tile.blockConcrete.10.desc=Asphalt
+
+#Road Line
+chisel.tile.roadLine.name=Road Lines
 
 
 
