@@ -30,10 +30,11 @@ public class ItemCarvable extends ItemBlock
         return i;
     }
 
+    //TODO- to fix some, one must break some
     @Override
     public String getUnlocalizedName(ItemStack itemstack)
     {
-        return "item." + Block.getBlockFromItem(this).getUnlocalizedName() + "." + itemstack.getItemDamage();
+        return "chisel." + Block.getBlockFromItem(this).getUnlocalizedName();
     }
 
     @Override
@@ -55,7 +56,8 @@ public class ItemCarvable extends ItemBlock
 
         ICarvable carvable = (ICarvable) block;
         CarvableVariation var = carvable.getVariation(stack.getItemDamage());
-        if(var == null) return;
+        if(var == null)
+            return;
 
         lines.add(var.description);
     }

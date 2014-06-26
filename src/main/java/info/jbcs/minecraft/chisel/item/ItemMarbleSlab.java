@@ -62,10 +62,12 @@ public class ItemMarbleSlab extends ItemCarvable
         if(metaMatches && side == 0 && targetBlock.equals(block.top))
         {
             world.setBlock(x, y, z, block.master, meta, 2);
+            stack.stackSize -= 1;
             return true;
         } else if(metaMatches && side == 1 && targetBlock.equals(block.bottom))
         {
             world.setBlock(x, y, z, block.master, meta, 2);
+            stack.stackSize -= 1;
             return true;
         }
 

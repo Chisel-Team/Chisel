@@ -20,7 +20,7 @@ public class BlockConcrete extends BlockCarvable
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
         float f = 0.125F;
-        return AxisAlignedBB.getAABBPool().getAABB(par2, par3, par4, (par2 + 1), ((par3 + 1) - f), (par4 + 1));
+        return AxisAlignedBB.getBoundingBox(par2, par3, par4, (par2 + 1), ((par3 + 1) - f), (par4 + 1));
     }
 
     @Override

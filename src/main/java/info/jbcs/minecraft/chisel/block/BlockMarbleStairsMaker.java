@@ -13,14 +13,13 @@ public class BlockMarbleStairsMaker
     public CarvableHelper carverHelper;
     BlockMarbleStairs blocks[];
 
-    int idStart;
+    //int idStart;
     Block blockBase;
     String blockName;
 
     public BlockMarbleStairsMaker(Block base)
     {
         carverHelper = new CarvableHelper();
-
         blockBase = base;
     }
 
@@ -32,7 +31,6 @@ public class BlockMarbleStairsMaker
     public void create(BlockMarbleStairsMakerCreator creator, String name)
     {
         blocks = new BlockMarbleStairs[carverHelper.variations.size() / 2];
-
         for(int i = 0; i < blocks.length; i++)
         {
             String n = name + "." + i;

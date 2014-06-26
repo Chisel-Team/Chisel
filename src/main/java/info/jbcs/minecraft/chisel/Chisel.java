@@ -91,7 +91,7 @@ public class Chisel
             // This fixes the bug.
             if(m.name.startsWith("null.") && m.name.length() == 6 && m.type == Type.BLOCK)
             {
-                m.setAction(Action.WARN);
+                m.warn();//(Action.WARN);
             }
         }
     }

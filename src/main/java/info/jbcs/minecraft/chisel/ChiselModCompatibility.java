@@ -16,8 +16,8 @@ public class ChiselModCompatibility
         {
             try
             {
-                if((cl = Class.forName(name)) != null)
-                    action();
+            if((cl = Class.forName(name)) != null)
+                action();
             } catch(ClassNotFoundException e)
             {
                 e.printStackTrace();
