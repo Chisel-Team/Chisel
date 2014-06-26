@@ -24,7 +24,7 @@ group = "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guid
 archivesBaseName = "Chisel"
 
 minecraft {
-    version = "1.7.10_pre4-10.12.2.1149-prerelease"
+    version = "1.7.10-10.13.0.1150"
     assetDir = "eclipse/assets"
 }
 

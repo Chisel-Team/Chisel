@@ -419,13 +419,6 @@ public class CarvableHelper
     {
         for(CarvableVariation variation : variations)
         {
-            if(variation.blockName.contains("cobblestone"))
-                System.out.println(variation.description);
-
-            if(variation.metadata == 1)
-            {
-                //    System.out.println(variation.description);
-            }
             list.add(new ItemStack(block, 1, variation.metadata));
         }
     }

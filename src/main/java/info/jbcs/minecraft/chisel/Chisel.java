@@ -36,7 +36,7 @@ import net.minecraftforge.common.config.Configuration;
 import java.io.File;
 
 
-@Mod(modid = "chisel", name = "Chisel", version = "1.5.4g"/*, dependencies = "after:ForgeMicroblock;"*/)
+@Mod(modid = "chisel", name = "Chisel", version = "1.5.5", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory"/*, dependencies = "after:ForgeMicroblock;"*/)
 public class Chisel
 {
     public static ItemChisel chisel;
@@ -61,7 +61,7 @@ public class Chisel
     public static final StepSoundEx soundTempleFootstep = new StepSoundEx("dig.stone", "chisel:temple-footstep", "dig.stone", 1.0f);
     public static final StepSoundEx soundMetalFootstep = new StepSoundEx("chisel:metal", "chisel:metal", "chisel:metal", 1.0f);
 
-    static Configuration config;
+    public static Configuration config;
 
     public static int RenderEldritchId;
     public static int RenderCTMId;

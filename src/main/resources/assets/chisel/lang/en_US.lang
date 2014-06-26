@@ -312,7 +312,7 @@ chisel.tile.sandstone.14.desc=Sandstone mosaic
 chisel.tile.sandstone.15.desc=Stacked sandstone tiles
 
 #Sandstone scribbles
-chisel.tile.sandstoneScribbles.name=Sandstone scribbles
+chisel.tile.sandstoneScribbles.name=Sandstone Scribbles
 chisel.tile.sandstoneScribbles.desc=Sandstone scribbles
 
 #Concrete
@@ -332,8 +332,83 @@ chisel.tile.blockConcrete.10.desc=Asphalt
 #Road Line
 chisel.tile.roadLine.name=Road Lines
 
+#Iron Blocks
+chisel.tile.iron.name=Iron Block
+chisel.tile.iron.1.desc=Large iron ingots
+chisel.tile.iron.2.desc=Small iron ingots
+chisel.tile.iron.3.desc=Iron gears
+chisel.tile.iron.4.desc=Iron bricks
+chisel.tile.iron.5.desc=Iron plates
+chisel.tile.iron.6.desc=Iron plates with rivets
+chisel.tile.iron.7.desc=Iron coin stack heads up
+chisel.tile.iron.8.desc=Iron coin stack heads down
+chisel.tile.iron.9.desc=Dark iron crate
+chisel.tile.iron.10.desc=Light iron crate
+chisel.tile.iron.11.desc=Iron block with moon decoration
+chisel.tile.iron.12.desc=Iron moon in purple obsidian
+chisel.tile.iron.13.desc=Iron moon in obsidian
+chisel.tile.iron.14.desc=Iron vents
+chisel.tile.iron.15.desc=Simple Iron Block
 
+#Gold Blocks
+chisel.tile.gold.name=Gold Block
+chisel.tile.gold.1.desc=Large golden ingots
+chisel.tile.gold.2.desc=Small golden ingots
+chisel.tile.gold.3.desc=Golden bricks
+chisel.tile.gold.4.desc=Gold cart
+chisel.tile.gold.5.desc=Golden coin stack heads up
+chisel.tile.gold.6.desc=Golden coin stack heads down
+chisel.tile.gold.7.desc=Dark gold crate
+chisel.tile.gold.8.desc=Light gold crate
+chisel.tile.gold.9.desc=Golden plates
+chisel.tile.gold.10.desc=Gold plates with rivets
+chisel.tile.gold.11.desc=Gold block with star decoration
+chisel.tile.gold.12.desc=Golden star in purple obsidian
+chisel.tile.gold.13.desc=Golden star in obsidian
+chisel.tile.gold.14.desc=Simple Gold Block
 
+#Glowstone
+chisel.tile.lightstone.name=Glowstone
+chisel.tile.lightstone.1.desc=Cobble glowstone block
+chisel.tile.lightstone.2.desc=Corroded glowstone blocks
+chisel.tile.lightstone.3.desc=Glowstone blocks with glass
+chisel.tile.lightstone.4.desc=Neon glowstone
+chisel.tile.lightstone.5.desc=Ornate glowstone blocks
+chisel.tile.lightstone.6.desc=Rocky glowstone
+chisel.tile.lightstone.7.desc=Shale-shaped glowstone
+chisel.tile.lightstone.8.desc=Glowstone tiles
+chisel.tile.lightstone.9.desc=Fancy glowstone lantern
+chisel.tile.lightstone.10.desc=Crumbling glowstone block
+chisel.tile.lightstone.11.desc=Organic glowstone growth block
+chisel.tile.lightstone.12.desc=Glowstone layers
+chisel.tile.lightstone.13.desc=Corroded glowstone tiles
+chisel.tile.lightstone.14.desc=Glowstone bismuth
+chisel.tile.lightstone.15.desc=Glowstone bismuth panel
+
+#Lapis blocks
+chisel.tile.lapis.name=Lapis Block
+chisel.tile.lapis.1.desc=Chunky lapis block
+chisel.tile.lapis.2.desc=Dark lapis block
+chisel.tile.lapis.3.desc=Zelda lapis block
+chisel.tile.lapis.4.desc=Ornate lapis block
+chisel.tile.lapis.5.desc=Lapis tile
+chisel.tile.lapis.6.desc=Lapis panel
+chisel.tile.lapis.7.desc=Smooth lapis
+chisel.tile.lapis.8.desc=Lapis with ornate layer
+
+#Emerald Blocks
+chisel.tile.emerald.name=Emerald Block
+chisel.tile.emerald.1.desc=Emerald panel
+chisel.tile.emerald.2.desc=Classic emerald panel
+chisel.tile.emerald.3.desc=Smooth emerald
+chisel.tile.emerald.4.desc=Emerald chunk
+chisel.tile.emerald.5.desc=Emerald with ornate layer
+chisel.tile.emerald.6.desc=Zelda emerald block
+chisel.tile.emerald.7.desc=Emerald cell
+chisel.tile.emerald.8.desc=Emerald bismuth
+chisel.tile.emerald.9.desc=Small emerald blocks
+chisel.tile.emerald.10.desc=Small ornate emerald blocks
+chisel.tile.emerald.11.desc=Ornate emerald block
 
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
