@@ -8,6 +8,26 @@ item.cloudBottle.name=Cloud In A Bottle
 # Block localizations
 # Have fun! ~zombiepig333
 
+#Cobblestone Blocks
+chisel.tile.cobblestone.name=Cobblestone
+chisel.tile.cobblestone.0.desc=Aligned cobblestone bricks
+chisel.tile.cobblestone.1.desc=Detailed cobblestone bricks
+chisel.tile.cobblestone.2.desc=Small cobblestone bricks
+chisel.tile.cobblestone.3.desc=Large cobblestone tiles
+chisel.tile.cobblestone.4.desc=Small cobblestone tiles
+chisel.tile.cobblestone.5.desc=French cobblestone tiles
+chisel.tile.cobblestone.6.desc=French cobblestone tiles
+chisel.tile.cobblestone.7.desc=Creeper cobblestone tiles
+chisel.tile.cobblestone.8.desc=Damaged cobblestone tiles
+chisel.tile.cobblestone.9.desc=Huge cobblestone tiles
+chisel.tile.cobblestone.10.desc=Cobblestone with creeper panel
+chisel.tile.cobblestone.11.desc=Cobblestone with dent
+chisel.tile.cobblestone.12.desc=Cobblestone with panel
+chisel.tile.cobblestone.13.desc=Cobblestone with light panel
+chisel.tile.cobblestone.14.desc=Cobblestone with dark panel
+
+#Sandstone Blocks
+
 #Marble Blocks
 chisel.tile.marble.name=Marble
 chisel.tile.marble.0.desc=Raw Marble
@@ -234,6 +254,24 @@ chisel.tile.blockFactory.12.desc=Shiny Metal Construction Block
 chisel.tile.blockFactory.13.desc=Weared Metal Wall with Openings for Ventilation
 chisel.tile.blockFactory.14.desc=Rusty Metal Plates
 chisel.tile.blockFactory.15.desc=Weared Metal Column
+
+#Diamond blocks
+chisel.tile.diamond.name=Diamond Block
+chisel.tile.diamond.0.desc=Embossed diamond block
+chisel.tile.diamond.1.desc=Diamond block with panel
+chisel.tile.diamond.2.desc=Diamond cells
+chisel.tile.diamond.3.desc=Diamonds in purple obsidian
+chisel.tile.diamond.4.desc=Diamonds in obsidian
+chisel.tile.diamond.5.desc=Diamond block simple
+chisel.tile.diamond.6.desc=Bismuth
+chisel.tile.diamond.7.desc=Crushed diamond
+chisel.tile.diamond.8.desc=Small diamond blocks
+chisel.tile.diamond.9.desc=Small ornate diamond blocks
+chisel.tile.diamond.10.desc=Zelda diamond block
+chisel.tile.diamond.11.desc=Diamond block with ornate layer
+
+
+
 
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks

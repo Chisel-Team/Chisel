@@ -305,21 +305,21 @@ public class ChiselBlocks
         {
             blockCobblestone = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("cobblestone", Blocks.cobblestone, 0, 0);
-            blockCobblestone.carverHelper.addVariation("Aligned cobblestone bricks", 1, "cobblestone/terrain-cobb-brickaligned");
-            blockCobblestone.carverHelper.addVariation("Detailed cobblestone bricks", 2, "cobblestone/terrain-cob-detailedbrick");
-            blockCobblestone.carverHelper.addVariation("Small cobblestone bricks", 3, "cobblestone/terrain-cob-smallbrick");
-            blockCobblestone.carverHelper.addVariation("Large cobblestone tiles", 4, "cobblestone/terrain-cobblargetiledark");
-            blockCobblestone.carverHelper.addVariation("Small cobblestone tiles", 5, "cobblestone/terrain-cobbsmalltile");
-            blockCobblestone.carverHelper.addVariation("French cobblestone tiles", 6, "cobblestone/terrain-cob-french");
-            blockCobblestone.carverHelper.addVariation("French cobblestone tiles", 7, "cobblestone/terrain-cob-french2");
-            blockCobblestone.carverHelper.addVariation("Creeper cobblestone tiles", 8, "cobblestone/terrain-cobmoss-creepdungeon");
-            blockCobblestone.carverHelper.addVariation("Damaged cobblestone tiles", 9, "cobblestone/terrain-mossysmalltiledark");
-            blockCobblestone.carverHelper.addVariation("Huge cobblestone tiles", 10, "cobblestone/terrain-pistonback-dungeontile");
-            blockCobblestone.carverHelper.addVariation("Cobblestone with creeper panel", 11, "cobblestone/terrain-pistonback-darkcreeper");
-            blockCobblestone.carverHelper.addVariation("Cobblestone with dent", 12, "cobblestone/terrain-pistonback-darkdent");
-            blockCobblestone.carverHelper.addVariation("Cobblestone with panel", 13, "cobblestone/terrain-pistonback-darkemboss");
-            blockCobblestone.carverHelper.addVariation("Cobblestone with light panel", 14, "cobblestone/terrain-pistonback-darkmarker");
-            blockCobblestone.carverHelper.addVariation("Cobblestone with dark panel", 15, "cobblestone/terrain-pistonback-darkpanel");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.0.desc"), 1, "cobblestone/terrain-cobb-brickaligned");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.1.desc"), 2, "cobblestone/terrain-cob-detailedbrick");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.2.desc"), 3, "cobblestone/terrain-cob-smallbrick");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.3.desc"), 4, "cobblestone/terrain-cobblargetiledark");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.4.desc"), 5, "cobblestone/terrain-cobbsmalltile");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.5.desc"), 6, "cobblestone/terrain-cob-french");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.6.desc"), 7, "cobblestone/terrain-cob-french2");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.7.desc"), 8, "cobblestone/terrain-cobmoss-creepdungeon");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.8.desc"), 9, "cobblestone/terrain-mossysmalltiledark");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.9.desc"), 10, "cobblestone/terrain-pistonback-dungeontile");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.10.desc"), 11, "cobblestone/terrain-pistonback-darkcreeper");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.11.desc"), 12, "cobblestone/terrain-pistonback-darkdent");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.12.desc"), 13, "cobblestone/terrain-pistonback-darkemboss");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.13.desc"), 14, "cobblestone/terrain-pistonback-darkmarker");
+            blockCobblestone.carverHelper.addVariation(I18n.format("chisel.tile.cobblestone.14.desc"), 15, "cobblestone/terrain-pistonback-darkpanel");
             blockCobblestone.carverHelper.register(blockCobblestone, "cobblestone");
             Carving.chisel.registerOre("cobblestone", "blockCobble");
         }
@@ -480,18 +480,18 @@ public class ChiselBlocks
         {
             blockDiamond = (BlockBeaconBase) new BlockBeaconBase().setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
             Carving.chisel.addVariation("diamond", Blocks.diamond_block, 0, 0);
-            blockDiamond.carverHelper.addVariation("Embossed diamond block", 1, "diamond/terrain-diamond-embossed");
-            blockDiamond.carverHelper.addVariation("Diamond block with panel", 2, "diamond/terrain-diamond-gem");
-            blockDiamond.carverHelper.addVariation("Diamond cells", 3, "diamond/terrain-diamond-cells");
-            blockDiamond.carverHelper.addVariation("Diamonds in purple obsidian", 4, "diamond/terrain-diamond-space");
-            blockDiamond.carverHelper.addVariation("Diamonds in obsidian", 5, "diamond/terrain-diamond-spaceblack");
-            blockDiamond.carverHelper.addVariation("Diamond block simple", 6, "diamond/terrain-diamond-simple");
-            blockDiamond.carverHelper.addVariation("Bismuth", 7, "diamond/a1-blockdiamond-bismuth");
-            blockDiamond.carverHelper.addVariation("Crushed diamond", 8, "diamond/a1-blockdiamond-crushed");
-            blockDiamond.carverHelper.addVariation("Small diamond blocks", 9, "diamond/a1-blockdiamond-four");
-            blockDiamond.carverHelper.addVariation("Small ornate diamond blocks", 10, "diamond/a1-blockdiamond-fourornate");
-            blockDiamond.carverHelper.addVariation("Zelda diamond block", 11, "diamond/a1-blockdiamond-zelda");
-            blockDiamond.carverHelper.addVariation("Diamond block with ornate layer", 12, "diamond/a1-blockdiamond-ornatelayer");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.0.desc"), 1, "diamond/terrain-diamond-embossed");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.1.desc"), 2, "diamond/terrain-diamond-gem");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.2.desc"), 3, "diamond/terrain-diamond-cells");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.3.desc"), 4, "diamond/terrain-diamond-space");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.4.desc"), 5, "diamond/terrain-diamond-spaceblack");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.5.desc"), 6, "diamond/terrain-diamond-simple");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.6.desc"), 7, "diamond/a1-blockdiamond-bismuth");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.7.desc"), 8, "diamond/a1-blockdiamond-crushed");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.8.desc"), 9, "diamond/a1-blockdiamond-four");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.9.desc"), 10, "diamond/a1-blockdiamond-fourornate");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.10.desc"), 11, "diamond/a1-blockdiamond-zelda");
+            blockDiamond.carverHelper.addVariation(I18n.format("chisel.tile.diamond.11.desc"), 12, "diamond/a1-blockdiamond-ornatelayer");
             blockDiamond.carverHelper.register(blockDiamond, "diamond");
             Carving.chisel.registerOre("diamond", "blockDiamond");
         }
@@ -1043,7 +1043,6 @@ public class ChiselBlocks
             OreDictionary.registerOre("blockTyrian", blockTyrian);
             Carving.chisel.registerOre("blockTyrian", "blockTyrian");
         }
-
 
 
         if(Chisel.featureEnabled("templeBlock"))
