@@ -419,16 +419,6 @@ public class CarvableHelper
     {
         for(CarvableVariation variation : variations)
         {
-<<<<<<< HEAD
-            if(variation.blockName.contains("sandstone"))
-                System.out.println(variation.description);
-
-            if(variation.metadata == 1)
-            {
-                //    System.out.println(variation.description);
-            }
-=======
->>>>>>> origin/master
             list.add(new ItemStack(block, 1, variation.metadata));
         }
     }
