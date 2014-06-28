@@ -1,5 +1,6 @@
 package info.jbcs.minecraft.chisel;
 
+import cpw.mods.fml.common.Optional;
 import info.jbcs.minecraft.chisel.carving.Carving;
 import net.minecraft.block.Block;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
