@@ -275,6 +275,7 @@ chisel.tile.diamond.11.desc=Diamond Block with Ornate Layer
 #Snakestone
 chisel.tile.snakestoneSand.name=Sand Snakestone
 chisel.tile.snakestoneStone.name=Stone Snakestone
+chisel.tile.snakestoneObsidian.name=Obsidian Snakestone
 
 #Glass blocks
 chisel.tile.glass.name=Glass
@@ -464,6 +465,7 @@ chisel.tile.stoneMoss.13.desc=Mossy cobblestone with pane
 chisel.tile.stoneMoss.14.desc=Mossy cobblestone with light panel
 chisel.tile.stoneMoss.15.desc=Mossy cobblestone with dark panel
 
+#Stone Bricks
 chisel.tile.stoneBrick.name=Stone Bricks
 chisel.tile.stoneBrick.4.desc=Small stone bricks
 chisel.tile.stoneBrick.5.desc=Wide stone bricks
@@ -477,6 +479,40 @@ chisel.tile.stoneBrick.12.desc=Stone panel
 chisel.tile.stoneBrick.13.desc=Sunken stone panel
 chisel.tile.stoneBrick.14.desc=Ornate stone panel
 chisel.tile.stoneBrick.15.desc=Poison stone brick
+
+#Dirt
+chisel.tile.blockDirt.name=Dirt
+chisel.tile.blockDirt.0.desc=Dirt bricks in disarray
+chisel.tile.blockDirt.1.desc=Dirt bricks imitating nether brick design
+chisel.tile.blockDirt.2.desc=Dirt bricks
+chisel.tile.blockDirt.3.desc=Cobbledirt
+chisel.tile.blockDirt.4.desc=Reinforced cobbledirt
+chisel.tile.blockDirt.5.desc=Reinforced dirt
+chisel.tile.blockDirt.6.desc=Happy dirt
+chisel.tile.blockDirt.7.desc=Large dirt bricks
+chisel.tile.blockDirt.8.desc=Large dirt bricks on top of dirt
+chisel.tile.blockDirt.9.desc=Horizontal dirt
+chisel.tile.blockDirt.10.desc=Vertical dirt
+chisel.tile.blockDirt.11.desc=Dirt layers
+chisel.tile.blockDirt.12.desc=Crumbling dirt
+
+#Ice
+chisel.tile.ice.name=Ice
+chisel.tile.ice.1.desc=Rough ice block
+chisel.tile.ice.2.desc=Cobbleice
+chisel.tile.ice.3.desc=Large rough ice bricks
+chisel.tile.ice.4.desc=Large ice bricks
+chisel.tile.ice.5.desc=Small ice bricks
+chisel.tile.ice.6.desc=Fancy glass wall
+chisel.tile.ice.7.desc=Large ice tiles
+chisel.tile.ice.8.desc=Fancy ice tiles
+chisel.tile.ice.9.desc=Sunken ice tiles
+chisel.tile.ice.10.desc=Disordered ice tiles
+chisel.tile.ice.11.desc=Ice panel
+chisel.tile.ice.12.desc=Ice double slab
+chisel.tile.ice.13.desc=Ice Zelda block
+chisel.tile.ice.14.desc=Ice Bismuth block
+chisel.tile.ice.15.desc=Ice Poison block
 
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
