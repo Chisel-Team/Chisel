@@ -419,7 +419,7 @@ public class CarvableHelper
     {
         for(CarvableVariation variation : variations)
         {
-            if(variation.blockName.contains("cobblestone"))
+            if(variation.blockName.contains("sandstone"))
                 System.out.println(variation.description);
 
             if(variation.metadata == 1)

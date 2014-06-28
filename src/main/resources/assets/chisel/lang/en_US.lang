@@ -27,6 +27,7 @@ chisel.tile.cobblestone.13.desc=Cobblestone with light panel
 chisel.tile.cobblestone.14.desc=Cobblestone with dark panel
 
 #Sandstone Blocks
+chisel.tile.sandstone.name=Sandstone
 
 #Marble Blocks
 chisel.tile.marble.name=Marble
