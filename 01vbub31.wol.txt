@@ -1,0 +1,34 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+Conflicts:
+	src/main/java/info/jbcs/minecraft/chisel/carving/CarvableHelper.java
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 7 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#   (use "git commit" to conclude merge)
+#
+# Changes to be committed:
+#
+#	modified:   README.md
+#	modified:   build.gradle
+#	modified:   src/main/java/info/jbcs/minecraft/chisel/Chisel.java
+#	modified:   src/main/java/info/jbcs/minecraft/chisel/ChiselBlocks.java
+#	modified:   src/main/java/info/jbcs/minecraft/chisel/ChiselModCompatibility.java
+#	modified:   src/main/java/info/jbcs/minecraft/chisel/carving/CarvableHelper.java
+#	new file:   src/main/java/info/jbcs/minecraft/chisel/client/gui/GuiChiselConfig.java
+#	new file:   src/main/java/info/jbcs/minecraft/chisel/client/gui/GuiFactory.java
+#	modified:   src/main/resources/assets/chisel/lang/en_US.lang
+#
+
