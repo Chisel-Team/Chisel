@@ -274,6 +274,7 @@ chisel.tile.diamond.11.desc=Diamond Block with Ornate Layer
 
 #Snakestone
 chisel.tile.snakestoneSand.name=Sand Snakestone
+chisel.tile.snakestoneStone.name=Stone Snakestone
 
 #Glass blocks
 chisel.tile.glass.name=Glass
@@ -410,7 +411,72 @@ chisel.tile.emerald.9.desc=Small emerald blocks
 chisel.tile.emerald.10.desc=Small ornate emerald blocks
 chisel.tile.emerald.11.desc=Ornate emerald block
 
+#Nether Brick
+chisel.tile.netherBrick.name=Nether Brick
+chisel.tile.netherBrick.1.desc=Blue nether brick
+chisel.tile.netherBrick.2.desc=Spattered nether brick
+chisel.tile.netherBrick.3.desc=Nether brick made of guts
+chisel.tile.netherBrick.4.desc=Dark nether brick made of guts
+chisel.tile.netherBrick.5.desc=Small nether brick made of guts
+chisel.tile.netherBrick.6.desc=Blue nether brick with lava
+chisel.tile.netherBrick.7.desc=Brown nether brick
+chisel.tile.netherBrick.8.desc=Obsidian nether brick
+chisel.tile.netherBrick.9.desc=Stone nether brick
+chisel.tile.netherBrick.10.desc=Nether brick made of meat
+chisel.tile.netherBrick.11.desc=Red nether brick made of meat
+chisel.tile.netherBrick.12.desc=Small nether brick made of meat
+chisel.tile.netherBrick.13.desc=Small red nether brick made of meat
+chisel.tile.netherBrick.14.desc=Red nether brick
+chisel.tile.netherBrick.15.desc=Small red nether brick
+
+#Netherrack
+chisel.tile.hellrock.name=Netherrack
+chisel.tile.hellrock.1.desc=Nethegravel with blood
+chisel.tile.hellrock.2.desc=Netherrack with blood
+chisel.tile.hellrock.3.desc=Darker netherrack with blood
+chisel.tile.hellrock.4.desc=Blue netherrack
+chisel.tile.hellrock.5.desc=Shale blue netherrack
+chisel.tile.hellrock.6.desc=Classic netherrack
+chisel.tile.hellrock.7.desc=Spattered netherrack
+chisel.tile.hellrock.8.desc=Netherrack made of guts
+chisel.tile.hellrock.9.desc=Dark netherrack made of guts
+chisel.tile.hellrock.10.desc=Netherrack made of meat
+chisel.tile.hellrock.11.desc=Red netherrack made of meat
+chisel.tile.hellrock.12.desc=Netherrack made of smaller meat chunks
+chisel.tile.hellrock.13.desc=Dark red netherrack
+chisel.tile.hellrock.14.desc=Netherrack with lava flowing
+
+#Mossy Stone
+chisel.tile.stoneMoss.name=Mossy Cobblestone
+chisel.tile.stoneMoss.1.desc=Aligned mossy cobblestone bricks
+chisel.tile.stoneMoss.2.desc=Detailed mossy cobblestone bricks
+chisel.tile.stoneMoss.3.desc=Small mossy cobblestone bricks
+chisel.tile.stoneMoss.4.desc=Large mossy cobblestone tiles
+chisel.tile.stoneMoss.5.desc=Small mossy cobblestone tiles
+chisel.tile.stoneMoss.6.desc=French mossy cobblestone tiles
+chisel.tile.stoneMoss.7.desc=French mossy cobblestone tiles
+chisel.tile.stoneMoss.8.desc=Creeper mossy cobblestone tiles
+chisel.tile.stoneMoss.9.desc=Damaged mossy cobblestone tiles
+chisel.tile.stoneMoss.10.desc=Huge mossy cobblestone tiles
+chisel.tile.stoneMoss.11.desc=Mossy cobblestone with creeper panel
+chisel.tile.stoneMoss.12.desc=Mossy cobblestone with dent
+chisel.tile.stoneMoss.13.desc=Mossy cobblestone with pane
+chisel.tile.stoneMoss.14.desc=Mossy cobblestone with light panel
+chisel.tile.stoneMoss.15.desc=Mossy cobblestone with dark panel
+
+chisel.tile.stoneBrick.name=Stone Bricks
+chisel.tile.stoneBrick.4.desc=Small stone bricks
+chisel.tile.stoneBrick.5.desc=Wide stone bricks
+chisel.tile.stoneBrick.6.desc=Small disordered stone bricks
+chisel.tile.stoneBrick.7.desc=Disordered stone bricks
+chisel.tile.stoneBrick.8.desc=Disordered stone panels
+chisel.tile.stoneBrick.9.desc=Stone bricks in a fancy arrangement
+chisel.tile.stoneBrick.10.desc=Ornate stone brick tiles
+chisel.tile.stoneBrick.11.desc=Large ornate stone brick tiles
+chisel.tile.stoneBrick.12.desc=Stone panel
+chisel.tile.stoneBrick.13.desc=Sunken stone panel
+chisel.tile.stoneBrick.14.desc=Ornate stone panel
+chisel.tile.stoneBrick.15.desc=Poison stone brick
+
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
-
-

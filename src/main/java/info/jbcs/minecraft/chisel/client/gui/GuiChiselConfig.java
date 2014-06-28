@@ -10,6 +10,6 @@ public class GuiChiselConfig extends GuiConfig{
 
     public GuiChiselConfig(GuiScreen parent) {
         super(parent, new ConfigElement(Chisel.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(),
-                "Chisel", false, false, GuiConfig.getAbridgedConfigPath(Chisel.config.toString()));
+                "chisel", false, false, GuiConfig.getAbridgedConfigPath(Chisel.config.toString()));
     }
 }
