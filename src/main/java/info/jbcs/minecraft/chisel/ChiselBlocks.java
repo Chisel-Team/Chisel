@@ -705,22 +705,22 @@ public class ChiselBlocks
             {
                 blockIcePillar = (BlockMarbleIce) new BlockMarbleIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
                 blockIcePillar.carverHelper.setChiselBlockName("Ice Pillar");
-                blockIcePillar.carverHelper.addVariation("Ice pillar", 0, "icepillar/column");
-                blockIcePillar.carverHelper.addVariation("Ice pillar capstone", 1, "icepillar/capstone");
-                blockIcePillar.carverHelper.addVariation("Ice pillar base", 2, "icepillar/base");
-                blockIcePillar.carverHelper.addVariation("Small ice pillar", 3, "icepillar/small");
-                blockIcePillar.carverHelper.addVariation("Carved ice pillar", 4, "icepillar/pillar-carved");
-                blockIcePillar.carverHelper.addVariation("Ornamental ice pillar", 5, "icepillar/a1-stoneornamental-marblegreek");
-                blockIcePillar.carverHelper.addVariation("Greek ice pillar", 6, "icepillar/a1-stonepillar-greek");
-                blockIcePillar.carverHelper.addVariation("Plain ice pillar", 7, "icepillar/a1-stonepillar-plain");
-                blockIcePillar.carverHelper.addVariation("Greek ice pillar capstone", 8, "icepillar/a1-stonepillar-greektopplain");
-                blockIcePillar.carverHelper.addVariation("Plain ice pillar capstone", 9, "icepillar/a1-stonepillar-plaintopplain");
-                blockIcePillar.carverHelper.addVariation("Greek ice pillar base", 10, "icepillar/a1-stonepillar-greekbottomplain");
-                blockIcePillar.carverHelper.addVariation("Plain ice pillar base", 11, "icepillar/a1-stonepillar-plainbottomplain");
-                blockIcePillar.carverHelper.addVariation("Greek ice pillar ornate capstone", 12, "icepillar/a1-stonepillar-greektopgreek");
-                blockIcePillar.carverHelper.addVariation("Plain ice pillar ornate capstone", 13, "icepillar/a1-stonepillar-plaintopgreek");
-                blockIcePillar.carverHelper.addVariation("Greek ice pillar ornate base", 14, "icepillar/a1-stonepillar-greekbottomgreek");
-                blockIcePillar.carverHelper.addVariation("Plain ice pillar ornate base", 15, "icepillar/a1-stonepillar-plainbottomgreek");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.0.desc"), 0, "icepillar/column");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.1.desc"), 1, "icepillar/capstone");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.2.desc"), 2, "icepillar/base");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.3.desc"), 3, "icepillar/small");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.4.desc"), 4, "icepillar/pillar-carved");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.5.desc"), 5, "icepillar/a1-stoneornamental-marblegreek");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.6.desc"), 6, "icepillar/a1-stonepillar-greek");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.7.desc"), 7, "icepillar/a1-stonepillar-plain");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.8.desc"), 8, "icepillar/a1-stonepillar-greektopplain");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.9.desc"), 9, "icepillar/a1-stonepillar-plaintopplain");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.10.desc"), 10, "icepillar/a1-stonepillar-greekbottomplain");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.11.desc"), 11, "icepillar/a1-stonepillar-plainbottomplain");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.12.desc"), 12, "icepillar/a1-stonepillar-greektopgreek");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.13.desc"), 13, "icepillar/a1-stonepillar-plaintopgreek");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.14.desc"), 14, "icepillar/a1-stonepillar-greekbottomgreek");
+                blockIcePillar.carverHelper.addVariation(I18n.format("chisel.tile.icePillar.15.desc"), 15, "icepillar/a1-stonepillar-plainbottomgreek");
                 blockIcePillar.carverHelper.register(blockIcePillar, "icePillar");
                 Carving.chisel.setGroupClass("icePillar", "ice");
             }

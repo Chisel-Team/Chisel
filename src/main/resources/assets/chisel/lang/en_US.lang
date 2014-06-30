@@ -515,5 +515,25 @@ chisel.tile.ice.13.desc=Ice Zelda block
 chisel.tile.ice.14.desc=Ice Bismuth block
 chisel.tile.ice.15.desc=Ice Poison block
 
+#Ice Pillars
+chisel.tile.icePillar.name=Ice Pillar
+chisel.tile.icePillar.0.desc=Ice pillar
+chisel.tile.icePillar.1.desc=Ice pillar capstone
+chisel.tile.icePillar.2.desc=Ice pillar base
+chisel.tile.icePillar.3.desc=Small ice pillar
+chisel.tile.icePillar.4.desc=Carved ice pillar
+chisel.tile.icePillar.5.desc=Ornamental ice pillar
+chisel.tile.icePillar.6.desc=Greek ice pillar
+chisel.tile.icePillar.7.desc=Plain ice pillar
+chisel.tile.icePillar.8.desc=Greek ice pillar capstone
+chisel.tile.icePillar.9.desc=Plain ice pillar capstone
+chisel.tile.icePillar.10.desc=Greek ice pillar base
+chisel.tile.icePillar.11.desc=Plain ice pillar base
+chisel.tile.icePillar.12.desc=Greek ice pillar ornate capstone
+chisel.tile.icePillar.13.desc=Plain ice pillar ornate capstone
+chisel.tile.icePillar.14.desc=Greek ice pillar ornate base
+chisel.tile.icePillar.15.desc=Plain ice pillar ornate base
+
+
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
