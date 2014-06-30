@@ -729,22 +729,22 @@ public class ChiselBlocks
             {
                 BlockMarbleStairsMaker makerIceStairs = new BlockMarbleStairsMaker(Blocks.ice);
                 makerIceStairs.carverHelper.setChiselBlockName("Ice Stairs");
-                makerIceStairs.carverHelper.addVariation("Ice stairs", 0, Blocks.ice);
-                makerIceStairs.carverHelper.addVariation("Rough ice stairs", 1, "ice/a1-ice-light");
-                makerIceStairs.carverHelper.addVariation("Cobbleice stairs", 2, "ice/a1-stonecobble-icecobble");
-                makerIceStairs.carverHelper.addVariation("Large rough ice brick stairs", 3, "ice/a1-netherbrick-ice");
-                makerIceStairs.carverHelper.addVariation("Large ice brick stairs", 4, "ice/a1-stonecobble-icebrick");
-                makerIceStairs.carverHelper.addVariation("Small ice brick stairs", 5, "ice/a1-stonecobble-icebricksmall");
-                makerIceStairs.carverHelper.addVariation("Fancy ice wall stairs", 6, "ice/a1-stonecobble-icedungeon");
-                makerIceStairs.carverHelper.addVariation("Large ice tile stairs", 7, "ice/a1-stonecobble-icefour");
-                makerIceStairs.carverHelper.addVariation("Fancy ice tile stairs", 8, "ice/a1-stonecobble-icefrench");
-                makerIceStairs.carverHelper.addVariation("Sunken ice tile stairs", 9, "ice/sunkentiles");
-                makerIceStairs.carverHelper.addVariation("Disordered ice tile stairs", 10, "ice/tiles");
-                makerIceStairs.carverHelper.addVariation("Ice panel stairs", 11, "ice/a1-stonecobble-icepanel");
-                makerIceStairs.carverHelper.addVariation("Ice double slab stairs", 12, "ice/a1-stoneslab-ice");
-                makerIceStairs.carverHelper.addVariation("Ice Zelda stairs", 13, "ice/zelda");
-                makerIceStairs.carverHelper.addVariation("Ice bismuth stairs", 14, "ice/bismuth");
-                makerIceStairs.carverHelper.addVariation("Ice poison stairs", 15, "ice/poison");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.0.desc"), 0, Blocks.ice);
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.1.desc"), 1, "ice/a1-ice-light");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.2.desc"), 2, "ice/a1-stonecobble-icecobble");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.3.desc"), 3, "ice/a1-netherbrick-ice");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.4.desc"), 4, "ice/a1-stonecobble-icebrick");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.5.desc"), 5, "ice/a1-stonecobble-icebricksmall");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.6.desc"), 6, "ice/a1-stonecobble-icedungeon");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.7.desc"), 7, "ice/a1-stonecobble-icefour");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.8.desc"), 8, "ice/a1-stonecobble-icefrench");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.9.desc"), 9, "ice/sunkentiles");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.10.desc"), 10, "ice/tiles");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.11.desc"), 11, "ice/a1-stonecobble-icepanel");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.12.desc"), 12, "ice/a1-stoneslab-ice");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.13.desc"), 13, "ice/zelda");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.14.desc"), 14, "ice/bismuth");
+                makerIceStairs.carverHelper.addVariation(I18n.format("chisel.tile.iceStairs.15.desc"), 15, "ice/poison");
                 makerIceStairs.create(new BlockMarbleStairsMakerCreator()
                 {
                     @Override

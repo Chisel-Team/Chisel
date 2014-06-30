@@ -534,6 +534,24 @@ chisel.tile.icePillar.13.desc=Plain ice pillar ornate capstone
 chisel.tile.icePillar.14.desc=Greek ice pillar ornate base
 chisel.tile.icePillar.15.desc=Plain ice pillar ornate base
 
+#Ice Stairs
+chisel.tile.iceStairs.name=Ice Stairs
+chisel.tile.iceStairs.0.desc=Ice Stairs
+chisel.tile.iceStairs.1.desc=Rough ice stairs
+chisel.tile.iceStairs.2.desc=Cobbleice stairs
+chisel.tile.iceStairs.3.desc=Large rough ice brick stairs
+chisel.tile.iceStairs.4.desc=Large ice brick stairs
+chisel.tile.iceStairs.5.desc=Small ice brick stairs
+chisel.tile.iceStairs.6.desc=Fancy ice wall stairs
+chisel.tile.iceStairs.7.desc=Large ice tile stairs
+chisel.tile.iceStairs.8.desc=Fancy ice tile stairs
+chisel.tile.iceStairs.9.desc=Sunken ice tile stairs
+chisel.tile.iceStairs.10.desc=Disordered ice tile stairs
+chisel.tile.iceStairs.11.desc=Ice panel stairs
+chisel.tile.iceStairs.12.desc=Ice double slab stairs
+chisel.tile.iceStairs.13.desc=Ice Zelda stairs
+chisel.tile.iceStairs.14.desc=Ice bismuth stairs
+chisel.tile.iceStairs.15.desc=Ice poison stairs
 
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
