@@ -798,21 +798,21 @@ public class ChiselBlocks
         {
             blockObsidian = (BlockCarvable) new BlockCarvable().setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("obsidian", Blocks.obsidian, 0, 0);
-            blockObsidian.carverHelper.addVariation("Large obsidian pillar", 1, "obsidian/pillar");
-            blockObsidian.carverHelper.addVariation("Obsidian pillar", 2, "obsidian/pillar-quartz");
-            blockObsidian.carverHelper.addVariation("Chiseled obsidian", 3, "obsidian/chiseled");
-            blockObsidian.carverHelper.addVariation("Shiny obsidian panel", 4, "obsidian/panel-shiny");
-            blockObsidian.carverHelper.addVariation("Obsidian panel", 5, "obsidian/panel");
-            blockObsidian.carverHelper.addVariation("Organic-looking obsidian chunks", 6, "obsidian/chunks");
-            blockObsidian.carverHelper.addVariation("Organic-looking obsidian growth", 7, "obsidian/growth");
-            blockObsidian.carverHelper.addVariation("Obsidian crystal", 8, "obsidian/crystal");
-            blockObsidian.carverHelper.addVariation("Obsidian panel with an ancient map on it", 9, "obsidian/map-a");
-            blockObsidian.carverHelper.addVariation("Obsidian panel with a map of some weird region on it", 10, "obsidian/map-b");
-            blockObsidian.carverHelper.addVariation("Bright obsidian panel", 11, "obsidian/panel-light");
-            blockObsidian.carverHelper.addVariation("Obsidian blocks", 12, "obsidian/blocks");
-            blockObsidian.carverHelper.addVariation("Obsidian tiles", 13, "obsidian/tiles");
-            blockObsidian.carverHelper.addVariation("Light obsidian blocks with Greek decor", 14, "obsidian/greek");
-            blockObsidian.carverHelper.addVariation("Small obsidian blocks inside an oak wood crate", 15, "obsidian/crate");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.1.desc"), 1, "obsidian/pillar");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.2.desc"), 2, "obsidian/pillar-quartz");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.3.desc"), 3, "obsidian/chiseled");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.4.desc"), 4, "obsidian/panel-shiny");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.5.desc"), 5, "obsidian/panel");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.6.desc"), 6, "obsidian/chunks");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.7.desc"), 7, "obsidian/growth");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.8.desc"), 8, "obsidian/crystal");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.9.desc"), 9, "obsidian/map-a");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.10.desc"), 10, "obsidian/map-b");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.11.desc"), 11, "obsidian/panel-light");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.12.desc"), 12, "obsidian/blocks");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.13.desc"), 13, "obsidian/tiles");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.14.desc"), 14, "obsidian/greek");
+            blockObsidian.carverHelper.addVariation(I18n.format("chisel.tile.obsidian.15.desc"), 15, "obsidian/crate");
             blockObsidian.carverHelper.register(blockObsidian, "obsidian");
             Carving.chisel.registerOre("obsidian", "blockObsidian");
         }

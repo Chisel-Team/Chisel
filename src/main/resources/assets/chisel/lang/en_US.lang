@@ -553,5 +553,24 @@ chisel.tile.iceStairs.13.desc=Ice Zelda stairs
 chisel.tile.iceStairs.14.desc=Ice bismuth stairs
 chisel.tile.iceStairs.15.desc=Ice poison stairs
 
+#Obsidian
+chisel.tile.obsidian.name=Obsidian
+chisel.tile.obsidian.1.desc=Large obsidian pillar
+chisel.tile.obsidian.2.desc=Obsidian pillar
+chisel.tile.obsidian.3.desc=Chiseled obsidian
+chisel.tile.obsidian.4.desc=Shiny obsidian panel
+chisel.tile.obsidian.5.desc=Obsidian panel
+chisel.tile.obsidian.6.desc=Organic-looking obsidian chunks
+chisel.tile.obsidian.7.desc=Organic-looking obsidian growth
+chisel.tile.obsidian.8.desc=Obsidian crystal
+chisel.tile.obsidian.9.desc=Obsidian panel with an ancient map on it
+chisel.tile.obsidian.10.desc=Obsidian panel with a map of some weird region on it
+chisel.tile.obsidian.11.desc=Bright obsidian panel
+chisel.tile.obsidian.12.desc=Obsidian blocks
+chisel.tile.obsidian.13.desc=Obsidian tiles
+chisel.tile.obsidian.14.desc=Light obsidian blocks with Greek decor
+chisel.tile.obsidian.15.desc=Small obsidian blocks inside an oak wood crate
+
+
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
