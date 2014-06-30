@@ -8,7 +8,6 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent.Action;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -179,7 +178,8 @@ public class Chisel
         new ChiselModCompatibility().postInit(event);
     }
 
-    public static void refreshConfig(){
+    public static void refreshConfig()
+    {
         concreteVelocity = config.get("general", "concreteVelocity", 0.45, "Traversing concrete roads, players will acceleration to this velocity. For reference, normal running speed is about 0.28. Set to 0 to disable acceleration.").getDouble(0.45);
         particlesTickrate = config.get("client", "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
         oldPillars = config.get("client", "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
@@ -190,15 +190,18 @@ public class Chisel
         ghostCloud = config.get("general", "doesCloudRenderLikeGhost", true).getBoolean(true);
         //iceMelt = config.get("general", "doesIceMeltIntoWater", true).getBoolean(true);
 
-        if(config.hasChanged()){
+        if(config.hasChanged())
+        {
             config.save();
         }
     }
 
 
     @SubscribeEvent
-    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event){
-        if (event.modID.equals("chisel")) {
+    public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if(event.modID.equals("chisel"))
+        {
             Chisel.refreshConfig();
         }
     }
