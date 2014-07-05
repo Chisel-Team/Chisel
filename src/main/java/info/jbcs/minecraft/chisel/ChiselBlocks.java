@@ -1134,8 +1134,9 @@ public class ChiselBlocks
 
         if(Chisel.featureEnabled("glassStained")) for(int i = 0; i < 16; i++)
         {
-            String blockName = "chisel.stainedGlass" + sGNames[i].replaceAll(" ", "");
-            String oreName = "stainedGlass" + sGNames[i].replaceAll(" ", "");
+            String nameWithoutSpace = sGNames[i].replaceAll(" ", "");
+            String blockName = "chisel.stainedGlass" + nameWithoutSpace;
+            String oreName = "stainedGlass" + nameWithoutSpace;
             String texName = "glassdyed/" + sGNames[i].toLowerCase().replaceAll(" ", "") + "-";
             int glassPrefix = (i & 3) << 2;
             int glassId = i >> 2;
@@ -1145,7 +1146,7 @@ public class ChiselBlocks
                 blockStainedGlass[glassId].carverHelper.registerBlock(blockStainedGlass[glassId], blockName);
                 blockStainedGlass[glassId].carverHelper.blockName = "Stained Glass";
             }
-            blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " bubble glass", glassPrefix + 0, texName + "bubble");
+            blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " bubble glass", glassPrefix, texName + "bubble");
             blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " glass panel", glassPrefix + 1, texName + "panel");
             blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " fancy glass panel", glassPrefix + 2, texName + "panel-fancy");
             blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " borderless glass", glassPrefix + 3, texName + "transparent");
@@ -1153,7 +1154,8 @@ public class ChiselBlocks
             Carving.chisel.registerOre(blockName, oreName);
             for(CarvableVariation cv : blockStainedGlass[glassId].carverHelper.variations)
             {
-                if(cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 4) continue;
+                if(cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 4)
+                    continue;
                 blockStainedGlass[glassId].carverHelper.registerVariation(blockName, cv, blockStainedGlass[glassId], cv.metadata);
             }
         }

@@ -260,18 +260,18 @@ chisel.tile.blockFactory.15.desc=Weared Metal Column
 
 #Diamond blocks
 chisel.tile.diamond.name=Diamond Block
-chisel.tile.diamond.0.desc=Embossed Diamond Block
-chisel.tile.diamond.1.desc=Diamond Block with Panel
-chisel.tile.diamond.2.desc=Diamond Cells
-chisel.tile.diamond.3.desc=Diamonds in Purple Obsidian
-chisel.tile.diamond.4.desc=Diamonds in Obsidian
-chisel.tile.diamond.5.desc=Simple Diamond Block
-chisel.tile.diamond.6.desc=Bismuth
-chisel.tile.diamond.7.desc=Crushed Diamond
-chisel.tile.diamond.8.desc=Small Diamond Blocks
-chisel.tile.diamond.9.desc=Small Ornate Diamond Blocks
-chisel.tile.diamond.10.desc=Zelda Diamond Block
-chisel.tile.diamond.11.desc=Diamond Block with Ornate Layer
+chisel.tile.diamond.1.desc=Embossed Diamond Block
+chisel.tile.diamond.2.desc=Diamond Block with Panel
+chisel.tile.diamond.3.desc=Diamond Cells
+chisel.tile.diamond.4.desc=Diamonds in Purple Obsidian
+chisel.tile.diamond.5.desc=Diamonds in Obsidian
+chisel.tile.diamond.6.desc=Simple Diamond Block
+chisel.tile.diamond.7.desc=Bismuth
+chisel.tile.diamond.8.desc=Crushed Diamond
+chisel.tile.diamond.9.desc=Small Diamond Blocks
+chisel.tile.diamond.10.desc=Small Ornate Diamond Blocks
+chisel.tile.diamond.11.desc=Zelda Diamond Block
+chisel.tile.diamond.12.desc=Diamond Block with Ornate Layer
 
 #Snakestone
 chisel.tile.snakestoneSand.name=Sand Snakestone
@@ -536,6 +536,14 @@ chisel.tile.icePillar.15.desc=Plain ice pillar ornate base
 
 #Ice Stairs
 chisel.tile.iceStairs.name=Ice Stairs
+chisel.tile.chisel.iceStairs.0.name=Ice Stairs
+chisel.tile.chisel.iceStairs.1.name=Ice Stairs
+chisel.tile.chisel.iceStairs.2.name=Ice Stairs
+chisel.tile.chisel.iceStairs.3.name=Ice Stairs
+chisel.tile.chisel.iceStairs.4.name=Ice Stairs
+chisel.tile.chisel.iceStairs.5.name=Ice Stairs
+chisel.tile.chisel.iceStairs.6.name=Ice Stairs
+chisel.tile.chisel.iceStairs.7.name=Ice Stairs
 chisel.tile.iceStairs.0.desc=Ice Stairs
 chisel.tile.iceStairs.1.desc=Rough ice stairs
 chisel.tile.iceStairs.2.desc=Cobbleice stairs
@@ -570,6 +578,97 @@ chisel.tile.obsidian.12.desc=Obsidian blocks
 chisel.tile.obsidian.13.desc=Obsidian tiles
 chisel.tile.obsidian.14.desc=Light obsidian blocks with Greek decor
 chisel.tile.obsidian.15.desc=Small obsidian blocks inside an oak wood crate
+
+#Wood
+chisel.tile.wood-oak.name=Oak Wood
+chisel.tile.wood-birch.name=Birch Wood
+chisel.tile.wood-spruce.name=Spruce Wood
+chisel.tile.wood-jungle.name=Jungle Wood
+chisel.tile.wood-dark-oak.name=Dark Oak Wood
+chisel.tile.wood-acacia.name=Acacia Wood
+
+#Remember to do the descriptions.
+
+#Obsidian Snakestone
+chisel.tile.obsidianSnakestone.name=Obsidian Snakestone
+
+#Iron Fence
+chisel.tile.fenceIron=Iron Bars
+
+#Glass Panes
+chisel.tile.glassPane=Glass Pane
+
+#Redstone block
+chisel.tile.blockRedstone.name=Redstone Block
+
+#Holystone
+chisel.tile.blockHolystone.name=Holystone
+
+#Lavastone
+chisel.tile.blockLavastone.name=Lavastone
+
+#Carpet
+chisel.tile.blockCarpet.name=Carpet
+
+#Carpet floor
+chisel.tile.blockCarpetFloor.name=Floor Carpet
+
+#Bookshelf
+chisel.tile.blockBookshelf.name=Bookshelf
+
+#Tyrian
+chisel.tile.blockTyrian.name=Tyrian
+
+#Temple
+chisel.tile.blockTemple.name=Temple Block
+
+#Temple Mossy
+chisel.tile.blockTempleMossy.name=Mossy Temple Block
+
+#Cloud
+chisel.tile.blockCloud.name=Cloud
+
+#Stained glass T.T
+chisel.tile.chisel.stainedGlassWhite.name=Stained Glass
+chisel.tile.chisel.stainedGlassOrange.name=Stained Glass
+chisel.tile.chisel.stainedGlassMagenta.name=Stained Glass
+chisel.tile.chisel.stainedGlassLightBlue.name=Stained Glass
+chisel.tile.chisel.stainedGlassYellow.name=Stained Glass
+chisel.tile.chisel.stainedGlassLime.name=Stained Glass
+chisel.tile.chisel.stainedGlassPink.name=Stained Glass
+chisel.tile.chisel.stainedGlassGray.name=Stained Glass
+chisel.tile.chisel.stainedGlassLightGray.name=Stained Glass
+chisel.tile.chisel.stainedGlassCyan.name=Stained Glass
+chisel.tile.chisel.stainedGlassPurple.name=Stained Glass
+chisel.tile.chisel.stainedGlassBlue.name=Stained Glass
+chisel.tile.chisel.stainedGlassBrown.name=Stained Glass
+chisel.tile.chisel.stainedGlassGreen.name=Stained Glass
+chisel.tile.chisel.stainedGlassRed.name=Stained Glass
+chisel.tile.chisel.stainedGlassBlack.name=Stained Glass
+
+#Stained GlassPane T.T
+chisel.tile.chisel.stainedGlassPaneWhite.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneOrange.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneMagenta.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneLightBlue.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneYellow.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneLime.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPanePink.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneGray.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneLightGray.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneCyan.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPanePurple.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneBlue.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneBrown.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneGreen.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneRed.name=Stained Glass Pane
+chisel.tile.chisel.stainedGlassPaneBlack.name=Stained Glass Pane
+
+#Concerete
+chisel.tile.concrete.name=Concrete
+
+#Fantasy block
+chisel.tile.blockFft.name=Fantasy Block
 
 
 # Creative Tab localizations

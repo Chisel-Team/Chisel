@@ -42,7 +42,7 @@ public class Crafting
         GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockFft, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.gold_nugget, 1)});
         GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockTyrian, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
         GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockTemple, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.dye, 1, 4)});
-        GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockFactory, 32, 0), new Object[]{"*X*", "X X", "*X*", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
+        GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockFactory, Chisel.factoryBlockAmount, 0), new Object[]{"*X*", "X X", "*X*", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
 
 
         if(Chisel.config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false))
