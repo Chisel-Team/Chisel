@@ -1191,12 +1191,19 @@ public class ChiselBlocks
 
         if(Chisel.featureEnabled("paperWall"))
         {
-            //blockPaperwall = (BlockCarvablePane) new BlockCarvablePane(Material.ground, true).setCreativeTab(Chisel.tabChisel).setHardness(2.0F).setResistance(10F);
-            //blockFactory.carverHelper.setChiselBlockName("Paperwall");
-            //blockFactory.carverHelper.addVariation("Basic paperwall", 0, "paper/basic");
+            blockPaperwall = (BlockCarvablePane) new BlockCarvablePane(Material.ground, true).setCreativeTab(Chisel.tabChisel).setHardness(2.0F).setResistance(10F);
+            blockPaperwall.carverHelper.setChiselBlockName("Paper Wall");
+            blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.0.desc"), 0, "paper/box");
+            blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.1.desc"), 1, "paper/throughMiddle");
+            blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.2.desc"), 2, "paper/cross");
+            blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.3.desc"), 3, "paper/sixSections");
+            blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.4.desc"), 4, "paper/vertical");
+            blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.5.desc"), 5, "paper/horizontal");
+            blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.6.desc"), 6, "paper/floral");
+            blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.7.desc"), 7, "paper/plain");
+            blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.8.desc"), 8, "paper/door");
 
-
-            //blockTempleMossy.carverHelper.register(blockPaperwall, "paperwall");
+            blockPaperwall.carverHelper.register(blockPaperwall, "blockPaperwall");
 
         }
 

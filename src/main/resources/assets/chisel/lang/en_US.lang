@@ -670,6 +670,18 @@ chisel.tile.concrete.name=Concrete
 #Fantasy block
 chisel.tile.blockFft.name=Fantasy Block
 
+#Paperwall
+chisel.tile.blockPaperwall.name=Paperwall
+chisel.tile.paperwall.0.desc=Boxed Paperwall
+chisel.tile.paperwall.1.desc=Middle Striked Paperwall
+chisel.tile.paperwall.2.desc=Crossed Paperwall
+chisel.tile.paperwall.3.desc=Six Sectioned Paperwall
+chisel.tile.paperwall.4.desc=Vertically Striked Paperwall
+chisel.tile.paperwall.5.desc=Horizontally Striked Paperwall
+chisel.tile.paperwall.6.desc=Floral Adorned Paperwall
+chisel.tile.paperwall.7.desc=Plain Paperwall
+chisel.tile.paperwall.8.desc=Door Shaped Paperwall
+
 
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
