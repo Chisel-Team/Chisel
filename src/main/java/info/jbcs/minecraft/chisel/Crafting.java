@@ -6,6 +6,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class Crafting
 {
@@ -55,6 +58,22 @@ public class Crafting
 
         GameRegistry.addRecipe(new ItemStack(Chisel.itemBallOMoss, 1), new Object[]{"XYX", "YXY", "XYX", 'X', Blocks.vine, 'Y', Items.stick});
         GameRegistry.addRecipe(new ItemStack(Chisel.itemCloudInABottle, 1), new Object[]{"X X", "XYX", " X ", 'X', Blocks.glass, 'Y', Items.quartz});
+
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.blockPaperwall, 8), new Object[]{"ppp", "psp", "ppp", ('p'), Items.paper, ('s'), "stickWood"}));
+
+        String[] sGNames = new String[]{
+                "White", "Orange", "Magenta", "Light Blue",
+                "Yellow", "Lime", "Pink", "Gray",
+                "Light Gray", "Cyan", "Purple", "Blue",
+                "Brown", "Green", "Red", "Black"
+        };
+
+        for(int i = 0; i < 16; i++)
+        {
+            OreDictionary.registerOre("stainedClay" + sGNames[i].replaceAll(" ", ""), new ItemStack(Blocks.stained_hardened_clay, 1, i));
+            OreDictionary.registerOre("blockWool" + sGNames[i].replaceAll(" ", ""), new ItemStack(Blocks.wool, 1, i));
+            GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ChiselBlocks.blockWoolenClay, 2, i), new Object[] {"blockWool" + sGNames[i].replaceAll(" ", ""), "stainedClay" + sGNames[i].replaceAll(" ", "")}));
+        }
 
 
     }
