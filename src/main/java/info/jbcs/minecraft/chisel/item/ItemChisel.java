@@ -1,17 +1,12 @@
 package info.jbcs.minecraft.chisel.item;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.ChiselBlocks;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.Carving;
 import info.jbcs.minecraft.chisel.carving.CarvingVariation;
-import info.jbcs.minecraft.chisel.Chisel;
-import info.jbcs.minecraft.chisel.ChiselBlocks;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
-
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -20,7 +15,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import cpw.mods.fml.common.FMLCommonHandler;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 public class ItemChisel extends ItemTool
 {
@@ -39,7 +38,7 @@ public class ItemChisel extends ItemTool
         setUnlocalizedName("chisel");
 
         toolSet.add("chisel");
-        carving = c;
+        this.carving = c;
     }
 
     @Override
@@ -131,7 +130,8 @@ public class ItemChisel extends ItemTool
                 if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ChiselBlocks.stoneBrick))
                     match = true;
             }
-            if(match == false) noReplace = true;
+            if(!match)
+                noReplace = true;
         }
 
         int updateValue = 2;
@@ -179,10 +179,7 @@ public class ItemChisel extends ItemTool
         stack.damageItem(1, player);
         if(stack.stackSize == 0)
         {
-            player.inventory.mainInventory[player.inventory.currentItem] =
-                    chiselHasBlockInside ?
-                            chiselTarget :
-                            null;
+            player.inventory.mainInventory[player.inventory.currentItem] = chiselHasBlockInside ? chiselTarget : null;
         }
 
         return true;

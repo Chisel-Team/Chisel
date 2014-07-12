@@ -627,7 +627,14 @@ public class ChiselBlocks
         {
             stoneBrick = (BlockCarvable) new BlockCarvable().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
             for(int i = 0; i < 4; i++)
-                Carving.chisel.addVariation("stoneBrick", Blocks.stonebrick, i, i);
+            {
+                if(i == 1)
+                {
+                    if(Chisel.allowMossy)
+                        Carving.chisel.addVariation("stoneBrick", Blocks.stonebrick, i, i);
+                } else
+                    Carving.chisel.addVariation("stoneBrick", Blocks.stonebrick, i, i);
+            }
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.4.desc"), 4, "stonebrick/smallbricks");
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.5.desc"), 5, "stonebrick/largebricks");
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.6.desc"), 6, "stonebrick/smallchaotic");

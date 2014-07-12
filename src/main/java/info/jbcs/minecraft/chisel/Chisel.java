@@ -59,6 +59,7 @@ public class Chisel
     public static boolean blockDescriptions;
     public static boolean ghostCloud;
     public static int factoryBlockAmount;
+    public static boolean allowMossy;
 
     public static final StepSoundEx soundHolystoneFootstep = new StepSoundEx("chisel:holystone", "chisel:holystone", "chisel:holystone", 1.0f);
     public static final StepSoundEx soundTempleFootstep = new StepSoundEx("dig.stone", "chisel:temple-footstep", "dig.stone", 1.0f);
@@ -190,6 +191,7 @@ public class Chisel
         enableChiseling = config.get("general", "enableChiselingLeftClicking", false, "Change blocks to another block using the Chisel and left-click.").getBoolean(false);
         ghostCloud = config.get("general", "doesCloudRenderLikeGhost", true).getBoolean(true);
         factoryBlockAmount = config.get("general", "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
+        allowMossy = config.get("general", "allowCobbleToMossyInChisel", true).getBoolean(true);
 
         if(config.hasChanged())
         {
