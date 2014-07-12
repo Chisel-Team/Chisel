@@ -64,6 +64,7 @@ public class ChiselBlocks
     public static BlockCarvable blockTempleMossy;
     public static BlockCarvable blockFactory;
     public static BlockCarvablePane blockPaperwall;
+    public static BlockCarvable blockWoolenClay;
 
     public static BlockSnakestone blockSnakestone;
     public static BlockSnakestone blockSandSnakestone;
@@ -1211,6 +1212,18 @@ public class ChiselBlocks
             blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.8.desc"), 8, "paper/door");
 
             blockPaperwall.carverHelper.register(blockPaperwall, "blockPaperwall");
+
+        }
+
+        if(Chisel.featureEnabled("woolenClay"))
+        {
+            blockWoolenClay = (BlockCarvable) new BlockCarvable().setCreativeTab(Chisel.tabChisel).setHardness(2F).setResistance(10F);
+            blockWoolenClay.carverHelper.setChiselBlockName("Woolen Clay");
+
+            for(int i = 0; i < 16; i++)
+                blockWoolenClay.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.woolenClay." + i + ".desc"), i, "woolenClay/" + sGNames[i].replaceAll(" ", "").toLowerCase());
+            blockWoolenClay.carverHelper.register(blockWoolenClay, "blockWoolenClay");
+
 
         }
 

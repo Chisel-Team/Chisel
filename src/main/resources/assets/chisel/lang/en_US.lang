@@ -682,6 +682,25 @@ chisel.tile.paperwall.6.desc=Floral Adorned Paperwall
 chisel.tile.paperwall.7.desc=Plain Paperwall
 chisel.tile.paperwall.8.desc=Door Shaped Paperwall
 
+#Woolen Clay
+chisel.tile.blockWoolenClay.name=Woolen Clay
+chisel.tile.woolenClay.0.desc=White Woolen Clay
+chisel.tile.woolenClay.1.desc=Orange Woolen Clay
+chisel.tile.woolenClay.2.desc=Magenta Woolen Clay
+chisel.tile.woolenClay.3.desc=Light Blue Woolen Clay
+chisel.tile.woolenClay.4.desc=Yellow Woolen Clay
+chisel.tile.woolenClay.5.desc=Lime Woolen Clay
+chisel.tile.woolenClay.6.desc=Pink Woolen Clay
+chisel.tile.woolenClay.7.desc=Grey Woolen Clay
+chisel.tile.woolenClay.8.desc=Light Grey Woolen Clay
+chisel.tile.woolenClay.9.desc=Cyan Woolen Clay
+chisel.tile.woolenClay.10.desc=Purple Woolen Clay
+chisel.tile.woolenClay.11.desc=Blue Woolen Clay
+chisel.tile.woolenClay.12.desc=Brown Woolen Clay
+chisel.tile.woolenClay.13.desc=Green Woolen Clay
+chisel.tile.woolenClay.14.desc=Red Woolen Clay
+chisel.tile.woolenClay.15.desc=Black Woolen Clay
+
 
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
