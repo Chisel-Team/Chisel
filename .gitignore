@@ -11,3 +11,6 @@ build
 
 #runtime
 run
+
+#mac
+.DS_Store
