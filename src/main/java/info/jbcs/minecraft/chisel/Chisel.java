@@ -51,21 +51,9 @@ public class Chisel
 
     public static boolean multipartLoaded = false;
 
-    public static boolean configExists;
-    public static boolean oldPillars;
-    public static boolean disableCTM;
-    public static double concreteVelocity;
-    public static int particlesTickrate;
-    public static boolean blockDescriptions;
-    public static boolean ghostCloud;
-    public static int factoryBlockAmount;
-    public static boolean allowMossy;
-
     public static final StepSoundEx soundHolystoneFootstep = new StepSoundEx("chisel:holystone", "chisel:holystone", "chisel:holystone", 1.0f);
     public static final StepSoundEx soundTempleFootstep = new StepSoundEx("dig.stone", "chisel:temple-footstep", "dig.stone", 1.0f);
     public static final StepSoundEx soundMetalFootstep = new StepSoundEx("chisel:metal", "chisel:metal", "chisel:metal", 1.0f);
-
-    public static Configuration config;
 
     public static int RenderEldritchId;
     public static int RenderCTMId;
@@ -77,12 +65,11 @@ public class Chisel
     @SidedProxy(clientSide = "info.jbcs.minecraft.chisel.ClientProxy", serverSide = "info.jbcs.minecraft.chisel.CommonProxy")
     public static CommonProxy proxy;
 
-    public static boolean chiselStoneToCobbleBricks;
-    public static boolean enableChiseling;
+
 
     public static boolean featureEnabled(String feature)
     {
-        return Chisel.config.get("features", feature, true).getBoolean(true);
+        return Configurations.config.get("features", feature, true).getBoolean(true);
     }
 
     @EventHandler
@@ -104,10 +91,10 @@ public class Chisel
     public void preInit(FMLPreInitializationEvent event)
     {
         File configFile = event.getSuggestedConfigurationFile();
-        configExists = configFile.exists();
-        config = new Configuration(configFile);
-        config.load();
-        refreshConfig();
+        Configurations.configExists = configFile.exists();
+        Configurations.config = new Configuration(configFile);
+        Configurations.config.load();
+        Configurations.refreshConfig();
 
         tabChisel = new CreativeTabs("tabChisel")
         {
@@ -166,8 +153,8 @@ public class Chisel
         });
 
 
-        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockMarble, 32, config.get("worldgen", "marbleAmount", 8, "Amount of marble to generate in the world; use 0 for none").getInt(8)), 1000);
-        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockLimestone, 32, config.get("worldgen", "limestoneAmount", 4, "Amount of limestone to generate in the world; use 0 for none").getInt(4)), 1000);
+        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockMarble, 32, Configurations.config.get("worldgen", "marbleAmount", 8, "Amount of marble to generate in the world; use 0 for none").getInt(8)), 1000);
+        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockLimestone, 32, Configurations.config.get("worldgen", "limestoneAmount", 4, "Amount of limestone to generate in the world; use 0 for none").getInt(4)), 1000);
 
         proxy.init();
         MinecraftForge.EVENT_BUS.register(this);
@@ -180,24 +167,7 @@ public class Chisel
         new ChiselModCompatibility().postInit(event);
     }
 
-    public static void refreshConfig()
-    {
-        concreteVelocity = config.get("general", "concreteVelocity", 0.45, "Traversing concrete roads, players will acceleration to this velocity. For reference, normal running speed is about 0.28. Set to 0 to disable acceleration.").getDouble(0.45);
-        particlesTickrate = config.get("client", "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
-        oldPillars = config.get("client", "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
-        disableCTM = !config.get("client", "connectedTextures", true, "Enable connected textures").getBoolean(true);
-        blockDescriptions = config.get("client", "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.").getBoolean(true);
-        chiselStoneToCobbleBricks = config.get("general", "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left-click.").getBoolean(true);
-        enableChiseling = config.get("general", "enableChiselingLeftClicking", false, "Change blocks to another block using the Chisel and left-click.").getBoolean(false);
-        ghostCloud = config.get("general", "doesCloudRenderLikeGhost", true).getBoolean(true);
-        factoryBlockAmount = config.get("general", "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
-        allowMossy = config.get("general", "allowCobbleToMossyInChisel", true).getBoolean(true);
 
-        if(config.hasChanged())
-        {
-            config.save();
-        }
-    }
 
 
     @SubscribeEvent
@@ -205,7 +175,7 @@ public class Chisel
     {
         if(event.modID.equals("chisel"))
         {
-            Chisel.refreshConfig();
+            Configurations.refreshConfig();
         }
     }
 }

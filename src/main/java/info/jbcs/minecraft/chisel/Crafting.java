@@ -16,7 +16,7 @@ public class Crafting
 
     public static void init()
     {
-        Block concreteRecipeBlock = Block.getBlockFromName(Chisel.config.get("tweaks", "concrete recipe block", "gravel", "Unlocalized name of the block that, when burned, will produce concrete (examples: lightgem, stone)").getString());
+        Block concreteRecipeBlock = Block.getBlockFromName(Configurations.config.get("tweaks", "concrete recipe block", "gravel", "Unlocalized name of the block that, when burned, will produce concrete (examples: lightgem, stone)").getString());
         if(concreteRecipeBlock == null) concreteRecipeBlock = Blocks.gravel;
 
         FurnaceRecipes.smelting().func_151393_a(concreteRecipeBlock, new ItemStack(ChiselBlocks.blockConcrete), 0.1F);
@@ -45,10 +45,10 @@ public class Crafting
         GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockFft, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.gold_nugget, 1)});
         GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockTyrian, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
         GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockTemple, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.dye, 1, 4)});
-        GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockFactory, Chisel.factoryBlockAmount, 0), new Object[]{"*X*", "X X", "*X*", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
+        GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockFactory, Configurations.factoryBlockAmount, 0), new Object[]{"*X*", "X X", "*X*", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
 
 
-        if(Chisel.config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false))
+        if(Configurations.config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false))
         {
             GameRegistry.addRecipe(new ItemStack(Chisel.chisel, 1), new Object[]{" YY", " YY", "X  ", 'X', Items.stick, 'Y', Items.iron_ingot});
         } else

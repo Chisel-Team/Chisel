@@ -1,6 +1,8 @@
 package info.jbcs.minecraft.chisel.block;
 
-import info.jbcs.minecraft.chisel.Chisel;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
 import info.jbcs.minecraft.chisel.client.render.BlockSpikesRenderer;
 import info.jbcs.minecraft.utilities.General;
@@ -12,8 +14,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 
 public class BlockSpikes extends Block
 {
@@ -42,7 +42,7 @@ public class BlockSpikes extends Block
 
         double dy = entity.posY - entity.prevPosY;
 
-        GeneralChiselClient.speedupPlayer(world, entity, Chisel.concreteVelocity);
+        GeneralChiselClient.speedupPlayer(world, entity, Configurations.concreteVelocity);
     }
 
     @Override

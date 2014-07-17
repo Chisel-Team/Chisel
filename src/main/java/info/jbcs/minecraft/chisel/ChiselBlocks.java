@@ -130,7 +130,7 @@ public class ChiselBlocks
 
             if(Chisel.featureEnabled("marblePillar"))
             {
-                if(Chisel.oldPillars)
+                if(Configurations.oldPillars)
                 {
                     blockMarblePillar = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
                     blockMarblePillar.carverHelper.setChiselBlockName("Marble Pillar");
@@ -176,7 +176,7 @@ public class ChiselBlocks
 
                 blockMarblePillarSlab = (BlockMarbleSlab) new BlockMarbleSlab(blockMarblePillar).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
                 blockMarblePillarSlab.carverHelper.setChiselBlockName("Marble Pillar Slab");
-                if(Chisel.oldPillars)
+                if(Configurations.oldPillars)
                 {
                     blockMarblePillarSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marblePillarSlabOld.0.desc"), 0, "marblepillarslabold/column");
                     blockMarblePillarSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marblePillarSlabOld.1.desc"), 1, "marblepillarslabold/capstone");
@@ -631,7 +631,7 @@ public class ChiselBlocks
             {
                 if(i == 1)
                 {
-                    if(Chisel.allowMossy)
+                    if(Configurations.allowMossy)
                         Carving.chisel.addVariation("stoneBrick", Blocks.stonebrick, i, i);
                 } else
                     Carving.chisel.addVariation("stoneBrick", Blocks.stonebrick, i, i);

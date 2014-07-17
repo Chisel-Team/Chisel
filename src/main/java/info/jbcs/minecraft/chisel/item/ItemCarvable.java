@@ -1,18 +1,17 @@
 package info.jbcs.minecraft.chisel.item;
 
+import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
-import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.utilities.General;
-
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
+import java.util.List;
 
 public class ItemCarvable extends ItemBlock
 {
@@ -46,7 +45,7 @@ public class ItemCarvable extends ItemBlock
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List lines, boolean advancedTooltips)
     {
-        if(!Chisel.blockDescriptions) return;
+        if(!Configurations.blockDescriptions) return;
 
         Item item = General.getItem(stack);
         if(item == null) return;

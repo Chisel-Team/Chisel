@@ -2,6 +2,7 @@ package info.jbcs.minecraft.chisel.carving;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.BlockMarbleSlab;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
 import info.jbcs.minecraft.chisel.client.render.CTM;
@@ -120,7 +121,7 @@ public class CarvableHelper
             } else if(v4)
             {
                 variation.kind = V4;
-            } else if(any && ctmx && !Chisel.disableCTM)
+            } else if(any && ctmx && !Configurations.disableCTM)
             {
                 variation.kind = CTMX;
             } else if(any)

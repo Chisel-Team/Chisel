@@ -1,6 +1,6 @@
 package info.jbcs.minecraft.chisel.client;
 
-import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.BlockHolystone;
 import info.jbcs.minecraft.chisel.block.BlockLavastone;
 import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
@@ -8,9 +8,6 @@ import info.jbcs.minecraft.chisel.entity.EntityBallOMossFX;
 import info.jbcs.minecraft.chisel.entity.EntityHolystoneFX;
 import info.jbcs.minecraft.chisel.entity.EntitySnakestoneObsidianFX;
 import info.jbcs.minecraft.utilities.GeneralClient;
-
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -20,6 +17,8 @@ import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 
 public class GeneralChiselClient
 {
@@ -28,7 +27,7 @@ public class GeneralChiselClient
 
     public static void spawnLavastoneFX(World world, BlockLavastone block, int x, int y, int z)
     {
-        if(Chisel.particlesTickrate != 0 && tick++ % Chisel.particlesTickrate != 0) return;
+        if(Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0) return;
 
         float f = 0.15F;
         double x1 = x + rand.nextDouble() * (block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() - f * 2.0F) + f + block.getBlockBoundsMinX();
@@ -79,7 +78,7 @@ public class GeneralChiselClient
 
     public static void spawnHolystoneFX(World world, BlockHolystone block, int x, int y, int z)
     {
-        if(Chisel.particlesTickrate != 0 && tick++ % Chisel.particlesTickrate != 0) return;
+        if(Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0) return;
 
         float f = 0.15F;
         double x1 = x + rand.nextDouble() * (block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() - f * 2.0F) + f + block.getBlockBoundsMinX();
@@ -122,7 +121,7 @@ public class GeneralChiselClient
 
     public static void spawnSnakestoneObsidianFX(World world, BlockSnakestoneObsidian block, int x, int y, int z)
     {
-        if(Chisel.particlesTickrate == 0 || tick++ % Chisel.particlesTickrate == 0)
+        if(Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0)
         {
             EntitySnakestoneObsidianFX res = new EntitySnakestoneObsidianFX(world, block, x, y, z);
             Minecraft.getMinecraft().effectRenderer.addEffect(res);
@@ -131,7 +130,7 @@ public class GeneralChiselClient
 
     public static void spawnBallOMossFX(World world, double x, double y, double z)
     {
-        if(Chisel.particlesTickrate == 0 || tick++ % Chisel.particlesTickrate == 0)
+        if(Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0)
         {
             EntityBallOMossFX res = new EntityBallOMossFX(world, x, y, z);
             Minecraft.getMinecraft().effectRenderer.addEffect(res);
@@ -209,15 +208,15 @@ public class GeneralChiselClient
 
         if(!(entity instanceof EntityPlayerSP)) return;
         if(velocity == 0) return;
-        if(velocity >= Chisel.concreteVelocity) return;
+        if(velocity >= Configurations.concreteVelocity) return;
 
         EntityPlayerSP player = (EntityPlayerSP) entity;
 
         if(Math.abs(player.movementInput.moveForward) < 0.75f && Math.abs(player.movementInput.moveStrafe) < 0.75f)
             return;
 
-        entity.motionX = Chisel.concreteVelocity * entity.motionX / velocity;
-        entity.motionZ = Chisel.concreteVelocity * entity.motionZ / velocity;
+        entity.motionX = Configurations.concreteVelocity * entity.motionX / velocity;
+        entity.motionZ = Configurations.concreteVelocity * entity.motionZ / velocity;
     }
 
 }

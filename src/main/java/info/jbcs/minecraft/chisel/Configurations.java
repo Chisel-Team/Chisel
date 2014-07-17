@@ -1,0 +1,45 @@
+package info.jbcs.minecraft.chisel;
+
+import net.minecraftforge.common.config.Configuration;
+
+/**
+ * Created by Pokefenn.
+ * Licensed under MIT (If this is one of my Mods)
+ */
+public class Configurations
+{
+    public static Configuration config;
+
+    public static boolean configExists;
+    public static boolean oldPillars;
+    public static boolean disableCTM;
+    public static boolean blockDescriptions;
+    public static boolean ghostCloud;
+    public static boolean allowMossy;
+    public static boolean chiselStoneToCobbleBricks;
+    public static boolean enableChiseling;
+
+    public static int factoryBlockAmount;
+    public static int particlesTickrate;
+
+    public static double concreteVelocity;
+
+    public static void refreshConfig()
+    {
+        concreteVelocity = config.get("general", "concreteVelocity", 0.45, "Traversing concrete roads, players will acceleration to this velocity. For reference, normal running speed is about 0.28. Set to 0 to disable acceleration.").getDouble(0.45);
+        particlesTickrate = config.get("client", "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
+        oldPillars = config.get("client", "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
+        disableCTM = !config.get("client", "connectedTextures", true, "Enable connected textures").getBoolean(true);
+        blockDescriptions = config.get("client", "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.").getBoolean(true);
+        chiselStoneToCobbleBricks = config.get("general", "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left-click.").getBoolean(true);
+        enableChiseling = config.get("general", "enableChiselingLeftClicking", false, "Change blocks to another block using the Chisel and left-click.").getBoolean(false);
+        ghostCloud = config.get("general", "doesCloudRenderLikeGhost", true).getBoolean(true);
+        factoryBlockAmount = config.get("general", "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
+        allowMossy = config.get("general", "allowCobbleToMossyInChisel", true).getBoolean(true);
+
+        if(config.hasChanged())
+        {
+            config.save();
+        }
+    }
+}

@@ -3,6 +3,7 @@ package info.jbcs.minecraft.chisel.item;
 import cpw.mods.fml.common.FMLCommonHandler;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.ChiselBlocks;
+import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.Carving;
 import info.jbcs.minecraft.chisel.carving.CarvingVariation;
@@ -61,7 +62,7 @@ public class ItemChisel extends ItemTool
     @Override
     public boolean onBlockStartBreak(ItemStack stack, final int x, final int y, final int z, EntityPlayer player)
     {
-        if(!Chisel.enableChiseling) return true;
+        if(!Configurations.enableChiseling) return true;
 
         World world = player.worldObj;
         Block block = world.getBlock(x, y, z);
@@ -123,7 +124,7 @@ public class ItemChisel extends ItemTool
             result = target;
 
 			/* special case: stone can be carved to cobble and bricks */
-            if(Chisel.chiselStoneToCobbleBricks)
+            if(Configurations.chiselStoneToCobbleBricks)
             {
                 if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ChiselBlocks.blockCobblestone))
                     match = true;
