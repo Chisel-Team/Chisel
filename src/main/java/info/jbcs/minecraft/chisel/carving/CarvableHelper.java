@@ -351,6 +351,7 @@ public class CarvableHelper
                     variation.icon = variation.block.getBlockTextureFromSide(2);
                     variation.iconTop = ((BlockPane) variation.block).getBlockTextureFromSide(0);
                     variation.iconBot = ((BlockPane) variation.block).getBlockTextureFromSide(0);
+
                 } else
                 {
                     switch(variation.kind)

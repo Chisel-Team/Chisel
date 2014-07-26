@@ -38,9 +38,12 @@ import net.minecraftforge.common.config.Configuration;
 import java.io.File;
 
 
-@Mod(modid = "chisel", name = "Chisel", version = "1.5.6", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory"/*, dependencies = "after:ForgeMicroblock;"*/)
+@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = "1.5.6", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory"/*, dependencies = "after:ForgeMicroblock;"*/)
 public class Chisel
 {
+    public static final String MOD_ID = "chisel";
+    public static final String MOD_NAME = "Chisel";
+
     public static ItemChisel chisel;
     //	public static ItemChisel needle;
     public static ItemCloudInABottle itemCloudInABottle;
@@ -64,13 +67,6 @@ public class Chisel
 
     @SidedProxy(clientSide = "info.jbcs.minecraft.chisel.ClientProxy", serverSide = "info.jbcs.minecraft.chisel.CommonProxy")
     public static CommonProxy proxy;
-
-
-
-    public static boolean featureEnabled(String feature)
-    {
-        return Configurations.config.get("features", feature, true).getBoolean(true);
-    }
 
     @EventHandler
     public void missingMapping(FMLMissingMappingsEvent event)
@@ -108,21 +104,21 @@ public class Chisel
         chisel = (ItemChisel) new ItemChisel(Carving.chisel).setTextureName("chisel:chisel").setCreativeTab(CreativeTabs.tabTools);
         GameRegistry.registerItem(chisel, "chisel");
 
-        if(featureEnabled("cloud"))
+        if(Configurations.featureEnabled("cloud"))
         {
             itemCloudInABottle = (ItemCloudInABottle) new ItemCloudInABottle().setTextureName("Chisel:cloudinabottle").setCreativeTab(CreativeTabs.tabTools);
             EntityRegistry.registerModEntity(EntityCloudInABottle.class, "CloudInABottle", 1, this, 40, 1, true);
             GameRegistry.registerItem(itemCloudInABottle, "chisel.cloudinabottle");
         }
 
-        if(featureEnabled("ballOfMoss"))
+        if(Configurations.featureEnabled("ballOfMoss"))
         {
             itemBallOMoss = (ItemBallOMoss) new ItemBallOMoss().setTextureName("Chisel:ballomoss").setCreativeTab(CreativeTabs.tabTools);
             EntityRegistry.registerModEntity(EntityBallOMoss.class, "BallOMoss", 2, this, 40, 1, true);
             GameRegistry.registerItem(itemBallOMoss, "ballomoss");
         }
 
-        if(featureEnabled("smashingRock"))
+        if(Configurations.featureEnabled("smashingRock"))
         {
             smashingRock = (ItemSmashingRock) new ItemSmashingRock().setTextureName("Chisel:smashingrock").setCreativeTab(CreativeTabs.tabTools);
             EntityRegistry.registerModEntity(EntitySmashingRock.class, "SmashingRock", 2, this, 40, 1, true);
@@ -153,8 +149,8 @@ public class Chisel
         });
 
 
-        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockMarble, 32, Configurations.config.get("worldgen", "marbleAmount", 8, "Amount of marble to generate in the world; use 0 for none").getInt(8)), 1000);
-        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockLimestone, 32, Configurations.config.get("worldgen", "limestoneAmount", 4, "Amount of limestone to generate in the world; use 0 for none").getInt(4)), 1000);
+        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockMarble, 32, Configurations.marbleAmount), 1000);
+        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockLimestone, 32, Configurations.limestoneAmount), 1000);
 
         proxy.init();
         MinecraftForge.EVENT_BUS.register(this);
@@ -166,8 +162,6 @@ public class Chisel
     {
         new ChiselModCompatibility().postInit(event);
     }
-
-
 
 
     @SubscribeEvent

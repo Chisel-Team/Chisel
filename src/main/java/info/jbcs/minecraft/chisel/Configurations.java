@@ -21,10 +21,12 @@ public class Configurations
 
     public static int factoryBlockAmount;
     public static int particlesTickrate;
+    public static int marbleAmount;
+    public static int limestoneAmount;
 
     public static double concreteVelocity;
 
-    public static void refreshConfig()
+    public static boolean refreshConfig()
     {
         concreteVelocity = config.get("general", "concreteVelocity", 0.45, "Traversing concrete roads, players will acceleration to this velocity. For reference, normal running speed is about 0.28. Set to 0 to disable acceleration.").getDouble(0.45);
         particlesTickrate = config.get("client", "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
@@ -36,10 +38,18 @@ public class Configurations
         ghostCloud = config.get("general", "doesCloudRenderLikeGhost", true).getBoolean(true);
         factoryBlockAmount = config.get("general", "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
         allowMossy = config.get("general", "allowCobbleToMossyInChisel", true).getBoolean(true);
+        marbleAmount = config.get("worldgen", "marbleAmount", 8, "Amount of marble to generate in the world; use 0 for none").getInt(8);
+        limestoneAmount = config.get("worldgen", "limestoneAmount", 8, "Amount of limestone to generate in the world; use 0 for none").getInt(8);
 
         if(config.hasChanged())
         {
             config.save();
         }
+        return true;
+    }
+
+    public static boolean featureEnabled(String feature)
+    {
+        return config.get("features", feature, true).getBoolean(true) && refreshConfig();
     }
 }

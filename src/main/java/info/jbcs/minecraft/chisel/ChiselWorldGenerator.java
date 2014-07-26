@@ -1,21 +1,21 @@
 package info.jbcs.minecraft.chisel;
 
-import java.util.Random;
-
+import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-import cpw.mods.fml.common.IWorldGenerator;
+
+import java.util.Random;
 
 public class ChiselWorldGenerator implements IWorldGenerator
 {
     WorldGenMinable gen;
     int amount;
 
-    public ChiselWorldGenerator(Block id, int count, int am)
+    public ChiselWorldGenerator(Block block, int count, int am)
     {
-        gen = new WorldGenMinable(id, count);
+        gen = new WorldGenMinable(block, count);
         amount = am;
     }
 

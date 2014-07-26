@@ -94,7 +94,7 @@ public class ItemChisel extends ItemTool
                 long cooldown = 20;
                 long time = world.getWorldInfo().getWorldTotalTime();
 
-                //if(time>useTime-cooldown && time<useTime+cooldown) noReplace = true;
+                if(time>useTime-cooldown && time<useTime+cooldown) noReplace = true;
             }
 
             CarvingVariation[] variations = carving.getVariations(block, blockMeta);
