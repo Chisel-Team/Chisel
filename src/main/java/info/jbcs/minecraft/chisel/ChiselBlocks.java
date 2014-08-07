@@ -10,11 +10,9 @@ import info.jbcs.minecraft.chisel.item.ItemMarbleSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ChiselBlocks
 {
@@ -427,7 +425,6 @@ public class ChiselBlocks
         {
             blockRoadLine = (BlockRoadLine) new BlockRoadLine().setStepSound(Block.soundTypeStone).setHardness(0.01F).setBlockName("roadLine");
             GameRegistry.registerBlock(blockRoadLine, ItemCarvable.class, "roadLine");
-            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(blockRoadLine, 8, 0), new Object[]{"wrw", "wrw", "wrw", ('w'), "dyeWhite", ('r'), Items.redstone}));
             //TODO- flag
             //LanguageRegistry.addName(new ItemStack(blockRoadLine, 1, 0), "Road lines");
         }

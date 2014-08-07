@@ -2,11 +2,10 @@ package info.jbcs.minecraft.chisel.block;
 
 
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
-
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockLavastone extends BlockMarbleTexturedOre
 {
@@ -21,6 +20,12 @@ public class BlockLavastone extends BlockMarbleTexturedOre
     {
         if(random.nextInt(8) == 0)
             GeneralChiselClient.spawnLavastoneFX(world, this, x, y, z);
+    }
+
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return true;
     }
 
 }
