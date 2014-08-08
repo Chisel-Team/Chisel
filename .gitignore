@@ -5,12 +5,21 @@
 org.*
 bin
 
+#idea
+.idea
+*.iml
+*.ipr
+*.iws
+out
+
 #gradle
 build
 .gradle
 
 #runtime
+eclipse
 run
 
 #mac
 .DS_Store
+*.command
