@@ -1139,17 +1139,17 @@ public class ChiselBlocks
 
         if(Configurations.featureEnabled("glassStained")) for(int i = 0; i < 16; i++)
         {
-            String nameWithoutSpace = sGNames[i].replaceAll(" ", "");
-            String blockName = "chisel.stainedGlass" + nameWithoutSpace;
-            String oreName = "stainedGlass" + nameWithoutSpace;
+            String blockName = "chisel.stainedGlass" + sGNames[i].replaceAll(" ", "");
+            String oreName = "stainedGlass" + sGNames[i].replaceAll(" ", "");
             String texName = "glassdyed/" + sGNames[i].toLowerCase().replaceAll(" ", "") + "-";
             int glassPrefix = (i & 3) << 2;
             int glassId = i >> 2;
+            Carving.chisel.addVariation(blockName, Blocks.stained_glass, i, 0);
             if(glassPrefix == 0)
             {
                 blockStainedGlass[glassId] = (BlockCarvableGlass) new BlockCarvableGlass().setStained(true).setHardness(0.3F).setStepSound(Block.soundTypeGlass).setBlockName("Stained Glass");
                 blockStainedGlass[glassId].carverHelper.registerBlock(blockStainedGlass[glassId], blockName);
-                blockStainedGlass[glassId].carverHelper.blockName = "Stained Glass";
+                //blockStainedGlass[glassId].carverHelper.blockName = "Stained Glass";
             }
             blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " bubble glass", glassPrefix, texName + "bubble");
             blockStainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " glass panel", glassPrefix + 1, texName + "panel");
@@ -1170,6 +1170,7 @@ public class ChiselBlocks
             String blockName = "chisel.stainedGlassPane" + sGNames[i].replaceAll(" ", "");
             String oreName = "stainedGlassPane" + sGNames[i].replaceAll(" ", "");
             String texName = "glasspanedyed/" + sGNames[i].toLowerCase().replaceAll(" ", "") + "-";
+            Carving.chisel.addVariation(blockName, Blocks.stained_glass_pane, i, 0);
             int glassPrefix = (i & 1) << 3;
             int glassId = i >> 1;
             if(glassPrefix == 0)
