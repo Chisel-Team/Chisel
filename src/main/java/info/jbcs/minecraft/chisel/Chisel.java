@@ -154,12 +154,6 @@ public class Chisel
         MinecraftForge.EVENT_BUS.register(this);
         FMLCommonHandler.instance().bus().register(instance);
 
-        if(Loader.isModLoaded("ProjRed|Exploration") && GameRegistry.findBlock("ProjRed|Exploration", "stonemarble") != null)
-        {
-            Carving.chisel.addVariation("marble", GameRegistry.findBlock("ProjRed|Exploration", "stonemarble"), 0, 99);
-            GameRegistry.findBlock("ProjRed|Exploration", "stonemarble").setHarvestLevel("chisel", 0, 0);
-        }
-
         FMLInterModComms.sendMessage("Waila", "register", "info.jbcs.minecraft.chisel.Waila.register");
     }
 
@@ -167,6 +161,12 @@ public class Chisel
     public void postInit(FMLPostInitializationEvent event)
     {
         new ChiselModCompatibility().postInit(event);
+
+        if(Loader.isModLoaded("ProjRed|Exploration") && GameRegistry.findBlock("ProjRed|Exploration", "stonemarble") != null)
+        {
+            Carving.chisel.addVariation("marble", GameRegistry.findBlock("ProjRed|Exploration", "stonemarble"), 0, 99);
+            GameRegistry.findBlock("ProjRed|Exploration", "stonemarble").setHarvestLevel("chisel", 0, 0);
+        }
     }
 
 
