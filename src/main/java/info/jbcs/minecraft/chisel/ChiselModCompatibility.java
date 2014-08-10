@@ -1,9 +1,8 @@
 package info.jbcs.minecraft.chisel;
 
-import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import info.jbcs.minecraft.chisel.carving.Carving;
 import net.minecraft.block.Block;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 
 public class ChiselModCompatibility
 {
@@ -116,15 +115,19 @@ public class ChiselModCompatibility
                 block.setHarvestLevel("chisel", 0, 0);
             }
         };
-        new ClassBlockCompat("mrtjp.projectred.ProjectRedExploration", "blockStones")
+        /*new ClassBlockCompat("mrtjp.projectred.blocks.DecorativeStoneDefs", "MARBLE")
         {
             @Override
             void action()
             {
-                Carving.chisel.addVariation("marble", block, 0, 99);
-                block.setHarvestLevel("chisel", 0, 0);
+                if(Loader.isModLoaded("ProjRed|Exploration") && GameRegistry.findBlock("ProjRed|Exploration", "stonemarble") != null)
+                {
+                    Carving.chisel.addVariation("marble", GameRegistry.findBlock("ProjRed|Exploration", "stonemarble"), 0, 99);
+                    GameRegistry.findBlock("ProjRed|Exploration", "stonemarble").setHarvestLevel("chisel", 0, 0);
+                }
             }
         };
+        */
 
         new ClassBlockCompat("mariculture.core.Core", "limestone")
         {

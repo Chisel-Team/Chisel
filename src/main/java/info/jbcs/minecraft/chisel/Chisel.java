@@ -2,6 +2,7 @@ package info.jbcs.minecraft.chisel;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -152,6 +153,12 @@ public class Chisel
         proxy.init();
         MinecraftForge.EVENT_BUS.register(this);
         FMLCommonHandler.instance().bus().register(instance);
+
+        if(Loader.isModLoaded("ProjRed|Exploration") && GameRegistry.findBlock("ProjRed|Exploration", "stonemarble") != null)
+        {
+            Carving.chisel.addVariation("marble", GameRegistry.findBlock("ProjRed|Exploration", "stonemarble"), 0, 99);
+            GameRegistry.findBlock("ProjRed|Exploration", "stonemarble").setHarvestLevel("chisel", 0, 0);
+        }
 
         FMLInterModComms.sendMessage("Waila", "register", "info.jbcs.minecraft.chisel.Waila.register");
     }
