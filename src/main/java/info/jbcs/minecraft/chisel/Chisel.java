@@ -162,10 +162,10 @@ public class Chisel
     {
         new ChiselModCompatibility().postInit(event);
 
-        if(Loader.isModLoaded("ProjRed|Exploration") && GameRegistry.findBlock("ProjRed|Exploration", "stonemarble") != null)
+        if(Loader.isModLoaded("ProjRed|Exploration") && GameRegistry.findBlock("ProjRed|Exploration", "projectred.exploration.stone") != null)
         {
-            Carving.chisel.addVariation("marble", GameRegistry.findBlock("ProjRed|Exploration", "stonemarble"), 0, 99);
-            GameRegistry.findBlock("ProjRed|Exploration", "stonemarble").setHarvestLevel("chisel", 0, 0);
+            Carving.chisel.addVariation("marble", GameRegistry.findBlock("ProjRed|Exploration", "projectred.exploration.stone"), 0, 99);
+            GameRegistry.findBlock("ProjRed|Exploration", "projectred.exploration.stone").setHarvestLevel("chisel", 0, 0);
         }
     }
 

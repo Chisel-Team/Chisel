@@ -18,6 +18,7 @@ public class Configurations
     public static boolean allowMossy;
     public static boolean chiselStoneToCobbleBricks;
     public static boolean enableChiseling;
+    public static boolean chiselRecipe;
 
     public static int factoryBlockAmount;
     public static int particlesTickrate;
@@ -40,6 +41,7 @@ public class Configurations
         allowMossy = config.get("general", "allowCobbleToMossyInChisel", true).getBoolean(true);
         marbleAmount = config.get("worldgen", "marbleAmount", 8, "Amount of marble to generate in the world; use 0 for none").getInt(8);
         limestoneAmount = config.get("worldgen", "limestoneAmount", 8, "Amount of limestone to generate in the world; use 0 for none").getInt(8);
+        config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
 
         if(config.hasChanged())
         {

@@ -49,7 +49,7 @@ public class Crafting
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.blockRoadLine, 8, 0), new Object[]{"wrw", "wrw", "wrw", ('w'), "dyeWhite", ('r'), Items.redstone}));
 
-        if(Configurations.config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false))
+        if(Configurations.chiselRecipe)
         {
             GameRegistry.addRecipe(new ItemStack(Chisel.chisel, 1), new Object[]{" YY", " YY", "X  ", 'X', Items.stick, 'Y', Items.iron_ingot});
         } else
