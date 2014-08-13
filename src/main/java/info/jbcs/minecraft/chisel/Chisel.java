@@ -160,7 +160,7 @@ public class Chisel
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        new ChiselModCompatibility().postInit(event);
+        Compatibility.init(event);
 
         if(Loader.isModLoaded("ProjRed|Exploration") && GameRegistry.findBlock("ProjRed|Exploration", "projectred.exploration.stone") != null)
         {
