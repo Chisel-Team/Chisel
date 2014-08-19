@@ -20,4 +20,10 @@ public class StepSoundEx extends SoundType
     {
         return this.soundName;
     }
+
+    @Override
+    public String getStepResourcePath()
+    {
+        return this.stepName;
+    }
 }
