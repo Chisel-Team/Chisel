@@ -272,6 +272,7 @@ public class Chisel
         if(!world.isRemote || chiselHasBlockInside)
         {
             world.setBlock(x, y, z, Block.getBlockFromItem(result), targetMeta, updateValue);
+            world.markBlockForUpdate(x, y, z);
         }
 
         switch(FMLCommonHandler.instance().getEffectiveSide())
