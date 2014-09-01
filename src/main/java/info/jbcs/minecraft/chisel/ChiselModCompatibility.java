@@ -20,7 +20,7 @@ public class ChiselModCompatibility
                     action();
             } catch(ClassNotFoundException e)
             {
-                e.printStackTrace();
+                //e.printStackTrace();
             } catch(IllegalArgumentException e)
             {
                 e.printStackTrace();
