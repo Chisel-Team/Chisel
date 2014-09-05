@@ -57,18 +57,21 @@ public class General
         return stack.getItem();
     }
 
-    public static String getUnlocalizedName(Block block)
+    public static String getName(Item item)
     {
-        String name = block.getUnlocalizedName();
-        if(name.startsWith("tile.")) name = name.substring(5);
-
-        return name;
+        String res = item.getUnlocalizedName();
+        return cleanTags(res);
     }
 
     public static String getName(Block block)
     {
         String res = block.getUnlocalizedName();
-        return res.substring(5);
+        return cleanTags(res);
+    }
+
+    public static String cleanTags(String tag)
+    {
+        return tag.replaceAll("[Cc]hisel\\p{Punct}", "").replaceFirst("^tile\\.", "").replaceFirst("^item\\.", "");
     }
 
 
