@@ -76,6 +76,7 @@ public class Crafting
             GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ChiselBlocks.blockWoolenClay, 2, i), new Object[] {"blockWool" + sGNames[i].replaceAll(" ", ""), "stainedClay" + sGNames[i].replaceAll(" ", "")}));
         }
 
+        GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockLaboratory, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.quartz, 1)});
 
     }
 }
