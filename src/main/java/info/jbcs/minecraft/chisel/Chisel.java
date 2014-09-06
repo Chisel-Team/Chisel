@@ -1,12 +1,9 @@
 package info.jbcs.minecraft.chisel;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -28,6 +25,7 @@ import info.jbcs.minecraft.chisel.item.ItemBallOMoss;
 import info.jbcs.minecraft.chisel.item.ItemChisel;
 import info.jbcs.minecraft.chisel.item.ItemCloudInABottle;
 import info.jbcs.minecraft.chisel.item.ItemSmashingRock;
+import info.jbcs.minecraft.utilities.General;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -86,6 +84,44 @@ public class Chisel
             if(m.name.startsWith("null.") && m.name.length() == 6 && m.type == Type.BLOCK)
             {
                 m.warn();//(Action.WARN);
+            }
+
+            // Fix mapping of snakestoneSand, snakestoneStone, limestoneStairs, marbleStairs when loading an old (1.5.4) save
+            else if(m.type == Type.BLOCK)
+            {
+                Block block = null;
+
+                if(General.cleanTags(m.name).equals("sandSnakestone"))
+                    block = GameRegistry.findBlock(Chisel.MOD_ID, "tile.snakestoneSand");
+                else if(General.cleanTags(m.name).equals("snakestone"))
+                    block = GameRegistry.findBlock(Chisel.MOD_ID, "tile.snakestoneStone");
+                else
+                    block = GameRegistry.findBlock(Chisel.MOD_ID, General.cleanTags(m.name));
+
+                if(block != null)
+                {
+                    m.remap(block);
+                    FMLLog.getLogger().info("Remapping block " + m.name + " to " + General.getName(block));
+                } else
+                    FMLLog.getLogger().warn("Block " + m.name + " could not get remapped.");
+            } else if(m.type == Type.ITEM)
+            {
+                Item item = null;
+
+                if(General.cleanTags(m.name).equals("sandSnakestone"))
+                    item = GameRegistry.findItem(Chisel.MOD_ID, "tile.snakestoneSand");
+                else if(General.cleanTags(m.name).equals("snakestone"))
+                    item = GameRegistry.findItem(Chisel.MOD_ID, "tile.snakestoneStone");
+                else
+                    item = GameRegistry.findItem(Chisel.MOD_ID, General.cleanTags(m.name));
+
+                if(item != null)
+                {
+                    m.remap(item);
+                    FMLLog.getLogger().info("Remapping item " + m.name + " to " + General.getName(item));
+
+                } else
+                    FMLLog.getLogger().warn("Item " + m.name + " could not get remapped.");
             }
         }
     }
@@ -193,12 +229,13 @@ public class Chisel
     Random random = new Random();
 
     @SubscribeEvent
-    public void onPlayerClick(PlayerInteractEvent event) {
+    public void onPlayerClick(PlayerInteractEvent event)
+    {
         if(event.action != PlayerInteractEvent.Action.LEFT_CLICK_BLOCK) return;
-        if (!Configurations.enableChiseling) return;
+        if(!Configurations.enableChiseling) return;
         EntityPlayer player = event.entityPlayer;
         ItemStack stack = player.getHeldItem();
-        if (stack == null || stack.getItem() != chisel) return;
+        if(stack == null || stack.getItem() != chisel) return;
 
         World world = event.world;
         int x = event.x;
@@ -229,14 +266,14 @@ public class Chisel
                 long cooldown = 20;
                 long time = world.getWorldInfo().getWorldTotalTime();
 
-                if(time>useTime-cooldown && time<useTime+cooldown) return; //noReplace = true;
+                if(time > useTime - cooldown && time < useTime + cooldown) return; //noReplace = true;
             }
 
             CarvingVariation[] variations = ItemChisel.carving.getVariations(block, blockMeta);
             if(variations == null || variations.length < 2) return; //noReplace = true;
             else
             {
-                int index = blockMeta +1;
+                int index = blockMeta + 1;
                 while(variations[index].block.equals(block) && variations[index].damage == blockMeta)
                 {
                     index++;
@@ -312,11 +349,12 @@ public class Chisel
     }
 
     @SubscribeEvent
-    public void onBlockBreak(BlockEvent.BreakEvent event) {
-        if (!Configurations.enableChiseling) return;
+    public void onBlockBreak(BlockEvent.BreakEvent event)
+    {
+        if(!Configurations.enableChiseling) return;
         EntityPlayer player = event.getPlayer();
         ItemStack stack = player.getHeldItem();
-        if (stack == null || stack.getItem() != chisel) return;
+        if(stack == null || stack.getItem() != chisel) return;
 
         event.setCanceled(true);
     }
