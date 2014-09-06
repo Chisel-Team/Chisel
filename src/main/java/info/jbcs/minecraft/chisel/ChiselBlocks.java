@@ -63,6 +63,7 @@ public class ChiselBlocks
     public static BlockCarvable blockFactory;
     public static BlockCarvablePane blockPaperwall;
     public static BlockCarvable blockWoolenClay;
+    public static BlockCarvable blockLaboratory;
 
     public static BlockSnakestone blockSnakestone;
     public static BlockSnakestone blockSandSnakestone;
@@ -1223,6 +1224,29 @@ public class ChiselBlocks
             blockWoolenClay.carverHelper.register(blockWoolenClay, "blockWoolenClay");
 
 
+        }
+
+        if(Configurations.featureEnabled("laboratory"))
+        {
+            blockLaboratory = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
+            blockLaboratory.carverHelper.setChiselBlockName("blockLaboratory");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.0.desc"), 0, "laboratory/wallpanel");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.1.desc"), 1, "laboratory/dottedpanel");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.2.desc"), 2, "laboratory/largewall");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.3.desc"), 3, "laboratory/roundel");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.4.desc"), 4, "laboratory/wallvents");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.5.desc"), 5, "laboratory/largetile");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.6.desc"), 6, "laboratory/smalltile");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.7.desc"), 7, "laboratory/floortile");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.8.desc"), 8, "laboratory/checkertile");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.9.desc"), 9, "laboratory/clearscreen");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.10.desc"),10, "laboratory/fuzzscreen");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.11.desc"),11,"laboratory/largesteel");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.12.desc"),12,"laboratory/smallsteel");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.13.desc"),13,"laboratory/directionright");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.14.desc"),14,"laboratory/directionleft");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.15.desc"),15,"laboratory/infocon");
+            blockLaboratory.carverHelper.register(blockLaboratory, "blockLaboratory");
         }
 
         Blocks.stone.setHarvestLevel("chisel", 0, 0);
