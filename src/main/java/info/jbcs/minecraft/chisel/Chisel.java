@@ -2,6 +2,7 @@ package info.jbcs.minecraft.chisel;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -28,6 +29,7 @@ import info.jbcs.minecraft.chisel.item.ItemBallOMoss;
 import info.jbcs.minecraft.chisel.item.ItemChisel;
 import info.jbcs.minecraft.chisel.item.ItemCloudInABottle;
 import info.jbcs.minecraft.chisel.item.ItemSmashingRock;
+import info.jbcs.minecraft.utilities.General;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -86,6 +88,47 @@ public class Chisel
             if(m.name.startsWith("null.") && m.name.length() == 6 && m.type == Type.BLOCK)
             {
                 m.warn();//(Action.WARN);
+            }
+
+            // Fix mapping of snakestoneSand, snakestoneStone, limestoneStairs, marbleStairs when loading an old (1.5.4) save
+            else if (m.type == Type.BLOCK)
+            {
+                Block block = null;
+
+                if (General.cleanTags(m.name).equals("sandSnakestone"))
+                    block = GameRegistry.findBlock(Chisel.MOD_ID, "tile.snakestoneSand");
+                else if (General.cleanTags(m.name).equals("snakestone"))
+                    block = GameRegistry.findBlock(Chisel.MOD_ID, "tile.snakestoneStone");
+                else
+                    block = GameRegistry.findBlock(Chisel.MOD_ID, General.cleanTags(m.name));
+
+                if (block != null)
+                {
+                    m.remap(block);
+                    FMLLog.getLogger().info("Remapping block " + m.name + " to " + General.getName(block));
+                }
+                else
+                    FMLLog.getLogger().warn("Block " + m.name + " could not get remapped.");
+            }
+            else if (m.type == Type.ITEM)
+            {
+                Item item = null;
+
+                if (General.cleanTags(m.name).equals("sandSnakestone"))
+                    item = GameRegistry.findItem(Chisel.MOD_ID, "tile.snakestoneSand");
+                else if (General.cleanTags(m.name).equals("snakestone"))
+                    item = GameRegistry.findItem(Chisel.MOD_ID, "tile.snakestoneStone");
+                else
+                    item = GameRegistry.findItem(Chisel.MOD_ID, General.cleanTags(m.name));
+
+                if (item != null)
+                {
+                    m.remap(item);
+                    FMLLog.getLogger().info("Remapping item " + m.name + " to " + General.getName(item));
+
+                }
+                else
+                    FMLLog.getLogger().warn("Item " + m.name + " could not get remapped.");
             }
         }
     }
