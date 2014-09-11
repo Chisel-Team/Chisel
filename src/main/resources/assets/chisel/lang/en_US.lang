@@ -722,3 +722,8 @@ chisel.tile.blockLaboratory.15.desc=Information Console
 
 # Creative Tab localizations
 itemGroup.tabChisel=Chisel Blocks
+
+#Container
+container.chisel=Chisel
+container.chisel.title=Carve blocks
+container.chisel.titleShort=Carve
