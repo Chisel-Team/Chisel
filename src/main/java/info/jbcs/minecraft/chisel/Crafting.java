@@ -34,7 +34,7 @@ public class Crafting
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockIcePillar, 6, 1), new Object[]{"XX", "XX", "XX", 'X', new ItemStack(ChiselBlocks.blockIce, 1, meta),});
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockIce, 4, 1), new Object[]{"XX", "XX", 'X', new ItemStack(ChiselBlocks.blockIcePillar, 1, meta),});
 
-            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockSandstone, 1, 1), new Object[]{"X", 'X', new ItemStack(ChiselBlocks.blockSandstoneScribbles, 1, meta),});
+            GameRegistry.addRecipe(new ItemStack(Blocks.sandstone, 1, 1), new Object[]{"X", 'X', new ItemStack(ChiselBlocks.blockSandstoneScribbles, 1, meta),});
 
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockCarpet, 8, meta), new Object[]{"YYY", "YXY", "YYY", 'X', new ItemStack(Items.string, 1), 'Y', new ItemStack(Blocks.wool, 1, meta),});
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockCarpetFloor, 3, meta), new Object[]{"XX", 'X', new ItemStack(ChiselBlocks.blockCarpet, 1, meta),});
