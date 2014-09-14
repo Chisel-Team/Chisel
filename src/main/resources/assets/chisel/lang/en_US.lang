@@ -298,8 +298,6 @@ chisel.tile.glass.15.desc=Modern Iron Fence
 
 #Sandstone
 chisel.tile.sandstone.name=Sandstone
-chisel.tile.sandstone.1.desc=Chiseled Sandstone
-chisel.tile.sandstone.2.desc=Smooth Sandstone
 chisel.tile.sandstone.3.desc=Faded Sandstone
 chisel.tile.sandstone.4.desc=Sandstone Pillar
 chisel.tile.sandstone.5.desc=Sandstone Pillar Capstone

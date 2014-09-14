@@ -351,8 +351,8 @@ public class ChiselBlocks
         {
             blockSandstone = (BlockCarvable) new BlockCarvable().setStepSound(Block.soundTypeStone).setHardness(0.8F);
             Carving.chisel.addVariation("sandstone", Blocks.sandstone, 0, 0);
-            blockSandstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.sandstone.1.desc"), 1, Blocks.sandstone, 1);
-            blockSandstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.sandstone.2.desc"), 2, Blocks.sandstone, 2);
+            Carving.chisel.addVariation("sandstone", Blocks.sandstone, 1, 1);
+            Carving.chisel.addVariation("sandstone", Blocks.sandstone, 2, 2);
             blockSandstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.sandstone.3.desc"), 3, "sandstone/faded");
             blockSandstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.sandstone.4.desc"), 4, "sandstone/column");
             blockSandstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.sandstone.5.desc"), 5, "sandstone/capstone");

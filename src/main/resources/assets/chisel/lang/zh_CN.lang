@@ -298,8 +298,6 @@ chisel.tile.glass.15.desc=现代式铁栅栏
 
 #Sandstone
 chisel.tile.sandstone.name=沙石
-chisel.tile.sandstone.1.desc=錾制沙石
-chisel.tile.sandstone.2.desc=光滑沙石
 chisel.tile.sandstone.3.desc=褪色沙石
 chisel.tile.sandstone.4.desc=沙石柱
 chisel.tile.sandstone.5.desc=沙石柱顶石
