@@ -5,6 +5,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+import info.jbcs.minecraft.chisel.Chisel;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -182,7 +183,7 @@ public class Carving
     {
         CarvingGroup blockGroup = carvingGroupsByVariation.get(key(item, metadata));
         if(blockGroup == null || blockGroup.sound == null)
-            return "chisel:chisel";
+            return Chisel.MOD_ID+":chisel.fallback";
 
         return blockGroup.sound;
     }
