@@ -23,6 +23,7 @@ public class ChiselWorldGenerator implements IWorldGenerator
     {
         for(int l = 0; l < amount; ++l)
         {
+            //TODO change the values if its marble or limestone, thanks to tahg for finding all of this.
             int i1 = x + random.nextInt(16);
             int j1 = bot + random.nextInt(top - bot);
             int k1 = z + random.nextInt(16);

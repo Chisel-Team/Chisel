@@ -18,7 +18,7 @@ public class BlockLavastone extends BlockMarbleTexturedOre
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random)
     {
-        if(random.nextInt(8) == 0)
+        if(random.nextInt(8) == 0 && world.isRemote)
             GeneralChiselClient.spawnLavastoneFX(world, this, x, y, z);
     }
 

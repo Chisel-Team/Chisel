@@ -1,29 +1,19 @@
 package info.jbcs.minecraft.chisel.item;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import info.jbcs.minecraft.chisel.Chisel;
-import info.jbcs.minecraft.chisel.ChiselBlocks;
-import info.jbcs.minecraft.chisel.Configurations;
+import info.jbcs.minecraft.chisel.api.ChiselMode;
+import info.jbcs.minecraft.chisel.api.IChiselMode;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.Carving;
-import info.jbcs.minecraft.chisel.carving.CarvingVariation;
-import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
-import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
-public class ItemChisel extends ItemTool
+public class ItemChisel extends ItemTool implements IChiselMode
 {
     public static Carving carving = Carving.chisel;
     private static final HashSet<String> toolSet = new HashSet<String>();
@@ -56,7 +46,14 @@ public class ItemChisel extends ItemTool
     }
 
     @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
+    public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player)
+    {
         return true;
+    }
+
+    @Override
+    public ChiselMode getChiselMode(ItemStack itemStack)
+    {
+        return ChiselMode.values()[itemStack.stackTagCompound.getInteger("chiselMode")];
     }
 }

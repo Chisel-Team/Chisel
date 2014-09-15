@@ -1240,12 +1240,12 @@ public class ChiselBlocks
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.7.desc"), 7, "laboratory/floortile");
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.8.desc"), 8, "laboratory/checkertile");
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.9.desc"), 9, "laboratory/clearscreen");
-            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.10.desc"),10, "laboratory/fuzzscreen");
-            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.11.desc"),11,"laboratory/largesteel");
-            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.12.desc"),12,"laboratory/smallsteel");
-            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.13.desc"),13,"laboratory/directionright");
-            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.14.desc"),14,"laboratory/directionleft");
-            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.15.desc"),15,"laboratory/infocon");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.10.desc"), 10, "laboratory/fuzzscreen");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.11.desc"), 11, "laboratory/largesteel");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.12.desc"), 12, "laboratory/smallsteel");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.13.desc"), 13, "laboratory/directionright");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.14.desc"), 14, "laboratory/directionleft");
+            blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.15.desc"), 15, "laboratory/infocon");
             blockLaboratory.carverHelper.register(blockLaboratory, "blockLaboratory");
         }
 
