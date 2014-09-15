@@ -26,6 +26,8 @@ import info.jbcs.minecraft.chisel.item.ItemBallOMoss;
 import info.jbcs.minecraft.chisel.item.ItemChisel;
 import info.jbcs.minecraft.chisel.item.ItemCloudInABottle;
 import info.jbcs.minecraft.chisel.item.ItemSmashingRock;
+import info.jbcs.minecraft.chisel.world.GeneratorLimestone;
+import info.jbcs.minecraft.chisel.world.GeneratorMarble;
 import info.jbcs.minecraft.utilities.General;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
@@ -187,8 +189,8 @@ public class Chisel
         });
 
 
-        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockMarble, 32, Configurations.marbleAmount), 1000);
-        GameRegistry.registerWorldGenerator(new ChiselWorldGenerator(ChiselBlocks.blockLimestone, 32, Configurations.limestoneAmount), 1000);
+        GameRegistry.registerWorldGenerator(new GeneratorMarble(ChiselBlocks.blockMarble, 32, Configurations.marbleAmount), 1000);
+        GameRegistry.registerWorldGenerator(new GeneratorLimestone(ChiselBlocks.blockLimestone, 32, Configurations.limestoneAmount), 1000);
 
         proxy.init();
         MinecraftForge.EVENT_BUS.register(this);

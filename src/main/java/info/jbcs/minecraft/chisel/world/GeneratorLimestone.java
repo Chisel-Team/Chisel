@@ -1,4 +1,4 @@
-package info.jbcs.minecraft.chisel;
+package info.jbcs.minecraft.chisel.world;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
@@ -8,12 +8,12 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 
 import java.util.Random;
 
-public class ChiselWorldGenerator implements IWorldGenerator
+public class GeneratorLimestone implements IWorldGenerator
 {
     WorldGenMinable gen;
     int amount;
 
-    public ChiselWorldGenerator(Block block, int count, int am)
+    public GeneratorLimestone(Block block, int count, int am)
     {
         gen = new WorldGenMinable(block, count);
         amount = am;
@@ -23,10 +23,9 @@ public class ChiselWorldGenerator implements IWorldGenerator
     {
         for(int l = 0; l < amount; ++l)
         {
-            //TODO change the values if its marble or limestone, thanks to tahg for finding all of this.
-            int i1 = x + random.nextInt(16);
+            int i1 = x + random.nextInt(15);
             int j1 = bot + random.nextInt(top - bot);
-            int k1 = z + random.nextInt(16);
+            int k1 = z + random.nextInt(15);
             gen.generate(world, random, i1, j1, k1);
         }
     }
