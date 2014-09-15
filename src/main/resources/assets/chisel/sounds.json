@@ -5,11 +5,11 @@
          "chisel/fallback"
       ]
    },
-   "squash":{
+   "random.squash":{
       "category":"neutral",
       "sounds":[
-         "squash",
-         "squash2"
+         "random/squash",
+         "random/squash2"
       ]
    },
    "chisel-wood":{
