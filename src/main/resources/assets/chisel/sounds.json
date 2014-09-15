@@ -1,8 +1,61 @@
 {
-	"chisel": {"category": "block", "sounds": ["chisel"]},
-	"chisel-wood": {"category": "block", "sounds": ["chisel-wood2", "chisel-wood3", "chisel-wood4", "chisel-wood5", "chisel-wood8", "chisel-wood9", "chisel-wood11"]},
-	"holystone": {"category": "block", "sounds": ["holystone1", "holystone2", "holystone3", "holystone5", "holystone7"]},
-	"squash": {"category": "block", "sounds": ["squash", "squash2"]},
-	"temple-footstep": {"category": "block", "sounds": ["temple-footstep1", "temple-footstep2", "temple-footstep3", "temple-footstep4", "temple-footstep5"]},
-	"metal": {"category": "block", "sounds": ["metal1", "metal2", "metal3", "metal4", "metal5", "metal6", "metal7", "metal8", "metal9"]}
+   "chisel":{
+      "category":"block",
+      "sounds":[
+         "chisel"
+      ]
+   },
+   "squash":{
+      "category":"block",
+      "sounds":[
+         "squash",
+         "squash2"
+      ]
+   },
+   "chisel-wood":{
+      "category":"block",
+      "sounds":[
+         "chisel-wood2",
+         "chisel-wood3",
+         "chisel-wood4",
+         "chisel-wood5",
+         "chisel-wood8",
+         "chisel-wood9",
+         "chisel-wood11"
+      ]
+   },
+   "holystone":{
+      "category":"block",
+      "sounds":[
+         "holystone1",
+         "holystone2",
+         "holystone3",
+         "holystone5",
+         "holystone7"
+      ]
+   },
+   "temple-footstep":{
+      "category":"block",
+      "sounds":[
+         "temple-footstep1",
+         "temple-footstep2",
+         "temple-footstep3",
+         "temple-footstep4",
+         "temple-footstep5"
+      ]
+   },
+   "metal":{
+      "category":"block",
+      "sounds":[
+         "metal1",
+         "metal2",
+         "metal3",
+         "metal4",
+         "metal5",
+         "metal6",
+         "metal7",
+         "metal8",
+         "metal9"
+      ]
+   }
 }
