@@ -5,23 +5,23 @@
          "chisel/fallback"
       ]
    },
+   "chisel.wood":{
+      "category":"player",
+      "sounds":[
+         "chisel/wood2",
+         "chisel/wood3",
+         "chisel/wood4",
+         "chisel/wood5",
+         "chisel/wood8",
+         "chisel/wood9",
+         "chisel/wood11"
+      ]
+   },
    "random.squash":{
       "category":"neutral",
       "sounds":[
          "random/squash",
          "random/squash2"
-      ]
-   },
-   "chisel-wood":{
-      "category":"block",
-      "sounds":[
-         "chisel-wood2",
-         "chisel-wood3",
-         "chisel-wood4",
-         "chisel-wood5",
-         "chisel-wood8",
-         "chisel-wood9",
-         "chisel-wood11"
       ]
    },
    "dig.holystone":{

@@ -796,7 +796,7 @@ public class ChiselBlocks
                 Blocks.planks.setHarvestLevel("chisel", 0, i);
                 blockPlanks[i].setHarvestLevel("axe", 0);
 
-                Carving.chisel.setVariationSound("wood-" + n, "chisel:chisel-wood");
+                Carving.chisel.setVariationSound("wood-" + n, Chisel.MOD_ID+":chisel.wood");
             }
         }
 
