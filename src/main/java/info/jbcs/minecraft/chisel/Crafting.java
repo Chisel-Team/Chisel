@@ -34,11 +34,18 @@ public class Crafting
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockIcePillar, 6, 1), new Object[]{"XX", "XX", "XX", 'X', new ItemStack(ChiselBlocks.blockIce, 1, meta),});
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockIce, 4, 1), new Object[]{"XX", "XX", 'X', new ItemStack(ChiselBlocks.blockIcePillar, 1, meta),});
 
-            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockSandstone, 1, 1), new Object[]{"X", 'X', new ItemStack(ChiselBlocks.blockSandstoneScribbles, 1, meta),});
+            GameRegistry.addRecipe(new ItemStack(Blocks.sandstone, 1, 1), new Object[]{"X", 'X', new ItemStack(ChiselBlocks.blockSandstoneScribbles, 1, meta),});
 
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockCarpet, 8, meta), new Object[]{"YYY", "YXY", "YYY", 'X', new ItemStack(Items.string, 1), 'Y', new ItemStack(Blocks.wool, 1, meta),});
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockCarpetFloor, 3, meta), new Object[]{"XX", 'X', new ItemStack(ChiselBlocks.blockCarpet, 1, meta),});
         }
+
+        // The following recipe is due to bugs with Chisel 1.5.1 to 1.5.6a
+        GameRegistry.addRecipe(new ItemStack(Blocks.sandstone, 1, 0), new Object[]{"X", 'X', new ItemStack(ChiselBlocks.blockSandstone, 1, 0),});
+
+        // The following recipe is due to bug with Chisel 1.5.6b
+        GameRegistry.addRecipe(new ItemStack(Blocks.sandstone, 1, 1), new Object[]{"X", 'X', new ItemStack(ChiselBlocks.blockSandstone, 1, 1),});
+
 
         GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockHolystone, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.feather, 1)});
         GameRegistry.addRecipe(new ItemStack(ChiselBlocks.blockLavastone, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.lava_bucket, 1)});
