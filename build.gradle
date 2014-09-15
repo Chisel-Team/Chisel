@@ -17,12 +17,12 @@ buildscript {
 }
 
 apply plugin: 'forge'
-version = "1.5.7"
+version = "1.5.8"                    // http://docs.codehaus.org/display/MAVEN/Versioning
 group = "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Chisel"
 
 minecraft {
-    version = "1.7.10-10.13.0.1180"
+    version = "1.7.10-10.13.0.1207"
     runDir = "run"
 
     replaceIn "Chisel.java"
