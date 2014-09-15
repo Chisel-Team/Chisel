@@ -54,6 +54,7 @@ public class ItemChisel extends ItemTool implements IChiselMode
     @Override
     public ChiselMode getChiselMode(ItemStack itemStack)
     {
-        return ChiselMode.values()[itemStack.stackTagCompound.getInteger("chiselMode")];
+        //TODO
+        return ChiselMode.SINGLE;
     }
 }
