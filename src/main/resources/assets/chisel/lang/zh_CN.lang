@@ -701,6 +701,24 @@ chisel.tile.woolenClay.13.desc=绿色羊毛粘土
 chisel.tile.woolenClay.14.desc=红色羊毛粘土
 chisel.tile.woolenClay.15.desc=黑色羊毛粘土
 
+#Laboratory Block
+chisel.tile.blockLaboratory.name=实验室方块
+chisel.tile.blockLaboratory.0.desc=墙板
+chisel.tile.blockLaboratory.1.desc=点状花纹墙板
+chisel.tile.blockLaboratory.2.desc=珐琅墙
+chisel.tile.blockLaboratory.3.desc=圆形图案珐琅墙
+chisel.tile.blockLaboratory.4.desc=珐琅墙通风口
+chisel.tile.blockLaboratory.5.desc=大块珐琅瓷砖
+chisel.tile.blockLaboratory.6.desc=小块珐琅瓷砖
+chisel.tile.blockLaboratory.7.desc=实验室地板
+chisel.tile.blockLaboratory.8.desc=棋盘格地板
+chisel.tile.blockLaboratory.9.desc=透晰屏幕
+chisel.tile.blockLaboratory.10.desc=毛面屏幕
+chisel.tile.blockLaboratory.11.desc=大块钢地砖
+chisel.tile.blockLaboratory.12.desc=小块钢地砖
+chisel.tile.blockLaboratory.13.desc=方向控制台 (右)
+chisel.tile.blockLaboratory.14.desc=方向控制台 (左)
+chisel.tile.blockLaboratory.15.desc=信息控制台
 
 # Creative Tab localizations
 itemGroup.tabChisel=凿工艺|方块
