@@ -43,8 +43,8 @@ public class GuiChisel extends GuiContainer
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        String line = isExtended() ? 
-                I18n.format(this.container.inventory.getInventoryName() + ".titleShort") : 
+        String line = isExtended() ?
+                I18n.format(this.container.inventory.getInventoryName() + ".titleShort") :
                 I18n.format(this.container.inventory.getInventoryName() + ".title");
         fontRendererObj.drawString(line, 88 - fontRendererObj.getStringWidth(line) / 2, 13, 0x404040);
     }

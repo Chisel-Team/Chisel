@@ -82,43 +82,40 @@ public class Chisel
             }
 
             // Fix mapping of snakestoneSand, snakestoneStone, limestoneStairs, marbleStairs when loading an old (1.5.4) save
-            else if (m.type == Type.BLOCK)
+            else if(m.type == Type.BLOCK)
             {
                 Block block = null;
 
-                if (General.cleanTags(m.name).equals("sandSnakestone"))
+                if(General.cleanTags(m.name).equals("sandSnakestone"))
                     block = GameRegistry.findBlock(Chisel.MOD_ID, "tile.snakestoneSand");
-                else if (General.cleanTags(m.name).equals("snakestone"))
+                else if(General.cleanTags(m.name).equals("snakestone"))
                     block = GameRegistry.findBlock(Chisel.MOD_ID, "tile.snakestoneStone");
                 else
                     block = GameRegistry.findBlock(Chisel.MOD_ID, General.cleanTags(m.name));
 
-                if (block != null)
+                if(block != null)
                 {
                     m.remap(block);
                     FMLLog.getLogger().info("Remapping block " + m.name + " to " + General.getName(block));
-                }
-                else
+                } else
                     FMLLog.getLogger().warn("Block " + m.name + " could not get remapped.");
-            }
-            else if (m.type == Type.ITEM)
+            } else if(m.type == Type.ITEM)
             {
                 Item item = null;
 
-                if (General.cleanTags(m.name).equals("sandSnakestone"))
+                if(General.cleanTags(m.name).equals("sandSnakestone"))
                     item = GameRegistry.findItem(Chisel.MOD_ID, "tile.snakestoneSand");
-                else if (General.cleanTags(m.name).equals("snakestone"))
+                else if(General.cleanTags(m.name).equals("snakestone"))
                     item = GameRegistry.findItem(Chisel.MOD_ID, "tile.snakestoneStone");
                 else
                     item = GameRegistry.findItem(Chisel.MOD_ID, General.cleanTags(m.name));
 
-                if (item != null)
+                if(item != null)
                 {
                     m.remap(item);
                     FMLLog.getLogger().info("Remapping item " + m.name + " to " + General.getName(item));
 
-                }
-                else
+                } else
                     FMLLog.getLogger().warn("Item " + m.name + " could not get remapped.");
             }
         }
