@@ -5,6 +5,7 @@ import info.jbcs.minecraft.chisel.inventory.InventoryChiselSelection;
 import info.jbcs.minecraft.utilities.GeneralClient;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -42,7 +43,9 @@ public class GuiChisel extends GuiContainer
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        String line = isExtended() ? "Carve" : "Carve blocks";
+        String line = isExtended() ? 
+                I18n.format(this.container.inventory.getInventoryName() + ".titleShort") : 
+                I18n.format(this.container.inventory.getInventoryName() + ".title");
         fontRendererObj.drawString(line, 88 - fontRendererObj.getStringWidth(line) / 2, 13, 0x404040);
     }
 

@@ -76,7 +76,7 @@ public class InventoryChiselSelection implements IInventory
     @Override
     public String getInventoryName()
     {
-        return "Carve blocks";
+        return "container.chisel";
     }
 
     @Override
