@@ -1,5 +1,8 @@
 package info.jbcs.minecraft.utilities;
 
+import java.util.HashMap;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,8 +13,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class General
 {
@@ -65,7 +66,12 @@ public class General
     public static String getName(Block block)
     {
         String res = block.getUnlocalizedName();
-        return res.substring(5);
+        return cleanTags(res);
+    }
+
+    public static String cleanTags(String tag)
+    {
+        return tag.replaceAll("[Cc]hisel\\p{Punct}", "").replaceFirst("^tile\\.", "").replaceFirst("^item\\.", "");
     }
 
 
@@ -94,11 +100,6 @@ public class General
 
         Vec3 var23 = var13.addVector(var18 * var21, var17 * var21, var20 * var21);
         return par1World.rayTraceBlocks(var13, var23, par3);
-    }
-
-    public static String cleanTags(String tag)
-    {
-        return tag.replaceAll("[Cc]hisel\\p{Punct}", "").replaceFirst("^tile\\.", "").replaceFirst("^item\\.", "");
     }
 
 }
