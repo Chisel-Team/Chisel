@@ -1,8 +1,72 @@
 {
-	"chisel": {"category": "block", "sounds": ["chisel"]},
-	"chisel-wood": {"category": "block", "sounds": ["chisel-wood2", "chisel-wood3", "chisel-wood4", "chisel-wood5", "chisel-wood8", "chisel-wood9", "chisel-wood11"]},
-	"holystone": {"category": "block", "sounds": ["holystone1", "holystone2", "holystone3", "holystone5", "holystone7"]},
-	"squash": {"category": "block", "sounds": ["squash", "squash2"]},
-	"temple-footstep": {"category": "block", "sounds": ["temple-footstep1", "temple-footstep2", "temple-footstep3", "temple-footstep4", "temple-footstep5"]},
-	"metal": {"category": "block", "sounds": ["metal1", "metal2", "metal3", "metal4", "metal5", "metal6", "metal7", "metal8", "metal9"]}
+   "chisel.fallback":{
+      "category":"player",
+      "sounds":[
+         "chisel/fallback"
+      ]
+   },
+   "chisel.wood":{
+      "category":"player",
+      "sounds":[
+         "chisel/wood2",
+         "chisel/wood3",
+         "chisel/wood4",
+         "chisel/wood5",
+         "chisel/wood8",
+         "chisel/wood9",
+         "chisel/wood11"
+      ]
+   },
+   "random.squash":{
+      "category":"neutral",
+      "sounds":[
+         "random/squash",
+         "random/squash2"
+      ]
+   },
+   "dig.holystone":{
+      "category":"block",
+      "sounds":[
+         "dig/holystone1",
+         "dig/holystone2",
+         "dig/holystone5"
+      ]
+   },
+   "dig.metal":{
+      "category":"block",
+      "sounds":[
+         "dig/metal",
+         "dig/metal1",
+         "dig/metal2",
+         "dig/metal3",
+         "dig/metal7",
+         "dig/metal8"
+      ]
+   },
+   "step.templeblock":{
+      "category":"neutral",
+      "sounds":[
+         "step/templeblock1",
+         "step/templeblock2",
+         "step/templeblock3",
+         "step/templeblock4",
+         "step/templeblock5"
+      ]
+   },
+   "step.holystone":{
+      "category":"neutral",
+      "sounds":[
+         "step/holystone3",
+         "step/holystone7"
+      ]
+   },
+   "step.metal":{
+      "category":"neutral",
+      "sounds":[
+         "step/metal4",
+         "step/metal5",
+         "step/metal6",
+         "step/metal9"
+      ]
+   }
 }

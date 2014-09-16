@@ -15,6 +15,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
+import info.jbcs.minecraft.chisel.block.BlockCarvable;
 import info.jbcs.minecraft.chisel.carving.Carving;
 import info.jbcs.minecraft.chisel.client.gui.GuiChisel;
 import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
@@ -56,9 +57,9 @@ public class Chisel
 
     public static boolean multipartLoaded = false;
 
-    public static final StepSoundEx soundHolystoneFootstep = new StepSoundEx("chisel:holystone", "chisel:holystone", "chisel:holystone", 1.0f);
-    public static final StepSoundEx soundTempleFootstep = new StepSoundEx("dig.stone", "chisel:temple-footstep", "dig.stone", 1.0f);
-    public static final StepSoundEx soundMetalFootstep = new StepSoundEx("chisel:metal", "chisel:metal", "chisel:metal", 1.0f);
+    public static final BlockCarvable.SoundType soundHolystoneFootstep = new BlockCarvable.SoundType("holystone", 1.0f, 1.0f);
+    public static final BlockCarvable.SoundType soundTempleFootstep = new BlockCarvable.SoundType("dig.stone", MOD_ID+":step.templeblock", 1.0f, 1.0f);
+    public static final BlockCarvable.SoundType soundMetalFootstep = new BlockCarvable.SoundType("metal", 1.0f, 1.0f);
 
     public static int RenderEldritchId;
     public static int RenderCTMId;

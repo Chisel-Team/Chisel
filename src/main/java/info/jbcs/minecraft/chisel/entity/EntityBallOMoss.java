@@ -1,5 +1,6 @@
 package info.jbcs.minecraft.chisel.entity;
 
+import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.ChiselBlocks;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
 import info.jbcs.minecraft.utilities.General;
@@ -61,7 +62,7 @@ public class EntityBallOMoss extends EntityThrowable
 
         if(worldObj.isRemote)
         {
-            worldObj.playSound(x, y, z, "chisel:squash", 1.0f, 1.0f, false);
+            worldObj.playSound(x, y, z, Chisel.MOD_ID+":random.squash", 1.0f, 1.0f, false);
 
             for(int i = 0; i < 32; i++)
                 GeneralChiselClient.spawnBallOMossFX(worldObj, posX, posY, posZ);
