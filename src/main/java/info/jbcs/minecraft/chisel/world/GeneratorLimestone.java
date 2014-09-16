@@ -23,7 +23,7 @@ public class GeneratorLimestone implements IWorldGenerator
     {
         for(int l = 0; l < amount; ++l)
         {
-            int i1 = x + random.nextInt(15);
+            int i1 = x + random.nextInt(15) - 1;
             int j1 = bot + random.nextInt(top - bot);
             int k1 = z + random.nextInt(15);
             gen.generate(world, random, i1, j1, k1);
