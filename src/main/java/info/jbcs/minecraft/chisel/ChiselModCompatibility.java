@@ -149,6 +149,25 @@ public class ChiselModCompatibility
                 blocks[0].setHarvestLevel("chisel", 0, 3);
             }
         };
+
+        new ClassBlockCompat("org.pfaa.geologica.GeologicaBlocks", "STRONG_STONE")
+        {
+            @Override
+            void action()
+            {
+                Carving.chisel.addVariation("marble", block, 5, 99);
+                block.setHarvestLevel("chisel", 0, 5);
+            }
+        };
+        new ClassBlockCompat("org.pfaa.geologica.GeologicaBlocks", "MEDIUM_STONE")
+        {
+            @Override
+            void action()
+            {
+                Carving.chisel.addVariation("limestone", block, 0, 99);
+                block.setHarvestLevel("chisel", 0, 0);
+            }
+        };
     }
 
 }
