@@ -159,24 +159,6 @@ public class ChiselModCompatibility
                 block.setHarvestLevel("chisel", 0, 5);
             }
         };
-        new ClassBlockCompat("org.pfaa.geologica.GeologicaBlocks", "STRONG_STONE_SLAB")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("marbleSlab", block, 5, 99);
-                block.setHarvestLevel("chisel", 0, 5);
-            }
-        };
-        new ClassBlockCompat("org.pfaa.geologica.GeologicaBlocks", "STRONG_STONE_BRICK_STAIRS__MARBLE")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("marbleStairs", block, 0, 99);
-                block.setHarvestLevel("chisel", 0, 0);
-            }
-        };
         new ClassBlockCompat("org.pfaa.geologica.GeologicaBlocks", "MEDIUM_STONE")
         {
             @Override
@@ -184,42 +166,6 @@ public class ChiselModCompatibility
             {
                 Carving.chisel.addVariation("limestone", block, 0, 99);
                 block.setHarvestLevel("chisel", 0, 0);
-            }
-        };
-        new ClassBlockCompat("org.pfaa.geologica.GeologicaBlocks", "MEDIUM_STONE_SLAB")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("limestoneSlab", block, 0, 99);
-                block.setHarvestLevel("chisel", 0, 0);
-            }
-        };
-        new ClassBlockCompat("org.pfaa.geologica.GeologicaBlocks", "MEDIUM_STONE_BRICK_STAIRS__LIMESTONE")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("limestoneStairs", block, 0, 99);
-                block.setHarvestLevel("chisel", 0, 0);
-            }
-        };
-        new ClassBlockCompat("org.pfaa.geologica.GeologicaBlocks", "STRONG_STONE_BRICK")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("stoneBrick", block, 3, 99);
-                block.setHarvestLevel("chisel", 0, 3);
-            }
-        };
-        new ClassBlockCompat("org.pfaa.geologica.GeologicaBlocks", "STRONG_COBBLE")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("cobblestone", block, 3, 99);
-                block.setHarvestLevel("chisel", 0, 3);
             }
         };
     }
