@@ -9,7 +9,7 @@ item.cloudBottle.name=Облако в бутылке
 # Have fun! ~zombiepig333
 
 #Cobblestone Blocks
-chisel.tile.cobblestone.name=Булыжник
+tile.cobblestone.name=Булыжник
 chisel.tile.cobblestone.0.desc=Выровненные булыжниковые кирпичи
 chisel.tile.cobblestone.1.desc=Детализированные булыжниковые кирпичи
 chisel.tile.cobblestone.2.desc=Маленькие булыжниковые кирпичи
@@ -27,10 +27,10 @@ chisel.tile.cobblestone.13.desc=Булыжник со светлой панел�
 chisel.tile.cobblestone.14.desc=Булыжник с тёмной панелью
 
 #Sandstone Blocks
-chisel.tile.sandstone.name=Песчаник
+tile.sandstone.name=Песчаник
 
 #Marble Blocks
-chisel.tile.marble.name=Мрамор
+tile.marble.name=Мрамор
 chisel.tile.marble.0.desc=Необработанный мрамор
 chisel.tile.marble.1.desc=Мраморный кирпич
 chisel.tile.marble.2.desc=Классическая мраморная панель
@@ -49,7 +49,7 @@ chisel.tile.marble.14.desc=Красивые мраморные плитки
 chisel.tile.marble.15.desc=Мраморные блоки
 
 #Marble Slabs
-chisel.tile.marbleSlab.name=Мраморная плита
+tile.marble_slab.name=Мраморная плита
 chisel.tile.marbleSlab.0.desc=Необработанная мраморная плита
 chisel.tile.marbleSlab.1.desc=Плита из мраморного кирпича
 chisel.tile.marbleSlab.2.desc=Плита из классической мраморной панели
@@ -68,7 +68,7 @@ chisel.tile.marbleSlab.14.desc=Плита из красивого плиточн
 chisel.tile.marbleSlab.15.desc=Плита из мраморных блоков
 
 #Marble Pillars (old)
-chisel.tile.marblePillar.name=Мраморная колонна
+tile.marble_pillar.name=Мраморная колонна
 chisel.tile.marblePillarOld.0.desc=Мраморная колонна
 chisel.tile.marblePillarOld.1.desc=Капитель мраморной колонны
 chisel.tile.marblePillarOld.2.desc=Основание мраморной колонны
@@ -105,7 +105,7 @@ chisel.tile.marblePillar.14.desc=Резная капитель колонны
 chisel.tile.marblePillar.15.desc=Декоративная капитель колонны
 
 #Marble Slabs (old)
-chisel.tile.marblePillarSlab.name=Плита из мраморной колонны
+tile.marble_pillar_slab.name=Плита из мраморной колонны
 chisel.tile.marblePillarSlabOld.0.desc=Плита из мраморной колонны
 chisel.tile.marblePillarSlabOld.1.desc=Плита из капители мраморной колонны
 chisel.tile.marblePillarSlabOld.2.desc=Плита из основания мраморной колонны
@@ -144,14 +144,14 @@ chisel.tile.marblePillarSlab.15.desc=Плита из декоративной к
 #Marble Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
 #Sorry!  It was the only way!
-chisel.tile.marbleStairs.0.name=Мраморные ступеньки
-chisel.tile.marbleStairs.1.name=Мраморные ступеньки
-chisel.tile.marbleStairs.2.name=Мраморные ступеньки
-chisel.tile.marbleStairs.3.name=Мраморные ступеньки
-chisel.tile.marbleStairs.4.name=Мраморные ступеньки
-chisel.tile.marbleStairs.5.name=Мраморные ступеньки
-chisel.tile.marbleStairs.6.name=Мраморные ступеньки
-chisel.tile.marbleStairs.7.name=Мраморные ступеньки
+tile.marble_stairs.0.name=Мраморные ступеньки
+tile.marble_stairs.1.name=Мраморные ступеньки
+tile.marble_stairs.2.name=Мраморные ступеньки
+tile.marble_stairs.3.name=Мраморные ступеньки
+tile.marble_stairs.4.name=Мраморные ступеньки
+tile.marble_stairs.5.name=Мраморные ступеньки
+tile.marble_stairs.6.name=Мраморные ступеньки
+tile.marble_stairs.7.name=Мраморные ступеньки
 
 #These are bugged.... so sad :,(
 chisel.tile.marbleStairs.0.desc=Ступеньки из необработанного мрамора
@@ -172,7 +172,7 @@ chisel.tile.marbleStairs.14.desc=Ступеньки из красивого пл
 chisel.tile.marbleStairs.15.desc=Ступеньки из мраморных блоков
 
 #Limestone
-chisel.tile.limestone.name=Известняк
+tile.limestone.name=Известняк
 chisel.tile.limestone.0.desc=Известняк
 chisel.tile.limestone.1.desc=Маленькие известняковые плитки
 chisel.tile.limestone.2.desc=Французские известняковые плитки
@@ -191,7 +191,7 @@ chisel.tile.limestone.14.desc=Известняк со светлой панел�
 chisel.tile.limestone.15.desc=Известняк с тёмной панелью
 
 #Limestone Slabs
-chisel.tile.limestoneSlab.name=Известняковая плита
+tile.limestone_slab.name=Известняковая плита
 chisel.tile.limestoneSlab.0.desc=Известняковая плита
 chisel.tile.limestoneSlab.1.desc=Маленькая известняковая плиточная плита
 chisel.tile.limestoneSlab.2.desc=Французская известняковая плиточная плита
@@ -212,14 +212,14 @@ chisel.tile.limestoneSlab.15.desc=Известняковая плита с тё�
 #Limestone Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
 #Sorry!  It was the only way!
-chisel.tile.limestoneStairs.0.name=Известняковые ступеньки
-chisel.tile.limestoneStairs.1.name=Известняковые ступеньки
-chisel.tile.limestoneStairs.2.name=Известняковые ступеньки
-chisel.tile.limestoneStairs.3.name=Известняковые ступеньки
-chisel.tile.limestoneStairs.4.name=Известняковые ступеньки
-chisel.tile.limestoneStairs.5.name=Известняковые ступеньки
-chisel.tile.limestoneStairs.6.name=Известняковые ступеньки
-chisel.tile.limestoneStairs.7.name=Известняковые ступеньки
+tile.limestone_stairs.0.name=Известняковые ступеньки
+tile.limestone_stairs.1.name=Известняковые ступеньки
+tile.limestone_stairs.2.name=Известняковые ступеньки
+tile.limestone_stairs.3.name=Известняковые ступеньки
+tile.limestone_stairs.4.name=Известняковые ступеньки
+tile.limestone_stairs.5.name=Известняковые ступеньки
+tile.limestone_stairs.6.name=Известняковые ступеньки
+tile.limestone_stairs.7.name=Известняковые ступеньки
 
 #These are bugged.... so sad :,(
 chisel.tile.limestoneStairs.0.desc=Известняковые ступеньки
@@ -240,7 +240,7 @@ chisel.tile.limestoneStairs.14.desc=Известняковые ступеньк�
 chisel.tile.limestoneStairs.15.desc=Известняковые ступеньки с тёмной панелью
 
 #Factory Blocks
-chisel.tile.blockFactory.name=Фабричный блок
+tile.factoryblock.name=Фабричный блок
 chisel.tile.blockFactory.0.desc=Ржавая металлическая пластина с точечным покрытием
 chisel.tile.blockFactory.1.desc=Ржавая металлическая пластина
 chisel.tile.blockFactory.2.desc=Очень ржавая металлическая пластина
@@ -259,7 +259,7 @@ chisel.tile.blockFactory.14.desc=Ржавые металлические пла�
 chisel.tile.blockFactory.15.desc=Изношенная металлическая колонна
 
 #Diamond blocks
-chisel.tile.diamond.name=Алмазный блок
+tile.diamond_block.name=Алмазный блок
 chisel.tile.diamond.1.desc=Рельефный алмазный блок
 chisel.tile.diamond.2.desc=Алмазный блок с панелью
 chisel.tile.diamond.3.desc=Алмазные ячейки
@@ -274,12 +274,12 @@ chisel.tile.diamond.11.desc=Алмазный блок Зельда
 chisel.tile.diamond.12.desc=Алмазный блок с декоративным слоем
 
 #Snakestone
-chisel.tile.snakestoneSand.name=Песочный змеиный камень
-chisel.tile.snakestoneStone.name=Каменный змеиный камень
-chisel.tile.snakestoneObsidian.name=Обсидиановый змеиный камень
+tile.snakestoneSand.name=Песочный змеиный камень
+tile.snakestoneStone.name=Каменный змеиный камень
+tile.obsidianSnakestone.name=Обсидиановый змеиный камень
 
 #Glass blocks
-chisel.tile.glass.name=Стекло
+tile.glass.name=Стекло
 chisel.tile.glass.1.desc=Пузырчатое стекло
 chisel.tile.glass.2.desc=Китайское стекло
 chisel.tile.glass.3.desc=Японское(?) стекло
@@ -297,7 +297,7 @@ chisel.tile.glass.14.desc=Стекло с тонкой сеткой
 chisel.tile.glass.15.desc=Современный железный забор
 
 #Sandstone
-chisel.tile.sandstone.name=Песчаник
+tile.sandstone.name=Песчаник
 chisel.tile.sandstone.3.desc=Блеклый песчаник
 chisel.tile.sandstone.4.desc=Песчаная колонна
 chisel.tile.sandstone.5.desc=Капитель песчаной колонны
@@ -313,11 +313,11 @@ chisel.tile.sandstone.14.desc=Песчаная мозаика
 chisel.tile.sandstone.15.desc=Ячеистые песчаные плитки
 
 #Sandstone scribbles
-chisel.tile.sandstoneScribbles.name=Песчаник с каракулями
+tile.sandstone_scribbles.name=Песчаник с каракулями
 chisel.tile.sandstoneScribbles.desc=Песчаник с каракулями
 
 #Concrete
-chisel.tile.blockConcrete.name=Бетон
+tile.concrete.name=Бетон
 chisel.tile.blockConcrete.0.desc=Бетон
 chisel.tile.blockConcrete.1.desc=Бетонный блок
 chisel.tile.blockConcrete.2.desc=Бетонная плита
@@ -331,10 +331,10 @@ chisel.tile.blockConcrete.9.desc=Частично выветрившийся б�
 chisel.tile.blockConcrete.10.desc=Асфальт
 
 #Road Line
-chisel.tile.roadLine.name=Дорожные линии
+tile.roadLine.name=Дорожные линии
 
 #Iron Blocks
-chisel.tile.iron.name=Железный блок
+tile.iron_block.name=Железный блок
 chisel.tile.iron.1.desc=Большие железные слитки
 chisel.tile.iron.2.desc=Маленькие железные слитки
 chisel.tile.iron.3.desc=Железные шестерни
@@ -352,7 +352,7 @@ chisel.tile.iron.14.desc=Железные разрезы
 chisel.tile.iron.15.desc=Простой железный блок
 
 #Gold Blocks
-chisel.tile.gold.name=Золотой блок
+tile.gold_block.name=Золотой блок
 chisel.tile.gold.1.desc=Большие золотые слитки
 chisel.tile.gold.2.desc=Маленькие золотые слитки
 chisel.tile.gold.3.desc=Золотые кирпичи
@@ -369,7 +369,7 @@ chisel.tile.gold.13.desc=Золотая звезда в обсидиане
 chisel.tile.gold.14.desc=Простой золотой блок
 
 #Glowstone
-chisel.tile.lightstone.name=Светящийся камень
+tile.glowstone.name=Светящийся камень
 chisel.tile.lightstone.1.desc=Булыжниковый светящийся блок
 chisel.tile.lightstone.2.desc=Проржавевшие светящиеся блоки
 chisel.tile.lightstone.3.desc=Светящиеся блоки со стеклом
@@ -387,7 +387,7 @@ chisel.tile.lightstone.14.desc=Светящийся висмут
 chisel.tile.lightstone.15.desc=Панель из светящегося висмута
 
 #Lapis blocks
-chisel.tile.lapis.name=Лазуритовый блок
+tile.lapis_block.name=Лазуритовый блок
 chisel.tile.lapis.1.desc=Плотный лазуритовый блок
 chisel.tile.lapis.2.desc=Тёмный лазуритовый блок
 chisel.tile.lapis.3.desc=Лазуритовый блок Зельда
@@ -398,7 +398,7 @@ chisel.tile.lapis.7.desc=Гладкий лазурит
 chisel.tile.lapis.8.desc=Лазурит с декоративным слоем
 
 #Emerald Blocks
-chisel.tile.emerald.name=Изумрудный блок
+tile.emerald_block.name=Изумрудный блок
 chisel.tile.emerald.1.desc=Изумрудная панель
 chisel.tile.emerald.2.desc=Классическая изумрудная панель
 chisel.tile.emerald.3.desc=Гладкий изумруд
@@ -412,7 +412,7 @@ chisel.tile.emerald.10.desc=Маленькие декоративные изум
 chisel.tile.emerald.11.desc=Декоративные изумрудные блоки
 
 #Nether Brick
-chisel.tile.netherBrick.name=Кирпич Нижнего мира
+tile.nether_brick.name=Кирпич Нижнего мира
 chisel.tile.netherBrick.1.desc=Синий кирпич Нижнего мира
 chisel.tile.netherBrick.2.desc=Забрызганный кирпич Нижнего мира
 chisel.tile.netherBrick.3.desc=Кирпич Нижнего мира, сделанный из внутренностей
@@ -430,7 +430,7 @@ chisel.tile.netherBrick.14.desc=Красный кирпич Нижнего ми�
 chisel.tile.netherBrick.15.desc=Маленький красный кирпич Нижнего мира
 
 #Netherrack
-chisel.tile.hellrock.name=Камень Нижнего мира
+tile.netherrack.name=Камень Нижнего мира
 chisel.tile.hellrock.1.desc=Гравий Нижнего мира с кровью
 chisel.tile.hellrock.2.desc=Камень Нижнего мира с кровью
 chisel.tile.hellrock.3.desc=Тёмный камень Нижнего мира с кровью
@@ -447,7 +447,7 @@ chisel.tile.hellrock.13.desc=Тёмный красный камень Нижне
 chisel.tile.hellrock.14.desc=Камень Нижнего мира с текучей лавой
 
 #Mossy Stone
-chisel.tile.stoneMoss.name=Замшелый булыжник
+tile.mossy_cobblestone.name=Замшелый булыжник
 chisel.tile.stoneMoss.1.desc=Выровненные замшелые булыжниковые кирпичи
 chisel.tile.stoneMoss.2.desc=Детализированные замшелые булыжниковые кирпичи
 chisel.tile.stoneMoss.3.desc=Маленькие замшелые булыжниковые кирпичи
@@ -465,7 +465,7 @@ chisel.tile.stoneMoss.14.desc=Замшелый булыжник со светл�
 chisel.tile.stoneMoss.15.desc=Замшелый булыжник с тёмной панелью
 
 #Stone Bricks
-chisel.tile.stoneBrick.name=Каменный кирпич
+tile.stonebrick.name=Каменный кирпич
 chisel.tile.stoneBrick.4.desc=Маленькие каменные кирпичи
 chisel.tile.stoneBrick.5.desc=Широкие каменные кирпичи
 chisel.tile.stoneBrick.6.desc=Маленькие неупорядоченные каменные кирпичи
@@ -480,7 +480,7 @@ chisel.tile.stoneBrick.14.desc=Декоративная каменная пан�
 chisel.tile.stoneBrick.15.desc=Ядовитый каменный кирпич
 
 #Dirt
-chisel.tile.blockDirt.name=Земля
+tile.dirt.name=Земля
 chisel.tile.blockDirt.0.desc=Беспорядочные земляные кирпичи
 chisel.tile.blockDirt.1.desc=Земляные кирпичи, похожи на кирпичи Нижнего мира
 chisel.tile.blockDirt.2.desc=Земляные кирпичи
@@ -496,7 +496,7 @@ chisel.tile.blockDirt.11.desc=Земляные слои
 chisel.tile.blockDirt.12.desc=Разрушенная земля
 
 #Ice
-chisel.tile.ice.name=Лёд
+tile.ice.name=Лёд
 chisel.tile.ice.1.desc=Необработанный ледяной блок
 chisel.tile.ice.2.desc=Булыжниковый лёд
 chisel.tile.ice.3.desc=Большие необработанные ледяные кирпичи
@@ -514,7 +514,7 @@ chisel.tile.ice.14.desc=Блок ледяного висмута
 chisel.tile.ice.15.desc=Блок ледяного яда
 
 #Ice Pillars
-chisel.tile.icePillar.name=Ледяная колонна
+tile.ice_pillar.name=Ледяная колонна
 chisel.tile.icePillar.0.desc=Ледяная колонна
 chisel.tile.icePillar.1.desc=Капитель ледяной колонны
 chisel.tile.icePillar.2.desc=Основание ледяной колонны
@@ -533,15 +533,15 @@ chisel.tile.icePillar.14.desc=Декоративное основание гре
 chisel.tile.icePillar.15.desc=Декоративное основание обычной ледяной колонны
 
 #Ice Stairs
-chisel.tile.iceStairs.name=Ледяные ступеньки
-chisel.tile.chisel.iceStairs.0.name=Ледяные ступеньки
-chisel.tile.chisel.iceStairs.1.name=Ледяные ступеньки
-chisel.tile.chisel.iceStairs.2.name=Ледяные ступеньки
-chisel.tile.chisel.iceStairs.3.name=Ледяные ступеньки
-chisel.tile.chisel.iceStairs.4.name=Ледяные ступеньки
-chisel.tile.chisel.iceStairs.5.name=Ледяные ступеньки
-chisel.tile.chisel.iceStairs.6.name=Ледяные ступеньки
-chisel.tile.chisel.iceStairs.7.name=Ледяные ступеньки
+tile.ice_stairs.name=Ледяные ступеньки
+tile.ice_stairs.0.name=Ледяные ступеньки
+tile.ice_stairs.1.name=Ледяные ступеньки
+tile.ice_stairs.2.name=Ледяные ступеньки
+tile.ice_stairs.3.name=Ледяные ступеньки
+tile.ice_stairs.4.name=Ледяные ступеньки
+tile.ice_stairs.5.name=Ледяные ступеньки
+tile.ice_stairs.6.name=Ледяные ступеньки
+tile.ice_stairs.7.name=Ледяные ступеньки
 chisel.tile.iceStairs.0.desc=Ледяные ступеньки
 chisel.tile.iceStairs.1.desc=Необработанные ледяные ступеньки
 chisel.tile.iceStairs.2.desc=Булыжниковые ледяные ступеньки
@@ -560,7 +560,7 @@ chisel.tile.iceStairs.14.desc=Ступеньки из ледяного висм�
 chisel.tile.iceStairs.15.desc=Ступеньки из ледяного яда
 
 #Obsidian
-chisel.tile.obsidian.name=Обсидиан
+tile.obsidian.name=Обсидиан
 chisel.tile.obsidian.1.desc=Большая обсидиановая колонна
 chisel.tile.obsidian.2.desc=Обсидиановая колонна
 chisel.tile.obsidian.3.desc=Резной обсидиан
@@ -578,98 +578,92 @@ chisel.tile.obsidian.14.desc=Светлые обсидиановые блоки 
 chisel.tile.obsidian.15.desc=Маленькие обсидиановые блоки в дубовом ящике
 
 #Wood
-chisel.tile.wood-oak.name=Дубовая древесина
-chisel.tile.wood-birch.name=Берёзовая древесина
-chisel.tile.wood-spruce.name=Еловая древесина
-chisel.tile.wood-jungle.name=Тропическая древесина
-chisel.tile.wood-dark-oak.name=Древесина тёмного дуба
-chisel.tile.wood-acacia.name=Древесина акации
+tile.oak_planks.name=Дубовая древесина
+tile.birch_planks.name=Берёзовая древесина
+tile.spruce_planks.name=Еловая древесина
+tile.jungle_planks.name=Тропическая древесина
+tile.dark_oak_planks.name=Древесина тёмного дуба
+tile.acacia_planks.name=Древесина акации
 
 #Remember to do the descriptions.
 
-#Obsidian Snakestone
-chisel.tile.obsidianSnakestone.name=Обсидиановый змеиный камень
-
 #Iron Fence
-chisel.tile.fenceIron=Железные прутья
+tile.iron_bars.name=Железные прутья
 
 #Glass Panes
-chisel.tile.glassPane=Стеклянная панель
+tile.glass_pane.name=Стеклянная панель
 
 #Redstone block
-chisel.tile.blockRedstone.name=Красный блок
+tile.redstone_block.name=Красный блок
 
 #Holystone
-chisel.tile.blockHolystone.name=Пемза
+tile.holystone.name=Пемза
 
 #Lavastone
-chisel.tile.blockLavastone.name=Лавовый камень
+tile.lavastone.name=Лавовый камень
 
 #Carpet
-chisel.tile.blockCarpet.name=Ковёр
+tile.carpet_block.name=Ковёр
 
 #Carpet floor
-chisel.tile.blockCarpetFloor.name=Напольный ковёр
+tile.carpet.name=Напольный ковёр
 
 #Bookshelf
-chisel.tile.blockBookshelf.name=Книжный шкаф
+tile.bookshelf.name=Книжный шкаф
 
 #Tyrian
-chisel.tile.blockTyrian.name=Тириан
+tile.tyrian.name=Тириан
 
 #Temple
-chisel.tile.blockTemple.name=Блок храма
+tile.templeblock.name=Блок храма
 
 #Temple Mossy
-chisel.tile.blockTempleMossy.name=Замшелый блок храма
+tile.mossy_templeblock.name=Замшелый блок храма
 
 #Cloud
-chisel.tile.blockCloud.name=Облако
+tile.cloud.name=Облако
 
 #Stained glass T.T
-chisel.tile.chisel.stainedGlassWhite.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassOrange.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassMagenta.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassLightBlue.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassYellow.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassLime.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassPink.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassGray.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassLightGray.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassCyan.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassPurple.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassBlue.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassBrown.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassGreen.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassRed.name=Окрашенное стекло
-chisel.tile.chisel.stainedGlassBlack.name=Окрашенное стекло
+tile.stained_glass_white.name=Окрашенное стекло
+tile.stained_glass_orange.name=Окрашенное стекло
+tile.stained_glass_magenta.name=Окрашенное стекло
+tile.stained_glass_lightBlue.name=Окрашенное стекло
+tile.stained_glass_yellow.name=Окрашенное стекло
+tile.stained_glass_lime.name=Окрашенное стекло
+tile.stained_glass_pink.name=Окрашенное стекло
+tile.stained_glass_gray.name=Окрашенное стекло
+tile.stained_glass_lightgray.name=Окрашенное стекло
+tile.stained_glass_cyan.name=Окрашенное стекло
+tile.stained_glass_purple.name=Окрашенное стекло
+tile.stained_glass_blue.name=Окрашенное стекло
+tile.stained_glass_brown.name=Окрашенное стекло
+tile.stained_glass_green.name=Окрашенное стекло
+tile.stained_glass_red.name=Окрашенное стекло
+tile.stained_glass_black.name=Окрашенное стекло
 
 #Stained GlassPane T.T
-chisel.tile.chisel.stainedGlassPaneWhite.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneOrange.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneMagenta.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneLightBlue.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneYellow.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneLime.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPanePink.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneGray.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneLightGray.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneCyan.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPanePurple.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneBlue.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneBrown.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneGreen.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneRed.name=Окрашенная стеклянная панель
-chisel.tile.chisel.stainedGlassPaneBlack.name=Окрашенная стеклянная панель
-
-#Concerete
-chisel.tile.concrete.name=Бетон
+tile.stained_glass_pane_white.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_orange.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_magenta.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_lightBlue.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_yellow.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_lime.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_pink.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_gray.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_lightgray.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_cyan.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_purple.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_blue.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_brown.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_green.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_red.name=Окрашенная стеклянная панель
+tile.stained_glass_pane_black.name=Окрашенная стеклянная панель
 
 #Fantasy block
-chisel.tile.blockFft.name=Фантастический блок
+tile.fantasyblock.name=Фантастический блок
 
 #Paperwall
-chisel.tile.blockPaperwall.name=Бумажная стена
+tile.paperwall.name=Бумажная стена
 chisel.tile.paperwall.0.desc=Коробочная бумажная стена
 chisel.tile.paperwall.1.desc=Разделённая бумажная стена
 chisel.tile.paperwall.2.desc=Скрещенная бумажная стена
@@ -681,7 +675,7 @@ chisel.tile.paperwall.7.desc=Обычная бумажная стена
 chisel.tile.paperwall.8.desc=Двереобразная бумажная стена
 
 #Woolen Clay
-chisel.tile.blockWoolenClay.name=Шерстяная глина
+tile.woolen_clay.name=Шерстяная глина
 chisel.tile.woolenClay.0.desc=Белая шерстяная глина
 chisel.tile.woolenClay.1.desc=Оранжевая шерстяная глина
 chisel.tile.woolenClay.2.desc=Сиреневая шерстяная глина
