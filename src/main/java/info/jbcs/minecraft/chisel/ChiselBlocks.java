@@ -372,7 +372,7 @@ public class ChiselBlocks
             if(Configurations.featureEnabled("snakeSandstone"))
             {
                 blockSandSnakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/sandsnake/").setBlockName("snakestoneSand");
-                GameRegistry.registerBlock(blockSandSnakestone, ItemCarvable.class, blockSandSnakestone.getUnlocalizedName());
+                GameRegistry.registerBlock(blockSandSnakestone, ItemCarvable.class, "snakestoneSand");
                 //TODO- eat me!
                 //LanguageRegistry.addName(new ItemStack(blockSandSnakestone, 1, 1), "Sandstone snake block head");
                 //LanguageRegistry.addName(new ItemStack(blockSandSnakestone, 1, 13), "Sandstone snake block body");
@@ -653,7 +653,7 @@ public class ChiselBlocks
         if(Configurations.featureEnabled("snakestone"))
         {
             blockSnakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/snake/").setBlockName("snakestoneStone");
-            GameRegistry.registerBlock(blockSnakestone, ItemCarvable.class, blockSnakestone.getUnlocalizedName());
+            GameRegistry.registerBlock(blockSnakestone, ItemCarvable.class, "snakestoneStone");
             //LanguageRegistry.addName(new ItemStack(blockSnakestone, 1, 1), "Stone snake block head");
             //LanguageRegistry.addName(new ItemStack(blockSnakestone, 1, 13), "Stone snake block body");
             Carving.chisel.addVariation("stoneBrick", blockSnakestone, 1, 16);
@@ -758,7 +758,7 @@ public class ChiselBlocks
                     {
                         return new BlockMarbleIceStairs(block, meta, helper);
                     }
-                }, "chisel.iceStairs");
+                }, "iceStairs");
             }
         }
 
@@ -826,7 +826,7 @@ public class ChiselBlocks
         if(Configurations.featureEnabled("snakestoneObsidian"))
         {
             blockObsidianSnakestone = (BlockSnakestoneObsidian) new BlockSnakestoneObsidian("Chisel:snakestone/obsidian/").setBlockName("obsidianSnakestone").setHardness(50.0F).setResistance(2000.0F);
-            GameRegistry.registerBlock(blockObsidianSnakestone, ItemCarvable.class, blockObsidianSnakestone.getUnlocalizedName());
+            GameRegistry.registerBlock(blockObsidianSnakestone, ItemCarvable.class, "obsidianSnakestone");
             //LanguageRegistry.addName(new ItemStack(blockObsidianSnakestone, 1, 1), "Obsidian snakestone head");
             //LanguageRegistry.addName(new ItemStack(blockObsidianSnakestone, 1, 13), "Obsidian snakestone body");
             Carving.chisel.addVariation("obsidian", blockObsidianSnakestone, 1, 16);
@@ -1140,7 +1140,7 @@ public class ChiselBlocks
 
         if(Configurations.featureEnabled("glassStained")) for(int i = 0; i < 16; i++)
         {
-            String blockName = "chisel.stainedGlass" + sGNames[i].replaceAll(" ", "");
+            final String blockName = "stainedGlass" + sGNames[i].replaceAll(" ", "");
             String oreName = "stainedGlass" + sGNames[i].replaceAll(" ", "");
             String texName = "glassdyed/" + sGNames[i].toLowerCase().replaceAll(" ", "") + "-";
             int glassPrefix = (i & 3) << 2;
@@ -1168,7 +1168,7 @@ public class ChiselBlocks
 
         if(Configurations.featureEnabled("glassStainedPane")) for(int i = 0; i < 16; i++)
         {
-            String blockName = "chisel.stainedGlassPane" + sGNames[i].replaceAll(" ", "");
+            final String blockName = "stainedGlassPane" + sGNames[i].replaceAll(" ", "");
             String oreName = "stainedGlassPane" + sGNames[i].replaceAll(" ", "");
             String texName = "glasspanedyed/" + sGNames[i].toLowerCase().replaceAll(" ", "") + "-";
             Carving.chisel.addVariation(blockName, Blocks.stained_glass_pane, i, 0);
@@ -1251,5 +1251,4 @@ public class ChiselBlocks
 
         Blocks.stone.setHarvestLevel("chisel", 0, 0);
     }
-
 }

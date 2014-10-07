@@ -29,13 +29,6 @@ public class ItemCarvable extends ItemBlock
         return i;
     }
 
-    //TODO- to fix some, one must break some
-    @Override
-    public String getUnlocalizedName(ItemStack itemstack)
-    {
-        return "chisel." + Block.getBlockFromItem(this).getUnlocalizedName();
-    }
-
     @Override
     public IIcon getIconFromDamage(int damage)
     {
