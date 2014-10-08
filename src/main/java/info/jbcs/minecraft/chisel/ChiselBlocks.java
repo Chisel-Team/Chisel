@@ -64,6 +64,8 @@ public class ChiselBlocks
     public static BlockCarvablePane blockPaperwall;
     public static BlockCarvable blockWoolenClay;
     public static BlockCarvable blockLaboratory;
+    public static BlockCarvablePumpkin blockCarvablePumpkinOn;
+    public static BlockCarvablePumpkin blockCarvablePumpkinOff;
 
     public static BlockSnakestone blockSnakestone;
     public static BlockSnakestone blockSandSnakestone;
@@ -1248,6 +1250,11 @@ public class ChiselBlocks
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.14.desc"), 14, "laboratory/directionleft");
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.15.desc"), 15, "laboratory/infocon");
             blockLaboratory.carverHelper.register(blockLaboratory, "laboratoryblock");
+        }
+
+        if(Configurations.featureEnabled("pumpkin"))
+        {
+            //TODO
         }
 
         Blocks.stone.setHarvestLevel("chisel", 0, 0);
