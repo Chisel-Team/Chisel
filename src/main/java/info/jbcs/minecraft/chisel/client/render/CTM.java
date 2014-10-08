@@ -1,5 +1,6 @@
 package info.jbcs.minecraft.chisel.client.render;
 
+import info.jbcs.minecraft.chisel.api.IFacade;
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
 
@@ -284,9 +285,23 @@ public class CTM
                 break;
         }
 
-        return world.getBlock(x, y, z).equals(block) && world.getBlockMetadata(x, y, z) == meta && (!world.getBlock(x2, y2, z2).equals(block) || world.getBlockMetadata(x2, y2, z2) != meta);
-
+        return getBlockOrFacade(world, x, y, z, side).equals(block) && getBlockOrFacadeMetadata(world, x, y, z, side) == meta && (!getBlockOrFacade(world, x2, y2, z2, side).equals(block) || getBlockOrFacadeMetadata(world, x2, y2, z2, side) != meta);
     }
 
+    private static int getBlockOrFacadeMetadata(IBlockAccess world, int x, int y, int z, int side) {
+      Block blk = world.getBlock(x, y, z);
+      if(blk instanceof IFacade) {
+        return ((IFacade)blk).getFacadeMetadata(world, x, y, z, side);
+      }
+      return world.getBlockMetadata(x, y, z);
+    }
+
+    private static Block getBlockOrFacade(IBlockAccess world, int x, int y, int z, int side) {
+      Block blk = world.getBlock(x, y, z);
+      if(blk instanceof IFacade) {
+        blk = ((IFacade)blk).getFacade(world, x, y, z, side);
+      }
+      return blk;
+    }
 
 }
