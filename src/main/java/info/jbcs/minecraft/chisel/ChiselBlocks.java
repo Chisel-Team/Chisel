@@ -64,8 +64,8 @@ public class ChiselBlocks
     public static BlockCarvablePane blockPaperwall;
     public static BlockCarvable blockWoolenClay;
     public static BlockCarvable blockLaboratory;
-    public static BlockCarvablePumpkin blockCarvablePumpkinOn;
-    public static BlockCarvablePumpkin blockCarvablePumpkinOff;
+    public static BlockCarvablePumpkin blockPumpkinOn;
+    public static BlockCarvablePumpkin blockPumpkinOff;
 
     public static BlockSnakestone blockSnakestone;
     public static BlockSnakestone blockSandSnakestone;
