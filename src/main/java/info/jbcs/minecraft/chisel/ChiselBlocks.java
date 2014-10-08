@@ -125,7 +125,7 @@ public class ChiselBlocks
             blockMarbleSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marbleSlab.13.desc"), 13, "marbleslab/marble-arranged-bricks");
             blockMarbleSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marbleSlab.14.desc"), 14, "marbleslab/marble-fancy-bricks");
             blockMarbleSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marbleSlab.15.desc"), 15, "marbleslab/marble-blocks");
-            blockMarbleSlab.carverHelper.register(blockMarbleSlab, "marbleSlab", ItemMarbleSlab.class);
+            blockMarbleSlab.carverHelper.register(blockMarbleSlab, "marble_slab", ItemMarbleSlab.class);
 
             if(Configurations.featureEnabled("marblePillar"))
             {
@@ -170,8 +170,8 @@ public class ChiselBlocks
                     blockMarblePillar.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marblePillar.14.desc"), 14, "marblepillar/carved");
                     blockMarblePillar.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marblePillar.15.desc"), 15, "marblepillar/ornamental");
                 }
-                blockMarblePillar.carverHelper.register(blockMarblePillar, "marblePillar");
-                Carving.chisel.setGroupClass("marblePillar", "marble");
+                blockMarblePillar.carverHelper.register(blockMarblePillar, "marble_pillar");
+                Carving.chisel.setGroupClass("marble_pillar", "marble");
 
                 blockMarblePillarSlab = (BlockMarbleSlab) new BlockMarbleSlab(blockMarblePillar).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
                 blockMarblePillarSlab.carverHelper.setChiselBlockName("Marble Pillar Slab");
@@ -212,7 +212,7 @@ public class ChiselBlocks
                     blockMarblePillarSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marblePillarSlab.14.desc"), 14, "marblepillarslab/carved");
                     blockMarblePillarSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marblePillarSlab.15.desc"), 15, "marblepillarslab/ornamental");
                 }
-                blockMarblePillarSlab.carverHelper.register(blockMarblePillarSlab, "marblePillarSlab", ItemMarbleSlab.class);
+                blockMarblePillarSlab.carverHelper.register(blockMarblePillarSlab, "marble_pillar_slab", ItemMarbleSlab.class);
             }
 
             BlockMarbleStairsMaker makerMarbleStairs = new BlockMarbleStairsMaker(blockMarble);
@@ -233,7 +233,7 @@ public class ChiselBlocks
             makerMarbleStairs.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marbleStairs.13.desc"), 13, "marbleslab/marble-arranged-bricks");
             makerMarbleStairs.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marbleStairs.14.desc"), 14, "marbleslab/marble-fancy-bricks");
             makerMarbleStairs.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.marbleStairs.15.desc"), 15, "marbleslab/marble-blocks");
-            makerMarbleStairs.create("marbleStairs");
+            makerMarbleStairs.create("marble_stairs");
         }
 
         if(Configurations.featureEnabled("limestone"))
@@ -278,7 +278,7 @@ public class ChiselBlocks
             blockLimestoneSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.limestoneSlab.13.desc"), 13, "limestone/terrain-pistonback-lightfour");
             blockLimestoneSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.limestoneSlab.14.desc"), 14, "limestone/terrain-pistonback-lightmarker");
             blockLimestoneSlab.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.limestoneSlab.15.desc"), 15, "limestone/terrain-pistonback-lightpanel");
-            blockLimestoneSlab.carverHelper.register(blockLimestoneSlab, "limestoneSlab", ItemMarbleSlab.class);
+            blockLimestoneSlab.carverHelper.register(blockLimestoneSlab, "limestone_slab", ItemMarbleSlab.class);
 
             BlockMarbleStairsMaker makerLimestoneStairs = new BlockMarbleStairsMaker(blockLimestone);
             makerLimestoneStairs.carverHelper.setChiselBlockName("Limestone Stairs");
@@ -298,7 +298,7 @@ public class ChiselBlocks
             makerLimestoneStairs.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.limestoneStairs.13.desc"), 13, "limestone/terrain-pistonback-lightfour");
             makerLimestoneStairs.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.limestoneStairs.14.desc"), 14, "limestone/terrain-pistonback-lightmarker");
             makerLimestoneStairs.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.limestoneStairs.15.desc"), 15, "limestone/terrain-pistonback-lightpanel");
-            makerLimestoneStairs.create("limestoneStairs");
+            makerLimestoneStairs.create("limestone_stairs");
         }
 
         if(Configurations.featureEnabled("cobblestone"))
@@ -321,7 +321,7 @@ public class ChiselBlocks
             blockCobblestone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.cobblestone.13.desc"), 14, "cobblestone/terrain-pistonback-darkmarker");
             blockCobblestone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.cobblestone.14.desc"), 15, "cobblestone/terrain-pistonback-darkpanel");
             blockCobblestone.carverHelper.register(blockCobblestone, "cobblestone");
-            Carving.chisel.registerOre("cobblestone", "blockCobble");
+            Carving.chisel.registerOre("cobblestone", "cobblestone");
         }
 
         if(Configurations.featureEnabled("glass"))
@@ -372,7 +372,7 @@ public class ChiselBlocks
             if(Configurations.featureEnabled("snakeSandstone"))
             {
                 blockSandSnakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/sandsnake/").setBlockName("snakestoneSand");
-                GameRegistry.registerBlock(blockSandSnakestone, ItemCarvable.class, blockSandSnakestone.getUnlocalizedName());
+                GameRegistry.registerBlock(blockSandSnakestone, ItemCarvable.class, "sand_snakestone");
                 //TODO- eat me!
                 //LanguageRegistry.addName(new ItemStack(blockSandSnakestone, 1, 1), "Sandstone snake block head");
                 //LanguageRegistry.addName(new ItemStack(blockSandSnakestone, 1, 13), "Sandstone snake block body");
@@ -400,7 +400,7 @@ public class ChiselBlocks
             blockSandstoneScribbles.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.sandstoneScribbles.desc"), 13, "sandstone-scribbles/scribbles-13");
             blockSandstoneScribbles.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.sandstoneScribbles.desc"), 14, "sandstone-scribbles/scribbles-14");
             blockSandstoneScribbles.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.sandstoneScribbles.desc"), 15, "sandstone-scribbles/scribbles-15");
-            blockSandstoneScribbles.carverHelper.register(blockSandstoneScribbles, "sandstoneScribbles");
+            blockSandstoneScribbles.carverHelper.register(blockSandstoneScribbles, "sandstone_scribbles");
         }
 
         if(Configurations.featureEnabled("concrete"))
@@ -425,7 +425,7 @@ public class ChiselBlocks
         if(Configurations.featureEnabled("roadLine"))
         {
             blockRoadLine = (BlockRoadLine) new BlockRoadLine().setStepSound(Block.soundTypeStone).setHardness(0.01F).setBlockName("roadLine");
-            GameRegistry.registerBlock(blockRoadLine, ItemCarvable.class, "roadLine");
+            GameRegistry.registerBlock(blockRoadLine, ItemCarvable.class, "road_line");
             //TODO- flag
             //LanguageRegistry.addName(new ItemStack(blockRoadLine, 1, 0), "Road lines");
         }
@@ -433,7 +433,7 @@ public class ChiselBlocks
         if(Configurations.featureEnabled("ironBlock"))
         {
             blockIron = (BlockBeaconBase) new BlockBeaconBase().setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
-            Carving.chisel.addVariation("iron", Blocks.iron_block, 0, 0);
+            Carving.chisel.addVariation("iron_block", Blocks.iron_block, 0, 0);
             blockIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron.1.desc"), 1, "iron/terrain-iron-largeingot");
             blockIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron.2.desc"), 2, "iron/terrain-iron-smallingot");
             blockIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron.3.desc"), 3, "iron/terrain-iron-gears");
@@ -449,14 +449,14 @@ public class ChiselBlocks
             blockIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron.13.desc"), 13, "iron/terrain-iron-spaceblack");
             blockIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron.14.desc"), 14, "iron/terrain-iron-vents");
             blockIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron.15.desc"), 15, "iron/terrain-iron-simple");
-            blockIron.carverHelper.register(blockIron, "iron");
-            Carving.chisel.registerOre("iron", "blockIron");
+            blockIron.carverHelper.register(blockIron, "iron_block");
+            Carving.chisel.registerOre("iron_block", "blockIron");
         }
 
         if(Configurations.featureEnabled("goldBlock"))
         {
             blockGold = (BlockBeaconBase) new BlockBeaconBase().setHardness(3F).setResistance(10F).setStepSound(Block.soundTypeMetal);
-            Carving.chisel.addVariation("gold", Blocks.gold_block, 0, 0);
+            Carving.chisel.addVariation("gold_block", Blocks.gold_block, 0, 0);
             blockGold.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.gold.1.desc"), 1, "gold/terrain-gold-largeingot");
             blockGold.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.gold.2.desc"), 2, "gold/terrain-gold-smallingot");
             blockGold.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.gold.3.desc"), 3, "gold/terrain-gold-brick");
@@ -471,14 +471,14 @@ public class ChiselBlocks
             blockGold.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.gold.12.desc"), 12, "gold/terrain-gold-space");
             blockGold.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.gold.13.desc"), 13, "gold/terrain-gold-spaceblack");
             blockGold.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.gold.14.desc"), 14, "gold/terrain-gold-simple");
-            blockGold.carverHelper.register(blockGold, "gold");
-            Carving.chisel.registerOre("gold", "blockGold");
+            blockGold.carverHelper.register(blockGold, "gold_block");
+            Carving.chisel.registerOre("gold_block", "blockGold");
         }
 
         if(Configurations.featureEnabled("diamondBlock"))
         {
             blockDiamond = (BlockBeaconBase) new BlockBeaconBase().setHardness(5F).setResistance(10F).setStepSound(Block.soundTypeMetal);
-            Carving.chisel.addVariation("diamond", Blocks.diamond_block, 0, 0);
+            Carving.chisel.addVariation("diamond_block", Blocks.diamond_block, 0, 0);
             blockDiamond.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.diamond.1.desc"), 1, "diamond/terrain-diamond-embossed");
             blockDiamond.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.diamond.2.desc"), 2, "diamond/terrain-diamond-gem");
             blockDiamond.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.diamond.3.desc"), 3, "diamond/terrain-diamond-cells");
@@ -491,14 +491,14 @@ public class ChiselBlocks
             blockDiamond.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.diamond.10.desc"), 10, "diamond/a1-blockdiamond-fourornate");
             blockDiamond.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.diamond.11.desc"), 11, "diamond/a1-blockdiamond-zelda");
             blockDiamond.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.diamond.12.desc"), 12, "diamond/a1-blockdiamond-ornatelayer");
-            blockDiamond.carverHelper.register(blockDiamond, "diamond");
-            Carving.chisel.registerOre("diamond", "blockDiamond");
+            blockDiamond.carverHelper.register(blockDiamond, "diamond_block");
+            Carving.chisel.registerOre("diamond_block", "blockDiamond");
         }
 
         if(Configurations.featureEnabled("glowstone"))
         {
             blockLightstone = (BlockLightstoneCarvable) new BlockLightstoneCarvable().setHardness(0.3F).setLightLevel(1.0F).setStepSound(Block.soundTypeGlass);
-            Carving.chisel.addVariation("lightstone", Blocks.glowstone, 0, 0);
+            Carving.chisel.addVariation("glowstone", Blocks.glowstone, 0, 0);
             blockLightstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lightstone.1.desc"), 1, "lightstone/terrain-sulphur-cobble");
             blockLightstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lightstone.2.desc"), 2, "lightstone/terrain-sulphur-corroded");
             blockLightstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lightstone.3.desc"), 3, "lightstone/terrain-sulphur-glass");
@@ -514,14 +514,14 @@ public class ChiselBlocks
             blockLightstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lightstone.13.desc"), 13, "lightstone/a1-glowstone-tilecorroded");
             blockLightstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lightstone.14.desc"), 14, "lightstone/glowstone-bismuth");
             blockLightstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lightstone.15.desc"), 15, "lightstone/glowstone-bismuth-panel");
-            blockLightstone.carverHelper.register(blockLightstone, "lightstone");
-            Carving.chisel.registerOre("lightstone", "blockGlowstone");
+            blockLightstone.carverHelper.register(blockLightstone, "glowstone");
+            Carving.chisel.registerOre("glowstone", "glowstone");
         }
 
         if(Configurations.featureEnabled("lapisBlock"))
         {
             blockLapis = (BlockCarvable) new BlockCarvable().setHardness(3F).setResistance(5F).setStepSound(Block.soundTypeStone);
-            Carving.chisel.addVariation("lapis", Blocks.lapis_block, 0, 0);
+            Carving.chisel.addVariation("lapis_block", Blocks.lapis_block, 0, 0);
             blockLapis.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lapis.1.desc"), 1, "lapis/terrain-lapisblock-chunky");
             blockLapis.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lapis.2.desc"), 2, "lapis/terrain-lapisblock-panel");
             blockLapis.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lapis.3.desc"), 3, "lapis/terrain-lapisblock-zelda");
@@ -530,14 +530,14 @@ public class ChiselBlocks
             blockLapis.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lapis.6.desc"), 6, "lapis/a1-blocklapis-panel");
             blockLapis.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lapis.7.desc"), 7, "lapis/a1-blocklapis-smooth");
             blockLapis.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lapis.8.desc"), 8, "lapis/a1-blocklapis-ornatelayer");
-            blockLapis.carverHelper.register(blockLapis, "lapis");
-            Carving.chisel.registerOre("lapis", "blockLapis");
+            blockLapis.carverHelper.register(blockLapis, "lapis_block");
+            Carving.chisel.registerOre("lapis_block", "blockLapis");
         }
 
         if(Configurations.featureEnabled("emeraldBlock"))
         {
             blockEmerald = (BlockBeaconBase) new BlockBeaconBase().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
-            Carving.chisel.addVariation("emerald", Blocks.emerald_block, 0, 0);
+            Carving.chisel.addVariation("emerald_block", Blocks.emerald_block, 0, 0);
             blockEmerald.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.emerald.1.desc"), 1, "emerald/a1-blockemerald-emeraldpanel");
             blockEmerald.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.emerald.2.desc"), 2, "emerald/a1-blockemerald-emeraldpanelclassic");
             blockEmerald.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.emerald.3.desc"), 3, "emerald/a1-blockemerald-emeraldsmooth");
@@ -549,14 +549,14 @@ public class ChiselBlocks
             blockEmerald.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.emerald.9.desc"), 9, "emerald/a1-blockquartz-four");
             blockEmerald.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.emerald.10.desc"), 10, "emerald/a1-blockquartz-fourornate");
             blockEmerald.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.emerald.11.desc"), 11, "emerald/a1-blockquartz-ornate");
-            blockEmerald.carverHelper.register(blockEmerald, "emerald");
-            Carving.chisel.registerOre("emerald", "blockEmerald");
+            blockEmerald.carverHelper.register(blockEmerald, "emerald_block");
+            Carving.chisel.registerOre("emerald_block", "blockEmerald");
         }
 
         if(Configurations.featureEnabled("netherBrick"))
         {
             blockNetherBrick = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
-            Carving.chisel.addVariation("netherBrick", Blocks.nether_brick, 0, 0);
+            Carving.chisel.addVariation("nether_brick", Blocks.nether_brick, 0, 0);
             //blockNetherBrick.carverHelper.addVariation("Nether brick", 0, Blocks.nether_brick);
             blockNetherBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.netherBrick.1.desc"), 1, "netherbrick/a1-netherbrick-brinstar");
             blockNetherBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.netherBrick.2.desc"), 2, "netherbrick/a1-netherbrick-classicspatter");
@@ -573,14 +573,14 @@ public class ChiselBlocks
             blockNetherBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.netherBrick.13.desc"), 13, "netherbrick/a1-netherbrick-meatsmall");
             blockNetherBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.netherBrick.14.desc"), 14, "netherbrick/a1-netherbrick-red");
             blockNetherBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.netherBrick.15.desc"), 15, "netherbrick/a1-netherbrick-redsmall");
-            blockNetherBrick.carverHelper.register(blockNetherBrick, "netherBrick");
-            Carving.chisel.registerOre("netherBrick", "netherBrick");
+            blockNetherBrick.carverHelper.register(blockNetherBrick, "nether_brick");
+            Carving.chisel.registerOre("nether_brick", "nether_brick");
         }
 
         if(Configurations.featureEnabled("netherRack"))
         {
             blockNetherrack = (BlockCarvable) new BlockCarvable().setHardness(0.4F).setStepSound(Block.soundTypeStone);
-            Carving.chisel.addVariation("hellrock", Blocks.netherrack, 0, 0);
+            Carving.chisel.addVariation("netherrack", Blocks.netherrack, 0, 0);
             blockNetherrack.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.hellrock.1.desc"), 1, "netherrack/a1-netherrack-bloodgravel");
             blockNetherrack.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.hellrock.2.desc"), 2, "netherrack/a1-netherrack-bloodrock");
             blockNetherrack.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.hellrock.3.desc"), 3, "netherrack/a1-netherrack-bloodrockgrey");
@@ -595,14 +595,14 @@ public class ChiselBlocks
             blockNetherrack.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.hellrock.12.desc"), 12, "netherrack/a1-netherrack-meatrock");
             blockNetherrack.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.hellrock.13.desc"), 13, "netherrack/a1-netherrack-red");
             blockNetherrack.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.hellrock.14.desc"), 14, "netherrack/a1-netherrack-wells");
-            blockNetherrack.carverHelper.register(blockNetherrack, "hellrock");
-            Carving.chisel.registerOre("hellrock", "blockNetherrack");
+            blockNetherrack.carverHelper.register(blockNetherrack, "netherrack");
+            Carving.chisel.registerOre("netherrack", "netherrack");
         }
 
         if(Configurations.featureEnabled("cobblestoneMossy"))
         {
             blockCobblestoneMossy = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
-            Carving.chisel.addVariation("stoneMoss", Blocks.mossy_cobblestone, 0, 0);
+            Carving.chisel.addVariation("mossy_cobblestone", Blocks.mossy_cobblestone, 0, 0);
             blockCobblestoneMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneMoss.1.desc"), 1, "cobblestonemossy/terrain-cobb-brickaligned");
             blockCobblestoneMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneMoss.2.desc"), 2, "cobblestonemossy/terrain-cob-detailedbrick");
             blockCobblestoneMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneMoss.3.desc"), 3, "cobblestonemossy/terrain-cob-smallbrick");
@@ -618,8 +618,8 @@ public class ChiselBlocks
             blockCobblestoneMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneMoss.13.desc"), 13, "cobblestonemossy/terrain-pistonback-darkemboss");
             blockCobblestoneMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneMoss.14.desc"), 14, "cobblestonemossy/terrain-pistonback-darkmarker");
             blockCobblestoneMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneMoss.15.desc"), 15, "cobblestonemossy/terrain-pistonback-darkpanel");
-            blockCobblestoneMossy.carverHelper.register(blockCobblestoneMossy, "stoneMoss");
-            Carving.chisel.registerOre("stoneMoss", "blockCobblestoneMossy");
+            blockCobblestoneMossy.carverHelper.register(blockCobblestoneMossy, "mossy_cobblestone");
+            Carving.chisel.registerOre("mossy_cobblestone", "mossy_cobblestone");
         }
 
         if(Configurations.featureEnabled("stoneBrick"))
@@ -630,9 +630,9 @@ public class ChiselBlocks
                 if(i == 1)
                 {
                     if(Configurations.allowMossy)
-                        Carving.chisel.addVariation("stoneBrick", Blocks.stonebrick, i, i);
+                        Carving.chisel.addVariation("stonebrick", Blocks.stonebrick, i, i);
                 } else
-                    Carving.chisel.addVariation("stoneBrick", Blocks.stonebrick, i, i);
+                    Carving.chisel.addVariation("stonebrick", Blocks.stonebrick, i, i);
             }
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.4.desc"), 4, "stonebrick/smallbricks");
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.5.desc"), 5, "stonebrick/largebricks");
@@ -646,24 +646,24 @@ public class ChiselBlocks
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.13.desc"), 13, "stonebrick/sunken");
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.14.desc"), 14, "stonebrick/ornatepanel");
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.15.desc"), 15, "stonebrick/poison");
-            stoneBrick.carverHelper.register(stoneBrick, "stoneBrick");
-            Carving.chisel.registerOre("stoneBrick", "blockStoneBrick");
+            stoneBrick.carverHelper.register(stoneBrick, "stonebrick");
+            Carving.chisel.registerOre("stonebrick", "stonebrick");
         }
 
         if(Configurations.featureEnabled("snakestone"))
         {
             blockSnakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/snake/").setBlockName("snakestoneStone");
-            GameRegistry.registerBlock(blockSnakestone, ItemCarvable.class, blockSnakestone.getUnlocalizedName());
+            GameRegistry.registerBlock(blockSnakestone, ItemCarvable.class, "stone_snakestone");
             //LanguageRegistry.addName(new ItemStack(blockSnakestone, 1, 1), "Stone snake block head");
             //LanguageRegistry.addName(new ItemStack(blockSnakestone, 1, 13), "Stone snake block body");
-            Carving.chisel.addVariation("stoneBrick", blockSnakestone, 1, 16);
-            Carving.chisel.addVariation("stoneBrick", blockSnakestone, 13, 17);
+            Carving.chisel.addVariation("stonebrick", blockSnakestone, 1, 16);
+            Carving.chisel.addVariation("stonebrick", blockSnakestone, 13, 17);
         }
 
         if(Configurations.featureEnabled("dirt"))
         {
             blockDirt = (BlockCarvable) new BlockCarvable(Material.ground).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("dirt.default");
-            Carving.chisel.addVariation("blockDirt", Blocks.dirt, 0, 0);
+            Carving.chisel.addVariation("dirt", Blocks.dirt, 0, 0);
             blockDirt.carverHelper.setChiselBlockName("Dirt");
             //blockDirt.carverHelper.addVariation("Dirt", 0, Blocks.dirt);
             blockDirt.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockDirt.0.desc"), 0, "dirt/bricks");
@@ -679,10 +679,10 @@ public class ChiselBlocks
             blockDirt.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockDirt.10.desc"), 10, "dirt/vert");
             blockDirt.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockDirt.11.desc"), 11, "dirt/layers");
             blockDirt.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockDirt.12.desc"), 12, "dirt/vertical");
-            blockDirt.carverHelper.register(blockDirt, "blockDirt");
+            blockDirt.carverHelper.register(blockDirt, "dirt");
             blockDirt.setHarvestLevel("shovel", 0);
             OreDictionary.registerOre("blockDirt", blockDirt);
-            Carving.chisel.registerOre("blockDirt", "blockDirt");
+            Carving.chisel.registerOre("dirt", "blockDirt");
         }
 
         if(Configurations.featureEnabled("ice"))
@@ -727,8 +727,8 @@ public class ChiselBlocks
                 blockIcePillar.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.icePillar.13.desc"), 13, "icepillar/a1-stonepillar-plaintopgreek");
                 blockIcePillar.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.icePillar.14.desc"), 14, "icepillar/a1-stonepillar-greekbottomgreek");
                 blockIcePillar.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.icePillar.15.desc"), 15, "icepillar/a1-stonepillar-plainbottomgreek");
-                blockIcePillar.carverHelper.register(blockIcePillar, "icePillar");
-                Carving.chisel.setGroupClass("icePillar", "ice");
+                blockIcePillar.carverHelper.register(blockIcePillar, "ice_pillar");
+                Carving.chisel.setGroupClass("ice_pillar", "ice");
             }
 
             if(Configurations.featureEnabled("iceStairs"))
@@ -758,18 +758,19 @@ public class ChiselBlocks
                     {
                         return new BlockMarbleIceStairs(block, meta, helper);
                     }
-                }, "chisel.iceStairs");
+                }, "ice_stairs");
             }
         }
 
         if(Configurations.featureEnabled("wood"))
         {
-            String[] plank_names = {"oak", "spruce", "birch", "jungle", "acacia", "dark-oak"};
+            String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
             String[] plank_ucnames = {"Oak", "Spruce", "Birch", "Jungle", "Acacia", "Dark Oak"};
             for(int i = 0; i < 6; i++)
             {
                 String n = plank_names[i];
                 String u = plank_ucnames[i];
+                final String orename = n.replace('-', '_') + "_planks";
 
                 blockPlanks[i] = (BlockCarvable) (new BlockCarvable()).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood);
                 blockPlanks[i].carverHelper.setChiselBlockName(u + " Wood Planks");
@@ -791,12 +792,12 @@ public class ChiselBlocks
                     blockPlanks[i].carverHelper.addVariation(u + " wood planks in disarray", 14, "planks-" + n + "/chaotic-hor");
                     blockPlanks[i].carverHelper.addVariation("Vertical " + n + " wood planks in disarray", 15, "planks-" + n + "/chaotic");
                 }
-                blockPlanks[i].carverHelper.register(blockPlanks[i], "wood-" + n);
-                Carving.chisel.addVariation("wood-" + n, Blocks.planks, i, 0);
+                blockPlanks[i].carverHelper.register(blockPlanks[i], orename);
+                Carving.chisel.addVariation(orename, Blocks.planks, i, 0);
                 Blocks.planks.setHarvestLevel("chisel", 0, i);
                 blockPlanks[i].setHarvestLevel("axe", 0);
 
-                Carving.chisel.setVariationSound("wood-" + n, Chisel.MOD_ID+":chisel.wood");
+                Carving.chisel.setVariationSound(orename, Chisel.MOD_ID+":chisel.wood");
             }
         }
 
@@ -820,13 +821,13 @@ public class ChiselBlocks
             blockObsidian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.obsidian.14.desc"), 14, "obsidian/greek");
             blockObsidian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.obsidian.15.desc"), 15, "obsidian/crate");
             blockObsidian.carverHelper.register(blockObsidian, "obsidian");
-            Carving.chisel.registerOre("obsidian", "blockObsidian");
+            Carving.chisel.registerOre("obsidian", "obsidian");
         }
 
         if(Configurations.featureEnabled("snakestoneObsidian"))
         {
             blockObsidianSnakestone = (BlockSnakestoneObsidian) new BlockSnakestoneObsidian("Chisel:snakestone/obsidian/").setBlockName("obsidianSnakestone").setHardness(50.0F).setResistance(2000.0F);
-            GameRegistry.registerBlock(blockObsidianSnakestone, ItemCarvable.class, blockObsidianSnakestone.getUnlocalizedName());
+            GameRegistry.registerBlock(blockObsidianSnakestone, ItemCarvable.class, "obsidian_snakestone");
             //LanguageRegistry.addName(new ItemStack(blockObsidianSnakestone, 1, 1), "Obsidian snakestone head");
             //LanguageRegistry.addName(new ItemStack(blockObsidianSnakestone, 1, 13), "Obsidian snakestone body");
             Carving.chisel.addVariation("obsidian", blockObsidianSnakestone, 1, 16);
@@ -836,7 +837,7 @@ public class ChiselBlocks
         if(Configurations.featureEnabled("ironBars"))
         {
             blockPaneIron = (BlockCarvablePane) new BlockCarvablePane(Material.iron, true).setHardness(0.3F).setStepSound(Block.soundTypeMetal);
-            Carving.chisel.addVariation("fenceIron", Blocks.iron_bars, 0, 0);
+            Carving.chisel.addVariation("iron_bars", Blocks.iron_bars, 0, 0);
             blockPaneIron.carverHelper.addVariation("Iron bars without frame", 1, "ironpane/fenceIron");
             blockPaneIron.carverHelper.addVariation("Menacing iron bars", 2, "ironpane/barbedwire");
             blockPaneIron.carverHelper.addVariation("Iron cage bars", 3, "ironpane/cage");
@@ -846,13 +847,13 @@ public class ChiselBlocks
             blockPaneIron.carverHelper.addVariation("Ornate iron pane fence", 7, "ironpane/terrain-glass-ornatesteel");
             blockPaneIron.carverHelper.addVariation("Vertical iron bars", 8, "ironpane/bars");
             blockPaneIron.carverHelper.addVariation("Iron spikes", 9, "ironpane/spikes");
-            blockPaneIron.carverHelper.register(blockPaneIron, "fenceIron");
+            blockPaneIron.carverHelper.register(blockPaneIron, "iron_bars");
         }
 
         if(Configurations.featureEnabled("glassPane"))
         {
             blockPaneGlass = (BlockCarvablePane) new BlockCarvablePane(Material.glass, false).setHardness(0.3F).setStepSound(Block.soundTypeGlass);
-            Carving.chisel.addVariation("glassPane", Blocks.glass_pane, 0, 0);
+            Carving.chisel.addVariation("glass_pane", Blocks.glass_pane, 0, 0);
             blockPaneGlass.carverHelper.addVariation("Bubble glass pane", 1, "glasspane/terrain-glassbubble");
             blockPaneGlass.carverHelper.addVariation("Borderless glass pane", 2, "glasspane/terrain-glassnoborder");
             blockPaneGlass.carverHelper.addVariation("Screen pane", 3, "glasspane/terrain-glass-screen");
@@ -861,13 +862,13 @@ public class ChiselBlocks
             blockPaneGlass.carverHelper.addVariation("Chinese glass pane with golden frame", 13, "glasspane/chinese2");
             blockPaneGlass.carverHelper.addVariation("Japanese glass pane", 14, "glasspane/japanese");
             blockPaneGlass.carverHelper.addVariation("Ornate japanese glass pane", 15, "glasspane/japanese2");
-            blockPaneGlass.carverHelper.register(blockPaneGlass, "glassPane");
+            blockPaneGlass.carverHelper.register(blockPaneGlass, "glass_pane");
         }
 
         if(Configurations.featureEnabled("redstoneBlock"))
         {
             blockRedstone = (BlockCarvablePowered) (new BlockCarvablePowered(Material.iron)).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
-            Carving.chisel.addVariation("blockRedstone", Blocks.redstone_block, 0, 0);
+            Carving.chisel.addVariation("redstone_block", Blocks.redstone_block, 0, 0);
             blockRedstone.carverHelper.addVariation("Smooth redstone", 1, "redstone/smooth");
             blockRedstone.carverHelper.addVariation("Large redstone block", 2, "redstone/block");
             blockRedstone.carverHelper.addVariation("Small redstone blocks", 3, "redstone/blocks");
@@ -883,8 +884,8 @@ public class ChiselBlocks
             blockRedstone.carverHelper.addVariation("Redstone supaplex circuit", 13, "redstone/supaplex");
             blockRedstone.carverHelper.addVariation("Redstone skulls", 14, "redstone/a1-blockredstone-skullred");
             blockRedstone.carverHelper.addVariation("Redstone Zelda block", 15, "redstone/a1-blockredstone-redstonezelda");
-            blockRedstone.carverHelper.register(blockRedstone, "blockRedstone");
-            Carving.chisel.registerOre("blockRedstone", "blockRedstone");
+            blockRedstone.carverHelper.register(blockRedstone, "redstone_block");
+            Carving.chisel.registerOre("redstone_block", "blockRedstone");
         }
 
         if(Configurations.featureEnabled("holystone"))
@@ -904,9 +905,9 @@ public class ChiselBlocks
             blockHolystone.carverHelper.addVariation("Fancy holystone tiles", 11, "holystone/fancy-tiles");
             blockHolystone.carverHelper.addVariation("Smooth holystone plate", 12, "holystone/plate");
             blockHolystone.carverHelper.addVariation("Holystone plate", 13, "holystone/plate-rough");
-            blockHolystone.carverHelper.register(blockHolystone, "blockHolystone");
+            blockHolystone.carverHelper.register(blockHolystone, "holystone");
             OreDictionary.registerOre("blockHolystone", blockHolystone);
-            Carving.chisel.registerOre("blockHolystone", "blockHolystone");
+            Carving.chisel.registerOre("holystone", "blockHolystone");
         }
 
         if(Configurations.featureEnabled("lavastone"))
@@ -919,9 +920,9 @@ public class ChiselBlocks
             blockLavastone.carverHelper.addVariation("Lava creeper in tiles", 4, "lavastone/creeper");
             blockLavastone.carverHelper.addVariation("Lava panel", 5, "lavastone/panel");
             blockLavastone.carverHelper.addVariation("Ornate lava panel", 6, "lavastone/panel-ornate");
-            blockLavastone.carverHelper.register(blockLavastone, "blockLavastone");
+            blockLavastone.carverHelper.register(blockLavastone, "lavastone");
             OreDictionary.registerOre("blockLavastone", blockLavastone);
-            Carving.chisel.registerOre("blockLavastone", "blockLavastone");
+            Carving.chisel.registerOre("lavastone", "blockLavastone");
         }
 
         if(Configurations.featureEnabled("fantasy"))
@@ -944,9 +945,9 @@ public class ChiselBlocks
             blockFft.carverHelper.addVariation("Fantasy block", 13, "fft/block");
             blockFft.carverHelper.addVariation("Fantasy bricks in disarray", 14, "fft/bricks-chaotic");
             blockFft.carverHelper.addVariation("Weared fantasy bricks", 15, "fft/bricks-wear");
-            blockFft.carverHelper.register(blockFft, "blockFft");
+            blockFft.carverHelper.register(blockFft, "fantasyblock");
             OreDictionary.registerOre("blockFft", blockFft);
-            Carving.chisel.registerOre("blockFft", "blockFft");
+            Carving.chisel.registerOre("fantasyblock", "blockFft");
         }
 
         if(Configurations.featureEnabled("carpet"))
@@ -970,9 +971,9 @@ public class ChiselBlocks
             blockCarpet.carverHelper.addVariation("Red carpet block", 14, "carpet/red");
             blockCarpet.carverHelper.addVariation("Black carpet block", 15, "carpet/black");
             blockCarpet.carverHelper.forbidChiseling = true;
-            blockCarpet.carverHelper.register(blockCarpet, "blockCarpet");
+            blockCarpet.carverHelper.register(blockCarpet, "carpet_block");
             OreDictionary.registerOre("blockCarpet", blockCarpet);
-            Carving.chisel.registerOre("blockCarpet", "blockCarpet");
+            Carving.chisel.registerOre("carpet_block", "blockCarpet");
         }
 
         if(Configurations.featureEnabled("carpetFloor"))
@@ -996,7 +997,7 @@ public class ChiselBlocks
             blockCarpetFloor.carverHelper.addVariation("Red carpet", 14, "carpet/red");
             blockCarpetFloor.carverHelper.addVariation("Black carpet", 15, "carpet/black");
             blockCarpetFloor.carverHelper.forbidChiseling = true;
-            blockCarpetFloor.carverHelper.register(blockCarpetFloor, "blockCarpetFloor");
+            blockCarpetFloor.carverHelper.register(blockCarpetFloor, "carpet");
 
             for(int i = 0; i < 16; i++)
             {
@@ -1011,7 +1012,7 @@ public class ChiselBlocks
         if(Configurations.featureEnabled("bookshelf"))
         {
             blockBookshelf = (BlockCarvable) new BlockMarbleBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood);
-            Carving.chisel.addVariation("blockBookshelf", Blocks.bookshelf, 0, 0);
+            Carving.chisel.addVariation("bookshelf", Blocks.bookshelf, 0, 0);
             blockBookshelf.carverHelper.addVariation("Bookshelf with rainbow colored books", 1, "bookshelf/rainbow");
             blockBookshelf.carverHelper.addVariation("Necromancer novice's bookshelf", 2, "bookshelf/necromancer-novice");
             blockBookshelf.carverHelper.addVariation("Necromancer's bookshelf", 3, "bookshelf/necromancer");
@@ -1020,9 +1021,9 @@ public class ChiselBlocks
             blockBookshelf.carverHelper.addVariation("Hoarder's bookshelf", 6, "bookshelf/hoarder");
             blockBookshelf.carverHelper.addVariation("Bookshelf filled to brim with boring pastel books", 7, "bookshelf/brim");
             blockBookshelf.carverHelper.addVariation("Historician's bookshelf", 8, "bookshelf/historician");
-            blockBookshelf.carverHelper.register(blockBookshelf, "blockBookshelf");
+            blockBookshelf.carverHelper.register(blockBookshelf, "bookshelf");
             blockBookshelf.setHarvestLevel("axe", 0);
-            Carving.chisel.registerOre("blockBookshelf", "blockBookshelf");
+            Carving.chisel.registerOre("bookshelf", "bookshelf");
         }
 
         if(Configurations.featureEnabled("futuristicArmorPlating"))
@@ -1045,9 +1046,9 @@ public class ChiselBlocks
             blockTyrian.carverHelper.addVariation("Black futuristic armor plating tiles", 13, "tyrian/black2");
             blockTyrian.carverHelper.addVariation("Black futuristic armor plating block with an opening", 14, "tyrian/opening");
             blockTyrian.carverHelper.addVariation("Futuristic armor plating with shining metal bits", 15, "tyrian/plate");
-            blockTyrian.carverHelper.register(blockTyrian, "blockTyrian");
+            blockTyrian.carverHelper.register(blockTyrian, "tyrian");
             OreDictionary.registerOre("blockTyrian", blockTyrian);
-            Carving.chisel.registerOre("blockTyrian", "blockTyrian");
+            Carving.chisel.registerOre("tyrian", "blockTyrian");
         }
 
 
@@ -1071,7 +1072,7 @@ public class ChiselBlocks
             blockTemple.carverHelper.addVariation("Small temple tiles", 13, "temple/smalltiles");
             blockTemple.carverHelper.addVariation("Light temple tiles", 14, "temple/tiles-light");
             blockTemple.carverHelper.addVariation("Small light temple tiles", 15, "temple/smalltiles-light");
-            blockTemple.carverHelper.register(blockTemple, "blockTemple");
+            blockTemple.carverHelper.register(blockTemple, "templeblock");
 
             if(Configurations.featureEnabled("templeBlockMossy"))
             {
@@ -1093,7 +1094,7 @@ public class ChiselBlocks
                 blockTempleMossy.carverHelper.addVariation("Small mossy temple tiles", 13, "templemossy/smalltiles");
                 blockTempleMossy.carverHelper.addVariation("Light mossy temple tiles", 14, "templemossy/tiles-light");
                 blockTempleMossy.carverHelper.addVariation("Small light mossy  temple tiles", 15, "templemossy/smalltiles-light");
-                blockTempleMossy.carverHelper.register(blockTempleMossy, "blockTempleMossy");
+                blockTempleMossy.carverHelper.register(blockTempleMossy, "mossy_templeblock");
             }
         }
 
@@ -1101,15 +1102,15 @@ public class ChiselBlocks
         {
             blockCloud = (BlockCloud) new BlockCloud().setHardness(0.2F).setLightOpacity(3).setStepSound(Block.soundTypeCloth);
             blockCloud.carverHelper.addVariation("Cloud block", 0, "cloud/cloud");
-            blockCloud.carverHelper.register(blockCloud, "blockCloud");
-            OreDictionary.registerOre("blockCloud", blockCloud);
-            Carving.chisel.registerOre("blockCloud", "blockCloud");
+            blockCloud.carverHelper.register(blockCloud, "cloud");
+            OreDictionary.registerOre("cloud", blockCloud);
+            Carving.chisel.registerOre("cloud", "cloud");
         }
 
         if(Configurations.featureEnabled("factory"))
         {
             blockFactory = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
-            blockFactory.carverHelper.setChiselBlockName("blockFactory");
+            blockFactory.carverHelper.setChiselBlockName("factoryblock");
             blockFactory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockFactory.0.desc"), 0, "factory/dots");
             blockFactory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockFactory.1.desc"), 1, "factory/rust2");
             blockFactory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockFactory.2.desc"), 2, "factory/rust");
@@ -1126,7 +1127,7 @@ public class ChiselBlocks
             blockFactory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockFactory.13.desc"), 13, "factory/plating");
             blockFactory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockFactory.14.desc"), 14, "factory/rustplates");
             blockFactory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockFactory.15.desc"), 15, "factory/column");
-            blockFactory.carverHelper.register(blockFactory, "blockFactory");
+            blockFactory.carverHelper.register(blockFactory, "factoryblock");
         }
 
         // 1.7! Let's go! Let's go-go!
@@ -1140,7 +1141,7 @@ public class ChiselBlocks
 
         if(Configurations.featureEnabled("glassStained")) for(int i = 0; i < 16; i++)
         {
-            String blockName = "chisel.stainedGlass" + sGNames[i].replaceAll(" ", "");
+            final String blockName = "stained_glass_" + sGNames[i].replaceAll(" ", "").toLowerCase();
             String oreName = "stainedGlass" + sGNames[i].replaceAll(" ", "");
             String texName = "glassdyed/" + sGNames[i].toLowerCase().replaceAll(" ", "") + "-";
             int glassPrefix = (i & 3) << 2;
@@ -1168,7 +1169,7 @@ public class ChiselBlocks
 
         if(Configurations.featureEnabled("glassStainedPane")) for(int i = 0; i < 16; i++)
         {
-            String blockName = "chisel.stainedGlassPane" + sGNames[i].replaceAll(" ", "");
+            final String blockName = "stained_glass_pane_" + sGNames[i].replaceAll(" ", "").toLowerCase();
             String oreName = "stainedGlassPane" + sGNames[i].replaceAll(" ", "");
             String texName = "glasspanedyed/" + sGNames[i].toLowerCase().replaceAll(" ", "") + "-";
             Carving.chisel.addVariation(blockName, Blocks.stained_glass_pane, i, 0);
@@ -1210,7 +1211,7 @@ public class ChiselBlocks
             blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.7.desc"), 7, "paper/plain");
             blockPaperwall.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.paperwall.8.desc"), 8, "paper/door");
 
-            blockPaperwall.carverHelper.register(blockPaperwall, "blockPaperwall");
+            blockPaperwall.carverHelper.register(blockPaperwall, "paperwall");
 
         }
 
@@ -1221,7 +1222,7 @@ public class ChiselBlocks
 
             for(int i = 0; i < 16; i++)
                 blockWoolenClay.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.woolenClay." + i + ".desc"), i, "woolenClay/" + sGNames[i].replaceAll(" ", "").toLowerCase());
-            blockWoolenClay.carverHelper.register(blockWoolenClay, "blockWoolenClay");
+            blockWoolenClay.carverHelper.register(blockWoolenClay, "woolen_clay");
 
 
         }
@@ -1229,7 +1230,7 @@ public class ChiselBlocks
         if(Configurations.featureEnabled("laboratory"))
         {
             blockLaboratory = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
-            blockLaboratory.carverHelper.setChiselBlockName("blockLaboratory");
+            blockLaboratory.carverHelper.setChiselBlockName("laboratoryblock");
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.0.desc"), 0, "laboratory/wallpanel");
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.1.desc"), 1, "laboratory/dottedpanel");
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.2.desc"), 2, "laboratory/largewall");
@@ -1246,10 +1247,9 @@ public class ChiselBlocks
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.13.desc"), 13, "laboratory/directionright");
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.14.desc"), 14, "laboratory/directionleft");
             blockLaboratory.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.blockLaboratory.15.desc"), 15, "laboratory/infocon");
-            blockLaboratory.carverHelper.register(blockLaboratory, "blockLaboratory");
+            blockLaboratory.carverHelper.register(blockLaboratory, "laboratoryblock");
         }
 
         Blocks.stone.setHarvestLevel("chisel", 0, 0);
     }
-
 }

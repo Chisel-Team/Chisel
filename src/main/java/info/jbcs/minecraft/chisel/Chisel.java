@@ -74,6 +74,8 @@ public class Chisel
     @EventHandler
     public void missingMapping(FMLMissingMappingsEvent event)
     {
+        BlockNameConversion.init();
+
         for(MissingMapping m : event.get())
         {
             // This bug was introduced along with Chisel 1.5.2, and was fixed in 1.5.3.
@@ -87,14 +89,7 @@ public class Chisel
             // Fix mapping of snakestoneSand, snakestoneStone, limestoneStairs, marbleStairs when loading an old (1.5.4) save
             else if(m.type == Type.BLOCK)
             {
-                Block block = null;
-
-                if(General.cleanTags(m.name).equals("sandSnakestone"))
-                    block = GameRegistry.findBlock(Chisel.MOD_ID, "tile.snakestoneSand");
-                else if(General.cleanTags(m.name).equals("snakestone"))
-                    block = GameRegistry.findBlock(Chisel.MOD_ID, "tile.snakestoneStone");
-                else
-                    block = GameRegistry.findBlock(Chisel.MOD_ID, General.cleanTags(m.name));
+                final Block block = BlockNameConversion.findBlock(m.name);
 
                 if(block != null)
                 {
@@ -104,14 +99,7 @@ public class Chisel
                     FMLLog.getLogger().warn("Block " + m.name + " could not get remapped.");
             } else if(m.type == Type.ITEM)
             {
-                Item item = null;
-
-                if(General.cleanTags(m.name).equals("sandSnakestone"))
-                    item = GameRegistry.findItem(Chisel.MOD_ID, "tile.snakestoneSand");
-                else if(General.cleanTags(m.name).equals("snakestone"))
-                    item = GameRegistry.findItem(Chisel.MOD_ID, "tile.snakestoneStone");
-                else
-                    item = GameRegistry.findItem(Chisel.MOD_ID, General.cleanTags(m.name));
+                final Item item = BlockNameConversion.findItem(m.name);
 
                 if(item != null)
                 {
@@ -149,7 +137,7 @@ public class Chisel
         {
             itemCloudInABottle = (ItemCloudInABottle) new ItemCloudInABottle().setTextureName("Chisel:cloudinabottle").setCreativeTab(CreativeTabs.tabTools);
             EntityRegistry.registerModEntity(EntityCloudInABottle.class, "CloudInABottle", 1, this, 40, 1, true);
-            GameRegistry.registerItem(itemCloudInABottle, "chisel.cloudinabottle");
+            GameRegistry.registerItem(itemCloudInABottle, "cloudinabottle");
         }
 
         if(Configurations.featureEnabled("ballOfMoss"))

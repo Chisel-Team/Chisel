@@ -290,7 +290,7 @@ public class CarvableHelper
     void registerBlock(Block block, String name, Class cl)
     {
         block.setBlockName(name);
-        GameRegistry.registerBlock(block, cl, "chisel." + name);
+        GameRegistry.registerBlock(block, cl, name);
         chiselBlocks.add(block);
     }
 
