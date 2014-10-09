@@ -1,7 +1,7 @@
 # Key localizations
 
 # Item localizations
-item.chisel.name=치즐
+item.chisel.name=정
 item.ballMoss.name=이끼 공
 item.cloudBottle.name=구름이 들어있는 유리병
 
@@ -282,7 +282,7 @@ chisel.tile.snakestoneObsidian.name=뱀 모양 옵시디언
 tile.glass.name=유리
 chisel.tile.glass.1.desc=Bubble Glass
 chisel.tile.glass.2.desc=중국산 유리
-chisel.tile.glass.3.desc=일본산(?) 유리
+chisel.tile.glass.3.desc=일본풍 유리
 chisel.tile.glass.4.desc=던전 유리
 chisel.tile.glass.5.desc=밝은 유리
 chisel.tile.glass.6.desc=Borderless Glass
@@ -334,7 +334,7 @@ chisel.tile.blockConcrete.10.desc=Asphalt
 tile.roadLine.name=Road Lines
 
 #Iron Blocks
-tile.iron.name=Iron Block
+tile.iron.name=철 블럭
 chisel.tile.iron.1.desc=Large Iron Ingots
 chisel.tile.iron.2.desc=Small Iron Ingots
 chisel.tile.iron.3.desc=Iron Gears
@@ -352,7 +352,7 @@ chisel.tile.iron.14.desc=Iron Vents
 chisel.tile.iron.15.desc=Simple Iron Block
 
 #Gold Blocks
-tile.gold.name=Gold Block
+tile.gold.name=금 블럭
 chisel.tile.gold.1.desc=Large Golden Ingots
 chisel.tile.gold.2.desc=Small Golden Ingots
 chisel.tile.gold.3.desc=Golden Bricks
@@ -369,7 +369,7 @@ chisel.tile.gold.13.desc=Golden Star in Obsidian
 chisel.tile.gold.14.desc=Simple Gold Block
 
 #Glowstone
-tile.lightstone.name=Glowstone
+tile.lightstone.name=발광석
 chisel.tile.lightstone.1.desc=Cobble Glowstone Block
 chisel.tile.lightstone.2.desc=Corroded Glowstone Blocks
 chisel.tile.lightstone.3.desc=Glowstone Blocks with Glass
@@ -387,7 +387,7 @@ chisel.tile.lightstone.14.desc=Glowstone Bismuth
 chisel.tile.lightstone.15.desc=Glowstone Bismuth Panel
 
 #Lapis blocks
-tile.lapis.name=Lapis Block
+tile.lapis.name=라피스 블럭
 chisel.tile.lapis.1.desc=Chunky Lapis Block
 chisel.tile.lapis.2.desc=Dark Lapis Block
 chisel.tile.lapis.3.desc=Zelda Lapis Block
@@ -398,7 +398,7 @@ chisel.tile.lapis.7.desc=Smooth Lapis
 chisel.tile.lapis.8.desc=Lapis with Ornate Layer
 
 #Emerald Blocks
-tile.emerald.name=Emerald Block
+tile.emerald.name=에메랄드 블럭
 chisel.tile.emerald.1.desc=Emerald Panel
 chisel.tile.emerald.2.desc=Classic emerald Panel
 chisel.tile.emerald.3.desc=Smooth Emerald
@@ -412,7 +412,7 @@ chisel.tile.emerald.10.desc=Small Ornate Emerald Blocks
 chisel.tile.emerald.11.desc=Ornate Emerald Block
 
 #Nether Brick
-tile.netherBrick.name=Nether Brick
+tile.netherBrick.name=네더벽돌
 chisel.tile.netherBrick.1.desc=Blue Nether Brick
 chisel.tile.netherBrick.2.desc=Spattered Nether Brick
 chisel.tile.netherBrick.3.desc=Nether Brick made of Guts
@@ -430,7 +430,7 @@ chisel.tile.netherBrick.14.desc=Red Nether Brick
 chisel.tile.netherBrick.15.desc=Small Red Nether Brick
 
 #Netherrack
-tile.hellrock.name=Netherrack
+tile.hellrock.name=네더랙
 chisel.tile.hellrock.1.desc=Nethergravel with Blood
 chisel.tile.hellrock.2.desc=Netherrack with Blood
 chisel.tile.hellrock.3.desc=Darker Netherrack with Blood
@@ -447,7 +447,7 @@ chisel.tile.hellrock.13.desc=Dark Red Netherrack
 chisel.tile.hellrock.14.desc=Netherrack with Flowing Lava
 
 #Mossy Stone
-tile.stoneMoss.name=Mossy Cobblestone
+tile.stoneMoss.name=이끼 낀 조약돌
 chisel.tile.stoneMoss.1.desc=Aligned Mossy Cobblestone Bricks
 chisel.tile.stoneMoss.2.desc=Detailed Mossy Cobblestone Bricks
 chisel.tile.stoneMoss.3.desc=Small Mossy Cobblestone Bricks
@@ -465,7 +465,7 @@ chisel.tile.stoneMoss.14.desc=Mossy Cobblestone with Light Panel
 chisel.tile.stoneMoss.15.desc=Mossy Cobblestone with Dark Panel
 
 #Stone Bricks
-tile.stoneBrick.name=Stone Bricks
+tile.stoneBrick.name=석재벽돌
 chisel.tile.stoneBrick.4.desc=Small Stone Bricks
 chisel.tile.stoneBrick.5.desc=Wide Stone Bricks
 chisel.tile.stoneBrick.6.desc=Small Disordered Stone Bricks
@@ -480,7 +480,7 @@ chisel.tile.stoneBrick.14.desc=Ornate Stone Panel
 chisel.tile.stoneBrick.15.desc=Poison Stone Brick
 
 #Dirt
-tile.blockDirt.name=Dirt
+tile.blockDirt.name=흙
 chisel.tile.blockDirt.0.desc=Dirt Bricks in Disarray
 chisel.tile.blockDirt.1.desc=Dirt Bricks Imitating Nether Brick Design
 chisel.tile.blockDirt.2.desc=Dirt Bricks
@@ -496,7 +496,7 @@ chisel.tile.blockDirt.11.desc=Dirt Layers
 chisel.tile.blockDirt.12.desc=Crumbling Dirt
 
 #Ice
-tile.ice.name=Ice
+tile.ice.name=얼음
 chisel.tile.ice.1.desc=Rough Ice Block
 chisel.tile.ice.2.desc=Cobble-ice
 chisel.tile.ice.3.desc=Large Rough Ice Bricks
@@ -514,7 +514,7 @@ chisel.tile.ice.14.desc=Ice Bismuth Block
 chisel.tile.ice.15.desc=Ice Poison Block
 
 #Ice Pillars
-tile.icePillar.name=Ice Pillar
+tile.icePillar.name=얼음 기둥
 chisel.tile.icePillar.0.desc=Ice Pillar
 chisel.tile.icePillar.1.desc=Ice Pillar Capstone
 chisel.tile.icePillar.2.desc=Ice Pillar Base
@@ -532,19 +532,19 @@ chisel.tile.icePillar.13.desc=Plain Ice Pillar Ornate Capstone
 chisel.tile.icePillar.14.desc=Greek Ice Pillar Ornate Base
 chisel.tile.icePillar.15.desc=Plain Ice Pillar Ornate Base
 
-#Ice Stairs
-tile.iceStairs.name=Ice Stairs
-tile.iceStairs.0.name=Ice Stairs
-tile.iceStairs.1.name=Ice Stairs
-tile.iceStairs.2.name=Ice Stairs
-tile.iceStairs.3.name=Ice Stairs
-tile.iceStairs.4.name=Ice Stairs
-tile.iceStairs.5.name=Ice Stairs
-tile.iceStairs.6.name=Ice Stairs
-tile.iceStairs.7.name=Ice Stairs
-tile.iceStairs.0.desc=Ice Stairs
-chisel.tile.iceStairs.1.desc=Rough Ice Stairs
-chisel.tile.iceStairs.2.desc=Cobble-ice Stairs
+#스태인드 글라스
+tile.iceStairs.name=얼음 계단
+tile.iceStairs.0.name=얼음 계단
+tile.iceStairs.1.name=얼음 계단
+tile.iceStairs.2.name=얼음 계단
+tile.iceStairs.3.name=얼음 계단
+tile.iceStairs.4.name=얼음 계단
+tile.iceStairs.5.name=얼음 계단
+tile.iceStairs.6.name=얼음 계단
+tile.iceStairs.7.name=얼음 계단
+tile.iceStairs.0.desc=얼음 계단
+chisel.tile.iceStairs.1.desc=Rough 스태인드 글라스
+chisel.tile.iceStairs.2.desc=Cobble-스태인드 글라스
 chisel.tile.iceStairs.3.desc=Large rough Ice Brick Stairs
 chisel.tile.iceStairs.4.desc=Large Ice Brick Stairs
 chisel.tile.iceStairs.5.desc=Small Ice Brick Stairs
@@ -560,7 +560,7 @@ chisel.tile.iceStairs.14.desc=Ice Bismuth Stairs
 chisel.tile.iceStairs.15.desc=Ice Poison Stairs
 
 #Obsidian
-tile.obsidian.name=Obsidian
+tile.obsidian.name=흑요석
 chisel.tile.obsidian.1.desc=Large Obsidian Pillar
 chisel.tile.obsidian.2.desc=Obsidian Pillar
 chisel.tile.obsidian.3.desc=Chiseled Obsidian
@@ -578,7 +578,7 @@ chisel.tile.obsidian.14.desc=Light Obsidian Blocks with Greek Decor
 chisel.tile.obsidian.15.desc=Small Obsidian Blocks inside an Oak Wood Crate
 
 #Wood
-tile.wood-oak.name=Oak Wood
+tile.wood-oak.name=참나무
 chisel.tile.wood-birch.name=Birch Wood
 chisel.tile.wood-spruce.name=Spruce Wood
 chisel.tile.wood-jungle.name=Jungle Wood
@@ -588,13 +588,13 @@ chisel.tile.wood-acacia.name=Acacia Wood
 #Remember to do the descriptions.
 
 #Iron Fence
-tile.fenceIron=Iron Bars
+tile.fenceIron=철창
 
 #Glass Panes
-tile.glassPane=Glass Pane
+tile.glassPane=유리판
 
 #Redstone block
-tile.blockRedstone.name=Redstone Block
+tile.blockRedstone.name=레드스톤 블럭
 
 #Holystone
 tile.blockHolystone.name=Holystone
@@ -603,13 +603,13 @@ tile.blockHolystone.name=Holystone
 tile.blockLavastone.name=Lavastone
 
 #Carpet
-tile.blockCarpet.name=Carpet
+tile.blockCarpet.name=카펫
 
 #Carpet floor
 tile.blockCarpetFloor.name=Floor Carpet
 
 #Bookshelf
-tile.blockBookshelf.name=Bookshelf
+tile.blockBookshelf.name=책장
 
 #Tyrian
 tile.blockTyrian.name=Tyrian
@@ -621,50 +621,50 @@ tile.blockTemple.name=Temple Block
 tile.blockTempleMossy.name=Mossy Temple Block
 
 #Cloud
-tile.blockCloud.name=Cloud
+tile.blockCloud.name=구름
 
 #Stained glass T.T
-tile.stainedGlassWhite.name=Stained Glass
-tile.stainedGlassOrange.name=Stained Glass
-tile.stainedGlassMagenta.name=Stained Glass
-tile.stainedGlassLightBlue.name=Stained Glass
-tile.stainedGlassYellow.name=Stained Glass
-tile.stainedGlassLime.name=Stained Glass
-tile.stainedGlassPink.name=Stained Glass
-tile.stainedGlassGray.name=Stained Glass
-tile.stainedGlassLightGray.name=Stained Glass
-tile.stainedGlassCyan.name=Stained Glass
-tile.stainedGlassPurple.name=Stained Glass
-tile.stainedGlassBlue.name=Stained Glass
-tile.stainedGlassBrown.name=Stained Glass
-tile.stainedGlassGreen.name=Stained Glass
-tile.stainedGlassRed.name=Stained Glass
-tile.stainedGlassBlack.name=Stained Glass
+tile.stainedGlassWhite.name=스태인드 글라스
+tile.stainedGlassOrange.name=스태인드 글라스
+tile.stainedGlassMagenta.name=스태인드 글라스
+tile.stainedGlassLightBlue.name=스태인드 글라스
+tile.stainedGlassYellow.name=스태인드 글라스
+tile.stainedGlassLime.name=스태인드 글라스
+tile.stainedGlassPink.name=스태인드 글라스
+tile.stainedGlassGray.name=스태인드 글라스
+tile.stainedGlassLightGray.name=스태인드 글라스
+tile.stainedGlassCyan.name=스태인드 글라스
+tile.stainedGlassPurple.name=스태인드 글라스
+tile.stainedGlassBlue.name=스태인드 글라스
+tile.stainedGlassBrown.name=스태인드 글라스
+tile.stainedGlassGreen.name=스태인드 글라스
+tile.stainedGlassRed.name=스태인드 글라스
+tile.stainedGlassBlack.name=스태인드 글라스
 
-#Stained GlassPane T.T
-tile.stainedGlassPaneWhite.name=Stained Glass Pane
-tile.stainedGlassPaneOrange.name=Stained Glass Pane
-tile.stainedGlassPaneMagenta.name=Stained Glass Pane
-tile.stainedGlassPaneLightBlue.name=Stained Glass Pane
-tile.stainedGlassPaneYellow.name=Stained Glass Pane
-tile.stainedGlassPaneLime.name=Stained Glass Pane
-tile.stainedGlassPanePink.name=Stained Glass Pane
-tile.stainedGlassPaneGray.name=Stained Glass Pane
-tile.stainedGlassPaneLightGray.name=Stained Glass Pane
-tile.stainedGlassPaneCyan.name=Stained Glass Pane
-tile.stainedGlassPanePurple.name=Stained Glass Pane
-tile.stainedGlassPaneBlue.name=Stained Glass Pane
-tile.stainedGlassPaneBrown.name=Stained Glass Pane
-tile.stainedGlassPaneGreen.name=Stained Glass Pane
-tile.stainedGlassPaneRed.name=Stained Glass Pane
-tile.stainedGlassPaneBlack.name=Stained Glass Pane
+#Stained Pane T.T
+tile.stainedGlassPaneWhite.name=스태인드 글라스 판
+tile.stainedGlassPaneOrange.name=스태인드 글라스 판
+tile.stainedGlassPaneMagenta.name=스태인드 글라스 판
+tile.stainedGlassPaneLightBlue.name=스태인드 글라스 판
+tile.stainedGlassPaneYellow.name=스태인드 글라스 판
+tile.stainedGlassPaneLime.name=스태인드 글라스 판
+tile.stainedGlassPanePink.name=스태인드 글라스 판
+tile.stainedGlassPaneGray.name=스태인드 글라스 판
+tile.stainedGlassPaneLightGray.name=스태인드 글라스 판
+tile.stainedGlassPaneCyan.name=스태인드 글라스 판
+tile.stainedGlassPanePurple.name=스태인드 글라스 판
+tile.stainedGlassPaneBlue.name=스태인드 글라스 판
+tile.stainedGlassPaneBrown.name=스태인드 글라스 판
+tile.stainedGlassPaneGreen.name=스태인드 글라스 판
+tile.stainedGlassPaneRed.name=스태인드 글라스 판
+tile.stainedGlassPaneBlack.name=스태인드 글라스 판
 
 
 #Fantasy block
-tile.blockFft.name=Fantasy Block
+tile.blockFft.name=환상 블럭
 
 #Paperwall
-tile.blockPaperwall.name=Paperwall
+tile.blockPaperwall.name=종이벽
 chisel.tile.paperwall.0.desc=Boxed Paperwall
 chisel.tile.paperwall.1.desc=Middle Striked Paperwall
 chisel.tile.paperwall.2.desc=Crossed Paperwall
