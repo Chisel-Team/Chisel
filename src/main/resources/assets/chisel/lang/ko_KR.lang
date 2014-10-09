@@ -532,7 +532,7 @@ chisel.tile.icePillar.13.desc=Plain Ice Pillar Ornate Capstone
 chisel.tile.icePillar.14.desc=Greek Ice Pillar Ornate Base
 chisel.tile.icePillar.15.desc=Plain Ice Pillar Ornate Base
 
-#스태인드 글라스
+#Ice Stairs
 tile.iceStairs.name=얼음 계단
 tile.iceStairs.0.name=얼음 계단
 tile.iceStairs.1.name=얼음 계단
@@ -641,7 +641,7 @@ tile.stainedGlassGreen.name=스태인드 글라스
 tile.stainedGlassRed.name=스태인드 글라스
 tile.stainedGlassBlack.name=스태인드 글라스
 
-#Stained Pane T.T
+#Stained GlassPane T.T
 tile.stainedGlassPaneWhite.name=스태인드 글라스 판
 tile.stainedGlassPaneOrange.name=스태인드 글라스 판
 tile.stainedGlassPaneMagenta.name=스태인드 글라스 판
