@@ -2,10 +2,6 @@ package info.jbcs.minecraft.chisel.block;
 
 import net.minecraft.world.World;
 
-/**
- * Created by Pokefenn.
- * Licensed under MIT (If this is one of my Mods)
- */
 public class BlockCarvablePumpkin extends BlockCarvable
 {
 

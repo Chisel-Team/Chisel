@@ -5,10 +5,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.carving.Carving;
 
-/**
- * Created by Pokefenn.
- * Licensed under MIT (If this is one of my Mods)
- */
 public class Compatibility
 {
 

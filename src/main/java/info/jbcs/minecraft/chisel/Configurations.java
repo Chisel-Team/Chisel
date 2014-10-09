@@ -2,10 +2,6 @@ package info.jbcs.minecraft.chisel;
 
 import net.minecraftforge.common.config.Configuration;
 
-/**
- * Created by Pokefenn.
- * Licensed under MIT (If this is one of my Mods)
- */
 public class Configurations
 {
     public static Configuration config;

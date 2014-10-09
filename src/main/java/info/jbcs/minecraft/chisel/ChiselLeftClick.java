@@ -19,10 +19,6 @@ import net.minecraftforge.event.world.BlockEvent;
 import java.util.HashMap;
 import java.util.Random;
 
-/**
- * Created by Pokefenn.
- * Licensed under MIT (If this is one of my Mods)
- */
 public class ChiselLeftClick
 {
 

@@ -5,10 +5,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-/**
- * Created by Pokefenn.
- * Licensed under MIT (If this is one of my Mods)
- */
 public class BlockAutoChisel extends BlockContainer
 {
     public BlockAutoChisel()
