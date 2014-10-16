@@ -14,6 +14,15 @@ public class Compatibility
 
         addSupport("ProjRed|Exploration", "projectred.exploration.stone", "marble", 0, 99);
         addSupport("bluepower", "marble", "marble", 0, 99);
+        
+        addSupport("PFAAGeologica", "strongStone", "marble", 5, 99);
+        addSupport("PFAAGeologica", "strongStoneSlab", "marbleSlab", 5, 99);
+        addSupport("PFAAGeologica", "strongStoneBrickStairs.marble", "marbleStairs", 0, 99);
+        addSupport("PFAAGeologica", "mediumStone", "limestone", 0, 99);
+        addSupport("PFAAGeologica", "mediumStoneSlab", "limestoneSlab", 0, 99);
+        addSupport("PFAAGeologica", "mediumStoneBrickStairs.limestone", "limestoneStairs", 0, 99);
+        addSupport("PFAAGeologica", "strongStoneBrick", "stoneBrick", 3, 99);
+        addSupport("PFAAGeologica", "strongCobble", "cobblestone", 3, 99);
     }
 
     public static void addSupport(String modname, String blockname, String name, int metadata, int order)
