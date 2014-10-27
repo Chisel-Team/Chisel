@@ -1,0 +1,721 @@
+# Key localizations
+
+# Item localizations
+item.chisel.name=凿子
+item.ballMoss.name=苔藓球
+item.cloudBottle.name=瓶装云朵
+
+# Block localizations
+# Have fun! ~zombiepig333
+
+#Cobblestone Blocks
+tile.cobblestone.name=圆石
+chisel.tile.cobblestone.0.desc=方正圆石砖
+chisel.tile.cobblestone.1.desc=精雕圆石砖
+chisel.tile.cobblestone.2.desc=细砌圆石砖
+chisel.tile.cobblestone.3.desc=粗砌圆石砖
+chisel.tile.cobblestone.4.desc=细砌圆石花砖
+chisel.tile.cobblestone.5.desc=法式圆石花砖
+chisel.tile.cobblestone.6.desc=法式圆石花砖
+chisel.tile.cobblestone.7.desc=爬行者雕纹花砖
+chisel.tile.cobblestone.8.desc=破损圆石花砖
+chisel.tile.cobblestone.9.desc=光滑圆石花砖
+chisel.tile.cobblestone.10.desc=爬行者凹面圆石砖
+chisel.tile.cobblestone.11.desc=凹面圆石砖
+chisel.tile.cobblestone.12.desc=镶板圆石砖
+chisel.tile.cobblestone.13.desc=浅色镶板圆石砖
+chisel.tile.cobblestone.14.desc=深色镶板圆石砖
+
+#Sandstone Blocks
+tile.sandstone.name=沙石
+
+#Marble Blocks
+tile.marble.name=大理石
+chisel.tile.marble.0.desc=天然大理石
+chisel.tile.marble.1.desc=大理石砖
+chisel.tile.marble.2.desc=古典镶板大理石
+chisel.tile.marble.3.desc=精致镶板大理石
+chisel.tile.marble.4.desc=镶板大理石
+chisel.tile.marble.5.desc=大理石块
+chisel.tile.marble.6.desc=深色爬行者大理石
+chisel.tile.marble.7.desc=浅色爬行者大理石
+chisel.tile.marble.8.desc=雕纹大理石
+chisel.tile.marble.9.desc=径纹大理石
+chisel.tile.marble.10.desc=凹面大理石
+chisel.tile.marble.11.desc=整凹面大理石
+chisel.tile.marble.12.desc=大理石瓷砖
+chisel.tile.marble.13.desc=齐纹大理石瓷砖
+chisel.tile.marble.14.desc=花式大理石瓷砖
+chisel.tile.marble.15.desc=大理石方砖
+
+#Marble slabs
+tile.marble_slab.name=大理石台阶
+chisel.tile.marbleSlab.0.desc=天然大理石台阶
+chisel.tile.marbleSlab.1.desc=大理石砖台阶
+chisel.tile.marbleSlab.2.desc=古典镶板大理石台阶
+chisel.tile.marbleSlab.3.desc=精致镶板大理石台阶
+chisel.tile.marbleSlab.4.desc=镶板大理石台阶
+chisel.tile.marbleSlab.5.desc=大理石块台阶
+chisel.tile.marbleSlab.6.desc=深色爬行者石台阶
+chisel.tile.marbleSlab.7.desc=浅色爬行者石台阶
+chisel.tile.marbleSlab.8.desc=雕纹大理石台阶
+chisel.tile.marbleSlab.9.desc=径纹大理石台阶
+chisel.tile.marbleSlab.10.desc=凹面大理石台阶
+chisel.tile.marbleSlab.11.desc=整凹面大理石台阶
+chisel.tile.marbleSlab.12.desc=大理石瓷砖台阶
+chisel.tile.marbleSlab.13.desc=齐纹大理石瓷砖台阶
+chisel.tile.marbleSlab.14.desc=花式大理石瓷砖台阶
+chisel.tile.marbleSlab.15.desc=大理石方砖台阶
+
+#Marble Pillars (新版已移除)
+tile.marble_pillar.name=大理石柱
+chisel.tile.marblePillarOld.0.desc=Marble Pillar
+chisel.tile.marblePillarOld.1.desc=Marble Pillar Capstone
+chisel.tile.marblePillarOld.2.desc=Marble Pillar Base
+chisel.tile.marblePillarOld.3.desc=Small Marble Pillar
+chisel.tile.marblePillarOld.4.desc=Carved Marble Pillar
+chisel.tile.marblePillarOld.5.desc=Ornamental Marble Pillar
+chisel.tile.marblePillarOld.6.desc=Greek Marble Pillar
+chisel.tile.marblePillarOld.7.desc=Plain Marble Pillar
+chisel.tile.marblePillarOld.8.desc=Greek Marble Pillar Capstone
+chisel.tile.marblePillarOld.9.desc=Plain Marble Pillar Capstone
+chisel.tile.marblePillarOld.10.desc=Greek Marble Pillar Base
+chisel.tile.marblePillarOld.11.desc=Plain Marble Pillar Base
+chisel.tile.marblePillarOld.12.desc=Greek Marble Pillar Ornate Capstone
+chisel.tile.marblePillarOld.13.desc=Plain Marble Pillar Ornate Capstone
+chisel.tile.marblePillarOld.14.desc=Greek Marble Pillar Ornate Base
+chisel.tile.marblePillarOld.15.desc=Plain Marble Pillar Ornate Base
+
+#Marble Pillars (current)
+chisel.tile.marblePillar.0.desc=大理石柱
+chisel.tile.marblePillar.1.desc=原始石柱
+chisel.tile.marblePillar.2.desc=简雕大理石柱
+chisel.tile.marblePillar.3.desc=凸面大理石柱
+chisel.tile.marblePillar.4.desc=粗雕大理石柱
+chisel.tile.marblePillar.5.desc=精雕顶石&希腊式石柱
+chisel.tile.marblePillar.6.desc=希腊式大理石柱
+chisel.tile.marblePillar.7.desc=简朴顶石&希腊式石柱
+chisel.tile.marblePillar.8.desc=精雕顶石&简朴石柱
+chisel.tile.marblePillar.9.desc=希腊式顶石&简朴石柱
+chisel.tile.marblePillar.10.desc=简朴大理石柱
+chisel.tile.marblePillar.11.desc=精雕顶石&宽纹石柱
+chisel.tile.marblePillar.12.desc=希腊式顶石&宽纹石柱
+chisel.tile.marblePillar.13.desc=简朴顶石&宽纹石柱
+chisel.tile.marblePillar.14.desc=錾制顶石
+chisel.tile.marblePillar.15.desc=华饰顶石
+
+#Marble slabs (新版已移除)
+tile.marble_pillar_slab.name=大理石柱台阶
+chisel.tile.marblePillarslabOld.0.desc=Marble Pillar Slab
+chisel.tile.marblePillarslabOld.1.desc=Marble Pllar Capstone Slab
+chisel.tile.marblePillarslabOld.2.desc=Marble Pillar Base Slab
+chisel.tile.marblePillarslabOld.3.desc=Small Marble Pillar Slab
+chisel.tile.marblePillarslabOld.4.desc=Carved Marble Pillar Slab
+chisel.tile.marblePillarslabOld.5.desc=Ornamental Marble Pillar Slab
+chisel.tile.marblePillarslabOld.6.desc=Greek Marble Pillar Slab
+chisel.tile.marblePillarslabOld.7.desc=Plain Marble Pillar Slab
+chisel.tile.marblePillarslabOld.8.desc=Greek Marble Pillar capstone Slab
+chisel.tile.marblePillarslabOld.9.desc=Plain Marble Pillar capstone Slab
+chisel.tile.marblePillarslabOld.10.desc=Greek Marble Pillar Base Slab
+chisel.tile.marblePillarslabOld.11.desc=Plain Marble Pillar Base Slab
+chisel.tile.marblePillarslabOld.12.desc=Greek Marble Pillar ornate capstone Slab
+chisel.tile.marblePillarslabOld.13.desc=Plain Marble Pillar ornate capstone Slab
+chisel.tile.marblePillarslabOld.14.desc=Greek Marble Pillar ornate Base Slab
+chisel.tile.marblePillarslabOld.15.desc=Plain Marble Pillar ornate Base Slab
+
+#Marble slabs (current)
+chisel.tile.marblePillarSlab.0.desc=大理石柱台阶
+chisel.tile.marblePillarSlab.1.desc=原始石柱台阶
+chisel.tile.marblePillarSlab.2.desc=简雕石柱台阶
+chisel.tile.marblePillarSlab.3.desc=凸面石柱台阶
+chisel.tile.marblePillarSlab.4.desc=粗雕石柱台阶
+chisel.tile.marblePillarSlab.5.desc=精雕顶石&希腊式石柱台阶
+chisel.tile.marblePillarSlab.6.desc=希腊式大理石柱台阶
+chisel.tile.marblePillarSlab.7.desc=简朴顶石&希腊式石柱台阶
+chisel.tile.marblePillarSlab.8.desc=精雕顶石&简朴石柱台阶
+chisel.tile.marblePillarSlab.9.desc=希腊式顶石&简朴石柱台阶
+chisel.tile.marblePillarSlab.10.desc=简朴大理石柱台阶
+chisel.tile.marblePillarSlab.11.desc=精雕顶石&宽纹石柱台阶
+chisel.tile.marblePillarSlab.12.desc=希腊式顶石&宽纹石柱台阶
+chisel.tile.marblePillarSlab.13.desc=简朴顶石&宽纹石柱台阶
+chisel.tile.marblePillarSlab.14.desc=錾制顶石台阶
+chisel.tile.marblePillarSlab.15.desc=华饰顶石台阶
+
+#Marble stairs
+#The same name goes here 8 different times since stairs take up 8 block positions.
+#Sorry!  It was the only way!
+chisel.tile.marble_stairs.0.name=大理石楼梯
+chisel.tile.marble_stairs.1.name=大理石楼梯
+chisel.tile.marble_stairs.2.name=大理石楼梯
+chisel.tile.marble_stairs.3.name=大理石楼梯
+chisel.tile.marble_stairs.4.name=大理石楼梯
+chisel.tile.marble_stairs.5.name=大理石楼梯
+chisel.tile.marble_stairs.6.name=大理石楼梯
+chisel.tile.marble_stairs.7.name=大理石楼梯
+
+#These are bugged.... so sad :,(
+chisel.tile.marbleStairs.0.desc=天然大理石楼梯
+chisel.tile.marbleStairs.1.desc=大理石砖楼梯
+chisel.tile.marbleStairs.2.desc=古典镶板大理石楼梯
+chisel.tile.marbleStairs.3.desc=精致镶板大理石楼梯
+chisel.tile.marbleStairs.4.desc=镶板大理石楼梯
+chisel.tile.marbleStairs.5.desc=大理石块楼梯
+chisel.tile.marbleStairs.6.desc=深色爬行者大理石楼梯
+chisel.tile.marbleStairs.7.desc=浅色爬行者大理石楼梯
+chisel.tile.marbleStairs.8.desc=雕纹大理石楼梯
+chisel.tile.marbleStairs.9.desc=径纹大理石楼梯
+chisel.tile.marbleStairs.10.desc=凹面大理石楼梯
+chisel.tile.marbleStairs.11.desc=整凹面大理石楼梯
+chisel.tile.marbleStairs.12.desc=大理石瓷砖楼梯
+chisel.tile.marbleStairs.13.desc=齐纹大理石瓷砖楼梯
+chisel.tile.marbleStairs.14.desc=花式大理石瓷砖楼梯
+chisel.tile.marbleStairs.15.desc=大理石方砖楼梯
+
+#Limestone
+tile.limestone.name=石灰岩
+chisel.tile.limestone.0.desc=石灰岩
+chisel.tile.limestone.1.desc=细砌灰岩花砖
+chisel.tile.limestone.2.desc=法式灰岩花砖
+chisel.tile.limestone.3.desc=法式灰岩花砖
+chisel.tile.limestone.4.desc=爬行者灰岩花砖
+chisel.tile.limestone.5.desc=细砌灰岩砖
+chisel.tile.limestone.6.desc=破损灰岩花砖
+chisel.tile.limestone.7.desc=光滑灰岩
+chisel.tile.limestone.8.desc=精雕镶板灰岩
+chisel.tile.limestone.9.desc=精雕镶板灰岩
+chisel.tile.limestone.10.desc=爬行者镶板灰岩
+chisel.tile.limestone.11.desc=凹面灰岩
+chisel.tile.limestone.12.desc=镶板灰岩
+chisel.tile.limestone.13.desc=粗砌灰岩
+chisel.tile.limestone.14.desc=浅色镶板灰岩
+chisel.tile.limestone.15.desc=深色镶板灰岩
+
+#Limestone slabs
+tile.limestone_slab.name=石灰岩台阶
+chisel.tile.limestoneSlab.0.desc=石灰岩台阶
+chisel.tile.limestoneSlab.1.desc=细砌灰岩花砖台阶
+chisel.tile.limestoneSlab.2.desc=法式灰岩花砖台阶
+chisel.tile.limestoneSlab.3.desc=法式灰岩花砖台阶
+chisel.tile.limestoneSlab.4.desc=爬行者灰岩花砖台阶
+chisel.tile.limestoneSlab.5.desc=细砌灰岩砖台阶
+chisel.tile.limestoneSlab.6.desc=破损灰岩花砖台阶
+chisel.tile.limestoneSlab.7.desc=光滑灰岩台阶
+chisel.tile.limestoneSlab.8.desc=精雕镶板灰岩台阶
+chisel.tile.limestoneSlab.9.desc=精雕镶板灰岩台阶
+chisel.tile.limestoneSlab.10.desc=爬行者镶板灰岩台阶
+chisel.tile.limestoneSlab.11.desc=凹面灰岩台阶
+chisel.tile.limestoneSlab.12.desc=镶板灰岩台阶
+chisel.tile.limestoneSlab.13.desc=粗砌灰岩台阶
+chisel.tile.limestoneSlab.14.desc=浅色镶板灰岩台阶
+chisel.tile.limestoneSlab.15.desc=深色镶板灰岩台阶
+
+#Limestone stairs
+#The same name goes here 8 different times since stairs take up 8 block positions.
+#Sorry!  It was the only way!
+tile.limestone_stairs.0.name=石灰岩楼梯
+tile.limestone_stairs.1.name=石灰岩楼梯
+tile.limestone_stairs.2.name=石灰岩楼梯
+tile.limestone_stairs.3.name=石灰岩楼梯
+tile.limestone_stairs.4.name=石灰岩楼梯
+tile.limestone_stairs.5.name=石灰岩楼梯
+tile.limestone_stairs.6.name=石灰岩楼梯
+tile.limestone_stairs.7.name=石灰岩楼梯
+
+#These are bugged.... so sad :,(
+chisel.tile.limestoneStairs.0.desc=石灰岩楼梯
+chisel.tile.limestoneStairs.1.desc=细砌灰岩花砖楼梯
+chisel.tile.limestoneStairs.2.desc=法式灰岩花砖楼梯
+chisel.tile.limestoneStairs.3.desc=法式灰岩花砖楼梯
+chisel.tile.limestoneStairs.4.desc=爬行者灰岩花砖楼梯
+chisel.tile.limestoneStairs.5.desc=细砌灰岩砖楼梯
+chisel.tile.limestoneStairs.6.desc=破损灰岩花砖楼梯
+chisel.tile.limestoneStairs.7.desc=光滑灰岩楼梯
+chisel.tile.limestoneStairs.8.desc=精雕镶板灰岩楼梯
+chisel.tile.limestoneStairs.9.desc=精雕镶板灰岩楼梯
+chisel.tile.limestoneStairs.10.desc=爬行者镶板灰岩楼梯
+chisel.tile.limestoneStairs.11.desc=凹面灰岩楼梯
+chisel.tile.limestoneStairs.12.desc=镶板灰岩楼梯
+chisel.tile.limestoneStairs.13.desc=粗砌灰岩楼梯
+chisel.tile.limestoneStairs.14.desc=浅色镶板灰岩楼梯
+chisel.tile.limestoneStairs.15.desc=深色镶板灰岩楼梯
+
+#Factory Blocks
+tile.factoryblock.name=工厂方块
+chisel.tile.blockFactory.0.desc=生锈金属块&点状图案
+chisel.tile.blockFactory.1.desc=生锈金属块
+chisel.tile.blockFactory.2.desc=锈蚀金属块
+chisel.tile.blockFactory.3.desc=略锈的金属块
+chisel.tile.blockFactory.4.desc=格栅块
+chisel.tile.blockFactory.5.desc=紫影格栅块
+chisel.tile.blockFactory.6.desc=黄黑相间的警示方块
+chisel.tile.blockFactory.7.desc=橙白相间的警示方块
+chisel.tile.blockFactory.8.desc=精密电路方块
+chisel.tile.blockFactory.9.desc=精致金属盒
+chisel.tile.blockFactory.10.desc=镀金精密电路方块
+chisel.tile.blockFactory.11.desc=镀金紫色生锈方块
+chisel.tile.blockFactory.12.desc=磨光金属建筑方块
+chisel.tile.blockFactory.13.desc=磨损金属墙体&通风口
+chisel.tile.blockFactory.14.desc=生锈金属块
+chisel.tile.blockFactory.15.desc=磨损金属壳
+
+#Diamond blocks
+tile.diamond_block.name=钻石块
+chisel.tile.diamond.1.desc=抛光钻石块
+chisel.tile.diamond.2.desc=镶板钻石块
+chisel.tile.diamond.3.desc=钻石单元块
+chisel.tile.diamond.4.desc=嵌有钻石的紫黑曜石
+chisel.tile.diamond.5.desc=嵌有钻石的黑曜石
+chisel.tile.diamond.6.desc=普通钻石块
+chisel.tile.diamond.7.desc=铋纹钻石块
+chisel.tile.diamond.8.desc=裂纹钻石块
+chisel.tile.diamond.9.desc=钻石方砖
+chisel.tile.diamond.10.desc=精雕钻石方砖
+chisel.tile.diamond.11.desc=塞尔达钻石块
+chisel.tile.diamond.12.desc=金框钻石块
+
+#Snakestone
+tile.snakestoneSand.name=蛇纹沙石
+tile.snakestoneStone.name=蛇纹石头
+tile.obsidianSnakestone.name=蛇纹黑曜石
+
+#Glass blocks
+tile.glass.name=玻璃
+chisel.tile.glass.1.desc=凸面玻璃
+chisel.tile.glass.2.desc=中式窗棂
+chisel.tile.glass.3.desc=日式窗格
+chisel.tile.glass.4.desc=地牢玻璃
+chisel.tile.glass.5.desc=亮色玻璃
+chisel.tile.glass.6.desc=无边框玻璃
+chisel.tile.glass.7.desc=精致钢化玻璃
+chisel.tile.glass.8.desc=屏风
+chisel.tile.glass.9.desc=页状玻璃
+chisel.tile.glass.10.desc=钢框玻璃
+chisel.tile.glass.11.desc=石框玻璃
+chisel.tile.glass.12.desc=条痕玻璃
+chisel.tile.glass.13.desc=粗格栅玻璃
+chisel.tile.glass.14.desc=细格栅玻璃
+chisel.tile.glass.15.desc=现代式铁栅栏
+
+#Sandstone
+tile.sandstone.name=沙石
+chisel.tile.sandstone.3.desc=褪色沙石
+chisel.tile.sandstone.4.desc=沙石柱
+chisel.tile.sandstone.5.desc=沙石柱顶石
+chisel.tile.sandstone.6.desc=小块錾制沙石柱
+chisel.tile.sandstone.7.desc=沙石柱基石
+chisel.tile.sandstone.8.desc=光滑又平坦的沙石
+chisel.tile.sandstone.9.desc=光滑沙石柱顶石
+chisel.tile.sandstone.10.desc=小块錾制光滑沙石柱
+chisel.tile.sandstone.11.desc=光滑沙石柱基石
+chisel.tile.sandstone.12.desc=沙石方砖
+chisel.tile.sandstone.13.desc=小块錾制沙石方砖
+chisel.tile.sandstone.14.desc=镶嵌錾制沙石
+chisel.tile.sandstone.15.desc=层叠錾制沙石
+
+#Sandstone scribbles
+tile.sandstone_scribbles.name=刻文沙石
+chisel.tile.sandstoneScribbles.desc=刻文沙石
+
+#Concrete
+tile.concrete.name=混凝土
+chisel.tile.blockConcrete.0.desc=混凝土
+chisel.tile.blockConcrete.1.desc=混凝土块
+chisel.tile.blockConcrete.2.desc=双层混凝土台阶
+chisel.tile.blockConcrete.3.desc=混凝土方砖
+chisel.tile.blockConcrete.4.desc=风化混凝土
+chisel.tile.blockConcrete.5.desc=风化混凝土块
+chisel.tile.blockConcrete.6.desc=风化双层混凝土台阶
+chisel.tile.blockConcrete.7.desc=风化混凝土方砖
+chisel.tile.blockConcrete.8.desc=局部风化的混凝土
+chisel.tile.blockConcrete.9.desc=局部风化的混凝土块
+chisel.tile.blockConcrete.10.desc=沥青
+
+#Road Line
+tile.roadLine.name=道路标线
+
+#Iron Blocks
+tile.iron_block.name=铁块
+chisel.tile.iron.1.desc=大块铁锭
+chisel.tile.iron.2.desc=小块铁锭
+chisel.tile.iron.3.desc=铁齿轮
+chisel.tile.iron.4.desc=铁砖
+chisel.tile.iron.5.desc=铁板
+chisel.tile.iron.6.desc=有锚钉的铁板
+chisel.tile.iron.7.desc=正面朝上的铁币堆
+chisel.tile.iron.8.desc=正面朝下的铁币堆
+chisel.tile.iron.9.desc=深色铁货箱
+chisel.tile.iron.10.desc=浅色铁货箱
+chisel.tile.iron.11.desc=月牙装饰的铁块
+chisel.tile.iron.12.desc=有铁月牙的紫黑曜石
+chisel.tile.iron.13.desc=有铁月牙的黑曜石
+chisel.tile.iron.14.desc=铁制通风口
+chisel.tile.iron.15.desc=普通的铁块
+
+#Gold Blocks
+tile.gold_block.name=金块
+chisel.tile.gold.1.desc=大块金块
+chisel.tile.gold.2.desc=小块金块
+chisel.tile.gold.3.desc=金砖
+chisel.tile.gold.4.desc=金矿车
+chisel.tile.gold.5.desc=正面朝上的金币堆
+chisel.tile.gold.6.desc=正面朝下的金币堆
+chisel.tile.gold.7.desc=暗色金盖板条箱
+chisel.tile.gold.8.desc=亮色金盖板条箱
+chisel.tile.gold.9.desc=金板
+chisel.tile.gold.10.desc=有锚钉的金板
+chisel.tile.gold.11.desc=月牙装饰的金块
+chisel.tile.gold.12.desc=有金月牙的紫黑曜石
+chisel.tile.gold.13.desc=有金月牙的黑曜石
+chisel.tile.gold.14.desc=普通的金块
+
+#Glowstone
+tile.glowstone.name=萤石
+chisel.tile.lightstone.1.desc=圆石纹萤石
+chisel.tile.lightstone.2.desc=被腐蚀的萤石砖
+chisel.tile.lightstone.3.desc=玻璃萤石砖
+chisel.tile.lightstone.4.desc=霓虹萤石
+chisel.tile.lightstone.5.desc=精雕萤石砖
+chisel.tile.lightstone.6.desc=岩状萤石
+chisel.tile.lightstone.7.desc=页状萤石
+chisel.tile.lightstone.8.desc=萤石花砖
+chisel.tile.lightstone.9.desc=精致的萤石灯笼
+chisel.tile.lightstone.10.desc=破碎的萤石
+chisel.tile.lightstone.11.desc=有机生长的萤石
+chisel.tile.lightstone.12.desc=层状萤石
+chisel.tile.lightstone.13.desc=被腐蚀的萤石花砖
+chisel.tile.lightstone.14.desc=铋纹萤石
+chisel.tile.lightstone.15.desc=铋纹镶板萤石
+
+#Lapis blocks
+tile.lapis_block.name=青金石块
+chisel.tile.lapis.1.desc=厚实的青金石块
+chisel.tile.lapis.2.desc=深色青金石块
+chisel.tile.lapis.3.desc=塞尔达青金石块
+chisel.tile.lapis.4.desc=精雕青金石块
+chisel.tile.lapis.5.desc=青金石花砖
+chisel.tile.lapis.6.desc=镶板青金石块
+chisel.tile.lapis.7.desc=光滑青金石块
+chisel.tile.lapis.8.desc=金框青金石块
+
+#Emerald Blocks
+tile.emerald_block.name=绿宝石块
+chisel.tile.emerald.1.desc=板面绿宝石块
+chisel.tile.emerald.2.desc=经典板面绿宝石块
+chisel.tile.emerald.3.desc=光滑绿宝石块
+chisel.tile.emerald.4.desc=碎纹绿宝石块
+chisel.tile.emerald.5.desc=金框绿宝石块
+chisel.tile.emerald.6.desc=塞尔达绿宝石块
+chisel.tile.emerald.7.desc=绿宝石单元块
+chisel.tile.emerald.8.desc=铋纹绿宝石块
+chisel.tile.emerald.9.desc=绿宝石方砖
+chisel.tile.emerald.10.desc=精雕绿宝石方砖
+chisel.tile.emerald.11.desc=精雕绿宝石块
+
+#Nether Brick
+tile.nether_brick.name=地狱砖
+chisel.tile.netherBrick.1.desc=蓝色地狱砖
+chisel.tile.netherBrick.2.desc=污秽的地狱砖
+chisel.tile.netherBrick.3.desc=用内脏砌成的地狱砖
+chisel.tile.netherBrick.4.desc=用内脏砌成的暗色地狱砖
+chisel.tile.netherBrick.5.desc=用小块内脏砌成的暗色地狱砖
+chisel.tile.netherBrick.6.desc=流着岩浆的蓝色地狱砖
+chisel.tile.netherBrick.7.desc=棕色地狱砖
+chisel.tile.netherBrick.8.desc=黑曜石质地狱砖
+chisel.tile.netherBrick.9.desc=石质地狱砖
+chisel.tile.netherBrick.10.desc=用肉做的地狱砖
+chisel.tile.netherBrick.11.desc=用肉做的赤红色地狱砖
+chisel.tile.netherBrick.12.desc=用小块肉做的地狱砖
+chisel.tile.netherBrick.13.desc=用小块肉做的红色地狱砖
+chisel.tile.netherBrick.14.desc=红色地狱砖
+chisel.tile.netherBrick.15.desc=小块錾制红色地狱砖
+
+#Netherrack
+tile.netherrack.name=地狱岩
+chisel.tile.hellrock.1.desc=沾有血迹的下界砂砾
+chisel.tile.hellrock.2.desc=沾有血迹的地狱岩
+chisel.tile.hellrock.3.desc=沾有血迹的暗色下界砂砾
+chisel.tile.hellrock.4.desc=蓝色地狱岩
+chisel.tile.hellrock.5.desc=页状蓝色地狱
+chisel.tile.hellrock.6.desc=经典地狱岩
+chisel.tile.hellrock.7.desc=污秽的地狱岩
+chisel.tile.hellrock.8.desc=用内脏砌成的地狱岩
+chisel.tile.hellrock.9.desc=用内脏砌成的暗色地狱岩
+chisel.tile.hellrock.10.desc=用肉做的地狱岩
+chisel.tile.hellrock.11.desc=用肉做的赤红色地狱岩
+chisel.tile.hellrock.12.desc=用小块肉做的地狱岩
+chisel.tile.hellrock.13.desc=深红色地狱岩
+chisel.tile.hellrock.14.desc=流着岩浆的地狱岩
+
+#Mossy Stone
+tile.mossy_cobblestone.name=苔石
+chisel.tile.stoneMoss.1.desc=整齐錾制苔石砖
+chisel.tile.stoneMoss.2.desc=精致錾制苔石砖
+chisel.tile.stoneMoss.3.desc=小块錾制苔石砖
+chisel.tile.stoneMoss.4.desc=大块錾制苔石瓷砖
+chisel.tile.stoneMoss.5.desc=小块錾制苔石瓷砖
+chisel.tile.stoneMoss.6.desc=法式苔石瓷砖
+chisel.tile.stoneMoss.7.desc=法式苔石瓷砖
+chisel.tile.stoneMoss.8.desc=爬行者錾制苔石瓷砖
+chisel.tile.stoneMoss.9.desc=损坏的苔石瓷砖
+chisel.tile.stoneMoss.10.desc=整面錾制苔石瓷砖
+chisel.tile.stoneMoss.11.desc=爬行者镶板苔石瓷砖
+chisel.tile.stoneMoss.12.desc=凹面苔石瓷砖
+chisel.tile.stoneMoss.13.desc=镶板苔石瓷砖
+chisel.tile.stoneMoss.14.desc=亮色镶板苔石瓷砖
+chisel.tile.stoneMoss.15.desc=暗色镶板苔石瓷砖
+
+#Stone Bricks
+tile.stonebrick.name=石砖
+chisel.tile.stoneBrick.4.desc=小块錾制石砖
+chisel.tile.stoneBrick.5.desc=大块錾制石砖
+chisel.tile.stoneBrick.6.desc=小杂石砖
+chisel.tile.stoneBrick.7.desc=大杂石砖
+chisel.tile.stoneBrick.8.desc=镶板杂石砖
+chisel.tile.stoneBrick.9.desc=光滑整齐的石砖
+chisel.tile.stoneBrick.10.desc=精致的石瓷砖
+chisel.tile.stoneBrick.11.desc=大块的精致石瓷砖
+chisel.tile.stoneBrick.12.desc=整面錾制石砖
+chisel.tile.stoneBrick.13.desc=凹面石砖
+chisel.tile.stoneBrick.14.desc=精致的镶板石砖
+chisel.tile.stoneBrick.15.desc=罪恶的石砖
+
+#Dirt
+tile.dirt.name=泥土
+chisel.tile.blockDirt.0.desc=杂乱堆叠的泥砖
+chisel.tile.blockDirt.1.desc=模仿地狱砖设计的泥砖
+chisel.tile.blockDirt.2.desc=泥砖
+chisel.tile.blockDirt.3.desc=圆石状泥砖
+chisel.tile.blockDirt.4.desc=加固圆石状泥砖
+chisel.tile.blockDirt.5.desc=加固泥土
+chisel.tile.blockDirt.6.desc=快乐灵魂泥土
+chisel.tile.blockDirt.7.desc=大块錾制泥土
+chisel.tile.blockDirt.8.desc=覆盖着泥土的大块錾制泥土
+chisel.tile.blockDirt.9.desc=水平花纹泥土
+chisel.tile.blockDirt.10.desc=垂直花纹泥土
+chisel.tile.blockDirt.11.desc=页状泥土
+chisel.tile.blockDirt.12.desc=破碎的泥土
+
+#Ice
+tile.ice.name=冰
+chisel.tile.ice.1.desc=粗糙錾制的冰砖
+chisel.tile.ice.2.desc=圆石状冰
+chisel.tile.ice.3.desc=大块粗糙錾制的冰砖
+chisel.tile.ice.4.desc=大块錾制的冰砖
+chisel.tile.ice.5.desc=小块錾制的冰砖
+chisel.tile.ice.6.desc=光滑的冰砖墙
+chisel.tile.ice.7.desc=大块錾制的冰瓷砖
+chisel.tile.ice.8.desc=光滑的冰瓷砖
+chisel.tile.ice.9.desc=凹面冰瓷砖
+chisel.tile.ice.10.desc=杂乱砌成的冰瓷砖
+chisel.tile.ice.11.desc=整面錾制的冰砖
+chisel.tile.ice.12.desc=双层冰台阶
+chisel.tile.ice.13.desc=塞尔达冰块
+chisel.tile.ice.14.desc=铋合金冰块
+chisel.tile.ice.15.desc=罪恶的冰块
+
+#Ice Pillars
+tile.ice_pillar.name=冰柱
+chisel.tile.icePillar.0.desc=冰柱
+chisel.tile.icePillar.1.desc=冰柱顶块
+chisel.tile.icePillar.2.desc=冰柱基座
+chisel.tile.icePillar.3.desc=小块錾制的冰柱
+chisel.tile.icePillar.4.desc=精致錾制的冰柱
+chisel.tile.icePillar.5.desc=漂亮的冰柱
+chisel.tile.icePillar.6.desc=希腊式冰柱
+chisel.tile.icePillar.7.desc=简朴的冰柱
+chisel.tile.icePillar.8.desc=希腊式冰柱顶块
+chisel.tile.icePillar.9.desc=简朴的冰柱顶块
+chisel.tile.icePillar.10.desc=希腊式冰柱基座
+chisel.tile.icePillar.11.desc=简朴的冰柱基座
+chisel.tile.icePillar.12.desc=希腊式冰柱 & 精致的柱顶块
+chisel.tile.icePillar.13.desc=简朴的冰柱 & 精致的柱顶块
+chisel.tile.icePillar.14.desc=希腊式冰柱 & 精致的柱基座
+chisel.tile.icePillar.15.desc=简朴的冰柱 & 精致的柱基座
+
+#Ice stairs
+tile.ice_stairs.name=冰楼梯
+tile.ice_stairs.0.name=冰楼梯
+tile.ice_stairs.1.name=冰楼梯
+tile.ice_stairs.2.name=冰楼梯
+tile.ice_stairs.3.name=冰楼梯
+tile.ice_stairs.4.name=冰楼梯
+tile.ice_stairs.5.name=冰楼梯
+tile.ice_stairs.6.name=冰楼梯
+tile.ice_stairs.7.name=冰楼梯
+chisel.tile.iceStairs.0.desc=冰楼梯
+chisel.tile.iceStairs.1.desc=粗糙錾制的楼梯
+chisel.tile.iceStairs.2.desc=圆石状楼梯
+chisel.tile.iceStairs.3.desc=大块粗糙錾制的冰砖楼梯
+chisel.tile.iceStairs.4.desc=大块錾制的冰砖楼梯
+chisel.tile.iceStairs.5.desc=小块錾制的冰砖楼梯
+chisel.tile.iceStairs.6.desc=光滑的冰砖楼梯
+chisel.tile.iceStairs.7.desc=大块錾制的冰瓷砖楼梯
+chisel.tile.iceStairs.8.desc=光滑的冰瓷砖楼梯
+chisel.tile.iceStairs.9.desc=凹面冰瓷砖楼梯
+chisel.tile.iceStairs.10.desc=杂乱砌成的冰瓷砖楼梯
+chisel.tile.iceStairs.11.desc=整面錾制楼梯
+chisel.tile.iceStairs.12.desc=双层冰台阶搭建的楼梯
+chisel.tile.iceStairs.13.desc=塞尔达冰楼梯
+chisel.tile.iceStairs.14.desc=铋合金冰楼梯
+chisel.tile.iceStairs.15.desc=罪恶的冰楼梯
+
+#Obsidian
+tile.obsidian.name=黑曜石
+chisel.tile.obsidian.1.desc=大块錾制的黑曜石柱
+chisel.tile.obsidian.2.desc=黑曜石柱
+chisel.tile.obsidian.3.desc=錾制黑曜石柱
+chisel.tile.obsidian.4.desc=明亮的黑曜石柱
+chisel.tile.obsidian.5.desc=镶板的黑曜石
+chisel.tile.obsidian.6.desc=有机黑曜石块
+chisel.tile.obsidian.7.desc=有机生长黑曜石块
+chisel.tile.obsidian.8.desc=黑曜石水晶
+chisel.tile.obsidian.9.desc=镶上地图的黑曜石
+chisel.tile.obsidian.10.desc=镶上某个地域地图的黑曜石
+chisel.tile.obsidian.11.desc=有光泽的镶板黑曜石
+chisel.tile.obsidian.12.desc=黑曜石方砖
+chisel.tile.obsidian.13.desc=黑曜石瓷砖
+chisel.tile.obsidian.14.desc=有希腊装饰图案的亮色黑曜石
+chisel.tile.obsidian.15.desc=装在板条箱中的小块錾制黑曜石
+
+#Wood
+tile.oak_planks.name=橡木
+tile.birch_planks.name=白桦木
+tile.spruce_planks.name=云杉木
+tile.jungle_planks.name=从林木
+tile.dark_oak_planks.name=深色橡木
+tile.acacia_planks.name=金合欢木
+
+#Remember to do the descriptions.
+
+#Iron Fence
+tile.iron_bars.name=铁栅栏
+
+#Glass Panes
+tile.glass_pane.name=玻璃板
+
+#Redstone block
+tile.redstone_block.name=红石块
+
+#Holystone
+tile.holystone.name=磨石
+
+#Lavastone
+tile.lavastone.name=熔岩石
+
+#Carpet
+tile.carpet_block.name=毯子
+
+#Carpet floor
+tile.carpet.name=地毯
+
+#Bookshelf
+tile.bookshelf.name=书架
+
+#Tyrian
+tile.tyrian.name=提尔石砖
+
+#Temple
+tile.templeblock.name=神庙石砖
+
+#Temple Mossy
+tile.mossy_templeblock.name=神庙苔石砖
+
+#Cloud
+tile.cloud.name=云朵
+
+#Stained glass T.T
+tile.stained_glass_white.name=染色玻璃
+tile.stained_glass_orange.name=染色玻璃
+tile.stained_glass_magenta.name=染色玻璃
+tile.stained_glass_lightBlue.name=染色玻璃
+tile.stained_glass_yellow.name=染色玻璃
+tile.stained_glass_lime.name=染色玻璃
+tile.stained_glass_pink.name=染色玻璃
+tile.stained_glass_gray.name=染色玻璃
+tile.stained_glass_lightgray.name=染色玻璃
+tile.stained_glass_cyan.name=染色玻璃
+tile.stained_glass_purple.name=染色玻璃
+tile.stained_glass_blue.name=染色玻璃
+tile.stained_glass_brown.name=染色玻璃
+tile.stained_glass_green.name=染色玻璃
+tile.stained_glass_red.name=染色玻璃
+tile.stained_glass_black.name=染色玻璃
+
+#Stained GlassPane T.T
+tile.stained_glass_pane_white.name=染色玻璃板
+tile.stained_glass_pane_orange.name=染色玻璃板
+tile.stained_glass_pane_magenta.name=染色玻璃板
+tile.stained_glass_pane_lightBlue.name=染色玻璃板
+tile.stained_glass_pane_yellow.name=染色玻璃板
+tile.stained_glass_pane_lime.name=染色玻璃板
+tile.stained_glass_pane_pink.name=染色玻璃板
+tile.stained_glass_pane_gray.name=染色玻璃板
+tile.stained_glass_pane_lightgray.name=染色玻璃板
+tile.stained_glass_pane_cyan.name=染色玻璃板
+tile.stained_glass_pane_purple.name=染色玻璃板
+tile.stained_glass_pane_blue.name=染色玻璃板
+tile.stained_glass_pane_brown.name=染色玻璃板
+tile.stained_glass_pane_green.name=染色玻璃板
+tile.stained_glass_pane_red.name=染色玻璃板
+tile.stained_glass_pane_black.name=染色玻璃板
+
+#Fantasy block
+tile.fantasyblock.name=幻想石砖
+
+#Paperwall
+tile.paperwall.name=障子
+chisel.tile.paperwall.0.desc=方框障子
+chisel.tile.paperwall.1.desc=二等分障子
+chisel.tile.paperwall.2.desc=四等分障子
+chisel.tile.paperwall.3.desc=六等分障子
+chisel.tile.paperwall.4.desc=垂直框障子
+chisel.tile.paperwall.5.desc=水平框障子
+chisel.tile.paperwall.6.desc=花卉图案障子
+chisel.tile.paperwall.7.desc=空白障子
+chisel.tile.paperwall.8.desc=障子门
+
+#Woolen Clay
+tile.woolen_clay.name=羊毛粘土
+chisel.tile.woolenClay.0.desc=白色羊毛粘土
+chisel.tile.woolenClay.1.desc=橙色色羊毛粘土
+chisel.tile.woolenClay.2.desc=品红色羊毛粘土
+chisel.tile.woolenClay.3.desc=淡蓝色羊毛粘土
+chisel.tile.woolenClay.4.desc=黄色羊毛粘土
+chisel.tile.woolenClay.5.desc=黄绿色羊毛粘土
+chisel.tile.woolenClay.6.desc=粉红色羊毛粘土
+chisel.tile.woolenClay.7.desc=灰色羊毛粘土
+chisel.tile.woolenClay.8.desc=淡灰色羊毛粘土
+chisel.tile.woolenClay.9.desc=青色羊毛粘土
+chisel.tile.woolenClay.10.desc=紫色羊毛粘土
+chisel.tile.woolenClay.11.desc=蓝色羊毛粘土
+chisel.tile.woolenClay.12.desc=棕色羊毛粘土
+chisel.tile.woolenClay.13.desc=绿色羊毛粘土
+chisel.tile.woolenClay.14.desc=红色羊毛粘土
+chisel.tile.woolenClay.15.desc=黑色羊毛粘土
+
+#Laboratory Block
+tile.laboratoryblock.name=实验室方块
+chisel.tile.blockLaboratory.0.desc=墙板
+chisel.tile.blockLaboratory.1.desc=点状花纹墙板
+chisel.tile.blockLaboratory.2.desc=珐琅墙
+chisel.tile.blockLaboratory.3.desc=圆形图案珐琅墙
+chisel.tile.blockLaboratory.4.desc=珐琅墙通风口
+chisel.tile.blockLaboratory.5.desc=大块珐琅瓷砖
+chisel.tile.blockLaboratory.6.desc=小块珐琅瓷砖
+chisel.tile.blockLaboratory.7.desc=实验室地板
+chisel.tile.blockLaboratory.8.desc=棋盘格地板
+chisel.tile.blockLaboratory.9.desc=透晰屏幕
+chisel.tile.blockLaboratory.10.desc=毛面屏幕
+chisel.tile.blockLaboratory.11.desc=大块钢地砖
+chisel.tile.blockLaboratory.12.desc=小块钢地砖
+chisel.tile.blockLaboratory.13.desc=方向控制台 (右)
+chisel.tile.blockLaboratory.14.desc=方向控制台 (左)
+chisel.tile.blockLaboratory.15.desc=信息控制台
+
+# Creative Tab localizations
+itemGroup.tabChisel=凿工艺|方块
+
+#Container
+container.chisel=凿子
+container.chisel.title=錾制方块
+container.chisel.titleShort=錾制

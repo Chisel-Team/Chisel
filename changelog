@@ -1,0 +1,92 @@
+1.5.7:
+Added the Laboratory block, a fancy new block added by GravitasShortfall
+Fixed issues with left clicking with the Chisel, thanks to Lordmau5/Konata
+Some locale things added so its not all only english.
+Fixes issues with crafting with sandstone blocks.
+Potentially fixes a issue with marble/limestone generation on multiplayer.
+
+1.5.6b
+Fixed ice pillar crafting issue.
+Sounds work now.
+Bluepower support for marble (Haven't tested due to time issues <,<)
+Project Red support for marble fixed.
+Fixed the config for the Chisel crafting recipe.
+
+1.5.6a
+Correct render for Lavastone.
+Stained Glass can now be made.
+Waila for block descriptions (Thanks to Parker8283 for the PR :3 )
+Fixed configuration for world generation
+
+1.5.6
+Woolen Clay, textures by the all mighty shoop :)
+Japanese Paperwalls! Textures by Sayomi_Inoue
+Config for allowing you to create mossy brick from stone.
+Maybe I'm trying to confuse you again?
+
+1.5.5a
+Fixed the unintended feature of crashing on servers.
+Maybe a secret hidden? Or i just feel like messing with you.
+
+1.5.5
+Major parts of this update is brought to you by Zombiepig333, so go thank him :)
+Config for the amount of factory blocks you get.
+Half done locale support (For some block descriptions and the names)
+Works on 1.7.10 now, no crashes from AABB changes.
+Few bug fixes.
+
+1.5.4g
+Fixed the latest crash with random items in the chisel inventory, will require Forge 1126 or above now.
+Fixed dirt blocks being able to give you blocks with no texture, this will shift the metadata in world, though!
+Few derps with the crafting stuff, now uses FMLs implementation of it.
+
+1.5.4f
+Fixed a crash with the latest forge, you will now need to use the latest recommended :)
+Recipe for the road marker thingy.
+Fixed the dirt block issues.
+PR from anti334 that changes how the connected textures working, making them work better.
+
+1.5.4e
+Fixed the issue of glowstone dropping the wrong metadata.
+Added in gregs suggestion of gem/metal blocks being usable in beacon bases
+
+1.5.4d
+Fixed a derp with nether brick not being carvable, thanks to Soaryn for finding that derp :P
+
+1.5.4c
+Fixed a crash bug with Carpenter's Blocks.
+Updated compatibility with Mariculture.
+
+1.5.4b
+Fixed a small issue, thanks to tambry, this is the problem of taking over mods >.>
+
+1.5.4a:
+Lavastone now emits light.
+Fixed issue with slabs, they can't be placed on the top of a block, will rewrite them soon.
+Noticed weird version issues >.>
+Fixed minor bugs
+Removed redundant System.out.println
+Smashing Rock is there, without texture and uncraftable, just ignore it for now :)
+
+1.5.4:
+Fixed a few crashes client side with the Moss and Cloud projectile.
+Removed AsieLib dependancy.
+Added in a config option for cloud rendering.
+Fixed a few misc bugs.
+
+Asies changes:
+
+1.5.3 (18 March 2014)
+Added: Far more config-level configurability for the mod's available features and behaviour.
+Changed: The config format. Cleaned it up a bit. Watch out!
+Fixed: Marble stairs and limestone stairs now work!
+Fixed: Partially attempted to fix the “left-click-with-chisel to make block disappear” bug.
+1.5.2 (17 March 2014)
+Added: Chiselable Stained Glass and Stained Glass Panes.
+Changed: Textures are now compressed with pngout, cutting the mod's size from 4MB to 2.1MB - an almost 50% reduction!
+Changed: The internal mod-specific names used in the GameRegistry. worlds saved with Chisel 1.5.1 will *not* be compatible, and worlds saved with Minecraft 1.6.4 and below probably will not convert perfectly as well, but this was done for the better - mod collisions could've and would've happened otherwise.
+Fixed: NPE with certain blocks' rendering.
+1.5.1 (16 March 2014)
+Ported to Minecraft 1.7.2.
+Added: Support for Acacia and Dark Oak planks.
+Removed: Overriding vanilla blocks.

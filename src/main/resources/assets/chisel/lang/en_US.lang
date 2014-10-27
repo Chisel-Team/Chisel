@@ -1,0 +1,721 @@
+# Key localizations
+
+# Item localizations
+item.chisel.name=Chisel
+item.ballMoss.name=Ball O' Moss
+item.cloudBottle.name=Cloud In A Bottle
+
+# Block localizations
+# Have fun! ~zombiepig333
+
+#Cobblestone Blocks
+tile.cobblestone.name=Cobblestone
+chisel.tile.cobblestone.0.desc=Aligned Cobblestone Bricks
+chisel.tile.cobblestone.1.desc=Detailed Cobblestone Bricks
+chisel.tile.cobblestone.2.desc=Small Cobblestone Bricks
+chisel.tile.cobblestone.3.desc=Large Cobblestone Tiles
+chisel.tile.cobblestone.4.desc=Small Cobblestone Tiles
+chisel.tile.cobblestone.5.desc=French Cobblestone Tiles
+chisel.tile.cobblestone.6.desc=French Cobblestone Tiles
+chisel.tile.cobblestone.7.desc=Creeper Cobblestone Tiles
+chisel.tile.cobblestone.8.desc=Damaged Cobblestone Tiles
+chisel.tile.cobblestone.9.desc=Huge Cobblestone Tiles
+chisel.tile.cobblestone.10.desc=Cobblestone with Creeper Panel
+chisel.tile.cobblestone.11.desc=Cobblestone with Dent
+chisel.tile.cobblestone.12.desc=Cobblestone with Panel
+chisel.tile.cobblestone.13.desc=Cobblestone with Light Panel
+chisel.tile.cobblestone.14.desc=Cobblestone with Dark Panel
+
+#Sandstone Blocks
+tile.sandstone.name=Sandstone
+
+#Marble Blocks
+tile.marble.name=Marble
+chisel.tile.marble.0.desc=Raw Marble
+chisel.tile.marble.1.desc=Marble Brick
+chisel.tile.marble.2.desc=Classic Marble Panel
+chisel.tile.marble.3.desc=Ornate Marble Panel
+chisel.tile.marble.4.desc=Marble Panel
+chisel.tile.marble.5.desc=Marble Block
+chisel.tile.marble.6.desc=Dark Creeper Marble
+chisel.tile.marble.7.desc=Light Creeper Marble
+chisel.tile.marble.8.desc=Carved Marble
+chisel.tile.marble.9.desc=Radial Carved Marble
+chisel.tile.marble.10.desc=Marble with Dent
+chisel.tile.marble.11.desc=Marble with Large Dent
+chisel.tile.marble.12.desc=Marble Tiles
+chisel.tile.marble.13.desc=Arranged Marble Tiles
+chisel.tile.marble.14.desc=Fancy Marble Tiles
+chisel.tile.marble.15.desc=Marble Blocks
+
+#Marble Slabs
+tile.marble_slab.name=Marble Slab
+chisel.tile.marbleSlab.0.desc=Raw Marble Slab
+chisel.tile.marbleSlab.1.desc=Marble Brick Slab
+chisel.tile.marbleSlab.2.desc=Classic Marble Panel Slab
+chisel.tile.marbleSlab.3.desc=Ornate Marble Panel Slab
+chisel.tile.marbleSlab.4.desc=Marble Panel Slab
+chisel.tile.marbleSlab.5.desc=Marble Block Slab
+chisel.tile.marbleSlab.6.desc=Dark Creeper Marble Slab
+chisel.tile.marbleSlab.7.desc=Light Creeper Marble Slab
+chisel.tile.marbleSlab.8.desc=Carved Marble Slab
+chisel.tile.marbleSlab.9.desc=Radial Carved Marble Slab
+chisel.tile.marbleSlab.10.desc=Marble Slab with Dent
+chisel.tile.marbleSlab.11.desc=Marble Slab with Large Dent
+chisel.tile.marbleSlab.12.desc=Marble Tiled Slab
+chisel.tile.marbleSlab.13.desc=Arranged Marble Tiled Slab
+chisel.tile.marbleSlab.14.desc=Fancy Marble Tiled Slab
+chisel.tile.marbleSlab.15.desc=Marble Blocks Slab
+
+#Marble Pillars (old)
+tile.marble_pillar.name=Marble Pillar
+chisel.tile.marblePillarOld.0.desc=Marble Pillar
+chisel.tile.marblePillarOld.1.desc=Marble Pillar Capstone
+chisel.tile.marblePillarOld.2.desc=Marble Pillar Base
+chisel.tile.marblePillarOld.3.desc=Small Marble Pillar
+chisel.tile.marblePillarOld.4.desc=Carved Marble Pillar
+chisel.tile.marblePillarOld.5.desc=Ornamental Marble Pillar
+chisel.tile.marblePillarOld.6.desc=Greek Marble Pillar
+chisel.tile.marblePillarOld.7.desc=Plain Marble Pillar
+chisel.tile.marblePillarOld.8.desc=Greek Marble Pillar Capstone
+chisel.tile.marblePillarOld.9.desc=Plain Marble Pillar Capstone
+chisel.tile.marblePillarOld.10.desc=Greek Marble Pillar Base
+chisel.tile.marblePillarOld.11.desc=Plain Marble Pillar Base
+chisel.tile.marblePillarOld.12.desc=Greek Marble Pillar Ornate Capstone
+chisel.tile.marblePillarOld.13.desc=Plain Marble Pillar Ornate Capstone
+chisel.tile.marblePillarOld.14.desc=Greek Marble Pillar Ornate Base
+chisel.tile.marblePillarOld.15.desc=Plain Marble Pillar Ornate Base
+
+#Marble Pillars (current)
+chisel.tile.marblePillar.0.desc=Marble Pillar
+chisel.tile.marblePillar.1.desc=Original Marble Pillar
+chisel.tile.marblePillar.2.desc=Simplistic Marble Pillar
+chisel.tile.marblePillar.3.desc=Convex Marble Pillar
+chisel.tile.marblePillar.4.desc=Rough Marble Pillar
+chisel.tile.marblePillar.5.desc=Greek Marble Pillar with Ornate Capstone
+chisel.tile.marblePillar.6.desc=Greek Marble Pillar
+chisel.tile.marblePillar.7.desc=Greek Marble Pillar with Plain Capstone
+chisel.tile.marblePillar.8.desc=Plain Marble Pillar with Ornate Capstone
+chisel.tile.marblePillar.9.desc=Plain Marble Pillar with Greek Capstone
+chisel.tile.marblePillar.10.desc=Plain Marble Pillar
+chisel.tile.marblePillar.11.desc=Wide Marble Pillar with Ornate Capstone
+chisel.tile.marblePillar.12.desc=Wide Marble Pillar with Greek Capstone
+chisel.tile.marblePillar.13.desc=Wide Marble Pillar with Plain Capstone
+chisel.tile.marblePillar.14.desc=Carved Pillar Capstone
+chisel.tile.marblePillar.15.desc=Ornamental Pillar Capstone
+
+#Marble Slabs (old)
+tile.marble_pillar_slab.name=Marble Pillar Slab
+chisel.tile.marblePillarSlabOld.0.desc=Marble Pillar Slab
+chisel.tile.marblePillarSlabOld.1.desc=Marble Pllar Capstone Slab
+chisel.tile.marblePillarSlabOld.2.desc=Marble Pillar Base Slab
+chisel.tile.marblePillarSlabOld.3.desc=Small Marble Pillar Slab
+chisel.tile.marblePillarSlabOld.4.desc=Carved Marble Pillar Slab
+chisel.tile.marblePillarSlabOld.5.desc=Ornamental Marble Pillar Slab
+chisel.tile.marblePillarSlabOld.6.desc=Greek Marble Pillar Slab
+chisel.tile.marblePillarSlabOld.7.desc=Plain Marble Pillar Slab
+chisel.tile.marblePillarSlabOld.8.desc=Greek Marble Pillar capstone Slab
+chisel.tile.marblePillarSlabOld.9.desc=Plain Marble Pillar capstone Slab
+chisel.tile.marblePillarSlabOld.10.desc=Greek Marble Pillar Base Slab
+chisel.tile.marblePillarSlabOld.11.desc=Plain Marble Pillar Base Slab
+chisel.tile.marblePillarSlabOld.12.desc=Greek Marble Pillar ornate capstone Slab
+chisel.tile.marblePillarSlabOld.13.desc=Plain Marble Pillar ornate capstone Slab
+chisel.tile.marblePillarSlabOld.14.desc=Greek Marble Pillar ornate Base Slab
+chisel.tile.marblePillarSlabOld.15.desc=Plain Marble Pillar ornate Base Slab
+
+#Marble Slabs (current)
+chisel.tile.marblePillarSlab.0.desc=Marble Pillar Slab
+chisel.tile.marblePillarSlab.1.desc=Original Marble Pillar Slab
+chisel.tile.marblePillarSlab.2.desc=Simplistic Marble Pillar Slab
+chisel.tile.marblePillarSlab.3.desc=Convex Marble Pillar Slab
+chisel.tile.marblePillarSlab.4.desc=Rough Marble Pillar Slab
+chisel.tile.marblePillarSlab.5.desc=Greek Marble Pillar Slab with Ornate Capstone
+chisel.tile.marblePillarSlab.6.desc=Greek Marble Pillar Slab
+chisel.tile.marblePillarSlab.7.desc=Greek Marble Pillar Slab with Plain Capstone
+chisel.tile.marblePillarSlab.8.desc=Plain Marble Pillar Slab with Ornate Capstone
+chisel.tile.marblePillarSlab.9.desc=Plain Marble Pillar Slab with Greek Capstone
+chisel.tile.marblePillarSlab.10.desc=Plain Marble Pillar Slab
+chisel.tile.marblePillarSlab.11.desc=Wide Marble Pillar Slab with Ornate Capstone
+chisel.tile.marblePillarSlab.12.desc=Wide Marble Pillar Slab with Greek Capstone
+chisel.tile.marblePillarSlab.13.desc=Wide Marble Pillar Slab with Plain Capstone
+chisel.tile.marblePillarSlab.14.desc=Carved Pillar Capstone Slab
+chisel.tile.marblePillarSlab.15.desc=Ornamental Pillar Capstone Slab
+
+#Marble Stairs
+#The same name goes here 8 different times since stairs take up 8 block positions.
+#Sorry!  It was the only way!
+tile.marble_stairs.0.name=Marble Stairs
+tile.marble_stairs.1.name=Marble Stairs
+tile.marble_stairs.2.name=Marble Stairs
+tile.marble_stairs.3.name=Marble Stairs
+tile.marble_stairs.4.name=Marble Stairs
+tile.marble_stairs.5.name=Marble Stairs
+tile.marble_stairs.6.name=Marble Stairs
+tile.marble_stairs.7.name=Marble Stairs
+
+#These are bugged.... so sad :,(
+chisel.tile.marbleStairs.0.desc=Raw Marble Stairs
+chisel.tile.marbleStairs.1.desc=Marble Brick Stairs
+chisel.tile.marbleStairs.2.desc=Classic Marble Panel Stairs
+chisel.tile.marbleStairs.3.desc=Ornate Marble Panel Stairs
+chisel.tile.marbleStairs.4.desc=Marble Panel Stairs
+chisel.tile.marbleStairs.5.desc=Marble Block Stairs
+chisel.tile.marbleStairs.6.desc=Dark Creeper Marble Stairs
+chisel.tile.marbleStairs.7.desc=Light Creeper Marble Stairs
+chisel.tile.marbleStairs.8.desc=Carved Marble Stairs
+chisel.tile.marbleStairs.9.desc=Radial Carved Marble Stairs
+chisel.tile.marbleStairs.10.desc=Marble Stairs with Dent
+chisel.tile.marbleStairs.11.desc=Marble Stairs with Large Dent
+chisel.tile.marbleStairs.12.desc=Marble Tiled Stairs
+chisel.tile.marbleStairs.13.desc=Arranged Marble Tiled Stairs
+chisel.tile.marbleStairs.14.desc=Fancy Marble Tiled Stairs
+chisel.tile.marbleStairs.15.desc=Marble Block Stairs
+
+#Limestone
+tile.limestone.name=Limestone
+chisel.tile.limestone.0.desc=Limestone
+chisel.tile.limestone.1.desc=Small Limestone Tiles
+chisel.tile.limestone.2.desc=French Limestone Tiles
+chisel.tile.limestone.3.desc=French Limestone Tiles
+chisel.tile.limestone.4.desc=Creeper Limestone Tiles
+chisel.tile.limestone.5.desc=Small Limestone Bricks
+chisel.tile.limestone.6.desc=Damaged Limestone Tiles
+chisel.tile.limestone.7.desc=Smooth Limestone
+chisel.tile.limestone.8.desc=Limestone with Ornate Panel
+chisel.tile.limestone.9.desc=Limestone with Ornate Panel
+chisel.tile.limestone.10.desc=Limestone with Creeper Panel
+chisel.tile.limestone.11.desc=Limestone with Dent
+chisel.tile.limestone.12.desc=Limestone with Panel
+chisel.tile.limestone.13.desc=Large Limestone Tiles
+chisel.tile.limestone.14.desc=Limestone with Light Panel
+chisel.tile.limestone.15.desc=Limestone with Dark Panel
+
+#Limestone Slabs
+tile.limestone_slab.name=Limestone Slab
+chisel.tile.limestoneSlab.0.desc=Limestone Slab
+chisel.tile.limestoneSlab.1.desc=Small Limestone Tiled Slab
+chisel.tile.limestoneSlab.2.desc=French Limestone Tiled Slab
+chisel.tile.limestoneSlab.3.desc=French Limestone Tiled Slab
+chisel.tile.limestoneSlab.4.desc=Creeper Limestone Tiled Slab
+chisel.tile.limestoneSlab.5.desc=Small Limestone Bricks Slab
+chisel.tile.limestoneSlab.6.desc=Damaged Limestone Tiled Slab
+chisel.tile.limestoneSlab.7.desc=Smooth Limestone Slab
+chisel.tile.limestoneSlab.8.desc=Limestone Slab with Ornate Panel
+chisel.tile.limestoneSlab.9.desc=Limestone Slab with Ornate Panel
+chisel.tile.limestoneSlab.10.desc=Limestone Slab with Creeper Panel
+chisel.tile.limestoneSlab.11.desc=Limestone Slab with Dent
+chisel.tile.limestoneSlab.12.desc=Limestone Slab with Panel
+chisel.tile.limestoneSlab.13.desc=Large Limestone Tiles Slab
+chisel.tile.limestoneSlab.14.desc=Limestone Slab with Light Panel
+chisel.tile.limestoneSlab.15.desc=Limestone Slab with Dark Panel
+
+#Limestone Stairs
+#The same name goes here 8 different times since stairs take up 8 block positions.
+#Sorry!  It was the only way!
+tile.limestone_stairs.0.name=Limestone Stairs
+tile.limestone_stairs.1.name=Limestone Stairs
+tile.limestone_stairs.2.name=Limestone Stairs
+tile.limestone_stairs.3.name=Limestone Stairs
+tile.limestone_stairs.4.name=Limestone Stairs
+tile.limestone_stairs.5.name=Limestone Stairs
+tile.limestone_stairs.6.name=Limestone Stairs
+tile.limestone_stairs.7.name=Limestone Stairs
+
+#These are bugged.... so sad :,(
+chisel.tile.limestoneStairs.0.desc=Limestone Stairs
+chisel.tile.limestoneStairs.1.desc=Small Limestone Tiled Stairs
+chisel.tile.limestoneStairs.2.desc=French Limestone Tiled Stairs
+chisel.tile.limestoneStairs.3.desc=French Limestone Tiled Stairs
+chisel.tile.limestoneStairs.4.desc=Creeper Limestone Tiled Stairs
+chisel.tile.limestoneStairs.5.desc=Small Limestone Bricks Stairs
+chisel.tile.limestoneStairs.6.desc=Damaged Limestone Tiled Stairs
+chisel.tile.limestoneStairs.7.desc=Smooth Limestone Stairs
+chisel.tile.limestoneStairs.8.desc=Limestone Stairs with Ornate Panel
+chisel.tile.limestoneStairs.9.desc=Limestone Stairs with Ornate Panel
+chisel.tile.limestoneStairs.10.desc=Limestone Stairs with Creeper Panel
+chisel.tile.limestoneStairs.11.desc=Limestone Stairs with Dent
+chisel.tile.limestoneStairs.12.desc=Limestone Stairs with Panel
+chisel.tile.limestoneStairs.13.desc=Large Limestone Tiled Stairs
+chisel.tile.limestoneStairs.14.desc=Limestone Stairs with Light Panel
+chisel.tile.limestoneStairs.15.desc=Limestone Stairs with Dark Panel
+
+#Factory Blocks
+tile.factoryblock.name=Factory Block
+chisel.tile.blockFactory.0.desc=Rusty Metal Plate with Dotted Pattern
+chisel.tile.blockFactory.1.desc=Rusty Metal Plate
+chisel.tile.blockFactory.2.desc=Very Rusty Metal Plate
+chisel.tile.blockFactory.3.desc=A Metal Plate with Little Rust
+chisel.tile.blockFactory.4.desc=Wireframe
+chisel.tile.blockFactory.5.desc=Wireframe in a Shade of Purple
+chisel.tile.blockFactory.6.desc=Yellow-Black Hazard Block
+chisel.tile.blockFactory.7.desc=Orange-White Hazard Block
+chisel.tile.blockFactory.8.desc=Fancy Circuit Block
+chisel.tile.blockFactory.9.desc=Fancy Metal Box
+chisel.tile.blockFactory.10.desc=Fancy Circuit Block with Gold Plating
+chisel.tile.blockFactory.11.desc=Rusty Purple Block with Gold Plating
+chisel.tile.blockFactory.12.desc=Shiny Metal Construction Block
+chisel.tile.blockFactory.13.desc=Weared Metal Wall with Openings for Ventilation
+chisel.tile.blockFactory.14.desc=Rusty Metal Plates
+chisel.tile.blockFactory.15.desc=Weared Metal Column
+
+#Diamond blocks
+tile.diamond_block.name=Diamond Block
+chisel.tile.diamond.1.desc=Embossed Diamond Block
+chisel.tile.diamond.2.desc=Diamond Block with Panel
+chisel.tile.diamond.3.desc=Diamond Cells
+chisel.tile.diamond.4.desc=Diamonds in Purple Obsidian
+chisel.tile.diamond.5.desc=Diamonds in Obsidian
+chisel.tile.diamond.6.desc=Simple Diamond Block
+chisel.tile.diamond.7.desc=Bismuth
+chisel.tile.diamond.8.desc=Crushed Diamond
+chisel.tile.diamond.9.desc=Small Diamond Blocks
+chisel.tile.diamond.10.desc=Small Ornate Diamond Blocks
+chisel.tile.diamond.11.desc=Zelda Diamond Block
+chisel.tile.diamond.12.desc=Diamond Block with Ornate Layer
+
+#Snakestone
+tile.snakestoneSand.name=Sand Snakestone
+tile.snakestoneStone.name=Stone Snakestone
+tile.obsidianSnakestone.name=Obsidian Snakestone
+
+#Glass blocks
+tile.glass.name=Glass
+chisel.tile.glass.1.desc=Bubble Glass
+chisel.tile.glass.2.desc=Chinese Glass
+chisel.tile.glass.3.desc=Japanese(?) Glass
+chisel.tile.glass.4.desc=Dungeon Glass
+chisel.tile.glass.5.desc=Light Glass
+chisel.tile.glass.6.desc=Borderless Glass
+chisel.tile.glass.7.desc=Ornate Steel Glass
+chisel.tile.glass.8.desc=Screen
+chisel.tile.glass.9.desc=Shale Glass
+chisel.tile.glass.10.desc=Steel Frame Glass
+chisel.tile.glass.11.desc=Stone Frame Glass
+chisel.tile.glass.12.desc=Streak Glass
+chisel.tile.glass.13.desc=Thick Grid Glass
+chisel.tile.glass.14.desc=Thin Grid Glass
+chisel.tile.glass.15.desc=Modern Iron Fence
+
+#Sandstone
+tile.sandstone.name=Sandstone
+chisel.tile.sandstone.3.desc=Faded Sandstone
+chisel.tile.sandstone.4.desc=Sandstone Pillar
+chisel.tile.sandstone.5.desc=Sandstone Pillar Capstone
+chisel.tile.sandstone.6.desc=Small Sandstone Pillar
+chisel.tile.sandstone.7.desc=Sandstone Pillar Base
+chisel.tile.sandstone.8.desc=Smooth & Flat Sandstone
+chisel.tile.sandstone.9.desc=Smooth Sandstone Pillar Capstone
+chisel.tile.sandstone.10.desc=Small Smooth Sandstone Pillar
+chisel.tile.sandstone.11.desc=Smooth Sandstone Pillar Base
+chisel.tile.sandstone.12.desc=Sandstone Block
+chisel.tile.sandstone.13.desc=Small Sandstone Blocks
+chisel.tile.sandstone.14.desc=Sandstone Mosaic
+chisel.tile.sandstone.15.desc=Stacked Sandstone Tiles
+
+#Sandstone scribbles
+tile.sandstone_scribbles.name=Sandstone Scribbles
+chisel.tile.sandstoneScribbles.desc=Sandstone scribbles
+
+#Concrete
+tile.concrete.name=Concrete
+chisel.tile.blockConcrete.0.desc=Concrete
+chisel.tile.blockConcrete.1.desc=Concrete Block
+chisel.tile.blockConcrete.2.desc=Concrete Double Slab
+chisel.tile.blockConcrete.3.desc=Small Concrete Blocks
+chisel.tile.blockConcrete.4.desc=Weathered Concrete
+chisel.tile.blockConcrete.5.desc=Weathered Concrete Block
+chisel.tile.blockConcrete.6.desc=Weathered Concrete Double Slab
+chisel.tile.blockConcrete.7.desc=Small Weathered Blocks
+chisel.tile.blockConcrete.8.desc=Partly Weathered Concrete
+chisel.tile.blockConcrete.9.desc=Partly Weathered Concrete Block
+chisel.tile.blockConcrete.10.desc=Asphalt
+
+#Road Line
+tile.roadLine.name=Road Lines
+
+#Iron Blocks
+tile.iron_block.name=Iron Block
+chisel.tile.iron.1.desc=Large Iron Ingots
+chisel.tile.iron.2.desc=Small Iron Ingots
+chisel.tile.iron.3.desc=Iron Gears
+chisel.tile.iron.4.desc=Iron Bricks
+chisel.tile.iron.5.desc=Iron Plates
+chisel.tile.iron.6.desc=Iron Plates with Rivets
+chisel.tile.iron.7.desc=Iron Coin Stack Heads-up
+chisel.tile.iron.8.desc=Iron Coin Stack Heads-down
+chisel.tile.iron.9.desc=Dark Iron Crate
+chisel.tile.iron.10.desc=Light Iron Crate
+chisel.tile.iron.11.desc=Iron Block with Moon Decoration
+chisel.tile.iron.12.desc=Iron Moon in Purple Obsidian
+chisel.tile.iron.13.desc=Iron Moon in Obsidian
+chisel.tile.iron.14.desc=Iron Vents
+chisel.tile.iron.15.desc=Simple Iron Block
+
+#Gold Blocks
+tile.gold_block.name=Gold Block
+chisel.tile.gold.1.desc=Large Golden Ingots
+chisel.tile.gold.2.desc=Small Golden Ingots
+chisel.tile.gold.3.desc=Golden Bricks
+chisel.tile.gold.4.desc=Gold Cart
+chisel.tile.gold.5.desc=Golden Coin Stack Heads-up
+chisel.tile.gold.6.desc=Golden Coin Stack Heads-down
+chisel.tile.gold.7.desc=Dark Gold Crate
+chisel.tile.gold.8.desc=Light Gold Crate
+chisel.tile.gold.9.desc=Golden Plates
+chisel.tile.gold.10.desc=Gold Plates with Rivets
+chisel.tile.gold.11.desc=Gold Block with Star Decoration
+chisel.tile.gold.12.desc=Golden Star in Purple Obsidian
+chisel.tile.gold.13.desc=Golden Star in Obsidian
+chisel.tile.gold.14.desc=Simple Gold Block
+
+#Glowstone
+tile.glowstone.name=Glowstone
+chisel.tile.lightstone.1.desc=Cobble Glowstone Block
+chisel.tile.lightstone.2.desc=Corroded Glowstone Blocks
+chisel.tile.lightstone.3.desc=Glowstone Blocks with Glass
+chisel.tile.lightstone.4.desc=Neon Glowstone
+chisel.tile.lightstone.5.desc=Ornate Glowstone Blocks
+chisel.tile.lightstone.6.desc=Rocky Glowstone
+chisel.tile.lightstone.7.desc=Shale-Shaped Glowstone
+chisel.tile.lightstone.8.desc=Glowstone Tiles
+chisel.tile.lightstone.9.desc=Fancy Glowstone Lantern
+chisel.tile.lightstone.10.desc=Crumbling Glowstone Block
+chisel.tile.lightstone.11.desc=Organic Glowstone Growth Block
+chisel.tile.lightstone.12.desc=Glowstone Layers
+chisel.tile.lightstone.13.desc=Corroded Glowstone Tiles
+chisel.tile.lightstone.14.desc=Glowstone Bismuth
+chisel.tile.lightstone.15.desc=Glowstone Bismuth Panel
+
+#Lapis blocks
+tile.lapis_block.name=Lapis Block
+chisel.tile.lapis.1.desc=Chunky Lapis Block
+chisel.tile.lapis.2.desc=Dark Lapis Block
+chisel.tile.lapis.3.desc=Zelda Lapis Block
+chisel.tile.lapis.4.desc=Ornate Lapis Block
+chisel.tile.lapis.5.desc=Lapis Tile
+chisel.tile.lapis.6.desc=Lapis Panel
+chisel.tile.lapis.7.desc=Smooth Lapis
+chisel.tile.lapis.8.desc=Lapis with Ornate Layer
+
+#Emerald Blocks
+tile.emerald_block.name=Emerald Block
+chisel.tile.emerald.1.desc=Emerald Panel
+chisel.tile.emerald.2.desc=Classic emerald Panel
+chisel.tile.emerald.3.desc=Smooth Emerald
+chisel.tile.emerald.4.desc=Emerald Chunk
+chisel.tile.emerald.5.desc=Emerald with Ornate Layer
+chisel.tile.emerald.6.desc=Zelda Emerald Block
+chisel.tile.emerald.7.desc=Emerald Cell
+chisel.tile.emerald.8.desc=Emerald Bismuth
+chisel.tile.emerald.9.desc=Small Emerald Blocks
+chisel.tile.emerald.10.desc=Small Ornate Emerald Blocks
+chisel.tile.emerald.11.desc=Ornate Emerald Block
+
+#Nether Brick
+tile.nether_brick.name=Nether Brick
+chisel.tile.netherBrick.1.desc=Blue Nether Brick
+chisel.tile.netherBrick.2.desc=Spattered Nether Brick
+chisel.tile.netherBrick.3.desc=Nether Brick made of Guts
+chisel.tile.netherBrick.4.desc=Dark Nether Brick made of Guts
+chisel.tile.netherBrick.5.desc=Small Nether Brick made of Guts
+chisel.tile.netherBrick.6.desc=Blue Nether Brick with Lava
+chisel.tile.netherBrick.7.desc=Brown Nether Brick
+chisel.tile.netherBrick.8.desc=Obsidian Nether Brick
+chisel.tile.netherBrick.9.desc=Stone Nether Brick
+chisel.tile.netherBrick.10.desc=Nether Brick made of Meat
+chisel.tile.netherBrick.11.desc=Red Nether Brick made of Meat
+chisel.tile.netherBrick.12.desc=Small Nether Brick made of Meat
+chisel.tile.netherBrick.13.desc=Small Red Nether Brick made of Meat
+chisel.tile.netherBrick.14.desc=Red Nether Brick
+chisel.tile.netherBrick.15.desc=Small Red Nether Brick
+
+#Netherrack
+tile.netherrack.name=Netherrack
+chisel.tile.hellrock.1.desc=Nethergravel with Blood
+chisel.tile.hellrock.2.desc=Netherrack with Blood
+chisel.tile.hellrock.3.desc=Darker Netherrack with Blood
+chisel.tile.hellrock.4.desc=Blue Netherrack
+chisel.tile.hellrock.5.desc=Shale Blue Netherrack
+chisel.tile.hellrock.6.desc=Classic Netherrack
+chisel.tile.hellrock.7.desc=Spattered Netherrack
+chisel.tile.hellrock.8.desc=Netherrack made of Guts
+chisel.tile.hellrock.9.desc=Dark Netherrack made of Guts
+chisel.tile.hellrock.10.desc=Netherrack made of Meat
+chisel.tile.hellrock.11.desc=Red Netherrack made of Meat
+chisel.tile.hellrock.12.desc=Netherrack made of Smaller Meat Chunks
+chisel.tile.hellrock.13.desc=Dark Red Netherrack
+chisel.tile.hellrock.14.desc=Netherrack with Flowing Lava
+
+#Mossy Stone
+tile.mossy_cobblestone.name=Mossy Cobblestone
+chisel.tile.stoneMoss.1.desc=Aligned Mossy Cobblestone Bricks
+chisel.tile.stoneMoss.2.desc=Detailed Mossy Cobblestone Bricks
+chisel.tile.stoneMoss.3.desc=Small Mossy Cobblestone Bricks
+chisel.tile.stoneMoss.4.desc=Large Mossy Cobblestone Tiles
+chisel.tile.stoneMoss.5.desc=Small Mossy Cobblestone Tiles
+chisel.tile.stoneMoss.6.desc=French Mossy Cobblestone Tiles
+chisel.tile.stoneMoss.7.desc=French Mossy Cobblestone Tiles
+chisel.tile.stoneMoss.8.desc=Creeper Mossy Cobblestone Tiles
+chisel.tile.stoneMoss.9.desc=Damaged Mossy Cobblestone Tiles
+chisel.tile.stoneMoss.10.desc=Huge Mossy Cobblestone Tiles
+chisel.tile.stoneMoss.11.desc=Mossy Cobblestone with Creeper Panel
+chisel.tile.stoneMoss.12.desc=Mossy Cobblestone with Dent
+chisel.tile.stoneMoss.13.desc=Mossy Cobblestone with Pane
+chisel.tile.stoneMoss.14.desc=Mossy Cobblestone with Light Panel
+chisel.tile.stoneMoss.15.desc=Mossy Cobblestone with Dark Panel
+
+#Stone Bricks
+tile.stonebrick.name=Stone Bricks
+chisel.tile.stoneBrick.4.desc=Small Stone Bricks
+chisel.tile.stoneBrick.5.desc=Wide Stone Bricks
+chisel.tile.stoneBrick.6.desc=Small Disordered Stone Bricks
+chisel.tile.stoneBrick.7.desc=Disordered Stone Bricks
+chisel.tile.stoneBrick.8.desc=Disordered Stone Panels
+chisel.tile.stoneBrick.9.desc=Stone Bricks in a Fancy Arrangement
+chisel.tile.stoneBrick.10.desc=Ornate Stone Brick tiles
+chisel.tile.stoneBrick.11.desc=Large Ornate Stone Brick Tiles
+chisel.tile.stoneBrick.12.desc=Stone Panel
+chisel.tile.stoneBrick.13.desc=Sunken Stone Panel
+chisel.tile.stoneBrick.14.desc=Ornate Stone Panel
+chisel.tile.stoneBrick.15.desc=Poison Stone Brick
+
+#Dirt
+tile.dirt.name=Dirt
+chisel.tile.blockDirt.0.desc=Dirt Bricks in Disarray
+chisel.tile.blockDirt.1.desc=Dirt Bricks Imitating Nether Brick Design
+chisel.tile.blockDirt.2.desc=Dirt Bricks
+chisel.tile.blockDirt.3.desc=Cobble-dirt
+chisel.tile.blockDirt.4.desc=Reinforced Cobble-dirt
+chisel.tile.blockDirt.5.desc=Reinforced Dirt
+chisel.tile.blockDirt.6.desc=Happy Dirt
+chisel.tile.blockDirt.7.desc=Large Dirt Bricks
+chisel.tile.blockDirt.8.desc=Large Dirt Bricks on top of Dirt
+chisel.tile.blockDirt.9.desc=Horizontal Dirt
+chisel.tile.blockDirt.10.desc=Vertical Dirt
+chisel.tile.blockDirt.11.desc=Dirt Layers
+chisel.tile.blockDirt.12.desc=Crumbling Dirt
+
+#Ice
+tile.ice.name=Ice
+chisel.tile.ice.1.desc=Rough Ice Block
+chisel.tile.ice.2.desc=Cobble-ice
+chisel.tile.ice.3.desc=Large Rough Ice Bricks
+chisel.tile.ice.4.desc=Large Ice Bricks
+chisel.tile.ice.5.desc=Small Ice Bricks
+chisel.tile.ice.6.desc=Fancy Glass Wall
+chisel.tile.ice.7.desc=Large Ice Tiles
+chisel.tile.ice.8.desc=Fancy Ice Tiles
+chisel.tile.ice.9.desc=Sunken Ice Tiles
+chisel.tile.ice.10.desc=Disordered Ice Tiles
+chisel.tile.ice.11.desc=Ice Panel
+chisel.tile.ice.12.desc=Ice Double Slab
+chisel.tile.ice.13.desc=Ice Zelda Block
+chisel.tile.ice.14.desc=Ice Bismuth Block
+chisel.tile.ice.15.desc=Ice Poison Block
+
+#Ice Pillars
+tile.ice_pillar.name=Ice Pillar
+chisel.tile.icePillar.0.desc=Ice Pillar
+chisel.tile.icePillar.1.desc=Ice Pillar Capstone
+chisel.tile.icePillar.2.desc=Ice Pillar Base
+chisel.tile.icePillar.3.desc=Small Ice Pillar
+chisel.tile.icePillar.4.desc=Carved Ice Pillar
+chisel.tile.icePillar.5.desc=Ornamental Ice Pillar
+chisel.tile.icePillar.6.desc=Greek Ice Pillar
+chisel.tile.icePillar.7.desc=Plain Ice Pillar
+chisel.tile.icePillar.8.desc=Greek Ice Pillar Capstone
+chisel.tile.icePillar.9.desc=Plain Ice Pillar Capstone
+chisel.tile.icePillar.10.desc=Greek Ice Pillar Base
+chisel.tile.icePillar.11.desc=Plain Ice Pillar Base
+chisel.tile.icePillar.12.desc=Greek Ice Pillar Ornate Capstone
+chisel.tile.icePillar.13.desc=Plain Ice Pillar Ornate Capstone
+chisel.tile.icePillar.14.desc=Greek Ice Pillar Ornate Base
+chisel.tile.icePillar.15.desc=Plain Ice Pillar Ornate Base
+
+#Ice Stairs
+tile.ice_stairs.name=Ice Stairs
+tile.ice_stairs.0.name=Ice Stairs
+tile.ice_stairs.1.name=Ice Stairs
+tile.ice_stairs.2.name=Ice Stairs
+tile.ice_stairs.3.name=Ice Stairs
+tile.ice_stairs.4.name=Ice Stairs
+tile.ice_stairs.5.name=Ice Stairs
+tile.ice_stairs.6.name=Ice Stairs
+tile.ice_stairs.7.name=Ice Stairs
+chisel.tile.iceStairs.0.desc=Ice Stairs
+chisel.tile.iceStairs.1.desc=Rough Ice Stairs
+chisel.tile.iceStairs.2.desc=Cobble-ice Stairs
+chisel.tile.iceStairs.3.desc=Large rough Ice Brick Stairs
+chisel.tile.iceStairs.4.desc=Large Ice Brick Stairs
+chisel.tile.iceStairs.5.desc=Small Ice Brick Stairs
+chisel.tile.iceStairs.6.desc=Fancy Ice Wall Stairs
+chisel.tile.iceStairs.7.desc=Large Ice Tile Stairs
+chisel.tile.iceStairs.8.desc=Fancy Ice Tile Stairs
+chisel.tile.iceStairs.9.desc=Sunken Ice Tile Stairs
+chisel.tile.iceStairs.10.desc=Disordered Ice Tile Stairs
+chisel.tile.iceStairs.11.desc=Ice Panel Stairs
+chisel.tile.iceStairs.12.desc=Ice Double Slab Stairs
+chisel.tile.iceStairs.13.desc=Ice Zelda Stairs
+chisel.tile.iceStairs.14.desc=Ice Bismuth Stairs
+chisel.tile.iceStairs.15.desc=Ice Poison Stairs
+
+#Obsidian
+tile.obsidian.name=Obsidian
+chisel.tile.obsidian.1.desc=Large Obsidian Pillar
+chisel.tile.obsidian.2.desc=Obsidian Pillar
+chisel.tile.obsidian.3.desc=Chiseled Obsidian
+chisel.tile.obsidian.4.desc=Shiny Obsidian Panel
+chisel.tile.obsidian.5.desc=Obsidian Panel
+chisel.tile.obsidian.6.desc=Organic-Looking Obsidian Chunks
+chisel.tile.obsidian.7.desc=Organic-Looking Obsidian Growth
+chisel.tile.obsidian.8.desc=Obsidian Crystal
+chisel.tile.obsidian.9.desc=Obsidian Panel with Map
+chisel.tile.obsidian.10.desc=Obsidian Panel with Region Map
+chisel.tile.obsidian.11.desc=Bright Obsidian Panel
+chisel.tile.obsidian.12.desc=Obsidian Blocks
+chisel.tile.obsidian.13.desc=Obsidian Tiles
+chisel.tile.obsidian.14.desc=Light Obsidian Blocks with Greek Decor
+chisel.tile.obsidian.15.desc=Small Obsidian Blocks inside an Oak Wood Crate
+
+#Wood
+tile.oak_planks.name=Oak Wood
+tile.birch_planks.name=Birch Wood
+tile.spruce_planks.name=Spruce Wood
+tile.jungle_planks.name=Jungle Wood
+tile.dark_oak_planks.name=Dark Oak Wood
+tile.acacia_planks.name=Acacia Wood
+
+#Remember to do the descriptions.
+
+#Iron Fence
+tile.iron_bars.name=Iron Bars
+
+#Glass Panes
+tile.glass_pane.name=Glass Pane
+
+#Redstone block
+tile.redstone_block.name=Redstone Block
+
+#Holystone
+tile.holystone.name=Holystone
+
+#Lavastone
+tile.lavastone.name=Lavastone
+
+#Carpet
+tile.carpet_block.name=Carpet
+
+#Carpet floor
+tile.carpet.name=Floor Carpet
+
+#Bookshelf
+tile.bookshelf.name=Bookshelf
+
+#Tyrian
+tile.tyrian.name=Tyrian
+
+#Temple
+tile.templeblock.name=Temple Block
+
+#Temple Mossy
+tile.mossy_templeblock.name=Mossy Temple Block
+
+#Cloud
+tile.cloud.name=Cloud
+
+#Stained glass T.T
+tile.stained_glass_white.name=Stained Glass
+tile.stained_glass_orange.name=Stained Glass
+tile.stained_glass_magenta.name=Stained Glass
+tile.stained_glass_lightBlue.name=Stained Glass
+tile.stained_glass_yellow.name=Stained Glass
+tile.stained_glass_lime.name=Stained Glass
+tile.stained_glass_pink.name=Stained Glass
+tile.stained_glass_gray.name=Stained Glass
+tile.stained_glass_lightgray.name=Stained Glass
+tile.stained_glass_cyan.name=Stained Glass
+tile.stained_glass_purple.name=Stained Glass
+tile.stained_glass_blue.name=Stained Glass
+tile.stained_glass_brown.name=Stained Glass
+tile.stained_glass_green.name=Stained Glass
+tile.stained_glass_red.name=Stained Glass
+tile.stained_glass_black.name=Stained Glass
+
+#Stained GlassPane T.T
+tile.stained_glass_pane_white.name=Stained Glass Pane
+tile.stained_glass_pane_orange.name=Stained Glass Pane
+tile.stained_glass_pane_magenta.name=Stained Glass Pane
+tile.stained_glass_pane_lightBlue.name=Stained Glass Pane
+tile.stained_glass_pane_yellow.name=Stained Glass Pane
+tile.stained_glass_pane_lime.name=Stained Glass Pane
+tile.stained_glass_pane_pink.name=Stained Glass Pane
+tile.stained_glass_pane_gray.name=Stained Glass Pane
+tile.stained_glass_pane_lightgray.name=Stained Glass Pane
+tile.stained_glass_pane_cyan.name=Stained Glass Pane
+tile.stained_glass_pane_purple.name=Stained Glass Pane
+tile.stained_glass_pane_blue.name=Stained Glass Pane
+tile.stained_glass_pane_brown.name=Stained Glass Pane
+tile.stained_glass_pane_green.name=Stained Glass Pane
+tile.stained_glass_pane_red.name=Stained Glass Pane
+tile.stained_glass_pane_black.name=Stained Glass Pane
+
+#Fantasy block
+tile.fantasyblock.name=Fantasy Block
+
+#Paperwall
+tile.paperwall.name=Paperwall
+chisel.tile.paperwall.0.desc=Boxed Paperwall
+chisel.tile.paperwall.1.desc=Middle Striked Paperwall
+chisel.tile.paperwall.2.desc=Crossed Paperwall
+chisel.tile.paperwall.3.desc=Six Sectioned Paperwall
+chisel.tile.paperwall.4.desc=Vertically Striked Paperwall
+chisel.tile.paperwall.5.desc=Horizontally Striked Paperwall
+chisel.tile.paperwall.6.desc=Floral Adorned Paperwall
+chisel.tile.paperwall.7.desc=Plain Paperwall
+chisel.tile.paperwall.8.desc=Door Shaped Paperwall
+
+#Woolen Clay
+tile.woolen_clay.name=Woolen Clay
+chisel.tile.woolenClay.0.desc=White Woolen Clay
+chisel.tile.woolenClay.1.desc=Orange Woolen Clay
+chisel.tile.woolenClay.2.desc=Magenta Woolen Clay
+chisel.tile.woolenClay.3.desc=Light Blue Woolen Clay
+chisel.tile.woolenClay.4.desc=Yellow Woolen Clay
+chisel.tile.woolenClay.5.desc=Lime Woolen Clay
+chisel.tile.woolenClay.6.desc=Pink Woolen Clay
+chisel.tile.woolenClay.7.desc=Grey Woolen Clay
+chisel.tile.woolenClay.8.desc=Light Grey Woolen Clay
+chisel.tile.woolenClay.9.desc=Cyan Woolen Clay
+chisel.tile.woolenClay.10.desc=Purple Woolen Clay
+chisel.tile.woolenClay.11.desc=Blue Woolen Clay
+chisel.tile.woolenClay.12.desc=Brown Woolen Clay
+chisel.tile.woolenClay.13.desc=Green Woolen Clay
+chisel.tile.woolenClay.14.desc=Red Woolen Clay
+chisel.tile.woolenClay.15.desc=Black Woolen Clay
+
+#Laboratory Block
+tile.laboratoryblock.name=Laboratory Block
+chisel.tile.blockLaboratory.0.desc=Wall Panel
+chisel.tile.blockLaboratory.1.desc=Dotted Panel
+chisel.tile.blockLaboratory.2.desc=Enameled Wall
+chisel.tile.blockLaboratory.3.desc=Enameled Roundel Wall
+chisel.tile.blockLaboratory.4.desc=Enameled Wall Vents
+chisel.tile.blockLaboratory.5.desc=Large Enameled Tile
+chisel.tile.blockLaboratory.6.desc=Small Enameled Tiles
+chisel.tile.blockLaboratory.7.desc=Laboratory Floor
+chisel.tile.blockLaboratory.8.desc=Checkerboard Floor
+chisel.tile.blockLaboratory.9.desc=Clear Panel
+chisel.tile.blockLaboratory.10.desc=Fuzzy Panel
+chisel.tile.blockLaboratory.11.desc=Large Steel Tile
+chisel.tile.blockLaboratory.12.desc=Small Steel Tiles
+chisel.tile.blockLaboratory.13.desc=Direction Console (Right)
+chisel.tile.blockLaboratory.14.desc=Direction Console (Left)
+chisel.tile.blockLaboratory.15.desc=Information Console
+
+# Creative Tab localizations
+itemGroup.tabChisel=Chisel Blocks
+
+#Container
+container.chisel=Chisel
+container.chisel.title=Carve blocks
+container.chisel.titleShort=Carve
