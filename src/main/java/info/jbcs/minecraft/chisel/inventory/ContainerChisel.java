@@ -62,8 +62,8 @@ public class ContainerChisel extends Container
         for(int l = 0; l < 9; l++)
         {
             addSlotToContainer(l == currentIndex ?
-                    new SlotChiselPlayer(this, inventoryplayer, l, 8 + l * 18, 160 - 18) :
-                    new Slot(inventoryplayer, l, 8 + l * 18, 160 - 18)
+                            new SlotChiselPlayer(this, inventoryplayer, l, 8 + l * 18, 160 - 18) :
+                            new Slot(inventoryplayer, l, 8 + l * 18, 160 - 18)
             );
         }
 

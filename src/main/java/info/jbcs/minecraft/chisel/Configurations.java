@@ -15,6 +15,7 @@ public class Configurations
     public static boolean chiselStoneToCobbleBricks;
     public static boolean enableChiseling;
     public static boolean chiselRecipe;
+    public static boolean autoChisel;
 
     public static int factoryBlockAmount;
     public static int particlesTickrate;
@@ -38,6 +39,7 @@ public class Configurations
         marbleAmount = config.get("worldgen", "marbleAmount", 7, "Amount of marble to generate in the world; use 0 for none").getInt(7);
         limestoneAmount = config.get("worldgen", "limestoneAmount", 8, "Amount of limestone to generate in the world; use 0 for none").getInt(8);
         chiselRecipe = config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
+        autoChisel = config.get("general", "autoChisel", true, "Should people be allowed to use the auto chisel").getBoolean(false);
 
         if(config.hasChanged())
         {

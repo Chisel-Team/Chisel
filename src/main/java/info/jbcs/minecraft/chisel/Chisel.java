@@ -1,26 +1,14 @@
 package info.jbcs.minecraft.chisel;
 
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.GameRegistry.Type;
+import info.jbcs.minecraft.chisel.block.BlockAutoChisel;
 import info.jbcs.minecraft.chisel.block.BlockCarvable;
-import info.jbcs.minecraft.chisel.carving.Carving;
+import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
+import info.jbcs.minecraft.chisel.client.gui.GuiAutoChisel;
 import info.jbcs.minecraft.chisel.client.gui.GuiChisel;
 import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
 import info.jbcs.minecraft.chisel.entity.EntityCloudInABottle;
 import info.jbcs.minecraft.chisel.entity.EntitySmashingRock;
+import info.jbcs.minecraft.chisel.inventory.ContainerAutoChisel;
 import info.jbcs.minecraft.chisel.inventory.ContainerChisel;
 import info.jbcs.minecraft.chisel.inventory.InventoryChiselSelection;
 import info.jbcs.minecraft.chisel.item.ItemBallOMoss;
@@ -30,15 +18,36 @@ import info.jbcs.minecraft.chisel.item.ItemSmashingRock;
 import info.jbcs.minecraft.chisel.world.GeneratorLimestone;
 import info.jbcs.minecraft.chisel.world.GeneratorMarble;
 import info.jbcs.minecraft.utilities.General;
+
+import java.io.File;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-
-import java.io.File;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.GameRegistry.Type;
 
 
 @Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = "@MOD_VERSION@", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory"/*, dependencies = "after:ForgeMicroblock;"*/)
@@ -60,6 +69,8 @@ public class Chisel
     public static final BlockCarvable.SoundType soundHolystoneFootstep = new BlockCarvable.SoundType("holystone", 1.0f, 1.0f);
     public static final BlockCarvable.SoundType soundTempleFootstep = new BlockCarvable.SoundType("dig.stone", MOD_ID+":step.templeblock", 1.0f, 1.0f);
     public static final BlockCarvable.SoundType soundMetalFootstep = new BlockCarvable.SoundType("metal", 1.0f, 1.0f);
+
+    public static Block autoChisel;
 
     public static int RenderEldritchId;
     public static int RenderCTMId;
@@ -130,8 +141,14 @@ public class Chisel
             }
         };
 
-        chisel = (ItemChisel) new ItemChisel(Carving.chisel).setTextureName("chisel:chisel").setCreativeTab(CreativeTabs.tabTools);
+        chisel = (ItemChisel) new ItemChisel().setTextureName("chisel:chisel").setCreativeTab(CreativeTabs.tabTools);
         GameRegistry.registerItem(chisel, "chisel");
+
+        if(Configurations.featureEnabled("autoChisel")){
+            autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(CreativeTabs.tabTools);
+            GameRegistry.registerBlock(autoChisel, autoChisel.getUnlocalizedName());
+            proxy.registerTileEntities();
+        }
 
         if(Configurations.featureEnabled("cloud"))
         {
@@ -167,13 +184,31 @@ public class Chisel
             @Override
             public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
             {
-                return new ContainerChisel(player.inventory, new InventoryChiselSelection(null));
+                switch (ID){
+                    case 0:
+                        return new ContainerChisel(player.inventory, new InventoryChiselSelection(null));
+                    case 1:
+                    	TileEntity tileentity = world.getTileEntity(x, y, z);
+                    	if (tileentity instanceof TileEntityAutoChisel)
+                    		return new ContainerAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
+                    default:
+                        return null;
+                }
             }
 
             @Override
             public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
             {
-                return new GuiChisel(player.inventory, new InventoryChiselSelection(null));
+                switch (ID){
+                    case 0:
+                        return new GuiChisel(player.inventory, new InventoryChiselSelection(null));
+                    case 1:
+                    	TileEntity tileentity = world.getTileEntity(x, y, z);
+                    	if (tileentity instanceof TileEntityAutoChisel)
+                    		return new GuiAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
+                    default:
+                        return null;
+                }
             }
         });
 

@@ -18,7 +18,7 @@ public class ItemChisel extends ItemTool implements IChiselMode
     public static Carving carving = Carving.chisel;
     private static final HashSet<String> toolSet = new HashSet<String>();
 
-    public ItemChisel(Carving c)
+    public ItemChisel()
     {
         super(1, ToolMaterial.IRON, CarvableHelper.getChiselBlockSet());
 
@@ -28,7 +28,6 @@ public class ItemChisel extends ItemTool implements IChiselMode
         setUnlocalizedName("chisel");
 
         toolSet.add("chisel");
-        //this.carving = c;
     }
 
     @Override
