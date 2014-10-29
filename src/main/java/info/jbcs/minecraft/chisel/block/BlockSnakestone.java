@@ -5,6 +5,7 @@ import info.jbcs.minecraft.chisel.client.render.BlockSnakeStoneRenderer;
 
 import java.util.List;
 
+import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -57,7 +58,7 @@ public class BlockSnakestone extends Block
         setHardness(1.5F);
         setResistance(10.0F);
         setStepSound(Block.soundTypeStone);
-        setCreativeTab(Chisel.tabChisel);
+        setCreativeTab(ModTabs.tabChiselBlocks);
         flipTopTextures = false;
 
         this.iconPrefix = iconPrefix;

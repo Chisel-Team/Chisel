@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.Side;
 import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
 import info.jbcs.minecraft.chisel.client.render.BlockSpikesRenderer;
-import info.jbcs.minecraft.utilities.General;
+import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

@@ -8,6 +8,7 @@ import info.jbcs.minecraft.chisel.Chisel;
 import java.util.List;
 import java.util.Random;
 
+import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -28,7 +29,7 @@ public class BlockMarbleIce extends BlockIce implements ICarvable
     {
         super();
         carverHelper = new CarvableHelper();
-        setCreativeTab(Chisel.tabChisel);
+        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     @Override

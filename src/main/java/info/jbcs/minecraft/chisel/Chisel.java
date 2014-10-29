@@ -1,28 +1,26 @@
 package info.jbcs.minecraft.chisel;
 
-import info.jbcs.minecraft.chisel.block.BlockAutoChisel;
 import info.jbcs.minecraft.chisel.block.BlockCarvable;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import info.jbcs.minecraft.chisel.client.gui.GuiAutoChisel;
 import info.jbcs.minecraft.chisel.client.gui.GuiChisel;
-import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
-import info.jbcs.minecraft.chisel.entity.EntityCloudInABottle;
-import info.jbcs.minecraft.chisel.entity.EntitySmashingRock;
+import info.jbcs.minecraft.chisel.compat.Compatibility;
+import info.jbcs.minecraft.chisel.compat.FMPIntegration;
+import info.jbcs.minecraft.chisel.compat.ModIntegration;
+import info.jbcs.minecraft.chisel.init.ModBlocks;
+import info.jbcs.minecraft.chisel.init.ModItems;
+import info.jbcs.minecraft.chisel.init.ModTabs;
 import info.jbcs.minecraft.chisel.inventory.ContainerAutoChisel;
 import info.jbcs.minecraft.chisel.inventory.ContainerChisel;
 import info.jbcs.minecraft.chisel.inventory.InventoryChiselSelection;
-import info.jbcs.minecraft.chisel.item.ItemBallOMoss;
-import info.jbcs.minecraft.chisel.item.ItemChisel;
-import info.jbcs.minecraft.chisel.item.ItemCloudInABottle;
-import info.jbcs.minecraft.chisel.item.ItemSmashingRock;
+import info.jbcs.minecraft.chisel.proxy.CommonProxy;
 import info.jbcs.minecraft.chisel.world.GeneratorLimestone;
 import info.jbcs.minecraft.chisel.world.GeneratorMarble;
-import info.jbcs.minecraft.utilities.General;
+import info.jbcs.minecraft.chisel.utils.General;
 
 import java.io.File;
 
 import net.minecraft.block.Block;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -45,24 +43,15 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
 
-@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = "@MOD_VERSION@", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory"/*, dependencies = "after:ForgeMicroblock;"*/)
+@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = "@MOD_VERSION@", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;")
 public class Chisel
 {
     public static final String MOD_ID = "chisel";
     public static final String MOD_NAME = "Chisel";
-
-    public static ItemChisel chisel;
-    //	public static ItemChisel needle;
-    public static ItemCloudInABottle itemCloudInABottle;
-    public static ItemBallOMoss itemBallOMoss;
-    public static ItemSmashingRock smashingRock;
-
-    public static CreativeTabs tabChisel;
 
     public static boolean multipartLoaded = false;
 
@@ -70,7 +59,7 @@ public class Chisel
     public static final BlockCarvable.SoundType soundTempleFootstep = new BlockCarvable.SoundType("dig.stone", MOD_ID+":step.templeblock", 1.0f, 1.0f);
     public static final BlockCarvable.SoundType soundMetalFootstep = new BlockCarvable.SoundType("metal", 1.0f, 1.0f);
 
-    public static Block autoChisel;
+
 
     public static int RenderEldritchId;
     public static int RenderCTMId;
@@ -79,7 +68,7 @@ public class Chisel
     @Instance(MOD_ID)
     public static Chisel instance;
 
-    @SidedProxy(clientSide = "info.jbcs.minecraft.chisel.ClientProxy", serverSide = "info.jbcs.minecraft.chisel.CommonProxy")
+    @SidedProxy(clientSide = "info.jbcs.minecraft.chisel.proxy.ClientProxy", serverSide = "info.jbcs.minecraft.chisel.proxy.CommonProxy")
     public static CommonProxy proxy;
 
     @EventHandler
@@ -132,45 +121,9 @@ public class Chisel
         Configurations.config.load();
         Configurations.refreshConfig();
 
-        tabChisel = new CreativeTabs("tabChisel")
-        {
-            @Override
-            public Item getTabIconItem()
-            {
-                return chisel;
-            }
-        };
-
-        chisel = (ItemChisel) new ItemChisel().setTextureName("chisel:chisel").setCreativeTab(CreativeTabs.tabTools);
-        GameRegistry.registerItem(chisel, "chisel");
-
-        if(Configurations.featureEnabled("autoChisel")){
-            autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(CreativeTabs.tabTools);
-            GameRegistry.registerBlock(autoChisel, autoChisel.getUnlocalizedName());
-            proxy.registerTileEntities();
-        }
-
-        if(Configurations.featureEnabled("cloud"))
-        {
-            itemCloudInABottle = (ItemCloudInABottle) new ItemCloudInABottle().setTextureName("Chisel:cloudinabottle").setCreativeTab(CreativeTabs.tabTools);
-            EntityRegistry.registerModEntity(EntityCloudInABottle.class, "CloudInABottle", 1, this, 40, 1, true);
-            GameRegistry.registerItem(itemCloudInABottle, "cloudinabottle");
-        }
-
-        if(Configurations.featureEnabled("ballOfMoss"))
-        {
-            itemBallOMoss = (ItemBallOMoss) new ItemBallOMoss().setTextureName("Chisel:ballomoss").setCreativeTab(CreativeTabs.tabTools);
-            EntityRegistry.registerModEntity(EntityBallOMoss.class, "BallOMoss", 2, this, 40, 1, true);
-            GameRegistry.registerItem(itemBallOMoss, "ballomoss");
-        }
-
-        if(Configurations.featureEnabled("smashingRock"))
-        {
-            smashingRock = (ItemSmashingRock) new ItemSmashingRock().setTextureName("Chisel:smashingrock").setCreativeTab(CreativeTabs.tabTools);
-            EntityRegistry.registerModEntity(EntitySmashingRock.class, "SmashingRock", 2, this, 40, 1, true);
-            GameRegistry.registerItem(smashingRock, "smashingrock");
-        }
-        ChiselBlocks.load();
+        ModItems.load();
+        ModTabs.load();
+        ModBlocks.load();
         proxy.preInit();
     }
 
@@ -213,8 +166,12 @@ public class Chisel
         });
 
 
-        GameRegistry.registerWorldGenerator(new GeneratorMarble(ChiselBlocks.blockMarble, 32, Configurations.marbleAmount), 1000);
-        GameRegistry.registerWorldGenerator(new GeneratorLimestone(ChiselBlocks.blockLimestone, 32, Configurations.limestoneAmount), 1000);
+        GameRegistry.registerWorldGenerator(new GeneratorMarble(ModBlocks.marble, 32, Configurations.marbleAmount), 1000);
+        GameRegistry.registerWorldGenerator(new GeneratorLimestone(ModBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
+
+        ModIntegration.addMod(FMPIntegration.class);
+
+        ModIntegration.init();
 
         proxy.init();
         MinecraftForge.EVENT_BUS.register(this);
@@ -227,6 +184,7 @@ public class Chisel
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+        ModIntegration.postInit();
         Compatibility.init(event);
     }
 

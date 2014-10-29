@@ -1,7 +1,7 @@
 package info.jbcs.minecraft.chisel.client.gui;
 
-import info.jbcs.minecraft.utilities.DummyContainer;
-import info.jbcs.minecraft.utilities.GeneralClient;
+import info.jbcs.minecraft.chisel.utils.DummyContainer;
+import info.jbcs.minecraft.chisel.utils.GeneralClient;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;

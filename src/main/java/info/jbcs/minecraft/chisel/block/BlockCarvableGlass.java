@@ -6,6 +6,7 @@ import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
+import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -25,7 +26,7 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable
         super(Material.glass, false);
 
         carverHelper = new CarvableHelper();
-        setCreativeTab(Chisel.tabChisel);
+        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     public BlockCarvableGlass setStained(boolean a)

@@ -7,6 +7,7 @@ import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.client.render.BlockMarblePaneRenderer;
+import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -27,7 +28,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable
 
         carverHelper = new CarvableHelper();
 
-        setCreativeTab(Chisel.tabChisel);
+        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     public BlockCarvablePane setStained(boolean a)

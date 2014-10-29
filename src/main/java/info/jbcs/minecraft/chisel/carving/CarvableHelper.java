@@ -8,7 +8,7 @@ import info.jbcs.minecraft.chisel.carving.CarvableVariation.CarvableVariationCTM
 import info.jbcs.minecraft.chisel.client.render.CTM;
 import info.jbcs.minecraft.chisel.client.render.TextureSubmap;
 import info.jbcs.minecraft.chisel.item.ItemCarvable;
-import info.jbcs.minecraft.utilities.GeneralClient;
+import info.jbcs.minecraft.chisel.utils.GeneralClient;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;

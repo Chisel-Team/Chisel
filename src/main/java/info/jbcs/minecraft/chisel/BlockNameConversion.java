@@ -1,6 +1,6 @@
 package info.jbcs.minecraft.chisel;
 
-import info.jbcs.minecraft.utilities.General;
+import info.jbcs.minecraft.chisel.utils.General;
 
 import java.util.HashMap;
 
@@ -26,7 +26,7 @@ public class BlockNameConversion
                     return namingConversion.get(oldname);
                 case 1: // simple lower case
                     return oldname.toLowerCase();
-                case 2: // rename "marbleSlab" -> "marble_slab", "blockRedstone" -> "redstone_block"
+                case 2: // rename "marbleSlab" -> "marble_slab", "redstone" -> "redstone_block"
                     newname = oldname.replaceAll("([a-z]+)([A-Z])", "$1_$2").toLowerCase();
                     if (newname.startsWith("block_"))
                     {
@@ -44,8 +44,8 @@ public class BlockNameConversion
                         newname = newname.replaceFirst("wood_([a-z_]+)", "$1_planks");
                     }
                     return newname;
-                case (MAX - 1): // ALWAYS last: rename "blockYxx" -> "yxx" (e.g. "blockDirt" -> "dirt").
-                                // This can be dangerous in cases like "blockCarpet" (a block) -> "carpet" (NO block)
+                case (MAX - 1): // ALWAYS last: rename "blockYxx" -> "yxx" (e.g. "dirt" -> "dirt").
+                                // This can be dangerous in cases like "carpet" (a block) -> "carpet" (NO block)
                     return oldname.replaceAll("([a-z]+)([A-Z])", "$1_$2").toLowerCase().replaceFirst("block_", "");
                 default:
                     throw new IndexOutOfBoundsException("conversion got invalid parameter step=" + step);
@@ -66,12 +66,12 @@ public class BlockNameConversion
         namingConversion.put("stoneMoss", "mossy_cobblestone");
         namingConversion.put("stoneBrick", "stonebrick");
         namingConversion.put("fenceIron", "iron_bars");
-        namingConversion.put("blockFft", "fantasyblock");
-        namingConversion.put("blockCarpetFloor", "carpet");
-        namingConversion.put("blockTemple", "templeblock");
-        namingConversion.put("blockTempleMossy", "mossy_templeblock");
-        namingConversion.put("blockFactory", "factoryblock");
-        namingConversion.put("blockLaboratory", "laboratoryblock");
+        namingConversion.put("fantasy", "fantasyblock");
+        namingConversion.put("carpetFloor", "carpet");
+        namingConversion.put("temple", "templeblock");
+        namingConversion.put("templeMossy", "mossy_templeblock");
+        namingConversion.put("factory", "factoryblock");
+        namingConversion.put("laboratory", "laboratoryblock");
         // "LightGray" is unfortunately converted to "light_gray"
         namingConversion.put("stainedGlassLightGray", "stained_glass_lightgray");
         namingConversion.put("stainedGlassPaneLightGray", "stained_glass_pane_lightgray");

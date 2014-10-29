@@ -5,6 +5,7 @@ import info.jbcs.minecraft.chisel.Chisel;
 
 import java.util.List;
 
+import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -22,7 +23,7 @@ public class BlockMarbleWall extends BlockWall
 
         carverHelper = new CarvableHelper();
 
-        setCreativeTab(Chisel.tabChisel);
+        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     @Override

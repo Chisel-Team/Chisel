@@ -7,6 +7,7 @@ import info.jbcs.minecraft.chisel.Chisel;
 
 import java.util.List;
 
+import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.BlockCarpet;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,7 +24,7 @@ public class BlockMarbleCarpet extends BlockCarpet implements ICarvable
     {
         carverHelper = new CarvableHelper();
 
-        setCreativeTab(Chisel.tabChisel);
+        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
 

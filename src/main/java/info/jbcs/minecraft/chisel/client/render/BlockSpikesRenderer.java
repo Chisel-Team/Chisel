@@ -1,7 +1,7 @@
 package info.jbcs.minecraft.chisel.client.render;
 
-import info.jbcs.minecraft.chisel.ChiselBlocks;
-import info.jbcs.minecraft.utilities.Drawing;
+import info.jbcs.minecraft.chisel.init.ModBlocks;
+import info.jbcs.minecraft.chisel.utils.Drawing;
 
 import java.util.Random;
 
@@ -66,22 +66,14 @@ public class BlockSpikesRenderer implements ISimpleBlockRenderingHandler
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
     {
-        int meta = world.getBlockMetadata(x, y, z);
-
         renderer.renderStandardBlock(block, x, y, z);
 
         Tessellator tessellator = Tessellator.instance;
-        IIcon icon = ChiselBlocks.blockSpiketrap.iconSpike;
-//		Icon icon=Chisel.blockSpiketrap.iconBase;
+        IIcon icon = ModBlocks.spikeTrap.iconSpike;
 
-        double h = 0.85;
         double d = 1.5 / 16;
         double r = d / 2;
 
-
-        double tx = x + 0.25;
-        double ty = y + h;
-        double tz = z + 0.25;
         double skew = 0.5;
 
         //       tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));

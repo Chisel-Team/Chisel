@@ -5,6 +5,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import info.jbcs.minecraft.chisel.api.ChiselMode;
 import info.jbcs.minecraft.chisel.carving.CarvingVariation;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
+import info.jbcs.minecraft.chisel.init.ModBlocks;
+import info.jbcs.minecraft.chisel.init.ModItems;
 import info.jbcs.minecraft.chisel.item.ItemChisel;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +35,7 @@ public class ChiselLeftClick
         if(!Configurations.enableChiseling) return;
         EntityPlayer player = event.entityPlayer;
         ItemStack stack = player.getHeldItem();
-        if(stack == null || stack.getItem() != Chisel.chisel) return;
+        if(stack == null || stack.getItem() != ModItems.chisel) return;
 
         World world = event.world;
         int x = event.x;
@@ -94,9 +96,9 @@ public class ChiselLeftClick
         /* special case: stone can be carved to cobble and bricks */
         if(Configurations.chiselStoneToCobbleBricks)
         {
-            if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ChiselBlocks.blockCobblestone))
+            if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ModBlocks.cobblestone))
                 match = true;
-            if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ChiselBlocks.stoneBrick))
+            if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ModBlocks.stoneBrick))
                 match = true;
         }
         if(!match)
@@ -152,7 +154,7 @@ public class ChiselLeftClick
         if(!Configurations.enableChiseling) return;
         EntityPlayer player = event.getPlayer();
         ItemStack stack = player.getHeldItem();
-        if(stack == null || stack.getItem() != Chisel.chisel) return;
+        if(stack == null || stack.getItem() != ModItems.chisel) return;
 
         event.setCanceled(true);
     }
