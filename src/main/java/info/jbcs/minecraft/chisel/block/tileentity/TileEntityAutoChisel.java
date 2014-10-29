@@ -1,7 +1,10 @@
 package info.jbcs.minecraft.chisel.block.tileentity;
 
+import info.jbcs.minecraft.chisel.carving.Carving;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -14,11 +17,6 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
 
 	private ItemStack[] inventory = new ItemStack[3];
     private String name = "autoChisel";
-
-	@Override
-	public boolean canUpdate() {
-		return false;
-	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int size) {
@@ -37,6 +35,32 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
 		} else
 			return null;
 	}
+
+    public ItemStack increaseStackInSlot(ItemStack stack, int slot, int size){
+        if(inventory[slot] != null){
+            ItemStack is;
+
+            if(inventory[slot].stackSize == 0){
+                inventory[slot] = stack;
+            }
+
+            if(inventory[slot].stackSize <= size){
+                is = inventory[slot];
+                inventory[slot] = null;
+                return is;
+            } else {
+                is = inventory[slot].splitStack(size);
+
+                if(inventory[slot].stackSize == 0){
+                    inventory[slot] = null;
+                }
+
+                return is;
+            }
+        } else {
+            return null;
+        }
+    }
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
@@ -57,6 +81,41 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
         {
             this.name = nbt.getString("CustomName");
         }
+    }
+
+    @Override
+    public void updateEntity(){
+        if(!worldObj.isRemote && worldObj.getWorldTime() % 20 == 0){
+            if(getStackInSlot(0) == null){
+                return;
+            }
+
+            ItemStack[] stacksInSlots = new ItemStack[inventory.length];
+
+            for(int c = 1; c < getSizeInventory() - 1; c++){
+                stacksInSlots[c - 1] = getStackInSlot(c);
+            }
+
+            ItemStack output = stacksInSlots[2];
+
+            if(!(stacksInSlots[0] == null || stacksInSlots[1] == null)){
+                if(output == null) {
+                    if (stacksInSlots[0].stackSize > 0) {
+                        output = stacksInSlots[1].copy();
+                        stacksInSlots[0].stackSize--;
+                    }
+                } else {
+                    if (stacksInSlots[0].stackSize > 0) {
+                        output.stackSize++;
+                        stacksInSlots[0].stackSize--;
+                    }
+                }
+            }
+        } else {
+            return;
+        }
+
+        markDirty();
     }
 
 	@Override
@@ -150,7 +209,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack){
-        return true;
+        return slot != 2;
     }
 
     @Override

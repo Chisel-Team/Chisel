@@ -12,16 +12,16 @@ public class ModTabs {
         tabChisel = new CreativeTabs("tabChisel")
         {
             @Override
-            public Item getTabIconItem()
-            {
-                return Item.getItemFromBlock(ModBlocks.holystone);
+            public Item getTabIconItem() {
+                return ModItems.chisel;
             }
         };
 
         tabChiselBlocks = new CreativeTabs("tabChiselBlocks") {
             @Override
-            public Item getTabIconItem() {
-                return ModItems.chisel;
+            public Item getTabIconItem()
+            {
+                return Item.getItemFromBlock(ModBlocks.holystone);
             }
         };
     }
