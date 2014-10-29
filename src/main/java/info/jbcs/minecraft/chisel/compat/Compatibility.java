@@ -3,7 +3,6 @@ package info.jbcs.minecraft.chisel.compat;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import info.jbcs.minecraft.chisel.ChiselModCompatibility;
 import info.jbcs.minecraft.chisel.carving.Carving;
 
 public class Compatibility
@@ -11,7 +10,7 @@ public class Compatibility
 
     public static void init(FMLPostInitializationEvent event)
     {
-        new ChiselModCompatibility().postInit(event);
+        new MarbleCompatibility().postInit(event);
 
         addSupport("ProjRed|Exploration", "projectred.exploration.stone", "marble", 0, 99);
         addSupport("bluepower", "marble", "marble", 0, 99);

@@ -1,10 +1,10 @@
-package info.jbcs.minecraft.chisel;
+package info.jbcs.minecraft.chisel.compat;
 
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import info.jbcs.minecraft.chisel.carving.Carving;
 import net.minecraft.block.Block;
 
-public class ChiselModCompatibility
+public class MarbleCompatibility
 {
 
 

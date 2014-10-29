@@ -9,19 +9,14 @@ import net.minecraft.item.ItemStack;
 public class FMPIntegration implements IModIntegration{
     @Override
     public String getModId(){
-        return "ForgeMultipart";
+        return "ForgeMicroblock";
     }
 
     @Override
     public void onInit(){
         registerMaterial(ModBlocks.marble);
-        registerMaterial(ModBlocks.marbleSlab);
         registerMaterial(ModBlocks.marblePillar);
-        registerMaterial(ModBlocks.marblePillarSlab);
-        registerMaterial(ModBlocks.marbleStairs);
         registerMaterial(ModBlocks.limestone);
-        registerMaterial(ModBlocks.limestoneSlab);
-        registerMaterial(ModBlocks.limestoneStairs);
         registerMaterial(ModBlocks.cobblestone);
         registerMaterial(ModBlocks.glass);
         registerMaterial(ModBlocks.sandstone, 3, 15);
@@ -40,22 +35,17 @@ public class FMPIntegration implements IModIntegration{
         registerMaterial(ModBlocks.dirt, 0, 12);
         registerMaterial(ModBlocks.ice, 1, 15);
         registerMaterial(ModBlocks.icePillar);
-        registerMaterial(ModBlocks.iceStairs);
         registerMaterial(ModBlocks.obsidian, 1, 15);
-        registerMaterial(ModBlocks.paneIron, 1, 9);
         registerMaterial(ModBlocks.redstone, 1, 15);
         registerMaterial(ModBlocks.holystone, 0, 13);
         registerMaterial(ModBlocks.lavastone, 0, 6);
         registerMaterial(ModBlocks.fantasy);
-        registerMaterial(ModBlocks.carpet);
         registerMaterial(ModBlocks.carpetFloor);
-        registerMaterial(ModBlocks.bookshelf, 0, 8);
         registerMaterial(ModBlocks.tyrian);
         registerMaterial(ModBlocks.temple);
         registerMaterial(ModBlocks.templeMossy);
         registerMaterial(ModBlocks.cloud, 0, 0);
         registerMaterial(ModBlocks.factory);
-        registerMaterial(ModBlocks.paperWall, 0, 8);
         registerMaterial(ModBlocks.laboratory);
     }
 

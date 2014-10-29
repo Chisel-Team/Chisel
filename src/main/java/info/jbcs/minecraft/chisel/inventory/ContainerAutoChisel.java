@@ -18,8 +18,8 @@ public class ContainerAutoChisel extends Container {
         autoChisel = tileEntityAutoChisel;
 
         addSlotToContainer(new Slot(tileEntityAutoChisel, 0, 53, 15));
-        addSlotToContainer(new Slot(tileEntityAutoChisel, 1, 103, 15));
-        addSlotToContainer(new Slot(tileEntityAutoChisel, 2, 78, 51));
+        addSlotToContainer(new Slot(tileEntityAutoChisel, 1, 78, 51));
+        addSlotToContainer(new Slot(tileEntityAutoChisel, 2, 103, 15));
 
         bindPlayerInventory(player);
     }
@@ -49,6 +49,12 @@ public class ContainerAutoChisel extends Container {
         if(slotObject != null && slotObject.getHasStack()){
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
+
+            if(slot == 2){
+                if(!this.mergeItemStack(stackInSlot, 3, 39, true)){
+                    return null;
+                }
+            }
 
             if(slot < autoChisel.getSizeInventory()){
                 if(!this.mergeItemStack(stackInSlot, 0, 35, true)){
