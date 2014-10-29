@@ -8,6 +8,7 @@ import info.jbcs.minecraft.chisel.client.render.BlockMarbleStairsRenderer;
 
 import java.util.List;
 
+import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -29,7 +30,7 @@ public class BlockMarbleStairs extends BlockStairs implements ICarvable
         super(block, meta);
 
         this.useNeighborBrightness = true;
-        setCreativeTab(Chisel.tabChisel);
+        setCreativeTab(ModTabs.tabChiselBlocks);
         carverHelper = helper;
         blockMeta = meta;
     }

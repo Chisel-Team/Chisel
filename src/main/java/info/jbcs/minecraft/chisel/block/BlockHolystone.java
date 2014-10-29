@@ -1,7 +1,7 @@
 package info.jbcs.minecraft.chisel.block;
 
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
-import info.jbcs.minecraft.utilities.General;
+import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;

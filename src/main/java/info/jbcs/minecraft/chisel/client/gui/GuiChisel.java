@@ -2,13 +2,11 @@ package info.jbcs.minecraft.chisel.client.gui;
 
 import info.jbcs.minecraft.chisel.inventory.ContainerChisel;
 import info.jbcs.minecraft.chisel.inventory.InventoryChiselSelection;
-import info.jbcs.minecraft.utilities.GeneralClient;
-import net.minecraft.client.gui.GuiButton;
+import info.jbcs.minecraft.chisel.utils.GeneralClient;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Slot;
 
 import org.lwjgl.opengl.GL11;
 

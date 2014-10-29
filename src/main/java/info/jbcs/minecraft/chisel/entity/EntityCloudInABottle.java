@@ -1,10 +1,8 @@
 package info.jbcs.minecraft.chisel.entity;
 
-import info.jbcs.minecraft.chisel.Chisel;
-import info.jbcs.minecraft.chisel.ChiselBlocks;
-
 import java.util.Random;
 
+import info.jbcs.minecraft.chisel.init.ModBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
@@ -109,7 +107,7 @@ public class EntityCloudInABottle extends EntityThrowable
                         {
                             if(world.getBlock(j2, k2, l2).isAir(world, j2, k2, l2) && Math.abs(j2 - x) + Math.abs(k2 - y) + Math.abs(l2 - z) < 4 * 1 + random.nextInt(2))
                             {
-                                world.setBlock(j2, k2, l2, ChiselBlocks.blockCloud);
+                                world.setBlock(j2, k2, l2, ModBlocks.cloud);
                                 count++;
                             }
                         }

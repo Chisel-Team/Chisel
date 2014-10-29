@@ -1,6 +1,6 @@
 package info.jbcs.minecraft.chisel.client.gui;
 
-import info.jbcs.minecraft.utilities.GeneralClient;
+import info.jbcs.minecraft.chisel.utils.GeneralClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 

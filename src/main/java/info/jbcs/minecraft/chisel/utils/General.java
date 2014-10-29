@@ -1,4 +1,4 @@
-package info.jbcs.minecraft.utilities;
+package info.jbcs.minecraft.chisel.utils;
 
 import java.util.HashMap;
 import java.util.Random;

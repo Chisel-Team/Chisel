@@ -1,4 +1,4 @@
-package info.jbcs.minecraft.chisel;
+package info.jbcs.minecraft.chisel.proxy;
 
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import net.minecraft.tileentity.TileEntity;

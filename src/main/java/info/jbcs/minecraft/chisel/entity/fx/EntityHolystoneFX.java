@@ -1,7 +1,7 @@
-package info.jbcs.minecraft.chisel.entity;
+package info.jbcs.minecraft.chisel.entity.fx;
 
 import info.jbcs.minecraft.chisel.block.BlockHolystone;
-import info.jbcs.minecraft.utilities.General;
+import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;

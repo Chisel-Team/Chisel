@@ -2,7 +2,7 @@ package info.jbcs.minecraft.chisel.inventory;
 
 import info.jbcs.minecraft.chisel.carving.Carving;
 import info.jbcs.minecraft.chisel.item.ItemChisel;
-import info.jbcs.minecraft.utilities.General;
+import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

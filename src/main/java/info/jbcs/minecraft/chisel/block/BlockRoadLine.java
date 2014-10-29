@@ -2,6 +2,7 @@ package info.jbcs.minecraft.chisel.block;
 
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.client.render.BlockRoadLineRenderer;
+import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,7 +24,7 @@ public class BlockRoadLine extends Block
         this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.00390625f, 1.0f);
 //        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 
-        setCreativeTab(Chisel.tabChisel);
+        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     @Override

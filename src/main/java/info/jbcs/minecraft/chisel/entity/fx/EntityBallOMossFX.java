@@ -1,8 +1,9 @@
-package info.jbcs.minecraft.chisel.entity;
+package info.jbcs.minecraft.chisel.entity.fx;
 
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
-import info.jbcs.minecraft.utilities.General;
+import info.jbcs.minecraft.chisel.init.ModItems;
+import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
@@ -107,7 +108,7 @@ public class EntityBallOMossFX extends EntityFX
 
 //		setParticleIcon(block.particles[General.rand.nextInt(block.particles.length)]);
 
-        icon = Chisel.itemBallOMoss.getIconFromDamage(0);
+        icon = ModItems.itemBallOMoss.getIconFromDamage(0);
         float width = 4.0f + General.rand.nextFloat() * 8.0f;
         float uu = General.rand.nextFloat() * (16.0f - width);
         float vv = General.rand.nextFloat() * (16.0f - width);

@@ -4,7 +4,7 @@ import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.Chisel;
-import info.jbcs.minecraft.utilities.Drawing;
+import info.jbcs.minecraft.chisel.utils.Drawing;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;

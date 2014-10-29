@@ -1,4 +1,4 @@
-package info.jbcs.minecraft.utilities;
+package info.jbcs.minecraft.chisel.utils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;

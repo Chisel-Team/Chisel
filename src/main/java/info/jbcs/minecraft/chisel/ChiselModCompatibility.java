@@ -97,7 +97,7 @@ public class ChiselModCompatibility
 
     public void postInit(FMLPostInitializationEvent event)
     {
-        new ClassBlockCompat("shukaro.artifice.ArtificeBlocks", "blockMarble")
+        new ClassBlockCompat("shukaro.artifice.ArtificeBlocks", "marble")
         {
             @Override
             void action()

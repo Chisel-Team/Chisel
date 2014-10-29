@@ -1,4 +1,4 @@
-package info.jbcs.minecraft.utilities;
+package info.jbcs.minecraft.chisel.utils;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;

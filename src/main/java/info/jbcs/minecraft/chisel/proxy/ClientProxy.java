@@ -1,5 +1,6 @@
-package info.jbcs.minecraft.chisel;
+package info.jbcs.minecraft.chisel.proxy;
 
+import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
 import info.jbcs.minecraft.chisel.entity.EntityCloudInABottle;
 import info.jbcs.minecraft.chisel.client.render.BlockAdvancedMarbleRenderer;
@@ -14,6 +15,7 @@ import info.jbcs.minecraft.chisel.client.render.BlockSnakeStoneRenderer;
 import info.jbcs.minecraft.chisel.client.render.BlockSpikesRenderer;
 import info.jbcs.minecraft.chisel.client.render.BlockTexturedOreRenderer;
 import info.jbcs.minecraft.chisel.client.render.ItemChiselRenderer;
+import info.jbcs.minecraft.chisel.init.ModItems;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -43,9 +45,9 @@ public class ClientProxy extends CommonProxy
 
         RenderingRegistry.registerBlockHandler(new BlockTexturedOreRenderer());
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityCloudInABottle.class, new RenderSnowball(Chisel.itemCloudInABottle));
-        RenderingRegistry.registerEntityRenderingHandler(EntityBallOMoss.class, new RenderSnowball(Chisel.itemBallOMoss));
+        RenderingRegistry.registerEntityRenderingHandler(EntityCloudInABottle.class, new RenderSnowball(ModItems.itemCloudInABottle));
+        RenderingRegistry.registerEntityRenderingHandler(EntityBallOMoss.class, new RenderSnowball(ModItems.itemBallOMoss));
 
-        MinecraftForgeClient.registerItemRenderer(Chisel.chisel, renderer);
+        MinecraftForgeClient.registerItemRenderer(ModItems.chisel, renderer);
     }
 }

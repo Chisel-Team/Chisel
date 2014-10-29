@@ -1,9 +1,9 @@
 package info.jbcs.minecraft.chisel.entity;
 
 import info.jbcs.minecraft.chisel.Chisel;
-import info.jbcs.minecraft.chisel.ChiselBlocks;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
-import info.jbcs.minecraft.utilities.General;
+import info.jbcs.minecraft.chisel.init.ModBlocks;
+import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -106,12 +106,12 @@ public class EntityBallOMoss extends EntityThrowable
         } else if(block.equals(Blocks.cobblestone_wall) && meta == 0)
         {
             resMeta = 1;
-        } else if(block.equals(ChiselBlocks.blockCobblestone))
+        } else if(block.equals(ModBlocks.cobblestone))
         {
-            resBlock = ChiselBlocks.blockCobblestoneMossy;
-        } else if(block.equals(ChiselBlocks.blockTemple))
+            resBlock = ModBlocks.cobblestoneMossy;
+        } else if(block.equals(ModBlocks.temple))
         {
-            resBlock = ChiselBlocks.blockTempleMossy;
+            resBlock = ModBlocks.templeMossy;
         } else if(block.equals(Blocks.stonebrick))
         {
             resMeta = 1;

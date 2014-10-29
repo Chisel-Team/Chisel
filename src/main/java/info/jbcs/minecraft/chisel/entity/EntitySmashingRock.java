@@ -1,8 +1,6 @@
 package info.jbcs.minecraft.chisel.entity;
 
-import info.jbcs.minecraft.chisel.ChiselBlocks;
-import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
-import info.jbcs.minecraft.utilities.General;
+import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
