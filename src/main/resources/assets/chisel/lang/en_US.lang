@@ -8,6 +8,11 @@ item.cloudBottle.name=Cloud In A Bottle
 # Block localizations
 # Have fun! ~zombiepig333
 
+#Chisel 2
+tile.autoChisel.name=Auto Chisel
+
+#Chisel 1
+
 #Cobblestone Blocks
 tile.cobblestone.name=Cobblestone
 chisel.tile.cobblestone.0.desc=Aligned Cobblestone Bricks

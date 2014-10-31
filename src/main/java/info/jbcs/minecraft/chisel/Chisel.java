@@ -47,7 +47,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
 
-@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = "@MOD_VERSION@", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;")
+@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = "2.0", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;")
 public class Chisel
 {
     public static final String MOD_ID = "chisel";
