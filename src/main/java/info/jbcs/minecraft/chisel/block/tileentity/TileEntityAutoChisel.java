@@ -1,12 +1,9 @@
 package info.jbcs.minecraft.chisel.block.tileentity;
 
-import info.jbcs.minecraft.chisel.block.BlockAutoChisel;
-import info.jbcs.minecraft.chisel.block.BlockCarvable;
 import info.jbcs.minecraft.chisel.carving.Carving;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -68,37 +65,38 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
 
     @Override
     public void updateEntity(){
-        if(!worldObj.isRemote){
+        if(!worldObj.isRemote && worldObj.getWorldTime() % 20 == 0) {
 
             ItemStack[] stacksInSlots = new ItemStack[inventory.length];
 
-            for(int c = 0; c < getSizeInventory(); c++) {
+            for (int c = 0; c < getSizeInventory(); c++) {
                 stacksInSlots[c] = getStackInSlot(c);
             }
 
             ItemStack input = stacksInSlots[0];
-            ItemStack target = stacksInSlots[2];
+            ItemStack target = stacksInSlots[1];
 
-            ItemStack output = stacksInSlots[1];
+            ItemStack output = stacksInSlots[2];
 
-            if(input != null && target != null){
+            if (input != null && target != null) {
 
-                if(carving.getGroup(Block.getBlockFromItem(input.getItem()), input.getItemDamage()) == carving.getGroup(Block.getBlockFromItem(target.getItem()), target.getItemDamage())){
+                if (carving.getGroup(Block.getBlockFromItem(input.getItem()), input.getItemDamage()) == carving.getGroup(Block.getBlockFromItem(target.getItem()), target.getItemDamage())) {
                     equal = true;
                 }
 
-                if(equal){
-                    if(output == null) {
-                        setInventorySlotContents(1, new ItemStack(Block.getBlockFromItem(input.getItem())));
+                if (equal) {
+                    if (output == null) {
+                        setInventorySlotContents(2, new ItemStack(Block.getBlockFromItem(target.getItem()), 1, target.getItemDamage()));
                     } else {
-                        output.stackSize++;
-                        input.stackSize--;
+                        if (input.stackSize != 0 || output.stackSize < getInventoryStackLimit()) {
+                            decrStackSize(0, 1);
+                            output.stackSize++;
+                        } else {
+                            inventory[0] = null;
+                        }
                     }
                 }
-
             }
-        } else {
-            return;
         }
 
         markDirty();
@@ -207,7 +205,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
                 return false;
             }
         } else if(side == 0){
-            if(slot == 2){
+            if(slot == 1){
                 return true;
             } else {
                 return false;
@@ -219,21 +217,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
 
     @Override
     public boolean canExtractItem(int slot, ItemStack itemStack, int side){
-        if(side != 0){
-            if(slot == 1){
-                return true;
-            } else {
-                return false;
-            }
-        } else if(side == 0){
-            if(slot == 2){
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
+        return true;
     }
 
     @Override

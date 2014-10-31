@@ -11,7 +11,6 @@ import info.jbcs.minecraft.chisel.item.ItemCarvable;
 import info.jbcs.minecraft.chisel.item.ItemMarbleSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
@@ -66,8 +65,8 @@ public class ModBlocks {
     public static BlockCarvablePane paperWall;
     public static BlockCarvable woolenClay;
     public static BlockCarvable laboratory;
-    public static BlockCarvablePumpkin pumpkinOn;
-    public static BlockCarvablePumpkin pumpkinOff;
+    public static BlockCarvable pumpkin;
+    public static BlockCarvable jackOLantern;
     public static Block autoChisel;
     public static BlockSnakestone snakestone;
     public static BlockSnakestone sandSnakestone;
@@ -1256,7 +1255,9 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("pumpkin"))
         {
-            //TODO
+            pumpkin = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(5F).setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("pumpkin", Blocks.pumpkin, 0, 0);
+            //pumpkin.carverHelper.addVariation("chisel.title.pumpkin.1.desc", 1, "pumpkin/1");
         }
 
         Blocks.stone.setHarvestLevel("chisel", 0, 0);
