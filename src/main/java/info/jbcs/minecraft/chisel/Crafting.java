@@ -60,10 +60,10 @@ public class Crafting
 
         if(Configurations.chiselRecipe)
         {
-            GameRegistry.addRecipe(new ItemStack(ModItems.chisel, 1), new Object[]{" YY", " YY", "X  ", 'X', Items.stick, 'Y', Items.iron_ingot});
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.chisel, 1), new Object[]{" YY", " YY", "X  ", 'X', Items.stick, 'Y', Items.iron_ingot}));
         } else
         {
-            GameRegistry.addRecipe(new ItemStack(ModItems.chisel, 1), new Object[]{" Y", "X ", 'X', Items.stick, 'Y', Items.iron_ingot});
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.chisel, 1), new Object[]{" Y", "X ", 'X', Items.stick, 'Y', Items.iron_ingot}));
         }
 
         if(Configurations.featureEnabled("ballOfMoss"))
@@ -89,5 +89,6 @@ public class Crafting
 
         GameRegistry.addRecipe(new ItemStack(ModBlocks.laboratory, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.quartz, 1)});
 
+        GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.autoChisel, 1),new Object[]{"XXX", "XYX", "XXX", Character.valueOf('X'), "plankWood", Character.valueOf('Y'), ModItems.chisel}));
     }
 }

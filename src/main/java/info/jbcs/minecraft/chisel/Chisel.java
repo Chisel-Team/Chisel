@@ -121,9 +121,9 @@ public class Chisel
         Configurations.config.load();
         Configurations.refreshConfig();
 
-        ModItems.load();
         ModTabs.load();
         ModBlocks.load();
+        ModItems.load();
         proxy.preInit();
     }
 
