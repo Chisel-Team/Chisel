@@ -17,7 +17,7 @@ buildscript {
 }
 
 apply plugin: 'forge'
-version = "1.5.7"
+version = "2.0"
 group = "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Chisel"
 
@@ -65,7 +65,7 @@ processResources
         }
 
 // some crazy stuff to make sure the chicken stuff is in the mods folder...
-// because it wont work otherwise...  because FML doesnt laod coremods from the classpath
+// because it wont work otherwise...  because FML doesnt load coremods from the classpath
 task copyChicken(type: Copy, dependsOn: "extractUserDev") {
     from { configurations.compile }
     include "**/*Chicken*.jar", "**/*NotEnoughItems*.jar"
