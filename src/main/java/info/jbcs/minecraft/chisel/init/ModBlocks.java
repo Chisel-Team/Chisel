@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.*;
+import info.jbcs.minecraft.chisel.block.tileentity.BlockVoidstone;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.carving.Carving;
@@ -67,6 +68,8 @@ public class ModBlocks {
     public static BlockCarvable laboratory;
     public static BlockCarvable pumpkin;
     public static BlockCarvable jackOLantern;
+    public static BlockCarvable voidstone;
+    public static BlockVoidstone voidstonePillar;
     public static Block autoChisel;
     public static BlockSnakestone snakestone;
     public static BlockSnakestone sandSnakestone;
@@ -1258,6 +1261,13 @@ public class ModBlocks {
             pumpkin = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(5F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("pumpkin", Blocks.pumpkin, 0, 0);
             //pumpkin.carverHelper.addVariation("chisel.title.pumpkin.1.desc", 1, "pumpkin/1");
+        }
+
+        if(Configurations.featureEnabled("voidstone")){
+            voidstone = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(5F).setStepSound(Block.soundTypeStone);
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.0.desc"), 0, "voidstone/metalborder");
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.1.desc"), 1, "voidstone/pillar-side");
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.2.desc"), 2, voidstonePillar, 0);
         }
 
         Blocks.stone.setHarvestLevel("chisel", 0, 0);

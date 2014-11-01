@@ -4,6 +4,7 @@ import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.BlockHolystone;
 import info.jbcs.minecraft.chisel.block.BlockLavastone;
 import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
+import info.jbcs.minecraft.chisel.block.tileentity.BlockVoidstone;
 import info.jbcs.minecraft.chisel.entity.fx.EntityBallOMossFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntityHolystoneFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntitySnakestoneObsidianFX;
@@ -16,6 +17,7 @@ import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+import sun.security.krb5.Config;
 
 import java.util.Random;
 
@@ -125,6 +127,12 @@ public class GeneralChiselClient
         {
             EntitySnakestoneObsidianFX res = new EntitySnakestoneObsidianFX(world, block, x, y, z);
             Minecraft.getMinecraft().effectRenderer.addEffect(res);
+        }
+    }
+
+    public static void spawnVoidstoneFX(World world, BlockVoidstone blockVoidstone, int x, int y, int z){
+        if(Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0){
+
         }
     }
 
