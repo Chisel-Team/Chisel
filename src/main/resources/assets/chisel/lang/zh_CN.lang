@@ -718,7 +718,8 @@ chisel.tile.blockLaboratory.14.desc=方向控制台 (左)
 chisel.tile.blockLaboratory.15.desc=信息控制台
 
 # Creative Tab localizations
-itemGroup.tabChisel=凿工艺|方块
+itemGroup.tabChiselBlocks=凿工艺|方块
+itemGroup.tabChisel=凿工艺|物品
 
 #Container
 container.chisel=凿子
