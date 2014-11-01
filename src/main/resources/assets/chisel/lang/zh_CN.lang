@@ -515,7 +515,7 @@ chisel.tile.ice.10.desc=杂乱砌成的冰瓷砖
 chisel.tile.ice.11.desc=整面錾制的冰砖
 chisel.tile.ice.12.desc=双层冰台阶
 chisel.tile.ice.13.desc=塞尔达冰块
-chisel.tile.ice.14.desc=铋合金冰块
+chisel.tile.ice.14.desc=铋纹冰块
 chisel.tile.ice.15.desc=罪恶的冰块
 
 #Ice Pillars
@@ -561,7 +561,7 @@ chisel.tile.iceStairs.10.desc=杂乱砌成的冰瓷砖楼梯
 chisel.tile.iceStairs.11.desc=整面錾制楼梯
 chisel.tile.iceStairs.12.desc=双层冰台阶搭建的楼梯
 chisel.tile.iceStairs.13.desc=塞尔达冰楼梯
-chisel.tile.iceStairs.14.desc=铋合金冰楼梯
+chisel.tile.iceStairs.14.desc=铋纹冰楼梯
 chisel.tile.iceStairs.15.desc=罪恶的冰楼梯
 
 #Obsidian
