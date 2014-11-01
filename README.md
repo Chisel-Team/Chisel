@@ -18,13 +18,24 @@ Contributing
 Chisel is open-source under the GPL v2 license.  As a result, you may contribute to the development of the mod via pull requests.  
 To set up the mod as to allow you to make changes, do the following:
 
-1. Keep in mind these setup instructions are for IntelliJ IDEA ONLY, not Eclipse.
-2. Clone the repository onto your local system.
-3. Open a command prompt from the repository folder.
-4. Run the command 'gradlew setupDecompWorkspace'.
-5. Then, run 'gradlew idea'.
-6. Open IntelliJ and point to either the project folder or the build.gradle file.
-7. After opening the project in IntelliJ, run 'gradlew genIntellijRuns' in the command terminal you opened earlier.
-8. You now have a functional local copy of Chisel, ready to develop on.
+1. Clone the repository onto your local system.
+2. Open a command prompt from the repository folder.
+3. 3. Run the command 'gradlew setupDecompWorkspace' if on a Windows, 'bash gradlew setupDecompWorkspace' on a Mac, and 'gradle setupDecompWorkspace' if you have Gradle installed, on any OS.
+
+*The next steps vary based on what IDE you wish to use*
+
+### IntelliJ IDEA
+4. Run 'gradlew idea'.
+5. Open IntelliJ and point to either the project folder or the build.gradle file.
+6. After opening the project in IntelliJ, run 'gradlew genIntellijRuns' in the command terminal you opened earlier.
+
+### Eclipse
+
+4b. Run 'gradlew eclipse' if on a Windows, 'bash gradlew eclipse' on a Mac, and 'gradle eclipse' if you have Gradle installed, on any OS.
+
+5b. Open Eclipse and point it to the folder named 'eclipse' within the folder.
+
+You now have a functional local copy of Chisel, ready to develop on.
+ 
 
 MAKE SURE TO UPDATE YOUR FORK BEFORE MAKING A PULL REQUEST.
