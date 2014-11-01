@@ -718,7 +718,8 @@ chisel.tile.blockLaboratory.14.desc=Direction Console (Left)
 chisel.tile.blockLaboratory.15.desc=Information Console
 
 # Creative Tab localizations
-itemGroup.tabChisel=Chisel Blocks
+itemGroup.tabChiselBlocks=Chisel Blocks
+itemGroup.tabChisel=Chisel Items
 
 #Container
 container.chisel=Chisel
