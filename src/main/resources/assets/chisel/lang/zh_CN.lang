@@ -8,6 +8,11 @@ item.cloudBottle.name=瓶装云朵
 # Block localizations
 # Have fun! ~zombiepig333
 
+#Chisel 2
+tile.autoChisel.name=自动雕凿机
+
+#Chisel 1
+
 #Cobblestone Blocks
 tile.cobblestone.name=圆石
 chisel.tile.cobblestone.0.desc=方正圆石砖
