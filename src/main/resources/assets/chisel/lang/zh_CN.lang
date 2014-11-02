@@ -11,6 +11,17 @@ item.cloudBottle.name=瓶装云朵
 #Chisel 2
 tile.autoChisel.name=自动雕凿机
 
+#Void Stone Blocks
+tile.voidstone.name=虚空石
+chisel.tile.voidstone.0.desc=金属镶板虚空石
+chisel.tile.voidstone.1.desc=粗砌虚空石
+chisel.tile.voidstone.2.desc=头颅砌成的虚空石
+chisel.tile.voidstone.3.desc=光滑虚空石
+
+#Void Stone Pillars
+tile.voidstonePillar.name=虚空石柱
+chisel.tile.voidstonePillar.0.desc=竖纹虚空石柱
+
 #Chisel 1
 
 #Cobblestone Blocks
@@ -443,8 +454,8 @@ chisel.tile.hellrock.4.desc=蓝色地狱岩
 chisel.tile.hellrock.5.desc=页状蓝色地狱
 chisel.tile.hellrock.6.desc=经典地狱岩
 chisel.tile.hellrock.7.desc=污秽的地狱岩
-chisel.tile.hellrock.8.desc=用内脏砌成的地狱岩
-chisel.tile.hellrock.9.desc=用内脏砌成的暗色地狱岩
+chisel.tile.hellrock.8.desc=内脏砌成的地狱岩
+chisel.tile.hellrock.9.desc=内脏砌成的暗色地狱岩
 chisel.tile.hellrock.10.desc=用肉做的地狱岩
 chisel.tile.hellrock.11.desc=用肉做的赤红色地狱岩
 chisel.tile.hellrock.12.desc=用小块肉做的地狱岩
@@ -453,11 +464,11 @@ chisel.tile.hellrock.14.desc=流着岩浆的地狱岩
 
 #Mossy Stone
 tile.mossy_cobblestone.name=苔石
-chisel.tile.stoneMoss.1.desc=整齐錾制苔石砖
-chisel.tile.stoneMoss.2.desc=精致錾制苔石砖
-chisel.tile.stoneMoss.3.desc=小块錾制苔石砖
-chisel.tile.stoneMoss.4.desc=大块錾制苔石瓷砖
-chisel.tile.stoneMoss.5.desc=小块錾制苔石瓷砖
+chisel.tile.stoneMoss.1.desc=整齐錾制的苔石砖
+chisel.tile.stoneMoss.2.desc=精雕苔石砖
+chisel.tile.stoneMoss.3.desc=粗砌苔石砖
+chisel.tile.stoneMoss.4.desc=粗砌苔石瓷砖
+chisel.tile.stoneMoss.5.desc=细砌苔石瓷砖
 chisel.tile.stoneMoss.6.desc=法式苔石瓷砖
 chisel.tile.stoneMoss.7.desc=法式苔石瓷砖
 chisel.tile.stoneMoss.8.desc=爬行者錾制苔石瓷砖
@@ -471,8 +482,8 @@ chisel.tile.stoneMoss.15.desc=暗色镶板苔石瓷砖
 
 #Stone Bricks
 tile.stonebrick.name=石砖
-chisel.tile.stoneBrick.4.desc=小块錾制石砖
-chisel.tile.stoneBrick.5.desc=大块錾制石砖
+chisel.tile.stoneBrick.4.desc=粗砌石砖
+chisel.tile.stoneBrick.5.desc=细砌石砖
 chisel.tile.stoneBrick.6.desc=小杂石砖
 chisel.tile.stoneBrick.7.desc=大杂石砖
 chisel.tile.stoneBrick.8.desc=镶板杂石砖
@@ -502,11 +513,11 @@ chisel.tile.blockDirt.12.desc=破碎的泥土
 
 #Ice
 tile.ice.name=冰
-chisel.tile.ice.1.desc=粗糙錾制的冰砖
+chisel.tile.ice.1.desc=粗雕冰砖
 chisel.tile.ice.2.desc=圆石状冰
-chisel.tile.ice.3.desc=大块粗糙錾制的冰砖
-chisel.tile.ice.4.desc=大块錾制的冰砖
-chisel.tile.ice.5.desc=小块錾制的冰砖
+chisel.tile.ice.3.desc=大块粗雕冰砖
+chisel.tile.ice.4.desc=粗砌冰砖
+chisel.tile.ice.5.desc=细砌冰砖
 chisel.tile.ice.6.desc=光滑的冰砖墙
 chisel.tile.ice.7.desc=大块錾制的冰瓷砖
 chisel.tile.ice.8.desc=光滑的冰瓷砖
@@ -521,21 +532,21 @@ chisel.tile.ice.15.desc=罪恶的冰块
 #Ice Pillars
 tile.ice_pillar.name=冰柱
 chisel.tile.icePillar.0.desc=冰柱
-chisel.tile.icePillar.1.desc=冰柱顶块
+chisel.tile.icePillar.1.desc=冰柱顶石
 chisel.tile.icePillar.2.desc=冰柱基座
-chisel.tile.icePillar.3.desc=小块錾制的冰柱
-chisel.tile.icePillar.4.desc=精致錾制的冰柱
+chisel.tile.icePillar.3.desc=细雕冰柱
+chisel.tile.icePillar.4.desc=精雕冰柱
 chisel.tile.icePillar.5.desc=漂亮的冰柱
 chisel.tile.icePillar.6.desc=希腊式冰柱
-chisel.tile.icePillar.7.desc=简朴的冰柱
+chisel.tile.icePillar.7.desc=简朴冰柱
 chisel.tile.icePillar.8.desc=希腊式冰柱顶块
-chisel.tile.icePillar.9.desc=简朴的冰柱顶块
+chisel.tile.icePillar.9.desc=简朴冰柱顶块
 chisel.tile.icePillar.10.desc=希腊式冰柱基座
-chisel.tile.icePillar.11.desc=简朴的冰柱基座
-chisel.tile.icePillar.12.desc=希腊式冰柱 & 精致的柱顶块
-chisel.tile.icePillar.13.desc=简朴的冰柱 & 精致的柱顶块
-chisel.tile.icePillar.14.desc=希腊式冰柱 & 精致的柱基座
-chisel.tile.icePillar.15.desc=简朴的冰柱 & 精致的柱基座
+chisel.tile.icePillar.11.desc=简朴冰柱基座
+chisel.tile.icePillar.12.desc=希腊式冰柱&精致顶石
+chisel.tile.icePillar.13.desc=简朴冰柱&精致顶石
+chisel.tile.icePillar.14.desc=希腊式冰柱&精致的柱基座
+chisel.tile.icePillar.15.desc=简朴冰柱&精致的柱基座
 
 #Ice stairs
 tile.ice_stairs.name=冰楼梯
@@ -548,13 +559,13 @@ tile.ice_stairs.5.name=冰楼梯
 tile.ice_stairs.6.name=冰楼梯
 tile.ice_stairs.7.name=冰楼梯
 chisel.tile.iceStairs.0.desc=冰楼梯
-chisel.tile.iceStairs.1.desc=粗糙錾制的楼梯
+chisel.tile.iceStairs.1.desc=粗雕冰楼梯
 chisel.tile.iceStairs.2.desc=圆石状楼梯
-chisel.tile.iceStairs.3.desc=大块粗糙錾制的冰砖楼梯
-chisel.tile.iceStairs.4.desc=大块錾制的冰砖楼梯
-chisel.tile.iceStairs.5.desc=小块錾制的冰砖楼梯
+chisel.tile.iceStairs.3.desc=大块粗雕冰砖楼梯
+chisel.tile.iceStairs.4.desc=粗砌冰砖楼梯
+chisel.tile.iceStairs.5.desc=细砌冰砖楼梯
 chisel.tile.iceStairs.6.desc=光滑的冰砖楼梯
-chisel.tile.iceStairs.7.desc=大块錾制的冰瓷砖楼梯
+chisel.tile.iceStairs.7.desc=粗砌冰瓷砖楼梯
 chisel.tile.iceStairs.8.desc=光滑的冰瓷砖楼梯
 chisel.tile.iceStairs.9.desc=凹面冰瓷砖楼梯
 chisel.tile.iceStairs.10.desc=杂乱砌成的冰瓷砖楼梯
@@ -566,21 +577,21 @@ chisel.tile.iceStairs.15.desc=罪恶的冰楼梯
 
 #Obsidian
 tile.obsidian.name=黑曜石
-chisel.tile.obsidian.1.desc=大块錾制的黑曜石柱
+chisel.tile.obsidian.1.desc=粗雕黑曜石柱
 chisel.tile.obsidian.2.desc=黑曜石柱
 chisel.tile.obsidian.3.desc=錾制黑曜石柱
-chisel.tile.obsidian.4.desc=明亮的黑曜石柱
-chisel.tile.obsidian.5.desc=镶板的黑曜石
+chisel.tile.obsidian.4.desc=亮色黑曜石柱
+chisel.tile.obsidian.5.desc=镶板黑曜石
 chisel.tile.obsidian.6.desc=有机黑曜石块
-chisel.tile.obsidian.7.desc=有机生长黑曜石块
+chisel.tile.obsidian.7.desc=有机生长的黑曜石块
 chisel.tile.obsidian.8.desc=黑曜石水晶
-chisel.tile.obsidian.9.desc=镶上地图的黑曜石
-chisel.tile.obsidian.10.desc=镶上某个地域地图的黑曜石
+chisel.tile.obsidian.9.desc=地图镶板黑曜石
+chisel.tile.obsidian.10.desc=地图镶板黑曜石
 chisel.tile.obsidian.11.desc=有光泽的镶板黑曜石
 chisel.tile.obsidian.12.desc=黑曜石方砖
 chisel.tile.obsidian.13.desc=黑曜石瓷砖
-chisel.tile.obsidian.14.desc=有希腊装饰图案的亮色黑曜石
-chisel.tile.obsidian.15.desc=装在板条箱中的小块錾制黑曜石
+chisel.tile.obsidian.14.desc=希腊式图案的亮色黑曜石
+chisel.tile.obsidian.15.desc=板条箱中的錾制黑曜石
 
 #Wood
 tile.oak_planks.name=橡木
@@ -701,20 +712,20 @@ chisel.tile.woolenClay.15.desc=黑色羊毛粘土
 #Laboratory Block
 tile.laboratoryblock.name=实验室方块
 chisel.tile.blockLaboratory.0.desc=墙板
-chisel.tile.blockLaboratory.1.desc=点状花纹墙板
+chisel.tile.blockLaboratory.1.desc=点状图案墙板
 chisel.tile.blockLaboratory.2.desc=珐琅墙
 chisel.tile.blockLaboratory.3.desc=圆形图案珐琅墙
 chisel.tile.blockLaboratory.4.desc=珐琅墙通风口
-chisel.tile.blockLaboratory.5.desc=大块珐琅瓷砖
-chisel.tile.blockLaboratory.6.desc=小块珐琅瓷砖
+chisel.tile.blockLaboratory.5.desc=粗砌珐琅瓷砖
+chisel.tile.blockLaboratory.6.desc=细砌珐琅瓷砖
 chisel.tile.blockLaboratory.7.desc=实验室地板
 chisel.tile.blockLaboratory.8.desc=棋盘格地板
 chisel.tile.blockLaboratory.9.desc=透晰屏幕
 chisel.tile.blockLaboratory.10.desc=毛面屏幕
 chisel.tile.blockLaboratory.11.desc=大块钢地砖
 chisel.tile.blockLaboratory.12.desc=小块钢地砖
-chisel.tile.blockLaboratory.13.desc=方向控制台 (右)
-chisel.tile.blockLaboratory.14.desc=方向控制台 (左)
+chisel.tile.blockLaboratory.13.desc=方向控制台 <右>
+chisel.tile.blockLaboratory.14.desc=方向控制台 <左>
 chisel.tile.blockLaboratory.15.desc=信息控制台
 
 # Creative Tab localizations
