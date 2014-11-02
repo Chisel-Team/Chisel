@@ -513,9 +513,9 @@ chisel.tile.blockDirt.12.desc=破碎的泥土
 
 #Ice
 tile.ice.name=冰
-chisel.tile.ice.1.desc=粗雕冰砖
+chisel.tile.ice.1.desc=粗砌冰砖
 chisel.tile.ice.2.desc=圆石状冰
-chisel.tile.ice.3.desc=大块粗雕冰砖
+chisel.tile.ice.3.desc=大块粗砌冰砖
 chisel.tile.ice.4.desc=粗砌冰砖
 chisel.tile.ice.5.desc=细砌冰砖
 chisel.tile.ice.6.desc=光滑的冰砖墙
@@ -559,9 +559,9 @@ tile.ice_stairs.5.name=冰楼梯
 tile.ice_stairs.6.name=冰楼梯
 tile.ice_stairs.7.name=冰楼梯
 chisel.tile.iceStairs.0.desc=冰楼梯
-chisel.tile.iceStairs.1.desc=粗雕冰楼梯
+chisel.tile.iceStairs.1.desc=粗砌冰楼梯
 chisel.tile.iceStairs.2.desc=圆石状楼梯
-chisel.tile.iceStairs.3.desc=大块粗雕冰砖楼梯
+chisel.tile.iceStairs.3.desc=大块粗砌冰砖楼梯
 chisel.tile.iceStairs.4.desc=粗砌冰砖楼梯
 chisel.tile.iceStairs.5.desc=细砌冰砖楼梯
 chisel.tile.iceStairs.6.desc=光滑的冰砖楼梯
