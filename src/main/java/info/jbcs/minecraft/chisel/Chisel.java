@@ -1,5 +1,7 @@
 package info.jbcs.minecraft.chisel;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.block.BlockCarvable;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import info.jbcs.minecraft.chisel.client.gui.GuiAutoChisel;
@@ -51,7 +53,7 @@ import cpw.mods.fml.common.registry.GameRegistry.Type;
 public class Chisel
 {
     public static final String MOD_ID = "chisel";
-    public static final String MOD_NAME = "Chisel";
+    public static final String MOD_NAME = "Chisel 2";
 
     public static boolean multipartLoaded = false;
 
@@ -169,9 +171,9 @@ public class Chisel
         GameRegistry.registerWorldGenerator(new GeneratorMarble(ModBlocks.marble, 32, Configurations.marbleAmount), 1000);
         GameRegistry.registerWorldGenerator(new GeneratorLimestone(ModBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
 
-        ModIntegration.addMod(FMPIntegration.class);
-
-        ModIntegration.init();
+        if(event.getSide() == Side.CLIENT){
+            initModIntegration();
+        }
 
         proxy.init();
         MinecraftForge.EVENT_BUS.register(this);
@@ -196,6 +198,13 @@ public class Chisel
         {
             Configurations.refreshConfig();
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static void initModIntegration(){
+        ModIntegration.addMod(FMPIntegration.class);
+
+        ModIntegration.init();
     }
 
 }
