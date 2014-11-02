@@ -172,7 +172,9 @@ public class Chisel
         GameRegistry.registerWorldGenerator(new GeneratorLimestone(ModBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
 
         if(event.getSide() == Side.CLIENT){
-            initModIntegration();
+            ModIntegration.addMod(FMPIntegration.class);
+            
+            ModIntegration.init();
         }
 
         proxy.init();
@@ -199,12 +201,4 @@ public class Chisel
             Configurations.refreshConfig();
         }
     }
-
-    @SideOnly(Side.CLIENT)
-    private static void initModIntegration(){
-        ModIntegration.addMod(FMPIntegration.class);
-
-        ModIntegration.init();
-    }
-
 }
