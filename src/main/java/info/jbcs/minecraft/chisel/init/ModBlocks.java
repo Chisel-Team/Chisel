@@ -432,8 +432,6 @@ public class ModBlocks {
         {
             roadLine = (BlockRoadLine) new BlockRoadLine().setStepSound(Block.soundTypeStone).setHardness(0.01F).setBlockName("roadLine");
             GameRegistry.registerBlock(roadLine, ItemCarvable.class, "road_line");
-            //TODO- flag
-            //LanguageRegistry.addName(new ItemStack(roadLine, 1, 0), "Road lines");
         }
 
         if(Configurations.featureEnabled("ironBlock"))
@@ -844,15 +842,15 @@ public class ModBlocks {
         {
             paneIron = (BlockCarvablePane) new BlockCarvablePane(Material.iron, true).setHardness(0.3F).setStepSound(Block.soundTypeMetal);
             Carving.chisel.addVariation("iron_bars", Blocks.iron_bars, 0, 0);
-            paneIron.carverHelper.addVariation("Iron bars without frame", 1, "ironpane/fenceIron");
-            paneIron.carverHelper.addVariation("Menacing iron bars", 2, "ironpane/barbedwire");
-            paneIron.carverHelper.addVariation("Iron cage bars", 3, "ironpane/cage");
-            paneIron.carverHelper.addVariation("Menacing iron spikes", 4, "ironpane/fenceIronTop");
-            paneIron.carverHelper.addVariation("Thick iron grid", 5, "ironpane/terrain-glass-thickgrid");
-            paneIron.carverHelper.addVariation("Thin iron grid", 6, "ironpane/terrain-glass-thingrid");
-            paneIron.carverHelper.addVariation("Ornate iron pane fence", 7, "ironpane/terrain-glass-ornatesteel");
-            paneIron.carverHelper.addVariation("Vertical iron bars", 8, "ironpane/bars");
-            paneIron.carverHelper.addVariation("Iron spikes", 9, "ironpane/spikes");
+            paneIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron_bars.1.desc"), 1, "ironpane/fenceIron");
+            paneIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron_bars.2.desc"), 2, "ironpane/barbedwire");
+            paneIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron_bars.3.desc"), 3, "ironpane/cage");
+            paneIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron_bars.4.desc"), 4, "ironpane/fenceIronTop");
+            paneIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron_bars.5.desc"), 5, "ironpane/terrain-glass-thickgrid");
+            paneIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron_bars.6.desc"), 6, "ironpane/terrain-glass-thingrid");
+            paneIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron_bars.7.desc"), 7, "ironpane/terrain-glass-ornatesteel");
+            paneIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron_bars.8.desc"), 8, "ironpane/bars");
+            paneIron.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.iron_bars.9.desc"), 9, "ironpane/spikes");
             paneIron.carverHelper.register(paneIron, "iron_bars");
         }
 
@@ -860,14 +858,14 @@ public class ModBlocks {
         {
             paneGlass = (BlockCarvablePane) new BlockCarvablePane(Material.glass, false).setHardness(0.3F).setStepSound(Block.soundTypeGlass);
             Carving.chisel.addVariation("glass_pane", Blocks.glass_pane, 0, 0);
-            paneGlass.carverHelper.addVariation("Bubble glass pane", 1, "glasspane/terrain-glassbubble");
-            paneGlass.carverHelper.addVariation("Borderless glass pane", 2, "glasspane/terrain-glassnoborder");
-            paneGlass.carverHelper.addVariation("Screen pane", 3, "glasspane/terrain-glass-screen");
-            paneGlass.carverHelper.addVariation("Streak glass pane", 4, "glasspane/terrain-glassstreak");
-            paneGlass.carverHelper.addVariation("Chinese glass pane", 12, "glasspane/chinese");
-            paneGlass.carverHelper.addVariation("Chinese glass pane with golden frame", 13, "glasspane/chinese2");
-            paneGlass.carverHelper.addVariation("Japanese glass pane", 14, "glasspane/japanese");
-            paneGlass.carverHelper.addVariation("Ornate japanese glass pane", 15, "glasspane/japanese2");
+            paneGlass.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.glass_pane.1.desc"), 1, "glasspane/terrain-glassbubble");
+            paneGlass.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.glass_pane.2.desc"), 2, "glasspane/terrain-glassnoborder");
+            paneGlass.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.glass_pane.3.desc"), 3, "glasspane/terrain-glass-screen");
+            paneGlass.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.glass_pane.4.desc"), 4, "glasspane/terrain-glassstreak");
+            paneGlass.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.glass_pane.12.desc"), 12, "glasspane/chinese");
+            paneGlass.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.glass_pane.13.desc"), 13, "glasspane/chinese2");
+            paneGlass.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.glass_pane.14.desc"), 14, "glasspane/japanese");
+            paneGlass.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.glass_pane.15.desc"), 15, "glasspane/japanese2");
             paneGlass.carverHelper.register(paneGlass, "glass_pane");
         }
 
@@ -875,21 +873,21 @@ public class ModBlocks {
         {
             redstone = (BlockCarvablePowered) (new BlockCarvablePowered(Material.iron)).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
             Carving.chisel.addVariation("redstone_block", Blocks.redstone_block, 0, 0);
-            redstone.carverHelper.addVariation("Smooth redstone", 1, "redstone/smooth");
-            redstone.carverHelper.addVariation("Large redstone block", 2, "redstone/block");
-            redstone.carverHelper.addVariation("Small redstone blocks", 3, "redstone/blocks");
-            redstone.carverHelper.addVariation("Redstone bricks", 4, "redstone/bricks");
-            redstone.carverHelper.addVariation("Small redstone bricks", 5, "redstone/smallbricks");
-            redstone.carverHelper.addVariation("Chaotic redstone bricks", 6, "redstone/smallchaotic");
-            redstone.carverHelper.addVariation("Chiseled redstone", 7, "redstone/chiseled");
-            redstone.carverHelper.addVariation("Redstone Greek decoration", 8, "redstone/ere");
-            redstone.carverHelper.addVariation("Ornate redstone tiles", 9, "redstone/ornate-tiles");
-            redstone.carverHelper.addVariation("Redstone pillar", 10, "redstone/pillar");
-            redstone.carverHelper.addVariation("Redstone tiles", 11, "redstone/tiles");
-            redstone.carverHelper.addVariation("Redstone circuit", 12, "redstone/circuit");
-            redstone.carverHelper.addVariation("Redstone supaplex circuit", 13, "redstone/supaplex");
-            redstone.carverHelper.addVariation("Redstone skulls", 14, "redstone/a1-blockredstone-skullred");
-            redstone.carverHelper.addVariation("Redstone Zelda block", 15, "redstone/a1-blockredstone-redstonezelda");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.1.desc"), 1, "redstone/smooth");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.2.desc"), 2, "redstone/block");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.3.desc"), 3, "redstone/blocks");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.4.desc"), 4, "redstone/bricks");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.5.desc"), 5, "redstone/smallbricks");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.6.desc"), 6, "redstone/smallchaotic");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.7.desc"), 7, "redstone/chiseled");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.8.desc"), 8, "redstone/ere");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.9.desc"), 9, "redstone/ornate-tiles");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.10.desc"), 10, "redstone/pillar");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.11.desc"), 11, "redstone/tiles");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.12.desc"), 12, "redstone/circuit");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.13.desc"), 13, "redstone/supaplex");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.14.desc"), 14, "redstone/a1-blockredstone-skullred");
+            redstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.redstone_block.15.desc"), 15, "redstone/a1-blockredstone-redstonezelda");
             redstone.carverHelper.register(redstone, "redstone_block");
             Carving.chisel.registerOre("redstone_block", "redstone");
         }
@@ -897,20 +895,20 @@ public class ModBlocks {
         if(Configurations.featureEnabled("holystone"))
         {
             holystone = (BlockHolystone) new BlockHolystone(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundHolystoneFootstep);
-            holystone.carverHelper.addVariation("Holystone", 0, "holystone/holystone");
-            holystone.carverHelper.addVariation("Smooth holystone", 1, "holystone/smooth");
-            holystone.carverHelper.addVariation("Mysterious holystone symbol", 2, "holystone/love");
-            holystone.carverHelper.addVariation("Chiseled holystone", 3, "holystone/chiseled");
-            holystone.carverHelper.addVariation("Holystone blocks", 4, "holystone/blocks");
-            holystone.carverHelper.addVariation("Rough holystone blocks", 5, "holystone/blocks-rough");
-            holystone.carverHelper.addVariation("Holystone bricks", 6, "holystone/brick");
-            holystone.carverHelper.addVariation("Large holystone bricks", 7, "holystone/largebricks");
-            holystone.carverHelper.addVariation("Holystone platform", 8, "holystone/platform");
-            holystone.carverHelper.addVariation("Holystone platform tiles", 9, "holystone/platform-tiles");
-            holystone.carverHelper.addVariation("Fancy holystone construction", 10, "holystone/construction");
-            holystone.carverHelper.addVariation("Fancy holystone tiles", 11, "holystone/fancy-tiles");
-            holystone.carverHelper.addVariation("Smooth holystone plate", 12, "holystone/plate");
-            holystone.carverHelper.addVariation("Holystone plate", 13, "holystone/plate-rough");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.0.desc"), 0, "holystone/holystone");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.1.desc"), 1, "holystone/smooth");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.2.desc"), 2, "holystone/love");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.3.desc"), 3, "holystone/chiseled");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.4.desc"), 4, "holystone/blocks");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.5.desc"), 5, "holystone/blocks-rough");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.6.desc"), 6, "holystone/brick");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.7.desc"), 7, "holystone/largebricks");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.8.desc"), 8, "holystone/platform");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.9.desc"), 9, "holystone/platform-tiles");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.10.desc"), 10, "holystone/construction");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.11.desc"), 11, "holystone/fancy-tiles");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.12.desc"), 12, "holystone/plate");
+            holystone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.holystone.13.desc"), 13, "holystone/plate-rough");
             holystone.carverHelper.register(holystone, "holystone");
             OreDictionary.registerOre("holystone", holystone);
             Carving.chisel.registerOre("holystone", "holystone");
@@ -919,13 +917,14 @@ public class ModBlocks {
         if(Configurations.featureEnabled("lavastone"))
         {
             lavastone = (BlockLavastone) new BlockLavastone(Material.rock, "lava_flow").setHardness(2.0F).setResistance(10F);
-            lavastone.carverHelper.addVariation("Lavastone", 0, "lavastone/cobble");
-            lavastone.carverHelper.addVariation("Black lavastone", 1, "lavastone/black");
-            lavastone.carverHelper.addVariation("Lavastone tiles", 2, "lavastone/tiles");
-            lavastone.carverHelper.addVariation("Chaotic lavastone bricks", 3, "lavastone/chaotic");
-            lavastone.carverHelper.addVariation("Lava creeper in tiles", 4, "lavastone/creeper");
-            lavastone.carverHelper.addVariation("Lava panel", 5, "lavastone/panel");
-            lavastone.carverHelper.addVariation("Ornate lava panel", 6, "lavastone/panel-ornate");
+            lavastone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lavastone.0.desc"), 0, "lavastone/cobble");
+            lavastone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lavastone.1.desc"), 1, "lavastone/black");
+            lavastone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lavastone.2.desc"), 2, "lavastone/tiles");
+            lavastone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lavastone.3.desc"), 3, "lavastone/chaotic");
+            lavastone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lavastone.4.desc"), 4, "lavastone/creeper");
+            lavastone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lavastone.5.desc"), 5, "lavastone/panel");
+            lavastone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lavastone.6.desc"), 6, "lavastone/panel-ornate");
+            lavastone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.lavastone.7.desc"), 7, "lavastone/dark");
             lavastone.carverHelper.register(lavastone, "lavastone");
             OreDictionary.registerOre("lavastone", lavastone);
             Carving.chisel.registerOre("lavastone", "lavastone");
@@ -935,22 +934,22 @@ public class ModBlocks {
         {
             fantasy = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F);
             fantasy.carverHelper.setChiselBlockName("Fantasy Block");
-            fantasy.carverHelper.addVariation("Fantasy brick", 0, "fantasy/brick");
-            fantasy.carverHelper.addVariation("Faded fantasy brick", 1, "fantasy/brick-faded");
-            fantasy.carverHelper.addVariation("Weared fantasy brick", 2, "fantasy/brick-wear");
-            fantasy.carverHelper.addVariation("Damaged fantasy bricks", 3, "fantasy/bricks");
-            fantasy.carverHelper.addVariation("Fantasy decoration", 4, "fantasy/decor");
-            fantasy.carverHelper.addVariation("Fantasy decoration block", 5, "fantasy/decor-block");
-            fantasy.carverHelper.addVariation("Fantasy pillar", 6, "fantasy/pillar");
-            fantasy.carverHelper.addVariation("Fantasy pillar decoration", 7, "fantasy/pillar-decorated");
-            fantasy.carverHelper.addVariation("Fantasy gold snake decoration", 8, "fantasy/gold-decor-1");
-            fantasy.carverHelper.addVariation("Fantasy gold noise decoration", 9, "fantasy/gold-decor-2");
-            fantasy.carverHelper.addVariation("Fantasy gold engravings decoration", 10, "fantasy/gold-decor-3");
-            fantasy.carverHelper.addVariation("Fantasy gold chains decoration", 11, "fantasy/gold-decor-4");
-            fantasy.carverHelper.addVariation("Fantasy plate decoration", 12, "fantasy/plate");
-            fantasy.carverHelper.addVariation("Fantasy block", 13, "fantasy/block");
-            fantasy.carverHelper.addVariation("Fantasy bricks in disarray", 14, "fantasy/bricks-chaotic");
-            fantasy.carverHelper.addVariation("Weared fantasy bricks", 15, "fantasy/bricks-wear");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.0.desc"), 0, "fantasy/brick");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.1.desc"), 1, "fantasy/brick-faded");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.2.desc"), 2, "fantasy/brick-wear");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.3.desc"), 3, "fantasy/bricks");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.4.desc"), 4, "fantasy/decor");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.5.desc"), 5, "fantasy/decor-block");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.6.desc"), 6, "fantasy/pillar");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.7.desc"), 7, "fantasy/pillar-decorated");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.8.desc"), 8, "fantasy/gold-decor-1");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.9.desc"), 9, "fantasy/gold-decor-2");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.10.desc"), 10, "fantasy/gold-decor-3");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.11.desc"), 11, "fantasy/gold-decor-4");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.12.desc"), 12, "fantasy/plate");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.13.desc"), 13, "fantasy/block");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.14.desc"), 14, "fantasy/bricks-chaotic");
+            fantasy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.fantasyblock.15.desc"), 15, "fantasy/bricks-wear");
             fantasy.carverHelper.register(fantasy, "fantasyblock");
             OreDictionary.registerOre("fantasy", fantasy);
             Carving.chisel.registerOre("fantasyblock", "fantasy");
@@ -960,22 +959,22 @@ public class ModBlocks {
         {
             carpet = (BlockCarvable) new BlockCarvable(Material.cloth).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeCloth);
             carpet.carverHelper.setChiselBlockName("Carpet Block");
-            carpet.carverHelper.addVariation("White carpet block", 0, "carpet/white");
-            carpet.carverHelper.addVariation("Orange carpet block", 1, "carpet/orange");
-            carpet.carverHelper.addVariation("Magenta carpet block", 2, "carpet/lily");
-            carpet.carverHelper.addVariation("Light blue carpet block", 3, "carpet/lightblue");
-            carpet.carverHelper.addVariation("Yellow carpet block", 4, "carpet/yellow");
-            carpet.carverHelper.addVariation("Light green carpet block", 5, "carpet/lightgreen");
-            carpet.carverHelper.addVariation("Pink carpet block", 6, "carpet/pink");
-            carpet.carverHelper.addVariation("Dark grey carpet block", 7, "carpet/darkgrey");
-            carpet.carverHelper.addVariation("Grey carpet block", 8, "carpet/grey");
-            carpet.carverHelper.addVariation("Teal carpet block", 9, "carpet/teal");
-            carpet.carverHelper.addVariation("Purple carpet block", 10, "carpet/purple");
-            carpet.carverHelper.addVariation("Dark blue carpet block", 11, "carpet/darkblue");
-            carpet.carverHelper.addVariation("Brown carpet block", 12, "carpet/brown");
-            carpet.carverHelper.addVariation("Green carpet block", 13, "carpet/green");
-            carpet.carverHelper.addVariation("Red carpet block", 14, "carpet/red");
-            carpet.carverHelper.addVariation("Black carpet block", 15, "carpet/black");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.0.desc"), 0, "carpet/white");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.1.desc"), 1, "carpet/orange");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.2.desc"), 2, "carpet/lily");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.3.desc"), 3, "carpet/lightblue");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.4.desc"), 4, "carpet/yellow");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.5.desc"), 5, "carpet/lightgreen");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.6.desc"), 6, "carpet/pink");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.7.desc"), 7, "carpet/darkgrey");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.8.desc"), 8, "carpet/grey");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.9.desc"), 9, "carpet/teal");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.10.desc"), 10, "carpet/purple");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.11.desc"), 11, "carpet/darkblue");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.12.desc"), 12, "carpet/brown");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.13.desc"), 13, "carpet/green");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.14.desc"), 14, "carpet/red");
+            carpet.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet_block.15.desc"), 15, "carpet/black");
             carpet.carverHelper.forbidChiseling = true;
             carpet.carverHelper.register(carpet, "carpet_block");
             OreDictionary.registerOre("carpet", carpet);
@@ -986,22 +985,22 @@ public class ModBlocks {
         {
             carpetFloor = (BlockMarbleCarpet) new BlockMarbleCarpet(Material.cloth).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeCloth);
             carpetFloor.carverHelper.setChiselBlockName("Carpet");
-            carpetFloor.carverHelper.addVariation("White carpet", 0, "carpet/white");
-            carpetFloor.carverHelper.addVariation("Orange carpet", 1, "carpet/orange");
-            carpetFloor.carverHelper.addVariation("Magenta carpet", 2, "carpet/lily");
-            carpetFloor.carverHelper.addVariation("Light blue carpet", 3, "carpet/lightblue");
-            carpetFloor.carverHelper.addVariation("Yellow carpet", 4, "carpet/yellow");
-            carpetFloor.carverHelper.addVariation("Light green carpet", 5, "carpet/lightgreen");
-            carpetFloor.carverHelper.addVariation("Pink carpet", 6, "carpet/pink");
-            carpetFloor.carverHelper.addVariation("Dark grey carpet", 7, "carpet/darkgrey");
-            carpetFloor.carverHelper.addVariation("Grey carpet", 8, "carpet/grey");
-            carpetFloor.carverHelper.addVariation("Teal carpet", 9, "carpet/teal");
-            carpetFloor.carverHelper.addVariation("Purple carpet", 10, "carpet/purple");
-            carpetFloor.carverHelper.addVariation("Dark blue carpet", 11, "carpet/darkblue");
-            carpetFloor.carverHelper.addVariation("Brown carpet", 12, "carpet/brown");
-            carpetFloor.carverHelper.addVariation("Green carpet", 13, "carpet/green");
-            carpetFloor.carverHelper.addVariation("Red carpet", 14, "carpet/red");
-            carpetFloor.carverHelper.addVariation("Black carpet", 15, "carpet/black");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.0.desc"), 0, "carpet/white");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.1.desc"), 1, "carpet/orange");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.2.desc"), 2, "carpet/lily");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.3.desc"), 3, "carpet/lightblue");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.4.desc"), 4, "carpet/yellow");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.5.desc"), 5, "carpet/lightgreen");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.6.desc"), 6, "carpet/pink");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.7.desc"), 7, "carpet/darkgrey");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.8.desc"), 8, "carpet/grey");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.9.desc"), 9, "carpet/teal");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.10.desc"), 10, "carpet/purple");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.11.desc"), 11, "carpet/darkblue");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.12.desc"), 12, "carpet/brown");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.13.desc"), 13, "carpet/green");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.14.desc"), 14, "carpet/red");
+            carpetFloor.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.carpet.15.desc"), 15, "carpet/black");
             carpetFloor.carverHelper.forbidChiseling = true;
             carpetFloor.carverHelper.register(carpetFloor, "carpet");
 
@@ -1019,14 +1018,14 @@ public class ModBlocks {
         {
             bookshelf = (BlockCarvable) new BlockMarbleBookshelf().setHardness(1.5F).setStepSound(Block.soundTypeWood);
             Carving.chisel.addVariation("bookshelf", Blocks.bookshelf, 0, 0);
-            bookshelf.carverHelper.addVariation("Bookshelf with rainbow colored books", 1, "bookshelf/rainbow");
-            bookshelf.carverHelper.addVariation("Necromancer novice's bookshelf", 2, "bookshelf/necromancer-novice");
-            bookshelf.carverHelper.addVariation("Necromancer's bookshelf", 3, "bookshelf/necromancer");
-            bookshelf.carverHelper.addVariation("Bookshelf with red tomes", 4, "bookshelf/redtomes");
-            bookshelf.carverHelper.addVariation("Abandoned bookshelf", 5, "bookshelf/abandoned");
-            bookshelf.carverHelper.addVariation("Hoarder's bookshelf", 6, "bookshelf/hoarder");
-            bookshelf.carverHelper.addVariation("Bookshelf filled to brim with boring pastel books", 7, "bookshelf/brim");
-            bookshelf.carverHelper.addVariation("Historician's bookshelf", 8, "bookshelf/historician");
+            bookshelf.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.bookshelf.1.desc"), 1, "bookshelf/rainbow");
+            bookshelf.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.bookshelf.2.desc"), 2, "bookshelf/necromancer-novice");
+            bookshelf.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.bookshelf.3.desc"), 3, "bookshelf/necromancer");
+            bookshelf.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.bookshelf.4.desc"), 4, "bookshelf/redtomes");
+            bookshelf.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.bookshelf.5.desc"), 5, "bookshelf/abandoned");
+            bookshelf.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.bookshelf.6.desc"), 6, "bookshelf/hoarder");
+            bookshelf.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.bookshelf.7.desc"), 7, "bookshelf/brim");
+            bookshelf.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.bookshelf.8.desc"), 8, "bookshelf/historician");
             bookshelf.carverHelper.register(bookshelf, "bookshelf");
             bookshelf.setHarvestLevel("axe", 0);
             Carving.chisel.registerOre("bookshelf", "bookshelf");
@@ -1036,22 +1035,22 @@ public class ModBlocks {
         {
             tyrian = (BlockCarvable) new BlockCarvable(Material.iron).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
             tyrian.carverHelper.setChiselBlockName("Futuristic Armor Plating Block");
-            tyrian.carverHelper.addVariation("Futuristic armor plating block", 0, "tyrian/shining");
-            tyrian.carverHelper.addVariation("Bleak futuristic armor plating block", 1, "tyrian/tyrian");
-            tyrian.carverHelper.addVariation("Purple futuristic armor plating block", 2, "tyrian/chaotic");
-            tyrian.carverHelper.addVariation("Faded purple futuristic armor plating block", 3, "tyrian/softplate");
-            tyrian.carverHelper.addVariation("Rusted futuristic armor plating block", 4, "tyrian/rust");
-            tyrian.carverHelper.addVariation("Elaborate futuristic armor plating block", 5, "tyrian/elaborate");
-            tyrian.carverHelper.addVariation("Futuristic armor plating block with many seams", 6, "tyrian/routes");
-            tyrian.carverHelper.addVariation("Futuristic platform block", 7, "tyrian/platform");
-            tyrian.carverHelper.addVariation("Futuristic armor plating tiles", 8, "tyrian/platetiles");
-            tyrian.carverHelper.addVariation("Diagonal futuristic armor plating block", 9, "tyrian/diagonal");
-            tyrian.carverHelper.addVariation("Futuristic armor plating block with dent", 10, "tyrian/dent");
-            tyrian.carverHelper.addVariation("Blue futuristic armor plating block", 11, "tyrian/blueplating");
-            tyrian.carverHelper.addVariation("Black futuristic armor plating block", 12, "tyrian/black");
-            tyrian.carverHelper.addVariation("Black futuristic armor plating tiles", 13, "tyrian/black2");
-            tyrian.carverHelper.addVariation("Black futuristic armor plating block with an opening", 14, "tyrian/opening");
-            tyrian.carverHelper.addVariation("Futuristic armor plating with shining metal bits", 15, "tyrian/plate");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.0.desc"), 0, "tyrian/shining");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.1.desc"), 1, "tyrian/tyrian");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.2.desc"), 2, "tyrian/chaotic");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.3.desc"), 3, "tyrian/softplate");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.4.desc"), 4, "tyrian/rust");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.5.desc"), 5, "tyrian/elaborate");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.6.desc"), 6, "tyrian/routes");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.7.desc"), 7, "tyrian/platform");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.8.desc"), 8, "tyrian/platetiles");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.9.desc"), 9, "tyrian/diagonal");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.10.desc"), 10, "tyrian/dent");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.11.desc"), 11, "tyrian/blueplating");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.12.desc"), 12, "tyrian/black");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.13.desc"), 13, "tyrian/black2");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.14.desc"), 14, "tyrian/opening");
+            tyrian.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.tyrian.15.desc"), 15, "tyrian/plate");
             tyrian.carverHelper.register(tyrian, "tyrian");
             OreDictionary.registerOre("tyrian", tyrian);
             Carving.chisel.registerOre("tyrian", "tyrian");
@@ -1062,44 +1061,44 @@ public class ModBlocks {
         {
             temple = (BlockCarvable) new BlockEldritch().setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundTempleFootstep);
             temple.carverHelper.setChiselBlockName("Temple Block");
-            temple.carverHelper.addVariation("Temple cobblestone", 0, "temple/cobble");
-            temple.carverHelper.addVariation("Orante temple block", 1, "temple/ornate");
-            temple.carverHelper.addVariation("Temple plate", 2, "temple/plate");
-            temple.carverHelper.addVariation("Cracked temple plate", 3, "temple/plate-cracked");
-            temple.carverHelper.addVariation("Temple bricks", 4, "temple/bricks");
-            temple.carverHelper.addVariation("Large temple bricks", 5, "temple/bricks-large");
-            temple.carverHelper.addVariation("Weared temple bricks", 6, "temple/bricks-weared");
-            temple.carverHelper.addVariation("Temple bricks in disarray", 7, "temple/bricks-disarray");
-            temple.carverHelper.addVariation("Temple column", 8, "temple/column");
-            temple.carverHelper.addVariation("Temple stand", 9, "temple/stand");
-            temple.carverHelper.addVariation("Temple mosaic stand", 10, "temple/stand-mosaic");
-            temple.carverHelper.addVariation("Temple creeper stand", 11, "temple/stand-creeper");
-            temple.carverHelper.addVariation("Temple tiles", 12, "temple/tiles");
-            temple.carverHelper.addVariation("Small temple tiles", 13, "temple/smalltiles");
-            temple.carverHelper.addVariation("Light temple tiles", 14, "temple/tiles-light");
-            temple.carverHelper.addVariation("Small light temple tiles", 15, "temple/smalltiles-light");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.0.desc"), 0, "temple/cobble");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.1.desc"), 1, "temple/ornate");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.2.desc"), 2, "temple/plate");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.3.desc"), 3, "temple/plate-cracked");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.4.desc"), 4, "temple/bricks");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.5.desc"), 5, "temple/bricks-large");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.6.desc"), 6, "temple/bricks-weared");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.7.desc"), 7, "temple/bricks-disarray");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.8.desc"), 8, "temple/column");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.9.desc"), 9, "temple/stand");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.10.desc"), 10, "temple/stand-mosaic");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.11.desc"), 11, "temple/stand-creeper");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.12.desc"), 12, "temple/tiles");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.13.desc"), 13, "temple/smalltiles");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.14.desc"), 14, "temple/tiles-light");
+            temple.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.templeblock.15.desc"), 15, "temple/smalltiles-light");
             temple.carverHelper.register(temple, "templeblock");
 
             if(Configurations.featureEnabled("templeBlockMossy"))
             {
                 templeMossy = (BlockCarvable) new BlockEldritch().setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundTempleFootstep);
                 templeMossy.carverHelper.setChiselBlockName("Mossy Temple Block");
-                templeMossy.carverHelper.addVariation("Mossy temple cobblestone", 0, "templemossy/cobble");
-                templeMossy.carverHelper.addVariation("Orante mossy temple block", 1, "templemossy/ornate");
-                templeMossy.carverHelper.addVariation("Mossy temple plate", 2, "templemossy/plate");
-                templeMossy.carverHelper.addVariation("Cracked mossy temple plate", 3, "templemossy/plate-cracked");
-                templeMossy.carverHelper.addVariation("Mossy temple bricks", 4, "templemossy/bricks");
-                templeMossy.carverHelper.addVariation("Large mossy temple bricks", 5, "templemossy/bricks-large");
-                templeMossy.carverHelper.addVariation("Weared mossy temple bricks", 6, "templemossy/bricks-weared");
-                templeMossy.carverHelper.addVariation("Mossy temple bricks in disarray", 7, "templemossy/bricks-disarray");
-                templeMossy.carverHelper.addVariation("Mossy temple column", 8, "templemossy/column");
-                templeMossy.carverHelper.addVariation("Mossy temple stand", 9, "templemossy/stand");
-                templeMossy.carverHelper.addVariation("Mossy temple mosaic stand", 10, "templemossy/stand-mosaic");
-                templeMossy.carverHelper.addVariation("Mossy temple creeper stand", 11, "templemossy/stand-creeper");
-                templeMossy.carverHelper.addVariation("Mossy temple tiles", 12, "templemossy/tiles");
-                templeMossy.carverHelper.addVariation("Small mossy temple tiles", 13, "templemossy/smalltiles");
-                templeMossy.carverHelper.addVariation("Light mossy temple tiles", 14, "templemossy/tiles-light");
-                templeMossy.carverHelper.addVariation("Small light mossy  temple tiles", 15, "templemossy/smalltiles-light");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.0.desc"), 0, "templemossy/cobble");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.1.desc"), 1, "templemossy/ornate");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.2.desc"), 2, "templemossy/plate");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.3.desc"), 3, "templemossy/plate-cracked");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.4.desc"), 4, "templemossy/bricks");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.5.desc"), 5, "templemossy/bricks-large");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.6.desc"), 6, "templemossy/bricks-weared");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.7.desc"), 7, "templemossy/bricks-disarray");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.8.desc"), 8, "templemossy/column");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.9.desc"), 9, "templemossy/stand");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.10.desc"), 10, "templemossy/stand-mosaic");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.11.desc"), 11, "templemossy/stand-creeper");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.12.desc"), 12, "templemossy/tiles");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.13.desc"), 13, "templemossy/smalltiles");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.14.desc"), 14, "templemossy/tiles-light");
+                templeMossy.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.mossy_templeblock.15.desc"), 15, "templemossy/smalltiles-light");
                 templeMossy.carverHelper.register(templeMossy, "mossy_templeblock");
             }
         }
@@ -1107,7 +1106,7 @@ public class ModBlocks {
         if(Configurations.featureEnabled("cloud"))
         {
             cloud = (BlockCloud) new BlockCloud().setHardness(0.2F).setLightOpacity(3).setStepSound(Block.soundTypeCloth);
-            cloud.carverHelper.addVariation("Cloud block", 0, "cloud/cloud");
+            cloud.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.cloud.0.desc"), 0, "cloud/cloud");
             cloud.carverHelper.register(cloud, "cloud");
             OreDictionary.registerOre("cloud", cloud);
             Carving.chisel.registerOre("cloud", "cloud");
@@ -1269,6 +1268,10 @@ public class ModBlocks {
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.1.desc"), 1, "voidstone/quarters");
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.2.desc"), 2, "voidstone/skulls");
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.3.desc"), 3, "voidstone/smooth");
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.12.desc"), 12, "voidstone/rune");
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.13.desc"), 13, "voidstone/raw");
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.14.desc"), 14, "voidstone/eye");
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.15.desc"), 15, "voidstone/bevel");
             voidstone.carverHelper.register(voidstone, "voidstone");
         }
 
