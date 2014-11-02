@@ -11,6 +11,17 @@ item.cloudBottle.name=Cloud In A Bottle
 #Chisel 2
 tile.autoChisel.name=Auto Chisel
 
+#Void Stone Blocks
+tile.voidstone.name=Void Stone
+chisel.tile.voidstone.0.desc=Void Stone with a Metal Border
+chisel.tile.voidstone.1.desc=Large Void Stone Tiles
+chisel.tile.voidstone.2.desc=Skulls
+chisel.tile.voidstone.3.desc=Smooth Void Stone
+
+#Void Stone Pillars
+tile.voidstonePillar.name=Void Stone Pillar
+chisel.tile.voidstonePillar.0.desc=Striped Void Stone Pillar
+
 #Chisel 1
 
 #Cobblestone Blocks

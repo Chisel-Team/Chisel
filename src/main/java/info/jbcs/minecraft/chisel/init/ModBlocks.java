@@ -4,7 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.*;
-import info.jbcs.minecraft.chisel.block.tileentity.BlockVoidstone;
+import info.jbcs.minecraft.chisel.block.BlockVoidstone;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.carving.Carving;
@@ -69,7 +69,7 @@ public class ModBlocks {
     public static BlockCarvable pumpkin;
     public static BlockCarvable jackOLantern;
     public static BlockCarvable voidstone;
-    public static BlockVoidstone voidstonePillar;
+    public static BlockVoidstone voidstonePillar = new BlockVoidstone();
     public static Block autoChisel;
     public static BlockSnakestone snakestone;
     public static BlockSnakestone sandSnakestone;
@@ -1266,8 +1266,16 @@ public class ModBlocks {
         if(Configurations.featureEnabled("voidstone")){
             voidstone = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(5F).setStepSound(Block.soundTypeStone);
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.0.desc"), 0, "voidstone/metalborder");
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.1.desc"), 1, "voidstone/pillar-side");
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.2.desc"), 2, voidstonePillar, 0);
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.1.desc"), 1, "voidstone/quarters");
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.2.desc"), 2, "voidstone/skulls");
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.3.desc"), 3, "voidstone/smooth");
+            voidstone.carverHelper.register(voidstone, "voidstone");
+        }
+
+        if(Configurations.featureEnabled("voidstonePillars")){
+            voidstonePillar = (BlockVoidstone) new BlockVoidstone().setStepSound(Block.soundTypeStone);
+            voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("chisel.tile.voidstone.0.desc"), 0, "voidstone/pillar-side");
+            voidstonePillar.carvableHelper.register(voidstonePillar, "voidstonePillar");
         }
 
         Blocks.stone.setHarvestLevel("chisel", 0, 0);
