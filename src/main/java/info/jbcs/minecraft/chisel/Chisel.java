@@ -1,6 +1,7 @@
 package info.jbcs.minecraft.chisel;
 
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.block.BlockCarvable;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import info.jbcs.minecraft.chisel.client.gui.GuiAutoChisel;
@@ -48,11 +49,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
 
-@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = "2.0.0.2", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;")
+@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = "2.0.0.1", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;")
 public class Chisel
 {
     public static final String MOD_ID = "chisel";
-    public static final String MOD_NAME = "Chisel";
+    public static final String MOD_NAME = "Chisel 2";
 
     public static boolean multipartLoaded = false;
 
@@ -171,9 +172,7 @@ public class Chisel
         GameRegistry.registerWorldGenerator(new GeneratorLimestone(ModBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
 
         if(event.getSide() == Side.CLIENT){
-            ModIntegration.addMod(FMPIntegration.class);
-
-            ModIntegration.init();
+            initModIntegration();
         }
 
         proxy.init();
@@ -199,6 +198,13 @@ public class Chisel
         {
             Configurations.refreshConfig();
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    private static void initModIntegration(){
+        ModIntegration.addMod(FMPIntegration.class);
+
+        ModIntegration.init();
     }
 
 }
