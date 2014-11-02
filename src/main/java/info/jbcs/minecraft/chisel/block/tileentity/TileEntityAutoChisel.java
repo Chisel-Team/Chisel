@@ -4,6 +4,8 @@ import info.jbcs.minecraft.chisel.carving.Carving;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -80,19 +82,21 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
 
             if (input != null && target != null) {
 
-                if (carving.getGroup(Block.getBlockFromItem(input.getItem()), input.getItemDamage()) == carving.getGroup(Block.getBlockFromItem(target.getItem()), target.getItemDamage())) {
-                    equal = true;
-                }
+                if(input.getItem() instanceof ItemBlock && target.getItem() instanceof ItemBlock){
+                    if (carving.getGroup(Block.getBlockFromItem(input.getItem()), input.getItemDamage()) == carving.getGroup(Block.getBlockFromItem(target.getItem()), target.getItemDamage())) {
+                        equal = true;
+                    }
 
-                if (equal) {
-                    if (output == null) {
-                        setInventorySlotContents(2, new ItemStack(Block.getBlockFromItem(target.getItem()), 1, target.getItemDamage()));
-                    } else {
-                        if (input.stackSize != 0 || output.stackSize < getInventoryStackLimit()) {
-                            decrStackSize(0, 1);
-                            output.stackSize++;
+                    if (equal) {
+                        if (output == null) {
+                            setInventorySlotContents(2, new ItemStack(Block.getBlockFromItem(target.getItem()), 1, target.getItemDamage()));
                         } else {
-                            inventory[0] = null;
+                            if (input.stackSize != 0 || output.stackSize < getInventoryStackLimit()) {
+                                decrStackSize(0, 1);
+                                output.stackSize++;
+                            } else {
+                                inventory[0] = null;
+                            }
                         }
                     }
                 }
