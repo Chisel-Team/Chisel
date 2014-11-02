@@ -4,7 +4,7 @@ import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.BlockHolystone;
 import info.jbcs.minecraft.chisel.block.BlockLavastone;
 import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
-import info.jbcs.minecraft.chisel.block.tileentity.BlockVoidstone;
+import info.jbcs.minecraft.chisel.block.BlockVoidstone;
 import info.jbcs.minecraft.chisel.entity.fx.EntityBallOMossFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntityHolystoneFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntitySnakestoneObsidianFX;
@@ -17,7 +17,6 @@ import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
-import sun.security.krb5.Config;
 
 import java.util.Random;
 

@@ -1,6 +1,6 @@
 package info.jbcs.minecraft.chisel.entity.fx;
 
-import info.jbcs.minecraft.chisel.block.tileentity.BlockVoidstone;
+import info.jbcs.minecraft.chisel.block.BlockVoidstone;
 import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
