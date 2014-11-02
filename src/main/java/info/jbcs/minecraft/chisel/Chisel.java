@@ -1,5 +1,6 @@
 package info.jbcs.minecraft.chisel;
 
+import cpw.mods.fml.relauncher.Side;
 import info.jbcs.minecraft.chisel.block.BlockCarvable;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import info.jbcs.minecraft.chisel.client.gui.GuiAutoChisel;
@@ -169,9 +170,11 @@ public class Chisel
         GameRegistry.registerWorldGenerator(new GeneratorMarble(ModBlocks.marble, 32, Configurations.marbleAmount), 1000);
         GameRegistry.registerWorldGenerator(new GeneratorLimestone(ModBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
 
-        ModIntegration.addMod(FMPIntegration.class);
+        if(event.getSide() == Side.CLIENT){
+            ModIntegration.addMod(FMPIntegration.class);
 
-        ModIntegration.init();
+            ModIntegration.init();
+        }
 
         proxy.init();
         MinecraftForge.EVENT_BUS.register(this);
