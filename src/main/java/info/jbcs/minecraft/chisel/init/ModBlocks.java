@@ -634,9 +634,9 @@ public class ModBlocks {
                 if(i == 1)
                 {
                     if(Configurations.allowMossy)
-                        Carving.chisel.addVariation("stonebrick", Blocks.stonebrick, i, i);
+                        Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
                 } else
-                    Carving.chisel.addVariation("stonebrick", Blocks.stonebrick, i, i);
+                    Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
             }
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.4.desc"), 4, "stonebrick/smallbricks");
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.5.desc"), 5, "stonebrick/largebricks");
@@ -650,8 +650,8 @@ public class ModBlocks {
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.13.desc"), 13, "stonebrick/sunken");
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.14.desc"), 14, "stonebrick/ornatepanel");
             stoneBrick.carverHelper.addVariation(StatCollector.translateToLocal("chisel.tile.stoneBrick.15.desc"), 15, "stonebrick/poison");
-            stoneBrick.carverHelper.register(stoneBrick, "stonebrick");
-            Carving.chisel.registerOre("stonebrick", "stonebrick");
+            stoneBrick.carverHelper.register(stoneBrick, "stonebricksmooth");
+            Carving.chisel.registerOre("stonebricksmooth", "stonebricksmooth");
         }
 
         if(Configurations.featureEnabled("snakestone"))
