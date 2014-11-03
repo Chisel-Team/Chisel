@@ -639,13 +639,13 @@ chisel.tile.redstone_block.4.desc=红石砖
 chisel.tile.redstone_block.5.desc=细砌红石砖
 chisel.tile.redstone_block.6.desc=杂乱砌成的红石砖
 chisel.tile.redstone_block.7.desc=錾制红石块
-chisel.tile.redstone_block.8.desc=希腊式红石块
+chisel.tile.redstone_block.8.desc=希腊式雕纹红石块
 chisel.tile.redstone_block.9.desc=精雕红石瓷砖
 chisel.tile.redstone_block.10.desc=竖纹红石块
 chisel.tile.redstone_block.11.desc=红石瓷砖
-chisel.tile.redstone_block.12.desc=电路板型红石块
-chisel.tile.redstone_block.13.desc=迷宫式电路板型红石块
-chisel.tile.redstone_block.14.desc=雕刻头颅的红石块
+chisel.tile.redstone_block.12.desc=电路板雕纹红石块
+chisel.tile.redstone_block.13.desc=迷宫式电路板雕纹红石块
+chisel.tile.redstone_block.14.desc=头颅錾制红石块
 chisel.tile.redstone_block.15.desc=塞尔达红石块
 
 #Holystone
