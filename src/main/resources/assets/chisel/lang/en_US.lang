@@ -485,7 +485,7 @@ chisel.tile.stoneMoss.14.desc=Mossy Cobblestone with Light Panel
 chisel.tile.stoneMoss.15.desc=Mossy Cobblestone with Dark Panel
 
 #Stone Bricks
-tile.stonebrick.name=Stone Bricks
+tile.stoneBrick.name=Stone Bricks
 chisel.tile.stoneBrick.4.desc=Small Stone Bricks
 chisel.tile.stoneBrick.5.desc=Wide Stone Bricks
 chisel.tile.stoneBrick.6.desc=Small Disordered Stone Bricks
