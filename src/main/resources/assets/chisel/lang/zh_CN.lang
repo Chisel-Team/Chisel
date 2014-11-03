@@ -17,6 +17,10 @@ chisel.tile.voidstone.0.desc=金属镶板虚空石
 chisel.tile.voidstone.1.desc=粗砌虚空石
 chisel.tile.voidstone.2.desc=头颅砌成的虚空石
 chisel.tile.voidstone.3.desc=光滑虚空石
+chisel.tile.voidstone.12.desc=铭刻符文的虚空石
+chisel.tile.voidstone.13.desc=原生虚空石
+chisel.tile.voidstone.14.desc=虚空之眼
+chisel.tile.voidstone.15.desc=斜纹镶板虚空石
 
 #Void Stone Pillars
 tile.voidstonePillar.name=虚空石柱
@@ -564,7 +568,7 @@ chisel.tile.iceStairs.2.desc=圆石状楼梯
 chisel.tile.iceStairs.3.desc=大块粗砌冰砖楼梯
 chisel.tile.iceStairs.4.desc=粗砌冰砖楼梯
 chisel.tile.iceStairs.5.desc=细砌冰砖楼梯
-chisel.tile.iceStairs.6.desc=光滑的冰砖楼梯
+chisel.tile.iceStairs.6.desc=光滑冰砖楼梯
 chisel.tile.iceStairs.7.desc=粗砌冰瓷砖楼梯
 chisel.tile.iceStairs.8.desc=光滑的冰瓷砖楼梯
 chisel.tile.iceStairs.9.desc=凹面冰瓷砖楼梯
@@ -605,39 +609,182 @@ tile.acacia_planks.name=金合欢木
 
 #Iron Fence
 tile.iron_bars.name=铁栅栏
+chisel.tile.iron_bars.1.desc=无框架铁栅栏
+chisel.tile.iron_bars.2.desc=环状铁栅栏
+chisel.tile.iron_bars.3.desc=牢笼铁栅栏
+chisel.tile.iron_bars.4.desc=御敌型尖钉栅栏
+chisel.tile.iron_bars.5.desc=密集铁网格
+chisel.tile.iron_bars.6.desc=稀疏铁网格
+chisel.tile.iron_bars.7.desc=精雕铁栅栏
+chisel.tile.iron_bars.8.desc=竖直铁栅栏
+chisel.tile.iron_bars.9.desc=铁尖钉栅栏
 
 #Glass Panes
 tile.glass_pane.name=玻璃板
+chisel.tile.glass_pane.1.desc=气泡图案玻璃板
+chisel.tile.glass_pane.2.desc=无边玻璃板
+chisel.tile.glass_pane.3.desc=屏风玻璃板
+chisel.tile.glass_pane.4.desc=条纹图案玻璃板
+chisel.tile.glass_pane.12.desc=中式艺术玻璃
+chisel.tile.glass_pane.13.desc=镶金边的中式玻璃
+chisel.tile.glass_pane.14.desc=日式玻璃板
+chisel.tile.glass_pane.15.desc=精雕日式玻璃板
 
 #Redstone block
 tile.redstone_block.name=红石块
+chisel.tile.redstone_block.1.desc=光滑红石块
+chisel.tile.redstone_block.2.desc=粗砌红石块
+chisel.tile.redstone_block.3.desc=细砌红石块
+chisel.tile.redstone_block.4.desc=红石砖
+chisel.tile.redstone_block.5.desc=细砌红石砖
+chisel.tile.redstone_block.6.desc=杂乱砌成的红石砖
+chisel.tile.redstone_block.7.desc=錾制红石块
+chisel.tile.redstone_block.8.desc=希腊式红石块
+chisel.tile.redstone_block.9.desc=精雕红石瓷砖
+chisel.tile.redstone_block.10.desc=竖纹红石块
+chisel.tile.redstone_block.11.desc=红石瓷砖
+chisel.tile.redstone_block.12.desc=电路板型红石块
+chisel.tile.redstone_block.13.desc=迷宫式电路板型红石块
+chisel.tile.redstone_block.14.desc=雕刻头颅的红石块
+chisel.tile.redstone_block.15.desc=塞尔达红石块
 
 #Holystone
 tile.holystone.name=磨石
+chisel.tile.holystone.0.desc=磨石
+chisel.tile.holystone.1.desc=光滑磨石
+chisel.tile.holystone.2.desc=神秘图案雕纹的磨石
+chisel.tile.holystone.3.desc=錾制磨石
+chisel.tile.holystone.4.desc=粗砌磨石
+chisel.tile.holystone.5.desc=粗雕磨石砖
+chisel.tile.holystone.6.desc=磨石砖
+chisel.tile.holystone.7.desc=粗砌磨石砖
+chisel.tile.holystone.8.desc=磨石地砖
+chisel.tile.holystone.9.desc=磨石瓷砖
+chisel.tile.holystone.10.desc=精雕磨石
+chisel.tile.holystone.11.desc=精雕磨石瓷砖
+chisel.tile.holystone.12.desc=光滑镶板磨石
+chisel.tile.holystone.13.desc=镶板磨石
 
 #Lavastone
 tile.lavastone.name=熔岩石
+chisel.tile.lavastone.0.desc=熔岩石
+chisel.tile.lavastone.1.desc=黑色熔岩石
+chisel.tile.lavastone.2.desc=熔岩石瓷砖
+chisel.tile.lavastone.3.desc=杂乱砌成的熔岩石砖
+chisel.tile.lavastone.4.desc=爬行者雕纹熔岩石砖
+chisel.tile.lavastone.5.desc=岩浆镶板
+chisel.tile.lavastone.6.desc=精致的岩浆镶板
+chisel.tile.lavastone.7.desc=黑暗熔岩石
 
 #Carpet
 tile.carpet_block.name=毯子
+chisel.tile.carpet_block.0.desc=白色毯子
+chisel.tile.carpet_block.1.desc=橙色毯子
+chisel.tile.carpet_block.2.desc=品红色毯子
+chisel.tile.carpet_block.3.desc=淡蓝色毯子
+chisel.tile.carpet_block.4.desc=黄色毯子
+chisel.tile.carpet_block.5.desc=淡绿色毯子
+chisel.tile.carpet_block.6.desc=粉色毯子
+chisel.tile.carpet_block.7.desc=深灰色毯子
+chisel.tile.carpet_block.8.desc=灰色毯子
+chisel.tile.carpet_block.9.desc=蓝绿色毯子
+chisel.tile.carpet_block.10.desc=紫色毯子
+chisel.tile.carpet_block.11.desc=深蓝色毯子
+chisel.tile.carpet_block.12.desc=棕色毯子
+chisel.tile.carpet_block.13.desc=绿色毯子
+chisel.tile.carpet_block.14.desc=红色毯子
+chisel.tile.carpet_block.15.desc=黑色毯子
 
 #Carpet floor
 tile.carpet.name=地毯
+chisel.tile.carpet.0.desc=白色地毯
+chisel.tile.carpet.1.desc=橙色地毯
+chisel.tile.carpet.2.desc=品红色地毯
+chisel.tile.carpet.3.desc=淡蓝色地毯
+chisel.tile.carpet.4.desc=黄色地毯
+chisel.tile.carpet.5.desc=淡绿色地毯
+chisel.tile.carpet.6.desc=粉色地毯
+chisel.tile.carpet.7.desc=深灰色地毯
+chisel.tile.carpet.8.desc=灰色地毯
+chisel.tile.carpet.9.desc=蓝绿色地毯
+chisel.tile.carpet.10.desc=紫色地毯
+chisel.tile.carpet.11.desc=深蓝色地毯
+chisel.tile.carpet.12.desc=棕色地毯
+chisel.tile.carpet.13.desc=绿色地毯
+chisel.tile.carpet.14.desc=红色地毯
+chisel.tile.carpet.15.desc=黑色地毯
 
 #Bookshelf
 tile.bookshelf.name=书架
+chisel.tile.bookshelf.1.desc=七彩书架
+chisel.tile.bookshelf.2.desc=死灵法师的书架
+chisel.tile.bookshelf.3.desc=巫师的书架
+chisel.tile.bookshelf.4.desc=藏有红色卷轴的书架
+chisel.tile.bookshelf.5.desc=废弃多年的书架
+chisel.tile.bookshelf.6.desc=贮藏者的书架
+chisel.tile.bookshelf.7.desc=塞满了无聊的蜡笔画册
+chisel.tile.bookshelf.8.desc=历史学家的书架
 
 #Tyrian
 tile.tyrian.name=提尔石砖
+chisel.tile.tyrian.0.desc=未来合金砖
+chisel.tile.tyrian.1.desc=粗砌未来合金砖
+chisel.tile.tyrian.2.desc=紫色未来合金砖
+chisel.tile.tyrian.3.desc=紫色的粗砌未来合金砖
+chisel.tile.tyrian.4.desc=生锈的未来合金砖
+chisel.tile.tyrian.5.desc=加工处理的未来合金砖
+chisel.tile.tyrian.6.desc=裂缝雕纹的未来合金砖
+chisel.tile.tyrian.7.desc=未来合金地砖
+chisel.tile.tyrian.8.desc=未来合金瓷砖
+chisel.tile.tyrian.9.desc=斜纹未来合金砖
+chisel.tile.tyrian.10.desc=凹面未来合金砖
+chisel.tile.tyrian.11.desc=蓝色未来合金砖
+chisel.tile.tyrian.12.desc=黑色未来合金砖
+chisel.tile.tyrian.13.desc=黑色未来合金瓷砖
+chisel.tile.tyrian.14.desc=空缺的黑色未来合金瓷砖
+chisel.tile.tyrian.15.desc=闪耀的未来合金砖
 
 #Temple
 tile.templeblock.name=神庙石砖
+chisel.tile.templeblock.0.desc=神庙圆石
+chisel.tile.templeblock.1.desc=精雕神庙石砖
+chisel.tile.templeblock.2.desc=神庙石板
+chisel.tile.templeblock.3.desc=碎裂神庙石板
+chisel.tile.templeblock.4.desc=细砌神庙石砖
+chisel.tile.templeblock.5.desc=粗砌神庙石砖
+chisel.tile.templeblock.6.desc=磨损的神庙石砖
+chisel.tile.templeblock.7.desc=杂乱砌成的神庙石砖
+chisel.tile.templeblock.8.desc=神庙圆柱
+chisel.tile.templeblock.9.desc=神庙站台
+chisel.tile.templeblock.10.desc=镶嵌錾制神庙站台
+chisel.tile.templeblock.11.desc=爬行者雕纹神庙站台
+chisel.tile.templeblock.12.desc=神庙瓷砖
+chisel.tile.templeblock.13.desc=粗砌神庙瓷砖
+chisel.tile.templeblock.14.desc=亮色神庙瓷砖
+chisel.tile.templeblock.15.desc=细砌亮色神庙瓷砖
 
 #Temple Mossy
 tile.mossy_templeblock.name=神庙苔石砖
+chisel.tile.mossy_templeblock.0.desc=神庙苔石
+chisel.tile.mossy_templeblock.1.desc=精雕神庙苔石砖
+chisel.tile.mossy_templeblock.2.desc=神庙苔石板
+chisel.tile.mossy_templeblock.3.desc=碎裂神庙苔石板
+chisel.tile.mossy_templeblock.4.desc=细砌神庙苔石砖
+chisel.tile.mossy_templeblock.5.desc=粗砌神庙苔石砖
+chisel.tile.mossy_templeblock.6.desc=磨损的神庙苔石砖
+chisel.tile.mossy_templeblock.7.desc=杂乱砌成的神庙苔石砖
+chisel.tile.mossy_templeblock.8.desc=神庙苔石圆柱
+chisel.tile.mossy_templeblock.9.desc=神庙苔石站台
+chisel.tile.mossy_templeblock.10.desc=镶嵌錾制神庙苔石站台
+chisel.tile.mossy_templeblock.11.desc=爬行者雕纹神庙苔石站台
+chisel.tile.mossy_templeblock.12.desc=神庙苔石瓷砖
+chisel.tile.mossy_templeblock.13.desc=粗砌神庙苔石瓷砖
+chisel.tile.mossy_templeblock.14.desc=亮色神庙苔石瓷砖
+chisel.tile.mossy_templeblock.15.desc=细砌亮色神庙苔石瓷砖
 
 #Cloud
 tile.cloud.name=云朵
+chisel.tile.cloud.0.desc=云朵方块
 
 #Stained glass T.T
 tile.stained_glass_white.name=染色玻璃
@@ -677,6 +824,22 @@ tile.stained_glass_pane_black.name=染色玻璃板
 
 #Fantasy block
 tile.fantasyblock.name=幻想石砖
+chisel.tile.fantasyblock.0.desc=粗砌幻想石砖
+chisel.tile.fantasyblock.1.desc=褪色幻想石砖
+chisel.tile.fantasyblock.2.desc=磨损的粗砌幻想石砖
+chisel.tile.fantasyblock.3.desc=破损幻想石砖
+chisel.tile.fantasyblock.4.desc=雕纹石砖
+chisel.tile.fantasyblock.5.desc=雕纹幻想砖块
+chisel.tile.fantasyblock.6.desc=竖纹幻想石柱
+chisel.tile.fantasyblock.7.desc=雕纹幻想石柱
+chisel.tile.fantasyblock.8.desc=金蛇雕纹幻想石砖
+chisel.tile.fantasyblock.9.desc=十字雕纹幻想石砖
+chisel.tile.fantasyblock.10.desc=波浪雕纹幻想石砖
+chisel.tile.fantasyblock.11.desc=链条雕纹幻想石砖
+chisel.tile.fantasyblock.12.desc=精雕幻想石板
+chisel.tile.fantasyblock.13.desc=幻想石块
+chisel.tile.fantasyblock.14.desc=杂乱砌成的幻想石砖
+chisel.tile.fantasyblock.15.desc=磨损的细砌幻想石砖
 
 #Paperwall
 tile.paperwall.name=障子
