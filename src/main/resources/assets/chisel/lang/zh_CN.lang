@@ -612,12 +612,12 @@ tile.iron_bars.name=铁栅栏
 chisel.tile.iron_bars.1.desc=无框架铁栅栏
 chisel.tile.iron_bars.2.desc=环状铁栅栏
 chisel.tile.iron_bars.3.desc=牢笼铁栅栏
-chisel.tile.iron_bars.4.desc=御敌型尖钉栅栏
+chisel.tile.iron_bars.4.desc=御敌型尖刺栅栏
 chisel.tile.iron_bars.5.desc=密集铁网格
-chisel.tile.iron_bars.6.desc=稀疏铁网格
+chisel.tile.iron_bars.6.desc=大块铁网格
 chisel.tile.iron_bars.7.desc=精雕铁栅栏
 chisel.tile.iron_bars.8.desc=竖直铁栅栏
-chisel.tile.iron_bars.9.desc=铁尖钉栅栏
+chisel.tile.iron_bars.9.desc=铁尖刺栅栏
 
 #Glass Panes
 tile.glass_pane.name=玻璃板
@@ -652,7 +652,7 @@ chisel.tile.redstone_block.15.desc=塞尔达红石块
 tile.holystone.name=磨石
 chisel.tile.holystone.0.desc=磨石
 chisel.tile.holystone.1.desc=光滑磨石
-chisel.tile.holystone.2.desc=神秘图案雕纹的磨石
+chisel.tile.holystone.2.desc=神秘图案雕纹磨石
 chisel.tile.holystone.3.desc=錾制磨石
 chisel.tile.holystone.4.desc=粗砌磨石
 chisel.tile.holystone.5.desc=粗雕磨石砖
