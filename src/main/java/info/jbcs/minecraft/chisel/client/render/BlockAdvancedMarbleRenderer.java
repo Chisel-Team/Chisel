@@ -4,6 +4,8 @@ import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.client.render.RenderBlocksCTM;
+import info.jbcs.minecraft.chisel.client.render.RenderBlocksColumn;
 import info.jbcs.minecraft.chisel.utils.Drawing;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -16,7 +18,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
 {
-    RenderBlocksCTM rendererCTM = new RenderBlocksCTM();
+    public RenderBlocksCTM rendererCTM = new RenderBlocksCTM();
     RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
 
     public BlockAdvancedMarbleRenderer()

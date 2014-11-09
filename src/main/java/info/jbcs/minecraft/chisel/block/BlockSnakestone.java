@@ -1,6 +1,5 @@
 package info.jbcs.minecraft.chisel.block;
 
-import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.client.render.BlockSnakeStoneRenderer;
 
 import java.util.List;

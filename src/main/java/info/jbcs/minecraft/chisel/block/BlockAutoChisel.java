@@ -26,6 +26,21 @@ public class BlockAutoChisel extends BlockContainer
     }
 
     @Override
+    public int getRenderType(){
+        return -1;
+    }
+
+    @Override
+    public boolean isOpaqueCube(){
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock(){
+        return false;
+    }
+
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float x1, float y1, float z1){
         TileEntity tile = world.getTileEntity(x, y, z);
         if(world.isRemote)

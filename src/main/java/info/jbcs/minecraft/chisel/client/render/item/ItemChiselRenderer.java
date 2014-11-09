@@ -1,4 +1,4 @@
-package info.jbcs.minecraft.chisel.client.render;
+package info.jbcs.minecraft.chisel.client.render.item;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;

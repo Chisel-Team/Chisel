@@ -1,6 +1,7 @@
 package info.jbcs.minecraft.chisel.client.render;
 
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.client.render.RenderBlocksEldritch;
 import info.jbcs.minecraft.chisel.utils.Drawing;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
