@@ -1,6 +1,5 @@
 package info.jbcs.minecraft.chisel.block;
 
-import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.client.render.BlockRoadLineRenderer;
 import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.Block;

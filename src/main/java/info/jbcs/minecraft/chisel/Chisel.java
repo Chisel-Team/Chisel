@@ -49,11 +49,12 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
 
-@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = "2.0.0.2", guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;")
+@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "info.jbcs.minecraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;")
 public class Chisel
 {
     public static final String MOD_ID = "chisel";
     public static final String MOD_NAME = "Chisel 2";
+    public static final String VERSION = "2.0.0.2";
 
     public static boolean multipartLoaded = false;
 
@@ -202,7 +203,8 @@ public class Chisel
 
     @SideOnly(Side.CLIENT)
     private static void initModIntegration(){
-        ModIntegration.addMod(FMPIntegration.class);
+        //To be added back at a different time
+        //ModIntegration.addMod(FMPIntegration.class);
 
         ModIntegration.init();
     }

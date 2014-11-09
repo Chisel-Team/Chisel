@@ -3,7 +3,6 @@ package info.jbcs.minecraft.chisel.block;
 import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
-import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.client.render.BlockMarbleStairsRenderer;
 
 import java.util.List;
