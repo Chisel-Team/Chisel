@@ -106,6 +106,17 @@ public class MarbleCompatibility
                 block.setHarvestLevel("chisel", 0, 0);
             }
         };
+
+        new ClassBlockCompat("com.bluepowermod.init.BPBlocks", "marble")
+        {
+            @Override
+            void action()
+            {
+                Carving.chisel.addVariation("marble", block, 0, 99);
+                block.setHarvestLevel("chisel", 0, 0);
+            }
+        };
+
         new ClassBlockCompat("num.numirp.block.ModBlocks", "blockDecor")
         {
             @Override

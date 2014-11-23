@@ -16,6 +16,7 @@ public class Configurations
     public static boolean enableChiseling;
     public static boolean chiselRecipe;
     public static boolean autoChisel;
+    public static boolean isPokefennChisel;
 
     public static int factoryBlockAmount;
     public static int particlesTickrate;
@@ -40,6 +41,7 @@ public class Configurations
         limestoneAmount = config.get("worldgen", "limestoneAmount", 8, "Amount of limestone to generate in the world; use 0 for none").getInt(8);
         chiselRecipe = config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
         autoChisel = config.get("general", "autoChisel", true, "Should people be allowed to use the auto chisel").getBoolean(false);
+        isPokefennChisel = config.get("general", "isPokefennChisel", false, "Are you using pokefenns chisel and would like to transfer your world?").getBoolean(false);
 
         if(config.hasChanged())
         {
