@@ -24,10 +24,14 @@ public class BlockNameConversion
             switch (step) {
                 case 0: // lookup list
                     return namingConversion.get(oldname);
-                case 1: // simple lower case
-                    return oldname.toLowerCase();
+                case 1: // remove Chisel:
+                    if(oldname.startsWith("Chisel:")){
+                        newname = oldname.replaceAll("(?i)" + "Chisel:", "");
+                    }
+                    return newname;
                 case 2: // rename "marbleSlab" -> "marble_slab", "redstone" -> "redstone_block"
                     newname = oldname.replaceAll("([a-z]+)([A-Z])", "$1_$2").toLowerCase();
+
                     if (newname.startsWith("block_"))
                     {
                         newname = newname.replaceFirst("block_([a-z_]+)", "$1_block");
@@ -45,7 +49,7 @@ public class BlockNameConversion
                     }
                     return newname;
                 case (MAX - 1): // ALWAYS last: rename "blockYxx" -> "yxx" (e.g. "dirt" -> "dirt").
-                                // This can be dangerous in cases like "carpet" (a block) -> "carpet" (NO block)
+                    // This can be dangerous in cases like "carpet" (a block) -> "carpet" (NO block)
                     return oldname.replaceAll("([a-z]+)([A-Z])", "$1_$2").toLowerCase().replaceFirst("block_", "");
                 default:
                     throw new IndexOutOfBoundsException("conversion got invalid parameter step=" + step);
@@ -75,15 +79,22 @@ public class BlockNameConversion
         // "LightGray" is unfortunately converted to "light_gray"
         namingConversion.put("stainedGlassLightGray", "stained_glass_lightgray");
         namingConversion.put("stainedGlassPaneLightGray", "stained_glass_pane_lightgray");
+        namingConversion.put("blockTemple", "templeblock");
+        namingConversion.put("stoneBrick", "stonebricksmooth");
+        namingConversion.put("blockTempleMossy", "mossy_templeblock");
+        namingConversion.put("blockFactory", "factoryblock");
+        namingConversion.put("blockFft", "fantasyblock");
+        namingConversion.put("blockCarpetFloor", "carpet");
+        namingConversion.put("blockLaboratory", "laboratoryblock");
     }
 
     public static Item findItem(String oldname)
     {
-        FMLLog.getLogger().trace("findItem() START " + oldname);
+        FMLLog.getLogger().trace("[Chisel 2] findItem() START " + oldname);
         Item item = null;
         for (int i = 0; i < NameConversions.MAX && item == null; i++)
         {
-            FMLLog.getLogger().trace("findItem()       Checking for " + NameConversions.conversion(oldname, i));
+            FMLLog.getLogger().trace("[Chisel 2] findItem()       Checking for " + NameConversions.conversion(oldname, i));
             item = GameRegistry.findItem(Chisel.MOD_ID, NameConversions.conversion(oldname, i));
         }
 
@@ -92,11 +103,11 @@ public class BlockNameConversion
 
     public static Block findBlock(String oldname)
     {
-        FMLLog.getLogger().trace("findBlock() START: " + oldname);
+        FMLLog.getLogger().trace("[Chisel 2] findBlock() START: " + oldname);
         Block block = null;
         for (int i = 0; i < NameConversions.MAX && block == null; i++)
         {
-            FMLLog.getLogger().trace("findBlock()       Checking for " + NameConversions.conversion(oldname, i));
+            FMLLog.getLogger().trace("[Chisel 2] findBlock()       Checking for " + NameConversions.conversion(oldname, i));
             block = GameRegistry.findBlock(Chisel.MOD_ID, NameConversions.conversion(oldname, i));
         }
 

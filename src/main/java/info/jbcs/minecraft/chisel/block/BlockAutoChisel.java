@@ -21,7 +21,6 @@ public class BlockAutoChisel extends BlockContainer
     public BlockAutoChisel()
     {
         super(Material.rock);
-        setBlockName("autoChisel");
         setHardness(1F);
     }
 

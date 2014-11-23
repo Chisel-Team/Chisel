@@ -873,23 +873,23 @@ chisel.tile.woolenClay.14.desc=Red Woolen Clay
 chisel.tile.woolenClay.15.desc=Black Woolen Clay
 
 #Laboratory Block
-tile.laboratoryblock.name=Laboratory Block
-chisel.tile.blockLaboratory.0.desc=Wall Panel
-chisel.tile.blockLaboratory.1.desc=Dotted Panel
-chisel.tile.blockLaboratory.2.desc=Enameled Wall
-chisel.tile.blockLaboratory.3.desc=Enameled Roundel Wall
-chisel.tile.blockLaboratory.4.desc=Enameled Wall Vents
-chisel.tile.blockLaboratory.5.desc=Large Enameled Tile
-chisel.tile.blockLaboratory.6.desc=Small Enameled Tiles
-chisel.tile.blockLaboratory.7.desc=Laboratory Floor
-chisel.tile.blockLaboratory.8.desc=Checkerboard Floor
-chisel.tile.blockLaboratory.9.desc=Clear Panel
-chisel.tile.blockLaboratory.10.desc=Fuzzy Panel
-chisel.tile.blockLaboratory.11.desc=Large Steel Tile
-chisel.tile.blockLaboratory.12.desc=Small Steel Tiles
-chisel.tile.blockLaboratory.13.desc=Direction Console (Right)
-chisel.tile.blockLaboratory.14.desc=Direction Console (Left)
-chisel.tile.blockLaboratory.15.desc=Information Console
+tile.laboratory.name=Laboratory Block
+chisel.tile.laboratory.0.desc=Wall Panel
+chisel.tile.laboratory.1.desc=Dotted Panel
+chisel.tile.laboratory.2.desc=Enameled Wall
+chisel.tile.laboratory.3.desc=Enameled Roundel Wall
+chisel.tile.laboratory.4.desc=Enameled Wall Vents
+chisel.tile.laboratory.5.desc=Large Enameled Tile
+chisel.tile.laboratory.6.desc=Small Enameled Tiles
+chisel.tile.laboratory.7.desc=Laboratory Floor
+chisel.tile.laboratory.8.desc=Checkerboard Floor
+chisel.tile.laboratory.9.desc=Clear Panel
+chisel.tile.laboratory.10.desc=Fuzzy Panel
+chisel.tile.laboratory.11.desc=Large Steel Tile
+chisel.tile.laboratory.12.desc=Small Steel Tiles
+chisel.tile.laboratory.13.desc=Direction Console (Right)
+chisel.tile.laboratory.14.desc=Direction Console (Left)
+chisel.tile.laboratory.15.desc=Information Console
 
 # Creative Tab localizations
 itemGroup.tabChiselBlocks=Chisel Blocks
