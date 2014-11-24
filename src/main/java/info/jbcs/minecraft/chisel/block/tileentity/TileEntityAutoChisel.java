@@ -1,10 +1,13 @@
 package info.jbcs.minecraft.chisel.block.tileentity;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.carving.Carving;
 import info.jbcs.minecraft.chisel.carving.CarvingVariation;
 import net.minecraft.block.Block;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemBlock;
@@ -20,6 +23,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
 
 	private ItemStack[] inventory = new ItemStack[3];
     private String name = "autoChisel";
+    private static EntityItem ghostItem;
     boolean equal = false;
 
     @Override
@@ -222,6 +226,21 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory{
     public void closeInventory(){
         NBTTagList tags = new NBTTagList();
         System.out.print(tags);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public EntityItem getItemForRendering(int slot){
+        if(ghostItem == null){
+            ghostItem = new EntityItem(worldObj);
+            ghostItem.hoverStart = 0.0F;
+        }
+
+        if(inventory[slot] == null){
+            return null;
+        } else {
+            ghostItem.setEntityItemStack(new ItemStack(inventory[slot].getItem(), 1, inventory[slot].getItemDamage()));
+            return ghostItem;
+        }
     }
     
 	@Override

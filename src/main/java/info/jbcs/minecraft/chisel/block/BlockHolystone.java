@@ -15,7 +15,7 @@ public class BlockHolystone extends BlockCarvable
 
     public BlockHolystone(Material m)
     {
-        super(m);
+        super(m, false);
 
         this.setLightLevel(0.25F);
     }

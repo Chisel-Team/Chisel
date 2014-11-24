@@ -12,7 +12,7 @@ public class BlockMarblePillar extends BlockCarvable
 
     public BlockMarblePillar(Material m)
     {
-        super(m);
+        super(m, false);
     }
 
     @Override

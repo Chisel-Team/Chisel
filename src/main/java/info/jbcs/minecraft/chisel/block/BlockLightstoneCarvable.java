@@ -11,7 +11,7 @@ public class BlockLightstoneCarvable extends BlockCarvable
 {
     public BlockLightstoneCarvable()
     {
-        super(Material.glass);
+        super(Material.glass, false);
     }
 
     @Override
