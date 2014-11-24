@@ -20,16 +20,17 @@ import java.util.List;
 public class BlockCarvable extends Block implements ICarvable
 {
     public CarvableHelper carverHelper;
-    private boolean isAlpha;
+    private boolean isAlpha, isOpaque;
 
     public BlockCarvable()
     {
-        this(Material.rock);
+        this(Material.rock, true);
     }
 
-    public BlockCarvable(Material m)
+    public BlockCarvable(Material m, boolean isOpaque)
     {
         super(m);
+        this.isOpaque = isOpaque;
         carverHelper = new CarvableHelper();
         setCreativeTab(ModTabs.tabChiselBlocks);
     }
@@ -69,6 +70,11 @@ public class BlockCarvable extends Block implements ICarvable
     public void registerBlockIcons(IIconRegister register)
     {
         carverHelper.registerBlockIcons("Chisel", this, register);
+    }
+
+    @Override
+    public boolean isOpaqueCube(){
+        return this.isOpaque;
     }
 
     @Override

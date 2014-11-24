@@ -16,6 +16,7 @@ public class Configurations
     public static boolean enableChiseling;
     public static boolean chiselRecipe;
     public static boolean autoChisel;
+    public static boolean fancy;
 
     public static int factoryBlockAmount;
     public static int particlesTickrate;
@@ -30,6 +31,7 @@ public class Configurations
         particlesTickrate = config.get("client", "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
         oldPillars = config.get("client", "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
         disableCTM = !config.get("client", "connectedTextures", true, "Enable connected textures").getBoolean(true);
+        fancy = config.get("client", "fancyLeaves", true, "Enable fancy textures").getBoolean(true);
         blockDescriptions = config.get("client", "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.").getBoolean(true);
         chiselStoneToCobbleBricks = config.get("general", "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left-click.").getBoolean(true);
         enableChiseling = config.get("general", "enableChiselingLeftClicking", false, "Change blocks to another block using the Chisel and left-click.").getBoolean(false);

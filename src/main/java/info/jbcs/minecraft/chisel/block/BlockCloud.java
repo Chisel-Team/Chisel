@@ -16,7 +16,7 @@ public class BlockCloud extends BlockCarvable
 
     public BlockCloud()
     {
-        super(Material.ice);
+        super(Material.ice, false);
         useNeighborBrightness = true;
     }
 

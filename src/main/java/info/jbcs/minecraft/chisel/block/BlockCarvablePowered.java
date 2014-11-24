@@ -7,7 +7,7 @@ public class BlockCarvablePowered extends BlockCarvable
 {
     public BlockCarvablePowered(Material m)
     {
-        super(m);
+        super(m, false);
     }
 
     /**
