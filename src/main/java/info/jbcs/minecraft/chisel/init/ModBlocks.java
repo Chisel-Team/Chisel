@@ -1,12 +1,9 @@
 package info.jbcs.minecraft.chisel.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.*;
-import info.jbcs.minecraft.chisel.block.BlockVoidstone;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.carving.Carving;
@@ -14,13 +11,10 @@ import info.jbcs.minecraft.chisel.item.ItemCarvable;
 import info.jbcs.minecraft.chisel.item.ItemMarbleSlab;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.concurrent.Callable;
 
 public class ModBlocks {
     public static BlockCarvable marble;
@@ -77,6 +71,7 @@ public class ModBlocks {
     public static BlockCarvable voidstone;
     public static BlockVoidstone voidstonePillar = new BlockVoidstone();
     public static Block autoChisel;
+    public static BlockPresent present;
     public static BlockSnakestone snakestone;
     public static BlockSnakestone sandSnakestone;
     public static BlockSnakestoneObsidian obsidianSnakestone;
@@ -812,9 +807,8 @@ public class ModBlocks {
                 }
                 planks[i].carverHelper.register(planks[i], orename);
                 Carving.chisel.addVariation(orename, Blocks.planks, i, 0);
-                Blocks.planks.setHarvestLevel("chisel", 0, i);
                 planks[i].setHarvestLevel("axe", 0);
-
+                Carving.chisel.registerOre("wood", "wood");
                 Carving.chisel.setVariationSound(orename, Chisel.MOD_ID+":chisel.wood");
             }
         }
@@ -1312,6 +1306,14 @@ public class ModBlocks {
 
             leaf.carverHelper.register(leaf, "leaves");
             Carving.chisel.registerOre("leaves", "leaves");
+        }
+
+        if (Configurations.featureEnabled("chest")) {
+            present = (BlockPresent) new BlockPresent().setHardness(2.5F).setStepSound(Block.soundTypeWood);
+            Carving.chisel.addVariation("chest", Blocks.chest, 0, 0);
+            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.presetnt.1.desc"), 1, present, 1);
+            present.carverHelper.register(present, "present");
+            Carving.chisel.registerOre("chest", "chest");
         }
 
         if(Configurations.featureEnabled("voidstone")){

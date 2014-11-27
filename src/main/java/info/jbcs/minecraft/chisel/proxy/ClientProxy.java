@@ -1,11 +1,15 @@
 package info.jbcs.minecraft.chisel.proxy;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
+import info.jbcs.minecraft.chisel.block.tileentity.TileEntityPresent;
 import info.jbcs.minecraft.chisel.client.render.*;
 import info.jbcs.minecraft.chisel.client.render.item.ItemAutoChiselRenderer;
 import info.jbcs.minecraft.chisel.client.render.item.ItemChiselRenderer;
+import info.jbcs.minecraft.chisel.client.render.item.ItemPresentRenderer;
 import info.jbcs.minecraft.chisel.client.render.tile.RenderAutoChisel;
+import info.jbcs.minecraft.chisel.client.render.tile.RenderPresent;
 import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
 import info.jbcs.minecraft.chisel.entity.EntityCloudInABottle;
 import info.jbcs.minecraft.chisel.init.ModBlocks;
@@ -13,7 +17,6 @@ import info.jbcs.minecraft.chisel.init.ModItems;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
@@ -41,8 +44,10 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerBlockHandler(new BlockTexturedOreRenderer());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAutoChisel.class, new RenderAutoChisel());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPresent.class, new RenderPresent());
 
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.autoChisel), new ItemAutoChiselRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.present), new ItemPresentRenderer());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityCloudInABottle.class, new RenderSnowball(ModItems.itemCloudInABottle));
         RenderingRegistry.registerEntityRenderingHandler(EntityBallOMoss.class, new RenderSnowball(ModItems.itemBallOMoss));
