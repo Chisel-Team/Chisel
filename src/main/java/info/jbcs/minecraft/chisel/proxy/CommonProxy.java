@@ -1,18 +1,16 @@
 package info.jbcs.minecraft.chisel.proxy;
 
-import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
-import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.registry.GameRegistry;
+import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
+import info.jbcs.minecraft.chisel.block.tileentity.TileEntityPresent;
 
 public class CommonProxy
 {
 	public void registerTileEntities() {
-		registerTileEntity(TileEntityAutoChisel.class, "autoChisel");
-	}
+        GameRegistry.registerTileEntity(TileEntityAutoChisel.class, "autoChisel");
+        GameRegistry.registerTileEntity(TileEntityPresent.class, "tile.present.present");
+    }
 
-	private void registerTileEntity(Class<? extends TileEntity> cls, String baseName) {
-		GameRegistry.registerTileEntity(cls, "tile.autoChisel." + baseName);
-	}
     public void preInit()
     {
     }

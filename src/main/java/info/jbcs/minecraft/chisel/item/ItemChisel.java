@@ -13,13 +13,11 @@ import net.minecraft.world.World;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ItemChisel extends ItemTool implements IChiselMode
-{
-    public static Carving carving = Carving.chisel;
+public class ItemChisel extends ItemTool implements IChiselMode {
     private static final HashSet<String> toolSet = new HashSet<String>();
+    public static Carving carving = Carving.chisel;
 
-    public ItemChisel()
-    {
+    public ItemChisel() {
         super(1, ToolMaterial.IRON, CarvableHelper.getChiselBlockSet());
 
         setMaxStackSize(1);
@@ -31,29 +29,24 @@ public class ItemChisel extends ItemTool implements IChiselMode
     }
 
     @Override
-    public Set<String> getToolClasses(ItemStack stack)
-    {
+    public Set<String> getToolClasses(ItemStack stack) {
         return toolSet;
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer)
-    {
+    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
         entityplayer.openGui(Chisel.instance, 0, world, 0, 0, 0);
 
         return itemstack;
     }
 
     @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player)
-    {
+    public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
         return true;
     }
 
     @Override
-    public ChiselMode getChiselMode(ItemStack itemStack)
-    {
-        //TODO
+    public ChiselMode getChiselMode(ItemStack itemStack) {
         return ChiselMode.SINGLE;
     }
 }
