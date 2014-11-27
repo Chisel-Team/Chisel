@@ -4,8 +4,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import info.jbcs.minecraft.chisel.client.model.ModelAutoChisel;
-import info.jbcs.minecraft.chisel.init.ModItems;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -20,11 +18,11 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class RenderAutoChisel extends TileEntitySpecialRenderer {
 
+    private static EntityItem ghostItem;
+    private static TileEntityAutoChisel autoChisel;
     private final ModelAutoChisel model;
     private final ResourceLocation texture = new ResourceLocation("chisel:textures/blocks/autoChisel.png");
     private final RenderItem renderTargetAndChisel, renderBase;
-    private static EntityItem ghostItem;
-    private static TileEntityAutoChisel autoChisel;
 
     public RenderAutoChisel(){
         model = new ModelAutoChisel();
@@ -78,7 +76,7 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer {
             GL11.glPopMatrix();
         }
 
-        EntityItem chisel = getGhostItem(autoChisel.getWorldObj(), new ItemStack(ModItems.chisel));
+        /*EntityItem chisel = getGhostItem(autoChisel.getWorldObj(), new ItemStack(ModItems.chisel));
 
         if(chisel != null){
             GL11.glPushMatrix();
@@ -86,7 +84,7 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer {
             GL11.glScaled(1, 1, 1);
             renderTargetAndChisel.doRender(chisel, 0, 0, 0, 0, 0);
             GL11.glPopMatrix();
-        }
+        }*/
     }
 
     @SideOnly(Side.CLIENT)

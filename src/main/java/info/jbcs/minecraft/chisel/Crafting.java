@@ -70,6 +70,8 @@ public class Crafting
             GameRegistry.addRecipe(new ItemStack(ModItems.itemBallOMoss, 1), new Object[]{"XYX", "YXY", "XYX", 'X', Blocks.vine, 'Y', Items.stick});
         if(Configurations.featureEnabled("cloud"))
             GameRegistry.addRecipe(new ItemStack(ModItems.itemCloudInABottle, 1), new Object[]{"X X", "XYX", " X ", 'X', Blocks.glass, 'Y', Items.quartz});
+        if (Configurations.featureEnabled("smashingrock"))
+            GameRegistry.addShapelessRecipe(new ItemStack(ModItems.smashingRock, 16), new Object[]{new ItemStack(Items.stone_pickaxe), new ItemStack(Items.glass_bottle, 1), new ItemStack(Items.stone_shovel)});
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.paperWall, 8), new Object[]{"ppp", "psp", "ppp", ('p'), Items.paper, ('s'), "stickWood"}));
 
