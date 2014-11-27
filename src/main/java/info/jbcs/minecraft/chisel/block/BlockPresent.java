@@ -240,23 +240,18 @@ public class BlockPresent extends BlockContainer implements ICarvable {
                 }
             }
 
-            world.func_147453_f(x, y, z, present);
+            world.func_147453_f(x, y, z, this);
         }
 
-        super.breakBlock(world, x, y, z, present, meta);
+        super.breakBlock(world, x, y, z, this, meta);
     }
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int meta, float x1, float y1, float z1) {
-        if (world.isRemote) {
+        if (!world.isRemote) {
+            player.openGui(Chisel.instance, 2, world, x, y, z);
             return true;
         } else {
-            IInventory inventory = getInventory(world, x, y, z);
-
-            if (inventory != null) {
-                player.openGui(Chisel.instance, 2, world, x, y, z);
-            }
-
             return true;
         }
     }

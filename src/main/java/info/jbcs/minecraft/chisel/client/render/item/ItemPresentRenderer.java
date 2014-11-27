@@ -23,19 +23,19 @@ public class ItemPresentRenderer implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/1.png"));
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/red.png"));
         switch (type) {
             case ENTITY:
-                renderBlock(0.0F, 1.0F, 0.0F);
+                renderBlock(0.0F, 0.0F, 0.0F);
                 break;
             case EQUIPPED:
-                renderBlock(0.5F, 1.5F, 0.5F);
+                renderBlock(0.0F, 0.0F, 0.0F);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                renderBlock(0.5F, 1.0F, 0.5F);
+                renderBlock(0.0F, 0.0F, 0.0F);
                 break;
             case INVENTORY:
-                renderInventory(0.0F, 0.625F, 0.0F);
+                renderInventory(1.0F, 1.0F, 1.0F);
                 break;
             default:
                 break;
@@ -55,7 +55,7 @@ public class ItemPresentRenderer implements IItemRenderer {
         GL11.glTranslatef(x, y, z);
         GL11.glRotatef(180F, 1F, 0, 0);
         GL11.glRotatef(-90F, 0, 1F, 0);
-        GL11.glScalef(0.8F, 0.8F, 0.8F);
+        GL11.glScalef(1.0F, 1.0F, 1.0F);
         model.renderAll();
         GL11.glPopMatrix();
     }

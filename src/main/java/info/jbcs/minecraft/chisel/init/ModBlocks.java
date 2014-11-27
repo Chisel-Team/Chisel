@@ -1309,6 +1309,7 @@ public class ModBlocks {
         }
 
         if (Configurations.featureEnabled("chest")) {
+            //TODO: will be done at winter time
             present = (BlockPresent) new BlockPresent().setHardness(2.5F).setStepSound(Block.soundTypeWood);
             Carving.chisel.addVariation("chest", Blocks.chest, 0, 0);
             present.carverHelper.addVariation(StatCollector.translateToLocal("tile.presetnt.1.desc"), 1, present, 1);
