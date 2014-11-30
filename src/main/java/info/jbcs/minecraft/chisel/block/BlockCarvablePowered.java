@@ -3,11 +3,9 @@ package info.jbcs.minecraft.chisel.block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockCarvablePowered extends BlockCarvable
-{
-    public BlockCarvablePowered(Material m)
-    {
-        super(m, false);
+public class BlockCarvablePowered extends BlockCarvable {
+    public BlockCarvablePowered(Material m) {
+        super(m);
     }
 
     /**
@@ -15,8 +13,7 @@ public class BlockCarvablePowered extends BlockCarvable
      * change based on its state.
      */
     @Override
-    public boolean canProvidePower()
-    {
+    public boolean canProvidePower() {
         return true;
     }
 
@@ -28,8 +25,7 @@ public class BlockCarvablePowered extends BlockCarvable
      * when checking the bottom of the block.
      */
     @Override
-    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5)
-    {
+    public int isProvidingWeakPower(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
         return 15;
     }
 
