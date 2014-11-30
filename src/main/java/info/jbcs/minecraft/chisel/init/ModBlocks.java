@@ -675,7 +675,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("dirt"))
         {
-            dirt = (BlockCarvable) new BlockCarvable(Material.ground, false).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("dirt.default");
+            dirt = (BlockCarvable) new BlockCarvable(Material.ground).setHardness(0.5F).setStepSound(Block.soundTypeGravel).setBlockName("dirt.default");
             Carving.chisel.addVariation("dirt", Blocks.dirt, 0, 0);
             dirt.carverHelper.setChiselBlockName("Dirt");
             //dirt.carverHelper.addVariation("Dirt", 0, Blocks.dirt);
@@ -967,7 +967,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("carpet"))
         {
-            carpet = (BlockCarvable) new BlockCarvable(Material.cloth, false).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeCloth);
+            carpet = (BlockCarvable) new BlockCarvable(Material.cloth).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeCloth);
             carpet.carverHelper.setChiselBlockName("Carpet Block");
             carpet.carverHelper.addVariation(StatCollector.translateToLocal("tile.carpet_block.0.desc"), 0, "carpet/white");
             carpet.carverHelper.addVariation(StatCollector.translateToLocal("tile.carpet_block.1.desc"), 1, "carpet/orange");
@@ -1045,7 +1045,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("futuristicArmorPlating"))
         {
-            tyrian = (BlockCarvable) new BlockCarvable(Material.iron, false).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
+            tyrian = (BlockCarvable) new BlockCarvable(Material.iron).setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
             tyrian.carverHelper.setChiselBlockName("Futuristic Armor Plating Block");
             tyrian.carverHelper.addVariation(StatCollector.translateToLocal("tile.tyrian.0.desc"), 0, "tyrian/shining");
             tyrian.carverHelper.addVariation(StatCollector.translateToLocal("tile.tyrian.1.desc"), 1, "tyrian/tyrian");
@@ -1280,7 +1280,7 @@ public class ModBlocks {
         }
 
         if(Configurations.featureEnabled("leaves")){
-            leaf = (BlockCarvable) new BlockCarvable(Material.leaves, false).setHardness(0.2F).setStepSound(Block.soundTypeGrass);
+            leaf = (BlockLeaf) new BlockLeaf(Material.leaves).setHardness(0.2F).setStepSound(Block.soundTypeGrass);
             Carving.chisel.addVariation("leaves", Blocks.leaves, 0, 0);
             Carving.chisel.addVariation("leaves", Blocks.leaves, 1, 0);
             Carving.chisel.addVariation("leaves", Blocks.leaves, 2, 0);

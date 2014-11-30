@@ -7,28 +7,23 @@ import net.minecraft.item.Item;
 
 import java.util.Random;
 
-public class BlockLightstoneCarvable extends BlockCarvable
-{
-    public BlockLightstoneCarvable()
-    {
-        super(Material.glass, false);
+public class BlockLightstoneCarvable extends BlockCarvable {
+    public BlockLightstoneCarvable() {
+        super(Material.glass);
     }
 
     @Override
-    public int quantityDropped(Random random)
-    {
+    public int quantityDropped(Random random) {
         return Blocks.glowstone.quantityDropped(random);
     }
 
     @Override
-    public Item getItemDropped(int i, Random random, int a)
-    {
+    public Item getItemDropped(int i, Random random, int a) {
         return Items.glowstone_dust;
     }
 
     @Override
-    public int damageDropped(int i)
-    {
+    public int damageDropped(int i) {
         return 0;
     }
 }

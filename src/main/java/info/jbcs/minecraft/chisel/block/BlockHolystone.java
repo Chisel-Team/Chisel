@@ -9,27 +9,23 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockHolystone extends BlockCarvable
-{
+public class BlockHolystone extends BlockCarvable {
     public IIcon iconStar;
 
-    public BlockHolystone(Material m)
-    {
-        super(m, false);
+    public BlockHolystone(Material m) {
+        super(m);
 
         this.setLightLevel(0.25F);
     }
 
     @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random random)
-    {
-        if(General.rand.nextInt(4) == 0 && world.isRemote)
+    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+        if (General.rand.nextInt(4) == 0 && world.isRemote)
             GeneralChiselClient.spawnHolystoneFX(world, this, x, y, z);
     }
 
     @Override
-    public void registerBlockIcons(IIconRegister register)
-    {
+    public void registerBlockIcons(IIconRegister register) {
         super.registerBlockIcons(register);
 
         iconStar = register.registerIcon("Chisel:holystone/particles/star");
