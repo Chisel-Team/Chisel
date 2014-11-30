@@ -12,6 +12,7 @@ import info.jbcs.minecraft.chisel.client.render.tile.RenderAutoChisel;
 import info.jbcs.minecraft.chisel.client.render.tile.RenderPresent;
 import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
 import info.jbcs.minecraft.chisel.entity.EntityCloudInABottle;
+import info.jbcs.minecraft.chisel.entity.EntitySmashingRock;
 import info.jbcs.minecraft.chisel.init.ModBlocks;
 import info.jbcs.minecraft.chisel.init.ModItems;
 import net.minecraft.client.renderer.entity.RenderSnowball;
@@ -51,6 +52,7 @@ public class ClientProxy extends CommonProxy
 
         RenderingRegistry.registerEntityRenderingHandler(EntityCloudInABottle.class, new RenderSnowball(ModItems.itemCloudInABottle));
         RenderingRegistry.registerEntityRenderingHandler(EntityBallOMoss.class, new RenderSnowball(ModItems.itemBallOMoss));
+        RenderingRegistry.registerEntityRenderingHandler(EntitySmashingRock.class, new RenderSnowball(ModItems.smashingRock));
 
         MinecraftForgeClient.registerItemRenderer(ModItems.chisel, renderer);
     }
