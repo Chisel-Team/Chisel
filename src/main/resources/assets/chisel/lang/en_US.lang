@@ -38,6 +38,16 @@ tile.voidstone.15.desc=Beveled void stone
 tile.voidstonePillar.name=Void Stone Pillar
 tile.voidstonePillar.0.desc=Striped Void Stone Pillar
 
+#Waterstone
+tile.waterstone.name=Waterstone
+tile.waterstone.0.desc=Waterstone bricks
+tile.waterstone.1.desc=Black waterstone
+tile.waterstone.2.desc=Waterstone tiles
+tile.waterstone.3.desc=Chaotic waterstone bricks
+tile.waterstone.4.desc=Water creeper in tiles
+tile.waterstone.5.desc=Water panel
+tile.waterstone.6.desc=Ornate water panel
+
 #Chisel 1
 
 #Cobblestone Blocks

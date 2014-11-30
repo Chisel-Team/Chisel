@@ -52,6 +52,7 @@ public class ModBlocks {
     public static BlockCarvablePowered redstone;
     public static BlockHolystone holystone;
     public static BlockLavastone lavastone;
+    public static BlockWaterstone waterstone;
     public static BlockCarvable leaf;
     public static BlockCarvable fantasy;
     public static BlockCarvable carpet;
@@ -1312,7 +1313,7 @@ public class ModBlocks {
             //TODO: will be done at winter time
             present = (BlockPresent) new BlockPresent().setHardness(2.5F).setStepSound(Block.soundTypeWood);
             Carving.chisel.addVariation("chest", Blocks.chest, 0, 0);
-            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.presetnt.1.desc"), 1, present, 1);
+            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.1.desc"), 1, present, 1);
             present.carverHelper.register(present, "present");
             Carving.chisel.registerOre("chest", "chest");
         }
@@ -1336,6 +1337,20 @@ public class ModBlocks {
             voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/pillar-side");
             voidstonePillar.carvableHelper.register(voidstonePillar, "voidstonePillar");
             Carving.chisel.registerOre("voidstonePillar", "voidstonePillar");
+        }
+
+        if (Configurations.featureEnabled("waterstone")) {
+            waterstone = (BlockWaterstone) new BlockWaterstone(Material.rock, "water_flow").setHardness(2.0F).setResistance(10.0F);
+            waterstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.waterstone.0.desc"), 0, "waterstone/cobble");
+            waterstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.waterstone.1.desc"), 1, "waterstone/black");
+            waterstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.waterstone.2.desc"), 2, "waterstone/tiles");
+            waterstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.waterstone.3.desc"), 3, "waterstone/chaotic");
+            waterstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.waterstone.4.desc"), 4, "waterstone/creeper");
+            waterstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.waterstone.5.desc"), 5, "waterstone/panel");
+            waterstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.waterstone.6.desc"), 6, "waterstone/panel-ornate");
+            waterstone.carverHelper.register(waterstone, "waterstone");
+            OreDictionary.registerOre("blockWaterstone", new ItemStack(waterstone, 1, OreDictionary.WILDCARD_VALUE));
+            Carving.chisel.registerOre("waterstone", "blockWaterstone");
         }
     }
 }
