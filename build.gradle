@@ -17,7 +17,7 @@ buildscript {
 }
 
 apply plugin: 'forge'
-version = "2.1.0.0"
+version = "2.1.0.1"
 group = "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Chisel 2"
 
