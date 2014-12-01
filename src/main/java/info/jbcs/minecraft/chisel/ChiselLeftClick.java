@@ -73,12 +73,29 @@ public class ChiselLeftClick
             if(variations == null || variations.length < 2) return; //noReplace = true;
             else
             {
-                int index = blockMeta + 1;
-                while(variations[index].block.equals(block) && variations[index].damage == blockMeta)
+                int index = -1;
+                //Find the index of the next block in the variation list
+                for (int i = 0; i < variations.length; ++i)
                 {
-                    index++;
-                    if(index >= variations.length) index = 0;
+                    CarvingVariation currVariation = variations[i];
+                    
+                    //If the metadata matches, then we are interested in the block AFTER this one
+                    if (currVariation.block.equals(block) && currVariation.meta == blockMeta)
+                    {
+                        index = i + 1;
+                    }
                 }
+                //If no index was found, something is wrong. Return.
+                if (index < 0)
+                {
+                    return;
+                }
+                //If the the current block is the last in the list, loop back to the first
+                else if (index >= variations.length)
+                {
+                    index = 0;
+                }
+                
                 CarvingVariation var = variations[index];
                 chiselTarget = new ItemStack(var.block, 1, var.damage);
             }
