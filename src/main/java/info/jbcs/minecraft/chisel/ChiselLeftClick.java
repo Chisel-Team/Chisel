@@ -28,14 +28,40 @@ public class ChiselLeftClick
     HashMap<String, String> chiselUseLocation = new HashMap<String, String>();
     Random random = new Random();
 
+    public static void setBlock(World world, int x, int y, int z, ChiselMode chiselMode, Block previousBlock, int previousMetadata, Block newBlock, int newMetadata, ForgeDirection direction) {
+        if (chiselMode == ChiselMode.SINGLE)
+        {
+            world.setBlock(x, y, z, newBlock, newMetadata, 2);
+        } else if (chiselMode == ChiselMode.CIRCLETHREE)
+        {
+            int radius = 1;
+            for (int i = -radius; i <= radius; i++)
+                for (int j = -radius; j <= radius; j++)
+                {
+                    //TODO facing stuff so this can be anywhere
+                    if (world.getBlock(x + i, y, z + j) != null)
+                    {
+                        if (world.getBlock(x + i, y, z + j) == previousBlock && world.getBlockMetadata(x + i, y, z + j) == previousMetadata) {
+                            int shiftedX = x;
+                            int shiftedY = y;
+                            int shiftedZ = z;
+
+                            world.setBlock(shiftedX, shiftedY, shiftedZ, newBlock, newMetadata, 2);
+                        }
+                    }
+                }
+
+        }
+
+    }
+
     @SubscribeEvent
-    public void onPlayerClick(PlayerInteractEvent event)
-    {
-        if(event.action != PlayerInteractEvent.Action.LEFT_CLICK_BLOCK) return;
-        if(!Configurations.enableChiseling) return;
+    public void onPlayerClick(PlayerInteractEvent event) {
+        if (event.action != PlayerInteractEvent.Action.LEFT_CLICK_BLOCK) return;
+        if (!Configurations.enableChiseling) return;
         EntityPlayer player = event.entityPlayer;
         ItemStack stack = player.getHeldItem();
-        if(stack == null || stack.getItem() != ModItems.chisel) return;
+        if (stack == null || stack.getItem() != ModItems.chisel) return;
 
         World world = event.world;
         int x = event.x;
@@ -47,55 +73,47 @@ public class ChiselLeftClick
 
         ItemStack chiselTarget = null;
 
-        if(stack.stackTagCompound != null)
-        {
+        if (stack.stackTagCompound != null) {
             chiselTarget = ItemStack.loadItemStackFromNBT(stack.stackTagCompound.getCompoundTag("chiselTarget"));
         }
 
         boolean chiselHasBlockInside = true;
 
-        if(chiselTarget == null)
-        {
+        if (chiselTarget == null) {
             chiselHasBlockInside = false;
 
             Long useTime = chiselUseTime.get(player.getCommandSenderName());
             String loc = chiselUseLocation.get(player.getCommandSenderName());
 
-            if(useTime != null && chiselUseLocation != null && loc.equals(x + "|" + y + "|" + z))
-            {
+            if (useTime != null && chiselUseLocation != null && loc.equals(x + "|" + y + "|" + z)) {
                 long cooldown = 20;
                 long time = world.getWorldInfo().getWorldTotalTime();
 
-                if(time > useTime - cooldown && time < useTime + cooldown) return; //noReplace = true;
+                if (time > useTime - cooldown && time < useTime + cooldown) return; //noReplace = true;
             }
 
             CarvingVariation[] variations = ItemChisel.carving.getVariations(block, blockMeta);
-            if(variations == null || variations.length < 2) return; //noReplace = true;
-            else
-            {
+            if (variations == null || variations.length < 2) return; //noReplace = true;
+            else {
                 int index = -1;
                 //Find the index of the next block in the variation list
-                for (int i = 0; i < variations.length; ++i)
-                {
+                for (int i = 0; i < variations.length; ++i) {
                     CarvingVariation currVariation = variations[i];
-                    
+
                     //If the metadata matches, then we are interested in the block AFTER this one
-                    if (currVariation.block.equals(block) && currVariation.meta == blockMeta)
-                    {
+                    if (currVariation.block.equals(block) && currVariation.meta == blockMeta) {
                         index = i + 1;
                     }
                 }
                 //If no index was found, something is wrong. Return.
-                if (index < 0)
-                {
+                if (index < 0) {
                     return;
                 }
                 //If the the current block is the last in the list, loop back to the first
-                else if (index >= variations.length)
-                {
+                else if (index >= variations.length) {
                     index = 0;
                 }
-                
+
                 CarvingVariation var = variations[index];
                 chiselTarget = new ItemStack(var.block, 1, var.damage);
             }
@@ -111,44 +129,38 @@ public class ChiselLeftClick
         result = target;
 
         /* special case: stone can be carved to cobble and bricks */
-        if(Configurations.chiselStoneToCobbleBricks)
-        {
-            if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ModBlocks.cobblestone))
+        if (Configurations.chiselStoneToCobbleBricks) {
+            if (!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ModBlocks.cobblestone))
                 match = true;
-            if(!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ModBlocks.stoneBrick))
+            if (!match && block.equals(Blocks.stone) && Block.getBlockFromItem(target).equals(ModBlocks.stoneBrick))
                 match = true;
         }
-        if(!match)
+        if (!match)
             return; //noReplace = true;
 
         int updateValue = 1;
 
-        if(!world.isRemote || chiselHasBlockInside)
-        {
+        if (!world.isRemote || chiselHasBlockInside) {
             world.setBlock(x, y, z, Block.getBlockFromItem(result), targetMeta, updateValue);
             world.markBlockForUpdate(x, y, z);
         }
 
-        switch(FMLCommonHandler.instance().getEffectiveSide())
-        {
+        switch (FMLCommonHandler.instance().getEffectiveSide()) {
             case SERVER:
                 chiselUseTime.put(player.getCommandSenderName(), world.getWorldInfo().getWorldTotalTime());
                 chiselUseLocation.put(player.getCommandSenderName(), x + "|" + y + "|" + z);
 
-                try
-                {
+                try {
                     //TODO chisel left click thingy
                     // Packet packet = Chisel.packet.create(Packets.CHISELED).writeInt(x).writeInt(y).writeInt(z);
                     // Chisel.packet.sendToAllAround(packet, new TargetPoint(player.dimension, x, y, z, 30.0f));
-                } catch(Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
 
             case CLIENT:
-                if(chiselHasBlockInside)
-                {
+                if (chiselHasBlockInside) {
                     String sound = ItemChisel.carving.getVariationSound(result, chiselTarget.getItemDamage());
                     GeneralChiselClient.spawnChiselEffect(x, y, z, sound);
                 }
@@ -159,51 +171,19 @@ public class ChiselLeftClick
         }
 
         stack.damageItem(1, player);
-        if(stack.stackSize == 0)
-        {
+        if (stack.stackSize == 0) {
             player.inventory.mainInventory[player.inventory.currentItem] = chiselHasBlockInside ? chiselTarget : null;
         }
     }
 
     @SubscribeEvent
-    public void onBlockBreak(BlockEvent.BreakEvent event)
-    {
-        if(!Configurations.enableChiseling) return;
+    public void onBlockBreak(BlockEvent.BreakEvent event) {
+        if (!Configurations.enableChiseling) return;
         EntityPlayer player = event.getPlayer();
         ItemStack stack = player.getHeldItem();
-        if(stack == null || stack.getItem() != ModItems.chisel) return;
+        if (stack == null || stack.getItem() != ModItems.chisel) return;
 
         event.setCanceled(true);
-    }
-
-
-    public static void setBlock(World world, int x, int y, int z, ChiselMode chiselMode, Block previousBlock, int previousMetadata, Block newBlock, int newMetadata, ForgeDirection direction)
-    {
-        if(chiselMode == ChiselMode.SINGLE)
-        {
-            world.setBlock(x, y, z, newBlock, newMetadata, 2);
-        } else if(chiselMode == ChiselMode.CIRCLETHREE)
-        {
-            int radius = 1;
-            for(int i = -radius; i <= radius; i++)
-                for(int j = -radius; j <= radius; j++)
-                {
-                    //TODO facing stuff so this can be anywhere
-                    if(world.getBlock(x + i, y, z + j) != null)
-                    {
-                        if(world.getBlock(x + i, y, z + j) == previousBlock && world.getBlockMetadata(x + i, y, z + j) == previousMetadata)
-                        {
-                            int shiftedX = x;
-                            int shiftedY = y;
-                            int shiftedZ = z;
-
-                            world.setBlock(shiftedX, shiftedY, shiftedZ, newBlock, newMetadata, 2);
-                        }
-                    }
-                }
-
-        }
-
     }
 
 }
