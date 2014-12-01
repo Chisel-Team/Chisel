@@ -4,12 +4,24 @@
 item.chisel.name=凿子
 item.ballMoss.name=苔藓球
 item.cloudBottle.name=瓶装云朵
+item.smashingRock.name=碎石块
 
 # Block localizations
 # Have fun! ~zombiepig333
 
 #Chisel 2
+
+#Auto Chisel
 tile.autoChisel.name=自动雕凿机
+
+#Leaves
+tile.leaves.6.desc=枯树叶
+tile.leaves.7.desc=精致修剪的树叶
+tile.leaves.8.desc=粉色叶瓣
+tile.leaves.9.desc=红色玫瑰花瓣
+tile.leaves.10.desc=白色玫瑰花瓣
+tile.leaves.11.desc=圣诞树挂饰
+tile.leaves.12.desc=圣诞树灯饰
 
 #Void Stone Blocks
 tile.voidstone.name=虚空石
@@ -25,6 +37,16 @@ tile.voidstone.15.desc=斜纹镶板虚空石
 #Void Stone Pillars
 tile.voidstonePillar.name=虚空石柱
 tile.voidstonePillar.0.desc=竖纹虚空石柱
+
+#Waterstone
+tile.waterstone.name=水石
+tile.waterstone.0.desc=水石砖
+tile.waterstone.1.desc=黑色水石
+tile.waterstone.2.desc=水石花砖
+tile.waterstone.3.desc=无序砌成的水石砖
+tile.waterstone.4.desc=爬行者雕纹水石
+tile.waterstone.5.desc=镶板水石
+tile.waterstone.6.desc=精致镶板水石
 
 #Chisel 1
 
@@ -261,22 +283,22 @@ tile.limestoneStairs.15.desc=深色镶板灰岩楼梯
 
 #Factory Blocks
 tile.factoryblock.name=工厂方块
-tile.blockFactory.0.desc=生锈金属块&点状图案
-tile.blockFactory.1.desc=生锈金属块
-tile.blockFactory.2.desc=锈蚀金属块
-tile.blockFactory.3.desc=略锈的金属块
-tile.blockFactory.4.desc=格栅块
-tile.blockFactory.5.desc=紫影格栅块
-tile.blockFactory.6.desc=黄黑相间的警示方块
-tile.blockFactory.7.desc=橙白相间的警示方块
-tile.blockFactory.8.desc=精密电路方块
-tile.blockFactory.9.desc=精致金属盒
-tile.blockFactory.10.desc=镀金精密电路方块
-tile.blockFactory.11.desc=镀金紫色生锈方块
-tile.blockFactory.12.desc=磨光金属建筑方块
-tile.blockFactory.13.desc=磨损金属墙体&通风口
-tile.blockFactory.14.desc=生锈金属块
-tile.blockFactory.15.desc=磨损金属壳
+tile.factory.0.desc=生锈金属块&点状图案
+tile.factory.1.desc=生锈金属块
+tile.factory.2.desc=锈蚀金属块
+tile.factory.3.desc=略锈的金属块
+tile.factory.4.desc=格栅块
+tile.factory.5.desc=紫影格栅块
+tile.factory.6.desc=黄黑相间的警示方块
+tile.factory.7.desc=橙白相间的警示方块
+tile.factory.8.desc=精密电路方块
+tile.factory.9.desc=精致金属盒
+tile.factory.10.desc=镀金精密电路方块
+tile.factory.11.desc=镀金紫色生锈方块
+tile.factory.12.desc=磨光金属建筑方块
+tile.factory.13.desc=磨损金属墙体&通风口
+tile.factory.14.desc=生锈金属块
+tile.factory.15.desc=磨损金属壳
 
 #Diamond blocks
 tile.diamond_block.name=钻石块
@@ -338,17 +360,17 @@ tile.sandstoneScribbles.desc=刻文沙石
 
 #Concrete
 tile.concrete.name=混凝土
-tile.blockConcrete.0.desc=混凝土
-tile.blockConcrete.1.desc=混凝土块
-tile.blockConcrete.2.desc=双层混凝土台阶
-tile.blockConcrete.3.desc=混凝土方砖
-tile.blockConcrete.4.desc=风化混凝土
-tile.blockConcrete.5.desc=风化混凝土块
-tile.blockConcrete.6.desc=风化双层混凝土台阶
-tile.blockConcrete.7.desc=风化混凝土方砖
-tile.blockConcrete.8.desc=局部风化的混凝土
-tile.blockConcrete.9.desc=局部风化的混凝土块
-tile.blockConcrete.10.desc=沥青
+tile.concrete.0.desc=混凝土
+tile.concrete.1.desc=混凝土块
+tile.concrete.2.desc=双层混凝土台阶
+tile.concrete.3.desc=混凝土方砖
+tile.concrete.4.desc=风化混凝土
+tile.concrete.5.desc=风化混凝土块
+tile.concrete.6.desc=风化双层混凝土台阶
+tile.concrete.7.desc=风化混凝土方砖
+tile.concrete.8.desc=局部风化的混凝土
+tile.concrete.9.desc=局部风化的混凝土块
+tile.concrete.10.desc=沥青
 
 #Road Line
 tile.roadLine.name=道路标线
@@ -501,19 +523,19 @@ tile.stoneBrick.15.desc=罪恶的石砖
 
 #Dirt
 tile.dirt.name=泥土
-tile.blockDirt.0.desc=杂乱堆叠的泥砖
-tile.blockDirt.1.desc=模仿地狱砖设计的泥砖
-tile.blockDirt.2.desc=泥砖
-tile.blockDirt.3.desc=圆石状泥砖
-tile.blockDirt.4.desc=加固圆石状泥砖
-tile.blockDirt.5.desc=加固泥土
-tile.blockDirt.6.desc=快乐灵魂泥土
-tile.blockDirt.7.desc=大块錾制泥土
-tile.blockDirt.8.desc=覆盖着泥土的大块錾制泥土
-tile.blockDirt.9.desc=水平花纹泥土
-tile.blockDirt.10.desc=垂直花纹泥土
-tile.blockDirt.11.desc=页状泥土
-tile.blockDirt.12.desc=破碎的泥土
+tile.dirt.0.desc=杂乱堆叠的泥砖
+tile.dirt.1.desc=模仿地狱砖设计的泥砖
+tile.dirt.2.desc=泥砖
+tile.dirt.3.desc=圆石状泥砖
+tile.dirt.4.desc=加固圆石状泥砖
+tile.dirt.5.desc=加固泥土
+tile.dirt.6.desc=快乐灵魂泥土
+tile.dirt.7.desc=大块錾制泥土
+tile.dirt.8.desc=覆盖着泥土的大块錾制泥土
+tile.dirt.9.desc=水平花纹泥土
+tile.dirt.10.desc=垂直花纹泥土
+tile.dirt.11.desc=页状泥土
+tile.dirt.12.desc=破碎的泥土
 
 #Ice
 tile.ice.name=冰
