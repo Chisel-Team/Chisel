@@ -25,10 +25,9 @@ tile.leaves.12.desc=Christmas Lights
 
 #Void Stone Blocks
 tile.voidstone.name=Void Stone
-tile.voidstone.0.desc=Void stone with a metal norder
+tile.voidstone.0.desc=Void stone with a metal border
 tile.voidstone.1.desc=Large void stone tiles
-tile.voidstone.2.desc=Skulls
-tile.voidstone.3.desc=Smooth void stone
+tile.voidstone.2.desc=Smooth void stone
 tile.voidstone.12.desc=Runic void stone
 tile.voidstone.13.desc=Raw void stone
 tile.voidstone.14.desc=Eye
