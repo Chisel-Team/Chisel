@@ -4,7 +4,7 @@ import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.BlockHolystone;
 import info.jbcs.minecraft.chisel.block.BlockLavastone;
 import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
-import info.jbcs.minecraft.chisel.block.BlockVoidstone;
+import info.jbcs.minecraft.chisel.block.BlockVoidstonePillar;
 import info.jbcs.minecraft.chisel.entity.fx.EntityBallOMossFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntityHolystoneFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntitySnakestoneObsidianFX;
@@ -22,22 +22,19 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 
-public class GeneralChiselClient
-{
+public class GeneralChiselClient {
     public static Random rand = new Random();
     public static int tick = 0;
 
-    public static void spawnLavastoneFX(World world, BlockLavastone block, int x, int y, int z)
-    {
-        if(Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0) return;
+    public static void spawnLavastoneFX(World world, BlockLavastone block, int x, int y, int z) {
+        if (Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0) return;
 
         float f = 0.15F;
         double x1 = x + rand.nextDouble() * (block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() - f * 2.0F) + f + block.getBlockBoundsMinX();
         double y1 = y + rand.nextDouble() * (block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() - f * 2.0F) + f + block.getBlockBoundsMinY();
         double z1 = z + rand.nextDouble() * (block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() - f * 2.0F) + f + block.getBlockBoundsMinZ();
 
-        switch(rand.nextInt(6))
-        {
+        switch (rand.nextInt(6)) {
             case 0:
                 y1 = y + block.getBlockBoundsMinY() - f;
                 y--;
@@ -64,7 +61,7 @@ public class GeneralChiselClient
                 break;
         }
 
-        if(world.getBlock(x, y, z).isOpaqueCube()) return;
+        if (world.getBlock(x, y, z).isOpaqueCube()) return;
 
         EntityLavaFX res = new EntityLavaFX(world, x1, y1, z1);
 //		res.motionX=x1-x-0.5;
@@ -78,17 +75,15 @@ public class GeneralChiselClient
         Minecraft.getMinecraft().effectRenderer.addEffect(res);
     }
 
-    public static void spawnHolystoneFX(World world, BlockHolystone block, int x, int y, int z)
-    {
-        if(Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0) return;
+    public static void spawnHolystoneFX(World world, BlockHolystone block, int x, int y, int z) {
+        if (Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0) return;
 
         float f = 0.15F;
         double x1 = x + rand.nextDouble() * (block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() - f * 2.0F) + f + block.getBlockBoundsMinX();
         double y1 = y + rand.nextDouble() * (block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() - f * 2.0F) + f + block.getBlockBoundsMinY();
         double z1 = z + rand.nextDouble() * (block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() - f * 2.0F) + f + block.getBlockBoundsMinZ();
 
-        switch(rand.nextInt(6))
-        {
+        switch (rand.nextInt(6)) {
             case 0:
                 y1 = y + block.getBlockBoundsMinY() - f;
                 y--;
@@ -115,30 +110,27 @@ public class GeneralChiselClient
                 break;
         }
 
-        if(world.getBlock(x, y, z).isOpaqueCube()) return;
+        if (world.getBlock(x, y, z).isOpaqueCube()) return;
 
         EntityHolystoneFX res = new EntityHolystoneFX(world, block, x1, y1, z1);
         Minecraft.getMinecraft().effectRenderer.addEffect(res);
     }
 
-    public static void spawnSnakestoneObsidianFX(World world, BlockSnakestoneObsidian block, int x, int y, int z)
-    {
-        if(Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0)
-        {
+    public static void spawnSnakestoneObsidianFX(World world, BlockSnakestoneObsidian block, int x, int y, int z) {
+        if (Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0) {
             EntitySnakestoneObsidianFX res = new EntitySnakestoneObsidianFX(world, block, x, y, z);
             Minecraft.getMinecraft().effectRenderer.addEffect(res);
         }
     }
 
-    public static void spawnVoidstoneFX(World world, BlockVoidstone block, int x, int y, int z){
-        if(Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0){
+    public static void spawnVoidstoneFX(World world, BlockVoidstonePillar block, int x, int y, int z) {
+        if (Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0) {
             float f = 0.15F;
             double x1 = x + rand.nextDouble() * (block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() - f * 2.0F) + f + block.getBlockBoundsMinX();
             double y1 = y + rand.nextDouble() * (block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() - f * 2.0F) + f + block.getBlockBoundsMinY();
             double z1 = z + rand.nextDouble() * (block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() - f * 2.0F) + f + block.getBlockBoundsMinZ();
 
-            switch(rand.nextInt(6))
-            {
+            switch (rand.nextInt(6)) {
                 case 0:
                     y1 = y + block.getBlockBoundsMinY() - f;
                     y--;
@@ -165,27 +157,24 @@ public class GeneralChiselClient
                     break;
             }
 
-            if(world.getBlock(x, y, z).isOpaqueCube()) return;
+            if (world.getBlock(x, y, z).isOpaqueCube()) return;
 
             EntityVoidstoneFX res = new EntityVoidstoneFX(world, block, x, y, z);
             Minecraft.getMinecraft().effectRenderer.addEffect(res);
         }
     }
 
-    public static void spawnBallOMossFX(World world, double x, double y, double z)
-    {
-        if(Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0)
-        {
+    public static void spawnBallOMossFX(World world, double x, double y, double z) {
+        if (Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0) {
             EntityBallOMossFX res = new EntityBallOMossFX(world, x, y, z);
             Minecraft.getMinecraft().effectRenderer.addEffect(res);
         }
     }
 
 
-    public static EntityDiggingFX addBlockHitEffects(World world, int x, int y, int z, int side)
-    {
+    public static EntityDiggingFX addBlockHitEffects(World world, int x, int y, int z, int side) {
         Block block = world.getBlock(x, y, z);
-        if(block.isAir(world, x, y, z))
+        if (block.isAir(world, x, y, z))
             return null;
 
         EffectRenderer renderer = Minecraft.getMinecraft().effectRenderer;
@@ -195,8 +184,7 @@ public class GeneralChiselClient
         double d1 = y + rand.nextDouble() * (block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() - f * 2.0F) + f + block.getBlockBoundsMinY();
         double d2 = z + rand.nextDouble() * (block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() - f * 2.0F) + f + block.getBlockBoundsMinZ();
 
-        switch(side)
-        {
+        switch (side) {
             case 0:
                 d1 = y + block.getBlockBoundsMinY() - f;
                 break;
@@ -228,15 +216,12 @@ public class GeneralChiselClient
         return res;
     }
 
-    public static void spawnChiselEffect(int x, int y, int z, String sound)
-    {
+    public static void spawnChiselEffect(int x, int y, int z, String sound) {
         World world = Minecraft.getMinecraft().theWorld;
-        for(int side = 0; side < 6; side++)
-        {
-            for(int j = 0; j < 16; j++)
-            {
+        for (int side = 0; side < 6; side++) {
+            for (int j = 0; j < 16; j++) {
                 EntityDiggingFX fx = addBlockHitEffects(Minecraft.getMinecraft().theWorld, x, y, z, side);
-                if(fx == null) return;
+                if (fx == null) return;
 
                 fx.multipleParticleScaleBy(0.25f + 0.5f * rand.nextFloat());
                 fx.multiplyVelocity(0.3f * rand.nextFloat());
@@ -246,17 +231,16 @@ public class GeneralChiselClient
         GeneralClient.playChiselSound(world, x, y, z, sound);
     }
 
-    public static void speedupPlayer(World world, Entity entity, double concreteVelocity)
-    {
+    public static void speedupPlayer(World world, Entity entity, double concreteVelocity) {
         double velocity = Math.sqrt(entity.motionX * entity.motionX + entity.motionZ * entity.motionZ);
 
-        if(!(entity instanceof EntityPlayerSP)) return;
-        if(velocity == 0) return;
-        if(velocity >= Configurations.concreteVelocity) return;
+        if (!(entity instanceof EntityPlayerSP)) return;
+        if (velocity == 0) return;
+        if (velocity >= Configurations.concreteVelocity) return;
 
         EntityPlayerSP player = (EntityPlayerSP) entity;
 
-        if(Math.abs(player.movementInput.moveForward) < 0.75f && Math.abs(player.movementInput.moveStrafe) < 0.75f)
+        if (Math.abs(player.movementInput.moveForward) < 0.75f && Math.abs(player.movementInput.moveStrafe) < 0.75f)
             return;
 
         entity.motionX = Configurations.concreteVelocity * entity.motionX / velocity;
