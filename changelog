@@ -1,3 +1,43 @@
+2.1.3:
+New voidstone textures:
+Fixes the connected textures crash
+Auto Chisel now drops inventory on block break
+
+2.1.2:
+Fixes texture issues
+
+2.1.1:
+Added Waterstone
+Fixed light going through blocks
+Fixed lang file
+Fixed Smashing Rock
+
+2.1.0:
+Leaves
+Setting up for christmas delight
+Auto chisel fixes and new render system for next update
+Worlds now transfer
+
+2.0.0.4:
+Fixes invisible block
+
+2.0.0.3:
+Fixes the dupe glitch and other small bugs
+
+2.0.0.2:
+Added more localization
+Fixes items in the auto chisel crashing the game
+Fixes server side crash with FMP
+Added more voidstone and lavastone
+
+2.0.0.1:
+Fixes creative tab naming
+
+2.0:
+Added the Auto Chisel
+Code Refactor
+Code Cleanup
+
 1.5.7:
 Added the Laboratory block, a fancy new block added by GravitasShortfall
 Fixed issues with left clicking with the Chisel, thanks to Lordmau5/Konata
