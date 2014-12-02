@@ -284,6 +284,8 @@ public class CTM
                 x2++;
                 break;
         }
+        if (getBlockOrFacade(world, x2, y2, z2, side) == null || getBlockOrFacade(world, x, y, z, side) == null || block == null)
+        	return false;
 
         return getBlockOrFacade(world, x, y, z, side).equals(block) && getBlockOrFacadeMetadata(world, x, y, z, side) == meta && (!getBlockOrFacade(world, x2, y2, z2, side).equals(block) || getBlockOrFacadeMetadata(world, x2, y2, z2, side) != meta);
     }
