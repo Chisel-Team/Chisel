@@ -23,6 +23,7 @@ import info.jbcs.minecraft.chisel.client.gui.GuiAutoChisel;
 import info.jbcs.minecraft.chisel.client.gui.GuiChisel;
 import info.jbcs.minecraft.chisel.client.gui.GuiPresent;
 import info.jbcs.minecraft.chisel.compat.Compatibility;
+import info.jbcs.minecraft.chisel.compat.FMPIntegration;
 import info.jbcs.minecraft.chisel.compat.ModIntegration;
 import info.jbcs.minecraft.chisel.init.ModBlocks;
 import info.jbcs.minecraft.chisel.init.ModItems;
@@ -68,8 +69,9 @@ public class Chisel
 
     @SideOnly(Side.CLIENT)
     private static void initModIntegration() {
-        //To be added back at a different time
-        //ModIntegration.addMod(FMPIntegration.class);
+        if(Configurations.enableFMP) {
+            ModIntegration.addMod(FMPIntegration.class);
+        }
 
         ModIntegration.init();
     }
