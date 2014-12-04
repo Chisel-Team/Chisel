@@ -7,16 +7,14 @@ import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
 import info.jbcs.minecraft.chisel.entity.EntityCloudInABottle;
 import info.jbcs.minecraft.chisel.entity.EntitySmashingRock;
-import info.jbcs.minecraft.chisel.item.ItemBallOMoss;
-import info.jbcs.minecraft.chisel.item.ItemChisel;
-import info.jbcs.minecraft.chisel.item.ItemCloudInABottle;
-import info.jbcs.minecraft.chisel.item.ItemSmashingRock;
+import info.jbcs.minecraft.chisel.item.*;
 
 public class ModItems {
     public static ItemChisel chisel;
     public static ItemCloudInABottle itemCloudInABottle;
     public static ItemBallOMoss itemBallOMoss;
     public static ItemSmashingRock smashingRock;
+    public static ItemUpgrade upgrade;
 
     public static void load() {
         chisel = (ItemChisel) new ItemChisel().setTextureName("chisel:chisel").setCreativeTab(ModTabs.tabChisel);
@@ -38,6 +36,11 @@ public class ModItems {
             smashingRock = (ItemSmashingRock) new ItemSmashingRock().setTextureName("Chisel:smashingrock").setCreativeTab(ModTabs.tabChisel);
             EntityRegistry.registerModEntity(EntitySmashingRock.class, "SmashingRock", 2, Chisel.instance, 40, 1, true);
             GameRegistry.registerItem(smashingRock, "smashingrock");
+        }
+
+        if(Configurations.featureEnabled("autoChiselUpgrades")){
+            upgrade = (ItemUpgrade) new ItemUpgrade("upgrade").setCreativeTab(ModTabs.tabChisel);
+            GameRegistry.registerItem(upgrade, upgrade.getUnlocalizedName());
         }
     }
 }

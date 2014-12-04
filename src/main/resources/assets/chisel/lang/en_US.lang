@@ -5,6 +5,13 @@ item.chisel.name=Chisel
 item.ballMoss.name=Ball O' Moss
 item.cloudBottle.name=Cloud In A Bottle
 item.smashingRock.name=Smashing Rock
+item.upgrade_speed.name=Speed Upgrade
+item.upgrade_automation.name=Automation Upgrade
+item.upgrade_stack.name=Stack Upgrade
+
+item.upgrade_speed.desc=Increases the rate at which it works
+item.upgrade_automation.desc=Allows things to push in and out of the Auto Chisel
+item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 
 # Block localizations
 # Have fun! ~zombiepig333

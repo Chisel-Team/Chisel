@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 public class ItemAutoChiselRenderer implements IItemRenderer{
 
     private final ModelAutoChisel model = new ModelAutoChisel();
-    private final ResourceLocation texture = new ResourceLocation("chisel:textures/blocks/autoChisel.png");
+    private  ResourceLocation texture;
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -24,6 +24,23 @@ public class ItemAutoChiselRenderer implements IItemRenderer{
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+        switch (item.getItemDamage()){
+            case 0:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel.png");
+                break;
+            case 1:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel_speed.png");
+                break;
+            case 2:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel_automation.png");
+                break;
+            case 3:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel_stack.png");
+                break;
+            default:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel.png");
+                break;
+        }
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         switch (type){
             case ENTITY:
