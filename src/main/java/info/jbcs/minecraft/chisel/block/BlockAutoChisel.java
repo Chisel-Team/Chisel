@@ -1,10 +1,13 @@
 package info.jbcs.minecraft.chisel.block;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,6 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
+import java.util.List;
 import java.util.Random;
 
 public class BlockAutoChisel extends BlockContainer {
@@ -49,6 +53,18 @@ public class BlockAutoChisel extends BlockContainer {
     public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
         dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, block, par6);
+    }
+
+    @Override
+    public int damageDropped(int metadata){
+        return metadata;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(int metadata, CreativeTabs creativeTabs, List subItems){
+        for(int x = 0; x < 4; x++){
+            subItems.add(new ItemStack(this, 1, x));
+        }
     }
 
     private void dropItems(World world, int x, int y, int z) {

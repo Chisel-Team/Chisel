@@ -21,7 +21,7 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer {
     private static EntityItem ghostItem;
     private static TileEntityAutoChisel autoChisel;
     private final ModelAutoChisel model;
-    private final ResourceLocation texture = new ResourceLocation("chisel:textures/blocks/autoChisel.png");
+    private ResourceLocation texture;
     private final RenderItem renderTargetAndChisel, renderBase;
 
     public RenderAutoChisel(){
@@ -46,6 +46,23 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer {
 
     @Override
     public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float scale) {
+        switch (tile.getBlockMetadata()){
+            case 0:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel.png");
+                break;
+            case 1:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel_speed.png");
+                break;
+            case 2:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel_automation.png");
+                break;
+            case 3:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel_stack.png");
+                break;
+            default:
+                texture = new ResourceLocation("chisel:textures/blocks/autoChisel/autoChisel.png");
+                break;
+        }
         bindTexture(texture);
         glPushMatrix();
         glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);

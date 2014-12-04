@@ -87,7 +87,7 @@ public class ModBlocks {
     {
         if(Configurations.featureEnabled("autoChisel")){
             autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(ModTabs.tabChisel).setBlockName("autoChisel");
-            GameRegistry.registerBlock(autoChisel, autoChisel.getUnlocalizedName());
+            GameRegistry.registerBlock(autoChisel, ItemBlockAutoChisel.class, "autoChisel");
             Chisel.proxy.registerTileEntities();
         }
 
