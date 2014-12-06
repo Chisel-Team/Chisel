@@ -1,8 +1,12 @@
 package info.jbcs.minecraft.chisel.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+
+import java.util.List;
 
 public class ItemBlockAutoChisel extends ItemBlock{
 
@@ -11,7 +15,6 @@ public class ItemBlockAutoChisel extends ItemBlock{
 
     public ItemBlockAutoChisel(Block block) {
         super(block);
-        setMaxDamage(0);
         setHasSubtypes(true);
     }
 
@@ -25,4 +28,8 @@ public class ItemBlockAutoChisel extends ItemBlock{
         return getUnlocalizedName() + "." + names[itemStack.getItemDamage()];
     }
 
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4){
+        list.add(StatCollector.translateToLocal(getUnlocalizedName() + "." + names[itemStack.getItemDamage()] + ".desc"));
+    }
 }

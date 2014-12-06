@@ -10,15 +10,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Random;
 
-public class BlockAutoChisel extends BlockContainer {
+public class BlockAutoChisel extends BlockContainer{
     public BlockAutoChisel() {
         super(Material.rock);
         setHardness(1F);
@@ -61,7 +63,8 @@ public class BlockAutoChisel extends BlockContainer {
     }
 
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int metadata, CreativeTabs creativeTabs, List subItems){
+    @Override
+    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List subItems){
         for(int x = 0; x < 4; x++){
             subItems.add(new ItemStack(this, 1, x));
         }

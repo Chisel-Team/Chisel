@@ -1,11 +1,15 @@
 package info.jbcs.minecraft.chisel;
 
+import info.jbcs.minecraft.chisel.block.BlockAutoChisel;
 import info.jbcs.minecraft.chisel.block.BlockCarvable;
+import info.jbcs.minecraft.chisel.block.BlockMarbleSlab;
+import info.jbcs.minecraft.chisel.block.BlockVoidstone;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 import java.util.List;
 
