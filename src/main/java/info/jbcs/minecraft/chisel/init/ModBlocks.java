@@ -114,6 +114,7 @@ public class ModBlocks {
             marble.carverHelper.addVariation(StatCollector.translateToLocal("tile.marble.15.desc"), 15, "marble/marble-blocks");
             marble.carverHelper.register(marble, "marble");
             OreDictionary.registerOre("marble", marble);
+            OreDictionary.registerOre("blockMarble", marble);
             Carving.chisel.registerOre("marble", "marble");
 
             marbleSlab = (BlockMarbleSlab) new BlockMarbleSlab(marble).setHardness(2.0F).setResistance(10F);
