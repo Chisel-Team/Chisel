@@ -109,5 +109,8 @@ public class Crafting {
 
         if(Configurations.autoChisel)
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.autoChisel, 1), new Object[]{"XXX", "XYX", "XXX", Character.valueOf('X'), "plankWood", Character.valueOf('Y'), ModItems.chisel}));
+
+        if(Configurations.featureEnabled("hexPlating"))
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.hexPlating, 1), new Object[]{"XXX", "XYX", "XXX", 'X', "stone", 'Y', "blockCoal"}));
     }
 }
