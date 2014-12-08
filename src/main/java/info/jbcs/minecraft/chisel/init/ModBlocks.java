@@ -76,6 +76,7 @@ public class ModBlocks {
     public static BlockSnakestone snakestone;
     public static BlockSnakestone sandSnakestone;
     public static BlockSnakestoneObsidian obsidianSnakestone;
+    public static BlockCarvable hexPlating;
 
     public static BlockSpikes spikeTrap;
 
@@ -86,7 +87,7 @@ public class ModBlocks {
     public static void load()
     {
         if(Configurations.featureEnabled("autoChisel")){
-            autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(ModTabs.tabChisel).setBlockName("autoChisel");
+            autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(ModTabs.tabChisel).setBlockName("autoChisel").setBlockTextureName(Chisel.MOD_ID + ":factory/circuit");
             GameRegistry.registerBlock(autoChisel, ItemBlockAutoChisel.class, "autoChisel");
             Chisel.proxy.registerTileEntities();
         }
@@ -1350,6 +1351,28 @@ public class ModBlocks {
             waterstone.carverHelper.register(waterstone, "waterstone");
             OreDictionary.registerOre("blockWaterstone", new ItemStack(waterstone, 1, OreDictionary.WILDCARD_VALUE));
             Carving.chisel.registerOre("waterstone", "blockWaterstone");
+        }
+
+        if(Configurations.featureEnabled("hexPlating")){
+            hexPlating = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10.0F);
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.0.desc"), 0, "hexPlating/black");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.1.desc"), 1, "hexPlating/blue");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.2.desc"), 2, "hexPlating/brown");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.3.desc"), 3, "hexPlating/cyan");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.4.desc"), 4, "hexPlating/green");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.5.desc"), 5, "hexPlating/light_blue");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.6.desc"), 6, "hexPlating/light_gray");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.7.desc"), 7, "hexPlating/lime");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.8.desc"), 8, "hexPlating/magenta");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.9.desc"), 9, "hexPlating/orange");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.10.desc"), 10, "hexPlating/pink");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.11.desc"), 11, "hexPlating/purple");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.12.desc"), 12, "hexPlating/red");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.13.desc"), 13, "hexPlating/white");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.14.desc"), 14, "hexPlating/yellow");
+            hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.15.desc"), 15, "hexPlating/gray");
+            hexPlating.carverHelper.register(hexPlating, "hexPlating");
+            Carving.chisel.registerOre("hexPlating", "hexPlating");
         }
     }
 }
