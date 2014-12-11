@@ -1322,6 +1322,7 @@ public class ModBlocks {
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/metalborder");
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/quarters");
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/smooth");
+            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.3.desc"), 3, "voidstone/skulls"
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.12.desc"), 12, "voidstone/rune");
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.13.desc"), 13, "voidstone/raw");
             voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.14.desc"), 14, "voidstone/eye");
