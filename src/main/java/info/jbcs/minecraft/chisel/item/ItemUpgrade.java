@@ -1,11 +1,13 @@
 package info.jbcs.minecraft.chisel.item;
 
 import info.jbcs.minecraft.chisel.Chisel;
+import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
@@ -23,9 +25,16 @@ public class ItemUpgrade extends Item{
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player){
-        System.out.println(this.getIconFromDamage(itemStack.getItemDamage()));
-        return itemStack;
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int size, float hitX, float hitY, float hitZ){
+        if(world.isRemote) return false;
+        TileEntity tile = world.getTileEntity(x, y, z);
+        TileEntityAutoChisel autoChisel;
+
+        if(tile != null && tile instanceof TileEntityAutoChisel){
+            TileEntityAutoChisel autoChisel1 = (TileEntityAutoChisel) tile;
+            //TODO: Finish the switch with upgrade
+        }
+        return true;
     }
 
     @Override

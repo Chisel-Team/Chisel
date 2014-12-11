@@ -4,6 +4,8 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
+import info.jbcs.minecraft.chisel.init.ModBlocks;
+import info.jbcs.minecraft.chisel.init.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -46,8 +48,26 @@ public class BlockAutoChisel extends BlockContainer{
         TileEntity tile = world.getTileEntity(x, y, z);
         if (world.isRemote)
             return true;
-        if (tile != null && tile instanceof TileEntityAutoChisel)
+
+        if (tile != null && tile instanceof TileEntityAutoChisel && !player.isSneaking()){
             player.openGui(Chisel.instance, 1, world, x, y, z);
+        }
+
+        if(player.isSneaking() && tile!= null && tile instanceof TileEntityAutoChisel){
+            TileEntityAutoChisel autoChisel = (TileEntityAutoChisel) tile;
+            System.out.println(player.getHeldItem());
+            if(player.getItemInUse() == new ItemStack(ModItems.upgrade, 1, 0)){
+                //If they are using the speed upgrade
+                world.setBlock(x, y, z, ModBlocks.autoChisel, 1, 3);
+            } else if(player.getItemInUse() == new ItemStack(ModItems.upgrade, 1, 1)){
+                //If they are using the automation upgrade
+                world.setBlock(x, y, z, ModBlocks.autoChisel, 2, 3);
+            } else if(player.getItemInUse() == new ItemStack(ModItems.upgrade, 1, 2)){
+                //If they are using the stack upgrade
+                world.setBlock(x, y, z, ModBlocks.autoChisel, 3, 3);
+            }
+        }
+
         return true;
     }
 
