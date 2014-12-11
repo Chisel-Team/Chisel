@@ -798,16 +798,13 @@ public class ModBlocks {
                 planks[i].carverHelper.addVariation(u + " wood crate", 10, "planks-" + n + "/crate");
                 planks[i].carverHelper.addVariation("Fancy " + n + " wood crate", 11, "planks-" + n + "/crate-fancy");
                 planks[i].carverHelper.addVariation("Large long " + n + " wood planks", 13, "planks-" + n + "/large");
-                if(i < 4)
-                {
-                    planks[i].carverHelper.addVariation("Vertical " + n + " wood planks", 3, "planks-" + n + "/vertical");
-                    planks[i].carverHelper.addVariation("Vertical uneven " + n + " wood planks", 4, "planks-" + n + "/vertical-uneven");
-                    planks[i].carverHelper.addVariation(u + " wood parquet", 5, "planks-" + n + "/parquet");
-                    planks[i].carverHelper.addVariation(u + " wood plank blinds", 7, "planks-" + n + "/blinds");
-                    planks[i].carverHelper.addVariation(u + " wood scaffold", 12, "planks-" + n + "/crateex");
-                    planks[i].carverHelper.addVariation(u + " wood planks in disarray", 14, "planks-" + n + "/chaotic-hor");
-                    planks[i].carverHelper.addVariation("Vertical " + n + " wood planks in disarray", 15, "planks-" + n + "/chaotic");
-                }
+                planks[i].carverHelper.addVariation("Vertical " + n + " wood planks", 3, "planks-" + n + "/vertical");
+                planks[i].carverHelper.addVariation("Vertical uneven " + n + " wood planks", 4, "planks-" + n + "/vertical-uneven");
+                planks[i].carverHelper.addVariation(u + " wood parquet", 5, "planks-" + n + "/parquet");
+                planks[i].carverHelper.addVariation(u + " wood plank blinds", 7, "planks-" + n + "/blinds");
+                planks[i].carverHelper.addVariation(u + " wood scaffold", 12, "planks-" + n + "/crateex");
+                planks[i].carverHelper.addVariation(u + " wood planks in disarray", 14, "planks-" + n + "/chaotic-hor");
+                planks[i].carverHelper.addVariation("Vertical " + n + " wood planks in disarray", 15, "planks-" + n + "/chaotic");
                 planks[i].carverHelper.register(planks[i], orename);
                 Carving.chisel.addVariation(orename, Blocks.planks, i, 0);
                 planks[i].setHarvestLevel("axe", 0);
