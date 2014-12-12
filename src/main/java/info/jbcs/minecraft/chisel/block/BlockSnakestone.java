@@ -1,9 +1,6 @@
 package info.jbcs.minecraft.chisel.block;
 
 import info.jbcs.minecraft.chisel.client.render.BlockSnakeStoneRenderer;
-
-import java.util.List;
-
 import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -15,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class BlockSnakestone extends Block
 {

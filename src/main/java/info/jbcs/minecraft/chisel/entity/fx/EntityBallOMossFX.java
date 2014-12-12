@@ -1,6 +1,7 @@
 package info.jbcs.minecraft.chisel.entity.fx;
 
-import info.jbcs.minecraft.chisel.Chisel;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
 import info.jbcs.minecraft.chisel.init.ModItems;
 import info.jbcs.minecraft.chisel.utils.General;
@@ -8,11 +9,7 @@ import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityBallOMossFX extends EntityFX
 {

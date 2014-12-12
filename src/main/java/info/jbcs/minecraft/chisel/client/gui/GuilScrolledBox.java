@@ -3,7 +3,6 @@ package info.jbcs.minecraft.chisel.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
-
 import org.lwjgl.opengl.GL11;
 
 public class GuilScrolledBox extends GuiElement

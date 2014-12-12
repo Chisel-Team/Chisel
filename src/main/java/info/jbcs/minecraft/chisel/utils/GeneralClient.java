@@ -1,21 +1,14 @@
 package info.jbcs.minecraft.chisel.utils;
 
-import java.util.HashMap;
-import java.util.Random;
-
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import scala.collection.parallel.ParIterableLike;
+
+import java.util.HashMap;
+import java.util.Random;
 
 public class GeneralClient
 {

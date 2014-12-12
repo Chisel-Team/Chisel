@@ -1,13 +1,12 @@
 package info.jbcs.minecraft.chisel;
 
-import info.jbcs.minecraft.chisel.utils.General;
-
-import java.util.HashMap;
-
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
+import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+
+import java.util.HashMap;
 
 public class BlockNameConversion
 {

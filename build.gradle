@@ -23,7 +23,7 @@ group = "info.jbcs.minecraft.chisel" // http://maven.apache.org/guides/mini/guid
 archivesBaseName = "Chisel 2"
 
 minecraft {
-    version = "1.7.10-10.13.0.1207"
+    version = "1.7.10-10.13.2.1230"
     runDir = "run"
 
     replaceIn "Chisel.java"

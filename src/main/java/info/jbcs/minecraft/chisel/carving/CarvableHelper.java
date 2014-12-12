@@ -25,7 +25,6 @@ import java.util.Set;
 
 public class CarvableHelper
 {
-    static final String modName = "chisel";
     public static final ArrayList<Block> chiselBlocks = new ArrayList<Block>();
 
     public static final int NORMAL = 0;
@@ -87,7 +86,7 @@ public class CarvableHelper
         {
             variation.texture = texture;
 
-            String path = "/assets/" + modName + "/textures/blocks/" + variation.texture;
+            String path = "/assets/" + Chisel.MOD_ID + "/textures/blocks/" + variation.texture;
 
             boolean any = Chisel.class.getResource(path + ".png") != null;
             boolean ctm3 = Chisel.class.getResource(path + "-ctm1.png") != null && Chisel.class.getResource(path + "-ctm2.png") != null && Chisel.class.getResource(path + "-ctm3.png") != null;

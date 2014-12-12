@@ -5,7 +5,6 @@ import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;
-
 import org.lwjgl.opengl.GL11;
 
 public class EntitySnakestoneObsidianFX extends EntityFX

@@ -3,23 +3,18 @@ package info.jbcs.minecraft.chisel.block;
 import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
-import info.jbcs.minecraft.chisel.Chisel;
-
-import java.util.List;
-import java.util.Random;
-
 import info.jbcs.minecraft.chisel.init.ModTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class BlockMarbleIce extends BlockIce implements ICarvable
 {

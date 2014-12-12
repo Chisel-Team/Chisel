@@ -1,14 +1,5 @@
 package info.jbcs.minecraft.chisel;
 
-import java.io.IOException;
-
-import info.jbcs.minecraft.chisel.carving.Carving;
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.INetHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
-
 public class Packets// extends MessageHandlerBase
 {
 
