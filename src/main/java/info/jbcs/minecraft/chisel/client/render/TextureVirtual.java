@@ -1,8 +1,8 @@
 package info.jbcs.minecraft.chisel.client.render;
 
-import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.util.IIcon;
 
 public class TextureVirtual implements IIcon
 {

@@ -4,7 +4,7 @@ import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.BlockHolystone;
 import info.jbcs.minecraft.chisel.block.BlockLavastone;
 import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
-import info.jbcs.minecraft.chisel.block.BlockVoidstonePillar;
+import info.jbcs.minecraft.chisel.block.BlockVoidstone;
 import info.jbcs.minecraft.chisel.entity.fx.EntityBallOMossFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntityHolystoneFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntitySnakestoneObsidianFX;
@@ -64,9 +64,6 @@ public class GeneralChiselClient {
         if (world.getBlock(x, y, z).isOpaqueCube()) return;
 
         EntityLavaFX res = new EntityLavaFX(world, x1, y1, z1);
-//		res.motionX=x1-x-0.5;
-//		res.motionY=y1-y-0.5;
-//		res.motionZ=z1-z-0.5;
         double multiplier = 0.45;
         res.motionX = -multiplier * (x1 - x - 0.5);
         res.motionY = multiplier * (y1 - y - 0.5);
@@ -123,7 +120,7 @@ public class GeneralChiselClient {
         }
     }
 
-    public static void spawnVoidstoneFX(World world, BlockVoidstonePillar block, int x, int y, int z) {
+    public static void spawnVoidstoneFX(World world, BlockVoidstone block, int x, int y, int z) {
         if (Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0) {
             float f = 0.15F;
             double x1 = x + rand.nextDouble() * (block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() - f * 2.0F) + f + block.getBlockBoundsMinX();
@@ -206,7 +203,6 @@ public class GeneralChiselClient {
         }
 
         EntityDiggingFX res = new EntityDiggingFX(world, d0, d1, d2, 0.0D, 0.0D, 0.0D, block, world.getBlockMetadata(x, y, z), side);
-//		res.func_70596_a(x, y, z);
         res.motionX = d0 - (x + 0.5);
         res.motionY = d1 - (y + 0.5);
         res.motionZ = d2 - (z + 0.5);

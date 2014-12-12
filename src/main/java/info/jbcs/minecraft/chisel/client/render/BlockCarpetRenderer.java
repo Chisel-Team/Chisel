@@ -1,7 +1,7 @@
 package info.jbcs.minecraft.chisel.client.render;
 
-import info.jbcs.minecraft.chisel.Chisel;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import info.jbcs.minecraft.chisel.Chisel;
 
 
 public class BlockCarpetRenderer extends BlockAdvancedMarbleRenderer

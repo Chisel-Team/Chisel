@@ -1,11 +1,11 @@
 package info.jbcs.minecraft.chisel.carving;
 
+import info.jbcs.minecraft.chisel.Chisel;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import info.jbcs.minecraft.chisel.Chisel;
 
 import java.util.ArrayList;
 import java.util.Collections;

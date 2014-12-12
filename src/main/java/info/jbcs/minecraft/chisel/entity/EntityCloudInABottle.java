@@ -1,12 +1,12 @@
 package info.jbcs.minecraft.chisel.entity;
 
-import java.util.Random;
-
 import info.jbcs.minecraft.chisel.init.ModBlocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class EntityCloudInABottle extends EntityThrowable
 {

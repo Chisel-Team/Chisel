@@ -1,6 +1,6 @@
 package info.jbcs.minecraft.chisel.entity.fx;
 
-import info.jbcs.minecraft.chisel.block.BlockVoidstonePillar;
+import info.jbcs.minecraft.chisel.block.BlockVoidstone;
 import info.jbcs.minecraft.chisel.utils.General;
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,7 +12,7 @@ public class EntityVoidstoneFX extends EntityFX {
     float initialScale;
     float angleOffset;
 
-    public EntityVoidstoneFX(World world, BlockVoidstonePillar blockVoidstone, double x, double y, double z) {
+    public EntityVoidstoneFX(World world, BlockVoidstone blockVoidstone, double x, double y, double z) {
         super(world, x, y, z, 0, 0, 0);
         initialScale = 1.0F + 1.0F * General.rand.nextFloat();
         angleOffset = rand.nextFloat() * 360;

@@ -3,7 +3,6 @@ package info.jbcs.minecraft.chisel.client.gui;
 import info.jbcs.minecraft.chisel.utils.GeneralClient;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-
 import org.lwjgl.input.Mouse;
 
 public abstract class Scrollbar extends GuiButton
