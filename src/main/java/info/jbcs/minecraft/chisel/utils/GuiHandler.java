@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
-public abstract class GuiHandler implements Comparable
+public abstract class GuiHandler implements Comparable<Object>
 {
     static ArrayList<GuiHandler> items = new ArrayList<GuiHandler>();
 

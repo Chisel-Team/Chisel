@@ -19,7 +19,7 @@ public class RenderPresent extends TileEntityChestRenderer {
     private ModelChest doubleChest = new ModelLargeChest();
 
     //TODO: this will be changed so it actually chescks after I have crate textures :)
-    private boolean isChristmas = true;
+    //private boolean isChristmas = true;
 
     public RenderPresent() {
 
