@@ -80,6 +80,23 @@ tile.hexPlating.13.desc=White Plating
 tile.hexPlating.14.desc=Yellow Plating
 tile.hexPlating.15.desc=Gray Plating
 
+#Grimstone
+tile.grimstone.name=Grimstone
+tile.grimstone.0.desc=Grimstone
+tile.grimstone.1.desc=Smooth Grimstone
+tile.grimstone.2.desc=Mysterious Grimstone symbol
+tile.grimstone.3.desc=Chiseled Grimstone
+tile.grimstone.4.desc=Grimstone blocks
+tile.grimstone.5.desc=Rough Grimstone bricks
+tile.grimstone.6.desc=Grimstone bricks
+tile.grimstone.7.desc=Large Grimstone bricks
+tile.grimstone.8.desc=Grimstone platform
+tile.grimstone.9.desc=Grimstone platform tiles
+tile.grimstone.10.desc=Fancy Grimstone construction
+tile.grimstone.11.desc=Fancy Grimstone tiles
+tile.grimstone.12.desc=Smooth Grimstone plate
+tile.grimstone.13.desc=Grimstone plate
+
 #Chisel 1
 
 #Cobblestone Blocks
@@ -894,6 +911,25 @@ tile.fantasyblock.12.desc=Fantasy plate decoration
 tile.fantasyblock.13.desc=Fantasy block
 tile.fantasyblock.14.desc=Fantasy bricks in disarray
 tile.fantasyblock.15.desc=Weared fantasy bricks
+
+#Fantasy block 2
+tile.fantasyblock2.name=Fantasy Block
+tile.fantasyblock2.0.desc=Fantasy brick
+tile.fantasyblock2.1.desc=Faded fantasy brick
+tile.fantasyblock2.2.desc=Weared fantasy brick
+tile.fantasyblock2.3.desc=Damaged fantasy bricks
+tile.fantasyblock2.4.desc=Fantasy decoration
+tile.fantasyblock2.5.desc=Fantasy decoration block
+tile.fantasyblock2.6.desc=Fantasy pillar
+tile.fantasyblock2.7.desc=Fantasy pillar decoration
+tile.fantasyblock2.8.desc=Fantasy gold snake decoration
+tile.fantasyblock2.9.desc=Fantasy gold noise decoration
+tile.fantasyblock2.10.desc=Fantasy gold engravings decoration
+tile.fantasyblock2.11.desc=Fantasy gold chains decoration
+tile.fantasyblock2.12.desc=Fantasy plate decoration
+tile.fantasyblock2.13.desc=Fantasy block
+tile.fantasyblock2.14.desc=Fantasy bricks in disarray
+tile.fantasyblock2.15.desc=Weared fantasy bricks
 
 #Paperwall
 tile.paperwall.name=Paperwall

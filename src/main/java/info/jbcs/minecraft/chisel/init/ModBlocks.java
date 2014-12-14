@@ -51,10 +51,12 @@ public class ModBlocks {
     public static BlockCarvable obsidian;
     public static BlockCarvablePowered redstone;
     public static BlockHolystone holystone;
+    public static BlockGrimstone grimstone;
     public static BlockLavastone lavastone;
     public static BlockWaterstone waterstone;
     public static BlockCarvable leaf;
     public static BlockCarvable fantasy;
+    public static BlockCarvable fantasy2;
     public static BlockCarvable carpet;
     public static BlockMarbleCarpet carpetFloor;
     public static BlockCarvable bookshelf;
@@ -1372,6 +1374,49 @@ public class ModBlocks {
             hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.15.desc"), 15, "hexPlating/gray");
             hexPlating.carverHelper.register(hexPlating, "hexPlating");
             Carving.chisel.registerOre("hexPlating", "hexPlating");
+        }
+
+        if(Configurations.featureEnabled("fantasy2")){
+            fantasy2 = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F);
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.0.desc"), 0, "fantasy2/brick");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.1.desc"), 1, "fantasy2/brick-faded");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.2.desc"), 2, "fantasy2/brick-wear");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.3.desc"), 3, "fantasy2/bricks");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.4.desc"), 4, "fantasy2/decor");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.5.desc"), 5, "fantasy2/decor-block");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.6.desc"), 6, "fantasy2/pillar");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.7.desc"), 7, "fantasy2/pillar-decorated");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.8.desc"), 8, "fantasy2/gold-decor-1");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.9.desc"), 9, "fantasy2/gold-decor-2");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.10.desc"), 10, "fantasy2/gold-decor-3");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.11.desc"), 11, "fantasy2/gold-decor-4");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.12.desc"), 12, "fantasy2/plate");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.13.desc"), 13, "fantasy2/block");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.14.desc"), 14, "fantasy2/bricks-chaotic");
+            fantasy2.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock2.15.desc"), 15, "fantasy2/bricks-wear");
+            fantasy2.carverHelper.register(fantasy2, "fantasyblock2");
+            OreDictionary.registerOre("fantasy2", fantasy2);
+            Carving.chisel.registerOre("fantasyblock2", "fantasy2");
+        }
+
+        if(Configurations.featureEnabled("grimstone")){
+            grimstone = (BlockGrimstone) new BlockGrimstone(Material.rock).setHardness(2.0F).setResistance(10F);
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.0.desc"), 0, "grimstone/grimstone");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.1.desc"), 1, "grimstone/smooth");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.2.desc"), 2, "grimstone/hate");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.3.desc"), 3, "grimstone/chiseled");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.4.desc"), 4, "grimstone/blocks");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.5.desc"), 5, "grimstone/blocks-rough");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.6.desc"), 6, "grimstone/brick");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.7.desc"), 7, "grimstone/largebricks");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.8.desc"), 8, "grimstone/platform");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.9.desc"), 9, "grimstone/platform-tiles");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.10.desc"), 10, "grimstone/construction");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.11.desc"), 11, "grimstone/fancy-tiles");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.12.desc"), 12, "grimstone/plate");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.13.desc"), 13, "grimstone/plate-rough");
+            grimstone.carverHelper.register(grimstone, "grimstone");
+            Carving.chisel.registerOre("grimstone", "grimstone");
         }
     }
 }

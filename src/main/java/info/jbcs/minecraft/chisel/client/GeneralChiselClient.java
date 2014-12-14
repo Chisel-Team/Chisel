@@ -1,14 +1,8 @@
 package info.jbcs.minecraft.chisel.client;
 
 import info.jbcs.minecraft.chisel.Configurations;
-import info.jbcs.minecraft.chisel.block.BlockHolystone;
-import info.jbcs.minecraft.chisel.block.BlockLavastone;
-import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
-import info.jbcs.minecraft.chisel.block.BlockVoidstone;
-import info.jbcs.minecraft.chisel.entity.fx.EntityBallOMossFX;
-import info.jbcs.minecraft.chisel.entity.fx.EntityHolystoneFX;
-import info.jbcs.minecraft.chisel.entity.fx.EntitySnakestoneObsidianFX;
-import info.jbcs.minecraft.chisel.entity.fx.EntityVoidstoneFX;
+import info.jbcs.minecraft.chisel.block.*;
+import info.jbcs.minecraft.chisel.entity.fx.*;
 import info.jbcs.minecraft.chisel.utils.GeneralClient;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -110,6 +104,47 @@ public class GeneralChiselClient {
         if (world.getBlock(x, y, z).isOpaqueCube()) return;
 
         EntityHolystoneFX res = new EntityHolystoneFX(world, block, x1, y1, z1);
+        Minecraft.getMinecraft().effectRenderer.addEffect(res);
+    }
+
+    public static void spawnGrimstoneFX(World world, BlockGrimstone block, int x, int y, int z) {
+        if (Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0) return;
+
+        float f = 0.15F;
+        double x1 = x + rand.nextDouble() * (block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() - f * 2.0F) + f + block.getBlockBoundsMinX();
+        double y1 = y + rand.nextDouble() * (block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() - f * 2.0F) + f + block.getBlockBoundsMinY();
+        double z1 = z + rand.nextDouble() * (block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() - f * 2.0F) + f + block.getBlockBoundsMinZ();
+
+        switch (rand.nextInt(6)) {
+            case 0:
+                y1 = y + block.getBlockBoundsMinY() - f;
+                y--;
+                break;
+            case 1:
+                y1 = y + block.getBlockBoundsMaxY() + f;
+                y++;
+                break;
+            case 2:
+                z1 = z + block.getBlockBoundsMinZ() - f;
+                z--;
+                break;
+            case 3:
+                z1 = z + block.getBlockBoundsMaxZ() + f;
+                z++;
+                break;
+            case 4:
+                x1 = x + block.getBlockBoundsMinX() - f;
+                x--;
+                break;
+            case 5:
+                x1 = x + block.getBlockBoundsMaxX() + f;
+                x++;
+                break;
+        }
+
+        if (world.getBlock(x, y, z).isOpaqueCube()) return;
+
+        EntityGrimstoneFX res = new EntityGrimstoneFX(world, block, x1, y1, z1);
         Minecraft.getMinecraft().effectRenderer.addEffect(res);
     }
 
