@@ -72,7 +72,7 @@ public class Crafting {
         if(Configurations.featureEnabled("factory"))
             GameRegistry.addRecipe(new ItemStack(ModBlocks.factory, Configurations.factoryBlockAmount, 0), new Object[]{"*X*", "X X", "*X*", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
         if(Configurations.featureEnabled("voidstone"))
-            GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstone, 8, 1), new Object[]{"xxx", "xyx", "xxx", 'x', new ItemStack(Blocks.stone, 1), 'y', new ItemStack(Items.ender_pearl, 1)});
+            GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstone, 8, 1), new Object[]{"oxo", "xyx", "oxo", 'x', new ItemStack(Blocks.stone, 1), 'y', new ItemStack(Items.ender_pearl, 1), 'o', new ItemStack(Blocks.obsidian, 1)});
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.roadLine, 8, 0), new Object[]{"wrw", "wrw", "wrw", ('w'), "dyeWhite", ('r'), Items.redstone}));
 
