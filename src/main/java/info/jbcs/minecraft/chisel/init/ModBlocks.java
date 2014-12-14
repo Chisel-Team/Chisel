@@ -1348,7 +1348,7 @@ public class ModBlocks {
             waterstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.waterstone.5.desc"), 5, "waterstone/panel");
             waterstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.waterstone.6.desc"), 6, "waterstone/panel-ornate");
             waterstone.carverHelper.register(waterstone, "waterstone");
-            OreDictionary.registerOre("blockWaterstone", new ItemStack(waterstone, 1, OreDictionary.WILDCARD_VALUE));
+            OreDictionary.registerOre("blockWaterstone", waterstone);
             Carving.chisel.registerOre("waterstone", "blockWaterstone");
         }
 
