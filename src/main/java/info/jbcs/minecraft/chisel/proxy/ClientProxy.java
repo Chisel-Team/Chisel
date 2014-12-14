@@ -1,10 +1,18 @@
 package info.jbcs.minecraft.chisel.proxy;
 
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityPresent;
-import info.jbcs.minecraft.chisel.client.render.*;
+import info.jbcs.minecraft.chisel.client.render.BlockAdvancedMarbleRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockCarpetRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockEldritchRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockMarblePaneRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockMarblePillarRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockMarbleStairsRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockNoCTMRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockRoadLineRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockSnakeStoneRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockSpikesRenderer;
+import info.jbcs.minecraft.chisel.client.render.BlockTexturedOreRenderer;
 import info.jbcs.minecraft.chisel.client.render.item.ItemAutoChiselRenderer;
 import info.jbcs.minecraft.chisel.client.render.item.ItemChiselRenderer;
 import info.jbcs.minecraft.chisel.client.render.item.ItemPresentRenderer;
@@ -18,6 +26,8 @@ import info.jbcs.minecraft.chisel.init.ModItems;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {

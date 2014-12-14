@@ -1,6 +1,5 @@
 package info.jbcs.minecraft.chisel.carving;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.block.BlockMarbleSlab;
@@ -9,6 +8,12 @@ import info.jbcs.minecraft.chisel.client.render.CTM;
 import info.jbcs.minecraft.chisel.client.render.TextureSubmap;
 import info.jbcs.minecraft.chisel.item.ItemCarvable;
 import info.jbcs.minecraft.chisel.utils.GeneralClient;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
@@ -17,11 +22,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CarvableHelper
 {

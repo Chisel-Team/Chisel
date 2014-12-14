@@ -2,11 +2,12 @@ package info.jbcs.minecraft.chisel.block;
 
 
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
+
+import java.util.Random;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockSnakestoneObsidian extends BlockSnakestone
 {

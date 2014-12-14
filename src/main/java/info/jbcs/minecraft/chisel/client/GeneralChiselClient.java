@@ -1,9 +1,20 @@
 package info.jbcs.minecraft.chisel.client;
 
 import info.jbcs.minecraft.chisel.Configurations;
-import info.jbcs.minecraft.chisel.block.*;
-import info.jbcs.minecraft.chisel.entity.fx.*;
+import info.jbcs.minecraft.chisel.block.BlockGrimstone;
+import info.jbcs.minecraft.chisel.block.BlockHolystone;
+import info.jbcs.minecraft.chisel.block.BlockLavastone;
+import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
+import info.jbcs.minecraft.chisel.block.BlockVoidstone;
+import info.jbcs.minecraft.chisel.entity.fx.EntityBallOMossFX;
+import info.jbcs.minecraft.chisel.entity.fx.EntityGrimstoneFX;
+import info.jbcs.minecraft.chisel.entity.fx.EntityHolystoneFX;
+import info.jbcs.minecraft.chisel.entity.fx.EntitySnakestoneObsidianFX;
+import info.jbcs.minecraft.chisel.entity.fx.EntityVoidstoneFX;
 import info.jbcs.minecraft.chisel.utils.GeneralClient;
+
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -12,8 +23,6 @@ import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 
 public class GeneralChiselClient {

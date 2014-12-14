@@ -1,9 +1,9 @@
 package info.jbcs.minecraft.chisel.compat;
 
-import cpw.mods.fml.common.Loader;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import cpw.mods.fml.common.Loader;
 
 public class ModIntegration {
 

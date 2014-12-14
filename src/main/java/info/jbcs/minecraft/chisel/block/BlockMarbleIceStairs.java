@@ -2,11 +2,12 @@ package info.jbcs.minecraft.chisel.block;
 
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.init.ModBlocks;
+
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockMarbleIceStairs extends BlockMarbleStairs
 {

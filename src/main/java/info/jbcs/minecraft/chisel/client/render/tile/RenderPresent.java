@@ -1,6 +1,5 @@
 package info.jbcs.minecraft.chisel.client.render.tile;
 
-import cpw.mods.fml.common.FMLLog;
 import info.jbcs.minecraft.chisel.block.BlockPresent;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityPresent;
 import net.minecraft.block.Block;
@@ -9,8 +8,11 @@ import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
 import net.minecraft.tileentity.TileEntity;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import cpw.mods.fml.common.FMLLog;
 
 public class RenderPresent extends TileEntityChestRenderer {
     private ModelChest chest = new ModelChest();

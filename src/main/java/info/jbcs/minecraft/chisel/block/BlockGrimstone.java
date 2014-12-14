@@ -4,12 +4,13 @@ import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
 import info.jbcs.minecraft.chisel.init.ModTabs;
 import info.jbcs.minecraft.chisel.utils.General;
+
+import java.util.Random;
+
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockGrimstone extends BlockCarvable {
     public IIcon iconStar;

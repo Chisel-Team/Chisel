@@ -1,13 +1,17 @@
 package info.jbcs.minecraft.chisel.init;
 
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.entity.EntityBallOMoss;
 import info.jbcs.minecraft.chisel.entity.EntityCloudInABottle;
 import info.jbcs.minecraft.chisel.entity.EntitySmashingRock;
-import info.jbcs.minecraft.chisel.item.*;
+import info.jbcs.minecraft.chisel.item.ItemBallOMoss;
+import info.jbcs.minecraft.chisel.item.ItemChisel;
+import info.jbcs.minecraft.chisel.item.ItemCloudInABottle;
+import info.jbcs.minecraft.chisel.item.ItemSmashingRock;
+import info.jbcs.minecraft.chisel.item.ItemUpgrade;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModItems {
     public static ItemChisel chisel;

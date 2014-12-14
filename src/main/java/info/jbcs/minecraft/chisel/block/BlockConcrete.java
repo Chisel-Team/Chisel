@@ -1,12 +1,12 @@
 package info.jbcs.minecraft.chisel.block;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 
 public class BlockConcrete extends BlockCarvable
 {

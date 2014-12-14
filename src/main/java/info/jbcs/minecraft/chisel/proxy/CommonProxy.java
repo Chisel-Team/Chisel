@@ -1,8 +1,8 @@
 package info.jbcs.minecraft.chisel.proxy;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityPresent;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CommonProxy
 {

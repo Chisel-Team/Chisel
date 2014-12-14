@@ -1,9 +1,9 @@
 package info.jbcs.minecraft.chisel.compat;
 
+import info.jbcs.minecraft.chisel.carving.Carving;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import info.jbcs.minecraft.chisel.carving.Carving;
 
 public class Compatibility
 {
