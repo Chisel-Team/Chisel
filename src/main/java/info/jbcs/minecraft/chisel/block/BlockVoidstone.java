@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 
 public class BlockVoidstone extends Block implements ICarvable{
     public CarvableHelper carverHelper;
-    public static IIcon iconParticle;
+    public IIcon iconParticle;
 
     public BlockVoidstone() {
         super(Material.rock);
@@ -30,7 +30,7 @@ public class BlockVoidstone extends Block implements ICarvable{
     public void registerBlockIcons(IIconRegister icon){
         iconParticle = icon.registerIcon(Chisel.MOD_ID + ":voidstone/particles/star");
     }
-    
+
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random)
     {

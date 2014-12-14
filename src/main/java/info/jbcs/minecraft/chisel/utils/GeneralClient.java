@@ -5,7 +5,6 @@ import java.util.Random;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
@@ -13,8 +12,6 @@ import net.minecraft.world.World;
 public class GeneralClient
 {
     public static Random rand = new Random();
-    private static EntityItem ghostItem;
-
     public static void playChiselSound(World world, int x, int y, int z, String sound)
     {
         Minecraft.getMinecraft().theWorld.playSound(x + 0.5, y + 0.5, z + 0.5, sound, 0.3f + 0.7f * rand.nextFloat(), 0.6f + 0.4f * rand.nextFloat(), true);

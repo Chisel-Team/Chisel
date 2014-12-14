@@ -13,7 +13,7 @@ public class ContainerPresent extends ContainerChest {
         lower = chest;
         rows = chest.getSizeInventory() / 9;
         chest.openInventory();
-        int a = (rows - 4) * 18, b, c;
+        int a = (rows - 4) * 18;
 
         for (int d = 0; d < rows; d++) {
             for (int e = 0; e < 9; e++) {

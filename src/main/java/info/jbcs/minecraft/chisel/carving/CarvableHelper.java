@@ -287,14 +287,14 @@ public class CarvableHelper
         registerBlock(block, name, ItemCarvable.class);
     }
 
-    void registerBlock(Block block, String name, Class cl)
+    void registerBlock(Block block, String name, Class<? extends ItemCarvable> cl)
     {
         block.setBlockName(name);
         GameRegistry.registerBlock(block, cl, name);
         chiselBlocks.add(block);
     }
 
-    public void register(Block block, String name, Class cl)
+    public void register(Block block, String name, Class<? extends ItemCarvable> cl)
     {
         registerBlock(block, name, cl);
 
@@ -417,7 +417,7 @@ public class CarvableHelper
         }
     }
 
-    public void registerSubBlocks(Block block, CreativeTabs tabs, List list)
+    public void registerSubBlocks(Block block, CreativeTabs tabs, List<ItemStack> list)
     {
         for(CarvableVariation variation : variations)
         {

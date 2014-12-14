@@ -29,11 +29,7 @@ public class ItemUpgrade extends Item{
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int size, float hitX, float hitY, float hitZ){
         if(world.isRemote) return false;
         TileEntity tile = world.getTileEntity(x, y, z);
-        TileEntityAutoChisel autoChisel;
-
         if(tile != null && tile instanceof TileEntityAutoChisel){
-            TileEntityAutoChisel autoChisel1 = (TileEntityAutoChisel) tile;
-            //TODO: Finish the switch with upgrade
         }
         return true;
     }

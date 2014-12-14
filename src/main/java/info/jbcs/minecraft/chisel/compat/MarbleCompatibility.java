@@ -10,7 +10,7 @@ public class MarbleCompatibility
 
     abstract class ClassCompat
     {
-        Class cl;
+        Class<?> cl;
 
         public ClassCompat(String name)
         {

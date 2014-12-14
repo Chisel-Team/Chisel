@@ -120,8 +120,8 @@ public class TileEntityPresent extends TileEntityChest {
         if (!worldObj.isRemote && numPlayersUsing != 0 && (+xCoord + yCoord + zCoord) % 200 == 0) {
             numPlayersUsing = 0;
             f = 5.0F;
-            List list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord - f, yCoord - f, zCoord - f, (xCoord + 1) + f, (yCoord + 1) + f, (zCoord + 1) + f));
-            Iterator iterator = list.iterator();
+            List<?> list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, AxisAlignedBB.getBoundingBox(xCoord - f, yCoord - f, zCoord - f, (xCoord + 1) + f, (yCoord + 1) + f, (zCoord + 1) + f));
+            Iterator<?> iterator = list.iterator();
 
             while (iterator.hasNext()) {
                 EntityPlayer player = (EntityPlayer) iterator.next();
