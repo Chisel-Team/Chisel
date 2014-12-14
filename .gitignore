@@ -23,3 +23,12 @@ run
 #mac
 .DS_Store
 *.command
+
+#workspace
+saves
+asm
+config
+logs
+
+*.txt
+*.json
