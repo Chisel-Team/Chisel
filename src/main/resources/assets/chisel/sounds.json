@@ -32,6 +32,12 @@
          "dig/holystone5"
       ]
    },
+"dig.grimstone":{
+      "category":"block",
+      "sounds":[
+         "dig/grimstone1"
+      ]
+   },
    "dig.metal":{
       "category":"block",
       "sounds":[
