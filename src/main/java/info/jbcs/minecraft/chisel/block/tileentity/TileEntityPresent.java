@@ -3,14 +3,15 @@ package info.jbcs.minecraft.chisel.block.tileentity;
 import info.jbcs.minecraft.chisel.block.BlockPresent;
 import info.jbcs.minecraft.chisel.inventory.ContainerPresent;
 import info.jbcs.minecraft.chisel.inventory.InventoryLargePresent;
+
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
-
-import java.util.Iterator;
-import java.util.List;
 
 public class TileEntityPresent extends TileEntityChest {
 

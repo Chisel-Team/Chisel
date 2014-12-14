@@ -2,10 +2,11 @@ package info.jbcs.minecraft.chisel.block;
 
 
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
-import net.minecraft.block.material.Material;
-import net.minecraft.world.World;
 
 import java.util.Random;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.world.World;
 
 public class BlockLavastone extends BlockMarbleTexturedOre
 {

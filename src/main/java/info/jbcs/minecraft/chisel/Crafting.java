@@ -1,6 +1,5 @@
 package info.jbcs.minecraft.chisel;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.init.ModBlocks;
 import info.jbcs.minecraft.chisel.init.ModItems;
 import net.minecraft.block.Block;
@@ -11,6 +10,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Crafting {
 

@@ -4,6 +4,9 @@ import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.init.ModTabs;
+
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockIce;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -13,8 +16,6 @@ import net.minecraft.item.Item;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class BlockMarbleIce extends BlockIce implements ICarvable
 {

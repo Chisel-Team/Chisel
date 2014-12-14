@@ -4,14 +4,15 @@ import info.jbcs.minecraft.chisel.Configurations;
 import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.utils.General;
+
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-
-import java.util.List;
 
 public class ItemCarvable extends ItemBlock
 {

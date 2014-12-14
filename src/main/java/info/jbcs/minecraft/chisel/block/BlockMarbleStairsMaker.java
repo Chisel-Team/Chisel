@@ -1,12 +1,12 @@
 package info.jbcs.minecraft.chisel.block;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.item.ItemCarvable;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockMarbleStairsMaker
 {

@@ -6,13 +6,14 @@ import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
 import info.jbcs.minecraft.chisel.utils.General;
+
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockVoidstone extends Block implements ICarvable{
     public CarvableHelper carverHelper;

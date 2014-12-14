@@ -1,13 +1,15 @@
 package info.jbcs.minecraft.chisel;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import info.jbcs.minecraft.chisel.api.ChiselMode;
 import info.jbcs.minecraft.chisel.carving.CarvingVariation;
 import info.jbcs.minecraft.chisel.client.GeneralChiselClient;
 import info.jbcs.minecraft.chisel.init.ModBlocks;
 import info.jbcs.minecraft.chisel.init.ModItems;
 import info.jbcs.minecraft.chisel.item.ItemChisel;
+
+import java.util.HashMap;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -17,9 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
-
-import java.util.HashMap;
-import java.util.Random;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class ChiselLeftClick
 {

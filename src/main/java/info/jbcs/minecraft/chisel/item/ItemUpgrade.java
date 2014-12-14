@@ -2,6 +2,9 @@ package info.jbcs.minecraft.chisel.item;
 
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
+
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,8 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class ItemUpgrade extends Item{
 

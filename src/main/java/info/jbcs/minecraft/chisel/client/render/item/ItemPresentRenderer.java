@@ -1,12 +1,14 @@
 package info.jbcs.minecraft.chisel.client.render.item;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import info.jbcs.minecraft.chisel.Chisel;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
+
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemPresentRenderer implements IItemRenderer {
     private final ModelChest model = new ModelChest();

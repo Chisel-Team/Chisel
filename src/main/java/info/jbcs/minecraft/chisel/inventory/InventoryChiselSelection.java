@@ -1,13 +1,14 @@
 package info.jbcs.minecraft.chisel.inventory;
 
 import info.jbcs.minecraft.chisel.item.ItemChisel;
+
+import java.util.ArrayList;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
-import java.util.ArrayList;
 
 public class InventoryChiselSelection implements IInventory
 {

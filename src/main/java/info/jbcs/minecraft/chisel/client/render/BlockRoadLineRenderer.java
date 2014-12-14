@@ -1,7 +1,5 @@
 package info.jbcs.minecraft.chisel.client.render;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import info.jbcs.minecraft.chisel.block.BlockRoadLine;
 import info.jbcs.minecraft.chisel.utils.Drawing;
 import net.minecraft.block.Block;
@@ -10,6 +8,8 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class BlockRoadLineRenderer implements ISimpleBlockRenderingHandler
 {

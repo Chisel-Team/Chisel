@@ -1,7 +1,5 @@
 package info.jbcs.minecraft.chisel.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityPresent;
@@ -9,6 +7,11 @@ import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.init.ModTabs;
 import info.jbcs.minecraft.chisel.inventory.InventoryLargePresent;
+
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -29,10 +32,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import java.util.Calendar;
-import java.util.Iterator;
-import java.util.Random;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPresent extends BlockContainer implements ICarvable {
     private final Random random = new Random();

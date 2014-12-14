@@ -1,11 +1,13 @@
 package info.jbcs.minecraft.chisel.block;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import info.jbcs.minecraft.chisel.init.ModBlocks;
 import info.jbcs.minecraft.chisel.init.ModItems;
+
+import java.util.List;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -17,9 +19,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-
-import java.util.List;
-import java.util.Random;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockAutoChisel extends BlockContainer{
     public BlockAutoChisel() {

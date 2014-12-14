@@ -5,6 +5,9 @@ import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.client.render.BlockMarbleStairsRenderer;
 import info.jbcs.minecraft.chisel.init.ModTabs;
+
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -15,8 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class BlockMarbleStairs extends BlockStairs implements ICarvable
 {

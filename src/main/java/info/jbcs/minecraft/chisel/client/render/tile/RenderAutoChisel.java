@@ -1,7 +1,10 @@
 package info.jbcs.minecraft.chisel.client.render.tile;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import static org.lwjgl.opengl.GL11.glPopMatrix;
+import static org.lwjgl.opengl.GL11.glPushMatrix;
+import static org.lwjgl.opengl.GL11.glRotatef;
+import static org.lwjgl.opengl.GL11.glScalef;
+import static org.lwjgl.opengl.GL11.glTranslatef;
 import info.jbcs.minecraft.chisel.block.tileentity.TileEntityAutoChisel;
 import info.jbcs.minecraft.chisel.client.model.ModelAutoChisel;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -12,9 +15,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
 import org.lwjgl.opengl.GL11;
 
-import static org.lwjgl.opengl.GL11.*;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class RenderAutoChisel extends TileEntitySpecialRenderer {
 

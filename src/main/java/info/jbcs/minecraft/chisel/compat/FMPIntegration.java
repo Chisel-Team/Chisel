@@ -1,10 +1,10 @@
 package info.jbcs.minecraft.chisel.compat;
 
-import cpw.mods.fml.common.event.FMLInterModComms;
 import info.jbcs.minecraft.chisel.compat.ModIntegration.IModIntegration;
 import info.jbcs.minecraft.chisel.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+import cpw.mods.fml.common.event.FMLInterModComms;
 
 public class FMPIntegration implements IModIntegration{
     @Override

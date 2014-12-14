@@ -1,14 +1,14 @@
 package info.jbcs.minecraft.chisel.utils;
 
+import java.util.HashMap;
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
-import java.util.HashMap;
-import java.util.Random;
 
 public class GeneralClient
 {
