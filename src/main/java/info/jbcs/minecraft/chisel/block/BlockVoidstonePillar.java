@@ -12,7 +12,7 @@ import net.minecraft.util.IIcon;
 public class BlockVoidstonePillar extends Block implements ICarvable{
 
     public static IIcon topBottom, pillarSide;
-    public static CarvableHelper carvableHelper;
+    public CarvableHelper carvableHelper;
 
     public BlockVoidstonePillar() {
         super(Material.rock);
