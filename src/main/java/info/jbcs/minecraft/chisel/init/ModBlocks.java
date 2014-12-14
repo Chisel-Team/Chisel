@@ -533,12 +533,12 @@ public class ModBlocks {
             diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.4.desc"), 4, "diamond/terrain-diamond-space");
             diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.5.desc"), 5, "diamond/terrain-diamond-spaceblack");
             diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.6.desc"), 6, "diamond/terrain-diamond-simple");
-            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.7.desc"), 7, "diamond/a1-blockdiamond-bismuth");
-            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.8.desc"), 8, "diamond/a1-blockdiamond-crushed");
-            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.9.desc"), 9, "diamond/a1-blockdiamond-four");
-            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.10.desc"), 10, "diamond/a1-blockdiamond-fourornate");
-            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.11.desc"), 11, "diamond/a1-blockdiamond-zelda");
-            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.12.desc"), 12, "diamond/a1-blockdiamond-ornatelayer");
+            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.7.desc"), 7, "diamond/terrain-diamond-bismuth");
+            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.8.desc"), 8, "diamond/terrain-diamond-crushed");
+            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.9.desc"), 9, "diamond/terrain-diamond-four");
+            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.10.desc"), 10, "diamond/terrain-diamond-fourornate");
+            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.11.desc"), 11, "diamond/terrain-diamond-zelda");
+            diamond.carverHelper.addVariation(StatCollector.translateToLocal("tile.diamond.12.desc"), 12, "diamond/terrain-diamond-ornatelayer");
             diamond.carverHelper.register(diamond, "diamond_block");
             Carving.chisel.registerOre("diamond_block", "diamond");
         }
@@ -586,17 +586,17 @@ public class ModBlocks {
         {
             emerald = (BlockBeaconBase) new BlockBeaconBase().setHardness(5.0F).setResistance(10.0F).setStepSound(Block.soundTypeMetal);
             Carving.chisel.addVariation("emerald_block", Blocks.emerald_block, 0, 0);
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.1.desc"), 1, "emerald/a1-blockemerald-emeraldpanel");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.2.desc"), 2, "emerald/a1-blockemerald-emeraldpanelclassic");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.3.desc"), 3, "emerald/a1-blockemerald-emeraldsmooth");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.4.desc"), 4, "emerald/a1-blockemerald-emeraldchunk");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.5.desc"), 5, "emerald/a1-blockemerald-emeraldornatelayer");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.6.desc"), 6, "emerald/a1-blockemerald-emeraldzelda");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.7.desc"), 7, "emerald/a1-blockquartz-cell");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.8.desc"), 8, "emerald/a1-blockquartz-cellbismuth");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.9.desc"), 9, "emerald/a1-blockquartz-four");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.10.desc"), 10, "emerald/a1-blockquartz-fourornate");
-            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.11.desc"), 11, "emerald/a1-blockquartz-ornate");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.1.desc"), 1, "emerald/panel");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.2.desc"), 2, "emerald/panelclassic");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.3.desc"), 3, "emerald/smooth");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.4.desc"), 4, "emerald/chunk");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.5.desc"), 5, "emerald/goldborder");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.6.desc"), 6, "emerald/zelda");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.7.desc"), 7, "emerald/cell");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.8.desc"), 8, "emerald/cellbismuth");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.9.desc"), 9, "emerald/four");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.10.desc"), 10, "emerald/fourornate");
+            emerald.carverHelper.addVariation(StatCollector.translateToLocal("tile.emerald.11.desc"), 11, "emerald/ornate");
             emerald.carverHelper.register(emerald, "emerald_block");
             Carving.chisel.registerOre("emerald_block", "emerald");
         }
@@ -1153,7 +1153,7 @@ public class ModBlocks {
         if(Configurations.featureEnabled("cloud"))
         {
             cloud = (BlockCloud) new BlockCloud().setHardness(0.2F).setLightOpacity(3).setStepSound(Block.soundTypeCloth);
-            cloud.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloud.0.desc"), 0, "cloud/cloud");
+            cloud.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloud.0.desc"), 0, "cloud");
             cloud.carverHelper.register(cloud, "cloud");
             OreDictionary.registerOre("cloud", cloud);
             Carving.chisel.registerOre("cloud", "cloud");
