@@ -33,22 +33,22 @@ public class BlockCarvablePumpkin extends BlockPumpkin implements ICarvable{
         this.isJackolantern = isOn;
     }
 
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        if(side == 1 || side == 0){
-            return this.top;
-        } else if(meta == 2 && side == 2){
-            return this.face[meta];
-        } else if(meta == 3 && side == 5){
-            return this.face[meta];
-        } else if(meta == 0 && side == 3){
-            return this.face[meta];
-        } else if(meta == 1 && side == 4){
-            return this.face[meta];
-        } else {
-            return this.side;
-        }
-    }
+    @SideOnly(Side.CLIENT)
+	@Override
+	public IIcon getIcon(int side, int meta)
+	{
+		switch(side)
+		{
+			case 0:
+				return this.top;// bottom
+			case 1:
+					return this.top;// top
+			case 3:
+					return this.face[meta];
+			default:
+				return this.side; // sides
+		}
+	}
 
     @Override
     public void registerBlockIcons(IIconRegister icon){
