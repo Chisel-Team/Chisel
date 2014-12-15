@@ -120,6 +120,7 @@ tile.grimstone.10.desc=Fancy Grimstone Construction
 tile.grimstone.11.desc=Fancy Grimstone Tiles
 tile.grimstone.12.desc=Smooth Grimstone Plate
 tile.grimstone.13.desc=Grimstone plate
+tile.grimstone.14.desc=Flaky Grimstone
 
 #Mechanical Block
 tile.mechanical.name=Mechanical Block
