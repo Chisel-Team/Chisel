@@ -1479,6 +1479,7 @@ public class ModBlocks {
             grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.11.desc"), 11, "grimstone/fancy-tiles");
             grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.12.desc"), 12, "grimstone/plate");
             grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.13.desc"), 13, "grimstone/plate-rough");
+            grimstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.grimstone.14.desc"), 14, "grimstone/flaky");
             grimstone.carverHelper.register(grimstone, "grimstone");
             Carving.chisel.registerOre("grimstone", "grimstone");
         }
