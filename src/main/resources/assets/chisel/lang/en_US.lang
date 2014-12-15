@@ -121,6 +121,32 @@ tile.grimstone.11.desc=Fancy Grimstone Tiles
 tile.grimstone.12.desc=Smooth Grimstone Plate
 tile.grimstone.13.desc=Grimstone plate
 
+#Mechanical Block
+tile.mechanical.name=Mechanical Block
+tile.mechanical.0.desc=Scaffold
+tile.mechanical.1.desc=Panels with Caution Tape
+tile.mechanical.2.desc=An Old Relic from the elves of Alfheim
+tile.mechanical.3.desc=Tangled Wires
+tile.mechanical.4.desc=Fan
+tile.mechanical.5.desc=Vent
+tile.mechanical.6.desc=Glowing Vent
+tile.mechanical.7.desc=Hex Patterned Panel
+tile.mechanical.8.desc=Gear
+tile.mechanical.9.desc=Alternate Vent
+tile.mechanical.10.desc=Scaffold
+tile.mechanical.11.desc=Scaffold
+tile.mechanical.12.desc=Scaffold
+tile.mechanical.13.desc=Scaffold
+tile.mechanical.14.desc=Scaffold
+tile.mechanical.15.desc=Scaffold
+
+#Cloudbrick
+tile.cloudbrick.name=Cloudbrick
+tile.cloudbrick.0.name=Large Cloudbricks
+tile.cloudbrick.1.name=Small Cloudbricks
+tile.cloudbrick.2.name=Vertical Small Cloudbricks
+tile.cloudbrick.3.name=Gridded Cloudbricks
+
 #Chisel 1
 
 #Cobblestone Blocks
@@ -1008,32 +1034,6 @@ tile.laboratory.12.desc=Small Steel Tiles
 tile.laboratory.13.desc=Direction Console (Right)
 tile.laboratory.14.desc=Direction Console (Left)
 tile.laboratory.15.desc=Information Console
-
-#Mechanical Block
-tile.mechanical.name=Mechanical Block
-tile.mechanical.0.desc=Scaffold
-tile.mechanical.1.desc=Panels with Caution Tape
-tile.mechanical.2.desc=An Old Relic from the land of Oneteufyv
-tile.mechanical.3.desc=Tangled Wires
-tile.mechanical.4.desc=Fan
-tile.mechanical.5.desc=Vent
-tile.mechanical.6.desc=Glowing Vent
-tile.mechanical.7.desc=Hex Patterned Panel
-tile.mechanical.8.desc=Gear
-tile.mechanical.9.desc=Alternate Vent
-tile.mechanical.10.desc=Scaffold
-tile.mechanical.11.desc=Scaffold
-tile.mechanical.12.desc=Scaffold
-tile.mechanical.13.desc=Scaffold
-tile.mechanical.14.desc=Scaffold
-tile.mechanical.15.desc=Scaffold
-
-#Cloudbrick
-tile.cloudbrick.name=Cloudbrick
-tile.cloudbrick.0.name=Large Cloudbricks
-tile.cloudbrick.1.name=Small Cloudbricks
-tile.cloudbrick.2.name=Vertical Small Cloudbricks
-tile.cloudbrick.3.name=Gridded Cloudbricks
 
 # Creative Tab localizations
 itemGroup.tabChiselBlocks=Chisel Blocks
