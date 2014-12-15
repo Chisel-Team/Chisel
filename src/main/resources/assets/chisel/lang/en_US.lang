@@ -60,20 +60,20 @@ tile.voidstone.7.desc=Beveled Voidstone
 tile.voidstonePillar.name=Void Stone Pillar
 tile.voidstonePillar.0.desc=Striped Void Stone Pillar
 
-#Animated Void Stone Blocks
-tile.voidstone2.name=Animated Voidstone
-tile.voidstone2.0.desc=Raw Animated Voidstone
-tile.voidstone2.1.desc=Large Animated Voidstone Tiles
-tile.voidstone2.2.desc=Smooth Animated Voidstone
-tile.voidstone2.3.desc=Skull Animated Voidstone
-tile.voidstone2.4.desc=Runic Animated Voidstone
-tile.voidstone2.5.desc=Metal-Bordered Animated Voidstone
-tile.voidstone2.6.desc=Eye Animated Voidstone
+#Energised Void Stone Blocks
+tile.voidstone2.name=Energised Voidstone
+tile.voidstone2.0.desc=Raw Energised Voidstone
+tile.voidstone2.1.desc=Large Energised Voidstone Tiles
+tile.voidstone2.2.desc=Smooth Energised Voidstone
+tile.voidstone2.3.desc=Skull Energised Voidstone
+tile.voidstone2.4.desc=Runic Energised Voidstone
+tile.voidstone2.5.desc=Metal-Bordered Energised Voidstone
+tile.voidstone2.6.desc=Eye Energised Voidstone
 tile.voidstone2.7.desc=Beveled Voidstone
 
 #Void Stone Pillars
-tile.voidstonePillar2.name=Animated Voidstone Pillar
-tile.voidstonePillar2.0.desc=Striped Animated Voidstone Pillar
+tile.voidstonePillar2.name=Energised Voidstone Pillar
+tile.voidstonePillar2.0.desc=Striped Energised Voidstone Pillar
 
 #Waterstone
 tile.waterstone.name=Waterstone
