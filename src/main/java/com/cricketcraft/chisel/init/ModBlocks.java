@@ -1447,16 +1447,6 @@ public class ModBlocks {
             mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.1.desc"), 1, "mechanical/cautiontape");
             mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.2.desc"), 2, "mechanical/relic");
             mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.3.desc"), 3, "mechanical/wires");
-            /*mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.4.desc"), 4, "mechanical/blocks");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.5.desc"), 5, "mechanical/blocks-rough");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.6.desc"), 6, "mechanical/brick");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.7.desc"), 7, "mechanical/largebricks");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.8.desc"), 8, "mechanical/platform");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.9.desc"), 9, "mechanical/platform-tiles");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.10.desc"), 10, "mechanical/construction");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.11.desc"), 11, "mechanical/fancy-tiles");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.12.desc"), 12, "mechanical/plate");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.13.desc"), 13, "mechanical/plate-rough");*/
             mechanical.carverHelper.register(mechanical, "mechanical");
             Carving.chisel.registerOre("mechanical", "mechanical");
         }
