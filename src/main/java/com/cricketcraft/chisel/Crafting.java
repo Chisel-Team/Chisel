@@ -79,8 +79,13 @@ public class Crafting {
             GameRegistry.addRecipe(new ItemStack(ModBlocks.factory, Configurations.factoryBlockAmount, 0), new Object[]{"*X*", "X X", "*X*", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
         if(Configurations.featureEnabled("voidstone"))
         {
-            GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstone, 8, 1), new Object[]{"oxo", "xyx", "oxo", 'x', new ItemStack(Blocks.stone, 1), 'y', new ItemStack(Items.ender_pearl, 1), 'o', new ItemStack(Blocks.obsidian, 1)});
-            GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstone2, 8, 1), new Object[]{"oxo", "xyx", "oxo", 'x', new ItemStack(Blocks.stone, 1), 'y', new ItemStack(Items.ender_eye, 1), 'o', new ItemStack(Blocks.obsidian, 1)});
+            GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstone, 8, 0), new Object[]{"oxo", "xyx", "oxo", 'x', new ItemStack(Blocks.stone, 1), 'y', new ItemStack(Items.ender_pearl, 1), 'o', new ItemStack(Blocks.obsidian, 1)});
+            GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstone2, 8, 0), new Object[]{"oxo", "xyx", "oxo", 'x', new ItemStack(Blocks.stone, 1), 'y', new ItemStack(Items.ender_eye, 1), 'o', new ItemStack(Blocks.obsidian, 1)});
+        }
+        if(Configurations.featureEnabled("voidstonePillars"))
+        {
+            GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstonePillar, 4, 0), new Object[]{"xx", "xx", 'x', new ItemStack(ModBlocks.voidstone, 1)});
+            GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstonePillar2, 4, 0), new Object[]{"xx", "xx", 'x', new ItemStack(ModBlocks.voidstone2, 1)});
         }
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.roadLine, 8, 0), new Object[]{"wrw", "wrw", "wrw", ('w'), "dyeWhite", ('r'), Items.redstone}));
