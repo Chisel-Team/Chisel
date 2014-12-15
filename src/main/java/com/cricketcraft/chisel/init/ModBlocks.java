@@ -82,7 +82,6 @@ public class ModBlocks {
     public static BlockSnakestoneObsidian obsidianSnakestone;
     public static BlockCarvable hexPlating;
     public static BlockCarvable mechanical;
-    public static BlockCarvable cloudbrick;
     public static BlockCarvable bone;
 
     // 1.7
@@ -1124,7 +1123,11 @@ public class ModBlocks {
         if(Configurations.featureEnabled("cloud"))
         {
             cloud = (BlockCloud) new BlockCloud().setHardness(0.2F).setLightOpacity(3).setStepSound(Block.soundTypeCloth);
-            cloud.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloud.0.desc"), 0, "cloud");
+            cloud.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloud.0.desc"), 0, "cloud/cloud");
+            cloud.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloud.1.desc"), 1, "cloud/large");
+            cloud.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloud.2.desc"), 2, "cloud/small");
+            cloud.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloud.3.desc"), 3, "cloud/vertical");
+            cloud.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloud.4.desc"), 4, "cloud/grid");
             cloud.carverHelper.register(cloud, "cloud");
             OreDictionary.registerOre("cloud", cloud);
             Carving.chisel.registerOre("cloud", "cloud");
@@ -1449,16 +1452,6 @@ public class ModBlocks {
             mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.3.desc"), 3, "mechanical/wires");
             mechanical.carverHelper.register(mechanical, "mechanical");
             Carving.chisel.registerOre("mechanical", "mechanical");
-        }
-        if(Configurations.featureEnabled("cloudbrick")){
-            cloudbrick = (BlockCarvable) new BlockCarvable(Material.leaves).setHardness(0.1F).setResistance(0.5F);
-            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.0.desc"), 0, "cloudbrick/large");
-            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.1.desc"), 1, "cloudbrick/small");
-            //Broken
-            //cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.2.desc"), 2, "cloudbrick/vertical");
-            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.3.desc"), 3, "cloudbrick/grid");
-            cloudbrick.carverHelper.register(cloudbrick, "cloudbrick");
-            Carving.chisel.registerOre("cloudbrick", "cloudbrick");
         }
         if(Configurations.featureEnabled("bone"))
         {
