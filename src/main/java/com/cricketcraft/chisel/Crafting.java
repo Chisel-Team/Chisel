@@ -60,12 +60,17 @@ public class Crafting {
 
         if(Configurations.featureEnabled("holystone"))
             GameRegistry.addRecipe(new ItemStack(ModBlocks.holystone, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.feather, 1)});
+        if(Configurations.featureEnabled("grimstone"))
+            GameRegistry.addRecipe(new ItemStack(ModBlocks.grimstone, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.coal, 1)});
         if(Configurations.featureEnabled("lavastone"))
             GameRegistry.addRecipe(new ItemStack(ModBlocks.lavastone, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.lava_bucket, 1)});
         if(Configurations.featureEnabled("waterstone"))
             GameRegistry.addRecipe(new ItemStack(ModBlocks.waterstone, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.water_bucket, 1)});
         if(Configurations.featureEnabled("fantasy"))
+        {
             GameRegistry.addRecipe(new ItemStack(ModBlocks.fantasy, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.gold_nugget, 1)});
+        	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.fantasy2, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(ModBlocks.fantasy, 1), 'X', "dyeWhite"}));
+        }
         if(Configurations.featureEnabled("futuristicArmorPlating"))
             GameRegistry.addRecipe(new ItemStack(ModBlocks.tyrian, 8, 0), new Object[]{"***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
         if(Configurations.featureEnabled("templeBlock"))
@@ -73,7 +78,10 @@ public class Crafting {
         if(Configurations.featureEnabled("factory"))
             GameRegistry.addRecipe(new ItemStack(ModBlocks.factory, Configurations.factoryBlockAmount, 0), new Object[]{"*X*", "X X", "*X*", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1)});
         if(Configurations.featureEnabled("voidstone"))
+        {
             GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstone, 8, 1), new Object[]{"oxo", "xyx", "oxo", 'x', new ItemStack(Blocks.stone, 1), 'y', new ItemStack(Items.ender_pearl, 1), 'o', new ItemStack(Blocks.obsidian, 1)});
+            GameRegistry.addRecipe(new ItemStack(ModBlocks.voidstone2, 8, 1), new Object[]{"oxo", "xyx", "oxo", 'x', new ItemStack(Blocks.stone, 1), 'y', new ItemStack(Items.ender_eye, 1), 'o', new ItemStack(Blocks.obsidian, 1)});
+        }
 
         GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.roadLine, 8, 0), new Object[]{"wrw", "wrw", "wrw", ('w'), "dyeWhite", ('r'), Items.redstone}));
 
