@@ -1462,7 +1462,7 @@ public class ModBlocks {
         }
         if(Configurations.featureEnabled("cloudbrick")){
             cloudbrick = (BlockCarvable) new BlockCarvable(Material.air).setHardness(0.1F).setResistance(0.5F);
-            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.0.desc"), 0, "cloudbrick/larged");
+            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.0.desc"), 0, "cloudbrick/large");
             cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.1.desc"), 1, "cloudbrick/small");
             cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.2.desc"), 2, "cloudbrick/vertical");
             cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.3.desc"), 3, "cloudbrick/grid");
