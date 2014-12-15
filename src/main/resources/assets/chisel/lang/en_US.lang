@@ -51,6 +51,20 @@ tile.voidstone.15.desc=Beveled Voidstone
 tile.voidstonePillar.name=Void Stone Pillar
 tile.voidstonePillar.0.desc=Striped Void Stone Pillar
 
+#Animated Void Stone Blocks
+tile.voidstone2.name=Animated Voidstone
+tile.voidstone2.0.desc=Metal-Bordered Animated Voidstone
+tile.voidstone2.1.desc=Large Animated Voidstone tiles
+tile.voidstone2.2.desc=Smooth Animated Voidstone
+tile.voidstone2.12.desc=Runic Animated Voidstone
+tile.voidstone2.13.desc=Raw Animated Voidstone
+tile.voidstone2.14.desc=Eye Animated Voidstone
+tile.voidstone2.15.desc=Beveled Animated Voidstone
+
+#Void Stone Pillars
+tile.voidstonePillar2.name=Animated Voidstone Pillar
+tile.voidstonePillar2.0.desc=Striped Animated Voidstone Pillar
+
 #Waterstone
 tile.waterstone.name=Waterstone
 tile.waterstone.0.desc=Waterstone Bricks
