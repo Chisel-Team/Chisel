@@ -37,20 +37,6 @@ tile.leaves.10.desc=White Rose
 tile.leaves.11.desc=Christmas Balls
 tile.leaves.12.desc=Christmas Lights
 
-#Void Stone Blocks
-tile.voidstone.name=Voidstone
-tile.voidstone.0.desc=Metal-BordeBlood Red Voidstone
-tile.voidstone.1.desc=Large Voidstone tiles
-tile.voidstone.2.desc=Smooth Voidstone
-tile.voidstone.12.desc=Runic Voidstone
-tile.voidstone.13.desc=Raw Voidstone
-tile.voidstone.14.desc=Eye Voidstone
-tile.voidstone.15.desc=Beveled Voidstone
-
-#Void Stone Pillars
-tile.voidstonePillar.name=Void Stone Pillar
-tile.voidstonePillar.0.desc=Striped Void Stone Pillar
-
 #Waterstone
 tile.waterstone.name=Waterstone
 tile.waterstone.0.desc=Waterstone Bricks
