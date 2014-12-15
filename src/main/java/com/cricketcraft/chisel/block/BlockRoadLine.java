@@ -54,7 +54,7 @@ public class BlockRoadLine extends Block
     @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-        return par1World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) || par1World.getBlock(par2, par3 - 1, par4).equals(Blocks.glowstone);
+        return World.doesBlockHaveSolidTopSurface(par1World, par2, par3 - 1, par4) || par1World.getBlock(par2, par3 - 1, par4).equals(Blocks.glowstone);
     }
 
     @Override
