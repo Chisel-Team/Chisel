@@ -5,16 +5,11 @@ import info.jbcs.minecraft.chisel.block.BlockGrimstone;
 import info.jbcs.minecraft.chisel.block.BlockHolystone;
 import info.jbcs.minecraft.chisel.block.BlockLavastone;
 import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
-import info.jbcs.minecraft.chisel.block.BlockVoidstone;
 import info.jbcs.minecraft.chisel.entity.fx.EntityBallOMossFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntityGrimstoneFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntityHolystoneFX;
 import info.jbcs.minecraft.chisel.entity.fx.EntitySnakestoneObsidianFX;
-import info.jbcs.minecraft.chisel.entity.fx.EntityVoidstoneFX;
 import info.jbcs.minecraft.chisel.utils.GeneralClient;
-
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -23,6 +18,8 @@ import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 
 public class GeneralChiselClient {
@@ -160,47 +157,6 @@ public class GeneralChiselClient {
     public static void spawnSnakestoneObsidianFX(World world, BlockSnakestoneObsidian block, int x, int y, int z) {
         if (Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0) {
             EntitySnakestoneObsidianFX res = new EntitySnakestoneObsidianFX(world, block, x, y, z);
-            Minecraft.getMinecraft().effectRenderer.addEffect(res);
-        }
-    }
-
-    public static void spawnVoidstoneFX(World world, BlockVoidstone block, int x, int y, int z) {
-        if (Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0) {
-            float f = 0.15F;
-            double x1 = x + rand.nextDouble() * (block.getBlockBoundsMaxX() - block.getBlockBoundsMinX() - f * 2.0F) + f + block.getBlockBoundsMinX();
-            double y1 = y + rand.nextDouble() * (block.getBlockBoundsMaxY() - block.getBlockBoundsMinY() - f * 2.0F) + f + block.getBlockBoundsMinY();
-            double z1 = z + rand.nextDouble() * (block.getBlockBoundsMaxZ() - block.getBlockBoundsMinZ() - f * 2.0F) + f + block.getBlockBoundsMinZ();
-
-            switch (rand.nextInt(6)) {
-                case 0:
-                    y1 = y + block.getBlockBoundsMinY() - f;
-                    y--;
-                    break;
-                case 1:
-                    y1 = y + block.getBlockBoundsMaxY() + f;
-                    y++;
-                    break;
-                case 2:
-                    z1 = z + block.getBlockBoundsMinZ() - f;
-                    z--;
-                    break;
-                case 3:
-                    z1 = z + block.getBlockBoundsMaxZ() + f;
-                    z++;
-                    break;
-                case 4:
-                    x1 = x + block.getBlockBoundsMinX() - f;
-                    x--;
-                    break;
-                case 5:
-                    x1 = x + block.getBlockBoundsMaxX() + f;
-                    x++;
-                    break;
-            }
-
-            if (world.getBlock(x, y, z).isOpaqueCube()) return;
-
-            EntityVoidstoneFX res = new EntityVoidstoneFX(world, block, x, y, z);
             Minecraft.getMinecraft().effectRenderer.addEffect(res);
         }
     }
