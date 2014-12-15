@@ -37,6 +37,14 @@ tile.leaves.10.desc=White Rose
 tile.leaves.11.desc=Christmas Balls
 tile.leaves.12.desc=Christmas Lights
 
+#Bone
+tile.bone.name=Bone Block
+tile.bone.0.desc=Compressed Bone
+tile.bone.1.desc=Skullpile
+tile.bone.2.desc=Pile of Bones
+tile.bone.3.desc=Beveled Compressed Bone
+tile.bone.4.desc=Brick Compressed Bone
+
 #Void Stone Blocks
 tile.voidstone.name=Voidstone
 tile.voidstone.0.desc=Raw Voidstone
