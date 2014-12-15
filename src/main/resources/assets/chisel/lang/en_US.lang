@@ -53,7 +53,7 @@ tile.voidstonePillar.name=Void Stone Pillar
 tile.voidstonePillar.0.desc=Striped Void Stone Pillar
 
 #Animated Void Stone Blocks
-tile.voidstone2.name=Voidstone
+tile.voidstone2.name=Animated Voidstone
 tile.voidstone2.0.desc=Raw Animated Voidstone
 tile.voidstone2.1.desc=Large Animated Voidstone Tiles
 tile.voidstone2.2.desc=Smooth Animated Voidstone
