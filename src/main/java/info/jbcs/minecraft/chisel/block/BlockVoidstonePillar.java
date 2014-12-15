@@ -1,5 +1,6 @@
 package info.jbcs.minecraft.chisel.block;
 
+import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.api.ICarvable;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
@@ -13,13 +14,15 @@ public class BlockVoidstonePillar extends Block implements ICarvable{
 
     public static IIcon topBottom, pillarSide;
     public CarvableHelper carvableHelper;
+    private boolean isAnimated;
 
-    public BlockVoidstonePillar() {
+    public BlockVoidstonePillar(boolean isAnimated) {
         super(Material.rock);
         carvableHelper = new CarvableHelper();
         setHardness(5.0F);
         setResistance(10.0F);
         setCreativeTab(ModTabs.tabChiselBlocks);
+        this.isAnimated = isAnimated;
     }
 
     @Override
@@ -34,8 +37,12 @@ public class BlockVoidstonePillar extends Block implements ICarvable{
 
     @Override
     public void registerBlockIcons(IIconRegister icon){
-        topBottom = icon.registerIcon("Chisel:voidstone/pillar-top");
-        pillarSide = icon.registerIcon("Chisel:voidstone/pillar-side");
+        if(this.isAnimated)
+            topBottom = icon.registerIcon(Chisel.MOD_ID + ":voidstone/animated/pillar-top");
+        else
+            topBottom = icon.registerIcon(Chisel.MOD_ID + ":voidstone/pillar-top");
+
+        pillarSide = icon.registerIcon(Chisel.MOD_ID + ":voidstone/pillar-side");
     }
 
     @Override

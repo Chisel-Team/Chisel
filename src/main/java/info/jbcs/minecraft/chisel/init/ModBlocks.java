@@ -1,40 +1,9 @@
 package info.jbcs.minecraft.chisel.init;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import info.jbcs.minecraft.chisel.Chisel;
 import info.jbcs.minecraft.chisel.Configurations;
-import info.jbcs.minecraft.chisel.block.BlockAutoChisel;
-import info.jbcs.minecraft.chisel.block.BlockBeaconBase;
-import info.jbcs.minecraft.chisel.block.BlockCarvable;
-import info.jbcs.minecraft.chisel.block.BlockCarvableGlass;
-import info.jbcs.minecraft.chisel.block.BlockCarvablePane;
-import info.jbcs.minecraft.chisel.block.BlockCarvablePowered;
-import info.jbcs.minecraft.chisel.block.BlockCloud;
-import info.jbcs.minecraft.chisel.block.BlockConcrete;
-import info.jbcs.minecraft.chisel.block.BlockEldritch;
-import info.jbcs.minecraft.chisel.block.BlockGrimstone;
-import info.jbcs.minecraft.chisel.block.BlockHolystone;
-import info.jbcs.minecraft.chisel.block.BlockLavastone;
-import info.jbcs.minecraft.chisel.block.BlockLeaf;
-import info.jbcs.minecraft.chisel.block.BlockLightstoneCarvable;
-import info.jbcs.minecraft.chisel.block.BlockMarbleBookshelf;
-import info.jbcs.minecraft.chisel.block.BlockMarbleCarpet;
-import info.jbcs.minecraft.chisel.block.BlockMarbleIce;
-import info.jbcs.minecraft.chisel.block.BlockMarbleIceStairs;
-import info.jbcs.minecraft.chisel.block.BlockMarblePillar;
-import info.jbcs.minecraft.chisel.block.BlockMarbleSlab;
-import info.jbcs.minecraft.chisel.block.BlockMarbleStairs;
-import info.jbcs.minecraft.chisel.block.BlockMarbleStairsMaker;
-import info.jbcs.minecraft.chisel.block.BlockMarbleStairsMakerCreator;
-import info.jbcs.minecraft.chisel.block.BlockMarbleWall;
-import info.jbcs.minecraft.chisel.block.BlockPresent;
-import info.jbcs.minecraft.chisel.block.BlockRoadLine;
-import info.jbcs.minecraft.chisel.block.BlockSnakestone;
-import info.jbcs.minecraft.chisel.block.BlockSnakestoneObsidian;
-import info.jbcs.minecraft.chisel.block.BlockSpikes;
-import info.jbcs.minecraft.chisel.block.BlockVoidstone;
-import info.jbcs.minecraft.chisel.block.BlockVoidstonePillar;
-import info.jbcs.minecraft.chisel.block.BlockWaterstone;
-import info.jbcs.minecraft.chisel.block.ItemBlockAutoChisel;
+import info.jbcs.minecraft.chisel.block.*;
 import info.jbcs.minecraft.chisel.carving.CarvableHelper;
 import info.jbcs.minecraft.chisel.carving.CarvableVariation;
 import info.jbcs.minecraft.chisel.carving.Carving;
@@ -46,7 +15,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
     public static BlockCarvable marble;
@@ -104,7 +72,7 @@ public class ModBlocks {
     public static BlockCarvable pumpkin;
     public static BlockCarvable jackOLantern;
     public static BlockVoidstone voidstone;
-    public static BlockVoidstonePillar voidstonePillar = new BlockVoidstonePillar();
+    public static BlockVoidstonePillar voidstonePillar;
     public static Block autoChisel;
     public static BlockPresent present;
     public static BlockSnakestone snakestone;
@@ -1352,22 +1320,37 @@ public class ModBlocks {
         }
 
         if(Configurations.featureEnabled("voidstone")){
-            voidstone = (BlockVoidstone) new BlockVoidstone().setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/metalborder");
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/quarters");
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/smooth");
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.3.desc"), 3, "voidstone/skulls");
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.12.desc"), 12, "voidstone/rune");
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.13.desc"), 13, "voidstone/raw");
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.14.desc"), 14, "voidstone/eye");
-            voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.15.desc"), 15, "voidstone/bevel");
+            if(Configurations.animatedVoidstone){
+                voidstone = (BlockVoidstone) new BlockVoidstone(Chisel.MOD_ID + ":voidstone/animated/void").setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/animated/metalborder");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/animated/quarters");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/animated/smooth");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.12.desc"), 12, "voidstone/animated/rune");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.13.desc"), 13, "voidstone/animated/raw");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.14.desc"), 14, "voidstone/animated/eye");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.15.desc"), 15, "voidstone/animated/bevel");
+            } else {
+                voidstone = (BlockVoidstone) new BlockVoidstone(null).setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/metalborder");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/quarters");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/smooth");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.3.desc"), 3, "voidstone/skulls");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.12.desc"), 12, "voidstone/rune");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.13.desc"), 13, "voidstone/raw");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.14.desc"), 14, "voidstone/eye");
+                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.15.desc"), 15, "voidstone/bevel");
+            }
             voidstone.carverHelper.register(voidstone, "voidstone");
             Carving.chisel.registerOre("voidstone", "voidstone");
         }
 
         if(Configurations.featureEnabled("voidstonePillars")){
-            voidstonePillar = (BlockVoidstonePillar) new BlockVoidstonePillar().setStepSound(Block.soundTypeStone);
-            voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar.0.desc"), 0, "voidstone/pillar-side");
+            voidstonePillar = (BlockVoidstonePillar) new BlockVoidstonePillar(Configurations.animatedVoidstone).setStepSound(Block.soundTypeStone);
+            if(Configurations.animatedVoidstone){
+                voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar.0.desc"), 0, "voidstone/pillar-side");
+            } else {
+                voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar.0.desc"), 0, "voidstone/pillar-side");
+            }
             voidstonePillar.carvableHelper.register(voidstonePillar, "voidstonePillar");
             Carving.chisel.registerOre("voidstonePillar", "voidstonePillar");
         }
