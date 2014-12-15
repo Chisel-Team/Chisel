@@ -1016,6 +1016,13 @@ tile.mechanical.13.desc=Scaffold
 tile.mechanical.14.desc=Scaffold
 tile.mechanical.15.desc=Scaffold
 
+#Cloudbrick
+tile.cloudbrick.name=Cloudbrick
+tile.cloudbrick.0.name=Large Cloudbricks
+tile.cloudbrick.1.name=Small Cloudbricks
+tile.cloudbrick.2.name=Vertical Small Cloudbricks
+tile.cloudbrick.3.name=Gridded Cloudbricks
+
 # Creative Tab localizations
 itemGroup.tabChiselBlocks=Chisel Blocks
 itemGroup.tabChisel=Chisel Items

@@ -82,6 +82,7 @@ public class ModBlocks {
     public static BlockSnakestoneObsidian obsidianSnakestone;
     public static BlockCarvable hexPlating;
     public static BlockCarvable mechanical;
+    public static BlockCarvable cloudbrick;
 
     public static BlockSpikes spikeTrap;
 
@@ -1459,6 +1460,15 @@ public class ModBlocks {
             mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.13.desc"), 13, "mechanical/plate-rough");*/
             mechanical.carverHelper.register(mechanical, "mechanical");
             Carving.chisel.registerOre("mechanical", "mechanical");
+        }
+        if(Configurations.featureEnabled("cloudbrick")){
+            cloudbrick = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(0.1F).setResistance(0.5F);
+            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.0.desc"), 0, "cloudbrick/larged");
+            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.1.desc"), 1, "cloudbrick/small");
+            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.2.desc"), 2, "cloudbrick/vertical");
+            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.3.desc"), 3, "cloudbrick/grid");
+            mechanical.carverHelper.register(cloudbrick, "cloudbrick");
+            Carving.chisel.registerOre("cloudbrick", "cloudbrick");
         }
     }
 }
