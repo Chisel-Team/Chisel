@@ -11,12 +11,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
-public class BlockVoidstonePillar extends Block implements ICarvable{
+public class BlockVoidstonePillar2 extends Block implements ICarvable{
 
     public static IIcon topBottom, pillarSide;
     public CarvableHelper carvableHelper;
 
-    public BlockVoidstonePillar() {
+    public BlockVoidstonePillar2() {
         super(Material.rock);
         carvableHelper = new CarvableHelper();
         setHardness(5.0F);
@@ -36,7 +36,7 @@ public class BlockVoidstonePillar extends Block implements ICarvable{
 
     @Override
     public void registerBlockIcons(IIconRegister icon){
-        topBottom = icon.registerIcon(Chisel.MOD_ID + ":voidstone/pillar-top");
+        topBottom = icon.registerIcon(Chisel.MOD_ID + ":voidstone/animated/pillar-top");
         pillarSide = icon.registerIcon(Chisel.MOD_ID + ":voidstone/pillar-side");
     }
 
