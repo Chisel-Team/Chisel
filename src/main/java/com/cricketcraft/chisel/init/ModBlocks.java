@@ -72,7 +72,9 @@ public class ModBlocks {
     public static BlockCarvable pumpkin;
     public static BlockCarvable jackOLantern;
     public static BlockVoidstone voidstone;
+    public static BlockVoidstone voidstone2;
     public static BlockVoidstonePillar voidstonePillar;
+    public static BlockVoidstonePillar voidstonePillar2;
     public static Block autoChisel;
     public static BlockPresent present;
     public static BlockSnakestone snakestone;
@@ -1320,17 +1322,7 @@ public class ModBlocks {
         }
 
         if(Configurations.featureEnabled("voidstone")){
-            if(Configurations.animatedVoidstone){
-                voidstone = (BlockVoidstone) new BlockVoidstone(Chisel.MOD_ID + ":voidstone/animated/void").setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
-                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/animated/metalborder");
-                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/animated/quarters");
-                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/animated/smooth");
-                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.12.desc"), 12, "voidstone/animated/rune");
-                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.13.desc"), 13, "voidstone/animated/raw");
-                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.14.desc"), 14, "voidstone/animated/eye");
-                voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.15.desc"), 15, "voidstone/animated/bevel");
-            } else {
-                voidstone = (BlockVoidstone) new BlockVoidstone(null).setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
+                voidstone = (BlockVoidstone) new BlockVoidstone(Chisel.MOD_ID + ":voidstone").setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/metalborder");
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/quarters");
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/smooth");
@@ -1339,20 +1331,33 @@ public class ModBlocks {
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.13.desc"), 13, "voidstone/raw");
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.14.desc"), 14, "voidstone/eye");
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.15.desc"), 15, "voidstone/bevel");
-            }
-            voidstone.carverHelper.register(voidstone, "voidstone");
-            Carving.chisel.registerOre("voidstone", "voidstone");
+
+                voidstone.carverHelper.register(voidstone, "voidstone");
+                Carving.chisel.registerOre("voidstone", "voidstone");
+
+                voidstone2 = (BlockVoidstone) new BlockVoidstone(Chisel.MOD_ID + ":voidstone/animated/void").setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
+                voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/animated/metalborder");
+                voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/animated/quarters");
+                voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/animated/smooth");
+                voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.12.desc"), 12, "voidstone/animated/rune");
+                voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.13.desc"), 13, "voidstone/animated/raw");
+                voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.14.desc"), 14, "voidstone/animated/eye");
+                voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.15.desc"), 15, "voidstone/animated/bevel");
+
+                voidstone2.carverHelper.register(voidstone2, "voidstone2");
+                Carving.chisel.registerOre("voidstone2", "voidstone2");
         }
 
         if(Configurations.featureEnabled("voidstonePillars")){
-            voidstonePillar = (BlockVoidstonePillar) new BlockVoidstonePillar(Configurations.animatedVoidstone).setStepSound(Block.soundTypeStone);
-            if(Configurations.animatedVoidstone){
-                voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar.0.desc"), 0, "voidstone/pillar-side");
-            } else {
-                voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar.0.desc"), 0, "voidstone/pillar-side");
-            }
+            voidstonePillar = (BlockVoidstonePillar) new BlockVoidstonePillar(false).setStepSound(Block.soundTypeStone);
+            voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar.0.desc"), 0, "voidstone/pillar-side");
             voidstonePillar.carvableHelper.register(voidstonePillar, "voidstonePillar");
             Carving.chisel.registerOre("voidstonePillar", "voidstonePillar");
+
+            voidstonePillar2 = (BlockVoidstonePillar) new BlockVoidstonePillar(true).setStepSound(Block.soundTypeStone);
+            voidstonePillar2.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar2.0.desc"), 0, "voidstone/pillar-side");
+            voidstonePillar2.carvableHelper.register(voidstonePillar2, "voidstonePillar2");
+            Carving.chisel.registerOre("voidstonePillar2", "voidstonePillar2");
         }
 
         if (Configurations.featureEnabled("waterstone")) {

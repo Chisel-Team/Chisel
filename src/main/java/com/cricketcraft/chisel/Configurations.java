@@ -18,7 +18,6 @@ public class Configurations
     public static boolean autoChisel;
     public static boolean fancy;
     public static boolean enableFMP;
-    public static boolean animatedVoidstone;
 
     public static int factoryBlockAmount;
     public static int particlesTickrate;
@@ -45,7 +44,6 @@ public class Configurations
         chiselRecipe = config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
         autoChisel = config.get("general", "autoChisel", true, "Should people be allowed to use the auto chisel").getBoolean(true);
         enableFMP = config.get("general", "enableFMP", true, "Do you want to enable FMP").getBoolean(true);
-        animatedVoidstone = config.get("client", "animatedVoidstone", true, "True, you want animated textures. False, nah i'm good.").getBoolean(true);
 
         if(config.hasChanged())
         {
