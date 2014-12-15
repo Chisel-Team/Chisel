@@ -45,6 +45,12 @@ tile.bone.2.desc=Pile of Bones
 tile.bone.3.desc=Beveled Compressed Bone
 tile.bone.4.desc=Brick Compressed Bone
 
+#Cloudbrick
+tile.cloudbrick.name=Cloud Brick
+tile.cloudbrick.0.desc=Large Cloud Bricks
+tile.cloudbrick.1.desc=Small Cloud Bricks
+tile.cloudbrick.3.desc=Gridded Cloud Bricks
+
 #Void Stone Blocks
 tile.voidstone.name=Voidstone
 tile.voidstone.0.desc=Raw Voidstone

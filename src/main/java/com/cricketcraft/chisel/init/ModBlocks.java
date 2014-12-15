@@ -1451,10 +1451,11 @@ public class ModBlocks {
             Carving.chisel.registerOre("mechanical", "mechanical");
         }
         if(Configurations.featureEnabled("cloudbrick")){
-            cloudbrick = (BlockCarvable) new BlockCarvable(Material.air).setHardness(0.1F).setResistance(0.5F);
+            cloudbrick = (BlockCarvable) new BlockCarvable(Material.leaves).setHardness(0.1F).setResistance(0.5F);
             cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.0.desc"), 0, "cloudbrick/large");
             cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.1.desc"), 1, "cloudbrick/small");
-            cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.2.desc"), 2, "cloudbrick/vertical");
+            //Broken
+            //cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.2.desc"), 2, "cloudbrick/vertical");
             cloudbrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.cloudbrick.3.desc"), 3, "cloudbrick/grid");
             cloudbrick.carverHelper.register(cloudbrick, "cloudbrick");
             Carving.chisel.registerOre("cloudbrick", "cloudbrick");
@@ -1466,7 +1467,7 @@ public class ModBlocks {
             bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.1.desc"), 1, "bone/skullpile");
             bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.2.desc"), 2, "bone/stacked");
             bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.3.desc"), 3, "bone/bevel");
-            bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.4.desc"), 3, "bone/bricks");
+            bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.4.desc"), 4, "bone/bricks");
             bone.carverHelper.register(bone, "bone");
             Carving.chisel.registerOre("bone", "bone");
         }
