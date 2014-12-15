@@ -126,8 +126,6 @@ public class Crafting {
 
         if(Configurations.featureEnabled("hexPlating"))
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.hexPlating, 1), new Object[]{"XXX", "XYX", "XXX", 'X', "stone", 'Y', "blockCoal"}));
-        if(Configurations.featureEnabled("cloudbrick"))
-        	GameRegistry.addRecipe(new ItemStack(ModBlocks.cloudbrick, 4), new Object[]{"XX", "XX", 'X', ModBlocks.cloud});
         if(Configurations.featureEnabled("bone"))
         	GameRegistry.addRecipe(new ItemStack(ModBlocks.bone, 4), new Object[]{"XX", "XX", 'X', Items.bone});
     }

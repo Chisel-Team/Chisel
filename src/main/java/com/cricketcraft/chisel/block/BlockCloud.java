@@ -59,11 +59,11 @@ public class BlockCloud extends BlockCarvable {
 
     @Override
     public int quantityDropped(Random rand) {
-        return 0;
+        return rand.nextInt(2);
     }
 
     @Override
     public int damageDropped(int meta) {
-        return 0;
+        return meta;
     }
 }
