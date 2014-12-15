@@ -8,7 +8,6 @@ import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.ItemMarbleSlab;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -97,7 +96,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("marble"))
         {
-            marble = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
+            marble = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
             marble.carverHelper.setChiselBlockName("Marble");
             marble.carverHelper.addVariation(StatCollector.translateToLocal("tile.marble.0.desc"), 0, "marble");
             marble.carverHelper.addVariation(StatCollector.translateToLocal("tile.marble.1.desc"), 1, "marble/a1-stoneornamental-marblebrick");
@@ -145,7 +144,7 @@ public class ModBlocks {
             {
                 if(Configurations.oldPillars)
                 {
-                    marblePillar = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
+                    marblePillar = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
                     marblePillar.carverHelper.setChiselBlockName("Marble Pillar");
                     marblePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.marblePillarOld.0.desc"), 0, "marblepillarold/column");
                     marblePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.marblePillarOld.1.desc"), 1, "marblepillarold/capstone");
@@ -252,7 +251,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("limestone"))
         {
-            limestone = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
+            limestone = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
             limestone.carverHelper.setChiselBlockName("Limestone");
             limestone.carverHelper.addVariation(StatCollector.translateToLocal("tile.limestone.0.desc"), 0, "limestone");
             limestone.carverHelper.addVariation(StatCollector.translateToLocal("tile.limestone.1.desc"), 1, "limestone/terrain-cobbsmalltilelight");
@@ -319,7 +318,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("cobblestone"))
         {
-            cobblestone = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
+            cobblestone = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("cobblestone", Blocks.cobblestone, 0, 0);
             cobblestone.carverHelper.addVariation(StatCollector.translateToLocal("tile.cobblestone.0.desc"), 1, "cobblestone/terrain-cobb-brickaligned");
             cobblestone.carverHelper.addVariation(StatCollector.translateToLocal("tile.cobblestone.1.desc"), 2, "cobblestone/terrain-cob-detailedbrick");
@@ -365,7 +364,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("sandstone"))
         {
-            sandstone = (BlockCarvable) new BlockCarvable().setStepSound(Block.soundTypeStone).setHardness(0.8F);
+            sandstone = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone).setHardness(0.8F);
             Carving.chisel.addVariation("sandstone", Blocks.sandstone, 0, 0);
             Carving.chisel.addVariation("sandstone", Blocks.sandstone, 1, 1);
             Carving.chisel.addVariation("sandstone", Blocks.sandstone, 2, 2);
@@ -400,7 +399,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("sandstoneScribbles"))
         {
-            sandstoneScribbles = (BlockCarvable) new BlockCarvable().setStepSound(Block.soundTypeStone).setHardness(0.8F);
+            sandstoneScribbles = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone).setHardness(0.8F);
             sandstoneScribbles.carverHelper.addVariation(StatCollector.translateToLocal("tile.sandstoneScribbles.desc"), 0, "sandstone-scribbles/scribbles-0");
             sandstoneScribbles.carverHelper.addVariation(StatCollector.translateToLocal("tile.sandstoneScribbles.desc"), 1, "sandstone-scribbles/scribbles-1");
             sandstoneScribbles.carverHelper.addVariation(StatCollector.translateToLocal("tile.sandstoneScribbles.desc"), 2, "sandstone-scribbles/scribbles-2");
@@ -537,7 +536,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("lapisBlock"))
         {
-            lapis = (BlockCarvable) new BlockCarvable().setHardness(3F).setResistance(5F).setStepSound(Block.soundTypeStone);
+            lapis = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(3F).setResistance(5F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("lapis_block", Blocks.lapis_block, 0, 0);
             lapis.carverHelper.addVariation(StatCollector.translateToLocal("tile.lapis.1.desc"), 1, "lapis/terrain-lapisblock-chunky");
             lapis.carverHelper.addVariation(StatCollector.translateToLocal("tile.lapis.2.desc"), 2, "lapis/terrain-lapisblock-panel");
@@ -572,7 +571,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("netherBrick"))
         {
-            netherBrick = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
+            netherBrick = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("nether_brick", Blocks.nether_brick, 0, 0);
             //netherBrick.carverHelper.addVariation("Nether brick", 0, Blocks.nether_brick);
             netherBrick.carverHelper.addVariation(StatCollector.translateToLocal("tile.netherBrick.1.desc"), 1, "netherbrick/a1-netherbrick-brinstar");
@@ -596,7 +595,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("netherRack"))
         {
-            netherrack = (BlockCarvable) new BlockCarvable().setHardness(0.4F).setStepSound(Block.soundTypeStone);
+            netherrack = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(0.4F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("netherrack", Blocks.netherrack, 0, 0);
             netherrack.carverHelper.addVariation(StatCollector.translateToLocal("tile.hellrock.1.desc"), 1, "netherrack/a1-netherrack-bloodgravel");
             netherrack.carverHelper.addVariation(StatCollector.translateToLocal("tile.hellrock.2.desc"), 2, "netherrack/a1-netherrack-bloodrock");
@@ -618,7 +617,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("cobblestoneMossy"))
         {
-            cobblestoneMossy = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
+            cobblestoneMossy = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("mossy_cobblestone", Blocks.mossy_cobblestone, 0, 0);
             cobblestoneMossy.carverHelper.addVariation(StatCollector.translateToLocal("tile.stoneMoss.1.desc"), 1, "cobblestonemossy/terrain-cobb-brickaligned");
             cobblestoneMossy.carverHelper.addVariation(StatCollector.translateToLocal("tile.stoneMoss.2.desc"), 2, "cobblestonemossy/terrain-cob-detailedbrick");
@@ -641,7 +640,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("stoneBrick"))
         {
-            stoneBrick = (BlockCarvable) new BlockCarvable().setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
+            stoneBrick = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(1.5F).setResistance(10.0F).setStepSound(Block.soundTypeStone);
             for(int i = 0; i < 4; i++)
             {
                 if(i == 1)
@@ -791,7 +790,7 @@ public class ModBlocks {
                 String u = plank_ucnames[i];
                 final String orename = n.replace('-', '_') + "_planks";
 
-                planks[i] = (BlockCarvable) (new BlockCarvable()).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood);
+                planks[i] = (BlockCarvable) (new BlockCarvable(Material.wood)).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood);
                 planks[i].carverHelper.setChiselBlockName(u + " Wood Planks");
                 planks[i].carverHelper.addVariation("Smooth " + n + " wood planks", 1, "planks-" + n + "/clean");
                 planks[i].carverHelper.addVariation("Short " + n + " wood planks", 2, "planks-" + n + "/short");
@@ -818,7 +817,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("obsidian"))
         {
-            obsidian = (BlockCarvable) new BlockCarvable().setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone);
+            obsidian = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("obsidian", Blocks.obsidian, 0, 0);
             obsidian.carverHelper.addVariation(StatCollector.translateToLocal("tile.obsidian.1.desc"), 1, "obsidian/pillar");
             obsidian.carverHelper.addVariation(StatCollector.translateToLocal("tile.obsidian.2.desc"), 2, "obsidian/pillar-quartz");
@@ -944,7 +943,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("fantasy"))
         {
-            fantasy = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F);
+            fantasy = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F);
             fantasy.carverHelper.setChiselBlockName("Fantasy Block");
             fantasy.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock.0.desc"), 0, "fantasy/brick");
             fantasy.carverHelper.addVariation(StatCollector.translateToLocal("tile.fantasyblock.1.desc"), 1, "fantasy/brick-faded");
@@ -1130,7 +1129,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("factory"))
         {
-            factory = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
+            factory = (BlockCarvable) new BlockCarvable(Material.iron).setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
             factory.carverHelper.setChiselBlockName("factoryblock");
             factory.carverHelper.addVariation(StatCollector.translateToLocal("tile.factory.0.desc"), 0, "factory/dots");
             factory.carverHelper.addVariation(StatCollector.translateToLocal("tile.factory.1.desc"), 1, "factory/rust2");
@@ -1239,7 +1238,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("woolenClay"))
         {
-            woolenClay = (BlockCarvable) new BlockCarvable().setCreativeTab(ModTabs.tabChiselBlocks).setHardness(2F).setResistance(10F);
+            woolenClay = (BlockCarvable) new BlockCarvable(Material.clay).setCreativeTab(ModTabs.tabChiselBlocks).setHardness(2F).setResistance(10F);
             woolenClay.carverHelper.setChiselBlockName("Woolen Clay");
 
             for(int i = 0; i < 16; i++)
@@ -1251,7 +1250,7 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("laboratory"))
         {
-            laboratory = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
+            laboratory = (BlockCarvable) new BlockCarvable(Material.iron).setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
             laboratory.carverHelper.setChiselBlockName("laboratoryblock");
             laboratory.carverHelper.addVariation(StatCollector.translateToLocal("tile.laboratory.0.desc"), 0, "laboratory/wallpanel");
             laboratory.carverHelper.addVariation(StatCollector.translateToLocal("tile.laboratory.1.desc"), 1, "laboratory/dottedpanel");
@@ -1276,7 +1275,7 @@ public class ModBlocks {
         if(Configurations.featureEnabled("pumpkin"))
         {
             //TODO: Actually finish the class for this
-            pumpkin = (BlockCarvable) new BlockCarvable().setHardness(2.0F).setResistance(5F).setStepSound(Block.soundTypeStone);
+            pumpkin = (BlockCarvable) new BlockCarvable(Material.gourd).setHardness(2.0F).setResistance(5F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("pumpkin", Blocks.pumpkin, 0, 0);
             //pumpkin.carverHelper.addVariation("chisel.title.pumpkin.1.desc", 1, "pumpkin/1");
         }
