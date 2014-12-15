@@ -69,7 +69,7 @@ public class BlockSpikesRenderer implements ISimpleBlockRenderingHandler
         renderer.renderStandardBlock(block, x, y, z);
 
         Tessellator tessellator = Tessellator.instance;
-        IIcon icon = ModBlocks.spikeTrap.iconSpike;
+        //IIcon icon = ModBlocks.spikeTrap.iconSpike;
 
         double d = 1.5 / 16;
         double r = d / 2;
@@ -91,7 +91,7 @@ public class BlockSpikesRenderer implements ISimpleBlockRenderingHandler
 
 
                 tessellator.addTranslation(sx, 0, sz);
-                drawSpike(icon, r, 0.5 + rand.nextDouble() * 0.35, x, y, z, rand.nextDouble() * skew - skew / 2, rand.nextDouble() * skew - skew / 2);
+                //drawSpike(icon, r, 0.5 + rand.nextDouble() * 0.35, x, y, z, rand.nextDouble() * skew - skew / 2, rand.nextDouble() * skew - skew / 2);
                 tessellator.addTranslation(-sx, 0, -sz);
             }
         }
