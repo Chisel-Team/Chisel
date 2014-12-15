@@ -69,8 +69,8 @@ public class ModBlocks {
     public static BlockCarvablePane paperWall;
     public static BlockCarvable woolenClay;
     public static BlockCarvable laboratory;
-    public static BlockCarvable pumpkin;
-    public static BlockCarvable jackOLantern;
+    public static BlockCarvablePumpkin pumpkin;
+    public static BlockCarvablePumpkin jackolantern;
     public static BlockVoidstone voidstone;
     public static BlockVoidstone voidstone2;
     public static BlockVoidstonePillar voidstonePillar;
@@ -1280,10 +1280,49 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("pumpkin"))
         {
-            //TODO: Actually finish the class for this
-            pumpkin = (BlockCarvable) new BlockCarvable(Material.gourd).setHardness(2.0F).setResistance(5F).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("pumpkin", Blocks.pumpkin, 0, 0);
-            //pumpkin.carverHelper.addVariation("chisel.title.pumpkin.1.desc", 1, "pumpkin/1");
+            pumpkin = (BlockCarvablePumpkin) new BlockCarvablePumpkin(false).setHardness(2.0F).setResistance(5F).setStepSound(Block.soundTypeStone);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.0.desc"), 0, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.1.desc"), 1, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.2.desc"), 2, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.3.desc"), 3, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.4.desc"), 4, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.5.desc"), 5, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.6.desc"), 6, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.7.desc"), 7, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.8.desc"), 8, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.9.desc"), 9, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.10.desc"), 10, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.11.desc"), 11, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.12.desc"), 12, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.13.desc"), 13, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.14.desc"), 14, pumpkin);
+            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.15.desc"), 15, pumpkin);
+            pumpkin.carverHelper.register(pumpkin, "pumpkin");
+            Carving.chisel.registerOre("pumpkin", "pumpkin");
+        }
+
+        if(Configurations.featureEnabled("jackolantern"))
+        {
+            Carving.chisel.addVariation("jackolantern", Blocks.pumpkin, 0, 0);
+            jackolantern = (BlockCarvablePumpkin) new BlockCarvablePumpkin(false).setHardness(2.0F).setResistance(5F).setStepSound(Block.soundTypeStone);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.0.desc"), 0, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.1.desc"), 1, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.2.desc"), 2, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.3.desc"), 3, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.4.desc"), 4, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.5.desc"), 5, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.6.desc"), 6, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.7.desc"), 7, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.8.desc"), 8, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.9.desc"), 9, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.10.desc"), 10, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.11.desc"), 11, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.12.desc"), 12, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.13.desc"), 13, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.14.desc"), 14, jackolantern);
+            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.jackolantern.15.desc"), 15, jackolantern);
+            Carving.chisel.registerOre("jackolantern", "jackolantern");
         }
 
         if(Configurations.featureEnabled("leaves")){
