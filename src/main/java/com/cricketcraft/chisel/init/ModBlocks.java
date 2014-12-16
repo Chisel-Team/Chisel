@@ -8,6 +8,7 @@ import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.ItemMarbleSlab;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -83,6 +84,7 @@ public class ModBlocks {
     public static BlockCarvable hexPlating;
     public static BlockCarvable technical;
     public static BlockCarvable bone;
+    public static BlockCarvable scorching;
 
     // 1.7
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
@@ -1500,7 +1502,6 @@ public class ModBlocks {
             technical.carverHelper.register(technical, "technical");
             Carving.chisel.registerOre("technical", "technical");
         }
-
         if(Configurations.featureEnabled("bone"))
         {
         	bone = (BlockCarvable) new BlockCarvable(Material.rock);
@@ -1511,6 +1512,17 @@ public class ModBlocks {
             bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.4.desc"), 4, "bone/bricks");
             bone.carverHelper.register(bone, "bone");
             Carving.chisel.registerOre("bone", "bone");
+        }
+        if(Configurations.featureEnabled("scorching"))
+        {
+        	scorching = (BlockCarvable) new BlockCarvable(Material.rock).setLightLevel(1F);
+        	scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.0.desc"), 0, "scorching/scorch");
+            scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.1.desc"), 1, "scorching/bordered");
+            scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.2.desc"), 2, "scorching/beveled");
+            scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.3.desc"), 3, "scorching/cracked");
+            scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.4.desc"), 4, "scorching/deep");
+            scorching.carverHelper.register(scorching, "scorching");
+            Carving.chisel.registerOre("scorching", "scorching");
         }
     }
 }
