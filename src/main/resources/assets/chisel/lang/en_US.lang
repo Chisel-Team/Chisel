@@ -123,23 +123,16 @@ tile.grimstone.13.desc=Grimstone plate
 tile.grimstone.14.desc=Flaky Grimstone
 
 #Technical Block
-tile.mechanical.name=Technical Block
-tile.mechanical.0.desc=Scaffold
-tile.mechanical.1.desc=Panels with Caution Tape
-tile.mechanical.2.desc=An Old Relic from the land of Oneteufyv
-tile.mechanical.3.desc=Under-Pipe (Large Pipe)
-tile.mechanical.4.desc=Fan (Fast)
-tile.mechanical.5.desc=Under-Pipe (Small Pipes)
-tile.mechanical.6.desc=Fan (Off)
-tile.mechanical.7.desc=Vents
-tile.mechanical.8.desc=Glowing Vents
-tile.mechanical.9.desc=Scaffold
-tile.mechanical.10.desc=Scaffold
-tile.mechanical.11.desc=Scaffold
-tile.mechanical.12.desc=Scaffold
-tile.mechanical.13.desc=Scaffold
-tile.mechanical.14.desc=Scaffold
-tile.mechanical.15.desc=Scaffold
+tile.technical.name=Technical Block
+tile.technical.0.desc=Scaffold
+tile.technical.1.desc=Panels with Caution Tape
+tile.technical.2.desc=An Old Relic from the land of Oneteufyv
+tile.technical.3.desc=Under-Pipe (Large Pipe)
+tile.technical.4.desc=Fan (Fast)
+tile.technical.5.desc=Under-Pipe (Small Pipes)
+tile.technical.6.desc=Fan (Off)
+tile.technical.7.desc=Vents
+tile.technical.8.desc=Glowing Vents
 
 #Cloudbrick
 tile.cloudbrick.name=Cloudbrick
