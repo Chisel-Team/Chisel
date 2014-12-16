@@ -85,6 +85,7 @@ public class ModBlocks {
     public static BlockCarvable technical;
     public static BlockCarvable bone;
     public static BlockCarvable scorching;
+    public static BlockCarvable brick;
 
     // 1.7
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
@@ -1523,6 +1524,19 @@ public class ModBlocks {
             scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.4.desc"), 4, "scorching/deep");
             scorching.carverHelper.register(scorching, "scorching");
             Carving.chisel.registerOre("scorching", "scorching");
+        }
+        if(Configurations.featureEnabled("brick"))
+        {
+            brick = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("brick", Blocks.brick_block, 0, 0);
+            brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.1.desc"), 1, "brick/large");
+            brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.2.desc"), 2, "brick/mortarless");
+            brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.3.desc"), 3, "brick/varied");
+            //brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.4.desc"), 4, "brick/cracked");
+            brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.5.desc"), 5, "brick/aged");
+            //brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.6.desc"), 6, "brick/mossy");
+            brick.carverHelper.register(brick, "brick");
+            Carving.chisel.registerOre("brick", "brick");
         }
     }
 }
