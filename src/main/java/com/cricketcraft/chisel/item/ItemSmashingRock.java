@@ -1,13 +1,16 @@
 package com.cricketcraft.chisel.item;
 
+import java.util.List;
+
 import com.cricketcraft.chisel.entity.EntitySmashingRock;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class ItemSmashingRock extends Item
+public class ItemSmashingRock extends BaseItem
 {
 
     public ItemSmashingRock()

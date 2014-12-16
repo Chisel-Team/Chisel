@@ -1,13 +1,16 @@
 package com.cricketcraft.chisel.item;
 
+import java.util.List;
+
 import com.cricketcraft.chisel.entity.EntityCloudInABottle;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class ItemCloudInABottle extends Item
+public class ItemCloudInABottle extends BaseItem
 {
 
     public ItemCloudInABottle()
@@ -15,7 +18,6 @@ public class ItemCloudInABottle extends Item
         super();
         setUnlocalizedName("cloudBottle");
     }
-
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {

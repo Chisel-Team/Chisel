@@ -15,7 +15,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class ItemUpgrade extends Item{
+public class ItemUpgrade extends BaseItem{
 
     public IIcon[] icons = new IIcon[6];
 
@@ -32,11 +32,6 @@ public class ItemUpgrade extends Item{
         if(tile != null && tile instanceof TileEntityAutoChisel){
         }
         return true;
-    }
-
-    @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4){
-        list.add(StatCollector.translateToLocal(this.getUnlocalizedName(itemStack) + ".desc"));
     }
 
     @Override
