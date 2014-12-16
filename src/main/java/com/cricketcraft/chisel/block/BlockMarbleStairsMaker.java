@@ -1,12 +1,13 @@
 package com.cricketcraft.chisel.block;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.item.ItemCarvable;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class BlockMarbleStairsMaker

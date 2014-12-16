@@ -2,17 +2,17 @@ package com.cricketcraft.chisel.item;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.Configurations;
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.utils.General;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
+import com.cricketcraft.chisel.Configurations;
+import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.utils.General;
 
 public class ItemCarvable extends ItemBlock
 {

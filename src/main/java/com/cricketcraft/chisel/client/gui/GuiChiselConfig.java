@@ -1,11 +1,12 @@
 package com.cricketcraft.chisel.client.gui;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.Configurations;
-
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
+
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.Configurations;
+
 import cpw.mods.fml.client.config.GuiConfig;
 
 public class GuiChiselConfig extends GuiConfig

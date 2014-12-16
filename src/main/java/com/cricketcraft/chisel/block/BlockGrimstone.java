@@ -2,15 +2,15 @@ package com.cricketcraft.chisel.block;
 
 import java.util.Random;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.client.GeneralChiselClient;
-import com.cricketcraft.chisel.init.ModTabs;
-import com.cricketcraft.chisel.utils.General;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.client.GeneralChiselClient;
+import com.cricketcraft.chisel.init.ModTabs;
+import com.cricketcraft.chisel.utils.General;
 
 public class BlockGrimstone extends BlockCarvable {
     public IIcon iconStar;

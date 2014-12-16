@@ -2,13 +2,13 @@ package com.cricketcraft.chisel.inventory;
 
 import java.util.ArrayList;
 
-import com.cricketcraft.chisel.item.ItemChisel;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import com.cricketcraft.chisel.item.ItemChisel;
 
 public class InventoryChiselSelection implements IInventory
 {

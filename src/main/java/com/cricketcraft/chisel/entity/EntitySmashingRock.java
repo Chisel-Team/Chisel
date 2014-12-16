@@ -1,13 +1,13 @@
 package com.cricketcraft.chisel.entity;
 
-import com.cricketcraft.chisel.utils.General;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.utils.General;
 
 public class EntitySmashingRock extends EntityThrowable
 {

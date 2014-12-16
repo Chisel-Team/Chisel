@@ -1,10 +1,11 @@
 package com.cricketcraft.chisel.compat;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+
 import com.cricketcraft.chisel.compat.ModIntegration.IModIntegration;
 import com.cricketcraft.chisel.init.ModBlocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.event.FMLInterModComms;
 
 public class FMPIntegration implements IModIntegration{

@@ -4,14 +4,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.init.ModTabs;
-import com.cricketcraft.chisel.inventory.InventoryLargePresent;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -32,6 +24,15 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
+import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.init.ModTabs;
+import com.cricketcraft.chisel.inventory.InventoryLargePresent;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

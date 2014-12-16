@@ -2,13 +2,13 @@ package com.cricketcraft.chisel;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.block.BlockCarvable;
-
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import net.minecraft.item.ItemStack;
+
+import com.cricketcraft.chisel.block.BlockCarvable;
 
 public class Waila implements IWailaDataProvider
 {

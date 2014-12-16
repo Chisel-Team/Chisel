@@ -1,11 +1,11 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.client.render.BlockMarblePillarRenderer;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.client.render.BlockMarblePillarRenderer;
 
 public class BlockMarblePillar extends BlockCarvable {
     public IIcon sides[] = new IIcon[6];

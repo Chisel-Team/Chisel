@@ -1,12 +1,12 @@
 package com.cricketcraft.chisel.item;
 
-import com.cricketcraft.chisel.block.BlockMarbleSlab;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.block.BlockMarbleSlab;
 
 public class ItemMarbleSlab extends ItemCarvable
 {

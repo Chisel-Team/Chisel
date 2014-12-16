@@ -3,14 +3,14 @@ package com.cricketcraft.chisel.block;
 
 import java.util.Random;
 
-import com.cricketcraft.chisel.Configurations;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.Configurations;
 
 public class BlockCloud extends BlockCarvable {
 

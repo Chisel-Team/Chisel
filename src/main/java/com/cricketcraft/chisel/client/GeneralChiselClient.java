@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel.client;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -8,8 +10,6 @@ import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 import com.cricketcraft.chisel.Configurations;
 import com.cricketcraft.chisel.block.BlockGrimstone;

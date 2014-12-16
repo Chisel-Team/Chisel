@@ -1,9 +1,9 @@
 package com.cricketcraft.chisel.carving;
 
-import com.cricketcraft.chisel.client.render.TextureSubmap;
-
 import net.minecraft.block.Block;
 import net.minecraft.util.IIcon;
+
+import com.cricketcraft.chisel.client.render.TextureSubmap;
 
 public class CarvableVariation
 {

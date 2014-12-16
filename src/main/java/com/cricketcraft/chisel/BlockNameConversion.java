@@ -2,10 +2,11 @@ package com.cricketcraft.chisel;
 
 import java.util.HashMap;
 
-import com.cricketcraft.chisel.utils.General;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+
+import com.cricketcraft.chisel.utils.General;
+
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 

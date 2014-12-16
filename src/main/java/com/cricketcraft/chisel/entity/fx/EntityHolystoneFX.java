@@ -1,11 +1,11 @@
 package com.cricketcraft.chisel.entity.fx;
 
-import com.cricketcraft.chisel.block.BlockHolystone;
-import com.cricketcraft.chisel.utils.General;
-
 import net.minecraft.client.particle.EntityFX;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.block.BlockHolystone;
+import com.cricketcraft.chisel.utils.General;
 
 public class EntityHolystoneFX extends EntityFX
 {

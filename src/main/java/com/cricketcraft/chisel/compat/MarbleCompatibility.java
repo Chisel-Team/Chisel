@@ -1,8 +1,9 @@
 package com.cricketcraft.chisel.compat;
 
+import net.minecraft.block.Block;
+
 import com.cricketcraft.chisel.carving.Carving;
 
-import net.minecraft.block.Block;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 
 public class MarbleCompatibility
