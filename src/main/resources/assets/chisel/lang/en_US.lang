@@ -134,6 +134,13 @@ tile.technical.6.desc=Fan (Off)
 tile.technical.7.desc=Vents
 tile.technical.8.desc=Glowing Vents
 
+tile.scorching.name=Scorching Block
+tile.scorching.0.desc=Solidified Fire
+tile.scorching.1.desc=Edged Solidified Fire
+tile.scorching.2.desc=Beveled Solidified Fire
+tile.scorching.3.desc=Burn Stone Encased Solidified Fire
+tile.scorching.4.desc=Deep Core Block
+
 #Cloudbrick
 tile.cloudbrick.name=Cloudbrick
 tile.cloudbrick.0.name=Large Cloudbricks
