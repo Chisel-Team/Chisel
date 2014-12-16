@@ -1494,8 +1494,8 @@ public class ModBlocks {
             mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.4.desc"), 4, "mechanical/fanFast");
             mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.5.desc"), 5, "mechanical/pipesSmall");
             mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.6.desc"), 6, "mechanical/fanStill");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.7.desc"), 7, "mechanical/vents"); // I need help making this thing accept the CTM :(
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.8.desc"), 8, "mechanical/ventsglowing");
+            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.7.desc"), 7, "mechanical/vent"); // I need help making this thing accept the CTM :(
+            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.8.desc"), 8, "mechanical/ventGlowing");
             //mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.9.desc"), 9, "mechanical/vent2");
             mechanical.carverHelper.register(mechanical, "mechanical");
             Carving.chisel.registerOre("mechanical", "mechanical");
