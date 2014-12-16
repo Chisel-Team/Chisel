@@ -29,6 +29,7 @@ saves
 asm
 config
 logs
+screenshots
 
 *.txt
 *.json
