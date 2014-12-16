@@ -1,10 +1,5 @@
 package com.cricketcraft.chisel.carving;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.Configurations;
 import com.cricketcraft.chisel.block.BlockMarbleSlab;
@@ -13,7 +8,7 @@ import com.cricketcraft.chisel.client.render.CTM;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.utils.GeneralClient;
-
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
@@ -22,7 +17,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-import cpw.mods.fml.common.registry.GameRegistry;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class CarvableHelper
 {
@@ -330,11 +329,9 @@ public class CarvableHelper
         if(variation.block == null)
         {
             Carving.chisel.addVariation(name, block, blockMeta, variation.metadata);
-            block.setHarvestLevel("chisel", 0, blockMeta);
         } else
         {
             Carving.chisel.addVariation(name, variation.block, variation.blockMeta, variation.metadata);
-            variation.block.setHarvestLevel("chisel", 0, variation.blockMeta);
         }
     }
 
