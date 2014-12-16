@@ -1,18 +1,20 @@
 package com.cricketcraft.chisel.item;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselMode;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.Carving;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.world.World;
 
 public class ItemChisel extends ItemTool implements IChiselMode {
     private static final HashSet<String> toolSet = new HashSet<String>();
@@ -28,7 +30,6 @@ public class ItemChisel extends ItemTool implements IChiselMode {
 
         toolSet.add("chisel");
     }
-
     @Override
     public Set<String> getToolClasses(ItemStack stack) {
         return toolSet;
@@ -49,5 +50,9 @@ public class ItemChisel extends ItemTool implements IChiselMode {
     @Override
     public ChiselMode getChiselMode(ItemStack itemStack) {
         return ChiselMode.SINGLE;
+    }
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4){
+    	StatCollector.translateToLocal(itemStack.getUnlocalizedName() + ".desc");
     }
 }
