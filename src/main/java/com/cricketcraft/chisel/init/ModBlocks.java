@@ -85,7 +85,8 @@ public class ModBlocks {
     public static BlockCarvable technical;
     public static BlockCarvable bone;
     public static BlockCarvable scorching;
-    public static BlockCarvable brick;
+    public static BlockCarvable brickCustom;
+    public static BlockCarvableTorch torch;
 
     // 1.7
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
@@ -1525,18 +1526,31 @@ public class ModBlocks {
             scorching.carverHelper.register(scorching, "scorching");
             Carving.chisel.registerOre("scorching", "scorching");
         }
-        if(Configurations.featureEnabled("brick"))
+        if(Configurations.featureEnabled("brickCustom"))
         {
-            brick = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone);
-            Carving.chisel.addVariation("brick", Blocks.brick_block, 0, 0);
-            brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.1.desc"), 1, "brick/large");
-            brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.2.desc"), 2, "brick/mortarless");
-            brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.3.desc"), 3, "brick/varied");
-            //brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.4.desc"), 4, "brick/cracked");
-            brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.5.desc"), 5, "brick/aged");
-            //brick.carverHelper.addVariation(StatCollector.translateToLocal("tile.brick.6.desc"), 6, "brick/mossy");
-            brick.carverHelper.register(brick, "brick");
-            Carving.chisel.registerOre("brick", "brick");
+            brickCustom = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("brickCustom", Blocks.brick_block, 0, 0);
+            brickCustom.carverHelper.addVariation(StatCollector.translateToLocal("tile.brickCustom.1.desc"), 1, "brickCustom/large");
+            brickCustom.carverHelper.addVariation(StatCollector.translateToLocal("tile.brickCustom.2.desc"), 2, "brickCustom/mortarless");
+            brickCustom.carverHelper.addVariation(StatCollector.translateToLocal("tile.brickCustom.3.desc"), 3, "brickCustom/varied");
+            //brickCustom.carverHelper.addVariation(StatCollector.translateToLocal("tile.brickCustom.4.desc"), 4, "brickCustom/cracked");
+            brickCustom.carverHelper.addVariation(StatCollector.translateToLocal("tile.brickCustom.5.desc"), 5, "brickCustom/aged");
+            //brickCustom.carverHelper.addVariation(StatCollector.translateToLocal("tile.brickCustom.6.desc"), 6, "brickCustom/mossy");
+            brickCustom.carverHelper.register(brickCustom, "brickCustom");
+            Carving.chisel.registerOre("brickCustom", "brickCustom");
         }
+        /*if(Configurations.featureEnabled("torch"))
+        {
+        	torch = (BlockCarvableTorch) new BlockCarvableTorch().setLightLevel(0.8F);
+            Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
+            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.1.desc"), 1, "torch/candle");
+            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.2.desc"), 2, "torch/candle-holder");
+            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.3.desc"), 3, "torch/lantern");
+            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.4.desc"), 4, "torch/lantern-letters");
+            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.5.desc"), 5, "torch/lamp");
+            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.6.desc"), 6, "torch/lamp-tall");
+            torch.carverHelper.register(torch, "torch");
+            Carving.chisel.registerOre("torch", "torch");
+        }*/
     }
 }
