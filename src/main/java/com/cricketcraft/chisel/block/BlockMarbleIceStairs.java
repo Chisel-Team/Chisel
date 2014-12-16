@@ -2,12 +2,12 @@ package com.cricketcraft.chisel.block;
 
 import java.util.Random;
 
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.init.ModBlocks;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.init.ModBlocks;
 
 public class BlockMarbleIceStairs extends BlockMarbleStairs
 {

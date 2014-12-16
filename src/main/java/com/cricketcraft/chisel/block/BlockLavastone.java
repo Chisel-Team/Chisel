@@ -3,10 +3,10 @@ package com.cricketcraft.chisel.block;
 
 import java.util.Random;
 
-import com.cricketcraft.chisel.client.GeneralChiselClient;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.client.GeneralChiselClient;
 
 public class BlockLavastone extends BlockMarbleTexturedOre
 {

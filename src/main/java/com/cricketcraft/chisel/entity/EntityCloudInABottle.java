@@ -2,12 +2,12 @@ package com.cricketcraft.chisel.entity;
 
 import java.util.Random;
 
-import com.cricketcraft.chisel.init.ModBlocks;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.init.ModBlocks;
 
 public class EntityCloudInABottle extends EntityThrowable
 {

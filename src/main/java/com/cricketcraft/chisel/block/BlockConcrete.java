@@ -1,11 +1,12 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.Configurations;
-import com.cricketcraft.chisel.client.GeneralChiselClient;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.Configurations;
+import com.cricketcraft.chisel.client.GeneralChiselClient;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 

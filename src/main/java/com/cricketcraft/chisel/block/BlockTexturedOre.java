@@ -1,11 +1,11 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.client.render.BlockTexturedOreRenderer;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+
+import com.cricketcraft.chisel.client.render.BlockTexturedOreRenderer;
 
 public class BlockTexturedOre extends Block
 {

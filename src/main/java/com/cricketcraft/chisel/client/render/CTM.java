@@ -1,9 +1,9 @@
 package com.cricketcraft.chisel.client.render;
 
-import com.cricketcraft.chisel.api.IFacade;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
+
+import com.cricketcraft.chisel.api.IFacade;
 
 public class CTM
 {

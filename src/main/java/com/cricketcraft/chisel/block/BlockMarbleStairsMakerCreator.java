@@ -1,8 +1,8 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.carving.CarvableHelper;
-
 import net.minecraft.block.Block;
+
+import com.cricketcraft.chisel.carving.CarvableHelper;
 
 public interface BlockMarbleStairsMakerCreator
 {

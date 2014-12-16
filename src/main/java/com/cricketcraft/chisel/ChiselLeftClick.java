@@ -3,13 +3,6 @@ package com.cricketcraft.chisel;
 import java.util.HashMap;
 import java.util.Random;
 
-import com.cricketcraft.chisel.api.ChiselMode;
-import com.cricketcraft.chisel.carving.CarvingVariation;
-import com.cricketcraft.chisel.client.GeneralChiselClient;
-import com.cricketcraft.chisel.init.ModBlocks;
-import com.cricketcraft.chisel.init.ModItems;
-import com.cricketcraft.chisel.item.ItemChisel;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -19,6 +12,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
+
+import com.cricketcraft.chisel.api.ChiselMode;
+import com.cricketcraft.chisel.carving.CarvingVariation;
+import com.cricketcraft.chisel.client.GeneralChiselClient;
+import com.cricketcraft.chisel.init.ModBlocks;
+import com.cricketcraft.chisel.init.ModItems;
+import com.cricketcraft.chisel.item.ItemChisel;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 

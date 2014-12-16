@@ -1,9 +1,5 @@
 package com.cricketcraft.chisel.inventory;
 
-import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.item.ItemChisel;
-import com.cricketcraft.chisel.utils.General;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -11,6 +7,10 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
+import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.item.ItemChisel;
+import com.cricketcraft.chisel.utils.General;
 
 public class ContainerChisel extends Container
 {

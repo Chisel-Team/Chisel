@@ -2,9 +2,6 @@ package com.cricketcraft.chisel.item;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,8 +9,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 
 public class ItemUpgrade extends BaseItem{
 

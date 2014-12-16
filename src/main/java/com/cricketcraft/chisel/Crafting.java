@@ -1,8 +1,5 @@
 package com.cricketcraft.chisel;
 
-import com.cricketcraft.chisel.init.ModBlocks;
-import com.cricketcraft.chisel.init.ModItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -11,6 +8,10 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import com.cricketcraft.chisel.init.ModBlocks;
+import com.cricketcraft.chisel.init.ModItems;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Crafting {

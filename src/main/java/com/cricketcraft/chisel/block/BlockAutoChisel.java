@@ -3,11 +3,6 @@ package com.cricketcraft.chisel.block;
 import java.util.List;
 import java.util.Random;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
-import com.cricketcraft.chisel.init.ModBlocks;
-import com.cricketcraft.chisel.init.ModItems;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,6 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
+import com.cricketcraft.chisel.init.ModBlocks;
+import com.cricketcraft.chisel.init.ModItems;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

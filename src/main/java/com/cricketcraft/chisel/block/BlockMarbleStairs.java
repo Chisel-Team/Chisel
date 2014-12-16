@@ -2,12 +2,6 @@ package com.cricketcraft.chisel.block;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.client.render.BlockMarbleStairsRenderer;
-import com.cricketcraft.chisel.init.ModTabs;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -18,6 +12,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.client.render.BlockMarbleStairsRenderer;
+import com.cricketcraft.chisel.init.ModTabs;
 
 public class BlockMarbleStairs extends BlockStairs implements ICarvable
 {
