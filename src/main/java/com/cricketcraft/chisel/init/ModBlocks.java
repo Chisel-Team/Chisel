@@ -1527,5 +1527,6 @@ public class ModBlocks {
             torch.carverHelper.register(torch, "torch");
             Carving.chisel.registerOre("torch", "torch");
         }*/
+
     }
 }
