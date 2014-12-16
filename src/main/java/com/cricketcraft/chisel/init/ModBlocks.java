@@ -81,7 +81,7 @@ public class ModBlocks {
     public static BlockSnakestone sandSnakestone;
     public static BlockSnakestoneObsidian obsidianSnakestone;
     public static BlockCarvable hexPlating;
-    public static BlockCarvable mechanical;
+    public static BlockCarvable technical;
     public static BlockCarvable bone;
 
     // 1.7
@@ -1485,20 +1485,20 @@ public class ModBlocks {
             Carving.chisel.registerOre("grimstone", "grimstone");
         }
 
-        if(Configurations.featureEnabled("mechanical")){
-            mechanical = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F);
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.0.desc"), 0, "mechanical/scaffold");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.1.desc"), 1, "mechanical/cautiontape");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.2.desc"), 2, "mechanical/industrialrelic");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.3.desc"), 3, "mechanical/pipesLarge");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.4.desc"), 4, "mechanical/fanFast");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.5.desc"), 5, "mechanical/pipesSmall");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.6.desc"), 6, "mechanical/fanStill");
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.7.desc"), 7, "mechanical/vent"); // I need help making this thing accept the CTM :(
-            mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.8.desc"), 8, "mechanical/ventGlowing");
-            //mechanical.carverHelper.addVariation(StatCollector.translateToLocal("tile.mechanical.9.desc"), 9, "mechanical/vent2");
-            mechanical.carverHelper.register(mechanical, "mechanical");
-            Carving.chisel.registerOre("mechanical", "mechanical");
+        if(Configurations.featureEnabled("technical")){
+            technical = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F);
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.0.desc"), 0, "technical/scaffold");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.1.desc"), 1, "technical/cautiontape");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.2.desc"), 2, "technical/industrialrelic");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.3.desc"), 3, "technical/pipesLarge");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.4.desc"), 4, "technical/fanFast");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.5.desc"), 5, "technical/pipesSmall");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.6.desc"), 6, "technical/fanStill");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.7.desc"), 7, "technical/vent"); // I need help making this thing accept the CTM :(
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.8.desc"), 8, "technical/ventGlowing");
+            //technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.9.desc"), 9, "technical/vent2");
+            technical.carverHelper.register(technical, "technical");
+            Carving.chisel.registerOre("technical", "technical");
         }
 
         if(Configurations.featureEnabled("bone"))
