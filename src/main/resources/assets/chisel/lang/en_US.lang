@@ -122,18 +122,18 @@ tile.grimstone.12.desc=Smooth Grimstone Plate
 tile.grimstone.13.desc=Grimstone plate
 tile.grimstone.14.desc=Flaky Grimstone
 
-#Mechanical Block
-tile.mechanical.name=Mechanical Block
+#Technical Block
+tile.mechanical.name=Technical Block
 tile.mechanical.0.desc=Scaffold
 tile.mechanical.1.desc=Panels with Caution Tape
-tile.mechanical.2.desc=An Old Relic from the elves of Alfheim
+tile.mechanical.2.desc=An Old Relic from the land of Oneteufyv
 tile.mechanical.3.desc=Tangled Wires
-tile.mechanical.4.desc=Fan
-tile.mechanical.5.desc=Vent
-tile.mechanical.6.desc=Glowing Vent
-tile.mechanical.7.desc=Hex Patterned Panel
-tile.mechanical.8.desc=Gear
-tile.mechanical.9.desc=Alternate Vent
+tile.mechanical.4.desc=Fan (Fast)
+tile.mechanical.5.desc=Fan (Slow)
+tile.mechanical.6.desc=Fan (Off)
+tile.mechanical.7.desc=Vent
+tile.mechanical.8.desc=Vent with lights
+tile.mechanical.9.desc=Scaffold
 tile.mechanical.10.desc=Scaffold
 tile.mechanical.11.desc=Scaffold
 tile.mechanical.12.desc=Scaffold
