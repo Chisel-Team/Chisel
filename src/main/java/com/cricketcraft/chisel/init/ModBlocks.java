@@ -1,56 +1,20 @@
 package com.cricketcraft.chisel.init;
 
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.Configurations;
+import com.cricketcraft.chisel.block.*;
+import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.item.ItemCarvable;
+import com.cricketcraft.chisel.item.ItemMarbleSlab;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
-
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.Configurations;
-import com.cricketcraft.chisel.block.BlockAutoChisel;
-import com.cricketcraft.chisel.block.BlockBeaconBase;
-import com.cricketcraft.chisel.block.BlockCarvable;
-import com.cricketcraft.chisel.block.BlockCarvableGlass;
-import com.cricketcraft.chisel.block.BlockCarvablePane;
-import com.cricketcraft.chisel.block.BlockCarvablePowered;
-import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
-import com.cricketcraft.chisel.block.BlockCarvableTorch;
-import com.cricketcraft.chisel.block.BlockCloud;
-import com.cricketcraft.chisel.block.BlockConcrete;
-import com.cricketcraft.chisel.block.BlockEldritch;
-import com.cricketcraft.chisel.block.BlockGrimstone;
-import com.cricketcraft.chisel.block.BlockHolystone;
-import com.cricketcraft.chisel.block.BlockLavastone;
-import com.cricketcraft.chisel.block.BlockLeaf;
-import com.cricketcraft.chisel.block.BlockLightstoneCarvable;
-import com.cricketcraft.chisel.block.BlockMarbleBookshelf;
-import com.cricketcraft.chisel.block.BlockMarbleCarpet;
-import com.cricketcraft.chisel.block.BlockMarbleIce;
-import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
-import com.cricketcraft.chisel.block.BlockMarblePillar;
-import com.cricketcraft.chisel.block.BlockMarbleSlab;
-import com.cricketcraft.chisel.block.BlockMarbleStairs;
-import com.cricketcraft.chisel.block.BlockMarbleStairsMaker;
-import com.cricketcraft.chisel.block.BlockMarbleStairsMakerCreator;
-import com.cricketcraft.chisel.block.BlockMarbleWall;
-import com.cricketcraft.chisel.block.BlockPresent;
-import com.cricketcraft.chisel.block.BlockRoadLine;
-import com.cricketcraft.chisel.block.BlockSnakestone;
-import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
-import com.cricketcraft.chisel.block.BlockVoidstone;
-import com.cricketcraft.chisel.block.BlockVoidstonePillar;
-import com.cricketcraft.chisel.block.BlockVoidstonePillar2;
-import com.cricketcraft.chisel.block.BlockWaterstone;
-import com.cricketcraft.chisel.block.ItemBlockAutoChisel;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.item.ItemCarvable;
-import com.cricketcraft.chisel.item.ItemMarbleSlab;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
     public static BlockCarvable marble;
@@ -105,8 +69,8 @@ public class ModBlocks {
     public static BlockCarvablePane paperWall;
     public static BlockCarvable woolenClay;
     public static BlockCarvable laboratory;
-    public static BlockCarvablePumpkin pumpkin;
-    public static BlockCarvablePumpkin jackolantern;
+    public static BlockCarvablePumpkin[] pumpkin = new BlockCarvablePumpkin[16];
+    public static BlockCarvablePumpkin[] jackolantern = new BlockCarvablePumpkin[16];
     public static BlockVoidstone voidstone;
     public static BlockVoidstone voidstone2;
     public static BlockVoidstonePillar voidstonePillar;
@@ -1319,49 +1283,25 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("pumpkin"))
         {
+            for(int metadata = 0; metadata < 16; metadata++){
+                pumpkin[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(false).setBlockName("pumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
+                pumpkin[metadata].setInformation("pumpkin/pumpkin_face_" + (metadata + 1) + "_off");
+                GameRegistry.registerBlock(pumpkin[metadata], "pumpkin" + (metadata + 1));
+                Carving.chisel.addVariation("pumpkin", pumpkin[metadata], 0, (metadata + 1));
+            }
             Carving.chisel.addVariation("pumpkin", Blocks.pumpkin, 0, 0);
-            pumpkin = (BlockCarvablePumpkin) new BlockCarvablePumpkin(false).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ModTabs.tabChiselBlocks);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.0.desc"), 0, "pumpkin/pumpkin_face_1_off", pumpkin, 0);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.1.desc"), 1, "pumpkin/pumpkin_face_2_off", pumpkin, 1);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.2.desc"), 2, "pumpkin/pumpkin_face_3_off", pumpkin, 2);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.3.desc"), 3, "pumpkin/pumpkin_face_4_off", pumpkin, 3);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.4.desc"), 4, "pumpkin/pumpkin_face_5_off", pumpkin, 4);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.5.desc"), 5, "pumpkin/pumpkin_face_6_off", pumpkin, 5);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.6.desc"), 6, "pumpkin/pumpkin_face_7_off", pumpkin, 6);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.7.desc"), 7, "pumpkin/pumpkin_face_8_off", pumpkin, 7);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.8.desc"), 8, "pumpkin/pumpkin_face_9_off", pumpkin, 8);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.9.desc"), 9, "pumpkin/pumpkin_face_10_off", pumpkin, 9);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.10.desc"), 10, "pumpkin/pumpkin_face_11_off", pumpkin, 10);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.11.desc"), 11, "pumpkin/pumpkin_face_12_off", pumpkin, 11);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.12.desc"), 12, "pumpkin/pumpkin_face_13_off", pumpkin, 12);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.13.desc"), 13, "pumpkin/pumpkin_face_14_off", pumpkin, 13);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.14.desc"), 14, "pumpkin/pumpkin_face_15_off", pumpkin, 14);
-            pumpkin.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.15.desc"), 15, "pumpkin/pumpkin_face_16_off", pumpkin, 15);
-            pumpkin.carverHelper.register(pumpkin, "pumpkin");
             Carving.chisel.registerOre("pumpkin", "pumpkin");
         }
 
         if(Configurations.featureEnabled("jackolantern"))
         {
-            Carving.chisel.addVariation("jackolantern", Blocks.pumpkin, 0, 0);
-            jackolantern = (BlockCarvablePumpkin) new BlockCarvablePumpkin(true).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ModTabs.tabChiselBlocks);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.0.desc"), 0, "pumpkin/pumpkin_face_1_on", jackolantern, 0);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.1.desc"), 1, "pumpkin/pumpkin_face_2_on", jackolantern, 1);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.2.desc"), 2, "pumpkin/pumpkin_face_3_on", jackolantern, 2);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.3.desc"), 3, "pumpkin/pumpkin_face_4_on", jackolantern, 3);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.4.desc"), 4, "pumpkin/pumpkin_face_5_on", jackolantern, 4);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.5.desc"), 5, "pumpkin/pumpkin_face_6_on", jackolantern, 5);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.6.desc"), 6, "pumpkin/pumpkin_face_7_on", jackolantern, 6);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.7.desc"), 7, "pumpkin/pumpkin_face_8_on", jackolantern, 7);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.8.desc"), 8, "pumpkin/pumpkin_face_9_on", jackolantern, 8);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.9.desc"), 9, "pumpkin/pumpkin_face_10_on", jackolantern, 9);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.10.desc"), 10, "pumpkin/pumpkin_face_11_on", jackolantern, 10);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.11.desc"), 11, "pumpkin/pumpkin_face_12_on", jackolantern, 11);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.12.desc"), 12, "pumpkin/pumpkin_face_13_on", jackolantern, 12);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.13.desc"), 13, "pumpkin/pumpkin_face_14_on", jackolantern, 13);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.14.desc"), 14, "pumpkin/pumpkin_face_15_on", jackolantern, 14);
-            jackolantern.carverHelper.addVariation(StatCollector.translateToLocal("tile.pumpkin.15.desc"), 15, "pumpkin/pumpkin_face_16_on", jackolantern, 15);
-            jackolantern.carverHelper.register(jackolantern, "jackolantern");
+            for(int metadata = 0; metadata < 16; metadata++){
+                jackolantern[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(true).setBlockName("litpumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
+                jackolantern[metadata].setInformation("pumpkin/pumpkin_face_" + (metadata + 1) + "_on");
+                GameRegistry.registerBlock(jackolantern[metadata], ("jackolantern" + (metadata + 1)));
+                Carving.chisel.addVariation("jackolantern", jackolantern[metadata], 0, (metadata + 1));
+            }
+            Carving.chisel.addVariation("jackolantern", Blocks.lit_pumpkin, 0, 0);
             Carving.chisel.registerOre("jackolantern", "jackolantern");
         }
 

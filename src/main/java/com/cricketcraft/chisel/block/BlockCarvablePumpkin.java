@@ -1,16 +1,14 @@
 package com.cricketcraft.chisel.block;
 
-import net.minecraft.block.BlockPumpkin;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
-
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.BlockPumpkin;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 
 public class BlockCarvablePumpkin extends BlockPumpkin implements ICarvable{
     public CarvableHelper carverHelper;
@@ -18,43 +16,34 @@ public class BlockCarvablePumpkin extends BlockPumpkin implements ICarvable{
     @SideOnly(Side.CLIENT)
     private IIcon top, face;
 
-    private int blockMetadata;
+    private String faceLocation;
 
     public BlockCarvablePumpkin(boolean isOn) {
         super(isOn);
+        if(isOn)
+            setLightLevel(4.0F);
         carverHelper = new CarvableHelper();
     }
 
     @SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIcon(int side, int meta)
-	{
-        if(side == 0 || side == 1)
-            return top;
-        if(side != 3)
-            return blockIcon;
-        return face;
-	}
+    public IIcon getIcon(int side, int meta)
+    {
+        return side == 1 ? top : (side == 0 ? top : (meta == 2 && side == 2 ? face : (meta == 3 && side == 5 ? face : (meta == 0 && side == 3 ? face : (meta == 1 && side == 4 ? face : this.blockIcon)))));
+    }
 
     @Override
     public void registerBlockIcons(IIconRegister icon){
-        System.out.println(carverHelper.getVariation(blockMetadata).texture);
         top = icon.registerIcon(Chisel.MOD_ID + ":pumpkin/pumpkin_top");
-        face = icon.registerIcon(Chisel.MOD_ID + ":" + carverHelper.getVariation(blockMetadata).texture);
+        face = icon.registerIcon(Chisel.MOD_ID + ":" + faceLocation);
         this.blockIcon = icon.registerIcon(Chisel.MOD_ID + ":pumpkin/pumpkin_side");
     }
 
     @Override
     public CarvableVariation getVariation(int metadata) {
-        blockMetadata = metadata;
         return carverHelper.getVariation(metadata);
     }
 
-    /*@SideOnly(Side.CLIENT)
-    @Override
-    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List subItems){
-        for(int x = 0; x < 16; x++){
-            subItems.add(new ItemStack(this, 1, x));
-        }
-    }*/
+    public void setInformation(String textureLocation){
+        this.faceLocation = textureLocation;
+    }
 }
