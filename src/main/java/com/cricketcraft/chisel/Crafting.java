@@ -1,18 +1,17 @@
 package com.cricketcraft.chisel;
 
+import com.cricketcraft.chisel.init.ModBlocks;
+import com.cricketcraft.chisel.init.ModItems;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-
-import com.cricketcraft.chisel.init.ModBlocks;
-import com.cricketcraft.chisel.init.ModItems;
-
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Crafting {
 
@@ -129,5 +128,11 @@ public class Crafting {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.hexPlating, 1), new Object[]{"XXX", "XYX", "XXX", 'X', "stone", 'Y', "blockCoal"}));
         if(Configurations.featureEnabled("bone"))
         	GameRegistry.addRecipe(new ItemStack(ModBlocks.bone, 4), new Object[]{"XX", "XX", 'X', Items.bone});
+
+        if(Configurations.featureEnabled("pumpkin")){
+            for(int x = 0; x < 16; x++){
+                GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.jackolantern[x]), new Object[]{new ItemStack(ModBlocks.pumpkin[x], 1), new ItemStack(Item.getItemFromBlock(Blocks.torch), 1)});
+            }
+        }
     }
 }
