@@ -1476,7 +1476,7 @@ public class ModBlocks {
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.7.desc"), 7, "technical/vent"); // I need help making this thing accept the CTM :(
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.8.desc"), 8, "technical/ventGlowing");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.9.desc"), 9, "technical/insulation");
-            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.9.desc"), 10, "technical/spinningStuffAnim");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.10.desc"), 10, "technical/spinningStuffAnim");
             technical.carverHelper.register(technical, "technical");
             Carving.chisel.registerOre("technical", "technical");
         }
