@@ -7,6 +7,12 @@ import net.minecraft.util.IIcon;
 
 public class RenderBlocksCTM extends RenderBlocks
 {
+    // globals added to save the JVM some trouble.  No need to constantly create and destroy ints if we don't have to
+    int blockLightBitChannel = 0;
+    int redBitChannel = 0;
+    int greenBitChannel = 0;
+    int blueBitChannel = 0;
+    int sunlightBitChannel = 0;
 
     RenderBlocksCTM()
     {
@@ -56,11 +62,13 @@ public class RenderBlocksCTM extends RenderBlocks
         L[b] = brightnessBottomRight;
         L[c] = brightnessTopRight;
         L[d] = brightnessTopLeft;
-        L[e] = (brightnessBottomLeft + brightnessTopLeft + brightnessTopRight + brightnessBottomRight) / 4;
-        L[xa] = (L[a] + L[b]) / 2;
-        L[xb] = (L[b] + L[c]) / 2;
-        L[xc] = (L[c] + L[d]) / 2;
-        L[xd] = (L[d] + L[a]) / 2;
+
+        // Updated to safely average light and color channels
+        L[e] = averageBrightnessChannels(brightnessBottomLeft, brightnessTopLeft, brightnessTopRight, brightnessBottomRight);
+        L[xa] = averageBrightnessChannels(L[a], L[b]);
+        L[xb] = averageBrightnessChannels(L[b], L[c]);
+        L[xc] = averageBrightnessChannels(L[c], L[d]);
+        L[xd] = averageBrightnessChannels(L[d], L[a]);
 
         R[a] = colorRedBottomLeft;
         R[b] = colorRedBottomRight;
@@ -91,6 +99,48 @@ public class RenderBlocksCTM extends RenderBlocks
         B[xb] = (B[b] + B[c]) / 2;
         B[xc] = (B[c] + B[d]) / 2;
         B[xd] = (B[d] + B[a]) / 2;
+    }
+
+    /*
+     * Takes in a variable number of packed light-integers, and computes the average value
+     * of each 4 bit channel
+     *
+     * For vanilla, these look like:
+     *   (S = skylight and L = block light)
+     *   0000 0000 SSSS 0000 0000 0000 LLLL 0000
+     * With the Colored Light Core installed, these look like:
+     *   (B = Blue, G = Green, R = Red)
+     *   0000 0000 SSSS BBBB GGGG RRRR LLLL 0000
+     *
+     * This method will average all of the values appropriately for the more complex case,
+     * by separating each color channel into a running total, then it will combine the
+     * final results together using integer division and a lot of bit-cramming.
+     *
+     * While slightly more complex, the runtime should not be drastically effected, and
+     * the averaging routine remains compatible with vanilla.
+     *
+     * Authored: CptSpaceToaster - 12/19/2014
+     */
+    int averageBrightnessChannels(int ... lightVals) {
+        blockLightBitChannel = 0;
+        redBitChannel = 0;
+        greenBitChannel = 0;
+        blueBitChannel = 0;
+        sunlightBitChannel = 0;
+
+        for (int light : lightVals) {
+            blockLightBitChannel += ((light >> 4) & 0x0F);
+            redBitChannel +=        ((light >> 8) & 0x0F);
+            greenBitChannel +=      ((light >> 12) & 0x0F);
+            blueBitChannel +=       ((light >> 16) & 0x0F);
+            sunlightBitChannel +=   ((light >> 20) & 0x0F);
+        }
+
+        return ((blockLightBitChannel /lightVals.length)<<4) |
+               ((redBitChannel/lightVals.length)<<8)        |
+               ((greenBitChannel/lightVals.length)<<12)     |
+               ((blueBitChannel/lightVals.length)<<16)      |
+               ((sunlightBitChannel/lightVals.length)<<20);
     }
 
     void side(int a, int b, int c, int d, int iconIndex, boolean flip)
