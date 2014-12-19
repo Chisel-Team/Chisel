@@ -86,6 +86,7 @@ public class ModBlocks {
     public static BlockCarvable scorching;
     public static BlockCarvable brickCustom;
     public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
+    public static BlockCarvable sign;
 
     // 1.7
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
@@ -1526,6 +1527,17 @@ public class ModBlocks {
                 Carving.chisel.addVariation("torch", torch[metadata], 0, (metadata + 1));
             }
             Carving.chisel.registerOre("torch", "torch");
+        }
+        if(Configurations.featureEnabled("warningSign"))
+        {
+        	sign = (BlockCarvable) new BlockCarvable(Material.iron);
+        	sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.0.desc"), 0, "warning/rad");
+            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.1.desc"), 1, "warning/bio");
+            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.2.desc"), 2, "warning/fire");
+            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.3.desc"), 3, "warning/explosion");
+            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.4.desc"), 4, "warning/death");
+            sign.carverHelper.register(sign, "warningSign");
+            Carving.chisel.registerOre("warningSign", "warningSign");
         }
 
     }

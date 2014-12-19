@@ -153,6 +153,15 @@ tile.scorching.2.desc=Beveled Solidified Fire
 tile.scorching.3.desc=Burn Stone Encased Solidified Fire
 tile.scorching.4.desc=Deep Core Block
 
+#Warning
+tile.warningSign.name=Warning Sign
+tile.warningSign.0.desc=Radiation
+tile.warningSign.1.desc=Biohazard
+tile.warningSign.2.desc=Fire
+tile.warningSign.3.desc=Explosion
+tile.warningSign.4.desc=Death
+
+
 #Brick
 tile.brickCustom.name=Brick Block
 tile.brickCustom.1.desc=Large Bricks
