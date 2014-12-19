@@ -85,7 +85,7 @@ public class ModBlocks {
     public static BlockCarvable bone;
     public static BlockCarvable scorching;
     public static BlockCarvable brickCustom;
-    public static BlockCarvableTorch torch;
+    public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
 
     // 1.7
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
@@ -1516,19 +1516,17 @@ public class ModBlocks {
             brickCustom.carverHelper.register(brickCustom, "brickCustom");
             Carving.chisel.registerOre("brickCustom", "brickCustom");
         }
-        /*if(Configurations.featureEnabled("torch"))
+        if(Configurations.featureEnabled("torch"))
         {
-        	torch = (BlockCarvableTorch) new BlockCarvableTorch().setLightLevel(0.8F);
             Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.1.desc"), 1, "torch/candle");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.2.desc"), 2, "torch/candle-holder");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.3.desc"), 3, "torch/lantern");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.4.desc"), 4, "torch/lantern-letters");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.5.desc"), 5, "torch/lamp");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.6.desc"), 6, "torch/lamp-tall");
-            torch.carverHelper.register(torch, "torch");
+            for(int metadata = 0; metadata < 6; metadata++){
+                torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setBlockName("torch").setCreativeTab(ModTabs.tabChiselBlocks);
+                torch[metadata].setInformation("torch" + (metadata + 1));
+                GameRegistry.registerBlock(torch[metadata], "torch" + (metadata + 1));
+                Carving.chisel.addVariation("torch", torch[metadata], 0, (metadata + 1));
+            }
             Carving.chisel.registerOre("torch", "torch");
-        }*/
+        }
 
     }
 }
