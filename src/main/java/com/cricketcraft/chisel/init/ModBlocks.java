@@ -71,8 +71,8 @@ public class ModBlocks {
     public static BlockCarvable laboratory;
     public static BlockCarvablePumpkin[] pumpkin = new BlockCarvablePumpkin[16];
     public static BlockCarvablePumpkin[] jackolantern = new BlockCarvablePumpkin[16];
-    public static BlockVoidstone voidstone;
-    public static BlockVoidstone voidstone2;
+    public static BlockCarvable voidstone;
+    public static BlockMarbleTexturedOre voidstone2;
     public static BlockVoidstonePillar voidstonePillar;
     public static BlockVoidstonePillar2 voidstonePillar2;
     public static Block autoChisel;
@@ -1346,7 +1346,7 @@ public class ModBlocks {
         }
 
         if(Configurations.featureEnabled("voidstone")){
-                voidstone = (BlockVoidstone) new BlockVoidstone(null).setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
+                voidstone = (BlockCarvable) new BlockCarvable().setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks).setHardness(5.0F).setResistance(10.0F);
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/raw");
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/quarters");
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/smooth");
@@ -1359,7 +1359,7 @@ public class ModBlocks {
                 voidstone.carverHelper.register(voidstone, "voidstone");
                 Carving.chisel.registerOre("voidstone", "voidstone");
 
-                voidstone2 = (BlockVoidstone) new BlockVoidstone(Chisel.MOD_ID + ":voidstone/animated/void").setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
+                voidstone2 = (BlockMarbleTexturedOre) new BlockMarbleTexturedOre(Material.rock, Chisel.MOD_ID + ":voidstone/animated/void").setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks).setHardness(5.0F).setResistance(10.0F);
                 voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/animated/raw");
                 voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/animated/quarters");
                 voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/animated/smooth");
