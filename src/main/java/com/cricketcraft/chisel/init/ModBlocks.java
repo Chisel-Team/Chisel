@@ -1494,11 +1494,6 @@ public class ModBlocks {
             technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.14.desc"), 3, "technical/fanStillTransparent");
             technical2.carverHelper.register(technical2, "technical2");
             Carving.chisel.registerOre("technical2", "technical2");
-
-            Carving.chisel.addVariation("technical2", technical2, 0, 16);
-            Carving.chisel.addVariation("technical2", technical2, 1, 17);
-            Carving.chisel.addVariation("technical2", technical2, 2, 18);
-            Carving.chisel.addVariation("technical2", technical2, 3, 19);
         }
         if(Configurations.featureEnabled("bone"))
         {
