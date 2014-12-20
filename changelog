@@ -1,3 +1,21 @@
+2.2.0:
+Added Grimstone
+Added non purple fantasy blocks
+Added more variations to dark oak and accacia
+Added Pumpkins
+Added Jack-O-Lanterns
+Added Hex Plating
+Added Technical Blocks
+Added Christmas Present
+British English and Pirate Language support
+Fixed the waterstone bug
+Fixed the Fantasy Pilla'
+Auto Chisel is upgradable and contains all fixes
+Major package refactor
+Tiny bug fixes here and there
+Compatibility with Colored Lights mod
+voidstone changes
+
 2.1.3:
 New voidstone textures:
 Fixes the connected textures crash
@@ -37,6 +55,8 @@ Fixes creative tab naming
 Added the Auto Chisel
 Code Refactor
 Code Cleanup
+
+Pokefenn's changes:
 
 1.5.7:
 Added the Laboratory block, a fancy new block added by GravitasShortfall
