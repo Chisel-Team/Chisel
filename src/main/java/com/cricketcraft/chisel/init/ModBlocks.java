@@ -82,6 +82,7 @@ public class ModBlocks {
     public static BlockSnakestoneObsidian obsidianSnakestone;
     public static BlockCarvable hexPlating;
     public static BlockCarvable technical;
+    //public static BlockCarvableGlass technical2;
     public static BlockCarvable bone;
     public static BlockCarvable scorching;
     public static BlockCarvable brickCustom;
@@ -1479,8 +1480,22 @@ public class ModBlocks {
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.9.desc"), 9, "technical/insulation");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.10.desc"), 10, "technical/spinningStuffAnim");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.11.desc"), 11, "technical/cables");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.12.desc"), 12, "technical/rustyCover");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.13.desc"), 13, "technical/grate");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.14.desc"), 14, "technical/fanStill");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.15.desc"), 15, "technical/grateRusty");
             technical.carverHelper.register(technical, "technical");
             Carving.chisel.registerOre("technical", "technical");
+
+            //Crash :/
+
+            /*technical2 = (BlockCarvableGlass) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F);
+            technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.0.desc"), 0, "technical/scaffoldTransparent");
+            technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.4.desc"), 1, "technical/fanFastTransparent");
+            technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.6.desc"), 2, "technical/fanStillTransparent");
+            technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.14.desc"), 3, "technical/fanStillTransparent");
+            technical2.carverHelper.register(technical2, "technical2");
+            Carving.chisel.registerOre("technical2", "technical2");*/
         }
         if(Configurations.featureEnabled("bone"))
         {

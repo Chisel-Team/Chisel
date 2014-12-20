@@ -140,10 +140,10 @@ tile.technical.8.desc=Glowing Vents
 tile.technical.9.desc=Insulation
 tile.technical.10.desc=Gears and Flywheels
 tile.technical.11.desc=Cables
-tile.technical.12.desc=Broken Panels on Scaffolds
+tile.technical.12.desc=Rusty Panel
 tile.technical.13.desc=Grate
-tile.technical.14.desc=Malfunctioning Fan
-tile.technical.15.desc=Glowing Grate
+tile.technical.14.desc=Malfunctioning Fan (WIP)
+tile.technical.15.desc=Rusty Grate
 
 #Scorching
 tile.scorching.name=Scorching Block
