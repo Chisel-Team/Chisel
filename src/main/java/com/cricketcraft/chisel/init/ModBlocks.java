@@ -82,7 +82,7 @@ public class ModBlocks {
     public static BlockSnakestoneObsidian obsidianSnakestone;
     public static BlockCarvable hexPlating;
     public static BlockCarvable technical;
-    //public static BlockCarvableGlass technical2;
+    public static BlockCarvableGlass technical2;
     public static BlockCarvable bone;
     public static BlockCarvable scorching;
     public static BlockCarvable brickCustom;
@@ -1487,15 +1487,18 @@ public class ModBlocks {
             technical.carverHelper.register(technical, "technical");
             Carving.chisel.registerOre("technical", "technical");
 
-            //Crash :/
-
-            /*technical2 = (BlockCarvableGlass) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F);
+            technical2 = (BlockCarvableGlass) new BlockCarvableGlass().setHardness(2.0F).setResistance(10F);
             technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.0.desc"), 0, "technical/scaffoldTransparent");
             technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.4.desc"), 1, "technical/fanFastTransparent");
             technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.6.desc"), 2, "technical/fanStillTransparent");
             technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.14.desc"), 3, "technical/fanStillTransparent");
             technical2.carverHelper.register(technical2, "technical2");
-            Carving.chisel.registerOre("technical2", "technical2");*/
+            Carving.chisel.registerOre("technical2", "technical2");
+
+            Carving.chisel.addVariation("technical2", technical2, 0, 16);
+            Carving.chisel.addVariation("technical2", technical2, 1, 17);
+            Carving.chisel.addVariation("technical2", technical2, 2, 18);
+            Carving.chisel.addVariation("technical2", technical2, 3, 19);
         }
         if(Configurations.featureEnabled("bone"))
         {
