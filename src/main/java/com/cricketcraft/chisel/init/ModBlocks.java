@@ -1477,7 +1477,7 @@ public class ModBlocks {
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.6.desc"), 6, "technical/fanStill");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.7.desc"), 7, "technical/vent");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.8.desc"), 8, "technical/ventGlowing");
-            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.9.desc"), 9, "technical/insulation");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.9.desc"), 9, "technical/insulationv2");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.10.desc"), 10, "technical/spinningStuffAnim");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.11.desc"), 11, "technical/cables");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.12.desc"), 12, "technical/rustyCover");
