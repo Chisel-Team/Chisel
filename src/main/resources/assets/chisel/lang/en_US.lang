@@ -142,8 +142,16 @@ tile.technical.10.desc=Gears and Flywheels
 tile.technical.11.desc=Cables
 tile.technical.12.desc=Rusty Panel
 tile.technical.13.desc=Grate
-tile.technical.14.desc=Malfunctioning Fan (WIP)
+tile.technical.14.desc=Fan (Malfunctioning)
 tile.technical.15.desc=Rusty Grate
+tile.technical2.name=Transparent Technical Block
+
+#Present Chest
+tile.present.name=Present Box
+tile.present.0.desc=§cRed Present
+tile.present.1.desc=§9Blue Present
+tile.present.2.desc=§aGreen Present
+tile.present.3.desc=§eYellow Present
 
 #Scorching
 tile.scorching.name=Scorching Block
