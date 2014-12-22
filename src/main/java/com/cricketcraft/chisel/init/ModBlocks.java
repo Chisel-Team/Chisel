@@ -1341,7 +1341,10 @@ public class ModBlocks {
             //TODO: will be done at winter time
             present = (BlockPresent) new BlockPresent().setHardness(2.5F).setStepSound(Block.soundTypeWood);
             Carving.chisel.addVariation("chest", Blocks.chest, 0, 0);
+            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.0.desc"), 0, present, 1);
             present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.1.desc"), 1, present, 1);
+            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.2.desc"), 2, present, 1);
+            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.3.desc"), 3, present, 1);
             present.carverHelper.register(present, "present");
             Carving.chisel.registerOre("chest", "chest");
         }
@@ -1480,9 +1483,9 @@ public class ModBlocks {
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.9.desc"), 9, "technical/insulationv2");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.10.desc"), 10, "technical/spinningStuffAnim");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.11.desc"), 11, "technical/cables");
-            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.12.desc"), 12, "technical/rustyCover");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.12.desc"), 12, "technical/rustyBoltedPlates");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.13.desc"), 13, "technical/grate");
-            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.14.desc"), 14, "technical/fanStill");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.14.desc"), 14, "technical/fanMalfunction");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.15.desc"), 15, "technical/grateRusty");
             technical.carverHelper.register(technical, "technical");
             Carving.chisel.registerOre("technical", "technical");
