@@ -54,21 +54,6 @@ public class BlockAutoChisel extends BlockContainer{
             player.openGui(Chisel.instance, 1, world, x, y, z);
         }
 
-        if(player.isSneaking() && tile!= null && tile instanceof TileEntityAutoChisel){
-            TileEntityAutoChisel autoChisel = (TileEntityAutoChisel) tile;
-            System.out.println(player.getHeldItem());
-            if(player.getItemInUse() == new ItemStack(ModItems.upgrade, 1, 0)){
-                //If they are using the speed upgrade
-                world.setBlock(x, y, z, ModBlocks.autoChisel, 1, 3);
-            } else if(player.getItemInUse() == new ItemStack(ModItems.upgrade, 1, 1)){
-                //If they are using the automation upgrade
-                world.setBlock(x, y, z, ModBlocks.autoChisel, 2, 3);
-            } else if(player.getItemInUse() == new ItemStack(ModItems.upgrade, 1, 2)){
-                //If they are using the stack upgrade
-                world.setBlock(x, y, z, ModBlocks.autoChisel, 3, 3);
-            }
-        }
-
         return true;
     }
 
@@ -76,19 +61,6 @@ public class BlockAutoChisel extends BlockContainer{
     public void breakBlock(World world, int x, int y, int z, Block block, int par6) {
         dropItems(world, x, y, z);
         super.breakBlock(world, x, y, z, block, par6);
-    }
-
-    @Override
-    public int damageDropped(int metadata){
-        return metadata;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void getSubBlocks(Item item, CreativeTabs creativeTabs, List subItems){
-        for(int x = 0; x < 4; x++){
-            subItems.add(new ItemStack(this, 1, x));
-        }
     }
 
     private void dropItems(World world, int x, int y, int z) {
