@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel.client.render.item;
 
+import com.cricketcraft.chisel.block.BlockPresent;
+import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +15,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemPresentRenderer implements IItemRenderer {
     private final ModelChest model = new ModelChest();
-
+    private final BlockPresent present = new BlockPresent();
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
         return type != ItemRenderType.FIRST_PERSON_MAP;
@@ -26,7 +28,7 @@ public class ItemPresentRenderer implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/red.png"));
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(present.getResourceSingle(item.getItemDamage()));
         switch (type) {
             case ENTITY:
                 renderBlock(0.0F, 0.0F, 0.0F);

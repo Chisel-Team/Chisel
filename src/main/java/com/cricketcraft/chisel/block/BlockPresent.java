@@ -38,6 +38,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPresent extends BlockContainer implements ICarvable {
     private final Random random = new Random();
+    private String textureLocation;
     public CarvableHelper carverHelper;
     private boolean isChristmas = true;
 
@@ -73,7 +74,23 @@ public class BlockPresent extends BlockContainer implements ICarvable {
     public ResourceLocation getResourceSingle(int metadata) {
         if (isChristmas) {
             switch (metadata) {
+                case 0:
+                    return new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/giftboxBlack.png");
                 case 1:
+                    return new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/giftboxBlue.png");
+                case 2:
+                    return new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/giftboxCyan.png");
+                case 3:
+                    return new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/giftboxGreen.png");
+                case 4:
+                    return new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/giftboxOrange.png");
+                case 5:
+                    return new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/giftboxPink.png");
+                case 6:
+                    return new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/giftboxPurple.png");
+                case 7:
+                    return new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/giftboxYellow.png");
+                case 8:
                     return new ResourceLocation(Chisel.MOD_ID, "textures/blocks/present/red.png");
                 default:
                     return null;

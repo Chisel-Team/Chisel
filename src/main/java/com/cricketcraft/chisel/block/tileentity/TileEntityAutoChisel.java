@@ -92,11 +92,11 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
         }
 
         if(isFaster){
-            if(!worldObj.isRemote && worldObj.getWorldTime() % 10 == 0){
+            if(!worldObj.isRemote && worldObj.getWorldTime() % 20 == 0){
                 doTransaction();
             }
         } else {
-            if(!worldObj.isRemote && worldObj.getWorldTime() % 20 == 0){
+            if(!worldObj.isRemote && worldObj.getWorldTime() % 40 == 0){
                 doTransaction();
             }
         }
@@ -105,7 +105,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
     }
 
     private void doTransaction(){
-        if(!(isSlotNull(BASE) && !(isSlotNull(TARGET)))){
+        if(inventory[BASE] != null && inventory[TARGET] != null){
             if(inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock){
                 Block base = Block.getBlockFromItem(inventory[BASE].getItem());
                 Block target = Block.getBlockFromItem(inventory[TARGET].getItem());
@@ -116,13 +116,13 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
                     if(baseCarvable.carverHelper.variations.contains(target)){
                         if(isStackMode){
                             if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
-                                if(isSlotNull(OUTPUT)){
+                                if(inventory[OUTPUT] == null){
                                     inventory[OUTPUT] = inventory[BASE];
                                     inventory[BASE] = null;
                                 }
                             }
                         } else {
-                            if(isSlotNull(OUTPUT)){
+                            if(inventory[OUTPUT] == null){
                                 inventory[OUTPUT] = new ItemStack(base, 1, inventory[BASE].getItemDamage());
                                 inventory[BASE].stackSize--;
                             } else if(inventory[BASE].stackSize != 0){
@@ -137,13 +137,13 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
                     if(targetCarvable.carverHelper.variations.contains(base)){
                         if(isStackMode){
                             if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
-                                if(isSlotNull(OUTPUT)){
+                                if(inventory[OUTPUT] == null){
                                     inventory[OUTPUT] = inventory[BASE];
                                     inventory[BASE] = null;
                                 }
                             }
                         } else {
-                            if(isSlotNull(OUTPUT)){
+                            if(inventory[OUTPUT] == null){
                                 inventory[OUTPUT] = new ItemStack(base, 1, inventory[BASE].getItemDamage());
                                 inventory[BASE].stackSize--;
                             } else if(inventory[BASE].stackSize != 0){
@@ -154,14 +154,6 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
                     }
                 }
             }
-        }
-    }
-
-    private boolean isSlotNull(int slot){
-        if(inventory[slot] == null){
-            return true;
-        } else {
-            return false;
         }
     }
 

@@ -6,6 +6,7 @@ import com.cricketcraft.chisel.block.*;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.client.render.item.ItemPresentRenderer;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.ItemMarbleSlab;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -76,7 +77,7 @@ public class ModBlocks {
     public static BlockVoidstonePillar voidstonePillar;
     public static BlockVoidstonePillar2 voidstonePillar2;
     public static Block autoChisel;
-    public static BlockPresent present;
+    public static BlockPresent[] present = new BlockPresent[16];
     public static BlockSnakestone snakestone;
     public static BlockSnakestone sandSnakestone;
     public static BlockSnakestoneObsidian obsidianSnakestone;
@@ -1338,14 +1339,7 @@ public class ModBlocks {
         }
 
         if (Configurations.featureEnabled("chest")) {
-            //TODO: will be done at winter time
-            present = (BlockPresent) new BlockPresent().setHardness(2.5F).setStepSound(Block.soundTypeWood);
             Carving.chisel.addVariation("chest", Blocks.chest, 0, 0);
-            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.0.desc"), 0, present, 1);
-            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.1.desc"), 1, present, 1);
-            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.2.desc"), 2, present, 1);
-            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.3.desc"), 3, present, 1);
-            present.carverHelper.register(present, "present");
             Carving.chisel.registerOre("chest", "chest");
         }
 

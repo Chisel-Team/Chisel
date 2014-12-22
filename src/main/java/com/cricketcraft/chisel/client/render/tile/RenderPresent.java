@@ -35,9 +35,9 @@ public class RenderPresent extends TileEntityChestRenderer {
             Block block = present.getBlockType();
             i = present.getBlockMetadata();
 
-            if (block instanceof BlockChest && i == 0) {
+            if (block instanceof BlockPresent && i == 0) {
                 try {
-                    ((BlockChest) block).func_149954_e(present.getWorldObj(), present.xCoord, present.yCoord, present.zCoord);
+                    ((BlockPresent) block).changeMetadataBasedOffSpecs(present.getWorldObj(), present.xCoord, present.yCoord, present.zCoord);
                 } catch (ClassCastException e) {
                     FMLLog.severe("[Chisel 2] Attempted to render a present at %d,  %d, %d that was not a present", present.xCoord, present.yCoord, present.zCoord);
                 }
@@ -53,10 +53,10 @@ public class RenderPresent extends TileEntityChestRenderer {
 
             if (present.adjacentChestXPos == null && present.adjacentChestZPos == null) {
                 modelchest = this.chest;
-                this.bindTexture(blockPresent.getResourceSingle(1));
+                this.bindTexture(blockPresent.getResourceSingle(present.getBlockMetadata()));
             } else {
                 modelchest = this.doubleChest;
-                this.bindTexture(blockPresent.getResourceDouble(1));
+                this.bindTexture(blockPresent.getResourceDouble(present.getBlockMetadata()));
             }
 
             GL11.glPushMatrix();
