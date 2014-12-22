@@ -695,8 +695,8 @@ public class ModBlocks {
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.1.desc"), 1, "dirt/netherbricks");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.2.desc"), 2, "dirt/bricks3");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.3.desc"), 3, "dirt/cobble");
-            dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.4.desc"), 4, "dirt/reinforced");
-            dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.5.desc"), 5, "dirt/dirt-reinforced");
+            dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.4.desc"), 4, "dirt/reinforcedCobbleDirt");
+            dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.5.desc"), 5, "dirt/reinforcedDirt");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.6.desc"), 6, "dirt/happy");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.7.desc"), 7, "dirt/bricks2");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.8.desc"), 8, "dirt/bricks+dirt2");
