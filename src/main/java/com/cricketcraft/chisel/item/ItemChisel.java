@@ -16,23 +16,13 @@ import com.cricketcraft.chisel.api.IChiselMode;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.Carving;
 
-public class ItemChisel extends ItemTool implements IChiselMode {
-    private static final HashSet<String> toolSet = new HashSet<String>();
+public class ItemChisel extends Item implements IChiselMode {
     public static Carving carving = Carving.chisel;
 
     public ItemChisel() {
-        super(1, ToolMaterial.IRON, CarvableHelper.getChiselBlockSet());
-
+        super();
         setMaxStackSize(1);
-        setMaxDamage(500);
-        efficiencyOnProperMaterial = 100f;
         setUnlocalizedName("chisel");
-
-        toolSet.add("chisel");
-    }
-    @Override
-    public Set<String> getToolClasses(ItemStack stack) {
-        return toolSet;
     }
 
     @Override
@@ -40,11 +30,6 @@ public class ItemChisel extends ItemTool implements IChiselMode {
         entityplayer.openGui(Chisel.instance, 0, world, 0, 0, 0);
 
         return itemstack;
-    }
-
-    @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
-        return true;
     }
 
     @Override
