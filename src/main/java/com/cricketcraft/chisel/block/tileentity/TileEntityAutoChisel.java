@@ -89,20 +89,20 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
         }
 
         if(isFaster){
-            if(!worldObj.isRemote && worldObj.getWorldTime() % 20 == 0){
+            if(!worldObj.isRemote && worldObj.getWorldTime() % 10 == 0){
                 if(inventory[BASE] != null && inventory[TARGET] != null){
                     if(inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock){
                         if(inventory[BASE].getUnlocalizedName().equalsIgnoreCase(inventory[TARGET].getUnlocalizedName())){
                             if(isStackMode){
                                 if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
                                     if(inventory[OUTPUT] == null){
-                                        inventory[OUTPUT] = inventory[BASE];
+                                        inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 64, inventory[TARGET].getItemDamage());
                                         inventory[BASE] = null;
                                     }
                                 }
                             } else {
                                 if(inventory[OUTPUT] == null){
-                                    inventory[OUTPUT] = inventory[BASE];
+                                    inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 1, inventory[TARGET].getItemDamage());
                                     inventory[BASE].stackSize--;
                                 } else if(inventory[BASE].stackSize != 0){
                                     inventory[OUTPUT].stackSize++;
@@ -116,20 +116,20 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
                 }
             }
         } else {
-            if(!worldObj.isRemote && worldObj.getWorldTime() % 100 == 0){
+            if(!worldObj.isRemote && worldObj.getWorldTime() % 40 == 0){
                 if(inventory[BASE] != null && inventory[TARGET] != null){
                     if(inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock){
                         if(inventory[BASE].getUnlocalizedName().equalsIgnoreCase(inventory[TARGET].getUnlocalizedName())){
                             if(isStackMode){
                                 if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
                                     if(inventory[OUTPUT] == null){
-                                        inventory[OUTPUT] = inventory[BASE];
+                                        inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 64, inventory[TARGET].getItemDamage());
                                         inventory[BASE] = null;
                                     }
                                 }
                             } else {
                                 if(inventory[OUTPUT] == null){
-                                    inventory[OUTPUT] = inventory[BASE];
+                                    inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 1, inventory[TARGET].getItemDamage());
                                     inventory[BASE].stackSize--;
                                 } else if(inventory[BASE].stackSize != 0){
                                     inventory[OUTPUT].stackSize++;
