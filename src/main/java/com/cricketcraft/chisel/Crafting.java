@@ -134,5 +134,19 @@ public class Crafting {
                 GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.jackolantern[x]), new Object[]{new ItemStack(ModBlocks.pumpkin[x], 1), new ItemStack(Item.getItemFromBlock(Blocks.torch), 1)});
             }
         }
+
+        if(Configurations.featureEnabled("technical")){
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.technical, Configurations.factoryBlockAmount, 0), new Object[]{"xyx", "yxy", "xyx", 'x', "stone", 'y', Items.iron_ingot}));
+        }
+
+        if(Configurations.featureEnabled("chest")){
+            for(int x = 0; x < 16; x++){
+                GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.present[x]), new Object[]{new ItemStack(Blocks.chest, 1), new ItemStack(Items.dye, 1, x)});
+            }
+        }
+
+        if(Configurations.featureEnabled("warningSign")){
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.sign, 4, 0), new Object[]{"xxx", "xyx", "xxx", 'x', "stone", 'y', Items.sign}));
+        }
     }
 }

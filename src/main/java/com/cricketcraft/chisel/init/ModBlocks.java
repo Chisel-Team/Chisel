@@ -8,6 +8,7 @@ import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.ItemMarbleSlab;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -71,21 +72,24 @@ public class ModBlocks {
     public static BlockCarvable laboratory;
     public static BlockCarvablePumpkin[] pumpkin = new BlockCarvablePumpkin[16];
     public static BlockCarvablePumpkin[] jackolantern = new BlockCarvablePumpkin[16];
-    public static BlockVoidstone voidstone;
-    public static BlockVoidstone voidstone2;
+    public static BlockCarvable voidstone;
+    public static BlockMarbleTexturedOre voidstone2;
     public static BlockVoidstonePillar voidstonePillar;
     public static BlockVoidstonePillar2 voidstonePillar2;
     public static Block autoChisel;
-    public static BlockPresent present;
+    public static BlockPresent[] present = new BlockPresent[16];
     public static BlockSnakestone snakestone;
     public static BlockSnakestone sandSnakestone;
     public static BlockSnakestoneObsidian obsidianSnakestone;
     public static BlockCarvable hexPlating;
     public static BlockCarvable technical;
+    public static BlockCarvableGlass technical2;
     public static BlockCarvable bone;
     public static BlockCarvable scorching;
     public static BlockCarvable brickCustom;
-    public static BlockCarvableTorch torch;
+    public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
+    public static BlockCarvable sign;
+    public static BlockCarvable arcane;
 
     // 1.7
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
@@ -95,7 +99,7 @@ public class ModBlocks {
     {
         if(Configurations.featureEnabled("autoChisel")){
             autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(ModTabs.tabChisel).setBlockName("autoChisel").setBlockTextureName(Chisel.MOD_ID + ":factory/circuit");
-            GameRegistry.registerBlock(autoChisel, ItemBlockAutoChisel.class, "autoChisel");
+            GameRegistry.registerBlock(autoChisel, "autoChisel");
             Chisel.proxy.registerTileEntities();
         }
 
@@ -692,8 +696,8 @@ public class ModBlocks {
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.1.desc"), 1, "dirt/netherbricks");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.2.desc"), 2, "dirt/bricks3");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.3.desc"), 3, "dirt/cobble");
-            dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.4.desc"), 4, "dirt/reinforced");
-            dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.5.desc"), 5, "dirt/dirt-reinforced");
+            dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.4.desc"), 4, "dirt/reinforcedCobbleDirt");
+            dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.5.desc"), 5, "dirt/reinforcedDirt");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.6.desc"), 6, "dirt/happy");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.7.desc"), 7, "dirt/bricks2");
             dirt.carverHelper.addVariation(StatCollector.translateToLocal("tile.dirt.8.desc"), 8, "dirt/bricks+dirt2");
@@ -1336,16 +1340,16 @@ public class ModBlocks {
         }
 
         if (Configurations.featureEnabled("chest")) {
-            //TODO: will be done at winter time
-            present = (BlockPresent) new BlockPresent().setHardness(2.5F).setStepSound(Block.soundTypeWood);
-            Carving.chisel.addVariation("chest", Blocks.chest, 0, 0);
-            present.carverHelper.addVariation(StatCollector.translateToLocal("tile.present.1.desc"), 1, present, 1);
-            present.carverHelper.register(present, "present");
+            for(int x = 0; x < 16; x++){
+                present[x] = (BlockPresent) new BlockPresent(x).setHardness(2.0F).setResistance(10.0F).setBlockName("present");
+                GameRegistry.registerBlock(present[x], "chest" + x);
+                Carving.chisel.addVariation("present", present[x], 0, (x + 1));
+            }
             Carving.chisel.registerOre("chest", "chest");
         }
 
         if(Configurations.featureEnabled("voidstone")){
-                voidstone = (BlockVoidstone) new BlockVoidstone(null).setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
+                voidstone = (BlockCarvable) new BlockCarvable().setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks).setHardness(5.0F).setResistance(10.0F);
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/raw");
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/quarters");
                 voidstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/smooth");
@@ -1358,7 +1362,7 @@ public class ModBlocks {
                 voidstone.carverHelper.register(voidstone, "voidstone");
                 Carving.chisel.registerOre("voidstone", "voidstone");
 
-                voidstone2 = (BlockVoidstone) new BlockVoidstone(Chisel.MOD_ID + ":voidstone/animated/void").setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks);
+                voidstone2 = (BlockMarbleTexturedOre) new BlockMarbleTexturedOre(Material.rock, Chisel.MOD_ID + ":voidstone/animated/void").setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabChiselBlocks).setHardness(5.0F).setResistance(10.0F);
                 voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.0.desc"), 0, "voidstone/animated/raw");
                 voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.1.desc"), 1, "voidstone/animated/quarters");
                 voidstone2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstone.2.desc"), 2, "voidstone/animated/smooth");
@@ -1475,11 +1479,23 @@ public class ModBlocks {
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.6.desc"), 6, "technical/fanStill");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.7.desc"), 7, "technical/vent");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.8.desc"), 8, "technical/ventGlowing");
-            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.9.desc"), 9, "technical/insulation");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.9.desc"), 9, "technical/insulationv2");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.10.desc"), 10, "technical/spinningStuffAnim");
             technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.11.desc"), 11, "technical/cables");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.12.desc"), 12, "technical/rustyBoltedPlates");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.13.desc"), 13, "technical/grate");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.14.desc"), 14, "technical/fanMalfunction");
+            technical.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.15.desc"), 15, "technical/grateRusty");
             technical.carverHelper.register(technical, "technical");
             Carving.chisel.registerOre("technical", "technical");
+
+            technical2 = (BlockCarvableGlass) new BlockCarvableGlass().setHardness(2.0F).setResistance(10F);
+            technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.0.desc"), 0, "technical/scaffoldTransparent");
+            technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.4.desc"), 1, "technical/fanFastTransparent");
+            technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.6.desc"), 2, "technical/fanStillTransparent");
+            technical2.carverHelper.addVariation(StatCollector.translateToLocal("tile.technical.14.desc"), 3, "technical/fanStillTransparent");
+            technical2.carverHelper.register(technical2, "technical2");
+            Carving.chisel.registerOre("technical2", "technical2");
         }
         if(Configurations.featureEnabled("bone"))
         {
@@ -1516,19 +1532,39 @@ public class ModBlocks {
             brickCustom.carverHelper.register(brickCustom, "brickCustom");
             Carving.chisel.registerOre("brickCustom", "brickCustom");
         }
-        /*if(Configurations.featureEnabled("torch"))
+        if(Configurations.featureEnabled("torch"))
         {
-        	torch = (BlockCarvableTorch) new BlockCarvableTorch().setLightLevel(0.8F);
             Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.1.desc"), 1, "torch/candle");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.2.desc"), 2, "torch/candle-holder");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.3.desc"), 3, "torch/lantern");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.4.desc"), 4, "torch/lantern-letters");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.5.desc"), 5, "torch/lamp");
-            torch.carverHelper.addVariation(StatCollector.translateToLocal("tile.torch.6.desc"), 6, "torch/lamp-tall");
-            torch.carverHelper.register(torch, "torch");
+            for(int metadata = 0; metadata < 6; metadata++){
+                torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setBlockName("torch").setCreativeTab(ModTabs.tabChiselBlocks);
+                torch[metadata].setInformation("torch" + (metadata + 1));
+                GameRegistry.registerBlock(torch[metadata], "torch" + (metadata + 1));
+                Carving.chisel.addVariation("torch", torch[metadata], 0, (metadata + 1));
+            }
             Carving.chisel.registerOre("torch", "torch");
-        }*/
+        }
+        if(Configurations.featureEnabled("warningSign"))
+        {
+        	sign = (BlockCarvable) new BlockCarvable(Material.iron).setHardness(2.0F).setResistance(10.0F);
+        	sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.0.desc"), 0, "warning/rad");
+            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.1.desc"), 1, "warning/bio");
+            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.2.desc"), 2, "warning/fire");
+            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.3.desc"), 3, "warning/explosion");
+            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.4.desc"), 4, "warning/death");
+            sign.carverHelper.register(sign, "warningSign");
+            Carving.chisel.registerOre("warningSign", "warningSign");
+        }
 
+        if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
+        {
+            arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
+            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 0, "arcane/largetile");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 1, "arcane/moon");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 2, "arcane/moon-thaumium");
+            arcane.carverHelper.register(arcane, "arcane");
+            Carving.chisel.registerOre("arcane", "arcane");
+        }
     }
 }

@@ -76,7 +76,6 @@ public class FMPIntegration implements IModIntegration{
         registerMaterial(ModBlocks.factory, 0, 12);
         registerMaterial(ModBlocks.factory, 14, 14);
         registerMaterial(ModBlocks.stainedGlass[0]); //White
-        registerMaterial(ModBlocks.stainedGlass[4]); //Yellow
         registerMaterial(ModBlocks.stainedGlass[8]); //Light Gray
         registerMaterial(ModBlocks.stainedGlass[12]); //Brown
         registerMaterial(ModBlocks.woolenClay);

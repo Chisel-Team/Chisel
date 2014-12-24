@@ -1,38 +1,24 @@
 package com.cricketcraft.chisel.item;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselMode;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.Carving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
-public class ItemChisel extends ItemTool implements IChiselMode {
-    private static final HashSet<String> toolSet = new HashSet<String>();
+import java.util.List;
+
+public class ItemChisel extends Item implements IChiselMode {
     public static Carving carving = Carving.chisel;
 
     public ItemChisel() {
-        super(1, ToolMaterial.IRON, CarvableHelper.getChiselBlockSet());
-
+        super();
         setMaxStackSize(1);
-        setMaxDamage(500);
-        efficiencyOnProperMaterial = 100f;
         setUnlocalizedName("chisel");
-
-        toolSet.add("chisel");
-    }
-    @Override
-    public Set<String> getToolClasses(ItemStack stack) {
-        return toolSet;
     }
 
     @Override
@@ -40,11 +26,6 @@ public class ItemChisel extends ItemTool implements IChiselMode {
         entityplayer.openGui(Chisel.instance, 0, world, 0, 0, 0);
 
         return itemstack;
-    }
-
-    @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, int X, int Y, int Z, EntityPlayer player) {
-        return true;
     }
 
     @Override
