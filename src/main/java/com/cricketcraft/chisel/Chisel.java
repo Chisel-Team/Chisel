@@ -119,7 +119,7 @@ public class Chisel
         Configurations.refreshConfig();
 
         ModTabs.load();
-        ModBlocks.load();
+        ModBlocks.preInit();
         ModItems.load();
         proxy.preInit();
     }
@@ -127,6 +127,7 @@ public class Chisel
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+    	ModBlocks.init();
         Crafting.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new IGuiHandler() {
