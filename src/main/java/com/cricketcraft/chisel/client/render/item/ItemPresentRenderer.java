@@ -32,13 +32,13 @@ public class ItemPresentRenderer implements IItemRenderer {
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Chisel.MOD_ID, present.getKindOfChest(meta) + ".png"));
         switch (type) {
             case ENTITY:
-                renderBlock(0.0F, 0.0F, 0.0F);
+                renderBlock(0.0F, 1.0F, 0.0F);
                 break;
             case EQUIPPED:
-                renderBlock(0.0F, 0.0F, 0.0F);
+                renderBlock(0.5F, 1.5F, 0.5F);
                 break;
             case EQUIPPED_FIRST_PERSON:
-                renderBlock(0.0F, 0.0F, 0.0F);
+                renderBlock(0.5F, 1.0F, 0.5F);
                 break;
             case INVENTORY:
                 renderInventory(1.0F, 1.0F, 1.0F);
