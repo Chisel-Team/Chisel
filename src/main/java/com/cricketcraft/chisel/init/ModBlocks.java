@@ -1564,9 +1564,9 @@ public class ModBlocks {
              arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
              Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
              Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
-             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 0, "arcane/largetile");
-             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 1, "arcane/moon");
-             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 2, "arcane/moon-thaumium");
+             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.0.desc"), 0, "arcane/ArcaneMoon");
+             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 1, "arcane/ArcaneMoonGlow");
+             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 2, "arcane/ArcaneTile");
              arcane.carverHelper.register(arcane, "arcane");
              Carving.chisel.registerOre("arcane", "arcane");
          }
