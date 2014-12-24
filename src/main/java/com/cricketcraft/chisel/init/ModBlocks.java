@@ -1343,7 +1343,6 @@ public class ModBlocks {
                 GameRegistry.registerBlock(present[x], "chest" + x);
                 Carving.chisel.addVariation("present", present[x], 0, (x + 1));
             }
-            Carving.chisel.addVariation("chest", Blocks.chest, 0, 0);
             Carving.chisel.registerOre("chest", "chest");
         }
 
