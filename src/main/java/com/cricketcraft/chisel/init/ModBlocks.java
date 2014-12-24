@@ -8,7 +8,6 @@ import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.ItemMarbleSlab;
-
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -96,7 +95,7 @@ public class ModBlocks {
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
     public static BlockCarvablePane[] stainedGlassPane = new BlockCarvablePane[8];
 
-    public static void preInit()
+    public static void load()
     {
         if(Configurations.featureEnabled("autoChisel")){
             autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(ModTabs.tabChisel).setBlockName("autoChisel").setBlockTextureName(Chisel.MOD_ID + ":factory/circuit");
@@ -1555,20 +1554,17 @@ public class ModBlocks {
             sign.carverHelper.register(sign, "warningSign");
             Carving.chisel.registerOre("warningSign", "warningSign");
         }
-    }
-    public static void init()
-    {
-    	//Load AFTER Thaumcraft Blocks have loaded :P
-    	 if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
-         {
-             arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
-             Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
-             Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
-             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 0, "arcane/largetile");
-             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 1, "arcane/moon");
-             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 2, "arcane/moon-thaumium");
-             arcane.carverHelper.register(arcane, "arcane");
-             Carving.chisel.registerOre("arcane", "arcane");
-         }
+
+        if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
+        {
+            arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
+            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 0, "arcane/largetile");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 1, "arcane/moon");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 2, "arcane/moon-thaumium");
+            arcane.carverHelper.register(arcane, "arcane");
+            Carving.chisel.registerOre("arcane", "arcane");
+        }
     }
 }
