@@ -1536,7 +1536,7 @@ public class ModBlocks {
         {
             Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
             for(int metadata = 0; metadata < 6; metadata++){
-                torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setBlockName("torch").setCreativeTab(ModTabs.tabChiselBlocks);
+                torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setLightLevel(0.9375F).setBlockName("torch").setCreativeTab(ModTabs.tabChiselBlocks);
                 torch[metadata].setInformation("torch" + (metadata + 1));
                 GameRegistry.registerBlock(torch[metadata], "torch" + (metadata + 1));
                 Carving.chisel.addVariation("torch", torch[metadata], 0, (metadata + 1));
