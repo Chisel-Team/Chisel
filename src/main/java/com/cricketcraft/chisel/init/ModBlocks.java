@@ -8,7 +8,6 @@ import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.ItemMarbleSlab;
-
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -96,7 +95,7 @@ public class ModBlocks {
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
     public static BlockCarvablePane[] stainedGlassPane = new BlockCarvablePane[8];
 
-    public static void preInit()
+    public static void load()
     {
         if(Configurations.featureEnabled("autoChisel")){
             autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(ModTabs.tabChisel).setBlockName("autoChisel").setBlockTextureName(Chisel.MOD_ID + ":factory/circuit");
@@ -1289,7 +1288,7 @@ public class ModBlocks {
         if(Configurations.featureEnabled("pumpkin"))
         {
             for(int metadata = 0; metadata < 16; metadata++){
-                pumpkin[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(false).setBlockName("pumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
+                pumpkin[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(false).setHardness(1.0F).setBlockName("pumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
                 pumpkin[metadata].setInformation("pumpkin/pumpkin_face_" + (metadata + 1) + "_off");
                 GameRegistry.registerBlock(pumpkin[metadata], "pumpkin" + (metadata + 1));
                 Carving.chisel.addVariation("pumpkin", pumpkin[metadata], 0, (metadata + 1));
@@ -1301,7 +1300,7 @@ public class ModBlocks {
         if(Configurations.featureEnabled("jackolantern"))
         {
             for(int metadata = 0; metadata < 16; metadata++){
-                jackolantern[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(true).setBlockName("litpumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
+                jackolantern[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(true).setHardness(1.0F).setBlockName("litpumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
                 jackolantern[metadata].setInformation("pumpkin/pumpkin_face_" + (metadata + 1) + "_on");
                 GameRegistry.registerBlock(jackolantern[metadata], ("jackolantern" + (metadata + 1)));
                 Carving.chisel.addVariation("jackolantern", jackolantern[metadata], 0, (metadata + 1));
@@ -1537,7 +1536,7 @@ public class ModBlocks {
         {
             Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
             for(int metadata = 0; metadata < 6; metadata++){
-                torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setBlockName("torch").setCreativeTab(ModTabs.tabChiselBlocks);
+                torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setLightLevel(0.9375F).setBlockName("torch").setCreativeTab(ModTabs.tabChiselBlocks);
                 torch[metadata].setInformation("torch" + (metadata + 1));
                 GameRegistry.registerBlock(torch[metadata], "torch" + (metadata + 1));
                 Carving.chisel.addVariation("torch", torch[metadata], 0, (metadata + 1));
@@ -1546,7 +1545,7 @@ public class ModBlocks {
         }
         if(Configurations.featureEnabled("warningSign"))
         {
-        	sign = (BlockCarvable) new BlockCarvable(Material.iron);
+        	sign = (BlockCarvable) new BlockCarvable(Material.iron).setHardness(2.0F).setResistance(10.0F);
         	sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.0.desc"), 0, "warning/rad");
             sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.1.desc"), 1, "warning/bio");
             sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.2.desc"), 2, "warning/fire");
@@ -1555,20 +1554,17 @@ public class ModBlocks {
             sign.carverHelper.register(sign, "warningSign");
             Carving.chisel.registerOre("warningSign", "warningSign");
         }
-    }
-    public static void init()
-    {
-    	//Load AFTER Thaumcraft Blocks have loaded :P
-    	 if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
-         {
-             arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
-             Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
-             Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
-             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.0.desc"), 0, "arcane/ArcaneMoon");
-             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 1, "arcane/ArcaneMoonGlow");
-             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 2, "arcane/ArcaneTile");
-             arcane.carverHelper.register(arcane, "arcane");
-             Carving.chisel.registerOre("arcane", "arcane");
-         }
+
+        if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
+        {
+            arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
+            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 0, "arcane/largetile");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 1, "arcane/moon");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 2, "arcane/moon-thaumium");
+            arcane.carverHelper.register(arcane, "arcane");
+            Carving.chisel.registerOre("arcane", "arcane");
+        }
     }
 }
