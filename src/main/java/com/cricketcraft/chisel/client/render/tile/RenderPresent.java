@@ -6,6 +6,7 @@ import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
 import cpw.mods.fml.common.FMLLog;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelChest;
+import net.minecraft.client.model.ModelLargeChest;
 import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -13,7 +14,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 public class RenderPresent extends TileEntityChestRenderer {
-    private ModelChest chest = new ModelChest();
+    private ModelChest smallChest = new ModelChest();
+    private ModelChest largeChest = new ModelLargeChest();
 
     public RenderPresent() {
     }
@@ -41,7 +43,14 @@ public class RenderPresent extends TileEntityChestRenderer {
 
         if (present.adjacentChestZNeg == null && present.adjacentChestXNeg == null) {
             BlockPresent blockPresent = (BlockPresent) present.getWorldObj().getBlock(present.xCoord, present.yCoord, present.zCoord);
-            this.bindTexture(new ResourceLocation(Chisel.MOD_ID, blockPresent.getKindOfChest(present.type) + ".png"));
+            ModelChest smallOrLargeChest;
+            if (present.adjacentChestZPos == null && present.adjacentChestXPos == null) {
+                smallOrLargeChest = smallChest;
+                this.bindTexture(new ResourceLocation(Chisel.MOD_ID, blockPresent.getKindOfChest(present.type) + ".png"));
+            } else {
+                smallOrLargeChest = largeChest;
+                this.bindTexture(new ResourceLocation(Chisel.MOD_ID, blockPresent.getKindOfChest(present.type) + "_double.png"));
+            }
 
             GL11.glPushMatrix();
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -98,8 +107,8 @@ public class RenderPresent extends TileEntityChestRenderer {
 
             f1 = 1.0F - f1;
             f1 = 1.0F - f1 * f1 * f1;
-            this.chest.chestLid.rotateAngleX = -(f1 * (float) Math.PI / 2.0F);
-            this.chest.renderAll();
+            smallOrLargeChest.chestLid.rotateAngleX = -(f1 * (float) Math.PI / 2.0F);
+            smallOrLargeChest.renderAll();
             GL11.glDisable(GL12.GL_RESCALE_NORMAL);
             GL11.glPopMatrix();
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
