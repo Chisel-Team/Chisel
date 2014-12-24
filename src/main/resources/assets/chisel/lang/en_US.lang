@@ -23,14 +23,7 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 #Chisel 2
 
 #Auto Chisel
-tile.autoChisel.base.name=Auto Chisel
-tile.autoChisel.base.desc=Base Version
-tile.autoChisel.speed.name=Auto Chisel (Speed)
-tile.autoChisel.speed.desc=Speed Upgrade
-tile.autoChisel.automation.name=Auto Chisel (Automation)
-tile.autoChisel.automation.desc=Automation Upgrade
-tile.autoChisel.stack.name=Auto Chisel (Stack)
-tile.autoChisel.stack.desc=Stack Upgrade
+tile.autoChisel.name=Auto Chisel
 
 #Leaves
 tile.leaves.6.desc=Dead Leaves
