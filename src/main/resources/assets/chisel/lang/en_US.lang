@@ -74,9 +74,11 @@ tile.voidstonePillar2.0.desc=Striped Energised Voidstone Pillar
 
 #Arcane
 tile.arcane.name=Arcane Stone Block
-tile.arcane.1.desc=Large Tile Arcane Stone
-tile.arcane.2.desc=Arcane Stone with Engraved Moon
-tile.arcane.3.desc=Arcane Stone with Thaumium Engraved Moon
+tile.arcane.0.desc=Engraved Moon
+tile.arcane.1.desc=Glowing Moon
+tile.arcane.2.desc=Large Tile with Border
+tile.arcane.3.desc=Engraved Symbols
+tile.arcane.4.desc=Glowing Symbols
 
 #Waterstone
 tile.waterstone.name=Waterstone
