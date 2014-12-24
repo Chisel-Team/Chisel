@@ -1,20 +1,16 @@
 package com.cricketcraft.chisel.item;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
-
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselMode;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.Carving;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
+
+import java.util.List;
 
 public class ItemChisel extends Item implements IChiselMode {
     public static Carving carving = Carving.chisel;

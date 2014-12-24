@@ -1,22 +1,23 @@
 package com.cricketcraft.chisel.block.tileentity;
 
-import java.util.Iterator;
-import java.util.List;
-
+import com.cricketcraft.chisel.block.BlockPresent;
+import com.cricketcraft.chisel.inventory.ContainerPresent;
+import com.cricketcraft.chisel.inventory.InventoryLargePresent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.cricketcraft.chisel.block.BlockPresent;
-import com.cricketcraft.chisel.inventory.ContainerPresent;
-import com.cricketcraft.chisel.inventory.InventoryLargePresent;
+import java.util.Iterator;
+import java.util.List;
 
 public class TileEntityPresent extends TileEntityChest {
 
-    public TileEntityPresent() {
+    public int type;
 
+    public TileEntityPresent(int type) {
+        this.type = type;
     }
 
     @Override
