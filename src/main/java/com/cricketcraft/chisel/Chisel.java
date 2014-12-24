@@ -47,7 +47,7 @@ import net.minecraftforge.common.config.Configuration;
 import java.io.File;
 
 
-@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;")
+@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;after:Thaumcraft")
 public class Chisel
 {
     public static final String MOD_ID = "chisel";
@@ -119,7 +119,7 @@ public class Chisel
         Configurations.refreshConfig();
 
         ModTabs.load();
-        ModBlocks.preInit();
+        ModBlocks.load();
         ModItems.load();
         proxy.preInit();
     }
@@ -127,7 +127,6 @@ public class Chisel
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	ModBlocks.init();
         Crafting.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new IGuiHandler() {
