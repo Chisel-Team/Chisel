@@ -1,9 +1,8 @@
 package com.cricketcraft.chisel.block.tileentity;
 
-import com.cricketcraft.chisel.block.BlockCarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.init.ModItems;
-import net.minecraft.block.Block;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -15,8 +14,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityAutoChisel extends TileEntity implements ISidedInventory {
 
@@ -92,69 +89,62 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
         }
 
         if(isFaster){
-            if(!worldObj.isRemote && worldObj.getWorldTime() % 20 == 0){
-                doTransaction();
-            }
-        } else {
-            if(!worldObj.isRemote && worldObj.getWorldTime() % 40 == 0){
-                doTransaction();
-            }
-        }
-
-        markDirty();
-    }
-
-    private void doTransaction(){
-        if(inventory[BASE] != null && inventory[TARGET] != null){
-            if(inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock){
-                Block base = Block.getBlockFromItem(inventory[BASE].getItem());
-                Block target = Block.getBlockFromItem(inventory[TARGET].getItem());
-
-                if(base instanceof BlockCarvable){
-                    BlockCarvable baseCarvable = (BlockCarvable) base;
-
-                    if(baseCarvable.carverHelper.variations.contains(target)){
-                        if(isStackMode){
-                            if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
+            if(!worldObj.isRemote && worldObj.getWorldTime() % 10 == 0){
+                if(inventory[BASE] != null && inventory[TARGET] != null){
+                    if(inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock){
+                        if(inventory[BASE].getUnlocalizedName().equalsIgnoreCase(inventory[TARGET].getUnlocalizedName())){
+                            if(isStackMode){
+                                if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
+                                    if(inventory[OUTPUT] == null){
+                                        inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 64, inventory[TARGET].getItemDamage());
+                                        inventory[BASE] = null;
+                                    }
+                                }
+                            } else {
                                 if(inventory[OUTPUT] == null){
-                                    inventory[OUTPUT] = inventory[BASE];
+                                    inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 1, inventory[TARGET].getItemDamage());
+                                    inventory[BASE].stackSize--;
+                                } else if(inventory[BASE].stackSize != 0){
+                                    inventory[OUTPUT].stackSize++;
+                                    inventory[BASE].stackSize--;
+                                } else {
                                     inventory[BASE] = null;
                                 }
-                            }
-                        } else {
-                            if(inventory[OUTPUT] == null){
-                                inventory[OUTPUT] = new ItemStack(base, 1, inventory[BASE].getItemDamage());
-                                inventory[BASE].stackSize--;
-                            } else if(inventory[BASE].stackSize != 0){
-                                inventory[OUTPUT].stackSize++;
-                                inventory[BASE].stackSize--;
                             }
                         }
                     }
-                } else if(target instanceof BlockCarvable){
-                    BlockCarvable targetCarvable = (BlockCarvable) target;
-
-                    if(targetCarvable.carverHelper.variations.contains(base)){
-                        if(isStackMode){
-                            if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
+                }
+            }
+        } else {
+            if(!worldObj.isRemote && worldObj.getWorldTime() % 40 == 0){
+                if(inventory[BASE] != null && inventory[TARGET] != null){
+                    if(inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock){
+                        if(inventory[BASE].getUnlocalizedName().equalsIgnoreCase(inventory[TARGET].getUnlocalizedName())){
+                            if(isStackMode){
+                                if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
+                                    if(inventory[OUTPUT] == null){
+                                        inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 64, inventory[TARGET].getItemDamage());
+                                        inventory[BASE] = null;
+                                    }
+                                }
+                            } else {
                                 if(inventory[OUTPUT] == null){
-                                    inventory[OUTPUT] = inventory[BASE];
+                                    inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 1, inventory[TARGET].getItemDamage());
+                                    inventory[BASE].stackSize--;
+                                } else if(inventory[BASE].stackSize != 0){
+                                    inventory[OUTPUT].stackSize++;
+                                    inventory[BASE].stackSize--;
+                                } else {
                                     inventory[BASE] = null;
                                 }
-                            }
-                        } else {
-                            if(inventory[OUTPUT] == null){
-                                inventory[OUTPUT] = new ItemStack(base, 1, inventory[BASE].getItemDamage());
-                                inventory[BASE].stackSize--;
-                            } else if(inventory[BASE].stackSize != 0){
-                                inventory[OUTPUT].stackSize++;
-                                inventory[BASE].stackSize--;
                             }
                         }
                     }
                 }
             }
         }
+
+        markDirty();
     }
 
     @Override
