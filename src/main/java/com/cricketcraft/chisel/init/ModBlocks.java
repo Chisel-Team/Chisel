@@ -6,7 +6,6 @@ import com.cricketcraft.chisel.block.*;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.client.render.item.ItemPresentRenderer;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.ItemMarbleSlab;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -1339,6 +1338,11 @@ public class ModBlocks {
         }
 
         if (Configurations.featureEnabled("chest")) {
+            for(int x = 0; x < 16; x++){
+                present[x] = (BlockPresent) new BlockPresent(x).setHardness(2.0F).setResistance(10.0F).setBlockName("present");
+                GameRegistry.registerBlock(present[x], "chest" + x);
+                Carving.chisel.addVariation("present", present[x], 0, (x + 1));
+            }
             Carving.chisel.addVariation("chest", Blocks.chest, 0, 0);
             Carving.chisel.registerOre("chest", "chest");
         }
