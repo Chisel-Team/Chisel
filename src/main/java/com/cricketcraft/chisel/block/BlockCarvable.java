@@ -1,7 +1,12 @@
 package com.cricketcraft.chisel.block;
 
-import java.util.List;
-
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.init.ModTabs;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -10,14 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.init.ModTabs;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 public class BlockCarvable extends Block implements ICarvable {
     public CarvableHelper carverHelper;
@@ -30,6 +28,8 @@ public class BlockCarvable extends Block implements ICarvable {
     public BlockCarvable(Material m) {
         super(m);
         carverHelper = new CarvableHelper();
+        setResistance(10.0F);
+        setHardness(2.0F);
         setCreativeTab(ModTabs.tabChiselBlocks);
     }
 

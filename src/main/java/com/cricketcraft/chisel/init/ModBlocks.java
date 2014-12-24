@@ -1545,7 +1545,7 @@ public class ModBlocks {
         }
         if(Configurations.featureEnabled("warningSign"))
         {
-        	sign = (BlockCarvable) new BlockCarvable(Material.iron);
+        	sign = (BlockCarvable) new BlockCarvable(Material.iron).setHardness(2.0F).setResistance(10.0F);
         	sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.0.desc"), 0, "warning/rad");
             sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.1.desc"), 1, "warning/bio");
             sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.2.desc"), 2, "warning/fire");
