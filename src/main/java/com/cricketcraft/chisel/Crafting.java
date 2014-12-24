@@ -144,5 +144,9 @@ public class Crafting {
                 GameRegistry.addShapelessRecipe(new ItemStack(ModBlocks.present[x]), new Object[]{new ItemStack(Blocks.chest, 1), new ItemStack(Items.dye, 1, x)});
             }
         }
+
+        if(Configurations.featureEnabled("warningSign")){
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.sign, 4, 0), new Object[]{"xxx", "xyx", "xxx", 'x', "stone", 'y', Items.sign}));
+        }
     }
 }
