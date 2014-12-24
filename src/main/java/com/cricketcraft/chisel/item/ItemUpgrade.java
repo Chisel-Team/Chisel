@@ -16,7 +16,7 @@ import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 
 public class ItemUpgrade extends BaseItem{
 
-    public IIcon[] icons = new IIcon[6];
+    public IIcon[] icons = new IIcon[3];
 
     public ItemUpgrade(String unlocalizedName) {
         super();

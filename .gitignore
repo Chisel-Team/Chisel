@@ -30,6 +30,7 @@ asm
 config
 logs
 screenshots
+mods
 
 *.txt
 *.json

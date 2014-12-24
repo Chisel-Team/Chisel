@@ -1,5 +1,8 @@
 package com.cricketcraft.chisel.block.tileentity;
 
+import com.cricketcraft.chisel.init.ModItems;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -11,14 +14,14 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityAutoChisel extends TileEntity implements ISidedInventory {
 
+    private final int BASE = 0, TARGET = 1, OUTPUT = 2, AUTOMATION = 3, STACK = 4, SPEED = 5;
+    private boolean isAutomated, isStackMode, isFaster;
     private static EntityItem ghostItem;
     boolean equal = false;
-    private ItemStack[] inventory = new ItemStack[3];
+    private ItemStack[] inventory = new ItemStack[6];
     private String name = "autoChisel";
 
     @Override
@@ -66,36 +69,74 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
     @Override
     public void updateEntity() {
-        if (!worldObj.isRemote && worldObj.getWorldTime() % 20 == 0) {
-            if (inventory[0] != null && inventory[1] != null) {
-                if (inventory[0].getItem() instanceof ItemBlock && inventory[1].getItem() instanceof ItemBlock) {
-                    if (inventory[0].getItem() == inventory[1].getItem()) {
-                        equal = true;
-                    } else {
-                        equal = false;
-                    }
-                    if (equal) {
-                        if (inventory[0].stackSize < 0) {
-                            inventory[0] = null;
-                        }
 
-                        if (inventory[1].stackSize < 0) {
-                            inventory[1] = null;
-                        }
+        if(inventory[SPEED] == new ItemStack(ModItems.upgrade, 1, 0)){
+            isFaster = true;
+        } else {
+            isFaster = false;
+        }
 
-                        if (inventory[1].stackSize < 0) {
-                            inventory[1] = null;
-                        }
+        if(inventory[AUTOMATION] == new ItemStack(ModItems.upgrade, 1, 1)){
+            isAutomated = true;
+        } else {
+            isAutomated = false;
+        }
 
-                        if (inventory[2] == null) {
-                            setInventorySlotContents(2, new ItemStack(inventory[1].getItem(), 1, inventory[1].getItemDamage()));
-                            decrStackSize(0, 1);
-                        } else {
-                            if (inventory[0].stackSize != 0 && inventory[2].stackSize <= getInventoryStackLimit()) {
-                                decrStackSize(0, 1);
-                                inventory[2].stackSize++;
+        if(inventory[STACK] == new ItemStack(ModItems.upgrade, 1, 2)){
+            isStackMode = true;
+        } else {
+            isStackMode = false;
+        }
+
+        if(isFaster){
+            if(!worldObj.isRemote && worldObj.getWorldTime() % 10 == 0){
+                if(inventory[BASE] != null && inventory[TARGET] != null){
+                    if(inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock){
+                        if(inventory[BASE].getUnlocalizedName().equalsIgnoreCase(inventory[TARGET].getUnlocalizedName())){
+                            if(isStackMode){
+                                if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
+                                    if(inventory[OUTPUT] == null){
+                                        inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 64, inventory[TARGET].getItemDamage());
+                                        inventory[BASE] = null;
+                                    }
+                                }
                             } else {
-                                inventory[0] = null;
+                                if(inventory[OUTPUT] == null){
+                                    inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 1, inventory[TARGET].getItemDamage());
+                                    inventory[BASE].stackSize--;
+                                } else if(inventory[BASE].stackSize != 0){
+                                    inventory[OUTPUT].stackSize++;
+                                    inventory[BASE].stackSize--;
+                                } else {
+                                    inventory[BASE] = null;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            if(!worldObj.isRemote && worldObj.getWorldTime() % 40 == 0){
+                if(inventory[BASE] != null && inventory[TARGET] != null){
+                    if(inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock){
+                        if(inventory[BASE].getUnlocalizedName().equalsIgnoreCase(inventory[TARGET].getUnlocalizedName())){
+                            if(isStackMode){
+                                if(inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()){
+                                    if(inventory[OUTPUT] == null){
+                                        inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 64, inventory[TARGET].getItemDamage());
+                                        inventory[BASE] = null;
+                                    }
+                                }
+                            } else {
+                                if(inventory[OUTPUT] == null){
+                                    inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 1, inventory[TARGET].getItemDamage());
+                                    inventory[BASE].stackSize--;
+                                } else if(inventory[BASE].stackSize != 0){
+                                    inventory[OUTPUT].stackSize++;
+                                    inventory[BASE].stackSize--;
+                                } else {
+                                    inventory[BASE] = null;
+                                }
                             }
                         }
                     }
@@ -179,7 +220,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
     @Override
     public int[] getAccessibleSlotsFromSide(int side) {
-        return new int[3];
+        return new int[6];
     }
 
     @Override
@@ -189,12 +230,22 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
     @Override
     public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
+        if(isAutomated){
+            if(side != 0 || side != 1 && slot == BASE){
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
-        return true;
+        if(isAutomated){
+            if(side == 0 || side == 1 && slot == OUTPUT){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

@@ -1,12 +1,11 @@
 package com.cricketcraft.chisel.inventory;
 
+import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 
 public class ContainerAutoChisel extends Container {
 
@@ -21,6 +20,10 @@ public class ContainerAutoChisel extends Container {
         addSlotToContainer(new Slot(tileEntityAutoChisel, 0, 53, 15));
         addSlotToContainer(new Slot(tileEntityAutoChisel, 1, 78, 51));
         addSlotToContainer(new Slot(tileEntityAutoChisel, 2, 103, 15));
+        addSlotToContainer(new Slot(tileEntityAutoChisel, 3, 151, 51));
+        addSlotToContainer(new Slot(tileEntityAutoChisel, 4, 151, 31));
+        addSlotToContainer(new Slot(tileEntityAutoChisel, 5, 151, 11));
+
 
         bindPlayerInventory(player);
     }
