@@ -1288,7 +1288,7 @@ public class ModBlocks {
         if(Configurations.featureEnabled("pumpkin"))
         {
             for(int metadata = 0; metadata < 16; metadata++){
-                pumpkin[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(false).setBlockName("pumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
+                pumpkin[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(false).setHardness(1.0F).setBlockName("pumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
                 pumpkin[metadata].setInformation("pumpkin/pumpkin_face_" + (metadata + 1) + "_off");
                 GameRegistry.registerBlock(pumpkin[metadata], "pumpkin" + (metadata + 1));
                 Carving.chisel.addVariation("pumpkin", pumpkin[metadata], 0, (metadata + 1));
@@ -1300,7 +1300,7 @@ public class ModBlocks {
         if(Configurations.featureEnabled("jackolantern"))
         {
             for(int metadata = 0; metadata < 16; metadata++){
-                jackolantern[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(true).setBlockName("litpumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
+                jackolantern[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(true).setHardness(1.0F).setBlockName("litpumpkin").setCreativeTab(ModTabs.tabChiselBlocks);
                 jackolantern[metadata].setInformation("pumpkin/pumpkin_face_" + (metadata + 1) + "_on");
                 GameRegistry.registerBlock(jackolantern[metadata], ("jackolantern" + (metadata + 1)));
                 Carving.chisel.addVariation("jackolantern", jackolantern[metadata], 0, (metadata + 1));
@@ -1536,7 +1536,7 @@ public class ModBlocks {
         {
             Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
             for(int metadata = 0; metadata < 6; metadata++){
-                torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setBlockName("torch").setCreativeTab(ModTabs.tabChiselBlocks);
+                torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setLightLevel(0.9375F).setBlockName("torch").setCreativeTab(ModTabs.tabChiselBlocks);
                 torch[metadata].setInformation("torch" + (metadata + 1));
                 GameRegistry.registerBlock(torch[metadata], "torch" + (metadata + 1));
                 Carving.chisel.addVariation("torch", torch[metadata], 0, (metadata + 1));
