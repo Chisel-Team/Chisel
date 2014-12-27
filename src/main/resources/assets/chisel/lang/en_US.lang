@@ -169,7 +169,14 @@ tile.warningSign.1.desc=Biohazard
 tile.warningSign.2.desc=Fire
 tile.warningSign.3.desc=Explosion
 tile.warningSign.4.desc=Death
-
+tile.warningSign.5.desc=Falling Objects
+tile.warningSign.6.desc=Danger of Falling
+tile.warningSign.7.desc=High Voltage
+tile.warningSign.8.desc=Generic Warning
+tile.warningSign.9.desc=Dangerous Chemicals
+tile.warningSign.10.desc=Under Construction
+tile.warningSign.11.desc=Loud Sounds
+tile.warningSign.12.desc=No Entry
 
 #Brick
 tile.brickCustom.name=Brick Block
