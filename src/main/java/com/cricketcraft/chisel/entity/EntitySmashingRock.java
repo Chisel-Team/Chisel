@@ -106,10 +106,10 @@ public class EntitySmashingRock extends EntityThrowable
             resMeta = 2;
         } else if(block.equals(Blocks.cobblestone))
         {
-            resBlock = Blocks.sand;
-        } else if(block.equals(Blocks.sand))
-        {
             resBlock = Blocks.gravel;
+        } else if(block.equals(Blocks.gravel))
+        {
+            resBlock = Blocks.sand;
         }
 
         if(resBlock.equals(block) && resMeta == meta)
