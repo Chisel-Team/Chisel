@@ -148,5 +148,9 @@ public class Crafting {
         if(Configurations.featureEnabled("warningSign")){
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.sign, 4, 0), new Object[]{"xxx", "xyx", "xxx", 'x', "stone", 'y', Items.sign}));
         }
+        if(Configurations.featureEnabled("scorching"))
+        {
+        	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.scorching, 8, 0), new Object[]{"xxx", "xyx", "xxx", 'x', "stone", 'y', Items.blaze_rod}));
+        }
     }
 }
