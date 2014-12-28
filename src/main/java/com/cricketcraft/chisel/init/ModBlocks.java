@@ -1568,11 +1568,14 @@ public class ModBlocks {
             arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
             Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.0.desc"), 0, "arcane/ArcaneMoon");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 1, "arcane/ArcaneMoonGlow");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.0.desc"), 0, "arcane/moonEngrave");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 1, "arcane/moonGlowAnim");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 2, "arcane/arcaneTile");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 3, "arcane/runes");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.4.desc"), 4, "arcane/runesGlow");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.5.desc"), 5, "arcane/arcaneBrickNoNoNo");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.6.desc"), 6, "arcane/conduitAnim");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.7.desc"), 7, "arcane/BorderBrain");
             arcane.carverHelper.register(arcane, "arcane");
             Carving.chisel.registerOre("arcane", "arcane");
         }
