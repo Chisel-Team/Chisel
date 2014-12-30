@@ -84,6 +84,7 @@ public class ModBlocks {
     public static BlockCarvable hexPlating;
     public static BlockCarvable technical;
     public static BlockCarvableGlass technical2;
+    public static BlockCarvable futura;
     public static BlockCarvable bone;
     public static BlockCarvable scorching;
     public static BlockCarvable brickCustom;
@@ -1497,6 +1498,17 @@ public class ModBlocks {
             technical2.carverHelper.register(technical2, "technical2");
             Carving.chisel.registerOre("technical2", "technical2");
         }
+
+        //Once screen overlay is done, remove WIP texs
+
+        if(Configurations.featureEnabled("futura")){
+            futura = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F);
+            futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.0.desc"), 0, "futura/screenMetallicWIP");
+            futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.1.desc"), 1, "futura/screenCyanWIP");
+            futura.carverHelper.register(futura, "futura");
+            Carving.chisel.registerOre("futura", "futura");
+        }
+
         if(Configurations.featureEnabled("bone"))
         {
         	bone = (BlockCarvable) new BlockCarvable(Material.rock);
@@ -1508,6 +1520,7 @@ public class ModBlocks {
             bone.carverHelper.register(bone, "bone");
             Carving.chisel.registerOre("bone", "bone");
         }
+
         if(Configurations.featureEnabled("scorching"))
         {
         	scorching = (BlockCarvable) new BlockCarvable(Material.rock).setLightLevel(1F);
@@ -1519,6 +1532,7 @@ public class ModBlocks {
             scorching.carverHelper.register(scorching, "scorching");
             Carving.chisel.registerOre("scorching", "scorching");
         }
+
         if(Configurations.featureEnabled("brickCustom"))
         {
             brickCustom = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
@@ -1532,6 +1546,7 @@ public class ModBlocks {
             brickCustom.carverHelper.register(brickCustom, "brickCustom");
             Carving.chisel.registerOre("brickCustom", "brickCustom");
         }
+
         if(Configurations.featureEnabled("torch"))
         {
             Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
@@ -1543,6 +1558,7 @@ public class ModBlocks {
             }
             Carving.chisel.registerOre("torch", "torch");
         }
+
         if(Configurations.featureEnabled("warningSign"))
         {
         	sign = (BlockCarvable) new BlockCarvable(Material.iron).setHardness(2.0F).setResistance(10.0F);
@@ -1563,6 +1579,8 @@ public class ModBlocks {
             Carving.chisel.registerOre("warningSign", "warningSign");
         }
 
+        //Thaumcraft
+
         if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
         {
             arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
@@ -1571,14 +1589,16 @@ public class ModBlocks {
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.0.desc"), 0, "arcane/moonEngrave");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 1, "arcane/moonGlowAnim");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 2, "arcane/arcaneTile");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 3, "arcane/runes");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.4.desc"), 4, "arcane/runesGlow");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.5.desc"), 5, "arcane/arcaneBrickNoNoNo");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 3, "arcane/arcaneRunes");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.4.desc"), 4, "arcane/arcaneRunesGlow");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.5.desc"), 5, "arcane/arcaneBigBrick");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.6.desc"), 6, "arcane/conduitAnim");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.7.desc"), 7, "arcane/BorderBrain");
             arcane.carverHelper.register(arcane, "arcane");
             Carving.chisel.registerOre("arcane", "arcane");
         }
+
+        //Twilight Forest
 
         if(Configurations.featureEnabled("TFMazestone") && Loader.isModLoaded("TwilightForest"))
         {
@@ -1592,5 +1612,23 @@ public class ModBlocks {
             Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 7, 7);
             Carving.chisel.registerOre("TFMazestone", "TFMazestone");
         }
+
+        if(Configurations.featureEnabled("TFTowerStone") && Loader.isModLoaded("TwilightForest"))
+        {
+            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "tile.TFTowerStone"), 0, 0);
+            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "tile.TFTowerStone"), 1, 1);
+            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "tile.TFTowerStone"), 2, 2);
+            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "tile.TFTowerStone"), 3, 3);
+            Carving.chisel.registerOre("TFTowerStone", "TFTowerStone");
+        }
+
+        if(Configurations.featureEnabled("TFUnderBrick") && Loader.isModLoaded("TwilightForest"))
+        {
+            Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "tile.TFUnderBrick"), 0, 0);
+            Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "tile.TFUnderBrick"), 1, 1);
+            Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "tile.TFUnderBrick"), 2, 2);
+            Carving.chisel.registerOre("TFUnderBrick", "TFUnderBrick");
+        }
+
     }
 }
