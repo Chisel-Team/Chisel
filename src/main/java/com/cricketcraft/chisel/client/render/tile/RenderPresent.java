@@ -31,14 +31,14 @@ public class RenderPresent extends TileEntityChestRenderer {
 
             if (block instanceof BlockPresent && i == 0) {
                 try {
-                    ((BlockPresent) block).changeMetadataBasedOffSpecs(present.getWorldObj(), present.xCoord, present.yCoord, present.zCoord);
+                    ((BlockPresent) block).func_149954_e(present.getWorldObj(), present.xCoord, present.yCoord, present.zCoord);
                 } catch (ClassCastException e) {
                     FMLLog.severe("[Chisel 2] Attempted to render a present at %d,  %d, %d that was not a present", present.xCoord, present.yCoord, present.zCoord);
                 }
                 i = present.getBlockMetadata();
             }
 
-            present.checkForAdjacentPresents();
+            present.checkForAdjacentChests();
         }
 
         if (present.adjacentChestZNeg == null && present.adjacentChestXNeg == null) {
