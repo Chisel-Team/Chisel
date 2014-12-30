@@ -14,7 +14,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TileEntityPresent extends TileEntityChest {
-
     public int type;
     private int ticksSinceSync;
 
@@ -24,94 +23,7 @@ public class TileEntityPresent extends TileEntityChest {
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return this.worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64.0D;
-    }
-
-    public void checkIfAdjacentBlocksAreMe(TileEntityPresent tile, int meta) {
-        if (tile.isInvalid()) {
-            this.adjacentChestChecked = false;
-        } else if (this.adjacentChestChecked) {
-            switch (meta) {
-                case 0:
-                    if (this.adjacentChestZPos != tile) {
-                        this.adjacentChestChecked = false;
-                    }
-
-                    break;
-                case 1:
-                    if (this.adjacentChestXNeg != tile) {
-                        this.adjacentChestChecked = false;
-                    }
-
-                    break;
-                case 2:
-                    if (this.adjacentChestZNeg != tile) {
-                        this.adjacentChestChecked = false;
-                    }
-
-                    break;
-                case 3:
-                    if (this.adjacentChestXPos != tile) {
-                        this.adjacentChestChecked = false;
-                    }
-            }
-        }
-    }
-
-    public void checkForAdjacentPresents() {
-        if (!this.adjacentChestChecked) {
-            TileEntityPresent zNeg = (TileEntityPresent) this.adjacentChestZNeg;
-            TileEntityPresent xPos = (TileEntityPresent) this.adjacentChestXPos;
-            TileEntityPresent xNeg = (TileEntityPresent) this.adjacentChestXNeg;
-            TileEntityPresent zPos = (TileEntityPresent) this.adjacentChestZPos;
-            this.adjacentChestChecked = true;
-
-            if (this.isBlockPresent(xCoord - 1, yCoord, zCoord)) {
-                xNeg = (TileEntityPresent) this.worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
-            }
-
-            if (this.isBlockPresent(xCoord + 1, yCoord, zCoord)) {
-                xPos = (TileEntityPresent) this.worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
-            }
-
-            if (this.isBlockPresent(xCoord, yCoord, zCoord - 1)) {
-                zNeg = (TileEntityPresent) this.worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
-            }
-
-            if (this.isBlockPresent(xCoord, yCoord, zCoord + 1)) {
-                zPos = (TileEntityPresent) this.worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
-            }
-
-            if (this.adjacentChestZNeg != null) {
-                zNeg.checkIfAdjacentBlocksAreMe(this, 0);
-            }
-
-            if (this.adjacentChestZPos != null) {
-                zPos.checkIfAdjacentBlocksAreMe(this, 2);
-            }
-
-            if (this.adjacentChestXPos != null) {
-                xPos.checkIfAdjacentBlocksAreMe(this, 1);
-            }
-
-            if (this.adjacentChestXNeg != null) {
-                xNeg.checkIfAdjacentBlocksAreMe(this, 3);
-            }
-
-            this.adjacentChestXNeg = xNeg;
-            this.adjacentChestXPos = xPos;
-            this.adjacentChestZPos = zPos;
-            this.adjacentChestZNeg = zNeg;
-        }
-    }
-
-    private boolean isBlockPresent(int x, int y, int z) {
-        if (this.worldObj == null) {
-            return false;
-        } else {
-            Block block = this.worldObj.getBlock(x, y, z);
-            return block instanceof BlockPresent;
-        }
+        return this.worldObj.getTileEntity(this.xCoord, this.yCoord, this.zCoord) != this ? false : player.getDistanceSq(this.xCoord + 0.5D, this.yCoord + 0.5D, this.zCoord + 0.5D) <= 64.0D;
     }
 
     @Override
@@ -209,32 +121,5 @@ public class TileEntityPresent extends TileEntityChest {
                 this.lidAngle = 0.0F;
             }
         }
-    }
-
-    @Override
-    public void openInventory() {
-        if (numPlayersUsing < 0) {
-            numPlayersUsing = 0;
-        }
-
-        ++numPlayersUsing;
-        worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, numPlayersUsing);
-        worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
-        worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, getBlockType());
-    }
-
-    @Override
-    public void closeInventory() {
-        numPlayersUsing = 0;
-        worldObj.addBlockEvent(xCoord, yCoord, zCoord, getBlockType(), 1, numPlayersUsing);
-        worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord, zCoord, getBlockType());
-        worldObj.notifyBlocksOfNeighborChange(xCoord, yCoord - 1, zCoord, getBlockType());
-    }
-
-    @Override
-    public void invalidate() {
-        super.invalidate();
-        updateContainingBlockInfo();
-        checkForAdjacentPresents();
     }
 }
