@@ -1,3 +1,13 @@
+2.2.1:
+Fixed Presents not rendering correctly, and combined their inventories properly
+Various bits of texture work
+Removed Chisel left click
+Added various missing hardness/resistance values to blocks (signs included)
+Added missing recipe for technical blocks
+Added missing lightValue to torches
+French language support
+Made preparations for some Arcane Blocks
+
 2.2.0:
 Added Grimstone
 Added non purple fantasy blocks
