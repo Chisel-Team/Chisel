@@ -18,7 +18,7 @@ buildscript {
 
 apply plugin: 'forge'
 apply plugin: 'maven'
-version = "2.2.0"
+version = "2.2.1"
 group = "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Chisel 2"
 
@@ -35,7 +35,7 @@ repositories {
 		name 'Chicken Bones Repo'
 		url "http://chickenbones.net/maven/"
 	}
-	
+
     maven {
 		name 'Prof Mobius Repo'
 		url "http://mobiusstrip.eu/maven"
@@ -69,7 +69,7 @@ processResources
                 exclude 'mcmod.info'
             }
         }
-		
+
 // Create deobf dev jars
 task deobfJar(type: Jar) {
     from sourceSets.main.output
