@@ -1587,16 +1587,37 @@ public class ModBlocks {
             Carving.chisel.registerOre("quartz", "quartz");
         }
 
+        //Thaumcraft
+
+        if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
+        {
+            arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
+            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.0.desc"), 0, "arcane/moonEngrave");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 1, "arcane/moonGlowAnim");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 2, "arcane/arcaneTile");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 3, "arcane/arcaneRunes");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.4.desc"), 4, "arcane/arcaneRunesGlow");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.5.desc"), 5, "arcane/arcaneBigBrick");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.6.desc"), 6, "arcane/conduitAnim");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.7.desc"), 7, "arcane/BorderBrain");
+            arcane.carverHelper.register(arcane, "arcane");
+            Carving.chisel.registerOre("arcane", "arcane");
+        }
+
+        /* It no work
+
         //Railcraft
 
         if(Configurations.featureEnabled("RCInfernalStone") && Loader.isModLoaded("Railcraft"))
         {
-            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.infernal"), 0, 0);
-            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.infernal"), 1, 1);
-            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.infernal"), 2, 2);
-            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.infernal"), 3, 3);
-            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.infernal"), 4, 4);
-            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.infernal"), 5, 5);
+            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 0, 0);
+            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 1, 1);
+            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 2, 2);
+            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 3, 3);
+            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 4, 4);
+            Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 5, 5);
             Carving.chisel.registerOre("RCInfernalStone", "RCInfernalStone");
         }
 
@@ -1654,37 +1675,18 @@ public class ModBlocks {
             Carving.chisel.registerOre("RCBloodStained", "RCBloodStained");
         }
 
-        //Thaumcraft
-
-        if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
-        {
-            arcane = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone);
-            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
-            Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.0.desc"), 0, "arcane/moonEngrave");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.1.desc"), 1, "arcane/moonGlowAnim");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 2, "arcane/arcaneTile");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 3, "arcane/arcaneRunes");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.4.desc"), 4, "arcane/arcaneRunesGlow");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.5.desc"), 5, "arcane/arcaneBigBrick");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.6.desc"), 6, "arcane/conduitAnim");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.7.desc"), 7, "arcane/BorderBrain");
-            arcane.carverHelper.register(arcane, "arcane");
-            Carving.chisel.registerOre("arcane", "arcane");
-        }
-
         //Twilight Forest
 
-        if(Configurations.featureEnabled("TFMazestone") && Loader.isModLoaded("TwilightForest"))
+        if(Configurations.featureEnabled("TFMazestone") && Loader.isModLoaded("Twilight Forest"))
         {
-            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "TFMazestone"), 0, 0);
-            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "TFMazestone"), 1, 1);
-            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "TFMazestone"), 2, 2);
-            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "TFMazestone"), 3, 3);
-            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "TFMazestone"), 4, 4);
-            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "TFMazestone"), 5, 5);
-            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "TFMazestone"), 6, 6);
-            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "TFMazestone"), 7, 7);
+            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 0, 0);
+            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 1, 1);
+            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 2, 2);
+            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 3, 3);
+            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 4, 4);
+            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 5, 5);
+            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 6, 6);
+            Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 7, 7);
             Carving.chisel.registerOre("TFMazestone", "TFMazestone");
         }
 
@@ -1707,21 +1709,23 @@ public class ModBlocks {
 
         //Applied Energistics
 
-        if(Configurations.featureEnabled("AECertusQuartz") && Loader.isModLoaded("AppliedEnergistics2"))
+        if(Configurations.featureEnabled("AECertusQuartz") && Loader.isModLoaded("appliedenergistics2"))
         {
-            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("AppliedEnergistics2", "BlockQuartz"), 0, 0);
-            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("AppliedEnergistics2", "BlockQuartzPillar"), 0, 1);
-            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("AppliedEnergistics2", "BlockQuartzChiseled"), 0, 2);
+            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "BlockQuartz"), 0, 0);
+            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "BlockQuartzPillar"), 0, 1);
+            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "BlockQuartzChiseled"), 0, 2);
             Carving.chisel.registerOre("AECertusQuartz", "AECertusQuartz");
         }
 
-        if(Configurations.featureEnabled("AESkyStone") && Loader.isModLoaded("AppliedEnergistics2"))
+        if(Configurations.featureEnabled("AESkyStone") && Loader.isModLoaded("appliedenergistics2"))
         {
-            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("AppliedEnergistics2", "BlockSkystone"), 1, 0);
-            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("AppliedEnergistics2", "BlockSkystone"), 2, 1);
-            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("AppliedEnergistics2", "BlockSkystone"), 3, 2);
+            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "BlockSkystone"), 1, 0);
+            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "BlockSkystone"), 2, 1);
+            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "BlockSkystone"), 3, 2);
             Carving.chisel.registerOre("AESkyStone", "AESkyStone");
         }
+
+        */
 
     }
 }
