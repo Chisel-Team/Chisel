@@ -30,7 +30,7 @@ public class ModTabs {
             {
             	//Broken
                 //return Item.getItemFromBlock(ModBlocks.bookshelf);
-            	return ModItems.chisel
+            	return ModItems.chisel;
             }
         };
         tabMetalChiselBlocks = new CreativeTabs("tabMetalChiselBlocks") {
