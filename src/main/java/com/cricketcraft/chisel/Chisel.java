@@ -185,6 +185,7 @@ public class Chisel
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
+    	ModBlocks.postLoad();
         ModIntegration.postInit();
         Compatibility.init(event);
     }
