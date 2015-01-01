@@ -25,7 +25,6 @@ public class BlockMarbleIce extends BlockIce implements ICarvable
     {
         super();
         carverHelper = new CarvableHelper();
-        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     @Override

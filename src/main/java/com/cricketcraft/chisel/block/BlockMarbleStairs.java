@@ -29,7 +29,6 @@ public class BlockMarbleStairs extends BlockStairs implements ICarvable
         super(block, meta);
 
         this.useNeighborBrightness = true;
-        setCreativeTab(ModTabs.tabChiselBlocks);
         carverHelper = helper;
         blockMeta = meta;
     }

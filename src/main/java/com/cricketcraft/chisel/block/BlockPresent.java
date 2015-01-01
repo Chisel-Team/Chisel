@@ -40,11 +40,10 @@ public class BlockPresent extends BlockChest implements ICarvable {
         super(1);
         this.type = type;
         carverHelper = new CarvableHelper();
-        setCreativeTab(ModTabs.tabChiselBlocks);
         setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0875F, 0.9365F);
 
         Calendar calendar = Calendar.getInstance();
-
+        //Unneeded?
         if (calendar.get(2) + 1 == 12 || calendar.get(2) + 1 == 1) {
             isChristmas = true; //The Christmas Season lasts for december and january
         } else {

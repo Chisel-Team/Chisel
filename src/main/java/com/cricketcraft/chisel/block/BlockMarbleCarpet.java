@@ -23,8 +23,6 @@ public class BlockMarbleCarpet extends BlockCarpet implements ICarvable
     public BlockMarbleCarpet(Material m)
     {
         carverHelper = new CarvableHelper();
-
-        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
 

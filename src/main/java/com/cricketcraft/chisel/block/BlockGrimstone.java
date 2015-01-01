@@ -17,7 +17,6 @@ public class BlockGrimstone extends BlockCarvable {
 
     public BlockGrimstone(Material m) {
         super(m);
-        this.setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     @Override

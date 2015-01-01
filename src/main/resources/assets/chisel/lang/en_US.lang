@@ -1147,7 +1147,10 @@ tile.laboratory.14.desc=Direction Console (Left)
 tile.laboratory.15.desc=Information Console
 
 # Creative Tab localizations
-itemGroup.tabChiselBlocks=Chisel Blocks
+itemGroup.tabOtherChiselBlocks=Other Chisel Blocks
+itemGroup.tabStoneChiselBlocks=Stone Chisel Blocks
+itemGroup.tabWoodChiselBlocks=Wood Chisel Blocks
+itemGroup.tabMetalChiselBlocks=Metal Chisel Blocks
 itemGroup.tabChisel=Chisel Items
 
 #Container

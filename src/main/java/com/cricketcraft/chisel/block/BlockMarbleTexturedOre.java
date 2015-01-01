@@ -23,16 +23,12 @@ public class BlockMarbleTexturedOre extends BlockTexturedOre implements ICarvabl
         super(mat, baseIcon);
 
         carverHelper = new CarvableHelper();
-
-        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     public BlockMarbleTexturedOre(Material mat, Block block) {
         super(mat, block);
 
         carverHelper = new CarvableHelper();
-
-        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     @Override

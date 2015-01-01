@@ -28,7 +28,7 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable
         super(Material.glass, false);
 
         carverHelper = new CarvableHelper();
-        setCreativeTab(ModTabs.tabChiselBlocks);
+        setCreativeTab(ModTabs.tabOtherChiselBlocks);
     }
 
     public BlockCarvableGlass setStained(boolean a)
