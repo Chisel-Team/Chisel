@@ -21,7 +21,6 @@ public class BlockVoidstonePillar extends Block implements ICarvable{
         carvableHelper = new CarvableHelper();
         setHardness(5.0F);
         setResistance(10.0F);
-        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     @Override

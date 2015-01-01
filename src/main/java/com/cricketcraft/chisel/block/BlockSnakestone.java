@@ -57,7 +57,6 @@ public class BlockSnakestone extends Block
         setHardness(1.5F);
         setResistance(10.0F);
         setStepSound(Block.soundTypeStone);
-        setCreativeTab(ModTabs.tabChiselBlocks);
         flipTopTextures = false;
 
         this.iconPrefix = iconPrefix;

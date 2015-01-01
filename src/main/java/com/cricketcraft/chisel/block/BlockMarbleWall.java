@@ -21,8 +21,6 @@ public class BlockMarbleWall extends BlockWall
         super(block);
 
         carverHelper = new CarvableHelper();
-
-        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     @Override

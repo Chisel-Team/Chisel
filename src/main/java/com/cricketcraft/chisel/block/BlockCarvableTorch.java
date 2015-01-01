@@ -19,8 +19,6 @@ public class BlockCarvableTorch extends BlockTorch implements ICarvable
         super();
 
         carverHelper = new CarvableHelper();
-
-        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 	@Override
 	public CarvableVariation getVariation(int metadata) {

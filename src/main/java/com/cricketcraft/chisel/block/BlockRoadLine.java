@@ -23,8 +23,6 @@ public class BlockRoadLine extends Block
 
         this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.00390625f, 1.0f);
 //        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
-
-        setCreativeTab(ModTabs.tabChiselBlocks);
     }
 
     @Override
