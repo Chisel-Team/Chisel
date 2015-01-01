@@ -746,6 +746,70 @@ tile.iceStairs.13.desc=Ice Zelda Stairs
 tile.iceStairs.14.desc=Ice Bismuth Stairs
 tile.iceStairs.15.desc=Ice Poison Stairs
 
+#Packed Ice
+tile.packedice.name=Packed Ice
+tile.packedice.1.desc=Rough Packed Ice Block
+tile.packedice.2.desc=Cobble-packedice
+tile.packedice.3.desc=Large Rough Packed Ice Bricks
+tile.packedice.4.desc=Large Packed Ice Bricks
+tile.packedice.5.desc=Small Packed Ice Bricks
+tile.packedice.6.desc=Fancy Glass Wall
+tile.packedice.7.desc=Large Packed Ice Tiles
+tile.packedice.8.desc=Fancy Packed Ice Tiles
+tile.packedice.9.desc=Sunken Packed Ice Tiles
+tile.packedice.10.desc=Disordered Packed Ice Tiles
+tile.packedice.11.desc=Packed Ice Panel
+tile.packedice.12.desc=Packed Ice Double Slab
+tile.packedice.13.desc=Packed Ice Zelda Block
+tile.packedice.14.desc=Packed Ice Bismuth Block
+tile.packedice.15.desc=Packed Ice Poison Block
+
+#Packed Ice Pillars
+tile.packedice_pillar.name=Packed Ice Pillar
+tile.packedicePillar.0.desc=Packed Ice Pillar
+tile.packedicePillar.1.desc=Packed Ice Pillar Capstone
+tile.packedicePillar.2.desc=Packed Ice Pillar Base
+tile.packedicePillar.3.desc=Small Packed Ice Pillar
+tile.packedicePillar.4.desc=Carved Packed Ice Pillar
+tile.packedicePillar.5.desc=Ornamental Packed Ice Pillar
+tile.packedicePillar.6.desc=Greek Packed Ice Pillar
+tile.packedicePillar.7.desc=Plain Packed Ice Pillar
+tile.packedicePillar.8.desc=Greek Packed Ice Pillar Capstone
+tile.packedicePillar.9.desc=Plain Packed Ice Pillar Capstone
+tile.packedicePillar.10.desc=Greek Packed Ice Pillar Base
+tile.packedicePillar.11.desc=Plain Packed Ice Pillar Base
+tile.packedicePillar.12.desc=Greek Packed Ice Pillar Ornate Capstone
+tile.packedicePillar.13.desc=Plain Packed Ice Pillar Ornate Capstone
+tile.packedicePillar.14.desc=Greek Packed Ice Pillar Ornate Base
+tile.packedicePillar.15.desc=Plain Packed Ice Pillar Ornate Base
+
+#Packed Ice Stairs
+tile.packedice_stairs.name=Packed Ice Stairs
+tile.packedice_stairs.0.name=Packed Ice Stairs
+tile.packedice_stairs.1.name=Packed Ice Stairs
+tile.packedice_stairs.2.name=Packed Ice Stairs
+tile.packedice_stairs.3.name=Packed Ice Stairs
+tile.packedice_stairs.4.name=Packed Ice Stairs
+tile.packedice_stairs.5.name=Packed Ice Stairs
+tile.packedice_stairs.6.name=Packed Ice Stairs
+tile.packedice_stairs.7.name=Packed Ice Stairs
+tile.packediceStairs.0.desc=Packed Ice Stairs
+tile.packediceStairs.1.desc=Rough Packed Ice Stairs
+tile.packediceStairs.2.desc=Cobble-Packed Ice Stairs
+tile.packediceStairs.3.desc=Large rough Packed Ice Brick Stairs
+tile.packediceStairs.4.desc=Large Packed Ice Brick Stairs
+tile.packediceStairs.5.desc=Small Packed Ice Brick Stairs
+tile.packediceStairs.6.desc=Fancy Packed Ice Wall Stairs
+tile.packediceStairs.7.desc=Large Packed Ice Tile Stairs
+tile.packediceStairs.8.desc=Fancy Packed Ice Tile Stairs
+tile.packediceStairs.9.desc=Sunken Packed Ice Tile Stairs
+tile.packediceStairs.10.desc=Disordered Packed Ice Tile Stairs
+tile.packediceStairs.11.desc=Packed Ice Panel Stairs
+tile.packediceStairs.12.desc=Packed Ice Double Slab Stairs
+tile.packediceStairs.13.desc=Packed Ice Zelda Stairs
+tile.packediceStairs.14.desc=Packed Ice Bismuth Stairs
+tile.packediceStairs.15.desc=Packed Ice Poison Stairs
+
 #Obsidian
 tile.obsidian.name=Obsidian
 tile.obsidian.1.desc=Large Obsidian Pillar
