@@ -1,21 +1,58 @@
 package com.cricketcraft.chisel.init;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.Configurations;
-import com.cricketcraft.chisel.block.*;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.item.ItemCarvable;
-import com.cricketcraft.chisel.item.ItemMarbleSlab;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.Configurations;
+import com.cricketcraft.chisel.block.BlockAutoChisel;
+import com.cricketcraft.chisel.block.BlockBeaconBase;
+import com.cricketcraft.chisel.block.BlockCarvable;
+import com.cricketcraft.chisel.block.BlockCarvableGlass;
+import com.cricketcraft.chisel.block.BlockCarvablePane;
+import com.cricketcraft.chisel.block.BlockCarvablePowered;
+import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
+import com.cricketcraft.chisel.block.BlockCarvableTorch;
+import com.cricketcraft.chisel.block.BlockCloud;
+import com.cricketcraft.chisel.block.BlockConcrete;
+import com.cricketcraft.chisel.block.BlockEldritch;
+import com.cricketcraft.chisel.block.BlockGrimstone;
+import com.cricketcraft.chisel.block.BlockHolystone;
+import com.cricketcraft.chisel.block.BlockLavastone;
+import com.cricketcraft.chisel.block.BlockLeaf;
+import com.cricketcraft.chisel.block.BlockLightstoneCarvable;
+import com.cricketcraft.chisel.block.BlockMarbleBookshelf;
+import com.cricketcraft.chisel.block.BlockMarbleCarpet;
+import com.cricketcraft.chisel.block.BlockMarbleIce;
+import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
+import com.cricketcraft.chisel.block.BlockMarblePackedIce;
+import com.cricketcraft.chisel.block.BlockMarblePackedIceStairs;
+import com.cricketcraft.chisel.block.BlockMarblePillar;
+import com.cricketcraft.chisel.block.BlockMarbleSlab;
+import com.cricketcraft.chisel.block.BlockMarbleStairs;
+import com.cricketcraft.chisel.block.BlockMarbleStairsMaker;
+import com.cricketcraft.chisel.block.BlockMarbleStairsMakerCreator;
+import com.cricketcraft.chisel.block.BlockMarbleTexturedOre;
+import com.cricketcraft.chisel.block.BlockMarbleWall;
+import com.cricketcraft.chisel.block.BlockPresent;
+import com.cricketcraft.chisel.block.BlockRoadLine;
+import com.cricketcraft.chisel.block.BlockSnakestone;
+import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
+import com.cricketcraft.chisel.block.BlockVoidstonePillar;
+import com.cricketcraft.chisel.block.BlockVoidstonePillar2;
+import com.cricketcraft.chisel.block.BlockWaterstone;
+import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.item.ItemCarvable;
+import com.cricketcraft.chisel.item.ItemMarbleSlab;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
     public static BlockCarvable marble;
@@ -47,7 +84,10 @@ public class ModBlocks {
     public static BlockCarvablePane paneIron;
     public static BlockMarbleIce ice;
     public static BlockMarbleIce icePillar;
+    public static BlockMarblePackedIce packedice;
+    public static BlockMarblePackedIce packedicePillar;
     public static BlockMarbleIceStairs iceStairs;
+    public static BlockMarblePackedIceStairs packediceStairs;
     public static BlockCarvable[] planks = new BlockCarvable[6];
     public static BlockCarvable obsidian;
     public static BlockCarvablePowered redstone;
@@ -787,6 +827,84 @@ public class ModBlocks {
                     }
                 }, "ice_stairs");
                 Carving.chisel.registerOre("iceStairs", "iceStairs");
+            }
+        }
+        //TODO: Make these textures a bit less transparent
+        if(Configurations.featureEnabled("packedice"))
+        {
+            packedice = (BlockMarblePackedIce) new BlockMarblePackedIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
+            Carving.chisel.addVariation("packedice", Blocks.packed_ice, 0, 0);
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.1.desc"), 1, "packedice/a1-ice-light");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.2.desc"), 2, "packedice/a1-stonecobble-icecobble");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.3.desc"), 3, "packedice/a1-netherbrick-ice");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.4.desc"), 4, "packedice/a1-stonecobble-icebrick");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.5.desc"), 5, "packedice/a1-stonecobble-icebricksmall");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.6.desc"), 6, "packedice/a1-stonecobble-icedungeon");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.7.desc"), 7, "packedice/a1-stonecobble-icefour");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.8.desc"), 8, "packedice/a1-stonecobble-icefrench");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.9.desc"), 9, "packedice/sunkentiles");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.10.desc"), 10, "packedice/tiles");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.11.desc"), 11, "packedice/a1-stonecobble-icepanel");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.12.desc"), 12, "packedice/a1-stoneslab-ice");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.13.desc"), 13, "packedice/zelda");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.14.desc"), 14, "packedice/bismuth");
+            packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.15.desc"), 15, "packedice/poison");
+            packedice.carverHelper.register(packedice, "packedice");
+            Carving.chisel.registerOre("packedice", "packedice");
+
+            if(Configurations.featureEnabled("packedicePillar"))
+            {
+                packedicePillar = (BlockMarblePackedIce) new BlockMarblePackedIce().setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
+                packedicePillar.carverHelper.setChiselBlockName("Packed Ice Pillar");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.0.desc"), 0, "packedicepillar/column");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.1.desc"), 1, "packedicepillar/capstone");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.2.desc"), 2, "packedicepillar/base");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.3.desc"), 3, "packedicepillar/small");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.4.desc"), 4, "packedicepillar/pillar-carved");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.5.desc"), 5, "packedicepillar/a1-stoneornamental-marblegreek");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.6.desc"), 6, "packedicepillar/a1-stonepillar-greek");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.7.desc"), 7, "packedicepillar/a1-stonepillar-plain");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.8.desc"), 8, "packedicepillar/a1-stonepillar-greektopplain");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.9.desc"), 9, "packedicepillar/a1-stonepillar-plaintopplain");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.10.desc"), 10, "packedicepillar/a1-stonepillar-greekbottomplain");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.11.desc"), 11, "packedicepillar/a1-stonepillar-plainbottomplain");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.12.desc"), 12, "packedicepillar/a1-stonepillar-greektopgreek");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.13.desc"), 13, "packedicepillar/a1-stonepillar-plaintopgreek");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.14.desc"), 14, "packedicepillar/a1-stonepillar-greekbottomgreek");
+                packedicePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.15.desc"), 15, "packedicepillar/a1-stonepillar-plainbottomgreek");
+                packedicePillar.carverHelper.register(packedicePillar, "packedice_pillar");
+                Carving.chisel.setGroupClass("packedice_pillar", "packedice");
+            }
+
+            if(Configurations.featureEnabled("packediceStairs"))
+            {
+                BlockMarbleStairsMaker makerPackedIceStairs = new BlockMarbleStairsMaker(Blocks.packed_ice);
+                makerPackedIceStairs.carverHelper.setChiselBlockName("Packed Ice Stairs");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.0.desc"), 0, Blocks.packed_ice);
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.1.desc"), 1, "packedice/a1-ice-light");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.2.desc"), 2, "packedice/a1-stonecobble-icecobble");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.3.desc"), 3, "packedice/a1-netherbrick-ice");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.4.desc"), 4, "packedice/a1-stonecobble-icebrick");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.5.desc"), 5, "packedice/a1-stonecobble-icebricksmall");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.6.desc"), 6, "packedice/a1-stonecobble-icedungeon");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.7.desc"), 7, "packedice/a1-stonecobble-icefour");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.8.desc"), 8, "packedice/a1-stonecobble-icefrench");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.9.desc"), 9, "packedice/sunkentiles");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.10.desc"), 10, "packedice/tiles");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.11.desc"), 11, "packedice/a1-stonecobble-icepanel");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.12.desc"), 12, "packedice/a1-stoneslab-ice");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.13.desc"), 13, "packedice/zelda");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.14.desc"), 14, "packedice/bismuth");
+                makerPackedIceStairs.carverHelper.addVariation(StatCollector.translateToLocal("tile.packediceStairs.15.desc"), 15, "packedice/poison");
+                makerPackedIceStairs.create(new BlockMarbleStairsMakerCreator()
+                {
+                    @Override
+                    public BlockMarbleStairs create(Block block, int meta, CarvableHelper helper)
+                    {
+                        return new BlockMarblePackedIceStairs(block, meta, helper);
+                    }
+                }, "packedice_stairs");
+                Carving.chisel.registerOre("packedIceStairs", "packedIceStairs");
             }
         }
 
