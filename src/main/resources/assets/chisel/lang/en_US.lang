@@ -80,8 +80,9 @@ tile.arcane.2.desc=Beveled Tile
 tile.arcane.3.desc=Engraved Symbols
 tile.arcane.4.desc=Glowing Symbols
 tile.arcane.5.desc=Bricks
-tile.arcane.6.desc=Vis Conduit
+tile.arcane.6.desc=Flux Conduit
 tile.arcane.7.desc=Braaainz
+tile.arcane.8.desc=Controlled Conduit
 
 #Futura
 tile.futura.name=Futura Block
