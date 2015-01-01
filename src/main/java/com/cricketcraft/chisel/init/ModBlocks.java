@@ -1719,8 +1719,8 @@ public class ModBlocks {
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.2.desc"), 2, "arcane/arcaneTile");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.3.desc"), 3, "arcane/arcaneRunes");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.4.desc"), 4, "arcane/arcaneRunesGlow");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.5.desc"), 5, "arcane/arcaneBigBrick");
-            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.6.desc"), 6, "arcane/conduitAnim");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.5.desc"), 5, "arcane/bigBrick");
+            arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.6.desc"), 6, "arcane/conduitGlowAnim");
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.7.desc"), 7, "arcane/BorderBrain");
             arcane.carverHelper.register(arcane, "arcane");
             Carving.chisel.registerOre("arcane", "arcane");
