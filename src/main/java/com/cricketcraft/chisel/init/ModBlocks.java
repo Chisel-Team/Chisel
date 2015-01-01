@@ -1586,8 +1586,10 @@ public class ModBlocks {
             Carving.chisel.addVariation("quartz", Blocks.quartz_block, 2, 0);
             Carving.chisel.registerOre("quartz", "quartz");
         }
-
-        //Thaumcraft
+    }
+    public static void postLoad()
+    {
+    	//Thaumcraft
 
         if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
         {
@@ -1655,11 +1657,7 @@ public class ModBlocks {
             Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "BlockSkyStone"), 3, 2);
             Carving.chisel.registerOre("AESkyStone", "AESkyStone");
         }*/
-    }
-    public static void postLoad()
-    {
         //Railcraft
-
         if(Configurations.featureEnabled("RCInfernalStone") && Loader.isModLoaded("Railcraft"))
         {
             Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 0, 0);
