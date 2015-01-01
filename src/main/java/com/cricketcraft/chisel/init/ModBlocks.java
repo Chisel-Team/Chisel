@@ -1725,7 +1725,7 @@ public class ModBlocks {
             arcane.carverHelper.register(arcane, "arcane");
             Carving.chisel.registerOre("arcane", "arcane");
         }
-        /*
+
         //Twilight Forest
 
         if(Configurations.featureEnabled("TFMazestone") && Loader.isModLoaded("Twilight Forest"))
@@ -1743,18 +1743,18 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("TFTowerStone") && Loader.isModLoaded("TwilightForest"))
         {
-            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "TFTowerStone"), 0, 0);
-            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "TFTowerStone"), 1, 1);
-            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "TFTowerStone"), 2, 2);
-            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "TFTowerStone"), 3, 3);
+            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "tile.TFTowerStone"), 0, 0);
+            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "tile.TFTowerStone"), 1, 1);
+            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "tile.TFTowerStone"), 2, 2);
+            Carving.chisel.addVariation("TFTowerStone", GameRegistry.findBlock("TwilightForest", "tile.TFTowerStone"), 3, 3);
             Carving.chisel.registerOre("TFTowerStone", "TFTowerStone");
         }
 
         if(Configurations.featureEnabled("TFUnderBrick") && Loader.isModLoaded("TwilightForest"))
         {
-            Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "TFUnderBrick"), 0, 0);
-            Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "TFUnderBrick"), 1, 1);
-            Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "TFUnderBrick"), 2, 2);
+            Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "tile.TFUnderBrick"), 0, 0);
+            Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "tile.TFUnderBrick"), 1, 1);
+            Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "tile.TFUnderBrick"), 2, 2);
             Carving.chisel.registerOre("TFUnderBrick", "TFUnderBrick");
         }
 
@@ -1762,19 +1762,20 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("AECertusQuartz") && Loader.isModLoaded("appliedenergistics2"))
         {
-            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "BlockQuartz"), 0, 0);
-            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "BlockQuartzPillar"), 0, 1);
-            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "BlockQuartzChiseled"), 0, 2);
+            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartz"), 0, 0);
+            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzPillar"), 0, 1);
+            Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzChiseled"), 0, 2);
             Carving.chisel.registerOre("AECertusQuartz", "AECertusQuartz");
         }
 
         if(Configurations.featureEnabled("AESkyStone") && Loader.isModLoaded("appliedenergistics2"))
         {
-            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "BlockSkyStone"), 1, 0);
-            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "BlockSkyStone"), 2, 1);
-            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "BlockSkyStone"), 3, 2);
+            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 1, 0);
+            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 2, 1);
+            Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 3, 2);
             Carving.chisel.registerOre("AESkyStone", "AESkyStone");
-        }*/
+        }
+
         //Railcraft
         if(Configurations.featureEnabled("RCInfernalStone") && Loader.isModLoaded("Railcraft"))
         {
@@ -1789,55 +1790,55 @@ public class ModBlocks {
 
         if(Configurations.featureEnabled("RCSandyStone") && Loader.isModLoaded("Railcraft"))
         {
-            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.sandy"), 0, 0);
-            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.sandy"), 1, 1);
-            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.sandy"), 2, 2);
-            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.sandy"), 3, 3);
-            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.sandy"), 4, 4);
-            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "railcraft.brick.sandy"), 5, 5);
+            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 0, 0);
+            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 1, 1);
+            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 2, 2);
+            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 3, 3);
+            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 4, 4);
+            Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 5, 5);
             Carving.chisel.registerOre("RCSandyStone", "RCSandyStone");
         }
 
         if(Configurations.featureEnabled("RCFrostBoundBlock") && Loader.isModLoaded("Railcraft"))
         {
-            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.frostbound"), 0, 0);
-            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.frostbound"), 1, 1);
-            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.frostbound"), 2, 2);
-            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.frostbound"), 3, 3);
-            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.frostbound"), 4, 4);
-            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.frostbound"), 5, 5);
+            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 0, 0);
+            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 1, 1);
+            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 2, 2);
+            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 3, 3);
+            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 4, 4);
+            Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 5, 5);
             Carving.chisel.registerOre("RCFrostBoundBlock", "RCFrostBoundBlock");
         }
 
         if(Configurations.featureEnabled("RCQuarriedBlock") && Loader.isModLoaded("Railcraft")) {
-            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.quarried"), 0, 0);
-            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.quarried"), 1, 1);
-            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.quarried"), 2, 2);
-            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.quarried"), 3, 3);
-            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.quarried"), 4, 4);
-            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "railcraft.brick.quarried"), 5, 5);
+            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 0, 0);
+            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 1, 1);
+            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 2, 2);
+            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 3, 3);
+            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 4, 4);
+            Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 5, 5);
             Carving.chisel.registerOre("RCQuarriedBlock", "RCQuarriedBlock");
         }
 
         if(Configurations.featureEnabled("RCBleachedBone") && Loader.isModLoaded("Railcraft"))
         {
-            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "railcraft.brick.bleachedbone"), 0, 0);
-            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "railcraft.brick.bleachedbone"), 1, 1);
-            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "railcraft.brick.bleachedbone"), 2, 2);
-            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "railcraft.brick.bleachedbone"), 3, 3);
-            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "railcraft.brick.bleachedbone"), 4, 4);
-            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "railcraft.brick.bleachedbone"), 5, 5);
+            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 0, 0);
+            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 1, 1);
+            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 2, 2);
+            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 3, 3);
+            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 4, 4);
+            Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 5, 5);
             Carving.chisel.registerOre("RCBleachedBone", "RCBleachedBone");
         }
 
         if(Configurations.featureEnabled("RCBloodStained") && Loader.isModLoaded("Railcraft"))
         {
-            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "railcraft.brick.bloodstained"), 0, 0);
-            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "railcraft.brick.bloodstained"), 1, 1);
-            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "railcraft.brick.bloodstained"), 2, 2);
-            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "railcraft.brick.bloodstained"), 3, 3);
-            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "railcraft.brick.bloodstained"), 4, 4);
-            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "railcraft.brick.bloodstained"), 5, 5);
+            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 0, 0);
+            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 1, 1);
+            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 2, 2);
+            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 3, 3);
+            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 4, 4);
+            Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 5, 5);
             Carving.chisel.registerOre("RCBloodStained", "RCBloodStained");
         }
     }
