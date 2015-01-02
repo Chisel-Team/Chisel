@@ -5,17 +5,13 @@ import com.cricketcraft.chisel.Configurations;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
 import com.cricketcraft.chisel.entity.EntityCloudInABottle;
 import com.cricketcraft.chisel.entity.EntitySmashingRock;
-import com.cricketcraft.chisel.item.ItemBallOMoss;
-import com.cricketcraft.chisel.item.ItemChisel;
-import com.cricketcraft.chisel.item.ItemCloudInABottle;
-import com.cricketcraft.chisel.item.ItemSmashingRock;
-import com.cricketcraft.chisel.item.ItemUpgrade;
-
+import com.cricketcraft.chisel.item.*;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModItems {
     public static ItemChisel chisel;
+    public static ItemDiamondChisel diamondChisel;
     public static ItemCloudInABottle itemCloudInABottle;
     public static ItemBallOMoss itemBallOMoss;
     public static ItemSmashingRock smashingRock;
@@ -46,6 +42,11 @@ public class ModItems {
         if(Configurations.featureEnabled("autoChiselUpgrades")){
             upgrade = (ItemUpgrade) new ItemUpgrade("upgrade").setCreativeTab(ModTabs.tabChisel);
             GameRegistry.registerItem(upgrade, upgrade.getUnlocalizedName());
+        }
+
+        if(Configurations.featureEnabled("diamondChisel")){
+            diamondChisel = (ItemDiamondChisel) new ItemDiamondChisel().setTextureName(Chisel.MOD_ID + ":diamondChisel").setCreativeTab(ModTabs.tabChisel);
+            GameRegistry.registerItem(diamondChisel, diamondChisel.getUnlocalizedName());
         }
     }
 }

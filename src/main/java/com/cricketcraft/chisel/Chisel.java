@@ -177,6 +177,7 @@ public class Chisel
 
         proxy.init();
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new ChiselLeftClick());
         FMLCommonHandler.instance().bus().register(instance);
 
         FMLInterModComms.sendMessage("Waila", "register", "com.cricketcraft.chisel.Waila.register");

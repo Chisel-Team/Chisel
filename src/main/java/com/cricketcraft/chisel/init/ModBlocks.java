@@ -1,58 +1,21 @@
 package com.cricketcraft.chisel.init;
 
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.Configurations;
+import com.cricketcraft.chisel.block.*;
+import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.item.ItemCarvable;
+import com.cricketcraft.chisel.item.ItemMarbleSlab;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
-
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.Configurations;
-import com.cricketcraft.chisel.block.BlockAutoChisel;
-import com.cricketcraft.chisel.block.BlockBeaconBase;
-import com.cricketcraft.chisel.block.BlockCarvable;
-import com.cricketcraft.chisel.block.BlockCarvableGlass;
-import com.cricketcraft.chisel.block.BlockCarvablePane;
-import com.cricketcraft.chisel.block.BlockCarvablePowered;
-import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
-import com.cricketcraft.chisel.block.BlockCarvableTorch;
-import com.cricketcraft.chisel.block.BlockCloud;
-import com.cricketcraft.chisel.block.BlockConcrete;
-import com.cricketcraft.chisel.block.BlockEldritch;
-import com.cricketcraft.chisel.block.BlockGrimstone;
-import com.cricketcraft.chisel.block.BlockHolystone;
-import com.cricketcraft.chisel.block.BlockLavastone;
-import com.cricketcraft.chisel.block.BlockLeaf;
-import com.cricketcraft.chisel.block.BlockLightstoneCarvable;
-import com.cricketcraft.chisel.block.BlockMarbleBookshelf;
-import com.cricketcraft.chisel.block.BlockMarbleCarpet;
-import com.cricketcraft.chisel.block.BlockMarbleIce;
-import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
-import com.cricketcraft.chisel.block.BlockMarblePackedIce;
-import com.cricketcraft.chisel.block.BlockMarblePackedIceStairs;
-import com.cricketcraft.chisel.block.BlockMarblePillar;
-import com.cricketcraft.chisel.block.BlockMarbleSlab;
-import com.cricketcraft.chisel.block.BlockMarbleStairs;
-import com.cricketcraft.chisel.block.BlockMarbleStairsMaker;
-import com.cricketcraft.chisel.block.BlockMarbleStairsMakerCreator;
-import com.cricketcraft.chisel.block.BlockMarbleTexturedOre;
-import com.cricketcraft.chisel.block.BlockMarbleWall;
-import com.cricketcraft.chisel.block.BlockPresent;
-import com.cricketcraft.chisel.block.BlockRoadLine;
-import com.cricketcraft.chisel.block.BlockSnakestone;
-import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
-import com.cricketcraft.chisel.block.BlockVoidstonePillar;
-import com.cricketcraft.chisel.block.BlockVoidstonePillar2;
-import com.cricketcraft.chisel.block.BlockWaterstone;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.item.ItemCarvable;
-import com.cricketcraft.chisel.item.ItemMarbleSlab;
-
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
     public static BlockCarvable marble;
@@ -138,6 +101,9 @@ public class ModBlocks {
 
     public static void load()
     {
+        Blocks.stone.setHarvestLevel("chisel", 0);
+        Blocks.sand.setHarvestLevel("chisel", 0);
+
         if(Configurations.featureEnabled("autoChisel")){
             autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(ModTabs.tabChisel).setBlockName("autoChisel").setBlockTextureName(Chisel.MOD_ID + ":factory/circuit");
             GameRegistry.registerBlock(autoChisel, "autoChisel");

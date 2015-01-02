@@ -1,10 +1,8 @@
 package com.cricketcraft.chisel.compat;
 
-import net.minecraft.block.Block;
-
 import com.cricketcraft.chisel.carving.Carving;
-
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import net.minecraft.block.Block;
 
 public class MarbleCompatibility
 {
@@ -82,6 +80,7 @@ public class MarbleCompatibility
                             ClassBlockCompat.this.doAction(block);
                         }
                     };
+                    block.setHarvestLevel("chisel", 0, 0);
                 }
             };
         }
@@ -105,6 +104,7 @@ public class MarbleCompatibility
             void action()
             {
                 Carving.chisel.addVariation("marble", block, 0, 99);
+                block.setHarvestLevel("chisel", 0, 0);
             }
         };
 
@@ -114,6 +114,7 @@ public class MarbleCompatibility
             void action()
             {
                 Carving.chisel.addVariation("marble", block, 0, 99);
+                block.setHarvestLevel("chisel", 0, 0);
             }
         };
 
@@ -123,6 +124,7 @@ public class MarbleCompatibility
             void action()
             {
                 Carving.chisel.addVariation("marble", block, 0, 99);
+                block.setHarvestLevel("chisel", 0, 0);
             }
         };
 
@@ -132,6 +134,7 @@ public class MarbleCompatibility
             void action()
             {
                 Carving.chisel.addVariation("limestone", block, 0, 99);
+                block.setHarvestLevel("chisel", 0, 0);
             }
         };
         new ClassBlockCompat("emasher.core.EmasherCore", "limestone")
@@ -140,6 +143,7 @@ public class MarbleCompatibility
             void action()
             {
                 Carving.chisel.addVariation("limestone", block, 0, 99);
+                block.setHarvestLevel("chisel", 0, 0);
             }
         };
 
@@ -151,8 +155,10 @@ public class MarbleCompatibility
                 Block[] blocks = (Block[]) cl.getField("blocks").get(null);
 
                 Carving.chisel.addVariation("marble", blocks[0], 2, 99);
+                blocks[0].setHarvestLevel("chisel", 0, 2);
 
                 Carving.chisel.addVariation("limestone", blocks[0], 3, 99);
+                blocks[0].setHarvestLevel("chisel", 0, 3);
             }
         };
     }

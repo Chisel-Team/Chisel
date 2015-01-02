@@ -11,6 +11,7 @@ public class Configurations
     public static boolean disableCTM;
     public static boolean blockDescriptions;
     public static boolean ghostCloud;
+    public static boolean chiselStoneToCobbleBricks;
     public static boolean allowMossy;
     public static boolean chiselRecipe;
     public static boolean autoChisel;
@@ -40,6 +41,7 @@ public class Configurations
         chiselRecipe = config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
         autoChisel = config.get("general", "autoChisel", true, "Should people be allowed to use the auto chisel").getBoolean(true);
         enableFMP = config.get("general", "enableFMP", true, "Do you want to enable FMP").getBoolean(true);
+        chiselStoneToCobbleBricks = config.get("general", "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left clicking.").getBoolean(false);
 
         if(config.hasChanged())
         {

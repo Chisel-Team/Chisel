@@ -22,6 +22,10 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 
 #Chisel 2
 
+#Diamond Chisel
+item.diamondChisel.name=Diamond Chisel
+item.diamondChisel.desc=Left click and it changes blocks!
+
 #Auto Chisel
 tile.autoChisel.name=Auto Chisel
 
