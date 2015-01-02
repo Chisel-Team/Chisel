@@ -19,7 +19,6 @@ public class RenderBlocksColumn extends RenderBlocks
     boolean connected(IBlockAccess world, int x, int y, int z, Block block, int meta)
     {
         return world.getBlock(x, y, z).equals(block) && world.getBlockMetadata(x, y, z) == meta;
-
     }
 
     @Override
