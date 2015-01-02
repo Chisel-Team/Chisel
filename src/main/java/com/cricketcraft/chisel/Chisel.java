@@ -45,11 +45,14 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory",  dependencies = "after:ForgeMultipart;after:Thaumcraft")
 public class Chisel
 {
+    public static final List<String> modsSupported = new ArrayList<String>();
     public static final String MOD_ID = "chisel";
     public static final BlockCarvable.SoundType soundTempleFootstep = new BlockCarvable.SoundType("dig.stone", MOD_ID + ":step.templeblock", 1.0f, 1.0f);
     public static final String MOD_NAME = "Chisel 2";
@@ -112,6 +115,11 @@ public class Chisel
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        modsSupported.add("Thaumcraft");
+        modsSupported.add("Twilight Forest");
+        modsSupported.add("appliedenergistics2");
+        modsSupported.add("Railcraft");
+
         File configFile = event.getSuggestedConfigurationFile();
         Configurations.configExists = configFile.exists();
         Configurations.config = new Configuration(configFile);
