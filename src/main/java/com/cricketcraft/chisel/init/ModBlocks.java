@@ -1672,11 +1672,11 @@ public class ModBlocks {
     }
     public static void postLoad()
     {
-    	//Thaumcraft
 
+        //Thaumcraft
         if(Configurations.featureEnabled("arcane") && Loader.isModLoaded("Thaumcraft"))
         {
-            arcane = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ModTabs.tabStoneChiselBlocks).setStepSound(Block.soundTypeStone);
+            arcane = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ModTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
             Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
             Carving.chisel.addVariation("arcane", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.0.desc"), 0, "arcane/moonEngrave");
@@ -1691,9 +1691,10 @@ public class ModBlocks {
             Carving.chisel.registerOre("arcane", "arcane");
         }
 
+
         //Twilight Forest
 
-        if(Configurations.featureEnabled("TFMazestone") && Loader.isModLoaded("Twilight Forest"))
+        if(Configurations.featureEnabled("TFMazestone") && Loader.isModLoaded("TwilightForest"))
         {
             Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 0, 0);
             Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 1, 1);
