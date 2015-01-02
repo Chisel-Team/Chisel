@@ -1,9 +1,8 @@
 package com.cricketcraft.chisel.client.render;
 
+import com.cricketcraft.chisel.api.IFacade;
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
-
-import com.cricketcraft.chisel.api.IFacade;
 
 public class CTM
 {
@@ -260,7 +259,7 @@ public class CTM
         return texture;
     }
 
-    private static boolean isConnected(IBlockAccess world, int x, int y, int z, int side, Block block, int meta)
+    protected static boolean isConnected(IBlockAccess world, int x, int y, int z, int side, Block block, int meta)
     {
         int x2 = x, y2 = y, z2 = z;
 
@@ -291,7 +290,7 @@ public class CTM
         return getBlockOrFacade(world, x, y, z, side).equals(block) && getBlockOrFacadeMetadata(world, x, y, z, side) == meta && (!getBlockOrFacade(world, x2, y2, z2, side).equals(block) || getBlockOrFacadeMetadata(world, x2, y2, z2, side) != meta);
     }
 
-    private static int getBlockOrFacadeMetadata(IBlockAccess world, int x, int y, int z, int side) {
+    protected static int getBlockOrFacadeMetadata(IBlockAccess world, int x, int y, int z, int side) {
       Block blk = world.getBlock(x, y, z);
       if(blk instanceof IFacade) {
         return ((IFacade)blk).getFacadeMetadata(world, x, y, z, side);
@@ -299,7 +298,7 @@ public class CTM
       return world.getBlockMetadata(x, y, z);
     }
 
-    private static Block getBlockOrFacade(IBlockAccess world, int x, int y, int z, int side) {
+    protected static Block getBlockOrFacade(IBlockAccess world, int x, int y, int z, int side) {
       Block blk = world.getBlock(x, y, z);
       if(blk instanceof IFacade) {
         blk = ((IFacade)blk).getFacade(world, x, y, z, side);
