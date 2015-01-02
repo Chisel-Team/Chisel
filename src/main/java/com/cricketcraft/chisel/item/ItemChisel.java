@@ -32,8 +32,9 @@ public class ItemChisel extends Item implements IChiselMode {
     public ChiselMode getChiselMode(ItemStack itemStack) {
         return ChiselMode.SINGLE;
     }
+
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4){
-    	StatCollector.translateToLocal(itemStack.getUnlocalizedName() + ".desc");
+      public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4){
+        StatCollector.translateToLocal("item.chisel.desc");
     }
 }
