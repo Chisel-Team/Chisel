@@ -119,6 +119,7 @@ public class Chisel
         modsSupported.add("Twilight Forest");
         modsSupported.add("appliedenergistics2");
         modsSupported.add("Railcraft");
+        modsSupported.add("AWWayOfTime");
 
         File configFile = event.getSuggestedConfigurationFile();
         Configurations.configExists = configFile.exists();

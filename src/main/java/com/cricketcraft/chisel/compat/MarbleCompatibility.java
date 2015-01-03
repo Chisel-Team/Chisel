@@ -108,6 +108,18 @@ public class MarbleCompatibility
             }
         };
 
+        new ClassCompat("shukaro.artifice.ArtificeBlocks")
+        {
+            @Override
+            void action() throws Exception
+            {
+                Block[] blocks = (Block[]) cl.getField("blockLimestones").get(null);
+
+                Carving.chisel.addVariation("limestone", blocks[0], 3, 99);
+                blocks[0].setHarvestLevel("chisel", 0, 3);
+            }
+        };
+
         new ClassBlockCompat("com.bluepowermod.init.BPBlocks", "marble")
         {
             @Override
