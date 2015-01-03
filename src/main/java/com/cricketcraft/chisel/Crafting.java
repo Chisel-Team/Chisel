@@ -92,8 +92,10 @@ public class Crafting {
 
         if (Configurations.chiselRecipe) {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.chisel, 1), new Object[]{" YY", " YY", "X  ", 'X', Items.stick, 'Y', Items.iron_ingot}));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.diamondChisel, 1), new Object[]{" YY", " YY", "x  ", 'x', "stickWood", 'Y', "ingotIron"}));
         } else {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.chisel, 1), new Object[]{" Y", "X ", 'X', Items.stick, 'Y', Items.iron_ingot}));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.diamondChisel, 1), new Object[]{"  y", "x  ", 'x', "stickWood", 'y', "ingotIron"}));
         }
 
         if (Configurations.featureEnabled("ballOfMoss"))
