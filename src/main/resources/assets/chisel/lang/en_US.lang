@@ -1150,6 +1150,43 @@ tile.laboratory.13.desc=Direction Console (Right)
 tile.laboratory.14.desc=Direction Console (Left)
 tile.laboratory.15.desc=Information Console
 
+#OCD
+tile.OCD.name=OCD Block
+tile.OCD.0.desc=White(Thick)
+tile.OCD.1.desc=White(Thin)
+tile.OCD.2.desc=Orange(Thick)
+tile.OCD.3.desc=Orange(Thin)
+tile.OCD.4.desc=Magenta(Thick)
+tile.OCD.5.desc=Magenta(Thin)
+tile.OCD.6.desc=Light Blue(Thick)
+tile.OCD.7.desc=Light Blue(Thin)
+tile.OCD.8.desc=Yellow(Thick)
+tile.OCD.9.desc=Yellow(Thin)
+tile.OCD.10.desc=Lime(Thick)
+tile.OCD.11.desc=Lime(Thin)
+tile.OCD.12.desc=Pink(Thick)
+tile.OCD.13.desc=Pink(Thin)
+tile.OCD.14.desc=Gray(Thick)
+tile.OCD.15.desc=Gray(Thin)
+#OCD2
+tile.OCD2.name=OCD Block
+tile.OCD2.0.desc=Light Gray(Thick)
+tile.OCD2.1.desc=Light Gray(Thin)
+tile.OCD2.2.desc=Cyan(Thick)
+tile.OCD2.3.desc=Cyan(Thin)
+tile.OCD2.4.desc=Purple(Thick)
+tile.OCD2.5.desc=Purple(Thin)
+tile.OCD2.6.desc=Blue(Thick)
+tile.OCD2.7.desc=Blue(Thin)
+tile.OCD2.8.desc=Brown(Thick)
+tile.OCD2.9.desc=Brown(Thin)
+tile.OCD2.10.desc=Green(Thick)
+tile.OCD2.11.desc=Green(Thin)
+tile.OCD2.12.desc=Red(Thick)
+tile.OCD2.13.desc=Red(Thin)
+tile.OCD2.14.desc=Black(Thick)
+tile.OCD2.15.desc=Black(Thin)
+
 # Creative Tab localizations
 itemGroup.tabOtherChiselBlocks=Other Chisel Blocks
 itemGroup.tabStoneChiselBlocks=Stone Chisel Blocks
