@@ -3,6 +3,7 @@ package com.cricketcraft.chisel.init;
 import com.cricketcraft.chisel.Chisel;
 import cpw.mods.fml.common.Loader;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 
 public class ModTabs {
@@ -49,7 +50,7 @@ public class ModTabs {
             @Override
             public Item getTabIconItem()
             {
-            	return Item.getItemFromBlock(ModBlocks.planks[0]);
+            	return Item.getItemFromBlock(Blocks.bookshelf);
             }
         };
 

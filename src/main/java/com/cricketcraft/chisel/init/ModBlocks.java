@@ -96,6 +96,7 @@ public class ModBlocks {
     public static BlockCarvable arcane;
     public static BlockCarvable OCD;
     public static BlockCarvable OCD2;
+    public static BlockCarvable bloodRune;
 
     // 1.7
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
@@ -1691,6 +1692,20 @@ public class ModBlocks {
             arcane.carverHelper.addVariation(StatCollector.translateToLocal("tile.arcane.7.desc"), 7, "arcane/BorderBrain");
             arcane.carverHelper.register(arcane, "arcane");
             Carving.chisel.registerOre("arcane", "arcane");
+        }
+
+        //Blood Magic
+        if(Configurations.featureEnabled("bloodRune") && Loader.isModLoaded("AWWayOfTime")){
+            bloodRune = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ModTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("bloodRune", GameRegistry.findBlock("AWWayOfTime", "bloodRune.blank"), 0, 0);
+            bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.0.desc"), 0, "bloodMagic/bloodRuneArranged");
+            bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.1.desc"), 1, "bloodMagic/bloodRuneBricks");
+            bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.2.desc"), 2, "bloodMagic/bloodRuneCarved");
+            bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.3.desc"), 3, "bloodMagic/bloodRuneCarvedRadial");
+            bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.4.desc"), 4, "bloodMagic/bloodRuneClassicPanel");
+            bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.5.desc"), 5, "bloodMagic/bloodRuneTiles");
+            bloodRune.carverHelper.register(bloodRune, "bloodRune");
+            Carving.chisel.registerOre("bloodRune", "bloodRune");
         }
 
 

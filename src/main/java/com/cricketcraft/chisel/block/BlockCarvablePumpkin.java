@@ -21,7 +21,7 @@ public class BlockCarvablePumpkin extends BlockPumpkin implements ICarvable{
     public BlockCarvablePumpkin(boolean isOn) {
         super(isOn);
         if(isOn)
-            setLightLevel(4.0F);
+            setLightLevel(10.0F);
         carverHelper = new CarvableHelper();
     }
 
