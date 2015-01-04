@@ -97,6 +97,7 @@ public class ModBlocks {
     public static BlockCarvable OCD;
     public static BlockCarvable OCD2;
     public static BlockCarvable bloodRune;
+    public static BlockCarvableSand coloredSand;
 
     // 1.7
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
@@ -1346,6 +1347,17 @@ public class ModBlocks {
             woolenClay.carverHelper.register(woolenClay, "woolen_clay");
 
             Carving.chisel.registerOre("woolen_clay", "woolen_clay");
+        }
+        if(Configurations.featureEnabled("coloredSand"))
+        {
+            coloredSand = (BlockCarvableSand) new BlockCarvableSand().setCreativeTab(ModTabs.tabOtherChiselBlocks);
+            coloredSand.carverHelper.setChiselBlockName("Colored Sand");
+
+            for(int i = 0; i < 16; i++)
+                coloredSand.carverHelper.addVariation(StatCollector.translateToLocal("tile.coloredSand." + i + ".desc"), i, "coloredSand/" + sGNames[i].replaceAll(" ", "").toLowerCase());
+            coloredSand.carverHelper.register(coloredSand, "colored_sand");
+
+            Carving.chisel.registerOre("colored_sand", "colored_sand");
         }
 
         if(Configurations.featureEnabled("laboratory"))
