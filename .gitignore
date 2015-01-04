@@ -31,6 +31,9 @@ config
 logs
 screenshots
 mods
+world
 
 *.txt
 *.json
+/server.properties
+*.dat
