@@ -2,6 +2,7 @@ package com.cricketcraft.chisel;
 
 import com.cricketcraft.chisel.init.ModBlocks;
 import com.cricketcraft.chisel.init.ModItems;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -153,6 +154,17 @@ public class Crafting {
         if(Configurations.featureEnabled("scorching"))
         {
         	GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.scorching, 8, 0), new Object[]{"xxx", "xyx", "xxx", 'x', "stone", 'y', Items.blaze_rod}));
+        }
+        if(Configurations.featureEnabled("coloredSand"))
+        {
+        	for(int x = 0; x < 16; x++)
+        	{
+				String[] dyes = { "Black", "Red", "Green", "Brown", "Blue",
+						"Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime",
+						"Yellow", "LightBlue", "Magenta", "Orange", "White" };
+        		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.coloredSand, 1, x), new Object[]{"sss", "sds", "sss", 's', Blocks.sand, 'd', "dye" + dyes[x]}));
+        		GameRegistry.addSmelting(new ItemStack(ModBlocks.coloredSand, 1, x), new ItemStack(Blocks.stained_glass, 1, x), 0.3F);
+        	}
         }
     }
 }

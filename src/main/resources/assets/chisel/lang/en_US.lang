@@ -1132,6 +1132,25 @@ tile.woolenClay.13.desc=Green Woolen Clay
 tile.woolenClay.14.desc=Red Woolen Clay
 tile.woolenClay.15.desc=Black Woolen Clay
 
+#Colored Sand
+tile.woolen_clay.name=Colored Sand
+tile.coloredSand.0.desc=White Colored Sand
+tile.coloredSand.1.desc=Orange Colored Sand
+tile.coloredSand.2.desc=Magenta Colored Sand
+tile.coloredSand.3.desc=Light Blue Colored Sand
+tile.coloredSand.4.desc=Yellow Colored Sand
+tile.coloredSand.5.desc=Lime Colored Sand
+tile.coloredSand.6.desc=Pink Colored Sand
+tile.coloredSand.7.desc=Grey Colored Sand
+tile.coloredSand.8.desc=Light Grey Colored Sand
+tile.coloredSand.9.desc=Cyan Colored Sand
+tile.coloredSand.10.desc=Purple Colored Sand
+tile.coloredSand.11.desc=Blue Colored Sand
+tile.coloredSand.12.desc=Brown Colored Sand
+tile.coloredSand.13.desc=Green Colored Sand
+tile.coloredSand.14.desc=Red Colored Sand
+tile.coloredSand.15.desc=Black Colored Sand
+
 #Laboratory Block
 tile.laboratoryblock.name=Laboratory Block
 tile.laboratory.0.desc=Wall Panel
