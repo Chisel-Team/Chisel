@@ -1659,6 +1659,7 @@ public class ModBlocks {
             sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.10.desc"), 10, "warning/underconstruction");
             sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.11.desc"), 11, "warning/sound");
             sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.12.desc"), 12, "warning/noentry");
+            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.13.desc"), 13, "warning/cryogenic");
             sign.carverHelper.register(sign, "warningSign");
             Carving.chisel.registerOre("warningSign", "warningSign");
         }
