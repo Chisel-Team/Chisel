@@ -113,10 +113,16 @@ public class Carving
         int i = OreDictionary.getOreID(block.getUnlocalizedName());
         if(i < 1)
             return null;
-
-        //if((res = carvingGroupsByOre.get(OreDictionary.getOreIDs(new ItemStack(block, 1, metadata)))) != null)
-        //    return res;
-
+        
+        //get All dictionary names for that block via Ids
+        //the first one matching with a group is chosen
+        int[] oreDictIds = OreDictionary.getOreIDs(new ItemStack(block, 1, metadata));
+        for (int oreId : oreDictIds) {
+            String oreDictName = OreDictionary.getOreName(oreId);
+            if(carvingGroupsByOre.containsKey(oreDictName))
+                return carvingGroupsByOre.get(oreDictName);
+        }
+    
         if((res = carvingGroupsByVariation.get(key(block, metadata))) != null)
             return res;
 
