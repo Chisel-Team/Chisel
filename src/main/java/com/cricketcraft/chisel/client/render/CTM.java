@@ -290,7 +290,7 @@ public class CTM
         return getBlockOrFacade(world, x, y, z, side).equals(block) && getBlockOrFacadeMetadata(world, x, y, z, side) == meta && (!getBlockOrFacade(world, x2, y2, z2, side).equals(block) || getBlockOrFacadeMetadata(world, x2, y2, z2, side) != meta);
     }
 
-    protected static int getBlockOrFacadeMetadata(IBlockAccess world, int x, int y, int z, int side) {
+    public static int getBlockOrFacadeMetadata(IBlockAccess world, int x, int y, int z, int side) {
       Block blk = world.getBlock(x, y, z);
       if(blk instanceof IFacade) {
         return ((IFacade)blk).getFacadeMetadata(world, x, y, z, side);
@@ -298,7 +298,7 @@ public class CTM
       return world.getBlockMetadata(x, y, z);
     }
 
-    protected static Block getBlockOrFacade(IBlockAccess world, int x, int y, int z, int side) {
+    public static Block getBlockOrFacade(IBlockAccess world, int x, int y, int z, int side) {
       Block blk = world.getBlock(x, y, z);
       if(blk instanceof IFacade) {
         blk = ((IFacade)blk).getFacade(world, x, y, z, side);

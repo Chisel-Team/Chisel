@@ -231,8 +231,8 @@ public class CarvableHelper
                     return variation.iconTop;
 
                 Block block = world.getBlock(x, y, z);
-                boolean topConnected = block.equals(world.getBlock(x, y + 1, z)) && metadata == world.getBlockMetadata(x, y + 1, z);
-                boolean botConnected = block.equals(world.getBlock(x, y - 1, z)) && metadata == world.getBlockMetadata(x, y - 1, z);
+                boolean topConnected = block.equals(CTM.getBlockOrFacade(world, x, y + 1, z, side)) && metadata == CTM.getBlockOrFacadeMetadata(world, x, y + 1, z, side);
+                boolean botConnected = block.equals(CTM.getBlockOrFacade(world, x, y - 1, z, side)) && metadata == CTM.getBlockOrFacadeMetadata(world, x, y - 1, z, side);
 
                 if(topConnected && botConnected) return variation.seamsCtmVert.icons[2];
                 if(topConnected && !botConnected) return variation.seamsCtmVert.icons[3];
@@ -243,7 +243,7 @@ public class CarvableHelper
                 if(side < 2)
                     return variation.iconTop;
 
-                Block block = world.getBlock(x, y, z);
+                Block block = CTM.getBlockOrFacade(world, x, y, z, side);
 
                 boolean p;
                 boolean n;
@@ -251,12 +251,12 @@ public class CarvableHelper
 
                 if(side < 4)
                 {
-                    p = isSame(world, x - 1, y, z, block, metadata);
-                    n = isSame(world, x + 1, y, z, block, metadata);
+                    p = isSame(world, x - 1, y, z, block, metadata, side);
+                    n = isSame(world, x + 1, y, z, block, metadata, side);
                 } else
                 {
-                    p = isSame(world, x, y, z + 1, block, metadata);
-                    n = isSame(world, x, y, z - 1, block, metadata);
+                    p = isSame(world, x, y, z + 1, block, metadata, side);
+                    n = isSame(world, x, y, z - 1, block, metadata, side);
                 }
 
                 if(p && n) return variation.seamsCtmVert.icons[1];
@@ -421,9 +421,9 @@ public class CarvableHelper
         }
     }
 
-    private boolean isSame(IBlockAccess world, int x, int y, int z, Block block, int meta)
+    private boolean isSame(IBlockAccess world, int x, int y, int z, Block block, int meta, int side)
     {
-        return world.getBlock(x, y, z).equals(block) && world.getBlockMetadata(x, y, z) == meta;
+        return CTM.getBlockOrFacade(world, x, y, z, side).equals(block) && CTM.getBlockOrFacadeMetadata(world, x, y, z, side) == meta;
     }
 
     public void setChiselBlockName(String name)
