@@ -1,12 +1,10 @@
 package com.cricketcraft.chisel.compat;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-
 import com.cricketcraft.chisel.compat.ModIntegration.IModIntegration;
 import com.cricketcraft.chisel.init.ModBlocks;
-
 import cpw.mods.fml.common.event.FMLInterModComms;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 public class FMPIntegration implements IModIntegration{
     @Override
@@ -76,8 +74,6 @@ public class FMPIntegration implements IModIntegration{
         registerMaterial(ModBlocks.factory, 0, 12);
         registerMaterial(ModBlocks.factory, 14, 14);
         registerMaterial(ModBlocks.stainedGlass[0]); //White
-        registerMaterial(ModBlocks.stainedGlass[8]); //Light Gray
-        registerMaterial(ModBlocks.stainedGlass[12]); //Brown
         registerMaterial(ModBlocks.woolenClay);
         registerMaterial(ModBlocks.laboratory, 2, 3);
         registerMaterial(ModBlocks.laboratory, 5, 12);

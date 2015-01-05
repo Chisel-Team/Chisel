@@ -22,6 +22,9 @@ public class Configurations
     public static int particlesTickrate;
     public static int marbleAmount;
     public static int limestoneAmount;
+    public static int graniteAmount;
+    public static int dioriteAmount;
+    public static int andesiteAmount;
 
     public static double concreteVelocity;
 
@@ -38,6 +41,9 @@ public class Configurations
         allowMossy = config.get("general", "allowCobbleToMossyInChisel", true).getBoolean(true);
         marbleAmount = config.get("worldgen", "marbleAmount", 7, "Amount of marble to generate in the world; use 0 for none").getInt(7);
         limestoneAmount = config.get("worldgen", "limestoneAmount", 8, "Amount of limestone to generate in the world; use 0 for none").getInt(8);
+        graniteAmount = config.get("worldgen", "graniteAmount", 8, "Amount of granite to generate in the world; use 0 for none.").getInt(8);
+        dioriteAmount = config.get("worldgen", "dioriteAmount", 8, "Amount of diorite to generate in the world; use 0 for none.").getInt(8);
+        andesiteAmount = config.get("worldgen", "andesiteAmount", 8, "Amount of andesite to generate in the world; use 0 for none.").getInt(8);
         chiselRecipe = config.get("general", "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
         autoChisel = config.get("general", "autoChisel", true, "Should people be allowed to use the auto chisel").getBoolean(true);
         enableFMP = config.get("general", "enableFMP", true, "Do you want to enable FMP").getBoolean(true);

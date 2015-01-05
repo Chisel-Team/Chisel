@@ -18,8 +18,7 @@ import com.cricketcraft.chisel.inventory.ContainerPresent;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
 import com.cricketcraft.chisel.proxy.CommonProxy;
 import com.cricketcraft.chisel.utils.General;
-import com.cricketcraft.chisel.world.GeneratorLimestone;
-import com.cricketcraft.chisel.world.GeneratorMarble;
+import com.cricketcraft.chisel.world.GeneratorChisel;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -177,8 +176,11 @@ public class Chisel
         });
 
 
-        GameRegistry.registerWorldGenerator(new GeneratorMarble(ModBlocks.marble, 32, Configurations.marbleAmount), 1000);
-        GameRegistry.registerWorldGenerator(new GeneratorLimestone(ModBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
+        GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.marble, 32, Configurations.marbleAmount), 1000);
+        GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
+        GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.andesite, 32, Configurations.andesiteAmount), 1000);
+        GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.granite, 32, Configurations.graniteAmount), 1000);
+        GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.diorite, 32, Configurations.dioriteAmount), 1000);
 
         if (event.getSide() == Side.CLIENT) {
             initModIntegration();

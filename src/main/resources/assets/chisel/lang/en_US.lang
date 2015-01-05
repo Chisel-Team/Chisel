@@ -22,6 +22,21 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 
 #Chisel 2
 
+#Diorite
+tile.diorite.name=Diorite
+tile.diorite.0.desc=Generates in your world
+tile.diorite.1.desc=Polished Diorite
+
+#Andesite
+tile.andesite.name=Andesite
+tile.andesite.0.desc=Generates in your world
+tile.andesite.1.desc=Polished Andesite
+
+#Granite
+tile.granite.name=Granite
+tile.granite.0.desc=Generates in your world
+tile.granite.1.desc=Polished Granite
+
 #Diamond Chisel
 item.diamondChisel.name=Diamond Chisel
 item.diamondChisel.desc=Left click and it changes blocks!
