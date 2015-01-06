@@ -100,7 +100,7 @@ tile.arcane.3.desc=Engraved Symbols
 tile.arcane.4.desc=Glowing Symbols
 tile.arcane.5.desc=Bricks
 tile.arcane.6.desc=Temporal Conduit
-tile.arcane.7.desc=Braaainz
+tile.arcane.7.desc=Stone Bordered Flesh/Brain Block
 tile.arcane.8.desc=Spatial Conduit
 
 #Futura
@@ -142,7 +142,7 @@ tile.hexPlating.15.desc=Gray Plating
 tile.grimstone.name=Grimstone
 tile.grimstone.0.desc=Grimstone
 tile.grimstone.1.desc=Smooth Grimstone
-tile.grimstone.2.desc=Mysterious Grimstone symbol
+tile.grimstone.2.desc=Mysterious Grimstone Symbol
 tile.grimstone.3.desc=Chiseled Grimstone
 tile.grimstone.4.desc=Grimstone Blocks
 tile.grimstone.5.desc=Rough Grimstone Bricks
@@ -188,7 +188,7 @@ tile.scorching.name=Scorching Block
 tile.scorching.0.desc=Solidified Fire
 tile.scorching.1.desc=Edged Solidified Fire
 tile.scorching.2.desc=Beveled Solidified Fire
-tile.scorching.3.desc=Burn Stone Encased Solidified Fire
+tile.scorching.3.desc=Burnt Stone Encased Solidified Fire
 tile.scorching.4.desc=Deep Core Block
 
 #Warning
@@ -206,7 +206,7 @@ tile.warningSign.9.desc=Dangerous Chemicals
 tile.warningSign.10.desc=Under Construction
 tile.warningSign.11.desc=Loud Sounds
 tile.warningSign.12.desc=No Entry
-tile.warningSign.13.desc=Cryogenic freezing in progresss
+tile.warningSign.13.desc=Cryogenic Freezing in progress
 
 #Brick
 tile.brickCustom.name=Brick Block
