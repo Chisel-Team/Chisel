@@ -107,6 +107,7 @@ tile.arcane.8.desc=Spatial Conduit
 tile.futura.name=Futura Block
 tile.futura.0.desc=Glowing Screen with Metallic Borders
 tile.futura.1.desc=Glowing Screen with Cyan Borders
+tile.futura.2.desc=Applied Labyrinthic Neon Lines
 
 #Waterstone
 tile.waterstone.name=Waterstone
