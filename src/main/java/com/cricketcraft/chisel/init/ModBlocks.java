@@ -103,7 +103,7 @@ public class ModBlocks {
     public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
     public static BlockCarvablePane[] stainedGlassPane = new BlockCarvablePane[8];
 
-    //1.8 or at least so you thing :P
+    //1.8 or at least so you think :P
     public static BlockCarvable granite, polishedGranite;
     public static BlockCarvable diorite, polishedDiorite;
     public static BlockCarvable andesite, polishedAndesite;
@@ -1609,6 +1609,7 @@ public class ModBlocks {
             futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.0.desc"), 0, "futura/screenMetallicWIP");
             futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.1.desc"), 1, "futura/screenCyanWIP");
             futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 2, "futura/controllerWIP");
+            futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 3, "futura/cricketTest");
             futura.carverHelper.register(futura, "futura");
             Carving.chisel.registerOre("futura", "futura");
         }
