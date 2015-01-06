@@ -206,7 +206,7 @@ tile.warningSign.9.desc=Dangerous Chemicals
 tile.warningSign.10.desc=Under Construction
 tile.warningSign.11.desc=Loud Sounds
 tile.warningSign.12.desc=No Entry
-tile.warningSign.13.desc=Cryogenic freezing in progesss
+tile.warningSign.13.desc=Cryogenic freezing in progresss
 
 #Brick
 tile.brickCustom.name=Brick Block
@@ -316,7 +316,7 @@ tile.marblePillar.15.desc=Ornamental Pillar Capstone
 #Marble Slabs (old)
 tile.marble_pillar_slab.name=Marble Pillar Slab
 tile.marblePillarSlabOld.0.desc=Marble Pillar Slab
-tile.marblePillarSlabOld.1.desc=Marble Pllar Capstone Slab
+tile.marblePillarSlabOld.1.desc=Marble Pillar Capstone Slab
 tile.marblePillarSlabOld.2.desc=Marble Pillar Base Slab
 tile.marblePillarSlabOld.3.desc=Small Marble Pillar Slab
 tile.marblePillarSlabOld.4.desc=Carved Marble Pillar Slab
@@ -707,7 +707,7 @@ tile.dirt.12.desc=Crumbling Dirt
 #Ice
 tile.ice.name=Ice
 tile.ice.1.desc=Rough Ice Block
-tile.ice.2.desc=Cobble-ice
+tile.ice.2.desc=Cobble-Ice
 tile.ice.3.desc=Large Rough Ice Bricks
 tile.ice.4.desc=Large Ice Bricks
 tile.ice.5.desc=Small Ice Bricks
@@ -771,7 +771,7 @@ tile.iceStairs.15.desc=Ice Poison Stairs
 #Packed Ice
 tile.packedice.name=Packed Ice
 tile.packedice.1.desc=Rough Packed Ice Block
-tile.packedice.2.desc=Cobble-packedice
+tile.packedice.2.desc=Cobble-Packed Ice
 tile.packedice.3.desc=Large Rough Packed Ice Bricks
 tile.packedice.4.desc=Large Packed Ice Bricks
 tile.packedice.5.desc=Small Packed Ice Bricks
@@ -870,7 +870,7 @@ tile.iron_bars.5.desc=Thick Iron Grid
 tile.iron_bars.6.desc=Thin Iron Grid
 tile.iron_bars.7.desc=Ornate Iron Pane Fence
 tile.iron_bars.8.desc=Vertical Iron Bars
-tile.iron_bars.9.desc=Iron spikes
+tile.iron_bars.9.desc=Iron Spikes
 
 #Glass Panes
 tile.glass_pane.name=Glass Pane
@@ -983,24 +983,24 @@ tile.tyrian.name=Tyrian
 tile.tyrian.0.desc=Futuristic Armor Plating Block
 tile.tyrian.1.desc=Bleak Futuristic Armor Plating Block
 tile.tyrian.2.desc=Purple Futuristic Armor Plating Block
-tile.tyrian.3.desc=Faded purple Futuristic Armor Plating Block
+tile.tyrian.3.desc=Faded Purple Futuristic Armor Plating Block
 tile.tyrian.4.desc=Rusted Futuristic Armor Plating Block
 tile.tyrian.5.desc=Elaborate Futuristic Armor Plating Block
 tile.tyrian.6.desc=Futuristic Armor Plating Block with many seams
-tile.tyrian.7.desc=Futuristic platform block
-tile.tyrian.8.desc=Futuristic armor plating tiles
+tile.tyrian.7.desc=Futuristic Platform Block
+tile.tyrian.8.desc=Futuristic Armor Plating Tiles
 tile.tyrian.9.desc=Diagonal Futuristic Armor Plating Block
 tile.tyrian.10.desc=Futuristic Armor Plating Block with dent
 tile.tyrian.11.desc=Blue Futuristic Armor Plating Block
 tile.tyrian.12.desc=Black Futuristic Armor Plating Block
-tile.tyrian.13.desc=Black futuristic armor plating tiles
+tile.tyrian.13.desc=Black Futuristic Armor Plating Tiles
 tile.tyrian.14.desc=Black Futuristic Armor Plating Block with an opening
-tile.tyrian.15.desc=Futuristic armor plating with shining metal bits
+tile.tyrian.15.desc=Futuristic Armor Plating with Shining Metal Vits
 
 #Temple
 tile.templeblock.name=Temple Block
 tile.templeblock.0.desc=Temple Cobblestone
-tile.templeblock.1.desc=Oranate Temple Block
+tile.templeblock.1.desc=Ornate Temple Block
 tile.templeblock.2.desc=Temple Plate
 tile.templeblock.3.desc=Cracked Temple Plate
 tile.templeblock.4.desc=Temple Bricks
@@ -1019,13 +1019,13 @@ tile.templeblock.15.desc=Small Light Temple Tiles
 #Temple Mossy
 tile.mossy_templeblock.name=Mossy Temple Block
 tile.mossy_templeblock.0.desc=Mossy Temple Cobblestone
-tile.mossy_templeblock.1.desc=Oranate Mossy Temple Block
+tile.mossy_templeblock.1.desc=Ornate Mossy Temple Block
 tile.mossy_templeblock.2.desc=Mossy Temple Plate
 tile.mossy_templeblock.3.desc=Cracked Mossy Temple Plate
 tile.mossy_templeblock.4.desc=Mossy Temple Bricks
 tile.mossy_templeblock.5.desc=Large Mossy Temple Bricks
 tile.mossy_templeblock.6.desc=Weared Mossy Temple Bricks
-tile.mossy_templeblock.7.desc=Mossy Temple bricks in disarray
+tile.mossy_templeblock.7.desc=Mossy Temple Bricks in disarray
 tile.mossy_templeblock.8.desc=Mossy Temple Column
 tile.mossy_templeblock.9.desc=Mossy Temple Stand
 tile.mossy_templeblock.10.desc=Mossy Temple Mosaic Stand
@@ -1033,11 +1033,11 @@ tile.mossy_templeblock.11.desc=Mossy Temple Creeper Stand
 tile.mossy_templeblock.12.desc=Mossy Temple Tiles
 tile.mossy_templeblock.13.desc=Small Mossy Temple Tiles
 tile.mossy_templeblock.14.desc=Light Mossy Temple Tiles
-tile.mossy_templeblock.15.desc=Small Light Mossy  Temple Tiles
+tile.mossy_templeblock.15.desc=Small Light Mossy Temple Tiles
 
 #Cloud
 tile.cloud.name=Cloud
-tile.cloud.0.desc=Cloud block
+tile.cloud.0.desc=Cloud Block
 tile.cloud.1.desc=Large Cloud Bricks
 tile.cloud.2.desc=Small Cloud Bricks
 tile.cloud.3.desc=Small Vertical Cloud Bricks
@@ -1149,7 +1149,7 @@ tile.woolenClay.14.desc=Red Woolen Clay
 tile.woolenClay.15.desc=Black Woolen Clay
 
 #Colored Sand
-tile.woolen_clay.name=Colored Sand
+tile.colored_sand.name=Colored Sand
 tile.coloredSand.0.desc=White Colored Sand
 tile.coloredSand.1.desc=Orange Colored Sand
 tile.coloredSand.2.desc=Magenta Colored Sand
