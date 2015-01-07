@@ -1608,7 +1608,6 @@ public class ModBlocks {
             futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.0.desc"), 0, "futura/screenMetallicWIP");
             futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.1.desc"), 1, "futura/screenCyanWIP");
             futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 2, "futura/controllerWIP");
-            futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 3, "futura/cricketTest");
             futura.carverHelper.register(futura, "futura");
             Carving.chisel.registerOre("futura", "futura");
         }

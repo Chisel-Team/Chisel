@@ -2,7 +2,6 @@ package com.cricketcraft.chisel;
 
 import com.cricketcraft.chisel.init.ModBlocks;
 import com.cricketcraft.chisel.init.ModItems;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -140,6 +139,7 @@ public class Crafting {
 
         if(Configurations.featureEnabled("technical")){
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.technical, Configurations.factoryBlockAmount, 0), new Object[]{"xyx", "yxy", "xyx", 'x', "stone", 'y', Items.iron_ingot}));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModBlocks.technical2, Configurations.factoryBlockAmount, 0), new Object[]{"xyx", "yzy", "xyx", 'x', "stone", 'y', "ingotIron", 'z', Blocks.glass}));
         }
 
         if(Configurations.featureEnabled("chest")){
