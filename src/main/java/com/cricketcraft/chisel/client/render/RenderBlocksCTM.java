@@ -129,18 +129,18 @@ public class RenderBlocksCTM extends RenderBlocks
         sunlightBitChannel = 0;
 
         for (int light : lightVals) {
-            blockLightBitChannel += ((light >> 4) & 0x0F);
-            redBitChannel +=        ((light >> 8) & 0x0F);
-            greenBitChannel +=      ((light >> 12) & 0x0F);
-            blueBitChannel +=       ((light >> 16) & 0x0F);
-            sunlightBitChannel +=   ((light >> 20) & 0x0F);
+            blockLightBitChannel += (light & 0xFF);
+            redBitChannel        += (light & 0xF00);
+            greenBitChannel      += (light & 0xF000);
+            blueBitChannel       += (light & 0xF0000);
+            sunlightBitChannel   += (light & 0xF00000);
         }
 
-        return ((blockLightBitChannel /lightVals.length)<<4) |
-               ((redBitChannel/lightVals.length)<<8)        |
-               ((greenBitChannel/lightVals.length)<<12)     |
-               ((blueBitChannel/lightVals.length)<<16)      |
-               ((sunlightBitChannel/lightVals.length)<<20);
+        return ((blockLightBitChannel/lightVals.length) & 0xFF)    |
+               ((redBitChannel/lightVals.length)        & 0xF00)   |
+               ((greenBitChannel/lightVals.length)      & 0xF000)  |
+               ((blueBitChannel/lightVals.length)       & 0xF0000) |
+               ((sunlightBitChannel/lightVals.length)   & 0xF00000);
     }
 
     void side(int a, int b, int c, int d, int iconIndex, boolean flip)
