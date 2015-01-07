@@ -1,3 +1,15 @@
+2.2.2:
+Diamond Chisel implemented while still retaining the iron chisel if diamond is disabled
+Added OCD Blocks
+Added Blood magic support
+Pumpkin is brighter
+Cryogenic Sign added
+Facades will connect textures
+1.8 world generation added, they don't have too many variations atm
+Spelling fixes
+updated Russian Language
+Creative tabs are now better sorted
+
 2.2.1:
 Fixed Presents not rendering correctly, and combined their inventories properly
 Various bits of texture work
