@@ -94,8 +94,8 @@ public class ModBlocks {
     public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
     public static BlockCarvable sign;
     public static BlockCarvable arcane;
-    public static BlockCarvable OCD;
-    public static BlockCarvable OCD2;
+    public static BlockCarvable mat;
+    public static BlockCarvable mat2;
     public static BlockCarvable bloodRune;
     public static BlockCarvableSand coloredSand;
 
@@ -1691,52 +1691,52 @@ public class ModBlocks {
             Carving.chisel.registerOre("quartz", "quartz");
         }
 
-        if (Configurations.featureEnabled("OCD"))
+        if (Configurations.featureEnabled("Mat"))
         {
-            OCD = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
-            OCD.carverHelper.setChiselBlockName("OCD");
-            OCD.carverHelper.register(OCD, "OCD");
+            mat = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
+            mat.carverHelper.setChiselBlockName("Mat");
+            mat.carverHelper.register(mat, "Mat");
 
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.0.desc"), 0, "OCD/White-Thick");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.1.desc"), 1, "OCD/White-Thin");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.2.desc"), 2, "OCD/Orange-Thick");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.3.desc"), 3, "OCD/Orange-Thin");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.4.desc"), 4, "OCD/Magenta-Thick");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.5.desc"), 5, "OCD/Magenta-Thin");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.6.desc"), 6, "OCD/LightBlue-Thick");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.7.desc"), 7, "OCD/LightBlue-Thin");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.8.desc"), 8, "OCD/Yellow-Thick");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.9.desc"), 9, "OCD/Yellow-Thin");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.10.desc"), 10, "OCD/Lime-Thick");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.11.desc"), 11, "OCD/Lime-Thin");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.12.desc"), 12, "OCD/Pink-Thick");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.13.desc"), 13, "OCD/Pink-Thin");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.14.desc"), 14, "OCD/Gray-Thick");
-            OCD.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD.15.desc"), 15, "OCD/Gray-Thin");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.0.desc"), 0, "mat/White-Thick");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.1.desc"), 1, "mat/White-Thin");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.2.desc"), 2, "mat/Orange-Thick");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.3.desc"), 3, "mat/Orange-Thin");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.4.desc"), 4, "mat/Magenta-Thick");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.5.desc"), 5, "mat/Magenta-Thin");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.6.desc"), 6, "mat/LightBlue-Thick");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.7.desc"), 7, "mat/LightBlue-Thin");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.8.desc"), 8, "mat/Yellow-Thick");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.9.desc"), 9, "mat/Yellow-Thin");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.10.desc"), 10, "mat/Lime-Thick");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.11.desc"), 11, "mat/Lime-Thin");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.12.desc"), 12, "mat/Pink-Thick");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.13.desc"), 13, "mat/Pink-Thin");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.14.desc"), 14, "mat/Gray-Thick");
+            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.15.desc"), 15, "mat/Gray-Thin");
         }
 
-        if (Configurations.featureEnabled("OCD2"))
+        if (Configurations.featureEnabled("Mat2"))
         {
-            OCD2 = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
-            OCD2.carverHelper.setChiselBlockName("OCD2");
-            OCD2.carverHelper.register(OCD2, "OCD2");
+            mat2 = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
+            mat2.carverHelper.setChiselBlockName("Mat2");
+            mat2.carverHelper.register(mat2, "Mat2");
 
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.0.desc"), 0, "OCD/LightGray-Thick");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.1.desc"), 1, "OCD/LightGray-Thin");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.2.desc"), 2, "OCD/Cyan-Thick");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.3.desc"), 3, "OCD/Cyan-Thin");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.4.desc"), 4, "OCD/Purple-Thick");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.5.desc"), 5, "OCD/Purple-Thin");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.6.desc"), 6, "OCD/Blue-Thick");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.7.desc"), 7, "OCD/Blue-Thin");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.8.desc"), 8, "OCD/Brown-Thick");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.9.desc"), 9, "OCD/Brown-Thin");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.10.desc"), 10, "OCD/Green-Thick");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.11.desc"), 11, "OCD/Green-Thin");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.12.desc"), 12, "OCD/Red-Thick");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.13.desc"), 13, "OCD/Red-Thin");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.14.desc"), 14, "OCD/Black-Thick");
-            OCD2.carverHelper.addVariation(StatCollector.translateToLocal("tile.OCD2.15.desc"), 15, "OCD/Black-Thin");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.0.desc"), 0, "mat/LightGray-Thick");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.1.desc"), 1, "mat/LightGray-Thin");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.2.desc"), 2, "mat/Cyan-Thick");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.3.desc"), 3, "mat/Cyan-Thin");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.4.desc"), 4, "mat/Purple-Thick");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.5.desc"), 5, "mat/Purple-Thin");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.6.desc"), 6, "mat/Blue-Thick");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.7.desc"), 7, "mat/Blue-Thin");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.8.desc"), 8, "mat/Brown-Thick");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.9.desc"), 9, "mat/Brown-Thin");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.10.desc"), 10, "mat/Green-Thick");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.11.desc"), 11, "mat/Green-Thin");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.12.desc"), 12, "mat/Red-Thick");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.13.desc"), 13, "mat/Red-Thin");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.14.desc"), 14, "mat/Black-Thick");
+            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.15.desc"), 15, "mat/Black-Thin");
         }
 
         //1.8
