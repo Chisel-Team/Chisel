@@ -4,7 +4,6 @@ import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.init.ModTabs;
 import com.cricketcraft.chisel.inventory.InventoryLargePresent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -26,7 +25,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.Random;
 
@@ -34,57 +32,48 @@ public class BlockPresent extends BlockChest implements ICarvable {
     private final Random random = new Random();
     private int type;
     public CarvableHelper carverHelper;
-    public boolean isChristmas;
 
     public BlockPresent(int type) {
         super(1);
         this.type = type;
         carverHelper = new CarvableHelper();
         setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0875F, 0.9365F);
-
-        Calendar calendar = Calendar.getInstance();
-        //Unneeded?
-        if (calendar.get(2) + 1 == 12 || calendar.get(2) + 1 == 1) {
-            isChristmas = true; //The Christmas Season lasts for december and january
-        } else {
-            isChristmas = false; //TODO: THESE NEED TO EXIST
-        }
     }
 
     public String getKindOfChest(int type){
         switch (type){
-            case 0: //TODO:         |----------these are fine-------------|   |------these are missing-------|
-                return isChristmas? "textures/blocks/present/presentChest0" : "textures/blocks/present/chest0";
+            case 0:
+                return "textures/blocks/present/presentChest0";
             case 1:
-                return isChristmas? "textures/blocks/present/presentChest1" : "textures/blocks/present/chest1";
+                return "textures/blocks/present/presentChest1";
             case 2:
-                return isChristmas? "textures/blocks/present/presentChest2" : "textures/blocks/present/chest2";
+                return "textures/blocks/present/presentChest2";
             case 3:
-                return isChristmas? "textures/blocks/present/presentChest3" : "textures/blocks/present/chest3";
+                return "textures/blocks/present/presentChest3";
             case 4:
-                return isChristmas? "textures/blocks/present/presentChest4" : "textures/blocks/present/chest4";
+                return "textures/blocks/present/presentChest4";
             case 5:
-                return isChristmas? "textures/blocks/present/presentChest5" : "textures/blocks/present/chest5";
+                return "textures/blocks/present/presentChest5";
             case 6:
-                return isChristmas? "textures/blocks/present/presentChest6" : "textures/blocks/present/chest6";
+                return "textures/blocks/present/presentChest6";
             case 7:
-                return isChristmas? "textures/blocks/present/presentChest7" : "textures/blocks/present/chest7";
+                return "textures/blocks/present/presentChest7";
             case 8:
-                return isChristmas? "textures/blocks/present/presentChest8" : "textures/blocks/present/chest8";
+                return "textures/blocks/present/presentChest8";
             case 9:
-                return isChristmas? "textures/blocks/present/presentChest9" : "textures/blocks/present/chest9";
+                return "textures/blocks/present/presentChest9";
             case 10:
-                return isChristmas? "textures/blocks/present/presentChest10" : "textures/blocks/present/chest10";
+                return "textures/blocks/present/presentChest10";
             case 11:
-                return isChristmas? "textures/blocks/present/presentChest11" : "textures/blocks/present/chest11";
+                return "textures/blocks/present/presentChest11";
             case 12:
-                return isChristmas? "textures/blocks/present/presentChest12" : "textures/blocks/present/chest12";
+                return "textures/blocks/present/presentChest12";
             case 13:
-                return isChristmas? "textures/blocks/present/presentChest13" : "textures/blocks/present/chest13";
+                return "textures/blocks/present/presentChest13";
             case 14:
-                return isChristmas? "textures/blocks/present/presentChest14" : "textures/blocks/present/chest14";
+                return "textures/blocks/present/presentChest14";
             case 15:
-                return isChristmas? "textures/blocks/present/presentChest15" : "textures/blocks/present/chest15";
+                return "textures/blocks/present/presentChest15";
             default:
                 return null;
         }

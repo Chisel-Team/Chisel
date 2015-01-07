@@ -104,15 +104,14 @@ public class ModBlocks {
     public static BlockCarvablePane[] stainedGlassPane = new BlockCarvablePane[8];
 
     //1.8 or at least so you think :P
-    public static BlockCarvable granite, polishedGranite;
-    public static BlockCarvable diorite, polishedDiorite;
-    public static BlockCarvable andesite, polishedAndesite;
+    public static BlockCarvable granite;
+    public static BlockCarvable diorite;
+    public static BlockCarvable andesite;
+
+    private static boolean areChestsReady = false;
 
     public static void load()
     {
-        Blocks.stone.setHarvestLevel("chisel", 0);
-        Blocks.sand.setHarvestLevel("chisel", 0);
-
         if(Configurations.featureEnabled("autoChisel")){
             autoChisel = new BlockAutoChisel().setBlockTextureName("Chisel:autoChisel").setCreativeTab(ModTabs.tabChisel).setBlockName("autoChisel").setBlockTextureName(Chisel.MOD_ID + ":factory/circuit");
             GameRegistry.registerBlock(autoChisel, "autoChisel");
@@ -1443,7 +1442,7 @@ public class ModBlocks {
             Carving.chisel.registerOre("leaves", "leaves");
         }
 
-        if (Configurations.featureEnabled("chest")) {
+        if (areChestsReady) {
             for(int x = 0; x < 16; x++){
                 present[x] = (BlockPresent) new BlockPresent(x).setCreativeTab(ModTabs.tabOtherChiselBlocks).setHardness(2.0F).setResistance(10.0F).setBlockName("present");
                 GameRegistry.registerBlock(present[x], "chest" + x);

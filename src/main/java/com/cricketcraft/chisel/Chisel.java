@@ -3,6 +3,8 @@ package com.cricketcraft.chisel;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
+import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.carving.CarvingVariation;
 import com.cricketcraft.chisel.client.gui.GuiAutoChisel;
 import com.cricketcraft.chisel.client.gui.GuiChisel;
 import com.cricketcraft.chisel.client.gui.GuiPresent;
@@ -18,6 +20,7 @@ import com.cricketcraft.chisel.inventory.ContainerPresent;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
 import com.cricketcraft.chisel.proxy.CommonProxy;
 import com.cricketcraft.chisel.utils.General;
+import com.cricketcraft.chisel.utils.GeneralClient;
 import com.cricketcraft.chisel.world.GeneratorChisel;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -38,10 +41,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -188,7 +194,6 @@ public class Chisel
 
         proxy.init();
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new ChiselLeftClick());
         FMLCommonHandler.instance().bus().register(instance);
 
         FMLInterModComms.sendMessage("Waila", "register", "com.cricketcraft.chisel.Waila.register");
@@ -208,5 +213,52 @@ public class Chisel
             Configurations.refreshConfig();
         }
     }
+    @SubscribeEvent
+    public void onLeftClickBlock(PlayerInteractEvent event)
+    {
+        ItemStack held = event.entityPlayer.getCurrentEquippedItem();
+        int slot = event.entityPlayer.inventory.currentItem;
+        Carving carving = new Carving();
 
+        if (event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK && held != null && held.getItem().equals(Configurations.featureEnabled("diamondChisel") ? ModItems.diamondChisel : ModItems.chisel))
+        {
+            int x = event.x, y = event.y, z = event.z;
+            Block block = event.world.getBlock(x, y, z);
+            int metadata = event.world.getBlockMetadata(x, y, z);
+            CarvingVariation[] variations = carving.getVariations(block, metadata);
+
+            if (variations != null)
+            {
+                ItemStack target = new ItemStack(block, metadata);
+
+                if (target != null)
+                {
+                    for (CarvingVariation v : variations)
+                    {
+                        if (v.block == Block.getBlockFromItem(target.getItem()) && v.meta == target.getItemDamage())
+                        {
+                            event.world.setBlock(x, y, z, v.block);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < variations.length; i++)
+                    {
+                        CarvingVariation v = variations[i];
+                        if (v.block == block && v.meta == metadata)
+                        {
+                            variations = ArrayUtils.remove(variations, i--);
+                        }
+                    }
+
+                    int index = event.world.rand.nextInt(variations.length);
+                    CarvingVariation newVar = variations[index];
+                    event.world.setBlock(x, y, z, newVar.block);
+                    GeneralClient.playChiselSound(event.world, x, y, z, MOD_ID + ":chisel.fallback");
+                    event.entityPlayer.inventory.currentItem = slot;
+                }
+            }
+        }
+    }
 }
