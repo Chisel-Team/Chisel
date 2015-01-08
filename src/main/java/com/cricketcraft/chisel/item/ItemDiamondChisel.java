@@ -1,35 +1,22 @@
 package com.cricketcraft.chisel.item;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.ChiselMode;
-import com.cricketcraft.chisel.api.IChiselMode;
-import com.cricketcraft.chisel.carving.Carving;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
-import java.util.HashSet;
-import java.util.List;
+import com.cricketcraft.chisel.api.ChiselMode;
+import com.cricketcraft.chisel.api.IChiselMode;
+import com.cricketcraft.chisel.carving.Carving;
 
 public class ItemDiamondChisel extends Item implements IChiselMode{
     public static Carving carving = Carving.chisel;
-    private static final HashSet<String> toolSet = new HashSet<String>();
 
     public ItemDiamondChisel() {
         super();
         setMaxStackSize(1);
         setUnlocalizedName("diamondChisel");
-        toolSet.add("chisel");
-    }
-
-    @Override
-    public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-        if(!entityplayer.isSneaking())
-            entityplayer.openGui(Chisel.instance, 0, world, 0, 0, 0);
-
-        return itemstack;
     }
 
     @Override
@@ -37,8 +24,9 @@ public class ItemDiamondChisel extends Item implements IChiselMode{
         return ChiselMode.SINGLE;
     }
 
-    @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4){
-        StatCollector.translateToLocal("item.diamondChisel.desc");
+        list.add("Deprecated. Craft to get new version.");
     }
 }

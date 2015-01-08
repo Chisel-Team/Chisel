@@ -132,6 +132,7 @@ public class Chisel
         Configurations.config.load();
         Configurations.refreshConfig();
 
+        PacketHandler.init();
         ModTabs.load();
         ModBlocks.load();
         ModItems.load();
@@ -211,54 +212,6 @@ public class Chisel
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.modID.equals("chisel")) {
             Configurations.refreshConfig();
-        }
-    }
-    @SubscribeEvent
-    public void onLeftClickBlock(PlayerInteractEvent event)
-    {
-        ItemStack held = event.entityPlayer.getCurrentEquippedItem();
-        int slot = event.entityPlayer.inventory.currentItem;
-        Carving carving = new Carving();
-
-        if (event.action == PlayerInteractEvent.Action.LEFT_CLICK_BLOCK && held != null && held.getItem().equals(Configurations.featureEnabled("diamondChisel") ? ModItems.diamondChisel : ModItems.chisel))
-        {
-            int x = event.x, y = event.y, z = event.z;
-            Block block = event.world.getBlock(x, y, z);
-            int metadata = event.world.getBlockMetadata(x, y, z);
-            CarvingVariation[] variations = carving.getVariations(block, metadata);
-
-            if (variations != null)
-            {
-                ItemStack target = new ItemStack(block, metadata);
-
-                if (target != null)
-                {
-                    for (CarvingVariation v : variations)
-                    {
-                        if (v.block == Block.getBlockFromItem(target.getItem()) && v.meta == target.getItemDamage())
-                        {
-                            event.world.setBlock(x, y, z, v.block);
-                        }
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < variations.length; i++)
-                    {
-                        CarvingVariation v = variations[i];
-                        if (v.block == block && v.meta == metadata)
-                        {
-                            variations = ArrayUtils.remove(variations, i--);
-                        }
-                    }
-
-                    int index = event.world.rand.nextInt(variations.length);
-                    CarvingVariation newVar = variations[index];
-                    event.world.setBlock(x, y, z, newVar.block);
-                    GeneralClient.playChiselSound(event.world, x, y, z, MOD_ID + ":chisel.fallback");
-                    event.entityPlayer.inventory.currentItem = slot;
-                }
-            }
         }
     }
 }

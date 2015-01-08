@@ -28,7 +28,6 @@ public class BlockCarvableSand extends BlockSand implements ICarvable {
         super();
         carverHelper = new CarvableHelper();
         setCreativeTab(ModTabs.tabOtherChiselBlocks);
-        setHarvestLevel("chisel", 0);
     }
 
     public BlockCarvableSand setStained(boolean a) {

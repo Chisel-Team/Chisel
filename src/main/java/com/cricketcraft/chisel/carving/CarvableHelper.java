@@ -309,7 +309,6 @@ public class CarvableHelper
             if(block instanceof BlockMarbleSlab && ((BlockMarbleSlab) block).isBottom)
             {
                 BlockMarbleSlab slab = (BlockMarbleSlab) block;
-                slab.top.setHarvestLevel("chisel", 0, variation.metadata);
 
                 if(!forbidChiseling)
                 {

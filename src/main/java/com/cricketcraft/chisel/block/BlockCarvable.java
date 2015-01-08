@@ -31,7 +31,6 @@ public class BlockCarvable extends Block implements ICarvable {
         setResistance(10.0F);
         setHardness(2.0F);
         setCreativeTab(ModTabs.tabOtherChiselBlocks);
-        setHarvestLevel("chisel", 0);
     }
 
     public BlockCarvable setStained(boolean a) {
