@@ -208,8 +208,8 @@ public class CarvableHelper {
 				return variation.iconTop;
 
 			Block block = world.getBlock(x, y, z);
-			boolean topConnected = block.equals(CTM.getBlockOrFacade(world, x, y + 1, z, side)) && metadata == CTM.getBlockOrFacadeMetadata(world, x, y + 1, z, side);
-			boolean botConnected = block.equals(CTM.getBlockOrFacade(world, x, y - 1, z, side)) && metadata == CTM.getBlockOrFacadeMetadata(world, x, y - 1, z, side);
+			boolean topConnected = CTM.isConnected(world, x, y + 1, z, side, block, metadata);
+			boolean botConnected = CTM.isConnected(world, x, y - 1, z, side, block, metadata);
 
 			if (topConnected && botConnected)
 				return variation.seamsCtmVert.icons[2];
@@ -230,11 +230,11 @@ public class CarvableHelper {
 			boolean reverse = side == 2 || side == 4;
 
 			if (side < 4) {
-				p = isSame(world, x - 1, y, z, block, metadata, side);
-				n = isSame(world, x + 1, y, z, block, metadata, side);
+				p = CTM.isConnected(world, x - 1, y, z, side, block, metadata);
+				n = CTM.isConnected(world, x + 1, y, z, side, block, metadata);
 			} else {
-				p = isSame(world, x, y, z + 1, block, metadata, side);
-				n = isSame(world, x, y, z - 1, block, metadata, side);
+				p = CTM.isConnected(world, x, y, z - 1, side, block, metadata);
+				n = CTM.isConnected(world, x, y, z + 1, side, block, metadata);
 			}
 
 			if (p && n)
@@ -379,10 +379,6 @@ public class CarvableHelper {
 		for (CarvableVariation variation : variations) {
 			list.add(new ItemStack(block, 1, variation.metadata));
 		}
-	}
-
-	private boolean isSame(IBlockAccess world, int x, int y, int z, Block block, int meta, int side) {
-		return CTM.getBlockOrFacade(world, x, y, z, side).equals(block) && CTM.getBlockOrFacadeMetadata(world, x, y, z, side) == meta;
 	}
 
 	public void setChiselBlockName(String name) {

@@ -2,6 +2,7 @@ package com.cricketcraft.chisel.client.render;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.api.IFacade;
 
@@ -187,34 +188,16 @@ public class CTM {
 		return texture;
 	}
 
-	protected static boolean isConnected(IBlockAccess world, int x, int y, int z, int side, Block block, int meta) {
-		int x2 = x, y2 = y, z2 = z;
+	public static boolean isConnected(IBlockAccess world, int x, int y, int z, int side, Block block, int meta) {
 
-		switch (side) {
-		case 0:
-			y2--;
-			break;
-		case 1:
-			y2++;
-			break;
-		case 2:
-			z2--;
-			break;
-		case 3:
-			z2++;
-			break;
-		case 4:
-			x2--;
-			break;
-		case 5:
-			x2++;
-			break;
-		}
-		if (getBlockOrFacade(world, x2, y2, z2, side) == null || getBlockOrFacade(world, x, y, z, side) == null || block == null)
-			return false;
+		ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[side];
+
+		int x2 = x + dir.offsetX;
+		int y2 = y + dir.offsetY;
+		int z2 = z + dir.offsetZ;
 
 		return getBlockOrFacade(world, x, y, z, side).equals(block) && getBlockOrFacadeMetadata(world, x, y, z, side) == meta
-				&& (!getBlockOrFacade(world, x2, y2, z2, side).equals(block) || getBlockOrFacadeMetadata(world, x2, y2, z2, side) != meta);
+				&& !(getBlockOrFacade(world, x2, y2, z2, side).equals(block) && getBlockOrFacadeMetadata(world, x2, y2, z2, side) == meta);
 	}
 
 	public static int getBlockOrFacadeMetadata(IBlockAccess world, int x, int y, int z, int side) {
