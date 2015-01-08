@@ -144,28 +144,28 @@ public class CarvableHelper {
 			return GeneralClient.getMissingIcon();
 
 		switch (variation.kind) {
-		case 0:
+		case NORMAL:
 			return variation.icon;
-		case 1:
+		case TOPSIDE:
 			if (side == 0 || side == 1)
 				return variation.iconTop;
 			else
 				return variation.icon;
-		case 2:
+		case TOPBOTSIDE:
 			if (side == 1)
 				return variation.iconTop;
 			else if (side == 0)
 				return variation.iconBot;
 			else
 				return variation.icon;
-		case 3:
+		case CTM3:
 			return variation.ctm.seams[0].icons[0];
-		case 4:
+		case CTMV:
 			if (side < 2)
 				return variation.iconTop;
 			else
 				return variation.seamsCtmVert.icons[0];
-		case 5:
+		case CTMH:
 			if (side < 2)
 				return variation.iconTop;
 			else
@@ -192,18 +192,18 @@ public class CarvableHelper {
 			return GeneralClient.getMissingIcon();
 
 		switch (variation.kind) {
-		case 0:
-		case 1:
-		case 2:
+		case NORMAL:
+		case TOPSIDE:
+		case TOPBOTSIDE:
 			return getIcon(side, metadata);
-		case 3:
+		case CTM3:
 			int tex = CTM.getTexture(world, x, y, z, side);
 
 			int row = tex / 16;
 			int col = tex % 16;
 
 			return variation.ctm.seams[col / 4].icons[col % 4 + row * 4];
-		case 4: {
+		case CTMV: {
 			if (side < 2)
 				return variation.iconTop;
 
@@ -219,7 +219,7 @@ public class CarvableHelper {
 				return variation.seamsCtmVert.icons[1];
 			return variation.seamsCtmVert.icons[0];
 		}
-		case 5:
+		case CTMH:
 			if (side < 2)
 				return variation.iconTop;
 
@@ -316,14 +316,14 @@ public class CarvableHelper {
 
 				} else {
 					switch (variation.kind) {
-					case 0:
+					case NORMAL:
 						variation.icon = variation.block.getIcon(2, variation.blockMeta);
 						break;
-					case 1:
+					case TOPSIDE:
 						variation.icon = variation.block.getIcon(2, variation.blockMeta);
 						variation.iconTop = variation.block.getIcon(0, variation.blockMeta);
 						break;
-					case 2:
+					case TOPBOTSIDE:
 						variation.icon = variation.block.getIcon(2, variation.blockMeta);
 						variation.iconTop = variation.block.getIcon(1, variation.blockMeta);
 						variation.iconBot = variation.block.getIcon(0, variation.blockMeta);
@@ -332,30 +332,30 @@ public class CarvableHelper {
 				}
 			} else {
 				switch (variation.kind) {
-				case 0:
+				case NORMAL:
 					variation.icon = register.registerIcon(modName + ":" + variation.texture);
 					break;
-				case 1:
+				case TOPSIDE:
 					variation.icon = register.registerIcon(modName + ":" + variation.texture + "-side");
 					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
 					break;
-				case 2:
+				case TOPBOTSIDE:
 					variation.icon = register.registerIcon(modName + ":" + variation.texture + "-side");
 					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
 					variation.iconBot = register.registerIcon(modName + ":" + variation.texture + "-bottom");
 					break;
-				case 3:
+				case CTM3:
 					CarvableVariationCTM ctm = new CarvableVariationCTM();
 					ctm.seams[0] = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm1"), 4, 4);
 					ctm.seams[1] = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm2"), 4, 4);
 					ctm.seams[2] = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm3"), 4, 4);
 					variation.ctm = ctm;
 					break;
-				case 4:
+				case CTMV:
 					variation.seamsCtmVert = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctmv"), 2, 2);
 					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
 					break;
-				case 5:
+				case CTMH:
 					variation.seamsCtmVert = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctmh"), 2, 2);
 					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
 					break;

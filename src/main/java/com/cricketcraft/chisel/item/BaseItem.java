@@ -11,6 +11,7 @@ import net.minecraft.util.StatCollector;
 
 public class BaseItem extends Item {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4) {
 		getWrappedDesc(list, itemStack);
@@ -37,7 +38,7 @@ public class BaseItem extends Item {
 			return new String[] { input };
 
 		char[] chars = input.toCharArray();
-		Vector lines = new Vector();
+		Vector<String> lines = new Vector<String>();
 		StringBuffer line = new StringBuffer();
 		StringBuffer word = new StringBuffer();
 
@@ -71,7 +72,7 @@ public class BaseItem extends Item {
 
 		String[] ret = new String[lines.size()];
 		int c = 0; // counter
-		for (Enumeration e = lines.elements(); e.hasMoreElements(); c++) {
+		for (Enumeration<String> e = lines.elements(); e.hasMoreElements(); c++) {
 			ret[c] = (String) e.nextElement();
 		}
 

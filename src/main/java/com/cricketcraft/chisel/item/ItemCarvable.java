@@ -32,6 +32,7 @@ public class ItemCarvable extends ItemBlock {
 		return Block.getBlockFromItem(this).getIcon(2, damage);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List lines, boolean advancedTooltips) {
 		if (!Configurations.blockDescriptions)
@@ -52,5 +53,4 @@ public class ItemCarvable extends ItemBlock {
 
 		lines.add(var.description);
 	}
-
 }
