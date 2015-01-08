@@ -53,14 +53,6 @@ tile.leaves.10.desc=White Rose
 tile.leaves.11.desc=Christmas Balls
 tile.leaves.12.desc=Christmas Lights
 
-#Bone
-tile.bone.name=Bone Block
-tile.bone.0.desc=Compressed Bone
-tile.bone.1.desc=Skullpile
-tile.bone.2.desc=Pile of Bones
-tile.bone.3.desc=Beveled Compressed Bone
-tile.bone.4.desc=Brick Compressed Bone
-
 #Void Stone Blocks
 tile.voidstone.name=Voidstone
 tile.voidstone.0.desc=Raw Voidstone
@@ -182,31 +174,6 @@ tile.present.0.desc=§cRed Present
 tile.present.1.desc=§9Blue Present
 tile.present.2.desc=§aGreen Present
 tile.present.3.desc=§eYellow Present
-
-#Scorching
-tile.scorching.name=Scorching Block
-tile.scorching.0.desc=Solidified Fire
-tile.scorching.1.desc=Edged Solidified Fire
-tile.scorching.2.desc=Beveled Solidified Fire
-tile.scorching.3.desc=Burnt Stone Encased Solidified Fire
-tile.scorching.4.desc=Deep Core Block
-
-#Warning
-tile.warningSign.name=Warning Sign
-tile.warningSign.0.desc=Radiation
-tile.warningSign.1.desc=Biohazard
-tile.warningSign.2.desc=Fire
-tile.warningSign.3.desc=Explosion
-tile.warningSign.4.desc=Death
-tile.warningSign.5.desc=Falling Objects
-tile.warningSign.6.desc=Danger of Falling
-tile.warningSign.7.desc=High Voltage
-tile.warningSign.8.desc=Generic Warning
-tile.warningSign.9.desc=Dangerous Chemicals
-tile.warningSign.10.desc=Under Construction
-tile.warningSign.11.desc=Loud Sounds
-tile.warningSign.12.desc=No Entry
-tile.warningSign.13.desc=Cryogenic Freezing in progress
 
 #Brick
 tile.brickCustom.name=Brick Block
@@ -1185,43 +1152,6 @@ tile.laboratory.12.desc=Small Steel Tiles
 tile.laboratory.13.desc=Direction Console (Right)
 tile.laboratory.14.desc=Direction Console (Left)
 tile.laboratory.15.desc=Information Console
-
-#mat
-tile.mat.name=mat Block
-tile.mat.0.desc=White(Thick)
-tile.mat.1.desc=White(Thin)
-tile.mat.2.desc=Orange(Thick)
-tile.mat.3.desc=Orange(Thin)
-tile.mat.4.desc=Magenta(Thick)
-tile.mat.5.desc=Magenta(Thin)
-tile.mat.6.desc=Light Blue(Thick)
-tile.mat.7.desc=Light Blue(Thin)
-tile.mat.8.desc=Yellow(Thick)
-tile.mat.9.desc=Yellow(Thin)
-tile.mat.10.desc=Lime(Thick)
-tile.mat.11.desc=Lime(Thin)
-tile.mat.12.desc=Pink(Thick)
-tile.mat.13.desc=Pink(Thin)
-tile.mat.14.desc=Gray(Thick)
-tile.mat.15.desc=Gray(Thin)
-#mat2
-tile.mat2.name=mat Block
-tile.mat2.0.desc=Light Gray(Thick)
-tile.mat2.1.desc=Light Gray(Thin)
-tile.mat2.2.desc=Cyan(Thick)
-tile.mat2.3.desc=Cyan(Thin)
-tile.mat2.4.desc=Purple(Thick)
-tile.mat2.5.desc=Purple(Thin)
-tile.mat2.6.desc=Blue(Thick)
-tile.mat2.7.desc=Blue(Thin)
-tile.mat2.8.desc=Brown(Thick)
-tile.mat2.9.desc=Brown(Thin)
-tile.mat2.10.desc=Green(Thick)
-tile.mat2.11.desc=Green(Thin)
-tile.mat2.12.desc=Red(Thick)
-tile.mat2.13.desc=Red(Thin)
-tile.mat2.14.desc=Black(Thick)
-tile.mat2.15.desc=Black(Thin)
 
 # Creative Tab localizations
 itemGroup.tabOtherChiselBlocks=Other Chisel Blocks

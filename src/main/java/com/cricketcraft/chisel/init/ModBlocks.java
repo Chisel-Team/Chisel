@@ -91,11 +91,8 @@ public class ModBlocks {
     public static BlockCarvable bone;
     public static BlockCarvable scorching;
     public static BlockCarvable brickCustom;
-    public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
     public static BlockCarvable sign;
     public static BlockCarvable arcane;
-    public static BlockCarvable mat;
-    public static BlockCarvable mat2;
     public static BlockCarvable bloodRune;
     public static BlockCarvableSand coloredSand;
 
@@ -1612,30 +1609,6 @@ public class ModBlocks {
             Carving.chisel.registerOre("futura", "futura");
         }
 
-        if(Configurations.featureEnabled("bone"))
-        {
-        	bone = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ModTabs.tabOtherChiselBlocks);
-        	bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.0.desc"), 0, "bone/solid");
-            bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.1.desc"), 1, "bone/skullpile");
-            bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.2.desc"), 2, "bone/stacked");
-            bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.3.desc"), 3, "bone/bevel");
-            bone.carverHelper.addVariation(StatCollector.translateToLocal("tile.bone.4.desc"), 4, "bone/bricks");
-            bone.carverHelper.register(bone, "bone");
-            Carving.chisel.registerOre("bone", "bone");
-        }
-
-        if(Configurations.featureEnabled("scorching"))
-        {
-        	scorching = (BlockCarvable) new BlockCarvable(Material.rock).setLightLevel(1F).setCreativeTab(ModTabs.tabOtherChiselBlocks);
-        	scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.0.desc"), 0, "scorching/scorch");
-            scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.1.desc"), 1, "scorching/bordered");
-            scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.2.desc"), 2, "scorching/beveled");
-            scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.3.desc"), 3, "scorching/cracked");
-            scorching.carverHelper.addVariation(StatCollector.translateToLocal("tile.scorching.4.desc"), 4, "scorching/deep");
-            scorching.carverHelper.register(scorching, "scorching");
-            Carving.chisel.registerOre("scorching", "scorching");
-        }
-
         if(Configurations.featureEnabled("brickCustom"))
         {
             brickCustom = (BlockCarvable) new BlockCarvable(Material.rock).setStepSound(Block.soundTypeStone).setCreativeTab(ModTabs.tabStoneChiselBlocks);
@@ -1650,93 +1623,12 @@ public class ModBlocks {
             Carving.chisel.registerOre("brickCustom", "brickCustom");
         }
 
-        if(Configurations.featureEnabled("torch"))
-        {
-            Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
-            for(int metadata = 0; metadata < 10; metadata++){
-                torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setCreativeTab(ModTabs.tabOtherChiselBlocks).setLightLevel(0.9375F).setBlockName("torch").setCreativeTab(ModTabs.tabOtherChiselBlocks);
-                torch[metadata].setInformation("torch" + (metadata + 1));
-                GameRegistry.registerBlock(torch[metadata], "torch" + (metadata + 1));
-                Carving.chisel.addVariation("torch", torch[metadata], 0, (metadata + 1));
-            }
-            Carving.chisel.registerOre("torch", "torch");
-        }
-
-        if(Configurations.featureEnabled("warningSign"))
-        {
-        	sign = (BlockCarvable) new BlockCarvable(Material.iron).setCreativeTab(ModTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
-        	sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.0.desc"), 0, "warning/rad");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.1.desc"), 1, "warning/bio");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.2.desc"), 2, "warning/fire");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.3.desc"), 3, "warning/explosion");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.4.desc"), 4, "warning/death");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.5.desc"), 5, "warning/falling");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.6.desc"), 6, "warning/fall");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.7.desc"), 7, "warning/voltage");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.8.desc"), 8, "warning/generic");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.9.desc"), 9, "warning/acid");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.10.desc"), 10, "warning/underconstruction");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.11.desc"), 11, "warning/sound");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.12.desc"), 12, "warning/noentry");
-            sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.13.desc"), 13, "warning/cryogenic");
-            sign.carverHelper.register(sign, "warningSign");
-            Carving.chisel.registerOre("warningSign", "warningSign");
-        }
-
         if(Configurations.featureEnabled("quartz"))
         {
             Carving.chisel.addVariation("quartz", Blocks.quartz_block, 0, 0);
             Carving.chisel.addVariation("quartz", Blocks.quartz_block, 1, 0);
             Carving.chisel.addVariation("quartz", Blocks.quartz_block, 2, 0);
             Carving.chisel.registerOre("quartz", "quartz");
-        }
-
-        if (Configurations.featureEnabled("Mat"))
-        {
-            mat = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
-            mat.carverHelper.setChiselBlockName("Mat");
-            mat.carverHelper.register(mat, "Mat");
-
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.0.desc"), 0, "mat/White-Thick");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.1.desc"), 1, "mat/White-Thin");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.2.desc"), 2, "mat/Orange-Thick");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.3.desc"), 3, "mat/Orange-Thin");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.4.desc"), 4, "mat/Magenta-Thick");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.5.desc"), 5, "mat/Magenta-Thin");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.6.desc"), 6, "mat/LightBlue-Thick");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.7.desc"), 7, "mat/LightBlue-Thin");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.8.desc"), 8, "mat/Yellow-Thick");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.9.desc"), 9, "mat/Yellow-Thin");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.10.desc"), 10, "mat/Lime-Thick");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.11.desc"), 11, "mat/Lime-Thin");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.12.desc"), 12, "mat/Pink-Thick");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.13.desc"), 13, "mat/Pink-Thin");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.14.desc"), 14, "mat/Gray-Thick");
-            mat.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat.15.desc"), 15, "mat/Gray-Thin");
-        }
-
-        if (Configurations.featureEnabled("Mat2"))
-        {
-            mat2 = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10F).setStepSound(Chisel.soundMetalFootstep);
-            mat2.carverHelper.setChiselBlockName("Mat2");
-            mat2.carverHelper.register(mat2, "Mat2");
-
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.0.desc"), 0, "mat/LightGray-Thick");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.1.desc"), 1, "mat/LightGray-Thin");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.2.desc"), 2, "mat/Cyan-Thick");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.3.desc"), 3, "mat/Cyan-Thin");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.4.desc"), 4, "mat/Purple-Thick");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.5.desc"), 5, "mat/Purple-Thin");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.6.desc"), 6, "mat/Blue-Thick");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.7.desc"), 7, "mat/Blue-Thin");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.8.desc"), 8, "mat/Brown-Thick");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.9.desc"), 9, "mat/Brown-Thin");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.10.desc"), 10, "mat/Green-Thick");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.11.desc"), 11, "mat/Green-Thin");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.12.desc"), 12, "mat/Red-Thick");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.13.desc"), 13, "mat/Red-Thin");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.14.desc"), 14, "mat/Black-Thick");
-            mat2.carverHelper.addVariation(StatCollector.translateToLocal("tile.mat2.15.desc"), 15, "mat/Black-Thin");
         }
 
         //1.8
@@ -1767,6 +1659,7 @@ public class ModBlocks {
             Carving.chisel.registerOre("andesite", "andesite");
         }
     }
+
     public static void postLoad()
     {
 
