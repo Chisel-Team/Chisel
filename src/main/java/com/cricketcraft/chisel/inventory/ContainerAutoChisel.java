@@ -89,7 +89,7 @@ public class ContainerAutoChisel extends Container {
 					}
 				} else {
 					// otherwise just put it in one of the 3 other slots
-					if (!this.mergeItemStack(itemStack1, 1, 3, false)) {
+					if (!this.mergeItemStack(itemStack1, 0, 3, false)) {
 						return null;
 					}
 				}
