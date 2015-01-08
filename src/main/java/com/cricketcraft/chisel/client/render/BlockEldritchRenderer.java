@@ -15,7 +15,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 public class BlockEldritchRenderer implements ISimpleBlockRenderingHandler {
 
 	public BlockEldritchRenderer() {
-		Chisel.RenderEldritchId = RenderingRegistry.getNextAvailableRenderId();
+		Chisel.renderEldritchId = RenderingRegistry.getNextAvailableRenderId();
 	}
 
 	@Override
@@ -95,7 +95,7 @@ public class BlockEldritchRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		return Chisel.RenderEldritchId;
+		return Chisel.renderEldritchId;
 	}
 
 }

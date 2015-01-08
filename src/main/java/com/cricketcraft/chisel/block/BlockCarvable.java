@@ -74,7 +74,7 @@ public class BlockCarvable extends Block implements ICarvable {
 
 	@Override
 	public int getRenderType() {
-		return Chisel.RenderCTMId;
+		return Chisel.renderCTMId;
 	}
 
 	@Override

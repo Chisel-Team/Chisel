@@ -50,7 +50,7 @@ public class BlockMarbleCarpet extends BlockCarpet implements ICarvable {
 
 	@Override
 	public int getRenderType() {
-		return Chisel.RenderCarpetId;
+		return Chisel.renderCarpetId;
 	}
 
 	@Override
