@@ -123,10 +123,15 @@ public class Chisel {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		modsSupported.add("Thaumcraft");
+        modsSupported.add("AWWayOfTime");
+
+		/* These mods will enable no blocks in chisel. IF YOU REENABLE
+		THESE BLOCKS, THE GAME WILL CRASH UPON TRYING TO RENDER MISSING
+		BLOCK IN THE CREATIVE TABS! See issue #106 for more info! ~Drull
+
 		modsSupported.add("Twilight Forest");
 		modsSupported.add("appliedenergistics2");
-		modsSupported.add("Railcraft");
-		modsSupported.add("AWWayOfTime");
+		modsSupported.add("Railcraft");*/
 
 		File configFile = event.getSuggestedConfigurationFile();
 		Configurations.configExists = configFile.exists();
