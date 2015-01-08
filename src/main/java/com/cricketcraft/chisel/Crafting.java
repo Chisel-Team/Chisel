@@ -72,8 +72,8 @@ public class Crafting {
 		if (Configurations.featureEnabled("waterstone"))
 			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.waterstone, 8, 0), new Object[] { "***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.water_bucket, 1) });
 		if (Configurations.featureEnabled("fantasy")) {
-			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.fantasy, 8, 0), new Object[] { "***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.gold_nugget, 1) });
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.fantasyblock2, 8, 0), new Object[] { "***", "*X*", "***", '*', new ItemStack(ChiselBlocks.fantasy, 1), 'X', "dyeWhite" }));
+			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.fantasyblock, 8, 0), new Object[] { "***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.gold_nugget, 1) });
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.fantasyblock2, 8, 0), new Object[] { "***", "*X*", "***", '*', new ItemStack(ChiselBlocks.fantasyblock, 1), 'X', "dyeWhite" }));
 		}
 		if (Configurations.featureEnabled("futuristicArmorPlating"))
 			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.tyrian, 8, 0), new Object[] { "***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1) });

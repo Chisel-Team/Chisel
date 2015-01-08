@@ -71,7 +71,6 @@ public final class ChiselBlocks {
 	public static final BlockMarblePackedIce packedice_pillar = null;
 	public static final BlockMarbleIceStairs iceStairs = null;
 	public static final BlockMarblePackedIceStairs packediceStairs = null;
-	public static final BlockCarvable[] planks = new BlockCarvable[6];
 	public static final BlockCarvable obsidian = null;
 	public static final BlockCarvablePowered redstone_block = null;
 	public static final BlockHolystone holystone = null;
@@ -79,7 +78,7 @@ public final class ChiselBlocks {
 	public static final BlockLavastone lavastone = null;
 	public static final BlockWaterstone waterstone = null;
 	public static final BlockCarvable leaves = null;
-	public static final BlockCarvable fantasy = null;
+	public static final BlockCarvable fantasyblock = null;
 	public static final BlockCarvable fantasyblock2 = null;
 	public static final BlockCarvable carpet_block = null;
 	public static final BlockMarbleCarpet carpet = null;
@@ -93,13 +92,11 @@ public final class ChiselBlocks {
 	public static final BlockCarvablePane paperwall = null;
 	public static final BlockCarvable woolen_clay = null;
 	public static final BlockCarvable laboratoryblock = null;
-	public static final BlockCarvablePumpkin[] pumpkin = new BlockCarvablePumpkin[16];
-	public static final BlockCarvablePumpkin[] jackolantern = new BlockCarvablePumpkin[16];
+
 	public static final BlockCarvable voidstone = null;
 	public static final BlockMarbleTexturedOre voidstone2 = null;
 	public static final BlockVoidstonePillar voidstonePillar = null;
 	public static final BlockVoidstonePillar2 voidstonePillar2 = null;
-	public static final BlockPresent[] present = new BlockPresent[16];
 	public static final BlockSnakestone stone_snakestone = null;
 	public static final BlockSnakestone sand_snakestone = null;
 	public static final BlockSnakestoneObsidian obsidian_snakestone = null;
@@ -115,9 +112,17 @@ public final class ChiselBlocks {
 	public static final BlockCarvable bloodRune = null;
 	public static final BlockCarvableSand colored_sand = null;
 
+	// Arrays can't be final because of how @ObjectHolder works
+	public static BlockCarvable[] planks = new BlockCarvable[6];
+
+	public static BlockPresent[] present = new BlockPresent[16];
+
+	public static BlockCarvablePumpkin[] pumpkin = new BlockCarvablePumpkin[16];
+	public static BlockCarvablePumpkin[] jackolantern = new BlockCarvablePumpkin[16];
+
 	// 1.7
-	public static final BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
-	public static final BlockCarvablePane[] stainedGlassPane = new BlockCarvablePane[8];
+	public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
+	public static BlockCarvablePane[] stainedGlassPane = new BlockCarvablePane[8];
 
 	// 1.8 or at least so you think :P
 	public static final BlockCarvable granite = null;
