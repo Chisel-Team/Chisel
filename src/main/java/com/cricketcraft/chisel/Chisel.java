@@ -142,9 +142,9 @@ public class Chisel {
 		Configurations.config.load();
 		Configurations.refreshConfig();
 
+		ChiselTabs.preInit();
 		Features.preInit();
 		PacketHandler.init();
-		ChiselTabs.load();
 		proxy.preInit();
 	}
 
@@ -210,6 +210,7 @@ public class Chisel {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		ChiselTabs.postInit();
 		ModIntegration.postInit();
 		Compatibility.init(event);
 	}

@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -393,6 +394,16 @@ public enum Features {
 			concrete.carverHelper.register(concrete, "concrete");
 			OreDictionary.registerOre("concrete", concrete);
 			Carving.chisel.registerOre("concrete", "concrete");
+		}
+
+		@Override
+		public void addRecipes() {
+			Block concreteRecipeBlock = Block.getBlockFromName(Configurations.config.get("tweaks", "concrete recipe block", "gravel",
+					"Unlocalized name of the block that, when burned, will produce concrete (examples: lightgem, stone)").getString());
+			if (concreteRecipeBlock == null)
+				concreteRecipeBlock = Blocks.gravel;
+
+			FurnaceRecipes.smelting().func_151393_a(concreteRecipeBlock, new ItemStack(ChiselBlocks.concrete), 0.1F);
 		}
 	},
 
@@ -1724,6 +1735,11 @@ public enum Features {
 			sandstone_scribbles.carverHelper.register(sandstone_scribbles, "sandstone_scribbles");
 			Carving.chisel.registerOre("sandstone_scribbles", "sandstone_scribbles");
 		}
+
+		@Override
+		public void addRecipes() {
+			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.sandstone_scribbles, 1), new Object[] { "X", 'X', new ItemStack(ChiselBlocks.sandstone, 1, 8), });
+		}
 	},
 
 	SMASHING_ROCK {
@@ -2177,5 +2193,14 @@ public enum Features {
 
 	private boolean shouldLoad(boolean init) {
 		return requiredMod == null ? !init : init && Loader.isModLoaded(requiredMod);
+	}
+
+	public static boolean oneModdedFeatureLoaded() {
+		for (Features f : values()) {
+			if (f.getRequiredMod() != null && Loader.isModLoaded(f.getRequiredMod())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
