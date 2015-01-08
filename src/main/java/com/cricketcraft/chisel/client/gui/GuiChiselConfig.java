@@ -5,7 +5,7 @@ import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.Configurations;
+import com.cricketcraft.chisel.config.Configurations;
 
 import cpw.mods.fml.client.config.GuiConfig;
 

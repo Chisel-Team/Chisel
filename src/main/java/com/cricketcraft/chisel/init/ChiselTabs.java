@@ -8,7 +8,7 @@ import com.cricketcraft.chisel.Chisel;
 
 import cpw.mods.fml.common.Loader;
 
-public class ModTabs {
+public class ChiselTabs {
 
 	private static boolean atLeastOneModIsLoaded = false;
 
@@ -21,7 +21,7 @@ public class ModTabs {
 
 			@Override
 			public Item getTabIconItem() {
-				return ModItems.chisel;
+				return ChiselItems.chisel;
 			}
 		};
 
@@ -38,11 +38,11 @@ public class ModTabs {
 				public Item getTabIconItem() {
 
 					if (Loader.isModLoaded("Thaumcraft")) {
-						return Item.getItemFromBlock(ModBlocks.arcane);
+						return Item.getItemFromBlock(ChiselBlocks.arcane);
 					} else if (Loader.isModLoaded("AWWayOfTime")) {
-						return Item.getItemFromBlock(ModBlocks.bloodRune);
+						return Item.getItemFromBlock(ChiselBlocks.bloodRune);
 					} else {
-						return Item.getItemFromBlock(ModBlocks.voidstone);
+						return Item.getItemFromBlock(ChiselBlocks.voidstone);
 					}
 				}
 			};
@@ -52,7 +52,7 @@ public class ModTabs {
 
 			@Override
 			public Item getTabIconItem() {
-				return Item.getItemFromBlock(ModBlocks.holystone);
+				return Item.getItemFromBlock(ChiselBlocks.holystone);
 			}
 		};
 
@@ -68,7 +68,7 @@ public class ModTabs {
 
 			@Override
 			public Item getTabIconItem() {
-				return Item.getItemFromBlock(ModBlocks.technical);
+				return Item.getItemFromBlock(ChiselBlocks.technical);
 			}
 		};
 
@@ -76,7 +76,7 @@ public class ModTabs {
 
 			@Override
 			public Item getTabIconItem() {
-				return Item.getItemFromBlock(ModBlocks.jackolantern[0]);
+				return Item.getItemFromBlock(ChiselBlocks.jackolantern[0]);
 			}
 		};
 	}

@@ -13,7 +13,7 @@ import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.client.render.BlockMarblePaneRenderer;
-import com.cricketcraft.chisel.init.ModTabs;
+import com.cricketcraft.chisel.init.ChiselTabs;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -28,7 +28,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 
 		carverHelper = new CarvableHelper();
 
-		setCreativeTab(ModTabs.tabOtherChiselBlocks);
+		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 	}
 
 	public BlockCarvablePane setStained(boolean a) {

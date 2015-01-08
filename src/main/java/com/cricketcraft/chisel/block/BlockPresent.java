@@ -44,42 +44,7 @@ public class BlockPresent extends BlockChest implements ICarvable {
 	}
 
 	public String getKindOfChest(int type) {
-		switch (type) {
-		case 0:
-			return "textures/blocks/present/presentChest0";
-		case 1:
-			return "textures/blocks/present/presentChest1";
-		case 2:
-			return "textures/blocks/present/presentChest2";
-		case 3:
-			return "textures/blocks/present/presentChest3";
-		case 4:
-			return "textures/blocks/present/presentChest4";
-		case 5:
-			return "textures/blocks/present/presentChest5";
-		case 6:
-			return "textures/blocks/present/presentChest6";
-		case 7:
-			return "textures/blocks/present/presentChest7";
-		case 8:
-			return "textures/blocks/present/presentChest8";
-		case 9:
-			return "textures/blocks/present/presentChest9";
-		case 10:
-			return "textures/blocks/present/presentChest10";
-		case 11:
-			return "textures/blocks/present/presentChest11";
-		case 12:
-			return "textures/blocks/present/presentChest12";
-		case 13:
-			return "textures/blocks/present/presentChest13";
-		case 14:
-			return "textures/blocks/present/presentChest14";
-		case 15:
-			return "textures/blocks/present/presentChest15";
-		default:
-			return null;
-		}
+		return "textures/blocks/present/presentChest" + type;
 	}
 
 	private static boolean isCatSittingOnMe(World world, int x, int y, int z) {
@@ -248,7 +213,7 @@ public class BlockPresent extends BlockChest implements ICarvable {
 	}
 
 	@Override
-	public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int strength) {
+	public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int direction) {
 		if (!canProvidePower()) {
 			return 0;
 		} else {

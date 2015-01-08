@@ -15,7 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 
 import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.init.ModItems;
+import com.cricketcraft.chisel.init.ChiselItems;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -26,7 +26,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		SPEED, AUTOMATION, STACK;
 
 		public String getUnlocalizedName() {
-			return ModItems.upgrade.getUnlocalizedName() + "_" + this.name().toLowerCase();
+			return ChiselItems.upgrade.getUnlocalizedName() + "_" + this.name().toLowerCase();
 		}
 		
 		public String getLocalizedName() {
@@ -302,7 +302,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	public boolean hasUpgrade(Upgrade upgrade) {
 		ItemStack stack = inventory[MIN_UPGRADE + upgrade.ordinal()];
 		if (stack != null) {
-			return stack.getItem() == ModItems.upgrade && stack.getItemDamage() == upgrade.ordinal();
+			return stack.getItem() == ChiselItems.upgrade && stack.getItemDamage() == upgrade.ordinal();
 		}
 		return false;
 	}

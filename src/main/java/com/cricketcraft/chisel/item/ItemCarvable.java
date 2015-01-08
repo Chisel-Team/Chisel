@@ -9,9 +9,9 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import com.cricketcraft.chisel.Configurations;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.utils.General;
 
 public class ItemCarvable extends ItemBlock {

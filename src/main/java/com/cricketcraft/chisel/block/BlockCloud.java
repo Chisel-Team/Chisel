@@ -9,7 +9,7 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.Configurations;
+import com.cricketcraft.chisel.config.Configurations;
 
 public class BlockCloud extends BlockCarvable {
 

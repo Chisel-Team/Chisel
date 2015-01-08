@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
-import com.cricketcraft.chisel.init.ModItems;
+import com.cricketcraft.chisel.init.ChiselItems;
 import com.cricketcraft.chisel.utils.General;
 
 import cpw.mods.fml.relauncher.Side;
@@ -97,7 +97,7 @@ public class EntityBallOMossFX extends EntityFX {
 
 		// setParticleIcon(block.particles[General.rand.nextInt(block.particles.length)]);
 
-		icon = ModItems.itemBallOMoss.getIconFromDamage(0);
+		icon = ChiselItems.itemBallOMoss.getIconFromDamage(0);
 		float width = 4.0f + General.rand.nextFloat() * 8.0f;
 		float uu = General.rand.nextFloat() * (16.0f - width);
 		float vv = General.rand.nextFloat() * (16.0f - width);

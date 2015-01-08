@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel.Upgrade;
-import com.cricketcraft.chisel.init.ModItems;
+import com.cricketcraft.chisel.init.ChiselItems;
 
 public class ContainerAutoChisel extends Container {
 
@@ -23,7 +23,7 @@ public class ContainerAutoChisel extends Container {
 
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return stack.getItem() == ModItems.upgrade && stack.getItemDamage() == upgradeType.ordinal();
+			return stack.getItem() == ChiselItems.upgrade && stack.getItemDamage() == upgradeType.ordinal();
 		}
 	}
 
@@ -83,7 +83,7 @@ public class ContainerAutoChisel extends Container {
 				}
 			} else {
 				// if this is an upgrade, check the upgrade slots
-				if (itemStack1.getItem() == ModItems.upgrade) {
+				if (itemStack1.getItem() == ChiselItems.upgrade) {
 					if (!this.mergeItemStack(itemStack1, 3, 6, false)) {
 						return null;
 					}

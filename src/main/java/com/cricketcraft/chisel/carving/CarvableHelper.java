@@ -15,11 +15,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.Configurations;
 import com.cricketcraft.chisel.block.BlockMarbleSlab;
 import com.cricketcraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
 import com.cricketcraft.chisel.client.render.CTM;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
+import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.utils.GeneralClient;
 

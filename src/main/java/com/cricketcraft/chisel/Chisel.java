@@ -21,9 +21,11 @@ import com.cricketcraft.chisel.client.gui.GuiPresent;
 import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.compat.FMPIntegration;
 import com.cricketcraft.chisel.compat.ModIntegration;
-import com.cricketcraft.chisel.init.ModBlocks;
-import com.cricketcraft.chisel.init.ModItems;
-import com.cricketcraft.chisel.init.ModTabs;
+import com.cricketcraft.chisel.config.Configurations;
+import com.cricketcraft.chisel.init.Features;
+import com.cricketcraft.chisel.init.ChiselBlocks;
+import com.cricketcraft.chisel.init.ChiselItems;
+import com.cricketcraft.chisel.init.ChiselTabs;
 import com.cricketcraft.chisel.inventory.ContainerAutoChisel;
 import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.ContainerPresent;
@@ -140,16 +142,15 @@ public class Chisel {
 		Configurations.config.load();
 		Configurations.refreshConfig();
 
+		Features.preInit();
 		PacketHandler.init();
-		ModTabs.load();
-		ModBlocks.load();
-		ModItems.load();
+		ChiselTabs.load();
 		proxy.preInit();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		Crafting.init();
+		Features.init();
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new IGuiHandler() {
 
@@ -190,11 +191,11 @@ public class Chisel {
 			}
 		});
 
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.marble, 32, Configurations.marbleAmount), 1000);
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.andesite, 32, Configurations.andesiteAmount), 1000);
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.granite, 32, Configurations.graniteAmount), 1000);
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ModBlocks.diorite, 32, Configurations.dioriteAmount), 1000);
+		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.marble, 32, Configurations.marbleAmount), 1000);
+		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
+		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.andesite, 32, Configurations.andesiteAmount), 1000);
+		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.granite, 32, Configurations.graniteAmount), 1000);
+		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.diorite, 32, Configurations.dioriteAmount), 1000);
 
 		if (event.getSide() == Side.CLIENT) {
 			initModIntegration();
@@ -209,7 +210,6 @@ public class Chisel {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		ModBlocks.postLoad();
 		ModIntegration.postInit();
 		Compatibility.init(event);
 	}

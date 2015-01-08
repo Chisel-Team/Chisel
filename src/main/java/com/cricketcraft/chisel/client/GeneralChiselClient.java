@@ -11,11 +11,11 @@ import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.Configurations;
 import com.cricketcraft.chisel.block.BlockGrimstone;
 import com.cricketcraft.chisel.block.BlockHolystone;
 import com.cricketcraft.chisel.block.BlockLavastone;
 import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
+import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.entity.fx.EntityBallOMossFX;
 import com.cricketcraft.chisel.entity.fx.EntityGrimstoneFX;
 import com.cricketcraft.chisel.entity.fx.EntityHolystoneFX;
