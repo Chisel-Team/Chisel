@@ -88,8 +88,51 @@ public class ContainerChisel extends Container {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer entity, int i) {
-		return null;
+	public ItemStack transferStackInSlot(EntityPlayer entity, int slotIdx) {
+		ItemStack itemstack = null;
+		Slot slot = (Slot) this.inventorySlots.get(slotIdx);
+
+		if (slot != null && slot.getHasStack()) {
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
+
+			if (slotIdx > 24) {
+				if (!this.mergeItemStack(itemstack1, 24, 25, false)) {
+					return null;
+				}
+			} else {
+				if (slotIdx < 24 && itemstack1 != null) {
+					entity.inventory.setItemStack(itemstack1.copy());
+					slot.onPickupFromSlot(entity, itemstack1);
+					itemstack1 = entity.inventory.getItemStack();
+					entity.inventory.setItemStack(null);
+				}
+
+				if (!this.mergeItemStack(itemstack1, 52, 61, false)) {
+					if (!this.mergeItemStack(itemstack1, 25, 52, false)) {
+						return null;
+					}
+				}
+			}
+			slot.onSlotChange(itemstack1, itemstack);
+
+			if (itemstack1.stackSize == 0) {
+				slot.putStack((ItemStack) null);
+			} else {
+				slot.onSlotChanged();
+			}
+			if (itemstack1.stackSize == itemstack.stackSize) {
+				return null;
+			}
+			if (slotIdx >= 24) {
+				slot.onPickupFromSlot(entity, itemstack1);
+			}
+			if (itemstack1.stackSize == 0) {
+				slot.putStack(null);
+				return null;
+			}
+		}
+		return itemstack;
 	}
 
 	public void onChiselSlotChanged() {
