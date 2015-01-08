@@ -7,8 +7,25 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
+import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel.Upgrade;
+import com.cricketcraft.chisel.init.ModItems;
 
 public class ContainerAutoChisel extends Container {
+
+	public static class SlotUpgrade extends Slot {
+
+		public Upgrade upgradeType;
+
+		public SlotUpgrade(TileEntityAutoChisel inv, int id, int x, int y, Upgrade upgrade) {
+			super(inv, id, x, y);
+			this.upgradeType = upgrade;
+		}
+
+		@Override
+		public boolean isItemValid(ItemStack stack) {
+			return stack.getItem() == ModItems.upgrade && stack.getItemDamage() == upgradeType.ordinal();
+		}
+	}
 
 	public static TileEntityAutoChisel autoChisel;
 	public static EntityPlayer player;
@@ -21,9 +38,9 @@ public class ContainerAutoChisel extends Container {
 		addSlotToContainer(new Slot(tileEntityAutoChisel, 0, 53, 15));
 		addSlotToContainer(new Slot(tileEntityAutoChisel, 1, 78, 51));
 		addSlotToContainer(new Slot(tileEntityAutoChisel, 2, 103, 15));
-		addSlotToContainer(new Slot(tileEntityAutoChisel, 3, 151, 11));
-		addSlotToContainer(new Slot(tileEntityAutoChisel, 4, 151, 31));
-		addSlotToContainer(new Slot(tileEntityAutoChisel, 5, 151, 51));
+		addSlotToContainer(new SlotUpgrade(tileEntityAutoChisel, 3, 151, 11, Upgrade.SPEED));
+		addSlotToContainer(new SlotUpgrade(tileEntityAutoChisel, 4, 151, 31, Upgrade.AUTOMATION));
+		addSlotToContainer(new SlotUpgrade(tileEntityAutoChisel, 5, 151, 51, Upgrade.STACK));
 
 		bindPlayerInventory(player);
 	}
@@ -49,29 +66,33 @@ public class ContainerAutoChisel extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber) {
 		ItemStack itemStack = null;
 		Slot slot = (Slot) this.inventorySlots.get(slotNumber);
+		System.out.println(slotNumber);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemStack1 = slot.getStack();
 			itemStack = itemStack1.copy();
 
-			if (slotNumber == 2) {
-				if (!this.mergeItemStack(itemStack1, 3, 39, true)) {
-					return null;
-				}
-
-				slot.onSlotChange(itemStack1, itemStack);
-			} else if (slotNumber != 1 && slotNumber != 0) {
-				if (!this.mergeItemStack(itemStack1, 0, 1, true)) {
-					return null;
-				} else if (slotNumber >= 3 && slotNumber < 30) {
-					if (this.mergeItemStack(itemStack1, 30, 39, false)) {
+			// if we are in the auto chisel
+			if (slotNumber <= 5) {
+				// merge hotbar
+				if (!this.mergeItemStack(itemStack1, 33, 42, false)) {
+					// merge rest of inventory
+					if (!this.mergeItemStack(itemStack1, 6, 33, false)) {
 						return null;
 					}
-				} else if (slotNumber >= 30 && slotNumber < 39 && !this.mergeItemStack(itemStack1, 3, 30, false)) {
-					return null;
 				}
-			} else if (this.mergeItemStack(itemStack1, 3, 39, false)) {
-				return null;
+			} else {
+				// if this is an upgrade, check the upgrade slots
+				if (itemStack1.getItem() == ModItems.upgrade) {
+					if (!this.mergeItemStack(itemStack1, 3, 6, false)) {
+						return null;
+					}
+				} else {
+					// otherwise just put it in one of the 3 other slots
+					if (!this.mergeItemStack(itemStack1, 1, 3, false)) {
+						return null;
+					}
+				}
 			}
 
 			if (itemStack1.stackSize == 0) {
