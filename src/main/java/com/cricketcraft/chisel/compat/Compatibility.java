@@ -8,7 +8,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class Compatibility
 {
-
     public static void init(FMLPostInitializationEvent event)
     {
         new MarbleCompatibility().postInit(event);
@@ -31,7 +30,6 @@ public class Compatibility
         if(Loader.isModLoaded(modname) && GameRegistry.findBlock(modname, blockname) != null)
         {
             Carving.chisel.addVariation(name, GameRegistry.findBlock(modname, blockname), metadata, order);
-            GameRegistry.findBlock(modname, blockname).setHarvestLevel("chisel", 0, 0);
         }
     }
 }

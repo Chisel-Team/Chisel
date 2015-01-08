@@ -18,7 +18,7 @@ public class ModItems {
     public static ItemUpgrade upgrade;
 
     public static void load() {
-        chisel = (ItemChisel) new ItemChisel().setTextureName("chisel:chisel").setCreativeTab(ModTabs.tabChisel);
+        chisel = (ItemChisel) new ItemChisel().setCreativeTab(ModTabs.tabChisel);
         GameRegistry.registerItem(chisel, "chisel");
 
         if (Configurations.featureEnabled("cloud")) {
@@ -44,8 +44,9 @@ public class ModItems {
             GameRegistry.registerItem(upgrade, upgrade.getUnlocalizedName());
         }
 
+        // TODO deprecated
         if(Configurations.featureEnabled("diamondChisel")){
-            diamondChisel = (ItemDiamondChisel) new ItemDiamondChisel().setTextureName(Chisel.MOD_ID + ":diamondChisel").setCreativeTab(ModTabs.tabChisel);
+            diamondChisel = (ItemDiamondChisel) new ItemDiamondChisel().setTextureName(Chisel.MOD_ID + ":diamondChisel");
             GameRegistry.registerItem(diamondChisel, diamondChisel.getUnlocalizedName());
         }
     }
