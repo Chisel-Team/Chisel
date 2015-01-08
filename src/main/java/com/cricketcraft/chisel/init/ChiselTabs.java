@@ -1,83 +1,64 @@
 package com.cricketcraft.chisel.init;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-
-import com.cricketcraft.chisel.Chisel;
-
-import cpw.mods.fml.common.Loader;
+import net.minecraft.item.ItemStack;
 
 public class ChiselTabs {
 
+	private static class CustomCreativeTab extends CreativeTabs {
+
+		private ItemStack stack;
+
+		public CustomCreativeTab(String label) {
+			super(label);
+		}
+
+		@Override
+		public Item getTabIconItem() {
+			return stack.getItem();
+		}
+
+		public void setTabIconItemStack(ItemStack stack) {
+			this.stack = stack;
+		}
+
+		@Override
+		public ItemStack getIconItemStack() {
+			return stack;
+		}
+	}
+
 	private static boolean atLeastOneModIsLoaded = false;
 
-	public static CreativeTabs tabChisel;
-	public static CreativeTabs tabStoneChiselBlocks, tabWoodChiselBlocks, tabMetalChiselBlocks, tabOtherChiselBlocks, tabModdedChiselBlocks;
+	public static final CustomCreativeTab tabChisel = new CustomCreativeTab("tabChisel");
+	public static final CustomCreativeTab tabStoneChiselBlocks = new CustomCreativeTab("tabStoneChiselBlocks");
+	public static final CustomCreativeTab tabWoodChiselBlocks = new CustomCreativeTab("tabWoodChiselBlocks");
+	public static final CustomCreativeTab tabMetalChiselBlocks = new CustomCreativeTab("tabMetalChiselBlocks");
+	public static final CustomCreativeTab tabOtherChiselBlocks = new CustomCreativeTab("tabOtherChiselBlocks");
+	public static final CustomCreativeTab tabModdedChiselBlocks = new CustomCreativeTab("tabModdedChiselBlocks");
 
-	public static void load() {
+	// this serves mostly just to load the static initializers
+	public static void preInit() {
+		atLeastOneModIsLoaded = Features.oneModdedFeatureLoaded();
+	}
 
-		tabChisel = new CreativeTabs("tabChisel") {
+	public static void postInit() {
 
-			@Override
-			public Item getTabIconItem() {
-				return ChiselItems.chisel;
-			}
-		};
-
-		for (String s : Chisel.modsSupported) {
-			if (Loader.isModLoaded(s)) {
-				atLeastOneModIsLoaded = true;
-			}
-		}
+		tabChisel.setTabIconItemStack(new ItemStack(ChiselItems.chisel));
+		tabStoneChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.holystone));
+		tabWoodChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.bookshelf));
+		tabMetalChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.technical));
+		tabOtherChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.jackolantern[0]));
 
 		if (atLeastOneModIsLoaded) {
-			tabModdedChiselBlocks = new CreativeTabs("tabModdedChiselBlocks") {
-
-				@Override
-				public Item getTabIconItem() {
-
-					if (Loader.isModLoaded("Thaumcraft")) {
-						return Item.getItemFromBlock(ChiselBlocks.arcane);
-					} else if (Loader.isModLoaded("AWWayOfTime")) {
-						return Item.getItemFromBlock(ChiselBlocks.bloodRune);
-					} else {
-						return Item.getItemFromBlock(ChiselBlocks.voidstone);
-					}
-				}
-			};
+			if (Features.ARCANE.enabled()) {
+				tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.arcane));
+			} else if (Features.BLOOD_RUNE.enabled()) {
+				tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.bloodRune));
+			} else {
+				tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.voidstone));
+			}
 		}
-
-		tabStoneChiselBlocks = new CreativeTabs("tabStoneChiselBlocks") {
-
-			@Override
-			public Item getTabIconItem() {
-				return Item.getItemFromBlock(ChiselBlocks.holystone);
-			}
-		};
-
-		tabWoodChiselBlocks = new CreativeTabs("tabWoodChiselBlocks") {
-
-			@Override
-			public Item getTabIconItem() {
-				return Item.getItemFromBlock(Blocks.bookshelf);
-			}
-		};
-
-		tabMetalChiselBlocks = new CreativeTabs("tabMetalChiselBlocks") {
-
-			@Override
-			public Item getTabIconItem() {
-				return Item.getItemFromBlock(ChiselBlocks.technical);
-			}
-		};
-
-		tabOtherChiselBlocks = new CreativeTabs("tabOtherChiselBlocks") {
-
-			@Override
-			public Item getTabIconItem() {
-				return Item.getItemFromBlock(ChiselBlocks.jackolantern[0]);
-			}
-		};
 	}
 }
