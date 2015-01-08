@@ -22,10 +22,9 @@ import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.compat.FMPIntegration;
 import com.cricketcraft.chisel.compat.ModIntegration;
 import com.cricketcraft.chisel.config.Configurations;
-import com.cricketcraft.chisel.init.Features;
 import com.cricketcraft.chisel.init.ChiselBlocks;
-import com.cricketcraft.chisel.init.ChiselItems;
 import com.cricketcraft.chisel.init.ChiselTabs;
+import com.cricketcraft.chisel.init.Features;
 import com.cricketcraft.chisel.inventory.ContainerAutoChisel;
 import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.ContainerPresent;
@@ -126,15 +125,13 @@ public class Chisel {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		modsSupported.add("Thaumcraft");
-        modsSupported.add("AWWayOfTime");
+		modsSupported.add("AWWayOfTime");
 
-		/* These mods will enable no blocks in chisel. IF YOU REENABLE
-		THESE BLOCKS, THE GAME WILL CRASH UPON TRYING TO RENDER MISSING
-		BLOCK IN THE CREATIVE TABS! See issue #106 for more info! ~Drull
-
-		modsSupported.add("Twilight Forest");
-		modsSupported.add("appliedenergistics2");
-		modsSupported.add("Railcraft");*/
+		/*
+		 * These mods will enable no blocks in chisel. IF YOU REENABLE THESE BLOCKS, THE GAME WILL CRASH UPON TRYING TO RENDER MISSING BLOCK IN THE CREATIVE TABS! See issue #106 for more info! ~Drull
+		 * 
+		 * modsSupported.add("Twilight Forest"); modsSupported.add("appliedenergistics2"); modsSupported.add("Railcraft");
+		 */
 
 		File configFile = event.getSuggestedConfigurationFile();
 		Configurations.configExists = configFile.exists();
@@ -191,11 +188,11 @@ public class Chisel {
 			}
 		});
 
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.marble, 32, Configurations.marbleAmount), 1000);
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.limestone, 32, Configurations.limestoneAmount), 1000);
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.andesite, 32, Configurations.andesiteAmount), 1000);
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.granite, 32, Configurations.graniteAmount), 1000);
-		GameRegistry.registerWorldGenerator(new GeneratorChisel(ChiselBlocks.diorite, 32, Configurations.dioriteAmount), 1000);
+		registerWorldgen(Features.MARBLE, ChiselBlocks.marble, Configurations.marbleAmount);
+		registerWorldgen(Features.LIMESTONE, ChiselBlocks.limestone, Configurations.limestoneAmount);
+		registerWorldgen(Features.ANDESITE, ChiselBlocks.andesite, Configurations.andesiteAmount);
+		registerWorldgen(Features.GRANITE, ChiselBlocks.granite, Configurations.graniteAmount);
+		registerWorldgen(Features.DIORITE, ChiselBlocks.diorite, Configurations.dioriteAmount);
 
 		if (event.getSide() == Side.CLIENT) {
 			initModIntegration();
@@ -206,6 +203,12 @@ public class Chisel {
 		FMLCommonHandler.instance().bus().register(instance);
 
 		FMLInterModComms.sendMessage("Waila", "register", "com.cricketcraft.chisel.Waila.register");
+	}
+
+	private void registerWorldgen(Features feature, Block block, int amount) {
+		if (feature.enabled()) {
+			GameRegistry.registerWorldGenerator(new GeneratorChisel(block, 32, amount), 1000);
+		}
 	}
 
 	@EventHandler
