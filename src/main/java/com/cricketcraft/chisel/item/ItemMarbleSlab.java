@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.block.BlockMarbleSlab;
+import com.cricketcraft.chisel.block.BlockCarvableSlab;
 
 public class ItemMarbleSlab extends ItemCarvable {
 
@@ -16,7 +16,7 @@ public class ItemMarbleSlab extends ItemCarvable {
 
 	@Override
 	public boolean func_150936_a(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack) {
-		BlockMarbleSlab block = (BlockMarbleSlab) Block.getBlockFromItem(this);
+		BlockCarvableSlab block = (BlockCarvableSlab) Block.getBlockFromItem(this);
 
 		switch (side) {
 		case 0:
@@ -48,7 +48,7 @@ public class ItemMarbleSlab extends ItemCarvable {
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hx, float hy, float hz) {
-		BlockMarbleSlab block = (BlockMarbleSlab) Block.getBlockFromItem(this);
+		BlockCarvableSlab block = (BlockCarvableSlab) Block.getBlockFromItem(this);
 
 		Block targetBlock = world.getBlock(x, y, z);
 		int meta = world.getBlockMetadata(x, y, z);

@@ -13,7 +13,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class BlockMarbleStairsMaker {
 
 	public CarvableHelper carverHelper;
-	BlockMarbleStairs blocks[];
+	BlockCarvableStairs blocks[];
 
 	// int idStart;
 	Block blockBase;
@@ -29,10 +29,10 @@ public class BlockMarbleStairsMaker {
 	}
 
 	public void create(BlockMarbleStairsMakerCreator creator, String name) {
-		blocks = new BlockMarbleStairs[carverHelper.variations.size() / 2];
+		blocks = new BlockCarvableStairs[carverHelper.variations.size() / 2];
 		for (int i = 0; i < blocks.length; i++) {
 			String n = name + "." + i;
-			blocks[i] = creator == null ? new BlockMarbleStairs(blockBase, i * 2, carverHelper) : creator.create(blockBase, i * 2, carverHelper);
+			blocks[i] = creator == null ? new BlockCarvableStairs(blockBase, i * 2, carverHelper) : creator.create(blockBase, i * 2, carverHelper);
 
 			blocks[i].setBlockName(n);
 			GameRegistry.registerBlock(blocks[i], ItemCarvable.class, n);

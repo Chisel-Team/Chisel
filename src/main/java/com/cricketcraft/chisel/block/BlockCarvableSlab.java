@@ -16,26 +16,26 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockMarbleSlab extends BlockCarvable {
+public class BlockCarvableSlab extends BlockCarvable {
 
 	public Block master;
-	public BlockMarbleSlab bottom;
-	public BlockMarbleSlab top;
+	public BlockCarvableSlab bottom;
+	public BlockCarvableSlab top;
 	public boolean isBottom;
 
-	public BlockMarbleSlab(BlockCarvable marble) {
+	public BlockCarvableSlab(BlockCarvable marble) {
 		opaque = true;
 
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
 
 		master = marble;
 		bottom = this;
-		top = new BlockMarbleSlab(this);
+		top = new BlockCarvableSlab(this);
 
 		isBottom = true;
 	}
 
-	public BlockMarbleSlab(BlockMarbleSlab bottomBlock) {
+	public BlockCarvableSlab(BlockCarvableSlab bottomBlock) {
 		super();
 		setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
 		master = bottomBlock.master;

@@ -97,7 +97,7 @@ public class EntityBallOMossFX extends EntityFX {
 
 		// setParticleIcon(block.particles[General.rand.nextInt(block.particles.length)]);
 
-		icon = ChiselItems.itemBallOMoss.getIconFromDamage(0);
+		icon = ChiselItems.ballomoss.getIconFromDamage(0);
 		float width = 4.0f + General.rand.nextFloat() * 8.0f;
 		float uu = General.rand.nextFloat() * (16.0f - width);
 		float vv = General.rand.nextFloat() * (16.0f - width);

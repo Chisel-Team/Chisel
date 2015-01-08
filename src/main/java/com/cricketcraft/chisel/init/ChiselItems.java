@@ -13,9 +13,9 @@ import cpw.mods.fml.common.registry.GameRegistry.ObjectHolder;
 public final class ChiselItems {
 
 	public static final ItemChisel chisel = null;
-	public static final ItemCloudInABottle itemCloudInABottle = null;
-	public static final ItemBallOMoss itemBallOMoss = null;
-	public static final ItemSmashingRock smashingRock = null;
+	public static final ItemCloudInABottle cloudinabottle = null;
+	public static final ItemBallOMoss ballomoss = null;
+	public static final ItemSmashingRock smashingrock = null;
 	public static final ItemUpgrade upgrade = null;
 
 	private ChiselItems() {

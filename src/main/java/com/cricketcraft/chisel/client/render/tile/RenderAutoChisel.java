@@ -27,6 +27,7 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -127,6 +128,8 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 	private final RenderItem renderTargetAndChisel, renderBase;
 
 	public RenderAutoChisel() {
+		Chisel.renderAutoChiselId = RenderingRegistry.getNextAvailableRenderId();
+
 		renderTargetAndChisel = new RenderItem() {
 
 			@Override

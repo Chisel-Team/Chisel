@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 
-public class BlockMarblePackedIceStairs extends BlockMarbleStairs {
+public class BlockMarblePackedIceStairs extends BlockCarvableStairs {
 
 	public BlockMarblePackedIceStairs(Block block, int meta, CarvableHelper helper) {
 		super(block, meta, helper);
