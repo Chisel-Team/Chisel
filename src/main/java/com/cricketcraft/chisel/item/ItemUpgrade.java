@@ -61,6 +61,6 @@ public class ItemUpgrade extends BaseItem {
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
 		Upgrade[] upgrades = Upgrade.values();
-		return getUnlocalizedName() + "_" + upgrades[stack.getItemDamage() % upgrades.length].name().toLowerCase();
+		return upgrades[stack.getItemDamage() % upgrades.length].getUnlocalizedName();
 	}
 }

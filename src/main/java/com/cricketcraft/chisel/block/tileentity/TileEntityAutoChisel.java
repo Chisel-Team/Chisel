@@ -12,6 +12,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.init.ModItems;
@@ -22,7 +23,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityAutoChisel extends TileEntity implements ISidedInventory {
 
 	public enum Upgrade {
-		SPEED, AUTOMATION, STACK
+		SPEED, AUTOMATION, STACK;
+
+		public String getUnlocalizedName() {
+			return ModItems.upgrade.getUnlocalizedName() + "_" + this.name().toLowerCase();
+		}
+		
+		public String getLocalizedName() {
+			return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+		}
 	}
 
 	private final int BASE = 0, TARGET = 1, OUTPUT = 2, MIN_UPGRADE = 3;
