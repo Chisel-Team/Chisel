@@ -37,19 +37,14 @@ public class ModTabs {
 				@Override
 				public Item getTabIconItem() {
 
-                    if (Loader.isModLoaded("Thaumcraft")) {
-                        return Item.getItemFromBlock(ModBlocks.arcane);
-                    }
-                    else
-                    {
-
-                        if (Loader.isModLoaded("AWWayOfTime")) {
-                            return Item.getItemFromBlock(ModBlocks.bloodRune);
-                        }
-
-                    };
-
-                }
+					if (Loader.isModLoaded("Thaumcraft")) {
+						return Item.getItemFromBlock(ModBlocks.arcane);
+					} else if (Loader.isModLoaded("AWWayOfTime")) {
+						return Item.getItemFromBlock(ModBlocks.bloodRune);
+					} else {
+						return Item.getItemFromBlock(ModBlocks.voidstone);
+					}
+				}
 			};
 		}
 
