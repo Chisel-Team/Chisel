@@ -245,7 +245,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
 		if (hasUpgrade(Upgrade.AUTOMATION)) {
-			if (side != 0 || side != 1 && slot == BASE) {
+			if (slot == BASE) {
 				return true;
 			}
 		}
@@ -255,7 +255,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
 		if (hasUpgrade(Upgrade.AUTOMATION)) {
-			if (side == 0 || side == 1 && slot == OUTPUT) {
+			if (slot == OUTPUT) {
 				return true;
 			}
 		}
