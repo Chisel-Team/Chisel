@@ -193,7 +193,7 @@ public class ItemChisel extends Item implements IChiselMode {
 			y = buf.readInt();
 			z = buf.readInt();
 			block = buf.readInt();
-			meta = (byte) buf.readByte();
+			meta = buf.readByte();
 		}
 	}
 

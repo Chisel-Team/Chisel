@@ -5,33 +5,29 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
-public class TextureSubmap
-{
-    public int width, height;
-    public IIcon icon;
-    public IIcon icons[];
+public class TextureSubmap {
 
-    public TextureSubmap(IIcon i, int w, int h)
-    {
-        icon = i;
-        width = w;
-        height = h;
-        icons = new IIcon[width * height];
+	public int width, height;
+	public IIcon icon;
+	public IIcon icons[];
 
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+	public TextureSubmap(IIcon i, int w, int h) {
+		icon = i;
+		width = w;
+		height = h;
+		icons = new IIcon[width * height];
 
-    @SubscribeEvent
-    public void TexturesStitched(TextureStitchEvent.Post event)
-    {
+		MinecraftForge.EVENT_BUS.register(this);
+	}
 
-        for(int x = 0; x < width; x++)
-        {
-            for(int y = 0; y < height; y++)
-            {
-                icons[y * width + x] = new TextureVirtual(icon, width, height, x, y);
-            }
-        }
-    }
+	@SubscribeEvent
+	public void TexturesStitched(TextureStitchEvent.Post event) {
+
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				icons[y * width + x] = new TextureVirtual(icon, width, height, x, y);
+			}
+		}
+	}
 
 }

@@ -9,11 +9,10 @@ import com.cricketcraft.chisel.Configurations;
 
 import cpw.mods.fml.client.config.GuiConfig;
 
-public class GuiChiselConfig extends GuiConfig
-{
+public class GuiChiselConfig extends GuiConfig {
 
-    public GuiChiselConfig(GuiScreen parent)
-    {
-        super(parent, new ConfigElement(Configurations.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), Chisel.MOD_ID, false, false, GuiConfig.getAbridgedConfigPath(Configurations.config.toString()));
-    }
+	public GuiChiselConfig(GuiScreen parent) {
+		super(parent, new ConfigElement(Configurations.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(), Chisel.MOD_ID, false, false, GuiConfig
+				.getAbridgedConfigPath(Configurations.config.toString()));
+	}
 }

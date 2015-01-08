@@ -1,73 +1,76 @@
 package com.cricketcraft.chisel.init;
 
-import com.cricketcraft.chisel.Chisel;
-import cpw.mods.fml.common.Loader;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 
+import com.cricketcraft.chisel.Chisel;
+
+import cpw.mods.fml.common.Loader;
+
 public class ModTabs {
 
-    private static boolean atLeastOneModIsLoaded = false;
+	private static boolean atLeastOneModIsLoaded = false;
 
-    public static CreativeTabs tabChisel;
-    public static CreativeTabs tabStoneChiselBlocks, tabWoodChiselBlocks,tabMetalChiselBlocks, tabOtherChiselBlocks, tabModdedChiselBlocks;
+	public static CreativeTabs tabChisel;
+	public static CreativeTabs tabStoneChiselBlocks, tabWoodChiselBlocks, tabMetalChiselBlocks, tabOtherChiselBlocks, tabModdedChiselBlocks;
 
-    public static void load(){
+	public static void load() {
 
-        tabChisel = new CreativeTabs("tabChisel")
-        {
-            @Override
-            public Item getTabIconItem() {
-                return ModItems.chisel;
-            }
-        };
+		tabChisel = new CreativeTabs("tabChisel") {
 
-        for(String s : Chisel.modsSupported){
-            if(Loader.isModLoaded(s)){
-                atLeastOneModIsLoaded = true;
-            }
-        }
+			@Override
+			public Item getTabIconItem() {
+				return ModItems.chisel;
+			}
+		};
 
-        if(atLeastOneModIsLoaded){
-            tabModdedChiselBlocks = new CreativeTabs("tabModdedChiselBlocks") {
-                @Override
-                public Item getTabIconItem() {
-                    return Item.getItemFromBlock(ModBlocks.arcane);
-                }
-            };
-        }
+		for (String s : Chisel.modsSupported) {
+			if (Loader.isModLoaded(s)) {
+				atLeastOneModIsLoaded = true;
+			}
+		}
 
-        tabStoneChiselBlocks = new CreativeTabs("tabStoneChiselBlocks") {
-            @Override
-            public Item getTabIconItem()
-            {
-                return Item.getItemFromBlock(ModBlocks.holystone);
-            }
-        };
+		if (atLeastOneModIsLoaded) {
+			tabModdedChiselBlocks = new CreativeTabs("tabModdedChiselBlocks") {
 
-        tabWoodChiselBlocks = new CreativeTabs("tabWoodChiselBlocks") {
-            @Override
-            public Item getTabIconItem()
-            {
-            	return Item.getItemFromBlock(Blocks.bookshelf);
-            }
-        };
+				@Override
+				public Item getTabIconItem() {
+					return Item.getItemFromBlock(ModBlocks.arcane);
+				}
+			};
+		}
 
-        tabMetalChiselBlocks = new CreativeTabs("tabMetalChiselBlocks") {
-            @Override
-            public Item getTabIconItem()
-            {
-                return Item.getItemFromBlock(ModBlocks.technical);
-            }
-        };
+		tabStoneChiselBlocks = new CreativeTabs("tabStoneChiselBlocks") {
 
-        tabOtherChiselBlocks = new CreativeTabs("tabOtherChiselBlocks") {
-            @Override
-            public Item getTabIconItem()
-            {
-                return Item.getItemFromBlock(ModBlocks.jackolantern[0]);
-            }
-        };
-    }
+			@Override
+			public Item getTabIconItem() {
+				return Item.getItemFromBlock(ModBlocks.holystone);
+			}
+		};
+
+		tabWoodChiselBlocks = new CreativeTabs("tabWoodChiselBlocks") {
+
+			@Override
+			public Item getTabIconItem() {
+				return Item.getItemFromBlock(Blocks.bookshelf);
+			}
+		};
+
+		tabMetalChiselBlocks = new CreativeTabs("tabMetalChiselBlocks") {
+
+			@Override
+			public Item getTabIconItem() {
+				return Item.getItemFromBlock(ModBlocks.technical);
+			}
+		};
+
+		tabOtherChiselBlocks = new CreativeTabs("tabOtherChiselBlocks") {
+
+			@Override
+			public Item getTabIconItem() {
+				return Item.getItemFromBlock(ModBlocks.jackolantern[0]);
+			}
+		};
+	}
 }

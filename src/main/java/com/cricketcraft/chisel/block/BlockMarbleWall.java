@@ -10,40 +10,34 @@ import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.init.ModTabs;
 
-public class BlockMarbleWall extends BlockWall
-{
-    CarvableHelper carverHelper;
+public class BlockMarbleWall extends BlockWall {
 
-    public BlockMarbleWall(Block block)
-    {
-        super(block);
+	CarvableHelper carverHelper;
 
-        carverHelper = new CarvableHelper();
-    }
+	public BlockMarbleWall(Block block) {
+		super(block);
 
-    @Override
-    public IIcon getIcon(int side, int metadata)
-    {
-        return carverHelper.getIcon(side, metadata);
-    }
+		carverHelper = new CarvableHelper();
+	}
 
-    @Override
-    public int damageDropped(int i)
-    {
-        return i;
-    }
+	@Override
+	public IIcon getIcon(int side, int metadata) {
+		return carverHelper.getIcon(side, metadata);
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister register)
-    {
-        carverHelper.registerBlockIcons("Chisel", this, register);
-    }
+	@Override
+	public int damageDropped(int i) {
+		return i;
+	}
 
-    @Override
-    public void getSubBlocks(Item block, CreativeTabs tabs, List list)
-    {
-        carverHelper.registerSubBlocks(this, tabs, list);
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		carverHelper.registerBlockIcons("Chisel", this, register);
+	}
+
+	@Override
+	public void getSubBlocks(Item block, CreativeTabs tabs, List list) {
+		carverHelper.registerSubBlocks(this, tabs, list);
+	}
 }

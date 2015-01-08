@@ -2,17 +2,16 @@ package com.cricketcraft.chisel.carving;
 
 import java.util.ArrayList;
 
-public class CarvingGroup
-{
-    public CarvingGroup(String n)
-    {
-        name = n;
-    }
+public class CarvingGroup {
 
-    String name;
-    String className;
-    String sound;
-    String oreName;
+	public CarvingGroup(String n) {
+		name = n;
+	}
 
-    ArrayList<CarvingVariation> variations = new ArrayList<CarvingVariation>();
+	String name;
+	String className;
+	String sound;
+	String oreName;
+
+	ArrayList<CarvingVariation> variations = new ArrayList<CarvingVariation>();
 }

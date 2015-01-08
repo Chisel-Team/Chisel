@@ -5,8 +5,8 @@ import net.minecraft.world.IBlockAccess;
 
 public interface IFacade {
 
-  int getFacadeMetadata(IBlockAccess world, int x, int y, int z, int side);
-  
-  Block getFacade(IBlockAccess world, int x, int y, int z, int side);
-    
+	int getFacadeMetadata(IBlockAccess world, int x, int y, int z, int side);
+
+	Block getFacade(IBlockAccess world, int x, int y, int z, int side);
+
 }

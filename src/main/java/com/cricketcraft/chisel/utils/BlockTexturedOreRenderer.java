@@ -10,78 +10,67 @@ import org.lwjgl.opengl.GL11;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockTexturedOreRenderer implements ISimpleBlockRenderingHandler
-{
-    float bot = -0.001f, top = 1.0f - bot;
-    static int id;
+public class BlockTexturedOreRenderer implements ISimpleBlockRenderingHandler {
 
-    public BlockTexturedOreRenderer()
-    {
-        id = RenderingRegistry.getNextAvailableRenderId();
-    }
+	float bot = -0.001f, top = 1.0f - bot;
+	static int id;
 
-    @Override
-    public void renderInventoryBlock(Block blck, int meta, int modelID, RenderBlocks renderer)
-    {
-        if(blck == null || !(blck instanceof BlockTexturedOre))
-            return;
+	public BlockTexturedOreRenderer() {
+		id = RenderingRegistry.getNextAvailableRenderId();
+	}
 
-        BlockTexturedOre block = (BlockTexturedOre) blck;
+	@Override
+	public void renderInventoryBlock(Block blck, int meta, int modelID, RenderBlocks renderer) {
+		if (blck == null || !(blck instanceof BlockTexturedOre))
+			return;
 
-        if(block.icon != null)
-        {
-            renderer.overrideBlockTexture = block.icon;
-            renderer.renderBlockAsItem(Blocks.stone, meta, 1.0f);
-            renderer.overrideBlockTexture = null;
-        } else if(block.base != null)
-        {
-            renderer.renderBlockAsItem(block.base, meta, 1.0f);
-        }
+		BlockTexturedOre block = (BlockTexturedOre) blck;
 
-        GL11.glEnable(3042);
-        GL11.glBlendFunc(770, 771);
-        renderer.setRenderBounds(bot, bot, bot, top, top, top);
-        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        Drawing.drawBlock(block, meta, renderer);
-        GL11.glDisable(3042);
-    }
+		if (block.icon != null) {
+			renderer.overrideBlockTexture = block.icon;
+			renderer.renderBlockAsItem(Blocks.stone, meta, 1.0f);
+			renderer.overrideBlockTexture = null;
+		} else if (block.base != null) {
+			renderer.renderBlockAsItem(block.base, meta, 1.0f);
+		}
 
-    @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block blck, int modelId, RenderBlocks renderer)
-    {
-        if(blck == null || !(blck instanceof BlockTexturedOre))
-            return false;
-        BlockTexturedOre block = (BlockTexturedOre) blck;
+		GL11.glEnable(3042);
+		GL11.glBlendFunc(770, 771);
+		renderer.setRenderBounds(bot, bot, bot, top, top, top);
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		Drawing.drawBlock(block, meta, renderer);
+		GL11.glDisable(3042);
+	}
 
-        if(block.currentPass == 0)
-        {
-            if(block.icon != null)
-            {
-                renderer.overrideBlockTexture = block.icon;
-                renderer.renderStandardBlock(block, x, y, z);
-                renderer.overrideBlockTexture = null;
-            } else if(block.base != null)
-            {
-                renderer.renderBlockByRenderType(block.base, x, y, z);
-            }
-        } else
-        {
-            renderer.setRenderBounds(bot, bot, bot, top, top, top);
-            renderer.renderStandardBlock(block, x, y, z);
-        }
+	@Override
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block blck, int modelId, RenderBlocks renderer) {
+		if (blck == null || !(blck instanceof BlockTexturedOre))
+			return false;
+		BlockTexturedOre block = (BlockTexturedOre) blck;
 
-        return true;
-    }
+		if (block.currentPass == 0) {
+			if (block.icon != null) {
+				renderer.overrideBlockTexture = block.icon;
+				renderer.renderStandardBlock(block, x, y, z);
+				renderer.overrideBlockTexture = null;
+			} else if (block.base != null) {
+				renderer.renderBlockByRenderType(block.base, x, y, z);
+			}
+		} else {
+			renderer.setRenderBounds(bot, bot, bot, top, top, top);
+			renderer.renderStandardBlock(block, x, y, z);
+		}
 
-    @Override
-    public boolean shouldRender3DInInventory(int modelId)
-    {
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public int getRenderId()
-    {
-        return id;
-    }
+	@Override
+	public boolean shouldRender3DInInventory(int modelId) {
+		return true;
+	}
+
+	@Override
+	public int getRenderId() {
+		return id;
+	}
 }

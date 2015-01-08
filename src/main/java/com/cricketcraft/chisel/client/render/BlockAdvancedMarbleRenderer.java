@@ -15,74 +15,67 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
-{
-    public RenderBlocksCTM rendererCTM = new RenderBlocksCTM();
-    RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
+public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler {
 
-    public BlockAdvancedMarbleRenderer()
-    {
-        if(Chisel.RenderCTMId == 0)
-        {
-            Chisel.RenderCTMId = RenderingRegistry.getNextAvailableRenderId();
+	public RenderBlocksCTM rendererCTM = new RenderBlocksCTM();
+	RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
 
-        }
-    }
+	public BlockAdvancedMarbleRenderer() {
+		if (Chisel.RenderCTMId == 0) {
+			Chisel.RenderCTMId = RenderingRegistry.getNextAvailableRenderId();
 
-    @Override
-    public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer)
-    {
-        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        Drawing.drawBlock(block, metadata, renderer);
-        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-    }
+		}
+	}
 
-    @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld)
-    {
-        int meta = world.getBlockMetadata(x, y, z);
+	@Override
+	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		Drawing.drawBlock(block, metadata, renderer);
+		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+	}
 
-        CarvableVariation var = ((ICarvable) block).getVariation(meta);
+	@Override
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
+		int meta = world.getBlockMetadata(x, y, z);
 
-        switch(var == null ? 0 : var.kind)
-        {
-            case CarvableHelper.CTMX:
-                rendererCTM.blockAccess = world;
-                rendererCTM.renderMaxX = 1.0;
-                rendererCTM.renderMaxY = 1.0;
-                rendererCTM.renderMaxZ = 1.0;
+		CarvableVariation var = ((ICarvable) block).getVariation(meta);
 
-                rendererCTM.submap = var.submap;
-                rendererCTM.submapSmall = var.submapSmall;
+		switch (var == null ? 0 : var.kind) {
+		case CarvableHelper.CTMX:
+			rendererCTM.blockAccess = world;
+			rendererCTM.renderMaxX = 1.0;
+			rendererCTM.renderMaxY = 1.0;
+			rendererCTM.renderMaxZ = 1.0;
 
-                rendererCTM.rendererOld = rendererOld;
+			rendererCTM.submap = var.submap;
+			rendererCTM.submapSmall = var.submapSmall;
 
-                return rendererCTM.renderStandardBlock(block, x, y, z);
-            case CarvableHelper.CTMV:
-                rendererColumn.blockAccess = world;
-                rendererColumn.renderMaxX = 1.0;
-                rendererColumn.renderMaxY = 1.0;
-                rendererColumn.renderMaxZ = 1.0;
+			rendererCTM.rendererOld = rendererOld;
 
-                rendererColumn.submap = var.seamsCtmVert;
-                rendererColumn.iconTop = var.iconTop;
+			return rendererCTM.renderStandardBlock(block, x, y, z);
+		case CarvableHelper.CTMV:
+			rendererColumn.blockAccess = world;
+			rendererColumn.renderMaxX = 1.0;
+			rendererColumn.renderMaxY = 1.0;
+			rendererColumn.renderMaxZ = 1.0;
 
-                return rendererColumn.renderStandardBlock(block, x, y, z);
-            default:
-                return rendererOld.renderStandardBlock(block, x, y, z);
-        }
-    }
+			rendererColumn.submap = var.seamsCtmVert;
+			rendererColumn.iconTop = var.iconTop;
 
-    @Override
-    public boolean shouldRender3DInInventory(int renderId)
-    {
-        return true;
-    }
+			return rendererColumn.renderStandardBlock(block, x, y, z);
+		default:
+			return rendererOld.renderStandardBlock(block, x, y, z);
+		}
+	}
 
-    @Override
-    public int getRenderId()
-    {
-        return Chisel.RenderCTMId;
-    }
+	@Override
+	public boolean shouldRender3DInInventory(int renderId) {
+		return true;
+	}
+
+	@Override
+	public int getRenderId() {
+		return Chisel.RenderCTMId;
+	}
 
 }

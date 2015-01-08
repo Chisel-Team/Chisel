@@ -9,38 +9,36 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.init.ModTabs;
 
-public class BlockVoidstonePillar2 extends Block implements ICarvable{
+public class BlockVoidstonePillar2 extends Block implements ICarvable {
 
-    public static IIcon topBottom, pillarSide;
-    public CarvableHelper carvableHelper;
+	public static IIcon topBottom, pillarSide;
+	public CarvableHelper carvableHelper;
 
-    public BlockVoidstonePillar2() {
-        super(Material.rock);
-        carvableHelper = new CarvableHelper();
-        setHardness(5.0F);
-        setResistance(10.0F);
-    }
+	public BlockVoidstonePillar2() {
+		super(Material.rock);
+		carvableHelper = new CarvableHelper();
+		setHardness(5.0F);
+		setResistance(10.0F);
+	}
 
-    @Override
-    public IIcon getIcon(int side, int meta){
-        if(side == 0 || side == 1){
-            return topBottom;
-        } else {
-            return pillarSide;
-        }
-    }
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		if (side == 0 || side == 1) {
+			return topBottom;
+		} else {
+			return pillarSide;
+		}
+	}
 
+	@Override
+	public void registerBlockIcons(IIconRegister icon) {
+		topBottom = icon.registerIcon(Chisel.MOD_ID + ":voidstone/animated/pillar-top");
+		pillarSide = icon.registerIcon(Chisel.MOD_ID + ":voidstone/pillar-side");
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister icon){
-        topBottom = icon.registerIcon(Chisel.MOD_ID + ":voidstone/animated/pillar-top");
-        pillarSide = icon.registerIcon(Chisel.MOD_ID + ":voidstone/pillar-side");
-    }
-
-    @Override
-    public CarvableVariation getVariation(int metadata) {
-        return carvableHelper.getVariation(metadata);
-    }
+	@Override
+	public CarvableVariation getVariation(int metadata) {
+		return carvableHelper.getVariation(metadata);
+	}
 }

@@ -9,27 +9,27 @@ import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.GeneralChiselClient;
-import com.cricketcraft.chisel.init.ModTabs;
 import com.cricketcraft.chisel.utils.General;
 
 public class BlockGrimstone extends BlockCarvable {
-    public IIcon iconStar;
 
-    public BlockGrimstone(Material m) {
-        super(m);
-    }
+	public IIcon iconStar;
 
-    @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        if (General.rand.nextInt(4) == 0 && world.isRemote)
-            GeneralChiselClient.spawnGrimstoneFX(world, this, x, y, z);
-    }
+	public BlockGrimstone(Material m) {
+		super(m);
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister register) {
-        super.registerBlockIcons(register);
+	@Override
+	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+		if (General.rand.nextInt(4) == 0 && world.isRemote)
+			GeneralChiselClient.spawnGrimstoneFX(world, this, x, y, z);
+	}
 
-        iconStar = register.registerIcon(Chisel.MOD_ID + ":grimstone/particles/star");
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		super.registerBlockIcons(register);
+
+		iconStar = register.registerIcon(Chisel.MOD_ID + ":grimstone/particles/star");
+	}
 
 }

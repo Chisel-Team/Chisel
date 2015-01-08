@@ -14,59 +14,60 @@ import net.minecraft.world.World;
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 
-public class ItemUpgrade extends BaseItem{
+public class ItemUpgrade extends BaseItem {
 
-    public IIcon[] icons = new IIcon[3];
+	public IIcon[] icons = new IIcon[3];
 
-    public ItemUpgrade(String unlocalizedName) {
-        super();
-        this.setUnlocalizedName(unlocalizedName);
-        this.setCreativeTab(CreativeTabs.tabMaterials);
-    }
+	public ItemUpgrade(String unlocalizedName) {
+		super();
+		this.setUnlocalizedName(unlocalizedName);
+		this.setCreativeTab(CreativeTabs.tabMaterials);
+	}
 
-    @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int size, float hitX, float hitY, float hitZ){
-        if(world.isRemote) return false;
-        TileEntity tile = world.getTileEntity(x, y, z);
-        if(tile != null && tile instanceof TileEntityAutoChisel){
-        }
-        return true;
-    }
+	@Override
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int size, float hitX, float hitY, float hitZ) {
+		if (world.isRemote)
+			return false;
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if (tile != null && tile instanceof TileEntityAutoChisel) {
+		}
+		return true;
+	}
 
-    @Override
-    public IIcon getIconFromDamage(int meta) {
-        if (meta > 3)
-            meta = 0;
+	@Override
+	public IIcon getIconFromDamage(int meta) {
+		if (meta > 3)
+			meta = 0;
 
-        return this.icons[meta];
-    }
+		return this.icons[meta];
+	}
 
-    @Override
-    public void registerIcons(IIconRegister reg) {
-        for (int i = 0; i < 3; i ++) {
-            this.icons[i] = reg.registerIcon(Chisel.MOD_ID + ":upgradeItem_" + i);
-        }
-    }
+	@Override
+	public void registerIcons(IIconRegister reg) {
+		for (int i = 0; i < 3; i++) {
+			this.icons[i] = reg.registerIcon(Chisel.MOD_ID + ":upgradeItem_" + i);
+		}
+	}
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    @Override
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
-        for (int i = 0; i < 3; i ++) {
-            list.add(new ItemStack(item, 1, i));
-        }
-    }
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
+		for (int i = 0; i < 3; i++) {
+			list.add(new ItemStack(item, 1, i));
+		}
+	}
 
-    @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        switch (stack.getItemDamage()) {
-            case 0:
-                return this.getUnlocalizedName() + "_speed";
-            case 1:
-                return this.getUnlocalizedName() + "_automation";
-            case 2:
-                return this.getUnlocalizedName() + "_stack";
-            default:
-                return this.getUnlocalizedName();
-        }
-    }
+	@Override
+	public String getUnlocalizedName(ItemStack stack) {
+		switch (stack.getItemDamage()) {
+		case 0:
+			return this.getUnlocalizedName() + "_speed";
+		case 1:
+			return this.getUnlocalizedName() + "_automation";
+		case 2:
+			return this.getUnlocalizedName() + "_stack";
+		default:
+			return this.getUnlocalizedName();
+		}
+	}
 }

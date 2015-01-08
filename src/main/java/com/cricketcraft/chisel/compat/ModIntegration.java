@@ -7,43 +7,46 @@ import cpw.mods.fml.common.Loader;
 
 public class ModIntegration {
 
-    private static List<IModIntegration> integratedMods = new ArrayList<IModIntegration>();
+	private static List<IModIntegration> integratedMods = new ArrayList<IModIntegration>();
 
-    public static void addMod(Class<? extends IModIntegration> cls){
-        try{
-            IModIntegration obj = cls.newInstance();
+	public static void addMod(Class<? extends IModIntegration> cls) {
+		try {
+			IModIntegration obj = cls.newInstance();
 
-            if(Loader.isModLoaded(obj.getModId())){
-                integratedMods.add(obj);
-            }
-        } catch(Throwable throwable){
-            throwable.printStackTrace();
-        }
-    }
+			if (Loader.isModLoaded(obj.getModId())) {
+				integratedMods.add(obj);
+			}
+		} catch (Throwable throwable) {
+			throwable.printStackTrace();
+		}
+	}
 
-    public static void init(){
-        try{
-            for(IModIntegration integration : integratedMods){
-                integration.onInit();
-            }
-        } catch (Throwable throwable){
-            throwable.printStackTrace();
-        }
-    }
+	public static void init() {
+		try {
+			for (IModIntegration integration : integratedMods) {
+				integration.onInit();
+			}
+		} catch (Throwable throwable) {
+			throwable.printStackTrace();
+		}
+	}
 
-    public static void postInit(){
-        try {
-            for (IModIntegration integration : integratedMods){
-                integration.onPostInit();
-            }
-        } catch (Throwable throwable){
-            throwable.printStackTrace();
-        }
-    }
+	public static void postInit() {
+		try {
+			for (IModIntegration integration : integratedMods) {
+				integration.onPostInit();
+			}
+		} catch (Throwable throwable) {
+			throwable.printStackTrace();
+		}
+	}
 
-    static interface IModIntegration{
-        String getModId();
-        void onInit();
-        void onPostInit();
-    }
+	static interface IModIntegration {
+
+		String getModId();
+
+		void onInit();
+
+		void onPostInit();
+	}
 }

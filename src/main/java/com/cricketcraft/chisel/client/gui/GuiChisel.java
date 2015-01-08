@@ -11,57 +11,48 @@ import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
 import com.cricketcraft.chisel.utils.GeneralClient;
 
-public class GuiChisel extends GuiContainer
-{
-    public EntityPlayer player;
-    public ContainerChisel container;
+public class GuiChisel extends GuiContainer {
 
-    public GuiChisel(InventoryPlayer iinventory, InventoryChiselSelection menu)
-    {
-        super(new ContainerChisel(iinventory, menu));
-        player = iinventory.player;
-        height = 177;
+	public EntityPlayer player;
+	public ContainerChisel container;
 
-        container = (ContainerChisel) inventorySlots;
-    }
+	public GuiChisel(InventoryPlayer iinventory, InventoryChiselSelection menu) {
+		super(new ContainerChisel(iinventory, menu));
+		player = iinventory.player;
+		height = 177;
 
-    @Override
-    public void onGuiClosed()
-    {
-        super.onGuiClosed();
-        inventorySlots.onContainerClosed(player);
-    }
+		container = (ContainerChisel) inventorySlots;
+	}
 
-    boolean isExtended()
-    {
-        return container.inventory.activeVariations > 16;
-    }
+	@Override
+	public void onGuiClosed() {
+		super.onGuiClosed();
+		inventorySlots.onContainerClosed(player);
+	}
 
-    @Override
-    protected void drawGuiContainerForegroundLayer(int j, int i)
-    {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+	boolean isExtended() {
+		return container.inventory.activeVariations > 16;
+	}
 
-        String line = isExtended() ?
-                I18n.format(this.container.inventory.getInventoryName() + ".titleShort") :
-                I18n.format(this.container.inventory.getInventoryName() + ".title");
-        fontRendererObj.drawString(line, 88 - fontRendererObj.getStringWidth(line) / 2, 13, 0x404040);
-    }
+	@Override
+	protected void drawGuiContainerForegroundLayer(int j, int i) {
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-    @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int mx, int my)
-    {
-        drawDefaultBackground();
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		String line = isExtended() ? I18n.format(this.container.inventory.getInventoryName() + ".titleShort") : I18n.format(this.container.inventory.getInventoryName() + ".title");
+		fontRendererObj.drawString(line, 88 - fontRendererObj.getStringWidth(line) / 2, 13, 0x404040);
+	}
 
-        int i = width - xSize >> 1;
-        int j = height - ySize >> 1;
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float f, int mx, int my) {
+		drawDefaultBackground();
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        String texture = isExtended() ?
-                "chisel:textures/chisel-gui-24.png" :
-                "chisel:textures/chisel-gui.png";
+		int i = width - xSize >> 1;
+		int j = height - ySize >> 1;
 
-        GeneralClient.bind(texture);
-        drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
-    }
+		String texture = isExtended() ? "chisel:textures/chisel-gui-24.png" : "chisel:textures/chisel-gui.png";
+
+		GeneralClient.bind(texture);
+		drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
+	}
 }

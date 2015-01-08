@@ -12,54 +12,47 @@ import net.minecraft.util.IIcon;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.init.ModTabs;
 
-public class BlockMarbleTexturedOre extends BlockTexturedOre implements ICarvable
-{
-    public CarvableHelper carverHelper;
+public class BlockMarbleTexturedOre extends BlockTexturedOre implements ICarvable {
 
-    public BlockMarbleTexturedOre(Material mat, String baseIcon)
-    {
-        super(mat, baseIcon);
+	public CarvableHelper carverHelper;
 
-        carverHelper = new CarvableHelper();
-    }
+	public BlockMarbleTexturedOre(Material mat, String baseIcon) {
+		super(mat, baseIcon);
 
-    public BlockMarbleTexturedOre(Material mat, Block block) {
-        super(mat, block);
+		carverHelper = new CarvableHelper();
+	}
 
-        carverHelper = new CarvableHelper();
-    }
+	public BlockMarbleTexturedOre(Material mat, Block block) {
+		super(mat, block);
 
-    @Override
-    public IIcon getIcon(int side, int metadata)
-    {
-        return carverHelper.getIcon(side, metadata);
-    }
+		carverHelper = new CarvableHelper();
+	}
 
-    @Override
-    public int damageDropped(int i)
-    {
-        return i;
-    }
+	@Override
+	public IIcon getIcon(int side, int metadata) {
+		return carverHelper.getIcon(side, metadata);
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister register)
-    {
-        super.registerBlockIcons(register);
+	@Override
+	public int damageDropped(int i) {
+		return i;
+	}
 
-        carverHelper.registerBlockIcons("Chisel", this, register);
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		super.registerBlockIcons(register);
 
-    @Override
-    public void getSubBlocks(Item block, CreativeTabs tabs, List list)
-    {
-        carverHelper.registerSubBlocks(this, tabs, list);
-    }
+		carverHelper.registerBlockIcons("Chisel", this, register);
+	}
 
-    @Override
-    public CarvableVariation getVariation(int metadata)
-    {
-        return carverHelper.getVariation(metadata);
-    }
+	@Override
+	public void getSubBlocks(Item block, CreativeTabs tabs, List list) {
+		carverHelper.registerSubBlocks(this, tabs, list);
+	}
+
+	@Override
+	public CarvableVariation getVariation(int metadata) {
+		return carverHelper.getVariation(metadata);
+	}
 }

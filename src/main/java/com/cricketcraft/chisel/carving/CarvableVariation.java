@@ -5,31 +5,31 @@ import net.minecraft.util.IIcon;
 
 import com.cricketcraft.chisel.client.render.TextureSubmap;
 
-public class CarvableVariation
-{
-    public String blockName;
-    public String description;
-    public int metadata;
-    public int kind;
+public class CarvableVariation {
 
-    public Block block;
-    public int blockMeta;
+	public String blockName;
+	public String description;
+	public int metadata;
+	public int kind;
 
-    public String texture;
+	public Block block;
+	public int blockMeta;
 
-    public IIcon icon;
-    public IIcon iconTop;
-    public IIcon iconBot;
+	public String texture;
 
-    public CarvableVariationCTM ctm;
-    public TextureSubmap seamsCtmVert;
-    public TextureSubmap variations9;
+	public IIcon icon;
+	public IIcon iconTop;
+	public IIcon iconBot;
 
-    public TextureSubmap submap;
-    public TextureSubmap submapSmall;
+	public CarvableVariationCTM ctm;
+	public TextureSubmap seamsCtmVert;
+	public TextureSubmap variations9;
 
-    static class CarvableVariationCTM
-    {
-        TextureSubmap seams[] = new TextureSubmap[3];
-    }
+	public TextureSubmap submap;
+	public TextureSubmap submapSmall;
+
+	static class CarvableVariationCTM {
+
+		TextureSubmap seams[] = new TextureSubmap[3];
+	}
 }

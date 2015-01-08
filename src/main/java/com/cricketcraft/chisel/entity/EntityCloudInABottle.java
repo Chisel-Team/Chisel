@@ -9,117 +9,104 @@ import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.init.ModBlocks;
 
-public class EntityCloudInABottle extends EntityThrowable
-{
-    Random rand = new Random();
+public class EntityCloudInABottle extends EntityThrowable {
 
-    public EntityCloudInABottle(World par1World)
-    {
-        super(par1World);
-    }
+	Random rand = new Random();
 
-    public EntityCloudInABottle(World par1World, EntityLivingBase par2EntityLiving)
-    {
-        super(par1World, par2EntityLiving);
-    }
+	public EntityCloudInABottle(World par1World) {
+		super(par1World);
+	}
 
-    public EntityCloudInABottle(World par1World, double x, double y, double z)
-    {
-        super(par1World, x, y, z);
-    }
+	public EntityCloudInABottle(World par1World, EntityLivingBase par2EntityLiving) {
+		super(par1World, par2EntityLiving);
+	}
 
-    @Override
-    protected void onImpact(MovingObjectPosition movingobjectposition)
-    {
-        if(worldObj.isRemote)
-            return;
+	public EntityCloudInABottle(World par1World, double x, double y, double z) {
+		super(par1World, x, y, z);
+	}
 
-        int x = movingobjectposition.blockX;
-        int y = movingobjectposition.blockY;
-        int z = movingobjectposition.blockZ;
+	@Override
+	protected void onImpact(MovingObjectPosition movingobjectposition) {
+		if (worldObj.isRemote)
+			return;
 
-        switch(movingobjectposition.sideHit)
-        {
-            case 0:
-                y--;
-                break;
-            case 1:
-                y++;
-                break;
-            case 2:
-                z--;
-                break;
-            case 3:
-                z++;
-                break;
-            case 4:
-                x--;
-                break;
-            case 5:
-                x++;
-                break;
-        }
+		int x = movingobjectposition.blockX;
+		int y = movingobjectposition.blockY;
+		int z = movingobjectposition.blockZ;
 
-        generate(worldObj, rand, x, y, z, 40);
+		switch (movingobjectposition.sideHit) {
+		case 0:
+			y--;
+			break;
+		case 1:
+			y++;
+			break;
+		case 2:
+			z--;
+			break;
+		case 3:
+			z++;
+			break;
+		case 4:
+			x--;
+			break;
+		case 5:
+			x++;
+			break;
+		}
 
-        worldObj.playAuxSFX(2002, (int) Math.round(this.posX), (int) Math.round(this.posY), (int) Math.round(this.posZ), 2);
-        setDead();
-    }
+		generate(worldObj, rand, x, y, z, 40);
 
-    public boolean generate(World world, Random random, int gx, int gy, int gz, int numberOfBlocks)
-    {
-        int X[] = new int[9];
-        int Y[] = new int[9];
-        int Z[] = new int[9];
+		worldObj.playAuxSFX(2002, (int) Math.round(this.posX), (int) Math.round(this.posY), (int) Math.round(this.posZ), 2);
+		setDead();
+	}
 
-        for(int dir = 0; dir < 9; dir++)
-        {
-            X[dir] = gx;
-            Y[dir] = gy;
-            Z[dir] = gz;
-        }
-        int count = 0;
-        while(count < numberOfBlocks)
-        {
-            for(int dir = 0; dir < 9; dir++)
-            {
-                if(count >= numberOfBlocks)
-                    break;
+	public boolean generate(World world, Random random, int gx, int gy, int gz, int numberOfBlocks) {
+		int X[] = new int[9];
+		int Y[] = new int[9];
+		int Z[] = new int[9];
 
-                int dx = dir % 3 - 1;
-                int dz = dir / 3 - 1;
+		for (int dir = 0; dir < 9; dir++) {
+			X[dir] = gx;
+			Y[dir] = gy;
+			Z[dir] = gz;
+		}
+		int count = 0;
+		while (count < numberOfBlocks) {
+			for (int dir = 0; dir < 9; dir++) {
+				if (count >= numberOfBlocks)
+					break;
 
-                if(dx == 0 && dz == 0)
-                    continue;
+				int dx = dir % 3 - 1;
+				int dz = dir / 3 - 1;
 
-                X[dir] += random.nextInt(3) - 1 + dx;
-                Z[dir] += random.nextInt(3) - 1 + dz;
-                Y[dir] += random.nextInt(2) * (random.nextInt(3) - 1);
+				if (dx == 0 && dz == 0)
+					continue;
 
-                int x = X[dir];
-                int y = Y[dir];
-                int z = Z[dir];
+				X[dir] += random.nextInt(3) - 1 + dx;
+				Z[dir] += random.nextInt(3) - 1 + dz;
+				Y[dir] += random.nextInt(2) * (random.nextInt(3) - 1);
 
-                for(int j2 = x; j2 < x + random.nextInt(4) + 1; j2++)
-                {
-                    for(int k2 = y; k2 < y + random.nextInt(1) + 2; k2++)
-                    {
-                        for(int l2 = z; l2 < z + random.nextInt(4) + 1; l2++)
-                        {
-                            if(world.getBlock(j2, k2, l2).isAir(world, j2, k2, l2) && Math.abs(j2 - x) + Math.abs(k2 - y) + Math.abs(l2 - z) < 4 * 1 + random.nextInt(2))
-                            {
-                                world.setBlock(j2, k2, l2, ModBlocks.cloud);
-                                count++;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+				int x = X[dir];
+				int y = Y[dir];
+				int z = Z[dir];
 
-        //System.out.println("Created " + count + " cloud blocks.");
+				for (int j2 = x; j2 < x + random.nextInt(4) + 1; j2++) {
+					for (int k2 = y; k2 < y + random.nextInt(1) + 2; k2++) {
+						for (int l2 = z; l2 < z + random.nextInt(4) + 1; l2++) {
+							if (world.getBlock(j2, k2, l2).isAir(world, j2, k2, l2) && Math.abs(j2 - x) + Math.abs(k2 - y) + Math.abs(l2 - z) < 4 * 1 + random.nextInt(2)) {
+								world.setBlock(j2, k2, l2, ModBlocks.cloud);
+								count++;
+							}
+						}
+					}
+				}
+			}
+		}
 
-        return true;
-    }
+		// System.out.println("Created " + count + " cloud blocks.");
+
+		return true;
+	}
 
 }

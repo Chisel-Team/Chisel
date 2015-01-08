@@ -11,45 +11,41 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockNoCTMRenderer implements ISimpleBlockRenderingHandler
-{
-    static int id;
+public class BlockNoCTMRenderer implements ISimpleBlockRenderingHandler {
 
-    public BlockNoCTMRenderer()
-    {
-        id = RenderingRegistry.getNextAvailableRenderId();
-    }
+	static int id;
 
-    @Override
-    public void renderInventoryBlock(Block block, int meta, int modelID, RenderBlocks renderer)
-    {
-        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        Drawing.drawBlock(block, meta, renderer);
-    }
+	public BlockNoCTMRenderer() {
+		id = RenderingRegistry.getNextAvailableRenderId();
+	}
 
-    @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer)
-    {
-        int meta = world.getBlockMetadata(x, y, z);
+	@Override
+	public void renderInventoryBlock(Block block, int meta, int modelID, RenderBlocks renderer) {
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		Drawing.drawBlock(block, meta, renderer);
+	}
 
-        if(meta != 0) renderer.overrideBlockTexture = block.getIcon(0, meta);
-        renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-        renderer.renderStandardBlock(block, x, y, z);
-        renderer.overrideBlockTexture = null;
+	@Override
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+		int meta = world.getBlockMetadata(x, y, z);
 
-        return false;
-    }
+		if (meta != 0)
+			renderer.overrideBlockTexture = block.getIcon(0, meta);
+		renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		renderer.renderStandardBlock(block, x, y, z);
+		renderer.overrideBlockTexture = null;
 
-    @Override
-    public boolean shouldRender3DInInventory(int renderId)
-    {
-        return true;
-    }
+		return false;
+	}
 
-    @Override
-    public int getRenderId()
-    {
-        return id;
-    }
+	@Override
+	public boolean shouldRender3DInInventory(int renderId) {
+		return true;
+	}
+
+	@Override
+	public int getRenderId() {
+		return id;
+	}
 
 }
