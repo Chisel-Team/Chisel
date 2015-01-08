@@ -56,7 +56,5 @@ public class ClientProxy extends CommonProxy
         RenderingRegistry.registerEntityRenderingHandler(EntitySmashingRock.class, new RenderSnowball(ModItems.smashingRock));
 
         MinecraftForgeClient.registerItemRenderer(ModItems.chisel, renderer);
-        // TODO deprecated
-        MinecraftForgeClient.registerItemRenderer(ModItems.diamondChisel, renderer);
     }
 }

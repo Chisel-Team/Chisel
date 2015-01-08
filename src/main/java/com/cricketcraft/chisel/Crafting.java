@@ -97,8 +97,6 @@ public class Crafting {
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.chisel, 1), new Object[]{" Y", "X ", 'X', Items.stick, 'Y', Items.iron_ingot}));
             GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ModItems.chisel, 1, 1), new Object[]{"  y", "x  ", 'x', "stickWood", 'y', "ingotIron"}));
         }
-        // Getting the proper diamond chisel from the deprecated one
-        GameRegistry.addShapelessRecipe(new ItemStack(ModItems.chisel, 1, 1), new ItemStack(ModItems.diamondChisel));
 
         if (Configurations.featureEnabled("ballOfMoss"))
             GameRegistry.addRecipe(new ItemStack(ModItems.itemBallOMoss, 1), new Object[]{"XYX", "YXY", "XYX", 'X', Blocks.vine, 'Y', Items.stick});

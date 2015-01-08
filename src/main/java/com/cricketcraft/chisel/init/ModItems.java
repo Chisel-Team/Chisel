@@ -11,7 +11,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModItems {
     public static ItemChisel chisel;
-    public static ItemDiamondChisel diamondChisel;
     public static ItemCloudInABottle itemCloudInABottle;
     public static ItemBallOMoss itemBallOMoss;
     public static ItemSmashingRock smashingRock;
@@ -42,12 +41,6 @@ public class ModItems {
         if(Configurations.featureEnabled("autoChiselUpgrades")){
             upgrade = (ItemUpgrade) new ItemUpgrade("upgrade").setCreativeTab(ModTabs.tabChisel);
             GameRegistry.registerItem(upgrade, upgrade.getUnlocalizedName());
-        }
-
-        // TODO deprecated
-        if(Configurations.featureEnabled("diamondChisel")){
-            diamondChisel = (ItemDiamondChisel) new ItemDiamondChisel().setTextureName(Chisel.MOD_ID + ":diamondChisel");
-            GameRegistry.registerItem(diamondChisel, diamondChisel.getUnlocalizedName());
         }
     }
 }
