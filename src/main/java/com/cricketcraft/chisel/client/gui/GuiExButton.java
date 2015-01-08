@@ -1,83 +1,74 @@
 package com.cricketcraft.chisel.client.gui;
 
-public class GuiExButton extends GuiElement
-{
-    protected String caption;
+public class GuiExButton extends GuiElement {
 
-    int u, v, texw, texh;
-    int borderTop, borderRight, borderBottom, borderLeft;
+	protected String caption;
 
-    boolean over;
-    public boolean disabled;
+	int u, v, texw, texh;
+	int borderTop, borderRight, borderBottom, borderLeft;
 
-    public TexturedBox boxDisabled;
-    public TexturedBox boxNormal;
-    public TexturedBox boxOver;
+	boolean over;
+	public boolean disabled;
 
-    public GuiExButton(int x, int y, int w, int h, String caption)
-    {
-        this(x, y, w, h, caption, "textures/gui/widgets.png");
-    }
+	public TexturedBox boxDisabled;
+	public TexturedBox boxNormal;
+	public TexturedBox boxOver;
 
-    public GuiExButton(int x, int y, int w, int h, String caption, String texture)
-    {
-        super(x, y, w, h);
-        this.caption = caption;
-        disabled = false;
-        u = 0;
-        v = 46;
-        texw = 200;
-        texh = 20;
-        borderTop = 2;
-        borderRight = 2;
-        borderBottom = 3;
-        borderLeft = 2;
+	public GuiExButton(int x, int y, int w, int h, String caption) {
+		this(x, y, w, h, caption, "textures/gui/widgets.png");
+	}
 
-        boxDisabled = new TexturedBox(texture, 0, 46, 200, 20, 2, 2, 3, 2);
-        boxNormal = new TexturedBox(texture, 0, 66, 200, 20, 2, 2, 3, 2);
-        boxOver = new TexturedBox(texture, 0, 86, 200, 20, 2, 2, 3, 2);
+	public GuiExButton(int x, int y, int w, int h, String caption, String texture) {
+		super(x, y, w, h);
+		this.caption = caption;
+		disabled = false;
+		u = 0;
+		v = 46;
+		texw = 200;
+		texh = 20;
+		borderTop = 2;
+		borderRight = 2;
+		borderBottom = 3;
+		borderLeft = 2;
 
-    }
+		boxDisabled = new TexturedBox(texture, 0, 46, 200, 20, 2, 2, 3, 2);
+		boxNormal = new TexturedBox(texture, 0, 66, 200, 20, 2, 2, 3, 2);
+		boxOver = new TexturedBox(texture, 0, 86, 200, 20, 2, 2, 3, 2);
 
-    public void onClick()
-    {
-    }
+	}
 
-    @Override
-    public void render()
-    {
-        int color = 0xffe0e0e0;
-        TexturedBox box = boxDisabled;
+	public void onClick() {
+	}
 
-        if(!disabled && !over)
-        {
-            box = boxNormal;
-            color = 0xffffffff;
-        } else if(!disabled && over)
-        {
-            box = boxOver;
-            color = 0xffffff70;
-        }
+	@Override
+	public void render() {
+		int color = 0xffe0e0e0;
+		TexturedBox box = boxDisabled;
 
-        box.render(gui, x, y, w, h);
-        gui.drawCenteredStringWithShadow(caption, x + w / 2, y + h / 2, color);
-    }
+		if (!disabled && !over) {
+			box = boxNormal;
+			color = 0xffffffff;
+		} else if (!disabled && over) {
+			box = boxOver;
+			color = 0xffffff70;
+		}
 
-    @Override
-    public void mouseMove(InputMouseEvent ev)
-    {
-        over = isMouseOver(ev);
-    }
+		box.render(gui, x, y, w, h);
+		gui.drawCenteredStringWithShadow(caption, x + w / 2, y + h / 2, color);
+	}
 
-    @Override
-    public void mouseDown(InputMouseEvent ev)
-    {
-        if(!isMouseOver(ev))
-        {
-            return;
-        }
+	@Override
+	public void mouseMove(InputMouseEvent ev) {
+		over = isMouseOver(ev);
+	}
 
-        gui.playSound("random.click", 1.0f, 1.0f);
-        onClick();
-    }
+	@Override
+	public void mouseDown(InputMouseEvent ev) {
+		if (!isMouseOver(ev)) {
+			return;
+		}
+
+		gui.playSound("random.click", 1.0f, 1.0f);
+		onClick();
+	}
 }

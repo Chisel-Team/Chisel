@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 
 import com.cricketcraft.chisel.carving.CarvableHelper;
 
-public interface BlockMarbleStairsMakerCreator
-{
-    public BlockMarbleStairs create(Block block, int meta, CarvableHelper helper);
+public interface BlockMarbleStairsMakerCreator {
+
+	public BlockMarbleStairs create(Block block, int meta, CarvableHelper helper);
 }

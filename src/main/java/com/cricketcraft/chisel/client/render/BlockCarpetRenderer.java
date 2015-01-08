@@ -4,22 +4,18 @@ import com.cricketcraft.chisel.Chisel;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
+public class BlockCarpetRenderer extends BlockAdvancedMarbleRenderer {
 
-public class BlockCarpetRenderer extends BlockAdvancedMarbleRenderer
-{
+	public BlockCarpetRenderer() {
+		super();
 
-    public BlockCarpetRenderer()
-    {
-        super();
+		Chisel.RenderCarpetId = RenderingRegistry.getNextAvailableRenderId();
 
-        Chisel.RenderCarpetId = RenderingRegistry.getNextAvailableRenderId();
+		rendererCTM = new RenderBlocksCTMCarpet();
+	}
 
-        rendererCTM = new RenderBlocksCTMCarpet();
-    }
-
-    @Override
-    public int getRenderId()
-    {
-        return Chisel.RenderCarpetId;
-    }
+	@Override
+	public int getRenderId() {
+		return Chisel.RenderCarpetId;
+	}
 }

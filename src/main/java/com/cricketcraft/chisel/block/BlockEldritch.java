@@ -2,19 +2,15 @@ package com.cricketcraft.chisel.block;
 
 import com.cricketcraft.chisel.Chisel;
 
+public class BlockEldritch extends BlockCarvable {
 
-public class BlockEldritch extends BlockCarvable
-{
+	public BlockEldritch() {
+		super();
+	}
 
-    public BlockEldritch()
-    {
-        super();
-    }
-
-    @Override
-    public int getRenderType()
-    {
-        return Chisel.RenderEldritchId;
-    }
+	@Override
+	public int getRenderType() {
+		return Chisel.RenderEldritchId;
+	}
 
 }

@@ -8,33 +8,36 @@ import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.client.render.BlockMarblePillarRenderer;
 
 public class BlockMarblePillar extends BlockCarvable {
-    public IIcon sides[] = new IIcon[6];
 
-    public BlockMarblePillar(Material m) {
-        super(m);
-    }
+	public IIcon sides[] = new IIcon[6];
 
-    @Override
-    public int getRenderType() {
-        return BlockMarblePillarRenderer.id;
-    }
+	public BlockMarblePillar(Material m) {
+		super(m);
+	}
 
-    @Override
-    public IIcon getIcon(int side, int metadata) {
-        return sides[side];
-    }
+	@Override
+	public int getRenderType() {
+		return BlockMarblePillarRenderer.id;
+	}
 
-    @Override
-    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-        return sides[side];
-    }
+	@Override
+	public IIcon getIcon(int side, int metadata) {
+		return sides[side];
+	}
 
-    public IIcon getCtmIcon(int index, int metadata) {
-        CarvableVariation var = carverHelper.variations.get(metadata);
+	@Override
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+		return sides[side];
+	}
 
-        if (index >= 4) return var.iconTop;
-        if (var.seamsCtmVert == null) return var.icon;
-        return var.seamsCtmVert.icons[index];
-    }
+	public IIcon getCtmIcon(int index, int metadata) {
+		CarvableVariation var = carverHelper.variations.get(metadata);
+
+		if (index >= 4)
+			return var.iconTop;
+		if (var.seamsCtmVert == null)
+			return var.icon;
+		return var.seamsCtmVert.icons[index];
+	}
 
 }

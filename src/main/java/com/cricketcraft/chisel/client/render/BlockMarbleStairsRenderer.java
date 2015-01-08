@@ -12,52 +12,46 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockMarbleStairsRenderer implements ISimpleBlockRenderingHandler
-{
-    public static int id;
+public class BlockMarbleStairsRenderer implements ISimpleBlockRenderingHandler {
 
-    public BlockMarbleStairsRenderer()
-    {
-        id = RenderingRegistry.getNextAvailableRenderId();
-    }
+	public static int id;
 
-    @Override
-    public void renderInventoryBlock(Block block, int meta, int modelID, RenderBlocks renderer)
-    {
-        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.5F);
-        Drawing.drawBlock(block, meta, renderer);
-        renderer.setRenderBounds(0.0F, 0.0F, 0.5F, 1.0F, 0.5F, 1.0F);
-        Drawing.drawBlock(block, meta, renderer);
-    }
+	public BlockMarbleStairsRenderer() {
+		id = RenderingRegistry.getNextAvailableRenderId();
+	}
 
-    @Override
-    public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block blck, int modelId, RenderBlocks renderer)
-    {
-        if(blck == null || !(blck instanceof BlockMarbleStairs))
-            return false;
-        BlockMarbleStairs block = (BlockMarbleStairs) blck;
+	@Override
+	public void renderInventoryBlock(Block block, int meta, int modelID, RenderBlocks renderer) {
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.5F);
+		Drawing.drawBlock(block, meta, renderer);
+		renderer.setRenderBounds(0.0F, 0.0F, 0.5F, 1.0F, 0.5F, 1.0F);
+		Drawing.drawBlock(block, meta, renderer);
+	}
 
-        renderer.renderBlockStairs(block, x, y, z);
+	@Override
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block blck, int modelId, RenderBlocks renderer) {
+		if (blck == null || !(blck instanceof BlockMarbleStairs))
+			return false;
+		BlockMarbleStairs block = (BlockMarbleStairs) blck;
 
-        return true;
-    }
+		renderer.renderBlockStairs(block, x, y, z);
 
-    @Override
-    public boolean shouldRender3DInInventory(int renderId)
-    {
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public int getRenderId()
-    {
-        return id;
-    }
+	@Override
+	public boolean shouldRender3DInInventory(int renderId) {
+		return true;
+	}
 
-    public int getRenderBlockPass()
-    {
-        return 1;
-    }
+	@Override
+	public int getRenderId() {
+		return id;
+	}
+
+	public int getRenderBlockPass() {
+		return 1;
+	}
 
 }

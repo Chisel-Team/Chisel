@@ -1,169 +1,147 @@
 package com.cricketcraft.chisel.compat;
 
-import com.cricketcraft.chisel.carving.Carving;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import net.minecraft.block.Block;
 
-public class MarbleCompatibility
-{
+import com.cricketcraft.chisel.carving.Carving;
 
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 
-    abstract class ClassCompat
-    {
-        Class<?> cl;
+public class MarbleCompatibility {
 
-        public ClassCompat(String name)
-        {
-            try
-            {
-                if((cl = Class.forName(name)) != null)
-                    action();
-            } catch(ClassNotFoundException e)
-            {
-                //e.printStackTrace();
-            } catch(IllegalArgumentException e)
-            {
-                e.printStackTrace();
-            } catch(IllegalAccessException e)
-            {
-                e.printStackTrace();
-            } catch(NoSuchFieldException e)
-            {
-                e.printStackTrace();
-            } catch(SecurityException e)
-            {
-                e.printStackTrace();
-            } catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-        }
+	abstract class ClassCompat {
 
-        abstract void action() throws Exception;
+		Class<?> cl;
 
-        abstract class BlockCompat
-        {
-            Block block;
+		public ClassCompat(String name) {
+			try {
+				if ((cl = Class.forName(name)) != null)
+					action();
+			} catch (ClassNotFoundException e) {
+				// e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (NoSuchFieldException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
-            public BlockCompat(String variableName) throws Exception
-            {
-                block = (Block) ClassCompat.this.cl.getField(variableName).get(null);
+		abstract void action() throws Exception;
 
-                if(block != null)
-                    action();
-            }
+		abstract class BlockCompat {
 
-            abstract void action() throws Exception;
-        }
+			Block block;
 
-        ;
-    }
+			public BlockCompat(String variableName) throws Exception {
+				block = (Block) ClassCompat.this.cl.getField(variableName).get(null);
 
-    ;
+				if (block != null)
+					action();
+			}
 
-    abstract class ClassBlockCompat
-    {
-        Block block;
+			abstract void action() throws Exception;
+		}
 
-        ClassBlockCompat(final String className, final String blockName)
-        {
-            new ClassCompat(className)
-            {
-                @Override
-                void action() throws Exception
-                {
-                    new BlockCompat(blockName)
-                    {
-                        @Override
-                        void action() throws Exception
-                        {
-                            ClassBlockCompat.this.doAction(block);
-                        }
-                    };
-                }
-            };
-        }
+		;
+	}
 
-        void doAction(Block b)
-        {
-            block = b;
+	;
 
-            action();
-        }
+	abstract class ClassBlockCompat {
 
-        abstract void action();
-    }
+		Block block;
 
+		ClassBlockCompat(final String className, final String blockName) {
+			new ClassCompat(className) {
 
-    public void postInit(FMLPostInitializationEvent event)
-    {
-        new ClassBlockCompat("shukaro.artifice.ArtificeBlocks", "marble")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("marble", block, 0, 99);
-            }
-        };
+				@Override
+				void action() throws Exception {
+					new BlockCompat(blockName) {
 
-        new ClassCompat("shukaro.artifice.ArtificeBlocks")
-        {
-            @Override
-            void action() throws Exception
-            {
-                Block[] blocks = (Block[]) cl.getField("blockLimestones").get(null);
+						@Override
+						void action() throws Exception {
+							ClassBlockCompat.this.doAction(block);
+						}
+					};
+				}
+			};
+		}
 
-                Carving.chisel.addVariation("limestone", blocks[0], 3, 99);
-            }
-        };
+		void doAction(Block b) {
+			block = b;
 
-        new ClassBlockCompat("com.bluepowermod.init.BPBlocks", "marble")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("marble", block, 0, 99);
-            }
-        };
+			action();
+		}
 
-        new ClassBlockCompat("num.numirp.block.ModBlocks", "blockDecor")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("marble", block, 0, 99);
-            }
-        };
+		abstract void action();
+	}
 
-        new ClassBlockCompat("mariculture.core.Core", "limestone")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("limestone", block, 0, 99);
-            }
-        };
-        new ClassBlockCompat("emasher.core.EmasherCore", "limestone")
-        {
-            @Override
-            void action()
-            {
-                Carving.chisel.addVariation("limestone", block, 0, 99);
-            }
-        };
+	public void postInit(FMLPostInitializationEvent event) {
+		new ClassBlockCompat("shukaro.artifice.ArtificeBlocks", "marble") {
 
-        new ClassCompat("Reika.GeoStrata.GeoStrata")
-        {
-            @Override
-            void action() throws Exception
-            {
-                Block[] blocks = (Block[]) cl.getField("blocks").get(null);
+			@Override
+			void action() {
+				Carving.chisel.addVariation("marble", block, 0, 99);
+			}
+		};
 
-                Carving.chisel.addVariation("marble", blocks[0], 2, 99);
+		new ClassCompat("shukaro.artifice.ArtificeBlocks") {
 
-                Carving.chisel.addVariation("limestone", blocks[0], 3, 99);
-            }
-        };
-    }
+			@Override
+			void action() throws Exception {
+				Block[] blocks = (Block[]) cl.getField("blockLimestones").get(null);
+
+				Carving.chisel.addVariation("limestone", blocks[0], 3, 99);
+			}
+		};
+
+		new ClassBlockCompat("com.bluepowermod.init.BPBlocks", "marble") {
+
+			@Override
+			void action() {
+				Carving.chisel.addVariation("marble", block, 0, 99);
+			}
+		};
+
+		new ClassBlockCompat("num.numirp.block.ModBlocks", "blockDecor") {
+
+			@Override
+			void action() {
+				Carving.chisel.addVariation("marble", block, 0, 99);
+			}
+		};
+
+		new ClassBlockCompat("mariculture.core.Core", "limestone") {
+
+			@Override
+			void action() {
+				Carving.chisel.addVariation("limestone", block, 0, 99);
+			}
+		};
+		new ClassBlockCompat("emasher.core.EmasherCore", "limestone") {
+
+			@Override
+			void action() {
+				Carving.chisel.addVariation("limestone", block, 0, 99);
+			}
+		};
+
+		new ClassCompat("Reika.GeoStrata.GeoStrata") {
+
+			@Override
+			void action() throws Exception {
+				Block[] blocks = (Block[]) cl.getField("blocks").get(null);
+
+				Carving.chisel.addVariation("marble", blocks[0], 2, 99);
+
+				Carving.chisel.addVariation("limestone", blocks[0], 3, 99);
+			}
+		};
+	}
 
 }

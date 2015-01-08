@@ -10,178 +10,155 @@ import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.item.ItemChisel;
 
-public class InventoryChiselSelection implements IInventory
-{
-    ItemStack chisel = null;
-    public final static int normalSlots = 32;
-    public int activeVariations = 0;
-    ContainerChisel container;
-    ItemStack[] inventory;
+public class InventoryChiselSelection implements IInventory {
 
-    public InventoryChiselSelection(ItemStack c)
-    {
-        super();
+	ItemStack chisel = null;
+	public final static int normalSlots = 32;
+	public int activeVariations = 0;
+	ContainerChisel container;
+	ItemStack[] inventory;
 
-        inventory = new ItemStack[normalSlots + 1];
-        chisel = c;
-    }
+	public InventoryChiselSelection(ItemStack c) {
+		super();
 
-    public void onInventoryUpdate(int slot)
-    {
+		inventory = new ItemStack[normalSlots + 1];
+		chisel = c;
+	}
 
-    }
+	public void onInventoryUpdate(int slot) {
 
-    @Override
-    public int getSizeInventory()
-    {
-        return normalSlots + 1;
-    }
+	}
 
-    @Override
-    public ItemStack getStackInSlot(int var1)
-    {
-        return inventory[var1];
-    }
+	@Override
+	public int getSizeInventory() {
+		return normalSlots + 1;
+	}
 
-    public void updateInventoryState(int slot)
-    {
-        onInventoryUpdate(slot);
-    }
+	@Override
+	public ItemStack getStackInSlot(int var1) {
+		return inventory[var1];
+	}
 
-    @Override
-    public ItemStack decrStackSize(int slot, int amount)
-    {
-        if(this.inventory[slot] != null)
-        {
-            ItemStack stack;
-            if(this.inventory[slot].stackSize <= amount)
-            {
-                stack = this.inventory[slot];
-                this.inventory[slot] = null;
-                updateInventoryState(slot);
-                return stack;
-            } else
-            {
-                stack = this.inventory[slot].splitStack(amount);
+	public void updateInventoryState(int slot) {
+		onInventoryUpdate(slot);
+	}
 
-                if(this.inventory[slot].stackSize == 0)
-                    this.inventory[slot] = null;
+	@Override
+	public ItemStack decrStackSize(int slot, int amount) {
+		if (this.inventory[slot] != null) {
+			ItemStack stack;
+			if (this.inventory[slot].stackSize <= amount) {
+				stack = this.inventory[slot];
+				this.inventory[slot] = null;
+				updateInventoryState(slot);
+				return stack;
+			} else {
+				stack = this.inventory[slot].splitStack(amount);
 
-                updateInventoryState(slot);
+				if (this.inventory[slot].stackSize == 0)
+					this.inventory[slot] = null;
 
-                return stack;
-            }
-        } else return null;
-    }
+				updateInventoryState(slot);
 
-    @Override
-    public String getInventoryName()
-    {
-        return "container.chisel";
-    }
+				return stack;
+			}
+		} else
+			return null;
+	}
 
-    @Override
-    public boolean hasCustomInventoryName()
-    {
-        return false;
-    }
+	@Override
+	public String getInventoryName() {
+		return "container.chisel";
+	}
 
-    @Override
-    public int getInventoryStackLimit()
-    {
-        return 64;
-    }
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
 
-    @Override
-    public void markDirty()
-    {
+	@Override
+	public int getInventoryStackLimit() {
+		return 64;
+	}
 
-    }
+	@Override
+	public void markDirty() {
 
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer)
-    {
-        return true;
-    }
+	}
 
-    public void clearItems()
-    {
-        activeVariations = 0;
-        for(int i = 0; i < normalSlots; i++)
-        {
-            inventory[i] = null;
-        }
-    }
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		return true;
+	}
 
-    public ItemStack getStackInSpecialSlot()
-    {
-        return inventory[normalSlots];
-    }
+	public void clearItems() {
+		activeVariations = 0;
+		for (int i = 0; i < normalSlots; i++) {
+			inventory[i] = null;
+		}
+	}
 
-    public void updateItems()
-    {
-        ItemStack chiseledItem = inventory[normalSlots];
+	public ItemStack getStackInSpecialSlot() {
+		return inventory[normalSlots];
+	}
 
-        clearItems();
+	public void updateItems() {
+		ItemStack chiseledItem = inventory[normalSlots];
 
-        if(chiseledItem == null)
-        {
-            container.onChiselSlotChanged();
-            return;
-        }
+		clearItems();
 
-        Item item = chiseledItem.getItem();
-        if(item == null) return;
+		if (chiseledItem == null) {
+			container.onChiselSlotChanged();
+			return;
+		}
 
-        if(Block.getBlockFromItem(item) == null)
-            return;
+		Item item = chiseledItem.getItem();
+		if (item == null)
+			return;
 
-        ArrayList<ItemStack> list = container.carving.getItems(chiseledItem);
+		if (Block.getBlockFromItem(item) == null)
+			return;
 
-        activeVariations = 0;
-        while(activeVariations < normalSlots && activeVariations < list.size())
-        {
-            inventory[activeVariations] = list.get(activeVariations);
-            activeVariations++;
-        }
+		ArrayList<ItemStack> list = container.carving.getItems(chiseledItem);
 
-        container.onChiselSlotChanged();
-    }
+		activeVariations = 0;
+		while (activeVariations < normalSlots && activeVariations < list.size()) {
+			inventory[activeVariations] = list.get(activeVariations);
+			activeVariations++;
+		}
 
-    @Override
-    public ItemStack getStackInSlotOnClosing(int slot)
-    {
-        ItemStack stack = getStackInSlot(slot);
+		container.onChiselSlotChanged();
+	}
 
-        if(stack == null)
-            return null;
-        inventory[slot] = null;
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slot) {
+		ItemStack stack = getStackInSlot(slot);
 
-        updateInventoryState(slot);
-        return stack;
-    }
+		if (stack == null)
+			return null;
+		inventory[slot] = null;
 
-    @Override
-    public void setInventorySlotContents(int slot, ItemStack stack)
-    {
-        inventory[slot] = stack;
-        updateInventoryState(slot);
-    }
+		updateInventoryState(slot);
+		return stack;
+	}
 
-    @Override
-    public void openInventory()
-    {
-    }
+	@Override
+	public void setInventorySlotContents(int slot, ItemStack stack) {
+		inventory[slot] = stack;
+		updateInventoryState(slot);
+	}
 
-    @Override
-    public void closeInventory()
-    {
-    }
+	@Override
+	public void openInventory() {
+	}
 
-    @Override
-    public boolean isItemValidForSlot(int i, ItemStack stack)
-    {
-        return !(stack != null && (stack.getItem() instanceof ItemChisel)) && i == normalSlots;
-    }
+	@Override
+	public void closeInventory() {
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack stack) {
+		return !(stack != null && (stack.getItem() instanceof ItemChisel)) && i == normalSlots;
+	}
 
 }

@@ -7,58 +7,51 @@ import net.minecraft.util.IIcon;
 
 import com.cricketcraft.chisel.client.render.BlockTexturedOreRenderer;
 
-public class BlockTexturedOre extends Block
-{
-    public int currentPass;
-    public Block base;
-    public IIcon icon;
-    String iconFile;
+public class BlockTexturedOre extends Block {
 
-    public BlockTexturedOre(Material mat, Block base)
-    {
-        super(mat);
+	public int currentPass;
+	public Block base;
+	public IIcon icon;
+	String iconFile;
 
-        this.base = base;
-    }
+	public BlockTexturedOre(Material mat, Block base) {
+		super(mat);
 
-    public BlockTexturedOre(Material mat, String iconFile)
-    {
-        super(mat);
+		this.base = base;
+	}
 
-        this.iconFile = iconFile;
-    }
+	public BlockTexturedOre(Material mat, String iconFile) {
+		super(mat);
 
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
+		this.iconFile = iconFile;
+	}
 
-    @Override
-    public int getRenderType()
-    {
-        return BlockTexturedOreRenderer.id;
-    }
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
 
-    @Override
-    public int getRenderBlockPass()
-    {
-        return 1;
-    }
+	@Override
+	public int getRenderType() {
+		return BlockTexturedOreRenderer.id;
+	}
 
-    @Override
-    public boolean canRenderInPass(int pass)
-    {
-        currentPass = pass;
+	@Override
+	public int getRenderBlockPass() {
+		return 1;
+	}
 
-        return pass == 1 || pass == 0;
-    }
+	@Override
+	public boolean canRenderInPass(int pass) {
+		currentPass = pass;
 
-    @Override
-    public void registerBlockIcons(IIconRegister register)
-    {
-        if(iconFile != null)
-            icon = register.registerIcon(iconFile);
-    }
+		return pass == 1 || pass == 0;
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		if (iconFile != null)
+			icon = register.registerIcon(iconFile);
+	}
 
 }

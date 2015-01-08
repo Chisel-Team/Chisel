@@ -18,71 +18,61 @@ import com.cricketcraft.chisel.init.ModTabs;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCarvableGlass extends BlockGlass implements ICarvable
-{
-    public CarvableHelper carverHelper;
-    private boolean isAlpha = false;
+public class BlockCarvableGlass extends BlockGlass implements ICarvable {
 
-    public BlockCarvableGlass()
-    {
-        super(Material.glass, false);
+	public CarvableHelper carverHelper;
+	private boolean isAlpha = false;
 
-        carverHelper = new CarvableHelper();
-        setCreativeTab(ModTabs.tabOtherChiselBlocks);
-    }
+	public BlockCarvableGlass() {
+		super(Material.glass, false);
 
-    public BlockCarvableGlass setStained(boolean a)
-    {
-        this.isAlpha = a;
-        return this;
-    }
+		carverHelper = new CarvableHelper();
+		setCreativeTab(ModTabs.tabOtherChiselBlocks);
+	}
 
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
+	public BlockCarvableGlass setStained(boolean a) {
+		this.isAlpha = a;
+		return this;
+	}
 
-    @Override
-    public int getRenderType()
-    {
-        return Chisel.RenderCTMId;
-    }
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
 
-    @Override
-    public IIcon getIcon(int side, int metadata)
-    {
-        return carverHelper.getIcon(side, metadata);
-    }
+	@Override
+	public int getRenderType() {
+		return Chisel.RenderCTMId;
+	}
 
-    @Override
-    public int damageDropped(int i)
-    {
-        return i;
-    }
+	@Override
+	public IIcon getIcon(int side, int metadata) {
+		return carverHelper.getIcon(side, metadata);
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister register)
-    {
-        carverHelper.registerBlockIcons("Chisel", this, register);
-    }
+	@Override
+	public int damageDropped(int i) {
+		return i;
+	}
 
-    @Override
-    public void getSubBlocks(Item item, CreativeTabs tabs, List list)
-    {
-        carverHelper.registerSubBlocks(this, tabs, list);
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		carverHelper.registerBlockIcons("Chisel", this, register);
+	}
 
-    @Override
-    public CarvableVariation getVariation(int metadata)
-    {
-        return carverHelper.getVariation(metadata);
-    }
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
+		carverHelper.registerSubBlocks(this, tabs, list);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderBlockPass()
-    {
-        return isAlpha ? 1 : 0;
-    }
+	@Override
+	public CarvableVariation getVariation(int metadata) {
+		return carverHelper.getVariation(metadata);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderBlockPass() {
+		return isAlpha ? 1 : 0;
+	}
 }

@@ -7,60 +7,55 @@ import net.minecraft.world.World;
 import com.cricketcraft.chisel.block.BlockHolystone;
 import com.cricketcraft.chisel.utils.General;
 
-public class EntityHolystoneFX extends EntityFX
-{
-    float initialScale;
-    float angleOffset;
-    static final float fadetime = 20f;
+public class EntityHolystoneFX extends EntityFX {
 
-    public EntityHolystoneFX(World world, BlockHolystone block, double x, double y, double z)
-    {
-        super(world, x, y, z, 0, 0, 0);
+	float initialScale;
+	float angleOffset;
+	static final float fadetime = 20f;
 
-        initialScale = 1.0f + 1.0f * General.rand.nextFloat();
-        angleOffset = rand.nextFloat() * 360;
+	public EntityHolystoneFX(World world, BlockHolystone block, double x, double y, double z) {
+		super(world, x, y, z, 0, 0, 0);
 
-        particleMaxAge = (int) (Math.random() * 10.0D) + 80;
+		initialScale = 1.0f + 1.0f * General.rand.nextFloat();
+		angleOffset = rand.nextFloat() * 360;
 
-        setPosition(x, y, z);
-        prevPosX = posX;
-        prevPosY = posY;
-        prevPosZ = posZ;
+		particleMaxAge = (int) (Math.random() * 10.0D) + 80;
 
-        noClip = true;
+		setPosition(x, y, z);
+		prevPosX = posX;
+		prevPosY = posY;
+		prevPosZ = posZ;
 
-        setParticleIcon(block.iconStar);
-    }
+		noClip = true;
 
-    @Override
-    public int getFXLayer()
-    {
-        return 1;
-    }
+		setParticleIcon(block.iconStar);
+	}
 
-    @Override
-    public void renderParticle(Tessellator tessellator, float partialTick, float rotX, float rotXZ, float rotZ, float rotYZ, float rotXY)
-    {
-        particleScale = 0.25f + initialScale * (float) Math.sin((particleAge + angleOffset) / 180.f);
+	@Override
+	public int getFXLayer() {
+		return 1;
+	}
 
-        if(particleAge < fadetime)
-            particleAlpha = particleAge / fadetime;
-        else if(particleAge + fadetime >= particleMaxAge)
-            particleAlpha = (particleMaxAge - particleAge) / fadetime;
-        else
-            particleAlpha = 1.0f;
+	@Override
+	public void renderParticle(Tessellator tessellator, float partialTick, float rotX, float rotXZ, float rotZ, float rotYZ, float rotXY) {
+		particleScale = 0.25f + initialScale * (float) Math.sin((particleAge + angleOffset) / 180.f);
 
-        super.renderParticle(tessellator, partialTick, rotX, rotXZ, rotZ, rotYZ, rotXY);
+		if (particleAge < fadetime)
+			particleAlpha = particleAge / fadetime;
+		else if (particleAge + fadetime >= particleMaxAge)
+			particleAlpha = (particleMaxAge - particleAge) / fadetime;
+		else
+			particleAlpha = 1.0f;
 
-    }
+		super.renderParticle(tessellator, partialTick, rotX, rotXZ, rotZ, rotYZ, rotXY);
 
-    @Override
-    public void onUpdate()
-    {
-        if(particleAge++ >= particleMaxAge)
-        {
-            setDead();
-        }
+	}
 
-    }
+	@Override
+	public void onUpdate() {
+		if (particleAge++ >= particleMaxAge) {
+			setDead();
+		}
+
+	}
 }

@@ -1,23 +1,20 @@
 package com.cricketcraft.chisel.client.gui;
 
-public class GuiLabel extends GuiElement
-{
-    String caption;
+public class GuiLabel extends GuiElement {
 
-    public GuiLabel(int x, int y, int w, int h, String caption)
-    {
-        super(x, y, w, h);
-        this.caption = caption;
-    }
+	String caption;
 
-    public GuiLabel(int x, int y, String string)
-    {
-        this(x, y, 0, 0, string);
-    }
+	public GuiLabel(int x, int y, int w, int h, String caption) {
+		super(x, y, w, h);
+		this.caption = caption;
+	}
 
-    @Override
-    public void render()
-    {
-        gui.drawString(caption, x, y, 0x404040);
-    }
+	public GuiLabel(int x, int y, String string) {
+		this(x, y, 0, 0, string);
+	}
+
+	@Override
+	public void render() {
+		gui.drawString(caption, x, y, 0x404040);
+	}
 }

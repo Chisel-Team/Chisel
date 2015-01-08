@@ -1,6 +1,5 @@
 package com.cricketcraft.chisel.block;
 
-
 import java.util.Random;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -9,33 +8,29 @@ import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.client.GeneralChiselClient;
 
-public class BlockSnakestoneObsidian extends BlockSnakestone
-{
-    public IIcon[] particles = new IIcon[8];
+public class BlockSnakestoneObsidian extends BlockSnakestone {
 
-    public BlockSnakestoneObsidian(String iconPrefix)
-    {
-        super(iconPrefix);
+	public IIcon[] particles = new IIcon[8];
 
-        flipTopTextures = true;
+	public BlockSnakestoneObsidian(String iconPrefix) {
+		super(iconPrefix);
 
-    }
+		flipTopTextures = true;
 
-    @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random random)
-    {
-        GeneralChiselClient.spawnSnakestoneObsidianFX(world, this, x, y, z);
-    }
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister register)
-    {
-        super.registerBlockIcons(register);
+	@Override
+	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+		GeneralChiselClient.spawnSnakestoneObsidianFX(world, this, x, y, z);
+	}
 
-        for(int i = 0; i < particles.length; i++)
-        {
-            particles[i] = register.registerIcon(iconPrefix + "particles/" + i);
-        }
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		super.registerBlockIcons(register);
+
+		for (int i = 0; i < particles.length; i++) {
+			particles[i] = register.registerIcon(iconPrefix + "particles/" + i);
+		}
+	}
 
 }

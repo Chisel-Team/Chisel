@@ -4,89 +4,79 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class TextureVirtual implements IIcon
-{
-    int ox, oy;
-    float u0, u1, v0, v1;
-    String name;
-    IIcon icon;
+public class TextureVirtual implements IIcon {
 
-    TextureVirtual(IIcon parent, int w, int h, int x, int y)
-    {
-        icon = parent;
+	int ox, oy;
+	float u0, u1, v0, v1;
+	String name;
+	IIcon icon;
 
-        u0 = icon.getInterpolatedU(16.0 * (x) / w);
-        u1 = icon.getInterpolatedU(16.0 * (x + 1) / w);
-        v0 = icon.getInterpolatedV(16.0 * (y) / h);
-        v1 = icon.getInterpolatedV(16.0 * (y + 1) / h);
+	TextureVirtual(IIcon parent, int w, int h, int x, int y) {
+		icon = parent;
 
-        name = icon.getIconName() + "|" + x + "." + y;
+		u0 = icon.getInterpolatedU(16.0 * (x) / w);
+		u1 = icon.getInterpolatedU(16.0 * (x + 1) / w);
+		v0 = icon.getInterpolatedV(16.0 * (y) / h);
+		v1 = icon.getInterpolatedV(16.0 * (y + 1) / h);
 
-        ox = icon.getIconWidth();
-        oy = icon.getIconHeight();
-    }
+		name = icon.getIconName() + "|" + x + "." + y;
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public float getMinU()
-    {
-        return u0;
-    }
+		ox = icon.getIconWidth();
+		oy = icon.getIconHeight();
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public float getMaxU()
-    {
-        return u1;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public float getMinU() {
+		return u0;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public float getInterpolatedU(double d0)
-    {
-        return (float) (u0 + (u1 - u0) * d0 / 16.0);
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public float getMaxU() {
+		return u1;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public float getMinV()
-    {
-        return v0;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public float getInterpolatedU(double d0) {
+		return (float) (u0 + (u1 - u0) * d0 / 16.0);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public float getMaxV()
-    {
-        return v1;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public float getMinV() {
+		return v0;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public float getInterpolatedV(double d0)
-    {
-        return (float) (v0 + (v1 - v0) * d0 / 16.0);
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public float getMaxV() {
+		return v1;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getIconName()
-    {
-        return name;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public float getInterpolatedV(double d0) {
+		return (float) (v0 + (v1 - v0) * d0 / 16.0);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getIconWidth()
-    {
-        return ox;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getIconName() {
+		return name;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getIconHeight()
-    {
-        return oy;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getIconWidth() {
+		return ox;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getIconHeight() {
+		return oy;
+	}
 
 }

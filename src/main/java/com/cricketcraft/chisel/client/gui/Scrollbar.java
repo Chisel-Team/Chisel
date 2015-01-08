@@ -7,120 +7,103 @@ import org.lwjgl.input.Mouse;
 
 import com.cricketcraft.chisel.utils.GeneralClient;
 
-public abstract class Scrollbar extends GuiButton
-{
-    public boolean active;
+public abstract class Scrollbar extends GuiButton {
 
-    public float offset;
-    public float step;
+	public boolean active;
 
-    boolean dragged;
+	public float offset;
+	public float step;
 
-    int elementHeight = 15;
+	boolean dragged;
 
-    public Scrollbar(int id, int x, int y, int w, int h, String string)
-    {
-        super(id, x, y, w, h, string);
-        offset = 0;
-        step = 0.025f;
-        height = h;
-        active = true;
-        dragged = false;
-    }
+	int elementHeight = 15;
 
-    /**
-     * Returns true if the mouse has been pressed on this control. Equivalent of
-     * MouseListener.mousePressed(MouseEvent e).
-     */
-    @Override
-    public boolean mousePressed(Minecraft mc, int x, int y)
-    {
-        if(x < xPosition || x >= xPosition + width)
-        {
-            return false;
-        }
+	public Scrollbar(int id, int x, int y, int w, int h, String string) {
+		super(id, x, y, w, h, string);
+		offset = 0;
+		step = 0.025f;
+		height = h;
+		active = true;
+		dragged = false;
+	}
 
-        if(y < yPosition || y >= yPosition + height)
-        {
-            return false;
-        }
+	/**
+	 * Returns true if the mouse has been pressed on this control. Equivalent of
+	 * MouseListener.mousePressed(MouseEvent e).
+	 */
+	@Override
+	public boolean mousePressed(Minecraft mc, int x, int y) {
+		if (x < xPosition || x >= xPosition + width) {
+			return false;
+		}
 
-        if(active)
-        {
-            dragged = true;
-        }
+		if (y < yPosition || y >= yPosition + height) {
+			return false;
+		}
 
-        return true;
-    }
+		if (active) {
+			dragged = true;
+		}
 
-    /**
-     * Draws this button to the screen.
-     */
-    @Override
-    public void drawButton(Minecraft mc, int x, int y)
-    {
-        if(dragged)
-        {
-            float initialOffset = offset;
-            int off = y - yPosition - elementHeight / 2;
-            offset = 1.0f * off / (height - elementHeight);
+		return true;
+	}
 
-            if(offset < 0)
-            {
-                offset = 0;
-            }
+	/**
+	 * Draws this button to the screen.
+	 */
+	@Override
+	public void drawButton(Minecraft mc, int x, int y) {
+		if (dragged) {
+			float initialOffset = offset;
+			int off = y - yPosition - elementHeight / 2;
+			offset = 1.0f * off / (height - elementHeight);
 
-            if(offset > 1)
-            {
-                offset = 1;
-            }
+			if (offset < 0) {
+				offset = 0;
+			}
 
-            if(initialOffset != offset)
-            {
-                onScrolled(offset);
-            }
-        }
+			if (offset > 1) {
+				offset = 1;
+			}
 
-        int bottom = yPosition + height;
-        GeneralClient.bind("/gui/allitems.png");
-        drawTexturedModalRect(xPosition, yPosition + (int) ((height - elementHeight) * offset), active ? 232 : 244, 0, 12, elementHeight);
-    }
+			if (initialOffset != offset) {
+				onScrolled(offset);
+			}
+		}
 
-    public void handleMouseInput()
-    {
-        if(Mouse.getEventButton() == 0 && !Mouse.getEventButtonState())
-        {
-            dragged = false;
-        }
+		int bottom = yPosition + height;
+		GeneralClient.bind("/gui/allitems.png");
+		drawTexturedModalRect(xPosition, yPosition + (int) ((height - elementHeight) * offset), active ? 232 : 244, 0, 12, elementHeight);
+	}
 
-        if(!active)
-        {
-            return;
-        }
+	public void handleMouseInput() {
+		if (Mouse.getEventButton() == 0 && !Mouse.getEventButtonState()) {
+			dragged = false;
+		}
 
-        float initialOffset = offset;
-        int direction = Mouse.getEventDWheel();
+		if (!active) {
+			return;
+		}
 
-        if(direction != 0)
-        {
-            offset += direction > 0 ? -step : step;
-        }
+		float initialOffset = offset;
+		int direction = Mouse.getEventDWheel();
 
-        if(offset < 0)
-        {
-            offset = 0;
-        }
+		if (direction != 0) {
+			offset += direction > 0 ? -step : step;
+		}
 
-        if(offset > 1)
-        {
-            offset = 1;
-        }
+		if (offset < 0) {
+			offset = 0;
+		}
 
-        if(initialOffset != offset)
-        {
-            onScrolled(offset);
-        }
-    }
+		if (offset > 1) {
+			offset = 1;
+		}
 
-    public abstract void onScrolled(float off);
+		if (initialOffset != offset) {
+			onScrolled(offset);
+		}
+	}
+
+	public abstract void onScrolled(float off);
 }

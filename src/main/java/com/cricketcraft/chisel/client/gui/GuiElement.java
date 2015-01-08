@@ -4,184 +4,150 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiElement
-{
-    public int x;
-    public int y;
-    public int w;
-    public int h;
+public class GuiElement {
 
-    public GuiScreenPlus gui;
-    public GuiElement parent, addedParent;
-    private ArrayList<GuiElement> children = null;
+	public int x;
+	public int y;
+	public int w;
+	public int h;
 
-    public GuiElement(int x, int y, int w, int h)
-    {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-    }
+	public GuiScreenPlus gui;
+	public GuiElement parent, addedParent;
+	private ArrayList<GuiElement> children = null;
 
-    public GuiElement addChild(GuiElement e)
-    {
-        if(children == null)
-        {
-            children = new ArrayList<GuiElement>();
-        }
+	public GuiElement(int x, int y, int w, int h) {
+		this.x = x;
+		this.y = y;
+		this.w = w;
+		this.h = h;
+	}
 
-        if(e.parent != null)
-        {
-            e.parent.removeChild(e);
-        }
+	public GuiElement addChild(GuiElement e) {
+		if (children == null) {
+			children = new ArrayList<GuiElement>();
+		}
 
-        children.add(e);
-        e.x += x;
-        e.y += y;
-        e.parent = this;
-        e.gui = gui;
-        return e;
-    }
+		if (e.parent != null) {
+			e.parent.removeChild(e);
+		}
 
-    public GuiElement removeChild(GuiElement e)
-    {
-        if(children == null)
-        {
-            return e;
-        }
+		children.add(e);
+		e.x += x;
+		e.y += y;
+		e.parent = this;
+		e.gui = gui;
+		return e;
+	}
 
-        children.remove(e);
-        e.x -= x;
-        e.y -= y;
-        e.parent = null;
-        e.gui = null;
-        return e;
-    }
+	public GuiElement removeChild(GuiElement e) {
+		if (children == null) {
+			return e;
+		}
 
-    public void onAdded()
-    {
-        if(children == null)
-        {
-            return;
-        }
+		children.remove(e);
+		e.x -= x;
+		e.y -= y;
+		e.parent = null;
+		e.gui = null;
+		return e;
+	}
 
-        for(GuiElement e : children)
-        {
-            if(e.parent != e.addedParent)
-            {
-                e.onAdded();
-            }
+	public void onAdded() {
+		if (children == null) {
+			return;
+		}
 
-            e.addedParent = e.parent;
-        }
-    }
+		for (GuiElement e : children) {
+			if (e.parent != e.addedParent) {
+				e.onAdded();
+			}
 
-    boolean isMouseOver(InputMouseEvent ev)
-    {
-        return ev.x >= x && ev.x < x + w && ev.y >= y && ev.y < y + h;
-    }
+			e.addedParent = e.parent;
+		}
+	}
 
-    public void mouseDown(InputMouseEvent ev)
-    {
-        if(children == null)
-        {
-            return;
-        }
+	boolean isMouseOver(InputMouseEvent ev) {
+		return ev.x >= x && ev.x < x + w && ev.y >= y && ev.y < y + h;
+	}
 
-        for(GuiElement e : children)
-        {
-            e.mouseDown(ev);
+	public void mouseDown(InputMouseEvent ev) {
+		if (children == null) {
+			return;
+		}
 
-            if(ev.handled)
-            {
-                return;
-            }
-        }
-    }
+		for (GuiElement e : children) {
+			e.mouseDown(ev);
 
-    public void mouseUp(InputMouseEvent ev)
-    {
-        if(children == null)
-        {
-            return;
-        }
+			if (ev.handled) {
+				return;
+			}
+		}
+	}
 
-        for(GuiElement e : children)
-        {
-            e.mouseUp(ev);
+	public void mouseUp(InputMouseEvent ev) {
+		if (children == null) {
+			return;
+		}
 
-            if(ev.handled)
-            {
-                return;
-            }
-        }
-    }
+		for (GuiElement e : children) {
+			e.mouseUp(ev);
 
-    public void mouseMove(InputMouseEvent ev)
-    {
-        if(children == null)
-        {
-            return;
-        }
+			if (ev.handled) {
+				return;
+			}
+		}
+	}
 
-        for(GuiElement e : children)
-        {
-            e.mouseMove(ev);
+	public void mouseMove(InputMouseEvent ev) {
+		if (children == null) {
+			return;
+		}
 
-            if(ev.handled)
-            {
-                return;
-            }
-        }
-    }
+		for (GuiElement e : children) {
+			e.mouseMove(ev);
 
-    public void mouseWheel(InputMouseEvent ev)
-    {
-        if(children == null)
-        {
-            return;
-        }
+			if (ev.handled) {
+				return;
+			}
+		}
+	}
 
-        for(GuiElement e : children)
-        {
-            e.mouseWheel(ev);
+	public void mouseWheel(InputMouseEvent ev) {
+		if (children == null) {
+			return;
+		}
 
-            if(ev.handled)
-            {
-                return;
-            }
-        }
-    }
+		for (GuiElement e : children) {
+			e.mouseWheel(ev);
 
-    public void render()
-    {
-        if(children == null)
-        {
-            return;
-        }
+			if (ev.handled) {
+				return;
+			}
+		}
+	}
 
-        for(GuiElement e : children)
-        {
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            e.render();
-        }
-    }
+	public void render() {
+		if (children == null) {
+			return;
+		}
 
-    public void keyPressed(InputKeyboardEvent ev)
-    {
-        if(children == null)
-        {
-            return;
-        }
+		for (GuiElement e : children) {
+			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			e.render();
+		}
+	}
 
-        for(GuiElement e : children)
-        {
-            e.keyPressed(ev);
+	public void keyPressed(InputKeyboardEvent ev) {
+		if (children == null) {
+			return;
+		}
 
-            if(ev.handled)
-            {
-                return;
-            }
-        }
-    }
+		for (GuiElement e : children) {
+			e.keyPressed(ev);
+
+			if (ev.handled) {
+				return;
+			}
+		}
+	}
 }

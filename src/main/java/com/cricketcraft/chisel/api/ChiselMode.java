@@ -1,10 +1,6 @@
 package com.cricketcraft.chisel.api;
 
-public enum ChiselMode
-{
+public enum ChiselMode {
 
-    SINGLE,
-    CIRCLETHREE,
-    COLLUM,
-    SIDEWAYS
+	SINGLE, CIRCLETHREE, COLLUM, SIDEWAYS
 }

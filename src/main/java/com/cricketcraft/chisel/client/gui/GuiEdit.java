@@ -2,70 +2,57 @@ package com.cricketcraft.chisel.client.gui;
 
 import net.minecraft.client.gui.GuiTextField;
 
-public class GuiEdit extends GuiElement
-{
-    GuiTextField field;
-    String tempString = "";
+public class GuiEdit extends GuiElement {
 
-    public GuiEdit(int x, int y, int w, int h)
-    {
-        super(x, y, w, h);
-    }
+	GuiTextField field;
+	String tempString = "";
 
-    @Override
-    public void onAdded()
-    {
-        field = new GuiTextField(gui.fontRendererObj(), x, y, w, h);
-        setText(tempString);
-    }
+	public GuiEdit(int x, int y, int w, int h) {
+		super(x, y, w, h);
+	}
 
-    public String getText()
-    {
-        if(field == null)
-        {
-            return tempString;
-        } else
-        {
-            return field.getText();
-        }
-    }
+	@Override
+	public void onAdded() {
+		field = new GuiTextField(gui.fontRendererObj(), x, y, w, h);
+		setText(tempString);
+	}
 
-    public void setText(String text)
-    {
-        if(field == null)
-        {
-            tempString = text;
-        } else
-        {
-            field.setText(text);
-        }
-    }
+	public String getText() {
+		if (field == null) {
+			return tempString;
+		} else {
+			return field.getText();
+		}
+	}
 
-    @Override
-    public void render()
-    {
-        field.drawTextBox();
-    }
+	public void setText(String text) {
+		if (field == null) {
+			tempString = text;
+		} else {
+			field.setText(text);
+		}
+	}
 
-    @Override
-    public void mouseDown(InputMouseEvent ev)
-    {
-        field.mouseClicked(ev.x, ev.y, ev.button);
+	@Override
+	public void render() {
+		field.drawTextBox();
+	}
 
-        if(isMouseOver(ev))
-        {
-            ev.handled = true;
-        }
-    }
+	@Override
+	public void mouseDown(InputMouseEvent ev) {
+		field.mouseClicked(ev.x, ev.y, ev.button);
 
-    @Override
-    public void keyPressed(InputKeyboardEvent ev)
-    {
-        field.textboxKeyTyped(ev.character, ev.key);
+		if (isMouseOver(ev)) {
+			ev.handled = true;
+		}
+	}
 
-        if(field.isFocused())
-        {
-            ev.handled = true;
-        }
-    }
+	@Override
+	public void keyPressed(InputKeyboardEvent ev) {
+		field.textboxKeyTyped(ev.character, ev.key);
+
+		if (field.isFocused()) {
+			ev.handled = true;
+		}
+	}
 }

@@ -16,106 +16,92 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockMarbleSlab extends BlockCarvable
-{
-    public Block master;
-    public BlockMarbleSlab bottom;
-    public BlockMarbleSlab top;
-    public boolean isBottom;
+public class BlockMarbleSlab extends BlockCarvable {
 
-    public BlockMarbleSlab(BlockCarvable marble)
-    {
-        opaque = true;
+	public Block master;
+	public BlockMarbleSlab bottom;
+	public BlockMarbleSlab top;
+	public boolean isBottom;
 
-        setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
+	public BlockMarbleSlab(BlockCarvable marble) {
+		opaque = true;
 
-        master = marble;
-        bottom = this;
-        top = new BlockMarbleSlab(this);
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
 
-        isBottom = true;
-    }
+		master = marble;
+		bottom = this;
+		top = new BlockMarbleSlab(this);
 
-    public BlockMarbleSlab(BlockMarbleSlab bottomBlock)
-    {
-        super();
-        setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
-        master = bottomBlock.master;
-        bottom = bottomBlock;
-        top = this;
+		isBottom = true;
+	}
 
-        carverHelper = bottomBlock.carverHelper;
-        isBottom = false;
-    }
+	public BlockMarbleSlab(BlockMarbleSlab bottomBlock) {
+		super();
+		setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
+		master = bottomBlock.master;
+		bottom = bottomBlock;
+		top = this;
 
-    @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
-    {
-        if(isBottom)
-        {
-            setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
-        } else
-        {
-            setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
-        }
-    }
+		carverHelper = bottomBlock.carverHelper;
+		isBottom = false;
+	}
 
-    @Override
-    public void setBlockBoundsForItemRender()
-    {
-        setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
-    }
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
+		if (isBottom) {
+			setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
+		} else {
+			setBlockBounds(0.0F, 0.5F, 0.0F, 1.0F, 1.0F, 1.0F);
+		}
+	}
 
-    @Override
-    public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity)
-    {
-        setBlockBoundsBasedOnState(par1World, par2, par3, par4);
-        super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
-    }
+	@Override
+	public void setBlockBoundsForItemRender() {
+		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
+	}
 
-    @Override
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
+	@Override
+	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
+		setBlockBoundsBasedOnState(par1World, par2, par3, par4);
+		super.addCollisionBoxesToList(par1World, par2, par3, par4, par5AxisAlignedBB, par6List, par7Entity);
+	}
 
-    @Override
-    public int damageDropped(int meta)
-    {
-        return meta;
-    }
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
 
-    @Override
-    public Item getItemDropped(int par1, Random par2Random, int par3)
-    {
-        return Item.getItemFromBlock(bottom);
-    }
+	@Override
+	public int damageDropped(int meta) {
+		return meta;
+	}
 
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
+	@Override
+	public Item getItemDropped(int par1, Random par2Random, int par3) {
+		return Item.getItemFromBlock(bottom);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public ItemStack getPickBlock(MovingObjectPosition mop, World world, int x, int y, int z)
-    {
-        return new ItemStack(bottom, 1, world.getBlockMetadata(x, y, z));
-    }
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
 
-    @Override
-    public IIcon getIcon(int side, int metadata)
-    {
-        return carverHelper.getIcon(side, metadata);
-//		return master.getIcon(side, metadata);
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public ItemStack getPickBlock(MovingObjectPosition mop, World world, int x, int y, int z) {
+		return new ItemStack(bottom, 1, world.getBlockMetadata(x, y, z));
+	}
 
-    @Override
-    public void getSubBlocks(Item block, CreativeTabs tabs, List list)
-    {
-        if(isBottom)
-            super.getSubBlocks(block, tabs, list);
-    }
+	@Override
+	public IIcon getIcon(int side, int metadata) {
+		return carverHelper.getIcon(side, metadata);
+		// return master.getIcon(side, metadata);
+	}
+
+	@Override
+	public void getSubBlocks(Item block, CreativeTabs tabs, List list) {
+		if (isBottom)
+			super.getSubBlocks(block, tabs, list);
+	}
 
 }

@@ -14,58 +14,48 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.init.ModTabs;
 
-public class BlockMarbleCarpet extends BlockCarpet implements ICarvable
-{
-    public CarvableHelper carverHelper;
+public class BlockMarbleCarpet extends BlockCarpet implements ICarvable {
 
-    public BlockMarbleCarpet(Material m)
-    {
-        carverHelper = new CarvableHelper();
-    }
+	public CarvableHelper carverHelper;
 
+	public BlockMarbleCarpet(Material m) {
+		carverHelper = new CarvableHelper();
+	}
 
-    @Override
-    public IIcon getIcon(int side, int metadata)
-    {
-        return carverHelper.getIcon(side, metadata);
-    }
+	@Override
+	public IIcon getIcon(int side, int metadata) {
+		return carverHelper.getIcon(side, metadata);
+	}
 
-    @Override
-    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
-    {
-        return carverHelper.getIcon(world, x, y, z, side);
-    }
+	@Override
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+		return carverHelper.getIcon(world, x, y, z, side);
+	}
 
-    @Override
-    public int damageDropped(int i)
-    {
-        return i;
-    }
+	@Override
+	public int damageDropped(int i) {
+		return i;
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister register)
-    {
-        carverHelper.registerBlockIcons("Chisel", this, register);
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		carverHelper.registerBlockIcons("Chisel", this, register);
+	}
 
-    @Override
-    public void getSubBlocks(Item item, CreativeTabs tabs, List list)
-    {
-        carverHelper.registerSubBlocks(this, tabs, list);
-    }
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
+		carverHelper.registerSubBlocks(this, tabs, list);
+	}
 
-    @Override
-    public int getRenderType()
-    {
-        return Chisel.RenderCarpetId;
-    }
+	@Override
+	public int getRenderType() {
+		return Chisel.RenderCarpetId;
+	}
 
-    @Override
-    public CarvableVariation getVariation(int metadata)
-    {
-        return carverHelper.getVariation(metadata);
-    }
+	@Override
+	public CarvableVariation getVariation(int metadata) {
+		return carverHelper.getVariation(metadata);
+	}
 
 }
