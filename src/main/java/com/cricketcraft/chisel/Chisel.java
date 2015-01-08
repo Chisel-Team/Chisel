@@ -64,9 +64,10 @@ public class Chisel {
 	public static final BlockCarvable.SoundType soundHolystoneFootstep = new BlockCarvable.SoundType("holystone", 1.0f, 1.0f);
 	public static final BlockCarvable.SoundType soundMetalFootstep = new BlockCarvable.SoundType("metal", 1.0f, 1.0f);
 	public static boolean multipartLoaded = false;
-	public static int RenderEldritchId;
-	public static int RenderCTMId;
-	public static int RenderCarpetId;
+	public static int renderEldritchId;
+	public static int renderCTMId;
+	public static int renderCarpetId;
+	public static int renderAutoChiselId;
 
 	@Instance(MOD_ID)
 	public static Chisel instance;

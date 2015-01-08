@@ -21,8 +21,8 @@ public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
 	RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
 
 	public BlockAdvancedMarbleRenderer() {
-		if (Chisel.RenderCTMId == 0) {
-			Chisel.RenderCTMId = RenderingRegistry.getNextAvailableRenderId();
+		if (Chisel.renderCTMId == 0) {
+			Chisel.renderCTMId = RenderingRegistry.getNextAvailableRenderId();
 
 		}
 	}
@@ -75,7 +75,7 @@ public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
 
 	@Override
 	public int getRenderId() {
-		return Chisel.RenderCTMId;
+		return Chisel.renderCTMId;
 	}
 
 }

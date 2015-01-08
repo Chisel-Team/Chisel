@@ -42,7 +42,7 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable {
 
 	@Override
 	public int getRenderType() {
-		return Chisel.RenderCTMId;
+		return Chisel.renderCTMId;
 	}
 
 	@Override

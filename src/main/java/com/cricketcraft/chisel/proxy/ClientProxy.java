@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
+import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
 import com.cricketcraft.chisel.client.render.BlockAdvancedMarbleRenderer;
@@ -16,7 +17,6 @@ import com.cricketcraft.chisel.client.render.BlockNoCTMRenderer;
 import com.cricketcraft.chisel.client.render.BlockRoadLineRenderer;
 import com.cricketcraft.chisel.client.render.BlockSnakeStoneRenderer;
 import com.cricketcraft.chisel.client.render.BlockTexturedOreRenderer;
-import com.cricketcraft.chisel.client.render.item.ItemAutoChiselRenderer;
 import com.cricketcraft.chisel.client.render.item.ItemChiselRenderer;
 import com.cricketcraft.chisel.client.render.item.ItemPresentRenderer;
 import com.cricketcraft.chisel.client.render.tile.RenderAutoChisel;
@@ -52,10 +52,14 @@ public class ClientProxy extends CommonProxy {
 
 		RenderingRegistry.registerBlockHandler(new BlockTexturedOreRenderer());
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAutoChisel.class, new RenderAutoChisel());
+		RenderAutoChisel rac = new RenderAutoChisel();
+		Chisel.renderAutoChiselId = RenderingRegistry.getNextAvailableRenderId();
+		RenderingRegistry.registerBlockHandler(rac);
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.autoChisel), rac);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAutoChisel.class, rac);
+		
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPresent.class, new RenderPresent());
 
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.autoChisel), new ItemAutoChiselRenderer());
 		for (int x = 0; x < 16; x++) {
 			MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.present[x]), new ItemPresentRenderer(x));
 		}

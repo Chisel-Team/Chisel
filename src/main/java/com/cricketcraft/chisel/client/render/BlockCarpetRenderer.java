@@ -9,13 +9,13 @@ public class BlockCarpetRenderer extends BlockAdvancedMarbleRenderer {
 	public BlockCarpetRenderer() {
 		super();
 
-		Chisel.RenderCarpetId = RenderingRegistry.getNextAvailableRenderId();
+		Chisel.renderCarpetId = RenderingRegistry.getNextAvailableRenderId();
 
 		rendererCTM = new RenderBlocksCTMCarpet();
 	}
 
 	@Override
 	public int getRenderId() {
-		return Chisel.RenderCarpetId;
+		return Chisel.renderCarpetId;
 	}
 }

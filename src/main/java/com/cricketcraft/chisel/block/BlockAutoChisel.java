@@ -24,7 +24,7 @@ public class BlockAutoChisel extends BlockContainer {
 
 	@Override
 	public int getRenderType() {
-		return -1;
+		return Chisel.renderAutoChiselId;
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public class BlockEldritch extends BlockCarvable {
 
 	@Override
 	public int getRenderType() {
-		return Chisel.RenderEldritchId;
+		return Chisel.renderEldritchId;
 	}
 
 }
