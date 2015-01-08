@@ -7,7 +7,7 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.init.ModBlocks;
+import com.cricketcraft.chisel.init.ChiselBlocks;
 
 public class EntityCloudInABottle extends EntityThrowable {
 
@@ -95,7 +95,7 @@ public class EntityCloudInABottle extends EntityThrowable {
 					for (int k2 = y; k2 < y + random.nextInt(1) + 2; k2++) {
 						for (int l2 = z; l2 < z + random.nextInt(4) + 1; l2++) {
 							if (world.getBlock(j2, k2, l2).isAir(world, j2, k2, l2) && Math.abs(j2 - x) + Math.abs(k2 - y) + Math.abs(l2 - z) < 4 * 1 + random.nextInt(2)) {
-								world.setBlock(j2, k2, l2, ModBlocks.cloud);
+								world.setBlock(j2, k2, l2, ChiselBlocks.cloud);
 								count++;
 							}
 						}

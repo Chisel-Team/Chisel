@@ -90,4 +90,5 @@ public class General {
 		return par1World.rayTraceBlocks(var13, var23, par3);
 	}
 
+	public static final String[] sGNames = new String[] { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Lime", "Pink", "Gray", "Light Gray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
 }

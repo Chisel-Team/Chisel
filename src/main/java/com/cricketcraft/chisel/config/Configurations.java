@@ -1,4 +1,10 @@
-package com.cricketcraft.chisel;
+package com.cricketcraft.chisel.config;
+
+import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.cricketcraft.chisel.init.Features;
 
 import net.minecraftforge.common.config.Configuration;
 
@@ -56,7 +62,24 @@ public class Configurations {
 		return true;
 	}
 
-	public static boolean featureEnabled(String feature) {
-		return config.get("features", feature, true).getBoolean(true) && refreshConfig();
+	public static boolean featureEnabled(Features feature) {
+		return config.get("features", featureName(feature), true).getBoolean(true) && refreshConfig();
 	}
+	
+	// this makes the old camelCase names from the new CONSTANT_CASE names
+	private static String featureName (Features feature) {
+		String[] words = feature.name().toLowerCase(Locale.ENGLISH).split("_");
+		if (words.length == 1) {
+			return words[0];
+		}
+		
+		String ret = words[0];
+		for (int i = 1; i < words.length; i++) {
+			ret += StringUtils.capitalize(words[i]);
+		}
+		return ret;
+	}
+	
+	@Deprecated
+	public static boolean featureEnabled(String feature) {return false;}
 }

@@ -14,7 +14,7 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.init.ModTabs;
+import com.cricketcraft.chisel.init.ChiselTabs;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -27,7 +27,7 @@ public class BlockCarvableSand extends BlockSand implements ICarvable {
 	public BlockCarvableSand() {
 		super();
 		carverHelper = new CarvableHelper();
-		setCreativeTab(ModTabs.tabOtherChiselBlocks);
+		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 	}
 
 	public BlockCarvableSand setStained(boolean a) {

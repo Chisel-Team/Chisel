@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.init.ModBlocks;
+import com.cricketcraft.chisel.init.ChiselBlocks;
 
 public class BlockMarblePackedIceStairs extends BlockMarbleStairs {
 
@@ -20,12 +20,12 @@ public class BlockMarblePackedIceStairs extends BlockMarbleStairs {
 
 	@Override
 	public void harvestBlock(World par1World, EntityPlayer par2EntityPlayer, int par3, int par4, int par5, int par6) {
-		ModBlocks.ice.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
+		ChiselBlocks.ice.harvestBlock(par1World, par2EntityPlayer, par3, par4, par5, par6);
 	}
 
 	@Override
 	public int quantityDropped(Random par1Random) {
-		return ModBlocks.ice.quantityDropped(par1Random);
+		return ChiselBlocks.ice.quantityDropped(par1Random);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class BlockMarblePackedIceStairs extends BlockMarbleStairs {
 
 	@Override
 	public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
-		ModBlocks.ice.updateTick(par1World, par2, par3, par4, par5Random);
+		ChiselBlocks.ice.updateTick(par1World, par2, par3, par4, par5Random);
 	}
 
 	@Override

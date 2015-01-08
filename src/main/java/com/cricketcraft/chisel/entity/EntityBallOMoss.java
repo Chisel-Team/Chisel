@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.GeneralChiselClient;
-import com.cricketcraft.chisel.init.ModBlocks;
+import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.utils.General;
 
 public class EntityBallOMoss extends EntityThrowable {
@@ -93,10 +93,10 @@ public class EntityBallOMoss extends EntityThrowable {
 			resBlock = Blocks.mossy_cobblestone;
 		} else if (block.equals(Blocks.cobblestone_wall) && meta == 0) {
 			resMeta = 1;
-		} else if (block.equals(ModBlocks.cobblestone)) {
-			resBlock = ModBlocks.cobblestoneMossy;
-		} else if (block.equals(ModBlocks.temple)) {
-			resBlock = ModBlocks.templeMossy;
+		} else if (block.equals(ChiselBlocks.cobblestone)) {
+			resBlock = ChiselBlocks.mossy_cobblestone;
+		} else if (block.equals(ChiselBlocks.templeblock)) {
+			resBlock = ChiselBlocks.mossy_templeblock;
 		} else if (block.equals(Blocks.stonebrick)) {
 			resMeta = 1;
 		}
