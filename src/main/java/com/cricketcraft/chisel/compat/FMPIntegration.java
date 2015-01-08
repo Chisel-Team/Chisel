@@ -68,8 +68,8 @@ public class FMPIntegration implements IModIntegration {
 		registerMaterial(ChiselBlocks.holystone, 0, 13);
 		registerMaterial(ChiselBlocks.carpet_block);
 		registerMaterial(ChiselBlocks.lavastone, 0, 6);
-		registerMaterial(ChiselBlocks.fantasy, 0, 1);
-		registerMaterial(ChiselBlocks.fantasy, 3, 14);
+		registerMaterial(ChiselBlocks.fantasyblock, 0, 1);
+		registerMaterial(ChiselBlocks.fantasyblock, 3, 14);
 		registerMaterial(ChiselBlocks.tyrian);
 		registerMaterial(ChiselBlocks.templeblock, 1, 2);
 		registerMaterial(ChiselBlocks.templeblock, 4, 15);
