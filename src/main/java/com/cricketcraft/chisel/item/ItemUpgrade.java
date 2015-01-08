@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
+import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel.Upgrade;
 
 public class ItemUpgrade extends BaseItem {
 
@@ -22,6 +23,7 @@ public class ItemUpgrade extends BaseItem {
 		super();
 		this.setUnlocalizedName(unlocalizedName);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
+		setHasSubtypes(true);
 	}
 
 	@Override
@@ -36,16 +38,15 @@ public class ItemUpgrade extends BaseItem {
 
 	@Override
 	public IIcon getIconFromDamage(int meta) {
-		if (meta > 3)
-			meta = 0;
-
-		return this.icons[meta];
+		// using modulo throughout to prevent AIOB
+		return this.icons[meta % Upgrade.values().length];
 	}
 
 	@Override
 	public void registerIcons(IIconRegister reg) {
-		for (int i = 0; i < 3; i++) {
-			this.icons[i] = reg.registerIcon(Chisel.MOD_ID + ":upgradeItem_" + i);
+		Upgrade[] upgrades = Upgrade.values();
+		for (int i = 0; i < upgrades.length; i++) {
+			this.icons[i] = reg.registerIcon(Chisel.MOD_ID + ":upgrade_" + upgrades[i].name().toLowerCase());
 		}
 	}
 
@@ -59,15 +60,7 @@ public class ItemUpgrade extends BaseItem {
 
 	@Override
 	public String getUnlocalizedName(ItemStack stack) {
-		switch (stack.getItemDamage()) {
-		case 0:
-			return this.getUnlocalizedName() + "_speed";
-		case 1:
-			return this.getUnlocalizedName() + "_automation";
-		case 2:
-			return this.getUnlocalizedName() + "_stack";
-		default:
-			return this.getUnlocalizedName();
-		}
+		Upgrade[] upgrades = Upgrade.values();
+		return getUnlocalizedName() + "_" + upgrades[stack.getItemDamage() % upgrades.length].name().toLowerCase();
 	}
 }
