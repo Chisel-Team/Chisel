@@ -6,7 +6,7 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.cricketcraft.chisel.block.BlockMarbleStairs;
+import com.cricketcraft.chisel.block.BlockCarvableStairs;
 import com.cricketcraft.chisel.utils.Drawing;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -31,9 +31,9 @@ public class BlockMarbleStairsRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block blck, int modelId, RenderBlocks renderer) {
-		if (blck == null || !(blck instanceof BlockMarbleStairs))
+		if (blck == null || !(blck instanceof BlockCarvableStairs))
 			return false;
-		BlockMarbleStairs block = (BlockMarbleStairs) blck;
+		BlockCarvableStairs block = (BlockCarvableStairs) blck;
 
 		renderer.renderBlockStairs(block, x, y, z);
 

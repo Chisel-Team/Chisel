@@ -10,6 +10,7 @@ import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
 import com.cricketcraft.chisel.client.render.BlockAdvancedMarbleRenderer;
 import com.cricketcraft.chisel.client.render.BlockCarpetRenderer;
 import com.cricketcraft.chisel.client.render.BlockEldritchRenderer;
+import com.cricketcraft.chisel.client.render.BlockGlowRenderer;
 import com.cricketcraft.chisel.client.render.BlockMarblePaneRenderer;
 import com.cricketcraft.chisel.client.render.BlockMarblePillarRenderer;
 import com.cricketcraft.chisel.client.render.BlockMarbleStairsRenderer;
@@ -49,11 +50,11 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new BlockEldritchRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockAdvancedMarbleRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockCarpetRenderer());
+		RenderingRegistry.registerBlockHandler(new BlockGlowRenderer());
 
 		RenderingRegistry.registerBlockHandler(new BlockTexturedOreRenderer());
 
 		RenderAutoChisel rac = new RenderAutoChisel();
-		Chisel.renderAutoChiselId = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(rac);
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.autoChisel), rac);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAutoChisel.class, rac);
@@ -64,9 +65,9 @@ public class ClientProxy extends CommonProxy {
 			MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.present[x]), new ItemPresentRenderer(x));
 		}
 
-		RenderingRegistry.registerEntityRenderingHandler(EntityCloudInABottle.class, new RenderSnowball(ChiselItems.itemCloudInABottle));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBallOMoss.class, new RenderSnowball(ChiselItems.itemBallOMoss));
-		RenderingRegistry.registerEntityRenderingHandler(EntitySmashingRock.class, new RenderSnowball(ChiselItems.smashingRock));
+		RenderingRegistry.registerEntityRenderingHandler(EntityCloudInABottle.class, new RenderSnowball(ChiselItems.cloudinabottle));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBallOMoss.class, new RenderSnowball(ChiselItems.ballomoss));
+		RenderingRegistry.registerEntityRenderingHandler(EntitySmashingRock.class, new RenderSnowball(ChiselItems.smashingrock));
 
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.chisel, renderer);
 	}

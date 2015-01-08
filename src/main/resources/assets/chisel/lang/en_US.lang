@@ -114,22 +114,22 @@ tile.waterstone.6.desc=Ornate Water Panel
 
 #Hex Plating
 tile.hexPlating.name=Hex Plating
-tile.hexPlating.0.desc=Black Plating
-tile.hexPlating.1.desc=Blue Plating
-tile.hexPlating.2.desc=Brown Plating
-tile.hexPlating.3.desc=Cyan Plating
-tile.hexPlating.4.desc=Green Plating
-tile.hexPlating.5.desc=Light Blue Plating
-tile.hexPlating.6.desc=Light Gray Plating
-tile.hexPlating.7.desc=Lime Plating
-tile.hexPlating.8.desc=Magenta Plating
-tile.hexPlating.9.desc=Orange Plating
-tile.hexPlating.10.desc=Pink Plating
-tile.hexPlating.11.desc=Purple Plating
-tile.hexPlating.12.desc=Red Plating
-tile.hexPlating.13.desc=White Plating
-tile.hexPlating.14.desc=Yellow Plating
-tile.hexPlating.15.desc=Gray Plating
+tile.hexPlating.black.desc=Black Plating
+tile.hexPlating.blue.desc=Blue Plating
+tile.hexPlating.brown.desc=Brown Plating
+tile.hexPlating.cyan.desc=Cyan Plating
+tile.hexPlating.green.desc=Green Plating
+tile.hexPlating.light_blue.desc=Light Blue Plating
+tile.hexPlating.light_gray.desc=Light Gray Plating
+tile.hexPlating.lime.desc=Lime Plating
+tile.hexPlating.magenta.desc=Magenta Plating
+tile.hexPlating.orange.desc=Orange Plating
+tile.hexPlating.pink.desc=Pink Plating
+tile.hexPlating.purple.desc=Purple Plating
+tile.hexPlating.red.desc=Red Plating
+tile.hexPlating.white.desc=White Plating
+tile.hexPlating.yellow.desc=Yellow Plating
+tile.hexPlating.gray.desc=Gray Plating
 
 #Grimstone
 tile.grimstone.name=Grimstone

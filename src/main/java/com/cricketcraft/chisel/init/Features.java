@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.StatCollector;
@@ -17,6 +18,7 @@ import com.cricketcraft.chisel.block.BlockAutoChisel;
 import com.cricketcraft.chisel.block.BlockBeaconBase;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.block.BlockCarvableGlass;
+import com.cricketcraft.chisel.block.BlockCarvableGlow;
 import com.cricketcraft.chisel.block.BlockCarvablePane;
 import com.cricketcraft.chisel.block.BlockCarvablePowered;
 import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
@@ -36,8 +38,8 @@ import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
 import com.cricketcraft.chisel.block.BlockMarblePackedIce;
 import com.cricketcraft.chisel.block.BlockMarblePackedIceStairs;
 import com.cricketcraft.chisel.block.BlockMarblePillar;
-import com.cricketcraft.chisel.block.BlockMarbleSlab;
-import com.cricketcraft.chisel.block.BlockMarbleStairs;
+import com.cricketcraft.chisel.block.BlockCarvableSlab;
+import com.cricketcraft.chisel.block.BlockCarvableStairs;
 import com.cricketcraft.chisel.block.BlockMarbleStairsMaker;
 import com.cricketcraft.chisel.block.BlockMarbleStairsMakerCreator;
 import com.cricketcraft.chisel.block.BlockMarbleTexturedOre;
@@ -66,7 +68,6 @@ import com.cricketcraft.chisel.item.ItemUpgrade;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.*;
 
@@ -146,7 +147,7 @@ public enum Features {
 		@Override
 		void addItems() {
 			ItemUpgrade upgrade = (ItemUpgrade) new ItemUpgrade("upgrade").setCreativeTab(ChiselTabs.tabChisel);
-			GameRegistry.registerItem(upgrade, upgrade.getUnlocalizedName());
+			GameRegistry.registerItem(upgrade, "upgrade");
 		}
 	},
 
@@ -154,14 +155,14 @@ public enum Features {
 
 		@Override
 		void addItems() {
-			ItemBallOMoss itemBallOMoss = (ItemBallOMoss) new ItemBallOMoss().setTextureName("Chisel:ballomoss").setCreativeTab(ChiselTabs.tabChisel);
+			ItemBallOMoss ballomoss = (ItemBallOMoss) new ItemBallOMoss().setTextureName("Chisel:ballomoss").setCreativeTab(ChiselTabs.tabChisel);
 			EntityRegistry.registerModEntity(EntityBallOMoss.class, "BallOMoss", 2, Chisel.instance, 40, 1, true);
-			GameRegistry.registerItem(itemBallOMoss, "ballomoss");
+			GameRegistry.registerItem(ballomoss, "ballomoss");
 		}
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ItemStack(ChiselItems.itemBallOMoss, 1), "XYX", "YXY", "XYX", 'X', Blocks.vine, 'Y', Items.stick);
+			GameRegistry.addRecipe(new ItemStack(ChiselItems.ballomoss, 1), "XYX", "YXY", "XYX", 'X', Blocks.vine, 'Y', Items.stick);
 		}
 	},
 
@@ -353,7 +354,7 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ItemStack(ChiselItems.itemCloudInABottle, 1), "X X", "XYX", " X ", 'X', Blocks.glass, 'Y', Items.quartz);
+			GameRegistry.addRecipe(new ItemStack(ChiselItems.cloudinabottle, 1), "X X", "XYX", " X ", 'X', Blocks.glass, 'Y', Items.quartz);
 		}
 	},
 
@@ -878,23 +879,10 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvable hexPlating = (BlockCarvable) new BlockCarvable().setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.0.desc"), 0, "hexPlating/black");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.1.desc"), 1, "hexPlating/blue");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.2.desc"), 2, "hexPlating/brown");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.3.desc"), 3, "hexPlating/cyan");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.4.desc"), 4, "hexPlating/green");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.5.desc"), 5, "hexPlating/light_blue");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.6.desc"), 6, "hexPlating/light_gray");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.7.desc"), 7, "hexPlating/lime");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.8.desc"), 8, "hexPlating/magenta");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.9.desc"), 9, "hexPlating/orange");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.10.desc"), 10, "hexPlating/pink");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.11.desc"), 11, "hexPlating/purple");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.12.desc"), 12, "hexPlating/red");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.13.desc"), 13, "hexPlating/white");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.14.desc"), 14, "hexPlating/yellow");
-			hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating.15.desc"), 15, "hexPlating/gray");
+			BlockCarvable hexPlating = (BlockCarvable) new BlockCarvableGlow("hexPlating/hexOverlay").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+			for (int i = 0; i < 16; i++) {
+				hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating." + ItemDye.field_150921_b[i] + ".desc"), i, "hexPlating/hexBase");
+			}
 			hexPlating.carverHelper.register(hexPlating, "hexPlating");
 			Carving.chisel.registerOre("hexPlating", "hexPlating");
 		}
@@ -1024,7 +1012,7 @@ public enum Features {
 			makerIceStairs.create(new BlockMarbleStairsMakerCreator() {
 
 				@Override
-				public BlockMarbleStairs create(Block block, int meta, CarvableHelper helper) {
+				public BlockCarvableStairs create(Block block, int meta, CarvableHelper helper) {
 					return new BlockMarbleIceStairs(block, meta, helper);
 				}
 			}, "ice_stairs");
@@ -1234,7 +1222,7 @@ public enum Features {
 			OreDictionary.registerOre("limestone", limestone);
 			Carving.chisel.registerOre("limestone", "limestone");
 
-			BlockCarvable limestone_slab = (BlockMarbleSlab) new BlockMarbleSlab(limestone).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F);
+			BlockCarvable limestone_slab = (BlockCarvableSlab) new BlockCarvableSlab(limestone).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F);
 			limestone_slab.carverHelper.setChiselBlockName("Limestone Slab");
 			limestone_slab.carverHelper.addVariation(StatCollector.translateToLocal("tile.limestoneSlab.0.desc"), 0, "limestone");
 			limestone_slab.carverHelper.addVariation(StatCollector.translateToLocal("tile.limestoneSlab.1.desc"), 1, "limestone/terrain-cobbsmalltilelight");
@@ -1311,7 +1299,7 @@ public enum Features {
 			OreDictionary.registerOre("blockMarble", marble);
 			Carving.chisel.registerOre("marble", "marble");
 
-			BlockCarvable marble_slab = (BlockMarbleSlab) new BlockMarbleSlab(marble).setHardness(2.0F).setResistance(10F);
+			BlockCarvable marble_slab = (BlockCarvableSlab) new BlockCarvableSlab(marble).setHardness(2.0F).setResistance(10F);
 			marble_slab.carverHelper.setChiselBlockName("Marble Slab");
 			marble_slab.carverHelper.addVariation(StatCollector.translateToLocal("tile.marbleSlab.0.desc"), 0, "marble");
 			marble_slab.carverHelper.addVariation(StatCollector.translateToLocal("tile.marbleSlab.1.desc"), 1, "marbleslab/a1-stoneornamental-marblebrick");
@@ -1410,7 +1398,7 @@ public enum Features {
 			marble_pillar.carverHelper.register(marble_pillar, "marble_pillar");
 			Carving.chisel.setGroupClass("marble_pillar", "marble");
 
-			BlockCarvable marble_pillar_slab = (BlockMarbleSlab) new BlockMarbleSlab(marble_pillar).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
+			BlockCarvable marble_pillar_slab = (BlockCarvableSlab) new BlockCarvableSlab(marble_pillar).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
 					.setStepSound(Block.soundTypeStone);
 			marble_pillar_slab.carverHelper.setChiselBlockName("Marble Pillar Slab");
 			if (Configurations.oldPillars) {
@@ -1619,7 +1607,7 @@ public enum Features {
 			makerPackedIceStairs.create(new BlockMarbleStairsMakerCreator() {
 
 				@Override
-				public BlockMarbleStairs create(Block block, int meta, CarvableHelper helper) {
+				public BlockCarvableStairs create(Block block, int meta, CarvableHelper helper) {
 					return new BlockMarblePackedIceStairs(block, meta, helper);
 				}
 			}, "packedice_stairs");
@@ -1916,14 +1904,14 @@ public enum Features {
 
 		@Override
 		void addItems() {
-			ItemSmashingRock smashingRock = (ItemSmashingRock) new ItemSmashingRock().setTextureName("Chisel:smashingrock").setCreativeTab(ChiselTabs.tabChisel);
+			ItemSmashingRock smashingrock = (ItemSmashingRock) new ItemSmashingRock().setTextureName("Chisel:smashingrock").setCreativeTab(ChiselTabs.tabChisel);
 			EntityRegistry.registerModEntity(EntitySmashingRock.class, "SmashingRock", 2, Chisel.instance, 40, 1, true);
-			GameRegistry.registerItem(smashingRock, "smashingrock");
+			GameRegistry.registerItem(smashingrock, "smashingrock");
 		}
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addShapelessRecipe(new ItemStack(ChiselItems.smashingRock, 16), new Object[] { new ItemStack(Items.stone_pickaxe), new ItemStack(Items.glass_bottle, 1),
+			GameRegistry.addShapelessRecipe(new ItemStack(ChiselItems.smashingrock, 16), new Object[] { new ItemStack(Items.stone_pickaxe), new ItemStack(Items.glass_bottle, 1),
 					new ItemStack(Items.stone_shovel) });
 		}
 	},

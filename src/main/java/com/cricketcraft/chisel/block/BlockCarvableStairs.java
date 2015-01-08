@@ -18,12 +18,12 @@ import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.client.render.BlockMarbleStairsRenderer;
 
-public class BlockMarbleStairs extends BlockStairs implements ICarvable {
+public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 
 	CarvableHelper carverHelper;
 	int blockMeta;
 
-	public BlockMarbleStairs(Block block, int meta, CarvableHelper helper) {
+	public BlockCarvableStairs(Block block, int meta, CarvableHelper helper) {
 		super(block, meta);
 
 		this.useNeighborBrightness = true;

@@ -64,4 +64,13 @@ public class Drawing {
 		renderer.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, block.getIcon(5, meta));
 		tessellator.draw();
 	}
+
+	public static void renderAllFaces(RenderBlocks renderer, Block block, int x, int y, int z, IIcon icon) {
+		renderer.renderFaceYNeg(block, x, y, z, icon);
+		renderer.renderFaceYPos(block, x, y, z, icon);
+		renderer.renderFaceZNeg(block, x, y, z, icon);
+		renderer.renderFaceZPos(block, x, y, z, icon);
+		renderer.renderFaceXNeg(block, x, y, z, icon);
+		renderer.renderFaceXPos(block, x, y, z, icon);
+	}
 }
