@@ -43,6 +43,7 @@ item.diamondChisel.desc=Left click and it changes blocks!
 
 #Auto Chisel
 tile.autoChisel.name=Auto Chisel
+autochisel.slot.target.tooltip=Target Slot
 
 #Leaves
 tile.leaves.6.desc=Dead Leaves

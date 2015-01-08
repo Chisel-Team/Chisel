@@ -1,9 +1,10 @@
 package com.cricketcraft.chisel.block.tileentity;
 
+import java.util.ArrayList;
+
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -11,7 +12,9 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.StatCollector;
 
+import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.init.ModItems;
 
 import cpw.mods.fml.relauncher.Side;
@@ -19,8 +22,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityAutoChisel extends TileEntity implements ISidedInventory {
 
-	private final int BASE = 0, TARGET = 1, OUTPUT = 2, AUTOMATION = 3, STACK = 4, SPEED = 5;
-	private boolean isAutomated, isStackMode, isFaster;
+	public enum Upgrade {
+		SPEED, AUTOMATION, STACK;
+
+		public String getUnlocalizedName() {
+			return ModItems.upgrade.getUnlocalizedName() + "_" + this.name().toLowerCase();
+		}
+		
+		public String getLocalizedName() {
+			return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+		}
+	}
+
+	private final int BASE = 0, TARGET = 1, OUTPUT = 2, MIN_UPGRADE = 3;
 	private static EntityItem ghostItem;
 	boolean equal = false;
 	private ItemStack[] inventory = new ItemStack[6];
@@ -72,81 +86,79 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	@Override
 	public void updateEntity() {
 
-		if (inventory[SPEED] == new ItemStack(ModItems.upgrade, 1, 0)) {
-			isFaster = true;
-		} else {
-			isFaster = false;
-		}
+		int checkPeriod = hasUpgrade(Upgrade.SPEED) ? 10 : 40;
 
-		if (inventory[AUTOMATION] == new ItemStack(ModItems.upgrade, 1, 1)) {
-			isAutomated = true;
-		} else {
-			isAutomated = false;
-		}
+		ItemStack base = inventory[BASE], target = inventory[TARGET], output = inventory[OUTPUT];
 
-		if (inventory[STACK] == new ItemStack(ModItems.upgrade, 1, 2)) {
-			isStackMode = true;
-		} else {
-			isStackMode = false;
-		}
+		if (!worldObj.isRemote && worldObj.getWorldTime() % checkPeriod == 0) {
+			if (base != null && target != null) {
+				if (canBeMadeFrom(base, target)) {
+					// the max possible for this craft
+					int canBeMade = target.getMaxStackSize();
 
-		if (isFaster) {
-			if (!worldObj.isRemote && worldObj.getWorldTime() % 10 == 0) {
-				if (inventory[BASE] != null && inventory[TARGET] != null) {
-					if (inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock) {
-						if (inventory[BASE].getUnlocalizedName().equalsIgnoreCase(inventory[TARGET].getUnlocalizedName())) {
-							if (isStackMode) {
-								if (inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()) {
-									if (inventory[OUTPUT] == null) {
-										inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 64, inventory[TARGET].getItemDamage());
-										inventory[BASE] = null;
-									}
-								}
-							} else {
-								if (inventory[OUTPUT] == null) {
-									inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 1, inventory[TARGET].getItemDamage());
-									inventory[BASE].stackSize--;
-								} else if (inventory[BASE].stackSize != 0) {
-									inventory[OUTPUT].stackSize++;
-									inventory[BASE].stackSize--;
-								} else {
-									inventory[BASE] = null;
-								}
-							}
-						}
+					// if there are items in the output, they count towards the max we can make
+					if (output != null) {
+						canBeMade -= output.stackSize;
 					}
-				}
-			}
-		} else {
-			if (!worldObj.isRemote && worldObj.getWorldTime() % 40 == 0) {
-				if (inventory[BASE] != null && inventory[TARGET] != null) {
-					if (inventory[BASE].getItem() instanceof ItemBlock && inventory[TARGET].getItem() instanceof ItemBlock) {
-						if (inventory[BASE].getUnlocalizedName().equalsIgnoreCase(inventory[TARGET].getUnlocalizedName())) {
-							if (isStackMode) {
-								if (inventory[BASE].stackSize == inventory[BASE].getMaxStackSize()) {
-									if (inventory[OUTPUT] == null) {
-										inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 64, inventory[TARGET].getItemDamage());
-										inventory[BASE] = null;
-									}
-								}
-							} else {
-								if (inventory[OUTPUT] == null) {
-									inventory[OUTPUT] = new ItemStack(inventory[TARGET].getItem(), 1, inventory[TARGET].getItemDamage());
-									inventory[BASE].stackSize--;
-								} else if (inventory[BASE].stackSize != 0) {
-									inventory[OUTPUT].stackSize++;
-									inventory[BASE].stackSize--;
-								} else {
-									inventory[BASE] = null;
-								}
-							}
+
+					// can't make more than we have
+					canBeMade = Math.min(base.stackSize, canBeMade);
+
+					// if we can't make any, forget it
+					if (canBeMade <= 0) {
+						return;
+					}
+
+					// result will always be a copy of the target, of course
+					ItemStack chiseled = target.copy();
+					// if we have the stack upgrade, boost the stack size to the max possible, otherwise just one
+					chiseled.stackSize = hasUpgrade(Upgrade.STACK) ? canBeMade : 1;
+
+					// if we can place the result in the output
+					if (canMerge(chiseled)) {
+						// if our output is empty, just use the current result
+						if (output == null) {
+							inventory[OUTPUT] = chiseled;
+						} else {
+							// otherwise just add our result to the existing stack
+							inventory[OUTPUT].stackSize += chiseled.stackSize;
 						}
+						// remove what we made from the stack
+						base.stackSize -= chiseled.stackSize;
+						if (base.stackSize <= 0) {
+							inventory[BASE] = null; // clear out 0 size itemstacks
+						}
+						// we changed something, so we need to tell the chunk to save
+						markDirty();
 					}
 				}
 			}
 		}
+	}
 
-		markDirty();
+	// lets make sure the user isn't trying to make something from a block that doesn't have this as a valid target
+	private boolean canBeMadeFrom(ItemStack from, ItemStack to) {
+		ArrayList<ItemStack> results = Carving.chisel.getItems(from);
+		for (ItemStack s : results) {
+			if (s.getItem() == to.getItem() && s.getItemDamage() == to.getItemDamage()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean canMerge(ItemStack toMerge) {
+		// if the output slot is empty we can merge without checking
+		if (inventory[OUTPUT] == null) {
+			return true;
+		}
+		// need to check NBT as well as item
+		if (toMerge.isItemEqual(inventory[OUTPUT]) && ItemStack.areItemStackTagsEqual(toMerge, inventory[OUTPUT])) {
+			// we only care about metadata if the item has subtypes
+			return toMerge.getHasSubtypes() && toMerge.getItemDamage() == inventory[OUTPUT].getItemDamage();
+		}
+
+		return false;
 	}
 
 	@Override
@@ -232,7 +244,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
-		if (isAutomated) {
+		if (hasUpgrade(Upgrade.AUTOMATION)) {
 			if (side != 0 || side != 1 && slot == BASE) {
 				return true;
 			}
@@ -242,7 +254,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
-		if (isAutomated) {
+		if (hasUpgrade(Upgrade.AUTOMATION)) {
 			if (side == 0 || side == 1 && slot == OUTPUT) {
 				return true;
 			}
@@ -285,5 +297,13 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
 		readFromNBT(packet.func_148857_g());
+	}
+
+	public boolean hasUpgrade(Upgrade upgrade) {
+		ItemStack stack = inventory[MIN_UPGRADE + upgrade.ordinal()];
+		if (stack != null) {
+			return stack.getItem() == ModItems.upgrade && stack.getItemDamage() == upgrade.ordinal();
+		}
+		return false;
 	}
 }
