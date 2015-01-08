@@ -53,23 +53,25 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
         switch(type)
         {
         case ENTITY:
+            GL11.glTranslatef(-0.5f, 0, 0.5f);
             break;
         case EQUIPPED:
-            GL11.glRotatef(35, 0, 1, 0);
-            GL11.glRotatef(20, 0, 0, 1);
+            GL11.glRotatef(20, 0, 1, 0);
+            GL11.glRotatef(-15, 1, 0, -1);
             GL11.glScalef(0.65f, 0.65f, 0.65f);
-            GL11.glTranslatef(1.1f, -0.2f, 0.75f);
+            GL11.glTranslatef(0.75f, -0.5f, 1.25f);
             break;
         case EQUIPPED_FIRST_PERSON:
             GL11.glRotatef(20, 0, 0, 1);
             GL11.glRotatef(30, 0, 1, 0);
-            GL11.glTranslatef(0.4f, -0.05f, -0.1f);
+            GL11.glTranslatef(0.2f, 0, -0.1f);
             GL11.glScalef(0.5f, 0.5f, 0.5f);
             break;
         case FIRST_PERSON_MAP:
             break;
         case INVENTORY:
-            GL11.glTranslatef(0, -0.5f, 0);
+            GL11.glTranslatef(-0.5f, -0.5f, 0.5f);
+            break;
         }
         
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
