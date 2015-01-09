@@ -1,8 +1,10 @@
 # Key localizations
 
 # Item localizations
-item.chisel.name=Chisel
+item.chisel.chisel_iron.name=Chisel
 item.chisel.desc=Right-Click to open GUI
+item.chisel.chisel_diamond.name=Diamond Chisel
+item.chisel.chisel_diamond.desc=Left click and it changes blocks!
 item.ballMoss.name=Ball O' Moss
 item.ballMoss.desc=Right-Click to throw. This will turn Cobblestone to Moss Stone on impact.
 item.cloudBottle.name=Cloud In A Bottle
@@ -37,12 +39,9 @@ tile.granite.name=Granite
 tile.granite.0.desc=Generates in your world
 tile.granite.1.desc=Polished Granite
 
-#Diamond Chisel
-item.diamondChisel.name=Diamond Chisel
-item.diamondChisel.desc=Left click and it changes blocks!
-
 #Auto Chisel
 tile.autoChisel.name=Auto Chisel
+autochisel.slot.chisel.tooltip=Chisel Slot
 autochisel.slot.target.tooltip=Target Slot
 
 #Leaves

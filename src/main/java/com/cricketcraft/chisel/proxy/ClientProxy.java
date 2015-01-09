@@ -1,7 +1,10 @@
 package com.cricketcraft.chisel.proxy;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.cricketcraft.chisel.Chisel;
@@ -58,7 +61,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(rac);
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.autoChisel), rac);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAutoChisel.class, rac);
-		
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPresent.class, new RenderPresent());
 
 		for (int x = 0; x < 16; x++) {
@@ -70,5 +73,15 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySmashingRock.class, new RenderSnowball(ChiselItems.smashingrock));
 
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.chisel, renderer);
+	}
+
+	@Override
+	public EntityPlayer getClientPlayer() {
+		return Minecraft.getMinecraft().thePlayer;
+	}
+
+	@Override
+	public World getClientWorld() {
+		return Minecraft.getMinecraft().theWorld;
 	}
 }

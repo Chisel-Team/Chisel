@@ -1,5 +1,8 @@
 package com.cricketcraft.chisel.proxy;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
+
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
 
@@ -16,5 +19,13 @@ public class CommonProxy {
 	}
 
 	public void init() {
+	}
+
+	public EntityPlayer getClientPlayer() {
+		return null;
+	}
+
+	public World getClientWorld() {
+		return null;
 	}
 }

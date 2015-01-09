@@ -5,7 +5,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import com.cricketcraft.chisel.utils.General;
+import com.cricketcraft.chisel.api.IChiselItem;
 
 public class SlotChiselSelection extends Slot {
 
@@ -54,9 +54,8 @@ public class SlotChiselSelection extends Slot {
 		}
 
 		selInventory.updateItems();
-
-		String sound = container.carving.getVariationSound(itemstack.getItem(), itemstack.getItemDamage());
-		player.worldObj.playSoundAtEntity(player, sound, 0.3f + 0.7f * General.rand.nextFloat(), 0.6f + 0.4f * General.rand.nextFloat());
+		
+		((IChiselItem)container.chisel.getItem()).onChisel(player.worldObj, player.inventory, player.inventory.currentItem, container.chisel, crafted);
 
 		/*
 		 * ItemStack stack=player.inventory.getItemStack();

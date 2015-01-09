@@ -8,7 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.cricketcraft.chisel.item.ItemChisel;
+import com.cricketcraft.chisel.item.chisel.ItemChisel;
 
 public class InventoryChiselSelection implements IInventory {
 

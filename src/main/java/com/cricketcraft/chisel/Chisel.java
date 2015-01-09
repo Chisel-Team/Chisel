@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel;
 
+import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
@@ -17,9 +18,11 @@ import com.cricketcraft.chisel.inventory.ContainerAutoChisel;
 import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.ContainerPresent;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
+import com.cricketcraft.chisel.item.chisel.ChiselController;
 import com.cricketcraft.chisel.proxy.CommonProxy;
 import com.cricketcraft.chisel.utils.General;
 import com.cricketcraft.chisel.world.GeneratorChisel;
+
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -136,6 +139,7 @@ public class Chisel {
 		ChiselTabs.preInit();
 		Features.preInit();
 		PacketHandler.init();
+		ChiselController.INSTANCE.preInit();
 		proxy.preInit();
 	}
 

@@ -59,11 +59,12 @@ import com.cricketcraft.chisel.entity.EntityCloudInABottle;
 import com.cricketcraft.chisel.entity.EntitySmashingRock;
 import com.cricketcraft.chisel.item.ItemBallOMoss;
 import com.cricketcraft.chisel.item.ItemCarvable;
-import com.cricketcraft.chisel.item.ItemChisel;
 import com.cricketcraft.chisel.item.ItemCloudInABottle;
 import com.cricketcraft.chisel.item.ItemMarbleSlab;
 import com.cricketcraft.chisel.item.ItemSmashingRock;
 import com.cricketcraft.chisel.item.ItemUpgrade;
+import com.cricketcraft.chisel.item.chisel.ItemChisel;
+import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -314,8 +315,10 @@ public enum Features {
 
 		@Override
 		void addItems() {
-			ItemChisel chisel = (ItemChisel) new ItemChisel().setCreativeTab(ChiselTabs.tabChisel);
+			ItemChisel chisel = (ItemChisel) new ItemChisel(ChiselType.IRON).setCreativeTab(ChiselTabs.tabChisel);
+			ItemChisel diamondChisel = (ItemChisel) new ItemChisel(ChiselType.DIAMOND).setCreativeTab(ChiselTabs.tabChisel);
 			GameRegistry.registerItem(chisel, "chisel");
+			GameRegistry.registerItem(diamondChisel, "diamondChisel");
 		}
 
 		@Override

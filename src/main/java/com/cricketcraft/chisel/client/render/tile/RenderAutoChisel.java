@@ -116,29 +116,19 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 
 	private static EntityItem ghostItem;
 
-	private final RenderItem renderTargetAndChisel, renderBase;
+	private final RenderItem renderItem;
 
 	public RenderAutoChisel() {
 		Chisel.renderAutoChiselId = RenderingRegistry.getNextAvailableRenderId();
 
-		renderTargetAndChisel = new RenderItem() {
+		renderItem = new RenderItem() {
 
 			@Override
 			public boolean shouldBob() {
 				return false;
 			}
 		};
-		renderTargetAndChisel.setRenderManager(RenderManager.instance);
-
-		renderBase = new RenderItem() {
-
-			@Override
-			public boolean shouldBob() {
-				return true;
-			}
-		};
-
-		renderBase.setRenderManager(RenderManager.instance);
+		renderItem.setRenderManager(RenderManager.instance);
 	}
 
 	private static final Random rand = new Random();
@@ -148,7 +138,7 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 
 		// Render Blocks
 		TileEntityAutoChisel autoChisel = (TileEntityAutoChisel) tile;
-		EntityItem item = autoChisel.getItemForRendering(1);
+		EntityItem item = autoChisel.getItemForRendering(TileEntityAutoChisel.TARGET);
 
 		rand.setSeed(tile.xCoord + tile.yCoord + tile.zCoord);
 		rand.nextBoolean();
@@ -170,17 +160,26 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 			GL11.glRotatef(autoChisel.zRot, 0, 0, 1);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_CONSTANT_ALPHA);
-			renderTargetAndChisel.doRender(item, 0, 0, 0, 0, 0);
+			renderItem.doRender(item, 0, 0, 0, 0, 0);
 			GL11.glPopMatrix();
 			GL11.glPopAttrib();
 		}
 
-		EntityItem item2 = autoChisel.getItemForRendering(0);
-
-		if (item2 != null) {
+		item = autoChisel.getItemForRendering(TileEntityAutoChisel.BASE);
+		if (item != null) {
 			GL11.glPushMatrix();
-			GL11.glTranslated(x + 0.4, y + 0.83, z + 0.5);
-			renderBase.doRender(item2, 0, 0, 0, 0, 0);
+			GL11.glTranslated(x + 0.35, y + 0.934, z + 0.5);
+			renderItem.doRender(item, 0, 0, 0, 0, 0);
+			GL11.glPopMatrix();
+		}
+		
+		item = autoChisel.getItemForRendering(TileEntityAutoChisel.CHISEL);
+		if (item != null) {
+			GL11.glPushMatrix();
+			GL11.glTranslated(x + 0.7, y + 1, z + 0.5);
+			GL11.glTranslated(-0.12, 0, 0);
+			GL11.glScalef(0.9f, 0.9f, 0.9f);
+			renderItem.doRender(item, 0, 0, 0, 0, 0);
 			GL11.glPopMatrix();
 		}
 	}
