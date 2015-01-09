@@ -13,7 +13,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.inventory.ContainerAutoChisel;
-import com.cricketcraft.chisel.inventory.ContainerAutoChisel.SlotAutoChisel;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
@@ -37,8 +36,8 @@ public class GuiAutoChisel extends GuiContainer {
 		int y = (this.height - this.ySize) / 2;
 
 		for (Slot slot : (List<Slot>) inventorySlots.inventorySlots) {
-			if (mouseInside(slot, mouseX - x, mouseY - y)) {
-				if (slot instanceof SlotAutoChisel) {
+			if (!slot.getHasStack() && mouseInside(slot, mouseX - x, mouseY - y)) {
+				if (slot.slotNumber < autochisel.getSizeInventory()) {
 					String tt = autochisel.getSlotTooltipUnloc(slot.slotNumber);
 					if (!Strings.isNullOrEmpty(tt)) {
 						this.func_146283_a(Lists.newArrayList(StatCollector.translateToLocal(tt)), mouseX - x, mouseY - y);
