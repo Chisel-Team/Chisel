@@ -68,7 +68,7 @@ public class ContainerAutoChisel extends Container {
 
 			// if we are in the auto chisel
 			if (slotNumber <= 6) {
-				if (!this.mergeItemStack(itemStack1, 33, 42, false)) {
+				if (!this.mergeItemStack(itemStack1, 7, 42, false)) {
 					return null;
 				}
 				// otherwise just put it in one of the machine slots
