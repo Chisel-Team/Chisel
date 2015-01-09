@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.block.BlockCarvableGlass;
+import com.cricketcraft.chisel.block.BlockCarvableGlow;
 import com.cricketcraft.chisel.block.BlockCarvablePane;
 import com.cricketcraft.chisel.block.BlockCarvablePowered;
 import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
@@ -103,7 +104,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable hexPlating = null;
 	public static final BlockCarvable technical = null;
 	public static final BlockCarvableGlass technical2 = null;
-	public static final BlockCarvable futura = null;
+	public static final BlockCarvableGlow futura = null;
 	public static final BlockCarvable bone = null;
 	public static final BlockCarvable scorching = null;
 	public static final BlockCarvable brickCustom = null;

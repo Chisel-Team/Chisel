@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.client.render;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
@@ -11,11 +12,11 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockNoCTMRenderer implements ISimpleBlockRenderingHandler {
+public class renderStandardBlock_noSunlight implements ISimpleBlockRenderingHandler {
 
 	static int id;
 
-	public BlockNoCTMRenderer() {
+	public renderStandardBlock_noSunlight() {
 		id = RenderingRegistry.getNextAvailableRenderId();
 	}
 
@@ -32,7 +33,7 @@ public class BlockNoCTMRenderer implements ISimpleBlockRenderingHandler {
 		if (meta != 0)
 			renderer.overrideBlockTexture = block.getIcon(0, meta);
 		renderer.setRenderBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		renderer.renderStandardBlock(block, x, y, z);
+		renderer.renderStandardBlockWithColorMultiplier(block, x, y, z, 1.0F, 1.0F, 1.0F);
 		renderer.overrideBlockTexture = null;
 
 		return false;
