@@ -31,13 +31,6 @@ minecraft {
     replace "@MOD_VERSION@", project.version
 }
 
-curse {
-    projectId = '225236'
-    apiKey = project.curseForgeApiKey
-    changelog = ''
-    releaseType = 'release'
-}
-
 repositories {
 	maven {
 		name 'Chicken Bones Repo'
@@ -123,7 +116,7 @@ curse {
     }
 
     if (project.hasProperty('curseforge_key')) apiKey = project.curseforge_key
-    projectId = project.curse_projectId
+    projectId = '225236'
     changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
     releaseType = project.hasProperty('mod_appendix') ? "${mod_appendix}".toString() : 'release'
 }
