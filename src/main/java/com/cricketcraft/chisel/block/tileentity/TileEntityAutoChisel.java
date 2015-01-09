@@ -94,7 +94,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 		ItemStack base = inventory[BASE], target = inventory[TARGET], output = inventory[OUTPUT];
 
-		if (!worldObj.isRemote && worldObj.getWorldTime() % checkPeriod == 0 && hasChisel()) {
+		if (!worldObj.isRemote && worldObj.getTotalWorldTime() % checkPeriod == 0 && hasChisel()) {
 			if (base != null && target != null) {
 				if (canBeMadeFrom(base, target)) {
 					// the max possible for this craft
