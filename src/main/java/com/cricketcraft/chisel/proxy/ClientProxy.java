@@ -16,7 +16,7 @@ import com.cricketcraft.chisel.client.render.BlockGlowRenderer;
 import com.cricketcraft.chisel.client.render.BlockMarblePaneRenderer;
 import com.cricketcraft.chisel.client.render.BlockMarblePillarRenderer;
 import com.cricketcraft.chisel.client.render.BlockMarbleStairsRenderer;
-import com.cricketcraft.chisel.client.render.renderStandardBlock_noSunlight;
+import com.cricketcraft.chisel.client.render.RenderStandardBlockNoSunlight;
 import com.cricketcraft.chisel.client.render.BlockRoadLineRenderer;
 import com.cricketcraft.chisel.client.render.BlockSnakeStoneRenderer;
 import com.cricketcraft.chisel.client.render.BlockTexturedOreRenderer;
@@ -47,7 +47,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new BlockMarblePaneRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockRoadLineRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockSnakeStoneRenderer());
-		RenderingRegistry.registerBlockHandler(new renderStandardBlock_noSunlight());
+		RenderingRegistry.registerBlockHandler(new RenderStandardBlockNoSunlight());
 		RenderingRegistry.registerBlockHandler(new BlockMarblePillarRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockEldritchRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockAdvancedMarbleRenderer());
