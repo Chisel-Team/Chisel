@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.Action;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -41,10 +40,11 @@ public final class ChiselController {
 		ItemStack held = event.entityPlayer.getCurrentEquippedItem();
 		int slot = event.entityPlayer.inventory.currentItem;
 
-		// TODO config for diamond only
 		if (held == null || !(held.getItem() instanceof IChiselItem)) {
 			return;
 		}
+		
+		IChiselItem chisel = (IChiselItem) held.getItem();
 
 		switch (event.action) {
 		case LEFT_CLICK_BLOCK:
@@ -55,7 +55,7 @@ public final class ChiselController {
 			int metadata = event.world.getBlockMetadata(x, y, z);
 			CarvingVariation[] variations = Carving.chisel.getVariations(block, metadata);
 
-			if (variations != null) {
+			if (variations != null && chisel.canChiselBlock(event.world, x, y, z, block, metadata)) {
 				ItemStack target = General.getChiselTarget(held);
 
 				if (target != null) {
@@ -83,9 +83,6 @@ public final class ChiselController {
 		case RIGHT_CLICK_BLOCK:
 			event.entityPlayer.openGui(Chisel.instance, 0, event.world, 0, 0, 0);
 			break;
-		}
-		if (event.action == Action.LEFT_CLICK_BLOCK) {
-
 		}
 	}
 
