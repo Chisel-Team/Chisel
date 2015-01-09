@@ -1,17 +1,5 @@
 package com.cricketcraft.chisel;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
-
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
@@ -32,7 +20,6 @@ import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
 import com.cricketcraft.chisel.proxy.CommonProxy;
 import com.cricketcraft.chisel.utils.General;
 import com.cricketcraft.chisel.world.GeneratorChisel;
-
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -40,12 +27,8 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLInterModComms;
-import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -53,6 +36,17 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory", dependencies = "after:ForgeMultipart;after:Thaumcraft")
 public class Chisel {
@@ -137,6 +131,8 @@ public class Chisel {
 		Configurations.config.load();
 		Configurations.refreshConfig();
 
+        System.out.println("[Chisel-2] Hey Jared, I wasn't lying");
+
 		ChiselTabs.preInit();
 		Features.preInit();
 		PacketHandler.init();
@@ -149,42 +145,42 @@ public class Chisel {
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new IGuiHandler() {
 
-			@Override
-			public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-				switch (ID) {
-				case 0:
-					return new ContainerChisel(player.inventory, new InventoryChiselSelection(null));
-				case 1:
-					TileEntity tileentity = world.getTileEntity(x, y, z);
-					if (tileentity instanceof TileEntityAutoChisel)
-						return new ContainerAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
-				case 2:
-					TileEntity tileEntity = world.getTileEntity(x, y, z);
-					if (tileEntity instanceof TileEntityPresent)
-						return new ContainerPresent(player.inventory, (TileEntityPresent) tileEntity);
-				default:
-					return null;
-				}
-			}
+            @Override
+            public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+                switch (ID) {
+                    case 0:
+                        return new ContainerChisel(player.inventory, new InventoryChiselSelection(null));
+                    case 1:
+                        TileEntity tileentity = world.getTileEntity(x, y, z);
+                        if (tileentity instanceof TileEntityAutoChisel)
+                            return new ContainerAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
+                    case 2:
+                        TileEntity tileEntity = world.getTileEntity(x, y, z);
+                        if (tileEntity instanceof TileEntityPresent)
+                            return new ContainerPresent(player.inventory, (TileEntityPresent) tileEntity);
+                    default:
+                        return null;
+                }
+            }
 
-			@Override
-			public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-				switch (ID) {
-				case 0:
-					return new GuiChisel(player.inventory, new InventoryChiselSelection(null));
-				case 1:
-					TileEntity tileentity = world.getTileEntity(x, y, z);
-					if (tileentity instanceof TileEntityAutoChisel)
-						return new GuiAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
-				case 2:
-					TileEntity tileEntity = world.getTileEntity(x, y, z);
-					if (tileEntity instanceof TileEntityPresent)
-						return new GuiPresent(player.inventory, (TileEntityPresent) tileEntity);
-				default:
-					return null;
-				}
-			}
-		});
+            @Override
+            public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+                switch (ID) {
+                    case 0:
+                        return new GuiChisel(player.inventory, new InventoryChiselSelection(null));
+                    case 1:
+                        TileEntity tileentity = world.getTileEntity(x, y, z);
+                        if (tileentity instanceof TileEntityAutoChisel)
+                            return new GuiAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
+                    case 2:
+                        TileEntity tileEntity = world.getTileEntity(x, y, z);
+                        if (tileEntity instanceof TileEntityPresent)
+                            return new GuiPresent(player.inventory, (TileEntityPresent) tileEntity);
+                    default:
+                        return null;
+                }
+            }
+        });
 
 		registerWorldgen(Features.MARBLE, ChiselBlocks.marble, Configurations.marbleAmount);
 		registerWorldgen(Features.LIMESTONE, ChiselBlocks.limestone, Configurations.limestoneAmount);
