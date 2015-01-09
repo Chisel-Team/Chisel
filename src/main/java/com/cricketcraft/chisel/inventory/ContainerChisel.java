@@ -143,14 +143,8 @@ public class ContainerChisel extends Container {
 		if (finished)
 			return;
 
-		if (chisel.stackTagCompound == null)
-			chisel.stackTagCompound = new NBTTagCompound();
-
-		NBTTagCompound tag = new NBTTagCompound();
-		if (inventory.getStackInSpecialSlot() != null)
-			inventory.getStackInSpecialSlot().writeToNBT(tag);
-
-		chisel.stackTagCompound.setTag("chiselTarget", tag);
+		General.setChiselTarget(chisel, inventory.getStackInSpecialSlot());
+		
 		playerInventory.mainInventory[currentIndex] = chisel;
 	}
 }
