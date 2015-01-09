@@ -133,6 +133,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 							inventory[BASE] = null; // clear out 0 size itemstacks
 						}
 
+						// TODO here we need to send a packet to the client so that the animation and sound can be played
 						((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], inventory[TARGET]);
 
 						// we changed something, so we need to tell the chunk to save

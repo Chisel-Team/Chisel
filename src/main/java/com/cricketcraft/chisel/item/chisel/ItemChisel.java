@@ -59,7 +59,7 @@ public class ItemChisel extends Item implements IChiselItem {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean held) {
-		String unloc = "item.chisel.chisel.desc.";
+		String unloc = "item.chisel.chisel.desc."; // TODO this is hacky
 		for (int i = 0; i < 3; i ++) {
 			list.add(StatCollector.translateToLocal(unloc + i));
 		}
