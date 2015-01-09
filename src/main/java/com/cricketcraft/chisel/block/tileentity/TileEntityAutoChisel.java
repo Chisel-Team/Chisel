@@ -36,7 +36,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	}
 
 	public static final int BASE = 0, TARGET = 1, OUTPUT = 2, CHISEL = 3, MIN_UPGRADE = 4;
-	
+
 	private static EntityItem ghostItem;
 	boolean equal = false;
 	private ItemStack[] inventory = new ItemStack[7];
@@ -245,7 +245,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		return new int[6];
+		return new int[] { BASE, OUTPUT };
 	}
 
 	@Override
@@ -253,14 +253,14 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		if (itemStack == null) {
 			return false;
 		}
-		
-		switch(slot) {
-		case BASE: 
+
+		switch (slot) {
+		case BASE:
 		case TARGET:
 			return !Carving.chisel.getItems(itemStack).isEmpty();
 		case OUTPUT:
 			return false;
-		case CHISEL: 
+		case CHISEL:
 			return itemStack.getItem() instanceof IChiselItem;
 		default:
 			return itemStack.getItem() == ChiselItems.upgrade && Upgrade.values()[slot - MIN_UPGRADE].ordinal() == itemStack.getItemDamage();
@@ -269,22 +269,12 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
-		if (hasUpgrade(Upgrade.AUTOMATION)) {
-			if (slot == BASE) {
-				return true;
-			}
-		}
-		return false;
+		return hasUpgrade(Upgrade.AUTOMATION) && slot == BASE;
 	}
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemStack, int side) {
-		if (hasUpgrade(Upgrade.AUTOMATION)) {
-			if (slot == OUTPUT) {
-				return true;
-			}
-		}
-		return false;
+		return hasUpgrade(Upgrade.AUTOMATION) && slot == OUTPUT;
 	}
 
 	@Override
