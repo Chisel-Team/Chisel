@@ -74,12 +74,8 @@ public class ContainerAutoChisel extends Container {
 
 			// if we are in the auto chisel
 			if (slotNumber <= 5) {
-				// merge hotbar
 				if (!this.mergeItemStack(itemStack1, 33, 42, false)) {
-					// merge rest of inventory
-					if (!this.mergeItemStack(itemStack1, 6, 33, false)) {
-						return null;
-					}
+					return null;
 				}
 			} else {
 				// if this is an upgrade, check the upgrade slots
