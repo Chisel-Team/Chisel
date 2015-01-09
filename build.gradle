@@ -86,3 +86,36 @@ artifacts {
     archives deobfJar
     archives sourcesJar
 }
+
+println(getChangelogText())
+String getChangelogText() {
+    def changelogFile = new File('changelog')
+    String str = ''
+    int lineCount = 0
+    boolean done = false
+    changelogFile.eachLine {
+        if (done || it == null) {
+            return
+        }
+        if (it.size() > 1) {
+            str += "$it" + (lineCount == 0 ? '\n\n' : '\n')
+            return
+        } else {
+            done = true
+        }
+    }
+    return str
+}
+
+curse {
+    dependsOn 'reobf'
+    
+    onlyIf {
+        return project.hasProperty('curseforge_key') && System.getenv("CURSE") != null && System.getenv("CURSE").equalsIgnoreCase("true")
+    }
+
+    if (project.hasProperty('curseforge_key')) apiKey = project.curseforge_key
+    projectId = project.curse_projectId
+    changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
+    releaseType = project.hasProperty('mod_appendix') ? "${mod_appendix}".toString() : 'release'
+}
