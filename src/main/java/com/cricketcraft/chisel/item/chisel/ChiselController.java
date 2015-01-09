@@ -14,11 +14,11 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.PacketHandler;
-import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.carving.CarvingVariation;
 import com.cricketcraft.chisel.client.GeneralChiselClient;
+import com.cricketcraft.chisel.utils.General;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -56,7 +56,7 @@ public final class ChiselController {
 			CarvingVariation[] variations = Carving.chisel.getVariations(block, metadata);
 
 			if (variations != null) {
-				ItemStack target = ((IChiselItem) held.getItem()).getTarget(held);
+				ItemStack target = General.getChiselTarget(held);
 
 				if (target != null) {
 					for (CarvingVariation v : variations) {

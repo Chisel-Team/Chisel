@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
@@ -89,6 +90,26 @@ public class General {
 		Vec3 var23 = var13.addVector(var18 * var21, var17 * var21, var20 * var21);
 		return par1World.rayTraceBlocks(var13, var23, par3);
 	}
-	
-	public static final String[] sGNames = new String[] { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Lime", "Pink", "Gray", "Light Gray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
+
+	public static ItemStack getChiselTarget(ItemStack chisel) {
+		return chisel.hasTagCompound() ? ItemStack.loadItemStackFromNBT(chisel.stackTagCompound.getCompoundTag("chiselTarget")) : null;
+	}
+
+	public static final String[] sGNames = new String[] { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Lime", "Pink", "Gray", "Light Gray", "Cyan", "Purple", "Blue", "Brown", "Green",
+			"Red", "Black" };
+
+	public static void setChiselTarget(ItemStack chisel, ItemStack target) {
+		initTag(chisel);
+		NBTTagCompound targetTag = new NBTTagCompound();
+		if (target != null) {
+			target.writeToNBT(targetTag);
+		}
+		chisel.getTagCompound().setTag("chiselTarget", targetTag);
+	}
+
+	private static void initTag(ItemStack stack) {
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+		}
+	}
 }

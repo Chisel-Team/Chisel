@@ -59,7 +59,15 @@ public class ItemChisel extends Item implements IChiselItem {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean held) {
-		list.add(StatCollector.translateToLocal(getUnlocalizedName(stack) + ".desc"));
+		String unloc = "item.chisel.chisel.desc.";
+		for (int i = 0; i < 3; i ++) {
+			list.add(StatCollector.translateToLocal(unloc + i));
+		}
+		
+		if (type == ChiselType.DIAMOND) {
+			list.add("");
+			list.add(StatCollector.translateToLocal(getUnlocalizedName(stack) + ".desc"));
+		}
 	}
 
 	@Override
@@ -88,10 +96,4 @@ public class ItemChisel extends Item implements IChiselItem {
 			}
 		}
 	}
-
-	@Override
-	public ItemStack getTarget(ItemStack chisel) {
-		return chisel.hasTagCompound() ? ItemStack.loadItemStackFromNBT(chisel.stackTagCompound.getCompoundTag("chiselTarget")) : null;
-	}
-
 }

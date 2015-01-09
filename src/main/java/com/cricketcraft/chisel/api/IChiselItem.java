@@ -18,12 +18,4 @@ public interface IChiselItem extends IChiselMode {
 	 */
 	void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target);
 
-	/**
-	 * Gets the current target of this chisel.
-	 * 
-	 * @param chisel
-	 * @return The ItemStack this chisel is targeting. {@code null} if nothing is targeted.
-	 */
-	ItemStack getTarget(ItemStack chisel);
-
 }
