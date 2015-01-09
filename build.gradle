@@ -31,6 +31,13 @@ minecraft {
     replace "@MOD_VERSION@", project.version
 }
 
+curse {
+    projectId = '225236'
+    apiKey = project.curseForgeApiKey
+    changelog = ''
+    releaseType = 'release'
+}
+
 repositories {
 	maven {
 		name 'Chicken Bones Repo'
