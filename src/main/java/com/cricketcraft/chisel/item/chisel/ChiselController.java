@@ -1,6 +1,9 @@
 package com.cricketcraft.chisel.item.chisel;
 
 import io.netty.buffer.ByteBuf;
+
+import java.util.Arrays;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -43,7 +46,7 @@ public final class ChiselController {
 		if (held == null || !(held.getItem() instanceof IChiselItem)) {
 			return;
 		}
-		
+
 		IChiselItem chisel = (IChiselItem) held.getItem();
 
 		switch (event.action) {
@@ -81,7 +84,9 @@ public final class ChiselController {
 			break;
 		case RIGHT_CLICK_AIR:
 		case RIGHT_CLICK_BLOCK:
-			event.entityPlayer.openGui(Chisel.instance, 0, event.world, 0, 0, 0);
+			if (!event.world.isRemote) {
+				event.entityPlayer.openGui(Chisel.instance, 0, event.world, 0, 0, 0);
+			}
 			break;
 		}
 	}
