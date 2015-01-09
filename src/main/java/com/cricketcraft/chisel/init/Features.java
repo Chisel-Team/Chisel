@@ -23,6 +23,8 @@ import com.cricketcraft.chisel.block.BlockCarvablePane;
 import com.cricketcraft.chisel.block.BlockCarvablePowered;
 import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
 import com.cricketcraft.chisel.block.BlockCarvableSand;
+import com.cricketcraft.chisel.block.BlockCarvableSlab;
+import com.cricketcraft.chisel.block.BlockCarvableStairs;
 import com.cricketcraft.chisel.block.BlockCloud;
 import com.cricketcraft.chisel.block.BlockConcrete;
 import com.cricketcraft.chisel.block.BlockEldritch;
@@ -38,8 +40,6 @@ import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
 import com.cricketcraft.chisel.block.BlockMarblePackedIce;
 import com.cricketcraft.chisel.block.BlockMarblePackedIceStairs;
 import com.cricketcraft.chisel.block.BlockMarblePillar;
-import com.cricketcraft.chisel.block.BlockCarvableSlab;
-import com.cricketcraft.chisel.block.BlockCarvableStairs;
 import com.cricketcraft.chisel.block.BlockMarbleStairsMaker;
 import com.cricketcraft.chisel.block.BlockMarbleStairsMakerCreator;
 import com.cricketcraft.chisel.block.BlockMarbleTexturedOre;
@@ -69,6 +69,7 @@ import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.*;
 
@@ -665,7 +666,7 @@ public enum Features {
 		// TODO Overlay is WIP
 		@Override
 		void addBlocks() {
-			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
+			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock/*, "futura/screenOverlay-ctm"*/).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
 			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.0.desc"), 0, "futura/screenMetallicWIP");
 			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.1.desc"), 1, "futura/screenCyanWIP");
 			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 2, "futura/controllerWIP");

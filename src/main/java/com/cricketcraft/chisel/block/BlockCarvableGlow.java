@@ -1,9 +1,11 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.Chisel;
-
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+
+import com.cricketcraft.chisel.Chisel;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -16,6 +18,11 @@ public class BlockCarvableGlow extends BlockCarvable {
 
 	public BlockCarvableGlow(String glowTexture) {
 		super();
+		this.glowTexturePath = glowTexture;
+	}
+
+	public BlockCarvableGlow(Material mat, String glowTexture) {
+		super(mat);
 		this.glowTexturePath = glowTexture;
 	}
 
