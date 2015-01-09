@@ -131,7 +131,7 @@ public class Chisel {
 		Configurations.config.load();
 		Configurations.refreshConfig();
 
-        System.out.println("[Chisel-2] Hey Jared, I wasn't lying");
+		System.out.println("[Chisel-2] Hey Jared, I wasn't lying");
 
 		ChiselTabs.preInit();
 		Features.preInit();
@@ -145,42 +145,42 @@ public class Chisel {
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new IGuiHandler() {
 
-            @Override
-            public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-                switch (ID) {
-                    case 0:
-                        return new ContainerChisel(player.inventory, new InventoryChiselSelection(null));
-                    case 1:
-                        TileEntity tileentity = world.getTileEntity(x, y, z);
-                        if (tileentity instanceof TileEntityAutoChisel)
-                            return new ContainerAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
-                    case 2:
-                        TileEntity tileEntity = world.getTileEntity(x, y, z);
-                        if (tileEntity instanceof TileEntityPresent)
-                            return new ContainerPresent(player.inventory, (TileEntityPresent) tileEntity);
-                    default:
-                        return null;
-                }
-            }
+			@Override
+			public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+				switch (ID) {
+				case 0:
+					return new ContainerChisel(player.inventory, new InventoryChiselSelection(null));
+				case 1:
+					TileEntity tileentity = world.getTileEntity(x, y, z);
+					if (tileentity instanceof TileEntityAutoChisel)
+						return new ContainerAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
+				case 2:
+					TileEntity tileEntity = world.getTileEntity(x, y, z);
+					if (tileEntity instanceof TileEntityPresent)
+						return new ContainerPresent(player.inventory, (TileEntityPresent) tileEntity);
+				default:
+					return null;
+				}
+			}
 
-            @Override
-            public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-                switch (ID) {
-                    case 0:
-                        return new GuiChisel(player.inventory, new InventoryChiselSelection(null));
-                    case 1:
-                        TileEntity tileentity = world.getTileEntity(x, y, z);
-                        if (tileentity instanceof TileEntityAutoChisel)
-                            return new GuiAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
-                    case 2:
-                        TileEntity tileEntity = world.getTileEntity(x, y, z);
-                        if (tileEntity instanceof TileEntityPresent)
-                            return new GuiPresent(player.inventory, (TileEntityPresent) tileEntity);
-                    default:
-                        return null;
-                }
-            }
-        });
+			@Override
+			public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+				switch (ID) {
+				case 0:
+					return new GuiChisel(player.inventory, new InventoryChiselSelection(null));
+				case 1:
+					TileEntity tileentity = world.getTileEntity(x, y, z);
+					if (tileentity instanceof TileEntityAutoChisel)
+						return new GuiAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
+				case 2:
+					TileEntity tileEntity = world.getTileEntity(x, y, z);
+					if (tileEntity instanceof TileEntityPresent)
+						return new GuiPresent(player.inventory, (TileEntityPresent) tileEntity);
+				default:
+					return null;
+				}
+			}
+		});
 
 		registerWorldgen(Features.MARBLE, ChiselBlocks.marble, Configurations.marbleAmount);
 		registerWorldgen(Features.LIMESTONE, ChiselBlocks.limestone, Configurations.limestoneAmount);
