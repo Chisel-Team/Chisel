@@ -325,11 +325,11 @@ public enum Features {
 		@Override
 		void addRecipes() {
 			if (Configurations.chiselRecipe) {
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.chisel, 1), " YY", " YY", "X  ", 'X', Items.stick, 'Y', Items.iron_ingot));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.chisel, 1, 1), " YY", " YY", "x  ", 'x', "stickWood", 'Y', "ingotIron"));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.chisel), " YY", " YY", "X  ", 'X', "stickWood", 'Y', "ingotIron"));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.diamondChisel), " YY", " YY", "x  ", 'x', "stickWood", 'Y', "gemDiamond"));
 			} else {
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.chisel, 1), " Y", "X ", 'X', Items.stick, 'Y', Items.iron_ingot));
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.chisel, 1, 1), "  y", "x  ", 'x', "stickWood", 'y', "ingotIron"));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.chisel), " Y", "X ", 'X', "stickWood", 'Y', "ingotIron"));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.diamondChisel), " Y", "X ", 'X', "stickWood", 'Y', "gemDiamond"));
 			}
 		}
 	},
