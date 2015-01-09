@@ -77,7 +77,7 @@ public class Configurations {
 		allowChiselDamage = config.get(category, "allowChiselDamage", true, "Should the chisel be damageable and take damage when it chisels something.").getBoolean();
 		ironChiselMaxDamage = config.get(category, "ironChiselMaxDamage", 500, "The max damage of the standard iron chisel. Default: 500.").getInt();
 		diamondChiselMaxDamage = config.get(category, "diamondChiselMaxDamage", 5000, "The max damage of the diamond chisel. Default: 5000").getInt();
-		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", false, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
+		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
 		
 		if (config.hasChanged()) {
 			config.save();
