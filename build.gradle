@@ -12,6 +12,7 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 
 }
@@ -19,9 +20,20 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'maven'
 apply plugin: 'curseforge'
-version = "2.2.2"
+
+import org.ajoberstar.grgit.Grgit
+
+def repo = Grgit.open(project.file('.'))
+project.ext.gitHash = repo.log().find().abbreviatedId
+
+ext.buildnumber = 0
+project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
+
+version = "${mod_version}.${buildnumber}"
 group = "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Chisel 2"
+archivesBaseName = "Chisel2"
+
+println("${version}")
 
 minecraft {
     version = "1.7.10-10.13.2.1277"
@@ -88,7 +100,6 @@ artifacts {
     archives sourcesJar
 }
 
-println(getChangelogText())
 String getChangelogText() {
     def changelogFile = new File('changelog')
     String str = ''
@@ -112,11 +123,12 @@ curse {
     dependsOn 'reobf'
 
     onlyIf {
-        return project.hasProperty('curseforge_key') && System.getenv("CURSE") != null && System.getenv("CURSE").equalsIgnoreCase("true")
+        return project.hasProperty('chisel_curseforge_key') && System.getenv("CURSE") != null && System.getenv("CURSE").equalsIgnoreCase("true")
     }
 
-    if (project.hasProperty('curseforge_key')) apiKey = project.curseforge_key
-    projectId = '225236'
+    if (project.hasProperty('chisel_curseforge_key')) apiKey = project.chisel_curseforge_key
+    projectId = project.projectId
     changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
-    releaseType = project.hasProperty('mod_appendix') ? "${mod_appendix}".toString() : 'release'
+    releaseType = 'release'
+    additionalArtifact deobfJar, sourcesJar
 }
