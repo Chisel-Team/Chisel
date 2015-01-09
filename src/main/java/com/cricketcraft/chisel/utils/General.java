@@ -89,6 +89,6 @@ public class General {
 		Vec3 var23 = var13.addVector(var18 * var21, var17 * var21, var20 * var21);
 		return par1World.rayTraceBlocks(var13, var23, par3);
 	}
-
+	
 	public static final String[] sGNames = new String[] { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Lime", "Pink", "Gray", "Light Gray", "Cyan", "Purple", "Blue", "Brown", "Green", "Red", "Black" };
 }

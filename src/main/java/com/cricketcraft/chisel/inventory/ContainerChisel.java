@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.item.ItemChisel;
+import com.cricketcraft.chisel.item.chisel.ItemChisel;
 import com.cricketcraft.chisel.utils.General;
 
 public class ContainerChisel extends Container {

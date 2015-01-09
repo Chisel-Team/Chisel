@@ -7,23 +7,18 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
-import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel.Upgrade;
-import com.cricketcraft.chisel.init.ChiselItems;
 
 public class ContainerAutoChisel extends Container {
 
-	public static class SlotUpgrade extends Slot {
+	public static class SlotAutoChisel extends Slot {
 
-		public Upgrade upgradeType;
-
-		public SlotUpgrade(TileEntityAutoChisel inv, int id, int x, int y, Upgrade upgrade) {
+		public SlotAutoChisel(TileEntityAutoChisel inv, int id, int x, int y) {
 			super(inv, id, x, y);
-			this.upgradeType = upgrade;
 		}
 
 		@Override
 		public boolean isItemValid(ItemStack stack) {
-			return stack.getItem() == ChiselItems.upgrade && stack.getItemDamage() == upgradeType.ordinal();
+			return inventory.isItemValidForSlot(slotNumber, stack);
 		}
 	}
 
@@ -35,12 +30,13 @@ public class ContainerAutoChisel extends Container {
 		ContainerAutoChisel.player = player.player;
 		autoChisel = tileEntityAutoChisel;
 
-		addSlotToContainer(new Slot(tileEntityAutoChisel, 0, 53, 15));
-		addSlotToContainer(new Slot(tileEntityAutoChisel, 1, 78, 51));
-		addSlotToContainer(new Slot(tileEntityAutoChisel, 2, 103, 15));
-		addSlotToContainer(new SlotUpgrade(tileEntityAutoChisel, 3, 151, 11, Upgrade.SPEED));
-		addSlotToContainer(new SlotUpgrade(tileEntityAutoChisel, 4, 151, 31, Upgrade.AUTOMATION));
-		addSlotToContainer(new SlotUpgrade(tileEntityAutoChisel, 5, 151, 51, Upgrade.STACK));
+		addSlotToContainer(new SlotAutoChisel(tileEntityAutoChisel, 0, 53, 15));
+		addSlotToContainer(new SlotAutoChisel(tileEntityAutoChisel, 1, 78, 51));
+		addSlotToContainer(new SlotAutoChisel(tileEntityAutoChisel, 2, 103, 15));
+		addSlotToContainer(new SlotAutoChisel(tileEntityAutoChisel, 3, 8, 62));
+		addSlotToContainer(new SlotAutoChisel(tileEntityAutoChisel, 4, 151, 11));
+		addSlotToContainer(new SlotAutoChisel(tileEntityAutoChisel, 5, 151, 31));
+		addSlotToContainer(new SlotAutoChisel(tileEntityAutoChisel, 6, 151, 51));
 
 		bindPlayerInventory(player);
 	}
@@ -73,22 +69,13 @@ public class ContainerAutoChisel extends Container {
 			itemStack = itemStack1.copy();
 
 			// if we are in the auto chisel
-			if (slotNumber <= 5) {
+			if (slotNumber <= 6) {
 				if (!this.mergeItemStack(itemStack1, 33, 42, false)) {
 					return null;
 				}
-			} else {
-				// if this is an upgrade, check the upgrade slots
-				if (itemStack1.getItem() == ChiselItems.upgrade) {
-					if (!this.mergeItemStack(itemStack1, 3, 6, false)) {
-						return null;
-					}
-				} else {
-					// otherwise just put it in one of the 3 other slots
-					if (!this.mergeItemStack(itemStack1, 0, 3, false)) {
-						return null;
-					}
-				}
+				// otherwise just put it in one of the machine slots
+			} else if (!this.mergeItemStack(itemStack1, 0, 7, false)) {
+				return null;
 			}
 
 			if (itemStack1.stackSize == 0) {

@@ -13,15 +13,19 @@ import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.inventory.ContainerAutoChisel;
-import com.cricketcraft.chisel.inventory.ContainerAutoChisel.SlotUpgrade;
+import com.cricketcraft.chisel.inventory.ContainerAutoChisel.SlotAutoChisel;
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 public class GuiAutoChisel extends GuiContainer {
 
 	private static final ResourceLocation gui = new ResourceLocation("chisel:textures/autochisel-gui.png");
 
+	private TileEntityAutoChisel autochisel;
+
 	public GuiAutoChisel(InventoryPlayer inventoryPlayer, TileEntityAutoChisel tileEntityAutoChisel) {
 		super(new ContainerAutoChisel(inventoryPlayer, tileEntityAutoChisel));
+		autochisel = tileEntityAutoChisel;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -34,16 +38,17 @@ public class GuiAutoChisel extends GuiContainer {
 
 		for (Slot slot : (List<Slot>) inventorySlots.inventorySlots) {
 			if (mouseInside(slot, mouseX - x, mouseY - y)) {
-				if (slot instanceof SlotUpgrade) {
-					this.func_146283_a(Lists.newArrayList(((SlotUpgrade) slot).upgradeType.getLocalizedName()), mouseX - x, mouseY - y);
-				} else if (slot.slotNumber == 1) {
-					this.func_146283_a(Lists.newArrayList(StatCollector.translateToLocal("autochisel.slot.target.tooltip")), mouseX - x, mouseY - y);
+				if (slot instanceof SlotAutoChisel) {
+					String tt = autochisel.getSlotTooltipUnloc(slot.slotNumber);
+					if (!Strings.isNullOrEmpty(tt)) {
+						this.func_146283_a(Lists.newArrayList(StatCollector.translateToLocal(tt)), mouseX - x, mouseY - y);
+					}
 				}
 			}
 		}
 		RenderHelper.enableGUIStandardItemLighting();
 	}
-	
+
 	private boolean mouseInside(Slot slot, int x, int y) {
 		return x >= slot.xDisplayPosition && x <= slot.xDisplayPosition + 16 && y >= slot.yDisplayPosition && y <= slot.yDisplayPosition + 16;
 	}
