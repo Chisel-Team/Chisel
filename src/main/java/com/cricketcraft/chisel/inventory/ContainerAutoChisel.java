@@ -61,8 +61,6 @@ public class ContainerAutoChisel extends Container {
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber) {
 		ItemStack itemStack = null;
 		Slot slot = (Slot) this.inventorySlots.get(slotNumber);
-		System.out.println("World.isRemote: " + player.worldObj.isRemote);
-		System.out.println("Shift Clicked Slot:" + slotNumber);
 
 		if (slot != null && slot.getHasStack()) {
 			ItemStack itemStack1 = slot.getStack();
