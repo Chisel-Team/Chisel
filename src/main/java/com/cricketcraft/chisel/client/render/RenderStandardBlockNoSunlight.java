@@ -12,11 +12,11 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class renderStandardBlock_noSunlight implements ISimpleBlockRenderingHandler {
+public class RenderStandardBlockNoSunlight implements ISimpleBlockRenderingHandler {
 
 	static int id;
 
-	public renderStandardBlock_noSunlight() {
+	public RenderStandardBlockNoSunlight() {
 		id = RenderingRegistry.getNextAvailableRenderId();
 	}
 
