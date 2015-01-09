@@ -195,9 +195,26 @@ public class CTM {
 		int x2 = x + dir.offsetX;
 		int y2 = y + dir.offsetY;
 		int z2 = z + dir.offsetZ;
-
-		return getBlockOrFacade(world, x, y, z, side).equals(block) && getBlockOrFacadeMetadata(world, x, y, z, side) == meta
-				&& !(getBlockOrFacade(world, x2, y2, z2, side).equals(block) && getBlockOrFacadeMetadata(world, x2, y2, z2, side) == meta);
+		
+		Block con = getBlockOrFacade(world, x, y, z, side);
+		Block obscuring = getBlockOrFacade(world, x2, y2, z2, side);
+		
+		// no block or a bad API user
+		if (con == null) {
+			return false;
+		}
+		
+		boolean ret = con.equals(block) && getBlockOrFacadeMetadata(world, x, y, z, side) == meta;
+		
+		// no block obscuring this face
+		if (obscuring == null) {
+			return true;
+		}
+		
+		// check that we aren't already connected outwards from this side
+		ret &= !(obscuring.equals(block) && getBlockOrFacadeMetadata(world, x2, y2, z2, side) == meta);
+		
+		return ret;
 	}
 
 	public static int getBlockOrFacadeMetadata(IBlockAccess world, int x, int y, int z, int side) {
