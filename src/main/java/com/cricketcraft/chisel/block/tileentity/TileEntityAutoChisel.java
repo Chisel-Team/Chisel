@@ -39,6 +39,8 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	boolean equal = false;
 	private ItemStack[] inventory = new ItemStack[6];
 	private String name = "autoChisel";
+	
+	public float xRot, yRot, zRot; // used for floating target client only
 
 	@Override
 	public boolean canUpdate() {
