@@ -51,6 +51,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory", dependencies = "after:ForgeMultipart;after:Thaumcraft")
 public class Chisel {
 
@@ -67,6 +70,8 @@ public class Chisel {
 	public static int renderCarpetId;
 	public static int renderAutoChiselId;
 	public static int renderGlowId;
+	
+	public static final Logger logger = LogManager.getLogger(MOD_ID);
 
 	@Instance(MOD_ID)
 	public static Chisel instance;
