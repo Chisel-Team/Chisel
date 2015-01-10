@@ -52,12 +52,13 @@ public class ChiselTabs {
 		tabOtherChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.jackolantern[0]));
 
 		if (atLeastOneModIsLoaded) {
-			//This seems to be crashing due to Arcane blocks still being null when the tab is added
-			//if (Features.ARCANE.enabled()) {
-			//	tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.arcane, 1, 1));
-			//} else {
+			if (Features.ARCANE.enabled()) {
+				tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.arcane));
+			} else if (Features.BLOOD_RUNE.enabled()) {
+				tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.bloodRune));
+			} else {
 				tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.voidstone));
-			//}
+			}
 		}
 	}
 }
