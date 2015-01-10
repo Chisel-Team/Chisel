@@ -823,12 +823,12 @@ tile.obsidian.14.desc=Light Obsidian Blocks with Greek Decor
 tile.obsidian.15.desc=Small Obsidian Blocks inside an Oak Wood Crate
 
 #Wood
-tile.oak_planks.name=Oak Wood
-tile.birch_planks.name=Birch Wood
-tile.spruce_planks.name=Spruce Wood
-tile.jungle_planks.name=Jungle Wood
-tile.dark_oak_planks.name=Dark Oak Wood
-tile.acacia_planks.name=Acacia Wood
+tile.oak_planks.name=Oak Wood Planks
+tile.birch_planks.name=Birch Wood Planks
+tile.spruce_planks.name=Spruce Wood Planks
+tile.jungle_planks.name=Jungle Wood Planks
+tile.dark_oak_planks.name=Dark Oak Wood Planks
+tile.acacia_planks.name=Acacia Wood Planks
 
 #Remember to do the descriptions.
 
