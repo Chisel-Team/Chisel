@@ -2417,7 +2417,7 @@ public enum Features {
 	}
 
 	public final boolean enabled() {
-		return Configurations.featureEnabled(this) && (requiredMod == null || Loader.isModLoaded("requiredMod")) && (parent == null || parent.enabled());
+		return Configurations.featureEnabled(this) && (requiredMod == null || Loader.isModLoaded(requiredMod)) && (parent == null || parent.enabled());
 	}
 
 	private String getRequiredMod() {
