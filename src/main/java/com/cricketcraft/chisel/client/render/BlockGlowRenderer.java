@@ -25,20 +25,21 @@ public class BlockGlowRenderer implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		Drawing.drawBlock(block, metadata, renderer);
 		GeneralClient.setGLColorFromInt(ItemDye.field_150922_c[metadata]);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		Drawing.drawBlock(block, ((BlockCarvableGlow)block).getGlowTexture(), renderer);
-		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glColor3f(1, 1, 1);
+		Drawing.drawBlock(block, metadata, renderer);
+		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		renderer.renderStandardBlock(block, x, y, z);
 		Tessellator.instance.setColorOpaque_I(ItemDye.field_150922_c[world.getBlockMetadata(x, y, z)]);
 		Tessellator.instance.setBrightness(0xF000F0);		
 		Drawing.renderAllFaces(renderer, block, x, y, z, ((BlockCarvableGlow) block).getGlowTexture());
+		renderer.renderStandardBlock(block, x, y, z);
 		return true;
 	}
 	

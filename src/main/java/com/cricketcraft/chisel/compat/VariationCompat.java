@@ -35,9 +35,7 @@ public class VariationCompat {
 		for (int i = 0; i < 16; i++) {
 			blocks.add(Triple.of(block, i, "limestone"));
 		}
-
-		// TODO geostrata
-
+		
 		registerAll(blocks);
 	}
 
