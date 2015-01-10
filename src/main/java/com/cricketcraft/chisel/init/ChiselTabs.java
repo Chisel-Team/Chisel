@@ -47,7 +47,7 @@ public class ChiselTabs {
 
 		tabChisel.setTabIconItemStack(new ItemStack(ChiselItems.chisel));
 		tabStoneChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.holystone));
-		tabWoodChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.bookshelf));
+		tabWoodChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.planks[0], 1, 1));
 		tabMetalChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.technical));
 		tabOtherChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.jackolantern[0]));
 
