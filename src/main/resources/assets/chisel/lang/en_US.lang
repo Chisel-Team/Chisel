@@ -432,10 +432,10 @@ tile.factory.6.desc=Yellow-Black Hazard Block
 tile.factory.7.desc=Orange-White Hazard Block
 tile.factory.8.desc=Fancy Circuit Block
 tile.factory.9.desc=Fancy Metal Box
-tile.factory.10.desc=Fancy Circuit Block with Gold Plating
-tile.factory.11.desc=Rusty Purple Block with Gold Plating
+tile.factory.10.desc=Gold-Plated Fancy Circuit Block
+tile.factory.11.desc=Gold-Plated Rusty Purple Block
 tile.factory.12.desc=Shiny Metal Construction Block
-tile.factory.13.desc=Worn Metal Wall with Openings for Ventilation
+tile.factory.13.desc=Worn Metal Wall with Ventilation Openings
 tile.factory.14.desc=Rusty Metal Plates
 tile.factory.15.desc=Worn Metal Column
 
