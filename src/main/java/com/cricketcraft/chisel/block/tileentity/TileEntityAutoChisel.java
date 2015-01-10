@@ -170,7 +170,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	}
 
 	private boolean hasChisel() {
-		return inventory[CHISEL] != null && inventory[CHISEL].getItem() == ChiselItems.chisel && inventory[CHISEL].stackSize >= 1;
+		return inventory[CHISEL] != null && inventory[CHISEL].getItem() instanceof IChiselItem && inventory[CHISEL].stackSize >= 1;
 	}
 
 	@Override
@@ -280,12 +280,12 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	@Override
 	public void openInventory() {
+		;
 	}
 
 	@Override
 	public void closeInventory() {
-		NBTTagList tags = new NBTTagList();
-		System.out.print(tags);
+		;
 	}
 
 	@SideOnly(Side.CLIENT)
