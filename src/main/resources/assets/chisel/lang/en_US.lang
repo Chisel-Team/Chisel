@@ -70,8 +70,8 @@ tile.voidstone.6.desc=Eye Voidstone
 tile.voidstone.7.desc=Beveled Voidstone
 
 #Void Stone Pillars
-tile.voidstonePillar.name=Void Stone Pillar
-tile.voidstonePillar.0.desc=Striped Void Stone Pillar
+tile.voidstonePillar.name=Voidstone Pillar
+tile.voidstonePillar.0.desc=Striped Voidstone Pillar
 
 #Energised Void Stone Blocks
 tile.voidstone2.name=Energised Voidstone
