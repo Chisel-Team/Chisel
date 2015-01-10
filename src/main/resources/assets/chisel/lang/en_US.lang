@@ -1068,7 +1068,7 @@ tile.fantasyblock.11.desc=Purpled Fantasy Gold Chains Decoration
 tile.fantasyblock.12.desc=Purpled Fantasy Plate Decoration
 tile.fantasyblock.13.desc=Purpled Fantasy Block
 tile.fantasyblock.14.desc=Purpled Fantasy Bricks in disarray
-tile.fantasyblock.15.desc=Purpled Worn Fantasy Bricks
+tile.fantasyblock.15.desc=Purpled Worn Fantasy Bricks in disarray
 
 #Fantasy block 2
 tile.fantasyblock2.name=Fantasy Block
@@ -1087,7 +1087,7 @@ tile.fantasyblock2.11.desc=Fantasy Gold Chains Decoration
 tile.fantasyblock2.12.desc=Fantasy Plate Decoration
 tile.fantasyblock2.13.desc=Fantasy Block
 tile.fantasyblock2.14.desc=Fantasy Bricks in disarray
-tile.fantasyblock2.15.desc=Worn Fantasy Bricks
+tile.fantasyblock2.15.desc=Worn Fantasy Bricks in disarray
 
 #Paperwall
 tile.paperwall.name=Paperwall
