@@ -144,7 +144,7 @@ public enum Features {
 		}
 	},
 
-	AUTO_CHISEL_UPGRADES {
+	AUTO_CHISEL_UPGRADES(AUTO_CHISEL) {
 
 		@Override
 		void addItems() {
@@ -666,7 +666,8 @@ public enum Features {
 		// TODO Overlay is WIP
 		@Override
 		void addBlocks() {
-			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock/*, "futura/screenOverlay-ctm"*/).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
+			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock/* , "futura/screenOverlay-ctm" */).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F)
+					.setResistance(10F);
 			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.0.desc"), 0, "futura/screenMetallicWIP");
 			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.1.desc"), 1, "futura/screenCyanWIP");
 			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 2, "futura/controllerWIP");
