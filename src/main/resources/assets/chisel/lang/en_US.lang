@@ -142,7 +142,7 @@ tile.grimstone.1.desc=Smooth Grimstone
 tile.grimstone.2.desc=Mysterious Grimstone Symbol
 tile.grimstone.3.desc=Chiseled Grimstone
 tile.grimstone.4.desc=Grimstone Blocks
-tile.grimstone.5.desc=Rough Grimstone Bricks
+tile.grimstone.5.desc=Rough Grimstone Blocks
 tile.grimstone.6.desc=Grimstone Bricks
 tile.grimstone.7.desc=Large Grimstone Bricks
 tile.grimstone.8.desc=Grimstone Platform
@@ -150,7 +150,7 @@ tile.grimstone.9.desc=Grimstone Platform Tiles
 tile.grimstone.10.desc=Fancy Grimstone Construction
 tile.grimstone.11.desc=Fancy Grimstone Tiles
 tile.grimstone.12.desc=Smooth Grimstone Plate
-tile.grimstone.13.desc=Grimstone plate
+tile.grimstone.13.desc=Grimstone Plate
 tile.grimstone.14.desc=Flaky Grimstone
 
 #Technical Block
@@ -880,7 +880,7 @@ tile.holystone.1.desc=Smooth Holystone
 tile.holystone.2.desc=Mysterious Holystone Symbol
 tile.holystone.3.desc=Chiseled Holystone
 tile.holystone.4.desc=Holystone Blocks
-tile.holystone.5.desc=Rough Holystone Bricks
+tile.holystone.5.desc=Rough Holystone Blocks
 tile.holystone.6.desc=Holystone Bricks
 tile.holystone.7.desc=Large Holystone Bricks
 tile.holystone.8.desc=Holystone Platform
