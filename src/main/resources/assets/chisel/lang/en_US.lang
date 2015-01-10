@@ -941,13 +941,13 @@ tile.carpet.15.desc=Black Carpet
 
 #Bookshelf
 tile.bookshelf.name=Bookshelf
-tile.bookshelf.1.desc=Bookshelf with rainbow colored books
-tile.bookshelf.2.desc=Necromancer Novice's Bookshelf
+tile.bookshelf.1.desc=Bookshelf with Rainbow Books
+tile.bookshelf.2.desc=Necromancer’s Apprentice Bookshelf
 tile.bookshelf.3.desc=Necromancer's Bookshelf
-tile.bookshelf.4.desc=Bookshelf with red tomes
+tile.bookshelf.4.desc=Bookshelf with Red Tomes
 tile.bookshelf.5.desc=Abandoned Bookshelf
 tile.bookshelf.6.desc=Hoarder's Bookshelf
-tile.bookshelf.7.desc=Bookshelf filled to the brim with boring pastel books
+tile.bookshelf.7.desc=Bookshelf filled to the brim with boring Pastel Books
 tile.bookshelf.8.desc=Historian's Bookshelf
 
 #Tyrian
