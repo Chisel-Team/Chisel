@@ -43,7 +43,9 @@ public class VariationCompat {
 
 	private void registerAll(List<Triple<Block, Integer, String>> blocks) {
 		for (Triple<Block, Integer, String> t : blocks) {
-			Carving.chisel.addVariation(t.getRight(), t.getLeft(), t.getMiddle(), 99);
+			if (t.getRight() != null) {
+				Carving.chisel.addVariation(t.getRight(), t.getLeft(), t.getMiddle(), 99);
+			}
 		}
 	}
 
