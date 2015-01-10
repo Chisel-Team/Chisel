@@ -884,7 +884,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvable hexPlating = (BlockCarvable) new BlockCarvableGlow("hexPlating/hexOverlay").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+			BlockCarvable hexPlating = (BlockCarvable) new BlockCarvableGlow("hexPlating/hexAnim").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
 			for (int i = 0; i < 16; i++) {
 				hexPlating.carverHelper.addVariation(StatCollector.translateToLocal("tile.hexPlating." + ItemDye.field_150921_b[i] + ".desc"), i, "hexPlating/hexBase");
 			}
