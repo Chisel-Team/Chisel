@@ -9,7 +9,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class Compatibility {
 
 	public static void init(FMLPostInitializationEvent event) {
-		new MarbleCompatibility().postInit(event);
+		new VariationCompat().postInit(event);
 
 		addSupport("ProjRed|Exploration", "projectred.exploration.stone", "marble", 0, 99);
 		addSupport("bluepower", "marble", "marble", 0, 99);
