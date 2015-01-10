@@ -70,8 +70,8 @@ tile.voidstone.6.desc=Eye Voidstone
 tile.voidstone.7.desc=Beveled Voidstone
 
 #Void Stone Pillars
-tile.voidstonePillar.name=Void Stone Pillar
-tile.voidstonePillar.0.desc=Striped Void Stone Pillar
+tile.voidstonePillar.name=Voidstone Pillar
+tile.voidstonePillar.0.desc=Striped Voidstone Pillar
 
 #Energised Void Stone Blocks
 tile.voidstone2.name=Energised Voidstone
@@ -142,7 +142,7 @@ tile.grimstone.1.desc=Smooth Grimstone
 tile.grimstone.2.desc=Mysterious Grimstone Symbol
 tile.grimstone.3.desc=Chiseled Grimstone
 tile.grimstone.4.desc=Grimstone Blocks
-tile.grimstone.5.desc=Rough Grimstone Bricks
+tile.grimstone.5.desc=Rough Grimstone Blocks
 tile.grimstone.6.desc=Grimstone Bricks
 tile.grimstone.7.desc=Large Grimstone Bricks
 tile.grimstone.8.desc=Grimstone Platform
@@ -150,7 +150,7 @@ tile.grimstone.9.desc=Grimstone Platform Tiles
 tile.grimstone.10.desc=Fancy Grimstone Construction
 tile.grimstone.11.desc=Fancy Grimstone Tiles
 tile.grimstone.12.desc=Smooth Grimstone Plate
-tile.grimstone.13.desc=Grimstone plate
+tile.grimstone.13.desc=Grimstone Plate
 tile.grimstone.14.desc=Flaky Grimstone
 
 #Technical Block
@@ -363,7 +363,7 @@ tile.limestone.5.desc=Small Limestone Bricks
 tile.limestone.6.desc=Damaged Limestone Tiles
 tile.limestone.7.desc=Smooth Limestone
 tile.limestone.8.desc=Limestone with Ornate Panel
-tile.limestone.9.desc=Limestone with Ornate Panel
+tile.limestone.9.desc=Limestone with Engraved Ornate Panel
 tile.limestone.10.desc=Limestone with Creeper Panel
 tile.limestone.11.desc=Limestone with Dent
 tile.limestone.12.desc=Limestone with Panel
@@ -432,12 +432,12 @@ tile.factory.6.desc=Yellow-Black Hazard Block
 tile.factory.7.desc=Orange-White Hazard Block
 tile.factory.8.desc=Fancy Circuit Block
 tile.factory.9.desc=Fancy Metal Box
-tile.factory.10.desc=Fancy Circuit Block with Gold Plating
-tile.factory.11.desc=Rusty Purple Block with Gold Plating
+tile.factory.10.desc=Gold-Plated Fancy Circuit Block
+tile.factory.11.desc=Gold-Plated Rusty Purple Block
 tile.factory.12.desc=Shiny Metal Construction Block
-tile.factory.13.desc=Weared Metal Wall with Openings for Ventilation
+tile.factory.13.desc=Worn Metal Wall with Ventilation Openings
 tile.factory.14.desc=Rusty Metal Plates
-tile.factory.15.desc=Weared Metal Column
+tile.factory.15.desc=Worn Metal Column
 
 #Diamond blocks
 tile.diamond_block.name=Diamond Block
@@ -447,7 +447,7 @@ tile.diamond.3.desc=Diamond Cells
 tile.diamond.4.desc=Diamonds in Purple Obsidian
 tile.diamond.5.desc=Diamonds in Obsidian
 tile.diamond.6.desc=Simple Diamond Block
-tile.diamond.7.desc=Bismuth
+tile.diamond.7.desc=Bismuth Diamond Block
 tile.diamond.8.desc=Crushed Diamond
 tile.diamond.9.desc=Small Diamond Blocks
 tile.diamond.10.desc=Small Ornate Diamond Blocks
@@ -823,12 +823,12 @@ tile.obsidian.14.desc=Light Obsidian Blocks with Greek Decor
 tile.obsidian.15.desc=Small Obsidian Blocks inside an Oak Wood Crate
 
 #Wood
-tile.oak_planks.name=Oak Wood
-tile.birch_planks.name=Birch Wood
-tile.spruce_planks.name=Spruce Wood
-tile.jungle_planks.name=Jungle Wood
-tile.dark_oak_planks.name=Dark Oak Wood
-tile.acacia_planks.name=Acacia Wood
+tile.oak_planks.name=Oak Wood Planks
+tile.birch_planks.name=Birch Wood Planks
+tile.spruce_planks.name=Spruce Wood Planks
+tile.jungle_planks.name=Jungle Wood Planks
+tile.dark_oak_planks.name=Dark Oak Wood Planks
+tile.acacia_planks.name=Acacia Wood Planks
 
 #Remember to do the descriptions.
 
@@ -880,7 +880,7 @@ tile.holystone.1.desc=Smooth Holystone
 tile.holystone.2.desc=Mysterious Holystone Symbol
 tile.holystone.3.desc=Chiseled Holystone
 tile.holystone.4.desc=Holystone Blocks
-tile.holystone.5.desc=Rough Holystone Bricks
+tile.holystone.5.desc=Rough Holystone Blocks
 tile.holystone.6.desc=Holystone Bricks
 tile.holystone.7.desc=Large Holystone Bricks
 tile.holystone.8.desc=Holystone Platform
@@ -941,13 +941,13 @@ tile.carpet.15.desc=Black Carpet
 
 #Bookshelf
 tile.bookshelf.name=Bookshelf
-tile.bookshelf.1.desc=Bookshelf with rainbow colored books
-tile.bookshelf.2.desc=Necromancer Novice's Bookshelf
+tile.bookshelf.1.desc=Bookshelf with Rainbow Books
+tile.bookshelf.2.desc=Necromancer’s Apprentice Bookshelf
 tile.bookshelf.3.desc=Necromancer's Bookshelf
-tile.bookshelf.4.desc=Bookshelf with red tomes
+tile.bookshelf.4.desc=Bookshelf with Red Tomes
 tile.bookshelf.5.desc=Abandoned Bookshelf
 tile.bookshelf.6.desc=Hoarder's Bookshelf
-tile.bookshelf.7.desc=Bookshelf filled to the brim with boring pastel books
+tile.bookshelf.7.desc=Bookshelf filled to the brim with boring Pastel Books
 tile.bookshelf.8.desc=Historian's Bookshelf
 
 #Tyrian
@@ -966,8 +966,8 @@ tile.tyrian.10.desc=Futuristic Armor Plating Block with dent
 tile.tyrian.11.desc=Blue Futuristic Armor Plating Block
 tile.tyrian.12.desc=Black Futuristic Armor Plating Block
 tile.tyrian.13.desc=Black Futuristic Armor Plating Tiles
-tile.tyrian.14.desc=Black Futuristic Armor Plating Block with an opening
-tile.tyrian.15.desc=Futuristic Armor Plating with Shining Metal Bits
+tile.tyrian.14.desc=Black Futuristic Armor Plating Block with Opening
+tile.tyrian.15.desc=Shiny Futuristic Armor Plating
 
 #Temple
 tile.templeblock.name=Temple Block
@@ -977,7 +977,7 @@ tile.templeblock.2.desc=Temple Plate
 tile.templeblock.3.desc=Cracked Temple Plate
 tile.templeblock.4.desc=Temple Bricks
 tile.templeblock.5.desc=Large Temple Bricks
-tile.templeblock.6.desc=Weared Temple Bricks
+tile.templeblock.6.desc=Worn Temple Bricks
 tile.templeblock.7.desc=Temple Bricks in disarray
 tile.templeblock.8.desc=Temple Column
 tile.templeblock.9.desc=Temple Stand
@@ -996,7 +996,7 @@ tile.mossy_templeblock.2.desc=Mossy Temple Plate
 tile.mossy_templeblock.3.desc=Cracked Mossy Temple Plate
 tile.mossy_templeblock.4.desc=Mossy Temple Bricks
 tile.mossy_templeblock.5.desc=Large Mossy Temple Bricks
-tile.mossy_templeblock.6.desc=Weared Mossy Temple Bricks
+tile.mossy_templeblock.6.desc=Worn Mossy Temple Bricks
 tile.mossy_templeblock.7.desc=Mossy Temple Bricks in disarray
 tile.mossy_templeblock.8.desc=Mossy Temple Column
 tile.mossy_templeblock.9.desc=Mossy Temple Stand
@@ -1068,7 +1068,7 @@ tile.fantasyblock.11.desc=Purpled Fantasy Gold Chains Decoration
 tile.fantasyblock.12.desc=Purpled Fantasy Plate Decoration
 tile.fantasyblock.13.desc=Purpled Fantasy Block
 tile.fantasyblock.14.desc=Purpled Fantasy Bricks in disarray
-tile.fantasyblock.15.desc=Purpled Worn Fantasy Bricks
+tile.fantasyblock.15.desc=Purpled Worn Fantasy Bricks in disarray
 
 #Fantasy block 2
 tile.fantasyblock2.name=Fantasy Block
@@ -1087,7 +1087,7 @@ tile.fantasyblock2.11.desc=Fantasy Gold Chains Decoration
 tile.fantasyblock2.12.desc=Fantasy Plate Decoration
 tile.fantasyblock2.13.desc=Fantasy Block
 tile.fantasyblock2.14.desc=Fantasy Bricks in disarray
-tile.fantasyblock2.15.desc=Worn Fantasy Bricks
+tile.fantasyblock2.15.desc=Worn Fantasy Bricks in disarray
 
 #Paperwall
 tile.paperwall.name=Paperwall
