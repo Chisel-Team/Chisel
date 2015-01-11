@@ -186,8 +186,8 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.autoChisel, 1), new Object[] { "XXX", "XYX", "XXX", Character.valueOf('X'), "plankWood", Character.valueOf('Y'),
-					ChiselItems.chisel }));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.autoChisel, 1), new Object[] { "XXX", " Y ", "YYY", Character.valueOf('X'), Blocks.stone_slab, Character.valueOf('Y'),
+					"ingotIron" }));
 		}
 	},
 
