@@ -72,6 +72,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntitySmashingRock.class, new RenderSnowball(ChiselItems.smashingrock));
 
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.chisel, renderer);
+		MinecraftForgeClient.registerItemRenderer(ChiselItems.diamondChisel, renderer);
 	}
 
 	@Override
