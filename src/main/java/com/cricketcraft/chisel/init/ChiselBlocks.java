@@ -11,6 +11,7 @@ import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
 import com.cricketcraft.chisel.block.BlockCarvableSand;
 import com.cricketcraft.chisel.block.BlockCarvableSlab;
 import com.cricketcraft.chisel.block.BlockCarvableStairs;
+import com.cricketcraft.chisel.block.BlockCarvableTorch;
 import com.cricketcraft.chisel.block.BlockCloud;
 import com.cricketcraft.chisel.block.BlockConcrete;
 import com.cricketcraft.chisel.block.BlockGrimstone;
@@ -111,6 +112,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable arcane = null;
 	public static final BlockCarvable bloodRune = null;
 	public static final BlockCarvableSand colored_sand = null;
+	public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
 
 	// Arrays can't be final because of how @ObjectHolder works
 	public static BlockCarvable[] planks = new BlockCarvable[6];
