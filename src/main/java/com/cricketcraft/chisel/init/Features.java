@@ -206,12 +206,12 @@ public enum Features {
 		}
 	},
 
-	BLOOD_RUNE("AWWayOfTime") {
+	BLOOD_RUNE("AWWayofTime") {
 
 		@Override
 		void addBlocks() {
 			BlockCarvable bloodRune = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
-			Carving.chisel.addVariation("bloodRune", GameRegistry.findBlock("AWWayOfTime", "bloodRune.blank"), 0, 0);
+			Carving.chisel.addVariation("bloodRune", GameRegistry.findBlock("AWWayofTime", "AlchemicalWizardrybloodRune"), 0, 0);
 			bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.0.desc"), 0, "bloodMagic/bloodRuneArranged");
 			bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.1.desc"), 1, "bloodMagic/bloodRuneBricks");
 			bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.2.desc"), 2, "bloodMagic/bloodRuneCarved");
