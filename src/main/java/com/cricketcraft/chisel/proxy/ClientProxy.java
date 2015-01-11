@@ -13,6 +13,7 @@ import com.cricketcraft.chisel.client.render.BlockAdvancedMarbleRenderer;
 import com.cricketcraft.chisel.client.render.BlockCarpetRenderer;
 import com.cricketcraft.chisel.client.render.BlockEldritchRenderer;
 import com.cricketcraft.chisel.client.render.BlockGlowRenderer;
+import com.cricketcraft.chisel.client.render.BlockLayeredRenderer;
 import com.cricketcraft.chisel.client.render.BlockMarblePaneRenderer;
 import com.cricketcraft.chisel.client.render.BlockMarblePillarRenderer;
 import com.cricketcraft.chisel.client.render.BlockMarbleStairsRenderer;
@@ -53,6 +54,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new BlockAdvancedMarbleRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockCarpetRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockGlowRenderer());
+		RenderingRegistry.registerBlockHandler(new BlockLayeredRenderer());
 
 		RenderingRegistry.registerBlockHandler(new BlockTexturedOreRenderer());
 
