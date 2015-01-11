@@ -105,6 +105,7 @@ tile.futura.name=Futura Block
 tile.futura.0.desc=Glowing Screen with Metallic Borders
 tile.futura.1.desc=Glowing Screen with Cyan Borders
 tile.futura.2.desc=Applied Labyrinthic Neon Lines
+tile.futura.3.desc=Poptart Rainbow
 
 #Waterstone
 tile.waterstone.name=Waterstone
