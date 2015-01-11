@@ -100,6 +100,13 @@ tile.arcane.6.desc=Temporal Conduit
 tile.arcane.7.desc=Braaainz
 tile.arcane.8.desc=Spatial Conduit
 
+#Thaumium
+tile.thaumium.name=Thaumium Block
+tile.thaumium.0.desc=Beveled Thaumium Block
+tile.thaumium.1.desc=Small Thaumium Blocks
+tile.thaumium.2.desc=Engraved Symbols
+tile.thaumium.3.desc=Red Symbols
+
 #Futura
 tile.futura.name=Futura Block
 tile.futura.0.desc=Glowing Screen with Metallic Borders
