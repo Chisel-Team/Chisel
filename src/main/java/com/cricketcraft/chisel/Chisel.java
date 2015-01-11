@@ -75,6 +75,7 @@ public class Chisel {
 	public static int renderAutoChiselId;
 	public static int renderGlowId;
 	public static int renderLayeredId;
+	public static int roadLineId;
 
 	public static final Logger logger = LogManager.getLogger(MOD_ID);
 
