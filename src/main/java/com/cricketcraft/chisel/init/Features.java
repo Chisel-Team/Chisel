@@ -1874,9 +1874,21 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockRoadLine road_line = (BlockRoadLine) new BlockRoadLine().setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
+			BlockRoadLine road_line = (BlockRoadLine) new BlockRoadLine("white").setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
 					.setBlockName("roadLine");
 			GameRegistry.registerBlock(road_line, ItemCarvable.class, "road_line");
+			BlockRoadLine road_line1 = (BlockRoadLine) new BlockRoadLine("yellow").setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
+					.setBlockName("roadLine1");
+			GameRegistry.registerBlock(road_line1, ItemCarvable.class, "road_line1");
+			BlockRoadLine road_line2 = (BlockRoadLine) new BlockRoadLine("double-white").setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
+					.setBlockName("roadLine2");
+			GameRegistry.registerBlock(road_line2, ItemCarvable.class, "road_line2");
+			BlockRoadLine road_line3 = (BlockRoadLine) new BlockRoadLine("double-yellow").setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
+					.setBlockName("roadLine3");
+			GameRegistry.registerBlock(road_line3, ItemCarvable.class, "road_line3");
+			Carving.chisel.addVariation("roadLine", road_line1, 0, 1);
+			Carving.chisel.addVariation("roadLine", road_line2, 0, 2);
+			Carving.chisel.addVariation("roadLine", road_line3, 0, 3);
 			Carving.chisel.registerOre("roadLine", "roadLine");
 		}
 
@@ -2412,9 +2424,9 @@ public enum Features {
 		Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
 		for(int type = 0; type < 10; type++){
 			if(type == 8 || type == 9)
-				torch[type] = (BlockCarvableTorch) new BlockCarvableTorch().disableParticles();
+				torch[type] = new BlockCarvableTorch().disableParticles();
 			else
-				torch[type] = (BlockCarvableTorch) new BlockCarvableTorch();
+				torch[type] = new BlockCarvableTorch();
 
 			torch[type].setInformation("torch" + (type + 1));
 			GameRegistry.registerBlock(torch[type], "torch" + (type + 1));
