@@ -33,6 +33,7 @@ import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.ContainerPresent;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
 import com.cricketcraft.chisel.item.chisel.ChiselController;
+import com.cricketcraft.chisel.network.PacketHandler;
 import com.cricketcraft.chisel.proxy.CommonProxy;
 import com.cricketcraft.chisel.utils.General;
 import com.cricketcraft.chisel.world.GeneratorChisel;

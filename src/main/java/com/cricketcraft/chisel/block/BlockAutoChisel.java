@@ -20,6 +20,7 @@ public class BlockAutoChisel extends BlockContainer {
 	public BlockAutoChisel() {
 		super(Material.rock);
 		setHardness(1F);
+		setBlockBounds(0.125f, 0, 0.125f, 0.875f, 0.8125f, 0.875f);
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class BlockAutoChisel extends BlockContainer {
 		if (tile != null && tile instanceof TileEntityAutoChisel && !player.isSneaking()) {
 			player.openGui(Chisel.instance, 1, world, x, y, z);
 		}
-
+		
 		return true;
 	}
 
