@@ -18,6 +18,7 @@ import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.init.ChiselItems;
 import com.cricketcraft.chisel.network.PacketHandler;
+import com.cricketcraft.chisel.network.message.MessageAutoChisel;
 import com.cricketcraft.chisel.network.message.MessageSlotUpdate;
 
 import cpw.mods.fml.relauncher.Side;
@@ -44,7 +45,12 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	private ItemStack[] inventory = new ItemStack[7];
 	private String name = "autoChisel";
 
-	public float xRot, yRot, zRot; // used for floating target client only
+	// used for floating target client only
+	public float xRot, yRot, zRot;
+
+	// used for chisel item rotation client only
+	public float chiselRot;
+	public boolean chiseling = false;
 
 	@Override
 	public boolean canUpdate() {
@@ -132,12 +138,13 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 						}
 						// remove what we made from the stack
 						base.stackSize -= chiseled.stackSize;
+						slotChanged(BASE);
 						if (base.stackSize <= 0) {
 							setInventorySlotContents(BASE, null); // clear out 0 size itemstacks
 						}
 
 						// TODO here we need to send a packet to the client so that the animation and sound can be played
-						((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], inventory[TARGET]);
+						chiselItem();
 					}
 				}
 			}
@@ -171,6 +178,12 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	private boolean hasChisel() {
 		return inventory[CHISEL] != null && inventory[CHISEL].getItem() instanceof IChiselItem && inventory[CHISEL].stackSize >= 1;
+	}
+
+	/** Calls IChiselItem#onChisel() and sends the chisel packet for sound/animation */
+	private void chiselItem() {
+		((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], inventory[TARGET]);
+		PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(this), worldObj.provider.dimensionId);
 	}
 
 	@Override
@@ -344,5 +357,9 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		} else {
 			return Upgrade.values()[slotNumber - MIN_UPGRADE].getUnlocalizedName() + ".name";
 		}
+	}
+
+	public void doChiselAnim() {
+		chiseling = true;
 	}
 }
