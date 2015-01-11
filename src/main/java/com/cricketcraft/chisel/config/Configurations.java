@@ -2,11 +2,11 @@ package com.cricketcraft.chisel.config;
 
 import java.util.Locale;
 
+import net.minecraftforge.common.config.Configuration;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.cricketcraft.chisel.init.Features;
-
-import net.minecraftforge.common.config.Configuration;
 
 public class Configurations {
 

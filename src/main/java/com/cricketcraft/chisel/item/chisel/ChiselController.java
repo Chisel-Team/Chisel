@@ -1,9 +1,6 @@
 package com.cricketcraft.chisel.item.chisel;
 
 import io.netty.buffer.ByteBuf;
-
-import java.util.Arrays;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
