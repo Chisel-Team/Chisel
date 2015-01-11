@@ -109,6 +109,9 @@ public final class ChiselBlocks {
 	public static final BlockCarvable brickCustom = null;
 	public static final BlockCarvable sign = null;
 	public static final BlockCarvable arcane = null;
+	public static final BlockCarvable thaumium = null;
+	public static final BlockCarvable tallow = null;
+
 	public static final BlockCarvable bloodRune = null;
 	public static final BlockCarvableSand colored_sand = null;
 
