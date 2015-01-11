@@ -1,47 +1,42 @@
 package com.cricketcraft.chisel.network.message;
 
-import com.cricketcraft.chisel.Chisel;
-
 import io.netty.buffer.ByteBuf;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.network.message.base.MessageCoords;
+
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageSlotUpdate implements IMessage {
+public class MessageSlotUpdate extends MessageCoords {
 
 	public MessageSlotUpdate() {
 	}
 
-	private int x, y, z;
 	private int slot;
 	private ItemStack stack;
 
 	public MessageSlotUpdate(TileEntity te, int slot, ItemStack stack) {
-		this.x = te.xCoord;
-		this.y = te.yCoord;
-		this.z = te.zCoord;
+		super(te);
 		this.slot = slot;
 		this.stack = stack;
 	}
 
 	@Override
 	public void toBytes(ByteBuf buf) {
-		buf.writeInt(x);
-		buf.writeInt(y);
-		buf.writeInt(z);
+		super.toBytes(buf);
 		buf.writeInt(slot);
 		ByteBufUtils.writeItemStack(buf, stack);
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
-		this.x = buf.readInt();
-		this.y = buf.readInt();
-		this.z = buf.readInt();
+		super.fromBytes(buf);
 		this.slot = buf.readInt();
 		this.stack = ByteBufUtils.readItemStack(buf);
 	}
