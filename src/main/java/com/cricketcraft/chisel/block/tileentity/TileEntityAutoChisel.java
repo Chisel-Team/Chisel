@@ -17,6 +17,8 @@ import net.minecraft.util.StatCollector;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.init.ChiselItems;
+import com.cricketcraft.chisel.network.PacketHandler;
+import com.cricketcraft.chisel.network.message.MessageSlotUpdate;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -122,22 +124,20 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 					if (canMerge(chiseled)) {
 						// if our output is empty, just use the current result
 						if (output == null) {
-							inventory[OUTPUT] = chiseled;
+							setInventorySlotContents(OUTPUT, chiseled);
 						} else {
 							// otherwise just add our result to the existing stack
 							inventory[OUTPUT].stackSize += chiseled.stackSize;
+							slotChanged(OUTPUT);
 						}
 						// remove what we made from the stack
 						base.stackSize -= chiseled.stackSize;
 						if (base.stackSize <= 0) {
-							inventory[BASE] = null; // clear out 0 size itemstacks
+							setInventorySlotContents(BASE, null); // clear out 0 size itemstacks
 						}
 
 						// TODO here we need to send a packet to the client so that the animation and sound can be played
 						((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], inventory[TARGET]);
-
-						// we changed something, so we need to tell the chunk to save
-						markDirty();
 					}
 				}
 			}
@@ -221,6 +221,14 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
 			stack.stackSize = getInventoryStackLimit();
 		}
+
+		if (!worldObj.isRemote) {
+			slotChanged(slot);
+		}
+	}
+
+	private void slotChanged(int slot) {
+		PacketHandler.INSTANCE.sendToDimension(new MessageSlotUpdate(this, slot, inventory[slot]), worldObj.provider.dimensionId);
 		markDirty();
 	}
 
@@ -246,7 +254,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		return new int[] { BASE, OUTPUT };
+		return new int[] { BASE, TARGET, OUTPUT, CHISEL };
 	}
 
 	@Override
@@ -270,7 +278,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itemStack, int side) {
-		return hasUpgrade(Upgrade.AUTOMATION) && slot == BASE;
+		return hasUpgrade(Upgrade.AUTOMATION) && (slot == BASE || slot == TARGET || slot == CHISEL);
 	}
 
 	@Override

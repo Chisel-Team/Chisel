@@ -1,6 +1,5 @@
 package com.cricketcraft.chisel.item.chisel;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -12,17 +11,14 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.PacketHandler;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.carving.CarvingVariation;
-import com.cricketcraft.chisel.client.GeneralChiselClient;
+import com.cricketcraft.chisel.network.PacketHandler;
+import com.cricketcraft.chisel.network.message.MessageChiselSound;
 import com.cricketcraft.chisel.utils.General;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public final class ChiselController {
 
@@ -92,56 +88,9 @@ public final class ChiselController {
 	 * Assumes that the player is holding a chisel
 	 */
 	private void setVariation(EntityPlayer player, World world, int x, int y, int z, CarvingVariation v, ItemStack target) {
-		PacketHandler.INSTANCE.sendTo(new PacketPlaySound(x, y, z, v), (EntityPlayerMP) player);
+		PacketHandler.INSTANCE.sendTo(new MessageChiselSound(x, y, z, v), (EntityPlayerMP) player);
 		world.setBlock(x, y, z, v.block);
 		world.setBlockMetadataWithNotify(x, y, z, v.meta, 3);
 		((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.inventory, player.inventory.currentItem, player.getCurrentEquippedItem(), target);
 	}
-
-	public static class PacketPlaySound implements IMessage {
-
-		public PacketPlaySound() {
-		}
-
-		private int x, y, z;
-		private int block;
-		private byte meta;
-
-		public PacketPlaySound(int x, int y, int z, CarvingVariation v) {
-			this.x = x;
-			this.y = y;
-			this.z = z;
-			this.block = Block.getIdFromBlock(v.block);
-			this.meta = (byte) v.meta;
-		}
-
-		@Override
-		public void toBytes(ByteBuf buf) {
-			buf.writeInt(x);
-			buf.writeInt(y);
-			buf.writeInt(z);
-			buf.writeInt(block);
-			buf.writeByte(meta);
-		}
-
-		@Override
-		public void fromBytes(ByteBuf buf) {
-			x = buf.readInt();
-			y = buf.readInt();
-			z = buf.readInt();
-			block = buf.readInt();
-			meta = buf.readByte();
-		}
-	}
-
-	public static class PlaySoundHandler implements IMessageHandler<PacketPlaySound, IMessage> {
-
-		@Override
-		public IMessage onMessage(PacketPlaySound message, MessageContext ctx) {
-			String sound = ItemChisel.carving.getVariationSound(Block.getBlockById(message.block), message.meta);
-			GeneralChiselClient.spawnChiselEffect(message.x, message.y, message.z, sound);
-			return null;
-		}
-	}
-
 }
