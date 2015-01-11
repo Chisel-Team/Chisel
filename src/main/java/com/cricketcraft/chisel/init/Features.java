@@ -32,7 +32,7 @@ import com.cricketcraft.chisel.block.BlockGrimstone;
 import com.cricketcraft.chisel.block.BlockHolystone;
 import com.cricketcraft.chisel.block.BlockLavastone;
 import com.cricketcraft.chisel.block.BlockLeaf;
-import com.cricketcraft.chisel.block.BlockLightstoneCarvable;
+import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
 import com.cricketcraft.chisel.block.BlockMarbleBookshelf;
 import com.cricketcraft.chisel.block.BlockMarbleCarpet;
 import com.cricketcraft.chisel.block.BlockMarbleIce;
@@ -828,7 +828,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockLightstoneCarvable glowstone = (BlockLightstoneCarvable) new BlockLightstoneCarvable().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.3F).setLightLevel(1.0F)
+			BlockCarvableGlowstone glowstone = (BlockCarvableGlowstone) new BlockCarvableGlowstone().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.3F).setLightLevel(1.0F)
 					.setStepSound(Block.soundTypeGlass);
 			Carving.chisel.addVariation("glowstone", Blocks.glowstone, 0, 0);
 			glowstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.lightstone.1.desc"), 1, "lightstone/terrain-sulphur-cobble");

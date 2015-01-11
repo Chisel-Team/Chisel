@@ -16,7 +16,7 @@ import com.cricketcraft.chisel.block.BlockConcrete;
 import com.cricketcraft.chisel.block.BlockGrimstone;
 import com.cricketcraft.chisel.block.BlockHolystone;
 import com.cricketcraft.chisel.block.BlockLavastone;
-import com.cricketcraft.chisel.block.BlockLightstoneCarvable;
+import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
 import com.cricketcraft.chisel.block.BlockMarbleCarpet;
 import com.cricketcraft.chisel.block.BlockMarbleIce;
 import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
@@ -55,7 +55,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable iron_block = null;
 	public static final BlockCarvable gold_block = null;
 	public static final BlockCarvable diamond_block = null;
-	public static final BlockLightstoneCarvable glowstone = null;
+	public static final BlockCarvableGlowstone glowstone = null;
 	public static final BlockCarvable lapis_block = null;
 	public static final BlockCarvable emerald_block = null;
 	public static final BlockCarvable nether_brick = null;
