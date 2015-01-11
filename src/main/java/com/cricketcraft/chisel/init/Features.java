@@ -668,9 +668,10 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock/* , "futura/screenOverlay-ctm" */).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F)
 					.setResistance(10F);
-			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.0.desc"), 0, "futura/screenMetallicWIP");
-			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.1.desc"), 1, "futura/screenCyanWIP");
-			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 2, "futura/controllerWIP");
+			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.0.desc"), 0, "futura/WIP/screenMetallicWIP");
+			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.1.desc"), 1, "futura/WIP/screenCyanWIP");
+            futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 2, "futura/WIP/controllerWIP");
+            futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.3.desc"), 3, "futura/WIP/wavyWIP");
 			futura.carverHelper.register(futura, "futura");
 			Carving.chisel.registerOre("futura", "futura");
 		}
