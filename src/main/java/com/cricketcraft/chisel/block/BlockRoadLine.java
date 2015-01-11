@@ -1,26 +1,29 @@
 package com.cricketcraft.chisel.block;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.BlockRoadLineRenderer;
 import com.cricketcraft.chisel.config.Configurations;
 
-public class BlockRoadLine extends Block {
+public class BlockRoadLine extends BlockCarvable {
 
-	public IIcon aloneIcon;
-	public IIcon halfLineIcon;
-	public IIcon fullLineIcon;
-	private String type;
+	public IIcon aloneIcon[] = new IIcon[4];
+	public IIcon halfLineIcon[] = new IIcon[4];
+	public IIcon fullLineIcon[] = new IIcon[4];
 
-	public BlockRoadLine(String type) {
+	public BlockRoadLine() {
 		super(Material.circuits);
-		this.type = type;
 
 		if (Configurations.useRoadLineTool) {
 			this.setHarvestLevel(Configurations.getRoadLineTool,Configurations.roadLineToolLevel);
@@ -28,7 +31,6 @@ public class BlockRoadLine extends Block {
 		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.00390625f, 1.0f);
 		// this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 	}
-
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
 		return null;
@@ -46,7 +48,7 @@ public class BlockRoadLine extends Block {
 
 	@Override
 	public int getRenderType() {
-		return BlockRoadLineRenderer.id;
+		return Chisel.roadLineId;
 	}
 
 	@Override
@@ -69,9 +71,13 @@ public class BlockRoadLine extends Block {
 
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = aloneIcon = reg.registerIcon("Chisel:line-marking/" + type + "-center");
-		halfLineIcon = reg.registerIcon("Chisel:line-marking/" + type + "-side");
-		fullLineIcon = reg.registerIcon("Chisel:line-marking/" + type + "-long");
+		for(int i = 0; i < 4; i++)
+		{
+			String[] texNames = {"white", "yellow", "double-white", "double-yellow"};
+			aloneIcon[i] = reg.registerIcon("Chisel:line-marking/" + texNames[i] + "-center");
+			halfLineIcon[i] = reg.registerIcon("Chisel:line-marking/" + texNames[i] + "-side");
+			fullLineIcon[i] = reg.registerIcon("Chisel:line-marking/" + texNames[i] + "-long");
+		}
 	}
 
 }
