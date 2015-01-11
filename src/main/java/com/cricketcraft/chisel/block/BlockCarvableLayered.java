@@ -9,37 +9,26 @@ import com.cricketcraft.chisel.Chisel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCarvableGlow extends BlockCarvable {
-
+public class BlockCarvableLayered extends BlockCarvable {
 	@SideOnly(Side.CLIENT)
-	private IIcon glowTexture;
+	private IIcon baseTexture;
+	private String baseTexLocation;
 
-	private String glowTexturePath;
-
-	public BlockCarvableGlow(String glowTexture) {
-		super();
-		this.setLightLevel(0.5F); //Same as redstone torch
-		this.glowTexturePath = glowTexture;
-	}
-
-	public BlockCarvableGlow(Material mat, String glowTexture) {
+	public BlockCarvableLayered(Material mat, String baseTexLocation) {
 		super(mat);
-		this.glowTexturePath = glowTexture;
+		this.baseTexLocation = baseTexLocation;
 	}
-
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		super.registerBlockIcons(register);
-		glowTexture = register.registerIcon(Chisel.MOD_ID + ":" + glowTexturePath);
+		baseTexture = register.registerIcon(Chisel.MOD_ID + ":" + baseTexLocation);
 	}
-
-	public IIcon getGlowTexture() {
-		return glowTexture;
+	public IIcon getBaseTex() {
+		return baseTexture;
 	}
-
 	@Override
 	public int getRenderType() {
-		return Chisel.renderGlowId;
+		return Chisel.renderLayeredId;
 	}
 
 	@Override

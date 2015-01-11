@@ -73,6 +73,23 @@ tile.voidstone.7.desc=Beveled Voidstone
 tile.voidstonePillar.name=Voidstone Pillar
 tile.voidstonePillar.0.desc=Striped Voidstone Pillar
 
+-#Warning
+tile.warningSign.name=Warning Sign
+tile.warningSign.0.desc=Radiation
+tile.warningSign.1.desc=Biohazard
+tile.warningSign.2.desc=Fire
+tile.warningSign.3.desc=Explosion
+tile.warningSign.4.desc=Death
+tile.warningSign.5.desc=Falling Objects
+tile.warningSign.6.desc=Danger of Falling
+tile.warningSign.7.desc=High Voltage
+tile.warningSign.8.desc=Generic Warning
+tile.warningSign.9.desc=Dangerous Chemicals
+tile.warningSign.10.desc=Under Construction
+tile.warningSign.11.desc=Loud Sounds
+tile.warningSign.12.desc=No Entry
+tile.warningSign.13.desc=Cryogenic Freezing in progress
+
 #Energised Void Stone Blocks
 tile.voidstone2.name=Energised Voidstone
 tile.voidstone2.0.desc=Raw Energised Voidstone
@@ -99,6 +116,23 @@ tile.arcane.5.desc=Bricks
 tile.arcane.6.desc=Temporal Conduit
 tile.arcane.7.desc=Braaainz
 tile.arcane.8.desc=Spatial Conduit
+
+#Thaumium
+tile.thaumium.name=Thaumium Block
+tile.thaumium.0.desc=Beveled Thaumium Block
+tile.thaumium.1.desc=Small Thaumium Blocks
+tile.thaumium.2.desc=Engraved Symbols
+tile.thaumium.3.desc=Red Symbols
+
+#Blood Rune
+tile.bloodrune.name=Blood Rune
+tile.bloodrune.0.desc=Arranged Blood Rune
+tile.bloodrune.1.desc=Blood Rune Bricks
+tile.bloodrune.2.desc=Carved Blood Rune
+tile.bloodrune.3.desc=Radial Carved Blood Rune
+tile.bloodrune.4.desc=Classic Panel Blood Rune
+tile.bloodrune.5.desc=Blood Rune Tiles
+
 
 #Futura
 tile.futura.name=Futura Block

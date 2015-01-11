@@ -9,6 +9,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.client.render.BlockRoadLineRenderer;
+import com.cricketcraft.chisel.config.Configurations;
 
 public class BlockRoadLine extends Block {
 
@@ -19,6 +20,9 @@ public class BlockRoadLine extends Block {
 	public BlockRoadLine() {
 		super(Material.circuits);
 
+		if (Configurations.useRoadLineTool) {
+			this.setHarvestLevel(Configurations.getRoadLineTool,Configurations.roadLineToolLevel);
+		}
 		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.00390625f, 1.0f);
 		// this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 	}

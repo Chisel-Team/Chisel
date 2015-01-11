@@ -5,18 +5,20 @@ import net.minecraft.block.Block;
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.block.BlockCarvableGlass;
+import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
+import com.cricketcraft.chisel.block.BlockCarvableLayered;
 import com.cricketcraft.chisel.block.BlockCarvablePane;
 import com.cricketcraft.chisel.block.BlockCarvablePowered;
 import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
 import com.cricketcraft.chisel.block.BlockCarvableSand;
 import com.cricketcraft.chisel.block.BlockCarvableSlab;
 import com.cricketcraft.chisel.block.BlockCarvableStairs;
+import com.cricketcraft.chisel.block.BlockCarvableTorch;
 import com.cricketcraft.chisel.block.BlockCloud;
 import com.cricketcraft.chisel.block.BlockConcrete;
 import com.cricketcraft.chisel.block.BlockGrimstone;
 import com.cricketcraft.chisel.block.BlockHolystone;
 import com.cricketcraft.chisel.block.BlockLavastone;
-import com.cricketcraft.chisel.block.BlockLightstoneCarvable;
 import com.cricketcraft.chisel.block.BlockMarbleCarpet;
 import com.cricketcraft.chisel.block.BlockMarbleIce;
 import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
@@ -55,7 +57,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable iron_block = null;
 	public static final BlockCarvable gold_block = null;
 	public static final BlockCarvable diamond_block = null;
-	public static final BlockLightstoneCarvable glowstone = null;
+	public static final BlockCarvableGlowstone glowstone = null;
 	public static final BlockCarvable lapis_block = null;
 	public static final BlockCarvable emerald_block = null;
 	public static final BlockCarvable nether_brick = null;
@@ -104,13 +106,15 @@ public final class ChiselBlocks {
 	public static final BlockCarvable technical = null;
 	public static final BlockCarvableGlass technical2 = null;
 	public static final BlockCarvable futura = null;
-	public static final BlockCarvable bone = null;
-	public static final BlockCarvable scorching = null;
 	public static final BlockCarvable brickCustom = null;
-	public static final BlockCarvable sign = null;
+	public static final BlockCarvableLayered sign = null;
 	public static final BlockCarvable arcane = null;
+	public static final BlockCarvable thaumium = null;
+	public static final BlockCarvable tallow = null;
+
 	public static final BlockCarvable bloodRune = null;
 	public static final BlockCarvableSand colored_sand = null;
+	public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
 
 	// Arrays can't be final because of how @ObjectHolder works
 	public static BlockCarvable[] planks = new BlockCarvable[6];

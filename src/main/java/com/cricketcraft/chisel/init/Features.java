@@ -1,5 +1,14 @@
 package com.cricketcraft.chisel.init;
 
+import static com.cricketcraft.chisel.init.ChiselBlocks.carpet_block;
+import static com.cricketcraft.chisel.init.ChiselBlocks.jackolantern;
+import static com.cricketcraft.chisel.init.ChiselBlocks.planks;
+import static com.cricketcraft.chisel.init.ChiselBlocks.present;
+import static com.cricketcraft.chisel.init.ChiselBlocks.pumpkin;
+import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlass;
+import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlassPane;
+import static com.cricketcraft.chisel.init.ChiselBlocks.torch;
+import static com.cricketcraft.chisel.utils.General.sGNames;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -19,12 +28,15 @@ import com.cricketcraft.chisel.block.BlockBeaconBase;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.block.BlockCarvableGlass;
 import com.cricketcraft.chisel.block.BlockCarvableGlow;
+import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
+import com.cricketcraft.chisel.block.BlockCarvableLayered;
 import com.cricketcraft.chisel.block.BlockCarvablePane;
 import com.cricketcraft.chisel.block.BlockCarvablePowered;
 import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
 import com.cricketcraft.chisel.block.BlockCarvableSand;
 import com.cricketcraft.chisel.block.BlockCarvableSlab;
 import com.cricketcraft.chisel.block.BlockCarvableStairs;
+import com.cricketcraft.chisel.block.BlockCarvableTorch;
 import com.cricketcraft.chisel.block.BlockCloud;
 import com.cricketcraft.chisel.block.BlockConcrete;
 import com.cricketcraft.chisel.block.BlockEldritch;
@@ -32,7 +44,6 @@ import com.cricketcraft.chisel.block.BlockGrimstone;
 import com.cricketcraft.chisel.block.BlockHolystone;
 import com.cricketcraft.chisel.block.BlockLavastone;
 import com.cricketcraft.chisel.block.BlockLeaf;
-import com.cricketcraft.chisel.block.BlockLightstoneCarvable;
 import com.cricketcraft.chisel.block.BlockMarbleBookshelf;
 import com.cricketcraft.chisel.block.BlockMarbleCarpet;
 import com.cricketcraft.chisel.block.BlockMarbleIce;
@@ -69,9 +80,6 @@ import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import static com.cricketcraft.chisel.init.ChiselBlocks.*;
-import static com.cricketcraft.chisel.utils.General.*;
 
 public enum Features {
 
@@ -130,8 +138,47 @@ public enum Features {
 		}
 	},
 
+	THAUMIUM("Thaumcraft") {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable thaumium = (BlockCarvable) new BlockCarvable(Material.iron).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeMetal);
+			Carving.chisel.addVariation("thaumium", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 4, 0);
+			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.0.desc"), 0, "thaumium/bevel");
+			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.1.desc"), 1, "thaumium/chunks");
+			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.2.desc"), 2, "thaumium/purplerunes");
+			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.3.desc"), 3, "thaumium/runes");
+			thaumium.carverHelper.register(thaumium, "thaumium");
+			Carving.chisel.registerOre("thaumium", "thaumium");
+		}
+	},
+
+	TALLOW("Thaumcraft") {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable tallow = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeSnow);
+			Carving.chisel.addVariation("tallow", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 5, 0);
+			tallow.carverHelper.register(tallow, "tallow");
+			Carving.chisel.registerOre("tallow", "tallow");
+		}
+	},
+
+	AMBER("Thaumcraft") {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable amber = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
+			Carving.chisel.addVariation("amber", GameRegistry.findBlock("Thaumcraft", "blockCosmeticOpaque"), 0, 0);
+			Carving.chisel.addVariation("amber", GameRegistry.findBlock("Thaumcraft", "blockCosmeticOpaque"), 1, 1);
+			amber.carverHelper.register(amber, "amber");
+			Carving.chisel.registerOre("amber", "amber");
+		}
+	},
+
 	AUTO_CHISEL {
 
+		@Override
 		void addBlocks() {
 			Block autoChisel = new BlockAutoChisel().setBlockTextureName(Chisel.MOD_ID + ":autoChisel/autoChisel").setCreativeTab(ChiselTabs.tabChisel).setBlockName("autoChisel");
 			GameRegistry.registerBlock(autoChisel, "autoChisel");
@@ -168,12 +215,12 @@ public enum Features {
 		}
 	},
 
-	BLOOD_RUNE("AWWayOfTime") {
+	BLOOD_RUNE("AWWayofTime") {
 
 		@Override
 		void addBlocks() {
 			BlockCarvable bloodRune = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
-			Carving.chisel.addVariation("bloodRune", GameRegistry.findBlock("AWWayOfTime", "bloodRune.blank"), 0, 0);
+			Carving.chisel.addVariation("bloodRune", GameRegistry.findBlock("AWWayofTime", "AlchemicalWizardrybloodRune"), 0, 0);
 			bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.0.desc"), 0, "bloodMagic/bloodRuneArranged");
 			bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.1.desc"), 1, "bloodMagic/bloodRuneBricks");
 			bloodRune.carverHelper.addVariation(StatCollector.translateToLocal("tile.bloodRune.2.desc"), 2, "bloodMagic/bloodRuneCarved");
@@ -725,6 +772,7 @@ public enum Features {
 
 	GLASS_STAINED {
 
+		@Override
 		void addBlocks() {
 			for (int i = 0; i < 16; i++) {
 				final String blockName = "stained_glass_" + sGNames[i].replaceAll(" ", "").toLowerCase();
@@ -790,7 +838,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockLightstoneCarvable glowstone = (BlockLightstoneCarvable) new BlockLightstoneCarvable().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.3F).setLightLevel(1.0F)
+			BlockCarvableGlowstone glowstone = (BlockCarvableGlowstone) new BlockCarvableGlowstone().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.3F).setLightLevel(1.0F)
 					.setStepSound(Block.soundTypeGlass);
 			Carving.chisel.addVariation("glowstone", Blocks.glowstone, 0, 0);
 			glowstone.carverHelper.addVariation(StatCollector.translateToLocal("tile.lightstone.1.desc"), 1, "lightstone/terrain-sulphur-cobble");
@@ -1770,6 +1818,7 @@ public enum Features {
 
 	RC_QUARRIED_BLOCK(RAILCRAFT.getRequiredMod(), RAILCRAFT) {
 
+		@Override
 		void addBlocks() {
 			Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 0, 0);
 			Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 1, 1);
@@ -2075,6 +2124,7 @@ public enum Features {
 
 	TEMPLE_BLOCK_MOSSY {
 
+		@Override
 		void addBlocks() {
 			BlockCarvable mossy_templeblock = (BlockCarvable) new BlockEldritch().setHardness(2.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setResistance(10F)
 					.setStepSound(Chisel.soundTempleFootstep);
@@ -2222,6 +2272,7 @@ public enum Features {
 
 	VOIDSTONE_PILLARS {
 
+		@Override
 		void addBlocks() {
 			BlockVoidstonePillar voidstonePillar = (BlockVoidstonePillar) new BlockVoidstonePillar().setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setStepSound(Block.soundTypeStone);
 			voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar.0.desc"), 0, "voidstone/pillar-side");
@@ -2327,7 +2378,52 @@ public enum Features {
 		boolean needsMetaRecipes() {
 			return true;
 		}
-	}
+	},
+
+	WARNING_SIGN {
+		@Override
+		void addBlocks() {
+			BlockCarvableLayered sign = (BlockCarvableLayered) new BlockCarvableLayered(Material.iron, "warning/base").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.0.desc"), 0, "warning/rad");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.1.desc"), 1, "warning/bio");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.2.desc"), 2, "warning/fire");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.3.desc"), 3, "warning/explosion");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.4.desc"), 4, "warning/death");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.5.desc"), 5, "warning/falling");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.6.desc"), 6, "warning/fall");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.7.desc"), 7, "warning/voltage");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.8.desc"), 8, "warning/generic");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.9.desc"), 9, "warning/acid");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.10.desc"), 10, "warning/underconstruction");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.11.desc"), 11, "warning/sound");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.12.desc"), 12, "warning/noentry");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.13.desc"), 13, "warning/cryogenic");
+			sign.carverHelper.register(sign, "warningSign");
+			Carving.chisel.registerOre("warningSign", "warningSign");
+		}
+		@Override
+		void addRecipes() {
+			 GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.sign, 4, 0), new Object[]{"xxx", "xyx", "xxx", 'x', "stone", 'y', Items.sign}));
+		}
+	},
+
+	TORCH {
+		@Override
+		void addBlocks() {
+		Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
+		for(int type = 0; type < 10; type++){
+			if(type == 8 || type == 9)
+				torch[type] = (BlockCarvableTorch) new BlockCarvableTorch().disableParticles();
+			else
+				torch[type] = (BlockCarvableTorch) new BlockCarvableTorch();
+
+			torch[type].setInformation("torch" + (type + 1));
+			GameRegistry.registerBlock(torch[type], "torch" + (type + 1));
+			Carving.chisel.addVariation("torch", torch[type], 0, (type + 1));
+		}
+		Carving.chisel.registerOre("torch", "torch");
+		}
+	},
 
 	;
 
