@@ -1875,21 +1875,13 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockRoadLine road_line = (BlockRoadLine) new BlockRoadLine("white").setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
+			BlockRoadLine road_line = (BlockRoadLine) new BlockRoadLine().setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
 					.setBlockName("roadLine");
+			road_line.carverHelper.addVariation(StatCollector.translateToLocal("tile.roadLine.0.desc"), 0, "line-marking/white-center");
+			road_line.carverHelper.addVariation(StatCollector.translateToLocal("tile.roadLine.1.desc"), 1, "line-marking/double-white-center");
+			road_line.carverHelper.addVariation(StatCollector.translateToLocal("tile.roadLine.2.desc"), 2, "line-marking/yellow-center");
+			road_line.carverHelper.addVariation(StatCollector.translateToLocal("tile.roadine.3.desc"), 3, "line-marking/double-yellow-center");
 			GameRegistry.registerBlock(road_line, ItemCarvable.class, "road_line");
-			BlockRoadLine road_line1 = (BlockRoadLine) new BlockRoadLine("yellow").setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
-					.setBlockName("roadLine1");
-			GameRegistry.registerBlock(road_line1, ItemCarvable.class, "road_line1");
-			BlockRoadLine road_line2 = (BlockRoadLine) new BlockRoadLine("double-white").setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
-					.setBlockName("roadLine2");
-			GameRegistry.registerBlock(road_line2, ItemCarvable.class, "road_line2");
-			BlockRoadLine road_line3 = (BlockRoadLine) new BlockRoadLine("double-yellow").setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.01F)
-					.setBlockName("roadLine3");
-			GameRegistry.registerBlock(road_line3, ItemCarvable.class, "road_line3");
-			Carving.chisel.addVariation("roadLine", road_line1, 0, 1);
-			Carving.chisel.addVariation("roadLine", road_line2, 0, 2);
-			Carving.chisel.addVariation("roadLine", road_line3, 0, 3);
 			Carving.chisel.registerOre("roadLine", "roadLine");
 		}
 
