@@ -547,10 +547,11 @@ tile.concrete.9.desc=Partly Weathered Concrete Block
 tile.concrete.10.desc=Asphalt
 
 #Road Line
-tile.roadLine.name=Road Lines (White)
-tile.roadLine1.name=Road Lines (Double White)
-tile.roadLine2.name=Road Lines (Yellow)
-tile.roadLine3.name=Road Lines (Double Yellow)
+tile.roadLine.name=Road Lines
+tile.roadLine.0.desc=White
+tile.roadLine.1.desc=Double White
+tile.roadLine.2.desc=Yellow
+tile.roadLine.3.desc=Double Yellow
 
 #Iron Blocks
 tile.iron_block.name=Iron Block

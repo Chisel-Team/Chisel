@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.BlockRoadLine;
 import com.cricketcraft.chisel.utils.Drawing;
 
@@ -15,10 +16,8 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class BlockRoadLineRenderer implements ISimpleBlockRenderingHandler {
 
-	public static int id;
-
 	public BlockRoadLineRenderer() {
-		id = RenderingRegistry.getNextAvailableRenderId();
+		Chisel.roadLineId = RenderingRegistry.getNextAvailableRenderId();
 	}
 
 	@Override
@@ -72,18 +71,18 @@ public class BlockRoadLineRenderer implements ISimpleBlockRenderingHandler {
 
 		if (N && S) {
 			renderer.uvRotateTop = 0;
-			renderer.overrideBlockTexture = block.fullLineIcon;
+			renderer.overrideBlockTexture = block.fullLineIcon[meta];
 			renderer.renderStandardBlock(block, x, y, z);
 
 		} else {
 			if (N) {
 				renderer.uvRotateTop = 0;
-				renderer.overrideBlockTexture = block.halfLineIcon;
+				renderer.overrideBlockTexture = block.halfLineIcon[meta];
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 			if (S) {
 				renderer.uvRotateTop = 3;
-				renderer.overrideBlockTexture = block.halfLineIcon;
+				renderer.overrideBlockTexture = block.halfLineIcon[meta];
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 
@@ -91,17 +90,17 @@ public class BlockRoadLineRenderer implements ISimpleBlockRenderingHandler {
 
 		if (E && W) {
 			renderer.uvRotateTop = 1;
-			renderer.overrideBlockTexture = block.fullLineIcon;
+			renderer.overrideBlockTexture = block.fullLineIcon[meta];
 			renderer.renderStandardBlock(block, x, y, z);
 		} else {
 			if (E) {
 				renderer.uvRotateTop = 1;
-				renderer.overrideBlockTexture = block.halfLineIcon;
+				renderer.overrideBlockTexture = block.halfLineIcon[meta];
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 			if (W) {
 				renderer.uvRotateTop = 2;
-				renderer.overrideBlockTexture = block.halfLineIcon;
+				renderer.overrideBlockTexture = block.halfLineIcon[meta];
 				renderer.renderStandardBlock(block, x, y, z);
 			}
 		}
@@ -118,6 +117,6 @@ public class BlockRoadLineRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		return id;
+		return Chisel.roadLineId;
 	}
 }
