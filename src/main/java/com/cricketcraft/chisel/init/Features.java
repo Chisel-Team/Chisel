@@ -135,8 +135,7 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockCarvable thaumium = (BlockCarvable) new BlockCarvable(Material.iron).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeMetal);
-			Carving.chisel.addVariation("thaumium", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 6, 0);
-			Carving.chisel.addVariation("thaumium", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 7, 1);
+			Carving.chisel.addVariation("thaumium", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 4, 0);
 			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.0.desc"), 0, "thaumium/bevel");
 			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.1.desc"), 1, "thaumium/chunks");
 			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.2.desc"), 2, "thaumium/purplerunes");
@@ -151,7 +150,7 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockCarvable tallow = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeSnow);
-			Carving.chisel.addVariation("tallow", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 10, 0);
+			Carving.chisel.addVariation("tallow", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 5, 0);
 			tallow.carverHelper.register(tallow, "tallow");
 			Carving.chisel.registerOre("tallow", "tallow");
 		}
