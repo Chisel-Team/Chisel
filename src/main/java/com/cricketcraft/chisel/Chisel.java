@@ -54,7 +54,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory", dependencies = "after:ForgeMultipart;after:Thaumcraft;after:appliedenergistics2;after:Railcraft")
+@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory", dependencies = "after:ForgeMultipart;after:Thaumcraft;after:appliedenergistics2;after:Railcraft;after:AWWayofTime")
 public class Chisel {
 
 	public static final List<String> modsSupported = new ArrayList<String>();
@@ -70,7 +70,7 @@ public class Chisel {
 	public static int renderCarpetId;
 	public static int renderAutoChiselId;
 	public static int renderGlowId;
-	
+
 	public static final Logger logger = LogManager.getLogger(MOD_ID);
 
 	@Instance(MOD_ID)
