@@ -16,9 +16,11 @@ public class BlockRoadLine extends Block {
 	public IIcon aloneIcon;
 	public IIcon halfLineIcon;
 	public IIcon fullLineIcon;
+	private String type;
 
-	public BlockRoadLine() {
+	public BlockRoadLine(String type) {
 		super(Material.circuits);
+		this.type = type;
 
 		if (Configurations.useRoadLineTool) {
 			this.setHarvestLevel(Configurations.getRoadLineTool,Configurations.roadLineToolLevel);
@@ -67,9 +69,9 @@ public class BlockRoadLine extends Block {
 
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = aloneIcon = reg.registerIcon("Chisel:line-marking/white-center");
-		halfLineIcon = reg.registerIcon("Chisel:line-marking/white-side");
-		fullLineIcon = reg.registerIcon("Chisel:line-marking/white-long");
+		blockIcon = aloneIcon = reg.registerIcon("Chisel:line-marking/" + type + "-center");
+		halfLineIcon = reg.registerIcon("Chisel:line-marking/" + type + "-side");
+		fullLineIcon = reg.registerIcon("Chisel:line-marking/" + type + "-long");
 	}
 
 }
