@@ -2,6 +2,7 @@ package com.cricketcraft.chisel.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 /**
  * To be implemented on blocks that "hide" another block inside, so connected textuers can still be
