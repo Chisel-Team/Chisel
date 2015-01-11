@@ -28,6 +28,7 @@ import com.cricketcraft.chisel.block.BlockBeaconBase;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.block.BlockCarvableGlass;
 import com.cricketcraft.chisel.block.BlockCarvableGlow;
+import com.cricketcraft.chisel.block.BlockCarvableLayered;
 import com.cricketcraft.chisel.block.BlockCarvablePane;
 import com.cricketcraft.chisel.block.BlockCarvablePowered;
 import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
@@ -2343,7 +2344,7 @@ public enum Features {
 	WARNING_SIGN {
 		@Override
 		void addBlocks() {
-			BlockCarvable sign = (BlockCarvable) new BlockCarvable(Material.iron).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+			BlockCarvableLayered sign = (BlockCarvableLayered) new BlockCarvableLayered(Material.iron, "warning/base").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
 			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.0.desc"), 0, "warning/rad");
 			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.1.desc"), 1, "warning/bio");
 			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.2.desc"), 2, "warning/fire");
@@ -2371,11 +2372,15 @@ public enum Features {
 		@Override
 		void addBlocks() {
 		Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
-		for(int metadata = 0; metadata < 10; metadata++){
-			torch[metadata] = (BlockCarvableTorch) new BlockCarvableTorch().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setLightLevel(0.9375F).setBlockName("torch");
-			torch[metadata].setInformation("torch" + (metadata + 1));
-			GameRegistry.registerBlock(torch[metadata], "torch" + (metadata + 1));
-			Carving.chisel.addVariation("torch", torch[metadata], 0, (metadata + 1));
+		for(int type = 0; type < 10; type++){
+			if(type == 8 || type == 9)
+				torch[type] = (BlockCarvableTorch) new BlockCarvableTorch().disableParticles();
+			else
+				torch[type] = (BlockCarvableTorch) new BlockCarvableTorch();
+
+			torch[type].setInformation("torch" + (type + 1));
+			GameRegistry.registerBlock(torch[type], "torch" + (type + 1));
+			Carving.chisel.addVariation("torch", torch[type], 0, (type + 1));
 		}
 		Carving.chisel.registerOre("torch", "torch");
 		}
