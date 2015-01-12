@@ -2071,6 +2071,8 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable tallow = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeSnow);
 			Carving.chisel.addVariation("tallow", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 5, 0);
+			tallow.carverHelper.addVariation(StatCollector.translateToLocal("tile.tallow.0.desc"), 0, "tallow/smooth");
+			tallow.carverHelper.addVariation(StatCollector.translateToLocal("tile.tallow.0.desc"), 1, "tallow/faces");
 			tallow.carverHelper.register(tallow, "tallow");
 			Carving.chisel.registerOre("tallow", "tallow");
 		}
