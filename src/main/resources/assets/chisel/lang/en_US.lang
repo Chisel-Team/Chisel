@@ -149,14 +149,13 @@ tile.tallow.0.desc=Smooth Tallow Block
 tile.tallow.1.desc=Ensouled Tallow Block
 
 #Blood Rune
-tile.bloodrune.name=Blood Rune
-tile.bloodrune.0.desc=Arranged Blood Rune
-tile.bloodrune.1.desc=Blood Rune Bricks
-tile.bloodrune.2.desc=Carved Blood Rune
-tile.bloodrune.3.desc=Radial Carved Blood Rune
-tile.bloodrune.4.desc=Classic Panel Blood Rune
-tile.bloodrune.5.desc=Blood Rune Tiles
-
+tile.bloodRune.name=Blood Rune
+tile.bloodRune.0.desc=Arranged Blood Rune
+tile.bloodRune.1.desc=Blood Rune Bricks
+tile.bloodRune.2.desc=Carved Blood Rune
+tile.bloodRune.3.desc=Radial Carved Blood Rune
+tile.bloodRune.4.desc=Classic Panel Blood Rune
+tile.bloodRune.5.desc=Blood Rune Tiles
 
 #Futura
 tile.futura.name=Futura Block
