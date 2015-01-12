@@ -9,12 +9,15 @@ import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.block.BlockGrimstone;
 import com.cricketcraft.chisel.block.BlockHolystone;
 import com.cricketcraft.chisel.block.BlockLavastone;
 import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
+import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
+import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.entity.fx.EntityBallOMossFX;
 import com.cricketcraft.chisel.entity.fx.EntityGrimstoneFX;
@@ -253,4 +256,15 @@ public class GeneralChiselClient {
 		entity.motionZ = Configurations.concreteVelocity * entity.motionZ / velocity;
 	}
 
+	public static void spawnAutoChiselFX(TileEntityAutoChisel te, ItemStack base) {
+		if (base != null) {
+			for (int i = 0; i < 10; i++) {
+				EntityDiggingFX particle = new EntityDiggingFX(te.getWorldObj(), te.xCoord + 0.5, te.yCoord + 0.95, te.zCoord + 0.5, 0, 0, 0, Block.getBlockFromItem(base.getItem()), base.getItemDamage());
+				particle.setVelocity((te.getWorldObj().rand.nextDouble() / 4) - 0.125, te.getWorldObj().rand.nextDouble() / 8, (te.getWorldObj().rand.nextDouble() / 4) - 0.125);
+				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
+			}
+			String sound = Carving.chisel.getVariationSound(base.getItem(), base.getItemDamage());
+			GeneralClient.playChiselSound(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, sound);
+		}
+	}
 }

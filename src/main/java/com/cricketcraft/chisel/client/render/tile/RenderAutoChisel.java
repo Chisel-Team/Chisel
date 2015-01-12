@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EntityDiggingFX;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -14,10 +13,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.model.obj.Face;
 import net.minecraftforge.client.model.obj.GroupObject;
@@ -25,18 +22,13 @@ import net.minecraftforge.client.model.obj.TextureCoordinate;
 import net.minecraftforge.client.model.obj.Vertex;
 import net.minecraftforge.client.model.obj.WavefrontObject;
 
-import org.lwjgl.opengl.GL11;
-
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
-import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.client.GeneralChiselClient;
-import com.cricketcraft.chisel.utils.GeneralClient;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import static org.lwjgl.opengl.GL11.*;
 
 public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimpleBlockRenderingHandler, IItemRenderer {
 
@@ -57,24 +49,24 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		switch (type) {
 		case ENTITY:
-			GL11.glTranslatef(-0.5f, 0, 0.5f);
+			glTranslatef(-0.5f, 0, 0.5f);
 			break;
 		case EQUIPPED:
-			GL11.glRotatef(20, 0, 1, 0);
-			GL11.glRotatef(-15, 1, 0, -1);
-			GL11.glScalef(0.65f, 0.65f, 0.65f);
-			GL11.glTranslatef(0.75f, -0.5f, 1.25f);
+			glRotatef(20, 0, 1, 0);
+			glRotatef(-15, 1, 0, -1);
+			glScalef(0.65f, 0.65f, 0.65f);
+			glTranslatef(0.75f, -0.5f, 1.25f);
 			break;
 		case EQUIPPED_FIRST_PERSON:
-			GL11.glRotatef(20, 0, 0, 1);
-			GL11.glRotatef(30, 0, 1, 0);
-			GL11.glTranslatef(0.2f, 0, -0.1f);
-			GL11.glScalef(0.5f, 0.5f, 0.5f);
+			glRotatef(20, 0, 0, 1);
+			glRotatef(30, 0, 1, 0);
+			glTranslatef(0.2f, 0, -0.1f);
+			glScalef(0.5f, 0.5f, 0.5f);
 			break;
 		case FIRST_PERSON_MAP:
 			break;
 		case INVENTORY:
-			GL11.glTranslatef(-0.5f, -0.5f, 0.5f);
+			glTranslatef(-0.5f, -0.5f, 0.5f);
 			break;
 		}
 
@@ -119,8 +111,6 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 		return Chisel.renderAutoChiselId;
 	}
 
-	private static EntityItem ghostItem;
-
 	private final RenderItem renderItem;
 
 	public RenderAutoChisel() {
@@ -157,80 +147,43 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 		}
 
 		if (item != null) {
-			GL11.glPushMatrix();
-			GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
-			GL11.glTranslated(x + 0.5, y + 1.5, z + 0.5);
-			GL11.glRotatef(autoChisel.xRot, 1, 0, 0);
-			GL11.glRotatef(autoChisel.yRot, 0, 1, 0);
-			GL11.glRotatef(autoChisel.zRot, 0, 0, 1);
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_CONSTANT_ALPHA);
+			glPushMatrix();
+			glPushAttrib(GL_ALL_ATTRIB_BITS);
+			glTranslated(x + 0.5, y + 1.5, z + 0.5);
+			glRotatef(autoChisel.xRot, 1, 0, 0);
+			glRotatef(autoChisel.yRot, 0, 1, 0);
+			glRotatef(autoChisel.zRot, 0, 0, 1);
+			glEnable(GL_BLEND);
+			glDepthMask(false);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_CONSTANT_ALPHA);
 			renderItem.doRender(item, 0, 0, 0, 0, 0);
-			GL11.glPopMatrix();
-			GL11.glPopAttrib();
+			glPopMatrix();
+			glPopAttrib();
 		}
 
 		item = autoChisel.getItemForRendering(TileEntityAutoChisel.BASE);
 		if (item != null) {
-			GL11.glPushMatrix();
-			GL11.glTranslated(x + 0.35, y + 0.934, z + 0.5);
-			item.getEntityItem().stackSize = autoChisel.getStackInSlot(TileEntityAutoChisel.BASE).stackSize;
+			glPushMatrix();
+			glTranslated(x + 0.35, y + 0.934, z + 0.5);
+			item.getEntityItem().stackSize = autoChisel.getLastBase() == null ? 1 : autoChisel.getLastBase().stackSize;
 			renderItem.doRender(item, 0, 0, 0, 0, 0);
-			GL11.glPopMatrix();
+			glPopMatrix();
 		}
 
 		item = autoChisel.getItemForRendering(TileEntityAutoChisel.CHISEL);
 		if (item != null) {
-			if (autoChisel.chiseling) {
-				autoChisel.chiselRot += 1;
-				if (autoChisel.chiselRot > 70) {
-					chiselItem(autoChisel);
-				}
-			} else {
-				autoChisel.chiselRot = Math.max(autoChisel.chiselRot - 1, 0);
-			}
-			GL11.glPushMatrix();
-			GL11.glTranslated(x + 0.7, y + 1.01, z + 0.5);
-			GL11.glRotatef(autoChisel.chiselRot, 0, 0, 1);
-			GL11.glTranslated(-0.12, 0, 0);
-			GL11.glScalef(0.9f, 0.9f, 0.9f);
+			glPushMatrix();
+			glTranslated(x + 0.7, y + 1.01, z + 0.5);
+			float rot = autoChisel.chiselRot == 0 ? 0 : autoChisel.chiseling ? autoChisel.chiselRot + (TileEntityAutoChisel.rotAmnt * scale) : autoChisel.chiselRot
+					- (TileEntityAutoChisel.rotAmnt * scale);
+			glRotatef(rot, 0, 0, 1);
+			glTranslated(-0.12, 0, 0);
+			glScalef(0.9f, 0.9f, 0.9f);
 			renderItem.doRender(item, 0, 0, 0, 0, 0);
-			GL11.glPopMatrix();
+			glPopMatrix();
 		} else {
 			autoChisel.chiselRot = 0;
 			autoChisel.chiseling = false;
 		}
 	}
-
-	private void chiselItem(TileEntityAutoChisel autoChisel) {
-		World world = autoChisel.getWorldObj();
-		ItemStack base = autoChisel.getStackInSlot(TileEntityAutoChisel.BASE);
-		if (base != null) {
-			for (int i = 0; i < 5; i++) {
-				EntityDiggingFX particle = new EntityDiggingFX(world, autoChisel.xCoord + 0.5, autoChisel.yCoord + 1, autoChisel.zCoord + 0.5, 0, 0, 0, Block.getBlockFromItem(base.getItem()),
-						base.getItemDamage());
-				particle.setVelocity((world.rand.nextDouble() / 4) - 0.125, world.rand.nextDouble() / 8, (world.rand.nextDouble() / 4) - 0.125);
-				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
-			}
-			String sound = Carving.chisel.getVariationSound(base.getItem(), base.getItemDamage());
-			GeneralClient.playChiselSound(world, autoChisel.xCoord, autoChisel.yCoord, autoChisel.zCoord, sound);
-		}
-		autoChisel.chiseling = false;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public EntityItem getGhostItem(World world, ItemStack itemStack) {
-		if (ghostItem == null) {
-			ghostItem = new EntityItem(world);
-			ghostItem.hoverStart = 0.0F;
-		}
-
-		if (itemStack == null) {
-			return null;
-		} else {
-			ghostItem.setEntityItemStack(itemStack);
-			return ghostItem;
-		}
-	}
-
 }
