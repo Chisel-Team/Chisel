@@ -7,11 +7,11 @@ import net.minecraft.world.IBlockAccess;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.client.render.BlockMarblePillarRenderer;
 
-public class BlockMarblePillar extends BlockCarvable {
+public class BlockCarvablePillar extends BlockCarvable {
 
 	public IIcon sides[] = new IIcon[6];
 
-	public BlockMarblePillar(Material m) {
+	public BlockCarvablePillar(Material m) {
 		super(m);
 	}
 
