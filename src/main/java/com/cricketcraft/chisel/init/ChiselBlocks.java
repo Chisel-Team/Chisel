@@ -37,12 +37,12 @@ public final class ChiselBlocks {
 	public static final BlockCarvableStairs marbleStairs = null;
 	public static final BlockCarvableStairs limestoneStairs = null;
 	public static final BlockCarvablePane iron_bars = null;
-	public static final BlockMarbleIce ice = null;
-	public static final BlockMarbleIce ice_pillar = null;
-	public static final BlockMarblePackedIce packedice = null;
-	public static final BlockMarblePackedIce packedice_pillar = null;
-	public static final BlockMarbleIceStairs iceStairs = null;
-	public static final BlockMarblePackedIceStairs packediceStairs = null;
+	public static final BlockCarvableIce ice = null;
+	public static final BlockCarvableIce ice_pillar = null;
+	public static final BlockCarvablePackedIce packedice = null;
+	public static final BlockCarvablePackedIce packedice_pillar = null;
+	public static final BlockCarvableIceStairs iceStairs = null;
+	public static final BlockCarvablePackedIceStairs packediceStairs = null;
 	public static final BlockCarvable obsidian = null;
 	public static final BlockCarvablePowered redstone_block = null;
 	public static final BlockHolystone holystone = null;
@@ -67,8 +67,8 @@ public final class ChiselBlocks {
 
 	public static final BlockCarvable voidstone = null;
 	public static final BlockMarbleTexturedOre voidstone2 = null;
-	public static final BlockVoidstonePillar voidstonePillar = null;
-	public static final BlockVoidstonePillar2 voidstonePillar2 = null;
+	public static final BlockCarvablePillar voidstonePillar = null;
+	public static final BlockCarvablePillar voidstonePillar2 = null;
 	public static final BlockSnakestone stone_snakestone = null;
 	public static final BlockSnakestone sand_snakestone = null;
 	public static final BlockSnakestoneObsidian obsidian_snakestone = null;
