@@ -26,21 +26,21 @@ import org.ajoberstar.grgit.Grgit
 def repo = Grgit.open(project.file('.'))
 project.ext.gitHash = repo.log().find().abbreviatedId
 
+boolean dev = System.getenv('chisel_dev') != null && System.getenv('chisel_dev').equals('TRUE')
+
 ext.buildnumber = 0
-project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
+project.buildnumber = !dev && System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
 
 version = "${mod_version}.${buildnumber}"
 group = "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "Chisel2"
-
-println("${version}")
+archivesBaseName = dev ? "Chisel2_DEV" : "Chisel2"
 
 minecraft {
-    version = "1.7.10-10.13.2.1277"
+    version = "${minecraft_version}-${forge_version}"
     runDir = "run"
 
     replaceIn "Chisel.java"
-    replace "@MOD_VERSION@", project.version
+    replace "@VERSION@", project.version
 }
 
 repositories {
@@ -56,11 +56,11 @@ repositories {
 }
 
 dependencies {
-    compile "mcp.mobius.waila:Waila:1.5.3_1.7.10:dev"
-	compile "codechicken:CodeChickenLib:1.7.10-1.1.1.95:dev"
-	compile "codechicken:CodeChickenCore:1.7.10-1.0.2.11:dev"
-	compile "codechicken:NotEnoughItems:1.7.10-1.0.2.26:dev"
-    compile "codechicken:ForgeMultipart:1.7.10-1.1.0.297:dev"
+    compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
+	compile "codechicken:CodeChickenLib:${minecraft_version}-${ccl_version}:dev"
+	compile "codechicken:CodeChickenCore:${minecraft_version}-${ccc_version}:dev"
+	compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
+    compile "codechicken:ForgeMultipart:${minecraft_version}-${fmp_version}:dev"
 }
 
 processResources

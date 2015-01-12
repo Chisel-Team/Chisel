@@ -66,7 +66,7 @@ public class Chisel {
 	public static final String MOD_ID = "chisel";
 	public static final BlockCarvable.SoundType soundTempleFootstep = new BlockCarvable.SoundType("dig.stone", MOD_ID + ":step.templeblock", 1.0f, 1.0f);
 	public static final String MOD_NAME = "Chisel 2";
-	public static final String VERSION = "2.2.2";
+	public static final String VERSION = "@VERSION@";
 	public static final BlockCarvable.SoundType soundHolystoneFootstep = new BlockCarvable.SoundType("holystone", 1.0f, 1.0f);
 	public static final BlockCarvable.SoundType soundMetalFootstep = new BlockCarvable.SoundType("metal", 1.0f, 1.0f);
 	public static boolean multipartLoaded = false;
