@@ -67,11 +67,8 @@ public class RenderBlocksCTMNoLight extends RenderBlocks {
 	}
 
 	void vert(int index) {
-		if (enableAO) {
-			tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-			tessellator.setBrightness(0xF000F0);
-		}
-
+		tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
+		tessellator.setBrightness(0xF000F0);
 		tessellator.addVertexWithUV(X[index], Y[index], Z[index], U[index], V[index]);
 	}
 
