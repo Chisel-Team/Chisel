@@ -3,7 +3,7 @@ package com.cricketcraft.chisel.block;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockIce;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,12 +16,12 @@ import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 
-public class BlockMarbleIce extends BlockIce implements ICarvable {
+public class BlockCarvablePackedIce extends Block implements ICarvable {
 
 	public CarvableHelper carverHelper;
 
-	public BlockMarbleIce() {
-		super();
+	public BlockCarvablePackedIce() {
+		super(Material.ice);
 		carverHelper = new CarvableHelper();
 	}
 

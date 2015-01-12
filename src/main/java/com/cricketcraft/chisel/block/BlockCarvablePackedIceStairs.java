@@ -9,9 +9,9 @@ import net.minecraft.world.World;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 
-public class BlockMarblePackedIceStairs extends BlockCarvableStairs {
+public class BlockCarvablePackedIceStairs extends BlockCarvableStairs {
 
-	public BlockMarblePackedIceStairs(Block block, int meta, CarvableHelper helper) {
+	public BlockCarvablePackedIceStairs(Block block, int meta, CarvableHelper helper) {
 		super(block, meta, helper);
 
 		slipperiness = 0.98F;
