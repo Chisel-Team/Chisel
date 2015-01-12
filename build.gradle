@@ -26,7 +26,7 @@ import org.ajoberstar.grgit.Grgit
 def repo = Grgit.open(project.file('.'))
 project.ext.gitHash = repo.log().find().abbreviatedId
 
-boolean dev = System.getenv('chisel_dev') != null && System.getenv('chisel_dev').equals('TRUE')
+boolean dev = project.hasProperty('chisel_dev') && project.chisel_dev.equalsIgnoreCase('true')
 
 ext.buildnumber = 0
 project.buildnumber = !dev && System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
