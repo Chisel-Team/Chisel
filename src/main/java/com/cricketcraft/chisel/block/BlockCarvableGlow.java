@@ -18,7 +18,7 @@ public class BlockCarvableGlow extends BlockCarvable {
 
 	public BlockCarvableGlow(String glowTexture) {
 		super();
-		this.setLightLevel(0.5F); //Same as redstone torch
+		setLightLevel(0.5f);
 		this.glowTexturePath = glowTexture;
 	}
 
@@ -40,10 +40,5 @@ public class BlockCarvableGlow extends BlockCarvable {
 	@Override
 	public int getRenderType() {
 		return Chisel.renderGlowId;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
 	}
 }
