@@ -2339,26 +2339,21 @@ public enum Features {
 	;
 
 	public static void init() {
-		loadBlocks(true);
-		loadItems(true);
 		loadRecipes();
 	}
 
-	private static void loadBlocks(boolean init) {
+	private static void loadBlocks() {
 		for (Features f : values()) {
-			if (f.enabled() && f.shouldLoad(init)) {
+			if (f.enabled()) {
 				f.addBlocks();
 			}
 		}
-
-		if (!init) {
-			Chisel.proxy.registerTileEntities();
-		}
+		Chisel.proxy.registerTileEntities();
 	}
 
-	private static void loadItems(boolean init) {
+	private static void loadItems() {
 		for (Features f : values()) {
-			if (f.enabled() && f.shouldLoad(init)) {
+			if (f.enabled()) {
 				f.addItems();
 			}
 		}
@@ -2381,8 +2376,8 @@ public enum Features {
 	}
 
 	public static void preInit() {
-		loadBlocks(false);
-		loadItems(false);
+		loadBlocks();
+		loadItems();
 	}
 
 	private Features parent;
@@ -2430,10 +2425,6 @@ public enum Features {
 
 	private String getRequiredMod() {
 		return requiredMod;
-	}
-
-	private boolean shouldLoad(boolean init) {
-		return requiredMod == null ? !init : init && Loader.isModLoaded(requiredMod);
 	}
 
 	public static boolean oneModdedFeatureLoaded() {
