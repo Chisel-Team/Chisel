@@ -67,6 +67,7 @@ public class Chisel {
 	public static boolean multipartLoaded = false;
 	public static int renderEldritchId;
 	public static int renderCTMId;
+	public static int renderCTMNoLightId;
 	public static int renderCarpetId;
 	public static int renderAutoChiselId;
 	public static int renderGlowId;
