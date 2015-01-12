@@ -1,20 +1,19 @@
 package com.cricketcraft.chisel.block;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.client.render.BlockRoadLineRenderer;
 import com.cricketcraft.chisel.config.Configurations;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockRoadLine extends BlockCarvable {
 
@@ -26,11 +25,12 @@ public class BlockRoadLine extends BlockCarvable {
 		super(Material.circuits);
 
 		if (Configurations.useRoadLineTool) {
-			this.setHarvestLevel(Configurations.getRoadLineTool,Configurations.roadLineToolLevel);
+			this.setHarvestLevel(Configurations.getRoadLineTool, Configurations.roadLineToolLevel);
 		}
 		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.00390625f, 1.0f);
 		// this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 	}
+
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
 		return null;
@@ -70,14 +70,25 @@ public class BlockRoadLine extends BlockCarvable {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		for(int i = 0; i < 4; i++)
-		{
-			String[] texNames = {"white", "yellow", "double-white", "double-yellow"};
+		for (int i = 0; i < 4; i++) {
+			String[] texNames = { "white", "yellow", "double-white", "double-yellow" };
 			aloneIcon[i] = reg.registerIcon("Chisel:line-marking/" + texNames[i] + "-center");
 			halfLineIcon[i] = reg.registerIcon("Chisel:line-marking/" + texNames[i] + "-side");
 			fullLineIcon[i] = reg.registerIcon("Chisel:line-marking/" + texNames[i] + "-long");
 		}
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int metadata) {
+		return aloneIcon[metadata % aloneIcon.length];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+		return getIcon(side, world.getBlockMetadata(x, y, z));
+	}
 }

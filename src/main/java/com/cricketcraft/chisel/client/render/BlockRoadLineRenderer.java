@@ -59,10 +59,10 @@ public class BlockRoadLineRenderer implements ISimpleBlockRenderingHandler {
 		}
 		tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
 
-		boolean N = world.getBlock(x, y, z - 1).equals(block);
-		boolean S = world.getBlock(x, y, z + 1).equals(block);
-		boolean W = world.getBlock(x - 1, y, z).equals(block);
-		boolean E = world.getBlock(x + 1, y, z).equals(block);
+		boolean N = world.getBlock(x, y, z - 1).equals(block) && world.getBlockMetadata(x, y, z - 1) == meta;
+		boolean S = world.getBlock(x, y, z + 1).equals(block) && world.getBlockMetadata(x, y, z + 1) == meta;
+		boolean W = world.getBlock(x - 1, y, z).equals(block) && world.getBlockMetadata(x - 1, y, z) == meta;
+		boolean E = world.getBlock(x + 1, y, z).equals(block) && world.getBlockMetadata(x + 1, y, z) == meta;
 
 		if (!N && !S && !W && !E) {
 			renderer.renderStandardBlock(block, x, y, z);
