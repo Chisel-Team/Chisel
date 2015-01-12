@@ -18,6 +18,7 @@ public class BlockCarvableGlow extends BlockCarvable {
 
 	public BlockCarvableGlow(String glowTexture) {
 		super();
+		this.setLightLevel(0.5F); //Same as redstone torch
 		this.glowTexturePath = glowTexture;
 	}
 

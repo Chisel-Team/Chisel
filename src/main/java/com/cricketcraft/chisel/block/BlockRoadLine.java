@@ -6,19 +6,27 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.client.render.BlockRoadLineRenderer;
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.config.Configurations;
 
-public class BlockRoadLine extends Block {
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-	public IIcon aloneIcon;
-	public IIcon halfLineIcon;
-	public IIcon fullLineIcon;
+public class BlockRoadLine extends BlockCarvable {
+
+	public IIcon aloneIcon[] = new IIcon[4];
+	public IIcon halfLineIcon[] = new IIcon[4];
+	public IIcon fullLineIcon[] = new IIcon[4];
 
 	public BlockRoadLine() {
 		super(Material.circuits);
 
+		if (Configurations.useRoadLineTool) {
+			this.setHarvestLevel(Configurations.getRoadLineTool, Configurations.roadLineToolLevel);
+		}
 		this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 0.00390625f, 1.0f);
 		// this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
 	}
@@ -40,7 +48,7 @@ public class BlockRoadLine extends Block {
 
 	@Override
 	public int getRenderType() {
-		return BlockRoadLineRenderer.id;
+		return Chisel.roadLineId;
 	}
 
 	@Override
@@ -62,10 +70,25 @@ public class BlockRoadLine extends Block {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
-		blockIcon = aloneIcon = reg.registerIcon("Chisel:line-marking/white-center");
-		halfLineIcon = reg.registerIcon("Chisel:line-marking/white-side");
-		fullLineIcon = reg.registerIcon("Chisel:line-marking/white-long");
+		for (int i = 0; i < 4; i++) {
+			String[] texNames = { "white", "yellow", "double-white", "double-yellow" };
+			aloneIcon[i] = reg.registerIcon("Chisel:line-marking/" + texNames[i] + "-center");
+			halfLineIcon[i] = reg.registerIcon("Chisel:line-marking/" + texNames[i] + "-side");
+			fullLineIcon[i] = reg.registerIcon("Chisel:line-marking/" + texNames[i] + "-long");
+		}
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int metadata) {
+		return aloneIcon[metadata % aloneIcon.length];
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+		return getIcon(side, world.getBlockMetadata(x, y, z));
+	}
 }

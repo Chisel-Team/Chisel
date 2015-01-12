@@ -2,11 +2,11 @@ package com.cricketcraft.chisel.config;
 
 import java.util.Locale;
 
+import net.minecraftforge.common.config.Configuration;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.cricketcraft.chisel.init.Features;
-
-import net.minecraftforge.common.config.Configuration;
 
 public class Configurations {
 
@@ -38,6 +38,10 @@ public class Configurations {
 	public static int ironChiselMaxDamage;
 	public static int diamondChiselMaxDamage;
 	public static boolean ironChiselCanLeftClick;
+	
+	public static boolean useRoadLineTool;
+	public static String getRoadLineTool;
+	public static int roadLineToolLevel;
 	
 	public static boolean refreshConfig() {
 
@@ -78,6 +82,12 @@ public class Configurations {
 		ironChiselMaxDamage = config.get(category, "ironChiselMaxDamage", 500, "The max damage of the standard iron chisel. Default: 500.").getInt();
 		diamondChiselMaxDamage = config.get(category, "diamondChiselMaxDamage", 5000, "The max damage of the diamond chisel. Default: 5000").getInt();
 		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
+		
+		/* block */
+		category = "block";
+		useRoadLineTool = config.get(category, "useRoadLineTool", false, "Should the road line require a tool to break (If false, road lines can be broken in Adventure)").getBoolean();
+		getRoadLineTool = config.get(category, "getRoadLineTool","pickaxe","The tool that is able to break roadLines (requires useRoadLineTool to be true to take effect)").getString();
+		roadLineToolLevel = config.get(category, "roadLineToolLevel",0,"The lowest harvest level of the tool able to break the road lines (requires useRoadLineTool to be true to take effect) (0 = Wood/Gold, 1 = Stone, 2 = Iron, 3 = Diamond) Default: 0").getInt();
 		
 		if (config.hasChanged()) {
 			config.save();

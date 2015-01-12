@@ -1,12 +1,12 @@
 package com.cricketcraft.chisel.client.render;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemDye;
 import net.minecraft.world.IBlockAccess;
+
+import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.BlockCarvableGlow;
