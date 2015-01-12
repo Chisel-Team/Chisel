@@ -59,6 +59,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	public static final int rotAmnt = 15;
 	public float chiselRot;
 	public boolean chiseling = false;
+	public int toChisel = 1;
 
 	private ItemStack lastBase;
 
@@ -150,7 +151,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 							slotChanged(OUTPUT);
 						}
 
-						chiselItem();
+						chiselItem(chiseled.stackSize);
 
 						// remove what we made from the stack
 						base.stackSize -= chiseled.stackSize;
@@ -166,7 +167,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 			if (chiseling) {
 				chiselRot += rotAmnt;
 				if (chiselRot >= maxRot) {
-					chiselItem();
+					chiselItem(0);
 				}
 			} else {
 				chiselRot = Math.max(chiselRot - rotAmnt, 0);
@@ -204,15 +205,15 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	}
 
 	/** Calls IChiselItem#onChisel() and sends the chisel packet for sound/animation */
-	private void chiselItem() {
+	private void chiselItem(int chiseled) {
 		if (!worldObj.isRemote) {
 			((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], inventory[TARGET]);
-			PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(this, true), worldObj.provider.dimensionId);
+			PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(this, chiseled, true), worldObj.provider.dimensionId);
 		} else {
 			GeneralChiselClient.spawnAutoChiselFX(this, lastBase != null ? lastBase : inventory[BASE]);
 			chiseling = false;
 			if (lastBase != null) {
-				lastBase.stackSize--;
+				lastBase.stackSize -= toChisel;
 				if (lastBase.stackSize <= 0) {
 					lastBase = null;
 				}
@@ -401,8 +402,9 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		}
 	}
 
-	public void doChiselAnim(ItemStack lastChiseled, boolean playSound) {
+	public void doChiselAnim(ItemStack lastChiseled, int chiseled, boolean playSound) {
 		this.lastBase = lastChiseled == null ? null : lastChiseled.copy();
+		this.toChisel = chiseled;
 		if (playSound) {
 			this.chiseling = true;
 		}
