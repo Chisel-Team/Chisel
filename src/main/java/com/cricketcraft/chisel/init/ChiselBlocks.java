@@ -38,9 +38,9 @@ public final class ChiselBlocks {
 	public static final BlockCarvableStairs limestoneStairs = null;
 	public static final BlockCarvablePane iron_bars = null;
 	public static final BlockCarvableIce ice = null;
-	public static final BlockCarvableIce ice_pillar = null;
+	public static final BlockCarvableIcePillar ice_pillar = null;
 	public static final BlockCarvablePackedIce packedice = null;
-	public static final BlockCarvablePackedIce packedice_pillar = null;
+	public static final BlockCarvablePackedIcePillar packedice_pillar = null;
 	public static final BlockCarvableIceStairs iceStairs = null;
 	public static final BlockCarvablePackedIceStairs packediceStairs = null;
 	public static final BlockCarvable obsidian = null;
