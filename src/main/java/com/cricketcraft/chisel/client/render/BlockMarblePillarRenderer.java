@@ -6,7 +6,7 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.cricketcraft.chisel.block.BlockMarblePillar;
+import com.cricketcraft.chisel.block.BlockCarvablePillar;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.utils.Drawing;
 
@@ -23,10 +23,10 @@ public class BlockMarblePillarRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public void renderInventoryBlock(Block blck, int metadata, int modelID, RenderBlocks renderer) {
-		if (!(blck instanceof BlockMarblePillar))
+		if (!(blck instanceof BlockCarvablePillar))
 			return;
 
-		BlockMarblePillar block = (BlockMarblePillar) blck;
+		BlockCarvablePillar block = (BlockCarvablePillar) blck;
 
 		block.sides[0] = block.sides[1] = block.getCtmIcon(4, metadata);
 		block.sides[2] = block.sides[3] = block.sides[4] = block.sides[5] = block.getCtmIcon(0, metadata);
@@ -41,10 +41,10 @@ public class BlockMarblePillarRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block blck, int modelId, RenderBlocks renderer) {
-		if (!(blck instanceof BlockMarblePillar))
+		if (!(blck instanceof BlockCarvablePillar))
 			return false;
 
-		BlockMarblePillar block = (BlockMarblePillar) blck;
+		BlockCarvablePillar block = (BlockCarvablePillar) blck;
 
 		int metadata = world.getBlockMetadata(x, y, z);
 

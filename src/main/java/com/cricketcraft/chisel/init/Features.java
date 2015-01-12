@@ -1,5 +1,14 @@
 package com.cricketcraft.chisel.init;
 
+import static com.cricketcraft.chisel.init.ChiselBlocks.carpet_block;
+import static com.cricketcraft.chisel.init.ChiselBlocks.jackolantern;
+import static com.cricketcraft.chisel.init.ChiselBlocks.planks;
+import static com.cricketcraft.chisel.init.ChiselBlocks.present;
+import static com.cricketcraft.chisel.init.ChiselBlocks.pumpkin;
+import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlass;
+import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlassPane;
+import static com.cricketcraft.chisel.init.ChiselBlocks.torch;
+import static com.cricketcraft.chisel.utils.General.sGNames;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -21,8 +30,13 @@ import com.cricketcraft.chisel.block.BlockCarvableAntiBlock;
 import com.cricketcraft.chisel.block.BlockCarvableGlass;
 import com.cricketcraft.chisel.block.BlockCarvableGlow;
 import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
+import com.cricketcraft.chisel.block.BlockCarvableIce;
+import com.cricketcraft.chisel.block.BlockCarvableIceStairs;
 import com.cricketcraft.chisel.block.BlockCarvableLayered;
+import com.cricketcraft.chisel.block.BlockCarvablePackedIce;
+import com.cricketcraft.chisel.block.BlockCarvablePackedIceStairs;
 import com.cricketcraft.chisel.block.BlockCarvablePane;
+import com.cricketcraft.chisel.block.BlockCarvablePillar;
 import com.cricketcraft.chisel.block.BlockCarvablePowered;
 import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
 import com.cricketcraft.chisel.block.BlockCarvableSand;
@@ -38,11 +52,6 @@ import com.cricketcraft.chisel.block.BlockLavastone;
 import com.cricketcraft.chisel.block.BlockLeaf;
 import com.cricketcraft.chisel.block.BlockMarbleBookshelf;
 import com.cricketcraft.chisel.block.BlockMarbleCarpet;
-import com.cricketcraft.chisel.block.BlockMarbleIce;
-import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
-import com.cricketcraft.chisel.block.BlockMarblePackedIce;
-import com.cricketcraft.chisel.block.BlockMarblePackedIceStairs;
-import com.cricketcraft.chisel.block.BlockMarblePillar;
 import com.cricketcraft.chisel.block.BlockMarbleStairsMaker;
 import com.cricketcraft.chisel.block.BlockMarbleStairsMakerCreator;
 import com.cricketcraft.chisel.block.BlockMarbleTexturedOre;
@@ -50,8 +59,6 @@ import com.cricketcraft.chisel.block.BlockPresent;
 import com.cricketcraft.chisel.block.BlockRoadLine;
 import com.cricketcraft.chisel.block.BlockSnakestone;
 import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
-import com.cricketcraft.chisel.block.BlockVoidstonePillar;
-import com.cricketcraft.chisel.block.BlockVoidstonePillar2;
 import com.cricketcraft.chisel.block.BlockWaterstone;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
@@ -72,9 +79,6 @@ import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import static com.cricketcraft.chisel.init.ChiselBlocks.*;
-import static com.cricketcraft.chisel.utils.General.*;
 
 public enum Features {
 
@@ -992,7 +996,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockMarbleIce ice = (BlockMarbleIce) new BlockMarbleIce().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
+			BlockCarvableIce ice = (BlockCarvableIce) new BlockCarvableIce().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
 			Carving.chisel.addVariation("ice", Blocks.ice, 0, 0);
 			ice.carverHelper.addVariation(StatCollector.translateToLocal("tile.ice.1.desc"), 1, "ice/a1-ice-light");
 			ice.carverHelper.addVariation(StatCollector.translateToLocal("tile.ice.2.desc"), 2, "ice/a1-stonecobble-icecobble");
@@ -1023,7 +1027,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockMarbleIce ice_pillar = (BlockMarbleIce) new BlockMarbleIce().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
+			BlockCarvableIce ice_pillar = (BlockCarvableIce) new BlockCarvableIce().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
 			ice_pillar.carverHelper.setChiselBlockName("Ice Pillar");
 			ice_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.icePillar.0.desc"), 0, "icepillar/column");
 			ice_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.icePillar.1.desc"), 1, "icepillar/capstone");
@@ -1077,7 +1081,7 @@ public enum Features {
 
 				@Override
 				public BlockCarvableStairs create(Block block, int meta, CarvableHelper helper) {
-					return new BlockMarbleIceStairs(block, meta, helper);
+					return new BlockCarvableIceStairs(block, meta, helper);
 				}
 			}, "ice_stairs");
 			Carving.chisel.registerOre("iceStairs", "iceStairs");
@@ -1439,7 +1443,7 @@ public enum Features {
 				marble_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.marblePillarOld.14.desc"), 14, "marblepillarold/a1-stonepillar-greekbottomgreek");
 				marble_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.marblePillarOld.15.desc"), 15, "marblepillarold/a1-stonepillar-plainbottomgreek");
 			} else {
-				marble_pillar = (BlockCarvable) new BlockMarblePillar(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
+				marble_pillar = (BlockCarvable) new BlockCarvablePillar(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
 						.setStepSound(Block.soundTypeStone);
 				marble_pillar.carverHelper.setChiselBlockName("Marble Pillar");
 				marble_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.marblePillar.0.desc"), 0, "marblepillar/pillar");
@@ -1595,7 +1599,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockMarblePackedIce packedice = (BlockMarblePackedIce) new BlockMarblePackedIce().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3)
+			BlockCarvablePackedIce packedice = (BlockCarvablePackedIce) new BlockCarvablePackedIce().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3)
 					.setStepSound(Block.soundTypeGlass);
 			Carving.chisel.addVariation("packedice", Blocks.packed_ice, 0, 0);
 			packedice.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedice.1.desc"), 1, "packedice/a1-ice-light");
@@ -1622,7 +1626,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockMarblePackedIce packedice_pillar = (BlockMarblePackedIce) new BlockMarblePackedIce().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3)
+			BlockCarvablePackedIce packedice_pillar = (BlockCarvablePackedIce) new BlockCarvablePackedIce().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3)
 					.setStepSound(Block.soundTypeGlass);
 			packedice_pillar.carverHelper.setChiselBlockName("Packed Ice Pillar");
 			packedice_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.0.desc"), 0, "packedicepillar/column");
@@ -1672,7 +1676,7 @@ public enum Features {
 
 				@Override
 				public BlockCarvableStairs create(Block block, int meta, CarvableHelper helper) {
-					return new BlockMarblePackedIceStairs(block, meta, helper);
+					return new BlockCarvablePackedIceStairs(block, meta, helper);
 				}
 			}, "packedice_stairs");
 			Carving.chisel.registerOre("packedIceStairs", "packedIceStairs");
@@ -2174,12 +2178,12 @@ public enum Features {
 			Carving.chisel.registerOre("mossy_templeblock", "mossy_templeblock");
 		};
 	},
-	
+
 	/**
 	 * Dummy feature for all TF subsets
 	 */
 	TWILGHT_FOREST("TwilightForest"),
-	
+
 	TF_MAZESTONE(TWILGHT_FOREST.getRequiredMod(), TWILGHT_FOREST) {
 
 		@Override
@@ -2329,18 +2333,18 @@ public enum Features {
 		}
 	},
 
-	VOIDSTONE_PILLARS {
+	VOIDSTONE_PILLARS(VOIDSTONE) {
 
 		@Override
 		void addBlocks() {
-			BlockVoidstonePillar voidstonePillar = (BlockVoidstonePillar) new BlockVoidstonePillar().setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setStepSound(Block.soundTypeStone);
-			voidstonePillar.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar.0.desc"), 0, "voidstone/pillar-side");
-			voidstonePillar.carvableHelper.register(voidstonePillar, "voidstonePillar");
+			BlockCarvablePillar voidstonePillar = (BlockCarvablePillar) new BlockCarvablePillar(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setStepSound(Block.soundTypeStone);
+			voidstonePillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar.0.desc"), 0, "voidstone/pillar");
+			voidstonePillar.carverHelper.register(voidstonePillar, "voidstonePillar");
 			Carving.chisel.registerOre("voidstonePillar", "voidstonePillar");
 
-			BlockVoidstonePillar2 voidstonePillar2 = (BlockVoidstonePillar2) new BlockVoidstonePillar2().setStepSound(Block.soundTypeStone);
-			voidstonePillar2.carvableHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar2.0.desc"), 0, "voidstone/pillar-side");
-			voidstonePillar2.carvableHelper.register(voidstonePillar2, "voidstonePillar2");
+			BlockCarvablePillar voidstonePillar2 = (BlockCarvablePillar) new BlockCarvablePillar(Material.rock).setStepSound(Block.soundTypeStone);
+			voidstonePillar2.carverHelper.addVariation(StatCollector.translateToLocal("tile.voidstonePillar2.0.desc"), 0, "voidstone/animated/pillar");
+			voidstonePillar2.carverHelper.register(voidstonePillar2, "voidstonePillar2");
 			Carving.chisel.registerOre("voidstonePillar2", "voidstonePillar2");
 		}
 
