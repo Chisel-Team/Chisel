@@ -568,8 +568,8 @@ tile.concrete.10.desc=Asphalt
 #Road Line
 tile.roadLine.name=Road Lines
 tile.roadLine.0.desc=White
-tile.roadLine.1.desc=Double White
-tile.roadLine.2.desc=Yellow
+tile.roadLine.1.desc=Yellow
+tile.roadLine.2.desc=Double White
 tile.roadLine.3.desc=Double Yellow
 
 #Iron Blocks
