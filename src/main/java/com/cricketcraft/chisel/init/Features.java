@@ -1890,7 +1890,7 @@ public enum Features {
 			road_line.carverHelper.addVariation(StatCollector.translateToLocal("tile.roadLine.0.desc"), 0, "line-marking/white-center");
 			road_line.carverHelper.addVariation(StatCollector.translateToLocal("tile.roadLine.1.desc"), 1, "line-marking/double-white-center");
 			road_line.carverHelper.addVariation(StatCollector.translateToLocal("tile.roadLine.2.desc"), 2, "line-marking/yellow-center");
-			road_line.carverHelper.addVariation(StatCollector.translateToLocal("tile.roadine.3.desc"), 3, "line-marking/double-yellow-center");
+			road_line.carverHelper.addVariation(StatCollector.translateToLocal("tile.roadLine.3.desc"), 3, "line-marking/double-yellow-center");
 			GameRegistry.registerBlock(road_line, ItemCarvable.class, "road_line");
 			Carving.chisel.registerOre("roadLine", "roadLine");
 		}
