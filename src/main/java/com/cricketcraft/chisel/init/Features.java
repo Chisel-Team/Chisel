@@ -246,6 +246,18 @@ public enum Features {
 		}
 	},
 
+	BLOOD_BLOCK("AWWayofTime") {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable bloodBrick = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
+			Carving.chisel.addVariation("bloodBrick", GameRegistry.findBlock("AWWayofTime", "largeBloodStoneBrick"), 0, 0);
+			Carving.chisel.addVariation("bloodBrick", GameRegistry.findBlock("AWWayofTime", "bloodStoneBrick"), 0, 1);
+			bloodBrick.carverHelper.register(bloodBrick, "bloodBrick");
+			Carving.chisel.registerOre("bloodBrick", "bloodBrick");
+		}
+	},
+
 	BOOKSHELF {
 
 		@Override
