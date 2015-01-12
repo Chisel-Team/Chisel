@@ -170,7 +170,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		// need to check NBT as well as item
 		if (toMerge.isItemEqual(inventory[OUTPUT]) && ItemStack.areItemStackTagsEqual(toMerge, inventory[OUTPUT])) {
 			// we only care about metadata if the item has subtypes
-			return toMerge.getHasSubtypes() && toMerge.getItemDamage() == inventory[OUTPUT].getItemDamage();
+			return !toMerge.getHasSubtypes() || toMerge.getItemDamage() == inventory[OUTPUT].getItemDamage();
 		}
 
 		return false;
