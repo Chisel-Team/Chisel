@@ -83,6 +83,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable tallow = null;
 
 	public static final BlockCarvable bloodRune = null;
+	public static final BlockCarvable bloodBrick = null;
 	public static final BlockCarvableSand colored_sand = null;
 	public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
 
