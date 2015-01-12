@@ -1,20 +1,5 @@
 package com.cricketcraft.chisel.init;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.block.*;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.config.Configurations;
-import com.cricketcraft.chisel.entity.EntityBallOMoss;
-import com.cricketcraft.chisel.entity.EntityCloudInABottle;
-import com.cricketcraft.chisel.entity.EntitySmashingRock;
-import com.cricketcraft.chisel.item.*;
-import com.cricketcraft.chisel.item.chisel.ItemChisel;
-import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -28,8 +13,68 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.block.BlockAutoChisel;
+import com.cricketcraft.chisel.block.BlockBeaconBase;
+import com.cricketcraft.chisel.block.BlockCarvable;
+import com.cricketcraft.chisel.block.BlockCarvableAntiBlock;
+import com.cricketcraft.chisel.block.BlockCarvableGlass;
+import com.cricketcraft.chisel.block.BlockCarvableGlow;
+import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
+import com.cricketcraft.chisel.block.BlockCarvableLayered;
+import com.cricketcraft.chisel.block.BlockCarvablePane;
+import com.cricketcraft.chisel.block.BlockCarvablePowered;
+import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
+import com.cricketcraft.chisel.block.BlockCarvableSand;
+import com.cricketcraft.chisel.block.BlockCarvableSlab;
+import com.cricketcraft.chisel.block.BlockCarvableStairs;
+import com.cricketcraft.chisel.block.BlockCarvableTorch;
+import com.cricketcraft.chisel.block.BlockCloud;
+import com.cricketcraft.chisel.block.BlockConcrete;
+import com.cricketcraft.chisel.block.BlockEldritch;
+import com.cricketcraft.chisel.block.BlockGrimstone;
+import com.cricketcraft.chisel.block.BlockHolystone;
+import com.cricketcraft.chisel.block.BlockLavastone;
+import com.cricketcraft.chisel.block.BlockLeaf;
+import com.cricketcraft.chisel.block.BlockMarbleBookshelf;
+import com.cricketcraft.chisel.block.BlockMarbleCarpet;
+import com.cricketcraft.chisel.block.BlockMarbleIce;
+import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
+import com.cricketcraft.chisel.block.BlockMarblePackedIce;
+import com.cricketcraft.chisel.block.BlockMarblePackedIceStairs;
+import com.cricketcraft.chisel.block.BlockMarblePillar;
+import com.cricketcraft.chisel.block.BlockMarbleStairsMaker;
+import com.cricketcraft.chisel.block.BlockMarbleStairsMakerCreator;
+import com.cricketcraft.chisel.block.BlockMarbleTexturedOre;
+import com.cricketcraft.chisel.block.BlockPresent;
+import com.cricketcraft.chisel.block.BlockRoadLine;
+import com.cricketcraft.chisel.block.BlockSnakestone;
+import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
+import com.cricketcraft.chisel.block.BlockVoidstonePillar;
+import com.cricketcraft.chisel.block.BlockVoidstonePillar2;
+import com.cricketcraft.chisel.block.BlockWaterstone;
+import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.config.Configurations;
+import com.cricketcraft.chisel.entity.EntityBallOMoss;
+import com.cricketcraft.chisel.entity.EntityCloudInABottle;
+import com.cricketcraft.chisel.entity.EntitySmashingRock;
+import com.cricketcraft.chisel.item.ItemBallOMoss;
+import com.cricketcraft.chisel.item.ItemCarvable;
+import com.cricketcraft.chisel.item.ItemCloudInABottle;
+import com.cricketcraft.chisel.item.ItemMarbleSlab;
+import com.cricketcraft.chisel.item.ItemSmashingRock;
+import com.cricketcraft.chisel.item.ItemUpgrade;
+import com.cricketcraft.chisel.item.chisel.ItemChisel;
+import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
-import static com.cricketcraft.chisel.utils.General.sGNames;
+import static com.cricketcraft.chisel.utils.General.*;
 
 public enum Features {
 
@@ -52,6 +97,18 @@ public enum Features {
 			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 2, 1);
 			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 3, 2);
 			Carving.chisel.registerOre("AESkyStone", "AESkyStone");
+		}
+	},
+
+	AMBER("Thaumcraft") {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable amber = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
+			Carving.chisel.addVariation("amber", GameRegistry.findBlock("Thaumcraft", "blockCosmeticOpaque"), 0, 0);
+			Carving.chisel.addVariation("amber", GameRegistry.findBlock("Thaumcraft", "blockCosmeticOpaque"), 1, 1);
+			amber.carverHelper.register(amber, "amber");
+			Carving.chisel.registerOre("amber", "amber");
 		}
 	},
 
@@ -80,17 +137,15 @@ public enum Features {
 				String oreName = "antiBlock" + ItemDye.field_150921_b[i];
 				String texName = "antiBlock/" + ItemDye.field_150921_b[i] + "-";
 
-				antiBlock.carverHelper.addVariation(StatCollector.translateToLocal("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc"), i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
-				//OreDictionary.registerOre(oreName, antiBlock);
+				antiBlock.carverHelper
+						.addVariation(StatCollector.translateToLocal("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc"), i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
+				// OreDictionary.registerOre(oreName, antiBlock);
 				Carving.chisel.registerOre(blockName, oreName);
 
 				/*
-				for (CarvableVariation cv : stainedGlass[glassId].carverHelper.variations) {
-					if (cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 4)
-						continue;
-					stainedGlass[glassId].carverHelper.registerVariation(blockName, cv, stainedGlass[glassId], cv.metadata);
-				}
-				*/
+				 * for (CarvableVariation cv : stainedGlass[glassId].carverHelper.variations) { if (cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 4) continue;
+				 * stainedGlass[glassId].carverHelper.registerVariation(blockName, cv, stainedGlass[glassId], cv.metadata); }
+				 */
 			}
 
 			antiBlock.carverHelper.register(antiBlock, "antiBlock");
@@ -98,15 +153,15 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			//TODO: Add a recipe
+			// TODO: Add a recipe
 			/*
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ChiselBlocks.woolen_clay, 2, meta), new Object[] { "blockWool" + sGNames[meta].replaceAll(" ", ""),
-					"stainedClay" + sGNames[meta].replaceAll(" ", "") }));
-			*/
+			 * GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ChiselBlocks.woolen_clay, 2, meta), new Object[] { "blockWool" + sGNames[meta].replaceAll(" ", ""), "stainedClay" +
+			 * sGNames[meta].replaceAll(" ", "") }));
+			 */
 		}
 
 		@Override
-		boolean needsMetaRecipes() { //TODO: Not sure if this is necessary
+		boolean needsMetaRecipes() { // TODO: Not sure if this is necessary
 			return true;
 		}
 	},
@@ -131,44 +186,6 @@ public enum Features {
 		}
 	},
 
-	THAUMIUM("Thaumcraft") {
-
-		@Override
-		void addBlocks() {
-			BlockCarvable thaumium = (BlockCarvable) new BlockCarvable(Material.iron).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeMetal);
-			Carving.chisel.addVariation("thaumium", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 4, 0);
-			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.0.desc"), 0, "thaumium/bevel");
-			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.1.desc"), 1, "thaumium/chunks");
-			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.2.desc"), 2, "thaumium/purplerunes");
-			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.3.desc"), 3, "thaumium/runes");
-			thaumium.carverHelper.register(thaumium, "thaumium");
-			Carving.chisel.registerOre("thaumium", "thaumium");
-		}
-	},
-
-	TALLOW("Thaumcraft") {
-
-		@Override
-		void addBlocks() {
-			BlockCarvable tallow = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeSnow);
-			Carving.chisel.addVariation("tallow", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 5, 0);
-			tallow.carverHelper.register(tallow, "tallow");
-			Carving.chisel.registerOre("tallow", "tallow");
-		}
-	},
-
-	AMBER("Thaumcraft") {
-
-		@Override
-		void addBlocks() {
-			BlockCarvable amber = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
-			Carving.chisel.addVariation("amber", GameRegistry.findBlock("Thaumcraft", "blockCosmeticOpaque"), 0, 0);
-			Carving.chisel.addVariation("amber", GameRegistry.findBlock("Thaumcraft", "blockCosmeticOpaque"), 1, 1);
-			amber.carverHelper.register(amber, "amber");
-			Carving.chisel.registerOre("amber", "amber");
-		}
-	},
-
 	AUTO_CHISEL {
 
 		@Override
@@ -179,8 +196,8 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.autoChisel, 1), new Object[] { "XXX", " Y ", "YYY", Character.valueOf('X'), Blocks.stone_slab, Character.valueOf('Y'),
-					"ingotIron" }));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.autoChisel, 1), new Object[] { "XXX", " Y ", "YYY", Character.valueOf('X'), Blocks.stone_slab,
+					Character.valueOf('Y'), "ingotIron" }));
 		}
 	},
 
@@ -459,6 +476,8 @@ public enum Features {
 
 	COLORED_SAND {
 
+		final String[] dyes = { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White" };
+
 		@Override
 		void addBlocks() {
 			BlockCarvableSand colored_sand = (BlockCarvableSand) new BlockCarvableSand().setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
@@ -470,8 +489,6 @@ public enum Features {
 
 			Carving.chisel.registerOre("colored_sand", "colored_sand");
 		}
-
-		final String[] dyes = { "Black", "Red", "Green", "Brown", "Blue", "Purple", "Cyan", "LightGray", "Gray", "Pink", "Lime", "Yellow", "LightBlue", "Magenta", "Orange", "White" };
 
 		@Override
 		void addRecipes() {
@@ -710,8 +727,8 @@ public enum Features {
 					.setResistance(10F);
 			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.0.desc"), 0, "futura/WIP/screenMetallicWIP");
 			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.1.desc"), 1, "futura/WIP/screenCyanWIP");
-            futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 2, "futura/WIP/controllerWIP");
-            futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.3.desc"), 3, "futura/WIP/wavyWIP");
+			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.2.desc"), 2, "futura/WIP/controllerWIP");
+			futura.carverHelper.addVariation(StatCollector.translateToLocal("tile.futura.3.desc"), 3, "futura/WIP/wavyWIP");
 			futura.carverHelper.register(futura, "futura");
 			Carving.chisel.registerOre("futura", "futura");
 		}
@@ -2044,6 +2061,17 @@ public enum Features {
 		}
 	},
 
+	TALLOW("Thaumcraft") {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable tallow = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeSnow);
+			Carving.chisel.addVariation("tallow", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 5, 0);
+			tallow.carverHelper.register(tallow, "tallow");
+			Carving.chisel.registerOre("tallow", "tallow");
+		}
+	},
+
 	TECHNICAL {
 
 		@Override
@@ -2146,12 +2174,12 @@ public enum Features {
 			Carving.chisel.registerOre("mossy_templeblock", "mossy_templeblock");
 		};
 	},
-
+	
 	/**
 	 * Dummy feature for all TF subsets
 	 */
 	TWILGHT_FOREST("TwilightForest"),
-
+	
 	TF_MAZESTONE(TWILGHT_FOREST.getRequiredMod(), TWILGHT_FOREST) {
 
 		@Override
@@ -2188,6 +2216,40 @@ public enum Features {
 			Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "tile.TFUnderBrick"), 1, 1);
 			Carving.chisel.addVariation("TFUnderBrick", GameRegistry.findBlock("TwilightForest", "tile.TFUnderBrick"), 2, 2);
 			Carving.chisel.registerOre("TFUnderBrick", "TFUnderBrick");
+		}
+	},
+
+	THAUMIUM("Thaumcraft") {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable thaumium = (BlockCarvable) new BlockCarvable(Material.iron).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeMetal);
+			Carving.chisel.addVariation("thaumium", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 4, 0);
+			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.0.desc"), 0, "thaumium/bevel");
+			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.1.desc"), 1, "thaumium/chunks");
+			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.2.desc"), 2, "thaumium/purplerunes");
+			thaumium.carverHelper.addVariation(StatCollector.translateToLocal("tile.thaumium.3.desc"), 3, "thaumium/runes");
+			thaumium.carverHelper.register(thaumium, "thaumium");
+			Carving.chisel.registerOre("thaumium", "thaumium");
+		}
+	},
+
+	TORCH {
+
+		@Override
+		void addBlocks() {
+			Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
+			for (int type = 0; type < 10; type++) {
+				if (type == 8 || type == 9)
+					torch[type] = new BlockCarvableTorch().disableParticles();
+				else
+					torch[type] = new BlockCarvableTorch();
+
+				torch[type].setInformation("torch" + (type + 1));
+				GameRegistry.registerBlock(torch[type], "torch" + (type + 1));
+				Carving.chisel.addVariation("torch", torch[type], 0, (type + 1));
+			}
+			Carving.chisel.registerOre("torch", "torch");
 		}
 	},
 
@@ -2289,6 +2351,36 @@ public enum Features {
 		}
 	},
 
+	WARNING_SIGN {
+
+		@Override
+		void addBlocks() {
+			BlockCarvableLayered sign = (BlockCarvableLayered) new BlockCarvableLayered(Material.iron, "warning/base").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F)
+					.setResistance(10.0F);
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.0.desc"), 0, "warning/rad");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.1.desc"), 1, "warning/bio");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.2.desc"), 2, "warning/fire");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.3.desc"), 3, "warning/explosion");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.4.desc"), 4, "warning/death");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.5.desc"), 5, "warning/falling");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.6.desc"), 6, "warning/fall");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.7.desc"), 7, "warning/voltage");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.8.desc"), 8, "warning/generic");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.9.desc"), 9, "warning/acid");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.10.desc"), 10, "warning/underconstruction");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.11.desc"), 11, "warning/sound");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.12.desc"), 12, "warning/noentry");
+			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.13.desc"), 13, "warning/cryogenic");
+			sign.carverHelper.register(sign, "warningSign");
+			Carving.chisel.registerOre("warningSign", "warningSign");
+		}
+
+		@Override
+		void addRecipes() {
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.sign, 4, 0), new Object[] { "xxx", "xyx", "xxx", 'x', "stone", 'y', Items.sign }));
+		}
+	},
+
 	WATERSTONE {
 
 		@Override
@@ -2377,52 +2469,9 @@ public enum Features {
 		}
 	},
 
-	WARNING_SIGN {
-		@Override
-		void addBlocks() {
-			BlockCarvableLayered sign = (BlockCarvableLayered) new BlockCarvableLayered(Material.iron, "warning/base").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.0.desc"), 0, "warning/rad");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.1.desc"), 1, "warning/bio");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.2.desc"), 2, "warning/fire");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.3.desc"), 3, "warning/explosion");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.4.desc"), 4, "warning/death");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.5.desc"), 5, "warning/falling");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.6.desc"), 6, "warning/fall");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.7.desc"), 7, "warning/voltage");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.8.desc"), 8, "warning/generic");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.9.desc"), 9, "warning/acid");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.10.desc"), 10, "warning/underconstruction");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.11.desc"), 11, "warning/sound");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.12.desc"), 12, "warning/noentry");
-			sign.carverHelper.addVariation(StatCollector.translateToLocal("tile.warningSign.13.desc"), 13, "warning/cryogenic");
-			sign.carverHelper.register(sign, "warningSign");
-			Carving.chisel.registerOre("warningSign", "warningSign");
-		}
-		@Override
-		void addRecipes() {
-			 GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.sign, 4, 0), new Object[]{"xxx", "xyx", "xxx", 'x', "stone", 'y', Items.sign}));
-		}
-	},
-
-	TORCH {
-		@Override
-		void addBlocks() {
-		Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
-		for(int type = 0; type < 10; type++){
-			if(type == 8 || type == 9)
-				torch[type] = new BlockCarvableTorch().disableParticles();
-			else
-				torch[type] = new BlockCarvableTorch();
-
-			torch[type].setInformation("torch" + (type + 1));
-			GameRegistry.registerBlock(torch[type], "torch" + (type + 1));
-			Carving.chisel.addVariation("torch", torch[type], 0, (type + 1));
-		}
-		Carving.chisel.registerOre("torch", "torch");
-		}
-	},
-
 	;
+
+	static int meta = 0;
 
 	public static void init() {
 		loadRecipes();
@@ -2459,6 +2508,15 @@ public enum Features {
 				}
 			}
 		}
+	}
+
+	public static boolean oneModdedFeatureLoaded() {
+		for (Features f : values()) {
+			if (f.getRequiredMod() != null && Loader.isModLoaded(f.getRequiredMod())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public static void preInit() {
@@ -2499,12 +2557,6 @@ public enum Features {
 		;
 	}
 
-	static int meta = 0;
-
-	boolean needsMetaRecipes() {
-		return false;
-	}
-
 	public final boolean enabled() {
 		return Configurations.featureEnabled(this) && (requiredMod == null || Loader.isModLoaded(requiredMod)) && (parent == null || parent.enabled());
 	}
@@ -2513,12 +2565,7 @@ public enum Features {
 		return requiredMod;
 	}
 
-	public static boolean oneModdedFeatureLoaded() {
-		for (Features f : values()) {
-			if (f.getRequiredMod() != null && Loader.isModLoaded(f.getRequiredMod())) {
-				return true;
-			}
-		}
+	boolean needsMetaRecipes() {
 		return false;
 	}
 }
