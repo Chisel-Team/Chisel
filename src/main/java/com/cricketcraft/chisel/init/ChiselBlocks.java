@@ -1,11 +1,9 @@
 package com.cricketcraft.chisel.init;
 
-import com.cricketcraft.chisel.block.*;
-import net.minecraft.block.Block;
-
 import com.cricketcraft.chisel.Chisel;
-
+import com.cricketcraft.chisel.block.*;
 import cpw.mods.fml.common.registry.GameRegistry.ObjectHolder;
+import net.minecraft.block.Block;
 
 @ObjectHolder(Chisel.MOD_ID)
 public final class ChiselBlocks {
@@ -29,7 +27,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable iron_block = null;
 	public static final BlockCarvable gold_block = null;
 	public static final BlockCarvable diamond_block = null;
-	public static final BlockLightstoneCarvable glowstone = null;
+	public static final BlockCarvableGlowstone glowstone = null;
 	public static final BlockCarvable lapis_block = null;
 	public static final BlockCarvable emerald_block = null;
 	public static final BlockCarvable nether_brick = null;
@@ -78,13 +76,15 @@ public final class ChiselBlocks {
 	public static final BlockCarvable technical = null;
 	public static final BlockCarvableGlass technical2 = null;
 	public static final BlockCarvable futura = null;
-	public static final BlockCarvable bone = null;
-	public static final BlockCarvable scorching = null;
 	public static final BlockCarvable brickCustom = null;
-	public static final BlockCarvable sign = null;
+	public static final BlockCarvableLayered sign = null;
 	public static final BlockCarvable arcane = null;
+	public static final BlockCarvable thaumium = null;
+	public static final BlockCarvable tallow = null;
+
 	public static final BlockCarvable bloodRune = null;
 	public static final BlockCarvableSand colored_sand = null;
+	public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
 
 	// Arrays can't be final because of how @ObjectHolder works
 	public static BlockCarvable[] planks = new BlockCarvable[6];

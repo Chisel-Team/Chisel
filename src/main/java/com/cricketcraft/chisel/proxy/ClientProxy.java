@@ -1,15 +1,8 @@
 package com.cricketcraft.chisel.proxy;
 
-import com.cricketcraft.chisel.client.render.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
-
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
+import com.cricketcraft.chisel.client.render.*;
 import com.cricketcraft.chisel.client.render.item.ItemChiselRenderer;
 import com.cricketcraft.chisel.client.render.item.ItemPresentRenderer;
 import com.cricketcraft.chisel.client.render.tile.RenderAutoChisel;
@@ -19,9 +12,14 @@ import com.cricketcraft.chisel.entity.EntityCloudInABottle;
 import com.cricketcraft.chisel.entity.EntitySmashingRock;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselItems;
-
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {
 
@@ -44,6 +42,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new BlockCarpetRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockGlowRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockCTMNoLightRenderer());
+		RenderingRegistry.registerBlockHandler(new BlockLayeredRenderer());
 
 		RenderingRegistry.registerBlockHandler(new BlockTexturedOreRenderer());
 
