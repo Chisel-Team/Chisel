@@ -147,7 +147,7 @@ public class Chisel {
 		Configurations.config.load();
 		Configurations.refreshConfig();
 
-		System.out.println("[Chisel-2] Hey Jared, I wasn't lying");
+		logger.info("Hey Jared, I wasn't lying");
 
 		ChiselTabs.preInit();
 		Features.preInit();

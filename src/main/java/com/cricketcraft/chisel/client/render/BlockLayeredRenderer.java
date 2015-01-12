@@ -32,8 +32,9 @@ public class BlockLayeredRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-		Drawing.renderAllFaces(renderer, block, x, y, z, ((BlockCarvableLayered) block).getBaseTex());
-		Tessellator.instance.setBrightness(0xFFFFFF);
+		renderer.setOverrideBlockTexture(((BlockCarvableLayered) block).getBaseTex());
+		renderer.renderStandardBlock(block, x, y, z);
+		renderer.clearOverrideBlockTexture();
 		renderer.renderStandardBlock(block, x, y, z);
 		return true;
 	}

@@ -163,7 +163,6 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 				}
 			}
 		} else if (worldObj.isRemote) {
-			System.out.println(lastBase);
 			if (chiseling) {
 				chiselRot += rotAmnt;
 				if (chiselRot >= maxRot) {
@@ -403,7 +402,6 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	}
 
 	public void doChiselAnim(ItemStack lastChiseled, boolean playSound) {
-		System.out.println(lastChiseled + "  " + playSound);
 		this.lastBase = lastChiseled == null ? null : lastChiseled.copy();
 		if (playSound) {
 			this.chiseling = true;
