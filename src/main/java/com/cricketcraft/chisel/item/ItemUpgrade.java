@@ -4,15 +4,11 @@ import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel.Upgrade;
 
 public class ItemUpgrade extends BaseItem {
@@ -24,16 +20,7 @@ public class ItemUpgrade extends BaseItem {
 		this.setUnlocalizedName(unlocalizedName);
 		this.setCreativeTab(CreativeTabs.tabMaterials);
 		setHasSubtypes(true);
-	}
-
-	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int size, float hitX, float hitY, float hitZ) {
-		if (world.isRemote)
-			return false;
-		TileEntity tile = world.getTileEntity(x, y, z);
-		if (tile != null && tile instanceof TileEntityAutoChisel) {
-		}
-		return true;
+		setMaxStackSize(1); // it's easier this way
 	}
 
 	@Override
