@@ -98,6 +98,9 @@ public class General {
 	public static final String[] sGNames = new String[] { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Lime", "Pink", "Gray", "Light Gray", "Cyan", "Purple", "Blue", "Brown", "Green",
 			"Red", "Black" };
 
+	public static final String[] featureColors = new String[] { "white", "orange", "magenta", "lightblue", "yellow", "lime", "pink", "darkgray", "lightgray", "cyan", "purple", "blue", "brown", "green",
+			"red", "black" };
+
 	public static void setChiselTarget(ItemStack chisel, ItemStack target) {
 		initTag(chisel);
 		NBTTagCompound targetTag = new NBTTagCompound();

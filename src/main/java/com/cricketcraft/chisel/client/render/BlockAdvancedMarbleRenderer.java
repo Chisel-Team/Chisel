@@ -23,7 +23,6 @@ public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
 	public BlockAdvancedMarbleRenderer() {
 		if (Chisel.renderCTMId == 0) {
 			Chisel.renderCTMId = RenderingRegistry.getNextAvailableRenderId();
-
 		}
 	}
 

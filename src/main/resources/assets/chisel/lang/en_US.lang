@@ -29,6 +29,25 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 
 #Chisel 2
 
+#AntiBlocks
+tile.antiBlock.name=Anti Block
+tile.antiBlock.black.desc=Black Anti Block
+tile.antiBlock.blue.desc=Blue Anti Block
+tile.antiBlock.brown.desc=Brown Anti Block
+tile.antiBlock.cyan.desc=Cyan Anti Block
+tile.antiBlock.green.desc=Green Anti Block
+tile.antiBlock.light_blue.desc=Light Blue Anti Block
+tile.antiBlock.silver.desc=Light Gray Anti Block
+tile.antiBlock.lime.desc=Lime Anti Block
+tile.antiBlock.magenta.desc=Magenta Anti Block
+tile.antiBlock.orange.desc=Orange Anti Block
+tile.antiBlock.pink.desc=Pink Anti Block
+tile.antiBlock.purple.desc=Purple Anti Block
+tile.antiBlock.red.desc=Red Anti Block
+tile.antiBlock.white.desc=White Anti Block
+tile.antiBlock.yellow.desc=Yellow Anti Block
+tile.antiBlock.gray.desc=Gray Anti Block
+
 #Diorite
 tile.diorite.name=Diorite
 tile.diorite.0.desc=Generates in your world

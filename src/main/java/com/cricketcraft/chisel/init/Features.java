@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.init;
 
+import com.cricketcraft.chisel.block.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -14,42 +15,6 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.block.BlockAutoChisel;
-import com.cricketcraft.chisel.block.BlockBeaconBase;
-import com.cricketcraft.chisel.block.BlockCarvable;
-import com.cricketcraft.chisel.block.BlockCarvableGlass;
-import com.cricketcraft.chisel.block.BlockCarvableGlow;
-import com.cricketcraft.chisel.block.BlockCarvablePane;
-import com.cricketcraft.chisel.block.BlockCarvablePowered;
-import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
-import com.cricketcraft.chisel.block.BlockCarvableSand;
-import com.cricketcraft.chisel.block.BlockCarvableSlab;
-import com.cricketcraft.chisel.block.BlockCarvableStairs;
-import com.cricketcraft.chisel.block.BlockCloud;
-import com.cricketcraft.chisel.block.BlockConcrete;
-import com.cricketcraft.chisel.block.BlockEldritch;
-import com.cricketcraft.chisel.block.BlockGrimstone;
-import com.cricketcraft.chisel.block.BlockHolystone;
-import com.cricketcraft.chisel.block.BlockLavastone;
-import com.cricketcraft.chisel.block.BlockLeaf;
-import com.cricketcraft.chisel.block.BlockLightstoneCarvable;
-import com.cricketcraft.chisel.block.BlockMarbleBookshelf;
-import com.cricketcraft.chisel.block.BlockMarbleCarpet;
-import com.cricketcraft.chisel.block.BlockMarbleIce;
-import com.cricketcraft.chisel.block.BlockMarbleIceStairs;
-import com.cricketcraft.chisel.block.BlockMarblePackedIce;
-import com.cricketcraft.chisel.block.BlockMarblePackedIceStairs;
-import com.cricketcraft.chisel.block.BlockMarblePillar;
-import com.cricketcraft.chisel.block.BlockMarbleStairsMaker;
-import com.cricketcraft.chisel.block.BlockMarbleStairsMakerCreator;
-import com.cricketcraft.chisel.block.BlockMarbleTexturedOre;
-import com.cricketcraft.chisel.block.BlockPresent;
-import com.cricketcraft.chisel.block.BlockRoadLine;
-import com.cricketcraft.chisel.block.BlockSnakestone;
-import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
-import com.cricketcraft.chisel.block.BlockVoidstonePillar;
-import com.cricketcraft.chisel.block.BlockVoidstonePillar2;
-import com.cricketcraft.chisel.block.BlockWaterstone;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
@@ -107,6 +72,49 @@ public enum Features {
 			andesite.carverHelper.addVariation(StatCollector.translateToLocal("tile.andesite.1.desc"), 1, "andesite/polishedAndesite");
 			andesite.carverHelper.register(andesite, "andesite");
 			Carving.chisel.registerOre("andesite", "andesite");
+		}
+	},
+
+	ANTIBLOCK {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable antiBlock = (BlockCarvable) new BlockCarvableAntiBlock().setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
+			antiBlock.carverHelper.setChiselBlockName("Anti Block");
+
+			for (int i = 0; i < 16; i++) {
+				final String blockName = "antiBlock" + ItemDye.field_150921_b[i];
+				String oreName = "antiBlock" + ItemDye.field_150921_b[i];
+				String texName = "antiBlock/" + ItemDye.field_150921_b[i] + "-";
+
+				antiBlock.carverHelper.addVariation(StatCollector.translateToLocal("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc"), i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
+				//OreDictionary.registerOre(oreName, antiBlock);
+				Carving.chisel.registerOre(blockName, oreName);
+
+				/*
+				for (CarvableVariation cv : stainedGlass[glassId].carverHelper.variations) {
+					if (cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 4)
+						continue;
+					stainedGlass[glassId].carverHelper.registerVariation(blockName, cv, stainedGlass[glassId], cv.metadata);
+				}
+				*/
+			}
+
+			antiBlock.carverHelper.register(antiBlock, "antiBlock");
+		}
+
+		@Override
+		void addRecipes() {
+			//TODO: Add a recipe
+			/*
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ChiselBlocks.woolen_clay, 2, meta), new Object[] { "blockWool" + sGNames[meta].replaceAll(" ", ""),
+					"stainedClay" + sGNames[meta].replaceAll(" ", "") }));
+			*/
+		}
+
+		@Override
+		boolean needsMetaRecipes() { //TODO: Not sure if this is necessary
+			return true;
 		}
 	},
 
