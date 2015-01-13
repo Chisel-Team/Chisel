@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.init;
+package com.cricketcraft.chisel;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -12,7 +12,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.BlockAutoChisel;
 import com.cricketcraft.chisel.block.BlockBeaconBase;
 import com.cricketcraft.chisel.block.BlockCarvable;
@@ -59,6 +58,9 @@ import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
 import com.cricketcraft.chisel.entity.EntityCloudInABottle;
 import com.cricketcraft.chisel.entity.EntitySmashingRock;
+import com.cricketcraft.chisel.init.ChiselBlocks;
+import com.cricketcraft.chisel.init.ChiselItems;
+import com.cricketcraft.chisel.init.ChiselTabs;
 import com.cricketcraft.chisel.item.ItemBallOMoss;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.ItemCloudInABottle;
@@ -135,8 +137,7 @@ public enum Features {
 				final String blockName = "antiBlock" + ItemDye.field_150921_b[i];
 				String oreName = "antiBlock" + ItemDye.field_150921_b[i];
 
-				antiBlock.carverHelper
-						.addVariation("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc", i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
+				antiBlock.carverHelper.addVariation("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc", i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
 				Carving.chisel.registerOre(blockName, oreName);
 			}
 
@@ -145,7 +146,7 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			// TODO: Add a recipe
+			// TODO Add a recipe
 		}
 
 		@Override
@@ -2456,9 +2457,9 @@ public enum Features {
 
 	;
 
-	static int meta = 0;
+	private static int meta = 0;
 
-	public static void init() {
+	static void init() {
 		loadRecipes();
 	}
 
@@ -2504,7 +2505,7 @@ public enum Features {
 		return false;
 	}
 
-	public static void preInit() {
+	static void preInit() {
 		loadBlocks();
 		loadItems();
 	}

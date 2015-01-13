@@ -204,7 +204,6 @@ public class BlockMarblePaneRenderer implements ISimpleBlockRenderingHandler {
 		BlockPane block = (BlockPane) b;
 		Tessellator tessellator = Tessellator.instance;
 
-		int worldHeight = world.getHeight();
 		tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 
 		float f = 1.0F;

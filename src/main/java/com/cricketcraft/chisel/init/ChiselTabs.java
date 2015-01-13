@@ -4,6 +4,8 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.cricketcraft.chisel.Features;
+
 public class ChiselTabs {
 
 	private static class CustomCreativeTab extends CreativeTabs {

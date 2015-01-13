@@ -1,9 +1,41 @@
 package com.cricketcraft.chisel.init;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.block.*;
-import cpw.mods.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraft.block.Block;
+
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.block.BlockCarvable;
+import com.cricketcraft.chisel.block.BlockCarvableGlass;
+import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
+import com.cricketcraft.chisel.block.BlockCarvableIce;
+import com.cricketcraft.chisel.block.BlockCarvableIcePillar;
+import com.cricketcraft.chisel.block.BlockCarvableIceStairs;
+import com.cricketcraft.chisel.block.BlockCarvableLayered;
+import com.cricketcraft.chisel.block.BlockCarvablePackedIce;
+import com.cricketcraft.chisel.block.BlockCarvablePackedIcePillar;
+import com.cricketcraft.chisel.block.BlockCarvablePackedIceStairs;
+import com.cricketcraft.chisel.block.BlockCarvablePane;
+import com.cricketcraft.chisel.block.BlockCarvablePillar;
+import com.cricketcraft.chisel.block.BlockCarvablePowered;
+import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
+import com.cricketcraft.chisel.block.BlockCarvableSand;
+import com.cricketcraft.chisel.block.BlockCarvableSlab;
+import com.cricketcraft.chisel.block.BlockCarvableStairs;
+import com.cricketcraft.chisel.block.BlockCarvableTorch;
+import com.cricketcraft.chisel.block.BlockCloud;
+import com.cricketcraft.chisel.block.BlockConcrete;
+import com.cricketcraft.chisel.block.BlockGrimstone;
+import com.cricketcraft.chisel.block.BlockHolystone;
+import com.cricketcraft.chisel.block.BlockLavastone;
+import com.cricketcraft.chisel.block.BlockMarbleCarpet;
+import com.cricketcraft.chisel.block.BlockMarbleTexturedOre;
+import com.cricketcraft.chisel.block.BlockMarbleWall;
+import com.cricketcraft.chisel.block.BlockPresent;
+import com.cricketcraft.chisel.block.BlockRoadLine;
+import com.cricketcraft.chisel.block.BlockSnakestone;
+import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
+import com.cricketcraft.chisel.block.BlockWaterstone;
+
+import cpw.mods.fml.common.registry.GameRegistry.ObjectHolder;
 
 @ObjectHolder(Chisel.MOD_ID)
 public final class ChiselBlocks {

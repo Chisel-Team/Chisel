@@ -28,8 +28,7 @@ public abstract class Scrollbar extends GuiButton {
 	}
 
 	/**
-	 * Returns true if the mouse has been pressed on this control. Equivalent of
-	 * MouseListener.mousePressed(MouseEvent e).
+	 * Returns true if the mouse has been pressed on this control. Equivalent of MouseListener.mousePressed(MouseEvent e).
 	 */
 	@Override
 	public boolean mousePressed(Minecraft mc, int x, int y) {
@@ -71,7 +70,6 @@ public abstract class Scrollbar extends GuiButton {
 			}
 		}
 
-		int bottom = yPosition + height;
 		GeneralClient.bind("/gui/allitems.png");
 		drawTexturedModalRect(xPosition, yPosition + (int) ((height - elementHeight) * offset), active ? 232 : 244, 0, 12, elementHeight);
 	}

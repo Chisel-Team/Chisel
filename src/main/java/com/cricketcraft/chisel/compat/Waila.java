@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel;
+package com.cricketcraft.chisel.compat;
 
 import java.util.List;
 

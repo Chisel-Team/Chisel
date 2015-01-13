@@ -1,8 +1,27 @@
 package com.cricketcraft.chisel.proxy;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
+
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
-import com.cricketcraft.chisel.client.render.*;
+import com.cricketcraft.chisel.client.render.BlockAdvancedMarbleRenderer;
+import com.cricketcraft.chisel.client.render.BlockCTMNoLightRenderer;
+import com.cricketcraft.chisel.client.render.BlockCarpetRenderer;
+import com.cricketcraft.chisel.client.render.BlockEldritchRenderer;
+import com.cricketcraft.chisel.client.render.BlockGlowRenderer;
+import com.cricketcraft.chisel.client.render.BlockLayeredRenderer;
+import com.cricketcraft.chisel.client.render.BlockMarblePaneRenderer;
+import com.cricketcraft.chisel.client.render.BlockMarblePillarRenderer;
+import com.cricketcraft.chisel.client.render.BlockMarbleStairsRenderer;
+import com.cricketcraft.chisel.client.render.BlockRoadLineRenderer;
+import com.cricketcraft.chisel.client.render.BlockSnakeStoneRenderer;
+import com.cricketcraft.chisel.client.render.BlockTexturedOreRenderer;
+import com.cricketcraft.chisel.client.render.RenderStandardBlockNoSunlight;
 import com.cricketcraft.chisel.client.render.item.ItemChiselRenderer;
 import com.cricketcraft.chisel.client.render.item.ItemPresentRenderer;
 import com.cricketcraft.chisel.client.render.tile.RenderAutoChisel;
@@ -12,14 +31,9 @@ import com.cricketcraft.chisel.entity.EntityCloudInABottle;
 import com.cricketcraft.chisel.entity.EntitySmashingRock;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselItems;
+
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {
 

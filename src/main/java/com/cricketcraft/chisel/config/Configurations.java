@@ -6,7 +6,7 @@ import net.minecraftforge.common.config.Configuration;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.cricketcraft.chisel.init.Features;
+import com.cricketcraft.chisel.Features;
 
 public class Configurations {
 

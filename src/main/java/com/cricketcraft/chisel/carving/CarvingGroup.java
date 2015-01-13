@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.carving;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CarvingGroup {
 
@@ -13,5 +14,5 @@ public class CarvingGroup {
 	String sound;
 	String oreName;
 
-	ArrayList<CarvingVariation> variations = new ArrayList<CarvingVariation>();
+	List<CarvingVariation> variations = new ArrayList<CarvingVariation>();
 }
