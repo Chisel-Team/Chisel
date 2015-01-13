@@ -26,33 +26,26 @@ public class ContainerChisel extends Container {
 		currentIndex = playerInventory.currentItem;
 		inv.container = this;
 
-		int[] leftOffsets = { 8, 26, 134, 152, 44, 116 };
-		int[] topOffsets = { 8, 26, 44, 62 };
+		int top = 8, left = 62;
 
-		for (int i = 0; i < 2; i++) {
-			for (int y = 0; y < 4; y++) {
-				for (int x = 0; x < 2; x++) {
-					addSlotToContainer(new SlotChiselSelection(this, inventory, inventory, x + i * 8 + y * 2, leftOffsets[x + i * 2], topOffsets[y]));
-				}
-			}
+		// selection slots
+		for (int i = 0; i < 40; i++) {
+			addSlotToContainer(new SlotChiselSelection(this, inventory, inventory, i, left + ((i % 10) * 18), top + ((i / 10) * 18)));
 		}
+		
+		// main slot
+		addSlotToContainer(new SlotChiselInput(this, inventory, InventoryChiselSelection.normalSlots, 24, 24));
 
-		for (int y = 0; y < 4; y++) {
-			for (int x = 0; x < 2; x++) {
-				addSlotToContainer(new SlotChiselSelection(this, inventory, inventory, 16 + x + y * 2, leftOffsets[4 + x], topOffsets[3 - y]));
-			}
+		top = 84;
+		left = 71;
+		// main inv
+		for (int i = 0; i < 27; i++) {
+			addSlotToContainer(new Slot(inventoryplayer, i + 9, left + ((i % 9) * 18), top + (i / 9) * 18));
 		}
-
-		addSlotToContainer(new SlotChiselInput(this, inventory, InventoryChiselSelection.normalSlots, 80, 35));
-
-		for (int k = 0; k < 3; k++) {
-			for (int j1 = 0; j1 < 9; j1++) {
-				addSlotToContainer(new Slot(inventoryplayer, j1 + k * 9 + 9, 8 + j1 * 18, 102 + k * 18 - 18));
-			}
-		}
-
-		for (int l = 0; l < 9; l++) {
-			addSlotToContainer(l == currentIndex ? new SlotChiselPlayer(this, inventoryplayer, l, 8 + l * 18, 160 - 18) : new Slot(inventoryplayer, l, 8 + l * 18, 160 - 18));
+		
+		top = 142;
+		for (int i = 0; i < 9; i++) {
+			addSlotToContainer(new Slot(inventoryplayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
 		}
 
 		chisel = inventoryplayer.getCurrentItem();
@@ -143,7 +136,7 @@ public class ContainerChisel extends Container {
 			return;
 
 		General.setChiselTarget(chisel, inventory.getStackInSpecialSlot());
-		
+
 		playerInventory.mainInventory[currentIndex] = chisel;
 	}
 }

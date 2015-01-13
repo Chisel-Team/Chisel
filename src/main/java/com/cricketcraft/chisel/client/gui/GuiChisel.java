@@ -4,11 +4,13 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.Slot;
 
 import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
+import com.cricketcraft.chisel.inventory.SlotChiselInput;
 import com.cricketcraft.chisel.utils.GeneralClient;
 
 public class GuiChisel extends GuiContainer {
@@ -20,6 +22,7 @@ public class GuiChisel extends GuiContainer {
 		super(new ContainerChisel(iinventory, menu));
 		player = iinventory.player;
 		height = 177;
+		xSize = 252;
 
 		container = (ContainerChisel) inventorySlots;
 	}
@@ -30,16 +33,12 @@ public class GuiChisel extends GuiContainer {
 		inventorySlots.onContainerClosed(player);
 	}
 
-	boolean isExtended() {
-		return container.inventory.activeVariations > 16;
-	}
-
 	@Override
 	protected void drawGuiContainerForegroundLayer(int j, int i) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		String line = isExtended() ? I18n.format(this.container.inventory.getInventoryName() + ".titleShort") : I18n.format(this.container.inventory.getInventoryName() + ".title");
-		fontRendererObj.drawString(line, 88 - fontRendererObj.getStringWidth(line) / 2, 13, 0x404040);
+		String line = I18n.format(this.container.inventory.getInventoryName() + ".title");
+		fontRendererObj.drawSplitString(line, 50 - fontRendererObj.getStringWidth(line) / 2, 60, 40, 0x404040);
 	}
 
 	@Override
@@ -50,9 +49,25 @@ public class GuiChisel extends GuiContainer {
 		int i = width - xSize >> 1;
 		int j = height - ySize >> 1;
 
-		String texture = isExtended() ? "chisel:textures/chisel-gui-24.png" : "chisel:textures/chisel-gui.png";
+		String texture = "chisel:textures/chisel2Gui.png";
 
 		GeneralClient.bind(texture);
 		drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
+	}
+
+	@Override
+	protected void func_146977_a(Slot slot) {
+		if (slot instanceof SlotChiselInput) {
+			GL11.glPushMatrix();
+			GL11.glScalef(2, 2, 2);
+			slot.xDisplayPosition -= 16;
+			slot.yDisplayPosition -= 16;
+			super.func_146977_a(slot);
+			slot.xDisplayPosition += 16;
+			slot.yDisplayPosition += 16;
+			GL11.glPopMatrix();
+		} else {
+			super.func_146977_a(slot);
+		}
 	}
 }
