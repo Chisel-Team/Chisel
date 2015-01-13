@@ -1,8 +1,6 @@
 package com.cricketcraft.chisel;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,8 +20,6 @@ import com.cricketcraft.chisel.client.gui.GuiAutoChisel;
 import com.cricketcraft.chisel.client.gui.GuiChisel;
 import com.cricketcraft.chisel.client.gui.GuiPresent;
 import com.cricketcraft.chisel.compat.Compatibility;
-import com.cricketcraft.chisel.compat.FMPIntegration;
-import com.cricketcraft.chisel.compat.ModIntegration;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselTabs;
@@ -56,13 +52,10 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory", dependencies = "after:ForgeMultipart;after:Thaumcraft;after:appliedenergistics2;after:Railcraft;after:AWWayofTime")
 public class Chisel {
 
-	public static final List<String> modsSupported = new ArrayList<String>();
 	public static final String MOD_ID = "chisel";
 	public static final BlockCarvable.SoundType soundTempleFootstep = new BlockCarvable.SoundType("dig.stone", MOD_ID + ":step.templeblock", 1.0f, 1.0f);
 	public static final String MOD_NAME = "Chisel 2";
@@ -79,22 +72,13 @@ public class Chisel {
 	public static int renderLayeredId;
 	public static int roadLineId;
 
-	public static final Logger logger = LogManager.getLogger(MOD_ID);
+	public static final Logger logger = LogManager.getLogger(MOD_NAME);
 
 	@Instance(MOD_ID)
 	public static Chisel instance;
 
 	@SidedProxy(clientSide = "com.cricketcraft.chisel.proxy.ClientProxy", serverSide = "com.cricketcraft.chisel.proxy.CommonProxy")
 	public static CommonProxy proxy;
-
-	@SideOnly(Side.CLIENT)
-	private static void initModIntegration() {
-		if (Configurations.enableFMP) {
-			ModIntegration.addMod(FMPIntegration.class);
-		}
-
-		ModIntegration.init();
-	}
 
 	@EventHandler
 	public void missingMapping(FMLMissingMappingsEvent event) {
@@ -135,12 +119,7 @@ public class Chisel {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		modsSupported.add("Thaumcraft");
-		modsSupported.add("AWWayOfTime");
-		modsSupported.add("Twilight Forest");
-		modsSupported.add("appliedenergistics2");
-		modsSupported.add("Railcraft");
-
+		
 		File configFile = event.getSuggestedConfigurationFile();
 		Configurations.configExists = configFile.exists();
 		Configurations.config = new Configuration(configFile);
@@ -205,10 +184,6 @@ public class Chisel {
 		registerWorldgen(Features.GRANITE, ChiselBlocks.granite, Configurations.graniteAmount);
 		registerWorldgen(Features.DIORITE, ChiselBlocks.diorite, Configurations.dioriteAmount);
 
-		if (event.getSide() == Side.CLIENT) {
-			initModIntegration();
-		}
-
 		proxy.init();
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(instance);
@@ -225,7 +200,6 @@ public class Chisel {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		ChiselTabs.postInit();
-		ModIntegration.postInit();
 		Compatibility.init(event);
 	}
 

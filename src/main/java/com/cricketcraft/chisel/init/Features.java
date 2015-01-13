@@ -1,14 +1,5 @@
 package com.cricketcraft.chisel.init;
 
-import static com.cricketcraft.chisel.init.ChiselBlocks.carpet_block;
-import static com.cricketcraft.chisel.init.ChiselBlocks.jackolantern;
-import static com.cricketcraft.chisel.init.ChiselBlocks.planks;
-import static com.cricketcraft.chisel.init.ChiselBlocks.present;
-import static com.cricketcraft.chisel.init.ChiselBlocks.pumpkin;
-import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlass;
-import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlassPane;
-import static com.cricketcraft.chisel.init.ChiselBlocks.torch;
-import static com.cricketcraft.chisel.utils.General.sGNames;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -82,6 +73,9 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+import static com.cricketcraft.chisel.init.ChiselBlocks.*;
+import static com.cricketcraft.chisel.utils.General.*;
+
 public enum Features {
 
 	AE_CERTUS_QUARTZ("appliedenergistics2") {
@@ -141,17 +135,10 @@ public enum Features {
 			for (int i = 0; i < 16; i++) {
 				final String blockName = "antiBlock" + ItemDye.field_150921_b[i];
 				String oreName = "antiBlock" + ItemDye.field_150921_b[i];
-				String texName = "antiBlock/" + ItemDye.field_150921_b[i] + "-";
 
 				antiBlock.carverHelper
 						.addVariation(StatCollector.translateToLocal("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc"), i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
-				// OreDictionary.registerOre(oreName, antiBlock);
 				Carving.chisel.registerOre(blockName, oreName);
-
-				/*
-				 * for (CarvableVariation cv : stainedGlass[glassId].carverHelper.variations) { if (cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 4) continue;
-				 * stainedGlass[glassId].carverHelper.registerVariation(blockName, cv, stainedGlass[glassId], cv.metadata); }
-				 */
 			}
 
 			antiBlock.carverHelper.register(antiBlock, "antiBlock");
@@ -160,14 +147,10 @@ public enum Features {
 		@Override
 		void addRecipes() {
 			// TODO: Add a recipe
-			/*
-			 * GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ChiselBlocks.woolen_clay, 2, meta), new Object[] { "blockWool" + sGNames[meta].replaceAll(" ", ""), "stainedClay" +
-			 * sGNames[meta].replaceAll(" ", "") }));
-			 */
 		}
 
 		@Override
-		boolean needsMetaRecipes() { // TODO: Not sure if this is necessary
+		boolean needsMetaRecipes() {
 			return true;
 		}
 	},
@@ -1041,7 +1024,8 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvableIcePillar ice_pillar = (BlockCarvableIcePillar) new BlockCarvableIcePillar(Material.ice).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
+			BlockCarvableIcePillar ice_pillar = (BlockCarvableIcePillar) new BlockCarvableIcePillar(Material.ice).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3)
+					.setStepSound(Block.soundTypeGlass);
 			ice_pillar.carverHelper.setChiselBlockName("Ice Pillar");
 			ice_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.icePillar.0.desc"), 0, "icepillar/plainplain");
 			ice_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.icePillar.1.desc"), 1, "icepillar/plaingreek");
@@ -1631,8 +1615,8 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvablePackedIcePillar packedice_pillar = (BlockCarvablePackedIcePillar) new BlockCarvablePackedIcePillar(Material.ice).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setLightOpacity(3)
-					.setStepSound(Block.soundTypeGlass);
+			BlockCarvablePackedIcePillar packedice_pillar = (BlockCarvablePackedIcePillar) new BlockCarvablePackedIcePillar(Material.ice).setCreativeTab(ChiselTabs.tabOtherChiselBlocks)
+					.setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
 			packedice_pillar.carverHelper.setChiselBlockName("Packed Ice Pillar");
 			packedice_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.0.desc"), 0, "icepillar/plainplain");
 			packedice_pillar.carverHelper.addVariation(StatCollector.translateToLocal("tile.packedicePillar.1.desc"), 1, "icepillar/plaingreek");
@@ -2412,7 +2396,7 @@ public enum Features {
 		void addBlocks() {
 			String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
 			String[] plank_ucnames = { "Oak", "Spruce", "Birch", "Jungle", "Acacia", "Dark Oak" };
-			for (int i = 0; i < 6; i++) {
+			for (int i = 0; i < plank_names.length; i++) {
 				String n = plank_names[i];
 				String u = plank_ucnames[i];
 				final String orename = n.replace('-', '_') + "_planks";

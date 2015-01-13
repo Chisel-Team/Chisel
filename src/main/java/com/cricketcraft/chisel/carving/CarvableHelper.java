@@ -19,6 +19,7 @@ import com.cricketcraft.chisel.block.BlockCarvableSlab;
 import com.cricketcraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
 import com.cricketcraft.chisel.client.render.CTM;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
+import com.cricketcraft.chisel.compat.FMPIntegration;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.utils.GeneralClient;
@@ -294,6 +295,11 @@ public class CarvableHelper {
 	}
 
 	public void registerVariation(String name, CarvableVariation variation, Block block, int blockMeta) {
+
+		if (block.renderAsNormalBlock() || block.isOpaqueCube() || block.isNormalCube()) {
+			FMPIntegration.registerFMP(block, blockMeta);
+		}
+
 		if (forbidChiseling)
 			return;
 
