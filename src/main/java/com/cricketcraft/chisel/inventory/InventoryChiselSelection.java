@@ -13,7 +13,7 @@ import com.cricketcraft.chisel.item.chisel.ItemChisel;
 public class InventoryChiselSelection implements IInventory {
 
 	ItemStack chisel = null;
-	public final static int normalSlots = 32;
+	public final static int normalSlots = 40;
 	public int activeVariations = 0;
 	ContainerChisel container;
 	ItemStack[] inventory;
