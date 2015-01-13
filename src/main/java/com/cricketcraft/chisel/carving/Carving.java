@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.carving;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -178,5 +179,9 @@ public class Carving {
 			return Chisel.MOD_ID + ":chisel.fallback";
 
 		return blockGroup.sound;
+	}
+
+	public Collection<CarvingGroup> getGroups() {
+		return carvingGroupsByVariation.values();
 	}
 }

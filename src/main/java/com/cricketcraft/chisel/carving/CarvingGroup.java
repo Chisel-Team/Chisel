@@ -3,6 +3,8 @@ package com.cricketcraft.chisel.carving;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
+
 public class CarvingGroup {
 
 	public CarvingGroup(String n) {
@@ -15,4 +17,8 @@ public class CarvingGroup {
 	String oreName;
 
 	List<CarvingVariation> variations = new ArrayList<CarvingVariation>();
+	
+	public List<CarvingVariation> getVariations() {
+		return ImmutableList.copyOf(variations);
+	}
 }

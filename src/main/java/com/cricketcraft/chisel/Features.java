@@ -2514,19 +2514,19 @@ public enum Features {
 
 	private String requiredMod;
 
-	Features() {
+	private Features() {
 		this(null, null);
 	}
 
-	Features(Features parent) {
+	private Features(Features parent) {
 		this(null, parent);
 	}
 
-	Features(String requiredMod) {
+	private Features(String requiredMod) {
 		this(requiredMod, null);
 	}
 
-	Features(String requriedMod, Features parent) {
+	private Features(String requriedMod, Features parent) {
 		this.requiredMod = requriedMod;
 		this.parent = parent;
 	}
