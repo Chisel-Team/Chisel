@@ -21,8 +21,8 @@ public class GuiChisel extends GuiContainer {
 	public GuiChisel(InventoryPlayer iinventory, InventoryChiselSelection menu) {
 		super(new ContainerChisel(iinventory, menu));
 		player = iinventory.player;
-		height = 177;
 		xSize = 252;
+		ySize = 202;
 
 		container = (ContainerChisel) inventorySlots;
 	}

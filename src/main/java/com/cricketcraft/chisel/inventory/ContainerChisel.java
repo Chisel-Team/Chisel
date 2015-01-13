@@ -29,21 +29,21 @@ public class ContainerChisel extends Container {
 		int top = 8, left = 62;
 
 		// selection slots
-		for (int i = 0; i < 40; i++) {
+		for (int i = 0; i < InventoryChiselSelection.normalSlots; i++) {
 			addSlotToContainer(new SlotChiselSelection(this, inventory, inventory, i, left + ((i % 10) * 18), top + ((i / 10) * 18)));
 		}
-		
+
 		// main slot
 		addSlotToContainer(new SlotChiselInput(this, inventory, InventoryChiselSelection.normalSlots, 24, 24));
 
-		top = 84;
-		left = 71;
+		top += 112;
+		left += 9;
 		// main inv
 		for (int i = 0; i < 27; i++) {
 			addSlotToContainer(new Slot(inventoryplayer, i + 9, left + ((i % 9) * 18), top + (i / 9) * 18));
 		}
-		
-		top = 142;
+
+		top += 58;
 		for (int i = 0; i < 9; i++) {
 			addSlotToContainer(new Slot(inventoryplayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
 		}
@@ -88,22 +88,20 @@ public class ContainerChisel extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (slotIdx > 24) {
-				if (!this.mergeItemStack(itemstack1, 24, 25, false)) {
+			if (slotIdx > InventoryChiselSelection.normalSlots + 1) {
+				if (!this.mergeItemStack(itemstack1, InventoryChiselSelection.normalSlots, InventoryChiselSelection.normalSlots + 1, false)) {
 					return null;
 				}
 			} else {
-				if (slotIdx < 24 && itemstack1 != null) {
+				if (slotIdx < InventoryChiselSelection.normalSlots && itemstack1 != null) {
 					entity.inventory.setItemStack(itemstack1.copy());
 					slot.onPickupFromSlot(entity, itemstack1);
 					itemstack1 = entity.inventory.getItemStack();
 					entity.inventory.setItemStack(null);
 				}
 
-				if (!this.mergeItemStack(itemstack1, 52, 61, false)) {
-					if (!this.mergeItemStack(itemstack1, 25, 52, false)) {
-						return null;
-					}
+				if (!this.mergeItemStack(itemstack1, InventoryChiselSelection.normalSlots + 1, InventoryChiselSelection.normalSlots + 1 + 36, false)) {
+					return null;
 				}
 			}
 			slot.onSlotChange(itemstack1, itemstack);
@@ -116,7 +114,7 @@ public class ContainerChisel extends Container {
 			if (itemstack1.stackSize == itemstack.stackSize) {
 				return null;
 			}
-			if (slotIdx >= 24) {
+			if (slotIdx >= InventoryChiselSelection.normalSlots) {
 				slot.onPickupFromSlot(entity, itemstack1);
 			}
 			if (itemstack1.stackSize == 0) {
