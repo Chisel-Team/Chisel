@@ -26,7 +26,7 @@ public class Waila implements IWailaDataProvider {
 	public List<String> getWailaBody(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
 		if (accessor.getBlock() instanceof BlockCarvable) {
 			BlockCarvable block = (BlockCarvable) accessor.getBlock();
-			strings.add(block.getVariation(accessor.getMetadata()).description);
+			strings.add(block.getVariation(accessor.getMetadata()).getDescription());
 		}
 		return strings;
 	}

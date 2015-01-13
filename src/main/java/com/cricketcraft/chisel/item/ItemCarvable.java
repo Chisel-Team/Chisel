@@ -51,6 +51,6 @@ public class ItemCarvable extends ItemBlock {
 		if (var == null)
 			return;
 
-		lines.add(var.description);
+		lines.add(var.getDescription());
 	}
 }

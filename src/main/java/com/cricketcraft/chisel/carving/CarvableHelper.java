@@ -74,7 +74,7 @@ public class CarvableHelper {
 			blockName = description;
 
 		CarvableVariation variation = new CarvableVariation();
-		variation.description = description;
+		variation.setDescriptionUnloc(description);
 		variation.metadata = metadata;
 		variation.blockName = blockName;
 
