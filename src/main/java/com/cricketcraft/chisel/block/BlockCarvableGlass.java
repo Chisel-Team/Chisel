@@ -39,6 +39,11 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable {
 	public boolean renderAsNormalBlock() {
 		return false;
 	}
+	
+	@Override
+	public boolean isNormalCube() {
+		return true;
+	}
 
 	@Override
 	public int getRenderType() {

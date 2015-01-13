@@ -30,9 +30,4 @@ public class BlockCarvableLayered extends BlockCarvable {
 	public int getRenderType() {
 		return Chisel.renderLayeredId;
 	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
 }
