@@ -1,20 +1,10 @@
 package com.cricketcraft.chisel.block;
 
+import net.minecraft.block.material.Material;
+
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.stats.StatList;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.World;
-
-import java.util.List;
 
 public class BlockCarvableAntiBlock extends BlockCarvable implements ICarvable {
 

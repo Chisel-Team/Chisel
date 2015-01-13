@@ -49,9 +49,7 @@ public class TexturedBox {
 		int u3 = u1 + texw - borderRight;
 		int v2 = v1 + borderTop;
 		int v3 = v1 + texh - borderBottom;
-		int texw1 = borderLeft;
 		int texw2 = tw - borderLeft - borderRight;
-		int texw3 = borderRight;
 		int texh1 = borderTop;
 		int texh2 = th - borderTop - borderBottom;
 		int texh3 = borderBottom;

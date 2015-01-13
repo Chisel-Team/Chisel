@@ -276,10 +276,6 @@ public class CarvableHelper {
 	public void register(Block block, String name, Class<? extends ItemCarvable> cl) {
 		registerBlock(block, name, cl);
 
-		if (block instanceof BlockCarvableSlab) {
-			BlockCarvableSlab slab = (BlockCarvableSlab) block;
-		}
-
 		for (CarvableVariation variation : variations) {
 			registerVariation(name, variation, block, variation.metadata);
 

@@ -29,7 +29,6 @@ public class BlockEldritchRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
-		int meta = world.getBlockMetadata(x, y, z);
 
 		// tessellator.setBrightness(block.getMixedBrightnessForBlock(world, x,
 		// y, z));

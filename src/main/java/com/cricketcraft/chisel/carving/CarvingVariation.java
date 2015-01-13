@@ -2,7 +2,7 @@ package com.cricketcraft.chisel.carving;
 
 import net.minecraft.block.Block;
 
-public class CarvingVariation implements Comparable {
+public class CarvingVariation implements Comparable<CarvingVariation> {
 
 	public CarvingVariation(Block block, int metadata, int ord) {
 		this.order = ord;
@@ -12,8 +12,8 @@ public class CarvingVariation implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object a) {
-		return order - ((CarvingVariation) a).order;
+	public int compareTo(CarvingVariation a) {
+		return order - a.order;
 	}
 
 	public int order;

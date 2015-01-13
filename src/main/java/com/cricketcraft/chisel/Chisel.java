@@ -3,10 +3,7 @@ package com.cricketcraft.chisel;
 import java.io.File;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -14,21 +11,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.cricketcraft.chisel.block.BlockCarvable;
-import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
-import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
-import com.cricketcraft.chisel.client.gui.GuiAutoChisel;
-import com.cricketcraft.chisel.client.gui.GuiChisel;
-import com.cricketcraft.chisel.client.gui.GuiPresent;
 import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselTabs;
-import com.cricketcraft.chisel.init.Features;
-import com.cricketcraft.chisel.inventory.ContainerAutoChisel;
-import com.cricketcraft.chisel.inventory.ContainerChisel;
-import com.cricketcraft.chisel.inventory.ContainerPresent;
-import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
 import com.cricketcraft.chisel.item.chisel.ChiselController;
+import com.cricketcraft.chisel.network.ChiselGuiHandler;
 import com.cricketcraft.chisel.network.PacketHandler;
 import com.cricketcraft.chisel.proxy.CommonProxy;
 import com.cricketcraft.chisel.utils.General;
@@ -48,7 +36,6 @@ import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
@@ -119,7 +106,7 @@ public class Chisel {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		
+
 		File configFile = event.getSuggestedConfigurationFile();
 		Configurations.configExists = configFile.exists();
 		Configurations.config = new Configuration(configFile);
@@ -139,44 +126,7 @@ public class Chisel {
 	public void init(FMLInitializationEvent event) {
 		Features.init();
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new IGuiHandler() {
-
-			@Override
-			public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-				switch (ID) {
-				case 0:
-					return new ContainerChisel(player.inventory, new InventoryChiselSelection(null));
-				case 1:
-					TileEntity tileentity = world.getTileEntity(x, y, z);
-					if (tileentity instanceof TileEntityAutoChisel)
-						return new ContainerAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
-				case 2:
-					TileEntity tileEntity = world.getTileEntity(x, y, z);
-					if (tileEntity instanceof TileEntityPresent)
-						return new ContainerPresent(player.inventory, (TileEntityPresent) tileEntity);
-				default:
-					return null;
-				}
-			}
-
-			@Override
-			public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-				switch (ID) {
-				case 0:
-					return new GuiChisel(player.inventory, new InventoryChiselSelection(null));
-				case 1:
-					TileEntity tileentity = world.getTileEntity(x, y, z);
-					if (tileentity instanceof TileEntityAutoChisel)
-						return new GuiAutoChisel(player.inventory, (TileEntityAutoChisel) tileentity);
-				case 2:
-					TileEntity tileEntity = world.getTileEntity(x, y, z);
-					if (tileEntity instanceof TileEntityPresent)
-						return new GuiPresent(player.inventory, (TileEntityPresent) tileEntity);
-				default:
-					return null;
-				}
-			}
-		});
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
 		registerWorldgen(Features.MARBLE, ChiselBlocks.marble, Configurations.marbleAmount);
 		registerWorldgen(Features.LIMESTONE, ChiselBlocks.limestone, Configurations.limestoneAmount);

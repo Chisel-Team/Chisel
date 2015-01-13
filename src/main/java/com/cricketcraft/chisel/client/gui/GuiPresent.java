@@ -2,7 +2,6 @@ package com.cricketcraft.chisel.client.gui;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -13,7 +12,6 @@ import com.cricketcraft.chisel.inventory.ContainerPresent;
 public class GuiPresent extends GuiContainer {
 
 	private static final ResourceLocation gui = new ResourceLocation("chisel:textures/present-gui.png");
-	private IInventory upper, lower;
 	private int rows;
 
 	public GuiPresent(InventoryPlayer inventoryPlayer, TileEntityPresent tileEntityPresent) {
