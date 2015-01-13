@@ -2,14 +2,19 @@ package com.cricketcraft.chisel.block;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.config.Configurations;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCloud extends BlockCarvable {
 
@@ -39,9 +44,14 @@ public class BlockCloud extends BlockCarvable {
 		return Configurations.ghostCloud ? 1 : 0;
 	}
 
-	@Override
-	public boolean shouldSideBeRendered(IBlockAccess iblockaccess, int i, int j, int k, int l) {
-		return super.shouldSideBeRendered(iblockaccess, i, j, k, 1 - l);
+	@SideOnly(Side.CLIENT)
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+		Block block = world.getBlock(x, y, z);
+		if (block == this) {
+			return false;
+		}
+
+		return super.shouldSideBeRendered(world, x, y, z, side);
 	}
 
 	@Override
