@@ -8,15 +8,17 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
+import com.cricketcraft.chisel.network.PacketHandler;
+import com.cricketcraft.chisel.network.message.MessageAutoChisel;
 
 public class ContainerAutoChisel extends Container {
 
-	public static TileEntityAutoChisel autoChisel;
-	public static EntityPlayer player;
+	public TileEntityAutoChisel autoChisel;
+	public EntityPlayer player;
 
 	public ContainerAutoChisel(InventoryPlayer player, TileEntityAutoChisel tileEntityAutoChisel) {
 
-		ContainerAutoChisel.player = player.player;
+		this.player = player.player;
 		autoChisel = tileEntityAutoChisel;
 
 		addSlot(tileEntityAutoChisel, 0, 53, 15);
@@ -90,6 +92,23 @@ public class ContainerAutoChisel extends Container {
 		}
 
 		return itemStack;
+	}
+
+	@Override
+	public ItemStack slotClick(int slotId, int p_75144_2_, int p_75144_3_, EntityPlayer player) {
+		if (slotId >= 0 && slotId < this.inventorySlots.size()) {
+			Slot slot = (Slot) this.inventorySlots.get(slotId);
+			ItemStack stack = slot.getStack();
+			ItemStack ret = super.slotClick(slotId, p_75144_2_, p_75144_3_, player);
+
+			if (!player.worldObj.isRemote && slot.slotNumber == TileEntityAutoChisel.BASE && !ItemStack.areItemStacksEqual(stack, slot.getStack())) {
+				int chiseled = stack == null ? 0 : slot.getStack() == null ? stack.stackSize : stack.stackSize - slot.getStack().stackSize;
+				PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(autoChisel, chiseled, false), player.worldObj.provider.dimensionId);
+			}
+
+			return ret;
+		}
+		return super.slotClick(slotId, p_75144_2_, p_75144_3_, player);
 	}
 
 	/**
