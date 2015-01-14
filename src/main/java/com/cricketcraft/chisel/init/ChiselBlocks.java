@@ -109,7 +109,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvableGlass technical2 = null;
 	public static final BlockCarvable futura = null;
 	public static final BlockCarvable brickCustom = null;
-	public static final BlockCarvableLayered sign = null;
+	public static final BlockCarvableLayered warningSign = null;
 	public static final BlockCarvable arcane = null;
 	public static final BlockCarvable thaumium = null;
 	public static final BlockCarvable tallow = null;
