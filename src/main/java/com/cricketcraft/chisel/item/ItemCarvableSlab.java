@@ -36,7 +36,7 @@ public class ItemCarvableSlab extends ItemCarvable {
 
 		boolean metaEquals = world.getBlockMetadata(x2, y2, z2) == meta;
 		// if the metadata at the place target matches, and the block there matches either the top of bottom slab, try to fill in the rest of the block
-		if (metaEquals && ((at == block.top && (dir == ForgeDirection.DOWN || hy == 1.0D)) || (at == block.bottom && (dir == ForgeDirection.UP || hy == 0)))) {
+		if (metaEquals && ((at == block.top && (hy <= 0.5D || hy == 1.0D)) || (at == block.bottom && (hy > 0.5D || hy == 0)))) {
 			place(stack, world, x2, y2, z2, block.master, meta);
 			return true;
 		}
