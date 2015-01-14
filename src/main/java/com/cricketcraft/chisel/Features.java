@@ -197,6 +197,13 @@ public enum Features {
 			ItemUpgrade upgrade = (ItemUpgrade) new ItemUpgrade("upgrade").setCreativeTab(ChiselTabs.tabChisel);
 			GameRegistry.registerItem(upgrade, "upgrade");
 		}
+		@Override
+		void addRecipes()
+		{
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.upgrade, 1, 0), new Object[]{"IEI", "EUE", "RRR", 'I', "ingotIron", 'E', Items.emerald, 'R', Items.redstone, 'U', Items.sugar}));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.upgrade, 1, 1), new Object[]{"IEI", "EUE", "RRR", 'I', "ingotIron", 'E', Items.emerald, 'R', Items.redstone, 'U', Blocks.hopper}));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.upgrade, 1, 2), new Object[]{"IEI", "EUE", "RRR", 'I', "ingotIron", 'E', Items.emerald, 'R', Items.redstone, 'U', Blocks.crafting_table}));
+		}
 	},
 
 	BALL_OF_MOSS {
