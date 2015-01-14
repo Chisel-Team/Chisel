@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.carving;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 public class CarvingVariation implements Comparable<CarvingVariation> {
 
@@ -20,4 +21,9 @@ public class CarvingVariation implements Comparable<CarvingVariation> {
 	public Block block;
 	public int meta;
 	public int damage;
+
+	public ItemStack getStack() {
+		return new ItemStack(block, 1, damage);
+	}
+
 }

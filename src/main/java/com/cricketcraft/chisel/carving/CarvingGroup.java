@@ -17,8 +17,17 @@ public class CarvingGroup {
 	String oreName;
 
 	List<CarvingVariation> variations = new ArrayList<CarvingVariation>();
-	
+
 	public List<CarvingVariation> getVariations() {
 		return ImmutableList.copyOf(variations);
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getOreName() {
+		return oreName;
+	}
+
 }
