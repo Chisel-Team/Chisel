@@ -2,10 +2,12 @@ package com.cricketcraft.chisel.client.gui;
 
 import java.util.List;
 
+import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 
@@ -59,5 +61,20 @@ public class GuiAutoChisel extends GuiContainer {
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		this.drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+
+		for (int i = TileEntityAutoChisel.BASE; i < TileEntityAutoChisel.CHISEL; i++) {
+			if (autochisel.getStackInSlot(i) == null) {
+				drawSlotOverlay(this, x, y, inventorySlots.getSlot(i), xSize, 0, 8);
+			}
+		}
+
+		if (autochisel.getStackInSlot(TileEntityAutoChisel.CHISEL) == null) {
+			drawSlotOverlay(this, x, y, inventorySlots.getSlot(TileEntityAutoChisel.CHISEL), xSize, 24, 0);
+		}
+	}
+
+	public static void drawSlotOverlay(GuiContainer gui, int x, int y, Slot slot, int u, int v, int padding) {
+		padding /= 2;
+		gui.drawTexturedModalRect(x + (slot.xDisplayPosition - padding), y + (slot.yDisplayPosition - padding), u, v, 18 + padding, 18 + padding);
 	}
 }

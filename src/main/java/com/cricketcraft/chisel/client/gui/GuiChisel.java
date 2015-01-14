@@ -53,6 +53,14 @@ public class GuiChisel extends GuiContainer {
 
 		GeneralClient.bind(texture);
 		drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
+
+		int x = (width - xSize) / 2;
+		int y = (height - ySize) / 2;
+		
+		Slot main = (Slot) container.inventorySlots.get(InventoryChiselSelection.normalSlots);
+		if (main.getStack() == null) {
+			GuiAutoChisel.drawSlotOverlay(this, x + 14, y + 14, main, 0, ySize, 60);
+		}
 	}
 
 	@Override
