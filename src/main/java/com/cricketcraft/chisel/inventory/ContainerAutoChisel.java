@@ -22,7 +22,7 @@ public class ContainerAutoChisel extends Container {
 		autoChisel = tileEntityAutoChisel;
 
 		addSlot(tileEntityAutoChisel, 0, 53, 15);
-		addSlot(tileEntityAutoChisel, 1, 78, 51);
+		addSlot(tileEntityAutoChisel, 1, 78, 52);
 		addSlot(tileEntityAutoChisel, 2, 103, 15);
 		addSlot(tileEntityAutoChisel, 3, 8, 62);
 		addSlot(tileEntityAutoChisel, 4, 151, 11);
