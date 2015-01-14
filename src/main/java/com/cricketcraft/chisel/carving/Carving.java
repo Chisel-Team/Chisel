@@ -100,9 +100,6 @@ public class Carving {
 	}
 
 	public CarvingGroup getGroup(Block block, int metadata) {
-		if (block.equals(Blocks.stone))
-			block = Blocks.stonebrick;
-
 		// Check name first
 		CarvingGroup res;
 		int i = OreDictionary.getOreID(block.getUnlocalizedName());
