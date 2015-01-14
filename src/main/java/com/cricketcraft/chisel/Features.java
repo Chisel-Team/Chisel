@@ -2021,6 +2021,8 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable stonebricksmooth = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(1.5F).setResistance(10.0F)
 					.setStepSound(Block.soundTypeStone);
+			if (Configurations.allowSmoothStone)
+				Carving.chisel.addVariation("stonebricksmooth", Blocks.stone, 0, -1);
 			for (int i = 0; i < 4; i++) {
 				if (i == 1) {
 					if (Configurations.allowMossy)
