@@ -1308,7 +1308,7 @@ public enum Features {
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.14.desc", 14, "limestone/terrain-pistonback-lightmarker");
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.15.desc", 15, "limestone/terrain-pistonback-lightpanel");
 			limestone_slab.carverHelper.register(limestone_slab, "limestone_slab", ItemCarvableSlab.class);
-			GameRegistry.registerBlock(limestone_slab.top, Block.blockRegistry.getNameForObject(limestone_slab) + "_top");
+			registerSlabTop(limestone_slab, limestone_slab.top);
 			Carving.chisel.registerOre("limestone_slab", "limestone_slab");
 
 			BlockMarbleStairsMaker makerLimestoneStairs = new BlockMarbleStairsMaker(limestone);
@@ -1386,7 +1386,7 @@ public enum Features {
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.14.desc", 14, "marbleslab/marble-fancy-bricks");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.15.desc", 15, "marbleslab/marble-blocks");
 			marble_slab.carverHelper.register(marble_slab, "marble_slab", ItemCarvableSlab.class);
-			GameRegistry.registerBlock(marble_slab.top, Block.blockRegistry.getNameForObject(marble_slab) + "_top");
+			registerSlabTop(marble_slab, marble_slab.top);
 			Carving.chisel.registerOre("marble_slab", "marble_slab");
 
 			BlockMarbleStairsMaker makerMarbleStairs = new BlockMarbleStairsMaker(marble);
@@ -1506,7 +1506,7 @@ public enum Features {
 				marble_pillar_slab.carverHelper.addVariation("tile.marblePillarSlab.15.desc", 15, "marblepillarslab/ornamental");
 			}
 			marble_pillar_slab.carverHelper.register(marble_pillar_slab, "marble_pillar_slab", ItemCarvableSlab.class);
-			GameRegistry.registerBlock(marble_pillar_slab.top, Block.blockRegistry.getNameForObject(marble_pillar_slab) + "_top");
+			registerSlabTop(marble_pillar_slab, marble_pillar_slab.top);
 		}
 
 		@Override
@@ -2354,29 +2354,29 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvableLayered sign = (BlockCarvableLayered) new BlockCarvableLayered(Material.iron, "warning/base").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F)
+			BlockCarvableLayered warningSign = (BlockCarvableLayered) new BlockCarvableLayered(Material.iron, "warning/base").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F)
 					.setResistance(10.0F);
-			sign.carverHelper.addVariation("tile.warningSign.0.desc", 0, "warning/rad");
-			sign.carverHelper.addVariation("tile.warningSign.1.desc", 1, "warning/bio");
-			sign.carverHelper.addVariation("tile.warningSign.2.desc", 2, "warning/fire");
-			sign.carverHelper.addVariation("tile.warningSign.3.desc", 3, "warning/explosion");
-			sign.carverHelper.addVariation("tile.warningSign.4.desc", 4, "warning/death");
-			sign.carverHelper.addVariation("tile.warningSign.5.desc", 5, "warning/falling");
-			sign.carverHelper.addVariation("tile.warningSign.6.desc", 6, "warning/fall");
-			sign.carverHelper.addVariation("tile.warningSign.7.desc", 7, "warning/voltage");
-			sign.carverHelper.addVariation("tile.warningSign.8.desc", 8, "warning/generic");
-			sign.carverHelper.addVariation("tile.warningSign.9.desc", 9, "warning/acid");
-			sign.carverHelper.addVariation("tile.warningSign.10.desc", 10, "warning/underconstruction");
-			sign.carverHelper.addVariation("tile.warningSign.11.desc", 11, "warning/sound");
-			sign.carverHelper.addVariation("tile.warningSign.12.desc", 12, "warning/noentry");
-			sign.carverHelper.addVariation("tile.warningSign.13.desc", 13, "warning/cryogenic");
-			sign.carverHelper.register(sign, "warningSign");
+			warningSign.carverHelper.addVariation("tile.warningSign.0.desc", 0, "warning/rad");
+			warningSign.carverHelper.addVariation("tile.warningSign.1.desc", 1, "warning/bio");
+			warningSign.carverHelper.addVariation("tile.warningSign.2.desc", 2, "warning/fire");
+			warningSign.carverHelper.addVariation("tile.warningSign.3.desc", 3, "warning/explosion");
+			warningSign.carverHelper.addVariation("tile.warningSign.4.desc", 4, "warning/death");
+			warningSign.carverHelper.addVariation("tile.warningSign.5.desc", 5, "warning/falling");
+			warningSign.carverHelper.addVariation("tile.warningSign.6.desc", 6, "warning/fall");
+			warningSign.carverHelper.addVariation("tile.warningSign.7.desc", 7, "warning/voltage");
+			warningSign.carverHelper.addVariation("tile.warningSign.8.desc", 8, "warning/generic");
+			warningSign.carverHelper.addVariation("tile.warningSign.9.desc", 9, "warning/acid");
+			warningSign.carverHelper.addVariation("tile.warningSign.10.desc", 10, "warning/underconstruction");
+			warningSign.carverHelper.addVariation("tile.warningSign.11.desc", 11, "warning/sound");
+			warningSign.carverHelper.addVariation("tile.warningSign.12.desc", 12, "warning/noentry");
+			warningSign.carverHelper.addVariation("tile.warningSign.13.desc", 13, "warning/cryogenic");
+			warningSign.carverHelper.register(warningSign, "warningSign");
 			Carving.chisel.registerOre("warningSign", "warningSign");
 		}
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.sign, 4, 0), new Object[] { "xxx", "xyx", "xxx", 'x', "stone", 'y', Items.sign }));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.warningSign, 4, 0), new Object[] { "xxx", "xyx", "xxx", 'x', "stone", 'y', Items.sign }));
 		}
 	},
 
@@ -2566,5 +2566,11 @@ public enum Features {
 
 	boolean needsMetaRecipes() {
 		return false;
+	}
+	
+	private static void registerSlabTop(Block bottom, Block top) {
+		String name = Block.blockRegistry.getNameForObject(bottom);
+		name = name.substring(name.indexOf(':')) + "_top";
+		GameRegistry.registerBlock(top, ItemCarvableSlab.class, name);
 	}
 }
