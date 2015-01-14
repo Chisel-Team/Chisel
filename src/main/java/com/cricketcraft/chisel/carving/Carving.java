@@ -1,12 +1,11 @@
 package com.cricketcraft.chisel.carving;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -121,7 +120,7 @@ public class Carving {
 		return null;
 	}
 
-	CarvingGroup getGroup(String name) {
+	public CarvingGroup getGroup(String name) {
 		CarvingGroup group = carvingGroupsByName.get(name);
 		if (group == null) {
 			group = new CarvingGroup(name);
@@ -178,7 +177,12 @@ public class Carving {
 		return blockGroup.sound;
 	}
 
-	public Collection<CarvingGroup> getGroups() {
-		return carvingGroupsByVariation.values();
+	public List<String> getSortedGroupNames() {
+		List<String> names = new ArrayList<String>();
+		for (String s : carvingGroupsByName.keySet()) {
+			names.add(s);
+		}
+		Collections.sort(names);
+		return names;
 	}
 }
