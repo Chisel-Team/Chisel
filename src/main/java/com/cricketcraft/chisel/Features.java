@@ -63,8 +63,8 @@ import com.cricketcraft.chisel.init.ChiselItems;
 import com.cricketcraft.chisel.init.ChiselTabs;
 import com.cricketcraft.chisel.item.ItemBallOMoss;
 import com.cricketcraft.chisel.item.ItemCarvable;
+import com.cricketcraft.chisel.item.ItemCarvableSlab;
 import com.cricketcraft.chisel.item.ItemCloudInABottle;
-import com.cricketcraft.chisel.item.ItemMarbleSlab;
 import com.cricketcraft.chisel.item.ItemSmashingRock;
 import com.cricketcraft.chisel.item.ItemUpgrade;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
@@ -196,6 +196,16 @@ public enum Features {
 		void addItems() {
 			ItemUpgrade upgrade = (ItemUpgrade) new ItemUpgrade("upgrade").setCreativeTab(ChiselTabs.tabChisel);
 			GameRegistry.registerItem(upgrade, "upgrade");
+		}
+
+		@Override
+		void addRecipes() {
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.upgrade, 1, 0), new Object[] { "IEI", "EUE", "RRR", 'I', "ingotIron", 'E', Items.emerald, 'R', Items.redstone, 'U',
+					Items.sugar }));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.upgrade, 1, 1), new Object[] { "IEI", "EUE", "RRR", 'I', "ingotIron", 'E', Items.emerald, 'R', Items.redstone, 'U',
+					Blocks.hopper }));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.upgrade, 1, 2), new Object[] { "IEI", "EUE", "RRR", 'I', "ingotIron", 'E', Items.emerald, 'R', Items.redstone, 'U',
+					Blocks.crafting_table }));
 		}
 	},
 
@@ -481,7 +491,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvableSand colored_sand = (BlockCarvableSand) new BlockCarvableSand().setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
+			BlockCarvableSand colored_sand = (BlockCarvableSand) new BlockCarvableSand().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setStepSound(Block.soundTypeSand);
 			colored_sand.carverHelper.setChiselBlockName("Colored Sand");
 
 			for (int i = 0; i < 16; i++)
@@ -1279,7 +1289,7 @@ public enum Features {
 			OreDictionary.registerOre("limestone", limestone);
 			Carving.chisel.registerOre("limestone", "limestone");
 
-			BlockCarvable limestone_slab = (BlockCarvableSlab) new BlockCarvableSlab(limestone).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F);
+			BlockCarvableSlab limestone_slab = (BlockCarvableSlab) new BlockCarvableSlab(limestone).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F);
 			limestone_slab.carverHelper.setChiselBlockName("Limestone Slab");
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.0.desc", 0, "limestone");
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.1.desc", 1, "limestone/terrain-cobbsmalltilelight");
@@ -1297,7 +1307,8 @@ public enum Features {
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.13.desc", 13, "limestone/terrain-pistonback-lightfour");
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.14.desc", 14, "limestone/terrain-pistonback-lightmarker");
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.15.desc", 15, "limestone/terrain-pistonback-lightpanel");
-			limestone_slab.carverHelper.register(limestone_slab, "limestone_slab", ItemMarbleSlab.class);
+			limestone_slab.carverHelper.register(limestone_slab, "limestone_slab", ItemCarvableSlab.class);
+			GameRegistry.registerBlock(limestone_slab.top, Block.blockRegistry.getNameForObject(limestone_slab) + "_top");
 			Carving.chisel.registerOre("limestone_slab", "limestone_slab");
 
 			BlockMarbleStairsMaker makerLimestoneStairs = new BlockMarbleStairsMaker(limestone);
@@ -1356,7 +1367,7 @@ public enum Features {
 			OreDictionary.registerOre("blockMarble", marble);
 			Carving.chisel.registerOre("marble", "marble");
 
-			BlockCarvable marble_slab = (BlockCarvableSlab) new BlockCarvableSlab(marble).setHardness(2.0F).setResistance(10F);
+			BlockCarvableSlab marble_slab = (BlockCarvableSlab) new BlockCarvableSlab(marble).setHardness(2.0F).setResistance(10F);
 			marble_slab.carverHelper.setChiselBlockName("Marble Slab");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.0.desc", 0, "marble");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.1.desc", 1, "marbleslab/a1-stoneornamental-marblebrick");
@@ -1374,7 +1385,8 @@ public enum Features {
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.13.desc", 13, "marbleslab/marble-arranged-bricks");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.14.desc", 14, "marbleslab/marble-fancy-bricks");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.15.desc", 15, "marbleslab/marble-blocks");
-			marble_slab.carverHelper.register(marble_slab, "marble_slab", ItemMarbleSlab.class);
+			marble_slab.carverHelper.register(marble_slab, "marble_slab", ItemCarvableSlab.class);
+			GameRegistry.registerBlock(marble_slab.top, Block.blockRegistry.getNameForObject(marble_slab) + "_top");
 			Carving.chisel.registerOre("marble_slab", "marble_slab");
 
 			BlockMarbleStairsMaker makerMarbleStairs = new BlockMarbleStairsMaker(marble);
@@ -1455,7 +1467,7 @@ public enum Features {
 			marble_pillar.carverHelper.register(marble_pillar, "marble_pillar");
 			Carving.chisel.setGroupClass("marble_pillar", "marble");
 
-			BlockCarvable marble_pillar_slab = (BlockCarvableSlab) new BlockCarvableSlab(marble_pillar).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
+			BlockCarvableSlab marble_pillar_slab = (BlockCarvableSlab) new BlockCarvableSlab(marble_pillar).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
 					.setStepSound(Block.soundTypeStone);
 			marble_pillar_slab.carverHelper.setChiselBlockName("Marble Pillar Slab");
 			if (Configurations.oldPillars) {
@@ -1493,7 +1505,8 @@ public enum Features {
 				marble_pillar_slab.carverHelper.addVariation("tile.marblePillarSlab.14.desc", 14, "marblepillarslab/carved");
 				marble_pillar_slab.carverHelper.addVariation("tile.marblePillarSlab.15.desc", 15, "marblepillarslab/ornamental");
 			}
-			marble_pillar_slab.carverHelper.register(marble_pillar_slab, "marble_pillar_slab", ItemMarbleSlab.class);
+			marble_pillar_slab.carverHelper.register(marble_pillar_slab, "marble_pillar_slab", ItemCarvableSlab.class);
+			GameRegistry.registerBlock(marble_pillar_slab.top, Block.blockRegistry.getNameForObject(marble_pillar_slab) + "_top");
 		}
 
 		@Override
