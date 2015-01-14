@@ -2034,6 +2034,8 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable stonebricksmooth = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(1.5F).setResistance(10.0F)
 					.setStepSound(Block.soundTypeStone);
+			if (Configurations.allowSmoothStone)
+				Carving.chisel.addVariation("stonebricksmooth", Blocks.stone, 0, -1);
 			for (int i = 0; i < 4; i++) {
 				if (i == 1) {
 					if (Configurations.allowMossy)
@@ -2527,19 +2529,19 @@ public enum Features {
 
 	private String requiredMod;
 
-	Features() {
+	private Features() {
 		this(null, null);
 	}
 
-	Features(Features parent) {
+	private Features(Features parent) {
 		this(null, parent);
 	}
 
-	Features(String requiredMod) {
+	private Features(String requiredMod) {
 		this(requiredMod, null);
 	}
 
-	Features(String requriedMod, Features parent) {
+	private Features(String requriedMod, Features parent) {
 		this.requiredMod = requriedMod;
 		this.parent = parent;
 	}

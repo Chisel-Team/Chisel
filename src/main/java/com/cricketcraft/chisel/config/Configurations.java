@@ -18,6 +18,7 @@ public class Configurations {
 	public static boolean ghostCloud;
 	public static int factoryBlockAmount;
 	public static boolean allowMossy;
+	public static boolean allowSmoothStone;
 	public static boolean chiselRecipe;
 	public static boolean enableFMP;
 	public static boolean chiselStoneToCobbleBricks;
@@ -54,6 +55,7 @@ public class Configurations {
 		ghostCloud = config.get(category, "doesCloudRenderLikeGhost", true).getBoolean(true);
 		factoryBlockAmount = config.get(category, "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
 		allowMossy = config.get(category, "allowCobbleToMossyInChisel", true).getBoolean(true);
+		allowSmoothStone = config.get(category, "allowSmoothStoneToStoneBricksAndBack", true).getBoolean(true);
 		chiselRecipe = config.get(category, "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
 		enableFMP = config.get(category, "enableFMP", true, "Do you want to enable FMP").getBoolean(true);
 		chiselStoneToCobbleBricks = config.get(category, "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left clicking.").getBoolean(false);
