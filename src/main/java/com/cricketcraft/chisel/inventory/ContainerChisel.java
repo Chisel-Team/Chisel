@@ -62,7 +62,8 @@ public class ContainerChisel extends Container {
 
 	@Override
 	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
-		if (par3 == 2 && par2 == currentIndex)
+		// we need to subtract away all the other slots
+		if (par1 - inventory.getSizeInventory() - 27 == currentIndex)
 			return null;
 
 		return super.slotClick(par1, par2, par3, par4EntityPlayer);

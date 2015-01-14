@@ -272,7 +272,6 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		
 		if (worldObj.isRemote && slot == BASE && stack != null) {
 			lastBase = stack.copy();
-			lastBase.stackSize++;
 		}
 
 		if (!worldObj.isRemote) {
