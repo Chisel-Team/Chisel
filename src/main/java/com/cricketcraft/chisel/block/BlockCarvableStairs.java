@@ -89,6 +89,6 @@ public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 
 	@Override
 	public CarvableVariation getVariation(int metadata) {
-		return carverHelper.getVariation(metadata);
+		return carverHelper.getVariation(blockMeta + (metadata / 8));
 	}
 }

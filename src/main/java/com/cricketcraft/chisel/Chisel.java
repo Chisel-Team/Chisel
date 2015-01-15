@@ -138,7 +138,7 @@ public class Chisel {
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(instance);
 
-		FMLInterModComms.sendMessage("Waila", "register", "com.cricketcraft.chisel.Waila.register");
+		FMLInterModComms.sendMessage("Waila", "register", "com.cricketcraft.chisel.compat.WailaCompat.register");
 	}
 
 	private void registerWorldgen(Features feature, Block block, int amount) {

@@ -6,11 +6,18 @@ import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaRegistrar;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.block.BlockCarvable;
+import com.cricketcraft.chisel.api.ICarvable;
 
-public class Waila implements IWailaDataProvider {
+public class WailaCompat implements IWailaDataProvider {
+
+	private WailaCompat() {
+	}
 
 	@Override
 	public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
@@ -24,8 +31,8 @@ public class Waila implements IWailaDataProvider {
 
 	@Override
 	public List<String> getWailaBody(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
-		if (accessor.getBlock() instanceof BlockCarvable) {
-			BlockCarvable block = (BlockCarvable) accessor.getBlock();
+		if (accessor.getBlock() instanceof ICarvable) {
+			ICarvable block = (ICarvable) accessor.getBlock();
 			strings.add(block.getVariation(accessor.getMetadata()).getDescription());
 		}
 		return strings;
@@ -36,8 +43,12 @@ public class Waila implements IWailaDataProvider {
 		return strings;
 	}
 
+	@Override
+	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z) {
+		return tag;
+	}
+
 	public static void register(IWailaRegistrar registrar) {
-		Waila instance = new Waila();
-		registrar.registerBodyProvider(instance, BlockCarvable.class);
+		registrar.registerBodyProvider(new WailaCompat(), ICarvable.class);
 	}
 }
