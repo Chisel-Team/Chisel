@@ -3,6 +3,7 @@ package com.cricketcraft.chisel.network.message;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.CarvingVariation;
 import com.cricketcraft.chisel.client.GeneralChiselClient;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
@@ -21,10 +22,10 @@ public class MessageChiselSound extends MessageCoords {
 	private int block;
 	private byte meta;
 
-	public MessageChiselSound(int x, int y, int z, CarvingVariation v) {
+	public MessageChiselSound(int x, int y, int z, ICarvingVariation v) {
 		super(x, y, z);
-		this.block = Block.getIdFromBlock(v.block);
-		this.meta = (byte) v.meta;
+		this.block = Block.getIdFromBlock(v.getBlock());
+		this.meta = (byte) v.getBlockMeta();
 	}
 
 	@Override

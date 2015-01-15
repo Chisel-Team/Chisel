@@ -13,6 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.BlockCarvableSlab;
@@ -27,8 +28,6 @@ import com.cricketcraft.chisel.utils.GeneralClient;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CarvableHelper {
-
-	public static final ArrayList<Block> chiselBlocks = new ArrayList<Block>();
 
 	public static final int NORMAL = 0;
 	public static final int TOPSIDE = 1;
@@ -270,7 +269,6 @@ public class CarvableHelper {
 	void registerBlock(Block block, String name, Class<? extends ItemCarvable> cl) {
 		block.setBlockName(name);
 		GameRegistry.registerBlock(block, cl, name);
-		chiselBlocks.add(block);
 	}
 
 	public void register(Block block, String name, Class<? extends ItemCarvable> cl) {
@@ -284,7 +282,6 @@ public class CarvableHelper {
 
 				if (!forbidChiseling) {
 					Carving.chisel.addVariation(name + ".top", slab.top, variation.metadata, 0);
-					Carving.chisel.setGroupClass(name + ".top", name);
 				}
 			}
 		}
@@ -389,7 +386,10 @@ public class CarvableHelper {
 
 	public static Set<Block> getChiselBlockSet() {
 		HashSet<Block> tools = new HashSet<Block>();
-		tools.addAll(CarvableHelper.chiselBlocks);
 		return tools;
+	}
+
+	public void registerOre(String ore) {
+		OreDictionary.registerOre(ore, variations.get(0).block);
 	}
 }
