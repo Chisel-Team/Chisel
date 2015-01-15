@@ -70,11 +70,6 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 
 		@Override
-		public ItemStack getStack() {
-			return null;
-		}
-
-		@Override
 		public int getOrder() {
 			return 0;
 		}
@@ -126,6 +121,12 @@ public class GroupList implements Set<ICarvingGroup> {
 		String key = group.getName();
 		if (groups.containsKey(key)) {
 			return false;
+		}
+		for (ICarvingVariation v : group.getVariations()) {
+			ICarvingGroup g = lookup.get(v);
+			if (g == null) {
+				lookup.put(new VariationWrapper(v), group);
+			}
 		}
 		groups.put(key, group);
 		return true;

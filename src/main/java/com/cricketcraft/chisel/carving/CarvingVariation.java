@@ -21,11 +21,6 @@ public class CarvingVariation implements ICarvingVariation {
 	}
 
 	@Override
-	public ItemStack getStack() {
-		return new ItemStack(block, 1, damage);
-	}
-
-	@Override
 	public Block getBlock() {
 		return block;
 	}
