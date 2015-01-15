@@ -1723,7 +1723,20 @@ public enum Features {
 	 * Dummy feature for all RC subsets
 	 */
 	RAILCRAFT("Railcraft"),
+	
+        RC_ABYSSAL_BLOCK(RAILCRAFT.getRequiredMod(), RAILCRAFT) {
 
+		@Override
+		void addBlocks() {
+			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 0, 0);
+			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 1, 1);
+			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 2, 2);
+			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 3, 3);
+			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 4, 4);
+			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 5, 5);
+			Carving.chisel.registerOre("RCAbyssalBlock", "RCAbyssalBlock");
+		};
+	},
 	RC_BLEACHED_BONE(RAILCRAFT.getRequiredMod(), RAILCRAFT) {
 
 		@Override
