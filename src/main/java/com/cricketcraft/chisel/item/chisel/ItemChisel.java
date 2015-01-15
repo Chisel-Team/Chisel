@@ -91,7 +91,7 @@ public class ItemChisel extends Item implements IChiselItem {
 
 	@Override
 	public boolean canChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target) {
-		return Block.getBlockFromItem(target.getItem()) != ChiselBlocks.marble;
+		return true;
 	}
 
 	@Override
