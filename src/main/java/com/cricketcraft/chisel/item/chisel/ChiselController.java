@@ -49,28 +49,28 @@ public final class ChiselController {
 			z = event.z;
 			Block block = event.world.getBlock(x, y, z);
 			int metadata = event.world.getBlockMetadata(x, y, z);
-			CarvingVariation[] variations = Carving.chisel.getVariations(block, metadata);
+			CarvingVariation[] variations = Carving.chisel.getVariations(block, metadata).toArray(new CarvingVariation[] {});
 
 			if (variations != null && chisel.canChiselBlock(event.world, x, y, z, block, metadata)) {
 				ItemStack target = General.getChiselTarget(held);
 
 				if (target != null) {
 					for (CarvingVariation v : variations) {
-						if (v.block == Block.getBlockFromItem(target.getItem()) && v.meta == target.getItemDamage()) {
+						if (v.getBlock() == Block.getBlockFromItem(target.getItem()) && v.getBlockMeta() == target.getItemDamage()) {
 							setVariation(event.entityPlayer, event.world, x, y, z, v, target);
 						}
 					}
 				} else {
 					for (int i = 0; i < variations.length; i++) {
 						CarvingVariation v = variations[i];
-						if (v.block == block && v.meta == metadata) {
+						if (v.getBlock() == block && v.getBlockMeta() == metadata) {
 							variations = ArrayUtils.remove(variations, i--);
 						}
 					}
 
 					int index = event.world.rand.nextInt(variations.length);
 					CarvingVariation newVar = variations[index];
-					setVariation(event.entityPlayer, event.world, x, y, z, newVar, new ItemStack(newVar.block, 1, newVar.damage));
+					setVariation(event.entityPlayer, event.world, x, y, z, newVar, new ItemStack(newVar.getBlock(), 1, newVar.getItemMeta()));
 					event.entityPlayer.inventory.currentItem = slot;
 				}
 			}
@@ -89,8 +89,7 @@ public final class ChiselController {
 	 */
 	private void setVariation(EntityPlayer player, World world, int x, int y, int z, CarvingVariation v, ItemStack target) {
 		PacketHandler.INSTANCE.sendTo(new MessageChiselSound(x, y, z, v), (EntityPlayerMP) player);
-		world.setBlock(x, y, z, v.block);
-		world.setBlockMetadataWithNotify(x, y, z, v.meta, 3);
+		world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
 		((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.inventory, player.inventory.currentItem, player.getCurrentEquippedItem(), target);
 	}
 }

@@ -1045,7 +1045,6 @@ public enum Features {
 			ice_pillar.carverHelper.addVariation("tile.icePillar.5.desc", 5, "icepillar/carved");
 			ice_pillar.carverHelper.addVariation("tile.icePillar.6.desc", 6, "icepillar/ornamental");
 			ice_pillar.carverHelper.register(ice_pillar, "ice_pillar");
-			Carving.chisel.setGroupClass("ice_pillar", "ice");
 		}
 
 		@Override
@@ -1465,7 +1464,6 @@ public enum Features {
 				marble_pillar.carverHelper.addVariation("tile.marblePillar.15.desc", 15, "marblepillar/ornamental");
 			}
 			marble_pillar.carverHelper.register(marble_pillar, "marble_pillar");
-			Carving.chisel.setGroupClass("marble_pillar", "marble");
 
 			BlockCarvableSlab marble_pillar_slab = (BlockCarvableSlab) new BlockCarvableSlab(marble_pillar).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
 					.setStepSound(Block.soundTypeStone);
@@ -1639,7 +1637,6 @@ public enum Features {
 			packedice_pillar.carverHelper.addVariation("tile.packedicePillar.5.desc", 5, "icepillar/carved");
 			packedice_pillar.carverHelper.addVariation("tile.packedicePillar.6.desc", 6, "icepillar/ornamental");
 			packedice_pillar.carverHelper.register(packedice_pillar, "packedice_pillar");
-			Carving.chisel.setGroupClass("packedice_pillar", "packedice");
 		}
 	},
 

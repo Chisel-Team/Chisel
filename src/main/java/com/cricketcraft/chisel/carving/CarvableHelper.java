@@ -284,7 +284,6 @@ public class CarvableHelper {
 
 				if (!forbidChiseling) {
 					Carving.chisel.addVariation(name + ".top", slab.top, variation.metadata, 0);
-					Carving.chisel.setGroupClass(name + ".top", name);
 				}
 			}
 		}
