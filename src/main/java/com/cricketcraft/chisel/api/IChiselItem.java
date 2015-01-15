@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.api;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -9,6 +10,19 @@ import net.minecraft.world.World;
  * Implement this on items which can be used to chisel blocks.
  */
 public interface IChiselItem extends IChiselMode {
+
+	/**
+	 * Checks whether the chisel can have its GUI opened
+	 * 
+	 * @param world
+	 *            {@link World} object
+	 * @param player
+	 *            The player holding the chisel. It can always be assumed that the player's current item will be this.
+	 * @param chisel
+	 *            The {@link ItemStack} representing your chisel
+	 * @return True if the GUI should open. False otherwise.
+	 */
+	boolean canOpenGui(World world, EntityPlayer player, ItemStack chisel);
 
 	/**
 	 * Called when an item is chiseled using this chisel
