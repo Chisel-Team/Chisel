@@ -5,12 +5,12 @@ import net.minecraft.item.ItemStack;
 public class CarvingUtils {
 
 	/**
-	 * The default implementation of {@link ICarvingVariation#compareTo(ICarvingVariation)}
+	 * A simple way to compare two {@link ICarvingVariation} objects based on the {@link ICarvingVariation#getOrder() getOrder()} method.
 	 * 
 	 * @param v1
-	 *            The first {@link ICarvingVariation variation}. Usually 'this'.
+	 *            The first {@link ICarvingVariation variation}.
 	 * @param v2
-	 *            The second {@link ICarvingVariation variation}. Usually the parameter to the {@code comapreTo} method.
+	 *            The second {@link ICarvingVariation variation}.
 	 * @return A positive integer if the first's order is greater, a negative integer if the second's is greater, and 0 if they are equal.
 	 */
 	public static int compare(ICarvingVariation v1, ICarvingVariation v2) {

@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -19,6 +20,7 @@ import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.client.gui.GuiChisel;
 
 public class RecipeHandlerChisel extends TemplateRecipeHandler {
 
@@ -81,6 +83,11 @@ public class RecipeHandlerChisel extends TemplateRecipeHandler {
 	@Override
 	public String getGuiTexture() {
 		return "Chisel:textures/chiselNEI.png";
+	}
+	
+	@Override
+	public Class<? extends GuiContainer> getGuiClass() {
+		return GuiChisel.class;
 	}
 
 	@Override
