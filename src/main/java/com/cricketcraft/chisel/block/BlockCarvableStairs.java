@@ -38,7 +38,7 @@ public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 
 	@Override
 	public int damageDropped(int i) {
-		return i & 0x8;
+		return i / 8;
 	}
 
 	@Override
@@ -47,6 +47,7 @@ public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 			carverHelper.registerBlockIcons("Chisel", this, register);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs tabs, List list) {
 		list.add(new ItemStack(block, 1, 0));
@@ -60,31 +61,19 @@ public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 
 	@Override
 	public void onBlockPlacedBy(World par1World, int par2, int par3, int par4, EntityLivingBase par5EntityLiving, ItemStack par6ItemStack) {
-		int l = MathHelper.floor_double((par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-		int i1 = par1World.getBlockMetadata(par2, par3, par4) & 4;
-		int odd = par6ItemStack.getItemDamage();
+		int meta = MathHelper.floor_double((par5EntityLiving.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 
-		if (l == 0) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 2 | i1 + odd, 2);
-		}
+		// 0->2 2->3 3->0 1->1
+		meta = meta == 0 ? 2 : meta == 2 ? 3 : meta == 3 ? 0 : 1;
 
-		if (l == 1) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 1 | i1 + odd, 2);
-		}
+		meta += par1World.getBlockMetadata(par2, par3, par4) % 8; // add upside-down-ness
 
-		if (l == 2) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 3 | i1 + odd, 2);
-		}
-
-		if (l == 3) {
-			par1World.setBlockMetadataWithNotify(par2, par3, par4, 0 | i1 + odd, 2);
-		}
+		par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
 	}
 
 	@Override
 	public int onBlockPlaced(World world, int x, int y, int z, int side, float hx, float hy, float hz, int damage) {
-		// int res=super.onBlockPlaced();
-		return side != 0 && (side == 1 || hy <= 0.5D) ? damage : damage | 4;
+		return side != 0 && (side == 1 || hy <= 0.5D) ? damage : damage + 4;
 	}
 
 	@Override
