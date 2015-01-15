@@ -358,9 +358,9 @@ public enum Features {
 				String group = "carpet." + i;
 
 				// TODO needle stuff
-//				Carving.needle.addVariation(group, Blocks.carpet, i, 0);
-//				Carving.needle.addVariation(group, carpet, i, 2);
-//				Carving.needle.addVariation(group, carpet_block, i, 1);
+				// Carving.needle.addVariation(group, Blocks.carpet, i, 0);
+				// Carving.needle.addVariation(group, carpet, i, 2);
+				// Carving.needle.addVariation(group, carpet_block, i, 1);
 			}
 
 			OreDictionary.registerOre("carpet", carpet);
@@ -1989,7 +1989,7 @@ public enum Features {
 			// 13), "Sandstone snake block body");
 			Carving.chisel.addVariation("sandstone", sand_snakestone, 1, 16);
 			Carving.chisel.addVariation("sandstone", sand_snakestone, 13, 17);
-//			Carving.chisel.registerOre("sandstone", "sandSnakestone");
+			// Carving.chisel.registerOre("sandstone", "sandSnakestone");
 		}
 	},
 
@@ -2005,7 +2005,7 @@ public enum Features {
 			// "Stone snake block body");
 			Carving.chisel.addVariation("stonebrick", stone_snakestone, 1, 16);
 			Carving.chisel.addVariation("stonebrick", stone_snakestone, 13, 17);
-//			Carving.chisel.registerOre("snakestoneStone", "snakestoneStone");
+			// Carving.chisel.registerOre("snakestoneStone", "snakestoneStone");
 		}
 	},
 
@@ -2018,7 +2018,7 @@ public enum Features {
 			GameRegistry.registerBlock(obsidian_snakestone, ItemCarvable.class, "obsidian_snakestone");
 			Carving.chisel.addVariation("obsidian", obsidian_snakestone, 1, 16);
 			Carving.chisel.addVariation("obsidian", obsidian_snakestone, 13, 17);
-//			Carving.chisel.registerOre("obsidianSnakestone", "obsidianSnakestone");
+			// Carving.chisel.registerOre("obsidianSnakestone", "obsidianSnakestone");
 		}
 	},
 
@@ -2028,14 +2028,16 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable stonebricksmooth = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(1.5F).setResistance(10.0F)
 					.setStepSound(Block.soundTypeStone);
-			if (Configurations.allowSmoothStone)
+			if (Configurations.allowSmoothStone) {
 				Carving.chisel.addVariation("stonebricksmooth", Blocks.stone, 0, -1);
+			}
 			for (int i = 0; i < 4; i++) {
 				if (i == 1) {
 					if (Configurations.allowMossy)
 						Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
-				} else
+				} else {
 					Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
+				}
 			}
 			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.4.desc", 4, "stonebrick/smallbricks");
 			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.5.desc", 5, "stonebrick/largebricks");

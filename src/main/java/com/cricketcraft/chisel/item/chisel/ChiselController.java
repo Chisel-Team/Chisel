@@ -10,8 +10,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
@@ -53,12 +51,12 @@ public final class ChiselController {
 			Block block = event.world.getBlock(x, y, z);
 			int metadata = event.world.getBlockMetadata(x, y, z);
 			List<ICarvingVariation> list = Carving.chisel.getVariations(block, metadata);
-			
+
 			if (list == null || list.isEmpty()) {
 				break;
 			}
-			
-			ICarvingVariation[]	variations = list.toArray(new CarvingVariation[] {});
+
+			ICarvingVariation[] variations = list.toArray(new CarvingVariation[] {});
 
 			if (chisel.canChiselBlock(event.world, x, y, z, block, metadata)) {
 				ItemStack target = General.getChiselTarget(held);
@@ -70,15 +68,15 @@ public final class ChiselController {
 						}
 					}
 				} else {
+					int idx = 0;
 					for (int i = 0; i < variations.length; i++) {
 						ICarvingVariation v = variations[i];
 						if (v.getBlock() == block && v.getBlockMeta() == metadata) {
-							variations = ArrayUtils.remove(variations, i--);
+							idx = (i + 1) % variations.length; // move to the next in the group
 						}
 					}
 
-					int index = event.world.rand.nextInt(variations.length);
-					ICarvingVariation newVar = variations[index];
+					ICarvingVariation newVar = variations[idx];
 					setVariation(event.entityPlayer, event.world, x, y, z, newVar, new ItemStack(newVar.getBlock(), 1, newVar.getItemMeta()));
 					event.entityPlayer.inventory.currentItem = slot;
 				}
@@ -97,6 +95,12 @@ public final class ChiselController {
 	 * Assumes that the player is holding a chisel
 	 */
 	private void setVariation(EntityPlayer player, World world, int x, int y, int z, ICarvingVariation v, ItemStack target) {
+		Block block = world.getBlock(x, y, z);
+		int meta = world.getBlockMetadata(x, y, z);
+		if (block == v.getBlock() && meta == v.getBlockMeta()) {
+			return; // don't chisel to the same thing
+		}
+
 		PacketHandler.INSTANCE.sendTo(new MessageChiselSound(x, y, z, v), (EntityPlayerMP) player);
 		world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
 		((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.inventory, player.inventory.currentItem, player.getCurrentEquippedItem(), target);

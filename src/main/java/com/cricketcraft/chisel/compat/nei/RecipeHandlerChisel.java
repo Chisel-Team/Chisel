@@ -72,7 +72,6 @@ public class RecipeHandlerChisel extends TemplateRecipeHandler {
 		public PositionedStack getResult() {
 			return null;
 		}
-
 	}
 
 	@Override

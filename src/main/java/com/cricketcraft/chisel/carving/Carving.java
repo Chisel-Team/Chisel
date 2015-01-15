@@ -86,7 +86,10 @@ public class Carving {
 		int[] ids = OreDictionary.getOreIDs(new ItemStack(block, metadata));
 		if (ids.length > 0) {
 			for (int id : ids) {
-				return groups.getGroupByOre(OreDictionary.getOreName(id));
+				ICarvingGroup oreGroup = groups.getGroupByOre(OreDictionary.getOreName(id));
+				if (oreGroup != null) {
+					return oreGroup;
+				}
 			}
 		}
 
