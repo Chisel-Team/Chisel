@@ -7,6 +7,7 @@ import net.minecraft.block.BlockSand;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
@@ -72,8 +73,13 @@ public class BlockCarvableSand extends BlockSand implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(int metadata) {
+	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
+	}
+
+	@Override
+	public CarvableVariation getVariation(ItemStack stack) {
+		return carverHelper.getVariation(stack.getItemDamage());
 	}
 
 	public static class SoundType extends Block.SoundType {
@@ -83,13 +89,10 @@ public class BlockCarvableSand extends BlockSand implements ICarvable {
 		public final String soundNamePlace;
 
 		/**
-		 * Creates a SoundType with automatic names for step and break sounds.
-		 * Sound names dig.soundName and step.soundName must be specified in the
-		 * sounds.json
+		 * Creates a SoundType with automatic names for step and break sounds. Sound names dig.soundName and step.soundName must be specified in the sounds.json
 		 * 
 		 * @param soundName
-		 *            block of the sound. Will automatically be expanded to
-		 *            "mod:dig.soundName" and "mod:step.soundName" respectively)
+		 *            block of the sound. Will automatically be expanded to "mod:dig.soundName" and "mod:step.soundName" respectively)
 		 * @param volume
 		 *            default 1.0f
 		 * @param frequency
@@ -103,8 +106,7 @@ public class BlockCarvableSand extends BlockSand implements ICarvable {
 		}
 
 		/**
-		 * Creates a SoundType with manual names for step and break sounds.
-		 * Sound names must be specified in the sounds.json
+		 * Creates a SoundType with manual names for step and break sounds. Sound names must be specified in the sounds.json
 		 * 
 		 * @param soundNameBreak
 		 *            block break sound
@@ -123,8 +125,7 @@ public class BlockCarvableSand extends BlockSand implements ICarvable {
 		}
 
 		/**
-		 * Creates a SoundType with manual names for step, break and place
-		 * sounds. Sound names must be specified in the sounds.json
+		 * Creates a SoundType with manual names for step, break and place sounds. Sound names must be specified in the sounds.json
 		 * 
 		 * @param soundNameBreak
 		 *            block break sound

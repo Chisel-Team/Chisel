@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.api.ICarvable;
@@ -77,7 +78,12 @@ public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(int metadata) {
+	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(blockMeta + (metadata / 8));
+	}
+
+	@Override
+	public CarvableVariation getVariation(ItemStack stack) {
+		return carverHelper.getVariation(stack.getItemDamage());
 	}
 }

@@ -2,7 +2,9 @@ package com.cricketcraft.chisel.block;
 
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
@@ -43,8 +45,13 @@ public class BlockCarvablePumpkin extends BlockPumpkin implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(int metadata) {
+	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
+	}
+
+	@Override
+	public CarvableVariation getVariation(ItemStack stack) {
+		return carverHelper.getVariation(stack.getItemDamage());
 	}
 
 	public void setInformation(String textureLocation) {

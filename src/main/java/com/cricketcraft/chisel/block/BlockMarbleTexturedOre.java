@@ -7,7 +7,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
@@ -52,7 +54,12 @@ public class BlockMarbleTexturedOre extends BlockTexturedOre implements ICarvabl
 	}
 
 	@Override
-	public CarvableVariation getVariation(int metadata) {
+	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
+	}
+
+	@Override
+	public CarvableVariation getVariation(ItemStack stack) {
+		return carverHelper.getVariation(stack.getItemDamage());
 	}
 }

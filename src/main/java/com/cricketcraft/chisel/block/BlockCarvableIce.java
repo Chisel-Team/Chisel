@@ -8,8 +8,10 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.api.ICarvable;
@@ -53,18 +55,20 @@ public class BlockCarvableIce extends BlockIce implements ICarvable {
 		par2EntityPlayer.addExhaustion(0.025F);
 
 		/*
-		 * if(this.canSilkHarvest(par1World, par2EntityPlayer, par3, par4, par5,
-		 * par6) && EnchantmentHelper.getSilkTouchModifier(par2EntityPlayer)) {
-		 * ItemStack itemstack = this.createStackedBlock(par6);
+		 * if(this.canSilkHarvest(par1World, par2EntityPlayer, par3, par4, par5, par6) && EnchantmentHelper.getSilkTouchModifier(par2EntityPlayer)) { ItemStack itemstack =
+		 * this.createStackedBlock(par6);
 		 * 
-		 * if(itemstack != null) { this.dropBlockAsItem(par1World, par3, par4,
-		 * par5, itemstack); } }
+		 * if(itemstack != null) { this.dropBlockAsItem(par1World, par3, par4, par5, itemstack); } }
 		 */
 	}
 
 	@Override
-	public CarvableVariation getVariation(int metadata) {
+	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
+	@Override
+	public CarvableVariation getVariation(ItemStack stack) {
+		return carverHelper.getVariation(stack.getItemDamage());
+	}
 }
