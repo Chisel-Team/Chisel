@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -47,11 +46,6 @@ public class GroupList implements Set<ICarvingGroup> {
 
 		private VariationKey(Block block, int blockMeta) {
 			data = Pair.of(block, blockMeta);
-		}
-
-		@Override
-		public int compareTo(ICarvingVariation o) {
-			return 0;
 		}
 
 		@Override

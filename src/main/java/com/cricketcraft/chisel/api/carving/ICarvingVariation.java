@@ -5,11 +5,8 @@ import net.minecraft.item.Item;
 
 /**
  * Represents a variation of a chiselable block.
- * <p>
- * Do note that while this interface extends {@link Comparable}, a default implementation of {@link Comparable#compareTo(Object)} is provided in
- * {@link CarvingUtils#compare(ICarvingVariation, ICarvingVariation)}
  */
-public interface ICarvingVariation extends Comparable<ICarvingVariation> {
+public interface ICarvingVariation {
 
 	/**
 	 * The base block of this variation.
@@ -33,10 +30,9 @@ public interface ICarvingVariation extends Comparable<ICarvingVariation> {
 	int getItemMeta();
 
 	/**
-	 * The "order" of this variation. Represents its position in the list of variations.
+	 * The "order" of this variation. Represents its position in the list of variations held by a group.
 	 * 
 	 * @return An integer to represent the position of this variation in the list of all variations in the group
 	 */
 	int getOrder();
-
 }

@@ -2,6 +2,14 @@ package com.cricketcraft.chisel.api.carving;
 
 import java.util.List;
 
+/**
+ * Represents a group of chiselable blocks.
+ * <p>
+ * This is an object that contains a collection of {@link ICarvingVariation} objects, and keeps them sorted. You may sort them in any way (or not at all), and {@link ICarvingVariation#getOrder()} will
+ * likely be of use to do so.
+ * <p>
+ * It also defines what sound and oredict name the group as a whole has.
+ */
 public interface ICarvingGroup {
 
 	/**
