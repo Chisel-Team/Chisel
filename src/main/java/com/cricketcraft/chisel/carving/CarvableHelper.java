@@ -296,11 +296,7 @@ public class CarvableHelper {
 		if (forbidChiseling)
 			return;
 
-		if (variation.block == null) {
-			Carving.chisel.addVariation(name, block, blockMeta, variation.metadata);
-		} else {
-			Carving.chisel.addVariation(name, variation.block, variation.blockMeta, variation.metadata);
-		}
+		Carving.chisel.addVariation(name, block, blockMeta, variation.metadata);
 	}
 
 	public void registerBlockIcons(String modName, Block block, IIconRegister register) {
