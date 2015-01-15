@@ -2,7 +2,6 @@ package com.cricketcraft.chisel.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
@@ -10,14 +9,14 @@ import com.cricketcraft.chisel.item.ItemCarvable;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class BlockMarbleStairsMaker {
+public class CarvableStairsMaker {
 
 	public CarvableHelper carverHelper;
 	// int idStart;
 	Block blockBase;
 	String blockName;
 
-	public BlockMarbleStairsMaker(Block base) {
+	public CarvableStairsMaker(Block base) {
 		carverHelper = new CarvableHelper();
 		blockBase = base;
 	}
@@ -26,7 +25,7 @@ public class BlockMarbleStairsMaker {
 		create(null, name, blocks);
 	}
 
-	public void create(BlockMarbleStairsMakerCreator creator, String name, Block[] blocks) {
+	public void create(IStairsCreator creator, String name, Block[] blocks) {
 		for (int i = 0; i < blocks.length; i++) {
 			String n = name + "." + i;
 			blocks[i] = creator == null ? new BlockCarvableStairs(blockBase, i * 2, carverHelper) : creator.create(blockBase, i * 2, carverHelper);
@@ -37,15 +36,10 @@ public class BlockMarbleStairsMaker {
 			for (int meta = 0; meta < 2 && i * 2 + meta < carverHelper.variations.size(); meta++) {
 				CarvableVariation variation = carverHelper.variations.get(i * 2 + meta);
 
-				for (int j = 0; j < 8; j++)
-					carverHelper.registerVariation(name + ".orientation." + j, variation, blocks[i], j + meta * 8);
+				carverHelper.registerVariation(name, variation, blocks[i], meta * 8);
 
-				CraftingManager.getInstance().addRecipe(new ItemStack(blocks[i], 4, meta * 8), new Object[] { "*  ", "** ", "***", '*', new ItemStack(blockBase, 1, i * 2 + meta) });
+				GameRegistry.addRecipe(new ItemStack(blocks[i], 4, meta * 8), "*  ", "** ", "***", '*', new ItemStack(blockBase, 1, i * 2 + meta));
 			}
-
-			CarvableHelper.chiselBlocks.add(blocks[i]);
 		}
-
 	}
-
 }
