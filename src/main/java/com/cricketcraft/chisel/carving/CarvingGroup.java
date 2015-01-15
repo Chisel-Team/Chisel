@@ -1,8 +1,10 @@
 package com.cricketcraft.chisel.carving;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
+import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.google.common.collect.ImmutableList;
@@ -27,7 +29,13 @@ public class CarvingGroup implements ICarvingGroup {
 	@Override
 	public void addVariation(ICarvingVariation variation) {
 		variations.add(variation);
-		Collections.sort(variations);
+		Collections.sort(variations, new Comparator<ICarvingVariation>() {
+
+			@Override
+			public int compare(ICarvingVariation o1, ICarvingVariation o2) {
+				return CarvingUtils.compare(o1, o2);
+			}
+		});
 	}
 
 	@Override

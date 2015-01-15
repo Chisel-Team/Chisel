@@ -1,9 +1,7 @@
 package com.cricketcraft.chisel.carving;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 
-import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 
 public class CarvingVariation implements ICarvingVariation {
@@ -38,10 +36,5 @@ public class CarvingVariation implements ICarvingVariation {
 	@Override
 	public int getOrder() {
 		return order;
-	}
-
-	@Override
-	public int compareTo(ICarvingVariation o) {
-		return CarvingUtils.compare(this, o);
 	}
 }
