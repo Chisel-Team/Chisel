@@ -89,6 +89,14 @@ task deobfJar(type: Jar) {
     classifier = 'deobf'
 }
 
+// Create API jar with sources and compiled files
+task apiJar(type: Jar) {
+    from sourceSets.main.allSource
+    from sourceSets.main.output
+	include 'com/cricketcraft/chisel/api/**/*'
+    classifier = 'api'
+}
+
 // Create source attachment for dev jar
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
@@ -98,6 +106,7 @@ task sourcesJar(type: Jar) {
 artifacts {
     archives deobfJar
     archives sourcesJar
+    archives apiJar
 }
 
 String getChangelogText() {
@@ -130,5 +139,5 @@ curse {
     projectId = project.projectId
     changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
     releaseType = 'release'
-    additionalArtifact deobfJar, sourcesJar
+    additionalArtifact deobfJar, sourcesJar, apiJar
 }
