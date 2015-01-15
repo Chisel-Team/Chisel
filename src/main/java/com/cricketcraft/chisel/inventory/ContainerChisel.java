@@ -89,12 +89,12 @@ public class ContainerChisel extends Container {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (slotIdx > InventoryChiselSelection.normalSlots + 1) {
+			if (slotIdx > InventoryChiselSelection.normalSlots) {
 				if (!this.mergeItemStack(itemstack1, InventoryChiselSelection.normalSlots, InventoryChiselSelection.normalSlots + 1, false)) {
 					return null;
 				}
 			} else {
-				if (slotIdx < InventoryChiselSelection.normalSlots && itemstack1 != null) {
+				if (slotIdx < InventoryChiselSelection.normalSlots + 1 && itemstack1 != null) {
 					entity.inventory.setItemStack(itemstack1.copy());
 					slot.onPickupFromSlot(entity, itemstack1);
 					itemstack1 = entity.inventory.getItemStack();
