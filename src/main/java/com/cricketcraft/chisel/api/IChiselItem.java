@@ -11,11 +11,18 @@ import net.minecraft.world.World;
 public interface IChiselItem extends IChiselMode {
 
 	/**
-	 * Called when a block is chiseled using this item. This method is responsible for damaging and deleting the chisel item.
+	 * Called when an item is chiseled using this chisel
 	 * 
-	 * @param stack
-	 *            The {@link ItemStack} being used
-	 * @return True if this chisel should be damaged. False otherwise.
+	 * @param world
+	 *            {@link World} object
+	 * @param inv
+	 *            The inventory this chisel is currently in
+	 * @param slot
+	 *            The slot index of the chisel in the inventory
+	 * @param chisel
+	 *            The {@link ItemStack} representing the chisel
+	 * @param target
+	 *            The {@link ItemStack} representing the target item
 	 */
 	void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target);
 
