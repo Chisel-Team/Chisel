@@ -39,3 +39,7 @@ You now have a functional local copy of Chisel, ready to develop on.
  
 
 MAKE SURE TO UPDATE YOUR FORK BEFORE MAKING A PULL REQUEST.
+
+Jenkins
+----------------
+http://coloredlightscore.us.to:8080/job/Chisel-2%20v1.7.10-Dev/
