@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -170,6 +171,7 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 			glPopMatrix();
 		}
 
+		GameSettings settings = Minecraft.getMinecraft().gameSettings;
 		item = autoChisel.getItemForRendering(TileEntityAutoChisel.CHISEL);
 		if (item != null) {
 			glPushMatrix();
@@ -179,7 +181,10 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 			glRotatef(rot, 0, 0, 1);
 			glTranslated(-0.12, 0, 0);
 			glScalef(0.9f, 0.9f, 0.9f);
+			boolean was = settings.fancyGraphics;
+			settings.fancyGraphics = true;
 			renderItem.doRender(item, 0, 0, 0, 0, 0);
+			settings.fancyGraphics = was;
 			glPopMatrix();
 		} else {
 			autoChisel.chiselRot = 0;
