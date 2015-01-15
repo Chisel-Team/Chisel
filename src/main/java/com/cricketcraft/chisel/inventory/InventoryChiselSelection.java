@@ -8,6 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
 
 public class InventoryChiselSelection implements IInventory {
@@ -117,6 +118,9 @@ public class InventoryChiselSelection implements IInventory {
 			return;
 
 		if (Block.getBlockFromItem(item) == null)
+			return;
+
+		if (!((IChiselItem) chisel.getItem()).canChisel(container.playerInventory.player.worldObj, this, container.playerInventory.currentItem, chisel, chiseledItem))
 			return;
 
 		ArrayList<ItemStack> list = container.carving.getItems(chiseledItem);

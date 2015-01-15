@@ -17,6 +17,7 @@ import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.config.Configurations;
+import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.utils.GeneralClient;
 
 public class ItemChisel extends Item implements IChiselItem {
@@ -82,10 +83,15 @@ public class ItemChisel extends Item implements IChiselItem {
 	public ChiselMode getChiselMode(ItemStack itemStack) {
 		return ChiselMode.SINGLE;
 	}
-	
+
 	@Override
 	public boolean canOpenGui(World world, EntityPlayer player, ItemStack chisel) {
 		return true;
+	}
+
+	@Override
+	public boolean canChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target) {
+		return Block.getBlockFromItem(target.getItem()) != ChiselBlocks.marble;
 	}
 
 	@Override
