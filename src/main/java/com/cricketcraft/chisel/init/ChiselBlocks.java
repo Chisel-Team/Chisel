@@ -66,15 +66,11 @@ public final class ChiselBlocks {
 	public static final BlockCarvable netherrack = null;
 	public static final BlockCarvable mossy_cobblestone = null;
 	public static final BlockCarvable stonebricksmooth = null;
-	public static final BlockCarvableStairs marbleStairs = null;
-	public static final BlockCarvableStairs limestoneStairs = null;
 	public static final BlockCarvablePane iron_bars = null;
 	public static final BlockCarvableIce ice = null;
 	public static final BlockCarvableIcePillar ice_pillar = null;
 	public static final BlockCarvablePackedIce packedice = null;
 	public static final BlockCarvablePackedIcePillar packedice_pillar = null;
-	public static final BlockCarvableIceStairs iceStairs = null;
-	public static final BlockCarvablePackedIceStairs packediceStairs = null;
 	public static final BlockCarvable obsidian = null;
 	public static final BlockCarvablePowered redstone_block = null;
 	public static final BlockHolystone holystone = null;
@@ -117,9 +113,15 @@ public final class ChiselBlocks {
 	public static final BlockCarvable bloodRune = null;
 	public static final BlockCarvable bloodBrick = null;
 	public static final BlockCarvableSand colored_sand = null;
+	
+	// Arrays can't be final because of how @ObjectHolder works
+	public static BlockCarvableStairs[] marbleStairs = new BlockCarvableStairs[8];
+	public static BlockCarvableStairs[] limestoneStairs = new BlockCarvableStairs[8];
+	public static BlockCarvableIceStairs[] iceStairs = new BlockCarvableIceStairs[8];
+	public static BlockCarvablePackedIceStairs[] packediceStairs = new BlockCarvablePackedIceStairs[8];
+
 	public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
 
-	// Arrays can't be final because of how @ObjectHolder works
 	public static BlockCarvable[] planks = new BlockCarvable[6];
 
 	public static BlockPresent[] present = new BlockPresent[16];
