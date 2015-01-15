@@ -77,7 +77,7 @@ public final class ChiselController {
 			break;
 		case RIGHT_CLICK_AIR:
 		case RIGHT_CLICK_BLOCK:
-			if (!event.world.isRemote) {
+			if (!event.world.isRemote && chisel.canOpenGui(event.world, event.entityPlayer, held)) {
 				event.entityPlayer.openGui(Chisel.instance, 0, event.world, 0, 0, 0);
 			}
 			break;

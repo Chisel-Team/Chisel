@@ -82,6 +82,11 @@ public class ItemChisel extends Item implements IChiselItem {
 	public ChiselMode getChiselMode(ItemStack itemStack) {
 		return ChiselMode.SINGLE;
 	}
+	
+	@Override
+	public boolean canOpenGui(World world, EntityPlayer player, ItemStack chisel) {
+		return true;
+	}
 
 	@Override
 	public void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target) {
