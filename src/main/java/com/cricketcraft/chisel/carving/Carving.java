@@ -11,15 +11,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.carving.ICarvingGroup;
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 
 public class Carving {
 
-	HashMap<String, CarvingGroup> carvingGroupsByName = new HashMap<String, CarvingGroup>();
-	HashMap<String, CarvingGroup> carvingGroupsByOre = new HashMap<String, CarvingGroup>();
-	HashMap<String, CarvingGroup> carvingGroupsByVariation = new HashMap<String, CarvingGroup>();
+	GroupList groups = new GroupList();
 
-	public static Carving chisel = new Carving();
-	public static Carving needle = new Carving();
+	public static final Carving chisel = new Carving();
+	public static final Carving needle = new Carving();
+
+	private Carving() {
+	}
 
 	String key(Item item, int metadata) {
 		return Item.itemRegistry.getNameForObject(item) + "|" + metadata;
@@ -29,34 +32,20 @@ public class Carving {
 		return Block.blockRegistry.getNameForObject(block) + "|" + metadata;
 	}
 
-	public boolean isVariationOfSameClass(Block target, int metadata1, Block block2, int metadata2) {
-		CarvingGroup group1 = carvingGroupsByVariation.get(key(target, metadata1));
-		if (group1 == null)
-			return false;
-
-		CarvingGroup group2 = carvingGroupsByVariation.get(key(block2, metadata2));
-		if (group2 == null)
-			return false;
-
-		return group1 == group2 || group1.className.equals(group2.className) && !group1.className.isEmpty();
-
-	}
-
-	public CarvingVariation[] getVariations(Block block, int metadata) {
-		CarvingGroup group = getGroup(block, metadata);
+	public List<ICarvingVariation> getVariations(Block block, int metadata) {
+		ICarvingGroup group = getGroup(block, metadata);
 		if (group == null)
 			return null;
 
-		CarvingVariation[] res = group.variations.toArray(new CarvingVariation[group.variations.size()]);
-		return res;
+		return group.getVariations();
 	}
 
 	public String getOre(Block block, int metadata) {
-		CarvingGroup group = getGroup(block, metadata);
+		ICarvingGroup group = getGroup(block, metadata);
 		if (group == null)
 			return null;
 
-		return group.oreName;
+		return group.getOreName();
 	}
 
 	public ArrayList<ItemStack> getItems(ItemStack chiseledItem) {
@@ -64,26 +53,29 @@ public class Carving {
 
 		int damage = chiseledItem.getItemDamage();
 
-		CarvingGroup group = getGroup(Block.getBlockFromItem(chiseledItem.getItem()), damage);
+		ICarvingGroup group = getGroup(Block.getBlockFromItem(chiseledItem.getItem()), damage);
 		if (group == null)
 			return items;
 
 		HashMap<String, Integer> mapping = new HashMap<String, Integer>();
 
-		if (group.variations != null) {
-			for (CarvingVariation v : group.variations) {
+		List<ICarvingVariation> variations = group.getVariations();
 
-				String key = Block.getIdFromBlock(v.block) + "|" + v.damage;
+		if (!group.getVariations().isEmpty()) {
+			for (ICarvingVariation v : variations) {
+
+				String key = Block.getIdFromBlock(v.getBlock()) + "|" + v.getItemMeta();
 				if (mapping.containsKey(key))
 					continue;
 				mapping.put(key, 1);
 
-				items.add(new ItemStack(v.block, 1, v.damage));
+				items.add(new ItemStack(v.getBlock(), 1, v.getItemMeta()));
 			}
 		}
 
 		ArrayList<ItemStack> ores;
-		if (group.oreName != null && ((ores = OreDictionary.getOres(group.oreName)) != null)) {
+		String oreName = group.getOreName();
+		if (oreName != null && ((ores = OreDictionary.getOres(oreName)) != null)) {
 			for (ItemStack stack : ores) {
 
 				String key = Item.getIdFromItem(stack.getItem()) + "|" + stack.getItemDamage();
@@ -98,71 +90,53 @@ public class Carving {
 		return items;
 	}
 
-	public CarvingGroup getGroup(Block block, int metadata) {
-		// Check name first
-		CarvingGroup res;
-		int i = OreDictionary.getOreID(block.getUnlocalizedName());
-		if (i < 1)
-			return null;
-
-		// get All dictionary names for that block via Ids
-		// the first one matching with a group is chosen
-		int[] oreDictIds = OreDictionary.getOreIDs(new ItemStack(block, 1, metadata));
-		for (int oreId : oreDictIds) {
-			String oreDictName = OreDictionary.getOreName(oreId);
-			if (carvingGroupsByOre.containsKey(oreDictName))
-				return carvingGroupsByOre.get(oreDictName);
+	public ICarvingGroup getGroup(Block block, int metadata) {
+		int[] ids = OreDictionary.getOreIDs(new ItemStack(block, metadata));
+		if (ids.length > 0) {
+			for (int id : ids) {
+				return groups.getGroupByOre(OreDictionary.getOreName(id));
+			}
 		}
 
-		if ((res = carvingGroupsByVariation.get(key(block, metadata))) != null)
-			return res;
-
-		return null;
+		return groups.getGroup(block, metadata);
 	}
 
-	public CarvingGroup getGroup(String name) {
-		CarvingGroup group = carvingGroupsByName.get(name);
-		if (group == null) {
-			group = new CarvingGroup(name);
-			group.className = name;
-			carvingGroupsByName.put(name, group);
-		}
-
-		return group;
+	public ICarvingGroup getGroup(String name) {
+		return groups.getGroupByName(name);
 	}
 
 	public CarvingVariation addVariation(String name, Block block, int metadata, int order) {
-		CarvingGroup group = getGroup(name);
-
-		CarvingGroup blockGroup = carvingGroupsByVariation.get(key(block, metadata));
-		if (blockGroup != null || blockGroup == group)
-			return null;
 
 		CarvingVariation variation = new CarvingVariation(block, metadata, order);
-		group.variations.add(variation);
-		Collections.sort(group.variations);
-		carvingGroupsByVariation.put(key(block, metadata), group);
+
+		ICarvingGroup group = groups.getGroupByName(name);
+
+		if (group == null) {
+			group = new CarvingGroup(name);
+			groups.add(group);
+		}
+
+		groups.addVariation(name, variation);
 
 		return variation;
 	}
 
 	public void registerOre(String name, String oreName) {
-		CarvingGroup group = getGroup(name);
-
-		carvingGroupsByOre.put(oreName, group);
-
-		group.oreName = oreName;
-	}
-
-	public void setGroupClass(String name, String className) {
-		CarvingGroup group = getGroup(name);
-
-		group.className = className;
+		ICarvingGroup group = groups.getGroupByName(name);
+		if (group != null) {
+			group.setOreName(oreName);
+		} else {
+			throw new NullPointerException("Cannot register ore name for group " + name + ", as it does not exist.");
+		}
 	}
 
 	public void setVariationSound(String name, String sound) {
-		CarvingGroup group = getGroup(name);
-		group.sound = sound;
+		ICarvingGroup group = groups.getGroupByName(name);
+		if (group != null) {
+			group.setSound(sound);
+		} else {
+			throw new NullPointerException("Cannot set sound for group " + name + ", as it does not exist.");
+		}
 	}
 
 	public String getVariationSound(Block block, int metadata) {
@@ -170,18 +144,14 @@ public class Carving {
 	}
 
 	public String getVariationSound(Item item, int metadata) {
-		CarvingGroup blockGroup = carvingGroupsByVariation.get(key(item, metadata));
-		if (blockGroup == null || blockGroup.sound == null)
-			return Chisel.MOD_ID + ":chisel.fallback";
-
-		return blockGroup.sound;
+		ICarvingGroup group = groups.getGroup(Block.getBlockFromItem(item), metadata);
+		String sound = group == null ? null : group.getSound();
+		return sound == null ? Chisel.MOD_ID + ":chisel.fallback" : sound;
 	}
 
 	public List<String> getSortedGroupNames() {
 		List<String> names = new ArrayList<String>();
-		for (String s : carvingGroupsByName.keySet()) {
-			names.add(s);
-		}
+		names.addAll(groups.getNames());
 		Collections.sort(names);
 		return names;
 	}

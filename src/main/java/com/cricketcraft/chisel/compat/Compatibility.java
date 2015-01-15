@@ -29,8 +29,10 @@ public class Compatibility {
 
 		/* Mariculture */
 		Block block = GameRegistry.findBlock("mariculture", "limestone");
-		for (int i = 0; i < 16; i++) {
-			addSupport("limestone", block, i, 99);
+		if (block != null) {
+			for (int i = 0; i < 16; i++) {
+				addSupport("limestone", block, i, 99);
+			}
 		}
 
 		/* Geologica */

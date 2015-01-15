@@ -17,7 +17,6 @@ import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.config.Configurations;
-import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.utils.GeneralClient;
 
 public class ItemChisel extends Item implements IChiselItem {
@@ -104,10 +103,8 @@ public class ItemChisel extends Item implements IChiselItem {
 			String sound = carving.getVariationSound(target.getItem(), target.getItemDamage());
 			EntityPlayer player = Chisel.proxy.getClientPlayer();
 			GeneralClient.playChiselSound(world, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound);
-		} else {
-			if (chisel.getItemDamage() >= chisel.getMaxDamage()) {
-				inv.decrStackSize(slot, 1);
-			}
+		} else if (chisel.getItemDamage() >= chisel.getMaxDamage()) {
+			inv.decrStackSize(slot, 1);
 		}
 	}
 
