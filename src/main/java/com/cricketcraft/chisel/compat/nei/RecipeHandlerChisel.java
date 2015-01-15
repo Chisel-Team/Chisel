@@ -15,6 +15,7 @@ import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
+import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
@@ -165,7 +166,7 @@ public class RecipeHandlerChisel extends TemplateRecipeHandler {
 	private static List<ItemStack> getVariationStacks(ICarvingGroup g) {
 		List<ItemStack> stacks = new ArrayList<ItemStack>();
 		for (ICarvingVariation v : g.getVariations()) {
-			stacks.add(v.getStack());
+			stacks.add(CarvingUtils.getStack(v));
 		}
 		String oreName = g.getOreName();
 		if (oreName != null) {

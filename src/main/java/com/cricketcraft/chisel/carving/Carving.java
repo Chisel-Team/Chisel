@@ -24,14 +24,6 @@ public class Carving {
 	private Carving() {
 	}
 
-	String key(Item item, int metadata) {
-		return Item.itemRegistry.getNameForObject(item) + "|" + metadata;
-	}
-
-	String key(Block block, int metadata) {
-		return Block.blockRegistry.getNameForObject(block) + "|" + metadata;
-	}
-
 	public List<ICarvingVariation> getVariations(Block block, int metadata) {
 		ICarvingGroup group = getGroup(block, metadata);
 		if (group == null)
@@ -105,20 +97,26 @@ public class Carving {
 		return groups.getGroupByName(name);
 	}
 
-	public CarvingVariation addVariation(String name, Block block, int metadata, int order) {
+	public void addVariation(String groupName, Block block, int metadata, int order) {
 
-		CarvingVariation variation = new CarvingVariation(block, metadata, order);
+		ICarvingVariation variation = new CarvingVariation(block, metadata, order);
+		addVariation(groupName, variation);
+	}
 
-		ICarvingGroup group = groups.getGroupByName(name);
+	public void addVariation(String groupName, ICarvingVariation variation) {
+
+		ICarvingGroup group = groups.getGroupByName(groupName);
 
 		if (group == null) {
-			group = new CarvingGroup(name);
-			groups.add(group);
+			group = new CarvingGroup(groupName);
+			addGroup(group);
 		}
 
-		groups.addVariation(name, variation);
+		groups.addVariation(groupName, variation);
+	}
 
-		return variation;
+	public void addGroup(ICarvingGroup group) {
+		groups.add(group);
 	}
 
 	public void registerOre(String name, String oreName) {
