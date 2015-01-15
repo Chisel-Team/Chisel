@@ -23,8 +23,8 @@ public class MessageChiselSound extends MessageCoords {
 
 	public MessageChiselSound(int x, int y, int z, CarvingVariation v) {
 		super(x, y, z);
-		this.block = Block.getIdFromBlock(v.block);
-		this.meta = (byte) v.meta;
+		this.block = Block.getIdFromBlock(v.getBlock());
+		this.meta = (byte) v.getBlockMeta();
 	}
 
 	@Override
