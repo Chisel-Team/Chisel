@@ -82,7 +82,7 @@ public class BlockCarvable extends Block implements ICarvable {
 	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
-	
+
 	@Override
 	public CarvableVariation getVariation(ItemStack stack) {
 		return carverHelper.getVariation(stack.getItemDamage());
@@ -95,13 +95,10 @@ public class BlockCarvable extends Block implements ICarvable {
 		public final String soundNamePlace;
 
 		/**
-		 * Creates a SoundType with automatic names for step and break sounds.
-		 * Sound names dig.soundName and step.soundName must be specified in the
-		 * sounds.json
+		 * Creates a SoundType with automatic names for step and break sounds. Sound names dig.soundName and step.soundName must be specified in the sounds.json
 		 * 
 		 * @param soundName
-		 *            block of the sound. Will automatically be expanded to
-		 *            "mod:dig.soundName" and "mod:step.soundName" respectively)
+		 *            block of the sound. Will automatically be expanded to "mod:dig.soundName" and "mod:step.soundName" respectively)
 		 * @param volume
 		 *            default 1.0f
 		 * @param frequency
@@ -115,8 +112,7 @@ public class BlockCarvable extends Block implements ICarvable {
 		}
 
 		/**
-		 * Creates a SoundType with manual names for step and break sounds.
-		 * Sound names must be specified in the sounds.json
+		 * Creates a SoundType with manual names for step and break sounds. Sound names must be specified in the sounds.json
 		 * 
 		 * @param soundNameBreak
 		 *            block break sound
@@ -135,8 +131,7 @@ public class BlockCarvable extends Block implements ICarvable {
 		}
 
 		/**
-		 * Creates a SoundType with manual names for step, break and place
-		 * sounds. Sound names must be specified in the sounds.json
+		 * Creates a SoundType with manual names for step, break and place sounds. Sound names must be specified in the sounds.json
 		 * 
 		 * @param soundNameBreak
 		 *            block break sound
