@@ -41,6 +41,25 @@ public interface IChiselItem extends IChiselMode {
 	void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target);
 
 	/**
+	 * Called to check if this {@link ItemStack} can be chiseled in this chisel. If not, there will be no possible variants displayed in the GUI.
+	 * <p>
+	 * It is not necessary to take into account whether this item <i>has</i> any variants, this method will only be called after that check.
+	 * 
+	 * @param world
+	 *            {@link World} object
+	 * @param inv
+	 *            The inventory this chisel is currently in
+	 * @param slot
+	 *            The slot index of the chisel in the inventory
+	 * @param chisel
+	 *            The {@link ItemStack} representing the chisel
+	 * @param target
+	 *            The {@link ItemStack} representing the target item
+	 * @return True if the current target can be chiseled into anything. False otherwise.
+	 */
+	boolean canChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target);
+
+	/**
 	 * Allows you to control if your item can chisel this block in the world.
 	 * 
 	 * @param world
