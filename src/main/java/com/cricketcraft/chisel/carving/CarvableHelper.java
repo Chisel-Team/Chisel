@@ -16,7 +16,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.block.BlockCarvableSlab;
 import com.cricketcraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
 import com.cricketcraft.chisel.client.render.CTM;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
@@ -258,7 +257,7 @@ public class CarvableHelper {
 		return GeneralClient.getMissingIcon();
 	}
 
-	public void register(Block block, String name) {
+	public void registerAll(Block block, String name) {
 		register(block, name, ItemCarvable.class);
 	}
 
@@ -273,17 +272,12 @@ public class CarvableHelper {
 
 	public void register(Block block, String name, Class<? extends ItemCarvable> cl) {
 		registerBlock(block, name, cl);
+		registerVariations(name, block);
+	}
 
+	public void registerVariations(String name, Block block) {
 		for (CarvableVariation variation : variations) {
 			registerVariation(name, variation, block, variation.metadata);
-
-			if (block instanceof BlockCarvableSlab && ((BlockCarvableSlab) block).isBottom) {
-				BlockCarvableSlab slab = (BlockCarvableSlab) block;
-
-				if (!forbidChiseling) {
-					Carving.chisel.addVariation(name + ".top", slab.top, variation.metadata, 0);
-				}
-			}
 		}
 	}
 
