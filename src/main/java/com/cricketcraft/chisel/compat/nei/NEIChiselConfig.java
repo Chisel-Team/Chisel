@@ -1,11 +1,12 @@
 package com.cricketcraft.chisel.compat.nei;
 
 import net.minecraft.item.ItemStack;
-
-import com.cricketcraft.chisel.Chisel;
-
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.client.gui.GuiChisel;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class NEIChiselConfig implements IConfigureNEI {
@@ -25,10 +26,10 @@ public class NEIChiselConfig implements IConfigureNEI {
 		API.hideItem(new ItemStack(GameRegistry.findBlock("chisel", "limestone_slab_top")));
 		API.hideItem(new ItemStack(GameRegistry.findBlock("chisel", "marble_slab_top")));
 		API.hideItem(new ItemStack(GameRegistry.findBlock("chisel", "marble_pillar_slab_top")));
-		
+
 		RecipeHandlerChisel handler = new RecipeHandlerChisel();
 		API.registerRecipeHandler(handler);
 		API.registerUsageHandler(handler);
+		API.setGuiOffset(GuiChisel.class, -50, 40);
 	}
-
 }
