@@ -41,7 +41,7 @@ import com.cricketcraft.chisel.block.BlockGrimstone;
 import com.cricketcraft.chisel.block.BlockHolystone;
 import com.cricketcraft.chisel.block.BlockLavastone;
 import com.cricketcraft.chisel.block.BlockLeaf;
-import com.cricketcraft.chisel.block.BlockMarbleBookshelf;
+import com.cricketcraft.chisel.block.BlockCarvableBookshelf;
 import com.cricketcraft.chisel.block.BlockMarbleCarpet;
 import com.cricketcraft.chisel.block.BlockMarbleTexturedOre;
 import com.cricketcraft.chisel.block.BlockPresent;
@@ -254,7 +254,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvable bookshelf = (BlockCarvable) new BlockMarbleBookshelf().setHardness(1.5F).setCreativeTab(ChiselTabs.tabWoodChiselBlocks).setStepSound(Block.soundTypeWood);
+			BlockCarvable bookshelf = (BlockCarvable) new BlockCarvableBookshelf().setHardness(1.5F).setCreativeTab(ChiselTabs.tabWoodChiselBlocks).setStepSound(Block.soundTypeWood);
 			Carving.chisel.addVariation("bookshelf", Blocks.bookshelf, 0, 0);
 			bookshelf.carverHelper.addVariation("tile.bookshelf.1.desc", 1, "bookshelf/rainbow");
 			bookshelf.carverHelper.addVariation("tile.bookshelf.2.desc", 2, "bookshelf/necromancer-novice");
