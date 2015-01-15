@@ -15,10 +15,9 @@ import codechicken.nei.NEIServerUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
+import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.carving.CarvingGroup;
-import com.cricketcraft.chisel.carving.CarvingVariation;
 
 public class RecipeHandlerChisel extends TemplateRecipeHandler {
 
@@ -108,7 +107,7 @@ public class RecipeHandlerChisel extends TemplateRecipeHandler {
 	public void loadCraftingRecipes(String outputId, Object... results) {
 		if (outputId.equals("chisel2.chisel")) {
 			for (String name : Carving.chisel.getSortedGroupNames()) {
-				CarvingGroup g = Carving.chisel.getGroup(name);
+				ICarvingGroup g = Carving.chisel.getGroup(name);
 				if (!g.getVariations().isEmpty()) {
 					addCached(getVariationStacks(g));
 				}
@@ -121,7 +120,7 @@ public class RecipeHandlerChisel extends TemplateRecipeHandler {
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
 		for (String name : Carving.chisel.getSortedGroupNames()) {
-			CarvingGroup g = Carving.chisel.getGroup(name);
+			ICarvingGroup g = Carving.chisel.getGroup(name);
 			List<ItemStack> variations = getVariationStacks(g);
 			for (ItemStack stack : variations) {
 				if (NEIServerUtils.areStacksSameTypeCrafting(stack, result)) {
@@ -134,7 +133,7 @@ public class RecipeHandlerChisel extends TemplateRecipeHandler {
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
 		for (String name : Carving.chisel.getSortedGroupNames()) {
-			CarvingGroup g = Carving.chisel.getGroup(name);
+			ICarvingGroup g = Carving.chisel.getGroup(name);
 			List<ItemStack> variations = getVariationStacks(g);
 			for (ItemStack stack : variations) {
 				if (NEIServerUtils.areStacksSameTypeCrafting(stack, ingredient)) {
@@ -163,7 +162,7 @@ public class RecipeHandlerChisel extends TemplateRecipeHandler {
 		addCached(variations, null, null);
 	}
 
-	private static List<ItemStack> getVariationStacks(CarvingGroup g) {
+	private static List<ItemStack> getVariationStacks(ICarvingGroup g) {
 		List<ItemStack> stacks = new ArrayList<ItemStack>();
 		for (ICarvingVariation v : g.getVariations()) {
 			stacks.add(v.getStack());
