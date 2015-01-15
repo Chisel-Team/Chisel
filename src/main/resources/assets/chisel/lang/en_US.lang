@@ -138,8 +138,8 @@ tile.arcane.8.desc=Spatial Conduit
 
 #Thaumium
 tile.thaumium.name=Thaumium Block
-tile.thaumium.0.desc=Beveled Thaumium Block
-tile.thaumium.1.desc=Small Thaumium Blocks
+tile.thaumium.0.desc=Ornate Pattern
+tile.thaumium.1.desc=Totem Faces
 tile.thaumium.2.desc=Engraved Symbols
 tile.thaumium.3.desc=Red Symbols
 

@@ -2226,8 +2226,8 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable thaumium = (BlockCarvable) new BlockCarvable(Material.iron).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeMetal);
 			Carving.chisel.addVariation("thaumium", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 4, 0);
-			thaumium.carverHelper.addVariation("tile.thaumium.0.desc", 0, "thaumium/bevel");
-			thaumium.carverHelper.addVariation("tile.thaumium.1.desc", 1, "thaumium/chunks");
+			thaumium.carverHelper.addVariation("tile.thaumium.0.desc", 0, "thaumium/ornate");
+			thaumium.carverHelper.addVariation("tile.thaumium.1.desc", 1, "thaumium/totem");
 			thaumium.carverHelper.addVariation("tile.thaumium.2.desc", 2, "thaumium/purplerunes");
 			thaumium.carverHelper.addVariation("tile.thaumium.3.desc", 3, "thaumium/runes");
 			thaumium.carverHelper.register(thaumium, "thaumium");
