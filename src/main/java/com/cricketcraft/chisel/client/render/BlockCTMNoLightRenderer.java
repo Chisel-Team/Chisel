@@ -38,23 +38,23 @@ public class BlockCTMNoLightRenderer implements ISimpleBlockRenderingHandler {
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
 		int meta = world.getBlockMetadata(x, y, z);
 
-		CarvableVariation var = ((ICarvable) block).getVariation(meta);
+		CarvableVariation var = ((ICarvable) block).getVariation(world, x, y, z, meta);
 
 		switch (var == null ? 0 : var.kind) {
-			case CarvableHelper.CTMX:
-				rendererCTMNoLight.blockAccess = world;
-				rendererCTMNoLight.renderMaxX = 1.0;
-				rendererCTMNoLight.renderMaxY = 1.0;
-				rendererCTMNoLight.renderMaxZ = 1.0;
+		case CarvableHelper.CTMX:
+			rendererCTMNoLight.blockAccess = world;
+			rendererCTMNoLight.renderMaxX = 1.0;
+			rendererCTMNoLight.renderMaxY = 1.0;
+			rendererCTMNoLight.renderMaxZ = 1.0;
 
-				rendererCTMNoLight.submap = var.submap;
-				rendererCTMNoLight.submapSmall = var.submapSmall;
+			rendererCTMNoLight.submap = var.submap;
+			rendererCTMNoLight.submapSmall = var.submapSmall;
 
-				rendererCTMNoLight.rendererOld = rendererOld;
+			rendererCTMNoLight.rendererOld = rendererOld;
 
-				return rendererCTMNoLight.renderStandardBlock(block, x, y, z);
-			default:
-				return rendererOld.renderStandardBlock(block, x, y, z);
+			return rendererCTMNoLight.renderStandardBlock(block, x, y, z);
+		default:
+			return rendererOld.renderStandardBlock(block, x, y, z);
 		}
 	}
 

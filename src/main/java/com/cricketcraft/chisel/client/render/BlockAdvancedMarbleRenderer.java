@@ -37,7 +37,7 @@ public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
 		int meta = world.getBlockMetadata(x, y, z);
 
-		CarvableVariation var = ((ICarvable) block).getVariation(meta);
+		CarvableVariation var = ((ICarvable) block).getVariation(world, x, y, z, meta);
 
 		switch (var == null ? 0 : var.kind) {
 		case CarvableHelper.CTMX:

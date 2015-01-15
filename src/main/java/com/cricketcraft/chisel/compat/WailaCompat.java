@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.api.ICarvable;
@@ -33,7 +34,8 @@ public class WailaCompat implements IWailaDataProvider {
 	public List<String> getWailaBody(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
 		if (accessor.getBlock() instanceof ICarvable) {
 			ICarvable block = (ICarvable) accessor.getBlock();
-			strings.add(block.getVariation(accessor.getMetadata()).getDescription());
+			MovingObjectPosition pos = accessor.getPosition();
+			strings.add(block.getVariation(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata()).getDescription());
 		}
 		return strings;
 	}
