@@ -2228,8 +2228,8 @@ public enum Features {
 			Carving.chisel.addVariation("thaumium", GameRegistry.findBlock("Thaumcraft", "blockCosmeticSolid"), 4, 0);
 			thaumium.carverHelper.addVariation("tile.thaumium.0.desc", 0, "thaumium/ornate");
 			thaumium.carverHelper.addVariation("tile.thaumium.1.desc", 1, "thaumium/totem");
-			thaumium.carverHelper.addVariation("tile.thaumium.2.desc", 2, "thaumium/purplerunes");
-			thaumium.carverHelper.addVariation("tile.thaumium.3.desc", 3, "thaumium/runes");
+			thaumium.carverHelper.addVariation("tile.thaumium.2.desc", 2, "thaumium/thaumiumBigBricks");
+			thaumium.carverHelper.addVariation("tile.thaumium.3.desc", 3, "thaumium/small");
 			thaumium.carverHelper.register(thaumium, "thaumium");
 			Carving.chisel.registerOre("thaumium", "thaumium");
 		}
