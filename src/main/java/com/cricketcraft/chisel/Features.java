@@ -1723,7 +1723,7 @@ public enum Features {
 	 * Dummy feature for all RC subsets
 	 */
 	RAILCRAFT("Railcraft"),
-	
+
         RC_ABYSSAL_BLOCK(RAILCRAFT.getRequiredMod(), RAILCRAFT) {
 
 		@Override
@@ -1941,7 +1941,7 @@ public enum Features {
 		@Override
 		void addItems() {
 			ItemSmashingRock smashingrock = (ItemSmashingRock) new ItemSmashingRock().setTextureName("Chisel:smashingrock").setCreativeTab(ChiselTabs.tabChisel);
-			EntityRegistry.registerModEntity(EntitySmashingRock.class, "SmashingRock", 2, Chisel.instance, 40, 1, true);
+			EntityRegistry.registerModEntity(EntitySmashingRock.class, "SmashingRock", 3, Chisel.instance, 40, 1, true);
 			GameRegistry.registerItem(smashingrock, "smashingrock");
 		}
 
