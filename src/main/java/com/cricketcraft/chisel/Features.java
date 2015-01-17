@@ -1674,7 +1674,7 @@ public enum Features {
 		@Override
 		void addRecipes() {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.paperwall, 8), "ppp", "psp", "ppp", ('p'), Items.paper, ('s'), "stickWood"));
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.paperwall, 4), "pp", "pp", "ppp", ('p'), paperwall));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.paperwall_block, 4), "pp", "pp", "ppp", ('p'), ChiselBlocks.paperwall));
 		}
 	},
 
@@ -2364,6 +2364,7 @@ public enum Features {
 			warningSign.carverHelper.addVariation("tile.warningSign.11.desc", 11, "warning/sound");
 			warningSign.carverHelper.addVariation("tile.warningSign.12.desc", 12, "warning/noentry");
 			warningSign.carverHelper.addVariation("tile.warningSign.13.desc", 13, "warning/cryogenic");
+			warningSign.carverHelper.addVariation("tile.warningSign.14.desc", 14, "warning/oxygen");
 			warningSign.carverHelper.registerAll(warningSign, "warningSign");
 			Carving.chisel.registerOre("warningSign", "warningSign");
 		}
