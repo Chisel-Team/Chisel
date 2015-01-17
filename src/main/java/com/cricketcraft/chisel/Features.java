@@ -1640,7 +1640,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvablePane paperwall = (BlockCarvablePane) new BlockCarvablePane(Material.ground, true).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setResistance(10F);
+			BlockCarvablePane paperwall = (BlockCarvablePane) new BlockCarvablePane(Material.ground, true).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setResistance(0.5F);
 			paperwall.carverHelper.setChiselBlockName("Paper Wall");
 			paperwall.carverHelper.addVariation("tile.paperwall.0.desc", 0, "paper/box");
 			paperwall.carverHelper.addVariation("tile.paperwall.1.desc", 1, "paper/throughMiddle");
@@ -1654,6 +1654,21 @@ public enum Features {
 
 			paperwall.carverHelper.registerAll(paperwall, "paperwall");
 			Carving.chisel.registerOre("paperwall", "paperwall");
+
+			BlockCarvable paperwall_block = (BlockCarvable) new BlockCarvable(Material.ground).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.5F).setResistance(0.5F);
+			paperwall_block.carverHelper.setChiselBlockName("Paper Wall Block");
+			paperwall_block.carverHelper.addVariation("tile.paperwall.0.desc", 0, "paper/box");
+			paperwall_block.carverHelper.addVariation("tile.paperwall.1.desc", 1, "paper/throughMiddle");
+			paperwall_block.carverHelper.addVariation("tile.paperwall.2.desc", 2, "paper/cross");
+			paperwall_block.carverHelper.addVariation("tile.paperwall.3.desc", 3, "paper/sixSections");
+			paperwall_block.carverHelper.addVariation("tile.paperwall.4.desc", 4, "paper/vertical");
+			paperwall_block.carverHelper.addVariation("tile.paperwall.5.desc", 5, "paper/horizontal");
+			paperwall_block.carverHelper.addVariation("tile.paperwall.6.desc", 6, "paper/floral");
+			paperwall_block.carverHelper.addVariation("tile.paperwall.7.desc", 7, "paper/plain");
+			paperwall_block.carverHelper.addVariation("tile.paperwall.8.desc", 8, "paper/door");
+
+			paperwall_block.carverHelper.registerAll(paperwall_block, "paperwall_block");
+			Carving.chisel.registerOre("paperwall_block", "paperwall_block");
 		}
 
 		@Override

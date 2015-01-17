@@ -1153,6 +1153,7 @@ tile.fantasyblock2.15.desc=Worn Fantasy Bricks in disarray
 
 #Paperwall
 tile.paperwall.name=Paperwall
+tile.paperwall_block.name=Paperwall Block
 tile.paperwall.0.desc=Boxed Paperwall
 tile.paperwall.1.desc=Middle Striked Paperwall
 tile.paperwall.2.desc=Crossed Paperwall
