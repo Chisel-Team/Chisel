@@ -1,8 +1,15 @@
 # Key localizations
 
 # Item localizations
-item.chisel.name=Стамеска
-item.chisel.desc=ПКМ, чтобы открыть интерфейс
+item.chisel.chisel_iron.name=Стамеска
+
+item.chisel.chisel.desc.0=ПКМ, чтобы открыть интерфейс
+item.chisel.chisel.desc.1=ЛКМ, чтобы менять блоки прямо в мире
+item.chisel.chisel.desc.2=Может ориентироваться на блок в инвентаре
+
+item.chisel.chisel_diamond.name=Алмазная стамеска
+item.chisel.chisel_diamond.desc=Обладает разными режимами для обработки. В разработке.
+
 item.ballMoss.name=Шарик мха
 item.ballMoss.desc=ПКМ, чтобы кинуть. Превратить булыжник в замшелый булыжник при столкновении.
 item.cloudBottle.name=Облако в бутылке
@@ -22,6 +29,25 @@ item.upgrade_stack.desc=Позволяет стамеске обрабатыва
 
 #Chisel 2
 
+#AntiBlocks
+tile.antiBlock.name=Антиблок
+tile.antiBlock.black.desc=Чёрный антиблок
+tile.antiBlock.blue.desc=Синий антиблок
+tile.antiBlock.brown.desc=Коричневый антиблок
+tile.antiBlock.cyan.desc=Бирюзовый антиблок
+tile.antiBlock.green.desc=Зелёный антиблок
+tile.antiBlock.light_blue.desc=Светло-синий антиблок
+tile.antiBlock.silver.desc=Светло-серый антиблок
+tile.antiBlock.lime.desc=Лаймовый антиблок
+tile.antiBlock.magenta.desc=Сиреневый антиблок
+tile.antiBlock.orange.desc=Оранжевый антиблок
+tile.antiBlock.pink.desc=Розовый антиблок
+tile.antiBlock.purple.desc=Фиолетовый антиблок
+tile.antiBlock.red.desc=Красный антиблок
+tile.antiBlock.white.desc=Белый антиблок
+tile.antiBlock.yellow.desc=Жёлтый антиблок
+tile.antiBlock.gray.desc=Серый антиблок
+
 #Diorite
 tile.diorite.name=Диорит
 tile.diorite.0.desc=Генерируется в Вашем мире
@@ -37,12 +63,10 @@ tile.granite.name=Гранит
 tile.granite.0.desc=Генерируется в Вашем мире
 tile.granite.1.desc=Гладкий гранит
 
-#Diamond Chisel
-item.diamondChisel.name=Алмазная стамеска
-item.diamondChisel.desc=Нажмите ЛКМ и она изменит блок!
-
 #Auto Chisel
 tile.autoChisel.name=Автоматическая стамеска
+autochisel.slot.chisel.tooltip=Слот стамески
+autochisel.slot.target.tooltip=Слот блока
 
 #Leaves
 tile.leaves.6.desc=Мёртвая листва
@@ -52,14 +76,6 @@ tile.leaves.9.desc=Красная роза
 tile.leaves.10.desc=Белая роза
 tile.leaves.11.desc=Рождественские шары
 tile.leaves.12.desc=Рождественские огни
-
-#Bone
-tile.bone.name=Костный блок
-tile.bone.0.desc=Сжатая кость
-tile.bone.1.desc=Черепная кучка
-tile.bone.2.desc=Кучка костей
-tile.bone.3.desc=Скошенная сжатая кость
-tile.bone.4.desc=Кирпич из сжатой кости
 
 #Void Stone Blocks
 tile.voidstone.name=Пустотный камень
@@ -75,6 +91,23 @@ tile.voidstone.7.desc=Скошенный пустотный камень
 #Void Stone Pillars
 tile.voidstonePillar.name=Колонна из пустотного камня
 tile.voidstonePillar.0.desc=Полосатая колонна из пустотного камня
+
+#Warning
+tile.warningSign.name=Предупреждающая табличка
+tile.warningSign.0.desc=Радиация
+tile.warningSign.1.desc=Биологическая опасность
+tile.warningSign.2.desc=Огонь
+tile.warningSign.3.desc=Взрывчатка
+tile.warningSign.4.desc=Смерть
+tile.warningSign.5.desc=Падающие объекты
+tile.warningSign.6.desc=Опасность проваливания
+tile.warningSign.7.desc=Высокое напряжение
+tile.warningSign.8.desc=Общее предупреждение
+tile.warningSign.9.desc=Опасные химикаты
+tile.warningSign.10.desc=В стадии строительства
+tile.warningSign.11.desc=Громкие звуки
+tile.warningSign.12.desc=Вход запрещён
+tile.warningSign.13.desc=В ходе криогенной заморозки
 
 #Energised Void Stone Blocks
 tile.voidstone2.name=Заряженный пустотный камень
@@ -92,7 +125,7 @@ tile.voidstonePillar2.name=Колонна из заряженного пусто
 tile.voidstonePillar2.0.desc=Полосатая колонна из заряженного пустотного камня
 
 #Arcane
-tile.arcane.name=Тайный каменный блок
+tile.arcane.name=Магический каменный блок
 tile.arcane.0.desc=Выгравированная Луна
 tile.arcane.1.desc=Светящаяся Луна
 tile.arcane.2.desc=Скошенная плитка
@@ -103,11 +136,33 @@ tile.arcane.6.desc=Временной канал
 tile.arcane.7.desc=Мозгииии
 tile.arcane.8.desc=Пространственный канал
 
+#Thaumium
+tile.thaumium.name=Таумический блок
+tile.thaumium.0.desc=Декоративный шаблон
+tile.thaumium.1.desc=Изображения тотемов
+tile.thaumium.2.desc=Кирпичи
+tile.thaumium.3.desc=Маленькие плитки
+
+#Tallow
+tile.tallow.name=Блок жира
+tile.tallow.0.desc=Гладкий блок жира
+tile.tallow.1.desc=Оживлённый блок жира
+
+#Blood Rune
+tile.bloodRune.name=Кровавая руна
+tile.bloodRune.0.desc=Обработанная кровавая руна
+tile.bloodRune.1.desc=Кирпичи из кровавой руны
+tile.bloodRune.2.desc=Резная кровавая руна
+tile.bloodRune.3.desc=Лучеобразная резная кровавая руна
+tile.bloodRune.4.desc=Классическая панель из кровавой руны
+tile.bloodRune.5.desc=Плитки из кровавой руны
+
 #Futura
 tile.futura.name=Футура-блок
 tile.futura.0.desc=Светящийся экран с металлическими гранями
 tile.futura.1.desc=Светящийся экран с бирюзовыми гранями
 tile.futura.2.desc=Прикладные лабиринтовые неоновые полосы
+tile.futura.3.desc=Радужный поп-тарт
 
 #Waterstone
 tile.waterstone.name=Водный камень
@@ -121,22 +176,22 @@ tile.waterstone.6.desc=Декоративная водная панель
 
 #Hex Plating
 tile.hexPlating.name=Ведьмино покрытие
-tile.hexPlating.0.desc=Чёрное покрытие
-tile.hexPlating.1.desc=Синее покрытие
-tile.hexPlating.2.desc=Коричневое покрытие
-tile.hexPlating.3.desc=Бирюзовое покрытие
-tile.hexPlating.4.desc=Зелёное покрытие
-tile.hexPlating.5.desc=Светло-синее покрытие
-tile.hexPlating.6.desc=Светло-серое покрытие
-tile.hexPlating.7.desc=Лаймовое покрытие
-tile.hexPlating.8.desc=Сиреневое покрытие
-tile.hexPlating.9.desc=Оранжевое покрытие
-tile.hexPlating.10.desc=Розовое покрытие
-tile.hexPlating.11.desc=Фиолетовое покрытие
-tile.hexPlating.12.desc=Красное покрытие
-tile.hexPlating.13.desc=Белое покрытие
-tile.hexPlating.14.desc=Жёлтое покрытие
-tile.hexPlating.15.desc=Серое покрытие
+tile.hexPlating.black.desc=Чёрное покрытие
+tile.hexPlating.blue.desc=Синее покрытие
+tile.hexPlating.brown.desc=Коричневое покрытие
+tile.hexPlating.cyan.desc=Бирюзовое покрытие
+tile.hexPlating.green.desc=Зелёное покрытие
+tile.hexPlating.light_blue.desc=Светло-синее покрытие
+tile.hexPlating.silver.desc=Светло-серое покрытие
+tile.hexPlating.lime.desc=Лаймовое покрытие
+tile.hexPlating.magenta.desc=Сиреневое покрытие
+tile.hexPlating.orange.desc=Оранжевое покрытие
+tile.hexPlating.pink.desc=Розовое покрытие
+tile.hexPlating.purple.desc=Фиолетовое покрытие
+tile.hexPlating.red.desc=Красное покрытие
+tile.hexPlating.white.desc=Белое покрытие
+tile.hexPlating.yellow.desc=Жёлтое покрытие
+tile.hexPlating.gray.desc=Серое покрытие
 
 #Grimstone
 tile.grimstone.name=Мрачный камень
@@ -182,31 +237,6 @@ tile.present.0.desc=§cКрасный подарок
 tile.present.1.desc=§9Синий подарок
 tile.present.2.desc=§aЗелёный подарок
 tile.present.3.desc=§eЖёлтый подарок
-
-#Scorching
-tile.scorching.name=Пылающий блок
-tile.scorching.0.desc=Затвердевший огонь
-tile.scorching.1.desc=Окантованный затвердевший огонь
-tile.scorching.2.desc=Скошенный затвердевший огонь
-tile.scorching.3.desc=Сгоревший камень, заключённый в затвердевший огонь
-tile.scorching.4.desc=Блок глубокого ядра
-
-#Warning
-tile.warningSign.name=Предупреждающая табличка
-tile.warningSign.0.desc=Радиация
-tile.warningSign.1.desc=Биологическая опасность
-tile.warningSign.2.desc=Огонь
-tile.warningSign.3.desc=Взрывчатка
-tile.warningSign.4.desc=Смерть
-tile.warningSign.5.desc=Падающие объекты
-tile.warningSign.6.desc=Опасность проваливания
-tile.warningSign.7.desc=Высокое напряжение
-tile.warningSign.8.desc=Общее предупреждение
-tile.warningSign.9.desc=Опасные химикаты
-tile.warningSign.10.desc=В стадии строительства
-tile.warningSign.11.desc=Громкие звуки
-tile.warningSign.12.desc=Вход запрещён
-tile.warningSign.13.desc=В ходе криогенной заморозки
 
 #Brick
 tile.brickCustom.name=Блок кирпича
@@ -541,6 +571,10 @@ tile.concrete.10.desc=Асфальт
 
 #Road Line
 tile.roadLine.name=Дорожные линии
+tile.roadLine.0.desc=Белые
+tile.roadLine.1.desc=Жёлтые
+tile.roadLine.2.desc=Двойные белые
+tile.roadLine.3.desc=Двойные жёлтые
 
 #Iron Blocks
 tile.iron_block.name=Железный блок
@@ -1185,43 +1219,6 @@ tile.laboratory.12.desc=Маленькие стальные плитки
 tile.laboratory.13.desc=Консоль направления (Правая)
 tile.laboratory.14.desc=Консоль направления (Левая)
 tile.laboratory.15.desc=Информационная консоль
-
-#mat
-tile.mat.name=mat-блок
-tile.mat.0.desc=Белый(Толстый)
-tile.mat.1.desc=Белый(Тонкий)
-tile.mat.2.desc=Оранжевый(Толстый)
-tile.mat.3.desc=Оранжевый(Тонкий)
-tile.mat.4.desc=Сиреневый(Толстый)
-tile.mat.5.desc=Сиреневый(Тонкий)
-tile.mat.6.desc=Светло-синий(Толстый)
-tile.mat.7.desc=Светло-синий(Тонкий)
-tile.mat.8.desc=Жёлтый(Толстый)
-tile.mat.9.desc=Жёлтый(Тонкий)
-tile.mat.10.desc=Лаймовый(Толстый)
-tile.mat.11.desc=Лаймовый(Тонкий)
-tile.mat.12.desc=Розовый(Толстый)
-tile.mat.13.desc=Розовый(Тонкий)
-tile.mat.14.desc=Серый(Толстый)
-tile.mat.15.desc=Серый(Тонкий)
-#mat2
-tile.mat2.name=mat-блок
-tile.mat2.0.desc=Светло-серый(Толстый)
-tile.mat2.1.desc=Светло-серый(Тонкий)
-tile.mat2.2.desc=Бирюзовый(Толстый)
-tile.mat2.3.desc=Бирюзовый(Тонкий)
-tile.mat2.4.desc=Фиолетовый(Толстый)
-tile.mat2.5.desc=Фиолетовый(Тонкий)
-tile.mat2.6.desc=Синий(Толстый)
-tile.mat2.7.desc=Синий(Тонкий)
-tile.mat2.8.desc=Коричневый(Толстый)
-tile.mat2.9.desc=Коричневый(Тонкий)
-tile.mat2.10.desc=Зелёный(Толстый)
-tile.mat2.11.desc=Зелёный(Тонкий)
-tile.mat2.12.desc=Красный(Толстый)
-tile.mat2.13.desc=Красный(Тонкий)
-tile.mat2.14.desc=Чёрный(Толстый)
-tile.mat2.15.desc=Чёрный(Тонкий)
 
 # Creative Tab localizations
 itemGroup.tabOtherChiselBlocks=Chisel: Остальные блоки
