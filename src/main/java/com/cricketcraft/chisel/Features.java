@@ -694,8 +694,10 @@ public enum Features {
 		// TODO Overlay is WIP
 		@Override
 		void addBlocks() {
-			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock/* , "futura/screenOverlay-ctm" */).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F)
-					.setResistance(10F);
+			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock/*
+																				 * ,
+																				 * "futura/screenOverlay-ctm"
+																				 */).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
 			futura.carverHelper.addVariation("tile.futura.0.desc", 0, "futura/WIP/screenMetallicWIP");
 			futura.carverHelper.addVariation("tile.futura.1.desc", 1, "futura/WIP/screenCyanWIP");
 			futura.carverHelper.addVariation("tile.futura.2.desc", 2, "futura/WIP/controllerWIP");
@@ -1481,7 +1483,8 @@ public enum Features {
 			BlockCarvable nether_brick = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10.0F)
 					.setStepSound(Block.soundTypeStone);
 			Carving.chisel.addVariation("nether_brick", Blocks.nether_brick, 0, 0);
-			// netherBrick.carverHelper.addVariation("Nether brick", 0, Blocks.nether_brick);
+			// netherBrick.carverHelper.addVariation("Nether brick", 0,
+			// Blocks.nether_brick);
 			nether_brick.carverHelper.addVariation("tile.netherBrick.1.desc", 1, "netherbrick/a1-netherbrick-brinstar");
 			nether_brick.carverHelper.addVariation("tile.netherBrick.2.desc", 2, "netherbrick/a1-netherbrick-classicspatter");
 			nether_brick.carverHelper.addVariation("tile.netherBrick.3.desc", 3, "netherbrick/a1-netherbrick-guts");
@@ -1724,7 +1727,7 @@ public enum Features {
 	 */
 	RAILCRAFT("Railcraft"),
 
-        RC_ABYSSAL_BLOCK(RAILCRAFT.getRequiredMod(), RAILCRAFT) {
+	RC_ABYSSAL_BLOCK(RAILCRAFT.getRequiredMod(), RAILCRAFT) {
 
 		@Override
 		void addBlocks() {
@@ -1896,7 +1899,8 @@ public enum Features {
 		@Override
 		void addRecipes() {
 			if (meta == 0) {
-				// The following recipe is due to bugs with Chisel 1.5.1 to 1.5.6a
+				// The following recipe is due to bugs with Chisel 1.5.1 to
+				// 1.5.6a
 				GameRegistry.addRecipe(new ItemStack(Blocks.sandstone, 1, 0), "X", 'X', new ItemStack(ChiselBlocks.sandstone, 1, 0));
 				// The following recipe is due to bug with Chisel 1.5.6b
 				GameRegistry.addRecipe(new ItemStack(Blocks.sandstone, 1, 1), "X", 'X', new ItemStack(ChiselBlocks.sandstone, 1, 1));
@@ -1994,7 +1998,8 @@ public enum Features {
 			GameRegistry.registerBlock(obsidian_snakestone, ItemCarvable.class, "obsidian_snakestone");
 			Carving.chisel.addVariation("obsidian", obsidian_snakestone, 1, 16);
 			Carving.chisel.addVariation("obsidian", obsidian_snakestone, 13, 17);
-			// Carving.chisel.registerOre("obsidianSnakestone", "obsidianSnakestone");
+			// Carving.chisel.registerOre("obsidianSnakestone",
+			// "obsidianSnakestone");
 		}
 	},
 
