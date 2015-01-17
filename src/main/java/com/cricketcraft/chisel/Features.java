@@ -1674,6 +1674,7 @@ public enum Features {
 		@Override
 		void addRecipes() {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.paperwall, 8), "ppp", "psp", "ppp", ('p'), Items.paper, ('s'), "stickWood"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.paperwall, 4), "pp", "pp", "ppp", ('p'), paperwall));
 		}
 	},
 
