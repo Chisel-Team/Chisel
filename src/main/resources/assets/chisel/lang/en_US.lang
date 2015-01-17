@@ -108,6 +108,7 @@ tile.warningSign.10.desc=Under Construction
 tile.warningSign.11.desc=Loud Sounds
 tile.warningSign.12.desc=No Entry
 tile.warningSign.13.desc=Cryogenic Freezing in progress
+tile.warningSign.14.desc=Oxygen Required
 
 #Energised Void Stone Blocks
 tile.voidstone2.name=Energised Voidstone
