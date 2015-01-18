@@ -15,9 +15,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.item.chisel.ChiselMode;
 
 public class General {
 

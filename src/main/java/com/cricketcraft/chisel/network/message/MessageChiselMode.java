@@ -3,8 +3,8 @@ package com.cricketcraft.chisel.network.message;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 
-import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.item.chisel.ChiselMode;
 import com.cricketcraft.chisel.utils.General;
 
 import cpw.mods.fml.common.network.ByteBufUtils;

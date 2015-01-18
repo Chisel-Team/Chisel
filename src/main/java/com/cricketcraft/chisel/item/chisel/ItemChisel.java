@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
@@ -95,12 +94,6 @@ public class ItemChisel extends Item implements IChiselItem {
 			if (chisel.getItemDamage() >= chisel.getMaxDamage()) {
 				inv.decrStackSize(slot, 1);
 			}
-		}
-
-		if (world.isRemote) {
-			String sound = carving.getVariationSound(target.getBlock(), target.getItemMeta());
-			EntityPlayer player = Chisel.proxy.getClientPlayer();
-			GeneralClient.playChiselSound(world, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound);
 		}
 	}
 
