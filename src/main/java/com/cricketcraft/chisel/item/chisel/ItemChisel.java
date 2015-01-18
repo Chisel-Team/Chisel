@@ -39,7 +39,6 @@ public class ItemChisel extends Item implements IChiselItem {
 		super();
 		this.type = type;
 		setMaxStackSize(1);
-		setHasSubtypes(true);
 		setTextureName(Chisel.MOD_ID + ":chisel_" + type.name().toLowerCase());
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -97,14 +96,15 @@ public class ItemChisel extends Item implements IChiselItem {
 	public void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target) {
 		if (Configurations.allowChiselDamage) {
 			chisel.setItemDamage(chisel.getItemDamage() + 1);
+			if (chisel.getItemDamage() >= chisel.getMaxDamage()) {
+				inv.decrStackSize(slot, 1);
+			}
 		}
 
 		if (world.isRemote) {
 			String sound = carving.getVariationSound(target.getItem(), target.getItemDamage());
 			EntityPlayer player = Chisel.proxy.getClientPlayer();
 			GeneralClient.playChiselSound(world, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound);
-		} else if (chisel.getItemDamage() >= chisel.getMaxDamage()) {
-			inv.decrStackSize(slot, 1);
 		}
 	}
 
