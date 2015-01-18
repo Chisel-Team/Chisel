@@ -2,6 +2,7 @@ package com.cricketcraft.chisel.utils;
 
 import java.util.Random;
 
+import joptsimple.internal.Strings;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,6 +14,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.api.ChiselMode;
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.chisel.carving.Carving;
 
 public class General {
 
@@ -98,8 +103,8 @@ public class General {
 	public static final String[] sGNames = new String[] { "White", "Orange", "Magenta", "Light Blue", "Yellow", "Lime", "Pink", "Gray", "Light Gray", "Cyan", "Purple", "Blue", "Brown", "Green",
 			"Red", "Black" };
 
-	public static final String[] featureColors = new String[] { "white", "orange", "magenta", "lightblue", "yellow", "lime", "pink", "darkgray", "lightgray", "cyan", "purple", "blue", "brown", "green",
-			"red", "black" };
+	public static final String[] featureColors = new String[] { "white", "orange", "magenta", "lightblue", "yellow", "lime", "pink", "darkgray", "lightgray", "cyan", "purple", "blue", "brown",
+			"green", "red", "black" };
 
 	public static void setChiselTarget(ItemStack chisel, ItemStack target) {
 		initTag(chisel);
@@ -114,5 +119,24 @@ public class General {
 		if (!stack.hasTagCompound()) {
 			stack.setTagCompound(new NBTTagCompound());
 		}
+	}
+
+	private static final String MODE_KEY = "chiselMode";
+	public static ChiselMode getChiselMode(ItemStack chisel) {
+		if (chisel.stackTagCompound == null || Strings.isNullOrEmpty(chisel.stackTagCompound.getString(MODE_KEY))) {
+			initTag(chisel);
+			chisel.stackTagCompound.setString(MODE_KEY, ChiselMode.SINGLE.name());
+		}
+
+		return Enum.valueOf(ChiselMode.class, chisel.stackTagCompound.getString(MODE_KEY));
+	}
+	
+	public static void setChiselMode(ItemStack chisel, ChiselMode mode) {
+		initTag(chisel);
+		chisel.stackTagCompound.setString(MODE_KEY, mode.name());
+	}
+	
+	public static ICarvingVariation getVariation(ItemStack stack) {
+		return Carving.chisel.getVariation(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage());
 	}
 }
