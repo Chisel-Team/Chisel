@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.api;
+package com.cricketcraft.chisel.item.chisel;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,6 +7,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.network.PacketHandler;
 import com.cricketcraft.chisel.network.message.MessageChiselSound;

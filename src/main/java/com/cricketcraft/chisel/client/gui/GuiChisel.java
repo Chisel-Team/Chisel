@@ -6,14 +6,13 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
 import com.cricketcraft.chisel.inventory.SlotChiselInput;
+import com.cricketcraft.chisel.item.chisel.ChiselMode;
 import com.cricketcraft.chisel.network.PacketHandler;
 import com.cricketcraft.chisel.network.message.MessageChiselMode;
 import com.cricketcraft.chisel.utils.General;
