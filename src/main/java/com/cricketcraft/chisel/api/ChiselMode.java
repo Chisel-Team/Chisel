@@ -3,6 +3,7 @@ package com.cricketcraft.chisel.api;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -44,15 +45,44 @@ public enum ChiselMode {
 		public void chiselAll(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, ICarvingVariation variation) {
 			Block block = world.getBlock(x, y, z);
 			int meta = world.getBlockMetadata(x, y, z);
-			if (side != ForgeDirection.DOWN && side != ForgeDirection.UP) {
-				setVariation(player, world, x, y, z, block, meta, variation);
-				setVariation(player, world, x, y + 1, z, block, meta, variation);
-				setVariation(player, world, x, y - 1, z, block, meta, variation);
-			} else {
-				// TODO top/bottom
+			int facing = MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			for (int i = -1; i <= 1; i++) {
+				if (side != ForgeDirection.DOWN && side != ForgeDirection.UP) {
+					setVariation(player, world, x, y + i, z, block, meta, variation);
+				} else {
+					if (facing == 0 || facing == 2) {
+						setVariation(player, world, x, y, z + i, block, meta, variation);
+					} else {
+						setVariation(player, world, x + i, y, z, block, meta, variation);
+					}
+				}
 			}
 		}
-	}; // TODO SIDEWAYS
+	},
+	ROW {
+
+		@Override
+		public void chiselAll(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, ICarvingVariation variation) {
+			Block block = world.getBlock(x, y, z);
+			int meta = world.getBlockMetadata(x, y, z);
+			int facing = MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			for (int i = -1; i <= 1; i++) {
+				if (side != ForgeDirection.DOWN && side != ForgeDirection.UP) {
+					if (side == ForgeDirection.EAST || side == ForgeDirection.WEST) {
+						setVariation(player, world, x, y, z + i, block, meta, variation);
+					} else {
+						setVariation(player, world, x + i, y, z, block, meta, variation);
+					}
+				} else {
+					if (facing == 0 || facing == 2) {
+						setVariation(player, world, x + i, y, z, block, meta, variation);
+					} else {
+						setVariation(player, world, x, y, z + i, block, meta, variation);
+					}
+				}
+			}
+		}
+	};
 
 	public abstract void chiselAll(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, ICarvingVariation variation);
 
@@ -72,5 +102,10 @@ public enum ChiselMode {
 		PacketHandler.INSTANCE.sendTo(new MessageChiselSound(x, y, z, v), (EntityPlayerMP) player);
 		world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
 		((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.inventory, player.inventory.currentItem, player.getCurrentEquippedItem(), v);
+	}
+
+	public ChiselMode next() {
+		ChiselMode[] values = values();
+		return values[(ordinal() + 1) % values.length];
 	}
 }
