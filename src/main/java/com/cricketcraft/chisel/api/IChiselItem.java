@@ -6,10 +6,12 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+
 /**
  * Implement this on items which can be used to chisel blocks.
  */
-public interface IChiselItem extends IChiselMode {
+public interface IChiselItem {
 
 	/**
 	 * Checks whether the chisel can have its GUI opened
@@ -38,7 +40,7 @@ public interface IChiselItem extends IChiselMode {
 	 * @param target
 	 *            The {@link ItemStack} representing the target item
 	 */
-	void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target);
+	void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ICarvingVariation target);
 
 	/**
 	 * Called to check if this {@link ItemStack} can be chiseled in this chisel. If not, there will be no possible variants displayed in the GUI.
