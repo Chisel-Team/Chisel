@@ -15,12 +15,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.client.GeneralChiselClient;
 import com.cricketcraft.chisel.init.ChiselItems;
 import com.cricketcraft.chisel.network.PacketHandler;
 import com.cricketcraft.chisel.network.message.MessageAutoChisel;
 import com.cricketcraft.chisel.network.message.MessageSlotUpdate;
+import com.cricketcraft.chisel.utils.General;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -207,7 +209,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	/** Calls IChiselItem#onChisel() and sends the chisel packet for sound/animation */
 	private void chiselItem(int chiseled) {
 		if (!worldObj.isRemote) {
-			((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], inventory[TARGET]);
+			((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], General.getVariation(inventory[TARGET]));
 			PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(this, chiseled, true), worldObj.provider.dimensionId);
 		} else {
 			GeneralChiselClient.spawnAutoChiselFX(this, lastBase != null ? lastBase : inventory[BASE]);

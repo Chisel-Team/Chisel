@@ -6,6 +6,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.utils.General;
 
 public class SlotChiselSelection extends Slot {
 
@@ -55,7 +56,7 @@ public class SlotChiselSelection extends Slot {
 
 		selInventory.updateItems();
 		
-		((IChiselItem)container.chisel.getItem()).onChisel(player.worldObj, player.inventory, player.inventory.currentItem, container.chisel, crafted);
+		((IChiselItem)container.chisel.getItem()).onChisel(player.worldObj, player.inventory, player.inventory.currentItem, container.chisel, General.getVariation(crafted));
 
 		/*
 		 * ItemStack stack=player.inventory.getItemStack();

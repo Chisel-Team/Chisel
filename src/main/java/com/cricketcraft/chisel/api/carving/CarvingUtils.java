@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel.api.carving;
 
+import com.cricketcraft.chisel.carving.Carving;
+
 import net.minecraft.item.ItemStack;
 
 public class CarvingUtils {

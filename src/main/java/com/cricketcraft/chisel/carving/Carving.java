@@ -24,6 +24,18 @@ public class Carving {
 	private Carving() {
 	}
 
+	public ICarvingVariation getVariation(Block block, int metadata) {
+		ICarvingGroup g = getGroup(block, metadata);
+		if (g != null) {
+			for (ICarvingVariation v : g.getVariations()) {
+				if (v.getBlock() == block && v.getBlockMeta() == metadata) {
+					return v;
+				}
+			}
+		}
+		return null;
+	}
+
 	public List<ICarvingVariation> getVariations(Block block, int metadata) {
 		ICarvingGroup group = getGroup(block, metadata);
 		if (group == null)

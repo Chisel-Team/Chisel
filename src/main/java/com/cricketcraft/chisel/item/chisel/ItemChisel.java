@@ -15,6 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.utils.GeneralClient;
@@ -78,11 +79,6 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public ChiselMode getChiselMode(ItemStack itemStack) {
-		return ChiselMode.SINGLE;
-	}
-
-	@Override
 	public boolean canOpenGui(World world, EntityPlayer player, ItemStack chisel) {
 		return true;
 	}
@@ -93,7 +89,7 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target) {
+	public void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ICarvingVariation target) {
 		if (Configurations.allowChiselDamage) {
 			chisel.setItemDamage(chisel.getItemDamage() + 1);
 			if (chisel.getItemDamage() >= chisel.getMaxDamage()) {
@@ -102,7 +98,7 @@ public class ItemChisel extends Item implements IChiselItem {
 		}
 
 		if (world.isRemote) {
-			String sound = carving.getVariationSound(target.getItem(), target.getItemDamage());
+			String sound = carving.getVariationSound(target.getBlock(), target.getItemMeta());
 			EntityPlayer player = Chisel.proxy.getClientPlayer();
 			GeneralClient.playChiselSound(world, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound);
 		}

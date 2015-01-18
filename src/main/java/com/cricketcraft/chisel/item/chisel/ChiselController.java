@@ -3,20 +3,18 @@ package com.cricketcraft.chisel.item.chisel;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.ChiselMode;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.carving.CarvingVariation;
-import com.cricketcraft.chisel.network.PacketHandler;
-import com.cricketcraft.chisel.network.message.MessageChiselSound;
 import com.cricketcraft.chisel.utils.General;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -24,6 +22,8 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public final class ChiselController {
 
 	public static final ChiselController INSTANCE = new ChiselController();
+	
+	private long lastTickClick = 0;
 
 	private ChiselController() {
 	}
@@ -60,11 +60,13 @@ public final class ChiselController {
 
 			if (chisel.canChiselBlock(event.world, x, y, z, block, metadata)) {
 				ItemStack target = General.getChiselTarget(held);
+				ChiselMode mode = General.getChiselMode(held);
+				ForgeDirection sideHit = ForgeDirection.VALID_DIRECTIONS[event.face];
 
 				if (target != null) {
 					for (ICarvingVariation v : variations) {
 						if (v.getBlock() == Block.getBlockFromItem(target.getItem()) && v.getBlockMeta() == target.getItemDamage()) {
-							setVariation(event.entityPlayer, event.world, x, y, z, v, target);
+							mode.chiselAll(event.entityPlayer, event.world, x, y, z, sideHit, v);
 						}
 					}
 				} else {
@@ -77,13 +79,26 @@ public final class ChiselController {
 					}
 
 					ICarvingVariation newVar = variations[idx];
-					setVariation(event.entityPlayer, event.world, x, y, z, newVar, new ItemStack(newVar.getBlock(), 1, newVar.getItemMeta()));
+					mode.chiselAll(event.entityPlayer, event.world, x, y, z, sideHit, newVar);
 					event.entityPlayer.inventory.currentItem = slot;
 				}
 			}
 			break;
 		case RIGHT_CLICK_AIR:
 		case RIGHT_CLICK_BLOCK:
+			// Make sure we have not responded this tick
+			if (event.world.getTotalWorldTime() == lastTickClick) {
+				break;
+			} else {
+				lastTickClick = event.world.getTotalWorldTime();
+			}
+			
+			if (!event.world.isRemote && event.entityPlayer.isSneaking()) {
+				ChiselMode mode = General.getChiselMode(held);
+				General.setChiselMode(held, ChiselMode.values()[(mode.ordinal() + 1) % 3]);
+				event.entityPlayer.addChatMessage(new ChatComponentText(General.getChiselMode(held).toString()));
+				break;
+			}
 			if (!event.world.isRemote && chisel.canOpenGui(event.world, event.entityPlayer, held)) {
 				event.entityPlayer.openGui(Chisel.instance, 0, event.world, 0, 0, 0);
 			}
@@ -91,18 +106,4 @@ public final class ChiselController {
 		}
 	}
 
-	/**
-	 * Assumes that the player is holding a chisel
-	 */
-	private void setVariation(EntityPlayer player, World world, int x, int y, int z, ICarvingVariation v, ItemStack target) {
-		Block block = world.getBlock(x, y, z);
-		int meta = world.getBlockMetadata(x, y, z);
-		if (block == v.getBlock() && meta == v.getBlockMeta()) {
-			return; // don't chisel to the same thing
-		}
-
-		PacketHandler.INSTANCE.sendTo(new MessageChiselSound(x, y, z, v), (EntityPlayerMP) player);
-		world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
-		((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.inventory, player.inventory.currentItem, player.getCurrentEquippedItem(), target);
-	}
 }
