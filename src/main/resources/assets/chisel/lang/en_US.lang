@@ -3,12 +3,12 @@
 # Item localizations
 item.chisel.chisel_iron.name=Chisel
 
-item.chisel.chisel.desc.0=Right-Click to open GUI
-item.chisel.chisel.desc.1=Left click to chisel blocks in world
-item.chisel.chisel.desc.2=Can target a block by leaving it in the inventory
+item.chisel.chisel.desc.gui=Right-Click to open GUI
+item.chisel.chisel.desc.lc1=Left click to chisel blocks in world
+item.chisel.chisel.desc.lc2=Can target a block by leaving it in the inventory
+item.chisel.chisel.desc.modes=Has multiple modes for chiseling.
 
 item.chisel.chisel_diamond.name=Diamond Chisel
-item.chisel.chisel_diamond.desc=Has multiple modes for chiseling. WIP.
 
 item.ballMoss.name=Ball O' Moss
 item.ballMoss.desc=Right-Click to throw. This will turn Cobblestone to Moss Stone on impact.
