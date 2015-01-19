@@ -166,7 +166,6 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 				}
 			}
 		} else if (worldObj.isRemote) {
-			System.out.println(chiseling + " " + chiselRot);
 			if (chiseling) {
 				chiselRot += rotAmnt;
 				if (chiselRot >= maxRot) {
