@@ -3,11 +3,11 @@ package com.cricketcraft.chisel.item.chisel;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -57,16 +57,19 @@ public class ItemChisel extends Item implements IChiselItem {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean held) {
-		String unloc = "item.chisel.chisel.desc."; // TODO this is hacky
-		for (int i = 0; i < 3; i++) {
-			if (i == 0 || type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick) {
-				list.add(StatCollector.translateToLocal(unloc + i));
-			}
+		String base = "item.chisel.chisel.desc.";
+		String gui = I18n.format(base + "gui");
+		String lc1 = I18n.format(base + "lc1");
+		String lc2 = I18n.format(base + "lc2");
+		String modes = I18n.format(base + "modes");
+		list.add(gui);
+		if (type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick) {
+			list.add(lc1);
+			list.add(lc2);
 		}
-
-		if (type == ChiselType.DIAMOND) {
+		if (type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) {
 			list.add("");
-			list.add(StatCollector.translateToLocal(getUnlocalizedName(stack) + ".desc"));
+			list.add(modes);
 		}
 	}
 
@@ -93,5 +96,10 @@ public class ItemChisel extends Item implements IChiselItem {
 	@Override
 	public boolean canChiselBlock(World world, int x, int y, int z, Block block, int metadata) {
 		return type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
+	}
+
+	@Override
+	public boolean hasModes(ItemStack chisel) {
+		return type == ChiselType.DIAMOND || Configurations.ironChiselHasModes;
 	}
 }

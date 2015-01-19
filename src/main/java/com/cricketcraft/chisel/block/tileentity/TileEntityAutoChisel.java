@@ -60,7 +60,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	public static final int maxRot = 60;
 	public static final int rotAmnt = 15;
 	public float chiselRot;
-	public boolean chiseling = false;
+	public boolean chiseling = false, breakChisel = false;;
 	public int toChisel = 1;
 
 	private ItemStack lastBase;
@@ -166,6 +166,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 				}
 			}
 		} else if (worldObj.isRemote) {
+			System.out.println(chiseling + " " + chiselRot);
 			if (chiseling) {
 				chiselRot += rotAmnt;
 				if (chiselRot >= maxRot) {
@@ -209,14 +210,19 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	/** Calls IChiselItem#onChisel() and sends the chisel packet for sound/animation */
 	private void chiselItem(int chiseled) {
 		if (!worldObj.isRemote) {
+			boolean breakChisel = false;
 			if (((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], General.getVariation(inventory[TARGET]))) {
-				inventory[CHISEL].setItemDamage(inventory[CHISEL].getItemDamage() - 1);
+				inventory[CHISEL].setItemDamage(inventory[CHISEL].getItemDamage() + 1);
 				if (inventory[CHISEL].getItemDamage() >= inventory[CHISEL].getMaxDamage()) {
-					inventory[CHISEL] = null;
+					setInventorySlotContents(CHISEL, null);
+					breakChisel = true;
 				}
 			}
-			PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(this, chiseled, true), worldObj.provider.dimensionId);
+			PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(this, chiseled, true, breakChisel), worldObj.provider.dimensionId);
 		} else {
+			if (breakChisel) {
+				worldObj.playSound(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, "random.break", 0.8F, 0.8F + worldObj.rand.nextFloat() * 0.4F, false);
+			}
 			GeneralChiselClient.spawnAutoChiselFX(this, lastBase != null ? lastBase : inventory[BASE]);
 			chiseling = false;
 			if (lastBase != null) {
@@ -276,7 +282,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
 			stack.stackSize = getInventoryStackLimit();
 		}
-		
+
 		if (worldObj.isRemote && slot == BASE && stack != null) {
 			lastBase = stack.copy();
 		}
@@ -368,7 +374,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		} else if (inventory[slot] == null) {
 			return null;
 		} else {
-			ghostItem.setEntityItemStack(new ItemStack(inventory[slot].getItem(), 1, inventory[slot].getItemDamage()));
+			ghostItem.setEntityItemStack(inventory[slot].copy());
 			return ghostItem;
 		}
 	}
@@ -408,14 +414,15 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		}
 	}
 
-	public void doChiselAnim(ItemStack lastChiseled, int chiseled, boolean playSound) {
+	public void doChiselAnim(ItemStack lastChiseled, int chiseled, boolean playSound, boolean breakChisel) {
 		this.lastBase = lastChiseled == null ? null : lastChiseled.copy();
 		this.toChisel = chiseled;
 		if (playSound) {
 			this.chiseling = true;
 		}
+		this.breakChisel = breakChisel;
 	}
-	
+
 	public ItemStack getLastBase() {
 		return lastBase == null ? null : lastBase.copy();
 	}

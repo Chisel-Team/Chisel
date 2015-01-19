@@ -186,9 +186,6 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 			renderItem.doRender(item, 0, 0, 0, 0, 0);
 			settings.fancyGraphics = was;
 			glPopMatrix();
-		} else {
-			autoChisel.chiselRot = 0;
-			autoChisel.chiseling = false;
 		}
 	}
 }

@@ -80,4 +80,13 @@ public interface IChiselItem {
 	 * @return True if the chiseling should take place. False otherwise.
 	 */
 	boolean canChiselBlock(World world, int x, int y, int z, Block block, int metadata);
+
+	/**
+	 * Allows you to control if your item has chiseling modes.
+	 * 
+	 * @param chisel
+	 *            The {@link ItemStack} representing the chisel.
+	 * @return True if the chisel supports modes. False otherwise.
+	 */
+	boolean hasModes(ItemStack chisel);
 }

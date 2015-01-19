@@ -9,6 +9,7 @@ import net.minecraft.inventory.Slot;
 
 import org.lwjgl.opengl.GL11;
 
+import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
 import com.cricketcraft.chisel.inventory.SlotChiselInput;
@@ -45,14 +46,23 @@ public class GuiChisel extends GuiContainer {
 		super.initGui();
 		currentMode = General.getChiselMode(container.chisel);
 
-		int x = this.width / 2 - 120;
-		int y = this.height / 2 - 6;
-		buttonList.add(new GuiButton(0, x, y, 53, 20, ""));
-		setButtonText();
+		if (showMode()) {
+			int x = this.width / 2 - 120;
+			int y = this.height / 2 - 6;
+			buttonList.add(new GuiButton(0, x, y, 53, 20, ""));
+			setButtonText();
+		}
 	}
 
 	private void setButtonText() {
 		((GuiButton) buttonList.get(0)).displayString = I18n.format(container.inventory.getInventoryName() + ".mode." + currentMode.name().toLowerCase());
+	}
+
+	private boolean showMode() {
+		if (container.chisel != null && container.chisel.getItem() instanceof IChiselItem) {
+			return ((IChiselItem) container.chisel.getItem()).hasModes(container.chisel);
+		}
+		return false;
 	}
 
 	@Override
@@ -61,8 +71,11 @@ public class GuiChisel extends GuiContainer {
 
 		String line = I18n.format(this.container.inventory.getInventoryName() + ".title");
 		fontRendererObj.drawSplitString(line, 50 - fontRendererObj.getStringWidth(line) / 2, 60, 40, 0x404040);
-		line = I18n.format(this.container.inventory.getInventoryName() + ".mode");
-		fontRendererObj.drawString(line, fontRendererObj.getStringWidth(line) / 2 + 6, 85, 0x404040);
+
+		if (showMode()) {
+			line = I18n.format(this.container.inventory.getInventoryName() + ".mode");
+			fontRendererObj.drawString(line, fontRendererObj.getStringWidth(line) / 2 + 6, 85, 0x404040);
+		}
 	}
 
 	@Override
