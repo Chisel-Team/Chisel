@@ -209,7 +209,12 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	/** Calls IChiselItem#onChisel() and sends the chisel packet for sound/animation */
 	private void chiselItem(int chiseled) {
 		if (!worldObj.isRemote) {
-			((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], General.getVariation(inventory[TARGET]));
+			if (((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], General.getVariation(inventory[TARGET]))) {
+				inventory[CHISEL].setItemDamage(inventory[CHISEL].getItemDamage() - 1);
+				if (inventory[CHISEL].getItemDamage() >= inventory[CHISEL].getMaxDamage()) {
+					inventory[CHISEL] = null;
+				}
+			}
 			PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(this, chiseled, true), worldObj.provider.dimensionId);
 		} else {
 			GeneralChiselClient.spawnAutoChiselFX(this, lastBase != null ? lastBase : inventory[BASE]);

@@ -3,6 +3,7 @@ package com.cricketcraft.chisel.item.chisel;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -93,6 +94,7 @@ public enum ChiselMode {
 	private static void setVariation(EntityPlayer player, World world, int x, int y, int z, Block origBlock, int origMeta, ICarvingVariation v) {
 		Block block = world.getBlock(x, y, z);
 		int meta = world.getBlockMetadata(x, y, z);
+		ItemStack held = player.getCurrentEquippedItem();
 		if (block == v.getBlock() && meta == v.getBlockMeta()) {
 			return; // don't chisel to the same thing
 		}
@@ -100,9 +102,18 @@ public enum ChiselMode {
 			return; // don't chisel if this doesn't match the target block (for the AOE modes)
 		}
 
-		PacketHandler.INSTANCE.sendTo(new MessageChiselSound(x, y, z, v), (EntityPlayerMP) player);
-		world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
-		((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.inventory, player.inventory.currentItem, player.getCurrentEquippedItem(), v);
+		if (held != null && held.getItem() instanceof IChiselItem) {
+			world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
+			boolean breakChisel = false;
+			if (((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.inventory, player.inventory.currentItem, player.getCurrentEquippedItem(), v)) {
+				player.getCurrentEquippedItem().damageItem(1, player);
+				if (player.getCurrentEquippedItem().stackSize <= 0) {
+					player.inventory.mainInventory[player.inventory.currentItem] = null;
+					breakChisel = true;
+				}
+			}
+			PacketHandler.INSTANCE.sendTo(new MessageChiselSound(x, y, z, v, breakChisel), (EntityPlayerMP) player);
+		}
 	}
 
 	public ChiselMode next() {

@@ -39,8 +39,9 @@ public interface IChiselItem {
 	 *            The {@link ItemStack} representing the chisel
 	 * @param target
 	 *            The {@link ItemStack} representing the target item
+	 * @return True if the chisel should be damaged. False otherwise.
 	 */
-	void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ICarvingVariation target);
+	boolean onChisel(World world, IInventory inv, int slot, ItemStack chisel, ICarvingVariation target);
 
 	/**
 	 * Called to check if this {@link ItemStack} can be chiseled in this chisel. If not, there will be no possible variants displayed in the GUI.

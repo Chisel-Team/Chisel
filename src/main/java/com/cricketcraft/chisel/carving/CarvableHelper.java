@@ -38,9 +38,6 @@ public class CarvableHelper {
 	public static final int V4 = 7;
 	public static final int CTMX = 8;
 
-	public CarvableHelper() {
-	}
-
 	public ArrayList<CarvableVariation> variations = new ArrayList<CarvableVariation>();
 	CarvableVariation[] map = new CarvableVariation[16];
 	public boolean forbidChiseling = false;
