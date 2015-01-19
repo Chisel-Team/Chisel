@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,7 +16,6 @@ import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.config.Configurations;
-import com.cricketcraft.chisel.utils.GeneralClient;
 
 public class ItemChisel extends Item implements IChiselItem {
 
@@ -88,13 +86,8 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ICarvingVariation target) {
-		if (Configurations.allowChiselDamage) {
-			chisel.setItemDamage(chisel.getItemDamage() + 1);
-			if (chisel.getItemDamage() >= chisel.getMaxDamage()) {
-				inv.decrStackSize(slot, 1);
-			}
-		}
+	public boolean onChisel(World world, IInventory inv, int slot, ItemStack chisel, ICarvingVariation target) {
+		return Configurations.allowChiselDamage;
 	}
 
 	@Override

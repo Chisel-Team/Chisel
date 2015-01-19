@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -90,13 +89,6 @@ public final class ChiselController {
 				break;
 			} else {
 				lastTickClick = event.world.getTotalWorldTime();
-			}
-			
-			if (!event.world.isRemote && event.entityPlayer.isSneaking()) {
-				ChiselMode mode = General.getChiselMode(held);
-				General.setChiselMode(held, ChiselMode.values()[(mode.ordinal() + 1) % 3]);
-				event.entityPlayer.addChatMessage(new ChatComponentText(General.getChiselMode(held).toString()));
-				break;
 			}
 			if (!event.world.isRemote && chisel.canOpenGui(event.world, event.entityPlayer, held)) {
 				event.entityPlayer.openGui(Chisel.instance, 0, event.world, 0, 0, 0);
