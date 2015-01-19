@@ -695,8 +695,7 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock/*
-																				 * ,
-																				 * "futura/screenOverlay-ctm"
+																				 * , "futura/screenOverlay-ctm"
 																				 */).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
 			futura.carverHelper.addVariation("tile.futura.0.desc", 0, "futura/WIP/screenMetallicWIP");
 			futura.carverHelper.addVariation("tile.futura.1.desc", 1, "futura/WIP/screenCyanWIP");
@@ -2468,27 +2467,45 @@ public enum Features {
 	private static int meta = 0;
 
 	static void init() {
+		Chisel.logger.info("Starting init...");
 		loadRecipes();
+		Chisel.logger.info("Init finished.");
 	}
 
 	private static void loadBlocks() {
+		Chisel.logger.info("Loading blocks...");
+		int num = 0;
 		for (Features f : values()) {
 			if (f.enabled()) {
 				f.addBlocks();
+				++num;
+			} else {
+				logDisabled(f);
 			}
 		}
+		Chisel.logger.info(num + " Feature's blocks loaded.");
+		Chisel.logger.info("Loading Tile Entities...");
 		Chisel.proxy.registerTileEntities();
+		Chisel.logger.info("Tile Entities loaded.");
 	}
 
 	private static void loadItems() {
+		Chisel.logger.info("Loading items...");
+		int num = 0;
 		for (Features f : values()) {
 			if (f.enabled()) {
 				f.addItems();
+				++num;
+			} else {
+				logDisabled(f);
 			}
 		}
+		Chisel.logger.info(num + " Feature's items loaded.");
 	}
 
 	private static void loadRecipes() {
+		Chisel.logger.info("Loading recipes...");
+		int num = 0;
 		for (Features f : values()) {
 			if (f.enabled()) {
 				if (f.needsMetaRecipes()) {
@@ -2500,13 +2517,27 @@ public enum Features {
 				} else {
 					f.addRecipes();
 				}
+				++num;
+			} else {
+				logDisabled(f);
 			}
+		}
+		Chisel.logger.info(num + " Feature's recipes loaded.");
+	}
+
+	private static void logDisabled(Features f) {
+		if (!f.hasParentFeature() && f.parent != null) {
+			Chisel.logger.info("Skipping feature {} as its parent feature {} was disabled.", Configurations.featureName(f), Configurations.featureName(f.parent));
+		} else if (!f.hasRequiredMod() && f.getRequiredMod() != null) {
+			Chisel.logger.info("Skipping feature {} as its required mod {} was missing.", Configurations.featureName(f), f.getRequiredMod());
+		} else {
+			Chisel.logger.info("Skipping feature {} as it was disabled in the config.", Configurations.featureName(f));
 		}
 	}
 
 	public static boolean oneModdedFeatureLoaded() {
 		for (Features f : values()) {
-			if (f.getRequiredMod() != null && Loader.isModLoaded(f.getRequiredMod())) {
+			if (f.hasRequiredMod()) {
 				return true;
 			}
 		}
@@ -2514,8 +2545,10 @@ public enum Features {
 	}
 
 	static void preInit() {
+		Chisel.logger.info("Starting pre-init...");
 		loadBlocks();
 		loadItems();
+		Chisel.logger.info("Pre-init finished.");
 	}
 
 	private Features parent;
@@ -2552,7 +2585,15 @@ public enum Features {
 	}
 
 	public final boolean enabled() {
-		return Configurations.featureEnabled(this) && (requiredMod == null || Loader.isModLoaded(requiredMod)) && (parent == null || parent.enabled());
+		return Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
+	}
+
+	private final boolean hasParentFeature() {
+		return parent == null || parent.enabled();
+	}
+
+	private final boolean hasRequiredMod() {
+		return getRequiredMod() == null || Loader.isModLoaded(getRequiredMod());
 	}
 
 	private String getRequiredMod() {
