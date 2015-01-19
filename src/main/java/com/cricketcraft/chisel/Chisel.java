@@ -113,8 +113,6 @@ public class Chisel {
 		Configurations.config.load();
 		Configurations.refreshConfig();
 
-		logger.info("Hey Jared, I wasn't lying");
-
 		ChiselTabs.preInit();
 		Features.preInit();
 		PacketHandler.init();
