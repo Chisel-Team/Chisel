@@ -104,8 +104,8 @@ public class Configurations {
 		return config.get("features", featureName(feature), true).getBoolean(true) && refreshConfig();
 	}
 
-	// this makes the old camelCase names from the new CONSTANT_CASE names
-	private static String featureName(Features feature) {
+	/** Makes the old camelCase names from the new CONSTANT_CASE names */
+	public static String featureName(Features feature) {
 		String[] words = feature.name().toLowerCase(Locale.ENGLISH).split("_");
 		if (words.length == 1) {
 			return words[0];
