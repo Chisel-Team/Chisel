@@ -15,7 +15,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 
 import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.client.GeneralChiselClient;
 import com.cricketcraft.chisel.init.ChiselItems;
