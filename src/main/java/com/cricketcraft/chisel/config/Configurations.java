@@ -40,6 +40,8 @@ public class Configurations {
 	public static int diamondChiselMaxDamage;
 	public static boolean ironChiselCanLeftClick;
 	public static boolean ironChiselHasModes;
+	public static int ironChiselAttackDamage;
+	public static int diamondChiselAttackDamage;
 
 	public static boolean useRoadLineTool;
 	public static String getRoadLineTool;
@@ -85,6 +87,8 @@ public class Configurations {
 		diamondChiselMaxDamage = config.get(category, "diamondChiselMaxDamage", 5000, "The max damage of the diamond chisel. Default: 5000").getInt();
 		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
 		ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
+		ironChiselAttackDamage = config.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.").getInt();
+		diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
 
 		/* block */
 		category = "block";

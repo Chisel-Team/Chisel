@@ -4,6 +4,9 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -16,16 +19,21 @@ import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.config.Configurations;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 public class ItemChisel extends Item implements IChiselItem {
 
 	public enum ChiselType {
-		IRON(Configurations.ironChiselMaxDamage), DIAMOND(Configurations.diamondChiselMaxDamage);
+		IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage),
+		DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage);
 
 		final int maxDamage;
+		final int attackDamage;
 
-		ChiselType(int maxDamage) {
+		ChiselType(int maxDamage, int attackDamage) {
 			this.maxDamage = maxDamage;
+			this.attackDamage = attackDamage;
 		}
 	}
 
@@ -78,6 +86,20 @@ public class ItemChisel extends Item implements IChiselItem {
 		return true;
 	}
 
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		Multimap<String, AttributeModifier> multimap = HashMultimap.create();
+		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Chisel Damage", type.attackDamage, 0));
+		return multimap;
+	}
+
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		stack.damageItem(1, attacker);
+		return super.hitEntity(stack, attacker, target);
+	}
+	
 	@Override
 	public boolean canOpenGui(World world, EntityPlayer player, ItemStack chisel) {
 		return true;
