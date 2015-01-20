@@ -1,7 +1,7 @@
 [
 {
   "modid": "chisel",
-  "name": "Chisel",
+  "name": "Chisel 2",
   "description": "A mod that adds in many fancy blocks for decoration, which are crafted utilising the Chisel.",
   "version": "${version}",
   "mcversion": "${mcversion}",
