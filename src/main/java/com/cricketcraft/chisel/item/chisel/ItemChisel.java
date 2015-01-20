@@ -111,7 +111,7 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public boolean onChisel(World world, IInventory inv, int slot, ItemStack chisel, ICarvingVariation target) {
+	public boolean onChisel(World world, ItemStack chisel, ICarvingVariation target) {
 		return Configurations.allowChiselDamage;
 	}
 
