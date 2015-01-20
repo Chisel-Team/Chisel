@@ -210,7 +210,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	private void chiselItem(int chiseled) {
 		if (!worldObj.isRemote) {
 			boolean breakChisel = false;
-			if (((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], General.getVariation(inventory[TARGET]))) {
+			if (((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, inventory[CHISEL], General.getVariation(inventory[TARGET]))) {
 				inventory[CHISEL].setItemDamage(inventory[CHISEL].getItemDamage() + 1);
 				if (inventory[CHISEL].getItemDamage() >= inventory[CHISEL].getMaxDamage()) {
 					setInventorySlotContents(CHISEL, null);

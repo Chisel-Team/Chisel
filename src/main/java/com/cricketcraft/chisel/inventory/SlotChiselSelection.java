@@ -60,7 +60,7 @@ public class SlotChiselSelection extends Slot {
 
 		selInventory.updateItems();
 		
-		if (((IChiselItem) container.chisel.getItem()).onChisel(player.worldObj, player.inventory, player.inventory.currentItem, container.chisel, General.getVariation(crafted))) {
+		if (((IChiselItem) container.chisel.getItem()).onChisel(player.worldObj, container.chisel, General.getVariation(crafted))) {
 			container.chisel.damageItem(1, player);
 			if (container.chisel.stackSize <= 0) {
 				player.inventory.mainInventory[player.inventory.currentItem] = null;
