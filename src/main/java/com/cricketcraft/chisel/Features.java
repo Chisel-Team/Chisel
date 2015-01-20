@@ -142,7 +142,7 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			// TODO Add a recipe
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.antiBlock), 8, 0, "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone"));
 		}
 
 		@Override
@@ -703,6 +703,11 @@ public enum Features {
 			futura.carverHelper.addVariation("tile.futura.3.desc", 3, "futura/WIP/wavyWIP");
 			futura.carverHelper.registerAll(futura, "futura");
 			Carving.chisel.registerOre("futura", "futura");
+		}
+
+		@Override
+		void addRecipes(){
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.futura), 8, 0, "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustRedstone"));
 		}
 	},
 
