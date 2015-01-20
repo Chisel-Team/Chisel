@@ -1101,7 +1101,7 @@ public enum Features {
 		void addBlocks() {
 			for (int metadata = 0; metadata < 16; metadata++) {
 				jackolantern[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(true).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(1.0F).setBlockName("litpumpkin")
-						.setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
+						.setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setLightLevel(1.0f);
 				jackolantern[metadata].setInformation("pumpkin/pumpkin_face_" + (metadata + 1) + "_on");
 				GameRegistry.registerBlock(jackolantern[metadata], ("jackolantern" + (metadata + 1)));
 				Carving.chisel.addVariation("jackolantern", jackolantern[metadata], 0, (metadata + 1));
