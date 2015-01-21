@@ -1,4 +1,6 @@
-package com.cricketcraft.chisel.api.carving;
+package com.cricketcraft.chisel.api;
+
+import com.cricketcraft.chisel.api.carving.IChiselMode;
 
 import net.minecraft.item.ItemStack;
 
