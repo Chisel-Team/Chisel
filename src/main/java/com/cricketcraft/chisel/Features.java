@@ -137,13 +137,17 @@ public enum Features {
 				antiBlock.carverHelper.addVariation("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc", i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
 			}
 
-			antiBlock.carverHelper.registerAll(antiBlock, "antiBlock");
-			Carving.chisel.registerOre("antiBlock", "antiBlock");
+			antiBlock.carverHelper.registerBlock(antiBlock, "antiBlock");
+			OreDictionary.registerOre("antiBlock", antiBlock);
 		}
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.antiBlock, 8, 0), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone"));
+			if (meta == 0) {
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.antiBlock, 8, 15), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone"));
+			}
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.antiBlock, 8, meta), "BBB", "BdB", "BBB",
+					'd', dyeOres[meta], 'B', new ItemStack(ChiselBlocks.antiBlock, 1, OreDictionary.WILDCARD_VALUE)));
 		}
 
 		@Override
@@ -707,7 +711,7 @@ public enum Features {
 		}
 
 		@Override
-		void addRecipes(){
+		void addRecipes() {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.futura, 8, 0), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustRedstone"));
 		}
 	},
@@ -1697,7 +1701,7 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addShapelessRecipe(new ItemStack(ChiselBlocks.present[meta]), new ItemStack(Blocks.chest, 1), new ItemStack(Items.dye, 1, meta));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ChiselBlocks.present[meta]), new ItemStack(Blocks.chest, 1), dyeOres[meta]));
 		}
 
 		@Override
@@ -2141,7 +2145,7 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.templeblock, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.dye, 1, 4));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.templeblock, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', dyeOres[4]));
 		}
 	},
 
@@ -2469,6 +2473,9 @@ public enum Features {
 	},
 
 	;
+
+	private static final String[] dyeOres = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
+			"dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
 
 	private static int meta = 0;
 
