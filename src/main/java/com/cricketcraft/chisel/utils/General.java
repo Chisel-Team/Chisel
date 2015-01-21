@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.carving.CarvingVariation;
 import com.cricketcraft.chisel.item.chisel.ChiselMode;
 
 public class General {
@@ -137,6 +138,7 @@ public class General {
 	}
 	
 	public static ICarvingVariation getVariation(ItemStack stack) {
-		return Carving.chisel.getVariation(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage());
+		ICarvingVariation v = Carving.chisel.getVariation(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage());
+		return v == null ? new CarvingVariation(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage(), 99) : v;
 	}
 }

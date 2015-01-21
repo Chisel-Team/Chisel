@@ -7,9 +7,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.carving.CarvingVariation;
@@ -48,10 +50,18 @@ public final class ChiselController {
 			z = event.z;
 			Block block = event.world.getBlock(x, y, z);
 			int metadata = event.world.getBlockMetadata(x, y, z);
-			List<ICarvingVariation> list = Carving.chisel.getVariations(block, metadata);
+			ICarvingGroup group = Carving.chisel.getGroup(block, metadata);
 
-			if (list == null || list.isEmpty()) {
-				break;
+			List<ICarvingVariation> list = group.getVariations();
+			
+			main: for (ItemStack stack : OreDictionary.getOres(group.getOreName())) {
+				ICarvingVariation v = General.getVariation(stack);
+				for (ICarvingVariation check : list) {
+					if (check.getBlock() == v.getBlock() && check.getBlockMeta() == v.getBlockMeta()) {
+						continue main;
+					}
+				}
+				list.add(General.getVariation(stack));
 			}
 
 			ICarvingVariation[] variations = list.toArray(new CarvingVariation[] {});
@@ -73,6 +83,7 @@ public final class ChiselController {
 						ICarvingVariation v = variations[i];
 						if (v.getBlock() == block && v.getBlockMeta() == metadata) {
 							idx = (i + 1) % variations.length; // move to the next in the group
+							break;
 						}
 					}
 
