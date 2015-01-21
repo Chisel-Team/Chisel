@@ -2,7 +2,6 @@ package com.cricketcraft.chisel.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -34,7 +33,7 @@ public interface IChiselItem {
 	 * @param chisel
 	 *            The {@link ItemStack} representing the chisel
 	 * @param target
-	 *            The {@link ItemStack} representing the target item
+	 *            The {@link ICarvingVariation} representing the target item
 	 * @return True if the chisel should be damaged. False otherwise.
 	 */
 	boolean onChisel(World world, ItemStack chisel, ICarvingVariation target);
@@ -46,17 +45,13 @@ public interface IChiselItem {
 	 * 
 	 * @param world
 	 *            {@link World} object
-	 * @param inv
-	 *            The inventory this chisel is currently in
-	 * @param slot
-	 *            The slot index of the chisel in the inventory
 	 * @param chisel
 	 *            The {@link ItemStack} representing the chisel
 	 * @param target
-	 *            The {@link ItemStack} representing the target item
+	 *            The {@link ICarvingVariation} representing the target item
 	 * @return True if the current target can be chiseled into anything. False otherwise.
 	 */
-	boolean canChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target);
+	boolean canChisel(World world, ItemStack chisel, ICarvingVariation target);
 
 	/**
 	 * Allows you to control if your item can chisel this block in the world.

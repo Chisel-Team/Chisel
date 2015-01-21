@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -106,7 +105,7 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public boolean canChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target) {
+	public boolean canChisel(World world, ItemStack chisel, ICarvingVariation target) {
 		return true;
 	}
 
