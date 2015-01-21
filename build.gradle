@@ -140,6 +140,6 @@ curse {
     projectId = project.projectId
     changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
     releaseType = 'release'
-    //displayName = "Chisel 2 - ${mod_version}"
+    displayName = "Chisel 2 - ${mod_version}"
     additionalArtifact deobfJar, sourcesJar, apiJar
 }
