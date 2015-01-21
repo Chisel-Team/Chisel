@@ -10,10 +10,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.chisel.api.carving.IChiselMode;
 import com.cricketcraft.chisel.network.PacketHandler;
 import com.cricketcraft.chisel.network.message.MessageChiselSound;
 
-public enum ChiselMode {
+public enum ChiselMode implements IChiselMode {
 
 	SINGLE {
 
@@ -86,8 +87,6 @@ public enum ChiselMode {
 		}
 	};
 
-	public abstract void chiselAll(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, ICarvingVariation variation);
-
 	/**
 	 * Assumes that the player is holding a chisel
 	 */
@@ -116,8 +115,11 @@ public enum ChiselMode {
 		}
 	}
 
-	public ChiselMode next() {
-		ChiselMode[] values = values();
-		return values[(ordinal() + 1) % values.length];
+	public static ChiselMode next(IChiselMode currentMode) {
+		if (currentMode instanceof ChiselMode) {
+			ChiselMode[] values = values();
+			return values[(((ChiselMode) currentMode).ordinal() + 1) % values.length];
+		}
+		return SINGLE;
 	}
 }

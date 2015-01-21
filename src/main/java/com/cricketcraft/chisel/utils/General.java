@@ -15,7 +15,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
+import com.cricketcraft.chisel.api.carving.IAdvancedChisel;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.chisel.api.carving.IChiselMode;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.carving.CarvingVariation;
 import com.cricketcraft.chisel.item.chisel.ChiselMode;
@@ -123,16 +125,21 @@ public class General {
 	}
 
 	private static final String MODE_KEY = "chiselMode";
-	public static ChiselMode getChiselMode(ItemStack chisel) {
+	public static IChiselMode getChiselMode(ItemStack chisel) {
 		if (chisel.stackTagCompound == null || Strings.isNullOrEmpty(chisel.stackTagCompound.getString(MODE_KEY))) {
 			initTag(chisel);
 			chisel.stackTagCompound.setString(MODE_KEY, ChiselMode.SINGLE.name());
+		}
+		
+		String name = chisel.stackTagCompound.getString(MODE_KEY);
+		if (chisel.getItem() instanceof IAdvancedChisel) {
+			return ((IAdvancedChisel)chisel.getItem()).getMode(chisel, name);
 		}
 
 		return Enum.valueOf(ChiselMode.class, chisel.stackTagCompound.getString(MODE_KEY));
 	}
 	
-	public static void setChiselMode(ItemStack chisel, ChiselMode mode) {
+	public static void setChiselMode(ItemStack chisel, IChiselMode mode) {
 		initTag(chisel);
 		chisel.stackTagCompound.setString(MODE_KEY, mode.name());
 	}
