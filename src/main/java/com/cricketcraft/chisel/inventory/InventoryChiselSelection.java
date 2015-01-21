@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
+import com.cricketcraft.chisel.utils.General;
 
 public class InventoryChiselSelection implements IInventory {
 
@@ -120,7 +121,7 @@ public class InventoryChiselSelection implements IInventory {
 		if (Block.getBlockFromItem(item) == null)
 			return;
 
-		if (!((IChiselItem) chisel.getItem()).canChisel(container.playerInventory.player.worldObj, this, container.playerInventory.currentItem, chisel, chiseledItem))
+		if (!((IChiselItem) chisel.getItem()).canChisel(container.playerInventory.player.worldObj, chisel, General.getVariation(chiseledItem)))
 			return;
 
 		ArrayList<ItemStack> list = container.carving.getItems(chiseledItem);
