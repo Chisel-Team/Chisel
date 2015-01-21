@@ -142,7 +142,7 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.antiBlock), 8, 0, "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.antiBlock, 8, 0), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone"));
 		}
 
 		@Override
@@ -707,7 +707,7 @@ public enum Features {
 
 		@Override
 		void addRecipes(){
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.futura), 8, 0, "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustRedstone"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.futura, 8, 0), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustRedstone"));
 		}
 	},
 
