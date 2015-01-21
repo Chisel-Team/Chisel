@@ -131,6 +131,7 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable antiBlock = (BlockCarvable) new BlockCarvableAntiBlock().setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 			antiBlock.carverHelper.setChiselBlockName("Anti Block");
+			antiBlock.carverHelper.forbidChiseling = true;
 
 			for (int i = 0; i < 16; i++) {
 				antiBlock.carverHelper.addVariation("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc", i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
