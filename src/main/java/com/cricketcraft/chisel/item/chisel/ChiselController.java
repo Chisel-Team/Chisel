@@ -13,6 +13,7 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.chisel.api.carving.IChiselMode;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.carving.CarvingVariation;
 import com.cricketcraft.chisel.utils.General;
@@ -72,7 +73,7 @@ public final class ChiselController {
 
 			if (chisel.canChiselBlock(event.world, x, y, z, block, metadata)) {
 				ItemStack target = General.getChiselTarget(held);
-				ChiselMode mode = General.getChiselMode(held);
+				IChiselMode mode = General.getChiselMode(held);
 				ForgeDirection sideHit = ForgeDirection.VALID_DIRECTIONS[event.face];
 
 				if (target != null) {

@@ -10,6 +10,8 @@ import net.minecraft.inventory.Slot;
 import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.carving.IAdvancedChisel;
+import com.cricketcraft.chisel.api.carving.IChiselMode;
 import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
 import com.cricketcraft.chisel.inventory.SlotChiselInput;
@@ -23,7 +25,7 @@ public class GuiChisel extends GuiContainer {
 
 	public EntityPlayer player;
 	public ContainerChisel container;
-	private ChiselMode currentMode;
+	private IChiselMode currentMode;
 
 	public GuiChisel(InventoryPlayer iinventory, InventoryChiselSelection menu) {
 		super(new ContainerChisel(iinventory, menu));
@@ -103,9 +105,15 @@ public class GuiChisel extends GuiContainer {
 	@Override
 	protected void actionPerformed(GuiButton button) {
 		if (button.id == 0) {
-			PacketHandler.INSTANCE.sendToServer(new MessageChiselMode(currentMode));
-			currentMode = currentMode.next();
-			setButtonText();
+			if (container.chisel != null && container.chisel.getItem() instanceof IAdvancedChisel) {
+				IAdvancedChisel item = (IAdvancedChisel) container.chisel.getItem();
+				currentMode = item.getNextMode(container.chisel, currentMode);
+				PacketHandler.INSTANCE.sendToServer(new MessageChiselMode(currentMode));
+			} else {
+				currentMode = ChiselMode.next(currentMode);
+				PacketHandler.INSTANCE.sendToServer(new MessageChiselMode(currentMode));
+				setButtonText();
+			}
 		}
 		super.actionPerformed(button);
 	}

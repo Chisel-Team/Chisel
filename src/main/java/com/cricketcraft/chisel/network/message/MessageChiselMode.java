@@ -4,6 +4,8 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.carving.IAdvancedChisel;
+import com.cricketcraft.chisel.api.carving.IChiselMode;
 import com.cricketcraft.chisel.item.chisel.ChiselMode;
 import com.cricketcraft.chisel.utils.General;
 
@@ -12,7 +14,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-
 public class MessageChiselMode implements IMessage {
 
 	public MessageChiselMode(){
@@ -20,8 +21,8 @@ public class MessageChiselMode implements IMessage {
 	
 	private String mode;
 	
-	public MessageChiselMode(ChiselMode current) {
-		this.mode = current.next().name();
+	public MessageChiselMode(IChiselMode iChiselMode) {
+		this.mode = iChiselMode.name();
 	}
 
 	public void toBytes(ByteBuf buf) {
@@ -38,7 +39,11 @@ public class MessageChiselMode implements IMessage {
 		public IMessage onMessage(MessageChiselMode message, MessageContext ctx) {
 			ItemStack stack = ctx.getServerHandler().playerEntity.getCurrentEquippedItem();
 			if (stack != null && stack.getItem() instanceof IChiselItem) {
-				General.setChiselMode(stack, ChiselMode.valueOf(message.mode));
+				if (stack.getItem() instanceof IAdvancedChisel) {
+					General.setChiselMode(stack, ((IAdvancedChisel) stack.getItem()).getMode(stack, message.mode));
+				} else {
+					General.setChiselMode(stack, ChiselMode.valueOf(message.mode));
+				}
 			}
 			return null;
 		}
