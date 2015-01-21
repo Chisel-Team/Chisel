@@ -52,6 +52,10 @@ public final class ChiselController {
 			int metadata = event.world.getBlockMetadata(x, y, z);
 			ICarvingGroup group = Carving.chisel.getGroup(block, metadata);
 
+			if (group == null) {
+				return;
+			}
+			
 			List<ICarvingVariation> list = group.getVariations();
 			
 			main: for (ItemStack stack : OreDictionary.getOres(group.getOreName())) {
