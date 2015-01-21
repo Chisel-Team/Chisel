@@ -120,6 +120,7 @@ String getChangelogText() {
         }
         if (it.size() > 1) {
             str += "$it" + (lineCount == 0 ? '\n\n' : '\n')
+            lineCount++
             return
         } else {
             done = true
