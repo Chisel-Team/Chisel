@@ -9,8 +9,8 @@ import net.minecraft.inventory.Slot;
 
 import org.lwjgl.opengl.GL11;
 
+import com.cricketcraft.chisel.api.IAdvancedChisel;
 import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.carving.IAdvancedChisel;
 import com.cricketcraft.chisel.api.carving.IChiselMode;
 import com.cricketcraft.chisel.inventory.ContainerChisel;
 import com.cricketcraft.chisel.inventory.InventoryChiselSelection;
