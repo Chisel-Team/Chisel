@@ -116,7 +116,7 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public boolean canChiselBlock(World world, int x, int y, int z, Block block, int metadata) {
+	public boolean canChiselBlock(World world, EntityPlayer player, int x, int y, int z, Block block, int metadata) {
 		return type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
 	}
 

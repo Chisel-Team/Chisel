@@ -120,6 +120,12 @@ public class Carving implements ICarvingRegistry {
 	}
 
 	@Override
+	public ICarvingGroup removeGroup(String groupName) {
+		ICarvingGroup g = groups.getGroupByName(groupName);
+		return groups.remove(g) ? g : null;
+	}
+
+	@Override
 	public void addVariation(String groupName, Block block, int metadata, int order) {
 		if (block == null) {
 			throw new NullPointerException("Cannot add variation in group " + groupName + " for null block.");

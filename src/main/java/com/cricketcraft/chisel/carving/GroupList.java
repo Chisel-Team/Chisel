@@ -3,6 +3,8 @@ package com.cricketcraft.chisel.carving;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import net.minecraft.block.Block;
@@ -11,6 +13,8 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class GroupList implements Set<ICarvingGroup> {
@@ -75,7 +79,7 @@ public class GroupList implements Set<ICarvingGroup> {
 	}
 
 	private HashMap<String, ICarvingGroup> groups = Maps.newHashMap();
-	private HashMap<VariationWrapper, ICarvingGroup> lookup = Maps.newHashMap();
+	private HashBiMap<VariationWrapper, ICarvingGroup> lookup = HashBiMap.create();
 
 	@Override
 	public int size() {
@@ -129,9 +133,17 @@ public class GroupList implements Set<ICarvingGroup> {
 	@Override
 	public boolean remove(Object o) {
 		if (o instanceof ICarvingGroup) {
+			Map<ICarvingGroup, VariationWrapper> reverse = lookup.inverse();
+			List<VariationWrapper> toRemove = Lists.newArrayList();
+			for (ICarvingGroup g : reverse.keySet()) {
+				if (g.getName().equals(((ICarvingGroup) o).getName())) {
+					toRemove.add(reverse.get(g));
+				}
+			}
+			for (VariationWrapper v : toRemove) {
+				lookup.remove(v);
+			}
 			return groups.remove(((ICarvingGroup) o).getName()) != null;
-		} else if (o instanceof ICarvingVariation) {
-			// TODO support carving variation removal
 		}
 		return false;
 	}

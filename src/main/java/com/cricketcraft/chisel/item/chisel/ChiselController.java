@@ -71,7 +71,7 @@ public final class ChiselController {
 
 			ICarvingVariation[] variations = list.toArray(new CarvingVariation[] {});
 
-			if (chisel.canChiselBlock(event.world, x, y, z, block, metadata)) {
+			if (chisel.canChiselBlock(event.world, event.entityPlayer, x, y, z, block, metadata)) {
 				ItemStack target = General.getChiselTarget(held);
 				IChiselMode mode = General.getChiselMode(held);
 				ForgeDirection sideHit = ForgeDirection.VALID_DIRECTIONS[event.face];
