@@ -65,7 +65,7 @@ public interface IChiselItem {
 	 * @param y
 	 *            Y coord of the block being chiseled
 	 * @param z
-	 *            Z coord of the block being chmatiseled
+	 *            Z coord of the block being chiseled
 	 * @param block
 	 *            The {@link Block} being chiseled
 	 * @param metadata
