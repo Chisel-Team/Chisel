@@ -15,6 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.carving.ICarvingRegistry;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.config.Configurations;
@@ -36,7 +37,7 @@ public class ItemChisel extends Item implements IChiselItem {
 		}
 	}
 
-	public static Carving carving = Carving.chisel;
+	public static ICarvingRegistry carving = Carving.chisel;
 
 	private ChiselType type;
 
