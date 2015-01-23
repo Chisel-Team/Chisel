@@ -1,6 +1,6 @@
 package com.cricketcraft.chisel.inventory;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -124,7 +124,7 @@ public class InventoryChiselSelection implements IInventory {
 		if (!((IChiselItem) chisel.getItem()).canChisel(container.playerInventory.player.worldObj, chisel, General.getVariation(chiseledItem)))
 			return;
 
-		ArrayList<ItemStack> list = container.carving.getItems(chiseledItem);
+		List<ItemStack> list = container.carving.getItemsForChiseling(chiseledItem);
 
 		activeVariations = 0;
 		while (activeVariations < normalSlots && activeVariations < list.size()) {

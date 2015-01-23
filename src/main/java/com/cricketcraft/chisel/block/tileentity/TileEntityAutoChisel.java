@@ -1,6 +1,6 @@
 package com.cricketcraft.chisel.block.tileentity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -178,7 +178,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	// lets make sure the user isn't trying to make something from a block that doesn't have this as a valid target
 	private boolean canBeMadeFrom(ItemStack from, ItemStack to) {
-		ArrayList<ItemStack> results = Carving.chisel.getItems(from);
+		List<ItemStack> results = Carving.chisel.getItemsForChiseling(from);
 		for (ItemStack s : results) {
 			if (s.getItem() == to.getItem() && s.getItemDamage() == to.getItemDamage()) {
 				return true;
@@ -329,7 +329,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		switch (slot) {
 		case BASE:
 		case TARGET:
-			return !Carving.chisel.getItems(itemStack).isEmpty();
+			return !Carving.chisel.getItemsForChiseling(itemStack).isEmpty();
 		case OUTPUT:
 			return false;
 		case CHISEL:

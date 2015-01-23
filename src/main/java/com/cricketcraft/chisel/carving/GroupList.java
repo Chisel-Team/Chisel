@@ -130,6 +130,8 @@ public class GroupList implements Set<ICarvingGroup> {
 	public boolean remove(Object o) {
 		if (o instanceof ICarvingGroup) {
 			return groups.remove(((ICarvingGroup) o).getName()) != null;
+		} else if (o instanceof ICarvingVariation) {
+			// TODO support carving variation removal
 		}
 		return false;
 	}
