@@ -58,19 +58,21 @@ public interface IChiselItem {
 	 * 
 	 * @param world
 	 *            World object
+	 * @param player
+	 *            {@link EntityPlayer The player} holding the chisel.
 	 * @param x
 	 *            X coord of the block being chiseled
 	 * @param y
 	 *            Y coord of the block being chiseled
 	 * @param z
-	 *            Z coord of the block being chiseled
+	 *            Z coord of the block being chmatiseled
 	 * @param block
 	 *            The {@link Block} being chiseled
 	 * @param metadata
 	 *            The blocks' metadata
 	 * @return True if the chiseling should take place. False otherwise.
 	 */
-	boolean canChiselBlock(World world, int x, int y, int z, Block block, int metadata);
+	boolean canChiselBlock(World world, EntityPlayer player, int x, int y, int z, Block block, int metadata);
 
 	/**
 	 * Allows you to control if your item has chiseling modes.

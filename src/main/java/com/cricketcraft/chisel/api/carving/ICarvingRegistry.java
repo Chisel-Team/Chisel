@@ -40,6 +40,8 @@ public interface ICarvingRegistry {
 	void addVariation(String groupName, ICarvingVariation variation);
 
 	void addGroup(ICarvingGroup group);
+	
+	ICarvingGroup removeGroup(String groupName);
 
 	void registerOre(String groupName, String oreName);
 
