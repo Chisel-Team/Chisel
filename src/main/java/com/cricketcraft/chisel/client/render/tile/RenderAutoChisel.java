@@ -83,7 +83,7 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		Tessellator tes = Tessellator.instance;
-		IIcon icon = block.getIcon(0, 0);
+		IIcon icon = renderer.hasOverrideBlockTexture() ? renderer.overrideBlockTexture : block.getIcon(0, 0);
 		tes.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
 		tes.setColorOpaque_F(1, 1, 1);
 		tes.addTranslation(x, y, z + 1);
@@ -92,9 +92,13 @@ public class RenderAutoChisel extends TileEntitySpecialRenderer implements ISimp
 				Vertex n = f.faceNormal;
 				tes.setNormal(n.x, n.y, n.z);
 				for (int i = 0; i < f.vertices.length; i++) {
-					Vertex v = f.vertices[i];
+					Vertex vert = f.vertices[i];
 					TextureCoordinate t = f.textureCoordinates[i];
-					tes.addVertexWithUV(v.x, v.y, v.z, icon.getInterpolatedU(t.u * 16), icon.getInterpolatedV(t.v * 16));
+					if (!renderer.hasOverrideBlockTexture()) {
+						tes.addVertexWithUV(vert.x, vert.y, vert.z, icon.getInterpolatedU(t.u * 16), icon.getInterpolatedV(t.v * 16));
+					} else {
+						tes.addVertexWithUV(vert.x, vert.y, vert.z, icon.getInterpolatedU((t.u * 64) % 16), icon.getInterpolatedV((t.v * 64) % 16));
+					}
 				}
 			}
 		}
