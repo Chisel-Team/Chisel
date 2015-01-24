@@ -227,10 +227,8 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 		List<VariationWrapper> toRemove = Lists.newArrayList();
 		for (VariationWrapper v : lookup.keySet()) {
-			if ((g == null || lookup.get(v) == g) && v.v.getBlock() == block && v.v.getBlockMeta() == metadata) {
-				if (g != null) {
-					g.removeVariation(v.v);
-				}
+			if ((g == null || lookup.get(v).getName().equals(g.getName())) && v.equals(new VariationWrapper(new VariationKey(block, metadata)))) {
+				lookup.get(v).removeVariation(v.v);
 				toRemove.add(v);
 			}
 		}

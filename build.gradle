@@ -18,7 +18,7 @@ buildscript {
 }
 
 apply plugin: 'forge'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'curseforge'
 
 import org.ajoberstar.grgit.Grgit
@@ -107,6 +107,26 @@ artifacts {
     archives deobfJar
     archives sourcesJar
     archives apiJar
+}
+
+publishing {
+    tasks.publish.dependsOn 'build'
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourcesJar
+            artifact apiJar
+            artifact deobfJar
+        }
+    }
+
+    repositories {
+        String prop = dev ? "chisel_mavendir" : "chisel_mavendir_dev"
+        if (project.hasProperty(prop)) {
+            maven { url project.getProperty(prop) }
+        }
+    }
 }
 
 String getChangelogText() {
