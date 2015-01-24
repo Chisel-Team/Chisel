@@ -40,8 +40,32 @@ public interface ICarvingRegistry {
 	void addVariation(String groupName, ICarvingVariation variation);
 
 	void addGroup(ICarvingGroup group);
-	
+
 	ICarvingGroup removeGroup(String groupName);
+
+	/**
+	 * Removes a varaition with the passed {@link Block} and metadata from the registry. If this variation is registered with mutiple groups, it will remove it from all of them.
+	 * 
+	 * @param block
+	 *            The {@link Block} of the {@link ICarvingVariation variation}
+	 * @param metadata
+	 *            The metadata of the {@link ICarvingVariation variation}
+	 * @return The ICarvingVariation that was removed. Null if nothing was removed.
+	 */
+	ICarvingVariation removeVariation(Block block, int metadata);
+
+	/**
+	 * Removes a varaition with the passed {@link Block} and metadata from the registry, but only from the specified {@link ICarvingGroup} name.
+	 * 
+	 * @param block
+	 *            The {@link Block} of the {@link ICarvingVariation variation}
+	 * @param metadata
+	 *            The metadata of the {@link ICarvingVariation variation}
+	 * @param group
+	 *            The name of the group that the variation should be removed from
+	 * @return The ICarvingVariation that was removed. Null if nothing was removed.
+	 */
+	ICarvingVariation removeVariation(Block block, int metadata, String group);
 
 	void registerOre(String groupName, String oreName);
 

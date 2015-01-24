@@ -2,8 +2,6 @@ package com.cricketcraft.chisel.api.carving;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-
 /**
  * Represents a group of chiselable blocks.
  * <p>
@@ -59,7 +57,7 @@ public interface ICarvingGroup {
 	List<ICarvingVariation> getVariations();
 
 	/**
-	 * Adds a variation to this group.
+	 * Adds a variation to this group. Do not call this from external code, as it will fail to remove the inverse lookup from the registry.
 	 * 
 	 * @param variation
 	 *            An {@link ICarvingVariation} to add to this group
@@ -67,13 +65,10 @@ public interface ICarvingGroup {
 	void addVariation(ICarvingVariation variation);
 
 	/**
-	 * Removes a varaition with the passed {@link Block} and metadata from this group.
+	 * Removes a variation to this group. Do not call this from external code, as it will fail to remove the inverse lookup from the registry.
 	 * 
-	 * @param block
-	 *            The {@link Block} of the {@link ICarvingVariation variation}
-	 * @param metadata
-	 *            The metadata of the {@link ICarvingVariation variation}
-	 * @return The ICarvingVariation that was removed. Null if nothing was removed.
+	 * @param variation
+	 *            An {@link ICarvingVariation} to add to this group
 	 */
-	ICarvingVariation removeVariation(Block block, int metadata);
+	boolean removeVariation(ICarvingVariation variation);
 }
