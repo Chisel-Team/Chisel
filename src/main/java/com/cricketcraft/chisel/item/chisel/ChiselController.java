@@ -15,7 +15,6 @@ import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.api.carving.IChiselMode;
 import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.carving.CarvingVariation;
 import com.cricketcraft.chisel.utils.General;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -69,7 +68,7 @@ public final class ChiselController {
 				list.add(General.getVariation(stack));
 			}
 
-			ICarvingVariation[] variations = list.toArray(new CarvingVariation[] {});
+			ICarvingVariation[] variations = list.toArray(new ICarvingVariation[] {});
 
 			if (chisel.canChiselBlock(event.world, event.entityPlayer, x, y, z, block, metadata)) {
 				ItemStack target = General.getChiselTarget(held);
