@@ -34,7 +34,6 @@ project.buildnumber = !dev && System.getenv('BUILD_NUMBER') != null ? System.get
 version = "${mod_version}.${buildnumber}"
 group = "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = dev ? "Chisel2_DEV" : "Chisel2"
-mavendir = dev ? file:///var/www/chisel-2-dev/ : file:///var/www/chisel-2/
 
 minecraft {
     version = "${minecraft_version}-${forge_version}"
