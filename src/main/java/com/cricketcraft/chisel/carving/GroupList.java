@@ -216,6 +216,30 @@ public class GroupList implements Set<ICarvingGroup> {
 		return groups.keySet();
 	}
 
+	public ICarvingVariation removeVariation(Block block, int metadata, String group) {
+		ICarvingGroup g = null;
+		if (group != null) {
+			g = groups.get(group);
+			if (g == null) {
+				throw new IllegalArgumentException("No such group " + group);
+			}
+			groups.remove(g.getName());
+		}
+		List<VariationWrapper> toRemove = Lists.newArrayList();
+		for (VariationWrapper v : lookup.keySet()) {
+			if ((g == null || lookup.get(v) == g) && v.v.getBlock() == block && v.v.getBlockMeta() == metadata) {
+				if (g != null) {
+					g.removeVariation(v.v);
+				}
+				toRemove.add(v);
+			}
+		}
+		for (VariationWrapper v : toRemove) {
+			lookup.remove(v);
+		}
+		return toRemove.isEmpty() ? null : toRemove.get(0).v;
+	}
+
 	@Override
 	public String toString() {
 		return groups.toString();

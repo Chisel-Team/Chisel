@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.minecraft.block.Block;
-
 import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
@@ -40,14 +38,14 @@ public class CarvingGroup implements ICarvingGroup {
 	}
 	
 	@Override
-	public ICarvingVariation removeVariation(Block block, int metadata) {
+	public boolean removeVariation(ICarvingVariation variation) {
 		ICarvingVariation toRemove = null;
 		for (ICarvingVariation v : variations) {
-			if (v.getBlock() == block && v.getBlockMeta() == metadata) {
+			if (v.getBlock() == variation.getBlock() && v.getBlockMeta() == variation.getBlockMeta()) {
 				toRemove = v;
 			}
 		}
-		return toRemove == null ? null : variations.remove(toRemove) ? toRemove : null;
+		return toRemove == null ? false : variations.remove(toRemove);
 	}
 
 	@Override

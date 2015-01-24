@@ -124,6 +124,16 @@ public class Carving implements ICarvingRegistry {
 		ICarvingGroup g = groups.getGroupByName(groupName);
 		return groups.remove(g) ? g : null;
 	}
+	
+	@Override
+	public ICarvingVariation removeVariation(Block block, int metadata) {
+		return removeVariation(block, metadata, null);
+	}
+
+	@Override
+	public ICarvingVariation removeVariation(Block block, int metadata, String group) {
+		return groups.removeVariation(block, metadata, group);
+	}
 
 	@Override
 	public void addVariation(String groupName, Block block, int metadata, int order) {
