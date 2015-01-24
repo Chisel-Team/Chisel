@@ -56,14 +56,18 @@ public class RenderBlocksColumn extends RenderBlocks {
 				sides[4] = iconTop;
 				sides[5] = iconTop;
 
-				if (xp && xn)
-					sides[0] = submap.icons[2];
-				else if (xp)
-					sides[0] = submap.icons[3];
-				else
+				// for some reason along the x axis the bottom texture on the ends is backwards. This flips it around.
+				if (xp && xn) {
+					sides[1] = submap.icons[2];
+					sides[0] = sides[1];
+				} else if (xp) {
+					sides[1] = submap.icons[3];
 					sides[0] = submap.icons[1];
-
-				sides[1] = sides[2] = sides[3] = sides[0];
+				} else {
+					sides[1] = submap.icons[1];
+					sides[0] = submap.icons[3];
+				}
+				sides[2] = sides[3] = sides[1];
 			} else {
 				boolean zp = connected(blockAccess, x, y, z + 1, block, metadata);
 				boolean zn = connected(blockAccess, x, y, z - 1, block, metadata);
