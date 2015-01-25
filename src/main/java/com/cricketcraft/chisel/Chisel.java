@@ -126,11 +126,12 @@ public class Chisel {
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
-		registerWorldgen(Features.MARBLE, ChiselBlocks.marble, Configurations.marbleAmount);
-		registerWorldgen(Features.LIMESTONE, ChiselBlocks.limestone, Configurations.limestoneAmount);
-		registerWorldgen(Features.ANDESITE, ChiselBlocks.andesite, Configurations.andesiteAmount);
-		registerWorldgen(Features.GRANITE, ChiselBlocks.granite, Configurations.graniteAmount);
-		registerWorldgen(Features.DIORITE, ChiselBlocks.diorite, Configurations.dioriteAmount);
+		addWorldgen(Features.MARBLE, ChiselBlocks.marble, Configurations.marbleAmount);
+		addWorldgen(Features.LIMESTONE, ChiselBlocks.limestone, Configurations.limestoneAmount);
+		addWorldgen(Features.ANDESITE, ChiselBlocks.andesite, Configurations.andesiteAmount, 40, 100, 0.5);
+		addWorldgen(Features.GRANITE, ChiselBlocks.granite, Configurations.graniteAmount, 40, 100, 0.5);
+		addWorldgen(Features.DIORITE, ChiselBlocks.diorite, Configurations.dioriteAmount, 40, 100, 0.5);
+		GameRegistry.registerWorldGenerator(GeneratorChisel.INSTANCE, 1000);
 
 		proxy.init();
 		MinecraftForge.EVENT_BUS.register(this);
@@ -139,9 +140,15 @@ public class Chisel {
 		FMLInterModComms.sendMessage("Waila", "register", "com.cricketcraft.chisel.compat.WailaCompat.register");
 	}
 
-	private void registerWorldgen(Features feature, Block block, int amount) {
+	private void addWorldgen(Features feature, Block block, double... data) {
 		if (feature.enabled()) {
-			GameRegistry.registerWorldGenerator(new GeneratorChisel(block, 32, amount), 1000);
+			if (data.length == 1) {
+				GeneratorChisel.INSTANCE.addFeature(block, 32, (int) data[0]);
+			} else if (data.length > 1 && data.length < 4) {
+				GeneratorChisel.INSTANCE.addFeature(block, 32, (int) data[0], (int) data[1], (int) data[2]);
+			} else if (data.length == 4) {
+				GeneratorChisel.INSTANCE.addFeature(block, 32, (int) data[0], (int) data[1], (int) data[2], data[3]);
+			}
 		}
 	}
 
