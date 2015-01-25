@@ -52,16 +52,19 @@ tile.antiBlock.gray.desc=Gray Anti Block
 tile.diorite.name=Diorite
 tile.diorite.0.desc=Generates in your world
 tile.diorite.1.desc=Polished Diorite
+tile.diorite.2.desc=Diorite Pillar
 
 #Andesite
 tile.andesite.name=Andesite
 tile.andesite.0.desc=Generates in your world
 tile.andesite.1.desc=Polished Andesite
+tile.andesite.2.desc=Andesite Pillar
 
 #Granite
 tile.granite.name=Granite
 tile.granite.0.desc=Generates in your world
 tile.granite.1.desc=Polished Granite
+tile.granite.2.desc=Granite Pillar
 
 #Auto Chisel
 tile.autoChisel.name=Auto Chisel
