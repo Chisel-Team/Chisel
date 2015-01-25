@@ -112,7 +112,7 @@ public class Carving implements ICarvingRegistry {
 
 	@Override
 	public ICarvingGroup getGroup(Block block, int metadata) {
-		int[] ids = OreDictionary.getOreIDs(new ItemStack(block, metadata));
+		int[] ids = OreDictionary.getOreIDs(new ItemStack(block, 1, metadata));
 		if (ids.length > 0) {
 			for (int id : ids) {
 				ICarvingGroup oreGroup = groups.getGroupByOre(OreDictionary.getOreName(id));
