@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -519,6 +520,21 @@ public enum Features {
 				concreteRecipeBlock = Blocks.gravel;
 
 			FurnaceRecipes.smelting().func_151393_a(concreteRecipeBlock, new ItemStack(ChiselBlocks.concrete), 0.1F);
+		}
+	},
+
+	COPPER
+	{
+		@Override
+		void addBlocks() {
+			ArrayList<ItemStack> oreBlocks = OreDictionary.getOres("blockCopper");
+			//This if can probably be done at feature level, but I don't know how to do that...
+			if(oreBlocks != OreDictionary.EMPTY_LIST)
+			{
+			for(int i = 0; i < oreBlocks.size(); i++)
+				Carving.chisel.addVariation("copperblock", Block.getBlockFromItem(oreBlocks.get(i).getItem()), oreBlocks.get(i).getItemDamage(), i);
+			Carving.chisel.registerOre("copperblock", "copperblock");
+			}
 		}
 	},
 
