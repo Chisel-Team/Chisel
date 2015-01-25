@@ -19,7 +19,7 @@ public class Carving implements ICarvingRegistry {
 
 	GroupList groups = new GroupList();
 
-	public static final Carving chisel = new Carving();
+	public static final ICarvingRegistry chisel = new Carving();
 	public static final Carving needle = new Carving();
 
 	private Carving() {
@@ -60,9 +60,20 @@ public class Carving implements ICarvingRegistry {
 	public List<ItemStack> getItemsForChiseling(ItemStack chiseledItem) {
 		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 
-		int damage = chiseledItem.getItemDamage();
+		ICarvingGroup group = null;
 
-		ICarvingGroup group = getGroup(Block.getBlockFromItem(chiseledItem.getItem()), damage);
+		int[] oreids = OreDictionary.getOreIDs(chiseledItem);
+		for (int i : oreids) {
+			group = groups.getGroupByOre(OreDictionary.getOreName(i));
+			if (group != null) {
+				break;
+			}
+		}
+
+		if (group == null) {
+			group = getGroup(Block.getBlockFromItem(chiseledItem.getItem()), chiseledItem.getItemDamage());
+		}
+
 		if (group == null)
 			return items;
 
