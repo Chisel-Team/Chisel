@@ -2,14 +2,12 @@
 New
 - Add config to prevent chiseling between vanilla leaf types
 - Use vanilla 1.8 textures for the 1.8 blocks, implement 1.8 block pillars
-
 Fixes
 - All blocks now have proper breaking animations
 - #175 Fix bad texture on bottom sides of CTMV blocks
 - #168 Fix only one type of block generating per world
 - #176 Fix bad aged brick texture
 - #174 Fix chiseling stained glass always giving white variations
-
 API
 - Add ability for custom chisels to define their own modes
 - Add support for removing variations and groups via the API

@@ -122,14 +122,14 @@ publishing {
     }
 
     repositories {
-        String prop = dev ? "chisel_mavendir" : "chisel_mavendir_dev"
+        String prop = dev ? "chisel_mavendir" : "chisel_dev_mavendir"
         if (project.hasProperty(prop)) {
             maven { url project.getProperty(prop) }
         }
     }
 }
 
-println('Changelog\n:' + getChangelogText())
+println('Changelog:\n' + getChangelogText())
 
 String getChangelogText() {
     def changelogFile = new File('changelog')
@@ -141,7 +141,8 @@ String getChangelogText() {
             return
         }
         if (it.size() > 1) {
-            str += "$it" + (lineCount == 0 ? '\n\n' : '\n')
+            def temp = "$it" + (lineCount == 0 ? '\n\n' : '\n')
+            str += (it.startsWith('-') ? '' : '\n') + "$temp"
             lineCount++
             return
         } else {
