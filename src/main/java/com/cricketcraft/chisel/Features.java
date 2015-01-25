@@ -888,7 +888,7 @@ public enum Features {
 			granite.carverHelper.setChiselBlockName("granite");
 			granite.carverHelper.addVariation("tile.granite.0.desc", 0, "granite/granite");
 			granite.carverHelper.addVariation("tile.granite.1.desc", 1, "granite/granitePolished");
-			granite.carverHelper.addVariation("tile.granite.1.desc", 2, "granite/granitePillar");
+			granite.carverHelper.addVariation("tile.granite.2.desc", 2, "granite/granitePillar");
 			granite.carverHelper.registerAll(granite, "granite");
 			Carving.chisel.registerOre("granite", "granite");
 		}
