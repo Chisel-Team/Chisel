@@ -2,6 +2,8 @@
 New
 - Add config to prevent chiseling between vanilla leaf types
 - Use vanilla 1.8 textures for the 1.8 blocks, implement 1.8 block pillars
+- Add new yellow brick type
+- Add chisling between different copper block types
 Fixes
 - All blocks now have proper breaking animations
 - #175 Fix bad texture on bottom sides of CTMV blocks
