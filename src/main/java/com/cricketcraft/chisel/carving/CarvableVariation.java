@@ -9,7 +9,7 @@ import com.cricketcraft.chisel.client.render.TextureSubmap;
 public class CarvableVariation {
 
 	public String blockName;
-	private String description;
+	public String descriptionUnloc;
 	public int metadata;
 	public int kind;
 
@@ -30,11 +30,11 @@ public class CarvableVariation {
 	public TextureSubmap submapSmall;
 
 	public String getDescription() {
-		return I18n.format(description);
+		return I18n.format(descriptionUnloc);
 	}
 
 	public void setDescriptionUnloc(String desc) {
-		this.description = desc;
+		this.descriptionUnloc = desc;
 	}
 
 	static class CarvableVariationCTM {
