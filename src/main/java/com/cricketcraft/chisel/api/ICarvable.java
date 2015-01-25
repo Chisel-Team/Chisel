@@ -1,11 +1,14 @@
 package com.cricketcraft.chisel.api;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.IBlockAccess;
-
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.IBlockAccess;
+
+/**
+ * To be implemented on blocks that can be chiseled and need advanced metadata to variation mapping. Currently not very usable without internal classes.
+ */
 public interface ICarvable {
 
 	/**
