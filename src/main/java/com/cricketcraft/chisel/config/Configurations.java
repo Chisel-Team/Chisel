@@ -22,6 +22,7 @@ public class Configurations {
 	public static boolean chiselRecipe;
 	public static boolean enableFMP;
 	public static boolean chiselStoneToCobbleBricks;
+	public static boolean chiselBackToVanillaLeaves;
 
 	public static int marbleAmount;
 	public static int limestoneAmount;
@@ -62,6 +63,7 @@ public class Configurations {
 		chiselRecipe = config.get(category, "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
 		enableFMP = config.get(category, "enableFMP", true, "Do you want to enable FMP").getBoolean(true);
 		chiselStoneToCobbleBricks = config.get(category, "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left clicking.").getBoolean(false);
+		chiselBackToVanillaLeaves = config.get(category, "chiselBackToVanillaLeaves", false, "If this is true, you can chisel from the chisel leaves back to vanilla ones. If it is false, you cannot.").getBoolean(false);
 
 		/* worldgen */
 		category = "worldgen";

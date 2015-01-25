@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel;
 
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -12,6 +14,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.block.BlockAutoChisel;
 import com.cricketcraft.chisel.block.BlockBeaconBase;
 import com.cricketcraft.chisel.block.BlockCarvable;
@@ -53,6 +56,7 @@ import com.cricketcraft.chisel.block.IStairsCreator;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.carving.CarvingGroup;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
 import com.cricketcraft.chisel.entity.EntityCloudInABottle;
@@ -68,11 +72,11 @@ import com.cricketcraft.chisel.item.ItemSmashingRock;
 import com.cricketcraft.chisel.item.ItemUpgrade;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
 import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
+import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.*;
 
@@ -1206,6 +1210,22 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockLeaf leaves = (BlockLeaf) new BlockLeaf(Material.leaves).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.2F).setStepSound(Block.soundTypeGrass);
+			Carving.chisel.addGroup(new CarvingGroup("leaves") {
+				
+				public List<ICarvingVariation> getVariations() {
+					if (Configurations.chiselBackToVanillaLeaves) {
+						return super.getVariations();
+					} else {
+						List<ICarvingVariation> ret = Lists.newArrayList();
+						for (ICarvingVariation v : super.getVariations()) {
+							if (v.getBlock() != Blocks.leaves && v.getBlock() != Blocks.leaves2) {
+								ret.add(v);
+							}
+						}
+						return ret;
+					}
+				}
+			});
 			Carving.chisel.addVariation("leaves", Blocks.leaves, 0, 0);
 			Carving.chisel.addVariation("leaves", Blocks.leaves, 1, 0);
 			Carving.chisel.addVariation("leaves", Blocks.leaves, 2, 0);
