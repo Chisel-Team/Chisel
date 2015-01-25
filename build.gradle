@@ -129,6 +129,8 @@ publishing {
     }
 }
 
+println('Changelog\n:' + getChangelogText())
+
 String getChangelogText() {
     def changelogFile = new File('changelog')
     String str = ''
