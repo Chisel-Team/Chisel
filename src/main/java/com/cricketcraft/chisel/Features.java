@@ -291,8 +291,7 @@ public enum Features {
 			// brickCustom.carverHelper.addVariation("tile.brickCustom.4.desc",
 			// 4, "brickCustom/cracked");
 			brickCustom.carverHelper.addVariation("tile.brickCustom.5.desc", 5, "brickCustom/aged");
-			// brickCustom.carverHelper.addVariation("tile.brickCustom.6.desc",
-			// 6, "brickCustom/mossy");
+			brickCustom.carverHelper.addVariation("tile.brickCustom.6.desc", 6, "brickCustom/yellow");
 			brickCustom.carverHelper.registerAll(brickCustom, "brickCustom");
 			Carving.chisel.registerOre("brickCustom", "brickCustom");
 		}
@@ -1211,7 +1210,7 @@ public enum Features {
 		void addBlocks() {
 			BlockLeaf leaves = (BlockLeaf) new BlockLeaf(Material.leaves).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.2F).setStepSound(Block.soundTypeGrass);
 			Carving.chisel.addGroup(new CarvingGroup("leaves") {
-				
+
 				public List<ICarvingVariation> getVariations() {
 					if (Configurations.chiselBackToVanillaLeaves) {
 						return super.getVariations();
