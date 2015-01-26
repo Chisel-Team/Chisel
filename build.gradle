@@ -121,7 +121,7 @@ publishing {
     }
 
     repositories {
-        String prop = dev ? "chisel_mavendir" : "chisel_dev_mavendir"
+        String prop = dev ? "chisel_dev_mavendir" : "chisel_mavendir"
         if (project.hasProperty(prop)) {
             maven { url project.getProperty(prop) }
         }
