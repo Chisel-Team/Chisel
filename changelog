@@ -1,3 +1,7 @@
+2.3.5:
+Fixes
+- Fix crash with copper block feature
+
 2.3.4:
 New
 - Add config to prevent chiseling between vanilla leaf types
