@@ -525,16 +525,11 @@ public enum Features {
 
 	COPPER
 	{
+
 		@Override
 		void addBlocks() {
-			ArrayList<ItemStack> oreBlocks = OreDictionary.getOres("blockCopper");
-			//This if can probably be done at feature level, but I don't know how to do that...
-			if(oreBlocks != OreDictionary.EMPTY_LIST)
-			{
-			for(int i = 0; i < oreBlocks.size(); i++)
-				Carving.chisel.addVariation("copperblock", Block.getBlockFromItem(oreBlocks.get(i).getItem()), oreBlocks.get(i).getItemDamage(), i);
-			Carving.chisel.registerOre("copperblock", "copperblock");
-			}
+			Carving.chisel.addGroup(new CarvingGroup("copperblock"));
+			Carving.chisel.registerOre("copperblock", "blockCopper");
 		}
 	},
 
