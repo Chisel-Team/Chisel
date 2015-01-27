@@ -109,6 +109,15 @@ public final class ChiselBlocks {
 	public static final BlockCarvable arcane = null;
 	public static final BlockCarvable thaumium = null;
 	public static final BlockCarvable tallow = null;
+	
+	public static final BlockCarvable copper = null;
+	public static final BlockCarvable bronze = null;
+	public static final BlockCarvable aluminum = null;
+	public static final BlockCarvable lead = null;
+	public static final BlockCarvable silver = null;
+	public static final BlockCarvable steel = null;
+	public static final BlockCarvable tin = null;
+	public static final BlockCarvable uranium = null;
 
 	public static final BlockCarvable bloodRune = null;
 	public static final BlockCarvable bloodBrick = null;

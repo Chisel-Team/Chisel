@@ -10,7 +10,7 @@ item.cloudBottle.name=구름이 들어있는 유리병
 # ko_KR Lang By Team MMKP Member alvin137,puyo061,clayweb
 
 #Cobblestone Blocks
-tile.cobblestone.name=조약돌
+tile.chisel.cobblestone.name=조약돌
 tile.cobblestone.0.desc=줄무늬 조약돌 벽돌
 tile.cobblestone.1.desc=섬세한 조약돌 벽돌
 tile.cobblestone.2.desc=작은 조약돌 벽돌
@@ -28,10 +28,10 @@ tile.cobblestone.13.desc=밝은 조약돌 패널
 tile.cobblestone.14.desc=어두운 조약돌 패널
 
 #Sandstone Blocks
-tile.sandstone.name=사암
+tile.chisel.sandstone.name=사암
 
 #Marble Blocks
-tile.marble.name=대리석
+tile.chisel.marble.name=대리석
 tile.marble.0.desc=대리석
 tile.marble.1.desc=대리석 벽돌
 tile.marble.2.desc=클래식 대리석 패널
@@ -50,7 +50,7 @@ tile.marble.14.desc=화려한 대리석 타일
 tile.marble.15.desc=대리석 블록
 
 #Marble Slabs
-tile.marbleSlab.name=대리석 반블럭
+tile.chisel.marbleSlab.name=대리석 반블럭
 tile.marbleSlab.0.desc=대리석 반블럭
 tile.marbleSlab.1.desc=반블럭 대리석 벽돌
 tile.marbleSlab.2.desc=클래식 대리석 반블럭  패널
@@ -69,7 +69,7 @@ tile.marbleSlab.14.desc=화려한 대리석 반블럭 타일
 tile.marbleSlab.15.desc=대리석 블록 반블럭
 
 #Marble Pillars (old)
-tile.marblePillar.name=대리석 기둥
+tile.chisel.marblePillar.name=대리석 기둥
 tile.marblePillarOld.0.desc=대리석 기둥
 tile.marblePillarOld.1.desc=대리석 기둥 꼭대기
 tile.marblePillarOld.2.desc=대리석 기둥 베이스
@@ -106,7 +106,7 @@ tile.marblePillar.14.desc=조각된 기둥 꼭대기
 tile.marblePillar.15.desc=화려한 기둥 꼭대기
 
 #Marble Slabs (old)
-tile.marblePillarSlab.name=Marble Pillar Slab
+tile.chisel.marblePillarSlab.name=Marble Pillar Slab
 tile.marblePillarSlabOld.0.desc=Marble Pillar Slab
 tile.marblePillarSlabOld.1.desc=Marble Pllar Capstone Slab
 tile.marblePillarSlabOld.2.desc=Marble Pillar Base Slab
@@ -145,14 +145,14 @@ tile.marblePillarSlab.15.desc=화려한 꼭대기 반블럭
 #Marble Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
 #Sorry!  It was the only way!
-tile.marbleStairs.0.name=대리석 계단
-tile.marbleStairs.1.name=대리석 계단
-tile.marbleStairs.2.name=대리석 계단
-tile.marbleStairs.3.name=대리석 계단
-tile.marbleStairs.4.name=대리석 계단
-tile.marbleStairs.5.name=대리석 계단
-tile.marbleStairs.6.name=대리석 계단
-tile.marbleStairs.7.name=대리석 계단
+tile.chisel.marbleStairs.0.name=대리석 계단
+tile.chisel.marbleStairs.1.name=대리석 계단
+tile.chisel.marbleStairs.2.name=대리석 계단
+tile.chisel.marbleStairs.3.name=대리석 계단
+tile.chisel.marbleStairs.4.name=대리석 계단
+tile.chisel.marbleStairs.5.name=대리석 계단
+tile.chisel.marbleStairs.6.name=대리석 계단
+tile.chisel.marbleStairs.7.name=대리석 계단
 
 #These are bugged.... so sad :,(
 tile.marbleStairs.0.desc=대리석 계단
@@ -173,7 +173,7 @@ tile.marbleStairs.14.desc=화려한 대리석 타일 계단
 tile.marbleStairs.15.desc=대리석 블록 계단
 
 #Limestone
-tile.limestone.name=석회암
+tile.chisel.limestone.name=석회암
 tile.limestone.0.desc=석회암
 tile.limestone.1.desc=작은 석회암 타일
 tile.limestone.2.desc=프랑스풍 석회암 타일
@@ -192,7 +192,7 @@ tile.limestone.14.desc=밝은 석회암 타일
 tile.limestone.15.desc=어두운 석회암 타일
 
 #Limestone Slabs
-tile.limestoneSlab.name=석회암 반블럭
+tile.chisel.limestoneSlab.name=석회암 반블럭
 tile.limestoneSlab.0.desc=석회암 반블럭
 tile.limestoneSlab.1.desc=작은 석회암 타일 반블럭
 tile.limestoneSlab.2.desc=프랑스풍 석회암 타일 반블럭
@@ -212,14 +212,14 @@ tile.limestoneSlab.15.desc=어두운 석회암 타일 반블럭
 #Limestone Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
 #Sorry!  It was the only way!
-tile.limestoneStairs.0.name=석회암 계단
-tile.limestoneStairs.1.name=석회암 계단
-tile.limestoneStairs.2.name=석회암 계단
-tile.limestoneStairs.3.name=석회암 계단
-tile.limestoneStairs.4.name=석회암 계단
-tile.limestoneStairs.5.name=석회암 계단
-tile.limestoneStairs.6.name=석회암 계단
-tile.limestoneStairs.7.name=석회암 계단
+tile.chisel.limestoneStairs.0.name=석회암 계단
+tile.chisel.limestoneStairs.1.name=석회암 계단
+tile.chisel.limestoneStairs.2.name=석회암 계단
+tile.chisel.limestoneStairs.3.name=석회암 계단
+tile.chisel.limestoneStairs.4.name=석회암 계단
+tile.chisel.limestoneStairs.5.name=석회암 계단
+tile.chisel.limestoneStairs.6.name=석회암 계단
+tile.chisel.limestoneStairs.7.name=석회암 계단
 
 #These are bugged.... so sad :,(
 tile.limestoneStairs.0.desc=석회암 계단
@@ -240,7 +240,7 @@ tile.limestoneStairs.14.desc=밝은 패널의 석회암 계단
 tile.limestoneStairs.15.desc=어두운 패널의 석회암 계단
 
 #Factory Blocks
-tile.blockFactory.name=공장 블럭
+tile.chisel.blockFactory.name=공장 블럭
 tile.blockFactory.0.desc=도트 패턴이 있는 녹슨 금속 판
 tile.blockFactory.1.desc=녹슨 금속 판
 tile.blockFactory.2.desc=매우 녹이 슨 금속 판
@@ -259,7 +259,7 @@ tile.blockFactory.14.desc=녹슨 금속 판
 tile.blockFactory.15.desc=닳은 금속 기둥
 
 #Diamond blocks
-tile.diamond.name=다이아몬드 블럭
+tile.chisel.diamond.name=다이아몬드 블럭
 tile.diamond.1.desc=부풀린 다이아몬드 블럭
 tile.diamond.2.desc=패널이 있는 다이아몬드 블럭
 tile.diamond.3.desc=다이아몬드 셀
@@ -274,12 +274,12 @@ tile.diamond.11.desc=Zelda Diamond Block
 tile.diamond.12.desc=Diamond Block with Ornate Layer
 
 #Snakestone
-tile.snakestoneSand.name=뱀 모양 사암
-tile.snakestoneStone.name=뱀 모양 돌
-tile.snakestoneObsidian.name=뱀 모양 옵시디언
+tile.chisel.snakestoneSand.name=뱀 모양 사암
+tile.chisel.snakestoneStone.name=뱀 모양 돌
+tile.chisel.snakestoneObsidian.name=뱀 모양 옵시디언
 
 #Glass blocks
-tile.glass.name=유리
+tile.chisel.glass.name=유리
 tile.glass.1.desc=Bubble Glass
 tile.glass.2.desc=중국산 유리
 tile.glass.3.desc=일본풍 유리
@@ -297,7 +297,7 @@ tile.glass.14.desc=격자가 얇은 유리
 tile.glass.15.desc=현대풍 철 울타리
 
 #Sandstone
-tile.sandstone.name=사암
+tile.chisel.sandstone.name=사암
 tile.sandstone.3.desc=Faded Sandstone
 tile.sandstone.4.desc=Sandstone Pillar
 tile.sandstone.5.desc=Sandstone Pillar Capstone
@@ -313,11 +313,11 @@ tile.sandstone.14.desc=Sandstone Mosaic
 tile.sandstone.15.desc=Stacked Sandstone Tiles
 
 #Sandstone scribbles
-tile.sandstoneScribbles.name=Sandstone Scribbles
+tile.chisel.sandstoneScribbles.name=Sandstone Scribbles
 tile.sandstoneScribbles.desc=Sandstone scribbles
 
 #Concrete
-tile.blockConcrete.name=Concrete
+tile.chisel.blockConcrete.name=Concrete
 tile.blockConcrete.0.desc=Concrete
 tile.blockConcrete.1.desc=Concrete Block
 tile.blockConcrete.2.desc=Concrete Double Slab
@@ -331,10 +331,10 @@ tile.blockConcrete.9.desc=Partly Weathered Concrete Block
 tile.blockConcrete.10.desc=Asphalt
 
 #Road Line
-tile.roadLine.name=Road Lines
+tile.chisel.roadLine.name=Road Lines
 
 #Iron Blocks
-tile.iron.name=철 블럭
+tile.chisel.iron.name=철 블럭
 tile.iron.1.desc=Large Iron Ingots
 tile.iron.2.desc=Small Iron Ingots
 tile.iron.3.desc=Iron Gears
@@ -352,7 +352,7 @@ tile.iron.14.desc=Iron Vents
 tile.iron.15.desc=Simple Iron Block
 
 #Gold Blocks
-tile.gold.name=금 블럭
+tile.chisel.gold.name=금 블럭
 tile.gold.1.desc=Large Golden Ingots
 tile.gold.2.desc=Small Golden Ingots
 tile.gold.3.desc=Golden Bricks
@@ -369,7 +369,7 @@ tile.gold.13.desc=Golden Star in Obsidian
 tile.gold.14.desc=Simple Gold Block
 
 #Glowstone
-tile.lightstone.name=발광석
+tile.chisel.lightstone.name=발광석
 tile.lightstone.1.desc=Cobble Glowstone Block
 tile.lightstone.2.desc=Corroded Glowstone Blocks
 tile.lightstone.3.desc=Glowstone Blocks with Glass
@@ -387,7 +387,7 @@ tile.lightstone.14.desc=Glowstone Bismuth
 tile.lightstone.15.desc=Glowstone Bismuth Panel
 
 #Lapis blocks
-tile.lapis.name=라피스 블럭
+tile.chisel.lapis.name=라피스 블럭
 tile.lapis.1.desc=Chunky Lapis Block
 tile.lapis.2.desc=Dark Lapis Block
 tile.lapis.3.desc=Zelda Lapis Block
@@ -398,7 +398,7 @@ tile.lapis.7.desc=Smooth Lapis
 tile.lapis.8.desc=Lapis with Ornate Layer
 
 #Emerald Blocks
-tile.emerald.name=에메랄드 블럭
+tile.chisel.emerald.name=에메랄드 블럭
 tile.emerald.1.desc=Emerald Panel
 tile.emerald.2.desc=Classic emerald Panel
 tile.emerald.3.desc=Smooth Emerald
@@ -412,7 +412,7 @@ tile.emerald.10.desc=Small Ornate Emerald Blocks
 tile.emerald.11.desc=Ornate Emerald Block
 
 #Nether Brick
-tile.netherBrick.name=네더벽돌
+tile.chisel.netherBrick.name=네더벽돌
 tile.netherBrick.1.desc=Blue Nether Brick
 tile.netherBrick.2.desc=Spattered Nether Brick
 tile.netherBrick.3.desc=Nether Brick made of Guts
@@ -430,7 +430,7 @@ tile.netherBrick.14.desc=Red Nether Brick
 tile.netherBrick.15.desc=Small Red Nether Brick
 
 #Netherrack
-tile.hellrock.name=네더랙
+tile.chisel.hellrock.name=네더랙
 tile.hellrock.1.desc=Nethergravel with Blood
 tile.hellrock.2.desc=Netherrack with Blood
 tile.hellrock.3.desc=Darker Netherrack with Blood
@@ -447,7 +447,7 @@ tile.hellrock.13.desc=Dark Red Netherrack
 tile.hellrock.14.desc=Netherrack with Flowing Lava
 
 #Mossy Stone
-tile.stoneMoss.name=이끼 낀 조약돌
+tile.chisel.stoneMoss.name=이끼 낀 조약돌
 tile.stoneMoss.1.desc=Aligned Mossy Cobblestone Bricks
 tile.stoneMoss.2.desc=Detailed Mossy Cobblestone Bricks
 tile.stoneMoss.3.desc=Small Mossy Cobblestone Bricks
@@ -465,22 +465,22 @@ tile.stoneMoss.14.desc=Mossy Cobblestone with Light Panel
 tile.stoneMoss.15.desc=Mossy Cobblestone with Dark Panel
 
 #Stone Bricks
-tile.stoneBrick.name=석재벽돌
-tile.stoneBrick.4.desc=Small Stone Bricks
-tile.stoneBrick.5.desc=Wide Stone Bricks
-tile.stoneBrick.6.desc=Small Disordered Stone Bricks
-tile.stoneBrick.7.desc=Disordered Stone Bricks
-tile.stoneBrick.8.desc=Disordered Stone Panels
-tile.stoneBrick.9.desc=Stone Bricks in a Fancy Arrangement
-tile.stoneBrick.10.desc=Ornate Stone Brick tiles
-tile.stoneBrick.11.desc=Large Ornate Stone Brick Tiles
-tile.stoneBrick.12.desc=Stone Panel
-tile.stoneBrick.13.desc=Sunken Stone Panel
-tile.stoneBrick.14.desc=Ornate Stone Panel
-tile.stoneBrick.15.desc=Poison Stone Brick
+tile.chisel.stonebricksmooth.name=석재벽돌
+tile.stonebricksmooth.4.desc=Small Stone Bricks
+tile.stonebricksmooth.5.desc=Wide Stone Bricks
+tile.stonebricksmooth.6.desc=Small Disordered Stone Bricks
+tile.stonebricksmooth.7.desc=Disordered Stone Bricks
+tile.stonebricksmooth.8.desc=Disordered Stone Panels
+tile.stonebricksmooth.9.desc=Stone Bricks in a Fancy Arrangement
+tile.stonebricksmooth.10.desc=Ornate Stone Brick tiles
+tile.stonebricksmooth.11.desc=Large Ornate Stone Brick Tiles
+tile.stonebricksmooth.12.desc=Stone Panel
+tile.stonebricksmooth.13.desc=Sunken Stone Panel
+tile.stonebricksmooth.14.desc=Ornate Stone Panel
+tile.stonebricksmooth.15.desc=Poison Stone Brick
 
 #Dirt
-tile.blockDirt.name=흙
+tile.chisel.blockDirt.name=흙
 tile.blockDirt.0.desc=Dirt Bricks in Disarray
 tile.blockDirt.1.desc=Dirt Bricks Imitating Nether Brick Design
 tile.blockDirt.2.desc=Dirt Bricks
@@ -496,7 +496,7 @@ tile.blockDirt.11.desc=Dirt Layers
 tile.blockDirt.12.desc=Crumbling Dirt
 
 #Ice
-tile.ice.name=얼음
+tile.chisel.ice.name=얼음
 tile.ice.1.desc=Rough Ice Block
 tile.ice.2.desc=Cobble-ice
 tile.ice.3.desc=Large Rough Ice Bricks
@@ -514,7 +514,7 @@ tile.ice.14.desc=Ice Bismuth Block
 tile.ice.15.desc=Ice Poison Block
 
 #Ice Pillars
-tile.icePillar.name=얼음 기둥
+tile.chisel.icePillar.name=얼음 기둥
 tile.icePillar.0.desc=Ice Pillar
 tile.icePillar.1.desc=Ice Pillar Capstone
 tile.icePillar.2.desc=Ice Pillar Base
@@ -533,15 +533,15 @@ tile.icePillar.14.desc=Greek Ice Pillar Ornate Base
 tile.icePillar.15.desc=Plain Ice Pillar Ornate Base
 
 #Ice Stairs
-tile.iceStairs.name=얼음 계단
-tile.iceStairs.0.name=얼음 계단
-tile.iceStairs.1.name=얼음 계단
-tile.iceStairs.2.name=얼음 계단
-tile.iceStairs.3.name=얼음 계단
-tile.iceStairs.4.name=얼음 계단
-tile.iceStairs.5.name=얼음 계단
-tile.iceStairs.6.name=얼음 계단
-tile.iceStairs.7.name=얼음 계단
+tile.chisel.iceStairs.name=얼음 계단
+tile.chisel.iceStairs.0.name=얼음 계단
+tile.chisel.iceStairs.1.name=얼음 계단
+tile.chisel.iceStairs.2.name=얼음 계단
+tile.chisel.iceStairs.3.name=얼음 계단
+tile.chisel.iceStairs.4.name=얼음 계단
+tile.chisel.iceStairs.5.name=얼음 계단
+tile.chisel.iceStairs.6.name=얼음 계단
+tile.chisel.iceStairs.7.name=얼음 계단
 tile.iceStairs.0.desc=얼음 계단
 tile.iceStairs.1.desc=Rough 스태인드 글라스
 tile.iceStairs.2.desc=Cobble-스태인드 글라스
@@ -560,7 +560,7 @@ tile.iceStairs.14.desc=Ice Bismuth Stairs
 tile.iceStairs.15.desc=Ice Poison Stairs
 
 #Obsidian
-tile.obsidian.name=흑요석
+tile.chisel.obsidian.name=흑요석
 tile.obsidian.1.desc=Large Obsidian Pillar
 tile.obsidian.2.desc=Obsidian Pillar
 tile.obsidian.3.desc=Chiseled Obsidian
@@ -578,12 +578,12 @@ tile.obsidian.14.desc=Light Obsidian Blocks with Greek Decor
 tile.obsidian.15.desc=Small Obsidian Blocks inside an Oak Wood Crate
 
 #Wood
-tile.wood-oak.name=참나무
-tile.wood-birch.name=Birch Wood
-tile.wood-spruce.name=Spruce Wood
-tile.wood-jungle.name=Jungle Wood
-tile.wood-dark-oak.name=Dark Oak Wood
-tile.wood-acacia.name=Acacia Wood
+tile.chisel.wood-oak.name=참나무
+tile.chisel.wood-birch.name=Birch Wood
+tile.chisel.wood-spruce.name=Spruce Wood
+tile.chisel.wood-jungle.name=Jungle Wood
+tile.chisel.wood-dark-oak.name=Dark Oak Wood
+tile.chisel.wood-acacia.name=Acacia Wood
 
 #Remember to do the descriptions.
 
@@ -594,77 +594,77 @@ tile.fenceIron=철창
 tile.glassPane=유리판
 
 #Redstone block
-tile.blockRedstone.name=레드스톤 블럭
+tile.chisel.blockRedstone.name=레드스톤 블럭
 
 #Holystone
-tile.blockHolystone.name=Holystone
+tile.chisel.blockHolystone.name=Holystone
 
 #Lavastone
-tile.blockLavastone.name=Lavastone
+tile.chisel.blockLavastone.name=Lavastone
 
 #Carpet
-tile.blockCarpet.name=카펫
+tile.chisel.blockCarpet.name=카펫
 
 #Carpet floor
-tile.blockCarpetFloor.name=Floor Carpet
+tile.chisel.blockCarpetFloor.name=Floor Carpet
 
 #Bookshelf
-tile.blockBookshelf.name=책장
+tile.chisel.blockBookshelf.name=책장
 
 #Tyrian
-tile.blockTyrian.name=Tyrian
+tile.chisel.blockTyrian.name=Tyrian
 
 #Temple
-tile.blockTemple.name=Temple Block
+tile.chisel.blockTemple.name=Temple Block
 
 #Temple Mossy
-tile.blockTempleMossy.name=Mossy Temple Block
+tile.chisel.blockTempleMossy.name=Mossy Temple Block
 
 #Cloud
-tile.blockCloud.name=구름
+tile.chisel.blockCloud.name=구름
 
 #Stained glass T.T
-tile.stainedGlassWhite.name=스태인드 글라스
-tile.stainedGlassOrange.name=스태인드 글라스
-tile.stainedGlassMagenta.name=스태인드 글라스
-tile.stainedGlassLightBlue.name=스태인드 글라스
-tile.stainedGlassYellow.name=스태인드 글라스
-tile.stainedGlassLime.name=스태인드 글라스
-tile.stainedGlassPink.name=스태인드 글라스
-tile.stainedGlassGray.name=스태인드 글라스
-tile.stainedGlassLightGray.name=스태인드 글라스
-tile.stainedGlassCyan.name=스태인드 글라스
-tile.stainedGlassPurple.name=스태인드 글라스
-tile.stainedGlassBlue.name=스태인드 글라스
-tile.stainedGlassBrown.name=스태인드 글라스
-tile.stainedGlassGreen.name=스태인드 글라스
-tile.stainedGlassRed.name=스태인드 글라스
-tile.stainedGlassBlack.name=스태인드 글라스
+tile.chisel.stainedGlassWhite.name=스태인드 글라스
+tile.chisel.stainedGlassOrange.name=스태인드 글라스
+tile.chisel.stainedGlassMagenta.name=스태인드 글라스
+tile.chisel.stainedGlassLightBlue.name=스태인드 글라스
+tile.chisel.stainedGlassYellow.name=스태인드 글라스
+tile.chisel.stainedGlassLime.name=스태인드 글라스
+tile.chisel.stainedGlassPink.name=스태인드 글라스
+tile.chisel.stainedGlassGray.name=스태인드 글라스
+tile.chisel.stainedGlassLightGray.name=스태인드 글라스
+tile.chisel.stainedGlassCyan.name=스태인드 글라스
+tile.chisel.stainedGlassPurple.name=스태인드 글라스
+tile.chisel.stainedGlassBlue.name=스태인드 글라스
+tile.chisel.stainedGlassBrown.name=스태인드 글라스
+tile.chisel.stainedGlassGreen.name=스태인드 글라스
+tile.chisel.stainedGlassRed.name=스태인드 글라스
+tile.chisel.stainedGlassBlack.name=스태인드 글라스
 
 #Stained GlassPane T.T
-tile.stainedGlassPaneWhite.name=스태인드 글라스 판
-tile.stainedGlassPaneOrange.name=스태인드 글라스 판
-tile.stainedGlassPaneMagenta.name=스태인드 글라스 판
-tile.stainedGlassPaneLightBlue.name=스태인드 글라스 판
-tile.stainedGlassPaneYellow.name=스태인드 글라스 판
-tile.stainedGlassPaneLime.name=스태인드 글라스 판
-tile.stainedGlassPanePink.name=스태인드 글라스 판
-tile.stainedGlassPaneGray.name=스태인드 글라스 판
-tile.stainedGlassPaneLightGray.name=스태인드 글라스 판
-tile.stainedGlassPaneCyan.name=스태인드 글라스 판
-tile.stainedGlassPanePurple.name=스태인드 글라스 판
-tile.stainedGlassPaneBlue.name=스태인드 글라스 판
-tile.stainedGlassPaneBrown.name=스태인드 글라스 판
-tile.stainedGlassPaneGreen.name=스태인드 글라스 판
-tile.stainedGlassPaneRed.name=스태인드 글라스 판
-tile.stainedGlassPaneBlack.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneWhite.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneOrange.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneMagenta.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneLightBlue.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneYellow.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneLime.name=스태인드 글라스 판
+tile.chisel.stainedGlassPanePink.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneGray.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneLightGray.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneCyan.name=스태인드 글라스 판
+tile.chisel.stainedGlassPanePurple.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneBlue.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneBrown.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneGreen.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneRed.name=스태인드 글라스 판
+tile.chisel.stainedGlassPaneBlack.name=스태인드 글라스 판
 
 
 #Fantasy block
-tile.blockFft.name=환상 블럭
+tile.chisel.blockFft.name=환상 블럭
 
 #Paperwall
-tile.blockPaperwall.name=종이벽
+tile.chisel.blockPaperwall.name=종이벽
 tile.paperwall.0.desc=Boxed Paperwall
 tile.paperwall.1.desc=Middle Striked Paperwall
 tile.paperwall.2.desc=Crossed Paperwall
@@ -676,7 +676,7 @@ tile.paperwall.7.desc=Plain Paperwall
 tile.paperwall.8.desc=Door Shaped Paperwall
 
 #Woolen Clay
-tile.blockWoolenClay.name=Woolen Clay
+tile.chisel.blockWoolenClay.name=Woolen Clay
 tile.woolenClay.0.desc=White Woolen Clay
 tile.woolenClay.1.desc=Orange Woolen Clay
 tile.woolenClay.2.desc=Magenta Woolen Clay
@@ -695,7 +695,7 @@ tile.woolenClay.14.desc=Red Woolen Clay
 tile.woolenClay.15.desc=Black Woolen Clay
 
 #Laboratory Block
-tile.blockLaboratory.name=Laboratory Block
+tile.chisel.blockLaboratory.name=Laboratory Block
 tile.blockLaboratory.0.desc=Wall Panel
 tile.blockLaboratory.1.desc=Dotted Panel
 tile.blockLaboratory.2.desc=Enameled Wall

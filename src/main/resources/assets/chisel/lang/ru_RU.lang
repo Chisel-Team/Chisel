@@ -30,7 +30,7 @@ item.upgrade_stack.desc=Позволяет стамеске обрабатыва
 #Chisel 2
 
 #AntiBlocks
-tile.antiBlock.name=Антиблок
+tile.chisel.antiBlock.name=Антиблок
 tile.antiBlock.black.desc=Чёрный антиблок
 tile.antiBlock.blue.desc=Синий антиблок
 tile.antiBlock.brown.desc=Коричневый антиблок
@@ -49,22 +49,22 @@ tile.antiBlock.yellow.desc=Жёлтый антиблок
 tile.antiBlock.gray.desc=Серый антиблок
 
 #Diorite
-tile.diorite.name=Диорит
+tile.chisel.diorite.name=Диорит
 tile.diorite.0.desc=Генерируется в Вашем мире
 tile.diorite.1.desc=Гладкий диорит
 
 #Andesite
-tile.andesite.name=Андезит
+tile.chisel.andesite.name=Андезит
 tile.andesite.0.desc=Генерируется в Вашем мире
 tile.andesite.1.desc=Гладкий андезит
 
 #Granite
-tile.granite.name=Гранит
+tile.chisel.granite.name=Гранит
 tile.granite.0.desc=Генерируется в Вашем мире
 tile.granite.1.desc=Гладкий гранит
 
 #Auto Chisel
-tile.autoChisel.name=Автоматическая стамеска
+tile.chisel.autoChisel.name=Автоматическая стамеска
 autochisel.slot.chisel.tooltip=Слот стамески
 autochisel.slot.target.tooltip=Слот блока
 
@@ -78,7 +78,7 @@ tile.leaves.11.desc=Рождественские шары
 tile.leaves.12.desc=Рождественские огни
 
 #Void Stone Blocks
-tile.voidstone.name=Пустотный камень
+tile.chisel.voidstone.name=Пустотный камень
 tile.voidstone.0.desc=Необработанный пустотный камень
 tile.voidstone.1.desc=Большие плитки пустотного камня
 tile.voidstone.2.desc=Гладкий пустотный камень
@@ -89,11 +89,11 @@ tile.voidstone.6.desc=Глазной пустотный камень
 tile.voidstone.7.desc=Скошенный пустотный камень
 
 #Void Stone Pillars
-tile.voidstonePillar.name=Колонна из пустотного камня
+tile.chisel.voidstonePillar.name=Колонна из пустотного камня
 tile.voidstonePillar.0.desc=Полосатая колонна из пустотного камня
 
 #Warning
-tile.warningSign.name=Предупреждающая табличка
+tile.chisel.warningSign.name=Предупреждающая табличка
 tile.warningSign.0.desc=Радиация
 tile.warningSign.1.desc=Биологическая опасность
 tile.warningSign.2.desc=Огонь
@@ -111,7 +111,7 @@ tile.warningSign.13.desc=В ходе криогенной заморозки
 tile.warningSign.14.desc=Необходим кислород
 
 #Energised Void Stone Blocks
-tile.voidstone2.name=Заряженный пустотный камень
+tile.chisel.voidstone2.name=Заряженный пустотный камень
 tile.voidstone2.0.desc=Необработанный заряженный пустотный камень
 tile.voidstone2.1.desc=Большие плитки заряженного пустотного камня
 tile.voidstone2.2.desc=Гладкий заряженный пустотный камень
@@ -122,11 +122,11 @@ tile.voidstone2.6.desc=Глазной заряженный пустотный к
 tile.voidstone2.7.desc=Скошенный пустотный камень
 
 #Void Stone Pillars
-tile.voidstonePillar2.name=Колонна из заряженного пустотного камня
+tile.chisel.voidstonePillar2.name=Колонна из заряженного пустотного камня
 tile.voidstonePillar2.0.desc=Полосатая колонна из заряженного пустотного камня
 
 #Arcane
-tile.arcane.name=Магический каменный блок
+tile.chisel.arcane.name=Магический каменный блок
 tile.arcane.0.desc=Выгравированная Луна
 tile.arcane.1.desc=Светящаяся Луна
 tile.arcane.2.desc=Скошенная плитка
@@ -138,19 +138,19 @@ tile.arcane.7.desc=Мозгииии
 tile.arcane.8.desc=Пространственный канал
 
 #Thaumium
-tile.thaumium.name=Таумический блок
+tile.chisel.thaumium.name=Таумический блок
 tile.thaumium.0.desc=Декоративный шаблон
 tile.thaumium.1.desc=Изображения тотемов
 tile.thaumium.2.desc=Кирпичи
 tile.thaumium.3.desc=Маленькие плитки
 
 #Tallow
-tile.tallow.name=Блок жира
+tile.chisel.tallow.name=Блок жира
 tile.tallow.0.desc=Гладкий блок жира
 tile.tallow.1.desc=Оживлённый блок жира
 
 #Blood Rune
-tile.bloodRune.name=Кровавая руна
+tile.chisel.bloodRune.name=Кровавая руна
 tile.bloodRune.0.desc=Обработанная кровавая руна
 tile.bloodRune.1.desc=Кирпичи из кровавой руны
 tile.bloodRune.2.desc=Резная кровавая руна
@@ -159,14 +159,14 @@ tile.bloodRune.4.desc=Классическая панель из кроваво�
 tile.bloodRune.5.desc=Плитки из кровавой руны
 
 #Futura
-tile.futura.name=Футура-блок
+tile.chisel.futura.name=Футура-блок
 tile.futura.0.desc=Светящийся экран с металлическими гранями
 tile.futura.1.desc=Светящийся экран с бирюзовыми гранями
 tile.futura.2.desc=Прикладные лабиринтовые неоновые полосы
 tile.futura.3.desc=Радужный поп-тарт
 
 #Waterstone
-tile.waterstone.name=Водный камень
+tile.chisel.waterstone.name=Водный камень
 tile.waterstone.0.desc=Кирпичи из водного камня
 tile.waterstone.1.desc=Чёрный водный камень
 tile.waterstone.2.desc=Плитки из водного камня
@@ -176,7 +176,7 @@ tile.waterstone.5.desc=Водная панель
 tile.waterstone.6.desc=Декоративная водная панель
 
 #Hex Plating
-tile.hexPlating.name=Ведьмино покрытие
+tile.chisel.hexPlating.name=Ведьмино покрытие
 tile.hexPlating.black.desc=Чёрное покрытие
 tile.hexPlating.blue.desc=Синее покрытие
 tile.hexPlating.brown.desc=Коричневое покрытие
@@ -195,7 +195,7 @@ tile.hexPlating.yellow.desc=Жёлтое покрытие
 tile.hexPlating.gray.desc=Серое покрытие
 
 #Grimstone
-tile.grimstone.name=Мрачный камень
+tile.chisel.grimstone.name=Мрачный камень
 tile.grimstone.0.desc=Мрачный камень
 tile.grimstone.1.desc=Гладкий мрачный камень
 tile.grimstone.2.desc=Таинственный символ мрачного камня
@@ -213,7 +213,7 @@ tile.grimstone.13.desc=Пластина из мрачного камня
 tile.grimstone.14.desc=Чешуйчатый мрачный камень
 
 #Technical Block
-tile.technical.name=Промышленный блок
+tile.chisel.technical.name=Промышленный блок
 tile.technical.0.desc=Строительные леса
 tile.technical.1.desc=Панели с запрещающей лентой
 tile.technical.2.desc=An Old Relic from the land of Oneteufyv
@@ -230,17 +230,17 @@ tile.technical.12.desc=Ржавая панель
 tile.technical.13.desc=Решётка
 tile.technical.14.desc=Вентилятор (Неисправный)
 tile.technical.15.desc=Ржавая решётка
-tile.technical2.name=Прозрачный промышленный блок
+tile.chisel.technical2.name=Прозрачный промышленный блок
 
 #Present Chest
-tile.present.name=Коробка с подарком
+tile.chisel.present.name=Коробка с подарком
 tile.present.0.desc=§cКрасный подарок
 tile.present.1.desc=§9Синий подарок
 tile.present.2.desc=§aЗелёный подарок
 tile.present.3.desc=§eЖёлтый подарок
 
 #Brick
-tile.brickCustom.name=Блок кирпича
+tile.chisel.brickCustom.name=Блок кирпича
 tile.brickCustom.1.desc=Большие кирпичи
 tile.brickCustom.2.desc=Кирпичи без цемента
 tile.brickCustom.3.desc=Различные кирпичи
@@ -249,7 +249,7 @@ tile.brickCustom.5.desc=Старые кирпичи
 #Chisel 1
 
 #Cobblestone Blocks
-tile.cobblestone.name=Булыжник
+tile.chisel.cobblestone.name=Булыжник
 tile.cobblestone.0.desc=Выровненные булыжниковые кирпичи
 tile.cobblestone.1.desc=Детализированные булыжниковые кирпичи
 tile.cobblestone.2.desc=Маленькие булыжниковые кирпичи
@@ -267,10 +267,10 @@ tile.cobblestone.13.desc=Булыжник со светлой панелью
 tile.cobblestone.14.desc=Булыжник с тёмной панелью
 
 #Sandstone Blocks
-tile.sandstone.name=Песчаник
+tile.chisel.sandstone.name=Песчаник
 
 #Marble Blocks
-tile.marble.name=Мрамор
+tile.chisel.marble.name=Мрамор
 tile.marble.0.desc=Необработанный мрамор
 tile.marble.1.desc=Мраморный кирпич
 tile.marble.2.desc=Классическая мраморная панель
@@ -289,7 +289,7 @@ tile.marble.14.desc=Красивые мраморные плитки
 tile.marble.15.desc=Мраморные блоки
 
 #Marble Slabs
-tile.marble_slab.name=Мраморная плита
+tile.chisel.marble_slab.name=Мраморная плита
 tile.marbleSlab.0.desc=Необработанная мраморная плита
 tile.marbleSlab.1.desc=Плита из мраморного кирпича
 tile.marbleSlab.2.desc=Плита из классической мраморной панели
@@ -308,7 +308,7 @@ tile.marbleSlab.14.desc=Плита из красивого плиточного 
 tile.marbleSlab.15.desc=Плита из мраморных блоков
 
 #Marble Pillars (old)
-tile.marble_pillar.name=Мраморная колонна
+tile.chisel.marble_pillar.name=Мраморная колонна
 tile.marblePillarOld.0.desc=Мраморная колонна
 tile.marblePillarOld.1.desc=Капитель мраморной колонны
 tile.marblePillarOld.2.desc=Основание мраморной колонны
@@ -345,7 +345,7 @@ tile.marblePillar.14.desc=Резная капитель колонны
 tile.marblePillar.15.desc=Декоративная капитель колонны
 
 #Marble Slabs (old)
-tile.marble_pillar_slab.name=Плита из мраморной колонны
+tile.chisel.marble_pillar_slab.name=Плита из мраморной колонны
 tile.marblePillarSlabOld.0.desc=Плита из мраморной колонны
 tile.marblePillarSlabOld.1.desc=Плита из капители мраморной колонны
 tile.marblePillarSlabOld.2.desc=Плита из основания мраморной колонны
@@ -384,14 +384,14 @@ tile.marblePillarSlab.15.desc=Плита из декоративной капи�
 #Marble Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
 #Sorry!  It was the only way!
-tile.marble_stairs.0.name=Мраморные ступеньки
-tile.marble_stairs.1.name=Мраморные ступеньки
-tile.marble_stairs.2.name=Мраморные ступеньки
-tile.marble_stairs.3.name=Мраморные ступеньки
-tile.marble_stairs.4.name=Мраморные ступеньки
-tile.marble_stairs.5.name=Мраморные ступеньки
-tile.marble_stairs.6.name=Мраморные ступеньки
-tile.marble_stairs.7.name=Мраморные ступеньки
+tile.chisel.marble_stairs.0.name=Мраморные ступеньки
+tile.chisel.marble_stairs.1.name=Мраморные ступеньки
+tile.chisel.marble_stairs.2.name=Мраморные ступеньки
+tile.chisel.marble_stairs.3.name=Мраморные ступеньки
+tile.chisel.marble_stairs.4.name=Мраморные ступеньки
+tile.chisel.marble_stairs.5.name=Мраморные ступеньки
+tile.chisel.marble_stairs.6.name=Мраморные ступеньки
+tile.chisel.marble_stairs.7.name=Мраморные ступеньки
 
 #These are bugged.... so sad :,(
 tile.marbleStairs.0.desc=Ступеньки из необработанного мрамора
@@ -412,7 +412,7 @@ tile.marbleStairs.14.desc=Ступеньки из красивого плито�
 tile.marbleStairs.15.desc=Ступеньки из мраморных блоков
 
 #Limestone
-tile.limestone.name=Известняк
+tile.chisel.limestone.name=Известняк
 tile.limestone.0.desc=Известняк
 tile.limestone.1.desc=Маленькие известняковые плитки
 tile.limestone.2.desc=Французские известняковые плитки
@@ -431,7 +431,7 @@ tile.limestone.14.desc=Известняк со светлой панелью
 tile.limestone.15.desc=Известняк с тёмной панелью
 
 #Limestone Slabs
-tile.limestone_slab.name=Известняковая плита
+tile.chisel.limestone_slab.name=Известняковая плита
 tile.limestoneSlab.0.desc=Известняковая плита
 tile.limestoneSlab.1.desc=Маленькая известняковая плиточная плита
 tile.limestoneSlab.2.desc=Французская известняковая плиточная плита
@@ -452,14 +452,14 @@ tile.limestoneSlab.15.desc=Известняковая плита с тёмной
 #Limestone Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
 #Sorry!  It was the only way!
-tile.limestone_stairs.0.name=Известняковые ступеньки
-tile.limestone_stairs.1.name=Известняковые ступеньки
-tile.limestone_stairs.2.name=Известняковые ступеньки
-tile.limestone_stairs.3.name=Известняковые ступеньки
-tile.limestone_stairs.4.name=Известняковые ступеньки
-tile.limestone_stairs.5.name=Известняковые ступеньки
-tile.limestone_stairs.6.name=Известняковые ступеньки
-tile.limestone_stairs.7.name=Известняковые ступеньки
+tile.chisel.limestone_stairs.0.name=Известняковые ступеньки
+tile.chisel.limestone_stairs.1.name=Известняковые ступеньки
+tile.chisel.limestone_stairs.2.name=Известняковые ступеньки
+tile.chisel.limestone_stairs.3.name=Известняковые ступеньки
+tile.chisel.limestone_stairs.4.name=Известняковые ступеньки
+tile.chisel.limestone_stairs.5.name=Известняковые ступеньки
+tile.chisel.limestone_stairs.6.name=Известняковые ступеньки
+tile.chisel.limestone_stairs.7.name=Известняковые ступеньки
 
 #These are bugged.... so sad :,(
 tile.limestoneStairs.0.desc=Известняковые ступеньки
@@ -480,7 +480,7 @@ tile.limestoneStairs.14.desc=Известняковые ступеньки со 
 tile.limestoneStairs.15.desc=Известняковые ступеньки с тёмной панелью
 
 #Factory Blocks
-tile.factoryblock.name=Фабричный блок
+tile.chisel.factoryblock.name=Фабричный блок
 tile.factory.0.desc=Ржавая металлическая пластина с точечным покрытием
 tile.factory.1.desc=Ржавая металлическая пластина
 tile.factory.2.desc=Очень ржавая металлическая пластина
@@ -499,7 +499,7 @@ tile.factory.14.desc=Ржавые металлические пластины
 tile.factory.15.desc=Изношенная металлическая колонна
 
 #Diamond blocks
-tile.diamond_block.name=Алмазный блок
+tile.chisel.diamond_block.name=Алмазный блок
 tile.diamond.1.desc=Рельефный алмазный блок
 tile.diamond.2.desc=Алмазный блок с панелью
 tile.diamond.3.desc=Алмазные ячейки
@@ -514,12 +514,12 @@ tile.diamond.11.desc=Алмазный блок Зельда
 tile.diamond.12.desc=Алмазный блок с декоративным слоем
 
 #Snakestone
-tile.snakestoneSand.name=Песочный змеиный камень
-tile.snakestoneStone.name=Каменный змеиный камень
-tile.obsidianSnakestone.name=Обсидиановый змеиный камень
+tile.chisel.snakestoneSand.name=Песочный змеиный камень
+tile.chisel.snakestoneStone.name=Каменный змеиный камень
+tile.chisel.obsidianSnakestone.name=Обсидиановый змеиный камень
 
 #Glass blocks
-tile.glass.name=Стекло
+tile.chisel.glass.name=Стекло
 tile.glass.1.desc=Пузырчатое стекло
 tile.glass.2.desc=Китайское стекло
 tile.glass.3.desc=Японское(?) стекло
@@ -537,7 +537,7 @@ tile.glass.14.desc=Стекло с тонкой сеткой
 tile.glass.15.desc=Современный железный забор
 
 #Sandstone
-tile.sandstone.name=Песчаник
+tile.chisel.sandstone.name=Песчаник
 tile.sandstone.3.desc=Блеклый песчаник
 tile.sandstone.4.desc=Песчаная колонна
 tile.sandstone.5.desc=Капитель песчаной колонны
@@ -553,11 +553,11 @@ tile.sandstone.14.desc=Песчаная мозаика
 tile.sandstone.15.desc=Ячеистые песчаные плитки
 
 #Sandstone scribbles
-tile.sandstone_scribbles.name=Песчаник с каракулями
+tile.chisel.sandstone_scribbles.name=Песчаник с каракулями
 tile.sandstoneScribbles.desc=Песчаник с каракулями
 
 #Concrete
-tile.concrete.name=Бетон
+tile.chisel.concrete.name=Бетон
 tile.concrete.0.desc=Бетон
 tile.concrete.1.desc=Бетонный блок
 tile.concrete.2.desc=Бетонная плита
@@ -571,14 +571,14 @@ tile.concrete.9.desc=Частично выветрившийся бетонны�
 tile.concrete.10.desc=Асфальт
 
 #Road Line
-tile.roadLine.name=Дорожные линии
+tile.chisel.roadLine.name=Дорожные линии
 tile.roadLine.0.desc=Белые
 tile.roadLine.1.desc=Жёлтые
 tile.roadLine.2.desc=Двойные белые
 tile.roadLine.3.desc=Двойные жёлтые
 
 #Iron Blocks
-tile.iron_block.name=Железный блок
+tile.chisel.iron_block.name=Железный блок
 tile.iron.1.desc=Большие железные слитки
 tile.iron.2.desc=Маленькие железные слитки
 tile.iron.3.desc=Железные шестерни
@@ -596,7 +596,7 @@ tile.iron.14.desc=Железные разрезы
 tile.iron.15.desc=Простой железный блок
 
 #Gold Blocks
-tile.gold_block.name=Золотой блок
+tile.chisel.gold_block.name=Золотой блок
 tile.gold.1.desc=Большие золотые слитки
 tile.gold.2.desc=Маленькие золотые слитки
 tile.gold.3.desc=Золотые кирпичи
@@ -613,7 +613,7 @@ tile.gold.13.desc=Золотая звезда в обсидиане
 tile.gold.14.desc=Простой золотой блок
 
 #Glowstone
-tile.glowstone.name=Светящийся камень
+tile.chisel.glowstone.name=Светящийся камень
 tile.lightstone.1.desc=Булыжниковый светящийся блок
 tile.lightstone.2.desc=Проржавевшие светящиеся блоки
 tile.lightstone.3.desc=Светящиеся блоки со стеклом
@@ -631,7 +631,7 @@ tile.lightstone.14.desc=Светящийся висмут
 tile.lightstone.15.desc=Панель из светящегося висмута
 
 #Lapis blocks
-tile.lapis_block.name=Лазуритовый блок
+tile.chisel.lapis_block.name=Лазуритовый блок
 tile.lapis.1.desc=Плотный лазуритовый блок
 tile.lapis.2.desc=Тёмный лазуритовый блок
 tile.lapis.3.desc=Лазуритовый блок Зельда
@@ -642,7 +642,7 @@ tile.lapis.7.desc=Гладкий лазурит
 tile.lapis.8.desc=Лазурит с декоративным слоем
 
 #Emerald Blocks
-tile.emerald_block.name=Изумрудный блок
+tile.chisel.emerald_block.name=Изумрудный блок
 tile.emerald.1.desc=Изумрудная панель
 tile.emerald.2.desc=Классическая изумрудная панель
 tile.emerald.3.desc=Гладкий изумруд
@@ -656,7 +656,7 @@ tile.emerald.10.desc=Маленькие декоративные изумруд�
 tile.emerald.11.desc=Декоративные изумрудные блоки
 
 #Nether Brick
-tile.nether_brick.name=Кирпич Нижнего мира
+tile.chisel.nether_brick.name=Кирпич Нижнего мира
 tile.netherBrick.1.desc=Синий кирпич Нижнего мира
 tile.netherBrick.2.desc=Забрызганный кирпич Нижнего мира
 tile.netherBrick.3.desc=Кирпич Нижнего мира, сделанный из внутренностей
@@ -674,7 +674,7 @@ tile.netherBrick.14.desc=Красный кирпич Нижнего мира
 tile.netherBrick.15.desc=Маленький красный кирпич Нижнего мира
 
 #Netherrack
-tile.netherrack.name=Камень Нижнего мира
+tile.chisel.netherrack.name=Камень Нижнего мира
 tile.hellrock.1.desc=Гравий Нижнего мира с кровью
 tile.hellrock.2.desc=Камень Нижнего мира с кровью
 tile.hellrock.3.desc=Тёмный камень Нижнего мира с кровью
@@ -691,7 +691,7 @@ tile.hellrock.13.desc=Тёмный красный камень Нижнего м
 tile.hellrock.14.desc=Камень Нижнего мира с текучей лавой
 
 #Mossy Stone
-tile.mossy_cobblestone.name=Замшелый булыжник
+tile.chisel.mossy_cobblestone.name=Замшелый булыжник
 tile.stoneMoss.1.desc=Выровненные замшелые булыжниковые кирпичи
 tile.stoneMoss.2.desc=Детализированные замшелые булыжниковые кирпичи
 tile.stoneMoss.3.desc=Маленькие замшелые булыжниковые кирпичи
@@ -709,22 +709,22 @@ tile.stoneMoss.14.desc=Замшелый булыжник со светлой п�
 tile.stoneMoss.15.desc=Замшелый булыжник с тёмной панелью
 
 #Stone Bricks
-tile.stoneBrick.name=Каменный кирпич
-tile.stoneBrick.4.desc=Маленькие каменные кирпичи
-tile.stoneBrick.5.desc=Широкие каменные кирпичи
-tile.stoneBrick.6.desc=Маленькие неупорядоченные каменные кирпичи
-tile.stoneBrick.7.desc=Неупорядоченные каменные кирпичи
-tile.stoneBrick.8.desc=Неупорядоченные каменные панели
-tile.stoneBrick.9.desc=Каменный кирпич в красивом расположении
-tile.stoneBrick.10.desc=Плитки декоративного каменного кирпича
-tile.stoneBrick.11.desc=Большие плитки декоративного каменного кирпича
-tile.stoneBrick.12.desc=Каменная панель
-tile.stoneBrick.13.desc=Осевшая каменная панель
-tile.stoneBrick.14.desc=Декоративная каменная панель
-tile.stoneBrick.15.desc=Ядовитый каменный кирпич
+tile.chisel.stonebricksmooth.name=Каменный кирпич
+tile.stonebricksmooth.4.desc=Маленькие каменные кирпичи
+tile.stonebricksmooth.5.desc=Широкие каменные кирпичи
+tile.stonebricksmooth.6.desc=Маленькие неупорядоченные каменные кирпичи
+tile.stonebricksmooth.7.desc=Неупорядоченные каменные кирпичи
+tile.stonebricksmooth.8.desc=Неупорядоченные каменные панели
+tile.stonebricksmooth.9.desc=Каменный кирпич в красивом расположении
+tile.stonebricksmooth.10.desc=Плитки декоративного каменного кирпича
+tile.stonebricksmooth.11.desc=Большие плитки декоративного каменного кирпича
+tile.stonebricksmooth.12.desc=Каменная панель
+tile.stonebricksmooth.13.desc=Осевшая каменная панель
+tile.stonebricksmooth.14.desc=Декоративная каменная панель
+tile.stonebricksmooth.15.desc=Ядовитый каменный кирпич
 
 #Dirt
-tile.dirt.name=Земля
+tile.chisel.dirt.name=Земля
 tile.dirt.0.desc=Беспорядочные земляные кирпичи
 tile.dirt.1.desc=Земляные кирпичи, похожи на кирпичи Нижнего мира
 tile.dirt.2.desc=Земляные кирпичи
@@ -740,7 +740,7 @@ tile.dirt.11.desc=Земляные слои
 tile.dirt.12.desc=Разрушенная земля
 
 #Ice
-tile.ice.name=Лёд
+tile.chisel.ice.name=Лёд
 tile.ice.1.desc=Необработанный ледяной блок
 tile.ice.2.desc=Булыжниковый лёд
 tile.ice.3.desc=Большие необработанные ледяные кирпичи
@@ -758,7 +758,7 @@ tile.ice.14.desc=Блок ледяного висмута
 tile.ice.15.desc=Блок ледяного яда
 
 #Ice Pillars
-tile.ice_pillar.name=Ледяная колонна
+tile.chisel.ice_pillar.name=Ледяная колонна
 tile.icePillar.0.desc=Обычная ледяная колонна с обычной капителью
 tile.icePillar.1.desc=Обычная ледяная колонна с греческой капителью
 tile.icePillar.2.desc=Греческая ледяная колонна с обычной капителью
@@ -767,15 +767,15 @@ tile.icePillar.4.desc=Резная капитель ледяной колонн�
 tile.icePillar.5.desc=Декоративная капитель ледяной колонны
 
 #Ice Stairs
-tile.ice_stairs.name=Ледяные ступеньки
-tile.ice_stairs.0.name=Ледяные ступеньки
-tile.ice_stairs.1.name=Ледяные ступеньки
-tile.ice_stairs.2.name=Ледяные ступеньки
-tile.ice_stairs.3.name=Ледяные ступеньки
-tile.ice_stairs.4.name=Ледяные ступеньки
-tile.ice_stairs.5.name=Ледяные ступеньки
-tile.ice_stairs.6.name=Ледяные ступеньки
-tile.ice_stairs.7.name=Ледяные ступеньки
+tile.chisel.ice_stairs.name=Ледяные ступеньки
+tile.chisel.ice_stairs.0.name=Ледяные ступеньки
+tile.chisel.ice_stairs.1.name=Ледяные ступеньки
+tile.chisel.ice_stairs.2.name=Ледяные ступеньки
+tile.chisel.ice_stairs.3.name=Ледяные ступеньки
+tile.chisel.ice_stairs.4.name=Ледяные ступеньки
+tile.chisel.ice_stairs.5.name=Ледяные ступеньки
+tile.chisel.ice_stairs.6.name=Ледяные ступеньки
+tile.chisel.ice_stairs.7.name=Ледяные ступеньки
 tile.iceStairs.0.desc=Ледяные ступеньки
 tile.iceStairs.1.desc=Необработанные ледяные ступеньки
 tile.iceStairs.2.desc=Булыжниковые ледяные ступеньки
@@ -794,7 +794,7 @@ tile.iceStairs.14.desc=Ступеньки из ледяного висмута
 tile.iceStairs.15.desc=Ступеньки из ледяного яда
 
 #Packed Ice
-tile.packedice.name=Плотный лёд
+tile.chisel.packedice.name=Плотный лёд
 tile.packedice.1.desc=Грубый блок плотного льда
 tile.packedice.2.desc=Булыжниковый плотный лёд
 tile.packedice.3.desc=Большие грубые кирпичи плотного льда
@@ -812,7 +812,7 @@ tile.packedice.14.desc=Висмутовый блок из плотного ль�
 tile.packedice.15.desc=Ядовитый блок из плотного льда
 
 #Packed Ice Pillars
-tile.packedice_pillar.name=Колонна из плотного льда
+tile.chisel.packedice_pillar.name=Колонна из плотного льда
 tile.packedice_pillar.0.desc=Обычная колонна из плотного льда с обычной капителью
 tile.packedice_pillar.1.desc=Обычная колонна из плотного льда с греческой капителью
 tile.packedice_pillar.2.desc=Греческая колонна из плотного льда с обычной капителью
@@ -821,15 +821,15 @@ tile.packedice_pillar.4.desc=Резная капитель колонны из �
 tile.packedice_pillar.5.desc=Декоративная капитель колонны из плотного льда
 
 #Packed Ice Stairs
-tile.packedice_stairs.name=Ступеньки из плотного льда
-tile.packedice_stairs.0.name=Ступеньки из плотного льда
-tile.packedice_stairs.1.name=Ступеньки из плотного льда
-tile.packedice_stairs.2.name=Ступеньки из плотного льда
-tile.packedice_stairs.3.name=Ступеньки из плотного льда
-tile.packedice_stairs.4.name=Ступеньки из плотного льда
-tile.packedice_stairs.5.name=Ступеньки из плотного льда
-tile.packedice_stairs.6.name=Ступеньки из плотного льда
-tile.packedice_stairs.7.name=Ступеньки из плотного льда
+tile.chisel.packedice_stairs.name=Ступеньки из плотного льда
+tile.chisel.packedice_stairs.0.name=Ступеньки из плотного льда
+tile.chisel.packedice_stairs.1.name=Ступеньки из плотного льда
+tile.chisel.packedice_stairs.2.name=Ступеньки из плотного льда
+tile.chisel.packedice_stairs.3.name=Ступеньки из плотного льда
+tile.chisel.packedice_stairs.4.name=Ступеньки из плотного льда
+tile.chisel.packedice_stairs.5.name=Ступеньки из плотного льда
+tile.chisel.packedice_stairs.6.name=Ступеньки из плотного льда
+tile.chisel.packedice_stairs.7.name=Ступеньки из плотного льда
 tile.packediceStairs.0.desc=Ступеньки из плотного льда
 tile.packediceStairs.1.desc=Ступеньки из грубого плотного льда
 tile.packediceStairs.2.desc=Ступеньки из булыжникового плотного льда
@@ -848,7 +848,7 @@ tile.packediceStairs.14.desc=Ступеньки из висмутового бл
 tile.packediceStairs.15.desc=Ступеньки из ядовитого блока плотного льда
 
 #Obsidian
-tile.obsidian.name=Обсидиан
+tile.chisel.obsidian.name=Обсидиан
 tile.obsidian.1.desc=Большая обсидиановая колонна
 tile.obsidian.2.desc=Обсидиановая колонна
 tile.obsidian.3.desc=Резной обсидиан
@@ -866,17 +866,17 @@ tile.obsidian.14.desc=Светлые обсидиановые блоки с гр
 tile.obsidian.15.desc=Маленькие обсидиановые блоки в дубовом ящике
 
 #Wood
-tile.oak_planks.name=Дубовая древесина
-tile.birch_planks.name=Берёзовая древесина
-tile.spruce_planks.name=Еловая древесина
-tile.jungle_planks.name=Тропическая древесина
-tile.dark_oak_planks.name=Древесина тёмного дуба
-tile.acacia_planks.name=Древесина акации
+tile.chisel.oak_planks.name=Дубовая древесина
+tile.chisel.birch_planks.name=Берёзовая древесина
+tile.chisel.spruce_planks.name=Еловая древесина
+tile.chisel.jungle_planks.name=Тропическая древесина
+tile.chisel.dark_oak_planks.name=Древесина тёмного дуба
+tile.chisel.acacia_planks.name=Древесина акации
 
 #Remember to do the descriptions.
 
 #Iron Fence
-tile.iron_bars.name=Железные прутья
+tile.chisel.iron_bars.name=Железные прутья
 tile.iron_bars.1.desc=Железные прутья без рамки
 tile.iron_bars.2.desc=Угрожающие железные прутья
 tile.iron_bars.3.desc=Прутья железной клетки
@@ -888,7 +888,7 @@ tile.iron_bars.8.desc=Вертикальные железные прутья
 tile.iron_bars.9.desc=Железные шипы
 
 #Glass Panes
-tile.glass_pane.name=Стеклянная панель
+tile.chisel.glass_pane.name=Стеклянная панель
 tile.glass_pane.1.desc=Пузырчатая стеклянная панель
 tile.glass_pane.2.desc=Безграничная стеклянная панель
 tile.glass_pane.3.desc=Панель экрана
@@ -899,7 +899,7 @@ tile.glass_pane.14.desc=Японская стеклянная панель
 tile.glass_pane.15.desc=Декоративная японская стеклянная панель
 
 #Redstone block
-tile.redstone_block.name=Красный блок
+tile.chisel.redstone_block.name=Красный блок
 tile.redstone_block.1.desc=Гладкий красный камень
 tile.redstone_block.2.desc=Большой красный блок
 tile.redstone_block.3.desc=Маленький красный блок
@@ -917,7 +917,7 @@ tile.redstone_block.14.desc=Красные черепа
 tile.redstone_block.15.desc=Красный блок Зельда
 
 #Holystone
-tile.holystone.name=Пемза
+tile.chisel.holystone.name=Пемза
 tile.holystone.0.desc=Пемза
 tile.holystone.1.desc=Гладкая пемза
 tile.holystone.2.desc=Таинственный символ пемзы
@@ -934,7 +934,7 @@ tile.holystone.12.desc=Гладкая пластина из пемзы
 tile.holystone.13.desc=Пластина из пемзы
 
 #Lavastone
-tile.lavastone.name=Лавовый камень
+tile.chisel.lavastone.name=Лавовый камень
 tile.lavastone.0.desc=Лавовый камень
 tile.lavastone.1.desc=Чёрный лавовый камень
 tile.lavastone.2.desc=Плитки из лавового камня
@@ -945,7 +945,7 @@ tile.lavastone.6.desc=Декоративная лавовая панель
 tile.lavastone.7.desc=Тёмный лавовый камень
 
 #Carpet
-tile.carpet_block.name=Ковёр
+tile.chisel.carpet_block.name=Ковёр
 tile.carpet_block.0.desc=Белый ковровый блок
 tile.carpet_block.1.desc=Оранжевый ковровый блок
 tile.carpet_block.2.desc=Сиреневый ковровый блок
@@ -964,7 +964,7 @@ tile.carpet_block.14.desc=Красный ковровый блок
 tile.carpet_block.15.desc=Чёрный ковровый блок
 
 #Carpet floor
-tile.carpet.name=Напольный ковёр
+tile.chisel.carpet.name=Напольный ковёр
 tile.carpet.0.desc=Белый ковёр
 tile.carpet.1.desc=Оранжевый ковёр
 tile.carpet.2.desc=Сиреневый ковёр
@@ -983,7 +983,7 @@ tile.carpet.14.desc=Красный ковёр
 tile.carpet.15.desc=Чёрный ковёр
 
 #Bookshelf
-tile.bookshelf.name=Книжный шкаф
+tile.chisel.bookshelf.name=Книжный шкаф
 tile.bookshelf.1.desc=Книжный шкаф с разноцветными книгами
 tile.bookshelf.2.desc=Книжный шкаф некроманта новичка
 tile.bookshelf.3.desc=Книжный шкаф некроманта
@@ -994,7 +994,7 @@ tile.bookshelf.7.desc=Книжный шкаф, заполненный до кр�
 tile.bookshelf.8.desc=Книжный шкаф историка
 
 #Tyrian
-tile.tyrian.name=Тириан
+tile.chisel.tyrian.name=Тириан
 tile.tyrian.0.desc=Футуристический бронированный блок
 tile.tyrian.1.desc=Бледный футуристический бронированный блок
 tile.tyrian.2.desc=Фиолетовый футуристический бронированный блок
@@ -1013,7 +1013,7 @@ tile.tyrian.14.desc=Чёрный футуристический брониров
 tile.tyrian.15.desc=Футуристический бронированный блок с блестящими металлическими кусками
 
 #Temple
-tile.templeblock.name=Храмовый блок
+tile.chisel.templeblock.name=Храмовый блок
 tile.templeblock.0.desc=Храмовый булыжник
 tile.templeblock.1.desc=Декоративный храмовый блок
 tile.templeblock.2.desc=Храмовая пластина
@@ -1032,7 +1032,7 @@ tile.templeblock.14.desc=Светлые храмовые плитки
 tile.templeblock.15.desc=Маленькие светлые храмовые плитки
 
 #Temple Mossy
-tile.mossy_templeblock.name=Замшелый храмовый блок
+tile.chisel.mossy_templeblock.name=Замшелый храмовый блок
 tile.mossy_templeblock.0.desc=Замшелый храмовый булыжник
 tile.mossy_templeblock.1.desc=Декоративный замшелый храмовый блок
 tile.mossy_templeblock.2.desc=Замшелая храмовая пластина
@@ -1051,7 +1051,7 @@ tile.mossy_templeblock.14.desc=Светлые замшелые храмовые 
 tile.mossy_templeblock.15.desc=Маленькие светлые замшелые храмовые плитки
 
 #Cloud
-tile.cloud.name=Облако
+tile.chisel.cloud.name=Облако
 tile.cloud.0.desc=Облачный блок
 tile.cloud.1.desc=Большие облачные кирпичи
 tile.cloud.2.desc=Маленькие облачные кирпичи
@@ -1059,43 +1059,43 @@ tile.cloud.3.desc=Маленькие вертикальные облачные �
 tile.cloud.4.desc=Сетчатые облачные кирпичи
 
 #Stained glass T.T
-tile.stained_glass_white.name=Окрашенное стекло
-tile.stained_glass_orange.name=Окрашенное стекло
-tile.stained_glass_magenta.name=Окрашенное стекло
-tile.stained_glass_lightBlue.name=Окрашенное стекло
-tile.stained_glass_yellow.name=Окрашенное стекло
-tile.stained_glass_lime.name=Окрашенное стекло
-tile.stained_glass_pink.name=Окрашенное стекло
-tile.stained_glass_gray.name=Окрашенное стекло
-tile.stained_glass_lightgray.name=Окрашенное стекло
-tile.stained_glass_cyan.name=Окрашенное стекло
-tile.stained_glass_purple.name=Окрашенное стекло
-tile.stained_glass_blue.name=Окрашенное стекло
-tile.stained_glass_brown.name=Окрашенное стекло
-tile.stained_glass_green.name=Окрашенное стекло
-tile.stained_glass_red.name=Окрашенное стекло
-tile.stained_glass_black.name=Окрашенное стекло
+tile.chisel.stained_glass_white.name=Окрашенное стекло
+tile.chisel.stained_glass_orange.name=Окрашенное стекло
+tile.chisel.stained_glass_magenta.name=Окрашенное стекло
+tile.chisel.stained_glass_lightBlue.name=Окрашенное стекло
+tile.chisel.stained_glass_yellow.name=Окрашенное стекло
+tile.chisel.stained_glass_lime.name=Окрашенное стекло
+tile.chisel.stained_glass_pink.name=Окрашенное стекло
+tile.chisel.stained_glass_gray.name=Окрашенное стекло
+tile.chisel.stained_glass_lightgray.name=Окрашенное стекло
+tile.chisel.stained_glass_cyan.name=Окрашенное стекло
+tile.chisel.stained_glass_purple.name=Окрашенное стекло
+tile.chisel.stained_glass_blue.name=Окрашенное стекло
+tile.chisel.stained_glass_brown.name=Окрашенное стекло
+tile.chisel.stained_glass_green.name=Окрашенное стекло
+tile.chisel.stained_glass_red.name=Окрашенное стекло
+tile.chisel.stained_glass_black.name=Окрашенное стекло
 
 #Stained GlassPane T.T
-tile.stained_glass_pane_white.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_orange.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_magenta.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_lightBlue.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_yellow.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_lime.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_pink.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_gray.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_lightgray.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_cyan.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_purple.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_blue.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_brown.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_green.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_red.name=Окрашенная стеклянная панель
-tile.stained_glass_pane_black.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_white.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_orange.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_magenta.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_lightBlue.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_yellow.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_lime.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_pink.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_gray.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_lightgray.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_cyan.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_purple.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_blue.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_brown.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_green.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_red.name=Окрашенная стеклянная панель
+tile.chisel.stained_glass_pane_black.name=Окрашенная стеклянная панель
 
 #Fantasy block
-tile.fantasyblock.name=Царский фантастический блок
+tile.chisel.fantasyblock.name=Царский фантастический блок
 tile.fantasyblock.0.desc=Царский фантастический кирпич
 tile.fantasyblock.1.desc=Тусклый царский фантастический кирпич
 tile.fantasyblock.2.desc=Изношенный царский фантастический кирпич
@@ -1114,7 +1114,7 @@ tile.fantasyblock.14.desc=Беспорядочные царские фантас
 tile.fantasyblock.15.desc=Изношенные царские фантастические кирпичи
 
 #Fantasy block 2
-tile.fantasyblock2.name=Фантастический блок
+tile.chisel.fantasyblock2.name=Фантастический блок
 tile.fantasyblock2.0.desc=Фантастический кирпич
 tile.fantasyblock2.1.desc=Тусклый фантастический кирпич
 tile.fantasyblock2.2.desc=Изношенный фантастический кирпич
@@ -1133,8 +1133,8 @@ tile.fantasyblock2.14.desc=Беспорядочные фантастически
 tile.fantasyblock2.15.desc=Изношенные фантастические кирпичи
 
 #Paperwall
-tile.paperwall.name=Бумажная стена
-tile.paperwall_block.name=Блок бумажной стены
+tile.chisel.paperwall.name=Бумажная стена
+tile.chisel.paperwall_block.name=Блок бумажной стены
 tile.paperwall.0.desc=Коробочная бумажная стена
 tile.paperwall.1.desc=Разделённая бумажная стена
 tile.paperwall.2.desc=Скрещенная бумажная стена
@@ -1146,7 +1146,7 @@ tile.paperwall.7.desc=Обычная бумажная стена
 tile.paperwall.8.desc=Двереобразная бумажная стена
 
 #Woolen Clay
-tile.woolen_clay.name=Шерстяная глина
+tile.chisel.woolen_clay.name=Шерстяная глина
 tile.woolenClay.0.desc=Белая шерстяная глина
 tile.woolenClay.1.desc=Оранжевая шерстяная глина
 tile.woolenClay.2.desc=Сиреневая шерстяная глина
@@ -1165,7 +1165,7 @@ tile.woolenClay.14.desc=Красная шерстяная глина
 tile.woolenClay.15.desc=Чёрная шерстяная глина
 
 #Colored Sand
-tile.colored_sand.name=Цветной песок
+tile.chisel.colored_sand.name=Цветной песок
 tile.coloredSand.0.desc=Белый цветной песок
 tile.coloredSand.1.desc=Оранжевый цветной песок
 tile.coloredSand.2.desc=Сиреневый цветной песок
@@ -1184,7 +1184,7 @@ tile.coloredSand.14.desc=Красный цветной песок
 tile.coloredSand.15.desc=Чёрный цветной песок
 
 #Laboratory Block
-tile.laboratoryblock.name=Лабораторный блок
+tile.chisel.laboratoryblock.name=Лабораторный блок
 tile.laboratory.0.desc=Настенная панель
 tile.laboratory.1.desc=Точечная панель
 tile.laboratory.2.desc=Эмалированная стена
