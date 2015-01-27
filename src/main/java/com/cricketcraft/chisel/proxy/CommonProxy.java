@@ -12,7 +12,7 @@ public class CommonProxy {
 
 	public void registerTileEntities() {
 		GameRegistry.registerTileEntity(TileEntityAutoChisel.class, "autoChisel");
-		GameRegistry.registerTileEntity(TileEntityPresent.class, "tile.present.present");
+		GameRegistry.registerTileEntity(TileEntityPresent.class, "tile.chisel.present");
 	}
 
 	public void preInit() {

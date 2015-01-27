@@ -255,7 +255,7 @@ public class CarvableHelper {
 	}
 
 	public void registerAll(Block block, String name) {
-		register(block, name, ItemCarvable.class);
+		registerAll(block, name, ItemCarvable.class);
 	}
 
 	public void registerBlock(Block block, String name) {
@@ -267,7 +267,7 @@ public class CarvableHelper {
 		GameRegistry.registerBlock(block, cl, name);
 	}
 
-	public void register(Block block, String name, Class<? extends ItemCarvable> cl) {
+	public void registerAll(Block block, String name, Class<? extends ItemCarvable> cl) {
 		registerBlock(block, name, cl);
 		registerVariations(name, block);
 	}
