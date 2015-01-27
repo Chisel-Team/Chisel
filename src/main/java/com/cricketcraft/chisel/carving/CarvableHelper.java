@@ -263,7 +263,7 @@ public class CarvableHelper {
 	}
 
 	void registerBlock(Block block, String name, Class<? extends ItemCarvable> cl) {
-		block.setBlockName(name);
+		block.setBlockName("chisel." + name);
 		GameRegistry.registerBlock(block, cl, name);
 	}
 

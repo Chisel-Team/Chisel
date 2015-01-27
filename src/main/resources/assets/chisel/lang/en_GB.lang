@@ -12,7 +12,7 @@ tile.carpet.7.desc=Dark Grey Carpet
 tile.carpet.8.desc=Grey Carpet
 
 #Woollen Clay
-tile.woolen_clay.name=Woollen Clay
+tile.chisel.woolen_clay.name=Woollen Clay
 tile.woolenClay.0.desc=White Woollen Clay
 tile.woolenClay.1.desc=Orange Woollen Clay
 tile.woolenClay.2.desc=Magenta Woollen Clay

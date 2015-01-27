@@ -78,7 +78,6 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.*;
 
@@ -103,6 +102,20 @@ public enum Features {
 			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 2, 1);
 			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 3, 2);
 			Carving.chisel.registerOre("AESkyStone", "AESkyStone");
+		}
+	},
+
+	ALUMINUM {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+					.setResistance(10F);
+			copper.carverHelper.addVariation("tile.aluminum.0.desc", 0, "metals/aluminum/caution");
+			copper.carverHelper.addVariation("tile.aluminum.1.desc", 1, "metals/aluminum/crate");
+			copper.carverHelper.addVariation("tile.aluminum.2.desc", 2, "metals/aluminum/thermal");
+			copper.carverHelper.registerAll(copper, "aluminumblock");
+			Carving.chisel.registerOre("aluminumblock", "blockAluminum");
 		}
 	},
 
@@ -296,6 +309,20 @@ public enum Features {
 			brickCustom.carverHelper.addVariation("tile.brickCustom.6.desc", 6, "brickCustom/yellow");
 			brickCustom.carverHelper.registerAll(brickCustom, "brickCustom");
 			Carving.chisel.registerOre("brickCustom", "brickCustom");
+		}
+	},
+
+	BRONZE {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+					.setResistance(10F);
+			copper.carverHelper.addVariation("tile.bronze.0.desc", 0, "metals/bronze/caution");
+			copper.carverHelper.addVariation("tile.bronze.1.desc", 1, "metals/bronze/crate");
+			copper.carverHelper.addVariation("tile.bronze.2.desc", 2, "metals/bronze/thermal");
+			copper.carverHelper.registerAll(copper, "bronzeblock");
+			Carving.chisel.registerOre("bronzeblock", "blockBronze");
 		}
 	},
 
@@ -529,7 +556,12 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addGroup(new CarvingGroup("copperblock"));
+			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+					.setResistance(10F);
+			copper.carverHelper.addVariation("tile.copper.0.desc", 0, "metals/copper/caution");
+			copper.carverHelper.addVariation("tile.copper.1.desc", 1, "metals/copper/crate");
+			copper.carverHelper.addVariation("tile.copper.2.desc", 2, "metals/copper/thermal");
+			copper.carverHelper.registerAll(copper, "copperblock");
 			Carving.chisel.registerOre("copperblock", "blockCopper");
 		}
 	},
@@ -1213,6 +1245,20 @@ public enum Features {
 		@Override
 		void addRecipes() {
 			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.lavastone, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.lava_bucket, 1));
+		}
+	},
+
+	LEAD {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+					.setResistance(10F);
+			copper.carverHelper.addVariation("tile.lead.0.desc", 0, "metals/lead/caution");
+			copper.carverHelper.addVariation("tile.lead.1.desc", 1, "metals/lead/crate");
+			copper.carverHelper.addVariation("tile.lead.2.desc", 2, "metals/lead/thermal");
+			copper.carverHelper.registerAll(copper, "leadblock");
+			Carving.chisel.registerOre("leadblock", "blockLead");
 		}
 	},
 
@@ -1999,6 +2045,20 @@ public enum Features {
 		}
 	},
 
+	SILVER {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+					.setResistance(10F);
+			copper.carverHelper.addVariation("tile.silver.0.desc", 0, "metals/silver/caution");
+			copper.carverHelper.addVariation("tile.silver.1.desc", 1, "metals/silver/crate");
+			copper.carverHelper.addVariation("tile.silver.2.desc", 2, "metals/silver/thermal");
+			copper.carverHelper.registerAll(copper, "silverblock");
+			Carving.chisel.registerOre("silverblock", "blockSilver");
+		}
+	},
+
 	SMASHING_ROCK {
 
 		@Override
@@ -2019,7 +2079,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockSnakestone sand_snakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/sandsnake/").setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setBlockName("snakestoneSand");
+			BlockSnakestone sand_snakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/sandsnake/").setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setBlockName("chisel.snakestoneSand");
 			GameRegistry.registerBlock(sand_snakestone, ItemCarvable.class, "sand_snakestone");
 			// TODO- eat me!
 			// LanguageRegistry.addName(new ItemStack(sandSnakestone, 1, 1),
@@ -2036,7 +2096,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockSnakestone stone_snakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/snake/").setBlockName("snakestoneStone").setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
+			BlockSnakestone stone_snakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/snake/").setBlockName("chisel.snakestoneStone").setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
 			GameRegistry.registerBlock(stone_snakestone, ItemCarvable.class, "stone_snakestone");
 			// LanguageRegistry.addName(new ItemStack(snakestone, 1, 1),
 			// "Stone snake block head");
@@ -2052,13 +2112,27 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockSnakestoneObsidian obsidian_snakestone = (BlockSnakestoneObsidian) new BlockSnakestoneObsidian("Chisel:snakestone/obsidian/").setBlockName("obsidianSnakestone").setHardness(50.0F)
+			BlockSnakestoneObsidian obsidian_snakestone = (BlockSnakestoneObsidian) new BlockSnakestoneObsidian("Chisel:snakestone/obsidian/").setBlockName("chisel.obsidianSnakestone").setHardness(50.0F)
 					.setResistance(2000.0F);
 			GameRegistry.registerBlock(obsidian_snakestone, ItemCarvable.class, "obsidian_snakestone");
 			Carving.chisel.addVariation("obsidian", obsidian_snakestone, 1, 16);
 			Carving.chisel.addVariation("obsidian", obsidian_snakestone, 13, 17);
 			// Carving.chisel.registerOre("obsidianSnakestone",
 			// "obsidianSnakestone");
+		}
+	},
+
+	STEEL {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+					.setResistance(10F);
+			copper.carverHelper.addVariation("tile.steel.0.desc", 0, "metals/steel/caution");
+			copper.carverHelper.addVariation("tile.steel.1.desc", 1, "metals/steel/crate");
+			copper.carverHelper.addVariation("tile.steel.2.desc", 2, "metals/steel/thermal");
+			copper.carverHelper.registerAll(copper, "steelblock");
+			Carving.chisel.registerOre("steelblock", "blockSteel");
 		}
 	},
 
@@ -2079,18 +2153,18 @@ public enum Features {
 					Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
 				}
 			}
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.4.desc", 4, "stonebrick/smallbricks");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.5.desc", 5, "stonebrick/largebricks");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.6.desc", 6, "stonebrick/smallchaotic");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.7.desc", 7, "stonebrick/chaoticbricks");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.8.desc", 8, "stonebrick/chaotic");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.9.desc", 9, "stonebrick/fancy");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.10.desc", 10, "stonebrick/ornate");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.11.desc", 11, "stonebrick/largeornate");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.12.desc", 12, "stonebrick/panel-hard");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.13.desc", 13, "stonebrick/sunken");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.14.desc", 14, "stonebrick/ornatepanel");
-			stonebricksmooth.carverHelper.addVariation("tile.stoneBrick.15.desc", 15, "stonebrick/poison");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.4.desc", 4, "stonebrick/smallbricks");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.5.desc", 5, "stonebrick/largebricks");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.6.desc", 6, "stonebrick/smallchaotic");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.7.desc", 7, "stonebrick/chaoticbricks");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.8.desc", 8, "stonebrick/chaotic");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.9.desc", 9, "stonebrick/fancy");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.10.desc", 10, "stonebrick/ornate");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.11.desc", 11, "stonebrick/largeornate");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.12.desc", 12, "stonebrick/panel-hard");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.13.desc", 13, "stonebrick/sunken");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.14.desc", 14, "stonebrick/ornatepanel");
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.15.desc", 15, "stonebrick/poison");
 			stonebricksmooth.carverHelper.registerAll(stonebricksmooth, "stonebricksmooth");
 			Carving.chisel.registerOre("stonebricksmooth", "stonebricksmooth");
 		}
@@ -2184,6 +2258,7 @@ public enum Features {
 	},
 
 	TEMPLE_BLOCK_MOSSY {
+
 		@Override
 		void addBlocks() {
 			BlockCarvable mossy_templeblock = (BlockCarvable) new BlockEldritch().setHardness(2.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setResistance(10F)
@@ -2208,6 +2283,20 @@ public enum Features {
 			mossy_templeblock.carverHelper.registerAll(mossy_templeblock, "mossy_templeblock");
 			Carving.chisel.registerOre("mossy_templeblock", "mossy_templeblock");
 		};
+	},
+
+	TIN {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+					.setResistance(10F);
+			copper.carverHelper.addVariation("tile.tin.0.desc", 0, "metals/tin/caution");
+			copper.carverHelper.addVariation("tile.tin.1.desc", 1, "metals/tin/crate");
+			copper.carverHelper.addVariation("tile.tin.2.desc", 2, "metals/tin/thermal");
+			copper.carverHelper.registerAll(copper, "tinblock");
+			Carving.chisel.registerOre("tinblock", "blockTin");
+		}
 	},
 
 	/**
@@ -2263,9 +2352,9 @@ public enum Features {
 			thaumium.carverHelper.addVariation("tile.thaumium.0.desc", 0, "thaumium/ornate");
 			thaumium.carverHelper.addVariation("tile.thaumium.1.desc", 1, "thaumium/totem");
 			thaumium.carverHelper.addVariation("tile.thaumium.2.desc", 2, "thaumium/thaumiumBigBricks");
-            thaumium.carverHelper.addVariation("tile.thaumium.3.desc", 3, "thaumium/small");
-            thaumium.carverHelper.addVariation("tile.thaumium.4.desc", 4, "thaumium/lattice");
-            thaumium.carverHelper.addVariation("tile.thaumium.5.desc", 5, "thaumium/planks");
+			thaumium.carverHelper.addVariation("tile.thaumium.3.desc", 3, "thaumium/small");
+			thaumium.carverHelper.addVariation("tile.thaumium.4.desc", 4, "thaumium/lattice");
+			thaumium.carverHelper.addVariation("tile.thaumium.5.desc", 5, "thaumium/planks");
 			thaumium.carverHelper.registerAll(thaumium, "thaumium");
 			Carving.chisel.registerOre("thaumium", "thaumium");
 		}
@@ -2321,6 +2410,20 @@ public enum Features {
 		@Override
 		void addRecipes() {
 			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.tyrian, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.stone, 1), 'X', new ItemStack(Items.iron_ingot, 1));
+		}
+	},
+
+	URANIUM /* Whose ranium? */{
+
+		@Override
+		void addBlocks() {
+			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+					.setResistance(10F);
+			copper.carverHelper.addVariation("tile.uranium.0.desc", 0, "metals/uranium/caution");
+			copper.carverHelper.addVariation("tile.uranium.1.desc", 1, "metals/uranium/crate");
+			copper.carverHelper.addVariation("tile.uranium.2.desc", 2, "metals/uranium/thermal");
+			copper.carverHelper.registerAll(copper, "uraniumblock");
+			Carving.chisel.registerOre("uraniumblock", "blockUranium");
 		}
 	},
 

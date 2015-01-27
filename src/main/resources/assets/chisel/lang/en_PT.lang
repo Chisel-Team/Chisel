@@ -38,7 +38,7 @@ tile.leaves.11.desc=Christmas Balls
 tile.leaves.12.desc=Christmas Lights
 
 #Waterstone
-tile.waterstone.name=Waterstone
+tile.chisel.waterstone.name=Waterstone
 tile.waterstone.0.desc=Waterstone Bricks
 tile.waterstone.1.desc=Kraken Black Waterstone
 tile.waterstone.2.desc=Waterstone Tiles
@@ -48,7 +48,7 @@ tile.waterstone.5.desc=Water Panel
 tile.waterstone.6.desc=Ornate Water Panel
 
 #Hex Plating
-tile.hexPlating.name=Hex Plating
+tile.chisel.hexPlating.name=Hex Plating
 tile.hexPlating.0.desc=Kraken Black Plating
 tile.hexPlating.1.desc=Ocean Blue Plating
 tile.hexPlating.2.desc=Brown Plating
@@ -67,7 +67,7 @@ tile.hexPlating.14.desc=Yellow Plating
 tile.hexPlating.15.desc=Gray Plating
 
 #Grimstone
-tile.grimstone.name=Grimstone
+tile.chisel.grimstone.name=Grimstone
 tile.grimstone.0.desc=Grimstone
 tile.grimstone.1.desc=Smooth Grimstone
 tile.grimstone.2.desc=Mysterious Grimstone symbol
@@ -86,7 +86,7 @@ tile.grimstone.13.desc=Grimstone plate
 #Chisel 1
 
 #Cobblestone Blocks
-tile.cobblestone.name=Cobblestone
+tile.chisel.cobblestone.name=Cobblestone
 tile.cobblestone.0.desc=Aligned Cobblestone Bricks
 tile.cobblestone.1.desc=Detailed Cobblestone Bricks
 tile.cobblestone.2.desc=Small Cobblestone Bricks
@@ -104,10 +104,10 @@ tile.cobblestone.13.desc=Cobblestone wit' Light Panel
 tile.cobblestone.14.desc=Cobblestone wit' Dark Panel
 
 #Sandstone Blocks
-tile.sandstone.name=Sandstone
+tile.chisel.sandstone.name=Sandstone
 
 #Marble Blocks
-tile.marble.name=Marble
+tile.chisel.marble.name=Marble
 tile.marble.0.desc=Raw Marble
 tile.marble.1.desc=Marble Brick
 tile.marble.2.desc=Classic Marble Panel
@@ -126,7 +126,7 @@ tile.marble.14.desc=Swaggy Marble Tiles
 tile.marble.15.desc=Marble Blocks
 
 #Marble Slabs
-tile.marble_slab.name=Marble Slab
+tile.chisel.marble_slab.name=Marble Slab
 tile.marbleSlab.0.desc=Raw Marble Slab
 tile.marbleSlab.1.desc=Marble Brick Slab
 tile.marbleSlab.2.desc=Classic Marble Panel Slab
@@ -145,7 +145,7 @@ tile.marbleSlab.14.desc=Swaggy Marble Tiled Slab
 tile.marbleSlab.15.desc=Marble Blocks Slab
 
 #Marble Pillars (old)
-tile.marble_pillar.name=Marble Pillar
+tile.chisel.marble_pillar.name=Marble Pillar
 tile.marblePillarOld.0.desc=Marble Pillar
 tile.marblePillarOld.1.desc=Marble Pillar Capstone
 tile.marblePillarOld.2.desc=Marble Pillar Base
@@ -182,7 +182,7 @@ tile.marblePillar.14.desc=Carved Pillar Capstone
 tile.marblePillar.15.desc=Ornamental Pillar Capstone
 
 #Marble Slabs (old)
-tile.marble_pillar_slab.name=Marble Pillar Slab
+tile.chisel.marble_pillar_slab.name=Marble Pillar Slab
 tile.marblePillarSlabOld.0.desc=Marble Pillar Slab
 tile.marblePillarSlabOld.1.desc=Marble Pllar Capstone Slab
 tile.marblePillarSlabOld.2.desc=Marble Pillar Base Slab
@@ -221,14 +221,14 @@ tile.marblePillarSlab.15.desc=Ornamental Pillar Capstone Slab
 #Marble Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
 #Sorry!  It was the only way!
-tile.marble_stairs.0.name=Marble Stairs
-tile.marble_stairs.1.name=Marble Stairs
-tile.marble_stairs.2.name=Marble Stairs
-tile.marble_stairs.3.name=Marble Stairs
-tile.marble_stairs.4.name=Marble Stairs
-tile.marble_stairs.5.name=Marble Stairs
-tile.marble_stairs.6.name=Marble Stairs
-tile.marble_stairs.7.name=Marble Stairs
+tile.chisel.marble_stairs.0.name=Marble Stairs
+tile.chisel.marble_stairs.1.name=Marble Stairs
+tile.chisel.marble_stairs.2.name=Marble Stairs
+tile.chisel.marble_stairs.3.name=Marble Stairs
+tile.chisel.marble_stairs.4.name=Marble Stairs
+tile.chisel.marble_stairs.5.name=Marble Stairs
+tile.chisel.marble_stairs.6.name=Marble Stairs
+tile.chisel.marble_stairs.7.name=Marble Stairs
 
 #These are bugged.... so sad :,(
 tile.marbleStairs.0.desc=Raw Marble Stairs
@@ -249,7 +249,7 @@ tile.marbleStairs.14.desc=Swaggy Marble Tiled Stairs
 tile.marbleStairs.15.desc=Marble Block Stairs
 
 #Limestone
-tile.limestone.name=Limestone
+tile.chisel.limestone.name=Limestone
 tile.limestone.0.desc=Limestone
 tile.limestone.1.desc=Small Limestone Tiles
 tile.limestone.2.desc=French Limestone Tiles
@@ -268,7 +268,7 @@ tile.limestone.14.desc=Limestone wit' Light Panel
 tile.limestone.15.desc=Limestone wit' Dark Panel
 
 #Limestone Slabs
-tile.limestone_slab.name=Limestone Slab
+tile.chisel.limestone_slab.name=Limestone Slab
 tile.limestoneSlab.0.desc=Limestone Slab
 tile.limestoneSlab.1.desc=Small Limestone Tiled Slab
 tile.limestoneSlab.2.desc=French Limestone Tiled Slab
@@ -289,14 +289,14 @@ tile.limestoneSlab.15.desc=Limestone Slab wit' Dark Panel
 #Limestone Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
 #Sorry!  It was the only way!
-tile.limestone_stairs.0.name=Limestone Stairs
-tile.limestone_stairs.1.name=Limestone Stairs
-tile.limestone_stairs.2.name=Limestone Stairs
-tile.limestone_stairs.3.name=Limestone Stairs
-tile.limestone_stairs.4.name=Limestone Stairs
-tile.limestone_stairs.5.name=Limestone Stairs
-tile.limestone_stairs.6.name=Limestone Stairs
-tile.limestone_stairs.7.name=Limestone Stairs
+tile.chisel.limestone_stairs.0.name=Limestone Stairs
+tile.chisel.limestone_stairs.1.name=Limestone Stairs
+tile.chisel.limestone_stairs.2.name=Limestone Stairs
+tile.chisel.limestone_stairs.3.name=Limestone Stairs
+tile.chisel.limestone_stairs.4.name=Limestone Stairs
+tile.chisel.limestone_stairs.5.name=Limestone Stairs
+tile.chisel.limestone_stairs.6.name=Limestone Stairs
+tile.chisel.limestone_stairs.7.name=Limestone Stairs
 
 #These are bugged.... so sad :,(
 tile.limestoneStairs.0.desc=Limestone Stairs
@@ -317,7 +317,7 @@ tile.limestoneStairs.14.desc=Limestone Stairs wit' Light Panel
 tile.limestoneStairs.15.desc=Limestone Stairs wit' Dark Panel
 
 #Factory Blocks
-tile.factoryblock.name=Factory Block
+tile.chisel.factoryblock.name=Factory Block
 tile.factory.0.desc=Rusty Metal Plate wit' Dotted Pattern
 tile.factory.1.desc=Rusty Metal Plate
 tile.factory.2.desc=Very Rusty Metal Plate
@@ -336,7 +336,7 @@ tile.factory.14.desc=Rusty Metal Plates
 tile.factory.15.desc=WeaBlood Red Metal Column
 
 #Diamond blocks
-tile.diamond_block.name=Diamond Block
+tile.chisel.diamond_block.name=Diamond Block
 tile.diamond.1.desc=Embossed Diamond Block
 tile.diamond.2.desc=Diamond Block wit' Panel
 tile.diamond.3.desc=Diamond Cells
@@ -351,12 +351,12 @@ tile.diamond.11.desc=Zelda Diamond Block
 tile.diamond.12.desc=Diamond Block wit' Ornate Layer
 
 #Snakestone
-tile.snakestoneSand.name=Sand Snakestone
-tile.snakestoneStone.name=Stone Snakestone
-tile.obsidianSnakestone.name=Obsidian Snakestone
+tile.chisel.snakestoneSand.name=Sand Snakestone
+tile.chisel.snakestoneStone.name=Stone Snakestone
+tile.chisel.obsidianSnakestone.name=Obsidian Snakestone
 
 #Glass blocks
-tile.glass.name=Glass
+tile.chisel.glass.name=Glass
 tile.glass.1.desc=Bubble Glass
 tile.glass.2.desc=Chinese Glass
 tile.glass.3.desc=Japanese(?) Glass
@@ -374,7 +374,7 @@ tile.glass.14.desc=Thin Grid Glass
 tile.glass.15.desc=Modern Iron Fence
 
 #Sandstone
-tile.sandstone.name=Sandstone
+tile.chisel.sandstone.name=Sandstone
 tile.sandstone.3.desc=Faded Sandstone
 tile.sandstone.4.desc=Sandstone Pillar
 tile.sandstone.5.desc=Sandstone Pillar Capstone
@@ -390,11 +390,11 @@ tile.sandstone.14.desc=Sandstone Mosaic
 tile.sandstone.15.desc=Stacked Sandstone Tiles
 
 #Sandstone scribbles
-tile.sandstone_scribbles.name=Sandstone Scribbles
+tile.chisel.sandstone_scribbles.name=Sandstone Scribbles
 tile.sandstoneScribbles.desc=Sandstone Scribbles
 
 #Concrete
-tile.concrete.name=Concrete
+tile.chisel.concrete.name=Concrete
 tile.concrete.0.desc=Concrete
 tile.concrete.1.desc=Concrete Block
 tile.concrete.2.desc=Concrete Double Slab
@@ -408,10 +408,10 @@ tile.concrete.9.desc=Partly WeatheBlood Red Concrete Block
 tile.concrete.10.desc=Asphalt
 
 #Road Line
-tile.roadLine.name=Road Lines
+tile.chisel.roadLine.name=Road Lines
 
 #Iron Blocks
-tile.iron_block.name=Iron Block
+tile.chisel.iron_block.name=Iron Block
 tile.iron.1.desc=Large Iron Ingots
 tile.iron.2.desc=Small Iron Ingots
 tile.iron.3.desc=Iron Gears
@@ -429,7 +429,7 @@ tile.iron.14.desc=Iron Vents
 tile.iron.15.desc=Simple Iron Block
 
 #Booty Blocks
-tile.Booty_block.name=Booty Block
+tile.chisel.Booty_block.name=Booty Block
 tile.Booty.1.desc=Large Bootyen Ingots
 tile.Booty.2.desc=Small Bootyen Ingots
 tile.Booty.3.desc=Bootyen Bricks
@@ -446,7 +446,7 @@ tile.Booty.13.desc=Bootyen Star in Obsidian
 tile.Booty.14.desc=Simple Booty Block
 
 #Glowstone
-tile.glowstone.name=Glowstone
+tile.chisel.glowstone.name=Glowstone
 tile.lightstone.1.desc=Cobble Glowstone Block
 tile.lightstone.2.desc=Corroded Glowstone Blocks
 tile.lightstone.3.desc=Glowstone Blocks wit' Glass
@@ -464,7 +464,7 @@ tile.lightstone.14.desc=Glowstone Bismuth
 tile.lightstone.15.desc=Glowstone Bismuth Panel
 
 #Lapis blocks
-tile.lapis_block.name=Lapis Block
+tile.chisel.lapis_block.name=Lapis Block
 tile.lapis.1.desc=Chunky Lapis Block
 tile.lapis.2.desc=Dark Lapis Block
 tile.lapis.3.desc=Zelda Lapis Block
@@ -475,7 +475,7 @@ tile.lapis.7.desc=Smooth Lapis
 tile.lapis.8.desc=Lapis wit' Ornate Layer
 
 #Emerald Blocks
-tile.emerald_block.name=Emerald Block
+tile.chisel.emerald_block.name=Emerald Block
 tile.emerald.1.desc=Emerald Panel
 tile.emerald.2.desc=Classic emerald Panel
 tile.emerald.3.desc=Smooth Emerald
@@ -489,7 +489,7 @@ tile.emerald.10.desc=Small Ornate Emerald Blocks
 tile.emerald.11.desc=Ornate Emerald Block
 
 #Nether Brick
-tile.nether_brick.name=Nether Brick
+tile.chisel.nether_brick.name=Nether Brick
 tile.netherBrick.1.desc=Ocean Blue Nether Brick
 tile.netherBrick.2.desc=SpatteBlood Red Nether Brick
 tile.netherBrick.3.desc=Nether Brick made of Guts
@@ -507,7 +507,7 @@ tile.netherBrick.14.desc=Blood Red Nether Brick
 tile.netherBrick.15.desc=Small Blood Red Nether Brick
 
 #Netherrack
-tile.netherrack.name=Netherrack
+tile.chisel.netherrack.name=Netherrack
 tile.hellrock.1.desc=Nethergravel wit' Blood
 tile.hellrock.2.desc=Netherrack wit' Blood
 tile.hellrock.3.desc=Darker Netherrack wit' Blood
@@ -524,7 +524,7 @@ tile.hellrock.13.desc=Dark Blood Red Netherrack
 tile.hellrock.14.desc=Netherrack wit' Flowing Lava
 
 #Mossy Stone
-tile.mossy_cobblestone.name=Mossy Cobblestone
+tile.chisel.mossy_cobblestone.name=Mossy Cobblestone
 tile.stoneMoss.1.desc=Aligned Mossy Cobblestone Bricks
 tile.stoneMoss.2.desc=Detailed Mossy Cobblestone Bricks
 tile.stoneMoss.3.desc=Small Mossy Cobblestone Bricks
@@ -542,22 +542,22 @@ tile.stoneMoss.14.desc=Mossy Cobblestone wit' Light Panel
 tile.stoneMoss.15.desc=Mossy Cobblestone wit' Dark Panel
 
 #Stone Bricks
-tile.stoneBrick.name=Stone Bricks
-tile.stoneBrick.4.desc=Small Stone Bricks
-tile.stoneBrick.5.desc=Wide Stone Bricks
-tile.stoneBrick.6.desc=Small DisordeBlood Red Stone Bricks
-tile.stoneBrick.7.desc=DisordeBlood Red Stone Bricks
-tile.stoneBrick.8.desc=DisordeBlood Red Stone Panels
-tile.stoneBrick.9.desc=Stone Bricks in a Swaggy Arrangement
-tile.stoneBrick.10.desc=Ornate Stone Brick tiles
-tile.stoneBrick.11.desc=Large Ornate Stone Brick Tiles
-tile.stoneBrick.12.desc=Stone Panel
-tile.stoneBrick.13.desc=Sunken Stone Panel
-tile.stoneBrick.14.desc=Ornate Stone Panel
-tile.stoneBrick.15.desc=Poison Stone Brick
+tile.chisel.stonebricksmooth.name=Stone Bricks
+tile.stonebricksmooth.4.desc=Small Stone Bricks
+tile.stonebricksmooth.5.desc=Wide Stone Bricks
+tile.stonebricksmooth.6.desc=Small DisordeBlood Red Stone Bricks
+tile.stonebricksmooth.7.desc=DisordeBlood Red Stone Bricks
+tile.stonebricksmooth.8.desc=DisordeBlood Red Stone Panels
+tile.stonebricksmooth.9.desc=Stone Bricks in a Swaggy Arrangement
+tile.stonebricksmooth.10.desc=Ornate Stone Brick tiles
+tile.stonebricksmooth.11.desc=Large Ornate Stone Brick Tiles
+tile.stonebricksmooth.12.desc=Stone Panel
+tile.stonebricksmooth.13.desc=Sunken Stone Panel
+tile.stonebricksmooth.14.desc=Ornate Stone Panel
+tile.stonebricksmooth.15.desc=Poison Stone Brick
 
 #Dirt
-tile.dirt.name=Dirt
+tile.chisel.dirt.name=Dirt
 tile.dirt.0.desc=Dirt Bricks in Disarray
 tile.dirt.1.desc=Dirt Bricks Imitating Nether Brick Design
 tile.dirt.2.desc=Dirt Bricks
@@ -573,7 +573,7 @@ tile.dirt.11.desc=Dirt Layers
 tile.dirt.12.desc=Crumbling Dirt
 
 #Ice
-tile.ice.name=Ice
+tile.chisel.ice.name=Ice
 tile.ice.1.desc=Rough Ice Block
 tile.ice.2.desc=Cobble-ice
 tile.ice.3.desc=Large Rough Ice Bricks
@@ -591,7 +591,7 @@ tile.ice.14.desc=Ice Bismuth Block
 tile.ice.15.desc=Ice Poison Block
 
 #Ice Pillars
-tile.ice_pillar.name=Ice Pillar
+tile.chisel.ice_pillar.name=Ice Pillar
 tile.icePillar.0.desc=Ice Pillar
 tile.icePillar.1.desc=Ice Pillar Capstone
 tile.icePillar.2.desc=Ice Pillar Base
@@ -610,15 +610,15 @@ tile.icePillar.14.desc=Greek Ice Pillar Ornate Base
 tile.icePillar.15.desc=Plain Ice Pillar Ornate Base
 
 #Ice Stairs
-tile.ice_stairs.name=Ice Stairs
-tile.ice_stairs.0.name=Ice Stairs
-tile.ice_stairs.1.name=Ice Stairs
-tile.ice_stairs.2.name=Ice Stairs
-tile.ice_stairs.3.name=Ice Stairs
-tile.ice_stairs.4.name=Ice Stairs
-tile.ice_stairs.5.name=Ice Stairs
-tile.ice_stairs.6.name=Ice Stairs
-tile.ice_stairs.7.name=Ice Stairs
+tile.chisel.ice_stairs.name=Ice Stairs
+tile.chisel.ice_stairs.0.name=Ice Stairs
+tile.chisel.ice_stairs.1.name=Ice Stairs
+tile.chisel.ice_stairs.2.name=Ice Stairs
+tile.chisel.ice_stairs.3.name=Ice Stairs
+tile.chisel.ice_stairs.4.name=Ice Stairs
+tile.chisel.ice_stairs.5.name=Ice Stairs
+tile.chisel.ice_stairs.6.name=Ice Stairs
+tile.chisel.ice_stairs.7.name=Ice Stairs
 tile.iceStairs.0.desc=Ice Stairs
 tile.iceStairs.1.desc=Rough Ice Stairs
 tile.iceStairs.2.desc=Cobble-Ice Stairs
@@ -637,7 +637,7 @@ tile.iceStairs.14.desc=Ice Bismuth Stairs
 tile.iceStairs.15.desc=Ice Poison Stairs
 
 #Obsidian
-tile.obsidian.name=Obsidian
+tile.chisel.obsidian.name=Obsidian
 tile.obsidian.1.desc=Large Obsidian Pillar
 tile.obsidian.2.desc=Obsidian Pillar
 tile.obsidian.3.desc=Chiseled Obsidian
@@ -655,17 +655,17 @@ tile.obsidian.14.desc=Light Obsidian Blocks wit' Greek Decor
 tile.obsidian.15.desc=Small Obsidian Blocks inside an Oak Wood Crate
 
 #Wood
-tile.oak_planks.name=Oak Wood
-tile.birch_planks.name=Birch Wood
-tile.spruce_planks.name=Spruce Wood
-tile.jungle_planks.name=Jungle Wood
-tile.dark_oak_planks.name=Dark Oak Wood
-tile.acacia_planks.name=Acacia Wood
+tile.chisel.oak_planks.name=Oak Wood
+tile.chisel.birch_planks.name=Birch Wood
+tile.chisel.spruce_planks.name=Spruce Wood
+tile.chisel.jungle_planks.name=Jungle Wood
+tile.chisel.dark_oak_planks.name=Dark Oak Wood
+tile.chisel.acacia_planks.name=Acacia Wood
 
 #Remember to do the descriptions.
 
 #Iron Fence
-tile.iron_bars.name=Iron Bars
+tile.chisel.iron_bars.name=Iron Bars
 tile.iron_bars.1.desc=Iron Bars wit'out Frame
 tile.iron_bars.2.desc=Menacing Iron Bars
 tile.iron_bars.3.desc=Iron Cage Bars
@@ -677,7 +677,7 @@ tile.iron_bars.8.desc=Vertical Iron Bars
 tile.iron_bars.9.desc=Iron spikes
 
 #Glass Panes
-tile.glass_pane.name=Glass Pane
+tile.chisel.glass_pane.name=Glass Pane
 tile.glass_pane.1.desc=Bubble Glass Pane
 tile.glass_pane.2.desc=Borderless Glass Pane
 tile.glass_pane.3.desc=Screen Pane
@@ -688,7 +688,7 @@ tile.glass_pane.14.desc=Japanese Glass Pane
 tile.glass_pane.15.desc=Ornate Japanese Glass Pane
 
 #Magic Dust block
-tile.redstone_block.name=Magic Dust Block
+tile.chisel.redstone_block.name=Magic Dust Block
 tile.redstone_block.1.desc=Smooth Magic Dust
 tile.redstone_block.2.desc=Large Magic Dust Block
 tile.redstone_block.3.desc=Small Magic Dust Block
@@ -706,7 +706,7 @@ tile.redstone_block.14.desc=Magic Dust Skulls
 tile.redstone_block.15.desc=Magic Dust Zelda Block
 
 #Holystone
-tile.holystone.name=Holystone
+tile.chisel.holystone.name=Holystone
 tile.holystone.0.desc=Holystone
 tile.holystone.1.desc=Smooth Holystone
 tile.holystone.2.desc=Mysterious Holystone Symbol
@@ -723,7 +723,7 @@ tile.holystone.12.desc=Smooth Holystone Plate
 tile.holystone.13.desc=Holystone Plate
 
 #Lavastone
-tile.lavastone.name=Lavastone
+tile.chisel.lavastone.name=Lavastone
 tile.lavastone.0.desc=Lavastone
 tile.lavastone.1.desc=Kraken Black Lavastone
 tile.lavastone.2.desc=Lavastone Tiles
@@ -734,7 +734,7 @@ tile.lavastone.6.desc=Ornate Lava Panel
 tile.lavastone.7.desc=Dark Lavastone
 
 #Carpet
-tile.carpet_block.name=Sailcloth
+tile.chisel.carpet_block.name=Sailcloth
 tile.carpet_block.0.desc=White Sailcloth Block
 tile.carpet_block.1.desc=Orange Sailcloth Block
 tile.carpet_block.2.desc=Magenta Sailcloth Block
@@ -753,7 +753,7 @@ tile.carpet_block.14.desc=Blood Red Sailcloth Block
 tile.carpet_block.15.desc=Kraken Black Sailcloth Block
 
 #Carpet floor
-tile.carpet.name=Floor Carpet
+tile.chisel.carpet.name=Floor Carpet
 tile.carpet.0.desc=White Carpet
 tile.carpet.1.desc=Orange Carpet
 tile.carpet.2.desc=Magenta Carpet
@@ -772,7 +772,7 @@ tile.carpet.14.desc=Blood Blood Red Carpet
 tile.carpet.15.desc=Kraken Black Carpet
 
 #Bookshelf
-tile.bookshelf.name=Bookshelf
+tile.chisel.bookshelf.name=Bookshelf
 tile.bookshelf.1.desc=Bookshelf wit' rainbow coloured books
 tile.bookshelf.2.desc=Necromancer Novice's Bookshelf
 tile.bookshelf.3.desc=Necromancer's Bookshelf
@@ -783,7 +783,7 @@ tile.bookshelf.7.desc=Bookshelf filled to the brim wit' boring pastel books
 tile.bookshelf.8.desc=Historian's Bookshelf
 
 #Tyrian
-tile.tyrian.name=Tyrian
+tile.chisel.tyrian.name=Tyrian
 tile.tyrian.0.desc=Futuristic Armor Plating Block
 tile.tyrian.1.desc=Bleak Futuristic Armor Plating Block
 tile.tyrian.2.desc=Purple Futuristic Armor Plating Block
@@ -802,7 +802,7 @@ tile.tyrian.14.desc=Kraken Black Futuristic Armor Plating Block wit' an opening
 tile.tyrian.15.desc=Futuristic armor plating wit' shining metal bits
 
 #Temple
-tile.templeblock.name=Temple Block
+tile.chisel.templeblock.name=Temple Block
 tile.templeblock.0.desc=Temple Cobblestone
 tile.templeblock.1.desc=Oranate Temple Block
 tile.templeblock.2.desc=Temple Plate
@@ -821,7 +821,7 @@ tile.templeblock.14.desc=Light Temple Tiles
 tile.templeblock.15.desc=Small Light Temple Tiles
 
 #Temple Mossy
-tile.mossy_templeblock.name=Mossy Temple Block
+tile.chisel.mossy_templeblock.name=Mossy Temple Block
 tile.mossy_templeblock.0.desc=Mossy Temple Cobblestone
 tile.mossy_templeblock.1.desc=Oranate Mossy Temple Block
 tile.mossy_templeblock.2.desc=Mossy Temple Plate
@@ -840,47 +840,47 @@ tile.mossy_templeblock.14.desc=Light Mossy Temple Tiles
 tile.mossy_templeblock.15.desc=Small Light Mossy  Temple Tiles
 
 #Cloud
-tile.cloud.name=Cloud
+tile.chisel.cloud.name=Cloud
 tile.cloud.0.desc=Cloud block
 
 #Stained glass T.T
-tile.stained_glass_white.name=Stained Glass
-tile.stained_glass_orange.name=Stained Glass
-tile.stained_glass_magenta.name=Stained Glass
-tile.stained_glass_lightOcean Blue.name=Stained Glass
-tile.stained_glass_yellow.name=Stained Glass
-tile.stained_glass_lime.name=Stained Glass
-tile.stained_glass_pink.name=Stained Glass
-tile.stained_glass_gray.name=Stained Glass
-tile.stained_glass_lightgray.name=Stained Glass
-tile.stained_glass_cyan.name=Stained Glass
-tile.stained_glass_purple.name=Stained Glass
-tile.stained_glass_Ocean Blue.name=Stained Glass
-tile.stained_glass_brown.name=Stained Glass
-tile.stained_glass_green.name=Stained Glass
-tile.stained_glass_Blood Red.name=Stained Glass
-tile.stained_glass_Kraken Black.name=Stained Glass
+tile.chisel.stained_glass_white.name=Stained Glass
+tile.chisel.stained_glass_orange.name=Stained Glass
+tile.chisel.stained_glass_magenta.name=Stained Glass
+tile.chisel.stained_glass_lightOcean Blue.name=Stained Glass
+tile.chisel.stained_glass_yellow.name=Stained Glass
+tile.chisel.stained_glass_lime.name=Stained Glass
+tile.chisel.stained_glass_pink.name=Stained Glass
+tile.chisel.stained_glass_gray.name=Stained Glass
+tile.chisel.stained_glass_lightgray.name=Stained Glass
+tile.chisel.stained_glass_cyan.name=Stained Glass
+tile.chisel.stained_glass_purple.name=Stained Glass
+tile.chisel.stained_glass_Ocean Blue.name=Stained Glass
+tile.chisel.stained_glass_brown.name=Stained Glass
+tile.chisel.stained_glass_green.name=Stained Glass
+tile.chisel.stained_glass_Blood Red.name=Stained Glass
+tile.chisel.stained_glass_Kraken Black.name=Stained Glass
 
 #Stained GlassPane T.T
-tile.stained_glass_pane_white.name=Stained Glass Pane
-tile.stained_glass_pane_orange.name=Stained Glass Pane
-tile.stained_glass_pane_magenta.name=Stained Glass Pane
-tile.stained_glass_pane_lightOcean Blue.name=Stained Glass Pane
-tile.stained_glass_pane_yellow.name=Stained Glass Pane
-tile.stained_glass_pane_lime.name=Stained Glass Pane
-tile.stained_glass_pane_pink.name=Stained Glass Pane
-tile.stained_glass_pane_gray.name=Stained Glass Pane
-tile.stained_glass_pane_lightgray.name=Stained Glass Pane
-tile.stained_glass_pane_cyan.name=Stained Glass Pane
-tile.stained_glass_pane_purple.name=Stained Glass Pane
-tile.stained_glass_pane_Ocean Blue.name=Stained Glass Pane
-tile.stained_glass_pane_brown.name=Stained Glass Pane
-tile.stained_glass_pane_green.name=Stained Glass Pane
-tile.stained_glass_pane_Blood Red.name=Stained Glass Pane
-tile.stained_glass_pane_Kraken Black.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_white.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_orange.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_magenta.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_lightOcean Blue.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_yellow.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_lime.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_pink.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_gray.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_lightgray.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_cyan.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_purple.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_Ocean Blue.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_brown.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_green.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_Blood Red.name=Stained Glass Pane
+tile.chisel.stained_glass_pane_Kraken Black.name=Stained Glass Pane
 
 #Fantasy block
-tile.fantasyblock.name=Purpled Fantasy Block
+tile.chisel.fantasyblock.name=Purpled Fantasy Block
 tile.fantasyblock.0.desc=Purpled Fantasy Brick
 tile.fantasyblock.1.desc=Purpled Faded Fantasy Brick
 tile.fantasyblock.2.desc=Purpled Worn Fantasy Brick
@@ -899,7 +899,7 @@ tile.fantasyblock.14.desc=Purpled Fantasy Bricks in disarray
 tile.fantasyblock.15.desc=Purpled Worn Fantasy Bricks
 
 #Fantasy block 2
-tile.fantasyblock2.name=Fantasy Block
+tile.chisel.fantasyblock2.name=Fantasy Block
 tile.fantasyblock2.0.desc=Fantasy Brick
 tile.fantasyblock2.1.desc=Faded Fantasy Brick
 tile.fantasyblock2.2.desc=Worn Fantasy Brick
@@ -918,7 +918,7 @@ tile.fantasyblock2.14.desc=Fantasy Bricks in disarray
 tile.fantasyblock2.15.desc=Worn Fantasy Bricks
 
 #Wall fer punchin' thru
-tile.paperwall.name=Paperwall
+tile.chisel.paperwall.name=Paperwall
 tile.paperwall.0.desc=Boxed Paperwall
 tile.paperwall.1.desc=Middle Striked Paperwall
 tile.paperwall.2.desc=Crossed Paperwall
@@ -930,7 +930,7 @@ tile.paperwall.7.desc=Plain Paperwall
 tile.paperwall.8.desc=Door Shaped Paperwall
 
 #Woolen Clay
-tile.woolen_clay.name=Sailcloth Clay
+tile.chisel.woolen_clay.name=Sailcloth Clay
 tile.woolenClay.0.desc=White Sailcloth Clay
 tile.woolenClay.1.desc=Orange Sailcloth Clay
 tile.woolenClay.2.desc=Magenta Sailcloth Clay
@@ -949,7 +949,7 @@ tile.woolenClay.14.desc=Blood Red Sailcloth Clay
 tile.woolenClay.15.desc=Kraken Black Sailcloth Clay
 
 #Laboratory Block
-tile.laboratoryblock.name=Laboratory Block
+tile.chisel.laboratoryblock.name=Laboratory Block
 tile.laboratory.0.desc=Wall Panel
 tile.laboratory.1.desc=Dotted Panel
 tile.laboratory.2.desc=Enamelled Wall
