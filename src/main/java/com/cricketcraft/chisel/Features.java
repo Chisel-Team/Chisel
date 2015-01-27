@@ -1,6 +1,5 @@
 package com.cricketcraft.chisel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -66,6 +65,7 @@ import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselItems;
 import com.cricketcraft.chisel.init.ChiselTabs;
 import com.cricketcraft.chisel.item.ItemBallOMoss;
+import com.cricketcraft.chisel.item.ItemBlockPresent;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.item.ItemCarvableSlab;
 import com.cricketcraft.chisel.item.ItemCloudInABottle;
@@ -1310,7 +1310,7 @@ public enum Features {
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.13.desc", 13, "limestone/terrain-pistonback-lightfour");
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.14.desc", 14, "limestone/terrain-pistonback-lightmarker");
 			limestone_slab.carverHelper.addVariation("tile.limestoneSlab.15.desc", 15, "limestone/terrain-pistonback-lightpanel");
-			limestone_slab.carverHelper.register(limestone_slab, "limestone_slab", ItemCarvableSlab.class);
+			limestone_slab.carverHelper.registerAll(limestone_slab, "limestone_slab", ItemCarvableSlab.class);
 			registerSlabTop(limestone_slab, limestone_slab.top);
 			Carving.chisel.registerOre("limestone_slab", "limestone_slab");
 
@@ -1388,7 +1388,7 @@ public enum Features {
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.13.desc", 13, "marbleslab/marble-arranged-bricks");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.14.desc", 14, "marbleslab/marble-fancy-bricks");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.15.desc", 15, "marbleslab/marble-blocks");
-			marble_slab.carverHelper.register(marble_slab, "marble_slab", ItemCarvableSlab.class);
+			marble_slab.carverHelper.registerAll(marble_slab, "marble_slab", ItemCarvableSlab.class);
 			registerSlabTop(marble_slab, marble_slab.top);
 			Carving.chisel.registerOre("marble_slab", "marble_slab");
 
@@ -1507,7 +1507,7 @@ public enum Features {
 				marble_pillar_slab.carverHelper.addVariation("tile.marblePillarSlab.14.desc", 14, "marblepillarslab/carved");
 				marble_pillar_slab.carverHelper.addVariation("tile.marblePillarSlab.15.desc", 15, "marblepillarslab/ornamental");
 			}
-			marble_pillar_slab.carverHelper.register(marble_pillar_slab, "marble_pillar_slab", ItemCarvableSlab.class);
+			marble_pillar_slab.carverHelper.registerAll(marble_pillar_slab, "marble_pillar_slab", ItemCarvableSlab.class);
 			registerSlabTop(marble_pillar_slab, marble_pillar_slab.top);
 		}
 
@@ -1724,17 +1724,17 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			for (int x = 0; x < 16; x++) {
-				present[x] = (BlockPresent) new BlockPresent(x).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(2.0F).setResistance(10.0F).setBlockName("present");
-				GameRegistry.registerBlock(present[x], "chest" + x);
-				Carving.chisel.addVariation("present", present[x], 0, (x + 1));
+			BlockPresent present = (BlockPresent) new BlockPresent().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(2.0F).setResistance(10.0F).setBlockName("present");
+			for (int i = 0; i < 16; i++) {
+				present.carverHelper.addVariation("tile.present.desc." + i, i, Blocks.chest);
 			}
+			present.carverHelper.registerAll(present, "present", ItemBlockPresent.class);
 			Carving.chisel.registerOre("present", "chest");
 		}
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ChiselBlocks.present[meta]), new ItemStack(Blocks.chest, 1), dyeOres[meta]));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ChiselBlocks.present, 1, meta), new ItemStack(Blocks.chest, 1), dyeOres[meta]));
 		}
 
 		@Override

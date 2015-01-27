@@ -4,6 +4,7 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.network.message.MessageAutoChisel;
 import com.cricketcraft.chisel.network.message.MessageChiselMode;
 import com.cricketcraft.chisel.network.message.MessageChiselSound;
+import com.cricketcraft.chisel.network.message.MessagePresentConnect;
 import com.cricketcraft.chisel.network.message.MessageSlotUpdate;
 
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -20,5 +21,6 @@ public class PacketHandler {
 		INSTANCE.registerMessage(MessageSlotUpdate.Handler.class, MessageSlotUpdate.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageAutoChisel.Handler.class, MessageAutoChisel.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageChiselMode.Handler.class, MessageChiselMode.class, id++, Side.SERVER);
+		INSTANCE.registerMessage(MessagePresentConnect.Handler.class, MessagePresentConnect.class, id++, Side.CLIENT);
 	}
 }

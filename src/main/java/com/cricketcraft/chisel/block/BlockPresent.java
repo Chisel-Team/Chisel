@@ -1,19 +1,16 @@
 package com.cricketcraft.chisel.block;
 
-import java.util.Iterator;
-import java.util.Random;
+import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockChest;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.Entity;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
@@ -21,46 +18,42 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.inventory.InventoryLargePresent;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockPresent extends BlockChest implements ICarvable {
+public class BlockPresent extends Block implements ICarvable {
 
-	private final Random random = new Random();
-	private int type;
 	public CarvableHelper carverHelper;
+	
+	private float minX, minY, minZ, maxX, maxY, maxZ;
 
-	public BlockPresent(int type) {
-		super(1);
-		this.type = type;
+	public BlockPresent() {
+		super(Material.wood);
 		carverHelper = new CarvableHelper();
-		setBlockBounds(0.0625F, 0.0F, 0.0625F, 0.9375F, 0875F, 0.9365F);
+		minX = 0.0625F;
+		minZ = 0.0625F;
+		maxX = 0.9375F;
+		maxY = 0.875F;
+		maxZ = 0.9375F;
+		setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 
-	public String getKindOfChest(int type) {
+	public String getModelTexture(int type) {
 		return "textures/blocks/present/presentChest" + type;
 	}
-
-	private static boolean isCatSittingOnMe(World world, int x, int y, int z) {
-		Iterator iterator = world.getEntitiesWithinAABB(EntityOcelot.class, AxisAlignedBB.getBoundingBox(x, y + 1, z, x + 1, y + 2, z + 1)).iterator();
-		EntityOcelot ocelot;
-
-		do {
-			if (!iterator.hasNext()) {
-				return false;
-			}
-
-			Entity entity = (Entity) iterator.next();
-			ocelot = (EntityOcelot) entity;
-		} while (!ocelot.isSitting());
-
-		return true;
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+		for (int i = 0; i < 16; i++) {
+			list.add(new ItemStack(item, 1, i));
+		}
 	}
 
 	@Override
@@ -79,96 +72,23 @@ public class BlockPresent extends BlockChest implements ICarvable {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
-		Block front = world.getBlock(x, y, z - 1);
-		Block back = world.getBlock(x, y, z + 1);
-		Block left = world.getBlock(x - 1, y, z);
-		Block right = world.getBlock(x + 1, y, z);
-		byte metadata = 0;
-		int rot = MathHelper.floor_double((entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-		if (rot == 0) {
-			metadata = 2;
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
+		super.onBlockPlacedBy(world, x, y, z, player, stack);
+		int heading = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+		TileEntityPresent te = (TileEntityPresent) world.getTileEntity(x, y, z);
+		world.setBlockMetadataWithNotify(x, y, z, heading, 3);
+		te.findConnections();
+		if (te.isConnected()) {
+			TileEntityPresent other = te.getConnection();
+			world.setBlockMetadataWithNotify(other.xCoord, other.yCoord, other.zCoord, heading, 3);
 		}
-
-		if (rot == 1) {
-			metadata = 5;
-		}
-
-		if (rot == 2) {
-			metadata = 3;
-		}
-
-		if (rot == 3) {
-			metadata = 4;
-		}
-
-		if (front != this && back != this && left != this && right != this) {
-			world.setBlockMetadataWithNotify(x, y, z, metadata, 3);
-		} else {
-			if ((front == this || back == this) && (metadata == 4 || metadata == 5)) {
-				if (front == this) {
-					world.setBlockMetadataWithNotify(x, y, z - 1, metadata, 3);
-				} else {
-					world.setBlockMetadataWithNotify(x, y, z + 1, metadata, 3);
-				}
-
-				world.setBlockMetadataWithNotify(x, y, z, metadata, 3);
-			}
-
-			if ((left == this || right == this) && (metadata == 2 || metadata == 3)) {
-				if (left == this) {
-					world.setBlockMetadataWithNotify(x - 1, y, z, metadata, 3);
-				} else {
-					world.setBlockMetadataWithNotify(x + 1, y, z, metadata, 3);
-				}
-
-				world.setBlockMetadataWithNotify(x, y, z, metadata, 3);
-			}
-		}
-	}
-
-	@Override
-	public boolean canPlaceBlockAt(World world, int x, int y, int z) {
-		int l = 0;
-
-		if (world.getBlock(x - 1, y, z) == this) {
-			++l;
-		}
-
-		if (world.getBlock(x + 1, y, z) == this) {
-			++l;
-		}
-
-		if (world.getBlock(x, y, z - 1) == this) {
-			++l;
-		}
-
-		if (world.getBlock(x, y, z + 1) == this) {
-			++l;
-		}
-
-		return l > 1 ? false : (areSurroundingBlocksMe(world, x, y - 1, z) ? false : (areSurroundingBlocksMe(world, x, y + 1, z) ? false : (areSurroundingBlocksMe(world, x, y, z - 1) ? false
-				: !areSurroundingBlocksMe(world, x, y, z + 1))));
-	}
-
-	private boolean areSurroundingBlocksMe(World world, int x, int y, int z) {
-		return world.getBlock(x, y, z) != this ? false : (world.getBlock(x - 1, y, z) == this ? true : (world.getBlock(x + 1, y, z) == this ? true : (world.getBlock(x, y, z - 1) == this ? true
-				: world.getBlock(x, y, z + 1) == this)));
-	}
-
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighbor) {
-		super.onNeighborBlockChange(world, x, y, z, neighbor);
-		TileEntityPresent tileEntityPresent = (TileEntityPresent) world.getTileEntity(x, y, z);
-
-		if (tileEntityPresent != null) {
-			tileEntityPresent.updateContainingBlockInfo();
-		}
+		te.setType(stack.getItemDamage());
+		world.markBlockForUpdate(x, y, z);
 	}
 
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block present, int meta) {
+
 		TileEntityPresent tileEntityPresent = (TileEntityPresent) world.getTileEntity(x, y, z);
 
 		if (tileEntityPresent != null) {
@@ -176,28 +96,7 @@ public class BlockPresent extends BlockChest implements ICarvable {
 				ItemStack itemStack = tileEntityPresent.getStackInSlot(c);
 
 				if (itemStack != null) {
-					float f = random.nextFloat() * 0.8F + 0.1F;
-					float f1 = random.nextFloat() * 0.8F + 0.1F;
-					EntityItem entityItem;
-
-					for (float f2 = random.nextFloat() * 0.8F + 0.1F; itemStack.stackSize > 0; world.spawnEntityInWorld(entityItem)) {
-						int stack = random.nextInt(21) + 10;
-
-						if (stack > itemStack.stackSize) {
-							stack = itemStack.stackSize;
-						}
-
-						itemStack.stackSize -= stack;
-						entityItem = new EntityItem(world, x + f, y + f1, z + f2, new ItemStack(itemStack.getItem(), stack, itemStack.getItemDamage()));
-						float motion = 0.05F;
-						entityItem.motionX = random.nextGaussian() * motion;
-						entityItem.motionY = random.nextGaussian() * motion + 0.2F;
-						entityItem.motionZ = random.nextGaussian() * motion;
-
-						if (itemStack.hasTagCompound()) {
-							entityItem.getEntityItem().setTagCompound((NBTTagCompound) itemStack.getTagCompound().copy());
-						}
-					}
+					dropBlockAsItem(world, x, y, z, itemStack);
 				}
 			}
 
@@ -208,23 +107,75 @@ public class BlockPresent extends BlockChest implements ICarvable {
 	}
 
 	@Override
-	public TileEntity createNewTileEntity(World world, int par2) {
-		return new TileEntityPresent(type);
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int hitX, float hitY, float hitZ, float p_149727_9_) {
+		if (!world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN)) {
+			player.openGui(Chisel.instance, 2, world, x, y, z);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
-	public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int direction) {
-		if (!canProvidePower()) {
-			return 0;
+	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
+		return getBoundingBox((TileEntityPresent) world.getTileEntity(x, y, z));
+	}
+
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+		return getBoundingBox((TileEntityPresent) world.getTileEntity(x, y, z));
+	}
+
+	public AxisAlignedBB getBoundingBox(TileEntityPresent me) {
+		if (me == null) {
+			return AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
+		}
+		int x = me.xCoord, y = me.yCoord, z = me.zCoord;
+		if (me.isConnected()) {
+			ForgeDirection dir = me.getConnectionDir();
+			if (dir != ForgeDirection.NORTH && (!me.isParent() || dir == ForgeDirection.SOUTH)) {
+				return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x + maxX + dir.offsetX, y + maxY, z + maxZ + dir.offsetZ);
+			} else {
+				return AxisAlignedBB.getBoundingBox(x + dir.offsetX + minX, y + minY, z + dir.offsetZ + minZ, x + maxX, y + maxY, z + maxZ);
+			}
+		}
+		return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x + maxX, y + maxY, z + maxZ);
+	}
+
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
+	{
+		TileEntityPresent te = (TileEntityPresent) world.getTileEntity(x, y, z);
+		if (!te.isConnected()) {
+			setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 0.875F, 0.9365F);
 		} else {
-			int players = ((TileEntityPresent) world.getTileEntity(x, y, z)).numPlayersUsing;
-			return MathHelper.clamp_int(players, 0, 15);
+			ForgeDirection dir = te.getConnectionDir();
+			switch (dir) {
+			case EAST:
+				setBlockBounds(0.0625F, 0, 0.0625F, 1, 0.875F, 0.9365F);
+				break;
+			case NORTH:
+				setBlockBounds(0.0625F, 0, 0, 0.9375F, 0.875F, 0.9365F);
+				break;
+			case SOUTH:
+				setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 0.875F, 1);
+				break;
+			case WEST:
+				setBlockBounds(0, 0, 0.0625F, 0.9375F, 0.875F, 0.9365F);
+				break;
+			default:
+				setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 0.875F, 0.9365F);
+				break;
+			}
 		}
 	}
+    
+	@Override
+	public boolean hasTileEntity(int metadata) {
+		return true;
+	}
 
 	@Override
-	public int isProvidingStrongPower(IBlockAccess world, int x, int y, int z, int strength) {
-		return strength == 1 ? isProvidingWeakPower(world, x, y, z, strength) : 0;
+	public TileEntity createTileEntity(World world, int metadata) {
+		return new TileEntityPresent();
 	}
 
 	@Override
@@ -234,7 +185,11 @@ public class BlockPresent extends BlockChest implements ICarvable {
 
 	@Override
 	public int getComparatorInputOverride(World world, int x, int y, int z, int strength) {
-		return Container.calcRedstoneFromInventory(getInventory(world, x, y, z));
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (te instanceof TileEntityPresent) {
+			return Container.calcRedstoneFromInventory((TileEntityPresent) te);
+		}
+		return 0;
 	}
 
 	@Override
@@ -243,47 +198,10 @@ public class BlockPresent extends BlockChest implements ICarvable {
 		this.blockIcon = register.registerIcon("planks_oak");
 	}
 
-	public IInventory getInventory(World world, int x, int y, int z) {
-		Object object = world.getTileEntity(x, y, z);
-
-		if (object == null) {
-			return null;
-		} else if (world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN)) {
-			return null;
-		} else if (isCatSittingOnMe(world, x, y, z)) {
-			return null;
-		} else if (world.getBlock(x - 1, y, z) == this && (world.isSideSolid(x - 1, y + 1, z, ForgeDirection.DOWN) || isCatSittingOnMe(world, x, y - 1, z))) {
-			return null;
-		} else if (world.getBlock(x + 1, y, z) == this && (world.isSideSolid(x + 1, y + 1, z, ForgeDirection.DOWN) || isCatSittingOnMe(world, x, y + 1, z))) {
-			return null;
-		} else if (world.getBlock(x, y, z - 1) == this && (world.isSideSolid(x, y + 1, z - 1, ForgeDirection.DOWN) || isCatSittingOnMe(world, x, y, z - 1))) {
-			return null;
-		} else if (world.getBlock(x, y, z + 1) == this && (world.isSideSolid(x, y + 1, z + 1, ForgeDirection.DOWN) || isCatSittingOnMe(world, x, y, z + 1))) {
-			return null;
-		} else {
-			if (world.getBlock(x - 1, y, z) == this) {
-				object = new InventoryLargePresent("container.chestDouble", (TileEntityPresent) world.getTileEntity(x - 1, y, z), (IInventory) object);
-			}
-
-			if (world.getBlock(x + 1, y, z) == this) {
-				object = new InventoryLargePresent("container.chestDouble", (TileEntityPresent) world.getTileEntity(x + 1, y, z), (IInventory) object);
-			}
-
-			if (world.getBlock(x, y, z - 1) == this) {
-				object = new InventoryLargePresent("container.chestDouble", (TileEntityPresent) world.getTileEntity(x, y, z - 1), (IInventory) object);
-			}
-
-			if (world.getBlock(x, y, z + 1) == this) {
-				object = new InventoryLargePresent("container.chestDouble", (TileEntityPresent) world.getTileEntity(x, y, z + 1), (IInventory) object);
-			}
-
-			return (IInventory) object;
-		}
-	}
-
 	@Override
 	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
-		return carverHelper.getVariation(metadata);
+		TileEntity te = world.getTileEntity(x, y, z);
+		return te instanceof TileEntityPresent ? carverHelper.getVariation(((TileEntityPresent) te).getType()) : carverHelper.getVariation(metadata);
 	}
 
 	@Override

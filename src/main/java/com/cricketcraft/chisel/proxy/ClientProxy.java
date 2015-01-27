@@ -23,7 +23,6 @@ import com.cricketcraft.chisel.client.render.BlockSnakeStoneRenderer;
 import com.cricketcraft.chisel.client.render.BlockTexturedOreRenderer;
 import com.cricketcraft.chisel.client.render.RenderStandardBlockNoSunlight;
 import com.cricketcraft.chisel.client.render.item.ItemChiselRenderer;
-import com.cricketcraft.chisel.client.render.item.ItemPresentRenderer;
 import com.cricketcraft.chisel.client.render.tile.RenderAutoChisel;
 import com.cricketcraft.chisel.client.render.tile.RenderPresent;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
@@ -65,11 +64,9 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.autoChisel), rac);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAutoChisel.class, rac);
 
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPresent.class, new RenderPresent());
-
-		for (int x = 0; x < 16; x++) {
-			MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.present[x]), new ItemPresentRenderer(x));
-		}
+		RenderPresent rp = new RenderPresent();
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.present), rp);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPresent.class, rp);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityCloudInABottle.class, new RenderSnowball(ChiselItems.cloudinabottle));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBallOMoss.class, new RenderSnowball(ChiselItems.ballomoss));

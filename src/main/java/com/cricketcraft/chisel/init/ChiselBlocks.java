@@ -113,6 +113,8 @@ public final class ChiselBlocks {
 	public static final BlockCarvable bloodRune = null;
 	public static final BlockCarvable bloodBrick = null;
 
+	public static final BlockPresent present = null;
+
 	// Arrays can't be final because of how @ObjectHolder works
 	public static BlockCarvableStairs[] marbleStairs = new BlockCarvableStairs[8];
 	public static BlockCarvableStairs[] limestoneStairs = new BlockCarvableStairs[8];
@@ -122,8 +124,6 @@ public final class ChiselBlocks {
 	public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
 
 	public static BlockCarvable[] planks = new BlockCarvable[6];
-
-	public static BlockPresent[] present = new BlockPresent[16];
 
 	public static BlockCarvablePumpkin[] pumpkin = new BlockCarvablePumpkin[16];
 	public static BlockCarvablePumpkin[] jackolantern = new BlockCarvablePumpkin[16];
