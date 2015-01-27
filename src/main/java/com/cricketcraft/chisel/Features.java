@@ -78,6 +78,7 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.*;
 
@@ -728,7 +729,7 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.futura, 8, 0), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustRedstone"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.futura, 8, 0), "SBS", "BGB", "SBS", 'S', "stone", 'G', "dustRedstone", 'B', new ItemStack(Blocks.stonebrick, 1)));
 		}
 	},
 
