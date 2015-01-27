@@ -18,7 +18,7 @@ buildscript {
 }
 
 apply plugin: 'forge'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'curseforge'
 
 import org.ajoberstar.grgit.Grgit
@@ -109,6 +109,27 @@ artifacts {
     archives apiJar
 }
 
+publishing {
+    tasks.publish.dependsOn 'build'
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact deobfJar
+            artifact sourcesJar
+            artifact apiJar
+        }
+    }
+
+    repositories {
+        String prop = dev ? "chisel_dev_mavendir" : "chisel_mavendir"
+        if (project.hasProperty(prop)) {
+            maven { url project.getProperty(prop) }
+        }
+    }
+}
+
+println('Changelog:\n' + getChangelogText())
+
 String getChangelogText() {
     def changelogFile = new File('changelog')
     String str = ''
@@ -119,7 +140,9 @@ String getChangelogText() {
             return
         }
         if (it.size() > 1) {
-            str += "$it" + (lineCount == 0 ? '\n\n' : '\n')
+            def temp = "$it" + (lineCount == 0 ? '\n\n' : '\n')
+            str += (it.startsWith('-') ? '' : '\n') + "$temp"
+            lineCount++
             return
         } else {
             done = true
@@ -139,5 +162,6 @@ curse {
     projectId = project.projectId
     changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
     releaseType = 'release'
+    displayName = "Chisel 2 - ${mod_version}"
     additionalArtifact deobfJar, sourcesJar, apiJar
 }

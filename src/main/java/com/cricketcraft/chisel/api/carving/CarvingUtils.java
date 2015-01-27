@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel.api.carving;
 
+import java.lang.reflect.Field;
+
 import net.minecraft.item.ItemStack;
 
 public class CarvingUtils {
@@ -26,5 +28,31 @@ public class CarvingUtils {
 	 */
 	public static ItemStack getStack(ICarvingVariation variation) {
 		return new ItemStack(variation.getBlock(), 1, variation.getItemMeta());
+	}
+
+	private static Field _chisel;
+	private static boolean errored = false;
+	private static final String CARVING_CLASS = "com.cricketcraft.chisel.carving.Carving";
+
+	/**
+	 * @return The instance of the chisel carving registry from the chisel mod.
+	 *         <p>
+	 *         If chisel is not installed or some other error occurs this will return null.
+	 */
+	public static ICarvingRegistry getChiselRegistry() {
+		if (errored) {
+			return null;
+		}
+
+		try {
+			if (_chisel == null) {
+				_chisel = Class.forName(CARVING_CLASS).getDeclaredField("chisel");
+			}
+			return (ICarvingRegistry) _chisel.get(null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			errored = true;
+			return getChiselRegistry();
+		}
 	}
 }

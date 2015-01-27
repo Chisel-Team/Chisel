@@ -229,7 +229,11 @@ public class BlockMarblePaneRenderer implements ISimpleBlockRenderingHandler {
 		if (iconPane == null || iconTop == null || iconSide == null)
 			return false;
 
-		paneRenderer.set(x, y, z, iconPane, iconTop, iconSide);
+		if (renderer.hasOverrideBlockTexture()) {
+			paneRenderer.set(x, y, z, renderer.overrideBlockTexture, renderer.overrideBlockTexture, renderer.overrideBlockTexture);
+		} else {
+			paneRenderer.set(x, y, z, iconPane, iconTop, iconSide);
+		}
 
 		boolean connectsNorth = block.canPaneConnectToBlock(world.getBlock(x, y, z - 1));
 		boolean connectsSouth = block.canPaneConnectToBlock(world.getBlock(x, y, z + 1));

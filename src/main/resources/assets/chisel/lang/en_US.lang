@@ -3,12 +3,12 @@
 # Item localizations
 item.chisel.chisel_iron.name=Chisel
 
-item.chisel.chisel.desc.0=Right-Click to open GUI
-item.chisel.chisel.desc.1=Left click to chisel blocks in world
-item.chisel.chisel.desc.2=Can target a block by leaving it in the inventory
+item.chisel.chisel.desc.gui=Right-Click to open GUI
+item.chisel.chisel.desc.lc1=Left click to chisel blocks in world
+item.chisel.chisel.desc.lc2=Can target a block by leaving it in the inventory
+item.chisel.chisel.desc.modes=Has multiple modes for chiseling.
 
 item.chisel.chisel_diamond.name=Diamond Chisel
-item.chisel.chisel_diamond.desc=Has multiple modes for chiseling. WIP.
 
 item.ballMoss.name=Ball O' Moss
 item.ballMoss.desc=Right-Click to throw. This will turn Cobblestone to Moss Stone on impact.
@@ -52,16 +52,19 @@ tile.antiBlock.gray.desc=Gray Anti Block
 tile.diorite.name=Diorite
 tile.diorite.0.desc=Generates in your world
 tile.diorite.1.desc=Polished Diorite
+tile.diorite.2.desc=Diorite Pillar
 
 #Andesite
 tile.andesite.name=Andesite
 tile.andesite.0.desc=Generates in your world
 tile.andesite.1.desc=Polished Andesite
+tile.andesite.2.desc=Andesite Pillar
 
 #Granite
 tile.granite.name=Granite
 tile.granite.0.desc=Generates in your world
 tile.granite.1.desc=Polished Granite
+tile.granite.2.desc=Granite Pillar
 
 #Auto Chisel
 tile.autoChisel.name=Auto Chisel
@@ -108,6 +111,7 @@ tile.warningSign.10.desc=Under Construction
 tile.warningSign.11.desc=Loud Sounds
 tile.warningSign.12.desc=No Entry
 tile.warningSign.13.desc=Cryogenic Freezing in progress
+tile.warningSign.14.desc=Oxygen Required
 
 #Energised Void Stone Blocks
 tile.voidstone2.name=Energised Voidstone
@@ -246,6 +250,7 @@ tile.brickCustom.1.desc=Large Bricks
 tile.brickCustom.2.desc=Mortarless Bricks
 tile.brickCustom.3.desc=Varied Bricks
 tile.brickCustom.5.desc=Aged Bricks
+tile.brickCustom.6.desc=Yellow Bricks
 
 #Chisel 1
 
@@ -760,22 +765,12 @@ tile.ice.15.desc=Ice Poison Block
 
 #Ice Pillars
 tile.ice_pillar.name=Ice Pillar
-tile.icePillar.0.desc=Ice Pillar
-tile.icePillar.1.desc=Ice Pillar Capstone
-tile.icePillar.2.desc=Ice Pillar Base
-tile.icePillar.3.desc=Small Ice Pillar
-tile.icePillar.4.desc=Carved Ice Pillar
-tile.icePillar.5.desc=Ornamental Ice Pillar
-tile.icePillar.6.desc=Greek Ice Pillar
-tile.icePillar.7.desc=Plain Ice Pillar
-tile.icePillar.8.desc=Greek Ice Pillar Capstone
-tile.icePillar.9.desc=Plain Ice Pillar Capstone
-tile.icePillar.10.desc=Greek Ice Pillar Base
-tile.icePillar.11.desc=Plain Ice Pillar Base
-tile.icePillar.12.desc=Greek Ice Pillar Ornate Capstone
-tile.icePillar.13.desc=Plain Ice Pillar Ornate Capstone
-tile.icePillar.14.desc=Greek Ice Pillar Ornate Base
-tile.icePillar.15.desc=Plain Ice Pillar Ornate Base
+tile.icePillar.0.desc=Plain Ice Pillar with Plain Capstone
+tile.icePillar.1.desc=Plain Ice Pillar with Greek Capstone
+tile.icePillar.2.desc=Greek Ice Pillar with Plain Capstone
+tile.icePillar.3.desc=Greek Ice Pillar with Greek Capstone
+tile.icePillar.4.desc=Carved Ice Pillar Capstone
+tile.icePillar.5.desc=Ornamental Ice Pillar Capstone
 
 #Ice Stairs
 tile.ice_stairs.name=Ice Stairs
@@ -824,22 +819,12 @@ tile.packedice.15.desc=Packed Ice Poison Block
 
 #Packed Ice Pillars
 tile.packedice_pillar.name=Packed Ice Pillar
-tile.packedicePillar.0.desc=Packed Ice Pillar
-tile.packedicePillar.1.desc=Packed Ice Pillar Capstone
-tile.packedicePillar.2.desc=Packed Ice Pillar Base
-tile.packedicePillar.3.desc=Small Packed Ice Pillar
-tile.packedicePillar.4.desc=Carved Packed Ice Pillar
-tile.packedicePillar.5.desc=Ornamental Packed Ice Pillar
-tile.packedicePillar.6.desc=Greek Packed Ice Pillar
-tile.packedicePillar.7.desc=Plain Packed Ice Pillar
-tile.packedicePillar.8.desc=Greek Packed Ice Pillar Capstone
-tile.packedicePillar.9.desc=Plain Packed Ice Pillar Capstone
-tile.packedicePillar.10.desc=Greek Packed Ice Pillar Base
-tile.packedicePillar.11.desc=Plain Packed Ice Pillar Base
-tile.packedicePillar.12.desc=Greek Packed Ice Pillar Ornate Capstone
-tile.packedicePillar.13.desc=Plain Packed Ice Pillar Ornate Capstone
-tile.packedicePillar.14.desc=Greek Packed Ice Pillar Ornate Base
-tile.packedicePillar.15.desc=Plain Packed Ice Pillar Ornate Base
+tile.packedice_pillar.0.desc=Plain Packed Ice Pillar with Plain Capstone
+tile.packedice_pillar.1.desc=Plain Packed Ice Pillar with Greek Capstone
+tile.packedice_pillar.2.desc=Greek Packed Ice Pillar with Plain Capstone
+tile.packedice_pillar.3.desc=Greek Packed Ice Pillar with Greek Capstone
+tile.packedice_pillar.4.desc=Carved Packed Ice Pillar Capstone
+tile.packedice_pillar.5.desc=Ornamental Packed Ice Pillar Capstone
 
 #Packed Ice Stairs
 tile.packedice_stairs.name=Packed Ice Stairs
@@ -1155,6 +1140,7 @@ tile.fantasyblock2.15.desc=Worn Fantasy Bricks in disarray
 
 #Paperwall
 tile.paperwall.name=Paperwall
+tile.paperwall_block.name=Paperwall Block
 tile.paperwall.0.desc=Boxed Paperwall
 tile.paperwall.1.desc=Middle Striked Paperwall
 tile.paperwall.2.desc=Crossed Paperwall
@@ -1234,3 +1220,8 @@ itemGroup.tabChisel=Chisel Items
 container.chisel=Chisel
 container.chisel.title=Carve blocks
 container.chisel.titleShort=Carve
+container.chisel.mode=Mode:
+container.chisel.mode.single=Single
+container.chisel.mode.panel=Panel
+container.chisel.mode.column=Column
+container.chisel.mode.row=Row

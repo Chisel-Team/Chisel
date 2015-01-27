@@ -7,6 +7,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.cricketcraft.chisel.api.carving.ICarvingRegistry;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
 import com.cricketcraft.chisel.utils.General;
@@ -18,7 +19,7 @@ public class ContainerChisel extends Container {
 	int currentIndex;
 	public ItemStack chisel;
 	public boolean finished;
-	public Carving carving;
+	public ICarvingRegistry carving;
 
 	public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv) {
 		inventory = inv;
@@ -128,7 +129,7 @@ public class ContainerChisel extends Container {
 
 	public void onChiselSlotChanged() {
 		ItemStack stack = playerInventory.mainInventory[currentIndex];
-		if (!stack.isItemEqual(chisel))
+		if (stack == null || !stack.isItemEqual(chisel))
 			finished = true;
 
 		if (finished)

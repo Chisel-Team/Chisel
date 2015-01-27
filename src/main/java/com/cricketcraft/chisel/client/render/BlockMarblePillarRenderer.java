@@ -48,15 +48,22 @@ public class BlockMarblePillarRenderer implements ISimpleBlockRenderingHandler {
 
 		int metadata = world.getBlockMetadata(x, y, z);
 
-		if (block.carverHelper.variations.get(metadata).kind != CarvableHelper.CTMV) {
-			block.sides[0] = block.carverHelper.getIcon(0, metadata);
-			block.sides[1] = block.carverHelper.getIcon(1, metadata);
-			block.sides[2] = block.carverHelper.getIcon(2, metadata);
-			block.sides[3] = block.carverHelper.getIcon(3, metadata);
-			block.sides[4] = block.carverHelper.getIcon(4, metadata);
-			block.sides[5] = block.carverHelper.getIcon(5, metadata);
+		//Probably not the best way to handle this...
+		if(metadata > block.carverHelper.variations.size())
+		{
+			metadata = block.carverHelper.variations.size() - 1;
+		}
+		else {
+			if (block.carverHelper.variations.get(metadata).kind != CarvableHelper.CTMV) {
+				block.sides[0] = block.carverHelper.getIcon(0, metadata);
+				block.sides[1] = block.carverHelper.getIcon(1, metadata);
+				block.sides[2] = block.carverHelper.getIcon(2, metadata);
+				block.sides[3] = block.carverHelper.getIcon(3, metadata);
+				block.sides[4] = block.carverHelper.getIcon(4, metadata);
+				block.sides[5] = block.carverHelper.getIcon(5, metadata);
 
-			return renderer.renderStandardBlock(block, x, y, z);
+				return renderer.renderStandardBlock(block, x, y, z);
+			}
 		}
 
 		boolean yp = connected(world, x, y + 1, z, block, metadata);

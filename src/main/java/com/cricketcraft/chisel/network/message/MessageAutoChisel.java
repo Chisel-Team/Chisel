@@ -18,16 +18,17 @@ public class MessageAutoChisel extends MessageCoords {
 	}
 
 	ItemStack base;
-	boolean playSound;
+	boolean playSound, breakChisel;
 	int chiseled;
 	
-	public MessageAutoChisel(TileEntityAutoChisel tile, int chiseled, boolean playSound) {
+	public MessageAutoChisel(TileEntityAutoChisel tile, int chiseled, boolean playSound, boolean breakChisel) {
 		super(tile);
 		this.base = tile.getStackInSlot(TileEntityAutoChisel.BASE);
 		if (base != null) {
 			base = base.copy();
 		}
 		this.playSound = playSound;
+		this.breakChisel = breakChisel;
 		this.chiseled = chiseled;
 	}
 	
@@ -35,6 +36,7 @@ public class MessageAutoChisel extends MessageCoords {
 	public void toBytes(ByteBuf buf) {
 		super.toBytes(buf);
 		buf.writeBoolean(playSound);
+		buf.writeBoolean(breakChisel);
 		buf.writeInt(chiseled);
 		ByteBufUtils.writeItemStack(buf, base);
 	}
@@ -43,6 +45,7 @@ public class MessageAutoChisel extends MessageCoords {
 	public void fromBytes(ByteBuf buf) {
 		super.fromBytes(buf);
 		this.playSound = buf.readBoolean();
+		this.breakChisel = buf.readBoolean();
 		this.chiseled = buf.readInt();
 		this.base = ByteBufUtils.readItemStack(buf);
 	}
@@ -53,7 +56,7 @@ public class MessageAutoChisel extends MessageCoords {
 
 			TileEntity te = message.getTileEntity(ctx);
 			if (te instanceof TileEntityAutoChisel) {
-				((TileEntityAutoChisel) te).doChiselAnim(message.base, message.chiseled, message.playSound);
+				((TileEntityAutoChisel) te).doChiselAnim(message.base, message.chiseled, message.playSound, message.breakChisel);
 			}
 			return null;
 		}

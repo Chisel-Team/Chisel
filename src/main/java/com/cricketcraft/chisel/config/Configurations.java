@@ -22,6 +22,7 @@ public class Configurations {
 	public static boolean chiselRecipe;
 	public static boolean enableFMP;
 	public static boolean chiselStoneToCobbleBricks;
+	public static boolean chiselBackToVanillaLeaves;
 
 	public static int marbleAmount;
 	public static int limestoneAmount;
@@ -39,11 +40,14 @@ public class Configurations {
 	public static int ironChiselMaxDamage;
 	public static int diamondChiselMaxDamage;
 	public static boolean ironChiselCanLeftClick;
-	
+	public static boolean ironChiselHasModes;
+	public static int ironChiselAttackDamage;
+	public static int diamondChiselAttackDamage;
+
 	public static boolean useRoadLineTool;
 	public static String getRoadLineTool;
 	public static int roadLineToolLevel;
-	
+
 	public static boolean refreshConfig() {
 
 		String category;
@@ -59,6 +63,7 @@ public class Configurations {
 		chiselRecipe = config.get(category, "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
 		enableFMP = config.get(category, "enableFMP", true, "Do you want to enable FMP").getBoolean(true);
 		chiselStoneToCobbleBricks = config.get(category, "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left clicking.").getBoolean(false);
+		chiselBackToVanillaLeaves = config.get(category, "chiselBackToVanillaLeaves", false, "If this is true, you can chisel from the chisel leaves back to vanilla ones. If it is false, you cannot.").getBoolean(false);
 
 		/* worldgen */
 		category = "worldgen";
@@ -78,19 +83,23 @@ public class Configurations {
 				.getBoolean(true);
 
 		/* chisel */
-
 		category = "chisel";
 		allowChiselDamage = config.get(category, "allowChiselDamage", true, "Should the chisel be damageable and take damage when it chisels something.").getBoolean();
 		ironChiselMaxDamage = config.get(category, "ironChiselMaxDamage", 500, "The max damage of the standard iron chisel. Default: 500.").getInt();
 		diamondChiselMaxDamage = config.get(category, "diamondChiselMaxDamage", 5000, "The max damage of the diamond chisel. Default: 5000").getInt();
 		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
-		
+		ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
+		ironChiselAttackDamage = config.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.").getInt();
+		diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
+
 		/* block */
 		category = "block";
 		useRoadLineTool = config.get(category, "useRoadLineTool", false, "Should the road line require a tool to break (If false, road lines can be broken in Adventure)").getBoolean();
-		getRoadLineTool = config.get(category, "getRoadLineTool","pickaxe","The tool that is able to break roadLines (requires useRoadLineTool to be true to take effect)").getString();
-		roadLineToolLevel = config.get(category, "roadLineToolLevel",0,"The lowest harvest level of the tool able to break the road lines (requires useRoadLineTool to be true to take effect) (0 = Wood/Gold, 1 = Stone, 2 = Iron, 3 = Diamond) Default: 0").getInt();
-		
+		getRoadLineTool = config.get(category, "getRoadLineTool", "pickaxe", "The tool that is able to break roadLines (requires useRoadLineTool to be true to take effect)").getString();
+		roadLineToolLevel = config.get(category, "roadLineToolLevel", 0,
+				"The lowest harvest level of the tool able to break the road lines (requires useRoadLineTool to be true to take effect) (0 = Wood/Gold, 1 = Stone, 2 = Iron, 3 = Diamond) Default: 0")
+				.getInt();
+
 		if (config.hasChanged()) {
 			config.save();
 		}
@@ -101,8 +110,8 @@ public class Configurations {
 		return config.get("features", featureName(feature), true).getBoolean(true) && refreshConfig();
 	}
 
-	// this makes the old camelCase names from the new CONSTANT_CASE names
-	private static String featureName(Features feature) {
+	/** Makes the old camelCase names from the new CONSTANT_CASE names */
+	public static String featureName(Features feature) {
 		String[] words = feature.name().toLowerCase(Locale.ENGLISH).split("_");
 		if (words.length == 1) {
 			return words[0];
