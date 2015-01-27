@@ -2107,7 +2107,6 @@ public enum Features {
 	},
 
 	TEMPLE_BLOCK_MOSSY {
-
 		@Override
 		void addBlocks() {
 			BlockCarvable mossy_templeblock = (BlockCarvable) new BlockEldritch().setHardness(2.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setResistance(10F)
@@ -2187,7 +2186,9 @@ public enum Features {
 			thaumium.carverHelper.addVariation("tile.thaumium.0.desc", 0, "thaumium/ornate");
 			thaumium.carverHelper.addVariation("tile.thaumium.1.desc", 1, "thaumium/totem");
 			thaumium.carverHelper.addVariation("tile.thaumium.2.desc", 2, "thaumium/thaumiumBigBricks");
-			thaumium.carverHelper.addVariation("tile.thaumium.3.desc", 3, "thaumium/small");
+            thaumium.carverHelper.addVariation("tile.thaumium.3.desc", 3, "thaumium/small");
+            thaumium.carverHelper.addVariation("tile.thaumium.4.desc", 4, "thaumium/lattice");
+            thaumium.carverHelper.addVariation("tile.thaumium.5.desc", 5, "thaumium/planks");
 			thaumium.carverHelper.registerAll(thaumium, "thaumium");
 			Carving.chisel.registerOre("thaumium", "thaumium");
 		}
