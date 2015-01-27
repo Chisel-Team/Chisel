@@ -2,9 +2,10 @@ package com.cricketcraft.chisel.network.message;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 
+import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.carving.CarvingVariation;
 import com.cricketcraft.chisel.client.GeneralChiselClient;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
 import com.cricketcraft.chisel.network.message.base.MessageCoords;
@@ -21,11 +22,13 @@ public class MessageChiselSound extends MessageCoords {
 
 	private int block;
 	private byte meta;
+	private boolean breakChisel;
 
-	public MessageChiselSound(int x, int y, int z, ICarvingVariation v) {
+	public MessageChiselSound(int x, int y, int z, ICarvingVariation v, boolean breakChisel) {
 		super(x, y, z);
 		this.block = Block.getIdFromBlock(v.getBlock());
 		this.meta = (byte) v.getBlockMeta();
+		this.breakChisel = breakChisel;
 	}
 
 	@Override
@@ -33,6 +36,7 @@ public class MessageChiselSound extends MessageCoords {
 		super.toBytes(buf);
 		buf.writeInt(block);
 		buf.writeByte(meta);
+		buf.writeBoolean(breakChisel);
 	}
 
 	@Override
@@ -40,6 +44,7 @@ public class MessageChiselSound extends MessageCoords {
 		super.fromBytes(buf);
 		block = buf.readInt();
 		meta = buf.readByte();
+		breakChisel = buf.readBoolean();
 	}
 
 	public static class Handler implements IMessageHandler<MessageChiselSound, IMessage> {
@@ -48,6 +53,10 @@ public class MessageChiselSound extends MessageCoords {
 		public IMessage onMessage(MessageChiselSound message, MessageContext ctx) {
 			String sound = ItemChisel.carving.getVariationSound(Block.getBlockById(message.block), message.meta);
 			GeneralChiselClient.spawnChiselEffect(message.x, message.y, message.z, sound);
+			if (message.breakChisel) {
+				EntityPlayer player = Chisel.proxy.getClientPlayer();
+				player.renderBrokenItemStack(player.getCurrentEquippedItem());
+			}
 			return null;
 		}
 	}

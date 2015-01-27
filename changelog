@@ -1,3 +1,46 @@
+2.3.5:
+Fixes
+- Fix crash with copper block feature
+
+2.3.4:
+New
+- Add config to prevent chiseling between vanilla leaf types
+- Use vanilla 1.8 textures for the 1.8 blocks, implement 1.8 block pillars
+- Add new yellow brick type
+- Add chisling between different copper block types
+Fixes
+- All blocks now have proper breaking animations
+- #175 Fix bad texture on bottom sides of CTMV blocks
+- #168 Fix only one type of block generating per world
+- #176 Fix bad aged brick texture
+- #174 Fix chiseling stained glass always giving white variations
+API
+- Add ability for custom chisels to define their own modes
+- Add support for removing variations and groups via the API
+
+2.3.3:
+Fix crash when left clicking certain blocks with the chisel
+
+2.3.2:
+Fixed antiblocks being chiselable between colors
+Added recipes to dye existing antiblocks
+Made all recipes that use dyes support oredict dyes
+Fixed left click chiseling not going through oredict members of the group
+
+2.3.1:
+Fixed recipe crash on startup
+
+2.3:
+Fixed issues with stairs
+NEI Handler for seeing how to obtain all the blocks
+Fixed sand having the wrong sound
+Fixed some assorted rendering and lighting issues
+Brand new Auto Chisel
+Recipes for the upgrades are now available
+Brand new Chisel GUI
+Added antiblocks
+Chisel Modes and left click!
+
 2.2.2:
 Diamond Chisel implemented while still retaining the iron chisel if diamond is disabled
 Added OCD Blocks
@@ -164,7 +207,7 @@ Asies changes:
 Added: Far more config-level configurability for the mod's available features and behaviour.
 Changed: The config format. Cleaned it up a bit. Watch out!
 Fixed: Marble stairs and limestone stairs now work!
-Fixed: Partially attempted to fix the “left-click-with-chisel to make block disappear” bug.
+Fixed: Partially attempted to fix the left-click-with-chisel to make block disappear bug.
 1.5.2 (17 March 2014)
 Added: Chiselable Stained Glass and Stained Glass Panes.
 Changed: Textures are now compressed with pngout, cutting the mod's size from 4MB to 2.1MB - an almost 50% reduction!

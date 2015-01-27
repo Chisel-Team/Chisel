@@ -38,6 +38,12 @@ public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
 		int meta = world.getBlockMetadata(x, y, z);
 
 		CarvableVariation var = ((ICarvable) block).getVariation(world, x, y, z, meta);
+		
+		if (rendererOld.hasOverrideBlockTexture()) {
+			// breaking anim
+			rendererOld.renderStandardBlock(block, x, y, z);
+			return true;
+		}
 
 		switch (var == null ? 0 : var.kind) {
 		case CarvableHelper.CTMX:

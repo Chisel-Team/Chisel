@@ -3,6 +3,7 @@ package com.cricketcraft.chisel.carving;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import net.minecraft.block.Block;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 public class GroupList implements Set<ICarvingGroup> {
@@ -129,6 +131,15 @@ public class GroupList implements Set<ICarvingGroup> {
 	@Override
 	public boolean remove(Object o) {
 		if (o instanceof ICarvingGroup) {
+			List<VariationWrapper> toRemove = Lists.newArrayList();
+			for (VariationWrapper v : lookup.keySet()) {
+				if (lookup.get(v).getName().equals(((ICarvingGroup) o).getName())) {
+					toRemove.add(v);
+				}
+			}
+			for (VariationWrapper v : toRemove) {
+				lookup.remove(v);
+			}
 			return groups.remove(((ICarvingGroup) o).getName()) != null;
 		}
 		return false;
@@ -203,6 +214,28 @@ public class GroupList implements Set<ICarvingGroup> {
 
 	public Collection<? extends String> getNames() {
 		return groups.keySet();
+	}
+
+	public ICarvingVariation removeVariation(Block block, int metadata, String group) {
+		ICarvingGroup g = null;
+		if (group != null) {
+			g = groups.get(group);
+			if (g == null) {
+				throw new IllegalArgumentException("No such group " + group);
+			}
+			groups.remove(g.getName());
+		}
+		List<VariationWrapper> toRemove = Lists.newArrayList();
+		for (VariationWrapper v : lookup.keySet()) {
+			if ((g == null || lookup.get(v).getName().equals(g.getName())) && v.equals(new VariationWrapper(new VariationKey(block, metadata)))) {
+				lookup.get(v).removeVariation(v.v);
+				toRemove.add(v);
+			}
+		}
+		for (VariationWrapper v : toRemove) {
+			lookup.remove(v);
+		}
+		return toRemove.isEmpty() ? null : toRemove.get(0).v;
 	}
 
 	@Override

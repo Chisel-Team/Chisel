@@ -57,10 +57,18 @@ public interface ICarvingGroup {
 	List<ICarvingVariation> getVariations();
 
 	/**
-	 * Adds a variation to this group.
+	 * Adds a variation to this group. Do not call this from external code, as it will fail to remove the inverse lookup from the registry.
 	 * 
 	 * @param variation
 	 *            An {@link ICarvingVariation} to add to this group
 	 */
 	void addVariation(ICarvingVariation variation);
+
+	/**
+	 * Removes a variation to this group. Do not call this from external code, as it will fail to remove the inverse lookup from the registry.
+	 * 
+	 * @param variation
+	 *            An {@link ICarvingVariation} to add to this group
+	 */
+	boolean removeVariation(ICarvingVariation variation);
 }

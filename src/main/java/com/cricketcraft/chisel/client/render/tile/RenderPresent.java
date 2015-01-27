@@ -1,126 +1,144 @@
 package com.cricketcraft.chisel.client.render.tile;
 
-import net.minecraft.block.Block;
+import java.util.HashMap;
+
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.model.ModelLargeChest;
-import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.block.BlockPresent;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
+import com.cricketcraft.chisel.init.ChiselBlocks;
+import com.google.common.collect.Maps;
 
-import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.client.FMLClientHandler;
 
-public class RenderPresent extends TileEntityChestRenderer {
+public class RenderPresent extends TileEntitySpecialRenderer implements IItemRenderer {
 
 	private ModelChest smallChest = new ModelChest();
 	private ModelChest largeChest = new ModelLargeChest();
-
-	public RenderPresent() {
-	}
+	
+	private HashMap<Integer, ResourceLocation> textureCache = Maps.newHashMap();
 
 	public void renderTileEntityAt(TileEntityPresent present, double x, double y, double z, float partialTicks) {
-		int i;
-
-		if (!present.hasWorldObj()) {
-			i = 0;
-		} else {
-			Block block = present.getBlockType();
-			i = present.getBlockMetadata();
-
-			if (block instanceof BlockPresent && i == 0) {
-				try {
-					((BlockPresent) block).func_149954_e(present.getWorldObj(), present.xCoord, present.yCoord, present.zCoord);
-				} catch (ClassCastException e) {
-					FMLLog.severe("[Chisel 2] Attempted to render a present at %d,  %d, %d that was not a present", present.xCoord, present.yCoord, present.zCoord);
-				}
-				i = present.getBlockMetadata();
+		GL11.glPushMatrix();
+		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
+		GL11.glScalef(1.0F, -1.0F, -1.0F);
+		int meta = present.getBlockMetadata();
+		bindTexture(present);
+		if (!present.isConnected()) {
+			GL11.glRotatef(90 * meta + 180, 0, 1, 0);
+			switch(present.getBlockMetadata()) {
+			case 0:
+				GL11.glTranslatef(-1, 0, -1);
+				break;
+			case 1:
+				GL11.glTranslatef(0, 0, -1);
+				break;
+			case 3:
+				GL11.glTranslatef(-1, 0, 0);
+				break;
 			}
-
-			present.checkForAdjacentChests();
+			smallChest.renderAll();
+		} else if (present.isParent()) {
+			ForgeDirection dir = present.getConnectionDir();
+			switch(dir) {
+			case NORTH:
+				GL11.glRotatef(-90, 0, 1, 0);
+				GL11.glTranslatef(0, 0, -1);
+				break;
+			case SOUTH:
+				GL11.glRotatef(-90, 0, 1, 0);
+				GL11.glTranslatef(-1, 0, -1);
+				break;
+			case WEST:
+				GL11.glTranslatef(-1, 0, 0);
+				break;
+			default:
+				break;
+			}
+			if (meta == 0 || meta == 3) {
+				GL11.glRotatef(180, 0, 1, 0);
+				GL11.glTranslatef(-2, 0, -1);
+			}
+			largeChest.renderAll();
 		}
-
-		if (present.adjacentChestZNeg == null && present.adjacentChestXNeg == null) {
-			BlockPresent blockPresent = (BlockPresent) present.getWorldObj().getBlock(present.xCoord, present.yCoord, present.zCoord);
-			ModelChest smallOrLargeChest;
-			if (present.adjacentChestZPos == null && present.adjacentChestXPos == null) {
-				smallOrLargeChest = smallChest;
-				this.bindTexture(new ResourceLocation(Chisel.MOD_ID, blockPresent.getKindOfChest(present.type) + ".png"));
-			} else {
-				smallOrLargeChest = largeChest;
-				this.bindTexture(new ResourceLocation(Chisel.MOD_ID, blockPresent.getKindOfChest(present.type) + "_double.png"));
-			}
-
-			GL11.glPushMatrix();
-			GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-			GL11.glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
-			GL11.glScalef(1.0F, -1.0F, -1.0F);
-			GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-			short short1 = 0;
-
-			if (i == 2) {
-				short1 = 180;
-			}
-
-			if (i == 3) {
-				short1 = 0;
-			}
-
-			if (i == 4) {
-				short1 = 90;
-			}
-
-			if (i == 5) {
-				short1 = -90;
-			}
-
-			if (i == 2 && present.adjacentChestXPos != null) {
-				GL11.glTranslatef(1.0F, 0.0F, 0.0F);
-			}
-
-			if (i == 5 && present.adjacentChestZPos != null) {
-				GL11.glTranslatef(0.0F, 0.0F, -1.0F);
-			}
-
-			GL11.glRotatef(short1, 0.0F, 1.0F, 0.0F);
-			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-			float f1 = present.prevLidAngle + (present.lidAngle - present.prevLidAngle) * partialTicks;
-			float f2;
-
-			if (present.adjacentChestZNeg != null) {
-				f2 = present.adjacentChestZNeg.prevLidAngle + (present.adjacentChestZNeg.lidAngle - present.adjacentChestZNeg.prevLidAngle) * partialTicks;
-
-				if (f2 > f1) {
-					f1 = f2;
-				}
-			}
-
-			if (present.adjacentChestXNeg != null) {
-				f2 = present.adjacentChestXNeg.prevLidAngle + (present.adjacentChestXNeg.lidAngle - present.adjacentChestXNeg.prevLidAngle) * partialTicks;
-
-				if (f2 > f1) {
-					f1 = f2;
-				}
-			}
-
-			f1 = 1.0F - f1;
-			f1 = 1.0F - f1 * f1 * f1;
-			smallOrLargeChest.chestLid.rotateAngleX = -(f1 * (float) Math.PI / 2.0F);
-			smallOrLargeChest.renderAll();
-			GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-			GL11.glPopMatrix();
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GL11.glPopMatrix();
+	}
+	
+	private void bindTexture(TileEntityPresent present) {
+		int idx = present.getType() + (present.isConnected() ? 0 : 16);
+		ResourceLocation rl = textureCache.get(idx);
+		if (rl == null) {
+			String res = ChiselBlocks.present.getModelTexture(present.getType());
+			res += present.isConnected() ? "_double.png" : ".png";
+			rl = new ResourceLocation("chisel", res);
+			textureCache.put(idx, rl);
 		}
+		bindTexture(rl);
 	}
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTicks) {
 		this.renderTileEntityAt((TileEntityPresent) tileEntity, x, y, z, partialTicks);
+	}
+	
+	@Override
+	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+		return type != ItemRenderType.FIRST_PERSON_MAP;
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+		return true;
+	}
+
+	@Override
+	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(new ResourceLocation(Chisel.MOD_ID, ChiselBlocks.present.getModelTexture(item.getItemDamage()) + ".png"));
+		switch (type) {
+		case ENTITY:
+			renderBlock(0.0F, 1.0F, 0.0F);
+			break;
+		case EQUIPPED:
+			renderBlock(0.5F, 1.5F, 0.5F);
+			break;
+		case EQUIPPED_FIRST_PERSON:
+			renderBlock(0.5F, 1.0F, 0.5F);
+			break;
+		case INVENTORY:
+			renderInventory(1.0F, 1.0F, 1.0F);
+			break;
+		default:
+			break;
+		}
+	}
+
+	private void renderBlock(float x, float y, float z) {
+		GL11.glPushMatrix();
+		GL11.glTranslatef(x, y, z);
+		GL11.glScaled(-1, -1, 1);
+		smallChest.renderAll();
+		GL11.glPopMatrix();
+	}
+
+	private void renderInventory(float x, float y, float z) {
+		GL11.glPushMatrix();
+		GL11.glTranslatef(x, y, z);
+		GL11.glRotatef(180F, 1F, 0, 0);
+		GL11.glRotatef(-90F, 0, 1F, 0);
+		GL11.glScalef(1.0F, 1.0F, 1.0F);
+		smallChest.renderAll();
+		GL11.glPopMatrix();
 	}
 }

@@ -103,7 +103,7 @@ public class ContainerAutoChisel extends Container {
 
 			if (!player.worldObj.isRemote && slot.slotNumber == TileEntityAutoChisel.BASE && !ItemStack.areItemStacksEqual(stack, slot.getStack())) {
 				int chiseled = stack == null ? 0 : slot.getStack() == null ? stack.stackSize : stack.stackSize - slot.getStack().stackSize;
-				PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(autoChisel, chiseled, false), player.worldObj.provider.dimensionId);
+				PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(autoChisel, chiseled, false, false), player.worldObj.provider.dimensionId);
 			}
 
 			return ret;

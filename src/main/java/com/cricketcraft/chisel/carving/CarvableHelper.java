@@ -38,9 +38,6 @@ public class CarvableHelper {
 	public static final int V4 = 7;
 	public static final int CTMX = 8;
 
-	public CarvableHelper() {
-	}
-
 	public ArrayList<CarvableVariation> variations = new ArrayList<CarvableVariation>();
 	CarvableVariation[] map = new CarvableVariation[16];
 	public boolean forbidChiseling = false;
@@ -258,7 +255,7 @@ public class CarvableHelper {
 	}
 
 	public void registerAll(Block block, String name) {
-		register(block, name, ItemCarvable.class);
+		registerAll(block, name, ItemCarvable.class);
 	}
 
 	public void registerBlock(Block block, String name) {
@@ -270,7 +267,7 @@ public class CarvableHelper {
 		GameRegistry.registerBlock(block, cl, name);
 	}
 
-	public void register(Block block, String name, Class<? extends ItemCarvable> cl) {
+	public void registerAll(Block block, String name, Class<? extends ItemCarvable> cl) {
 		registerBlock(block, name, cl);
 		registerVariations(name, block);
 	}

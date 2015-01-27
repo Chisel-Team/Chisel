@@ -7,7 +7,6 @@ import java.util.List;
 import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 public class CarvingGroup implements ICarvingGroup {
@@ -23,7 +22,7 @@ public class CarvingGroup implements ICarvingGroup {
 	}
 
 	public List<ICarvingVariation> getVariations() {
-		return ImmutableList.copyOf(variations);
+		return Lists.newArrayList(variations);
 	}
 
 	@Override
@@ -36,6 +35,17 @@ public class CarvingGroup implements ICarvingGroup {
 				return CarvingUtils.compare(o1, o2);
 			}
 		});
+	}
+	
+	@Override
+	public boolean removeVariation(ICarvingVariation variation) {
+		ICarvingVariation toRemove = null;
+		for (ICarvingVariation v : variations) {
+			if (v.getBlock() == variation.getBlock() && v.getBlockMeta() == variation.getBlockMeta()) {
+				toRemove = v;
+			}
+		}
+		return toRemove == null ? false : variations.remove(toRemove);
 	}
 
 	@Override

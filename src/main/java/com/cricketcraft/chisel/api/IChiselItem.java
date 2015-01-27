@@ -2,14 +2,15 @@ package com.cricketcraft.chisel.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 
 /**
  * Implement this on items which can be used to chisel blocks.
  */
-public interface IChiselItem extends IChiselMode {
+public interface IChiselItem {
 
 	/**
 	 * Checks whether the chisel can have its GUI opened
@@ -29,16 +30,13 @@ public interface IChiselItem extends IChiselMode {
 	 * 
 	 * @param world
 	 *            {@link World} object
-	 * @param inv
-	 *            The inventory this chisel is currently in
-	 * @param slot
-	 *            The slot index of the chisel in the inventory
 	 * @param chisel
 	 *            The {@link ItemStack} representing the chisel
 	 * @param target
-	 *            The {@link ItemStack} representing the target item
+	 *            The {@link ICarvingVariation} representing the target item
+	 * @return True if the chisel should be damaged. False otherwise.
 	 */
-	void onChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target);
+	boolean onChisel(World world, ItemStack chisel, ICarvingVariation target);
 
 	/**
 	 * Called to check if this {@link ItemStack} can be chiseled in this chisel. If not, there will be no possible variants displayed in the GUI.
@@ -47,23 +45,21 @@ public interface IChiselItem extends IChiselMode {
 	 * 
 	 * @param world
 	 *            {@link World} object
-	 * @param inv
-	 *            The inventory this chisel is currently in
-	 * @param slot
-	 *            The slot index of the chisel in the inventory
 	 * @param chisel
 	 *            The {@link ItemStack} representing the chisel
 	 * @param target
-	 *            The {@link ItemStack} representing the target item
+	 *            The {@link ICarvingVariation} representing the target item
 	 * @return True if the current target can be chiseled into anything. False otherwise.
 	 */
-	boolean canChisel(World world, IInventory inv, int slot, ItemStack chisel, ItemStack target);
+	boolean canChisel(World world, ItemStack chisel, ICarvingVariation target);
 
 	/**
 	 * Allows you to control if your item can chisel this block in the world.
 	 * 
 	 * @param world
 	 *            World object
+	 * @param player
+	 *            {@link EntityPlayer The player} holding the chisel.
 	 * @param x
 	 *            X coord of the block being chiseled
 	 * @param y
@@ -76,5 +72,14 @@ public interface IChiselItem extends IChiselMode {
 	 *            The blocks' metadata
 	 * @return True if the chiseling should take place. False otherwise.
 	 */
-	boolean canChiselBlock(World world, int x, int y, int z, Block block, int metadata);
+	boolean canChiselBlock(World world, EntityPlayer player, int x, int y, int z, Block block, int metadata);
+
+	/**
+	 * Allows you to control if your item has chiseling modes.
+	 * 
+	 * @param chisel
+	 *            The {@link ItemStack} representing the chisel.
+	 * @return True if the chisel supports modes. False otherwise.
+	 */
+	boolean hasModes(ItemStack chisel);
 }

@@ -1,6 +1,6 @@
 package com.cricketcraft.chisel.block.tileentity;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,6 +21,7 @@ import com.cricketcraft.chisel.init.ChiselItems;
 import com.cricketcraft.chisel.network.PacketHandler;
 import com.cricketcraft.chisel.network.message.MessageAutoChisel;
 import com.cricketcraft.chisel.network.message.MessageSlotUpdate;
+import com.cricketcraft.chisel.utils.General;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -58,7 +59,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	public static final int maxRot = 60;
 	public static final int rotAmnt = 15;
 	public float chiselRot;
-	public boolean chiseling = false;
+	public boolean chiseling = false, breakChisel = false;;
 	public int toChisel = 1;
 
 	private ItemStack lastBase;
@@ -177,7 +178,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	// lets make sure the user isn't trying to make something from a block that doesn't have this as a valid target
 	private boolean canBeMadeFrom(ItemStack from, ItemStack to) {
-		ArrayList<ItemStack> results = Carving.chisel.getItems(from);
+		List<ItemStack> results = Carving.chisel.getItemsForChiseling(from);
 		for (ItemStack s : results) {
 			if (s.getItem() == to.getItem() && s.getItemDamage() == to.getItemDamage()) {
 				return true;
@@ -207,9 +208,19 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	/** Calls IChiselItem#onChisel() and sends the chisel packet for sound/animation */
 	private void chiselItem(int chiseled) {
 		if (!worldObj.isRemote) {
-			((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, this, CHISEL, inventory[CHISEL], inventory[TARGET]);
-			PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(this, chiseled, true), worldObj.provider.dimensionId);
+			boolean breakChisel = false;
+			if (((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, inventory[CHISEL], General.getVariation(inventory[TARGET]))) {
+				inventory[CHISEL].setItemDamage(inventory[CHISEL].getItemDamage() + 1);
+				if (inventory[CHISEL].getItemDamage() >= inventory[CHISEL].getMaxDamage()) {
+					setInventorySlotContents(CHISEL, null);
+					breakChisel = true;
+				}
+			}
+			PacketHandler.INSTANCE.sendToDimension(new MessageAutoChisel(this, chiseled, true, breakChisel), worldObj.provider.dimensionId);
 		} else {
+			if (breakChisel) {
+				worldObj.playSound(xCoord + 0.5, yCoord + 0.5, zCoord + 0.5, "random.break", 0.8F, 0.8F + worldObj.rand.nextFloat() * 0.4F, false);
+			}
 			GeneralChiselClient.spawnAutoChiselFX(this, lastBase != null ? lastBase : inventory[BASE]);
 			chiseling = false;
 			if (lastBase != null) {
@@ -269,7 +280,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		if (stack != null && stack.stackSize > getInventoryStackLimit()) {
 			stack.stackSize = getInventoryStackLimit();
 		}
-		
+
 		if (worldObj.isRemote && slot == BASE && stack != null) {
 			lastBase = stack.copy();
 		}
@@ -318,7 +329,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		switch (slot) {
 		case BASE:
 		case TARGET:
-			return !Carving.chisel.getItems(itemStack).isEmpty();
+			return !Carving.chisel.getItemsForChiseling(itemStack).isEmpty();
 		case OUTPUT:
 			return false;
 		case CHISEL:
@@ -361,7 +372,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		} else if (inventory[slot] == null) {
 			return null;
 		} else {
-			ghostItem.setEntityItemStack(new ItemStack(inventory[slot].getItem(), 1, inventory[slot].getItemDamage()));
+			ghostItem.setEntityItemStack(inventory[slot].copy());
 			return ghostItem;
 		}
 	}
@@ -401,14 +412,15 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		}
 	}
 
-	public void doChiselAnim(ItemStack lastChiseled, int chiseled, boolean playSound) {
+	public void doChiselAnim(ItemStack lastChiseled, int chiseled, boolean playSound, boolean breakChisel) {
 		this.lastBase = lastChiseled == null ? null : lastChiseled.copy();
 		this.toChisel = chiseled;
 		if (playSound) {
 			this.chiseling = true;
 		}
+		this.breakChisel = breakChisel;
 	}
-	
+
 	public ItemStack getLastBase() {
 		return lastBase == null ? null : lastBase.copy();
 	}
