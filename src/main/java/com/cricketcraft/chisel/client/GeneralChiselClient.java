@@ -1,7 +1,14 @@
 package com.cricketcraft.chisel.client;
 
-import java.util.Random;
-
+import com.cricketcraft.chisel.block.BlockGrimstone;
+import com.cricketcraft.chisel.block.BlockHolystone;
+import com.cricketcraft.chisel.block.BlockLavastone;
+import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
+import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
+import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.config.Configurations;
+import com.cricketcraft.chisel.entity.fx.*;
+import com.cricketcraft.chisel.utils.GeneralClient;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -12,18 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.block.BlockGrimstone;
-import com.cricketcraft.chisel.block.BlockHolystone;
-import com.cricketcraft.chisel.block.BlockLavastone;
-import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
-import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
-import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.config.Configurations;
-import com.cricketcraft.chisel.entity.fx.EntityBallOMossFX;
-import com.cricketcraft.chisel.entity.fx.EntityGrimstoneFX;
-import com.cricketcraft.chisel.entity.fx.EntityHolystoneFX;
-import com.cricketcraft.chisel.entity.fx.EntitySnakestoneObsidianFX;
-import com.cricketcraft.chisel.utils.GeneralClient;
+import java.util.Random;
 
 public class GeneralChiselClient {
 
@@ -169,6 +165,11 @@ public class GeneralChiselClient {
 			EntitySnakestoneObsidianFX res = new EntitySnakestoneObsidianFX(world, block, x, y, z);
 			Minecraft.getMinecraft().effectRenderer.addEffect(res);
 		}
+	}
+
+	public static void spawnCricketFX(World world, double x, double y, double z) {
+		EntityCricketFX cricket = new EntityCricketFX(world, x, y, z);
+		Minecraft.getMinecraft().effectRenderer.addEffect(cricket);
 	}
 
 	public static void spawnBallOMossFX(World world, double x, double y, double z) {
