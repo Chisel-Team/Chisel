@@ -165,7 +165,7 @@ public class GeneralChiselClient {
 	}
 
 	public static void spawnSnakestoneObsidianFX(World world, BlockSnakestoneObsidian block, int x, int y, int z) {
-		if (Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0) {
+		if (Configurations.particlesTickrate != 0 || tick++ % Configurations.particlesTickrate != 0) {
 			EntitySnakestoneObsidianFX res = new EntitySnakestoneObsidianFX(world, block, x, y, z);
 			Minecraft.getMinecraft().effectRenderer.addEffect(res);
 		}
