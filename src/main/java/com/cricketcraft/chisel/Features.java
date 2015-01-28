@@ -200,7 +200,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Block autoChisel = new BlockAutoChisel().setBlockTextureName(Chisel.MOD_ID + ":autoChisel/autoChisel").setCreativeTab(ChiselTabs.tabChisel).setBlockName("autoChisel");
+			Block autoChisel = new BlockAutoChisel().setBlockTextureName(Chisel.MOD_ID + ":autoChisel/autoChisel").setCreativeTab(ChiselTabs.tabChisel).setBlockName("chisel.autoChisel");
 			GameRegistry.registerBlock(autoChisel, "autoChisel");
 		}
 
