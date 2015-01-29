@@ -33,11 +33,6 @@ public class BlockCarvableIce extends BlockIce implements ICarvable {
 	}
 
 	@Override
-	public int damageDropped(int i) {
-		return 0;
-	}
-
-	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		carverHelper.registerBlockIcons("Chisel", this, register);
 	}
