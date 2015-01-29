@@ -369,8 +369,8 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockMarbleCarpet carpet = (BlockMarbleCarpet) new BlockMarbleCarpet(Material.cloth).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(2.0F).setResistance(10F)
-					.setStepSound(Block.soundTypeCloth);
+			BlockMarbleCarpet carpet = (BlockMarbleCarpet) new BlockMarbleCarpet(Material.cloth).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.1F).setStepSound(Block.soundTypeCloth)
+					.setLightOpacity(0).setStepSound(Block.soundTypeCloth);
 			carpet.carverHelper.setChiselBlockName("Carpet");
 			carpet.carverHelper.addVariation("tile.carpet.0.desc", 0, "carpet/white");
 			carpet.carverHelper.addVariation("tile.carpet.1.desc", 1, "carpet/orange");
@@ -1070,7 +1070,7 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.ice_pillar, 6, 1), "XX", "XX", "XX", 'X', new ItemStack(ChiselBlocks.ice, 1, OreDictionary.WILDCARD_VALUE));
+			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.ice_pillar, 6, 0), "XX", "XX", "XX", 'X', new ItemStack(ChiselBlocks.ice, 1, OreDictionary.WILDCARD_VALUE));
 		}
 	},
 
@@ -1080,22 +1080,22 @@ public enum Features {
 		void addBlocks() {
 			CarvableStairsMaker makerIceStairs = new CarvableStairsMaker(Blocks.ice);
 			makerIceStairs.carverHelper.setChiselBlockName("Ice Stairs");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.0.desc", 0, Blocks.ice);
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.1.desc", 1, "ice/a1-ice-light");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.2.desc", 2, "ice/a1-stonecobble-icecobble");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.3.desc", 3, "ice/a1-netherbrick-ice");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.4.desc", 4, "ice/a1-stonecobble-icebrick");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.5.desc", 5, "ice/a1-stonecobble-icebricksmall");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.6.desc", 6, "ice/a1-stonecobble-icedungeon");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.7.desc", 7, "ice/a1-stonecobble-icefour");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.8.desc", 8, "ice/a1-stonecobble-icefrench");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.9.desc", 9, "ice/sunkentiles");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.10.desc", 10, "ice/tiles");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.11.desc", 11, "ice/a1-stonecobble-icepanel");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.12.desc", 12, "ice/a1-stoneslab-ice");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.13.desc", 13, "ice/zelda");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.14.desc", 14, "ice/bismuth");
-			makerIceStairs.carverHelper.addVariation("tile.iceStairs.15.desc", 15, "ice/poison");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.0.desc", 0, Blocks.ice);
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.1.desc", 1, "ice/a1-ice-light");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.2.desc", 2, "ice/a1-stonecobble-icecobble");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.3.desc", 3, "ice/a1-netherbrick-ice");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.4.desc", 4, "ice/a1-stonecobble-icebrick");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.5.desc", 5, "ice/a1-stonecobble-icebricksmall");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.6.desc", 6, "ice/a1-stonecobble-icedungeon");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.7.desc", 7, "ice/a1-stonecobble-icefour");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.8.desc", 8, "ice/a1-stonecobble-icefrench");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.9.desc", 9, "ice/sunkentiles");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.10.desc", 10, "ice/tiles");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.11.desc", 11, "ice/a1-stonecobble-icepanel");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.12.desc", 12, "ice/a1-stoneslab-ice");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.13.desc", 13, "ice/zelda");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.14.desc", 14, "ice/bismuth");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.15.desc", 15, "ice/poison");
 			makerIceStairs.create(new IStairsCreator() {
 
 				@Override
@@ -1681,13 +1681,13 @@ public enum Features {
 			BlockCarvablePackedIcePillar packedice_pillar = (BlockCarvablePackedIcePillar) new BlockCarvablePackedIcePillar(Material.ice).setCreativeTab(ChiselTabs.tabOtherChiselBlocks)
 					.setHardness(0.5F).setLightOpacity(3).setStepSound(Block.soundTypeGlass);
 			packedice_pillar.carverHelper.setChiselBlockName("Packed Ice Pillar");
-			packedice_pillar.carverHelper.addVariation("tile.packedicePillar.0.desc", 0, "icepillar/plainplain");
-			packedice_pillar.carverHelper.addVariation("tile.packedicePillar.1.desc", 1, "icepillar/plaingreek");
-			packedice_pillar.carverHelper.addVariation("tile.packedicePillar.2.desc", 2, "icepillar/greekplain");
-			packedice_pillar.carverHelper.addVariation("tile.packedicePillar.3.desc", 3, "icepillar/greekgreek");
-			packedice_pillar.carverHelper.addVariation("tile.packedicePillar.4.desc", 4, "icepillar/convexplain");
-			packedice_pillar.carverHelper.addVariation("tile.packedicePillar.5.desc", 5, "icepillar/carved");
-			packedice_pillar.carverHelper.addVariation("tile.packedicePillar.6.desc", 6, "icepillar/ornamental");
+			packedice_pillar.carverHelper.addVariation("tile.packedice_pillar.0.desc", 0, "icepillar/plainplain");
+			packedice_pillar.carverHelper.addVariation("tile.packedice_pillar.1.desc", 1, "icepillar/plaingreek");
+			packedice_pillar.carverHelper.addVariation("tile.packedice_pillar.2.desc", 2, "icepillar/greekplain");
+			packedice_pillar.carverHelper.addVariation("tile.packedice_pillar.3.desc", 3, "icepillar/greekgreek");
+			packedice_pillar.carverHelper.addVariation("tile.packedice_pillar.4.desc", 4, "icepillar/convexplain");
+			packedice_pillar.carverHelper.addVariation("tile.packedice_pillar.5.desc", 5, "icepillar/carved");
+			packedice_pillar.carverHelper.addVariation("tile.packedice_pillar.6.desc", 6, "icepillar/ornamental");
 			packedice_pillar.carverHelper.registerAll(packedice_pillar, "packedice_pillar");
 		}
 	},
@@ -1698,22 +1698,22 @@ public enum Features {
 		void addBlocks() {
 			CarvableStairsMaker makerPackedIceStairs = new CarvableStairsMaker(Blocks.packed_ice);
 			makerPackedIceStairs.carverHelper.setChiselBlockName("Packed Ice Stairs");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.0.desc", 0, Blocks.packed_ice);
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.1.desc", 1, "ice/a1-ice-light");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.2.desc", 2, "ice/a1-stonecobble-icecobble");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.3.desc", 3, "ice/a1-netherbrick-ice");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.4.desc", 4, "ice/a1-stonecobble-icebrick");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.5.desc", 5, "ice/a1-stonecobble-icebricksmall");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.6.desc", 6, "ice/a1-stonecobble-icedungeon");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.7.desc", 7, "ice/a1-stonecobble-icefour");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.8.desc", 8, "ice/a1-stonecobble-icefrench");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.9.desc", 9, "ice/sunkentiles");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.10.desc", 10, "ice/tiles");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.11.desc", 11, "ice/a1-stonecobble-icepanel");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.12.desc", 12, "ice/a1-stoneslab-ice");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.13.desc", 13, "ice/zelda");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.14.desc", 14, "ice/bismuth");
-			makerPackedIceStairs.carverHelper.addVariation("tile.packediceStairs.15.desc", 15, "ice/poison");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.0.desc", 0, Blocks.packed_ice);
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.1.desc", 1, "ice/a1-ice-light");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.2.desc", 2, "ice/a1-stonecobble-icecobble");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.3.desc", 3, "ice/a1-netherbrick-ice");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.4.desc", 4, "ice/a1-stonecobble-icebrick");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.5.desc", 5, "ice/a1-stonecobble-icebricksmall");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.6.desc", 6, "ice/a1-stonecobble-icedungeon");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.7.desc", 7, "ice/a1-stonecobble-icefour");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.8.desc", 8, "ice/a1-stonecobble-icefrench");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.9.desc", 9, "ice/sunkentiles");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.10.desc", 10, "ice/tiles");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.11.desc", 11, "ice/a1-stonecobble-icepanel");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.12.desc", 12, "ice/a1-stoneslab-ice");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.13.desc", 13, "ice/zelda");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.14.desc", 14, "ice/bismuth");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.15.desc", 15, "ice/poison");
 			makerPackedIceStairs.create(new IStairsCreator() {
 
 				@Override

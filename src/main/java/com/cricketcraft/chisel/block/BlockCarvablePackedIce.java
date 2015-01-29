@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.block;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -33,7 +34,7 @@ public class BlockCarvablePackedIce extends Block implements ICarvable {
 	}
 
 	@Override
-	public int damageDropped(int i) {
+	public int quantityDropped(int meta, int fortune, Random random) {
 		return 0;
 	}
 
