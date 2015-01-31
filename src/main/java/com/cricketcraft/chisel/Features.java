@@ -2417,12 +2417,14 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+			BlockCarvable uraniumblock = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-			copper.carverHelper.addVariation("tile.uranium.0.desc", 0, "metals/uranium/caution");
-			copper.carverHelper.addVariation("tile.uranium.1.desc", 1, "metals/uranium/crate");
-			copper.carverHelper.addVariation("tile.uranium.2.desc", 2, "metals/uranium/thermal");
-			copper.carverHelper.registerAll(copper, "uraniumblock");
+            uraniumblock.carverHelper.addVariation("tile.uranium.0.desc", 0, "metals/uranium/caution");
+            uraniumblock.carverHelper.addVariation("tile.uranium.1.desc", 1, "metals/uranium/crate");
+            uraniumblock.carverHelper.addVariation("tile.uranium.2.desc", 2, "metals/uranium/thermal");
+            uraniumblock.carverHelper.addVariation("tile.uranium.3.desc", 3, "metals/uranium/adv");
+            uraniumblock.carverHelper.addVariation("tile.uranium.4.desc", 4, "metals/uranium/egregious");
+            uraniumblock.carverHelper.registerAll(uraniumblock, "uraniumblock");
 			Carving.chisel.registerOre("uraniumblock", "blockUranium");
 		}
 	},
