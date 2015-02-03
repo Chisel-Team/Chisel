@@ -6,7 +6,7 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 
-public class BlockCarvableAntiBlock extends BlockCarvable implements ICarvable {
+public class BlockCarvableAntiBlock extends BlockCarvableColor implements ICarvable {
 
 	public CarvableHelper carverHelper;
 
