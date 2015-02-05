@@ -2202,7 +2202,7 @@ public enum Features {
 			technical.carverHelper.addVariation("tile.technical.11.desc", 11, "technical/cables");
 			technical.carverHelper.addVariation("tile.technical.12.desc", 12, "technical/rustyBoltedPlates");
 			technical.carverHelper.addVariation("tile.technical.13.desc", 13, "technical/grate");
-			technical.carverHelper.addVariation("tile.technical.14.desc", 14, "technical/fanMalfunction");
+			technical.carverHelper.addVariation("tile.technical.14.desc", 14, "technical/malfunctionFan");
 			technical.carverHelper.addVariation("tile.technical.15.desc", 15, "technical/grateRusty");
 			technical.carverHelper.registerAll(technical, "technical");
 
