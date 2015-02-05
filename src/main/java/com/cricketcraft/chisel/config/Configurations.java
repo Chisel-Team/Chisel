@@ -1,12 +1,10 @@
 package com.cricketcraft.chisel.config;
 
-import java.util.Locale;
-
+import com.cricketcraft.chisel.Features;
 import net.minecraftforge.common.config.Configuration;
-
 import org.apache.commons.lang3.StringUtils;
 
-import com.cricketcraft.chisel.Features;
+import java.util.Locale;
 
 public class Configurations {
 
@@ -43,6 +41,7 @@ public class Configurations {
 	public static boolean ironChiselHasModes;
 	public static int ironChiselAttackDamage;
 	public static int diamondChiselAttackDamage;
+	public static boolean allowChiselCrossColors;
 
 	public static boolean useRoadLineTool;
 	public static String getRoadLineTool;
@@ -63,7 +62,9 @@ public class Configurations {
 		chiselRecipe = config.get(category, "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
 		enableFMP = config.get(category, "enableFMP", true, "Do you want to enable FMP").getBoolean(true);
 		chiselStoneToCobbleBricks = config.get(category, "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left clicking.").getBoolean(false);
-		chiselBackToVanillaLeaves = config.get(category, "chiselBackToVanillaLeaves", false, "If this is true, you can chisel from the chisel leaves back to vanilla ones. If it is false, you cannot.").getBoolean(false);
+		chiselBackToVanillaLeaves = config.get(category, "chiselBackToVanillaLeaves", false, "If this is true, you can chisel from the chisel leaves back to vanilla ones. If it is false, you cannot.")
+				.getBoolean(
+						false);
 
 		/* worldgen */
 		category = "worldgen";
@@ -90,7 +91,9 @@ public class Configurations {
 		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
 		ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
 		ironChiselAttackDamage = config.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.").getInt();
-		diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
+		diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2,
+				"The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
+		allowChiselCrossColors = config.get(category, "allowChiselCrossColors", true, "Should someone be able to chisel something into a different color.").getBoolean();
 
 		/* block */
 		category = "block";
