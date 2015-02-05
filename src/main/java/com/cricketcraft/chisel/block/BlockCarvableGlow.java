@@ -9,7 +9,7 @@ import com.cricketcraft.chisel.Chisel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockCarvableGlow extends BlockCarvable {
+public class BlockCarvableGlow extends BlockCarvableColor {
 
 	@SideOnly(Side.CLIENT)
 	private IIcon glowTexture;
