@@ -67,12 +67,12 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable aluminum = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-			aluminum.carverHelper.addVariation("tile.aluminum.0.desc", 0, "metals/aluminum/caution");
-			aluminum.carverHelper.addVariation("tile.aluminum.1.desc", 1, "metals/aluminum/crate");
-			aluminum.carverHelper.addVariation("tile.aluminum.2.desc", 2, "metals/aluminum/thermal");
-			aluminum.carverHelper.addVariation("tile.aluminum.3.desc", 3, "metals/aluminum/adv");
-			aluminum.carverHelper.addVariation("tile.aluminum.4.desc", 4, "metals/aluminum/egregious");
-			aluminum.carverHelper.addVariation("tile.aluminum.5.desc", 5, "metals/aluminum/bolted");
+			aluminum.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/aluminum/caution");
+			aluminum.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/aluminum/crate");
+			aluminum.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/aluminum/thermal");
+			aluminum.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/aluminum/adv");
+			aluminum.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/aluminum/egregious");
+			aluminum.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/aluminum/bolted");
 			aluminum.carverHelper.registerAll(aluminum, "aluminumblock");
 			Carving.chisel.registerOre("aluminumblock", "blockAluminum");
 		}
@@ -278,12 +278,12 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable bronze = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-			bronze.carverHelper.addVariation("tile.bronze.0.desc", 0, "metals/bronze/caution");
-			bronze.carverHelper.addVariation("tile.bronze.1.desc", 1, "metals/bronze/crate");
-			bronze.carverHelper.addVariation("tile.bronze.2.desc", 2, "metals/bronze/thermal");
-			bronze.carverHelper.addVariation("tile.bronze.3.desc", 3, "metals/bronze/adv");
-			bronze.carverHelper.addVariation("tile.bronze.4.desc", 4, "metals/bronze/egregious");
-			bronze.carverHelper.addVariation("tile.bronze.5.desc", 5, "metals/bronze/bolted");
+			bronze.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/bronze/caution");
+			bronze.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/bronze/crate");
+			bronze.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/bronze/thermal");
+			bronze.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/bronze/adv");
+			bronze.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/bronze/egregious");
+			bronze.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/bronze/bolted");
 			bronze.carverHelper.registerAll(bronze, "bronzeblock");
 			Carving.chisel.registerOre("bronzeblock", "blockBronze");
 		}
@@ -523,12 +523,12 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable copper = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-			copper.carverHelper.addVariation("tile.copper.0.desc", 0, "metals/copper/caution");
-			copper.carverHelper.addVariation("tile.copper.1.desc", 1, "metals/copper/crate");
-			copper.carverHelper.addVariation("tile.copper.2.desc", 2, "metals/copper/thermal");
-			copper.carverHelper.addVariation("tile.copper.3.desc", 3, "metals/copper/adv");
-			copper.carverHelper.addVariation("tile.copper.4.desc", 4, "metals/copper/egregious");
-			copper.carverHelper.addVariation("tile.copper.5.desc", 5, "metals/copper/bolted");
+			copper.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/copper/caution");
+			copper.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/copper/crate");
+			copper.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/copper/thermal");
+			copper.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/copper/adv");
+			copper.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/copper/egregious");
+			copper.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/copper/bolted");
 			copper.carverHelper.registerAll(copper, "copperblock");
 			Carving.chisel.registerOre("copperblock", "blockCopper");
 		}
@@ -1222,12 +1222,12 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable lead = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-			lead.carverHelper.addVariation("tile.lead.0.desc", 0, "metals/lead/caution");
-			lead.carverHelper.addVariation("tile.lead.1.desc", 1, "metals/lead/crate");
-			lead.carverHelper.addVariation("tile.lead.2.desc", 2, "metals/lead/thermal");
-            lead.carverHelper.addVariation("tile.lead.3.desc", 3, "metals/lead/adv");
-            lead.carverHelper.addVariation("tile.lead.4.desc", 4, "metals/lead/egregious");
-            lead.carverHelper.addVariation("tile.lead.5.desc", 5, "metals/lead/bolted");
+			lead.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/lead/caution");
+			lead.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/lead/crate");
+			lead.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/lead/thermal");
+            lead.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/lead/adv");
+            lead.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/lead/egregious");
+            lead.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/lead/bolted");
 			lead.carverHelper.registerAll(lead, "leadblock");
 			Carving.chisel.registerOre("leadblock", "blockLead");
 		}
@@ -2022,12 +2022,12 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable silver = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-			silver.carverHelper.addVariation("tile.silver.0.desc", 0, "metals/silver/caution");
-			silver.carverHelper.addVariation("tile.silver.1.desc", 1, "metals/silver/crate");
-			silver.carverHelper.addVariation("tile.silver.2.desc", 2, "metals/silver/thermal");
-            silver.carverHelper.addVariation("tile.silver.3.desc", 3, "metals/silver/adv");
-            silver.carverHelper.addVariation("tile.silver.4.desc", 4, "metals/silver/egregious");
-            silver.carverHelper.addVariation("tile.silver.5.desc", 5, "metals/silver/bolted");
+			silver.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/silver/caution");
+			silver.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/silver/crate");
+			silver.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/silver/thermal");
+            silver.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/silver/adv");
+            silver.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/silver/egregious");
+            silver.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/silver/bolted");
 			silver.carverHelper.registerAll(silver, "silverblock");
 			Carving.chisel.registerOre("silverblock", "blockSilver");
 		}
@@ -2102,12 +2102,12 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable steel = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-			steel.carverHelper.addVariation("tile.steel.0.desc", 0, "metals/steel/caution");
-			steel.carverHelper.addVariation("tile.steel.1.desc", 1, "metals/steel/crate");
-			steel.carverHelper.addVariation("tile.steel.2.desc", 2, "metals/steel/thermal");
-            steel.carverHelper.addVariation("tile.steel.3.desc", 3, "metals/steel/adv");
-            steel.carverHelper.addVariation("tile.steel.4.desc", 4, "metals/steel/egregious");
-            steel.carverHelper.addVariation("tile.steel.5.desc", 5, "metals/steel/bolted");
+			steel.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/steel/caution");
+			steel.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/steel/crate");
+			steel.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/steel/thermal");
+            steel.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/steel/adv");
+            steel.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/steel/egregious");
+            steel.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/steel/bolted");
 			steel.carverHelper.registerAll(steel, "steelblock");
 			Carving.chisel.registerOre("steelblock", "blockSteel");
 		}
@@ -2268,12 +2268,12 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable tin = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-			tin.carverHelper.addVariation("tile.tin.0.desc", 0, "metals/tin/caution");
-			tin.carverHelper.addVariation("tile.tin.1.desc", 1, "metals/tin/crate");
-			tin.carverHelper.addVariation("tile.tin.2.desc", 2, "metals/tin/thermal");
-            tin.carverHelper.addVariation("tile.tin.3.desc", 3, "metals/tin/adv");
-            tin.carverHelper.addVariation("tile.tin.4.desc", 4, "metals/tin/egregious");
-            tin.carverHelper.addVariation("tile.tin.5.desc", 5, "metals/tin/bolted");
+			tin.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/tin/caution");
+			tin.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/tin/crate");
+			tin.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/tin/thermal");
+            tin.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/tin/adv");
+            tin.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/tin/egregious");
+            tin.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/tin/bolted");
 			tin.carverHelper.registerAll(tin, "tinblock");
 			Carving.chisel.registerOre("tinblock", "blockTin");
 		}
@@ -2399,12 +2399,12 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable uranium = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-            uranium.carverHelper.addVariation("tile.uranium.0.desc", 0, "metals/uranium/caution");
-            uranium.carverHelper.addVariation("tile.uranium.1.desc", 1, "metals/uranium/crate");
-            uranium.carverHelper.addVariation("tile.uranium.2.desc", 2, "metals/uranium/thermal");
-            uranium.carverHelper.addVariation("tile.uranium.3.desc", 3, "metals/uranium/adv");
-            uranium.carverHelper.addVariation("tile.uranium.4.desc", 4, "metals/uranium/egregious");
-            uranium.carverHelper.addVariation("tile.uranium.5.desc", 5, "metals/uranium/bolted");
+            uranium.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/uranium/caution");
+            uranium.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/uranium/crate");
+            uranium.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/uranium/thermal");
+            uranium.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/uranium/adv");
+            uranium.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/uranium/egregious");
+            uranium.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/uranium/bolted");
             uranium.carverHelper.registerAll(uranium, "uraniumblock");
 			Carving.chisel.registerOre("uraniumblock", "blockUranium");
 		}

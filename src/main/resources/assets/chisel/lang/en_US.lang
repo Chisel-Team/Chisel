@@ -237,6 +237,14 @@ tile.technical.14.desc=Fan (Malfunctioning)
 tile.technical.15.desc=Rusty Grate
 tile.chisel.technical2.name=Transparent Technical Block
 
+#Metal Blocks
+tile.metalOre.0.desc = Caution Stripes
+tile.metalOre.1.desc = Shipping Crate
+tile.metalOre.2.desc = Thermal
+tile.metalOre.3.desc = An Old Relic from the land of Oneteufyv
+tile.metalOre.4.desc = Egregiously Bordered Block
+tile.metalOre.5.desc = Fancy Bolted Plating
+
 #Present Chest
 tile.chisel.present.name=Present Box
 tile.present.0.desc=§cRed Present
