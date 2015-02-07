@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.compat.Compatibility;
+import com.cricketcraft.chisel.compat.IMCHandler;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselTabs;
@@ -31,7 +32,9 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -156,6 +159,13 @@ public class Chisel {
 	public void postInit(FMLPostInitializationEvent event) {
 		ChiselTabs.postInit();
 		Compatibility.init(event);
+	}
+
+	@EventHandler
+	public void onIMC(IMCEvent event) {
+		for (IMCMessage msg : event.getMessages()) {
+			IMCHandler.INSTANCE.handleMessage(msg);
+		}
 	}
 
 	@SubscribeEvent
