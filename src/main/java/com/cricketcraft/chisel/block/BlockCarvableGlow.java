@@ -12,29 +12,37 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockCarvableGlow extends BlockCarvable {
 
 	@SideOnly(Side.CLIENT)
-	private IIcon glowTexture;
+	private IIcon[] baseTextures;
 
-	private String glowTexturePath;
+	private String[] texturePaths;
 
-	public BlockCarvableGlow(String glowTexture) {
+	public final boolean doColors;
+
+	public BlockCarvableGlow(boolean doColors, String... underlayTextures) {
 		super();
 		setLightLevel(0.5f);
-		this.glowTexturePath = glowTexture;
+		this.texturePaths = underlayTextures;
+		this.doColors = doColors;
 	}
 
-	public BlockCarvableGlow(Material mat, String glowTexture) {
+	public BlockCarvableGlow(Material mat, boolean doColors, String... underlayTextures) {
 		super(mat);
-		this.glowTexturePath = glowTexture;
+		setLightLevel(0.5f);
+		this.texturePaths = underlayTextures;
+		this.doColors = doColors;
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		super.registerBlockIcons(register);
-		glowTexture = register.registerIcon(Chisel.MOD_ID + ":" + glowTexturePath);
+		baseTextures = new IIcon[16];
+		for (int i = 0; i < texturePaths.length; i++) {
+			baseTextures[i] = register.registerIcon(Chisel.MOD_ID + ":" + texturePaths[i]);
+		}
 	}
 
-	public IIcon getGlowTexture() {
-		return glowTexture;
+	public IIcon getGlowTexture(int meta) {
+		return baseTextures[meta % baseTextures.length];
 	}
 
 	@Override

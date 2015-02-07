@@ -51,7 +51,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new RenderStandardBlockNoSunlight());
 		RenderingRegistry.registerBlockHandler(new BlockMarblePillarRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockEldritchRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockAdvancedMarbleRenderer());
+		RenderingRegistry.registerBlockHandler(BlockAdvancedMarbleRenderer.INSTANCE);
 		RenderingRegistry.registerBlockHandler(new BlockCarpetRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockGlowRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockCTMNoLightRenderer());

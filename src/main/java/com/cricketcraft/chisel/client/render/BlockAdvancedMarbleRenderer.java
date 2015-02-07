@@ -19,8 +19,10 @@ public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
 
 	public RenderBlocksCTM rendererCTM = new RenderBlocksCTM();
 	RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
+	
+	public static final BlockAdvancedMarbleRenderer INSTANCE = new BlockAdvancedMarbleRenderer();
 
-	public BlockAdvancedMarbleRenderer() {
+	protected BlockAdvancedMarbleRenderer() {
 		if (Chisel.renderCTMId == 0) {
 			Chisel.renderCTMId = RenderingRegistry.getNextAvailableRenderId();
 		}
