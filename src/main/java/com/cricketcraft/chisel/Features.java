@@ -2143,7 +2143,15 @@ public enum Features {
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.14.desc", 14, "stonebrick/ornatepanel");
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.15.desc", 15, "stonebrick/poison");
 			stonebricksmooth.carverHelper.registerAll(stonebricksmooth, "stonebricksmooth");
-			Carving.chisel.registerOre("stonebricksmooth", "stonebricksmooth");
+
+            BlockCarvable stonebricksmooth2 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(1.5F).setResistance(10.0F)
+                    .setStepSound(Block.soundTypeStone);
+            stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.0.desc", 0, "stonebrick2/masonryPlain");
+            stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.1.desc", 1, "stonebrick2/masonryFelsic");
+            stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.2.desc", 2, "stonebrick2/masonryMafic");
+            stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.3.desc", 3, "stonebrick2/masonryMixed");
+            stonebricksmooth2.carverHelper.registerAll(stonebricksmooth2, "stonebricksmooth2");
+			Carving.chisel.registerOre("stonebricksmooth2", "stonebricksmooth");
 		}
 	},
 
