@@ -1,7 +1,12 @@
 package com.cricketcraft.chisel.block;
 
-import java.util.List;
-
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.init.ChiselTabs;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -11,14 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.init.ChiselTabs;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 
 public class BlockCarvable extends Block implements ICarvable {
 
@@ -31,6 +29,9 @@ public class BlockCarvable extends Block implements ICarvable {
 
 	public BlockCarvable(Material m) {
 		super(m);
+		if (m == Material.rock || m == Material.iron) {
+			setHarvestLevel("pickaxe", 0);
+		}
 		carverHelper = new CarvableHelper();
 		setResistance(10.0F);
 		setHardness(2.0F);
