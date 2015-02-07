@@ -1,16 +1,16 @@
 package com.cricketcraft.chisel.inventory;
 
-import java.util.List;
-
+import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.item.chisel.ItemChisel;
+import com.cricketcraft.chisel.utils.General;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.item.chisel.ItemChisel;
-import com.cricketcraft.chisel.utils.General;
+import java.util.List;
 
 public class InventoryChiselSelection implements IInventory {
 
@@ -163,6 +163,11 @@ public class InventoryChiselSelection implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
+		//Really didn't think people would chisel a shovel
+		if (stack.getItem() instanceof ItemTool) {
+			return false;
+		}
+
 		return !(stack != null && (stack.getItem() instanceof ItemChisel)) && i == normalSlots;
 	}
 
