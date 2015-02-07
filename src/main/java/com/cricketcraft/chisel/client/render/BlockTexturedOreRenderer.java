@@ -1,17 +1,14 @@
 package com.cricketcraft.chisel.client.render;
 
+import com.cricketcraft.chisel.block.BlockTexturedOre;
+import com.cricketcraft.chisel.utils.Drawing;
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
-
-import com.cricketcraft.chisel.block.BlockTexturedOre;
-import com.cricketcraft.chisel.utils.Drawing;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class BlockTexturedOreRenderer implements ISimpleBlockRenderingHandler {
 
@@ -56,15 +53,17 @@ public class BlockTexturedOreRenderer implements ISimpleBlockRenderingHandler {
 				renderer.overrideBlockTexture = block.icon;
 				renderer.renderStandardBlock(block, x, y, z);
 				renderer.overrideBlockTexture = null;
+				return true;
 			} else if (block.base != null) {
 				renderer.renderBlockByRenderType(block.base, x, y, z);
+				return true;
 			}
 		} else {
-			renderer.setRenderBounds(bot, bot, bot, top, top, top);
-			renderer.renderStandardBlock(block, x, y, z);
+			renderer.setRenderBounds(0, 0, 0, 1, 1, 1);
+			return renderer.renderStandardBlock(block, x, y, z);
 		}
 
-		return true;
+		return false;
 	}
 
 	@Override
