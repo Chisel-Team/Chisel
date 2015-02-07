@@ -1225,9 +1225,9 @@ public enum Features {
 			lead.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/lead/caution");
 			lead.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/lead/crate");
 			lead.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/lead/thermal");
-            lead.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/lead/adv");
-            lead.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/lead/egregious");
-            lead.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/lead/bolted");
+			lead.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/lead/adv");
+			lead.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/lead/egregious");
+			lead.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/lead/bolted");
 			lead.carverHelper.registerAll(lead, "leadblock");
 			Carving.chisel.registerOre("leadblock", "blockLead");
 		}
@@ -1807,12 +1807,17 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 0, 0);
-			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 1, 1);
-			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 2, 2);
-			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 3, 3);
-			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 4, 4);
-			Carving.chisel.addVariation("RCAbyssalBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal"), 5, 5);
+			Block abyssal = GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.abyssal");
+			if (abyssal == null) {
+				abyssal = GameRegistry.findBlock("Railcraft", "brick.abyssal");
+			}
+
+			Carving.chisel.addVariation("RCAbyssalBlock", abyssal, 0, 0);
+			Carving.chisel.addVariation("RCAbyssalBlock", abyssal, 1, 1);
+			Carving.chisel.addVariation("RCAbyssalBlock", abyssal, 2, 2);
+			Carving.chisel.addVariation("RCAbyssalBlock", abyssal, 3, 3);
+			Carving.chisel.addVariation("RCAbyssalBlock", abyssal, 4, 4);
+			Carving.chisel.addVariation("RCAbyssalBlock", abyssal, 5, 5);
 			Carving.chisel.registerOre("RCAbyssalBlock", "RCAbyssalBlock");
 		};
 	},
@@ -1820,12 +1825,17 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 0, 0);
-			Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 1, 1);
-			Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 2, 2);
-			Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 3, 3);
-			Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 4, 4);
-			Carving.chisel.addVariation("RCBleachedBone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone"), 5, 5);
+			Block bleachedBone = GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bleachedbone");
+			if (bleachedBone == null) {
+				bleachedBone = GameRegistry.findBlock("Railcraft", "brick.bleachedbone");
+			}
+
+			Carving.chisel.addVariation("RCBleachedBone", bleachedBone, 0, 0);
+			Carving.chisel.addVariation("RCBleachedBone", bleachedBone, 1, 1);
+			Carving.chisel.addVariation("RCBleachedBone", bleachedBone, 2, 2);
+			Carving.chisel.addVariation("RCBleachedBone", bleachedBone, 3, 3);
+			Carving.chisel.addVariation("RCBleachedBone", bleachedBone, 4, 4);
+			Carving.chisel.addVariation("RCBleachedBone", bleachedBone, 5, 5);
 			Carving.chisel.registerOre("RCBleachedBone", "RCBleachedBone");
 		}
 	},
@@ -1834,12 +1844,17 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 0, 0);
-			Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 1, 1);
-			Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 2, 2);
-			Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 3, 3);
-			Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 4, 4);
-			Carving.chisel.addVariation("RCBloodStained", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained"), 5, 5);
+			Block bloodStained = GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.bloodstained");
+			if (bloodStained == null) {
+				bloodStained = GameRegistry.findBlock("Railcraft", "brick.bloodstained");
+			}
+
+			Carving.chisel.addVariation("RCBloodStained", bloodStained, 0, 0);
+			Carving.chisel.addVariation("RCBloodStained", bloodStained, 1, 1);
+			Carving.chisel.addVariation("RCBloodStained", bloodStained, 2, 2);
+			Carving.chisel.addVariation("RCBloodStained", bloodStained, 3, 3);
+			Carving.chisel.addVariation("RCBloodStained", bloodStained, 4, 4);
+			Carving.chisel.addVariation("RCBloodStained", bloodStained, 5, 5);
 			Carving.chisel.registerOre("RCBloodStained", "RCBloodStained");
 		}
 	},
@@ -1848,12 +1863,16 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 0, 0);
-			Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 1, 1);
-			Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 2, 2);
-			Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 3, 3);
-			Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 4, 4);
-			Carving.chisel.addVariation("RCFrostBoundBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound"), 5, 5);
+			Block frostBound = GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.frostbound");
+			if (frostBound == null) {
+				frostBound = GameRegistry.findBlock("Railcraft", "brick.frostbound");
+			}
+			Carving.chisel.addVariation("RCFrostBoundBlock", frostBound, 0, 0);
+			Carving.chisel.addVariation("RCFrostBoundBlock", frostBound, 1, 1);
+			Carving.chisel.addVariation("RCFrostBoundBlock", frostBound, 2, 2);
+			Carving.chisel.addVariation("RCFrostBoundBlock", frostBound, 3, 3);
+			Carving.chisel.addVariation("RCFrostBoundBlock", frostBound, 4, 4);
+			Carving.chisel.addVariation("RCFrostBoundBlock", frostBound, 5, 5);
 			Carving.chisel.registerOre("RCFrostBoundBlock", "RCFrostBoundBlock");
 		}
 	},
@@ -1862,12 +1881,16 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 0, 0);
-			Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 1, 1);
-			Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 2, 2);
-			Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 3, 3);
-			Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 4, 4);
-			Carving.chisel.addVariation("RCInfernalStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal"), 5, 5);
+			Block infernal = GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.infernal");
+			if (infernal == null) {
+				infernal = GameRegistry.findBlock("Railcraft", "brick.infernal");
+			}
+			Carving.chisel.addVariation("RCInfernalStone", infernal, 0, 0);
+			Carving.chisel.addVariation("RCInfernalStone", infernal, 1, 1);
+			Carving.chisel.addVariation("RCInfernalStone", infernal, 2, 2);
+			Carving.chisel.addVariation("RCInfernalStone", infernal, 3, 3);
+			Carving.chisel.addVariation("RCInfernalStone", infernal, 4, 4);
+			Carving.chisel.addVariation("RCInfernalStone", infernal, 5, 5);
 			Carving.chisel.registerOre("RCInfernalStone", "RCInfernalStone");
 		}
 	},
@@ -1876,12 +1899,16 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 0, 0);
-			Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 1, 1);
-			Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 2, 2);
-			Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 3, 3);
-			Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 4, 4);
-			Carving.chisel.addVariation("RCQuarriedBlock", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried"), 5, 5);
+			Block quarried = GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.quarried");
+			if (quarried == null) {
+				quarried = GameRegistry.findBlock("Railcraft", "brick.quarried");
+			}
+			Carving.chisel.addVariation("RCQuarriedBlock", quarried, 0, 0);
+			Carving.chisel.addVariation("RCQuarriedBlock", quarried, 1, 1);
+			Carving.chisel.addVariation("RCQuarriedBlock", quarried, 2, 2);
+			Carving.chisel.addVariation("RCQuarriedBlock", quarried, 3, 3);
+			Carving.chisel.addVariation("RCQuarriedBlock", quarried, 4, 4);
+			Carving.chisel.addVariation("RCQuarriedBlock", quarried, 5, 5);
 			Carving.chisel.registerOre("RCQuarriedBlock", "RCQuarriedBlock");
 		};
 	},
@@ -1890,12 +1917,16 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 0, 0);
-			Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 1, 1);
-			Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 2, 2);
-			Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 3, 3);
-			Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 4, 4);
-			Carving.chisel.addVariation("RCSandyStone", GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy"), 5, 5);
+			Block sandy = GameRegistry.findBlock("Railcraft", "tile.railcraft.brick.sandy");
+			if (sandy == null) {
+				sandy = GameRegistry.findBlock("Railcraft", "brick.sandy");
+			}
+			Carving.chisel.addVariation("RCSandyStone", sandy, 0, 0);
+			Carving.chisel.addVariation("RCSandyStone", sandy, 1, 1);
+			Carving.chisel.addVariation("RCSandyStone", sandy, 2, 2);
+			Carving.chisel.addVariation("RCSandyStone", sandy, 3, 3);
+			Carving.chisel.addVariation("RCSandyStone", sandy, 4, 4);
+			Carving.chisel.addVariation("RCSandyStone", sandy, 5, 5);
 			Carving.chisel.registerOre("RCSandyStone", "RCSandyStone");
 		}
 	},
@@ -2025,9 +2056,9 @@ public enum Features {
 			silver.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/silver/caution");
 			silver.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/silver/crate");
 			silver.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/silver/thermal");
-            silver.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/silver/adv");
-            silver.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/silver/egregious");
-            silver.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/silver/bolted");
+			silver.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/silver/adv");
+			silver.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/silver/egregious");
+			silver.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/silver/bolted");
 			silver.carverHelper.registerAll(silver, "silverblock");
 			Carving.chisel.registerOre("silverblock", "blockSilver");
 		}
@@ -2053,7 +2084,8 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockSnakestone sand_snakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/sandsnake/").setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setBlockName("chisel.snakestoneSand");
+			BlockSnakestone sand_snakestone = (BlockSnakestone) new BlockSnakestone("Chisel:snakestone/sandsnake/").setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setBlockName(
+					"chisel.snakestoneSand");
 			GameRegistry.registerBlock(sand_snakestone, ItemCarvable.class, "sand_snakestone");
 			// TODO- eat me!
 			// LanguageRegistry.addName(new ItemStack(sandSnakestone, 1, 1),
@@ -2086,7 +2118,8 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockSnakestoneObsidian obsidian_snakestone = (BlockSnakestoneObsidian) new BlockSnakestoneObsidian("Chisel:snakestone/obsidian/").setBlockName("chisel.obsidianSnakestone").setHardness(50.0F)
+			BlockSnakestoneObsidian obsidian_snakestone = (BlockSnakestoneObsidian) new BlockSnakestoneObsidian("Chisel:snakestone/obsidian/").setBlockName("chisel.obsidianSnakestone")
+					.setHardness(50.0F)
 					.setResistance(2000.0F);
 			GameRegistry.registerBlock(obsidian_snakestone, ItemCarvable.class, "obsidian_snakestone");
 			Carving.chisel.addVariation("obsidian", obsidian_snakestone, 1, 16);
@@ -2105,9 +2138,9 @@ public enum Features {
 			steel.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/steel/caution");
 			steel.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/steel/crate");
 			steel.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/steel/thermal");
-            steel.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/steel/adv");
-            steel.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/steel/egregious");
-            steel.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/steel/bolted");
+			steel.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/steel/adv");
+			steel.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/steel/egregious");
+			steel.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/steel/bolted");
 			steel.carverHelper.registerAll(steel, "steelblock");
 			Carving.chisel.registerOre("steelblock", "blockSteel");
 		}
@@ -2271,9 +2304,9 @@ public enum Features {
 			tin.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/tin/caution");
 			tin.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/tin/crate");
 			tin.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/tin/thermal");
-            tin.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/tin/adv");
-            tin.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/tin/egregious");
-            tin.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/tin/bolted");
+			tin.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/tin/adv");
+			tin.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/tin/egregious");
+			tin.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/tin/bolted");
 			tin.carverHelper.registerAll(tin, "tinblock");
 			Carving.chisel.registerOre("tinblock", "blockTin");
 		}
@@ -2399,13 +2432,13 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable uranium = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
 					.setResistance(10F);
-            uranium.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/uranium/caution");
-            uranium.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/uranium/crate");
-            uranium.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/uranium/thermal");
-            uranium.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/uranium/adv");
-            uranium.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/uranium/egregious");
-            uranium.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/uranium/bolted");
-            uranium.carverHelper.registerAll(uranium, "uraniumblock");
+			uranium.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/uranium/caution");
+			uranium.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/uranium/crate");
+			uranium.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/uranium/thermal");
+			uranium.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/uranium/adv");
+			uranium.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/uranium/egregious");
+			uranium.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/uranium/bolted");
+			uranium.carverHelper.registerAll(uranium, "uraniumblock");
 			Carving.chisel.registerOre("uraniumblock", "blockUranium");
 		}
 	},
