@@ -146,8 +146,8 @@ public enum Features {
 			arcane.carverHelper.addVariation("tile.arcane.0.desc", 0, "arcane/moonEngrave");
 			arcane.carverHelper.addVariation("tile.arcane.1.desc", 1, "arcane/moonGlowAnim");
 			arcane.carverHelper.addVariation("tile.arcane.2.desc", 2, "arcane/arcaneTile");
-			arcane.carverHelper.addVariation("tile.arcane.3.desc", 3, "arcane/arcaneRunes");
-			arcane.carverHelper.addVariation("tile.arcane.4.desc", 4, "arcane/arcaneRunesGlow");
+			arcane.carverHelper.addVariation("tile.arcane.3.desc", 3, "arcane/runes");
+			arcane.carverHelper.addVariation("tile.arcane.4.desc", 4, "arcane/runesGlow");
 			arcane.carverHelper.addVariation("tile.arcane.5.desc", 5, "arcane/bigBrick");
 			arcane.carverHelper.addVariation("tile.arcane.6.desc", 6, "arcane/conduitGlowAnim");
 			arcane.carverHelper.addVariation("tile.arcane.7.desc", 7, "arcane/BorderBrain");
