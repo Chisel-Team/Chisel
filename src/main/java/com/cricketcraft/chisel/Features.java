@@ -110,14 +110,15 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable antiBlock = (BlockCarvable) new BlockCarvableAntiBlock().setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 			antiBlock.carverHelper.setChiselBlockName("Anti Block");
-			if (!Configurations.allowChiselCrossColors)
+			if (!Configurations.allowChiselCrossColors) {
 				antiBlock.carverHelper.forbidChiseling = true;
+			}
 
 			for (int i = 0; i < 16; i++) {
 				antiBlock.carverHelper.addVariation("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc", i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
 			}
 
-			antiBlock.carverHelper.registerBlock(antiBlock, "antiBlock");
+			antiBlock.carverHelper.registerAll(antiBlock, "antiBlock");
 			OreDictionary.registerOre("antiBlock", antiBlock);
 		}
 
@@ -312,8 +313,9 @@ public enum Features {
 			carpet_block.carverHelper.addVariation("tile.carpet_block.13.desc", 13, "carpet/green");
 			carpet_block.carverHelper.addVariation("tile.carpet_block.14.desc", 14, "carpet/red");
 			carpet_block.carverHelper.addVariation("tile.carpet_block.15.desc", 15, "carpet/black");
-			if (!Configurations.allowChiselCrossColors)
+			if (!Configurations.allowChiselCrossColors) {
 				carpet_block.carverHelper.forbidChiseling = true;
+			}
 			carpet_block.carverHelper.registerAll(carpet_block, "carpet_block");
 			OreDictionary.registerOre("blockCarpet", carpet_block);
 		}
@@ -352,8 +354,9 @@ public enum Features {
 			carpet.carverHelper.addVariation("tile.carpet.13.desc", 13, "carpet/green");
 			carpet.carverHelper.addVariation("tile.carpet.14.desc", 14, "carpet/red");
 			carpet.carverHelper.addVariation("tile.carpet.15.desc", 15, "carpet/black");
-			if (!Configurations.allowChiselCrossColors)
+			if (!Configurations.allowChiselCrossColors) {
 				carpet.carverHelper.forbidChiseling = true;
+			}
 			carpet.carverHelper.registerAll(carpet, "carpet");
 
 			// for (int i = 0; i < 16; i++) {
