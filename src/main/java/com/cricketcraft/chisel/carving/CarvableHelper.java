@@ -1,10 +1,14 @@
 package com.cricketcraft.chisel.carving;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
+import com.cricketcraft.chisel.client.render.CTM;
+import com.cricketcraft.chisel.client.render.TextureSubmap;
+import com.cricketcraft.chisel.compat.FMPIntegration;
+import com.cricketcraft.chisel.config.Configurations;
+import com.cricketcraft.chisel.item.ItemCarvable;
+import com.cricketcraft.chisel.utils.GeneralClient;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
@@ -15,16 +19,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
-import com.cricketcraft.chisel.client.render.CTM;
-import com.cricketcraft.chisel.client.render.TextureSubmap;
-import com.cricketcraft.chisel.compat.FMPIntegration;
-import com.cricketcraft.chisel.config.Configurations;
-import com.cricketcraft.chisel.item.ItemCarvable;
-import com.cricketcraft.chisel.utils.GeneralClient;
-
-import cpw.mods.fml.common.registry.GameRegistry;
+import java.util.*;
 
 public class CarvableHelper {
 
@@ -36,7 +31,12 @@ public class CarvableHelper {
 	public static final int CTMH = 5;
 	public static final int V9 = 6;
 	public static final int V4 = 7;
-	public static final int CTMX = 8;
+    public static final int CTMX = 8;
+    public static final int R16 = 9;
+    public static final int R9 = 10;
+    public static final int R4 = 11;
+
+    private static final Random rand = new Random();
 
 	public ArrayList<CarvableVariation> variations = new ArrayList<CarvableVariation>();
 	CarvableVariation[] map = new CarvableVariation[16];
@@ -88,6 +88,9 @@ public class CarvableHelper {
 			boolean v9 = Chisel.class.getResource(path + "-v9.png") != null;
 			boolean v4 = Chisel.class.getResource(path + "-v4.png") != null;
 			boolean ctmx = Chisel.class.getResource(path + "-ctm.png") != null;
+            boolean r16 = Chisel.class.getResource(path + "-r16.png") != null;
+            boolean r9 = Chisel.class.getResource(path + "-r9.png") != null;
+            boolean r4 = Chisel.class.getResource(path + "-r4.png") != null;
 
 			if (ctm3) {
 				variation.kind = 3;
@@ -105,7 +108,13 @@ public class CarvableHelper {
 				variation.kind = V4;
 			} else if (any && ctmx && !Configurations.disableCTM) {
 				variation.kind = CTMX;
-			} else if (any) {
+			} else if (r16) {
+                variation.kind = R16;
+            } else if (r9) {
+                variation.kind = R9;
+            } else if (r4) {
+                variation.kind = R4;
+            } else if (any) {
 				variation.kind = 0;
 			} else {
 				throw new RuntimeException("No valid textures found for chisel block variation '" + description + "' (" + variation.texture + ")");
@@ -140,38 +149,44 @@ public class CarvableHelper {
 			return GeneralClient.getMissingIcon();
 
 		switch (variation.kind) {
-		case NORMAL:
-			return variation.icon;
-		case TOPSIDE:
-			if (side == 0 || side == 1)
-				return variation.iconTop;
-			else
-				return variation.icon;
-		case TOPBOTSIDE:
-			if (side == 1)
-				return variation.iconTop;
-			else if (side == 0)
-				return variation.iconBot;
-			else
-				return variation.icon;
-		case CTM3:
-			return variation.ctm.seams[0].icons[0];
-		case CTMV:
-			if (side < 2)
-				return variation.iconTop;
-			else
-				return variation.seamsCtmVert.icons[0];
-		case CTMH:
-			if (side < 2)
-				return variation.iconTop;
-			else
-				return variation.seamsCtmVert.icons[0];
-		case V9:
-			return variation.variations9.icons[4];
-		case V4:
-			return variation.variations9.icons[0];
-		case CTMX:
-			return variation.icon;
+            case NORMAL:
+                return variation.icon;
+            case TOPSIDE:
+                if (side == 0 || side == 1)
+                    return variation.iconTop;
+                else
+                    return variation.icon;
+            case TOPBOTSIDE:
+                if (side == 1)
+                    return variation.iconTop;
+                else if (side == 0)
+                    return variation.iconBot;
+                else
+                    return variation.icon;
+            case CTM3:
+                return variation.ctm.seams[0].icons[0];
+            case CTMV:
+                if (side < 2)
+                    return variation.iconTop;
+                else
+                    return variation.seamsCtmVert.icons[0];
+            case CTMH:
+                if (side < 2)
+                    return variation.iconTop;
+                else
+                    return variation.seamsCtmVert.icons[0];
+            case V9:
+                return variation.variations9.icons[4];
+            case V4:
+                return variation.variations9.icons[0];
+            case CTMX:
+                return variation.icon;
+            case R16:
+                return variation.variations9.icons[5];
+            case R9:
+                return variation.variations9.icons[4];
+            case R4:
+                return variation.variations9.icons[0];
 		}
 
 		return GeneralClient.getMissingIcon();
@@ -242,14 +257,37 @@ public class CarvableHelper {
 			return variation.seamsCtmVert.icons[0];
 		case V9:
 		case V4:
-			int index = x + y * 606731 + z * 571163 + side * 555491;
-			if (index < 0)
-				index = -index;
+			int index = x + y + z;
+            if ((side==2)||(side==5))
+            {
+                index=-index;
+            }
+			while (index < 0)
+            {
+                index = index+10000;
+            }
 
 			return variation.variations9.icons[index % ((variation.kind == V9) ? 9 : 4)];
 		case CTMX:
 			return variation.icon;
+        case R16:
+        case R9:
+        case R4:
+
+            int indexRan = x + y + z;
+            if ((side==2)||(side==5)) {
+                indexRan = -indexRan;
+            }
+            while (indexRan < 0) {
+                indexRan = indexRan+10000;
+            }
+
+            //rand.setSeed(indexRan); // Broken
+
+            return variation.variations9.icons[ /*rand*/ indexRan % ((variation.kind == R9) ? 9 : 4)];
 		}
+
+
 
 		return GeneralClient.getMissingIcon();
 	}
@@ -356,6 +394,15 @@ public class CarvableHelper {
 					variation.submap = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm"), 4, 4);
 					variation.submapSmall = new TextureSubmap(variation.icon, 2, 2);
 					break;
+                case R16:
+                    variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r16"), 4, 4);
+                    break;
+                case R9:
+                    variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r9"), 3, 3);
+                    break;
+                case R4:
+                    variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r4"), 2, 2);
+                    break;
 				}
 			}
 		}
@@ -368,7 +415,7 @@ public class CarvableHelper {
 	}
 
 	public void setChiselBlockName(String name) {
-		blockName = name;
+        blockName = name;
 	}
 
 	public static Set<Block> getChiselBlockSet() {
