@@ -1,6 +1,8 @@
 package com.cricketcraft.chisel.config;
 
+import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.Features;
+import net.minecraft.item.ItemDye;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.commons.lang3.StringUtils;
 
@@ -47,6 +49,8 @@ public class Configurations {
 	public static String getRoadLineTool;
 	public static int roadLineToolLevel;
 
+    public static int[] configColors = new int[ItemDye.field_150923_a.length];
+
 	public static boolean refreshConfig() {
 
 		String category;
@@ -63,8 +67,7 @@ public class Configurations {
 		enableFMP = config.get(category, "enableFMP", true, "Do you want to enable FMP").getBoolean(true);
 		chiselStoneToCobbleBricks = config.get(category, "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left clicking.").getBoolean(false);
 		chiselBackToVanillaLeaves = config.get(category, "chiselBackToVanillaLeaves", false, "If this is true, you can chisel from the chisel leaves back to vanilla ones. If it is false, you cannot.")
-				.getBoolean(
-						false);
+				.getBoolean(false);
 
 		/* worldgen */
 		category = "worldgen";
@@ -102,6 +105,21 @@ public class Configurations {
 		roadLineToolLevel = config.get(category, "roadLineToolLevel", 0,
 				"The lowest harvest level of the tool able to break the road lines (requires useRoadLineTool to be true to take effect) (0 = Wood/Gold, 1 = Stone, 2 = Iron, 3 = Diamond) Default: 0")
 				.getInt();
+
+        /* hexColors */
+        category = "hexColors";
+
+        for(int i = 0; i < ItemDye.field_150923_a.length; i++) {
+            // tterrag... don't kill me over this formatting.
+            String temp = config.get(category, "hex" + ItemDye.field_150923_a[i], "#" + Integer.toHexString(ItemDye.field_150922_c[i]), Character.toUpperCase(ItemDye.field_150923_a[i].charAt(0)) + ItemDye.field_150923_a[i].substring(1) + " color for hex block overlay #RRGGBB").getString();
+            // Or this
+            try {
+                configColors[i] = Integer.decode(temp);
+            } catch (NumberFormatException e) {
+                Chisel.logger.warn("Configuration error, " + temp + " was not recognized as a color.  Using default: #" + Integer.toHexString(ItemDye.field_150922_c[i]));
+                configColors[i] = ItemDye.field_150922_c[i];
+            }
+        }
 
 		if (config.hasChanged()) {
 			config.save();
