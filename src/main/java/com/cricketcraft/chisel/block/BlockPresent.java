@@ -128,7 +128,6 @@ public class BlockPresent extends Block implements ICarvable {
 
 	public AxisAlignedBB getBoundingBox(TileEntityPresent me) {
 		if (me == null) {
-			System.out.println(-1);
 			return AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
 		}
 		int x = me.xCoord, y = me.yCoord, z = me.zCoord;
