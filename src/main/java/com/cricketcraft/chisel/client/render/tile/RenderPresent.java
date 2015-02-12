@@ -34,11 +34,11 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
-		int meta = present.getBlockMetadata();
+		int rotation = present.getRotation();
 		bindTexture(present);
 		if (!present.isConnected()) {
-			GL11.glRotatef(90 * meta + 180, 0, 1, 0);
-			switch(present.getBlockMetadata()) {
+			GL11.glRotatef(90 * rotation + 180, 0, 1, 0);
+			switch(rotation) {
 			case 0:
 				GL11.glTranslatef(-1, 0, -1);
 				break;
@@ -67,7 +67,7 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 			default:
 				break;
 			}
-			if (meta == 0 || meta == 3) {
+			if (rotation == 0 || rotation == 3) {
 				GL11.glRotatef(180, 0, 1, 0);
 				GL11.glTranslatef(-2, 0, -1);
 			}
@@ -77,10 +77,10 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 	}
 	
 	private void bindTexture(TileEntityPresent present) {
-		int idx = present.getType() + (present.isConnected() ? 0 : 16);
+		int idx = present.getWorldObj().getBlockMetadata(present.xCoord, present.yCoord, present.zCoord) + (present.isConnected() ? 0 : 16);
 		ResourceLocation rl = textureCache.get(idx);
 		if (rl == null) {
-			String res = ChiselBlocks.present.getModelTexture(present.getType());
+			String res = ChiselBlocks.present.getModelTexture(idx % 16);
 			res += present.isConnected() ? "_double.png" : ".png";
 			rl = new ResourceLocation("chisel", res);
 			textureCache.put(idx, rl);
