@@ -2454,6 +2454,21 @@ public enum Features {
 		}
 	},
 
+	VALENTINES {
+		@Override void addBlocks() {
+			BlockCarvable valentines = (BlockCarvable) new BlockCarvable(Material.wood).setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(2F)
+					.setResistance(10F);
+			valentines.carverHelper.addVariation("tile.valentines.0.desc", 0, "valentines/bricks");
+			valentines.carverHelper.addVariation("tile.valentines.1.desc", 1, "valentines/companion");
+			valentines.carverHelper.registerAll(valentines, "valentines");
+			Carving.chisel.registerOre("valentines", "blockValentines");
+		}
+
+		@Override void addRecipes() {
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.valentines, 8, 0), "***", "*X*", "***", '*', "stone", 'X', new ItemStack(Items.dye, 1, 9)));
+		}
+	},
+
 	VOIDSTONE {
 
 		@Override
