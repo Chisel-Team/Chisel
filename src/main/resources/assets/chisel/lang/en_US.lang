@@ -29,6 +29,11 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 
 #Chisel 2
 
+#Valentines
+tile.chisel.valentines.name=Valentines Block
+tile.valentines.0.desc=Valentines Bricks
+tile.valentines.1.desc=If it speaks, I wouldn't touch it
+
 #AntiBlocks
 tile.chisel.antiBlock.name=Anti Block
 tile.antiBlock.black.desc=Black Anti Block
