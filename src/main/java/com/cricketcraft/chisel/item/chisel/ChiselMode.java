@@ -102,7 +102,11 @@ public enum ChiselMode implements IChiselMode {
 		}
 
 		if (held != null && held.getItem() instanceof IChiselItem) {
-			world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
+			if (origBlock == block) {
+				world.setBlockMetadataWithNotify(x, y, z, v.getBlockMeta(), 3);
+			} else {
+				world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
+			}
 			boolean breakChisel = false;
 			if (((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.getCurrentEquippedItem(), v)) {
 				player.getCurrentEquippedItem().damageItem(1, player);

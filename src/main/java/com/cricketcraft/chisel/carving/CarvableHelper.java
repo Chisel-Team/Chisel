@@ -255,19 +255,40 @@ public class CarvableHelper {
 			else if (n)
 				return variation.seamsCtmVert.icons[reverse ? 3 : 2];
 			return variation.seamsCtmVert.icons[0];
-		case V9:
-		case V4:
-			int index = x + y + z;
-            if ((side==2)||(side==5))
-            {
-                index=-index;
-            }
-			while (index < 0)
-            {
-                index = index+10000;
+        case V9:
+        case V4:
+            int variationSize = (variation.kind == V9) ? 3 : 2;
+
+            int xModulus = x % variationSize;
+            int zModulus = z % variationSize;
+            //This ensures that blocks placed near 0,0 or it's axis' do not misbehave
+            int textureX = (xModulus < 0) ? (xModulus + variationSize) : xModulus;
+            int textureZ = (zModulus < 0) ? (zModulus + variationSize) : zModulus;
+            //Always invert the y index
+            int textureY = (variationSize - (y % variationSize) - 1);
+
+            if (side == 2 || side == 5) {
+                //For WEST, SOUTH reverse the indexes for both X and Z
+                textureX = (variationSize - textureX - 1);
+                textureZ = (variationSize - textureZ - 1);
+            } else if (side == 0) {
+                //For DOWN, reverse the indexes for only Z
+                textureZ = (variationSize - textureZ - 1);
             }
 
-			return variation.variations9.icons[index % ((variation.kind == V9) ? 9 : 4)];
+            int index;
+            if (side == 0 || side == 1) {
+                // DOWN || UP
+                index = textureX + textureZ * variationSize;
+            } else if (side == 2 || side == 3) {
+                // NORTH || SOUTH
+                index = textureX + textureY * variationSize;
+            } else {
+                // WEST || EAST
+                index = textureZ + textureY * variationSize;
+            }
+
+            return variation.variations9.icons[index];
 		case CTMX:
 			return variation.icon;
         case R16:
