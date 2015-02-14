@@ -238,6 +238,14 @@ tile.technical.15.desc=Rusty Grate
 tile.chisel.technical2.name=Transparent Technical Block
 
 #Metal Blocks
+tile.chisel.aluminumblock.name=Block of Aluminum
+tile.chisel.bronzeblock.name=Block of Bronze
+tile.chisel.copperblock.name=Block of Copper
+tile.chisel.leadblock.name=Block of Lead
+tile.chisel.silverblock.name=Block of Silver
+tile.chisel.steelblock.name=Block of Steel
+tile.chisel.tinblock.name=Block of Tin
+tile.chisel.uraniumblock.nameBlock of Uranium
 tile.metalOre.0.desc=Caution Stripes
 tile.metalOre.1.desc=Shipping Crate
 tile.metalOre.2.desc=Thermal
