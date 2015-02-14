@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.block.tileentity;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -10,19 +11,20 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.network.PacketHandler;
 import com.cricketcraft.chisel.network.message.MessagePresentConnect;
 
-public class TileEntityPresent extends TileEntity implements IInventory {
+public class TileEntityPresent extends TileEntity implements IInventory, IDoubleChest {
 
 	private TileEntityPresent connection = null;
 	private ForgeDirection cachedDir = null;
 	private boolean isParent;
-	private ItemStack[] inventory = new ItemStack[27];
-	private int type;
+	private final ItemStack[] inventory = new ItemStack[27];
+	private int rotation;
 	private boolean autoSearch = true;
 
 	@Override
@@ -46,12 +48,14 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 	}
 
 	private boolean connectTo(TileEntityPresent present, ForgeDirection dir) {
-		if (present.type == type && !present.isConnected() && Math.abs(present.xCoord - xCoord + present.yCoord - yCoord + present.zCoord - zCoord) == 1) {
+		if (present.getBlockMetadata() == getBlockMetadata() && !present.isConnected() && Math.abs(present.xCoord - xCoord + present.yCoord - yCoord + present.zCoord - zCoord) == 1) {
 			connection = present;
 			connection.connection = this;
 			connection.cachedDir = dir.getOpposite();
+			connection.markDirty();
 			cachedDir = dir;
 			isParent = !present.isParent;
+			markDirty();
 			PacketHandler.INSTANCE.sendToDimension(new MessagePresentConnect(this, dir, true), worldObj.provider.dimensionId);
 			return true;
 		}
@@ -70,8 +74,10 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 		if (isConnected()) {
 			this.connection.cachedDir = null;
 			this.connection.connection = null;
+			this.connection.markDirty();
 			this.cachedDir = null;
 			this.connection = null;
+			this.markDirty();
 			PacketHandler.INSTANCE.sendToDimension(new MessagePresentConnect(this, ForgeDirection.UNKNOWN, false), worldObj.provider.dimensionId);
 		}
 	}
@@ -88,12 +94,12 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 		return isParent || !isConnected();
 	}
 
-	public int getType() {
-		return type;
+	public int getRotation() {
+		return rotation;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setRotation(int rot) {
+		this.rotation = rot;
 	}
 
 	public void findConnections() {
@@ -123,7 +129,7 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 		super.writeToNBT(tag);
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < inventory.length; ++i)
+		for (int i = 0; i < getTrueSizeInventory(); ++i)
 		{
 			if (inventory[i] != null)
 			{
@@ -136,7 +142,7 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 
 		tag.setTag("Items", nbttaglist);
 		tag.setBoolean("isParent", isParent);
-		tag.setInteger("presentType", type);
+		tag.setInteger("rotation", rotation);
 		if (cachedDir != null) {
 			tag.setInteger("conDir", cachedDir.ordinal());
 		}
@@ -147,14 +153,13 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 	{
 		super.readFromNBT(tag);
 		NBTTagList nbttaglist = tag.getTagList("Items", 10);
-		inventory = new ItemStack[this.getSizeInventory()];
 
 		for (int i = 0; i < nbttaglist.tagCount(); ++i)
 		{
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			int j = nbttagcompound1.getByte("Slot") & 255;
 
-			if (j >= 0 && j < inventory.length)
+			if (j >= 0 && j < getTrueSizeInventory())
 			{
 				inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
@@ -162,7 +167,7 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 
 		this.isParent = tag.getBoolean("isParent");
 
-		this.type = tag.getInteger("presentType");
+		this.rotation = tag.getInteger("rotation");
 		if (tag.hasKey("conDir")) {
 			cachedDir = ForgeDirection.values()[tag.getInteger("conDir")];
 		}
@@ -180,18 +185,33 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
 		readFromNBT(packet.func_148857_g());
 	}
+	
+	@Override
+	public boolean shouldRefresh(Block oldBlock, Block newBlock, int oldMeta, int newMeta, World world, int x, int y, int z) {
+		// prevent losing TE data when in-world chiseling
+		return oldBlock != newBlock;
+	}
 
+	private int getAdjustedSlot(int slot) {
+		slot %= getSizeInventory();
+		if (isConnected() && !isParent) {
+			slot = (slot + getTrueSizeInventory()) % getSizeInventory();
+		}
+		return slot;
+	}
+	
 	/* IInventory */
 
 	@Override
 	public int getSizeInventory() {
-		return isConnected() ? inventory.length + connection.inventory.length : inventory.length;
+		return isConnected() ? getTrueSizeInventory() + connection.getTrueSizeInventory() : getTrueSizeInventory();
 	}
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		if (slot >= inventory.length) {
-			return isConnected() ? connection.inventory[slot % inventory.length] : null;
+		slot = getAdjustedSlot(slot);
+		if (slot >= getTrueSizeInventory()) {
+			return isConnected() ? connection.inventory[slot % getTrueSizeInventory()] : null;
 		} else {
 			return inventory[slot];
 		}
@@ -200,10 +220,11 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 	@Override
 	public ItemStack decrStackSize(int slot, int amount)
 	{
+		slot = getAdjustedSlot(slot);
 		ItemStack[] inv = inventory;
-		if (isConnected() && slot >= inventory.length) {
+		if (isConnected() && slot >= getTrueSizeInventory()) {
 			inv = connection.inventory;
-			slot %= inventory.length;
+			slot %= getTrueSizeInventory();
 		}
 
 		if (inv[slot] != null)
@@ -243,10 +264,11 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		if (slot < inventory.length) {
+		slot = getAdjustedSlot(slot);
+		if (slot < getTrueSizeInventory()) {
 			inventory[slot] = stack;
 		} else if (isConnected()) {
-			connection.inventory[slot % inventory.length] = stack;
+			connection.inventory[slot % getTrueSizeInventory()] = stack;
 		}
 	}
 
@@ -283,5 +305,22 @@ public class TileEntityPresent extends TileEntity implements IInventory {
 	@Override
 	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
 		return true;
+	}
+	
+	/* IDoubleChest */
+	
+	@Override
+	public int getTrueSizeInventory() {
+		return inventory.length;
+	}
+	
+	@Override
+	public ItemStack getTrueStackInSlot(int slot) {
+		return inventory[slot % getTrueSizeInventory()];
+	}
+	
+	@Override
+	public void putStackInTrueSlot(int slot, ItemStack stack) {
+		inventory[slot % getTrueSizeInventory()] = stack; 
 	}
 }

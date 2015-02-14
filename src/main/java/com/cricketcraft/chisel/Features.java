@@ -110,14 +110,15 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable antiBlock = (BlockCarvable) new BlockCarvableAntiBlock().setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 			antiBlock.carverHelper.setChiselBlockName("Anti Block");
-			if (!Configurations.allowChiselCrossColors)
+			if (!Configurations.allowChiselCrossColors) {
 				antiBlock.carverHelper.forbidChiseling = true;
+			}
 
 			for (int i = 0; i < 16; i++) {
 				antiBlock.carverHelper.addVariation("tile.antiBlock." + ItemDye.field_150921_b[i] + ".desc", i, "antiblock/" + ItemDye.field_150921_b[i] + "-antiBlock");
 			}
 
-			antiBlock.carverHelper.registerBlock(antiBlock, "antiBlock");
+			antiBlock.carverHelper.registerAll(antiBlock, "antiBlock");
 			OreDictionary.registerOre("antiBlock", antiBlock);
 		}
 
@@ -312,8 +313,9 @@ public enum Features {
 			carpet_block.carverHelper.addVariation("tile.carpet_block.13.desc", 13, "carpet/green");
 			carpet_block.carverHelper.addVariation("tile.carpet_block.14.desc", 14, "carpet/red");
 			carpet_block.carverHelper.addVariation("tile.carpet_block.15.desc", 15, "carpet/black");
-			if (!Configurations.allowChiselCrossColors)
+			if (!Configurations.allowChiselCrossColors) {
 				carpet_block.carverHelper.forbidChiseling = true;
+			}
 			carpet_block.carverHelper.registerAll(carpet_block, "carpet_block");
 			OreDictionary.registerOre("blockCarpet", carpet_block);
 		}
@@ -352,8 +354,9 @@ public enum Features {
 			carpet.carverHelper.addVariation("tile.carpet.13.desc", 13, "carpet/green");
 			carpet.carverHelper.addVariation("tile.carpet.14.desc", 14, "carpet/red");
 			carpet.carverHelper.addVariation("tile.carpet.15.desc", 15, "carpet/black");
-			if (!Configurations.allowChiselCrossColors)
+			if (!Configurations.allowChiselCrossColors) {
 				carpet.carverHelper.forbidChiseling = true;
+			}
 			carpet.carverHelper.registerAll(carpet, "carpet");
 
 			// for (int i = 0; i < 16; i++) {
@@ -2448,6 +2451,21 @@ public enum Features {
 			uranium.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/uranium/bolted");
 			uranium.carverHelper.registerAll(uranium, "uraniumblock");
 			Carving.chisel.registerOre("uraniumblock", "blockUranium");
+		}
+	},
+
+	VALENTINES {
+		@Override void addBlocks() {
+			BlockCarvable valentines = (BlockCarvable) new BlockCarvable(Material.wood).setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(2F)
+					.setResistance(10F);
+			valentines.carverHelper.addVariation("tile.valentines.0.desc", 0, "valentines/bricks");
+			valentines.carverHelper.addVariation("tile.valentines.1.desc", 1, "valentines/companion");
+			valentines.carverHelper.registerAll(valentines, "valentines");
+			Carving.chisel.registerOre("valentines", "blockValentines");
+		}
+
+		@Override void addRecipes() {
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.valentines, 8, 0), "***", "*X*", "***", '*', "stone", 'X', new ItemStack(Items.dye, 1, 9)));
 		}
 	},
 

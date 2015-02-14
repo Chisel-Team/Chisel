@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -76,13 +77,13 @@ public class BlockPresent extends Block implements ICarvable {
 		super.onBlockPlacedBy(world, x, y, z, player, stack);
 		int heading = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 		TileEntityPresent te = (TileEntityPresent) world.getTileEntity(x, y, z);
-		world.setBlockMetadataWithNotify(x, y, z, heading, 3);
+		world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 3);
+		te.setRotation(heading);
 		te.findConnections();
 		if (te.isConnected()) {
 			TileEntityPresent other = te.getConnection();
-			world.setBlockMetadataWithNotify(other.xCoord, other.yCoord, other.zCoord, heading, 3);
+			other.setRotation(heading);
 		}
-		te.setType(stack.getItemDamage());
 		world.markBlockForUpdate(x, y, z);
 	}
 
@@ -92,8 +93,8 @@ public class BlockPresent extends Block implements ICarvable {
 		TileEntityPresent tileEntityPresent = (TileEntityPresent) world.getTileEntity(x, y, z);
 
 		if (tileEntityPresent != null) {
-			for (int c = 0; c < tileEntityPresent.getSizeInventory(); c++) {
-				ItemStack itemStack = tileEntityPresent.getStackInSlot(c);
+			for (int c = 0; c < tileEntityPresent.getTrueSizeInventory(); c++) {
+				ItemStack itemStack = tileEntityPresent.getTrueStackInSlot(c);
 
 				if (itemStack != null) {
 					dropBlockAsItem(world, x, y, z, itemStack);
@@ -132,7 +133,8 @@ public class BlockPresent extends Block implements ICarvable {
 		int x = me.xCoord, y = me.yCoord, z = me.zCoord;
 		if (me.isConnected()) {
 			ForgeDirection dir = me.getConnectionDir();
-			if (dir != ForgeDirection.NORTH && (!me.isParent() || dir == ForgeDirection.SOUTH)) {
+			// warning: magic below! Do not change this conditional
+			if (dir == ForgeDirection.EAST || (me.isParent() && dir == ForgeDirection.SOUTH) || (!me.isParent() && dir == ForgeDirection.SOUTH)) {
 				return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x + maxX + dir.offsetX, y + maxY, z + maxZ + dir.offsetZ);
 			} else {
 				return AxisAlignedBB.getBoundingBox(x + dir.offsetX + minX, y + minY, z + dir.offsetZ + minZ, x + maxX, y + maxY, z + maxZ);
@@ -191,6 +193,16 @@ public class BlockPresent extends Block implements ICarvable {
 		}
 		return 0;
 	}
+	
+	@Override
+	public int damageDropped(int meta) {
+		return meta;
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+		return new ItemStack(this, 1, world.getBlockMetadata(x, y, z));
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
@@ -200,8 +212,7 @@ public class BlockPresent extends Block implements ICarvable {
 
 	@Override
 	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
-		TileEntity te = world.getTileEntity(x, y, z);
-		return te instanceof TileEntityPresent ? carverHelper.getVariation(((TileEntityPresent) te).getType()) : carverHelper.getVariation(metadata);
+		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
