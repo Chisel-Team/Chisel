@@ -1,8 +1,10 @@
 package com.cricketcraft.chisel.inventory;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerPresent extends ContainerChest {
 
@@ -35,5 +37,41 @@ public class ContainerPresent extends ContainerChest {
 
 	public IInventory getLowerPresentInventory() {
 		return lower;
+	}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer p_82846_1_, int p_82846_2_) {
+
+		ItemStack itemstack = null;
+		Slot slot = (Slot) this.inventorySlots.get(p_82846_2_);
+
+		if (slot != null && slot.getHasStack())
+		{
+			ItemStack itemstack1 = slot.getStack();
+			itemstack = itemstack1.copy();
+
+			if (p_82846_2_ < rows * 9)
+			{
+				if (!this.mergeItemStack(itemstack1, rows * 9, rows * 9 + 36, true))
+				{
+					return null;
+				}
+			}
+			else if (!this.mergeItemStack(itemstack1, 0, rows * 9, false))
+			{
+				return null;
+			}
+
+			if (itemstack1.stackSize == 0)
+			{
+				slot.putStack((ItemStack) null);
+			}
+			else
+			{
+				slot.onSlotChanged();
+			}
+		}
+
+		return itemstack;
 	}
 }
