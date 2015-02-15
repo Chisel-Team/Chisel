@@ -1745,9 +1745,9 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockPresent present = (BlockPresent) new BlockPresent().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(2.0F).setResistance(10.0F).setBlockName("present");
+			BlockPresent present = (BlockPresent) new BlockPresent().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(2.0F).setResistance(10.0F).setBlockName("chisel.present");
 			for (int i = 0; i < 16; i++) {
-				present.carverHelper.addVariation("tile.present.desc." + i, i, Blocks.chest);
+				present.carverHelper.addVariation("tile.chisel.present.desc", i, Blocks.chest);
 			}
 			present.carverHelper.registerAll(present, "present", ItemBlockPresent.class);
 			Carving.chisel.registerOre("present", "chest");
