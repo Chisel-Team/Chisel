@@ -1,3 +1,14 @@
+2.3.6
+Fixes
+- Fix present not keeping inventory
+- Fix present not rendering correctly
+- Fix crashes due to rendering waterstone and the likes when covered by all 6 sides
+- Fix crash with Railcraft when block was left enabled
+
+Added
+- All metal types are now available
+- Valentines block, more coming soon
+
 2.3.5:
 Fixes
 - Fix crash with copper block feature
