@@ -1,13 +1,21 @@
-2.3.6
+2.3.6:
+New
+- Rewrote presents, now function properly as double chests (better than vanilla!)
+- Add metal blocks, varaitions for aluminum, bronze, lead, silver, steel, tin, and uranium
+- Config options for hex block colors
+- 2 Valentine's blocks
+Changes
+- Antiblocks and other colored blocks can now be chiseled between
+- New malfunctioning fan texture
+- V4 and V9 textures will now tile instead of staircase
 Fixes
-- Fix present not keeping inventory
-- Fix present not rendering correctly
-- Fix crashes due to rendering waterstone and the likes when covered by all 6 sides
-- Fix crash with Railcraft when block was left enabled
-
-Added
-- All metal types are now available
-- Valentines block, more coming soon
+- Fixed some render issues with ice/icepillars
+- Crash with some IFacade blocks next to columns
+- Fix harvest levels of all blocks
+- Fix compatability with Railcraft 9.5.X
+- Fix crashes with creative tabs
+API
+- Add IMC for major API functions
 
 2.3.5:
 Fixes
