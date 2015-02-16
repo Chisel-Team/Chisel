@@ -1,18 +1,17 @@
 package com.cricketcraft.chisel.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ContainerChest;
+import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerPresent extends ContainerChest {
+public class ContainerPresent extends Container {
 
 	private IInventory lower;
 	private int rows;
 
 	public ContainerPresent(IInventory player, IInventory chest) {
-		super(player, chest);
 		lower = chest;
 		rows = chest.getSizeInventory() / 9;
 		chest.openInventory();
@@ -52,7 +51,7 @@ public class ContainerPresent extends ContainerChest {
 
 			if (p_82846_2_ < rows * 9)
 			{
-				if (!this.mergeItemStack(itemstack1, rows * 9, rows * 9 + 36, true))
+				if (!this.mergeItemStack(itemstack1, rows * 9, inventorySlots.size(), true))
 				{
 					return null;
 				}
@@ -73,5 +72,10 @@ public class ContainerPresent extends ContainerChest {
 		}
 
 		return itemstack;
+	}
+
+	@Override
+	public boolean canInteractWith(EntityPlayer p_75145_1_) {
+		return true;
 	}
 }

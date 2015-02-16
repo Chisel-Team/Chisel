@@ -102,7 +102,7 @@ public enum ChiselMode implements IChiselMode {
 		}
 
 		if (held != null && held.getItem() instanceof IChiselItem) {
-			if (origBlock == block) {
+			if (origBlock == v.getBlock()) {
 				world.setBlockMetadataWithNotify(x, y, z, v.getBlockMeta(), 3);
 			} else {
 				world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
