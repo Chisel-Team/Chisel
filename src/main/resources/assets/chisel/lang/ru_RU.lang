@@ -29,6 +29,11 @@ item.upgrade_stack.desc=Позволяет стамеске обрабатыва
 
 #Chisel 2
 
+#Valentines
+tile.chisel.valentines.name=Блок Валентина
+tile.valentines.0.desc=Кирпичи Валентина
+tile.valentines.1.desc=Если оно говорит, я не буду его трогать
+
 #AntiBlocks
 tile.chisel.antiBlock.name=Антиблок
 tile.antiBlock.black.desc=Чёрный антиблок
@@ -52,16 +57,19 @@ tile.antiBlock.gray.desc=Серый антиблок
 tile.chisel.diorite.name=Диорит
 tile.diorite.0.desc=Генерируется в Вашем мире
 tile.diorite.1.desc=Гладкий диорит
+tile.diorite.2.desc=Колонна из диорита
 
 #Andesite
 tile.chisel.andesite.name=Андезит
 tile.andesite.0.desc=Генерируется в Вашем мире
 tile.andesite.1.desc=Гладкий андезит
+tile.andesite.2.desc=Колонна из андезита
 
 #Granite
 tile.chisel.granite.name=Гранит
 tile.granite.0.desc=Генерируется в Вашем мире
 tile.granite.1.desc=Гладкий гранит
+tile.granite.2.desc=Колонна из гранита
 
 #Auto Chisel
 tile.chisel.autoChisel.name=Автоматическая стамеска
@@ -143,6 +151,8 @@ tile.thaumium.0.desc=Декоративный шаблон
 tile.thaumium.1.desc=Изображения тотемов
 tile.thaumium.2.desc=Кирпичи
 tile.thaumium.3.desc=Маленькие плитки
+tile.thaumium.4.desc=Решётка
+tile.thaumium.5.desc=Огранённые доски
 
 #Tallow
 tile.chisel.tallow.name=Блок жира
@@ -232,12 +242,25 @@ tile.technical.14.desc=Вентилятор (Неисправный)
 tile.technical.15.desc=Ржавая решётка
 tile.chisel.technical2.name=Прозрачный промышленный блок
 
+#Metal Blocks
+tile.chisel.aluminumblock.name=Алюминиевый блок
+tile.chisel.bronzeblock.name=Бронзовый блок
+tile.chisel.copperblock.name=Медный блок
+tile.chisel.leadblock.name=Свинцовый блок
+tile.chisel.silverblock.name=Серебряный блок
+tile.chisel.steelblock.name=Стальной блок
+tile.chisel.tinblock.name=Оловянный блок
+tile.chisel.uraniumblock.name=Урановый блок
+tile.metalOre.0.desc=Предупреждающие полосы
+tile.metalOre.1.desc=Ящик доставки
+tile.metalOre.2.desc=Тепловой
+tile.metalOre.3.desc=Старая реликвия из древних земель
+tile.metalOre.4.desc=Хорошо огранённый блок
+tile.metalOre.5.desc=Красивое болтовое покрытие
+
 #Present Chest
-tile.chisel.present.name=Коробка с подарком
-tile.present.0.desc=§cКрасный подарок
-tile.present.1.desc=§9Синий подарок
-tile.present.2.desc=§aЗелёный подарок
-tile.present.3.desc=§eЖёлтый подарок
+tile.chisel.present.name=Подарок
+tile.chisel.present.desc=Красивенький подарочный сундук
 
 #Brick
 tile.chisel.brickCustom.name=Блок кирпича
@@ -245,6 +268,7 @@ tile.brickCustom.1.desc=Большие кирпичи
 tile.brickCustom.2.desc=Кирпичи без цемента
 tile.brickCustom.3.desc=Различные кирпичи
 tile.brickCustom.5.desc=Старые кирпичи
+tile.brickCustom.6.desc=Жёлтые кирпичи
 
 #Chisel 1
 
@@ -765,6 +789,7 @@ tile.icePillar.2.desc=Греческая ледяная колонна с обы
 tile.icePillar.3.desc=Греческая ледяная колонна с греческой капителью
 tile.icePillar.4.desc=Резная капитель ледяной колонны
 tile.icePillar.5.desc=Декоративная капитель ледяной колонны
+tile.icePillar.6.desc=Расписанная ледяная колонна
 
 #Ice Stairs
 tile.chisel.ice_stairs.name=Ледяные ступеньки
@@ -819,6 +844,7 @@ tile.packedice_pillar.2.desc=Греческая колонна из плотно
 tile.packedice_pillar.3.desc=Греческая колонна из плотного льда с греческой капителью
 tile.packedice_pillar.4.desc=Резная капитель колонны из плотного льда
 tile.packedice_pillar.5.desc=Декоративная капитель колонны из плотного льда
+tile.packedice_pillar.6.desc=Расписанная колонна из плотного льда
 
 #Packed Ice Stairs
 tile.chisel.packedice_stairs.name=Ступеньки из плотного льда
