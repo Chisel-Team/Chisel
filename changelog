@@ -1,3 +1,9 @@
+2.3.7:
+Changes
+- Updated russian translation
+Fixes
+- Fixed a serious bug allowing left-click chiseling to change blocks to incorrect types
+
 2.3.6:
 New
 - Rewrote presents, now function properly as double chests (better than vanilla!)
