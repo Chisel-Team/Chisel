@@ -31,8 +31,12 @@ public class CarvingUtils {
 	}
 
 	private static Field _chisel;
-	private static boolean errored = false;
+	private static boolean registryErrored = false;
 	private static final String CARVING_CLASS = "com.cricketcraft.chisel.carving.Carving";
+
+	private static Class<ICarvableHelper> _carvableHelper;
+	private static boolean helperErrored = false;
+	private static final String CARVABLE_HELPER_CLASS = "com.cricketcraft.carving.CarvableHelper";
 
 	/**
 	 * @return The instance of the chisel carving registry from the chisel mod.
@@ -40,7 +44,7 @@ public class CarvingUtils {
 	 *         If chisel is not installed or some other error occurs this will return null.
 	 */
 	public static ICarvingRegistry getChiselRegistry() {
-		if (errored) {
+		if (registryErrored) {
 			return null;
 		}
 
@@ -51,8 +55,31 @@ public class CarvingUtils {
 			return (ICarvingRegistry) _chisel.get(null);
 		} catch (Exception e) {
 			e.printStackTrace();
-			errored = true;
+			registryErrored = true;
 			return getChiselRegistry();
+		}
+	}
+
+	/**
+	 * @return An instance of an {@link ICarvableHelper}.
+	 *         <p>
+	 *         If chisel is not installed or some other error occurs this will return null.
+	 */
+	@SuppressWarnings("unchecked")
+	public static ICarvableHelper getCarvableHelperInstance() {
+		if (helperErrored) {
+			return null;
+		}
+
+		try {
+			if (_carvableHelper == null) {
+				_carvableHelper = (Class<ICarvableHelper>) Class.forName(CARVABLE_HELPER_CLASS);
+			}
+			return _carvableHelper.newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+			helperErrored = true;
+			return getCarvableHelperInstance();
 		}
 	}
 }
