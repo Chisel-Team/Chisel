@@ -8,6 +8,7 @@ import com.cricketcraft.chisel.compat.FMPIntegration;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.utils.GeneralClient;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
@@ -23,20 +24,288 @@ import java.util.*;
 
 public class CarvableHelper {
 
-	public static final int NORMAL = 0;
-	public static final int TOPSIDE = 1;
-	public static final int TOPBOTSIDE = 2;
-	public static final int CTM3 = 3;
-	public static final int CTMV = 4;
-	public static final int CTMH = 5;
-	public static final int V9 = 6;
-	public static final int V4 = 7;
-    public static final int CTMX = 8;
-    public static final int R16 = 9;
-    public static final int R9 = 10;
-    public static final int R4 = 11;
+	public interface ISubmapManager {
 
-    private static final Random rand = new Random();
+		IIcon getIcon(int side, int meta);
+
+		IIcon getIcon(IBlockAccess world, int x, int y, int z, int side);
+
+		void registerIcons(String modName, Block block, IIconRegister register);
+	}
+
+	public enum TextureType implements ISubmapManager {
+
+		TOPSIDE("top", "side") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		TOPBOTSIDE("top", "bottom", "side") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		CTM3("ctm1", "ctm2", "ctm3") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		CTMV("ctmv", "top") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		CTMH("ctmh", "top") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		V9("v9") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		V4("v4") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		CTMX("", "ctm") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		R16("r16") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		R9("r9") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		R4("r4") {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		},
+		NORMAL {
+
+			@Override
+			public IIcon getIcon(int side, int meta) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void registerIcons(String modName, Block block, IIconRegister register) {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+		
+		private String[] suffixes;
+
+		private TextureType(String... suffixes) {
+			this.suffixes = suffixes.length == 0 ? new String[] { "" } : suffixes;
+		}
+
+		public static ISubmapManager getManagerFor(String path) {
+			for (TextureType t : values()) {
+				boolean matches = true;
+				for (String s : t.suffixes) {
+					String res = "".equals(s) ? path + ".png" : path + "-" + s + ".png";
+					if (Chisel.class.getResource(res) == null) {
+						matches = false;
+					}
+				}
+				if (matches) {
+					return t;
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public abstract IIcon getIcon(int side, int meta);
+
+		@Override
+		public abstract IIcon getIcon(IBlockAccess world, int x, int y, int z, int side);
+	}
+
+	private static final Random rand = new Random();
 
 	public ArrayList<CarvableVariation> variations = new ArrayList<CarvableVariation>();
 	CarvableVariation[] map = new CarvableVariation[16];
@@ -75,53 +344,11 @@ public class CarvableHelper {
 
 		if (texture != null) {
 			variation.texture = texture;
-
 			String path = "/assets/" + Chisel.MOD_ID + "/textures/blocks/" + variation.texture;
-
-			boolean any = Chisel.class.getResource(path + ".png") != null;
-			boolean ctm3 = Chisel.class.getResource(path + "-ctm1.png") != null && Chisel.class.getResource(path + "-ctm2.png") != null && Chisel.class.getResource(path + "-ctm3.png") != null;
-			boolean ctmv = Chisel.class.getResource(path + "-ctmv.png") != null;
-			boolean ctmh = Chisel.class.getResource(path + "-ctmh.png") != null;
-			boolean side = Chisel.class.getResource(path + "-side.png") != null;
-			boolean top = Chisel.class.getResource(path + "-top.png") != null;
-			boolean bot = Chisel.class.getResource(path + "-bottom.png") != null;
-			boolean v9 = Chisel.class.getResource(path + "-v9.png") != null;
-			boolean v4 = Chisel.class.getResource(path + "-v4.png") != null;
-			boolean ctmx = Chisel.class.getResource(path + "-ctm.png") != null;
-            boolean r16 = Chisel.class.getResource(path + "-r16.png") != null;
-            boolean r9 = Chisel.class.getResource(path + "-r9.png") != null;
-            boolean r4 = Chisel.class.getResource(path + "-r4.png") != null;
-
-			if (ctm3) {
-				variation.kind = 3;
-			} else if (ctmh && top) {
-				variation.kind = 5;
-			} else if (ctmv && top) {
-				variation.kind = CTMV;
-			} else if (bot && top && side) {
-				variation.kind = 2;
-			} else if (top && side) {
-				variation.kind = 1;
-			} else if (v9) {
-				variation.kind = V9;
-			} else if (v4) {
-				variation.kind = V4;
-			} else if (any && ctmx && !Configurations.disableCTM) {
-				variation.kind = CTMX;
-			} else if (r16) {
-                variation.kind = R16;
-            } else if (r9) {
-                variation.kind = R9;
-            } else if (r4) {
-                variation.kind = R4;
-            } else if (any) {
-				variation.kind = 0;
-			} else {
-				throw new RuntimeException("No valid textures found for chisel block variation '" + description + "' (" + variation.texture + ")");
-			}
+			variation.type = (TextureType) TextureType.getManagerFor(path);
 		} else {
 			variation.block = block;
-			variation.kind = 2;
+			variation.type = TextureType.TOPBOTSIDE;
 			variation.blockMeta = blockMeta;
 		}
 
@@ -148,45 +375,45 @@ public class CarvableHelper {
 		if (variation == null)
 			return GeneralClient.getMissingIcon();
 
-		switch (variation.kind) {
-            case NORMAL:
-                return variation.icon;
-            case TOPSIDE:
-                if (side == 0 || side == 1)
-                    return variation.iconTop;
-                else
-                    return variation.icon;
-            case TOPBOTSIDE:
-                if (side == 1)
-                    return variation.iconTop;
-                else if (side == 0)
-                    return variation.iconBot;
-                else
-                    return variation.icon;
-            case CTM3:
-                return variation.ctm.seams[0].icons[0];
-            case CTMV:
-                if (side < 2)
-                    return variation.iconTop;
-                else
-                    return variation.seamsCtmVert.icons[0];
-            case CTMH:
-                if (side < 2)
-                    return variation.iconTop;
-                else
-                    return variation.seamsCtmVert.icons[0];
-            case V9:
-                return variation.variations9.icons[4];
-            case V4:
-                return variation.variations9.icons[0];
-            case CTMX:
-                return variation.icon;
-            case R16:
-                return variation.variations9.icons[5];
-            case R9:
-                return variation.variations9.icons[4];
-            case R4:
-                return variation.variations9.icons[0];
+		switch (variation.type) {
+		case NORMAL:
+			return variation.icon;
+		case TOPSIDE:
+			if (side == 0 || side == 1)
+				return variation.iconTop;
+			else
+				return variation.icon;
+		case TOPBOTSIDE:
+			if (side == 1)
+				return variation.iconTop;
+			else if (side == 0)
+				return variation.iconBot;
+			else
+				return variation.icon;
+		case CTM3:
+			return variation.ctm.seams[0].icons[0];
+		case CTMV:
+			if (side < 2)
+				return variation.iconTop;
+			else
+				return variation.seamsCtmVert.icons[0];
+		case CTMH:
+			if (side < 2)
+				return variation.iconTop;
+			else
+				return variation.seamsCtmVert.icons[0];
+		case V9:
+			return variation.variations9.icons[4];
+		case V4:
+			return variation.variations9.icons[0];
+		case CTMX:
+			return variation.icon;
+		case R16:
+			return variation.variations9.icons[5];
+		case R9:
+			return variation.variations9.icons[4];
+		case R4:
+			return variation.variations9.icons[0];
 		}
 
 		return GeneralClient.getMissingIcon();
@@ -202,7 +429,7 @@ public class CarvableHelper {
 		if (variation == null)
 			return GeneralClient.getMissingIcon();
 
-		switch (variation.kind) {
+		switch (variation.type) {
 		case NORMAL:
 		case TOPSIDE:
 		case TOPBOTSIDE:
@@ -255,60 +482,58 @@ public class CarvableHelper {
 			else if (n)
 				return variation.seamsCtmVert.icons[reverse ? 3 : 2];
 			return variation.seamsCtmVert.icons[0];
-        case V9:
-        case V4:
-            int variationSize = (variation.kind == V9) ? 3 : 2;
+		case V9:
+		case V4:
+			int variationSize = (variation.type == TextureType.V9) ? 3 : 2;
 
-            int xModulus = x % variationSize;
-            int zModulus = z % variationSize;
-            //This ensures that blocks placed near 0,0 or it's axis' do not misbehave
-            int textureX = (xModulus < 0) ? (xModulus + variationSize) : xModulus;
-            int textureZ = (zModulus < 0) ? (zModulus + variationSize) : zModulus;
-            //Always invert the y index
-            int textureY = (variationSize - (y % variationSize) - 1);
+			int xModulus = x % variationSize;
+			int zModulus = z % variationSize;
+			// This ensures that blocks placed near 0,0 or it's axis' do not misbehave
+			int textureX = (xModulus < 0) ? (xModulus + variationSize) : xModulus;
+			int textureZ = (zModulus < 0) ? (zModulus + variationSize) : zModulus;
+			// Always invert the y index
+			int textureY = (variationSize - (y % variationSize) - 1);
 
-            if (side == 2 || side == 5) {
-                //For WEST, SOUTH reverse the indexes for both X and Z
-                textureX = (variationSize - textureX - 1);
-                textureZ = (variationSize - textureZ - 1);
-            } else if (side == 0) {
-                //For DOWN, reverse the indexes for only Z
-                textureZ = (variationSize - textureZ - 1);
-            }
+			if (side == 2 || side == 5) {
+				// For WEST, SOUTH reverse the indexes for both X and Z
+				textureX = (variationSize - textureX - 1);
+				textureZ = (variationSize - textureZ - 1);
+			} else if (side == 0) {
+				// For DOWN, reverse the indexes for only Z
+				textureZ = (variationSize - textureZ - 1);
+			}
 
-            int index;
-            if (side == 0 || side == 1) {
-                // DOWN || UP
-                index = textureX + textureZ * variationSize;
-            } else if (side == 2 || side == 3) {
-                // NORTH || SOUTH
-                index = textureX + textureY * variationSize;
-            } else {
-                // WEST || EAST
-                index = textureZ + textureY * variationSize;
-            }
+			int index;
+			if (side == 0 || side == 1) {
+				// DOWN || UP
+				index = textureX + textureZ * variationSize;
+			} else if (side == 2 || side == 3) {
+				// NORTH || SOUTH
+				index = textureX + textureY * variationSize;
+			} else {
+				// WEST || EAST
+				index = textureZ + textureY * variationSize;
+			}
 
-            return variation.variations9.icons[index];
+			return variation.variations9.icons[index];
 		case CTMX:
 			return variation.icon;
-        case R16:
-        case R9:
-        case R4:
+		case R16:
+		case R9:
+		case R4:
 
-            int indexRan = x + y + z;
-            if ((side==2)||(side==5)) {
-                indexRan = -indexRan;
-            }
-            while (indexRan < 0) {
-                indexRan = indexRan+10000;
-            }
+			int indexRan = x + y + z;
+			if ((side == 2) || (side == 5)) {
+				indexRan = -indexRan;
+			}
+			while (indexRan < 0) {
+				indexRan = indexRan + 10000;
+			}
 
-            //rand.setSeed(indexRan); // Broken
+			// rand.setSeed(indexRan); // Broken
 
-            return variation.variations9.icons[ /*rand*/ indexRan % ((variation.kind == R9) ? 9 : 4)];
+			return variation.variations9.icons[ /* rand */indexRan % ((variation.type == TextureType.R9) ? 9 : 4)];
 		}
-
-
 
 		return GeneralClient.getMissingIcon();
 	}
@@ -360,7 +585,7 @@ public class CarvableHelper {
 					variation.iconBot = ((BlockPane) variation.block).getBlockTextureFromSide(0);
 
 				} else {
-					switch (variation.kind) {
+					switch (variation.type) {
 					case NORMAL:
 						variation.icon = variation.block.getIcon(2, variation.blockMeta);
 						break;
@@ -376,7 +601,7 @@ public class CarvableHelper {
 					}
 				}
 			} else {
-				switch (variation.kind) {
+				switch (variation.type) {
 				case NORMAL:
 					variation.icon = register.registerIcon(modName + ":" + variation.texture);
 					break;
@@ -415,15 +640,15 @@ public class CarvableHelper {
 					variation.submap = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm"), 4, 4);
 					variation.submapSmall = new TextureSubmap(variation.icon, 2, 2);
 					break;
-                case R16:
-                    variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r16"), 4, 4);
-                    break;
-                case R9:
-                    variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r9"), 3, 3);
-                    break;
-                case R4:
-                    variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r4"), 2, 2);
-                    break;
+				case R16:
+					variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r16"), 4, 4);
+					break;
+				case R9:
+					variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r9"), 3, 3);
+					break;
+				case R4:
+					variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r4"), 2, 2);
+					break;
 				}
 			}
 		}
@@ -436,12 +661,7 @@ public class CarvableHelper {
 	}
 
 	public void setChiselBlockName(String name) {
-        blockName = name;
-	}
-
-	public static Set<Block> getChiselBlockSet() {
-		HashSet<Block> tools = new HashSet<Block>();
-		return tools;
+		blockName = name;
 	}
 
 	public void registerOre(String ore) {

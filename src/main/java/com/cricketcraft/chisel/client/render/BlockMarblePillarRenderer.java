@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.block.BlockCarvablePillar;
 import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
 import com.cricketcraft.chisel.utils.Drawing;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -54,7 +55,7 @@ public class BlockMarblePillarRenderer implements ISimpleBlockRenderingHandler {
 			metadata = block.carverHelper.variations.size() - 1;
 		}
 		else {
-			if (block.carverHelper.variations.get(metadata).kind != CarvableHelper.CTMV) {
+			if (block.carverHelper.variations.get(metadata).type != TextureType.CTMV) {
 				block.sides[0] = block.carverHelper.getIcon(0, metadata);
 				block.sides[1] = block.carverHelper.getIcon(1, metadata);
 				block.sides[2] = block.carverHelper.getIcon(2, metadata);

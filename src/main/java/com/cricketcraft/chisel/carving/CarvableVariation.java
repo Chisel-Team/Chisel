@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IIcon;
 
+import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
 
 public class CarvableVariation {
@@ -11,7 +12,7 @@ public class CarvableVariation {
 	public String blockName;
 	public String descriptionUnloc;
 	public int metadata;
-	public int kind;
+	public TextureType type = TextureType.NORMAL;
 
 	public Block block;
 	public int blockMeta;
@@ -19,8 +20,8 @@ public class CarvableVariation {
 	public String texture;
 
 	public IIcon icon;
-	public IIcon iconTop;
 	public IIcon iconBot;
+	public IIcon iconTop;
 
 	public CarvableVariationCTM ctm;
 	public TextureSubmap seamsCtmVert;
