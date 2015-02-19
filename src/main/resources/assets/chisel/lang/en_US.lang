@@ -9,6 +9,7 @@ item.chisel.chisel.desc.lc2=Can target a block by leaving it in the inventory
 item.chisel.chisel.desc.modes=Has multiple modes for chiseling.
 
 item.chisel.chisel_diamond.name=Diamond Chisel
+item.chisel.chisel_obsidian.name=Obsidian Chisel
 
 item.ballMoss.name=Ball O' Moss
 item.ballMoss.desc=Right-Click to throw. This will turn Cobblestone to Moss Stone on impact.
