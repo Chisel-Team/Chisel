@@ -5,10 +5,9 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 
-import org.apache.commons.lang3.tuple.Triple;
-
 import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.*;
 import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.SubSide.*;
+import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.Y_HALF_X;
 
 public class RenderBlocksCTM extends RenderBlocks {
 
@@ -26,7 +25,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 	enum Vert {
 
 		ZERO(0, 0, 0),
-		ONE(1, 1, 1),
+		XYZ(1, 1, 1),
 		X(1, 0, 0),
 		Y(0, 1, 0),
 		Z(0, 0, 1),
@@ -76,7 +75,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 	 * Each sub-side contains 4 {@link Vert} objects representing its position on the block.
 	 */
 	enum SubSide {
-		XNEG_LB(ZERO, Z_HALF, YZ_HALF, Y_HALF), XNEG_RB(Z_HALF, Z, Y_HALF_Z, YZ_HALF), XNEG_LT(Y_HALF, YZ_HALF, Z_HALF_Y, Y), XNEG_RT(YZ_HALF, Y_HALF_Z, YZ, Z_HALF_Y);
+		XNEG_LB(ZERO, Z_HALF, YZ_HALF, Y_HALF),      XNEG_RB(Z_HALF, Z, Y_HALF_Z, YZ_HALF),     XNEG_RT(YZ_HALF, Y_HALF_Z, YZ, Z_HALF_Y),    XNEG_LT(Y_HALF, YZ_HALF, Z_HALF_Y, Y),
+        XPOS_LB(XZ, Z_HALF_X, YZ_HALF_X, Y_HALF_XZ), XPOS_RB(Z_HALF_X, X, Y_HALF_X, YZ_HALF_X), XPOS_RT(YZ_HALF_X, Y_HALF_X, XY, Z_HALF_XY), XPOS_LT(Y_HALF_XZ, YZ_HALF_X, Z_HALF_XY, XYZ),
+
+        ZNEG_LB(X, X_HALF, XY_HALF, Y_HALF_X),     ZNEG_RB(X_HALF, ZERO, Y_HALF, XY_HALF),      ZNEG_RT(XY_HALF, Y_HALF, Y, X_HALF_Y),         ZNEG_LT(Y_HALF_X, XY_HALF, X_HALF_Y, XY),
+        ZPOS_LB(Z, X_HALF_Z, XY_HALF_Z, Y_HALF_Z), ZPOS_RB(X_HALF_Z, XZ, Y_HALF_XZ, XY_HALF_Z), ZPOS_RT(XY_HALF_Z, Y_HALF_XZ, XYZ, X_HALF_YZ), ZPOS_LT(Y_HALF_Z, XY_HALF_Z, X_HALF_YZ, YZ),
+
+        YNEG_LB(ZERO, X_HALF, XZ_HALF, Z_HALF), YNEG_RB(X_HALF, X, Z_HALF_X, XZ_HALF), YNEG_RT(XZ_HALF, Z_HALF_X, XZ, X_HALF_Z), YNEG_LT(Z_HALF, XZ_HALF, X_HALF_Z, Z);
 
 		private Vert xmin, xmax, ymin, ymax;
 
@@ -118,6 +123,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 	TextureSubmap submapSmall;
 	RenderBlocks rendererOld;
 
+    int[][] lightmap = new int[3][3];
+
 	int bx, by, bz;
 
 	@Override
@@ -138,64 +145,51 @@ public class RenderBlocksCTM extends RenderBlocks {
 		return res;
 	}
 
-	void updateLighting() {
-		lightingCache[0] = brightnessBottomLeft;
-		lightingCache[1] = brightnessBottomRight;
-		lightingCache[2] = brightnessTopRight;
-		lightingCache[3] = brightnessTopLeft;
 
-		// // Updated to safely average light and color channels
-		// L[e] = averageBrightnessChannels(brightnessBottomLeft, brightnessTopLeft, brightnessTopRight, brightnessBottomRight);
-		// L[xa] = averageBrightnessChannels(L[a], L[b]);
-		// L[xb] = averageBrightnessChannels(L[b], L[c]);
-		// L[xc] = averageBrightnessChannels(L[c], L[d]);
-		// L[xd] = averageBrightnessChannels(L[d], L[a]);
-		//
-		// Rcache[a] = colorRedBottomLeft;
-		// Rcache[b] = colorRedBottomRight;
-		// Rcache[c] = colorRedTopRight;
-		// Rcache[d] = colorRedTopLeft;
-		// Rcache[e] = (colorRedBottomLeft + colorRedTopLeft + colorRedTopRight + colorRedBottomRight) / 4;
-		// Rcache[xa] = (Rcache[a] + Rcache[b]) / 2;
-		// Rcache[xb] = (Rcache[b] + Rcache[c]) / 2;
-		// Rcache[xc] = (Rcache[c] + Rcache[d]) / 2;
-		// Rcache[xd] = (Rcache[d] + Rcache[a]) / 2;
-		//
-		// Gcache[a] = colorGreenBottomLeft;
-		// Gcache[b] = colorGreenBottomRight;
-		// Gcache[c] = colorGreenTopRight;
-		// Gcache[d] = colorGreenTopLeft;
-		// Gcache[e] = (colorGreenBottomLeft + colorGreenTopLeft + colorGreenTopRight + colorGreenBottomRight) / 4;
-		// Gcache[xa] = (Gcache[a] + Gcache[b]) / 2;
-		// Gcache[xb] = (Gcache[b] + Gcache[c]) / 2;
-		// Gcache[xc] = (Gcache[c] + Gcache[d]) / 2;
-		// Gcache[xd] = (Gcache[d] + Gcache[a]) / 2;
-		//
-		// Bcache[a] = colorBlueBottomLeft;
-		// Bcache[b] = colorBlueBottomRight;
-		// Bcache[c] = colorBlueTopRight;
-		// Bcache[d] = colorBlueTopLeft;
-		// Bcache[e] = (colorBlueBottomLeft + colorBlueTopLeft + colorBlueTopRight + colorBlueBottomRight) / 4;
-		// Bcache[xa] = (Bcache[a] + Bcache[b]) / 2;
-		// Bcache[xb] = (Bcache[b] + Bcache[c]) / 2;
-		// Bcache[xc] = (Bcache[c] + Bcache[d]) / 2;
-		// Bcache[xd] = (Bcache[d] + Bcache[a]) / 2;
+    /* This method fills a 3x3 grid of light values based on the four corners, by averaging them together.
+     *
+     * 2  TL   x    TR
+     *
+     * 1  x    x    x
+     *
+     * 0  BL   x    BR
+     *    0    1    2
+     *
+     * Note: Variable names mean nothing... don't touch
+     *
+     * ._.
+     *
+     * shakes fist in anger
+     */
+    void fillLightmap(int bottomLeft, int bottomRight, int topRight, int topLeft) {
+        lightmap[0][0] = bottomRight;
+        lightmap[2][0] = topRight;
+        lightmap[2][2] = topLeft;
+        lightmap[0][2] = bottomLeft;
+
+        lightmap[1][0] = avg(bottomRight, topRight);
+        lightmap[2][1] = avg(topRight, topLeft);
+        lightmap[1][2] = avg(topLeft, bottomLeft);
+        lightmap[0][1] = avg(bottomLeft, bottomRight);
+
+        lightmap[1][1] = avg(bottomLeft, bottomRight, topRight, topLeft);
+    }
+
+    void getLight(int x, int y) {
+        lightingCache[0] = lightmap[0+x][0+y];
+        lightingCache[1] = lightmap[1+x][0+y];
+        lightingCache[2] = lightmap[1+x][1+y];
+        lightingCache[3] = lightmap[0+x][1+y];
+    }
+
+	void updateLighting() {
+		//nop
 	}
 
 	/**
-	 * Takes in a variable number of packed light-integers, and computes the average value of each 4 bit channel
-	 * 
-	 * For vanilla, these look like: (S = skylight and L = block light) 0000 0000 SSSS 0000 0000 0000 LLLL 0000 With the Colored Light Core installed, these look like: (B = Blue, G = Green, R = Red)
-	 * 0000 0000 SSSS BBBB GGGG RRRR LLLL 0000
-	 * 
-	 * This method will average all of the values appropriately for the more complex case, by separating each color channel into a running total, then it will combine the final results together using
-	 * integer division and a lot of bit-cramming.
-	 * 
-	 * While slightly more complex, the runtime should not be drastically effected, and the averaging routine remains compatible with vanilla.
-	 * 
-	 * Authored: CptSpaceToaster - 12/19/2014
+	 * This works around a bug in CLC atm
 	 */
-	int averageBrightnessChannels(int... lightVals) {
+	int avg(int... lightVals) {
 		blockLightBitChannel = 0;
 		redBitChannel = 0;
 		greenBitChannel = 0;
@@ -247,10 +241,14 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 4);
 
-			updateLighting();
+            fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
+            getLight(0, 0);
 			side(XNEG_LB, tex[2], false);
+            getLight(1, 0);
 			side(XNEG_RB, tex[3], false);
+            getLight(1, 1);
 			side(XNEG_RT, tex[1], false);
+            getLight(0, 1);
 			side(XNEG_LT, tex[0], false);
 		}
 	}
@@ -267,11 +265,15 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 5);
 
-			updateLighting();
-			// side(11, 21, 3, 15, tex[3], false);
-			// side(16, 7, 21, 11, tex[2], false);
-			// side(25, 11, 15, 2, tex[1], false);
-			// side(6, 16, 11, 25, tex[0], false);
+            fillLightmap(brightnessTopRight, brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight);
+            getLight(0, 0);
+            side(XPOS_LB, tex[2], false);
+            getLight(1, 0);
+            side(XPOS_RB, tex[3], false);
+            getLight(1, 1);
+            side(XPOS_RT, tex[1], false);
+            getLight(0, 1);
+            side(XPOS_LT, tex[0], false);
 		}
 	}
 
@@ -287,11 +289,15 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 2);
 
-			updateLighting();
-			// side(2, 15, 8, 22, tex[0], false);
-			// side(15, 3, 18, 8, tex[2], false);
-			// side(8, 18, 0, 14, tex[3], false);
-			// side(22, 8, 14, 1, tex[1], false);
+            fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
+            getLight(0, 0);
+            side(ZNEG_LB, tex[2], false);
+            getLight(1, 0);
+            side(ZNEG_RB, tex[3], false);
+            getLight(1, 1);
+            side(ZNEG_RT, tex[1], false);
+            getLight(0, 1);
+            side(ZNEG_LT, tex[0], false);
 		}
 	}
 
@@ -307,11 +313,15 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 3);
 
-			updateLighting();
-			// side(17, 4, 20, 10, tex[2], false);
-			// side(5, 17, 10, 24, tex[0], false);
-			// side(24, 10, 16, 6, tex[1], false);
-			// side(10, 20, 7, 16, tex[3], false);
+            fillLightmap(brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight, brightnessTopRight);
+            getLight(0, 0);
+            side(ZPOS_LB, tex[2], false);
+            getLight(1, 0);
+            side(ZPOS_RB, tex[3], false);
+            getLight(1, 1);
+            side(ZPOS_RT, tex[1], false);
+            getLight(0, 1);
+            side(ZPOS_LT, tex[0], false);
 		}
 	}
 
@@ -327,11 +337,15 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 0);
 
-			updateLighting();
-			// side(13, 21, 7, 20, tex[3], true);
-			// side(19, 13, 20, 4, tex[2], true);
-			// side(0, 18, 13, 19, tex[0], true);
-			// side(18, 3, 21, 13, tex[1], true);
+            fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
+            getLight(0, 0);
+            side(YNEG_LB, tex[2], false);
+            getLight(1, 0);
+            side(YNEG_RB, tex[3], false);
+            getLight(1, 1);
+            side(YNEG_RT, tex[1], false);
+            getLight(0, 1);
+            side(YNEG_LT, tex[0], false);
 		}
 	}
 

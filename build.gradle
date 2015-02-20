@@ -165,5 +165,3 @@ curse {
     displayName = "Chisel 2 - ${mod_version}"
     additionalArtifact deobfJar, sourcesJar, apiJar
 }
-
-sourceSets { main { output.resourcesDir = output.classesDir } }
