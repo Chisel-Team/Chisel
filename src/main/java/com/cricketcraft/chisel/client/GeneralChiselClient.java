@@ -1,17 +1,5 @@
 package com.cricketcraft.chisel.client;
 
-import java.util.Random;
-
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.client.particle.EntityDiggingFX;
-import net.minecraft.client.particle.EntityLavaFX;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
-
 import com.cricketcraft.chisel.block.BlockGrimstone;
 import com.cricketcraft.chisel.block.BlockHolystone;
 import com.cricketcraft.chisel.block.BlockLavastone;
@@ -24,6 +12,17 @@ import com.cricketcraft.chisel.entity.fx.EntityGrimstoneFX;
 import com.cricketcraft.chisel.entity.fx.EntityHolystoneFX;
 import com.cricketcraft.chisel.entity.fx.EntitySnakestoneObsidianFX;
 import com.cricketcraft.chisel.utils.GeneralClient;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.particle.EntityDiggingFX;
+import net.minecraft.client.particle.EntityLavaFX;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class GeneralChiselClient {
 
@@ -259,7 +258,8 @@ public class GeneralChiselClient {
 	public static void spawnAutoChiselFX(TileEntityAutoChisel te, ItemStack base) {
 		if (base != null) {
 			for (int i = 0; i < 10; i++) {
-				EntityDiggingFX particle = new EntityDiggingFX(te.getWorldObj(), te.xCoord + 0.5, te.yCoord + 0.95, te.zCoord + 0.5, 0, 0, 0, Block.getBlockFromItem(base.getItem()), base.getItemDamage());
+				EntityDiggingFX particle = new EntityDiggingFX(te.getWorldObj(), te.xCoord + 0.5, te.yCoord + 0.95, te.zCoord + 0.5, 0, 0, 0, Block.getBlockFromItem(base.getItem()),
+						base.getItemDamage());
 				particle.setVelocity((te.getWorldObj().rand.nextDouble() / 4) - 0.125, te.getWorldObj().rand.nextDouble() / 8, (te.getWorldObj().rand.nextDouble() / 4) - 0.125);
 				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 			}

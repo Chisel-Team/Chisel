@@ -1,16 +1,15 @@
 package com.cricketcraft.chisel.block;
 
-import java.util.Random;
-
+import com.cricketcraft.chisel.client.GeneralChiselClient;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.client.GeneralChiselClient;
+import java.util.Random;
 
 public class BlockSnakestoneObsidian extends BlockSnakestone {
 
-	public IIcon[] particles = new IIcon[8];
+	public static IIcon[] particles = new IIcon[8];
 
 	public BlockSnakestoneObsidian(String iconPrefix) {
 		super(iconPrefix);
