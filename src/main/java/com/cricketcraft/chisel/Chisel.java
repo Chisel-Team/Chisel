@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.cricketcraft.chisel.block.BlockCarvable;
+import com.cricketcraft.chisel.client.player.PlayerSpecials;
 import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.compat.IMCHandler;
 import com.cricketcraft.chisel.config.Configurations;
@@ -32,9 +33,9 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -139,6 +140,9 @@ public class Chisel {
 		proxy.init();
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(instance);
+
+		FMLCommonHandler.instance().bus().register(new PlayerSpecials());
+
 
 		FMLInterModComms.sendMessage("Waila", "register", "com.cricketcraft.chisel.compat.WailaCompat.register");
 	}
