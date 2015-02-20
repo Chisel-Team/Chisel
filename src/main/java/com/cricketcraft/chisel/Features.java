@@ -388,8 +388,10 @@ public enum Features {
 		void addItems() {
 			ItemChisel chisel = (ItemChisel) new ItemChisel(ChiselType.IRON).setCreativeTab(ChiselTabs.tabChisel);
 			ItemChisel diamondChisel = (ItemChisel) new ItemChisel(ChiselType.DIAMOND).setCreativeTab(ChiselTabs.tabChisel);
+			ItemChisel obsidianChisel = (ItemChisel) new ItemChisel(ChiselType.OBSIDIAN).setCreativeTab(ChiselTabs.tabChisel);
 			GameRegistry.registerItem(chisel, "chisel");
 			GameRegistry.registerItem(diamondChisel, "diamondChisel");
+			GameRegistry.registerItem(obsidianChisel, "obsidianChisel");
 		}
 
 		@Override
@@ -397,9 +399,11 @@ public enum Features {
 			if (Configurations.chiselRecipe) {
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.chisel), " YY", " YY", "X  ", 'X', "stickWood", 'Y', "ingotIron"));
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.diamondChisel), " YY", " YY", "x  ", 'x', "stickWood", 'Y', "gemDiamond"));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.obsidianChisel), " YY", " YY", "x  ", 'x', "stickWood", 'Y', Blocks.obsidian));
 			} else {
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.chisel), " Y", "X ", 'X', "stickWood", 'Y', "ingotIron"));
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.diamondChisel), " Y", "X ", 'X', "stickWood", 'Y', "gemDiamond"));
+				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselItems.obsidianChisel), " Y", "X ", 'X', "stickWood", 'Y', Blocks.obsidian));
 			}
 		}
 	},
@@ -1822,7 +1826,9 @@ public enum Features {
 			Carving.chisel.addVariation("RCAbyssalBlock", abyssal, 4, 4);
 			Carving.chisel.addVariation("RCAbyssalBlock", abyssal, 5, 5);
 			Carving.chisel.registerOre("RCAbyssalBlock", "RCAbyssalBlock");
-		};
+		}
+
+		;
 	},
 	RC_BLEACHED_BONE(RAILCRAFT.getRequiredMod(), RAILCRAFT) {
 
@@ -1913,7 +1919,9 @@ public enum Features {
 			Carving.chisel.addVariation("RCQuarriedBlock", quarried, 4, 4);
 			Carving.chisel.addVariation("RCQuarriedBlock", quarried, 5, 5);
 			Carving.chisel.registerOre("RCQuarriedBlock", "RCQuarriedBlock");
-		};
+		}
+
+		;
 	},
 
 	RC_SANDY_STONE(RAILCRAFT.getRequiredMod(), RAILCRAFT) {
@@ -2122,8 +2130,7 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockSnakestoneObsidian obsidian_snakestone = (BlockSnakestoneObsidian) new BlockSnakestoneObsidian("Chisel:snakestone/obsidian/").setBlockName("chisel.obsidianSnakestone")
-					.setHardness(50.0F)
-					.setResistance(2000.0F);
+					.setHardness(50.0F).setResistance(2000.0F);
 			GameRegistry.registerBlock(obsidian_snakestone, ItemCarvable.class, "obsidian_snakestone");
 			Carving.chisel.addVariation("obsidian", obsidian_snakestone, 1, 16);
 			Carving.chisel.addVariation("obsidian", obsidian_snakestone, 13, 17);
@@ -2180,13 +2187,13 @@ public enum Features {
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.15.desc", 15, "stonebrick/poison");
 			stonebricksmooth.carverHelper.registerAll(stonebricksmooth, "stonebricksmooth");
 
-            BlockCarvable stonebricksmooth2 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(1.5F).setResistance(10.0F)
-                    .setStepSound(Block.soundTypeStone);
-            stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.0.desc", 0, "stonebrick2/masonryPlain");
-            stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.1.desc", 1, "stonebrick2/masonryFelsic");
-            stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.2.desc", 2, "stonebrick2/masonryMafic");
-            stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.3.desc", 3, "stonebrick2/masonryMixed");
-            stonebricksmooth2.carverHelper.registerAll(stonebricksmooth2, "stonebricksmooth2");
+			BlockCarvable stonebricksmooth2 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(1.5F).setResistance(10.0F)
+					.setStepSound(Block.soundTypeStone);
+			stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.0.desc", 0, "stonebrick2/masonryPlain");
+			stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.1.desc", 1, "stonebrick2/masonryFelsic");
+			stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.2.desc", 2, "stonebrick2/masonryMafic");
+			stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.3.desc", 3, "stonebrick2/masonryMixed");
+			stonebricksmooth2.carverHelper.registerAll(stonebricksmooth2, "stonebricksmooth2");
 			Carving.chisel.registerOre("stonebricksmooth2", "stonebricksmooth");
 		}
 	},
@@ -2303,7 +2310,9 @@ public enum Features {
 			mossy_templeblock.carverHelper.addVariation("tile.mossy_templeblock.15.desc", 15, "templemossy/smalltiles-light");
 			mossy_templeblock.carverHelper.registerAll(mossy_templeblock, "mossy_templeblock");
 			Carving.chisel.registerOre("mossy_templeblock", "mossy_templeblock");
-		};
+		}
+
+		;
 	},
 
 	TIN {
@@ -2455,7 +2464,9 @@ public enum Features {
 	},
 
 	VALENTINES {
-		@Override void addBlocks() {
+
+		@Override
+		void addBlocks() {
 			BlockCarvable valentines = (BlockCarvable) new BlockCarvable(Material.wood).setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(2F)
 					.setResistance(10F);
 			valentines.carverHelper.addVariation("tile.valentines.0.desc", 0, "valentines/bricks");
@@ -2464,7 +2475,8 @@ public enum Features {
 			Carving.chisel.registerOre("valentines", "blockValentines");
 		}
 
-		@Override void addRecipes() {
+		@Override
+		void addRecipes() {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.valentines, 8, 0), "***", "*X*", "***", '*', "stone", 'X', new ItemStack(Items.dye, 1, 9)));
 		}
 	},
@@ -2651,7 +2663,6 @@ public enum Features {
 			return true;
 		}
 	},
-
 	;
 
 	private static final String[] dyeOres = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
