@@ -39,10 +39,12 @@ public class Configurations {
 	public static boolean allowChiselDamage;
 	public static int ironChiselMaxDamage;
 	public static int diamondChiselMaxDamage;
+	public static int obsidianChiselMaxDamage;
 	public static boolean ironChiselCanLeftClick;
 	public static boolean ironChiselHasModes;
 	public static int ironChiselAttackDamage;
 	public static int diamondChiselAttackDamage;
+	public static int obsidianChiselAttackDamage;
 	public static boolean allowChiselCrossColors;
 
 	public static boolean useRoadLineTool;
@@ -91,12 +93,16 @@ public class Configurations {
 		allowChiselDamage = config.get(category, "allowChiselDamage", true, "Should the chisel be damageable and take damage when it chisels something.").getBoolean();
 		ironChiselMaxDamage = config.get(category, "ironChiselMaxDamage", 500, "The max damage of the standard iron chisel. Default: 500.").getInt();
 		diamondChiselMaxDamage = config.get(category, "diamondChiselMaxDamage", 5000, "The max damage of the diamond chisel. Default: 5000").getInt();
+		obsidianChiselMaxDamage = config.get(category, "obsidianChiselMaxDamage", 50000, "The max damage of the obsidian chisel. Default: 50000").getInt();
 		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
 		ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
-		ironChiselAttackDamage = config.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.").getInt();
-		diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2,
-				"The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
 		allowChiselCrossColors = config.get(category, "allowChiselCrossColors", true, "Should someone be able to chisel something into a different color.").getBoolean();
+		ironChiselAttackDamage = config.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.")
+				.getInt();
+		diamondChiselAttackDamage = config
+				.get(category, "diamondChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
+		obsidianChiselAttackDamage = config
+				.get(category, "obsidianChiselAttackDamage", 4, "The extra attack damage points (in half hearts) that the obsidian chisel inflicts when it is used to attack an entity.").getInt();
 
 		/* block */
 		category = "block";
@@ -131,7 +137,9 @@ public class Configurations {
 		return config.get("features", featureName(feature), true).getBoolean(true) && refreshConfig();
 	}
 
-	/** Makes the old camelCase names from the new CONSTANT_CASE names */
+	/**
+	 * Makes the old camelCase names from the new CONSTANT_CASE names
+	 */
 	public static String featureName(Features feature) {
 		String[] words = feature.name().toLowerCase(Locale.ENGLISH).split("_");
 		if (words.length == 1) {
