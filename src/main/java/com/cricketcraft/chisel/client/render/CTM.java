@@ -30,11 +30,16 @@ public class CTM {
 		int blockMetadata = world.getBlockMetadata(x, y, z);
 
 		boolean b[] = new boolean[6];
-		if (side <= 1) {
+        if (side == 0) {
+            b[0] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
+            b[1] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
+            b[2] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
+            b[3] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+        } else if (side == 1) {
 			b[0] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
 			b[1] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
-			b[2] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
-			b[3] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+			b[2] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
+			b[3] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
 		} else if (side == 2) {
 			b[0] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
 			b[1] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
@@ -88,11 +93,16 @@ public class CTM {
 			texture = 34;
 
 		boolean b2[] = new boolean[6];
-		if (side <= 1) {
-			b2[0] = !isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
-			b2[1] = !isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
-			b2[2] = !isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
-			b2[3] = !isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
+        if (side == 0) {
+            b2[0] = !isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
+            b2[1] = !isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
+            b2[2] = !isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
+            b2[3] = !isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
+        } else if (side == 1) {
+			b2[0] = !isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
+			b2[1] = !isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
+			b2[2] = !isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
+			b2[3] = !isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
 		} else if (side == 2) {
 			b2[0] = !isConnected(world, x - 1, y - 1, z, side, block, blockMetadata);
 			b2[1] = !isConnected(world, x + 1, y - 1, z, side, block, blockMetadata);
