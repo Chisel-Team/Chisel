@@ -141,8 +141,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 					// if we have the stack upgrade, boost the stack size to the max possible, otherwise just one
 					chiseled.stackSize = hasUpgrade(Upgrade.STACK) ? canBeMade : 1;
 
-					// if we can place the result in the output
-					if (canMerge(chiseled)) {
+					if (canChisel(chiseled)) {
 						// if our output is empty, just use the current result
 						if (output == null) {
 							setInventorySlotContents(OUTPUT, chiseled);
@@ -187,7 +186,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		return false;
 	}
 
-	private boolean canMerge(ItemStack toMerge) {
+	private boolean canChisel(ItemStack toMerge) {
 		// if the output slot is empty we can merge without checking
 		if (inventory[OUTPUT] == null) {
 			return true;
@@ -198,7 +197,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 			return !toMerge.getHasSubtypes() || toMerge.getItemDamage() == inventory[OUTPUT].getItemDamage();
 		}
 
-		return false;
+		return ((IChiselItem)inventory[CHISEL].getItem()).canChisel(worldObj, inventory[CHISEL], General.getVariation(inventory[TARGET]));
 	}
 
 	private boolean hasChisel() {
