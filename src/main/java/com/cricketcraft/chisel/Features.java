@@ -100,7 +100,12 @@ public enum Features {
 			andesite.carverHelper.addVariation("tile.andesite.1.desc", 1, "andesite/andesitePolished");
 			andesite.carverHelper.addVariation("tile.andesite.2.desc", 2, "andesite/andesitePillar");
 			andesite.carverHelper.registerAll(andesite, "andesite");
-			Carving.chisel.registerOre("andesite", "andesite");
+			Carving.chisel.registerOre("andesite", "blockAndesite");
+		}
+
+		@Override
+		void addRecipes() {
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(andesite, 2), diorite, "cobblestone"));
 		}
 	},
 
@@ -577,6 +582,11 @@ public enum Features {
 			diorite.carverHelper.registerAll(diorite, "diorite");
 			Carving.chisel.registerOre("diorite", "diorite");
 		}
+		
+		@Override
+		void addRecipes() {
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(diorite, 2), "cq", "qc", 'c', "cobblestone", 'q', "gemQuartz"));
+		}
 	},
 
 	DIRT {
@@ -913,6 +923,11 @@ public enum Features {
 			granite.carverHelper.addVariation("tile.granite.2.desc", 2, "granite/granitePillar");
 			granite.carverHelper.registerAll(granite, "granite");
 			Carving.chisel.registerOre("granite", "granite");
+		}
+
+		@Override
+		void addRecipes() {
+			GameRegistry.addRecipe(new ShapelessOreRecipe(granite, diorite, "gemQuartz"));
 		}
 	},
 
