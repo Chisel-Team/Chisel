@@ -81,8 +81,8 @@ public class RenderBlocksCTM extends RenderBlocks {
         ZNEG_LB(X, X_HALF, XY_HALF, Y_HALF_X),     ZNEG_RB(X_HALF, ZERO, Y_HALF, XY_HALF),      ZNEG_RT(XY_HALF, Y_HALF, Y, X_HALF_Y),         ZNEG_LT(Y_HALF_X, XY_HALF, X_HALF_Y, XY),
         ZPOS_LB(Z, X_HALF_Z, XY_HALF_Z, Y_HALF_Z), ZPOS_RB(X_HALF_Z, XZ, Y_HALF_XZ, XY_HALF_Z), ZPOS_RT(XY_HALF_Z, Y_HALF_XZ, XYZ, X_HALF_YZ), ZPOS_LT(Y_HALF_Z, XY_HALF_Z, X_HALF_YZ, YZ),
 
-        YNEG_LB(ZERO, X_HALF, XZ_HALF, Z_HALF), YNEG_RB(X_HALF, X, Z_HALF_X, XZ_HALF), YNEG_RT(XZ_HALF, Z_HALF_X, XZ, X_HALF_Z), YNEG_LT(Z_HALF, XZ_HALF, X_HALF_Z, Z);
-
+        YNEG_LB(ZERO, X_HALF, XZ_HALF, Z_HALF), YNEG_RB(X_HALF, X, Z_HALF_X, XZ_HALF), YNEG_RT(XZ_HALF, Z_HALF_X, XZ, X_HALF_Z), YNEG_LT(Z_HALF, XZ_HALF, X_HALF_Z, Z),
+        YPOS_LB(YZ, X_HALF_YZ, XZ_HALF_Y, Z_HALF_Y), YPOS_RB(X_HALF_YZ, XYZ, Z_HALF_XY, XZ_HALF_Y), YPOS_RT(XZ_HALF_Y, Z_HALF_XY, XY, X_HALF_Y), YPOS_LT(Z_HALF_Y, XZ_HALF_Y, X_HALF_Y, Y);
 		private Vert xmin, xmax, ymin, ymax;
 
 		SubSide(Vert xmin, Vert ymin, Vert ymax, Vert xmax) {
@@ -162,15 +162,15 @@ public class RenderBlocksCTM extends RenderBlocks {
      * shakes fist in anger
      */
     void fillLightmap(int bottomLeft, int bottomRight, int topRight, int topLeft) {
-        lightmap[0][0] = bottomRight;
-        lightmap[2][0] = topRight;
-        lightmap[2][2] = topLeft;
-        lightmap[0][2] = bottomLeft;
+        lightmap[0][0] = bottomLeft;
+        lightmap[2][0] = bottomRight;
+        lightmap[2][2] = topRight;
+        lightmap[0][2] = topLeft;
 
-        lightmap[1][0] = avg(bottomRight, topRight);
-        lightmap[2][1] = avg(topRight, topLeft);
-        lightmap[1][2] = avg(topLeft, bottomLeft);
-        lightmap[0][1] = avg(bottomLeft, bottomRight);
+        lightmap[1][0] = avg(bottomLeft, bottomRight);
+        lightmap[2][1] = avg(bottomRight, topRight);
+        lightmap[1][2] = avg(topRight, topLeft);
+        lightmap[0][1] = avg(topLeft, bottomLeft);
 
         lightmap[1][1] = avg(bottomLeft, bottomRight, topRight, topLeft);
     }
@@ -241,7 +241,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 4);
 
-            fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
+            fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
             getLight(0, 0);
 			side(XNEG_LB, tex[2], false);
             getLight(1, 0);
@@ -265,7 +265,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 5);
 
-            fillLightmap(brightnessTopRight, brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight);
+            fillLightmap(brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight, brightnessTopRight);
             getLight(0, 0);
             side(XPOS_LB, tex[2], false);
             getLight(1, 0);
@@ -289,7 +289,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 2);
 
-            fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
+            fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
             getLight(0, 0);
             side(ZNEG_LB, tex[2], false);
             getLight(1, 0);
@@ -313,7 +313,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 3);
 
-            fillLightmap(brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight, brightnessTopRight);
+            fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
             getLight(0, 0);
             side(ZPOS_LB, tex[2], false);
             getLight(1, 0);
@@ -335,7 +335,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 0.0, 0.0, i.getMaxU(), i.getMinV());
 			tessellator.addVertexWithUV(1.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 0);
+			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 1);
 
             fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
             getLight(0, 0);
@@ -359,13 +359,17 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 1.0, 1.0, i.getMaxU(), i.getMaxV());
 			tessellator.addVertexWithUV(1.0, 1.0, 0.0, i.getMaxU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 1);
+			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 0);
 
-			updateLighting();
-			// side(12, 24, 6, 25, tex[3], false);
-			// side(22, 12, 25, 2, tex[1], false);
-			// side(1, 23, 12, 22, tex[0], false);
-			// side(23, 5, 24, 12, tex[2], false);
+            fillLightmap(brightnessTopRight, brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight);
+            getLight(0, 0);
+            side(YPOS_LB, tex[2], false);
+            getLight(1, 0);
+            side(YPOS_RB, tex[3], false);
+            getLight(1, 1);
+            side(YPOS_RT, tex[1], false);
+            getLight(0, 1);
+            side(YPOS_LT, tex[0], false);
 		}
 	}
 
