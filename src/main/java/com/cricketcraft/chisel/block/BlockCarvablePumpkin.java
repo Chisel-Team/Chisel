@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.ItemStack;
@@ -25,6 +26,7 @@ public class BlockCarvablePumpkin extends BlockPumpkin implements ICarvable {
 
 	public BlockCarvablePumpkin(boolean isOn) {
 		super(isOn);
+		this.setStepSound(Block.soundTypeWood);
 		if (isOn)
 			setLightLevel(10.0F);
 		carverHelper = new CarvableHelper();
