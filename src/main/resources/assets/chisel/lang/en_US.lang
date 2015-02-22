@@ -596,7 +596,7 @@ tile.concrete.9.desc=Partly Weathered Concrete Block
 tile.concrete.10.desc=Asphalt
 
 #Road Line
-tile.chisel.roadLine.name=Road Lines
+tile.chisel.road_line.name=Road Lines
 tile.roadLine.0.desc=White
 tile.roadLine.1.desc=Yellow
 tile.roadLine.2.desc=Double White
