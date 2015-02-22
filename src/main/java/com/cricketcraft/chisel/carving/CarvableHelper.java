@@ -271,10 +271,10 @@ public class CarvableHelper {
                 //For WEST, SOUTH reverse the indexes for both X and Z
                 textureX = (variationSize - textureX - 1);
                 textureZ = (variationSize - textureZ - 1);
-            } else if (side == 0) {
+            } /*else if (side == 0) {
                 //For DOWN, reverse the indexes for only Z
                 textureZ = (variationSize - textureZ - 1);
-            }
+            }//*/
 
             int index;
             if (side == 0 || side == 1) {

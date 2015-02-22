@@ -2245,6 +2245,7 @@ public enum Features {
 			technical.carverHelper.addVariation("tile.technical.13.desc", 13, "technical/grate");
 			technical.carverHelper.addVariation("tile.technical.14.desc", 14, "technical/malfunctionFan");
 			technical.carverHelper.addVariation("tile.technical.15.desc", 15, "technical/grateRusty");
+            technical.carverHelper.registerAll(technical, "technical");
 
 			BlockCarvableGlass technical2 = (BlockCarvableGlass) new BlockCarvableGlass().setHardness(2.0F).setResistance(10F);
 			technical2.carverHelper.addVariation("tile.technical.0.desc", 0, "technical/scaffoldTransparent");
@@ -2252,12 +2253,12 @@ public enum Features {
 			technical2.carverHelper.addVariation("tile.technical.6.desc", 2, "technical/fanStillTransparent");
 			technical2.carverHelper.addVariation("tile.technical.14.desc", 3, "technical/fanStillTransparent");
 			technical2.carverHelper.registerAll(technical2, "technical2");
-			Carving.chisel.registerOre("technical2", "technical");
+			//Carving.chisel.registerOre("technical2", "technical");
 
             BlockCarvable technical3 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
             technical3.carverHelper.addVariation("tile.technical3.0.desc", 0, "technical/massiveFan");
             technical2.carverHelper.registerAll(technical3, "technical3");
-            Carving.chisel.registerOre("technical3", "technical");
+            //Carving.chisel.registerOre("technical3", "technical");
 
             for (int i = 0; i < 4; i++) {
                 Carving.chisel.addVariation("technical", GameRegistry.findBlock("chisel", "technical2"), i, i);
@@ -2267,7 +2268,7 @@ public enum Features {
                 Carving.chisel.addVariation("technical", GameRegistry.findBlock("chisel", "technical3"), i, i);
             }
 
-            technical.carverHelper.registerAll(technical, "technical");
+
             Carving.chisel.registerOre("technical", "technical");
 		}
 
@@ -2275,8 +2276,8 @@ public enum Features {
 		void addRecipes() {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.technical, Configurations.factoryBlockAmount, 0), new Object[] { "xyx", "yxy", "xyx", 'x', "stone", 'y',
 					Items.iron_ingot }));
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.technical2, Configurations.factoryBlockAmount, 0), new Object[] { "xyx", "yzy", "xyx", 'x', "stone", 'y',
-					"ingotIron", 'z', Blocks.glass }));
+			/*GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.technical2, Configurations.factoryBlockAmount, 0), new Object[] { "xyx", "yzy", "xyx", 'x', "stone", 'y',
+					"ingotIron", 'z', Blocks.glass })); //*/
 		}
 	},
 
