@@ -225,6 +225,8 @@ tile.grimstone.14.desc=Flaky Grimstone
 
 #Technical Block
 tile.chisel.technical.name=Technical Block
+tile.chisel.technical2.name=Transparent Technical Block
+tile.chisel.technical3.name=Industrial Technical Block
 tile.technical.0.desc=Scaffold
 tile.technical.1.desc=Panels with Caution Tape
 tile.technical.2.desc=An Old Relic from the land of Oneteufyv
@@ -241,7 +243,7 @@ tile.technical.12.desc=Rusty Panel
 tile.technical.13.desc=Grate
 tile.technical.14.desc=Fan (Malfunctioning)
 tile.technical.15.desc=Rusty Grate
-tile.chisel.technical2.name=Transparent Technical Block
+tile.technical3.0.desc=I'm a big fan of this massive fan!
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
@@ -735,6 +737,10 @@ tile.stoneMoss.15.desc=Mossy Cobblestone with Dark Panel
 
 #Stone Bricks
 tile.chisel.stonebricksmooth.name=Stone Bricks
+tile.stonebricksmooth.0.desc=Modern Neutral Masonry
+tile.stonebricksmooth.1.desc=Modern Felsic Masonry
+tile.stonebricksmooth.2.desc=Modern Mafic Masonry
+tile.stonebricksmooth.3.desc=Modern Mixed Masonry
 tile.stonebricksmooth.4.desc=Small Stone Bricks
 tile.stonebricksmooth.5.desc=Wide Stone Bricks
 tile.stonebricksmooth.6.desc=Small Disordered Stone Bricks

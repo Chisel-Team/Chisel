@@ -2181,13 +2181,17 @@ public enum Features {
 				Carving.chisel.addVariation("stonebricksmooth", Blocks.stone, 0, -1);
 			}
 			for (int i = 0; i < 4; i++) {
-				if (i == 1) {
-					if (Configurations.allowMossy)
-						Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
+				if ((i == 1) && (Configurations.allowMossy)) {
+					Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
 				} else {
 					Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
 				}
 			}
+
+            stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.0.desc", 0, "stonebrick2/masonryPlain");
+            stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.1.desc", 1, "stonebrick2/masonryFelsic");
+            stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.2.desc", 2, "stonebrick2/masonryMafic");
+            stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.3.desc", 3, "stonebrick2/masonryMixed");
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.4.desc", 4, "stonebrick/smallbricks");
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.5.desc", 5, "stonebrick/largebricks");
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.6.desc", 6, "stonebrick/smallchaotic");
@@ -2201,15 +2205,9 @@ public enum Features {
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.14.desc", 14, "stonebrick/ornatepanel");
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.15.desc", 15, "stonebrick/poison");
 			stonebricksmooth.carverHelper.registerAll(stonebricksmooth, "stonebricksmooth");
+            Carving.chisel.registerOre("stonebricksmooth", "stonebricksmooth");
 
-			BlockCarvable stonebricksmooth2 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(1.5F).setResistance(10.0F)
-					.setStepSound(Block.soundTypeStone);
-			stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.0.desc", 0, "stonebrick2/masonryPlain");
-			stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.1.desc", 1, "stonebrick2/masonryFelsic");
-			stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.2.desc", 2, "stonebrick2/masonryMafic");
-			stonebricksmooth2.carverHelper.addVariation("tile.stonebricksmooth2.3.desc", 3, "stonebrick2/masonryMixed");
-			stonebricksmooth2.carverHelper.registerAll(stonebricksmooth2, "stonebricksmooth2");
-			Carving.chisel.registerOre("stonebricksmooth2", "stonebricksmooth");
+            //Carving.chisel.addVariation("stonebricksmooth", GameRegistry.findBlock("Chisel-2", "tile.TFTowerStone"), 0, 0);
 		}
 	},
 
@@ -2247,7 +2245,6 @@ public enum Features {
 			technical.carverHelper.addVariation("tile.technical.13.desc", 13, "technical/grate");
 			technical.carverHelper.addVariation("tile.technical.14.desc", 14, "technical/malfunctionFan");
 			technical.carverHelper.addVariation("tile.technical.15.desc", 15, "technical/grateRusty");
-			technical.carverHelper.registerAll(technical, "technical");
 
 			BlockCarvableGlass technical2 = (BlockCarvableGlass) new BlockCarvableGlass().setHardness(2.0F).setResistance(10F);
 			technical2.carverHelper.addVariation("tile.technical.0.desc", 0, "technical/scaffoldTransparent");
@@ -2255,7 +2252,23 @@ public enum Features {
 			technical2.carverHelper.addVariation("tile.technical.6.desc", 2, "technical/fanStillTransparent");
 			technical2.carverHelper.addVariation("tile.technical.14.desc", 3, "technical/fanStillTransparent");
 			technical2.carverHelper.registerAll(technical2, "technical2");
-			Carving.chisel.registerOre("technical", "technical");
+			Carving.chisel.registerOre("technical2", "technical");
+
+            BlockCarvable technical3 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
+            technical3.carverHelper.addVariation("tile.technical3.0.desc", 0, "technical/massiveFan");
+            technical2.carverHelper.registerAll(technical3, "technical3");
+            Carving.chisel.registerOre("technical3", "technical");
+
+            for (int i = 0; i < 4; i++) {
+                Carving.chisel.addVariation("technical", GameRegistry.findBlock("chisel", "technical2"), i, i);
+            }
+
+            for (int i = 0; i < 1; i++) {
+                Carving.chisel.addVariation("technical", GameRegistry.findBlock("chisel", "technical3"), i, i);
+            }
+
+            technical.carverHelper.registerAll(technical, "technical");
+            Carving.chisel.registerOre("technical", "technical");
 		}
 
 		@Override
