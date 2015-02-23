@@ -11,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.cricketcraft.chisel.block.BlockCarvable;
-import com.cricketcraft.chisel.client.player.PlayerSpecials;
 import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.compat.IMCHandler;
 import com.cricketcraft.chisel.config.Configurations;
@@ -140,9 +139,6 @@ public class Chisel {
 		proxy.init();
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(instance);
-
-		FMLCommonHandler.instance().bus().register(new PlayerSpecials());
-
 
 		FMLInterModComms.sendMessage("Waila", "register", "com.cricketcraft.chisel.compat.WailaCompat.register");
 	}

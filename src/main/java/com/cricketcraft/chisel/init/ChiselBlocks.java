@@ -40,6 +40,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvablePackedIce packedice = null;
 	public static final BlockCarvablePackedIcePillar packedice_pillar = null;
 	public static final BlockCarvable obsidian = null;
+	public static final BlockCarvable obsidian2 = null;
 	public static final BlockCarvablePowered redstone_block = null;
 	public static final BlockHolystone holystone = null;
 	public static final BlockGrimstone grimstone = null;
