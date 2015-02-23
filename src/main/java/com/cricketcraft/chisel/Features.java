@@ -2257,6 +2257,7 @@ public enum Features {
 
             BlockCarvable technical3 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
             technical3.carverHelper.addVariation("tile.technical3.0.desc", 0, "technical/massiveFan");
+            technical3.carverHelper.addVariation("tile.technical3.1.desc", 1, "technical/massiveHexPlating");
             technical2.carverHelper.registerAll(technical3, "technical3");
             //Carving.chisel.registerOre("technical3", "technical");
 
