@@ -2252,22 +2252,14 @@ public enum Features {
 			technical2.carverHelper.addVariation("tile.technical.4.desc", 1, "technical/fanFastTransparent");
 			technical2.carverHelper.addVariation("tile.technical.6.desc", 2, "technical/fanStillTransparent");
 			technical2.carverHelper.addVariation("tile.technical.14.desc", 3, "technical/fanStillTransparent");
-			technical2.carverHelper.registerAll(technical2, "technical2");
-			//Carving.chisel.registerOre("technical2", "technical");
+            technical2.carverHelper.registerBlock(technical2, "technical2");
+            technical2.carverHelper.registerVariations("technical", technical2);
 
             BlockCarvable technical3 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
             technical3.carverHelper.addVariation("tile.technical3.0.desc", 0, "technical/massiveFan");
-            technical2.carverHelper.registerAll(technical3, "technical3");
-            //Carving.chisel.registerOre("technical3", "technical");
-
-            for (int i = 0; i < 4; i++) {
-                Carving.chisel.addVariation("technical", GameRegistry.findBlock("chisel", "technical2"), i, i);
-            }
-
-            for (int i = 0; i < 1; i++) {
-                Carving.chisel.addVariation("technical", GameRegistry.findBlock("chisel", "technical3"), i, i);
-            }
-
+            technical3.carverHelper.addVariation("tile.technical3.1.desc", 1, "technical/massiveHexPlating");
+            technical2.carverHelper.registerBlock(technical3, "technical3");
+            technical2.carverHelper.registerVariations("technical", technical3);
 
             Carving.chisel.registerOre("technical", "technical");
 		}

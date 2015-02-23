@@ -244,6 +244,7 @@ tile.technical.13.desc=Grate
 tile.technical.14.desc=Fan (Malfunctioning)
 tile.technical.15.desc=Rusty Grate
 tile.technical3.0.desc=I'm a big fan of this massive fan!
+tile.technical3.1.desc=Industrial Armor Plating
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
