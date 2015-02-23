@@ -62,8 +62,8 @@ public class ClientProxy extends CommonProxy {
 
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.chisel, renderer);
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.diamondChisel, renderer);
-
-		MinecraftForge.EVENT_BUS.register(new PlayerSpecials());
+		
+		PlayerSpecials.init();
 	}
 
 	@Override
