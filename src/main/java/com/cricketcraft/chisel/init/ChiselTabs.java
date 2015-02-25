@@ -8,6 +8,9 @@ import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.Features;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class ChiselTabs {
 
 	private static class CustomCreativeTab extends CreativeTabs {
