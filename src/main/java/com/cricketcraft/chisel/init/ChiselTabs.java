@@ -31,6 +31,25 @@ public class ChiselTabs {
 		public ItemStack getIconItemStack() {
 			return stack;
 		}
+		
+		@Override
+	    @SideOnly(Side.CLIENT)
+	    public String getBackgroundImageName() {
+
+	        return search ? "item_search.png" : super.getBackgroundImageName();
+	    }
+
+	    @Override
+	    public int getSearchbarWidth() {
+
+	        return 89;
+	    }
+	    
+	    @Override
+	    public boolean hasSearchBar() {
+
+	        return true;
+	    }
 	}
 
 	private static boolean atLeastOneModIsLoaded = false;
