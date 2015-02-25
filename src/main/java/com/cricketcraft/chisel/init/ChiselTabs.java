@@ -11,11 +11,14 @@ import com.cricketcraft.chisel.Features;
 public class ChiselTabs {
 
 	private static class CustomCreativeTab extends CreativeTabs {
+		
+		private boolean search;
 
 		private ItemStack stack;
 
-		public CustomCreativeTab(String label) {
+		public CustomCreativeTab(String label, boolean searchbar) {
 			super(label);
+			this.search = searchbar;
 		}
 
 		@Override
@@ -48,18 +51,18 @@ public class ChiselTabs {
 	    @Override
 	    public boolean hasSearchBar() {
 
-	        return true;
+	        return search;
 	    }
 	}
 
 	private static boolean atLeastOneModIsLoaded = false;
 
-	public static final CustomCreativeTab tabChisel = new CustomCreativeTab("tabChisel");
-	public static final CustomCreativeTab tabStoneChiselBlocks = new CustomCreativeTab("tabStoneChiselBlocks");
-	public static final CustomCreativeTab tabWoodChiselBlocks = new CustomCreativeTab("tabWoodChiselBlocks");
-	public static final CustomCreativeTab tabMetalChiselBlocks = new CustomCreativeTab("tabMetalChiselBlocks");
-	public static final CustomCreativeTab tabOtherChiselBlocks = new CustomCreativeTab("tabOtherChiselBlocks");
-	public static final CustomCreativeTab tabModdedChiselBlocks = new CustomCreativeTab("tabModdedChiselBlocks");
+	public static final CustomCreativeTab tabChisel = new CustomCreativeTab("tabChisel", false);
+	public static final CustomCreativeTab tabStoneChiselBlocks = new CustomCreativeTab("tabStoneChiselBlocks", true);
+	public static final CustomCreativeTab tabWoodChiselBlocks = new CustomCreativeTab("tabWoodChiselBlocks", true);
+	public static final CustomCreativeTab tabMetalChiselBlocks = new CustomCreativeTab("tabMetalChiselBlocks", true);
+	public static final CustomCreativeTab tabOtherChiselBlocks = new CustomCreativeTab("tabOtherChiselBlocks", true);
+	public static final CustomCreativeTab tabModdedChiselBlocks = new CustomCreativeTab("tabModdedChiselBlocks", true);
 
 	// this serves mostly just to load the static initializers
 	public static void preInit() {
