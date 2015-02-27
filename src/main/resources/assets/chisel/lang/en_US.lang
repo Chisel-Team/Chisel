@@ -78,6 +78,7 @@ autochisel.slot.chisel.tooltip=Chisel Slot
 autochisel.slot.target.tooltip=Target Slot
 
 #Leaves
+tile.chisel.leaves.name=Leaf
 tile.leaves.6.desc=Dead Leaves
 tile.leaves.7.desc=Fancy Leaves
 tile.leaves.8.desc=Pink Petals
