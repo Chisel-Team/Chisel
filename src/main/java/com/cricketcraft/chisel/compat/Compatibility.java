@@ -16,6 +16,7 @@ public class Compatibility {
 
 		/* Proj Red */
 		addSupport("ProjRed|Exploration", "projectred.exploration.stone", "marble", 0, 99);
+		addSupport("ProjRed|Exploration", "projectred.exploration.stone", "marble", 1, 99);
 
 		/* Bluepower */
 		addSupport("bluepower", "marble", "marble", 0, 99);
