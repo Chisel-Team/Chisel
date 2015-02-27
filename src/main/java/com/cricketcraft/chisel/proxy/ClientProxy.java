@@ -20,7 +20,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy {
 
@@ -62,7 +61,7 @@ public class ClientProxy extends CommonProxy {
 
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.chisel, renderer);
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.diamondChisel, renderer);
-		
+
 		PlayerSpecials.init();
 	}
 
