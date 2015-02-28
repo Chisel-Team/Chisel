@@ -14,7 +14,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ChiselTabs {
 
 	private static class CustomCreativeTab extends CreativeTabs {
-		
+
 		private boolean search;
 
 		private ItemStack stack;
@@ -37,25 +37,25 @@ public class ChiselTabs {
 		public ItemStack getIconItemStack() {
 			return stack;
 		}
-		
+
 		@Override
-	    @SideOnly(Side.CLIENT)
-	    public String getBackgroundImageName() {
+		@SideOnly(Side.CLIENT)
+		public String getBackgroundImageName() {
 
-	        return search ? "item_search.png" : super.getBackgroundImageName();
-	    }
+			return search ? "item_search.png" : super.getBackgroundImageName();
+		}
 
-	    @Override
-	    public int getSearchbarWidth() {
+		@Override
+		public int getSearchbarWidth() {
 
-	        return 89;
-	    }
-	    
-	    @Override
-	    public boolean hasSearchBar() {
+			return 89;
+		}
 
-	        return search;
-	    }
+		@Override
+		public boolean hasSearchBar() {
+
+			return search;
+		}
 	}
 
 	private static boolean atLeastOneModIsLoaded = false;
@@ -74,21 +74,26 @@ public class ChiselTabs {
 
 	public static void postInit() {
 
-		if(Features.CHISEL.enabled())
-		tabChisel.setTabIconItemStack(new ItemStack(ChiselItems.chisel));
-		else tabChisel.setTabIconItemStack(new ItemStack(Items.stick));
-		if(Features.HOLYSTONE.enabled())
-		tabStoneChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.holystone));
-		else tabStoneChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.stonebrick));
-		if(Features.WOOD.enabled())
-		tabWoodChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.planks[0], 1, 1));
-		else tabWoodChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.planks));
-		if(Features.TECHNICAL.enabled())
-		tabMetalChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.technical));
-		else tabMetalChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.iron_block));
-		if(Features.JACKOLANTERN.enabled())
-		tabOtherChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.jackolantern[0]));
-		else tabOtherChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.lit_pumpkin));
+		if (Features.CHISEL.enabled())
+			tabChisel.setTabIconItemStack(new ItemStack(ChiselItems.chisel));
+		else
+			tabChisel.setTabIconItemStack(new ItemStack(Items.stick));
+		if (Features.HOLYSTONE.enabled())
+			tabStoneChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.holystone));
+		else
+			tabStoneChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.stonebrick));
+		if (Features.WOOD.enabled())
+			tabWoodChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.planks[0], 1, 1));
+		else
+			tabWoodChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.planks));
+		if (Features.TECHNICAL.enabled())
+			tabMetalChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.technical));
+		else
+			tabMetalChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.iron_block));
+		if (Features.JACKOLANTERN.enabled())
+			tabOtherChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.jackolantern[0]));
+		else
+			tabOtherChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.lit_pumpkin));
 
 		if (atLeastOneModIsLoaded) {
 			if (Features.ARCANE.enabled()) {
@@ -96,9 +101,10 @@ public class ChiselTabs {
 			} else if (Features.BLOOD_RUNE.enabled()) {
 				tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.bloodRune));
 			} else {
-				if(ChiselBlocks.voidstone != null)
-				tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.voidstone));
-				else tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.obsidian));
+				if (ChiselBlocks.voidstone != null)
+					tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(ChiselBlocks.voidstone));
+				else
+					tabModdedChiselBlocks.setTabIconItemStack(new ItemStack(Blocks.obsidian));
 			}
 		}
 	}

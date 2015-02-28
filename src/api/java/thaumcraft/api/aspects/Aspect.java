@@ -181,14 +181,14 @@ public class Aspect {
 		public static final Aspect BEAST = new Aspect("bestia",0x9f6409, new Aspect[] {MOTION, LIFE});
 		public static final Aspect FLESH = new Aspect("corpus",0xee478d, new Aspect[] {DEATH, BEAST});
 		public static final Aspect UNDEAD = new Aspect("exanimis",0x3a4000, new Aspect[] {MOTION, DEATH});
-		public static final Aspect MIND = new Aspect("cognitio",0xffc2b3, new Aspect[] {FIRE, SOUL});
+		public static final Aspect MIND = new Aspect("cognitio",0xffc2b3, new Aspect[] {EARTH, SOUL});
 		public static final Aspect SENSES = new Aspect("sensus",0x0fd9ff, new Aspect[] {AIR, SOUL});
 		public static final Aspect MAN = new Aspect("humanus",0xffd7c0, new Aspect[] {BEAST, MIND});
 		public static final Aspect CROP = new Aspect("messis",0xe1b371, new Aspect[] {PLANT, MAN});		
 		public static final Aspect MINE = new Aspect("perfodio",0xdcd2d8, new Aspect[] {MAN, EARTH});
 		public static final Aspect TOOL = new Aspect("instrumentum",0x4040ee, new Aspect[] {MAN, ORDER});
 		public static final Aspect HARVEST = new Aspect("meto",0xeead82, new Aspect[] {CROP, TOOL});
-		public static final Aspect WEAPON = new Aspect("telum",0xc05050, new Aspect[] {TOOL, FIRE});
+		public static final Aspect WEAPON = new Aspect("telum",0xc05050, new Aspect[] {TOOL, ENTROPY});
 		public static final Aspect ARMOR = new Aspect("tutamen",0x00c0c0, new Aspect[] {TOOL, EARTH});
 		public static final Aspect HUNGER = new Aspect("fames",0x9a0305, new Aspect[] {LIFE, VOID});
 		public static final Aspect GREED = new Aspect("lucrum",0xe6be44, new Aspect[] {MAN, HUNGER});
