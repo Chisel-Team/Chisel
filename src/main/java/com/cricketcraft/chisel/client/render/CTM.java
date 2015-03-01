@@ -5,6 +5,44 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.api.IFacade;
+/**
+ * The CTM renderer will draw the block's FACE using by assembling 4 quadrants from the 5 available block
+ * textures.  The normal Texture.png is the blocks "unconnected" texture, and is used when CTM is disabled or the block
+ * has nothing to connect to.  This texture has all of the outside corner quadrants  The texture-ctm.png contains the
+ * rest of the quadrants.
+ *
+ *  ┌─────────────────┐ ┌────────────────────────────────┐
+ *  │ texture.png     │ │ texture-ctm.png                │
+ *  │ ╔══════╤══════╗ │ │                                │
+ *  │ ║      │      ║ │ │        │       ║      │      ║ │
+ *  │ ║ 16   │ 17   ║ │ │  0     │ 1     ║ 2    │ 3    ║ │
+ *  │ ╟──────┼──────╢ │ │  ──────┼───────╟──────┼──────╢ │
+ *  │ ║      │      ║ │ │        │       ║      │      ║ │
+ *  │ ║ 18   │ 19   ║ │ │  4     │ 5     ║ 6    │ 7    ║ │
+ *  │ ╚══════╧══════╝ │ │  ══════╤═══════╝──────┼──────╚ │
+ *  └─────────────────┘ │        │       │      │        │
+ *                      │  8     │ 9     │ 10   │ 11     │
+ *                      │  ──────┼───────┼──────┼──────  │
+ *                      │        │       │      │        │
+ *                      │  12    │ 13    │ 14   │ 15     │
+ *                      │  ══════╧═══════╗             ╔ │
+ *                      └────────────────────────────────┘
+ *
+ * combining { 16, 9, 18, 13}, we can generate a connected texture!
+ * ╔══════╤═══════
+ * ║      │
+ * ║ 16   │ 9
+ * ╟──────┼──────
+ * ║      │
+ * ║ 18   │ 13
+ * ╚══════╧═══════
+ *
+ * HAVE FUN!
+ * -CptRageToaster-
+ *
+ * TODO: Everything
+ */
+
 
 public class CTM {
 
