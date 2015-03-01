@@ -29,7 +29,7 @@ import com.cricketcraft.chisel.api.IFacade;
  *                      │ ═══════╧═══════╗ ─────┼───── ╔ │
  *                      └────────────────────────────────┘
  *
- * combining { 16, 9, 18, 13}, we can generate a texture connected to the right!
+ * combining { 18, 13,  9, 16 }, we can generate a texture connected to the right!
  *
  *  ╔══════╤═══════
  *  ║      │      │
@@ -40,7 +40,7 @@ import com.cricketcraft.chisel.api.IFacade;
  *  ╚══════╧═══════
  *
  *
- * combining { 2, 11, 18, 13}, we can generate a texture, in the shape of an L (connected to the right, and up
+ * combining { 18, 13, 11,  2 }, we can generate a texture, in the shape of an L (connected to the right, and up
  *
  *  ║ ─────┼───── ╚
  *  ║      │      │
@@ -60,12 +60,74 @@ import com.cricketcraft.chisel.api.IFacade;
 
 public class CTM {
 
-	static int submaps[][] = { { 16, 17, 18, 19 }, { 16, 9, 18, 13 }, { 8, 9, 12, 13 }, { 8, 17, 12, 19 }, { 16, 9, 6, 15 }, { 8, 17, 14, 7 }, { 2, 11, 6, 15 }, { 8, 9, 14, 15 }, { 10, 1, 14, 15 },
-			{ 10, 11, 14, 5 }, { 0, 11, 4, 15 }, { 0, 1, 14, 15 }, {}, {}, {}, {}, { 16, 17, 6, 7 }, { 16, 9, 6, 5 }, { 8, 9, 4, 5 }, { 8, 17, 4, 7 }, { 2, 11, 18, 13 }, { 10, 3, 12, 19 },
-			{ 10, 11, 12, 13 }, { 10, 3, 14, 7 }, { 0, 11, 14, 15 }, { 10, 11, 4, 15 }, { 10, 11, 4, 5 }, { 10, 1, 14, 5 }, {}, {}, {}, {}, { 2, 3, 6, 7 }, { 2, 1, 6, 5 }, { 0, 1, 4, 5 },
-			{ 0, 3, 4, 7 }, { 2, 11, 6, 5 }, { 8, 9, 4, 15 }, { 2, 1, 6, 15 }, { 8, 9, 14, 5 }, { 0, 1, 4, 15 }, { 0, 1, 14, 5 }, { 10, 1, 4, 15 }, { 0, 11, 14, 5 }, {}, {}, {}, {}, { 2, 3, 18, 19 },
-			{ 2, 1, 18, 13 }, { 0, 1, 12, 13 }, { 0, 3, 12, 19 }, { 10, 1, 12, 13 }, { 0, 3, 14, 7 }, { 0, 11, 12, 13 }, { 10, 3, 4, 7 }, { 0, 11, 4, 5 }, { 10, 1, 4, 5 }, { 10, 11, 14, 15 },
-			{ 0, 1, 4, 5 }, {}, {}, {}, {}, };
+    /**
+     *  The quads are ordered the same here, and in the renderer:
+     *  1. Lower left
+     *  2. Lower Right
+     *  3. Top Right
+     *  4. Top Left
+     */
+	static int submaps[][] = {
+            { 18, 19, 17, 16 }, //  0 - No connection, with border
+
+            { 18, 19,  3,  2 }, //  1 - Connected from above
+            { 18, 13,  9, 16 }, //  2 - Connected to the right
+            {  6,  7, 17, 16 }, //  3 - Connected from below
+            { 12, 19, 17,  8 }, //  4 - Connected to the left
+
+            {  6,  7,  3,  2 }, //  5 - ║
+            { 12, 13,  9,  8 }, //  6 - ═
+            { 18, 13, 11,  2 }, //  7 - ╚  with inside corner
+            {  6, 15,  3, 16 }, //  8 - ╔  with inside corner
+            { 14,  7, 17,  8 }, //  9 - ╗  with inside corner
+            { 12, 19,  3, 10 }, // 10 - ╝  with inside corner
+
+            { 18, 13,  1,  2 }, // 11 - ╚  no inside corner
+            {  6,  5,  3, 16 }, // 12 - ╔  no inside corner
+            {  4,  7, 17,  8 }, // 13 - ╗  no inside corner
+            { 12, 19,  3,  0 }, // 14 - ╝  no inside corner
+
+            {  6, 15, 11,  2 }, // 15 - ╠  with inside corners
+            { 14, 15,  9,  8 }, // 16 - ╦  with inside corners
+            { 14,  7,  3, 10 }, // 17 - ╣  with inside corners
+            { 12, 13, 11, 10 }, // 18 - ╩  with inside corners
+
+            {  6,  5, 11,  2 }, // 23 - ╠  with top right inside corner
+            {  4, 15,  9,  8 }, // 24 - ╦  with bottom right inside corner
+            { 14,  7,  3,  0 }, // 25 - ╣  with bottom left inside corner
+            { 12, 13,  1, 10 }, // 26 - ╩  with top left inside corner
+
+            {  6, 15,  1,  2 }, // 19 - ╠  with bottom right inside corner
+            { 14,  5,  9,  8 }, // 20 - ╦  with bottom left inside corner
+            {  4,  7,  3, 10 }, // 21 - ╣  with top left inside corner
+            { 12, 13, 11,  0 }, // 22 - ╩  with top right inside corner
+
+            {  6,  5,  1,  2 }, // 27 - ╠  no inside corners
+            {  4,  5,  9,  8 }, // 28 - ╦  no inside corners
+            {  4,  7,  3,  0 }, // 29 - ╣  no inside corners
+            { 12, 13,  1,  0 }, // 30 - ╩  no inside corners
+
+            { 14, 15, 11, 10 }, // 31 - ╬, with all inside corners
+
+            { 14,  5, 11, 10 }, // 32 - ╬, with all but bottom right inside corner
+            {  4, 15, 11, 10 }, // 33 - ╬, with all but bottom left inside corner
+            { 14, 15, 11,  0 }, // 34 - ╬, with all but top left inside corner
+            { 14, 15,  1, 10 }, // 35 - ╬, with all but top right inside corner
+
+            {  4,  5, 11, 10 }, // 36 - ╬, with top inside corners
+            {  4, 15, 11,  0 }, // 37 - ╬, with right inside corners
+            { 14, 15,  1,  0 }, // 38 - ╬, with right inside corners
+            { 14,  5,  1, 10 }, // 39 - ╬, with left inside corners
+            {  4, 15,  1, 10 }, // 40 - ╬, with top left and bottom right inside corners
+            { 14,  5, 11,  0 }, // 41 - ╬, with top right and bottom left inside corners
+
+            {  4,  5,  1, 10 }, // 42 - ╬, with top left inside corner
+            {  4,  5, 11,  0 }, // 43 - ╬, with top right inside corner
+            {  4, 15,  1,  0 }, // 44 - ╬, with bottom right inside corner
+            { 14,  5,  1,  0 }, // 45 - ╬, with bottom left inside corner
+
+            {  4,  5,  1,  0 }, // 46 - ╬, no inside corners
+    };
 
 	public static int[] getSubmapIndices(IBlockAccess world, int x, int y, int z, int side) {
 		int index = getTexture(world, x, y, z, side);
@@ -81,172 +143,58 @@ public class CTM {
 		Block block = world.getBlock(x, y, z);
 		int blockMetadata = world.getBlockMetadata(x, y, z);
 
-		boolean b[] = new boolean[6];
+		boolean b[] = new boolean[8];
+        /**
+         * b[0]    b[1]    b[2]
+         *
+         *
+         *
+         * b[3]    FACE    b[4]
+         *
+         *
+         *
+         * b[5]    b[6]    b[7]
+         */
         if (side == 0) {
+            //TODO:
             b[0] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
             b[1] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
             b[2] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
             b[3] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
         } else if (side == 1) {
+            //TODO:
 			b[0] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
 			b[1] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
 			b[2] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
 			b[3] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
 		} else if (side == 2) {
+            //TODO:
 			b[0] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
 			b[1] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
 			b[2] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
 			b[3] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
 		} else if (side == 3) {
+            //TODO:
 			b[0] = isConnected(world, x - 1, y, z, side, block, blockMetadata);
 			b[1] = isConnected(world, x + 1, y, z, side, block, blockMetadata);
 			b[2] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
 			b[3] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
 		} else if (side == 4) {
+            //TODO:
 			b[0] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
 			b[1] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
 			b[2] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
 			b[3] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
 		} else if (side == 5) {
+            //TODO:
 			b[0] = isConnected(world, x, y, z + 1, side, block, blockMetadata);
 			b[1] = isConnected(world, x, y, z - 1, side, block, blockMetadata);
 			b[2] = isConnected(world, x, y - 1, z, side, block, blockMetadata);
 			b[3] = isConnected(world, x, y + 1, z, side, block, blockMetadata);
 		}
-		if (b[0] & !b[1] & !b[2] & !b[3])
-			texture = 3;
-		else if (!b[0] & b[1] & !b[2] & !b[3])
-			texture = 1;
-		else if (!b[0] & !b[1] & b[2] & !b[3])
-			texture = 16;
-		else if (!b[0] & !b[1] & !b[2] & b[3])
-			texture = 48;
-		else if (b[0] & b[1] & !b[2] & !b[3])
-			texture = 2;
-		else if (!b[0] & !b[1] & b[2] & b[3])
-			texture = 32;
-		else if (b[0] & !b[1] & b[2] & !b[3])
-			texture = 19;
-		else if (b[0] & !b[1] & !b[2] & b[3])
-			texture = 51;
-		else if (!b[0] & b[1] & b[2] & !b[3])
-			texture = 17;
-		else if (!b[0] & b[1] & !b[2] & b[3])
-			texture = 49;
-		else if (!b[0] & b[1] & b[2] & b[3])
-			texture = 33;
-		else if (b[0] & !b[1] & b[2] & b[3])
-			texture = 35;
-		else if (b[0] & b[1] & !b[2] & b[3])
-			texture = 50;
-		else if (b[0] & b[1] & b[2] & !b[3])
-			texture = 18;
-		else if (b[0] & b[1] & b[2] & b[3])
-			texture = 34;
 
-		boolean b2[] = new boolean[6];
-        if (side == 0) {
-            b2[0] = !isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
-            b2[1] = !isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
-            b2[2] = !isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
-            b2[3] = !isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
-        } else if (side == 1) {
-			b2[0] = !isConnected(world, x + 1, y, z - 1, side, block, blockMetadata);
-			b2[1] = !isConnected(world, x - 1, y, z - 1, side, block, blockMetadata);
-			b2[2] = !isConnected(world, x + 1, y, z + 1, side, block, blockMetadata);
-			b2[3] = !isConnected(world, x - 1, y, z + 1, side, block, blockMetadata);
-		} else if (side == 2) {
-			b2[0] = !isConnected(world, x - 1, y - 1, z, side, block, blockMetadata);
-			b2[1] = !isConnected(world, x + 1, y - 1, z, side, block, blockMetadata);
-			b2[2] = !isConnected(world, x - 1, y + 1, z, side, block, blockMetadata);
-			b2[3] = !isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);
-		} else if (side == 3) {
-			b2[0] = !isConnected(world, x + 1, y - 1, z, side, block, blockMetadata);
-			b2[1] = !isConnected(world, x - 1, y - 1, z, side, block, blockMetadata);
-			b2[2] = !isConnected(world, x + 1, y + 1, z, side, block, blockMetadata);
-			b2[3] = !isConnected(world, x - 1, y + 1, z, side, block, blockMetadata);
-		} else if (side == 4) {
-			b2[0] = !isConnected(world, x, y - 1, z + 1, side, block, blockMetadata);
-			b2[1] = !isConnected(world, x, y - 1, z - 1, side, block, blockMetadata);
-			b2[2] = !isConnected(world, x, y + 1, z + 1, side, block, blockMetadata);
-			b2[3] = !isConnected(world, x, y + 1, z - 1, side, block, blockMetadata);
-		} else if (side == 5) {
-			b2[0] = !isConnected(world, x, y - 1, z - 1, side, block, blockMetadata);
-			b2[1] = !isConnected(world, x, y - 1, z + 1, side, block, blockMetadata);
-			b2[2] = !isConnected(world, x, y + 1, z - 1, side, block, blockMetadata);
-			b2[3] = !isConnected(world, x, y + 1, z + 1, side, block, blockMetadata);
-		}
+        //TODO: return something other than zero
 
-		if (texture == 17 && b2[0])
-			texture = 4;
-		if (texture == 19 && b2[1])
-			texture = 5;
-		if (texture == 49 && b2[2])
-			texture = 20;
-		if (texture == 51 && b2[3])
-			texture = 21;
-
-		if (texture == 18 && b2[0] && b2[1])
-			texture = 7;
-		if (texture == 33 && b2[0] && b2[2])
-			texture = 6;
-		if (texture == 35 && b2[3] && b2[1])
-			texture = 23;
-		if (texture == 50 && b2[3] && b2[2])
-			texture = 22;
-
-		if (texture == 18 && !b2[0] && b2[1])
-			texture = 39;
-		if (texture == 33 && b2[0] && !b2[2])
-			texture = 38;
-		if (texture == 35 && !b2[3] && b2[1])
-			texture = 53;
-		if (texture == 50 && b2[3] && !b2[2])
-			texture = 52;
-
-		if (texture == 18 && b2[0] && !b2[1])
-			texture = 37;
-		if (texture == 33 && !b2[0] && b2[2])
-			texture = 36;
-		if (texture == 35 && b2[3] && !b2[1])
-			texture = 55;
-		if (texture == 50 && !b2[3] && b2[2])
-			texture = 54;
-
-		if (texture == 34 && b2[0] && b2[1] && b2[2] && b2[3])
-			texture = 58;
-
-		if (texture == 34 && !b2[0] && b2[1] && b2[2] && b2[3])
-			texture = 9;
-		if (texture == 34 && b2[0] && !b2[1] && b2[2] && b2[3])
-			texture = 25;
-		if (texture == 34 && b2[0] && b2[1] && !b2[2] && b2[3])
-			texture = 8;
-		if (texture == 34 && b2[0] && b2[1] && b2[2] && !b2[3])
-			texture = 24;
-
-		if (texture == 34 && b2[0] && b2[1] && !b2[2] && !b2[3])
-			texture = 11;
-		if (texture == 34 && !b2[0] && !b2[1] && b2[2] && b2[3])
-			texture = 26;
-		if (texture == 34 && !b2[0] && b2[1] && !b2[2] && b2[3])
-			texture = 27;
-		if (texture == 34 && b2[0] && !b2[1] && b2[2] && !b2[3])
-			texture = 10;
-
-		if (texture == 34 && b2[0] && !b2[1] && !b2[2] && b2[3])
-			texture = 42;
-		if (texture == 34 && !b2[0] && b2[1] && b2[2] && !b2[3])
-			texture = 43;
-
-		if (texture == 34 && b2[0] && !b2[1] && !b2[2] && !b2[3])
-			texture = 40;
-		if (texture == 34 && !b2[0] && b2[1] && !b2[2] && !b2[3])
-			texture = 41;
-		if (texture == 34 && !b2[0] && !b2[1] && b2[2] && !b2[3])
-			texture = 56;
-		if (texture == 34 && !b2[0] && !b2[1] && !b2[2] && b2[3])
-			texture = 57;
 		return texture;
 	}
 
@@ -294,5 +242,4 @@ public class CTM {
 		}
 		return blk;
 	}
-
 }
