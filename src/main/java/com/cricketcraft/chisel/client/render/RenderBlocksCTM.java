@@ -13,14 +13,14 @@ public class RenderBlocksCTM extends RenderBlocks {
 
 	/**
 	 * An enum for all possible 26 sub-side vertices.
-	 * <p>
+	 *
 	 * The naming scheme is as follows:
-	 * <ul>
-	 * <li>ZERO and ONE are special cases, they are the absolute min and absolute max of the block.</li>
-	 * <li>X, Y, Z, or any combination means that the axes listed in the name are at 1.</li>
-	 * <li>X, Y, Z, or any combination followed by HALF means that those axes are at 0.5.</li>
-	 * <li>X, Y, Z, or any combination after a HALF means those axes are at 1.</li>
-	 * </ul>
+	 *
+	 * ZERO and ONE are special cases, they are the absolute min and absolute max of the block.
+	 * X, Y, Z, or any combination means that the axes listed in the name are at 1.
+	 * X, Y, Z, or any combination followed by HALF means that those axes are at 0.5.
+	 * X, Y, Z, or any combination after a HALF means those axes are at 1.
+	 *
 	 */
 	enum Vert {
 
@@ -61,6 +61,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 
 		void render(RenderBlocksCTM inst, int cacheID) {
 			if (inst.enableAO) {
+                // TODO: Get this back in
 				// inst.tessellator.setColorOpaque_F(inst.redCache[cacheID], inst.greenCache[cacheID], inst.blueCache[cacheID]);
 				inst.tessellator.setBrightness(inst.lightingCache[cacheID]);
 			}
@@ -182,10 +183,6 @@ public class RenderBlocksCTM extends RenderBlocks {
         lightingCache[3] = lightmap[0+x][1+y];
     }
 
-	void updateLighting() {
-		//nop
-	}
-
 	/**
 	 * This works around a bug in CLC atm
 	 */
@@ -208,7 +205,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 				| ((blueBitChannel / lightVals.length) & 0xF0000) | ((sunlightBitChannel / lightVals.length) & 0xF00000);
 	}
 
-	void side(SubSide side, int iconIndex, boolean flip) {
+	void side(SubSide side, int iconIndex) {
 		IIcon icon = iconIndex >= 16 ? submapSmall.icons[iconIndex - 16] : submap.icons[iconIndex];
 
 		double umax = icon.getMaxU();
@@ -216,14 +213,14 @@ public class RenderBlocksCTM extends RenderBlocks {
 		double vmax = icon.getMaxV();
 		double vmin = icon.getMinV();
 
-		uCache[0] = flip ? umax : umin;
+		uCache[0] = umin;
 		uCache[1] = umax;
-		uCache[2] = flip ? umin : umax;
+		uCache[2] = umax;
 		uCache[3] = umin;
 
-		vCache[0] = flip ? vmin : vmax;
+		vCache[0] = vmax;
 		vCache[1] = vmax;
-		vCache[2] = flip ? vmax : vmin;
+		vCache[2] = vmin;
 		vCache[3] = vmin;
 
 		side.render(this);
@@ -243,13 +240,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 
             fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
             getLight(0, 0);
-			side(XNEG_LB, tex[2], false);
+			side(XNEG_LB, tex[0]);
             getLight(1, 0);
-			side(XNEG_RB, tex[3], false);
+			side(XNEG_RB, tex[1]);
             getLight(1, 1);
-			side(XNEG_RT, tex[1], false);
+			side(XNEG_RT, tex[2]);
             getLight(0, 1);
-			side(XNEG_LT, tex[0], false);
+			side(XNEG_LT, tex[3]);
 		}
 	}
 
@@ -267,13 +264,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 
             fillLightmap(brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight, brightnessTopRight);
             getLight(0, 0);
-            side(XPOS_LB, tex[2], false);
+            side(XPOS_LB, tex[0]);
             getLight(1, 0);
-            side(XPOS_RB, tex[3], false);
+            side(XPOS_RB, tex[1]);
             getLight(1, 1);
-            side(XPOS_RT, tex[1], false);
+            side(XPOS_RT, tex[2]);
             getLight(0, 1);
-            side(XPOS_LT, tex[0], false);
+            side(XPOS_LT, tex[3]);
 		}
 	}
 
@@ -291,13 +288,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 
             fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
             getLight(0, 0);
-            side(ZNEG_LB, tex[2], false);
+            side(ZNEG_LB, tex[0]);
             getLight(1, 0);
-            side(ZNEG_RB, tex[3], false);
+            side(ZNEG_RB, tex[1]);
             getLight(1, 1);
-            side(ZNEG_RT, tex[1], false);
+            side(ZNEG_RT, tex[2]);
             getLight(0, 1);
-            side(ZNEG_LT, tex[0], false);
+            side(ZNEG_LT, tex[3]);
 		}
 	}
 
@@ -315,13 +312,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 
             fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
             getLight(0, 0);
-            side(ZPOS_LB, tex[2], false);
+            side(ZPOS_LB, tex[0]);
             getLight(1, 0);
-            side(ZPOS_RB, tex[3], false);
+            side(ZPOS_RB, tex[1]);
             getLight(1, 1);
-            side(ZPOS_RT, tex[1], false);
+            side(ZPOS_RT, tex[2]);
             getLight(0, 1);
-            side(ZPOS_LT, tex[0], false);
+            side(ZPOS_LT, tex[3]);
 		}
 	}
 
@@ -339,13 +336,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 
             fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
             getLight(0, 0);
-            side(YNEG_LB, tex[2], false);
+            side(YNEG_LB, tex[0]);
             getLight(1, 0);
-            side(YNEG_RB, tex[3], false);
+            side(YNEG_RB, tex[1]);
             getLight(1, 1);
-            side(YNEG_RT, tex[1], false);
+            side(YNEG_RT, tex[2]);
             getLight(0, 1);
-            side(YNEG_LT, tex[0], false);
+            side(YNEG_LT, tex[3]);
 		}
 	}
 
@@ -363,13 +360,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 
             fillLightmap(brightnessTopRight, brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight);
             getLight(0, 0);
-            side(YPOS_LB, tex[2], false);
+            side(YPOS_LB, tex[0]);
             getLight(1, 0);
-            side(YPOS_RB, tex[3], false);
+            side(YPOS_RB, tex[1]);
             getLight(1, 1);
-            side(YPOS_RT, tex[1], false);
+            side(YPOS_RT, tex[2]);
             getLight(0, 1);
-            side(YPOS_LT, tex[0], false);
+            side(YPOS_LT, tex[3]);
 		}
 	}
 
