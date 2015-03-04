@@ -16,7 +16,7 @@ public class ContainerChisel extends Container {
 
 	public final InventoryChiselSelection inventory;
 	public InventoryPlayer playerInventory;
-	int currentIndex;
+	int chiselSlot;
 	public ItemStack chisel;
 	public boolean finished;
 	public ICarvingRegistry carving;
@@ -24,7 +24,7 @@ public class ContainerChisel extends Container {
 	public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv) {
 		inventory = inv;
 		playerInventory = inventoryplayer;
-		currentIndex = playerInventory.currentItem;
+		chiselSlot = playerInventory.currentItem;
 		inv.container = this;
 
 		int top = 8, left = 62;
@@ -64,7 +64,10 @@ public class ContainerChisel extends Container {
 	@Override
 	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
 		// we need to subtract away all the other slots
-		if (par1 - inventory.getSizeInventory() - 27 == currentIndex)
+		int clickedSlot = par1 - inventory.getSizeInventory() - 27;
+
+		// if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
+		if (clickedSlot == chiselSlot || (par3 == 2 && par2 == chiselSlot))
 			return null;
 
 		return super.slotClick(par1, par2, par3, par4EntityPlayer);
@@ -128,7 +131,7 @@ public class ContainerChisel extends Container {
 	}
 
 	public void onChiselSlotChanged() {
-		ItemStack stack = playerInventory.mainInventory[currentIndex];
+		ItemStack stack = playerInventory.mainInventory[chiselSlot];
 		if (stack == null || !stack.isItemEqual(chisel))
 			finished = true;
 
@@ -137,6 +140,6 @@ public class ContainerChisel extends Container {
 
 		General.setChiselTarget(chisel, inventory.getStackInSpecialSlot());
 
-		playerInventory.mainInventory[currentIndex] = chisel;
+		playerInventory.mainInventory[chiselSlot] = chisel;
 	}
 }
