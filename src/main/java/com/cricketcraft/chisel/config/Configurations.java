@@ -33,23 +33,26 @@ public class Configurations {
 	public static int particlesTickrate;
 	public static boolean oldPillars;
 	public static boolean disableCTM;
+	public static boolean connectInsideCTM;
 	public static boolean fancy;
 	public static boolean blockDescriptions;
 
 	public static boolean allowChiselDamage;
 	public static int ironChiselMaxDamage;
 	public static int diamondChiselMaxDamage;
+	public static int obsidianChiselMaxDamage;
 	public static boolean ironChiselCanLeftClick;
 	public static boolean ironChiselHasModes;
 	public static int ironChiselAttackDamage;
 	public static int diamondChiselAttackDamage;
+	public static int obsidianChiselAttackDamage;
 	public static boolean allowChiselCrossColors;
 
 	public static boolean useRoadLineTool;
 	public static String getRoadLineTool;
 	public static int roadLineToolLevel;
 
-    public static int[] configColors = new int[ItemDye.field_150923_a.length];
+	public static int[] configColors = new int[ItemDye.field_150923_a.length];
 
 	public static boolean refreshConfig() {
 
@@ -82,6 +85,7 @@ public class Configurations {
 		particlesTickrate = config.get(category, "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
 		oldPillars = config.get(category, "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
 		disableCTM = !config.get(category, "connectedTextures", true, "Enable connected textures").getBoolean(true);
+		connectInsideCTM = !config.get(category, "connectInsideCTM", false, "Choose whether the inside corner is disconnected on a CTM block - http://imgur.com/eUywLZ4").getBoolean(false);
 		fancy = config.get(category, "fancyLeaves", true, "Enable fancy textures").getBoolean(true);
 		blockDescriptions = config.get(category, "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.")
 				.getBoolean(true);
@@ -89,14 +93,18 @@ public class Configurations {
 		/* chisel */
 		category = "chisel";
 		allowChiselDamage = config.get(category, "allowChiselDamage", true, "Should the chisel be damageable and take damage when it chisels something.").getBoolean();
-		ironChiselMaxDamage = config.get(category, "ironChiselMaxDamage", 500, "The max damage of the standard iron chisel. Default: 500.").getInt();
-		diamondChiselMaxDamage = config.get(category, "diamondChiselMaxDamage", 5000, "The max damage of the diamond chisel. Default: 5000").getInt();
+		ironChiselMaxDamage = config.getInt("ironChiselMaxDamage", category, 500, 1, Short.MAX_VALUE, "The max damage of the standard iron chisel.");
+		diamondChiselMaxDamage = config.getInt("diamondChiselMaxDamage", category, 5000, 1, Short.MAX_VALUE, "The max damage of the diamond chisel.");
+		obsidianChiselMaxDamage = config.getInt("obsidianChiselMaxDamage", category, 2500, 1, Short.MAX_VALUE, "The max damage of the obsidian chisel.");
 		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
 		ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
-		ironChiselAttackDamage = config.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.").getInt();
-		diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2,
-				"The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
 		allowChiselCrossColors = config.get(category, "allowChiselCrossColors", true, "Should someone be able to chisel something into a different color.").getBoolean();
+		ironChiselAttackDamage = config.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.")
+				.getInt();
+		diamondChiselAttackDamage = config
+				.get(category, "diamondChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
+		obsidianChiselAttackDamage = config
+				.get(category, "obsidianChiselAttackDamage", 4, "The extra attack damage points (in half hearts) that the obsidian chisel inflicts when it is used to attack an entity.").getInt();
 
 		/* block */
 		category = "block";
@@ -107,19 +115,19 @@ public class Configurations {
 				.getInt();
 
         /* hexColors */
-        category = "hexColors";
+		category = "hexColors";
 
-        for(int i = 0; i < ItemDye.field_150923_a.length; i++) {
-            // tterrag... don't kill me over this formatting.
-            String temp = config.get(category, "hex" + ItemDye.field_150923_a[i], "#" + Integer.toHexString(ItemDye.field_150922_c[i]), Character.toUpperCase(ItemDye.field_150923_a[i].charAt(0)) + ItemDye.field_150923_a[i].substring(1) + " color for hex block overlay #RRGGBB").getString();
-            // Or this
-            try {
-                configColors[i] = Integer.decode(temp);
-            } catch (NumberFormatException e) {
-                Chisel.logger.warn("Configuration error, " + temp + " was not recognized as a color.  Using default: #" + Integer.toHexString(ItemDye.field_150922_c[i]));
-                configColors[i] = ItemDye.field_150922_c[i];
-            }
-        }
+		for(int i = 0; i < ItemDye.field_150923_a.length; i++) {
+			// tterrag... don't kill me over this formatting.
+			String temp = config.get(category, "hex" + ItemDye.field_150923_a[i], "#" + Integer.toHexString(ItemDye.field_150922_c[i]), Character.toUpperCase(ItemDye.field_150923_a[i].charAt(0)) + ItemDye.field_150923_a[i].substring(1) + " color for hex block overlay #RRGGBB").getString();
+			// Or this
+			try {
+				configColors[i] = Integer.decode(temp);
+			} catch (NumberFormatException e) {
+				Chisel.logger.warn("Configuration error, " + temp + " was not recognized as a color.  Using default: #" + Integer.toHexString(ItemDye.field_150922_c[i]));
+				configColors[i] = ItemDye.field_150922_c[i];
+			}
+		}
 
 		if (config.hasChanged()) {
 			config.save();
@@ -131,7 +139,9 @@ public class Configurations {
 		return config.get("features", featureName(feature), true).getBoolean(true) && refreshConfig();
 	}
 
-	/** Makes the old camelCase names from the new CONSTANT_CASE names */
+	/**
+	 * Makes the old camelCase names from the new CONSTANT_CASE names
+	 */
 	public static String featureName(Features feature) {
 		String[] words = feature.name().toLowerCase(Locale.ENGLISH).split("_");
 		if (words.length == 1) {
