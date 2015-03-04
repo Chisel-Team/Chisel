@@ -2490,8 +2490,16 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable valentines = (BlockCarvable) new BlockCarvable(Material.wood).setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(2F)
 					.setResistance(10F);
-			valentines.carverHelper.addVariation("tile.valentines.0.desc", 0, "valentines/bricks");
+			valentines.carverHelper.addVariation("tile.valentines.0.desc", 0, "valentines/1");
 			valentines.carverHelper.addVariation("tile.valentines.1.desc", 1, "valentines/companion");
+			valentines.carverHelper.addVariation("tile.valentines.2.desc", 2, "valentines/2");
+			valentines.carverHelper.addVariation("tile.valentines.3.desc", 3, "valentines/3");
+			valentines.carverHelper.addVariation("tile.valentines.4.desc", 4, "valentines/4");
+			valentines.carverHelper.addVariation("tile.valentines.5.desc", 5, "valentines/5");
+			valentines.carverHelper.addVariation("tile.valentines.6.desc", 6, "valentines/6");
+			valentines.carverHelper.addVariation("tile.valentines.7.desc", 7, "valentines/7");
+			valentines.carverHelper.addVariation("tile.valentines.8.desc", 8, "valentines/8");
+			valentines.carverHelper.addVariation("tile.valentines.9.desc", 9, "valentines/9");
 			valentines.carverHelper.registerAll(valentines, "valentines");
 			Carving.chisel.registerOre("valentines", "blockValentines");
 		}
