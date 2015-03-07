@@ -1558,6 +1558,38 @@ public enum Features {
 		}
 	},
 
+    NATION {
+
+        @Override
+        void addBlocks() {
+            BlockCarvable imperial = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
+            imperial.carverHelper.addVariation("tile.nation.0.desc", 0, "nation/imperialCamo");
+            imperial.carverHelper.addVariation("tile.nation.1.desc", 1, "nation/imperialCamoSecluded");
+            imperial.carverHelper.addVariation("tile.nation.2.desc", 2, "nation/imperialPlate");
+            imperial.carverHelper.addVariation("tile.nation.3.desc", 3, "nation/imperialCautionWhite");
+            imperial.carverHelper.addVariation("tile.nation.4.desc", 4, "nation/imperialCautionOrange");
+            imperial.carverHelper.registerBlock(imperial, "imperial");
+            imperial.carverHelper.registerAll(imperial, "nation");
+
+            BlockCarvable rebel = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
+            rebel.carverHelper.addVariation("tile.nation.0.desc", 0, "nation/rebelCamo");
+            rebel.carverHelper.addVariation("tile.nation.1.desc", 1, "nation/rebelCamoSecluded");
+            rebel.carverHelper.addVariation("tile.nation.2.desc", 2, "nation/rebelPlate");
+            rebel.carverHelper.addVariation("tile.nation.3.desc", 3, "nation/rebelCautionWhite");
+            rebel.carverHelper.addVariation("tile.nation.4.desc", 4, "nation/rebelCautionRed");
+            rebel.carverHelper.registerBlock(rebel, "rebel");
+            rebel.carverHelper.registerVariations("nation", rebel);
+
+            Carving.chisel.registerOre("nation", "nation");
+        }
+
+        @Override
+        void addRecipes() {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.nation, 32, 0), new Object[] { "xyx", "yzy", "xyx", 'x', "stone", 'y',
+                    Items.iron_ingot, 'z', Items.gold_nugget }));
+        }
+    },
+
 	NETHER_BRICK {
 
 		@Override

@@ -30,10 +30,19 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 
 #Chisel 2
 
+#Nation
+tile.chisel.imperial.name=Imperialistic Block
+tile.chisel.rebel.name=Rebellious Block
+tile.nation.0.desc=Camouflaged
+tile.nation.1.desc=Camouflaged (Secluded)
+tile.nation.2.desc=Bolted Plate
+tile.nation.3.desc=White Caution Tape
+tile.nation.4.desc=Teamed Caution Tape
+
 #Shingles
-tile.chisel.shingles.name="Shingles"
-tile.shingles.0.desc="Red Diagonal"
-tile.shingles.1.desc="Red Tiny Squares"
+tile.chisel.shingles.name=Shingles
+tile.shingles.0.desc=Red Diagonal
+tile.shingles.1.desc=Red Tiny Squares
 
 #Valentines
 tile.chisel.valentines.name=Valentines Block
@@ -107,7 +116,7 @@ tile.voidstone.7.desc=Beveled Voidstone
 tile.chisel.voidstonePillar.name=Voidstone Pillar
 tile.voidstonePillar.0.desc=Striped Voidstone Pillar
 
--#Warning
+#Warning
 tile.chisel.warningSign.name=Warning Sign
 tile.warningSign.0.desc=Radiation
 tile.warningSign.1.desc=Biohazard
