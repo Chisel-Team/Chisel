@@ -32,6 +32,7 @@ logs
 screenshots
 mods
 world
+lib
 
 *.txt
 *.json
