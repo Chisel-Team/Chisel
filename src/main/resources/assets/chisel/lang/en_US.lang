@@ -43,6 +43,10 @@ tile.nation.4.desc=Teamed Caution Tape
 tile.chisel.shingles.name=Shingles
 tile.shingles.0.desc=Red Diagonal
 tile.shingles.1.desc=Red Tiny Squares
+tile.shingles.2.desc=Red Big Squares
+tile.shingles.3.desc=Black Diagonal
+tile.shingles.4.desc=Black Tiny Squares
+tile.shingles.5.desc=Black Big Squares
 
 #Valentines
 tile.chisel.valentines.name=Valentines Block
