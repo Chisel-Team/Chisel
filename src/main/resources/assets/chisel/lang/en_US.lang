@@ -31,7 +31,7 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 #Chisel 2
 
 #Nation
-tile.chisel.imperial.name=Imperialistic Block
+tile.chisel.nation.name=Imperialistic Block
 tile.chisel.rebel.name=Rebellious Block
 tile.nation.0.desc=Camouflaged
 tile.nation.1.desc=Camouflaged (Secluded)
