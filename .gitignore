@@ -39,3 +39,4 @@ libs
 *.json
 /server.properties
 *.dat
+*.psd
