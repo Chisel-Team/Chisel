@@ -30,6 +30,11 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 
 #Chisel 2
 
+#Shingles
+tile.chisel.shingles.name="Shingles"
+tile.shingles.0.desc="Red Diagonal"
+tile.shingles.1.desc="Red Tiny Squares"
+
 #Valentines
 tile.chisel.valentines.name=Valentines Block
 tile.valentines.0.desc=Valentines Bricks
