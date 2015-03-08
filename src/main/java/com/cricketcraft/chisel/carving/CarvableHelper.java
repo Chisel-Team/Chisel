@@ -43,23 +43,39 @@ public class CarvableHelper {
 	public boolean forbidChiseling = false;
 	public String blockName;
 
-	public void addVariation(String description, int metadata, Block bb) {
-		addVariation(description, metadata, null, bb, 0);
+    public void addVariation(String description, int metadata, Block bb) {
+        addVariation(description, metadata, null, bb, 0, Chisel.MOD_ID, Chisel.class);
+    }
+
+    public void addVariation(String description, int metadata, Block bb, int blockMeta) {
+        addVariation(description, metadata, null, bb, blockMeta, Chisel.MOD_ID, Chisel.class);
+    }
+
+    public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material) {
+        addVariation(description, metadata, null, bb, blockMeta, Chisel.MOD_ID, Chisel.class);
+    }
+
+    public void addVariation(String description, int metadata, String texture) {
+        addVariation(description, metadata, texture, null, 0, Chisel.MOD_ID, Chisel.class);
+    }
+
+	public void addVariation(String description, int metadata, Block bb, String modid, Class mainModClass) {
+		addVariation(description, metadata, null, bb, 0, modid, mainModClass);
 	}
 
-	public void addVariation(String description, int metadata, Block bb, int blockMeta) {
-		addVariation(description, metadata, null, bb, blockMeta);
+	public void addVariation(String description, int metadata, Block bb, int blockMeta, String modid, Class mainModClass) {
+		addVariation(description, metadata, null, bb, blockMeta, modid, mainModClass);
 	}
 
-	public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material) {
-		addVariation(description, metadata, null, bb, blockMeta);
+	public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material, String modid, Class mainModClass) {
+		addVariation(description, metadata, null, bb, blockMeta, modid, mainModClass);
 	}
 
-	public void addVariation(String description, int metadata, String texture) {
-		addVariation(description, metadata, texture, null, 0);
+	public void addVariation(String description, int metadata, String texture, String modid, Class mainModClass) {
+		addVariation(description, metadata, texture, null, 0, modid, mainModClass);
 	}
 
-	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta) {
+	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, Class mainModClass) {
 		if (variations.size() >= 16)
 			return;
 
@@ -76,21 +92,21 @@ public class CarvableHelper {
 		if (texture != null) {
 			variation.texture = texture;
 
-			String path = "/assets/" + Chisel.MOD_ID + "/textures/blocks/" + variation.texture;
+			String path = "/assets/" + modid + "/textures/blocks/" + variation.texture;
 
-			boolean any = Chisel.class.getResource(path + ".png") != null;
-			boolean ctm3 = Chisel.class.getResource(path + "-ctm1.png") != null && Chisel.class.getResource(path + "-ctm2.png") != null && Chisel.class.getResource(path + "-ctm3.png") != null;
-			boolean ctmv = Chisel.class.getResource(path + "-ctmv.png") != null;
-			boolean ctmh = Chisel.class.getResource(path + "-ctmh.png") != null;
-			boolean side = Chisel.class.getResource(path + "-side.png") != null;
-			boolean top = Chisel.class.getResource(path + "-top.png") != null;
-			boolean bot = Chisel.class.getResource(path + "-bottom.png") != null;
-			boolean v9 = Chisel.class.getResource(path + "-v9.png") != null;
-			boolean v4 = Chisel.class.getResource(path + "-v4.png") != null;
-			boolean ctmx = Chisel.class.getResource(path + "-ctm.png") != null;
-            boolean r16 = Chisel.class.getResource(path + "-r16.png") != null;
-            boolean r9 = Chisel.class.getResource(path + "-r9.png") != null;
-            boolean r4 = Chisel.class.getResource(path + "-r4.png") != null;
+			boolean any = mainModClass.getResource(path + ".png") != null;
+			boolean ctm3 = mainModClass.getResource(path + "-ctm1.png") != null && mainModClass.getResource(path + "-ctm2.png") != null && mainModClass.getResource(path + "-ctm3.png") != null;
+			boolean ctmv = mainModClass.getResource(path + "-ctmv.png") != null;
+			boolean ctmh = mainModClass.getResource(path + "-ctmh.png") != null;
+			boolean side = mainModClass.getResource(path + "-side.png") != null;
+			boolean top = mainModClass.getResource(path + "-top.png") != null;
+			boolean bot = mainModClass.getResource(path + "-bottom.png") != null;
+			boolean v9 = mainModClass.getResource(path + "-v9.png") != null;
+			boolean v4 = mainModClass.getResource(path + "-v4.png") != null;
+			boolean ctmx = mainModClass.getResource(path + "-ctm.png") != null;
+            boolean r16 = mainModClass.getResource(path + "-r16.png") != null;
+            boolean r9 = mainModClass.getResource(path + "-r9.png") != null;
+            boolean r4 = mainModClass.getResource(path + "-r4.png") != null;
 
 			if (ctm3) {
 				variation.kind = 3;
