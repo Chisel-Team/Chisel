@@ -2,6 +2,8 @@ package com.cricketcraft.chisel;
 
 import java.io.File;
 
+import com.cricketcraft.chisel.entity.EntityChiselSnowman;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -135,6 +137,8 @@ public class Chisel {
 		addWorldgen(Features.GRANITE, ChiselBlocks.granite, Configurations.graniteAmount, 40, 100, 0.5);
 		addWorldgen(Features.DIORITE, ChiselBlocks.diorite, Configurations.dioriteAmount, 40, 100, 0.5);
 		GameRegistry.registerWorldGenerator(GeneratorChisel.INSTANCE, 1000);
+
+        EntityRegistry.registerModEntity(EntityChiselSnowman.class, "snowman", 0, this, 80, 1, true);
 
 		proxy.init();
 		MinecraftForge.EVENT_BUS.register(this);
