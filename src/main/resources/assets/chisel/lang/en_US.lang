@@ -224,6 +224,9 @@ tile.hexPlating.white.desc=White Plating
 tile.hexPlating.yellow.desc=Yellow Plating
 tile.hexPlating.gray.desc=Gray Plating
 
+#Hex Large Plating
+tile.chisel.hexLargePlating.name=Large Hex Plating
+
 #Grimstone
 tile.chisel.grimstone.name=Grimstone
 tile.grimstone.0.desc=Grimstone
