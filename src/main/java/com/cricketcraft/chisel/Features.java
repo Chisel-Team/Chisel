@@ -1162,7 +1162,7 @@ public enum Features {
 				jackolantern[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(true).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(1.0F).setBlockName("litpumpkin")
 						.setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setLightLevel(1.0f);
 				jackolantern[metadata].setInformation("pumpkin/pumpkin_face_" + (metadata + 1) + "_on");
-				GameRegistry.registerBlock(jackolantern[metadata], ("jackolantern" + (metadata + 1)));
+				GameRegistry.registerBlock(jackolantern[metadata], ItemCarvablePumpkin.class, ("jackolantern" + (metadata + 1)));
 				Carving.chisel.addVariation("jackolantern", jackolantern[metadata], 0, (metadata + 1));
 			}
 			Carving.chisel.addVariation("jackolantern", Blocks.lit_pumpkin, 0, 0);
@@ -1832,7 +1832,7 @@ public enum Features {
 				pumpkin[metadata] = (BlockCarvablePumpkin) new BlockCarvablePumpkin(false).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(1.0F).setBlockName("pumpkin")
 						.setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 				pumpkin[metadata].setInformation("pumpkin/pumpkin_face_" + (metadata + 1) + "_off");
-				GameRegistry.registerBlock(pumpkin[metadata], "pumpkin" + (metadata + 1));
+				GameRegistry.registerBlock(pumpkin[metadata], ItemCarvablePumpkin.class, "pumpkin" + (metadata + 1));
 				Carving.chisel.addVariation("pumpkin", pumpkin[metadata], 0, (metadata + 1));
 			}
 			Carving.chisel.addVariation("pumpkin", Blocks.pumpkin, 0, 0);
