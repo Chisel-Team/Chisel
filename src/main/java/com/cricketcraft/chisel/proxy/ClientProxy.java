@@ -8,6 +8,7 @@ import com.cricketcraft.chisel.client.render.item.ItemChiselRenderer;
 import com.cricketcraft.chisel.client.render.tile.RenderAutoChisel;
 import com.cricketcraft.chisel.client.render.tile.RenderPresent;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
+import com.cricketcraft.chisel.entity.EntityChiselSnowman;
 import com.cricketcraft.chisel.entity.EntityCloudInABottle;
 import com.cricketcraft.chisel.entity.EntitySmashingRock;
 import com.cricketcraft.chisel.init.ChiselBlocks;
@@ -58,6 +59,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerEntityRenderingHandler(EntityCloudInABottle.class, new RenderSnowball(ChiselItems.cloudinabottle));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBallOMoss.class, new RenderSnowball(ChiselItems.ballomoss));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySmashingRock.class, new RenderSnowball(ChiselItems.smashingrock));
+        RenderingRegistry.registerEntityRenderingHandler(EntityChiselSnowman.class, new RenderChiselSnowman());
 
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.chisel, renderer);
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.diamondChisel, renderer);
