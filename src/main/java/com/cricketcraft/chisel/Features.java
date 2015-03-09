@@ -1751,9 +1751,9 @@ public enum Features {
             if (Loader.isModLoaded("TConstruct"))
             {
                 Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 0, 0);
-                Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 13, 0);
+                // This block is 1/2 of an obsidian block Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 13, 0);
                 Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 0, 0);
-                Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 13, 0);
+                // This block is 1/2 of an obsidian block Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 13, 0);
             }
 
             obsidian.carverHelper.registerAll(obsidian, "obsidian");
