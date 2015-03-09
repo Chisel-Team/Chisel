@@ -80,18 +80,30 @@ tile.chisel.diorite.name=Diorite
 tile.diorite.0.desc=Generates in your world
 tile.diorite.1.desc=Polished Diorite
 tile.diorite.2.desc=Diorite Pillar
+tile.diorite.3.desc=Diorite Bricks
+tile.diorite.4.desc=Ornate Diorite
+tile.diorite.5.desc=Prismatic Diorite
+tile.diorite.6.desc=Diorite Small Tiles
 
 #Andesite
 tile.chisel.andesite.name=Andesite
 tile.andesite.0.desc=Generates in your world
 tile.andesite.1.desc=Polished Andesite
 tile.andesite.2.desc=Andesite Pillar
+tile.andesite.3.desc=Andesite Bricks
+tile.andesite.4.desc=Ornate Andesite
+tile.andesite.5.desc=Prismatic Andesite
+tile.andesite.6.desc=Andesite Small Tiles
 
 #Granite
 tile.chisel.granite.name=Granite
 tile.granite.0.desc=Generates in your world
 tile.granite.1.desc=Polished Granite
 tile.granite.2.desc=Granite Pillar
+tile.granite.3.desc=Granite Bricks
+tile.granite.4.desc=Ornate Granite
+tile.granite.5.desc=Prismatic Granite
+tile.granite.6.desc=Granite Small Tiles
 
 #Auto Chisel
 tile.chisel.autoChisel.name=Auto Chisel
