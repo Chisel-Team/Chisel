@@ -98,7 +98,11 @@ public enum Features {
 			andesite.carverHelper.setChiselBlockName("andesite");
 			andesite.carverHelper.addVariation("tile.andesite.0.desc", 0, "andesite/andesite");
 			andesite.carverHelper.addVariation("tile.andesite.1.desc", 1, "andesite/andesitePolished");
-			andesite.carverHelper.addVariation("tile.andesite.2.desc", 2, "andesite/andesitePillar");
+            andesite.carverHelper.addVariation("tile.andesite.2.desc", 2, "andesite/andesitePillar");
+            andesite.carverHelper.addVariation("tile.andesite.3.desc", 3, "andesite/andesiteLBrick");
+            andesite.carverHelper.addVariation("tile.andesite.4.desc", 4, "andesite/andesiteOrnate");
+            andesite.carverHelper.addVariation("tile.andesite.5.desc", 5, "andesite/andesitePrism");
+            andesite.carverHelper.addVariation("tile.andesite.6.desc", 6, "andesite/andesiteTiles");
 			andesite.carverHelper.registerAll(andesite, "andesite");
 			Carving.chisel.registerOre("andesite", "blockAndesite");
 		}
@@ -579,6 +583,10 @@ public enum Features {
 			diorite.carverHelper.addVariation("tile.diorite.0.desc", 0, "diorite/diorite");
 			diorite.carverHelper.addVariation("tile.diorite.1.desc", 1, "diorite/dioritePolished");
 			diorite.carverHelper.addVariation("tile.diorite.2.desc", 2, "diorite/dioritePillar");
+            diorite.carverHelper.addVariation("tile.diorite.3.desc", 3, "diorite/dioriteLBrick");
+            diorite.carverHelper.addVariation("tile.diorite.4.desc", 4, "diorite/dioriteOrnate");
+            diorite.carverHelper.addVariation("tile.diorite.5.desc", 5, "diorite/dioritePrism");
+            diorite.carverHelper.addVariation("tile.diorite.6.desc", 6, "diorite/dioriteTiles");
 			diorite.carverHelper.registerAll(diorite, "diorite");
 			Carving.chisel.registerOre("diorite", "diorite");
 		}
@@ -921,6 +929,10 @@ public enum Features {
 			granite.carverHelper.addVariation("tile.granite.0.desc", 0, "granite/granite");
 			granite.carverHelper.addVariation("tile.granite.1.desc", 1, "granite/granitePolished");
 			granite.carverHelper.addVariation("tile.granite.2.desc", 2, "granite/granitePillar");
+            granite.carverHelper.addVariation("tile.granite.3.desc", 3, "granite/graniteLBrick");
+            granite.carverHelper.addVariation("tile.granite.4.desc", 4, "granite/graniteOrnate");
+            granite.carverHelper.addVariation("tile.granite.5.desc", 5, "granite/granitePrism");
+            granite.carverHelper.addVariation("tile.granite.6.desc", 6, "granite/graniteTiles");
 			granite.carverHelper.registerAll(granite, "granite");
 			Carving.chisel.registerOre("granite", "granite");
 		}
