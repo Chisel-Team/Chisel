@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": [ "AUTOMATIC_MAIDEN", "Pokefenn", "Cricket", "tterrag" ],
   "credits": "This mod uses a lot of textures from the Painterly pack: http://painterlypack.net/. Also one stone variation is designed to look like a block from Doku. Oh, and asie for porting the mod to 1.7.2. Oh wait and Drullkus for some wonderful art.",
-  "logoFile": "",
+  "logoFile": "/banner.jpg",
   "screenshots": [],
   "dependencies": []
 }
