@@ -953,8 +953,19 @@ public enum Features {
                 Carving.chisel.addVariation("gold_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 5, 0);
             }
 
+            BlockCarvable gold2 = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+                    .setResistance(10F);
+            gold2.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/gold/caution");
+            gold2.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/gold/crate");
+            gold2.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/gold/thermal");
+            gold2.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/gold/adv");
+            gold2.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/gold/egregious");
+            gold2.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/gold/bolted");
+            gold2.carverHelper.registerBlock(gold2, "gold2");
+            gold2.carverHelper.registerVariations("gold_block", gold2);
+
             gold_block.carverHelper.registerAll(gold_block, "gold_block");
-			Carving.chisel.registerOre("gold_block", "gold");
+			Carving.chisel.registerOre("gold_block", "blockGold");
 		}
 	},
 
@@ -1206,8 +1217,19 @@ public enum Features {
                 Carving.chisel.addVariation("iron_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 4, 0);
             }
 
+            BlockCarvable iron2 = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+                    .setResistance(10F);
+            iron2.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/iron/caution");
+            iron2.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/iron/crate");
+            iron2.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/iron/thermal");
+            iron2.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/iron/adv");
+            iron2.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/iron/egregious");
+            iron2.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/iron/bolted");
+            iron2.carverHelper.registerBlock(iron2, "iron2");
+            iron2.carverHelper.registerVariations("iron_block", iron2);
+
             iron_block.carverHelper.registerAll(iron_block, "iron_block");
-			Carving.chisel.registerOre("iron_block", "iron");
+			Carving.chisel.registerOre("iron_block", "blockIron");
 		}
 	},
 
