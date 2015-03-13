@@ -1808,6 +1808,10 @@ public enum Features {
 			packedice.carverHelper.registerAll(packedice, "packedice");
 			Carving.chisel.registerOre("packedice", "packedice");
 		}
+		@Override
+		void addRecipes() {
+			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.packedice_pillar, 6, 0), "XX", "XX", "XX", 'X', new ItemStack(ChiselBlocks.packedice, 1, OreDictionary.WILDCARD_VALUE));
+		}
 	},
 
 	PACKEDICE_PILLAR {
