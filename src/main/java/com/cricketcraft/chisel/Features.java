@@ -572,8 +572,8 @@ public enum Features {
 
             if (Loader.isModLoaded("TConstruct"))
             {
-                Carving.chisel.addVariation("netherrack", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 7, 0);
-                Carving.chisel.addVariation("netherrack", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 7, 0);
+                Carving.chisel.addVariation("diamond_block", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 7, 0);
+                Carving.chisel.addVariation("diamond_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 7, 0);
             }
 
             diamond_block.carverHelper.registerAll(diamond_block, "diamond_block");
@@ -597,7 +597,7 @@ public enum Features {
 			diorite.carverHelper.registerAll(diorite, "diorite");
 			Carving.chisel.registerOre("diorite", "diorite");
 		}
-		
+
 		@Override
 		void addRecipes() {
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(diorite, 2), "cq", "qc", 'c', "cobblestone", 'q', "gemQuartz"));
@@ -1300,8 +1300,8 @@ public enum Features {
 
             if (Loader.isModLoaded("TConstruct"))
             {
-                Carving.chisel.addVariation("netherrack", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 6, 0);
-                Carving.chisel.addVariation("netherrack", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 6, 0);
+                Carving.chisel.addVariation("lapis_block", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 6, 0);
+                Carving.chisel.addVariation("lapis_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 6, 0);
             }
 
             lapis_block.carverHelper.registerAll(lapis_block, "lapis_block");
@@ -2125,8 +2125,8 @@ public enum Features {
 
             if (Loader.isModLoaded("TConstruct"))
             {
-                Carving.chisel.addVariation("netherrack", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 8, 0);
-                Carving.chisel.addVariation("netherrack", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 8, 0);
+                Carving.chisel.addVariation("redstone_block", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 8, 0);
+                Carving.chisel.addVariation("redstone_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 8, 0);
             }
 
             redstone_block.carverHelper.registerAll(redstone_block, "redstone_block");
