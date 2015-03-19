@@ -8,9 +8,12 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -99,6 +102,7 @@ public class PlayerSpecials {
 		RenderTranslucent translucent = new RenderTranslucent();
 
 		renderMap.putAll(UUID.fromString("a7529984-8cb2-4fb9-b799-97980f770101"), Lists.newArrayList(backChisel, translucent)); // Cricket
+        renderMap.putAll(UUID.fromString("a1d2532b-ee11-4ca3-b4c5-76e168d4c98e"), Lists.newArrayList(backChisel, translucent)); // TheCricket26
 		renderMap.putAll(UUID.fromString("5399b615-3440-4c66-939d-ab1375952ac3"), Lists.newArrayList(backChisel, translucent)); // Drullkus
 
 		renderMap.put(UUID.fromString("671516b1-4fb3-4c03-aa7c-9c88cfab3ae8"), new RenderHolstered(new ItemStack(ChiselItems.diamondChisel))); // tterrag
@@ -110,19 +114,20 @@ public class PlayerSpecials {
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
-	public void onPlayerRenderPre(RenderPlayerEvent.Pre event) {
-		Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
-		for (IDevRenderer r : renders) {
-			r.renderPlayer(event.entityPlayer, false);
-		}
+	public void onPlayerRenderPre(RenderLivingEvent.Pre event) {
+        if(nameIsGood(event.entity)){
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.75F);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        }
 	}
 
 	@SubscribeEvent
-	public void onPlayerRenderPost(RenderPlayerEvent.Post event) {
-		Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
-		for (IDevRenderer r : renders) {
-			r.renderPlayer(event.entityPlayer, true);
-		}
+	public void onPlayerRenderPost(RenderLivingEvent.Post event) {
+        if(nameIsGood(event.entity)){
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            GL11.glDisable(GL11.GL_BLEND);
+        }
 	}
 
 	@SubscribeEvent
@@ -137,7 +142,13 @@ public class PlayerSpecials {
 	public void onPlayerRenderSpecialPost(RenderPlayerEvent.Specials.Post event) {
 		Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
 		for (IDevRenderer r : renders) {
-			r.renderExtras(event.entityPlayer, false);
+			r.renderExtras(event.entityPlayer, true);
 		}
 	}
+
+    private boolean nameIsGood(Entity entity){
+        if(EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket") || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("TheCricket26"))
+            return true;
+        return false;
+    }
 }
