@@ -48,6 +48,9 @@ public class ModelCTM implements ISmartBlockModel {
     public List getFaceQuads(EnumFacing face) {
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
         for (BakedQuad quad : quads) {
+            if (quad==null){
+                continue;
+            }
             if (quad.getFace() == face) {
                 toReturn.add(quad);
             }
