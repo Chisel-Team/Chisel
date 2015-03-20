@@ -569,13 +569,6 @@ public enum Features {
 			diamond_block.carverHelper.addVariation("tile.diamond.10.desc", 10, "diamond/terrain-diamond-fourornate");
 			diamond_block.carverHelper.addVariation("tile.diamond.11.desc", 11, "diamond/terrain-diamond-zelda");
 			diamond_block.carverHelper.addVariation("tile.diamond.12.desc", 12, "diamond/terrain-diamond-ornatelayer");
-
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("diamond_block", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 7, 0);
-                Carving.chisel.addVariation("diamond_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 7, 0);
-            }
-
             diamond_block.carverHelper.registerAll(diamond_block, "diamond_block");
 			Carving.chisel.registerOre("diamond_block", "diamond");
 		}
@@ -662,19 +655,6 @@ public enum Features {
         void addBlocks() {
             //BlockCarvable end_stone = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
             Carving.chisel.addVariation("end_stone", Blocks.end_stone , 0, 0);
-
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("end_stone", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 12, 0);
-                Carving.chisel.addVariation("end_stone", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 12, 0);
-            }
-
-            if (Loader.isModLoaded("Botania"))
-            {
-                Carving.chisel.addVariation("end_stone", GameRegistry.findBlock("Botania", ""), 12, 0);
-                Carving.chisel.addVariation("end_stone", GameRegistry.findBlock("Botania", "endStoneBrick"), 12, 0);
-            }
-
             //end_stone.carverHelper.registerAll(emerald_block, "endStone");
             Carving.chisel.registerOre("end_stone", "end_stone");
         }
@@ -947,12 +927,6 @@ public enum Features {
 			gold_block.carverHelper.addVariation("tile.gold.13.desc", 13, "gold/terrain-gold-spaceblack");
 			gold_block.carverHelper.addVariation("tile.gold.14.desc", 14, "gold/terrain-gold-simple");
 
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("gold_block", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 5, 0);
-                Carving.chisel.addVariation("gold_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 5, 0);
-            }
-
             BlockCarvable gold2 = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
                     .setResistance(10F);
             gold2.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/gold/caution");
@@ -1211,12 +1185,6 @@ public enum Features {
 			iron_block.carverHelper.addVariation("tile.iron.14.desc", 14, "iron/terrain-iron-vents");
 			iron_block.carverHelper.addVariation("tile.iron.15.desc", 15, "iron/terrain-iron-simple");
 
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("iron_block", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 4, 0);
-                Carving.chisel.addVariation("iron_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 4, 0);
-            }
-
             BlockCarvable iron2 = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
                     .setResistance(10F);
             iron2.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/iron/caution");
@@ -1297,12 +1265,6 @@ public enum Features {
 			lapis_block.carverHelper.addVariation("tile.lapis.6.desc", 6, "lapis/a1-blocklapis-panel");
 			lapis_block.carverHelper.addVariation("tile.lapis.7.desc", 7, "lapis/a1-blocklapis-smooth");
 			lapis_block.carverHelper.addVariation("tile.lapis.8.desc", 8, "lapis/a1-blocklapis-ornatelayer");
-
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("lapis_block", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 6, 0);
-                Carving.chisel.addVariation("lapis_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 6, 0);
-            }
 
             lapis_block.carverHelper.registerAll(lapis_block, "lapis_block");
 			Carving.chisel.registerOre("lapis_block", "lapis");
@@ -1736,12 +1698,6 @@ public enum Features {
 			netherrack.carverHelper.addVariation("tile.hellrock.13.desc", 13, "netherrack/a1-netherrack-red");
 			netherrack.carverHelper.addVariation("tile.hellrock.14.desc", 14, "netherrack/a1-netherrack-wells");
 
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("netherrack", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 2, 0);
-                Carving.chisel.addVariation("netherrack", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 2, 0);
-            }
-
             netherrack.carverHelper.registerAll(netherrack, "netherrack");
 			Carving.chisel.registerOre("netherrack", "netherrack");
 		}
@@ -1769,14 +1725,6 @@ public enum Features {
 			obsidian.carverHelper.addVariation("tile.obsidian.13.desc", 13, "obsidian/tiles");
 			obsidian.carverHelper.addVariation("tile.obsidian.14.desc", 14, "obsidian/greek");
 			obsidian.carverHelper.addVariation("tile.obsidian.15.desc", 15, "obsidian/crate");
-
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 0, 0);
-                // This block is 1/2 of an obsidian block Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 13, 0);
-                Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 0, 0);
-                // This block is 1/2 of an obsidian block Carving.chisel.addVariation("obsidian", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 13, 0);
-            }
 
             obsidian.carverHelper.registerAll(obsidian, "obsidian");
 			Carving.chisel.registerOre("obsidian", "obsidian");
@@ -2127,12 +2075,6 @@ public enum Features {
 			redstone_block.carverHelper.addVariation("tile.redstone_block.14.desc", 14, "redstone/a1-blockredstone-skullred");
 			redstone_block.carverHelper.addVariation("tile.redstone_block.15.desc", 15, "redstone/a1-blockredstone-redstonezelda");
 
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("redstone_block", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 8, 0);
-                Carving.chisel.addVariation("redstone_block", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 8, 0);
-            }
-
             redstone_block.carverHelper.registerAll(redstone_block, "redstone_block");
 			Carving.chisel.registerOre("redstone_block", "redstone");
 		}
@@ -2179,12 +2121,6 @@ public enum Features {
 			sandstone.carverHelper.addVariation("tile.sandstone.13.desc", 13, "sandstone/blocks");
 			sandstone.carverHelper.addVariation("tile.sandstone.14.desc", 14, "sandstone/mosaic");
 			sandstone.carverHelper.addVariation("tile.sandstone.15.desc", 15, "sandstone/horizontal-tiles");
-
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("sandstone", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 1, 0);
-                Carving.chisel.addVariation("sandstone", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 1, 0);
-            }
 
             sandstone.carverHelper.registerAll(sandstone, "sandstone");
 			Carving.chisel.registerOre("sandstone", "sandstone");
@@ -2365,14 +2301,6 @@ public enum Features {
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.13.desc", 13, "stonebrick/sunken");
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.14.desc", 14, "stonebrick/ornatepanel");
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.15.desc", 15, "stonebrick/poison");
-
-            if (Loader.isModLoaded("TConstruct"))
-            {
-                Carving.chisel.addVariation("stonebricksmooth", GameRegistry.findBlock("TConstruct", "decoration.multibrick"), 3, 0);
-                Carving.chisel.addVariation("stonebricksmooth", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 3, 0);
-                Carving.chisel.addVariation("stonebricksmooth", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 14, 0);
-                Carving.chisel.addVariation("stonebricksmooth", GameRegistry.findBlock("TConstruct", "decoration.multibrickfancy"), 15, 0);
-            }
 
 			stonebricksmooth.carverHelper.registerAll(stonebricksmooth, "stonebricksmooth");
             Carving.chisel.registerOre("stonebricksmooth", "stonebricksmooth");
