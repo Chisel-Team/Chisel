@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel.compat;
 
+import java.util.Map;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -9,6 +11,7 @@ import thaumcraft.api.aspects.AspectList;
 
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.init.ChiselBlocks;
+import com.google.common.collect.Maps;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -18,7 +21,23 @@ public class Compatibility {
 
 	public static String[] rockColorNames = { "gray", "lightgray", "brown", "tan", "reddish", "bluish", "greenish" };
 
-	public static void init(FMLPostInitializationEvent event) {
+    public static Map<Integer, String> tconMap = Maps.newHashMap();
+
+    static
+    {
+        tconMap.put(0, "obsidian");
+        tconMap.put(1, "sandstone");
+        tconMap.put(2, "netherrack");
+        tconMap.put(3, "stonebricksmooth");
+        tconMap.put(4, "iron_block");
+        tconMap.put(5, "gold_block");
+        tconMap.put(6, "lapis_block");
+        tconMap.put(7, "diamond_block");
+        tconMap.put(8, "redstone_block");
+        tconMap.put(12, "end_stone");
+    }
+
+    public static void init(FMLPostInitializationEvent event) {
 
 		/* Proj Red */
 		addSupport("ProjRed|Exploration", "projectred.exploration.stone", "marble", 0, 99);
@@ -55,8 +74,19 @@ public class Compatibility {
 		/* Thaumcraft TODO There is probably a cleaner way of doing this */
 		if (Loader.isModLoaded("Thaumcraft")) {
 			loadThaumcraftAspects();
-		}
-	}
+        }
+
+        for (Integer i : tconMap.keySet())
+        {
+            addSupport("TConstruct", "decoration.multibrick", tconMap.get(i), i, 99);
+            addSupport("TConstruct", "decoration.multibrickfancy", tconMap.get(i), i, 99);
+        }
+
+        addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 14, 99);
+        addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 15, 99);
+
+        addSupport("Botania", "endStoneBrick", "end_stone", 12, 0);
+    }
 
 	public static void addSupport(String modname, String blockname, String name, int metadata, int order) {
 		if (Loader.isModLoaded(modname) && GameRegistry.findBlock(modname, blockname) != null) {
