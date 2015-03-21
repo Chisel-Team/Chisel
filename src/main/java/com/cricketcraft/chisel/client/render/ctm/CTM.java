@@ -186,6 +186,18 @@ public class CTM {
 
         int[] ret = new int[] { 18, 19, 17, 16 };
 
+        /**
+         * b[0]    b[1]    b[2]
+         *
+         *
+         *
+         * b[3]    FACE    b[4]
+         *
+         *
+         *
+         * b[5]    b[6]    b[7]
+         */
+
         // Bottom Left
         if (b[3] || b[6]) {
             ret[0] = 4 + (b[6] ? 2 : 0) + (b[3] ? 8 : 0);
@@ -212,5 +224,7 @@ public class CTM {
 
         return ret;
     }
+
+
 
 }

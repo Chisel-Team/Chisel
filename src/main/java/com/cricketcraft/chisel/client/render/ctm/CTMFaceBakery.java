@@ -90,7 +90,7 @@ public class CTMFaceBakery extends FaceBakery{
             }
         }
         else if (f==EnumFacing.DOWN){
-            if (isSUp){
+            if (!isSUp){
                 isNorth=true;
             }
             if (isSLeft){
@@ -169,6 +169,7 @@ public class CTMFaceBakery extends FaceBakery{
         else {
             s=resources.ctmTexture;
         }
+
         return makeBakedQuad(pos.from, pos.to, new BlockPartFace(side, 0, s.getIconName(), new BlockFaceUV(CTM.uvs[quad], 0)),
                 s, side, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), side.getAxis(), 0, false), false, false);
     }
