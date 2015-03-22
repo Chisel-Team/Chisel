@@ -16,6 +16,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
@@ -354,4 +355,5 @@ public abstract class BlockCarvable extends Block{
     public static boolean areBlocksEqual(IBlockState state1, IBlockState state2){
         return (state1.getBlock()==state2.getBlock()&&state1.getValue(VARIATION)==state2.getValue(VARIATION));
     }
+
 }
