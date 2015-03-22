@@ -63,7 +63,7 @@ public class ModelCTM implements ISmartBlockModel {
     }
 
     public boolean isAmbientOcclusion() {
-        return true;
+        return false;
     }
 
     public boolean isGui3d() {
