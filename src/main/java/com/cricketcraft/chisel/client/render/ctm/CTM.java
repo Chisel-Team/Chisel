@@ -140,7 +140,7 @@ public class CTM {
         } else if (side == EnumFacing.UP) {
             b[0] = north_west; //North West
             b[1] = north; // North
-            b[2] = south_west; //North East
+            b[2] = north_east; //North East
             b[3] = west; // West
             b[4] = east; // East
             b[5] = south_west; // South West
@@ -150,7 +150,7 @@ public class CTM {
             b[0] = east_up; // Up East
             b[1] = up; // Up
             b[2] = west_up; // Up West
-            b[3] = east_up; // East
+            b[3] = east; // East
             b[4] = west; // West
             b[5] = east_down; // Down East
             b[6] = down; // Down
