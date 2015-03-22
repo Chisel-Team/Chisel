@@ -217,59 +217,59 @@ public abstract class BlockCarvable extends Block{
         boolean west_up = false;
         boolean west_down = false;
 
-        if (blockStatesEqual(state, w.getBlockState(pos.up()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.up()))){
             up=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.down()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.down()))){
             down=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.north()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.north()))){
             north=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.south()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.south()))){
             south=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.east()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.east()))){
             east=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.west()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.west()))){
             west=true;
         }
 
-        if (blockStatesEqual(state, w.getBlockState(pos.north().east()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.north().east()))){
             north_east=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.north().west()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.north().west()))){
             north_west=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.north().up()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.north().up()))){
             north_up=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.north().down()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.north().down()))){
             north_down=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.south().east()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.south().east()))){
             south_east=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.south().west()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.south().west()))){
             south_west=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.south().up()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.south().up()))){
             south_up=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.south().down()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.south().down()))){
             south_down=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.east().up()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.east().up()))){
             east_up=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.east().down()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.east().down()))){
             east_down=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.west().up()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.west().up()))){
             west_up=true;
         }
-        if (blockStatesEqual(state, w.getBlockState(pos.west().down()))){
+        if (areBlocksEqual(state, w.getBlockState(pos.west().down()))){
             west_down=true;
         }
 
@@ -343,5 +343,15 @@ public abstract class BlockCarvable extends Block{
         else {
             return false;
         }
+    }
+
+    /**
+     * Returns whether the two blocks are equal ctm blocks
+     * @param state1 First state
+     * @param state2 Second state
+     * @return Whether they are the same block
+     */
+    public static boolean areBlocksEqual(IBlockState state1, IBlockState state2){
+        return (state1.getBlock()==state2.getBlock()&&state1.getValue(VARIATION)==state2.getValue(VARIATION));
     }
 }

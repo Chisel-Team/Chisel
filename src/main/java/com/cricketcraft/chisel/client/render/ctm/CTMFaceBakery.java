@@ -2,6 +2,7 @@ package com.cricketcraft.chisel.client.render.ctm;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
+import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockFaceUV;
