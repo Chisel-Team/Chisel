@@ -254,7 +254,7 @@ public class CarvableHelper {
 
 			boolean p;
 			boolean n;
-			boolean reverse = side == 2 || side == 4;
+			boolean reverse = side == 2 || side == 5;
 
 			if (side < 4) {
 				p = CTM.isConnected(world, x - 1, y, z, side, block, metadata);
