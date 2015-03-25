@@ -1,20 +1,19 @@
 2.3.8:
-Changes
+New
 - Added a recipe for packed ice pillars
-- Added iron/gold block variations to the Oredict
-- Recolored antiblocks a little
 - Added some Tinker's Construct variations
 - Added andesite, diorite, and granite, and a couple variations
-- Added large hex plating
-- Chiseled pumpkins can now make snow-golems
-- Extended CTM to the API... however this still need some work
+- Added hex armor plating and large hex plating
 - Added "Shingle" blocks
 - Added "Imperial" and "Rebel" blocks
+- Created our biggest fan :D
+Changes
+- Added iron/gold block variations to the Oredict
+- Recolored antiblocks a little
+- Chiseled pumpkins can now make snow-golems
 - Custom particles will be disabled if the vanilla "Particles:" option is set to "Off"
 - Added a search bar to Chisel's creative tab menus
-- Added hex armor plating
 - Unified some of the technical blocks as one variation
-- Created our biggest fan :D
 Fixes
 - Fixed a bug when Tinker's Construct and Botania would crash on load
 - Fixed one issue with CTM not rendering the texture properly
@@ -28,6 +27,8 @@ Fixes
 - Fixed missing localizations for road lines
 - Fixed a bug when rendering several types of Pillars
 - Fixed a bug that accidentally let the auto-chisel chisel things it shouldn't
+API
+- Extended CTM to the API... however this still need some work
 
 2.3.7:
 Changes
