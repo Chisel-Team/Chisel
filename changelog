@@ -1,3 +1,34 @@
+2.3.8:
+Changes
+- Added a recipe for packed ice pillars
+- Added iron/gold block variations to the Oredict
+- Recolored antiblocks a little
+- Added some Tinker's Construct variations
+- Added andesite, diorite, and granite, and a couple variations
+- Added large hex plating
+- Chiseled pumpkins can now make snow-golems
+- Extended CTM to the API... however this still need some work
+- Added "Shingle" blocks
+- Added "Imperial" and "Rebel" blocks
+- Custom particles will be disabled if the vanilla "Particles:" option is set to "Off"
+- Added a search bar to Chisel's creative tab menus
+- Added hex armor plating
+- Unified some of the technical blocks as one variation
+- Created our biggest fan :D
+Fixes
+- Fixed a bug when Tinker's Construct and Botania would crash on load
+- Fixed one issue with CTM not rendering the texture properly
+- Corrected masonry texture references
+- Chiseled bookshelves drop the correct book now
+- Fixed compatibility with Project Red's Marble Bricks
+- Fixed stair placement, and tooltip bugs
+- Chiseled half-slabs noe behave like vanilla's when it comes to redstone
+- Pumpkins and Jack o Lanterns now play the correct sounds
+- Fixed an old crash with Railcraft
+- Fixed missing localizations for road lines
+- Fixed a bug when rendering several types of Pillars
+- Fixed a bug that accidentally let the auto-chisel chisel things it shouldn't
+
 2.3.7:
 Changes
 - Updated russian translation
