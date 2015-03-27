@@ -40,15 +40,16 @@ public class IMCHandler {
 				} else {
 					reg.removeVariation(block, meta, data[0]);
 				}
+				break;
 			case REGISTER_GROUP_ORE:
 				reg.registerOre(data[0], data[1]);
+				break;
 			default:
 				throw new IllegalArgumentException("Invalid IMC constant! How...what...?");
 			}
 		} catch (Exception e) {
-			Chisel.logger.error("Could not handle data {} for IMC type {}. This was sent from mod {}.\n"
-					+ "!! This is a bug in that mod !!\nSwallowing error and continuing...",
-					value, type.name(), message.getSender());
+			Chisel.logger.error("Could not handle data {} for IMC type {}. This was sent from mod {}.\n" + "!! This is a bug in that mod !!\nSwallowing error and continuing...", value, type.name(),
+					message.getSender());
 			e.printStackTrace();
 		}
 	}
