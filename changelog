@@ -1,3 +1,7 @@
+2.3.9:
+API
+- Fixed issue where Chisel would crash if a user sent any message to the IMC
+
 2.3.8:
 New
 - Added a recipe for packed ice pillars
