@@ -1,5 +1,23 @@
 package com.cricketcraft.chisel.carving;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockPane;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.oredict.OreDictionary;
+
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
 import com.cricketcraft.chisel.client.render.CTM;
@@ -8,18 +26,8 @@ import com.cricketcraft.chisel.compat.FMPIntegration;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.utils.GeneralClient;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockPane;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.*;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CarvableHelper {
 
@@ -44,38 +52,38 @@ public class CarvableHelper {
 	public String blockName;
 
     public void addVariation(String description, int metadata, Block bb) {
-        addVariation(description, metadata, null, bb, 0, Chisel.MOD_ID, Chisel.class);
+        addVariation(description, metadata, null, bb, 0, Chisel.MOD_ID);
     }
 
     public void addVariation(String description, int metadata, Block bb, int blockMeta) {
-        addVariation(description, metadata, null, bb, blockMeta, Chisel.MOD_ID, Chisel.class);
+        addVariation(description, metadata, null, bb, blockMeta, Chisel.MOD_ID);
     }
 
     public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material) {
-        addVariation(description, metadata, null, bb, blockMeta, Chisel.MOD_ID, Chisel.class);
+        addVariation(description, metadata, null, bb, blockMeta, Chisel.MOD_ID);
     }
 
     public void addVariation(String description, int metadata, String texture) {
-        addVariation(description, metadata, texture, null, 0, Chisel.MOD_ID, Chisel.class);
+        addVariation(description, metadata, texture, null, 0, Chisel.MOD_ID);
     }
 
-	public void addVariation(String description, int metadata, Block bb, String modid, Class mainModClass) {
-		addVariation(description, metadata, null, bb, 0, modid, mainModClass);
+	public void addVariation(String description, int metadata, Block bb, String modid) {
+		addVariation(description, metadata, null, bb, 0, modid);
 	}
 
-	public void addVariation(String description, int metadata, Block bb, int blockMeta, String modid, Class mainModClass) {
-		addVariation(description, metadata, null, bb, blockMeta, modid, mainModClass);
+	public void addVariation(String description, int metadata, Block bb, int blockMeta, String modid) {
+		addVariation(description, metadata, null, bb, blockMeta, modid);
 	}
 
-	public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material, String modid, Class mainModClass) {
-		addVariation(description, metadata, null, bb, blockMeta, modid, mainModClass);
+	public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material, String modid) {
+		addVariation(description, metadata, null, bb, blockMeta, modid);
 	}
 
-	public void addVariation(String description, int metadata, String texture, String modid, Class mainModClass) {
-		addVariation(description, metadata, texture, null, 0, modid, mainModClass);
+	public void addVariation(String description, int metadata, String texture, String modid) {
+		addVariation(description, metadata, texture, null, 0, modid);
 	}
 
-	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, Class mainModClass) {
+	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid) {
 		if (variations.size() >= 16)
 			return;
 
@@ -92,21 +100,21 @@ public class CarvableHelper {
 		if (texture != null) {
 			variation.texture = texture;
 
-			String path = "/assets/" + modid + "/textures/blocks/" + variation.texture;
+			String path = variation.texture;
 
-			boolean any = mainModClass.getResource(path + ".png") != null;
-			boolean ctm3 = mainModClass.getResource(path + "-ctm1.png") != null && mainModClass.getResource(path + "-ctm2.png") != null && mainModClass.getResource(path + "-ctm3.png") != null;
-			boolean ctmv = mainModClass.getResource(path + "-ctmv.png") != null;
-			boolean ctmh = mainModClass.getResource(path + "-ctmh.png") != null;
-			boolean side = mainModClass.getResource(path + "-side.png") != null;
-			boolean top = mainModClass.getResource(path + "-top.png") != null;
-			boolean bot = mainModClass.getResource(path + "-bottom.png") != null;
-			boolean v9 = mainModClass.getResource(path + "-v9.png") != null;
-			boolean v4 = mainModClass.getResource(path + "-v4.png") != null;
-			boolean ctmx = mainModClass.getResource(path + "-ctm.png") != null;
-            boolean r16 = mainModClass.getResource(path + "-r16.png") != null;
-            boolean r9 = mainModClass.getResource(path + "-r9.png") != null;
-            boolean r4 = mainModClass.getResource(path + "-r4.png") != null;
+			boolean any = exists(modid, path, "");
+			boolean ctm3 = exists(modid, path, "-ctm1") && exists(modid, path, "-ctm2") && exists(modid, path, "-ctm3");
+			boolean ctmv = exists(modid, path, "-ctmv");
+			boolean ctmh = exists(modid, path, "-ctmh");
+			boolean side = exists(modid, path, "-side");
+			boolean top = exists(modid, path, "-top");
+			boolean bot = exists(modid, path, "-bottom");
+			boolean v9 = exists(modid, path, "-v9");
+			boolean v4 = exists(modid, path, "-v4");
+			boolean ctmx = exists(modid, path, "-ctm");
+			boolean r16 = exists(modid, path, "-r16");
+			boolean r9 = exists(modid, path, "-r9");
+			boolean r4 = exists(modid, path, "-r4");
 
 			if (ctm3) {
 				variation.kind = 3;
@@ -143,6 +151,17 @@ public class CarvableHelper {
 
 		variations.add(variation);
 		map[metadata] = variation;
+	}
+
+	// This is ugly, but faster than class.getResource
+	private boolean exists(String modid, String path, String postfix) {
+		ResourceLocation rl = new ResourceLocation(modid, "textures/blocks/" + path + postfix + ".png");
+		try {
+			Minecraft.getMinecraft().getResourceManager().getAllResources(rl);
+			return true;
+		} catch (Throwable t) {
+			return false;
+		}
 	}
 
 	public CarvableVariation getVariation(int metadata) {
