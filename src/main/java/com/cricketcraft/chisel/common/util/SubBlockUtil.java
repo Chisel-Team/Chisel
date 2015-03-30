@@ -4,6 +4,7 @@ import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.subblocks.ICTMSubBlock;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
+import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.Block;
 
 /**
@@ -14,14 +15,14 @@ import net.minecraft.block.Block;
 public class SubBlockUtil {
 
     /**
-     * Get the resources from the block and sub block id
+     * Get the resources from the block and Variation
      * @param block The Block
-     * @param subBlock The sub block id
+     * @param v The Variation
      * @return The Resources
      */
-    public static CTMBlockResources getResources(Block block, int subBlock){
+    public static CTMBlockResources getResources(Block block, Variation v){
         if (block instanceof BlockCarvable){
-            return getResources(((BlockCarvable) block).getSubBlock(subBlock));
+            return getResources(((BlockCarvable) block).getSubBlock(v));
         }
         return null;
     }

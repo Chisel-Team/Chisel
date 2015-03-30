@@ -3,6 +3,7 @@ package com.cricketcraft.chisel.client.render.ctm;
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import net.minecraft.block.BlockDynamicLiquid;
+import net.minecraft.block.BlockGlowstone;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockFaceUV;
@@ -171,7 +172,7 @@ public class CTMFaceBakery extends FaceBakery{
             s=resources.ctmTexture;
         }
 
-        return makeBakedQuad(pos.from, pos.to, new BlockPartFace(side, 0, s.getIconName(), new BlockFaceUV(CTM.uvs[quad], 0)),
+        return makeBakedQuad(pos.from, pos.to, new BlockPartFace(side, -1, s.getIconName(), new BlockFaceUV(CTM.uvs[quad], 0)),
                 s, side, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), side.getAxis(), 0, false), false, false);
     }
 }

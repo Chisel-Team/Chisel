@@ -3,9 +3,10 @@ package com.cricketcraft.chisel;
 import com.cricketcraft.chisel.client.TextureStitcher;
 import com.cricketcraft.chisel.client.command.CommandTest;
 import com.cricketcraft.chisel.client.render.ctm.CTMModelRegistry;
+import com.cricketcraft.chisel.common.CarvableBlocks;
 import com.cricketcraft.chisel.common.CommonProxy;
 import com.cricketcraft.chisel.common.Reference;
-import com.cricketcraft.chisel.common.init.ChiselBlocks;
+import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockModelShapes;
 import net.minecraft.client.resources.model.ModelManager;
@@ -42,15 +43,16 @@ public class Chisel implements Reference{
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
+        Variation.doStuff();
         MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
         MinecraftForge.EVENT_BUS.register(new TextureStitcher());
-        ChiselBlocks.preInit();
+        CarvableBlocks.preInitBlocks();
 
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event){
-        ChiselBlocks.init();
+        CarvableBlocks.initBlocks();
         ClientCommandHandler.instance.registerCommand(new CommandTest());
     }
 

@@ -6,7 +6,9 @@ import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.subblocks.ICTMSubBlock;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
 import com.cricketcraft.chisel.common.util.SubBlockUtil;
+import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockFaceUV;
 import net.minecraft.client.renderer.block.model.BlockPartFace;
@@ -36,14 +38,9 @@ public class ModelCTM implements ISmartBlockModel {
 
     private List<BakedQuad> quads;
 
-    public static final FaceBakery bakery = new FaceBakery();
-
     private TextureAtlasSprite particle;
 
 
-    public ModelCTM(IBlockState state) {
-        this.quads = generateQuads(state);
-    }
 
     public List getFaceQuads(EnumFacing face) {
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
@@ -63,7 +60,7 @@ public class ModelCTM implements ISmartBlockModel {
     }
 
     public boolean isAmbientOcclusion() {
-        return false;
+        return true;
     }
 
     public boolean isGui3d() {
@@ -84,16 +81,19 @@ public class ModelCTM implements ISmartBlockModel {
 
     @Override
     public IBakedModel handleBlockState(IBlockState state) {
+        //throw new RuntimeException(state.getValue(BlockCarvable.VARIATION).toString());
         Chisel.logger.info("Handling block state for "+state.toString());
         List<BakedQuad> newQuads = generateQuads(state);
         this.quads = newQuads;
-        this.particle = SubBlockUtil.getResources(state.getBlock(), (Integer) state.getValue(BlockCarvable.VARIATION)).getDefaultTexture();
+        Chisel.logger.info(state.getBlock().toString());
+        Chisel.logger.info(state.getValue(BlockCarvable.VARIATION).toString());
+        this.particle = SubBlockUtil.getResources(state.getBlock(), (Variation) state.getValue(BlockCarvable.VARIATION)).getDefaultTexture();
         return this;
     }
 
     private List<BakedQuad> generateQuads(IBlockState state) {
         List<BakedQuad> newQuads = new ArrayList<BakedQuad>();
-        int variation = (Integer) state.getValue(BlockCarvable.VARIATION);
+        Variation variation = (Variation) state.getValue(BlockCarvable.VARIATION);
         if (state.getBlock() instanceof BlockCarvable) {
             ISubBlock subBlock = ((BlockCarvable) state.getBlock()).getSubBlock(variation);
             if (subBlock instanceof ICTMSubBlock) {

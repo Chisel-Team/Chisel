@@ -2,17 +2,30 @@ package com.cricketcraft.chisel.common.block;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.IFacade;
+import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.client.render.ctm.CTMModelRegistry;
+import com.cricketcraft.chisel.common.CarvableBlocks;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
 import com.cricketcraft.chisel.common.init.ChiselTabs;
+import com.cricketcraft.chisel.common.util.SubBlockUtil;
+import com.cricketcraft.chisel.common.variation.PropertyVariation;
+import com.cricketcraft.chisel.common.variation.Variation;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
@@ -21,16 +34,20 @@ import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.common.property.Properties;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 /**
  * Represents a Carvable (aka Chisilable) block
  */
-public abstract class BlockCarvable extends Block{
+public class BlockCarvable extends Block{
 
     /**
      * The Property for the variation of this block
      */
-    public static final PropertyInteger VARIATION = PropertyInteger.create("Variation", 0, 16);
+    public static final PropertyVariation VARIATION = new PropertyVariation();
 
     /**
      * These are used for connected textures
@@ -59,32 +76,26 @@ public abstract class BlockCarvable extends Block{
 
 
 
-    private String name;
+    private CarvableBlocks type;
 
     /**
      * Array of all the block resources, each one represents a sub block
      */
     private ISubBlock[] subBlocks = new ISubBlock[16];
 
-    public BlockCarvable(){
-        this("defaultChiselBlock");
+
+    public BlockCarvable(CarvableBlocks type){
+        this(Material.rock, type);
     }
 
-    public BlockCarvable(String name){
-        this(Material.rock, name, false);
-    }
-
-    public BlockCarvable(Material material, String name, boolean isCTM){
+    public BlockCarvable(Material material, CarvableBlocks type){
         super(material);
+        this.type=type;
         setupStates();
         setResistance(10.0F);
         setHardness(2.0F);
         setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
-        setUnlocalizedName(name);
-        this.name=name;
-        if (isCTM) {
-            CTMModelRegistry.register(this);
-        }
+        setUnlocalizedName(type.getName());
     }
 
     @Override
@@ -101,7 +112,7 @@ public abstract class BlockCarvable extends Block{
                 withProperty(CONNECTED_NORTH_WEST, false).withProperty(CONNECTED_NORTH_UP, false).withProperty(CONNECTED_NORTH_DOWN, false).
                 withProperty(CONNECTED_SOUTH_EAST, false).withProperty(CONNECTED_SOUTH_WEST, false).withProperty(CONNECTED_SOUTH_UP, false).
                 withProperty(CONNECTED_SOUTH_DOWN, false).withProperty(CONNECTED_EAST_UP, false).withProperty(CONNECTED_EAST_DOWN, false).
-                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(VARIATION, 0));
+                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(VARIATION, type.getVariants()[0]));
     }
 
     public ExtendedBlockState getBaseExtendedState(){
@@ -114,17 +125,17 @@ public abstract class BlockCarvable extends Block{
 
     @Override
     public int damageDropped(IBlockState state) {
-        return (Integer)state.getValue(VARIATION);
+        return getMetaFromState(state);
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta){
-        return getBlockState().getBaseState().withProperty(VARIATION, meta);
+        return getBlockState().getBaseState().withProperty(VARIATION, Variation.fromMeta(type, meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state){
-        return (Integer)state.getValue(VARIATION);
+        return (Integer)Variation.metaFromVariation(type, (Variation) state.getValue(VARIATION));
     }
 
     /**
@@ -167,18 +178,20 @@ public abstract class BlockCarvable extends Block{
     }
 
     /**
-     * Get the sub block from the "id"
-     * @param i The "ID"
+     * Get the sub block from the variation
+     * @param v the variation
      * @return The sub block
      */
-    public ISubBlock getSubBlock(int i){
-        if (i>=subBlocks.length){
-            return subBlocks[0];
-        }
-        if (subBlocks[i]==null){
-            return subBlocks[0];
-        }
-        return subBlocks[i];
+    public ISubBlock getSubBlock(Variation v){
+//        for (ISubBlock block : subBlocks){
+//            Chisel.logger.info("Sub Block: "+block);
+//        }
+//        Chisel.logger.info("meta: "+Variation.metaFromVariation(type, v));
+        return subBlocks[Variation.metaFromVariation(type, v)];
+    }
+
+    public ISubBlock[] allSubBlocks(){
+        return this.subBlocks;
     }
 
 
@@ -187,14 +200,17 @@ public abstract class BlockCarvable extends Block{
      * @return The Name
      */
     public String getName(){
-        return this.name;
+        return this.type.getName();
     }
 
+    /**
+     * Gets the type of block this is
+     * @return The Type
+     */
+    public CarvableBlocks getType(){
+        return this.type;
+    }
 
-
-    public abstract void initSubBlocks();
-
-    public abstract void preInitSubBlocks();
 
 
     @Override
@@ -353,7 +369,46 @@ public abstract class BlockCarvable extends Block{
      * @return Whether they are the same block
      */
     public static boolean areBlocksEqual(IBlockState state1, IBlockState state2){
-        return (state1.getBlock()==state2.getBlock()&&state1.getValue(VARIATION)==state2.getValue(VARIATION));
+        return (state1.getBlock()==state2.getBlock()&&((Variation)state1.getValue(VARIATION)).equals((Variation) state2.getValue(VARIATION)));
     }
 
+    /**
+     * Whether the two positions
+     * @param w
+     * @param pos1
+     * @param pos2
+     * @return
+     */
+    public static boolean isConnected(World w, BlockPos pos1, BlockPos pos2){
+        return areBlocksEqual(w.getBlockState(pos1), w.getBlockState(pos2));
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getMixedBrightnessForBlock(IBlockAccess worldIn, BlockPos pos){
+        return 0xf<<20;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void getSubBlocks(Item item, CreativeTabs tab, List list){
+        for (int i=0;i<subBlocks.length;i++){
+            ISubBlock sub = subBlocks[i];
+            ItemStack stack = new ItemStack(item, 1, i);
+            CTMBlockResources r = SubBlockUtil.getResources(sub);
+            //setLore(stack, r.getLore());
+            list.add(stack);
+        }
+    }
+
+    public static void setLore(ItemStack stack, List<String> lore){
+        NBTTagCompound compound = new NBTTagCompound();
+        NBTTagList list = new NBTTagList();
+        for (String s : lore){
+            list.appendTag(new NBTTagString(s));
+        }
+        compound.setTag("lore", list);
+        NBTTagCompound itemCompound = new NBTTagCompound();
+        itemCompound.setTag("display", compound);
+        stack.setTagCompound(itemCompound);
+    }
 }

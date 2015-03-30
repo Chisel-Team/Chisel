@@ -50,14 +50,13 @@ public class CTMModelRegistry implements Reference{
         }
     }
 
-    public static void register(BlockCarvable block){
-        final ModelResourceLocation location = new ModelResourceLocation(MOD_ID.toLowerCase()+":"+block.getName(), "all");
-        ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
-            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                //throw new RuntimeException("Stuff is happening");
-                return location;
-            }
-        });
-        register(location, new ModelCTM(block.getDefaultState()));
+    public static void register(String block, String variation){
+        final ModelResourceLocation location = new ModelResourceLocation(MOD_ID.toLowerCase()+":"+block, "variation="+variation);
+//        ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
+//            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+//                return location;
+//            }
+//        });
+        register(location, new ModelCTM());
     }
 }

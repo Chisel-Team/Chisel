@@ -1,6 +1,9 @@
 package com.cricketcraft.chisel.client.command;
 
 import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.common.CarvableBlocks;
+import com.cricketcraft.chisel.common.block.BlockCarvable;
+import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelManager;
@@ -37,24 +40,10 @@ public class CommandTest implements ICommand{
     }
 
     public void processCommand(ICommandSender var1, String[] var2) throws CommandException{
-        Map ro;
-        try {
-            Field f = Minecraft.class.getDeclaredField("modelManager");
-            f.setAccessible(true);
-            ModelManager m=(ModelManager)f.get(Minecraft.getMinecraft());
-            Field f2 = ModelManager.class.getDeclaredField("modelRegistry");
-            f2.setAccessible(true);
-            IRegistry r = (IRegistry)f2.get(m);
-            Field f3 = r.getClass().getDeclaredField("registryObjects");
-            f3.setAccessible(true);
-            ro = (Map)f3.get(r);
-        } catch (Exception exception){
-            throw new RuntimeException(exception);
+        BlockCarvable block = CarvableBlocks.ANTIBLOCK.getBlock();
+        for (ISubBlock s : block.allSubBlocks()){
+            var1.addChatMessage(new ChatComponentText(s.getName()));
         }
-        for (Map.Entry e : (Set<Map.Entry>)ro.entrySet()){
-            Chisel.logger.info(e.getKey().toString()+" "+e.getValue().toString());
-        }
-        var1.addChatMessage(new ChatComponentText("Did stuff"));
     }
 
     public boolean canCommandSenderUseCommand(ICommandSender var1){
