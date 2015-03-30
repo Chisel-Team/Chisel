@@ -29,11 +29,6 @@ public class Compatibility {
         tconMap.put(1, "sandstone");
         tconMap.put(2, "netherrack");
         tconMap.put(3, "stonebricksmooth");
-        tconMap.put(4, "iron_block");
-        tconMap.put(5, "gold_block");
-        tconMap.put(6, "lapis_block");
-        tconMap.put(7, "diamond_block");
-        tconMap.put(8, "redstone_block");
         tconMap.put(12, "end_stone");
     }
 
