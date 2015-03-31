@@ -5,6 +5,7 @@ import com.cricketcraft.chisel.client.render.BlockResources;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.client.render.ctm.CTMModelRegistry;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
+import com.cricketcraft.chisel.common.block.ItemChiselBlock;
 import com.cricketcraft.chisel.common.block.subblocks.CTMSubBlock;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.Block;
@@ -123,7 +124,7 @@ public enum CarvableBlocks implements Reference{
                     block.addSubBlock(CTMSubBlock.generateSubBlock(block, v.getValue(), "Default Sub Block"));
                 }
             }
-            GameRegistry.registerBlock(block, block.getName());
+            GameRegistry.registerBlock(block, ItemChiselBlock.class, block.getName());
         }
     }
 
@@ -139,6 +140,19 @@ public enum CarvableBlocks implements Reference{
     private static boolean isCTM(String blockName, String variation){
         String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-ctm.png";
         return Chisel.class.getResource(path) !=null;
+    }
+
+    public static CarvableBlocks getBlock(String name){
+        for (CarvableBlocks b : values()){
+            if (b.getName().equals(name)){
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public static CarvableBlocks getBlock(BlockCarvable block){
+        return getBlock(block.getName());
     }
 
 }

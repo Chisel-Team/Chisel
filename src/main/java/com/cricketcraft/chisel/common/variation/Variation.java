@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.common.variation;
 
 import com.cricketcraft.chisel.common.CarvableBlocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.IStringSerializable;
 
 /**
