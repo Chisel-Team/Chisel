@@ -27,6 +27,7 @@ import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.utils.GeneralClient;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CarvableHelper {
@@ -97,7 +98,7 @@ public class CarvableHelper {
 		variation.metadata = metadata;
 		variation.blockName = blockName;
 
-		if (texture != null) {
+		if (texture != null && FMLCommonHandler.instance().getSide().isClient()) {
 			variation.texture = texture;
 
 			String path = variation.texture;
