@@ -51,7 +51,7 @@ public class Configurations {
 	public static String getRoadLineTool;
 	public static int roadLineToolLevel;
 
-    public static int[] configColors = new int[ItemDye.field_150923_a.length];
+	public static int[] configColors = new int[ItemDye.field_150923_a.length];
 
 	public static boolean refreshConfig() {
 
@@ -63,13 +63,13 @@ public class Configurations {
 				"Traversing concrete roads, players will acceleration to this velocity. For reference, normal running speed is about 0.28. Set to 0 to disable acceleration.").getDouble(0.45);
 		ghostCloud = config.get(category, "doesCloudRenderLikeGhost", true).getBoolean(true);
 		factoryBlockAmount = config.get(category, "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
-		allowMossy = config.get(category, "allowCobbleToMossyInChisel", true).getBoolean(true);
+		allowMossy = config.get(category, "allowBrickToMossyInChisel", true, "If true, you can chisel stone brick to mossy stone brick.").getBoolean(true);
 		allowSmoothStone = config.get(category, "allowSmoothStoneToStoneBricksAndBack", true).getBoolean(true);
 		chiselRecipe = config.get(category, "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
 		enableFMP = config.get(category, "enableFMP", true, "Do you want to enable FMP").getBoolean(true);
 		chiselStoneToCobbleBricks = config.get(category, "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left clicking.").getBoolean(false);
-		chiselBackToVanillaLeaves = config.get(category, "chiselBackToVanillaLeaves", false, "If this is true, you can chisel from the chisel leaves back to vanilla ones. If it is false, you cannot.")
-				.getBoolean(false);
+		chiselBackToVanillaLeaves = config
+				.get(category, "chiselBackToVanillaLeaves", false, "If this is true, you can chisel from the chisel leaves back to vanilla ones. If it is false, you cannot.").getBoolean(false);
 
 		/* worldgen */
 		category = "worldgen";
@@ -97,12 +97,12 @@ public class Configurations {
 		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
 		ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
 		allowChiselCrossColors = config.get(category, "allowChiselCrossColors", true, "Should someone be able to chisel something into a different color.").getBoolean();
-		ironChiselAttackDamage = config.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.")
-				.getInt();
-		diamondChiselAttackDamage = config
-				.get(category, "diamondChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
-		obsidianChiselAttackDamage = config
-				.get(category, "obsidianChiselAttackDamage", 4, "The extra attack damage points (in half hearts) that the obsidian chisel inflicts when it is used to attack an entity.").getInt();
+		ironChiselAttackDamage = config
+				.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.").getInt();
+		diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2,
+				"The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
+		obsidianChiselAttackDamage = config.get(category, "obsidianChiselAttackDamage", 4,
+				"The extra attack damage points (in half hearts) that the obsidian chisel inflicts when it is used to attack an entity.").getInt();
 
 		/* block */
 		category = "block";
@@ -112,20 +112,21 @@ public class Configurations {
 				"The lowest harvest level of the tool able to break the road lines (requires useRoadLineTool to be true to take effect) (0 = Wood/Gold, 1 = Stone, 2 = Iron, 3 = Diamond) Default: 0")
 				.getInt();
 
-        /* hexColors */
-        category = "hexColors";
+		/* hexColors */
+		category = "hexColors";
 
-        for(int i = 0; i < ItemDye.field_150923_a.length; i++) {
-            // tterrag... don't kill me over this formatting.
-            String temp = config.get(category, "hex" + ItemDye.field_150923_a[i], "#" + Integer.toHexString(ItemDye.field_150922_c[i]), Character.toUpperCase(ItemDye.field_150923_a[i].charAt(0)) + ItemDye.field_150923_a[i].substring(1) + " color for hex block overlay #RRGGBB").getString();
-            // Or this
-            try {
-                configColors[i] = Integer.decode(temp);
-            } catch (NumberFormatException e) {
-                Chisel.logger.warn("Configuration error, " + temp + " was not recognized as a color.  Using default: #" + Integer.toHexString(ItemDye.field_150922_c[i]));
-                configColors[i] = ItemDye.field_150922_c[i];
-            }
-        }
+		for (int i = 0; i < ItemDye.field_150923_a.length; i++) {
+			// tterrag... don't kill me over this formatting.
+			String temp = config.get(category, "hex" + ItemDye.field_150923_a[i], "#" + Integer.toHexString(ItemDye.field_150922_c[i]),
+					Character.toUpperCase(ItemDye.field_150923_a[i].charAt(0)) + ItemDye.field_150923_a[i].substring(1) + " color for hex block overlay #RRGGBB").getString();
+			// Or this
+			try {
+				configColors[i] = Integer.decode(temp);
+			} catch (NumberFormatException e) {
+				Chisel.logger.warn("Configuration error, " + temp + " was not recognized as a color.  Using default: #" + Integer.toHexString(ItemDye.field_150922_c[i]));
+				configColors[i] = ItemDye.field_150922_c[i];
+			}
+		}
 
 		if (config.hasChanged()) {
 			config.save();

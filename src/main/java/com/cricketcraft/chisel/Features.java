@@ -2280,7 +2280,7 @@ public enum Features {
 			for (int i = 0; i < 4; i++) {
 				if ((i == 1) && (Configurations.allowMossy)) {
 					Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
-				} else {
+				} else if (i != 1) {
 					Carving.chisel.addVariation("stonebricksmooth", Blocks.stonebrick, i, i);
 				}
 			}
