@@ -3,14 +3,8 @@ package com.cricketcraft.chisel.compat;
 import java.util.Map;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
-import thaumcraft.api.ThaumcraftApi;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.AspectList;
 
 import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.google.common.collect.Maps;
 
 import cpw.mods.fml.common.Loader;
@@ -94,7 +88,7 @@ public class Compatibility {
 	}
 
 	private static void loadThaumcraftAspects() {
-		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestone, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
-		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestoneWall, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
+//		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestone, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
+//		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestoneWall, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
 	}
 }
