@@ -619,6 +619,9 @@ tile.glass.13.desc=Thick Grid Glass
 tile.glass.14.desc=Thin Grid Glass
 tile.glass.15.desc=Modern Iron Fence
 
+tile.chisel.glass2.name=Glass
+tile.glass2.0.desc=Asymmetrical Leaded Glass
+
 #Sandstone
 tile.chisel.sandstone.name=Sandstone
 tile.sandstone.3.desc=Faded Sandstone
