@@ -794,6 +794,11 @@ public enum Features {
 			glass.carverHelper.addVariation("tile.glass.15.desc", 15, "glass/a1-glasswindow-ironfencemodern");
 			glass.carverHelper.registerAll(glass, "glass");
 			Carving.chisel.registerOre("glass", "glass");
+
+			BlockCarvableGlass glass2 = (BlockCarvableGlass) new BlockCarvableGlass().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.3F).setStepSound(Block.soundTypeGlass);
+			glass2.carverHelper.addVariation("tile.glass2.0.desc", 0, "glass/chrono");
+            glass2.carverHelper.registerBlock(glass2, "glass2");
+            glass2.carverHelper.registerVariations("glass", glass2);
 		}
 	},
 
