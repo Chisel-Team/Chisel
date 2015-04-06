@@ -21,6 +21,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable cobblestone = null;
 	public static final BlockMarbleWall cobblestoneWall = null;
 	public static final BlockCarvableGlass glass = null;
+	public static final BlockCarvableGlass glass2 = null;
 	public static final BlockCarvablePane glass_pane = null;
 	public static final BlockCarvable sandstone = null;
 	public static final BlockCarvable sandstone_scribbles = null;
@@ -61,6 +62,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable templeblock = null;
 	public static final BlockCarvable mossy_templeblock = null;
 	public static final BlockCarvable factoryblock = null;
+	public static final BlockCarvable factoryblock2 = null;
 	public static final BlockCarvablePane paperwall = null;
 	public static final BlockCarvable paperwall_block = null;
 	public static final BlockCarvable woolen_clay = null;
