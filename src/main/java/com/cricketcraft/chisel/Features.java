@@ -2645,6 +2645,16 @@ public enum Features {
 
 			voidstone2.carverHelper.registerAll(voidstone2, "voidstone2");
 			Carving.chisel.registerOre("voidstone2", "voidstone2");
+
+			BlockCarvable voidstoneRunic = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(5.0F).setResistance(10.0F);
+			voidstoneRunic.carverHelper.setChiselBlockName("Voidstone Runic");
+
+			for (int i = 1; i < 16; i++)
+				voidstoneRunic.carverHelper.addVariation("tile.voidstoneRunic." + i + ".desc", i, "voidstone/runes/rune" + sGNames[i].replaceAll(" ", ""));
+			voidstoneRunic.carverHelper.registerAll(voidstoneRunic, "voidstoneRunic");
+			voidstoneRunic.carverHelper.registerVariations("voidstone", voidstoneRunic);
+
+			Carving.chisel.registerOre("voidstoneRunic", "voidstoneRunic");
 		}
 
 		@Override

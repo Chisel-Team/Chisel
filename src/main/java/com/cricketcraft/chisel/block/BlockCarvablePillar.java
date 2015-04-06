@@ -31,7 +31,12 @@ public class BlockCarvablePillar extends BlockCarvable {
 	}
 
 	public IIcon getCtmIcon(int index, int metadata) {
-		CarvableVariation var = carverHelper.variations.get(metadata);
+		//Workaround to prevent crash with invalid meta
+		CarvableVariation var = null;
+		if(metadata <= carverHelper.variations.size())
+			var = carverHelper.variations.get(metadata);
+		else
+			var = carverHelper.variations.get(0);
 
 		if (index >= 4)
 			return var.iconTop;
