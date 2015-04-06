@@ -1,10 +1,10 @@
-package com.cricketcraft.chisel.compat;
+package com.cricketcraft.chisel.compat.fmp;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.event.FMLInterModComms;
 
-public class FMPIntegration {
+public class FMPIMC {
 
 	public static void registerFMP(Block block) {
 		registerFMP(block, 0, 15);

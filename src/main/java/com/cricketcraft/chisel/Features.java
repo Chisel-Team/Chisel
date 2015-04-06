@@ -6,6 +6,7 @@ import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.carving.CarvingGroup;
+import com.cricketcraft.chisel.compat.fmp.ItemBlockChiselTorchPart;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
 import com.cricketcraft.chisel.entity.EntityCloudInABottle;
@@ -17,6 +18,7 @@ import com.cricketcraft.chisel.item.*;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
 import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
 import com.google.common.collect.Lists;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -2518,14 +2520,18 @@ public enum Features {
 		void addBlocks() {
 			Carving.chisel.addVariation("torch", Blocks.torch, 0, 0);
 			for (int type = 0; type < 10; type++) {
-				if (type == 8 || type == 9)
-					torch[type] = new BlockCarvableTorch().disableParticles();
-				else
-					torch[type] = new BlockCarvableTorch();
-
-				torch[type].setInformation("torch" + (type + 1));
-				GameRegistry.registerBlock(torch[type], "torch" + (type + 1));
-				Carving.chisel.addVariation("torch", torch[type], 0, (type + 1));
+				String name = "torch" + (type + 1);
+				BlockCarvableTorch t = new BlockCarvableTorch(type, name);
+				if (type == 8 || type == 9) {
+					t.disableParticles();
+				}
+				if (Loader.isModLoaded("ForgeMultipart")) {
+					GameRegistry.registerBlock(t, ItemBlockChiselTorchPart.class, name, t);
+				} else {
+					GameRegistry.registerBlock(t, name);
+				}
+				Carving.chisel.addVariation("torch", t, 0, (type + 1));
+				torches[type] = t;
 			}
 			Carving.chisel.registerOre("torch", "torch");
 		}

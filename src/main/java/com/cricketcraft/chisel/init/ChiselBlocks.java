@@ -1,9 +1,11 @@
 package com.cricketcraft.chisel.init;
 
+import net.minecraft.block.Block;
+
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.*;
+
 import cpw.mods.fml.common.registry.GameRegistry.ObjectHolder;
-import net.minecraft.block.Block;
 
 @ObjectHolder(Chisel.MOD_ID)
 public final class ChiselBlocks {
@@ -103,7 +105,7 @@ public final class ChiselBlocks {
 	public static BlockCarvableIceStairs[] iceStairs = new BlockCarvableIceStairs[8];
 	public static BlockCarvablePackedIceStairs[] packediceStairs = new BlockCarvablePackedIceStairs[8];
 
-	public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
+	public static Block[] torches = new BlockCarvableTorch[16];
 
 	public static BlockCarvable[] planks = new BlockCarvable[6];
 
