@@ -581,6 +581,12 @@ tile.factory.13.desc=Worn Metal Wall with Ventilation Openings
 tile.factory.14.desc=Rusty Metal Plates
 tile.factory.15.desc=Worn Metal Column
 
+tile.chisel.factoryblock2.name=Factory Block
+tile.factory2.0.desc=Neon Blue Plating
+tile.factory2.1.desc=Vertical Venting
+tile.factory2.2.desc=Metallic Blue Circuit Plating
+tile.factory2.3.desc=Blue Wireframing
+
 #Diamond blocks
 tile.chisel.diamond_block.name=Diamond Block
 tile.diamond.1.desc=Embossed Diamond Block

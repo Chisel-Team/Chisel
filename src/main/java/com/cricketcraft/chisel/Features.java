@@ -687,6 +687,15 @@ public enum Features {
 			factoryblock.carverHelper.addVariation("tile.factory.15.desc", 15, "factory/column");
 			factoryblock.carverHelper.registerAll(factoryblock, "factoryblock");
 			Carving.chisel.registerOre("factoryblock", "factoryblock");
+
+			BlockCarvable factoryblock2 = (BlockCarvable) new BlockCarvable(Material.iron).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F)
+					.setStepSound(Chisel.soundMetalFootstep);
+			factoryblock2.carverHelper.addVariation("tile.factory2.0.desc", 0, "factory/iceiceice");
+			factoryblock2.carverHelper.addVariation("tile.factory2.1.desc", 1, "factory/vent");
+			factoryblock2.carverHelper.addVariation("tile.factory2.2.desc", 2, "factory/tilemosaic");
+			factoryblock2.carverHelper.addVariation("tile.factory2.3.desc", 3, "factory/wireframeblue");
+			factoryblock2.carverHelper.registerAll(factoryblock2, "factoryblock2");
+			factoryblock2.carverHelper.registerVariations("factoryblock", factoryblock2);
 		}
 
 		@Override
