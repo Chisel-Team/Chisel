@@ -3,6 +3,7 @@ package com.cricketcraft.chisel;
 import java.io.File;
 
 import com.cricketcraft.chisel.entity.EntityChiselSnowman;
+
 import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -15,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.compat.IMCHandler;
+import com.cricketcraft.chisel.compat.fmp.FMPCompat;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselTabs;
@@ -28,6 +30,7 @@ import com.cricketcraft.chisel.world.GeneratorChisel;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -122,6 +125,9 @@ public class Chisel {
 		Features.preInit();
 		PacketHandler.init();
 		ChiselController.INSTANCE.preInit();
+		if (Loader.isModLoaded("ForgeMultipart")) {
+			new FMPCompat().init();
+		}
 		proxy.preInit();
 	}
 
