@@ -130,6 +130,22 @@ tile.voidstone.4.desc=Runic Voidstone
 tile.voidstone.5.desc=Metal-Bordered Voidstone
 tile.voidstone.6.desc=Eye Voidstone
 tile.voidstone.7.desc=Beveled Voidstone
+tile.chisel.voidstoneRunic.name=Runic Voidstone
+tile.voidstoneRunic.0.desc=Voidstone - Orange Rune
+tile.voidstoneRunic.1.desc=Voidstone - Magenta Rune
+tile.voidstoneRunic.2.desc=Voidstone - Light Blue Rune
+tile.voidstoneRunic.3.desc=Voidstone - Yellow Rune
+tile.voidstoneRunic.4.desc=Voidstone - Lime Rune
+tile.voidstoneRunic.5.desc=Voidstone - Pink Rune
+tile.voidstoneRunic.6.desc=Voidstone - Gray Rune
+tile.voidstoneRunic.7.desc=Voidstone - Light Gray Rune
+tile.voidstoneRunic.8.desc=Voidstone - Cyan Rune
+tile.voidstoneRunic.9.desc=Voidstone - Purple Rune
+tile.voidstoneRunic.10.desc=Voidstone - Blue Rune
+tile.voidstoneRunic.11.desc=Voidstone - Brown Rune
+tile.voidstoneRunic.12.desc=Voidstone - Green Rune
+tile.voidstoneRunic.13.desc=Voidstone - Red Rune
+tile.voidstoneRunic.14.desc=Voidstone - Black Rune
 
 #Void Stone Pillars
 tile.chisel.voidstonePillar.name=Voidstone Pillar
