@@ -162,7 +162,10 @@ public enum Features {
 			arcane.carverHelper.addVariation("tile.arcane.4.desc", 4, "arcane/runesGlow");
 			arcane.carverHelper.addVariation("tile.arcane.5.desc", 5, "arcane/bigBrick");
 			arcane.carverHelper.addVariation("tile.arcane.6.desc", 6, "arcane/conduitGlowAnim");
-			arcane.carverHelper.addVariation("tile.arcane.7.desc", 7, "arcane/BorderBrain");
+            arcane.carverHelper.addVariation("tile.arcane.7.desc", 7, "arcane/BorderBrain");
+            arcane.carverHelper.addVariation("tile.arcane.8.desc", 8, "arcane/ArcaneBorder");
+            arcane.carverHelper.addVariation("tile.arcane.9.desc", 9, "arcane/arcaneMatrix");
+            arcane.carverHelper.addVariation("tile.arcane.10.desc", 10, "arcane/thaumcraftLogo");
 			arcane.carverHelper.registerAll(arcane, "arcane");
 			Carving.chisel.registerOre("arcane", "arcane");
 		}
