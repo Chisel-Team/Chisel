@@ -79,14 +79,12 @@ public class BlockPresent extends Block implements ICarvable {
 		TileEntityPresent te = (TileEntityPresent) world.getTileEntity(x, y, z);
 		world.setBlockMetadataWithNotify(x, y, z, stack.getItemDamage(), 3);
 		te.setRotation(heading);
-		if (!world.isRemote) {
-			te.findConnections();
-			if (te.isConnected()) {
-				TileEntityPresent other = te.getConnection();
-				other.setRotation(heading);
-			}
-			world.markBlockForUpdate(x, y, z);
+		te.findConnections();
+		if (te.isConnected()) {
+			TileEntityPresent other = te.getConnection();
+			other.setRotation(heading);
 		}
+		world.markBlockForUpdate(x, y, z);
 	}
 
 	@Override
