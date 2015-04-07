@@ -2,13 +2,13 @@
 New
 - Added ARRRRRRR-cane stone blocks
 - Added Factory varients using some old textures that were lying around
-- Added Chrono Glass Variant
+- Added a new Glass varient: Asymmetrical Leaded Glass
 Changes
 - Chiseled Torches now work as Forge microparts
 - AntiBlocks will not allow mobs to spawn on them (like half blocks, or glass)
 Fixes
-- Fixed the Mossy configuration to properly disable/enable whether the player
-can chisel cobble into mossy cobble, etc.
+- Fixed the Mossy configuration to properly disable/enable whether the player can chisel cobble into mossy cobble, etc.
+- Fixed some more present-nonsense
 - Fixed a crash on dedicated servers
 - Fixed an bug that allowed item duplication.  We're sorry server ops :(
 - Improved block loading performance significantly!
