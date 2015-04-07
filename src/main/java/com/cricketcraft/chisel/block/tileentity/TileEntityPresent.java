@@ -21,6 +21,8 @@ import com.cricketcraft.chisel.network.message.MessagePresentConnect;
 public class TileEntityPresent extends TileEntity implements IInventory, IDoubleChest {
 
 	private TileEntityPresent connection = null;
+	// If cachedDir is non-null, but connection is null, this present must be
+	// connected to an unloaded present. This is handled appropriately.
 	private ForgeDirection cachedDir = null;
 	private boolean isParent;
 	private final ItemStack[] inventory = new ItemStack[27];
@@ -29,14 +31,10 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 
 	@Override
 	public void updateEntity() {
-		if (isConnected() && connection.isInvalid()) {
-			disconnect();
-		}
-
-		if (autoSearch && worldObj != null /* ugh */) {
+		if (!isConnected() && autoSearch && worldObj != null /* ugh */) {
 			if (cachedDir != null) {
 				connectTo(cachedDir);
-			} else {
+			} else if (!worldObj.isRemote){
 				findConnections();
 			}
 			autoSearch = false;
@@ -48,7 +46,7 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 	}
 
 	private boolean connectTo(TileEntityPresent present, ForgeDirection dir) {
-		if (present.getBlockMetadata() == getBlockMetadata() && !present.isConnected() && Math.abs(present.xCoord - xCoord + present.yCoord - yCoord + present.zCoord - zCoord) == 1) {
+		if (present.getBlockMetadata() == getBlockMetadata() && !present.isConnected() && (present.cachedDir == null || present.cachedDir == dir.getOpposite()) && Math.abs(present.xCoord - xCoord + present.yCoord - yCoord + present.zCoord - zCoord) == 1) {
 			connection = present;
 			connection.connection = this;
 			connection.cachedDir = dir.getOpposite();
@@ -63,22 +61,31 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 	}
 
 	public boolean connectTo(ForgeDirection dir) {
-		TileEntity te = worldObj.getTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+		int x = xCoord + dir.offsetX, y = yCoord + dir.offsetY, z = zCoord + dir.offsetZ;
+		TileEntity te = getTileSafe(x, y, z);
 		if (te instanceof TileEntityPresent) {
 			return connectTo((TileEntityPresent) te, dir);
 		}
-		return false;
+		return !exists(x, y, z);
 	}
 
-	public void disconnect() {
+	/**
+	 * @param preserveDir
+	 *            If true, this is only a virtual disconnect, meaning the other
+	 *            chest still exists, but is still loaded, so maintain a
+	 *            cachedDir for reconnection upon chunk load.
+	 */
+	public void disconnect(boolean preserveDir) {
 		if (isConnected()) {
-			this.connection.cachedDir = null;
+			if (!preserveDir) {
+				this.connection.cachedDir = null;
+				this.cachedDir = null;
+			}
 			this.connection.connection = null;
 			this.connection.markDirty();
-			this.cachedDir = null;
 			this.connection = null;
 			this.markDirty();
-			PacketHandler.INSTANCE.sendToDimension(new MessagePresentConnect(this, ForgeDirection.UNKNOWN, false), worldObj.provider.dimensionId);
+			PacketHandler.INSTANCE.sendToDimension(new MessagePresentConnect(this, ForgeDirection.UNKNOWN, false, preserveDir), worldObj.provider.dimensionId);
 		}
 	}
 
@@ -104,16 +111,21 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 
 	public void findConnections() {
 		if (!isConnected()) {
+			if (cachedDir != null) {
+				if (connectTo(cachedDir)) {
+					return;
+				}
+			}
 			for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
 				if (dir != ForgeDirection.UP && dir != ForgeDirection.DOWN) {
 					if (connectTo(dir)) {
-						break;
+						return;
 					}
 				}
 			}
 		}
 	}
-	
+
 	public TileEntityPresent getParent() {
 		return isParent || connection == null ? this : connection;
 	}
@@ -124,15 +136,12 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound tag)
-	{
+	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		NBTTagList nbttaglist = new NBTTagList();
 
-		for (int i = 0; i < getTrueSizeInventory(); ++i)
-		{
-			if (inventory[i] != null)
-			{
+		for (int i = 0; i < getTrueSizeInventory(); ++i) {
+			if (inventory[i] != null) {
 				NBTTagCompound nbttagcompound1 = new NBTTagCompound();
 				nbttagcompound1.setByte("Slot", (byte) i);
 				inventory[i].writeToNBT(nbttagcompound1);
@@ -149,18 +158,15 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound tag)
-	{
+	public void readFromNBT(NBTTagCompound tag) {
 		super.readFromNBT(tag);
 		NBTTagList nbttaglist = tag.getTagList("Items", 10);
 
-		for (int i = 0; i < nbttaglist.tagCount(); ++i)
-		{
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
 			NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
 			int j = nbttagcompound1.getByte("Slot") & 255;
 
-			if (j >= 0 && j < getTrueSizeInventory())
-			{
+			if (j >= 0 && j < getTrueSizeInventory()) {
 				inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
 			}
 		}
@@ -173,7 +179,7 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 		}
 		autoSearch = true;
 	}
-	
+
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound tag = new NBTTagCompound();
@@ -185,11 +191,27 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity packet) {
 		readFromNBT(packet.func_148857_g());
 	}
-	
+
 	@Override
 	public boolean shouldRefresh(Block oldBlock, Block newBlock, int oldMeta, int newMeta, World world, int x, int y, int z) {
 		// prevent losing TE data when in-world chiseling
 		return oldBlock != newBlock;
+	}
+
+	@Override
+	public void invalidate() {
+		super.invalidate();
+		if (isConnected()) {
+			disconnect(false);
+		}
+	}
+
+	@Override
+	public void onChunkUnload() {
+		super.onChunkUnload();
+		if (isConnected()) {
+			disconnect(true);
+		}
 	}
 
 	private int getAdjustedSlot(int slot) {
@@ -199,7 +221,32 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 		}
 		return slot;
 	}
-	
+
+	private TileEntity getTileSafe(int x, int y, int z) {
+		if (exists(x, y, z)) {
+			return worldObj.getTileEntity(x, y, z);
+		}
+		return null;
+	}
+
+	// private Block getBlockSafe(int x, int y, int z) {
+	// if (exists(x, y, z)) {
+	// return worldObj.getBlock(x, y, z);
+	// }
+	// return null;
+	// }
+	//
+	// private int getMetaSafe(int x, int y, int z) {
+	// if (exists(x, y, z)) {
+	// return worldObj.getBlockMetadata(x, y, z);
+	// }
+	// return 0;
+	// }
+	//
+	private boolean exists(int x, int y, int z) {
+		return worldObj.blockExists(x, y, z);
+	}
+
 	/* IInventory */
 
 	@Override
@@ -218,41 +265,34 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int amount)
-	{
+	public ItemStack decrStackSize(int slot, int amount) {
 		slot = getAdjustedSlot(slot);
 		ItemStack[] inv = inventory;
 		if (isConnected() && slot >= getTrueSizeInventory()) {
 			inv = connection.inventory;
 			slot %= getTrueSizeInventory();
+			connection.markDirty();
 		}
 
-		if (inv[slot] != null)
-		{
+		if (inv[slot] != null) {
 			ItemStack itemstack;
 
-			if (inv[slot].stackSize <= amount)
-			{
+			if (inv[slot].stackSize <= amount) {
 				itemstack = inv[slot];
 				inv[slot] = null;
 				this.markDirty();
 				return itemstack;
-			}
-			else
-			{
+			} else {
 				itemstack = inv[slot].splitStack(amount);
 
-				if (inv[slot].stackSize == 0)
-				{
+				if (inv[slot].stackSize == 0) {
 					inv[slot] = null;
 				}
 
 				this.markDirty();
 				return itemstack;
 			}
-		}
-		else
-		{
+		} else {
 			return null;
 		}
 	}
@@ -269,6 +309,7 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 			inventory[slot] = stack;
 		} else if (isConnected()) {
 			connection.inventory[slot % getTrueSizeInventory()] = stack;
+			connection.markDirty();
 		}
 	}
 
@@ -306,21 +347,21 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 	public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
 		return true;
 	}
-	
+
 	/* IDoubleChest */
-	
+
 	@Override
 	public int getTrueSizeInventory() {
 		return inventory.length;
 	}
-	
+
 	@Override
 	public ItemStack getTrueStackInSlot(int slot) {
 		return inventory[slot % getTrueSizeInventory()];
 	}
-	
+
 	@Override
 	public void putStackInTrueSlot(int slot, ItemStack stack) {
-		inventory[slot % getTrueSizeInventory()] = stack; 
+		inventory[slot % getTrueSizeInventory()] = stack;
 	}
 }
