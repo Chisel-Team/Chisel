@@ -194,7 +194,10 @@ tile.arcane.4.desc=Glowing Symbols
 tile.arcane.5.desc=Bricks
 tile.arcane.6.desc=Temporal Conduit
 tile.arcane.7.desc=Braaainz
-tile.arcane.8.desc=Spatial Conduit
+tile.arcane.8.desc=Infernally Arcane
+tile.arcane.9.desc=Nasty Nazca Lines
+tile.arcane.10.desc=Fine Thaumaturge's Emblem
+tile.arcane.11.desc=Cracked Rock leaking Eldritch Glow
 
 #Thaumium
 tile.chisel.thaumium.name=Thaumium Block
