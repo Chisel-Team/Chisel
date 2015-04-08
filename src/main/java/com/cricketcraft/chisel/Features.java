@@ -781,6 +781,15 @@ public enum Features {
                 circuits.carverHelper.addVariation("tile.futuraCircuit." + ItemDye.field_150921_b[i] + ".desc", i, "futura/circuitPlate");
             }
 
+            BlockSnakestone FalsettoAE = (BlockSnakestone) new BlockSnakestone("futura/controllerHack/").setBlockName("chisel.snakestoneStone").setCreativeTab(ChiselTabs.tabMetalChiselBlocks);
+            GameRegistry.registerBlock(FalsettoAE, ItemCarvable.class, "FalsettoAE");
+            // LanguageRegistry.addName(new ItemStack(snakestone, 1, 1),
+            // "Stone snake block head");
+            // LanguageRegistry.addName(new ItemStack(snakestone, 1, 13),
+            // "Stone snake block body");
+            Carving.chisel.addVariation("futura", FalsettoAE, 1, 67);
+            Carving.chisel.addVariation("futura", FalsettoAE, 13, 68);
+
             circuits.carverHelper.registerBlock(circuits, "futuraCircuit");
             circuits.carverHelper.registerVariations("futura", circuits);
             Carving.chisel.registerOre("futura", "futura");
