@@ -781,13 +781,14 @@ public enum Features {
                 circuits.carverHelper.addVariation("tile.futuraCircuit." + ItemDye.field_150921_b[i] + ".desc", i, "futura/circuitPlate");
             }
 
-            BlockSnakestone FalsettoAE = (BlockSnakestone) new BlockSnakestone("Chisel:futura/controllerHack/").setBlockName("chisel.snakestoneStone").setCreativeTab(ChiselTabs.tabMetalChiselBlocks);
+            // Looks like an AE Controller, feels like one, even lags like one!
+            BlockSnakestone FalsettoAE = (BlockSnakestone) new BlockSnakestone("Chisel:futura/controllerHack/").setBlockName("chisel.fakeController").setCreativeTab(ChiselTabs.tabMetalChiselBlocks);
             GameRegistry.registerBlock(FalsettoAE, ItemCarvable.class, "FalsettoAE");
             // LanguageRegistry.addName(new ItemStack(snakestone, 1, 1),
             // "Stone snake block head");
             // LanguageRegistry.addName(new ItemStack(snakestone, 1, 13),
             // "Stone snake block body");
-            Carving.chisel.addVariation("futura", FalsettoAE, 1, 67);
+            // Carving.chisel.addVariation("futura", FalsettoAE, 1, 67); // Real AE controllers don't have heads!
             Carving.chisel.addVariation("futura", FalsettoAE, 13, 68);
 
             circuits.carverHelper.registerBlock(circuits, "futuraCircuit");
