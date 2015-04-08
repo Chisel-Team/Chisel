@@ -783,10 +783,10 @@ public enum Features {
             }
 
             // Looks like an AE Controller, feels like one, even lags like one!
-            BlockSnakestone FalsettoAE = (BlockSnakestone) new BlockSnakestone("Chisel:futura/controllerHack/").setBlockName("chisel.fakeController").setCreativeTab(ChiselTabs.tabMetalChiselBlocks);
-            GameRegistry.registerBlock(FalsettoAE, ItemCarvable.class, "FalsettoAE");
-            Carving.chisel.addVariation("futura", FalsettoAE, 1, 67);
-            Carving.chisel.addVariation("futura", FalsettoAE, 13, 68);
+            BlockSnakestone FakeAE = (BlockSnakestone) new BlockSnakestone("Chisel:futura/controllerHack/").setBlockName("chisel.fakeController").setCreativeTab(ChiselTabs.tabMetalChiselBlocks);
+            GameRegistry.registerBlock(FakeAE, ItemCarvable.class, "FakeAE");
+            Carving.chisel.addVariation("futura", FakeAE, 1, 67);
+            Carving.chisel.addVariation("futura", FakeAE, 13, 68);
 
             circuits.carverHelper.registerBlock(circuits, "futuraCircuit");
             circuits.carverHelper.registerVariations("futura", circuits);
