@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -166,7 +167,7 @@ public enum Features {
             arcane.carverHelper.addVariation("tile.arcane.8.desc", 8, "arcane/ArcaneBorder");
             arcane.carverHelper.addVariation("tile.arcane.9.desc", 9, "arcane/arcaneMatrix");
             arcane.carverHelper.addVariation("tile.arcane.10.desc", 10, "arcane/thaumcraftLogo");
-            arcane.carverHelper.addVariation("tile.arcane.11.desc", 11, "arcane/entropiedEntritchRock");
+            arcane.carverHelper.addVariation("tile.arcane.11.desc", 11, "arcane/arcaneCrackAnim");
 			arcane.carverHelper.registerAll(arcane, "arcane");
 			Carving.chisel.registerOre("arcane", "arcane");
 		}
@@ -784,11 +785,7 @@ public enum Features {
             // Looks like an AE Controller, feels like one, even lags like one!
             BlockSnakestone FalsettoAE = (BlockSnakestone) new BlockSnakestone("Chisel:futura/controllerHack/").setBlockName("chisel.fakeController").setCreativeTab(ChiselTabs.tabMetalChiselBlocks);
             GameRegistry.registerBlock(FalsettoAE, ItemCarvable.class, "FalsettoAE");
-            // LanguageRegistry.addName(new ItemStack(snakestone, 1, 1),
-            // "Stone snake block head");
-            // LanguageRegistry.addName(new ItemStack(snakestone, 1, 13),
-            // "Stone snake block body");
-            // Carving.chisel.addVariation("futura", FalsettoAE, 1, 67); // Real AE controllers don't have heads!
+            Carving.chisel.addVariation("futura", FalsettoAE, 1, 67);
             Carving.chisel.addVariation("futura", FalsettoAE, 13, 68);
 
             circuits.carverHelper.registerBlock(circuits, "futuraCircuit");
