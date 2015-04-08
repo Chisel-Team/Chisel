@@ -1,5 +1,8 @@
 # 핵심 한글화 (Key localizations)
 
+# 엔티티 한글화 (Entity localizations)
+entity.chisel.snowman.name=눈 골렘
+
 # 아이템 한글화 (Item localizations)
 item.chisel.name=끌
 
@@ -9,6 +12,7 @@ item.chisel.chisel.desc.lc2=끌에 변경된 블록이 있으면 해당 블록�
 item.chisel.chisel.desc.modes=변환 범위를 선택 할 수 있습니다.
 
 item.chisel.chisel_diamond.name=다이아몬드 끌
+item.chisel.chisel_obsidian.name=흑요석 끌
 
 item.ballMoss.name=이끼 공
 item.ballMoss.desc=우클릭으로 던지기. 돌과 조약돌에 이끼가 낍니다.
@@ -29,12 +33,30 @@ item.upgrade_stack.desc=한 번에 작업하는 블록 양을 늘립니다.
 
 #Chisel 2
 
+# 국가 블록 (Nation)
+tile.chisel.nation.name=제국 블록
+tile.chisel.rebel.name=반제국 블록
+tile.nation.0.desc=위장 블록
+tile.nation.1.desc=위장 블록(격리)
+tile.nation.2.desc=볼트 판
+tile.nation.3.desc=하얀색 주의 표시
+tile.nation.4.desc=팀색 주의 표시
+
+# 지붕널 (Shingles)
+tile.chisel.shingles.name=대상포진
+tile.shingles.0.desc=빨간색 사선
+tile.shingles.1.desc=빨간색 작은 사각형
+tile.shingles.2.desc=빨간색 큰 사각형
+tile.shingles.3.desc=검은색 사선
+tile.shingles.4.desc=검은색 작은 사각형
+tile.shingles.5.desc=검은색 큰 사각형
+
 # 발렌타인 (Valentines)
 tile.chisel.valentines.name=발렌타인 블록
 tile.valentines.0.desc=발렌타인 블록
 tile.valentines.1.desc=저라면, 이거 안만져요.
 
-# 형광블록 (AntiBlocks)
+# 형광 블록 (AntiBlocks)
 tile.chisel.antiBlock.name=형광 블록
 tile.antiBlock.black.desc=검은색 형광 블록
 tile.antiBlock.blue.desc=파란색 형광 블록
@@ -58,18 +80,30 @@ tile.chisel.diorite.name=섬록암
 tile.diorite.0.desc=현재 세계에 생성되어있습니다.
 tile.diorite.1.desc=손질된 섬록암
 tile.diorite.2.desc=섬록암 기둥
+tile.diorite.3.desc=섬록암 벽돌
+tile.diorite.4.desc=화려한 섬록암
+tile.diorite.5.desc=각기둥 섬록암
+tile.diorite.6.desc=작은 섬록암 타일
 
 # 안산암 (Andesite)
 tile.chisel.andesite.name=안산암
 tile.andesite.0.desc=현재 세계에 생성되어있습니다.
 tile.andesite.1.desc=손질된 안산암
 tile.andesite.2.desc=안산암 기둥
+tile.andesite.3.desc=안산암 벽돌
+tile.andesite.4.desc=화려한 안산암
+tile.andesite.5.desc=각기둥 안산암
+tile.andesite.6.desc=작은 안산암 타일
 
 # 화강암 (Granite)
 tile.chisel.granite.name=화강암
 tile.granite.0.desc=현재 세계에 생성되어있습니다.
 tile.granite.1.desc=손질된 화강암
 tile.granite.2.desc=화강암 기둥
+tile.granite.3.desc=화강암 벽돌
+tile.granite.4.desc=화려한 화강암
+tile.granite.5.desc=각기둥 화강암
+tile.granite.6.desc=작은 화강암 타일
 
 # 자동화 끌 (Auto Chisel)
 tile.chisel.autoChisel.name=자동화 끌
@@ -77,6 +111,7 @@ autochisel.slot.chisel.tooltip=끌 넣는 곳
 autochisel.slot.target.tooltip=견본 넣는 곳
 
 # 나뭇잎 (Leaves)
+tile.chisel.leaves.name=나뭇잎
 tile.leaves.6.desc=죽은 나뭇잎
 tile.leaves.7.desc=특이한 나뭇잎
 tile.leaves.8.desc=벚꽃잎
@@ -95,6 +130,22 @@ tile.voidstone.4.desc=룬이 새겨진 공허석
 tile.voidstone.5.desc=금속 테두리의 공허석
 tile.voidstone.6.desc=눈 문양의 공허석
 tile.voidstone.7.desc=모서리를 다듬은 공허석
+tile.chisel.voidstoneRunic.name=룬이 새겨진 공허석
+tile.voidstoneRunic.0.desc=공허석 - 주황색 룬
+tile.voidstoneRunic.1.desc=공허석 - 자홍색 룬
+tile.voidstoneRunic.2.desc=공허석 - 하늘색 룬
+tile.voidstoneRunic.3.desc=공허석 - 노란색 룬
+tile.voidstoneRunic.4.desc=공허석 - 연두색 룬
+tile.voidstoneRunic.5.desc=공허석 - 분홍색 룬
+tile.voidstoneRunic.6.desc=공허석 - 회색 룬
+tile.voidstoneRunic.7.desc=공허석 - 밝은 회색 룬
+tile.voidstoneRunic.8.desc=공허석 - 청록색 룬
+tile.voidstoneRunic.9.desc=공허석 - 보라색 룬
+tile.voidstoneRunic.10.desc=공허석 - 파란색 룬
+tile.voidstoneRunic.11.desc=공허석 - 갈색 룬
+tile.voidstoneRunic.12.desc=공허석 - 초록색 룬
+tile.voidstoneRunic.13.desc=공허석 - 빨간색 룬
+tile.voidstoneRunic.14.desc=공허석 - 검은색 룬
 
 # 공허석 기둥 (Void Stone Pillars)
 tile.chisel.voidstonePillar.name=공허석 기둥
@@ -143,7 +194,10 @@ tile.arcane.4.desc=빛나는 룬 문양
 tile.arcane.5.desc=벽돌
 tile.arcane.6.desc=시간의 도관
 tile.arcane.7.desc=뇌에에에
-tile.arcane.8.desc=공간의 도관
+tile.arcane.8.desc=지옥의 비전
+tile.arcane.9.desc=불쾌한 나스카 라인
+tile.arcane.10.desc=선명한 사움술사의 상징
+tile.arcane.11.desc=엘드리치의 빛이 새어나오는 돌
 
 # 사우뮴 블록 (Thaumium)
 tile.chisel.thaumium.name=사우뮴 블록
@@ -156,9 +210,8 @@ tile.thaumium.5.desc=구속된 목재
 
 # 수지 블록 (Tallow)
 tile.chisel.tallow.name=수지 블록
-tile.tallow.0.desc=
-tile.tallow.1.desc=부드러운 수지 블록
-tile.tallow.2.desc=혼이 담긴 수지 블록
+tile.tallow.0.desc=부드러운 수지 블록
+tile.tallow.1.desc=혼이 담긴 수지 블록
 
 # 피의 룬 (Blood Rune)
 tile.chisel.bloodRune.name=피의 룬
@@ -171,10 +224,27 @@ tile.bloodRune.5.desc=피의 룬 타일
 
 # 미래적 블록 (Futura)
 tile.chisel.futura.name=미래적 블록
+tile.chisel.futuraCircuit.name=미래적 회로
 tile.futura.0.desc=빛나는 화면과 금속 테두리
 tile.futura.1.desc=빛나는 화면과 청록색 테두리
-#tile.futura.2.desc=Applied Labyrinthic Neon Lines
-#tile.futura.3.desc=Poptart Rainbow
+tile.futura.2.desc=응용 에너지학 네온 회선
+tile.futura.3.desc=팝타르 무지개
+tile.futuraCircuit.black.desc=검은색
+tile.futuraCircuit.blue.desc=파란색
+tile.futuraCircuit.brown.desc=갈색
+tile.futuraCircuit.cyan.desc=청록색
+tile.futuraCircuit.green.desc=초록색
+tile.futuraCircuit.light_blue.desc=하늘색
+tile.futuraCircuit.silver.desc=밝은 회색
+tile.futuraCircuit.lime.desc=연두색
+tile.futuraCircuit.magenta.desc=자홍색
+tile.futuraCircuit.orange.desc=주황색
+tile.futuraCircuit.pink.desc=분홍색
+tile.futuraCircuit.purple.desc=보라색
+tile.futuraCircuit.red.desc=빨간색
+tile.futuraCircuit.white.desc=하얀색
+tile.futuraCircuit.yellow.desc=노란색
+tile.futuraCircuit.gray.desc=회색
 
 # 수석 (Waterstone)
 tile.chisel.waterstone.name=수석
@@ -205,6 +275,9 @@ tile.hexPlating.white.desc=하얀색 육각 무늬 판
 tile.hexPlating.yellow.desc=노란색 육각 무늬 판
 tile.hexPlating.gray.desc=회색 육각 무늬 판
 
+# 대형 육각 무늬 판 (Hex Large Plating)
+tile.chisel.hexLargePlating.name=대형 육각 무늬 판
+
 # 음산한 돌 (Grimstone)
 tile.chisel.grimstone.name=음산한 돌
 tile.grimstone.0.desc=음산한 돌
@@ -225,6 +298,8 @@ tile.grimstone.14.desc=벗겨진 음산한 돌
 
 # 기술 블록 (Technical Block)
 tile.chisel.technical.name=기술 블록
+tile.chisel.technical2.name=투명 기술 블록
+tile.chisel.technical3.name=산업 기술 블록
 tile.technical.0.desc=비계
 tile.technical.1.desc=경고 테두리 패널
 #tile.technical.2.desc=An Old Relic from the land of Oneteufyv
@@ -241,7 +316,8 @@ tile.technical.12.desc=녹슨 패널
 tile.technical.13.desc=창살
 tile.technical.14.desc=환풍기 (불량)
 tile.technical.15.desc=녹슨 창살
-tile.chisel.technical2.name=투명 기술 블록
+tile.technical3.0.desc=나는 거대한 팬의 광팬이에요!
+tile.technical3.1.desc=산업 강화판
 
 # 금속 블록 (Metal Blocks)
 tile.chisel.aluminumblock.name=알루미늄 블록
@@ -420,7 +496,6 @@ tile.chisel.marble_stairs.5.name=대리석 계단
 tile.chisel.marble_stairs.6.name=대리석 계단
 tile.chisel.marble_stairs.7.name=대리석 계단
 
-# 대리석 계단 (Marble Stairs)
 #These are bugged.... so sad :,(
 tile.marbleStairs.0.desc=가공 안된 대리석 계단
 tile.marbleStairs.1.desc=대리석 벽돌 계단
@@ -526,6 +601,12 @@ tile.factory.13.desc=통풍구가 있는 마모된 금속 벽
 tile.factory.14.desc=녹슨 금속 판
 tile.factory.15.desc=마모된 금속 기둥
 
+tile.chisel.factoryblock2.name=공장 블록
+tile.factory2.0.desc=파란색 네온 판
+tile.factory2.1.desc=수직 통풍구
+tile.factory2.2.desc=금속성 파란색 회로판
+tile.factory2.3.desc=파란색 와이어 프레임
+
 # 다이아몬드 블록 (Diamond blocks)
 tile.chisel.diamond_block.name=다이아몬드 블록
 tile.diamond.1.desc=밝은 다이아몬드 블록
@@ -563,6 +644,9 @@ tile.glass.12.desc=테두리가 없는 유리
 tile.glass.13.desc=두꺼운 격자 유리
 tile.glass.14.desc=얇은 격자 유리
 tile.glass.15.desc=현대적인 철 울타리
+
+tile.chisel.glass2.name=유리
+tile.glass2.0.desc=비대칭의 납이 섞인 유리
 
 # 사암 (Sandstone)
 tile.chisel.sandstone.name=사암
@@ -738,6 +822,10 @@ tile.stoneMoss.15.desc=이끼 낀 어두운 조약돌 패널
 
 # 석재 벽돌 (Stone Bricks)
 tile.chisel.stonebricksmooth.name=석재 벽돌
+tile.stonebricksmooth.0.desc=현대적인 기본 벽돌
+tile.stonebricksmooth.1.desc=현대적인 규장질 벽돌
+tile.stonebricksmooth.2.desc=현대적인 고철질 벽돌
+tile.stonebricksmooth.3.desc=현대적인 혼합된 벽돌
 tile.stonebricksmooth.4.desc=작은 석재 벽돌
 tile.stonebricksmooth.5.desc=넓은 석재 벽돌
 tile.stonebricksmooth.6.desc=작고 복잡한 석재 벽돌
