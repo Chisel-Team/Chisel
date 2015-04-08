@@ -225,6 +225,7 @@ tile.bloodRune.5.desc=Blood Rune Tiles
 #Futura
 tile.chisel.futura.name=Futura Block
 tile.chisel.futuraCircuit.name=Futura Circuit
+chisel.fakeController.name=ME Controller?
 tile.futura.0.desc=Glowing Screen with Metallic Borders
 tile.futura.1.desc=Glowing Screen with Cyan Borders
 tile.futura.2.desc=Applied Labyrinthic Neon Lines
