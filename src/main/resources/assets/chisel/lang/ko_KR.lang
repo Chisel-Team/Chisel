@@ -43,7 +43,7 @@ tile.nation.3.desc=하얀색 주의 표시
 tile.nation.4.desc=팀색 주의 표시
 
 # 지붕널 (Shingles)
-tile.chisel.shingles.name=대상포진
+tile.chisel.shingles.name=지붕널
 tile.shingles.0.desc=빨간색 사선
 tile.shingles.1.desc=빨간색 작은 사각형
 tile.shingles.2.desc=빨간색 큰 사각형
