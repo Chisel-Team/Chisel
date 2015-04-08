@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.common.block;
 
+import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.common.CarvableBlocks;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.Block;
@@ -18,14 +19,37 @@ public class ItemChiselBlock extends ItemBlock{
     public ItemChiselBlock(Block block){
         super(block);
         BlockCarvable b = (BlockCarvable)block;
+        CarvableBlocks bl = CarvableBlocks.getBlock(b);
         this.setHasSubtypes(true);
-        this.variations= CarvableBlocks.getBlock(b).getVariants();
+        if (b.getIndex()==0) {
+            this.variations = bl.getVariants();
+        } else {
+            int left = (bl.getVariants().length%16);
+            Variation[] var = new Variation[left];
+            int index = b.getIndex()*16;
+            int cur = 0;
+            for (int i=0;i<bl.getVariants().length;i++){
+                if (i>=index&&cur<=var.length){
+                    if (bl.getVariants()[i]==null){
+                        continue;
+                    }
+                    var[cur]=bl.getVariants()[i];
+                    cur++;
+                }
+            }
+            this.variations=var;
+        }
     }
 
 
     public String getUnlocalizedName(ItemStack stack){
-        Variation curVariation = this.variations[stack.getMetadata()];
-        return super.getUnlocalizedName(stack)+"."+curVariation;
+        try {
+            Variation curVariation = this.variations[stack.getMetadata()];
+            return super.getUnlocalizedName(stack)+"."+curVariation;
+        } catch (IndexOutOfBoundsException e){
+            Chisel.logger.info("Meta is: "+stack.getMetadata()+" and length is "+this.variations.length);
+            return super.getUnlocalizedName(stack)+"."+"null";
+        }
     }
 
     public int getMetadata(int meta){

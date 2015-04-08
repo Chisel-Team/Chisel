@@ -81,21 +81,29 @@ public class BlockCarvable extends Block{
     /**
      * Array of all the block resources, each one represents a sub block
      */
-    private ISubBlock[] subBlocks = new ISubBlock[16];
+    private ISubBlock[] subBlocks;
+
+    private int index;
 
 
-    public BlockCarvable(CarvableBlocks type){
-        this(Material.rock, type);
+    public BlockCarvable(CarvableBlocks type, int subBlocksAmount, int index){
+        this(Material.rock, type, subBlocksAmount, index);
     }
 
-    public BlockCarvable(Material material, CarvableBlocks type){
+    public BlockCarvable(Material material, CarvableBlocks type, int subBlocksAmount, int index){
         super(material);
+        subBlocks = new ISubBlock[subBlocksAmount];
         this.type=type;
+        this.index=index;
         setupStates();
         setResistance(10.0F);
         setHardness(2.0F);
         setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
         setUnlocalizedName(type.getName());
+    }
+
+    public int getIndex(){
+        return this.index;
     }
 
     @Override
@@ -106,13 +114,14 @@ public class BlockCarvable extends Block{
     }
 
     private void setupStates(){
+        Variation v = type.getVariants()[getIndex()*16];
         this.setDefaultState(getExtendedBlockState().withProperty(CONNECTED_DOWN, false).
                 withProperty(CONNECTED_UP, false).withProperty(CONNECTED_NORTH, false).withProperty(CONNECTED_SOUTH, false).
                 withProperty(CONNECTED_EAST, false).withProperty(CONNECTED_WEST, false).withProperty(CONNECTED_NORTH_EAST, false).
                 withProperty(CONNECTED_NORTH_WEST, false).withProperty(CONNECTED_NORTH_UP, false).withProperty(CONNECTED_NORTH_DOWN, false).
                 withProperty(CONNECTED_SOUTH_EAST, false).withProperty(CONNECTED_SOUTH_WEST, false).withProperty(CONNECTED_SOUTH_UP, false).
                 withProperty(CONNECTED_SOUTH_DOWN, false).withProperty(CONNECTED_EAST_UP, false).withProperty(CONNECTED_EAST_DOWN, false).
-                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(VARIATION, type.getVariants()[0]));
+                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(VARIATION, v));
     }
 
     public ExtendedBlockState getBaseExtendedState(){
@@ -130,7 +139,7 @@ public class BlockCarvable extends Block{
 
     @Override
     public IBlockState getStateFromMeta(int meta){
-        return getBlockState().getBaseState().withProperty(VARIATION, Variation.fromMeta(type, meta));
+        return getBlockState().getBaseState().withProperty(VARIATION, Variation.fromMeta(type, meta, getIndex()));
     }
 
     @Override
@@ -144,7 +153,7 @@ public class BlockCarvable extends Block{
      */
     public void addSubBlock(ISubBlock subBlock) {
         if (!hasSubBlock(subBlock)){
-            for (int i=0;i<16;i++){
+            for (int i=0;i<subBlocks.length;i++){
                 if (subBlocks[i]==null){
                     subBlocks[i]=subBlock;
                     Chisel.logger.info("Adding Sub Block "+subBlock.getName()+" to "+this.getName());
@@ -389,12 +398,17 @@ public class BlockCarvable extends Block{
         return 0xf<<20;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List list){
-        for (int i=0;i<subBlocks.length;i++){
-            ISubBlock sub = subBlocks[i];
-            ItemStack stack = new ItemStack(item, 1, i);
-            CTMBlockResources r = SubBlockUtil.getResources(sub);
+        int curIndex = 0;
+        for (ISubBlock sub : subBlocks){
+            if (sub==null){
+                continue;
+            }
+            ItemStack stack = new ItemStack(item, 1, curIndex);
+            curIndex++;
+            //CTMBlockResources r = SubBlockUtil.getResources(sub);
             //setLore(stack, r.getLore());
             list.add(stack);
         }

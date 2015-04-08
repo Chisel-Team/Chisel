@@ -81,7 +81,7 @@ public class ModelCTM implements ISmartBlockModel {
 
     @Override
     public IBakedModel handleBlockState(IBlockState state) {
-        //throw new RuntimeException(state.getValue(BlockCarvable.VARIATION).toString());
+        // /throw new RuntimeException(state.getValue(BlockCarvable.VARIATION).toString());
         Chisel.logger.info("Handling block state for "+state.toString());
         List<BakedQuad> newQuads = generateQuads(state);
         this.quads = newQuads;

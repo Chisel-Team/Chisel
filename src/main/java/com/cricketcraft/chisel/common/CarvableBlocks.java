@@ -31,7 +31,7 @@ public enum CarvableBlocks implements Reference{
 
     ANTIBLOCK("antiblock"){
         @Override
-        public Variation[] getVariants(){
+        protected Variation[] createVariations(){
             return Variation.getColors();
         }
 
@@ -45,6 +45,7 @@ public enum CarvableBlocks implements Reference{
 
     protected String name;
     private static Map<String, BlockCarvable> blocks = new HashMap<String, BlockCarvable>();
+    private Variation[] variations;
 
     public static BlockCarvable getBlockWithName(String name){
         return blocks.get(name);
@@ -57,6 +58,7 @@ public enum CarvableBlocks implements Reference{
 
     CarvableBlocks(String name){
         this.name=name;
+        variations=createVariations();
     }
 
     /**
@@ -73,9 +75,15 @@ public enum CarvableBlocks implements Reference{
      * @return The Variants
      */
     public Variation[] getVariants(){
-        //return new Variation[]{Variation.DEFAULT};
-        throw new RuntimeException("Not getting overwritten");
+        return variations;
+        //throw new RuntimeException("Not getting overwritten");
     }
+
+    protected Variation[] createVariations(){
+        return new Variation[0];
+    }
+
+
 
     /**
      * Gets the block it is based on. So if this is chiselable cobblestone it will return Blocks.cobblestone
@@ -106,26 +114,63 @@ public enum CarvableBlocks implements Reference{
             if (!shouldBlockLoad(b)){
                 continue;
             }
-            BlockCarvable block = new BlockCarvable(b);
-            for (Variation v : b.getVariants()){
-                if (isCTM(b.getName(), v.getValue())){
-                    CTMModelRegistry.register(b.getName(), v.getValue());
-                    CTMBlockResources.preGenerateBlockResources(block, v.getValue());
+
+            //BlockCarvable block = new BlockCarvable(b, b.getVariants().length);
+            Variation[][] var = splitVariationArray(b.getVariants());
+            for (int i=0;i<var.length;i++) {
+                Variation[] vArray = var[i];
+                BlockCarvable block = new BlockCarvable(b,vArray.length, i);
+                for (Variation v : b.getVariants()) {
+                    if (isCTM(b.getName(), v.getValue())) {
+                        CTMModelRegistry.register(b.getName(), v.getValue(), var.length);
+                        CTMBlockResources.preGenerateBlockResources(block, v.getValue());
+                    }
+                }
+                if (i==0) {
+                    blocks.put(b.getName(), block);
+                }
+                else {
+                    blocks.put(b.getName()+i, block);
                 }
             }
-            blocks.put(b.getName(), block);
         }
     }
 
+
     public static void initBlocks(){
-        for (BlockCarvable block : blocks.values()){
-            for (Variation v : block.getType().getVariants()){
+        for (int i=0;i<blocks.size();i++){
+            BlockCarvable block = (BlockCarvable)blocks.values().toArray()[i];
+            for (int h=0;h<block.getType().getVariants().length;h++){
+                Variation v = block.getType().getVariants()[h];
+                if (block.getIndex()!=0){
+                    int exclusion = block.getIndex()*16;
+                    //Chisel.logger.info("i is "+i);
+                    if (h<exclusion){
+                        Chisel.logger.info("Exluding "+v.getName()+" from block "+blocks.keySet().toArray()[i]);
+                        continue;
+                    }
+                }
                 if (isCTM(block.getName(), v.getValue())){
                     block.addSubBlock(CTMSubBlock.generateSubBlock(block, v.getValue(), "Default Sub Block"));
                 }
             }
-            GameRegistry.registerBlock(block, ItemChiselBlock.class, block.getName());
+            GameRegistry.registerBlock(block, ItemChiselBlock.class, (String)blocks.keySet().toArray()[i]);
         }
+    }
+
+    private static Variation[][] splitVariationArray(Variation[] array){
+        int bound = ((int)Math.ceil(array.length/16)+1);
+        Variation[][] vars = new Variation[bound][16];
+        for (int i=0;i<array.length;i++){
+            int cur = (int)i/16;
+            if (cur>=bound){
+                continue;
+            }
+            int leftover = (i%16);
+            //Chisel.logger.info("cur: "+cur+" leftover: "+leftover);
+            vars[cur][leftover] = array[i];
+        }
+        return vars;
     }
 
     private static boolean shouldBlockLoad(CarvableBlocks c){

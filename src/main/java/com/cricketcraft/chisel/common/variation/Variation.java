@@ -3,6 +3,7 @@ package com.cricketcraft.chisel.common.variation;
 import com.cricketcraft.chisel.common.CarvableBlocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.IStringSerializable;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  * Represents a variation of a chisel block
@@ -34,11 +35,6 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
 
     private Variation(String value){
         this.value=value;
-        for (Variation v : PropertyVariation.values){
-            if (v.equals(this)){
-                return;
-            }
-        }
         PropertyVariation.values.add(this);
     }
 
@@ -50,6 +46,11 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
 
 
     public static Variation createVariation(String value){
+        for (Variation v : PropertyVariation.values){
+            if (v.getValue().equals(value)){
+                return v;
+            }
+        }
         return new Variation(value);
     }
 
@@ -64,6 +65,16 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
 
 
     /**
+     * Returns a variation array of main and colors
+     * @param main The Main variations
+     * @return main + colors
+     */
+    public static Variation[] withColors(Variation[] main){
+        return ArrayUtils.addAll(getColors(), main);
+    }
+
+
+    /**
      * Gets the meta value for a variation
      * @param blocks The Block it is
      * @param v The Variation it is
@@ -73,17 +84,24 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
         for (int i=0;i<blocks.getVariants().length;i++){
             Variation l = blocks.getVariants()[i];
             if (l.equals(v)) {
+                if (i>=16){
+                    return i%16;
+                }
                 return i;
             }
         }
         return 0;
     }
 
-    public static Variation fromMeta(CarvableBlocks block, int meta){
+    public static Variation fromMeta(CarvableBlocks block, int meta, int index){
         if (block==null){
             throw new RuntimeException(""+block);
         }
-        return block.getVariants()[meta];
+        try {
+            return block.getVariants()[(index * 16) + meta];
+        } catch (ArrayIndexOutOfBoundsException e){
+            return block.getVariants()[index*16];
+        }
     }
 
 
