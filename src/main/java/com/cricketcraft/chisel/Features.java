@@ -775,7 +775,15 @@ public enum Features {
 			futura.carverHelper.addVariation("tile.futura.2.desc", 2, "futura/WIP/controllerWIP");
 			futura.carverHelper.addVariation("tile.futura.3.desc", 3, "futura/WIP/wavyWIP");
 			futura.carverHelper.registerAll(futura, "futura");
-			Carving.chisel.registerOre("futura", "futura");
+
+            BlockCarvable circuits = (BlockCarvable) new BlockCarvableGlow("animations/strobe").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+            for (int i = 0; i < 16; i++) {
+                circuits.carverHelper.addVariation("tile.futuraCircuit." + ItemDye.field_150921_b[i] + ".desc", i, "futura/circuitPlate");
+            }
+
+            circuits.carverHelper.registerBlock(circuits, "futuraCircuit");
+            circuits.carverHelper.registerVariations("futura", circuits);
+            Carving.chisel.registerOre("futura", "futura");
 		}
 
 		@Override
@@ -1020,14 +1028,14 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-            BlockCarvable hexPlating = (BlockCarvable) new BlockCarvableGlow("hexPlating/hexAnim").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+            BlockCarvable hexPlating = (BlockCarvable) new BlockCarvableGlow("animations/shroud").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
             for (int i = 0; i < 16; i++) {
                 hexPlating.carverHelper.addVariation("tile.hexPlating." + ItemDye.field_150921_b[i] + ".desc", i, "hexPlating/hexBase");
             }
             hexPlating.carverHelper.registerAll(hexPlating, "hexPlating");
             Carving.chisel.registerOre("hexPlating", "hexPlating");
 
-            BlockCarvable hexLargePlating = (BlockCarvable) new BlockCarvableGlow("hexPlating/hexAnim").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+            BlockCarvable hexLargePlating = (BlockCarvable) new BlockCarvableGlow("animations/shroud").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
             for (int i = 0; i < 16; i++) {
                 hexLargePlating.carverHelper.addVariation("tile.hexPlating." + ItemDye.field_150921_b[i] + ".desc", i, "hexPlating/hexNew");
             }

@@ -224,10 +224,27 @@ tile.bloodRune.5.desc=Blood Rune Tiles
 
 #Futura
 tile.chisel.futura.name=Futura Block
+tile.chisel.futuraCircuit.name=Futura Circuit
 tile.futura.0.desc=Glowing Screen with Metallic Borders
 tile.futura.1.desc=Glowing Screen with Cyan Borders
 tile.futura.2.desc=Applied Labyrinthic Neon Lines
 tile.futura.3.desc=Poptart Rainbow
+tile.futuraCircuit.black.desc=Black
+tile.futuraCircuit.blue.desc=Blue
+tile.futuraCircuit.brown.desc=Brown
+tile.futuraCircuit.cyan.desc=Cyan
+tile.futuraCircuit.green.desc=Green
+tile.futuraCircuit.light_blue.desc=Light Blue
+tile.futuraCircuit.silver.desc=Light Gray
+tile.futuraCircuit.lime.desc=Lime
+tile.futuraCircuit.magenta.desc=Magenta
+tile.futuraCircuit.orange.desc=Orange
+tile.futuraCircuit.pink.desc=Pink
+tile.futuraCircuit.purple.desc=Purple
+tile.futuraCircuit.red.desc=Red
+tile.futuraCircuit.white.desc=White
+tile.futuraCircuit.yellow.desc=Yellow
+tile.futuraCircuit.gray.desc=Gray
 
 #Waterstone
 tile.chisel.waterstone.name=Waterstone
