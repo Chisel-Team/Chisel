@@ -2683,7 +2683,7 @@ public enum Features {
 			voidstoneRunic.carverHelper.setChiselBlockName("Voidstone Runic");
 
 			for (int i = 1; i < 16; i++)
-				voidstoneRunic.carverHelper.addVariation("tile.voidstoneRunic." + i + ".desc", i, "voidstone/runes/rune" + sGNames[i].replaceAll(" ", ""));
+				voidstoneRunic.carverHelper.addVariation("tile.voidstoneRunic." + sGNames[i].replaceAll(" ", "").toLowerCase() + ".desc", i, "voidstone/runes/rune" + sGNames[i].replaceAll(" ", ""));
 			voidstoneRunic.carverHelper.registerAll(voidstoneRunic, "voidstoneRunic");
 			voidstoneRunic.carverHelper.registerVariations("voidstone", voidstoneRunic);
 
