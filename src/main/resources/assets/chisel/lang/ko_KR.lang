@@ -225,6 +225,7 @@ tile.bloodRune.5.desc=피의 룬 타일
 # 미래적 블록 (Futura)
 tile.chisel.futura.name=미래적 블록
 tile.chisel.futuraCircuit.name=미래적 회로
+tile.chisel.fakeController.name=ME 제어기?
 tile.futura.0.desc=빛나는 화면과 금속 테두리
 tile.futura.1.desc=빛나는 화면과 청록색 테두리
 tile.futura.2.desc=응용 에너지학 네온 회선
