@@ -16,14 +16,9 @@ public class CTMSubBlock extends SubBlock implements ICTMSubBlock{
 
     private CTMBlockResources resources;
 
-    public CTMSubBlock(String name, BlockCarvable parent, CTMBlockResources resources){
-        super(name, parent);
+    public CTMSubBlock(String name, BlockCarvable parent, CTMBlockResources resources) {
+        super(null, name, parent);
         this.resources=resources;
-    }
-
-    public CTMSubBlock(String name, BlockCarvable parent){
-        super(name, parent);
-
     }
 
     public CTMBlockResources getResources(){

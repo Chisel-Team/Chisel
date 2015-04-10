@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.common.block.subblocks;
 
+import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 
 /**
@@ -9,7 +10,6 @@ import com.cricketcraft.chisel.common.block.BlockCarvable;
  */
 public interface ISubBlock {
 
-    public String getName();
 
-    public BlockCarvable getParent();
+    public IBlockResources getResources();
 }

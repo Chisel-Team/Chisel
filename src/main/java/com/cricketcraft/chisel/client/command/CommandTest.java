@@ -40,10 +40,10 @@ public class CommandTest implements ICommand{
     }
 
     public void processCommand(ICommandSender var1, String[] var2) throws CommandException{
-        BlockCarvable block = CarvableBlocks.ANTIBLOCK.getBlock();
-        for (ISubBlock s : block.allSubBlocks()){
-            var1.addChatMessage(new ChatComponentText(s.getName()));
-        }
+//        BlockCarvable block = CarvableBlocks.ANTIBLOCK.getBlock();
+//        for (ISubBlock s : block.allSubBlocks()){
+//            var1.addChatMessage(new ChatComponentText(s.getName()));
+//        }
     }
 
     public boolean canCommandSenderUseCommand(ICommandSender var1){

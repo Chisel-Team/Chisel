@@ -156,7 +156,7 @@ public class BlockCarvable extends Block{
             for (int i=0;i<subBlocks.length;i++){
                 if (subBlocks[i]==null){
                     subBlocks[i]=subBlock;
-                    Chisel.logger.info("Adding Sub Block "+subBlock.getName()+" to "+this.getName());
+                    //Chisel.logger.info("Adding Sub Block "+subBlock.getName()+" to "+this.getName());
                     return;
                 }
             }
@@ -195,7 +195,7 @@ public class BlockCarvable extends Block{
     public ISubBlock getSubBlock(Variation v){
         Chisel.logger.info("meta: "+Variation.metaFromVariation(type, v));
         ISubBlock block = subBlocks[Variation.metaFromVariation(type, v)];
-        Chisel.logger.info("Returning sub block "+block.getName());
+        //Chisel.logger.info("Returning sub block "+block.getName());
         return block;
     }
 

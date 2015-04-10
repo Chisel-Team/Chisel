@@ -28,6 +28,7 @@ public class CTMBlockResources extends BlockResources{
     public CTMBlockResources(BlockCarvable parent, String name, List<String> lore, TextureAtlasSprite texture, TextureAtlasSprite ctmTexture){
         super(parent, name, lore, texture);
         this.ctmTexture=ctmTexture;
+        this.texture=texture;
         allResources.add(this);
     }
 
@@ -56,16 +57,4 @@ public class CTMBlockResources extends BlockResources{
         TextureStitcher.register(prefix+subBlockName+"-ctm");
     }
 
-    public void refresh(TextureMap map){
-        texture = map.getAtlasSprite(texture.getIconName());
-        ctmTexture = map.getAtlasSprite(ctmTexture.getIconName());
-        Chisel.logger.info("Real name is "+ctmTexture.getIconName());
-    }
-
-    public static void refreshAll(TextureMap map){
-        for (CTMBlockResources resource : allResources){
-            resource.refresh(map);
-            Chisel.logger.info("Refreshing Resource "+resource.getVariantName()+"-"+resource.getParent().getName());
-        }
-    }
 }

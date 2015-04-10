@@ -3,10 +3,12 @@ package com.cricketcraft.chisel.common;
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.BlockResources;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
+import com.cricketcraft.chisel.client.render.NonCTMModelRegistry;
 import com.cricketcraft.chisel.client.render.ctm.CTMModelRegistry;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.ItemChiselBlock;
 import com.cricketcraft.chisel.common.block.subblocks.CTMSubBlock;
+import com.cricketcraft.chisel.common.block.subblocks.SubBlock;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSandStone;
@@ -125,7 +127,12 @@ public enum CarvableBlocks implements Reference{
                         CTMModelRegistry.register(b.getName(), v.getValue(), var.length);
                         CTMBlockResources.preGenerateBlockResources(block, v.getValue());
                     }
+                    else {
+                        NonCTMModelRegistry.register(b.getName(), v.getValue(), var.length);
+                        BlockResources.preGenerateBlockResources(block, v.getValue());
+                    }
                 }
+                NonCTMModelRegistry.registerInventory(b, var.length);
                 if (i==0) {
                     blocks.put(b.getName(), block);
                 }
@@ -151,7 +158,10 @@ public enum CarvableBlocks implements Reference{
                     }
                 }
                 if (isCTM(block.getName(), v.getValue())){
-                    block.addSubBlock(CTMSubBlock.generateSubBlock(block, v.getValue(), "Default Sub Block"));
+                    block.addSubBlock(CTMSubBlock.generateSubBlock(block, v.getValue(), "Default CTM Sub Block"));
+                }
+                else {
+                    block.addSubBlock(SubBlock.generateSubBlock(block, v.getValue(), "Default Non CTM Sub block"));
                 }
             }
             GameRegistry.registerBlock(block, ItemChiselBlock.class, (String)blocks.keySet().toArray()[i]);
@@ -159,6 +169,9 @@ public enum CarvableBlocks implements Reference{
     }
 
     private static Variation[][] splitVariationArray(Variation[] array){
+        if (array.length<=16){
+            return new Variation[][]{array};
+        }
         int bound = ((int)Math.ceil(array.length/16)+1);
         Variation[][] vars = new Variation[bound][16];
         for (int i=0;i<array.length;i++){
