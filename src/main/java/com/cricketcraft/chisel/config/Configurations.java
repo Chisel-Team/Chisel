@@ -53,6 +53,8 @@ public class Configurations {
 
 	public static int[] configColors = new int[ItemDye.field_150923_a.length];
 
+	public static boolean fullBlockConcrete;
+
 	public static boolean refreshConfig() {
 
 		String category;
@@ -61,6 +63,7 @@ public class Configurations {
 		category = "general";
 		concreteVelocity = config.get(category, "concreteVelocity", 0.45,
 				"Traversing concrete roads, players will acceleration to this velocity. For reference, normal running speed is about 0.28. Set to 0 to disable acceleration.").getDouble(0.45);
+		fullBlockConcrete = config.get(category, "fullBlockConcrete", false, "Should concrete be a full block. This will also unavoidably disable speed increase if set to true.").getBoolean(false);
 		ghostCloud = config.get(category, "doesCloudRenderLikeGhost", true).getBoolean(true);
 		factoryBlockAmount = config.get(category, "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
 		allowMossy = config.get(category, "allowBrickToMossyInChisel", true, "If true, you can chisel stone brick to mossy stone brick.").getBoolean(true);
