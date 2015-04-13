@@ -13,4 +13,9 @@ public class ClientProxy extends CommonProxy{
     public void init(){
 
     }
+
+    @Override
+    public boolean isClient(){
+        return true;
+    }
 }

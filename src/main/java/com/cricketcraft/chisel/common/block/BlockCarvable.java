@@ -414,15 +414,16 @@ public class BlockCarvable extends Block{
         }
     }
 
-    public static void setLore(ItemStack stack, List<String> lore){
-        NBTTagCompound compound = new NBTTagCompound();
-        NBTTagList list = new NBTTagList();
-        for (String s : lore){
-            list.appendTag(new NBTTagString(s));
-        }
-        compound.setTag("lore", list);
-        NBTTagCompound itemCompound = new NBTTagCompound();
-        itemCompound.setTag("display", compound);
-        stack.setTagCompound(itemCompound);
-    }
+
+    @Override
+    public int getRenderType() { return 3; }
+
+    @Override
+    public boolean isOpaqueCube() { return false; }
+
+    @Override
+    public boolean isFullCube() { return false; }
+
+    @Override
+    public boolean isVisuallyOpaque() { return false; }
 }

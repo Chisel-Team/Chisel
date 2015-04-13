@@ -14,8 +14,17 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -131,6 +140,10 @@ public enum CarvableBlocks implements Reference{
                         NonCTMModelRegistry.register(b.getName(), v.getValue(), var.length);
                         BlockResources.preGenerateBlockResources(block, v.getValue());
                     }
+                    //ModelResourceLocation location;
+                    //location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":antiblock", "inventory");
+                    //Chisel.logger.info("Location is "+location.toString());
+                    //ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Variation.metaFromVariation(b, v), location);
                 }
                 NonCTMModelRegistry.registerInventory(b, var.length);
                 if (i==0) {
@@ -141,6 +154,23 @@ public enum CarvableBlocks implements Reference{
                 }
             }
         }
+        for (int i=0;i<blocks.size();i++){
+            BlockCarvable block = (BlockCarvable)blocks.values().toArray()[i];
+            final ModelResourceLocation location;
+            if (block.getIndex()==0) {
+                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":"+block.getName(), "inventory");
+            } else {
+                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":"+block.getName()+i, "inventory");
+            }
+            GameRegistry.registerBlock(block, ItemChiselBlock.class, (String)blocks.keySet().toArray()[i]);
+            Chisel.logger.info("Item is " + Item.getItemFromBlock(block) + " and name is " + block.getName() + " and index is " + block.getIndex());
+            Chisel.logger.info("Location is "+location.toString());
+            for (Variation v : block.getType().getVariants()){
+                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Variation.metaFromVariation(block.getType(), v), location);
+            }
+            //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), block.getIndex(), location);
+        }
+
     }
 
 
@@ -164,7 +194,13 @@ public enum CarvableBlocks implements Reference{
                     block.addSubBlock(SubBlock.generateSubBlock(block, v.getValue(), "Default Non CTM Sub block"));
                 }
             }
-            GameRegistry.registerBlock(block, ItemChiselBlock.class, (String)blocks.keySet().toArray()[i]);
+//            final ModelResourceLocation location;
+//            if (block.getIndex()==0) {
+//                location = new ModelResourceLocation(MOD_ID.toLowerCase() + block.getName(), "inventory");
+//            } else {
+//                location = new ModelResourceLocation(MOD_ID.toLowerCase() + block.getName()+i, "inventory");
+//            }
+//            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), block.getIndex(), location);
         }
     }
 

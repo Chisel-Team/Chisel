@@ -49,7 +49,6 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
 
     @Override
     public IBakedModel handleItemState(ItemStack stack){
-        Chisel.logger.info("Handling item stack");
         if (stack.getItem() instanceof ItemChiselBlock){
             ItemChiselBlock itemBlock = (ItemChiselBlock)stack.getItem();
             if (itemBlock.getBlock() instanceof  BlockCarvable){

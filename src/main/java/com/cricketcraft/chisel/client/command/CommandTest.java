@@ -6,6 +6,10 @@ import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
 import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiIngame;
+import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelManager;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
@@ -40,10 +44,23 @@ public class CommandTest implements ICommand{
     }
 
     public void processCommand(ICommandSender var1, String[] var2) throws CommandException{
-//        BlockCarvable block = CarvableBlocks.ANTIBLOCK.getBlock();
-//        for (ISubBlock s : block.allSubBlocks()){
-//            var1.addChatMessage(new ChatComponentText(s.getName()));
-//        }
+        try {
+            Field f = GuiIngame.class.getDeclaredField("itemRenderer");
+            f.setAccessible(true);
+            RenderItem renderer =  (RenderItem)f.get(Minecraft.getMinecraft().ingameGUI);
+            Field f2 = RenderItem.class.getDeclaredField("itemModelMesher");
+            f2.setAccessible(true);
+            ItemModelMesher mesher = (ItemModelMesher)f2.get(renderer);
+            Field f3 = ItemModelMesher.class.getDeclaredField("simpleShapesCache");
+            f3.setAccessible(true);
+            Map shapes = (Map)f3.get(mesher);
+            for (Map.Entry entry : (Set<Map.Entry>)shapes.entrySet()){
+                var1.addChatMessage(new ChatComponentText(entry.getKey().toString()+"="+entry.getValue().toString()));
+            }
+        } catch (Exception e){
+            var1.addChatMessage(new ChatComponentText("error"));
+            e.printStackTrace();
+        }
     }
 
     public boolean canCommandSenderUseCommand(ICommandSender var1){
