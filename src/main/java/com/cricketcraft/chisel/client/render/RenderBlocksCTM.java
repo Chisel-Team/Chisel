@@ -16,13 +16,14 @@ public class RenderBlocksCTM extends RenderBlocks {
 	 *
 	 * The naming scheme is as follows:
 	 *
-	 * ZERO and ONE are special cases, they are the absolute min and absolute max of the block.
-	 * X, Y, Z, or any combination means that the axes listed in the name are at 1.
-	 * X, Y, Z, or any combination followed by HALF means that those axes are at 0.5.
-	 * X, Y, Z, or any combination after a HALF means those axes are at 1.
+	 * ZERO and ONE are special cases, they are the absolute min and absolute
+	 * max of the block. X, Y, Z, or any combination means that the axes listed
+	 * in the name are at 1. X, Y, Z, or any combination followed by HALF means
+	 * that those axes are at 0.5. X, Y, Z, or any combination after a HALF
+	 * means those axes are at 1.
 	 */
 	enum Vert {
-
+		// @formatter:off
 		ZERO(0, 0, 0),
 		XYZ(1, 1, 1),
 		X(1, 0, 0),
@@ -49,6 +50,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		XY_HALF_Z(0.5, 0.5, 1),
 		YZ_HALF_X(1, 0.5, 0.5),
 		XZ_HALF_Y(0.5, 1, 0.5);
+		// @formatter:on
 
 		private double x, y, z;
 
@@ -69,11 +71,14 @@ public class RenderBlocksCTM extends RenderBlocks {
 	}
 
 	/**
-	 * Each side is divided into 4 sub-sides. LB(left bottom), RB(right bottom), LT(right top), and RT(right top).
+	 * Each side is divided into 4 sub-sides. LB(left bottom), RB(right bottom),
+	 * LT(right top), and RT(right top).
 	 *
-	 * Each sub-side contains 4 {@link Vert} objects representing its position on the block.
+	 * Each sub-side contains 4 {@link Vert} objects representing its position
+	 * on the block.
 	 */
 	enum SubSide {
+		// @formatter:off
 		XNEG_LB(ZERO, Z_HALF, YZ_HALF, Y_HALF), XNEG_RB(Z_HALF, Z, Y_HALF_Z, YZ_HALF), XNEG_RT(YZ_HALF, Y_HALF_Z, YZ, Z_HALF_Y), XNEG_LT(Y_HALF, YZ_HALF, Z_HALF_Y, Y),
 		XPOS_LB(XZ, Z_HALF_X, YZ_HALF_X, Y_HALF_XZ), XPOS_RB(Z_HALF_X, X, Y_HALF_X, YZ_HALF_X), XPOS_RT(YZ_HALF_X, Y_HALF_X, XY, Z_HALF_XY), XPOS_LT(Y_HALF_XZ, YZ_HALF_X, Z_HALF_XY, XYZ),
 
@@ -82,6 +87,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 
 		YNEG_LB(ZERO, X_HALF, XZ_HALF, Z_HALF), YNEG_RB(X_HALF, X, Z_HALF_X, XZ_HALF), YNEG_RT(XZ_HALF, Z_HALF_X, XZ, X_HALF_Z), YNEG_LT(Z_HALF, XZ_HALF, X_HALF_Z, Z),
 		YPOS_LB(YZ, X_HALF_YZ, XZ_HALF_Y, Z_HALF_Y), YPOS_RB(X_HALF_YZ, XYZ, Z_HALF_XY, XZ_HALF_Y), YPOS_RT(XZ_HALF_Y, Z_HALF_XY, XY, X_HALF_Y), YPOS_LT(Z_HALF_Y, XZ_HALF_Y, X_HALF_Y, Y);
+		// @formatter:on
 		private Vert xmin, xmax, ymin, ymax;
 
 		SubSide(Vert xmin, Vert ymin, Vert ymax, Vert xmax) {
@@ -129,7 +135,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 
 	int bx, by, bz;
 
-	@Override public boolean renderStandardBlock(Block block, int x, int y, int z) {
+	@Override
+	public boolean renderStandardBlock(Block block, int x, int y, int z) {
 		bx = x;
 		by = y;
 		bz = z;
@@ -146,7 +153,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 		return res;
 	}
 
-	/* This method fills a 3x3 grid of light values based on the four corners, by averaging them together.
+	/* @formatter:off
+	 * This method fills a 3x3 grid of light values based on the four corners, by averaging them together.
 	 *
 	 * 2  TL   x    TR
 	 *
@@ -161,6 +169,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 	 *
 	 * shakes fist in anger
 	 */
+	// @formatter:on
 	void fillLightmap(int bottomLeft, int bottomRight, int topRight, int topLeft) {
 		lightmap[0][0] = bottomLeft;
 		lightmap[2][0] = bottomRight;
@@ -229,8 +238,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 			sunlightBitChannel += (light & 0xF00000);
 		}
 
-		return ((blockLightBitChannel / lightVals.length) & 0xFF) | ((redBitChannel / lightVals.length) & 0xF00) | ((greenBitChannel / lightVals.length) & 0xF000) | (
-				(blueBitChannel / lightVals.length) & 0xF0000) | ((sunlightBitChannel / lightVals.length) & 0xF00000);
+		return ((blockLightBitChannel / lightVals.length) & 0xFF) | ((redBitChannel / lightVals.length) & 0xF00) | ((greenBitChannel / lightVals.length) & 0xF000)
+				| ((blueBitChannel / lightVals.length) & 0xF0000) | ((sunlightBitChannel / lightVals.length) & 0xF00000);
 	}
 
 	void side(SubSide side, int iconIndex) {
@@ -254,7 +263,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 		side.render(this);
 	}
 
-	@Override public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
+	@Override
+	public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
 		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
 			IIcon i = rendererOld.overrideBlockTexture;
 
@@ -281,7 +291,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 		}
 	}
 
-	@Override public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon) {
+	@Override
+	public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon) {
 		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
 			IIcon i = rendererOld.overrideBlockTexture;
 
@@ -307,7 +318,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 		}
 	}
 
-	@Override public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon) {
+	@Override
+	public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon) {
 		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
 			IIcon i = rendererOld.overrideBlockTexture;
 
@@ -333,7 +345,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 		}
 	}
 
-	@Override public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon) {
+	@Override
+	public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon) {
 		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
 			IIcon i = rendererOld.overrideBlockTexture;
 
@@ -359,7 +372,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 		}
 	}
 
-	@Override public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon) {
+	@Override
+	public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon) {
 		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
 			IIcon i = rendererOld.overrideBlockTexture;
 
@@ -385,7 +399,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 		}
 	}
 
-	@Override public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon) {
+	@Override
+	public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon) {
 		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
 			IIcon i = rendererOld.overrideBlockTexture;
 

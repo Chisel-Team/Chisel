@@ -1,15 +1,9 @@
 package com.cricketcraft.chisel.carving;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.carving.CarvableVariation.CarvableVariationCTM;
-import com.cricketcraft.chisel.client.render.CTM;
-import com.cricketcraft.chisel.client.render.TextureSubmap;
-import com.cricketcraft.chisel.compat.FMPIntegration;
-import com.cricketcraft.chisel.config.Configurations;
-import com.cricketcraft.chisel.item.ItemCarvable;
-import com.cricketcraft.chisel.utils.GeneralClient;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
@@ -20,7 +14,14 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.*;
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.client.render.CTM;
+import com.cricketcraft.chisel.client.render.TextureSubmap;
+import com.cricketcraft.chisel.compat.FMPIntegration;
+import com.cricketcraft.chisel.item.ItemCarvable;
+import com.cricketcraft.chisel.utils.GeneralClient;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CarvableHelper {
 
@@ -33,248 +34,19 @@ public class CarvableHelper {
 		void registerIcons(String modName, Block block, IIconRegister register);
 	}
 
-	public enum TextureType implements ISubmapManager {
+	public enum TextureType {
 
-		TOPSIDE("top", "side") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		TOPBOTSIDE("top", "bottom", "side") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		CTM3("ctm1", "ctm2", "ctm3") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		CTMV("ctmv", "top") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		CTMH("ctmh", "top") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		V9("v9") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		V4("v4") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		CTMX("", "ctm") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		R16("r16") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		R9("r9") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		R4("r4") {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		},
-		NORMAL {
-
-			@Override
-			public IIcon getIcon(int side, int meta) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			@Override
-			public void registerIcons(String modName, Block block, IIconRegister register) {
-				// TODO Auto-generated method stub
-				
-			}
-		};
+		TOPSIDE("top", "side"),
+		TOPBOTSIDE("top", "bottom", "side"),
+		CTMV("ctmv", "top"),
+		CTMH("ctmh", "top"),
+		V9("v9"),
+		V4("v4"),
+		CTMX("", "ctm"),
+		R16("r16"),
+		R9("r9"),
+		R4("r4"),
+		NORMAL;
 		
 		private String[] suffixes;
 
@@ -282,7 +54,7 @@ public class CarvableHelper {
 			this.suffixes = suffixes.length == 0 ? new String[] { "" } : suffixes;
 		}
 
-		public static ISubmapManager getManagerFor(String path) {
+		public static TextureType getTypeFor(String path) {
 			for (TextureType t : values()) {
 				boolean matches = true;
 				for (String s : t.suffixes) {
@@ -297,12 +69,6 @@ public class CarvableHelper {
 			}
 			return null;
 		}
-
-		@Override
-		public abstract IIcon getIcon(int side, int meta);
-
-		@Override
-		public abstract IIcon getIcon(IBlockAccess world, int x, int y, int z, int side);
 	}
 
 	private static final Random rand = new Random();
@@ -345,7 +111,7 @@ public class CarvableHelper {
 		if (texture != null) {
 			variation.texture = texture;
 			String path = "/assets/" + Chisel.MOD_ID + "/textures/blocks/" + variation.texture;
-			variation.type = (TextureType) TextureType.getManagerFor(path);
+			variation.type = (TextureType) TextureType.getTypeFor(path);
 		} else {
 			variation.block = block;
 			variation.type = TextureType.TOPBOTSIDE;
@@ -390,8 +156,6 @@ public class CarvableHelper {
 				return variation.iconBot;
 			else
 				return variation.icon;
-		case CTM3:
-			return variation.ctm.seams[0].icons[0];
 		case CTMV:
 			if (side < 2)
 				return variation.iconTop;
@@ -434,13 +198,13 @@ public class CarvableHelper {
 		case TOPSIDE:
 		case TOPBOTSIDE:
 			return getIcon(side, metadata);
-		case CTM3:
-			int tex = CTM.getTexture(world, x, y, z, side);
-
-			int row = tex / 16;
-			int col = tex % 16;
-
-			return variation.ctm.seams[col / 4].icons[col % 4 + row * 4];
+//		case CTM3:
+//			int tex = CTM.getTexture(world, x, y, z, side);
+//
+//			int row = tex / 16;
+//			int col = tex % 16;
+//
+//			return variation.ctm.seams[col / 4].icons[col % 4 + row * 4];
 		case CTMV: {
 			if (side < 2)
 				return variation.iconTop;
@@ -614,13 +378,13 @@ public class CarvableHelper {
 					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
 					variation.iconBot = register.registerIcon(modName + ":" + variation.texture + "-bottom");
 					break;
-				case CTM3:
-					CarvableVariationCTM ctm = new CarvableVariationCTM();
-					ctm.seams[0] = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm1"), 4, 4);
-					ctm.seams[1] = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm2"), 4, 4);
-					ctm.seams[2] = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm3"), 4, 4);
-					variation.ctm = ctm;
-					break;
+//				case CTM3:
+//					CarvableVariationCTM ctm = new CarvableVariationCTM();
+//					ctm.seams[0] = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm1"), 4, 4);
+//					ctm.seams[1] = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm2"), 4, 4);
+//					ctm.seams[2] = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm3"), 4, 4);
+//					variation.ctm = ctm;
+//					break;
 				case CTMV:
 					variation.seamsCtmVert = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctmv"), 2, 2);
 					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
