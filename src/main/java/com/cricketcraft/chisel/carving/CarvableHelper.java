@@ -2,7 +2,6 @@ package com.cricketcraft.chisel.carving;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
@@ -13,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.CTM;
@@ -46,16 +47,21 @@ public class CarvableHelper {
 		R16("r16"),
 		R9("r9"),
 		R4("r4"),
-		NORMAL;
+		NORMAL,
+		CUSTOM;
 		
+		private static final TextureType[] VALUES;
 		private String[] suffixes;
+		static {
+			VALUES = ArrayUtils.subarray(values(), 0, values().length - 1);
+		}
 
 		private TextureType(String... suffixes) {
 			this.suffixes = suffixes.length == 0 ? new String[] { "" } : suffixes;
 		}
 
 		public static TextureType getTypeFor(String path) {
-			for (TextureType t : values()) {
+			for (TextureType t : VALUES) {
 				boolean matches = true;
 				for (String s : t.suffixes) {
 					String res = "".equals(s) ? path + ".png" : path + "-" + s + ".png";
@@ -67,11 +73,9 @@ public class CarvableHelper {
 					return t;
 				}
 			}
-			return null;
+			return CUSTOM;
 		}
 	}
-
-	private static final Random rand = new Random();
 
 	public ArrayList<CarvableVariation> variations = new ArrayList<CarvableVariation>();
 	CarvableVariation[] map = new CarvableVariation[16];
@@ -95,6 +99,10 @@ public class CarvableHelper {
 	}
 
 	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta) {
+		addVariation(description, metadata, texture, block, blockMeta);
+	}
+
+	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, ISubmapManager customManager) {
 		if (variations.size() >= 16)
 			return;
 
@@ -112,6 +120,10 @@ public class CarvableHelper {
 			variation.texture = texture;
 			String path = "/assets/" + Chisel.MOD_ID + "/textures/blocks/" + variation.texture;
 			variation.type = (TextureType) TextureType.getTypeFor(path);
+			if (variation.type == TextureType.CUSTOM && customManager == null) {
+				throw new IllegalArgumentException(String.format("Could not find texture for block %s, and no custom texture manager was provided.", block));
+			}
+			variation.manager = customManager;
 		} else {
 			variation.block = block;
 			variation.type = TextureType.TOPBOTSIDE;
@@ -178,6 +190,8 @@ public class CarvableHelper {
 			return variation.variations9.icons[4];
 		case R4:
 			return variation.variations9.icons[0];
+		case CUSTOM:
+			return variation.manager.getIcon(side, metadata);
 		}
 
 		return GeneralClient.getMissingIcon();
@@ -297,6 +311,8 @@ public class CarvableHelper {
 			// rand.setSeed(indexRan); // Broken
 
 			return variation.variations9.icons[ /* rand */indexRan % ((variation.type == TextureType.R9) ? 9 : 4)];
+		case CUSTOM:
+			return variation.manager.getIcon(world, x, y, z, side);
 		}
 
 		return GeneralClient.getMissingIcon();
@@ -413,6 +429,8 @@ public class CarvableHelper {
 				case R4:
 					variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r4"), 2, 2);
 					break;
+				case CUSTOM:
+					variation.manager.registerIcons(modName, block, register);
 				}
 			}
 		}
