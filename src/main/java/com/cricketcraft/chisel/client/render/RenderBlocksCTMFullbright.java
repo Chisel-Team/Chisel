@@ -1,17 +1,19 @@
 package com.cricketcraft.chisel.client.render;
 
 import com.cricketcraft.chisel.api.client.CTM;
+import com.cricketcraft.chisel.api.client.TextureSubmap;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 
-public class RenderBlocksCTMNoLight extends RenderBlocks {
+// TODO rewrite this to use the updated RenderBlocksCTM code
+public class RenderBlocksCTMFullbright extends RenderBlocks {
 
 	private static CTM ctm = CTM.getInstance();
 	
-	RenderBlocksCTMNoLight() {
+	RenderBlocksCTMFullbright() {
 		super();
 		resetVertices();
 	}
@@ -47,8 +49,18 @@ public class RenderBlocksCTMNoLight extends RenderBlocks {
 	}
 
 	void side(int a, int b, int c, int d, int iconIndex, boolean flip) {
-		IIcon icon = iconIndex >= 16 ? submapSmall.icons[iconIndex - 16] : submap.icons[iconIndex];
-
+		IIcon icon;
+		TextureSubmap map;
+		if (iconIndex >= 16) {
+			iconIndex -= 16;
+			map = submapSmall;
+		} else {
+			map = submap;
+		}
+		int x = iconIndex % map.getWidth();
+		int y = iconIndex / map.getHeight();
+		icon = map.getSubIcon(x, y);
+		
 		double u0 = icon.getMaxU();
 		double u1 = icon.getMinU();
 		double v0 = icon.getMaxV();

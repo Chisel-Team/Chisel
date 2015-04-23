@@ -4,7 +4,7 @@ import com.cricketcraft.chisel.Chisel;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockCarpetRenderer extends BlockAdvancedMarbleRenderer {
+public class BlockCarpetRenderer extends RendererCTM {
 
 	public BlockCarpetRenderer() {
 		super();

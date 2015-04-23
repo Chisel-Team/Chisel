@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.client.render;
 
 import com.cricketcraft.chisel.api.client.CTM;
+import com.cricketcraft.chisel.api.client.TextureSubmap;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -35,11 +36,11 @@ public class RenderBlocksColumn extends RenderBlocks {
 			sides[1] = iconTop;
 
 			if (yp && yn)
-				sides[2] = submap.icons[2];
+				sides[2] = submap.getSubIcon(0, 1);
 			else if (yp)
-				sides[2] = submap.icons[3];
+				sides[2] = submap.getSubIcon(1, 1);
 			else
-				sides[2] = submap.icons[1];
+				sides[2] = submap.getSubIcon(1, 0);
 
 			sides[3] = sides[4] = sides[5] = sides[2];
 		} else {
@@ -62,14 +63,14 @@ public class RenderBlocksColumn extends RenderBlocks {
 
 				// for some reason along the x axis the bottom texture on the ends is backwards. This flips it around.
 				if (xp && xn) {
-					sides[1] = submap.icons[2];
+					sides[1] = submap.getSubIcon(0, 1);
 					sides[0] = sides[1];
 				} else if (xp) {
-					sides[1] = submap.icons[3];
-					sides[0] = submap.icons[1];
+					sides[1] = submap.getSubIcon(1, 1);
+					sides[0] = submap.getSubIcon(1, 0);
 				} else {
-					sides[1] = submap.icons[1];
-					sides[0] = submap.icons[3];
+					sides[1] = submap.getSubIcon(1, 0);
+					sides[0] = submap.getSubIcon(1, 1);
 				}
 				sides[2] = sides[3] = sides[1];
 			} else {
@@ -93,16 +94,16 @@ public class RenderBlocksColumn extends RenderBlocks {
 					sides[3] = iconTop;
 
 					if (zp && zn)
-						sides[0] = submap.icons[2];
+						sides[0] = submap.getSubIcon(0, 1);
 					else if (zp)
-						sides[0] = submap.icons[1];
+						sides[0] = submap.getSubIcon(1, 0);
 					else
-						sides[0] = submap.icons[3];
+						sides[0] = submap.getSubIcon(1, 1);
 
 					sides[1] = sides[4] = sides[5] = sides[0];
 				} else {
 					sides[0] = sides[1] = iconTop;
-					sides[2] = sides[3] = sides[4] = sides[5] = submap.icons[0];
+					sides[2] = sides[3] = sides[4] = sides[5] = submap.getSubIcon(0, 0);
 				}
 			}
 		}

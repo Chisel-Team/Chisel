@@ -8,7 +8,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.utils.Drawing;
@@ -16,12 +15,12 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler {
+public class RendererCTM implements ISimpleBlockRenderingHandler {
 
 	public RenderBlocksCTM rendererCTM = new RenderBlocksCTM();
 	RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
 
-	public BlockAdvancedMarbleRenderer() {
+	public RendererCTM() {
 		if (Chisel.renderCTMId == 0) {
 			Chisel.renderCTMId = RenderingRegistry.getNextAvailableRenderId();
 		}

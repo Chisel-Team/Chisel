@@ -5,8 +5,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IIcon;
 
 import com.cricketcraft.chisel.api.client.ISubmapManager;
+import com.cricketcraft.chisel.api.client.TextureSubmap;
 import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
-import com.cricketcraft.chisel.client.render.TextureSubmap;
 
 public class CarvableVariation {
 

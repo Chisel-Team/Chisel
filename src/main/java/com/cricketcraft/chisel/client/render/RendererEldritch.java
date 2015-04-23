@@ -12,9 +12,9 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockEldritchRenderer implements ISimpleBlockRenderingHandler {
+public class RendererEldritch implements ISimpleBlockRenderingHandler {
 
-	public BlockEldritchRenderer() {
+	public RendererEldritch() {
 		Chisel.renderEldritchId = RenderingRegistry.getNextAvailableRenderId();
 	}
 

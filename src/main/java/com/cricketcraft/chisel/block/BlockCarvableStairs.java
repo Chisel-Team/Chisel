@@ -17,7 +17,7 @@ import net.minecraft.world.World;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.client.render.BlockMarbleStairsRenderer;
+import com.cricketcraft.chisel.client.render.RendererStairs;
 
 public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 
@@ -57,7 +57,7 @@ public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 
 	@Override
 	public int getRenderType() {
-		return BlockMarbleStairsRenderer.id;
+		return RendererStairs.id;
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.api.client.CTM;
 import com.cricketcraft.chisel.api.client.ISubmapManager;
+import com.cricketcraft.chisel.api.client.TextureSubmap;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 
 import static com.cricketcraft.chisel.api.client.Dir.*;
@@ -22,20 +23,20 @@ public class SubmapManagerFakeController implements ISubmapManager {
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return map.icons[0];
+		return map.getSubIcon(0, 0);
 	}
 
 	@Override
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
 		ctm.buildConnectionMap(world, x, y, z, side, ChiselBlocks.futura, 2);
 		if (ctm.connectedAnd(TOP, BOTTOM, LEFT, RIGHT)) {
-			return map.icons[3];
+			return map.getSubIcon(1, 1);
 		} else if (ctm.connectedAnd(TOP, BOTTOM)) {
-			return map.icons[2];
+			return map.getSubIcon(0, 1);
 		} else if (ctm.connectedAnd(LEFT, RIGHT)) {
-			return map.icons[1];
+			return map.getSubIcon(1, 0);
 		} else {
-			return map.icons[0];
+			return map.getSubIcon(0, 0);
 		}
 	}
 

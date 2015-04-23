@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.client.render;
 
 import com.cricketcraft.chisel.api.client.CTM;
+import com.cricketcraft.chisel.api.client.TextureSubmap;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -246,7 +247,17 @@ public class RenderBlocksCTM extends RenderBlocks {
 	}
 
 	void side(SubSide side, int iconIndex) {
-		IIcon icon = iconIndex >= 16 ? submapSmall.icons[iconIndex - 16] : submap.icons[iconIndex];
+		IIcon icon;
+		TextureSubmap map;
+		if (iconIndex >= 16) {
+			iconIndex -= 16;
+			map = submapSmall;
+		} else {
+			map = submap;
+		}
+		int x = iconIndex % map.getWidth();
+		int y = iconIndex / map.getHeight();
+		icon = map.getSubIcon(x, y);
 
 		double umax = icon.getMaxU();
 		double umin = icon.getMinU();

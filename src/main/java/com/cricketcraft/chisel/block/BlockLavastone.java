@@ -7,7 +7,7 @@ import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.client.GeneralChiselClient;
 
-public class BlockLavastone extends BlockMarbleTexturedOre {
+public class BlockLavastone extends BlockMultiLayer {
 
 	public BlockLavastone(Material mat, String baseIcon) {
 		super(mat, baseIcon);

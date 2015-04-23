@@ -14,9 +14,9 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockRoadLineRenderer implements ISimpleBlockRenderingHandler {
+public class RendererRoadLine implements ISimpleBlockRenderingHandler {
 
-	public BlockRoadLineRenderer() {
+	public RendererRoadLine() {
 		Chisel.roadLineId = RenderingRegistry.getNextAvailableRenderId();
 	}
 

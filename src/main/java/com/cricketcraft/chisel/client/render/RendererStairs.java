@@ -12,11 +12,11 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockMarbleStairsRenderer implements ISimpleBlockRenderingHandler {
+public class RendererStairs implements ISimpleBlockRenderingHandler {
 
 	public static int id;
 
-	public BlockMarbleStairsRenderer() {
+	public RendererStairs() {
 		id = RenderingRegistry.getNextAvailableRenderId();
 	}
 
