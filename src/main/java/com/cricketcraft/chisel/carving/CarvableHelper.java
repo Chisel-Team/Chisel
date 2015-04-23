@@ -63,12 +63,11 @@ public class CarvableHelper {
 			this.suffixes = suffixes.length == 0 ? new String[] { "" } : suffixes;
 		}
 
-		public static TextureType getTypeFor(String path) {
+		public static TextureType getTypeFor(CarvableHelper inst, String modid, String path) {
 			for (TextureType t : VALUES) {
 				boolean matches = true;
 				for (String s : t.suffixes) {
-					String res = "".equals(s) ? path + ".png" : path + "-" + s + ".png";
-					if (Chisel.class.getResource(res) == null) {
+					if (!inst.exists(modid, path, s.isEmpty() ? s : "-" + s)) {
 						matches = false;
 					}
 				}
@@ -144,10 +143,9 @@ public class CarvableHelper {
 
 		if (texture != null && FMLCommonHandler.instance().getSide().isClient()) {
 			variation.texture = texture;
-			String path = "/assets/" + Chisel.MOD_ID + "/textures/blocks/" + variation.texture;
-			variation.type = (TextureType) TextureType.getTypeFor(path);
+			variation.type = (TextureType) TextureType.getTypeFor(this, modid, variation.texture);
 			if (variation.type == TextureType.CUSTOM && customManager == null) {
-				throw new IllegalArgumentException(String.format("Could not find texture for block %s, and no custom texture manager was provided.", block));
+				throw new IllegalArgumentException(String.format("Could not find texture %s, and no custom texture manager was provided.", texture));
 			}
 			variation.manager = customManager;
 		} else {
