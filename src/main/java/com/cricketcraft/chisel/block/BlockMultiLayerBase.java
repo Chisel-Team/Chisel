@@ -5,22 +5,22 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
-import com.cricketcraft.chisel.client.render.BlockTexturedOreRenderer;
+import com.cricketcraft.chisel.client.render.RendererMultiLayer;
 
-public class BlockTexturedOre extends Block {
+public abstract class BlockMultiLayerBase extends Block {
 
 	public int currentPass;
 	public Block base;
 	public IIcon icon;
 	String iconFile;
 
-	public BlockTexturedOre(Material mat, Block base) {
+	public BlockMultiLayerBase(Material mat, Block base) {
 		super(mat);
 
 		this.base = base;
 	}
 
-	public BlockTexturedOre(Material mat, String iconFile) {
+	public BlockMultiLayerBase(Material mat, String iconFile) {
 		super(mat);
 
 		this.iconFile = iconFile;
@@ -33,7 +33,7 @@ public class BlockTexturedOre extends Block {
 
 	@Override
 	public int getRenderType() {
-		return BlockTexturedOreRenderer.id;
+		return RendererMultiLayer.id;
 	}
 
 	@Override

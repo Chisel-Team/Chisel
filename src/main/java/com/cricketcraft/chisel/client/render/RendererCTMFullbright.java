@@ -8,19 +8,18 @@ import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
+import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.utils.Drawing;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockCTMNoLightRenderer implements ISimpleBlockRenderingHandler {
+public class RendererCTMFullbright implements ISimpleBlockRenderingHandler {
 
-	public RenderBlocksCTMNoLight rendererCTMNoLight = new RenderBlocksCTMNoLight();
+	public RenderBlocksCTMFullbright rendererCTMNoLight = new RenderBlocksCTMFullbright();
 
-	public BlockCTMNoLightRenderer() {
+	public RendererCTMFullbright() {
 		if (Chisel.renderCTMNoLightId == 0) {
 			Chisel.renderCTMNoLightId = RenderingRegistry.getNextAvailableRenderId();
 		}

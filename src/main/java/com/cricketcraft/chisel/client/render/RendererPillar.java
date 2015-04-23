@@ -13,11 +13,11 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockMarblePillarRenderer implements ISimpleBlockRenderingHandler {
+public class RendererPillar implements ISimpleBlockRenderingHandler {
 
 	public static int id;
 
-	public BlockMarblePillarRenderer() {
+	public RendererPillar() {
 		id = RenderingRegistry.getNextAvailableRenderId();
 	}
 

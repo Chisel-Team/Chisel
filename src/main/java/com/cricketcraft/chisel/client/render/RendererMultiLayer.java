@@ -1,6 +1,6 @@
 package com.cricketcraft.chisel.client.render;
 
-import com.cricketcraft.chisel.block.BlockTexturedOre;
+import com.cricketcraft.chisel.block.BlockMultiLayerBase;
 import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -10,21 +10,21 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
-public class BlockTexturedOreRenderer implements ISimpleBlockRenderingHandler {
+public class RendererMultiLayer implements ISimpleBlockRenderingHandler {
 
 	float bot = -0.001f, top = 1.0f - bot;
 	public static int id;
 
-	public BlockTexturedOreRenderer() {
+	public RendererMultiLayer() {
 		id = RenderingRegistry.getNextAvailableRenderId();
 	}
 
 	@Override
 	public void renderInventoryBlock(Block blck, int meta, int modelID, RenderBlocks renderer) {
-		if (blck == null || !(blck instanceof BlockTexturedOre))
+		if (blck == null || !(blck instanceof BlockMultiLayerBase))
 			return;
 
-		BlockTexturedOre block = (BlockTexturedOre) blck;
+		BlockMultiLayerBase block = (BlockMultiLayerBase) blck;
 
 		if (block.icon != null) {
 			renderer.overrideBlockTexture = block.icon;
@@ -44,9 +44,9 @@ public class BlockTexturedOreRenderer implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block blck, int modelId, RenderBlocks renderer) {
-		if (blck == null || !(blck instanceof BlockTexturedOre))
+		if (blck == null || !(blck instanceof BlockMultiLayerBase))
 			return false;
-		BlockTexturedOre block = (BlockTexturedOre) blck;
+		BlockMultiLayerBase block = (BlockMultiLayerBase) blck;
 
 		if (block.currentPass == 0) {
 			if (block.icon != null) {

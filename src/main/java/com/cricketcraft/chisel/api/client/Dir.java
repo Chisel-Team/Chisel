@@ -6,8 +6,16 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import static net.minecraftforge.common.util.ForgeDirection.*;
 
+/**
+ * Think of this class as a "Two dimensional ForgeDirection, with diagonals".
+ * <p>
+ * It represents the eight different directions a face of a block can connect with CTM, and contains the logic for determining if a block is indeed connected in that direction.
+ * <p>
+ * Note that, for example, {@link #TOP_RIGHT} does not mean connected to the {@link #TOP} and {@link #RIGHT}, but connected in the diagonal direction represented by {@link #TOP_RIGHT}. This is used
+ * for inner corner rendering.
+ */
 public enum Dir {
-	
+	// @formatter:off
 	TOP(UP), 
 	TOP_RIGHT(UP, EAST), 
 	RIGHT(EAST), 
@@ -18,8 +26,11 @@ public enum Dir {
 	TOP_LEFT(UP, WEST);
 	// @formatter:on
 
-	private static final ForgeDirection NORMAL = SOUTH;
+	/**
+	 * All values of this enum, used to prevent unnecessary allocation via {@link #values()}.
+	 */
 	public static final Dir[] VALUES = values();
+	private static final ForgeDirection NORMAL = SOUTH;
 
 	private ForgeDirection[] dirs;
 
@@ -27,6 +38,27 @@ public enum Dir {
 		this.dirs = dirs;
 	}
 
+	/**
+	 * Finds if this block is connected for the given side in this Dir.
+	 * 
+	 * @param inst
+	 *            The CTM instance to use for logic.
+	 * @param world
+	 *            The world the block is in.
+	 * @param x
+	 *            The x coordinate of your block.
+	 * @param y
+	 *            The y coordinate of your block.
+	 * @param z
+	 *            The z coordinate of your block.
+	 * @param sideIdx
+	 *            The side index of the current face. This equivalent to {@link ForgeDirection#ordinal()}
+	 * @param block
+	 *            The block being rendered.
+	 * @param meta
+	 *            The metadata of the block.
+	 * @return True if the block is connected in the given Dir, false otherwise.
+	 */
 	public boolean isConnected(CTM inst, IBlockAccess world, int x, int y, int z, int sideIdx, Block block, int meta) {
 		ForgeDirection side = getOrientation(sideIdx);
 		ForgeDirection[] dirs = getNormalizedDirs(side);

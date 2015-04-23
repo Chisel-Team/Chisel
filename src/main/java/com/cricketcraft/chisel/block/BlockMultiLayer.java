@@ -15,17 +15,17 @@ import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 
-public class BlockMarbleTexturedOre extends BlockTexturedOre implements ICarvable {
+public class BlockMultiLayer extends BlockMultiLayerBase implements ICarvable {
 
 	public CarvableHelper carverHelper;
 
-	public BlockMarbleTexturedOre(Material mat, String baseIcon) {
+	public BlockMultiLayer(Material mat, String baseIcon) {
 		super(mat, baseIcon);
 
 		carverHelper = new CarvableHelper();
 	}
 
-	public BlockMarbleTexturedOre(Material mat, Block block) {
+	public BlockMultiLayer(Material mat, Block block) {
 		super(mat, block);
 
 		carverHelper = new CarvableHelper();

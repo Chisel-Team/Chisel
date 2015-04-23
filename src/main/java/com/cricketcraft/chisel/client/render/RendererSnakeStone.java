@@ -12,11 +12,11 @@ import com.cricketcraft.chisel.utils.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
-public class BlockSnakeStoneRenderer implements ISimpleBlockRenderingHandler {
+public class RendererSnakeStone implements ISimpleBlockRenderingHandler {
 
 	public static int id;
 
-	public BlockSnakeStoneRenderer() {
+	public RendererSnakeStone() {
 		id = RenderingRegistry.getNextAvailableRenderId();
 	}
 

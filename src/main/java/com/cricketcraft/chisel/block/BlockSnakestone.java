@@ -13,7 +13,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import com.cricketcraft.chisel.client.render.BlockSnakeStoneRenderer;
+import com.cricketcraft.chisel.client.render.RendererSnakeStone;
 
 public class BlockSnakestone extends Block {
 
@@ -62,7 +62,7 @@ public class BlockSnakestone extends Block {
 
 	@Override
 	public int getRenderType() {
-		return BlockSnakeStoneRenderer.id;
+		return RendererSnakeStone.id;
 	}
 
 	static final int[] rotRemap = { 0, 3, 1, 2 };

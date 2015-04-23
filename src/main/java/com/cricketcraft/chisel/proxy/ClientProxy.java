@@ -32,20 +32,19 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init() {
-		RenderingRegistry.registerBlockHandler(new BlockMarbleStairsRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockMarblePaneRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockRoadLineRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockSnakeStoneRenderer());
-		RenderingRegistry.registerBlockHandler(new RenderStandardBlockNoSunlight());
-		RenderingRegistry.registerBlockHandler(new BlockMarblePillarRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockEldritchRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockAdvancedMarbleRenderer());
+		RenderingRegistry.registerBlockHandler(new RendererStairs());
+		RenderingRegistry.registerBlockHandler(new RendererCTMPane());
+		RenderingRegistry.registerBlockHandler(new RendererRoadLine());
+		RenderingRegistry.registerBlockHandler(new RendererSnakeStone());
+		RenderingRegistry.registerBlockHandler(new RendererPillar());
+		RenderingRegistry.registerBlockHandler(new RendererEldritch());
+		RenderingRegistry.registerBlockHandler(new RendererCTM());
 		RenderingRegistry.registerBlockHandler(new BlockCarpetRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockGlowRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockCTMNoLightRenderer());
-		RenderingRegistry.registerBlockHandler(new BlockLayeredRenderer());
+		RenderingRegistry.registerBlockHandler(new RendererLayeredGlow());
+		RenderingRegistry.registerBlockHandler(new RendererCTMFullbright());
+		RenderingRegistry.registerBlockHandler(new RendererSimpleLayered());
 
-		RenderingRegistry.registerBlockHandler(new BlockTexturedOreRenderer());
+		RenderingRegistry.registerBlockHandler(new RendererMultiLayer());
 
 		RenderAutoChisel rac = new RenderAutoChisel();
 		RenderingRegistry.registerBlockHandler(rac);

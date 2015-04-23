@@ -5,7 +5,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.client.render.BlockMarblePillarRenderer;
+import com.cricketcraft.chisel.client.render.RendererPillar;
 
 public class BlockCarvablePillar extends BlockCarvable {
 
@@ -17,7 +17,7 @@ public class BlockCarvablePillar extends BlockCarvable {
 
 	@Override
 	public int getRenderType() {
-		return BlockMarblePillarRenderer.id;
+		return RendererPillar.id;
 	}
 
 	@Override
@@ -31,9 +31,9 @@ public class BlockCarvablePillar extends BlockCarvable {
 	}
 
 	public IIcon getCtmIcon(int index, int metadata) {
-		//Workaround to prevent crash with invalid meta
+		// Workaround to prevent crash with invalid meta
 		CarvableVariation var = null;
-		if(metadata <= carverHelper.variations.size())
+		if (metadata <= carverHelper.variations.size())
 			var = carverHelper.variations.get(metadata);
 		else
 			var = carverHelper.variations.get(0);
@@ -42,7 +42,7 @@ public class BlockCarvablePillar extends BlockCarvable {
 			return var.iconTop;
 		if (var.seamsCtmVert == null)
 			return var.icon;
-		return var.seamsCtmVert.icons[index];
+		return var.seamsCtmVert.getSubIcon(index % 2, index / 2);
 	}
 
 }

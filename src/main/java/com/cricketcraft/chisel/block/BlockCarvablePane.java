@@ -14,7 +14,7 @@ import net.minecraft.world.IBlockAccess;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.client.render.BlockMarblePaneRenderer;
+import com.cricketcraft.chisel.client.render.RendererCTMPane;
 import com.cricketcraft.chisel.init.ChiselTabs;
 
 import cpw.mods.fml.relauncher.Side;
@@ -46,7 +46,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 
 	@Override
 	public int getRenderType() {
-		return BlockMarblePaneRenderer.id;
+		return RendererCTMPane.id;
 	}
 
 	@Override
