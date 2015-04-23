@@ -10,6 +10,7 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
 import com.cricketcraft.chisel.utils.Drawing;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -40,8 +41,7 @@ public class BlockCTMNoLightRenderer implements ISimpleBlockRenderingHandler {
 
 		CarvableVariation var = ((ICarvable) block).getVariation(world, x, y, z, meta);
 
-		switch (var == null ? 0 : var.kind) {
-		case CarvableHelper.CTMX:
+		if (var != null && var.type == TextureType.CTMX) {
 			rendererCTMNoLight.blockAccess = world;
 			rendererCTMNoLight.renderMaxX = 1.0;
 			rendererCTMNoLight.renderMaxY = 1.0;
@@ -53,7 +53,7 @@ public class BlockCTMNoLightRenderer implements ISimpleBlockRenderingHandler {
 			rendererCTMNoLight.rendererOld = rendererOld;
 
 			return rendererCTMNoLight.renderStandardBlock(block, x, y, z);
-		default:
+		} else {
 			return rendererOld.renderStandardBlock(block, x, y, z);
 		}
 	}

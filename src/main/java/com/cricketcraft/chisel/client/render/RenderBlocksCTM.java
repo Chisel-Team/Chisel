@@ -1,11 +1,112 @@
 package com.cricketcraft.chisel.client.render;
 
+import com.cricketcraft.chisel.api.client.CTM;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
+import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.*;
+import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.SubSide.*;
+import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.Y_HALF_X;
 
 public class RenderBlocksCTM extends RenderBlocks {
+
+	/**
+	 * An enum for all possible 26 sub-side vertices.
+	 *
+	 * The naming scheme is as follows:
+	 *
+	 * ZERO and ONE are special cases, they are the absolute min and absolute
+	 * max of the block. X, Y, Z, or any combination means that the axes listed
+	 * in the name are at 1. X, Y, Z, or any combination followed by HALF means
+	 * that those axes are at 0.5. X, Y, Z, or any combination after a HALF
+	 * means those axes are at 1.
+	 */
+	enum Vert {
+		// @formatter:off
+		ZERO(0, 0, 0),
+		XYZ(1, 1, 1),
+		X(1, 0, 0),
+		Y(0, 1, 0),
+		Z(0, 0, 1),
+		XY(1, 1, 0),
+		YZ(0, 1, 1),
+		XZ(1, 0, 1),
+		X_HALF(0.5, 0, 0),
+		Y_HALF(0, 0.5, 0),
+		Z_HALF(0, 0, 0.5),
+		XY_HALF(0.5, 0.5, 0),
+		YZ_HALF(0, 0.5, 0.5),
+		XZ_HALF(0.5, 0, 0.5),
+		X_HALF_Y(0.5, 1, 0),
+		X_HALF_Z(0.5, 0, 1),
+		Y_HALF_X(1, 0.5, 0),
+		Y_HALF_Z(0, 0.5, 1),
+		Z_HALF_X(1, 0, 0.5),
+		Z_HALF_Y(0, 1, 0.5),
+		X_HALF_YZ(0.5, 1, 1),
+		Y_HALF_XZ(1, 0.5, 1),
+		Z_HALF_XY(1, 1, 0.5),
+		XY_HALF_Z(0.5, 0.5, 1),
+		YZ_HALF_X(1, 0.5, 0.5),
+		XZ_HALF_Y(0.5, 1, 0.5);
+		// @formatter:on
+
+		private double x, y, z;
+
+		private Vert(double x, double y, double z) {
+			this.x = x;
+			this.y = y;
+			this.z = z;
+		}
+
+		void render(RenderBlocksCTM inst, int cacheID) {
+			if (inst.enableAO) {
+				inst.tessellator.setColorOpaque_F(inst.redCache[cacheID], inst.grnCache[cacheID], inst.bluCache[cacheID]);
+				inst.tessellator.setBrightness(inst.lightingCache[cacheID]);
+			}
+
+			inst.tessellator.addVertexWithUV(x, y, z, inst.uCache[cacheID], inst.vCache[cacheID]);
+		}
+	}
+
+	/**
+	 * Each side is divided into 4 sub-sides. LB(left bottom), RB(right bottom),
+	 * LT(right top), and RT(right top).
+	 *
+	 * Each sub-side contains 4 {@link Vert} objects representing its position
+	 * on the block.
+	 */
+	enum SubSide {
+		// @formatter:off
+		XNEG_LB(ZERO, Z_HALF, YZ_HALF, Y_HALF), XNEG_RB(Z_HALF, Z, Y_HALF_Z, YZ_HALF), XNEG_RT(YZ_HALF, Y_HALF_Z, YZ, Z_HALF_Y), XNEG_LT(Y_HALF, YZ_HALF, Z_HALF_Y, Y),
+		XPOS_LB(XZ, Z_HALF_X, YZ_HALF_X, Y_HALF_XZ), XPOS_RB(Z_HALF_X, X, Y_HALF_X, YZ_HALF_X), XPOS_RT(YZ_HALF_X, Y_HALF_X, XY, Z_HALF_XY), XPOS_LT(Y_HALF_XZ, YZ_HALF_X, Z_HALF_XY, XYZ),
+
+		ZNEG_LB(X, X_HALF, XY_HALF, Y_HALF_X), ZNEG_RB(X_HALF, ZERO, Y_HALF, XY_HALF), ZNEG_RT(XY_HALF, Y_HALF, Y, X_HALF_Y), ZNEG_LT(Y_HALF_X, XY_HALF, X_HALF_Y, XY),
+		ZPOS_LB(Z, X_HALF_Z, XY_HALF_Z, Y_HALF_Z), ZPOS_RB(X_HALF_Z, XZ, Y_HALF_XZ, XY_HALF_Z), ZPOS_RT(XY_HALF_Z, Y_HALF_XZ, XYZ, X_HALF_YZ), ZPOS_LT(Y_HALF_Z, XY_HALF_Z, X_HALF_YZ, YZ),
+
+		YNEG_LB(ZERO, X_HALF, XZ_HALF, Z_HALF), YNEG_RB(X_HALF, X, Z_HALF_X, XZ_HALF), YNEG_RT(XZ_HALF, Z_HALF_X, XZ, X_HALF_Z), YNEG_LT(Z_HALF, XZ_HALF, X_HALF_Z, Z),
+		YPOS_LB(YZ, X_HALF_YZ, XZ_HALF_Y, Z_HALF_Y), YPOS_RB(X_HALF_YZ, XYZ, Z_HALF_XY, XZ_HALF_Y), YPOS_RT(XZ_HALF_Y, Z_HALF_XY, XY, X_HALF_Y), YPOS_LT(Z_HALF_Y, XZ_HALF_Y, X_HALF_Y, Y);
+		// @formatter:on
+		private Vert xmin, xmax, ymin, ymax;
+
+		SubSide(Vert xmin, Vert ymin, Vert ymax, Vert xmax) {
+			this.xmin = xmin;
+			this.ymin = ymin;
+			this.ymax = ymax;
+			this.xmax = xmax;
+		}
+
+		void render(RenderBlocksCTM inst) {
+			xmin.render(inst, 0);
+			ymin.render(inst, 1);
+			ymax.render(inst, 2);
+			xmax.render(inst, 3);
+		}
+	}
+	
+	private static CTM ctm = CTM.getInstance();
 
 	// globals added to save the JVM some trouble. No need to constantly create
 	// and destroy ints if we don't have to
@@ -17,23 +118,23 @@ public class RenderBlocksCTM extends RenderBlocks {
 
 	RenderBlocksCTM() {
 		super();
-
-		resetVertices();
 	}
 
 	Tessellator tessellator;
-	double[] X = new double[26];
-	double[] Y = new double[26];
-	double[] Z = new double[26];
-	double[] U = new double[26];
-	double[] V = new double[26];
-	int[] L = new int[26];
-	float[] R = new float[26];
-	float[] G = new float[26];
-	float[] B = new float[26];
+	double[] uCache = new double[4];
+	double[] vCache = new double[4];
+	int[] lightingCache = new int[4];
+	float[] redCache = new float[4];
+	float[] grnCache = new float[4];
+	float[] bluCache = new float[4];
 	TextureSubmap submap;
 	TextureSubmap submapSmall;
 	RenderBlocks rendererOld;
+
+	int[][] lightmap = new int[3][3];
+	float[][] redmap = new float[3][3];
+	float[][] grnmap = new float[3][3];
+	float[][] blumap = new float[3][3];
 
 	int bx, by, bz;
 
@@ -55,70 +156,77 @@ public class RenderBlocksCTM extends RenderBlocks {
 		return res;
 	}
 
-	void setupSides(int a, int b, int c, int d, int xa, int xb, int xc, int xd, int e) {
-		L[a] = brightnessBottomLeft;
-		L[b] = brightnessBottomRight;
-		L[c] = brightnessTopRight;
-		L[d] = brightnessTopLeft;
+	/* @formatter:off
+	 * This method fills a 3x3 grid of light values based on the four corners, by averaging them together.
+	 *
+	 * 2  TL   x    TR
+	 *
+	 * 1  x    x    x
+	 *
+	 * 0  BL   x    BR
+	 *    0    1    2
+	 *
+	 * Note: Variable names mean nothing... don't touch
+	 *
+	 * ._.
+	 *
+	 * shakes fist in anger
+	 */
+	// @formatter:on
+	void fillLightmap(int bottomLeft, int bottomRight, int topRight, int topLeft) {
+		lightmap[0][0] = bottomLeft;
+		lightmap[2][0] = bottomRight;
+		lightmap[2][2] = topRight;
+		lightmap[0][2] = topLeft;
 
-		// Updated to safely average light and color channels
-		L[e] = averageBrightnessChannels(brightnessBottomLeft, brightnessTopLeft, brightnessTopRight, brightnessBottomRight);
-		L[xa] = averageBrightnessChannels(L[a], L[b]);
-		L[xb] = averageBrightnessChannels(L[b], L[c]);
-		L[xc] = averageBrightnessChannels(L[c], L[d]);
-		L[xd] = averageBrightnessChannels(L[d], L[a]);
+		lightmap[1][0] = avg(bottomLeft, bottomRight);
+		lightmap[2][1] = avg(bottomRight, topRight);
+		lightmap[1][2] = avg(topRight, topLeft);
+		lightmap[0][1] = avg(topLeft, bottomLeft);
 
-		R[a] = colorRedBottomLeft;
-		R[b] = colorRedBottomRight;
-		R[c] = colorRedTopRight;
-		R[d] = colorRedTopLeft;
-		R[e] = (colorRedBottomLeft + colorRedTopLeft + colorRedTopRight + colorRedBottomRight) / 4;
-		R[xa] = (R[a] + R[b]) / 2;
-		R[xb] = (R[b] + R[c]) / 2;
-		R[xc] = (R[c] + R[d]) / 2;
-		R[xd] = (R[d] + R[a]) / 2;
-
-		G[a] = colorGreenBottomLeft;
-		G[b] = colorGreenBottomRight;
-		G[c] = colorGreenTopRight;
-		G[d] = colorGreenTopLeft;
-		G[e] = (colorGreenBottomLeft + colorGreenTopLeft + colorGreenTopRight + colorGreenBottomRight) / 4;
-		G[xa] = (G[a] + G[b]) / 2;
-		G[xb] = (G[b] + G[c]) / 2;
-		G[xc] = (G[c] + G[d]) / 2;
-		G[xd] = (G[d] + G[a]) / 2;
-
-		B[a] = colorBlueBottomLeft;
-		B[b] = colorBlueBottomRight;
-		B[c] = colorBlueTopRight;
-		B[d] = colorBlueTopLeft;
-		B[e] = (colorBlueBottomLeft + colorBlueTopLeft + colorBlueTopRight + colorBlueBottomRight) / 4;
-		B[xa] = (B[a] + B[b]) / 2;
-		B[xb] = (B[b] + B[c]) / 2;
-		B[xc] = (B[c] + B[d]) / 2;
-		B[xd] = (B[d] + B[a]) / 2;
+		lightmap[1][1] = avg(bottomLeft, bottomRight, topRight, topLeft);
 	}
 
-	/*
-	 * Takes in a variable number of packed light-integers, and computes the
-	 * average value of each 4 bit channel
-	 * 
-	 * For vanilla, these look like: (S = skylight and L = block light) 0000
-	 * 0000 SSSS 0000 0000 0000 LLLL 0000 With the Colored Light Core installed,
-	 * these look like: (B = Blue, G = Green, R = Red) 0000 0000 SSSS BBBB GGGG
-	 * RRRR LLLL 0000
-	 * 
-	 * This method will average all of the values appropriately for the more
-	 * complex case, by separating each color channel into a running total, then
-	 * it will combine the final results together using integer division and a
-	 * lot of bit-cramming.
-	 * 
-	 * While slightly more complex, the runtime should not be drastically
-	 * effected, and the averaging routine remains compatible with vanilla.
-	 * 
-	 * Authored: CptSpaceToaster - 12/19/2014
+	void fillColormap(float bottomLeft, float bottomRight, float topRight, float topLeft, float[][] map) {
+		map[0][0] = bottomLeft;
+		map[2][0] = bottomRight;
+		map[2][2] = topRight;
+		map[0][2] = topLeft;
+
+		map[1][0] = (bottomLeft + bottomRight) / 2.0F;
+		map[2][1] = (bottomRight + topRight) / 2.0F;
+		map[1][2] = (topRight + topLeft) / 2.0F;
+		map[0][1] = (topLeft + bottomLeft) / 2.0F;
+
+		map[1][1] = (bottomLeft + bottomRight + topRight + topLeft) / 4.0F;
+	}
+
+	void getLight(int x, int y) {
+		lightingCache[0] = lightmap[0 + x][0 + y];
+		lightingCache[1] = lightmap[1 + x][0 + y];
+		lightingCache[2] = lightmap[1 + x][1 + y];
+		lightingCache[3] = lightmap[0 + x][1 + y];
+
+		redCache[0] = redmap[0 + x][0 + y];
+		redCache[1] = redmap[1 + x][0 + y];
+		redCache[2] = redmap[1 + x][1 + y];
+		redCache[3] = redmap[0 + x][1 + y];
+
+		grnCache[0] = grnmap[0 + x][0 + y];
+		grnCache[1] = grnmap[1 + x][0 + y];
+		grnCache[2] = grnmap[1 + x][1 + y];
+		grnCache[3] = grnmap[0 + x][1 + y];
+
+		bluCache[0] = blumap[0 + x][0 + y];
+		bluCache[1] = blumap[1 + x][0 + y];
+		bluCache[2] = blumap[1 + x][1 + y];
+		bluCache[3] = blumap[0 + x][1 + y];
+	}
+
+	/**
+	 * This works around a bug in CLC atm
 	 */
-	int averageBrightnessChannels(int... lightVals) {
+	int avg(int... lightVals) {
 		blockLightBitChannel = 0;
 		redBitChannel = 0;
 		greenBitChannel = 0;
@@ -137,37 +245,25 @@ public class RenderBlocksCTM extends RenderBlocks {
 				| ((blueBitChannel / lightVals.length) & 0xF0000) | ((sunlightBitChannel / lightVals.length) & 0xF00000);
 	}
 
-	void side(int a, int b, int c, int d, int iconIndex, boolean flip) {
+	void side(SubSide side, int iconIndex) {
 		IIcon icon = iconIndex >= 16 ? submapSmall.icons[iconIndex - 16] : submap.icons[iconIndex];
 
-		double u0 = icon.getMaxU();
-		double u1 = icon.getMinU();
-		double v0 = icon.getMaxV();
-		double v1 = icon.getMinV();
+		double umax = icon.getMaxU();
+		double umin = icon.getMinU();
+		double vmax = icon.getMaxV();
+		double vmin = icon.getMinV();
 
-		U[a] = flip ? u1 : u1;
-		U[b] = flip ? u0 : u1;
-		U[c] = flip ? u0 : u0;
-		U[d] = flip ? u1 : u0;
+		uCache[0] = umin;
+		uCache[1] = umax;
+		uCache[2] = umax;
+		uCache[3] = umin;
 
-		V[a] = flip ? v1 : v1;
-		V[b] = flip ? v1 : v0;
-		V[c] = flip ? v0 : v0;
-		V[d] = flip ? v0 : v1;
+		vCache[0] = vmax;
+		vCache[1] = vmax;
+		vCache[2] = vmin;
+		vCache[3] = vmin;
 
-		vert(a);
-		vert(b);
-		vert(c);
-		vert(d);
-	}
-
-	void vert(int index) {
-		if (enableAO) {
-			tessellator.setColorOpaque_F(R[index], G[index], B[index]);
-			tessellator.setBrightness(L[index]);
-		}
-
-		tessellator.addVertexWithUV(X[index], Y[index], Z[index], U[index], V[index]);
+		side.render(this);
 	}
 
 	@Override
@@ -180,13 +276,21 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(0.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
 			tessellator.addVertexWithUV(0.0, 1.0, 1.0, i.getMaxU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 4);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 4);
 
-			setupSides(1, 0, 4, 5, 14, 19, 17, 23, 9);
-			side(1, 14, 9, 23, tex[0], false);
-			side(23, 9, 17, 5, tex[1], false);
-			side(9, 19, 4, 17, tex[3], false);
-			side(14, 0, 19, 9, tex[2], false);
+			fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
+			fillColormap(colorRedBottomRight, colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, redmap);
+			fillColormap(colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, grnmap);
+			fillColormap(colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, blumap);
+
+			getLight(0, 0);
+			side(XNEG_LB, tex[0]);
+			getLight(1, 0);
+			side(XNEG_RB, tex[1]);
+			getLight(1, 1);
+			side(XNEG_RT, tex[2]);
+			getLight(0, 1);
+			side(XNEG_LT, tex[3]);
 		}
 	}
 
@@ -200,13 +304,20 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 0.0, 0.0, i.getMinU(), i.getMaxV());
 			tessellator.addVertexWithUV(1.0, 1.0, 0.0, i.getMinU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 5);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 5);
 
-			setupSides(3, 2, 6, 7, 15, 25, 16, 21, 11);
-			side(11, 21, 3, 15, tex[3], false);
-			side(16, 7, 21, 11, tex[2], false);
-			side(25, 11, 15, 2, tex[1], false);
-			side(6, 16, 11, 25, tex[0], false);
+			fillLightmap(brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight, brightnessTopRight);
+			fillColormap(colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, redmap);
+			fillColormap(colorGreenTopLeft, colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, grnmap);
+			fillColormap(colorBlueTopLeft, colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, blumap);
+			getLight(0, 0);
+			side(XPOS_LB, tex[0]);
+			getLight(1, 0);
+			side(XPOS_RB, tex[1]);
+			getLight(1, 1);
+			side(XPOS_RT, tex[2]);
+			getLight(0, 1);
+			side(XPOS_LT, tex[3]);
 		}
 	}
 
@@ -220,13 +331,20 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(0.0, 0.0, 0.0, i.getMinU(), i.getMaxV());
 			tessellator.addVertexWithUV(0.0, 1.0, 0.0, i.getMinU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 2);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 2);
 
-			setupSides(2, 3, 0, 1, 15, 18, 14, 22, 8);
-			side(2, 15, 8, 22, tex[0], false);
-			side(15, 3, 18, 8, tex[2], false);
-			side(8, 18, 0, 14, tex[3], false);
-			side(22, 8, 14, 1, tex[1], false);
+			fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
+			fillColormap(colorRedBottomRight, colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, redmap);
+			fillColormap(colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, grnmap);
+			fillColormap(colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, blumap);
+			getLight(0, 0);
+			side(ZNEG_LB, tex[0]);
+			getLight(1, 0);
+			side(ZNEG_RB, tex[1]);
+			getLight(1, 1);
+			side(ZNEG_RT, tex[2]);
+			getLight(0, 1);
+			side(ZNEG_LT, tex[3]);
 		}
 	}
 
@@ -240,13 +358,20 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
 			tessellator.addVertexWithUV(1.0, 1.0, 1.0, i.getMaxU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 3);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 3);
 
-			setupSides(4, 7, 6, 5, 20, 16, 24, 17, 10);
-			side(17, 4, 20, 10, tex[2], false);
-			side(5, 17, 10, 24, tex[0], false);
-			side(24, 10, 16, 6, tex[1], false);
-			side(10, 20, 7, 16, tex[3], false);
+			fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
+			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
+			fillColormap(colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, grnmap);
+			fillColormap(colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, blumap);
+			getLight(0, 0);
+			side(ZPOS_LB, tex[0]);
+			getLight(1, 0);
+			side(ZPOS_RB, tex[1]);
+			getLight(1, 1);
+			side(ZPOS_RT, tex[2]);
+			getLight(0, 1);
+			side(ZPOS_LT, tex[3]);
 		}
 	}
 
@@ -260,13 +385,20 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 0.0, 0.0, i.getMaxU(), i.getMinV());
 			tessellator.addVertexWithUV(1.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 0);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 0);
 
-			setupSides(0, 3, 7, 4, 18, 21, 20, 19, 13);
-			side(13, 21, 7, 20, tex[3], true);
-			side(19, 13, 20, 4, tex[2], true);
-			side(0, 18, 13, 19, tex[0], true);
-			side(18, 3, 21, 13, tex[1], true);
+			fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
+			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
+			fillColormap(colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, grnmap);
+			fillColormap(colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, blumap);
+			getLight(0, 0);
+			side(YNEG_LB, tex[0]);
+			getLight(1, 0);
+			side(YNEG_RB, tex[1]);
+			getLight(1, 1);
+			side(YNEG_RT, tex[2]);
+			getLight(0, 1);
+			side(YNEG_LT, tex[3]);
 		}
 	}
 
@@ -280,119 +412,20 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 1.0, 1.0, i.getMaxU(), i.getMaxV());
 			tessellator.addVertexWithUV(1.0, 1.0, 0.0, i.getMaxU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 1);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 1);
 
-			setupSides(2, 1, 5, 6, 22, 23, 24, 25, 12);
-			side(12, 24, 6, 25, tex[3], false);
-			side(22, 12, 25, 2, tex[1], false);
-			side(1, 23, 12, 22, tex[0], false);
-			side(23, 5, 24, 12, tex[2], false);
+			fillLightmap(brightnessTopRight, brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight);
+			fillColormap(colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, redmap);
+			fillColormap(colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, colorGreenBottomRight, grnmap);
+			fillColormap(colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, colorBlueBottomRight, blumap);
+			getLight(0, 0);
+			side(YPOS_LB, tex[0]);
+			getLight(1, 0);
+			side(YPOS_RB, tex[1]);
+			getLight(1, 1);
+			side(YPOS_RT, tex[2]);
+			getLight(0, 1);
+			side(YPOS_LT, tex[3]);
 		}
-	}
-
-	void resetVertices() {
-		X[0] = 0;
-		Z[0] = 0;
-		Y[0] = 0;
-
-		X[1] = 0;
-		Z[1] = 0;
-		Y[1] = 1;
-
-		X[2] = 1;
-		Z[2] = 0;
-		Y[2] = 1;
-
-		X[3] = 1;
-		Z[3] = 0;
-		Y[3] = 0;
-
-		X[4] = 0;
-		Z[4] = 1;
-		Y[4] = 0;
-
-		X[5] = 0;
-		Z[5] = 1;
-		Y[5] = 1;
-
-		X[6] = 1;
-		Z[6] = 1;
-		Y[6] = 1;
-
-		X[7] = 1;
-		Z[7] = 1;
-		Y[7] = 0;
-
-		X[8] = 0.5;
-		Z[8] = 0;
-		Y[8] = 0.5;
-
-		X[9] = 0;
-		Z[9] = 0.5;
-		Y[9] = 0.5;
-
-		X[10] = 0.5;
-		Z[10] = 1;
-		Y[10] = 0.5;
-
-		X[11] = 1;
-		Z[11] = 0.5;
-		Y[11] = 0.5;
-
-		X[12] = 0.5;
-		Z[12] = 0.5;
-		Y[12] = 1;
-
-		X[13] = 0.5;
-		Z[13] = 0.5;
-		Y[13] = 0;
-
-		X[14] = 0;
-		Z[14] = 0;
-		Y[14] = 0.5;
-
-		X[15] = 1;
-		Z[15] = 0;
-		Y[15] = 0.5;
-
-		X[16] = 1;
-		Z[16] = 1;
-		Y[16] = 0.5;
-
-		X[17] = 0;
-		Z[17] = 1;
-		Y[17] = 0.5;
-
-		X[18] = 0.5;
-		Z[18] = 0;
-		Y[18] = 0;
-
-		X[19] = 0;
-		Z[19] = 0.5;
-		Y[19] = 0;
-
-		X[20] = 0.5;
-		Z[20] = 1;
-		Y[20] = 0;
-
-		X[21] = 1;
-		Z[21] = 0.5;
-		Y[21] = 0;
-
-		X[22] = 0.5;
-		Z[22] = 0;
-		Y[22] = 1;
-
-		X[23] = 0;
-		Z[23] = 0.5;
-		Y[23] = 1;
-
-		X[24] = 0.5;
-		Z[24] = 1;
-		Y[24] = 1;
-
-		X[25] = 1;
-		Z[25] = 0.5;
-		Y[25] = 1;
 	}
 }

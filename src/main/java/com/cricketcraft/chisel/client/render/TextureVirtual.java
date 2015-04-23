@@ -6,59 +6,59 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TextureVirtual implements IIcon {
 
-	int ox, oy;
-	float u0, u1, v0, v1;
-	String name;
-	IIcon icon;
+	private int width, height;
+	private float umin, umax, vmin, vmax;
+	private String name;
+	private IIcon parentIcon;
 
 	TextureVirtual(IIcon parent, int w, int h, int x, int y) {
-		icon = parent;
+		parentIcon = parent;
 
-		u0 = icon.getInterpolatedU(16.0 * (x) / w);
-		u1 = icon.getInterpolatedU(16.0 * (x + 1) / w);
-		v0 = icon.getInterpolatedV(16.0 * (y) / h);
-		v1 = icon.getInterpolatedV(16.0 * (y + 1) / h);
+		umin = parentIcon.getInterpolatedU(16.0 * (x) / w);
+		umax = parentIcon.getInterpolatedU(16.0 * (x + 1) / w);
+		vmin = parentIcon.getInterpolatedV(16.0 * (y) / h);
+		vmax = parentIcon.getInterpolatedV(16.0 * (y + 1) / h);
 
-		name = icon.getIconName() + "|" + x + "." + y;
+		name = parentIcon.getIconName() + "|" + x + "." + y;
 
-		ox = icon.getIconWidth();
-		oy = icon.getIconHeight();
+		width = parentIcon.getIconWidth();
+		height = parentIcon.getIconHeight();
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getMinU() {
-		return u0;
+		return umin;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getMaxU() {
-		return u1;
+		return umax;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getInterpolatedU(double d0) {
-		return (float) (u0 + (u1 - u0) * d0 / 16.0);
+		return (float) (umin + (umax - umin) * d0 / 16.0);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getMinV() {
-		return v0;
+		return vmin;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getMaxV() {
-		return v1;
+		return vmax;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public float getInterpolatedV(double d0) {
-		return (float) (v0 + (v1 - v0) * d0 / 16.0);
+		return (float) (vmin + (vmax - vmin) * d0 / 16.0);
 	}
 
 	@Override
@@ -70,13 +70,12 @@ public class TextureVirtual implements IIcon {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getIconWidth() {
-		return ox;
+		return width;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getIconHeight() {
-		return oy;
+		return height;
 	}
-
 }

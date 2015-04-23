@@ -2,8 +2,11 @@ package com.cricketcraft.chisel.config;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.Features;
+import com.cricketcraft.chisel.api.client.CTM;
+
 import net.minecraft.item.ItemDye;
 import net.minecraftforge.common.config.Configuration;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
@@ -33,6 +36,7 @@ public class Configurations {
 	public static int particlesTickrate;
 	public static boolean oldPillars;
 	public static boolean disableCTM;
+	public static boolean connectInsideCTM;
 	public static boolean fancy;
 	public static boolean blockDescriptions;
 
@@ -87,6 +91,8 @@ public class Configurations {
 		particlesTickrate = config.get(category, "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
 		oldPillars = config.get(category, "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
 		disableCTM = !config.get(category, "connectedTextures", true, "Enable connected textures").getBoolean(true);
+		CTM.disableObscuredFaceCheckConfig = connectInsideCTM = !config.get(category, "connectInsideCTM", false,
+				"Choose whether the inside corner is disconnected on a CTM block - http://imgur.com/eUywLZ4").getBoolean(false);
 		fancy = config.get(category, "fancyLeaves", true, "Enable fancy textures").getBoolean(true);
 		blockDescriptions = config.get(category, "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.")
 				.getBoolean(true);
@@ -100,6 +106,7 @@ public class Configurations {
 		ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
 		ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
 		allowChiselCrossColors = config.get(category, "allowChiselCrossColors", true, "Should someone be able to chisel something into a different color.").getBoolean();
+
 		ironChiselAttackDamage = config
 				.get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.").getInt();
 		diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2,

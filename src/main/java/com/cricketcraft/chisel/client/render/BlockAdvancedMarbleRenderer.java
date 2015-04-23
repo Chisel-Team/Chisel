@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.utils.Drawing;
 
@@ -45,8 +46,8 @@ public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
 			return true;
 		}
 
-		switch (var == null ? 0 : var.kind) {
-		case CarvableHelper.CTMX:
+		switch (var == null ? TextureType.NORMAL : var.type) {
+		case CTMX:
 			rendererCTM.blockAccess = world;
 			rendererCTM.renderMaxX = 1.0;
 			rendererCTM.renderMaxY = 1.0;
@@ -58,7 +59,7 @@ public class BlockAdvancedMarbleRenderer implements ISimpleBlockRenderingHandler
 			rendererCTM.rendererOld = rendererOld;
 
 			return rendererCTM.renderStandardBlock(block, x, y, z);
-		case CarvableHelper.CTMV:
+		case CTMV:
 			rendererColumn.blockAccess = world;
 			rendererColumn.renderMaxX = 1.0;
 			rendererColumn.renderMaxY = 1.0;

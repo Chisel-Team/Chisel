@@ -6,6 +6,7 @@ import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.carving.CarvingGroup;
+import com.cricketcraft.chisel.client.render.SubmapManagerFakeController;
 import com.cricketcraft.chisel.compat.fmp.ItemBlockChiselTorchPart;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
@@ -773,7 +774,7 @@ public enum Features {
 																				 */).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
 			futura.carverHelper.addVariation("tile.futura.0.desc", 0, "futura/WIP/screenMetallicWIP");
 			futura.carverHelper.addVariation("tile.futura.1.desc", 1, "futura/WIP/screenCyanWIP");
-			futura.carverHelper.addVariation("tile.futura.2.desc", 2, "futura/WIP/controllerWIP");
+			futura.carverHelper.addVariation("tile.futura.2.desc", 2, "futura/WIP/controllerWIP", new SubmapManagerFakeController());
 			futura.carverHelper.addVariation("tile.futura.3.desc", 3, "futura/WIP/wavyWIP");
 			futura.carverHelper.registerAll(futura, "futura");
 
