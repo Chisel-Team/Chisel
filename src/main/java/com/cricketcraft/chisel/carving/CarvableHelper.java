@@ -76,6 +76,8 @@ public class CarvableHelper {
 			return CUSTOM;
 		}
 	}
+	
+	private static CTM ctm = CTM.getInstance();
 
 	public ArrayList<CarvableVariation> variations = new ArrayList<CarvableVariation>();
 	CarvableVariation[] map = new CarvableVariation[16];
@@ -99,7 +101,7 @@ public class CarvableHelper {
 	}
 
 	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta) {
-		addVariation(description, metadata, texture, block, blockMeta);
+		addVariation(description, metadata, texture, block, blockMeta, null);
 	}
 
 	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, ISubmapManager customManager) {
@@ -224,8 +226,8 @@ public class CarvableHelper {
 				return variation.iconTop;
 
 			Block block = world.getBlock(x, y, z);
-			boolean topConnected = CTM.isConnected(world, x, y + 1, z, side, block, metadata);
-			boolean botConnected = CTM.isConnected(world, x, y - 1, z, side, block, metadata);
+			boolean topConnected = ctm.isConnected(world, x, y + 1, z, side, block, metadata);
+			boolean botConnected = ctm.isConnected(world, x, y - 1, z, side, block, metadata);
 
 			if (topConnected && botConnected)
 				return variation.seamsCtmVert.icons[2];
@@ -239,18 +241,18 @@ public class CarvableHelper {
 			if (side < 2)
 				return variation.iconTop;
 
-			Block block = CTM.getBlockOrFacade(world, x, y, z, side);
+			Block block = ctm.getBlockOrFacade(world, x, y, z, side);
 
 			boolean p;
 			boolean n;
 			boolean reverse = side == 2 || side == 4;
 
 			if (side < 4) {
-				p = CTM.isConnected(world, x - 1, y, z, side, block, metadata);
-				n = CTM.isConnected(world, x + 1, y, z, side, block, metadata);
+				p = ctm.isConnected(world, x - 1, y, z, side, block, metadata);
+				n = ctm.isConnected(world, x + 1, y, z, side, block, metadata);
 			} else {
-				p = CTM.isConnected(world, x, y, z - 1, side, block, metadata);
-				n = CTM.isConnected(world, x, y, z + 1, side, block, metadata);
+				p = ctm.isConnected(world, x, y, z - 1, side, block, metadata);
+				n = ctm.isConnected(world, x, y, z + 1, side, block, metadata);
 			}
 
 			if (p && n)
