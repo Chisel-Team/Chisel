@@ -104,6 +104,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 			xmax.render(inst, 3);
 		}
 	}
+	
+	private static CTM ctm = CTM.getInstance();
 
 	// globals added to save the JVM some trouble. No need to constantly create
 	// and destroy ints if we don't have to
@@ -273,7 +275,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(0.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
 			tessellator.addVertexWithUV(0.0, 1.0, 1.0, i.getMaxU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 4);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 4);
 
 			fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
 			fillColormap(colorRedBottomRight, colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, redmap);
@@ -301,7 +303,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 0.0, 0.0, i.getMinU(), i.getMaxV());
 			tessellator.addVertexWithUV(1.0, 1.0, 0.0, i.getMinU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 5);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 5);
 
 			fillLightmap(brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight, brightnessTopRight);
 			fillColormap(colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, redmap);
@@ -328,7 +330,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(0.0, 0.0, 0.0, i.getMinU(), i.getMaxV());
 			tessellator.addVertexWithUV(0.0, 1.0, 0.0, i.getMinU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 2);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 2);
 
 			fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
 			fillColormap(colorRedBottomRight, colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, redmap);
@@ -355,7 +357,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
 			tessellator.addVertexWithUV(1.0, 1.0, 1.0, i.getMaxU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 3);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 3);
 
 			fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
 			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
@@ -382,7 +384,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 0.0, 0.0, i.getMaxU(), i.getMinV());
 			tessellator.addVertexWithUV(1.0, 0.0, 1.0, i.getMaxU(), i.getMaxV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 0);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 0);
 
 			fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
 			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
@@ -409,7 +411,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			tessellator.addVertexWithUV(1.0, 1.0, 1.0, i.getMaxU(), i.getMaxV());
 			tessellator.addVertexWithUV(1.0, 1.0, 0.0, i.getMaxU(), i.getMinV());
 		} else {
-			int tex[] = CTM.getSubmapIndices(blockAccess, bx, by, bz, 1);
+			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 1);
 
 			fillLightmap(brightnessTopRight, brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight);
 			fillColormap(colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, redmap);

@@ -10,14 +10,15 @@ public class RenderBlocksColumn extends RenderBlocks {
 	TextureSubmap submap;
 	IIcon iconTop;
 	IIcon sides[] = new IIcon[6];
+	CTM ctm = CTM.getInstance();
 
 	RenderBlocksColumn() {
 		super();
 	}
 
 	boolean connected(IBlockAccess world, int x, int y, int z, Block block, int meta) {
-		Block inWorld = CTM.getBlockOrFacade(world, x, y, z, -1);
-		return inWorld != null && inWorld.equals(block) && CTM.getBlockOrFacadeMetadata(world, x, y, z, -1) == meta;
+		Block inWorld = ctm.getBlockOrFacade(world, x, y, z, -1);
+		return inWorld != null && inWorld.equals(block) && ctm.getBlockOrFacadeMetadata(world, x, y, z, -1) == meta;
 	}
 
 	@Override
