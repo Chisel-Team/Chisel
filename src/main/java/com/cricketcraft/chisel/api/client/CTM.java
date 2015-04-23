@@ -94,7 +94,7 @@ public class CTM {
 	/**
 	 * @return The indeces of the typical 4x4 submap to use for the given face at the given location.
 	 * 
-	 *         Indeces are in counter-clockwise order starting at bottom right.
+	 *         Indeces are in counter-clockwise order starting at bottom left.
 	 */
 	public int[] getSubmapIndices(IBlockAccess world, int x, int y, int z, int side) {
 		int[] ret = new int[] { 18, 19, 17, 16 };
