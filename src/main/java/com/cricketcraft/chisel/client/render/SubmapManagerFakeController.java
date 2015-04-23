@@ -6,7 +6,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.api.client.CTM;
-import com.cricketcraft.chisel.carving.CarvableHelper.ISubmapManager;
+import com.cricketcraft.chisel.api.client.ISubmapManager;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 
 import static com.cricketcraft.chisel.api.client.Dir.*;

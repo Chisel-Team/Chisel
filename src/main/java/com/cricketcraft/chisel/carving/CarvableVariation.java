@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.IIcon;
 
-import com.cricketcraft.chisel.carving.CarvableHelper.ISubmapManager;
+import com.cricketcraft.chisel.api.client.ISubmapManager;
 import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
 
