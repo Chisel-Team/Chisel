@@ -16,7 +16,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.client.render.CTM;
+import com.cricketcraft.chisel.api.client.CTM;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
 import com.cricketcraft.chisel.compat.FMPIntegration;
 import com.cricketcraft.chisel.item.ItemCarvable;

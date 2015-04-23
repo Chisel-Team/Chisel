@@ -1,10 +1,11 @@
 package com.cricketcraft.chisel.client.render;
 
+import com.cricketcraft.chisel.api.client.CTM;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
-
 import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.*;
 import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.SubSide.*;
 import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.Y_HALF_X;

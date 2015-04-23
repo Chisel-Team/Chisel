@@ -5,10 +5,11 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import com.cricketcraft.chisel.api.client.CTM;
 import com.cricketcraft.chisel.carving.CarvableHelper.ISubmapManager;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 
-import static com.cricketcraft.chisel.client.render.CTM.Dir.*;
+import static com.cricketcraft.chisel.api.client.Dir.*;
 
 public class SubmapManagerFakeController implements ISubmapManager {
 
