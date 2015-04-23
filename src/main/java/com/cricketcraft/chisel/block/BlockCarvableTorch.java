@@ -22,13 +22,16 @@ public class BlockCarvableTorch extends BlockTorch implements ICarvable {
 	public CarvableHelper carverHelper;
 	private String texLocation;
 	protected boolean emitsParticles = true;
+	public int idx;
 
-	public BlockCarvableTorch() {
+	public BlockCarvableTorch(int idx, String tex) {
 		super();
 		carverHelper = new CarvableHelper();
 		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 		setLightLevel(0.9375F);
 		setBlockName("torch");
+		this.idx = idx;
+		this.texLocation = tex;
 	}
 
 	@Override
@@ -45,11 +48,7 @@ public class BlockCarvableTorch extends BlockTorch implements ICarvable {
 	public void registerBlockIcons(IIconRegister icon) {
 		this.blockIcon = icon.registerIcon(Chisel.MOD_ID + ":torch/" + texLocation);
 	}
-
-	public void setInformation(String textureLocation) {
-		this.texLocation = textureLocation;
-	}
-
+	
 	public BlockCarvableTorch disableParticles() {
 		this.emitsParticles = false;
 		return this;

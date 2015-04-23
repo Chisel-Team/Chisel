@@ -1,9 +1,18 @@
 package com.cricketcraft.chisel.block;
 
+import static net.minecraftforge.common.util.ForgeDirection.DOWN;
+import static net.minecraftforge.common.util.ForgeDirection.UP;
+
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCompressedPowered;
+import net.minecraft.block.BlockFarmland;
+import net.minecraft.block.BlockHopper;
+import net.minecraft.block.BlockSlab;
+import net.minecraft.block.BlockSnow;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -13,6 +22,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -103,5 +113,20 @@ public class BlockCarvableSlab extends BlockCarvable {
 		if (isBottom)
 			super.getSubBlocks(block, tabs, list);
 	}
+	/**
+     * Checks if the block is a solid face on the given side, used by placement logic.
+     *
+     * @param world The current world
+     * @param x X Position
+     * @param y Y position
+     * @param z Z position
+     * @param side The side to check
+     * @return True if the block is solid on the specified side.
+     */
+	@Override
+    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
+    {
+        return !isBottom && (side == UP);
+    }
 
 }

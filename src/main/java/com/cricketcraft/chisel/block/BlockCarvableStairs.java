@@ -69,6 +69,10 @@ public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 
 		meta += par1World.getBlockMetadata(par2, par3, par4) % 8; // add upside-down-ness
 
+		if (par6ItemStack.getItemDamage() >= 8) {
+			meta += 8;
+		}
+		
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
 	}
 
@@ -84,6 +88,6 @@ public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 
 	@Override
 	public CarvableVariation getVariation(ItemStack stack) {
-		return carverHelper.getVariation(stack.getItemDamage());
+		return carverHelper.getVariation(blockMeta + (stack.getItemDamage() / 8));
 	}
 }

@@ -15,16 +15,21 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 public class MessagePresentConnect extends MessageCoords {
 	
 	private ForgeDirection dir;
-	private boolean connect;
+	private boolean connect, preserveDir;
 	
 	public MessagePresentConnect() {
 		super();
 	}
 	
 	public MessagePresentConnect(TileEntityPresent present, ForgeDirection dir, boolean connecting) {
+		this(present, dir, connecting, false);
+	}
+	
+	public MessagePresentConnect(TileEntityPresent present, ForgeDirection dir, boolean connecting, boolean preserveDir) {
 		super(present);
 		this.dir = dir;
 		this.connect = connecting;
+		this.preserveDir = preserveDir;
 	}
 	
 	@Override
@@ -32,6 +37,7 @@ public class MessagePresentConnect extends MessageCoords {
 		super.toBytes(buf);
 		buf.writeInt(dir.ordinal());
 		buf.writeBoolean(connect);
+		buf.writeBoolean(preserveDir);
 	}
 	
 	@Override
@@ -39,6 +45,7 @@ public class MessagePresentConnect extends MessageCoords {
 		super.fromBytes(buf);
 		dir = ForgeDirection.values()[buf.readInt()];
 		connect = buf.readBoolean();
+		preserveDir = buf.readBoolean();
 	}
 	
 	public static class Handler implements IMessageHandler<MessagePresentConnect, IMessage> {
@@ -50,7 +57,7 @@ public class MessagePresentConnect extends MessageCoords {
 				if (message.connect) {
 					((TileEntityPresent) te).connectTo(message.dir);
 				} else {
-					((TileEntityPresent) te).disconnect();
+					((TileEntityPresent) te).disconnect(message.preserveDir);
 				}
 			}
 			return null;

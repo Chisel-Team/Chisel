@@ -29,7 +29,7 @@ project.ext.gitHash = repo.log().find().abbreviatedId
 boolean dev = project.hasProperty('chisel_dev') && project.chisel_dev.equalsIgnoreCase('true')
 
 ext.buildnumber = 0
-project.buildnumber = !dev && System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
+project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
 
 version = "${mod_version}.${buildnumber}"
 group = "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html

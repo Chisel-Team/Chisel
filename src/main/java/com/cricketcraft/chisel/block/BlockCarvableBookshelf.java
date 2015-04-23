@@ -35,14 +35,19 @@ public class BlockCarvableBookshelf extends BlockCarvable {
 	}
 
 	@Override
-	public int quantityDropped(Random par1Random) {
+	public int quantityDropped(Random random) {
 		return 3;
 	}
 
 	@Override
-	public Item getItemDropped(int par1, Random par2Random, int par3) {
+	public Item getItemDropped(int ammount, Random random, int meta) {
 		return Items.book;
 	}
+
+    @Override
+    public int damageDropped(int damage){
+        return 0;
+    }
 
 	@Override
 	public float getEnchantPowerBonus(World world, int x, int y, int z) {

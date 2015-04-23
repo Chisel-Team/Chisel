@@ -2,6 +2,9 @@ package com.cricketcraft.chisel;
 
 import java.io.File;
 
+import com.cricketcraft.chisel.entity.EntityChiselSnowman;
+
+import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -13,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.compat.IMCHandler;
+import com.cricketcraft.chisel.compat.fmp.FMPCompat;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselTabs;
@@ -26,15 +30,16 @@ import com.cricketcraft.chisel.world.GeneratorChisel;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLInterModComms;
+import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent.MissingMapping;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -120,6 +125,9 @@ public class Chisel {
 		Features.preInit();
 		PacketHandler.init();
 		ChiselController.INSTANCE.preInit();
+		if (Loader.isModLoaded("ForgeMultipart")) {
+			new FMPCompat().init();
+		}
 		proxy.preInit();
 	}
 
@@ -135,6 +143,8 @@ public class Chisel {
 		addWorldgen(Features.GRANITE, ChiselBlocks.granite, Configurations.graniteAmount, 40, 100, 0.5);
 		addWorldgen(Features.DIORITE, ChiselBlocks.diorite, Configurations.dioriteAmount, 40, 100, 0.5);
 		GameRegistry.registerWorldGenerator(GeneratorChisel.INSTANCE, 1000);
+
+        EntityRegistry.registerModEntity(EntityChiselSnowman.class, "snowman", 0, this, 80, 1, true);
 
 		proxy.init();
 		MinecraftForge.EVENT_BUS.register(this);

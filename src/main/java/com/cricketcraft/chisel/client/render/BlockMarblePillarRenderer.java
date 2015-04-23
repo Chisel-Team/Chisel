@@ -95,7 +95,7 @@ public class BlockMarblePillarRenderer implements ISimpleBlockRenderingHandler {
 				renderer.uvRotateEast = 2;
 				renderer.uvRotateWest = 1;
 				renderer.uvRotateTop = 1;
-				renderer.uvRotateBottom = 1;
+				renderer.uvRotateBottom = 2;
 
 				block.sides[4] = block.getCtmIcon(4, metadata);
 				block.sides[5] = block.getCtmIcon(4, metadata);

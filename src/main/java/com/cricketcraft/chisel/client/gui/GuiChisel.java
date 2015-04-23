@@ -6,6 +6,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
@@ -53,6 +54,15 @@ public class GuiChisel extends GuiContainer {
 			int y = this.height / 2 - 6;
 			buttonList.add(new GuiButton(0, x, y, 53, 20, ""));
 			setButtonText();
+		}
+	}
+
+	@Override
+	public void updateScreen() {
+		super.updateScreen();
+		ItemStack held = player.getCurrentEquippedItem();
+		if (held == null || !(held.getItem() instanceof IChiselItem)) {
+			mc.displayGuiScreen(null);
 		}
 	}
 

@@ -31,7 +31,7 @@ public class GeneralChiselClient {
 	public static int tick = 0;
 
 	public static void spawnLavastoneFX(World world, BlockLavastone block, int x, int y, int z) {
-		if (Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0)
+		if (Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0 || Minecraft.getMinecraft().gameSettings.particleSetting != 0)
 			return;
 
 		float f = 0.15F;
@@ -79,7 +79,7 @@ public class GeneralChiselClient {
 	}
 
 	public static void spawnHolystoneFX(World world, BlockHolystone block, int x, int y, int z) {
-		if (Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0)
+		if (Configurations.particlesTickrate != 0 && tick++ % Configurations.particlesTickrate != 0 || Minecraft.getMinecraft().gameSettings.particleSetting != 0)
 			return;
 
 		float f = 0.15F;
@@ -165,14 +165,14 @@ public class GeneralChiselClient {
 	}
 
 	public static void spawnSnakestoneObsidianFX(World world, BlockSnakestoneObsidian block, int x, int y, int z) {
-		if (Configurations.particlesTickrate != 0 || tick++ % Configurations.particlesTickrate != 0) {
+		if (Configurations.particlesTickrate != 0 || tick++ % Configurations.particlesTickrate != 0 || Minecraft.getMinecraft().gameSettings.particleSetting != 0) {
 			EntitySnakestoneObsidianFX res = new EntitySnakestoneObsidianFX(world, block, x, y, z);
 			Minecraft.getMinecraft().effectRenderer.addEffect(res);
 		}
 	}
 
 	public static void spawnBallOMossFX(World world, double x, double y, double z) {
-		if (Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0) {
+		if (Configurations.particlesTickrate == 0 || tick++ % Configurations.particlesTickrate == 0 || Minecraft.getMinecraft().gameSettings.particleSetting != 0) {
 			EntityBallOMossFX res = new EntityBallOMossFX(world, x, y, z);
 			Minecraft.getMinecraft().effectRenderer.addEffect(res);
 		}
@@ -180,7 +180,7 @@ public class GeneralChiselClient {
 
 	public static EntityDiggingFX addBlockHitEffects(World world, int x, int y, int z, int side) {
 		Block block = world.getBlock(x, y, z);
-		if (block.isAir(world, x, y, z))
+		if (block.isAir(world, x, y, z) || Minecraft.getMinecraft().gameSettings.particleSetting != 0)
 			return null;
 
 		EffectRenderer renderer = Minecraft.getMinecraft().effectRenderer;
@@ -257,9 +257,10 @@ public class GeneralChiselClient {
 	}
 
 	public static void spawnAutoChiselFX(TileEntityAutoChisel te, ItemStack base) {
-		if (base != null) {
+		if (base != null && Minecraft.getMinecraft().gameSettings.particleSetting == 0) {
 			for (int i = 0; i < 10; i++) {
-				EntityDiggingFX particle = new EntityDiggingFX(te.getWorldObj(), te.xCoord + 0.5, te.yCoord + 0.95, te.zCoord + 0.5, 0, 0, 0, Block.getBlockFromItem(base.getItem()), base.getItemDamage());
+				EntityDiggingFX particle = new EntityDiggingFX(te.getWorldObj(), te.xCoord + 0.5, te.yCoord + 0.95, te.zCoord + 0.5, 0, 0, 0, Block.getBlockFromItem(base.getItem()),
+						base.getItemDamage());
 				particle.setVelocity((te.getWorldObj().rand.nextDouble() / 4) - 0.125, te.getWorldObj().rand.nextDouble() / 8, (te.getWorldObj().rand.nextDouble() / 4) - 0.125);
 				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 			}
