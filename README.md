@@ -3,6 +3,10 @@ Chisel
 Chisel is a mod for Minecraft which adds aesthetic blocks to the game through the use of a chisel.  Originally created by 
 AUTOMATIC_MAIDEN, it was ported to Minecraft 1.7.2 by asie, and maintained by Pokefenn during 1.7.10 and now maintained by Cricket.
 
+Pull Requests
+---------------
+If you wish to create a pull request with an awesome new feature, a language translation or even a bug fix. That's cool but please push to the correct branch which is dev. That is the working branch. Master is for releases only.
+
 Issue Reporting
 ----------------
 If you wish to report an issue with the mod, please submit one to the issue tracker in this repository.  When creating an 
