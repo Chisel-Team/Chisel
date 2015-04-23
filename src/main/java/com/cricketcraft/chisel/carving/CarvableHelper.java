@@ -19,6 +19,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.client.CTM;
+import com.cricketcraft.chisel.api.client.ISubmapManager;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
 import com.cricketcraft.chisel.compat.fmp.FMPIMC;
 import com.cricketcraft.chisel.item.ItemCarvable;
@@ -28,15 +29,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CarvableHelper {
-
-	public interface ISubmapManager {
-
-		IIcon getIcon(int side, int meta);
-
-		IIcon getIcon(IBlockAccess world, int x, int y, int z, int side);
-
-		void registerIcons(String modName, Block block, IIconRegister register);
-	}
 
 	public enum TextureType {
 
