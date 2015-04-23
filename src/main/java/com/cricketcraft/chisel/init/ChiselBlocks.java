@@ -1,9 +1,11 @@
 package com.cricketcraft.chisel.init;
 
+import net.minecraft.block.Block;
+
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.*;
+
 import cpw.mods.fml.common.registry.GameRegistry.ObjectHolder;
-import net.minecraft.block.Block;
 
 @ObjectHolder(Chisel.MOD_ID)
 public final class ChiselBlocks {
@@ -19,6 +21,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable cobblestone = null;
 	public static final BlockMarbleWall cobblestoneWall = null;
 	public static final BlockCarvableGlass glass = null;
+	public static final BlockCarvableGlass glass2 = null;
 	public static final BlockCarvablePane glass_pane = null;
 	public static final BlockCarvable sandstone = null;
 	public static final BlockCarvable sandstone_scribbles = null;
@@ -30,6 +33,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvableGlowstone glowstone = null;
 	public static final BlockCarvable lapis_block = null;
 	public static final BlockCarvable emerald_block = null;
+    public static final BlockCarvable nation = null;
 	public static final BlockCarvable nether_brick = null;
 	public static final BlockCarvable netherrack = null;
 	public static final BlockCarvable mossy_cobblestone = null;
@@ -40,6 +44,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvablePackedIce packedice = null;
 	public static final BlockCarvablePackedIcePillar packedice_pillar = null;
 	public static final BlockCarvable obsidian = null;
+	public static final BlockCarvable obsidian2 = null;
 	public static final BlockCarvablePowered redstone_block = null;
 	public static final BlockHolystone holystone = null;
 	public static final BlockGrimstone grimstone = null;
@@ -57,6 +62,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable templeblock = null;
 	public static final BlockCarvable mossy_templeblock = null;
 	public static final BlockCarvable factoryblock = null;
+	public static final BlockCarvable factoryblock2 = null;
 	public static final BlockCarvablePane paperwall = null;
 	public static final BlockCarvable paperwall_block = null;
 	public static final BlockCarvable woolen_clay = null;
@@ -101,7 +107,7 @@ public final class ChiselBlocks {
 	public static BlockCarvableIceStairs[] iceStairs = new BlockCarvableIceStairs[8];
 	public static BlockCarvablePackedIceStairs[] packediceStairs = new BlockCarvablePackedIceStairs[8];
 
-	public static BlockCarvableTorch[] torch = new BlockCarvableTorch[16];
+	public static Block[] torches = new BlockCarvableTorch[16];
 
 	public static BlockCarvable[] planks = new BlockCarvable[6];
 

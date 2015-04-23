@@ -32,8 +32,11 @@ logs
 screenshots
 mods
 world
+lib
+libs
 
 *.txt
 *.json
 /server.properties
 *.dat
+*.psd

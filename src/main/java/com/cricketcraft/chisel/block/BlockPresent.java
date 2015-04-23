@@ -31,7 +31,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class BlockPresent extends Block implements ICarvable {
 
 	public CarvableHelper carverHelper;
-	
+
 	private float minX, minY, minZ, maxX, maxY, maxZ;
 
 	public BlockPresent() {
@@ -48,7 +48,7 @@ public class BlockPresent extends Block implements ICarvable {
 	public String getModelTexture(int type) {
 		return "textures/blocks/present/presentChest" + type;
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tab, List list) {
@@ -118,12 +118,16 @@ public class BlockPresent extends Block implements ICarvable {
 
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
+		if(world.getTileEntity(x, y, z) instanceof TileEntityPresent)
 		return getBoundingBox((TileEntityPresent) world.getTileEntity(x, y, z));
+		else return null;
 	}
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
+		if(world.getTileEntity(x, y, z) instanceof TileEntityPresent)
 		return getBoundingBox((TileEntityPresent) world.getTileEntity(x, y, z));
+		else return null;
 	}
 
 	public AxisAlignedBB getBoundingBox(TileEntityPresent me) {
@@ -169,7 +173,7 @@ public class BlockPresent extends Block implements ICarvable {
 			}
 		}
 	}
-    
+
 	@Override
 	public boolean hasTileEntity(int metadata) {
 		return true;
@@ -193,7 +197,7 @@ public class BlockPresent extends Block implements ICarvable {
 		}
 		return 0;
 	}
-	
+
 	@Override
 	public int damageDropped(int meta) {
 		return meta;

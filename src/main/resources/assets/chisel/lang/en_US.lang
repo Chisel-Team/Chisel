@@ -1,5 +1,8 @@
 # Key localizations
 
+# Entity localizations
+entity.chisel.snowman.name=Snow Golem
+
 # Item localizations
 item.chisel.chisel_iron.name=Chisel
 
@@ -9,6 +12,7 @@ item.chisel.chisel.desc.lc2=Can target a block by leaving it in the inventory
 item.chisel.chisel.desc.modes=Has multiple modes for chiseling.
 
 item.chisel.chisel_diamond.name=Diamond Chisel
+item.chisel.chisel_obsidian.name=Obsidian Chisel
 
 item.ballMoss.name=Ball O' Moss
 item.ballMoss.desc=Right-Click to throw. This will turn Cobblestone to Moss Stone on impact.
@@ -28,6 +32,24 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 # Have fun! ~zombiepig333
 
 #Chisel 2
+
+#Nation
+tile.chisel.nation.name=Imperialistic Block
+tile.chisel.rebel.name=Rebellious Block
+tile.nation.0.desc=Camouflaged
+tile.nation.1.desc=Camouflaged (Secluded)
+tile.nation.2.desc=Bolted Plate
+tile.nation.3.desc=White Caution Tape
+tile.nation.4.desc=Teamed Caution Tape
+
+#Shingles
+tile.chisel.shingles.name=Shingles
+tile.shingles.0.desc=Red Diagonal
+tile.shingles.1.desc=Red Tiny Squares
+tile.shingles.2.desc=Red Big Squares
+tile.shingles.3.desc=Black Diagonal
+tile.shingles.4.desc=Black Tiny Squares
+tile.shingles.5.desc=Black Big Squares
 
 #Valentines
 tile.chisel.valentines.name=Valentines Block
@@ -58,18 +80,30 @@ tile.chisel.diorite.name=Diorite
 tile.diorite.0.desc=Generates in your world
 tile.diorite.1.desc=Polished Diorite
 tile.diorite.2.desc=Diorite Pillar
+tile.diorite.3.desc=Diorite Bricks
+tile.diorite.4.desc=Ornate Diorite
+tile.diorite.5.desc=Prismatic Diorite
+tile.diorite.6.desc=Diorite Small Tiles
 
 #Andesite
 tile.chisel.andesite.name=Andesite
 tile.andesite.0.desc=Generates in your world
 tile.andesite.1.desc=Polished Andesite
 tile.andesite.2.desc=Andesite Pillar
+tile.andesite.3.desc=Andesite Bricks
+tile.andesite.4.desc=Ornate Andesite
+tile.andesite.5.desc=Prismatic Andesite
+tile.andesite.6.desc=Andesite Small Tiles
 
 #Granite
 tile.chisel.granite.name=Granite
 tile.granite.0.desc=Generates in your world
 tile.granite.1.desc=Polished Granite
 tile.granite.2.desc=Granite Pillar
+tile.granite.3.desc=Granite Bricks
+tile.granite.4.desc=Ornate Granite
+tile.granite.5.desc=Prismatic Granite
+tile.granite.6.desc=Granite Small Tiles
 
 #Auto Chisel
 tile.chisel.autoChisel.name=Auto Chisel
@@ -77,6 +111,7 @@ autochisel.slot.chisel.tooltip=Chisel Slot
 autochisel.slot.target.tooltip=Target Slot
 
 #Leaves
+tile.chisel.leaves.name=Leaf
 tile.leaves.6.desc=Dead Leaves
 tile.leaves.7.desc=Fancy Leaves
 tile.leaves.8.desc=Pink Petals
@@ -95,12 +130,28 @@ tile.voidstone.4.desc=Runic Voidstone
 tile.voidstone.5.desc=Metal-Bordered Voidstone
 tile.voidstone.6.desc=Eye Voidstone
 tile.voidstone.7.desc=Beveled Voidstone
+tile.chisel.voidstoneRunic.name=Runic Voidstone
+tile.voidstoneRunic.0.desc=Voidstone - Orange Rune
+tile.voidstoneRunic.1.desc=Voidstone - Magenta Rune
+tile.voidstoneRunic.2.desc=Voidstone - Light Blue Rune
+tile.voidstoneRunic.3.desc=Voidstone - Yellow Rune
+tile.voidstoneRunic.4.desc=Voidstone - Lime Rune
+tile.voidstoneRunic.5.desc=Voidstone - Pink Rune
+tile.voidstoneRunic.6.desc=Voidstone - Gray Rune
+tile.voidstoneRunic.7.desc=Voidstone - Light Gray Rune
+tile.voidstoneRunic.8.desc=Voidstone - Cyan Rune
+tile.voidstoneRunic.9.desc=Voidstone - Purple Rune
+tile.voidstoneRunic.10.desc=Voidstone - Blue Rune
+tile.voidstoneRunic.11.desc=Voidstone - Brown Rune
+tile.voidstoneRunic.12.desc=Voidstone - Green Rune
+tile.voidstoneRunic.13.desc=Voidstone - Red Rune
+tile.voidstoneRunic.14.desc=Voidstone - Black Rune
 
 #Void Stone Pillars
 tile.chisel.voidstonePillar.name=Voidstone Pillar
 tile.voidstonePillar.0.desc=Striped Voidstone Pillar
 
--#Warning
+#Warning
 tile.chisel.warningSign.name=Warning Sign
 tile.warningSign.0.desc=Radiation
 tile.warningSign.1.desc=Biohazard
@@ -143,7 +194,10 @@ tile.arcane.4.desc=Glowing Symbols
 tile.arcane.5.desc=Bricks
 tile.arcane.6.desc=Temporal Conduit
 tile.arcane.7.desc=Braaainz
-tile.arcane.8.desc=Spatial Conduit
+tile.arcane.8.desc=Infernally Arcane
+tile.arcane.9.desc=Nasty Nazca Lines
+tile.arcane.10.desc=Fine Thaumaturge's Emblem
+tile.arcane.11.desc=Cracked Rock leaking Eldritch Glow
 
 #Thaumium
 tile.chisel.thaumium.name=Thaumium Block
@@ -204,6 +258,9 @@ tile.hexPlating.white.desc=White Plating
 tile.hexPlating.yellow.desc=Yellow Plating
 tile.hexPlating.gray.desc=Gray Plating
 
+#Hex Large Plating
+tile.chisel.hexLargePlating.name=Large Hex Plating
+
 #Grimstone
 tile.chisel.grimstone.name=Grimstone
 tile.grimstone.0.desc=Grimstone
@@ -224,6 +281,8 @@ tile.grimstone.14.desc=Flaky Grimstone
 
 #Technical Block
 tile.chisel.technical.name=Technical Block
+tile.chisel.technical2.name=Transparent Technical Block
+tile.chisel.technical3.name=Industrial Technical Block
 tile.technical.0.desc=Scaffold
 tile.technical.1.desc=Panels with Caution Tape
 tile.technical.2.desc=An Old Relic from the land of Oneteufyv
@@ -240,12 +299,15 @@ tile.technical.12.desc=Rusty Panel
 tile.technical.13.desc=Grate
 tile.technical.14.desc=Fan (Malfunctioning)
 tile.technical.15.desc=Rusty Grate
-tile.chisel.technical2.name=Transparent Technical Block
+tile.technical3.0.desc=I'm a big fan of this massive fan!
+tile.technical3.1.desc=Industrial Armor Plating
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
 tile.chisel.bronzeblock.name=Block of Bronze
 tile.chisel.copperblock.name=Block of Copper
+tile.chisel.gold2.name=Block of Gold
+tile.chisel.iron2.name=Block of Iron
 tile.chisel.leadblock.name=Block of Lead
 tile.chisel.silverblock.name=Block of Silver
 tile.chisel.steelblock.name=Block of Steel
@@ -522,6 +584,12 @@ tile.factory.13.desc=Worn Metal Wall with Ventilation Openings
 tile.factory.14.desc=Rusty Metal Plates
 tile.factory.15.desc=Worn Metal Column
 
+tile.chisel.factoryblock2.name=Factory Block
+tile.factory2.0.desc=Neon Blue Plating
+tile.factory2.1.desc=Vertical Venting
+tile.factory2.2.desc=Metallic Blue Circuit Plating
+tile.factory2.3.desc=Blue Wireframing
+
 #Diamond blocks
 tile.chisel.diamond_block.name=Diamond Block
 tile.diamond.1.desc=Embossed Diamond Block
@@ -560,6 +628,9 @@ tile.glass.13.desc=Thick Grid Glass
 tile.glass.14.desc=Thin Grid Glass
 tile.glass.15.desc=Modern Iron Fence
 
+tile.chisel.glass2.name=Glass
+tile.glass2.0.desc=Asymmetrical Leaded Glass
+
 #Sandstone
 tile.chisel.sandstone.name=Sandstone
 tile.sandstone.3.desc=Faded Sandstone
@@ -595,7 +666,7 @@ tile.concrete.9.desc=Partly Weathered Concrete Block
 tile.concrete.10.desc=Asphalt
 
 #Road Line
-tile.chisel.roadLine.name=Road Lines
+tile.chisel.road_line.name=Road Lines
 tile.roadLine.0.desc=White
 tile.roadLine.1.desc=Yellow
 tile.roadLine.2.desc=Double White
@@ -734,6 +805,10 @@ tile.stoneMoss.15.desc=Mossy Cobblestone with Dark Panel
 
 #Stone Bricks
 tile.chisel.stonebricksmooth.name=Stone Bricks
+tile.stonebricksmooth.0.desc=Modern Neutral Masonry
+tile.stonebricksmooth.1.desc=Modern Felsic Masonry
+tile.stonebricksmooth.2.desc=Modern Mafic Masonry
+tile.stonebricksmooth.3.desc=Modern Mixed Masonry
 tile.stonebricksmooth.4.desc=Small Stone Bricks
 tile.stonebricksmooth.5.desc=Wide Stone Bricks
 tile.stonebricksmooth.6.desc=Small Disordered Stone Bricks

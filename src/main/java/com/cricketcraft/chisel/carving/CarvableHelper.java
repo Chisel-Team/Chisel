@@ -6,10 +6,12 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -18,10 +20,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.client.CTM;
 import com.cricketcraft.chisel.client.render.TextureSubmap;
-import com.cricketcraft.chisel.compat.FMPIntegration;
+import com.cricketcraft.chisel.compat.fmp.FMPIMC;
 import com.cricketcraft.chisel.item.ItemCarvable;
 import com.cricketcraft.chisel.utils.GeneralClient;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class CarvableHelper {
@@ -84,27 +87,48 @@ public class CarvableHelper {
 	public boolean forbidChiseling = false;
 	public String blockName;
 
-	public void addVariation(String description, int metadata, Block bb) {
-		addVariation(description, metadata, null, bb, 0);
+    public void addVariation(String description, int metadata, Block bb) {
+        addVariation(description, metadata, null, bb, 0, Chisel.MOD_ID);
+    }
+
+    public void addVariation(String description, int metadata, Block bb, int blockMeta) {
+        addVariation(description, metadata, null, bb, blockMeta, Chisel.MOD_ID);
+    }
+
+    public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material) {
+        addVariation(description, metadata, null, bb, blockMeta, Chisel.MOD_ID);
+    }
+
+    public void addVariation(String description, int metadata, String texture) {
+        addVariation(description, metadata, texture, (ISubmapManager) null);
+    }
+    
+    public void addVariation(String description, int metadata, String texture, ISubmapManager manager) {
+    	addVariation(description, metadata, texture, null, 0, Chisel.MOD_ID, manager);
+    }
+
+	public void addVariation(String description, int metadata, Block bb, String modid) {
+		addVariation(description, metadata, null, bb, 0, modid);
 	}
 
-	public void addVariation(String description, int metadata, Block bb, int blockMeta) {
-		addVariation(description, metadata, null, bb, blockMeta);
+	public void addVariation(String description, int metadata, Block bb, int blockMeta, String modid) {
+		addVariation(description, metadata, null, bb, blockMeta, modid);
 	}
 
-	public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material) {
-		addVariation(description, metadata, null, bb, blockMeta);
+	public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material, String modid) {
+		addVariation(description, metadata, null, bb, blockMeta, modid);
 	}
 
-	public void addVariation(String description, int metadata, String texture) {
-		addVariation(description, metadata, texture, null, 0);
+	public void addVariation(String description, int metadata, String texture, String modid) {
+		addVariation(description, metadata, texture, null, 0, modid);
 	}
 
-	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta) {
-		addVariation(description, metadata, texture, block, blockMeta, null);
+	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid) {
+		addVariation(description, metadata, texture, block, blockMeta, modid, null);
 	}
 
-	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, ISubmapManager customManager) {
+	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, ISubmapManager customManager) {
+
 		if (variations.size() >= 16)
 			return;
 
@@ -118,7 +142,7 @@ public class CarvableHelper {
 		variation.metadata = metadata;
 		variation.blockName = blockName;
 
-		if (texture != null) {
+		if (texture != null && FMLCommonHandler.instance().getSide().isClient()) {
 			variation.texture = texture;
 			String path = "/assets/" + Chisel.MOD_ID + "/textures/blocks/" + variation.texture;
 			variation.type = (TextureType) TextureType.getTypeFor(path);
@@ -134,6 +158,17 @@ public class CarvableHelper {
 
 		variations.add(variation);
 		map[metadata] = variation;
+	}
+
+	// This is ugly, but faster than class.getResource
+	private boolean exists(String modid, String path, String postfix) {
+		ResourceLocation rl = new ResourceLocation(modid, "textures/blocks/" + path + postfix + ".png");
+		try {
+			Minecraft.getMinecraft().getResourceManager().getAllResources(rl);
+			return true;
+		} catch (Throwable t) {
+			return false;
+		}
 	}
 
 	public CarvableVariation getVariation(int metadata) {
@@ -245,7 +280,7 @@ public class CarvableHelper {
 
 			boolean p;
 			boolean n;
-			boolean reverse = side == 2 || side == 4;
+			boolean reverse = side == 2 || side == 5;
 
 			if (side < 4) {
 				p = ctm.isConnected(world, x - 1, y, z, side, block, metadata);
@@ -262,40 +297,40 @@ public class CarvableHelper {
 			else if (n)
 				return variation.seamsCtmVert.icons[reverse ? 3 : 2];
 			return variation.seamsCtmVert.icons[0];
-		case V9:
-		case V4:
-			int variationSize = (variation.type == TextureType.V9) ? 3 : 2;
+        case V9:
+        case V4:
+            int variationSize = (variation.type == TextureType.V9) ? 3 : 2;
 
-			int xModulus = x % variationSize;
-			int zModulus = z % variationSize;
-			// This ensures that blocks placed near 0,0 or it's axis' do not misbehave
-			int textureX = (xModulus < 0) ? (xModulus + variationSize) : xModulus;
-			int textureZ = (zModulus < 0) ? (zModulus + variationSize) : zModulus;
-			// Always invert the y index
-			int textureY = (variationSize - (y % variationSize) - 1);
+            int xModulus = x % variationSize;
+            int zModulus = z % variationSize;
+            //This ensures that blocks placed near 0,0 or it's axis' do not misbehave
+            int textureX = (xModulus < 0) ? (xModulus + variationSize) : xModulus;
+            int textureZ = (zModulus < 0) ? (zModulus + variationSize) : zModulus;
+            //Always invert the y index
+            int textureY = (variationSize - (y % variationSize) - 1);
 
-			if (side == 2 || side == 5) {
-				// For WEST, SOUTH reverse the indexes for both X and Z
-				textureX = (variationSize - textureX - 1);
-				textureZ = (variationSize - textureZ - 1);
-			} else if (side == 0) {
-				// For DOWN, reverse the indexes for only Z
-				textureZ = (variationSize - textureZ - 1);
-			}
+            if (side == 2 || side == 5) {
+                //For WEST, SOUTH reverse the indexes for both X and Z
+                textureX = (variationSize - textureX - 1);
+                textureZ = (variationSize - textureZ - 1);
+            } /*else if (side == 0) {
+                //For DOWN, reverse the indexes for only Z
+                textureZ = (variationSize - textureZ - 1);
+            }//*/
 
-			int index;
-			if (side == 0 || side == 1) {
-				// DOWN || UP
-				index = textureX + textureZ * variationSize;
-			} else if (side == 2 || side == 3) {
-				// NORTH || SOUTH
-				index = textureX + textureY * variationSize;
-			} else {
-				// WEST || EAST
-				index = textureZ + textureY * variationSize;
-			}
+            int index;
+            if (side == 0 || side == 1) {
+                // DOWN || UP
+                index = textureX + textureZ * variationSize;
+            } else if (side == 2 || side == 3) {
+                // NORTH || SOUTH
+                index = textureX + textureY * variationSize;
+            } else {
+                // WEST || EAST
+                index = textureZ + textureY * variationSize;
+            }
 
-			return variation.variations9.icons[index];
+            return variation.variations9.icons[index];
 		case CTMX:
 			return variation.icon;
 		case R16:
@@ -347,7 +382,7 @@ public class CarvableHelper {
 	public void registerVariation(String name, CarvableVariation variation, Block block, int blockMeta) {
 
 		if (block.renderAsNormalBlock() || block.isOpaqueCube() || block.isNormalCube()) {
-			FMPIntegration.registerFMP(block, blockMeta);
+			FMPIMC.registerFMP(block, blockMeta);
 		}
 
 		if (forbidChiseling)

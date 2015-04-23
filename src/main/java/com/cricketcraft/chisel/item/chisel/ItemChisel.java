@@ -1,7 +1,13 @@
 package com.cricketcraft.chisel.item.chisel;
 
-import java.util.List;
-
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.carving.ICarvingRegistry;
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.config.Configurations;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,20 +19,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.carving.ICarvingRegistry;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.config.Configurations;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import java.util.List;
 
 public class ItemChisel extends Item implements IChiselItem {
 
 	public enum ChiselType {
 		IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage),
-		DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage);
+		DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage),
+		OBSIDIAN(Configurations.obsidianChiselMaxDamage, Configurations.obsidianChiselAttackDamage);
 
 		final int maxDamage;
 		final int attackDamage;
@@ -71,11 +71,11 @@ public class ItemChisel extends Item implements IChiselItem {
 		String lc2 = I18n.format(base + "lc2");
 		String modes = I18n.format(base + "modes");
 		list.add(gui);
-		if (type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick) {
+		if (type == ChiselType.DIAMOND || type == ChiselType.OBSIDIAN || Configurations.ironChiselCanLeftClick) {
 			list.add(lc1);
 			list.add(lc2);
 		}
-		if (type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) {
+		if (type == ChiselType.DIAMOND || type == ChiselType.OBSIDIAN || Configurations.ironChiselHasModes) {
 			list.add("");
 			list.add(modes);
 		}
@@ -99,7 +99,7 @@ public class ItemChisel extends Item implements IChiselItem {
 		stack.damageItem(1, attacker);
 		return super.hitEntity(stack, attacker, target);
 	}
-	
+
 	@Override
 	public boolean canOpenGui(World world, EntityPlayer player, ItemStack chisel) {
 		return true;
@@ -117,11 +117,11 @@ public class ItemChisel extends Item implements IChiselItem {
 
 	@Override
 	public boolean canChiselBlock(World world, EntityPlayer player, int x, int y, int z, Block block, int metadata) {
-		return type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
+		return type == ChiselType.DIAMOND || type == ChiselType.OBSIDIAN || Configurations.ironChiselCanLeftClick;
 	}
 
 	@Override
 	public boolean hasModes(ItemStack chisel) {
-		return type == ChiselType.DIAMOND || Configurations.ironChiselHasModes;
+		return type == ChiselType.DIAMOND || type == ChiselType.OBSIDIAN || Configurations.ironChiselHasModes;
 	}
 }
