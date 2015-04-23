@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.client.render;
+package com.cricketcraft.chisel.api.client;
 
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -10,19 +10,17 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.api.IFacade;
-import com.cricketcraft.chisel.config.Configurations;
 import com.google.common.collect.Maps;
 
-import static com.cricketcraft.chisel.client.render.CTM.Dir.*;
-import static net.minecraftforge.common.util.ForgeDirection.*;
+import static com.cricketcraft.chisel.api.client.Dir.*;
 
+// @formatter:off
 /**
- * @formatter:off
  * The CTM renderer will draw the block's FACE using by assembling 4 quadrants from the 5 available block
  * textures.  The normal Texture.png is the blocks "unconnected" texture, and is used when CTM is disabled or the block
  * has nothing to connect to.  This texture has all of the outside corner quadrants  The texture-ctm.png contains the
  * rest of the quadrants.
- *
+ * <pre><blockquote>
  * ┌─────────────────┐ ┌────────────────────────────────┐
  * │ texture.png     │ │ texture-ctm.png                │
  * │ ╔══════╤══════╗ │ │  ──────┼────── ║ ─────┼───── ║ │
@@ -40,9 +38,9 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
  *                     │ │ 12   │ 13   ││ 14   │ 15   │ │
  *                     │ ═══════╧═══════╗ ─────┼───── ╔ │
  *                     └────────────────────────────────┘
- *
+ * </blockquote></pre>
  * combining { 18, 13,  9, 16 }, we can generate a texture connected to the right!
- *
+ * <pre><blockquote>
  * ╔══════╤═══════
  * ║      │      │
  * ║ 16   │ 9    │
@@ -50,10 +48,10 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
  * ║      │      │
  * ║ 18   │ 13   │
  * ╚══════╧═══════
- *
+ * </blockquote></pre>
  *
  * combining { 18, 13, 11,  2 }, we can generate a texture, in the shape of an L (connected to the right, and up
- *
+ * <pre><blockquote>
  * ║ ─────┼───── ╚
  * ║      │      │
  * ║ 2    │ 11   │
@@ -61,86 +59,23 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
  * ║      │      │
  * ║ 18   │ 13   │
  * ╚══════╧═══════
- *
+ * </blockquote></pre>
  *
  * HAVE FUN!
  * -CptRageToaster-
  */
+// @formatter:on
 public class CTM {
-
-	public enum Dir {
-		
-		TOP(UP), 
-		TOP_RIGHT(UP, EAST), 
-		RIGHT(EAST), 
-		BOTTOM_RIGHT(DOWN, EAST), 
-		BOTTOM(DOWN), 
-		BOTTOM_LEFT(DOWN, WEST), 
-		LEFT(WEST), 
-		TOP_LEFT(UP, WEST);
-		// @formatter:on
-
-		private static final ForgeDirection NORMAL = SOUTH;
-		private static final Dir[] VALUES = values();
-
-		private ForgeDirection[] dirs;
-
-		private Dir(ForgeDirection... dirs) {
-			this.dirs = dirs;
-		}
-
-		private boolean isConnected(CTM inst, IBlockAccess world, int x, int y, int z, int sideIdx, Block block, int meta) {
-			ForgeDirection side = getOrientation(sideIdx);
-			ForgeDirection[] dirs = getNormalizedDirs(side);
-			for (ForgeDirection dir : dirs) {
-				x += dir.offsetX;
-				y += dir.offsetY;
-				z += dir.offsetZ;
-			}
-			return inst.isConnected(world, x, y, z, side, block, meta);
-		}
-
-		private ForgeDirection[] getNormalizedDirs(ForgeDirection normal) {
-			if (normal == NORMAL) {
-				return dirs;
-			} else if (normal == NORMAL.getOpposite()) {
-				// If this is the opposite direction of the default normal, we
-				// need to mirror the dirs
-				// A mirror version does not affect y+ and y- so we ignore those
-				ForgeDirection[] ret = new ForgeDirection[dirs.length];
-				for (int i = 0; i < ret.length; i++) {
-					ret[i] = dirs[i].offsetY != 0 ? dirs[i] : dirs[i].getOpposite();
-				}
-				return ret;
-			} else {
-				ForgeDirection axis = null;
-				// Next, we need different a different rotation axis depending
-				// on if this is up/down or not
-				if (normal.offsetY == 0) {
-					// If it is not up/down, pick either the left or right-hand
-					// rotation
-					axis = normal == NORMAL.getRotation(UP) ? UP : DOWN;
-				} else {
-					// If it is up/down, pick either the up or down rotation.
-					axis = normal == UP ? NORMAL.getRotation(DOWN) : NORMAL.getRotation(UP);
-				}
-				ForgeDirection[] ret = new ForgeDirection[dirs.length];
-				// Finally apply all the rotations
-				for (int i = 0; i < ret.length; i++) {
-					ret[i] = dirs[i].getRotation(axis);
-				}
-				return ret;
-			}
-		}
-	}
 
 	/** Some hardcoded offset values for the different corner indeces */
 	private int[] submapOffsets = { 4, 5, 1, 0 };
 	private TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
 	private static EnumMap<Dir, Boolean> connectionMap = Maps.newEnumMap(Dir.class);
-	
-	public boolean disableObscuredFaceCheck = false;
-	
+	/** For use via the Chisel 2 config only, altering this could cause unintended behavior */
+	public static boolean disableObscuredFaceCheckConfig = false;
+
+	public Boolean disableObscuredFaceCheck = null;
+
 	private CTM() {
 		for (Dir dir : Dir.VALUES) {
 			connectionMap.put(dir, false);
@@ -151,11 +86,16 @@ public class CTM {
 		submapMap.put(2, new Dir[] { TOP, RIGHT, TOP_RIGHT });
 		submapMap.put(3, new Dir[] { TOP, LEFT, TOP_LEFT });
 	}
-	
+
 	public static CTM getInstance() {
 		return new CTM();
 	}
 
+	/**
+	 * @return The indeces of the typical 4x4 submap to use for the given face at the given location.
+	 * 
+	 *         Indeces are in counter-clockwise order starting at bottom right.
+	 */
 	public int[] getSubmapIndices(IBlockAccess world, int x, int y, int z, int side) {
 		int[] ret = new int[] { 18, 19, 17, 16 };
 
@@ -177,9 +117,7 @@ public class CTM {
 	}
 
 	/**
-	 * Builds the connection map and stores it in this class. The
-	 * {@link #connected(Dir)}, {@link #connectedAnd(Dir...)}, and
-	 * {@link #connectedOr(Dir...)} methods can be used to access it.
+	 * Builds the connection map and stores it in this CTM instance. The {@link #connected(Dir)}, {@link #connectedAnd(Dir...)}, and {@link #connectedOr(Dir...)} methods can be used to access it.
 	 */
 	public void buildConnectionMap(IBlockAccess world, int x, int y, int z, int side, Block block, int meta) {
 		for (Dir dir : Dir.VALUES) {
@@ -204,10 +142,20 @@ public class CTM {
 		}
 	}
 
+	/**
+	 * @param dir
+	 *            The direction to check connection in.
+	 * @return True if the cached connectionMap holds a connection in this {@link Dir direction}.
+	 */
 	public boolean connected(Dir dir) {
 		return connectionMap.get(dir);
 	}
 
+	/**
+	 * @param dirs
+	 *            The directions to check connection in.
+	 * @return True if the cached connectionMap holds a connection in <i><b>all</b></i> the given {@link Dir directions}.
+	 */
 	public boolean connectedAnd(Dir... dirs) {
 		for (Dir dir : dirs) {
 			if (!connected(dir)) {
@@ -217,6 +165,11 @@ public class CTM {
 		return true;
 	}
 
+	/**
+	 * @param dirs
+	 *            The directions to check connection in.
+	 * @return True if the cached connectionMap holds a connection in <i><b>one of</b></i> the given {@link Dir directions}.
+	 */
 	private boolean connectedOr(Dir... dirs) {
 		for (Dir dir : dirs) {
 			if (connected(dir)) {
@@ -226,18 +179,56 @@ public class CTM {
 		return false;
 	}
 
+	/**
+	 * A simple check for if the given block can connect to the given direction on the given side.
+	 * 
+	 * @param world
+	 * @param x
+	 *            The x coordinate of the block to check <i>against</i>. This is not the position of your block.
+	 * @param y
+	 *            The y coordinate of the block to check <i>against</i>. This is not the position of your block.
+	 * @param z
+	 *            The z coordinate of the block to check <i>against</i>. This is not the position of your block.
+	 * @param side
+	 *            The side of the block to check for connection status. This is <i>not</i> the direction to check in.
+	 * @param block
+	 *            The block to check against for connection.
+	 * @param meta
+	 *            The metadata to check against for connection.
+	 * @return True if the given block can connect to the given location on the given side.
+	 */
 	public boolean isConnected(IBlockAccess world, int x, int y, int z, int side, Block block, int meta) {
 		ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[side];
 		return isConnected(world, x, y, z, dir, block, meta);
 	}
 
+	/**
+	 * A simple check for if the given block can connect to the given direction on the given side.
+	 * 
+	 * @param world
+	 * @param x
+	 *            The x coordinate of the block to check <i>against</i>. This is not the position of your block.
+	 * @param y
+	 *            The y coordinate of the block to check <i>against</i>. This is not the position of your block.
+	 * @param z
+	 *            The z coordinate of the block to check <i>against</i>. This is not the position of your block.
+	 * @param dir
+	 *            The {@link ForgeDirection side} of the block to check for connection status. This is <i>not</i> the direction to check in.
+	 * @param block
+	 *            The block to check against for connection.
+	 * @param meta
+	 *            The metadata to check against for connection.
+	 * @return True if the given block can connect to the given location on the given side.
+	 */
 	public boolean isConnected(IBlockAccess world, int x, int y, int z, ForgeDirection dir, Block block, int meta) {
 		int x2 = x + dir.offsetX;
 		int y2 = y + dir.offsetY;
 		int z2 = z + dir.offsetZ;
 
+		boolean disableObscured = disableObscuredFaceCheck == null ? disableObscuredFaceCheckConfig : disableObscuredFaceCheck;
+
 		Block con = getBlockOrFacade(world, x, y, z, dir.ordinal());
-		Block obscuring = disableObscuredFaceCheck ? null : getBlockOrFacade(world, x2, y2, z2, dir.ordinal());
+		Block obscuring = disableObscured ? null : getBlockOrFacade(world, x2, y2, z2, dir.ordinal());
 
 		// no block or a bad API user
 		if (con == null) {
@@ -252,11 +243,22 @@ public class CTM {
 		}
 
 		// check that we aren't already connected outwards from this side
-		ret &= !(obscuring.equals(block) && getBlockOrFacadeMetadata(world, x2, y2, z2, dir.ordinal()) == meta && Configurations.connectInsideCTM);
+		ret &= !(obscuring.equals(block) && getBlockOrFacadeMetadata(world, x2, y2, z2, dir.ordinal()) == meta);
 
 		return ret;
 	}
 
+	/**
+	 * A utility method to access metadata from both the world and {@link IFacade} blocks in the world.
+	 * 
+	 * @param world
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param side
+	 *            The side to check for. -1 for unknown.
+	 * @return The metadata at this position in the world, or inside an {@link IFacade} block.
+	 */
 	public int getBlockOrFacadeMetadata(IBlockAccess world, int x, int y, int z, int side) {
 		Block blk = world.getBlock(x, y, z);
 		if (blk instanceof IFacade) {
@@ -265,6 +267,17 @@ public class CTM {
 		return world.getBlockMetadata(x, y, z);
 	}
 
+	/**
+	 * A utility method to access a block from both the world and {@link IFacade} blocks in the world.
+	 * 
+	 * @param world
+	 * @param x
+	 * @param y
+	 * @param z
+	 * @param side
+	 *            The side to check for. -1 for unknown.
+	 * @return The block at this position in the world, or inside an {@link IFacade} block.
+	 */
 	public Block getBlockOrFacade(IBlockAccess world, int x, int y, int z, int side) {
 		Block blk = world.getBlock(x, y, z);
 		if (blk instanceof IFacade) {

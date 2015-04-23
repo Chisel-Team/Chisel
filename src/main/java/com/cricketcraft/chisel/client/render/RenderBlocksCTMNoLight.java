@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel.client.render;
 
+import com.cricketcraft.chisel.api.client.CTM;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
