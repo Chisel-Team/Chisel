@@ -12,8 +12,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
 
 public class BlockMultiLayer extends BlockMultiLayerBase implements ICarvable {
 
@@ -22,13 +22,13 @@ public class BlockMultiLayer extends BlockMultiLayerBase implements ICarvable {
 	public BlockMultiLayer(Material mat, String baseIcon) {
 		super(mat, baseIcon);
 
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 	}
 
 	public BlockMultiLayer(Material mat, Block block) {
 		super(mat, block);
 
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 	}
 
 	@Override
@@ -54,12 +54,12 @@ public class BlockMultiLayer extends BlockMultiLayerBase implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
+	public IVariationInfo getVariation(ItemStack stack) {
 		return carverHelper.getVariation(stack.getItemDamage());
 	}
 }

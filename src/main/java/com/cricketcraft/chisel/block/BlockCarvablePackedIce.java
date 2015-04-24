@@ -16,8 +16,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
 
 public class BlockCarvablePackedIce extends Block implements ICarvable {
 
@@ -25,7 +25,7 @@ public class BlockCarvablePackedIce extends Block implements ICarvable {
 
 	public BlockCarvablePackedIce() {
 		super(Material.ice);
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 	}
 
 	@Override
@@ -64,12 +64,12 @@ public class BlockCarvablePackedIce extends Block implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
+	public IVariationInfo getVariation(ItemStack stack) {
 		return carverHelper.getVariation(stack.getItemDamage());
 	}
 }

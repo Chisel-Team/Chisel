@@ -4,7 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.client.render.RendererPillar;
 
 public class BlockCarvablePillar extends BlockCarvable {
@@ -32,12 +32,13 @@ public class BlockCarvablePillar extends BlockCarvable {
 
 	public IIcon getCtmIcon(int index, int metadata) {
 		// Workaround to prevent crash with invalid meta
-		CarvableVariation var = null;
-		if (metadata <= carverHelper.variations.size())
-			var = carverHelper.variations.get(metadata);
+		IVariationInfo var = null;
+		if (metadata <= carverHelper.infoList.size())
+			var = carverHelper.infoList.get(metadata);
 		else
-			var = carverHelper.variations.get(0);
+			var = carverHelper.infoList.get(0);
 
+		// TODO this...
 		if (index >= 4)
 			return var.iconTop;
 		if (var.seamsCtmVert == null)

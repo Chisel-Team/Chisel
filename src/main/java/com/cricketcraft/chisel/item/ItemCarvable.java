@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.utils.General;
 
@@ -47,7 +47,7 @@ public class ItemCarvable extends ItemBlock {
 			return;
 
 		ICarvable carvable = (ICarvable) block;
-		CarvableVariation var = carvable.getVariation(stack);
+		IVariationInfo var = carvable.getVariation(stack);
 		if (var == null)
 			return;
 

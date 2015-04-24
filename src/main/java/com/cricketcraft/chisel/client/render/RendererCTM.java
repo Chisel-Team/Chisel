@@ -8,8 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
-import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.utils.Drawing;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -37,7 +37,7 @@ public class RendererCTM implements ISimpleBlockRenderingHandler {
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
 		int meta = world.getBlockMetadata(x, y, z);
 
-		CarvableVariation var = ((ICarvable) block).getVariation(world, x, y, z, meta);
+		IVariationInfo var = ((ICarvable) block).getVariation(world, x, y, z, meta);
 		
 		if (rendererOld.hasOverrideBlockTexture()) {
 			// breaking anim

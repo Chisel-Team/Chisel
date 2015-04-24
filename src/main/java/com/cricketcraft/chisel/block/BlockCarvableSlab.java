@@ -1,18 +1,9 @@
 package com.cricketcraft.chisel.block;
 
-import static net.minecraftforge.common.util.ForgeDirection.DOWN;
-import static net.minecraftforge.common.util.ForgeDirection.UP;
-
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockCompressedPowered;
-import net.minecraft.block.BlockFarmland;
-import net.minecraft.block.BlockHopper;
-import net.minecraft.block.BlockSlab;
-import net.minecraft.block.BlockSnow;
-import net.minecraft.block.BlockStairs;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
@@ -25,6 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import static net.minecraftforge.common.util.ForgeDirection.UP;
 
 public class BlockCarvableSlab extends BlockCarvable {
 

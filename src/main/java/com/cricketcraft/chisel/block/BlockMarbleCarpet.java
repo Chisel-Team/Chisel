@@ -13,15 +13,15 @@ import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
 
 public class BlockMarbleCarpet extends BlockCarpet implements ICarvable {
 
 	public CarvableHelper carverHelper;
 
 	public BlockMarbleCarpet(Material m) {
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 	}
 
 	@Override
@@ -55,12 +55,12 @@ public class BlockMarbleCarpet extends BlockCarpet implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
+	public IVariationInfo getVariation(ItemStack stack) {
 		return carverHelper.getVariation(stack.getItemDamage());
 	}
 }

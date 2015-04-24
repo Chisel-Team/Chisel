@@ -12,8 +12,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.client.render.RendererCTMPane;
 import com.cricketcraft.chisel.init.ChiselTabs;
 
@@ -28,7 +28,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 	public BlockCarvablePane(Material material, boolean drops) {
 		super("", "", material, drops);
 
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 
 		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 	}
@@ -70,12 +70,12 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
+	public IVariationInfo getVariation(ItemStack stack) {
 		return carverHelper.getVariation(stack.getItemDamage());
 	}
 }
