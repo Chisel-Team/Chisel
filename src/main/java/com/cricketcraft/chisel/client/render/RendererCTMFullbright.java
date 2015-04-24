@@ -7,10 +7,6 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.api.rendering.TextureType;
-import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.utils.Drawing;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
