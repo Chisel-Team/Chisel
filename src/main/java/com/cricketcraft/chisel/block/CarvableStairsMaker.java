@@ -3,8 +3,8 @@ package com.cricketcraft.chisel.block;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.item.ItemCarvable;
 
 import cpw.mods.fml.common.registry.GameRegistry;

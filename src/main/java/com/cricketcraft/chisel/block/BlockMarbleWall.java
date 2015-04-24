@@ -9,7 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 
-import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
 
 public class BlockMarbleWall extends BlockWall {
 

@@ -13,8 +13,8 @@ import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 
 public class BlockMarbleCarpet extends BlockCarpet implements ICarvable {
 

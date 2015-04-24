@@ -14,12 +14,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
+import com.cricketcraft.chisel.api.carving.CarvingUtils.SimpleCarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.block.*;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.carving.CarvingGroup;
 import com.cricketcraft.chisel.client.render.SubmapManagerCarpetFloor;
 import com.cricketcraft.chisel.client.render.SubmapManagerFakeController;
 import com.cricketcraft.chisel.client.render.SubmapManagerSlab;
@@ -46,6 +46,7 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.sGNames;
 
@@ -1360,7 +1361,7 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockLeaf leaves = (BlockLeaf) new BlockLeaf(Material.leaves).setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.2F).setStepSound(Block.soundTypeGrass);
-			Carving.chisel.addGroup(new CarvingGroup("leaves") {
+			Carving.chisel.addGroup(new SimpleCarvingGroup("leaves") {
 
 				public List<ICarvingVariation> getVariations() {
 					if (Configurations.chiselBackToVanillaLeaves) {

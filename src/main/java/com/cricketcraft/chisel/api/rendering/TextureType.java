@@ -15,8 +15,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.client.render.RenderBlocksCTM;
 import com.cricketcraft.chisel.client.render.RenderBlocksColumn;
 
