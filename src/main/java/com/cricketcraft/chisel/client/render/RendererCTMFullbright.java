@@ -8,7 +8,8 @@ import org.lwjgl.opengl.GL11;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.api.rendering.TextureType;
 import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.utils.Drawing;
 
@@ -34,27 +35,29 @@ public class RendererCTMFullbright implements ISimpleBlockRenderingHandler {
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
+	// TODO this needs to go...amalgamate into RendererCTM
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
-		int meta = world.getBlockMetadata(x, y, z);
-
-		CarvableVariation var = ((ICarvable) block).getVariation(world, x, y, z, meta);
-
-		if (var != null && var.type == TextureType.CTMX) {
-			rendererCTMNoLight.blockAccess = world;
-			rendererCTMNoLight.renderMaxX = 1.0;
-			rendererCTMNoLight.renderMaxY = 1.0;
-			rendererCTMNoLight.renderMaxZ = 1.0;
-
-			rendererCTMNoLight.submap = var.submap;
-			rendererCTMNoLight.submapSmall = var.submapSmall;
-
-			rendererCTMNoLight.rendererOld = rendererOld;
-
-			return rendererCTMNoLight.renderStandardBlock(block, x, y, z);
-		} else {
-			return rendererOld.renderStandardBlock(block, x, y, z);
-		}
+//		int meta = world.getBlockMetadata(x, y, z);
+//
+//		IVariationInfo var = ((ICarvable) block).getVariation(world, x, y, z, meta);
+//
+//		if (var != null && var.getType() == TextureType.CTMX) {
+//			rendererCTMNoLight.blockAccess = world;
+//			rendererCTMNoLight.renderMaxX = 1.0;
+//			rendererCTMNoLight.renderMaxY = 1.0;
+//			rendererCTMNoLight.renderMaxZ = 1.0;
+//
+//			rendererCTMNoLight.submap = var.submap;
+//			rendererCTMNoLight.submapSmall = var.submapSmall;
+//
+//			rendererCTMNoLight.rendererOld = rendererOld;
+//
+//			return rendererCTMNoLight.renderStandardBlock(block, x, y, z);
+//		} else {
+//			return rendererOld.renderStandardBlock(block, x, y, z);
+//		}
+		return rendererOld.renderStandardBlock(block, x, y, z);
 	}
 
 	@Override

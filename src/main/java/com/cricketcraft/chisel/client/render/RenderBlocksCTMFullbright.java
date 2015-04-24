@@ -1,7 +1,7 @@
 package com.cricketcraft.chisel.client.render;
 
-import com.cricketcraft.chisel.api.client.CTM;
-import com.cricketcraft.chisel.api.client.TextureSubmap;
+import com.cricketcraft.chisel.api.rendering.CTM;
+import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;

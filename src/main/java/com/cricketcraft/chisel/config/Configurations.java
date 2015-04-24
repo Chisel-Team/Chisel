@@ -2,7 +2,7 @@ package com.cricketcraft.chisel.config;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.Features;
-import com.cricketcraft.chisel.api.client.CTM;
+import com.cricketcraft.chisel.api.rendering.CTM;
 
 import net.minecraft.item.ItemDye;
 import net.minecraftforge.common.config.Configuration;

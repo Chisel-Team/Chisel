@@ -5,7 +5,7 @@ import net.minecraft.util.IIcon;
 
 public class RenderBlocksCTMCarpet extends RenderBlocksCTM {
 
-	RenderBlocksCTMCarpet() {
+	public RenderBlocksCTMCarpet() {
 		super();
 	}
 

@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.api.client.ISubmapManager;
+import com.cricketcraft.chisel.api.rendering.ISubmapManager;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 
 /**
