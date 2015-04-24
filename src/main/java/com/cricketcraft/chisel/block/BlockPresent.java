@@ -21,9 +21,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

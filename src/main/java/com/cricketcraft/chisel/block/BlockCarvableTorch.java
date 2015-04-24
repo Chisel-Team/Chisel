@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.init.ChiselTabs;
 
 import cpw.mods.fml.relauncher.Side;

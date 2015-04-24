@@ -55,5 +55,10 @@ public enum IMC {
 	/**
 	 * The modid of Chisel so you can easily send IMC to this mod.
 	 */
-	public static final String CHISEL_MODID = Chisel.MOD_ID;
+	@Deprecated
+	public static final String CHISEL_MODID = "chisel";
+	
+	public static final String getModid() {
+		return ChiselAPIProps.MOD_ID;
+	}
 }

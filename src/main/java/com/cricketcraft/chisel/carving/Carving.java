@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.carving.ICarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingRegistry;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
@@ -21,6 +22,10 @@ public class Carving implements ICarvingRegistry {
 
 	public static final ICarvingRegistry chisel = new Carving();
 	public static final Carving needle = new Carving();
+	
+	static {
+		CarvingUtils.chisel = chisel;
+	}
 
 	private Carving() {
 	}
@@ -152,7 +157,7 @@ public class Carving implements ICarvingRegistry {
 			throw new NullPointerException("Cannot add variation in group " + groupName + " for null block.");
 		}
 
-		ICarvingVariation variation = new CarvingVariation(block, metadata, order);
+		ICarvingVariation variation = CarvingUtils.getDefaultVariationFor(block, metadata, order);
 		addVariation(groupName, variation);
 	}
 
@@ -167,7 +172,7 @@ public class Carving implements ICarvingRegistry {
 		ICarvingGroup group = groups.getGroupByName(groupName);
 
 		if (group == null) {
-			group = new CarvingGroup(groupName);
+			group = CarvingUtils.getDefaultGroupFor(groupName);
 			addGroup(group);
 		}
 

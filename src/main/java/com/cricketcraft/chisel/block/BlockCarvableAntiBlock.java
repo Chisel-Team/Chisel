@@ -6,7 +6,7 @@ import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
 
 public class BlockCarvableAntiBlock extends BlockCarvableColor implements ICarvable {
 
