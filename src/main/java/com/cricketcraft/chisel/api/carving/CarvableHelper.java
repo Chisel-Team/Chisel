@@ -26,7 +26,6 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class CarvableHelper {
 	
 	public static Class<? extends ItemBlock> itemCarvableClass = null;
-	public static IIcon missingIcon = null;
 
 	private Block theBlock;
 	
@@ -38,7 +37,7 @@ public class CarvableHelper {
 		this.theBlock = block;
 	}
     public void addVariation(String description, int metadata, ISubmapManager<? extends RenderBlocks> manager) {
-    	addVariation(description	, metadata, null, manager);
+    	addVariation(description, metadata, null, manager);
     }
 
     public void addVariation(String description, int metadata, Block bb) {
