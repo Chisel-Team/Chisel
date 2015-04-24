@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.api.rendering.CTM;
 import com.cricketcraft.chisel.api.rendering.ISubmapManager;
@@ -13,7 +14,7 @@ import com.cricketcraft.chisel.init.ChiselBlocks;
 
 import static com.cricketcraft.chisel.api.rendering.Dir.*;
 
-public class SubmapManagerFakeController implements ISubmapManager {
+public class SubmapManagerFakeController implements ISubmapManager<RenderBlocks> {
 
 	private TextureSubmap map;
 	private CTM ctm = CTM.getInstance();
@@ -45,9 +46,17 @@ public class SubmapManagerFakeController implements ISubmapManager {
 	public void registerIcons(String modName, Block block, IIconRegister register) {
 		map = new TextureSubmap(register.registerIcon(modName + ":futura/WIP/controllerWIP-ctm"), 2, 2);
 	}
-	
+
 	@Override
 	public RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
 		return rendererOld;
+	}
+
+	@Override
+	public void preRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+	}
+
+	@Override
+	public void postRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -34,7 +35,7 @@ public class CarvableHelper {
 	public CarvableHelper(Block block) {
 		this.theBlock = block;
 	}
-    public void addVariation(String description, int metadata, ISubmapManager manager) {
+    public void addVariation(String description, int metadata, ISubmapManager<? extends RenderBlocks> manager) {
     	addVariation(description, metadata, null, manager);
     }
 
@@ -51,10 +52,10 @@ public class CarvableHelper {
     }
 
     public void addVariation(String description, int metadata, String texture) {
-        addVariation(description, metadata, texture, (ISubmapManager) null);
+        addVariation(description, metadata, texture, (ISubmapManager<? extends RenderBlocks>) null);
     }
     
-    public void addVariation(String description, int metadata, String texture, ISubmapManager manager) {
+    public void addVariation(String description, int metadata, String texture, ISubmapManager<? extends RenderBlocks> manager) {
     	addVariation(description, metadata, texture, null, 0, Chisel.MOD_ID, manager);
     }
 
@@ -78,7 +79,7 @@ public class CarvableHelper {
 		addVariation(description, metadata, texture, block, blockMeta, modid, null);
 	}
 
-	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, ISubmapManager customManager) {
+	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, ISubmapManager<? extends RenderBlocks> customManager) {
 
 		if (infoList.size() >= 16)
 			return;

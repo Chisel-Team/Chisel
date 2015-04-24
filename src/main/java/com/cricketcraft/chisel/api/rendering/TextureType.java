@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
@@ -306,7 +307,7 @@ public enum TextureType {
 		this.suffixes = suffixes.length == 0 ? new String[] { "" } : suffixes;
 	}
 	
-	public ISubmapManager createManagerFor(ICarvingVariation variation, String texturePath) {
+	public ISubmapManager<RenderBlocks> createManagerFor(ICarvingVariation variation, String texturePath) {
 		return new SubmapManagerDefault(this, variation, texturePath);
 	}
 	
@@ -355,7 +356,7 @@ public enum TextureType {
 		}
 	}
 	
-	private static class SubmapManagerDefault implements ISubmapManager {
+	private static class SubmapManagerDefault implements ISubmapManager<RenderBlocks> {
 
 		private TextureType type;
 		private ICarvingVariation variation;
@@ -386,6 +387,14 @@ public enum TextureType {
 		@Override
 		public RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
 			return type.createRenderContext(rendererOld, world, cachedObject);
+		}
+		
+		@Override
+		public void preRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		}
+		
+		@Override
+		public void postRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {			
 		}
 	}
 }

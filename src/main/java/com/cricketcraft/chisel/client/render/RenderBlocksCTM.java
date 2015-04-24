@@ -1,15 +1,17 @@
 package com.cricketcraft.chisel.client.render;
 
-import com.cricketcraft.chisel.api.rendering.CTM;
-import com.cricketcraft.chisel.api.rendering.TextureSubmap;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
-import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.*;
+import net.minecraftforge.common.util.ForgeDirection;
+
+import com.cricketcraft.chisel.api.rendering.CTM;
+import com.cricketcraft.chisel.api.rendering.ISubmapManager;
+import com.cricketcraft.chisel.api.rendering.TextureSubmap;
+
 import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.SubSide.*;
-import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.Y_HALF_X;
+import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.*;
 
 public class RenderBlocksCTM extends RenderBlocks {
 
@@ -18,11 +20,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 	 *
 	 * The naming scheme is as follows:
 	 *
-	 * ZERO and ONE are special cases, they are the absolute min and absolute
-	 * max of the block. X, Y, Z, or any combination means that the axes listed
-	 * in the name are at 1. X, Y, Z, or any combination followed by HALF means
-	 * that those axes are at 0.5. X, Y, Z, or any combination after a HALF
-	 * means those axes are at 1.
+	 * ZERO is a special case, it is the absolute min point of the block. X, Y, Z, or any combination means that the axes listed in the name are at 1. X, Y, Z, or any combination followed by HALF
+	 * means that those axes are at 0.5. X, Y, Z, or any combination after a HALF means those axes are at 1.
 	 */
 	enum Vert {
 		// @formatter:off
@@ -61,26 +60,53 @@ public class RenderBlocksCTM extends RenderBlocks {
 			this.y = y;
 			this.z = z;
 		}
+		
+		private static double u, v, xDiff, yDiff, zDiff, uDiff, vDiff;
 
-		void render(RenderBlocksCTM inst, int cacheID) {
+		void render(RenderBlocksCTM inst, ForgeDirection normal, int cacheID) {
 			if (inst.enableAO) {
 				inst.tessellator.setColorOpaque_F(inst.redCache[cacheID], inst.grnCache[cacheID], inst.bluCache[cacheID]);
 				inst.tessellator.setBrightness(inst.lightingCache[cacheID]);
 			}
-			double xDiff = inst.renderMaxX - inst.renderMinX;
-			double yDiff = inst.renderMaxY - inst.renderMinY;
-			double zDiff = inst.renderMaxZ - inst.renderMinZ;
+			u = cacheID == 1 || cacheID == 2 ? inst.maxU : inst.minU;
+			v = cacheID < 2 ? inst.maxV : inst.minV;
+			
+			uDiff = inst.maxU - inst.minU;
+			vDiff = inst.maxV - inst.minV;
 
-			inst.tessellator.addVertexWithUV(inst.renderMinX + (x * xDiff), inst.renderMinY + (y * yDiff), inst.renderMinZ + (z * zDiff), inst.uCache[cacheID], inst.vCache[cacheID]);
+			if (inst.renderMinX + inst.renderMinY + inst.renderMinZ != 0 || inst.renderMaxX + inst.renderMaxY + inst.renderMaxZ != 3) {
+				boolean uMin = u == inst.minU;
+				boolean vMin = v == inst.minV;
+
+				xDiff = inst.renderMaxX - inst.renderMinX;
+				yDiff = inst.renderMaxY - inst.renderMinY;
+				zDiff = inst.renderMaxZ - inst.renderMinZ;
+
+				if (normal.offsetY != 0) {
+					uDiff *= uMin ? inst.renderMinX : 1 - inst.renderMaxX;
+					vDiff *= vMin ? inst.renderMinZ : 1 - inst.renderMaxZ;
+				} else if (normal.offsetX != 0) {
+					uDiff *= uMin ? inst.renderMinZ : 1 - inst.renderMaxZ;
+					vDiff *= vMin ? inst.renderMinY : 1 - inst.renderMaxY;
+				} else if (normal.offsetZ != 0) {
+					uDiff *= uMin ? inst.renderMinX : 1 - inst.renderMaxX;
+					vDiff *= vMin ? inst.renderMinY : 1 - inst.renderMaxY;
+				}
+				u = u == inst.minU ? inst.minU + uDiff : inst.maxU - uDiff;
+
+				v = v == inst.minV ? inst.minV + vDiff : inst.maxV - vDiff;
+			} else {
+				xDiff = yDiff = zDiff = 1;
+			}
+
+			inst.tessellator.addVertexWithUV(inst.renderMinX + (x * xDiff), inst.renderMinY + (y * yDiff), inst.renderMinZ + (z * zDiff), u, v);
 		}
 	}
 
 	/**
-	 * Each side is divided into 4 sub-sides. LB(left bottom), RB(right bottom),
-	 * LT(right top), and RT(right top).
+	 * Each side is divided into 4 sub-sides. LB(left bottom), RB(right bottom), LT(right top), and RT(right top).
 	 *
-	 * Each sub-side contains 4 {@link Vert} objects representing its position
-	 * on the block.
+	 * Each sub-side contains 4 {@link Vert} objects representing its position on the block.
 	 */
 	enum SubSide {
 		// @formatter:off
@@ -94,22 +120,38 @@ public class RenderBlocksCTM extends RenderBlocks {
 		YPOS_LB(YZ, X_HALF_YZ, XZ_HALF_Y, Z_HALF_Y), YPOS_RB(X_HALF_YZ, XYZ, Z_HALF_XY, XZ_HALF_Y), YPOS_RT(XZ_HALF_Y, Z_HALF_XY, XY, X_HALF_Y), YPOS_LT(Z_HALF_Y, XZ_HALF_Y, X_HALF_Y, Y);
 		// @formatter:on
 		private Vert xmin, xmax, ymin, ymax;
+		private ForgeDirection normal;
 
 		SubSide(Vert xmin, Vert ymin, Vert ymax, Vert xmax) {
 			this.xmin = xmin;
 			this.ymin = ymin;
 			this.ymax = ymax;
 			this.xmax = xmax;
+			this.normal = calcNormal();
+		}
+
+		private ForgeDirection calcNormal() {
+			double xTot = xmin.x + xmax.x + ymin.x + ymax.x;
+			double yTot = xmin.y + xmax.y + ymin.y + ymax.y;
+			double zTot = xmin.z + xmax.z + ymin.z + ymax.z;
+			if (xTot % 4 == 0) {
+				return xTot > 0 ? ForgeDirection.EAST : ForgeDirection.WEST;
+			} else if (yTot % 4 == 0) {
+				return yTot > 0 ? ForgeDirection.UP : ForgeDirection.DOWN;
+			} else if (zTot % 4 == 0) {
+				return zTot > 0 ? ForgeDirection.SOUTH : ForgeDirection.NORTH;
+			}
+			return ForgeDirection.UNKNOWN;
 		}
 
 		void render(RenderBlocksCTM inst) {
-			xmin.render(inst, 0);
-			ymin.render(inst, 1);
-			ymax.render(inst, 2);
-			xmax.render(inst, 3);
+			xmin.render(inst, normal, 0);
+			ymin.render(inst, normal, 1);
+			ymax.render(inst, normal, 2);
+			xmax.render(inst, normal, 3);
 		}
 	}
-	
+
 	private static CTM ctm = CTM.getInstance();
 
 	// globals added to save the JVM some trouble. No need to constantly create
@@ -125,8 +167,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 	}
 
 	Tessellator tessellator;
-	double[] uCache = new double[4];
-	double[] vCache = new double[4];
+	double minU, maxU;
+	double minV, maxV;
 	int[] lightingCache = new int[4];
 	float[] redCache = new float[4];
 	float[] grnCache = new float[4];
@@ -134,6 +176,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 	public TextureSubmap submap;
 	public TextureSubmap submapSmall;
 	public RenderBlocks rendererOld;
+	public ISubmapManager<RenderBlocksCTM> manager;
 
 	int[][] lightmap = new int[3][3];
 	float[][] redmap = new float[3][3];
@@ -250,6 +293,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 	}
 
 	void side(SubSide side, int iconIndex) {
+		
 		IIcon icon;
 		TextureSubmap map;
 		if (iconIndex >= 16) {
@@ -267,15 +311,20 @@ public class RenderBlocksCTM extends RenderBlocks {
 		double vmax = icon.getMaxV();
 		double vmin = icon.getMinV();
 
-		uCache[0] = umin;
-		uCache[1] = umax;
-		uCache[2] = umax;
-		uCache[3] = umin;
+		minU = umin;
+		maxU = umax;
+		minV = vmin;
+		maxV = vmax;
 
-		vCache[0] = vmax;
-		vCache[1] = vmax;
-		vCache[2] = vmin;
-		vCache[3] = vmin;
+		// uCache[0] = umin;
+		// uCache[1] = umax;
+		// uCache[2] = umax;
+		// uCache[3] = umin;
+		//
+		// vCache[0] = vmax;
+		// vCache[1] = vmax;
+		// vCache[2] = vmin;
+		// vCache[3] = vmin;
 
 		side.render(this);
 	}
@@ -297,6 +346,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, grnmap);
 			fillColormap(colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, blumap);
 
+			pre(ForgeDirection.WEST);
+
 			getLight(0, 0);
 			side(XNEG_LB, tex[0]);
 			getLight(1, 0);
@@ -305,6 +356,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 			side(XNEG_RT, tex[2]);
 			getLight(0, 1);
 			side(XNEG_LT, tex[3]);
+			
+			post(ForgeDirection.WEST);
 		}
 	}
 
@@ -324,6 +377,9 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, redmap);
 			fillColormap(colorGreenTopLeft, colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, grnmap);
 			fillColormap(colorBlueTopLeft, colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, blumap);
+			
+			pre(ForgeDirection.EAST);
+			
 			getLight(0, 0);
 			side(XPOS_LB, tex[0]);
 			getLight(1, 0);
@@ -332,7 +388,10 @@ public class RenderBlocksCTM extends RenderBlocks {
 			side(XPOS_RT, tex[2]);
 			getLight(0, 1);
 			side(XPOS_LT, tex[3]);
+			
+			post(ForgeDirection.EAST);
 		}
+		rendererOld.clearOverrideBlockTexture();
 	}
 
 	@Override
@@ -351,6 +410,9 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedBottomRight, colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, redmap);
 			fillColormap(colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, grnmap);
 			fillColormap(colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, blumap);
+			
+			pre(ForgeDirection.NORTH);
+
 			getLight(0, 0);
 			side(ZNEG_LB, tex[0]);
 			getLight(1, 0);
@@ -359,7 +421,10 @@ public class RenderBlocksCTM extends RenderBlocks {
 			side(ZNEG_RT, tex[2]);
 			getLight(0, 1);
 			side(ZNEG_LT, tex[3]);
+			
+			post(ForgeDirection.NORTH);
 		}
+		rendererOld.clearOverrideBlockTexture();
 	}
 
 	@Override
@@ -378,6 +443,9 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
 			fillColormap(colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, grnmap);
 			fillColormap(colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, blumap);
+
+			pre(ForgeDirection.SOUTH);
+			
 			getLight(0, 0);
 			side(ZPOS_LB, tex[0]);
 			getLight(1, 0);
@@ -386,7 +454,10 @@ public class RenderBlocksCTM extends RenderBlocks {
 			side(ZPOS_RT, tex[2]);
 			getLight(0, 1);
 			side(ZPOS_LT, tex[3]);
+			
+			post(ForgeDirection.SOUTH);
 		}
+		rendererOld.clearOverrideBlockTexture();
 	}
 
 	@Override
@@ -405,6 +476,9 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
 			fillColormap(colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, grnmap);
 			fillColormap(colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, blumap);
+			
+			pre(ForgeDirection.DOWN);
+			
 			getLight(0, 0);
 			side(YNEG_LB, tex[0]);
 			getLight(1, 0);
@@ -413,7 +487,10 @@ public class RenderBlocksCTM extends RenderBlocks {
 			side(YNEG_RT, tex[2]);
 			getLight(0, 1);
 			side(YNEG_LT, tex[3]);
+			
+			post(ForgeDirection.DOWN);
 		}
+		rendererOld.clearOverrideBlockTexture();
 	}
 
 	@Override
@@ -432,6 +509,9 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, redmap);
 			fillColormap(colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, colorGreenBottomRight, grnmap);
 			fillColormap(colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, colorBlueBottomRight, blumap);
+			
+			pre(ForgeDirection.UP);
+
 			getLight(0, 0);
 			side(YPOS_LB, tex[0]);
 			getLight(1, 0);
@@ -440,6 +520,17 @@ public class RenderBlocksCTM extends RenderBlocks {
 			side(YPOS_RT, tex[2]);
 			getLight(0, 1);
 			side(YPOS_LT, tex[3]);
+			
+			post(ForgeDirection.UP);
 		}
+		rendererOld.clearOverrideBlockTexture();
+	}
+
+	private void pre(ForgeDirection face) {
+		manager.preRenderSide(this, blockAccess, bx, by, bz, face);
+	}
+
+	private void post(ForgeDirection face) {
+		manager.postRenderSide(this, blockAccess, bx, by, bz, face);
 	}
 }

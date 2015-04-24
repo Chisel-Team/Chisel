@@ -22,6 +22,7 @@ import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.carving.CarvingGroup;
 import com.cricketcraft.chisel.client.render.SubmapManagerCarpetFloor;
 import com.cricketcraft.chisel.client.render.SubmapManagerFakeController;
+import com.cricketcraft.chisel.client.render.SubmapManagerSlab;
 import com.cricketcraft.chisel.compat.fmp.ItemBlockChiselTorchPart;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
@@ -45,7 +46,6 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.sGNames;
 
@@ -1525,7 +1525,7 @@ public enum Features {
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.10.desc", 10, "marbleslab/terrain-pistonback-marbledent");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.11.desc", 11, "marbleslab/terrain-pistonback-marbledent-small");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.12.desc", 12, "marbleslab/marble-bricks");
-			marble_slab.carverHelper.addVariation("tile.marbleSlab.13.desc", 13, "marbleslab/marble-arranged-bricks");
+			marble_slab.carverHelper.addVariation("tile.marbleSlab.13.desc", 13, new SubmapManagerSlab("marbleslab/marble-arranged-bricks"));
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.14.desc", 14, "marbleslab/marble-fancy-bricks");
 			marble_slab.carverHelper.addVariation("tile.marbleSlab.15.desc", 15, "marbleslab/marble-blocks");
 			marble_slab.carverHelper.registerAll(marble_slab, "marble_slab", ItemCarvableSlab.class);

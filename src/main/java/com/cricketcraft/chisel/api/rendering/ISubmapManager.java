@@ -5,8 +5,9 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public interface ISubmapManager {
+public interface ISubmapManager<T extends RenderBlocks> {
 
 	/**
 	 * Gets the icon for item rendering, based on side and item metadata.
@@ -36,5 +37,9 @@ public interface ISubmapManager {
 	 */
 	void registerIcons(String modName, Block block, IIconRegister register);
 	
-	RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world);
+	T createRenderContext(RenderBlocks rendererOld, IBlockAccess world);
+	
+	void preRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side);
+	
+	void postRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side);
 }
