@@ -37,13 +37,14 @@ public class BlockCarvablePillar extends BlockCarvable {
 			var = carverHelper.infoList.get(metadata);
 		else
 			var = carverHelper.infoList.get(0);
+		return var.getSubmapManager().getIcon(0, metadata);
 
 		// TODO this...
-		if (index >= 4)
-			return var.iconTop;
-		if (var.seamsCtmVert == null)
-			return var.icon;
-		return var.seamsCtmVert.getSubIcon(index % 2, index / 2);
+//		if (index >= 4)
+//			return var.iconTop;
+//		if (var.seamsCtmVert == null)
+//			return var.icon;
+//		return var.seamsCtmVert.getSubIcon(index % 2, index / 2);
 	}
 
 }

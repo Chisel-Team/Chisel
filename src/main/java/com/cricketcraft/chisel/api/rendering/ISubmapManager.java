@@ -1,6 +1,7 @@
-package com.cricketcraft.chisel.api.client;
+package com.cricketcraft.chisel.api.rendering;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -34,4 +35,6 @@ public interface ISubmapManager {
 	 *            The IIconRegister instance.
 	 */
 	void registerIcons(String modName, Block block, IIconRegister register);
+	
+	RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world);
 }

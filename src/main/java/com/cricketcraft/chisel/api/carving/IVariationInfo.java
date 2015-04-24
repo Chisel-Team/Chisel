@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.api.carving;
 
-import com.cricketcraft.chisel.api.client.ISubmapManager;
+import com.cricketcraft.chisel.api.rendering.ISubmapManager;
+import com.cricketcraft.chisel.api.rendering.TextureType;
 
 public interface IVariationInfo {
 
@@ -9,4 +10,6 @@ public interface IVariationInfo {
 	ICarvingVariation getVariation();
 
 	String getDescription();
+	
+	TextureType getType();
 }
