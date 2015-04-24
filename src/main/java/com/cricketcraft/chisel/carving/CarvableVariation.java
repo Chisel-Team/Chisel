@@ -24,7 +24,6 @@ public class CarvableVariation {
 	public IIcon iconBot;
 	public IIcon iconTop;
 
-	public CarvableVariationCTM ctm;
 	public TextureSubmap seamsCtmVert;
 	public TextureSubmap variations9;
 
@@ -39,10 +38,5 @@ public class CarvableVariation {
 
 	public void setDescriptionUnloc(String desc) {
 		this.descriptionUnloc = desc;
-	}
-
-	static class CarvableVariationCTM {
-
-		TextureSubmap seams[] = new TextureSubmap[3];
 	}
 }

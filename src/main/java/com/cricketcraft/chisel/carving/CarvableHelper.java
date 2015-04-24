@@ -18,6 +18,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.api.carving.VariationInfoBase;
 import com.cricketcraft.chisel.api.client.CTM;
 import com.cricketcraft.chisel.api.client.ISubmapManager;
 import com.cricketcraft.chisel.api.client.TextureSubmap;
@@ -32,6 +35,7 @@ public class CarvableHelper {
 
 	public enum TextureType {
 
+		// TODO decide if this is the correct way to go about it...then implement the abstract method
 		TOPSIDE("top", "side"),
 		TOPBOTSIDE("top", "bottom", "side"),
 		CTMV("ctmv", "top"),
@@ -54,6 +58,8 @@ public class CarvableHelper {
 		private TextureType(String... suffixes) {
 			this.suffixes = suffixes.length == 0 ? new String[] { "" } : suffixes;
 		}
+		
+		public abstract ISubmapManager createManagerFor(ICarvingVariation variation);
 
 		public static TextureType getTypeFor(CarvableHelper inst, String modid, String path) {
 			for (TextureType t : VALUES) {
@@ -71,10 +77,16 @@ public class CarvableHelper {
 		}
 	}
 	
+	private Block theBlock;
+	
+	public CarvableHelper(Block block) {
+		this.theBlock = block;
+	}
+	
 	private static CTM ctm = CTM.getInstance();
 
-	public ArrayList<CarvableVariation> variations = new ArrayList<CarvableVariation>();
-	CarvableVariation[] map = new CarvableVariation[16];
+	public ArrayList<IVariationInfo> infoList = new ArrayList<IVariationInfo>();
+	IVariationInfo[] infoMap = new IVariationInfo[16];
 	public boolean forbidChiseling = false;
 	public String blockName;
 
@@ -120,7 +132,7 @@ public class CarvableHelper {
 
 	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, ISubmapManager customManager) {
 
-		if (variations.size() >= 16)
+		if (infoList.size() >= 16)
 			return;
 
 		if (blockName == null && block != null)
@@ -128,26 +140,23 @@ public class CarvableHelper {
 		else if (blockName == null && description != null)
 			blockName = description;
 
-		CarvableVariation variation = new CarvableVariation();
-		variation.setDescriptionUnloc(description);
-		variation.metadata = metadata;
-		variation.blockName = blockName;
-
-		if (texture != null && FMLCommonHandler.instance().getSide().isClient()) {
-			variation.texture = texture;
-			variation.type = (TextureType) TextureType.getTypeFor(this, modid, variation.texture);
-			if (variation.type == TextureType.CUSTOM && customManager == null) {
-				throw new IllegalArgumentException(String.format("Could not find texture %s, and no custom texture manager was provided.", texture));
-			}
-			variation.manager = customManager;
-		} else {
-			variation.block = block;
-			variation.type = TextureType.TOPBOTSIDE;
-			variation.blockMeta = blockMeta;
+		CarvingVariation var = new CarvingVariation(theBlock, metadata, metadata);
+		TextureType type = TextureType.getTypeFor(this, modid, texture);
+		if (type == TextureType.CUSTOM && customManager == null) {
+			throw new IllegalArgumentException(String.format("Could not find texture %s, and no custom texture manager was provided.", texture));
 		}
+		
+		IVariationInfo info;
+		if (customManager != null) {
+			info = new VariationInfoBase(var, description, customManager);
+		} else {
+			info = new VariationInfoBase(var, description, type.createManagerFor(var));
+		}
+		
+		// TODO handling for block texture override params
 
-		variations.add(variation);
-		map[metadata] = variation;
+		infoList.add(info);
+		infoMap[metadata] = info;
 	}
 
 	// This is ugly, but faster than class.getResource
@@ -161,11 +170,11 @@ public class CarvableHelper {
 		}
 	}
 
-	public CarvableVariation getVariation(int metadata) {
+	public IVariationInfo getVariation(int metadata) {
 		if (metadata < 0 || metadata > 15)
 			metadata = 0;
 
-		CarvableVariation variation = map[metadata];
+		IVariationInfo variation = infoMap[metadata];
 		if (variation == null)
 			return null;
 
@@ -176,10 +185,13 @@ public class CarvableHelper {
 		if (metadata < 0 || metadata > 15)
 			metadata = 0;
 
-		CarvableVariation variation = map[metadata];
+		IVariationInfo variation = infoMap[metadata];
 		if (variation == null)
 			return GeneralClient.getMissingIcon();
+		
+		return variation.getSubmapManager().getIcon(side, metadata);
 
+		/*
 		switch (variation.type) {
 		case NORMAL:
 			return variation.icon;
@@ -222,6 +234,7 @@ public class CarvableHelper {
 		}
 
 		return GeneralClient.getMissingIcon();
+		*/
 	}
 
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
@@ -230,10 +243,13 @@ public class CarvableHelper {
 		if (metadata < 0 || metadata > 15)
 			metadata = 0;
 
-		CarvableVariation variation = map[metadata];
+		IVariationInfo variation = infoMap[metadata];
 		if (variation == null)
 			return GeneralClient.getMissingIcon();
 
+		return variation.getSubmapManager().getIcon(world, x, y, z, side);
+		
+		/*
 		switch (variation.type) {
 		case NORMAL:
 		case TOPSIDE:
@@ -300,7 +316,7 @@ public class CarvableHelper {
                 //For DOWN, reverse the indexes for only Z
                 textureZ = (variationSize - textureZ - 1);
             }//*/
-
+/*
             int index;
             if (side == 0 || side == 1) {
                 // DOWN || UP
@@ -337,6 +353,7 @@ public class CarvableHelper {
 		}
 
 		return GeneralClient.getMissingIcon();
+		*/
 	}
 
 	public void registerAll(Block block, String name) {
@@ -358,103 +375,109 @@ public class CarvableHelper {
 	}
 
 	public void registerVariations(String name, Block block) {
-		for (CarvableVariation variation : variations) {
-			registerVariation(name, variation, block, variation.metadata);
+		for (IVariationInfo info : infoList) {
+			registerVariation(name, info);
 		}
 	}
 
-	public void registerVariation(String name, CarvableVariation variation, Block block, int blockMeta) {
+	public void registerVariation(String name, IVariationInfo info) {
 
+		Block block = info.getVariation().getBlock();
+		
 		if (block.renderAsNormalBlock() || block.isOpaqueCube() || block.isNormalCube()) {
-			FMPIMC.registerFMP(block, blockMeta);
+			FMPIMC.registerFMP(block, info.getVariation().getBlockMeta());
 		}
 
 		if (forbidChiseling)
 			return;
 
-		Carving.chisel.addVariation(name, block, blockMeta, variation.metadata);
+		Carving.chisel.addVariation(name, info.getVariation());
 	}
 
 	public void registerBlockIcons(String modName, Block block, IIconRegister register) {
-		for (CarvableVariation variation : variations) {
-			if (variation.block != null) {
-				variation.block.registerBlockIcons(register);
+		for (IVariationInfo info : infoList) {
+			info.getSubmapManager().registerIcons(modName, block, register);
+		}
+		/*
+			if (info.block != null) {
+				info.block.registerBlockIcons(register);
 
-				if (variation.block instanceof BlockPane) {
-					variation.icon = variation.block.getBlockTextureFromSide(2);
-					variation.iconTop = ((BlockPane) variation.block).getBlockTextureFromSide(0);
-					variation.iconBot = ((BlockPane) variation.block).getBlockTextureFromSide(0);
+				if (info.block instanceof BlockPane) {
+					info.icon = info.block.getBlockTextureFromSide(2);
+					info.iconTop = ((BlockPane) info.block).getBlockTextureFromSide(0);
+					info.iconBot = ((BlockPane) info.block).getBlockTextureFromSide(0);
 
 				} else {
-					switch (variation.type) {
+					switch (info.type) {
 					case NORMAL:
-						variation.icon = variation.block.getIcon(2, variation.blockMeta);
+						info.icon = info.block.getIcon(2, info.blockMeta);
 						break;
 					case TOPSIDE:
-						variation.icon = variation.block.getIcon(2, variation.blockMeta);
-						variation.iconTop = variation.block.getIcon(0, variation.blockMeta);
+						info.icon = info.block.getIcon(2, info.blockMeta);
+						info.iconTop = info.block.getIcon(0, info.blockMeta);
 						break;
 					case TOPBOTSIDE:
-						variation.icon = variation.block.getIcon(2, variation.blockMeta);
-						variation.iconTop = variation.block.getIcon(1, variation.blockMeta);
-						variation.iconBot = variation.block.getIcon(0, variation.blockMeta);
+						info.icon = info.block.getIcon(2, info.blockMeta);
+						info.iconTop = info.block.getIcon(1, info.blockMeta);
+						info.iconBot = info.block.getIcon(0, info.blockMeta);
 						break;
 					default:
 						break;
 					}
 				}
 			} else {
-				switch (variation.type) {
+				switch (info.type) {
 				case NORMAL:
-					variation.icon = register.registerIcon(modName + ":" + variation.texture);
+					info.icon = register.registerIcon(modName + ":" + info.texture);
 					break;
 				case TOPSIDE:
-					variation.icon = register.registerIcon(modName + ":" + variation.texture + "-side");
-					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
+					info.icon = register.registerIcon(modName + ":" + info.texture + "-side");
+					info.iconTop = register.registerIcon(modName + ":" + info.texture + "-top");
 					break;
 				case TOPBOTSIDE:
-					variation.icon = register.registerIcon(modName + ":" + variation.texture + "-side");
-					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
-					variation.iconBot = register.registerIcon(modName + ":" + variation.texture + "-bottom");
+					info.icon = register.registerIcon(modName + ":" + info.texture + "-side");
+					info.iconTop = register.registerIcon(modName + ":" + info.texture + "-top");
+					info.iconBot = register.registerIcon(modName + ":" + info.texture + "-bottom");
 					break;
 				case CTMV:
-					variation.seamsCtmVert = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctmv"), 2, 2);
-					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
+					info.seamsCtmVert = new TextureSubmap(register.registerIcon(modName + ":" + info.texture + "-ctmv"), 2, 2);
+					info.iconTop = register.registerIcon(modName + ":" + info.texture + "-top");
 					break;
 				case CTMH:
-					variation.seamsCtmVert = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctmh"), 2, 2);
-					variation.iconTop = register.registerIcon(modName + ":" + variation.texture + "-top");
+					info.seamsCtmVert = new TextureSubmap(register.registerIcon(modName + ":" + info.texture + "-ctmh"), 2, 2);
+					info.iconTop = register.registerIcon(modName + ":" + info.texture + "-top");
 					break;
 				case V9:
-					variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-v9"), 3, 3);
+					info.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + info.texture + "-v9"), 3, 3);
 					break;
 				case V4:
-					variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-v4"), 2, 2);
+					info.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + info.texture + "-v4"), 2, 2);
 					break;
 				case CTMX:
-					variation.icon = register.registerIcon(modName + ":" + variation.texture);
-					variation.submap = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-ctm"), 4, 4);
-					variation.submapSmall = new TextureSubmap(variation.icon, 2, 2);
+					info.icon = register.registerIcon(modName + ":" + info.texture);
+					info.submap = new TextureSubmap(register.registerIcon(modName + ":" + info.texture + "-ctm"), 4, 4);
+					info.submapSmall = new TextureSubmap(info.icon, 2, 2);
 					break;
 				case R16:
-					variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r16"), 4, 4);
+					info.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + info.texture + "-r16"), 4, 4);
 					break;
 				case R9:
-					variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r9"), 3, 3);
+					info.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + info.texture + "-r9"), 3, 3);
 					break;
 				case R4:
-					variation.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + variation.texture + "-r4"), 2, 2);
+					info.variations9 = new TextureSubmap(register.registerIcon(modName + ":" + info.texture + "-r4"), 2, 2);
 					break;
 				case CUSTOM:
-					variation.manager.registerIcons(modName, block, register);
+					info.manager.registerIcons(modName, block, register);
 				}
 			}
 		}
+		*/
 	}
 
 	public void registerSubBlocks(Block block, CreativeTabs tabs, List<ItemStack> list) {
-		for (CarvableVariation variation : variations) {
-			list.add(new ItemStack(block, 1, variation.metadata));
+		for (IVariationInfo info : infoList) {
+			list.add(new ItemStack(block, 1, info.getVariation().getItemMeta()));
 		}
 	}
 
@@ -463,6 +486,6 @@ public class CarvableHelper {
 	}
 
 	public void registerOre(String ore) {
-		OreDictionary.registerOre(ore, variations.get(0).block);
+		OreDictionary.registerOre(ore, infoList.get(0).getVariation().getBlock());
 	}
 }

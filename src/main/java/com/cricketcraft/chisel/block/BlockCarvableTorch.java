@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
 import com.cricketcraft.chisel.init.ChiselTabs;
 
 import cpw.mods.fml.relauncher.Side;
@@ -26,7 +26,7 @@ public class BlockCarvableTorch extends BlockTorch implements ICarvable {
 
 	public BlockCarvableTorch(int idx, String tex) {
 		super();
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 		setLightLevel(0.9375F);
 		setBlockName("torch");
@@ -35,12 +35,12 @@ public class BlockCarvableTorch extends BlockTorch implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
+	public IVariationInfo getVariation(ItemStack stack) {
 		return carverHelper.getVariation(stack.getItemDamage());
 	}
 

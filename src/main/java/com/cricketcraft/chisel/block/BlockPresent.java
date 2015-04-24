@@ -21,9 +21,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -36,7 +36,7 @@ public class BlockPresent extends Block implements ICarvable {
 
 	public BlockPresent() {
 		super(Material.wood);
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 		minX = 0.0625F;
 		minZ = 0.0625F;
 		maxX = 0.9375F;
@@ -215,12 +215,12 @@ public class BlockPresent extends Block implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
+	public IVariationInfo getVariation(ItemStack stack) {
 		return carverHelper.getVariation(stack.getItemDamage());
 	}
 }

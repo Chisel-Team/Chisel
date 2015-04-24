@@ -1,7 +1,5 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.entity.EntityChiselSnowman;
-import com.cricketcraft.chisel.init.ChiselBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPumpkin;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -10,15 +8,16 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
+import com.cricketcraft.chisel.entity.EntityChiselSnowman;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.world.World;
 
 public class BlockCarvablePumpkin extends BlockPumpkin implements ICarvable {
 
@@ -34,7 +33,7 @@ public class BlockCarvablePumpkin extends BlockPumpkin implements ICarvable {
 		this.setStepSound(Block.soundTypeWood);
 		if (isOn)
 			setLightLevel(10.0F);
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 	}
 
     @Override
@@ -112,12 +111,12 @@ public class BlockCarvablePumpkin extends BlockPumpkin implements ICarvable {
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
+	public IVariationInfo getVariation(ItemStack stack) {
 		return carverHelper.getVariation(stack.getItemDamage());
 	}
 

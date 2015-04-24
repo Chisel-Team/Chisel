@@ -14,7 +14,7 @@ public class BlockCarvableAntiBlock extends BlockCarvableColor implements ICarva
 
 	public BlockCarvableAntiBlock() {
 		super(Material.rock);
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 	}
 
 	@Override

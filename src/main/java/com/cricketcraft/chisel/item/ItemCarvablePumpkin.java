@@ -1,9 +1,7 @@
 package com.cricketcraft.chisel.item;
 
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.config.Configurations;
-import com.cricketcraft.chisel.utils.General;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +10,10 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
-import java.util.List;
+import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.config.Configurations;
+import com.cricketcraft.chisel.utils.General;
 
 public class ItemCarvablePumpkin extends ItemBlock {
 
@@ -52,7 +53,7 @@ public class ItemCarvablePumpkin extends ItemBlock {
             return;
 
         ICarvable carvable = (ICarvable) block;
-        CarvableVariation var = carvable.getVariation(stack);
+        IVariationInfo var = carvable.getVariation(stack);
         if (var == null)
             return;
 

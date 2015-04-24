@@ -18,7 +18,7 @@ public class BlockMarbleWall extends BlockWall {
 	public BlockMarbleWall(Block block) {
 		super(block);
 
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 	}
 
 	@Override

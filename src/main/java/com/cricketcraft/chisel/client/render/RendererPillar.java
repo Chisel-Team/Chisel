@@ -49,10 +49,10 @@ public class RendererPillar implements ISimpleBlockRenderingHandler {
 		int metadata = world.getBlockMetadata(x, y, z);
 
 		// Probably not the best way to handle this...
-		if (metadata >= block.carverHelper.variations.size()) {
+		if (metadata >= block.carverHelper.infoList.size()) {
 			metadata = 0;
 		} else {
-			if (block.carverHelper.variations.get(metadata).type != TextureType.CTMV) {
+			if (block.carverHelper.infoList.get(metadata).type != TextureType.CTMV) {
 				block.sides[0] = block.carverHelper.getIcon(0, metadata);
 				block.sides[1] = block.carverHelper.getIcon(1, metadata);
 				block.sides[2] = block.carverHelper.getIcon(2, metadata);

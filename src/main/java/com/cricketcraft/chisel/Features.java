@@ -1,6 +1,21 @@
 package com.cricketcraft.chisel;
 
+import java.util.List;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
+
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.block.*;
 import com.cricketcraft.chisel.carving.CarvableHelper;
 import com.cricketcraft.chisel.carving.CarvableVariation;
@@ -15,7 +30,14 @@ import com.cricketcraft.chisel.entity.EntitySmashingRock;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselItems;
 import com.cricketcraft.chisel.init.ChiselTabs;
-import com.cricketcraft.chisel.item.*;
+import com.cricketcraft.chisel.item.ItemBallOMoss;
+import com.cricketcraft.chisel.item.ItemBlockPresent;
+import com.cricketcraft.chisel.item.ItemCarvable;
+import com.cricketcraft.chisel.item.ItemCarvablePumpkin;
+import com.cricketcraft.chisel.item.ItemCarvableSlab;
+import com.cricketcraft.chisel.item.ItemCloudInABottle;
+import com.cricketcraft.chisel.item.ItemSmashingRock;
+import com.cricketcraft.chisel.item.ItemUpgrade;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
 import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
 import com.google.common.collect.Lists;
@@ -23,20 +45,6 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemDye;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
-
-import java.util.List;
 
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.sGNames;
@@ -872,10 +880,10 @@ public enum Features {
 				stainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " borderless glass", glassPrefix + 3, texName + "transparent");
 				OreDictionary.registerOre(oreName, new ItemStack(Blocks.stained_glass, 1, i));
 				Carving.chisel.registerOre(blockName, oreName);
-				for (CarvableVariation cv : stainedGlass[glassId].carverHelper.variations) {
-					if (cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 4)
+				for (IVariationInfo info : stainedGlass[glassId].carverHelper.infoList) {
+					if (info.getVariation().getBlockMeta() < glassPrefix || info.getVariation().getBlockMeta() >= glassPrefix + 4)
 						continue;
-					stainedGlass[glassId].carverHelper.registerVariation(blockName, cv, stainedGlass[glassId], cv.metadata);
+					stainedGlass[glassId].carverHelper.registerVariation(blockName, info);
 				}
 			}
 		}
@@ -906,10 +914,10 @@ public enum Features {
 				stainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " fancy quadrant glass", glassPrefix + 5, texName + "quad-fancy");
 				OreDictionary.registerOre(oreName, new ItemStack(Blocks.stained_glass_pane, 1, i));
 				Carving.chisel.registerOre(blockName, oreName);
-				for (CarvableVariation cv : stainedGlassPane[glassId].carverHelper.variations) {
-					if (cv.metadata < glassPrefix || cv.metadata >= glassPrefix + 8)
+				for (IVariationInfo info : stainedGlassPane[glassId].carverHelper.infoList) {
+					if (info.getVariation().getBlockMeta() < glassPrefix || info.getVariation().getBlockMeta() >= glassPrefix + 8)
 						continue;
-					stainedGlassPane[glassId].carverHelper.registerVariation(blockName, cv, stainedGlassPane[glassId], cv.metadata);
+					stainedGlassPane[glassId].carverHelper.registerVariation(blockName, info);
 				}
 			}
 		}
