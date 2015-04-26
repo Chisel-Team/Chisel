@@ -11,11 +11,11 @@ import net.minecraft.util.IIcon;
 
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 
-public class BlockMarbleWall extends BlockWall {
+public class BlockCarvableWall extends BlockWall {
 
 	CarvableHelper carverHelper;
 
-	public BlockMarbleWall(Block block) {
+	public BlockCarvableWall(Block block) {
 		super(block);
 
 		carverHelper = new CarvableHelper(this);

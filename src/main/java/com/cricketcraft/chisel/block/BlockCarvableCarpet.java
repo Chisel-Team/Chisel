@@ -16,11 +16,11 @@ import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
 
-public class BlockMarbleCarpet extends BlockCarpet implements ICarvable {
+public class BlockCarvableCarpet extends BlockCarpet implements ICarvable {
 
 	public CarvableHelper carverHelper;
 
-	public BlockMarbleCarpet(Material m) {
+	public BlockCarvableCarpet(Material m) {
 		carverHelper = new CarvableHelper(this);
 	}
 
@@ -48,10 +48,10 @@ public class BlockMarbleCarpet extends BlockCarpet implements ICarvable {
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
 		carverHelper.registerSubBlocks(this, tabs, list);
 	}
-
+	
 	@Override
 	public int getRenderType() {
-		return Chisel.renderCarpetId;
+		return Chisel.renderCTMId;
 	}
 
 	@Override

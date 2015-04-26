@@ -36,6 +36,7 @@ public class CarvableHelper {
 	public CarvableHelper(Block block) {
 		this.theBlock = block;
 	}
+    
     public void addVariation(String description, int metadata, ISubmapManager<? extends RenderBlocks> manager) {
     	addVariation(description, metadata, null, manager);
     }
@@ -87,18 +88,20 @@ public class CarvableHelper {
 
 		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, metadata);
 		TextureType type = TextureType.getTypeFor(this, modid, texture);
-		if (type == TextureType.CUSTOM && customManager == null) {
+		if (type == TextureType.CUSTOM && customManager == null && block == null) {
 			throw new IllegalArgumentException(String.format("Could not find texture %s, and no custom texture manager was provided.", texture));
 		}
 		
 		IVariationInfo info;
+		ISubmapManager<?> manager;
 		if (customManager != null) {
-			info = new VariationInfoBase(var, description, customManager);
+			manager = customManager;
+		} else if (block != null) {
+			manager = type.createManagerFor(var, block, blockMeta);
 		} else {
-			info = new VariationInfoBase(var, description, type.createManagerFor(var, texture));
+			manager = type.createManagerFor(var, texture);
 		}
-		
-		// TODO handling for block texture override params
+		info = new VariationInfoBase(var, description, manager);
 
 		infoList.add(info);
 		infoMap[metadata] = info;

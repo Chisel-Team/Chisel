@@ -311,6 +311,10 @@ public enum TextureType {
 		return new SubmapManagerDefault(this, variation, texturePath);
 	}
 	
+	public ISubmapManager<RenderBlocks> createManagerFor(ICarvingVariation variation, Block block, int meta) {
+		return new SubmapManagerExistingIcon(this, variation, block, meta);
+	}
+	
 	protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
 		return register.registerIcon(modName + ":" + texturePath);
 	}
@@ -356,17 +360,14 @@ public enum TextureType {
 		}
 	}
 	
-	private static class SubmapManagerDefault implements ISubmapManager<RenderBlocks> {
-
-		private TextureType type;
-		private ICarvingVariation variation;
-		private Object cachedObject;
-		private String texturePath;
+	private abstract static class SubmapManagerBase<T extends RenderBlocks> implements ISubmapManager<T> {
+		protected final TextureType type;
+		protected ICarvingVariation variation;
+		protected Object cachedObject;
 		
-		private SubmapManagerDefault(TextureType type, ICarvingVariation variation, String texturePath) {
+		private SubmapManagerBase(TextureType type, ICarvingVariation variation) {
 			this.type = type;
 			this.variation = variation;
-			this.texturePath = texturePath;
 		}
 		
 		@Override
@@ -378,15 +379,10 @@ public enum TextureType {
 		public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
 			return type.getIcon(variation, cachedObject, world, x, y, z, side, world.getBlockMetadata(x, y, z));
 		}
-
-		@Override
-		public void registerIcons(String modName, Block block, IIconRegister register) {
-			cachedObject = type.registerIcons(variation, modName, texturePath, register);
-		}
 		
 		@Override
-		public RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
-			return type.createRenderContext(rendererOld, world, cachedObject);
+		public T createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
+			return (T) type.createRenderContext(rendererOld, world, cachedObject);
 		}
 		
 		@Override
@@ -395,6 +391,47 @@ public enum TextureType {
 		
 		@Override
 		public void postRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {			
+		}
+	}
+
+	private static class SubmapManagerDefault extends SubmapManagerBase<RenderBlocks> {
+
+		private String texturePath;
+		
+		private SubmapManagerDefault(TextureType type, ICarvingVariation variation, String texturePath) {
+			super(type, variation);
+			this.texturePath = texturePath;
+		}
+
+		@Override
+		public void registerIcons(String modName, Block block, IIconRegister register) {
+			cachedObject = type.registerIcons(variation, modName, texturePath, register);
+		}
+	}
+	
+	private static class SubmapManagerExistingIcon extends SubmapManagerBase<RenderBlocks> {
+		
+		private Block block;
+		private int meta;
+		
+		private SubmapManagerExistingIcon(TextureType type, ICarvingVariation variation, Block block, int meta) {
+			super(type, variation);
+			this.block = block;
+			this.meta = meta;
+		}
+		
+		@Override
+		public IIcon getIcon(int side, int meta) {
+			return block.getIcon(side, this.meta);
+		}
+		
+		@Override
+		public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+			return getIcon(side, world.getBlockMetadata(x, y, z));
+		}
+
+		@Override
+		public void registerIcons(String modName, Block block, IIconRegister register) {
 		}
 	}
 }

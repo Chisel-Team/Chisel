@@ -42,9 +42,11 @@ public class RendererCTM implements ISimpleBlockRenderingHandler {
 
 		if (!rendererOld.hasOverrideBlockTexture() && var != null) {
 			RenderBlocks rb = var.getSubmapManager().createRenderContext(rendererOld, world);
-			if (rb != null) {
-				if (rb.getClass() == RenderBlocksCTM.class) {
+			if (rb != null && rb != rendererOld) {
+				rb.blockAccess = world;
+				if (rb instanceof RenderBlocksCTM) {
 					((RenderBlocksCTM)rb).manager = (ISubmapManager<RenderBlocksCTM>) var.getSubmapManager();
+					((RenderBlocksCTM)rb).rendererOld = rendererOld;
 				}
 				return rb.renderStandardBlock(block, x, y, z);
 			}

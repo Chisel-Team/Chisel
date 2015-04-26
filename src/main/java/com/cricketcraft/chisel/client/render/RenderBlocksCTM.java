@@ -23,7 +23,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 	 * ZERO is a special case, it is the absolute min point of the block. X, Y, Z, or any combination means that the axes listed in the name are at 1. X, Y, Z, or any combination followed by HALF
 	 * means that those axes are at 0.5. X, Y, Z, or any combination after a HALF means those axes are at 1.
 	 */
-	enum Vert {
+	protected enum Vert {
 		// @formatter:off
 		ZERO(0, 0, 0),
 		XYZ(1, 1, 1),
@@ -108,7 +108,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 	 *
 	 * Each sub-side contains 4 {@link Vert} objects representing its position on the block.
 	 */
-	enum SubSide {
+	protected enum SubSide {
 		// @formatter:off
 		XNEG_LB(ZERO, Z_HALF, YZ_HALF, Y_HALF), XNEG_RB(Z_HALF, Z, Y_HALF_Z, YZ_HALF), XNEG_RT(YZ_HALF, Y_HALF_Z, YZ, Z_HALF_Y), XNEG_LT(Y_HALF, YZ_HALF, Z_HALF_Y, Y),
 		XPOS_LB(XZ, Z_HALF_X, YZ_HALF_X, Y_HALF_XZ), XPOS_RB(Z_HALF_X, X, Y_HALF_X, YZ_HALF_X), XPOS_RT(YZ_HALF_X, Y_HALF_X, XY, Z_HALF_XY), XPOS_LT(Y_HALF_XZ, YZ_HALF_X, Z_HALF_XY, XYZ),
@@ -152,38 +152,39 @@ public class RenderBlocksCTM extends RenderBlocks {
 		}
 	}
 
-	private static CTM ctm = CTM.getInstance();
+	protected static CTM ctm = CTM.getInstance();
 
 	// globals added to save the JVM some trouble. No need to constantly create
 	// and destroy ints if we don't have to
-	int blockLightBitChannel = 0;
-	int redBitChannel = 0;
-	int greenBitChannel = 0;
-	int blueBitChannel = 0;
-	int sunlightBitChannel = 0;
+	protected int blockLightBitChannel = 0;
+	protected int redBitChannel = 0;
+	protected int greenBitChannel = 0;
+	protected int blueBitChannel = 0;
+	protected int sunlightBitChannel = 0;
 
 	public RenderBlocksCTM() {
 		super();
+		renderMaxX = renderMaxY = renderMaxZ = 1;
 	}
 
-	Tessellator tessellator;
-	double minU, maxU;
-	double minV, maxV;
-	int[] lightingCache = new int[4];
-	float[] redCache = new float[4];
-	float[] grnCache = new float[4];
-	float[] bluCache = new float[4];
+	protected Tessellator tessellator;
+	protected double minU, maxU;
+	protected double minV, maxV;
+	protected int[] lightingCache = new int[4];
+	protected float[] redCache = new float[4];
+	protected float[] grnCache = new float[4];
+	protected float[] bluCache = new float[4];
 	public TextureSubmap submap;
 	public TextureSubmap submapSmall;
 	public RenderBlocks rendererOld;
 	public ISubmapManager<RenderBlocksCTM> manager;
 
-	int[][] lightmap = new int[3][3];
-	float[][] redmap = new float[3][3];
-	float[][] grnmap = new float[3][3];
-	float[][] blumap = new float[3][3];
+	protected int[][] lightmap = new int[3][3];
+	protected float[][] redmap = new float[3][3];
+	protected float[][] grnmap = new float[3][3];
+	protected float[][] blumap = new float[3][3];
 
-	int bx, by, bz;
+	protected int bx, by, bz;
 
 	@Override
 	public boolean renderStandardBlock(Block block, int x, int y, int z) {
@@ -220,7 +221,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 	 * shakes fist in anger
 	 */
 	// @formatter:on
-	void fillLightmap(int bottomLeft, int bottomRight, int topRight, int topLeft) {
+	protected void fillLightmap(int bottomLeft, int bottomRight, int topRight, int topLeft) {
 		lightmap[0][0] = bottomLeft;
 		lightmap[2][0] = bottomRight;
 		lightmap[2][2] = topRight;
@@ -234,7 +235,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		lightmap[1][1] = avg(bottomLeft, bottomRight, topRight, topLeft);
 	}
 
-	void fillColormap(float bottomLeft, float bottomRight, float topRight, float topLeft, float[][] map) {
+	protected void fillColormap(float bottomLeft, float bottomRight, float topRight, float topLeft, float[][] map) {
 		map[0][0] = bottomLeft;
 		map[2][0] = bottomRight;
 		map[2][2] = topRight;
@@ -248,7 +249,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		map[1][1] = (bottomLeft + bottomRight + topRight + topLeft) / 4.0F;
 	}
 
-	void getLight(int x, int y) {
+	protected void getLight(int x, int y) {
 		lightingCache[0] = lightmap[0 + x][0 + y];
 		lightingCache[1] = lightmap[1 + x][0 + y];
 		lightingCache[2] = lightmap[1 + x][1 + y];
@@ -273,7 +274,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 	/**
 	 * This works around a bug in CLC atm
 	 */
-	int avg(int... lightVals) {
+	private int avg(int... lightVals) {
 		blockLightBitChannel = 0;
 		redBitChannel = 0;
 		greenBitChannel = 0;
@@ -292,7 +293,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 				| ((blueBitChannel / lightVals.length) & 0xF0000) | ((sunlightBitChannel / lightVals.length) & 0xF00000);
 	}
 
-	void side(SubSide side, int iconIndex) {
+	protected void side(SubSide side, int iconIndex) {
 		
 		IIcon icon;
 		TextureSubmap map;
@@ -341,12 +342,12 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 4);
 
+			pre(ForgeDirection.WEST);
+
 			fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
 			fillColormap(colorRedBottomRight, colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, redmap);
 			fillColormap(colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, grnmap);
 			fillColormap(colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, blumap);
-
-			pre(ForgeDirection.WEST);
 
 			getLight(0, 0);
 			side(XNEG_LB, tex[0]);
@@ -373,13 +374,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 5);
 
+			pre(ForgeDirection.EAST);
+
 			fillLightmap(brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight, brightnessTopRight);
 			fillColormap(colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, redmap);
 			fillColormap(colorGreenTopLeft, colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, grnmap);
 			fillColormap(colorBlueTopLeft, colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, blumap);
-			
-			pre(ForgeDirection.EAST);
-			
+						
 			getLight(0, 0);
 			side(XPOS_LB, tex[0]);
 			getLight(1, 0);
@@ -391,7 +392,6 @@ public class RenderBlocksCTM extends RenderBlocks {
 			
 			post(ForgeDirection.EAST);
 		}
-		rendererOld.clearOverrideBlockTexture();
 	}
 
 	@Override
@@ -406,13 +406,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 2);
 
+			pre(ForgeDirection.NORTH);
+
 			fillLightmap(brightnessBottomRight, brightnessTopRight, brightnessTopLeft, brightnessBottomLeft);
 			fillColormap(colorRedBottomRight, colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, redmap);
 			fillColormap(colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, grnmap);
 			fillColormap(colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, blumap);
 			
-			pre(ForgeDirection.NORTH);
-
 			getLight(0, 0);
 			side(ZNEG_LB, tex[0]);
 			getLight(1, 0);
@@ -424,7 +424,6 @@ public class RenderBlocksCTM extends RenderBlocks {
 			
 			post(ForgeDirection.NORTH);
 		}
-		rendererOld.clearOverrideBlockTexture();
 	}
 
 	@Override
@@ -439,12 +438,12 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 3);
 
+			pre(ForgeDirection.SOUTH);
+
 			fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
 			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
 			fillColormap(colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, grnmap);
 			fillColormap(colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, blumap);
-
-			pre(ForgeDirection.SOUTH);
 			
 			getLight(0, 0);
 			side(ZPOS_LB, tex[0]);
@@ -457,7 +456,6 @@ public class RenderBlocksCTM extends RenderBlocks {
 			
 			post(ForgeDirection.SOUTH);
 		}
-		rendererOld.clearOverrideBlockTexture();
 	}
 
 	@Override
@@ -472,13 +470,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 0);
 
+			pre(ForgeDirection.DOWN);
+
 			fillLightmap(brightnessBottomLeft, brightnessBottomRight, brightnessTopRight, brightnessTopLeft);
 			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
 			fillColormap(colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, grnmap);
 			fillColormap(colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, blumap);
-			
-			pre(ForgeDirection.DOWN);
-			
+						
 			getLight(0, 0);
 			side(YNEG_LB, tex[0]);
 			getLight(1, 0);
@@ -490,7 +488,6 @@ public class RenderBlocksCTM extends RenderBlocks {
 			
 			post(ForgeDirection.DOWN);
 		}
-		rendererOld.clearOverrideBlockTexture();
 	}
 
 	@Override
@@ -505,13 +502,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			int tex[] = ctm.getSubmapIndices(blockAccess, bx, by, bz, 1);
 
+			pre(ForgeDirection.UP);
+
 			fillLightmap(brightnessTopRight, brightnessTopLeft, brightnessBottomLeft, brightnessBottomRight);
 			fillColormap(colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, redmap);
 			fillColormap(colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, colorGreenBottomRight, grnmap);
 			fillColormap(colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, colorBlueBottomRight, blumap);
 			
-			pre(ForgeDirection.UP);
-
 			getLight(0, 0);
 			side(YPOS_LB, tex[0]);
 			getLight(1, 0);
@@ -523,14 +520,13 @@ public class RenderBlocksCTM extends RenderBlocks {
 			
 			post(ForgeDirection.UP);
 		}
-		rendererOld.clearOverrideBlockTexture();
 	}
 
-	private void pre(ForgeDirection face) {
+	protected void pre(ForgeDirection face) {
 		manager.preRenderSide(this, blockAccess, bx, by, bz, face);
 	}
 
-	private void post(ForgeDirection face) {
+	protected void post(ForgeDirection face) {
 		manager.postRenderSide(this, blockAccess, bx, by, bz, face);
 	}
 }

@@ -2,12 +2,8 @@ package com.cricketcraft.chisel;
 
 import java.io.File;
 
-import com.cricketcraft.chisel.entity.EntityChiselSnowman;
-
-import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemCarrotOnAStick;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -21,6 +17,7 @@ import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.compat.IMCHandler;
 import com.cricketcraft.chisel.compat.fmp.FMPCompat;
 import com.cricketcraft.chisel.config.Configurations;
+import com.cricketcraft.chisel.entity.EntityChiselSnowman;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselTabs;
 import com.cricketcraft.chisel.item.ItemCarvable;
@@ -49,6 +46,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
@@ -64,8 +62,6 @@ public class Chisel {
 	public static boolean multipartLoaded = false;
 	public static int renderEldritchId;
 	public static int renderCTMId;
-	public static int renderCTMNoLightId;
-	public static int renderCarpetId;
 	public static int renderAutoChiselId;
 	public static int renderGlowId;
 	public static int renderLayeredId;
