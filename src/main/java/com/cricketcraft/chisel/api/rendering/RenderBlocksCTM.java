@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.client.render;
+package com.cricketcraft.chisel.api.rendering;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -6,12 +6,8 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.cricketcraft.chisel.api.rendering.CTM;
-import com.cricketcraft.chisel.api.rendering.ISubmapManager;
-import com.cricketcraft.chisel.api.rendering.TextureSubmap;
-
-import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.SubSide.*;
-import static com.cricketcraft.chisel.client.render.RenderBlocksCTM.Vert.*;
+import static com.cricketcraft.chisel.api.rendering.RenderBlocksCTM.SubSide.*;
+import static com.cricketcraft.chisel.api.rendering.RenderBlocksCTM.Vert.*;
 
 public class RenderBlocksCTM extends RenderBlocks {
 

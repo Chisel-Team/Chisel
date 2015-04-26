@@ -11,10 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.api.rendering.ClientUtils;
 
 public class BlockCarvableCarpet extends BlockCarpet implements ICarvable {
 
@@ -51,7 +51,7 @@ public class BlockCarvableCarpet extends BlockCarpet implements ICarvable {
 	
 	@Override
 	public int getRenderType() {
-		return Chisel.renderCTMId;
+		return ClientUtils.renderCTMId;
 	}
 
 	@Override

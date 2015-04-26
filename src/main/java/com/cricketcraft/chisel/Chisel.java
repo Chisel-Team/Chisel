@@ -61,7 +61,6 @@ public class Chisel {
 	public static final BlockCarvable.SoundType soundMetalFootstep = new BlockCarvable.SoundType("metal", 1.0f, 1.0f);
 	public static boolean multipartLoaded = false;
 	public static int renderEldritchId;
-	public static int renderCTMId;
 	public static int renderAutoChiselId;
 	public static int renderGlowId;
 	public static int renderLayeredId;

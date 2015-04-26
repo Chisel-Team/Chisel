@@ -8,6 +8,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.api.rendering.ISubmapManager;
+import com.cricketcraft.chisel.api.rendering.RenderBlocksCTM;
 import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 
 public class SubmapManagerSlab implements ISubmapManager<RenderBlocksCTM> {

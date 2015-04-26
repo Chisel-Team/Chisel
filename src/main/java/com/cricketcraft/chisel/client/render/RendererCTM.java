@@ -6,10 +6,11 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
-import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.api.rendering.ClientUtils;
 import com.cricketcraft.chisel.api.rendering.ISubmapManager;
+import com.cricketcraft.chisel.api.rendering.RenderBlocksCTM;
 import com.cricketcraft.chisel.utils.Drawing;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -21,8 +22,8 @@ public class RendererCTM implements ISimpleBlockRenderingHandler {
 	RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
 
 	public RendererCTM() {
-		if (Chisel.renderCTMId == 0) {
-			Chisel.renderCTMId = RenderingRegistry.getNextAvailableRenderId();
+		if (ClientUtils.renderCTMId == 0) {
+			ClientUtils.renderCTMId = RenderingRegistry.getNextAvailableRenderId();
 		}
 	}
 
@@ -62,7 +63,6 @@ public class RendererCTM implements ISimpleBlockRenderingHandler {
 
 	@Override
 	public int getRenderId() {
-		return Chisel.renderCTMId;
+		return ClientUtils.renderCTMId;
 	}
-
 }

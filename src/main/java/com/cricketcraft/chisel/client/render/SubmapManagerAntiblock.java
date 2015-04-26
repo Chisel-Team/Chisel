@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+import com.cricketcraft.chisel.api.rendering.RenderBlocksCTM;
 import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 
 public class SubmapManagerAntiblock extends SubmapManagerBase<RenderBlocksCTM> {
