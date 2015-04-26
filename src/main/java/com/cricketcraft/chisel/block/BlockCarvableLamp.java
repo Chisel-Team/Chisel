@@ -9,23 +9,23 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class BlockMarbleLamp extends BlockCarvable {
+public class BlockCarvableLamp extends BlockCarvable {
 
-	BlockMarbleLamp blockUnpowered;
-	BlockMarbleLamp blockPowered;
+	BlockCarvableLamp blockUnpowered;
+	BlockCarvableLamp blockPowered;
 	boolean powered;
 
-	public BlockMarbleLamp() {
+	public BlockCarvableLamp() {
 		super(Material.redstoneLight);
 
 		powered = false;
 		blockUnpowered = this;
-		blockPowered = new BlockMarbleLamp(this);
+		blockPowered = new BlockCarvableLamp(this);
 
 		setHardness(0.3F);
 	}
 
-	public BlockMarbleLamp(BlockMarbleLamp unpoweredVersion) {
+	public BlockCarvableLamp(BlockCarvableLamp unpoweredVersion) {
 		super(Material.redstoneLight);
 
 		carverHelper = unpoweredVersion.carverHelper;

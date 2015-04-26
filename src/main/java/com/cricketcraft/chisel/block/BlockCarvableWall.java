@@ -9,16 +9,16 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 
-import com.cricketcraft.chisel.carving.CarvableHelper;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
 
-public class BlockMarbleWall extends BlockWall {
+public class BlockCarvableWall extends BlockWall {
 
 	CarvableHelper carverHelper;
 
-	public BlockMarbleWall(Block block) {
+	public BlockCarvableWall(Block block) {
 		super(block);
 
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 	}
 
 	@Override

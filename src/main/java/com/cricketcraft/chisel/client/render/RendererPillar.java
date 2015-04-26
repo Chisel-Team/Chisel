@@ -6,8 +6,8 @@ import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
 
+import com.cricketcraft.chisel.api.rendering.TextureType;
 import com.cricketcraft.chisel.block.BlockCarvablePillar;
-import com.cricketcraft.chisel.carving.CarvableHelper.TextureType;
 import com.cricketcraft.chisel.utils.Drawing;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
@@ -39,6 +39,7 @@ public class RendererPillar implements ISimpleBlockRenderingHandler {
 
 	}
 
+	// TODO this is a hardcoded mess...icon decisions should be left to the ISubmapManager, not here
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block blck, int modelId, RenderBlocks renderer) {
 		if (!(blck instanceof BlockCarvablePillar))
@@ -49,10 +50,10 @@ public class RendererPillar implements ISimpleBlockRenderingHandler {
 		int metadata = world.getBlockMetadata(x, y, z);
 
 		// Probably not the best way to handle this...
-		if (metadata >= block.carverHelper.variations.size()) {
+		if (metadata >= block.carverHelper.infoList.size()) {
 			metadata = 0;
 		} else {
-			if (block.carverHelper.variations.get(metadata).type != TextureType.CTMV) {
+			if (block.carverHelper.infoList.get(metadata).getType() != TextureType.CTMV) {
 				block.sides[0] = block.carverHelper.getIcon(0, metadata);
 				block.sides[1] = block.carverHelper.getIcon(1, metadata);
 				block.sides[2] = block.carverHelper.getIcon(2, metadata);

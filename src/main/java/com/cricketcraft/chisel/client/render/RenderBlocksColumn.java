@@ -1,7 +1,7 @@
 package com.cricketcraft.chisel.client.render;
 
-import com.cricketcraft.chisel.api.client.CTM;
-import com.cricketcraft.chisel.api.client.TextureSubmap;
+import com.cricketcraft.chisel.api.rendering.CTM;
+import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -10,12 +10,13 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderBlocksColumn extends RenderBlocks {
 
-	TextureSubmap submap;
-	IIcon iconTop;
-	IIcon sides[] = new IIcon[6];
-	CTM ctm = CTM.getInstance();
+	public TextureSubmap submap;
+	public IIcon iconTop;
+	
+	private IIcon sides[] = new IIcon[6];
+	private CTM ctm = CTM.getInstance();
 
-	RenderBlocksColumn() {
+	public RenderBlocksColumn() {
 		super();
 	}
 

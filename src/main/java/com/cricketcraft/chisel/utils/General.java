@@ -16,10 +16,10 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import com.cricketcraft.chisel.api.IAdvancedChisel;
+import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.api.carving.IChiselMode;
 import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.carving.CarvingVariation;
 import com.cricketcraft.chisel.item.chisel.ChiselMode;
 
 public class General {
@@ -143,9 +143,9 @@ public class General {
 		initTag(chisel);
 		chisel.stackTagCompound.setString(MODE_KEY, mode.name());
 	}
-	
+
 	public static ICarvingVariation getVariation(ItemStack stack) {
 		ICarvingVariation v = Carving.chisel.getVariation(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage());
-		return v == null ? new CarvingVariation(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage(), 99) : v;
+		return v == null ? CarvingUtils.getDefaultVariationFor(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage(), 99) : v;
 	}
 }

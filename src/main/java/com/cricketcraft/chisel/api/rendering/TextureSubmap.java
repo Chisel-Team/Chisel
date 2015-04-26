@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.api.client;
+package com.cricketcraft.chisel.api.rendering;
 
 import java.util.List;
 
@@ -79,9 +79,11 @@ public class TextureSubmap {
 	 */
 	@SubscribeEvent
 	public final void TexturesStitched(TextureStitchEvent.Post event) {
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				icons[x][y] = new TextureVirtual(getBaseIcon(), width, height, x, y);
+		for (TextureSubmap ts : submaps) {
+			for (int x = 0; x < ts.width; x++) {
+				for (int y = 0; y < ts.height; y++) {
+					ts.icons[x][y] = new TextureVirtual(ts.getBaseIcon(), ts.width, ts.height, x, y);
+				}
 			}
 		}
 	}
