@@ -5,20 +5,17 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.common.util.ForgeDirection;
 
-import com.cricketcraft.chisel.api.rendering.ISubmapManager;
 import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 
+public class SubmapManagerCarpetFloor extends SubmapManagerBase<RenderBlocksCTM> {
 
-public class SubmapManagerCarpetFloor implements ISubmapManager<RenderBlocksCTM> {
-	
 	private static RenderBlocksCTM rb = new RenderBlocksCTM();
-	
+
 	private TextureSubmap submap;
 	private TextureSubmap submapSmall;
 	private String color;
-	
+
 	public SubmapManagerCarpetFloor(String color) {
 		this.color = color;
 	}
@@ -42,23 +39,9 @@ public class SubmapManagerCarpetFloor implements ISubmapManager<RenderBlocksCTM>
 
 	@Override
 	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
-		rb.blockAccess = world;
-		rb.renderMaxX = 1.0;
 		rb.renderMaxY = 1f / 16f;
-		rb.renderMaxZ = 1.0;
-
 		rb.submap = submap;
 		rb.submapSmall = submapSmall;
-
-		rb.rendererOld = rendererOld;
 		return rb;
-	}
-
-	@Override
-	public void preRenderSide(RenderBlocksCTM renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-	}
-	
-	@Override
-	public void postRenderSide(RenderBlocksCTM renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 	}
 }
