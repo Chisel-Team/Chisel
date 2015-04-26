@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.api.client;
+package com.cricketcraft.chisel.api.rendering;
 
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
@@ -12,7 +12,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.cricketcraft.chisel.api.IFacade;
 import com.google.common.collect.Maps;
 
-import static com.cricketcraft.chisel.api.client.Dir.*;
+import static com.cricketcraft.chisel.api.rendering.Dir.*;
 
 // @formatter:off
 /**
@@ -68,15 +68,15 @@ import static com.cricketcraft.chisel.api.client.Dir.*;
 public class CTM {
 
 	/** Some hardcoded offset values for the different corner indeces */
-	private int[] submapOffsets = { 4, 5, 1, 0 };
-	private TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
+	private static int[] submapOffsets = { 4, 5, 1, 0 };
+	private static TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
 	private static EnumMap<Dir, Boolean> connectionMap = Maps.newEnumMap(Dir.class);
 	/** For use via the Chisel 2 config only, altering this could cause unintended behavior */
 	public static boolean disableObscuredFaceCheckConfig = false;
 
 	public Boolean disableObscuredFaceCheck = null;
 
-	private CTM() {
+	static {
 		for (Dir dir : Dir.VALUES) {
 			connectionMap.put(dir, false);
 		}
@@ -85,6 +85,9 @@ public class CTM {
 		submapMap.put(1, new Dir[] { BOTTOM, RIGHT, BOTTOM_RIGHT });
 		submapMap.put(2, new Dir[] { TOP, RIGHT, TOP_RIGHT });
 		submapMap.put(3, new Dir[] { TOP, LEFT, TOP_LEFT });
+	}
+	
+	private CTM() {
 	}
 
 	public static CTM getInstance() {

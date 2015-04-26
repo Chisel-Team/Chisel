@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.api.client;
+package com.cricketcraft.chisel.api.rendering;
 
 import net.minecraft.block.Block;
 import net.minecraft.world.IBlockAccess;

@@ -1,12 +1,7 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.carving.CarvableHelper;
-import com.cricketcraft.chisel.carving.CarvableVariation;
-import com.cricketcraft.chisel.init.ChiselTabs;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -16,7 +11,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import java.util.List;
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.api.rendering.ClientUtils;
+import com.cricketcraft.chisel.init.ChiselTabs;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCarvable extends Block implements ICarvable {
 
@@ -32,7 +35,7 @@ public class BlockCarvable extends Block implements ICarvable {
 		if (m == Material.rock || m == Material.iron) {
 			setHarvestLevel("pickaxe", 0);
 		}
-		carverHelper = new CarvableHelper();
+		carverHelper = new CarvableHelper(this);
 		setResistance(10.0F);
 		setHardness(2.0F);
 		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
@@ -76,16 +79,16 @@ public class BlockCarvable extends Block implements ICarvable {
 
 	@Override
 	public int getRenderType() {
-		return Chisel.renderCTMId;
+		return ClientUtils.renderCTMId;
 	}
 
 	@Override
-	public CarvableVariation getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+	public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
 		return carverHelper.getVariation(metadata);
 	}
 
 	@Override
-	public CarvableVariation getVariation(ItemStack stack) {
+	public IVariationInfo getVariation(ItemStack stack) {
 		return carverHelper.getVariation(stack.getItemDamage());
 	}
 

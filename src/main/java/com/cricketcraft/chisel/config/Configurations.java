@@ -2,7 +2,7 @@ package com.cricketcraft.chisel.config;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.Features;
-import com.cricketcraft.chisel.api.client.CTM;
+import com.cricketcraft.chisel.api.rendering.CTM;
 
 import net.minecraft.item.ItemDye;
 import net.minecraftforge.common.config.Configuration;
@@ -91,7 +91,7 @@ public class Configurations {
 		particlesTickrate = config.get(category, "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
 		oldPillars = config.get(category, "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
 		disableCTM = !config.get(category, "connectedTextures", true, "Enable connected textures").getBoolean(true);
-		CTM.disableObscuredFaceCheckConfig = connectInsideCTM = !config.get(category, "connectInsideCTM", false,
+		CTM.disableObscuredFaceCheckConfig = connectInsideCTM = config.get(category, "connectInsideCTM", false,
 				"Choose whether the inside corner is disconnected on a CTM block - http://imgur.com/eUywLZ4").getBoolean(false);
 		fancy = config.get(category, "fancyLeaves", true, "Enable fancy textures").getBoolean(true);
 		blockDescriptions = config.get(category, "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.")
