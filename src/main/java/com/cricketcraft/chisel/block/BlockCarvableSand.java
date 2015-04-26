@@ -15,6 +15,7 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.api.rendering.ClientUtils;
 import com.cricketcraft.chisel.init.ChiselTabs;
 
 import cpw.mods.fml.relauncher.Side;
@@ -69,7 +70,7 @@ public class BlockCarvableSand extends BlockSand implements ICarvable {
 
 	@Override
 	public int getRenderType() {
-		return Chisel.renderCTMId;
+		return ClientUtils.renderCTMId;
 	}
 
 	@Override

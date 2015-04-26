@@ -47,6 +47,7 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.sGNames;
 
