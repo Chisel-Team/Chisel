@@ -31,14 +31,13 @@ public class SubmapManagerAntiblock extends SubmapManagerBase<RenderBlocksCTM> {
 	};
 
 	@SideOnly(Side.CLIENT)
-	private RenderBlocksCTMFullbright rb;
+	private static RenderBlocksCTMFullbright rb;
 	
 	private String color;
 	private TextureSubmap submap, submapSmall;
 
 	public SubmapManagerAntiblock(String color) {
 		this.color = color;
-		this.rb = new RenderBlocksCTMFullbright();
 	}
 
 	@Override
@@ -56,6 +55,9 @@ public class SubmapManagerAntiblock extends SubmapManagerBase<RenderBlocksCTM> {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
+		if (rb == null) {
+			rb = new RenderBlocksCTMFullbright();
+		}
 		rb.submap = submap;
 		rb.submapSmall = submapSmall;
 		return rb;
