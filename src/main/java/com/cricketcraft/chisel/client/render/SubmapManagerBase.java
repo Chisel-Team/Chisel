@@ -7,6 +7,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.api.rendering.ISubmapManager;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 
 public abstract class SubmapManagerBase<T extends RenderBlocks> implements ISubmapManager<T> {
 
@@ -16,15 +19,18 @@ public abstract class SubmapManagerBase<T extends RenderBlocks> implements ISubm
 	}
 	
 	@Override
+	@SideOnly(Side.CLIENT)
 	public T createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
 		return null;
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void preRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void postRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 	}
 }

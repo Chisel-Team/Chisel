@@ -9,9 +9,13 @@ import net.minecraft.world.IBlockAccess;
 import com.cricketcraft.chisel.api.rendering.RenderBlocksCTM;
 import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 public class SubmapManagerAntiblock extends SubmapManagerBase<RenderBlocksCTM> {
 
-	private static final RenderBlocksCTM rb = new RenderBlocksCTM() {
+	@SideOnly(Side.CLIENT)
+	private static class RenderBlocksCTMFullbright extends RenderBlocksCTM {
 
 		@Override
 		protected void fillLightmap(int bottomLeft, int bottomRight, int topRight, int topLeft) {
@@ -26,11 +30,15 @@ public class SubmapManagerAntiblock extends SubmapManagerBase<RenderBlocksCTM> {
 		}
 	};
 
+	@SideOnly(Side.CLIENT)
+	private RenderBlocksCTMFullbright rb;
+	
 	private String color;
 	private TextureSubmap submap, submapSmall;
 
 	public SubmapManagerAntiblock(String color) {
 		this.color = color;
+		this.rb = new RenderBlocksCTMFullbright();
 	}
 
 	@Override
@@ -39,12 +47,14 @@ public class SubmapManagerAntiblock extends SubmapManagerBase<RenderBlocksCTM> {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(String modName, Block block, IIconRegister register) {
 		submap = new TextureSubmap(register.registerIcon(modName + ":antiblock/" + color + "-antiBlock-ctm"), 4, 4);
 		submapSmall = new TextureSubmap(register.registerIcon(modName + ":antiblock/" + color + "-antiBlock"), 2, 2);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
 		rb.submap = submap;
 		rb.submapSmall = submapSmall;
