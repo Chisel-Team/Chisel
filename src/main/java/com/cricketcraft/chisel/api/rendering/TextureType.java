@@ -19,6 +19,9 @@ import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.client.render.RenderBlocksColumn;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 /**
  * Handles all default {@link ISubmapManager} behavior
  */
@@ -90,6 +93,7 @@ public enum TextureType {
 		}
 		
 		@Override
+		@SideOnly(Side.CLIENT)
 		protected RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world, Object cachedObject) {
 			RenderBlocksColumn ret = theRenderBlocksColumn;
 			Pair<IIcon, TextureSubmap> data = (Pair<IIcon, TextureSubmap>) cachedObject;
@@ -226,6 +230,7 @@ public enum TextureType {
 		}
 		
 		@Override
+		@SideOnly(Side.CLIENT)
 		protected RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world, Object cachedObject) {
 			RenderBlocksCTM ret = theRenderBlocksCTM;
 			Triple<?, TextureSubmap, TextureSubmap> data = (Triple<?, TextureSubmap, TextureSubmap>) cachedObject;
@@ -294,8 +299,10 @@ public enum TextureType {
 	private static final TextureType[] VALUES;
 	private static final CTM ctm = CTM.getInstance();
 	private static final Random rand = new Random();
-	private static final RenderBlocksCTM theRenderBlocksCTM = new RenderBlocksCTM();
-	private static final RenderBlocksColumn theRenderBlocksColumn = new RenderBlocksColumn();
+	@SideOnly(Side.CLIENT)
+	private static RenderBlocksCTM theRenderBlocksCTM;
+	@SideOnly(Side.CLIENT)
+	private static RenderBlocksColumn theRenderBlocksColumn;
 
 	private String[] suffixes;
 	static {
@@ -306,14 +313,22 @@ public enum TextureType {
 		this.suffixes = suffixes.length == 0 ? new String[] { "" } : suffixes;
 	}
 	
-	public ISubmapManager<RenderBlocks> createManagerFor(ICarvingVariation variation, String texturePath) {
+	private static void initStatics() {
+		if (theRenderBlocksCTM == null) {
+			theRenderBlocksCTM = new RenderBlocksCTM();
+			theRenderBlocksColumn = new RenderBlocksColumn();
+		}
+	}
+	
+	public ISubmapManager<?> createManagerFor(ICarvingVariation variation, String texturePath) {
 		return new SubmapManagerDefault(this, variation, texturePath);
 	}
 	
-	public ISubmapManager<RenderBlocks> createManagerFor(ICarvingVariation variation, Block block, int meta) {
+	public ISubmapManager<?> createManagerFor(ICarvingVariation variation, Block block, int meta) {
 		return new SubmapManagerExistingIcon(this, variation, block, meta);
 	}
 	
+	@SideOnly(Side.CLIENT)
 	protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
 		return register.registerIcon(modName + ":" + texturePath);
 	}
@@ -326,6 +341,7 @@ public enum TextureType {
 		return getIcon(variation, cachedObject, side, meta);
 	}
 
+	@SideOnly(Side.CLIENT)
 	protected RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world, Object cachedObject) {
 		return null;
 	}
@@ -359,6 +375,7 @@ public enum TextureType {
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	private abstract static class SubmapManagerBase<T extends RenderBlocks> implements ISubmapManager<T> {
 		protected final TextureType type;
 		protected ICarvingVariation variation;
@@ -381,6 +398,7 @@ public enum TextureType {
 		
 		@Override
 		public T createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
+			initStatics();
 			return (T) type.createRenderContext(rendererOld, world, cachedObject);
 		}
 		
@@ -393,6 +411,7 @@ public enum TextureType {
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	private static class SubmapManagerDefault extends SubmapManagerBase<RenderBlocks> {
 
 		private String texturePath;
@@ -408,6 +427,7 @@ public enum TextureType {
 		}
 	}
 	
+	@SideOnly(Side.CLIENT)
 	private static class SubmapManagerExistingIcon extends SubmapManagerBase<RenderBlocks> {
 		
 		private Block block;

@@ -26,6 +26,8 @@ public class Carving implements ICarvingRegistry {
 	static {
 		CarvingUtils.chisel = chisel;
 	}
+	
+	public static void construct() {}
 
 	private Carving() {
 	}
