@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import com.cricketcraft.chisel.api.ChiselAPIProps;
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.block.BlockCarvable;
+import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.compat.Compatibility;
 import com.cricketcraft.chisel.compat.IMCHandler;
 import com.cricketcraft.chisel.compat.fmp.FMPCompat;
@@ -74,6 +75,7 @@ public class Chisel {
 	public Chisel() { 
 		ChiselAPIProps.MOD_ID = MOD_ID;
 		CarvableHelper.itemCarvableClass = ItemCarvable.class;
+		Carving.construct();
 	}
 
 	@SidedProxy(clientSide = "com.cricketcraft.chisel.proxy.ClientProxy", serverSide = "com.cricketcraft.chisel.proxy.CommonProxy")

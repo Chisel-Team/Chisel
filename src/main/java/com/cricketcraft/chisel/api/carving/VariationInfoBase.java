@@ -10,7 +10,7 @@ public class VariationInfoBase implements IVariationInfo {
 
 	private ICarvingVariation variation;
 	private String unlocDesc;
-	private ISubmapManager<? extends RenderBlocks> manager;
+	private ISubmapManager<?> manager;
 	private TextureType type;
 
 	public VariationInfoBase(ICarvingVariation variation, String unlocDesc, ISubmapManager<? extends RenderBlocks> manager) {
@@ -35,7 +35,7 @@ public class VariationInfoBase implements IVariationInfo {
 	}
 
 	@Override
-	public ISubmapManager<? extends RenderBlocks> getSubmapManager() {
+	public ISubmapManager<?> getSubmapManager() {
 		return manager;
 	}
 
