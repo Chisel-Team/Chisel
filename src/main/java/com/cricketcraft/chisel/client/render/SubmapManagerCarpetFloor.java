@@ -15,7 +15,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class SubmapManagerCarpetFloor extends SubmapManagerBase<RenderBlocksCTM> {
 
 	@SideOnly(Side.CLIENT)
-	private RenderBlocksCTM rb;
+	private static RenderBlocksCTM rb;
 
 	private TextureSubmap submap;
 	private TextureSubmap submapSmall;
@@ -23,7 +23,6 @@ public class SubmapManagerCarpetFloor extends SubmapManagerBase<RenderBlocksCTM>
 
 	public SubmapManagerCarpetFloor(String color) {
 		this.color = color;
-		this.rb = new RenderBlocksCTM();
 	}
 
 	@Override
@@ -47,6 +46,9 @@ public class SubmapManagerCarpetFloor extends SubmapManagerBase<RenderBlocksCTM>
 	@Override
 	@SideOnly(Side.CLIENT)
 	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
+		if (rb == null) {
+			rb = new RenderBlocksCTM();
+		}
 		rb.renderMaxY = 1f / 16f;
 		rb.submap = submap;
 		rb.submapSmall = submapSmall;
