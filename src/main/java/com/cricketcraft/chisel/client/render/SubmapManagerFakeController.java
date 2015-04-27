@@ -10,6 +10,8 @@ import com.cricketcraft.chisel.api.rendering.CTM;
 import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import static com.cricketcraft.chisel.api.rendering.Dir.*;
 
 public class SubmapManagerFakeController extends SubmapManagerBase<RenderBlocks> {
@@ -41,6 +43,7 @@ public class SubmapManagerFakeController extends SubmapManagerBase<RenderBlocks>
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(String modName, Block block, IIconRegister register) {
 		map = new TextureSubmap(register.registerIcon(modName + ":futura/WIP/controllerWIP-ctm"), 2, 2);
 	}

@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel.api.rendering;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -35,11 +37,15 @@ public interface ISubmapManager<T extends RenderBlocks> {
 	 * @param register
 	 *            The IIconRegister instance.
 	 */
+	@SideOnly(Side.CLIENT)
 	void registerIcons(String modName, Block block, IIconRegister register);
-	
+
+	@SideOnly(Side.CLIENT)
 	T createRenderContext(RenderBlocks rendererOld, IBlockAccess world);
-	
+
+	@SideOnly(Side.CLIENT)
 	void preRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side);
-	
+
+	@SideOnly(Side.CLIENT)
 	void postRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side);
 }
