@@ -7,9 +7,12 @@ import com.cricketcraft.chisel.client.render.ctm.CTMModelRegistry;
 import com.cricketcraft.chisel.common.CarvableBlocks;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
 import com.cricketcraft.chisel.common.init.ChiselTabs;
+import com.cricketcraft.chisel.common.util.ReflectionUtil;
 import com.cricketcraft.chisel.common.util.SubBlockUtil;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -21,6 +24,8 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,6 +42,7 @@ import net.minecraftforge.common.property.Properties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -47,7 +53,7 @@ public class BlockCarvable extends Block{
     /**
      * The Property for the variation of this block
      */
-    public static final PropertyVariation VARIATION = new PropertyVariation();
+    public PropertyVariation VARIATION;
 
     /**
      * These are used for connected textures
@@ -86,15 +92,17 @@ public class BlockCarvable extends Block{
     private int index;
 
 
-    public BlockCarvable(CarvableBlocks type, int subBlocksAmount, int index){
-        this(Material.rock, type, subBlocksAmount, index);
+    public BlockCarvable(CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p){
+        this(Material.rock, type, subBlocksAmount, index, p);
     }
 
-    public BlockCarvable(Material material, CarvableBlocks type, int subBlocksAmount, int index){
+    public BlockCarvable(Material material, CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p){
         super(material);
         subBlocks = new ISubBlock[subBlocksAmount];
         this.type=type;
         this.index=index;
+        this.VARIATION=p;
+        ReflectionUtil.setFinalValue("blockState", Block.class, this, createRealBlockState(p));
         setupStates();
         setResistance(10.0F);
         setHardness(2.0F);
@@ -102,15 +110,41 @@ public class BlockCarvable extends Block{
         setUnlocalizedName(type.getName());
     }
 
+    public static BlockCarvable createBlock(Material m, CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p){
+        return new BlockCarvable(m, type, subBlocksAmount, index, p);
+    }
+
     public int getIndex(){
         return this.index;
     }
 
-    @Override
-    public BlockState createBlockState(){
-        return new ExtendedBlockState(this, new IProperty[]{VARIATION}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
+    private BlockState createRealBlockState(PropertyVariation p){
+        ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
                 CONNECTED_NORTH_EAST,CONNECTED_NORTH_WEST,CONNECTED_NORTH_UP,CONNECTED_NORTH_DOWN,CONNECTED_SOUTH_EAST,CONNECTED_SOUTH_WEST,
                 CONNECTED_SOUTH_UP,CONNECTED_SOUTH_DOWN,CONNECTED_EAST_UP,CONNECTED_EAST_DOWN,CONNECTED_WEST_UP,CONNECTED_WEST_DOWN});
+        return state;
+    }
+
+
+    @Override
+    public BlockState createBlockState(){
+//        VARIATION = new PropertyVariation();
+//        ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[]{VARIATION}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
+//                CONNECTED_NORTH_EAST,CONNECTED_NORTH_WEST,CONNECTED_NORTH_UP,CONNECTED_NORTH_DOWN,CONNECTED_SOUTH_EAST,CONNECTED_SOUTH_WEST,
+//                CONNECTED_SOUTH_UP,CONNECTED_SOUTH_DOWN,CONNECTED_EAST_UP,CONNECTED_EAST_DOWN,CONNECTED_WEST_UP,CONNECTED_WEST_DOWN});
+//        try {
+//            Field f = BlockState.class.getDeclaredField("validStates");
+//            f.setAccessible(true);
+//            ImmutableList list = (ImmutableList)f.get(state);
+//            Chisel.logger.info("Length is "+list.size()+ " for something");
+//            for (int i=0;i<list.size();i++){
+//                Chisel.logger.info(list.get(i).toString());
+//            }
+//        } catch (Exception e){
+//            e.printStackTrace();
+//            Chisel.logger.error("Bad stuff happened");
+//        }
+        return Blocks.air.getBlockState();
     }
 
     private void setupStates(){
@@ -139,12 +173,27 @@ public class BlockCarvable extends Block{
 
     @Override
     public IBlockState getStateFromMeta(int meta){
-        return getBlockState().getBaseState().withProperty(VARIATION, Variation.fromMeta(type, meta, getIndex()));
+        Variation v = Variation.fromMeta(type, meta, getIndex());
+        return getBlockState().getBaseState().withProperty(VARIATION, v);
     }
+
+//    @Override
+//    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
+//        IBlockState state = getStateFromMeta(meta);
+//        Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
+//        state.withProperty(VARIATION, v);
+//        Chisel.logger.info("Setting variation for "+((BlockCarvable) state.getBlock()).getName()+" to "+v+ " placed");
+//        Chisel.logger.info("Variation is "+state.getValue(VARIATION));
+//        return state;
+//    }
 
     @Override
     public int getMetaFromState(IBlockState state){
-        return (Integer)Variation.metaFromVariation(type, (Variation) state.getValue(VARIATION));
+//        if (state.getBlock() instanceof BlockCarvable){
+//            BlockCarvable b = (BlockCarvable)state.getBlock();
+//            return Variation.metaFromVariation(b.getType(), (Variation) state.getValue(VARIATION));
+//        }
+        return Variation.metaFromVariation(type, (Variation) state.getValue(VARIATION));
     }
 
     /**
@@ -193,7 +242,7 @@ public class BlockCarvable extends Block{
      * @return The sub block
      */
     public ISubBlock getSubBlock(Variation v){
-        Chisel.logger.info("meta: "+Variation.metaFromVariation(type, v));
+        //Chisel.logger.info("meta: "+Variation.metaFromVariation(type, v));
         ISubBlock block = subBlocks[Variation.metaFromVariation(type, v)];
         //Chisel.logger.info("Returning sub block "+block.getName());
         return block;
@@ -221,9 +270,24 @@ public class BlockCarvable extends Block{
     }
 
 
+//    @Override
+//    public IBlockState getActualState(IBlockState state, IBlockAccess w, BlockPos pos){
+//        if (state.getBlock() instanceof BlockCarvable){
+//            Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
+//            state.withProperty(VARIATION, v);
+//            Chisel.logger.info("Setting variation for "+((BlockCarvable) state.getBlock()).getName()+" to "+v+ " basic");
+//        }
+//        return state;
+//    }
 
     @Override
     public IBlockState getExtendedState(IBlockState state, IBlockAccess w, BlockPos pos) {
+//        if (state.getBlock() instanceof BlockCarvable){
+//            Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
+//            state.withProperty(VARIATION, v);
+//            Chisel.logger.info("Setting variation for "+((BlockCarvable) state.getBlock()).getName()+" to "+v + " advanced");
+//        }
+
         boolean up = false;
         boolean down = false;
         boolean north = false;
@@ -377,7 +441,7 @@ public class BlockCarvable extends Block{
      * @param state2 Second state
      * @return Whether they are the same block
      */
-    public static boolean areBlocksEqual(IBlockState state1, IBlockState state2){
+    public boolean areBlocksEqual(IBlockState state1, IBlockState state2){
         return (state1.getBlock()==state2.getBlock()&&((Variation)state1.getValue(VARIATION)).equals((Variation) state2.getValue(VARIATION)));
     }
 
@@ -388,7 +452,7 @@ public class BlockCarvable extends Block{
      * @param pos2
      * @return
      */
-    public static boolean isConnected(World w, BlockPos pos1, BlockPos pos2){
+    public boolean isConnected(World w, BlockPos pos1, BlockPos pos2){
         return areBlocksEqual(w.getBlockState(pos1), w.getBlockState(pos2));
     }
 
@@ -419,11 +483,14 @@ public class BlockCarvable extends Block{
     public int getRenderType() { return 3; }
 
     @Override
-    public boolean isOpaqueCube() { return false; }
+    public boolean isOpaqueCube() {
+        return false;
+    }
 
     @Override
     public boolean isFullCube() { return false; }
 
     @Override
     public boolean isVisuallyOpaque() { return false; }
+
 }

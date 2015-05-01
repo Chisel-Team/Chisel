@@ -5,6 +5,7 @@ import com.cricketcraft.chisel.client.render.ctm.ModelCTM;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.ItemChiselBlock;
 import com.cricketcraft.chisel.common.util.SubBlockUtil;
+import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -42,7 +43,8 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
 
     @Override
     public IBakedModel handleBlockState(IBlockState state) {
-        IBlockResources r = ((BlockCarvable)state.getBlock()).getSubBlock((Variation)state.getValue(BlockCarvable.VARIATION)).getResources();
+        PropertyVariation VARIATION = ((BlockCarvable)state.getBlock()).getType().getPropertyVariation();
+        IBlockResources r = ((BlockCarvable)state.getBlock()).getSubBlock((Variation)state.getValue(VARIATION)).getResources();
         this.quads=generateQuads(r);
         return this;
     }

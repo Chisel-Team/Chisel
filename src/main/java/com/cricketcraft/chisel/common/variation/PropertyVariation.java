@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.common.variation;
 
+import com.cricketcraft.chisel.Chisel;
 import net.minecraft.block.properties.PropertyHelper;
 
 import java.util.ArrayList;
@@ -13,13 +14,17 @@ import java.util.Collection;
  */
 public class PropertyVariation extends PropertyHelper{
 
-    static Collection<Variation> values = new ArrayList<Variation>();
+    Collection<Variation> values = new ArrayList<Variation>();
 
     public PropertyVariation(){
         super("variation", Variation.class);
+        Chisel.logger.info("PropertyVariation created");
     }
 
     public Collection getAllowedValues(){
+        if (values.size()==0){
+            throw new RuntimeException("0 Values?");
+        }
         return values;
     }
 

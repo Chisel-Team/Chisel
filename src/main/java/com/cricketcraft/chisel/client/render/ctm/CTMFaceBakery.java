@@ -154,7 +154,7 @@ public class CTMFaceBakery extends FaceBakery{
      * @return The CTM Face
      */
     public CTMFace makeCtmFace(EnumFacing side, CTMBlockResources resources, int[] quads){
-        Chisel.logger.info("Making CTM face");
+        //Chisel.logger.info("Making CTM face");
         return new CTMFace(makeQuadFor(side, resources, quads[0], 1),
                            makeQuadFor(side, resources, quads[1], 2),
                            makeQuadFor(side, resources, quads[2], 3),

@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.common;
 
 import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.carving.CarvingVariationRepresentation;
 import com.cricketcraft.chisel.client.render.BlockResources;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.client.render.NonCTMModelRegistry;
@@ -9,24 +10,17 @@ import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.ItemChiselBlock;
 import com.cricketcraft.chisel.common.block.subblocks.CTMSubBlock;
 import com.cricketcraft.chisel.common.block.subblocks.SubBlock;
+import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockSandStone;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.ItemModelMesher;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,14 +36,42 @@ public enum CarvableBlocks implements Reference{
 
     ANTIBLOCK("antiblock"){
         @Override
-        protected Variation[] createVariations(){
-            return Variation.getColors();
+        protected Variation[] createVariations(PropertyVariation p){
+            return Variation.getColors(p);
         }
 
         @Override
         public String getOrdictName(){
             return "antiblock";
         }
+    },
+
+    COBBLESTONE("cobblestone"){
+        @Override
+        protected Variation[] createVariations(PropertyVariation p){
+            return new Variation[]{Variation.createVariation("fancy", p)};
+        }
+
+        @Override
+        public String getOrdictName(){
+            return "cobblestone";
+        }
+
+
+        @Override
+        public String[] createHonorarySubBlocks(){return new String[]{"cobblestone#0"};}
+    },
+    FACTORY("factory"){
+        @Override
+        protected Variation[] createVariations(PropertyVariation p){
+            return new Variation[]{Variation.createVariation("wireframe", p), Variation.createVariation("circuit", p)};
+        }
+
+        @Override
+        public String getOrdictName(){
+            return "factory";
+        }
+
     }
 
     ;
@@ -57,6 +79,10 @@ public enum CarvableBlocks implements Reference{
     protected String name;
     private static Map<String, BlockCarvable> blocks = new HashMap<String, BlockCarvable>();
     private Variation[] variations;
+
+    protected PropertyVariation propertyVariation;
+
+    private CarvingVariationRepresentation[] carvingVariations;
 
     public static BlockCarvable getBlockWithName(String name){
         return blocks.get(name);
@@ -66,10 +92,50 @@ public enum CarvableBlocks implements Reference{
         return getBlockWithName(name);
     }
 
+    public CarvingVariationRepresentation[] getCarvingVariations(){
+        return this.carvingVariations;
+    }
+
+
+    private static void initCarvingVariations(){
+        for (CarvableBlocks b : values()){
+            int l = b.getVariants().length+b.createHonorarySubBlocks().length;
+            CarvingVariationRepresentation[] r = new CarvingVariationRepresentation[l];
+            for (int i=0;i<b.getVariants().length;i++){
+                Variation v = b.getVariants()[i];
+                r[i]=new CarvingVariationRepresentation(b.getBlock(), i);
+            }
+            int index = b.getVariants().length;
+            for (int i=0;i<b.createHonorarySubBlocks().length;i++){
+                String data = b.createHonorarySubBlocks()[i];
+                String[] p = data.split("#");
+                r[index+i]=new CarvingVariationRepresentation(getBlockFromString(p[0]), Integer.parseInt(p[1]));
+            }
+            b.carvingVariations=r;
+        }
+    }
+
+    /**
+     * Gets the block from a string with the format {mod}:{block name}
+     * So for vanilla cobblestone it would be vanilla:cobblestone
+     * @param in
+     * @return
+     */
+    private static Block getBlockFromString(String in){
+        String[] parts = in.split(":");
+        if (parts.length<2){
+            return (Block)Block.blockRegistry.getObject(new ResourceLocation(parts[0]));
+        }
+        else {
+            return GameRegistry.findBlock(parts[0], parts[1]);
+        }
+    }
+
 
     CarvableBlocks(String name){
         this.name=name;
-        variations=createVariations();
+        propertyVariation = new PropertyVariation();
+        variations=createVariations(propertyVariation);
     }
 
     /**
@@ -90,19 +156,16 @@ public enum CarvableBlocks implements Reference{
         //throw new RuntimeException("Not getting overwritten");
     }
 
-    protected Variation[] createVariations(){
-        return new Variation[0];
+    protected abstract Variation[] createVariations(PropertyVariation p);
+
+    protected String[] createHonorarySubBlocks(){return new String[0];}
+
+    protected String[] getLore(String v){
+        return new String[]{"chisel.lore."+getName()+"."+v+".1"};
     }
 
 
 
-    /**
-     * Gets the block it is based on. So if this is chiselable cobblestone it will return Blocks.cobblestone
-     * @return The Block this block is based on
-     */
-    public Block getBaseBlock(){
-        return null;
-    }
 
     /**
      * Gets the Ore dictionary name of this block
@@ -126,11 +189,13 @@ public enum CarvableBlocks implements Reference{
                 continue;
             }
 
-            //BlockCarvable block = new BlockCarvable(b, b.getVariants().length);
             Variation[][] var = splitVariationArray(b.getVariants());
             for (int i=0;i<var.length;i++) {
                 Variation[] vArray = var[i];
-                BlockCarvable block = new BlockCarvable(b,vArray.length, i);
+                BlockCarvable block = new BlockCarvable(b,vArray.length, i, b.propertyVariation);
+                if (block.VARIATION==null){
+                    throw new RuntimeException("Variation is null");
+                }
                 for (Variation v : b.getVariants()) {
                     if (isCTM(b.getName(), v.getValue())) {
                         CTMModelRegistry.register(b.getName(), v.getValue(), var.length);
@@ -140,10 +205,6 @@ public enum CarvableBlocks implements Reference{
                         NonCTMModelRegistry.register(b.getName(), v.getValue(), var.length);
                         BlockResources.preGenerateBlockResources(block, v.getValue());
                     }
-                    //ModelResourceLocation location;
-                    //location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":antiblock", "inventory");
-                    //Chisel.logger.info("Location is "+location.toString());
-                    //ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Variation.metaFromVariation(b, v), location);
                 }
                 NonCTMModelRegistry.registerInventory(b, var.length);
                 if (i==0) {
@@ -163,12 +224,9 @@ public enum CarvableBlocks implements Reference{
                 location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":"+block.getName()+i, "inventory");
             }
             GameRegistry.registerBlock(block, ItemChiselBlock.class, (String)blocks.keySet().toArray()[i]);
-            Chisel.logger.info("Item is " + Item.getItemFromBlock(block) + " and name is " + block.getName() + " and index is " + block.getIndex());
-            Chisel.logger.info("Location is "+location.toString());
             for (Variation v : block.getType().getVariants()){
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Variation.metaFromVariation(block.getType(), v), location);
             }
-            //Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), block.getIndex(), location);
         }
 
     }
@@ -181,28 +239,22 @@ public enum CarvableBlocks implements Reference{
                 Variation v = block.getType().getVariants()[h];
                 if (block.getIndex()!=0){
                     int exclusion = block.getIndex()*16;
-                    //Chisel.logger.info("i is "+i);
                     if (h<exclusion){
                         Chisel.logger.info("Exluding "+v.getName()+" from block "+blocks.keySet().toArray()[i]);
                         continue;
                     }
                 }
                 if (isCTM(block.getName(), v.getValue())){
-                    block.addSubBlock(CTMSubBlock.generateSubBlock(block, v.getValue(), "Default CTM Sub Block"));
+                    block.addSubBlock(CTMSubBlock.generateSubBlock(block, v.getValue(), block.getType().getLore(v.getValue())));
                 }
                 else {
-                    block.addSubBlock(SubBlock.generateSubBlock(block, v.getValue(), "Default Non CTM Sub block"));
+                    block.addSubBlock(SubBlock.generateSubBlock(block, v.getValue(), block.getType().getLore(v.getValue())));
                 }
             }
-//            final ModelResourceLocation location;
-//            if (block.getIndex()==0) {
-//                location = new ModelResourceLocation(MOD_ID.toLowerCase() + block.getName(), "inventory");
-//            } else {
-//                location = new ModelResourceLocation(MOD_ID.toLowerCase() + block.getName()+i, "inventory");
-//            }
-//            Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(block), block.getIndex(), location);
         }
+        initCarvingVariations();
     }
+
 
     private static Variation[][] splitVariationArray(Variation[] array){
         if (array.length<=16){
@@ -248,5 +300,10 @@ public enum CarvableBlocks implements Reference{
     public static CarvableBlocks getBlock(BlockCarvable block){
         return getBlock(block.getName());
     }
+
+    public PropertyVariation getPropertyVariation(){
+        return this.propertyVariation;
+    }
+
 
 }

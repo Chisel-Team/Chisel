@@ -1,11 +1,20 @@
 package com.cricketcraft.chisel.common.block;
 
 import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.common.CarvableBlocks;
+import com.cricketcraft.chisel.common.util.SubBlockUtil;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
+
+import java.util.List;
 
 /**
  * Class for the item for the chisel block
@@ -47,10 +56,32 @@ public class ItemChiselBlock extends ItemBlock{
             Variation curVariation = this.variations[stack.getMetadata()];
             return super.getUnlocalizedName(stack)+"."+curVariation;
         } catch (IndexOutOfBoundsException e){
-            Chisel.logger.info("Meta is: "+stack.getMetadata()+" and length is "+this.variations.length);
             return super.getUnlocalizedName(stack)+"."+"null";
         }
     }
+
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+        Variation v = variations[stack.getMetadata()];
+        IBlockResources r = SubBlockUtil.getResources(Block.getBlockFromItem(stack.getItem()), v);
+        if (r==null){
+            return;
+        }
+        for (String s : r.getLore()){
+            tooltip.add(StatCollector.translateToLocal(s));
+        }
+//        if (isShifting()){
+//            tooltip.add("Sneaking");
+//        }
+//        if (advanced){
+//            tooltip.add("F3+h active");
+//        }
+    }
+
+//    @SideOnly(Side.CLIENT)
+//    private static boolean isShifting(){
+//        return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
+//    }
 
     public int getMetadata(int meta){
         return meta;

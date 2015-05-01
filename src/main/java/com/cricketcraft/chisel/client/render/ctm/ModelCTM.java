@@ -6,6 +6,7 @@ import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.subblocks.ICTMSubBlock;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
 import com.cricketcraft.chisel.common.util.SubBlockUtil;
+import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.Tessellator;
@@ -82,18 +83,19 @@ public class ModelCTM implements ISmartBlockModel {
     @Override
     public IBakedModel handleBlockState(IBlockState state) {
         // /throw new RuntimeException(state.getValue(BlockCarvable.VARIATION).toString());
-        Chisel.logger.info("Handling block state for "+state.toString());
-        List<BakedQuad> newQuads = generateQuads(state);
+        PropertyVariation VARIATION = null;
+        if (state.getBlock() instanceof BlockCarvable){
+            VARIATION=((BlockCarvable) state.getBlock()).VARIATION;
+        }
+        List<BakedQuad> newQuads = generateQuads(state, VARIATION);
         this.quads = newQuads;
-        Chisel.logger.info(state.getBlock().toString());
-        Chisel.logger.info(state.getValue(BlockCarvable.VARIATION).toString());
-        this.particle = SubBlockUtil.getResources(state.getBlock(), (Variation) state.getValue(BlockCarvable.VARIATION)).getDefaultTexture();
+        this.particle = SubBlockUtil.getResources(state.getBlock(), (Variation) state.getValue(VARIATION)).getDefaultTexture();
         return this;
     }
 
-    private List<BakedQuad> generateQuads(IBlockState state) {
+    private List<BakedQuad> generateQuads(IBlockState state, PropertyVariation VARIATION) {
         List<BakedQuad> newQuads = new ArrayList<BakedQuad>();
-        Variation variation = (Variation) state.getValue(BlockCarvable.VARIATION);
+        Variation variation = (Variation) state.getValue(VARIATION);
         if (state.getBlock() instanceof BlockCarvable) {
             ISubBlock subBlock = ((BlockCarvable) state.getBlock()).getSubBlock(variation);
             if (subBlock instanceof ICTMSubBlock) {

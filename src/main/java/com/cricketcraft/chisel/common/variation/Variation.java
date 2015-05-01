@@ -12,30 +12,20 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class Variation implements IStringSerializable, Comparable<Variation>{
 
-    public static final Variation WHITE = createVariation("white");
-    public static final Variation ORANGE = createVariation("orange");
-    public static final Variation MAGENTA = createVariation("magenta");
-    public static final Variation LIGHT_BLUE = createVariation("light_blue");
-    public static final Variation YELLOW = createVariation("yellow");
-    public static final Variation LIME = createVariation("lime");
-    public static final Variation PINK = createVariation("pink");
-    public static final Variation GRAY = createVariation("gray");
-    public static final Variation LIGHT_GRAY = createVariation("light_gray");
-    public static final Variation CYAN = createVariation("cyan");
-    public static final Variation PURPLE = createVariation("purple");
-    public static final Variation BLUE = createVariation("blue");
-    public static final Variation BROWN = createVariation("brown");
-    public static final Variation GREEN = createVariation("green");
-    public static final Variation RED = createVariation("red");
-    public static final Variation BLACK = createVariation("black");
+
+
+
 
 
 
     private String value;
 
-    private Variation(String value){
+    private PropertyVariation property;
+
+    private Variation(PropertyVariation v, String value){
         this.value=value;
-        PropertyVariation.values.add(this);
+        this.property=v;
+        property.values.add(this);
     }
 
     public static void doStuff(){};
@@ -45,13 +35,8 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
     }
 
 
-    public static Variation createVariation(String value){
-        for (Variation v : PropertyVariation.values){
-            if (v.getValue().equals(value)){
-                return v;
-            }
-        }
-        return new Variation(value);
+    public static Variation createVariation(String value, PropertyVariation v){
+        return new Variation(v,value);
     }
 
 
@@ -59,8 +44,11 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
      * Gets the variations for a block that uses colors
      * @return
      */
-    public static Variation[] getColors(){
-        return new Variation[]{WHITE, ORANGE, MAGENTA, LIGHT_BLUE, YELLOW, LIME, PINK, GRAY, LIGHT_GRAY, CYAN, PURPLE, BLUE, BROWN, GREEN, RED, BLACK};
+    public static Variation[] getColors(PropertyVariation p){
+        return new Variation[]{createVariation("white", p),createVariation("orange", p),createVariation("magenta", p),createVariation("light_blue", p),
+                createVariation("yellow", p),createVariation("lime", p),createVariation("pink", p),createVariation("gray", p),
+                createVariation("light_gray", p),createVariation("cyan", p),createVariation("purple", p),createVariation("blue", p),
+                createVariation("brown", p),createVariation("green", p),createVariation("red", p),createVariation("black", p)};
     }
 
 
@@ -69,8 +57,8 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
      * @param main The Main variations
      * @return main + colors
      */
-    public static Variation[] withColors(Variation[] main){
-        return ArrayUtils.addAll(getColors(), main);
+    public static Variation[] withColors(Variation[] main, PropertyVariation p){
+        return ArrayUtils.addAll(getColors(p), main);
     }
 
 
@@ -126,6 +114,7 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
     }
 
     public String toString(){
+        //throw new RuntimeException("Giving name";)
         return getValue();
     }
 }

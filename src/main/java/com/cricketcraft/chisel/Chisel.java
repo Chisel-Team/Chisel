@@ -46,9 +46,7 @@ public class Chisel implements Reference{
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         Variation.doStuff();
-        MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
-        MinecraftForge.EVENT_BUS.register(new NonCTMModelRegistry.BakedEventListener());
-        MinecraftForge.EVENT_BUS.register(new TextureStitcher());
+        proxy.preInit();
         CarvableBlocks.preInitBlocks();
 
     }
