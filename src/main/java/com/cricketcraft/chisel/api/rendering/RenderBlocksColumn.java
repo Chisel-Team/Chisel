@@ -1,18 +1,19 @@
-package com.cricketcraft.chisel.client.render;
-
-import com.cricketcraft.chisel.api.rendering.CTM;
-import com.cricketcraft.chisel.api.rendering.TextureSubmap;
+package com.cricketcraft.chisel.api.rendering;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
+/**
+ * Used by {@link TextureType#CTMV}, slated to be rewritten. Do not use.
+ */
+@Deprecated
 public class RenderBlocksColumn extends RenderBlocks {
 
 	public TextureSubmap submap;
 	public IIcon iconTop;
-	
+
 	private IIcon sides[] = new IIcon[6];
 	private CTM ctm = CTM.getInstance();
 
