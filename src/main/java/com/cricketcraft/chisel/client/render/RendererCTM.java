@@ -19,7 +19,6 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 public class RendererCTM implements ISimpleBlockRenderingHandler {
 
 	public RenderBlocksCTM rendererCTM = new RenderBlocksCTM();
-	RenderBlocksColumn rendererColumn = new RenderBlocksColumn();
 
 	public RendererCTM() {
 		if (ClientUtils.renderCTMId == 0) {

@@ -17,7 +17,6 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.client.render.RenderBlocksColumn;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -25,7 +24,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * Handles all default {@link ISubmapManager} behavior
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "deprecation" })
 public enum TextureType {
 
 	// @formatter:off
