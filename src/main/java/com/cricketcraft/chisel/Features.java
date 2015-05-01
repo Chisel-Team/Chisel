@@ -10,6 +10,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -1726,7 +1728,14 @@ public enum Features {
 		@Override
 		void addBlocks() {
 
-			BlockCarvable netherrack = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(0.4F).setStepSound(Block.soundTypeStone);
+			BlockCarvable netherrack = (BlockCarvable) new BlockCarvable(Material.rock) {
+
+				@Override
+				public boolean isFireSource(World world, int x, int y, int z, ForgeDirection side) {
+					return side == ForgeDirection.UP;
+				}
+
+			}.setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(0.4F).setStepSound(Block.soundTypeStone);
 			Carving.chisel.addVariation("netherrack", Blocks.netherrack, 0, 0);
 			netherrack.carverHelper.addVariation("tile.hellrock.1.desc", 1, "netherrack/a1-netherrack-bloodgravel");
 			netherrack.carverHelper.addVariation("tile.hellrock.2.desc", 2, "netherrack/a1-netherrack-bloodrock");
@@ -1743,7 +1752,7 @@ public enum Features {
 			netherrack.carverHelper.addVariation("tile.hellrock.13.desc", 13, "netherrack/a1-netherrack-red");
 			netherrack.carverHelper.addVariation("tile.hellrock.14.desc", 14, "netherrack/a1-netherrack-wells");
 
-            netherrack.carverHelper.registerAll(netherrack, "netherrack");
+			netherrack.carverHelper.registerAll(netherrack, "netherrack");
 			Carving.chisel.registerOre("netherrack", "netherrack");
 		}
 	},
@@ -1752,8 +1761,8 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockCarvable obsidian = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(50.0F).setResistance(2000.0F)
-					.setStepSound(Block.soundTypeStone);
+			BlockCarvable obsidian = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(50.0F).setResistance(2000.0F).setStepSound(Block.soundTypeStone);
+
 			Carving.chisel.addVariation("obsidian", Blocks.obsidian, 0, 0);
 			obsidian.carverHelper.addVariation("tile.obsidian.1.desc", 1, "obsidian/pillar");
 			obsidian.carverHelper.addVariation("tile.obsidian.2.desc", 2, "obsidian/pillar-quartz");
