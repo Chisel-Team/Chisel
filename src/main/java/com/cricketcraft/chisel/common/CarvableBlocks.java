@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Represents all the different carvable blocks
  *
@@ -36,8 +37,8 @@ public enum CarvableBlocks implements Reference{
 
     ANTIBLOCK("antiblock"){
         @Override
-        protected Variation[] createVariations(PropertyVariation p){
-            return Variation.getColors(p);
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return Variation.getColors(c);
         }
 
         @Override
@@ -48,30 +49,49 @@ public enum CarvableBlocks implements Reference{
 
     COBBLESTONE("cobblestone"){
         @Override
-        protected Variation[] createVariations(PropertyVariation p){
-            return new Variation[]{Variation.createVariation("fancy", p)};
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("fancy")};
         }
-
-        @Override
-        public String getOrdictName(){
-            return "cobblestone";
-        }
-
 
         @Override
         public String[] createHonorarySubBlocks(){return new String[]{"cobblestone#0"};}
     },
     FACTORY("factory"){
         @Override
-        protected Variation[] createVariations(PropertyVariation p){
-            return new Variation[]{Variation.createVariation("wireframe", p), Variation.createVariation("circuit", p)};
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("wireframe"), c.value("circuit")};
+        }
+
+    },
+    ALUMINIUM("aluminium", true){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("caution"), c.value("crate"), c.value("thermal"), c.value("adv"), c.value("egregious"), c.value("bolted")};
+        }
+    },
+    ANDESITE("andesite"){
+
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("pillar"), c.value("lbrick"), c.value("ornate"), c.value("prism"), c.value("tiles")};
         }
 
         @Override
-        public String getOrdictName(){
-            return "factory";
+        public String[] createHonorarySubBlocks(){
+            return new String[]{"stone#5", "stone#6"};
+        }
+    },
+    BOOKSHELF("bookshelf"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("default"), c.value("rainbow"), c.value("necromancer-novice"),
+                    c.value("necromancer"), c.value("redtomes"), c.value("abandoned"), c.value("hoarder"), c.value("brim"), c.value("historician")};
         }
 
+        @Override
+        public String[] createHonorarySubBlocks(){
+            return new String[]{"bookshelf#0"};
+        }
     }
 
     ;
@@ -79,6 +99,7 @@ public enum CarvableBlocks implements Reference{
     protected String name;
     private static Map<String, BlockCarvable> blocks = new HashMap<String, BlockCarvable>();
     private Variation[] variations;
+    private boolean isBeaconBase;
 
     protected PropertyVariation propertyVariation;
 
@@ -133,9 +154,14 @@ public enum CarvableBlocks implements Reference{
 
 
     CarvableBlocks(String name){
+        this(name, false);
+    }
+
+    CarvableBlocks(String name, boolean isBeaconBase){
         this.name=name;
         propertyVariation = new PropertyVariation();
-        variations=createVariations(propertyVariation);
+        variations=createVariations(Variation.creator(propertyVariation));
+        this.isBeaconBase=isBeaconBase;
     }
 
     /**
@@ -156,7 +182,7 @@ public enum CarvableBlocks implements Reference{
         //throw new RuntimeException("Not getting overwritten");
     }
 
-    protected abstract Variation[] createVariations(PropertyVariation p);
+    protected abstract Variation[] createVariations(Variation.VariationCreator c);
 
     protected String[] createHonorarySubBlocks(){return new String[0];}
 
@@ -192,7 +218,7 @@ public enum CarvableBlocks implements Reference{
             Variation[][] var = splitVariationArray(b.getVariants());
             for (int i=0;i<var.length;i++) {
                 Variation[] vArray = var[i];
-                BlockCarvable block = new BlockCarvable(b,vArray.length, i, b.propertyVariation);
+                BlockCarvable block = new BlockCarvable(b,vArray.length, i, b.propertyVariation, b.isBeaconBase);
                 if (block.VARIATION==null){
                     throw new RuntimeException("Variation is null");
                 }
@@ -240,7 +266,7 @@ public enum CarvableBlocks implements Reference{
                 if (block.getIndex()!=0){
                     int exclusion = block.getIndex()*16;
                     if (h<exclusion){
-                        Chisel.logger.info("Exluding "+v.getName()+" from block "+blocks.keySet().toArray()[i]);
+                        Chisel.logger.info("Excluding "+v.getName()+" from block "+blocks.keySet().toArray()[i]);
                         continue;
                     }
                 }
@@ -284,8 +310,15 @@ public enum CarvableBlocks implements Reference{
     }
 
     private static boolean isCTM(String blockName, String variation){
-        String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-ctm.png";
-        return Chisel.class.getResource(path) !=null;
+        String ctmPath = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-ctm.png";
+        String ctmHPath = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-ctmh.png";
+        if (Chisel.class.getResource(ctmPath)!=null){
+            return true;
+        }
+        if (Chisel.class.getResource(ctmHPath)!=null){
+            return true;
+        }
+        return false;
     }
 
     public static CarvableBlocks getBlock(String name){

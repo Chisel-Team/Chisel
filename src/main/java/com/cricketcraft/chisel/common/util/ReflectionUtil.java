@@ -25,6 +25,16 @@ public class ReflectionUtil {
         return f;
     }
 
+    public static void setPrivateValue(Class clazz, String fieldName, Object o, Object value){
+        try {
+            Field f = clazz.getDeclaredField(fieldName);
+            f.setAccessible(true);
+            f.set(o, value);
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
     /**
      * Get the value of the specified field
      * @param v The Name

@@ -91,13 +91,16 @@ public class BlockCarvable extends Block{
 
     private int index;
 
+    private boolean isBeaconBase;
 
-    public BlockCarvable(CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p){
-        this(Material.rock, type, subBlocksAmount, index, p);
+
+    public BlockCarvable(CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p, boolean isBeaconBase){
+        this(Material.rock, type, subBlocksAmount, index, p, isBeaconBase);
     }
 
-    public BlockCarvable(Material material, CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p){
+    public BlockCarvable(Material material, CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p, boolean isBeaconBase){
         super(material);
+        this.isBeaconBase=isBeaconBase;
         subBlocks = new ISubBlock[subBlocksAmount];
         this.type=type;
         this.index=index;
@@ -106,12 +109,8 @@ public class BlockCarvable extends Block{
         setupStates();
         setResistance(10.0F);
         setHardness(2.0F);
-        setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
+        setCreativeTab(ChiselTabs.tab);
         setUnlocalizedName(type.getName());
-    }
-
-    public static BlockCarvable createBlock(Material m, CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p){
-        return new BlockCarvable(m, type, subBlocksAmount, index, p);
     }
 
     public int getIndex(){
@@ -492,5 +491,10 @@ public class BlockCarvable extends Block{
 
     @Override
     public boolean isVisuallyOpaque() { return false; }
+
+    @Override
+    public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
+        return this.isBeaconBase;
+    }
 
 }

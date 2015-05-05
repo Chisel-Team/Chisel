@@ -45,7 +45,8 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
     public IBakedModel handleBlockState(IBlockState state) {
         PropertyVariation VARIATION = ((BlockCarvable)state.getBlock()).getType().getPropertyVariation();
         IBlockResources r = ((BlockCarvable)state.getBlock()).getSubBlock((Variation)state.getValue(VARIATION)).getResources();
-        this.quads=generateQuads(r);
+        texture=r.getDefaultTexture();
+        this.quads=generateQuads((BlockResources)r);
         return this;
     }
 
@@ -56,7 +57,7 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
             if (itemBlock.getBlock() instanceof  BlockCarvable){
                 BlockCarvable block = (BlockCarvable)itemBlock.getBlock();
                 Variation[] vars = block.getType().getVariants();
-                this.quads=generateQuads(block.allSubBlocks()[stack.getMetadata()].getResources());
+                this.quads=generateQuads((BlockResources)block.allSubBlocks()[stack.getMetadata()].getResources());
             }
         }
         else {
@@ -65,16 +66,31 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
         return this;
     }
 
-    private List<BakedQuad> generateQuads(IBlockResources r){
+    private List<BakedQuad> generateQuads(BlockResources r){
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
 
         for (EnumFacing f : EnumFacing.values()){
-            toReturn.add(makeQuad(f, r.getDefaultTexture()));
+            TextureAtlasSprite t = r.getDefaultTexture();
+            if (f==EnumFacing.UP){
+                if (r.top!=null) {
+                    t = r.top;
+                }
+            }
+            else if (f==EnumFacing.DOWN){
+                if (r.bottom!=null) {
+                    t = r.bottom;
+                }
+            }
+            else if (r.side!=null){
+                t=r.side;
+            }
+            toReturn.add(makeQuad(f, t));
         }
         return toReturn;
     }
 
-    private static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite){
+    public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite){
+        //Chisel.logger.info("Making "+sprite.getIconName()+" for facing "+f.getName());
         return bakery.makeBakedQuad(pos.from, pos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(new float[]{0, 0, 16, 16}, 0)),
                 sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, false);
     }

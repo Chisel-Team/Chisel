@@ -56,6 +56,16 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 
 public class CTM {
 
+    public static int remapCTM(int num){
+        switch (num){
+            case 16: return 0;
+            case 17: return 1;
+            case 18: return 4;
+            case 19: return 5;
+            default: return num;
+        }
+    }
+
     /**
      * The Uvs for the specific "magic number" value
      */

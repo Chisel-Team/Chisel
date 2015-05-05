@@ -2,6 +2,8 @@ package com.cricketcraft.chisel.client.render.ctm;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
+import com.cricketcraft.chisel.client.render.ModelNonCTM;
+import com.cricketcraft.chisel.common.Reference;
 import net.minecraft.block.BlockDynamicLiquid;
 import net.minecraft.block.BlockGlowstone;
 import net.minecraft.block.BlockSlab;
@@ -22,7 +24,7 @@ import javax.vecmath.Vector3f;
  *
  * @author minecreatr
  */
-public class CTMFaceBakery extends FaceBakery{
+public class CTMFaceBakery extends FaceBakery implements Reference{
 
     public static final CTMFaceBakery instance = new CTMFaceBakery();
 
@@ -163,14 +165,40 @@ public class CTMFaceBakery extends FaceBakery{
     }
 
     private BakedQuad makeQuadFor(EnumFacing side, CTMBlockResources resources, int quad, int quadSection){
-        ModelCTM.QuadPos pos = getCorrectQuadPos(side, quadSection);
-        TextureAtlasSprite s;
-        if (CTM.isDefaultTexture(quad)){
-            s=resources.texture;
+        TextureAtlasSprite s = resources.ctmTexture;
+        if (resources.isCTMH){
+            if (side==EnumFacing.UP||side==EnumFacing.DOWN) {
+                if (side == EnumFacing.UP) {
+                    s = resources.top;
+                } else {
+                    s = resources.bottom;
+                }
+                return ModelNonCTM.makeQuad(side, s);
+            }
+        }
+        else if (resources.isCTMV){
+            if (side==EnumFacing.NORTH||side==EnumFacing.SOUTH||side==EnumFacing.WEST||side==EnumFacing.EAST){
+                s=resources.side;
+                return ModelNonCTM.makeQuad(side, s);
+            }
+        }
+        if (CTM.isDefaultTexture(quad)&&((!resources.isCTMH)||(!resources.isCTMV))){
+            if (!resources.isCTMH){
+                if (!resources.isCTMV){
+                    s=resources.texture;
+                }
+            }
+//            Chisel.logger.info("Using resources.texture for "+quad+" and "+resources.getParent().getName()+" variant "+resources.getVariantName());
         }
         else {
             s=resources.ctmTexture;
         }
+        if (resources.isCTMH||resources.isCTMV){
+            int old = quad;
+            quad = CTM.remapCTM(quad);
+            Chisel.logger.info("Remapping ctm(h/v) "+old+" to "+quad);
+        }
+        ModelCTM.QuadPos pos = getCorrectQuadPos(side, quadSection);
 
         return makeBakedQuad(pos.from, pos.to, new BlockPartFace(side, -1, s.getIconName(), new BlockFaceUV(CTM.uvs[quad], 0)),
                 s, side, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), side.getAxis(), 0, false), false, false);

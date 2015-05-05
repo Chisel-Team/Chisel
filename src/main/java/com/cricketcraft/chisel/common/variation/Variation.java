@@ -12,12 +12,6 @@ import org.apache.commons.lang3.ArrayUtils;
  */
 public class Variation implements IStringSerializable, Comparable<Variation>{
 
-
-
-
-
-
-
     private String value;
 
     private PropertyVariation property;
@@ -39,12 +33,30 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
         return new Variation(v,value);
     }
 
+    public static VariationCreator creator(PropertyVariation p){
+        return new VariationCreator(p);
+    }
+
+    public static class VariationCreator{
+
+        private PropertyVariation p;
+
+        private VariationCreator(PropertyVariation p){
+            this.p=p;
+        }
+
+        public Variation value(String v){
+            return createVariation(v, p);
+        }
+    }
+
 
     /**
      * Gets the variations for a block that uses colors
      * @return
      */
-    public static Variation[] getColors(PropertyVariation p){
+    public static Variation[] getColors(VariationCreator c){
+        PropertyVariation p = c.p;
         return new Variation[]{createVariation("white", p),createVariation("orange", p),createVariation("magenta", p),createVariation("light_blue", p),
                 createVariation("yellow", p),createVariation("lime", p),createVariation("pink", p),createVariation("gray", p),
                 createVariation("light_gray", p),createVariation("cyan", p),createVariation("purple", p),createVariation("blue", p),
@@ -57,8 +69,8 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
      * @param main The Main variations
      * @return main + colors
      */
-    public static Variation[] withColors(Variation[] main, PropertyVariation p){
-        return ArrayUtils.addAll(getColors(p), main);
+    public static Variation[] withColors(Variation[] main, VariationCreator c){
+        return ArrayUtils.addAll(getColors(c), main);
     }
 
 
