@@ -53,5 +53,5 @@ public class ChiselTabs {
         }
     }
 
-    public static final ChiselCreativeTab tab = new ChiselCreativeTab();
+    public static final CreativeTabs tab = new ChiselCreativeTab().setBackgroundImageName("item_search.png");
 }

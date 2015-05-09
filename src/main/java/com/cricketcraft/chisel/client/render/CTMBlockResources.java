@@ -26,18 +26,13 @@ public class CTMBlockResources extends BlockResources{
 
     public TextureAtlasSprite ctmTexture;
 
-    public boolean isCTMH = false;
-
-    public boolean isCTMV = false;
 
 
     public CTMBlockResources(BlockCarvable parent, String name, List<String> lore, TextureAtlasSprite texture, TextureAtlasSprite ctmTexture,
-                             TextureAtlasSprite side, TextureAtlasSprite top, TextureAtlasSprite bottom, boolean isCTMH, boolean isCTMV){
-        super(parent, name, lore, texture, side, top, bottom);
+                             TextureAtlasSprite side, TextureAtlasSprite top, TextureAtlasSprite bottom, int type){
+        super(parent, name, lore, texture, side, top, bottom, type);
         this.ctmTexture=ctmTexture;
         this.texture=texture;
-        this.isCTMH=isCTMH;
-        this.isCTMV=isCTMV;
         allResources.add(this);
     }
 
@@ -55,14 +50,19 @@ public class CTMBlockResources extends BlockResources{
         if (map==null){
             throw new RuntimeException("TextureMap is null");
         }
-        boolean isCTMH = isCTMH(parent.getName(), subBlockName);
-        boolean isCTMV = isCTMV(parent.getName(), subBlockName);
+        int type = CTM;
+        if (isCTMH(parent.getName(), subBlockName)){
+            type = CTMH;
+        }
+        else if (isCTMV(parent.getName(), subBlockName)){
+            type = CTMV;
+        }
         TextureAtlasSprite texture = map.getAtlasSprite(prefix+subBlockName);
         TextureAtlasSprite ctm;
-        if (isCTMH){
+        if (type==CTMH){
             ctm = map.getAtlasSprite(prefix+subBlockName+"-ctmh");
         }
-        else if (isCTMV){
+        else if (type==CTMV){
             ctm = map.getAtlasSprite(prefix+subBlockName+"-ctmv");
         }
         else {
@@ -84,7 +84,7 @@ public class CTMBlockResources extends BlockResources{
             bottom = top;
         }
 
-        return new CTMBlockResources(parent, subBlockName, lore, texture, ctm, side, top, bottom, isCTMH, isCTMV);
+        return new CTMBlockResources(parent, subBlockName, lore, texture, ctm, side, top, bottom, type);
     }
 
     public static void preGenerateBlockResources(BlockCarvable parent, String subBlockName){
@@ -112,10 +112,7 @@ public class CTMBlockResources extends BlockResources{
 
     @Override
     public TextureAtlasSprite getDefaultTexture(){
-        if (isCTMH||isCTMV){
-//            TextureAtlasSprite temp = this.ctmTexture;
-//            ReflectionUtil.setPrivateValue(TextureAtlasSprite.class, "maxU", temp, temp.getMaxU()-8);
-//            ReflectionUtil.setPrivateValue(TextureAtlasSprite.class, "maxV", temp, temp.getMaxV()-8);
+        if (type==CTMH||type==CTMV){
             return this.ctmTexture;
         }
         return this.texture;

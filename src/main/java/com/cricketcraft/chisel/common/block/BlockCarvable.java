@@ -2,9 +2,12 @@ package com.cricketcraft.chisel.common.block;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.IFacade;
+import com.cricketcraft.chisel.client.render.BlockResources;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
+import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.client.render.ctm.CTMModelRegistry;
 import com.cricketcraft.chisel.common.CarvableBlocks;
+import com.cricketcraft.chisel.common.PropertyBlockPos;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
 import com.cricketcraft.chisel.common.init.ChiselTabs;
 import com.cricketcraft.chisel.common.util.ReflectionUtil;
@@ -24,6 +27,7 @@ import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -31,6 +35,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
@@ -80,6 +85,8 @@ public class BlockCarvable extends Block{
     public static final IUnlistedProperty CONNECTED_WEST_UP = Properties.toUnlisted(PropertyBool.create("Connected North East"));
     public static final IUnlistedProperty CONNECTED_WEST_DOWN = Properties.toUnlisted(PropertyBool.create("Connected North East"));
 
+    public static final PropertyBlockPos BLOCK_POS = new PropertyBlockPos();
+
 
 
     private CarvableBlocks type;
@@ -105,6 +112,7 @@ public class BlockCarvable extends Block{
         this.type=type;
         this.index=index;
         this.VARIATION=p;
+        this.fullBlock = isOpaqueCube();
         ReflectionUtil.setFinalValue("blockState", Block.class, this, createRealBlockState(p));
         setupStates();
         setResistance(10.0F);
@@ -120,29 +128,13 @@ public class BlockCarvable extends Block{
     private BlockState createRealBlockState(PropertyVariation p){
         ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
                 CONNECTED_NORTH_EAST,CONNECTED_NORTH_WEST,CONNECTED_NORTH_UP,CONNECTED_NORTH_DOWN,CONNECTED_SOUTH_EAST,CONNECTED_SOUTH_WEST,
-                CONNECTED_SOUTH_UP,CONNECTED_SOUTH_DOWN,CONNECTED_EAST_UP,CONNECTED_EAST_DOWN,CONNECTED_WEST_UP,CONNECTED_WEST_DOWN});
+                CONNECTED_SOUTH_UP,CONNECTED_SOUTH_DOWN,CONNECTED_EAST_UP,CONNECTED_EAST_DOWN,CONNECTED_WEST_UP,CONNECTED_WEST_DOWN, BLOCK_POS});
         return state;
     }
 
 
     @Override
     public BlockState createBlockState(){
-//        VARIATION = new PropertyVariation();
-//        ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[]{VARIATION}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
-//                CONNECTED_NORTH_EAST,CONNECTED_NORTH_WEST,CONNECTED_NORTH_UP,CONNECTED_NORTH_DOWN,CONNECTED_SOUTH_EAST,CONNECTED_SOUTH_WEST,
-//                CONNECTED_SOUTH_UP,CONNECTED_SOUTH_DOWN,CONNECTED_EAST_UP,CONNECTED_EAST_DOWN,CONNECTED_WEST_UP,CONNECTED_WEST_DOWN});
-//        try {
-//            Field f = BlockState.class.getDeclaredField("validStates");
-//            f.setAccessible(true);
-//            ImmutableList list = (ImmutableList)f.get(state);
-//            Chisel.logger.info("Length is "+list.size()+ " for something");
-//            for (int i=0;i<list.size();i++){
-//                Chisel.logger.info(list.get(i).toString());
-//            }
-//        } catch (Exception e){
-//            e.printStackTrace();
-//            Chisel.logger.error("Bad stuff happened");
-//        }
         return Blocks.air.getBlockState();
     }
 
@@ -154,7 +146,7 @@ public class BlockCarvable extends Block{
                 withProperty(CONNECTED_NORTH_WEST, false).withProperty(CONNECTED_NORTH_UP, false).withProperty(CONNECTED_NORTH_DOWN, false).
                 withProperty(CONNECTED_SOUTH_EAST, false).withProperty(CONNECTED_SOUTH_WEST, false).withProperty(CONNECTED_SOUTH_UP, false).
                 withProperty(CONNECTED_SOUTH_DOWN, false).withProperty(CONNECTED_EAST_UP, false).withProperty(CONNECTED_EAST_DOWN, false).
-                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(VARIATION, v));
+                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(BLOCK_POS, null).withProperty(VARIATION, v));
     }
 
     public ExtendedBlockState getBaseExtendedState(){
@@ -280,12 +272,14 @@ public class BlockCarvable extends Block{
 //    }
 
     @Override
-    public IBlockState getExtendedState(IBlockState state, IBlockAccess w, BlockPos pos) {
-//        if (state.getBlock() instanceof BlockCarvable){
-//            Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
-//            state.withProperty(VARIATION, v);
-//            Chisel.logger.info("Setting variation for "+((BlockCarvable) state.getBlock()).getName()+" to "+v + " advanced");
-//        }
+    public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
+        if (stateIn.getBlock()==null||stateIn.getBlock().getMaterial()==Material.air){
+            return stateIn;
+        }
+        IExtendedBlockState state = (IExtendedBlockState)stateIn;
+        Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
+
+        state = state.withProperty(BLOCK_POS, pos);
 
         boolean up = false;
         boolean down = false;
@@ -363,7 +357,7 @@ public class BlockCarvable extends Block{
         }
 
 
-        return ((IExtendedBlockState)state).withProperty(CONNECTED_UP, up).withProperty(CONNECTED_DOWN, down).withProperty(CONNECTED_NORTH, north).
+        return state.withProperty(CONNECTED_UP, up).withProperty(CONNECTED_DOWN, down).withProperty(CONNECTED_NORTH, north).
                 withProperty(CONNECTED_SOUTH, south).withProperty(CONNECTED_EAST, east).withProperty(CONNECTED_WEST, west)
                 .withProperty(CONNECTED_NORTH_EAST, north_east).withProperty(CONNECTED_NORTH_WEST, north_west).
                         withProperty(CONNECTED_NORTH_UP, north_up).withProperty(CONNECTED_NORTH_DOWN, north_down).
@@ -483,7 +477,10 @@ public class BlockCarvable extends Block{
 
     @Override
     public boolean isOpaqueCube() {
-        return false;
+        if (type==null){
+            return true;
+        }
+        return type.isOpaqueCube();
     }
 
     @Override
@@ -495,6 +492,20 @@ public class BlockCarvable extends Block{
     @Override
     public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
         return this.isBeaconBase;
+    }
+
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
+        AxisAlignedBB axis = type.getCollisionBoundingBox(worldIn, pos, state);
+        if (axis!=null){
+            return axis;
+        }
+        return super.getCollisionBoundingBox(worldIn, pos, state);
+    }
+
+    @Override
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn) {
+        type.onEntityCollidedWithBlock(worldIn, pos, entityIn);
     }
 
 }

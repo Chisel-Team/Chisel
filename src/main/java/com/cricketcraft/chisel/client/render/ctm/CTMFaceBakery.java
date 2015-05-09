@@ -2,6 +2,7 @@ package com.cricketcraft.chisel.client.render.ctm;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
+import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.client.render.ModelNonCTM;
 import com.cricketcraft.chisel.common.Reference;
 import net.minecraft.block.BlockDynamicLiquid;
@@ -166,34 +167,32 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
 
     private BakedQuad makeQuadFor(EnumFacing side, CTMBlockResources resources, int quad, int quadSection){
         TextureAtlasSprite s = resources.ctmTexture;
-        if (resources.isCTMH){
+        if (resources.type== IBlockResources.CTMH){
             if (side==EnumFacing.UP||side==EnumFacing.DOWN) {
                 if (side == EnumFacing.UP) {
                     s = resources.top;
                 } else {
                     s = resources.bottom;
                 }
-                return ModelNonCTM.makeQuad(side, s);
+                return ModelNonCTM.makeQuad(side, s, resources.type, null);
             }
         }
-        else if (resources.isCTMV){
+        else if (resources.type== IBlockResources.CTMV){
             if (side==EnumFacing.NORTH||side==EnumFacing.SOUTH||side==EnumFacing.WEST||side==EnumFacing.EAST){
                 s=resources.side;
-                return ModelNonCTM.makeQuad(side, s);
+                return ModelNonCTM.makeQuad(side, s, resources.type, null);
             }
         }
-        if (CTM.isDefaultTexture(quad)&&((!resources.isCTMH)||(!resources.isCTMV))){
-            if (!resources.isCTMH){
-                if (!resources.isCTMV){
-                    s=resources.texture;
-                }
+        if (CTM.isDefaultTexture(quad)){
+            if (!(resources.type==IBlockResources.CTMH||resources.type==IBlockResources.CTMV)){
+                s=resources.texture;
             }
 //            Chisel.logger.info("Using resources.texture for "+quad+" and "+resources.getParent().getName()+" variant "+resources.getVariantName());
         }
         else {
             s=resources.ctmTexture;
         }
-        if (resources.isCTMH||resources.isCTMV){
+        if (resources.type==IBlockResources.CTMH||resources.type==IBlockResources.CTMV){
             int old = quad;
             quad = CTM.remapCTM(quad);
             Chisel.logger.info("Remapping ctm(h/v) "+old+" to "+quad);

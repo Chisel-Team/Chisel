@@ -43,9 +43,12 @@ public class BlockResources implements IBlockResources, Reference{
     protected String variantName;
     protected BlockCarvable parent;
 
+    public int type;
+
     protected BlockResources(){};
 
-    public BlockResources(BlockCarvable parent, String name, List<String> lore, TextureAtlasSprite texture, TextureAtlasSprite side, TextureAtlasSprite top, TextureAtlasSprite bottom){
+    public BlockResources(BlockCarvable parent, String name, List<String> lore, TextureAtlasSprite texture,
+                          TextureAtlasSprite side, TextureAtlasSprite top, TextureAtlasSprite bottom, int type){
         this.texture=texture;
         this.lore=lore;
         this.variantName=name;
@@ -53,6 +56,7 @@ public class BlockResources implements IBlockResources, Reference{
         this.side=side;
         this.top=top;
         this.bottom=bottom;
+        this.type=type;
     }
 
     public TextureAtlasSprite getDefaultTexture(){
@@ -87,7 +91,31 @@ public class BlockResources implements IBlockResources, Reference{
         if (map==null){
             throw new RuntimeException("TextureMap is null");
         }
-        TextureAtlasSprite texture = map.getAtlasSprite(prefix+subBlockName);
+        int type = NORMAL;
+        TextureAtlasSprite texture;
+        if (isV9(parent.getName(), subBlockName)){
+            texture = map.getAtlasSprite(prefix+subBlockName+"-v9");
+            type=V9;
+        }
+        else if (isV4(parent.getName(), subBlockName)){
+            texture = map.getAtlasSprite(prefix+subBlockName+"-v4");
+            type=V4;
+        }
+        else if (isR16(parent.getName(), subBlockName)){
+            texture = map.getAtlasSprite(prefix+subBlockName+"-r16");
+            type=R16;
+        }
+        else if (isR9(parent.getName(), subBlockName)){
+            texture = map.getAtlasSprite(prefix+subBlockName+"-r9");
+            type=R9;
+        }
+        else if (isR4(parent.getName(), subBlockName)){
+            texture = map.getAtlasSprite(prefix+subBlockName+"-r4");
+            type = R4;
+        }
+        else {
+            texture = map.getAtlasSprite(prefix+subBlockName);
+        }
 
         TextureAtlasSprite side = null;
         TextureAtlasSprite top = null;
@@ -101,13 +129,33 @@ public class BlockResources implements IBlockResources, Reference{
         if (hasBottomOverride(parent.getName(), subBlockName)){
             bottom = map.getAtlasSprite(prefix+subBlockName+"-bottom");
         }
+        if (top!=null&&bottom==null){
+            bottom=top;
+        }
 
-        return new BlockResources(parent, subBlockName, lore, texture, side, top, bottom);
+        return new BlockResources(parent, subBlockName, lore, texture, side, top, bottom, type);
     }
 
     public static void preGenerateBlockResources(BlockCarvable parent, String subBlockName){
         String prefix = MOD_ID.toLowerCase()+":blocks/"+parent.getName()+"/";
-        TextureStitcher.register(prefix+subBlockName);
+        if (isV9(parent.getName(), subBlockName)){
+            TextureStitcher.register(prefix+subBlockName+"-v9");
+        }
+        else if (isV4(parent.getName(), subBlockName)){
+            TextureStitcher.register(prefix+subBlockName+"-v4");
+        }
+        else if (isR16(parent.getName(), subBlockName)){
+            TextureStitcher.register(prefix+subBlockName+"-r16");
+        }
+        else if (isR9(parent.getName(), subBlockName)){
+            TextureStitcher.register(prefix+subBlockName+"-r9");
+        }
+        else if (isR4(parent.getName(), subBlockName)){
+            TextureStitcher.register(prefix+subBlockName+"-r4");
+        }
+        else {
+            TextureStitcher.register(prefix + subBlockName);
+        }
         if (hasSideOverride(parent.getName(), subBlockName)){
             TextureStitcher.register(prefix+subBlockName+"-side");
         }
@@ -142,6 +190,44 @@ public class BlockResources implements IBlockResources, Reference{
     protected static boolean isCTMV(String blockName, String variation){
         String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-ctmv.png";
         return Chisel.class.getResource(path) !=null;
+    }
+
+    protected static boolean isV9(String blockName, String variation){
+        String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-v9.png";
+        return Chisel.class.getResource(path) !=null;
+    }
+
+    protected static boolean isV4(String blockName, String variation){
+        String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-v4.png";
+        return Chisel.class.getResource(path) !=null;
+    }
+
+    protected static boolean isR16(String blockName, String variation){
+        String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-v9.png";
+        return Chisel.class.getResource(path) !=null;
+    }
+
+    protected static boolean isR9(String blockName, String variation){
+        String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-v9.png";
+        return Chisel.class.getResource(path) !=null;
+    }
+
+    protected static boolean isR4(String blockName, String variation){
+        String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-v9.png";
+        return Chisel.class.getResource(path) !=null;
+    }
+
+    public static int getIntervals(int in){
+        if (in==V9||in==R9){
+            return 3;
+        }
+        else if (in==V4||in==R4){
+            return 2;
+        }
+        else if (in==R16){
+            return 4;
+        }
+        return 1;
     }
 
 

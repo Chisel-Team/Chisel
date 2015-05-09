@@ -13,10 +13,17 @@ import com.cricketcraft.chisel.common.block.subblocks.SubBlock;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -47,15 +54,7 @@ public enum CarvableBlocks implements Reference{
         }
     },
 
-    COBBLESTONE("cobblestone"){
-        @Override
-        protected Variation[] createVariations(Variation.VariationCreator c){
-            return new Variation[]{c.value("fancy")};
-        }
 
-        @Override
-        public String[] createHonorarySubBlocks(){return new String[]{"cobblestone#0"};}
-    },
     FACTORY("factory"){
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c){
@@ -91,6 +90,117 @@ public enum CarvableBlocks implements Reference{
         @Override
         public String[] createHonorarySubBlocks(){
             return new String[]{"bookshelf#0"};
+        }
+    },
+    BRICK("brick"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("large"), c.value("mortarless"), c.value("varied"), c.value("aged"), c.value("yellow")};
+        }
+
+        @Override
+        public String[] createHonorarySubBlocks(){
+            return new String[]{"brick_block#0"};
+        }
+    },
+    BRONZE("bronze"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("caution"), c.value("crate"), c.value("thermal"), c.value("adv"), c.value("egregious"), c.value("bolted")};
+        }
+    },
+    COBBLESTONE("cobblestone"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("aligned_brick"), c.value("detailed_brick"), c.value("small_brick"),
+                    c.value("large_tile"), c.value("small_tile"), c.value("french_tile"), c.value("french_tile2"),
+                    c.value("creeper_tile"), c.value("damaged_tile"), c.value("huge_tile"), c.value("creeper_panel"),
+                    c.value("dent"), c.value("panel"), c.value("light_panel"), c.value("dark_panel")};
+        }
+
+        @Override
+        public String[] createHonorarySubBlocks(){return new String[]{"cobblestone#0"};}
+    },
+    COBBLESTONE_MOSSY("cobblestone_mossy"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("small_brick"),
+                    c.value("large_tile"), c.value("small_tile"), c.value("french_tile"), c.value("french_tile2"),
+                    c.value("creeper_tile"), c.value("damaged_tile"), c.value("huge_tile"), c.value("creeper_panel"),
+                    c.value("dent"), c.value("light_panel"), c.value("dark_panel")};
+        }
+        @Override
+        public String[] createHonorarySubBlocks(){return new String[]{"mossy_cobblestone#0"};}
+    },
+    CLOUD("cloud"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("cloud"), c.value("large"), c.value("small"), c.value("vertical"), c.value("grid")};
+        }
+
+        @Override
+        protected Material getMaterial(){
+            return Material.cloth;
+        }
+
+        @Override
+        protected float getBlockHardness(){
+            return 0.2f;
+        }
+
+        @Override
+        public int getOpacity(){
+            return 3;
+        }
+
+        @Override
+        public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entity) {
+            entity.fallDistance = 0.0F;
+
+            if (entity.motionY < 0.0D) {
+                entity.motionY *= 0.0050000000000000001D;
+            } else if (entity.motionY > 0) {
+                entity.motionY += 0.0285;
+            }
+        }
+    },
+    CONCRETE("concrete"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("default"), c.value("block"), c.value("doubleslab"), c.value("blocks"), c.value("weathered"),
+            c.value("weathered_block"), c.value("weathered_doubleslab"), c.value("weathered_blocks"), c.value("weathered_half"), c.value("weathered_block_half"),
+            c.value("asphalt")};
+        }
+
+        @Override
+        public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entity) {
+            double velocity = Math.sqrt(entity.motionX * entity.motionX + entity.motionZ * entity.motionZ);
+
+            if (!(entity instanceof EntityPlayerSP))
+                return;
+            if (velocity == 0)
+                return;
+
+            EntityPlayerSP player = (EntityPlayerSP) entity;
+
+            if (Math.abs(player.movementInput.moveForward) < 0.75f && Math.abs(player.movementInput.moveStrafe) < 0.75f)
+                return;
+
+            entity.motionX = entity.motionX / velocity;
+            entity.motionZ = entity.motionZ / velocity;
+        }
+    },
+    COPPER("copper"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("caution"), c.value("crate"), c.value("thermal"), c.value("adv"), c.value("egregious"), c.value("bolted")};
+        }
+    },
+    DIAMOND_BLOCK("diamond_block"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("embossed"), c.value("gem"), c.value("cells"), c.value("space"), c.value("spaceblack"), c.value("simple"),
+            c.value("bismuth"), c.value("crushed"), c.value("four"), c.value("fourornate"), c.value("zelda"), c.value("ornatelayer")};
         }
     }
 
@@ -184,6 +294,29 @@ public enum CarvableBlocks implements Reference{
 
     protected abstract Variation[] createVariations(Variation.VariationCreator c);
 
+    public boolean isOpaqueCube(){
+        return true;
+    }
+
+    protected Material getMaterial(){
+        return Material.rock;
+    }
+
+    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state){
+        return null;
+    }
+
+    protected float getBlockHardness(){
+        return 1f;
+    }
+
+    public int getOpacity(){
+        return 1;
+    }
+
+    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn) {
+    }
+
     protected String[] createHonorarySubBlocks(){return new String[0];}
 
     protected String[] getLore(String v){
@@ -218,7 +351,9 @@ public enum CarvableBlocks implements Reference{
             Variation[][] var = splitVariationArray(b.getVariants());
             for (int i=0;i<var.length;i++) {
                 Variation[] vArray = var[i];
-                BlockCarvable block = new BlockCarvable(b,vArray.length, i, b.propertyVariation, b.isBeaconBase);
+                BlockCarvable block = new BlockCarvable(b.getMaterial(), b,vArray.length, i, b.propertyVariation, b.isBeaconBase);
+                block.setHardness(b.getBlockHardness());
+                block.setLightOpacity(b.getOpacity());
                 if (block.VARIATION==null){
                     throw new RuntimeException("Variation is null");
                 }
