@@ -68,9 +68,9 @@ import static com.cricketcraft.chisel.api.rendering.Dir.*;
 public class CTM {
 
 	/** Some hardcoded offset values for the different corner indeces */
-	private static int[] submapOffsets = { 4, 5, 1, 0 };
-	private static TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
-	private static EnumMap<Dir, Boolean> connectionMap = Maps.newEnumMap(Dir.class);
+	protected static int[] submapOffsets = { 4, 5, 1, 0 };
+	protected static TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
+	protected static EnumMap<Dir, Boolean> connectionMap = Maps.newEnumMap(Dir.class);
 	/** For use via the Chisel 2 config only, altering this could cause unintended behavior */
 	public static boolean disableObscuredFaceCheckConfig = false;
 
@@ -87,7 +87,7 @@ public class CTM {
 		submapMap.put(3, new Dir[] { TOP, LEFT, TOP_LEFT });
 	}
 	
-	private CTM() {
+	protected CTM() {
 	}
 
 	public static CTM getInstance() {
