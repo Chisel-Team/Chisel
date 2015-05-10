@@ -41,7 +41,7 @@ public class RendererCTM implements ISimpleBlockRenderingHandler {
 		IVariationInfo var = ((ICarvable) block).getVariation(world, x, y, z, meta);
 
 		if (!rendererOld.hasOverrideBlockTexture() && var != null) {
-			RenderBlocks rb = var.getSubmapManager().createRenderContext(rendererOld, world);
+			RenderBlocks rb = var.getSubmapManager().createRenderContext(rendererOld, block, world);
 			if (rb != null && rb != rendererOld) {
 				rb.blockAccess = world;
 				if (rb instanceof RenderBlocksCTM) {

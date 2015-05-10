@@ -54,10 +54,11 @@ public class SubmapManagerAntiblock extends SubmapManagerBase<RenderBlocksCTM> {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
+	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		if (rb == null) {
 			rb = new RenderBlocksCTMFullbright();
 		}
+		rb.setRenderBoundsFromBlock(block);
 		rb.submap = submap;
 		rb.submapSmall = submapSmall;
 		return rb;
