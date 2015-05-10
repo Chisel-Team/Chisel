@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.client.render;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -20,7 +21,7 @@ public abstract class SubmapManagerBase<T extends RenderBlocks> implements ISubm
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public T createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
+	public T createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		return null;
 	}
 

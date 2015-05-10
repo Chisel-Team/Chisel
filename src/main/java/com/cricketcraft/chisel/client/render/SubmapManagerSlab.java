@@ -49,11 +49,11 @@ public class SubmapManagerSlab implements ISubmapManager<RenderBlocksCTM> {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
+	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		if (rb == null) {
 			rb = new RenderBlocksCTM();
 		}
-		rb.renderMaxY = 1f / 2f;
+		rb.setRenderBoundsFromBlock(block);
 		rb.submap = submap;
 		rb.submapSmall = submapSmall;
 		return rb;

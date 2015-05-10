@@ -41,7 +41,7 @@ public interface ISubmapManager<T extends RenderBlocks> {
 	void registerIcons(String modName, Block block, IIconRegister register);
 
 	@SideOnly(Side.CLIENT)
-	T createRenderContext(RenderBlocks rendererOld, IBlockAccess world);
+	T createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world);
 
 	@SideOnly(Side.CLIENT)
 	void preRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side);

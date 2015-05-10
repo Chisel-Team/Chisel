@@ -234,9 +234,6 @@ public enum TextureType {
 			RenderBlocksCTM ret = theRenderBlocksCTM;
 			Triple<?, TextureSubmap, TextureSubmap> data = (Triple<?, TextureSubmap, TextureSubmap>) cachedObject;
 			ret.blockAccess = world;
-			ret.renderMaxX = 1.0;
-			ret.renderMaxY = 1.0;
-			ret.renderMaxZ = 1.0;
 
 			ret.submap = data.getMiddle();
 			ret.submapSmall = data.getRight();
@@ -342,7 +339,7 @@ public enum TextureType {
 
 	@SideOnly(Side.CLIENT)
 	protected RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world, Object cachedObject) {
-		return null;
+		return rendererOld;
 	}
 
 	public static TextureType getTypeFor(CarvableHelper inst, String modid, String path) {
@@ -396,9 +393,11 @@ public enum TextureType {
 		}
 		
 		@Override
-		public T createRenderContext(RenderBlocks rendererOld, IBlockAccess world) {
+		public T createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 			initStatics();
-			return (T) type.createRenderContext(rendererOld, world, cachedObject);
+			T rb = (T) type.createRenderContext(rendererOld, world, cachedObject);
+			rb.setRenderBoundsFromBlock(block);
+			return rb;
 		}
 		
 		@Override
