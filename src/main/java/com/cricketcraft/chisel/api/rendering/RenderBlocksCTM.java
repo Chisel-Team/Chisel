@@ -148,7 +148,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		}
 	}
 
-	protected static CTM ctm = CTM.getInstance();
+	public CTM ctm = CTM.getInstance();
 
 	// globals added to save the JVM some trouble. No need to constantly create
 	// and destroy ints if we don't have to
