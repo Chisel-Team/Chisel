@@ -120,9 +120,9 @@ public enum TextureType {
 		
 		@Override
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, IBlockAccess world, int x, int y, int z, int side, int meta) {
-			Pair<IIcon, TextureSubmap> data = (Pair<IIcon, TextureSubmap>) cachedObject;
+			Pair<TextureSubmap, IIcon> data = (Pair<TextureSubmap, IIcon>) cachedObject;
 			if (side < 2)
-				return data.getLeft();
+				return data.getRight();
 
 			Block block = ctm.getBlockOrFacade(world, x, y, z, side);
 
@@ -138,7 +138,7 @@ public enum TextureType {
 				n = ctm.isConnected(world, x, y, z + 1, side, block, meta);
 			}
 			
-			TextureSubmap map = data.getRight();
+			TextureSubmap map = data.getLeft();
 			if (p && n)
 				return map.getSubIcon(1, 0);
 			else if (p)
