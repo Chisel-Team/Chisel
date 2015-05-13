@@ -9,7 +9,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public interface ISubmapManager<T extends RenderBlocks> {
+public interface ISubmapManager {
 
 	/**
 	 * Gets the icon for item rendering, based on side and item metadata.
@@ -41,11 +41,11 @@ public interface ISubmapManager<T extends RenderBlocks> {
 	void registerIcons(String modName, Block block, IIconRegister register);
 
 	@SideOnly(Side.CLIENT)
-	T createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world);
+	RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world);
 
 	@SideOnly(Side.CLIENT)
-	void preRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side);
+	void preRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side);
 
 	@SideOnly(Side.CLIENT)
-	void postRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side);
+	void postRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side);
 }

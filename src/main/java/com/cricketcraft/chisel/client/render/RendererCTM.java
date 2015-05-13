@@ -9,7 +9,6 @@ import org.lwjgl.opengl.GL11;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.api.rendering.ClientUtils;
-import com.cricketcraft.chisel.api.rendering.ISubmapManager;
 import com.cricketcraft.chisel.api.rendering.RenderBlocksCTM;
 import com.cricketcraft.chisel.utils.Drawing;
 
@@ -33,7 +32,6 @@ public class RendererCTM implements ISimpleBlockRenderingHandler {
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
 		int meta = world.getBlockMetadata(x, y, z);
@@ -45,7 +43,7 @@ public class RendererCTM implements ISimpleBlockRenderingHandler {
 			if (rb != null && rb != rendererOld) {
 				rb.blockAccess = world;
 				if (rb instanceof RenderBlocksCTM) {
-					((RenderBlocksCTM)rb).manager = (ISubmapManager<RenderBlocksCTM>) var.getSubmapManager();
+					((RenderBlocksCTM)rb).manager = var.getSubmapManager();
 					((RenderBlocksCTM)rb).rendererOld = rendererOld;
 				}
 				return rb.renderStandardBlock(block, x, y, z);

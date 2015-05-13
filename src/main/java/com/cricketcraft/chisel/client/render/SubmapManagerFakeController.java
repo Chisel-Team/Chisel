@@ -1,7 +1,6 @@
 package com.cricketcraft.chisel.client.render;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -12,9 +11,10 @@ import com.cricketcraft.chisel.init.ChiselBlocks;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import static com.cricketcraft.chisel.api.rendering.Dir.*;
 
-public class SubmapManagerFakeController extends SubmapManagerBase<RenderBlocks> {
+public class SubmapManagerFakeController extends SubmapManagerBase {
 
 	private TextureSubmap map;
 	private CTM ctm = CTM.getInstance();

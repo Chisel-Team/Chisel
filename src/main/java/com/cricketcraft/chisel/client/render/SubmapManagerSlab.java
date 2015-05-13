@@ -14,7 +14,7 @@ import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SubmapManagerSlab implements ISubmapManager<RenderBlocksCTM> {
+public class SubmapManagerSlab implements ISubmapManager {
 
 	@SideOnly(Side.CLIENT)
 	private static RenderBlocksCTM rb;
@@ -49,7 +49,7 @@ public class SubmapManagerSlab implements ISubmapManager<RenderBlocksCTM> {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
+	public RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		if (rb == null) {
 			rb = new RenderBlocksCTM();
 		}
@@ -63,9 +63,10 @@ public class SubmapManagerSlab implements ISubmapManager<RenderBlocksCTM> {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void preRenderSide(RenderBlocksCTM renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-		if (side.ordinal() < 2 && !renderer.rendererOld.hasOverrideBlockTexture()) {
-			renderer.rendererOld.setOverrideBlockTexture(sideTexture);
+	public void preRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		RenderBlocksCTM rbctm = (RenderBlocksCTM) renderer;
+		if (side.ordinal() < 2 && !rbctm.rendererOld.hasOverrideBlockTexture()) {
+			rbctm.rendererOld.setOverrideBlockTexture(sideTexture);
 			hadOverride = false;
 		} else {
 			hadOverride = true;
@@ -74,9 +75,9 @@ public class SubmapManagerSlab implements ISubmapManager<RenderBlocksCTM> {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void postRenderSide(RenderBlocksCTM renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+	public void postRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		if (!hadOverride) {
-			renderer.rendererOld.clearOverrideBlockTexture();
+			((RenderBlocksCTM) renderer).rendererOld.clearOverrideBlockTexture();
 		}
 	}
 }

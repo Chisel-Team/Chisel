@@ -12,7 +12,7 @@ import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SubmapManagerAntiblock extends SubmapManagerBase<RenderBlocksCTM> {
+public class SubmapManagerAntiblock extends SubmapManagerBase {
 
 	@SideOnly(Side.CLIENT)
 	private static class RenderBlocksCTMFullbright extends RenderBlocksCTM {
@@ -54,7 +54,7 @@ public class SubmapManagerAntiblock extends SubmapManagerBase<RenderBlocksCTM> {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public RenderBlocksCTM createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
+	public RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		if (rb == null) {
 			rb = new RenderBlocksCTMFullbright();
 		}

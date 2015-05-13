@@ -173,7 +173,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 	public TextureSubmap submap;
 	public TextureSubmap submapSmall;
 	public RenderBlocks rendererOld;
-	public ISubmapManager<RenderBlocksCTM> manager;
+	public ISubmapManager manager;
 
 	protected int[][] lightmap = new int[3][3];
 	protected float[][] redmap = new float[3][3];
