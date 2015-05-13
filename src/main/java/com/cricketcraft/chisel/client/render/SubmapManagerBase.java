@@ -12,7 +12,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 
-public abstract class SubmapManagerBase<T extends RenderBlocks> implements ISubmapManager<T> {
+public abstract class SubmapManagerBase implements ISubmapManager {
 
 	@Override
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
@@ -21,17 +21,17 @@ public abstract class SubmapManagerBase<T extends RenderBlocks> implements ISubm
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-	public T createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
+	public RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		return null;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void preRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+	public void preRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void postRenderSide(T renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+	public void postRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 	}
 }

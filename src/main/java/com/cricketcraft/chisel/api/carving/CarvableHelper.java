@@ -39,7 +39,7 @@ public class CarvableHelper {
 		this.theBlock = block;
 	}
     
-    public void addVariation(String description, int metadata, ISubmapManager<?> manager) {
+    public void addVariation(String description, int metadata, ISubmapManager manager) {
     	addVariation(description, metadata, null, manager);
     }
 
@@ -56,10 +56,10 @@ public class CarvableHelper {
     }
 
     public void addVariation(String description, int metadata, String texture) {
-        addVariation(description, metadata, texture, (ISubmapManager<?>) null);
+        addVariation(description, metadata, texture, (ISubmapManager) null);
     }
     
-    public void addVariation(String description, int metadata, String texture, ISubmapManager<?> manager) {
+    public void addVariation(String description, int metadata, String texture, ISubmapManager manager) {
     	addVariation(description, metadata, texture, null, 0, ChiselAPIProps.MOD_ID, manager);
     }
 
@@ -83,7 +83,7 @@ public class CarvableHelper {
 		addVariation(description, metadata, texture, block, blockMeta, modid, null);
 	}
 
-	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, ISubmapManager<?> customManager) {
+	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, ISubmapManager customManager) {
 
 		if (infoList.size() >= 16)
 			return;
@@ -96,14 +96,14 @@ public class CarvableHelper {
 		infoMap[metadata] = info;
 	}
 
-	private IVariationInfo getClientInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager<?> customManager) {
+	private IVariationInfo getClientInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager) {
 		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, metadata);
 		TextureType type = TextureType.getTypeFor(this, modid, texture);
 		if (type == TextureType.CUSTOM && customManager == null && block == null) {
 			throw new IllegalArgumentException(String.format("Could not find texture %s, and no custom texture manager was provided.", texture));
 		}
 		
-		ISubmapManager<?> manager;
+		ISubmapManager manager;
 		if (customManager != null) {
 			manager = customManager;
 		} else if (block != null) {
@@ -114,7 +114,7 @@ public class CarvableHelper {
 		return new VariationInfoBase(var, description, manager);
 	}
 	
-	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager<?> customManager) {
+	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager) {
 		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, metadata);
 		return new VariationInfoBase(var, description, null);
 	}

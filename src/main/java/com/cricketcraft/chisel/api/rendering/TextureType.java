@@ -316,11 +316,11 @@ public enum TextureType {
 		}
 	}
 	
-	public ISubmapManager<?> createManagerFor(ICarvingVariation variation, String texturePath) {
+	public ISubmapManager createManagerFor(ICarvingVariation variation, String texturePath) {
 		return new SubmapManagerDefault(this, variation, texturePath);
 	}
 	
-	public ISubmapManager<?> createManagerFor(ICarvingVariation variation, Block block, int meta) {
+	public ISubmapManager createManagerFor(ICarvingVariation variation, Block block, int meta) {
 		return new SubmapManagerExistingIcon(this, variation, block, meta);
 	}
 	
@@ -372,7 +372,7 @@ public enum TextureType {
 	}
 	
 	@SideOnly(Side.CLIENT)
-	private abstract static class SubmapManagerBase<T extends RenderBlocks> implements ISubmapManager<T> {
+	private abstract static class SubmapManagerBase implements ISubmapManager {
 		protected final TextureType type;
 		protected ICarvingVariation variation;
 		protected Object cachedObject;
@@ -393,9 +393,9 @@ public enum TextureType {
 		}
 		
 		@Override
-		public T createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
+		public RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 			initStatics();
-			T rb = (T) type.createRenderContext(rendererOld, world, cachedObject);
+			RenderBlocks rb = type.createRenderContext(rendererOld, world, cachedObject);
 			rb.setRenderBoundsFromBlock(block);
 			return rb;
 		}
@@ -410,7 +410,7 @@ public enum TextureType {
 	}
 
 	@SideOnly(Side.CLIENT)
-	private static class SubmapManagerDefault extends SubmapManagerBase<RenderBlocks> {
+	private static class SubmapManagerDefault extends SubmapManagerBase {
 
 		private String texturePath;
 		
@@ -426,7 +426,7 @@ public enum TextureType {
 	}
 	
 	@SideOnly(Side.CLIENT)
-	private static class SubmapManagerExistingIcon extends SubmapManagerBase<RenderBlocks> {
+	private static class SubmapManagerExistingIcon extends SubmapManagerBase {
 		
 		private Block block;
 		private int meta;
