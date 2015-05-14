@@ -1047,14 +1047,14 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-            BlockCarvable hexPlating = (BlockCarvable) new BlockCarvableGlow("animations/archetype32x").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+            BlockCarvable hexPlating = (BlockCarvable) new BlockCarvableGlow("animations/archetype2").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
             for (int i = 0; i < 16; i++) {
                 hexPlating.carverHelper.addVariation("tile.hexPlating." + ItemDye.field_150921_b[i] + ".desc", i, "hexPlating/hexBase");
             }
             hexPlating.carverHelper.registerAll(hexPlating, "hexPlating");
             Carving.chisel.registerOre("hexPlating", "hexPlating");
 
-            BlockCarvable hexLargePlating = (BlockCarvable) new BlockCarvableGlow("animations/archetype32x").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+            BlockCarvable hexLargePlating = (BlockCarvable) new BlockCarvableGlow("animations/archetype2").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
             for (int i = 0; i < 16; i++) {
                 hexLargePlating.carverHelper.addVariation("tile.hexPlating." + ItemDye.field_150921_b[i] + ".desc", i, "hexPlating/hexNew");
             }
@@ -2178,8 +2178,28 @@ public enum Features {
 			sandstone.carverHelper.addVariation("tile.sandstone.13.desc", 13, "sandstone/blocks");
 			sandstone.carverHelper.addVariation("tile.sandstone.14.desc", 14, "sandstone/mosaic");
 			sandstone.carverHelper.addVariation("tile.sandstone.15.desc", 15, "sandstone/horizontal-tiles");
+			sandstone.carverHelper.registerAll(sandstone, "sandstone");
 
-            sandstone.carverHelper.registerAll(sandstone, "sandstone");
+			BlockCarvable sandstone_scribbles = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setStepSound(Block.soundTypeStone).setHardness(0.8F);
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 0, "sandstone-scribbles/scribbles-0");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 1, "sandstone-scribbles/scribbles-1");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 2, "sandstone-scribbles/scribbles-2");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 3, "sandstone-scribbles/scribbles-3");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 4, "sandstone-scribbles/scribbles-4");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 5, "sandstone-scribbles/scribbles-5");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 6, "sandstone-scribbles/scribbles-6");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 7, "sandstone-scribbles/scribbles-7");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 8, "sandstone-scribbles/scribbles-8");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 9, "sandstone-scribbles/scribbles-9");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 10, "sandstone-scribbles/scribbles-10");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 11, "sandstone-scribbles/scribbles-11");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 12, "sandstone-scribbles/scribbles-12");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 13, "sandstone-scribbles/scribbles-13");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 14, "sandstone-scribbles/scribbles-14");
+			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 15, "sandstone-scribbles/scribbles-15");
+			sandstone_scribbles.carverHelper.registerBlock(sandstone_scribbles, "sandstone_scribbles");
+			sandstone_scribbles.carverHelper.registerVariations("sandstone", sandstone_scribbles);
+
 			Carving.chisel.registerOre("sandstone", "sandstone");
 		}
 
@@ -2196,7 +2216,7 @@ public enum Features {
 		}
 	},
 
-	SANDSTONE_SCRIBBLES {
+	/*SANDSTONE_SCRIBBLES { I moved all of this into sandstone, see Sandstone. ~ Drullkus
 
 		@Override
 		void addBlocks() {
@@ -2225,7 +2245,7 @@ public enum Features {
 		void addRecipes() {
 			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.sandstone_scribbles, 1), "X", 'X', new ItemStack(ChiselBlocks.sandstone, 1, 8));
 		}
-	},
+	},//*/
 
 	SILVER {
 
