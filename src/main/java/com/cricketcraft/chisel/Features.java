@@ -799,11 +799,11 @@ public enum Features {
             /*BlockSnakestone FakeAE = (BlockSnakestone) new BlockSnakestone("Chisel:futura/controllerHack/").setBlockName("chisel.fakeController").setCreativeTab(ChiselTabs.tabMetalChiselBlocks);
             GameRegistry.registerBlock(FakeAE, ItemCarvable.class, "FakeAE");
             Carving.chisel.addVariation("futura", FakeAE, 1, 67);
-            Carving.chisel.addVariation("futura", FakeAE, 13, 68);
+            Carving.chisel.addVariation("futura", FakeAE, 13, 68);*/
 
             circuits.carverHelper.registerBlock(circuits, "futuraCircuit");
             circuits.carverHelper.registerVariations("futura", circuits);
-            Carving.chisel.registerOre("futura", "futura");*/
+            Carving.chisel.registerOre("futura", "futura");
 		}
 
 		@Override
