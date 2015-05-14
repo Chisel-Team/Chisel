@@ -651,6 +651,11 @@ tile.glass2.0.desc=Asymmetrical Leaded Glass
 
 #Sandstone
 tile.chisel.sandstone.name=Sandstone
+
+tile.sandstone.0.desc=Sandstone Glyphs
+tile.sandstone.1.desc=Sandcobble
+tile.sandstone.2.desc=Sandstone Creeper
+
 tile.sandstone.3.desc=Faded Sandstone
 tile.sandstone.4.desc=Sandstone Pillar
 tile.sandstone.5.desc=Sandstone Pillar Capstone
