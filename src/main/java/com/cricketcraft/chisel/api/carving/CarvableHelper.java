@@ -60,7 +60,7 @@ public class CarvableHelper {
     }
     
     public void addVariation(String description, int metadata, String texture, ISubmapManager manager) {
-    	addVariation(description, metadata, texture, null, 0, ChiselAPIProps.MOD_ID, manager);
+    	addVariation(description, metadata, texture, null, 0, ChiselAPIProps.MOD_ID, manager, metadata);
     }
 
 	public void addVariation(String description, int metadata, Block bb, String modid) {
@@ -80,24 +80,33 @@ public class CarvableHelper {
 	}
 
 	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid) {
-		addVariation(description, metadata, texture, block, blockMeta, modid, null);
+		addVariation(description, metadata, texture, block, blockMeta, modid, null, metadata);
 	}
 
-	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, ISubmapManager customManager) {
+	public void addVariation(String description, int metadata, String texture, int order) {
+		addVariation(description, metadata, texture, null, 0, ChiselAPIProps.MOD_ID, (ISubmapManager) null, order);
+	}
+
+	public void addVariation(String description, int metadata, String texture, Block block, int blockMeta, String modid, ISubmapManager customManager, int order) {
 
 		if (infoList.size() >= 16)
 			return;
 
 		IVariationInfo info = FMLCommonHandler.instance().getSide().isClient()
-				? getClientInfo(modid, texture, description, metadata, block, blockMeta, customManager) 
-				: getServerInfo(modid, texture, description, metadata, block, blockMeta, customManager);
+				? getClientInfo(modid, texture, description, metadata, block, blockMeta, customManager, order)
+				: getServerInfo(modid, texture, description, metadata, block, blockMeta, customManager, order);
 
 		infoList.add(info);
 		infoMap[metadata] = info;
 	}
 
-	private IVariationInfo getClientInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager) {
-		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, metadata);
+	private IVariationInfo getClientInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager)
+	{
+		return getClientInfo(modid, texture, description, metadata, block, blockMeta, customManager, metadata);
+	}
+
+	private IVariationInfo getClientInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager, int order) {
+		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, order);
 		TextureType type = TextureType.getTypeFor(this, modid, texture);
 		if (type == TextureType.CUSTOM && customManager == null && block == null) {
 			throw new IllegalArgumentException(String.format("Could not find texture %s, and no custom texture manager was provided.", texture));
@@ -113,9 +122,14 @@ public class CarvableHelper {
 		}
 		return new VariationInfoBase(var, description, manager);
 	}
+
+	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager)
+	{
+		return getServerInfo(modid, texture, description, metadata, block, blockMeta, customManager, metadata);
+	}
 	
-	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager) {
-		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, metadata);
+	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager, int order) {
+		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, order);
 		return new VariationInfoBase(var, description, null);
 	}
 
