@@ -2159,9 +2159,12 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockCarvable sandstone = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setStepSound(Block.soundTypeStone).setHardness(0.8F);
-			Carving.chisel.addVariation("sandstone", Blocks.sandstone, 0, 0);
-			Carving.chisel.addVariation("sandstone", Blocks.sandstone, 1, 1);
-			Carving.chisel.addVariation("sandstone", Blocks.sandstone, 2, 2);
+			Carving.chisel.addVariation("sandstone", Blocks.sandstone, 0, -5);
+			Carving.chisel.addVariation("sandstone", Blocks.sandstone, 1, -4);
+			Carving.chisel.addVariation("sandstone", Blocks.sandstone, 2, -3);
+			sandstone.carverHelper.addVariation("tile.sandstone.0.desc", 0, "sandstone/terrain-sandstone-smoothglyph");
+			sandstone.carverHelper.addVariation("tile.sandstone.1.desc", 1, "sandstone/terrain-sandstone-solidcobble");
+			sandstone.carverHelper.addVariation("tile.sandstone.2.desc", 2, "sandstone/a0-sandstonepreview-boxcreeper");
 			sandstone.carverHelper.addVariation("tile.sandstone.3.desc", 3, "sandstone/faded");
 			sandstone.carverHelper.addVariation("tile.sandstone.4.desc", 4, "sandstone/column");
 			sandstone.carverHelper.addVariation("tile.sandstone.5.desc", 5, "sandstone/capstone");
