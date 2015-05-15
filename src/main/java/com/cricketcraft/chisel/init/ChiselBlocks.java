@@ -33,7 +33,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvableGlowstone glowstone = null;
 	public static final BlockCarvable lapis_block = null;
 	public static final BlockCarvable emerald_block = null;
-    public static final BlockCarvable nation = null;
+    public static final BlockCarvable rebel = null;
 	public static final BlockCarvable nether_brick = null;
 	public static final BlockCarvable netherrack = null;
 	public static final BlockCarvable mossy_cobblestone = null;
@@ -70,15 +70,18 @@ public final class ChiselBlocks {
 
 	public static final BlockCarvable voidstone = null;
 	public static final BlockMultiLayer voidstone2 = null;
+	public static final BlockCarvable voidstonerunic = null;
 	public static final BlockCarvablePillar voidstonePillar = null;
 	public static final BlockCarvablePillar voidstonePillar2 = null;
 	public static final BlockSnakestone stone_snakestone = null;
 	public static final BlockSnakestone sand_snakestone = null;
 	public static final BlockSnakestoneObsidian obsidian_snakestone = null;
 	public static final BlockCarvable hexPlating = null;
+	public static final BlockCarvable hexLargePlating = null;
 	public static final BlockCarvable technical = null;
 	public static final BlockCarvableGlass technical2 = null;
 	public static final BlockCarvable futura = null;
+	public static final BlockCarvable circuits = null;
 	public static final BlockCarvable brickCustom = null;
 	public static final BlockCarvableLayered warningSign = null;
 	public static final BlockCarvable arcane = null;
