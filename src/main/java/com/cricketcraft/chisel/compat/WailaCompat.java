@@ -45,7 +45,6 @@ public class WailaCompat implements IWailaDataProvider {
 		return strings;
 	}
 
-	@Override
 	public NBTTagCompound getNBTData(EntityPlayerMP player, TileEntity te, NBTTagCompound tag, World world, int x, int y, int z) {
 		return tag;
 	}
