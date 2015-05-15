@@ -100,11 +100,6 @@ public class CarvableHelper {
 		infoMap[metadata] = info;
 	}
 
-	private IVariationInfo getClientInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager)
-	{
-		return getClientInfo(modid, texture, description, metadata, block, blockMeta, customManager, metadata);
-	}
-
 	private IVariationInfo getClientInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager, int order) {
 		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, order);
 		TextureType type = TextureType.getTypeFor(this, modid, texture);
@@ -121,11 +116,6 @@ public class CarvableHelper {
 			manager = type.createManagerFor(var, texture);
 		}
 		return new VariationInfoBase(var, description, manager);
-	}
-
-	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager)
-	{
-		return getServerInfo(modid, texture, description, metadata, block, blockMeta, customManager, metadata);
 	}
 	
 	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager, int order) {
