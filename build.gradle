@@ -56,11 +56,12 @@ repositories {
 }
 
 dependencies {
-    compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
+    //compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
 	compile "codechicken:CodeChickenLib:${minecraft_version}-${ccl_version}:dev"
 	compile "codechicken:CodeChickenCore:${minecraft_version}-${ccc_version}:dev"
 	compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
     compile "codechicken:ForgeMultipart:${minecraft_version}-${fmp_version}:dev"
+    compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.505:dev"
 }
 
 processResources
