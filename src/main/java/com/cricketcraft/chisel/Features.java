@@ -1664,13 +1664,13 @@ public enum Features {
         @Override
         void addBlocks() {
             BlockCarvable imperial = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
-            imperial.carverHelper.addVariation("tile.nation.0.desc", 0, "nation/imperialCamo");
-            imperial.carverHelper.addVariation("tile.nation.1.desc", 1, "nation/imperialCamoSecluded");
-            imperial.carverHelper.addVariation("tile.nation.2.desc", 2, "nation/imperialPlate");
-            imperial.carverHelper.addVariation("tile.nation.3.desc", 3, "nation/imperialCautionWhite");
-            imperial.carverHelper.addVariation("tile.nation.4.desc", 4, "nation/imperialCautionOrange");
+            imperial.carverHelper.addVariation("tile.rebel.0.desc", 0, "rebel/imperialCamo");
+            imperial.carverHelper.addVariation("tile.rebel.1.desc", 1, "rebel/imperialCamoSecluded");
+            imperial.carverHelper.addVariation("tile.rebel.2.desc", 2, "rebel/imperialPlate");
+            imperial.carverHelper.addVariation("tile.rebel.3.desc", 3, "rebel/imperialCautionWhite");
+            imperial.carverHelper.addVariation("tile.rebel.4.desc", 4, "rebel/imperialCautionOrange");
             //imperial.carverHelper.registerBlock(imperial, "imperial");
-            imperial.carverHelper.registerAll(imperial, "nation");
+            imperial.carverHelper.registerAll(imperial, "rebel");
 
             BlockCarvable rebel = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
             rebel.carverHelper.addVariation("tile.nation.0.desc", 0, "nation/rebelCamo", 20);
@@ -1679,14 +1679,14 @@ public enum Features {
             rebel.carverHelper.addVariation("tile.nation.3.desc", 3, "nation/rebelCautionWhite", 23);
             rebel.carverHelper.addVariation("tile.nation.4.desc", 4, "nation/rebelCautionRed", 24);
             rebel.carverHelper.registerBlock(rebel, "rebel");
-            rebel.carverHelper.registerVariations("nation", rebel);
+            rebel.carverHelper.registerVariations("rebel", rebel);
 
-            Carving.chisel.registerOre("nation", "nation");
+            Carving.chisel.registerOre("rebel", "rebel");
         }
 
         @Override
         void addRecipes() {
-            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.nation, 32, 0), new Object[] { "xyx", "yzy", "xyx", 'x', "stone", 'y',
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.rebel, 32, 0), new Object[] { "xyx", "yzy", "xyx", 'x', "stone", 'y',
                     Items.iron_ingot, 'z', Items.gold_nugget }));
         }
     },
@@ -2693,13 +2693,13 @@ public enum Features {
 			voidstone2.carverHelper.registerAll(voidstone2, "voidstone2");
 			Carving.chisel.registerOre("voidstone2", "voidstone2");
 
-			BlockCarvable voidstoneRunic = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(5.0F).setResistance(10.0F);
+			BlockCarvable voidstonerunic = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(5.0F).setResistance(10.0F);
 
 
 			for (int i = 1; i < 16; i++)
-				voidstoneRunic.carverHelper.addVariation("tile.voidstoneRunic." + sGNames[i].replaceAll(" ", "").toLowerCase() + ".desc", i, "voidstone/runes/rune" + sGNames[i].replaceAll(" ", ""));
-			voidstoneRunic.carverHelper.registerAll(voidstoneRunic, "voidstoneRunic");
-			voidstoneRunic.carverHelper.registerVariations("voidstone", voidstoneRunic);
+				voidstonerunic.carverHelper.addVariation("tile.voidstoneRunic." + sGNames[i].replaceAll(" ", "").toLowerCase() + ".desc", i, "voidstone/runes/rune" + sGNames[i].replaceAll(" ", ""));
+			voidstonerunic.carverHelper.registerAll(voidstonerunic, "voidstoneRunic");
+			voidstonerunic.carverHelper.registerVariations("voidstone", voidstonerunic);
 
 			Carving.chisel.registerOre("voidstoneRunic", "voidstoneRunic");
 		}
