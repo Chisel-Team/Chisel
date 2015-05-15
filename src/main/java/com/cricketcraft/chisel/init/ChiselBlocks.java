@@ -33,7 +33,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvableGlowstone glowstone = null;
 	public static final BlockCarvable lapis_block = null;
 	public static final BlockCarvable emerald_block = null;
-    public static final BlockCarvable nation = null;
+    public static final BlockCarvable rebel = null;
 	public static final BlockCarvable nether_brick = null;
 	public static final BlockCarvable netherrack = null;
 	public static final BlockCarvable mossy_cobblestone = null;
