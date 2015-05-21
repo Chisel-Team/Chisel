@@ -715,7 +715,7 @@ public enum Features {
 			factoryblock2.carverHelper.addVariation("tile.factory2.2.desc", 2, "factory/tilemosaic", 22);
 			factoryblock2.carverHelper.addVariation("tile.factory2.3.desc", 3, "factory/wireframeblue", 23);
 			factoryblock2.carverHelper.registerAll(factoryblock2, "factoryblock2");
-			factoryblock2.carverHelper.registerVariations("factoryblock", factoryblock2);
+			factoryblock2.carverHelper.registerVariations("factoryblock");
 		}
 
 		@Override
@@ -769,7 +769,7 @@ public enum Features {
 			fantasyblock2.carverHelper.addVariation("tile.fantasyblock2.15.desc", 15, "fantasy2/bricks-wear");
 
 			fantasyblock2.carverHelper.registerBlock(fantasyblock2, "fantasyblock2");
-			fantasyblock2.carverHelper.registerVariations("fantasy", fantasyblock2);
+			fantasyblock2.carverHelper.registerVariations("fantasy");
 		}
 
 		@Override
@@ -799,7 +799,7 @@ public enum Features {
             }
 
             circuits.carverHelper.registerBlock(circuits, "futuraCircuit");
-            circuits.carverHelper.registerVariations("futura", circuits);
+            circuits.carverHelper.registerVariations("futura");
             Carving.chisel.registerOre("futura", "futura");
 		}
 
@@ -836,7 +836,7 @@ public enum Features {
 			BlockCarvableGlass glass2 = (BlockCarvableGlass) new BlockCarvableGlass().setCreativeTab(ChiselTabs.tabOtherChiselBlocks).setHardness(0.3F).setStepSound(Block.soundTypeGlass);
 			glass2.carverHelper.addVariation("tile.glass2.0.desc", 0, "glass/chrono", 20);
             glass2.carverHelper.registerBlock(glass2, "glass2");
-            glass2.carverHelper.registerVariations("glass", glass2);
+            glass2.carverHelper.registerVariations("glass");
 		}
 	},
 
@@ -980,7 +980,7 @@ public enum Features {
             gold2.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/gold/egregious", 24);
             gold2.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/gold/bolted", 25);
             gold2.carverHelper.registerBlock(gold2, "gold2");
-            gold2.carverHelper.registerVariations("gold_block", gold2);
+            gold2.carverHelper.registerVariations("gold_block");
 
             gold_block.carverHelper.registerAll(gold_block, "gold_block");
 			Carving.chisel.registerOre("gold_block", "blockGold");
@@ -1057,7 +1057,7 @@ public enum Features {
             }
 
             hexLargePlating.carverHelper.registerBlock(hexLargePlating, "hexLargePlating");
-            hexLargePlating.carverHelper.registerVariations("hexPlating", hexLargePlating);
+            hexLargePlating.carverHelper.registerVariations("hexPlating");
             Carving.chisel.registerOre("hexPlating", "hexPlating");
 		}
 
@@ -1238,7 +1238,7 @@ public enum Features {
             iron2.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/iron/egregious", 24);
             iron2.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/iron/bolted", 25);
             iron2.carverHelper.registerBlock(iron2, "iron2");
-            iron2.carverHelper.registerVariations("iron_block", iron2);
+            iron2.carverHelper.registerVariations("iron_block");
 
             iron_block.carverHelper.registerAll(iron_block, "iron_block");
 			Carving.chisel.registerOre("iron_block", "blockIron");
@@ -1670,10 +1670,10 @@ public enum Features {
             rebel.carverHelper.addVariation("tile.rebel.4.desc", 4, "military/rebelCautionRed", 24);
             rebel.carverHelper.registerBlock(rebel, "rebel");
             
-            imperial.carverHelper.registerVariations("military", imperial);
-            rebel.carverHelper.registerVariations("military", rebel);
+            imperial.carverHelper.registerVariations("military");
+            rebel.carverHelper.registerVariations("military");
 
-            Carving.chisel.registerOre("rebel", "nation");
+            Carving.chisel.registerOre("military", "military");
         }
 
         @Override
@@ -2173,7 +2173,7 @@ public enum Features {
 			sandstone2.carverHelper.addVariation("tile.sandstone.16.desc", 0, "sandstone2/terrain-sandstone-brickflat", 19);
 			sandstone2.carverHelper.addVariation("tile.sandstone.17.desc", 1, "sandstone2/a0-sandstonepreview-smoothflat", 20);
 			sandstone2.carverHelper.registerBlock(sandstone2, "sandstone2");
-			sandstone2.carverHelper.registerVariations("sandstone", sandstone2);
+			sandstone2.carverHelper.registerVariations("sandstone");
 
 			BlockCarvable sandstone_scribbles = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setStepSound(Block.soundTypeStone).setHardness(0.8F);
 			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 0, "sandstone-scribbles/scribbles-0", 36);
@@ -2193,7 +2193,7 @@ public enum Features {
 			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 14, "sandstone-scribbles/scribbles-14", 50);
 			sandstone_scribbles.carverHelper.addVariation("tile.sandstoneScribbles.desc", 15, "sandstone-scribbles/scribbles-15", 51);
 			sandstone_scribbles.carverHelper.registerBlock(sandstone_scribbles, "sandstone_scribbles");
-			sandstone_scribbles.carverHelper.registerVariations("sandstone", sandstone_scribbles);
+			sandstone_scribbles.carverHelper.registerVariations("sandstone");
 
 			Carving.chisel.registerOre("sandstone", "sandstone");
 		}
@@ -2392,13 +2392,13 @@ public enum Features {
 			technical2.carverHelper.addVariation("tile.technical.6.desc", 2, "technical/fanStillTransparent", 22);
 			technical2.carverHelper.addVariation("tile.technical.14.desc", 3, "technical/fanStillTransparent", 23);
             technical2.carverHelper.registerBlock(technical2, "technical2");
-            technical2.carverHelper.registerVariations("technical", technical2);
+            technical2.carverHelper.registerVariations("technical");
 
             BlockCarvable technical3 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
             technical3.carverHelper.addVariation("tile.technical3.0.desc", 0, "technical/massiveFan", 40);
             technical3.carverHelper.addVariation("tile.technical3.1.desc", 1, "technical/massiveHexPlating", 41);
             technical2.carverHelper.registerBlock(technical3, "technical3");
-            technical2.carverHelper.registerVariations("technical", technical3);
+            technical2.carverHelper.registerVariations("technical");
 
             Carving.chisel.registerOre("technical", "technical");
 		}
@@ -2691,7 +2691,7 @@ public enum Features {
 			for (int i = 1; i < 16; i++)
 				voidstonerunic.carverHelper.addVariation("tile.voidstoneRunic." + sGNames[i].replaceAll(" ", "").toLowerCase() + ".desc", i, "voidstone/runes/rune" + sGNames[i].replaceAll(" ", ""));
 			voidstonerunic.carverHelper.registerAll(voidstonerunic, "voidstoneRunic");
-			voidstonerunic.carverHelper.registerVariations("voidstone", voidstonerunic);
+			voidstonerunic.carverHelper.registerVariations("voidstone");
 
 			Carving.chisel.registerOre("voidstoneRunic", "voidstoneRunic");
 		}
