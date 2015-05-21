@@ -37,7 +37,6 @@ public class Configurations {
 	public static boolean oldPillars;
 	public static boolean disableCTM;
 	public static boolean connectInsideCTM;
-	public static boolean fancy;
 	public static boolean blockDescriptions;
 
 	public static boolean allowChiselDamage;
@@ -93,7 +92,6 @@ public class Configurations {
 		disableCTM = !config.get(category, "connectedTextures", true, "Enable connected textures").getBoolean(true);
 		CTM.disableObscuredFaceCheckConfig = connectInsideCTM = config.get(category, "connectInsideCTM", false,
 				"Choose whether the inside corner is disconnected on a CTM block - http://imgur.com/eUywLZ4").getBoolean(false);
-		fancy = config.get(category, "fancyLeaves", true, "Enable fancy textures").getBoolean(true);
 		blockDescriptions = config.get(category, "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.")
 				.getBoolean(true);
 
