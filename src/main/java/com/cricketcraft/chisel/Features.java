@@ -25,6 +25,7 @@ import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.client.render.SubmapManagerAntiblock;
 import com.cricketcraft.chisel.client.render.SubmapManagerCarpetFloor;
 import com.cricketcraft.chisel.client.render.SubmapManagerFakeController;
+import com.cricketcraft.chisel.client.render.SubmapManagerLeaves;
 import com.cricketcraft.chisel.client.render.SubmapManagerSlab;
 import com.cricketcraft.chisel.compat.fmp.ItemBlockChiselTorchPart;
 import com.cricketcraft.chisel.config.Configurations;
@@ -49,7 +50,6 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
 import static com.cricketcraft.chisel.init.ChiselBlocks.*;
 import static com.cricketcraft.chisel.utils.General.sGNames;
 
@@ -1383,23 +1383,14 @@ public enum Features {
 			Carving.chisel.addVariation("leaves", Blocks.leaves, 3, 0);
 			Carving.chisel.addVariation("leaves", Blocks.leaves2, 0, 0);
 			Carving.chisel.addVariation("leaves", Blocks.leaves2, 1, 0);
-			if (Configurations.fancy) { //TODO: This looks problematic -Drullkus
-				leaves.carverHelper.addVariation("tile.leaves.6.desc", 6, "leaves/dead");
-				leaves.carverHelper.addVariation("tile.leaves.7.desc", 7, "leaves/fancy");
-				leaves.carverHelper.addVariation("tile.leaves.8.desc", 8, "leaves/pinkpetal");
-				leaves.carverHelper.addVariation("tile.leaves.9.desc", 9, "leaves/red_roses");
-				leaves.carverHelper.addVariation("tile.leaves.10.desc", 10, "leaves/roses");
-				leaves.carverHelper.addVariation("tile.leaves.11.desc", 11, "leaves/christmasBalls");
-				leaves.carverHelper.addVariation("tile.leaves.12.desc", 12, "leaves/christmasLights");
-			} else {
-				leaves.carverHelper.addVariation("tile.leaves.6.desc", 6, "leaves/dead_opaque");
-				leaves.carverHelper.addVariation("tile.leaves.7.desc", 7, "leaves/fancy_opaque");
-				leaves.carverHelper.addVariation("tile.leaves.8.desc", 8, "leaves/pinkpetal_opaque");
-				leaves.carverHelper.addVariation("tile.leaves.9.desc", 9, "leaves/red_roses_opaque");
-				leaves.carverHelper.addVariation("tile.leaves.10.desc", 10, "leaves/roses_opaque");
-				leaves.carverHelper.addVariation("tile.leaves.11.desc", 11, "leaves/christmasBalls_opaque");
-				leaves.carverHelper.addVariation("tile.leaves.12.desc", 12, "leaves/christmasLights_opaque");
-			}
+
+			leaves.carverHelper.addVariation("tile.leaves.6.desc", 6, new SubmapManagerLeaves("leaves/dead"));
+			leaves.carverHelper.addVariation("tile.leaves.7.desc", 7, new SubmapManagerLeaves("leaves/fancy"));
+			leaves.carverHelper.addVariation("tile.leaves.8.desc", 8, new SubmapManagerLeaves("leaves/pinkpetal"));
+			leaves.carverHelper.addVariation("tile.leaves.9.desc", 9, new SubmapManagerLeaves("leaves/red_roses"));
+			leaves.carverHelper.addVariation("tile.leaves.10.desc", 10, new SubmapManagerLeaves("leaves/roses"));
+			leaves.carverHelper.addVariation("tile.leaves.11.desc", 11, new SubmapManagerLeaves("leaves/christmasBalls"));
+			leaves.carverHelper.addVariation("tile.leaves.12.desc", 12, new SubmapManagerLeaves("leaves/christmasLights"));
 
 			leaves.carverHelper.registerAll(leaves, "leaves");
 			Carving.chisel.registerOre("leaves", "leaves");
@@ -1664,24 +1655,25 @@ public enum Features {
         @Override
         void addBlocks() {
             BlockCarvable imperial = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
-            imperial.carverHelper.addVariation("tile.rebel.0.desc", 0, "rebel/imperialCamo");
-            imperial.carverHelper.addVariation("tile.rebel.1.desc", 1, "rebel/imperialCamoSecluded");
-            imperial.carverHelper.addVariation("tile.rebel.2.desc", 2, "rebel/imperialPlate");
-            imperial.carverHelper.addVariation("tile.rebel.3.desc", 3, "rebel/imperialCautionWhite");
-            imperial.carverHelper.addVariation("tile.rebel.4.desc", 4, "rebel/imperialCautionOrange");
-            //imperial.carverHelper.registerBlock(imperial, "imperial");
-            imperial.carverHelper.registerAll(imperial, "rebel");
+            imperial.carverHelper.addVariation("tile.imperial.0.desc", 0, "military/imperialCamo");
+            imperial.carverHelper.addVariation("tile.imperial.1.desc", 1, "military/imperialCamoSecluded");
+            imperial.carverHelper.addVariation("tile.imperial.2.desc", 2, "military/imperialPlate");
+            imperial.carverHelper.addVariation("tile.imperial.3.desc", 3, "military/imperialCautionWhite");
+            imperial.carverHelper.addVariation("tile.imperial.4.desc", 4, "military/imperialCautionOrange");
+            imperial.carverHelper.registerBlock(imperial, "imperial");
 
             BlockCarvable rebel = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
-            rebel.carverHelper.addVariation("tile.nation.0.desc", 0, "nation/rebelCamo", 20);
-            rebel.carverHelper.addVariation("tile.nation.1.desc", 1, "nation/rebelCamoSecluded", 21);
-            rebel.carverHelper.addVariation("tile.nation.2.desc", 2, "nation/rebelPlate", 22);
-            rebel.carverHelper.addVariation("tile.nation.3.desc", 3, "nation/rebelCautionWhite", 23);
-            rebel.carverHelper.addVariation("tile.nation.4.desc", 4, "nation/rebelCautionRed", 24);
+            rebel.carverHelper.addVariation("tile.rebel.0.desc", 0, "military/rebelCamo", 20);
+            rebel.carverHelper.addVariation("tile.rebel.1.desc", 1, "military/rebelCamoSecluded", 21);
+            rebel.carverHelper.addVariation("tile.rebel.2.desc", 2, "military/rebelPlate", 22);
+            rebel.carverHelper.addVariation("tile.rebel.3.desc", 3, "military/rebelCautionWhite", 23);
+            rebel.carverHelper.addVariation("tile.rebel.4.desc", 4, "military/rebelCautionRed", 24);
             rebel.carverHelper.registerBlock(rebel, "rebel");
-            rebel.carverHelper.registerVariations("rebel", rebel);
+            
+            imperial.carverHelper.registerVariations("military", imperial);
+            rebel.carverHelper.registerVariations("military", rebel);
 
-            Carving.chisel.registerOre("rebel", "rebel");
+            Carving.chisel.registerOre("rebel", "nation");
         }
 
         @Override
