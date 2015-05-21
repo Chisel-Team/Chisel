@@ -220,6 +220,11 @@ public enum TextureType {
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, int side, int meta) {
 			return V9.getIcon(variation, cachedObject, side, meta);
 		}
+		
+		@Override
+		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, IBlockAccess world, int x, int y, int z, int side, int meta) {
+			return getRIcon(this, (TextureSubmap) cachedObject, x, y, z, side);
+		}
 	},
 	R9("r9"){
 		@Override
@@ -295,11 +300,18 @@ public enum TextureType {
 	}
 	
 	protected static IIcon getRIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
-		rand.setSeed(x + y + z + side);
+		rand.setSeed(getCoordinateRandom(x, y, z));
 		rand.nextBoolean();
-		int size = type == TextureType.R4 ? 2 : 3;
+		int size = type == TextureType.R4 ? 2 : type == TextureType.R9 ? 3 : 4;
 		return map.getSubIcon(rand.nextInt(size), rand.nextInt(size));
 	}
+	
+	private static long getCoordinateRandom(int x, int y, int z) {
+		// MC 1.8 code...
+        long l = (x * 3129871) ^ z * 116129781L ^ y;
+        l = l * l * 42317861L + l * 11L;
+        return l;
+    }
 	
 	/* End of that mess */
 	
