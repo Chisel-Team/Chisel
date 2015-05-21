@@ -128,7 +128,7 @@ public enum TextureType {
 
 			boolean p;
 			boolean n;
-			boolean reverse = side == 2 || side == 5;
+			boolean reverse = side == 3 || side == 4;
 
 			if (side < 4) {
 				p = ctm.isConnected(world, x - 1, y, z, side, block, meta);
@@ -142,7 +142,7 @@ public enum TextureType {
 			if (p && n)
 				return map.getSubIcon(1, 0);
 			else if (p)
-				return map.getSubIcon(reverse ? 0 : 1, 1);
+				return map.getSubIcon(reverse ? 1 : 0, 1);
 			else if (n)
 				return map.getSubIcon(reverse ? 0 : 1, 1);
 			return map.getSubIcon(0, 0);
@@ -308,9 +308,9 @@ public enum TextureType {
 	
 	private static long getCoordinateRandom(int x, int y, int z) {
 		// MC 1.8 code...
-        long l = (x * 3129871) ^ z * 116129781L ^ y;
-        l = l * l * 42317861L + l * 11L;
-        return l;
+		long l = (x * 3129871) ^ z * 116129781L ^ y;
+		l = l * l * 42317861L + l * 11L;
+		return l;
     }
 	
 	/* End of that mess */
