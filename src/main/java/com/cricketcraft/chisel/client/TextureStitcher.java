@@ -26,7 +26,6 @@ public class TextureStitcher {
             TextureAtlasSprite sprite = event.map.registerSprite(new ResourceLocation(s));
             Chisel.logger.info("Stitching texture "+s);
         }
-        Chisel.logger.info("Clearing texture que");
         //CTMBlockResources.refreshAll(event.map);
     }
 
