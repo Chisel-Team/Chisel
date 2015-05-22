@@ -1,6 +1,9 @@
 package com.cricketcraft.chisel.common.util;
 
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.client.render.BlockResources;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
+import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.subblocks.ICTMSubBlock;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
@@ -20,10 +23,11 @@ public class SubBlockUtil {
      * @param v The Variation
      * @return The Resources
      */
-    public static CTMBlockResources getResources(Block block, Variation v){
+    public static IBlockResources getResources(Block block, Variation v){
         if (block instanceof BlockCarvable){
             return getResources(((BlockCarvable) block).getSubBlock(v));
         }
+        Chisel.logger.error("Block not instance of block carvable, instance of "+block.getClass());
         return null;
     }
 
@@ -32,10 +36,7 @@ public class SubBlockUtil {
      * @param block The Sub block
      * @return The Block resources
      */
-    public static CTMBlockResources getResources(ISubBlock block){
-        if (block instanceof ICTMSubBlock){
-            return ((ICTMSubBlock) block).getResources();
-        }
-        return null;
+    public static IBlockResources getResources(ISubBlock block){
+        return block.getResources();
     }
 }

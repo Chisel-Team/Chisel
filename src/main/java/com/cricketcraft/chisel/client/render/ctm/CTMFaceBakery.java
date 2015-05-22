@@ -174,13 +174,13 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
                 } else {
                     s = resources.bottom;
                 }
-                return ModelNonCTM.makeQuad(side, s, resources.type, null);
+                return ModelNonCTM.makeQuad(side, s, resources.type);
             }
         }
         else if (resources.type== IBlockResources.CTMV){
             if (side==EnumFacing.NORTH||side==EnumFacing.SOUTH||side==EnumFacing.WEST||side==EnumFacing.EAST){
                 s=resources.side;
-                return ModelNonCTM.makeQuad(side, s, resources.type, null);
+                return ModelNonCTM.makeQuad(side, s, resources.type);
             }
         }
         if (CTM.isDefaultTexture(quad)){

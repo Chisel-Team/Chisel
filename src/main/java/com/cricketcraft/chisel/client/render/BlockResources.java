@@ -136,22 +136,28 @@ public class BlockResources implements IBlockResources, Reference{
         return new BlockResources(parent, subBlockName, lore, texture, side, top, bottom, type);
     }
 
-    public static void preGenerateBlockResources(BlockCarvable parent, String subBlockName){
+    public static int preGenerateBlockResources(BlockCarvable parent, String subBlockName){
         String prefix = MOD_ID.toLowerCase()+":blocks/"+parent.getName()+"/";
+        int type = NORMAL;
         if (isV9(parent.getName(), subBlockName)){
             TextureStitcher.register(prefix+subBlockName+"-v9");
+            type=V9;
         }
         else if (isV4(parent.getName(), subBlockName)){
             TextureStitcher.register(prefix+subBlockName+"-v4");
+            type=V4;
         }
         else if (isR16(parent.getName(), subBlockName)){
             TextureStitcher.register(prefix+subBlockName+"-r16");
+            type=R16;
         }
         else if (isR9(parent.getName(), subBlockName)){
             TextureStitcher.register(prefix+subBlockName+"-r9");
+            type=R9;
         }
         else if (isR4(parent.getName(), subBlockName)){
             TextureStitcher.register(prefix+subBlockName+"-r4");
+            type=R4;
         }
         else {
             TextureStitcher.register(prefix + subBlockName);
@@ -165,6 +171,7 @@ public class BlockResources implements IBlockResources, Reference{
         if (hasBottomOverride(parent.getName(), subBlockName)){
             TextureStitcher.register(prefix+subBlockName+"-bottom");
         }
+        return type;
     }
 
     protected static boolean hasSideOverride(String blockName, String variation){
@@ -189,7 +196,14 @@ public class BlockResources implements IBlockResources, Reference{
 
     protected static boolean isCTMV(String blockName, String variation){
         String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-ctmv.png";
-        return Chisel.class.getResource(path) !=null;
+        boolean r = Chisel.class.getResource(path) !=null;
+        if (r){
+            Chisel.logger.info("Returning true ctmv for "+blockName+" variation "+variation);
+        }
+        else {
+            Chisel.logger.info("Returning false for ctmv for path\n"+path);
+        }
+        return r;
     }
 
     protected static boolean isV9(String blockName, String variation){
@@ -228,6 +242,10 @@ public class BlockResources implements IBlockResources, Reference{
             return 4;
         }
         return 1;
+    }
+
+    public int getType(){
+        return this.type;
     }
 
 

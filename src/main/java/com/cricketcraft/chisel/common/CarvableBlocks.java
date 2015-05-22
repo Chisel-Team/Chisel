@@ -202,6 +202,30 @@ public enum CarvableBlocks implements Reference{
             return new Variation[]{c.value("embossed"), c.value("gem"), c.value("cells"), c.value("space"), c.value("spaceblack"), c.value("simple"),
             c.value("bismuth"), c.value("crushed"), c.value("four"), c.value("fourornate"), c.value("zelda"), c.value("ornatelayer")};
         }
+    },
+    DIORITE("diorite"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("pillar"), c.value("lbrick"), c.value("ornate"), c.value("prism"), c.value("tiles")};
+        }
+
+        @Override
+        public String[] createHonorarySubBlocks(){
+            return new String[]{"stone#3", "stone#4"};
+        }
+    },
+    DIRT("dirt"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("bricks"), c.value("netherbricks"), c.value("bricks3"), c.value("cobble"), c.value("reinforcedCobble"),
+            c.value("reinforced"), c.value("happy"), c.value("bricks2"), c.value("bricksdirt2"), c.value("hor"), c.value("vert"), c.value("layers"),
+            c.value("vertical"), c.value("chunky")};
+        }
+
+        @Override
+        public String[] createHonorarySubBlocks(){
+            return new String[]{"dirt#0", "dirt#1", "dirt#2"};
+        }
     }
 
     ;
@@ -359,12 +383,12 @@ public enum CarvableBlocks implements Reference{
                 }
                 for (Variation v : b.getVariants()) {
                     if (isCTM(b.getName(), v.getValue())) {
-                        CTMModelRegistry.register(b.getName(), v.getValue(), var.length);
                         CTMBlockResources.preGenerateBlockResources(block, v.getValue());
+                        CTMModelRegistry.register(b.getName(), v.getValue(), var.length);
                     }
                     else {
-                        NonCTMModelRegistry.register(b.getName(), v.getValue(), var.length);
-                        BlockResources.preGenerateBlockResources(block, v.getValue());
+                        int type = BlockResources.preGenerateBlockResources(block, v.getValue());
+                        NonCTMModelRegistry.register(b.getName(), v.getValue(), var.length, type);
                     }
                 }
                 NonCTMModelRegistry.registerInventory(b, var.length);

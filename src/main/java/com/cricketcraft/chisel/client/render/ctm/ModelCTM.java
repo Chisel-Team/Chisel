@@ -9,6 +9,8 @@ import com.cricketcraft.chisel.common.util.SubBlockUtil;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockModelRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockFaceUV;
@@ -19,6 +21,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelRotation;
+import net.minecraft.client.resources.model.WeightedBakedModel;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.ISmartBlockModel;
@@ -30,7 +33,7 @@ import java.util.List;
 
 /**
  * Block Model for Connected textures
- * Deals with the Connected texture rendering basicly
+ * Deals with the Connected texture rendering basically
  *
  * @author minecreatr
  */
@@ -101,11 +104,50 @@ public class ModelCTM implements ISmartBlockModel {
             if (subBlock instanceof ICTMSubBlock) {
                 ICTMSubBlock ctmSubBlock = (ICTMSubBlock) subBlock;
                 for (EnumFacing f : EnumFacing.values()) {
+                    if (isTouchingSide(state, f)){
+                        continue;
+                    }
                     CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getSubmapIndices((IExtendedBlockState)state,f)).addToList(newQuads);
                 }
+
             }
         }
         return newQuads;
+    }
+
+    public static boolean isTouchingSide(IBlockState inState, EnumFacing f){
+        if (inState==null){
+            return false;
+        }
+        if (!(inState instanceof IExtendedBlockState)){
+            return false;
+        }
+        IExtendedBlockState state = (IExtendedBlockState)inState;
+        boolean up = (Boolean)state.getValue(BlockCarvable.CONNECTED_UP);
+        boolean down = (Boolean)state.getValue(BlockCarvable.CONNECTED_DOWN);
+        boolean north = (Boolean)state.getValue(BlockCarvable.CONNECTED_NORTH);
+        boolean south = (Boolean)state.getValue(BlockCarvable.CONNECTED_SOUTH);
+        boolean west = (Boolean)state.getValue(BlockCarvable.CONNECTED_WEST);
+        boolean east = (Boolean)state.getValue(BlockCarvable.CONNECTED_EAST);
+        if (up&&f==EnumFacing.UP){
+            return true;
+        }
+        if (down&&f==EnumFacing.DOWN){
+            return true;
+        }
+        if (north&&f==EnumFacing.NORTH){
+            return true;
+        }
+        if (south&&f==EnumFacing.SOUTH){
+            return true;
+        }
+        if (west&&f==EnumFacing.WEST){
+            return true;
+        }
+        if (east&&f==EnumFacing.EAST){
+            return true;
+        }
+        return false;
     }
 
 

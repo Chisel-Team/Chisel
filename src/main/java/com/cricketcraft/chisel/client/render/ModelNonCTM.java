@@ -49,11 +49,8 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
         PropertyVariation VARIATION = ((BlockCarvable)state.getBlock()).getType().getPropertyVariation();
         IBlockResources r = ((BlockCarvable)state.getBlock()).getSubBlock((Variation)state.getValue(VARIATION)).getResources();
         resources=(BlockResources)r;
-        BlockPos pos = ((IExtendedBlockState)state).getValue(BlockCarvable.BLOCK_POS);
-        if (pos==null){
-            throw new RuntimeException("Pos is null?");
-        }
-        this.quads=generateQuads((BlockResources)r, pos);
+        //BlockPos pos = ((IExtendedBlockState)state).getValue(BlockCarvable.BLOCK_POS);
+        this.quads=generateQuads((BlockResources)r, state);
         return this;
     }
 
@@ -73,15 +70,14 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
         return this;
     }
 
-    private List<BakedQuad> generateQuads(BlockResources r, BlockPos pos){
-        int type = IBlockResources.NORMAL;
-        if (r instanceof CTMBlockResources){
-            CTMBlockResources ctm = (CTMBlockResources)r;
-            type = ctm.type;
-        }
+    private List<BakedQuad> generateQuads(BlockResources r, IBlockState state){
+        int type;
+        boolean inv = state==null;
+        type = r.getType();
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
 
         for (EnumFacing f : EnumFacing.values()){
+            if (ModelCTM.isTouchingSide(state, f)) continue;
             TextureAtlasSprite t = r.getDefaultTexture();
             if (f==EnumFacing.UP){
                 if (r.top!=null) {
@@ -96,80 +92,19 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
             else if (r.side!=null){
                 t=r.side;
             }
-            toReturn.add(makeQuad(f, t, type, pos));
+
+            toReturn.add(makeQuad(f, t, type));
         }
         return toReturn;
     }
 
-    public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, int type, BlockPos pos){
-        if (pos==null) {
-            int num = 16;
-            if (type == IBlockResources.CTMH || type == IBlockResources.CTMV || type == IBlockResources.V4 || type == IBlockResources.R4)
-                num = 8;
-            else if (type == IBlockResources.V9 || type == IBlockResources.R9) num = 16 / 3;
-            else if (type == IBlockResources.R16) num = 4;
-            return bakery.makeBakedQuad(quadPos.from, quadPos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(new float[]{0, 0, num, num}, 0)),
-                    sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, false);
-        }
-        int variationSize = (type == IBlockResources.V9||type == IBlockResources.R9) ? 3 : 2;
-        variationSize = (type == IBlockResources.R16) ? 4: variationSize;
-        Chisel.logger.info("Rendering stuff, variation size is "+variationSize);
-        int xModulus = pos.getX() % variationSize;
-        int zModulus =pos.getZ() % variationSize;
-        int textureX = (xModulus < 0) ? (xModulus + variationSize) : xModulus;
-        int textureZ = (zModulus < 0) ? (zModulus + variationSize) : zModulus;
-        int textureY = (variationSize - (pos.getY() % variationSize) - 1);
-
-        if (f == EnumFacing.WEST|| f == EnumFacing.SOUTH) {
-            //For WEST, SOUTH reverse the indexes for both X and Z
-            textureX = (variationSize - textureX - 1);
-            textureZ = (variationSize - textureZ - 1);
-        } /*else if (side == 0) {
-            //For DOWN, reverse the indexes for only Z
-            textureZ = (variationSize - textureZ - 1);
-        	}*/
-
-        int index;
-        if (f == EnumFacing.DOWN || f == EnumFacing.UP) {
-            // DOWN || UP
-            index = textureX + textureZ * variationSize;
-        } else if (f == EnumFacing.NORTH || f == EnumFacing.SOUTH) {
-            // NORTH || SOUTH
-            index = textureX + textureY * variationSize;
-        } else {
-            // WEST || EAST
-            index = textureZ + textureY * variationSize;
-        }
-        float minU = (index%variationSize)*(16/variationSize);
-        float minV = (index/variationSize)*(16/variationSize);
-
-        float maxU = ((index%variationSize)+1)*(16/variationSize);
-        float maxV = ((index%variationSize)+1)*(16/variationSize);
-
-
-        float uDif = maxU-minU;
-        float vDif = maxV-minV;
-        float tot = uDif+vDif;
-
-        if (tot>16){
-            if (uDif>8){
-                maxU-=8;
-            }
-            if (vDif>8){
-                maxV-=8;
-            }
-        }
-        else if (tot<16){
-            if (uDif<8){
-                maxU+=8;
-            }
-            if (vDif<8){
-                maxV+=8;
-            }
-        }
-        
-
-        return bakery.makeBakedQuad(quadPos.from, quadPos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(new float[]{minU, minV, maxU, maxV}, 0)),
+    public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, int type){
+        int num = 16;
+        if (type == IBlockResources.CTMH || type == IBlockResources.CTMV || type == IBlockResources.V4 || type == IBlockResources.R4)
+            num = 8;
+        else if (type == IBlockResources.V9 || type == IBlockResources.R9) num = 16 / 3;
+        else if (type == IBlockResources.R16) num = 4;
+        return bakery.makeBakedQuad(quadPos.from, quadPos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(new float[]{0, 0, num, num}, 0)),
                 sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, false);
     }
 

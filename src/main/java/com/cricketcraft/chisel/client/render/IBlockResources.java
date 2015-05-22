@@ -29,6 +29,8 @@ public interface IBlockResources {
     public String getVariantName();
 
     public List<String> getLore();
+    
+    public int getType();
 
 
 }

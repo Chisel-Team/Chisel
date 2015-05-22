@@ -55,6 +55,7 @@ public class CTMBlockResources extends BlockResources{
             type = CTMH;
         }
         else if (isCTMV(parent.getName(), subBlockName)){
+            Chisel.logger.info("CTMV for "+subBlockName+" parent "+parent.getName());
             type = CTMV;
         }
         TextureAtlasSprite texture = map.getAtlasSprite(prefix+subBlockName);
@@ -87,14 +88,17 @@ public class CTMBlockResources extends BlockResources{
         return new CTMBlockResources(parent, subBlockName, lore, texture, ctm, side, top, bottom, type);
     }
 
-    public static void preGenerateBlockResources(BlockCarvable parent, String subBlockName){
+    public static int preGenerateBlockResources(BlockCarvable parent, String subBlockName){
         String prefix = MOD_ID.toLowerCase()+":blocks/"+parent.getName()+"/";
         TextureStitcher.register(prefix+subBlockName);
+        int type = CTM;
         if (isCTMH(parent.getName(), subBlockName)){
             TextureStitcher.register(prefix+subBlockName+"-ctmh");
+            type=CTMH;
         }
         else if (isCTMV(parent.getName(), subBlockName)){
-            TextureStitcher.register(prefix+subBlockName+"ctmv");
+            TextureStitcher.register(prefix+subBlockName+"-ctmv");
+            type=CTMV;
         }
         else {
             TextureStitcher.register(prefix + subBlockName + "-ctm");
@@ -108,6 +112,7 @@ public class CTMBlockResources extends BlockResources{
         if (hasBottomOverride(parent.getName(), subBlockName)){
             TextureStitcher.register(prefix+subBlockName+"-bottom");
         }
+        return type;
     }
 
     @Override

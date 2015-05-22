@@ -85,7 +85,6 @@ public class BlockCarvable extends Block{
     public static final IUnlistedProperty CONNECTED_WEST_UP = Properties.toUnlisted(PropertyBool.create("Connected North East"));
     public static final IUnlistedProperty CONNECTED_WEST_DOWN = Properties.toUnlisted(PropertyBool.create("Connected North East"));
 
-    public static final PropertyBlockPos BLOCK_POS = new PropertyBlockPos();
 
 
 
@@ -128,7 +127,7 @@ public class BlockCarvable extends Block{
     private BlockState createRealBlockState(PropertyVariation p){
         ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
                 CONNECTED_NORTH_EAST,CONNECTED_NORTH_WEST,CONNECTED_NORTH_UP,CONNECTED_NORTH_DOWN,CONNECTED_SOUTH_EAST,CONNECTED_SOUTH_WEST,
-                CONNECTED_SOUTH_UP,CONNECTED_SOUTH_DOWN,CONNECTED_EAST_UP,CONNECTED_EAST_DOWN,CONNECTED_WEST_UP,CONNECTED_WEST_DOWN, BLOCK_POS});
+                CONNECTED_SOUTH_UP,CONNECTED_SOUTH_DOWN,CONNECTED_EAST_UP,CONNECTED_EAST_DOWN,CONNECTED_WEST_UP,CONNECTED_WEST_DOWN});
         return state;
     }
 
@@ -146,7 +145,7 @@ public class BlockCarvable extends Block{
                 withProperty(CONNECTED_NORTH_WEST, false).withProperty(CONNECTED_NORTH_UP, false).withProperty(CONNECTED_NORTH_DOWN, false).
                 withProperty(CONNECTED_SOUTH_EAST, false).withProperty(CONNECTED_SOUTH_WEST, false).withProperty(CONNECTED_SOUTH_UP, false).
                 withProperty(CONNECTED_SOUTH_DOWN, false).withProperty(CONNECTED_EAST_UP, false).withProperty(CONNECTED_EAST_DOWN, false).
-                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(BLOCK_POS, null).withProperty(VARIATION, v));
+                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(VARIATION, v));
     }
 
     public ExtendedBlockState getBaseExtendedState(){
@@ -277,9 +276,12 @@ public class BlockCarvable extends Block{
             return stateIn;
         }
         IExtendedBlockState state = (IExtendedBlockState)stateIn;
-        Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
-
-        state = state.withProperty(BLOCK_POS, pos);
+//        Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
+//        IBlockResources res = SubBlockUtil.getResources(state.getBlock(), v);
+//        if (res.getType()==IBlockResources.V4||res.getType()==IBlockResources.V9||res.getType()==IBlockResources.R4||res.getType()==IBlockResources.R9||res.getType()==IBlockResources.R16) {
+//            //Chisel.logger.info("Setting pos for "+v.getName());
+//            state = state.withProperty(BLOCK_POS, pos);
+//        }
 
         boolean up = false;
         boolean down = false;
