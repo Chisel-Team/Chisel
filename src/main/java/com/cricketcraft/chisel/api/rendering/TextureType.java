@@ -95,15 +95,15 @@ public enum TextureType {
 		@SideOnly(Side.CLIENT)
 		protected RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world, Object cachedObject) {
 			RenderBlocksColumn ret = theRenderBlocksColumn;
-			Pair<IIcon, TextureSubmap> data = (Pair<IIcon, TextureSubmap>) cachedObject;
+			Pair<TextureSubmap, IIcon> data = (Pair<TextureSubmap, IIcon>) cachedObject;
 			
 			ret.blockAccess = world;
 			ret.renderMaxX = 1.0;
 			ret.renderMaxY = 1.0;
 			ret.renderMaxZ = 1.0;
 
-			ret.submap = data.getRight();
-			ret.iconTop = data.getLeft();
+			ret.submap = data.getLeft();
+			ret.iconTop = data.getRight();
 			return ret;
 		}
 	},
