@@ -1703,7 +1703,7 @@ public enum Features {
             imperial.carverHelper.addVariation("tile.imperial.2.desc", 2, "military/imperialPlate");
             imperial.carverHelper.addVariation("tile.imperial.3.desc", 3, "military/imperialCautionWhite");
             imperial.carverHelper.addVariation("tile.imperial.4.desc", 4, "military/imperialCautionOrange");
-            imperial.carverHelper.registerBlock(imperial, "imperial");
+            imperial.carverHelper.registerBlock(imperial, "nation");
 
             BlockCarvable rebel = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
             rebel.carverHelper.addVariation("tile.rebel.0.desc", 0, "military/rebelCamo", 20);
