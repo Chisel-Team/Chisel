@@ -85,7 +85,7 @@ public class Compatibility {
 
         addSupport("Botania", "endStoneBrick", "end_stone", 12, 0);
 
-		if(Loader.isModLoaded("Equivalent Exchange 3")){
+		if(Loader.isModLoaded("EE3")){
 			loadEE3Values();
 		}
     }
