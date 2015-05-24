@@ -40,9 +40,9 @@ public final class ChiselBlocks {
 	public static final BlockCarvable stonebricksmooth = null;
 	public static final BlockCarvablePane iron_bars = null;
 	public static final BlockCarvableIce ice = null;
-	public static final BlockCarvableIcePillar ice_pillar = null;
+	public static final BlockCarvableIce ice_pillar = null;
 	public static final BlockCarvablePackedIce packedice = null;
-	public static final BlockCarvablePackedIcePillar packedice_pillar = null;
+	public static final BlockCarvablePackedIce packedice_pillar = null;
 	public static final BlockCarvable obsidian = null;
 	public static final BlockCarvable obsidian2 = null;
 	public static final BlockCarvablePowered redstone_block = null;
@@ -71,8 +71,8 @@ public final class ChiselBlocks {
 	public static final BlockCarvable voidstone = null;
 	public static final BlockMultiLayer voidstone2 = null;
 	public static final BlockCarvable voidstonerunic = null;
-	public static final BlockCarvablePillar voidstonePillar = null;
-	public static final BlockCarvablePillar voidstonePillar2 = null;
+	public static final BlockCarvable voidstonePillar = null;
+	public static final BlockCarvable voidstonePillar2 = null;
 	public static final BlockSnakestone stone_snakestone = null;
 	public static final BlockSnakestone sand_snakestone = null;
 	public static final BlockSnakestoneObsidian obsidian_snakestone = null;
