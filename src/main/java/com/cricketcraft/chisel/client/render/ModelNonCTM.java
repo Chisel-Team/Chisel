@@ -77,7 +77,6 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
 
         for (EnumFacing f : EnumFacing.values()){
-            if (ModelCTM.isTouchingSide(state, f)) continue;
             TextureAtlasSprite t = r.getDefaultTexture();
             if (f==EnumFacing.UP){
                 if (r.top!=null) {

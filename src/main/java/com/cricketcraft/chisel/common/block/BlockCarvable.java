@@ -25,7 +25,9 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -59,6 +61,14 @@ public class BlockCarvable extends Block{
      * The Property for the variation of this block
      */
     public PropertyVariation VARIATION;
+
+
+    /**
+     * X Y and Z modules for coordinate variation
+     */
+    public static final IUnlistedProperty XMODULES = Properties.toUnlisted(PropertyInteger.create("X Modules", 0, 4));
+    public static final IUnlistedProperty YMODULES = Properties.toUnlisted(PropertyInteger.create("V Section", 0, 4));
+    public static final IUnlistedProperty ZMODULES = Properties.toUnlisted(PropertyInteger.create("Z Section", 0, 4));
 
     /**
      * These are used for connected textures
@@ -127,7 +137,7 @@ public class BlockCarvable extends Block{
     private BlockState createRealBlockState(PropertyVariation p){
         ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
                 CONNECTED_NORTH_EAST,CONNECTED_NORTH_WEST,CONNECTED_NORTH_UP,CONNECTED_NORTH_DOWN,CONNECTED_SOUTH_EAST,CONNECTED_SOUTH_WEST,
-                CONNECTED_SOUTH_UP,CONNECTED_SOUTH_DOWN,CONNECTED_EAST_UP,CONNECTED_EAST_DOWN,CONNECTED_WEST_UP,CONNECTED_WEST_DOWN});
+                CONNECTED_SOUTH_UP,CONNECTED_SOUTH_DOWN,CONNECTED_EAST_UP,CONNECTED_EAST_DOWN,CONNECTED_WEST_UP,CONNECTED_WEST_DOWN,XMODULES,YMODULES,ZMODULES});
         return state;
     }
 
@@ -145,7 +155,8 @@ public class BlockCarvable extends Block{
                 withProperty(CONNECTED_NORTH_WEST, false).withProperty(CONNECTED_NORTH_UP, false).withProperty(CONNECTED_NORTH_DOWN, false).
                 withProperty(CONNECTED_SOUTH_EAST, false).withProperty(CONNECTED_SOUTH_WEST, false).withProperty(CONNECTED_SOUTH_UP, false).
                 withProperty(CONNECTED_SOUTH_DOWN, false).withProperty(CONNECTED_EAST_UP, false).withProperty(CONNECTED_EAST_DOWN, false).
-                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(VARIATION, v));
+                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(XMODULES, 0).withProperty(YMODULES, 0)
+                .withProperty(ZMODULES, 0).withProperty(VARIATION, v));
     }
 
     public ExtendedBlockState getBaseExtendedState(){
@@ -276,12 +287,18 @@ public class BlockCarvable extends Block{
             return stateIn;
         }
         IExtendedBlockState state = (IExtendedBlockState)stateIn;
-//        Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
-//        IBlockResources res = SubBlockUtil.getResources(state.getBlock(), v);
-//        if (res.getType()==IBlockResources.V4||res.getType()==IBlockResources.V9||res.getType()==IBlockResources.R4||res.getType()==IBlockResources.R9||res.getType()==IBlockResources.R16) {
-//            //Chisel.logger.info("Setting pos for "+v.getName());
-//            state = state.withProperty(BLOCK_POS, pos);
-//        }
+        Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
+        IBlockResources res = SubBlockUtil.getResources(state.getBlock(), v);
+        if (res.getType()==IBlockResources.V4||res.getType()==IBlockResources.V9||res.getType()==IBlockResources.R4||res.getType()==IBlockResources.R9||res.getType()==IBlockResources.R16) {
+            int variationSize = BlockResources.getVariationWidth(res.getType());
+            int xModulus = Math.abs(pos.getX() % variationSize);
+            int zModulus = Math.abs(pos.getZ() % variationSize);
+            int yModules = Math.abs(pos.getY() % variationSize);
+            return state.withProperty(XMODULES, xModulus).withProperty(YMODULES, yModules).withProperty(ZMODULES, zModulus);
+        }
+        else if (res.getType()==IBlockResources.NORMAL){
+            return stateIn;
+        }
 
         boolean up = false;
         boolean down = false;

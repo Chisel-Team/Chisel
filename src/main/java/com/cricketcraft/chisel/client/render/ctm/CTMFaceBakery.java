@@ -167,7 +167,7 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
 
     private BakedQuad makeQuadFor(EnumFacing side, CTMBlockResources resources, int quad, int quadSection){
         TextureAtlasSprite s = resources.ctmTexture;
-        if (resources.type== IBlockResources.CTMH){
+        if (resources.type == IBlockResources.CTMH){
             if (side==EnumFacing.UP||side==EnumFacing.DOWN) {
                 if (side == EnumFacing.UP) {
                     s = resources.top;
@@ -177,7 +177,7 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
                 return ModelNonCTM.makeQuad(side, s, resources.type);
             }
         }
-        else if (resources.type== IBlockResources.CTMV){
+        else if (resources.type == IBlockResources.CTMV){
             if (side==EnumFacing.NORTH||side==EnumFacing.SOUTH||side==EnumFacing.WEST||side==EnumFacing.EAST){
                 s=resources.side;
                 return ModelNonCTM.makeQuad(side, s, resources.type);
@@ -195,7 +195,7 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
         if (resources.type==IBlockResources.CTMH||resources.type==IBlockResources.CTMV){
             int old = quad;
             quad = CTM.remapCTM(quad);
-            Chisel.logger.info("Remapping ctm(h/v) "+old+" to "+quad);
+            //Chisel.logger.info("Remapping ctm(h/v) "+old+" to "+quad);
         }
         ModelCTM.QuadPos pos = getCorrectQuadPos(side, quadSection);
 

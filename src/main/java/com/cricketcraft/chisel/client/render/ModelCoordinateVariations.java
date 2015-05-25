@@ -22,6 +22,7 @@ import net.minecraft.client.resources.model.WeightedBakedModel;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.ISmartBlockModel;
+import net.minecraftforge.common.property.IExtendedBlockState;
 
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;
@@ -84,9 +85,58 @@ public class ModelCoordinateVariations extends WeightedBakedModel{
         }
 
         private List<BakedQuad> generateQuads(IBlockState state, IBlockResources r) {
+            if (BlockResources.isV(r.getType())){
+                return makeVQuads(state, r);
+            }
+            else {
+                return makeRQuads(state, r);
+            }
+
+        }
+
+        private List<BakedQuad> makeVQuads(IBlockState s, IBlockResources r){
+            IExtendedBlockState state = (IExtendedBlockState)s;
+            int variationSize = BlockResources.getVariationWidth(r.getType());
+
+            int xModules = (Integer)state.getValue(BlockCarvable.XMODULES);
+            int yModules = (Integer)state.getValue(BlockCarvable.YMODULES);
+            int zModules = (Integer)state.getValue(BlockCarvable.ZMODULES);
+            //This ensures that blocks placed near 0,0 or it's axis' do not misbehave
+            int textureX = (xModules < 0) ? (xModules + variationSize) : xModules;
+            int textureZ = (zModules < 0) ? (zModules + variationSize) : zModules;
+            //Always invert the y index
+            int textureY = (variationSize - yModules - 1);
+
+            int interval = 16/variationSize;
+
+            List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
+
+            for (EnumFacing side : EnumFacing.values()){
+                int index;
+                if (side == EnumFacing.DOWN || side == EnumFacing.UP) {
+                    // DOWN || UP
+                    index = textureX + textureZ * variationSize;
+                } else if (side == EnumFacing.NORTH || side == EnumFacing.SOUTH) {
+                    // NORTH || SOUTH
+                    index = textureX + textureY * variationSize;
+                } else {
+                    // WEST || EAST
+                    index = textureZ + textureY * variationSize;
+                }
+                //throw new RuntimeException(index % variationSize+" and "+index/variationSize);
+                int minU = interval*(index%variationSize);
+                int minV = interval*(index/variationSize);
+
+                //Chisel.logger.info("Using u/v pairs "+minU+" "+minV+" "+maxU+" "+maxV);
+                toReturn.add(makeQuad(side, r.getDefaultTexture(), new float[]{minU, minV, minU+interval, minV+interval}));
+            }
+            return toReturn;
+        }
+
+        private List<BakedQuad> makeRQuads(IBlockState s, IBlockResources r){
             int bound = 4;
             int wid = 2;
-            if (r.getType()==IBlockResources.V9||r.getType()==IBlockResources.R9){
+            if (r.getType()==IBlockResources.R9){
                 bound = 9;
                 wid = 3;
             }

@@ -104,9 +104,6 @@ public class ModelCTM implements ISmartBlockModel {
             if (subBlock instanceof ICTMSubBlock) {
                 ICTMSubBlock ctmSubBlock = (ICTMSubBlock) subBlock;
                 for (EnumFacing f : EnumFacing.values()) {
-                    if (isTouchingSide(state, f)){
-                        continue;
-                    }
                     CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getSubmapIndices((IExtendedBlockState)state,f)).addToList(newQuads);
                 }
 

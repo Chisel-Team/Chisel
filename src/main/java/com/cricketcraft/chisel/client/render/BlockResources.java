@@ -174,6 +174,30 @@ public class BlockResources implements IBlockResources, Reference{
         return type;
     }
 
+    public static int getVariationWidth(int type){
+        if (type==V9||type==R9){
+            return 3;
+        }
+        else if (type==V4||type==R4){
+            return 2;
+        }
+        else if (type==R16){
+            return 4;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public static int getVariationSize(int type){
+        return getVariationWidth(type)*getVariationWidth(type);
+    }
+
+    public static boolean isV(int type){
+        return (type==V4||type==V9);
+    }
+
+
     protected static boolean hasSideOverride(String blockName, String variation){
         String path = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-side.png";
         return Chisel.class.getResource(path) !=null;

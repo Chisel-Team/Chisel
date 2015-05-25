@@ -202,6 +202,11 @@ public enum CarvableBlocks implements Reference{
             return new Variation[]{c.value("embossed"), c.value("gem"), c.value("cells"), c.value("space"), c.value("spaceblack"), c.value("simple"),
             c.value("bismuth"), c.value("crushed"), c.value("four"), c.value("fourornate"), c.value("zelda"), c.value("ornatelayer")};
         }
+
+        @Override
+        public String[] createHonorarySubBlocks(){
+            return new String[]{"diamond_block#0"};
+        }
     },
     DIORITE("diorite"){
         @Override
@@ -225,6 +230,18 @@ public enum CarvableBlocks implements Reference{
         @Override
         public String[] createHonorarySubBlocks(){
             return new String[]{"dirt#0", "dirt#1", "dirt#2"};
+        }
+    },
+    EMERALD_BLOCK("emerald"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("embossed"), c.value("gem"), c.value("cells"), c.value("space"), c.value("spaceblack"), c.value("simple"),
+                    c.value("bismuth"), c.value("crushed"), c.value("four"), c.value("fourornate"), c.value("zelda"), c.value("ornatelayer")};
+        }
+
+        @Override
+        public String[] createHonorarySubBlocks(){
+            return new String[]{"emerald_block#0"};
         }
     }
 
