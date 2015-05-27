@@ -1,16 +1,5 @@
 package com.cricketcraft.chisel;
 
-import static com.cricketcraft.chisel.init.ChiselBlocks.andesite;
-import static com.cricketcraft.chisel.init.ChiselBlocks.diorite;
-import static com.cricketcraft.chisel.init.ChiselBlocks.granite;
-import static com.cricketcraft.chisel.init.ChiselBlocks.jackolantern;
-import static com.cricketcraft.chisel.init.ChiselBlocks.planks;
-import static com.cricketcraft.chisel.init.ChiselBlocks.pumpkin;
-import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlass;
-import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlassPane;
-import static com.cricketcraft.chisel.init.ChiselBlocks.torches;
-import static com.cricketcraft.chisel.utils.General.sGNames;
-
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -31,47 +20,14 @@ import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.CarvingUtils.SimpleCarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.block.BlockAutoChisel;
-import com.cricketcraft.chisel.block.BlockBeaconBase;
-import com.cricketcraft.chisel.block.BlockCarvable;
-import com.cricketcraft.chisel.block.BlockCarvableAntiBlock;
-import com.cricketcraft.chisel.block.BlockCarvableBookshelf;
-import com.cricketcraft.chisel.block.BlockCarvableCarpet;
-import com.cricketcraft.chisel.block.BlockCarvableGlass;
-import com.cricketcraft.chisel.block.BlockCarvableGlow;
-import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
-import com.cricketcraft.chisel.block.BlockCarvableIce;
-import com.cricketcraft.chisel.block.BlockCarvableIceStairs;
-import com.cricketcraft.chisel.block.BlockCarvableLayered;
-import com.cricketcraft.chisel.block.BlockCarvablePackedIce;
-import com.cricketcraft.chisel.block.BlockCarvablePackedIceStairs;
-import com.cricketcraft.chisel.block.BlockCarvablePane;
-import com.cricketcraft.chisel.block.BlockCarvablePowered;
-import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
-import com.cricketcraft.chisel.block.BlockCarvableSlab;
-import com.cricketcraft.chisel.block.BlockCarvableStairs;
-import com.cricketcraft.chisel.block.BlockCarvableTorch;
-import com.cricketcraft.chisel.block.BlockCloud;
-import com.cricketcraft.chisel.block.BlockConcrete;
-import com.cricketcraft.chisel.block.BlockEldritch;
-import com.cricketcraft.chisel.block.BlockGrimstone;
-import com.cricketcraft.chisel.block.BlockHolystone;
-import com.cricketcraft.chisel.block.BlockLavastone;
-import com.cricketcraft.chisel.block.BlockLeaf;
-import com.cricketcraft.chisel.block.BlockMultiLayer;
-import com.cricketcraft.chisel.block.BlockPresent;
-import com.cricketcraft.chisel.block.BlockRoadLine;
-import com.cricketcraft.chisel.block.BlockSnakestone;
-import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
-import com.cricketcraft.chisel.block.BlockWaterstone;
-import com.cricketcraft.chisel.block.CarvableStairsMaker;
-import com.cricketcraft.chisel.block.IStairsCreator;
+import com.cricketcraft.chisel.block.*;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.client.render.SubmapManagerAntiblock;
 import com.cricketcraft.chisel.client.render.SubmapManagerCarpetFloor;
 import com.cricketcraft.chisel.client.render.SubmapManagerFakeController;
 import com.cricketcraft.chisel.client.render.SubmapManagerLeaves;
 import com.cricketcraft.chisel.client.render.SubmapManagerSlab;
+import com.cricketcraft.chisel.client.render.SubmapManagerVoidstone;
 import com.cricketcraft.chisel.compat.fmp.ItemBlockChiselTorchPart;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
@@ -95,6 +51,9 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import static com.cricketcraft.chisel.init.ChiselBlocks.*;
+import static com.cricketcraft.chisel.utils.General.sGNames;
 
 public enum Features {
 
@@ -2702,28 +2661,28 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable voidstone = (BlockCarvable) new BlockCarvable().setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setStepSound(Block.soundTypeStone)
 					.setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(5.0F).setResistance(10.0F);
-			voidstone.carverHelper.addVariation("tile.voidstone.0.desc", 0, "voidstone/raw");
-			voidstone.carverHelper.addVariation("tile.voidstone.1.desc", 1, "voidstone/quarters");
-			voidstone.carverHelper.addVariation("tile.voidstone.2.desc", 2, "voidstone/smooth");
-			voidstone.carverHelper.addVariation("tile.voidstone.3.desc", 3, "voidstone/skulls");
-			voidstone.carverHelper.addVariation("tile.voidstone.4.desc", 4, "voidstone/rune");
-			voidstone.carverHelper.addVariation("tile.voidstone.5.desc", 5, "voidstone/metalborder");
-			voidstone.carverHelper.addVariation("tile.voidstone.6.desc", 6, "voidstone/eye");
-			voidstone.carverHelper.addVariation("tile.voidstone.7.desc", 7, "voidstone/bevel");
+			voidstone.carverHelper.addVariation("tile.voidstone.0.desc", 0, new SubmapManagerVoidstone("voidstone/raw"));
+			voidstone.carverHelper.addVariation("tile.voidstone.1.desc", 1, new SubmapManagerVoidstone("voidstone/quarters"));
+			voidstone.carverHelper.addVariation("tile.voidstone.2.desc", 2, new SubmapManagerVoidstone("voidstone/smooth"));
+			voidstone.carverHelper.addVariation("tile.voidstone.3.desc", 3, new SubmapManagerVoidstone("voidstone/skulls"));
+			voidstone.carverHelper.addVariation("tile.voidstone.4.desc", 4, new SubmapManagerVoidstone("voidstone/rune"));
+			voidstone.carverHelper.addVariation("tile.voidstone.5.desc", 5, new SubmapManagerVoidstone("voidstone/metalborder"));
+			voidstone.carverHelper.addVariation("tile.voidstone.6.desc", 6, new SubmapManagerVoidstone("voidstone/eye"));
+			voidstone.carverHelper.addVariation("tile.voidstone.7.desc", 7, new SubmapManagerVoidstone("voidstone/bevel"));
 
 			voidstone.carverHelper.registerAll(voidstone, "voidstone");
 			Carving.chisel.registerOre("voidstone", "voidstone");
 
-			BlockMultiLayer voidstone2 = (BlockMultiLayer) new BlockMultiLayer(Material.rock, Chisel.MOD_ID + ":voidstone/animated/void").setStepSound(Block.soundTypeStone)
+			BlockCarvable voidstone2 = (BlockCarvable) new BlockCarvable().setStepSound(Block.soundTypeStone)
 					.setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(5.0F).setResistance(10.0F);
-			voidstone2.carverHelper.addVariation("tile.voidstone.0.desc", 0, "voidstone/animated/raw");
-			voidstone2.carverHelper.addVariation("tile.voidstone.1.desc", 1, "voidstone/animated/quarters");
-			voidstone2.carverHelper.addVariation("tile.voidstone.2.desc", 2, "voidstone/animated/smooth");
-			voidstone2.carverHelper.addVariation("tile.voidstone.3.desc", 3, "voidstone/animated/skulls");
-			voidstone2.carverHelper.addVariation("tile.voidstone.4.desc", 4, "voidstone/animated/rune");
-			voidstone2.carverHelper.addVariation("tile.voidstone.5.desc", 5, "voidstone/animated/metalborder");
-			voidstone2.carverHelper.addVariation("tile.voidstone.6.desc", 6, "voidstone/animated/eye");
-			voidstone2.carverHelper.addVariation("tile.voidstone.7.desc", 7, "voidstone/animated/bevel");
+			voidstone2.carverHelper.addVariation("tile.voidstone.0.desc", 0, new SubmapManagerVoidstone("voidstone/animated/raw"));
+			voidstone2.carverHelper.addVariation("tile.voidstone.1.desc", 1, new SubmapManagerVoidstone("voidstone/animated/quarters"));
+			voidstone2.carverHelper.addVariation("tile.voidstone.2.desc", 2, new SubmapManagerVoidstone("voidstone/animated/smooth"));
+			voidstone2.carverHelper.addVariation("tile.voidstone.3.desc", 3, new SubmapManagerVoidstone("voidstone/animated/skulls"));
+			voidstone2.carverHelper.addVariation("tile.voidstone.4.desc", 4, new SubmapManagerVoidstone("voidstone/animated/rune"));
+			voidstone2.carverHelper.addVariation("tile.voidstone.5.desc", 5, new SubmapManagerVoidstone("voidstone/animated/metalborder"));
+			voidstone2.carverHelper.addVariation("tile.voidstone.6.desc", 6, new SubmapManagerVoidstone("voidstone/animated/eye"));
+			voidstone2.carverHelper.addVariation("tile.voidstone.7.desc", 7, new SubmapManagerVoidstone("voidstone/animated/bevel"));
 
 			voidstone2.carverHelper.registerAll(voidstone2, "voidstone2");
 			Carving.chisel.registerOre("voidstone2", "voidstone2");

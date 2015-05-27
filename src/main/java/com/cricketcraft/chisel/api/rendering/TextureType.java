@@ -264,7 +264,7 @@ public enum TextureType {
 	
 	/* Some util stuff for shared code between v* and r* */
 	
-	protected static IIcon getVIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
+	public static IIcon getVIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
 		int variationSize = (type == TextureType.V9) ? 3 : 2;
 
 		int xModulus = x % variationSize;
@@ -299,7 +299,7 @@ public enum TextureType {
 		return map.getSubIcon(index % variationSize, index / variationSize);
 	}
 	
-	protected static IIcon getRIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
+	public static IIcon getRIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
 		rand.setSeed(getCoordinateRandom(x, y, z));
 		rand.nextBoolean();
 		int size = type == TextureType.R4 ? 2 : type == TextureType.R9 ? 3 : 4;
