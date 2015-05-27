@@ -69,7 +69,7 @@ public final class ChiselBlocks {
 	public static final BlockCarvable laboratoryblock = null;
 
 	public static final BlockCarvable voidstone = null;
-	public static final BlockMultiLayer voidstone2 = null;
+	public static final BlockCarvable voidstone2 = null;
 	public static final BlockCarvable voidstonerunic = null;
 	public static final BlockCarvable voidstonePillar = null;
 	public static final BlockCarvable voidstonePillar2 = null;

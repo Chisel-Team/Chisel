@@ -25,7 +25,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 public class ClientProxy extends CommonProxy {
 
 	ItemChiselRenderer renderer = new ItemChiselRenderer();
-
+	
 	@Override
 	public void preInit() {
 	}
