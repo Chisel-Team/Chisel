@@ -17,8 +17,6 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import net.minecraftforge.oredict.OreDictionary;
-
 import org.apache.logging.log4j.Level;
 
 public class Compatibility {
@@ -89,16 +87,6 @@ public class Compatibility {
 		if(Loader.isModLoaded("EE3")){
 			loadEE3Values();
 		}
-		//Oredict
-		OreDictionary.registerOre("stoneGranite", new ItemStack(ChiselBlocks.granite, 1, 0));
-		OreDictionary.registerOre("stoneAndesite", new ItemStack(ChiselBlocks.andesite, 1, 0));
-		OreDictionary.registerOre("stoneDiorite", new ItemStack(ChiselBlocks.diorite, 1, 0));
-		OreDictionary.registerOre("stoneGranitePolished", new ItemStack(ChiselBlocks.granite, 1, 1));
-		OreDictionary.registerOre("stoneAndesitePolished", new ItemStack(ChiselBlocks.andesite, 1, 1));
-		OreDictionary.registerOre("stoneDioritePolished", new ItemStack(ChiselBlocks.diorite, 1, 1));
-		OreDictionary.registerOre("stoneGranitePillar", new ItemStack(ChiselBlocks.granite, 1, 2));
-		OreDictionary.registerOre("stoneAndesitePillar", new ItemStack(ChiselBlocks.andesite, 1, 2));
-		OreDictionary.registerOre("stoneDioritePillar", new ItemStack(ChiselBlocks.diorite, 1, 2));
     }
 
 	public static void addSupport(String modname, String blockname, String name, int metadata, int order) {

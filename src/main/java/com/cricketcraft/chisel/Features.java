@@ -1,5 +1,16 @@
 package com.cricketcraft.chisel;
 
+import static com.cricketcraft.chisel.init.ChiselBlocks.andesite;
+import static com.cricketcraft.chisel.init.ChiselBlocks.diorite;
+import static com.cricketcraft.chisel.init.ChiselBlocks.granite;
+import static com.cricketcraft.chisel.init.ChiselBlocks.jackolantern;
+import static com.cricketcraft.chisel.init.ChiselBlocks.planks;
+import static com.cricketcraft.chisel.init.ChiselBlocks.pumpkin;
+import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlass;
+import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlassPane;
+import static com.cricketcraft.chisel.init.ChiselBlocks.torches;
+import static com.cricketcraft.chisel.utils.General.sGNames;
+
 import java.util.List;
 
 import net.minecraft.block.Block;
@@ -11,16 +22,45 @@ import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.CarvingUtils.SimpleCarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.block.*;
+import com.cricketcraft.chisel.block.BlockAutoChisel;
+import com.cricketcraft.chisel.block.BlockBeaconBase;
+import com.cricketcraft.chisel.block.BlockCarvable;
+import com.cricketcraft.chisel.block.BlockCarvableAntiBlock;
+import com.cricketcraft.chisel.block.BlockCarvableBookshelf;
+import com.cricketcraft.chisel.block.BlockCarvableCarpet;
+import com.cricketcraft.chisel.block.BlockCarvableGlass;
+import com.cricketcraft.chisel.block.BlockCarvableGlow;
+import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
+import com.cricketcraft.chisel.block.BlockCarvableIce;
+import com.cricketcraft.chisel.block.BlockCarvableIceStairs;
+import com.cricketcraft.chisel.block.BlockCarvableLayered;
+import com.cricketcraft.chisel.block.BlockCarvablePackedIce;
+import com.cricketcraft.chisel.block.BlockCarvablePackedIceStairs;
+import com.cricketcraft.chisel.block.BlockCarvablePane;
+import com.cricketcraft.chisel.block.BlockCarvablePowered;
+import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
+import com.cricketcraft.chisel.block.BlockCarvableSlab;
+import com.cricketcraft.chisel.block.BlockCarvableStairs;
+import com.cricketcraft.chisel.block.BlockCarvableTorch;
+import com.cricketcraft.chisel.block.BlockCloud;
+import com.cricketcraft.chisel.block.BlockConcrete;
+import com.cricketcraft.chisel.block.BlockEldritch;
+import com.cricketcraft.chisel.block.BlockGrimstone;
+import com.cricketcraft.chisel.block.BlockHolystone;
+import com.cricketcraft.chisel.block.BlockLavastone;
+import com.cricketcraft.chisel.block.BlockLeaf;
+import com.cricketcraft.chisel.block.BlockPresent;
+import com.cricketcraft.chisel.block.BlockRoadLine;
+import com.cricketcraft.chisel.block.BlockSnakestone;
+import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
+import com.cricketcraft.chisel.block.BlockWaterstone;
+import com.cricketcraft.chisel.block.CarvableStairsMaker;
+import com.cricketcraft.chisel.block.IStairsCreator;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.client.render.SubmapManagerAntiblock;
 import com.cricketcraft.chisel.client.render.SubmapManagerCarpetFloor;
@@ -52,8 +92,10 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import static com.cricketcraft.chisel.init.ChiselBlocks.*;
-import static com.cricketcraft.chisel.utils.General.sGNames;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public enum Features {
 
@@ -122,6 +164,7 @@ public enum Features {
             andesite.carverHelper.addVariation("tile.andesite.6.desc", 6, "andesite/andesiteTiles");
 			andesite.carverHelper.registerAll(andesite, "andesite");
 			Carving.chisel.registerOre("andesite", "blockAndesite");
+			Carving.chisel.registerOre("andesite", "stoneAndesite");
 		}
 
 		@Override
@@ -609,7 +652,8 @@ public enum Features {
             diorite.carverHelper.addVariation("tile.diorite.5.desc", 5, "diorite/dioritePrism");
             diorite.carverHelper.addVariation("tile.diorite.6.desc", 6, "diorite/dioriteTiles");
 			diorite.carverHelper.registerAll(diorite, "diorite");
-			Carving.chisel.registerOre("diorite", "diorite");
+			Carving.chisel.registerOre("diorite", "blockDiorite");
+			Carving.chisel.registerOre("diorite", "stoneDiorite");
 		}
 
 		@Override
@@ -1003,7 +1047,8 @@ public enum Features {
             granite.carverHelper.addVariation("tile.granite.5.desc", 5, "granite/granitePrism");
             granite.carverHelper.addVariation("tile.granite.6.desc", 6, "granite/graniteTiles");
 			granite.carverHelper.registerAll(granite, "granite");
-			Carving.chisel.registerOre("granite", "granite");
+			Carving.chisel.registerOre("granite", "blockGranite");
+			Carving.chisel.registerOre("granite", "stoneGranite");
 		}
 
 		@Override
@@ -1671,7 +1716,7 @@ public enum Features {
             rebel.carverHelper.addVariation("tile.rebel.3.desc", 3, "military/rebelCautionWhite", 23);
             rebel.carverHelper.addVariation("tile.rebel.4.desc", 4, "military/rebelCautionRed", 24);
             rebel.carverHelper.registerBlock(rebel, "rebel");
-            
+
             imperial.carverHelper.registerVariations("military");
             rebel.carverHelper.registerVariations("military");
 
