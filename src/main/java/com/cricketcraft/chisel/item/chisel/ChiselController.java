@@ -105,7 +105,7 @@ public final class ChiselController {
 			} else {
 				lastTickClick = event.world.getTotalWorldTime();
 			}
-			if (!event.world.isRemote && chisel.canOpenGui(event.world, event.entityPlayer, held) && event.world.getTileEntity(event.x, event.y, event.z) == null) {
+			if (!event.world.isRemote && chisel.canOpenGui(event.world, event.entityPlayer, held)) {
 				event.entityPlayer.openGui(Chisel.instance, 0, event.world, 0, 0, 0);
 			}
 			break;
