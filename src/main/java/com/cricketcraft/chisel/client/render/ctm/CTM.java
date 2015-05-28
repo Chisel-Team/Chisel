@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel.client.render.ctm;
 
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.property.IExtendedBlockState;
@@ -100,7 +102,7 @@ public class CTM {
 
 
 
-    public static int[] getSubmapIndices(IExtendedBlockState state, EnumFacing side) {
+    public static int[] getSubmapIndices(IExtendedBlockState state, EnumFacing side, int type) {
         if (!(state.getBlock() instanceof BlockCarvable)){
             return new int[] { 18, 19, 17, 16 };
         }
@@ -122,8 +124,6 @@ public class CTM {
         boolean east_down = (Boolean)state.getValue(BlockCarvable.CONNECTED_EAST_DOWN);
         boolean west_up = (Boolean)state.getValue(BlockCarvable.CONNECTED_WEST_UP);
         boolean west_down = (Boolean)state.getValue(BlockCarvable.CONNECTED_WEST_DOWN);
-
-
 
 
         boolean b[] = new boolean[8];
@@ -207,6 +207,36 @@ public class CTM {
          *
          * b[5]    b[6]    b[7]
          */
+        if (side!=EnumFacing.UP&&side!=EnumFacing.DOWN){
+            if (type==IBlockResources.CTMH){
+                if (b[3]&&b[4]){
+                    return new int[]{6, 7, 3, 2}; //top right
+                }
+                else if (b[4]){
+                    return new int[]{12, 13, 9, 8}; //bottom left
+                }
+                else if (b[3]){
+                    return new int[]{14, 15, 11, 10}; //bottom right
+                }
+                else {
+                    return new int[]{4, 5, 1, 0}; //top left
+                }
+            }
+            else if (type==IBlockResources.CTMV){
+                if (b[1]&&b[6]){
+                    return new int[]{12, 13, 9, 8}; //bottom left
+                }
+                else if (b[1]){
+                    return new int[]{14, 15, 11, 10}; //bottom right
+                }
+                else if (b[6]){
+                    return new int[]{6, 7, 3, 2}; //top right
+                }
+                else {
+                    return new int[]{4, 5, 1, 0}; //top left
+                }
+            }
+        }
 
         // Bottom Left
         if (b[3] || b[6]) {

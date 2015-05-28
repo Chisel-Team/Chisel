@@ -23,6 +23,7 @@ import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.client.resources.model.WeightedBakedModel;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
@@ -104,7 +105,8 @@ public class ModelCTM implements ISmartBlockModel {
             if (subBlock instanceof ICTMSubBlock) {
                 ICTMSubBlock ctmSubBlock = (ICTMSubBlock) subBlock;
                 for (EnumFacing f : EnumFacing.values()) {
-                    CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getSubmapIndices((IExtendedBlockState)state,f)).addToList(newQuads);
+                    CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getSubmapIndices((IExtendedBlockState)state, f, ctmSubBlock.getResources().getType())
+                    ).addToList(newQuads);
                 }
 
             }

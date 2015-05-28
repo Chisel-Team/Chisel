@@ -54,14 +54,6 @@ public enum CarvableBlocks implements Reference{
         }
     },
 
-
-    FACTORY("factory"){
-        @Override
-        protected Variation[] createVariations(Variation.VariationCreator c){
-            return new Variation[]{c.value("wireframe"), c.value("circuit")};
-        }
-
-    },
     ALUMINIUM("aluminium", true){
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c){
@@ -235,13 +227,33 @@ public enum CarvableBlocks implements Reference{
     EMERALD_BLOCK("emerald"){
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c){
-            return new Variation[]{c.value("embossed"), c.value("gem"), c.value("cells"), c.value("space"), c.value("spaceblack"), c.value("simple"),
-                    c.value("bismuth"), c.value("crushed"), c.value("four"), c.value("fourornate"), c.value("zelda"), c.value("ornatelayer")};
+            return new Variation[]{c.value("panel"), c.value("panelclassic"), c.value("smooth"), c.value("chunk"), c.value("goldborder"),
+            c.value("zelda"), c.value("cell"), c.value("cellbismuth"), c.value("four"), c.value("fourornate"), c.value("ornate")};
         }
 
         @Override
         public String[] createHonorarySubBlocks(){
             return new String[]{"emerald_block#0"};
+        }
+    },
+    END_STONE("end_stone"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("chiseled")};
+        }
+
+        @Override
+        public String[] createHonorarySubBlocks(){
+            return new String[]{"end_stone#0"};
+        }
+    },
+    FACTORY("factory"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("dots"), c.value("rust"), c.value("rust2"), c.value("platex"), c.value("wireframewhite"),
+            c.value("wireframe"), c.value("hazard"), c.value("hazardorange"), c.value("circuit"), c.value("metalbox"), c.value("goldplate"),
+            c.value("goldplating"), c.value("grinder"), c.value("plating"), c.value("rustplates"), c.value("column"), c.value("iceiceice"),
+            c.value("vent"), c.value("tilemosaic"), c.value("wireframeblue")};
         }
     }
 
@@ -488,10 +500,14 @@ public enum CarvableBlocks implements Reference{
     private static boolean isCTM(String blockName, String variation){
         String ctmPath = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-ctm.png";
         String ctmHPath = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-ctmh.png";
+        String ctmVPath = "/assets/"+MOD_ID.toLowerCase()+"/textures/blocks/"+blockName+"/"+variation+"-ctmv.png";
         if (Chisel.class.getResource(ctmPath)!=null){
             return true;
         }
         if (Chisel.class.getResource(ctmHPath)!=null){
+            return true;
+        }
+        if (Chisel.class.getResource(ctmVPath)!=null){
             return true;
         }
         return false;

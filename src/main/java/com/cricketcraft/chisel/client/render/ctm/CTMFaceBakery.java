@@ -167,22 +167,22 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
 
     private BakedQuad makeQuadFor(EnumFacing side, CTMBlockResources resources, int quad, int quadSection){
         TextureAtlasSprite s = resources.ctmTexture;
-        if (resources.type == IBlockResources.CTMH){
+        if (resources.type == IBlockResources.CTMH|| resources.type == IBlockResources.CTMV){
             if (side==EnumFacing.UP||side==EnumFacing.DOWN) {
                 if (side == EnumFacing.UP) {
                     s = resources.top;
                 } else {
                     s = resources.bottom;
                 }
-                return ModelNonCTM.makeQuad(side, s, resources.type);
+                return ModelNonCTM.makeQuad(side, s, resources.type, true);
             }
         }
-        else if (resources.type == IBlockResources.CTMV){
-            if (side==EnumFacing.NORTH||side==EnumFacing.SOUTH||side==EnumFacing.WEST||side==EnumFacing.EAST){
-                s=resources.side;
-                return ModelNonCTM.makeQuad(side, s, resources.type);
-            }
-        }
+//        else if (resources.type == IBlockResources.CTMV){
+//            if (side==EnumFacing.NORTH||side==EnumFacing.SOUTH||side==EnumFacing.WEST||side==EnumFacing.EAST){
+//                s=resources.side;
+//                return ModelNonCTM.makeQuad(side, s, resources.type);
+//            }
+//        }
         if (CTM.isDefaultTexture(quad)){
             if (!(resources.type==IBlockResources.CTMH||resources.type==IBlockResources.CTMV)){
                 s=resources.texture;
@@ -198,7 +198,12 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
             //Chisel.logger.info("Remapping ctm(h/v) "+old+" to "+quad);
         }
         ModelCTM.QuadPos pos = getCorrectQuadPos(side, quadSection);
+        return makeRealQuad(pos, side, s, quad);
 
+
+    }
+
+    private BakedQuad makeRealQuad(ModelCTM.QuadPos pos, EnumFacing side, TextureAtlasSprite s, int quad){
         return makeBakedQuad(pos.from, pos.to, new BlockPartFace(side, -1, s.getIconName(), new BlockFaceUV(CTM.uvs[quad], 0)),
                 s, side, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), side.getAxis(), 0, false), false, false);
     }

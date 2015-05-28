@@ -289,14 +289,14 @@ public class BlockCarvable extends Block{
         IExtendedBlockState state = (IExtendedBlockState)stateIn;
         Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
         IBlockResources res = SubBlockUtil.getResources(state.getBlock(), v);
-        if (res.getType()==IBlockResources.V4||res.getType()==IBlockResources.V9||res.getType()==IBlockResources.R4||res.getType()==IBlockResources.R9||res.getType()==IBlockResources.R16) {
+        if (res.getType()==IBlockResources.V4||res.getType()==IBlockResources.V9) {
             int variationSize = BlockResources.getVariationWidth(res.getType());
             int xModulus = Math.abs(pos.getX() % variationSize);
             int zModulus = Math.abs(pos.getZ() % variationSize);
             int yModules = Math.abs(pos.getY() % variationSize);
             return state.withProperty(XMODULES, xModulus).withProperty(YMODULES, yModules).withProperty(ZMODULES, zModulus);
         }
-        else if (res.getType()==IBlockResources.NORMAL){
+        else if (res.getType()==IBlockResources.NORMAL||res.getType()==IBlockResources.R9||res.getType()==IBlockResources.R4||res.getType()==IBlockResources.R16){
             return stateIn;
         }
 

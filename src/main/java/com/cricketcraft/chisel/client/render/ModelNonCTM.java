@@ -72,7 +72,6 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
 
     private List<BakedQuad> generateQuads(BlockResources r, IBlockState state){
         int type;
-        boolean inv = state==null;
         type = r.getType();
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
 
@@ -91,18 +90,20 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
             else if (r.side!=null){
                 t=r.side;
             }
+            boolean full = ((f==EnumFacing.UP||f==EnumFacing.DOWN)&&(r.getType()==IBlockResources.CTMH||r.getType()==IBlockResources.CTMV));
 
-            toReturn.add(makeQuad(f, t, type));
+            toReturn.add(makeQuad(f, t, type, full));
         }
         return toReturn;
     }
 
-    public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, int type){
+    public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, int type, boolean full){
         int num = 16;
         if (type == IBlockResources.CTMH || type == IBlockResources.CTMV || type == IBlockResources.V4 || type == IBlockResources.R4)
             num = 8;
         else if (type == IBlockResources.V9 || type == IBlockResources.R9) num = 16 / 3;
         else if (type == IBlockResources.R16) num = 4;
+        if (full) num = 16;
         return bakery.makeBakedQuad(quadPos.from, quadPos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(new float[]{0, 0, num, num}, 0)),
                 sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, false);
     }
