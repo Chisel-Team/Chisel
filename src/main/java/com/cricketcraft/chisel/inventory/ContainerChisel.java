@@ -50,7 +50,7 @@ public class ContainerChisel extends Container {
 		}
 
 		chisel = inventoryplayer.getCurrentItem();
-		if (chisel.stackTagCompound != null) {
+		if (chisel != null && chisel.stackTagCompound != null) {
 			ItemStack stack = ItemStack.loadItemStackFromNBT(chisel.stackTagCompound.getCompoundTag("chiselTarget"));
 			inventory.setInventorySlotContents(InventoryChiselSelection.normalSlots, stack);
 		}
