@@ -2,22 +2,23 @@ package com.cricketcraft.chisel.compat;
 
 import java.util.Map;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.Features;
+import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselItems;
-import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
-import cpw.mods.fml.common.FMLLog;
-import net.minecraft.block.Block;
-
-import com.cricketcraft.chisel.carving.Carving;
 import com.google.common.collect.Maps;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+
+import net.minecraftforge.oredict.OreDictionary;
+
 import org.apache.logging.log4j.Level;
 
 public class Compatibility {
@@ -88,6 +89,16 @@ public class Compatibility {
 		if(Loader.isModLoaded("EE3")){
 			loadEE3Values();
 		}
+		//Oredict
+		OreDictionary.registerOre("stoneGranite", new ItemStack(ChiselBlocks.granite, 1, 0));
+		OreDictionary.registerOre("stoneAndesite", new ItemStack(ChiselBlocks.andesite, 1, 0));
+		OreDictionary.registerOre("stoneDiorite", new ItemStack(ChiselBlocks.diorite, 1, 0));
+		OreDictionary.registerOre("stoneGranitePolished", new ItemStack(ChiselBlocks.granite, 1, 1));
+		OreDictionary.registerOre("stoneAndesitePolished", new ItemStack(ChiselBlocks.andesite, 1, 1));
+		OreDictionary.registerOre("stoneDioritePolished", new ItemStack(ChiselBlocks.diorite, 1, 1));
+		OreDictionary.registerOre("stoneGranitePillar", new ItemStack(ChiselBlocks.granite, 1, 2));
+		OreDictionary.registerOre("stoneAndesitePillar", new ItemStack(ChiselBlocks.andesite, 1, 2));
+		OreDictionary.registerOre("stoneDioritePillar", new ItemStack(ChiselBlocks.diorite, 1, 2));
     }
 
 	public static void addSupport(String modname, String blockname, String name, int metadata, int order) {
