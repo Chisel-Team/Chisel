@@ -32,6 +32,8 @@ screenshots
 mods
 lib
 libs
+config
+world
 
 *.txt
 *.json

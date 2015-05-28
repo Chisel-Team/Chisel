@@ -22,7 +22,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 public final class ChiselController {
 
 	public static final ChiselController INSTANCE = new ChiselController();
-	
+
 	private long lastTickClick = 0;
 
 	private ChiselController() {
@@ -55,9 +55,9 @@ public final class ChiselController {
 			if (group == null) {
 				return;
 			}
-			
+
 			List<ICarvingVariation> list = group.getVariations();
-			
+
 			main: for (ItemStack stack : OreDictionary.getOres(group.getOreName())) {
 				ICarvingVariation v = General.getVariation(stack);
 				for (ICarvingVariation check : list) {
@@ -105,7 +105,7 @@ public final class ChiselController {
 			} else {
 				lastTickClick = event.world.getTotalWorldTime();
 			}
-			if (!event.world.isRemote && chisel.canOpenGui(event.world, event.entityPlayer, held)) {
+			if (!event.world.isRemote && chisel.canOpenGui(event.world, event.entityPlayer, held) && event.world.getTileEntity(event.x, event.y, event.z) == null) {
 				event.entityPlayer.openGui(Chisel.instance, 0, event.world, 0, 0, 0);
 			}
 			break;
