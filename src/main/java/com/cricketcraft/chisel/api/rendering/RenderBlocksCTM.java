@@ -163,7 +163,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		renderMaxX = renderMaxY = renderMaxZ = 1;
 	}
 
-	protected Tessellator tessellator;
+	protected Tessellator tessellator = Tessellator.instance;
 	protected double minU, maxU;
 	protected double minV, maxV;
 	protected int[] lightingCache = new int[4];
@@ -188,13 +188,9 @@ public class RenderBlocksCTM extends RenderBlocks {
 		by = y;
 		bz = z;
 
-		tessellator = Tessellator.instance;
 		tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-
 		tessellator.addTranslation(x, y, z);
-
 		boolean res = super.renderStandardBlock(block, x, y, z);
-
 		tessellator.addTranslation(-x, -y, -z);
 
 		return res;
