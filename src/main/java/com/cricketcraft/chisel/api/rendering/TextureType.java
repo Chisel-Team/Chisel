@@ -60,6 +60,7 @@ public enum TextureType {
 		}
 	},
 	CTMV("ctmv", "top"){
+				
 		@Override
 		protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
 			return Pair.of(new TextureSubmap(register.registerIcon(modName + ":" + texturePath + "-ctmv"), 2, 2), register.registerIcon(modName + ":" + texturePath + "-top"));
@@ -364,7 +365,7 @@ public enum TextureType {
 	protected RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world, Object cachedObject) {
 		return rendererOld;
 	}
-
+	
 	public static TextureType getTypeFor(CarvableHelper inst, String modid, String path) {
 		if (path == null) {
 			return CUSTOM;
