@@ -173,10 +173,10 @@ public class CarvableHelper {
 
 	public void registerAll(Block block, String name, Class<? extends ItemBlock> cl) {
 		registerBlock(block, name, cl);
-		registerVariations(name, block);
+		registerVariations(name);
 	}
 
-	public void registerVariations(String name, Block block) {
+	public void registerVariations(String name) {
 		for (IVariationInfo info : infoList) {
 			registerVariation(name, info);
 		}

@@ -124,32 +124,35 @@ public class RenderBlocksColumn extends RenderBlocks {
 
 	@Override
 	public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
-		super.renderFaceXNeg(block, x, y, z, sides[4]);
+		super.renderFaceXNeg(block, x, y, z, getIcon(icon, 4));
 	}
 
 	@Override
 	public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon) {
-		super.renderFaceXPos(block, x, y, z, sides[5]);
+		super.renderFaceXPos(block, x, y, z, getIcon(icon, 5));
 	}
 
 	@Override
 	public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon) {
-		super.renderFaceZNeg(block, x, y, z, sides[2]);
+		super.renderFaceZNeg(block, x, y, z, getIcon(icon, 2));
 	}
 
 	@Override
 	public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon) {
-		super.renderFaceZPos(block, x, y, z, sides[3]);
+		super.renderFaceZPos(block, x, y, z, getIcon(icon, 3));
 	}
 
 	@Override
 	public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon) {
-		super.renderFaceYNeg(block, x, y, z, sides[0]);
+		super.renderFaceYNeg(block, x, y, z, getIcon(icon, 0));
 	}
 
 	@Override
 	public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon) {
-		super.renderFaceYPos(block, x, y, z, sides[1]);
+		super.renderFaceYPos(block, x, y, z, getIcon(icon, 1));
 	}
 
+	private IIcon getIcon(IIcon defaultIcon, int side) {
+		return sides[side] == null ? defaultIcon : sides[side];
+	}
 }

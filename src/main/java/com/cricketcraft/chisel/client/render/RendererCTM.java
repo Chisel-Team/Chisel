@@ -1,7 +1,9 @@
 package com.cricketcraft.chisel.client.render;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
@@ -28,29 +30,32 @@ public class RendererCTM implements ISimpleBlockRenderingHandler {
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		Drawing.drawBlock(block, metadata, renderer);
+		IVariationInfo var = ((ICarvable) block).getVariation(new ItemStack(block, 1, metadata));
+		Drawing.drawBlock(block, metadata, getContext(renderer, block, Minecraft.getMinecraft().theWorld, var, metadata));
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
 	}
 
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks rendererOld) {
 		int meta = world.getBlockMetadata(x, y, z);
-
 		IVariationInfo var = ((ICarvable) block).getVariation(world, x, y, z, meta);
-
+		return getContext(rendererOld, block, world, var, meta).renderStandardBlock(block, x, y, z);
+	}
+	
+	private RenderBlocks getContext(RenderBlocks rendererOld, Block block, IBlockAccess world, IVariationInfo var, int meta) {
 		if (!rendererOld.hasOverrideBlockTexture() && var != null) {
 			RenderBlocks rb = var.getSubmapManager().createRenderContext(rendererOld, block, world);
 			if (rb != null && rb != rendererOld) {
 				rb.blockAccess = world;
 				if (rb instanceof RenderBlocksCTM) {
-					((RenderBlocksCTM)rb).manager = var.getSubmapManager();
-					((RenderBlocksCTM)rb).rendererOld = rendererOld;
+					RenderBlocksCTM rbctm = (RenderBlocksCTM) rb;
+					rbctm.manager = rbctm.manager == null ? var.getSubmapManager() : rbctm.manager;
+					rbctm.rendererOld = rbctm.rendererOld == null ? rendererOld : rbctm.rendererOld;
 				}
-				return rb.renderStandardBlock(block, x, y, z);
+				return rb;
 			}
 		}
-
-		return rendererOld.renderStandardBlock(block, x, y, z) || rendererOld.hasOverrideBlockTexture();
+		return rendererOld;
 	}
 
 	@Override
