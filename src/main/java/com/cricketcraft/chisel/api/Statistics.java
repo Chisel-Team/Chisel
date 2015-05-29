@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel;
+package com.cricketcraft.chisel.api;
 
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatBasic;

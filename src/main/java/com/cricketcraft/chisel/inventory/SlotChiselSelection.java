@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.Statistics;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.utils.General;
 import com.cricketcraft.chisel.utils.GeneralClient;
@@ -67,6 +68,8 @@ public class SlotChiselSelection extends Slot {
 		if (player.worldObj.isRemote) {
 			String sound = Carving.chisel.getVariationSound(crafted.getItem(), crafted.getItemDamage());
 			GeneralClient.playChiselSound(player.worldObj, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound);
+		} else {
+			container.playerInventory.player.addStat(Statistics.blocksChiseled, crafted.stackSize);
 		}
 	}
 }

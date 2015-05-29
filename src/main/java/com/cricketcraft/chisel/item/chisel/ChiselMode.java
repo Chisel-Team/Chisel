@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.Statistics;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.api.carving.IChiselMode;
 import com.cricketcraft.chisel.network.PacketHandler;
@@ -107,6 +108,7 @@ public enum ChiselMode implements IChiselMode {
 			} else {
 				world.setBlock(x, y, z, v.getBlock(), v.getBlockMeta(), 3);
 			}
+			player.addStat(Statistics.blocksChiseled, 1);
 			boolean breakChisel = false;
 			if (((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.getCurrentEquippedItem(), v)) {
 				player.getCurrentEquippedItem().damageItem(1, player);
