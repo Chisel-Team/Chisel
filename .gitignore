@@ -24,6 +24,9 @@ run
 .DS_Store
 *.command
 
+#windows
+Thumbs.db
+
 #workspace
 saves
 asm

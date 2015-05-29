@@ -129,6 +129,7 @@ public class Chisel {
 
 		ChiselTabs.preInit();
 		Features.preInit();
+		Statistics.init();
 		PacketHandler.init();
 		ChiselController.INSTANCE.preInit();
 		if (Loader.isModLoaded("ForgeMultipart")) {
