@@ -1,5 +1,8 @@
 # Key localizations
 
+#Stat localizations
+stat.blockChiseled=Blocks Chiseled
+
 # Entity localizations
 entity.chisel.snowman.name=Snow Golem
 

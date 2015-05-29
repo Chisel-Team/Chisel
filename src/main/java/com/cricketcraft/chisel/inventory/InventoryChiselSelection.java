@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.inventory;
 
+import com.cricketcraft.chisel.Statistics;
 import com.cricketcraft.chisel.api.IChiselItem;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
 import com.cricketcraft.chisel.utils.General;
@@ -106,7 +107,8 @@ public class InventoryChiselSelection implements IInventory {
 
 	public void updateItems() {
 		ItemStack chiseledItem = inventory[normalSlots];
-
+		if(inventory[normalSlots] != null)
+		container.playerInventory.player.addStat(Statistics.blocksChiseled, inventory[normalSlots].stackSize);
 		clearItems();
 
 		if (chiseledItem == null) {
