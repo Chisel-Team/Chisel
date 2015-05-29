@@ -210,7 +210,7 @@ public class CarvableHelper {
 	}
 
 	public void registerOre(String ore) {
-		OreDictionary.registerOre(ore, infoList.get(0).getVariation().getBlock());
+		OreDictionary.registerOre(ore, theBlock);
 	}
 
 	@SideOnly(Side.CLIENT)
