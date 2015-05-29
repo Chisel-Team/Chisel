@@ -1120,7 +1120,7 @@ public enum Features {
 			ice.carverHelper.addVariation("tile.ice.8.desc", 8, "ice/a1-stonecobble-icefrench");
 			ice.carverHelper.addVariation("tile.ice.9.desc", 9, "ice/sunkentiles");
 			ice.carverHelper.addVariation("tile.ice.10.desc", 10, "ice/tiles");
-//			ice.carverHelper.addVariation("tile.ice.11.desc", 11, "ice/a1-stonecobble-icepanel");
+			ice.carverHelper.addVariation("tile.ice.11.desc", 11, "ice/a1-stonecobble-icepanel");
 			ice.carverHelper.addVariation("tile.ice.12.desc", 12, "ice/a1-stoneslab-ice");
 			ice.carverHelper.addVariation("tile.ice.13.desc", 13, "ice/zelda");
 			ice.carverHelper.addVariation("tile.ice.14.desc", 14, "ice/bismuth");
@@ -1175,7 +1175,7 @@ public enum Features {
 			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.8.desc", 8, "ice/a1-stonecobble-icefrench");
 			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.9.desc", 9, "ice/sunkentiles");
 			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.10.desc", 10, "ice/tiles");
-//			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.11.desc", 11, "ice/a1-stonecobble-icepanel");
+			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.11.desc", 11, "ice/a1-stonecobble-icepanel");
 			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.12.desc", 12, "ice/a1-stoneslab-ice");
 			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.13.desc", 13, "ice/zelda");
 			makerIceStairs.carverHelper.addVariation("tile.ice_stairs.14.desc", 14, "ice/bismuth");
@@ -1797,7 +1797,7 @@ public enum Features {
 			packedice.carverHelper.addVariation("tile.packedice.8.desc", 8, "ice/a1-stonecobble-icefrench");
 			packedice.carverHelper.addVariation("tile.packedice.9.desc", 9, "ice/sunkentiles");
 			packedice.carverHelper.addVariation("tile.packedice.10.desc", 10, "ice/tiles");
-//			packedice.carverHelper.addVariation("tile.packedice.11.desc", 11, "ice/a1-stonecobble-icepanel");
+			packedice.carverHelper.addVariation("tile.packedice.11.desc", 11, "ice/a1-stonecobble-icepanel");
 			packedice.carverHelper.addVariation("tile.packedice.12.desc", 12, "ice/a1-stoneslab-ice");
 			packedice.carverHelper.addVariation("tile.packedice.13.desc", 13, "ice/zelda");
 			packedice.carverHelper.addVariation("tile.packedice.14.desc", 14, "ice/bismuth");
@@ -1846,7 +1846,7 @@ public enum Features {
 			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.8.desc", 8, "ice/a1-stonecobble-icefrench");
 			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.9.desc", 9, "ice/sunkentiles");
 			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.10.desc", 10, "ice/tiles");
-//			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.11.desc", 11, "ice/a1-stonecobble-icepanel");
+			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.11.desc", 11, "ice/a1-stonecobble-icepanel");
 			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.12.desc", 12, "ice/a1-stoneslab-ice");
 			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.13.desc", 13, "ice/zelda");
 			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.14.desc", 14, "ice/bismuth");
