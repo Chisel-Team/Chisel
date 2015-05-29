@@ -56,7 +56,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			this.y = y;
 			this.z = z;
 		}
-		
+
 		private static double u, v, xDiff, yDiff, zDiff, uDiff, vDiff;
 
 		void render(RenderBlocksCTM inst, ForgeDirection normal, int cacheID) {
@@ -66,7 +66,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 			}
 			u = cacheID == 1 || cacheID == 2 ? inst.maxU : inst.minU;
 			v = cacheID < 2 ? inst.maxV : inst.minV;
-			
+
 			uDiff = inst.maxU - inst.minU;
 			vDiff = inst.maxV - inst.minV;
 
@@ -163,7 +163,7 @@ public class RenderBlocksCTM extends RenderBlocks {
 		renderMaxX = renderMaxY = renderMaxZ = 1;
 	}
 
-	protected Tessellator tessellator;
+	protected Tessellator tessellator = Tessellator.instance;
 	protected double minU, maxU;
 	protected double minV, maxV;
 	protected int[] lightingCache = new int[4];
@@ -181,6 +181,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 	protected float[][] blumap = new float[3][3];
 
 	protected int bx, by, bz;
+	
+	private boolean inWorld = false;
 
 	@Override
 	public boolean renderStandardBlock(Block block, int x, int y, int z) {
@@ -188,13 +190,11 @@ public class RenderBlocksCTM extends RenderBlocks {
 		by = y;
 		bz = z;
 
-		tessellator = Tessellator.instance;
 		tessellator.setColorOpaque_F(1.0F, 1.0F, 1.0F);
-
 		tessellator.addTranslation(x, y, z);
-
+		inWorld = true;
 		boolean res = super.renderStandardBlock(block, x, y, z);
-
+		inWorld = false;
 		tessellator.addTranslation(-x, -y, -z);
 
 		return res;
@@ -289,8 +289,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 				| ((blueBitChannel / lightVals.length) & 0xF0000) | ((sunlightBitChannel / lightVals.length) & 0xF00000);
 	}
 
-	protected void side(SubSide side, int iconIndex) {
-		
+	protected void side(Block block, SubSide side, int iconIndex) {
+
 		IIcon icon;
 		TextureSubmap map;
 		if (iconIndex >= 16) {
@@ -299,9 +299,14 @@ public class RenderBlocksCTM extends RenderBlocks {
 		} else {
 			map = submap;
 		}
-		int x = iconIndex % map.getWidth();
-		int y = iconIndex / map.getHeight();
-		icon = map.getSubIcon(x, y);
+
+		if (map == null) {
+			icon = getBlockIconFromSide(block, side.normal.ordinal());
+		} else {
+			int x = iconIndex % map.getWidth();
+			int y = iconIndex / map.getHeight();
+			icon = map.getSubIcon(x, y);
+		}
 
 		double umax = icon.getMaxU();
 		double umin = icon.getMinU();
@@ -328,8 +333,8 @@ public class RenderBlocksCTM extends RenderBlocks {
 
 	@Override
 	public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
-		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
-			IIcon i = rendererOld.overrideBlockTexture;
+		if (!inWorld || (rendererOld != null && rendererOld.hasOverrideBlockTexture())) {
+			IIcon i = rendererOld.hasOverrideBlockTexture() ? rendererOld.overrideBlockTexture : icon;
 
 			tessellator.addVertexWithUV(renderMinX, renderMaxY, renderMinZ, i.getMinU(), i.getMinV());
 			tessellator.addVertexWithUV(renderMinX, renderMinY, renderMinZ, i.getMinU(), i.getMaxV());
@@ -346,22 +351,22 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, blumap);
 
 			getLight(0, 0);
-			side(XNEG_LB, tex[0]);
+			side(block, XNEG_LB, tex[0]);
 			getLight(1, 0);
-			side(XNEG_RB, tex[1]);
+			side(block, XNEG_RB, tex[1]);
 			getLight(1, 1);
-			side(XNEG_RT, tex[2]);
+			side(block, XNEG_RT, tex[2]);
 			getLight(0, 1);
-			side(XNEG_LT, tex[3]);
-			
+			side(block, XNEG_LT, tex[3]);
+
 			post(ForgeDirection.WEST);
 		}
 	}
 
 	@Override
 	public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon) {
-		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
-			IIcon i = rendererOld.overrideBlockTexture;
+		if (!inWorld || (rendererOld != null && rendererOld.hasOverrideBlockTexture())) {
+			IIcon i = rendererOld.hasOverrideBlockTexture() ? rendererOld.overrideBlockTexture : icon;
 
 			tessellator.addVertexWithUV(renderMaxX, renderMaxY, renderMaxZ, i.getMaxU(), i.getMinV());
 			tessellator.addVertexWithUV(renderMaxX, renderMinY, renderMaxZ, i.getMaxU(), i.getMaxV());
@@ -376,24 +381,24 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, redmap);
 			fillColormap(colorGreenTopLeft, colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, grnmap);
 			fillColormap(colorBlueTopLeft, colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, blumap);
-						
+
 			getLight(0, 0);
-			side(XPOS_LB, tex[0]);
+			side(block, XPOS_LB, tex[0]);
 			getLight(1, 0);
-			side(XPOS_RB, tex[1]);
+			side(block, XPOS_RB, tex[1]);
 			getLight(1, 1);
-			side(XPOS_RT, tex[2]);
+			side(block, XPOS_RT, tex[2]);
 			getLight(0, 1);
-			side(XPOS_LT, tex[3]);
-			
+			side(block, XPOS_LT, tex[3]);
+
 			post(ForgeDirection.EAST);
 		}
 	}
 
 	@Override
 	public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon) {
-		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
-			IIcon i = rendererOld.overrideBlockTexture;
+		if (!inWorld || (rendererOld != null && rendererOld.hasOverrideBlockTexture())) {
+			IIcon i = rendererOld.hasOverrideBlockTexture() ? rendererOld.overrideBlockTexture : icon;
 
 			tessellator.addVertexWithUV(renderMaxX, renderMaxY, renderMinZ, i.getMaxU(), i.getMinV());
 			tessellator.addVertexWithUV(renderMaxX, renderMinY, renderMinZ, i.getMaxU(), i.getMaxV());
@@ -408,24 +413,24 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedBottomRight, colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, redmap);
 			fillColormap(colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, grnmap);
 			fillColormap(colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, blumap);
-			
+
 			getLight(0, 0);
-			side(ZNEG_LB, tex[0]);
+			side(block, ZNEG_LB, tex[0]);
 			getLight(1, 0);
-			side(ZNEG_RB, tex[1]);
+			side(block, ZNEG_RB, tex[1]);
 			getLight(1, 1);
-			side(ZNEG_RT, tex[2]);
+			side(block, ZNEG_RT, tex[2]);
 			getLight(0, 1);
-			side(ZNEG_LT, tex[3]);
-			
+			side(block, ZNEG_LT, tex[3]);
+
 			post(ForgeDirection.NORTH);
 		}
 	}
 
 	@Override
 	public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon) {
-		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
-			IIcon i = rendererOld.overrideBlockTexture;
+		if (!inWorld || (rendererOld != null && rendererOld.hasOverrideBlockTexture())) {
+			IIcon i = rendererOld.hasOverrideBlockTexture() ? rendererOld.overrideBlockTexture : icon;
 
 			tessellator.addVertexWithUV(renderMinX, renderMaxY, renderMaxZ, i.getMinU(), i.getMinV());
 			tessellator.addVertexWithUV(renderMinX, renderMinY, renderMaxZ, i.getMinU(), i.getMaxV());
@@ -440,24 +445,24 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
 			fillColormap(colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, grnmap);
 			fillColormap(colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, blumap);
-			
+
 			getLight(0, 0);
-			side(ZPOS_LB, tex[0]);
+			side(block, ZPOS_LB, tex[0]);
 			getLight(1, 0);
-			side(ZPOS_RB, tex[1]);
+			side(block, ZPOS_RB, tex[1]);
 			getLight(1, 1);
-			side(ZPOS_RT, tex[2]);
+			side(block, ZPOS_RT, tex[2]);
 			getLight(0, 1);
-			side(ZPOS_LT, tex[3]);
-			
+			side(block, ZPOS_LT, tex[3]);
+
 			post(ForgeDirection.SOUTH);
 		}
 	}
 
 	@Override
 	public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon) {
-		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
-			IIcon i = rendererOld.overrideBlockTexture;
+		if (!inWorld || (rendererOld != null && rendererOld.hasOverrideBlockTexture())) {
+			IIcon i = rendererOld.hasOverrideBlockTexture() ? rendererOld.overrideBlockTexture : icon;
 
 			tessellator.addVertexWithUV(renderMinX, renderMinY, renderMaxZ, i.getMinU(), i.getMaxV());
 			tessellator.addVertexWithUV(renderMinX, renderMinY, renderMinZ, i.getMinU(), i.getMinV());
@@ -472,24 +477,24 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedBottomLeft, colorRedBottomRight, colorRedTopRight, colorRedTopLeft, redmap);
 			fillColormap(colorGreenBottomLeft, colorGreenBottomRight, colorGreenTopRight, colorGreenTopLeft, grnmap);
 			fillColormap(colorBlueBottomLeft, colorBlueBottomRight, colorBlueTopRight, colorBlueTopLeft, blumap);
-						
+
 			getLight(0, 0);
-			side(YNEG_LB, tex[0]);
+			side(block, YNEG_LB, tex[0]);
 			getLight(1, 0);
-			side(YNEG_RB, tex[1]);
+			side(block, YNEG_RB, tex[1]);
 			getLight(1, 1);
-			side(YNEG_RT, tex[2]);
+			side(block, YNEG_RT, tex[2]);
 			getLight(0, 1);
-			side(YNEG_LT, tex[3]);
-			
+			side(block, YNEG_LT, tex[3]);
+
 			post(ForgeDirection.DOWN);
 		}
 	}
 
 	@Override
 	public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon) {
-		if (rendererOld != null && rendererOld.hasOverrideBlockTexture()) {
-			IIcon i = rendererOld.overrideBlockTexture;
+		if (!inWorld || (rendererOld != null && rendererOld.hasOverrideBlockTexture())) {
+			IIcon i = rendererOld.hasOverrideBlockTexture() ? rendererOld.overrideBlockTexture : icon;
 
 			tessellator.addVertexWithUV(renderMinX, renderMaxY, renderMinZ, i.getMinU(), i.getMinV());
 			tessellator.addVertexWithUV(renderMinX, renderMaxY, renderMaxZ, i.getMinU(), i.getMaxV());
@@ -504,16 +509,16 @@ public class RenderBlocksCTM extends RenderBlocks {
 			fillColormap(colorRedTopRight, colorRedTopLeft, colorRedBottomLeft, colorRedBottomRight, redmap);
 			fillColormap(colorGreenTopRight, colorGreenTopLeft, colorGreenBottomLeft, colorGreenBottomRight, grnmap);
 			fillColormap(colorBlueTopRight, colorBlueTopLeft, colorBlueBottomLeft, colorBlueBottomRight, blumap);
-			
+
 			getLight(0, 0);
-			side(YPOS_LB, tex[0]);
+			side(block, YPOS_LB, tex[0]);
 			getLight(1, 0);
-			side(YPOS_RB, tex[1]);
+			side(block, YPOS_RB, tex[1]);
 			getLight(1, 1);
-			side(YPOS_RT, tex[2]);
+			side(block, YPOS_RT, tex[2]);
 			getLight(0, 1);
-			side(YPOS_LT, tex[3]);
-			
+			side(block, YPOS_LT, tex[3]);
+
 			post(ForgeDirection.UP);
 		}
 	}

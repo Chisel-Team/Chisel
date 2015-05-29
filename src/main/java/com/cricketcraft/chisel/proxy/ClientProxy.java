@@ -25,7 +25,7 @@ import net.minecraftforge.client.MinecraftForgeClient;
 public class ClientProxy extends CommonProxy {
 
 	ItemChiselRenderer renderer = new ItemChiselRenderer();
-
+	
 	@Override
 	public void preInit() {
 	}
@@ -36,7 +36,6 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new RendererCTMPane());
 		RenderingRegistry.registerBlockHandler(new RendererRoadLine());
 		RenderingRegistry.registerBlockHandler(new RendererSnakeStone());
-		RenderingRegistry.registerBlockHandler(new RendererPillar());
 		RenderingRegistry.registerBlockHandler(new RendererEldritch());
 		RenderingRegistry.registerBlockHandler(new RendererCTM());
 		RenderingRegistry.registerBlockHandler(new RendererLayeredGlow());

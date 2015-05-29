@@ -3,13 +3,21 @@ package com.cricketcraft.chisel.compat;
 import java.util.Map;
 
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
+import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.init.ChiselBlocks;
+import com.cricketcraft.chisel.init.ChiselItems;
 import com.google.common.collect.Maps;
+import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import org.apache.logging.log4j.Level;
 
 public class Compatibility {
 
@@ -75,6 +83,10 @@ public class Compatibility {
         addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 15, 99);
 
         addSupport("Botania", "endStoneBrick", "end_stone", 12, 0);
+
+		if(Loader.isModLoaded("EE3")){
+			loadEE3Values();
+		}
     }
 
 	public static void addSupport(String modname, String blockname, String name, int metadata, int order) {
@@ -90,5 +102,144 @@ public class Compatibility {
 	private static void loadThaumcraftAspects() {
 //		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestone, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
 //		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestoneWall, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
+	}
+
+	private static void loadEE3Values(){
+		FMLLog.log(Chisel.MOD_ID, Level.INFO, "Oooh is that Equivalent Exchange I see?");
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselItems.ballomoss, 1), 16);
+
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.sand_snakestone, 1, 1), 8);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.sand_snakestone, 1, 13), 8);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.cloud, 1, 0), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.cloud, 1, 1), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.cloud, 1, 2), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.cloud, 1, 3), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.cloud, 1, 4), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass_pane, 1, 1), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass_pane, 1, 2), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass_pane, 1, 3), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass_pane, 1, 4), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass_pane, 1, 12), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass_pane, 1, 13), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass_pane, 1, 14), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass_pane, 1, 15), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.present, 1, 4), 80);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.road_line, 1, 0), 24);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.road_line, 1, 1), 24);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.road_line, 1, 2), 24);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.road_line, 1, 3), 24);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.technical2, 1, 0), 24);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.technical2, 1, 1), 24);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.technical2, 1, 2), 24);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.technical2, 1, 3), 24);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass2, 1), 1);
+		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.technical2, 1, 0), 32);
+
+		for(int x = 0; x < ChiselBlocks.pumpkin.length; x++){
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.pumpkin[x], 1), 144);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.jackolantern[x], 1), 153);
+		}
+
+		for(int x = 0; x < ChiselBlocks.torches.length; x++){
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.torches[x], 1), 9);
+		}
+
+		for(int x = 0; x < 10; x++){
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.valentines, 1, x), 3);
+		}
+
+		for(int x = 0 ; x < 16; x++){
+			if(x <= 10)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.concrete, 1, x), 8);
+			if(x <= 14)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.grimstone, 1, x), 5);
+			if(x < 14)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.grimstone, 1, x), 7);
+			if(x < 12)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.dirt, 1, x), 1);
+			if(x < 5){
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.rebel, 1, x), 39);
+			}
+
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.fantasyblock, 1, x), 29444);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.fantasyblock, 1, x), 31444);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.limestone, 1, x), 1);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.marble, 1, x), 1);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.marble_pillar, 1, x), 8);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.marble_pillar_slab, 1, x), 4);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.sandstone_scribbles, 1, x), 4);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.stonebricksmooth, 1, x), 1);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.templeblock, 1, x), 108);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.mossy_templeblock, 1, x), 108);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glowstone, 1, x), 1536);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.ice, 1, x), 1);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.woolen_clay, 1, x), 153);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.factoryblock, 1, x), 32);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.hexPlating, 1, x), 37);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.gold_block, 1, x), 18432);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.iron_block, 1, x), 2304);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.laboratoryblock, 1, x), 33);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.technical, 1, x), 32);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.tyrian, 1, x), 33);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.hexLargePlating, 1, x), 37);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.circuits, 1, x), 37);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.factoryblock2, 1, x), 32);
+
+			if(x < 15)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.warningSign, 1, x), 6);
+
+			if(x < 4)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.factoryblock2, 1, x), 32);
+
+			for(int c = 0; c < ChiselBlocks.stainedGlass.length; c++){
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.stainedGlass[c], 1, x), 1);
+			}
+
+			for(int c = 0; c < ChiselBlocks.stainedGlassPane.length; c++){
+				if(x <= 13)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.stainedGlassPane[c], 1, x), 1);
+			}
+
+			if(x > 0) {
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.cobblestone, 1, x), 1);
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.mossy_cobblestone, 1, x), 1);
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.netherrack, 1, x), 1);
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.obsidian, 1, x), 64);
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.sandstone, 1, x), 4);
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.voidstonerunic, 1, x), 160);
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass, 1, x), 1);
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.redstone_block, 1, x), 288);
+				if(x <= 8)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.bookshelf, 1, x), 528);
+				if (x <= 12) {
+					EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.diamond_block, 1, x), 73728);
+					if (x != 12)
+						EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.emerald_block, 1, x), 73728);
+				}
+
+				for (int c = 0; c < ChiselBlocks.planks.length; c++) {
+					EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.planks[c], 1, x), 8);
+				}
+			}
+		}
+
+		for(int x = 0; x <= 6; x++){
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.andesite, 1, x), 129);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.diorite, 1, x), 257);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.granite, 1, x), 513);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.lavastone, 1, x), 9);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.lavastone, 1, 7), 9);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.voidstone, 1, x), 160);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.voidstone, 1, 7), 160);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.voidstone2, 1, x), 256);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.voidstone2, 1, 7), 256);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.waterstone, 1, x), 1);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.ice_pillar, 1, x), 1);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.iron_bars, 1, x), 96);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.iron_bars, 1, 7), 96);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.iron_bars, 1, 8), 96);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.iron_bars, 1, 9), 96);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.paperwall, 1, x), 32);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.paperwall, 1, 7), 32);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.paperwall, 1, 8), 32);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.paperwall_block, 1, x), 32);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.paperwall_block, 1, 7), 32);
+			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.paperwall_block, 1, 8), 32);
+			if(x > 0){
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.brickCustom, 1, x), 256);
+			}
+		}
 	}
 }

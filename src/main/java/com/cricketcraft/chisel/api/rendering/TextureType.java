@@ -60,6 +60,7 @@ public enum TextureType {
 		}
 	},
 	CTMV("ctmv", "top"){
+				
 		@Override
 		protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
 			return Pair.of(new TextureSubmap(register.registerIcon(modName + ":" + texturePath + "-ctmv"), 2, 2), register.registerIcon(modName + ":" + texturePath + "-top"));
@@ -95,15 +96,15 @@ public enum TextureType {
 		@SideOnly(Side.CLIENT)
 		protected RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world, Object cachedObject) {
 			RenderBlocksColumn ret = theRenderBlocksColumn;
-			Pair<IIcon, TextureSubmap> data = (Pair<IIcon, TextureSubmap>) cachedObject;
+			Pair<TextureSubmap, IIcon> data = (Pair<TextureSubmap, IIcon>) cachedObject;
 			
 			ret.blockAccess = world;
 			ret.renderMaxX = 1.0;
 			ret.renderMaxY = 1.0;
 			ret.renderMaxZ = 1.0;
 
-			ret.submap = data.getRight();
-			ret.iconTop = data.getLeft();
+			ret.submap = data.getLeft();
+			ret.iconTop = data.getRight();
 			return ret;
 		}
 	},
@@ -128,7 +129,7 @@ public enum TextureType {
 
 			boolean p;
 			boolean n;
-			boolean reverse = side == 2 || side == 5;
+			boolean reverse = side == 3 || side == 4;
 
 			if (side < 4) {
 				p = ctm.isConnected(world, x - 1, y, z, side, block, meta);
@@ -142,7 +143,7 @@ public enum TextureType {
 			if (p && n)
 				return map.getSubIcon(1, 0);
 			else if (p)
-				return map.getSubIcon(reverse ? 0 : 1, 1);
+				return map.getSubIcon(reverse ? 1 : 0, 1);
 			else if (n)
 				return map.getSubIcon(reverse ? 0 : 1, 1);
 			return map.getSubIcon(0, 0);
@@ -161,45 +162,13 @@ public enum TextureType {
 
 		@Override
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, IBlockAccess world, int x, int y, int z, int side, int meta) {           
-			int variationSize = (this == TextureType.V9) ? 3 : 2;
-			TextureSubmap map = (TextureSubmap) cachedObject;
-
-			int xModulus = x % variationSize;
-			int zModulus = z % variationSize;
-			//This ensures that blocks placed near 0,0 or it's axis' do not misbehave
-			int textureX = (xModulus < 0) ? (xModulus + variationSize) : xModulus;
-			int textureZ = (zModulus < 0) ? (zModulus + variationSize) : zModulus;
-			//Always invert the y index
-			int textureY = (variationSize - (y % variationSize) - 1);
-
-			if (side == 2 || side == 5) {
-				//For WEST, SOUTH reverse the indexes for both X and Z
-				textureX = (variationSize - textureX - 1);
-				textureZ = (variationSize - textureZ - 1);
-			} /*else if (side == 0) {
-            //For DOWN, reverse the indexes for only Z
-            textureZ = (variationSize - textureZ - 1);
-        	}*/
-
-			int index;
-			if (side == 0 || side == 1) {
-				// DOWN || UP
-				index = textureX + textureZ * variationSize;
-			} else if (side == 2 || side == 3) {
-				// NORTH || SOUTH
-				index = textureX + textureY * variationSize;
-			} else {
-				// WEST || EAST
-				index = textureZ + textureY * variationSize;
-			}
-
-			return map.getSubIcon(index % variationSize, index / variationSize);
+			return getVIcon(this, (TextureSubmap) cachedObject, x, y, z, side);
 		}
 	},
 	V4("v4"){
 		@Override
 		protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
-			return new TextureSubmap(register.registerIcon(modName + ":" + texturePath + "-v4"), 3, 3);
+			return new TextureSubmap(register.registerIcon(modName + ":" + texturePath + "-v4"), 2, 2);
 		}
 		
 		@Override
@@ -209,7 +178,7 @@ public enum TextureType {
 		
 		@Override
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, IBlockAccess world, int x, int y, int z, int side, int meta) {
-			return V9.getIcon(variation, cachedObject, world, x, y, z, side, meta);
+			return getVIcon(this, (TextureSubmap) cachedObject, x, y, z, side);
 		}
 	},
 	CTMX("", "ctm"){
@@ -252,6 +221,11 @@ public enum TextureType {
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, int side, int meta) {
 			return V9.getIcon(variation, cachedObject, side, meta);
 		}
+		
+		@Override
+		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, IBlockAccess world, int x, int y, int z, int side, int meta) {
+			return getRIcon(this, (TextureSubmap) cachedObject, x, y, z, side);
+		}
 	},
 	R9("r9"){
 		@Override
@@ -266,7 +240,7 @@ public enum TextureType {
 		
 		@Override
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, IBlockAccess world, int x, int y, int z, int side, int meta) {
-			return R4.getIcon(variation, cachedObject, side, meta);
+			return getRIcon(this, (TextureSubmap) cachedObject, x, y, z, side);
 		}
 	},
 	R4("r4"){
@@ -283,14 +257,64 @@ public enum TextureType {
 		
 		@Override
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, IBlockAccess world, int x, int y, int z, int side, int meta) {
-			rand.setSeed(x + y + z + side);
-			rand.nextBoolean();
-			int size = this == TextureType.R4 ? 2 : 3;
-			return ((TextureSubmap)cachedObject).getSubIcon(rand.nextInt(size), rand.nextInt(size));
+			return getRIcon(this, (TextureSubmap) cachedObject, x, y, z, side);
 		}
 	},
 	NORMAL,
 	CUSTOM;
+	
+	/* Some util stuff for shared code between v* and r* */
+	
+	public static IIcon getVIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
+		int variationSize = (type == TextureType.V9) ? 3 : 2;
+
+		int xModulus = x % variationSize;
+		int zModulus = z % variationSize;
+		//This ensures that blocks placed near 0,0 or it's axis' do not misbehave
+		int textureX = (xModulus < 0) ? (xModulus + variationSize) : xModulus;
+		int textureZ = (zModulus < 0) ? (zModulus + variationSize) : zModulus;
+		//Always invert the y index
+		int textureY = (variationSize - (y % variationSize) - 1);
+
+		if (side == 2 || side == 5) {
+			//For WEST, SOUTH reverse the indexes for both X and Z
+			textureX = (variationSize - textureX - 1);
+			textureZ = (variationSize - textureZ - 1);
+		} /*else if (side == 0) {
+        //For DOWN, reverse the indexes for only Z
+        textureZ = (variationSize - textureZ - 1);
+    	}*/
+
+		int index;
+		if (side == 0 || side == 1) {
+			// DOWN || UP
+			index = textureX + textureZ * variationSize;
+		} else if (side == 2 || side == 3) {
+			// NORTH || SOUTH
+			index = textureX + textureY * variationSize;
+		} else {
+			// WEST || EAST
+			index = textureZ + textureY * variationSize;
+		}
+
+		return map.getSubIcon(index % variationSize, index / variationSize);
+	}
+	
+	public static IIcon getRIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
+		rand.setSeed(getCoordinateRandom(x, y, z));
+		rand.nextBoolean();
+		int size = type == TextureType.R4 ? 2 : type == TextureType.R9 ? 3 : 4;
+		return map.getSubIcon(rand.nextInt(size), rand.nextInt(size));
+	}
+	
+	private static long getCoordinateRandom(int x, int y, int z) {
+		// MC 1.8 code...
+		long l = (x * 3129871) ^ z * 116129781L ^ y;
+		l = l * l * 42317861L + l * 11L;
+		return l;
+    }
+	
+	/* End of that mess */
 	
 	private static final TextureType[] VALUES;
 	private static final CTM ctm = CTM.getInstance();
@@ -341,7 +365,7 @@ public enum TextureType {
 	protected RenderBlocks createRenderContext(RenderBlocks rendererOld, IBlockAccess world, Object cachedObject) {
 		return rendererOld;
 	}
-
+	
 	public static TextureType getTypeFor(CarvableHelper inst, String modid, String path) {
 		if (path == null) {
 			return CUSTOM;

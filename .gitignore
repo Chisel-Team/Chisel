@@ -27,13 +27,13 @@ run
 #workspace
 saves
 asm
-config
 logs
 screenshots
 mods
-world
 lib
 libs
+config
+world
 
 *.txt
 *.json
