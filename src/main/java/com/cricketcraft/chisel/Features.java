@@ -13,6 +13,7 @@ import static com.cricketcraft.chisel.utils.General.sGNames;
 
 import java.util.List;
 
+import com.cricketcraft.chisel.item.chisel.ItemChisel;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -27,40 +28,7 @@ import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.CarvingUtils.SimpleCarvingGroup;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.block.BlockAutoChisel;
-import com.cricketcraft.chisel.block.BlockBeaconBase;
-import com.cricketcraft.chisel.block.BlockCarvable;
-import com.cricketcraft.chisel.block.BlockCarvableAntiBlock;
-import com.cricketcraft.chisel.block.BlockCarvableBookshelf;
-import com.cricketcraft.chisel.block.BlockCarvableCarpet;
-import com.cricketcraft.chisel.block.BlockCarvableGlass;
-import com.cricketcraft.chisel.block.BlockCarvableGlow;
-import com.cricketcraft.chisel.block.BlockCarvableGlowstone;
-import com.cricketcraft.chisel.block.BlockCarvableIce;
-import com.cricketcraft.chisel.block.BlockCarvableIceStairs;
-import com.cricketcraft.chisel.block.BlockCarvableLayered;
-import com.cricketcraft.chisel.block.BlockCarvablePackedIce;
-import com.cricketcraft.chisel.block.BlockCarvablePackedIceStairs;
-import com.cricketcraft.chisel.block.BlockCarvablePane;
-import com.cricketcraft.chisel.block.BlockCarvablePowered;
-import com.cricketcraft.chisel.block.BlockCarvablePumpkin;
-import com.cricketcraft.chisel.block.BlockCarvableSlab;
-import com.cricketcraft.chisel.block.BlockCarvableStairs;
-import com.cricketcraft.chisel.block.BlockCarvableTorch;
-import com.cricketcraft.chisel.block.BlockCloud;
-import com.cricketcraft.chisel.block.BlockConcrete;
-import com.cricketcraft.chisel.block.BlockEldritch;
-import com.cricketcraft.chisel.block.BlockGrimstone;
-import com.cricketcraft.chisel.block.BlockHolystone;
-import com.cricketcraft.chisel.block.BlockLavastone;
-import com.cricketcraft.chisel.block.BlockLeaf;
-import com.cricketcraft.chisel.block.BlockPresent;
-import com.cricketcraft.chisel.block.BlockRoadLine;
-import com.cricketcraft.chisel.block.BlockSnakestone;
-import com.cricketcraft.chisel.block.BlockSnakestoneObsidian;
-import com.cricketcraft.chisel.block.BlockWaterstone;
-import com.cricketcraft.chisel.block.CarvableStairsMaker;
-import com.cricketcraft.chisel.block.IStairsCreator;
+import com.cricketcraft.chisel.block.*;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.client.render.SubmapManagerAntiblock;
 import com.cricketcraft.chisel.client.render.SubmapManagerCarpetFloor;
@@ -76,16 +44,7 @@ import com.cricketcraft.chisel.entity.EntitySmashingRock;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.chisel.init.ChiselItems;
 import com.cricketcraft.chisel.init.ChiselTabs;
-import com.cricketcraft.chisel.item.ItemBallOMoss;
-import com.cricketcraft.chisel.item.ItemBlockPresent;
-import com.cricketcraft.chisel.item.ItemCarvable;
-import com.cricketcraft.chisel.item.ItemCarvablePumpkin;
-import com.cricketcraft.chisel.item.ItemCarvableSlab;
-import com.cricketcraft.chisel.item.ItemCloudInABottle;
-import com.cricketcraft.chisel.item.ItemSmashingRock;
-import com.cricketcraft.chisel.item.ItemUpgrade;
-import com.cricketcraft.chisel.item.chisel.ItemChisel;
-import com.cricketcraft.chisel.item.chisel.ItemChisel.ChiselType;
+import com.cricketcraft.chisel.item.*;
 import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.Loader;
@@ -162,9 +121,9 @@ public enum Features {
             andesite.carverHelper.addVariation("tile.andesite.4.desc", 4, "andesite/andesiteOrnate");
             andesite.carverHelper.addVariation("tile.andesite.5.desc", 5, "andesite/andesitePrism");
             andesite.carverHelper.addVariation("tile.andesite.6.desc", 6, "andesite/andesiteTiles");
+			andesite.carverHelper.registerOre("blockAndesite");
+			andesite.carverHelper.registerOre("stoneAndesite");
 			andesite.carverHelper.registerAll(andesite, "andesite");
-			Carving.chisel.registerOre("andesite", "blockAndesite");
-			Carving.chisel.registerOre("andesite", "stoneAndesite");
 		}
 
 		@Override
@@ -459,9 +418,9 @@ public enum Features {
 
 		@Override
 		void addItems() {
-			ItemChisel chisel = (ItemChisel) new ItemChisel(ChiselType.IRON).setCreativeTab(ChiselTabs.tabChisel);
-			ItemChisel diamondChisel = (ItemChisel) new ItemChisel(ChiselType.DIAMOND).setCreativeTab(ChiselTabs.tabChisel);
-			ItemChisel obsidianChisel = (ItemChisel) new ItemChisel(ChiselType.OBSIDIAN).setCreativeTab(ChiselTabs.tabChisel);
+			ItemChisel chisel = (ItemChisel) new ItemChisel(ItemChisel.ChiselType.IRON).setCreativeTab(ChiselTabs.tabChisel);
+			ItemChisel diamondChisel = (ItemChisel) new ItemChisel(ItemChisel.ChiselType.DIAMOND).setCreativeTab(ChiselTabs.tabChisel);
+			ItemChisel obsidianChisel = (ItemChisel) new ItemChisel(ItemChisel.ChiselType.OBSIDIAN).setCreativeTab(ChiselTabs.tabChisel);
 			GameRegistry.registerItem(chisel, "chisel");
 			GameRegistry.registerItem(diamondChisel, "diamondChisel");
 			GameRegistry.registerItem(obsidianChisel, "obsidianChisel");
@@ -651,9 +610,9 @@ public enum Features {
             diorite.carverHelper.addVariation("tile.diorite.4.desc", 4, "diorite/dioriteOrnate");
             diorite.carverHelper.addVariation("tile.diorite.5.desc", 5, "diorite/dioritePrism");
             diorite.carverHelper.addVariation("tile.diorite.6.desc", 6, "diorite/dioriteTiles");
+			diorite.carverHelper.registerOre("blockDiorite");
+			diorite.carverHelper.registerOre("stoneDiorite");
 			diorite.carverHelper.registerAll(diorite, "diorite");
-			Carving.chisel.registerOre("diorite", "blockDiorite");
-			Carving.chisel.registerOre("diorite", "stoneDiorite");
 		}
 
 		@Override
@@ -1046,9 +1005,9 @@ public enum Features {
             granite.carverHelper.addVariation("tile.granite.4.desc", 4, "granite/graniteOrnate");
             granite.carverHelper.addVariation("tile.granite.5.desc", 5, "granite/granitePrism");
             granite.carverHelper.addVariation("tile.granite.6.desc", 6, "granite/graniteTiles");
+			granite.carverHelper.registerOre("blockGranite");
+			granite.carverHelper.registerOre("stoneGranite");
 			granite.carverHelper.registerAll(granite, "granite");
-			Carving.chisel.registerOre("granite", "blockGranite");
-			Carving.chisel.registerOre("granite", "stoneGranite");
 		}
 
 		@Override
