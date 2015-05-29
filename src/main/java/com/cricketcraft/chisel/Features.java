@@ -593,7 +593,7 @@ public enum Features {
 			diamond_block.carverHelper.addVariation("tile.diamond.11.desc", 11, "diamond/terrain-diamond-zelda");
 			diamond_block.carverHelper.addVariation("tile.diamond.12.desc", 12, "diamond/terrain-diamond-ornatelayer");
             diamond_block.carverHelper.registerAll(diamond_block, "diamond_block");
-			Carving.chisel.registerOre("diamond_block", "diamond");
+			Carving.chisel.registerOre("diamond_block", "blockDiamond");
 		}
 	},
 
