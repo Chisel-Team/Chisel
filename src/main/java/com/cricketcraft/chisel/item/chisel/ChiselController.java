@@ -2,7 +2,6 @@ package com.cricketcraft.chisel.item.chisel;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.Statistics;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -56,8 +55,6 @@ public final class ChiselController {
 			if (group == null) {
 				return;
 			}
-
-			event.entityPlayer.addStat(Statistics.blocksChiseled, 1);
 
 			List<ICarvingVariation> list = group.getVariations();
 

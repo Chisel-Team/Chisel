@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.cricketcraft.chisel.api.ChiselAPIProps;
+import com.cricketcraft.chisel.api.Statistics;
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.block.BlockCarvable;
 import com.cricketcraft.chisel.carving.Carving;
