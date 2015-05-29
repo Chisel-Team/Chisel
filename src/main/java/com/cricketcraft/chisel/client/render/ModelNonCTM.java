@@ -23,6 +23,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
+import net.minecraftforge.fml.common.registry.GameData;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;
@@ -56,12 +58,16 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
 
     @Override
     public IBakedModel handleItemState(ItemStack stack){
+        //Chisel.logger.info("Handling itemstack for "+GameRegistry.findUniqueIdentifierFor(stack.getItem()));
         if (stack.getItem() instanceof ItemChiselBlock){
             ItemChiselBlock itemBlock = (ItemChiselBlock)stack.getItem();
             if (itemBlock.getBlock() instanceof  BlockCarvable){
                 BlockCarvable block = (BlockCarvable)itemBlock.getBlock();
-                Variation[] vars = block.getType().getVariants();
+                //Chisel.logger.info("index for "+GameRegistry.findUniqueIdentifierFor(block).toString()+" is "+block.getIndex());
                 this.quads = generateQuads((BlockResources)block.allSubBlocks()[stack.getMetadata()].getResources(), null);
+            }
+            else {
+                Chisel.logger.info("Not BlockCarvable?");
             }
         }
         else {

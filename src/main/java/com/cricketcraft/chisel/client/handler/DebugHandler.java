@@ -20,6 +20,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import org.lwjgl.opengl.GL11;
 
@@ -45,7 +46,7 @@ public class DebugHandler {
             return;
         }
         List<String> text = new ArrayList<String>();
-        text.add(EnumChatFormatting.BLUE+"Block: "+EnumChatFormatting.GREEN+state.getBlock().getUnlocalizedName());
+        text.add(EnumChatFormatting.BLUE+"Block: "+EnumChatFormatting.GREEN+ GameRegistry.findUniqueIdentifierFor(state.getBlock()).toString());
         text.add(EnumChatFormatting.BLUE+"Meta: "+EnumChatFormatting.GREEN+state.getBlock().getMetaFromState(state));
         text.add(EnumChatFormatting.BLUE+"State Class: "+EnumChatFormatting.GREEN+state.getClass().toString());
         if (state.getBlock() instanceof BlockCarvable){

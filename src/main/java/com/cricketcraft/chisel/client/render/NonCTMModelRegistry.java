@@ -12,6 +12,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.resources.model.WeightedBakedModel;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.HashMap;
@@ -40,6 +41,7 @@ public class NonCTMModelRegistry implements Reference{
                     Chisel.logger.info("Model above is weighted");
                 }
                 event.modelRegistry.putObject(entry.getKey(), entry.getValue());
+                ModelResourceLocation l = (ModelResourceLocation)entry.getKey();
                 //event.modelManager.getMissingModel()
             }
         }
@@ -63,17 +65,29 @@ public class NonCTMModelRegistry implements Reference{
         }
     }
 
-    public static void registerInventory(CarvableBlocks block, int amount){
-        for (int i=0;i<amount;i++) {
-            ModelResourceLocation location;
-            if (i==0){
-                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block.getName(), "inventory");
-            }
-            else {
-                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block.getName()+i, "inventory");
-            }
-            register(location, new ModelNonCTM());
+    public static void registerInventory(CarvableBlocks block, int index) {
+        ModelResourceLocation location;
+        if (index == 0) {
+            location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block.getName(), "inventory");
+        } else {
+            location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block.getName() + index, "inventory");
         }
+        register(location, new ModelNonCTM());
+//        if (index!=0) {
+//            if (block.getBlock(index)==null){
+//                throw new RuntimeException("Null block for index "+index+" and block "+block.getName());
+//            }
+//            if (Item.getItemFromBlock(block.getBlock(index))==null){
+//                throw new RuntimeException("null item");
+//            }
+////            Item item = Item.getItemFromBlock(block.getBlock(index));
+////            ModelLoader.setCustomModelResourceLocation(item, -1, location);
+////            int totalMeta = block.getVariants().length-(index*16);
+////            for (int i=0;i<totalMeta;i++) {
+////                ModelLoader.setCustomModelResourceLocation(item, i, location);
+////            }
+//        }
+
     }
 
 

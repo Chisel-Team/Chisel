@@ -95,7 +95,7 @@ public enum CarvableBlocks implements Reference{
             return new String[]{"brick_block#0"};
         }
     },
-    BRONZE("bronze"){
+    BRONZE("bronze", true){
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c){
             return new Variation[]{c.value("caution"), c.value("crate"), c.value("thermal"), c.value("adv"), c.value("egregious"), c.value("bolted")};
@@ -182,13 +182,13 @@ public enum CarvableBlocks implements Reference{
             entity.motionZ = entity.motionZ / velocity;
         }
     },
-    COPPER("copper"){
+    COPPER("copper", true){
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c){
             return new Variation[]{c.value("caution"), c.value("crate"), c.value("thermal"), c.value("adv"), c.value("egregious"), c.value("bolted")};
         }
     },
-    DIAMOND_BLOCK("diamond_block"){
+    DIAMOND_BLOCK("diamond_block", true){
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c){
             return new Variation[]{c.value("embossed"), c.value("gem"), c.value("cells"), c.value("space"), c.value("spaceblack"), c.value("simple"),
@@ -224,7 +224,7 @@ public enum CarvableBlocks implements Reference{
             return new String[]{"dirt#0", "dirt#1", "dirt#2"};
         }
     },
-    EMERALD_BLOCK("emerald"){
+    EMERALD_BLOCK("emerald", true){
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c){
             return new Variation[]{c.value("panel"), c.value("panelclassic"), c.value("smooth"), c.value("chunk"), c.value("goldborder"),
@@ -274,6 +274,15 @@ public enum CarvableBlocks implements Reference{
 
     public BlockCarvable getBlock(){
         return getBlockWithName(name);
+    }
+
+    public BlockCarvable getBlock(int index){
+        if (index==0){
+            return getBlockWithName(name);
+        }
+        else {
+            return getBlockWithName(name+index);
+        }
     }
 
     public CarvingVariationRepresentation[] getCarvingVariations(){
@@ -404,12 +413,14 @@ public enum CarvableBlocks implements Reference{
             Variation[][] var = splitVariationArray(b.getVariants());
             for (int i=0;i<var.length;i++) {
                 Variation[] vArray = var[i];
+                //Chisel.logger.info("index is "+i+" for "+b.getName());
                 BlockCarvable block = new BlockCarvable(b.getMaterial(), b,vArray.length, i, b.propertyVariation, b.isBeaconBase);
                 block.setHardness(b.getBlockHardness());
                 block.setLightOpacity(b.getOpacity());
                 if (block.VARIATION==null){
                     throw new RuntimeException("Variation is null");
                 }
+                int count = 0;
                 for (Variation v : b.getVariants()) {
                     if (isCTM(b.getName(), v.getValue())) {
                         CTMBlockResources.preGenerateBlockResources(block, v.getValue());
@@ -419,14 +430,15 @@ public enum CarvableBlocks implements Reference{
                         int type = BlockResources.preGenerateBlockResources(block, v.getValue());
                         NonCTMModelRegistry.register(b.getName(), v.getValue(), var.length, type);
                     }
+                    count++;
                 }
-                NonCTMModelRegistry.registerInventory(b, var.length);
                 if (i==0) {
                     blocks.put(b.getName(), block);
                 }
                 else {
                     blocks.put(b.getName()+i, block);
                 }
+                NonCTMModelRegistry.registerInventory(b, i);
             }
         }
         for (int i=0;i<blocks.size();i++){
@@ -435,10 +447,11 @@ public enum CarvableBlocks implements Reference{
             if (block.getIndex()==0) {
                 location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":"+block.getName(), "inventory");
             } else {
-                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":"+block.getName()+i, "inventory");
+                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":"+block.getName()+(i+1), "inventory");
             }
             GameRegistry.registerBlock(block, ItemChiselBlock.class, (String)blocks.keySet().toArray()[i]);
             for (Variation v : block.getType().getVariants()){
+                //Chisel.logger.info("Setting custom model resource location "+location+" for block "+blocks.keySet().toArray()[i]+" and meta "+Variation.metaFromVariation(block.getType(), v));
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Variation.metaFromVariation(block.getType(), v), location);
             }
         }
