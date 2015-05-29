@@ -121,9 +121,9 @@ public enum Features {
             andesite.carverHelper.addVariation("tile.andesite.4.desc", 4, "andesite/andesiteOrnate");
             andesite.carverHelper.addVariation("tile.andesite.5.desc", 5, "andesite/andesitePrism");
             andesite.carverHelper.addVariation("tile.andesite.6.desc", 6, "andesite/andesiteTiles");
+			andesite.carverHelper.registerAll(andesite, "andesite");
 			andesite.carverHelper.registerOre("blockAndesite");
 			andesite.carverHelper.registerOre("stoneAndesite");
-			andesite.carverHelper.registerAll(andesite, "andesite");
 		}
 
 		@Override
@@ -610,9 +610,9 @@ public enum Features {
             diorite.carverHelper.addVariation("tile.diorite.4.desc", 4, "diorite/dioriteOrnate");
             diorite.carverHelper.addVariation("tile.diorite.5.desc", 5, "diorite/dioritePrism");
             diorite.carverHelper.addVariation("tile.diorite.6.desc", 6, "diorite/dioriteTiles");
+			diorite.carverHelper.registerAll(diorite, "diorite");
 			diorite.carverHelper.registerOre("blockDiorite");
 			diorite.carverHelper.registerOre("stoneDiorite");
-			diorite.carverHelper.registerAll(diorite, "diorite");
 		}
 
 		@Override
@@ -1005,9 +1005,9 @@ public enum Features {
             granite.carverHelper.addVariation("tile.granite.4.desc", 4, "granite/graniteOrnate");
             granite.carverHelper.addVariation("tile.granite.5.desc", 5, "granite/granitePrism");
             granite.carverHelper.addVariation("tile.granite.6.desc", 6, "granite/graniteTiles");
+			granite.carverHelper.registerAll(granite, "granite");
 			granite.carverHelper.registerOre("blockGranite");
 			granite.carverHelper.registerOre("stoneGranite");
-			granite.carverHelper.registerAll(granite, "granite");
 		}
 
 		@Override
