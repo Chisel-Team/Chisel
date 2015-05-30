@@ -15,11 +15,13 @@ public class BlockCarvableGlow extends BlockCarvableColor {
 	private IIcon glowTexture;
 
 	private String glowTexturePath;
+	private boolean isColored;
 
-	public BlockCarvableGlow(String glowTexture) {
+	public BlockCarvableGlow(String glowTexture, boolean colorized) {
 		super();
 		setLightLevel(0.5f);
 		this.glowTexturePath = glowTexture;
+		this.isColored = colorized;
 	}
 
 	public BlockCarvableGlow(Material mat, String glowTexture) {
@@ -39,6 +41,10 @@ public class BlockCarvableGlow extends BlockCarvableColor {
 
 	@Override
 	public int getRenderType() {
-		return Chisel.renderGlowId;
+		if(this.isColored){
+			return Chisel.renderGlowId;
+		} else {
+			return Chisel.renderNoColorGlowId;
+		}
 	}
 }
