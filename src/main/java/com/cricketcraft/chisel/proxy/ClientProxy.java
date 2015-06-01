@@ -1,13 +1,11 @@
 package com.cricketcraft.chisel.proxy;
 
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
-import com.cricketcraft.chisel.block.tileentity.TileEntityDeChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
 import com.cricketcraft.chisel.client.player.PlayerSpecials;
 import com.cricketcraft.chisel.client.render.*;
 import com.cricketcraft.chisel.client.render.item.ItemChiselRenderer;
 import com.cricketcraft.chisel.client.render.tile.RenderAutoChisel;
-import com.cricketcraft.chisel.client.render.tile.RenderDeChisel;
 import com.cricketcraft.chisel.client.render.tile.RenderPresent;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
 import com.cricketcraft.chisel.entity.EntityChiselSnowman;
@@ -46,11 +44,9 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new RendererMultiLayer());
 
 		RenderAutoChisel rac = new RenderAutoChisel();
-		RenderDeChisel deChisel = new RenderDeChisel();
 		RenderingRegistry.registerBlockHandler(rac);
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.autoChisel), rac);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAutoChisel.class, rac);
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDeChisel.class, deChisel);
 
 		RenderPresent rp = new RenderPresent();
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.present), rp);
