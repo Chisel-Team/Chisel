@@ -25,9 +25,10 @@ public class ContainerAutoChisel extends Container {
 		addSlot(tileEntityAutoChisel, 1, 78, 52);
 		addSlot(tileEntityAutoChisel, 2, 103, 15);
 		addSlot(tileEntityAutoChisel, 3, 8, 62);
-		addSlot(tileEntityAutoChisel, 4, 151, 11);
-		addSlot(tileEntityAutoChisel, 5, 151, 31);
-		addSlot(tileEntityAutoChisel, 6, 151, 51);
+		addSlot(tileEntityAutoChisel, 4, 151, 5);
+		addSlot(tileEntityAutoChisel, 5, 151, 25);
+		addSlot(tileEntityAutoChisel, 6, 151, 45);
+		addSlot(tileEntityAutoChisel, 7, 151, 65);
 
 		bindPlayerInventory(player);
 	}

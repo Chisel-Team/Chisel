@@ -13,7 +13,7 @@ import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel.Upgrade;
 
 public class ItemUpgrade extends BaseItem {
 
-	public IIcon[] icons = new IIcon[3];
+	public IIcon[] icons = new IIcon[4];
 
 	public ItemUpgrade(String unlocalizedName) {
 		super();
@@ -40,7 +40,7 @@ public class ItemUpgrade extends BaseItem {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < Upgrade.values().length; i++) {
 			list.add(new ItemStack(item, 1, i));
 		}
 	}

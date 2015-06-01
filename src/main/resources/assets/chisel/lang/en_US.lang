@@ -26,10 +26,12 @@ item.smashingRock.desc=Right-Click to throw. This will turn Cobblestone into Gra
 item.upgrade_speed.name=Speed Upgrade
 item.upgrade_automation.name=Automation Upgrade
 item.upgrade_stack.name=Stack Upgrade
+item.upgrade_reversion.name=Reversion Upgrade
 
 item.upgrade_speed.desc=Increases the rate at which it works
 item.upgrade_automation.desc=Allows things to push in and out of the Auto Chisel
 item.upgrade_stack.desc=Allows it to manufacture stacks at a time
+item.upgrade_reversion.desc=Reverts the base slot to its original form
 
 # Block localizations
 # Have fun! ~zombiepig333
@@ -112,6 +114,10 @@ tile.granite.6.desc=Granite Small Tiles
 tile.chisel.autoChisel.name=Auto Chisel
 autochisel.slot.chisel.tooltip=Chisel Slot
 autochisel.slot.target.tooltip=Target Slot
+autochisel.slot.speed.tooltip=Speed Upgrade
+autochisel.slot.automation.tooltip=Automation Upgrade
+autochisel.slot.stack.tooltip=Stack Upgrade
+autochisel.slot.reversion.tooltip=Reversion Upgrade
 
 #Leaves
 tile.chisel.leaves.name=Leaf
