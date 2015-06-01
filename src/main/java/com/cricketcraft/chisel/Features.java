@@ -573,6 +573,14 @@ public enum Features {
 		}
 	},
 
+	DECHISEL{
+		@Override
+		void addBlocks(){
+			BlockDeChisel deChisel = new BlockDeChisel();
+			GameRegistry.registerBlock(deChisel, deChisel.getUnlocalizedName());
+		}
+	},
+
 	DIAMOND_BLOCK {
 
 		@Override
