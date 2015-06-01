@@ -11,7 +11,6 @@ import cpw.mods.fml.common.registry.GameRegistry.ObjectHolder;
 public final class ChiselBlocks {
 
 	public static final Block autoChisel = null;
-	public static final BlockDeChisel deChisel = null;
 	public static final BlockCarvable antiBlock = null;
 	public static final BlockCarvable marble = null;
 	public static final BlockCarvable marble_pillar = null;
