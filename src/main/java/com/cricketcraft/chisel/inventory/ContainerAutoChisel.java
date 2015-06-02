@@ -25,10 +25,10 @@ public class ContainerAutoChisel extends Container {
 		addSlot(tileEntityAutoChisel, 1, 78, 52);
 		addSlot(tileEntityAutoChisel, 2, 103, 15);
 		addSlot(tileEntityAutoChisel, 3, 8, 62);
-		addSlot(tileEntityAutoChisel, 4, 151, 5);
-		addSlot(tileEntityAutoChisel, 5, 151, 25);
-		addSlot(tileEntityAutoChisel, 6, 151, 45);
-		addSlot(tileEntityAutoChisel, 7, 151, 65);
+		addSlot(tileEntityAutoChisel, 4, 152, 5);
+		addSlot(tileEntityAutoChisel, 5, 152, 25);
+		addSlot(tileEntityAutoChisel, 6, 152, 45);
+		addSlot(tileEntityAutoChisel, 7, 152, 65);
 
 		bindPlayerInventory(player);
 	}
@@ -70,12 +70,12 @@ public class ContainerAutoChisel extends Container {
 			itemStack = itemStack1.copy();
 
 			// if we are in the auto chisel
-			if (slotNumber <= 6) {
-				if (!this.mergeItemStack(itemStack1, 7, 42, false)) {
+			if (slotNumber <= 7) {
+				if (!this.mergeItemStack(itemStack1, 8, 42, false)) {
 					return null;
 				}
 				// otherwise just put it in one of the machine slots
-			} else if (!this.mergeItemStack(itemStack1, 0, 7, false)) {
+			} else if (!this.mergeItemStack(itemStack1, 0, 8, false)) {
 				return null;
 			}
 
