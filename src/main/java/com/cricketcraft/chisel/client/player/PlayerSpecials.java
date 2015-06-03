@@ -147,7 +147,7 @@ public class PlayerSpecials {
 	}
 
     private boolean nameIsGood(Entity entity){
-        if(EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket") || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("TheCricket26"))
+        if(EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket") || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("TheCricket26") || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket"))
             return true;
         return false;
     }
