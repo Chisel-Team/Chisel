@@ -17,6 +17,11 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.ctmlib.CTM;
+import com.cricketcraft.ctmlib.ISubmapManager;
+import com.cricketcraft.ctmlib.RenderBlocksCTM;
+import com.cricketcraft.ctmlib.RenderBlocksColumn;
+import com.cricketcraft.ctmlib.TextureSubmap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

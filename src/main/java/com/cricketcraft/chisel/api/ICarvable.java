@@ -5,7 +5,7 @@ import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.api.rendering.ISubmapManager;
+import com.cricketcraft.ctmlib.ISubmapManager;
 
 /**
  * To be implemented on blocks that can be chiseled and need advanced metadata to variation mapping. Currently not very usable without internal classes.

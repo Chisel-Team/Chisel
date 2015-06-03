@@ -17,8 +17,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.cricketcraft.chisel.api.ChiselAPIProps;
 import com.cricketcraft.chisel.api.FMPIMC;
-import com.cricketcraft.chisel.api.rendering.ISubmapManager;
 import com.cricketcraft.chisel.api.rendering.TextureType;
+import com.cricketcraft.ctmlib.ISubmapManager;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
