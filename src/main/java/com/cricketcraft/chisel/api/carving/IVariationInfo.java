@@ -1,7 +1,7 @@
 package com.cricketcraft.chisel.api.carving;
 
-import com.cricketcraft.chisel.api.rendering.ISubmapManager;
 import com.cricketcraft.chisel.api.rendering.TextureType;
+import com.cricketcraft.ctmlib.ISubmapManager;
 
 public interface IVariationInfo {
 

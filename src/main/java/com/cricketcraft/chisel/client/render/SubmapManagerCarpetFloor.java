@@ -6,8 +6,8 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import com.cricketcraft.chisel.api.rendering.RenderBlocksCTM;
-import com.cricketcraft.chisel.api.rendering.TextureSubmap;
+import com.cricketcraft.ctmlib.RenderBlocksCTM;
+import com.cricketcraft.ctmlib.TextureSubmap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
