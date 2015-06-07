@@ -106,6 +106,7 @@ public class PlayerSpecials {
 		renderMap.putAll(UUID.fromString("5399b615-3440-4c66-939d-ab1375952ac3"), Lists.newArrayList(backChisel, translucent)); // Drullkus
 
 		renderMap.put(UUID.fromString("671516b1-4fb3-4c03-aa7c-9c88cfab3ae8"), new RenderHolstered(new ItemStack(ChiselItems.diamondChisel))); // tterrag
+		renderMap.put(UUID.fromString("ad18f501-08fa-4e7e-b324-86750009106e"), new RenderHolstered(new ItemStack(ChiselItems.chisel)));//minecreatr
 
 		MinecraftForge.EVENT_BUS.register(this);
 	}
@@ -147,7 +148,9 @@ public class PlayerSpecials {
 	}
 
     private boolean nameIsGood(Entity entity){
-        if(EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket") || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("TheCricket26") || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket"))
+        if(EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket")
+				|| EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Drullkus")
+				|| EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("minecreatr"))
             return true;
         return false;
     }
