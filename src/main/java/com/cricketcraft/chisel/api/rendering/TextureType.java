@@ -401,12 +401,12 @@ public enum TextureType {
 	}
 	
 	@SideOnly(Side.CLIENT)
-	private abstract static class SubmapManagerBase implements ISubmapManager {
+	public abstract static class AbstractSubmapManager implements ISubmapManager {
 		protected final TextureType type;
 		protected ICarvingVariation variation;
 		protected Object cachedObject;
 		
-		private SubmapManagerBase(TextureType type, ICarvingVariation variation) {
+		private AbstractSubmapManager(TextureType type, ICarvingVariation variation) {
 			this.type = type;
 			this.variation = variation;
 		}
@@ -436,10 +436,14 @@ public enum TextureType {
 		@Override
 		public void postRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {			
 		}
+		
+		public Object getCachedObject() {
+			return cachedObject;
+		}
 	}
 
 	@SideOnly(Side.CLIENT)
-	private static class SubmapManagerDefault extends SubmapManagerBase {
+	private static class SubmapManagerDefault extends AbstractSubmapManager {
 
 		private String texturePath;
 		
@@ -455,7 +459,7 @@ public enum TextureType {
 	}
 	
 	@SideOnly(Side.CLIENT)
-	private static class SubmapManagerExistingIcon extends SubmapManagerBase {
+	private static class SubmapManagerExistingIcon extends AbstractSubmapManager {
 		
 		private Block block;
 		private int meta;
