@@ -4,17 +4,17 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.event.TextureStitchEvent.Post;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Triple;
 
 import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.rendering.TextureType;
 import com.cricketcraft.chisel.api.rendering.TextureType.AbstractSubmapManager;
-import com.cricketcraft.ctmlib.CTM;
 import com.cricketcraft.ctmlib.RenderBlocksCTM;
-import com.cricketcraft.ctmlib.RendererCTM;
 import com.cricketcraft.ctmlib.TextureSubmap;
 
 import cpw.mods.fml.relauncher.Side;
@@ -22,6 +22,52 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class SubmapManagerRCTM extends SubmapManagerBase {
 
+	@SideOnly(Side.CLIENT)
+	private class RenderBlocksRCTM extends RenderBlocksCTM {
+
+		@Override
+		public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
+			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.WEST.ordinal());
+			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.WEST.ordinal());
+			super.renderFaceXNeg(block, x, y, z, icon);
+		}
+
+		@Override
+		public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon) {
+			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.EAST.ordinal());
+			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.EAST.ordinal());
+			super.renderFaceXPos(block, x, y, z, icon);
+		}
+
+		@Override
+		public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon) {
+			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.DOWN.ordinal());
+			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.DOWN.ordinal());
+			super.renderFaceYNeg(block, x, y, z, icon);
+		}
+
+		@Override
+		public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon) {
+			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.UP.ordinal());
+			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.UP.ordinal());
+			super.renderFaceYPos(block, x, y, z, icon);
+		}
+
+		@Override
+		public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon) {
+			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.NORTH.ordinal());
+			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.UP.ordinal());
+			super.renderFaceZNeg(block, x, y, z, icon);
+		}
+
+		@Override
+		public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon) {
+			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.SOUTH.ordinal());
+			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.SOUTH.ordinal());
+			super.renderFaceZPos(block, x, y, z, icon);
+		}
+	}
+	
 	private class Submap extends TextureSubmap {
 
 		private TextureSubmap[][] submap;
@@ -44,7 +90,7 @@ public class SubmapManagerRCTM extends SubmapManagerBase {
 	}
 
 	@SideOnly(Side.CLIENT)
-	private static RenderBlocksCTM rb;
+	private RenderBlocksCTM rb;
 
 	private TextureSubmap submap, smallSubmap;
 	private int size;
@@ -71,12 +117,9 @@ public class SubmapManagerRCTM extends SubmapManagerBase {
 	@Override
 	public RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		if (rb == null) {
-			rb = new RenderBlocksCTM();
+			rb = new RenderBlocksRCTM();
 		}
 		rb.setRenderBoundsFromBlock(block);
-		// TODO figure out how to get side context...
-		rb.submap = TextureType.getRIcon(rType, submap, RendererCTM.x, RendererCTM.y, RendererCTM.z, side);
-		rb.submapSmall = null; // TODO
 		return rb;
 	}
 
