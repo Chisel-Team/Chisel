@@ -17,7 +17,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -62,11 +61,11 @@ public class ItemChisel extends Item implements IChiselItem {
 	{
 		switch (type) {
 			case DIAMOND:
-				if (repairMaterial.getItem().equals(Items.diamond)) return true;
+				return repairMaterial.getItem().equals(Items.diamond);
 			case IRON:
-				if (repairMaterial.getItem().equals(Items.iron_ingot)) return true;
+				return repairMaterial.getItem().equals(Items.iron_ingot);
 			case OBSIDIAN:
-				if (repairMaterial.getItem().equals(ItemBlock.getItemFromBlock(Blocks.obsidian))) return true;
+				return repairMaterial.getItem().equals(Item.getItemFromBlock(Blocks.obsidian));
 		}
 
 		return false;
