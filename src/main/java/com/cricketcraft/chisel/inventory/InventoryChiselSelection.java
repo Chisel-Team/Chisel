@@ -128,8 +128,10 @@ public class InventoryChiselSelection implements IInventory {
 
 		activeVariations = 0;
 		while (activeVariations < normalSlots && activeVariations < list.size()) {
-			inventory[activeVariations] = list.get(activeVariations);
-			activeVariations++;
+			if(Block.blockRegistry.getNameForObject(list.get(activeVariations)) != null) {
+				inventory[activeVariations] = list.get(activeVariations);
+				activeVariations++;
+			}
 		}
 
 		container.onChiselSlotChanged();
