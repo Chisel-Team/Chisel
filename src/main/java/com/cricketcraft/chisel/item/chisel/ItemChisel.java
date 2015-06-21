@@ -46,14 +46,21 @@ public class ItemChisel extends Item implements IChiselItem {
 	public ItemChisel(ChiselType type) {
 		super();
 		this.type = type;
-		if (Configurations.allowChiselDamage) {
-			this.setMaxDamage(type.maxDamage);
-		} else {
-			this.setMaxDamage(0);
-		}
 		setMaxStackSize(1);
 		setTextureName(Chisel.MOD_ID + ":chisel_" + type.name().toLowerCase());
 		MinecraftForge.EVENT_BUS.register(this);
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack stack){
+		if(Configurations.allowChiselDamage)
+			return type.maxDamage;
+		return 0;
+	}
+
+	@Override
+	public boolean isDamageable(){
+		return Configurations.allowChiselDamage;
 	}
 
 	@Override
