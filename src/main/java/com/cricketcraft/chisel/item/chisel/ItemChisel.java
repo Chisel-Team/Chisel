@@ -14,7 +14,10 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -44,17 +47,29 @@ public class ItemChisel extends Item implements IChiselItem {
 	public ItemChisel(ChiselType type) {
 		super();
 		this.type = type;
+		if (Configurations.allowChiselDamage) {
+			this.setMaxDamage(type.maxDamage);
+		} else {
+			this.setMaxDamage(0);
+		}
 		setMaxStackSize(1);
 		setTextureName(Chisel.MOD_ID + ":chisel_" + type.name().toLowerCase());
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	@Override
-	public int getMaxDamage(ItemStack stack) {
-		if (Configurations.allowChiselDamage) {
-			return type.maxDamage;
+	public boolean getIsRepairable(ItemStack damagedItem, ItemStack repairMaterial)
+	{
+		switch (type) {
+			case DIAMOND:
+				if (repairMaterial.getItem().equals(Items.diamond)) return true;
+			case IRON:
+				if (repairMaterial.getItem().equals(Items.iron_ingot)) return true;
+			case OBSIDIAN:
+				if (repairMaterial.getItem().equals(ItemBlock.getItemFromBlock(Blocks.obsidian))) return true;
 		}
-		return 0;
+
+		return false;
 	}
 
 	@Override
