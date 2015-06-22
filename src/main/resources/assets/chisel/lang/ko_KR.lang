@@ -1,10 +1,13 @@
 # 핵심 한글화 (Key localizations)
 
+# 상태 한글화 (Stat localizations)
+stat.blockChiseled=가공된 블록
+
 # 엔티티 한글화 (Entity localizations)
 entity.chisel.snowman.name=눈 골렘
 
 # 아이템 한글화 (Item localizations)
-item.chisel.name=끌
+item.chisel.chisel_iron.name=끌
 
 item.chisel.chisel.desc.gui=우클릭으로 GUI 열기
 item.chisel.chisel.desc.lc1=왼클릭으로 블록을 순차적으로 모양을 변경
@@ -23,10 +26,12 @@ item.smashingRock.desc=우클릭으로 던지기. 조약돌을 자갈로 자갈�
 item.upgrade_speed.name=속도 업그레이드
 item.upgrade_automation.name=자동화 업그레이드
 item.upgrade_stack.name=중첩 업그레이드
+item.upgrade_reversion.name=복원 업그레이드
 
 item.upgrade_speed.desc=작업 속도를 증가시킵니다.
 item.upgrade_automation.desc=블록들을 자동으로 넣고 뺄 수 있게 합니다.
 item.upgrade_stack.desc=한 번에 작업하는 블록 양을 늘립니다.
+item.upgrade_reversion.desc=슬롯에 있는 블록을 기본이 되는 블록으로 변환합니다.
 
 # 블록 한글화 (Block localizations)
 # Have fun! ~zombiepig333
@@ -109,6 +114,10 @@ tile.granite.6.desc=작은 화강암 타일
 tile.chisel.autoChisel.name=자동화 끌
 autochisel.slot.chisel.tooltip=끌 넣는 곳
 autochisel.slot.target.tooltip=견본 넣는 곳
+autochisel.slot.speed.tooltip=속도 업그레이드
+autochisel.slot.automation.tooltip=자동화 업그레이드
+autochisel.slot.stack.tooltip=중첩 업그레이드
+autochisel.slot.reversion.tooltip=복원 업그레이드
 
 # 나뭇잎 (Leaves)
 tile.chisel.leaves.name=나뭇잎
@@ -131,21 +140,21 @@ tile.voidstone.5.desc=금속 테두리의 공허석
 tile.voidstone.6.desc=눈 문양의 공허석
 tile.voidstone.7.desc=모서리를 다듬은 공허석
 tile.chisel.voidstoneRunic.name=룬이 새겨진 공허석
-tile.voidstoneRunic.0.desc=공허석 - 주황색 룬
-tile.voidstoneRunic.1.desc=공허석 - 자홍색 룬
-tile.voidstoneRunic.2.desc=공허석 - 하늘색 룬
-tile.voidstoneRunic.3.desc=공허석 - 노란색 룬
-tile.voidstoneRunic.4.desc=공허석 - 연두색 룬
-tile.voidstoneRunic.5.desc=공허석 - 분홍색 룬
-tile.voidstoneRunic.6.desc=공허석 - 회색 룬
-tile.voidstoneRunic.7.desc=공허석 - 밝은 회색 룬
-tile.voidstoneRunic.8.desc=공허석 - 청록색 룬
-tile.voidstoneRunic.9.desc=공허석 - 보라색 룬
-tile.voidstoneRunic.10.desc=공허석 - 파란색 룬
-tile.voidstoneRunic.11.desc=공허석 - 갈색 룬
-tile.voidstoneRunic.12.desc=공허석 - 초록색 룬
-tile.voidstoneRunic.13.desc=공허석 - 빨간색 룬
-tile.voidstoneRunic.14.desc=공허석 - 검은색 룬
+tile.voidstoneRunic.orange.desc=공허석 - 주황색 룬
+tile.voidstoneRunic.magenta.desc=공허석 - 자홍색 룬
+tile.voidstoneRunic.lightblue.desc=공허석 - 하늘색 룬
+tile.voidstoneRunic.yellow.desc=공허석 - 노란색 룬
+tile.voidstoneRunic.lime.desc=공허석 - 연두색 룬
+tile.voidstoneRunic.pink.desc=공허석 - 분홍색 룬
+tile.voidstoneRunic.gray.desc=공허석 - 회색 룬
+tile.voidstoneRunic.lightgray.desc=공허석 - 밝은 회색 룬
+tile.voidstoneRunic.cyan.desc=공허석 - 청록색 룬
+tile.voidstoneRunic.purple.desc=공허석 - 보라색 룬
+tile.voidstoneRunic.blue.desc=공허석 - 파란색 룬
+tile.voidstoneRunic.brown.desc=공허석 - 갈색 룬
+tile.voidstoneRunic.green.desc=공허석 - 초록색 룬
+tile.voidstoneRunic.red.desc=공허석 - 빨간색 룬
+tile.voidstoneRunic.black.desc=공허석 - 검은색 룬
 
 # 공허석 기둥 (Void Stone Pillars)
 tile.chisel.voidstonePillar.name=공허석 기둥
@@ -230,6 +239,7 @@ tile.futura.0.desc=빛나는 화면과 금속 테두리
 tile.futura.1.desc=빛나는 화면과 청록색 테두리
 tile.futura.2.desc=응용 에너지학 네온 회선
 tile.futura.3.desc=팝타르 무지개
+#tile.futura.4.desc=Purple Applie Labyrinthic Neon Lines
 tile.futuraCircuit.black.desc=검은색
 tile.futuraCircuit.blue.desc=파란색
 tile.futuraCircuit.brown.desc=갈색
@@ -651,6 +661,11 @@ tile.glass2.0.desc=비대칭의 납이 섞인 유리
 
 # 사암 (Sandstone)
 tile.chisel.sandstone.name=사암
+
+tile.sandstone.0.desc=문양있는 사암
+tile.sandstone.1.desc=사암 조약돌
+tile.sandstone.2.desc=크리퍼 문양 사암
+
 tile.sandstone.3.desc=마모된 사암
 tile.sandstone.4.desc=사암 기둥
 tile.sandstone.5.desc=사암 기둥 갓돌
