@@ -9,6 +9,7 @@ import static com.cricketcraft.chisel.init.ChiselBlocks.pumpkin;
 import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlass;
 import static com.cricketcraft.chisel.init.ChiselBlocks.stainedGlassPane;
 import static com.cricketcraft.chisel.init.ChiselBlocks.torches;
+import static com.cricketcraft.chisel.utils.General.featureColors;
 import static com.cricketcraft.chisel.utils.General.sGNames;
 
 import java.util.List;
@@ -891,10 +892,10 @@ public enum Features {
 					stainedGlass[glassId] = (BlockCarvableGlass) new BlockCarvableGlass().setStained(true).setHardness(0.3F).setStepSound(Block.soundTypeGlass).setBlockName("Stained Glass");
 					stainedGlass[glassId].carverHelper.registerBlock(stainedGlass[glassId], blockName);
 				}
-				stainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " bubble glass", glassPrefix, texName + "bubble");
-				stainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " glass panel", glassPrefix + 1, texName + "panel");
-				stainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " fancy glass panel", glassPrefix + 2, texName + "panel-fancy");
-				stainedGlass[glassId].carverHelper.addVariation(sGNames[i] + " borderless glass", glassPrefix + 3, texName + "transparent");
+				stainedGlass[glassId].carverHelper.addVariation(featureColors[i] + ".bubble.desc", glassPrefix, texName + "bubble");
+				stainedGlass[glassId].carverHelper.addVariation(featureColors[i] + ".glass.desc", glassPrefix + 1, texName + "panel");
+				stainedGlass[glassId].carverHelper.addVariation(featureColors[i] + ".glass.fancy.desc", glassPrefix + 2, texName + "panel-fancy");
+				stainedGlass[glassId].carverHelper.addVariation(featureColors[i] + ".glass.noborder.desc", glassPrefix + 3, texName + "transparent");
 				OreDictionary.registerOre(oreName, new ItemStack(Blocks.stained_glass, 1, i));
 				Carving.chisel.registerOre(blockName, oreName);
 				for (IVariationInfo info : stainedGlass[glassId].carverHelper.infoList) {
@@ -922,12 +923,12 @@ public enum Features {
 							.setBlockName("Stained Glass Pane").setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 					stainedGlassPane[glassId].carverHelper.registerBlock(stainedGlassPane[glassId], blockName);
 				}
-				stainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " bubble glass", glassPrefix, texName + "bubble");
-				stainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " glass panel", glassPrefix + 1, texName + "panel");
-				stainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " fancy glass panel", glassPrefix + 2, texName + "panel-fancy");
-				stainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " borderless glass", glassPrefix + 3, texName + "transparent");
-				stainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " quadrant glass", glassPrefix + 4, texName + "quad");
-				stainedGlassPane[glassId].carverHelper.addVariation(sGNames[i] + " fancy quadrant glass", glassPrefix + 5, texName + "quad-fancy");
+				stainedGlassPane[glassId].carverHelper.addVariation(featureColors[i] + ".pane.bubble.desc", glassPrefix, texName + "bubble");
+				stainedGlassPane[glassId].carverHelper.addVariation(featureColors[i] + ".pane.glass.desc", glassPrefix + 1, texName + "panel");
+				stainedGlassPane[glassId].carverHelper.addVariation(featureColors[i] + ".pane.glass.fancy.desc", glassPrefix + 2, texName + "panel-fancy");
+				stainedGlassPane[glassId].carverHelper.addVariation(featureColors[i] + ".pane.glass.noborder.desc", glassPrefix + 3, texName + "transparent");
+				stainedGlassPane[glassId].carverHelper.addVariation(featureColors[i] + ".pane.glass.quadrant.desc", glassPrefix + 4, texName + "quad");
+				stainedGlassPane[glassId].carverHelper.addVariation(featureColors[i] + ".pane.glass.fancyquadrant.desc", glassPrefix + 5, texName + "quad-fancy");
 				OreDictionary.registerOre(oreName, new ItemStack(Blocks.stained_glass_pane, 1, i));
 				Carving.chisel.registerOre(blockName, oreName);
 				for (IVariationInfo info : stainedGlassPane[glassId].carverHelper.infoList) {
@@ -2803,29 +2804,27 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
-			String[] plank_ucnames = { "Oak", "Spruce", "Birch", "Jungle", "Acacia", "Dark Oak" };
 			for (int i = 0; i < plank_names.length; i++) {
 				String n = plank_names[i];
-				String u = plank_ucnames[i];
 				final String name = n.replace('-', '_') + "_planks";
 
 				planks[i] = (BlockCarvable) (new BlockCarvable(Material.wood)).setCreativeTab(ChiselTabs.tabWoodChiselBlocks).setHardness(2.0F).setResistance(5.0F).setStepSound(Block.soundTypeWood);
 
-				planks[i].carverHelper.addVariation("Smooth " + n + " wood planks", 1, "planks-" + n + "/clean");
-				planks[i].carverHelper.addVariation("Short " + n + " wood planks", 2, "planks-" + n + "/short");
-				planks[i].carverHelper.addVariation("Fancy " + n + " wood plank arrangement", 6, "planks-" + n + "/fancy");
-				planks[i].carverHelper.addVariation(u + " wood panel", 8, "planks-" + n + "/panel-nails");
-				planks[i].carverHelper.addVariation(u + " wood double slab", 9, "planks-" + n + "/double");
-				planks[i].carverHelper.addVariation(u + " wood crate", 10, "planks-" + n + "/crate");
-				planks[i].carverHelper.addVariation("Fancy " + n + " wood crate", 11, "planks-" + n + "/crate-fancy");
-				planks[i].carverHelper.addVariation("Large long " + n + " wood planks", 13, "planks-" + n + "/large");
-				planks[i].carverHelper.addVariation("Vertical " + n + " wood planks", 3, "planks-" + n + "/vertical");
-				planks[i].carverHelper.addVariation("Vertical uneven " + n + " wood planks", 4, "planks-" + n + "/vertical-uneven");
-				planks[i].carverHelper.addVariation(u + " wood parquet", 5, "planks-" + n + "/parquet");
-				planks[i].carverHelper.addVariation(u + " wood plank blinds", 7, "planks-" + n + "/blinds");
-				planks[i].carverHelper.addVariation(u + " wood scaffold", 12, "planks-" + n + "/crateex");
-				planks[i].carverHelper.addVariation(u + " wood planks in disarray", 14, "planks-" + n + "/chaotic-hor");
-				planks[i].carverHelper.addVariation("Vertical " + n + " wood planks in disarray", 15, "planks-" + n + "/chaotic");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.1.desc", 1, "planks-" + n + "/clean");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.2.desc", 2, "planks-" + n + "/short");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.6.desc", 6, "planks-" + n + "/fancy");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.8.desc", 8, "planks-" + n + "/panel-nails");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.9.desc", 9, "planks-" + n + "/double");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.10.desc", 10, "planks-" + n + "/crate");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.11.desc", 11, "planks-" + n + "/crate-fancy");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.13.desc", 13, "planks-" + n + "/large");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.3.desc", 3, "planks-" + n + "/vertical");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.4.desc", 4, "planks-" + n + "/vertical-uneven");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.5.desc", 5, "planks-" + n + "/parquet");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.7.desc", 7, "planks-" + n + "/blinds");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.12.desc", 12, "planks-" + n + "/crateex");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.14.desc", 14, "planks-" + n + "/chaotic-hor");
+				planks[i].carverHelper.addVariation("tile." + n + ".planks.15.desc", 15, "planks-" + n + "/chaotic");
 				planks[i].carverHelper.registerAll(planks[i], name);
 				Carving.chisel.addVariation(name, Blocks.planks, i, 0);
 				planks[i].setHarvestLevel("axe", 0);
