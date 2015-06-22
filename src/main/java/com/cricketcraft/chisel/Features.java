@@ -62,9 +62,9 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartz"), 0, 0);
-			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzPillar"), 0, 1);
-			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzChiseled"), 0, 2);
+			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.appliedenergistics2.BlockQuartz"), 0, 0);
+			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.appliedenergistics2.BlockQuartzPillar"), 0, 1);
+			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.appliedenergistics2.BlockQuartzChiseled"), 0, 2);
 			Carving.chisel.registerOre("AECertusQuartz", "AECertusQuartz");
 		}
 	},
@@ -73,9 +73,9 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 1, 0);
-			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 2, 1);
-			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 3, 2);
+			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.appliedenergistics2.BlockSkyStone"), 1, 0);
+			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.appliedenergistics2.BlockSkyStone"), 2, 1);
+			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.appliedenergistics2.BlockSkyStone"), 3, 2);
 			Carving.chisel.registerOre("AESkyStone", "AESkyStone");
 		}
 	},
