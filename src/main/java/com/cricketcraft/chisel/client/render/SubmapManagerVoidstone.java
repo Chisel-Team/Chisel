@@ -85,6 +85,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		if (rb == null) {
 			rb = new RenderBlocksVoidstone();
