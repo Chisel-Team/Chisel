@@ -1,7 +1,5 @@
 package com.cricketcraft.chisel.client.render;
 
-import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.api.rendering.RenderBlocksCTM;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -14,6 +12,7 @@ import com.cricketcraft.chisel.block.BlockCarvableGlow;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.utils.GeneralClient;
 import com.cricketcraft.ctmlib.Drawing;
+import com.cricketcraft.ctmlib.RenderBlocksCTM;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
