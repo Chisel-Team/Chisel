@@ -119,6 +119,25 @@ autochisel.slot.automation.tooltip=Automation Upgrade
 autochisel.slot.stack.tooltip=Stack Upgrade
 autochisel.slot.reversion.tooltip=Reversion Upgrade
 
+#Beacon
+tile.chisel.beacon.name=Beacon
+tile.beacon.black.desc=Black Beamed Beacon
+tile.beacon.blue.desc=Blue Beamed Beacon
+tile.beacon.brown.desc=Brown Beamed Beacon
+tile.beacon.cyan.desc=Cyan Beamed Beacon
+tile.beacon.green.desc=Green Beamed Beacon
+tile.beacon.lightBlue.desc=Light Blue Beamed Beacon
+tile.beacon.silver.desc=Light Gray Beamed Beacon
+tile.beacon.lime.desc=Lime Beamed Beacon
+tile.beacon.magenta.desc=Magenta Beamed Beacon
+tile.beacon.orange.desc=Orange Beamed Beacon
+tile.beacon.pink.desc=Pink Beamed Beacon
+tile.beacon.purple.desc=Purple Beamed Beacon
+tile.beacon.red.desc=Red Beamed Beacon
+tile.beacon.white.desc=White Beamed Beacon
+tile.beacon.yellow.desc=Yellow Beamed Beacon
+tile.beacon.gray.desc=Gray Beamed Beacon
+
 #Leaves
 tile.chisel.leaves.name=Leaf
 tile.leaves.6.desc=Dead Leaves
