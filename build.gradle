@@ -43,6 +43,12 @@ minecraft {
     replace "@VERSION@", project.version
 }
 
+configurations {
+    shade
+    compile.extendsFrom shade
+    compile.extendsFrom exportedCompile
+}
+
 repositories {
 	maven {
 		name 'Chicken Bones Repo'
@@ -53,6 +59,11 @@ repositories {
 		name 'Prof Mobius Repo'
 		url "http://mobiusstrip.eu/maven"
 	}
+    
+    maven {
+        name 'Chisel Repo'
+        url "http://coloredlightscore.us.to/maven/chisel-2"
+    }
 }
 
 dependencies {
@@ -62,6 +73,10 @@ dependencies {
 	compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
     compile "codechicken:ForgeMultipart:${minecraft_version}-${fmp_version}:dev"
     compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.505:dev"
+    
+    shade ("com.cricketcraft.ctmlib:CTMLib:${ctmlib_version}") {
+        transitive = false
+    }
 }
 
 processResources
@@ -83,6 +98,14 @@ processResources
                 exclude 'mcmod.info'
             }
         }
+        
+jar {
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            exclude 'META-INF', 'META-INF/**', '*.info'
+        }
+    }
+}
 
 // Create deobf dev jars
 task deobfJar(type: Jar) {
