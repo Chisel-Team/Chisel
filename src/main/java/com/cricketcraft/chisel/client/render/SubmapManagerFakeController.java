@@ -5,14 +5,14 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import com.cricketcraft.chisel.api.rendering.CTM;
-import com.cricketcraft.chisel.api.rendering.TextureSubmap;
 import com.cricketcraft.chisel.init.ChiselBlocks;
+import com.cricketcraft.ctmlib.CTM;
+import com.cricketcraft.ctmlib.TextureSubmap;
+
+import static com.cricketcraft.ctmlib.Dir.*;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-import static com.cricketcraft.chisel.api.rendering.Dir.*;
 
 public class SubmapManagerFakeController extends SubmapManagerBase {
 
