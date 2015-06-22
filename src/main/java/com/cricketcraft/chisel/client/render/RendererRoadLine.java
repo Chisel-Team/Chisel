@@ -9,7 +9,7 @@ import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.block.BlockRoadLine;
-import com.cricketcraft.chisel.utils.Drawing;
+import com.cricketcraft.ctmlib.Drawing;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;

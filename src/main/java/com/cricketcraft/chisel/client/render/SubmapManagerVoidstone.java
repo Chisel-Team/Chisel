@@ -1,8 +1,5 @@
 package com.cricketcraft.chisel.client.render;
 
-import com.cricketcraft.chisel.api.rendering.TextureType;
-import com.cricketcraft.chisel.api.rendering.TextureSubmap;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -10,6 +7,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import com.cricketcraft.chisel.api.rendering.TextureType;
+import com.cricketcraft.ctmlib.TextureSubmap;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

@@ -2,8 +2,8 @@ package com.cricketcraft.chisel.api.carving;
 
 import net.minecraft.util.StatCollector;
 
-import com.cricketcraft.chisel.api.rendering.ISubmapManager;
 import com.cricketcraft.chisel.api.rendering.TextureType;
+import com.cricketcraft.ctmlib.ISubmapManager;
 
 public class VariationInfoBase implements IVariationInfo {
 

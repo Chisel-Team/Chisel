@@ -1,13 +1,15 @@
 package com.cricketcraft.chisel.client.render;
 
 import com.cricketcraft.chisel.block.BlockMultiLayerBase;
-import com.cricketcraft.chisel.utils.Drawing;
+import com.cricketcraft.ctmlib.Drawing;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
+
 import org.lwjgl.opengl.GL11;
 
 public class RendererMultiLayer implements ISimpleBlockRenderingHandler {

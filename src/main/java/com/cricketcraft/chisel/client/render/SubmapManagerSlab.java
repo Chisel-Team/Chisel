@@ -7,9 +7,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.cricketcraft.chisel.api.rendering.ISubmapManager;
-import com.cricketcraft.chisel.api.rendering.RenderBlocksCTM;
-import com.cricketcraft.chisel.api.rendering.TextureSubmap;
+import com.cricketcraft.ctmlib.ISubmapManager;
+import com.cricketcraft.ctmlib.RenderBlocksCTM;
+import com.cricketcraft.ctmlib.TextureSubmap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
