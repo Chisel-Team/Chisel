@@ -1,5 +1,7 @@
 package com.cricketcraft.chisel.client.render;
 
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.api.rendering.RenderBlocksCTM;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
@@ -37,10 +39,32 @@ public class RendererLayeredGlow implements ISimpleBlockRenderingHandler {
 	@Override
 	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
 		Tessellator.instance.setColorOpaque_I(Configurations.configColors[world.getBlockMetadata(x, y, z)]);
-		Tessellator.instance.setBrightness(0xF000F0);		
-		Drawing.renderAllFaces(renderer, block, x, y, z, ((BlockCarvableGlow) block).getGlowTexture());
+		Tessellator.instance.setBrightness(0xF000F0);
+		BlockCarvableGlow glow = (BlockCarvableGlow) block;
+		if(glow.hasSubmapManager()){
+			renderer.overrideBlockTexture = glow.getGlowTexture();
+			getContext(renderer, glow, world).renderBlockAllFaces(glow, x, y, z);
+		} else {
+			Drawing.renderAllFaces(renderer, block, x, y, z, ((BlockCarvableGlow) block).getGlowTexture());
+		}
 		renderer.renderStandardBlock(block, x, y, z);
 		return true;
+	}
+
+	private RenderBlocks getContext(RenderBlocks rendererOld, BlockCarvableGlow block, IBlockAccess world) {
+		if (!rendererOld.hasOverrideBlockTexture() && block != null) {
+			RenderBlocks rb = block.getSubmapManager().createRenderContext(rendererOld, block, world);
+			if (rb != null && rb != rendererOld) {
+				rb.blockAccess = world;
+				if (rb instanceof RenderBlocksCTM) {
+					RenderBlocksCTM rbctm = (RenderBlocksCTM) rb;
+					rbctm.manager = rbctm.manager == null ? block.getSubmapManager() : rbctm.manager;
+					rbctm.rendererOld = rbctm.rendererOld == null ? rendererOld : rbctm.rendererOld;
+				}
+				return rb;
+			}
+		}
+		return rendererOld;
 	}
 	
 	@Override

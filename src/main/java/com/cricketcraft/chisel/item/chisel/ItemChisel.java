@@ -14,6 +14,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -50,11 +52,30 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public int getMaxDamage(ItemStack stack) {
-		if (Configurations.allowChiselDamage) {
+	public int getMaxDamage(ItemStack stack){
+		if(Configurations.allowChiselDamage)
 			return type.maxDamage;
-		}
 		return 0;
+	}
+
+	@Override
+	public boolean isDamageable(){
+		return Configurations.allowChiselDamage;
+	}
+
+	@Override
+	public boolean getIsRepairable(ItemStack damagedItem, ItemStack repairMaterial)
+	{
+		switch (type) {
+			case DIAMOND:
+				return repairMaterial.getItem().equals(Items.diamond);
+			case IRON:
+				return repairMaterial.getItem().equals(Items.iron_ingot);
+			case OBSIDIAN:
+				return repairMaterial.getItem().equals(Item.getItemFromBlock(Blocks.obsidian));
+		}
+
+		return false;
 	}
 
 	@Override

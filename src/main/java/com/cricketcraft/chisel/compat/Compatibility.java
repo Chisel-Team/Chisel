@@ -105,7 +105,7 @@ public class Compatibility {
 	}
 
 	private static void loadEE3Values(){
-		FMLLog.log(Chisel.MOD_ID, Level.INFO, "Oooh is that Equivalent Exchange I see?");
+		FMLLog.log(Chisel.MOD_ID, Level.INFO, "[Chisel 2] Oooh is that Equivalent Exchange I see?");
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselItems.ballomoss, 1), 16);
 
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.sand_snakestone, 1, 1), 8);

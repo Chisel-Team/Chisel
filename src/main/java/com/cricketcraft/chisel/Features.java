@@ -786,16 +786,14 @@ public enum Features {
 
 	FUTURA {
 
-		// TODO Overlay is WIP
 		@Override
 		void addBlocks() {
-			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock/*
-																				 * , "futura/screenOverlay-ctm"
-																				 */).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
+			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
 			futura.carverHelper.addVariation("tile.futura.0.desc", 0, "futura/WIP/screenMetallicWIP");
 			futura.carverHelper.addVariation("tile.futura.1.desc", 1, "futura/WIP/screenCyanWIP");
-			futura.carverHelper.addVariation("tile.futura.2.desc", 2, "futura/WIP/controllerWIP", new SubmapManagerFakeController());
+			futura.carverHelper.addVariation("tile.futura.2.desc", 2, "futura/WIP/controllerWIP-Overlay", new SubmapManagerFakeController(2));
 			futura.carverHelper.addVariation("tile.futura.3.desc", 3, "futura/WIP/wavyWIP");
+			futura.carverHelper.addVariation("tile.futura.4.desc", 4, "futura/WIP/controllerWIP-Overlay", new SubmapManagerFakeController(4));
 			futura.carverHelper.registerAll(futura, "futura");
 
             BlockCarvable circuits = (BlockCarvable) new BlockCarvableGlow("animations/strobe").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);
