@@ -216,6 +216,19 @@ public enum Features {
 		}
 	},
 
+	BEACON {
+		@Override
+		void addBlocks(){
+			BlockCarvableBeacon beacon = (BlockCarvableBeacon) new BlockCarvableBeacon().setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
+			Carving.chisel.addVariation("beacon", Blocks.beacon, 0, 0);
+			for(int meta = 0; meta < 16; meta++){
+				beacon.carverHelper.addVariation("tile.beacon." + ItemDye.field_150923_a[meta] + ".desc", meta, "beacon", (meta + 1));
+			}
+			beacon.carverHelper.registerAll(beacon, "beacon");
+			Carving.chisel.registerOre("beacon", "beacon");
+		}
+	},
+
 	BLOOD_RUNE("AWWayofTime") {
 
 		@Override
