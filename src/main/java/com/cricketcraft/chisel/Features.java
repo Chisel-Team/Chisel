@@ -58,6 +58,28 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public enum Features {
 
+	AE_CERTUS_QUARTZ("appliedenergistics2") {
+
+		@Override
+		void addBlocks() {
+			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartz"), 0, 0);
+			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzPillar"), 0, 1);
+			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzChiseled"), 0, 2);
+			Carving.chisel.registerOre("AECertusQuartz", "AECertusQuartz");
+		}
+	},
+
+	AE_SKY_STONE("appliedenergistics2") {
+
+		@Override
+		void addBlocks() {
+			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 1, 0);
+			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 2, 1);
+			Carving.chisel.addVariation("AESkyStone", GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone"), 3, 2);
+			Carving.chisel.registerOre("AESkyStone", "AESkyStone");
+		}
+	},
+
 	ALUMINUM {
 
 		@Override
