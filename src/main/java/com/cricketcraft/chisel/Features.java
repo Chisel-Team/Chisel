@@ -115,7 +115,7 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockCarvable andesite = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
-			andesite.carverHelper.addVariation("tile.andesite.0.desc", 0, "andesite/andesite");
+			andesite.carverHelper.addVariation(Configurations.imTooGoodForDescriptions ?  "" : "tile.andesite.0.desc", 0, "andesite/andesite");
 			andesite.carverHelper.addVariation("tile.andesite.1.desc", 1, "andesite/andesitePolished");
             andesite.carverHelper.addVariation("tile.andesite.2.desc", 2, "andesite/andesitePillar");
             andesite.carverHelper.addVariation("tile.andesite.3.desc", 3, "andesite/andesiteLBrick");
@@ -617,7 +617,7 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable diorite = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
 
-			diorite.carverHelper.addVariation("tile.diorite.0.desc", 0, "diorite/diorite");
+			diorite.carverHelper.addVariation(Configurations.imTooGoodForDescriptions ?  "" : "tile.diorite.0.desc", 0, "diorite/diorite");
 			diorite.carverHelper.addVariation("tile.diorite.1.desc", 1, "diorite/dioritePolished");
 			diorite.carverHelper.addVariation("tile.diorite.2.desc", 2, "diorite/dioritePillar");
             diorite.carverHelper.addVariation("tile.diorite.3.desc", 3, "diorite/dioriteLBrick");
@@ -1010,7 +1010,7 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable granite = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
 
-			granite.carverHelper.addVariation("tile.granite.0.desc", 0, "granite/granite");
+			granite.carverHelper.addVariation(Configurations.imTooGoodForDescriptions ?  "" : "tile.granite.0.desc", 0, "granite/granite");
 			granite.carverHelper.addVariation("tile.granite.1.desc", 1, "granite/granitePolished");
 			granite.carverHelper.addVariation("tile.granite.2.desc", 2, "granite/granitePillar");
             granite.carverHelper.addVariation("tile.granite.3.desc", 3, "granite/graniteLBrick");

@@ -38,6 +38,7 @@ public class Configurations {
 	public static boolean disableCTM;
 	public static boolean connectInsideCTM;
 	public static boolean blockDescriptions;
+	public static boolean imTooGoodForDescriptions;
 
 	public static boolean allowChiselDamage;
 	public static int ironChiselMaxDamage;
@@ -94,6 +95,7 @@ public class Configurations {
 				"Choose whether the inside corner is disconnected on a CTM block - http://imgur.com/eUywLZ4").getBoolean(false);
 		blockDescriptions = config.get(category, "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.")
 				.getBoolean(true);
+		imTooGoodForDescriptions = config.get(category, "imTooGooForBlockDescriptions", false, "For those people who just hate block descriptions on the world gen!").getBoolean();
 
 		/* chisel */
 		category = "chisel";
