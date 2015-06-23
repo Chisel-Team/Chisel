@@ -1,12 +1,12 @@
-# Key localizations
+#Key localizations
 
 #Stat localizations
 stat.blockChiseled=Blocks Chiseled
 
-# Entity localizations
+#Entity localizations
 entity.chisel.snowman.name=Snow Golem
 
-# Item localizations
+#Item localizations
 item.chisel.chisel_iron.name=Chisel
 
 item.chisel.chisel.desc.gui=Right-Click to open GUI
@@ -34,7 +34,6 @@ item.upgrade_stack.desc=Allows it to manufacture stacks at a time
 item.upgrade_reversion.desc=Reverts the base slot to its original form
 
 # Block localizations
-# Have fun! ~zombiepig333
 
 #Chisel 2
 
@@ -139,7 +138,7 @@ tile.beacon.yellow.desc=Yellow Beamed Beacon
 tile.beacon.gray.desc=Gray Beamed Beacon
 
 #Leaves
-tile.chisel.leaves.name=Leaf
+tile.chisel.leaves.name=Leaves
 tile.leaves.6.desc=Dead Leaves
 tile.leaves.7.desc=Fancy Leaves
 tile.leaves.8.desc=Pink Petals
@@ -1026,8 +1025,6 @@ tile.chisel.jungle_planks.name=Jungle Wood Planks
 tile.chisel.dark_oak_planks.name=Dark Oak Wood Planks
 tile.chisel.acacia_planks.name=Acacia Wood Planks
 
-#Remember to do the descriptions.
-
 #Iron Fence
 tile.chisel.iron_bars.name=Iron Bars
 tile.iron_bars.1.desc=Iron Bars without Frame
@@ -1106,8 +1103,8 @@ tile.carpet_block.3.desc=Light Blue Carpet Block
 tile.carpet_block.4.desc=Yellow Carpet Block
 tile.carpet_block.5.desc=Light green Carpet Block
 tile.carpet_block.6.desc=Pink Carpet Block
-tile.carpet_block.7.desc=Dark grey Carpet Block
-tile.carpet_block.8.desc=Grey Carpet Block
+tile.carpet_block.7.desc=Dark Gray Carpet Block
+tile.carpet_block.8.desc=Gray Carpet Block
 tile.carpet_block.9.desc=Teal Carpet Block
 tile.carpet_block.10.desc=Purple Carpet Block
 tile.carpet_block.11.desc=Dark blue Carpet Block
@@ -1125,8 +1122,8 @@ tile.carpet.3.desc=Light Blue Carpet
 tile.carpet.4.desc=Yellow Carpet
 tile.carpet.5.desc=Light Green Carpet
 tile.carpet.6.desc=Pink Carpet
-tile.carpet.7.desc=Dark Grey Carpet
-tile.carpet.8.desc=Grey Carpet
+tile.carpet.7.desc=Dark Gray Carpet
+tile.carpet.8.desc=Gray Carpet
 tile.carpet.9.desc=Teal Carpet
 tile.carpet.10.desc=Purple Carpet
 tile.carpet.11.desc=Dark Blue Carpet
@@ -1307,8 +1304,8 @@ tile.woolenClay.3.desc=Light Blue Woolen Clay
 tile.woolenClay.4.desc=Yellow Woolen Clay
 tile.woolenClay.5.desc=Lime Woolen Clay
 tile.woolenClay.6.desc=Pink Woolen Clay
-tile.woolenClay.7.desc=Grey Woolen Clay
-tile.woolenClay.8.desc=Light Grey Woolen Clay
+tile.woolenClay.7.desc=Gray Woolen Clay
+tile.woolenClay.8.desc=Light Gray Woolen Clay
 tile.woolenClay.9.desc=Cyan Woolen Clay
 tile.woolenClay.10.desc=Purple Woolen Clay
 tile.woolenClay.11.desc=Blue Woolen Clay
@@ -1326,8 +1323,8 @@ tile.coloredSand.3.desc=Light Blue Colored Sand
 tile.coloredSand.4.desc=Yellow Colored Sand
 tile.coloredSand.5.desc=Lime Colored Sand
 tile.coloredSand.6.desc=Pink Colored Sand
-tile.coloredSand.7.desc=Grey Colored Sand
-tile.coloredSand.8.desc=Light Grey Colored Sand
+tile.coloredSand.7.desc=Gray Colored Sand
+tile.coloredSand.8.desc=Light Gray Colored Sand
 tile.coloredSand.9.desc=Cyan Colored Sand
 tile.coloredSand.10.desc=Purple Colored Sand
 tile.coloredSand.11.desc=Blue Colored Sand
@@ -1355,302 +1352,302 @@ tile.laboratory.13.desc=Direction Console (Right)
 tile.laboratory.14.desc=Direction Console (Left)
 tile.laboratory.15.desc=Information Console
 
-#Planks (They go in order of creative tab appearence if that helps)
+#Planks (They go in order of creative tab appearance if that helps)
 #Oak
-tile.oak.planks.1.desc=Smooth oak wood planks
-tile.oak.planks.2.desc=Short oak wood planks
-tile.oak.planks.6.desc=Fancy oak wood plank arrangement
-tile.oak.planks.8.desc=Oak wood panel
-tile.oak.planks.9.desc=Oak wood double slab
-tile.oak.planks.10.desc=Oak wood crate
-tile.oak.planks.11.desc=Fancy oak wood crate
-tile.oak.planks.13.desc=Large long oak wood planks
-tile.oak.planks.3.desc=Vertical oak wood planks
-tile.oak.planks.4.desc=Vertical uneven oak wood planks
-tile.oak.planks.5.desc=Oak wood parquet
-tile.oak.planks.7.desc=Oak wood plank blinds
-tile.oak.planks.12.desc=Oak wood scaffold
-tile.oak.planks.14.desc=Oak wood planks in disarray
-tile.oak.planks.15.desc=Vertical oak wood planks in disarray
+tile.oak.planks.1.desc=Smooth Oak Wood Planks
+tile.oak.planks.2.desc=Short Oak Wood Planks
+tile.oak.planks.6.desc=Fancy Oak Wood Plank Arrangement
+tile.oak.planks.8.desc=Oak Wood Panel
+tile.oak.planks.9.desc=Oak Wood Double Slab
+tile.oak.planks.10.desc=Oak Wood Crate
+tile.oak.planks.11.desc=Fancy Oak Wood Crate
+tile.oak.planks.13.desc=Large Long Oak Wood Planks
+tile.oak.planks.3.desc=Vertical Oak Wood Planks
+tile.oak.planks.4.desc=Vertical Uneven Oak Wood Planks
+tile.oak.planks.5.desc=Oak Wood Parquet
+tile.oak.planks.7.desc=Oak Wood Plank Blinds
+tile.oak.planks.12.desc=Oak Wood Scaffold
+tile.oak.planks.14.desc=Oak Wood Planks in Disarray
+tile.oak.planks.15.desc=Vertical Oak Wood Planks in Disarray
 
 #Spruce
-tile.spruce.planks.1.desc=Smooth spruce wood planks
-tile.spruce.planks.2.desc=Short spruce wood planks
-tile.spruce.planks.6.desc=Fancy spruce wood plank arrangement
-tile.spruce.planks.8.desc=Spruce wood panel
-tile.spruce.planks.9.desc=Spruce wood double slab
-tile.spruce.planks.10.desc=Spruce wood crate
-tile.spruce.planks.11.desc=Fancy spruce wood crate
-tile.spruce.planks.13.desc=Large long spruce wood planks
-tile.spruce.planks.3.desc=Vertical spruce wood planks
-tile.spruce.planks.4.desc=Vertical uneven spruce wood planks
-tile.spruce.planks.5.desc=Spruce wood parquet
-tile.spruce.planks.7.desc=Spruce wood plank blinds
-tile.spruce.planks.12.desc=Spruce wood scaffold
-tile.spruce.planks.14.desc=Spruce wood planks in disarray
-tile.spruce.planks.15.desc=Vertical oak wood planks in disarray
+tile.spruce.planks.1.desc=Smooth Spruce Wood Planks
+tile.spruce.planks.2.desc=Short Spruce Wood Planks
+tile.spruce.planks.6.desc=Fancy Spruce Wood Plank Arrangement
+tile.spruce.planks.8.desc=Spruce Wood Panel
+tile.spruce.planks.9.desc=Spruce Wood Double Slab
+tile.spruce.planks.10.desc=Spruce Wood Crate
+tile.spruce.planks.11.desc=Fancy Spruce Wood Crate
+tile.spruce.planks.13.desc=Large Long Spruce Wood Planks
+tile.spruce.planks.3.desc=Vertical Spruce Wood Planks
+tile.spruce.planks.4.desc=Vertical Uneven Spruce Wood Planks
+tile.spruce.planks.5.desc=Spruce Wood Parquet
+tile.spruce.planks.7.desc=Spruce Wood Plank Blinds
+tile.spruce.planks.12.desc=Spruce Wood Scaffold
+tile.spruce.planks.14.desc=Spruce Wood Planks in Disarray
+tile.spruce.planks.15.desc=Vertical Spruce Wood Planks in Disarray
 
 #Birch
-tile.birch.planks.1.desc=Smooth birch wood planks
-tile.birch.planks.2.desc=Short birch wood planks
-tile.birch.planks.6.desc=Fancy birch wood plank arrangement
-tile.birch.planks.8.desc=Birch wood panel
-tile.birch.planks.9.desc=Birch wood double slab
-tile.birch.planks.10.desc=Birch wood crate
-tile.birch.planks.11.desc=Fancy birch wood crate
-tile.birch.planks.13.desc=Large long birch wood planks
-tile.birch.planks.3.desc=Vertical birch wood planks
-tile.birch.planks.4.desc=Vertical uneven birch wood planks
-tile.birch.planks.5.desc=Birch wood parquet
-tile.birch.planks.7.desc=Birch wood plank blinds
-tile.birch.planks.12.desc=Birch wood scaffold
-tile.birch.planks.14.desc=Birch wood planks in disarray
-tile.birch.planks.15.desc=Vertical birch wood planks in disarray
+tile.birch.planks.1.desc=Smooth Birch Wood Planks
+tile.birch.planks.2.desc=Short Birch Wood Planks
+tile.birch.planks.6.desc=Fancy Birch Wood Plank Arrangement
+tile.birch.planks.8.desc=Birch Wood Panel
+tile.birch.planks.9.desc=Birch Wood Double Slab
+tile.birch.planks.10.desc=Birch Wood Crate
+tile.birch.planks.11.desc=Fancy Birch Wood Crate
+tile.birch.planks.13.desc=Large Long Birch Wood Planks
+tile.birch.planks.3.desc=Vertical Birch Wood Planks
+tile.birch.planks.4.desc=Vertical Uneven Birch Wood Planks
+tile.birch.planks.5.desc=Birch Wood Parquet
+tile.birch.planks.7.desc=Birch Wood Plank Blinds
+tile.birch.planks.12.desc=Birch Wood Scaffold
+tile.birch.planks.14.desc=Birch Wood Planks in Disarray
+tile.birch.planks.15.desc=Vertical Birch Wood Planks in Disarray
 
 #Jungle
-tile.jungle.planks.1.desc=Smooth jungle wood planks
-tile.jungle.planks.2.desc=Short jungle wood planks
-tile.jungle.planks.6.desc=Fancy jungle wood plank arrangement
-tile.jungle.planks.8.desc=Jungle wood panel
-tile.jungle.planks.9.desc=Jungle wood double slab
-tile.jungle.planks.10.desc=Oak wood crate
-tile.jungle.planks.11.desc=Fancy jungle wood crate
-tile.jungle.planks.13.desc=Large long jungle wood planks
-tile.jungle.planks.3.desc=Vertical jungle wood planks
-tile.jungle.planks.4.desc=Vertical uneven jungle wood planks
-tile.jungle.planks.5.desc=Jungle wood parquet
-tile.jungle.planks.7.desc=Jungle wood plank blinds
-tile.jungle.planks.12.desc=Jungle wood scaffold
-tile.jungle.planks.14.desc=Jungle wood planks in disarray
-tile.jungle.planks.15.desc=Vertical jungle wood planks in disarray
+tile.jungle.planks.1.desc=Smooth Jungle Wood Planks
+tile.jungle.planks.2.desc=Short Jungle Wood Planks
+tile.jungle.planks.6.desc=Fancy Jungle Wood Plank Arrangement
+tile.jungle.planks.8.desc=Jungle Wood Panel
+tile.jungle.planks.9.desc=Jungle Wood Double Slab
+tile.jungle.planks.10.desc=Oak Wood Crate
+tile.jungle.planks.11.desc=Fancy jungle Wood Crate
+tile.jungle.planks.13.desc=Large Long Jungle Wood Planks
+tile.jungle.planks.3.desc=Vertical Jungle Wood Planks
+tile.jungle.planks.4.desc=Vertical Uneven Jungle Wood Planks
+tile.jungle.planks.5.desc=Jungle Wood Parquet
+tile.jungle.planks.7.desc=Jungle Wood Plank Blinds
+tile.jungle.planks.12.desc=Jungle Wood Scaffold
+tile.jungle.planks.14.desc=Jungle Wood Planks in Disarray
+tile.jungle.planks.15.desc=Vertical Jungle Wood Planks in Disarray
 
 #Acacia
-tile.acacia.planks.1.desc=Smooth acacia wood planks
-tile.acacia.planks.2.desc=Short acacia wood planks
-tile.acacia.planks.6.desc=Fancy acacia wood plank arrangement
-tile.acacia.planks.8.desc=Acacia wood panel
-tile.acacia.planks.9.desc=Acacia wood double slab
-tile.acacia.planks.10.desc=Acacia wood crate
-tile.acacia.planks.11.desc=Fancy acacia wood crate
-tile.acacia.planks.13.desc=Large long acacia wood planks
-tile.acacia.planks.3.desc=Vertical acacia wood planks
-tile.acacia.planks.4.desc=Vertical uneven acacia wood planks
-tile.acacia.planks.5.desc=Acacia wood parquet
-tile.acacia.planks.7.desc=Acacia wood plank blinds
-tile.acacia.planks.12.desc=Acacia wood scaffold
-tile.acacia.planks.14.desc=Acacia wood planks in disarray
-tile.acacia.planks.15.desc=Vertical acacia wood planks in disarray
+tile.acacia.planks.1.desc=Smooth Acacia Wood Planks
+tile.acacia.planks.2.desc=Short Acacia Wood Planks
+tile.acacia.planks.6.desc=Fancy Acacia Wood Plank Arrangement
+tile.acacia.planks.8.desc=Acacia Wood Panel
+tile.acacia.planks.9.desc=Acacia Wood Double Slab
+tile.acacia.planks.10.desc=Acacia Wood Crate
+tile.acacia.planks.11.desc=Fancy Acacia Wood Crate
+tile.acacia.planks.13.desc=Large Long Acacia Wood Planks
+tile.acacia.planks.3.desc=Vertical Acacia Wood Planks
+tile.acacia.planks.4.desc=Vertical Uneven Acacia Wood Planks
+tile.acacia.planks.5.desc=Acacia Wood Parquet
+tile.acacia.planks.7.desc=Acacia Wood Plank Blinds
+tile.acacia.planks.12.desc=Acacia Wood Scaffold
+tile.acacia.planks.14.desc=Acacia Wood Planks in Disarray
+tile.acacia.planks.15.desc=Vertical Acacia Wood Planks in Disarray
 
 #Dark Oak
-tile.dark-oak.planks.1.desc=Smooth dark oak wood planks
-tile.dark-oak.planks.2.desc=Short dark oak wood planks
-tile.dark-oak.planks.6.desc=Fancy dark oak wood plank arrangement
-tile.dark-oak.planks.8.desc=Dark Oak wood panel
-tile.dark-oak.planks.9.desc=Dark Oak wood double slab
-tile.dark-oak.planks.10.desc=Dark Oak wood crate
-tile.dark-oak.planks.11.desc=Fancy dark oak wood crate
-tile.dark-oak.planks.13.desc=Large long dark oak wood planks
-tile.dark-oak.planks.3.desc=Vertical dark oak wood planks
-tile.dark-oak.planks.4.desc=Vertical uneven dark oak wood planks
-tile.dark-oak.planks.5.desc=Dark Oak wood parquet
-tile.dark-oak.planks.7.desc=Dark Oak wood plank blinds
-tile.dark-oak.planks.12.desc=Dark Oak wood scaffold
-tile.dark-oak.planks.14.desc=Dark Oak wood planks in disarray
-tile.dark-oak.planks.15.desc=Vertical dark oak wood planks in disarray
+tile.dark-oak.planks.1.desc=Smooth Dark Oak Wood Planks
+tile.dark-oak.planks.2.desc=Short Dark Oak Wood Planks
+tile.dark-oak.planks.6.desc=Fancy Dark Oak Wood Plank Arrangement
+tile.dark-oak.planks.8.desc=Dark Oak Wood Panel
+tile.dark-oak.planks.9.desc=Dark Oak Wood Double Slab
+tile.dark-oak.planks.10.desc=Dark Oak Wood Crate
+tile.dark-oak.planks.11.desc=Fancy Dark Oak Wood Crate
+tile.dark-oak.planks.13.desc=Large Long Dark Oak Wood Planks
+tile.dark-oak.planks.3.desc=Vertical Dark Oak Wood Planks
+tile.dark-oak.planks.4.desc=Vertical Uneven Dark Oak Wood Planks
+tile.dark-oak.planks.5.desc=Dark Oak Wood Parquet
+tile.dark-oak.planks.7.desc=Dark Oak Wood Plank Blinds
+tile.dark-oak.planks.12.desc=Dark Oak Wood Scaffold
+tile.dark-oak.planks.14.desc=Dark Oak Wood Planks in Disarray
+tile.dark-oak.planks.15.desc=Vertical Dark Oak Wood Planks in Disarray
 
 #Stained Glass
-white.bubble.desc=White bubble glass
-white.glass.desc=White glass panel
-white.glass.fancy.desc=White fancy glass panel
-white.glass.noborder.desc=White borderless glass
+white.bubble.desc=White Bubble Glass
+white.glass.desc=White Glass Panel
+white.glass.fancy.desc=White Fancy Glass Panel
+white.glass.noborder.desc=White Borderless Glass
 
-orange.bubble.desc=Orange bubble glass
-orange.glass.desc=Orange glass panel
-orange.glass.fancy.desc=Orange fancy glass panel
-orange.glass.noborder.desc=Orange borderless glass
+orange.bubble.desc=Orange Bubble Glass
+orange.glass.desc=Orange Glass Panel
+orange.glass.fancy.desc=Orange Fancy Glass Panel
+orange.glass.noborder.desc=Orange Borderless Glass
 
-magenta.bubble.desc=Magenta bubble glass
-magenta.glass.desc=Magenta glass panel
-magenta.glass.fancy.desc=Magenta fancy glass panel
-magenta.glass.noborder.desc=Magenta borderless glass
+magenta.bubble.desc=Magenta Bubble Glass
+magenta.glass.desc=Magenta Glass Panel
+magenta.glass.fancy.desc=Magenta Fancy Glass Panel
+magenta.glass.noborder.desc=Magenta Borderless Glass
 
-lightblue.bubble.desc=Light Blue bubble glass
-lightblue.glass.desc=Light Blue glass panel
-lightblue.glass.fancy.desc=Light Blue fancy glass panel
-lightblue.glass.noborder.desc=Light Blue borderless glass
+lightblue.bubble.desc=Light Blue Bubble Glass
+lightblue.glass.desc=Light Blue Glass Panel
+lightblue.glass.fancy.desc=Light Blue Fancy Glass Panel
+lightblue.glass.noborder.desc=Light Blue Borderless Glass
 
-yellow.bubble.desc=Yellow bubble glass
-yellow.glass.desc=Yellow glass panel
-yellow.glass.fancy.desc=Yellow fancy glass panel
-yellow.glass.noborder.desc=Yellow borderless glass
+yellow.bubble.desc=Yellow Bubble Glass
+yellow.glass.desc=Yellow Glass Panel
+yellow.glass.fancy.desc=Yellow Fancy Glass Panel
+yellow.glass.noborder.desc=Yellow Borderless Glass
 
-lime.bubble.desc=Lime bubble glass
-lime.glass.desc=Lime glass panel
-lime.glass.fancy.desc=Lime fancy glass panel
-lime.glass.noborder.desc=Lime borderless glass
+lime.bubble.desc=Lime Bubble Glass
+lime.glass.desc=Lime Glass Panel
+lime.glass.fancy.desc=Lime Fancy Glass Panel
+lime.glass.noborder.desc=Lime Borderless Glass
 
-pink.bubble.desc=Pink bubble glass
-pink.glass.desc=Pink glass panel
-pink.glass.fancy.desc=Pink fancy glass panel
-pink.glass.noborder.desc=Pink borderless glass
+pink.bubble.desc=Pink Bubble Glass
+pink.glass.desc=Pink Glass Panel
+pink.glass.fancy.desc=Pink Fancy Glass Panel
+pink.glass.noborder.desc=Pink Borderless Glass
 
-darkgray.bubble.desc=Gray bubble glass
-darkgray.glass.desc=Gray glass panel
-darkgray.glass.fancy.desc=Gray fancy glass panel
-darkgray.glass.noborder.desc=Gray borderless glass
+darkgray.bubble.desc=Gray Bubble Glass
+darkgray.glass.desc=Gray Glass Panel
+darkgray.glass.fancy.desc=Gray Fancy Glass Panel
+darkgray.glass.noborder.desc=Gray Borderless Glass
 
-lightgray.bubble.desc=Light Gray bubble glass
-lightgray.glass.desc=Light Gray glass panel
-lightgray.glass.fancy.desc=Light Gray fancy glass panel
-lightgray.glass.noborder.desc=Light Gray borderless glass
+lightgray.bubble.desc=Light Gray Bubble Glass
+lightgray.glass.desc=Light Gray Glass Panel
+lightgray.glass.fancy.desc=Light Gray Fancy Glass Panel
+lightgray.glass.noborder.desc=Light Gray Borderless Glass
 
-cyan.bubble.desc=Cyan bubble glass
-cyan.glass.desc=Cyan glass panel
-cyan.glass.fancy.desc=Cyan fancy glass panel
-cyan.glass.noborder.desc=Cyan borderless glass
+cyan.bubble.desc=Cyan Bubble Glass
+cyan.glass.desc=Cyan Glass Panel
+cyan.glass.fancy.desc=Cyan Fancy Glass Panel
+cyan.glass.noborder.desc=Cyan Borderless Glass
 
-purple.bubble.desc=Purple bubble glass
-purple.glass.desc=Purple glass panel
-purple.glass.fancy.desc=Purple fancy glass panel
-purple.glass.noborder.desc=Purple borderless glass
+purple.bubble.desc=Purple Bubble Glass
+purple.glass.desc=Purple Glass Panel
+purple.glass.fancy.desc=Purple Fancy Glass Panel
+purple.glass.noborder.desc=Purple Borderless Glass
 
-blue.bubble.desc=Blue bubble glass
-blue.glass.desc=Blue glass panel
-blue.glass.fancy.desc=Blue fancy glass panel
-blue.glass.noborder.desc=Blue borderless glass
+blue.bubble.desc=Blue Bubble Glass
+blue.glass.desc=Blue Glass Panel
+blue.glass.fancy.desc=Blue Fancy Glass Panel
+blue.glass.noborder.desc=Blue Borderless Glass
 
-brown.bubble.desc=Brown bubble glass
-brown.glass.desc=Brown glass panel
-brown.glass.fancy.desc=Brown fancy glass panel
-brown.glass.noborder.desc=Brown borderless glass
+brown.bubble.desc=Brown Bubble Glass
+brown.glass.desc=Brown Glass Panel
+brown.glass.fancy.desc=Brown Fancy Glass Panel
+brown.glass.noborder.desc=Brown Borderless Glass
 
-green.bubble.desc=Green bubble glass
-green.glass.desc=Green glass panel
-green.glass.fancy.desc=Green fancy glass panel
-green.glass.noborder.desc=Green borderless glass
+green.bubble.desc=Green Bubble Glass
+green.glass.desc=Green Glass Panel
+green.glass.fancy.desc=Green Fancy Glass Panel
+green.glass.noborder.desc=Green Borderless Glass
 
-red.bubble.desc=Red bubble glass
-red.glass.desc=Red glass panel
-red.glass.fancy.desc=Red fancy glass panel
-red.glass.noborder.desc=Red borderless glass
+red.bubble.desc=Red Bubble Glass
+red.glass.desc=Red Glass Panel
+red.glass.fancy.desc=Red Fancy Glass Panel
+red.glass.noborder.desc=Red Borderless Glass
 
-black.bubble.desc=Black bubble glass
-black.glass.desc=Black glass panel
-black.glass.fancy.desc=Black fancy glass panel
-black.glass.noborder.desc=Black borderless glass
+black.bubble.desc=Black Bubble Glass
+black.glass.desc=Black Glass Panel
+black.glass.fancy.desc=Black Fancy Glass Panel
+black.glass.noborder.desc=Black Borderless Glass
 
 #Stained Glass Pane
-white.pane.bubble.desc=White bubble glass
-white.pane.glass.desc=White glass panel
-white.pane.glass.fancy.desc=White fancy glass panel
-white.pane.glass.noborder.desc=White borderless glass
-white.pane.glass.quadrant.desc=White quadrant glass
-white.pane.glass.fancyquadrant.desc=White fancy quadrant glass
+white.pane.bubble.desc=White Bubble Glass
+white.pane.glass.desc=White Glass Panel
+white.pane.glass.fancy.desc=White Fancy Glass Panel
+white.pane.glass.noborder.desc=White Borderless Glass
+white.pane.glass.quadrant.desc=White Quadrant Glass
+white.pane.glass.fancyquadrant.desc=White Fancy Quadrant Glass
 
-orange.pane.bubble.desc=Orange bubble glass
-orange.pane.glass.desc=Orange glass panel
-orange.pane.glass.fancy.desc=Orange fancy glass panel
-orange.pane.glass.noborder.desc=Orange borderless glass
-orange.pane.glass.quadrant.desc=Orange quadrant glass
-orange.pane.glass.fancyquadrant.desc=Orange fancy quadrant glass
+orange.pane.bubble.desc=Orange Bubble Glass
+orange.pane.glass.desc=Orange Glass Panel
+orange.pane.glass.fancy.desc=Orange Fancy Glass Panel
+orange.pane.glass.noborder.desc=Orange Borderless Glass
+orange.pane.glass.quadrant.desc=Orange Quadrant Glass
+orange.pane.glass.fancyquadrant.desc=Orange Fancy Quadrant Glass
 
-magenta.pane.bubble.desc=Magenta bubble glass
-magenta.pane.glass.desc=Magenta glass panel
-magenta.pane.glass.fancy.desc=Magenta fancy glass panel
-magenta.pane.glass.noborder.desc=Magenta borderless glass
-magenta.pane.glass.quadrant.desc=Magenta quadrant glass
-magenta.pane.glass.fancyquadrant.desc=Magenta fancy quadrant glass
+magenta.pane.bubble.desc=Magenta Bubble Glass
+magenta.pane.glass.desc=Magenta Glass Panel
+magenta.pane.glass.fancy.desc=Magenta Fancy Glass Panel
+magenta.pane.glass.noborder.desc=Magenta Borderless Glass
+magenta.pane.glass.quadrant.desc=Magenta Quadrant Glass
+magenta.pane.glass.fancyquadrant.desc=Magenta Fancy Quadrant Glass
 
-lightblue.pane.bubble.desc=Light Blue bubble glass
-lightblue.pane.glass.desc=Light Blue glass panel
-lightblue.pane.glass.fancy.desc=Light Blue fancy glass panel
-lightblue.pane.glass.noborder.desc=Light Blue borderless glass
-lightblue.pane.glass.quadrant.desc=Light Blue quadrant glass
-lightblue.pane.glass.fancyquadrant.desc=Light Blue fancy quadrant glass
+lightblue.pane.bubble.desc=Light Blue Bubble Glass
+lightblue.pane.glass.desc=Light Blue Glass Panel
+lightblue.pane.glass.fancy.desc=Light Blue Fancy Glass Panel
+lightblue.pane.glass.noborder.desc=Light Blue Borderless Glass
+lightblue.pane.glass.quadrant.desc=Light Blue Quadrant Glass
+lightblue.pane.glass.fancyquadrant.desc=Light Blue Fancy Quadrant Glass
 
-yellow.pane.bubble.desc=Yellow bubble glass
-yellow.pane.glass.desc=Yellow glass panel
-yellow.pane.glass.fancy.desc=Yellow fancy glass panel
-yellow.pane.glass.noborder.desc=Yellow borderless glass
-yellow.pane.glass.quadrant.desc=Yellow quadrant glass
-yellow.pane.glass.fancyquadrant.desc=Yellow fancy quadrant glass
+yellow.pane.bubble.desc=Yellow Bubble Glass
+yellow.pane.glass.desc=Yellow Glass Panel
+yellow.pane.glass.fancy.desc=Yellow Fancy Glass Panel
+yellow.pane.glass.noborder.desc=Yellow Borderless Glass
+yellow.pane.glass.quadrant.desc=Yellow Quadrant Glass
+yellow.pane.glass.fancyquadrant.desc=Yellow Fancy Quadrant Glass
 
-lime.pane.bubble.desc=Lime bubble glass
-lime.pane.glass.desc=Lime glass panel
-lime.pane.glass.fancy.desc=Lime fancy glass panel
-lime.pane.glass.noborder.desc=Lime borderless glass
-lime.pane.glass.quadrant.desc=Lime quadrant glass
-lime.pane.glass.fancyquadrant.desc=Lime fancy quadrant glass
+lime.pane.bubble.desc=Lime Bubble Glass
+lime.pane.glass.desc=Lime Glass Panel
+lime.pane.glass.fancy.desc=Lime Fancy Glass Panel
+lime.pane.glass.noborder.desc=Lime Borderless Glass
+lime.pane.glass.quadrant.desc=Lime Quadrant Glass
+lime.pane.glass.fancyquadrant.desc=Lime Fancy Quadrant Glass
 
-pink.pane.bubble.desc=Pink bubble glass
-pink.pane.glass.desc=Pink glass panel
-pink.pane.glass.fancy.desc=Pink fancy glass panel
-pink.pane.glass.noborder.desc=Pink borderless glass
-pink.pane.glass.quadrant.desc=Pink quadrant glass
-pink.pane.glass.fancyquadrant.desc=Pink fancy quadrant glass
+pink.pane.bubble.desc=Pink Bubble Glass
+pink.pane.glass.desc=Pink Glass Panel
+pink.pane.glass.fancy.desc=Pink Fancy Glass Panel
+pink.pane.glass.noborder.desc=Pink Borderless Glass
+pink.pane.glass.quadrant.desc=Pink Quadrant Glass
+pink.pane.glass.fancyquadrant.desc=Pink Fancy Quadrant Glass
 
-darkgray.pane.bubble.desc=Gray bubble glass
-darkgray.pane.glass.desc=Gray glass panel
-darkgray.pane.glass.fancy.desc=Gray fancy glass panel
-darkgray.pane.glass.noborder.desc=Gray borderless glass
-darkgray.pane.glass.quadrant.desc=Gray quadrant glass
-darkgray.pane.glass.fancyquadrant.desc=Gray fancy quadrant glass
+darkgray.pane.bubble.desc=Gray Bubble Glass
+darkgray.pane.glass.desc=Gray Glass Panel
+darkgray.pane.glass.fancy.desc=Gray Fancy Glass Panel
+darkgray.pane.glass.noborder.desc=Gray Borderless Glass
+darkgray.pane.glass.quadrant.desc=Gray Quadrant Glass
+darkgray.pane.glass.fancyquadrant.desc=Gray Fancy Quadrant Glass
 
-lightgray.pane.bubble.desc=Light Gray bubble glass
-lightgray.pane.glass.desc=Light Gray glass panel
-lightgray.pane.glass.fancy.desc=Light Gray fancy glass panel
-lightgray.pane.glass.noborder.desc=Light Gray borderless glass
-lightgray.pane.glass.quadrant.desc=Light Gray quadrant glass
-lightgray.pane.glass.fancyquadrant.desc=Light Gray fancy quadrant glass
+lightgray.pane.bubble.desc=Light Gray Bubble Glass
+lightgray.pane.glass.desc=Light Gray Glass Panel
+lightgray.pane.glass.fancy.desc=Light Gray Fancy Glass Panel
+lightgray.pane.glass.noborder.desc=Light Gray Borderless Glass
+lightgray.pane.glass.quadrant.desc=Light Gray Quadrant Glass
+lightgray.pane.glass.fancyquadrant.desc=Light Gray Fancy Quadrant Glass
 
-cyan.pane.bubble.desc=Cyan bubble glass
-cyan.pane.glass.desc=Cyan glass panel
-cyan.pane.glass.fancy.desc=Cyan fancy glass panel
-cyan.pane.glass.noborder.desc=Cyan borderless glass
-cyan.pane.glass.quadrant.desc=Cyan quadrant glass
-cyan.pane.glass.fancyquadrant.desc=Cyan fancy quadrant glass
+cyan.pane.bubble.desc=Cyan Bubble Glass
+cyan.pane.glass.desc=Cyan Glass Panel
+cyan.pane.glass.fancy.desc=Cyan Fancy Glass Panel
+cyan.pane.glass.noborder.desc=Cyan Borderless Glass
+cyan.pane.glass.quadrant.desc=Cyan Quadrant Glass
+cyan.pane.glass.fancyquadrant.desc=Cyan Fancy Quadrant Glass
 
-purple.pane.bubble.desc=Purple bubble glass
-purple.pane.glass.desc=Purple glass panel
-purple.pane.glass.fancy.desc=Purple fancy glass panel
-purple.pane.glass.noborder.desc=Purple borderless glass
-purple.pane.glass.quadrant.desc=Purple quadrant glass
-purple.pane.glass.fancyquadrant.desc=Purple fancy quadrant glass
+purple.pane.bubble.desc=Purple Bubble Glass
+purple.pane.glass.desc=Purple Glass Panel
+purple.pane.glass.fancy.desc=Purple Fancy Glass Panel
+purple.pane.glass.noborder.desc=Purple Borderless Glass
+purple.pane.glass.quadrant.desc=Purple Quadrant Glass
+purple.pane.glass.fancyquadrant.desc=Purple Fancy Quadrant Glass
 
-blue.pane.bubble.desc=Blue bubble glass
-blue.pane.glass.desc=Blue glass panel
-blue.pane.glass.fancy.desc=Blue fancy glass panel
-blue.pane.glass.noborder.desc=Blue borderless glass
-blue.pane.glass.quadrant.desc=Blue quadrant glass
-blue.pane.glass.fancyquadrant.desc=Blue fancy quadrant glass
+blue.pane.bubble.desc=Blue Bubble Glass
+blue.pane.glass.desc=Blue Glass Panel
+blue.pane.glass.fancy.desc=Blue Fancy Glass Panel
+blue.pane.glass.noborder.desc=Blue Borderless Glass
+blue.pane.glass.quadrant.desc=Blue Quadrant Glass
+blue.pane.glass.fancyquadrant.desc=Blue Fancy Quadrant Glass
 
-brown.pane.bubble.desc=Brown bubble glass
-brown.pane.glass.desc=Brown glass panel
-brown.pane.glass.fancy.desc=Brown fancy glass panel
-brown.pane.glass.noborder.desc=Brown borderless glass
-brown.pane.glass.quadrant.desc=Brown quadrant glass
-brown.pane.glass.fancyquadrant.desc=Brown fancy quadrant glass
+brown.pane.bubble.desc=Brown Bubble Glass
+brown.pane.glass.desc=Brown Glass Panel
+brown.pane.glass.fancy.desc=Brown Fancy Glass Panel
+brown.pane.glass.noborder.desc=Brown Borderless Glass
+brown.pane.glass.quadrant.desc=Brown Quadrant Glass
+brown.pane.glass.fancyquadrant.desc=Brown Fancy Quadrant Glass
 
-green.pane.bubble.desc=Green bubble glass
-green.pane.glass.desc=Green glass panel
-green.pane.glass.fancy.desc=Green fancy glass panel
-green.pane.glass.noborder.desc=Green borderless glass
-green.pane.glass.quadrant.desc=Green quadrant glass
-green.pane.glass.fancyquadrant.desc=Green fancy quadrant glass
+green.pane.bubble.desc=Green Bubble Glass
+green.pane.glass.desc=Green Glass Panel
+green.pane.glass.fancy.desc=Green Fancy Glass Panel
+green.pane.glass.noborder.desc=Green Borderless Glass
+green.pane.glass.quadrant.desc=Green Quadrant Glass
+green.pane.glass.fancyquadrant.desc=Green Fancy Quadrant Glass
 
-red.pane.bubble.desc=Red bubble glass
-red.pane.glass.desc=Red glass panel
-red.pane.glass.fancy.desc=Red fancy glass panel
-red.pane.glass.noborder.desc=Red borderless glass
-red.pane.glass.quadrant.desc=Red quadrant glass
-red.pane.glass.fancyquadrant.desc=Red fancy quadrant glass
+red.pane.bubble.desc=Red Bubble Glass
+red.pane.glass.desc=Red Glass Panel
+red.pane.glass.fancy.desc=Red Fancy Glass Panel
+red.pane.glass.noborder.desc=Red Borderless Glass
+red.pane.glass.quadrant.desc=Red Quadrant Glass
+red.pane.glass.fancyquadrant.desc=Red Fancy Quadrant Glass
 
-black.pane.bubble.desc=Black bubble glass
-black.pane.glass.desc=Black glass panel
-black.pane.glass.fancy.desc=Black fancy glass panel
-black.pane.glass.noborder.desc=Black borderless glass
-black.pane.glass.quadrant.desc=Black quadrant glass
-black.pane.glass.fancyquadrant.desc=Black fancy quadrant glass
+black.pane.bubble.desc=Black Bubble Glass
+black.pane.glass.desc=Black Glass Panel
+black.pane.glass.fancy.desc=Black Fancy Glass Panel
+black.pane.glass.noborder.desc=Black Borderless Glass
+black.pane.glass.quadrant.desc=Black Quadrant Glass
+black.pane.glass.fancyquadrant.desc=Black Fancy Quadrant Glass
 
 # Creative Tab localizations
 itemGroup.tabOtherChiselBlocks=Other Chisel Blocks
