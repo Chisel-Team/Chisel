@@ -1,6 +1,12 @@
-# Key localizations
+#Key localizations
 
-# Item localizations
+#Stat localizations
+stat.blockChiseled=Блоков обработано
+
+#Entity localizations
+entity.chisel.snowman.name=Снеговик
+
+#Item localizations
 item.chisel.chisel_iron.name=Стамеска
 
 item.chisel.chisel.desc.gui=ПКМ, чтобы открыть интерфейс
@@ -9,6 +15,7 @@ item.chisel.chisel.desc.lc2=Может ориентироваться на бл�
 item.chisel.chisel.desc.modes=Обладает разными режимами для обработки.
 
 item.chisel.chisel_diamond.name=Алмазная стамеска
+item.chisel.chisel_obsidian.name=Обсидиановая стамеска
 
 item.ballMoss.name=Шарик мха
 item.ballMoss.desc=ПКМ, чтобы кинуть. Превратить булыжник в замшелый булыжник при столкновении.
@@ -19,15 +26,34 @@ item.smashingRock.desc=ПКМ, чтобы кинуть. Превратить б�
 item.upgrade_speed.name=Улучшение «Скорость»
 item.upgrade_automation.name=Улучшение «Автоматизация»
 item.upgrade_stack.name=Улучшение «Складывание»
+item.upgrade_reversion.name=Улучшение «Реверсия»
 
 item.upgrade_speed.desc=Увеличивает скорость работы стамески
 item.upgrade_automation.desc=Позволяет предметам входить и выходить из авто-стамески
-item.upgrade_stack.desc=Позволяет стамеске обрабатывать сразу стаки предметов
+item.upgrade_stack.desc=Позволяет стамеске обрабатывать целый стак предметов
+item.upgrade_reversion.desc=Возвращает основной слот к первоначальной форме
 
-# Block localizations
-# Have fun! ~zombiepig333
+#Block localizations
 
 #Chisel 2
+
+#Nation
+tile.chisel.nation.name=Империалистический блок
+tile.chisel.rebel.name=Повстанческий блок
+tile.nation.0.desc=Замаскированный
+tile.nation.1.desc=Замаскированный (Спрятанный)
+tile.nation.2.desc=Болтовое покрытие
+tile.nation.3.desc=Белая предупреждающая лента
+tile.nation.4.desc=Соединённая предупреждающая лента
+
+#Shingles
+tile.chisel.shingles.name=Черепица
+tile.shingles.0.desc=Красная диагональ
+tile.shingles.1.desc=Красные малые квадраты
+tile.shingles.2.desc=Красные большие квадраты
+tile.shingles.3.desc=Чёрная диагональ
+tile.shingles.4.desc=Чёрные малые квадраты
+tile.shingles.5.desc=Чёрные большие квадраты
 
 #Valentines
 tile.chisel.valentines.name=Блок Валентина
@@ -35,48 +61,84 @@ tile.valentines.0.desc=Кирпичи Валентина
 tile.valentines.1.desc=Если оно говорит, я не буду его трогать
 
 #AntiBlocks
-tile.chisel.antiBlock.name=Антиблок
-tile.antiBlock.black.desc=Чёрный антиблок
-tile.antiBlock.blue.desc=Синий антиблок
-tile.antiBlock.brown.desc=Коричневый антиблок
-tile.antiBlock.cyan.desc=Бирюзовый антиблок
-tile.antiBlock.green.desc=Зелёный антиблок
-tile.antiBlock.light_blue.desc=Светло-синий антиблок
-tile.antiBlock.silver.desc=Светло-серый антиблок
-tile.antiBlock.lime.desc=Лаймовый антиблок
-tile.antiBlock.magenta.desc=Сиреневый антиблок
-tile.antiBlock.orange.desc=Оранжевый антиблок
-tile.antiBlock.pink.desc=Розовый антиблок
-tile.antiBlock.purple.desc=Фиолетовый антиблок
-tile.antiBlock.red.desc=Красный антиблок
-tile.antiBlock.white.desc=Белый антиблок
-tile.antiBlock.yellow.desc=Жёлтый антиблок
-tile.antiBlock.gray.desc=Серый антиблок
+tile.chisel.antiBlock.name=Анти-блок
+tile.antiBlock.black.desc=Чёрный анти-блок
+tile.antiBlock.blue.desc=Синий анти-блок
+tile.antiBlock.brown.desc=Коричневый анти-блок
+tile.antiBlock.cyan.desc=Бирюзовый анти-блок
+tile.antiBlock.green.desc=Зелёный анти-блок
+tile.antiBlock.light_blue.desc=Светло-синий анти-блок
+tile.antiBlock.silver.desc=Светло-серый анти-блок
+tile.antiBlock.lime.desc=Лаймовый анти-блок
+tile.antiBlock.magenta.desc=Сиреневый анти-блок
+tile.antiBlock.orange.desc=Оранжевый анти-блок
+tile.antiBlock.pink.desc=Розовый анти-блок
+tile.antiBlock.purple.desc=Фиолетовый анти-блок
+tile.antiBlock.red.desc=Красный анти-блок
+tile.antiBlock.white.desc=Белый анти-блок
+tile.antiBlock.yellow.desc=Жёлтый анти-блок
+tile.antiBlock.gray.desc=Серый анти-блок
 
 #Diorite
 tile.chisel.diorite.name=Диорит
 tile.diorite.0.desc=Генерируется в Вашем мире
 tile.diorite.1.desc=Гладкий диорит
 tile.diorite.2.desc=Колонна из диорита
+tile.diorite.3.desc=Диоритовые кирпичи
+tile.diorite.4.desc=Декоративный диорит
+tile.diorite.5.desc=Призматический диорит
+tile.diorite.6.desc=Диоритовые маленькие плитки
 
 #Andesite
 tile.chisel.andesite.name=Андезит
 tile.andesite.0.desc=Генерируется в Вашем мире
 tile.andesite.1.desc=Гладкий андезит
 tile.andesite.2.desc=Колонна из андезита
+tile.andesite.3.desc=Андезитовые кирпичи
+tile.andesite.4.desc=Декоративный андезит
+tile.andesite.5.desc=Призматический андезит
+tile.andesite.6.desc=Андезитовые маленькие плитки
 
 #Granite
 tile.chisel.granite.name=Гранит
 tile.granite.0.desc=Генерируется в Вашем мире
 tile.granite.1.desc=Гладкий гранит
 tile.granite.2.desc=Колонна из гранита
+tile.granite.3.desc=Гранитовые кирпичи
+tile.granite.4.desc=Декоративный гранит
+tile.granite.5.desc=Призматический гранит
+tile.granite.6.desc=Гранитовые маленькие плитки
 
 #Auto Chisel
 tile.chisel.autoChisel.name=Автоматическая стамеска
 autochisel.slot.chisel.tooltip=Слот стамески
 autochisel.slot.target.tooltip=Слот блока
+autochisel.slot.speed.tooltip=Улучшение «Скорость»
+autochisel.slot.automation.tooltip=Улучшение «Автоматизация»
+autochisel.slot.stack.tooltip=Улучшение «Складывание»
+autochisel.slot.reversion.tooltip=Улучшение «Реверсия»
+
+#Beacon
+tile.chisel.beacon.name=Маяк
+tile.beacon.black.desc=Маяк с чёрным лучом
+tile.beacon.blue.desc=Маяк с синем лучом
+tile.beacon.brown.desc=Маяк с коричневым лучом
+tile.beacon.cyan.desc=Маяк с бирюзовым лучом
+tile.beacon.green.desc=Маяк с зелёным лучом
+tile.beacon.lightBlue.desc=Маяк со светло-синем лучом
+tile.beacon.silver.desc=Маяк со светло-серым лучом
+tile.beacon.lime.desc=Маяк с лаймовым лучом
+tile.beacon.magenta.desc=Маяк с сиреневым лучом
+tile.beacon.orange.desc=Маяк с оранжевым лучом
+tile.beacon.pink.desc=Маяк с розовым лучом
+tile.beacon.purple.desc=Маяк с фиолетовым лучом
+tile.beacon.red.desc=Маяк с красным лучом
+tile.beacon.white.desc=Маяк с белым лучом
+tile.beacon.yellow.desc=Маяк с жёлтым лучом
+tile.beacon.gray.desc=Маяк с серым лучом
 
 #Leaves
+tile.chisel.leaves.name=Листва
 tile.leaves.6.desc=Мёртвая листва
 tile.leaves.7.desc=Красивая листва
 tile.leaves.8.desc=Розовые лепестки
@@ -95,6 +157,22 @@ tile.voidstone.4.desc=Рунический пустотный камень
 tile.voidstone.5.desc=Огранённый металлом пустотный камень
 tile.voidstone.6.desc=Глазной пустотный камень
 tile.voidstone.7.desc=Скошенный пустотный камень
+tile.chisel.voidstoneRunic.name=Рунический пустотный камень
+tile.voidstoneRunic.orange.desc=Пустотный камень - Оранжевая руна
+tile.voidstoneRunic.magenta.desc=Пустотный камень - Сиреневая руна
+tile.voidstoneRunic.lightblue.desc=Пустотный камень - Светло-синяя руна
+tile.voidstoneRunic.yellow.desc=Пустотный камень - Жёлтая руна
+tile.voidstoneRunic.lime.desc=Пустотный камень - Лаймовая руна
+tile.voidstoneRunic.pink.desc=Пустотный камень - Розовая руна
+tile.voidstoneRunic.gray.desc=Пустотный камень - Серая руна
+tile.voidstoneRunic.lightgray.desc=Пустотный камень - Светло-серая руна
+tile.voidstoneRunic.cyan.desc=Пустотный камень - Бирюзовая руна
+tile.voidstoneRunic.purple.desc=Пустотный камень - Фиолетовая руна
+tile.voidstoneRunic.blue.desc=Пустотный камень - Синяя руна
+tile.voidstoneRunic.brown.desc=Пустотный камень - Коричневая руна
+tile.voidstoneRunic.green.desc=Пустотный камень - Зелёная руна
+tile.voidstoneRunic.red.desc=Пустотный камень - Красная руна
+tile.voidstoneRunic.black.desc=Пустотный камень - Чёрная руна
 
 #Void Stone Pillars
 tile.chisel.voidstonePillar.name=Колонна из пустотного камня
@@ -144,6 +222,9 @@ tile.arcane.5.desc=Кирпичи
 tile.arcane.6.desc=Временной канал
 tile.arcane.7.desc=Мозгииии
 tile.arcane.8.desc=Пространственный канал
+tile.arcane.9.desc=Неприятные геоглифы Наски
+tile.arcane.10.desc=Изысканная эмблема тауматурга
+tile.arcane.11.desc=Cracked Rock leaking Eldritch Glow
 
 #Thaumium
 tile.chisel.thaumium.name=Таумический блок
@@ -170,10 +251,29 @@ tile.bloodRune.5.desc=Плитки из кровавой руны
 
 #Futura
 tile.chisel.futura.name=Футура-блок
+tile.chisel.futuraCircuit.name=Футура-контур
+tile.chisel.fakeController.name=МЭ контроллер?
 tile.futura.0.desc=Светящийся экран с металлическими гранями
 tile.futura.1.desc=Светящийся экран с бирюзовыми гранями
 tile.futura.2.desc=Прикладные лабиринтовые неоновые полосы
 tile.futura.3.desc=Радужный поп-тарт
+tile.futura.4.desc=Фиолетовые прикладные лабиринтовые неоновые полосы
+tile.futuraCircuit.black.desc=Чёрный
+tile.futuraCircuit.blue.desc=Синий
+tile.futuraCircuit.brown.desc=Коричневый
+tile.futuraCircuit.cyan.desc=Бирюзовый
+tile.futuraCircuit.green.desc=Зелёный
+tile.futuraCircuit.light_blue.desc=Светло-синий
+tile.futuraCircuit.silver.desc=Светло-серый
+tile.futuraCircuit.lime.desc=Лаймовый
+tile.futuraCircuit.magenta.desc=Сиреневый
+tile.futuraCircuit.orange.desc=Оранжевый
+tile.futuraCircuit.pink.desc=Розовый
+tile.futuraCircuit.purple.desc=Фиолетовый
+tile.futuraCircuit.red.desc=Красный
+tile.futuraCircuit.white.desc=Белый
+tile.futuraCircuit.yellow.desc=Жёлтый
+tile.futuraCircuit.gray.desc=Серый
 
 #Waterstone
 tile.chisel.waterstone.name=Водный камень
@@ -186,7 +286,7 @@ tile.waterstone.5.desc=Водная панель
 tile.waterstone.6.desc=Декоративная водная панель
 
 #Hex Plating
-tile.chisel.hexPlating.name=Ведьмино покрытие
+tile.chisel.hexPlating.name=Хекс-покрытие
 tile.hexPlating.black.desc=Чёрное покрытие
 tile.hexPlating.blue.desc=Синее покрытие
 tile.hexPlating.brown.desc=Коричневое покрытие
@@ -203,6 +303,9 @@ tile.hexPlating.red.desc=Красное покрытие
 tile.hexPlating.white.desc=Белое покрытие
 tile.hexPlating.yellow.desc=Жёлтое покрытие
 tile.hexPlating.gray.desc=Серое покрытие
+
+#Hex Large Plating
+tile.chisel.hexLargePlating.name=Большое хекс-покрытие
 
 #Grimstone
 tile.chisel.grimstone.name=Мрачный камень
@@ -223,7 +326,9 @@ tile.grimstone.13.desc=Пластина из мрачного камня
 tile.grimstone.14.desc=Чешуйчатый мрачный камень
 
 #Technical Block
-tile.chisel.technical.name=Промышленный блок
+tile.chisel.technical.name=Технический блок
+tile.chisel.technical2.name=Прозрачный технический блок
+tile.chisel.technical3.name=Промышленный технический блок
 tile.technical.0.desc=Строительные леса
 tile.technical.1.desc=Панели с запрещающей лентой
 tile.technical.2.desc=An Old Relic from the land of Oneteufyv
@@ -240,12 +345,15 @@ tile.technical.12.desc=Ржавая панель
 tile.technical.13.desc=Решётка
 tile.technical.14.desc=Вентилятор (Неисправный)
 tile.technical.15.desc=Ржавая решётка
-tile.chisel.technical2.name=Прозрачный промышленный блок
+tile.technical3.0.desc=Я большой фанат этого огромного вентилятора!
+tile.technical3.1.desc=Промышленная бронепластина
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Алюминиевый блок
 tile.chisel.bronzeblock.name=Бронзовый блок
 tile.chisel.copperblock.name=Медный блок
+tile.chisel.gold2.name=Золотой блок
+tile.chisel.iron2.name=Железный блок
 tile.chisel.leadblock.name=Свинцовый блок
 tile.chisel.silverblock.name=Серебряный блок
 tile.chisel.steelblock.name=Стальной блок
@@ -522,6 +630,12 @@ tile.factory.13.desc=Изношенная металлическая стена 
 tile.factory.14.desc=Ржавые металлические пластины
 tile.factory.15.desc=Изношенная металлическая колонна
 
+tile.chisel.factoryblock2.name=Фабричный блок
+tile.factory2.0.desc=Неоновое синие покрытие
+tile.factory2.1.desc=Вертикальная вентиляция
+tile.factory2.2.desc=Металлическое синее контурное покрытие
+tile.factory2.3.desc=Синий каркас
+
 #Diamond blocks
 tile.chisel.diamond_block.name=Алмазный блок
 tile.diamond.1.desc=Рельефный алмазный блок
@@ -560,8 +674,16 @@ tile.glass.13.desc=Стекло с толстой сеткой
 tile.glass.14.desc=Стекло с тонкой сеткой
 tile.glass.15.desc=Современный железный забор
 
+tile.chisel.glass2.name=Стекло
+tile.glass2.0.desc=Асимметричное освинцованное стекло
+
 #Sandstone
 tile.chisel.sandstone.name=Песчаник
+
+tile.sandstone.0.desc=Песчаниковые глифы
+tile.sandstone.1.desc=Песчаниковый булыжник
+tile.sandstone.2.desc=Песчаниковый крипер
+
 tile.sandstone.3.desc=Блеклый песчаник
 tile.sandstone.4.desc=Песчаная колонна
 tile.sandstone.5.desc=Капитель песчаной колонны
@@ -595,7 +717,7 @@ tile.concrete.9.desc=Частично выветрившийся бетонны�
 tile.concrete.10.desc=Асфальт
 
 #Road Line
-tile.chisel.roadLine.name=Дорожные линии
+tile.chisel.road_line.name=Дорожные линии
 tile.roadLine.0.desc=Белые
 tile.roadLine.1.desc=Жёлтые
 tile.roadLine.2.desc=Двойные белые
@@ -734,6 +856,10 @@ tile.stoneMoss.15.desc=Замшелый булыжник с тёмной пан�
 
 #Stone Bricks
 tile.chisel.stonebricksmooth.name=Каменный кирпич
+tile.stonebricksmooth.0.desc=Современная обычная кирпичная кладка
+tile.stonebricksmooth.1.desc=Современная кислая кирпичная кладка
+tile.stonebricksmooth.2.desc=Современная мафическая кирпичная кладка
+tile.stonebricksmooth.3.desc=Современная смешанная кирпичная кладка
 tile.stonebricksmooth.4.desc=Маленькие каменные кирпичи
 tile.stonebricksmooth.5.desc=Широкие каменные кирпичи
 tile.stonebricksmooth.6.desc=Маленькие неупорядоченные каменные кирпичи
@@ -898,8 +1024,6 @@ tile.chisel.spruce_planks.name=Еловая древесина
 tile.chisel.jungle_planks.name=Тропическая древесина
 tile.chisel.dark_oak_planks.name=Древесина тёмного дуба
 tile.chisel.acacia_planks.name=Древесина акации
-
-#Remember to do the descriptions.
 
 #Iron Fence
 tile.chisel.iron_bars.name=Железные прутья
@@ -1228,7 +1352,304 @@ tile.laboratory.13.desc=Консоль направления (Правая)
 tile.laboratory.14.desc=Консоль направления (Левая)
 tile.laboratory.15.desc=Информационная консоль
 
-# Creative Tab localizations
+#Planks (They go in order of creative tab appearance if that helps)
+#Oak
+tile.oak.planks.1.desc=Smooth Oak Wood Planks
+tile.oak.planks.2.desc=Short Oak Wood Planks
+tile.oak.planks.6.desc=Fancy Oak Wood Plank Arrangement
+tile.oak.planks.8.desc=Oak Wood Panel
+tile.oak.planks.9.desc=Oak Wood Double Slab
+tile.oak.planks.10.desc=Oak Wood Crate
+tile.oak.planks.11.desc=Fancy Oak Wood Crate
+tile.oak.planks.13.desc=Large Long Oak Wood Planks
+tile.oak.planks.3.desc=Vertical Oak Wood Planks
+tile.oak.planks.4.desc=Vertical Uneven Oak Wood Planks
+tile.oak.planks.5.desc=Oak Wood Parquet
+tile.oak.planks.7.desc=Oak Wood Plank Blinds
+tile.oak.planks.12.desc=Oak Wood Scaffold
+tile.oak.planks.14.desc=Oak Wood Planks in Disarray
+tile.oak.planks.15.desc=Vertical Oak Wood Planks in Disarray
+
+#Spruce
+tile.spruce.planks.1.desc=Smooth Spruce Wood Planks
+tile.spruce.planks.2.desc=Short Spruce Wood Planks
+tile.spruce.planks.6.desc=Fancy Spruce Wood Plank Arrangement
+tile.spruce.planks.8.desc=Spruce Wood Panel
+tile.spruce.planks.9.desc=Spruce Wood Double Slab
+tile.spruce.planks.10.desc=Spruce Wood Crate
+tile.spruce.planks.11.desc=Fancy Spruce Wood Crate
+tile.spruce.planks.13.desc=Large Long Spruce Wood Planks
+tile.spruce.planks.3.desc=Vertical Spruce Wood Planks
+tile.spruce.planks.4.desc=Vertical Uneven Spruce Wood Planks
+tile.spruce.planks.5.desc=Spruce Wood Parquet
+tile.spruce.planks.7.desc=Spruce Wood Plank Blinds
+tile.spruce.planks.12.desc=Spruce Wood Scaffold
+tile.spruce.planks.14.desc=Spruce Wood Planks in Disarray
+tile.spruce.planks.15.desc=Vertical Spruce Wood Planks in Disarray
+
+#Birch
+tile.birch.planks.1.desc=Smooth Birch Wood Planks
+tile.birch.planks.2.desc=Short Birch Wood Planks
+tile.birch.planks.6.desc=Fancy Birch Wood Plank Arrangement
+tile.birch.planks.8.desc=Birch Wood Panel
+tile.birch.planks.9.desc=Birch Wood Double Slab
+tile.birch.planks.10.desc=Birch Wood Crate
+tile.birch.planks.11.desc=Fancy Birch Wood Crate
+tile.birch.planks.13.desc=Large Long Birch Wood Planks
+tile.birch.planks.3.desc=Vertical Birch Wood Planks
+tile.birch.planks.4.desc=Vertical Uneven Birch Wood Planks
+tile.birch.planks.5.desc=Birch Wood Parquet
+tile.birch.planks.7.desc=Birch Wood Plank Blinds
+tile.birch.planks.12.desc=Birch Wood Scaffold
+tile.birch.planks.14.desc=Birch Wood Planks in Disarray
+tile.birch.planks.15.desc=Vertical Birch Wood Planks in Disarray
+
+#Jungle
+tile.jungle.planks.1.desc=Smooth Jungle Wood Planks
+tile.jungle.planks.2.desc=Short Jungle Wood Planks
+tile.jungle.planks.6.desc=Fancy Jungle Wood Plank Arrangement
+tile.jungle.planks.8.desc=Jungle Wood Panel
+tile.jungle.planks.9.desc=Jungle Wood Double Slab
+tile.jungle.planks.10.desc=Oak Wood Crate
+tile.jungle.planks.11.desc=Fancy jungle Wood Crate
+tile.jungle.planks.13.desc=Large Long Jungle Wood Planks
+tile.jungle.planks.3.desc=Vertical Jungle Wood Planks
+tile.jungle.planks.4.desc=Vertical Uneven Jungle Wood Planks
+tile.jungle.planks.5.desc=Jungle Wood Parquet
+tile.jungle.planks.7.desc=Jungle Wood Plank Blinds
+tile.jungle.planks.12.desc=Jungle Wood Scaffold
+tile.jungle.planks.14.desc=Jungle Wood Planks in Disarray
+tile.jungle.planks.15.desc=Vertical Jungle Wood Planks in Disarray
+
+#Acacia
+tile.acacia.planks.1.desc=Smooth Acacia Wood Planks
+tile.acacia.planks.2.desc=Short Acacia Wood Planks
+tile.acacia.planks.6.desc=Fancy Acacia Wood Plank Arrangement
+tile.acacia.planks.8.desc=Acacia Wood Panel
+tile.acacia.planks.9.desc=Acacia Wood Double Slab
+tile.acacia.planks.10.desc=Acacia Wood Crate
+tile.acacia.planks.11.desc=Fancy Acacia Wood Crate
+tile.acacia.planks.13.desc=Large Long Acacia Wood Planks
+tile.acacia.planks.3.desc=Vertical Acacia Wood Planks
+tile.acacia.planks.4.desc=Vertical Uneven Acacia Wood Planks
+tile.acacia.planks.5.desc=Acacia Wood Parquet
+tile.acacia.planks.7.desc=Acacia Wood Plank Blinds
+tile.acacia.planks.12.desc=Acacia Wood Scaffold
+tile.acacia.planks.14.desc=Acacia Wood Planks in Disarray
+tile.acacia.planks.15.desc=Vertical Acacia Wood Planks in Disarray
+
+#Dark Oak
+tile.dark-oak.planks.1.desc=Smooth Dark Oak Wood Planks
+tile.dark-oak.planks.2.desc=Short Dark Oak Wood Planks
+tile.dark-oak.planks.6.desc=Fancy Dark Oak Wood Plank Arrangement
+tile.dark-oak.planks.8.desc=Dark Oak Wood Panel
+tile.dark-oak.planks.9.desc=Dark Oak Wood Double Slab
+tile.dark-oak.planks.10.desc=Dark Oak Wood Crate
+tile.dark-oak.planks.11.desc=Fancy Dark Oak Wood Crate
+tile.dark-oak.planks.13.desc=Large Long Dark Oak Wood Planks
+tile.dark-oak.planks.3.desc=Vertical Dark Oak Wood Planks
+tile.dark-oak.planks.4.desc=Vertical Uneven Dark Oak Wood Planks
+tile.dark-oak.planks.5.desc=Dark Oak Wood Parquet
+tile.dark-oak.planks.7.desc=Dark Oak Wood Plank Blinds
+tile.dark-oak.planks.12.desc=Dark Oak Wood Scaffold
+tile.dark-oak.planks.14.desc=Dark Oak Wood Planks in Disarray
+tile.dark-oak.planks.15.desc=Vertical Dark Oak Wood Planks in Disarray
+
+#Stained Glass
+white.bubble.desc=Белое пузырчатое стекло
+white.glass.desc=Белая стеклянная панель
+white.glass.fancy.desc=Белая красивая стеклянная панель
+white.glass.noborder.desc=Белое безграничное стекло
+
+orange.bubble.desc=Оранжевое пузырчатое стекло
+orange.glass.desc=Оранжевая стеклянная панель
+orange.glass.fancy.desc=Оранжевая красивая стеклянная панель
+orange.glass.noborder.desc=Оранжевое безграничное стекло
+
+magenta.bubble.desc=Сиреневое пузырчатое стекло
+magenta.glass.desc=Сиреневая стеклянная панель
+magenta.glass.fancy.desc=Сиреневая красивая стеклянная панель
+magenta.glass.noborder.desc=Сиреневое безграничное стекло
+
+lightblue.bubble.desc=Светло-синее пузырчатое стекло
+lightblue.glass.desc=Светло-синяя стеклянная панель
+lightblue.glass.fancy.desc=Светло-синяя красивая стеклянная панель
+lightblue.glass.noborder.desc=Светло-синее безграничное стекло
+
+yellow.bubble.desc=Жёлтое пузырчатое стекло
+yellow.glass.desc=Жёлтая стеклянная панель
+yellow.glass.fancy.desc=Жёлтая красивая стеклянная панель
+yellow.glass.noborder.desc=Жёлтое безграничное стекло
+
+lime.bubble.desc=Лаймовое пузырчатое стекло
+lime.glass.desc=Лаймовая стеклянная панель
+lime.glass.fancy.desc=Лаймовая красивая стеклянная панель
+lime.glass.noborder.desc=Лаймовое безграничное стекло
+
+pink.bubble.desc=Розовое пузырчатое стекло
+pink.glass.desc=Розовая стеклянная панель
+pink.glass.fancy.desc=Розовая красивая стеклянная панель
+pink.glass.noborder.desc=Розовое безграничное стекло
+
+darkgray.bubble.desc=Серое пузырчатое стекло
+darkgray.glass.desc=Серая стеклянная панель
+darkgray.glass.fancy.desc=Серая красивая стеклянная панель
+darkgray.glass.noborder.desc=Серое безграничное стекло
+
+lightgray.bubble.desc=Светло-серое пузырчатое стекло
+lightgray.glass.desc=Светло-серая стеклянная панель
+lightgray.glass.fancy.desc=Светло-серая красивая стеклянная панель
+lightgray.glass.noborder.desc=Светло-серое безграничное стекло
+
+cyan.bubble.desc=Бирюзовое пузырчатое стекло
+cyan.glass.desc=Бирюзовая стеклянная панель
+cyan.glass.fancy.desc=Бирюзовая красивая стеклянная панель
+cyan.glass.noborder.desc=Бирюзовое безграничное стекло
+
+purple.bubble.desc=Фиолетовое пузырчатое стекло
+purple.glass.desc=Фиолетовая стеклянная панель
+purple.glass.fancy.desc=Фиолетовая красивая стеклянная панель
+purple.glass.noborder.desc=Фиолетовое безграничное стекло
+
+blue.bubble.desc=Синее пузырчатое стекло
+blue.glass.desc=Синяя стеклянная панель
+blue.glass.fancy.desc=Синяя красивая стеклянная панель
+blue.glass.noborder.desc=Синее безграничное стекло
+
+brown.bubble.desc=Коричневое пузырчатое стекло
+brown.glass.desc=Коричневая стеклянная панель
+brown.glass.fancy.desc=Коричневая красивая стеклянная панель
+brown.glass.noborder.desc=Коричневое безграничное стекло
+
+green.bubble.desc=Зелёное пузырчатое стекло
+green.glass.desc=Зелёная стеклянная панель
+green.glass.fancy.desc=Зелёная красивая стеклянная панель
+green.glass.noborder.desc=Зелёное безграничное стекло
+
+red.bubble.desc=Красное пузырчатое стекло
+red.glass.desc=Красная стеклянная панель
+red.glass.fancy.desc=Красная красивая стеклянная панель
+red.glass.noborder.desc=Красное безграничное стекло
+
+black.bubble.desc=Чёрное пузырчатое стекло
+black.glass.desc=Чёрная стеклянная панель
+black.glass.fancy.desc=Чёрная красивая стеклянная панель
+black.glass.noborder.desc=Чёрное безграничное стекло
+
+#Stained Glass Pane
+white.pane.bubble.desc=Белое пузырчатое стекло
+white.pane.glass.desc=Белая стеклянная панель
+white.pane.glass.fancy.desc=Белая красивая стеклянная панель
+white.pane.glass.noborder.desc=Белое безграничное стекло
+white.pane.glass.quadrant.desc=Белая четверть стекла
+white.pane.glass.fancyquadrant.desc=Белая красивая четверть стекла
+
+orange.pane.bubble.desc=Оранжевое пузырчатое стекло
+orange.pane.glass.desc=Оранжевая стеклянная панель
+orange.pane.glass.fancy.desc=Оранжевая красивая стеклянная панель
+orange.pane.glass.noborder.desc=Оранжевое безграничное стекло
+orange.pane.glass.quadrant.desc=Оранжевая четверть стекла
+orange.pane.glass.fancyquadrant.desc=Оранжевая красивая четверть стекла
+
+magenta.pane.bubble.desc=Сиреневое пузырчатое стекло
+magenta.pane.glass.desc=Сиреневая стеклянная панель
+magenta.pane.glass.fancy.desc=Сиреневая красивая стеклянная панель
+magenta.pane.glass.noborder.desc=Сиреневое безграничное стекло
+magenta.pane.glass.quadrant.desc=Сиреневая четверть стекла
+magenta.pane.glass.fancyquadrant.desc=Сиреневая красивая четверть стекла
+
+lightblue.pane.bubble.desc=Светло-синее пузырчатое стекло
+lightblue.pane.glass.desc=Светло-синяя стеклянная панель
+lightblue.pane.glass.fancy.desc=Светло-синяя красивая стеклянная панель
+lightblue.pane.glass.noborder.desc=Светло-синее безграничное стекло
+lightblue.pane.glass.quadrant.desc=Светло-синяя четверть стекла
+lightblue.pane.glass.fancyquadrant.desc=Светло-синяя красивая четверть стекла
+
+yellow.pane.bubble.desc=Жёлтое пузырчатое стекло
+yellow.pane.glass.desc=Жёлтая стеклянная панель
+yellow.pane.glass.fancy.desc=Жёлтая красивая стеклянная панель
+yellow.pane.glass.noborder.desc=Жёлтое безграничное стекло
+yellow.pane.glass.quadrant.desc=Жёлтая четверть стекла
+yellow.pane.glass.fancyquadrant.desc=Жёлтая красивая четверть стекла
+
+lime.pane.bubble.desc=Лаймовое пузырчатое стекло
+lime.pane.glass.desc=Лаймовая стеклянная панель
+lime.pane.glass.fancy.desc=Лаймовая красивая стеклянная панель
+lime.pane.glass.noborder.desc=Лаймовое безграничное стекло
+lime.pane.glass.quadrant.desc=Лаймовая четверть стекла
+lime.pane.glass.fancyquadrant.desc=Лаймовая красивая четверть стекла
+
+pink.pane.bubble.desc=Розовое пузырчатое стекло
+pink.pane.glass.desc=Розовая стеклянная панель
+pink.pane.glass.fancy.desc=Розовая красивая стеклянная панель
+pink.pane.glass.noborder.desc=Розовое безграничное стекло
+pink.pane.glass.quadrant.desc=Розовая четверть стекла
+pink.pane.glass.fancyquadrant.desc=Розовая красивая четверть стекла
+
+darkgray.pane.bubble.desc=Серое пузырчатое стекло
+darkgray.pane.glass.desc=Серая стеклянная панель
+darkgray.pane.glass.fancy.desc=Серая красивая стеклянная панель
+darkgray.pane.glass.noborder.desc=Серое безграничное стекло
+darkgray.pane.glass.quadrant.desc=Серая четверть стекла
+darkgray.pane.glass.fancyquadrant.desc=Серая красивая четверть стекла
+
+lightgray.pane.bubble.desc=Светло-серое пузырчатое стекло
+lightgray.pane.glass.desc=Светло-серая стеклянная панель
+lightgray.pane.glass.fancy.desc=Светло-серая красивая стеклянная панель
+lightgray.pane.glass.noborder.desc=Светло-серое безграничное стекло
+lightgray.pane.glass.quadrant.desc=Светло-серая четверть стекла
+lightgray.pane.glass.fancyquadrant.desc=Светло-серая красивая четверть стекла
+
+cyan.pane.bubble.desc=Бирюзовое пузырчатое стекло
+cyan.pane.glass.desc=Бирюзовая стеклянная панель
+cyan.pane.glass.fancy.desc=Бирюзовая красивая стеклянная панель
+cyan.pane.glass.noborder.desc=Бирюзовое безграничное стекло
+cyan.pane.glass.quadrant.desc=Бирюзовая четверть стекла
+cyan.pane.glass.fancyquadrant.desc=Бирюзовая красивая четверть стекла
+
+purple.pane.bubble.desc=Фиолетовое пузырчатое стекло
+purple.pane.glass.desc=Фиолетовая стеклянная панель
+purple.pane.glass.fancy.desc=Фиолетовая красивая стеклянная панель
+purple.pane.glass.noborder.desc=Фиолетовое безграничное стекло
+purple.pane.glass.quadrant.desc=Фиолетовая четверть стекла
+purple.pane.glass.fancyquadrant.desc=Фиолетовая красивая четверть стекла
+
+blue.pane.bubble.desc=Синее пузырчатое стекло
+blue.pane.glass.desc=Синяя стеклянная панель
+blue.pane.glass.fancy.desc=Синяя красивая стеклянная панель
+blue.pane.glass.noborder.desc=Синее безграничное стекло
+blue.pane.glass.quadrant.desc=Синяя четверть стекла
+blue.pane.glass.fancyquadrant.desc=Синяя красивая четверть стекла
+
+brown.pane.bubble.desc=Коричневое пузырчатое стекло
+brown.pane.glass.desc=Коричневая стеклянная панель
+brown.pane.glass.fancy.desc=Коричневая красивая стеклянная панель
+brown.pane.glass.noborder.desc=Коричневое безграничное стекло
+brown.pane.glass.quadrant.desc=Коричневая четверть стекла
+brown.pane.glass.fancyquadrant.desc=Коричневая красивая четверть стекла
+
+green.pane.bubble.desc=Зелёное пузырчатое стекло
+green.pane.glass.desc=Зелёная стеклянная панель
+green.pane.glass.fancy.desc=Зелёная красивая стеклянная панель
+green.pane.glass.noborder.desc=Зелёное безграничное стекло
+green.pane.glass.quadrant.desc=Зелёная четверть стекла
+green.pane.glass.fancyquadrant.desc=Зелёная красивая четверть стекла
+
+red.pane.bubble.desc=Красное пузырчатое стекло
+red.pane.glass.desc=Красная стеклянная панель
+red.pane.glass.fancy.desc=Красная красивая стеклянная панель
+red.pane.glass.noborder.desc=Красное безграничное стекло
+red.pane.glass.quadrant.desc=Красная четверть стекла
+red.pane.glass.fancyquadrant.desc=Красная красивая четверть стекла
+
+black.pane.bubble.desc=Чёрное пузырчатое стекло
+black.pane.glass.desc=Чёрная стеклянная панель
+black.pane.glass.fancy.desc=Чёрная красивая стеклянная панель
+black.pane.glass.noborder.desc=Чёрное безграничное стекло
+black.pane.glass.quadrant.desc=Чёрная четверть стекла
+black.pane.glass.fancyquadrant.desc=Чёрная красивая четверть стекла
+
+#Creative Tab localizations
 itemGroup.tabOtherChiselBlocks=Chisel: Остальные блоки
 itemGroup.tabStoneChiselBlocks=Chisel: Каменные блоки
 itemGroup.tabWoodChiselBlocks=Chisel: Деревянные блоки
