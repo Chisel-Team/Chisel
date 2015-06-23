@@ -1,15 +1,31 @@
 # Only those localizations which need to be changed
 
+#AntiBlocks
+tile.antiBlock.silver.desc=Light Grey Anti Block
+tile.antiBlock.gray.desc=Grey Anti Block
+
+#Beacon
+tile.beacon.silver.desc=Light Grey Beamed Beacon
+tile.beacon.gray.desc=Grey Beamed Beacon
+
+#Void Stone Blocks
+tile.voidstoneRunic.gray.desc=Voidstone - Grey Rune
+tile.voidstoneRunic.lightgray.desc=Voidstone - Light Grey Rune
+
+#Futura
+tile.futuraCircuit.silver.desc=Light Grey
+tile.futuraCircuit.gray.desc=Grey
+
 #Hex Plating
 tile.hexPlating.15.desc=Grey Plating
 
 #Carpet
-tile.carpet_block.7.desc=Dark Grey Carpet Block
-tile.carpet_block.8.desc=Grey Carpet Block
+tile.carpet_block.7.desc=Grey Carpet Block
+tile.carpet_block.8.desc=Light Grey Carpet Block
 
 #Carpet floor
-tile.carpet.7.desc=Dark Grey Carpet
-tile.carpet.8.desc=Grey Carpet
+tile.carpet.7.desc=Grey Carpet
+tile.carpet.8.desc=Light Grey Carpet
 
 #Woollen Clay
 tile.chisel.woolen_clay.name=Woollen Clay
@@ -30,9 +46,39 @@ tile.woolenClay.13.desc=Green Woollen Clay
 tile.woolenClay.14.desc=Red Woollen Clay
 tile.woolenClay.15.desc=Black Woollen Clay
 
+#Colored Sand
+tile.coloredSand.7.desc=Grey Colored Sand
+tile.coloredSand.8.desc=Light Grey Colored Sand
+
 #Laboratory Block
 tile.laboratory.2.desc=Enamelled Wall
 tile.laboratory.3.desc=Enamelled Roundel Wall
 tile.laboratory.4.desc=Enamelled Wall Vents
 tile.laboratory.5.desc=Large Enamelled Tile
 tile.laboratory.6.desc=Small Enamelled Tiles
+
+#Stained Glass
+darkgray.bubble.desc=Grey Bubble Glass
+darkgray.glass.desc=Grey Glass Panel
+darkgray.glass.fancy.desc=Grey Fancy Glass Panel
+darkgray.glass.noborder.desc=Grey Borderless Glass
+
+lightgray.bubble.desc=Light Grey Bubble Glass
+lightgray.glass.desc=Light Grey Glass Panel
+lightgray.glass.fancy.desc=Light Grey Fancy Glass Panel
+lightgray.glass.noborder.desc=Light Grey Borderless Glass
+
+#Stained Glass Pane
+darkgray.pane.bubble.desc=Grey Bubble Glass
+darkgray.pane.glass.desc=Grey Glass Panel
+darkgray.pane.glass.fancy.desc=Grey Fancy Glass Panel
+darkgray.pane.glass.noborder.desc=Grey Borderless Glass
+darkgray.pane.glass.quadrant.desc=Grey Quadrant Glass
+darkgray.pane.glass.fancyquadrant.desc=Grey Fancy Quadrant Glass
+
+lightgray.pane.bubble.desc=Light Grey Bubble Glass
+lightgray.pane.glass.desc=Light Grey Glass Panel
+lightgray.pane.glass.fancy.desc=Light Grey Fancy Glass Panel
+lightgray.pane.glass.noborder.desc=Light Grey Borderless Glass
+lightgray.pane.glass.quadrant.desc=Light Grey Quadrant Glass
+lightgray.pane.glass.fancyquadrant.desc=Light Grey Fancy Quadrant Glass
