@@ -1,12 +1,18 @@
 package com.cricketcraft.chisel;
 
 import java.io.File;
+import java.util.logging.Level;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -51,6 +57,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
+
+import static java.util.logging.Level.*;
 
 @Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory", dependencies = "after:EE3;after:ForgeMultipart;after:Thaumcraft;after:appliedenergistics2;after:Railcraft;after:AWWayofTime;after:TwilightForest")
 public class Chisel {
@@ -177,6 +185,8 @@ public class Chisel {
 	public void postInit(FMLPostInitializationEvent event) {
 		ChiselTabs.postInit();
 		Compatibility.init(event);
+		FMLLog.severe("Unable to lookup chisel:... is not an error, please do not treat it as such");
+		FMLLog.bigWarning("In case you didn't see the red above I suggest you read it - Cricket");
 	}
 
 	@EventHandler
@@ -190,6 +200,18 @@ public class Chisel {
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 		if (event.modID.equals("chisel")) {
 			Configurations.refreshConfig();
+		}
+	}
+
+	@SubscribeEvent
+	public void thankYou(EntityJoinWorldEvent event){
+		if(!event.world.isRemote && event.entity instanceof EntityPlayerMP){
+			EntityPlayerMP player = (EntityPlayerMP) event.entity;
+			if(!player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getBoolean("thanked")){
+				NBTTagCompound tag = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
+				tag.setBoolean("thanked", true);
+				player.addChatMessage(new ChatComponentText("Thank you for half a million downloads! - The Chisel Team"));
+			}
 		}
 	}
 }
