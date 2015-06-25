@@ -1,3 +1,33 @@
+2.4:
+New
+- EE3 compatibility
+- Reversion upgrade for the Auto Chisel
+- Added Chiselled beacons that look a little odd, but display every color
+- You can repair chisels in an anvil with the material you made it out of\
+- Added the purple AE2 Controller
+- Localization support for planks and stained glass
+- 1.8 stones are oreDict'd
+- Added a config for the bounding box of concrete
+- Added a config to disable the tooltip of blocks that generate in your world
+
+Changes
+- Spice up the Hex Plating
+- Added some sandstone
+- Sandstone Scribbles are now part of sandstone
+- New "Hades" animation on the voidstone
+- Hex Plating is blast proof
+- Changed the ME Controller texture
+
+Fixes
+- Packed Ice rendering and reduced the oil on it
+- Fixed a crash with putting a chisel into storage drawers
+- Fixes a diamond dupe of sorts
+- Fixes multiple rendering crashes
+- Fixes bookshelf rendering
+
+API
+- CTM is now its own mod CTMLib
+
 2.3.10:
 New
 - Added ARRRRRRR-cane stone blocks
