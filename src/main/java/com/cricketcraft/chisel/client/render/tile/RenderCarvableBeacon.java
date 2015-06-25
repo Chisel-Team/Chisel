@@ -1,21 +1,36 @@
 package com.cricketcraft.chisel.client.render.tile;
 
-import com.cricketcraft.chisel.block.tileentity.TileEntityCarvableBeacon;
+import java.awt.Color;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockBeacon;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntityBeaconRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemDye;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.IBlockAccess;
+
 import org.lwjgl.opengl.GL11;
 
-import java.awt.*;
+import com.cricketcraft.chisel.block.tileentity.TileEntityCarvableBeacon;
 
-public class RenderCarvableBeacon extends TileEntityBeaconRenderer{
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+
+public class RenderCarvableBeacon extends TileEntityBeaconRenderer implements ISimpleBlockRenderingHandler {
     private static final ResourceLocation texture = new ResourceLocation("textures/entity/beacon_beam.png");
 
+    private int renderId;
+    
+	public RenderCarvableBeacon() {
+		this.renderId = RenderingRegistry.getNextAvailableRenderId();	
+	}
+	
     public void renderTileEntityAt(TileEntityCarvableBeacon beacon, double x, double y, double z, float partialTicks) {
         float f1 = beacon.func_146002_i();
         GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
@@ -111,4 +126,36 @@ public class RenderCarvableBeacon extends TileEntityBeaconRenderer{
     public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTicks) {
         this.renderTileEntityAt((TileEntityCarvableBeacon) tile, x, y, z, partialTicks);
     }
+
+	@Override
+	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
+		renderer.renderBlockAsItem(Blocks.beacon, 0, 1);
+	}
+
+	@Override
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+        float f = 0.1875F;
+        renderer.setOverrideBlockTexture(renderer.getBlockIcon(Blocks.glass));
+        renderer.renderStandardBlockWithAmbientOcclusion(block, x, y, z, 1, 1, 1);
+        renderer.renderAllFaces = true;
+        renderer.setOverrideBlockTexture(renderer.getBlockIcon(Blocks.obsidian));
+        renderer.setRenderBounds(0.125D, 0.00625D, 0.125D, 0.875D, (double)f, 0.875D);
+        renderer.renderStandardBlockWithAmbientOcclusion(block, x, y, z, 1, 1, 1);
+        renderer.setOverrideBlockTexture(renderer.getBlockIcon(Blocks.beacon));
+        renderer.setRenderBounds(0.1875D, (double)f, 0.1875D, 0.8125D, 0.875D, 0.8125D);
+        renderer.renderStandardBlockWithAmbientOcclusion(block, x, y, z, 1, 1, 1);
+        renderer.renderAllFaces = false;
+        renderer.clearOverrideBlockTexture();
+        return true;
+	}
+
+	@Override
+	public boolean shouldRender3DInInventory(int modelId) {
+		return true;
+	}
+
+	@Override
+	public int getRenderId() {
+		return renderId;
+	}
 }

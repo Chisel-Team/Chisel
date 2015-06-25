@@ -1,10 +1,5 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.block.tileentity.TileEntityCarvableBeacon;
-import com.cricketcraft.chisel.init.ChiselTabs;
 import net.minecraft.block.BlockBeacon;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,14 +8,23 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.cricketcraft.chisel.api.ICarvable;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
+import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.block.tileentity.TileEntityCarvableBeacon;
+import com.cricketcraft.chisel.init.ChiselTabs;
+
 public class BlockCarvableBeacon extends BlockBeacon implements ICarvable {
 
+	public static int renderId;
+	
     public CarvableHelper carverHelper;
 
     public BlockCarvableBeacon() {
         super();
         setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
         setLightLevel(5.0F);
+        setBlockTextureName("beacon");
         carverHelper = new CarvableHelper(this);
     }
 
@@ -45,6 +49,11 @@ public class BlockCarvableBeacon extends BlockBeacon implements ICarvable {
     }
 
     @Override
+    public int getRenderType() {
+    	return renderId;
+    }
+    
+    @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
         super.onBlockPlacedBy(world, x, y, z, player, stack);
 
@@ -52,12 +61,7 @@ public class BlockCarvableBeacon extends BlockBeacon implements ICarvable {
             ((TileEntityCarvableBeacon) world.getTileEntity(x, y, z)).func_145999_a(stack.getDisplayName());
         }
     }
-
-    @Override
-    public int getRenderType(){
-        return 34;
-    }
-
+    
     @Override
     public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
         return carverHelper.getVariation(metadata);
