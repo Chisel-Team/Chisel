@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.block;
 
+import com.cricketcraft.chisel.init.ChiselTabs;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
@@ -30,7 +31,7 @@ public class CarvableStairsMaker {
 			String n = name + "." + i;
 			blocks[i] = creator == null ? new BlockCarvableStairs(blockBase, i * 2, carverHelper) : creator.create(blockBase, i * 2, carverHelper);
 
-			blocks[i].setBlockName("chisel." + n);
+			blocks[i].setBlockName("chisel." + n).setCreativeTab(ChiselTabs.tabStairChiselBlocks);
 			GameRegistry.registerBlock(blocks[i], ItemCarvable.class, n);
 
 			for (int meta = 0; meta < 2 && i * 2 + meta < carverHelper.infoList.size(); meta++) {

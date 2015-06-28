@@ -95,6 +95,17 @@ public enum Features {
 			aluminum.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/aluminum/bolted", 25);
 			aluminum.carverHelper.registerAll(aluminum, "aluminumblock");
 			Carving.chisel.registerOre("aluminumblock", "blockAluminum");
+
+			CarvableStairsMaker aluminumStairs = new CarvableStairsMaker(aluminum);
+
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/aluminum/caution");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/aluminum/crate");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/aluminum/thermal");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/aluminum/adv");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/aluminum/egregious");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/aluminum/bolted");
+			aluminumStairs.create("aluminum_stairs", ChiselBlocks.aluminumStairs);
+			Carving.chisel.registerOre("aluminum_stairs", "aluminum_stairs");
 		}
 	},
 
