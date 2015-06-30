@@ -20,6 +20,13 @@ public class SubmapManagerFakeController extends SubmapManagerBase {
 	private TextureSubmap map;
 	private CTM ctm = CTM.getInstance();
 	private int meta;
+    private String texturePath;
+
+    public SubmapManagerFakeController(int meta, String texture) {
+        ctm.disableObscuredFaceCheck = true;
+        this.meta = meta;
+        texturePath = texture;
+    }
 
 	public SubmapManagerFakeController(int meta) {
 		ctm.disableObscuredFaceCheck = true;
@@ -51,20 +58,15 @@ public class SubmapManagerFakeController extends SubmapManagerBase {
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(String modName, Block block, IIconRegister register) {
 
-        switch(meta)
+        if (texturePath != null)
         {
-            default:
-                Chisel.logger.info("SubmapManagerFakeController was called on block" + block.getUnlocalizedName()
-                        + " but an entry was not provided in this class!");
-            case 2:
-                map = new TextureSubmap(register.registerIcon(modName + ":futura/WIP/controller"), 2, 2);
-                break;
-            case 4:
-                map = new TextureSubmap(register.registerIcon(modName + ":futura/WIP/controllerPurple"), 2, 2);
-                break;
-            case 5:
-                map = new TextureSubmap(register.registerIcon(modName + ":futura/WIP/uberWavy"), 2, 2);
-                break;
+            map = new TextureSubmap(register.registerIcon(modName + ":" + texturePath), 2, 2);
+        }
+        else
+        {
+            Chisel.logger.info("SubmapManagerFakeController was called on block " + block.getUnlocalizedName()
+                    + " without declaring texture, using a default texture instead.");
+            map = new TextureSubmap(register.registerIcon(modName + ":futura/WIP/controller"), 2, 2);
         }
 	}
 }
