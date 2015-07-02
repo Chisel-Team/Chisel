@@ -22,8 +22,6 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 	// TODO there must be a better more generic way to do this...
 	@SideOnly(Side.CLIENT)
 	private class RenderBlocksVoidstone extends RenderBlocksCTM {
-
-		private RenderBlocks rb = new RenderBlocks();
 		
 		@Override
 		public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
@@ -121,7 +119,6 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 		if (rb == null) {
 			rb = new RenderBlocksVoidstone();
 		}
-		rb.rb.blockAccess = world;
 		RenderBlocks ctx = overlay.createRenderContext(rendererOld, block, world);
 		rb.setRenderBoundsFromBlock(block);
 		if (ctx instanceof RenderBlocksCTM) {
