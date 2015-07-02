@@ -9,7 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
-
+import net.minecraftforge.client.MinecraftForgeClient;
 import static org.lwjgl.opengl.GL11.*;
 
 public class RendererMultiLayer implements ISimpleBlockRenderingHandler {
@@ -52,7 +52,7 @@ public class RendererMultiLayer implements ISimpleBlockRenderingHandler {
 			return false;
 		BlockMultiLayerBase block = (BlockMultiLayerBase) blck;
 
-		if (block.currentPass == 0) {
+		if (MinecraftForgeClient.getRenderPass() == 0) {
 			if (block.icon != null) {
 				renderer.overrideBlockTexture = block.icon;
 				renderer.renderStandardBlock(block, x, y, z);
