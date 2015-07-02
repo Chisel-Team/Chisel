@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.client.render;
 
+import com.cricketcraft.chisel.Chisel;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
@@ -19,6 +20,13 @@ public class SubmapManagerFakeController extends SubmapManagerBase {
 	private TextureSubmap map;
 	private CTM ctm = CTM.getInstance();
 	private int meta;
+    private String texturePath;
+
+    public SubmapManagerFakeController(int meta, String texture) {
+        ctm.disableObscuredFaceCheck = true;
+        this.meta = meta;
+        texturePath = texture;
+    }
 
 	public SubmapManagerFakeController(int meta) {
 		ctm.disableObscuredFaceCheck = true;
@@ -31,9 +39,11 @@ public class SubmapManagerFakeController extends SubmapManagerBase {
 	}
 
 	@Override
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
+	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
+	{
 		ctm.buildConnectionMap(world, x, y, z, side, ChiselBlocks.futura, meta);
-		if (ctm.connectedAnd(TOP, BOTTOM, LEFT, RIGHT)) {
+
+		if (ctm.connectedAnd(TOP, TOP_RIGHT, RIGHT, BOTTOM_RIGHT, BOTTOM, BOTTOM_LEFT, LEFT, TOP_LEFT)) {
 			return map.getSubIcon(1, 1);
 		} else if (ctm.connectedAnd(TOP, BOTTOM)) {
 			return map.getSubIcon(0, 1);
@@ -47,10 +57,16 @@ public class SubmapManagerFakeController extends SubmapManagerBase {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(String modName, Block block, IIconRegister register) {
-		if(meta == 2){
-			map = new TextureSubmap(register.registerIcon(modName + ":futura/WIP/controller"), 2, 2);
-		} else {
-			map = new TextureSubmap(register.registerIcon(modName + ":futura/WIP/controllerPurple"), 2, 2);
-		}
+
+        if (texturePath != null)
+        {
+            map = new TextureSubmap(register.registerIcon(modName + ":" + texturePath), 2, 2);
+        }
+        else
+        {
+            Chisel.logger.info("SubmapManagerFakeController was called on block " + block.getUnlocalizedName()
+                    + " without declaring texture, using a default texture instead.");
+            map = new TextureSubmap(register.registerIcon(modName + ":futura/WIP/controller"), 2, 2);
+        }
 	}
 }
