@@ -1,4 +1,17 @@
-2.4:
+2.4.1:
+New
+- New UberWavy futura block
+
+Changes
+- Waterstone and Lavastone will now use the still textures, not flowing
+- The voidstone render has been retouched, energized voidstone will now have CTM variants where the normal voidstone does.
+
+Fixes
+- Fix bad rendering code in layered items
+- Fix chisel using its own render pass variable instead of the forge provided one
+  - The above two fixes should allow EnderIO facades (and other similar blocks) to work with waterstone, lavastone, etc.
+- Fix regular voidstone ctm not working
+2.4.0:
 New
 - EE3 compatibility
 - Reversion upgrade for the Auto Chisel
