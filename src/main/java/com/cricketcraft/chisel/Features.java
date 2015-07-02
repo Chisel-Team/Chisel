@@ -1349,7 +1349,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockLavastone lavastone = (BlockLavastone) new BlockLavastone(Material.rock, "Chisel:lavastone/lava_flow").setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F);
+			BlockLavastone lavastone = (BlockLavastone) new BlockLavastone(Material.rock, "lava_still").setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F);
 			lavastone.carverHelper.addVariation("tile.lavastone.0.desc", 0, "lavastone/cobble");
 			lavastone.carverHelper.addVariation("tile.lavastone.1.desc", 1, "lavastone/black");
 			lavastone.carverHelper.addVariation("tile.lavastone.2.desc", 2, "lavastone/tiles");
@@ -2792,7 +2792,7 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
-			BlockWaterstone waterstone = (BlockWaterstone) new BlockWaterstone(Material.rock, "Chisel:waterstone/water_flow").setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10.0F);
+			BlockWaterstone waterstone = (BlockWaterstone) new BlockWaterstone(Material.rock, "water_still").setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10.0F);
 			waterstone.carverHelper.addVariation("tile.waterstone.0.desc", 0, "waterstone/cobble");
 			waterstone.carverHelper.addVariation("tile.waterstone.1.desc", 1, "waterstone/black");
 			waterstone.carverHelper.addVariation("tile.waterstone.2.desc", 2, "waterstone/tiles");
