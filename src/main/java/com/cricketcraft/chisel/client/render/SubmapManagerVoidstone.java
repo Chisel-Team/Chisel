@@ -11,8 +11,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.cricketcraft.chisel.api.carving.CarvingUtils;
 import com.cricketcraft.chisel.api.rendering.TextureType;
 import com.cricketcraft.ctmlib.ISubmapManager;
-import com.cricketcraft.ctmlib.TextureSubmap;
 import com.cricketcraft.ctmlib.RenderBlocksCTM;
+import com.cricketcraft.ctmlib.TextureSubmap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,45 +23,65 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 	@SideOnly(Side.CLIENT)
 	private class RenderBlocksVoidstone extends RenderBlocksCTM {
 
+		private RenderBlocks rb = new RenderBlocks();
+		
 		@Override
-		public void renderFaceXNeg(Block block, double x, double y, double z, IIcon p_147798_8_) {
-			super.renderFaceXNeg(block, x, y, z, getBase(x, y, z, ForgeDirection.WEST.ordinal()));
-			super.renderFaceXNeg(block, x, y, z, p_147798_8_);
+		public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
+			super.renderFaceXNeg(block, x, y, z, icon);
+			setRenderBounds(0.001, 0, 0, 1, 1, 1);
+			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.WEST.ordinal()));
+			super.renderFaceXNeg(block, x, y, z, null);
+			clearOverrideBlockTexture();
 		}
 
 		@Override
-		public void renderFaceXPos(Block block, double x, double y, double z, IIcon p_147764_8_) {
-			super.renderFaceXPos(block, x, y, z, getBase(x, y, z, ForgeDirection.EAST.ordinal()));
-			super.renderFaceXPos(block, x, y, z, p_147764_8_);
+		public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon) {
+			super.renderFaceXPos(block, x, y, z, icon);
+			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.EAST.ordinal()));
+			setRenderBounds(0, 0, 0, 0.999, 1, 1);
+			super.renderFaceXPos(block, x, y, z, null);
+			clearOverrideBlockTexture();
 		}
 
 		@Override
-		public void renderFaceYNeg(Block block, double x, double y, double z, IIcon p_147768_8_) {
-			super.renderFaceYNeg(block, x, y, z, getBase(x, y, z, ForgeDirection.DOWN.ordinal()));
-			super.renderFaceYNeg(block, x, y, z, p_147768_8_);
+		public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon) {
+			super.renderFaceYNeg(block, x, y, z, icon);
+			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.DOWN.ordinal()));
+			setRenderBounds(0, 0.001, 0, 1, 1, 1);
+			super.renderFaceYNeg(block, x, y, z, null);
+			clearOverrideBlockTexture();
 		}
 
 		@Override
-		public void renderFaceYPos(Block block, double x, double y, double z, IIcon p_147806_8_) {
-			super.renderFaceYPos(block, x, y, z, getBase(x, y, z, ForgeDirection.UP.ordinal()));
-			super.renderFaceYPos(block, x, y, z, p_147806_8_);
+		public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon) {
+			super.renderFaceYPos(block, x, y, z, icon);
+			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.UP.ordinal()));
+			setRenderBounds(0, 0, 0, 1, 0.999, 1);
+			super.renderFaceYPos(block, x, y, z, null);
+			clearOverrideBlockTexture();
 		}
 
 		@Override
-		public void renderFaceZNeg(Block block, double x, double y, double z, IIcon p_147761_8_) {
-			super.renderFaceZNeg(block, x, y, z, getBase(x, y, z, ForgeDirection.NORTH.ordinal()));
-			super.renderFaceZNeg(block, x, y, z, p_147761_8_);
+		public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon) {
+			super.renderFaceZNeg(block, x, y, z, icon);
+			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.NORTH.ordinal()));
+			setRenderBounds(0, 0, 0.001, 1, 1, 1);
+			super.renderFaceZNeg(block, x, y, z, null);
+			clearOverrideBlockTexture();
 		}
 
 		@Override
-		public void renderFaceZPos(Block block, double x, double y, double z, IIcon p_147734_8_) {
-			super.renderFaceZPos(block, x, y, z, getBase(x, y, z, ForgeDirection.SOUTH.ordinal()));
-			super.renderFaceZPos(block, x, y, z, p_147734_8_);
+		public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon) {
+			super.renderFaceZPos(block, x, y, z, icon);
+			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.SOUTH.ordinal()));
+			setRenderBounds(0, 0, 0, 1, 1, 0.999);
+			super.renderFaceZPos(block, x, y, z, null);
+			clearOverrideBlockTexture();
 		}
 	}
 
 	@SideOnly(Side.CLIENT)
-	private RenderBlocksCTM rb;
+	private RenderBlocksVoidstone rb;
 
 	private ISubmapManager overlay;
 	private TextureSubmap base;
@@ -101,6 +121,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 		if (rb == null) {
 			rb = new RenderBlocksVoidstone();
 		}
+		rb.rb.blockAccess = world;
 		RenderBlocks ctx = overlay.createRenderContext(rendererOld, block, world);
 		rb.setRenderBoundsFromBlock(block);
 		if (ctx instanceof RenderBlocksCTM) {
