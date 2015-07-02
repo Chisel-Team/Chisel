@@ -12,6 +12,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.ChiselAPIProps;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
@@ -69,7 +70,7 @@ public class BlockCarvable extends Block implements ICarvable {
 
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		carverHelper.registerBlockIcons("Chisel", this, register);
+		carverHelper.registerBlockIcons(Chisel.MOD_ID, this, register);
 	}
 
 	@Override
