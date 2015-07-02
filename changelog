@@ -11,6 +11,10 @@ Fixes
 - Fix chisel using its own render pass variable instead of the forge provided one
   - The above two fixes should allow EnderIO facades (and other similar blocks) to work with waterstone, lavastone, etc.
 - Fix regular voidstone ctm not working
+
+CTMLib
+- Fix CTM not connecting to IFacade blocks
+
 2.4.0:
 New
 - EE3 compatibility
