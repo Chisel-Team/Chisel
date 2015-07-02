@@ -95,6 +95,17 @@ public enum Features {
 			aluminum.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/aluminum/bolted", 25);
 			aluminum.carverHelper.registerAll(aluminum, "aluminumblock");
 			Carving.chisel.registerOre("aluminumblock", "blockAluminum");
+
+			CarvableStairsMaker aluminumStairs = new CarvableStairsMaker(aluminum);
+
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/aluminum/caution");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/aluminum/crate");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/aluminum/thermal");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/aluminum/adv");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/aluminum/egregious");
+			aluminumStairs.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/aluminum/bolted");
+			aluminumStairs.create("aluminum_stairs", ChiselBlocks.aluminumStairs);
+			Carving.chisel.registerOre("aluminum_stairs", "aluminum_stairs");
 		}
 	},
 
@@ -805,9 +816,10 @@ public enum Features {
 			BlockCarvable futura = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
 			futura.carverHelper.addVariation("tile.futura.0.desc", 0, "futura/WIP/screenMetallicWIP");
 			futura.carverHelper.addVariation("tile.futura.1.desc", 1, "futura/WIP/screenCyanWIP");
-			futura.carverHelper.addVariation("tile.futura.2.desc", 2, "futura/WIP/controllerWIP-Overlay", new SubmapManagerFakeController(2));
+			futura.carverHelper.addVariation("tile.futura.2.desc", 2, "futura/WIP/controller", new SubmapManagerFakeController(2, "futura/WIP/controller"));
 			futura.carverHelper.addVariation("tile.futura.3.desc", 3, "futura/WIP/wavyWIP");
-			futura.carverHelper.addVariation("tile.futura.4.desc", 4, "futura/WIP/controllerWIP-Overlay", new SubmapManagerFakeController(4));
+			futura.carverHelper.addVariation("tile.futura.4.desc", 4, "futura/WIP/controller", new SubmapManagerFakeController(4, "futura/WIP/controllerPurple"));
+			futura.carverHelper.addVariation("tile.futura.5.desc", 5, "futura/WIP/controller", new SubmapManagerFakeController(5, "futura/WIP/uberWavy"));
 			futura.carverHelper.registerAll(futura, "futura");
 
             BlockCarvable circuits = (BlockCarvable) new BlockCarvableGlow("animations/strobe").setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10.0F);

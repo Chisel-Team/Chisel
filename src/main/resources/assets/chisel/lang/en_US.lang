@@ -1655,6 +1655,7 @@ itemGroup.tabStoneChiselBlocks=Stone Chisel Blocks
 itemGroup.tabWoodChiselBlocks=Wood Chisel Blocks
 itemGroup.tabMetalChiselBlocks=Metal Chisel Blocks
 itemGroup.tabModdedChiselBlocks=Modded Chisel Blocks
+itemGroup.tabStairChiselBlocks=Chisel Stairs
 itemGroup.tabChisel=Chisel Items
 
 #Container
