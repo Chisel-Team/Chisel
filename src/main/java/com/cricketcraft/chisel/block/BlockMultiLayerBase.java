@@ -4,12 +4,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.client.ForgeHooksClient;
 
 import com.cricketcraft.chisel.client.render.RendererMultiLayer;
 
 public abstract class BlockMultiLayerBase extends Block {
 
-	public int currentPass;
 	public Block base;
 	public IIcon icon;
 	String iconFile;
@@ -43,8 +43,7 @@ public abstract class BlockMultiLayerBase extends Block {
 
 	@Override
 	public boolean canRenderInPass(int pass) {
-		currentPass = pass;
-
+		ForgeHooksClient.setRenderPass(pass);
 		return pass == 1 || pass == 0;
 	}
 
