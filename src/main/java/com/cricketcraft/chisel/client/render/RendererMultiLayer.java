@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 
-import org.lwjgl.opengl.GL11;
+import static org.lwjgl.opengl.GL11.*;
 
 public class RendererMultiLayer implements ISimpleBlockRenderingHandler {
 
@@ -35,13 +35,15 @@ public class RendererMultiLayer implements ISimpleBlockRenderingHandler {
 		} else if (block.base != null) {
 			renderer.renderBlockAsItem(block.base, meta, 1.0f);
 		}
-
-		GL11.glEnable(3042);
-		GL11.glBlendFunc(770, 771);
+		
+		glPushMatrix();
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		renderer.setRenderBounds(bot, bot, bot, top, top, top);
-		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		glTranslatef(-0.5F, -0.5F, -0.5F);
 		Drawing.drawBlock(block, meta, renderer);
-		GL11.glDisable(3042);
+		glDisable(GL_BLEND);
+		glPopMatrix();
 	}
 
 	@Override
