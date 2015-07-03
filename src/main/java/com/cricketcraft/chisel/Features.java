@@ -2414,23 +2414,23 @@ public enum Features {
 			technical.carverHelper.addVariation("tile.technical.13.desc", 13, "technical/grate");
 			technical.carverHelper.addVariation("tile.technical.14.desc", 14, "technical/malfunctionFan");
 			technical.carverHelper.addVariation("tile.technical.15.desc", 15, "technical/grateRusty");
-            technical.carverHelper.registerAll(technical, "technical");
+            		technical.carverHelper.registerAll(technical, "technical");
 
 			BlockCarvableGlass technical2 = (BlockCarvableGlass) new BlockCarvableGlass().setHardness(2.0F).setResistance(10F);
 			technical2.carverHelper.addVariation("tile.technical.0.desc", 0, "technical/scaffoldTransparent", 20);
 			technical2.carverHelper.addVariation("tile.technical.4.desc", 1, "technical/fanFastTransparent", 21);
 			technical2.carverHelper.addVariation("tile.technical.6.desc", 2, "technical/fanStillTransparent", 22);
 			technical2.carverHelper.addVariation("tile.technical.14.desc", 3, "technical/fanStillTransparent", 23);
-            technical2.carverHelper.registerBlock(technical2, "technical2");
-            technical2.carverHelper.registerVariations("technical");
+            		technical2.carverHelper.registerBlock(technical2, "technical2");
+            		technical2.carverHelper.registerVariations("technical");
 
-            BlockCarvable technical3 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
-            technical3.carverHelper.addVariation("tile.technical3.0.desc", 0, "technical/massiveFan", 40);
-            technical3.carverHelper.addVariation("tile.technical3.1.desc", 1, "technical/massiveHexPlating", 41);
-            technical2.carverHelper.registerBlock(technical3, "technical3");
-            technical2.carverHelper.registerVariations("technical");
+		        BlockCarvable technical3 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
+		        technical3.carverHelper.addVariation("tile.technical3.0.desc", 0, "technical/massiveFan", 40);
+		        technical3.carverHelper.addVariation("tile.technical3.1.desc", 1, "technical/massiveHexPlating", 41);
+		        technical3.carverHelper.registerBlock(technical3, "technical3");
+		        technical3.carverHelper.registerVariations("technical");
 
-            Carving.chisel.registerOre("technical", "technical");
+            		Carving.chisel.registerOre("technical", "technical");
 		}
 
 		@Override
