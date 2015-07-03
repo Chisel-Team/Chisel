@@ -26,7 +26,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 		@Override
 		public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
 			super.renderFaceXNeg(block, x, y, z, icon);
-			setRenderBounds(0.001, 0, 0, 1, 1, 1);
+			renderMinX += 0.001;
 			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.WEST.ordinal()));
 			super.renderFaceXNeg(block, x, y, z, null);
 			clearOverrideBlockTexture();
@@ -36,7 +36,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 		public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon) {
 			super.renderFaceXPos(block, x, y, z, icon);
 			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.EAST.ordinal()));
-			setRenderBounds(0, 0, 0, 0.999, 1, 1);
+			renderMaxX -= 0.001;
 			super.renderFaceXPos(block, x, y, z, null);
 			clearOverrideBlockTexture();
 		}
@@ -45,7 +45,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 		public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon) {
 			super.renderFaceYNeg(block, x, y, z, icon);
 			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.DOWN.ordinal()));
-			setRenderBounds(0, 0.001, 0, 1, 1, 1);
+			renderMinY += 0.001;
 			super.renderFaceYNeg(block, x, y, z, null);
 			clearOverrideBlockTexture();
 		}
@@ -54,7 +54,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 		public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon) {
 			super.renderFaceYPos(block, x, y, z, icon);
 			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.UP.ordinal()));
-			setRenderBounds(0, 0, 0, 1, 0.999, 1);
+			renderMaxY -= 0.001;
 			super.renderFaceYPos(block, x, y, z, null);
 			clearOverrideBlockTexture();
 		}
@@ -63,7 +63,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 		public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon) {
 			super.renderFaceZNeg(block, x, y, z, icon);
 			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.NORTH.ordinal()));
-			setRenderBounds(0, 0, 0.001, 1, 1, 1);
+			renderMinZ += 0.001;
 			super.renderFaceZNeg(block, x, y, z, null);
 			clearOverrideBlockTexture();
 		}
@@ -72,7 +72,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 		public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon) {
 			super.renderFaceZPos(block, x, y, z, icon);
 			setOverrideBlockTexture(getBase(x, y, z, ForgeDirection.SOUTH.ordinal()));
-			setRenderBounds(0, 0, 0, 1, 1, 0.999);
+			renderMaxZ -= 0.001;
 			super.renderFaceZPos(block, x, y, z, null);
 			clearOverrideBlockTexture();
 		}
