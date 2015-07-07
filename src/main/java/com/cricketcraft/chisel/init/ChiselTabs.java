@@ -67,6 +67,11 @@ public class ChiselTabs {
 	public static final CustomCreativeTab tabStairChiselBlocks = new CustomCreativeTab("tabStairChiselBlocks", true);
 
 
+	// this serves mostly just to load the static initializers
+	public static void preInit() {
+
+	}
+
 	public static void postInit() {
 
 		if (Features.CHISEL.enabled())
