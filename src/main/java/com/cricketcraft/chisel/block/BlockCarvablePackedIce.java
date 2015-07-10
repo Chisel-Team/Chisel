@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.ctmlib.ClientUtils;
+import com.cricketcraft.chisel.api.rendering.ClientUtils;
 
 public class BlockCarvablePackedIce extends Block implements ICarvable {
 
