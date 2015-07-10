@@ -1,11 +1,27 @@
 package com.cricketcraft.chisel.proxy;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
+
 import com.cricketcraft.chisel.block.BlockCarvableBeacon;
 import com.cricketcraft.chisel.block.tileentity.TileEntityAutoChisel;
 import com.cricketcraft.chisel.block.tileentity.TileEntityCarvableBeacon;
 import com.cricketcraft.chisel.block.tileentity.TileEntityPresent;
 import com.cricketcraft.chisel.client.player.PlayerSpecials;
-import com.cricketcraft.chisel.client.render.*;
+import com.cricketcraft.chisel.client.render.RenderChiselSnowman;
+import com.cricketcraft.chisel.client.render.RendererCTM;
+import com.cricketcraft.chisel.client.render.RendererCTMPane;
+import com.cricketcraft.chisel.client.render.RendererEldritch;
+import com.cricketcraft.chisel.client.render.RendererLayeredGlow;
+import com.cricketcraft.chisel.client.render.RendererMultiLayer;
+import com.cricketcraft.chisel.client.render.RendererRoadLine;
+import com.cricketcraft.chisel.client.render.RendererSimpleLayered;
+import com.cricketcraft.chisel.client.render.RendererSnakeStone;
+import com.cricketcraft.chisel.client.render.RendererStairs;
 import com.cricketcraft.chisel.client.render.item.ItemChiselRenderer;
 import com.cricketcraft.chisel.client.render.tile.RenderAutoChisel;
 import com.cricketcraft.chisel.client.render.tile.RenderCarvableBeacon;
@@ -19,12 +35,6 @@ import com.cricketcraft.chisel.init.ChiselItems;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderSnowball;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {
 
@@ -36,6 +46,7 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init() {
+		RenderingRegistry.registerBlockHandler(new RendererCTM());
 		RenderingRegistry.registerBlockHandler(new RendererStairs());
 		RenderingRegistry.registerBlockHandler(new RendererCTMPane());
 		RenderingRegistry.registerBlockHandler(new RendererRoadLine());
