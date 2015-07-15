@@ -47,7 +47,7 @@ public class ItemCarvable extends ItemBlock {
 			return;
 
 		ICarvable carvable = (ICarvable) block;
-		IVariationInfo var = carvable.getVariation(stack);
+		IVariationInfo var = carvable.getManager(stack.getItemDamage());
 		if (var == null)
 			return;
 

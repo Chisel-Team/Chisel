@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.client.render;
 
 import com.cricketcraft.chisel.Chisel;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
@@ -9,9 +10,9 @@ import net.minecraft.world.IBlockAccess;
 import com.cricketcraft.chisel.init.ChiselBlocks;
 import com.cricketcraft.ctmlib.CTM;
 import com.cricketcraft.ctmlib.TextureSubmap;
+import com.google.common.base.Optional;
 
 import static com.cricketcraft.ctmlib.Dir.*;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,13 +24,13 @@ public class SubmapManagerFakeController extends SubmapManagerBase {
     private String texturePath;
 
     public SubmapManagerFakeController(int meta, String texture) {
-        ctm.disableObscuredFaceCheck = true;
+        ctm.disableObscuredFaceCheck = Optional.of(true);
         this.meta = meta;
         texturePath = texture;
     }
 
 	public SubmapManagerFakeController(int meta) {
-		ctm.disableObscuredFaceCheck = true;
+		ctm.disableObscuredFaceCheck = Optional.of(true);
 		this.meta = meta;
 	}
 

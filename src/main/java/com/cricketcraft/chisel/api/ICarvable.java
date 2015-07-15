@@ -5,12 +5,13 @@ import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.ctmlib.ICTMBlock;
 import com.cricketcraft.ctmlib.ISubmapManager;
 
 /**
  * To be implemented on blocks that can be chiseled and need advanced metadata to variation mapping. Currently not very usable without internal classes.
  */
-public interface ICarvable {
+public interface ICarvable extends ICTMBlock<IVariationInfo> {
 
 	/**
 	 * Gets a {@link ISubmapManager} from this block, based on metadata.
@@ -31,15 +32,12 @@ public interface ICarvable {
 	 *            The metadata of the block
 	 * @return The {@link ISubmapManager} that represents this block in the world.
 	 */
-	public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata);
+	public IVariationInfo getManager(IBlockAccess world, int x, int y, int z, int metadata);
 
 	/**
 	 * Gets the {@link ISubmapManager} for this block when it is in item form.
 	 * 
-	 * @param stack
-	 *            The {@link ItemStack} representing this block;
 	 * @return A {@link ISubmapManager}
 	 */
-	public IVariationInfo getVariation(ItemStack stack);
+	public IVariationInfo getManager(int meta);
 }
-	

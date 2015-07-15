@@ -63,12 +63,12 @@ public class BlockCarvableBeacon extends BlockBeacon implements ICarvable {
     }
     
     @Override
-    public IVariationInfo getVariation(IBlockAccess world, int x, int y, int z, int metadata) {
+    public IVariationInfo getManager(IBlockAccess world, int x, int y, int z, int metadata) {
         return carverHelper.getVariation(metadata);
     }
 
     @Override
-    public IVariationInfo getVariation(ItemStack stack) {
-        return carverHelper.getVariation(stack.getItemDamage());
+    public IVariationInfo getManager(int meta) {
+        return carverHelper.getVariation(meta);
     }
 }

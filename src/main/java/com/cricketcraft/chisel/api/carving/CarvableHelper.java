@@ -142,7 +142,7 @@ public class CarvableHelper {
 		if (info == null)
 			return getMissingIcon();
 		
-		return info.getSubmapManager().getIcon(side, metadata);
+		return info.getIcon(side, metadata);
 	}
 
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
@@ -155,7 +155,7 @@ public class CarvableHelper {
 		if (info == null)
 			return getMissingIcon();
 
-		return info.getSubmapManager().getIcon(world, x, y, z, side);
+		return info.getIcon(world, x, y, z, side);
 	}
 
 	public void registerAll(Block block, String name) {
@@ -199,7 +199,7 @@ public class CarvableHelper {
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(String modName, Block block, IIconRegister register) {
 		for (IVariationInfo info : infoList) {
-			info.getSubmapManager().registerIcons(modName, block, register);
+			info.registerIcons(modName, block, register);
 		}
 	}
 
