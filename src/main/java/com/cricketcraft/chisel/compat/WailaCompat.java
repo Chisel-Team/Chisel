@@ -35,7 +35,7 @@ public class WailaCompat implements IWailaDataProvider {
 		if (accessor.getBlock() instanceof ICarvable) {
 			ICarvable block = (ICarvable) accessor.getBlock();
 			MovingObjectPosition pos = accessor.getPosition();
-			strings.add(block.getVariation(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata()).getDescription());
+			strings.add(block.getManager(accessor.getWorld(), pos.blockX, pos.blockY, pos.blockZ, accessor.getMetadata()).getDescription());
 		}
 		return strings;
 	}
