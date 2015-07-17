@@ -199,16 +199,4 @@ public class Chisel {
 			Configurations.refreshConfig();
 		}
 	}
-
-	@SubscribeEvent
-	public void thankYou(EntityJoinWorldEvent event){
-		if(!event.world.isRemote && event.entity instanceof EntityPlayerMP){
-			EntityPlayerMP player = (EntityPlayerMP) event.entity;
-			if(!player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG).getBoolean("thanked")){
-				NBTTagCompound tag = player.getEntityData().getCompoundTag(EntityPlayer.PERSISTED_NBT_TAG);
-				tag.setBoolean("thanked", true);
-				player.addChatMessage(new ChatComponentText("Thank you for half a million downloads! - The Chisel Team"));
-			}
-		}
-	}
 }
