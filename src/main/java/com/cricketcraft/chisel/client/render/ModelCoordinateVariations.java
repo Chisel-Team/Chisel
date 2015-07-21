@@ -6,12 +6,7 @@ import com.cricketcraft.chisel.common.util.SubBlockUtil;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockFaceUV;
-import net.minecraft.client.renderer.block.model.BlockPartFace;
-import net.minecraft.client.renderer.block.model.BlockPartRotation;
-import net.minecraft.client.renderer.block.model.FaceBakery;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelRotation;
@@ -26,31 +21,31 @@ import java.util.List;
 import java.util.Random;
 
 /**
-* Model for coordinate variations
-*
-* @author minecreatr
-*/
-public class ModelCoordinateVariations extends WeightedBakedModel{
+ * Model for coordinate variations
+ *
+ * @author minecreatr
+ */
+public class ModelCoordinateVariations extends WeightedBakedModel {
 
     private String variation;
 
-    private ModelCoordinateVariations(List l, String v){
+    private ModelCoordinateVariations(List l, String v) {
         super(l);
         this.variation = v;
     }
 
-    public static ModelCoordinateVariations newModel(String v){
+    public static ModelCoordinateVariations newModel(String v) {
         Builder b = new Builder();
         b.add(new SmartSubtype(0), 1);
         return new ModelCoordinateVariations(b.build().models, v);
     }
 
     @Override
-    public IBakedModel getAlternativeModel(long seed){
+    public IBakedModel getAlternativeModel(long seed) {
         return new SmartSubtype(seed);
     }
 
-    protected static class SmartSubtype implements ISmartBlockModel{
+    protected static class SmartSubtype implements ISmartBlockModel {
 
 
         private static final FaceBakery bakery = new FaceBakery();
@@ -63,15 +58,15 @@ public class ModelCoordinateVariations extends WeightedBakedModel{
 
         private TextureAtlasSprite particle;
 
-        public SmartSubtype(long seed){
+        public SmartSubtype(long seed) {
             this.seed = seed;
         }
 
         @Override
         public IBakedModel handleBlockState(IBlockState state) {
             PropertyVariation VARIATION = null;
-            if (state.getBlock() instanceof BlockCarvable){
-                VARIATION=((BlockCarvable) state.getBlock()).VARIATION;
+            if (state.getBlock() instanceof BlockCarvable) {
+                VARIATION = ((BlockCarvable) state.getBlock()).VARIATION;
             }
             IBlockResources r = SubBlockUtil.getResources(state.getBlock(), (Variation) state.getValue(VARIATION));
             List<BakedQuad> newQuads = generateQuads(state, r);
@@ -81,33 +76,32 @@ public class ModelCoordinateVariations extends WeightedBakedModel{
         }
 
         private List<BakedQuad> generateQuads(IBlockState state, IBlockResources r) {
-            if (BlockResources.isV(r.getType())){
+            if (BlockResources.isV(r.getType())) {
                 return makeVQuads(state, r);
-            }
-            else {
+            } else {
                 return makeRQuads(state, r);
             }
 
         }
 
-        private List<BakedQuad> makeVQuads(IBlockState s, IBlockResources r){
-            IExtendedBlockState state = (IExtendedBlockState)s;
+        private List<BakedQuad> makeVQuads(IBlockState s, IBlockResources r) {
+            IExtendedBlockState state = (IExtendedBlockState) s;
             int variationSize = BlockResources.getVariationWidth(r.getType());
 
-            int xModules = (Integer)state.getValue(BlockCarvable.XMODULES);
-            int yModules = (Integer)state.getValue(BlockCarvable.YMODULES);
-            int zModules = (Integer)state.getValue(BlockCarvable.ZMODULES);
+            int xModules = (Integer) state.getValue(BlockCarvable.XMODULES);
+            int yModules = (Integer) state.getValue(BlockCarvable.YMODULES);
+            int zModules = (Integer) state.getValue(BlockCarvable.ZMODULES);
             //This ensures that blocks placed near 0,0 or it's axis' do not misbehave
             int textureX = (xModules < 0) ? (xModules + variationSize) : xModules;
             int textureZ = (zModules < 0) ? (zModules + variationSize) : zModules;
             //Always invert the y index
             int textureY = (variationSize - yModules - 1);
 
-            int interval = 16/variationSize;
+            int interval = 16 / variationSize;
 
             List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
 
-            for (EnumFacing side : EnumFacing.values()){
+            for (EnumFacing side : EnumFacing.values()) {
                 int index;
                 if (side == EnumFacing.DOWN || side == EnumFacing.UP) {
                     // DOWN || UP
@@ -120,48 +114,47 @@ public class ModelCoordinateVariations extends WeightedBakedModel{
                     index = textureZ + textureY * variationSize;
                 }
                 //throw new RuntimeException(index % variationSize+" and "+index/variationSize);
-                int minU = interval*(index%variationSize);
-                int minV = interval*(index/variationSize);
+                int minU = interval * (index % variationSize);
+                int minV = interval * (index / variationSize);
 
                 //Chisel.logger.info("Using u/v pairs "+minU+" "+minV+" "+maxU+" "+maxV);
-                toReturn.add(makeQuad(side, r.getDefaultTexture(), new float[]{minU, minV, minU+interval, minV+interval}));
+                toReturn.add(makeQuad(side, r.getDefaultTexture(), new float[]{minU, minV, minU + interval, minV + interval}));
             }
             return toReturn;
         }
 
-        private List<BakedQuad> makeRQuads(IBlockState s, IBlockResources r){
+        private List<BakedQuad> makeRQuads(IBlockState s, IBlockResources r) {
             int bound = 4;
             int wid = 2;
-            if (r.getType()==IBlockResources.R9){
+            if (r.getType() == IBlockResources.R9) {
                 bound = 9;
                 wid = 3;
-            }
-            else if (r.getType()==IBlockResources.R16){
+            } else if (r.getType() == IBlockResources.R16) {
                 bound = 16;
                 wid = 4;
             }
             Random random = new Random(seed);
             int num = random.nextInt(bound) + 1;
-            float interval = 16/wid;
-            int unitsAcross = num%wid;
-            int unitsDown = num/wid;
-            if (unitsAcross==0){
+            float interval = 16 / wid;
+            int unitsAcross = num % wid;
+            int unitsDown = num / wid;
+            if (unitsAcross == 0) {
                 unitsAcross++;
             }
-            if (unitsDown==0){
+            if (unitsDown == 0) {
                 unitsDown++;
             }
-            float maxU = unitsAcross*interval;
-            float maxV = unitsDown*interval;
+            float maxU = unitsAcross * interval;
+            float maxV = unitsDown * interval;
             //Chisel.logger.info("maxU: "+maxU+" maxV: "+maxV);
             List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
-            for (EnumFacing f : EnumFacing.values()){
-                toReturn.add(makeQuad(f, r.getDefaultTexture(), new float[]{maxU-interval, maxV-interval, maxU, maxV}));
+            for (EnumFacing f : EnumFacing.values()) {
+                toReturn.add(makeQuad(f, r.getDefaultTexture(), new float[]{maxU - interval, maxV - interval, maxU, maxV}));
             }
             return toReturn;
         }
 
-        public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, float[] uvs){
+        public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, float[] uvs) {
             return bakery.makeBakedQuad(quadPos.from, quadPos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(uvs, 0)),
                     sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, false);
         }
@@ -170,7 +163,7 @@ public class ModelCoordinateVariations extends WeightedBakedModel{
         public List getFaceQuads(EnumFacing face) {
             List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
             for (BakedQuad quad : quads) {
-                if (quad==null){
+                if (quad == null) {
                     continue;
                 }
                 if (quad.getFace() == face) {

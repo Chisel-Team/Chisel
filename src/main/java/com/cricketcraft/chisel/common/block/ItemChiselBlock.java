@@ -19,43 +19,43 @@ import java.util.List;
  *
  * @author minecreatr
  */
-public class ItemChiselBlock extends ItemBlock{
+public class ItemChiselBlock extends ItemBlock {
 
     private Variation[] variations;
 
-    public ItemChiselBlock(Block block){
+    public ItemChiselBlock(Block block) {
         super(block);
-        BlockCarvable b = (BlockCarvable)block;
+        BlockCarvable b = (BlockCarvable) block;
         CarvableBlocks bl = CarvableBlocks.getBlock(b);
         this.setHasSubtypes(true);
-        if (b.getIndex()==0) {
+        if (b.getIndex() == 0) {
             this.variations = bl.getVariants();
         } else {
-            int left = (bl.getVariants().length%16);
+            int left = (bl.getVariants().length % 16);
             Variation[] var = new Variation[left];
-            int index = b.getIndex()*16;
+            int index = b.getIndex() * 16;
             int cur = 0;
-            for (int i=0;i<bl.getVariants().length;i++){
-                if (i>=index&&cur<=var.length){
-                    if (bl.getVariants()[i]==null){
+            for (int i = 0; i < bl.getVariants().length; i++) {
+                if (i >= index && cur <= var.length) {
+                    if (bl.getVariants()[i] == null) {
                         continue;
                     }
-                    var[cur]=bl.getVariants()[i];
+                    var[cur] = bl.getVariants()[i];
                     cur++;
                 }
             }
-            this.variations=var;
+            this.variations = var;
         }
     }
 
 
     @Override
-    public String getUnlocalizedName(ItemStack stack){
+    public String getUnlocalizedName(ItemStack stack) {
         try {
             Variation curVariation = this.variations[stack.getMetadata()];
-            return super.getUnlocalizedName(stack)+"."+curVariation;
-        } catch (IndexOutOfBoundsException e){
-            return super.getUnlocalizedName(stack)+"."+"null";
+            return super.getUnlocalizedName(stack) + "." + curVariation;
+        } catch (IndexOutOfBoundsException e) {
+            return super.getUnlocalizedName(stack) + "." + "null";
         }
     }
 
@@ -64,10 +64,10 @@ public class ItemChiselBlock extends ItemBlock{
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
         Variation v = variations[stack.getMetadata()];
         IBlockResources r = SubBlockUtil.getResources(Block.getBlockFromItem(stack.getItem()), v);
-        if (r==null){
+        if (r == null) {
             return;
         }
-        for (String s : r.getLore()){
+        for (String s : r.getLore()) {
             tooltip.add(StatCollector.translateToLocal(s));
         }
 //        if (isShifting()){
@@ -84,7 +84,7 @@ public class ItemChiselBlock extends ItemBlock{
 //    }
 
     @Override
-    public int getMetadata(int meta){
+    public int getMetadata(int meta) {
         return meta;
     }
 

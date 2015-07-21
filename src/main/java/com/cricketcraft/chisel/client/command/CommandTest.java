@@ -13,44 +13,44 @@ import java.util.List;
  *
  * @author minecreatr
  */
-public class CommandTest implements ICommand{
+public class CommandTest implements ICommand {
 
     @Override
-    public String getCommandName(){
+    public String getCommandName() {
         return "ctest";
     }
 
     @Override
-    public String getCommandUsage(ICommandSender s){
+    public String getCommandUsage(ICommandSender s) {
         return "Chisel test command";
     }
 
     @Override
-    public List getCommandAliases(){
+    public List getCommandAliases() {
         return Lists.newArrayList();
     }
 
     @Override
-    public void processCommand(ICommandSender var1, String[] var2) throws CommandException{
+    public void processCommand(ICommandSender var1, String[] var2) throws CommandException {
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender var1){
+    public boolean canCommandSenderUseCommand(ICommandSender var1) {
         return true;
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender var1, String[] var2, BlockPos var3){
+    public List addTabCompletionOptions(ICommandSender var1, String[] var2, BlockPos var3) {
         return Lists.newArrayList();
     }
 
     @Override
-    public boolean isUsernameIndex(String[] var1, int var2){
+    public boolean isUsernameIndex(String[] var1, int var2) {
         return false;
     }
 
     @Override
-    public int compareTo(Object o){
+    public int compareTo(Object o) {
         return 0;
     }
 }

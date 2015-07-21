@@ -33,12 +33,11 @@ public class ModelCTM implements ISmartBlockModel {
     private TextureAtlasSprite particle;
 
 
-
     @Override
     public List getFaceQuads(EnumFacing face) {
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
         for (BakedQuad quad : quads) {
-            if (quad==null){
+            if (quad == null) {
                 continue;
             }
             if (quad.getFace() == face) {
@@ -82,8 +81,8 @@ public class ModelCTM implements ISmartBlockModel {
     public IBakedModel handleBlockState(IBlockState state) {
         // /throw new RuntimeException(state.getValue(BlockCarvable.VARIATION).toString());
         PropertyVariation VARIATION = null;
-        if (state.getBlock() instanceof BlockCarvable){
-            VARIATION=((BlockCarvable) state.getBlock()).VARIATION;
+        if (state.getBlock() instanceof BlockCarvable) {
+            VARIATION = ((BlockCarvable) state.getBlock()).VARIATION;
         }
         List<BakedQuad> newQuads = generateQuads(state, VARIATION);
         this.quads = newQuads;
@@ -99,7 +98,7 @@ public class ModelCTM implements ISmartBlockModel {
             if (subBlock instanceof ICTMSubBlock) {
                 ICTMSubBlock ctmSubBlock = (ICTMSubBlock) subBlock;
                 for (EnumFacing f : EnumFacing.values()) {
-                    CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getSubmapIndices((IExtendedBlockState)state, f, ctmSubBlock.getResources().getType())
+                    CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getSubmapIndices((IExtendedBlockState) state, f, ctmSubBlock.getResources().getType())
                     ).addToList(newQuads);
                 }
 
@@ -108,55 +107,52 @@ public class ModelCTM implements ISmartBlockModel {
         return newQuads;
     }
 
-    public static boolean isTouchingSide(IBlockState inState, EnumFacing f){
-        if (inState==null){
+    public static boolean isTouchingSide(IBlockState inState, EnumFacing f) {
+        if (inState == null) {
             return false;
         }
-        if (!(inState instanceof IExtendedBlockState)){
+        if (!(inState instanceof IExtendedBlockState)) {
             return false;
         }
-        IExtendedBlockState state = (IExtendedBlockState)inState;
-        boolean up = (Boolean)state.getValue(BlockCarvable.CONNECTED_UP);
-        boolean down = (Boolean)state.getValue(BlockCarvable.CONNECTED_DOWN);
-        boolean north = (Boolean)state.getValue(BlockCarvable.CONNECTED_NORTH);
-        boolean south = (Boolean)state.getValue(BlockCarvable.CONNECTED_SOUTH);
-        boolean west = (Boolean)state.getValue(BlockCarvable.CONNECTED_WEST);
-        boolean east = (Boolean)state.getValue(BlockCarvable.CONNECTED_EAST);
-        if (up&&f==EnumFacing.UP){
+        IExtendedBlockState state = (IExtendedBlockState) inState;
+        boolean up = (Boolean) state.getValue(BlockCarvable.CONNECTED_UP);
+        boolean down = (Boolean) state.getValue(BlockCarvable.CONNECTED_DOWN);
+        boolean north = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH);
+        boolean south = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH);
+        boolean west = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST);
+        boolean east = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST);
+        if (up && f == EnumFacing.UP) {
             return true;
         }
-        if (down&&f==EnumFacing.DOWN){
+        if (down && f == EnumFacing.DOWN) {
             return true;
         }
-        if (north&&f==EnumFacing.NORTH){
+        if (north && f == EnumFacing.NORTH) {
             return true;
         }
-        if (south&&f==EnumFacing.SOUTH){
+        if (south && f == EnumFacing.SOUTH) {
             return true;
         }
-        if (west&&f==EnumFacing.WEST){
+        if (west && f == EnumFacing.WEST) {
             return true;
         }
-        if (east&&f==EnumFacing.EAST){
+        if (east && f == EnumFacing.EAST) {
             return true;
         }
         return false;
     }
 
 
-
-
-
     /**
      * Two vectors to represent the position of a quad
      */
-    public static class QuadPos{
+    public static class QuadPos {
         public Vector3f from;
         public Vector3f to;
 
-        public QuadPos(Vector3f from, Vector3f to){
-            this.from=from;
-            this.to=to;
+        public QuadPos(Vector3f from, Vector3f to) {
+            this.from = from;
+            this.to = to;
         }
     }
 }

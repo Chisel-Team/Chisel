@@ -11,26 +11,26 @@ import java.util.Collection;
  *
  * @author minecreatr
  */
-public class PropertyVariation extends PropertyHelper{
+public class PropertyVariation extends PropertyHelper {
 
     Collection<Variation> values = new ArrayList<Variation>();
 
-    public PropertyVariation(){
+    public PropertyVariation() {
         super("variation", Variation.class);
         Chisel.logger.info("PropertyVariation created");
     }
 
     @Override
-    public Collection getAllowedValues(){
-        if (values.size()==0){
+    public Collection getAllowedValues() {
+        if (values.size() == 0) {
             throw new RuntimeException("0 Values?");
         }
         return values;
     }
 
     @Override
-    public String getName(Comparable en){
-        return ((Variation)en).getValue();
+    public String getName(Comparable en) {
+        return ((Variation) en).getValue();
     }
 
 }

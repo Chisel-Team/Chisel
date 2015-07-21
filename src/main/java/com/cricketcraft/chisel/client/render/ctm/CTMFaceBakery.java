@@ -4,11 +4,7 @@ import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.client.render.ModelNonCTM;
 import com.cricketcraft.chisel.common.Reference;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockFaceUV;
-import net.minecraft.client.renderer.block.model.BlockPartFace;
-import net.minecraft.client.renderer.block.model.BlockPartRotation;
-import net.minecraft.client.renderer.block.model.FaceBakery;
+import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
@@ -20,7 +16,7 @@ import javax.vecmath.Vector3f;
  *
  * @author minecreatr
  */
-public class CTMFaceBakery extends FaceBakery implements Reference{
+public class CTMFaceBakery extends FaceBakery implements Reference {
 
     public static final CTMFaceBakery instance = new CTMFaceBakery();
 
@@ -53,117 +49,112 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
 
     /**
      * Gets the id for the correct quad position
+     *
      * @param f The Direction it is facing
      * @param r The Region
-     *
+     *          <p/>
      *          From Up       Sides
-     *            N             U
-     *       W  |4|3|  E    N |4|3| S
+     *          N             U
+     *          W  |4|3|  E    N |4|3| S
      *          |1|2|         |1|2|
-     *            S             D
+     *          S             D
      * @return The QuadPos
      */
-    public static ModelCTM.QuadPos getCorrectQuadPos(EnumFacing f, int r){
+    public static ModelCTM.QuadPos getCorrectQuadPos(EnumFacing f, int r) {
         boolean isNorth = false;
         boolean isWest = false;
         boolean isUp = false;
 
         boolean isSUp = false;
         boolean isSLeft = false;
-        if (r==4){
-            isSUp=true;
-            isSLeft=true;
+        if (r == 4) {
+            isSUp = true;
+            isSLeft = true;
+        } else if (r == 3) {
+            isSUp = true;
+        } else if (r == 1) {
+            isSLeft = true;
         }
-        else if (r==3){
-            isSUp=true;
-        }
-        else if (r==1){
-            isSLeft=true;
-        }
-        if (f==EnumFacing.UP){
-            isUp=true;
-            if (isSUp){
-                isNorth=true;
+        if (f == EnumFacing.UP) {
+            isUp = true;
+            if (isSUp) {
+                isNorth = true;
             }
-            if (isSLeft){
-                isWest=true;
+            if (isSLeft) {
+                isWest = true;
             }
-        }
-        else if (f==EnumFacing.DOWN){
-            if (!isSUp){
-                isNorth=true;
+        } else if (f == EnumFacing.DOWN) {
+            if (!isSUp) {
+                isNorth = true;
             }
-            if (isSLeft){
-                isWest=true;
+            if (isSLeft) {
+                isWest = true;
             }
-        }
-        else if (f==EnumFacing.NORTH){
-            isNorth=true;
-            if (isSUp){
-                isUp=true;
+        } else if (f == EnumFacing.NORTH) {
+            isNorth = true;
+            if (isSUp) {
+                isUp = true;
             }
-            if (!isSLeft){
-                isWest=true;
+            if (!isSLeft) {
+                isWest = true;
             }
-        }
-        else if (f==EnumFacing.SOUTH){
-            if (isSUp){
-                isUp=true;
+        } else if (f == EnumFacing.SOUTH) {
+            if (isSUp) {
+                isUp = true;
             }
-            if (isSLeft){
-                isWest=true;
+            if (isSLeft) {
+                isWest = true;
             }
-        }
-        else if (f==EnumFacing.WEST){
-            isWest=true;
-            if (isSUp){
-                isUp=true;
+        } else if (f == EnumFacing.WEST) {
+            isWest = true;
+            if (isSUp) {
+                isUp = true;
             }
-            if (isSLeft){
-                isNorth=true;
+            if (isSLeft) {
+                isNorth = true;
             }
-        }
-        else if (f==EnumFacing.EAST){
-            if (isSUp){
-                isUp=true;
+        } else if (f == EnumFacing.EAST) {
+            if (isSUp) {
+                isUp = true;
             }
-            if (!isSLeft){
-                isNorth=true;
+            if (!isSLeft) {
+                isNorth = true;
             }
         }
         int num = 0;
-        if (isUp){
-            num=4;
+        if (isUp) {
+            num = 4;
         }
-        if (isNorth){
-            num+=1;
+        if (isNorth) {
+            num += 1;
         }
-        if (isWest){
-            num+=2;
+        if (isWest) {
+            num += 2;
         }
         return possibleQuads[num];
     }
 
     /**
      * Makes a ctm face
-     * @param side The Side
+     *
+     * @param side      The Side
      * @param resources The Resources to use
-     * @param quads The Quad "ids"
+     * @param quads     The Quad "ids"
      * @return The CTM Face
      */
-    public CTMFace makeCtmFace(EnumFacing side, CTMBlockResources resources, int[] quads){
+    public CTMFace makeCtmFace(EnumFacing side, CTMBlockResources resources, int[] quads) {
         //Chisel.logger.info("Making CTM face");
         return new CTMFace(makeQuadFor(side, resources, quads[0], 1),
-                           makeQuadFor(side, resources, quads[1], 2),
-                           makeQuadFor(side, resources, quads[2], 3),
-                           makeQuadFor(side, resources, quads[3], 4)
-                );
+                makeQuadFor(side, resources, quads[1], 2),
+                makeQuadFor(side, resources, quads[2], 3),
+                makeQuadFor(side, resources, quads[3], 4)
+        );
     }
 
-    private BakedQuad makeQuadFor(EnumFacing side, CTMBlockResources resources, int quad, int quadSection){
+    private BakedQuad makeQuadFor(EnumFacing side, CTMBlockResources resources, int quad, int quadSection) {
         TextureAtlasSprite s = resources.ctmTexture;
-        if (resources.type == IBlockResources.CTMH|| resources.type == IBlockResources.CTMV){
-            if (side==EnumFacing.UP||side==EnumFacing.DOWN) {
+        if (resources.type == IBlockResources.CTMH || resources.type == IBlockResources.CTMV) {
+            if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
                 if (side == EnumFacing.UP) {
                     s = resources.top;
                 } else {
@@ -178,16 +169,15 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
 //                return ModelNonCTM.makeQuad(side, s, resources.type);
 //            }
 //        }
-        if (CTM.isDefaultTexture(quad)){
-            if (!(resources.type==IBlockResources.CTMH||resources.type==IBlockResources.CTMV)){
-                s=resources.texture;
+        if (CTM.isDefaultTexture(quad)) {
+            if (!(resources.type == IBlockResources.CTMH || resources.type == IBlockResources.CTMV)) {
+                s = resources.texture;
             }
 //            Chisel.logger.info("Using resources.texture for "+quad+" and "+resources.getParent().getName()+" variant "+resources.getVariantName());
+        } else {
+            s = resources.ctmTexture;
         }
-        else {
-            s=resources.ctmTexture;
-        }
-        if (resources.type==IBlockResources.CTMH||resources.type==IBlockResources.CTMV){
+        if (resources.type == IBlockResources.CTMH || resources.type == IBlockResources.CTMV) {
             int old = quad;
             quad = CTM.remapCTM(quad);
             //Chisel.logger.info("Remapping ctm(h/v) "+old+" to "+quad);
@@ -198,7 +188,7 @@ public class CTMFaceBakery extends FaceBakery implements Reference{
 
     }
 
-    private BakedQuad makeRealQuad(ModelCTM.QuadPos pos, EnumFacing side, TextureAtlasSprite s, int quad){
+    private BakedQuad makeRealQuad(ModelCTM.QuadPos pos, EnumFacing side, TextureAtlasSprite s, int quad) {
         return makeBakedQuad(pos.from, pos.to, new BlockPartFace(side, -1, s.getIconName(), new BlockFaceUV(CTM.uvs[quad], 0)),
                 s, side, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), side.getAxis(), 0, false), false, false);
     }

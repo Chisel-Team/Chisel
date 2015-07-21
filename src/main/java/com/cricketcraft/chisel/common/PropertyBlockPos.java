@@ -8,25 +8,25 @@ import net.minecraftforge.common.property.IUnlistedProperty;
  *
  * @author minecreatr
  */
-public class PropertyBlockPos implements IUnlistedProperty<BlockPos>{
+public class PropertyBlockPos implements IUnlistedProperty<BlockPos> {
 
     @Override
-    public String getName(){
+    public String getName() {
         return "pos";
     }
 
     @Override
-    public boolean isValid(BlockPos var){
+    public boolean isValid(BlockPos var) {
         return true;
     }
 
     @Override
-    public Class getType(){
+    public Class getType() {
         return BlockPos.class;
     }
 
     @Override
-    public String valueToString(BlockPos pos){
+    public String valueToString(BlockPos pos) {
         return pos.toString();
     }
 }

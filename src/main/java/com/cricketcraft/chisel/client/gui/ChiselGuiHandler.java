@@ -10,16 +10,16 @@ import net.minecraftforge.fml.common.network.IGuiHandler;
  *
  * @author minecreatr
  */
-public class ChiselGuiHandler implements IGuiHandler{
+public class ChiselGuiHandler implements IGuiHandler {
 
     @Override
-    public Object getServerGuiElement(int id, EntityPlayer player, World world,  int x, int y, int z) {
+    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         return null;
     }
 
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        if (id==0){
+        if (id == 0) {
             return new GuiChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem()));
         }
         return null;

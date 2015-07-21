@@ -14,34 +14,33 @@ import java.util.Map;
  *
  * @author minecreatr
  */
-public class CTMModelRegistry implements Reference{
+public class CTMModelRegistry implements Reference {
 
     private static final Map<ModelResourceLocation, ModelCTM> models = new HashMap<ModelResourceLocation, ModelCTM>();
 
 
-    private static void register(ModelResourceLocation location, ModelCTM model){
+    private static void register(ModelResourceLocation location, ModelCTM model) {
         models.put(location, model);
     }
 
-    public static class BakedEventListener{
+    public static class BakedEventListener {
 
         @SubscribeEvent
-        public void onModelBake(ModelBakeEvent event){
-            for (Map.Entry<ModelResourceLocation, ModelCTM> entry : models.entrySet()){
-                Chisel.logger.info("Registering CTM model for "+entry.getKey().toString());
+        public void onModelBake(ModelBakeEvent event) {
+            for (Map.Entry<ModelResourceLocation, ModelCTM> entry : models.entrySet()) {
+                Chisel.logger.info("Registering CTM model for " + entry.getKey().toString());
                 event.modelRegistry.putObject(entry.getKey(), entry.getValue());
             }
         }
     }
 
-    public static void register(String block, String variation, int amount){
-        for (int i=0;i<amount;i++) {
+    public static void register(String block, String variation, int amount) {
+        for (int i = 0; i < amount; i++) {
             ModelResourceLocation location;
-            if (i==0){
+            if (i == 0) {
                 location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block, "variation=" + variation);
-            }
-            else {
-                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block+i, "variation=" + variation);
+            } else {
+                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block + i, "variation=" + variation);
             }
             register(location, new ModelCTM());
         }

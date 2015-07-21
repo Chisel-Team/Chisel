@@ -5,15 +5,15 @@ package com.cricketcraft.chisel.common;
  */
 public class CommonProxy {
 
-    public void init(){
+    public void init() {
 
     }
 
-    public boolean isClient(){
+    public boolean isClient() {
         return false;
     }
 
-    public void preInit(){
+    public void preInit() {
 
     }
 }

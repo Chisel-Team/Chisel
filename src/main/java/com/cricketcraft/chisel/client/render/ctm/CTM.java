@@ -10,7 +10,7 @@ import net.minecraftforge.common.property.IExtendedBlockState;
  * textures.  The normal Texture.png is the blocks "unconnected" texture, and is used when CTM is disabled or the block
  * has nothing to connect to.  This texture has all of the outside corner quadrants  The texture-ctm.png contains the
  * rest of the quadrants.
- *
+ * <p/>
  * ┌─────────────────┐ ┌────────────────────────────────┐
  * │ texture.png     │ │ texture-ctm.png                │
  * │ ╔══════╤══════╗ │ │  ──────┼────── ║ ─────┼───── ║ │
@@ -21,16 +21,16 @@ import net.minecraftforge.common.property.IExtendedBlockState;
  * │ ║ 18   │ 19   ║ │ │ │ 4    │ 5    │║ 6    │ 7    ║ │
  * │ ╚══════╧══════╝ │ │  ──────┼────── ║ ─────┼───── ║ │
  * └─────────────────┘ │ ═══════╤═══════╝ ─────┼───── ╚ │
- *                     │ │      │      ││      │      │ │
- *                     │ │ 8    │ 9    ││ 10   │ 11   │ │
- *                     │ ┼──────┼──────┼┼──────┼──────┼ │
- *                     │ │      │      ││      │      │ │
- *                     │ │ 12   │ 13   ││ 14   │ 15   │ │
- *                     │ ═══════╧═══════╗ ─────┼───── ╔ │
- *                     └────────────────────────────────┘
- *
+ * │ │      │      ││      │      │ │
+ * │ │ 8    │ 9    ││ 10   │ 11   │ │
+ * │ ┼──────┼──────┼┼──────┼──────┼ │
+ * │ │      │      ││      │      │ │
+ * │ │ 12   │ 13   ││ 14   │ 15   │ │
+ * │ ═══════╧═══════╗ ─────┼───── ╔ │
+ * └────────────────────────────────┘
+ * <p/>
  * combining { 18, 13,  9, 16 }, we can generate a texture connected to the right!
- *
+ * <p/>
  * ╔══════╤═══════
  * ║      │      │
  * ║ 16   │ 9    │
@@ -38,10 +38,10 @@ import net.minecraftforge.common.property.IExtendedBlockState;
  * ║      │      │
  * ║ 18   │ 13   │
  * ╚══════╧═══════
- *
- *
+ * <p/>
+ * <p/>
  * combining { 18, 13, 11,  2 }, we can generate a texture, in the shape of an L (connected to the right, and up
- *
+ * <p/>
  * ║ ─────┼───── ╚
  * ║      │      │
  * ║ 2    │ 11   │
@@ -49,28 +49,33 @@ import net.minecraftforge.common.property.IExtendedBlockState;
  * ║      │      │
  * ║ 18   │ 13   │
  * ╚══════╧═══════
- *
- *
+ * <p/>
+ * <p/>
  * HAVE FUN!
  * -CptRageToaster-
  */
 
 public class CTM {
 
-    public static int remapCTM(int num){
-        switch (num){
-            case 16: return 0;
-            case 17: return 1;
-            case 18: return 4;
-            case 19: return 5;
-            default: return num;
+    public static int remapCTM(int num) {
+        switch (num) {
+            case 16:
+                return 0;
+            case 17:
+                return 1;
+            case 18:
+                return 4;
+            case 19:
+                return 5;
+            default:
+                return num;
         }
     }
 
     /**
      * The Uvs for the specific "magic number" value
      */
-    public static final float[][] uvs = new float[][] {
+    public static final float[][] uvs = new float[][]{
             //Ctm texture
             {0, 0, 4, 4},// 0
             {4, 0, 8, 4}, // 1
@@ -95,34 +100,33 @@ public class CTM {
             {8, 8, 16, 16} // 19
     };
 
-    public static boolean isDefaultTexture(int id){
-        return (id==16||id==17||id==18||id==19);
+    public static boolean isDefaultTexture(int id) {
+        return (id == 16 || id == 17 || id == 18 || id == 19);
     }
 
 
-
     public static int[] getSubmapIndices(IExtendedBlockState state, EnumFacing side, int type) {
-        if (!(state.getBlock() instanceof BlockCarvable)){
-            return new int[] { 18, 19, 17, 16 };
+        if (!(state.getBlock() instanceof BlockCarvable)) {
+            return new int[]{18, 19, 17, 16};
         }
-        boolean down = (Boolean)state.getValue(BlockCarvable.CONNECTED_DOWN);
-        boolean up = (Boolean)state.getValue(BlockCarvable.CONNECTED_UP);
-        boolean north = (Boolean)state.getValue(BlockCarvable.CONNECTED_NORTH);
-        boolean south = (Boolean)state.getValue(BlockCarvable.CONNECTED_SOUTH);
-        boolean east = (Boolean)state.getValue(BlockCarvable.CONNECTED_EAST);
-        boolean west = (Boolean)state.getValue(BlockCarvable.CONNECTED_WEST);
-        boolean north_east = (Boolean)state.getValue(BlockCarvable.CONNECTED_NORTH_EAST);
-        boolean north_west = (Boolean)state.getValue(BlockCarvable.CONNECTED_NORTH_WEST);
-        boolean north_up = (Boolean)state.getValue(BlockCarvable.CONNECTED_NORTH_UP);
-        boolean north_down = (Boolean)state.getValue(BlockCarvable.CONNECTED_NORTH_DOWN);
-        boolean south_east = (Boolean)state.getValue(BlockCarvable.CONNECTED_SOUTH_EAST);
-        boolean south_west = (Boolean)state.getValue(BlockCarvable.CONNECTED_SOUTH_WEST);
-        boolean south_up = (Boolean)state.getValue(BlockCarvable.CONNECTED_SOUTH_UP);
-        boolean south_down = (Boolean)state.getValue(BlockCarvable.CONNECTED_SOUTH_DOWN);
-        boolean east_up = (Boolean)state.getValue(BlockCarvable.CONNECTED_EAST_UP);
-        boolean east_down = (Boolean)state.getValue(BlockCarvable.CONNECTED_EAST_DOWN);
-        boolean west_up = (Boolean)state.getValue(BlockCarvable.CONNECTED_WEST_UP);
-        boolean west_down = (Boolean)state.getValue(BlockCarvable.CONNECTED_WEST_DOWN);
+        boolean down = (Boolean) state.getValue(BlockCarvable.CONNECTED_DOWN);
+        boolean up = (Boolean) state.getValue(BlockCarvable.CONNECTED_UP);
+        boolean north = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH);
+        boolean south = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH);
+        boolean east = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST);
+        boolean west = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST);
+        boolean north_east = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_EAST);
+        boolean north_west = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_WEST);
+        boolean north_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_UP);
+        boolean north_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_DOWN);
+        boolean south_east = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_EAST);
+        boolean south_west = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_WEST);
+        boolean south_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_UP);
+        boolean south_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_DOWN);
+        boolean east_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST_UP);
+        boolean east_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST_DOWN);
+        boolean west_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST_UP);
+        boolean west_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST_DOWN);
 
 
         boolean b[] = new boolean[8];
@@ -193,7 +197,7 @@ public class CTM {
             b[7] = north_down; // Down North
         }
 
-        int[] ret = new int[] { 18, 19, 17, 16 };
+        int[] ret = new int[]{18, 19, 17, 16};
 
         /**
          * b[0]    b[1]    b[2]
@@ -206,32 +210,25 @@ public class CTM {
          *
          * b[5]    b[6]    b[7]
          */
-        if (side!=EnumFacing.UP&&side!=EnumFacing.DOWN){
-            if (type==IBlockResources.CTMH){
-                if (b[3]&&b[4]){
+        if (side != EnumFacing.UP && side != EnumFacing.DOWN) {
+            if (type == IBlockResources.CTMH) {
+                if (b[3] && b[4]) {
                     return new int[]{6, 7, 3, 2}; //top right
-                }
-                else if (b[4]){
+                } else if (b[4]) {
                     return new int[]{12, 13, 9, 8}; //bottom left
-                }
-                else if (b[3]){
+                } else if (b[3]) {
                     return new int[]{14, 15, 11, 10}; //bottom right
-                }
-                else {
+                } else {
                     return new int[]{4, 5, 1, 0}; //top left
                 }
-            }
-            else if (type==IBlockResources.CTMV){
-                if (b[1]&&b[6]){
+            } else if (type == IBlockResources.CTMV) {
+                if (b[1] && b[6]) {
                     return new int[]{12, 13, 9, 8}; //bottom left
-                }
-                else if (b[1]){
+                } else if (b[1]) {
                     return new int[]{14, 15, 11, 10}; //bottom right
-                }
-                else if (b[6]){
+                } else if (b[6]) {
                     return new int[]{6, 7, 3, 2}; //top right
-                }
-                else {
+                } else {
                     return new int[]{4, 5, 1, 0}; //top left
                 }
             }
@@ -263,7 +260,6 @@ public class CTM {
 
         return ret;
     }
-
 
 
 }

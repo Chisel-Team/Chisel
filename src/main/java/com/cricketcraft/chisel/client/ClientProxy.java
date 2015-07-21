@@ -14,20 +14,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * @author minecreatr
  */
 @SideOnly(Side.CLIENT)
-public class ClientProxy extends CommonProxy{
+public class ClientProxy extends CommonProxy {
 
     @Override
-    public void init(){
+    public void init() {
 
     }
 
     @Override
-    public boolean isClient(){
+    public boolean isClient() {
         return true;
     }
 
     @Override
-    public void preInit(){
+    public void preInit() {
         MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
         MinecraftForge.EVENT_BUS.register(new NonCTMModelRegistry.BakedEventListener());
         MinecraftForge.EVENT_BUS.register(new TextureStitcher());
