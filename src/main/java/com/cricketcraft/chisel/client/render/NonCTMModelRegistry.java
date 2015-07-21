@@ -41,7 +41,6 @@ public class NonCTMModelRegistry implements Reference{
                     Chisel.logger.info("Model above is weighted");
                 }
                 event.modelRegistry.putObject(entry.getKey(), entry.getValue());
-                ModelResourceLocation l = (ModelResourceLocation)entry.getKey();
                 //event.modelManager.getMissingModel()
             }
         }

@@ -2,8 +2,8 @@ package com.cricketcraft.chisel.common.block.subblocks;
 
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
-import scala.actors.threadpool.Arrays;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**

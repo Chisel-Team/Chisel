@@ -1,7 +1,6 @@
 package com.cricketcraft.chisel.common;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.carving.CarvingVariationRepresentation;
 import com.cricketcraft.chisel.client.render.BlockResources;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.client.render.NonCTMModelRegistry;
@@ -10,6 +9,7 @@ import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.ItemChiselBlock;
 import com.cricketcraft.chisel.common.block.subblocks.CTMSubBlock;
 import com.cricketcraft.chisel.common.block.subblocks.SubBlock;
+import com.cricketcraft.chisel.common.util.OreDictionaryUtil;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.Block;
@@ -20,6 +20,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
@@ -48,10 +49,6 @@ public enum CarvableBlocks implements Reference{
             return Variation.getColors(c);
         }
 
-        @Override
-        public String getOrdictName(){
-            return "antiblock";
-        }
     },
 
     ALUMINIUM("aluminium", true){
@@ -199,6 +196,11 @@ public enum CarvableBlocks implements Reference{
         public String[] createHonorarySubBlocks(){
             return new String[]{"diamond_block#0"};
         }
+
+        @Override
+        public String getOredictName(){
+            return "blockDiamond";
+        }
     },
     DIORITE("diorite"){
         @Override
@@ -255,6 +257,42 @@ public enum CarvableBlocks implements Reference{
             c.value("goldplating"), c.value("grinder"), c.value("plating"), c.value("rustplates"), c.value("column"), c.value("iceiceice"),
             c.value("vent"), c.value("tilemosaic"), c.value("wireframeblue")};
         }
+    },
+    FANTASY("fantasy"){
+
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("brick"), c.value("brick-faded"), c.value("brick-wear"), c.value("bricks"), c.value("decor"),
+            c.value("decor-block"), c.value("pillar"), c.value("pillar-decorated"), c.value("gold-decor-1"), c.value("gold-decor-2"),
+            c.value("gold-decor-3"), c.value("gold-decor-4"), c.value("plate"), c.value("block"), c.value("bricks-chaotic"), c.value("bricks-wear"),
+
+            c.value("purple-brick"), c.value("purple-brick-faded"), c.value("purple-brick-wear"), c.value("purple-bricks"), c.value("purple-decor"),
+            c.value("purple-decor-block"), c.value("purple-pillar"), c.value("purple-pillar-decorated"),c.value("purple-plate"),
+            c.value("purple-block"), c.value("purple-bricks-chaotic"), c.value("purple-bricks-wear")
+            };
+        }
+    },
+    GLOWSTONE("glowstone"){
+
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("sulphur-cobble"), c.value("sulphur-corroded"), c.value("sulphur-glass"), c.value("sulphur-neon"),
+            c.value("sulphur-ornate"), c.value("sulphur-rocky"), c.value("sulphur-shale"), c.value("sulphur-tile"), c.value("sulphur-weavelanternlight"),
+            c.value("cobble"), c.value("growth"), c.value("layers"), c.value("tilecorroded"), c.value("bismuth"), c.value("bismuth-panel")};
+        }
+    },
+    GOLD_BLOCK("gold_block"){
+
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c){
+            return new Variation[]{c.value("largeingot")};
+        }
+
+        @Override
+        public String getOredictName(){
+            return "blockGold";
+        }
+
     }
 
     ;
@@ -266,7 +304,6 @@ public enum CarvableBlocks implements Reference{
 
     protected PropertyVariation propertyVariation;
 
-    private CarvingVariationRepresentation[] carvingVariations;
 
     public static BlockCarvable getBlockWithName(String name){
         return blocks.get(name);
@@ -285,28 +322,6 @@ public enum CarvableBlocks implements Reference{
         }
     }
 
-    public CarvingVariationRepresentation[] getCarvingVariations(){
-        return this.carvingVariations;
-    }
-
-
-    private static void initCarvingVariations(){
-        for (CarvableBlocks b : values()){
-            int l = b.getVariants().length+b.createHonorarySubBlocks().length;
-            CarvingVariationRepresentation[] r = new CarvingVariationRepresentation[l];
-            for (int i=0;i<b.getVariants().length;i++){
-                Variation v = b.getVariants()[i];
-                r[i]=new CarvingVariationRepresentation(b.getBlock(), i);
-            }
-            int index = b.getVariants().length;
-            for (int i=0;i<b.createHonorarySubBlocks().length;i++){
-                String data = b.createHonorarySubBlocks()[i];
-                String[] p = data.split("#");
-                r[index+i]=new CarvingVariationRepresentation(getBlockFromString(p[0]), Integer.parseInt(p[1]));
-            }
-            b.carvingVariations=r;
-        }
-    }
 
     /**
      * Gets the block from a string with the format {mod}:{block name}
@@ -392,7 +407,7 @@ public enum CarvableBlocks implements Reference{
      * Gets the Ore dictionary name of this block
      * @return The Ore Dictionary name
      */
-    public String getOrdictName(){
+    public String getOredictName(){
         return getName();
     }
 
@@ -444,14 +459,10 @@ public enum CarvableBlocks implements Reference{
         for (int i=0;i<blocks.size();i++){
             BlockCarvable block = (BlockCarvable)blocks.values().toArray()[i];
             final ModelResourceLocation location;
-            if (block.getIndex()==0) {
-                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":"+block.getName(), "inventory");
-            } else {
-                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":"+block.getName()+(i+1), "inventory");
-            }
+            location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":"+block.getName(), "inventory");
             GameRegistry.registerBlock(block, ItemChiselBlock.class, (String)blocks.keySet().toArray()[i]);
             for (Variation v : block.getType().getVariants()){
-                //Chisel.logger.info("Setting custom model resource location "+location+" for block "+blocks.keySet().toArray()[i]+" and meta "+Variation.metaFromVariation(block.getType(), v));
+                Chisel.logger.info("Setting custom model resource location "+location+" for block "+blocks.keySet().toArray()[i]+" and meta "+Variation.metaFromVariation(block.getType(), v));
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Variation.metaFromVariation(block.getType(), v), location);
             }
         }
@@ -463,6 +474,7 @@ public enum CarvableBlocks implements Reference{
         for (int i=0;i<blocks.size();i++){
             BlockCarvable block = (BlockCarvable)blocks.values().toArray()[i];
             for (int h=0;h<block.getType().getVariants().length;h++){
+                OreDictionaryUtil.add(block);
                 Variation v = block.getType().getVariants()[h];
                 if (block.getIndex()!=0){
                     int exclusion = block.getIndex()*16;
@@ -479,7 +491,6 @@ public enum CarvableBlocks implements Reference{
                 }
             }
         }
-        initCarvingVariations();
     }
 
 

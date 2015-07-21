@@ -2,11 +2,13 @@ package com.cricketcraft.chisel;
 
 import com.cricketcraft.chisel.client.TextureStitcher;
 import com.cricketcraft.chisel.client.command.CommandTest;
+import com.cricketcraft.chisel.client.gui.ChiselGuiHandler;
 import com.cricketcraft.chisel.client.render.NonCTMModelRegistry;
 import com.cricketcraft.chisel.client.render.ctm.CTMModelRegistry;
 import com.cricketcraft.chisel.common.CarvableBlocks;
 import com.cricketcraft.chisel.common.CommonProxy;
 import com.cricketcraft.chisel.common.Reference;
+import com.cricketcraft.chisel.common.item.ItemChisel;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockModelShapes;
@@ -20,6 +22,8 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,11 +47,16 @@ public class Chisel implements Reference{
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY, modId = MOD_ID)
     public static CommonProxy proxy;
 
+    public static ItemChisel itemChisel;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event){
         Variation.doStuff();
         proxy.preInit();
         CarvableBlocks.preInitBlocks();
+        itemChisel = new ItemChisel();
+        GameRegistry.registerItem(itemChisel, "itemChisel");
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
     }
 

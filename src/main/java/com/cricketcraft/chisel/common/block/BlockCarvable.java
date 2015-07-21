@@ -34,6 +34,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
@@ -46,6 +47,7 @@ import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.common.property.Properties;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -122,7 +124,12 @@ public class BlockCarvable extends Block{
         this.index=index;
         this.VARIATION=p;
         this.fullBlock = isOpaqueCube();
-        ReflectionUtil.setFinalValue("blockState", Block.class, this, createRealBlockState(p));
+        if ((Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
+            ReflectionUtil.setFinalValue("blockState", Block.class, this, createRealBlockState(p));
+        }
+        else {
+            ReflectionUtil.setFinalValue("field_176227_L", Block.class, this, createRealBlockState(p));
+        }
         setupStates();
         setResistance(10.0F);
         setHardness(2.0F);
