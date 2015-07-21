@@ -10,16 +10,15 @@ import net.minecraft.world.World;
  * To be implemented on blocks that "hide" another block inside, so connected textuers can still be
  * accomplished.
  */
-public interface IFacade
-{
+public interface IFacade {
     /**
      * Gets the block state this facade is acting as.
      *
      * @param world {@link World}
-     * @param pos The Blocks position
-     * @param side The side being rendered, NOT the side being connected from.
-     *            <p>
-     *            This value can be -1 if no side is specified. Please handle this appropriately.
+     * @param pos   The Blocks position
+     * @param side  The side being rendered, NOT the side being connected from.
+     *              <p/>
+     *              This value can be -1 if no side is specified. Please handle this appropriately.
      * @return The block inside of your facade block.
      */
     IBlockState getFacade(IBlockAccess world, BlockPos pos, EnumFacing side);

@@ -35,21 +35,21 @@ public class ChiselTabs {
         }
     }
 
-    public static class ChiselCreativeTab extends CreativeTabs{
+    public static class ChiselCreativeTab extends CreativeTabs {
 
-        public ChiselCreativeTab(){
+        public ChiselCreativeTab() {
             super("chiselCreativeTab");
 
         }
 
         @Override
-        public boolean hasSearchBar(){
+        public boolean hasSearchBar() {
             return true;
         }
 
         @Override
         @SideOnly(Side.CLIENT)
-        public Item getTabIconItem(){
+        public Item getTabIconItem() {
             return Item.getItemFromBlock(CarvableBlocks.ANTIBLOCK.getBlock());
         }
     }

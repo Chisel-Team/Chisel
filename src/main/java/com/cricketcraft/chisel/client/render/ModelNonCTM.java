@@ -7,12 +7,7 @@ import com.cricketcraft.chisel.common.block.ItemChiselBlock;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockFaceUV;
-import net.minecraft.client.renderer.block.model.BlockPartFace;
-import net.minecraft.client.renderer.block.model.BlockPartRotation;
-import net.minecraft.client.renderer.block.model.FaceBakery;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelRotation;
@@ -30,7 +25,7 @@ import java.util.List;
  *
  * @author minecreatr
  */
-public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
+public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel {
 
     private List<BakedQuad> quads;
 
@@ -43,62 +38,58 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
 
     @Override
     public IBakedModel handleBlockState(IBlockState state) {
-        PropertyVariation VARIATION = ((BlockCarvable)state.getBlock()).getType().getPropertyVariation();
-        IBlockResources r = ((BlockCarvable)state.getBlock()).getSubBlock((Variation)state.getValue(VARIATION)).getResources();
-        resources=(BlockResources)r;
+        PropertyVariation VARIATION = ((BlockCarvable) state.getBlock()).getType().getPropertyVariation();
+        IBlockResources r = ((BlockCarvable) state.getBlock()).getSubBlock((Variation) state.getValue(VARIATION)).getResources();
+        resources = (BlockResources) r;
         //BlockPos pos = ((IExtendedBlockState)state).getValue(BlockCarvable.BLOCK_POS);
-        this.quads=generateQuads((BlockResources)r, state);
+        this.quads = generateQuads((BlockResources) r, state);
         return this;
     }
 
     @Override
-    public IBakedModel handleItemState(ItemStack stack){
+    public IBakedModel handleItemState(ItemStack stack) {
         //Chisel.logger.info("Handling itemstack for "+GameRegistry.findUniqueIdentifierFor(stack.getItem()));
-        if (stack.getItem() instanceof ItemChiselBlock){
-            ItemChiselBlock itemBlock = (ItemChiselBlock)stack.getItem();
-            if (itemBlock.getBlock() instanceof  BlockCarvable){
-                BlockCarvable block = (BlockCarvable)itemBlock.getBlock();
+        if (stack.getItem() instanceof ItemChiselBlock) {
+            ItemChiselBlock itemBlock = (ItemChiselBlock) stack.getItem();
+            if (itemBlock.getBlock() instanceof BlockCarvable) {
+                BlockCarvable block = (BlockCarvable) itemBlock.getBlock();
                 //Chisel.logger.info("index for "+GameRegistry.findUniqueIdentifierFor(block).toString()+" is "+block.getIndex());
-                this.quads = generateQuads((BlockResources)block.allSubBlocks()[stack.getMetadata()].getResources(), null);
-            }
-            else {
+                this.quads = generateQuads((BlockResources) block.allSubBlocks()[stack.getMetadata()].getResources(), null);
+            } else {
                 Chisel.logger.info("Not BlockCarvable?");
             }
-        }
-        else {
+        } else {
             Chisel.logger.info("Not Chisel Block Item?");
         }
         return this;
     }
 
-    private List<BakedQuad> generateQuads(BlockResources r, IBlockState state){
+    private List<BakedQuad> generateQuads(BlockResources r, IBlockState state) {
         int type;
         type = r.getType();
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
 
-        for (EnumFacing f : EnumFacing.values()){
+        for (EnumFacing f : EnumFacing.values()) {
             TextureAtlasSprite t = r.getDefaultTexture();
-            if (f==EnumFacing.UP){
-                if (r.top!=null) {
+            if (f == EnumFacing.UP) {
+                if (r.top != null) {
                     t = r.top;
                 }
-            }
-            else if (f==EnumFacing.DOWN){
-                if (r.bottom!=null) {
+            } else if (f == EnumFacing.DOWN) {
+                if (r.bottom != null) {
                     t = r.bottom;
                 }
+            } else if (r.side != null) {
+                t = r.side;
             }
-            else if (r.side!=null){
-                t=r.side;
-            }
-            boolean full = ((f==EnumFacing.UP||f==EnumFacing.DOWN)&&(r.getType()==IBlockResources.CTMH||r.getType()==IBlockResources.CTMV));
+            boolean full = ((f == EnumFacing.UP || f == EnumFacing.DOWN) && (r.getType() == IBlockResources.CTMH || r.getType() == IBlockResources.CTMV));
 
             toReturn.add(makeQuad(f, t, type, full));
         }
         return toReturn;
     }
 
-    public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, int type, boolean full){
+    public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, int type, boolean full) {
         int num = 16;
         if (type == IBlockResources.CTMH || type == IBlockResources.CTMV || type == IBlockResources.V4 || type == IBlockResources.R4)
             num = 8;
@@ -113,7 +104,7 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
     public List getFaceQuads(EnumFacing face) {
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
         for (BakedQuad quad : quads) {
-            if (quad==null){
+            if (quad == null) {
                 continue;
             }
             if (quad.getFace() == face) {
@@ -146,8 +137,8 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
 
     @Override
     public TextureAtlasSprite getTexture() {
-        if (resources.getDefaultTexture()==null||resources.getDefaultTexture().getIconName().equals("missingno")){
-            if (resources.top==null){
+        if (resources.getDefaultTexture() == null || resources.getDefaultTexture().getIconName().equals("missingno")) {
+            if (resources.top == null) {
                 return resources.side;
             }
             return resources.top;

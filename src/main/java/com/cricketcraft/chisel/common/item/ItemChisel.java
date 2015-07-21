@@ -11,9 +11,9 @@ import net.minecraft.world.World;
  *
  * @author minecreatr
  */
-public class ItemChisel extends Item{
+public class ItemChisel extends Item {
 
-    public ItemChisel(){
+    public ItemChisel() {
         super();
         setMaxStackSize(1);
         setUnlocalizedName("itemChisel");

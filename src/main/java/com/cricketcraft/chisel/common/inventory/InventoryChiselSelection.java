@@ -90,7 +90,7 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public IChatComponent getDisplayName(){
+    public IChatComponent getDisplayName() {
         return new ChatComponentTranslation(getCommandSenderName());
     }
 
@@ -130,7 +130,7 @@ public class InventoryChiselSelection implements IInventory {
 
         activeVariations = 0;
         while (activeVariations < normalSlots && activeVariations < list.size()) {
-            if(Block.blockRegistry.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
+            if (Block.blockRegistry.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
                 inventory[activeVariations] = list.get(activeVariations);
                 activeVariations++;
             }
@@ -169,30 +169,31 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public void clear(){
+    public void clear() {
         inventory = new ItemStack[inventory.length];
     }
 
     @Override
-    public int getField(int var1){
+    public int getField(int var1) {
         return var1;
     }
 
     @Override
-    public void setField(int var1, int var2){}
+    public void setField(int var1, int var2) {
+    }
 
     @Override
-    public int getFieldCount(){
+    public int getFieldCount() {
         return 0;
     }
 
     @Override
-    public void openInventory(EntityPlayer var1){
+    public void openInventory(EntityPlayer var1) {
 
     }
 
     @Override
-    public void closeInventory(EntityPlayer var1){
+    public void closeInventory(EntityPlayer var1) {
 
     }
 

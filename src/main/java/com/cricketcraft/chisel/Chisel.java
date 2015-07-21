@@ -23,7 +23,7 @@ import org.apache.logging.log4j.Logger;
  */
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME)
-public class Chisel implements Reference{
+public class Chisel implements Reference {
 
     public static final Logger logger = LogManager.getLogger(MOD_NAME);
 
@@ -36,7 +36,7 @@ public class Chisel implements Reference{
     public static ItemChisel itemChisel;
 
     @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event){
+    public void preInit(FMLPreInitializationEvent event) {
         Variation.doStuff();
         proxy.preInit();
         CarvableBlocks.preInitBlocks();
@@ -47,7 +47,7 @@ public class Chisel implements Reference{
     }
 
     @Mod.EventHandler
-    public void init(FMLInitializationEvent event){
+    public void init(FMLInitializationEvent event) {
         CarvableBlocks.initBlocks();
         ClientCommandHandler.instance.registerCommand(new CommandTest());
     }

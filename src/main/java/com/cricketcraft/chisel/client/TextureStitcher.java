@@ -20,15 +20,15 @@ public class TextureStitcher {
 
 
     @SubscribeEvent
-    public void onTextureStitch(TextureStitchEvent event){
-        for (String s : toBeRegistered){
+    public void onTextureStitch(TextureStitchEvent event) {
+        for (String s : toBeRegistered) {
             TextureAtlasSprite sprite = event.map.registerSprite(new ResourceLocation(s));
-            Chisel.logger.info("Stitching texture "+s);
+            Chisel.logger.info("Stitching texture " + s);
         }
         //CTMBlockResources.refreshAll(event.map);
     }
 
-    public static void register(String s){
+    public static void register(String s) {
         toBeRegistered.add(s);
     }
 

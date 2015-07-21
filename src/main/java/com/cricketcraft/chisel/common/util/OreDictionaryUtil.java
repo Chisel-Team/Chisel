@@ -14,14 +14,14 @@ import java.util.List;
  */
 public class OreDictionaryUtil {
 
-    public static void add(BlockCarvable block){
+    public static void add(BlockCarvable block) {
         OreDictionary.registerOre(block.getType().getOredictName(), block);
     }
 
-    public static List<ItemStack> getVariations(ItemStack stack){
+    public static List<ItemStack> getVariations(ItemStack stack) {
         int[] ids = OreDictionary.getOreIDs(stack);
         List<ItemStack> stacks = new ArrayList<ItemStack>();
-        for (int id : ids){
+        for (int id : ids) {
             stacks.addAll(OreDictionary.getOres(OreDictionary.getOreName(id)));
         }
         return stacks;

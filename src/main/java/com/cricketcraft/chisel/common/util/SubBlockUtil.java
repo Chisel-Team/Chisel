@@ -16,24 +16,26 @@ public class SubBlockUtil {
 
     /**
      * Get the resources from the block and Variation
+     *
      * @param block The Block
-     * @param v The Variation
+     * @param v     The Variation
      * @return The Resources
      */
-    public static IBlockResources getResources(Block block, Variation v){
-        if (block instanceof BlockCarvable){
+    public static IBlockResources getResources(Block block, Variation v) {
+        if (block instanceof BlockCarvable) {
             return getResources(((BlockCarvable) block).getSubBlock(v));
         }
-        Chisel.logger.error("Block not instance of block carvable, instance of "+block.getClass());
+        Chisel.logger.error("Block not instance of block carvable, instance of " + block.getClass());
         return null;
     }
 
     /**
      * Get the CTMBlock resources for the given sub block
+     *
      * @param block The Sub block
      * @return The Block resources
      */
-    public static IBlockResources getResources(ISubBlock block){
+    public static IBlockResources getResources(ISubBlock block) {
         return block.getResources();
     }
 }

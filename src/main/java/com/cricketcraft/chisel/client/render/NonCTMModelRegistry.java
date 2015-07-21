@@ -17,21 +17,21 @@ import java.util.Map;
  *
  * @author minecreatr
  */
-public class NonCTMModelRegistry implements Reference{
+public class NonCTMModelRegistry implements Reference {
 
     private static final Map<ModelResourceLocation, IBakedModel> models = new HashMap<ModelResourceLocation, IBakedModel>();
 
-    private static void register(ModelResourceLocation location, IBakedModel model){
+    private static void register(ModelResourceLocation location, IBakedModel model) {
         models.put(location, model);
     }
 
-    public static class BakedEventListener{
+    public static class BakedEventListener {
 
         @SubscribeEvent
-        public void onModelBake(ModelBakeEvent event){
-            for (Map.Entry<ModelResourceLocation, IBakedModel> entry : models.entrySet()){
-                Chisel.logger.info("Registering Non CTM model for "+entry.getKey().toString()+" model class is "+entry.getValue().getClass());
-                if (entry.getValue() instanceof WeightedBakedModel){
+        public void onModelBake(ModelBakeEvent event) {
+            for (Map.Entry<ModelResourceLocation, IBakedModel> entry : models.entrySet()) {
+                Chisel.logger.info("Registering Non CTM model for " + entry.getKey().toString() + " model class is " + entry.getValue().getClass());
+                if (entry.getValue() instanceof WeightedBakedModel) {
                     Chisel.logger.info("Model above is weighted");
                 }
                 event.modelRegistry.putObject(entry.getKey(), entry.getValue());
@@ -40,17 +40,16 @@ public class NonCTMModelRegistry implements Reference{
         }
     }
 
-    public static void register(String block, String variation, int amount, int type){
-        for (int i=0;i<amount;i++) {
+    public static void register(String block, String variation, int amount, int type) {
+        for (int i = 0; i < amount; i++) {
             ModelResourceLocation location;
-            if (i==0){
+            if (i == 0) {
                 location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block, "variation=" + variation);
+            } else {
+                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block + i, "variation=" + variation);
             }
-            else {
-                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block+i, "variation=" + variation);
-            }
-            if (type!=IBlockResources.NORMAL){
-                Chisel.logger.info("Registering model coordinate variation for "+block+" variation "+variation);
+            if (type != IBlockResources.NORMAL) {
+                Chisel.logger.info("Registering model coordinate variation for " + block + " variation " + variation);
                 register(location, ModelCoordinateVariations.newModel(variation));
                 return;
             }
