@@ -32,6 +32,7 @@ public class SubBlock implements ISubBlock{
         return this.parent;
     }
 
+    @Override
     public BlockResources getResources(){
         return this.resources;
     }

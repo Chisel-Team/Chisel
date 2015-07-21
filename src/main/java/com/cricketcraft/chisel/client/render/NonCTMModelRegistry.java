@@ -1,18 +1,12 @@
 package com.cricketcraft.chisel.client.render;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.client.render.ctm.ModelCTM;
 import com.cricketcraft.chisel.common.CarvableBlocks;
 import com.cricketcraft.chisel.common.Reference;
-import com.cricketcraft.chisel.common.variation.Variation;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.resources.model.WeightedBakedModel;
-import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.HashMap;

@@ -1,13 +1,9 @@
 package com.cricketcraft.chisel.client.render.ctm;
 
-import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.client.render.ModelNonCTM;
 import com.cricketcraft.chisel.common.Reference;
-import net.minecraft.block.BlockDynamicLiquid;
-import net.minecraft.block.BlockGlowstone;
-import net.minecraft.block.BlockSlab;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockFaceUV;
 import net.minecraft.client.renderer.block.model.BlockPartFace;
@@ -16,7 +12,6 @@ import net.minecraft.client.renderer.block.model.FaceBakery;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import javax.vecmath.Vector3f;
 

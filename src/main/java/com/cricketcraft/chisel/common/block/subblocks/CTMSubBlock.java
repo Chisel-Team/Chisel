@@ -21,6 +21,7 @@ public class CTMSubBlock extends SubBlock implements ICTMSubBlock{
         this.resources=resources;
     }
 
+    @Override
     public CTMBlockResources getResources(){
         return this.resources;
     }

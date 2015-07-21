@@ -1,7 +1,5 @@
 package com.cricketcraft.chisel.client.render.ctm;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.subblocks.ICTMSubBlock;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
@@ -9,22 +7,11 @@ import com.cricketcraft.chisel.common.util.SubBlockUtil;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelRenderer;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.BlockFaceUV;
-import net.minecraft.client.renderer.block.model.BlockPartFace;
-import net.minecraft.client.renderer.block.model.BlockPartRotation;
-import net.minecraft.client.renderer.block.model.FaceBakery;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.client.resources.model.ModelRotation;
-import net.minecraft.client.resources.model.WeightedBakedModel;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
@@ -47,6 +34,7 @@ public class ModelCTM implements ISmartBlockModel {
 
 
 
+    @Override
     public List getFaceQuads(EnumFacing face) {
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
         for (BakedQuad quad : quads) {
@@ -60,26 +48,32 @@ public class ModelCTM implements ISmartBlockModel {
         return toReturn;
     }
 
+    @Override
     public List getGeneralQuads() {
         return this.quads;
     }
 
+    @Override
     public boolean isAmbientOcclusion() {
         return true;
     }
 
+    @Override
     public boolean isGui3d() {
         return true;
     }
 
+    @Override
     public boolean isBuiltInRenderer() {
         return false;
     }
 
+    @Override
     public TextureAtlasSprite getTexture() {
         return particle;
     }
 
+    @Override
     public ItemCameraTransforms getItemCameraTransforms() {
         return ItemCameraTransforms.DEFAULT;
     }

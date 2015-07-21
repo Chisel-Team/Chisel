@@ -47,6 +47,7 @@ public class ChiselTabs {
             return true;
         }
 
+        @Override
         @SideOnly(Side.CLIENT)
         public Item getTabIconItem(){
             return Item.getItemFromBlock(CarvableBlocks.ANTIBLOCK.getBlock());

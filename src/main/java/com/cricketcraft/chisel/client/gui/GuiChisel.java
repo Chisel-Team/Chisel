@@ -2,12 +2,9 @@ package com.cricketcraft.chisel.client.gui;
 
 import com.cricketcraft.chisel.common.inventory.ContainerChisel;
 import com.cricketcraft.chisel.common.inventory.InventoryChiselSelection;
-import com.cricketcraft.chisel.common.inventory.SlotChiselInput;
 import com.cricketcraft.chisel.common.item.ItemChisel;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;

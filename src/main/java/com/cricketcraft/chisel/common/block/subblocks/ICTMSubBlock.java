@@ -9,5 +9,6 @@ import com.cricketcraft.chisel.client.render.CTMBlockResources;
  */
 public interface ICTMSubBlock extends ISubBlock{
 
+    @Override
     public CTMBlockResources getResources();
 }

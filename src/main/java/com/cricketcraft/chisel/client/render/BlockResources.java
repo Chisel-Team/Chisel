@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -59,10 +58,12 @@ public class BlockResources implements IBlockResources, Reference{
         this.type=type;
     }
 
+    @Override
     public TextureAtlasSprite getDefaultTexture(){
         return this.texture;
     }
 
+    @Override
     public BlockCarvable getParent(){
         return this.parent;
     }
@@ -76,10 +77,12 @@ public class BlockResources implements IBlockResources, Reference{
         return false;
     }
 
+    @Override
     public String getVariantName(){
         return this.variantName;
     }
 
+    @Override
     public List<String> getLore(){
         return this.lore;
     }
@@ -268,6 +271,7 @@ public class BlockResources implements IBlockResources, Reference{
         return 1;
     }
 
+    @Override
     public int getType(){
         return this.type;
     }

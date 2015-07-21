@@ -1,6 +1,5 @@
 package com.cricketcraft.chisel.common.block;
 
-import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.common.CarvableBlocks;
 import com.cricketcraft.chisel.common.util.SubBlockUtil;
@@ -12,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.input.Keyboard;
 
 import java.util.List;
 
@@ -51,6 +49,7 @@ public class ItemChiselBlock extends ItemBlock{
     }
 
 
+    @Override
     public String getUnlocalizedName(ItemStack stack){
         try {
             Variation curVariation = this.variations[stack.getMetadata()];
@@ -60,6 +59,7 @@ public class ItemChiselBlock extends ItemBlock{
         }
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
         Variation v = variations[stack.getMetadata()];
@@ -83,6 +83,7 @@ public class ItemChiselBlock extends ItemBlock{
 //        return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 //    }
 
+    @Override
     public int getMetadata(int meta){
         return meta;
     }

@@ -4,7 +4,6 @@ import com.cricketcraft.chisel.Chisel;
 import net.minecraft.block.properties.PropertyHelper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -21,6 +20,7 @@ public class PropertyVariation extends PropertyHelper{
         Chisel.logger.info("PropertyVariation created");
     }
 
+    @Override
     public Collection getAllowedValues(){
         if (values.size()==0){
             throw new RuntimeException("0 Values?");
@@ -28,6 +28,7 @@ public class PropertyVariation extends PropertyHelper{
         return values;
     }
 
+    @Override
     public String getName(Comparable en){
         return ((Variation)en).getValue();
     }

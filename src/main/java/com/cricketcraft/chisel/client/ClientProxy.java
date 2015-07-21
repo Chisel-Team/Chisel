@@ -26,6 +26,7 @@ public class ClientProxy extends CommonProxy{
         return true;
     }
 
+    @Override
     public void preInit(){
         MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
         MinecraftForge.EVENT_BUS.register(new NonCTMModelRegistry.BakedEventListener());

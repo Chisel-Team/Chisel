@@ -1,6 +1,5 @@
 package com.cricketcraft.chisel.common.util;
 
-import com.cricketcraft.chisel.common.CarvableBlocks;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;

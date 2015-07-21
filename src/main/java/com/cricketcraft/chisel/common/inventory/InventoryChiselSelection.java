@@ -89,6 +89,7 @@ public class InventoryChiselSelection implements IInventory {
 
     }
 
+    @Override
     public IChatComponent getDisplayName(){
         return new ChatComponentTranslation(getCommandSenderName());
     }
@@ -167,24 +168,30 @@ public class InventoryChiselSelection implements IInventory {
         return !(stack != null && (stack.getItem() instanceof ItemChisel)) && i == normalSlots;
     }
 
+    @Override
     public void clear(){
         inventory = new ItemStack[inventory.length];
     }
 
+    @Override
     public int getField(int var1){
         return var1;
     }
 
+    @Override
     public void setField(int var1, int var2){}
 
+    @Override
     public int getFieldCount(){
         return 0;
     }
 
+    @Override
     public void openInventory(EntityPlayer var1){
 
     }
 
+    @Override
     public void closeInventory(EntityPlayer var1){
 
     }
