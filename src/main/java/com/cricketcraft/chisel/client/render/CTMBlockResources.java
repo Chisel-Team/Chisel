@@ -2,14 +2,10 @@ package com.cricketcraft.chisel.client.render;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.TextureStitcher;
-import com.cricketcraft.chisel.common.Reference;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
-import com.cricketcraft.chisel.common.util.ReflectionUtil;
-import net.minecraft.block.BlockFence;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.util.ArrayList;
 import java.util.List;

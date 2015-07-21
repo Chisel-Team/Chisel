@@ -17,6 +17,8 @@ buildscript {
 
 apply plugin: 'forge'
 
+idea { module { inheritOutputDirs = true } }
+
 version = "1.0"
 group= "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "chisel3"
@@ -66,5 +68,13 @@ processResources
     // copy everything else, thats not the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+jar {
+    classifier = 'universal'
+    version = "${project.minecraft.version}-${project.version}"
+    manifest {
+        attributes 'FMLAT': 'chisel_at.cfg'
     }
 }

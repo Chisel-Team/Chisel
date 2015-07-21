@@ -2,26 +2,10 @@ package com.cricketcraft.chisel.client.render.ctm;
 
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.common.Reference;
-import com.cricketcraft.chisel.common.block.BlockCarvable;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockModelShapes;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.resources.IReloadableResourceManager;
-import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.server.CommandTeleport;
-import net.minecraft.util.RegistrySimple;
 import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.property.ExtendedBlockState;
-import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -2,13 +2,10 @@ package com.cricketcraft.chisel.client.handler;
 
 import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
-import com.cricketcraft.chisel.common.util.ReflectionUtil;
 import com.cricketcraft.chisel.common.util.SubBlockUtil;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.UnmodifiableIterator;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -18,16 +15,11 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import org.lwjgl.opengl.GL11;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Handler to debug stuff
@@ -58,7 +50,7 @@ public class DebugHandler {
         Minecraft mc = Minecraft.getMinecraft();
         IBakedModel m = mc.getBlockRendererDispatcher().getModelFromBlockState(state, mc.theWorld, mc.objectMouseOver.getBlockPos());
         if (m instanceof IFlexibleBakedModel.Wrapper){
-            m = (IBakedModel) ReflectionUtil.getValue("parent", m);
+//            m = (IBakedModel) ReflectionUtil.getValue("parent", m);
         }
         text.add(EnumChatFormatting.BLUE+"Model Class: "+m.getClass());
         for (IProperty  p : (ImmutableSet<IProperty>)state.getProperties().keySet()){

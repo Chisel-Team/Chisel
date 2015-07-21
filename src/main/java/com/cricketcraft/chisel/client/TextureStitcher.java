@@ -1,7 +1,6 @@
 package com.cricketcraft.chisel.client;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;

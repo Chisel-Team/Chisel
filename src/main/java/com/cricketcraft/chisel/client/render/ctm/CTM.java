@@ -1,6 +1,5 @@
 package com.cricketcraft.chisel.client.render.ctm;
 
-import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import net.minecraft.util.EnumFacing;

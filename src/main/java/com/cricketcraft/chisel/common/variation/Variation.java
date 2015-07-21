@@ -1,7 +1,6 @@
 package com.cricketcraft.chisel.common.variation;
 
 import com.cricketcraft.chisel.common.CarvableBlocks;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.IStringSerializable;
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -114,10 +113,12 @@ public class Variation implements IStringSerializable, Comparable<Variation>{
 
 
 
+    @Override
     public String getName(){
         return this.getValue();
     }
 
+    @Override
     public int compareTo(Variation v){
         if (this.equals(v)){
             return 0;

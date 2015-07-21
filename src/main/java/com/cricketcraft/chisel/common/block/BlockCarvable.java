@@ -1,43 +1,27 @@
 package com.cricketcraft.chisel.common.block;
 
-import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.api.IFacade;
 import com.cricketcraft.chisel.client.render.BlockResources;
-import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.client.render.IBlockResources;
-import com.cricketcraft.chisel.client.render.ctm.CTMModelRegistry;
 import com.cricketcraft.chisel.common.CarvableBlocks;
-import com.cricketcraft.chisel.common.PropertyBlockPos;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
 import com.cricketcraft.chisel.common.init.ChiselTabs;
-import com.cricketcraft.chisel.common.util.ReflectionUtil;
 import com.cricketcraft.chisel.common.util.SubBlockUtil;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.BlockRendererDispatcher;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.resources.model.SimpleBakedModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.launchwrapper.Launch;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -47,11 +31,9 @@ import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.common.property.Properties;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -124,12 +106,7 @@ public class BlockCarvable extends Block{
         this.index=index;
         this.VARIATION=p;
         this.fullBlock = isOpaqueCube();
-        if ((Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
-            ReflectionUtil.setFinalValue("blockState", Block.class, this, createRealBlockState(p));
-        }
-        else {
-            ReflectionUtil.setFinalValue("field_176227_L", Block.class, this, createRealBlockState(p));
-        }
+	    this.blockState = createRealBlockState(p);
         setupStates();
         setResistance(10.0F);
         setHardness(2.0F);
@@ -446,12 +423,7 @@ public class BlockCarvable extends Block{
                 return false;
             }
         }
-        if (state1.getBlock()==state2.getBlock()){
-            return true;
-        }
-        else {
-            return false;
-        }
+	    return state1.getBlock() == state2.getBlock();
     }
 
     /**

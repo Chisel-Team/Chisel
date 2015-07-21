@@ -4,7 +4,6 @@ import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.client.render.ctm.ModelCTM;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import com.cricketcraft.chisel.common.block.ItemChiselBlock;
-import com.cricketcraft.chisel.common.util.SubBlockUtil;
 import com.cricketcraft.chisel.common.variation.PropertyVariation;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.state.IBlockState;
@@ -18,13 +17,9 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
-import net.minecraftforge.common.property.IExtendedBlockState;
-import net.minecraftforge.fml.common.registry.GameData;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.vecmath.Vector3f;
 import java.util.ArrayList;
@@ -114,6 +109,7 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
                 sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, false);
     }
 
+    @Override
     public List getFaceQuads(EnumFacing face) {
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
         for (BakedQuad quad : quads) {
@@ -128,22 +124,27 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
         return toReturn;
     }
 
+    @Override
     public List getGeneralQuads() {
         return this.quads;
     }
 
+    @Override
     public boolean isAmbientOcclusion() {
         return true;
     }
 
+    @Override
     public boolean isGui3d() {
         return true;
     }
 
+    @Override
     public boolean isBuiltInRenderer() {
         return false;
     }
 
+    @Override
     public TextureAtlasSprite getTexture() {
         if (resources.getDefaultTexture()==null||resources.getDefaultTexture().getIconName().equals("missingno")){
             if (resources.top==null){
@@ -154,6 +155,7 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel{
         return resources.getDefaultTexture();
     }
 
+    @Override
     public ItemCameraTransforms getItemCameraTransforms() {
         return ItemCameraTransforms.DEFAULT;
     }

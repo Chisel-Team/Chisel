@@ -1,11 +1,8 @@
 package com.cricketcraft.chisel.common.util;
 
 import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.client.render.BlockResources;
-import com.cricketcraft.chisel.client.render.CTMBlockResources;
 import com.cricketcraft.chisel.client.render.IBlockResources;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
-import com.cricketcraft.chisel.common.block.subblocks.ICTMSubBlock;
 import com.cricketcraft.chisel.common.block.subblocks.ISubBlock;
 import com.cricketcraft.chisel.common.variation.Variation;
 import net.minecraft.block.Block;
