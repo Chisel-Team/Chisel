@@ -17,6 +17,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class DebugHandler {
         Minecraft mc = Minecraft.getMinecraft();
         IBakedModel m = mc.getBlockRendererDispatcher().getModelFromBlockState(state, mc.theWorld, mc.objectMouseOver.getBlockPos());
         if (m instanceof IFlexibleBakedModel.Wrapper){
-//            m = (IBakedModel) ReflectionUtil.getValue("parent", m);
+	        m = ReflectionHelper.getPrivateValue(IFlexibleBakedModel.Wrapper.class, (IFlexibleBakedModel.Wrapper)m, "parent");
         }
         text.add(EnumChatFormatting.BLUE+"Model Class: "+m.getClass());
         for (IProperty  p : (ImmutableSet<IProperty>)state.getProperties().keySet()){
