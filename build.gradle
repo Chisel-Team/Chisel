@@ -24,15 +24,14 @@ group= "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-na
 archivesBaseName = "chisel3"
 
 minecraft {
-    version = "1.8-11.14.1.1336"
-    runDir = "run"
+    version = "1.8-11.14.3.1493"
     
     // the mappings can be changed at any time, and must be in the following format.
     // snapshot_YYYYMMDD   snapshot are built nightly.
     // stable_#            stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not allways work.
     // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20150310"
+    mappings = "snapshot_20150721"
 }
 
 dependencies {

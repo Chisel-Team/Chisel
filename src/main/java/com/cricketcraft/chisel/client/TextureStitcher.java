@@ -1,10 +1,13 @@
 package com.cricketcraft.chisel.client;
 
 import com.cricketcraft.chisel.Chisel;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +21,11 @@ public class TextureStitcher {
 
     public static List<String> toBeRegistered = new ArrayList<String>();
 
-
     @SubscribeEvent
-    public void onTextureStitch(TextureStitchEvent event) {
+    public void onTextureStitch(TextureStitchEvent.Pre event) {
+        Chisel.proxy.preTextureStitch();
         for (String s : toBeRegistered) {
-            TextureAtlasSprite sprite = event.map.registerSprite(new ResourceLocation(s));
+            event.map.registerSprite(new ResourceLocation(s));
             Chisel.logger.info("Stitching texture " + s);
         }
         //CTMBlockResources.refreshAll(event.map);
