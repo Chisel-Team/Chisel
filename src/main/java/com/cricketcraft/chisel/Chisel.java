@@ -11,6 +11,7 @@ import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -48,6 +49,7 @@ public class Chisel implements Reference {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        proxy.init();
         CarvableBlocks.initBlocks();
         ClientCommandHandler.instance.registerCommand(new CommandTest());
     }
