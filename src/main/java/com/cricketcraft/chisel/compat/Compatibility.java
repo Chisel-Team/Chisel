@@ -82,7 +82,8 @@ public class Compatibility {
         addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 14, 99);
         addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 15, 99);
 
-        addSupport("Botania", "endStoneBrick", "end_stone", 12, 0);
+        addSupport("Botania", "endStoneBrick", "end_stone", 0, 0);
+        addSupport("Botania", "endStoneBrick", "end_stone", 1, 0);
 
 		if(Loader.isModLoaded("EE3")){
 			loadEE3Values();
