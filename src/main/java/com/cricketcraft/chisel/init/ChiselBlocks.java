@@ -128,6 +128,9 @@ public final class ChiselBlocks {
 	public static final BlockCarvable diorite = null;
 	public static final BlockCarvable andesite = null;
 
+	// 1.9... drull pls
+	public static final BlockCarvable purpur = null;
+
 	private ChiselBlocks() {
 	}
 }

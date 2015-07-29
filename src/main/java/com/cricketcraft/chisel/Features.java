@@ -136,7 +136,7 @@ public enum Features {
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.antiBlock, 8, 15), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone"));
 			}
 			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.antiBlock, 8, meta), "BBB", "BdB", "BBB",
-					'd', dyeOres[meta], 'B', new ItemStack(ChiselBlocks.antiBlock, 1, OreDictionary.WILDCARD_VALUE)));
+                    'd', dyeOres[meta], 'B', new ItemStack(ChiselBlocks.antiBlock, 1, OreDictionary.WILDCARD_VALUE)));
 		}
 
 		@Override
@@ -622,10 +622,11 @@ public enum Features {
 
         @Override
         void addBlocks() {
-            //BlockCarvable end_stone = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
-            Carving.chisel.addVariation("end_stone", Blocks.end_stone , 0, 0);
-            //end_stone.carverHelper.registerAll(emerald_block, "endStone");
-            Carving.chisel.registerOre("end_stone", "end_stone");
+            BlockCarvable end_Stone = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
+            Carving.chisel.addVariation("end_Stone", Blocks.end_stone , 0, -1);
+            end_Stone.carverHelper.addVariation("tile.endstone.0.desc", 0, "endstone/end_bricks");
+            end_Stone.carverHelper.registerAll(end_Stone, "end_Stone");
+            Carving.chisel.registerOre("end_Stone", "end_Stone");
         }
     },
 
@@ -667,8 +668,8 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.factoryblock, Configurations.factoryBlockAmount, 0), new Object[] { "*X*", "X X", "*X*", '*', new ItemStack(Blocks.stone, 1), 'X',
-					new ItemStack(Items.iron_ingot, 1) });
+			GameRegistry.addRecipe(new ItemStack(ChiselBlocks.factoryblock, Configurations.factoryBlockAmount, 0), new Object[]{"*X*", "X X", "*X*", '*', new ItemStack(Blocks.stone, 1), 'X',
+                    new ItemStack(Items.iron_ingot, 1)});
 		}
 	},
 
@@ -1794,11 +1795,11 @@ public enum Features {
 			makerPackedIceStairs.carverHelper.addVariation("tile.packedice_stairs.15.desc", 15, "ice/poison");
 			makerPackedIceStairs.create(new IStairsCreator() {
 
-				@Override
-				public BlockCarvableStairs create(Block block, int meta, CarvableHelper helper) {
-					return new BlockCarvablePackedIceStairs(block, meta, helper);
-				}
-			}, "packedice_stairs", ChiselBlocks.packediceStairs);
+                @Override
+                public BlockCarvableStairs create(Block block, int meta, CarvableHelper helper) {
+                    return new BlockCarvablePackedIceStairs(block, meta, helper);
+                }
+            }, "packedice_stairs", ChiselBlocks.packediceStairs);
 			Carving.chisel.registerOre("packedice_stairs", "packedIceStairs");
 		}
 	},
@@ -1893,6 +1894,23 @@ public enum Features {
 			return true;
 		}
 	},
+
+    PURPUR {
+        @Override
+        void addBlocks() {
+            BlockCarvable purpur = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
+            purpur.carverHelper.addVariation("tile.purpur.0.desc", 0, "end_purpur/purpur_block");
+            purpur.carverHelper.addVariation("tile.purpur.1.desc", 1, "end_purpur/purpur_pillar");
+
+            purpur.carverHelper.registerAll(purpur, "purpur");
+            Carving.chisel.registerOre("purpur", "purpur");
+        }
+
+        @Override
+        void addRecipes() {
+            GameRegistry.addShapelessRecipe(new ItemStack(ChiselBlocks.purpur), new ItemStack(Item.getItemFromBlock(Blocks.end_stone), 1), new ItemStack(Items.dye, 1, 5));
+        }
+    },
 
 	QUARTZ {
 
