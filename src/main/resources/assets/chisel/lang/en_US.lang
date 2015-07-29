@@ -329,6 +329,7 @@ tile.grimstone.14.desc=Flaky Grimstone
 tile.chisel.technical.name=Technical Block
 tile.chisel.technical2.name=Transparent Technical Block
 tile.chisel.technical3.name=Industrial Technical Block
+tile.chisel.technical4.name=Technical Block
 tile.technical.0.desc=Scaffold
 tile.technical.1.desc=Panels with Caution Tape
 tile.technical.2.desc=An Old Relic from the land of Oneteufyv
@@ -347,6 +348,13 @@ tile.technical.14.desc=Fan (Malfunctioning)
 tile.technical.15.desc=Rusty Grate
 tile.technical3.0.desc=I'm a big fan of this massive fan!
 tile.technical3.1.desc=Industrial Armor Plating
+tile.technical4.0.desc=Corroded Metal Chunks
+tile.technical4.1.desc=Rusted Metal Chunks
+tile.technical4.2.desc=Sturdy
+tile.technical4.3.desc=MegaCell©
+tile.technical4.4.desc=Thermal Exhaust Plating
+tile.technical4.5.desc=Makeshift Plating
+tile.technical4.6.desc=Tape Drive? (I'm too young for this.)
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
