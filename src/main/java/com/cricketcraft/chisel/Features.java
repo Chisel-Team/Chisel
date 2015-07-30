@@ -624,7 +624,14 @@ public enum Features {
         void addBlocks() {
             BlockCarvable end_Stone = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
             Carving.chisel.addVariation("end_Stone", Blocks.end_stone , 0, -1);
-            end_Stone.carverHelper.addVariation("tile.endstone.0.desc", 0, "endstone/end_bricks");
+            end_Stone.carverHelper.addVariation("tile.end_Stone.0.desc", 0, "endstone/end_bricks");
+            end_Stone.carverHelper.addVariation("tile.end_Stone.1.desc", 1, "endstone/chaoticBricks");
+            end_Stone.carverHelper.addVariation("tile.end_Stone.2.desc", 2, "endstone/CheckeredTile");
+            end_Stone.carverHelper.addVariation("tile.end_Stone.3.desc", 3, "endstone/enderCircuit");
+            end_Stone.carverHelper.addVariation("tile.end_Stone.4.desc", 4, "endstone/endFrenchBricks");
+            end_Stone.carverHelper.addVariation("tile.end_Stone.5.desc", 5, "endstone/endPillar");
+            end_Stone.carverHelper.addVariation("tile.end_Stone.6.desc", 6, "endstone/endStoneEtched");
+            end_Stone.carverHelper.addVariation("tile.end_Stone.7.desc", 7, "endstone/prismaticEndStone");
             end_Stone.carverHelper.registerAll(end_Stone, "end_Stone");
             Carving.chisel.registerOre("end_Stone", "end_Stone");
         }
@@ -1901,6 +1908,12 @@ public enum Features {
             BlockCarvable purpur = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
             purpur.carverHelper.addVariation("tile.purpur.0.desc", 0, "end_purpur/purpur_block");
             purpur.carverHelper.addVariation("tile.purpur.1.desc", 1, "end_purpur/purpur_pillar");
+            purpur.carverHelper.addVariation("tile.purpur.2.desc", 2, "end_purpur/shulker");
+            purpur.carverHelper.addVariation("tile.purpur.3.desc", 3, "end_purpur/tilePurpur");
+            purpur.carverHelper.addVariation("tile.purpur.4.desc", 4, "end_purpur/tileBrokenPurpur");
+            purpur.carverHelper.addVariation("tile.purpur.5.desc", 5, "end_purpur/prismaticPurpur");
+            purpur.carverHelper.addVariation("tile.purpur.6.desc", 6, "end_purpur/purpurBricks");
+            purpur.carverHelper.addVariation("tile.purpur.7.desc", 7, "end_purpur/purpurCobble");
 
             purpur.carverHelper.registerAll(purpur, "purpur");
             Carving.chisel.registerOre("purpur", "purpur");

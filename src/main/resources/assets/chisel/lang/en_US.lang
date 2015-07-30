@@ -356,6 +356,28 @@ tile.technical4.4.desc=Thermal Exhaust Plating
 tile.technical4.5.desc=Makeshift Plating
 tile.technical4.6.desc=Tape Drive? (I'm too young for this.)
 
+#End Stone
+tile.chisel.end_Stone.name=End Stone
+tile.end_Stone.0.name=End Stone Bricks
+tile.end_Stone.1.name=End Chaotic Bricks
+tile.end_Stone.2.name=Checkered Tiles
+tile.end_Stone.3.name=Ender Circuit
+tile.end_Stone.4.name=Fancy Bricks
+tile.end_Stone.5.name=End Stone Pillar
+tile.end_Stone.6.name=Etched End Stone
+tile.end_Stone.7.name=Prismatic End Stone
+
+#Purpur
+tile.chisel.purpur.name=Purpur
+tile.purpur.0.name=Medium Tiles
+tile.purpur.1.name=Pillar
+tile.purpur.2.name=Not Shulker
+tile.purpur.3.name=Small Tiles
+tile.purpur.4.name=Broken Small Tiles
+tile.purpur.5.name=Prismatic Purpur
+tile.purpur.6.name=Rough Bricks
+tile.purpur.7.name=Cracked Surface
+
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
 tile.chisel.bronzeblock.name=Block of Bronze
