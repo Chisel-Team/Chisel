@@ -14,7 +14,10 @@ import static com.cricketcraft.chisel.utils.General.sGNames;
 
 import java.util.List;
 
+import com.cricketcraft.chisel.api.rendering.TextureType;
+import com.cricketcraft.chisel.client.render.*;
 import com.cricketcraft.chisel.item.chisel.ItemChisel;
+import com.cricketcraft.ctmlib.ISubmapManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -31,12 +34,6 @@ import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.block.*;
 import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.client.render.SubmapManagerAntiblock;
-import com.cricketcraft.chisel.client.render.SubmapManagerCarpetFloor;
-import com.cricketcraft.chisel.client.render.SubmapManagerFakeController;
-import com.cricketcraft.chisel.client.render.SubmapManagerLeaves;
-import com.cricketcraft.chisel.client.render.SubmapManagerSlab;
-import com.cricketcraft.chisel.client.render.SubmapManagerVoidstone;
 import com.cricketcraft.chisel.compat.fmp.ItemBlockChiselTorchPart;
 import com.cricketcraft.chisel.config.Configurations;
 import com.cricketcraft.chisel.entity.EntityBallOMoss;
@@ -2235,7 +2232,7 @@ public enum Features {
 			technical4.carverHelper.addVariation("tile.technical4.1.desc", 1, "technical/new/weatheredOrangePanels");
 			technical4.carverHelper.addVariation("tile.technical4.2.desc", 2, "technical/new/Sturdy");
 			technical4.carverHelper.addVariation("tile.technical4.3.desc", 3, "technical/new/MegaCell");
-			technical4.carverHelper.addVariation("tile.technical4.4.desc", 4, "technical/new/ExhaustPlating");
+			technical4.carverHelper.addVariation("tile.technical4.4.desc", 4, "technical/new/test/ExhaustPlating", new SubmapManagerRCTM(4, "technical/new/test/ExhaustPlating", TextureType.R4));
 			technical4.carverHelper.addVariation("tile.technical4.5.desc", 5, "technical/new/MakeshiftPanels");
             technical4.carverHelper.addVariation("tile.technical4.6.desc", 6, "technical/new/TapeDrive");
 			technical4.carverHelper.registerBlock(technical4, "technical4");
