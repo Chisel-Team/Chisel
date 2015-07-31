@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.client.event.TextureStitchEvent.Post;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Triple;
@@ -29,42 +28,42 @@ public class SubmapManagerRCTM extends SubmapManagerBase {
 		public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
 			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.WEST.ordinal());
 			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.WEST.ordinal());
-			super.renderFaceXNeg(block, x, y, z, icon);
+			super.renderFaceXNeg(block, x, y, z, submapSmall.getSubIcon(0, 0));
 		}
 
 		@Override
 		public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon) {
 			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.EAST.ordinal());
 			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.EAST.ordinal());
-			super.renderFaceXPos(block, x, y, z, icon);
+			super.renderFaceXPos(block, x, y, z, submapSmall.getSubIcon(0, 0));
 		}
 
 		@Override
 		public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon) {
 			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.DOWN.ordinal());
 			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.DOWN.ordinal());
-			super.renderFaceYNeg(block, x, y, z, icon);
+			super.renderFaceYNeg(block, x, y, z, submapSmall.getSubIcon(0, 0));
 		}
 
 		@Override
 		public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon) {
 			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.UP.ordinal());
 			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.UP.ordinal());
-			super.renderFaceYPos(block, x, y, z, icon);
+			super.renderFaceYPos(block, x, y, z, submapSmall.getSubIcon(0, 0));
 		}
 
 		@Override
 		public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon) {
 			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.NORTH.ordinal());
 			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.UP.ordinal());
-			super.renderFaceZNeg(block, x, y, z, icon);
+			super.renderFaceZNeg(block, x, y, z, submapSmall.getSubIcon(0, 0));
 		}
 
 		@Override
 		public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon) {
 			submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.submap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.SOUTH.ordinal());
 			submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerRCTM.this.smallSubmap, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), ForgeDirection.SOUTH.ordinal());
-			super.renderFaceZPos(block, x, y, z, icon);
+			super.renderFaceZPos(block, x, y, z, submapSmall.getSubIcon(0, 0));
 		}
 	}
 	
@@ -78,12 +77,11 @@ public class SubmapManagerRCTM extends SubmapManagerBase {
 		}
 
 		@Override
-		public void TexturesStitched(Post event) {
-			super.TexturesStitched(event);
+		public void texturesStitched() {
 			for (int i = 0; i < icons.length; i++) {
 				for (int j = 0; j < icons[i].length; j++) {
 					icons[i][j] = submap[i][j];
-					submap[i][j].TexturesStitched(event);
+					submap[i][j].texturesStitched();
 				}
 			}
 		}
@@ -127,16 +125,16 @@ public class SubmapManagerRCTM extends SubmapManagerBase {
 	@Override
 	public void registerIcons(String modName, Block block, IIconRegister register) {
 		IIcon base = register.registerIcon(modName + ":" + texturePath);
-		TextureSubmap[][] submaps = new TextureSubmap[size][size];
-		TextureSubmap[][] submapsSmall = new TextureSubmap[size][size];
 		int wh = (int) Math.sqrt(size);
+		TextureSubmap[][] submaps = new TextureSubmap[wh][wh];
+		TextureSubmap[][] submapsSmall = new TextureSubmap[wh][wh];
 		for (int i = 0; i < size; i++) {
-			AbstractSubmapManager manager = (AbstractSubmapManager) TextureType.CTMX.createManagerFor(CarvingUtils.getDefaultVariationFor(block, meta, 0), texturePath + "-ctm-" + i);
+			AbstractSubmapManager manager = (AbstractSubmapManager) TextureType.CTMX.createManagerFor(CarvingUtils.getDefaultVariationFor(block, meta, 0), texturePath + "-" + i);
 			manager.registerIcons(modName, block, register);
 			Object cached = manager.getCachedObject();
 			Triple<IIcon, TextureSubmap, TextureSubmap> triple = (Triple<IIcon, TextureSubmap, TextureSubmap>) cached;
-			submaps[size % wh][size / wh] = triple.getMiddle();
-			submapsSmall[size % wh][size / wh] = triple.getRight();
+			submaps[i % wh][i / wh] = triple.getMiddle();
+			submapsSmall[i % wh][i / wh] = triple.getRight();
 			if (i == 0) {
 				defaultIcon = triple.getRight().getSubIcon(0, 0);
 			}
