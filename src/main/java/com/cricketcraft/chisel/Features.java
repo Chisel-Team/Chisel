@@ -2235,6 +2235,7 @@ public enum Features {
 			technical4.carverHelper.addVariation("tile.technical4.4.desc", 4, "technical/new/test/ExhaustPlating", new SubmapManagerRCTM(4, "technical/new/test/ExhaustPlating", TextureType.R4));
 			technical4.carverHelper.addVariation("tile.technical4.5.desc", 5, "technical/new/MakeshiftPanels");
             technical4.carverHelper.addVariation("tile.technical4.6.desc", 6, "technical/new/TapeDrive");
+			technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/Piping");
 			technical4.carverHelper.registerBlock(technical4, "technical4");
 			technical4.carverHelper.registerVariations("technical");
 
