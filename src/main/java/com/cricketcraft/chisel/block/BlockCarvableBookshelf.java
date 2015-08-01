@@ -45,9 +45,14 @@ public class BlockCarvableBookshelf extends BlockCarvable {
 	}
 
     @Override
-    public int damageDropped(int damage){
-        return 0;
-    }
+	public int damageDropped(int damage) {
+		return 0;
+	}
+
+	@Override
+	public int getDamageValue(World world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z);
+	}
 
 	@Override
 	public float getEnchantPowerBonus(World world, int x, int y, int z) {
