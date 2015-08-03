@@ -29,7 +29,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * Handles all default {@link ISubmapManager} behavior
  */
-@SuppressWarnings({ "unchecked", "deprecation" })
+@SuppressWarnings("unchecked")
 public enum TextureType {
 
 	// @formatter:off
