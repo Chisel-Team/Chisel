@@ -22,7 +22,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 
 	@SideOnly(Side.CLIENT)
-	private class RenderBlocksRCTM extends RenderBlocksCTM {
+	private class RenderBlocksCombinedCTM extends RenderBlocksCTM {
 
 		@Override
 		public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
@@ -121,9 +121,10 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		if (rb == null) {
-			rb = new RenderBlocksRCTM();
+			rb = new RenderBlocksCombinedCTM();
 		}
 		rb.setRenderBoundsFromBlock(block);
 		return rb;
@@ -131,6 +132,7 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(String modName, Block block, IIconRegister register) {
 		IIcon base = register.registerIcon(modName + ":" + texturePath);
 		int wh = (int) Math.sqrt(size);
