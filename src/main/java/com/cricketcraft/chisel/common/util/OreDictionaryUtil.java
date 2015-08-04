@@ -14,8 +14,11 @@ import java.util.List;
  */
 public class OreDictionaryUtil {
 
+
     public static void add(BlockCarvable block) {
-        OreDictionary.registerOre(block.getType().getOredictName(), block);
+        for (int i=0;i<block.getTotalVariations();i++) {
+            OreDictionary.registerOre(block.getType().getOredictName(), new ItemStack(block, 1, i));
+        }
     }
 
     public static List<ItemStack> getVariations(ItemStack stack) {

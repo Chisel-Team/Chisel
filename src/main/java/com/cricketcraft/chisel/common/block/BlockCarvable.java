@@ -116,6 +116,10 @@ public class BlockCarvable extends Block {
         return this.index;
     }
 
+    public int getTotalVariations(){
+        return getType().getVariants().length-(16*getIndex());
+    }
+
     private BlockState createRealBlockState(PropertyVariation p) {
         ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
                 CONNECTED_NORTH_EAST, CONNECTED_NORTH_WEST, CONNECTED_NORTH_UP, CONNECTED_NORTH_DOWN, CONNECTED_SOUTH_EAST, CONNECTED_SOUTH_WEST,
