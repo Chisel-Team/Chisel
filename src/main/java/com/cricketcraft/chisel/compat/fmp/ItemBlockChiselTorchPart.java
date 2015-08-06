@@ -25,6 +25,7 @@ public class ItemBlockChiselTorchPart extends ItemBlock {
 		this.torch = torch;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean func_150936_a(World world, int x, int y, int z, int side, EntityPlayer player, ItemStack stack) {
 		return (placePart(world, new BlockCoord(x, y, z).offset(side), stack, side, false)) || (super.func_150936_a(world, x, y, z, side, player, stack));

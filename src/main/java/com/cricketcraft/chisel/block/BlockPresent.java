@@ -118,16 +118,18 @@ public class BlockPresent extends Block implements ICarvable {
 
 	@Override
 	public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
-		if(world.getTileEntity(x, y, z) instanceof TileEntityPresent)
-		return getBoundingBox((TileEntityPresent) world.getTileEntity(x, y, z));
-		else return null;
+		if (world.getTileEntity(x, y, z) instanceof TileEntityPresent)
+			return getBoundingBox((TileEntityPresent) world.getTileEntity(x, y, z));
+		else
+			return null;
 	}
 
 	@Override
 	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-		if(world.getTileEntity(x, y, z) instanceof TileEntityPresent)
-		return getBoundingBox((TileEntityPresent) world.getTileEntity(x, y, z));
-		else return null;
+		if (world.getTileEntity(x, y, z) instanceof TileEntityPresent)
+			return getBoundingBox((TileEntityPresent) world.getTileEntity(x, y, z));
+		else
+			return null;
 	}
 
 	public AxisAlignedBB getBoundingBox(TileEntityPresent me) {
@@ -147,8 +149,8 @@ public class BlockPresent extends Block implements ICarvable {
 		return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x + maxX, y + maxY, z + maxZ);
 	}
 
-    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
-	{
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
 		TileEntityPresent te = (TileEntityPresent) world.getTileEntity(x, y, z);
 		if (!te.isConnected()) {
 			setBlockBounds(0.0625F, 0, 0.0625F, 0.9375F, 0.875F, 0.9365F);

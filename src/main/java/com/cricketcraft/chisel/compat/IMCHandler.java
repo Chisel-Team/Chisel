@@ -14,7 +14,7 @@ public class IMCHandler {
 	public static final IMCHandler INSTANCE = new IMCHandler();
 
 	private int order = 1000;
-	
+
 	private IMCHandler() {
 	}
 

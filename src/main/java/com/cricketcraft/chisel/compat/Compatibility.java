@@ -5,6 +5,8 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
+import org.apache.logging.log4j.Level;
+
 import com.cricketcraft.chisel.Chisel;
 import com.cricketcraft.chisel.carving.Carving;
 import com.cricketcraft.chisel.init.ChiselBlocks;
@@ -17,24 +19,21 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-import org.apache.logging.log4j.Level;
-
 public class Compatibility {
 
 	public static String[] rockColorNames = { "gray", "lightgray", "brown", "tan", "reddish", "bluish", "greenish" };
 
-    public static Map<Integer, String> tconMap = Maps.newHashMap();
+	public static Map<Integer, String> tconMap = Maps.newHashMap();
 
-    static
-    {
-        tconMap.put(0, "obsidian");
-        tconMap.put(1, "sandstone");
-        tconMap.put(2, "netherrack");
-        tconMap.put(3, "stonebricksmooth");
-        tconMap.put(12, "end_stone");
-    }
+	static {
+		tconMap.put(0, "obsidian");
+		tconMap.put(1, "sandstone");
+		tconMap.put(2, "netherrack");
+		tconMap.put(3, "stonebricksmooth");
+		tconMap.put(12, "end_stone");
+	}
 
-    public static void init(FMLPostInitializationEvent event) {
+	public static void init(FMLPostInitializationEvent event) {
 
 		/* Proj Red */
 		addSupport("ProjRed|Exploration", "projectred.exploration.stone", "marble", 0, 99);
@@ -71,24 +70,23 @@ public class Compatibility {
 		/* Thaumcraft TODO There is probably a cleaner way of doing this */
 		if (Loader.isModLoaded("Thaumcraft")) {
 			loadThaumcraftAspects();
-        }
+		}
 
-        for (Integer i : tconMap.keySet())
-        {
-            addSupport("TConstruct", "decoration.multibrick", tconMap.get(i), i, 99);
-            addSupport("TConstruct", "decoration.multibrickfancy", tconMap.get(i), i, 99);
-        }
+		for (Integer i : tconMap.keySet()) {
+			addSupport("TConstruct", "decoration.multibrick", tconMap.get(i), i, 99);
+			addSupport("TConstruct", "decoration.multibrickfancy", tconMap.get(i), i, 99);
+		}
 
-        addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 14, 99);
-        addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 15, 99);
+		addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 14, 99);
+		addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 15, 99);
 
-        addSupport("Botania", "endStoneBrick", "end_stone", 0, 0);
-        addSupport("Botania", "endStoneBrick", "end_stone", 1, 0);
+		addSupport("Botania", "endStoneBrick", "end_stone", 0, 0);
+		addSupport("Botania", "endStoneBrick", "end_stone", 1, 0);
 
-		if(Loader.isModLoaded("EE3")){
+		if (Loader.isModLoaded("EE3")) {
 			loadEE3Values();
 		}
-    }
+	}
 
 	public static void addSupport(String modname, String blockname, String name, int metadata, int order) {
 		if (Loader.isModLoaded(modname) && GameRegistry.findBlock(modname, blockname) != null) {
@@ -101,11 +99,11 @@ public class Compatibility {
 	}
 
 	private static void loadThaumcraftAspects() {
-//		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestone, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
-//		ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestoneWall, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
+		// ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestone, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
+		// ThaumcraftApi.registerObjectTag(new ItemStack(ChiselBlocks.cobblestoneWall, 1, OreDictionary.WILDCARD_VALUE), (new AspectList()).add(Aspect.ENTROPY, 1).add(Aspect.EARTH, 1));
 	}
 
-	private static void loadEE3Values(){
+	private static void loadEE3Values() {
 		FMLLog.log(Chisel.MOD_ID, Level.INFO, "[Chisel 2] Oooh is that Equivalent Exchange I see?");
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselItems.ballomoss, 1), 16);
 
@@ -136,25 +134,29 @@ public class Compatibility {
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass2, 1), 1);
 		EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.technical2, 1, 0), 32);
 
-		for(int x = 0; x < ChiselBlocks.pumpkin.length; x++){
+		for (int x = 0; x < ChiselBlocks.pumpkin.length; x++) {
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.pumpkin[x], 1), 144);
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.jackolantern[x], 1), 153);
 		}
 
-		for(int x = 0; x < ChiselBlocks.torches.length; x++){
+		for (int x = 0; x < ChiselBlocks.torches.length; x++) {
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.torches[x], 1), 9);
 		}
 
-		for(int x = 0; x < 10; x++){
+		for (int x = 0; x < 10; x++) {
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.valentines, 1, x), 3);
 		}
 
-		for(int x = 0 ; x < 16; x++){
-			if(x <= 10)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.concrete, 1, x), 8);
-			if(x <= 14)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.grimstone, 1, x), 5);
-			if(x < 14)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.grimstone, 1, x), 7);
-			if(x < 12)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.dirt, 1, x), 1);
-			if(x < 5){
+		for (int x = 0; x < 16; x++) {
+			if (x <= 10)
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.concrete, 1, x), 8);
+			if (x <= 14)
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.grimstone, 1, x), 5);
+			if (x < 14)
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.grimstone, 1, x), 7);
+			if (x < 12)
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.dirt, 1, x), 1);
+			if (x < 5) {
 				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.rebel, 1, x), 39);
 			}
 
@@ -182,19 +184,22 @@ public class Compatibility {
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.circuits, 1, x), 37);
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.factoryblock2, 1, x), 32);
 
-			if(x < 15)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.warningSign, 1, x), 6);
+			if (x < 15)
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.warningSign, 1, x), 6);
 
-			if(x < 4)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.factoryblock2, 1, x), 32);
+			if (x < 4)
+				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.factoryblock2, 1, x), 32);
 
-			for(int c = 0; c < ChiselBlocks.stainedGlass.length; c++){
+			for (int c = 0; c < ChiselBlocks.stainedGlass.length; c++) {
 				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.stainedGlass[c], 1, x), 1);
 			}
 
-			for(int c = 0; c < ChiselBlocks.stainedGlassPane.length; c++){
-				if(x <= 13)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.stainedGlassPane[c], 1, x), 1);
+			for (int c = 0; c < ChiselBlocks.stainedGlassPane.length; c++) {
+				if (x <= 13)
+					EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.stainedGlassPane[c], 1, x), 1);
 			}
 
-			if(x > 0) {
+			if (x > 0) {
 				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.cobblestone, 1, x), 1);
 				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.mossy_cobblestone, 1, x), 1);
 				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.netherrack, 1, x), 1);
@@ -203,7 +208,8 @@ public class Compatibility {
 				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.voidstonerunic, 1, x), 160);
 				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.glass, 1, x), 1);
 				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.redstone_block, 1, x), 288);
-				if(x <= 8)EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.bookshelf, 1, x), 528);
+				if (x <= 8)
+					EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.bookshelf, 1, x), 528);
 				if (x <= 12) {
 					EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.diamond_block, 1, x), 73728);
 					if (x != 12)
@@ -216,7 +222,7 @@ public class Compatibility {
 			}
 		}
 
-		for(int x = 0; x <= 6; x++){
+		for (int x = 0; x <= 6; x++) {
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.andesite, 1, x), 129);
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.diorite, 1, x), 257);
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.granite, 1, x), 513);
@@ -238,7 +244,7 @@ public class Compatibility {
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.paperwall_block, 1, x), 32);
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.paperwall_block, 1, 7), 32);
 			EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.paperwall_block, 1, 8), 32);
-			if(x > 0){
+			if (x > 0) {
 				EnergyValueRegistryProxy.addPreAssignedEnergyValue(new ItemStack(ChiselBlocks.brickCustom, 1, x), 256);
 			}
 		}

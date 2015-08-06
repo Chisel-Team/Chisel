@@ -1,6 +1,5 @@
 package com.cricketcraft.chisel.client.render;
 
-import com.cricketcraft.chisel.entity.EntityChiselSnowman;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelSnowMan;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -12,54 +11,58 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
-import static net.minecraftforge.client.IItemRenderer.ItemRenderType.*;
-import static net.minecraftforge.client.IItemRenderer.ItemRendererHelper.*;
+
 import org.lwjgl.opengl.GL11;
 
-public class RenderChiselSnowman extends RenderLiving{
+import com.cricketcraft.chisel.entity.EntityChiselSnowman;
 
-    private static final ResourceLocation snowManTextures = new ResourceLocation("textures/entity/snowman.png");
-    private ModelSnowMan snowMan;
+import static net.minecraftforge.client.IItemRenderer.ItemRenderType.EQUIPPED;
+import static net.minecraftforge.client.IItemRenderer.ItemRendererHelper.BLOCK_3D;
 
-    public RenderChiselSnowman() {
-        super(new ModelSnowMan(), 0.5F);
-        snowMan = (ModelSnowMan)super.mainModel;
-        setRenderPassModel(this.snowMan);
-    }
+public class RenderChiselSnowman extends RenderLiving {
 
-    @Override
-    protected void renderEquippedItems(EntityLivingBase entityLivingBase, float size){
-        this.renderEquippedItems((EntityChiselSnowman) entityLivingBase, size);
-    }
+	private static final ResourceLocation snowManTextures = new ResourceLocation("textures/entity/snowman.png");
+	private ModelSnowMan snowMan;
 
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity) {
-        return this.getEntityTexture((EntityChiselSnowman) entity);
-    }
+	public RenderChiselSnowman() {
+		super(new ModelSnowMan(), 0.5F);
+		snowMan = (ModelSnowMan) super.mainModel;
+		setRenderPassModel(this.snowMan);
+	}
 
-    protected ResourceLocation getEntityTexture(EntityChiselSnowman snowman){
-        return snowManTextures;
-    }
+	@Override
+	protected void renderEquippedItems(EntityLivingBase entityLivingBase, float size) {
+		this.renderEquippedItems((EntityChiselSnowman) entityLivingBase, size);
+	}
 
-    protected void renderEquippedItems(EntityChiselSnowman snowman, float size){
-        super.renderEquippedItems(snowman, size);
-        ItemStack itemStack = snowman.getEquipmentInSlot(2);
+	@Override
+	protected ResourceLocation getEntityTexture(Entity entity) {
+		return this.getEntityTexture((EntityChiselSnowman) entity);
+	}
 
-        if(itemStack.getItem() instanceof ItemBlock){
-            GL11.glPushMatrix();
-            this.snowMan.head.postRender(0.0625F);
+	protected ResourceLocation getEntityTexture(EntityChiselSnowman snowman) {
+		return snowManTextures;
+	}
 
-            IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(itemStack, EQUIPPED);
-            boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(EQUIPPED, itemStack, BLOCK_3D));
+	protected void renderEquippedItems(EntityChiselSnowman snowman, float size) {
+		super.renderEquippedItems(snowman, size);
+		ItemStack itemStack = snowman.getEquipmentInSlot(2);
 
-            if(is3D || RenderBlocks.renderItemIn3d(Block.getBlockFromItem(itemStack.getItem()).getRenderType())){
-                float f1 = 0.625F;
-                GL11.glTranslatef(0.0F, -0.34375F, 0.0F);
-                GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-                GL11.glScalef(f1, -f1, f1);
-            }
-            this.renderManager.itemRenderer.renderItem(snowman, itemStack, 0);
-            GL11.glPopMatrix();
-        }
-    }
+		if (itemStack.getItem() instanceof ItemBlock) {
+			GL11.glPushMatrix();
+			this.snowMan.head.postRender(0.0625F);
+
+			IItemRenderer customRenderer = MinecraftForgeClient.getItemRenderer(itemStack, EQUIPPED);
+			boolean is3D = (customRenderer != null && customRenderer.shouldUseRenderHelper(EQUIPPED, itemStack, BLOCK_3D));
+
+			if (is3D || RenderBlocks.renderItemIn3d(Block.getBlockFromItem(itemStack.getItem()).getRenderType())) {
+				float f1 = 0.625F;
+				GL11.glTranslatef(0.0F, -0.34375F, 0.0F);
+				GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+				GL11.glScalef(f1, -f1, f1);
+			}
+			this.renderManager.itemRenderer.renderItem(snowman, itemStack, 0);
+			GL11.glPopMatrix();
+		}
+	}
 }

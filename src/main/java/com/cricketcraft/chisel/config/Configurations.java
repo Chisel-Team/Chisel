@@ -1,15 +1,15 @@
 package com.cricketcraft.chisel.config;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.Features;
-import com.cricketcraft.ctmlib.CTM;
+import java.util.Locale;
 
 import net.minecraft.item.ItemDye;
 import net.minecraftforge.common.config.Configuration;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Locale;
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.Features;
+import com.cricketcraft.ctmlib.CTM;
 
 public class Configurations {
 

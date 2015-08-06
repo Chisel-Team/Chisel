@@ -10,6 +10,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockCarvableLayered extends BlockCarvable {
+
 	@SideOnly(Side.CLIENT)
 	private IIcon baseTexture;
 	private String baseTexLocation;
@@ -18,14 +19,17 @@ public class BlockCarvableLayered extends BlockCarvable {
 		super(mat);
 		this.baseTexLocation = baseTexLocation;
 	}
+
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		super.registerBlockIcons(register);
 		baseTexture = register.registerIcon(Chisel.MOD_ID + ":" + baseTexLocation);
 	}
+
 	public IIcon getBaseTex() {
 		return baseTexture;
 	}
+
 	@Override
 	public int getRenderType() {
 		return Chisel.renderLayeredId;

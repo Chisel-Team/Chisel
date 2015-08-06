@@ -36,6 +36,7 @@ public class BlockCarvableWall extends BlockWall {
 		carverHelper.registerBlockIcons("Chisel", this, register);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs tabs, List list) {
 		carverHelper.registerSubBlocks(this, tabs, list);

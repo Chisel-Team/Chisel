@@ -29,12 +29,11 @@ public class GeneralClient {
 
 		Minecraft.getMinecraft().getTextureManager().bindTexture(res);
 	}
-	
-    public static void setGLColorFromInt(int color)
-    {
-        float red = (color >> 16 & 255) / 255.0F;
-        float green = (color >> 8 & 255) / 255.0F;
-        float blue = (color & 255) / 255.0F;
-        GL11.glColor4f(red, green, blue, 1.0F);
-    }
+
+	public static void setGLColorFromInt(int color) {
+		float red = (color >> 16 & 255) / 255.0F;
+		float green = (color >> 8 & 255) / 255.0F;
+		float blue = (color & 255) / 255.0F;
+		GL11.glColor4f(red, green, blue, 1.0F);
+	}
 }

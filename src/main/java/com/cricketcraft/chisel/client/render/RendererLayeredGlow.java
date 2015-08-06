@@ -27,7 +27,7 @@ public class RendererLayeredGlow implements ISimpleBlockRenderingHandler {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		GeneralClient.setGLColorFromInt(Configurations.configColors[metadata]);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		Drawing.drawBlock(block, ((BlockCarvableGlow)block).getGlowTexture(), renderer);
+		Drawing.drawBlock(block, ((BlockCarvableGlow) block).getGlowTexture(), renderer);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glColor3f(1, 1, 1);
 		Drawing.drawBlock(block, metadata, renderer);
@@ -42,7 +42,7 @@ public class RendererLayeredGlow implements ISimpleBlockRenderingHandler {
 		renderer.renderStandardBlock(block, x, y, z);
 		return true;
 	}
-	
+
 	@Override
 	public boolean shouldRender3DInInventory(int modelId) {
 		return true;

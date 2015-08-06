@@ -1,11 +1,11 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.init.ChiselTabs;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
+import com.cricketcraft.chisel.init.ChiselTabs;
 import com.cricketcraft.chisel.item.ItemCarvable;
 
 import cpw.mods.fml.common.registry.GameRegistry;

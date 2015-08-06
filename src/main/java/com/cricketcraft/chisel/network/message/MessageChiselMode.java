@@ -16,25 +16,27 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageChiselMode implements IMessage {
 
-	public MessageChiselMode(){
+	public MessageChiselMode() {
 	}
-	
+
 	private String mode;
-	
+
 	public MessageChiselMode(IChiselMode iChiselMode) {
 		this.mode = iChiselMode.name();
 	}
 
+	@Override
 	public void toBytes(ByteBuf buf) {
 		ByteBufUtils.writeUTF8String(buf, mode);
 	}
-	
+
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		this.mode = ByteBufUtils.readUTF8String(buf);
 	}
-	
+
 	public static class Handler implements IMessageHandler<MessageChiselMode, IMessage> {
+
 		@Override
 		public IMessage onMessage(MessageChiselMode message, MessageContext ctx) {
 			ItemStack stack = ctx.getServerHandler().playerEntity.getCurrentEquippedItem();

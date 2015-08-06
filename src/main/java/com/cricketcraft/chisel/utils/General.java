@@ -125,24 +125,25 @@ public class General {
 	}
 
 	private static final String MODE_KEY = "chiselMode";
+
 	public static IChiselMode getChiselMode(ItemStack chisel) {
 		if (chisel == null) {
 			return ChiselMode.SINGLE;
 		}
-		
+
 		if (chisel.stackTagCompound == null || Strings.isNullOrEmpty(chisel.stackTagCompound.getString(MODE_KEY))) {
 			initTag(chisel);
 			chisel.stackTagCompound.setString(MODE_KEY, ChiselMode.SINGLE.name());
 		}
-		
+
 		String name = chisel.stackTagCompound.getString(MODE_KEY);
 		if (chisel.getItem() instanceof IAdvancedChisel) {
-			return ((IAdvancedChisel)chisel.getItem()).getMode(chisel, name);
+			return ((IAdvancedChisel) chisel.getItem()).getMode(chisel, name);
 		}
 
 		return Enum.valueOf(ChiselMode.class, chisel.stackTagCompound.getString(MODE_KEY));
 	}
-	
+
 	public static void setChiselMode(ItemStack chisel, IChiselMode mode) {
 		initTag(chisel);
 		chisel.stackTagCompound.setString(MODE_KEY, mode.name());

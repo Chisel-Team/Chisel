@@ -211,7 +211,6 @@ public class BlockSnakestone extends Block {
 	public boolean rotateBodyPart(World world, int x, int y, int z) {
 		int[] con = getConnections(world, x, y, z);
 		int blockMeta = world.getBlockMetadata(x, y, z);
-		int kind = blockMeta & 0xc;
 
 		if (con[1] == -1)
 			return false;
@@ -288,8 +287,6 @@ public class BlockSnakestone extends Block {
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		int type = meta & 0xc;
-		int orient = meta & 0x3;
 
 		switch (meta | (side << 4)) {
 
@@ -506,6 +503,7 @@ public class BlockSnakestone extends Block {
 		return iconCross;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
 		list.add(new ItemStack(item, 1, 1));

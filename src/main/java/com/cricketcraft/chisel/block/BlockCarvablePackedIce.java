@@ -34,7 +34,7 @@ public class BlockCarvablePackedIce extends Block implements ICarvable {
 	public int getRenderType() {
 		return ClientUtils.renderCTMId;
 	}
-	
+
 	@Override
 	public IIcon getIcon(int side, int metadata) {
 		return carverHelper.getIcon(side, metadata);
@@ -50,6 +50,7 @@ public class BlockCarvablePackedIce extends Block implements ICarvable {
 		carverHelper.registerBlockIcons("Chisel", this, register);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
 		carverHelper.registerSubBlocks(this, tabs, list);

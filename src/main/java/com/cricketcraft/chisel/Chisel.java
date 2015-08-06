@@ -72,8 +72,8 @@ public class Chisel {
 
 	@Instance(MOD_ID)
 	public static Chisel instance;
-	
-	public Chisel() { 
+
+	public Chisel() {
 		ChiselAPIProps.MOD_ID = MOD_ID;
 		CarvableHelper.itemCarvableClass = ItemCarvable.class;
 		Carving.construct();
@@ -152,7 +152,7 @@ public class Chisel {
 		addWorldgen(Features.DIORITE, ChiselBlocks.diorite, Configurations.dioriteAmount, 40, 100, 0.5);
 		GameRegistry.registerWorldGenerator(GeneratorChisel.INSTANCE, 1000);
 
-        EntityRegistry.registerModEntity(EntityChiselSnowman.class, "snowman", 0, this, 80, 1, true);
+		EntityRegistry.registerModEntity(EntityChiselSnowman.class, "snowman", 0, this, 80, 1, true);
 
 		proxy.init();
 		MinecraftForge.EVENT_BUS.register(this);

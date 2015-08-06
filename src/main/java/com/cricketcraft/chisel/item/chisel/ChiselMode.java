@@ -49,7 +49,7 @@ public enum ChiselMode implements IChiselMode {
 		public void chiselAll(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, ICarvingVariation variation) {
 			Block block = world.getBlock(x, y, z);
 			int meta = world.getBlockMetadata(x, y, z);
-			int facing = MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			int facing = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			for (int i = -1; i <= 1; i++) {
 				if (side != ForgeDirection.DOWN && side != ForgeDirection.UP) {
 					setVariation(player, world, x, y + i, z, block, meta, variation);
@@ -69,7 +69,7 @@ public enum ChiselMode implements IChiselMode {
 		public void chiselAll(EntityPlayer player, World world, int x, int y, int z, ForgeDirection side, ICarvingVariation variation) {
 			Block block = world.getBlock(x, y, z);
 			int meta = world.getBlockMetadata(x, y, z);
-			int facing = MathHelper.floor_double((double) (player.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			int facing = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 			for (int i = -1; i <= 1; i++) {
 				if (side != ForgeDirection.DOWN && side != ForgeDirection.UP) {
 					if (side == ForgeDirection.EAST || side == ForgeDirection.WEST) {

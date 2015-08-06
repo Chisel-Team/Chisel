@@ -8,6 +8,6 @@ public interface IVariationInfo extends ISubmapManager {
 	ICarvingVariation getVariation();
 
 	String getDescription();
-	
+
 	TextureType getType();
 }

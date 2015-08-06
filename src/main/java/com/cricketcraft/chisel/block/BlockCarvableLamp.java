@@ -63,12 +63,9 @@ public class BlockCarvableLamp extends BlockCarvable {
 	}
 
 	/*
-	 * @Override public void updateTick(World world, int x, int y, int z, Random
-	 * rand){ if (world.isRemote) return;
+	 * @Override public void updateTick(World world, int x, int y, int z, Random rand){ if (world.isRemote) return;
 	 * 
-	 * if(powered && !world.isBlockIndirectlyGettingPowered(x, y, z)){ int
-	 * meta=world.getBlockMetadata(x, y, z); world.setBlock(x, y, z,
-	 * Block.redstoneLampIdle.blockID, meta, 2); } }
+	 * if(powered && !world.isBlockIndirectlyGettingPowered(x, y, z)){ int meta=world.getBlockMetadata(x, y, z); world.setBlock(x, y, z, Block.redstoneLampIdle.blockID, meta, 2); } }
 	 */
 
 	@Override

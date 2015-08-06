@@ -128,7 +128,7 @@ public class InventoryChiselSelection implements IInventory {
 
 		activeVariations = 0;
 		while (activeVariations < normalSlots && activeVariations < list.size()) {
-			if(Block.blockRegistry.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
+			if (Block.blockRegistry.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
 				inventory[activeVariations] = list.get(activeVariations);
 				activeVariations++;
 			}
@@ -165,7 +165,7 @@ public class InventoryChiselSelection implements IInventory {
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack stack) {
-		//Really didn't think people would chisel a shovel
+		// Really didn't think people would chisel a shovel
 		if (stack.getItem() instanceof ItemTool) {
 			return false;
 		}

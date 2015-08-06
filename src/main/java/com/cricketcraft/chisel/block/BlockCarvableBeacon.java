@@ -17,58 +17,58 @@ import com.cricketcraft.chisel.init.ChiselTabs;
 public class BlockCarvableBeacon extends BlockBeacon implements ICarvable {
 
 	public static int renderId;
-	
-    public CarvableHelper carverHelper;
 
-    public BlockCarvableBeacon() {
-        super();
-        setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
-        setLightLevel(5.0F);
-        setBlockTextureName("beacon");
-        carverHelper = new CarvableHelper(this);
-    }
+	public CarvableHelper carverHelper;
 
-    @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntityCarvableBeacon();
-    }
+	public BlockCarvableBeacon() {
+		super();
+		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
+		setLightLevel(5.0F);
+		setBlockTextureName("beacon");
+		carverHelper = new CarvableHelper(this);
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par5, float hitX, float hitY, float hitZ) {
-        if (world.isRemote) {
-            return true;
-        } else {
-            TileEntityCarvableBeacon tileentitybeacon = (TileEntityCarvableBeacon) world.getTileEntity(x, y, z);
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
+		return new TileEntityCarvableBeacon();
+	}
 
-            if (tileentitybeacon != null) {
-                player.func_146104_a(tileentitybeacon);
-            }
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int par5, float hitX, float hitY, float hitZ) {
+		if (world.isRemote) {
+			return true;
+		} else {
+			TileEntityCarvableBeacon tileentitybeacon = (TileEntityCarvableBeacon) world.getTileEntity(x, y, z);
 
-            return true;
-        }
-    }
+			if (tileentitybeacon != null) {
+				player.func_146104_a(tileentitybeacon);
+			}
 
-    @Override
-    public int getRenderType() {
-    	return renderId;
-    }
-    
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
-        super.onBlockPlacedBy(world, x, y, z, player, stack);
+			return true;
+		}
+	}
 
-        if (stack.hasDisplayName()) {
-            ((TileEntityCarvableBeacon) world.getTileEntity(x, y, z)).func_145999_a(stack.getDisplayName());
-        }
-    }
-    
-    @Override
-    public IVariationInfo getManager(IBlockAccess world, int x, int y, int z, int metadata) {
-        return carverHelper.getVariation(metadata);
-    }
+	@Override
+	public int getRenderType() {
+		return renderId;
+	}
 
-    @Override
-    public IVariationInfo getManager(int meta) {
-        return carverHelper.getVariation(meta);
-    }
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase player, ItemStack stack) {
+		super.onBlockPlacedBy(world, x, y, z, player, stack);
+
+		if (stack.hasDisplayName()) {
+			((TileEntityCarvableBeacon) world.getTileEntity(x, y, z)).func_145999_a(stack.getDisplayName());
+		}
+	}
+
+	@Override
+	public IVariationInfo getManager(IBlockAccess world, int x, int y, int z, int metadata) {
+		return carverHelper.getVariation(metadata);
+	}
+
+	@Override
+	public IVariationInfo getManager(int meta) {
+		return carverHelper.getVariation(meta);
+	}
 }

@@ -1,15 +1,17 @@
 package com.cricketcraft.chisel.client.render;
 
-import com.cricketcraft.chisel.block.BlockMultiLayerBase;
-import com.cricketcraft.ctmlib.Drawing;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.MinecraftForgeClient;
+
+import com.cricketcraft.chisel.block.BlockMultiLayerBase;
+import com.cricketcraft.ctmlib.Drawing;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class RendererMultiLayer implements ISimpleBlockRenderingHandler {
@@ -35,7 +37,7 @@ public class RendererMultiLayer implements ISimpleBlockRenderingHandler {
 		} else if (block.base != null) {
 			renderer.renderBlockAsItem(block.base, meta, 1.0f);
 		}
-		
+
 		glPushMatrix();
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
