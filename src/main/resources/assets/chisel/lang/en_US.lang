@@ -258,6 +258,7 @@ tile.futura.1.desc=Glowing Screen with Cyan Borders
 tile.futura.2.desc=Applied Labyrinthic Neon Lines
 tile.futura.3.desc=Poptart Rainbow
 tile.futura.4.desc=Purple Applied Labyrinthic Neon Lines
+tile.futura.5.desc=Psychedelic Poptart Rainbow.v02
 tile.futuraCircuit.black.desc=Black
 tile.futuraCircuit.blue.desc=Blue
 tile.futuraCircuit.brown.desc=Brown
@@ -367,9 +368,15 @@ tile.end_Stone.4.desc=Fancy Bricks
 tile.end_Stone.5.desc=End Stone Pillar
 tile.end_Stone.6.desc=Etched End Stone
 tile.end_Stone.7.desc=Prismatic End Stone
+tile.end_Stone.8.desc=End Stone Chunk
+tile.end_Stone.9.desc=Framed End Stone Chunk
+tile.end_Stone.10.desc=Arcane Block of End Stone
+tile.end_Stone.11.desc=Framed End Stone
+tile.end_Stone.12.desc=Ornate End Stone
+tile.end_Stone.13.desc=End Stone Large Tile
 
 #Purpur
-tile.chisel.purpur.name=Purpur
+tile.chisel.purpur.name=Purpur Block
 tile.purpur.0.desc=Medium Tiles
 tile.purpur.1.desc=Pillar
 tile.purpur.2.desc=Not Shulker
@@ -378,6 +385,9 @@ tile.purpur.4.desc=Broken Small Tiles
 tile.purpur.5.desc=Prismatic Purpur
 tile.purpur.6.desc=Rough Bricks
 tile.purpur.7.desc=Cracked Surface
+tile.purpur.8.desc=Arcane Block of Purpur
+tile.purpur.9.desc=Purpur Large Tile
+tile.purpur.10.desc=Ornate Purpur
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
