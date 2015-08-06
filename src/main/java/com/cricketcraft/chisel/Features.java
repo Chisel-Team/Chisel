@@ -2002,6 +2002,9 @@ public enum Features {
             purpur.carverHelper.addVariation("tile.purpur.5.desc", 5, "end_purpur/prismaticPurpur");
             purpur.carverHelper.addVariation("tile.purpur.6.desc", 6, "end_purpur/purpurBricks");
             purpur.carverHelper.addVariation("tile.purpur.7.desc", 7, "end_purpur/purpurCobble");
+            purpur.carverHelper.addVariation("tile.purpur.8.desc", 8, "end_purpur/arcanePurpur");
+            purpur.carverHelper.addVariation("tile.purpur.9.desc", 9, "end_purpur/purpurLargeTile");
+            purpur.carverHelper.addVariation("tile.purpur.10.desc", 10, "end_purpur/purpurOrnate");
 
             purpur.carverHelper.registerAll(purpur, "purpur");
             Carving.chisel.registerOre("purpur", "purpur");
@@ -2471,10 +2474,11 @@ public enum Features {
 			technical4.carverHelper.addVariation("tile.technical4.1.desc", 1, "technical/new/weatheredOrangePanels");
 			technical4.carverHelper.addVariation("tile.technical4.2.desc", 2, "technical/new/Sturdy");
 			technical4.carverHelper.addVariation("tile.technical4.3.desc", 3, "technical/new/MegaCell");
-			technical4.carverHelper.addVariation("tile.technical4.4.desc", 4, "technical/new/test/ExhaustPlating", new SubmapManagerCombinedCTM(4, "technical/new/test/ExhaustPlating", TextureType.R4));
+			technical4.carverHelper.addVariation("tile.technical4.4.desc", 4, "technical/new/ExhaustPlating"/*, new SubmapManagerCombinedCTM(4, "technical/new/test/ExhaustPlating", TextureType.R4)*/);
 			technical4.carverHelper.addVariation("tile.technical4.5.desc", 5, "technical/new/MakeshiftPanels");
-            technical4.carverHelper.addVariation("tile.technical4.6.desc", 6, "technical/new/TapeDrive");
-			technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/Piping");
+			technical4.carverHelper.addVariation("tile.technical4.6.desc", 6, "technical/new/Piping");
+            //The animation is malfunctioning. :(
+            //technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/TapeDrive");
 			technical4.carverHelper.registerBlock(technical4, "technical4");
 			technical4.carverHelper.registerVariations("technical");
 
