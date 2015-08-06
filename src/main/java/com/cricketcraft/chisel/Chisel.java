@@ -3,14 +3,9 @@ package com.cricketcraft.chisel;
 import java.io.File;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -182,8 +177,6 @@ public class Chisel {
 	public void postInit(FMLPostInitializationEvent event) {
 		ChiselTabs.postInit();
 		Compatibility.init(event);
-		FMLLog.severe("Unable to lookup chisel:... is not an error, please do not treat it as such");
-		FMLLog.bigWarning("In case you didn't see the red above I suggest you read it - Cricket");
 	}
 
 	@EventHandler
