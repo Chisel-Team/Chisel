@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.client.gui;
 
+import com.cricketcraft.chisel.common.inventory.ContainerChisel;
 import com.cricketcraft.chisel.common.inventory.InventoryChiselSelection;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -14,7 +15,12 @@ public class ChiselGuiHandler implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
-        return null;
+        if (id == 0){
+            return new ContainerChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem()));
+        }
+        else {
+            return null;
+        }
     }
 
     @Override

@@ -21,7 +21,9 @@ public class ItemChisel extends Item {
 
     @Override
     public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-        playerIn.openGui(Chisel.instance, 0, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
+        if (!worldIn.isRemote) {
+            playerIn.openGui(Chisel.instance, 0, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
+        }
         return itemStackIn;
     }
 }
