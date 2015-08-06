@@ -22,7 +22,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 	// TODO there must be a better more generic way to do this...
 	@SideOnly(Side.CLIENT)
 	private class RenderBlocksVoidstone extends RenderBlocksCTM {
-		
+
 		@Override
 		public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
 			super.renderFaceXNeg(block, x, y, z, icon);
@@ -100,7 +100,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 	public IIcon getIcon(int side, int meta) {
 		return overlay.getIcon(side, meta);
 	}
-	
+
 	@Override
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
 		return overlay.getIcon(world, x, y, z, side);

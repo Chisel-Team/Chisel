@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import static net.minecraftforge.common.util.ForgeDirection.UP;
 
 public class BlockCarvableSlab extends BlockCarvable {
@@ -63,6 +62,7 @@ public class BlockCarvableSlab extends BlockCarvable {
 		setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void addCollisionBoxesToList(World par1World, int par2, int par3, int par4, AxisAlignedBB par5AxisAlignedBB, List par6List, Entity par7Entity) {
 		setBlockBoundsBasedOnState(par1World, par2, par3, par4);
@@ -101,25 +101,31 @@ public class BlockCarvableSlab extends BlockCarvable {
 		// return master.getIcon(side, metadata);
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void getSubBlocks(Item block, CreativeTabs tabs, List list) {
 		if (isBottom)
 			super.getSubBlocks(block, tabs, list);
 	}
+
 	/**
-     * Checks if the block is a solid face on the given side, used by placement logic.
-     *
-     * @param world The current world
-     * @param x X Position
-     * @param y Y position
-     * @param z Z position
-     * @param side The side to check
-     * @return True if the block is solid on the specified side.
-     */
+	 * Checks if the block is a solid face on the given side, used by placement logic.
+	 *
+	 * @param world
+	 *            The current world
+	 * @param x
+	 *            X Position
+	 * @param y
+	 *            Y position
+	 * @param z
+	 *            Z position
+	 * @param side
+	 *            The side to check
+	 * @return True if the block is solid on the specified side.
+	 */
 	@Override
-    public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side)
-    {
-        return !isBottom && (side == UP);
-    }
+	public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
+		return !isBottom && (side == UP);
+	}
 
 }

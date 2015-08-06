@@ -34,7 +34,7 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 		if (!isConnected() && autoSearch && worldObj != null /* ugh */) {
 			if (cachedDir != null) {
 				connectTo(cachedDir);
-			} else if (!worldObj.isRemote){
+			} else if (!worldObj.isRemote) {
 				findConnections();
 			}
 			autoSearch = false;
@@ -46,7 +46,8 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 	}
 
 	private boolean connectTo(TileEntityPresent present, ForgeDirection dir) {
-		if (present.getBlockMetadata() == getBlockMetadata() && !present.isConnected() && (present.cachedDir == null || present.cachedDir == dir.getOpposite()) && Math.abs(present.xCoord - xCoord + present.yCoord - yCoord + present.zCoord - zCoord) == 1) {
+		if (present.getBlockMetadata() == getBlockMetadata() && !present.isConnected() && (present.cachedDir == null || present.cachedDir == dir.getOpposite())
+				&& Math.abs(present.xCoord - xCoord + present.yCoord - yCoord + present.zCoord - zCoord) == 1) {
 			connection = present;
 			connection.connection = this;
 			connection.cachedDir = dir.getOpposite();
@@ -71,9 +72,7 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 
 	/**
 	 * @param preserveDir
-	 *            If true, this is only a virtual disconnect, meaning the other
-	 *            chest still exists, but is still loaded, so maintain a
-	 *            cachedDir for reconnection upon chunk load.
+	 *            If true, this is only a virtual disconnect, meaning the other chest still exists, but is still loaded, so maintain a cachedDir for reconnection upon chunk load.
 	 */
 	public void disconnect(boolean preserveDir) {
 		if (isConnected()) {

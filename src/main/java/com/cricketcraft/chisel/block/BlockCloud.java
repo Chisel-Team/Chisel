@@ -43,6 +43,7 @@ public class BlockCloud extends BlockCarvable {
 		return Configurations.ghostCloud ? 1 : 0;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
 		Block block = world.getBlock(x, y, z);

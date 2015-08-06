@@ -22,12 +22,13 @@ public class Carving implements ICarvingRegistry {
 
 	public static final ICarvingRegistry chisel = new Carving();
 	public static final Carving needle = new Carving();
-	
+
 	static {
 		CarvingUtils.chisel = chisel;
 	}
-	
-	public static void construct() {}
+
+	public static void construct() {
+	}
 
 	private Carving() {
 	}
@@ -142,7 +143,7 @@ public class Carving implements ICarvingRegistry {
 		ICarvingGroup g = groups.getGroupByName(groupName);
 		return groups.remove(g) ? g : null;
 	}
-	
+
 	@Override
 	public ICarvingVariation removeVariation(Block block, int metadata) {
 		return removeVariation(block, metadata, null);

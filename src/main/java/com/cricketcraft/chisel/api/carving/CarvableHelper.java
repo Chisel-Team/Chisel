@@ -26,42 +26,42 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class CarvableHelper {
-	
+
 	public static Class<? extends ItemBlock> itemCarvableClass = null;
 
 	private Block theBlock;
-	
+
 	public ArrayList<IVariationInfo> infoList = new ArrayList<IVariationInfo>();
 	IVariationInfo[] infoMap = new IVariationInfo[16];
 	public boolean forbidChiseling = false;
-	
+
 	public CarvableHelper(Block block) {
 		this.theBlock = block;
 	}
-    
-    public void addVariation(String description, int metadata, ISubmapManager manager) {
-    	addVariation(description, metadata, null, manager);
-    }
 
-    public void addVariation(String description, int metadata, Block bb) {
-        addVariation(description, metadata, null, bb, 0, ChiselAPIProps.MOD_ID);
-    }
+	public void addVariation(String description, int metadata, ISubmapManager manager) {
+		addVariation(description, metadata, null, manager);
+	}
 
-    public void addVariation(String description, int metadata, Block bb, int blockMeta) {
-        addVariation(description, metadata, null, bb, blockMeta, ChiselAPIProps.MOD_ID);
-    }
+	public void addVariation(String description, int metadata, Block bb) {
+		addVariation(description, metadata, null, bb, 0, ChiselAPIProps.MOD_ID);
+	}
 
-    public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material) {
-        addVariation(description, metadata, null, bb, blockMeta, ChiselAPIProps.MOD_ID);
-    }
+	public void addVariation(String description, int metadata, Block bb, int blockMeta) {
+		addVariation(description, metadata, null, bb, blockMeta, ChiselAPIProps.MOD_ID);
+	}
 
-    public void addVariation(String description, int metadata, String texture) {
-        addVariation(description, metadata, texture, (ISubmapManager) null);
-    }
-    
-    public void addVariation(String description, int metadata, String texture, ISubmapManager manager) {
-    	addVariation(description, metadata, texture, null, 0, ChiselAPIProps.MOD_ID, manager, metadata);
-    }
+	public void addVariation(String description, int metadata, Block bb, int blockMeta, Material material) {
+		addVariation(description, metadata, null, bb, blockMeta, ChiselAPIProps.MOD_ID);
+	}
+
+	public void addVariation(String description, int metadata, String texture) {
+		addVariation(description, metadata, texture, (ISubmapManager) null);
+	}
+
+	public void addVariation(String description, int metadata, String texture, ISubmapManager manager) {
+		addVariation(description, metadata, texture, null, 0, ChiselAPIProps.MOD_ID, manager, metadata);
+	}
 
 	public void addVariation(String description, int metadata, Block bb, String modid) {
 		addVariation(description, metadata, null, bb, 0, modid);
@@ -92,9 +92,8 @@ public class CarvableHelper {
 		if (infoList.size() >= 16)
 			return;
 
-		IVariationInfo info = FMLCommonHandler.instance().getSide().isClient()
-				? getClientInfo(modid, texture, description, metadata, block, blockMeta, customManager, order)
-				: getServerInfo(modid, texture, description, metadata, block, blockMeta, customManager, order);
+		IVariationInfo info = FMLCommonHandler.instance().getSide().isClient() ? getClientInfo(modid, texture, description, metadata, block, blockMeta, customManager, order) : getServerInfo(modid,
+				texture, description, metadata, block, blockMeta, customManager, order);
 
 		infoList.add(info);
 		infoMap[metadata] = info;
@@ -106,7 +105,7 @@ public class CarvableHelper {
 		if (type == TextureType.CUSTOM && customManager == null && block == null) {
 			throw new IllegalArgumentException(String.format("Could not find texture %s, and no custom texture manager was provided.", texture));
 		}
-		
+
 		ISubmapManager manager;
 		if (customManager != null) {
 			manager = customManager;
@@ -117,7 +116,7 @@ public class CarvableHelper {
 		}
 		return new VariationInfoBase(var, description, manager);
 	}
-	
+
 	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager, int order) {
 		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, order);
 		return new VariationInfoBase(var, description, null);
@@ -141,7 +140,7 @@ public class CarvableHelper {
 		IVariationInfo info = infoMap[metadata];
 		if (info == null)
 			return getMissingIcon();
-		
+
 		return info.getIcon(side, metadata);
 	}
 

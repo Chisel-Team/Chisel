@@ -72,7 +72,7 @@ public class BlockCarvableStairs extends BlockStairs implements ICarvable {
 		if (par6ItemStack.getItemDamage() >= 8) {
 			meta += 8;
 		}
-		
+
 		par1World.setBlockMetadataWithNotify(par2, par3, par4, meta, 2);
 	}
 

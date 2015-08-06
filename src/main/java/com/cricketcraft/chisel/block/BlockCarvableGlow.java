@@ -1,11 +1,11 @@
 package com.cricketcraft.chisel.block;
 
-import com.cricketcraft.chisel.client.render.SubmapManagerBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 
 import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.client.render.SubmapManagerBase;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -29,7 +29,7 @@ public class BlockCarvableGlow extends BlockCarvableColor {
 		this.glowTexturePath = glowTexture;
 	}
 
-	public BlockCarvableGlow(Material material, String glowTexture, SubmapManagerBase submapManagerBase){
+	public BlockCarvableGlow(Material material, String glowTexture, SubmapManagerBase submapManagerBase) {
 		super(material);
 		this.glowTexturePath = glowTexture;
 		this.submapManagerBase = submapManagerBase;
@@ -41,11 +41,11 @@ public class BlockCarvableGlow extends BlockCarvableColor {
 		glowTexture = register.registerIcon(Chisel.MOD_ID + ":" + glowTexturePath);
 	}
 
-	public boolean hasSubmapManager(){
+	public boolean hasSubmapManager() {
 		return submapManagerBase == null;
 	}
 
-	public SubmapManagerBase getSubmapManager(){
+	public SubmapManagerBase getSubmapManager() {
 		return hasSubmapManager() ? submapManagerBase : null;
 	}
 

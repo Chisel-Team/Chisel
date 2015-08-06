@@ -11,14 +11,13 @@ import com.cricketcraft.ctmlib.ISubmapManager;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-
 public abstract class SubmapManagerBase implements ISubmapManager {
 
 	@Override
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
 		return getIcon(side, world.getBlockMetadata(x, y, z));
 	}
-	
+
 	@Override
 	@SideOnly(Side.CLIENT)
 	public RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {

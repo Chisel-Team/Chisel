@@ -66,6 +66,7 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable {
 		carverHelper.registerBlockIcons("Chisel", this, register);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
 		carverHelper.registerSubBlocks(this, tabs, list);

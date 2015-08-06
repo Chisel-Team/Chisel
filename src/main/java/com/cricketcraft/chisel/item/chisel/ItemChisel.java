@@ -1,13 +1,7 @@
 package com.cricketcraft.chisel.item.chisel;
 
-import com.cricketcraft.chisel.Chisel;
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.carving.ICarvingRegistry;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.carving.Carving;
-import com.cricketcraft.chisel.config.Configurations;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,14 +15,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-import java.util.List;
+import com.cricketcraft.chisel.Chisel;
+import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.carving.ICarvingRegistry;
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.chisel.carving.Carving;
+import com.cricketcraft.chisel.config.Configurations;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 
 public class ItemChisel extends Item implements IChiselItem {
 
 	public enum ChiselType {
-		IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage),
-		DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage),
-		OBSIDIAN(Configurations.obsidianChiselMaxDamage, Configurations.obsidianChiselAttackDamage);
+		IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage), DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage), OBSIDIAN(
+				Configurations.obsidianChiselMaxDamage, Configurations.obsidianChiselAttackDamage);
 
 		final int maxDamage;
 		final int attackDamage;
@@ -52,27 +52,26 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public int getMaxDamage(ItemStack stack){
-		if(Configurations.allowChiselDamage)
+	public int getMaxDamage(ItemStack stack) {
+		if (Configurations.allowChiselDamage)
 			return type.maxDamage;
 		return 0;
 	}
 
 	@Override
-	public boolean isDamageable(){
+	public boolean isDamageable() {
 		return Configurations.allowChiselDamage;
 	}
 
 	@Override
-	public boolean getIsRepairable(ItemStack damagedItem, ItemStack repairMaterial)
-	{
+	public boolean getIsRepairable(ItemStack damagedItem, ItemStack repairMaterial) {
 		switch (type) {
-			case DIAMOND:
-				return repairMaterial.getItem().equals(Items.diamond);
-			case IRON:
-				return repairMaterial.getItem().equals(Items.iron_ingot);
-			case OBSIDIAN:
-				return repairMaterial.getItem().equals(Item.getItemFromBlock(Blocks.obsidian));
+		case DIAMOND:
+			return repairMaterial.getItem().equals(Items.diamond);
+		case IRON:
+			return repairMaterial.getItem().equals(Items.iron_ingot);
+		case OBSIDIAN:
+			return repairMaterial.getItem().equals(Item.getItemFromBlock(Blocks.obsidian));
 		}
 
 		return false;

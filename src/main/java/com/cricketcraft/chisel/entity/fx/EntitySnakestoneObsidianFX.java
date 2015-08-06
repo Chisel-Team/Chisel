@@ -60,7 +60,7 @@ public class EntitySnakestoneObsidianFX extends EntityFX {
 
 		noClip = true;
 
-		setParticleIcon(block.particles[General.rand.nextInt(block.particles.length)]);
+		setParticleIcon(BlockSnakestoneObsidian.particles[General.rand.nextInt(BlockSnakestoneObsidian.particles.length)]);
 	}
 
 	@Override

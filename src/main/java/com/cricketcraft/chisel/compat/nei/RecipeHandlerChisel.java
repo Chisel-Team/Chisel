@@ -83,7 +83,7 @@ public class RecipeHandlerChisel extends TemplateRecipeHandler {
 	public String getGuiTexture() {
 		return "Chisel:textures/chiselNEI.png";
 	}
-	
+
 	@Override
 	public Class<? extends GuiContainer> getGuiClass() {
 		return GuiChisel.class;
@@ -111,6 +111,7 @@ public class RecipeHandlerChisel extends TemplateRecipeHandler {
 		this.transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(75, 22, 15, 13), "chisel2.chisel", new Object[0]));
 	}
 
+	@Override
 	public void loadCraftingRecipes(String outputId, Object... results) {
 		if (outputId.equals("chisel2.chisel")) {
 			for (String name : Carving.chisel.getSortedGroupNames()) {

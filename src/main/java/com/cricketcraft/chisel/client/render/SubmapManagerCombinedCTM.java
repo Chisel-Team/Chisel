@@ -59,7 +59,7 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 			setIcons(rType, x, y, z, ForgeDirection.SOUTH);
 			super.renderFaceZPos(block, x, y, z, submapSmall.getSubIcon(0, 0));
 		}
-		
+
 		private void setIcons(TextureType type, double x, double y, double z, ForgeDirection side) {
 			int ix = MathHelper.floor_double(x);
 			int iy = MathHelper.floor_double(y);
@@ -73,7 +73,7 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 			}
 		}
 	}
-	
+
 	private class Submap extends TextureSubmap {
 
 		private TextureSubmap[][] submap;
@@ -105,9 +105,7 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 	private TextureType rType;
 
 	public SubmapManagerCombinedCTM(int meta, String texturePath, TextureType rType) {
-		assert rType == TextureType.R16 || rType == TextureType.R9 || rType == TextureType.R4 ||
-			   rType == TextureType.V4  || rType == TextureType.V9
-				: "Not a valid random type!";
+		assert rType == TextureType.R16 || rType == TextureType.R9 || rType == TextureType.R4 || rType == TextureType.V4 || rType == TextureType.V9 : "Not a valid random type!";
 
 		this.meta = meta;
 		this.texturePath = texturePath;

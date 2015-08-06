@@ -47,19 +47,20 @@ public class BlockCarvableTorch extends BlockTorch implements ICarvable {
 	public void registerBlockIcons(IIconRegister icon) {
 		this.blockIcon = icon.registerIcon(Chisel.MOD_ID + ":torch/" + texLocation);
 	}
-	
+
 	public BlockCarvableTorch disableParticles() {
 		this.emitsParticles = false;
 		return this;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World p_149734_1_, int p_149734_2_, int p_149734_3_, int p_149734_4_, Random p_149734_5_) {
 		if (emitsParticles) {
 			int l = p_149734_1_.getBlockMetadata(p_149734_2_, p_149734_3_, p_149734_4_);
-			double d0 = (double) ((float) p_149734_2_ + 0.5F);
-			double d1 = (double) ((float) p_149734_3_ + 0.7F);
-			double d2 = (double) ((float) p_149734_4_ + 0.5F);
+			double d0 = p_149734_2_ + 0.5F;
+			double d1 = p_149734_3_ + 0.7F;
+			double d2 = p_149734_4_ + 0.5F;
 			double d3 = 0.2199999988079071D;
 			double d4 = 0.27000001072883606D;
 

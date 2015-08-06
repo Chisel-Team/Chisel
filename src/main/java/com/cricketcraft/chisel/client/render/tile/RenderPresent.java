@@ -25,7 +25,7 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 
 	private ModelChest smallChest = new ModelChest();
 	private ModelChest largeChest = new ModelLargeChest();
-	
+
 	private HashMap<Integer, ResourceLocation> textureCache = Maps.newHashMap();
 
 	public void renderTileEntityAt(TileEntityPresent present, double x, double y, double z, float partialTicks) {
@@ -38,7 +38,7 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 		bindTexture(present);
 		if (!present.isConnected()) {
 			GL11.glRotatef(90 * rotation + 180, 0, 1, 0);
-			switch(rotation) {
+			switch (rotation) {
 			case 0:
 				GL11.glTranslatef(-1, 0, -1);
 				break;
@@ -52,7 +52,7 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 			smallChest.renderAll();
 		} else if (present.isParent()) {
 			ForgeDirection dir = present.getConnectionDir();
-			switch(dir) {
+			switch (dir) {
 			case NORTH:
 				GL11.glRotatef(-90, 0, 1, 0);
 				GL11.glTranslatef(0, 0, -1);
@@ -75,7 +75,7 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 		}
 		GL11.glPopMatrix();
 	}
-	
+
 	private void bindTexture(TileEntityPresent present) {
 		int idx = present.getWorldObj().getBlockMetadata(present.xCoord, present.yCoord, present.zCoord) + (present.isConnected() ? 0 : 16);
 		ResourceLocation rl = textureCache.get(idx);
@@ -92,7 +92,7 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float partialTicks) {
 		this.renderTileEntityAt((TileEntityPresent) tileEntity, x, y, z, partialTicks);
 	}
-	
+
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
 		return type != ItemRenderType.FIRST_PERSON_MAP;

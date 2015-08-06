@@ -6,12 +6,12 @@ import net.minecraft.item.ItemStack;
 
 public class ItemCarvablePumpkin extends ItemCarvable {
 
-    public ItemCarvablePumpkin(Block block) {
-        super(block);
-    }
+	public ItemCarvablePumpkin(Block block) {
+		super(block);
+	}
 
-    @Override
-    public boolean isValidArmor(ItemStack itemStack, int armorType, Entity entity){
-        return true;
-    }
+	@Override
+	public boolean isValidArmor(ItemStack itemStack, int armorType, Entity entity) {
+		return true;
+	}
 }

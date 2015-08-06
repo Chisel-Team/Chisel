@@ -1,15 +1,15 @@
 package com.cricketcraft.chisel.compat.fmp;
 
-import com.cricketcraft.chisel.init.ChiselBlocks;
-import com.google.common.collect.Lists;
-
 import net.minecraft.block.Block;
 import net.minecraft.world.World;
 import codechicken.lib.vec.BlockCoord;
+import codechicken.multipart.MultiPartRegistry;
 import codechicken.multipart.MultiPartRegistry.IPartConverter;
 import codechicken.multipart.MultiPartRegistry.IPartFactory;
-import codechicken.multipart.MultiPartRegistry;
 import codechicken.multipart.TMultiPart;
+
+import com.cricketcraft.chisel.init.ChiselBlocks;
+import com.google.common.collect.Lists;
 
 public class FMPCompat implements IPartFactory, IPartConverter {
 

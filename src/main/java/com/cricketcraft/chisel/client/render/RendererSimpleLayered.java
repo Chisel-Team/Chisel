@@ -23,7 +23,7 @@ public class RendererSimpleLayered implements ISimpleBlockRenderingHandler {
 	public void renderInventoryBlock(Block block, int metadata, int modelId, RenderBlocks renderer) {
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		Drawing.drawBlock(block, ((BlockCarvableLayered)block).getBaseTex(), renderer);
+		Drawing.drawBlock(block, ((BlockCarvableLayered) block).getBaseTex(), renderer);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		Drawing.drawBlock(block, metadata, renderer);
 		GL11.glTranslatef(0.5F, 0.5F, 0.5F);

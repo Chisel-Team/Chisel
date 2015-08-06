@@ -44,29 +44,21 @@ public class ContainerPresent extends Container {
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(p_82846_2_);
 
-		if (slot != null && slot.getHasStack())
-		{
+		if (slot != null && slot.getHasStack()) {
 			ItemStack itemstack1 = slot.getStack();
 			itemstack = itemstack1.copy();
 
-			if (p_82846_2_ < rows * 9)
-			{
-				if (!this.mergeItemStack(itemstack1, rows * 9, inventorySlots.size(), true))
-				{
+			if (p_82846_2_ < rows * 9) {
+				if (!this.mergeItemStack(itemstack1, rows * 9, inventorySlots.size(), true)) {
 					return null;
 				}
-			}
-			else if (!this.mergeItemStack(itemstack1, 0, rows * 9, false))
-			{
+			} else if (!this.mergeItemStack(itemstack1, 0, rows * 9, false)) {
 				return null;
 			}
 
-			if (itemstack1.stackSize == 0)
-			{
+			if (itemstack1.stackSize == 0) {
 				slot.putStack((ItemStack) null);
-			}
-			else
-			{
+			} else {
 				slot.onSlotChanged();
 			}
 		}

@@ -58,7 +58,7 @@ public class SubmapManagerSlab implements ISubmapManager {
 		rb.submapSmall = submapSmall;
 		return rb;
 	}
-	
+
 	private boolean hadOverride = false;
 
 	@Override

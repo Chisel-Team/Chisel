@@ -71,6 +71,7 @@ public class BlockCarvable extends Block implements ICarvable {
 		carverHelper.registerBlockIcons(Chisel.MOD_ID, this, register);
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void getSubBlocks(Item item, CreativeTabs tabs, List list) {
 		carverHelper.registerSubBlocks(this, tabs, list);

@@ -1,6 +1,5 @@
 package com.cricketcraft.chisel.api;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.IBlockAccess;
 
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
@@ -32,6 +31,7 @@ public interface ICarvable extends ICTMBlock<IVariationInfo> {
 	 *            The metadata of the block
 	 * @return The {@link ISubmapManager} that represents this block in the world.
 	 */
+	@Override
 	public IVariationInfo getManager(IBlockAccess world, int x, int y, int z, int metadata);
 
 	/**
@@ -39,5 +39,6 @@ public interface ICarvable extends ICTMBlock<IVariationInfo> {
 	 * 
 	 * @return A {@link ISubmapManager}
 	 */
+	@Override
 	public IVariationInfo getManager(int meta);
 }
