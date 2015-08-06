@@ -91,6 +91,8 @@ public class BlockCarvable extends Block {
 
     private boolean isBeaconBase;
 
+    private BlockState realBlockState;
+
 
     public BlockCarvable(CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p, boolean isBeaconBase) {
         this(Material.rock, type, subBlocksAmount, index, p, isBeaconBase);
@@ -104,12 +106,17 @@ public class BlockCarvable extends Block {
         this.index = index;
         this.VARIATION = p;
         this.fullBlock = isOpaqueCube();
-        this.blockState = createRealBlockState(p);
+        this.realBlockState = createRealBlockState(p);
         setupStates();
         setResistance(10.0F);
         setHardness(2.0F);
         setCreativeTab(ChiselTabs.tab);
         setUnlocalizedName(type.getName());
+    }
+
+    @Override
+    public BlockState getBlockState() {
+        return this.realBlockState;
     }
 
     public int getIndex() {

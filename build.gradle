@@ -73,7 +73,7 @@ processResources
 jar {
     classifier = 'universal'
     version = "${project.minecraft.version}-${project.version}"
-    manifest {
-        attributes 'FMLAT': 'chisel_at.cfg'
-    }
+//    manifest {
+//        attributes 'FMLAT': 'chisel_at.cfg'
+//    }
 }
