@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.common.inventory;
 
+import com.cricketcraft.chisel.Chisel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -13,6 +14,8 @@ public class ContainerChisel extends Container {
     int chiselSlot;
     public ItemStack chisel;
     public boolean finished;
+
+    private int totalSlots = 0;
 
     public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv) {
         inventory = inv;
@@ -47,15 +50,29 @@ public class ContainerChisel extends Container {
             ItemStack stack = ItemStack.loadItemStackFromNBT(chisel.getTagCompound().getCompoundTag("chiselTarget"));
             inventory.setInventorySlotContents(InventoryChiselSelection.normalSlots, stack);
         }
-
+        Chisel.logger.info("There are "+totalSlots+" slots but list is " + inventorySlots.size());
 
         inventory.updateItems();
+    }
+
+    @Override
+    protected Slot addSlotToContainer(Slot slotIn){
+        totalSlots++;
+        return super.addSlotToContainer(slotIn);
     }
 
     @Override
     public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
         // we need to subtract away all the other slots
         int clickedSlot = par1 - inventory.getSizeInventory() - 27;
+        Chisel.logger.info("Slot clicked is "+par1+" and slot length is "+inventorySlots.size());
+        try {
+            Slot slot = (Slot)inventorySlots.get(par1);
+            Chisel.logger.info("Slot is "+slot);
+        } catch (Exception exception){
+            Chisel.logger.info("Exception getting slot");
+            exception.printStackTrace();
+        }
 
         // if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
         if (clickedSlot == chiselSlot || (par3 == 2 && par2 == chiselSlot))
@@ -132,4 +149,5 @@ public class ContainerChisel extends Container {
 
         playerInventory.mainInventory[chiselSlot] = chisel;
     }
+
 }

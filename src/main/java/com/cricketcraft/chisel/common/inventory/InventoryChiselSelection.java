@@ -8,6 +8,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
 
@@ -26,10 +27,15 @@ public class InventoryChiselSelection implements IInventory {
 
         inventory = new ItemStack[normalSlots + 1];
         chisel = c;
+        if (chisel.getTagCompound() !=null && chisel.getTagCompound().getTag("chiselTarget") != null) {
+            ItemStack target = ItemStack.loadItemStackFromNBT(chisel.getTagCompound().getCompoundTag("chiselTarget"));
+            if (target != null) {
+                inventory[normalSlots] = target;
+            }
+        }
     }
 
     public void onInventoryUpdate(int slot) {
-
     }
 
     @Override
@@ -145,6 +151,9 @@ public class InventoryChiselSelection implements IInventory {
 
         if (stack == null)
             return null;
+        NBTTagCompound targetItem = new NBTTagCompound();
+        inventory[slot].writeToNBT(targetItem);
+        chisel.getTagCompound().setTag("chiselTarget", targetItem);
         inventory[slot] = null;
 
         updateInventoryState(slot);

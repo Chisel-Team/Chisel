@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableSet;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumChatFormatting;
@@ -18,6 +19,7 @@ import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +66,9 @@ public class DebugHandler {
             Minecraft.getMinecraft().fontRendererObj.drawString(l, 10, 10 + (cur * 10), 1);
             cur++;
         }
+        GL11.glColor3f(1f, 1f, 1f);
+        Minecraft.getMinecraft().getTextureManager().bindTexture(Gui.icons);
+
     }
 
     private static IBlockState getBlockStateLooking() {
