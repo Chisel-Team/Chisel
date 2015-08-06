@@ -27,8 +27,9 @@ import com.google.common.collect.Multimap;
 public class ItemChisel extends Item implements IChiselItem {
 
 	public enum ChiselType {
-		IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage), DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage), OBSIDIAN(
-				Configurations.obsidianChiselMaxDamage, Configurations.obsidianChiselAttackDamage);
+		IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage),
+		DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage),
+		OBSIDIAN(Configurations.obsidianChiselMaxDamage, Configurations.obsidianChiselAttackDamage);
 
 		final int maxDamage;
 		final int attackDamage;

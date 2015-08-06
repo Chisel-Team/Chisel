@@ -29,7 +29,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TileEntityAutoChisel extends TileEntity implements ISidedInventory {
 
 	public enum Upgrade {
-		SPEED, AUTOMATION, STACK, REVERSION;
+		SPEED,
+		AUTOMATION,
+		STACK,
+		REVERSION;
 
 		public String getUnlocalizedName() {
 			return ChiselItems.upgrade.getUnlocalizedName() + "_" + this.name().toLowerCase();
