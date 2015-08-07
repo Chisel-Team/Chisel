@@ -36,6 +36,8 @@ public class Chisel implements Reference {
 
     public static ItemChisel itemChisel;
 
+    private static boolean debug = true;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Variation.doStuff();
@@ -52,6 +54,16 @@ public class Chisel implements Reference {
         proxy.init();
         CarvableBlocks.initBlocks();
         ClientCommandHandler.instance.registerCommand(new CommandTest());
+    }
+
+    /**
+     * Sends a debug message, basically a wrapper for the logger that only prints when debugging is enabled
+     * @param message
+     */
+    public static void debug(String message){
+        if (debug){
+            logger.info(message);
+        }
     }
 
 //    @Mod.EventHandler

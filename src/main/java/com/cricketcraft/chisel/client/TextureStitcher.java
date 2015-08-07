@@ -26,7 +26,7 @@ public class TextureStitcher {
         Chisel.proxy.preTextureStitch();
         for (String s : toBeRegistered) {
             event.map.registerSprite(new ResourceLocation(s));
-            Chisel.logger.info("Stitching texture " + s);
+            Chisel.debug("Stitching texture " + s);
         }
         //CTMBlockResources.refreshAll(event.map);
     }

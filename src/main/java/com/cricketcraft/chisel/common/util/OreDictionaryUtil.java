@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.common.util;
 
+import com.cricketcraft.chisel.common.CarvableBlocks;
 import com.cricketcraft.chisel.common.block.BlockCarvable;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -19,6 +20,10 @@ public class OreDictionaryUtil {
         for (int i=0;i<block.getTotalVariations();i++) {
             OreDictionary.registerOre(block.getType().getOredictName(), new ItemStack(block, 1, i));
         }
+    }
+
+    public static void addHonorary(CarvableBlocks block, ItemStack stack){
+        OreDictionary.registerOre(block.getOredictName(), stack);
     }
 
     public static List<ItemStack> getVariations(ItemStack stack) {

@@ -56,10 +56,10 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel {
                 //Chisel.logger.info("index for "+GameRegistry.findUniqueIdentifierFor(block).toString()+" is "+block.getIndex());
                 this.quads = generateQuads((BlockResources) block.allSubBlocks()[stack.getMetadata()].getResources(), null);
             } else {
-                Chisel.logger.info("Not BlockCarvable?");
+                Chisel.debug("Not BlockCarvable?");
             }
         } else {
-            Chisel.logger.info("Not Chisel Block Item?");
+            Chisel.debug("Not Chisel Block Item?");
         }
         return this;
     }

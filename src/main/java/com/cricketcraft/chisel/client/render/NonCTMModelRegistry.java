@@ -30,9 +30,9 @@ public class NonCTMModelRegistry implements Reference {
         @SubscribeEvent
         public void onModelBake(ModelBakeEvent event) {
             for (Map.Entry<ModelResourceLocation, IBakedModel> entry : models.entrySet()) {
-                Chisel.logger.info("Registering Non CTM model for " + entry.getKey().toString() + " model class is " + entry.getValue().getClass());
+                Chisel.debug("Registering Non CTM model for " + entry.getKey().toString() + " model class is " + entry.getValue().getClass());
                 if (entry.getValue() instanceof WeightedBakedModel) {
-                    Chisel.logger.info("Model above is weighted");
+                    Chisel.debug("Model above is weighted");
                 }
                 event.modelRegistry.putObject(entry.getKey(), entry.getValue());
                 //event.modelManager.getMissingModel()
@@ -49,7 +49,7 @@ public class NonCTMModelRegistry implements Reference {
                 location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block + i, "variation=" + variation);
             }
             if (type != IBlockResources.NORMAL) {
-                Chisel.logger.info("Registering model coordinate variation for " + block + " variation " + variation);
+                Chisel.debug("Registering model coordinate variation for " + block + " variation " + variation);
                 register(location, ModelCoordinateVariations.newModel(variation));
                 return;
             }

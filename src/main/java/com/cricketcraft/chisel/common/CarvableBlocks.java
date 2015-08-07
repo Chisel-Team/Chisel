@@ -18,7 +18,12 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
@@ -42,6 +47,16 @@ public enum CarvableBlocks implements Reference {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
             return Variation.getColors(c);
+        }
+
+        @Override
+        protected Object[] getCrafting(){
+            return new Object[]{"SSS", "SGS", "SSS", 'S', Blocks.stone, 'G', Items.glowstone_dust};
+        }
+
+        @Override
+        protected int getCraftingAmount(){
+            return 8;
         }
 
     },
@@ -295,6 +310,7 @@ public enum CarvableBlocks implements Reference {
     private static Map<String, BlockCarvable> blocks = new HashMap<String, BlockCarvable>();
     private Variation[] variations;
     private boolean isBeaconBase;
+    private IRecipe recipe;
 
     protected PropertyVariation propertyVariation;
 
@@ -324,12 +340,25 @@ public enum CarvableBlocks implements Reference {
      * @return
      */
     private static Block getBlockFromString(String in) {
-        String[] parts = in.split(":");
-        if (parts.length < 2) {
-            return (Block) Block.blockRegistry.getObject(new ResourceLocation(parts[0]));
-        } else {
-            return GameRegistry.findBlock(parts[0], parts[1]);
+        if (!in.contains(":")){
+            return (Block) Block.blockRegistry.getObject(new ResourceLocation(in));
         }
+        String[] parts = in.split(":");
+        return GameRegistry.findBlock(parts[0], parts[1]);
+    }
+
+    private static ItemStack parseStack(String in){
+        int meta = 0;
+        String block;
+        if (!in.contains("#")){
+            block = in;
+        }
+        else {
+            String[] parts = in.split("#");
+            block = parts[0];
+            meta = Integer.parseInt(parts[1]);
+        }
+        return new ItemStack(getBlockFromString(block), 1, meta);
     }
 
 
@@ -389,8 +418,16 @@ public enum CarvableBlocks implements Reference {
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn) {
     }
 
+    protected Object[] getCrafting(){
+        return new Object[0];
+    }
+
     protected String[] createHonorarySubBlocks() {
         return new String[0];
+    }
+
+    protected int getCraftingAmount(){
+        return 1;
     }
 
     protected String[] getLore(String v) {
@@ -425,8 +462,11 @@ public enum CarvableBlocks implements Reference {
             Variation[][] var = splitVariationArray(b.getVariants());
             for (int i = 0; i < var.length; i++) {
                 Variation[] vArray = var[i];
-                //Chisel.logger.info("index is "+i+" for "+b.getName());
+                //Chisel.debug("index is "+i+" for "+b.getName());
                 BlockCarvable block = new BlockCarvable(b.getMaterial(), b, vArray.length, i, b.propertyVariation, b.isBeaconBase);
+//                if (i == 0 && b.getCrafting().length!=0){
+//                    b.recipe = GameRegistry.addShapedRecipe(new ItemStack(block, b.getCraftingAmount(), 0), b.getCrafting());
+//                }
                 block.setHardness(b.getBlockHardness());
                 block.setLightOpacity(b.getOpacity());
                 if (block.VARIATION == null) {
@@ -457,7 +497,7 @@ public enum CarvableBlocks implements Reference {
             location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block.getName(), "inventory");
             GameRegistry.registerBlock(block, ItemChiselBlock.class, (String) blocks.keySet().toArray()[i]);
             for (Variation v : block.getType().getVariants()) {
-                Chisel.logger.info("Setting custom model resource location " + location + " for block " + blocks.keySet().toArray()[i] + " and meta " + Variation.metaFromVariation(block.getType(), v));
+                Chisel.debug("Setting custom model resource location " + location + " for block " + blocks.keySet().toArray()[i] + " and meta " + Variation.metaFromVariation(block.getType(), v));
                 ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Variation.metaFromVariation(block.getType(), v), location);
             }
         }
@@ -468,13 +508,22 @@ public enum CarvableBlocks implements Reference {
     public static void initBlocks() {
         for (int i = 0; i < blocks.size(); i++) {
             BlockCarvable block = (BlockCarvable) blocks.values().toArray()[i];
+            CarvableBlocks b = block.getType();
+            if (block.getIndex() == 0 && b.getCrafting().length!=0){
+                b.recipe = GameRegistry.addShapedRecipe(new ItemStack(block, b.getCraftingAmount(), 0), b.getCrafting());
+            }
+            if (b.createHonorarySubBlocks().length!=0){
+                for (String s : b.createHonorarySubBlocks()){
+                    OreDictionaryUtil.addHonorary(b, parseStack(s));
+                }
+            }
             for (int h = 0; h < block.getType().getVariants().length; h++) {
                 OreDictionaryUtil.add(block);
                 Variation v = block.getType().getVariants()[h];
                 if (block.getIndex() != 0) {
                     int exclusion = block.getIndex() * 16;
                     if (h < exclusion) {
-                        Chisel.logger.info("Excluding " + v.getName() + " from block " + blocks.keySet().toArray()[i]);
+                        Chisel.debug("Excluding " + v.getName() + " from block " + blocks.keySet().toArray()[i]);
                         continue;
                     }
                 }
@@ -500,7 +549,7 @@ public enum CarvableBlocks implements Reference {
                 continue;
             }
             int leftover = (i % 16);
-            //Chisel.logger.info("cur: "+cur+" leftover: "+leftover);
+            //Chisel.debug("cur: "+cur+" leftover: "+leftover);
             vars[cur][leftover] = array[i];
         }
         return vars;

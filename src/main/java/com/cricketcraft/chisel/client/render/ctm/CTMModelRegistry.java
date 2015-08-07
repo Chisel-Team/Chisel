@@ -28,7 +28,7 @@ public class CTMModelRegistry implements Reference {
         @SubscribeEvent
         public void onModelBake(ModelBakeEvent event) {
             for (Map.Entry<ModelResourceLocation, ModelCTM> entry : models.entrySet()) {
-                Chisel.logger.info("Registering CTM model for " + entry.getKey().toString());
+                Chisel.debug("Registering CTM model for " + entry.getKey().toString());
                 event.modelRegistry.putObject(entry.getKey(), entry.getValue());
             }
         }

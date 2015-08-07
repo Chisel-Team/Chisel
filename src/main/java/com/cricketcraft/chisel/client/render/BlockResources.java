@@ -91,7 +91,7 @@ public class BlockResources implements IBlockResources, Reference {
 
     public static BlockResources generateBlockResources(BlockCarvable parent, String subBlockName, List<String> lore) {
         String prefix = MOD_ID.toLowerCase() + ":blocks/" + parent.getName() + "/";
-        Chisel.logger.info(prefix);
+        Chisel.debug(prefix);
         TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
         if (map == null) {
             throw new RuntimeException("TextureMap is null");
@@ -214,9 +214,9 @@ public class BlockResources implements IBlockResources, Reference {
         String path = "/assets/" + MOD_ID.toLowerCase() + "/textures/blocks/" + blockName + "/" + variation + "-ctmv.png";
         boolean r = Chisel.class.getResource(path) != null;
         if (r) {
-            Chisel.logger.info("Returning true ctmv for " + blockName + " variation " + variation);
+            Chisel.debug("Returning true ctmv for " + blockName + " variation " + variation);
         } else {
-            Chisel.logger.info("Returning false for ctmv for path\n" + path);
+            Chisel.debug("Returning false for ctmv for path\n" + path);
         }
         return r;
     }

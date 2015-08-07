@@ -41,7 +41,7 @@ public class CTMBlockResources extends BlockResources {
      */
     public static CTMBlockResources generateBlockResources(BlockCarvable parent, String subBlockName, List<String> lore) {
         String prefix = MOD_ID.toLowerCase() + ":blocks/" + parent.getName() + "/";
-        Chisel.logger.info(prefix);
+        Chisel.debug(prefix);
         TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
         if (map == null) {
             throw new RuntimeException("TextureMap is null");
@@ -50,7 +50,7 @@ public class CTMBlockResources extends BlockResources {
         if (isCTMH(parent.getName(), subBlockName)) {
             type = CTMH;
         } else if (isCTMV(parent.getName(), subBlockName)) {
-            Chisel.logger.info("CTMV for " + subBlockName + " parent " + parent.getName());
+            Chisel.debug("CTMV for " + subBlockName + " parent " + parent.getName());
             type = CTMV;
         }
         TextureAtlasSprite texture = map.getAtlasSprite(prefix + subBlockName);

@@ -17,7 +17,7 @@ public class PropertyVariation extends PropertyHelper {
 
     public PropertyVariation() {
         super("variation", Variation.class);
-        Chisel.logger.info("PropertyVariation created");
+        Chisel.debug("PropertyVariation created");
     }
 
     @Override
