@@ -1,6 +1,7 @@
 package com.cricketcraft.chisel.item.chisel;
 
 import java.util.List;
+import java.util.Locale;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
@@ -48,7 +49,7 @@ public class ItemChisel extends Item implements IChiselItem {
 		super();
 		this.type = type;
 		setMaxStackSize(1);
-		setTextureName(Chisel.MOD_ID + ":chisel_" + type.name().toLowerCase());
+		setTextureName(Chisel.MOD_ID + ":chisel_" + type.name().toLowerCase(Locale.ENGLISH));
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
