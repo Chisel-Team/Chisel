@@ -83,7 +83,6 @@ public class Compatibility {
 			addSupport("TConstruct", "decoration.multibrick", tconMap.get(i), i, 99);
 			addSupport("TConstruct", "decoration.multibrickfancy", tconMap.get(i), i, 99);
 		}
-		TinkersChiselCompat.addTConstructDetailingSupport();
 
 		addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 14, 99);
 		addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 15, 99);
