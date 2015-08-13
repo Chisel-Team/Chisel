@@ -63,13 +63,24 @@ public enum CarvableBlocks implements Reference {
     ALUMINIUM("aluminium", true) {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("caution"), c.value("crate"), c.value("thermal"), c.value("adv"), c.value("egregious"), c.value("bolted")};
+            return new Variation[]{
+				c.value("caution"),
+				c.value("crate"),
+				c.value("thermal"),
+				c.value("adv"),
+				c.value("egregious"),
+				c.value("bolted")};
         }
     },
     ANDESITE("andesite") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("pillar"), c.value("lbrick"), c.value("ornate"), c.value("prism"), c.value("tiles")};
+            return new Variation[]{
+				c.value("pillar"),
+				c.value("lbrick"),
+				c.value("ornate"),
+				c.value("prism"),
+				c.value("tiles")};
         }
 
         @Override
@@ -80,8 +91,16 @@ public enum CarvableBlocks implements Reference {
     BOOKSHELF("bookshelf") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("default"), c.value("rainbow"), c.value("necromancer-novice"),
-                    c.value("necromancer"), c.value("redtomes"), c.value("abandoned"), c.value("hoarder"), c.value("brim"), c.value("historician")};
+            return new Variation[]{
+				c.value("default"), 
+				c.value("rainbow"), 
+				c.value("necromancer-novice"),
+				c.value("necromancer"), 
+				c.value("redtomes"), 
+				c.value("abandoned"), 
+				c.value("hoarder"), 
+				c.value("brim"), 
+				c.value("historician")};
         }
 
         @Override
@@ -92,7 +111,12 @@ public enum CarvableBlocks implements Reference {
     BRICK("brick") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("large"), c.value("mortarless"), c.value("varied"), c.value("aged"), c.value("yellow")};
+            return new Variation[]{
+				c.value("large"), 
+				c.value("mortarless"), 
+				c.value("varied"), 
+				c.value("aged"), 
+				c.value("yellow")};
         }
 
         @Override
@@ -103,16 +127,37 @@ public enum CarvableBlocks implements Reference {
     BRONZE("bronze", true) {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("caution"), c.value("crate"), c.value("thermal"), c.value("adv"), c.value("egregious"), c.value("bolted")};
+            return new Variation[]{
+				c.value("caution"), 
+				c.value("crate"), 
+				c.value("thermal"), 
+				c.value("adv"), 
+				c.value("egregious"), 
+				c.value("bolted")};
         }
     },
     COBBLESTONE("cobblestone") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("aligned_brick"), c.value("detailed_brick"), c.value("small_brick"),
-                    c.value("large_tile"), c.value("small_tile"), c.value("french_tile"), c.value("french_tile2"),
-                    c.value("creeper_tile"), c.value("damaged_tile"), c.value("huge_tile"), c.value("creeper_panel"),
-                    c.value("dent"), c.value("panel"), c.value("light_panel"), c.value("dark_panel")};
+            return new Variation[]{
+				c.value("aligned_brick"), 
+				c.value("detailed_brick"), 
+				c.value("small_brick"),
+                    
+				c.value("large_tile"), 
+				c.value("small_tile"), 
+				c.value("french_tile"), 
+				c.value("french_tile2"),
+                    
+				c.value("creeper_tile"), 
+				c.value("damaged_tile"), 
+				c.value("huge_tile"), 
+				c.value("creeper_panel"),
+                    
+				c.value("dent"), 
+				c.value("panel"), 
+				c.value("light_panel"), 
+				c.value("dark_panel")};
         }
 
         @Override
@@ -123,10 +168,22 @@ public enum CarvableBlocks implements Reference {
     COBBLESTONE_MOSSY("cobblestone_mossy") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("small_brick"),
-                    c.value("large_tile"), c.value("small_tile"), c.value("french_tile"), c.value("french_tile2"),
-                    c.value("creeper_tile"), c.value("damaged_tile"), c.value("huge_tile"), c.value("creeper_panel"),
-                    c.value("dent"), c.value("light_panel"), c.value("dark_panel")};
+            return new Variation[]{
+				c.value("small_brick"),
+                    
+				c.value("large_tile"), 
+				c.value("small_tile"), 
+				c.value("french_tile"), 
+				c.value("french_tile2"),
+                    
+				c.value("creeper_tile"), 
+				c.value("damaged_tile"), 
+				c.value("huge_tile"), 
+				c.value("creeper_panel"),
+                    
+				c.value("dent"), 
+				c.value("light_panel"), 
+				c.value("dark_panel")};
         }
 
         @Override
@@ -137,7 +194,12 @@ public enum CarvableBlocks implements Reference {
     CLOUD("cloud") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("cloud"), c.value("large"), c.value("small"), c.value("vertical"), c.value("grid")};
+            return new Variation[]{
+				c.value("cloud"), 
+				c.value("large"), 
+				c.value("small"), 
+				c.value("vertical"), 
+				c.value("grid")};
         }
 
         @Override
@@ -169,9 +231,20 @@ public enum CarvableBlocks implements Reference {
     CONCRETE("concrete") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("default"), c.value("block"), c.value("doubleslab"), c.value("blocks"), c.value("weathered"),
-                    c.value("weathered_block"), c.value("weathered_doubleslab"), c.value("weathered_blocks"), c.value("weathered_half"), c.value("weathered_block_half"),
-                    c.value("asphalt")};
+            return new Variation[]{
+				c.value("default"), 
+				c.value("block"), 
+				c.value("doubleslab"), 
+				c.value("blocks"), 
+				c.value("weathered"),
+                    
+				c.value("weathered_block"), 
+				c.value("weathered_doubleslab"), 
+				c.value("weathered_blocks"), 
+				c.value("weathered_half"), 
+				c.value("weathered_block_half"),
+                    
+				c.value("asphalt")};
         }
 
         @Override
@@ -200,14 +273,32 @@ public enum CarvableBlocks implements Reference {
     COPPER("copper", true) {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("caution"), c.value("crate"), c.value("thermal"), c.value("adv"), c.value("egregious"), c.value("bolted")};
+            return new Variation[]{
+				c.value("caution"), 
+				c.value("crate"), 
+				c.value("thermal"), 
+				c.value("adv"), 
+				c.value("egregious"), 
+				c.value("bolted")};
         }
     },
     DIAMOND_BLOCK("diamond_block", true) {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("embossed"), c.value("gem"), c.value("cells"), c.value("space"), c.value("spaceblack"), c.value("simple"),
-                    c.value("bismuth"), c.value("crushed"), c.value("four"), c.value("fourornate"), c.value("zelda"), c.value("ornatelayer")};
+            return new Variation[]{
+				c.value("embossed"), 
+				c.value("gem"), 
+				c.value("cells"), 
+				c.value("space"), 
+				c.value("spaceblack"), 
+				c.value("simple"),
+                    
+				c.value("bismuth"), 
+				c.value("crushed"), 
+				c.value("four"), 
+				c.value("fourornate"), 
+				c.value("zelda"), 
+				c.value("ornatelayer")};
         }
 
         @Override
@@ -223,7 +314,12 @@ public enum CarvableBlocks implements Reference {
     DIORITE("diorite") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("pillar"), c.value("lbrick"), c.value("ornate"), c.value("prism"), c.value("tiles")};
+            return new Variation[]{
+				c.value("pillar"), 
+				c.value("lbrick"), 
+				c.value("ornate"), 
+				c.value("prism"), 
+				c.value("tiles")};
         }
 
         @Override
@@ -234,9 +330,23 @@ public enum CarvableBlocks implements Reference {
     DIRT("dirt") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("bricks"), c.value("netherbricks"), c.value("bricks3"), c.value("cobble"), c.value("reinforcedCobble"),
-                    c.value("reinforced"), c.value("happy"), c.value("bricks2"), c.value("bricksdirt2"), c.value("hor"), c.value("vert"), c.value("layers"),
-                    c.value("vertical"), c.value("chunky")};
+            return new Variation[]{
+				c.value("bricks"), 
+				c.value("netherbricks"), 
+				c.value("bricks3"), 
+				c.value("cobble"), 
+				c.value("reinforcedCobble"),
+                    
+				c.value("reinforced"), 
+				c.value("happy"), 
+				c.value("bricks2"), 
+				c.value("bricksdirt2"), 
+				c.value("hor"), 
+				c.value("vert"), 
+				c.value("layers"),
+                    
+				c.value("vertical"), 
+				c.value("chunky")};
         }
 
         @Override
@@ -247,8 +357,19 @@ public enum CarvableBlocks implements Reference {
     EMERALD_BLOCK("emerald", true) {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("panel"), c.value("panelclassic"), c.value("smooth"), c.value("chunk"), c.value("goldborder"),
-                    c.value("zelda"), c.value("cell"), c.value("cellbismuth"), c.value("four"), c.value("fourornate"), c.value("ornate")};
+            return new Variation[]{
+				c.value("panel"), 
+				c.value("panelclassic"), 
+				c.value("smooth"), 
+				c.value("chunk"), 
+				c.value("goldborder"),
+                    
+				c.value("zelda"), 
+				c.value("cell"), 
+				c.value("cellbismuth"), 
+				c.value("four"), 
+				c.value("fourornate"), 
+				c.value("ornate")};
         }
 
         @Override
@@ -259,7 +380,8 @@ public enum CarvableBlocks implements Reference {
     END_STONE("end_stone") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("chiseled")};
+            return new Variation[]{
+				c.value("chiseled")};
         }
 
         @Override
@@ -270,37 +392,101 @@ public enum CarvableBlocks implements Reference {
     FACTORY("factory") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("dots"), c.value("rust"), c.value("rust2"), c.value("platex"), c.value("wireframewhite"),
-                    c.value("wireframe"), c.value("hazard"), c.value("hazardorange"), c.value("circuit"), c.value("metalbox"), c.value("goldplate"),
-                    c.value("goldplating"), c.value("grinder"), c.value("plating"), c.value("rustplates"), c.value("column"), c.value("iceiceice"),
-                    c.value("vent"), c.value("tilemosaic"), c.value("wireframeblue")};
+            return new Variation[]{
+				c.value("dots"), 
+				c.value("rust"), 
+				c.value("rust2"), 
+				c.value("platex"), 
+				c.value("wireframewhite"),
+                    
+				c.value("wireframe"), 
+				c.value("hazard"), 
+				c.value("hazardorange"), 
+				c.value("circuit"), 
+				c.value("metalbox"), 
+				c.value("goldplate"),
+                    
+				c.value("goldplating"), 
+				c.value("grinder"), 
+				c.value("plating"), 
+				c.value("rustplates"), 
+				c.value("column"), 
+				c.value("iceiceice"),
+                    
+				c.value("vent"), 
+				c.value("tilemosaic"), 
+				c.value("wireframeblue")};
         }
     },
     FANTASY("fantasy") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("brick"), c.value("brick-faded"), c.value("brick-wear"), c.value("bricks"), c.value("decor"),
-                    c.value("decor-block"), c.value("pillar"), c.value("pillar-decorated"), c.value("gold-decor-1"), c.value("gold-decor-2"),
-                    c.value("gold-decor-3"), c.value("gold-decor-4"), c.value("plate"), c.value("block"), c.value("bricks-chaotic"), c.value("bricks-wear"),
+            return new Variation[]{
+				c.value("brick"), 
+				c.value("brick-faded"), 
+				c.value("brick-wear"), 
+				c.value("bricks"), 
+				c.value("decor"),
+                    
+				c.value("decor-block"), 
+				c.value("pillar"), 
+				c.value("pillar-decorated"), 
+				c.value("gold-decor-1"), 
+				c.value("gold-decor-2"),
+                    
+				c.value("gold-decor-3"), 
+				c.value("gold-decor-4"), 
+				c.value("plate"), 
+				c.value("block"), 
+				c.value("bricks-chaotic"), 
+				c.value("bricks-wear"),
 
-                    c.value("purple-brick"), c.value("purple-brick-faded"), c.value("purple-brick-wear"), c.value("purple-bricks"), c.value("purple-decor"),
-                    c.value("purple-decor-block"), c.value("purple-pillar"), c.value("purple-pillar-decorated"), c.value("purple-plate"),
-                    c.value("purple-block"), c.value("purple-bricks-chaotic"), c.value("purple-bricks-wear")
+                    
+				c.value("purple-brick"), 
+				c.value("purple-brick-faded"), 
+				c.value("purple-brick-wear"), 
+				c.value("purple-bricks"), 
+				c.value("purple-decor"),
+                    
+				c.value("purple-decor-block"), 
+				c.value("purple-pillar"), 
+				c.value("purple-pillar-decorated"), 
+				c.value("purple-plate"),
+                    
+				c.value("purple-block"), 
+				c.value("purple-bricks-chaotic"), 
+				c.value("purple-bricks-wear")
             };
         }
     },
     GLOWSTONE("glowstone") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("sulphur-cobble"), c.value("sulphur-corroded"), c.value("sulphur-glass"), c.value("sulphur-neon"),
-                    c.value("sulphur-ornate"), c.value("sulphur-rocky"), c.value("sulphur-shale"), c.value("sulphur-tile"), c.value("sulphur-weavelanternlight"),
-                    c.value("cobble"), c.value("growth"), c.value("layers"), c.value("tilecorroded"), c.value("bismuth"), c.value("bismuth-panel")};
+            return new Variation[]{
+				c.value("sulphur-cobble"), 
+				c.value("sulphur-corroded"), 
+				c.value("sulphur-glass"), 
+				c.value("sulphur-neon"),
+                    
+				c.value("sulphur-ornate"), 
+				c.value("sulphur-rocky"), 
+				c.value("sulphur-shale"), 
+				c.value("sulphur-tile"), 
+				c.value("sulphur-weavelanternlight"),
+                    
+				c.value("cobble"), 
+				c.value("growth"), 
+				c.value("layers"), 
+				c.value("tilecorroded"), 
+				c.value("bismuth"), 
+				c.value("bismuth-panel")};
         }
     },
     GOLD_BLOCK("gold_block") {
         @Override
         protected Variation[] createVariations(Variation.VariationCreator c) {
-            return new Variation[]{c.value("largeingot")};
+            return new Variation[]{
+				c.value("largeingot")};
         }
 
         @Override
