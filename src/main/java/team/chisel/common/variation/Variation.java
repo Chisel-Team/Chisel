@@ -50,6 +50,14 @@ public class Variation implements IStringSerializable, Comparable<Variation> {
         public Variation value(String v) {
             return createVariation(v, p);
         }
+
+        public Variation[] values(String... values){
+            Variation[] vars = new Variation[values.length];
+            for (int i = 0 ; i < values.length ; i++){
+                vars[i] = value(values[i]);
+            }
+            return vars;
+        }
     }
 
 
