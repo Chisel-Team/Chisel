@@ -1,5 +1,7 @@
 package team.chisel.common;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import team.chisel.Chisel;
 import team.chisel.client.render.BlockResources;
 import team.chisel.client.render.CTMBlockResources;
@@ -31,7 +33,9 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -496,29 +500,23 @@ public enum CarvableBlocks implements Reference {
     };
 
     protected String name;
-    private static Map<String, BlockCarvable> blocks = new HashMap<String, BlockCarvable>();
     private Variation[] variations;
     private boolean isBeaconBase;
     private IRecipe recipe;
+    private List<BlockCarvable> instances;
 
     protected PropertyVariation propertyVariation;
 
 
-    public static BlockCarvable getBlockWithName(String name) {
-        return blocks.get(name);
-    }
 
     public BlockCarvable getBlock() {
-        return getBlockWithName(name);
+        return getBlock(0);
     }
 
     public BlockCarvable getBlock(int index) {
-        if (index == 0) {
-            return getBlockWithName(name);
-        } else {
-            return getBlockWithName(name + index);
-        }
+        return instances.get(index);
     }
+
 
 
     /**
@@ -560,6 +558,7 @@ public enum CarvableBlocks implements Reference {
         propertyVariation = new PropertyVariation();
         variations = createVariations(Variation.creator(propertyVariation));
         this.isBeaconBase = isBeaconBase;
+        this.instances = new ArrayList<BlockCarvable>();
     }
 
     /**
@@ -676,22 +675,19 @@ public enum CarvableBlocks implements Reference {
                     }
                     count++;
                 }
-                if (i == 0) {
-                    blocks.put(b.getName(), block);
-                } else {
-                    blocks.put(b.getName() + i, block);
-                }
+                b.instances.add(block);
                 NonCTMModelRegistry.registerInventory(b, i);
             }
         }
-        for (int i = 0; i < blocks.size(); i++) {
-            BlockCarvable block = (BlockCarvable) blocks.values().toArray()[i];
-            final ModelResourceLocation location;
-            location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block.getName(), "inventory");
-            GameRegistry.registerBlock(block, ItemChiselBlock.class, (String) blocks.keySet().toArray()[i]);
-            for (Variation v : block.getType().getVariants()) {
-                Chisel.debug("Setting custom model resource location " + location + " for block " + blocks.keySet().toArray()[i] + " and meta " + Variation.metaFromVariation(block.getType(), v));
-                ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Variation.metaFromVariation(block.getType(), v), location);
+        for (CarvableBlocks b : values()) {
+            for (BlockCarvable block : b.instances) {
+                final ModelResourceLocation location;
+                location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block.getName(), "inventory");
+                GameRegistry.registerBlock(block, ItemChiselBlock.class, block.getIndexName());
+                for (Variation v : block.getType().getVariants()) {
+                    Chisel.debug("Setting custom model resource location " + location + " for block " + block + " and meta " + Variation.metaFromVariation(block.getType(), v));
+                    ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), Variation.metaFromVariation(block.getType(), v), location);
+                }
             }
         }
 
@@ -699,34 +695,34 @@ public enum CarvableBlocks implements Reference {
 
 
     public static void initBlocks() {
-        for (int i = 0; i < blocks.size(); i++) {
-            BlockCarvable block = (BlockCarvable) blocks.values().toArray()[i];
-            CarvableBlocks b = block.getType();
-            if (block.getIndex() == 0 && b.getCrafting().length!=0){
-                b.recipe = GameRegistry.addShapedRecipe(new ItemStack(block, b.getCraftingAmount(), 0), b.getCrafting());
-            }
-            if (block.getIndex() == 0 && b.getSmeltedItem()!=null){
-                GameRegistry.addSmelting(b.getSmeltedItem(), new ItemStack(block, b.getCraftingAmount(), 0), 0.35F);
-            }
-            if (b.createHonorarySubBlocks().length!=0){
-                for (String s : b.createHonorarySubBlocks()){
-                    OreDictionaryUtil.addHonorary(b, parseStack(s));
+        for (CarvableBlocks b : values()) {
+            for (BlockCarvable block : b.instances) {
+                if (block.getIndex() == 0 && b.getCrafting().length != 0) {
+                    b.recipe = GameRegistry.addShapedRecipe(new ItemStack(block, b.getCraftingAmount(), 0), b.getCrafting());
                 }
-            }
-            for (int h = 0; h < block.getType().getVariants().length; h++) {
-                OreDictionaryUtil.add(block);
-                Variation v = block.getType().getVariants()[h];
-                if (block.getIndex() != 0) {
-                    int exclusion = block.getIndex() * 16;
-                    if (h < exclusion) {
-                        Chisel.debug("Excluding " + v.getName() + " from block " + blocks.keySet().toArray()[i]);
-                        continue;
+                if (block.getIndex() == 0 && b.getSmeltedItem() != null) {
+                    GameRegistry.addSmelting(b.getSmeltedItem(), new ItemStack(block, b.getCraftingAmount(), 0), 0.35F);
+                }
+                if (b.createHonorarySubBlocks().length != 0) {
+                    for (String s : b.createHonorarySubBlocks()) {
+                        OreDictionaryUtil.addHonorary(b, parseStack(s));
                     }
                 }
-                if (isCTM(block.getName(), v.getValue())) {
-                    block.addSubBlock(CTMSubBlock.generateSubBlock(block, v.getValue(), block.getType().getLore(v.getValue())));
-                } else {
-                    block.addSubBlock(SubBlock.generateSubBlock(block, v.getValue(), block.getType().getLore(v.getValue())));
+                for (int h = 0; h < block.getType().getVariants().length; h++) {
+                    OreDictionaryUtil.add(block);
+                    Variation v = block.getType().getVariants()[h];
+                    if (block.getIndex() != 0) {
+                        int exclusion = block.getIndex() * 16;
+                        if (h < exclusion) {
+                            Chisel.debug("Excluding " + v.getName() + " from block " + block);
+                            continue;
+                        }
+                    }
+                    if (isCTM(block.getName(), v.getValue())) {
+                        block.addSubBlock(CTMSubBlock.generateSubBlock(block, v.getValue(), block.getType().getLore(v.getValue())));
+                    } else {
+                        block.addSubBlock(SubBlock.generateSubBlock(block, v.getValue(), block.getType().getLore(v.getValue())));
+                    }
                 }
             }
         }

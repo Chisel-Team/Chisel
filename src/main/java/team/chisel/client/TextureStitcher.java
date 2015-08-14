@@ -1,5 +1,8 @@
 package team.chisel.client;
 
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraftforge.client.event.GuiOpenEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import team.chisel.Chisel;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -26,6 +29,14 @@ public class TextureStitcher {
         }
         //CTMBlockResources.refreshAll(event.map);
     }
+//    Not yet.....
+//    //SHHHHHHHHH
+//    @SubscribeEvent
+//    public void onGuiOpen(GuiOpenEvent event){
+//        if (event.gui instanceof GuiMainMenu){
+//            ReflectionHelper.setPrivateValue(GuiMainMenu.class, (GuiMainMenu) event.gui, "Tterrag is Awesome", "splashText");
+//        }
+//    }
 
     public static void register(String s) {
         toBeRegistered.add(s);

@@ -258,6 +258,15 @@ public class BlockCarvable extends Block {
         return this.type.getName();
     }
 
+    public String getIndexName(){
+        if (index == 0){
+            return getName();
+        }
+        else {
+            return getName()+index;
+        }
+    }
+
     /**
      * Gets the type of block this is
      *
