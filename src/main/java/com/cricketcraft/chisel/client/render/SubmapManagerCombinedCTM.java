@@ -27,37 +27,37 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 		@Override
 		public void renderFaceXNeg(Block block, double x, double y, double z, IIcon icon) {
 			setIcons(rType, x, y, z, ForgeDirection.WEST);
-			super.renderFaceXNeg(block, x, y, z, submapSmall.getSubIcon(0, 0));
+			super.renderFaceXNeg(block, x, y, z, inWorld ? submapSmall.getSubIcon(0, 0) : icon);
 		}
 
 		@Override
 		public void renderFaceXPos(Block block, double x, double y, double z, IIcon icon) {
 			setIcons(rType, x, y, z, ForgeDirection.EAST);
-			super.renderFaceXPos(block, x, y, z, submapSmall.getSubIcon(0, 0));
+			super.renderFaceXPos(block, x, y, z, inWorld ? submapSmall.getSubIcon(0, 0) : icon);
 		}
 
 		@Override
 		public void renderFaceYNeg(Block block, double x, double y, double z, IIcon icon) {
 			setIcons(rType, x, y, z, ForgeDirection.DOWN);
-			super.renderFaceYNeg(block, x, y, z, submapSmall.getSubIcon(0, 0));
+			super.renderFaceYNeg(block, x, y, z, inWorld ? submapSmall.getSubIcon(0, 0) : icon);
 		}
 
 		@Override
 		public void renderFaceYPos(Block block, double x, double y, double z, IIcon icon) {
 			setIcons(rType, x, y, z, ForgeDirection.UP);
-			super.renderFaceYPos(block, x, y, z, submapSmall.getSubIcon(0, 0));
+			super.renderFaceYPos(block, x, y, z, inWorld ? submapSmall.getSubIcon(0, 0) : icon);
 		}
 
 		@Override
 		public void renderFaceZNeg(Block block, double x, double y, double z, IIcon icon) {
 			setIcons(rType, x, y, z, ForgeDirection.NORTH);
-			super.renderFaceZNeg(block, x, y, z, submapSmall.getSubIcon(0, 0));
+			super.renderFaceZNeg(block, x, y, z, inWorld ? submapSmall.getSubIcon(0, 0) : icon);
 		}
 
 		@Override
 		public void renderFaceZPos(Block block, double x, double y, double z, IIcon icon) {
 			setIcons(rType, x, y, z, ForgeDirection.SOUTH);
-			super.renderFaceZPos(block, x, y, z, submapSmall.getSubIcon(0, 0));
+			super.renderFaceZPos(block, x, y, z, inWorld ? submapSmall.getSubIcon(0, 0) : icon);
 		}
 
 		private void setIcons(TextureType type, double x, double y, double z, ForgeDirection side) {
@@ -144,7 +144,7 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 			submaps[i % wh][i / wh] = triple.getMiddle();
 			submapsSmall[i % wh][i / wh] = triple.getRight();
 			if (i == 0) {
-				defaultIcon = triple.getRight().getSubIcon(0, 0);
+				defaultIcon = triple.getRight().getBaseIcon();
 			}
 		}
 		submap = new Submap(base, wh, submaps);
