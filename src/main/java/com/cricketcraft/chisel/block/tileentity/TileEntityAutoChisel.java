@@ -181,7 +181,8 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	private ItemStack getTarget() {
 		if (inventory[BASE] != null && hasUpgrade(Upgrade.REVERSION)) {
 			// if we have a reversion upgrade, use that for the target
-			return Carving.chisel.getItemsForChiseling(inventory[BASE]).get(0);
+			List<ItemStack> possible = Carving.chisel.getItemsForChiseling(inventory[BASE]);
+			return possible.isEmpty() ? null : possible.get(0);
 		} else {
 			return inventory[TARGET];
 		}
