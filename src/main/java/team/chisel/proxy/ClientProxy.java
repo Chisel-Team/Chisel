@@ -14,6 +14,7 @@ import team.chisel.client.render.RendererRoadLine;
 import team.chisel.client.render.RendererSimpleLayered;
 import team.chisel.client.render.RendererSnakeStone;
 import team.chisel.client.render.RendererStairs;
+import team.chisel.client.render.SubmapManagerAntiblock;
 import team.chisel.client.render.item.ItemChiselRenderer;
 import team.chisel.client.render.tile.RenderAutoChisel;
 import team.chisel.client.render.tile.RenderCarvableBeacon;
@@ -75,6 +76,7 @@ public class ClientProxy extends CommonProxy {
 
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.chisel, renderer);
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.diamondChisel, renderer);
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.antiBlock), new SubmapManagerAntiblock.AntiblockItemRenderer());
 	}
 
 	@Override

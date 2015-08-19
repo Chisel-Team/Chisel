@@ -1,11 +1,17 @@
 package team.chisel.client.render;
 
+import org.lwjgl.opengl.GL11;
+
+import team.chisel.init.ChiselBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.client.IItemRenderer;
 
+import com.cricketcraft.ctmlib.Drawing;
 import com.cricketcraft.ctmlib.RenderBlocksCTM;
 import com.cricketcraft.ctmlib.TextureSubmap;
 
@@ -13,6 +19,27 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class SubmapManagerAntiblock extends SubmapManagerBase {
+	
+	@SideOnly(Side.CLIENT)
+	public static class AntiblockItemRenderer implements IItemRenderer {
+
+		@Override
+		public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+			return true;
+		}
+
+		@Override
+		public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+			return true;
+		}
+
+		@Override
+		public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+			GL11.glDisable(GL11.GL_LIGHTING);
+			Drawing.drawBlock(ChiselBlocks.antiBlock, ChiselBlocks.antiBlock.getIcon(0, item.getItemDamage()), (RenderBlocks) data[0]);
+			GL11.glEnable(GL11.GL_LIGHTING);
+		}
+	}
 
 	@SideOnly(Side.CLIENT)
 	private static class RenderBlocksCTMFullbright extends RenderBlocksCTM {
