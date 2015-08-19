@@ -52,12 +52,12 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 
-@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "com.cricketcraft.chisel.client.gui.GuiFactory", dependencies = "after:EE3;after:ForgeMultipart;after:Thaumcraft;after:appliedenergistics2;after:Railcraft;after:AWWayofTime;after:TwilightForest")
+@Mod(modid = Chisel.MOD_ID, name = Chisel.MOD_NAME, version = Chisel.VERSION, guiFactory = "team.chisel.client.gui.GuiFactory", dependencies = "after:EE3;after:ForgeMultipart;after:Thaumcraft;after:appliedenergistics2;after:Railcraft;after:AWWayofTime;after:TwilightForest")
 public class Chisel {
 
 	public static final String MOD_ID = "chisel";
 	public static final BlockCarvable.SoundType soundTempleFootstep = new BlockCarvable.SoundType("dig.stone", MOD_ID + ":step.templeblock", 1.0f, 1.0f);
-	public static final String MOD_NAME = "Chisel 2";
+	public static final String MOD_NAME = "Chisel";
 	public static final String VERSION = "@VERSION@";
 	public static final BlockCarvable.SoundType soundHolystoneFootstep = new BlockCarvable.SoundType("holystone", 1.0f, 1.0f);
 	public static final BlockCarvable.SoundType soundMetalFootstep = new BlockCarvable.SoundType("metal", 1.0f, 1.0f);
@@ -79,7 +79,7 @@ public class Chisel {
 		Carving.construct();
 	}
 
-	@SidedProxy(clientSide = "com.cricketcraft.chisel.proxy.ClientProxy", serverSide = "com.cricketcraft.chisel.proxy.CommonProxy")
+	@SidedProxy(clientSide = "team.chisel.proxy.ClientProxy", serverSide = "team.chisel.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
 	@EventHandler
@@ -158,7 +158,7 @@ public class Chisel {
 		MinecraftForge.EVENT_BUS.register(this);
 		FMLCommonHandler.instance().bus().register(instance);
 
-		FMLInterModComms.sendMessage("Waila", "register", "com.cricketcraft.chisel.compat.WailaCompat.register");
+		FMLInterModComms.sendMessage("Waila", "register", "team.chisel.compat.WailaCompat.register");
 	}
 
 	private void addWorldgen(Features feature, Block block, double... data) {
