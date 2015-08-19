@@ -2751,9 +2751,9 @@ public enum Features {
 			voidstone.carverHelper.addVariation("tile.voidstone.2.desc", 2, "voidstone/smooth", 2);
 			voidstone.carverHelper.addVariation("tile.voidstone.3.desc", 3, "voidstone/skulls", 3);
 			voidstone.carverHelper.addVariation("tile.voidstone.4.desc", 4, "voidstone/rune", 4);
-			voidstone.carverHelper.addVariation("tile.voidstone.5.desc", 5, "voidstone/metalborder", 5);
+			voidstone.carverHelper.addVariation("tile.voidstone.5.desc", 5, "voidstone/VoidSturdy", 5);
 			voidstone.carverHelper.addVariation("tile.voidstone.6.desc", 6, "voidstone/eye", 6);
-			voidstone.carverHelper.addVariation("tile.voidstone.7.desc", 7, "voidstone/bevel", 7);
+			voidstone.carverHelper.addVariation("tile.voidstone.7.desc", 7, "voidstone/voidBevel", 7);
 
 			voidstone.carverHelper.registerAll(voidstone, "voidstone");
 			Carving.chisel.registerOre("voidstone", "voidstone");
