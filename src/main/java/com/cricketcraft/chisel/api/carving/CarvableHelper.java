@@ -114,7 +114,7 @@ public class CarvableHelper {
 		} else {
 			manager = type.createManagerFor(var, texture);
 		}
-		return new VariationInfoBase(var, description, manager);
+		return new VariationInfoBase(var, description, manager, type);
 	}
 
 	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager, int order) {
