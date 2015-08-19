@@ -1,14 +1,14 @@
 [
 {
   "modid": "chisel",
-  "name": "Chisel 2",
+  "name": "Chisel",
   "description": "A mod that adds in many fancy blocks for decoration, which are crafted utilising the Chisel.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "http://www.minecraftforum.net/forums/thread/1294901",
   "updateUrl": "",
-  "authorList": [ "AUTOMATIC_MAIDEN", "Pokefenn", "Cricket", "tterrag" ],
-  "credits": "This mod uses a lot of textures from the Painterly pack: http://painterlypack.net/. Also one stone variation is designed to look like a block from Doku. Oh, and asie for porting the mod to 1.7.2. Oh wait and Drullkus for some wonderful art.",
+  "authorList": [ "tterrag", "Drullkus", "minecreatr" ],
+  "credits": "AUTOMATIC_MAIDEN for the original mod,\nasie for porting to 1.7.2,\nand Pokenfenn/Cricket for continuing it in 1.7.\nThis mod uses textures from the Painterly Pack: http://painterlypack.net/.",
   "logoFile": "/banner.jpg",
   "screenshots": [],
   "dependencies": []
