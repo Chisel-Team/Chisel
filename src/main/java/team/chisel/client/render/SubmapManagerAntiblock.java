@@ -46,14 +46,29 @@ public class SubmapManagerAntiblock extends SubmapManagerBase {
 
 		@Override
 		protected void fillLightmap(int bottomLeft, int bottomRight, int topRight, int topLeft) {
+			ao();
 			int maxLight = 0xF000F0;
 			super.fillLightmap(maxLight, maxLight, maxLight, maxLight);
 		}
 
 		@Override
 		protected void fillColormap(float bottomLeft, float bottomRight, float topRight, float topLeft, float[][] map) {
+			ao();
 			int color = 0xFFFFFF;
 			super.fillColormap(color, color, color, color, map);
+		}
+		
+		@Override
+		public boolean renderStandardBlock(Block block, int x, int y, int z) {
+			boolean ret = super.renderStandardBlock(block, x, y, z);
+			this.enableAO = false;
+			return ret;
+		}
+		
+		private void ao() {
+			if (this.inWorld) {
+				this.enableAO = true;
+			}
 		}
 	};
 
