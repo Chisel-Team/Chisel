@@ -33,7 +33,7 @@ project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUI
 
 version = "${mod_version}.${buildnumber}"
 group = "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = dev ? "Chisel2_DEV" : "Chisel2"
+archivesBaseName = dev ? "Chisel_DEV" : "Chisel"
 
 minecraft {
     version = "${minecraft_version}-${forge_version}"
@@ -185,7 +185,7 @@ curse {
     projectId = project.projectId
     changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
     releaseType = 'release'
-    displayName = "Chisel 2 - ${mod_version}"
+    displayName = "Chisel - ${mod_version}"
     additionalArtifact deobfJar, sourcesJar, apiJar
 }
 
