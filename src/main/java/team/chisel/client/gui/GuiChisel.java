@@ -104,8 +104,8 @@ public class GuiChisel extends GuiContainer {
 //    protected void actionPerformed(GuiButton button) {
 //        if (button.id == 0) {
 //            if (container.chisel != null && container.chisel.getItem() instanceof IAdvancedChisel) {
-//                IAdvancedChisel item = (IAdvancedChisel) container.chisel.getItem();
-//                currentMode = item.getNextMode(container.chisel, currentMode);
+//                IAdvancedChisel items = (IAdvancedChisel) container.chisel.getItem();
+//                currentMode = items.getNextMode(container.chisel, currentMode);
 //                PacketHandler.INSTANCE.sendToServer(new MessageChiselMode(currentMode));
 //            } else {
 //                currentMode = ChiselMode.next(currentMode);

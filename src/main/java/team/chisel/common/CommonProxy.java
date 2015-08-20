@@ -3,7 +3,7 @@ package team.chisel.common;
 /**
  * The Common Proxy
  */
-public class CommonProxy {
+public class CommonProxy implements Reference{
 
     public void init() {
 

@@ -4,6 +4,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import team.chisel.client.ClientUtil;
+import team.chisel.common.CarvableBlocks;
 
 public class SlotChiselSelection extends Slot {
 
@@ -52,11 +55,11 @@ public class SlotChiselSelection extends Slot {
         selInventory.updateItems();
 
 
-//        if (player.worldObj.isRemote) {
-//            String sound = Carving.chisel.getVariationSound(crafted.getItem(), crafted.getItemDamage());
-//            GeneralClient.playChiselSound(player.worldObj, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound);
-//        } else {
-//            container.playerInventory.player.addStat(Statistics.blocksChiseled, crafted.stackSize);
-//        }
+        if (player.worldObj.isRemote) {
+            String sound = CarvableBlocks.fromItemStack(crafted).getSound();
+            ClientUtil.playSound(player.worldObj, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound);
+        } else {
+            //container.playerInventory.player.addStat(Statistics.blocksChiseled, crafted.stackSize);
+        }
     }
 }

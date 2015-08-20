@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 /**
- * Class for the item for the chisel block
+ * Class for the items for the chisel block
  *
  * @author minecreatr
  */

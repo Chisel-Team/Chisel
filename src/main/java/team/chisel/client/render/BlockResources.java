@@ -232,17 +232,17 @@ public class BlockResources implements IBlockResources, Reference {
     }
 
     protected static boolean isR16(String blockName, String variation) {
-        String path = "/assets/" + MOD_ID.toLowerCase() + "/textures/blocks/" + blockName + "/" + variation + "-v9.png";
+        String path = "/assets/" + MOD_ID.toLowerCase() + "/textures/blocks/" + blockName + "/" + variation + "-r16.png";
         return Chisel.class.getResource(path) != null;
     }
 
     protected static boolean isR9(String blockName, String variation) {
-        String path = "/assets/" + MOD_ID.toLowerCase() + "/textures/blocks/" + blockName + "/" + variation + "-v9.png";
+        String path = "/assets/" + MOD_ID.toLowerCase() + "/textures/blocks/" + blockName + "/" + variation + "-r9.png";
         return Chisel.class.getResource(path) != null;
     }
 
     protected static boolean isR4(String blockName, String variation) {
-        String path = "/assets/" + MOD_ID.toLowerCase() + "/textures/blocks/" + blockName + "/" + variation + "-v9.png";
+        String path = "/assets/" + MOD_ID.toLowerCase() + "/textures/blocks/" + blockName + "/" + variation + "-r4.png";
         return Chisel.class.getResource(path) != null;
     }
 

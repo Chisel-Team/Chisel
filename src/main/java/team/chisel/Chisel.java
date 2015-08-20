@@ -1,5 +1,9 @@
 package team.chisel;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.model.ModelLoader;
 import team.chisel.client.command.CommandTest;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.common.CarvableBlocks;
@@ -35,16 +39,17 @@ public class Chisel implements Reference {
 
     public static ItemChisel itemChisel;
 
-    private static boolean debug = true;
+    public static final boolean debug = true;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         Variation.doStuff();
-        proxy.preInit();
         CarvableBlocks.preInitBlocks();
         itemChisel = new ItemChisel();
         GameRegistry.registerItem(itemChisel, "itemChisel");
+        GameRegistry.addShapedRecipe(new ItemStack(itemChisel), " x", "s ", 'x', Items.iron_ingot, 's', Items.stick);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
+        proxy.preInit();
 
     }
 
@@ -53,6 +58,7 @@ public class Chisel implements Reference {
         proxy.init();
         CarvableBlocks.initBlocks();
         ClientCommandHandler.instance.registerCommand(new CommandTest());
+
     }
 
     /**

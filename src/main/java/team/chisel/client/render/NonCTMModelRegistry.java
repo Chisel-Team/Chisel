@@ -70,13 +70,13 @@ public class NonCTMModelRegistry implements Reference {
 //                throw new RuntimeException("Null block for index "+index+" and block "+block.getName());
 //            }
 //            if (Item.getItemFromBlock(block.getBlock(index))==null){
-//                throw new RuntimeException("null item");
+//                throw new RuntimeException("null items");
 //            }
-////            Item item = Item.getItemFromBlock(block.getBlock(index));
-////            ModelLoader.setCustomModelResourceLocation(item, -1, location);
+////            Item items = Item.getItemFromBlock(block.getBlock(index));
+////            ModelLoader.setCustomModelResourceLocation(items, -1, location);
 ////            int totalMeta = block.getVariants().length-(index*16);
 ////            for (int i=0;i<totalMeta;i++) {
-////                ModelLoader.setCustomModelResourceLocation(item, i, location);
+////                ModelLoader.setCustomModelResourceLocation(items, i, location);
 ////            }
 //        }
 

@@ -1,5 +1,9 @@
 package team.chisel.client;
 
+import net.minecraft.client.resources.model.ModelBakery;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
+import team.chisel.Chisel;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.NonCTMModelRegistry;
 import team.chisel.client.render.ctm.CTMModelRegistry;
@@ -21,6 +25,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
+
     }
 
     @Override
@@ -31,6 +36,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit() {
 
+        ModelLoader.setCustomModelResourceLocation(Chisel.itemChisel, 0, new ModelResourceLocation(MOD_ID + ":itemChisel", "inventory"));
+        //ModelBakery.addVariantName(Chisel.itemChisel, MOD_ID+":itemChisel");
         MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
         MinecraftForge.EVENT_BUS.register(new NonCTMModelRegistry.BakedEventListener());
         MinecraftForge.EVENT_BUS.register(new TextureStitcher());

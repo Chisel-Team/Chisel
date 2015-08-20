@@ -22,9 +22,6 @@ public class PropertyVariation extends PropertyHelper {
 
     @Override
     public Collection getAllowedValues() {
-        if (values.size() == 0) {
-            throw new RuntimeException("0 Values?");
-        }
         return values;
     }
 

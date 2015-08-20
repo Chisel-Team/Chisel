@@ -497,6 +497,12 @@ public enum CarvableBlocks implements Reference {
             return "blockGold";
         }
 
+    },
+    NULL("null"){
+        @Override
+        protected Variation[] createVariations(Variation.VariationCreator c) {
+            return new Variation[0];
+        }
     };
 
     protected String name;
@@ -622,6 +628,20 @@ public enum CarvableBlocks implements Reference {
         return null;
     }
 
+    public String getSound(){
+        return MOD_ID+":chisel.fallback";
+    }
+
+    public static CarvableBlocks fromItemStack(ItemStack stack){
+        if (Block.getBlockFromItem(stack.getItem())!=null){
+            Block blockIn = Block.getBlockFromItem(stack.getItem());
+            if (blockIn instanceof BlockCarvable){
+                return ((BlockCarvable) blockIn).getType();
+            }
+        }
+        return NULL;
+    }
+
     protected String[] getLore(String v) {
         return new String[]{"chisel.lore." + getName() + "." + v + ".1"};
     }
@@ -647,6 +667,9 @@ public enum CarvableBlocks implements Reference {
 
     public static void preInitBlocks() {
         for (CarvableBlocks b : values()) {
+            if (b==NULL){
+                continue;
+            }
             if (!shouldBlockLoad(b)) {
                 continue;
             }
@@ -680,6 +703,9 @@ public enum CarvableBlocks implements Reference {
             }
         }
         for (CarvableBlocks b : values()) {
+            if (b==NULL){
+                continue;
+            }
             for (BlockCarvable block : b.instances) {
                 final ModelResourceLocation location;
                 location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block.getName(), "inventory");
@@ -696,6 +722,9 @@ public enum CarvableBlocks implements Reference {
 
     public static void initBlocks() {
         for (CarvableBlocks b : values()) {
+            if (b==NULL){
+                continue;
+            }
             for (BlockCarvable block : b.instances) {
                 if (block.getIndex() == 0 && b.getCrafting().length != 0) {
                     b.recipe = GameRegistry.addShapedRecipe(new ItemStack(block, b.getCraftingAmount(), 0), b.getCrafting());
