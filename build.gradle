@@ -12,68 +12,138 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
+
 }
 
 apply plugin: 'forge'
+apply plugin: 'maven-publish'
+apply plugin: 'curseforge'
 
-idea { module { inheritOutputDirs = true } }
+import org.ajoberstar.grgit.Grgit
 
-version = "1.0"
-group= "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "chisel3"
+def repo = Grgit.open(project.file('.'))
+project.ext.gitHash = repo.log().find().abbreviatedId
+
+boolean dev = project.hasProperty('chisel_dev') && project.chisel_dev.equalsIgnoreCase('true')
+
+ext.buildnumber = 0
+project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
+
+version = "MC${minecraft_version}-${mod_version}.${buildnumber}"
+group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = dev ? "Chisel_DEV" : "Chisel"
 
 minecraft {
-    version = "1.8-11.14.3.1493"
-    
-    // the mappings can be changed at any time, and must be in the following format.
-    // snapshot_YYYYMMDD   snapshot are built nightly.
-    // stable_#            stables are built at the discretion of the MCP team.
-    // Use non-default mappings at your own risk. they may not allways work.
-    // simply re-run your setup task after changing the mappings to update your workspace.
-    mappings = "snapshot_20150721"
-}
+    version = "${minecraft_version}-${forge_version}"
+    runDir = "run"
 
-dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+    replaceIn "Chisel.java"
+    replace "@VERSION@", project.version
 }
 
 processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+        {
+            // this will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+            inputs.property "mcversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+            // replace stuff in mcmod.info, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
+
+                // replace version and mcversion
+                expand 'version': project.version, 'mcversion': project.minecraft.version
+            }
+
+            // copy everything else, thats not the mcmod.info
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
+
+
+// Create deobf dev jars
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+// Create API jar with sources and compiled files
+task apiJar(type: Jar) {
+    from sourceSets.main.allSource
+    from sourceSets.main.output
+	include 'team/chisel/api/**/*'
+    classifier = 'api'
+}
+
+// Create source attachment for dev jar
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+artifacts {
+    archives deobfJar
+    archives sourcesJar
+    archives apiJar
+}
+
+publishing {
+    tasks.publish.dependsOn 'build'
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact deobfJar
+            artifact sourcesJar
+            artifact apiJar
+        }
     }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+
+    repositories {
+        if (project.hasProperty('mavendir')) {
+            maven { url mavendir }
+        }
     }
 }
 
-jar {
-    classifier = 'universal'
-    version = "${project.minecraft.version}-${project.version}"
-//    manifest {
-//        attributes 'FMLAT': 'chisel_at.cfg'
-//    }
+println('Changelog:\n' + getChangelogText())
+
+String getChangelogText() {
+    def changelogFile = new File('changelog')
+    String str = ''
+    int lineCount = 0
+    boolean done = false
+    changelogFile.eachLine {
+        if (done || it == null) {
+            return
+        }
+        if (it.size() > 1) {
+            def temp = "$it" + (lineCount == 0 ? '\n\n' : '\n')
+            str += (it.startsWith('-') ? '' : '\n') + "$temp"
+            lineCount++
+            return
+        } else {
+            done = true
+        }
+    }
+    return str
 }
+
+curse {
+    dependsOn 'reobf'
+
+    onlyIf {
+        return project.hasProperty('chisel_curseforge_key') && System.getenv("CURSE") != null && System.getenv("CURSE").equalsIgnoreCase("true")
+    }
+
+    if (project.hasProperty('chisel_curseforge_key')) apiKey = project.chisel_curseforge_key
+    projectId = project.projectId
+    changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
+    releaseType = 'release'
+    displayName = "Chisel - ${mod_version}"
+    additionalArtifact deobfJar, sourcesJar, apiJar
+}
+
+idea { module { inheritOutputDirs = true } }
