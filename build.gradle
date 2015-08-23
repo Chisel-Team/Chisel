@@ -141,7 +141,7 @@ curse {
     if (project.hasProperty('chisel_curseforge_key')) apiKey = project.chisel_curseforge_key
     projectId = project.projectId
     changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
-    releaseType = 'release'
+    releaseType = project.curse_type
     displayName = "Chisel - ${mod_version}"
     additionalArtifact deobfJar, sourcesJar, apiJar
 }
