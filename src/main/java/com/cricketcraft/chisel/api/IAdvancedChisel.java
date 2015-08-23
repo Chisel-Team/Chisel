@@ -1,18 +1,16 @@
 package com.cricketcraft.chisel.api;
 
-import com.cricketcraft.chisel.api.carving.IChiselMode;
-
 import net.minecraft.item.ItemStack;
 
+import com.cricketcraft.chisel.api.carving.IChiselMode;
+
 /**
- * Implement this on chisel items which require more control over chisel modes
- * (including adding new modes).
+ * Implement this on chisel items which require more control over chisel modes (including adding new modes).
  */
 public interface IAdvancedChisel {
 
 	/**
-	 * Gets the next mode the button in the GUI should switch to given the
-	 * current mode.
+	 * Gets the next mode the button in the GUI should switch to given the current mode.
 	 * 
 	 * @param stack
 	 *            The {@link ItemStack} representing the chisel
