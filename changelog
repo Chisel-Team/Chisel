@@ -1,3 +1,29 @@
+CT2.5.0:
+New
+- Lots of new endstone variants
+- Purpur blocks
+- New technical blocks (piping, battery, and more)
+
+Changes
+- Under new management! Name of the project has been changed to "Chisel"
+- Now includes CTMLib 1.2.0-10
+- Greatly improve the look of energized voidstone
+- Retexture 2 of the voidstone variants (bevel and metalborder)
+- Removed special player rendering
+- Fixed EMC registrations so that they are actually dynamic
+- Lavastone and Waterstone now use the still texture, not flowing
+
+Fixes
+- Fix "The Turkey Bug"
+- Fix crash when an unchiselable item made its way into the autochisel
+- Fix VariationInfos always returning CUSTOM for their texture type
+- Fix antiblocks not working when smooth lighting is off
+- Fix Botania compat
+- Fix pick block on bookshelves
+
+API
+- Add IConnectable for allowing other blocks to determine if chisel blocks will connect to them
+
 2.4.1:
 New
 - New UberWavy futura block
