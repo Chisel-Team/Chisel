@@ -32,7 +32,7 @@ ext.buildnumber = 0
 project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
 
 version = "${mod_version}.${buildnumber}"
-group = "com.cricketcraft.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = dev ? "Chisel_DEV" : "Chisel"
 
 minecraft {
