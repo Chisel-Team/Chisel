@@ -31,7 +31,7 @@ boolean dev = project.hasProperty('chisel_dev') && project.chisel_dev.equalsIgno
 ext.buildnumber = 0
 project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
 
-version = "MC${minecraft_version}-${mod_version}.${buildnumber}"
+version = "${mod_version}.${buildnumber}"
 group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = dev ? "Chisel_DEV" : "Chisel"
 
@@ -63,7 +63,6 @@ processResources
             }
         }
 
-
 // Create deobf dev jars
 task deobfJar(type: Jar) {
     from sourceSets.main.output
@@ -74,7 +73,7 @@ task deobfJar(type: Jar) {
 task apiJar(type: Jar) {
     from sourceSets.main.allSource
     from sourceSets.main.output
-	include 'team/chisel/api/**/*'
+	include 'com/cricketcraft/chisel/api/**/*'
     classifier = 'api'
 }
 
@@ -135,13 +134,13 @@ curse {
     dependsOn 'reobf'
 
     onlyIf {
-        return project.hasProperty('chisel_curseforge_key') && System.getenv("CURSE") != null && System.getenv("CURSE").equalsIgnoreCase("true")
+        return project.hasProperty('curseforge_key') && System.getenv("CURSE") != null && System.getenv("CURSE").equalsIgnoreCase("true")
     }
 
-    if (project.hasProperty('chisel_curseforge_key')) apiKey = project.chisel_curseforge_key
+    if (project.hasProperty('curseforge_key')) apiKey = project.curseforge_key
     projectId = project.projectId
     changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
-    releaseType = project.curse_type
+    releaseType = 'release'
     displayName = "Chisel - ${mod_version}"
     additionalArtifact deobfJar, sourcesJar, apiJar
 }
