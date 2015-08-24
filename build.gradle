@@ -26,12 +26,12 @@ import org.ajoberstar.grgit.Grgit
 def repo = Grgit.open(project.file('.'))
 project.ext.gitHash = repo.log().find().abbreviatedId
 
-boolean dev = project.hasProperty('chisel_dev') && project.chisel_dev.equalsIgnoreCase('true')
+boolean dev = System.getenv("RELEASE") == null || System.getenv("RELEASE").equalsIgnoreCase("false")
 
 ext.buildnumber = 0
-project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
+project.buildnumber = System.getenv('BUILD_NUMBER') == null ? "CUSTOM" : System.getenv('BUILD_NUMBER')
 
-version = "${mod_version}.${buildnumber}"
+version = dev ? project.ext.gitHash + "-${buildnumber}" : "MC${minecraft_version}-${mod_version}.${buildnumber}"
 group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = dev ? "Chisel_DEV" : "Chisel"
 
@@ -178,7 +178,7 @@ curse {
     dependsOn 'reobf'
 
     onlyIf {
-        return project.hasProperty('curseforge_key') && System.getenv("CURSE") != null && System.getenv("CURSE").equalsIgnoreCase("true")
+        return !dev && project.hasProperty('curseforge_key')
     }
 
     if (project.hasProperty('curseforge_key')) apiKey = project.curseforge_key
