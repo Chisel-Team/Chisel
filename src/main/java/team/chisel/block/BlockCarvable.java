@@ -8,7 +8,7 @@ import com.cricketcraft.chisel.api.carving.IVariationInfo;
 import com.cricketcraft.chisel.api.rendering.ClientUtils;
 
 import team.chisel.Chisel;
-import team.chisel.init.ChiselTabs;
+import com.cricketcraft.chisel.api.ChiselTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

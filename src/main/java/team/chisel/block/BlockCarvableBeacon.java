@@ -5,7 +5,7 @@ import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
 
 import team.chisel.block.tileentity.TileEntityCarvableBeacon;
-import team.chisel.init.ChiselTabs;
+import com.cricketcraft.chisel.api.ChiselTabs;
 import net.minecraft.block.BlockBeacon;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

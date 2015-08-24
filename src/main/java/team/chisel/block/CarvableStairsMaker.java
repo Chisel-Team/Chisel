@@ -3,7 +3,7 @@ package team.chisel.block;
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
 
-import team.chisel.init.ChiselTabs;
+import com.cricketcraft.chisel.api.ChiselTabs;
 import team.chisel.item.ItemCarvable;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
