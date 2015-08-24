@@ -22,7 +22,8 @@ import team.chisel.compat.fmp.FMPCompat;
 import team.chisel.config.Configurations;
 import team.chisel.entity.EntityChiselSnowman;
 import team.chisel.init.ChiselBlocks;
-import team.chisel.init.ChiselTabs;
+import com.cricketcraft.chisel.api.ChiselTabs;
+import team.chisel.init.TabsInit;
 import team.chisel.item.ItemCarvable;
 import team.chisel.item.chisel.ChiselController;
 import team.chisel.network.ChiselGuiHandler;
@@ -128,7 +129,7 @@ public class Chisel {
 		Configurations.config.load();
 		Configurations.refreshConfig();
 
-		ChiselTabs.preInit();
+		TabsInit.preInit();
 		Features.preInit();
 		Statistics.init();
 		PacketHandler.init();
@@ -175,7 +176,7 @@ public class Chisel {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		ChiselTabs.postInit();
+		TabsInit.postInit();
 		Compatibility.init(event);
 	}
 

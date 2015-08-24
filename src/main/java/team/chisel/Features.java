@@ -18,7 +18,7 @@ import team.chisel.entity.EntityCloudInABottle;
 import team.chisel.entity.EntitySmashingRock;
 import team.chisel.init.ChiselBlocks;
 import team.chisel.init.ChiselItems;
-import team.chisel.init.ChiselTabs;
+import com.cricketcraft.chisel.api.ChiselTabs;
 import team.chisel.item.ItemBallOMoss;
 import team.chisel.item.ItemBlockPresent;
 import team.chisel.item.ItemCarvable;
