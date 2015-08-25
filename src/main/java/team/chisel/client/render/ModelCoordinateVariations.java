@@ -66,7 +66,7 @@ public class ModelCoordinateVariations extends WeightedBakedModel {
         public IBakedModel handleBlockState(IBlockState state) {
             PropertyVariation VARIATION = null;
             if (state.getBlock() instanceof BlockCarvable) {
-                VARIATION = ((BlockCarvable) state.getBlock()).VARIATION;
+                VARIATION = ((BlockCarvable) state.getBlock()).variation;
             }
             IBlockResources r = SubBlockUtil.getResources(state.getBlock(), (Variation) state.getValue(VARIATION));
             List<BakedQuad> newQuads = generateQuads(state, r);

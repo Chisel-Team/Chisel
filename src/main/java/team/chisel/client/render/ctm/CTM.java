@@ -1,18 +1,41 @@
 package team.chisel.client.render.ctm;
 
-import team.chisel.client.render.IBlockResources;
-import team.chisel.common.block.BlockCarvable;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.common.property.IExtendedBlockState;
-import team.chisel.common.connections.CTMConnections;
-import team.chisel.common.connections.EnumConnection;
+import static team.chisel.common.util.Dir.BOTTOM;
+import static team.chisel.common.util.Dir.BOTTOM_LEFT;
+import static team.chisel.common.util.Dir.BOTTOM_RIGHT;
+import static team.chisel.common.util.Dir.LEFT;
+import static team.chisel.common.util.Dir.RIGHT;
+import static team.chisel.common.util.Dir.TOP;
+import static team.chisel.common.util.Dir.TOP_LEFT;
+import static team.chisel.common.util.Dir.TOP_RIGHT;
+import gnu.trove.map.TIntObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
+import java.util.EnumMap;
+
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.common.property.IExtendedBlockState;
+import team.chisel.api.IFacade;
+import team.chisel.common.util.Dir;
+import team.chisel.common.variation.PropertyVariation;
+import team.chisel.common.variation.Variation;
+
+import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Maps;
+
+// @formatter:off
 /**
  * The CTM renderer will draw the block's FACE using by assembling 4 quadrants from the 5 available block
  * textures.  The normal Texture.png is the blocks "unconnected" texture, and is used when CTM is disabled or the block
  * has nothing to connect to.  This texture has all of the outside corner quadrants  The texture-ctm.png contains the
  * rest of the quadrants.
- * <p/>
+ * <pre><blockquote>
  * ┌─────────────────┐ ┌────────────────────────────────┐
  * │ texture.png     │ │ texture-ctm.png                │
  * │ ╔══════╤══════╗ │ │  ──────┼────── ║ ─────┼───── ║ │
@@ -23,16 +46,16 @@ import team.chisel.common.connections.EnumConnection;
  * │ ║ 18   │ 19   ║ │ │ │ 4    │ 5    │║ 6    │ 7    ║ │
  * │ ╚══════╧══════╝ │ │  ──────┼────── ║ ─────┼───── ║ │
  * └─────────────────┘ │ ═══════╤═══════╝ ─────┼───── ╚ │
- * │ │      │      ││      │      │ │
- * │ │ 8    │ 9    ││ 10   │ 11   │ │
- * │ ┼──────┼──────┼┼──────┼──────┼ │
- * │ │      │      ││      │      │ │
- * │ │ 12   │ 13   ││ 14   │ 15   │ │
- * │ ═══════╧═══════╗ ─────┼───── ╔ │
- * └────────────────────────────────┘
- * <p/>
+ *                     │ │      │      ││      │      │ │
+ *                     │ │ 8    │ 9    ││ 10   │ 11   │ │
+ *                     │ ┼──────┼──────┼┼──────┼──────┼ │
+ *                     │ │      │      ││      │      │ │
+ *                     │ │ 12   │ 13   ││ 14   │ 15   │ │
+ *                     │ ═══════╧═══════╗ ─────┼───── ╔ │
+ *                     └────────────────────────────────┘
+ * </blockquote></pre>
  * combining { 18, 13,  9, 16 }, we can generate a texture connected to the right!
- * <p/>
+ * <pre><blockquote>
  * ╔══════╤═══════
  * ║      │      │
  * ║ 16   │ 9    │
@@ -40,10 +63,10 @@ import team.chisel.common.connections.EnumConnection;
  * ║      │      │
  * ║ 18   │ 13   │
  * ╚══════╧═══════
- * <p/>
- * <p/>
+ * </blockquote></pre>
+ *
  * combining { 18, 13, 11,  2 }, we can generate a texture, in the shape of an L (connected to the right, and up
- * <p/>
+ * <pre><blockquote>
  * ║ ─────┼───── ╚
  * ║      │      │
  * ║ 2    │ 11   │
@@ -51,29 +74,14 @@ import team.chisel.common.connections.EnumConnection;
  * ║      │      │
  * ║ 18   │ 13   │
  * ╚══════╧═══════
- * <p/>
- * <p/>
+ * </blockquote></pre>
+ *
  * HAVE FUN!
  * -CptRageToaster-
  */
-
+// @formatter:on
 public class CTM {
-
-    public static int remapCTM(int num) {
-        switch (num) {
-            case 16:
-                return 0;
-            case 17:
-                return 1;
-            case 18:
-                return 4;
-            case 19:
-                return 5;
-            default:
-                return num;
-        }
-    }
-
+	
     /**
      * The Uvs for the specific "magic number" value
      */
@@ -101,172 +109,202 @@ public class CTM {
             {0, 8, 8, 16}, // 18
             {8, 8, 16, 16} // 19
     };
+    
+	/** Some hardcoded offset values for the different corner indeces */
+	protected static int[] submapOffsets = { 4, 5, 1, 0 };
+	/** For use via the Chisel 2 config only, altering this could cause unintended behavior */
+	public static boolean disableObscuredFaceCheckConfig = false;
 
+	public Optional<Boolean> disableObscuredFaceCheck = Optional.absent();
+
+	protected TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
+	protected EnumMap<Dir, Boolean> connectionMap = Maps.newEnumMap(Dir.class);
+
+	protected CTM() {
+		for (Dir dir : Dir.VALUES) {
+			connectionMap.put(dir, false);
+		}
+
+		// Mapping the different corner indeces to their respective dirs
+		submapMap.put(0, new Dir[] { BOTTOM, LEFT, BOTTOM_LEFT });
+		submapMap.put(1, new Dir[] { BOTTOM, RIGHT, BOTTOM_RIGHT });
+		submapMap.put(2, new Dir[] { TOP, RIGHT, TOP_RIGHT });
+		submapMap.put(3, new Dir[] { TOP, LEFT, TOP_LEFT });
+	}
+
+	public static CTM getInstance() {
+		return new CTM();
+	}
+
+	/**
+	 * @param vARIATION 
+	 * @return The indeces of the typical 4x4 submap to use for the given face at the given location.
+	 * 
+	 *         Indeces are in counter-clockwise order starting at bottom left.
+	 */
+	public int[] getSubmapIndices(IExtendedBlockState state, EnumFacing side) {
+		int[] ret = new int[] { 18, 19, 17, 16 };
+
+		buildConnectionMap(state, side);
+
+		// Map connections to submap indeces
+		for (int i = 0; i < 4; i++) {
+			fillSubmaps(ret, i);
+		}
+
+		return ret;
+	}
+	
     public static boolean isDefaultTexture(int id) {
         return (id == 16 || id == 17 || id == 18 || id == 19);
     }
 
+	/**
+	 * Builds the connection map and stores it in this CTM instance. The {@link #connected(Dir)}, {@link #connectedAnd(Dir...)}, and {@link #connectedOr(Dir...)} methods can be used to access it.
+	 */
+	public void buildConnectionMap(IExtendedBlockState state, EnumFacing side) {
+		for (Dir dir : Dir.VALUES) {
+			connectionMap.put(dir, dir.isConnected(state, side));
+		}
+	}
 
-    public static int[] getSubmapIndices(IExtendedBlockState state, EnumFacing side, int type) {
-        if (!(state.getBlock() instanceof BlockCarvable)) {
-            return new int[]{18, 19, 17, 16};
-        }
+	private void fillSubmaps(int[] ret, int idx) {
+		Dir[] dirs = submapMap.get(idx);
+		if (connectedOr(dirs[0], dirs[1])) {
+			if (connectedAnd(dirs)) {
+				// If all dirs are connected, we use the fully connected face,
+				// the base offset value.
+				ret[idx] = submapOffsets[idx];
+			} else {
+				// This is a bit magic-y, but basically the array is ordered so
+				// the first dir requires an offset of 2, and the second dir
+				// requires an offset of 8, plus the initial offset for the
+				// corner.
+				ret[idx] = submapOffsets[idx] + (connected(dirs[0]) ? 2 : 0) + (connected(dirs[1]) ? 8 : 0);
+			}
+		}
+	}
 
-        CTMConnections connections = state.getValue(BlockCarvable.CONNECTIONS);
-        if (connections == null){
-            connections = new CTMConnections();
-        }
-//        boolean down = (Boolean) state.getValue(BlockCarvable.CONNECTED_DOWN);
-//        boolean up = (Boolean) state.getValue(BlockCarvable.CONNECTED_UP);
-//        boolean north = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH);
-//        boolean south = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH);
-//        boolean east = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST);
-//        boolean west = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST);
-//        boolean north_east = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_EAST);
-//        boolean north_west = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_WEST);
-//        boolean north_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_UP);
-//        boolean north_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_DOWN);
-//        boolean south_east = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_EAST);
-//        boolean south_west = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_WEST);
-//        boolean south_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_UP);
-//        boolean south_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_DOWN);
-//        boolean east_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST_UP);
-//        boolean east_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST_DOWN);
-//        boolean west_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST_UP);
-//        boolean west_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST_DOWN);
+	/**
+	 * @param dir
+	 *            The direction to check connection in.
+	 * @return True if the cached connectionMap holds a connection in this {@link Dir direction}.
+	 */
+	public boolean connected(Dir dir) {
+		return connectionMap.get(dir);
+	}
 
+	/**
+	 * @param dirs
+	 *            The directions to check connection in.
+	 * @return True if the cached connectionMap holds a connection in <i><b>all</b></i> the given {@link Dir directions}.
+	 */
+	public boolean connectedAnd(Dir... dirs) {
+		for (Dir dir : dirs) {
+			if (!connected(dir)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-        boolean b[] = new boolean[8];
-        /**
-         * b[0]    b[1]    b[2]
-         *
-         *
-         *
-         * b[3]    FACE    b[4]
-         *
-         *
-         *
-         * b[5]    b[6]    b[7]
-         */
-        if (side == EnumFacing.DOWN) {
-            b[0] = connections.isConnected(EnumConnection.SOUTH_WEST);//South West
-            b[1] = connections.isConnected(EnumConnection.SOUTH); // South
-            b[2] = connections.isConnected(EnumConnection.SOUTH_EAST); // South east
-            b[3] = connections.isConnected(EnumConnection.WEST); // West
-            b[4] = connections.isConnected(EnumConnection.EAST); //East
-            b[5] = connections.isConnected(EnumConnection.NORTH_WEST); // North West
-            b[6] = connections.isConnected(EnumConnection.NORTH); // North
-            b[7] = connections.isConnected(EnumConnection.NORTH_EAST); // North East
-        } else if (side == EnumFacing.UP) {
-            b[0] = connections.isConnected(EnumConnection.NORTH_WEST); //North West
-            b[1] = connections.isConnected(EnumConnection.NORTH); // North
-            b[2] = connections.isConnected(EnumConnection.NORTH_EAST); //North East
-            b[3] = connections.isConnected(EnumConnection.WEST); // West
-            b[4] = connections.isConnected(EnumConnection.EAST); // East
-            b[5] = connections.isConnected(EnumConnection.SOUTH_WEST); // South West
-            b[6] = connections.isConnected(EnumConnection.SOUTH); // South
-            b[7] = connections.isConnected(EnumConnection.SOUTH_EAST); //South East
-        } else if (side == EnumFacing.NORTH) {
-            b[0] = connections.isConnected(EnumConnection.EAST_UP); // Up East
-            b[1] = connections.isConnected(EnumConnection.UP); // Up
-            b[2] = connections.isConnected(EnumConnection.WEST_UP); // Up West
-            b[3] = connections.isConnected(EnumConnection.EAST); // East
-            b[4] = connections.isConnected(EnumConnection.WEST); // West
-            b[5] = connections.isConnected(EnumConnection.EAST_DOWN); // Down East
-            b[6] = connections.isConnected(EnumConnection.DOWN); // Down
-            b[7] = connections.isConnected(EnumConnection.WEST_DOWN); // Down West
-        } else if (side == EnumFacing.SOUTH) {
-            b[0] = connections.isConnected(EnumConnection.WEST_UP); // Up West
-            b[1] = connections.isConnected(EnumConnection.UP); // Up
-            b[2] = connections.isConnected(EnumConnection.EAST_UP); // Up East
-            b[3] = connections.isConnected(EnumConnection.WEST); // West
-            b[4] = connections.isConnected(EnumConnection.EAST); // East
-            b[5] = connections.isConnected(EnumConnection.WEST_DOWN); // Down West
-            b[6] = connections.isConnected(EnumConnection.DOWN); // Down
-            b[7] = connections.isConnected(EnumConnection.EAST_DOWN); // Down East
-        } else if (side == EnumFacing.WEST) {
-            b[0] = connections.isConnected(EnumConnection.NORTH_UP); //Up North
-            b[1] = connections.isConnected(EnumConnection.UP); // Up
-            b[2] = connections.isConnected(EnumConnection.SOUTH_UP); // Up South
-            b[3] = connections.isConnected(EnumConnection.NORTH); // North
-            b[4] = connections.isConnected(EnumConnection.SOUTH); // South
-            b[5] = connections.isConnected(EnumConnection.NORTH_DOWN); // Down North
-            b[6] = connections.isConnected(EnumConnection.DOWN); // Down
-            b[7] = connections.isConnected(EnumConnection.SOUTH_DOWN); // Down South
-        } else if (side == EnumFacing.EAST) {
-            b[0] = connections.isConnected(EnumConnection.SOUTH_UP); // Up South
-            b[1] = connections.isConnected(EnumConnection.UP); // Up
-            b[2] = connections.isConnected(EnumConnection.NORTH_UP); // Up North
-            b[3] = connections.isConnected(EnumConnection.SOUTH); // South
-            b[4] = connections.isConnected(EnumConnection.NORTH); // North
-            b[5] = connections.isConnected(EnumConnection.SOUTH_DOWN); //Down South
-            b[6] = connections.isConnected(EnumConnection.DOWN); // Down
-            b[7] = connections.isConnected(EnumConnection.NORTH_DOWN); // Down North
-        }
+	/**
+	 * @param dirs
+	 *            The directions to check connection in.
+	 * @return True if the cached connectionMap holds a connection in <i><b>one of</b></i> the given {@link Dir directions}.
+	 */
+	private boolean connectedOr(Dir... dirs) {
+		for (Dir dir : dirs) {
+			if (connected(dir)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-        int[] ret = new int[]{18, 19, 17, 16};
+	/**
+	 * Whether it is connected on the specified side
+	 *
+	 * @param world
+	 *            The World
+	 * @param pos
+	 *            The Block pos
+	 * @param facing
+	 *            The Side
+	 * @return Whether it is connected
+	 */
+	public boolean isConnected(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+		return blockStatesEqual(getBlockOrFacade(world, pos, facing), getBlockOrFacade(world, pos.offset(facing), facing));
+	}
 
-        /**
-         * b[0]    b[1]    b[2]
-         *
-         *
-         *
-         * b[3]    FACE    b[4]
-         *
-         *
-         *
-         * b[5]    b[6]    b[7]
-         */
-        if (side != EnumFacing.UP && side != EnumFacing.DOWN) {
-            if (type == IBlockResources.CTMH) {
-                if (b[3] && b[4]) {
-                    return new int[]{6, 7, 3, 2}; //top right
-                } else if (b[4]) {
-                    return new int[]{12, 13, 9, 8}; //bottom left
-                } else if (b[3]) {
-                    return new int[]{14, 15, 11, 10}; //bottom right
-                } else {
-                    return new int[]{4, 5, 1, 0}; //top left
-                }
-            } else if (type == IBlockResources.CTMV) {
-                if (b[1] && b[6]) {
-                    return new int[]{12, 13, 9, 8}; //bottom left
-                } else if (b[1]) {
-                    return new int[]{14, 15, 11, 10}; //bottom right
-                } else if (b[6]) {
-                    return new int[]{6, 7, 3, 2}; //top right
-                } else {
-                    return new int[]{4, 5, 1, 0}; //top left
-                }
+	/**
+	 * Whether it is connected on the specified side
+	 *
+	 * @param world
+	 *            The World
+	 * @param x
+	 *            The Block x position
+	 * @param y
+	 *            The Block y position
+	 * @param z
+	 *            The Block z position
+	 * @param facing
+	 *            The Side
+	 * @return Whether it is connected
+	 */
+	public boolean isConnected(IBlockAccess world, int x, int y, int z, EnumFacing facing) {
+		return isConnected(world, new BlockPos(x, y, z), facing);
+	}
+
+    /**
+     * Returns whether the two block states are equal to each other
+     *
+     * @param state1 The First Block State
+     * @param state2 The Second Block State
+     * @return Whether they are equal
+     */
+    @SuppressWarnings("unchecked")
+	public boolean blockStatesEqual(IBlockState state1, IBlockState state2) {
+        for (IProperty p : (ImmutableSet<IProperty>) state1.getProperties().keySet()) {
+            if (!state2.getProperties().containsKey(p)) {
+                return false;
+            }
+            if (state1.getValue(p) != state2.getValue(p)) {
+                return false;
             }
         }
-
-        // Bottom Left
-        if (b[3] || b[6]) {
-            ret[0] = 4 + (b[6] ? 2 : 0) + (b[3] ? 8 : 0);
-            if (b[3] && b[5] && b[6]) ret[0] = 4;
-        }
-
-        // Bottom Right
-        if (b[6] || b[4]) {
-            ret[1] = 5 + (b[6] ? 2 : 0) + (b[4] ? 8 : 0);
-            if (b[4] && b[6] && b[7]) ret[1] = 5;
-        }
-
-        // Top Right
-        if (b[4] || b[1]) {
-            ret[2] = 1 + (b[1] ? 2 : 0) + (b[4] ? 8 : 0);
-            if (b[1] && b[2] && b[4]) ret[2] = 1;
-        }
-
-        // Top Left
-        if (b[1] || b[3]) {
-            ret[3] = (b[1] ? 2 : 0) + (b[3] ? 8 : 0);
-            if (b[0] && b[1] && b[3]) ret[3] = 0;
-        }
-
-        return ret;
+        return state1.getBlock() == state2.getBlock();
     }
 
+    /**
+     * Returns whether the two blocks are equal ctm blocks
+     *
+     * @param state1 First state
+     * @param state2 Second state
+     * @return Whether they are the same block
+     */
+    public boolean areBlocksEqual(IBlockState state1, IBlockState state2, PropertyVariation variation) {
+        return (state1.getBlock() == state2.getBlock() && ((Variation) state1.getValue(variation)).equals((Variation) state2.getValue(variation)));
+    }
+
+    /**
+     * Whether the two positions
+     *
+     * @param w
+     * @param pos1
+     * @param pos2
+     * @return
+     */
+    public boolean isConnected(World w, BlockPos pos1, BlockPos pos2, PropertyVariation variation) {
+        return areBlocksEqual(w.getBlockState(pos1), w.getBlockState(pos2), variation);
+    }
+    
+	public IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, EnumFacing side) {
+		IBlockState state = world.getBlockState(pos);
+		if (state.getBlock() instanceof IFacade) {
+			return ((IFacade) state.getBlock()).getFacade(world, pos, side);
+		}
+		return state;
+	}
 
 }

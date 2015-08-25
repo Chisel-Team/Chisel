@@ -1,22 +1,11 @@
 package team.chisel.common.block;
 
-import team.chisel.api.IFacade;
-import team.chisel.client.render.BlockResources;
-import team.chisel.client.render.IBlockResources;
-import team.chisel.common.CarvableBlocks;
-import team.chisel.common.block.subblocks.ISubBlock;
-import team.chisel.common.connections.CTMConnections;
-import team.chisel.common.connections.EnumConnection;
-import team.chisel.common.connections.PropertyCTMConnections;
-import team.chisel.common.init.ChiselTabs;
-import team.chisel.common.util.SubBlockUtil;
-import team.chisel.common.variation.PropertyVariation;
-import team.chisel.common.variation.Variation;
-import com.google.common.collect.ImmutableSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
@@ -27,7 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
@@ -36,31 +25,37 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.common.property.Properties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.ArrayList;
-import java.util.List;
+import team.chisel.client.render.BlockResources;
+import team.chisel.client.render.IBlockResources;
+import team.chisel.client.render.ctm.CTM;
+import team.chisel.common.CarvableBlocks;
+import team.chisel.common.block.subblocks.ISubBlock;
+import team.chisel.common.connections.CTMConnections;
+import team.chisel.common.connections.EnumConnection;
+import team.chisel.common.connections.PropertyCTMConnections;
+import team.chisel.common.init.ChiselTabs;
+import team.chisel.common.util.SubBlockUtil;
+import team.chisel.common.variation.PropertyVariation;
+import team.chisel.common.variation.Variation;
 
 /**
  * Represents a Carvable (aka Chisilable) block
  */
-public class BlockCarvable extends Block {
+public class BlockCarvable extends Block implements ICarvable {
 
     /**
      * The Property for the variation of this block
      */
-    public PropertyVariation VARIATION;
+    public PropertyVariation variation;
 
     public static final PropertyCTMConnections CONNECTIONS = new PropertyCTMConnections();
-
-
+    
     /**
      * X Y and Z modules for coordinate variation
      */
-    public static final IUnlistedProperty XMODULES = Properties.toUnlisted(PropertyInteger.create("X Modules", 0, 4));
-    public static final IUnlistedProperty YMODULES = Properties.toUnlisted(PropertyInteger.create("V Section", 0, 4));
-    public static final IUnlistedProperty ZMODULES = Properties.toUnlisted(PropertyInteger.create("Z Section", 0, 4));
-
-
+    public static final IUnlistedProperty<Integer> XMODULES = Properties.toUnlisted(PropertyInteger.create("X Modules", 0, 4));
+    public static final IUnlistedProperty<Integer> YMODULES = Properties.toUnlisted(PropertyInteger.create("V Section", 0, 4));
+    public static final IUnlistedProperty<Integer> ZMODULES = Properties.toUnlisted(PropertyInteger.create("Z Section", 0, 4));
 
     private CarvableBlocks type;
 
@@ -75,6 +70,7 @@ public class BlockCarvable extends Block {
 
     private BlockState realBlockState;
 
+    private final CTM ctm = CTM.getInstance();
 
     public BlockCarvable(CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p, boolean isBeaconBase) {
         this(Material.rock, type, subBlocksAmount, index, p, isBeaconBase);
@@ -86,7 +82,7 @@ public class BlockCarvable extends Block {
         subBlocks = new ISubBlock[subBlocksAmount];
         this.type = type;
         this.index = index;
-        this.VARIATION = p;
+        this.variation = p;
         this.fullBlock = isOpaqueCube();
         this.realBlockState = createRealBlockState(p);
         setupStates();
@@ -101,21 +97,23 @@ public class BlockCarvable extends Block {
         return this.realBlockState;
     }
 
-    public int getIndex() {
-        return this.index;
-    }
+	@Override
+	public int getIndex() {
+		return this.index;
+	}
 
-    public int getTotalVariations(){
-        return getType().getVariants().length-(16*getIndex());
-    }
+	@Override
+	public ISubBlock getSubBlock(int meta) {
+		return subBlocks[MathHelper.clamp_int(meta, 0, subBlocks.length)];
+	}
 
-    private BlockState createRealBlockState(PropertyVariation p) {
-//        return new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
-//                CONNECTED_NORTH_EAST, CONNECTED_NORTH_WEST, CONNECTED_NORTH_UP, CONNECTED_NORTH_DOWN, CONNECTED_SOUTH_EAST, CONNECTED_SOUTH_WEST,
-//                CONNECTED_SOUTH_UP, CONNECTED_SOUTH_DOWN, CONNECTED_EAST_UP, CONNECTED_EAST_DOWN, CONNECTED_WEST_UP, CONNECTED_WEST_DOWN, XMODULES, YMODULES, ZMODULES});
-        return new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTIONS});
-    }
+	public int getTotalVariations() {
+		return getType().getVariants().length - (16 * getIndex());
+	}
 
+	private BlockState createRealBlockState(PropertyVariation p) {
+		return new ExtendedBlockState(this, new IProperty[] { p }, new IUnlistedProperty[] { CONNECTIONS });
+	}
 
     @Override
     public BlockState createBlockState() {
@@ -124,15 +122,9 @@ public class BlockCarvable extends Block {
 
     private void setupStates() {
         Variation v = type.getVariants()[getIndex() * 16];
-//        this.setDefaultState(getExtendedBlockState().withProperty(CONNECTED_DOWN, false).
-//                withProperty(CONNECTED_UP, false).withProperty(CONNECTED_NORTH, false).withProperty(CONNECTED_SOUTH, false).
-//                withProperty(CONNECTED_EAST, false).withProperty(CONNECTED_WEST, false).withProperty(CONNECTED_NORTH_EAST, false).
-//                withProperty(CONNECTED_NORTH_WEST, false).withProperty(CONNECTED_NORTH_UP, false).withProperty(CONNECTED_NORTH_DOWN, false).
-//                withProperty(CONNECTED_SOUTH_EAST, false).withProperty(CONNECTED_SOUTH_WEST, false).withProperty(CONNECTED_SOUTH_UP, false).
-//                withProperty(CONNECTED_SOUTH_DOWN, false).withProperty(CONNECTED_EAST_UP, false).withProperty(CONNECTED_EAST_DOWN, false).
-//                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(XMODULES, 0).withProperty(YMODULES, 0)
-//                .withProperty(ZMODULES, 0).withProperty(VARIATION, v));
-        this.setDefaultState(getExtendedBlockState().withProperty(CONNECTIONS, new CTMConnections()).withProperty(VARIATION, v));
+        this.setDefaultState(getExtendedBlockState()
+        	.withProperty(CONNECTIONS, new CTMConnections())
+        	.withProperty(variation, v));
     }
 
     public ExtendedBlockState getBaseExtendedState() {
@@ -151,26 +143,12 @@ public class BlockCarvable extends Block {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         Variation v = Variation.fromMeta(type, meta, getIndex());
-        return getBlockState().getBaseState().withProperty(VARIATION, v);
+        return getBlockState().getBaseState().withProperty(variation, v);
     }
-
-//    @Override
-//    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer){
-//        IBlockState state = getStateFromMeta(meta);
-//        Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
-//        state.withProperty(VARIATION, v);
-//        Chisel.logger.info("Setting variation for "+((BlockCarvable) state.getBlock()).getName()+" to "+v+ " placed");
-//        Chisel.logger.info("Variation is "+state.getValue(VARIATION));
-//        return state;
-//    }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-//        if (state.getBlock() instanceof BlockCarvable){
-//            BlockCarvable b = (BlockCarvable)state.getBlock();
-//            return Variation.metaFromVariation(b.getType(), (Variation) state.getValue(VARIATION));
-//        }
-        return Variation.metaFromVariation(type, (Variation) state.getValue(VARIATION));
+        return Variation.metaFromVariation(type, (Variation) state.getValue(variation));
     }
 
     /**
@@ -259,198 +237,45 @@ public class BlockCarvable extends Block {
         return this.type;
     }
 
+	@Override
+	public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
+		if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial() == Material.air) {
+			return stateIn;
+		}
+		IExtendedBlockState state = (IExtendedBlockState) stateIn;
+		Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
+		IBlockResources res = SubBlockUtil.getResources(state.getBlock(), v);
+		if (res.getType() == IBlockResources.V4 || res.getType() == IBlockResources.V9) {
+			int variationSize = BlockResources.getVariationWidth(res.getType());
+			int xModulus = Math.abs(pos.getX() % variationSize);
+			int zModulus = Math.abs(pos.getZ() % variationSize);
+			int yModules = Math.abs(pos.getY() % variationSize);
+			return state.withProperty(XMODULES, xModulus).withProperty(YMODULES, yModules).withProperty(ZMODULES, zModulus);
+		} else if (res.getType() == IBlockResources.NORMAL || res.getType() == IBlockResources.R9 || res.getType() == IBlockResources.R4 || res.getType() == IBlockResources.R16) {
+			return stateIn;
+		}
+		List<EnumConnection> connections = new ArrayList<EnumConnection>();
+		for (EnumConnection connection : EnumConnection.values()) {
+			if (ctm.areBlocksEqual(state, connection.getBlockAt(pos, w), variation)) {
+				connections.add(connection);
+			}
+		}
 
-//    @Override
-//    public IBlockState getActualState(IBlockState state, IBlockAccess w, BlockPos pos){
-//        if (state.getBlock() instanceof BlockCarvable){
-//            Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
-//            state.withProperty(VARIATION, v);
-//            Chisel.logger.info("Setting variation for "+((BlockCarvable) state.getBlock()).getName()+" to "+v+ " basic");
-//        }
-//        return state;
-//    }
-
-    @Override
-    public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
-        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial() == Material.air) {
-            return stateIn;
-        }
-        IExtendedBlockState state = (IExtendedBlockState) stateIn;
-        Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
-        IBlockResources res = SubBlockUtil.getResources(state.getBlock(), v);
-        if (res.getType() == IBlockResources.V4 || res.getType() == IBlockResources.V9) {
-            int variationSize = BlockResources.getVariationWidth(res.getType());
-            int xModulus = Math.abs(pos.getX() % variationSize);
-            int zModulus = Math.abs(pos.getZ() % variationSize);
-            int yModules = Math.abs(pos.getY() % variationSize);
-            return state.withProperty(XMODULES, xModulus).withProperty(YMODULES, yModules).withProperty(ZMODULES, zModulus);
-        } else if (res.getType() == IBlockResources.NORMAL || res.getType() == IBlockResources.R9 || res.getType() == IBlockResources.R4 || res.getType() == IBlockResources.R16) {
-            return stateIn;
-        }
-        List<EnumConnection> connections = new ArrayList<EnumConnection>();
-        for (EnumConnection connection : EnumConnection.values()){
-            if (areBlocksEqual(state, connection.getBlockAt(pos, w))){
-                connections.add(connection);
-            }
-        }
-
-
-//        if (areBlocksEqual(state, w.getBlockState(pos.up()))) {
-//            connections.add();
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.down()))) {
-//            down = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.north()))) {
-//            north = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.south()))) {
-//            south = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.east()))) {
-//            east = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.west()))) {
-//            west = true;
-//        }
-//
-//        if (areBlocksEqual(state, w.getBlockState(pos.north().east()))) {
-//            north_east = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.north().west()))) {
-//            north_west = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.north().up()))) {
-//            north_up = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.north().down()))) {
-//            north_down = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.south().east()))) {
-//            south_east = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.south().west()))) {
-//            south_west = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.south().up()))) {
-//            south_up = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.south().down()))) {
-//            south_down = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.east().up()))) {
-//            east_up = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.east().down()))) {
-//            east_down = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.west().up()))) {
-//            west_up = true;
-//        }
-//        if (areBlocksEqual(state, w.getBlockState(pos.west().down()))) {
-//            west_down = true;
-//        }
-
-        return state.withProperty(CONNECTIONS, new CTMConnections(connections));
-//        return state.withProperty(CONNECTED_UP, up).withProperty(CONNECTED_DOWN, down).withProperty(CONNECTED_NORTH, north).
-//                withProperty(CONNECTED_SOUTH, south).withProperty(CONNECTED_EAST, east).withProperty(CONNECTED_WEST, west)
-//                .withProperty(CONNECTED_NORTH_EAST, north_east).withProperty(CONNECTED_NORTH_WEST, north_west).
-//                        withProperty(CONNECTED_NORTH_UP, north_up).withProperty(CONNECTED_NORTH_DOWN, north_down).
-//                        withProperty(CONNECTED_SOUTH_EAST, south_east).withProperty(CONNECTED_SOUTH_WEST, south_west).
-//                        withProperty(CONNECTED_SOUTH_UP, south_up).withProperty(CONNECTED_SOUTH_DOWN, south_down).
-//                        withProperty(CONNECTED_EAST_UP, east_up).withProperty(CONNECTED_EAST_DOWN, east_down).
-//                        withProperty(CONNECTED_WEST_UP, west_up).withProperty(CONNECTED_WEST_DOWN, west_down);
-    }
-
-    /**
-     * Whether it is connected on the specified side
-     *
-     * @param world  The World
-     * @param pos    The Block pos
-     * @param facing The Side
-     * @return Whether it is connected
-     */
-    public static boolean isConnected(IBlockAccess world, BlockPos pos, EnumFacing facing) {
-        return blockStatesEqual(getBlockOrFacade(world, pos, facing), getBlockOrFacade(world, pos(pos.getX() + facing.getFrontOffsetX(),
-                pos.getY() + facing.getFrontOffsetY(), pos.getZ() + facing.getFrontOffsetZ()), facing));
-    }
-
-    /**
-     * Whether it is connected on the specified side
-     *
-     * @param world  The World
-     * @param x      The Block x position
-     * @param y      The Block y position
-     * @param z      The Block z position
-     * @param facing The Side
-     * @return Whether it is connected
-     */
-    public static boolean isConnected(IBlockAccess world, int x, int y, int z, EnumFacing facing) {
-        return isConnected(world, pos(x, y, z), facing);
-    }
-
-
-    public static IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, EnumFacing side) {
-        IBlockState state = world.getBlockState(pos);
-        if (state.getBlock() instanceof IFacade) {
-            return ((IFacade) state.getBlock()).getFacade(world, pos, side);
-        }
-        return state;
-    }
+		return state.withProperty(CONNECTIONS, new CTMConnections(connections));
+	}
 
     public static BlockPos pos(int x, int y, int z) {
         return new BlockPos(x, y, z);
     }
 
-    /**
-     * Returns whether the two block states are equal to each other
-     *
-     * @param state1 The First Block State
-     * @param state2 The Second Block State
-     * @return Whether they are equal
-     */
-    public static boolean blockStatesEqual(IBlockState state1, IBlockState state2) {
-        for (IProperty p : (ImmutableSet<IProperty>) state1.getProperties().keySet()) {
-            if (!state2.getProperties().containsKey(p)) {
-                return false;
-            }
-            if (state1.getValue(p) != state2.getValue(p)) {
-                return false;
-            }
-        }
-        return state1.getBlock() == state2.getBlock();
-    }
-
-    /**
-     * Returns whether the two blocks are equal ctm blocks
-     *
-     * @param state1 First state
-     * @param state2 Second state
-     * @return Whether they are the same block
-     */
-    public boolean areBlocksEqual(IBlockState state1, IBlockState state2) {
-        return (state1.getBlock() == state2.getBlock() && ((Variation) state1.getValue(VARIATION)).equals((Variation) state2.getValue(VARIATION)));
-    }
-
-    /**
-     * Whether the two positions
-     *
-     * @param w
-     * @param pos1
-     * @param pos2
-     * @return
-     */
-    public boolean isConnected(World w, BlockPos pos1, BlockPos pos2) {
-        return areBlocksEqual(w.getBlockState(pos1), w.getBlockState(pos2));
-    }
-
     @Override
     @SideOnly(Side.CLIENT)
     public int getMixedBrightnessForBlock(IBlockAccess worldIn, BlockPos pos) {
-        return 0xf << 20;
+        return super.getMixedBrightnessForBlock(worldIn, pos);
     }
 
-    @Override
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         int curIndex = 0;
@@ -465,7 +290,6 @@ public class BlockCarvable extends Block {
             list.add(stack);
         }
     }
-
 
     @Override
     public int getRenderType() {
@@ -482,12 +306,12 @@ public class BlockCarvable extends Block {
 
     @Override
     public boolean isFullCube() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isVisuallyOpaque() {
-        return false;
+        return true;
     }
 
     @Override
@@ -506,7 +330,6 @@ public class BlockCarvable extends Block {
 
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn) {
-        type.onEntityCollidedWithBlock(worldIn, pos, entityIn);
-    }
-
+		type.onEntityCollidedWithBlock(worldIn, pos, entityIn);
+	}
 }

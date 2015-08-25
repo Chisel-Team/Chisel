@@ -84,7 +84,7 @@ public class ModelCTM implements ISmartBlockModel {
         // /throw new RuntimeException(state.getValue(BlockCarvable.VARIATION).toString());
         PropertyVariation VARIATION = null;
         if (state.getBlock() instanceof BlockCarvable) {
-            VARIATION = ((BlockCarvable) state.getBlock()).VARIATION;
+            VARIATION = ((BlockCarvable) state.getBlock()).variation;
         }
         List<BakedQuad> newQuads = generateQuads(state, VARIATION);
         this.quads = newQuads;
@@ -98,14 +98,12 @@ public class ModelCTM implements ISmartBlockModel {
         if (state.getBlock() instanceof BlockCarvable) {
             ISubBlock subBlock = ((BlockCarvable) state.getBlock()).getSubBlock(variation);
             if (subBlock instanceof ICTMSubBlock) {
-                ICTMSubBlock ctmSubBlock = (ICTMSubBlock) subBlock;
-                for (EnumFacing f : EnumFacing.values()) {
-                    if (!isTouchingSide(state, f)) {
-                        CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getSubmapIndices((IExtendedBlockState) state, f, ctmSubBlock.getResources().getType())
-                        ).addToList(newQuads);
-                    }
-                }
-
+				ICTMSubBlock ctmSubBlock = (ICTMSubBlock) subBlock;
+				for (EnumFacing f : EnumFacing.values()) {
+					if (!isTouchingSide(state, f)) {
+						CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getInstance().getSubmapIndices((IExtendedBlockState) state, f)).addToList(newQuads);
+					}
+				}
             }
         }
         return newQuads;

@@ -178,8 +178,8 @@ public class CTMFaceBakery extends FaceBakery implements Reference {
             s = resources.ctmTexture;
         }
         if (resources.type == IBlockResources.CTMH || resources.type == IBlockResources.CTMV) {
-            int old = quad;
-            quad = CTM.remapCTM(quad);
+//            int old = quad;
+//            quad = CTM.remapCTM(quad);
             //Chisel.logger.info("Remapping ctm(h/v) "+old+" to "+quad);
         }
         ModelCTM.QuadPos pos = getCorrectQuadPos(side, quadSection);

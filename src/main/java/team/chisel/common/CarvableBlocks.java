@@ -684,7 +684,7 @@ public enum CarvableBlocks implements Reference {
 //                }
                 block.setHardness(b.getBlockHardness());
                 block.setLightOpacity(b.getOpacity());
-                if (block.VARIATION == null) {
+                if (block.variation == null) {
                     throw new RuntimeException("Variation is null");
                 }
                 int count = 0;

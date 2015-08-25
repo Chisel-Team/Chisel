@@ -1,7 +1,12 @@
 package team.chisel.common.connections;
 
+import java.util.Map;
+
+import com.google.common.collect.Maps;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 
 /**
@@ -29,9 +34,12 @@ public enum EnumConnection {
     EAST_UP(pos().east().up()),
     EAST_DOWN(pos().east().down()),
     WEST_UP(pos().west().up()),
-    WEST_DOWN(pos().west().down())
-    ;
+    WEST_DOWN(pos().west().down());
 
+    public static final EnumConnection[] VALUES = values();
+    
+    private static final Map<BlockPos, EnumConnection> vecMap = Maps.newHashMap();
+    
     private BlockPos positionVector;
 
     /**
@@ -46,6 +54,27 @@ public enum EnumConnection {
         return new BlockPos(0, 0, 0);
     }
 
+    public static EnumConnection fromFacings(EnumFacing... facings) {
+    	BlockPos vec = pos();
+    	for (EnumFacing f : facings) {
+    		vec = vec.offset(f);
+    	}
+    	return fromVec(vec);
+    }
+    
+    public static EnumConnection fromVec(BlockPos vec) {
+    	EnumConnection ret = vecMap.get(vec);
+    	if (ret == null) {
+    		for (EnumConnection c : VALUES) {
+    			if (c.positionVector.equals(vec)) {
+    				vecMap.put(vec, c);
+    				ret = c;
+    			}
+    		}
+    	}
+    	return ret;
+    }
+    
     public IBlockState getBlockAt(BlockPos origin, IBlockAccess w){
         return w.getBlockState(origin.add(positionVector));
     }
