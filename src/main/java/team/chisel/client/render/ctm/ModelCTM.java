@@ -3,6 +3,8 @@ package team.chisel.client.render.ctm;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.subblocks.ICTMSubBlock;
 import team.chisel.common.block.subblocks.ISubBlock;
+import team.chisel.common.connections.CTMConnections;
+import team.chisel.common.connections.EnumConnection;
 import team.chisel.common.util.SubBlockUtil;
 import team.chisel.common.variation.PropertyVariation;
 import team.chisel.common.variation.Variation;
@@ -98,8 +100,10 @@ public class ModelCTM implements ISmartBlockModel {
             if (subBlock instanceof ICTMSubBlock) {
                 ICTMSubBlock ctmSubBlock = (ICTMSubBlock) subBlock;
                 for (EnumFacing f : EnumFacing.values()) {
-                    CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getSubmapIndices((IExtendedBlockState) state, f, ctmSubBlock.getResources().getType())
-                    ).addToList(newQuads);
+                    if (!isTouchingSide(state, f)) {
+                        CTMFaceBakery.instance.makeCtmFace(f, ctmSubBlock.getResources(), CTM.getSubmapIndices((IExtendedBlockState) state, f, ctmSubBlock.getResources().getType())
+                        ).addToList(newQuads);
+                    }
                 }
 
             }
@@ -115,28 +119,23 @@ public class ModelCTM implements ISmartBlockModel {
             return false;
         }
         IExtendedBlockState state = (IExtendedBlockState) inState;
-        boolean up = (Boolean) state.getValue(BlockCarvable.CONNECTED_UP);
-        boolean down = (Boolean) state.getValue(BlockCarvable.CONNECTED_DOWN);
-        boolean north = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH);
-        boolean south = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH);
-        boolean west = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST);
-        boolean east = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST);
-        if (up && f == EnumFacing.UP) {
+        CTMConnections connections = state.getValue(BlockCarvable.CONNECTIONS);
+        if (connections.isConnected(EnumConnection.UP) && f == EnumFacing.UP) {
             return true;
         }
-        if (down && f == EnumFacing.DOWN) {
+        if (connections.isConnected(EnumConnection.DOWN) && f == EnumFacing.DOWN) {
             return true;
         }
-        if (north && f == EnumFacing.NORTH) {
+        if (connections.isConnected(EnumConnection.NORTH) && f == EnumFacing.NORTH) {
             return true;
         }
-        if (south && f == EnumFacing.SOUTH) {
+        if (connections.isConnected(EnumConnection.SOUTH) && f == EnumFacing.SOUTH) {
             return true;
         }
-        if (west && f == EnumFacing.WEST) {
+        if (connections.isConnected(EnumConnection.WEST) && f == EnumFacing.WEST) {
             return true;
         }
-        if (east && f == EnumFacing.EAST) {
+        if (connections.isConnected(EnumConnection.EAST) && f == EnumFacing.EAST) {
             return true;
         }
         return false;

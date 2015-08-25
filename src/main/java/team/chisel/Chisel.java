@@ -4,6 +4,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import org.apache.commons.lang3.StringUtils;
 import team.chisel.client.command.CommandTest;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.common.CarvableBlocks;
@@ -39,7 +40,7 @@ public class Chisel implements Reference {
 
     public static ItemChisel itemChisel;
 
-    public static final boolean debug = true;
+    public static final boolean debug = StringUtils.isEmpty(System.getProperty("chisel.debug"));
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {

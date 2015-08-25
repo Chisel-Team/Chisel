@@ -7,7 +7,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 /**
- * To be implemented on blocks that "hide" another block inside, so connected textuers can still be
+ * To be implemented on blocks that "hide" another block inside, so connected textures can still be
  * accomplished.
  */
 public interface IFacade {

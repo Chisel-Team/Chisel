@@ -5,6 +5,9 @@ import team.chisel.client.render.BlockResources;
 import team.chisel.client.render.IBlockResources;
 import team.chisel.common.CarvableBlocks;
 import team.chisel.common.block.subblocks.ISubBlock;
+import team.chisel.common.connections.CTMConnections;
+import team.chisel.common.connections.EnumConnection;
+import team.chisel.common.connections.PropertyCTMConnections;
 import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.SubBlockUtil;
 import team.chisel.common.variation.PropertyVariation;
@@ -34,6 +37,7 @@ import net.minecraftforge.common.property.Properties;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +50,8 @@ public class BlockCarvable extends Block {
      */
     public PropertyVariation VARIATION;
 
+    public static final PropertyCTMConnections CONNECTIONS = new PropertyCTMConnections();
+
 
     /**
      * X Y and Z modules for coordinate variation
@@ -54,30 +60,6 @@ public class BlockCarvable extends Block {
     public static final IUnlistedProperty YMODULES = Properties.toUnlisted(PropertyInteger.create("V Section", 0, 4));
     public static final IUnlistedProperty ZMODULES = Properties.toUnlisted(PropertyInteger.create("Z Section", 0, 4));
 
-    /**
-     * These are used for connected textures
-     */
-    public static final IUnlistedProperty CONNECTED_DOWN = Properties.toUnlisted(PropertyBool.create("Connected Down"));
-    public static final IUnlistedProperty CONNECTED_UP = Properties.toUnlisted(PropertyBool.create("Connected Up"));
-    public static final IUnlistedProperty CONNECTED_NORTH = Properties.toUnlisted(PropertyBool.create("Connected North"));
-    public static final IUnlistedProperty CONNECTED_SOUTH = Properties.toUnlisted(PropertyBool.create("Connected South"));
-    public static final IUnlistedProperty CONNECTED_EAST = Properties.toUnlisted(PropertyBool.create("Connected East"));
-    public static final IUnlistedProperty CONNECTED_WEST = Properties.toUnlisted(PropertyBool.create("Connected West"));
-    /**
-     * For connected textures corners 12
-     */
-    public static final IUnlistedProperty CONNECTED_NORTH_EAST = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_NORTH_WEST = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_NORTH_UP = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_NORTH_DOWN = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_SOUTH_EAST = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_SOUTH_WEST = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_SOUTH_UP = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_SOUTH_DOWN = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_EAST_UP = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_EAST_DOWN = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_WEST_UP = Properties.toUnlisted(PropertyBool.create("Connected North East"));
-    public static final IUnlistedProperty CONNECTED_WEST_DOWN = Properties.toUnlisted(PropertyBool.create("Connected North East"));
 
 
     private CarvableBlocks type;
@@ -128,10 +110,10 @@ public class BlockCarvable extends Block {
     }
 
     private BlockState createRealBlockState(PropertyVariation p) {
-        ExtendedBlockState state = new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
-                CONNECTED_NORTH_EAST, CONNECTED_NORTH_WEST, CONNECTED_NORTH_UP, CONNECTED_NORTH_DOWN, CONNECTED_SOUTH_EAST, CONNECTED_SOUTH_WEST,
-                CONNECTED_SOUTH_UP, CONNECTED_SOUTH_DOWN, CONNECTED_EAST_UP, CONNECTED_EAST_DOWN, CONNECTED_WEST_UP, CONNECTED_WEST_DOWN, XMODULES, YMODULES, ZMODULES});
-        return state;
+//        return new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTED_DOWN, CONNECTED_UP, CONNECTED_NORTH, CONNECTED_SOUTH, CONNECTED_WEST, CONNECTED_EAST,
+//                CONNECTED_NORTH_EAST, CONNECTED_NORTH_WEST, CONNECTED_NORTH_UP, CONNECTED_NORTH_DOWN, CONNECTED_SOUTH_EAST, CONNECTED_SOUTH_WEST,
+//                CONNECTED_SOUTH_UP, CONNECTED_SOUTH_DOWN, CONNECTED_EAST_UP, CONNECTED_EAST_DOWN, CONNECTED_WEST_UP, CONNECTED_WEST_DOWN, XMODULES, YMODULES, ZMODULES});
+        return new ExtendedBlockState(this, new IProperty[]{p}, new IUnlistedProperty[]{CONNECTIONS});
     }
 
 
@@ -142,14 +124,15 @@ public class BlockCarvable extends Block {
 
     private void setupStates() {
         Variation v = type.getVariants()[getIndex() * 16];
-        this.setDefaultState(getExtendedBlockState().withProperty(CONNECTED_DOWN, false).
-                withProperty(CONNECTED_UP, false).withProperty(CONNECTED_NORTH, false).withProperty(CONNECTED_SOUTH, false).
-                withProperty(CONNECTED_EAST, false).withProperty(CONNECTED_WEST, false).withProperty(CONNECTED_NORTH_EAST, false).
-                withProperty(CONNECTED_NORTH_WEST, false).withProperty(CONNECTED_NORTH_UP, false).withProperty(CONNECTED_NORTH_DOWN, false).
-                withProperty(CONNECTED_SOUTH_EAST, false).withProperty(CONNECTED_SOUTH_WEST, false).withProperty(CONNECTED_SOUTH_UP, false).
-                withProperty(CONNECTED_SOUTH_DOWN, false).withProperty(CONNECTED_EAST_UP, false).withProperty(CONNECTED_EAST_DOWN, false).
-                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(XMODULES, 0).withProperty(YMODULES, 0)
-                .withProperty(ZMODULES, 0).withProperty(VARIATION, v));
+//        this.setDefaultState(getExtendedBlockState().withProperty(CONNECTED_DOWN, false).
+//                withProperty(CONNECTED_UP, false).withProperty(CONNECTED_NORTH, false).withProperty(CONNECTED_SOUTH, false).
+//                withProperty(CONNECTED_EAST, false).withProperty(CONNECTED_WEST, false).withProperty(CONNECTED_NORTH_EAST, false).
+//                withProperty(CONNECTED_NORTH_WEST, false).withProperty(CONNECTED_NORTH_UP, false).withProperty(CONNECTED_NORTH_DOWN, false).
+//                withProperty(CONNECTED_SOUTH_EAST, false).withProperty(CONNECTED_SOUTH_WEST, false).withProperty(CONNECTED_SOUTH_UP, false).
+//                withProperty(CONNECTED_SOUTH_DOWN, false).withProperty(CONNECTED_EAST_UP, false).withProperty(CONNECTED_EAST_DOWN, false).
+//                withProperty(CONNECTED_WEST_UP, false).withProperty(CONNECTED_WEST_DOWN, false).withProperty(XMODULES, 0).withProperty(YMODULES, 0)
+//                .withProperty(ZMODULES, 0).withProperty(VARIATION, v));
+        this.setDefaultState(getExtendedBlockState().withProperty(CONNECTIONS, new CTMConnections()).withProperty(VARIATION, v));
     }
 
     public ExtendedBlockState getBaseExtendedState() {
@@ -304,91 +287,79 @@ public class BlockCarvable extends Block {
         } else if (res.getType() == IBlockResources.NORMAL || res.getType() == IBlockResources.R9 || res.getType() == IBlockResources.R4 || res.getType() == IBlockResources.R16) {
             return stateIn;
         }
-
-        boolean up = false;
-        boolean down = false;
-        boolean north = false;
-        boolean south = false;
-        boolean east = false;
-        boolean west = false;
-        boolean north_east = false;
-        boolean north_west = false;
-        boolean north_up = false;
-        boolean north_down = false;
-        boolean south_east = false;
-        boolean south_west = false;
-        boolean south_up = false;
-        boolean south_down = false;
-        boolean east_up = false;
-        boolean east_down = false;
-        boolean west_up = false;
-        boolean west_down = false;
-
-        if (areBlocksEqual(state, w.getBlockState(pos.up()))) {
-            up = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.down()))) {
-            down = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.north()))) {
-            north = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.south()))) {
-            south = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.east()))) {
-            east = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.west()))) {
-            west = true;
-        }
-
-        if (areBlocksEqual(state, w.getBlockState(pos.north().east()))) {
-            north_east = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.north().west()))) {
-            north_west = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.north().up()))) {
-            north_up = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.north().down()))) {
-            north_down = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.south().east()))) {
-            south_east = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.south().west()))) {
-            south_west = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.south().up()))) {
-            south_up = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.south().down()))) {
-            south_down = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.east().up()))) {
-            east_up = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.east().down()))) {
-            east_down = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.west().up()))) {
-            west_up = true;
-        }
-        if (areBlocksEqual(state, w.getBlockState(pos.west().down()))) {
-            west_down = true;
+        List<EnumConnection> connections = new ArrayList<EnumConnection>();
+        for (EnumConnection connection : EnumConnection.values()){
+            if (areBlocksEqual(state, connection.getBlockAt(pos, w))){
+                connections.add(connection);
+            }
         }
 
 
-        return state.withProperty(CONNECTED_UP, up).withProperty(CONNECTED_DOWN, down).withProperty(CONNECTED_NORTH, north).
-                withProperty(CONNECTED_SOUTH, south).withProperty(CONNECTED_EAST, east).withProperty(CONNECTED_WEST, west)
-                .withProperty(CONNECTED_NORTH_EAST, north_east).withProperty(CONNECTED_NORTH_WEST, north_west).
-                        withProperty(CONNECTED_NORTH_UP, north_up).withProperty(CONNECTED_NORTH_DOWN, north_down).
-                        withProperty(CONNECTED_SOUTH_EAST, south_east).withProperty(CONNECTED_SOUTH_WEST, south_west).
-                        withProperty(CONNECTED_SOUTH_UP, south_up).withProperty(CONNECTED_SOUTH_DOWN, south_down).
-                        withProperty(CONNECTED_EAST_UP, east_up).withProperty(CONNECTED_EAST_DOWN, east_down).
-                        withProperty(CONNECTED_WEST_UP, west_up).withProperty(CONNECTED_WEST_DOWN, west_down);
+//        if (areBlocksEqual(state, w.getBlockState(pos.up()))) {
+//            connections.add();
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.down()))) {
+//            down = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.north()))) {
+//            north = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.south()))) {
+//            south = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.east()))) {
+//            east = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.west()))) {
+//            west = true;
+//        }
+//
+//        if (areBlocksEqual(state, w.getBlockState(pos.north().east()))) {
+//            north_east = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.north().west()))) {
+//            north_west = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.north().up()))) {
+//            north_up = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.north().down()))) {
+//            north_down = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.south().east()))) {
+//            south_east = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.south().west()))) {
+//            south_west = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.south().up()))) {
+//            south_up = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.south().down()))) {
+//            south_down = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.east().up()))) {
+//            east_up = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.east().down()))) {
+//            east_down = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.west().up()))) {
+//            west_up = true;
+//        }
+//        if (areBlocksEqual(state, w.getBlockState(pos.west().down()))) {
+//            west_down = true;
+//        }
+
+        return state.withProperty(CONNECTIONS, new CTMConnections(connections));
+//        return state.withProperty(CONNECTED_UP, up).withProperty(CONNECTED_DOWN, down).withProperty(CONNECTED_NORTH, north).
+//                withProperty(CONNECTED_SOUTH, south).withProperty(CONNECTED_EAST, east).withProperty(CONNECTED_WEST, west)
+//                .withProperty(CONNECTED_NORTH_EAST, north_east).withProperty(CONNECTED_NORTH_WEST, north_west).
+//                        withProperty(CONNECTED_NORTH_UP, north_up).withProperty(CONNECTED_NORTH_DOWN, north_down).
+//                        withProperty(CONNECTED_SOUTH_EAST, south_east).withProperty(CONNECTED_SOUTH_WEST, south_west).
+//                        withProperty(CONNECTED_SOUTH_UP, south_up).withProperty(CONNECTED_SOUTH_DOWN, south_down).
+//                        withProperty(CONNECTED_EAST_UP, east_up).withProperty(CONNECTED_EAST_DOWN, east_down).
+//                        withProperty(CONNECTED_WEST_UP, west_up).withProperty(CONNECTED_WEST_DOWN, west_down);
     }
 
     /**

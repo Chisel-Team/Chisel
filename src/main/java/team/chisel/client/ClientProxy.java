@@ -46,6 +46,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preTextureStitch() {
-        ReflectionHelper.setPrivateValue(TextureMap.class, Minecraft.getMinecraft().getTextureMapBlocks(), false, "skipFirst");
+        //ReflectionHelper.setPrivateValue(TextureMap.class, Minecraft.getMinecraft().getTextureMapBlocks(), false, "skipFirst");
     }
 }

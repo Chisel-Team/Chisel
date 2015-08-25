@@ -4,6 +4,8 @@ import team.chisel.client.render.IBlockResources;
 import team.chisel.common.block.BlockCarvable;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.property.IExtendedBlockState;
+import team.chisel.common.connections.CTMConnections;
+import team.chisel.common.connections.EnumConnection;
 
 /**
  * The CTM renderer will draw the block's FACE using by assembling 4 quadrants from the 5 available block
@@ -109,24 +111,29 @@ public class CTM {
         if (!(state.getBlock() instanceof BlockCarvable)) {
             return new int[]{18, 19, 17, 16};
         }
-        boolean down = (Boolean) state.getValue(BlockCarvable.CONNECTED_DOWN);
-        boolean up = (Boolean) state.getValue(BlockCarvable.CONNECTED_UP);
-        boolean north = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH);
-        boolean south = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH);
-        boolean east = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST);
-        boolean west = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST);
-        boolean north_east = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_EAST);
-        boolean north_west = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_WEST);
-        boolean north_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_UP);
-        boolean north_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_DOWN);
-        boolean south_east = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_EAST);
-        boolean south_west = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_WEST);
-        boolean south_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_UP);
-        boolean south_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_DOWN);
-        boolean east_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST_UP);
-        boolean east_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST_DOWN);
-        boolean west_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST_UP);
-        boolean west_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST_DOWN);
+
+        CTMConnections connections = state.getValue(BlockCarvable.CONNECTIONS);
+        if (connections == null){
+            connections = new CTMConnections();
+        }
+//        boolean down = (Boolean) state.getValue(BlockCarvable.CONNECTED_DOWN);
+//        boolean up = (Boolean) state.getValue(BlockCarvable.CONNECTED_UP);
+//        boolean north = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH);
+//        boolean south = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH);
+//        boolean east = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST);
+//        boolean west = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST);
+//        boolean north_east = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_EAST);
+//        boolean north_west = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_WEST);
+//        boolean north_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_UP);
+//        boolean north_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_NORTH_DOWN);
+//        boolean south_east = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_EAST);
+//        boolean south_west = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_WEST);
+//        boolean south_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_UP);
+//        boolean south_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_SOUTH_DOWN);
+//        boolean east_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST_UP);
+//        boolean east_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_EAST_DOWN);
+//        boolean west_up = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST_UP);
+//        boolean west_down = (Boolean) state.getValue(BlockCarvable.CONNECTED_WEST_DOWN);
 
 
         boolean b[] = new boolean[8];
@@ -142,59 +149,59 @@ public class CTM {
          * b[5]    b[6]    b[7]
          */
         if (side == EnumFacing.DOWN) {
-            b[0] = south_west; //South West
-            b[1] = south; // South
-            b[2] = south_east; // South east
-            b[3] = west; // West
-            b[4] = east; //East
-            b[5] = north_west; // North West
-            b[6] = north; // North
-            b[7] = north_east; // North East
+            b[0] = connections.isConnected(EnumConnection.SOUTH_WEST);//South West
+            b[1] = connections.isConnected(EnumConnection.SOUTH); // South
+            b[2] = connections.isConnected(EnumConnection.SOUTH_EAST); // South east
+            b[3] = connections.isConnected(EnumConnection.WEST); // West
+            b[4] = connections.isConnected(EnumConnection.EAST); //East
+            b[5] = connections.isConnected(EnumConnection.NORTH_WEST); // North West
+            b[6] = connections.isConnected(EnumConnection.NORTH); // North
+            b[7] = connections.isConnected(EnumConnection.NORTH_EAST); // North East
         } else if (side == EnumFacing.UP) {
-            b[0] = north_west; //North West
-            b[1] = north; // North
-            b[2] = north_east; //North East
-            b[3] = west; // West
-            b[4] = east; // East
-            b[5] = south_west; // South West
-            b[6] = south; // South
-            b[7] = south_east; //South East
+            b[0] = connections.isConnected(EnumConnection.NORTH_WEST); //North West
+            b[1] = connections.isConnected(EnumConnection.NORTH); // North
+            b[2] = connections.isConnected(EnumConnection.NORTH_EAST); //North East
+            b[3] = connections.isConnected(EnumConnection.WEST); // West
+            b[4] = connections.isConnected(EnumConnection.EAST); // East
+            b[5] = connections.isConnected(EnumConnection.SOUTH_WEST); // South West
+            b[6] = connections.isConnected(EnumConnection.SOUTH); // South
+            b[7] = connections.isConnected(EnumConnection.SOUTH_EAST); //South East
         } else if (side == EnumFacing.NORTH) {
-            b[0] = east_up; // Up East
-            b[1] = up; // Up
-            b[2] = west_up; // Up West
-            b[3] = east; // East
-            b[4] = west; // West
-            b[5] = east_down; // Down East
-            b[6] = down; // Down
-            b[7] = west_down; // Down West
+            b[0] = connections.isConnected(EnumConnection.EAST_UP); // Up East
+            b[1] = connections.isConnected(EnumConnection.UP); // Up
+            b[2] = connections.isConnected(EnumConnection.WEST_UP); // Up West
+            b[3] = connections.isConnected(EnumConnection.EAST); // East
+            b[4] = connections.isConnected(EnumConnection.WEST); // West
+            b[5] = connections.isConnected(EnumConnection.EAST_DOWN); // Down East
+            b[6] = connections.isConnected(EnumConnection.DOWN); // Down
+            b[7] = connections.isConnected(EnumConnection.WEST_DOWN); // Down West
         } else if (side == EnumFacing.SOUTH) {
-            b[0] = west_up; // Up West
-            b[1] = up; // Up
-            b[2] = east_up; // Up East
-            b[3] = west; // West
-            b[4] = east; // East
-            b[5] = west_down; // Down West
-            b[6] = down; // Down
-            b[7] = east_down; // Down East
+            b[0] = connections.isConnected(EnumConnection.WEST_UP); // Up West
+            b[1] = connections.isConnected(EnumConnection.UP); // Up
+            b[2] = connections.isConnected(EnumConnection.EAST_UP); // Up East
+            b[3] = connections.isConnected(EnumConnection.WEST); // West
+            b[4] = connections.isConnected(EnumConnection.EAST); // East
+            b[5] = connections.isConnected(EnumConnection.WEST_DOWN); // Down West
+            b[6] = connections.isConnected(EnumConnection.DOWN); // Down
+            b[7] = connections.isConnected(EnumConnection.EAST_DOWN); // Down East
         } else if (side == EnumFacing.WEST) {
-            b[0] = north_up; //Up North
-            b[1] = up; // Up
-            b[2] = south_up; // Up South
-            b[3] = north; // North
-            b[4] = south; // South
-            b[5] = north_down; // Down North
-            b[6] = down; // Down
-            b[7] = south_down; // Down South
+            b[0] = connections.isConnected(EnumConnection.NORTH_UP); //Up North
+            b[1] = connections.isConnected(EnumConnection.UP); // Up
+            b[2] = connections.isConnected(EnumConnection.SOUTH_UP); // Up South
+            b[3] = connections.isConnected(EnumConnection.NORTH); // North
+            b[4] = connections.isConnected(EnumConnection.SOUTH); // South
+            b[5] = connections.isConnected(EnumConnection.NORTH_DOWN); // Down North
+            b[6] = connections.isConnected(EnumConnection.DOWN); // Down
+            b[7] = connections.isConnected(EnumConnection.SOUTH_DOWN); // Down South
         } else if (side == EnumFacing.EAST) {
-            b[0] = south_up; // Up South
-            b[1] = up; // Up
-            b[2] = north_up; // Up North
-            b[3] = south; // South
-            b[4] = north; // North
-            b[5] = south_down; //Down South
-            b[6] = down; // Down
-            b[7] = north_down; // Down North
+            b[0] = connections.isConnected(EnumConnection.SOUTH_UP); // Up South
+            b[1] = connections.isConnected(EnumConnection.UP); // Up
+            b[2] = connections.isConnected(EnumConnection.NORTH_UP); // Up North
+            b[3] = connections.isConnected(EnumConnection.SOUTH); // South
+            b[4] = connections.isConnected(EnumConnection.NORTH); // North
+            b[5] = connections.isConnected(EnumConnection.SOUTH_DOWN); //Down South
+            b[6] = connections.isConnected(EnumConnection.DOWN); // Down
+            b[7] = connections.isConnected(EnumConnection.NORTH_DOWN); // Down North
         }
 
         int[] ret = new int[]{18, 19, 17, 16};
