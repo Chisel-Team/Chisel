@@ -51,23 +51,9 @@ public enum Dir {
 	/**
 	 * Finds if this block is connected for the given side in this Dir.
 	 * 
-	 * @param inst
-	 *            The CTM instance to use for logic.
-	 * @param world
-	 *            The world the block is in.
-	 * @param x
-	 *            The x coordinate of your block.
-	 * @param y
-	 *            The y coordinate of your block.
-	 * @param z
-	 *            The z coordinate of your block.
-	 * @param sideIdx
-	 *            The side index of the current face. This equivalent to {@link ForgeDirection#ordinal()}
-	 * @param block
-	 *            The block being rendered.
-	 * @param meta
-	 *            The metadata of the block.
-	 * @return True if the block is connected in the given Dir, false otherwise.
+	 * @param state The BlockState fo the block
+	 * @param side The Side of the block that is being checked
+	 * @return Whether the block is connected on the specified side
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean isConnected(IExtendedBlockState state, EnumFacing side) {
