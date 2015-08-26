@@ -1,8 +1,7 @@
 package team.chisel.inventory;
 
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.Statistics;
-
+import team.chisel.api.IChiselItem;
+import team.chisel.api.Statistics;
 import team.chisel.carving.Carving;
 import team.chisel.utils.General;
 import team.chisel.utils.GeneralClient;

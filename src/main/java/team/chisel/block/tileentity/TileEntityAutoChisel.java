@@ -2,8 +2,7 @@ package team.chisel.block.tileentity;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.api.IChiselItem;
-
+import team.chisel.api.IChiselItem;
 import team.chisel.carving.Carving;
 import team.chisel.client.GeneralChiselClient;
 import team.chisel.init.ChiselItems;

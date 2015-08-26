@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.api.carving;
+package team.chisel.api.carving;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

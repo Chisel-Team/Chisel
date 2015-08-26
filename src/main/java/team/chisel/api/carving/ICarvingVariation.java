@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.api.carving;
+package team.chisel.api.carving;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;

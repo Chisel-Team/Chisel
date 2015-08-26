@@ -1,11 +1,10 @@
-package com.cricketcraft.chisel.api;
+package team.chisel.api;
 
+import team.chisel.api.carving.ICarvingVariation;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 
 /**
  * Implement this on items which can be used to chisel blocks.

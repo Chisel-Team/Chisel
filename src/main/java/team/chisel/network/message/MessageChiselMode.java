@@ -1,9 +1,8 @@
 package team.chisel.network.message;
 
-import com.cricketcraft.chisel.api.IAdvancedChisel;
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.carving.IChiselMode;
-
+import team.chisel.api.IAdvancedChisel;
+import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.item.chisel.ChiselMode;
 import team.chisel.utils.General;
 import io.netty.buffer.ByteBuf;

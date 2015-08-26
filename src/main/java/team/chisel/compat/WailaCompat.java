@@ -2,8 +2,7 @@ package team.chisel.compat;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.api.ICarvable;
-
+import team.chisel.api.ICarvable;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;

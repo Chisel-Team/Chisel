@@ -13,13 +13,13 @@ import net.minecraft.item.ItemStack;
 import org.apache.logging.log4j.Level;
 
 import team.chisel.Chisel;
+import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.carving.Carving;
 import team.chisel.init.ChiselBlocks;
 import team.chisel.init.ChiselItems;
 import team.chisel.utils.RecipeUtil;
 
-import com.cricketcraft.chisel.api.carving.ICarvingGroup;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.google.common.collect.Maps;
 import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
 

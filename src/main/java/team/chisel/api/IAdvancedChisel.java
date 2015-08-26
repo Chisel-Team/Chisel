@@ -1,8 +1,7 @@
-package com.cricketcraft.chisel.api;
+package team.chisel.api;
 
+import team.chisel.api.carving.IChiselMode;
 import net.minecraft.item.ItemStack;
-
-import com.cricketcraft.chisel.api.carving.IChiselMode;
 
 /**
  * Implement this on chisel items which require more control over chisel modes (including adding new modes).

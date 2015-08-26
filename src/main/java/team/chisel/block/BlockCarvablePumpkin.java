@@ -1,10 +1,9 @@
 package team.chisel.block;
 
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-import com.cricketcraft.chisel.api.carving.IVariationInfo;
-
 import team.chisel.Chisel;
+import team.chisel.api.ICarvable;
+import team.chisel.api.carving.CarvableHelper;
+import team.chisel.api.carving.IVariationInfo;
 import team.chisel.entity.EntityChiselSnowman;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPumpkin;

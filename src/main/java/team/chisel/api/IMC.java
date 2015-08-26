@@ -1,4 +1,5 @@
-package com.cricketcraft.chisel.api;
+package team.chisel.api;
+
 
 /**
  * Use the enum constants (using {@link #key} or calling {@link #toString()}) in this class as keys for IMC messages sent to chisel

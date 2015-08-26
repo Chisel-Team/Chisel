@@ -10,13 +10,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.apache.commons.lang3.tuple.Triple;
 
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.rendering.TextureType;
+import team.chisel.api.rendering.TextureType.AbstractSubmapManager;
 import team.chisel.ctmlib.RenderBlocksCTM;
 import team.chisel.ctmlib.TextureSubmap;
-
-import com.cricketcraft.chisel.api.carving.CarvingUtils;
-import com.cricketcraft.chisel.api.rendering.TextureType;
-import com.cricketcraft.chisel.api.rendering.TextureType.AbstractSubmapManager;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

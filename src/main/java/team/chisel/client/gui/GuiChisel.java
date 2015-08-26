@@ -10,10 +10,9 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-import com.cricketcraft.chisel.api.IAdvancedChisel;
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.carving.IChiselMode;
-
+import team.chisel.api.IAdvancedChisel;
+import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.inventory.ContainerChisel;
 import team.chisel.inventory.InventoryChiselSelection;
 import team.chisel.inventory.SlotChiselInput;

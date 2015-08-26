@@ -2,9 +2,8 @@ package team.chisel.item;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.api.carving.IVariationInfo;
-
+import team.chisel.api.ICarvable;
+import team.chisel.api.carving.IVariationInfo;
 import team.chisel.config.Configurations;
 import team.chisel.utils.General;
 import net.minecraft.block.Block;

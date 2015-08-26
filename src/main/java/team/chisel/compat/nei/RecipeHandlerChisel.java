@@ -11,10 +11,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.opengl.GL11;
 
-import com.cricketcraft.chisel.api.carving.CarvingUtils;
-import com.cricketcraft.chisel.api.carving.ICarvingGroup;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.carving.Carving;
 import team.chisel.client.gui.GuiChisel;
 import codechicken.lib.gui.GuiDraw;

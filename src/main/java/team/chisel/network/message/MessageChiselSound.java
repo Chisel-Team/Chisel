@@ -1,8 +1,7 @@
 package team.chisel.network.message;
 
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-
 import team.chisel.Chisel;
+import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.client.GeneralChiselClient;
 import team.chisel.item.chisel.ItemChisel;
 import team.chisel.network.message.base.MessageCoords;

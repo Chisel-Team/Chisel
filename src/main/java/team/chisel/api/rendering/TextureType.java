@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.api.rendering;
+package team.chisel.api.rendering;
 
 import java.util.Random;
 
@@ -15,15 +15,13 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
+import team.chisel.api.carving.CarvableHelper;
+import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.ctmlib.CTM;
 import team.chisel.ctmlib.ISubmapManager;
 import team.chisel.ctmlib.RenderBlocksCTM;
 import team.chisel.ctmlib.RenderBlocksColumn;
 import team.chisel.ctmlib.TextureSubmap;
-
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

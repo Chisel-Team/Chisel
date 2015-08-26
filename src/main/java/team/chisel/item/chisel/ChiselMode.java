@@ -1,10 +1,9 @@
 package team.chisel.item.chisel;
 
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.Statistics;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.api.carving.IChiselMode;
-
+import team.chisel.api.IChiselItem;
+import team.chisel.api.Statistics;
+import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.network.PacketHandler;
 import team.chisel.network.message.MessageChiselSound;
 import net.minecraft.block.Block;

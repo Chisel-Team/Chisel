@@ -2,11 +2,10 @@ package team.chisel.utils;
 
 import java.util.Random;
 
-import com.cricketcraft.chisel.api.IAdvancedChisel;
-import com.cricketcraft.chisel.api.carving.CarvingUtils;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.api.carving.IChiselMode;
-
+import team.chisel.api.IAdvancedChisel;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.carving.Carving;
 import team.chisel.item.chisel.ChiselMode;
 import joptsimple.internal.Strings;

@@ -2,12 +2,11 @@ package team.chisel.item.chisel;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.carving.ICarvingGroup;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.api.carving.IChiselMode;
-
 import team.chisel.Chisel;
+import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.carving.Carving;
 import team.chisel.utils.General;
 import net.minecraft.block.Block;

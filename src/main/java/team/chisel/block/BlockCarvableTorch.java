@@ -2,12 +2,11 @@ package team.chisel.block;
 
 import java.util.Random;
 
-import com.cricketcraft.chisel.api.ICarvable;
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-import com.cricketcraft.chisel.api.carving.IVariationInfo;
-
 import team.chisel.Chisel;
-import com.cricketcraft.chisel.api.ChiselTabs;
+import team.chisel.api.ChiselTabs;
+import team.chisel.api.ICarvable;
+import team.chisel.api.carving.CarvableHelper;
+import team.chisel.api.carving.IVariationInfo;
 import net.minecraft.block.BlockTorch;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.world.IBlockAccess;

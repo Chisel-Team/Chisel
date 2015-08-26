@@ -1,9 +1,8 @@
 package team.chisel.compat;
 
-import com.cricketcraft.chisel.api.IMC;
-import com.cricketcraft.chisel.api.carving.ICarvingRegistry;
-
 import team.chisel.Chisel;
+import team.chisel.api.IMC;
+import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.carving.Carving;
 import net.minecraft.block.Block;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;

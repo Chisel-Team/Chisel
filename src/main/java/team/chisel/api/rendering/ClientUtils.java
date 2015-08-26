@@ -1,4 +1,4 @@
-package com.cricketcraft.chisel.api.rendering;
+package team.chisel.api.rendering;
 
 public class ClientUtils {
 

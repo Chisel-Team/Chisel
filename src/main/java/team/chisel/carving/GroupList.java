@@ -10,8 +10,9 @@ import net.minecraft.block.Block;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import com.cricketcraft.chisel.api.carving.ICarvingGroup;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.api.carving.ICarvingVariation;
+
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 

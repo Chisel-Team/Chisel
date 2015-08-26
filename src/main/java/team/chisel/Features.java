@@ -2,6 +2,12 @@ package team.chisel;
 
 import java.util.List;
 
+import team.chisel.api.ChiselTabs;
+import team.chisel.api.carving.CarvableHelper;
+import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.IVariationInfo;
+import team.chisel.api.carving.CarvingUtils.SimpleCarvingGroup;
+import team.chisel.api.rendering.TextureType;
 import team.chisel.block.*;
 import team.chisel.carving.Carving;
 import team.chisel.client.render.SubmapManagerAntiblock;
@@ -18,7 +24,6 @@ import team.chisel.entity.EntityCloudInABottle;
 import team.chisel.entity.EntitySmashingRock;
 import team.chisel.init.ChiselBlocks;
 import team.chisel.init.ChiselItems;
-import com.cricketcraft.chisel.api.ChiselTabs;
 import team.chisel.item.ItemBallOMoss;
 import team.chisel.item.ItemBlockPresent;
 import team.chisel.item.ItemCarvable;
@@ -42,11 +47,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.api.carving.IVariationInfo;
-import com.cricketcraft.chisel.api.carving.CarvingUtils.SimpleCarvingGroup;
-import com.cricketcraft.chisel.api.rendering.TextureType;
 import com.google.common.collect.Lists;
 
 import static team.chisel.init.ChiselBlocks.*;

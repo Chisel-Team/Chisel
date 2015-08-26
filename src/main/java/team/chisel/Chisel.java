@@ -10,10 +10,10 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.cricketcraft.chisel.api.ChiselAPIProps;
-import com.cricketcraft.chisel.api.Statistics;
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-
+import team.chisel.api.ChiselAPIProps;
+import team.chisel.api.ChiselTabs;
+import team.chisel.api.Statistics;
+import team.chisel.api.carving.CarvableHelper;
 import team.chisel.block.BlockCarvable;
 import team.chisel.carving.Carving;
 import team.chisel.compat.Compatibility;
@@ -22,7 +22,6 @@ import team.chisel.compat.fmp.FMPCompat;
 import team.chisel.config.Configurations;
 import team.chisel.entity.EntityChiselSnowman;
 import team.chisel.init.ChiselBlocks;
-import com.cricketcraft.chisel.api.ChiselTabs;
 import team.chisel.init.TabsInit;
 import team.chisel.item.ItemCarvable;
 import team.chisel.item.chisel.ChiselController;

@@ -1,15 +1,10 @@
-package com.cricketcraft.chisel.api;
+package team.chisel.api;
 
-import team.chisel.Features;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import team.chisel.init.ChiselBlocks;
-import team.chisel.init.ChiselItems;
 
 public class ChiselTabs {
 
@@ -58,7 +53,6 @@ public class ChiselTabs {
 		}
 	}
 
-
 	public static final CustomCreativeTab tabChisel = new CustomCreativeTab("tabChisel", false);
 	public static final CustomCreativeTab tabStoneChiselBlocks = new CustomCreativeTab("tabStoneChiselBlocks", true);
 	public static final CustomCreativeTab tabWoodChiselBlocks = new CustomCreativeTab("tabWoodChiselBlocks", true);
@@ -66,6 +60,4 @@ public class ChiselTabs {
 	public static final CustomCreativeTab tabOtherChiselBlocks = new CustomCreativeTab("tabOtherChiselBlocks", true);
 	public static final CustomCreativeTab tabModdedChiselBlocks = new CustomCreativeTab("tabModdedChiselBlocks", true);
 	public static final CustomCreativeTab tabStairChiselBlocks = new CustomCreativeTab("tabStairChiselBlocks", true);
-
-
 }

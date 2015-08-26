@@ -1,10 +1,10 @@
 package team.chisel.init;
 
-import com.cricketcraft.chisel.api.ChiselTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import team.chisel.Features;
+import team.chisel.api.ChiselTabs;
 
 public class TabsInit {
 

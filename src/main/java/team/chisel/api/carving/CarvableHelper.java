@@ -1,9 +1,8 @@
-package com.cricketcraft.chisel.api.carving;
+package team.chisel.api.carving;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import team.chisel.ctmlib.ISubmapManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -15,11 +14,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.oredict.OreDictionary;
-
-import com.cricketcraft.chisel.api.ChiselAPIProps;
-import com.cricketcraft.chisel.api.FMPIMC;
-import com.cricketcraft.chisel.api.rendering.TextureType;
-
+import team.chisel.api.ChiselAPIProps;
+import team.chisel.api.FMPIMC;
+import team.chisel.api.rendering.TextureType;
+import team.chisel.ctmlib.ISubmapManager;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;

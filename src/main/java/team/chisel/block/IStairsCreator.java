@@ -1,7 +1,6 @@
 package team.chisel.block;
 
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-
+import team.chisel.api.carving.CarvableHelper;
 import net.minecraft.block.Block;
 
 public interface IStairsCreator {

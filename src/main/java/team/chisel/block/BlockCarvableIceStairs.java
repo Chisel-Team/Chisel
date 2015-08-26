@@ -2,8 +2,7 @@ package team.chisel.block;
 
 import java.util.Random;
 
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-
+import team.chisel.api.carving.CarvableHelper;
 import team.chisel.init.ChiselBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

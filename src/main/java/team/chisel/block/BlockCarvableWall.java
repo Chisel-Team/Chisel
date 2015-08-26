@@ -2,8 +2,7 @@ package team.chisel.block;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-
+import team.chisel.api.carving.CarvableHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockWall;
 import net.minecraft.client.renderer.texture.IIconRegister;

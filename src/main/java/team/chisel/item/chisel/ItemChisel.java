@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Locale;
 
 import team.chisel.Chisel;
+import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.ICarvingRegistry;
+import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.carving.Carving;
 import team.chisel.config.Configurations;
 import net.minecraft.block.Block;
@@ -19,9 +22,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.carving.ICarvingRegistry;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 

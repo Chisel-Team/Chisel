@@ -2,8 +2,7 @@ package team.chisel.inventory;
 
 import java.util.List;
 
-import com.cricketcraft.chisel.api.IChiselItem;
-
+import team.chisel.api.IChiselItem;
 import team.chisel.item.chisel.ItemChisel;
 import team.chisel.utils.General;
 import net.minecraft.block.Block;
