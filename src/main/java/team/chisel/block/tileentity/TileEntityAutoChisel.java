@@ -1,15 +1,8 @@
 package team.chisel.block.tileentity;
 
 import java.util.List;
+import java.util.UUID;
 
-import team.chisel.api.IChiselItem;
-import team.chisel.carving.Carving;
-import team.chisel.client.GeneralChiselClient;
-import team.chisel.init.ChiselItems;
-import team.chisel.network.PacketHandler;
-import team.chisel.network.message.MessageAutoChisel;
-import team.chisel.network.message.MessageSlotUpdate;
-import team.chisel.utils.General;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -21,6 +14,19 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.FakePlayer;
+import team.chisel.api.IChiselItem;
+import team.chisel.carving.Carving;
+import team.chisel.client.GeneralChiselClient;
+import team.chisel.init.ChiselItems;
+import team.chisel.network.PacketHandler;
+import team.chisel.network.message.MessageAutoChisel;
+import team.chisel.network.message.MessageSlotUpdate;
+import team.chisel.utils.General;
+
+import com.mojang.authlib.GameProfile;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -43,6 +49,8 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	public static final int BASE = 0, TARGET = 1, OUTPUT = 2, CHISEL = 3, MIN_UPGRADE = 4;
 	private static final int FAST_SPEED = 1, SLOW_SPEED = 4;
+	
+	private static final GameProfile DUMMY_PROFILE = new GameProfile(UUID.fromString("32e06e7e-4c3b-11e5-885d-feff819cdc9f"), "[Chiseler]");
 
 	private int progress = 0;
 
@@ -64,6 +72,8 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	public int toChisel = 1;
 
 	private ItemStack lastBase;
+	
+	private FakePlayer fakePlayer;
 
 	@Override
 	public boolean canUpdate() {
@@ -110,6 +120,10 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 	@Override
 	public void updateEntity() {
+		
+		if (fakePlayer == null && !worldObj.isRemote) {
+			fakePlayer = new FakePlayer((WorldServer) worldObj, DUMMY_PROFILE);
+		}
 
 		ItemStack base = inventory[BASE], target = getTarget(), output = inventory[OUTPUT];
 
@@ -213,7 +227,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 			return false;
 		}
 
-		return ((IChiselItem) inventory[CHISEL].getItem()).canChisel(worldObj, inventory[CHISEL], General.getVariation(getTarget()));
+		return ((IChiselItem) inventory[CHISEL].getItem()).canChisel(worldObj, fakePlayer, inventory[CHISEL], General.getVariation(getTarget()));
 	}
 
 	private boolean hasChisel() {
@@ -224,7 +238,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	private void chiselItem(int chiseled, ItemStack target) {
 		if (!worldObj.isRemote) {
 			boolean breakChisel = false;
-			if (((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, inventory[CHISEL], General.getVariation(target))) {
+			if (((IChiselItem) inventory[CHISEL].getItem()).onChisel(worldObj, fakePlayer, inventory[CHISEL], General.getVariation(target))) {
 				inventory[CHISEL].setItemDamage(inventory[CHISEL].getItemDamage() + 1);
 				if (inventory[CHISEL].getItemDamage() >= inventory[CHISEL].getMaxDamage()) {
 					setInventorySlotContents(CHISEL, null);
@@ -284,8 +298,9 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 			ItemStack is = inventory[slot];
 			inventory[slot] = null;
 			return is;
-		} else
+		} else {
 			return null;
+		}
 	}
 
 	@Override
@@ -298,6 +313,10 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 
 		if (worldObj.isRemote && slot == BASE && stack != null) {
 			lastBase = stack.copy();
+		}
+		
+		if (slot == CHISEL) {
+			fakePlayer.inventory.setInventorySlotContents(fakePlayer.inventory.currentItem, stack);
 		}
 
 		if (!worldObj.isRemote) {

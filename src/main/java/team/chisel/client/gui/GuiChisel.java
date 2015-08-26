@@ -72,7 +72,7 @@ public class GuiChisel extends GuiContainer {
 
 	private boolean showMode() {
 		if (container.chisel != null && container.chisel.getItem() instanceof IChiselItem) {
-			return ((IChiselItem) container.chisel.getItem()).hasModes(container.chisel);
+			return ((IChiselItem) container.chisel.getItem()).hasModes(mc.thePlayer, container.chisel);
 		}
 		return false;
 	}

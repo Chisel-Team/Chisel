@@ -120,7 +120,7 @@ public class InventoryChiselSelection implements IInventory {
 		if (Block.getBlockFromItem(item) == null)
 			return;
 
-		if (!((IChiselItem) chisel.getItem()).canChisel(container.playerInventory.player.worldObj, chisel, General.getVariation(chiseledItem)))
+		if (!((IChiselItem) chisel.getItem()).canChisel(container.playerInventory.player.worldObj, container.playerInventory.player, chisel, General.getVariation(chiseledItem)))
 			return;
 
 		List<ItemStack> list = container.carving.getItemsForChiseling(chiseledItem);

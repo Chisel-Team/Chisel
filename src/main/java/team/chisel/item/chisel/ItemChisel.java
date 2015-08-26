@@ -128,12 +128,12 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public boolean canChisel(World world, ItemStack chisel, ICarvingVariation target) {
+	public boolean canChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
 		return true;
 	}
 
 	@Override
-	public boolean onChisel(World world, ItemStack chisel, ICarvingVariation target) {
+	public boolean onChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
 		return Configurations.allowChiselDamage;
 	}
 
@@ -143,7 +143,7 @@ public class ItemChisel extends Item implements IChiselItem {
 	}
 
 	@Override
-	public boolean hasModes(ItemStack chisel) {
+	public boolean hasModes(EntityPlayer player, ItemStack chisel) {
 		return type == ChiselType.DIAMOND || type == ChiselType.OBSIDIAN || Configurations.ironChiselHasModes;
 	}
 }

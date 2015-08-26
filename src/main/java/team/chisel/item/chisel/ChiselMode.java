@@ -109,7 +109,7 @@ public enum ChiselMode implements IChiselMode {
 			}
 			player.addStat(Statistics.blocksChiseled, 1);
 			boolean breakChisel = false;
-			if (((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player.getCurrentEquippedItem(), v)) {
+			if (((IChiselItem) player.getCurrentEquippedItem().getItem()).onChisel(world, player, player.getCurrentEquippedItem(), v)) {
 				player.getCurrentEquippedItem().damageItem(1, player);
 				if (player.getCurrentEquippedItem().stackSize <= 0) {
 					player.inventory.mainInventory[player.inventory.currentItem] = null;

@@ -1,10 +1,10 @@
 package team.chisel.api;
 
-import team.chisel.api.carving.ICarvingVariation;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import team.chisel.api.carving.ICarvingVariation;
 
 /**
  * Implement this on items which can be used to chisel blocks.
@@ -29,13 +29,15 @@ public interface IChiselItem {
 	 * 
 	 * @param world
 	 *            {@link World} object
+	 * @param player
+	 *            The {@link EntityPlayer} performing the chiseling.
 	 * @param chisel
 	 *            The {@link ItemStack} representing the chisel
 	 * @param target
 	 *            The {@link ICarvingVariation} representing the target item
 	 * @return True if the chisel should be damaged. False otherwise.
 	 */
-	boolean onChisel(World world, ItemStack chisel, ICarvingVariation target);
+	boolean onChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target);
 
 	/**
 	 * Called to check if this {@link ItemStack} can be chiseled in this chisel. If not, there will be no possible variants displayed in the GUI.
@@ -44,13 +46,15 @@ public interface IChiselItem {
 	 * 
 	 * @param world
 	 *            {@link World} object
+	 * @param player
+	 *            The {@link EntityPlayer} performing the chiseling.
 	 * @param chisel
 	 *            The {@link ItemStack} representing the chisel
 	 * @param target
 	 *            The {@link ICarvingVariation} representing the target item
 	 * @return True if the current target can be chiseled into anything. False otherwise.
 	 */
-	boolean canChisel(World world, ItemStack chisel, ICarvingVariation target);
+	boolean canChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target);
 
 	/**
 	 * Allows you to control if your item can chisel this block in the world.
@@ -76,9 +80,11 @@ public interface IChiselItem {
 	/**
 	 * Allows you to control if your item has chiseling modes.
 	 * 
+	 * @param player
+	 *            {@link EntityPlayer The player} holding the chisel.
 	 * @param chisel
 	 *            The {@link ItemStack} representing the chisel.
 	 * @return True if the chisel supports modes. False otherwise.
 	 */
-	boolean hasModes(ItemStack chisel);
+	boolean hasModes(EntityPlayer player, ItemStack chisel);
 }
