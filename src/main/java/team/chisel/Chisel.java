@@ -21,6 +21,7 @@ import team.chisel.compat.IMCHandler;
 import team.chisel.compat.fmp.FMPCompat;
 import team.chisel.config.Configurations;
 import team.chisel.entity.EntityChiselSnowman;
+import team.chisel.init.BlockPackRegistry;
 import team.chisel.init.ChiselBlocks;
 import team.chisel.init.TabsInit;
 import team.chisel.item.ItemCarvable;
@@ -129,6 +130,7 @@ public class Chisel {
 		Configurations.refreshConfig();
 
 		TabsInit.preInit();
+		BlockPackRegistry.INSTANCE.preInit(event);
 		Features.preInit();
 		Statistics.init();
 		PacketHandler.init();
