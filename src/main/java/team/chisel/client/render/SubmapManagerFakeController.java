@@ -1,19 +1,20 @@
 package team.chisel.client.render;
 
 import team.chisel.Chisel;
+import team.chisel.ctmlib.CTM;
+import team.chisel.ctmlib.TextureSubmap;
 import team.chisel.init.ChiselBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
-import com.cricketcraft.ctmlib.CTM;
-import com.cricketcraft.ctmlib.TextureSubmap;
 import com.google.common.base.Optional;
+
+import static team.chisel.ctmlib.Dir.*;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import static com.cricketcraft.ctmlib.Dir.*;
 
 public class SubmapManagerFakeController extends SubmapManagerBase {
 

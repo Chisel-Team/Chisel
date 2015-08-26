@@ -15,13 +15,14 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
+import team.chisel.ctmlib.CTM;
+import team.chisel.ctmlib.ISubmapManager;
+import team.chisel.ctmlib.RenderBlocksCTM;
+import team.chisel.ctmlib.RenderBlocksColumn;
+import team.chisel.ctmlib.TextureSubmap;
+
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.ctmlib.CTM;
-import com.cricketcraft.ctmlib.ISubmapManager;
-import com.cricketcraft.ctmlib.RenderBlocksCTM;
-import com.cricketcraft.ctmlib.RenderBlocksColumn;
-import com.cricketcraft.ctmlib.TextureSubmap;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

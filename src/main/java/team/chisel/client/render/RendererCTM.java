@@ -1,7 +1,8 @@
 package team.chisel.client.render;
 
+import team.chisel.ctmlib.CTMRenderer;
+
 import com.cricketcraft.chisel.api.rendering.ClientUtils;
-import com.cricketcraft.ctmlib.CTMRenderer;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

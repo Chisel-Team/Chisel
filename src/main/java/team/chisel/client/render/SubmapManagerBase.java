@@ -1,13 +1,11 @@
 package team.chisel.client.render;
 
+import team.chisel.ctmlib.ISubmapManager;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import com.cricketcraft.ctmlib.ISubmapManager;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

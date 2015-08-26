@@ -1,14 +1,12 @@
 package team.chisel.client.render;
 
 import team.chisel.block.BlockMultiLayerBase;
+import team.chisel.ctmlib.Drawing;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.MinecraftForgeClient;
-
-import com.cricketcraft.ctmlib.Drawing;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import static org.lwjgl.opengl.GL11.*;

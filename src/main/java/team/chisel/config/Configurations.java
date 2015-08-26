@@ -9,8 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import team.chisel.Chisel;
 import team.chisel.Features;
-
-import com.cricketcraft.ctmlib.CTM;
+import team.chisel.ctmlib.CTM;
 
 public class Configurations {
 

@@ -1,14 +1,12 @@
 package team.chisel.client.render;
 
+import team.chisel.ctmlib.RenderBlocksCTM;
+import team.chisel.ctmlib.TextureSubmap;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import com.cricketcraft.ctmlib.RenderBlocksCTM;
-import com.cricketcraft.ctmlib.TextureSubmap;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

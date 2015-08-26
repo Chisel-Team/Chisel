@@ -8,9 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import team.chisel.Chisel;
 import team.chisel.block.BlockCarvableLayered;
-
-import com.cricketcraft.ctmlib.Drawing;
-
+import team.chisel.ctmlib.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

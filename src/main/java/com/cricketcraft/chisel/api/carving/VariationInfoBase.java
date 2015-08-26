@@ -1,5 +1,6 @@
 package com.cricketcraft.chisel.api.carving;
 
+import team.chisel.ctmlib.ISubmapManager;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -9,7 +10,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import com.cricketcraft.chisel.api.rendering.TextureType;
-import com.cricketcraft.ctmlib.ISubmapManager;
 
 public class VariationInfoBase implements IVariationInfo {
 

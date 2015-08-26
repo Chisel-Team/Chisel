@@ -7,9 +7,7 @@ import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 import team.chisel.block.BlockSnakestone;
-
-import com.cricketcraft.ctmlib.Drawing;
-
+import team.chisel.ctmlib.Drawing;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

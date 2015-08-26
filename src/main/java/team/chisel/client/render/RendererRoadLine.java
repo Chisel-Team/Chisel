@@ -2,15 +2,13 @@ package team.chisel.client.render;
 
 import team.chisel.Chisel;
 import team.chisel.block.BlockRoadLine;
+import team.chisel.ctmlib.Drawing;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
-
-import com.cricketcraft.ctmlib.Drawing;
-
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 

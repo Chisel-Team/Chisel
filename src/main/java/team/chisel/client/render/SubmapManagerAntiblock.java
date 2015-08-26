@@ -2,6 +2,9 @@ package team.chisel.client.render;
 
 import org.lwjgl.opengl.GL11;
 
+import team.chisel.ctmlib.Drawing;
+import team.chisel.ctmlib.RenderBlocksCTM;
+import team.chisel.ctmlib.TextureSubmap;
 import team.chisel.init.ChiselBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -10,11 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.IItemRenderer;
-
-import com.cricketcraft.ctmlib.Drawing;
-import com.cricketcraft.ctmlib.RenderBlocksCTM;
-import com.cricketcraft.ctmlib.TextureSubmap;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
