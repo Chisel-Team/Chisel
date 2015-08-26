@@ -355,8 +355,9 @@ tile.technical4.2.desc=Sturdy
 tile.technical4.3.desc=MegaCell™ Battery
 tile.technical4.4.desc=Thermal Exhaust Plating
 tile.technical4.5.desc=Makeshift Plating
-tile.technical4.6.desc=Tape Drive? (I'm too young for this.)
-tile.technical4.7.desc=Pipe Dream
+tile.technical4.6.desc=Pipe Dream
+tile.technical4.7.desc=Worn Concrete
+tile.technical4.16.desc=Tape Drive? (I'm too young for this.)
 
 #End Stone
 tile.chisel.end_Stone.name=End Stone
