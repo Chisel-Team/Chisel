@@ -2480,7 +2480,8 @@ public enum Features {
 					.addVariation("tile.technical4.4.desc", 4, "technical/new/ExhaustPlating"/* , new SubmapManagerCombinedCTM(4, "technical/new/test/ExhaustPlating", TextureType.R4) */);
 			technical4.carverHelper.addVariation("tile.technical4.5.desc", 5, "technical/new/MakeshiftPanels");
 			technical4.carverHelper.addVariation("tile.technical4.6.desc", 6, "technical/new/Piping");
-			// The animation is malfunctioning. :(
+            technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/concrete/concreteBlocks" , new SubmapManagerCombinedCTM(9, "technical/new/concrete/concreteBlocks", TextureType.R9));
+            // The animation is malfunctioning. :(
 			// technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/TapeDrive");
 			technical4.carverHelper.registerBlock(technical4, "technical4");
 			technical4.carverHelper.registerVariations("technical");
