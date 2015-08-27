@@ -30,6 +30,7 @@ import team.chisel.network.ChiselGuiHandler;
 import team.chisel.network.PacketHandler;
 import team.chisel.proxy.CommonProxy;
 import team.chisel.utils.General;
+import team.chisel.utils.PerChunkData;
 import team.chisel.world.GeneratorChisel;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -131,6 +132,7 @@ public class Chisel {
 
 		TabsInit.preInit();
 		BlockPackRegistry.INSTANCE.preInit(event);
+		MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
 		Features.preInit();
 		Statistics.init();
 		PacketHandler.init();

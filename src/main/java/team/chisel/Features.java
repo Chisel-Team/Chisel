@@ -30,6 +30,7 @@ import team.chisel.item.ItemCarvable;
 import team.chisel.item.ItemCarvablePumpkin;
 import team.chisel.item.ItemCarvableSlab;
 import team.chisel.item.ItemCloudInABottle;
+import team.chisel.item.ItemOffsetTool;
 import team.chisel.item.ItemSmashingRock;
 import team.chisel.item.ItemUpgrade;
 import team.chisel.item.chisel.ItemChisel;
@@ -1814,6 +1815,14 @@ public enum Features {
 
 			obsidian.carverHelper.registerAll(obsidian, "obsidian");
 			Carving.chisel.registerOre("obsidian", "obsidian");
+		}
+	},
+	
+	OFFSET_TOOL {
+
+		@Override
+		void addItems() {
+			GameRegistry.registerItem(new ItemOffsetTool(), "offsettool");
 		}
 	},
 

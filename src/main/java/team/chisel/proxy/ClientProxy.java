@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 import team.chisel.block.BlockCarvableBeacon;
 import team.chisel.block.tileentity.TileEntityAutoChisel;
 import team.chisel.block.tileentity.TileEntityCarvableBeacon;
@@ -76,6 +77,8 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.chisel, renderer);
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.diamondChisel, renderer);
 //		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.antiBlock), new SubmapManagerAntiblock.AntiblockItemRenderer());
+		
+		MinecraftForge.EVENT_BUS.register(ChiselItems.offsettool);
 	}
 
 	@Override

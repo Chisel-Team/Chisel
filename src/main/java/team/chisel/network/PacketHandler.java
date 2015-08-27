@@ -6,6 +6,8 @@ import team.chisel.network.message.MessageChiselMode;
 import team.chisel.network.message.MessageChiselSound;
 import team.chisel.network.message.MessagePresentConnect;
 import team.chisel.network.message.MessageSlotUpdate;
+import team.chisel.utils.PerChunkData.MessageChunkData;
+import team.chisel.utils.PerChunkData.MessageChunkDataHandler;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 
@@ -21,5 +23,6 @@ public class PacketHandler {
 		INSTANCE.registerMessage(MessageAutoChisel.Handler.class, MessageAutoChisel.class, id++, Side.CLIENT);
 		INSTANCE.registerMessage(MessageChiselMode.Handler.class, MessageChiselMode.class, id++, Side.SERVER);
 		INSTANCE.registerMessage(MessagePresentConnect.Handler.class, MessagePresentConnect.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, id++, Side.CLIENT);
 	}
 }
