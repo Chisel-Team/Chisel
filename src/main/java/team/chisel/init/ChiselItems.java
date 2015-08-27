@@ -3,6 +3,7 @@ package team.chisel.init;
 import team.chisel.Chisel;
 import team.chisel.item.ItemBallOMoss;
 import team.chisel.item.ItemCloudInABottle;
+import team.chisel.item.ItemOffsetTool;
 import team.chisel.item.ItemSmashingRock;
 import team.chisel.item.ItemUpgrade;
 import team.chisel.item.chisel.ItemChisel;
@@ -18,6 +19,7 @@ public final class ChiselItems {
 	public static final ItemBallOMoss ballomoss = null;
 	public static final ItemSmashingRock smashingrock = null;
 	public static final ItemUpgrade upgrade = null;
+	public static final ItemOffsetTool offsettool = null;
 
 	private ChiselItems() {
 	}

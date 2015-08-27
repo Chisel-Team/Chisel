@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -22,6 +23,10 @@ import team.chisel.ctmlib.ISubmapManager;
 import team.chisel.ctmlib.RenderBlocksCTM;
 import team.chisel.ctmlib.RenderBlocksColumn;
 import team.chisel.ctmlib.TextureSubmap;
+import team.chisel.item.ItemOffsetTool;
+import team.chisel.item.ItemOffsetTool.OffsetData;
+import team.chisel.utils.PerChunkData;
+import team.chisel.utils.PerChunkData.ChunkDataBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -272,6 +277,16 @@ public enum TextureType {
 	public static IIcon getVIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
 		int variationSize = (type == TextureType.V9) ? 3 : 2;
 
+		ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.<ChunkDataBase<OffsetData>>getData(ItemOffsetTool.DATA_KEY);
+		if (cd != null) {
+			OffsetData data = cd.getDataForChunk(new ChunkCoordIntPair(x >> 4, z >> 4));
+			if (data != null) {
+				x += data.getOffsetX();
+				y += data.getOffsetY();
+				z += data.getOffsetZ();
+			}
+		}
+		
 		int xModulus = x % variationSize;
 		int zModulus = z % variationSize;
 		//This ensures that blocks placed near 0,0 or it's axis' do not misbehave
