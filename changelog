@@ -1,3 +1,15 @@
+2.9.0:
+Version is 2.9 while work on 3.0 is done. This is to avoid version clashes with Chisel 2.
+New
+- Concrete technical block
+Changes
+- Update to CTMLib 1.3.0
+Fixes
+- Fix blocks with stairs (ice, packed ice) not being chiselable properly.
+- Fix stairs not being chiselable
+API
+- Allow access to creative tabs
+
 CT2.5.0:
 New
 - Lots of new endstone variants
