@@ -3,7 +3,6 @@ package com.cricketcraft.chisel.api.carving;
 import java.util.ArrayList;
 import java.util.List;
 
-import team.chisel.ctmlib.ISubmapManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -15,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.oredict.OreDictionary;
+import team.chisel.ctmlib.ISubmapManager;
 
 import com.cricketcraft.chisel.api.ChiselAPIProps;
 import com.cricketcraft.chisel.api.FMPIMC;
@@ -100,7 +100,7 @@ public class CarvableHelper {
 	}
 
 	private IVariationInfo getClientInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager, int order) {
-		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, order);
+		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(getBlock(), metadata, order);
 		TextureType type = TextureType.getTypeFor(this, modid, texture);
 		if (type == TextureType.CUSTOM && customManager == null && block == null) {
 			throw new IllegalArgumentException(String.format("Could not find texture %s, and no custom texture manager was provided.", texture));
@@ -118,7 +118,7 @@ public class CarvableHelper {
 	}
 
 	private IVariationInfo getServerInfo(String modid, String texture, String description, int metadata, Block block, int blockMeta, ISubmapManager customManager, int order) {
-		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(theBlock, metadata, order);
+		ICarvingVariation var = CarvingUtils.getDefaultVariationFor(getBlock(), metadata, order);
 		return new VariationInfoBase(var, description, null);
 	}
 
@@ -209,11 +209,15 @@ public class CarvableHelper {
 	}
 
 	public void registerOre(String ore) {
-		OreDictionary.registerOre(ore, theBlock);
+		OreDictionary.registerOre(ore, getBlock());
 	}
 
 	@SideOnly(Side.CLIENT)
 	public IIcon getMissingIcon() {
 		return ((TextureMap) Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.locationBlocksTexture)).getAtlasSprite("missingno");
+	}
+	
+	public Block getBlock() {
+		return theBlock;
 	}
 }
