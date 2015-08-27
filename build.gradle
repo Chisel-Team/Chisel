@@ -62,7 +62,7 @@ repositories {
     
     maven {
         name 'Chisel Repo'
-        url "http://coloredlightscore.us.to/maven/chisel-2"
+        url "http://maven.tterrag.com/"
     }
 }
 
@@ -74,7 +74,7 @@ dependencies {
     compile "codechicken:ForgeMultipart:${minecraft_version}-${fmp_version}:dev"
     compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.505:dev"
     
-    shade ("com.cricketcraft.ctmlib:CTMLib:${ctmlib_version}") {
+    shade ("team.chisel.ctmlib:CTMLib:${ctmlib_version}") {
         transitive = false
     }
 }
