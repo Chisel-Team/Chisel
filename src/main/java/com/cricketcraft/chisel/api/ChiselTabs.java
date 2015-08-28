@@ -1,15 +1,10 @@
 package com.cricketcraft.chisel.api;
 
-import team.chisel.Features;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import team.chisel.init.ChiselBlocks;
-import team.chisel.init.ChiselItems;
 
 public class ChiselTabs {
 
