@@ -109,7 +109,6 @@ public class ItemOffsetTool extends Item {
 				ForgeDirection face = ForgeDirection.getOrientation(side);
 				data.move(getMoveDir(face, hitX, hitY, hitZ));
 				PerChunkData.INSTANCE.chunkModified(world.getChunkFromBlockCoords(x, z), DATA_KEY);
-				System.out.println(data.xOffset + " " + data.yOffset + " " + data.zOffset);
 			}
 		}
 		return super.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
@@ -159,8 +158,11 @@ public class ItemOffsetTool extends Item {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDepthMask(false);
+		
+		// Draw the X
 		tess.startDrawing(GL11.GL_LINES);
 		tess.setColorOpaque_I(0);
+		
 		double px = -(player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks);
 		double py = -(player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks);
 		double pz = -(player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks);
@@ -190,6 +192,7 @@ public class ItemOffsetTool extends Item {
 
 		Vec3 hit = mop.hitVec;
 
+		// Draw the triangle highlight
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GL11.glDisable(GL11.GL_CULL_FACE);
@@ -203,6 +206,8 @@ public class ItemOffsetTool extends Item {
 		boolean isY = moveDir.offsetY != 0;
 		boolean isZ = moveDir.offsetZ != 0;
 
+		// Always draw the center point first, then draw the next two points.
+		// Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
 		if (face.offsetX != 0) {
 			tess.addVertex(x, 0.5, 0.5);
 			tess.addVertex(x, isY ? clampedY : 0, isZ ? clampedZ : 0);
