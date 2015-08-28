@@ -37,21 +37,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public enum TextureType {
 
 	// @formatter:off
-	TOPSIDE("top", "side") {
-		@Override
-		protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
-			return new IIcon[]{
-					register.registerIcon(modName + ":" + texturePath + "-side"),
-					register.registerIcon(modName + ":" + texturePath + "-top")
-			};
-		}
-		
-		@Override
-		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, int side, int meta) {
-			IIcon[] icons = (IIcon[]) cachedObject;
-			return side > 1 ? icons[0] : icons[1];
-		}
-	},
 	TOPBOTSIDE("top", "bottom", "side"){
 		@Override
 		protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
@@ -66,6 +51,21 @@ public enum TextureType {
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, int side, int meta) {
 			IIcon[] icons = (IIcon[]) cachedObject;
 			return side > 1 ? icons[0] : icons[side + 1];
+		}
+	},
+	TOPSIDE("top", "side") {
+		@Override
+		protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
+			return new IIcon[]{
+					register.registerIcon(modName + ":" + texturePath + "-side"),
+					register.registerIcon(modName + ":" + texturePath + "-top")
+			};
+		}
+		
+		@Override
+		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, int side, int meta) {
+			IIcon[] icons = (IIcon[]) cachedObject;
+			return side > 1 ? icons[0] : icons[1];
 		}
 	},
 	CTMV("ctmv", "top"){
@@ -277,6 +277,7 @@ public enum TextureType {
 	public static IIcon getVIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
 		int variationSize = (type == TextureType.V9) ? 3 : 2;
 
+		// TODO this is not API safe
 		ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.<ChunkDataBase<OffsetData>>getData(ItemOffsetTool.DATA_KEY);
 		if (cd != null) {
 			OffsetData data = cd.getDataForChunk(new ChunkCoordIntPair(x >> 4, z >> 4));
