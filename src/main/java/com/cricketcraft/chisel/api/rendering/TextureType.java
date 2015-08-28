@@ -34,21 +34,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public enum TextureType {
 
 	// @formatter:off
-	TOPSIDE("top", "side") {
-		@Override
-		protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
-			return new IIcon[]{
-					register.registerIcon(modName + ":" + texturePath + "-side"),
-					register.registerIcon(modName + ":" + texturePath + "-top")
-			};
-		}
-		
-		@Override
-		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, int side, int meta) {
-			IIcon[] icons = (IIcon[]) cachedObject;
-			return side > 1 ? icons[0] : icons[1];
-		}
-	},
 	TOPBOTSIDE("top", "bottom", "side"){
 		@Override
 		protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
@@ -63,6 +48,21 @@ public enum TextureType {
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, int side, int meta) {
 			IIcon[] icons = (IIcon[]) cachedObject;
 			return side > 1 ? icons[0] : icons[side + 1];
+		}
+	},
+	TOPSIDE("top", "side") {
+		@Override
+		protected Object registerIcons(ICarvingVariation variation, String modName, String texturePath, IIconRegister register) {
+			return new IIcon[]{
+					register.registerIcon(modName + ":" + texturePath + "-side"),
+					register.registerIcon(modName + ":" + texturePath + "-top")
+			};
+		}
+		
+		@Override
+		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, int side, int meta) {
+			IIcon[] icons = (IIcon[]) cachedObject;
+			return side > 1 ? icons[0] : icons[1];
 		}
 	},
 	CTMV("ctmv", "top"){
