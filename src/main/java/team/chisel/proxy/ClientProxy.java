@@ -11,6 +11,7 @@ import team.chisel.block.BlockCarvableBeacon;
 import team.chisel.block.tileentity.TileEntityAutoChisel;
 import team.chisel.block.tileentity.TileEntityCarvableBeacon;
 import team.chisel.block.tileentity.TileEntityPresent;
+import team.chisel.client.render.InterpolatedIcon;
 import team.chisel.client.render.RenderChiselSnowman;
 import team.chisel.client.render.RendererCTM;
 import team.chisel.client.render.RendererCTMPane;
@@ -79,6 +80,7 @@ public class ClientProxy extends CommonProxy {
 //		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.antiBlock), new SubmapManagerAntiblock.AntiblockItemRenderer());
 		
 		MinecraftForge.EVENT_BUS.register(ChiselItems.offsettool);
+		MinecraftForge.EVENT_BUS.register(new InterpolatedIcon.RegistrationHandler());
 	}
 
 	@Override
