@@ -142,7 +142,7 @@ public class ItemOffsetTool extends Item {
 		EntityPlayer player = event.player;
 
 		Block block = player.worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ);
-		if (block instanceof ICarvable) {
+		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == this && block instanceof ICarvable) {
 			ICarvable carvable = (ICarvable) block;
 			if (!validTypes.contains(carvable.getManager(player.worldObj.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ)).getType())) {
 				return;
