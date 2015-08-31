@@ -23,6 +23,7 @@ import team.chisel.client.render.RendererSimpleLayered;
 import team.chisel.client.render.RendererSnakeStone;
 import team.chisel.client.render.RendererStairs;
 import team.chisel.client.render.item.ItemChiselRenderer;
+import team.chisel.client.render.item.ItemStarFieldRenderer;
 import team.chisel.client.render.tile.RenderAutoChisel;
 import team.chisel.client.render.tile.RenderCarvableBeacon;
 import team.chisel.client.render.tile.RenderPresent;
@@ -78,8 +79,13 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.chisel, renderer);
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.diamondChisel, renderer);
 //		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ChiselBlocks.antiBlock), new SubmapManagerAntiblock.AntiblockItemRenderer());
-		
+
 		MinecraftForge.EVENT_BUS.register(ChiselItems.offsettool);
+
+		ItemStarFieldRenderer enderStarField = new ItemStarFieldRenderer();
+
+		MinecraftForgeClient.registerItemRenderer(ChiselItems.offsettool, enderStarField);
+
 		MinecraftForge.EVENT_BUS.register(new InterpolatedIcon.RegistrationHandler());
 	}
 
