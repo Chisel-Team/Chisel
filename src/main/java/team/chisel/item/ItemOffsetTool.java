@@ -248,4 +248,11 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 	public float getMaskMultiplier(ItemStack stack, EntityPlayer player) {
 		return 1.0f;
 	}
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean requiresMultipleRenderPasses()
+    {
+        return true;
+    }
 }

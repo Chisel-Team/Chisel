@@ -1,5 +1,6 @@
 package team.chisel.proxy;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,17 +12,8 @@ import team.chisel.block.BlockCarvableBeacon;
 import team.chisel.block.tileentity.TileEntityAutoChisel;
 import team.chisel.block.tileentity.TileEntityCarvableBeacon;
 import team.chisel.block.tileentity.TileEntityPresent;
-import team.chisel.client.render.InterpolatedIcon;
-import team.chisel.client.render.RenderChiselSnowman;
-import team.chisel.client.render.RendererCTM;
-import team.chisel.client.render.RendererCTMPane;
-import team.chisel.client.render.RendererEldritch;
-import team.chisel.client.render.RendererLayeredGlow;
-import team.chisel.client.render.RendererMultiLayer;
-import team.chisel.client.render.RendererRoadLine;
-import team.chisel.client.render.RendererSimpleLayered;
-import team.chisel.client.render.RendererSnakeStone;
-import team.chisel.client.render.RendererStairs;
+import team.chisel.client.ClientTickHandler;
+import team.chisel.client.render.*;
 import team.chisel.client.render.item.ItemChiselRenderer;
 import team.chisel.client.render.item.ItemStarFieldRenderer;
 import team.chisel.client.render.tile.RenderAutoChisel;
@@ -82,11 +74,19 @@ public class ClientProxy extends CommonProxy {
 
 		MinecraftForge.EVENT_BUS.register(ChiselItems.offsettool);
 
+        MinecraftForge.EVENT_BUS.register(new InterpolatedIcon.RegistrationHandler());
+
+        // Had 75% no idea what I was doing. Shaders, woo!
+
+        // TODO: Resource location "textures/entity/end_portal.png" Find out where the fuck to put this
+
+        FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+
 		ItemStarFieldRenderer enderStarField = new ItemStarFieldRenderer();
 
 		MinecraftForgeClient.registerItemRenderer(ChiselItems.offsettool, enderStarField);
 
-		MinecraftForge.EVENT_BUS.register(new InterpolatedIcon.RegistrationHandler());
+		ShaderHelper.initShaders();
 	}
 
 	@Override

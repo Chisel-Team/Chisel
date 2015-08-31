@@ -6,6 +6,7 @@ import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL11;
+import team.chisel.client.ClientTickHandler;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -34,7 +35,7 @@ public class ShaderHelper {
 
         if(shader != 0) {
             int time = ARBShaderObjects.glGetUniformLocationARB(shader, "time");
-            ARBShaderObjects.glUniform1iARB(time, (int)(Minecraft.getMinecraft().thePlayer.worldObj.getWorldTime() % Integer.MAX_VALUE));
+            ARBShaderObjects.glUniform1iARB(time, ClientTickHandler.gameTicks);
 
             if(callback != null)
                 callback.call(shader);

@@ -73,13 +73,13 @@ public class ItemStarFieldRenderer implements IItemRenderer {
                     GL11.glDisable(GL11.GL_ALPHA_TEST);
                     GL11.glDisable(GL11.GL_DEPTH_TEST);
 
-                    IShaderRenderItem ISRI = (IShaderRenderItem)(item.getItem());
+                    IShaderRenderItem icri = (IShaderRenderItem)(item.getItem());
 
-                    StarFieldRendererHelper.cosmicOpacity = ISRI.getMaskMultiplier(item, null);
+                    StarFieldRendererHelper.cosmicOpacity = icri.getMaskMultiplier(item, null);
                     StarFieldRendererHelper.inventoryRender = true;
                     StarFieldRendererHelper.useShader();
 
-                    IIcon cosmicicon = ISRI.getMaskTexture(item, null);
+                    IIcon cosmicicon = icri.getMaskTexture(item, null);
 
                     GL11.glColor4d(1, 1, 1, 1);
 
@@ -160,11 +160,11 @@ public class ItemStarFieldRenderer implements IItemRenderer {
         if (item.getItem() instanceof IShaderRenderItem) {
             GL11.glDisable(GL11.GL_ALPHA_TEST);
             GL11.glDepthFunc(GL11.GL_EQUAL);
-            IShaderRenderItem ISRI = (IShaderRenderItem)(item.getItem());
-            StarFieldRendererHelper.cosmicOpacity = ISRI.getMaskMultiplier(item, player);
+            IShaderRenderItem icri = (IShaderRenderItem)(item.getItem());
+            StarFieldRendererHelper.cosmicOpacity = icri.getMaskMultiplier(item, player);
             StarFieldRendererHelper.useShader();
 
-            IIcon cosmicicon = ISRI.getMaskTexture(item, player);
+            IIcon cosmicicon = icri.getMaskTexture(item, player);
 
             float minu = cosmicicon.getMinU();
             float maxu = cosmicicon.getMaxU();
