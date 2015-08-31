@@ -7,10 +7,12 @@ import java.util.Map;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
@@ -19,8 +21,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
+import team.chisel.Chisel;
 import team.chisel.api.ChiselTabs;
 import team.chisel.api.ICarvable;
+import team.chisel.api.rendering.IShaderRenderItem;
 import team.chisel.api.rendering.TextureType;
 import team.chisel.utils.NBTSaveable;
 import team.chisel.utils.PerChunkData;
@@ -35,7 +39,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import static net.minecraftforge.common.util.ForgeDirection.*;
 
-public class ItemOffsetTool extends Item {
+public class ItemOffsetTool extends Item implements IShaderRenderItem {
 
 	public static class OffsetData implements NBTSaveable {
 
@@ -84,12 +88,13 @@ public class ItemOffsetTool extends Item {
 
 	public static final String DATA_KEY = "offsettool";
 	private static final List<TextureType> validTypes = Lists.newArrayList(TextureType.V4, TextureType.V9 /* SOON, TextureType.V16 */);
+    private IIcon shaderMask;
 
 	public ItemOffsetTool() {
 		super();
 		setCreativeTab(ChiselTabs.tabChisel);
 		setUnlocalizedName("chisel.offsettool");
-		setTextureName("offsettool");
+		setTextureName(Chisel.MOD_ID + ":tools/offsetTool_anim");
 		PerChunkData.INSTANCE.registerChunkData(DATA_KEY, new ChunkDataBase<OffsetData>(OffsetData.class, true));
 	}
 
@@ -224,5 +229,23 @@ public class ItemOffsetTool extends Item {
 		tess.draw();
 		GL11.glPopAttrib();
 		GL11.glPopMatrix();
+	}
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerIcons(IIconRegister iconRegister) {
+        super.registerIcons(iconRegister);
+
+        this.shaderMask = iconRegister.registerIcon(Chisel.MOD_ID + ":tools/offsetTool_mask_anim");
+    }
+
+	@Override
+	public IIcon getMaskTexture(ItemStack stack, EntityPlayer player) {
+		return shaderMask;
+	}
+
+	@Override
+	public float getMaskMultiplier(ItemStack stack, EntityPlayer player) {
+		return 1.0f;
 	}
 }
