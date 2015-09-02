@@ -1,22 +1,24 @@
 package team.chisel.client.render;
 
-import net.minecraft.client.Minecraft;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import net.minecraft.client.renderer.OpenGlHelper;
+
 import org.lwjgl.opengl.ARBFragmentShader;
 import org.lwjgl.opengl.ARBShaderObjects;
 import org.lwjgl.opengl.ARBVertexShader;
 import org.lwjgl.opengl.GL11;
-import team.chisel.client.ClientTickHandler;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import team.chisel.Chisel;
+import team.chisel.client.ClientTickHandler;
 
 public class ShaderHelper {
 
     private static final int VERT = ARBVertexShader.GL_VERTEX_SHADER_ARB;
     private static final int FRAG = ARBFragmentShader.GL_FRAGMENT_SHADER_ARB;
-    private static final String PREFIX = "/assets/chisel/shader/";
+    private static final String PREFIX = "/assets/chisel/shaders/";
 
     public static int starFieldShader = 0;
 
@@ -78,13 +80,13 @@ public class ShaderHelper {
 
         ARBShaderObjects.glLinkProgramARB(program);
         if(ARBShaderObjects.glGetObjectParameteriARB(program, ARBShaderObjects.GL_OBJECT_LINK_STATUS_ARB) == GL11.GL_FALSE) {
-            //Physis.logger.error(getLogInfo(program));
+            Chisel.logger.error(getLogInfo(program));
             return 0;
         }
 
         ARBShaderObjects.glValidateProgramARB(program);
         if (ARBShaderObjects.glGetObjectParameteriARB(program, ARBShaderObjects.GL_OBJECT_VALIDATE_STATUS_ARB) == GL11.GL_FALSE) {
-            //Physis.logger.error(getLogInfo(program));
+            Chisel.logger.error(getLogInfo(program));
             return 0;
         }
 

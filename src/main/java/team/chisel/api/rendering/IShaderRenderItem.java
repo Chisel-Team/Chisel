@@ -9,7 +9,7 @@ import net.minecraft.util.IIcon;
 public interface IShaderRenderItem {
 
     @SideOnly(Side.CLIENT)
-    public IIcon getMaskTexture(ItemStack stack, EntityPlayer player);
+    public IIcon getOverlayTexture(ItemStack stack, EntityPlayer player);
 
     @SideOnly(Side.CLIENT)
     public float getMaskMultiplier(ItemStack stack, EntityPlayer player);

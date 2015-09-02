@@ -88,13 +88,13 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 
 	public static final String DATA_KEY = "offsettool";
 	private static final List<TextureType> validTypes = Lists.newArrayList(TextureType.V4, TextureType.V9 /* SOON, TextureType.V16 */);
-    private IIcon shaderMask;
+    private IIcon overlay;
 
 	public ItemOffsetTool() {
 		super();
 		setCreativeTab(ChiselTabs.tabChisel);
 		setUnlocalizedName("chisel.offsettool");
-		setTextureName(Chisel.MOD_ID + ":tools/offsetTool_anim");
+		setTextureName(Chisel.MOD_ID + ":tools/offsetTool_mask");
 		PerChunkData.INSTANCE.registerChunkData(DATA_KEY, new ChunkDataBase<OffsetData>(OffsetData.class, true));
 	}
 
@@ -235,24 +235,16 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
     @Override
     public void registerIcons(IIconRegister iconRegister) {
         super.registerIcons(iconRegister);
-
-        this.shaderMask = iconRegister.registerIcon(Chisel.MOD_ID + ":tools/offsetTool_mask_anim");
+        this.overlay = iconRegister.registerIcon(Chisel.MOD_ID + ":tools/offsetTool_anim");
     }
 
 	@Override
-	public IIcon getMaskTexture(ItemStack stack, EntityPlayer player) {
-		return shaderMask;
+	public IIcon getOverlayTexture(ItemStack stack, EntityPlayer player) {
+		return overlay;
 	}
 
 	@Override
 	public float getMaskMultiplier(ItemStack stack, EntityPlayer player) {
 		return 1.0f;
 	}
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean requiresMultipleRenderPasses()
-    {
-        return true;
-    }
 }
