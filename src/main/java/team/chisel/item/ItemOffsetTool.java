@@ -95,6 +95,7 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 		setCreativeTab(ChiselTabs.tabChisel);
 		setUnlocalizedName("chisel.offsettool");
 		setTextureName(Chisel.MOD_ID + ":tools/offsetTool_mask");
+		setFull3D();
 		PerChunkData.INSTANCE.registerChunkData(DATA_KEY, new ChunkDataBase<OffsetData>(OffsetData.class, true));
 	}
 
