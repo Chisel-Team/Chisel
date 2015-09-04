@@ -43,9 +43,7 @@ public final class ChiselController {
 
 		switch (event.action) {
 		case LEFT_CLICK_BLOCK:
-			boolean shifting = false;
-			if(event.entityPlayer.isSneaking())
-				shifting = true;
+			boolean shifting = event.entityPlayer.isSneaking();
 			int x = event.x,
 			y = event.y,
 			z = event.z;
