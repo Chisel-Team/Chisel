@@ -704,7 +704,7 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockCarvable end_Stone = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
-			Carving.chisel.addVariation("end_Stone", Blocks.end_stone, 0, -1);
+			Carving.chisel.addVariation("end_stone", Blocks.end_stone, 0, -1);
 			end_Stone.carverHelper.addVariation("tile.end_Stone.0.desc", 0, "endstone/end_bricks");
 			end_Stone.carverHelper.addVariation("tile.end_Stone.1.desc", 1, "endstone/chaoticBricks");
 			end_Stone.carverHelper.addVariation("tile.end_Stone.2.desc", 2, "endstone/CheckeredTile");
