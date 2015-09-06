@@ -102,7 +102,7 @@ public enum Features {
 			aluminumStairs.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/aluminum/adv");
 			aluminumStairs.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/aluminum/egregious");
 			aluminumStairs.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/aluminum/bolted");
-			aluminumStairs.create("aluminum_stairs", ChiselBlocks.aluminumStairs);
+			aluminumStairs.create("aluminum_stairs", ChiselBlocks.aluminumStairs, ChiselBlocks.aluminumStairs.length);
 			Carving.chisel.registerOre("aluminum_stairs", "aluminum_stairs");
 		}
 	},
@@ -1222,7 +1222,7 @@ public enum Features {
 				public BlockCarvableStairs create(Block block, int meta, CarvableHelper helper) {
 					return new BlockCarvableIceStairs(block, meta, helper);
 				}
-			}, "ice_stairs", ChiselBlocks.iceStairs);
+			}, "ice_stairs", ChiselBlocks.iceStairs, ChiselBlocks.iceStairs.length);
 			Carving.chisel.registerOre("ice_stairs", "iceStairs");
 		}
 	},
@@ -1507,7 +1507,7 @@ public enum Features {
 			makerLimestoneStairs.carverHelper.addVariation("tile.limestoneStairs.13.desc", 13, "limestone/terrain-pistonback-lightfour");
 			makerLimestoneStairs.carverHelper.addVariation("tile.limestoneStairs.14.desc", 14, "limestone/terrain-pistonback-lightmarker");
 			makerLimestoneStairs.carverHelper.addVariation("tile.limestoneStairs.15.desc", 15, "limestone/terrain-pistonback-lightpanel");
-			makerLimestoneStairs.create("limestone_stairs", ChiselBlocks.limestoneStairs);
+			makerLimestoneStairs.create("limestone_stairs", ChiselBlocks.limestoneStairs, ChiselBlocks.limestoneStairs.length);
 			Carving.chisel.registerOre("limestone_stairs", "limestone_stairs");
 		}
 
@@ -1585,7 +1585,7 @@ public enum Features {
 			makerMarbleStairs.carverHelper.addVariation("tile.marbleStairs.13.desc", 13, "marbleslab/marble-arranged-bricks");
 			makerMarbleStairs.carverHelper.addVariation("tile.marbleStairs.14.desc", 14, "marbleslab/marble-fancy-bricks");
 			makerMarbleStairs.carverHelper.addVariation("tile.marbleStairs.15.desc", 15, "marbleslab/marble-blocks");
-			makerMarbleStairs.create("marble_stairs", ChiselBlocks.marbleStairs);
+			makerMarbleStairs.create("marble_stairs", ChiselBlocks.marbleStairs, ChiselBlocks.marbleStairs.length);
 		}
 
 		@Override
@@ -1895,7 +1895,7 @@ public enum Features {
 				public BlockCarvableStairs create(Block block, int meta, CarvableHelper helper) {
 					return new BlockCarvablePackedIceStairs(block, meta, helper);
 				}
-			}, "packedice_stairs", ChiselBlocks.packediceStairs);
+			}, "packedice_stairs", ChiselBlocks.packediceStairs, ChiselBlocks.marbleStairs.length);
 			Carving.chisel.registerOre("packedice_stairs", "packedIceStairs");
 		}
 	},
