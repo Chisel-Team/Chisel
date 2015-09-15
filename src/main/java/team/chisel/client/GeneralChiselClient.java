@@ -2,6 +2,13 @@ package team.chisel.client;
 
 import java.util.Random;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.particle.EntityDiggingFX;
+import net.minecraft.client.particle.EntityLavaFX;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import team.chisel.block.BlockGrimstone;
 import team.chisel.block.BlockHolystone;
 import team.chisel.block.BlockLavastone;
@@ -14,15 +21,6 @@ import team.chisel.entity.fx.EntityGrimstoneFX;
 import team.chisel.entity.fx.EntityHolystoneFX;
 import team.chisel.entity.fx.EntitySnakestoneObsidianFX;
 import team.chisel.utils.GeneralClient;
-import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.particle.EffectRenderer;
-import net.minecraft.client.particle.EntityDiggingFX;
-import net.minecraft.client.particle.EntityLavaFX;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class GeneralChiselClient {
 
@@ -234,25 +232,6 @@ public class GeneralChiselClient {
 		}
 
 		GeneralClient.playChiselSound(world, x, y, z, sound);
-	}
-
-	public static void speedupPlayer(World world, Entity entity, double concreteVelocity) {
-		double velocity = Math.sqrt(entity.motionX * entity.motionX + entity.motionZ * entity.motionZ);
-
-		if (!(entity instanceof EntityPlayerSP))
-			return;
-		if (velocity == 0)
-			return;
-		if (velocity >= Configurations.concreteVelocity)
-			return;
-
-		EntityPlayerSP player = (EntityPlayerSP) entity;
-
-		if (Math.abs(player.movementInput.moveForward) < 0.75f && Math.abs(player.movementInput.moveStrafe) < 0.75f)
-			return;
-
-		entity.motionX = Configurations.concreteVelocity * entity.motionX / velocity;
-		entity.motionZ = Configurations.concreteVelocity * entity.motionZ / velocity;
 	}
 
 	public static void spawnAutoChiselFX(TileEntityAutoChisel te, ItemStack base) {

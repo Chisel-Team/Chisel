@@ -1,35 +1,45 @@
 package team.chisel.block;
 
-import team.chisel.client.GeneralChiselClient;
+import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovementInput;
+import net.minecraft.util.MovementInputFromOptions;
 import team.chisel.config.Configurations;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockConcrete extends BlockCarvable {
 
 	public BlockConcrete() {
 		super();
+		FMLCommonHandler.instance().bus().register(this);
 	}
 
-	@Override
-	public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {
-		if (Configurations.fullBlockConcrete)
-			return AxisAlignedBB.getBoundingBox(par2, par3, par4, (par2 + 1), ((par3 + 1)), (par4 + 1));
-		else
-			return AxisAlignedBB.getBoundingBox(par2, par3, par4, (par2 + 1), ((par3 + 1) - 0.125F), (par4 + 1));
+	@SideOnly(Side.CLIENT)
+	private static MovementInput manualInputCheck;
+
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void speedupPlayer(PlayerTickEvent event) {
+		if (event.phase == Phase.START && event.side.isClient() && event.player.onGround) {
+			if (manualInputCheck == null) {
+				manualInputCheck = new MovementInputFromOptions(Minecraft.getMinecraft().gameSettings);
+			}
+			EntityPlayerSP player = (EntityPlayerSP) event.player;
+			Block below = player.worldObj.getBlock(MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY) - 2, MathHelper.floor_double(player.posZ));
+			if (below == this) {
+				manualInputCheck.updatePlayerMoveState();
+				if (manualInputCheck.moveForward != 0 || manualInputCheck.moveStrafe != 0) {
+					player.motionX *= Configurations.concreteVelocityMult + 0.05;
+					player.motionZ *= Configurations.concreteVelocityMult + 0.05;
+				}
+			}
+		}
 	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-		if (FMLCommonHandler.instance().getEffectiveSide() != Side.CLIENT)
-			return;
-		if (Configurations.concreteVelocity == 0)
-			return;
-
-		GeneralChiselClient.speedupPlayer(world, entity, Configurations.concreteVelocity);
-	}
-
 }
