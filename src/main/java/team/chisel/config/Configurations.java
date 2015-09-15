@@ -17,7 +17,7 @@ public class Configurations {
 
 	public static boolean configExists;
 
-	public static double concreteVelocity;
+	public static double concreteVelocityMult;
 	public static boolean ghostCloud;
 	public static int factoryBlockAmount;
 	public static boolean allowMossy;
@@ -65,8 +65,7 @@ public class Configurations {
 
 		/* general */
 		category = "general";
-		concreteVelocity = config.get(category, "concreteVelocity", 0.45,
-				"Traversing concrete roads, players will acceleration to this velocity. For reference, normal running speed is about 0.28. Set to 0 to disable acceleration.").getDouble(0.45);
+		concreteVelocityMult = config.get(category, "concreteVelocityMult", 1.35, "The factor that concrete increases your velocity. Default is 1.35, set to 1 for no change.").getDouble();
 		fullBlockConcrete = config.get(category, "fullBlockConcrete", false, "Should concrete be a full block. This will also unavoidably disable speed increase if set to true.").getBoolean(false);
 		ghostCloud = config.get(category, "doesCloudRenderLikeGhost", true).getBoolean(true);
 		factoryBlockAmount = config.get(category, "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
