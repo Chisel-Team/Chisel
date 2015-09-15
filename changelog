@@ -1,3 +1,9 @@
+2.9.1:
+Fixes
+- Fix TOPBOTSIDE blocks (like the battery) being broken and showing the top texture on the bottom
+API
+- Fix ChiselTabs referencing internal classes in imports
+
 2.9.0:
 Version is 2.9 while work on 3.0 is done. This is to avoid version clashes with Chisel 2.
 New

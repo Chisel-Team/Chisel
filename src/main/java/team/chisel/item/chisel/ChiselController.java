@@ -43,6 +43,7 @@ public final class ChiselController {
 
 		switch (event.action) {
 		case LEFT_CLICK_BLOCK:
+			boolean shifting = event.entityPlayer.isSneaking();
 			int x = event.x,
 			y = event.y,
 			z = event.z;
@@ -84,7 +85,10 @@ public final class ChiselController {
 					for (int i = 0; i < variations.length; i++) {
 						ICarvingVariation v = variations[i];
 						if (v.getBlock() == block && v.getBlockMeta() == metadata) {
-							idx = (i + 1) % variations.length; // move to the next in the group
+							if(shifting)
+								idx = (i - 1) % variations.length; // move to the previous in the group
+							else
+								idx = (i + 1) % variations.length; // move to the next in the group
 							break;
 						}
 					}
