@@ -5,25 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import com.pahimar.ee3.api.exchange.RecipeRegistryProxy;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-
-import org.apache.logging.log4j.Level;
-
-import team.chisel.Chisel;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.carving.Carving;
-import team.chisel.init.ChiselBlocks;
-import team.chisel.init.ChiselItems;
 import team.chisel.utils.RecipeUtil;
 
 import com.google.common.collect.Maps;
-import com.pahimar.ee3.api.exchange.EnergyValueRegistryProxy;
+import com.pahimar.ee3.api.exchange.RecipeRegistryProxy;
 
-import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;

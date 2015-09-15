@@ -11,7 +11,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import team.chisel.api.ChiselAPIProps;
-import team.chisel.api.ChiselTabs;
 import team.chisel.api.Statistics;
 import team.chisel.api.carving.CarvableHelper;
 import team.chisel.block.BlockCarvable;

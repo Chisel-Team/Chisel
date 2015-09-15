@@ -1,19 +1,19 @@
 package team.chisel.utils;
 
-import cpw.mods.fml.common.registry.GameRegistry;
+import java.util.List;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
-
-import java.util.List;
 
 /**
  * Utility for crafting/recipe things
  */
 public class RecipeUtil {
 
-    public static boolean isCraftable(ItemStack stack){
+    @SuppressWarnings("unchecked")
+	public static boolean isCraftable(ItemStack stack){
         for (IRecipe recipe : (List<IRecipe>)CraftingManager.getInstance().getRecipeList()){
             if (recipe.getRecipeOutput()==null){
                 continue;
