@@ -66,6 +66,7 @@ public class BlockCarvable extends Block implements ICarvable {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		carverHelper.registerBlockIcons(Chisel.MOD_ID, this, register);
 	}
