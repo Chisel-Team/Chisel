@@ -1,6 +1,10 @@
 2.9.1:
+Changes
+- While holding shift, left-click chiseling order will be reversed (Cricket)
+- Concrete now has a full bounding box, and the method of speeding up the player has been redone to be much less frustrating
 Fixes
 - Fix TOPBOTSIDE blocks (like the battery) being broken and showing the top texture on the bottom
+- Fix compatibility endstone blocks being in the wrong group (minecreatr)
 API
 - Fix ChiselTabs referencing internal classes in imports
 
