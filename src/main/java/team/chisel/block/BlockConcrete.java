@@ -27,7 +27,7 @@ public class BlockConcrete extends BlockCarvable {
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
 	public void speedupPlayer(PlayerTickEvent event) {
-		if (event.phase == Phase.START && event.side.isClient() && event.player.onGround) {
+		if (event.phase == Phase.START && event.side.isClient() && event.player.onGround && event.player instanceof EntityPlayerSP) {
 			if (manualInputCheck == null) {
 				manualInputCheck = new MovementInputFromOptions(Minecraft.getMinecraft().gameSettings);
 			}
