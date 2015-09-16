@@ -165,8 +165,8 @@ String getChangelogText() {
             return
         }
         if (it.size() > 1) {
-            def temp = "$it" + (lineCount == 0 ? '\n\n' : '\n')
-            str += (it.startsWith('-') ? '' : '\n') + "$temp"
+            def temp = "$it" + (lineCount == 0 ? '<br/><br/>' : '<br/>)
+            str += (it.startsWith('-') ? '' : '<br/>') + "$temp"
             lineCount++
             return
         } else {
