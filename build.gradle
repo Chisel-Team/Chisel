@@ -40,7 +40,7 @@ project.buildnumber = System.getenv('BUILD_NUMBER') == null ? "CUSTOM" : System.
 
 version = dev ? "${branchname}-${project.ext.gitHash}-${buildnumber}" : "${mod_version}.${buildnumber}"
 group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = dev ? "Chisel_DEV" : "Chisel"
+archivesBaseName = "Chisel"
 
 minecraft {
     version = "${minecraft_version}-${forge_version}"
