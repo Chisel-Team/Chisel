@@ -2,11 +2,7 @@ package team.chisel.block;
 
 import java.util.List;
 
-import team.chisel.api.ChiselTabs;
-import team.chisel.api.ICarvable;
-import team.chisel.api.carving.CarvableHelper;
-import team.chisel.api.carving.IVariationInfo;
-import team.chisel.api.rendering.ClientUtils;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockGlass;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,6 +10,13 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
+import team.chisel.api.ChiselTabs;
+import team.chisel.api.ICarvable;
+import team.chisel.api.carving.CarvableHelper;
+import team.chisel.api.carving.IVariationInfo;
+import team.chisel.api.rendering.ClientUtils;
+import team.chisel.ctmlib.CTM;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -21,6 +24,7 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable {
 
 	public CarvableHelper carverHelper;
 	private boolean isAlpha = false;
+	private CTM ctm = CTM.getInstance();
 
 	public BlockCarvableGlass() {
 		super(Material.glass, false);
@@ -52,6 +56,19 @@ public class BlockCarvableGlass extends BlockGlass implements ICarvable {
 	@Override
 	public IIcon getIcon(int side, int metadata) {
 		return carverHelper.getIcon(side, metadata);
+	}
+	
+	@Override
+	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y, int z, int side) {
+		ForgeDirection face = ForgeDirection.getOrientation(side).getOpposite();
+		int meX = x + face.offsetX;
+		int meY = y + face.offsetY;
+		int meZ = z + face.offsetZ;
+		Block block = world.getBlock(meX, meY, meZ);
+		int meta = world.getBlockMetadata(meX, meY, meZ);
+		Block otherBlock = ctm.getBlockOrFacade(world, x, y, z, face.ordinal());
+		int otherMeta = ctm.getBlockOrFacadeMetadata(world, x, y, z, face.ordinal());
+		return block != otherBlock || meta != otherMeta;
 	}
 
 	@Override
