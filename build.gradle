@@ -28,6 +28,9 @@ import org.ajoberstar.grgit.Grgit
 def repo = Grgit.open(project.file('.'))
 project.ext.gitHash = repo.log().find().abbreviatedId
 def branchname = repo.branch.getCurrent().fullName
+if (branchname.contains('HEAD')) {
+    branchname = System.getenv("GIT_BRANCH")
+}
 branchname = branchname.substring(branchname.lastIndexOf('/') + 1)
 
 boolean dev = System.getenv("RELEASE") == null || System.getenv("RELEASE").equalsIgnoreCase("false")
