@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import team.chisel.api.blockpack.BlockPack;
+import team.chisel.api.blockpack.BlockPackProvider;
 import team.chisel.api.blockpack.IBlockPack;
 
 import com.google.common.base.Throwables;
@@ -17,6 +18,8 @@ import cpw.mods.fml.common.discovery.ASMDataTable.ASMData;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import team.chisel.api.blockpack.IBlockPackProvider;
+import team.chisel.api.blockpack.IProvidedBlockPack;
 
 public enum BlockPackRegistry {
 	INSTANCE;
@@ -54,12 +57,31 @@ public enum BlockPackRegistry {
 		}
 	}
 
-	private Set<ASMData> annotations;
+	private class BlockPackProviderData {
+		private ASMData data;
+		private String name;
+		private List<String> modDeps;
+
+		@SuppressWarnings("unchecked")
+		private BlockPackProviderData(ASMData data){
+			this.data = data;
+			this.name = (String) data.getAnnotationInfo().get("value");
+			this.modDeps = (List<String>) data.getAnnotationInfo().get("modDeps");
+
+			if (this.modDeps == null){
+				this.modDeps = Lists.newArrayList();
+			}
+		}
+	}
+
+	private Set<ASMData> blockBackAnnotations;
+	private Set<ASMData> blockPackProviderAnnotations;
 	private Set<BlockPackKey> blockPacks = Sets.newHashSet();
 
 	public void preInit(FMLPreInitializationEvent event) {
-		annotations = event.getAsmData().getAll(BlockPack.class.getName());
-		register();
+		blockBackAnnotations = event.getAsmData().getAll(BlockPack.class.getName());
+		blockPackProviderAnnotations = event.getAsmData().getAll(BlockPackProvider.class.getName());
+		register(event);
 		for (BlockPackKey key : blockPacks) {
 			key.pack.preInit(event);
 		}
@@ -82,15 +104,30 @@ public enum BlockPackRegistry {
 	/**
 	 * For internal use only. Do not call. Callers will be sacked.
 	 */
-	private void register() {
+	private void register(FMLPreInitializationEvent event) {
 		if (registered) {
 			throw new IllegalStateException("I warned you!");
 		}
 
+		Map<String, BlockPackProviderData> loadedProviders = Maps.newHashMap();
+		for (ASMData data : blockPackProviderAnnotations){
+			BlockPackProviderData info = new BlockPackProviderData(data);
+			loadedProviders.put(info.name, info);
+		}
+
 		Map<String, BlockPackData> loaded = Maps.newHashMap();
-		for (ASMData data : annotations) {
+		for (ASMData data : blockBackAnnotations) {
 			BlockPackData info = new BlockPackData(data);
 			loaded.put(info.name, info);
+		}
+
+		Set<String> providerBlacklist = Sets.newHashSet();
+		for (BlockPackProviderData data : loadedProviders.values()){
+			for (String s : data.modDeps){
+				if (!Loader.isModLoaded(s)){
+					providerBlacklist.add(data.name);
+				}
+			}
 		}
 
 		Set<String> blacklist = Sets.newHashSet();
@@ -108,6 +145,10 @@ public enum BlockPackRegistry {
 			}
 		}
 
+		for (String s : providerBlacklist){
+			loadedProviders.remove(s);
+		}
+
 		for (String s : blacklist) {
 			loaded.remove(s);
 		}
@@ -115,6 +156,12 @@ public enum BlockPackRegistry {
 		for (BlockPackData pack : loaded.values()) {
 			registerBlockPack(pack);
 		}
+
+		for (BlockPackProviderData provider : loadedProviders.values()){
+			registerBlockPackProvider(provider, event);
+		}
+
+
 
 		registered = true;
 	}
@@ -129,4 +176,18 @@ public enum BlockPackRegistry {
 			Throwables.propagate(e);
 		}
 	}
+
+	@SuppressWarnings("unchecked")
+	private void registerBlockPackProvider(BlockPackProviderData provider, FMLPreInitializationEvent event){
+		try {
+			Class<? extends IBlockPackProvider> clazz = (Class<? extends IBlockPackProvider>) Class.forName(provider.data.getClassName());
+			IBlockPackProvider inst = clazz.newInstance();
+			for (IProvidedBlockPack pack : inst.getProvidedPacks(event)){
+				blockPacks.add(new BlockPackKey(pack, pack.getName()));
+			}
+		} catch (Exception e){
+			Throwables.propagate(e);
+		}
+	}
+
 }
