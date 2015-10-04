@@ -553,17 +553,17 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockCarvable concrete = (BlockConcrete) new BlockConcrete().setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(0.5F);
-			concrete.carverHelper.addVariation("tile.concrete.0.desc", 0, "concrete/default");
-			concrete.carverHelper.addVariation("tile.concrete.1.desc", 1, "concrete/block");
-			concrete.carverHelper.addVariation("tile.concrete.2.desc", 2, "concrete/doubleslab");
-			concrete.carverHelper.addVariation("tile.concrete.3.desc", 3, "concrete/blocks");
-			concrete.carverHelper.addVariation("tile.concrete.4.desc", 4, "concrete/weathered");
-			concrete.carverHelper.addVariation("tile.concrete.5.desc", 5, "concrete/weathered-block");
-			concrete.carverHelper.addVariation("tile.concrete.6.desc", 6, "concrete/weathered-doubleslab");
-			concrete.carverHelper.addVariation("tile.concrete.7.desc", 7, "concrete/weathered-blocks");
-			concrete.carverHelper.addVariation("tile.concrete.8.desc", 8, "concrete/weathered-half");
-			concrete.carverHelper.addVariation("tile.concrete.9.desc", 9, "concrete/weathered-block-half");
-			concrete.carverHelper.addVariation("tile.concrete.10.desc", 10, "concrete/asphalt");
+			concrete.carverHelper.addVariation("tile.concrete.0.desc", 0, "concrete/concrete");
+			concrete.carverHelper.addVariation("tile.concrete.1.desc", 1, "concrete/concreteWeathered");
+			concrete.carverHelper.addVariation("tile.concrete.2.desc", 2, "concrete/concreteDmg");
+			concrete.carverHelper.addVariation("tile.concrete.3.desc", 3, "concrete/concreteVines");
+			concrete.carverHelper.addVariation("tile.concrete.4.desc", 4, "concrete/concreteCracked");
+			concrete.carverHelper.addVariation("tile.concrete.5.desc", 5, "concrete/concreteMoldy");
+			concrete.carverHelper.addVariation("tile.concrete.6.desc", 6, "concrete/concreteMoldyCracked");
+			concrete.carverHelper.addVariation("tile.concrete.7.desc", 7, "concrete/asphaltCracks");
+			concrete.carverHelper.addVariation("tile.concrete.8.desc", 8, "concrete/asphaltWeathered");
+			concrete.carverHelper.addVariation("tile.concrete.9.desc", 9, "concrete/asphaltCracksWeathered");
+			concrete.carverHelper.addVariation("tile.concrete.10.desc", 10, "concrete/asphaltV2");
 			concrete.carverHelper.registerAll(concrete, "concrete");
 			OreDictionary.registerOre("concrete", concrete);
 			Carving.chisel.registerOre("concrete", "concrete");
