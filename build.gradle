@@ -14,12 +14,14 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
+}
 
+plugins {
+    id 'com.matthewprenger.cursegradle' version '1.0.2'
 }
 
 apply plugin: 'forge'
 apply plugin: 'maven-publish'
-apply plugin: 'curseforge'
 
 import org.ajoberstar.grgit.Grgit
 
@@ -159,7 +161,7 @@ publishing {
 println('Changelog:\n' + getChangelogText())
 
 String getChangelogText() {
-    def changelogFile = new File('changelog')
+    def changelogFile = file('changelog.txt')
     String str = ''
     int lineCount = 0
     boolean done = false
@@ -168,8 +170,15 @@ String getChangelogText() {
             return
         }
         if (it.size() > 1) {
-            def temp = "$it" + (lineCount == 0 ? '<br/><br/>' : '<br/>')
-            str += (it.startsWith('-') ? '' : '<br/>') + "$temp"
+            def temp = it
+            if (lineCount == 0) {
+                temp = "<h3>$temp</h3>"
+            } else if (it.startsWith('-')) {
+                temp = "&nbsp;&nbsp;&nbsp;$temp"
+            } else {
+                temp = "<h4>$temp</h4>"
+            }
+            str += "$temp<br/>"
             lineCount++
             return
         } else {
@@ -179,19 +188,33 @@ String getChangelogText() {
     return str
 }
 
-curse {
-    dependsOn 'reobf'
-
-    onlyIf {
-        return !dev && project.hasProperty('curseforge_key')
+tasks.curseforge.dependsOn 'reobf'
+tasks.curseforge.onlyIf {
+    return !dev && project.hasProperty('curseforge_key')
+}
+    
+curseforge {
+    if (project.hasProperty('curseforge_key')) {
+        apiKey = project.curseforge_key
     }
 
-    if (project.hasProperty('curseforge_key')) apiKey = project.curseforge_key
-    projectId = project.projectId
-    changelog = System.getenv("CHANGELOG").equals("none") ? getChangelogText() : System.getenv("CHANGELOG")
-    releaseType = 'release'
-    displayName = "Chisel - ${mod_version}"
-    additionalArtifact deobfJar, sourcesJar, apiJar
+    project {
+        id = project.projectId
+        changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
+        changelogType = 'html'
+        releaseType = 'release'
+        relations {
+            embeddedLibrary 'ctmlib'
+        }
+        mainArtifact(jar) {
+            displayName = "Chisel - ${version}"
+        }
+        addArtifact deobfJar
+        addArtifact sourcesJar
+        addArtifact(apiJar) {
+            relations {}
+        }
+    }
 }
 
 idea { module { inheritOutputDirs = true } }
