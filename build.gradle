@@ -189,9 +189,7 @@ String getChangelogText() {
 }
 
 tasks.curseforge.dependsOn 'reobf'
-tasks.curseforge.onlyIf {
-    return !dev && project.hasProperty('curseforge_key')
-}
+tasks.curseforge.enabled = !dev && project.hasProperty('curseforge_key')
     
 curseforge {
     if (project.hasProperty('curseforge_key')) {
