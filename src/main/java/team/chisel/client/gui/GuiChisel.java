@@ -93,7 +93,6 @@ public class GuiChisel extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerBackgroundLayer(float f, int mx, int my) {
-		drawDefaultBackground();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		int i = width - xSize >> 1;
