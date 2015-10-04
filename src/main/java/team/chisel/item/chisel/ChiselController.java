@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -86,11 +87,8 @@ public final class ChiselController {
 					for (int i = 0; i < variations.length; i++) {
 						ICarvingVariation v = variations[i];
 						if (v.getBlock() == block && v.getBlockMeta() == metadata) {
-							if(shifting)
-								idx = (i - 1) % variations.length; // move to the previous in the group
-							else
-								idx = (i + 1) % variations.length; // move to the next in the group
-							break;
+							idx = i + variations.length + (shifting ? -1 : 1);
+							idx %= variations.length;
 						}
 					}
 
@@ -115,4 +113,12 @@ public final class ChiselController {
 		}
 	}
 
+	// This still shows the block being broken, but it's better than nothing
+	@SubscribeEvent
+	public void onBlockBreak(BlockEvent.BreakEvent event) {
+		ItemStack stack = event.getPlayer().getCurrentEquippedItem();
+		if (event.getPlayer().capabilities.isCreativeMode && stack != null && stack.getItem() instanceof IChiselItem) {
+			event.setCanceled(true);
+		}
+	}
 }
