@@ -41,7 +41,14 @@ public class RenderCarvableBeacon extends TileEntityBeaconRenderer implements IS
 	
 	private void renderBeam(float f1, World world, double x, double y, double z, int meta, float partialTicks) {
 		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
-		Color color = new Color(ItemDye.field_150922_c[meta]);
+		Color color;
+		if (meta < 15) {
+			color = new Color(ItemDye.field_150922_c[meta]);
+		} else {
+			float hue = ((float) world.getTotalWorldTime() % 256) / 256;
+			color = new Color(Color.HSBtoRGB(hue + (partialTicks / 256), 1, 1));
+		}
+		
 		Tessellator tessellator = Tessellator.instance;
 		this.bindTexture(texture);
 		GL11.glTexParameterf(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S, 10497.0F);
