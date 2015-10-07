@@ -1,18 +1,24 @@
 package team.chisel.block;
 
+import java.util.List;
+
+import net.minecraft.block.BlockBeacon;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import team.chisel.block.tileentity.TileEntityCarvableBeacon;
+import team.chisel.init.ChiselBlocks;
+
+import com.cricketcraft.chisel.api.ChiselTabs;
 import com.cricketcraft.chisel.api.ICarvable;
 import com.cricketcraft.chisel.api.carving.CarvableHelper;
 import com.cricketcraft.chisel.api.carving.IVariationInfo;
-
-import team.chisel.block.tileentity.TileEntityCarvableBeacon;
-import com.cricketcraft.chisel.api.ChiselTabs;
-import net.minecraft.block.BlockBeacon;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 
 public class BlockCarvableBeacon extends BlockBeacon implements ICarvable {
 
@@ -46,6 +52,24 @@ public class BlockCarvableBeacon extends BlockBeacon implements ICarvable {
 
 			return true;
 		}
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs p_149666_2_, List list) {
+		for (int i = 0; i < 16; i++) {
+			list.add(new ItemStack(item, 1, i));
+		}
+	}
+
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z) {
+		return new ItemStack(ChiselBlocks.beacon, 1, world.getBlockMetadata(x, y, z));
+	}
+	
+	@Override
+	public int damageDropped(int meta) {
+		return meta;
 	}
 
 	@Override
