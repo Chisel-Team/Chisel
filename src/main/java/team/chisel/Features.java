@@ -2016,6 +2016,7 @@ public enum Features {
 			purpur.carverHelper.addVariation("tile.purpur.8.desc", 8, "end_purpur/arcanePurpur");
 			purpur.carverHelper.addVariation("tile.purpur.9.desc", 9, "end_purpur/purpurLargeTile");
 			purpur.carverHelper.addVariation("tile.purpur.10.desc", 10, "end_purpur/purpurOrnate");
+			purpur.carverHelper.addVariation("tile.purpur.11.desc", 11, "end_purpur/borderPurpur", new SubmapManagerCombinedCTM(4, "end_purpur/borderPurpur", TextureType.V4));
 
 			purpur.carverHelper.registerAll(purpur, "purpur");
 			Carving.chisel.registerOre("purpur", "purpur");
