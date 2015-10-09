@@ -11,6 +11,7 @@ import team.chisel.api.rendering.TextureType;
 import team.chisel.block.*;
 import team.chisel.carving.Carving;
 import team.chisel.client.render.SubmapManagerAntiblock;
+import team.chisel.client.render.SubmapManagerAnyV;
 import team.chisel.client.render.SubmapManagerCarpetFloor;
 import team.chisel.client.render.SubmapManagerCombinedCTM;
 import team.chisel.client.render.SubmapManagerFakeController;
@@ -2508,6 +2509,16 @@ public enum Features {
 			 * GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.technical2, Configurations.factoryBlockAmount, 0), new Object[] { "xyx", "yzy", "xyx", 'x', "stone", 'y',
 			 * "ingotIron", 'z', Blocks.glass })); //
 			 */
+		}
+	},
+	
+	TEST {
+		
+		@Override
+		void addBlocks() {
+			BlockCarvable vTest = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabChisel);
+			vTest.carverHelper.addVariation("test", 0, new SubmapManagerAnyV("1testing/MONOCULUSfrag", 3, 7));
+			vTest.carverHelper.registerAll(vTest, "vTest");
 		}
 	},
 

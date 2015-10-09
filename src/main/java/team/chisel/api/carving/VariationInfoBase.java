@@ -42,6 +42,11 @@ public class VariationInfoBase implements IVariationInfo {
 	public TextureType getType() {
 		return type;
 	}
+	
+	@Override
+	public ISubmapManager getManager() {
+		return manager;
+	}
 
 	// ISubmapManager delegation
 
