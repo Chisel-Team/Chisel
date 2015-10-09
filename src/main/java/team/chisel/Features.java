@@ -275,6 +275,7 @@ public enum Features {
 			bloodRune.carverHelper.addVariation("tile.bloodRune.3.desc", 3, "bloodMagic/bloodRuneCarvedRadial");
 			bloodRune.carverHelper.addVariation("tile.bloodRune.4.desc", 4, "bloodMagic/bloodRuneClassicPanel");
 			bloodRune.carverHelper.addVariation("tile.bloodRune.5.desc", 5, "bloodMagic/bloodRuneTiles");
+			bloodRune.carverHelper.addVariation("tile.bloodRune.6.desc", 6, "bloodMagic/RuneDiagonalBricks", new SubmapManagerCombinedCTM(4, "bloodMagic/RuneDiagonalBricks", TextureType.V4));
 			bloodRune.carverHelper.registerAll(bloodRune, "bloodRune");
 			Carving.chisel.registerOre("bloodRune", "bloodRune");
 		}
