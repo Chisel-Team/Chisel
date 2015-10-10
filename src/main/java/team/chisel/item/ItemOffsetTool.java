@@ -24,6 +24,8 @@ import org.lwjgl.opengl.GL11;
 import team.chisel.Chisel;
 import team.chisel.api.ChiselTabs;
 import team.chisel.api.ICarvable;
+import team.chisel.api.carving.IVariationInfo;
+import team.chisel.api.rendering.IOffsetRendered;
 import team.chisel.api.rendering.IShaderRenderItem;
 import team.chisel.api.rendering.TextureType;
 import team.chisel.utils.NBTSaveable;
@@ -78,9 +80,9 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 
 		private int updateValue(int current, int move) {
 			current -= move;
-			current %= 15;
+			current %= 16;
 			if (current < 0) {
-				current += 15;
+				current += 16;
 			}
 			return current;
 		}
@@ -88,6 +90,7 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 
 	public static final String DATA_KEY = "offsettool";
 	private static final List<TextureType> validTypes = Lists.newArrayList(TextureType.V4, TextureType.V9 /* SOON, TextureType.V16 */);
+	
     private IIcon overlay;
 
 	public ItemOffsetTool() {
@@ -104,11 +107,7 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 		Block block = world.getBlock(x, y, z);
 		if (block instanceof ICarvable) {
 			if (world.isRemote) {
-				ICarvable carvable = (ICarvable) block;
-				if (validTypes.contains(carvable.getManager(world.getBlockMetadata(x, y, z)).getType())) {
-					return true;
-				}
-				return false;
+				return canOffset(player, world, x, y, z, side);
 			} else {
 				ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.getData(DATA_KEY);
 				OffsetData data = cd.getDataForChunk(world.getChunkFromBlockCoords(x, z));
@@ -147,89 +146,97 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 		MovingObjectPosition mop = event.target;
 		EntityPlayer player = event.player;
 
-		Block block = player.worldObj.getBlock(mop.blockX, mop.blockY, mop.blockZ);
+		if (canOffset(player, player.worldObj, mop.blockX, mop.blockY, mop.blockZ, mop.sideHit)) {
+
+			ForgeDirection face = ForgeDirection.getOrientation(mop.sideHit);
+			Tessellator tess = Tessellator.instance;
+			GL11.glPushMatrix();
+			GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glDisable(GL11.GL_TEXTURE_2D);
+			GL11.glDepthMask(false);
+
+			// Draw the X
+			tess.startDrawing(GL11.GL_LINES);
+			tess.setColorOpaque_I(0);
+
+			double px = -(player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks);
+			double py = -(player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks);
+			double pz = -(player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks);
+			double x = Math.max(0, face.offsetX) + (0.01 * face.offsetX);
+			double y = Math.max(0, face.offsetY) + (0.01 * face.offsetY);
+			double z = Math.max(0, face.offsetZ) + (0.01 * face.offsetZ);
+
+			GL11.glTranslated(px, py, pz);
+			GL11.glTranslated(mop.blockX, mop.blockY, mop.blockZ);
+			if (face.offsetX != 0) {
+				tess.addVertex(x, 0, 0);
+				tess.addVertex(x, 1, 1);
+				tess.addVertex(x, 1, 0);
+				tess.addVertex(x, 0, 1);
+			} else if (face.offsetY != 0) {
+				tess.addVertex(0, y, 0);
+				tess.addVertex(1, y, 1);
+				tess.addVertex(1, y, 0);
+				tess.addVertex(0, y, 1);
+			} else {
+				tess.addVertex(0, 0, z);
+				tess.addVertex(1, 1, z);
+				tess.addVertex(1, 0, z);
+				tess.addVertex(0, 1, z);
+			}
+			tess.draw();
+
+			Vec3 hit = mop.hitVec;
+
+			// Draw the triangle highlight
+			GL11.glEnable(GL11.GL_BLEND);
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+			GL11.glDisable(GL11.GL_CULL_FACE);
+			tess.startDrawing(GL11.GL_TRIANGLES);
+			tess.setColorRGBA_I(0xFFFFFF, 0x55);
+			ForgeDirection moveDir = getMoveDir(face, hit.xCoord - mop.blockX, hit.yCoord - mop.blockY, hit.zCoord - mop.blockZ);
+			int clampedX = Math.max(0, moveDir.offsetX);
+			int clampedY = Math.max(0, moveDir.offsetY);
+			int clampedZ = Math.max(0, moveDir.offsetZ);
+			boolean isX = moveDir.offsetX != 0;
+			boolean isY = moveDir.offsetY != 0;
+			boolean isZ = moveDir.offsetZ != 0;
+
+			// Always draw the center point first, then draw the next two points.
+			// Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
+			if (face.offsetX != 0) {
+				tess.addVertex(x, 0.5, 0.5);
+				tess.addVertex(x, isY ? clampedY : 0, isZ ? clampedZ : 0);
+				tess.addVertex(x, isY ? clampedY : 1, isZ ? clampedZ : 1);
+			} else if (face.offsetY != 0) {
+				tess.addVertex(0.5, y, 0.5);
+				tess.addVertex(isX ? clampedX : 0, y, isZ ? clampedZ : 0);
+				tess.addVertex(isX ? clampedX : 1, y, isZ ? clampedZ : 1);
+			} else {
+				tess.addVertex(0.5, 0.5, z);
+				tess.addVertex(isX ? clampedX : 0, isY ? clampedY : 0, z);
+				tess.addVertex(isX ? clampedX : 1, isY ? clampedY : 1, z);
+			}
+			tess.draw();
+			GL11.glPopAttrib();
+			GL11.glPopMatrix();
+		}
+	}
+
+	private boolean canOffset(EntityPlayer player, World world, int x, int y, int z, int side) {
+		Block block = world.getBlock(x, y, z);
 		if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == this && block instanceof ICarvable) {
 			ICarvable carvable = (ICarvable) block;
-			if (!validTypes.contains(carvable.getManager(player.worldObj.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ)).getType())) {
-				return;
+			IVariationInfo info = carvable.getManager(player.worldObj.getBlockMetadata(x, y, z));
+			if (info.getManager() instanceof IOffsetRendered) {
+				return ((IOffsetRendered) info.getManager()).canOffset(world, x, y, z, side);
+			} else if (carvable instanceof IOffsetRendered) {
+				return ((IOffsetRendered) carvable).canOffset(world, x, y, z, side);
 			}
-		} else {
-			return;
+			return validTypes.contains(info.getType());
 		}
-
-		ForgeDirection face = ForgeDirection.getOrientation(mop.sideHit);
-		Tessellator tess = Tessellator.instance;
-		GL11.glPushMatrix();
-		GL11.glPushAttrib(GL11.GL_ENABLE_BIT);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		GL11.glDisable(GL11.GL_TEXTURE_2D);
-		GL11.glDepthMask(false);
-		
-		// Draw the X
-		tess.startDrawing(GL11.GL_LINES);
-		tess.setColorOpaque_I(0);
-		
-		double px = -(player.lastTickPosX + (player.posX - player.lastTickPosX) * event.partialTicks);
-		double py = -(player.lastTickPosY + (player.posY - player.lastTickPosY) * event.partialTicks);
-		double pz = -(player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.partialTicks);
-		double x = Math.max(0, face.offsetX) + (0.01 * face.offsetX);
-		double y = Math.max(0, face.offsetY) + (0.01 * face.offsetY);
-		double z = Math.max(0, face.offsetZ) + (0.01 * face.offsetZ);
-
-		GL11.glTranslated(px, py, pz);
-		GL11.glTranslated(mop.blockX, mop.blockY, mop.blockZ);
-		if (face.offsetX != 0) {
-			tess.addVertex(x, 0, 0);
-			tess.addVertex(x, 1, 1);
-			tess.addVertex(x, 1, 0);
-			tess.addVertex(x, 0, 1);
-		} else if (face.offsetY != 0) {
-			tess.addVertex(0, y, 0);
-			tess.addVertex(1, y, 1);
-			tess.addVertex(1, y, 0);
-			tess.addVertex(0, y, 1);
-		} else {
-			tess.addVertex(0, 0, z);
-			tess.addVertex(1, 1, z);
-			tess.addVertex(1, 0, z);
-			tess.addVertex(0, 1, z);
-		}
-		tess.draw();
-
-		Vec3 hit = mop.hitVec;
-
-		// Draw the triangle highlight
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glDisable(GL11.GL_CULL_FACE);
-		tess.startDrawing(GL11.GL_TRIANGLES);
-		tess.setColorRGBA_I(0xFFFFFF, 0x55);
-		ForgeDirection moveDir = getMoveDir(face, hit.xCoord - mop.blockX, hit.yCoord - mop.blockY, hit.zCoord - mop.blockZ);
-		int clampedX = Math.max(0, moveDir.offsetX);
-		int clampedY = Math.max(0, moveDir.offsetY);
-		int clampedZ = Math.max(0, moveDir.offsetZ);
-		boolean isX = moveDir.offsetX != 0;
-		boolean isY = moveDir.offsetY != 0;
-		boolean isZ = moveDir.offsetZ != 0;
-
-		// Always draw the center point first, then draw the next two points.
-		// Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
-		if (face.offsetX != 0) {
-			tess.addVertex(x, 0.5, 0.5);
-			tess.addVertex(x, isY ? clampedY : 0, isZ ? clampedZ : 0);
-			tess.addVertex(x, isY ? clampedY : 1, isZ ? clampedZ : 1);
-		} else if (face.offsetY != 0) {
-			tess.addVertex(0.5, y, 0.5);
-			tess.addVertex(isX ? clampedX : 0, y, isZ ? clampedZ : 0);
-			tess.addVertex(isX ? clampedX : 1, y, isZ ? clampedZ : 1);
-		} else {
-			tess.addVertex(0.5, 0.5, z);
-			tess.addVertex(isX ? clampedX : 0, isY ? clampedY : 0, z);
-			tess.addVertex(isX ? clampedX : 1, isY ? clampedY : 1, z);
-		}
-		tess.draw();
-		GL11.glPopAttrib();
-		GL11.glPopMatrix();
+		return false;
 	}
 
     @SideOnly(Side.CLIENT)

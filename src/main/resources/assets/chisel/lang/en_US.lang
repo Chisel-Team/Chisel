@@ -133,7 +133,7 @@ tile.beacon.orange.desc=Orange Beamed Beacon
 tile.beacon.pink.desc=Pink Beamed Beacon
 tile.beacon.purple.desc=Purple Beamed Beacon
 tile.beacon.red.desc=Red Beamed Beacon
-tile.beacon.white.desc=White Beamed Beacon
+tile.beacon.white.desc=Rainbow Beamed Beacon
 tile.beacon.yellow.desc=Yellow Beamed Beacon
 tile.beacon.gray.desc=Gray Beamed Beacon
 
@@ -747,15 +747,15 @@ tile.sandstoneScribbles.desc=Sandstone Scribbles
 #Concrete
 tile.chisel.concrete.name=Concrete
 tile.concrete.0.desc=Concrete
-tile.concrete.1.desc=Concrete Block
-tile.concrete.2.desc=Concrete Double Slab
-tile.concrete.3.desc=Small Concrete Blocks
-tile.concrete.4.desc=Weathered Concrete
-tile.concrete.5.desc=Weathered Concrete Block
-tile.concrete.6.desc=Weathered Concrete Double Slab
-tile.concrete.7.desc=Small Weathered Blocks
-tile.concrete.8.desc=Partly Weathered Concrete
-tile.concrete.9.desc=Partly Weathered Concrete Block
+tile.concrete.1.desc=Weathered Concrete
+tile.concrete.2.desc=Damaged Concrete
+tile.concrete.3.desc=Concrete With Vines
+tile.concrete.4.desc=Cracked Concrete
+tile.concrete.5.desc=Moldy Concrete
+tile.concrete.6.desc=Moldy Cracked Concrete
+tile.concrete.7.desc=Cracked Asphalt
+tile.concrete.8.desc=Weathered Asphalt
+tile.concrete.9.desc=Cracked Weathered Asphalt
 tile.concrete.10.desc=Asphalt
 
 #Road Line

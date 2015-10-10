@@ -11,6 +11,7 @@ import team.chisel.api.rendering.TextureType;
 import team.chisel.block.*;
 import team.chisel.carving.Carving;
 import team.chisel.client.render.SubmapManagerAntiblock;
+import team.chisel.client.render.SubmapManagerAnyV;
 import team.chisel.client.render.SubmapManagerCarpetFloor;
 import team.chisel.client.render.SubmapManagerCombinedCTM;
 import team.chisel.client.render.SubmapManagerFakeController;
@@ -275,6 +276,7 @@ public enum Features {
 			bloodRune.carverHelper.addVariation("tile.bloodRune.3.desc", 3, "bloodMagic/bloodRuneCarvedRadial");
 			bloodRune.carverHelper.addVariation("tile.bloodRune.4.desc", 4, "bloodMagic/bloodRuneClassicPanel");
 			bloodRune.carverHelper.addVariation("tile.bloodRune.5.desc", 5, "bloodMagic/bloodRuneTiles");
+			bloodRune.carverHelper.addVariation("tile.bloodRune.6.desc", 6, "bloodMagic/RuneDiagonalBricks", new SubmapManagerCombinedCTM(4, "bloodMagic/RuneDiagonalBricks", TextureType.V4));
 			bloodRune.carverHelper.registerAll(bloodRune, "bloodRune");
 			Carving.chisel.registerOre("bloodRune", "bloodRune");
 		}
@@ -553,17 +555,17 @@ public enum Features {
 		@Override
 		void addBlocks() {
 			BlockCarvable concrete = (BlockConcrete) new BlockConcrete().setStepSound(Block.soundTypeStone).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(0.5F);
-			concrete.carverHelper.addVariation("tile.concrete.0.desc", 0, "concrete/default");
-			concrete.carverHelper.addVariation("tile.concrete.1.desc", 1, "concrete/block");
-			concrete.carverHelper.addVariation("tile.concrete.2.desc", 2, "concrete/doubleslab");
-			concrete.carverHelper.addVariation("tile.concrete.3.desc", 3, "concrete/blocks");
-			concrete.carverHelper.addVariation("tile.concrete.4.desc", 4, "concrete/weathered");
-			concrete.carverHelper.addVariation("tile.concrete.5.desc", 5, "concrete/weathered-block");
-			concrete.carverHelper.addVariation("tile.concrete.6.desc", 6, "concrete/weathered-doubleslab");
-			concrete.carverHelper.addVariation("tile.concrete.7.desc", 7, "concrete/weathered-blocks");
-			concrete.carverHelper.addVariation("tile.concrete.8.desc", 8, "concrete/weathered-half");
-			concrete.carverHelper.addVariation("tile.concrete.9.desc", 9, "concrete/weathered-block-half");
-			concrete.carverHelper.addVariation("tile.concrete.10.desc", 10, "concrete/asphalt");
+			concrete.carverHelper.addVariation("tile.concrete.0.desc", 0, "concrete/concrete");
+			concrete.carverHelper.addVariation("tile.concrete.1.desc", 1, "concrete/concreteWeathered");
+			concrete.carverHelper.addVariation("tile.concrete.2.desc", 2, "concrete/concreteDmg");
+			concrete.carverHelper.addVariation("tile.concrete.3.desc", 3, "concrete/concreteVines");
+			concrete.carverHelper.addVariation("tile.concrete.4.desc", 4, "concrete/concreteCracked");
+			concrete.carverHelper.addVariation("tile.concrete.5.desc", 5, "concrete/concreteMoldy");
+			concrete.carverHelper.addVariation("tile.concrete.6.desc", 6, "concrete/concreteMoldyCracked");
+			concrete.carverHelper.addVariation("tile.concrete.7.desc", 7, "concrete/asphaltCracks");
+			concrete.carverHelper.addVariation("tile.concrete.8.desc", 8, "concrete/asphaltWeathered");
+			concrete.carverHelper.addVariation("tile.concrete.9.desc", 9, "concrete/asphaltCracksWeathered");
+			concrete.carverHelper.addVariation("tile.concrete.10.desc", 10, "concrete/asphaltV2");
 			concrete.carverHelper.registerAll(concrete, "concrete");
 			OreDictionary.registerOre("concrete", concrete);
 			Carving.chisel.registerOre("concrete", "concrete");
@@ -2016,6 +2018,7 @@ public enum Features {
 			purpur.carverHelper.addVariation("tile.purpur.8.desc", 8, "end_purpur/arcanePurpur");
 			purpur.carverHelper.addVariation("tile.purpur.9.desc", 9, "end_purpur/purpurLargeTile");
 			purpur.carverHelper.addVariation("tile.purpur.10.desc", 10, "end_purpur/purpurOrnate");
+			purpur.carverHelper.addVariation("tile.purpur.11.desc", 11, "end_purpur/borderPurpur", new SubmapManagerCombinedCTM(4, "end_purpur/borderPurpur", TextureType.V4));
 
 			purpur.carverHelper.registerAll(purpur, "purpur");
 			Carving.chisel.registerOre("purpur", "purpur");
@@ -2517,6 +2520,16 @@ public enum Features {
 			 * GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.technical2, Configurations.factoryBlockAmount, 0), new Object[] { "xyx", "yzy", "xyx", 'x', "stone", 'y',
 			 * "ingotIron", 'z', Blocks.glass })); //
 			 */
+		}
+	},
+	
+	TEST {
+		
+		@Override
+		void addBlocks() {
+			BlockCarvable vTest = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabChisel);
+			vTest.carverHelper.addVariation("test", 0, new SubmapManagerAnyV("1testing/MONOCULUSfrag", 3, 7));
+			vTest.carverHelper.registerAll(vTest, "vTest");
 		}
 	},
 

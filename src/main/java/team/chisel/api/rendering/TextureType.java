@@ -19,6 +19,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import team.chisel.api.carving.CarvableHelper;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.ctmlib.CTM;
+import team.chisel.ctmlib.ISubmap;
 import team.chisel.ctmlib.ISubmapManager;
 import team.chisel.ctmlib.RenderBlocksCTM;
 import team.chisel.ctmlib.RenderBlocksColumn;
@@ -171,7 +172,7 @@ public enum TextureType {
 
 		@Override
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, IBlockAccess world, int x, int y, int z, int side, int meta) {           
-			return getVIcon(this, (TextureSubmap) cachedObject, x, y, z, side);
+			return getVIcon((TextureSubmap) cachedObject, x, y, z, side);
 		}
 	},
 	V4("v4"){
@@ -187,7 +188,7 @@ public enum TextureType {
 		
 		@Override
 		protected IIcon getIcon(ICarvingVariation variation, Object cachedObject, IBlockAccess world, int x, int y, int z, int side, int meta) {
-			return getVIcon(this, (TextureSubmap) cachedObject, x, y, z, side);
+			return getVIcon((TextureSubmap) cachedObject, x, y, z, side);
 		}
 	},
 	CTMX("", "ctm"){
@@ -273,14 +274,18 @@ public enum TextureType {
 	CUSTOM;
 	
 	/* Some util stuff for shared code between v* and r* */
-	
-	public static IIcon getVIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
-		int variationSize = (type == TextureType.V9) ? 3 : 2;
 
+	@Deprecated
+	public static IIcon getVIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
+		return getVIcon(map, x, y, z, side);
+	}
+
+	public static IIcon getVIcon(ISubmap map, int x, int y, int z, int side) {
 		// TODO this is not API safe
 		ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.<ChunkDataBase<OffsetData>>getData(ItemOffsetTool.DATA_KEY);
 		if (cd != null) {
 			OffsetData data = cd.getDataForChunk(new ChunkCoordIntPair(x >> 4, z >> 4));
+			System.out.println(data.getOffsetX() + " " + data.getOffsetY() + " " + data.getOffsetZ());
 			if (data != null) {
 				x += data.getOffsetX();
 				y += data.getOffsetY();
@@ -288,43 +293,43 @@ public enum TextureType {
 			}
 		}
 		
-		int xModulus = x % variationSize;
-		int zModulus = z % variationSize;
-		//This ensures that blocks placed near 0,0 or it's axis' do not misbehave
-		int textureX = (xModulus < 0) ? (xModulus + variationSize) : xModulus;
-		int textureZ = (zModulus < 0) ? (zModulus + variationSize) : zModulus;
-		//Always invert the y index
-		int textureY = (variationSize - (y % variationSize) - 1);
-
-		if (side == 2 || side == 5) {
-			//For WEST, SOUTH reverse the indexes for both X and Z
-			textureX = (variationSize - textureX - 1);
-			textureZ = (variationSize - textureZ - 1);
-		} /*else if (side == 0) {
-        //For DOWN, reverse the indexes for only Z
-        textureZ = (variationSize - textureZ - 1);
-    	}*/
-
-		int index;
+		int xSize = map.getWidth();
+		int ySize = map.getHeight();
+		
+		int tx, ty;
+		
+		// Calculate submap x/y from x/y/z by ignoring the direction which the side is offset on
+		// Negate the y coordinate when calculating non-vertical directions, otherwise it is reverse order
 		if (side == 0 || side == 1) {
 			// DOWN || UP
-			index = textureX + textureZ * variationSize;
+			tx = x % xSize;
+			ty = z % ySize;
 		} else if (side == 2 || side == 3) {
 			// NORTH || SOUTH
-			index = textureX + textureY * variationSize;
+			tx = x % xSize;
+			ty = -y % ySize;		
 		} else {
 			// WEST || EAST
-			index = textureZ + textureY * variationSize;
+			tx = z % xSize;
+			ty = -y % ySize;		
 		}
+		
+		// Remainder can produce negative values, so wrap around
+		if (tx < 0) { tx += xSize; }
+		if (ty < 0) { ty += ySize; }
 
-		return map.getSubIcon(index % variationSize, index / variationSize);
+		return map.getSubIcon(tx,ty);
 	}
 	
+	@Deprecated
 	public static IIcon getRIcon(TextureType type, TextureSubmap map, int x, int y, int z, int side) {
+		return getRIcon(map, x, y, z, side);
+	}
+	
+	public static IIcon getRIcon(ISubmap map, int x, int y, int z, int side) {
 		rand.setSeed(getCoordinateRandom(x, y, z));
 		rand.nextBoolean();
-		int size = type == TextureType.R4 ? 2 : type == TextureType.R9 ? 3 : 4;
-		return map.getSubIcon(rand.nextInt(size), rand.nextInt(size));
+		return map.getSubIcon(rand.nextInt(map.getWidth()), rand.nextInt(map.getHeight()));
 	}
 	
 	private static long getCoordinateRandom(int x, int y, int z) {
