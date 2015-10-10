@@ -285,7 +285,7 @@ public enum TextureType {
 		ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.<ChunkDataBase<OffsetData>>getData(ItemOffsetTool.DATA_KEY);
 		if (cd != null) {
 			OffsetData data = cd.getDataForChunk(new ChunkCoordIntPair(x >> 4, z >> 4));
-			System.out.println(data.getOffsetX() + " " + data.getOffsetY() + " " + data.getOffsetZ());
+			// System.out.println(data.getOffsetX() + " " + data.getOffsetY() + " " + data.getOffsetZ());
 			if (data != null) {
 				x += data.getOffsetX();
 				y += data.getOffsetY();

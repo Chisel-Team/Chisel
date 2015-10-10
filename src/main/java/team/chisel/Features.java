@@ -2670,6 +2670,7 @@ public enum Features {
 			thaumium.carverHelper.addVariation("tile.thaumium.3.desc", 3, "thaumium/small", 23);
 			thaumium.carverHelper.addVariation("tile.thaumium.4.desc", 4, "thaumium/lattice", 24);
 			thaumium.carverHelper.addVariation("tile.thaumium.5.desc", 5, "thaumium/planks", 25);
+			thaumium.carverHelper.addVariation("tile.thaumium.6.desc", 6, "thaumium/thaumDiagonalBricks", new SubmapManagerCombinedCTM(4, "thaumium/thaumDiagonalBricks", TextureType.V4));
 			thaumium.carverHelper.registerAll(thaumium, "thaumium");
 			Carving.chisel.registerOre("thaumium", "thaumium");
 		}
