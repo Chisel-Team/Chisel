@@ -46,6 +46,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new RendererEldritch());
 		RenderingRegistry.registerBlockHandler(new RendererLayeredGlow());
 		RenderingRegistry.registerBlockHandler(new RendererSimpleLayered());
+		RenderingRegistry.registerBlockHandler(new RenderRoofing());
 
 		RenderingRegistry.registerBlockHandler(new RendererMultiLayer());
 
