@@ -2524,7 +2524,7 @@ public enum Features {
 		}
 	},
 	
-	TEST {
+	/*TEST {
 		
 		@Override
 		void addBlocks() {
@@ -2532,7 +2532,7 @@ public enum Features {
 			vTest.carverHelper.addVariation("test", 0, new SubmapManagerAnyV("1testing/MONOCULUSfrag", 3, 7));
 			vTest.carverHelper.registerAll(vTest, "vTest");
 		}
-	},
+	},*/
 
 	TEMPLE_BLOCK {
 
