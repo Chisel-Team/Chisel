@@ -365,7 +365,7 @@ tile.technical4.16.desc=Tape Drive? (I'm too young for this.)
 #End Stone
 tile.chisel.end_Stone.name=End Stone
 tile.end_Stone.0.desc=Bricks
-tile.end_Stone.1.desc= Chaotic Bricks
+tile.end_Stone.1.desc=Chaotic Bricks
 tile.end_Stone.2.desc=Checkered Tiles
 tile.end_Stone.3.desc=Ender Circuit
 tile.end_Stone.4.desc=Fancy Bricks
