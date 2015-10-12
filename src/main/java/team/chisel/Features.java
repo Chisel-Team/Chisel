@@ -2334,8 +2334,8 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addShapelessRecipe(new ItemStack(ChiselItems.smashingrock, 16), new Object[] { new ItemStack(Items.stone_pickaxe), new ItemStack(Items.glass_bottle, 1),
-					new ItemStack(Items.stone_shovel) });
+			GameRegistry.addShapelessRecipe(new ItemStack(ChiselItems.smashingrock, 16), new Object[]{new ItemStack(Items.stone_pickaxe), new ItemStack(Items.glass_bottle, 1),
+					new ItemStack(Items.stone_shovel)});
 		}
 	},
 
@@ -2515,8 +2515,8 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.technical, Configurations.factoryBlockAmount, 0), new Object[] { "xyx", "yxy", "xyx", 'x', "stone", 'y',
-					Items.iron_ingot }));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.technical, Configurations.factoryBlockAmount, 0), new Object[]{"xyx", "yxy", "xyx", 'x', "stone", 'y',
+					Items.iron_ingot}));
 			/*
 			 * GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.technical2, Configurations.factoryBlockAmount, 0), new Object[] { "xyx", "yzy", "xyx", 'x', "stone", 'y',
 			 * "ingotIron", 'z', Blocks.glass })); //
@@ -2671,6 +2671,7 @@ public enum Features {
 			thaumium.carverHelper.addVariation("tile.thaumium.4.desc", 4, "thaumium/lattice", 24);
 			thaumium.carverHelper.addVariation("tile.thaumium.5.desc", 5, "thaumium/planks", 25);
 			thaumium.carverHelper.addVariation("tile.thaumium.6.desc", 6, "thaumium/thaumDiagonalBricks", new SubmapManagerCombinedCTM(4, "thaumium/thaumDiagonalBricks", TextureType.V4));
+			thaumium.carverHelper.addVariation("tile.thaumium.7.desc", 7, new SubmapManagerAnyV("thaumium/thaumicEyeSegment", 3, 2));
 			thaumium.carverHelper.registerAll(thaumium, "thaumium");
 			Carving.chisel.registerOre("thaumium", "thaumium");
 		}
