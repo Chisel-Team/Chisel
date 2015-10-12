@@ -905,6 +905,10 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
+			stainedGlassForestry = new BlockCarvableGlass();
+			stainedGlassForestry.setStained(true).setHardness(0.3F).setStepSound(Block.soundTypeGlass).setBlockName("Stained Glass");
+			stainedGlassForestry.carverHelper.registerBlock(stainedGlassForestry, "stained_glass_forestry");
+
 			for (int i = 0; i < 16; i++) {
 				final String blockName = "stained_glass_" + sGNames[i].replaceAll(" ", "").toLowerCase();
 				String oreName = "stainedGlass" + sGNames[i].replaceAll(" ", "");
@@ -927,6 +931,10 @@ public enum Features {
 						continue;
 					stainedGlass[glassId].carverHelper.registerVariation(blockName, info);
 				}
+
+				stainedGlassForestry.carverHelper.addVariation(featureColors[i] + ".glass.forestry.desc", i, texName + "forestry");
+				IVariationInfo info = stainedGlassForestry.carverHelper.infoList.get(i);
+				stainedGlassForestry.carverHelper.registerVariation(blockName, info);
 			}
 		}
 	},
