@@ -1272,6 +1272,7 @@ tile.chisel.stained_glass_brown.name=Stained Glass
 tile.chisel.stained_glass_green.name=Stained Glass
 tile.chisel.stained_glass_red.name=Stained Glass
 tile.chisel.stained_glass_black.name=Stained Glass
+tile.chisel.stained_glass_forestry.name=Stained Glass
 
 #Stained GlassPane T.T
 tile.chisel.stained_glass_pane_white.name=Stained Glass Pane
@@ -1507,81 +1508,97 @@ white.bubble.desc=White Bubble Glass
 white.glass.desc=White Glass Panel
 white.glass.fancy.desc=White Fancy Glass Panel
 white.glass.noborder.desc=White Borderless Glass
+white.glass.forestry.desc=White Forestry Glass
 
 orange.bubble.desc=Orange Bubble Glass
 orange.glass.desc=Orange Glass Panel
 orange.glass.fancy.desc=Orange Fancy Glass Panel
 orange.glass.noborder.desc=Orange Borderless Glass
+orange.glass.forestry.desc=Orange Forestry Glass
 
 magenta.bubble.desc=Magenta Bubble Glass
 magenta.glass.desc=Magenta Glass Panel
 magenta.glass.fancy.desc=Magenta Fancy Glass Panel
 magenta.glass.noborder.desc=Magenta Borderless Glass
+magenta.glass.forestry.desc=Magenta Forestry Glass
 
 lightblue.bubble.desc=Light Blue Bubble Glass
 lightblue.glass.desc=Light Blue Glass Panel
 lightblue.glass.fancy.desc=Light Blue Fancy Glass Panel
 lightblue.glass.noborder.desc=Light Blue Borderless Glass
+lightblue.glass.forestry.desc=Light Blue Forestry Glass
 
 yellow.bubble.desc=Yellow Bubble Glass
 yellow.glass.desc=Yellow Glass Panel
 yellow.glass.fancy.desc=Yellow Fancy Glass Panel
 yellow.glass.noborder.desc=Yellow Borderless Glass
+yellow.glass.forestry.desc=Yellow Forestry Glass
 
 lime.bubble.desc=Lime Bubble Glass
 lime.glass.desc=Lime Glass Panel
 lime.glass.fancy.desc=Lime Fancy Glass Panel
 lime.glass.noborder.desc=Lime Borderless Glass
+lime.glass.forestry.desc=Lime Forestry Glass
 
 pink.bubble.desc=Pink Bubble Glass
 pink.glass.desc=Pink Glass Panel
 pink.glass.fancy.desc=Pink Fancy Glass Panel
 pink.glass.noborder.desc=Pink Borderless Glass
+pink.glass.forestry.desc=Pink Forestry Glass
 
 darkgray.bubble.desc=Gray Bubble Glass
 darkgray.glass.desc=Gray Glass Panel
 darkgray.glass.fancy.desc=Gray Fancy Glass Panel
 darkgray.glass.noborder.desc=Gray Borderless Glass
+darkgray.glass.forestry.desc=Gray Forestry Glass
 
 lightgray.bubble.desc=Light Gray Bubble Glass
 lightgray.glass.desc=Light Gray Glass Panel
 lightgray.glass.fancy.desc=Light Gray Fancy Glass Panel
 lightgray.glass.noborder.desc=Light Gray Borderless Glass
+lightgray.glass.forestry.desc=Light Gray Forestry Glass
 
 cyan.bubble.desc=Cyan Bubble Glass
 cyan.glass.desc=Cyan Glass Panel
 cyan.glass.fancy.desc=Cyan Fancy Glass Panel
 cyan.glass.noborder.desc=Cyan Borderless Glass
+cyan.glass.forestry.desc=Cyan Forestry Glass
 
 purple.bubble.desc=Purple Bubble Glass
 purple.glass.desc=Purple Glass Panel
 purple.glass.fancy.desc=Purple Fancy Glass Panel
 purple.glass.noborder.desc=Purple Borderless Glass
+purple.glass.forestry.desc=Purple Forestry Glass
 
 blue.bubble.desc=Blue Bubble Glass
 blue.glass.desc=Blue Glass Panel
 blue.glass.fancy.desc=Blue Fancy Glass Panel
 blue.glass.noborder.desc=Blue Borderless Glass
+blue.glass.forestry.desc=Blue Forestry Glass
 
 brown.bubble.desc=Brown Bubble Glass
 brown.glass.desc=Brown Glass Panel
 brown.glass.fancy.desc=Brown Fancy Glass Panel
 brown.glass.noborder.desc=Brown Borderless Glass
+brown.glass.forestry.desc=Brown Forestry Glass
 
 green.bubble.desc=Green Bubble Glass
 green.glass.desc=Green Glass Panel
 green.glass.fancy.desc=Green Fancy Glass Panel
 green.glass.noborder.desc=Green Borderless Glass
+green.glass.forestry.desc=Green Forestry Glass
 
 red.bubble.desc=Red Bubble Glass
 red.glass.desc=Red Glass Panel
 red.glass.fancy.desc=Red Fancy Glass Panel
 red.glass.noborder.desc=Red Borderless Glass
+red.glass.forestry.desc=Red Forestry Glass
 
 black.bubble.desc=Black Bubble Glass
 black.glass.desc=Black Glass Panel
 black.glass.fancy.desc=Black Fancy Glass Panel
 black.glass.noborder.desc=Black Borderless Glass
+black.glass.forestry.desc=Black Forestry Glass
 
 #Stained Glass Pane
 white.pane.bubble.desc=White Bubble Glass

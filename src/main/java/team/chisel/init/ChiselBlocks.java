@@ -119,6 +119,7 @@ public final class ChiselBlocks {
 
 	// 1.7
 	public static BlockCarvableGlass[] stainedGlass = new BlockCarvableGlass[4];
+	public static BlockCarvableGlass stainedGlassForestry;
 	public static BlockCarvablePane[] stainedGlassPane = new BlockCarvablePane[8];
 
 	// 1.8 or at least so you think :P
