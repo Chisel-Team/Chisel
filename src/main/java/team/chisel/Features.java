@@ -2615,7 +2615,7 @@ public enum Features {
 		@Override
 		void addBlocks() {
 
-            BlockCarvable mazeStone = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
+            BlockCarvable mazeStone = (BlockCarvable) new BlockCarvable(Material.rock, 5.0F, 75.0F ).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
             mazeStone.carverHelper.addVariation("tile.mazestone.0.desc", 0, "mazestone/circular", 20);
             mazeStone.carverHelper.addVariation("tile.mazestone.1.desc", 1, "mazestone/prismatic", 21);
             mazeStone.carverHelper.addVariation("tile.mazestone.2.desc", 2, "mazestone/intricate", 22);

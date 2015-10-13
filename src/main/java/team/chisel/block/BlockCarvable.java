@@ -38,6 +38,18 @@ public class BlockCarvable extends Block implements ICarvable {
 		setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
 	}
 
+	public BlockCarvable(Material m, float resistance, float hardness)
+    {
+        super(m);
+        if (m == Material.rock || m == Material.iron) {
+            setHarvestLevel("pickaxe", 0);
+        }
+        carverHelper = new CarvableHelper(this);
+        setResistance(resistance);
+        setHardness(hardness);
+        setCreativeTab(ChiselTabs.tabOtherChiselBlocks);
+    }
+
 	public BlockCarvable setStained(boolean a) {
 		this.isAlpha = a;
 		return this;
