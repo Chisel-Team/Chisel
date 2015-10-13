@@ -2497,15 +2497,15 @@ public enum Features {
 			technicalLarge.carverHelper.registerVariations("technical");
 
 			BlockCarvable technical4 = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(2.0F).setResistance(10F);
-			technical4.carverHelper.addVariation("tile.technical4.0.desc", 0, "technical/new/weatheredGreenPanels");
-			technical4.carverHelper.addVariation("tile.technical4.1.desc", 1, "technical/new/weatheredOrangePanels");
-			technical4.carverHelper.addVariation("tile.technical4.2.desc", 2, "technical/new/Sturdy");
-			technical4.carverHelper.addVariation("tile.technical4.3.desc", 3, "technical/new/MegaCell");
+			technical4.carverHelper.addVariation("tile.technical4.0.desc", 0, "technical/new/weatheredGreenPanels", 60);
+			technical4.carverHelper.addVariation("tile.technical4.1.desc", 1, "technical/new/weatheredOrangePanels", 61);
+			technical4.carverHelper.addVariation("tile.technical4.2.desc", 2, "technical/new/Sturdy", 62);
+			technical4.carverHelper.addVariation("tile.technical4.3.desc", 3, "technical/new/MegaCell", 63);
 			technical4.carverHelper
-					.addVariation("tile.technical4.4.desc", 4, "technical/new/ExhaustPlating"/* , new SubmapManagerCombinedCTM(4, "technical/new/test/ExhaustPlating", TextureType.R4) */);
-			technical4.carverHelper.addVariation("tile.technical4.5.desc", 5, "technical/new/MakeshiftPanels");
-			technical4.carverHelper.addVariation("tile.technical4.6.desc", 6, "technical/new/Piping");
-            technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/concrete/concreteBlocks" , new SubmapManagerCombinedCTM(9, "technical/new/concrete/concreteBlocks", TextureType.R9));
+					.addVariation("tile.technical4.4.desc", 4, "technical/new/ExhaustPlating", 64/* , new SubmapManagerCombinedCTM(4, "technical/new/test/ExhaustPlating", TextureType.R4) */);
+			technical4.carverHelper.addVariation("tile.technical4.5.desc", 5, "technical/new/MakeshiftPanels", 65);
+			technical4.carverHelper.addVariation("tile.technical4.6.desc", 6, "technical/new/Piping", 66);
+            technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/concrete/concreteBlocks" , new SubmapManagerCombinedCTM(9, "technical/new/concrete/concreteBlocks", TextureType.R9), 67);
             // The animation is malfunctioning. :(
 			// technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/TapeDrive");
 			technical4.carverHelper.registerBlock(technical4, "technical4");
@@ -2524,16 +2524,6 @@ public enum Features {
 			 */
 		}
 	},
-	
-	/*TEST {
-		
-		@Override
-		void addBlocks() {
-			BlockCarvable vTest = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabChisel);
-			vTest.carverHelper.addVariation("test", 0, new SubmapManagerAnyV("1testing/MONOCULUSfrag", 3, 7));
-			vTest.carverHelper.registerAll(vTest, "vTest");
-		}
-	},*/
 
 	TEMPLE_BLOCK {
 
@@ -2681,8 +2671,8 @@ public enum Features {
 			thaumium.carverHelper.addVariation("tile.thaumium.3.desc", 3, "thaumium/small", 23);
 			thaumium.carverHelper.addVariation("tile.thaumium.4.desc", 4, "thaumium/lattice", 24);
 			thaumium.carverHelper.addVariation("tile.thaumium.5.desc", 5, "thaumium/planks", 25);
-			thaumium.carverHelper.addVariation("tile.thaumium.6.desc", 6, "thaumium/thaumDiagonalBricks", new SubmapManagerCombinedCTM(4, "thaumium/thaumDiagonalBricks", TextureType.V4));
-			thaumium.carverHelper.addVariation("tile.thaumium.7.desc", 7, new SubmapManagerAnyV("thaumium/thaumicEyeSegment", 3, 2));
+			thaumium.carverHelper.addVariation("tile.thaumium.6.desc", 6, "thaumium/thaumDiagonalBricks", new SubmapManagerCombinedCTM(4, "thaumium/thaumDiagonalBricks", TextureType.V4), 26);
+			thaumium.carverHelper.addVariation("tile.thaumium.7.desc", 7, "thaumium/thaumicEyeSegment", new SubmapManagerAnyV("thaumium/thaumicEyeSegment", 3, 2), 27);
 			thaumium.carverHelper.registerAll(thaumium, "thaumium");
 			Carving.chisel.registerOre("thaumium", "thaumium");
 		}
