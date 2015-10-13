@@ -63,6 +63,10 @@ public class CarvableHelper {
 		addVariation(description, metadata, texture, null, 0, ChiselAPIProps.MOD_ID, manager, metadata);
 	}
 
+    public void addVariation(String description, int metadata, String texture, ISubmapManager manager, int order) {
+        addVariation(description, metadata, texture, null, 0, ChiselAPIProps.MOD_ID, manager, order);
+    }
+
 	public void addVariation(String description, int metadata, Block bb, String modid) {
 		addVariation(description, metadata, null, bb, 0, modid);
 	}
