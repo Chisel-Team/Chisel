@@ -1753,6 +1753,7 @@ public enum Features {
 			nether_brick.carverHelper.addVariation("tile.netherBrick.13.desc", 13, "netherbrick/a1-netherbrick-meatsmall");
 			nether_brick.carverHelper.addVariation("tile.netherBrick.14.desc", 14, "netherbrick/a1-netherbrick-red");
 			nether_brick.carverHelper.addVariation("tile.netherBrick.15.desc", 15, "netherbrick/a1-netherbrick-redsmall");
+            nether_brick.carverHelper.addVariation("tile.netherBrick.0.desc", 0, "netherbrick/netherFancyBricks", 16);
 			nether_brick.carverHelper.registerAll(nether_brick, "nether_brick");
 			Carving.chisel.registerOre("nether_brick", "nether_brick");
 		}
