@@ -2623,6 +2623,14 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
+
+            BlockCarvable mazeStone = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
+            mazeStone.carverHelper.addVariation("tile.mazestone.0.desc", 0, "mazestone/circular", 20);
+            mazeStone.carverHelper.addVariation("tile.mazestone.1.desc", 1, "mazestone/prismatic", 21);
+            mazeStone.carverHelper.addVariation("tile.mazestone.2.desc", 2, "mazestone/intricate", 22);
+            mazeStone.carverHelper.addVariation("tile.mazestone.3.desc", 3, "mazestone/cobbled", 23);
+            mazeStone.carverHelper.addVariation("tile.mazestone.6.desc", 6, "mazestone/mazestoneDiagonals", new SubmapManagerCombinedCTM(4, "mazestone/mazestoneDiagonals", TextureType.V4), 24);
+
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 0, 0);
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 1, 1);
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 2, 2);
@@ -2631,6 +2639,8 @@ public enum Features {
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 5, 5);
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 6, 6);
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 7, 7);
+
+            mazeStone.carverHelper.registerAll(mazeStone, "TFMazestone");
 			Carving.chisel.registerOre("TFMazestone", "TFMazestone");
 		}
 	},
