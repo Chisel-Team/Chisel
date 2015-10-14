@@ -234,6 +234,8 @@ tile.thaumium.2.desc=Bricks
 tile.thaumium.3.desc=Small Tiles
 tile.thaumium.4.desc=Lattice
 tile.thaumium.5.desc=Bounded Planks
+tile.thaumium.6.desc=Diagonal Bricks
+tile.thaumium.7.desc=Eye Engraving
 
 #Tallow
 tile.chisel.tallow.name=Block of Tallow
@@ -248,6 +250,7 @@ tile.bloodRune.2.desc=Carved Blood Rune
 tile.bloodRune.3.desc=Radial Carved Blood Rune
 tile.bloodRune.4.desc=Classic Panel Blood Rune
 tile.bloodRune.5.desc=Blood Rune Tiles
+tile.bloodRune.6.desc=Diagonal Bricks
 
 #Futura
 tile.chisel.futura.name=Futura Block
@@ -361,20 +364,21 @@ tile.technical4.16.desc=Tape Drive? (I'm too young for this.)
 
 #End Stone
 tile.chisel.end_Stone.name=End Stone
-tile.end_Stone.0.desc=End Stone Bricks
-tile.end_Stone.1.desc=End Chaotic Bricks
+tile.end_Stone.0.desc=Bricks
+tile.end_Stone.1.desc=Chaotic Bricks
 tile.end_Stone.2.desc=Checkered Tiles
 tile.end_Stone.3.desc=Ender Circuit
 tile.end_Stone.4.desc=Fancy Bricks
-tile.end_Stone.5.desc=End Stone Pillar
+tile.end_Stone.5.desc=Pillar
 tile.end_Stone.6.desc=Etched End Stone
 tile.end_Stone.7.desc=Prismatic End Stone
 tile.end_Stone.8.desc=End Stone Chunk
 tile.end_Stone.9.desc=Framed End Stone Chunk
-tile.end_Stone.10.desc=Arcane Block of End Stone
+tile.end_Stone.10.desc=Arcane Block
 tile.end_Stone.11.desc=Framed End Stone
 tile.end_Stone.12.desc=Ornate End Stone
-tile.end_Stone.13.desc=End Stone Large Tile
+tile.end_Stone.13.desc=Large Tile
+tile.end_Stone.14.desc=Diagonal Bricks
 
 #Purpur
 tile.chisel.purpur.name=Purpur Block
@@ -386,9 +390,10 @@ tile.purpur.4.desc=Broken Small Tiles
 tile.purpur.5.desc=Prismatic Purpur
 tile.purpur.6.desc=Rough Bricks
 tile.purpur.7.desc=Cracked Surface
-tile.purpur.8.desc=Arcane Block of Purpur
-tile.purpur.9.desc=Purpur Large Tile
+tile.purpur.8.desc=Arcane Block
+tile.purpur.9.desc=Large Tile
 tile.purpur.10.desc=Ornate Purpur
+tile.purpur.11.desc=Diagonal Bricks
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
