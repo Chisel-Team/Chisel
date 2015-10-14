@@ -314,6 +314,11 @@ public enum TextureType {
 			ty = -y % ySize;		
 		}
 		
+		// Reverse x order for north and east
+		if (side == 2 || side == 5) {
+			tx = xSize - tx - 1;
+		}
+		
 		// Remainder can produce negative values, so wrap around
 		if (tx < 0) { tx += xSize; }
 		if (ty < 0) { ty += ySize; }
