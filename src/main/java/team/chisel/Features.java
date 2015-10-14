@@ -24,6 +24,7 @@ import team.chisel.api.rendering.TextureType;
 import team.chisel.block.*;
 import team.chisel.carving.Carving;
 import team.chisel.client.render.SubmapManagerAntiblock;
+import team.chisel.client.render.SubmapManagerAnyV;
 import team.chisel.client.render.SubmapManagerCarpetFloor;
 import team.chisel.client.render.SubmapManagerCombinedCTM;
 import team.chisel.client.render.SubmapManagerFakeController;
@@ -53,7 +54,6 @@ import com.google.common.collect.Lists;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-
 import static team.chisel.init.ChiselBlocks.*;
 import static team.chisel.utils.General.*;
 
