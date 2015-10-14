@@ -30,10 +30,10 @@ public class GroupList implements Set<ICarvingGroup> {
 			if (obj instanceof ICarvingVariation) {
 				ICarvingVariation v2 = (ICarvingVariation) obj;
 				ItemStack stack1 = v.getStack(), stack2 = v2.getStack();
-				if (v.getBlock() != null && v.getBlock() != Blocks.air) {
+				if (stack1.isItemEqual(stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2)) {
+					return true;
+				} else if (v.getBlock() != null && v.getBlock() != Blocks.air) {
 					return v.getBlock() == v2.getBlock() && v.getBlockMeta() == v2.getBlockMeta();
-				} else {
-					return stack1.isItemEqual(stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2);
 				}
 			} else if (obj instanceof VariationWrapper) {
 				return equals(((VariationWrapper) obj).v);
@@ -43,11 +43,7 @@ public class GroupList implements Set<ICarvingGroup> {
 
 		@Override
 		public int hashCode() {
-			if (v.getBlock() != null && v.getBlock() != Blocks.air) {
-				return (v.getBlock().hashCode() << 4) | v.getBlockMeta();
-			} else {
-				return v.getStack().getItem().hashCode() ^ v.getStack().getItemDamage();
-			}
+			return v.getStack().getItem().hashCode() ^ v.getStack().getItemDamage();
 		}
 	}
 
@@ -90,19 +86,21 @@ public class GroupList implements Set<ICarvingGroup> {
 	private class StackKey implements ICarvingVariation {
 
 		ItemStack stack;
+		Block block;
 
 		private StackKey(ItemStack stack) {
 			this.stack = stack;
+			this.block = Block.getBlockFromItem(stack.getItem());
 		}
 
 		@Override
 		public Block getBlock() {
-			return null;
+			return block;
 		}
 
 		@Override
 		public int getBlockMeta() {
-			return 0;
+			return stack.getItemDamage();
 		}
 
 		@Override
