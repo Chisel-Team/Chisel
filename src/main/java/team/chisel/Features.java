@@ -1011,7 +1011,7 @@ public enum Features {
 		void addBlocks() {
 			BlockCarvable gold_block = (BlockBeaconBase) new BlockBeaconBase().setCreativeTab(ChiselTabs.tabMetalChiselBlocks).setHardness(3F).setResistance(10F).setStepSound(Block.soundTypeMetal);
 			Carving.chisel.addVariation("gold_block", Blocks.gold_block, 0, 0);
-            gold_block.carverHelper.addVariation("tile.gold.0.desc", 0, "gold/goldEye", 16);
+            gold_block.carverHelper.addVariation("tile.gold.0.desc", 0, "gold/goldEye", new SubmapManagerAnyV("gold/goldEye", 3, 2), 16);
 			gold_block.carverHelper.addVariation("tile.gold.1.desc", 1, "gold/terrain-gold-largeingot");
 			gold_block.carverHelper.addVariation("tile.gold.2.desc", 2, "gold/terrain-gold-smallingot");
 			gold_block.carverHelper.addVariation("tile.gold.3.desc", 3, "gold/terrain-gold-brick");
