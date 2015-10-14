@@ -3,7 +3,6 @@ package team.chisel.api.carving;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -28,6 +27,15 @@ public interface ICarvingRegistry {
 	ICarvingGroup getGroup(Block block, int meta);
 
 	/**
+	 * Finds the group the ItemStack belongs to in the registry.
+	 * 
+	 * @param stack
+	 *            The ItemStack of the variation
+	 * @return The {@link ICarvingGroup} that the ItemStack pair belongs to
+	 */
+	ICarvingGroup getGroup(ItemStack stack);
+
+	/**
 	 * Gets an {@link ICarvingGroup} by its name.
 	 * 
 	 * @param name
@@ -46,6 +54,15 @@ public interface ICarvingRegistry {
 	 * @return The {@link ICarvingVariation} containing this block/meta pair
 	 */
 	ICarvingVariation getVariation(Block block, int meta);
+
+	/**
+	 * Gets the {@link ICarvingVariation} instance represented by this stack.
+	 * 
+	 * @param stack The ItemStack of the variation
+	 * 
+	 * @return The {@link ICarvingVariation} containing this stack
+	 */
+	ICarvingVariation getVariation(ItemStack stack);
 
 	/**
 	 * Gets the list of {@link ICarvingVariation}s from the group that contains this block/meta pair.
@@ -90,17 +107,14 @@ public interface ICarvingRegistry {
 	public String getVariationSound(Block block, int metadata);
 
 	/**
-	 * Gets the sound resource string for the group represented by this item/meta pair.
-	 * <p>
-	 * Mostly a convenience for calling {@link #getVariationSound(Block, int)} with {@link Block#getBlockFromItem(Item)}.
+	 * Gets the sound resource string for the group represented by this ItemStack.
 	 * 
-	 * @param item
-	 *            The item of the variation
-	 * @param metadata
-	 *            The metadata of the variation
+	 * @param stack
+	 *            The ItemStack of the variation
+	 * 
 	 * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
 	 */
-	public String getVariationSound(Item item, int metadata);
+	public String getVariationSound(ItemStack stack);
 
 	/**
 	 * @return A list of all registered group names, sorted alphabetically.

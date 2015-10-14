@@ -2,20 +2,53 @@ package team.chisel.carving;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.api.carving.ICarvingVariation;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Lists;
 
 public class Carving implements ICarvingRegistry {
+
+	private static class ItemStackWrapper {
+
+		private ItemStack wrapped;
+
+		private ItemStackWrapper(ItemStack stack) {
+			this.wrapped = stack;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			} else if (obj == null) {
+				return false;
+			} else if (getClass() != obj.getClass()) {
+				return false;
+			}
+			
+			ItemStackWrapper other = (ItemStackWrapper) obj;
+			if (wrapped == null) {
+				if (other.wrapped != null) {
+					return false;
+				}
+			} else {
+				return ItemStack.areItemStacksEqual(wrapped, other.wrapped) && ItemStack.areItemStackTagsEqual(wrapped, other.wrapped);
+			}
+			return true;
+		}
+
+	}
 
 	GroupList groups = new GroupList();
 
@@ -34,9 +67,17 @@ public class Carving implements ICarvingRegistry {
 
 	@Override
 	public ICarvingVariation getVariation(Block block, int metadata) {
-		ICarvingGroup g = getGroup(block, metadata);
-		if (g != null) {
-			for (ICarvingVariation v : g.getVariations()) {
+		return getVariation(block, metadata, getGroup(block, metadata));
+	}
+	
+	@Override
+	public ICarvingVariation getVariation(ItemStack stack) {
+		return getVariation(stack, getGroup(stack));
+	}
+
+	private ICarvingVariation getVariation(Block block, int metadata, ICarvingGroup group) {
+		if (group != null) {
+			for (ICarvingVariation v : group.getVariations()) {
 				if (v.getBlock() == block && v.getBlockMeta() == metadata) {
 					return v;
 				}
@@ -45,6 +86,17 @@ public class Carving implements ICarvingRegistry {
 		return null;
 	}
 
+	private ICarvingVariation getVariation(ItemStack stack, ICarvingGroup group) {
+		if (group != null) {
+			for (ICarvingVariation v : group.getVariations()) {
+				if (stack.isItemEqual(v.getStack()) && ItemStack.areItemStackTagsEqual(stack, v.getStack())) {
+					return v;
+				}
+			}
+		}
+		return null;
+	}
+	
 	@Override
 	public List<ICarvingVariation> getGroupVariations(Block block, int metadata) {
 		ICarvingGroup group = getGroup(block, metadata);
@@ -68,35 +120,18 @@ public class Carving implements ICarvingRegistry {
 		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 
 		ICarvingGroup group = null;
-
-		int[] oreids = OreDictionary.getOreIDs(chiseledItem);
-		for (int i : oreids) {
-			group = groups.getGroupByOre(OreDictionary.getOreName(i));
-			if (group != null) {
-				break;
-			}
-		}
-
-		if (group == null) {
-			group = getGroup(Block.getBlockFromItem(chiseledItem.getItem()), chiseledItem.getItemDamage());
-		}
+		
+		group = getGroup(chiseledItem);
 
 		if (group == null)
 			return items;
 
-		HashMap<String, Integer> mapping = new HashMap<String, Integer>();
-
 		List<ICarvingVariation> variations = group.getVariations();
+		List<ItemStackWrapper> found = Lists.newArrayList();
 
 		if (!group.getVariations().isEmpty()) {
 			for (ICarvingVariation v : variations) {
-
-				String key = Block.getIdFromBlock(v.getBlock()) + "|" + v.getItemMeta();
-				if (mapping.containsKey(key))
-					continue;
-				mapping.put(key, 1);
-
-				items.add(new ItemStack(v.getBlock(), 1, v.getItemMeta()));
+				addNewStackToList(v.getStack(), items, found);
 			}
 		}
 
@@ -104,22 +139,37 @@ public class Carving implements ICarvingRegistry {
 		String oreName = group.getOreName();
 		if (oreName != null && ((ores = OreDictionary.getOres(oreName)) != null)) {
 			for (ItemStack stack : ores) {
-
-				String key = Item.getIdFromItem(stack.getItem()) + "|" + stack.getItemDamage();
-				if (mapping.containsKey(key))
-					continue;
-				mapping.put(key, 2);
-
-				items.add(stack);
+				addNewStackToList(stack, items, found);
 			}
 		}
 
 		return items;
 	}
+	
+	private void addNewStackToList(ItemStack stack, List<ItemStack> list, List<ItemStackWrapper> found) {
+		ItemStackWrapper wrapper = new ItemStackWrapper(stack);
+		if (!found.contains(wrapper)) {
+			list.add(stack);
+			found.add(wrapper);
+		}
+	}
 
 	@Override
 	public ICarvingGroup getGroup(Block block, int metadata) {
-		int[] ids = OreDictionary.getOreIDs(new ItemStack(block, 1, metadata));
+		ICarvingVariation variation = getVariation(block, metadata, groups.getGroup(block, metadata));
+		ItemStack stack = variation == null ? new ItemStack(block, 1, metadata) : variation.getStack();
+		ICarvingGroup ore = getOreGroup(stack);
+		return ore == null ? groups.getGroup(block, metadata) : ore;
+	}
+	
+	@Override
+	public ICarvingGroup getGroup(ItemStack stack) {
+		ICarvingGroup ore = getOreGroup(stack);
+		return ore == null ? groups.getGroup(stack) : ore;
+	}
+
+	private ICarvingGroup getOreGroup(ItemStack stack) {
+		int[] ids = OreDictionary.getOreIDs(stack);
 		if (ids.length > 0) {
 			for (int id : ids) {
 				ICarvingGroup oreGroup = groups.getGroupByOre(OreDictionary.getOreName(id));
@@ -128,8 +178,7 @@ public class Carving implements ICarvingRegistry {
 				}
 			}
 		}
-
-		return groups.getGroup(block, metadata);
+		return null;
 	}
 
 	@Override
@@ -208,12 +257,17 @@ public class Carving implements ICarvingRegistry {
 
 	@Override
 	public String getVariationSound(Block block, int metadata) {
-		return getVariationSound(Item.getItemFromBlock(block), metadata);
+		ICarvingGroup group = groups.getGroup(block, metadata);
+		return getSound(group);
 	}
 
 	@Override
-	public String getVariationSound(Item item, int metadata) {
-		ICarvingGroup group = groups.getGroup(Block.getBlockFromItem(item), metadata);
+	public String getVariationSound(ItemStack stack) {
+		ICarvingGroup group = groups.getGroup(stack);
+		return getSound(group);
+	}
+
+	private String getSound(ICarvingGroup group) {
 		String sound = group == null ? null : group.getSound();
 		return sound == null ? Chisel.MOD_ID + ":chisel.fallback" : sound;
 	}

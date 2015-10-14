@@ -25,14 +25,11 @@ public class CarvingUtils {
 	}
 
 	/**
-	 * Gets an {@link ItemStack} representing the passed {@link ICarvingVariation}.
-	 * 
-	 * @param variation
-	 *            An {@link ICarvingVariation}
-	 * @return An {@link ItemStack}
+	 * @deprecated Use {@link ICarvingVariation#getStack()}
 	 */
+	@Deprecated
 	public static ItemStack getStack(ICarvingVariation variation) {
-		return new ItemStack(variation.getBlock(), 1, variation.getItemMeta());
+		return variation.getStack();
 	}
 
 	public static ICarvingRegistry chisel;
@@ -77,13 +74,11 @@ public class CarvingUtils {
 		private int order;
 		private Block block;
 		private int meta;
-		private int damage;
 
 		public SimpleCarvingVariation(Block block, int metadata, int order) {
 			this.order = order;
 			this.block = block;
 			this.meta = metadata;
-			this.damage = metadata;
 		}
 
 		@Override
@@ -97,8 +92,8 @@ public class CarvingUtils {
 		}
 
 		@Override
-		public int getItemMeta() {
-			return damage;
+		public ItemStack getStack() {
+			return new ItemStack(block, 1, meta);
 		}
 
 		@Override
@@ -172,5 +167,4 @@ public class CarvingUtils {
 			this.oreName = oreName;
 		}
 	}
-
 }

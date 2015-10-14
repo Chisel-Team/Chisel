@@ -149,7 +149,7 @@ public class General {
 	}
 
 	public static ICarvingVariation getVariation(ItemStack stack) {
-		ICarvingVariation v = Carving.chisel.getVariation(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage());
+		ICarvingVariation v = Carving.chisel.getVariation(stack);
 		return v == null ? CarvingUtils.getDefaultVariationFor(Block.getBlockFromItem(stack.getItem()), stack.getItemDamage(), 99) : v;
 	}
 }

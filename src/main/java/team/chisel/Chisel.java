@@ -142,6 +142,35 @@ public class Chisel {
 		proxy.preInit();
 	}
 
+//	private static class CarvingVariationItemStack implements ICarvingVariation {
+//
+//		ItemStack stack;
+//		
+//		public CarvingVariationItemStack(ItemStack stack) {
+//			this.stack = stack;
+//		}
+//		
+//		@Override
+//		public Block getBlock() {
+//			return null;
+//		}
+//
+//		@Override
+//		public int getBlockMeta() {
+//			return 0;
+//		}
+//
+//		@Override
+//		public ItemStack getStack() {
+//			return stack.copy();
+//		}
+//
+//		@Override
+//		public int getOrder() {
+//			return 0;
+//		}
+//	}
+//	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		Features.init();
@@ -162,6 +191,14 @@ public class Chisel {
 		FMLCommonHandler.instance().bus().register(instance);
 
 		FMLInterModComms.sendMessage("Waila", "register", "team.chisel.compat.WailaCompat.register");
+
+//		ItemStack stack = new ItemStack(DarkSteelItems.itemDarkSteelPickaxe);
+//		Carving.chisel.addVariation("testing2", new CarvingVariationItemStack(stack.copy()));
+//		Iterator<IDarkSteelUpgrade> iter = DarkSteelRecipeManager.instance.recipeIterator();
+//		while (iter.hasNext()) {
+//			iter.next().writeToItem(stack);
+//		}
+//		Carving.chisel.addVariation("testing2", new CarvingVariationItemStack(stack.copy()));
 	}
 
 	private void addWorldgen(Features feature, Block block, double... data) {

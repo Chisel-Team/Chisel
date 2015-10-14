@@ -2,16 +2,28 @@ package team.chisel;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import team.chisel.api.ChiselTabs;
 import team.chisel.api.carving.CarvableHelper;
+import team.chisel.api.carving.CarvingUtils.SimpleCarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IVariationInfo;
-import team.chisel.api.carving.CarvingUtils.SimpleCarvingGroup;
 import team.chisel.api.rendering.TextureType;
 import team.chisel.block.*;
 import team.chisel.carving.Carving;
 import team.chisel.client.render.SubmapManagerAntiblock;
-import team.chisel.client.render.SubmapManagerAnyV;
 import team.chisel.client.render.SubmapManagerCarpetFloor;
 import team.chisel.client.render.SubmapManagerCombinedCTM;
 import team.chisel.client.render.SubmapManagerFakeController;
@@ -35,27 +47,15 @@ import team.chisel.item.ItemOffsetTool;
 import team.chisel.item.ItemSmashingRock;
 import team.chisel.item.ItemUpgrade;
 import team.chisel.item.chisel.ItemChisel;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemDye;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.google.common.collect.Lists;
 
-import static team.chisel.init.ChiselBlocks.*;
-import static team.chisel.utils.General.*;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+
+import static team.chisel.init.ChiselBlocks.*;
+import static team.chisel.utils.General.*;
 
 public enum Features {
 

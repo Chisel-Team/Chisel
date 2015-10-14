@@ -1,7 +1,10 @@
 package team.chisel.api.carving;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * Represents a variation of a chiselable block.
@@ -13,6 +16,7 @@ public interface ICarvingVariation {
 	 * 
 	 * @return A {@link Block} that is the base of this variation
 	 */
+	@Nullable
 	Block getBlock();
 
 	/**
@@ -23,11 +27,14 @@ public interface ICarvingVariation {
 	int getBlockMeta();
 
 	/**
-	 * The item metadata of this variation
+	 * The {@link ItemStack} of this variation. This can be customized to allow for variations that differ on NBT alone.
+	 * <p>
+	 * This ItemStack should be a copy (or a new instance) of the stack, callers of this method are not required to leave the stack unmodified.
 	 * 
-	 * @return An int representing the metadata of this variations's {@link Item}.
+	 * @return An {@link ItemStack} that represents this variation.
 	 */
-	int getItemMeta();
+	@Nonnull
+	ItemStack getStack();
 
 	/**
 	 * The "order" of this variation. Represents its position in the list of variations held by a group.

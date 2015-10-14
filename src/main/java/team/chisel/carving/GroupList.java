@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import net.minecraft.block.Block;
-
-import org.apache.commons.lang3.tuple.Pair;
-
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 
@@ -30,7 +29,12 @@ public class GroupList implements Set<ICarvingGroup> {
 		public boolean equals(Object obj) {
 			if (obj instanceof ICarvingVariation) {
 				ICarvingVariation v2 = (ICarvingVariation) obj;
-				return v.getBlock() == v2.getBlock() && (v.getBlockMeta() == v2.getBlockMeta() || v.getItemMeta() == v2.getItemMeta());
+				ItemStack stack1 = v.getStack(), stack2 = v2.getStack();
+				if (v.getBlock() != null && v.getBlock() != Blocks.air) {
+					return v.getBlock() == v2.getBlock() && v.getBlockMeta() == v2.getBlockMeta();
+				} else {
+					return stack1.isItemEqual(stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2);
+				}
 			} else if (obj instanceof VariationWrapper) {
 				return equals(((VariationWrapper) obj).v);
 			}
@@ -39,31 +43,37 @@ public class GroupList implements Set<ICarvingGroup> {
 
 		@Override
 		public int hashCode() {
-			return v.getBlock().hashCode();
+			if (v.getBlock() != null && v.getBlock() != Blocks.air) {
+				return (v.getBlock().hashCode() << 4) | v.getBlockMeta();
+			} else {
+				return v.getStack().getItem().hashCode() ^ v.getStack().getItemDamage();
+			}
 		}
 	}
 
-	private class VariationKey implements ICarvingVariation {
+	private class BlockKey implements ICarvingVariation {
 
-		Pair<Block, Integer> data;
+		private Block block;
+		private int meta;
 
-		private VariationKey(Block block, int blockMeta) {
-			data = Pair.of(block, blockMeta);
+		private BlockKey(Block block, int blockMeta) {
+			this.block = block;
+			this.meta = blockMeta;
 		}
 
 		@Override
 		public Block getBlock() {
-			return data.getLeft();
+			return block;
 		}
 
 		@Override
 		public int getBlockMeta() {
-			return data.getRight();
+			return meta;
 		}
 
 		@Override
-		public int getItemMeta() {
-			return data.getRight();
+		public ItemStack getStack() {
+			return new ItemStack(getBlock(), getBlockMeta());
 		}
 
 		@Override
@@ -73,7 +83,41 @@ public class GroupList implements Set<ICarvingGroup> {
 
 		@Override
 		public String toString() {
-			return data.toString();
+			return block.toString() + "|" + meta;
+		}
+	}
+
+	private class StackKey implements ICarvingVariation {
+
+		ItemStack stack;
+
+		private StackKey(ItemStack stack) {
+			this.stack = stack;
+		}
+
+		@Override
+		public Block getBlock() {
+			return null;
+		}
+
+		@Override
+		public int getBlockMeta() {
+			return 0;
+		}
+
+		@Override
+		public ItemStack getStack() {
+			return stack;
+		}
+
+		@Override
+		public int getOrder() {
+			return 0;
+		}
+
+		@Override
+		public String toString() {
+			return stack.toString();
 		}
 	}
 
@@ -188,7 +232,15 @@ public class GroupList implements Set<ICarvingGroup> {
 	}
 
 	public ICarvingGroup getGroup(Block block, int metadata) {
-		return lookup.get(new VariationWrapper(new VariationKey(block, metadata)));
+		return getGroup(new BlockKey(block, metadata));
+	}
+	
+	public ICarvingGroup getGroup(ItemStack stack) {
+		return getGroup(new StackKey(stack));
+	}
+	
+	public ICarvingGroup getGroup(ICarvingVariation variation) {
+		return lookup.get(new VariationWrapper(variation));
 	}
 
 	public void addVariation(String name, ICarvingVariation variation) {
@@ -216,8 +268,16 @@ public class GroupList implements Set<ICarvingGroup> {
 	public Collection<? extends String> getNames() {
 		return groups.keySet();
 	}
+	
+	public ICarvingVariation removeVariation(ItemStack stack, String group) {
+		return removeVariation(new StackKey(stack), group);
+	}
 
 	public ICarvingVariation removeVariation(Block block, int metadata, String group) {
+		return removeVariation(new BlockKey(block, metadata), group);
+	}
+
+	public ICarvingVariation removeVariation(ICarvingVariation variation, String group) {
 		ICarvingGroup g = null;
 		if (group != null) {
 			g = groups.get(group);
@@ -228,7 +288,7 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 		List<VariationWrapper> toRemove = Lists.newArrayList();
 		for (VariationWrapper v : lookup.keySet()) {
-			if ((g == null || lookup.get(v).getName().equals(g.getName())) && v.equals(new VariationWrapper(new VariationKey(block, metadata)))) {
+			if ((g == null || lookup.get(v).getName().equals(g.getName())) && v.equals(new VariationWrapper(variation))) {
 				lookup.get(v).removeVariation(v.v);
 				toRemove.add(v);
 			}

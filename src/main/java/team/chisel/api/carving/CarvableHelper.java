@@ -7,9 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.data.AnimationMetadataSection;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -204,7 +202,7 @@ public class CarvableHelper {
 
 	public void registerSubBlocks(Block block, CreativeTabs tabs, List<ItemStack> list) {
 		for (IVariationInfo info : infoList) {
-			list.add(new ItemStack(block, 1, info.getVariation().getItemMeta()));
+			list.add(info.getVariation().getStack());
 		}
 	}
 

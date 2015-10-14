@@ -242,7 +242,7 @@ public class GeneralChiselClient {
 				particle.setVelocity((te.getWorldObj().rand.nextDouble() / 4) - 0.125, te.getWorldObj().rand.nextDouble() / 8, (te.getWorldObj().rand.nextDouble() / 4) - 0.125);
 				Minecraft.getMinecraft().effectRenderer.addEffect(particle);
 			}
-			String sound = Carving.chisel.getVariationSound(base.getItem(), base.getItemDamage());
+			String sound = Carving.chisel.getVariationSound(base);
 			GeneralClient.playChiselSound(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord, sound);
 		}
 	}
