@@ -132,7 +132,8 @@ public enum Features {
 			andesite.carverHelper.addVariation("tile.andesite.3.desc", 3, "andesite/andesiteLBrick");
 			andesite.carverHelper.addVariation("tile.andesite.4.desc", 4, "andesite/andesiteOrnate");
 			andesite.carverHelper.addVariation("tile.andesite.5.desc", 5, "andesite/andesitePrism");
-			andesite.carverHelper.addVariation("tile.andesite.6.desc", 6, "andesite/andesiteTiles");
+            andesite.carverHelper.addVariation("tile.andesite.6.desc", 6, "andesite/andesiteTiles");
+            andesite.carverHelper.addVariation("tile.andesite.7.desc", 7, "andesite/andesiteDiagonalBricks", new SubmapManagerCombinedCTM(4, "andesite/andesiteDiagonalBricks", TextureType.V4));
 			andesite.carverHelper.registerAll(andesite, "andesite");
 			andesite.carverHelper.registerOre("blockAndesite");
 			andesite.carverHelper.registerOre("stoneAndesite");
@@ -636,6 +637,7 @@ public enum Features {
 			diorite.carverHelper.addVariation("tile.diorite.4.desc", 4, "diorite/dioriteOrnate");
 			diorite.carverHelper.addVariation("tile.diorite.5.desc", 5, "diorite/dioritePrism");
 			diorite.carverHelper.addVariation("tile.diorite.6.desc", 6, "diorite/dioriteTiles");
+            diorite.carverHelper.addVariation("tile.diorite.7.desc", 7, "diorite/dioriteDiagonalBricks", new SubmapManagerCombinedCTM(4, "diorite/dioriteDiagonalBricks", TextureType.V4));
 			diorite.carverHelper.registerAll(diorite, "diorite");
 			diorite.carverHelper.registerOre("blockDiorite");
 			diorite.carverHelper.registerOre("stoneDiorite");
@@ -1053,6 +1055,7 @@ public enum Features {
 			granite.carverHelper.addVariation("tile.granite.4.desc", 4, "granite/graniteOrnate");
 			granite.carverHelper.addVariation("tile.granite.5.desc", 5, "granite/granitePrism");
 			granite.carverHelper.addVariation("tile.granite.6.desc", 6, "granite/graniteTiles");
+            granite.carverHelper.addVariation("tile.granite.7.desc", 7, "granite/graniteDiagonalBricks", new SubmapManagerCombinedCTM(4, "granite/graniteDiagonalBricks", TextureType.V4));
 			granite.carverHelper.registerAll(granite, "granite");
 			granite.carverHelper.registerOre("blockGranite");
 			granite.carverHelper.registerOre("stoneGranite");
