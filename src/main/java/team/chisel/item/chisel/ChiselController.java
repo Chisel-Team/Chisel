@@ -1,35 +1,66 @@
 package team.chisel.item.chisel;
 
 import java.util.List;
+import java.util.Queue;
 
-import com.cricketcraft.chisel.api.IChiselItem;
-import com.cricketcraft.chisel.api.carving.ICarvingGroup;
-import com.cricketcraft.chisel.api.carving.ICarvingVariation;
-import com.cricketcraft.chisel.api.carving.IChiselMode;
-
-import team.chisel.Chisel;
-import team.chisel.carving.Carving;
-import team.chisel.utils.General;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.oredict.OreDictionary;
+import team.chisel.Chisel;
+import team.chisel.carving.Carving;
+import team.chisel.utils.General;
+
+import com.cricketcraft.chisel.api.IChiselItem;
+import com.cricketcraft.chisel.api.carving.ICarvingGroup;
+import com.cricketcraft.chisel.api.carving.ICarvingVariation;
+import com.cricketcraft.chisel.api.carving.IChiselMode;
+import com.google.common.collect.Queues;
+
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.common.gameevent.TickEvent.ServerTickEvent;
 
 public final class ChiselController {
+
+	private static class GuiOpen implements Runnable {
+
+		private EntityPlayer player;
+		private ItemStack stack;
+
+		public GuiOpen(EntityPlayer player, ItemStack stack) {
+			super();
+			this.player = player;
+			this.stack = stack;
+		}
+
+		@Override
+		public void run() {
+			ItemStack current = player.getCurrentEquippedItem();
+			if (current != null) {
+				if (ItemStack.areItemStacksEqual(stack, current) && ItemStack.areItemStackTagsEqual(stack, current)) {
+					player.openGui(Chisel.instance, 0, player.worldObj, 0, 0, 0);
+				}
+			}
+		}
+	}
 
 	public static final ChiselController INSTANCE = new ChiselController();
 
 	private long lastTickClick = 0;
+	private Queue<GuiOpen> openQueue = Queues.newArrayDeque();
 
 	private ChiselController() {
 	}
 
 	public void preInit() {
 		MinecraftForge.EVENT_BUS.register(this);
+		FMLCommonHandler.instance().bus().register(this);
 	}
 
 	@SubscribeEvent
@@ -107,7 +138,7 @@ public final class ChiselController {
 				lastTickClick = event.world.getTotalWorldTime();
 			}
 			if (!event.world.isRemote && chisel.canOpenGui(event.world, event.entityPlayer, held)) {
-				event.entityPlayer.openGui(Chisel.instance, 0, event.world, 0, 0, 0);
+				openQueue.add(new GuiOpen(event.entityPlayer, held));
 			}
 			break;
 		}
@@ -119,6 +150,16 @@ public final class ChiselController {
 		ItemStack stack = event.getPlayer().getCurrentEquippedItem();
 		if (event.getPlayer().capabilities.isCreativeMode && stack != null && stack.getItem() instanceof IChiselItem) {
 			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public void openQueuedGui(ServerTickEvent event) {
+		if (event.phase == Phase.END) {
+			GuiOpen open = openQueue.poll();
+			if (open != null) {
+				open.run();
+			}
 		}
 	}
 }
