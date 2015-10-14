@@ -27,6 +27,7 @@ public class GuiChisel extends GuiContainer {
 	public EntityPlayer player;
 	public ContainerChisel container;
 	private IChiselMode currentMode;
+	private boolean dead = false;
 
 	public GuiChisel(InventoryPlayer iinventory, InventoryChiselSelection menu) {
 		super(new ContainerChisel(iinventory, menu));
@@ -35,6 +36,11 @@ public class GuiChisel extends GuiContainer {
 		ySize = 202;
 
 		container = (ContainerChisel) inventorySlots;
+		
+		if (player.getCurrentEquippedItem() == null) {
+			player.closeScreen();
+			dead = true;
+		}
 	}
 
 	@Override
@@ -62,7 +68,7 @@ public class GuiChisel extends GuiContainer {
 		super.updateScreen();
 		ItemStack held = player.getCurrentEquippedItem();
 		if (held == null || !(held.getItem() instanceof IChiselItem)) {
-			mc.displayGuiScreen(null);
+			player.closeScreen();
 		}
 	}
 
@@ -75,6 +81,13 @@ public class GuiChisel extends GuiContainer {
 			return ((IChiselItem) container.chisel.getItem()).hasModes(mc.thePlayer, container.chisel);
 		}
 		return false;
+	}
+	
+	@Override
+	public void drawScreen(int p_73863_1_, int p_73863_2_, float p_73863_3_) {
+		if (!dead) {
+			super.drawScreen(p_73863_1_, p_73863_2_, p_73863_3_);
+		}
 	}
 
 	@Override
