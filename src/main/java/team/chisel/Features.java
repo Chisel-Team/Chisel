@@ -1035,10 +1035,11 @@ public enum Features {
 			gold2.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/gold/adv", 23);
 			gold2.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/gold/egregious", 24);
 			gold2.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/gold/bolted", 25);
+
+
+            gold_block.carverHelper.registerAll(gold_block, "gold_block");
 			gold2.carverHelper.registerBlock(gold2, "gold2");
 			gold2.carverHelper.registerVariations("gold_block");
-
-			gold_block.carverHelper.registerAll(gold_block, "gold_block");
 			Carving.chisel.registerOre("gold_block", "blockGold");
 		}
 	},
