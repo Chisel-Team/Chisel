@@ -26,23 +26,23 @@ public class ItemChiselRenderer implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack stack, Object... data) {
-		RenderHelper.enableGUIStandardItemLighting();
-
+		GL11.glPushMatrix();
+		
+		// Fixes potential render bug with blocks that draw this item
+		renderItem.zLevel = 10f;
 		renderItem.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().renderEngine, stack, 0, 0);
 
-		if (stack.stackTagCompound == null)
-			return;
+		if (stack.stackTagCompound != null) {
 
-		ItemStack chiselTarget = ItemStack.loadItemStackFromNBT(stack.stackTagCompound.getCompoundTag("chiselTarget"));
-		if (chiselTarget == null)
-			return;
+			ItemStack chiselTarget = ItemStack.loadItemStackFromNBT(stack.stackTagCompound.getCompoundTag("chiselTarget"));
+			if (chiselTarget != null) {
 
-		GL11.glPushMatrix();
-		GL11.glScalef(0.65f, 0.65f, 0.65f);
-		GL11.glTranslatef(-8f, -8f, 0.0f);
+				GL11.glScalef(0.65f, 0.65f, 0.65f);
+				GL11.glTranslatef(-8f, -8f, 0.0f);
 
-		renderItem.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().renderEngine, chiselTarget, 8, 8);
-
+				renderItem.renderItemIntoGUI(Minecraft.getMinecraft().fontRenderer, Minecraft.getMinecraft().renderEngine, chiselTarget, 8, 8);
+			}
+		}
 		GL11.glPopMatrix();
 	}
 
