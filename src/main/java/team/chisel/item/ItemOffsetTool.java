@@ -25,6 +25,7 @@ import team.chisel.Chisel;
 import team.chisel.api.ChiselTabs;
 import team.chisel.api.ICarvable;
 import team.chisel.api.carving.IVariationInfo;
+import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.api.rendering.IOffsetRendered;
 import team.chisel.api.rendering.IShaderRenderItem;
 import team.chisel.api.rendering.TextureType;
@@ -38,12 +39,11 @@ import com.google.common.collect.Maps;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import static net.minecraftforge.common.util.ForgeDirection.*;
 
 public class ItemOffsetTool extends Item implements IShaderRenderItem {
 
-	public static class OffsetData implements NBTSaveable {
+	public static class OffsetData implements NBTSaveable, IOffsetData {
 
 		private int xOffset, yOffset, zOffset;
 
@@ -60,20 +60,23 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 			zOffset = offset & 0xF;
 		}
 
-		public void move(ForgeDirection dir) {
+		void move(ForgeDirection dir) {
 			xOffset = updateValue(xOffset, dir.offsetX);
 			yOffset = updateValue(yOffset, dir.offsetY);
 			zOffset = updateValue(zOffset, dir.offsetZ);
 		}
 
+		@Override
 		public int getOffsetX() {
 			return xOffset;
 		}
 
+		@Override
 		public int getOffsetY() {
 			return yOffset;
 		}
 
+		@Override
 		public int getOffsetZ() {
 			return zOffset;
 		}
@@ -110,7 +113,7 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 				return canOffset(player, world, x, y, z, side);
 			} else {
 				ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.getData(DATA_KEY);
-				OffsetData data = cd.getDataForChunk(world.getChunkFromBlockCoords(x, z));
+				OffsetData data = cd.getDataForChunk(world.getChunkFromBlockCoords(x, z).getChunkCoordIntPair());
 				ForgeDirection face = ForgeDirection.getOrientation(side);
 				data.move(getMoveDir(face, hitX, hitY, hitZ));
 				PerChunkData.INSTANCE.chunkModified(world.getChunkFromBlockCoords(x, z), DATA_KEY);

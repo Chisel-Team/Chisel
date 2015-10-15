@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -18,16 +17,14 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import team.chisel.api.carving.CarvableHelper;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.chunkdata.ChunkData;
+import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.ctmlib.CTM;
 import team.chisel.ctmlib.ISubmap;
 import team.chisel.ctmlib.ISubmapManager;
 import team.chisel.ctmlib.RenderBlocksCTM;
 import team.chisel.ctmlib.RenderBlocksColumn;
 import team.chisel.ctmlib.TextureSubmap;
-import team.chisel.item.ItemOffsetTool;
-import team.chisel.item.ItemOffsetTool.OffsetData;
-import team.chisel.utils.PerChunkData;
-import team.chisel.utils.PerChunkData.ChunkDataBase;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -281,16 +278,11 @@ public enum TextureType {
 	}
 
 	public static IIcon getVIcon(ISubmap map, int x, int y, int z, int side) {
-		// TODO this is not API safe
-		ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.<ChunkDataBase<OffsetData>>getData(ItemOffsetTool.DATA_KEY);
-		if (cd != null) {
-			OffsetData data = cd.getDataForChunk(new ChunkCoordIntPair(x >> 4, z >> 4));
-			// System.out.println(data.getOffsetX() + " " + data.getOffsetY() + " " + data.getOffsetZ());
-			if (data != null) {
-				x += data.getOffsetX();
-				y += data.getOffsetY();
-				z += data.getOffsetZ();
-			}
+		IOffsetData data = ChunkData.getOffsetForChunk(x, z);
+		if (data != null) {
+			x += data.getOffsetX();
+			y += data.getOffsetY();
+			z += data.getOffsetZ();
 		}
 		
 		int xSize = map.getWidth();
