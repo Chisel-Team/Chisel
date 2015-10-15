@@ -11,6 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.apache.commons.lang3.tuple.Triple;
 
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.rendering.IOffsetRendered;
 import team.chisel.api.rendering.TextureType;
 import team.chisel.api.rendering.TextureType.AbstractSubmapManager;
 import team.chisel.ctmlib.RenderBlocksCTM;
@@ -18,7 +19,7 @@ import team.chisel.ctmlib.TextureSubmap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class SubmapManagerCombinedCTM extends SubmapManagerBase {
+public class SubmapManagerCombinedCTM extends SubmapManagerBase implements IOffsetRendered {
 
 	@SideOnly(Side.CLIENT)
 	private class RenderBlocksCombinedCTM extends RenderBlocksCTM {
@@ -64,11 +65,11 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 			int iy = MathHelper.floor_double(y);
 			int iz = MathHelper.floor_double(z);
 			if (type == TextureType.V4 || type == TextureType.V9) {
-				submap = (TextureSubmap) TextureType.getVIcon(rType, SubmapManagerCombinedCTM.this.submap, ix, iy, iz, side.ordinal());
-				submapSmall = (TextureSubmap) TextureType.getVIcon(rType, SubmapManagerCombinedCTM.this.smallSubmap, ix, iy, iz, side.ordinal());
+				submap = (TextureSubmap) TextureType.getVIcon(SubmapManagerCombinedCTM.this.submap, ix, iy, iz, side.ordinal());
+				submapSmall = (TextureSubmap) TextureType.getVIcon(SubmapManagerCombinedCTM.this.smallSubmap, ix, iy, iz, side.ordinal());
 			} else {
-				submap = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerCombinedCTM.this.submap, ix, iy, iz, side.ordinal());
-				submapSmall = (TextureSubmap) TextureType.getRIcon(rType, SubmapManagerCombinedCTM.this.smallSubmap, ix, iy, iz, side.ordinal());
+				submap = (TextureSubmap) TextureType.getRIcon(SubmapManagerCombinedCTM.this.submap, ix, iy, iz, side.ordinal());
+				submapSmall = (TextureSubmap) TextureType.getRIcon(SubmapManagerCombinedCTM.this.smallSubmap, ix, iy, iz, side.ordinal());
 			}
 		}
 	}
@@ -148,5 +149,10 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase {
 		}
 		submap = new Submap(base, wh, submaps);
 		smallSubmap = new Submap(base, wh, submapsSmall);
+	}
+
+	@Override
+	public boolean canOffset(IBlockAccess world, int x, int y, int z, int side) {
+		return true;
 	}
 }
