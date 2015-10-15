@@ -87,7 +87,8 @@ tile.diorite.2.desc=Diorite Pillar
 tile.diorite.3.desc=Diorite Bricks
 tile.diorite.4.desc=Ornate Diorite
 tile.diorite.5.desc=Prismatic Diorite
-tile.diorite.6.desc=Diorite Small Tiles
+tile.diorite.6.desc=Small Tiles
+tile.diorite.7.desc=Diagonal Bricks
 
 #Andesite
 tile.chisel.andesite.name=Andesite
@@ -97,7 +98,8 @@ tile.andesite.2.desc=Andesite Pillar
 tile.andesite.3.desc=Andesite Bricks
 tile.andesite.4.desc=Ornate Andesite
 tile.andesite.5.desc=Prismatic Andesite
-tile.andesite.6.desc=Andesite Small Tiles
+tile.andesite.6.desc= Small Tiles
+tile.andesite.7.desc=Diagonal Bricks
 
 #Granite
 tile.chisel.granite.name=Granite
@@ -107,7 +109,8 @@ tile.granite.2.desc=Granite Pillar
 tile.granite.3.desc=Granite Bricks
 tile.granite.4.desc=Ornate Granite
 tile.granite.5.desc=Prismatic Granite
-tile.granite.6.desc=Granite Small Tiles
+tile.granite.6.desc=Small Tiles
+tile.granite.7.desc=Diagonal Bricks
 
 #Auto Chisel
 tile.chisel.autoChisel.name=Auto Chisel
@@ -804,6 +807,7 @@ tile.gold.11.desc=Gold Block with Star Decoration
 tile.gold.12.desc=Golden Star in Purple Obsidian
 tile.gold.13.desc=Golden Star in Obsidian
 tile.gold.14.desc=Simple Gold Block
+tile.gold.0.desc=Golden Eye
 
 #Glowstone
 tile.chisel.glowstone.name=Glowstone
