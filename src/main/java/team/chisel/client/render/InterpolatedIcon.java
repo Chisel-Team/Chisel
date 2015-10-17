@@ -102,7 +102,6 @@ public class InterpolatedIcon extends TextureAtlasSprite {
 					iresource.getMetadata("dummy");
 					JsonObject mcmeta = ((SimpleResource) iresource).mcmetaJson;
 					if (mcmeta != null) {
-						System.out.println("Processing icon: " + e.getKey());
 						JsonElement interp = mcmeta.getAsJsonObject("animation").get("interpolate");
 						if (interp != null && interp.getAsBoolean()) {
 							e.setValue(new InterpolatedIcon(e.getKey(), e.getValue()));

@@ -10,6 +10,7 @@ import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import team.chisel.Chisel;
+import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.api.chunkdata.IChunkData;
 import team.chisel.api.chunkdata.IChunkDataRegistry;
 import team.chisel.network.PacketHandler;
@@ -127,6 +128,10 @@ public enum PerChunkData implements IChunkDataRegistry {
 		public T getDataForChunk(ChunkCoordIntPair coords) {
 			return getOrCreateNew(coords);
 		}
+	}
+
+	private PerChunkData() {
+		ChunkData.setOffsetRegistry(this);
 	}
 
 	private Map<String, IChunkData<?>> data = Maps.newHashMap();
