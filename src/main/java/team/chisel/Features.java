@@ -2435,10 +2435,10 @@ public enum Features {
 				}
 			}
 
-			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.0.desc", 0, "stonebrick2/masonBricksPlain", 16);
-			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.1.desc", 1, "stonebrick2/masonBricksFelsic", 17);
-			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.2.desc", 2, "stonebrick2/masonBricksMafic", 18);
-			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.3.desc", 3, "stonebrick2/masonBricksMixed", 19);
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.0.desc", 0, "stonebrick2/masonry2Neutral", 16);
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.1.desc", 1, "stonebrick2/masonry2Blue", 17);
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.2.desc", 2, "stonebrick2/masonry2Red", 18);
+			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.3.desc", 3, "stonebrick2/masonry2Both", 19);
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.4.desc", 4, "stonebrick/smallbricks");
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.5.desc", 5, "stonebrick/largebricks");
 			stonebricksmooth.carverHelper.addVariation("tile.stonebricksmooth.6.desc", 6, "stonebrick/smallchaotic");
