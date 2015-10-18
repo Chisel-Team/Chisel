@@ -153,6 +153,6 @@ public class SubmapManagerCombinedCTM extends SubmapManagerBase implements IOffs
 
 	@Override
 	public boolean canOffset(IBlockAccess world, int x, int y, int z, int side) {
-		return true;
+		return rType == TextureType.V4 || rType == TextureType.V9;
 	}
 }
