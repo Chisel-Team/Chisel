@@ -725,6 +725,7 @@ public enum Features {
 			end_Stone.carverHelper.addVariation("tile.end_Stone.12.desc", 12, "endstone/endStoneOrnate");
 			end_Stone.carverHelper.addVariation("tile.end_Stone.13.desc", 13, "endstone/endStoneLargeTile");
 			end_Stone.carverHelper.addVariation("tile.end_Stone.14.desc", 14, "endstone/enderDiagonalBrick", new SubmapManagerCombinedCTM(4, "endstone/enderDiagonalBrick", TextureType.V4));
+            end_Stone.carverHelper.addVariation("tile.end_Stone.15.desc", 15, "endstone/masonryEnder");
 			end_Stone.carverHelper.registerAll(end_Stone, "end_Stone");
 			Carving.chisel.registerOre("end_Stone", "end_Stone");
 		}
@@ -2034,6 +2035,7 @@ public enum Features {
 			purpur.carverHelper.addVariation("tile.purpur.9.desc", 9, "end_purpur/purpurLargeTile");
 			purpur.carverHelper.addVariation("tile.purpur.10.desc", 10, "end_purpur/purpurOrnate");
 			purpur.carverHelper.addVariation("tile.purpur.11.desc", 11, "end_purpur/borderPurpur", new SubmapManagerCombinedCTM(4, "end_purpur/borderPurpur", TextureType.V4));
+            purpur.carverHelper.addVariation("tile.purpur.12.desc", 12, "end_purpur/masonryPurpur");
 
 			purpur.carverHelper.registerAll(purpur, "purpur");
 			Carving.chisel.registerOre("purpur", "purpur");
@@ -2634,6 +2636,7 @@ public enum Features {
             mazeStone.carverHelper.addVariation("tile.mazestone.2.desc", 2, "mazestone/intricate", 22);
             mazeStone.carverHelper.addVariation("tile.mazestone.3.desc", 3, "mazestone/cobbled", 23);
             mazeStone.carverHelper.addVariation("tile.mazestone.4.desc", 4, "mazestone/mazestoneDiagonals", new SubmapManagerCombinedCTM(4, "mazestone/mazestoneDiagonals", TextureType.V4), 24);
+            mazeStone.carverHelper.addVariation("tile.mazeStone.5.desc", 5, "mazeStone/masonryMazestone", 25);
 
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 0, 0);
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 1, 1);
