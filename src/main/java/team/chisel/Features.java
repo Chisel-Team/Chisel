@@ -63,9 +63,16 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
+
+			BlockCarvable AECertusQuartz = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabModdedChiselBlocks);
 			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartz"), 0, 0);
 			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzPillar"), 0, 1);
 			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzChiseled"), 0, 2);
+			AECertusQuartz.carverHelper.addVariation("tile.AECertusQuartz.0.desc", 0, "quartz/certus/certusChiseled", 3);
+			AECertusQuartz.carverHelper.addVariation("tile.AECertusQuartz.1.desc", 1, "quartz/certus/certusPrismatic", 4);
+			AECertusQuartz.carverHelper.addVariation("tile.AECertusQuartz.2.desc", 2, "quartz/certus/masonryCertus", 5);
+
+			AECertusQuartz.carverHelper.registerAll(AECertusQuartz, "AECertusQuartz");
 			Carving.chisel.registerOre("AECertusQuartz", "AECertusQuartz");
 		}
 	},
@@ -2047,9 +2054,16 @@ public enum Features {
 
 		@Override
 		void addBlocks() {
+
+			BlockCarvable quartz = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
 			Carving.chisel.addVariation("quartz", Blocks.quartz_block, 0, 0);
-			Carving.chisel.addVariation("quartz", Blocks.quartz_block, 1, 0);
-			Carving.chisel.addVariation("quartz", Blocks.quartz_block, 2, 0);
+			Carving.chisel.addVariation("quartz", Blocks.quartz_block, 1, 1);
+			Carving.chisel.addVariation("quartz", Blocks.quartz_block, 2, 2);
+			quartz.carverHelper.addVariation("tile.quartz.0.desc", 0, "quartz/quartzChiseled", 3);
+			quartz.carverHelper.addVariation("tile.quartz.1.desc", 1, "quartz/quartzPrismatic", 4);
+			quartz.carverHelper.addVariation("tile.quartz.2.desc", 2, "quartz/masonryQuartz", 5);
+
+			quartz.carverHelper.registerAll(quartz, "quartz");
 			Carving.chisel.registerOre("quartz", "quartz");
 		}
 	},
