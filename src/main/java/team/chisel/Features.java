@@ -1372,6 +1372,7 @@ public enum Features {
 			lapis_block.carverHelper.addVariation("tile.lapis.6.desc", 6, "lapis/a1-blocklapis-panel");
 			lapis_block.carverHelper.addVariation("tile.lapis.7.desc", 7, "lapis/a1-blocklapis-smooth");
 			lapis_block.carverHelper.addVariation("tile.lapis.8.desc", 8, "lapis/a1-blocklapis-ornatelayer");
+			lapis_block.carverHelper.addVariation("tile.lapis.0.desc", 0, "lapis/masonryLapis", 9);
 
 			lapis_block.carverHelper.registerAll(lapis_block, "lapis_block");
 			Carving.chisel.registerOre("lapis_block", "lapis");
@@ -2227,6 +2228,7 @@ public enum Features {
 			redstone_block.carverHelper.addVariation("tile.redstone_block.13.desc", 13, "redstone/supaplex");
 			redstone_block.carverHelper.addVariation("tile.redstone_block.14.desc", 14, "redstone/a1-blockredstone-skullred");
 			redstone_block.carverHelper.addVariation("tile.redstone_block.15.desc", 15, "redstone/a1-blockredstone-redstonezelda");
+			redstone_block.carverHelper.addVariation("tile.redstone_block.0.desc", 0, "redstone/masonryRedstone", 16);
 
 			redstone_block.carverHelper.registerAll(redstone_block, "redstone_block");
 			Carving.chisel.registerOre("redstone_block", "redstone");
