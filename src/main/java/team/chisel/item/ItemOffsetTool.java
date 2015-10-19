@@ -113,7 +113,7 @@ public class ItemOffsetTool extends Item implements IShaderRenderItem {
 				return canOffset(player, world, x, y, z, side);
 			} else {
 				ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.getData(DATA_KEY);
-				OffsetData data = cd.getDataForChunk(world.getChunkFromBlockCoords(x, z).getChunkCoordIntPair());
+				OffsetData data = cd.getDataForChunk(world.provider.dimensionId, world.getChunkFromBlockCoords(x, z).getChunkCoordIntPair());
 				ForgeDirection face = ForgeDirection.getOrientation(side);
 				data.move(getMoveDir(face, hitX, hitY, hitZ));
 				PerChunkData.INSTANCE.chunkModified(world.getChunkFromBlockCoords(x, z), DATA_KEY);

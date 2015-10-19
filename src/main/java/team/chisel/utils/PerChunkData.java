@@ -15,7 +15,9 @@ import team.chisel.api.chunkdata.IChunkData;
 import team.chisel.api.chunkdata.IChunkDataRegistry;
 import team.chisel.network.PacketHandler;
 
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Table;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.ByteBufUtils;
@@ -77,7 +79,7 @@ public enum PerChunkData implements IChunkDataRegistry {
 	 */
 	public static class ChunkDataBase<T extends NBTSaveable> implements IChunkData<T> {
 
-		protected final Map<ChunkCoordIntPair, T> data = Maps.newHashMap();
+		protected final Table<Integer, ChunkCoordIntPair, T> data = HashBasedTable.create();
 		protected final Class<? extends T> clazz;
 		private final boolean needsClientSync;
 
@@ -88,7 +90,7 @@ public enum PerChunkData implements IChunkDataRegistry {
 
 		@Override
 		public void writeToNBT(Chunk chunk, NBTTagCompound tag) {
-			T t = data.get(chunk.getChunkCoordIntPair());
+			T t = data.get(chunk.worldObj.provider.dimensionId, chunk.getChunkCoordIntPair());
 			if (t != null) {
 				t.write(tag);
 			}
@@ -96,17 +98,18 @@ public enum PerChunkData implements IChunkDataRegistry {
 
 		@Override
 		public void readFromNBT(Chunk chunk, NBTTagCompound tag) {
+			int dimID = chunk.worldObj.provider.dimensionId;
 			ChunkCoordIntPair coords = chunk.getChunkCoordIntPair();
 			if (tag.hasNoTags()) {
-				data.remove(coords);
+				data.remove(dimID, coords);
 				return;
 			}
-			T t = getOrCreateNew(coords);
+			T t = getOrCreateNew(dimID, coords);
 			t.read(tag);
 		}
 		
-		protected T getOrCreateNew(ChunkCoordIntPair coords) {
-			T t = data.get(coords);
+		protected T getOrCreateNew(int dimID, ChunkCoordIntPair coords) {
+			T t = data.get(dimID, coords);
 			if (t == null) {
 				try {
 					t = clazz.newInstance();
@@ -115,7 +118,7 @@ public enum PerChunkData implements IChunkDataRegistry {
 					e.printStackTrace();
 				}
 			}
-			data.put(coords, t);
+			data.put(dimID, coords, t);
 			return t;
 		}
 
@@ -125,8 +128,8 @@ public enum PerChunkData implements IChunkDataRegistry {
 		}
 
 		@Override
-		public T getDataForChunk(ChunkCoordIntPair coords) {
-			return getOrCreateNew(coords);
+		public T getDataForChunk(int dimID, ChunkCoordIntPair coords) {
+			return getOrCreateNew(dimID, coords);
 		}
 	}
 

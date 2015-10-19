@@ -1,6 +1,7 @@
 package team.chisel.api.chunkdata;
 
 import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 
 public class ChunkData {
@@ -36,16 +37,16 @@ public class ChunkData {
 		}
 	}
 
-	public static IOffsetData getOffsetForChunk(int x, int z) {
-		return getOffsetForChunk(new ChunkCoordIntPair(x >> 4, z >> 4));
+	public static IOffsetData getOffsetForChunk(World world, int x, int z) {
+		return getOffsetForChunk(world.getChunkFromBlockCoords(x, z));
 	}
 
 	public static IOffsetData getOffsetForChunk(Chunk chunk) {
-		return getOffsetForChunk(chunk.getChunkCoordIntPair());
+		return getOffsetForChunk(chunk.worldObj.provider.dimensionId, chunk.getChunkCoordIntPair());
 	}
 
-	public static IOffsetData getOffsetForChunk(ChunkCoordIntPair chunk) {
+	public static IOffsetData getOffsetForChunk(int dimID, ChunkCoordIntPair chunk) {
 		IChunkData<? extends IOffsetData> data = offsetRegistry.<IChunkData<? extends IOffsetData>> getData(OFFSET_DATA_KEY);
-		return data == null ? DUMMY : data.getDataForChunk(chunk);
+		return data == null ? DUMMY : data.getDataForChunk(dimID, chunk);
 	}
 }

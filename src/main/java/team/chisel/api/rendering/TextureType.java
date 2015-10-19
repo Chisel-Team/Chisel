@@ -278,7 +278,7 @@ public enum TextureType {
 	}
 
 	public static IIcon getVIcon(ISubmap map, int x, int y, int z, int side) {
-		IOffsetData data = ChunkData.getOffsetForChunk(x, z);
+		IOffsetData data = ChunkData.getOffsetForChunk(Minecraft.getMinecraft().theWorld, x, z);
 		if (data != null) {
 			x += data.getOffsetX();
 			y += data.getOffsetY();

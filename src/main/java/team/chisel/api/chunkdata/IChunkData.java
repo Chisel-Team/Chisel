@@ -12,6 +12,6 @@ public interface IChunkData<T> {
 
 	boolean requiresClientSync();
 	
-	T getDataForChunk(ChunkCoordIntPair chunk);
+	T getDataForChunk(int dimID, ChunkCoordIntPair chunk);
 
 }
