@@ -1845,6 +1845,11 @@ public enum Features {
 		void addItems() {
 			GameRegistry.registerItem(new ItemOffsetTool(), "offsettool");
 		}
+
+		@Override
+		void addRecipes() {
+			GameRegistry.addRecipe(new ShapedOreRecipe(ChiselItems.offsettool, " o ", "oeo", "so ", 'o', Blocks.obsidian, 'e', Items.ender_eye, 's', "stickWood"));
+		}
 	},
 
 	PACKEDICE {
