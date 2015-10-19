@@ -61,7 +61,7 @@ public class ItemStarFieldRenderer implements IItemRenderer {
 			RenderHelper.enableGUIStandardItemLighting();
 
 			GL11.glEnable(GL11.GL_ALPHA_TEST);
-
+			
 			RenderItem r = RenderItem.getInstance();
 			r.renderItemIntoGUI(mc.fontRenderer, mc.getTextureManager(), item, 0, 0, true);
 
@@ -101,12 +101,14 @@ public class ItemStarFieldRenderer implements IItemRenderer {
 				float maxu = overlay.getMaxU();
 				float maxv = overlay.getMaxV();
 
+				GL11.glDisable(GL11.GL_LIGHTING);
 				t.startDrawingQuads();
 				t.addVertexWithUV(0, 0, 0, minu, minv);
 				t.addVertexWithUV(0, 16, 0, minu, maxv);
 				t.addVertexWithUV(16, 16, 0, maxu, maxv);
 				t.addVertexWithUV(16, 0, 0, maxu, minv);
 				t.draw();
+				GL11.glEnable(GL11.GL_LIGHTING);
 
 				GL11.glDepthFunc(GL11.GL_LEQUAL);
 			}
