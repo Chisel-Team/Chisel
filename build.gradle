@@ -112,6 +112,10 @@ jar {
             exclude 'META-INF', 'META-INF/**', '*.info'
         }
     }
+    
+    manifest {
+        attributes 'FMLAT': 'chisel_compile_at.cfg'
+    }
 }
 
 // Create deobf dev jars
