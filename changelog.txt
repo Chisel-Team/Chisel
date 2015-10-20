@@ -1,3 +1,14 @@
+2.9.3:
+Changes
+- Beacon rendering has been improved to show the color of the beacon in the item
+- White beacon, which was identical to the vanilla one, is now the RAINBOW BEACON
+Fixes
+- #43 Top slabs are unnamed
+- Fix AT not running on new forge versions (caused things like the special item rendering in the chisel GUI to not work)
+- Fix all potential issues with the chisel GUI and blocks that take the item in your hand
+- Fix chisel not rendering correctly in caches, etc.
+- Fix chiseled beacon pick block, sub blocks, and drops
+
 2.9.2:
 Changes
 - In-world chiseling is now possible in creative
