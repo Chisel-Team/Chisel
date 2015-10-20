@@ -63,6 +63,19 @@ Fixes
 API
 - Add IConnectable for allowing other blocks to determine if chisel blocks will connect to them
 
+2.5.0:
+New
+- Connected Textured Blocks should show in the chisel menu
+- Beacons!
+- Piping
+- 1.9 Blocks
+Changes
+- Limestone gets a new look
+- Ball of moss is cheaper
+Fixes
+- Bookshelves pick block
+- Assorted other bugs got squished
+
 2.4.1:
 New
 - New UberWavy futura block
