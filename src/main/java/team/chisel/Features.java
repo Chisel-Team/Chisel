@@ -2656,7 +2656,7 @@ public enum Features {
 			mazeStone.carverHelper.addVariation("tile.mazestone.2.desc", 2, "mazestone/intricate", 22);
 			mazeStone.carverHelper.addVariation("tile.mazestone.3.desc", 3, "mazestone/cobbled", 23);
 			mazeStone.carverHelper.addVariation("tile.mazestone.4.desc", 4, "mazestone/mazestoneDiagonals", new SubmapManagerCombinedCTM(4, "mazestone/mazestoneDiagonals", TextureType.V4), 24);
-			mazeStone.carverHelper.addVariation("tile.mazeStone.5.desc", 5, "mazeStone/masonryMazestone", 25);
+			mazeStone.carverHelper.addVariation("tile.mazestone.5.desc", 5, "mazestone/masonryMazestone", 25);
 
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 0, 0);
 			Carving.chisel.addVariation("TFMazestone", GameRegistry.findBlock("TwilightForest", "tile.TFMazestone"), 1, 1);
