@@ -703,6 +703,7 @@ public enum Features {
 			emerald_block.carverHelper.addVariation("tile.emerald.9.desc", 9, "emerald/four");
 			emerald_block.carverHelper.addVariation("tile.emerald.10.desc", 10, "emerald/fourornate");
 			emerald_block.carverHelper.addVariation("tile.emerald.11.desc", 11, "emerald/ornate");
+			emerald_block.carverHelper.addVariation("tile.emerald.0.desc", 0, "emerald/masonryEmerald", 12);
 			emerald_block.carverHelper.registerAll(emerald_block, "emerald_block");
 			Carving.chisel.registerOre("emerald_block", "emerald");
 		}

@@ -17,7 +17,7 @@ item.chisel.chisel.desc.modes=Has multiple modes for chiseling.
 item.chisel.chisel_diamond.name=Diamond Chisel
 item.chisel.chisel_obsidian.name=Obsidian Chisel
 
-item.chisel.offsetool.name=Ender Offset Wand
+item.chisel.offsettool.name=Ender Offset Wand
 
 item.ballMoss.name=Ball O' Moss
 item.ballMoss.desc=Right-Click to throw. This will turn Cobblestone to Moss Stone on impact.
