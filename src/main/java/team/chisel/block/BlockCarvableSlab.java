@@ -49,6 +49,14 @@ public class BlockCarvableSlab extends BlockCarvable {
 	}
 
 	@Override
+	public Block setBlockName(String p_149663_1_) {
+		if (this != top) {
+			top.setBlockName(p_149663_1_);
+		}
+		return super.setBlockName(p_149663_1_);
+	}
+
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4) {
 		if (isBottom) {
 			setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.5F, 1.0F);
