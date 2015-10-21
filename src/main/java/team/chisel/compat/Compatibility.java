@@ -83,6 +83,48 @@ public class Compatibility {
 		addSupport("Botania", "endStoneBrick", "end_stone", 0, 0);
 		addSupport("Botania", "endStoneBrick", "end_stone", 1, 0);
 
+		//Andesite
+
+		addSupport("Botania", "stone", "andesite", 0, 20);
+		addSupport("Botania", "stone", "andesite", 4, 21);
+		addSupport("Botania", "stone", "andesite", 8, 22);
+		addSupport("Botania", "stone", "andesite", 12, 23);
+
+		addSupport("ganyssurface", "18Stones", "andesite", 5, 24);
+		addSupport("ganyssurface", "18Stones", "andesite", 6, 25);
+
+		//Diorite
+
+		addSupport("Botania", "stone", "diorite", 2, 20);
+		addSupport("Botania", "stone", "diorite", 6, 21);
+		addSupport("Botania", "stone", "diorite", 10, 22);
+		addSupport("Botania", "stone", "diorite", 14, 23);
+
+		addSupport("ganyssurface", "18Stones", "diorite", 1, 24);
+		addSupport("ganyssurface", "18Stones", "diorite", 2, 25);
+
+		//Granite
+
+		addSupport("Botania", "stone", "granite", 3, 20);
+		addSupport("Botania", "stone", "granite", 7, 21);
+		addSupport("Botania", "stone", "granite", 11, 22);
+		addSupport("Botania", "stone", "granite", 15, 23);
+
+		addSupport("ganyssurface", "18Stones", "granite", 3, 24);
+		addSupport("ganyssurface", "18Stones", "granite", 4, 25);
+
+		//Prismarine
+
+		addSupport("Botania", "prismarine", "prismarine", 0, 20);
+		addSupport("Botania", "prismarine", "prismarine", 1, 21);
+		addSupport("Botania", "prismarine", "prismarine", 2, 22);
+
+		addSupport("ganyssurface", "prismarineBlocks", "prismarine", 0, 23);
+		addSupport("ganyssurface", "prismarineBlocks", "prismarine", 1, 24);
+		addSupport("ganyssurface", "prismarineBlocks", "prismarine", 2, 25);
+
+
+
 		if (Loader.isModLoaded("EE3")) {
 			loadEE3Values();
 		}

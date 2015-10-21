@@ -141,19 +141,6 @@ public enum Features {
 			andesite.carverHelper.addVariation("tile.andesite.6.desc", 6, "andesite/andesiteTiles");
 			andesite.carverHelper.addVariation("tile.andesite.7.desc", 7, "andesite/andesiteDiagonalBricks", new SubmapManagerCombinedCTM(4, "andesite/andesiteDiagonalBricks", TextureType.V4));
 			andesite.carverHelper.registerAll(andesite, "andesite");
-
-			if (Loader.isModLoaded("Botania")) {
-				Carving.chisel.addVariation("andesite", GameRegistry.findBlock("Botania", "stone"), 0, 20);
-				Carving.chisel.addVariation("andesite", GameRegistry.findBlock("Botania", "stone"), 4, 21);
-				Carving.chisel.addVariation("andesite", GameRegistry.findBlock("Botania", "stone"), 8, 22);
-				Carving.chisel.addVariation("andesite", GameRegistry.findBlock("Botania", "stone"), 12, 23);
-			}
-
-			if (Loader.isModLoaded("ganyssurface")) {
-				Carving.chisel.addVariation("andesite", GameRegistry.findBlock("ganyssurface", "18Stones"), 5, 24);
-				Carving.chisel.addVariation("andesite", GameRegistry.findBlock("ganyssurface", "18Stones"), 6, 25);
-			}
-
 			andesite.carverHelper.registerOre("blockAndesite");
 			andesite.carverHelper.registerOre("stoneAndesite");
 		}
@@ -655,19 +642,6 @@ public enum Features {
 			diorite.carverHelper.addVariation("tile.diorite.6.desc", 6, "diorite/dioriteTiles");
 			diorite.carverHelper.addVariation("tile.diorite.7.desc", 7, "diorite/dioriteDiagonalBricks", new SubmapManagerCombinedCTM(4, "diorite/dioriteDiagonalBricks", TextureType.V4));
 			diorite.carverHelper.registerAll(diorite, "diorite");
-
-			if (Loader.isModLoaded("Botania")) {
-				Carving.chisel.addVariation("diorite", GameRegistry.findBlock("Botania", "stone"), 2, 20);
-				Carving.chisel.addVariation("diorite", GameRegistry.findBlock("Botania", "stone"), 6, 21);
-				Carving.chisel.addVariation("diorite", GameRegistry.findBlock("Botania", "stone"), 10, 22);
-				Carving.chisel.addVariation("diorite", GameRegistry.findBlock("Botania", "stone"), 14, 23);
-			}
-
-			if (Loader.isModLoaded("ganyssurface")) {
-				Carving.chisel.addVariation("diorite", GameRegistry.findBlock("ganyssurface", "18Stones"), 1, 24);
-				Carving.chisel.addVariation("diorite", GameRegistry.findBlock("ganyssurface", "18Stones"), 2, 25);
-			}
-
 			diorite.carverHelper.registerOre("blockDiorite");
 			diorite.carverHelper.registerOre("stoneDiorite");
 		}
@@ -1089,19 +1063,6 @@ public enum Features {
 			granite.carverHelper.addVariation("tile.granite.6.desc", 6, "granite/graniteTiles");
 			granite.carverHelper.addVariation("tile.granite.7.desc", 7, "granite/graniteDiagonalBricks", new SubmapManagerCombinedCTM(4, "granite/graniteDiagonalBricks", TextureType.V4));
 			granite.carverHelper.registerAll(granite, "granite");
-
-			if (Loader.isModLoaded("Botania")) {
-				Carving.chisel.addVariation("granite", GameRegistry.findBlock("Botania", "stone"), 3, 20);
-				Carving.chisel.addVariation("granite", GameRegistry.findBlock("Botania", "stone"), 7, 21);
-				Carving.chisel.addVariation("granite", GameRegistry.findBlock("Botania", "stone"), 11, 22);
-				Carving.chisel.addVariation("granite", GameRegistry.findBlock("Botania", "stone"), 15, 23);
-			}
-
-			if (Loader.isModLoaded("ganyssurface")) {
-				Carving.chisel.addVariation("granite", GameRegistry.findBlock("ganyssurface", "18Stones"), 4, 24);
-				Carving.chisel.addVariation("granite", GameRegistry.findBlock("ganyssurface", "18Stones"), 5, 25);
-			}
-
 			granite.carverHelper.registerOre("blockGranite");
 			granite.carverHelper.registerOre("stoneGranite");
 		}
@@ -2080,19 +2041,6 @@ public enum Features {
 			prismarine.carverHelper.addVariation("tile.prismarine.7.desc", 7, "prismarine/diagonal/prismarineDiagonalAnim",
 					new SubmapManagerCombinedCTM(4, "prismarine/diagonal/prismarineDiagonalAnim", TextureType.V4), -13);
 			prismarine.carverHelper.registerAll(prismarine, "prismarine");
-
-			if (Loader.isModLoaded("Botania")) {
-				Carving.chisel.addVariation("prismarine", GameRegistry.findBlock("Botania", "prismarine"), 0, 0);
-				Carving.chisel.addVariation("prismarine", GameRegistry.findBlock("Botania", "prismarine"), 1, 1);
-				Carving.chisel.addVariation("prismarine", GameRegistry.findBlock("Botania", "prismarine"), 2, 2);
-			}
-
-			if (Loader.isModLoaded("ganyssurface")) {
-				Carving.chisel.addVariation("prismarine", GameRegistry.findBlock("ganyssurface", "prismarineBlocks"), 0, 3);
-				Carving.chisel.addVariation("prismarine", GameRegistry.findBlock("ganyssurface", "prismarineBlocks"), 1, 4);
-				Carving.chisel.addVariation("prismarine", GameRegistry.findBlock("ganyssurface", "prismarineBlocks"), 2, 5);
-			}
-
 			OreDictionary.registerOre("prismarine", prismarine);
 			Carving.chisel.registerOre("prismarine", "prismarine");
 		}
