@@ -15,6 +15,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
+import team.chisel.Chisel;
 import team.chisel.api.carving.CarvableHelper;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.chunkdata.ChunkData;
@@ -278,7 +279,7 @@ public enum TextureType {
 	}
 
 	public static IIcon getVIcon(ISubmap map, int x, int y, int z, int side) {
-		IOffsetData data = ChunkData.getOffsetForChunk(Minecraft.getMinecraft().theWorld, x, z);
+		IOffsetData data = ChunkData.getOffsetForChunk(Chisel.proxy.getClientWorld(), x, z);
 		if (data != null) {
 			x += data.getOffsetX();
 			y += data.getOffsetY();

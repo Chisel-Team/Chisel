@@ -1,5 +1,7 @@
 package team.chisel.api.carving;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -61,21 +63,25 @@ public class VariationInfoBase implements IVariationInfo {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(String modName, Block block, IIconRegister register) {
 		manager.registerIcons(modName, block, register);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public RenderBlocks createRenderContext(RenderBlocks rendererOld, Block block, IBlockAccess world) {
 		return manager.createRenderContext(rendererOld, block, world);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void preRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		manager.preRenderSide(renderer, world, x, y, z, side);
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void postRenderSide(RenderBlocks renderer, IBlockAccess world, int x, int y, int z, ForgeDirection side) {
 		manager.postRenderSide(renderer, world, x, y, z, side);
 	}
