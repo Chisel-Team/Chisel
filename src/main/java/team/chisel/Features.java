@@ -1487,6 +1487,28 @@ public enum Features {
 			limestone.carverHelper.addVariation("tile.limestone.14.desc", 14, "limestone/terrain-pistonback-lightmarker");
 			limestone.carverHelper.addVariation("tile.limestone.15.desc", 15, "limestone/terrain-pistonback-lightpanel");
 			limestone.carverHelper.registerAll(limestone, "limestone");
+
+			BlockCarvable burdstone = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
+					.setStepSound(Block.soundTypeStone);
+
+			burdstone.carverHelper.addVariation("tile.limestone.0.desc", 0, "birdstone/birdstone-smalltile");
+			burdstone.carverHelper.addVariation("tile.limestone.1.desc", 1, "birdstone/birdstone-french");
+			burdstone.carverHelper.addVariation("tile.limestone.2.desc", 2, "birdstone/birdstone-french2");
+			burdstone.carverHelper.addVariation("tile.limestone.3.desc", 3, "birdstone/birdstone-french-creep");
+			burdstone.carverHelper.addVariation("tile.limestone.4.desc", 4, "birdstone/birdstone-smallbrick");
+			burdstone.carverHelper.addVariation("tile.limestone.5.desc", 5, "birdstone/birdstone-smallbroken");
+			burdstone.carverHelper.addVariation("tile.limestone.6.desc", 6, "birdstone/birdstone-rough");
+			burdstone.carverHelper.addVariation("tile.limestone.7.desc", 7, "birdstone/birdstone-ornate1");
+			burdstone.carverHelper.addVariation("tile.limestone.8.desc", 8, "birdstone/birdstone-ornate2");
+			burdstone.carverHelper.addVariation("tile.limestone.9.desc", 9, "birdstone/birdstone-smooth-creep");
+			burdstone.carverHelper.addVariation("tile.limestone.10.desc", 10, "birdstone/birdstone-dent.png");
+			burdstone.carverHelper.addVariation("tile.limestone.11.desc", 11, "birdstone/birdstone-emboss");
+			burdstone.carverHelper.addVariation("tile.limestone.12.desc", 12, "birdstone/birdstone-fourtile");
+			burdstone.carverHelper.addVariation("tile.limestone.13.desc", 13, "birdstone/birdstone-marker");
+			burdstone.carverHelper.addVariation("tile.limestone.14.desc", 14, "birdstone/birdstone-darkpanel");
+			burdstone.carverHelper.addVariation("tile.limestone.15.desc", 15, "birdstone/birdstone-smooth");
+			//carverHelper.registerVariations("technical");
+
 			OreDictionary.registerOre("limestone", limestone);
 			Carving.chisel.registerOre("limestone", "limestone");
 
