@@ -2024,6 +2024,29 @@ public enum Features {
 		}
 	},
 
+	PRISMARINE {
+
+		@Override
+		void addBlocks() {
+			BlockCarvable prismarine = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(1.5F).setResistance(30.0F)
+					.setStepSound(Block.soundTypeStone);
+
+			prismarine.carverHelper.addVariation("tile.prismarine.0.desc", 0, "prismarine/prismarine_rough", -20);
+			prismarine.carverHelper.addVariation("tile.prismarine.1.desc", 1, "prismarine/prismarine_bricks", -19);
+			prismarine.carverHelper.addVariation("tile.prismarine.2.desc", 2, "prismarine/prismarine_dark", -18);
+			prismarine.carverHelper.addVariation("tile.prismarine.3.desc", 3, "prismarine/prismarineCircular", -17);
+			prismarine.carverHelper.addVariation("tile.prismarine.4.desc", 4, "prismarine/prismarineBrick", -16);
+			prismarine.carverHelper.addVariation("tile.prismarine.5.desc", 5, "prismarine/masonryPrismarine", -15);
+			prismarine.carverHelper.addVariation("tile.prismarine.6.desc", 6, "prismarine/masonryPrismarineAnim", -14);
+			prismarine.carverHelper.addVariation("tile.prismarine.7.desc", 7, "prismarine/diagonal/prismarineDiagonalAnim",
+					new SubmapManagerCombinedCTM(4, "prismarine/diagonal/prismarineDiagonalAnim", TextureType.V4), -13);
+			prismarine.carverHelper.registerAll(prismarine, "prismarine");
+
+			OreDictionary.registerOre("prismarine", prismarine);
+			Carving.chisel.registerOre("prismarine", "prismarine");
+		}
+	},
+
 	PUMPKIN {
 
 		@Override
