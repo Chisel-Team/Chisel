@@ -663,6 +663,9 @@ tile.limestoneStairs.13.desc=Large Limestone Tiled Stairs
 tile.limestoneStairs.14.desc=Limestone Stairs with Light Panel
 tile.limestoneStairs.15.desc=Limestone Stairs with Dark Panel
 
+#Birdstone
+tile.chisel.birdstone.name=Birdstone
+
 #Factory Blocks
 tile.chisel.factoryblock.name=Factory Block
 tile.factory.0.desc=Rusty Metal Plate with Dotted Pattern

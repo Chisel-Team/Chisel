@@ -211,7 +211,7 @@ public class CarvableHelper {
 	}
 
 	public void registerOre(String ore) {
-		OreDictionary.registerOre(ore, getBlock());
+		OreDictionary.registerOre(ore, new ItemStack(getBlock(), 1, OreDictionary.WILDCARD_VALUE));
 	}
 
 	@SideOnly(Side.CLIENT)

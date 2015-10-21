@@ -1486,7 +1486,7 @@ public enum Features {
 			limestone.carverHelper.addVariation("tile.limestone.14.desc", 14, "limestone/terrain-pistonback-lightmarker");
 			limestone.carverHelper.addVariation("tile.limestone.15.desc", 15, "limestone/terrain-pistonback-lightpanel");
 			limestone.carverHelper.registerAll(limestone, "limestone");
-
+			limestone.carverHelper.registerOre("limestone");
 			BlockCarvable burdstone = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
 					.setStepSound(Block.soundTypeStone);
 
@@ -1500,16 +1500,16 @@ public enum Features {
 			burdstone.carverHelper.addVariation("tile.limestone.8.desc", 7, "birdstone/birdstone-ornate1", 24);
 			burdstone.carverHelper.addVariation("tile.limestone.9.desc", 8, "birdstone/birdstone-ornate2", 25);
 			burdstone.carverHelper.addVariation("tile.limestone.10.desc", 9, "birdstone/birdstone-smooth-creep", 26);
-			burdstone.carverHelper.addVariation("tile.limestone.11.desc", 10, "birdstone/birdstone-dent.png", 27);
+			burdstone.carverHelper.addVariation("tile.limestone.11.desc", 10, "birdstone/birdstone-dent", 27);
 			burdstone.carverHelper.addVariation("tile.limestone.12.desc", 11, "birdstone/birdstone-emboss", 28);
 			burdstone.carverHelper.addVariation("tile.limestone.13.desc", 12, "birdstone/birdstone-fourtile", 29);
 			burdstone.carverHelper.addVariation("tile.limestone.14.desc", 13, "birdstone/birdstone-marker", 30);
 			burdstone.carverHelper.addVariation("tile.limestone.15.desc", 14, "birdstone/birdstone-darkpanel", 31);
 			burdstone.carverHelper.addVariation("tile.limestone.0.desc", 15, "birdstone/birdstone-smooth", 16);
-			burdstone.carverHelper.registerBlock(burdstone, "limestone");
+			burdstone.carverHelper.registerBlock(burdstone, "birdstone");
 			burdstone.carverHelper.registerVariations("limestone");
-
-			OreDictionary.registerOre("limestone", limestone);
+			burdstone.carverHelper.registerOre("limestone");
+			
 			Carving.chisel.registerOre("limestone", "limestone");
 
 			BlockCarvableSlab limestone_slab = (BlockCarvableSlab) new BlockCarvableSlab(limestone).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F);
