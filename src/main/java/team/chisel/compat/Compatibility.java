@@ -80,8 +80,22 @@ public class Compatibility {
 		addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 14, 99);
 		addSupport("TConstruct", "decoration.multibrickfancy", "stonebricksmooth", 15, 99);
 
-		addSupport("Botania", "endStoneBrick", "end_stone", 0, 0);
-		addSupport("Botania", "endStoneBrick", "end_stone", 1, 0);
+		//Limestone
+
+		addSupport("thebetweenlands", "limestone", "limestone", 0, 100);
+		addSupport("thebetweenlands", "limestoneBricks", "limestone", 0, 101);
+		addSupport("thebetweenlands", "polishedLimestone", "limestone", 0, 102);
+		addSupport("thebetweenlands", "limestoneTiles", "limestone", 0, 103);
+		addSupport("thebetweenlands", "chiseledLimestone", "limestone", 0, 104);
+
+		//Endstone
+
+		addSupport("Botania", "endStoneBrick", "end_stone", 0, 20);
+		addSupport("Botania", "endStoneBrick", "end_stone", 1, 21);
+
+		addSupport("ganysEnd", "endstoneBrick", "end_stone", 0, 22);
+
+		addSupport("etfuturum", "end_bricks", "end_stone", 0, 23);
 
 		//Andesite
 
@@ -93,6 +107,9 @@ public class Compatibility {
 		addSupport("ganyssurface", "18Stones", "andesite", 5, 24);
 		addSupport("ganyssurface", "18Stones", "andesite", 6, 25);
 
+		addSupport("etfuturum", "stone", "andesite", 5, 26);
+		addSupport("etfuturum", "stone", "andesite", 6, 27);
+
 		//Diorite
 
 		addSupport("Botania", "stone", "diorite", 2, 20);
@@ -102,6 +119,9 @@ public class Compatibility {
 
 		addSupport("ganyssurface", "18Stones", "diorite", 1, 24);
 		addSupport("ganyssurface", "18Stones", "diorite", 2, 25);
+
+		addSupport("etfuturum", "stone", "diorite", 3, 26);
+		addSupport("etfuturum", "stone", "diorite", 4, 27);
 
 		//Granite
 
@@ -113,6 +133,9 @@ public class Compatibility {
 		addSupport("ganyssurface", "18Stones", "granite", 3, 24);
 		addSupport("ganyssurface", "18Stones", "granite", 4, 25);
 
+		addSupport("etfuturum", "stone", "granite", 1, 26);
+		addSupport("etfuturum", "stone", "granite", 2, 27);
+
 		//Prismarine
 
 		addSupport("Botania", "prismarine", "prismarine", 0, 20);
@@ -123,7 +146,14 @@ public class Compatibility {
 		addSupport("ganyssurface", "prismarineBlocks", "prismarine", 1, 24);
 		addSupport("ganyssurface", "prismarineBlocks", "prismarine", 2, 25);
 
+		addSupport("etfuturum", "prismarine_block", "prismarine", 0, 26);
+		addSupport("etfuturum", "prismarine_block", "prismarine", 1, 27);
+		addSupport("etfuturum", "prismarine_block", "prismarine", 2, 28);
 
+		//Purpur
+
+		addSupport("etfuturum", "purpur_block", "purpur", 0, 20);
+		addSupport("etfuturum", "purpur_pillar", "purpur", 0, 21);
 
 		if (Loader.isModLoaded("EE3")) {
 			loadEE3Values();
