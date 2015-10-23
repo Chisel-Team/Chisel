@@ -68,7 +68,7 @@ public enum Features {
 			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzPillar"), 0, 1);
 			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzChiseled"), 0, 2);
 			AECertusQuartz.carverHelper.addVariation("tile.AECertusQuartz.0.desc", 0, "quartz/certus/certusChiseled", 3);
-			AECertusQuartz.carverHelper.addVariation("tile.AECertusQuartz.1.desc", 1, "quartz/certus/certusPrismatic", 4);
+			AECertusQuartz.carverHelper.addVariation("tile.AECertusQuartz.1.desc", 1, "quartz/certus/certusPrismaticPattern", 4);
 			AECertusQuartz.carverHelper.addVariation("tile.AECertusQuartz.2.desc", 2, "quartz/certus/masonryCertus", 5);
 
 			AECertusQuartz.carverHelper.registerAll(AECertusQuartz, "AECertusQuartz");
@@ -137,7 +137,7 @@ public enum Features {
 			andesite.carverHelper.addVariation("tile.andesite.2.desc", 2, "andesite/andesitePillar");
 			andesite.carverHelper.addVariation("tile.andesite.3.desc", 3, "andesite/andesiteLBrick");
 			andesite.carverHelper.addVariation("tile.andesite.4.desc", 4, "andesite/andesiteOrnate");
-			andesite.carverHelper.addVariation("tile.andesite.5.desc", 5, "andesite/andesitePrism");
+			andesite.carverHelper.addVariation("tile.andesite.5.desc", 5, "andesite/andesitePrismatic");
 			andesite.carverHelper.addVariation("tile.andesite.6.desc", 6, "andesite/andesiteTiles");
 			andesite.carverHelper.addVariation("tile.andesite.7.desc", 7, "andesite/andesiteDiagonalBricks", new SubmapManagerCombinedCTM(4, "andesite/andesiteDiagonalBricks", TextureType.V4));
 			andesite.carverHelper.registerAll(andesite, "andesite");
@@ -638,7 +638,7 @@ public enum Features {
 			diorite.carverHelper.addVariation("tile.diorite.2.desc", 2, "diorite/dioritePillar");
 			diorite.carverHelper.addVariation("tile.diorite.3.desc", 3, "diorite/dioriteLBrick");
 			diorite.carverHelper.addVariation("tile.diorite.4.desc", 4, "diorite/dioriteOrnate");
-			diorite.carverHelper.addVariation("tile.diorite.5.desc", 5, "diorite/dioritePrism");
+			diorite.carverHelper.addVariation("tile.diorite.5.desc", 5, "diorite/dioritePrismatic");
 			diorite.carverHelper.addVariation("tile.diorite.6.desc", 6, "diorite/dioriteTiles");
 			diorite.carverHelper.addVariation("tile.diorite.7.desc", 7, "diorite/dioriteDiagonalBricks", new SubmapManagerCombinedCTM(4, "diorite/dioriteDiagonalBricks", TextureType.V4));
 			diorite.carverHelper.registerAll(diorite, "diorite");
@@ -703,6 +703,8 @@ public enum Features {
 			emerald_block.carverHelper.addVariation("tile.emerald.10.desc", 10, "emerald/fourornate");
 			emerald_block.carverHelper.addVariation("tile.emerald.11.desc", 11, "emerald/ornate");
 			emerald_block.carverHelper.addVariation("tile.emerald.0.desc", 0, "emerald/masonryEmerald", 12);
+			emerald_block.carverHelper.addVariation("tile.emerald.12.desc", 12, "emerald/emeraldCircle", 13);
+			emerald_block.carverHelper.addVariation("tile.emerald.13.desc", 13, "emerald/emeraldPrismatic", 14);
 			emerald_block.carverHelper.registerAll(emerald_block, "emerald_block");
 			Carving.chisel.registerOre("emerald_block", "emerald");
 		}
@@ -1059,7 +1061,7 @@ public enum Features {
 			granite.carverHelper.addVariation("tile.granite.2.desc", 2, "granite/granitePillar");
 			granite.carverHelper.addVariation("tile.granite.3.desc", 3, "granite/graniteLBrick");
 			granite.carverHelper.addVariation("tile.granite.4.desc", 4, "granite/graniteOrnate");
-			granite.carverHelper.addVariation("tile.granite.5.desc", 5, "granite/granitePrism");
+			granite.carverHelper.addVariation("tile.granite.5.desc", 5, "granite/granitePrismatic");
 			granite.carverHelper.addVariation("tile.granite.6.desc", 6, "granite/graniteTiles");
 			granite.carverHelper.addVariation("tile.granite.7.desc", 7, "granite/graniteDiagonalBricks", new SubmapManagerCombinedCTM(4, "granite/graniteDiagonalBricks", TextureType.V4));
 			granite.carverHelper.registerAll(granite, "granite");
@@ -2111,7 +2113,7 @@ public enum Features {
 			Carving.chisel.addVariation("quartz", Blocks.quartz_block, 1, 1);
 			Carving.chisel.addVariation("quartz", Blocks.quartz_block, 2, 2);
 			quartz.carverHelper.addVariation("tile.quartz.0.desc", 0, "quartz/quartzChiseled", 3);
-			quartz.carverHelper.addVariation("tile.quartz.1.desc", 1, "quartz/quartzPrismatic", 4);
+			quartz.carverHelper.addVariation("tile.quartz.1.desc", 1, "quartz/quartzPrismaticPattern", 4);
 			quartz.carverHelper.addVariation("tile.quartz.2.desc", 2, "quartz/masonryQuartz", 5);
 
 			quartz.carverHelper.registerAll(quartz, "quartz");
@@ -2697,7 +2699,7 @@ public enum Features {
 
 			BlockCarvable mazeStone = (BlockCarvable) new BlockCarvable(Material.rock, 5.0F, 75.0F).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setStepSound(Block.soundTypeStone);
 			mazeStone.carverHelper.addVariation("tile.mazestone.0.desc", 0, "mazestone/circular", 20);
-			mazeStone.carverHelper.addVariation("tile.mazestone.1.desc", 1, "mazestone/prismatic", 21);
+			mazeStone.carverHelper.addVariation("tile.mazestone.1.desc", 1, "mazestone/prismaticMazestone", 21);
 			mazeStone.carverHelper.addVariation("tile.mazestone.2.desc", 2, "mazestone/intricate", 22);
 			mazeStone.carverHelper.addVariation("tile.mazestone.3.desc", 3, "mazestone/cobbled", 23);
 			mazeStone.carverHelper.addVariation("tile.mazestone.4.desc", 4, "mazestone/mazestoneDiagonals", new SubmapManagerCombinedCTM(4, "mazestone/mazestoneDiagonals", TextureType.V4), 24);
