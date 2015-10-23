@@ -723,7 +723,7 @@ public enum Features {
 			end_Stone.carverHelper.addVariation("tile.end_Stone.4.desc", 4, "endstone/endFrenchBricks");
 			end_Stone.carverHelper.addVariation("tile.end_Stone.5.desc", 5, "endstone/endPillar");
 			end_Stone.carverHelper.addVariation("tile.end_Stone.6.desc", 6, "endstone/endStoneEtched");
-			end_Stone.carverHelper.addVariation("tile.end_Stone.7.desc", 7, "endstone/prismaticEndStone");
+			end_Stone.carverHelper.addVariation("tile.end_Stone.7.desc", 7, "endstone/endPrismatic");
 			end_Stone.carverHelper.addVariation("tile.end_Stone.8.desc", 8, "endstone/endStoneChunk");
 			end_Stone.carverHelper.addVariation("tile.end_Stone.9.desc", 9, "endstone/EnderFrame", new SubmapManagerCombinedCTM(9, "endstone/EnderFrame", TextureType.V9));
 			end_Stone.carverHelper.addVariation("tile.end_Stone.10.desc", 10, "endstone/arcaneEndStone");
@@ -2084,7 +2084,7 @@ public enum Features {
 			purpur.carverHelper.addVariation("tile.purpur.2.desc", 2, "end_purpur/shulker");
 			purpur.carverHelper.addVariation("tile.purpur.3.desc", 3, "end_purpur/tilePurpur");
 			purpur.carverHelper.addVariation("tile.purpur.4.desc", 4, "end_purpur/tileBrokenPurpur");
-			purpur.carverHelper.addVariation("tile.purpur.5.desc", 5, "end_purpur/prismaticPurpur");
+			purpur.carverHelper.addVariation("tile.purpur.5.desc", 5, "end_purpur/purpurPrismarine");
 			purpur.carverHelper.addVariation("tile.purpur.6.desc", 6, "end_purpur/purpurBricks");
 			purpur.carverHelper.addVariation("tile.purpur.7.desc", 7, "end_purpur/purpurCobble");
 			purpur.carverHelper.addVariation("tile.purpur.8.desc", 8, "end_purpur/arcanePurpur");
