@@ -83,7 +83,7 @@ public class SubmapManagerVoidstone extends SubmapManagerBase {
 	private TextureSubmap base;
 
 	private IIcon getBase(double x, double y, double z, int side) {
-		return TextureType.getVIcon(TextureType.V4, base, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), side);
+		return TextureType.getVIcon(base, MathHelper.floor_double(x), MathHelper.floor_double(y), MathHelper.floor_double(z), side);
 	}
 
 	private String texture;
