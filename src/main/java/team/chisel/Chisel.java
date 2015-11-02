@@ -10,10 +10,6 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.cricketcraft.chisel.api.ChiselAPIProps;
-import com.cricketcraft.chisel.api.Statistics;
-import com.cricketcraft.chisel.api.carving.CarvableHelper;
-
 import team.chisel.block.BlockCarvable;
 import team.chisel.carving.Carving;
 import team.chisel.compat.Compatibility;
@@ -22,7 +18,6 @@ import team.chisel.compat.fmp.FMPCompat;
 import team.chisel.config.Configurations;
 import team.chisel.entity.EntityChiselSnowman;
 import team.chisel.init.ChiselBlocks;
-import com.cricketcraft.chisel.api.ChiselTabs;
 import team.chisel.init.TabsInit;
 import team.chisel.item.ItemCarvable;
 import team.chisel.item.chisel.ChiselController;
@@ -31,6 +26,11 @@ import team.chisel.network.PacketHandler;
 import team.chisel.proxy.CommonProxy;
 import team.chisel.utils.General;
 import team.chisel.world.GeneratorChisel;
+
+import com.cricketcraft.chisel.api.ChiselAPIProps;
+import com.cricketcraft.chisel.api.Statistics;
+import com.cricketcraft.chisel.api.carving.CarvableHelper;
+
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -122,6 +122,7 @@ public class Chisel {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		FMLCommonHandler.instance().registerCrashCallable(new ChiselCrashCallable());
 
 		File configFile = event.getSuggestedConfigurationFile();
 		Configurations.configExists = configFile.exists();
