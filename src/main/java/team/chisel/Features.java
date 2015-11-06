@@ -2,6 +2,7 @@ package team.chisel;
 
 import java.util.List;
 
+import net.minecraft.block.BlockFire;
 import team.chisel.block.*;
 import team.chisel.carving.Carving;
 import team.chisel.client.render.SubmapManagerAntiblock;
@@ -308,6 +309,7 @@ public enum Features {
 			bookshelf.carverHelper.registerAll(bookshelf, "bookshelf");
 			bookshelf.setHarvestLevel("axe", 0);
 			Carving.chisel.registerOre("bookshelf", "bookshelf");
+			Blocks.fire.setFireInfo(bookshelf, 5, 20);
 		}
 	},
 
@@ -2906,6 +2908,7 @@ public enum Features {
 				planks[i].setHarvestLevel("axe", 0);
 				Carving.chisel.registerOre(name, "wood");
 				Carving.chisel.setVariationSound(name, Chisel.MOD_ID + ":chisel.wood");
+				Blocks.fire.setFireInfo(planks[i], 5, 20);
 			}
 		}
 	},
