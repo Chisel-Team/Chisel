@@ -554,6 +554,22 @@ public enum Features {
 		}
 	},
 
+    COBALT {
+        @Override
+        void addBlocks() {
+            BlockCarvable cobalt = (BlockCarvable) new BlockBeaconBase(Material.iron).setStepSound(Block.soundTypeMetal).setCreativeTab(ChiselTabs.tabModdedChiselBlocks).setHardness(5F)
+                    .setResistance(10F);
+            cobalt.carverHelper.addVariation("tile.metalOre.0.desc", 0, "metals/cobalt/caution", 20);
+            cobalt.carverHelper.addVariation("tile.metalOre.1.desc", 1, "metals/cobalt/crate", 21);
+            cobalt.carverHelper.addVariation("tile.metalOre.2.desc", 2, "metals/cobalt/thermal", 22);
+            cobalt.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/cobalt/machine", 23);
+            cobalt.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/cobalt/badGreggy", 24);
+            cobalt.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/cobalt/bolted", 25);
+            cobalt.carverHelper.registerAll(cobalt, "cobaltblock");
+            Carving.chisel.registerOre("cobaltblock", "blockCobalt");
+        }
+    },
+
 	CONCRETE {
 
 		@Override
@@ -723,7 +739,7 @@ public enum Features {
 			emerald_block.carverHelper.addVariation("tile.emerald.12.desc", 12, "emerald/emeraldCircle", 13);
 			emerald_block.carverHelper.addVariation("tile.emerald.13.desc", 13, "emerald/emeraldPrismatic", 14);
 			emerald_block.carverHelper.registerAll(emerald_block, "emerald_block");
-			Carving.chisel.registerOre("emerald_block", "emerald");
+			Carving.chisel.registerOre("emerald_block", "blockEmerald");
 		}
 	},
 
@@ -1411,7 +1427,7 @@ public enum Features {
 			lapis_block.carverHelper.addVariation("tile.lapis.0.desc", 0, "lapis/masonryLapis", 9);
 
 			lapis_block.carverHelper.registerAll(lapis_block, "lapis_block");
-			Carving.chisel.registerOre("lapis_block", "lapis");
+			Carving.chisel.registerOre("lapis_block", "blockLapis");
 		}
 	},
 
@@ -2351,7 +2367,7 @@ public enum Features {
 			redstone_block.carverHelper.addVariation("tile.redstone_block.0.desc", 0, "redstone/masonryRedstone", 16);
 
 			redstone_block.carverHelper.registerAll(redstone_block, "redstone_block");
-			Carving.chisel.registerOre("redstone_block", "redstone");
+			Carving.chisel.registerOre("redstone_block", "blockRedstone");
 		}
 	},
 
