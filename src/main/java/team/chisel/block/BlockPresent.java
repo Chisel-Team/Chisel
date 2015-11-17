@@ -107,11 +107,11 @@ public class BlockPresent extends Block implements ICarvable {
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int hitX, float hitY, float hitZ, float p_149727_9_) {
-		if (!world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN)) {
+		if (!world.isRemote && !world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN)) {
 			player.openGui(Chisel.instance, 2, world, x, y, z);
 			return true;
 		}
-		return false;
+		return world.isRemote;
 	}
 
 	@Override

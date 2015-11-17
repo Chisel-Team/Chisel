@@ -36,6 +36,12 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 		GL11.glTranslatef((float) x, (float) y + 1.0F, (float) z + 1.0F);
 		GL11.glScalef(1.0F, -1.0F, -1.0F);
 		int rotation = present.getRotation();
+		
+		// math taken from vanilla chests
+        float lidAngle = present.getPrevLidPos() + (present.getLidPos()- present.getPrevLidPos()) * partialTicks;
+        lidAngle = 1.0F - lidAngle;
+        lidAngle = 1.0F - lidAngle * lidAngle * lidAngle;
+        
 		bindTexture(present);
 		if (!present.isConnected()) {
 			GL11.glRotatef(90 * rotation + 180, 0, 1, 0);
@@ -50,6 +56,7 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 				GL11.glTranslatef(-1, 0, 0);
 				break;
 			}
+			smallChest.chestLid.rotateAngleX = -(lidAngle * (float) Math.PI / 2.0F);
 			smallChest.renderAll();
 		} else if (present.isParent()) {
 			ForgeDirection dir = present.getConnectionDir();
@@ -72,8 +79,12 @@ public class RenderPresent extends TileEntitySpecialRenderer implements IItemRen
 				GL11.glRotatef(180, 0, 1, 0);
 				GL11.glTranslatef(-2, 0, -1);
 			}
+			largeChest.chestLid.rotateAngleX = -(lidAngle * (float) Math.PI / 2.0F);
 			largeChest.renderAll();
 		}
+		
+		smallChest.chestLid.rotateAngleX = 0;
+		largeChest.chestLid.rotateAngleX = 0;
 		GL11.glPopMatrix();
 	}
 

@@ -1,6 +1,8 @@
 package team.chisel.inventory;
 
+import team.chisel.block.tileentity.TileEntityPresent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -8,12 +10,13 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerPresent extends Container {
 
-	private IInventory lower;
-	private int rows;
+	private final int rows;
+	private final TileEntityPresent chest;
 
-	public ContainerPresent(IInventory player, IInventory chest) {
-		lower = chest;
-		rows = chest.getSizeInventory() / 9;
+	public ContainerPresent(InventoryPlayer playerInv, TileEntityPresent chest) {
+		this.chest = chest;
+		this.rows = chest.getSizeInventory() / 9;
+
 		chest.openInventory();
 		int a = (rows - 4) * 18;
 
@@ -25,17 +28,25 @@ public class ContainerPresent extends Container {
 
 		for (int d = 0; d < 3; d++) {
 			for (int e = 0; e < 9; e++) {
-				addSlotToContainer(new Slot(player, e + d * 9 + 9, 8 + e * 18, 103 + d * 18 + a));
+				addSlotToContainer(new Slot(playerInv, e + d * 9 + 9, 8 + e * 18, 103 + d * 18 + a));
 			}
 		}
 
 		for (int d = 0; d < 9; d++) {
-			addSlotToContainer(new Slot(player, d, 8 + d * 18, 161 + a));
+			addSlotToContainer(new Slot(playerInv, d, 8 + d * 18, 161 + a));
 		}
+
+		this.chest.getParent().addPlayerUsing(playerInv.player);
+	}
+
+	@Override
+	public void onContainerClosed(EntityPlayer p_75134_1_) {
+		super.onContainerClosed(p_75134_1_);
+		this.chest.getParent().removePlayerUsing(p_75134_1_);
 	}
 
 	public IInventory getLowerPresentInventory() {
-		return lower;
+		return chest;
 	}
 
 	@Override

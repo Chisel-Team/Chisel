@@ -1,8 +1,7 @@
 package team.chisel.block.tileentity;
 
-import team.chisel.init.ChiselBlocks;
-import team.chisel.network.PacketHandler;
-import team.chisel.network.message.MessagePresentConnect;
+import java.util.Set;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -16,6 +15,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import team.chisel.init.ChiselBlocks;
+import team.chisel.network.PacketHandler;
+import team.chisel.network.message.MessagePresentConnect;
+
+import com.google.common.collect.Sets;
 
 public class TileEntityPresent extends TileEntity implements IInventory, IDoubleChest {
 
@@ -27,6 +31,11 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 	private final ItemStack[] inventory = new ItemStack[27];
 	private int rotation;
 	private boolean autoSearch = true;
+	
+	private Set<EntityPlayer> playersUsing = Sets.newHashSet();
+	
+	private static final float MAX_LID_POS = 1;
+	private float lidPos, prevLidPos;
 
 	@Override
 	public void updateEntity() {
@@ -37,6 +46,20 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 				findConnections();
 			}
 			autoSearch = false;
+		}
+		this.prevLidPos = lidPos;
+		if (playersUsing.size() > 0) {
+			if (lidPos == 0) {
+				this.worldObj.playSoundEffect(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5, "random.chestopen", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			}
+			
+			lidPos = Math.min(MAX_LID_POS, lidPos + 0.1f);
+		} else {
+			lidPos = Math.max(0, lidPos - 0.1f);
+			
+			if (getLidPos() < MAX_LID_POS / 2f && getPrevLidPos() >= MAX_LID_POS / 2f) {
+				this.worldObj.playSoundEffect(this.xCoord + 0.5, this.yCoord + 0.5, this.zCoord + 0.5, "random.chestclosed", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+			}
 		}
 	}
 
@@ -122,6 +145,22 @@ public class TileEntityPresent extends TileEntity implements IInventory, IDouble
 				}
 			}
 		}
+	}
+
+	public void addPlayerUsing(EntityPlayer player) {
+		playersUsing.add(player);
+	}
+
+	public void removePlayerUsing(EntityPlayer player) {
+		playersUsing.remove(player);
+	}
+
+	public float getLidPos() {
+		return lidPos;
+	}
+
+	public float getPrevLidPos() {
+		return prevLidPos;
 	}
 
 	public TileEntityPresent getParent() {
