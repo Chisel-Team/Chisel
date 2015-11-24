@@ -1570,7 +1570,7 @@ public enum Features {
 			burdstone.carverHelper.registerBlock(burdstone, "birdstone");
 			burdstone.carverHelper.registerVariations("limestone");
 			burdstone.carverHelper.registerOre("limestone");
-			
+
 			Carving.chisel.registerOre("limestone", "limestone");
 
 			BlockCarvableSlab limestone_slab = (BlockCarvableSlab) new BlockCarvableSlab(limestone).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F);
