@@ -2593,14 +2593,12 @@ public enum Features {
             technical4.carverHelper.addVariation("tile.technical4.1.desc", 1, "technical/new/weatheredOrangePanels", 61);
             technical4.carverHelper.addVariation("tile.technical4.2.desc", 2, "technical/new/Sturdy", 62);
             technical4.carverHelper.addVariation("tile.technical4.3.desc", 3, "technical/new/MegaCell", 63);
-            technical4.carverHelper.addVariation("tile.technical4.4.desc", 4, "technical/new/ExhaustPlating", 64/*
-                                                                                                                 * , new SubmapManagerCombinedCTM(4, "technical/new/test/ExhaustPlating",
-																												 * TextureType.R4)
-																												 */);
+            technical4.carverHelper.addVariation("tile.technical4.4.desc", 4, "technical/new/ExhaustPlating", 64);
             technical4.carverHelper.addVariation("tile.technical4.5.desc", 5, "technical/new/MakeshiftPanels", 65);
             technical4.carverHelper.addVariation("tile.technical4.6.desc", 6, "technical/new/Piping", 66);
-            technical4.carverHelper
-                .addVariation("tile.technical4.7.desc", 7, "technical/new/concrete/concreteBlocks", new SubmapManagerCombinedCTM(9, "technical/new/concrete/concreteBlocks", TextureType.R9), 67);
+            technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/concrete/concreteBlocks",
+                new SubmapManagerCombinedCTM(9, "technical/new/concrete/concreteBlocks", TextureType.R9), 67);
+            technical4.carverHelper.addVariation("tile.technical4.8.desc", 8, "technical/new/engineering", new SubmapManagerCombinedCTM(4, "technical/new/engineering", TextureType.V4), 68);
             // The animation is malfunctioning. :(
             // technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/TapeDrive");
             technical4.carverHelper.registerBlock(technical4, "technical4");
