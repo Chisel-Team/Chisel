@@ -21,7 +21,6 @@ import net.minecraftforge.common.MinecraftForge;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -29,8 +28,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import team.chisel.init.ChiselItems;
 
 public class DevPlayer {
-
-    private boolean resetRender;
 
     private float renderTick;
 
@@ -94,11 +91,13 @@ public class DevPlayer {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerRenderPre(RenderLivingEvent.Pre event) {
+        float r = 1.0F,
+            g = 1.0F,
+            b = 1.0F,
+            a = 1.0F;
+
         if (namesForTransparency(event.entity)) {
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.75F);
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            resetRender = true;
+            a = 0.75F;
         }
 
         if (namesForRainbow(event.entity)) {
@@ -106,14 +105,16 @@ public class DevPlayer {
             float hue = ((float) event.entity.worldObj.getTotalWorldTime() % 256) / 256;
             color = new Color(Color.HSBtoRGB(hue + (renderTick / 256), 1, 1));
 
-            float r = ((((float) color.getRed() / 256.0F) / 2.0F) + 0.5F);
-            float g = ((((float) color.getGreen() / 256.0F) / 2.0F) + 0.5F);
-            float b = ((((float) color.getBlue() / 256.0F) / 2.0F) + 0.5F);
+            r = ((((float) color.getRed() / 256.0F) / 2.0F) + 0.5F);
+            g = ((((float) color.getGreen() / 256.0F) / 2.0F) + 0.5F);
+            b = ((((float) color.getBlue() / 256.0F) / 2.0F) + 0.5F);
+        }
 
-            GL11.glColor4f((r > 1.0F ? 1.0F : r), (g > 1.0F ? 1.0F : g), (b > 1.0F ? 1.0F : b), 1.0F);
+        if (namesForTransparency(event.entity) || namesForRainbow(event.entity))
+        {
+            GL11.glColor4f((r > 1.0F ? 1.0F : r), (g > 1.0F ? 1.0F : g), (b > 1.0F ? 1.0F : b), (a > 1.0F ? 1.0F : a));
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            resetRender = true;
         }
     }
 
@@ -122,7 +123,6 @@ public class DevPlayer {
         if (namesForTransparency(event.entity) || namesForRainbow(event.entity)) {
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glDisable(GL11.GL_BLEND);
-            resetRender = false;
         }
     }
 
@@ -143,15 +143,17 @@ public class DevPlayer {
     }
 
     private boolean namesForTransparency(Entity entity) {
-        if (EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket") || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName())
-            .equals("minecreatr")) {
+        if (EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket")
+            || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("minecreatr")) {
             return true;
         }
         return false;
     }
 
     private boolean namesForRainbow(Entity entity) {
-        if (EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Drullkus")) {
+        if (EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Bacon_Bucket") // Drullkus's Alt
+            || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Drullkus")
+            || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket")) {
             return true;
         }
         return false;
