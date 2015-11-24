@@ -1,5 +1,6 @@
 package team.chisel.client.render;
 
+import java.awt.*;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -29,11 +30,13 @@ import team.chisel.init.ChiselItems;
 
 public class DevPlayer {
 
+    private boolean resetRender;
+
     private interface IDevRenderer {
 
-        void renderPlayer(EntityPlayer player, boolean post);
+        void renderPlayer(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event);
 
-        void renderExtras(EntityPlayer player, boolean post);
+        void renderExtras(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event);
     }
 
     private class RenderHolstered implements IDevRenderer {
@@ -45,7 +48,7 @@ public class DevPlayer {
         }
 
         @Override
-        public void renderExtras(EntityPlayer player, boolean post) {
+        public void renderExtras(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
             if (!post) {
                 GL11.glPushMatrix();
                 Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.locationItemsTexture);
@@ -70,25 +73,52 @@ public class DevPlayer {
         }
 
         @Override
-        public void renderPlayer(EntityPlayer player, boolean post) {
+        public void renderPlayer(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
         }
     }
 
-    private class RenderTranslucent implements IDevRenderer	{
+    /*private class RenderTranslucent implements IDevRenderer	{
 
         @Override
-        public void renderExtras(EntityPlayer player, boolean post) {
+        public void renderExtras(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
         }
 
         @Override
-        public void renderPlayer(EntityPlayer player, boolean post) {
+        public void renderPlayer(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
             if (!post) {
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.75F);
                 GL11.glEnable(GL11.GL_BLEND);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                resetRender = true;
             } else {
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                 GL11.glDisable(GL11.GL_BLEND);
+                resetRender = false;
+            }
+        }
+    }*/
+
+    private class RenderRainbow implements IDevRenderer {
+
+        @Override
+        public void renderExtras(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
+        }
+
+        @Override
+        public void renderPlayer(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
+            if (!post) {
+                Color color;
+                float hue = ((float) event.entityPlayer.getEntityWorld().getTotalWorldTime() % 256) / 256;
+                color = new Color(Color.HSBtoRGB(hue + (event.partialRenderTick / 256), 1, 1));
+
+                GL11.glColor4f(((float)color.getRed()) / 256, ((float)color.getGreen()) / 256, ((float)color.getBlue()) / 256, 1.0F);
+                GL11.glEnable(GL11.GL_BLEND);
+                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                resetRender = true;
+            } else {
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                GL11.glDisable(GL11.GL_BLEND);
+                resetRender = false;
             }
         }
     }
@@ -99,11 +129,12 @@ public class DevPlayer {
 
     private DevPlayer() {
         RenderHolstered backChisel = new RenderHolstered(new ItemStack(ChiselItems.obsidianChisel));
-        RenderTranslucent translucent = new RenderTranslucent();
+        RenderRainbow translucent = new RenderRainbow();
+
 
         renderMap.putAll(UUID.fromString("a7529984-8cb2-4fb9-b799-97980f770101"), Lists.newArrayList(backChisel, translucent)); // Cricket
         renderMap.putAll(UUID.fromString("a1d2532b-ee11-4ca3-b4c5-76e168d4c98e"), Lists.newArrayList(backChisel, translucent)); // TheCricket26
-        renderMap.putAll(UUID.fromString("5399b615-3440-4c66-939d-ab1375952ac3"), Lists.newArrayList(backChisel, translucent)); // Drullkus
+        renderMap.putAll(UUID.fromString("5399b615-3440-4c66-939d-ab1375952ac3"), Lists.newArrayList(new RenderHolstered(new ItemStack(ChiselItems.diamondChisel)))); // Drullkus
 
         renderMap.put(UUID.fromString("671516b1-4fb3-4c03-aa7c-9c88cfab3ae8"), new RenderHolstered(new ItemStack(ChiselItems.diamondChisel))); // tterrag
         renderMap.put(UUID.fromString("ad18f501-08fa-4e7e-b324-86750009106e"), new RenderHolstered(new ItemStack(ChiselItems.chisel)));//minecreatr
@@ -125,25 +156,43 @@ public class DevPlayer {
 
     @SubscribeEvent
     public void onPlayerRenderPost(RenderLivingEvent.Post event) {
-        if(nameIsGood(event.entity)){
+        if (nameIsGood(event.entity)){
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glDisable(GL11.GL_BLEND);
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerRenderSpecialPre(RenderPlayerEvent.Specials.Pre event) {
-        Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
+        /*Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
         for (IDevRenderer r : renders) {
-            r.renderExtras(event.entityPlayer, false);
+            r.renderExtras(event.entityPlayer, false, event);
+        }*/
+
+        if (EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName()).equals("Drullkus")) {
+
+            Color color;
+            float hue = ((float) event.entityPlayer.getEntityWorld().getTotalWorldTime() % 256) / 256;
+            color = new Color(Color.HSBtoRGB(hue + (event.partialRenderTick / 256), 1, 1));
+
+            GL11.glColor4f(((float)color.getRed()) / 256, ((float)color.getGreen()) / 256, ((float)color.getBlue()) / 256, 1.0F);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            this.resetRender = true;
         }
     }
 
     @SubscribeEvent
     public void onPlayerRenderSpecialPost(RenderPlayerEvent.Specials.Post event) {
-        Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
+        /*Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
         for (IDevRenderer r : renders) {
-            r.renderExtras(event.entityPlayer, true);
+            r.renderExtras(event.entityPlayer, true, event);
+        }*/
+
+        if (this.resetRender && EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName()).equals("Drullkus")) {
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+            GL11.glDisable(GL11.GL_BLEND);
+            this.resetRender = false;
         }
     }
 
