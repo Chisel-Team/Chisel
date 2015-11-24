@@ -99,6 +99,7 @@ public enum Features {
 			aluminum.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/aluminum/machine", 23);
 			aluminum.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/aluminum/badGreggy", 24);
 			aluminum.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/aluminum/bolted", 25);
+			aluminum.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/aluminum/scaffold", 26);
 			aluminum.carverHelper.registerAll(aluminum, "aluminumblock");
 			Carving.chisel.registerOre("aluminumblock", "blockAluminum");
 
@@ -348,6 +349,7 @@ public enum Features {
 			bronze.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/bronze/machine", 23);
 			bronze.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/bronze/badGreggy", 24);
 			bronze.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/bronze/bolted", 25);
+			bronze.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/bronze/scaffold", 26);
 			bronze.carverHelper.registerAll(bronze, "bronzeblock");
 			Carving.chisel.registerOre("bronzeblock", "blockBronze");
 		}
@@ -565,6 +567,7 @@ public enum Features {
             cobalt.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/cobalt/machine", 23);
             cobalt.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/cobalt/badGreggy", 24);
             cobalt.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/cobalt/bolted", 25);
+			cobalt.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/cobalt/scaffold", 26);
             cobalt.carverHelper.registerAll(cobalt, "cobaltblock");
             Carving.chisel.registerOre("cobaltblock", "blockCobalt");
         }
@@ -614,6 +617,7 @@ public enum Features {
 			copper.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/copper/machine", 23);
 			copper.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/copper/badGreggy", 24);
 			copper.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/copper/bolted", 25);
+			copper.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/copper/scaffold", 26);
 			copper.carverHelper.registerAll(copper, "copperblock");
 			Carving.chisel.registerOre("copperblock", "blockCopper");
 		}
@@ -712,6 +716,7 @@ public enum Features {
 			electrum.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/electrum/machine", 23);
 			electrum.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/electrum/badGreggy", 24);
 			electrum.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/electrum/bolted", 25);
+			electrum.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/electrum/scaffold", 26);
 			electrum.carverHelper.registerAll(electrum, "electrumblock");
 			Carving.chisel.registerOre("electrumblock", "blockElectrum");
 		}
@@ -1075,6 +1080,7 @@ public enum Features {
 			gold2.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/gold/machine", 23);
 			gold2.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/gold/badGreggy", 24);;
 			gold2.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/gold/bolted", 25);
+			gold2.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/gold/scaffold", 26);
 
 			gold_block.carverHelper.registerAll(gold_block, "gold_block");
 			gold2.carverHelper.registerBlock(gold2, "gold2");
@@ -1295,6 +1301,7 @@ public enum Features {
             invar.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/invar/machine", 23);
             invar.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/invar/badGreggy", 24);
             invar.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/invar/bolted", 25);
+			invar.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/invar/scaffold", 26);
             invar.carverHelper.registerAll(invar, "invarblock");
             Carving.chisel.registerOre("invarblock", "blockInvar");
         }
@@ -1352,6 +1359,7 @@ public enum Features {
 			iron2.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/iron/machine", 23);
 			iron2.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/iron/badGreggy", 24);
 			iron2.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/iron/bolted", 25);
+			iron2.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/iron/scaffold", 26);
 			iron2.carverHelper.registerBlock(iron2, "iron2");
 			iron2.carverHelper.registerVariations("iron_block");
 
@@ -1467,6 +1475,7 @@ public enum Features {
 			lead.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/lead/machine", 23);
 			lead.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/lead/badGreggy", 24);
 			lead.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/lead/bolted", 25);
+			lead.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/lead/scaffold", 26);
 			lead.carverHelper.registerAll(lead, "leadblock");
 			Carving.chisel.registerOre("leadblock", "blockLead");
 		}
@@ -1898,6 +1907,7 @@ public enum Features {
             nickel.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/nickel/machine", 23);
             nickel.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/nickel/badGreggy", 24);
             nickel.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/nickel/bolted", 25);
+			nickel.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/nickel/scaffold", 26);
             nickel.carverHelper.registerAll(nickel, "nickelblock");
             Carving.chisel.registerOre("nickelblock", "blockNickel");
         }
@@ -2105,6 +2115,7 @@ public enum Features {
             platinum.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/platinum/machine", 23);
             platinum.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/platinum/badGreggy", 24);
             platinum.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/platinum/bolted", 25);
+			platinum.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/platinum/scaffold", 26);
             platinum.carverHelper.registerAll(platinum, "platinumblock");
             Carving.chisel.registerOre("platinumblock", "blockPlatinum");
         }
@@ -2482,6 +2493,7 @@ public enum Features {
 			silver.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/silver/machine", 23);
 			silver.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/silver/badGreggy", 24);
 			silver.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/silver/bolted", 25);
+			silver.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/silver/scaffold", 26);
 			silver.carverHelper.registerAll(silver, "silverblock");
 			Carving.chisel.registerOre("silverblock", "blockSilver");
 		}
@@ -2563,6 +2575,7 @@ public enum Features {
 			steel.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/steel/machine", 23);
 			steel.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/steel/badGreggy", 24);
 			steel.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/steel/bolted", 25);
+			steel.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/steel/scaffold", 26);
 			steel.carverHelper.registerAll(steel, "steelblock");
 			Carving.chisel.registerOre("steelblock", "blockSteel");
 		}
@@ -2766,6 +2779,7 @@ public enum Features {
 			tin.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/tin/machine", 23);
 			tin.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/tin/badGreggy", 24);;
 			tin.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/tin/bolted", 25);
+			tin.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/tin/scaffold", 26);
 			tin.carverHelper.registerAll(tin, "tinblock");
 			Carving.chisel.registerOre("tinblock", "blockTin");
 		}
@@ -2914,6 +2928,7 @@ public enum Features {
 			uranium.carverHelper.addVariation("tile.metalOre.3.desc", 3, "metals/uranium/machine", 23);
 			uranium.carverHelper.addVariation("tile.metalOre.4.desc", 4, "metals/uranium/badGreggy", 24);
 			uranium.carverHelper.addVariation("tile.metalOre.5.desc", 5, "metals/uranium/bolted", 25);
+			uranium.carverHelper.addVariation("tile.metalOre.6.desc", 6, "metals/uranium/scaffold", 26);
 			uranium.carverHelper.registerAll(uranium, "uraniumblock");
 			Carving.chisel.registerOre("uraniumblock", "blockUranium");
 		}
