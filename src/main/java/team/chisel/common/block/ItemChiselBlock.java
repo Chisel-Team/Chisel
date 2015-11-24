@@ -67,9 +67,9 @@ public class ItemChiselBlock extends ItemBlock {
         if (r == null) {
             return;
         }
-        for (String s : r.getLore()) {
-            tooltip.add(StatCollector.translateToLocal(s));
-        }
+//        for (String s : r.getLore()) {
+//            tooltip.add(StatCollector.translateToLocal(s));
+//        }
 //        if (isShifting()){
 //            tooltip.add("Sneaking");
 //        }

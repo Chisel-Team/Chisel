@@ -19,15 +19,15 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.api.IFacade;
+import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.common.util.Dir;
 import team.chisel.common.variation.PropertyVariation;
-import team.chisel.common.variation.Variation;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
+import team.chisel.common.variation.Variation;
 
 // @formatter:off
 /**
@@ -137,15 +137,14 @@ public class CTM {
 	}
 
 	/**
-	 * @param vARIATION 
 	 * @return The indeces of the typical 4x4 submap to use for the given face at the given location.
 	 * 
 	 *         Indeces are in counter-clockwise order starting at bottom left.
 	 */
-	public int[] getSubmapIndices(IExtendedBlockState state, EnumFacing side) {
+	public int[] getSubmapIndices(CTMBlockRenderContext ctx, EnumFacing side) {
 		int[] ret = new int[] { 18, 19, 17, 16 };
 
-		buildConnectionMap(state, side);
+		buildConnectionMap(ctx, side);
 
 		// Map connections to submap indeces
 		for (int i = 0; i < 4; i++) {
@@ -162,9 +161,9 @@ public class CTM {
 	/**
 	 * Builds the connection map and stores it in this CTM instance. The {@link #connected(Dir)}, {@link #connectedAnd(Dir...)}, and {@link #connectedOr(Dir...)} methods can be used to access it.
 	 */
-	public void buildConnectionMap(IExtendedBlockState state, EnumFacing side) {
+	public void buildConnectionMap(CTMBlockRenderContext ctx, EnumFacing side) {
 		for (Dir dir : Dir.VALUES) {
-			connectionMap.put(dir, dir.isConnected(state, side));
+			connectionMap.put(dir, dir.isConnected(ctx, side));
 		}
 	}
 
@@ -256,36 +255,8 @@ public class CTM {
 		return isConnected(world, new BlockPos(x, y, z), facing);
 	}
 
-    /**
-     * Returns whether the two block states are equal to each other
-     *
-     * @param state1 The First Block State
-     * @param state2 The Second Block State
-     * @return Whether they are equal
-     */
-    @SuppressWarnings("unchecked")
-	public boolean blockStatesEqual(IBlockState state1, IBlockState state2) {
-        for (IProperty p : (ImmutableSet<IProperty>) state1.getProperties().keySet()) {
-            if (!state2.getProperties().containsKey(p)) {
-                return false;
-            }
-            if (state1.getValue(p) != state2.getValue(p)) {
-                return false;
-            }
-        }
-        return state1.getBlock() == state2.getBlock();
-    }
 
-    /**
-     * Returns whether the two blocks are equal ctm blocks
-     *
-     * @param state1 First state
-     * @param state2 Second state
-     * @return Whether they are the same block
-     */
-    public boolean areBlocksEqual(IBlockState state1, IBlockState state2, PropertyVariation variation) {
-        return (state1.getBlock() == state2.getBlock() && ((Variation) state1.getValue(variation)).equals((Variation) state2.getValue(variation)));
-    }
+
 
     /**
      * Whether the two positions
@@ -298,13 +269,45 @@ public class CTM {
     public boolean isConnected(World w, BlockPos pos1, BlockPos pos2, PropertyVariation variation) {
         return areBlocksEqual(w.getBlockState(pos1), w.getBlockState(pos2), variation);
     }
-    
+
 	public IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, EnumFacing side) {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof IFacade) {
 			return ((IFacade) state.getBlock()).getFacade(world, pos, side);
 		}
 		return state;
+	}
+
+	/**
+	 * Returns whether the two blocks are equal ctm blocks
+	 *
+	 * @param state1 First state
+	 * @param state2 Second state
+	 * @return Whether they are the same block
+	 */
+	public static boolean areBlocksEqual(IBlockState state1, IBlockState state2, PropertyVariation variation) {
+		return (state1.getBlock() == state2.getBlock() && ((Variation) state1.getValue(variation)).equals((Variation) state2.getValue(variation)));
+	}
+
+
+	/**
+	 * Returns whether the two block states are equal to each other
+	 *
+	 * @param state1 The First Block State
+	 * @param state2 The Second Block State
+	 * @return Whether they are equal
+	 */
+	@SuppressWarnings("unchecked")
+	public boolean blockStatesEqual(IBlockState state1, IBlockState state2) {
+		for (IProperty p : (ImmutableSet<IProperty>) state1.getProperties().keySet()) {
+			if (!state2.getProperties().containsKey(p)) {
+				return false;
+			}
+			if (state1.getValue(p) != state2.getValue(p)) {
+				return false;
+			}
+		}
+		return state1.getBlock() == state2.getBlock();
 	}
 
 }

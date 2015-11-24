@@ -27,6 +27,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.client.render.BlockResources;
 import team.chisel.client.render.IBlockResources;
+import team.chisel.api.render.RenderType;
 import team.chisel.client.render.ctm.CTM;
 import team.chisel.common.CarvableBlocks;
 import team.chisel.common.block.subblocks.ISubBlock;
@@ -34,6 +35,7 @@ import team.chisel.common.connections.CTMConnections;
 import team.chisel.common.connections.EnumConnection;
 import team.chisel.common.connections.PropertyCTMConnections;
 import team.chisel.common.init.ChiselTabs;
+import team.chisel.common.util.ChiselBlock;
 import team.chisel.common.util.SubBlockUtil;
 import team.chisel.common.variation.PropertyVariation;
 import team.chisel.common.variation.Variation;
@@ -57,7 +59,7 @@ public class BlockCarvable extends Block implements ICarvable {
     public static final IUnlistedProperty<Integer> YMODULES = Properties.toUnlisted(PropertyInteger.create("V Section", 0, 4));
     public static final IUnlistedProperty<Integer> ZMODULES = Properties.toUnlisted(PropertyInteger.create("Z Section", 0, 4));
 
-    private CarvableBlocks type;
+    private ChiselBlock type;
 
     /**
      * Array of all the block resources, each one represents a sub block
@@ -66,11 +68,22 @@ public class BlockCarvable extends Block implements ICarvable {
 
     private int index;
 
-    private boolean isBeaconBase;
-
     private BlockState realBlockState;
 
     private final CTM ctm = CTM.getInstance();
+
+    public BlockCarvable(ChiselBlock type, int index, PropertyVariation p){
+        super(type.getData().material);
+        this.subBlocks = new ISubBlock[type.getVariations().length];
+        this.type = type;
+        this.index = index;
+        this.variation = p;
+        this.realBlockState = createRealBlockState(p);
+        setupStates();
+        setUnlocalizedName(type.getData().name);
+        setHardness(type.getData().hardness);
+
+    }
 
     public BlockCarvable(CarvableBlocks type, int subBlocksAmount, int index, PropertyVariation p, boolean isBeaconBase) {
         this(Material.rock, type, subBlocksAmount, index, p, isBeaconBase);
@@ -237,6 +250,7 @@ public class BlockCarvable extends Block implements ICarvable {
         return this.type;
     }
 
+    @SideOnly(Side.CLIENT)
 	@Override
 	public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
 		if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial() == Material.air) {
@@ -245,13 +259,13 @@ public class BlockCarvable extends Block implements ICarvable {
 		IExtendedBlockState state = (IExtendedBlockState) stateIn;
 		Variation v = ((BlockCarvable) state.getBlock()).getType().getVariants()[state.getBlock().getMetaFromState(state)];
 		IBlockResources res = SubBlockUtil.getResources(state.getBlock(), v);
-		if (res.getType() == IBlockResources.V4 || res.getType() == IBlockResources.V9) {
+		if (res.getType() == RenderType.V4 || res.getType() == RenderType.V9) {
 			int variationSize = BlockResources.getVariationWidth(res.getType());
 			int xModulus = Math.abs(pos.getX() % variationSize);
 			int zModulus = Math.abs(pos.getZ() % variationSize);
 			int yModules = Math.abs(pos.getY() % variationSize);
 			return state.withProperty(XMODULES, xModulus).withProperty(YMODULES, yModules).withProperty(ZMODULES, zModulus);
-		} else if (res.getType() == IBlockResources.NORMAL || res.getType() == IBlockResources.R9 || res.getType() == IBlockResources.R4 || res.getType() == IBlockResources.R16) {
+		} else if (res.getType() == RenderType.NORMAL || res.getType() == RenderType.R9 || res.getType() == RenderType.R4 || res.getType() == RenderType.R16) {
 			return stateIn;
 		}
 		List<EnumConnection> connections = new ArrayList<EnumConnection>();
@@ -298,10 +312,7 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public boolean isOpaqueCube() {
-        if (type == null) {
-            return true;
-        }
-        return type.isOpaqueCube();
+        return type.getData().isOpaqueCube;
     }
 
     @Override
@@ -316,20 +327,12 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
-        return this.isBeaconBase;
+        return this.type.getData().beaconBase;
     }
 
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state) {
-        AxisAlignedBB axis = type.getCollisionBoundingBox(worldIn, pos, state);
-        if (axis != null) {
-            return axis;
-        }
-        return super.getCollisionBoundingBox(worldIn, pos, state);
-    }
 
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn) {
-		type.onEntityCollidedWithBlock(worldIn, pos, entityIn);
+		type.getHandler().onEntityCollidedWithBlock(worldIn, pos, entityIn);
 	}
 }

@@ -1,6 +1,7 @@
 package team.chisel.client.render;
 
 import team.chisel.Chisel;
+import team.chisel.api.render.RenderType;
 import team.chisel.client.render.ctm.ModelCTM;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
@@ -65,7 +66,7 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel {
     }
 
     private List<BakedQuad> generateQuads(BlockResources r, IBlockState state) {
-        int type;
+        RenderType type;
         type = r.getType();
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
 
@@ -82,19 +83,19 @@ public class ModelNonCTM implements ISmartBlockModel, ISmartItemModel {
             } else if (r.side != null) {
                 t = r.side;
             }
-            boolean full = ((f == EnumFacing.UP || f == EnumFacing.DOWN) && (r.getType() == IBlockResources.CTMH || r.getType() == IBlockResources.CTMV));
+            boolean full = ((f == EnumFacing.UP || f == EnumFacing.DOWN) && (r.getType() == RenderType.CTMH || r.getType() == RenderType.CTMV));
 
             toReturn.add(makeQuad(f, t, type, full));
         }
         return toReturn;
     }
 
-    public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, int type, boolean full) {
+    public static BakedQuad makeQuad(EnumFacing f, TextureAtlasSprite sprite, RenderType type, boolean full) {
         int num = 16;
-        if (type == IBlockResources.CTMH || type == IBlockResources.CTMV || type == IBlockResources.V4 || type == IBlockResources.R4)
+        if (type == RenderType.CTMH || type == RenderType.CTMV || type == RenderType.V4 || type == RenderType.R4)
             num = 8;
-        else if (type == IBlockResources.V9 || type == IBlockResources.R9) num = 16 / 3;
-        else if (type == IBlockResources.R16) num = 4;
+        else if (type == RenderType.V9 || type == RenderType.R9) num = 16 / 3;
+        else if (type == RenderType.R16) num = 4;
         if (full) num = 16;
         return bakery.makeBakedQuad(quadPos.from, quadPos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(new float[]{0, 0, num, num}, 0)),
                 sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, false);

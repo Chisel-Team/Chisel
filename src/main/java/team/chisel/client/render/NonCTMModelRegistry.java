@@ -1,6 +1,7 @@
 package team.chisel.client.render;
 
 import team.chisel.Chisel;
+import team.chisel.api.render.RenderType;
 import team.chisel.common.CarvableBlocks;
 import team.chisel.common.Reference;
 import net.minecraft.client.resources.model.IBakedModel;
@@ -40,7 +41,7 @@ public class NonCTMModelRegistry implements Reference {
         }
     }
 
-    public static void register(String block, String variation, int amount, int type) {
+    public static void register(String block, String variation, int amount, RenderType type) {
         for (int i = 0; i < amount; i++) {
             ModelResourceLocation location;
             if (i == 0) {
@@ -48,7 +49,7 @@ public class NonCTMModelRegistry implements Reference {
             } else {
                 location = new ModelResourceLocation(MOD_ID.toLowerCase() + ":" + block + i, "variation=" + variation);
             }
-            if (type != IBlockResources.NORMAL) {
+            if (type != RenderType.NORMAL) {
                 Chisel.debug("Registering model coordinate variation for " + block + " variation " + variation);
                 register(location, ModelCoordinateVariations.newModel(variation));
                 return;

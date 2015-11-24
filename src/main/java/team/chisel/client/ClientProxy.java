@@ -4,6 +4,8 @@ import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import team.chisel.Chisel;
+import team.chisel.api.block.ClientVariationData;
+import team.chisel.api.block.VariationData;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.NonCTMModelRegistry;
 import team.chisel.client.render.ctm.CTMModelRegistry;
@@ -14,6 +16,10 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import team.chisel.common.util.ChiselBlock;
+import team.chisel.common.util.ChiselVariation;
+import team.chisel.common.util.ClientChiselVariation;
+import team.chisel.common.variation.Variation;
 
 /**
  * The Client Proxy
@@ -51,5 +57,10 @@ public class ClientProxy extends CommonProxy {
         } catch (Exception exception){
             //Older version of forge, this is fine because it means this is not needed so no crash
         }
+    }
+
+    @Override
+    public ChiselVariation createVariation(ChiselBlock parent, Variation.VariationCreator creator, VariationData data){
+        return new ClientChiselVariation(parent, creator, (ClientVariationData) data);
     }
 }

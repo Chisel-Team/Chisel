@@ -29,14 +29,6 @@ public class TextureStitcher {
         }
         //CTMBlockResources.refreshAll(event.map);
     }
-//    Not yet.....
-//    //SHHHHHHHHH
-//    @SubscribeEvent
-//    public void onGuiOpen(GuiOpenEvent event){
-//        if (event.gui instanceof GuiMainMenu){
-//            ReflectionHelper.setPrivateValue(GuiMainMenu.class, (GuiMainMenu) event.gui, "Tterrag is Awesome", "splashText");
-//        }
-//    }
 
     public static void register(String s) {
         toBeRegistered.add(s);

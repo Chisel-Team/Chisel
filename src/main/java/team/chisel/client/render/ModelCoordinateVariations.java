@@ -1,5 +1,6 @@
 package team.chisel.client.render;
 
+import team.chisel.api.render.RenderType;
 import team.chisel.client.render.ctm.ModelCTM;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.util.SubBlockUtil;
@@ -126,10 +127,10 @@ public class ModelCoordinateVariations extends WeightedBakedModel {
         private List<BakedQuad> makeRQuads(IBlockState s, IBlockResources r) {
             int bound = 4;
             int wid = 2;
-            if (r.getType() == IBlockResources.R9) {
+            if (r.getType() == RenderType.R9) {
                 bound = 9;
                 wid = 3;
-            } else if (r.getType() == IBlockResources.R16) {
+            } else if (r.getType() == RenderType.R16) {
                 bound = 16;
                 wid = 4;
             }

@@ -1,5 +1,7 @@
 package team.chisel.common.variation;
 
+import net.minecraft.util.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import team.chisel.common.CarvableBlocks;
 import net.minecraft.util.IStringSerializable;
 import org.apache.commons.lang3.ArrayUtils;

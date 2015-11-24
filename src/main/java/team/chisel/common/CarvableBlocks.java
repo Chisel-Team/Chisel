@@ -1,11 +1,10 @@
 package team.chisel.common;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import team.chisel.Chisel;
 import team.chisel.client.render.BlockResources;
 import team.chisel.client.render.CTMBlockResources;
 import team.chisel.client.render.NonCTMModelRegistry;
+import team.chisel.api.render.RenderType;
 import team.chisel.client.render.ctm.CTMModelRegistry;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
@@ -34,9 +33,7 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -688,12 +685,12 @@ public enum CarvableBlocks implements Reference {
                     throw new RuntimeException("Variation is null");
                 }
                 int count = 0;
-                for (Variation v : b.getVariants()) {
+                for (Variation v : var[i]) {
                     if (isCTM(b.getName(), v.getValue())) {
                         CTMBlockResources.preGenerateBlockResources(block, v.getValue());
                         CTMModelRegistry.register(b.getName(), v.getValue(), var.length);
                     } else {
-                        int type = BlockResources.preGenerateBlockResources(block, v.getValue());
+                        RenderType type = BlockResources.preGenerateBlockResources(block, v.getValue());
                         NonCTMModelRegistry.register(b.getName(), v.getValue(), var.length, type);
                     }
                     count++;

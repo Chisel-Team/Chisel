@@ -9,12 +9,8 @@ import static net.minecraft.util.EnumFacing.WEST;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumFacing.AxisDirection;
-import net.minecraftforge.common.property.IExtendedBlockState;
-import team.chisel.common.block.BlockCarvable;
-import team.chisel.common.connections.CTMConnections;
+import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.common.connections.EnumConnection;
-
-import com.google.common.base.Optional;
 
 /**
  * Think of this class as a "Two dimensional ForgeDirection, with diagonals".
@@ -51,15 +47,15 @@ public enum Dir {
 	/**
 	 * Finds if this block is connected for the given side in this Dir.
 	 * 
-	 * @param state The BlockState fo the block
+	 * @param ctx The CTM block render context
 	 * @param side The Side of the block that is being checked
 	 * @return Whether the block is connected on the specified side
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean isConnected(IExtendedBlockState state, EnumFacing side) {
+	public boolean isConnected(CTMBlockRenderContext ctx, EnumFacing side) {
 		EnumFacing[] dirs = getNormalizedDirs(side);
 		EnumConnection connection = EnumConnection.fromFacings(dirs);
-		return ((Optional<CTMConnections>) state.getUnlistedProperties().get(BlockCarvable.CONNECTIONS)).or(new CTMConnections()).isConnected(connection);
+		return ctx.isConnected(connection);
 	}
 
 	private EnumFacing[] getNormalizedDirs(EnumFacing normal) {

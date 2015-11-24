@@ -1,8 +1,8 @@
 package team.chisel.client.render.ctm;
 
-import team.chisel.client.render.CTMBlockResources;
-import team.chisel.client.render.IBlockResources;
+import team.chisel.api.render.RenderType;
 import team.chisel.client.render.ModelNonCTM;
+import team.chisel.client.render.QuadPos;
 import team.chisel.common.Reference;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -10,6 +10,8 @@ import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
 
 import javax.vecmath.Vector3f;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Makes faces for CTM
@@ -18,32 +20,30 @@ import javax.vecmath.Vector3f;
  */
 public class CTMFaceBakery extends FaceBakery implements Reference {
 
-    public static final CTMFaceBakery instance = new CTMFaceBakery();
-
-    public static final ModelCTM.QuadPos[] possibleQuads = new ModelCTM.QuadPos[]{
-//            new ModelCTM.QuadPos(new Vector3f(8, 0, 0), new Vector3f(16, 16, 8)), // South West Pillar quad 1 from top
-//            new ModelCTM.QuadPos(new Vector3f(8, 0, 8), new Vector3f(16, 16, 16)), // South East Pillar quad 2 from top
-//            new ModelCTM.QuadPos(new Vector3f(0, 0, 8), new Vector3f(8, 16, 16)), // North East Pillar quad 3 from top
-//            new ModelCTM.QuadPos(new Vector3f(0, 0, 0), new Vector3f(8, 16, 8)), // North West Pillar quad 4 from top
+    public static final QuadPos[] possibleQuads = new QuadPos[]{
+//            new QuadPos(new Vector3f(8, 0, 0), new Vector3f(16, 16, 8)), // South West Pillar quad 1 from top
+//            new QuadPos(new Vector3f(8, 0, 8), new Vector3f(16, 16, 16)), // South East Pillar quad 2 from top
+//            new QuadPos(new Vector3f(0, 0, 8), new Vector3f(8, 16, 16)), // North East Pillar quad 3 from top
+//            new QuadPos(new Vector3f(0, 0, 0), new Vector3f(8, 16, 8)), // North West Pillar quad 4 from top
 //
-//            new ModelCTM.QuadPos(new Vector3f(0, 0, 0), new Vector3f(16, 8, 8)), // North to South Down West quad 1 from South face
-//            new ModelCTM.QuadPos(new Vector3f(0, 0, 8), new Vector3f(16, 8, 16)), // North to South Down East quad 2 from South face
-//            new ModelCTM.QuadPos(new Vector3f(0, 8, 8), new Vector3f(16, 16, 16)), // North to South Up East quad 3 from South face
-//            new ModelCTM.QuadPos(new Vector3f(0, 8, 0), new Vector3f(16, 16, 8)), // North to South Up West quad 4 from South face
+//            new QuadPos(new Vector3f(0, 0, 0), new Vector3f(16, 8, 8)), // North to South Down West quad 1 from South face
+//            new QuadPos(new Vector3f(0, 0, 8), new Vector3f(16, 8, 16)), // North to South Down East quad 2 from South face
+//            new QuadPos(new Vector3f(0, 8, 8), new Vector3f(16, 16, 16)), // North to South Up East quad 3 from South face
+//            new QuadPos(new Vector3f(0, 8, 0), new Vector3f(16, 16, 8)), // North to South Up West quad 4 from South face
 //
-//            new ModelCTM.QuadPos(new Vector3f(0, 0, 0), new Vector3f(8, 8, 16)), // West to East Down North quad 1 from East face
-//            new ModelCTM.QuadPos(new Vector3f(8, 0, 0), new Vector3f(16, 8, 16)), // West to East Down South quad 2 from East face
-//            new ModelCTM.QuadPos(new Vector3f(8, 8, 0), new Vector3f(16, 16, 16)), // West to East Up South quad 3 from East face
-//            new ModelCTM.QuadPos(new Vector3f(0, 8, 0), new Vector3f(16, 16, 16)) // West to East Up North quad 4 from East face
-            new ModelCTM.QuadPos(new Vector3f(8, 0, 8), new Vector3f(16, 8, 16)), // Down South East
-            new ModelCTM.QuadPos(new Vector3f(8, 0, 0), new Vector3f(16, 8, 8)), //Down North East
-            new ModelCTM.QuadPos(new Vector3f(0, 0, 8), new Vector3f(8, 8, 16)), //Down South West
-            new ModelCTM.QuadPos(new Vector3f(0, 0, 0), new Vector3f(8, 8, 8)), // Down North West
+//            new QuadPos(new Vector3f(0, 0, 0), new Vector3f(8, 8, 16)), // West to East Down North quad 1 from East face
+//            new QuadPos(new Vector3f(8, 0, 0), new Vector3f(16, 8, 16)), // West to East Down South quad 2 from East face
+//            new QuadPos(new Vector3f(8, 8, 0), new Vector3f(16, 16, 16)), // West to East Up South quad 3 from East face
+//            new QuadPos(new Vector3f(0, 8, 0), new Vector3f(16, 16, 16)) // West to East Up North quad 4 from East face
+            new QuadPos(new Vector3f(8, 0, 8), new Vector3f(16, 8, 16)), // Down South East
+            new QuadPos(new Vector3f(8, 0, 0), new Vector3f(16, 8, 8)), //Down North East
+            new QuadPos(new Vector3f(0, 0, 8), new Vector3f(8, 8, 16)), //Down South West
+            new QuadPos(new Vector3f(0, 0, 0), new Vector3f(8, 8, 8)), // Down North West
 
-            new ModelCTM.QuadPos(new Vector3f(8, 8, 8), new Vector3f(16, 16, 16)), // Up South East
-            new ModelCTM.QuadPos(new Vector3f(8, 8, 0), new Vector3f(16, 16, 8)), //Up North East
-            new ModelCTM.QuadPos(new Vector3f(0, 8, 8), new Vector3f(8, 16, 16)), //Up South West
-            new ModelCTM.QuadPos(new Vector3f(0, 8, 0), new Vector3f(8, 16, 8)), // Up North West
+            new QuadPos(new Vector3f(8, 8, 8), new Vector3f(16, 16, 16)), // Up South East
+            new QuadPos(new Vector3f(8, 8, 0), new Vector3f(16, 16, 8)), //Up North East
+            new QuadPos(new Vector3f(0, 8, 8), new Vector3f(8, 16, 16)), //Up South West
+            new QuadPos(new Vector3f(0, 8, 0), new Vector3f(8, 16, 8)), // Up North West
 
     };
 
@@ -60,7 +60,7 @@ public class CTMFaceBakery extends FaceBakery implements Reference {
      *          S             D
      * @return The QuadPos
      */
-    public static ModelCTM.QuadPos getCorrectQuadPos(EnumFacing f, int r) {
+    public static QuadPos getCorrectQuadPos(EnumFacing f, int r) {
         boolean isNorth = false;
         boolean isWest = false;
         boolean isUp = false;
@@ -138,57 +138,60 @@ public class CTMFaceBakery extends FaceBakery implements Reference {
      * Makes a ctm face
      *
      * @param side      The Side
-     * @param resources The Resources to use
+     * @param sprites The Sprites to use
      * @param quads     The Quad "ids"
      * @return The CTM Face
      */
-    public CTMFace makeCtmFace(EnumFacing side, CTMBlockResources resources, int[] quads) {
+    public List<BakedQuad> makeCtmFace(EnumFacing side, TextureAtlasSprite[] sprites, int[] quads) {
         //Chisel.logger.info("Making CTM face");
-        return new CTMFace(makeQuadFor(side, resources, quads[0], 1),
-                makeQuadFor(side, resources, quads[1], 2),
-                makeQuadFor(side, resources, quads[2], 3),
-                makeQuadFor(side, resources, quads[3], 4)
+        return Arrays.asList(makeQuadFor(side, sprites, quads[0], 1),
+                makeQuadFor(side, sprites, quads[1], 2),
+                makeQuadFor(side, sprites, quads[2], 3),
+                makeQuadFor(side, sprites, quads[3], 4)
         );
     }
 
-    private BakedQuad makeQuadFor(EnumFacing side, CTMBlockResources resources, int quad, int quadSection) {
-        TextureAtlasSprite s = resources.ctmTexture;
-        if (resources.type == IBlockResources.CTMH || resources.type == IBlockResources.CTMV) {
-            if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
-                if (side == EnumFacing.UP) {
-                    s = resources.top;
-                } else {
-                    s = resources.bottom;
-                }
-                return ModelNonCTM.makeQuad(side, s, resources.type, true);
-            }
-        }
-//        else if (resources.type == IBlockResources.CTMV){
-//            if (side==EnumFacing.NORTH||side==EnumFacing.SOUTH||side==EnumFacing.WEST||side==EnumFacing.EAST){
-//                s=resources.side;
-//                return ModelNonCTM.makeQuad(side, s, resources.type);
+    private BakedQuad makeQuadFor(EnumFacing side, TextureAtlasSprite[] sprites, int quad, int quadSection) {
+        TextureAtlasSprite s = sprites[1];
+//        if (resources.type == RenderType.CTMH || resources.type == RenderType.CTMV) {
+//            if (side == EnumFacing.UP || side == EnumFacing.DOWN) {
+//                if (side == EnumFacing.UP) {
+//                    s = resources.top;
+//                } else {
+//                    s = resources.bottom;
+//                }
+//                return ModelNonCTM.makeQuad(side, s, resources.type, true);
 //            }
 //        }
-        if (CTM.isDefaultTexture(quad)) {
-            if (!(resources.type == IBlockResources.CTMH || resources.type == IBlockResources.CTMV)) {
-                s = resources.texture;
-            }
-//            Chisel.logger.info("Using resources.texture for "+quad+" and "+resources.getParent().getName()+" variant "+resources.getVariantName());
-        } else {
-            s = resources.ctmTexture;
+////        else if (resources.type == RenderType.CTMV){
+////            if (side==EnumFacing.NORTH||side==EnumFacing.SOUTH||side==EnumFacing.WEST||side==EnumFacing.EAST){
+////                s=resources.side;
+////                return ModelNonCTM.makeQuad(side, s, resources.type);
+////            }
+////        }
+//        if (CTM.isDefaultTexture(quad)) {
+//            if (!(resources.type == RenderType.CTMH || resources.type == RenderType.CTMV)) {
+//                s = resources.texture;
+//            }
+////            Chisel.logger.info("Using resources.texture for "+quad+" and "+resources.getParent().getName()+" variant "+resources.getVariantName());
+//        } else {
+//            s = resources.ctmTexture;
+//        }
+//        if (resources.type == RenderType.CTMH || resources.type == RenderType.CTMV) {
+////            int old = quad;
+////            quad = CTM.remapCTM(quad);
+//            //Chisel.logger.info("Remapping ctm(h/v) "+old+" to "+quad);
+//        }
+        if (CTM.isDefaultTexture(quad)){
+            s = sprites[0];
         }
-        if (resources.type == IBlockResources.CTMH || resources.type == IBlockResources.CTMV) {
-//            int old = quad;
-//            quad = CTM.remapCTM(quad);
-            //Chisel.logger.info("Remapping ctm(h/v) "+old+" to "+quad);
-        }
-        ModelCTM.QuadPos pos = getCorrectQuadPos(side, quadSection);
+        QuadPos pos = getCorrectQuadPos(side, quadSection);
         return makeRealQuad(pos, side, s, quad);
 
 
     }
 
-    private BakedQuad makeRealQuad(ModelCTM.QuadPos pos, EnumFacing side, TextureAtlasSprite s, int quad) {
+    private BakedQuad makeRealQuad(QuadPos pos, EnumFacing side, TextureAtlasSprite s, int quad) {
         return makeBakedQuad(pos.from, pos.to, new BlockPartFace(side, -1, s.getIconName(), new BlockFaceUV(CTM.uvs[quad], 0)),
                 s, side, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), side.getAxis(), 0, false), false, false);
     }

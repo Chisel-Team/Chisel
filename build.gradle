@@ -36,8 +36,8 @@ group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conven
 archivesBaseName = dev ? "Chisel_DEV" : "Chisel"
 
 minecraft {
-    mappings = "snapshot_20150721"
-    version = "${minecraft_version}-${forge_version}"
+    mappings = "snapshot_20151124"
+    version = "${minecraft_version}-${forge_version}-${minecraft_version}"
     runDir = "run"
 
     replaceIn "Chisel.java"
