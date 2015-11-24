@@ -31,11 +31,10 @@ import team.chisel.init.ChiselItems;
 public class DevPlayer {
 
     private boolean resetRender;
+    private float renderTick;
+
 
     private interface IDevRenderer {
-
-        void renderPlayer(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event);
-
         void renderExtras(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event);
     }
 
@@ -70,56 +69,14 @@ public class DevPlayer {
                 ItemRenderer.renderItemIn2D(Tessellator.instance, icon.getMaxU(), icon.getMinV(), icon.getMinU(), icon.getMaxV(), icon.getIconWidth(), icon.getIconHeight(), 1.0F / 16.0F);
                 GL11.glPopMatrix();
             }
-        }
-
-        @Override
-        public void renderPlayer(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
+            renderTick = event.partialRenderTick;
         }
     }
-
-    /*private class RenderTranslucent implements IDevRenderer	{
-
-        @Override
-        public void renderExtras(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
-        }
-
-        @Override
-        public void renderPlayer(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
-            if (!post) {
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.75F);
-                GL11.glEnable(GL11.GL_BLEND);
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                resetRender = true;
-            } else {
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                GL11.glDisable(GL11.GL_BLEND);
-                resetRender = false;
-            }
-        }
-    }*/
 
     private class RenderRainbow implements IDevRenderer {
 
         @Override
         public void renderExtras(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
-        }
-
-        @Override
-        public void renderPlayer(EntityPlayer player, boolean post, RenderPlayerEvent.Specials event) {
-            if (!post) {
-                Color color;
-                float hue = ((float) event.entityPlayer.getEntityWorld().getTotalWorldTime() % 256) / 256;
-                color = new Color(Color.HSBtoRGB(hue + (event.partialRenderTick / 256), 1, 1));
-
-                GL11.glColor4f(((float)color.getRed()) / 256, ((float)color.getGreen()) / 256, ((float)color.getBlue()) / 256, 1.0F);
-                GL11.glEnable(GL11.GL_BLEND);
-                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                resetRender = true;
-            } else {
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                GL11.glDisable(GL11.GL_BLEND);
-                resetRender = false;
-            }
         }
     }
 
@@ -143,14 +100,20 @@ public class DevPlayer {
     }
 
     public static void init() {
+        //Blank method to just run the class
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerRenderPre(RenderLivingEvent.Pre event) {
         if(nameIsGood(event.entity)){
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.75F);
+            Color color;
+            float hue = ((float) event.entity.worldObj.getTotalWorldTime() % 256) / 256;
+            color = new Color(Color.HSBtoRGB(hue + (renderTick / 256), 1, 1));
+
+            GL11.glColor4f(((float)color.getRed()) / 256, ((float)color.getGreen()) / 256, ((float)color.getBlue()) / 256, 0.75F);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            resetRender = true;
         }
     }
 
@@ -159,40 +122,23 @@ public class DevPlayer {
         if (nameIsGood(event.entity)){
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             GL11.glDisable(GL11.GL_BLEND);
+            resetRender = false;
         }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public void onPlayerRenderSpecialPre(RenderPlayerEvent.Specials.Pre event) {
-        /*Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
+        Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
         for (IDevRenderer r : renders) {
             r.renderExtras(event.entityPlayer, false, event);
-        }*/
-
-        if (EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName()).equals("Drullkus")) {
-
-            Color color;
-            float hue = ((float) event.entityPlayer.getEntityWorld().getTotalWorldTime() % 256) / 256;
-            color = new Color(Color.HSBtoRGB(hue + (event.partialRenderTick / 256), 1, 1));
-
-            GL11.glColor4f(((float)color.getRed()) / 256, ((float)color.getGreen()) / 256, ((float)color.getBlue()) / 256, 1.0F);
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            this.resetRender = true;
         }
     }
 
     @SubscribeEvent
     public void onPlayerRenderSpecialPost(RenderPlayerEvent.Specials.Post event) {
-        /*Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
+        Collection<IDevRenderer> renders = renderMap.get(event.entityPlayer.getUniqueID());
         for (IDevRenderer r : renders) {
             r.renderExtras(event.entityPlayer, true, event);
-        }*/
-
-        if (this.resetRender && EnumChatFormatting.getTextWithoutFormattingCodes(event.entity.getCommandSenderName()).equals("Drullkus")) {
-            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            GL11.glDisable(GL11.GL_BLEND);
-            this.resetRender = false;
         }
     }
 
