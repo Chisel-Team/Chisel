@@ -77,9 +77,10 @@ public class DevPlayer {
     private DevPlayer() {
         renderMap.put(UUID.fromString("a7529984-8cb2-4fb9-b799-97980f770101"), new RenderHolstered(new ItemStack(ChiselItems.obsidianChisel))); // Cricket
         renderMap.put(UUID.fromString("a1d2532b-ee11-4ca3-b4c5-76e168d4c98e"), new RenderHolstered(new ItemStack(ChiselItems.obsidianChisel))); // TheCricket26
-        renderMap.put(UUID.fromString("5399b615-3440-4c66-939d-ab1375952ac3"), new RenderHolstered(new ItemStack(ChiselItems.diamondChisel))); // Drullkus
 
+        renderMap.put(UUID.fromString("5399b615-3440-4c66-939d-ab1375952ac3"), new RenderHolstered(new ItemStack(ChiselItems.diamondChisel))); // Drullkus
         renderMap.put(UUID.fromString("671516b1-4fb3-4c03-aa7c-9c88cfab3ae8"), new RenderHolstered(new ItemStack(ChiselItems.diamondChisel))); // tterrag
+
         renderMap.put(UUID.fromString("ad18f501-08fa-4e7e-b324-86750009106e"), new RenderHolstered(new ItemStack(ChiselItems.chisel))); // minecreatr
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -110,8 +111,7 @@ public class DevPlayer {
             b = ((((float) color.getBlue() / 256.0F) / 2.0F) + 0.5F);
         }
 
-        if (namesForTransparency(event.entity) || namesForRainbow(event.entity))
-        {
+        if (namesForTransparency(event.entity) || namesForRainbow(event.entity)) {
             GL11.glColor4f((r > 1.0F ? 1.0F : r), (g > 1.0F ? 1.0F : g), (b > 1.0F ? 1.0F : b), (a > 1.0F ? 1.0F : a));
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -143,19 +143,23 @@ public class DevPlayer {
     }
 
     private boolean namesForTransparency(Entity entity) {
-        if (EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket")
-            || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("minecreatr")) {
+        if (doesUsernameEqual(entity, "Cricket") ||
+            doesUsernameEqual(entity, "minecreatr")) {
             return true;
         }
         return false;
     }
 
     private boolean namesForRainbow(Entity entity) {
-        if (EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Bacon_Bucket") // Drullkus's Alt
-            || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Drullkus")
-            || EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals("Cricket")) {
+        if (doesUsernameEqual(entity, "Bacon_Bucket") || // Drullkus's Alt
+            doesUsernameEqual(entity, "Drullkus") ||
+            doesUsernameEqual(entity, "Cricket")) {
             return true;
         }
         return false;
+    }
+
+    private boolean doesUsernameEqual(Entity entity, String name) {
+        return EnumChatFormatting.getTextWithoutFormattingCodes(entity.getCommandSenderName()).equals(name);
     }
 }
