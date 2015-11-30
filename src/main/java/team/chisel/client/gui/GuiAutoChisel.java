@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
@@ -28,10 +27,15 @@ public class GuiAutoChisel extends GuiContainer {
 		autochisel = tileEntityAutoChisel;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float partialTick) {
+		super.drawScreen(mouseX, mouseY, partialTick);
 
 		int x = (this.width - this.xSize) / 2;
 		int y = (this.height - this.ySize) / 2;
@@ -41,7 +45,7 @@ public class GuiAutoChisel extends GuiContainer {
 				if (slot.slotNumber < autochisel.getSizeInventory()) {
 					String tt = autochisel.getSlotTooltipUnloc(slot.slotNumber);
 					if (!Strings.isNullOrEmpty(tt)) {
-						this.func_146283_a(Lists.newArrayList(StatCollector.translateToLocal(tt)), mouseX - x, mouseY - y);
+						this.func_146283_a(Lists.newArrayList(tt), mouseX, mouseY);
 					}
 				}
 			}
