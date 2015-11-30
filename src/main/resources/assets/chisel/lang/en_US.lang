@@ -122,6 +122,7 @@ autochisel.slot.speed.tooltip=Speed Upgrade
 autochisel.slot.automation.tooltip=Automation Upgrade
 autochisel.slot.stack.tooltip=Stack Upgrade
 autochisel.slot.reversion.tooltip=Reversion Upgrade
+chisel.autochisel.upgrade.disabled=Upgrades Disabled
 
 #Beacon
 tile.chisel.beacon.name=Beacon

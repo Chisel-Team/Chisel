@@ -13,9 +13,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.FakePlayer;
+import team.chisel.Features;
 import team.chisel.api.IChiselItem;
 import team.chisel.carving.Carving;
 import team.chisel.client.GeneralChiselClient;
@@ -39,11 +41,18 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		REVERSION;
 
 		public String getUnlocalizedName() {
-			return ChiselItems.upgrade.getUnlocalizedName() + "_" + this.name().toLowerCase();
+			if (Features.AUTO_CHISEL_UPGRADES.enabled()) {
+				return ChiselItems.upgrade.getUnlocalizedName() + "_" + this.name().toLowerCase() + ".name";
+			}
+			return "chisel.autochisel.upgrade.disabled";
 		}
 
 		public String getLocalizedName() {
-			return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+			String ret = StatCollector.translateToLocal(getUnlocalizedName());
+			if (!Features.AUTO_CHISEL_UPGRADES.enabled()) {
+				ret = EnumChatFormatting.RED.toString().concat(ret);
+			}
+			return ret;
 		}
 	}
 
@@ -94,8 +103,9 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 					inventory[slot] = null;
 				return is;
 			}
-		} else
+		} else {
 			return null;
+		}
 	}
 
 	@Override
@@ -315,7 +325,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 			lastBase = stack.copy();
 		}
 		
-		if (slot == CHISEL) {
+		if (slot == CHISEL && !worldObj.isRemote) {
 			fakePlayer.inventory.setInventorySlotContents(fakePlayer.inventory.currentItem, stack);
 		}
 
@@ -369,7 +379,7 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 		case CHISEL:
 			return itemStack.getItem() instanceof IChiselItem;
 		default:
-			return itemStack.getItem() == ChiselItems.upgrade && Upgrade.values()[slot - MIN_UPGRADE].ordinal() == itemStack.getItemDamage();
+			return Features.AUTO_CHISEL_UPGRADES.enabled() && itemStack.getItem() == ChiselItems.upgrade && Upgrade.values()[slot - MIN_UPGRADE].ordinal() == itemStack.getItemDamage();
 		}
 	}
 
@@ -431,11 +441,15 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 	}
 
 	public boolean hasUpgrade(Upgrade upgrade) {
-		ItemStack stack = inventory[MIN_UPGRADE + upgrade.ordinal()];
-		if (stack != null) {
-			return stack.getItem() == ChiselItems.upgrade && stack.getItemDamage() == upgrade.ordinal();
+		if (Features.AUTO_CHISEL_UPGRADES.enabled()) {
+			ItemStack stack = inventory[MIN_UPGRADE + upgrade.ordinal()];
+			if (stack != null) {
+				return stack.getItem() == ChiselItems.upgrade && stack.getItemDamage() == upgrade.ordinal();
+			}
+			return false;
 		}
-		return false;
+
+		return upgrade == Upgrade.REVERSION ? false : true;
 	}
 
 	public String getSlotTooltipUnloc(int slotNumber) {
@@ -447,9 +461,10 @@ public class TileEntityAutoChisel extends TileEntity implements ISidedInventory 
 			} else if (slotNumber == CHISEL) {
 				name = "chisel";
 			}
-			return name == null ? null : String.format(base, name);
+			String unloc = name == null ? null : String.format(base, name);
+			return StatCollector.translateToLocal(unloc);
 		} else {
-			return Upgrade.values()[slotNumber - MIN_UPGRADE].getUnlocalizedName() + ".name";
+			return Upgrade.values()[slotNumber - MIN_UPGRADE].getLocalizedName();
 		}
 	}
 
