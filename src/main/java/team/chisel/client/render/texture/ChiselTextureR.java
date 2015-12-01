@@ -26,7 +26,7 @@ public class ChiselTextureR extends AbstractChiselTexture<ModuleBlockRenderConte
 
         int bound = context.getVariationSize();
         int wid = (int)Math.sqrt(bound);
-        Random random = new Random(seed);
+        Random random = new Random(/*seed*/); //todo actually add a seed
         int num = random.nextInt(bound) + 1;
         float interval = 16 / wid;
         int unitsAcross = num % wid;
@@ -42,7 +42,7 @@ public class ChiselTextureR extends AbstractChiselTexture<ModuleBlockRenderConte
         //Chisel.logger.info("maxU: "+maxU+" maxV: "+maxV);
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
         for (EnumFacing f : EnumFacing.values()) {
-            toReturn.add(makeQuad(f, r.getDefaultTexture(), new float[]{maxU - interval, maxV - interval, maxU, maxV}));
+            toReturn.add(QuadHelper.makeUVFaceQuad(f, sprites[0], new float[]{maxU - interval, maxV - interval, maxU, maxV}));
         }
         return toReturn;
     }

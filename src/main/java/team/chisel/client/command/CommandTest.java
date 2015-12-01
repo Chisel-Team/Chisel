@@ -50,7 +50,7 @@ public class CommandTest implements ICommand {
     }
 
     @Override
-    public int compareTo(Object o) {
+    public int compareTo(ICommand o) {
         return 0;
     }
 }

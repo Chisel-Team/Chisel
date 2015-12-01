@@ -13,12 +13,27 @@ import java.util.Map;
  */
 public class RenderContextList {
 
-    private Map<String, IBlockRenderContext> contextMap;
+    private Map<IBlockRenderType<?>, IBlockRenderContext> contextMap;
 
-    public RenderContextList(List<IBlockRenderType> types, IBlockAccess world, BlockPos pos){
-        contextMap = new HashMap<String, IBlockRenderContext>();
-        for (IBlockRenderType type : types){
-            contextMap.put(type.getName(), type.getBlockRenderContext(world, pos));
+    public RenderContextList(List<IBlockRenderType<?>> types, IBlockAccess world, BlockPos pos){
+        contextMap = new HashMap<IBlockRenderType<?>, IBlockRenderContext>();
+        for (IBlockRenderType<?> type : types){
+            IBlockRenderContext ctx = type.getBlockRenderContext(world, pos);
+            if (ctx != null) {
+                contextMap.put(type, ctx);
+            }
         }
+    }
+
+    public IBlockRenderContext getRenderContext(IBlockRenderType<?> type){
+        return this.contextMap.get(type);
+    }
+
+    public boolean contains(IBlockRenderType<?> type){
+        return getRenderContext(type) != null;
+    }
+
+    public RenderContextList(){
+
     }
 }

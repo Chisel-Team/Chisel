@@ -14,6 +14,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.util.EnumMap;
 
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -22,12 +23,10 @@ import net.minecraft.world.World;
 import team.chisel.api.IFacade;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.common.util.Dir;
-import team.chisel.common.variation.PropertyVariation;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
-import team.chisel.common.variation.Variation;
 
 // @formatter:off
 /**
@@ -266,8 +265,8 @@ public class CTM {
      * @param pos2
      * @return
      */
-    public boolean isConnected(World w, BlockPos pos1, BlockPos pos2, PropertyVariation variation) {
-        return areBlocksEqual(w.getBlockState(pos1), w.getBlockState(pos2), variation);
+    public boolean isConnected(World w, BlockPos pos1, BlockPos pos2, PropertyInteger metaProperty) {
+        return areBlocksEqual(w.getBlockState(pos1), w.getBlockState(pos2), metaProperty);
     }
 
 	public IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, EnumFacing side) {
@@ -285,8 +284,8 @@ public class CTM {
 	 * @param state2 Second state
 	 * @return Whether they are the same block
 	 */
-	public static boolean areBlocksEqual(IBlockState state1, IBlockState state2, PropertyVariation variation) {
-		return (state1.getBlock() == state2.getBlock() && ((Variation) state1.getValue(variation)).equals((Variation) state2.getValue(variation)));
+	public static boolean areBlocksEqual(IBlockState state1, IBlockState state2, PropertyInteger metaProperty) {
+		return (state1.getBlock() == state2.getBlock() && state1.getValue(metaProperty) == state2.getValue(metaProperty));
 	}
 
 

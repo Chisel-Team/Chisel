@@ -1,6 +1,7 @@
 package team.chisel.api.block;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 
 /**
  * Represents data about a specific variation
@@ -15,7 +16,7 @@ public class VariationData {
     /**
      * The Recipe for this variation, if null it cant be crafted
      */
-    public String[] recipe;
+    public IRecipe recipe;
 
     /**
      * The Itemstack that is smelted into this variation, if null it cant be smelted
@@ -23,14 +24,14 @@ public class VariationData {
     public ItemStack smeltedFrom;
 
     /**
-     * Gets the amount of this block produced through crafting/smelting
+     * Gets the amount of this block produced through smelting
      */
-    public int amountCrafted;
+    public int amountSmelted;
 
     /**
      * The Light value provided by this block
      */
-    public float light;
+    public int light;
 
     /**
      * The Block hardness
@@ -40,13 +41,18 @@ public class VariationData {
     /**
      * Whether this block can be used to construct a beacon base
      */
-    boolean beaconBase;
+    public boolean beaconBase;
 
-    public VariationData(String name, String[] recipe, ItemStack smeltedFrom, int amountCrafted, float light, float hardness, boolean beaconBase){
+    /**
+     * The Index of this variation in the blocks total variations
+     */
+    public int index;
+
+    public VariationData(String name, IRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness, boolean beaconBase){
         this.name = name;
         this.recipe = recipe;
         this.smeltedFrom = smeltedFrom;
-        this.amountCrafted = amountCrafted;
+        this.amountSmelted = amountSmelted;
         this.light = light;
         this.hardness = hardness;
         this.beaconBase = beaconBase;

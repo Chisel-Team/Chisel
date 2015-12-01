@@ -2,7 +2,9 @@ package team.chisel.api.block;
 
 import net.minecraft.block.material.Material;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Data about a chisel block, contains all the data from the json
@@ -16,17 +18,12 @@ public class ChiselBlockData {
     /**
      * A List of all the variations of this block
      */
-    public List<VariationData> variations;
+    public VariationData[] variations;
 
     /**
      * The Mod or map that owns this block, if its a mod this should be the modid, for ones added by chisel this is just "chisel"
      */
     public String owner;
-
-    /**
-     * The Handler, must implement team.chisel.api.block.IBlockHandler, if null or not a class with use the default handler
-     */
-    public String handler;
 
     /**
      * The Material for this block
@@ -49,28 +46,37 @@ public class ChiselBlockData {
     public boolean beaconBase;
 
     /**
-     * Whether this block should tick randomly
+     * Map of String names to the index of variation data in the variations array
      */
-    public boolean ticksRandomly;
-
-    /**
-     * The Tick rate of this block, default 10
-     */
-    public int tickRate;
+    private Map<String, Integer> nameVariationMap;
 
 
-    protected ChiselBlockData(String name, List<VariationData> variations, String owner, String handler, Material material, float hardness,
-                              boolean opaqueCube, boolean beaconBase, boolean ticks, int tickRate){
+
+    protected ChiselBlockData(String name, VariationData[] variations, String owner, Material material, float hardness,
+                              boolean opaqueCube, boolean beaconBase){
         this.name = name;
         this.variations = variations;
         this.owner = owner;
-        this.handler = handler;
         this.material = material;
         this.hardness = hardness;
         this.isOpaqueCube = opaqueCube;
         this.beaconBase = beaconBase;
-        this.ticksRandomly = ticks;
-        this.tickRate = tickRate;;
+        this.nameVariationMap = new HashMap<String, Integer>();
+        for (int i = 0 ; i < variations.length ; i++){
+            if (variations[i] != null){
+                nameVariationMap.put(variations[i].name, i);
+                variations[i].index = i;
+            }
+        }
+    }
+
+    public VariationData getVariation(String name){
+        if (nameVariationMap.containsKey(name)){
+            return this.variations[nameVariationMap.get(name)];
+        }
+        else {
+            return variations[0];
+        }
     }
 
 

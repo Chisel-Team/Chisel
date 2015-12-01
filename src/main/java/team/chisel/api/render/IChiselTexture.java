@@ -1,6 +1,7 @@
 package team.chisel.api.render;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 
 import java.util.List;
@@ -26,5 +27,12 @@ public interface IChiselTexture<CTX extends IBlockRenderContext> {
     /**
      * Gets a list of all the block render types needed for this texture
      */
-    List<IBlockRenderType> getBlockRenderTypes();
+    List<IBlockRenderType<? extends CTX>> getBlockRenderTypes();
+
+    /**
+     * Gets the texture for a particle
+     * @return The Texture for a particle
+     */
+    TextureAtlasSprite getParticle();
+
 }

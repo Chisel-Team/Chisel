@@ -2,7 +2,6 @@ package team.chisel.common.util;
 
 import team.chisel.Chisel;
 import team.chisel.api.block.ChiselBlockData;
-import team.chisel.api.block.IBlockHandler;
 import team.chisel.api.block.VariationData;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.variation.PropertyVariation;

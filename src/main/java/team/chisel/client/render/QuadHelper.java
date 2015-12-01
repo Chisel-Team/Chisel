@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.block.model.FaceBakery;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
+import org.lwjgl.util.vector.Vector3f;
 import team.chisel.client.render.ctm.CTMFaceBakery;
 
-import javax.vecmath.Vector3f;
 import java.util.List;
 
 /**

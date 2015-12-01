@@ -1,7 +1,6 @@
 package team.chisel.client.render.ctm;
 
-import team.chisel.api.render.RenderType;
-import team.chisel.client.render.ModelNonCTM;
+import org.lwjgl.util.vector.Vector3f;
 import team.chisel.client.render.QuadPos;
 import team.chisel.common.Reference;
 import net.minecraft.client.renderer.block.model.*;
@@ -9,7 +8,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
 
-import javax.vecmath.Vector3f;
 import java.util.Arrays;
 import java.util.List;
 

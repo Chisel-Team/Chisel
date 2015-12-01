@@ -6,6 +6,7 @@ import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,11 +15,11 @@ import java.util.List;
  */
 public abstract class AbstractChiselTexture<CTX extends IBlockRenderContext> implements IChiselTexture<CTX> {
 
-    protected IBlockRenderType type;
+    protected IBlockRenderType<? extends CTX> type;
 
     protected TextureAtlasSprite[] sprites;
 
-    public AbstractChiselTexture(IBlockRenderType type, TextureAtlasSprite[] sprites) {
+    public AbstractChiselTexture(IBlockRenderType<? extends CTX> type, TextureAtlasSprite[] sprites) {
         this.type = type;
         this.sprites = sprites;
     }
@@ -30,7 +31,9 @@ public abstract class AbstractChiselTexture<CTX extends IBlockRenderContext> imp
     }
 
     @Override
-    public List<IBlockRenderType> getBlockRenderTypes(){
-        return Arrays.asList(type);
+    public List<IBlockRenderType<? extends CTX>> getBlockRenderTypes(){
+        List<IBlockRenderType<? extends CTX>> list = new ArrayList<IBlockRenderType<? extends CTX>>();
+        list.add(type);
+        return list;
     }
 }

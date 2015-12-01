@@ -1,6 +1,7 @@
 package team.chisel.client.render;
 
-import javax.vecmath.Vector3f;
+
+import org.lwjgl.util.vector.Vector3f;
 
 /**
  * Two vectors to represent the position of a quad
