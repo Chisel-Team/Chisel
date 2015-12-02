@@ -10,6 +10,7 @@ import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.api.block.ClientVariationData;
+import team.chisel.api.render.ChiselFace;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
@@ -67,7 +68,7 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
             return null;
         }
         else {
-            return this.variationData.defaultTexture
+            return this.variationData.defaultFace.getParticle();
         }
     }
 
@@ -83,11 +84,10 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
             List<BakedQuad> quadList = new ArrayList<BakedQuad>();
             ClientVariationData varData = (ClientVariationData) block.getBlockData().variations[state.getValue(block.metaProperty)];
             for (EnumFacing facing : EnumFacing.VALUES){
-                IChiselTexture<? extends IBlockRenderContext> tex = varData.getTextureForSide(facing);
-                for (IBlockRenderType<? extends IBlockRenderContext> type : tex.getBlockRenderTypes()){
-                    quadList.addAll(tex.getSideQuads(facing, ctxList.getRenderContext()))
+                ChiselFace face = varData.getFaceForSide(facing);
+                for (IChiselTexture<? extends IBlockRenderContext> tex : face.getTextureList()){
+                    quadList.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getBlockRenderType())));
                 }
-                quadList.addAll(tex.getSideQuads(facing, ctxList.getRenderContext()))
             }
         }
         else {

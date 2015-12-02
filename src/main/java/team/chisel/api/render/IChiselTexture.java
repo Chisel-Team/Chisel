@@ -20,14 +20,10 @@ public interface IChiselTexture<CTX extends IBlockRenderContext> {
     List<BakedQuad> getSideQuads(EnumFacing side, CTX context);
 
     /**
-     * Whether this texture is actually a combined texture that has child textures
+     * Gets the block render type of this texture
+     * @return The Rendertype of this texture
      */
-    boolean isCombined();
-
-    /**
-     * Gets a list of all the block render types needed for this texture
-     */
-    List<IBlockRenderType<? extends CTX>> getBlockRenderTypes();
+    IBlockRenderType<CTX> getBlockRenderType();
 
     /**
      * Gets the texture for a particle

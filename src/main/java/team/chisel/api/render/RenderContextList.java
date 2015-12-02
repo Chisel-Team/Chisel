@@ -3,6 +3,7 @@ package team.chisel.api.render;
 
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import team.chisel.Chisel;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +26,13 @@ public class RenderContextList {
         }
     }
 
-    public IBlockRenderContext getRenderContext(IBlockRenderType<?> type){
-        return this.contextMap.get(type);
+    public <CTX extends IBlockRenderContext> CTX getRenderContext(IBlockRenderType<CTX> type){
+        try {
+            return (CTX) this.contextMap.get(type);
+        } catch (ClassCastException exception){
+            Chisel.debug("Contextmap had a bad type context pair");
+            throw exception;
+        }
     }
 
     public boolean contains(IBlockRenderType<?> type){

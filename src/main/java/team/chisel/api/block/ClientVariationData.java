@@ -3,6 +3,7 @@ package team.chisel.api.block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.EnumFacing;
+import team.chisel.api.render.ChiselFace;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
@@ -21,33 +22,31 @@ public class ClientVariationData extends VariationData {
     /**
      * The Default chisel texture for the sides of this block
      */
-    public IChiselTexture<? extends IBlockRenderContext> defaultTexture;
+    public ChiselFace defaultFace;
 
     /**
      * The chisel texture for the sides of this block
      */
-    private Map<EnumFacing, IChiselTexture<? extends IBlockRenderContext>> sideOverrides;
+    private Map<EnumFacing, ChiselFace> sideOverrides;
 
     private List<IBlockRenderType<? extends IBlockRenderContext>> typesUsed;
     
     public ClientVariationData(String name, IRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness, boolean beaconBase,
-                               IChiselTexture<? extends IBlockRenderContext> defaultTexture, Map<EnumFacing, IChiselTexture<? extends IBlockRenderContext>> sideOverrides){
+                               ChiselFace defaultFace, Map<EnumFacing, ChiselFace> sideOverrides){
         super(name, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase);
-        this.defaultTexture = defaultTexture;
+        this.defaultFace = defaultFace;
         this.sideOverrides = sideOverrides;
         this.typesUsed = new ArrayList<IBlockRenderType<? extends IBlockRenderContext>>();
-        List<IBlockRenderType<? extends IBlockRenderContext>> allTypes = new ArrayList<IBlockRenderType<? extends IBlockRenderContext>>();
-        for (IChiselTexture<? extends IBlockRenderContext> texture : sideOverrides.values()){
-            allTypes.addAll(texture.getBlockRenderTypes());
-        }
-        for (IBlockRenderType<? extends IBlockRenderContext> type : allTypes){
-            if (!typesUsed.contains(type)){
-                typesUsed.add(type);
+        for (ChiselFace face : sideOverrides.values()){
+            for (IChiselTexture<? extends IBlockRenderContext> texture : face.getTextureList()) {
+                if (!typesUsed.contains(texture.getBlockRenderType())){
+                    typesUsed.add(texture.getBlockRenderType());
+                }
             }
         }
-        for (IBlockRenderType<? extends IBlockRenderContext> type : defaultTexture.getBlockRenderTypes()) {
-            if (!typesUsed.contains(type)) {
-                typesUsed.add(type);
+        for (IChiselTexture<? extends IBlockRenderContext> texture : defaultFace.getTextureList()) {
+            if (!typesUsed.contains(texture.getBlockRenderType())) {
+                typesUsed.add(texture.getBlockRenderType());
             }
         }
     }
@@ -56,12 +55,15 @@ public class ClientVariationData extends VariationData {
         return this.typesUsed;
     }
 
-    public IChiselTexture<? extends IBlockRenderContext> getTextureForSide(EnumFacing facing){
-        if (sideOverrides.containsKey(facing)){
+    public ChiselFace getFaceForSide(EnumFacing facing){
+        if (facing == null){
+            return defaultFace;
+        }
+        else if (sideOverrides.containsKey(facing)){
             return sideOverrides.get(facing);
         }
         else {
-            return defaultTexture;
+            return defaultFace;
         }
     }
 

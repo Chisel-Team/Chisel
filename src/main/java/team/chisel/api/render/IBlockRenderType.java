@@ -15,7 +15,7 @@ public interface IBlockRenderType<CTX extends IBlockRenderContext> {
      * @param sprites The Sprites
      * @return A Chisel Texture
      */
-    IChiselTexture<? extends CTX> makeTexture(TextureAtlasSprite... sprites);
+    IChiselTexture<CTX> makeTexture(TextureAtlasSprite... sprites);
 
     /**
      * Gets the block render context for this block
