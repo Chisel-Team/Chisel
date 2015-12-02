@@ -172,7 +172,7 @@ public class BlockCarvable extends Block implements ICarvable {
 		}
 		IExtendedBlockState state = (IExtendedBlockState) stateIn;
         ClientVariationData data = (ClientVariationData) this.data.variations[state.getValue(metaProperty)];
-        List<IBlockRenderType<? extends IBlockRenderContext>> types = data.getTypesUsed();
+        List<IBlockRenderType> types = data.getTypesUsed();
 
         RenderContextList ctxList = new RenderContextList(types, w, pos);
 

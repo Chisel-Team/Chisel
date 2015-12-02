@@ -4,7 +4,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
-import team.chisel.common.connections.EnumConnection;
+import team.chisel.common.util.EnumConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +25,8 @@ public class BlockRenderTypeCTMH extends BlockRenderTypeCTM {
             }
         }
         if (sideConnect){
-            if (connections.contains(EnumConnection.DOWN)){
-                connections.remove(EnumConnection.DOWN);
-            }
-            if (connections.contains(EnumConnection.UP)){
-                connections.remove(EnumConnection.UP);
-            }
+            connections.remove(EnumConnection.DOWN);
+            connections.remove(EnumConnection.UP);
         }
         return new CTMBlockRenderContext(connections);
     }

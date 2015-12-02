@@ -10,7 +10,7 @@ import team.chisel.client.render.ctx.ModuleBlockRenderContext;
 /**
  * Abstract block render type for blocks that need to keep track of x/y/z modules
  */
-public abstract class BlockRenderTypeWithModules implements IBlockRenderType<ModuleBlockRenderContext> {
+public abstract class BlockRenderTypeWithModules implements IBlockRenderType {
 
     private int variationSize;
 

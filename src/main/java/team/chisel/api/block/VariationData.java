@@ -15,8 +15,9 @@ public class VariationData {
 
     /**
      * The Recipe for this variation, if null it cant be crafted
+     * todo Crafting stuff, maybe custom data class 3x3 of unique identifiers or ore dictionary names
      */
-    public IRecipe recipe;
+    //public IRecipe recipe;
 
     /**
      * The Itemstack that is smelted into this variation, if null it cant be smelted
@@ -48,9 +49,9 @@ public class VariationData {
      */
     public int index;
 
-    public VariationData(String name, IRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness, boolean beaconBase){
+    public VariationData(String name, ItemStack smeltedFrom, int amountSmelted, int light, float hardness, boolean beaconBase){
         this.name = name;
-        this.recipe = recipe;
+        //this.recipe = recipe;
         this.smeltedFrom = smeltedFrom;
         this.amountSmelted = amountSmelted;
         this.light = light;

@@ -13,27 +13,25 @@ import java.util.List;
 /**
  * Abstract implementation of IChiselTexture
  */
-public abstract class AbstractChiselTexture<CTX extends IBlockRenderContext> implements IChiselTexture<CTX> {
+public abstract class AbstractChiselTexture implements IChiselTexture {
 
-    protected IBlockRenderType<? extends CTX> type;
+    protected IBlockRenderType type;
 
     protected TextureAtlasSprite[] sprites;
 
-    public AbstractChiselTexture(IBlockRenderType<? extends CTX> type, TextureAtlasSprite[] sprites) {
+    public AbstractChiselTexture(IBlockRenderType type, TextureAtlasSprite[] sprites) {
         this.type = type;
         this.sprites = sprites;
     }
 
 
     @Override
-    public boolean isCombined(){
-        return false;
+    public IBlockRenderType getBlockRenderType(){
+        return this.type;
     }
 
     @Override
-    public List<IBlockRenderType<? extends CTX>> getBlockRenderTypes(){
-        List<IBlockRenderType<? extends CTX>> list = new ArrayList<IBlockRenderType<? extends CTX>>();
-        list.add(type);
-        return list;
+    public TextureAtlasSprite getParticle(){
+        return sprites[0];
     }
 }

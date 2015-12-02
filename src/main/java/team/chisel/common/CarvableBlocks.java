@@ -671,7 +671,7 @@
 //                continue;
 //            }
 //
-//            Variation[][] var = splitVariationArray(b.getVariants());
+//            Variation[][] var = vArray(b.getVariants());
 //            for (int i = 0; i < var.length; i++) {
 //                Variation[] vArray = var[i];
 //                //Chisel.debug("index is "+i+" for "+b.getName());

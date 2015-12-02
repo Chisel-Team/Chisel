@@ -1,6 +1,6 @@
 package team.chisel.common.init;
 
-import team.chisel.common.CarvableBlocks;
+import team.chisel.Chisel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -50,7 +50,7 @@ public class ChiselTabs {
         @Override
         @SideOnly(Side.CLIENT)
         public Item getTabIconItem() {
-            return Item.getItemFromBlock(CarvableBlocks.ANTIBLOCK.getBlock());
+            return Chisel.itemChisel;
         }
     }
 

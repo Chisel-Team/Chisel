@@ -3,6 +3,7 @@ package team.chisel.client.render.texture;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
+import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctx.ModuleBlockRenderContext;
 import team.chisel.client.render.type.BlockRenderTypeV;
@@ -14,14 +15,16 @@ import java.util.List;
 /**
  * Texture for V texture types
  */
-public class ChiselTextureV extends AbstractChiselTexture<ModuleBlockRenderContext> {
+public class ChiselTextureV extends AbstractChiselTexture {
 
     public ChiselTextureV(BlockRenderTypeV type, TextureAtlasSprite[] sprites){
         super(type, sprites);
     }
 
     @Override
-    public List<BakedQuad> getSideQuads(EnumFacing side, ModuleBlockRenderContext context){
+    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext contextIn){
+
+        ModuleBlockRenderContext context = (ModuleBlockRenderContext) contextIn;
 
         int xModules = context.getXModules();
         int yModules = context.getYModules();

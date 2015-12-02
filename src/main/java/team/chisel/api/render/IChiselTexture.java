@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Represents a Chisel Texture/resource
  */
-public interface IChiselTexture<CTX extends IBlockRenderContext> {
+public interface IChiselTexture {
 
     /**
      * Gets a list of quads for the side for this texture
@@ -17,13 +17,13 @@ public interface IChiselTexture<CTX extends IBlockRenderContext> {
      * @param context The Context
      * @return A List of Quads
      */
-    List<BakedQuad> getSideQuads(EnumFacing side, CTX context);
+    List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context);
 
     /**
      * Gets the block render type of this texture
      * @return The Rendertype of this texture
      */
-    IBlockRenderType<CTX> getBlockRenderType();
+    IBlockRenderType getBlockRenderType();
 
     /**
      * Gets the texture for a particle

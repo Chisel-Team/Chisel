@@ -76,7 +76,22 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public String getCommandSenderName() {
+    public ItemStack removeStackFromSlot(int slot){
+        ItemStack stack = getStackInSlot(slot);
+
+        if (stack == null)
+            return null;
+        NBTTagCompound targetItem = new NBTTagCompound();
+        inventory[slot].writeToNBT(targetItem);
+        chisel.getTagCompound().setTag("chiselTarget", targetItem);
+        inventory[slot] = null;
+
+        updateInventoryState(slot);
+        return stack;
+    }
+
+    @Override
+    public String getName() {
         return "container.chisel";
     }
 
@@ -97,7 +112,7 @@ public class InventoryChiselSelection implements IInventory {
 
     @Override
     public IChatComponent getDisplayName() {
-        return new ChatComponentTranslation(getCommandSenderName());
+        return new ChatComponentTranslation(getName());
     }
 
     @Override
@@ -143,21 +158,6 @@ public class InventoryChiselSelection implements IInventory {
         }
 
         container.onChiselSlotChanged();
-    }
-
-    @Override
-    public ItemStack getStackInSlotOnClosing(int slot) {
-        ItemStack stack = getStackInSlot(slot);
-
-        if (stack == null)
-            return null;
-        NBTTagCompound targetItem = new NBTTagCompound();
-        inventory[slot].writeToNBT(targetItem);
-        chisel.getTagCompound().setTag("chiselTarget", targetItem);
-        inventory[slot] = null;
-
-        updateInventoryState(slot);
-        return stack;
     }
 
     @Override

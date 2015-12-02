@@ -8,7 +8,7 @@ import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.texture.ChiselTextureCTM;
-import team.chisel.common.connections.EnumConnection;
+import team.chisel.common.util.EnumConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  * Block RenderType for CTM
  */
 @BlockRenderType("CTM")
-public class BlockRenderTypeCTM implements IBlockRenderType<CTMBlockRenderContext> {
+public class BlockRenderTypeCTM implements IBlockRenderType {
 
     @Override
     public IChiselTexture makeTexture(TextureAtlasSprite... sprites){

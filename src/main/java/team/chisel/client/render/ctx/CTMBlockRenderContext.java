@@ -1,7 +1,7 @@
 package team.chisel.client.render.ctx;
 
 import team.chisel.api.render.IBlockRenderContext;
-import team.chisel.common.connections.EnumConnection;
+import team.chisel.common.util.EnumConnection;
 
 import java.util.ArrayList;
 import java.util.Arrays;

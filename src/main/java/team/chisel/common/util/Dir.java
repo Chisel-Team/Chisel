@@ -10,7 +10,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumFacing.AxisDirection;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
-import team.chisel.common.connections.EnumConnection;
 
 /**
  * Think of this class as a "Two dimensional ForgeDirection, with diagonals".

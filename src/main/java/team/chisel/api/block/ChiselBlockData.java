@@ -1,6 +1,7 @@
 package team.chisel.api.block;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.util.MathHelper;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,10 +46,6 @@ public class ChiselBlockData {
      */
     public boolean beaconBase;
 
-    /**
-     * Map of String names to the index of variation data in the variations array
-     */
-    private Map<String, Integer> nameVariationMap;
 
 
 
@@ -61,24 +58,12 @@ public class ChiselBlockData {
         this.hardness = hardness;
         this.isOpaqueCube = opaqueCube;
         this.beaconBase = beaconBase;
-        this.nameVariationMap = new HashMap<String, Integer>();
-        for (int i = 0 ; i < variations.length ; i++){
-            if (variations[i] != null){
-                nameVariationMap.put(variations[i].name, i);
-                variations[i].index = i;
-            }
-        }
     }
 
-    public VariationData getVariation(String name){
-        if (nameVariationMap.containsKey(name)){
-            return this.variations[nameVariationMap.get(name)];
-        }
-        else {
-            return variations[0];
-        }
+    public VariationData getVariation(int meta){
+        return this.variations[MathHelper.clamp_int(meta,
+                0, variations.length)];
     }
-
 
 
 

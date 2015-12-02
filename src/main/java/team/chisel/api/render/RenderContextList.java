@@ -14,11 +14,11 @@ import java.util.Map;
  */
 public class RenderContextList {
 
-    private Map<IBlockRenderType<?>, IBlockRenderContext> contextMap;
+    private Map<IBlockRenderType, IBlockRenderContext> contextMap;
 
-    public RenderContextList(List<IBlockRenderType<?>> types, IBlockAccess world, BlockPos pos){
-        contextMap = new HashMap<IBlockRenderType<?>, IBlockRenderContext>();
-        for (IBlockRenderType<?> type : types){
+    public RenderContextList(List<IBlockRenderType> types, IBlockAccess world, BlockPos pos){
+        contextMap = new HashMap<IBlockRenderType, IBlockRenderContext>();
+        for (IBlockRenderType type : types){
             IBlockRenderContext ctx = type.getBlockRenderContext(world, pos);
             if (ctx != null) {
                 contextMap.put(type, ctx);
@@ -26,16 +26,16 @@ public class RenderContextList {
         }
     }
 
-    public <CTX extends IBlockRenderContext> CTX getRenderContext(IBlockRenderType<CTX> type){
+    public IBlockRenderContext getRenderContext(IBlockRenderType type){
         try {
-            return (CTX) this.contextMap.get(type);
+            return this.contextMap.get(type);
         } catch (ClassCastException exception){
             Chisel.debug("Contextmap had a bad type context pair");
             throw exception;
         }
     }
 
-    public boolean contains(IBlockRenderType<?> type){
+    public boolean contains(IBlockRenderType type){
         return getRenderContext(type) != null;
     }
 
