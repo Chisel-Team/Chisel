@@ -7,7 +7,7 @@ public abstract class JsonObjectBase<T> implements Supplier<T> {
     private T cache;
 
     @Override
-    public T get() {
+    public final T get() {
         return cache != null ? cache : (cache = create());
     }
 
