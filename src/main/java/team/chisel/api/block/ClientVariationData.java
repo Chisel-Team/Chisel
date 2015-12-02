@@ -1,14 +1,14 @@
 package team.chisel.api.block;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import team.chisel.api.render.ChiselFace;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  * The Version of VariationData used on the client

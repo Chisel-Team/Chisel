@@ -1,7 +1,7 @@
 package team.chisel.common.inventory;
 
-import team.chisel.common.item.ItemChisel;
-import team.chisel.common.util.OreDictionaryUtil;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -11,8 +11,8 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
-
-import java.util.List;
+import team.chisel.common.item.ItemChisel;
+import team.chisel.common.util.OreDictionaryUtil;
 
 public class InventoryChiselSelection implements IInventory {
 

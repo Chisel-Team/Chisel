@@ -1,5 +1,8 @@
 package team.chisel.client.render;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -17,9 +20,6 @@ import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Model for all chisel blocks
