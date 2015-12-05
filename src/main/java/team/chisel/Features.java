@@ -61,6 +61,10 @@ import static team.chisel.utils.General.*;
 public enum Features {
 
     AE_CERTUS_QUARTZ("appliedenergistics2") {
+    	
+    	private Block blockCheck = null;
+    	private boolean blockChecked = false;
+    	
         @Override
         void addBlocks() {
 
@@ -73,9 +77,18 @@ public enum Features {
             AECertusQuartz.carverHelper.addVariation("tile.AECertusQuartz.2.desc", 2, "quartz/certus/masonryCertus", 5);
 
             AECertusQuartz.carverHelper.registerAll(AECertusQuartz, "AECertusQuartz");
-            Carving.chisel.registerOre("AECertusQuartz", "AECertusQuartz");
-        }
-    },
+			Carving.chisel.registerOre("AECertusQuartz", "AECertusQuartz");
+		}
+
+		@Override
+		public boolean enabled() {
+			if (!blockChecked) {
+				blockCheck = GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartz");
+				blockChecked = true;
+			}
+			return super.enabled() && blockCheck != null;
+		}
+	},
 
     AE_SKY_STONE("appliedenergistics2") {
         @Override
@@ -3180,7 +3193,7 @@ public enum Features {
         ;
     }
 
-    public final boolean enabled() {
+    public boolean enabled() {
         return Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
     }
 
