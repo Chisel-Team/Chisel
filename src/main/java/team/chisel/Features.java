@@ -139,7 +139,9 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(andesite, 2), diorite, "cobblestone"));
+			if (DIORITE.enabled()) {
+				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(andesite, 2), diorite, "cobblestone"));
+			}
 		}
 	},
 
@@ -1060,7 +1062,9 @@ public enum Features {
 
 		@Override
 		void addRecipes() {
-			GameRegistry.addRecipe(new ShapelessOreRecipe(granite, diorite, "gemQuartz"));
+			if (DIORITE.enabled()) {
+				GameRegistry.addRecipe(new ShapelessOreRecipe(granite, diorite, "gemQuartz"));
+			}
 		}
 	},
 
