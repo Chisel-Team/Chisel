@@ -144,8 +144,10 @@ public enum Features {
         }
 
         @Override
-        void addRecipes() {
-            GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(andesite, 2), diorite, "cobblestone"));
+		void addRecipes() {
+			if (DIORITE.enabled()) {
+				GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(andesite, 2), diorite, "cobblestone"));
+			}
         }
     },
 
@@ -1071,13 +1073,15 @@ public enum Features {
             granite.carverHelper.registerAll(granite, "granite");
             granite.carverHelper.registerOre("blockGranite");
             granite.carverHelper.registerOre("stoneGranite");
-        }
+		}
 
-        @Override
-        void addRecipes() {
-            GameRegistry.addRecipe(new ShapelessOreRecipe(granite, diorite, "gemQuartz"));
-        }
-    },
+		@Override
+		void addRecipes() {
+			if (DIORITE.enabled()) {
+				GameRegistry.addRecipe(new ShapelessOreRecipe(granite, diorite, "gemQuartz"));
+			}
+		}
+	},
 
     GRIMSTONE {
         @Override
