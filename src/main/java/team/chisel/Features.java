@@ -59,6 +59,9 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public enum Features {
 
 	AE_CERTUS_QUARTZ("appliedenergistics2") {
+		
+		private Block blockCheck;
+		private boolean blockChecked;
 
 		@Override
 		void addBlocks() {
@@ -66,6 +69,15 @@ public enum Features {
 			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzPillar"), 0, 1);
 			Carving.chisel.addVariation("AECertusQuartz", GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzChiseled"), 0, 2);
 			Carving.chisel.registerOre("AECertusQuartz", "AECertusQuartz");
+		}
+
+		@Override
+		public boolean enabled() {
+			if (!blockChecked) {
+				blockCheck = GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartz");
+				blockChecked = true;
+			}
+			return super.enabled() && blockCheck != null;
 		}
 	},
 
@@ -3069,7 +3081,7 @@ public enum Features {
 		;
 	}
 
-	public final boolean enabled() {
+	public boolean enabled() {
 		return Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
 	}
 
