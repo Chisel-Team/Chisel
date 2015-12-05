@@ -1,4 +1,4 @@
-package team.chisel.common;
+package team.chisel.common.init;
 
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import team.chisel.api.block.ChiselBlockData;
