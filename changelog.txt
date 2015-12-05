@@ -1,3 +1,13 @@
+2.9.4:
+Changes
+- Flammable stuff is now actually flammable, e.g. bookshelves, planks (Cricket)
+- Add some text to crash logs about those pesky "Unable to lookup" errors
+Fixes
+- #52 Fix not being able to chisel endstone
+- #69 Allow the Autochisel to function properly when upgrades are disabled. It will function as if it has all ugprades (except reversion).
+- Chisel-2#433 Fix andesite and granite recipes not checking for disabled diorite
+- #60 Fix crash when AE2 decorative quartz is disabled
+
 2.9.3:
 Changes
 - Beacon rendering has been improved to show the color of the beacon in the item
