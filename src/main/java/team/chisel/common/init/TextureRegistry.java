@@ -2,7 +2,7 @@ package team.chisel.common.init;
 
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IChiselTexture;
-import team.chisel.common.util.CombinedChiselTexture;
+import team.chisel.common.util.PossibleType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,6 +41,18 @@ public class TextureRegistry {
         }
         else if (combinedMap.containsKey(loc)){
             throw new IllegalArgumentException("Chisel Texture " + loc + " is combined!");
+        }
+        else {
+            throw new IllegalArgumentException("There is no Chisel texture with the name "+loc);
+        }
+    }
+
+    public static PossibleType<IChiselTexture, CombinedChiselTexture> getPossible(ResourceLocation loc){
+        if (isNonCombinedTex(loc)){
+            return PossibleType.makeFirst(getTexture(loc));
+        }
+        else if (isCombinedTex(loc)){
+            return PossibleType.makeSecond(getCombinedTexture(loc));
         }
         else {
             throw new IllegalArgumentException("There is no Chisel texture with the name "+loc);

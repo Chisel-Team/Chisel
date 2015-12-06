@@ -30,6 +30,14 @@ public class PossibleType<FIRST, SECOND> {
         this.isFirst = false;
     }
 
+    public FIRST getFirst(){
+        return this.first;
+    }
+
+    public SECOND getSecond(){
+        return this.second;
+    }
+
     public boolean isFirst(){
         return this.isFirst;
     }

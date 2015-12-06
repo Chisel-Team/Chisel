@@ -6,7 +6,6 @@ import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.common.init.TextureTypeRegistry;
-import team.chisel.common.util.CombinedChiselTexture;
 import team.chisel.common.util.PossibleType;
 
 
@@ -35,7 +34,7 @@ public class JsonTexture extends JsonObjectBase<PossibleType<IChiselTexture, Com
 
 
     @Override
-    public PossibleType<IChiselTexture, CombinedChiselTexture> create(TextureMap map) {
+    protected PossibleType<IChiselTexture, CombinedChiselTexture> create(TextureMap map) {
 
         if (isCombined()){
             if (!checkNull(textures)){
@@ -47,7 +46,7 @@ public class JsonTexture extends JsonObjectBase<PossibleType<IChiselTexture, Com
             CombinedChiselTexture combined = new CombinedChiselTexture();
             for (String child : children){
                 ResourceLocation loc = new ResourceLocation(child);
-                combined.addTexture(loc);
+                combined.addTexture();
             }
             return PossibleType.makeSecond(combined);
         }

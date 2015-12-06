@@ -10,5 +10,5 @@ public abstract class JsonObjectBase<T, F> {
         return cache != null ? cache : (cache = create(factory));
     }
 
-    public abstract T create(F factory);
+    protected abstract T create(F factory);
 }
