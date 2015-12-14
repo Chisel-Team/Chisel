@@ -421,6 +421,26 @@ tile.brickCustom.3.desc=Varied Bricks
 tile.brickCustom.5.desc=Aged Bricks
 tile.brickCustom.6.desc=Yellow Bricks
 
+
+#Crag Rock
+tile.chisel.cragRock.name=Crag Rock
+tile.cragRock.0.desc=Aligned Crag Rock Bricks
+tile.cragRock.1.desc=Detailed Crag Rock Bricks
+tile.cragRock.2.desc=Small Crag Rock Bricks
+tile.cragRock.3.desc=Large Crag Rock Tiles
+tile.cragRock.4.desc=Small Crag Rock Tiles
+tile.cragRock.5.desc=French Crag Rock Tiles
+tile.cragRock.6.desc=French Crag Rock Tiles
+tile.cragRock.7.desc=Creeper Crag Rock Tiles
+tile.cragRock.8.desc=Damaged Crag Rock Tiles
+tile.cragRock.9.desc=Huge Crag Rock Tiles
+tile.cragRock.10.desc=Crag Rock with Creeper Panel
+tile.cragRock.11.desc=Crag Rock with Dent
+tile.cragRock.12.desc=Crag Rock with Panel
+tile.cragRock.13.desc=Crag Rock with Light Panel
+tile.cragRock.14.desc=Crag Rock with Dark Panel
+
+
 #Chisel 1
 
 #Cobblestone Blocks
