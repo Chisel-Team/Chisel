@@ -1,0 +1,5 @@
+{
+	"type":"CTM",
+	"textures":["chisel:blocks/voidstone/bevel",
+	"chisel:blocks/voidstone/bevel-ctm"]
+}
