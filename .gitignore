@@ -1,41 +1,29 @@
-#eclipse
-.project
-.classpath
-.metadata
-org.*
-bin
+/download
+/eclipseBin
 
-#idea
-.idea
-*.iml
-*.ipr
-*.iws
-out
+## gradle
+/.gradle
+/build
 
-#gradle
-build
-.gradle
+## ForgeGradle
+/run
+/*.launch
 
-#runtime
-eclipse
-run
+## eclipse
+/eclipse
+/.settings
+/.metadata
+/.classpath
+/.project
+/bin
 
-#mac
-.DS_Store
-*.command
+## intellij
+/out
+/.idea
+/*.iml
+/*.ipr
+/*.iws
+/atlassian-ide-plugin.xml
 
-#workspace
-saves
-asm
-config
-logs
-screenshots
-mods
-world
-lib
-libs
-
-*.txt
-/server.properties
-*.dat
-*.psd
+## gedit
+*~
