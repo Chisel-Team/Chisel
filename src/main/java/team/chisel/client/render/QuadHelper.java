@@ -9,9 +9,11 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
 import org.lwjgl.util.vector.Vector3f;
+import team.chisel.Chisel;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.ctm.CTMFaceBakery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,18 +38,19 @@ public class QuadHelper {
         return makeUVFaceQuad(f, sprite, new float[]{0, 0, 16, 16});
     }
 
-    public static BakedQuad makeFourQuads(EnumFacing f, TextureAtlasSprite sprite, float[] uvs){
-        for (int i = 0 ; i < 4 ; i++ ){
-            QuadPos pos = CTMFaceBakery.getCorrectQuadPos(f, i);
-
-            float uDif = uvs[2] - uvs[0];
-            float vDif = uvs[1] - uvs[3];
-            float[] uvsOut = {uvs[0], uvs[1], uvs[0]+uDif, uvs[1] + vDif);
-            if (i == 3){
-                uvsOut = {uvs[2]/2, }
-            }
-            //todo Finish this
-        }
+    public static List<BakedQuad> makeFourQuads(EnumFacing f, TextureAtlasSprite sprite, float[] uvs){
+        List<BakedQuad> quads = new ArrayList<BakedQuad>();
+        float uDif = uvs[2] - uvs[0];
+        float vDif = uvs[1] - uvs[3];
+        quads.add(makeUVQuad(f, sprite, new float[]{uvs[0], uvs[1], uvs[0]+(uDif/2), uvs[1] + (vDif/2)},
+                CTMFaceBakery.getCorrectQuadPos(f, 4)));
+        quads.add(makeUVQuad(f, sprite, new float[]{uvs[0]+(uDif/2), uvs[1], uvs[2], uvs[1]+(vDif/2)},
+                CTMFaceBakery.getCorrectQuadPos(f, 3)));
+        quads.add(makeUVQuad(f, sprite, new float[]{uvs[0]+(uDif/2), uvs[1]+(vDif/2), uvs[2], uvs[3]},
+                CTMFaceBakery.getCorrectQuadPos(f, 2)));
+        quads.add(makeUVQuad(f, sprite, new float[]{uvs[0], uvs[1]+(vDif/2), uvs[0]+(uDif/2), uvs[3]},
+                CTMFaceBakery.getCorrectQuadPos(f, 1)));
+        return quads;
     }
 
     /**
@@ -58,10 +61,11 @@ public class QuadHelper {
      * @return The Quad
      */
     public static BakedQuad makeUVFaceQuad(EnumFacing f, TextureAtlasSprite sprite, float[] uvs){
-        makeUVQuad(f, sprite, uvs, quadPos);
+        return makeUVQuad(f, sprite, uvs, quadPos);
     }
 
     public static BakedQuad makeUVQuad(EnumFacing f, TextureAtlasSprite sprite, float[] uvs, QuadPos pos){
+        Chisel.debug(uvs);
         return bakery.makeBakedQuad(pos.from, pos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(uvs, 0)),
                 sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, false);
     }

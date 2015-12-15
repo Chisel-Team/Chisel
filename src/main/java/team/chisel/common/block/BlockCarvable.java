@@ -13,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -241,6 +242,12 @@ public class BlockCarvable extends Block implements ICarvable {
         else {
             return true;
         }
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean canRenderInLayer(EnumWorldBlockLayer layer){
+        return this.data.isValid(layer);
     }
     @Override
     public boolean isFullBlock(){

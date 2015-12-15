@@ -1,10 +1,13 @@
 package team.chisel.common.util.json;
 
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.Chisel;
 import team.chisel.api.render.ChiselFace;
 import team.chisel.api.render.ChiselFaceRegistry;
 import team.chisel.api.render.ChiselTextureRegistry;
+
+import java.util.Locale;
 
 /**
  * Json version of ChiselFace
@@ -15,6 +18,8 @@ public class JsonFace extends JsonObjectBase<ChiselFace> {
      * If this is the type COMBINED then these are the identifiers of the child textures
      */
     private String[] children;
+
+    private String layer;
 
 
     @Override
@@ -37,6 +42,17 @@ public class JsonFace extends JsonObjectBase<ChiselFace> {
                 }
             } else {
                 Chisel.debug("Skipping child " + child + " because it is invalid");
+            }
+        }
+        if (layer != null){
+            if (layer.equalsIgnoreCase("Cutout")){
+                face.setLayer(EnumWorldBlockLayer.CUTOUT);
+            }
+            else if (layer.equalsIgnoreCase("Mipped Cutout") || layer.equalsIgnoreCase("Mipped_Cutout")){
+                face.setLayer(EnumWorldBlockLayer.CUTOUT_MIPPED);
+            }
+            else if (layer.equalsIgnoreCase("Translucent")){
+                face.setLayer(EnumWorldBlockLayer.TRANSLUCENT);
             }
         }
         return face;

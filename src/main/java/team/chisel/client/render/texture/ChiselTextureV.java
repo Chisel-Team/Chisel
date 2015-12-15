@@ -2,6 +2,7 @@ package team.chisel.client.render.texture;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.EnumFacing;
+import team.chisel.Chisel;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
@@ -21,7 +22,7 @@ public class ChiselTextureV extends AbstractChiselTexture {
     }
 
     @Override
-    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext contextIn){
+    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext contextIn, int quadGoal){
 
         ModuleBlockRenderContext context = (ModuleBlockRenderContext) contextIn;
 
@@ -51,9 +52,14 @@ public class ChiselTextureV extends AbstractChiselTexture {
         //throw new RuntimeException(index % variationSize+" and "+index/variationSize);
         int minU = interval * (index % variationSize);
         int minV = interval * (index / variationSize);
-
-        List<BakedQuad> list = new ArrayList<BakedQuad>();
-        list.add(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), new float[]{minU, minV, minU + interval, minV + interval}));
-        return list;
+        if (quadGoal != 4) {
+            List<BakedQuad> list = new ArrayList<BakedQuad>();
+            list.add(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), new float[]{minU, minV, minU + interval, minV + interval}));
+            return list;
+        } else {
+            Chisel.debug("V texture complying with quad goal of 4");
+            Chisel.debug(new float[]{minU, minV, minU + interval, minV + interval});
+            return QuadHelper.makeFourQuads(side, sprites[0].getSprite(), new float[]{minU, minV, minU + interval, minV + interval});
+        }
     }
 }

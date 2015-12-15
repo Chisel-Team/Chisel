@@ -11,6 +11,7 @@ import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
@@ -97,8 +98,18 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
                     0, block.getBlockData().variations.length)];
             for (EnumFacing facing : EnumFacing.VALUES){
                 ChiselFace face = varData.getFaceForSide(facing);
+                if (MinecraftForgeClient.getRenderLayer() != face.getLayer()){
+                    Chisel.debug("Skipping Layer "+ MinecraftForgeClient.getRenderLayer()+" for block "+state);
+                    continue;
+                }
+                int singleGreatestQuadGoal = 1;
                 for (IChiselTexture tex : face.getTextureList()){
-                    quadList.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getBlockRenderType())));
+                    if (tex.getBlockRenderType().getQuadsPerSide() > singleGreatestQuadGoal){
+                        singleGreatestQuadGoal = tex.getBlockRenderType().getQuadsPerSide();
+                    }
+                }
+                for (IChiselTexture tex : face.getTextureList()){
+                    quadList.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getBlockRenderType()), singleGreatestQuadGoal));
                 }
             }
             return new ModelChiselBlock(quadList, varData);

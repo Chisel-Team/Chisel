@@ -49,6 +49,13 @@ public class ClientVariationData extends VariationData {
         }
     }
 
+    public List<ChiselFace> getAllFaces(){
+        List<ChiselFace> faces = new ArrayList<ChiselFace>();
+        faces.add(defaultFace);
+        faces.addAll(sideOverrides.values());
+        return faces;
+    }
+
     public List<IBlockRenderType> getTypesUsed() {
         return this.typesUsed;
     }

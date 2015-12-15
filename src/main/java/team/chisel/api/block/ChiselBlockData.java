@@ -1,8 +1,13 @@
 package team.chisel.api.block;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import team.chisel.api.render.ChiselFace;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +51,9 @@ public class ChiselBlockData {
      */
     public boolean beaconBase;
 
+    @SideOnly(Side.CLIENT)
+    private List<EnumWorldBlockLayer> layers;
+
 
 
 
@@ -63,6 +71,24 @@ public class ChiselBlockData {
     public VariationData getVariation(int meta){
         return this.variations[MathHelper.clamp_int(meta,
                 0, variations.length)];
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean isValid(EnumWorldBlockLayer layer){
+        if (this.layers == null){
+            this.layers = new ArrayList<EnumWorldBlockLayer>();
+            for (VariationData data : this.variations){
+                if (data instanceof ClientVariationData){
+                    ClientVariationData cData = (ClientVariationData) data;
+                    for (ChiselFace face : cData.getAllFaces()){
+                        if (!this.layers.contains(face.getLayer())){
+                            this.layers.add(face.getLayer());
+                        }
+                    }
+                }
+            }
+        }
+        return this.layers.contains(layer);
     }
 
 

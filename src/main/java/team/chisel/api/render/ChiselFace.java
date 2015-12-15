@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.util.EnumWorldBlockLayer;
 
 /**
  * Chisel Face, basicly a list of IChiselTexture's
@@ -14,14 +15,18 @@ public class ChiselFace {
 
     private List<ChiselFace> childFaces;
 
+    private EnumWorldBlockLayer layer;
+
     public ChiselFace(){
         this.textureList = new ArrayList<IChiselTexture>();
         this.childFaces = new ArrayList<ChiselFace>();
+        this.layer = EnumWorldBlockLayer.SOLID;
     }
 
-    public ChiselFace(List<IChiselTexture> textureList, List<ChiselFace> childFaces){
+    public ChiselFace(List<IChiselTexture> textureList, List<ChiselFace> childFaces, EnumWorldBlockLayer layer){
         this.textureList = textureList;
         this.childFaces = childFaces;
+        this.layer = layer;
     }
 
     public List<IChiselTexture> getTextureList(){
@@ -56,6 +61,14 @@ public class ChiselFace {
         else {
             return childFaces.get(0).getParticle();
         }
+    }
+
+    public void setLayer(EnumWorldBlockLayer layer){
+        this.layer = layer;
+    }
+
+    public EnumWorldBlockLayer getLayer(){
+        return this.layer;
     }
 
 }

@@ -75,6 +75,17 @@ public class Chisel implements Reference {
         }
     }
 
+    public static void debug(float[] array){
+        if (debug) {
+            String message = "[";
+            for (float obj : array) {
+                message = message + obj + " ";
+            }
+            logger.info(message+"]");
+        }
+
+    }
+
 //    @Mod.EventHandler
 //    public void postInit(FMLPostInitializationEvent event){
 //        Map ro;
