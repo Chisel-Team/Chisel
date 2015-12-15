@@ -6,6 +6,6 @@ import team.chisel.api.render.BlockRenderType;
 public class BlockRenderTypeV9 extends BlockRenderTypeV {
 
     public BlockRenderTypeV9(){
-        super(9);
+        super(3, 3);
     }
 }

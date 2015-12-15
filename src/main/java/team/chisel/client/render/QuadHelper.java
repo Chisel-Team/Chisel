@@ -41,7 +41,7 @@ public class QuadHelper {
     public static List<BakedQuad> makeFourQuads(EnumFacing f, TextureAtlasSprite sprite, float[] uvs){
         List<BakedQuad> quads = new ArrayList<BakedQuad>();
         float uDif = uvs[2] - uvs[0];
-        float vDif = uvs[1] - uvs[3];
+        float vDif = uvs[3] - uvs[1];
         quads.add(makeUVQuad(f, sprite, new float[]{uvs[0], uvs[1], uvs[0]+(uDif/2), uvs[1] + (vDif/2)},
                 CTMFaceBakery.getCorrectQuadPos(f, 4)));
         quads.add(makeUVQuad(f, sprite, new float[]{uvs[0]+(uDif/2), uvs[1], uvs[2], uvs[1]+(vDif/2)},

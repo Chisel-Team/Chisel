@@ -1,16 +1,18 @@
 package team.chisel.client.render.texture;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.Axis;
 import team.chisel.Chisel;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
-import team.chisel.client.render.ctx.ModuleBlockRenderContext;
+import team.chisel.client.render.ctx.BlockRenderContextSheet;
 import team.chisel.client.render.type.BlockRenderTypeV;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Texture for V texture types
@@ -22,44 +24,64 @@ public class ChiselTextureV extends AbstractChiselTexture {
     }
 
     @Override
-    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext contextIn, int quadGoal){
+    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext contextIn, int quadGoal) {
 
-        ModuleBlockRenderContext context = (ModuleBlockRenderContext) contextIn;
+        BlockRenderContextSheet context = (BlockRenderContextSheet) contextIn;
 
-        int xModules = context.getXModules();
-        int yModules = context.getYModules();
-        int zModules = context.getZModules();
-        int variationSize = context.getVariationSize();
-        //This ensures that blocks placed near 0,0 or it's axis' do not misbehave
-        int textureX = (xModules < 0) ? (xModules + variationSize) : xModules;
-        int textureZ = (zModules < 0) ? (zModules + variationSize) : zModules;
-        //Always invert the y index
-        int textureY = (variationSize - yModules - 1);
+        BlockPos pos = context.getPosition();
 
-        int interval = 16 / variationSize;
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
 
-        int index;
-        if (side == EnumFacing.DOWN || side == EnumFacing.UP) {
+        int xSize = context.getXSize();
+        int ySize = context.getYSize();
+
+        int tx, ty;
+
+        // Calculate submap x/y from x/y/z by ignoring the direction which the side is offset on
+        // Negate the y coordinate when calculating non-vertical directions, otherwise it is reverse order
+        if (side.getAxis().isVertical()) {
             // DOWN || UP
-            index = textureX + textureZ * variationSize;
-        } else if (side == EnumFacing.NORTH || side == EnumFacing.SOUTH) {
+            tx = x % xSize;
+            ty = z % ySize;
+        } else if (side.getAxis() == Axis.Z) {
             // NORTH || SOUTH
-            index = textureX + textureY * variationSize;
+            tx = x % xSize;
+            ty = -y % ySize;
         } else {
             // WEST || EAST
-            index = textureZ + textureY * variationSize;
+            tx = z % xSize;
+            ty = -y % ySize;
         }
-        //throw new RuntimeException(index % variationSize+" and "+index/variationSize);
-        int minU = interval * (index % variationSize);
-        int minV = interval * (index / variationSize);
+
+        // Reverse x order for north and east
+        if (side == EnumFacing.NORTH || side == EnumFacing.EAST) {
+            tx = (xSize - tx - 1) % xSize;
+        }
+
+        // Remainder can produce negative values, so wrap around
+        if (tx < 0) {
+            tx += xSize;
+        }
+        if (ty < 0) {
+            ty += ySize;
+        }
+
+        int intervalU = 16 / xSize;
+        int intervalV = 16 / ySize;
+
+        // throw new RuntimeException(index % variationSize+" and "+index/variationSize);
+        int minU = intervalU * tx;
+        int minV = intervalV * ty;
         if (quadGoal != 4) {
             List<BakedQuad> list = new ArrayList<BakedQuad>();
-            list.add(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), new float[]{minU, minV, minU + interval, minV + interval}));
+            list.add(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), new float[] { minU, minV, minU + intervalU, minV + intervalV }));
             return list;
         } else {
             Chisel.debug("V texture complying with quad goal of 4");
-            Chisel.debug(new float[]{minU, minV, minU + interval, minV + interval});
-            return QuadHelper.makeFourQuads(side, sprites[0].getSprite(), new float[]{minU, minV, minU + interval, minV + interval});
+            Chisel.debug(new float[] { minU, minV, minU + intervalU, minV + intervalV });
+            return QuadHelper.makeFourQuads(side, sprites[0].getSprite(), new float[] { minU, minV, minU + intervalU, minV + intervalV });
         }
     }
 }
