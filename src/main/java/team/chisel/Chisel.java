@@ -2,11 +2,15 @@ package team.chisel;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import org.apache.commons.lang3.StringUtils;
+import team.chisel.api.block.ChiselBlockData;
+import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.command.CommandTest;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
+import team.chisel.common.init.BlockRegistry;
 import team.chisel.common.item.ItemChisel;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -36,14 +40,19 @@ public class Chisel implements Reference {
 
     public static ItemChisel itemChisel;
 
-    public static final boolean debug = StringUtils.isEmpty(System.getProperty("chisel.debug"));
+    public static final boolean debug = true;//StringUtils.isEmpty(System.getProperty("chisel.debug"));
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        proxy.construct();
         itemChisel = new ItemChisel();
         GameRegistry.registerItem(itemChisel, "itemChisel");
         GameRegistry.addShapedRecipe(new ItemStack(itemChisel), " x", "s ", 'x', Items.iron_ingot, 's', Items.stick);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
+        ChiselBlockFactory factory = ChiselBlockFactory.newFactory("chisel");
+        ChiselBlockData voidstone = factory.newBlock("voidstone").newVariation("normal").
+                setTextureLocation(new ResourceLocation("chisel", "textures/blocks/voidstone/normal.json")).buildVariation().build();
+        BlockRegistry.registerBlock(voidstone);
         proxy.preInit();
 
     }
@@ -51,6 +60,7 @@ public class Chisel implements Reference {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init();
+        BlockRegistry.init(event);
         ClientCommandHandler.instance.registerCommand(new CommandTest());
 
     }

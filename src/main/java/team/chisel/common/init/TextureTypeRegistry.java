@@ -1,6 +1,13 @@
 package team.chisel.common.init;
 
 import team.chisel.api.render.IBlockRenderType;
+import team.chisel.client.render.type.BlockRenderTypeCTM;
+import team.chisel.client.render.type.BlockRenderTypeCTMH;
+import team.chisel.client.render.type.BlockRenderTypeCTMV;
+import team.chisel.client.render.type.BlockRenderTypeNormal;
+import team.chisel.client.render.type.BlockRenderTypeV;
+import team.chisel.client.render.type.BlockRenderTypeV4;
+import team.chisel.client.render.type.BlockRenderTypeV9;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -11,7 +18,18 @@ import java.util.Map;
  */
 public class TextureTypeRegistry {
 
-    private static Map<String, IBlockRenderType> map = new HashMap<String, IBlockRenderType>();
+    private static Map<String, IBlockRenderType> map;
+
+    static {
+        map = new HashMap<String, IBlockRenderType>();
+        map.put("CTM", new BlockRenderTypeCTM());
+        map.put("NORMAL", new BlockRenderTypeNormal());
+        map.put("CTMH", new BlockRenderTypeCTMH());
+        map.put("CTMV", new BlockRenderTypeCTMV());
+        map.put("V4", new BlockRenderTypeV4());
+        map.put("V9", new BlockRenderTypeV9());
+    }
+
 
     public static void register(String name, IBlockRenderType type){
         String key = name.toUpperCase(Locale.US);

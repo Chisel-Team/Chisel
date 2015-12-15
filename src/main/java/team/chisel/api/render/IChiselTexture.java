@@ -15,9 +15,10 @@ public interface IChiselTexture {
      * Gets a list of quads for the side for this texture
      * @param side The Side
      * @param context The Context
+     * @param quadGoal Amount of quads that should be made
      * @return A List of Quads
      */
-    List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context);
+    List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int quadGoal);
 
     /**
      * Gets the block render type of this texture

@@ -28,6 +28,7 @@ import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.render.ctm.CTM;
+import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.PropertyRenderContextList;
 
 /**
@@ -50,8 +51,15 @@ public class BlockCarvable extends Block implements ICarvable {
 
     private final CTM ctm = CTM.getInstance();
 
+    private int metaVariations;
+
     public BlockCarvable(ChiselBlockData data, int index){
         super(data.material);
+        setCreativeTab(ChiselTabs.tab);
+        this.data = data;
+        if (this.data == null){
+            throw new IllegalArgumentException("Data cannot be null!");
+        }
         this.index = index;
         int max;
         if (data.variations.length >= 16){
@@ -60,12 +68,17 @@ public class BlockCarvable extends Block implements ICarvable {
         else {
             max = data.variations.length;
         }
+        this.metaVariations = max;
         this.metaProperty = PropertyInteger.create("Variation", 0, max);
         this.realBlockState = createRealBlockState(metaProperty);
         setupStates();
         setUnlocalizedName(data.name);
         setHardness(data.hardness);
 
+    }
+
+    public int getTotalMetaVariations(){
+        return this.metaVariations;
     }
 
     @Override
@@ -222,7 +235,16 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public boolean isOpaqueCube() {
-        return this.data.isOpaqueCube;
+        if (this.data != null) {
+            return this.data.isOpaqueCube;
+        }
+        else {
+            return true;
+        }
+    }
+    @Override
+    public boolean isFullBlock(){
+        return isOpaqueCube();
     }
 
     @Override

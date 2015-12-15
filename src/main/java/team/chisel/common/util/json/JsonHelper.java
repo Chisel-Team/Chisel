@@ -2,14 +2,12 @@ package team.chisel.common.util.json;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.ChiselFace;
+import team.chisel.api.render.ChiselFaceRegistry;
+import team.chisel.api.render.ChiselTextureRegistry;
 import team.chisel.api.render.IChiselTexture;
-import team.chisel.common.init.TextureRegistry;
-import team.chisel.common.util.PossibleType;
-
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,13 +41,52 @@ public class JsonHelper {
 //        }
 //    }
 
-    public static ChiselFace getFaceFromResource(ResourceLocation loc){
-
+    private static ChiselFace createFace(ResourceLocation loc){
+        if (isValid(loc) && isCombined(loc)){
+            JsonObject object = objectCache.get(loc);
+            JsonFace face = gson.fromJson(object, JsonFace.class);
+            ChiselFace cFace = face.get();
+            ChiselFaceRegistry.putFace(loc, cFace);
+            return cFace;
+        }
+        else {
+            throw new IllegalArgumentException("ResourceLocation "+loc+" is not a valid combined texture!");
+        }
     }
 
-    public static IChiselTexture getTextureFromResource(ResourceLocation loc){
+    private static IChiselTexture createTexture(ResourceLocation loc){
+        if (isValid(loc) && !isCombined(loc)){
+            JsonObject object = objectCache.get(loc);
+            JsonTexture texture = gson.fromJson(object, JsonTexture.class);
+            IChiselTexture cTexture = texture.get();
+            ChiselTextureRegistry.putTexture(loc, cTexture);
+            return cTexture;
 
+        }
+        else {
+            throw new IllegalArgumentException("ResourceLocation "+loc+" is not a valid noncombined texture!");
+        }
     }
+
+    public static ChiselFace getOrCreateFace(ResourceLocation loc){
+        if (ChiselFaceRegistry.isFace(loc)){
+            return ChiselFaceRegistry.getFace(loc);
+        }
+        else {
+            return createFace(loc);
+        }
+    }
+
+    public static IChiselTexture getOrCreateTexture(ResourceLocation loc){
+        if (ChiselTextureRegistry.isTex(loc)){
+            return ChiselTextureRegistry.getTex(loc);
+        }
+        else {
+            return createTexture(loc);
+        }
+    }
+
+
 
     public static boolean isValid(ResourceLocation loc){
         if (objectCache.containsKey(loc)){
@@ -58,15 +95,26 @@ public class JsonHelper {
         try {
             JsonObject object = gson.fromJson(new InputStreamReader(Minecraft.getMinecraft().
                     getResourceManager().getResource(loc).getInputStream()), JsonObject.class);
-            if (object.get("type") != null){
+            if (object.has("children") || object.has("textures")){
                 objectCache.put(loc, object);
+                return true;
+            }
+            else {
+                return false;
             }
         } catch (Exception exception){
-            throw new RuntimeException(exception);
+            exception.printStackTrace();
+            return false;
         }
     }
 
     public static boolean isCombined(ResourceLocation loc){
-
+        if (isValid(loc)){
+            JsonObject object = objectCache.get(loc);
+            return object.has("children") && !object.has("textures");
+        }
+        else {
+            return false;
+        }
     }
 }

@@ -14,6 +14,7 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
+import team.chisel.Chisel;
 import team.chisel.api.block.ClientVariationData;
 import team.chisel.api.render.ChiselFace;
 import team.chisel.api.render.IChiselTexture;
@@ -86,6 +87,7 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
 
     @Override
     public IBakedModel handleBlockState(IBlockState stateIn){
+        Chisel.debug("Handling blockstate "+stateIn);
         if (stateIn.getBlock() instanceof BlockCarvable && stateIn instanceof IExtendedBlockState){
             IExtendedBlockState state = (IExtendedBlockState) stateIn;
             BlockCarvable block = (BlockCarvable) state.getBlock();

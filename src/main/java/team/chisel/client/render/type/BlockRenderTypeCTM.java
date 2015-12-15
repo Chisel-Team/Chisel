@@ -1,11 +1,11 @@
 package team.chisel.client.render.type;
 
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.texture.ChiselTextureCTM;
 import team.chisel.common.util.EnumConnection;
@@ -20,7 +20,7 @@ import java.util.List;
 public class BlockRenderTypeCTM implements IBlockRenderType {
 
     @Override
-    public IChiselTexture makeTexture(TextureAtlasSprite... sprites){
+    public IChiselTexture makeTexture(TextureSpriteCallback... sprites){
         return new ChiselTextureCTM(this, sprites);
     }
 
@@ -33,5 +33,10 @@ public class BlockRenderTypeCTM implements IBlockRenderType {
             }
         }
         return new CTMBlockRenderContext(connections);
+    }
+
+    @Override
+    public int getQuadsPerSide(){
+        return 4;
     }
 }

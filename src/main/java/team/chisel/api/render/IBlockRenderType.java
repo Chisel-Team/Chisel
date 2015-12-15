@@ -1,6 +1,5 @@
 package team.chisel.api.render;
 
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
@@ -15,7 +14,7 @@ public interface IBlockRenderType {
      * @param sprites The Sprites
      * @return A Chisel Texture
      */
-    IChiselTexture makeTexture(TextureAtlasSprite... sprites);
+    IChiselTexture makeTexture(TextureSpriteCallback... sprites);
 
     /**
      * Gets the block render context for this block
@@ -24,4 +23,10 @@ public interface IBlockRenderType {
      * @return The block render context
      */
     IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos);
+
+    /**
+     * Gets the amount of quads per side
+     * @return The Amount of quads per side
+     */
+    int getQuadsPerSide();
 }

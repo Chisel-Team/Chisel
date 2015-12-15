@@ -1,18 +1,17 @@
 package team.chisel.common.util.json;
 
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.client.TextureStitcher;
 import team.chisel.common.init.TextureTypeRegistry;
-import team.chisel.common.util.PossibleType;
+import team.chisel.api.render.TextureSpriteCallback;
 
 
 /**
  * Raw version of IChiselTexture
  */
-public class JsonTexture extends JsonObjectBase<PossibleType<IChiselTexture, CombinedChiselTexture>, TextureMap> {
+public class JsonTexture extends JsonObjectBase<IChiselTexture> {
 
     /**
      * The String for the type of texture
@@ -27,55 +26,27 @@ public class JsonTexture extends JsonObjectBase<PossibleType<IChiselTexture, Com
      */
     private String[] textures;
 
-    /**
-     * If this is the type COMBINED then these are the identifiers of the child textures
-     */
-    private String[] children;
-
 
     @Override
-    protected PossibleType<IChiselTexture, CombinedChiselTexture> create(TextureMap map) {
-
-        if (isCombined()){
-            if (!checkNull(textures)){
-                throw new IllegalArgumentException("COMBINED texture type can not have any textures!");
-            }
-            if (checkNull(children)){
-                throw new IllegalArgumentException("COMBINED texture type must have children textures!");
-            }
-            CombinedChiselTexture combined = new CombinedChiselTexture();
-            for (String child : children){
-                ResourceLocation loc = new ResourceLocation(child);
-                combined.addTexture();
-            }
-            return PossibleType.makeSecond(combined);
+    protected IChiselTexture create() {
+        if (checkNull(textures)){
+            throw new IllegalArgumentException("Texture must have at least one texture!");
         }
-        else {
-            if (checkNull(textures)){
-                throw new IllegalArgumentException("Texture must have at least one texture!");
-            }
-            if (!checkNull(children)){
-                throw new IllegalArgumentException("Non Combined texture cannot have children!");
-            }
-            if (!TextureTypeRegistry.isValid(this.type)){
-                throw new IllegalArgumentException("Texture Type "+this.type+" is not valid");
-            }
-            TextureAtlasSprite[] sprites = new TextureAtlasSprite[this.textures.length];
-            for (int i = 0 ; i < this.textures.length ; i++){
-                String tex = this.textures[i];
-                sprites[i] = map.registerSprite(new ResourceLocation(tex));
-            }
-            IBlockRenderType type = TextureTypeRegistry.getType(this.type);
-            IChiselTexture tex = type.makeTexture(sprites);
-            return PossibleType.makeFirst(tex);
+        if (!TextureTypeRegistry.isValid(this.type)){
+            throw new IllegalArgumentException("Texture Type "+this.type+" is not valid");
         }
+        TextureSpriteCallback[] callbacks = new TextureSpriteCallback[this.textures.length];
+        for (int i = 0 ; i < this.textures.length ; i++){
+            String tex = this.textures[i];
+            callbacks[i] = new TextureSpriteCallback(new ResourceLocation(tex));
+            TextureStitcher.register(callbacks[i]);
+        }
+        IBlockRenderType type = TextureTypeRegistry.getType(this.type);
+        return type.makeTexture(callbacks);
     }
 
     private static boolean checkNull(Object[] array){
         return array == null || array.length == 0;
     }
 
-    public boolean isCombined(){
-        return this.type.equalsIgnoreCase("COMBINED");
-    }
 }

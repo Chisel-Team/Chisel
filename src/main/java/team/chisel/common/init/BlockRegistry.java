@@ -1,8 +1,11 @@
 package team.chisel.common.init;
 
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import team.chisel.Chisel;
 import team.chisel.api.block.ChiselBlockData;
 import team.chisel.api.block.VariationData;
+import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.block.BlockCarvable;
 
 import java.util.HashMap;
@@ -18,6 +21,9 @@ public class BlockRegistry {
 
 
     public static void registerBlock(ChiselBlockData data){
+        if (data == null){
+            throw new IllegalArgumentException("Block Data cannot be null!");
+        }
         if (!rawBlockData.containsKey(data.name)){
             rawBlockData.put(data.name, data);
         }
@@ -26,15 +32,18 @@ public class BlockRegistry {
         }
     }
 
-    public static void preInit(FMLPreInitializationEvent event){
+    public static void init(FMLInitializationEvent event){
         for (ChiselBlockData data : rawBlockData.values()){
+            if (data == null){
+                Chisel.debug("Skipping block cause null data?");
+                continue;
+            }
             VariationData[][] split = splitVariationArray(data.variations);
             for (int i = 0 ; i < split.length ; i++){
                 VariationData[] vars = split[i];
                 BlockCarvable block = new BlockCarvable(data, i);
-                for (VariationData var : vars){
-
-                }
+                GameRegistry.registerBlock(block, block.getName());
+                ChiselModelRegistry.register(block);
             }
 
         }

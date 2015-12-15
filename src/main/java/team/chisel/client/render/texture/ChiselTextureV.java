@@ -1,13 +1,12 @@
 package team.chisel.client.render.texture;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 import team.chisel.api.render.IBlockRenderContext;
+import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctx.ModuleBlockRenderContext;
 import team.chisel.client.render.type.BlockRenderTypeV;
-import team.chisel.common.block.BlockCarvable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ import java.util.List;
  */
 public class ChiselTextureV extends AbstractChiselTexture {
 
-    public ChiselTextureV(BlockRenderTypeV type, TextureAtlasSprite[] sprites){
+    public ChiselTextureV(BlockRenderTypeV type, TextureSpriteCallback[] sprites){
         super(type, sprites);
     }
 
@@ -54,7 +53,7 @@ public class ChiselTextureV extends AbstractChiselTexture {
         int minV = interval * (index / variationSize);
 
         List<BakedQuad> list = new ArrayList<BakedQuad>();
-        list.add(QuadHelper.makeUVFaceQuad(side, sprites[0], new float[]{minU, minV, minU + interval, minV + interval}));
+        list.add(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), new float[]{minU, minV, minU + interval, minV + interval}));
         return list;
     }
 }

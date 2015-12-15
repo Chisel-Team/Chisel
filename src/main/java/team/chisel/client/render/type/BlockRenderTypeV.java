@@ -2,6 +2,7 @@ package team.chisel.client.render.type;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.texture.ChiselTextureV;
 
 /**
@@ -14,7 +15,12 @@ public class BlockRenderTypeV extends BlockRenderTypeWithModules {
     }
 
     @Override
-    public IChiselTexture makeTexture(TextureAtlasSprite... sprites){
+    public IChiselTexture makeTexture(TextureSpriteCallback... sprites){
         return new ChiselTextureV(this, sprites);
+    }
+
+    @Override
+    public int getQuadsPerSide(){
+        return 1;
     }
 }

@@ -1,6 +1,5 @@
 package team.chisel.common.util.json;
 
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.Chisel;
 import team.chisel.api.render.ChiselFace;
@@ -10,7 +9,7 @@ import team.chisel.api.render.ChiselTextureRegistry;
 /**
  * Json version of ChiselFace
  */
-public class JsonFace extends JsonObjectBase<ChiselFace, TextureMap> {
+public class JsonFace extends JsonObjectBase<ChiselFace> {
 
     /**
      * If this is the type COMBINED then these are the identifiers of the child textures
@@ -19,7 +18,7 @@ public class JsonFace extends JsonObjectBase<ChiselFace, TextureMap> {
 
 
     @Override
-    protected ChiselFace create(TextureMap map) {
+    protected ChiselFace create() {
         if (checkNull(children)) {
             throw new IllegalArgumentException("COMBINED texture type must have children textures!");
         }
@@ -32,9 +31,9 @@ public class JsonFace extends JsonObjectBase<ChiselFace, TextureMap> {
                 face.addTexture(ChiselTextureRegistry.getTex(loc));
             } else if (JsonHelper.isValid(loc)) {
                 if (JsonHelper.isCombined(loc)) {
-                    face.addChildFace(JsonHelper.getFaceFromResource(loc));
+                    face.addChildFace(JsonHelper.getOrCreateFace(loc));
                 } else {
-                    face.addTexture(JsonHelper.getTextureFromResource(loc));
+                    face.addTexture(JsonHelper.getOrCreateTexture(loc));
                 }
             } else {
                 Chisel.debug("Skipping child " + child + " because it is invalid");
