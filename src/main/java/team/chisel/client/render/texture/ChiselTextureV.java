@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
-import team.chisel.Chisel;
+import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
@@ -20,8 +20,8 @@ import team.chisel.client.render.type.BlockRenderTypeV;
  */
 public class ChiselTextureV extends AbstractChiselTexture {
 
-    public ChiselTextureV(BlockRenderTypeV type, TextureSpriteCallback[] sprites){
-        super(type, sprites);
+    public ChiselTextureV(BlockRenderTypeV type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+        super(type, layer, sprites);
     }
 
     @Override

@@ -1,7 +1,6 @@
 {
-	"children" :[
+	"children":[
 		"chisel:textures/blocks/voidstone/background.json",
 		"chisel:textures/blocks/voidstone/normal_border.json"
-	],
-	"layer":"Cutout"
+	]
 }

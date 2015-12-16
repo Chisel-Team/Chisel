@@ -1,11 +1,16 @@
 package team.chisel.common.util.json;
 
+import java.util.Locale;
+
+import javax.annotation.Nullable;
+
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.TextureStitcher;
 import team.chisel.common.init.TextureTypeRegistry;
-import team.chisel.api.render.TextureSpriteCallback;
 
 
 /**
@@ -26,6 +31,8 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture> {
      */
     private String[] textures;
 
+    @Nullable
+    private String layer;
 
     @Override
     protected IChiselTexture create() {
@@ -42,7 +49,8 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture> {
             TextureStitcher.register(callbacks[i]);
         }
         IBlockRenderType type = TextureTypeRegistry.getType(this.type);
-        return type.makeTexture(callbacks);
+        EnumWorldBlockLayer layerObj = layer == null ? EnumWorldBlockLayer.SOLID : EnumWorldBlockLayer.valueOf(layer.toUpperCase(Locale.US));
+        return type.makeTexture(layerObj, callbacks);
     }
 
     private static boolean checkNull(Object[] array){

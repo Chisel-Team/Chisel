@@ -7,9 +7,9 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumWorldBlockLayer;
 
 /**
- * Chisel Face, basicly a list of IChiselTexture's
+ * Chisel Face, basically a list of IChiselTexture's
  */
-public class ChiselFace {
+public final class ChiselFace {
 
     private List<IChiselTexture> textureList;
 
@@ -17,13 +17,16 @@ public class ChiselFace {
 
     private EnumWorldBlockLayer layer;
 
-    public ChiselFace(){
-        this.textureList = new ArrayList<IChiselTexture>();
-        this.childFaces = new ArrayList<ChiselFace>();
-        this.layer = EnumWorldBlockLayer.SOLID;
+    public ChiselFace() {
+        this(new ArrayList<IChiselTexture>(), new ArrayList<ChiselFace>(), EnumWorldBlockLayer.SOLID);
     }
 
-    public ChiselFace(List<IChiselTexture> textureList, List<ChiselFace> childFaces, EnumWorldBlockLayer layer){
+    public ChiselFace(EnumWorldBlockLayer layer) {
+        this();
+        setLayer(layer);
+    }
+
+    public ChiselFace(List<IChiselTexture> textureList, List<ChiselFace> childFaces, EnumWorldBlockLayer layer) {
         this.textureList = textureList;
         this.childFaces = childFaces;
         this.layer = layer;

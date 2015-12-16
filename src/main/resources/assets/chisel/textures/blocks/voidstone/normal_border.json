@@ -1,5 +1,8 @@
 {
 	"type":"CTM",
-	"textures":["chisel:blocks/voidstone/bevel",
-	"chisel:blocks/voidstone/bevel-ctm"]
+	"textures":[
+		"chisel:blocks/voidstone/bevel",
+		"chisel:blocks/voidstone/bevel-ctm"
+	],
+	"layer":"cutout"
 }

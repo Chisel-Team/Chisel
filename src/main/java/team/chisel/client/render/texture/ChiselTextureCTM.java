@@ -1,16 +1,17 @@
 package team.chisel.client.render.texture;
 
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctm.CTM;
-import team.chisel.client.render.type.BlockRenderTypeCTM;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
-
-import java.util.Arrays;
-import java.util.List;
+import team.chisel.client.render.type.BlockRenderTypeCTM;
 
 /**
  * Chisel Texture for CTM
@@ -18,8 +19,8 @@ import java.util.List;
 public class ChiselTextureCTM extends AbstractChiselTexture {
 
 
-    public ChiselTextureCTM(BlockRenderTypeCTM type, TextureSpriteCallback[] sprites){
-        super(type, sprites);
+    public ChiselTextureCTM(BlockRenderTypeCTM type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+        super(type, layer, sprites);
     }
 
     @Override

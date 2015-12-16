@@ -1,6 +1,7 @@
 package team.chisel.api.render;
 
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 
 /**
@@ -11,10 +12,12 @@ public interface IBlockRenderType {
 
     /**
      * Make a Chisel Texture from a list of sprites
+     * @param layer The texture layer
      * @param sprites The Sprites
      * @return A Chisel Texture
+     * TODO This should probably take a bean, so that adding extra stuff later doesn't break API
      */
-    IChiselTexture makeTexture(TextureSpriteCallback... sprites);
+    IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites);
 
     /**
      * Gets the block render context for this block

@@ -1,13 +1,16 @@
 package team.chisel.common.util.json;
 
+import java.util.List;
+
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.Chisel;
 import team.chisel.api.render.ChiselFace;
 import team.chisel.api.render.ChiselFaceRegistry;
 import team.chisel.api.render.ChiselTextureRegistry;
+import team.chisel.api.render.IChiselTexture;
 
-import java.util.Locale;
+import com.google.common.base.Preconditions;
 
 /**
  * Json version of ChiselFace
@@ -19,14 +22,9 @@ public class JsonFace extends JsonObjectBase<ChiselFace> {
      */
     private String[] children;
 
-    private String layer;
-
-
     @Override
     protected ChiselFace create() {
-        if (checkNull(children)) {
-            throw new IllegalArgumentException("COMBINED texture type must have children textures!");
-        }
+        Preconditions.checkNotNull(children, "COMBINED texture type must have children textures!");
         ChiselFace face = new ChiselFace();
         for (String child : children) {
             ResourceLocation loc = new ResourceLocation(child);
@@ -44,21 +42,18 @@ public class JsonFace extends JsonObjectBase<ChiselFace> {
                 Chisel.debug("Skipping child " + child + " because it is invalid");
             }
         }
-        if (layer != null){
-            if (layer.equalsIgnoreCase("Cutout")){
-                face.setLayer(EnumWorldBlockLayer.CUTOUT);
-            }
-            else if (layer.equalsIgnoreCase("Mipped Cutout") || layer.equalsIgnoreCase("Mipped_Cutout")){
-                face.setLayer(EnumWorldBlockLayer.CUTOUT_MIPPED);
-            }
-            else if (layer.equalsIgnoreCase("Translucent")){
-                face.setLayer(EnumWorldBlockLayer.TRANSLUCENT);
-            }
-        }
+        face.setLayer(getLayer(face.getTextureList()));
         return face;
     }
 
-    private static boolean checkNull(Object[] array) {
-        return array == null || array.length == 0;
+    private EnumWorldBlockLayer getLayer(List<IChiselTexture> textures) {
+        EnumWorldBlockLayer layer = EnumWorldBlockLayer.SOLID;
+        for (IChiselTexture tex : textures) {
+            EnumWorldBlockLayer texLayer = tex.getLayer();
+            if (texLayer.ordinal() > layer.ordinal()) {
+                layer = texLayer;
+            }
+        }
+        return layer;
     }
 }

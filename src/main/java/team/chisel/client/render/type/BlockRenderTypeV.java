@@ -1,5 +1,6 @@
 package team.chisel.client.render.type;
 
+import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.texture.ChiselTextureV;
@@ -14,8 +15,8 @@ public class BlockRenderTypeV extends BlockRenderTypeSheet {
     }
 
     @Override
-    public IChiselTexture makeTexture(TextureSpriteCallback... sprites){
-        return new ChiselTextureV(this, sprites);
+    public IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+        return new ChiselTextureV(this, layer, sprites);
     }
 
     @Override

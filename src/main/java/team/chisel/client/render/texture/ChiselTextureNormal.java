@@ -1,23 +1,23 @@
 package team.chisel.client.render.texture;
 
+import java.util.Arrays;
+import java.util.List;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.EnumFacing;
-import team.chisel.Chisel;
+import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.type.BlockRenderTypeNormal;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Chisel texture for a normal texture
  */
 public class ChiselTextureNormal extends AbstractChiselTexture {
 
-    public ChiselTextureNormal(BlockRenderTypeNormal type, TextureSpriteCallback[] sprites){
-        super(type, sprites);
+    public ChiselTextureNormal(BlockRenderTypeNormal type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+        super(type, layer, sprites);
     }
 
     @Override

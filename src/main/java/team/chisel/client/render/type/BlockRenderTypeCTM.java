@@ -1,6 +1,7 @@
 package team.chisel.client.render.type;
 
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
 import team.chisel.api.render.IBlockRenderType;
@@ -20,8 +21,8 @@ import java.util.List;
 public class BlockRenderTypeCTM implements IBlockRenderType {
 
     @Override
-    public IChiselTexture makeTexture(TextureSpriteCallback... sprites){
-        return new ChiselTextureCTM(this, sprites);
+    public IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+        return new ChiselTextureCTM(this, layer, sprites);
     }
 
     @Override
