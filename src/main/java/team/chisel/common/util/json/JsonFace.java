@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ResourceLocation;
-import team.chisel.Chisel;
 import team.chisel.api.render.ChiselFace;
 import team.chisel.api.render.ChiselFaceRegistry;
 import team.chisel.api.render.ChiselTextureRegistry;
@@ -32,14 +31,12 @@ public class JsonFace extends JsonObjectBase<ChiselFace> {
                 face.addChildFace(ChiselFaceRegistry.getFace(loc));
             } else if (ChiselTextureRegistry.isTex(loc)) {
                 face.addTexture(ChiselTextureRegistry.getTex(loc));
-            } else if (JsonHelper.isValid(loc)) {
+            } else {
                 if (JsonHelper.isCombined(loc)) {
                     face.addChildFace(JsonHelper.getOrCreateFace(loc));
                 } else {
                     face.addTexture(JsonHelper.getOrCreateTexture(loc));
                 }
-            } else {
-                Chisel.debug("Skipping child " + child + " because it is invalid");
             }
         }
         face.setLayer(getLayer(face.getTextureList()));

@@ -1,120 +1,92 @@
 package team.chisel.common.util.json;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.ChiselFace;
 import team.chisel.api.render.ChiselFaceRegistry;
 import team.chisel.api.render.ChiselTextureRegistry;
 import team.chisel.api.render.IChiselTexture;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 
-/**
- * Helps with json stuff
- */
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 public class JsonHelper {
 
     private static final Gson gson = new Gson();
 
     private static Map<ResourceLocation, JsonObject> objectCache = new HashMap<ResourceLocation, JsonObject>();
 
-//    public static PossibleType<IChiselTexture, CombinedChiselTexture> getTextureFromResource(ResourceLocation loc){
-//        try {
-//            if (TextureRegistry.isTex(loc)){
-//                return TextureRegistry.getPossible(loc);
-//            }
-//            JsonTexture tex = gson.fromJson(new InputStreamReader(Minecraft.getMinecraft().
-//                    getResourceManager().getResource(loc).getInputStream()), JsonTexture.class);
-//            PossibleType<IChiselTexture, CombinedChiselTexture> type = tex.get(Minecraft.getMinecraft().getTextureMapBlocks());
-//            if (type.isFirst()){
-//                TextureRegistry.registerTexture(loc, type.getFirst());
-//            }
-//            else {
-//                TextureRegistry.registerTexture(loc, type.getSecond());
-//            }
-//            return type;
-//        } catch (Exception exception){
-//            throw new RuntimeException(exception);
-//        }
-//    }
+    private static ChiselFace createFace(ResourceLocation loc) {
+        checkCombined(true, loc);
 
-    private static ChiselFace createFace(ResourceLocation loc){
-        if (isValid(loc) && isCombined(loc)){
-            JsonObject object = objectCache.get(loc);
-            JsonFace face = gson.fromJson(object, JsonFace.class);
-            ChiselFace cFace = face.get();
-            ChiselFaceRegistry.putFace(loc, cFace);
-            return cFace;
-        }
-        else {
-            throw new IllegalArgumentException("ResourceLocation "+loc+" is not a valid combined texture!");
-        }
+        JsonObject object = objectCache.get(loc);
+        JsonFace face = gson.fromJson(object, JsonFace.class);
+        ChiselFace cFace = face.get();
+        ChiselFaceRegistry.putFace(loc, cFace);
+        return cFace;
     }
 
-    private static IChiselTexture createTexture(ResourceLocation loc){
-        if (isValid(loc) && !isCombined(loc)){
-            JsonObject object = objectCache.get(loc);
-            JsonTexture texture = gson.fromJson(object, JsonTexture.class);
-            IChiselTexture cTexture = texture.get();
-            ChiselTextureRegistry.putTexture(loc, cTexture);
-            return cTexture;
+    private static IChiselTexture createTexture(ResourceLocation loc) {
+        checkCombined(false, loc);
 
-        }
-        else {
-            throw new IllegalArgumentException("ResourceLocation "+loc+" is not a valid noncombined texture!");
-        }
+        JsonObject object = objectCache.get(loc);
+        JsonTexture texture = gson.fromJson(object, JsonTexture.class);
+        IChiselTexture cTexture = texture.get();
+        ChiselTextureRegistry.putTexture(loc, cTexture);
+        return cTexture;
     }
 
-    public static ChiselFace getOrCreateFace(ResourceLocation loc){
-        if (ChiselFaceRegistry.isFace(loc)){
+    public static ChiselFace getOrCreateFace(ResourceLocation loc) {
+        if (ChiselFaceRegistry.isFace(loc)) {
             return ChiselFaceRegistry.getFace(loc);
-        }
-        else {
+        } else {
             return createFace(loc);
         }
     }
 
-    public static IChiselTexture getOrCreateTexture(ResourceLocation loc){
-        if (ChiselTextureRegistry.isTex(loc)){
+    public static IChiselTexture getOrCreateTexture(ResourceLocation loc) {
+        if (ChiselTextureRegistry.isTex(loc)) {
             return ChiselTextureRegistry.getTex(loc);
-        }
-        else {
+        } else {
             return createTexture(loc);
         }
     }
 
-
-
-    public static boolean isValid(ResourceLocation loc){
-        if (objectCache.containsKey(loc)){
-            return true;
+    public static void checkValid(ResourceLocation loc) {
+        if (objectCache.containsKey(loc)) {
+            return;
         }
         try {
-            JsonObject object = gson.fromJson(new InputStreamReader(Minecraft.getMinecraft().
-                    getResourceManager().getResource(loc).getInputStream()), JsonObject.class);
-            if (object.has("children") || object.has("textures")){
+            JsonObject object = gson.fromJson(new InputStreamReader(Minecraft.getMinecraft().getResourceManager().getResource(loc).getInputStream()), JsonObject.class);
+            if (object.has("children") || object.has("textures")) {
                 objectCache.put(loc, object);
-                return true;
+            } else {
+                throw new IllegalArgumentException(loc + " does not have a 'children' and/or 'textures' field!");
             }
-            else {
-                return false;
-            }
-        } catch (Exception exception){
-            exception.printStackTrace();
-            return false;
+        } catch (Exception exception) {
+            throw new IllegalArgumentException(exception);
         }
     }
+    
+    public static boolean isCombined(ResourceLocation loc) {
+        checkValid(loc);
 
-    public static boolean isCombined(ResourceLocation loc){
-        if (isValid(loc)){
-            JsonObject object = objectCache.get(loc);
-            return object.has("children") && !object.has("textures");
+        JsonObject object = objectCache.get(loc);
+        return object.has("children") && !object.has("textures");
+    }
+
+    public static void checkCombined(boolean isCombined, ResourceLocation loc) {
+        boolean check = isCombined(loc);
+        
+        if (!isCombined) {
+            check = !check;
         }
-        else {
-            return false;
+        if (!check) {
+            throw new IllegalArgumentException(loc.toString() + " must " + (isCombined ? "be" : "not be") + " a combined texture!");
         }
     }
 }

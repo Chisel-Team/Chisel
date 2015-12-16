@@ -12,6 +12,8 @@ import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.TextureStitcher;
 import team.chisel.common.init.TextureTypeRegistry;
 
+import com.google.common.base.Preconditions;
+
 
 /**
  * Raw version of IChiselTexture
@@ -36,12 +38,8 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture> {
 
     @Override
     protected IChiselTexture create() {
-        if (checkNull(textures)){
-            throw new IllegalArgumentException("Texture must have at least one texture!");
-        }
-        if (!TextureTypeRegistry.isValid(this.type)){
-            throw new IllegalArgumentException("Texture Type "+this.type+" is not valid");
-        }
+        Preconditions.checkNotNull(textures, "Texture must have at least one texture!");
+        Preconditions.checkArgument(TextureTypeRegistry.isValid(this.type), "Texture Type "+this.type+" is not valid");
         TextureSpriteCallback[] callbacks = new TextureSpriteCallback[this.textures.length];
         for (int i = 0 ; i < this.textures.length ; i++){
             String tex = this.textures[i];
@@ -52,9 +50,4 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture> {
         EnumWorldBlockLayer layerObj = layer == null ? EnumWorldBlockLayer.SOLID : EnumWorldBlockLayer.valueOf(layer.toUpperCase(Locale.US));
         return type.makeTexture(layerObj, callbacks);
     }
-
-    private static boolean checkNull(Object[] array){
-        return array == null || array.length == 0;
-    }
-
 }
