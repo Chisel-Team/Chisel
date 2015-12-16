@@ -18,7 +18,6 @@ import team.chisel.client.render.type.BlockRenderTypeCTM;
  */
 public class ChiselTextureCTM extends AbstractChiselTexture {
 
-
     public ChiselTextureCTM(BlockRenderTypeCTM type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
         super(type, layer, sprites);
     }

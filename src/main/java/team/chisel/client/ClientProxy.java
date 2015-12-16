@@ -7,9 +7,11 @@ import team.chisel.api.block.ChiselBlockBuilder;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.CommonProxy;
+import team.chisel.common.init.TextureTypeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -33,12 +35,13 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void construct(){
+    public void construct(FMLPreInitializationEvent event){
         ChiselBlockBuilder.VariationBuilder.setInterface(new ChiselBuilderClientImpl());
+        TextureTypeRegistry.preInit(event);
     }
 
     @Override
-    public void preInit() {
+    public void preInit(FMLPreInitializationEvent event) {
 
         ModelLoader.setCustomModelResourceLocation(Chisel.itemChisel, 0, new ModelResourceLocation(MOD_ID + ":itemChisel", "inventory"));
         //ModelBakery.addVariantName(Chisel.itemChisel, MOD_ID+":itemChisel");
