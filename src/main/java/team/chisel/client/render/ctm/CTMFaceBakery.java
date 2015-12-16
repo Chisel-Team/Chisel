@@ -191,6 +191,6 @@ public class CTMFaceBakery extends FaceBakery implements Reference {
 
     private BakedQuad makeRealQuad(QuadPos pos, EnumFacing side, TextureAtlasSprite s, int quad) {
         return makeBakedQuad(pos.from, pos.to, new BlockPartFace(side, -1, s.getIconName(), new BlockFaceUV(CTM.uvs[quad], 0)),
-                s, side, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), side.getAxis(), 0, false), false, false);
+                s, side, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), side.getAxis(), 0, false), false, true);
     }
 }
