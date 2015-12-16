@@ -25,9 +25,4 @@ public class BlockRenderTypeNormal implements IBlockRenderType {
     public IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos){
         return null;
     }
-
-    @Override
-    public int getQuadsPerSide(){
-        return 1;
-    }
 }

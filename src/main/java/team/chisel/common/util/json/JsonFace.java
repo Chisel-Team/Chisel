@@ -22,20 +22,20 @@ public class JsonFace extends JsonObjectBase<ChiselFace> {
     private String[] children;
 
     @Override
-    protected ChiselFace create() {
+    protected ChiselFace create(ResourceLocation loc) {
         Preconditions.checkNotNull(children, "COMBINED texture type must have children textures!");
         ChiselFace face = new ChiselFace();
         for (String child : children) {
-            ResourceLocation loc = new ResourceLocation(child);
-            if (ChiselFaceRegistry.isFace(loc)) {
-                face.addChildFace(ChiselFaceRegistry.getFace(loc));
-            } else if (ChiselTextureRegistry.isTex(loc)) {
-                face.addTexture(ChiselTextureRegistry.getTex(loc));
+            ResourceLocation childLoc = new ResourceLocation(child);
+            if (ChiselFaceRegistry.isFace(childLoc)) {
+                face.addChildFace(ChiselFaceRegistry.getFace(childLoc));
+            } else if (ChiselTextureRegistry.isTex(childLoc)) {
+                face.addTexture(ChiselTextureRegistry.getTex(childLoc));
             } else {
-                if (JsonHelper.isCombined(loc)) {
-                    face.addChildFace(JsonHelper.getOrCreateFace(loc));
+                if (JsonHelper.isCombined(childLoc)) {
+                    face.addChildFace(JsonHelper.getOrCreateFace(childLoc));
                 } else {
-                    face.addTexture(JsonHelper.getOrCreateTexture(loc));
+                    face.addTexture(JsonHelper.getOrCreateTexture(childLoc));
                 }
             }
         }

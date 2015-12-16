@@ -37,16 +37,29 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture> {
     private String layer;
 
     @Override
-    protected IChiselTexture create() {
-        Preconditions.checkNotNull(textures, "Texture must have at least one texture!");
-        Preconditions.checkArgument(TextureTypeRegistry.isValid(this.type), "Texture Type "+this.type+" is not valid");
-        TextureSpriteCallback[] callbacks = new TextureSpriteCallback[this.textures.length];
-        for (int i = 0 ; i < this.textures.length ; i++){
-            String tex = this.textures[i];
-            callbacks[i] = new TextureSpriteCallback(new ResourceLocation(tex));
-            TextureStitcher.register(callbacks[i]);
-        }
+    protected IChiselTexture create(ResourceLocation loc) {
+        Preconditions.checkArgument(TextureTypeRegistry.isValid(this.type), "Texture Type " + this.type + " is not valid");
+
         IBlockRenderType type = TextureTypeRegistry.getType(this.type);
+        Preconditions.checkArgument(textures != null || type.requiredTextures() == 1, "Texture type %s requires %d textures, the texture name can only be inferred for textures that require 1.",
+                this.type, type.requiredTextures());
+        if (textures != null) {
+            Preconditions
+                    .checkArgument(textures.length == type.requiredTextures(), "Texture type %s requires %d textures. Only %d were provided.", this.type, type.requiredTextures(), textures.length);
+        }
+
+        TextureSpriteCallback[] callbacks = new TextureSpriteCallback[type.requiredTextures()];
+        if (textures == null) {
+            callbacks[0] = new TextureSpriteCallback(new ResourceLocation(loc.getResourceDomain(), loc.getResourcePath().replace("textures/", "").replace(".json", "")));
+            TextureStitcher.register(callbacks[0]);
+        } else {
+            for (int i = 0; i < this.textures.length; i++) {
+                String tex = this.textures[i];
+                callbacks[i] = new TextureSpriteCallback(new ResourceLocation(tex));
+                TextureStitcher.register(callbacks[i]);
+            }
+        }
+        
         EnumWorldBlockLayer layerObj = layer == null ? EnumWorldBlockLayer.SOLID : EnumWorldBlockLayer.valueOf(layer.toUpperCase(Locale.US));
         return type.makeTexture(layerObj, callbacks);
     }

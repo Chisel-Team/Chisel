@@ -40,4 +40,9 @@ public class BlockRenderTypeCTM implements IBlockRenderType {
     public int getQuadsPerSide(){
         return 4;
     }
+    
+    @Override
+    public int requiredTextures() {
+        return 2;
+    }
 }

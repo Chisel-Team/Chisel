@@ -1,6 +1,8 @@
 package team.chisel.common.init;
 
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import java.util.HashMap;
+import java.util.Map;
+
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.Chisel;
@@ -11,17 +13,12 @@ import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Registry for chisel blocks
  */
 public class BlockRegistry {
 
     private static Map<String, ChiselBlockData> rawBlockData = new HashMap<String, ChiselBlockData>();
-
-
 
     public static void registerBlock(ChiselBlockData data){
         if (data == null){

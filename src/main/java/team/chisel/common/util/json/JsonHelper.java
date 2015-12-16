@@ -25,7 +25,7 @@ public class JsonHelper {
 
         JsonObject object = objectCache.get(loc);
         JsonFace face = gson.fromJson(object, JsonFace.class);
-        ChiselFace cFace = face.get();
+        ChiselFace cFace = face.get(loc);
         ChiselFaceRegistry.putFace(loc, cFace);
         return cFace;
     }
@@ -35,7 +35,7 @@ public class JsonHelper {
 
         JsonObject object = objectCache.get(loc);
         JsonTexture texture = gson.fromJson(object, JsonTexture.class);
-        IChiselTexture cTexture = texture.get();
+        IChiselTexture cTexture = texture.get(loc);
         ChiselTextureRegistry.putTexture(loc, cTexture);
         return cTexture;
     }
@@ -62,10 +62,10 @@ public class JsonHelper {
         }
         try {
             JsonObject object = gson.fromJson(new InputStreamReader(Minecraft.getMinecraft().getResourceManager().getResource(loc).getInputStream()), JsonObject.class);
-            if (object.has("children") || object.has("textures")) {
+            if (object.has("children") || object.has("type")) {
                 objectCache.put(loc, object);
             } else {
-                throw new IllegalArgumentException(loc + " does not have a 'children' and/or 'textures' field!");
+                throw new IllegalArgumentException(loc + " does not have a 'children' and/or 'type' field!");
             }
         } catch (Exception exception) {
             throw new IllegalArgumentException(exception);
@@ -76,7 +76,7 @@ public class JsonHelper {
         checkValid(loc);
 
         JsonObject object = objectCache.get(loc);
-        return object.has("children") && !object.has("textures");
+        return object.has("children") && !object.has("type");
     }
 
     public static void checkCombined(boolean isCombined, ResourceLocation loc) {

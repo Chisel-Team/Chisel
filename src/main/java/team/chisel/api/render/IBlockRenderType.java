@@ -31,5 +31,15 @@ public interface IBlockRenderType {
      * Gets the amount of quads per side
      * @return The Amount of quads per side
      */
-    int getQuadsPerSide();
+    default int getQuadsPerSide() {
+        return 1;
+    }
+    
+    /**
+     * The amount of textures required for this render type. For instance CTM requires two.
+     * @return The amount of textures required.
+     */
+    default int requiredTextures() {
+        return 1;
+    }
 }

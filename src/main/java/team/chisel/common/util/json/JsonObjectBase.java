@@ -1,14 +1,16 @@
 package team.chisel.common.util.json;
 
-import com.google.common.base.Supplier;
+import net.minecraft.util.ResourceLocation;
 
-public abstract class JsonObjectBase<T> implements Supplier<T>{
+
+public abstract class JsonObjectBase<T> implements JsonSupplier<T> {
 
     private T cache;
 
-    public final T get() {
-        return cache != null ? cache : (cache = create());
+    @Override
+    public final T get(ResourceLocation loc) {
+        return cache != null ? cache : (cache = create(loc));
     }
 
-    protected abstract T create();
+    protected abstract T create(ResourceLocation loc);
 }
