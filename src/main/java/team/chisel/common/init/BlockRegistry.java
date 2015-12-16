@@ -51,8 +51,10 @@ public class BlockRegistry {
                         Carving.chisel.addVariation(vars[meta].group, block.getDefaultState().withProperty(block.metaProp, meta), meta + (i * 16));
                     }
                 }
-                // todo Seperate Client and server code more
-                ChiselModelRegistry.register(block);
+                if (event.getSide().isClient()) {
+                    // TODO Seperate Client and server code more
+                    ChiselModelRegistry.register(block);
+                }
             }
 
         }
