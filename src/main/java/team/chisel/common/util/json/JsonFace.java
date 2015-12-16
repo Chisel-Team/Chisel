@@ -26,7 +26,10 @@ public class JsonFace extends JsonObjectBase<ChiselFace> {
         Preconditions.checkNotNull(children, "COMBINED texture type must have children textures!");
         ChiselFace face = new ChiselFace();
         for (String child : children) {
-            ResourceLocation childLoc = new ResourceLocation(child);
+            if (JsonHelper.isLocalPath(child)) {
+                child = JsonHelper.toAbsolutePath(child, loc);
+            }
+            ResourceLocation childLoc = new ResourceLocation(child + ".json");
             if (ChiselFaceRegistry.isFace(childLoc)) {
                 face.addChildFace(ChiselFaceRegistry.getFace(childLoc));
             } else if (ChiselTextureRegistry.isTex(childLoc)) {

@@ -89,4 +89,18 @@ public class JsonHelper {
             throw new IllegalArgumentException(loc.toString() + " must " + (isCombined ? "be" : "not be") + " a combined texture!");
         }
     }
+
+    public static boolean isLocalPath(String path) {
+        return path.startsWith("./");
+    }
+    
+    public static String toAbsolutePath(String localPath, ResourceLocation loc) {
+        String path = loc.getResourcePath();
+        path = path.substring(0, path.lastIndexOf('/') + 1);
+        return loc.getResourceDomain() + ":" + path + localPath.substring(2);
+    }
+
+    public static String toTexturePath(String resourcePath) {
+        return resourcePath.replace("textures/", "").replace(".json", "");
+    }
 }

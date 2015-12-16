@@ -50,11 +50,14 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture> {
 
         TextureSpriteCallback[] callbacks = new TextureSpriteCallback[type.requiredTextures()];
         if (textures == null) {
-            callbacks[0] = new TextureSpriteCallback(new ResourceLocation(loc.getResourceDomain(), loc.getResourcePath().replace("textures/", "").replace(".json", "")));
+            callbacks[0] = new TextureSpriteCallback(new ResourceLocation(loc.getResourceDomain(), JsonHelper.toTexturePath(loc.getResourcePath())));
             TextureStitcher.register(callbacks[0]);
         } else {
             for (int i = 0; i < this.textures.length; i++) {
                 String tex = this.textures[i];
+                if (JsonHelper.isLocalPath(tex)) {
+                    tex = JsonHelper.toTexturePath(JsonHelper.toAbsolutePath(tex, loc));
+                }
                 callbacks[i] = new TextureSpriteCallback(new ResourceLocation(tex));
                 TextureStitcher.register(callbacks[i]);
             }

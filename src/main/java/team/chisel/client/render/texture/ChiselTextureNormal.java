@@ -30,6 +30,4 @@ public class ChiselTextureNormal extends AbstractChiselTexture {
             return Arrays.asList(QuadHelper.makeNormalFaceQuad(side, sprites[0].getSprite()));
         }
     }
-
-
 }
