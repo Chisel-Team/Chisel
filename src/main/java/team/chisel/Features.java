@@ -612,6 +612,33 @@ public enum Features {
 		}
 	},
 
+    CRAG_ROCK("BiomesOPlenty") {
+
+        @Override
+        void addBlocks() {
+            BlockCarvable cragRock = (BlockCarvable) new BlockCarvable(Material.rock).setCreativeTab(ChiselTabs.tabStoneChiselBlocks).setHardness(2.0F).setResistance(10F)
+                    .setStepSound(Block.soundTypeStone);
+            Carving.chisel.addVariation("cragRock", GameRegistry.findBlock("BiomesOPlenty", "cragRock"), 0, 0);
+            cragRock.carverHelper.addVariation("tile.cragRock.0.desc", 1, "cragRock/terrain-cobb-brickaligned");
+            cragRock.carverHelper.addVariation("tile.cragRock.1.desc", 2, "cragRock/terrain-cob-detailedbrick");
+            cragRock.carverHelper.addVariation("tile.cragRock.2.desc", 3, "cragRock/terrain-cob-smallbrick");
+            cragRock.carverHelper.addVariation("tile.cragRock.3.desc", 4, "cragRock/terrain-cobblargetiledark");
+            cragRock.carverHelper.addVariation("tile.cragRock.4.desc", 5, "cragRock/terrain-cobbsmalltile");
+            cragRock.carverHelper.addVariation("tile.cragRock.5.desc", 6, "cragRock/terrain-cob-french");
+            cragRock.carverHelper.addVariation("tile.cragRock.6.desc", 7, "cragRock/terrain-cob-french2");
+            cragRock.carverHelper.addVariation("tile.cragRock.7.desc", 8, "cragRock/terrain-cobmoss-creepdungeon");
+            cragRock.carverHelper.addVariation("tile.cragRock.8.desc", 9, "cragRock/terrain-mossysmalltiledark");
+            cragRock.carverHelper.addVariation("tile.cragRock.9.desc", 10, "cragRock/terrain-pistonback-dungeontile");
+            cragRock.carverHelper.addVariation("tile.cragRock.10.desc", 11, "cragRock/terrain-pistonback-darkcreeper");
+            cragRock.carverHelper.addVariation("tile.cragRock.11.desc", 12, "cragRock/terrain-pistonback-darkdent");
+            cragRock.carverHelper.addVariation("tile.cragRock.12.desc", 13, "cragRock/terrain-pistonback-darkemboss");
+            cragRock.carverHelper.addVariation("tile.cragRock.13.desc", 14, "cragRock/terrain-pistonback-darkmarker");
+            cragRock.carverHelper.addVariation("tile.cragRock.14.desc", 15, "cragRock/terrain-pistonback-darkpanel");
+            cragRock.carverHelper.registerAll(cragRock, "cragRock");
+            Carving.chisel.registerOre("cragRock", "cragRock");
+        }
+    },
+    
 	DIAMOND_BLOCK {
 
 		@Override
