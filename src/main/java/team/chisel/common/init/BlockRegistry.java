@@ -1,12 +1,14 @@
 package team.chisel.common.init;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.Chisel;
 import team.chisel.api.block.ChiselBlockData;
 import team.chisel.api.block.VariationData;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.block.BlockCarvable;
+import team.chisel.common.block.ItemChiselBlock;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +34,7 @@ public class BlockRegistry {
         }
     }
 
-    public static void init(FMLInitializationEvent event){
+    public static void preInit(FMLPreInitializationEvent event){
         for (ChiselBlockData data : rawBlockData.values()){
             if (data == null){
                 Chisel.debug("Skipping block cause null data?");
@@ -42,7 +44,8 @@ public class BlockRegistry {
             for (int i = 0 ; i < split.length ; i++){
                 VariationData[] vars = split[i];
                 BlockCarvable block = new BlockCarvable(data, i);
-                GameRegistry.registerBlock(block, block.getName());
+                GameRegistry.registerBlock(block, ItemChiselBlock.class, block.getName());
+                //todo Seperate Client and server code more
                 ChiselModelRegistry.register(block);
             }
 

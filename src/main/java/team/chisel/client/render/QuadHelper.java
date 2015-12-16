@@ -65,7 +65,7 @@ public class QuadHelper {
     }
 
     public static BakedQuad makeUVQuad(EnumFacing f, TextureAtlasSprite sprite, float[] uvs, QuadPos pos){
-        Chisel.debug(uvs);
+        //Chisel.debug(uvs);
         return bakery.makeBakedQuad(pos.from, pos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(uvs, 0)),
                 sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, false);
     }

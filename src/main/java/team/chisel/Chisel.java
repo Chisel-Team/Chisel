@@ -54,13 +54,14 @@ public class Chisel implements Reference {
                 setTextureLocation(new ResourceLocation("chisel", "textures/blocks/voidstone/normal.json")).buildVariation().build();
         BlockRegistry.registerBlock(voidstone);
         proxy.preInit();
+        BlockRegistry.preInit(event);
 
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init();
-        BlockRegistry.init(event);
+        //BlockRegistry.init(event);
         ClientCommandHandler.instance.registerCommand(new CommandTest());
 
     }

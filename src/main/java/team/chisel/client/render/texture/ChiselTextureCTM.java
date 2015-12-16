@@ -9,6 +9,7 @@ import team.chisel.client.render.ctm.CTM;
 import team.chisel.client.render.type.BlockRenderTypeCTM;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,6 +24,11 @@ public class ChiselTextureCTM extends AbstractChiselTexture {
 
     @Override
     public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int target) {
-        return QuadHelper.makeCtmFace(side, this.sprites, CTM.getInstance().getSubmapIndices((CTMBlockRenderContext)context, side));
+        if (context == null){
+            return Arrays.asList(QuadHelper.makeNormalFaceQuad(side, sprites[0].getSprite()));
+        }
+        else {
+            return QuadHelper.makeCtmFace(side, this.sprites, CTM.getInstance().getSubmapIndices((CTMBlockRenderContext) context, side));
+        }
     }
 }

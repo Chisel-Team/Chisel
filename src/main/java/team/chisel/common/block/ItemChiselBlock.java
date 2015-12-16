@@ -30,7 +30,7 @@ public class ItemChiselBlock extends ItemBlock {
         try {
             VariationData varData = block.getBlockData().getVariation(stack.getItemDamage());
             return super.getUnlocalizedName(stack) + "." + varData.name;
-        } catch (IndexOutOfBoundsException e) {
+        } catch (Exception e) {
             return super.getUnlocalizedName(stack) + "." + "null";
         }
     }

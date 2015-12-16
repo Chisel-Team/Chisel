@@ -121,12 +121,16 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
 
     @Override
     public IBakedModel handleItemState(ItemStack stack) {
+        //Chisel.debug("Handling item model for "+stack);
         if (stack.getItem() instanceof ItemChiselBlock){
             BlockCarvable block = (BlockCarvable) ((ItemChiselBlock)stack.getItem()).getBlock();
             ClientVariationData varData = (ClientVariationData) block.getBlockData().getVariation(stack.getItemDamage());
             List<BakedQuad> quads = new ArrayList<BakedQuad>();
             for (EnumFacing facing : EnumFacing.VALUES){
-                quads.add(QuadHelper.makeNormalFaceQuad(facing, varData.getFaceForSide(facing).getParticle()));
+                //quads.add(QuadHelper.makeNormalFaceQuad(facing, varData.getFaceForSide(facing).getParticle()));
+                for (IChiselTexture tex : varData.getFaceForSide(facing).getTextureList()){
+                    quads.addAll(tex.getSideQuads(facing, null, 1));
+                }
             }
             return new ModelChiselBlock(quads, varData);
         }

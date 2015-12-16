@@ -23,7 +23,7 @@ public class ChiselTextureNormal extends AbstractChiselTexture {
     @Override
     public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int target){
         if (target == 4){
-            Chisel.debug("Normal texture complying with quad goal of 4");
+            //Chisel.debug("Normal texture complying with quad goal of 4");
             return QuadHelper.makeFourQuads(side, sprites[0].getSprite(), new float[]{0, 0, 16, 16});
         }
         else {

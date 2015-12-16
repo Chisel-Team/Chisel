@@ -1,6 +1,7 @@
 package team.chisel.client.render.texture;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -25,6 +26,9 @@ public class ChiselTextureV extends AbstractChiselTexture {
 
     @Override
     public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext contextIn, int quadGoal) {
+        if (contextIn == null){
+            return Arrays.asList(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), new float[]{0, 0, 8, 8}));
+        }
 
         BlockRenderContextSheet context = (BlockRenderContextSheet) contextIn;
 
@@ -79,8 +83,8 @@ public class ChiselTextureV extends AbstractChiselTexture {
             list.add(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), new float[] { minU, minV, minU + intervalU, minV + intervalV }));
             return list;
         } else {
-            Chisel.debug("V texture complying with quad goal of 4");
-            Chisel.debug(new float[] { minU, minV, minU + intervalU, minV + intervalV });
+            //Chisel.debug("V texture complying with quad goal of 4");
+            //Chisel.debug(new float[] { minU, minV, minU + intervalU, minV + intervalV });
             return QuadHelper.makeFourQuads(side, sprites[0].getSprite(), new float[] { minU, minV, minU + intervalU, minV + intervalV });
         }
     }

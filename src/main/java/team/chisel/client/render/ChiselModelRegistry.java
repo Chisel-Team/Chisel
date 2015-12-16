@@ -53,6 +53,8 @@ public class ChiselModelRegistry implements Reference {
                 inventoryLocation = new ModelResourceLocation(MOD_ID.toLowerCase()+":"+block.getName()+i, "inventory");
             }
             register(inventoryLocation, new ModelChiselBlock());
+            Chisel.debug("Setting custom resource location for Item "+Item.getItemFromBlock(block)+
+                    " with meta "+i+ " to location "+inventoryLocation);
             ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), i, inventoryLocation);
         }
     }
