@@ -1,6 +1,7 @@
 package team.chisel.common.item;
 
 import team.chisel.Chisel;
+import team.chisel.common.init.ChiselTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -17,6 +18,7 @@ public class ItemChisel extends Item {
         super();
         setMaxStackSize(1);
         setUnlocalizedName("itemChisel");
+        setCreativeTab(ChiselTabs.tab);
     }
 
     @Override

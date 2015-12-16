@@ -61,6 +61,10 @@ processResources {
     }
 }
 
+jar.manifest {
+    attributes 'FMLAT': 'chisel_at.cfg'
+}
+
 // Create API jar with sources and compiled files
 task apiJar(type: Jar) {
     from sourceSets.main.allSource

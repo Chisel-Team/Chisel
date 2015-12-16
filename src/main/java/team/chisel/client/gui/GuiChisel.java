@@ -1,16 +1,22 @@
 package team.chisel.client.gui;
 
-import team.chisel.common.inventory.ContainerChisel;
-import team.chisel.common.inventory.InventoryChiselSelection;
-import team.chisel.common.item.ItemChisel;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
+import team.chisel.common.inventory.ContainerChisel;
+import team.chisel.common.inventory.InventoryChiselSelection;
+import team.chisel.common.inventory.SlotChiselInput;
+import team.chisel.common.item.ItemChisel;
 
 public class GuiChisel extends GuiContainer {
 
@@ -32,7 +38,6 @@ public class GuiChisel extends GuiContainer {
         inventorySlots.onContainerClosed(player);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void initGui() {
         super.initGui();
@@ -69,8 +74,13 @@ public class GuiChisel extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int j, int i) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        //String line = I18n.format(this.container.inventory.getInventoryName() + ".title");
-        //fontRendererObj.drawSplitString(line, 50 - fontRendererObj.getStringWidth(line) / 2, 60, 40, 0x404040);
+        String line = I18n.format(this.container.inventory.getName() + ".title");
+        List<String> lines = fontRendererObj.listFormattedStringToWidth(line, 40);
+        int y = 60;
+        for (String s : lines) {
+            fontRendererObj.drawString(s, 32 - fontRendererObj.getStringWidth(s) / 2, y, 0x404040);
+            y += 10;
+        }
 
 //        if (showMode()) {
 //            line = I18n.format(this.container.inventory.getInventoryName() + ".mode");
@@ -116,21 +126,21 @@ public class GuiChisel extends GuiContainer {
 //        super.actionPerformed(button);
 //    }
 
-//    @Override
-//    protected void drawSlot(Slot slot) {
-//        if (slot instanceof SlotChiselInput) {
-//            GL11.glPushMatrix();
-//            GL11.glScalef(2, 2, 2);
-//            slot.xDisplayPosition -= 16;
-//            slot.yDisplayPosition -= 16;
-//            super.drawSlot(slot);
-//            slot.xDisplayPosition += 16;
-//            slot.yDisplayPosition += 16;
-//            GL11.glPopMatrix();
-//        } else {
-//            super.func_146977_a(slot);
-//        }
-//    }
+    @Override
+    protected void drawSlot(Slot slot) {
+        if (slot instanceof SlotChiselInput) {
+            GL11.glPushMatrix();
+            GL11.glScalef(2, 2, 2);
+            slot.xDisplayPosition -= 16;
+            slot.yDisplayPosition -= 16;
+            super.drawSlot(slot);
+            slot.xDisplayPosition += 16;
+            slot.yDisplayPosition += 16;
+            GL11.glPopMatrix();
+        } else {
+            super.drawSlot(slot);
+        }
+    }
 
     public static void drawSlotOverlay(GuiContainer gui, int x, int y, Slot slot, int u, int v, int padding) {
         padding /= 2;

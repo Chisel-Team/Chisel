@@ -2,3 +2,5 @@ tile.antiblock.white.name=White Antiblock
 chisel.lore.antiblock.white.1=White Colored Antiblock
 
 itemGroup.chiselCreativeTab=Chisel 3
+
+container.chisel.title=Chisel Blocks
