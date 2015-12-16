@@ -1,11 +1,12 @@
 package team.chisel.common.inventory;
 
-import team.chisel.Chisel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import team.chisel.Chisel;
 
 public class ContainerChisel extends Container {
 
@@ -146,6 +147,14 @@ public class ContainerChisel extends Container {
         if (finished)
             return;
 
+        if (!chisel.hasTagCompound()) {
+            chisel.setTagCompound(new NBTTagCompound());
+        }
+        NBTTagCompound targetTag = new NBTTagCompound();
+        if (inventory.getStackInSpecialSlot() != null) {
+            inventory.getStackInSpecialSlot().writeToNBT(targetTag);
+        }
+        chisel.getTagCompound().setTag("chiselTarget", targetTag);
 
         playerInventory.mainInventory[chiselSlot] = chisel;
     }
