@@ -791,6 +791,19 @@ public enum Features {
         }
     },
 
+    ENDER {
+        @Override
+        void addBlocks() {
+            BlockCarvable ender = (BlockCarvable) new BlockCarvable(Material.rock).setHardness(2.0F).setResistance(10.0F).setCreativeTab(ChiselTabs.tabStoneChiselBlocks);
+            ender.carverHelper.addVariation("tile.ender.0.desc", 0, "ender_pearl_block/resonantSolid");
+            ender.carverHelper.addVariation("tile.ender.1.desc", 1, "ender_pearl_block/enderZelda");
+            ender.carverHelper.addVariation("tile.ender.2.desc", 2, "ender_pearl_block/enderEye", new SubmapManagerAnyV("ender_pearl_block/enderEye", 3, 2));
+            ender.carverHelper.addVariation("tile.ender.3.desc", 3, "ender_pearl_block/resonantBricks", new SubmapManagerCombinedCTM(4, "ender_pearl_block/resonantBricks", TextureType.V4));
+            ender.carverHelper.registerAll(ender, "blockEnderPearl");
+            Carving.chisel.registerOre("blockEnderPearl", "blockEnderPearl");
+        }
+    },
+
     FACTORY {
         @Override
         void addBlocks() {
