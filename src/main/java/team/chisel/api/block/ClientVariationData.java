@@ -28,10 +28,10 @@ public class ClientVariationData extends VariationData {
 
     private List<IBlockRenderType> typesUsed;
     
-    public ClientVariationData(String name, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted,
+    public ClientVariationData(String name, String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted,
                                int light, float hardness, boolean beaconBase, int index,
                                ChiselFace defaultFace, Map<EnumFacing, ChiselFace> sideOverrides){
-        super(name, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index);
+        super(name, group, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index);
         this.defaultFace = defaultFace;
         this.sideOverrides = sideOverrides;
         this.typesUsed = new ArrayList<IBlockRenderType>();

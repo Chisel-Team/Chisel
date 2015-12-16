@@ -1,7 +1,8 @@
 package team.chisel.api.block;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 
 /**
  * Represents data about a specific variation
@@ -14,8 +15,13 @@ public class VariationData {
     public String name;
 
     /**
-     * The Recipe for this variation, if null it cant be crafted
-     * todo Crafting stuff, maybe custom data class 3x3 of unique identifiers or ore dictionary names
+     * The carving group of this variation
+     */
+    @Nullable
+    public String group;
+
+    /**
+     * The Recipe for this variation, if null it cant be crafted TODO Crafting stuff, maybe custom data class 3x3 of unique identifiers or ore dictionary names
      */
     public ChiselRecipe recipe;
 
@@ -49,8 +55,9 @@ public class VariationData {
      */
     public int index;
 
-    public VariationData(String name, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness, boolean beaconBase, int index){
+    public VariationData(String name, @Nullable String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness, boolean beaconBase, int index) {
         this.name = name;
+        this.group = group;
         this.recipe = recipe;
         this.smeltedFrom = smeltedFrom;
         this.amountSmelted = amountSmelted;
@@ -58,7 +65,4 @@ public class VariationData {
         this.hardness = hardness;
         this.beaconBase = beaconBase;
     }
-
-
-
 }

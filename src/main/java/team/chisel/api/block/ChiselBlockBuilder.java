@@ -1,14 +1,14 @@
 package team.chisel.api.block;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Building a ChiselBlockData
@@ -73,8 +73,8 @@ public class ChiselBlockBuilder {
         return this;
     }
 
-    public VariationBuilder newVariation(String name){
-        VariationBuilder builder = new VariationBuilder(this, name, curIndex);
+    public VariationBuilder newVariation(String name, String group){
+        VariationBuilder builder = new VariationBuilder(this, name, group, curIndex);
         curIndex++;
         return builder;
     }
@@ -97,7 +97,7 @@ public class ChiselBlockBuilder {
          */
         public interface IChiselBuilderInterface {
 
-            VariationData build(String name, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,
+            VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,
                                 boolean beaconBase, ResourceLocation texLocation, Map<EnumFacing, ResourceLocation> overrideMap);
 
         }
@@ -106,6 +106,8 @@ public class ChiselBlockBuilder {
 
         private String name;
 
+        private String group;
+        
         private int index;
 
         private ChiselRecipe recipe;
@@ -126,12 +128,10 @@ public class ChiselBlockBuilder {
 
         private static IChiselBuilderInterface builderInterface;
 
-
-
-
-        private VariationBuilder(ChiselBlockBuilder parent, String name, int index){
+        private VariationBuilder(ChiselBlockBuilder parent, String name, String group, int index){
             this.parent = parent;
             this.name = name;
+            this.group = group;
             this.index = index;
             this.light = 0;
             this.hardness = parent.hardness;
@@ -181,7 +181,7 @@ public class ChiselBlockBuilder {
         }
 
         private VariationData doBuild(){
-            return builderInterface.build(name, index, recipe, smeltedFrom, amountSmelted, light, hardness,
+            return builderInterface.build(name, group, index, recipe, smeltedFrom, amountSmelted, light, hardness,
                     beaconBase, texLocation, overrideMap);
         }
 

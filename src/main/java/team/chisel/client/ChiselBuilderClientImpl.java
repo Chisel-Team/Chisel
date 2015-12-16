@@ -19,14 +19,14 @@ import java.util.Map;
 public class ChiselBuilderClientImpl implements ChiselBlockBuilder.VariationBuilder.IChiselBuilderInterface {
 
     @Override
-    public VariationData build(String name, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,
+    public VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,
                                boolean beaconBase, ResourceLocation texLocation, Map<EnumFacing, ResourceLocation> overrideMap){
         ChiselFace defaultFace = JsonHelper.getOrCreateFace(texLocation);
         Map<EnumFacing, ChiselFace> faceMap = new HashMap<EnumFacing, ChiselFace>();
         for (Map.Entry<EnumFacing, ResourceLocation> entry : overrideMap.entrySet()){
             faceMap.put(entry.getKey(), JsonHelper.getOrCreateFace(entry.getValue()));
         }
-        return new ClientVariationData(name, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index, defaultFace, faceMap);
+        return new ClientVariationData(name, group, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index, defaultFace, faceMap);
     }
 
 }

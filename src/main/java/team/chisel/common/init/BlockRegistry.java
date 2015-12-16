@@ -9,6 +9,7 @@ import team.chisel.api.block.VariationData;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
+import team.chisel.common.carving.Carving;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,11 +42,16 @@ public class BlockRegistry {
                 continue;
             }
             VariationData[][] split = splitVariationArray(data.variations);
-            for (int i = 0 ; i < split.length ; i++){
+            for (int i = 0; i < split.length; i++) {
                 VariationData[] vars = split[i];
                 BlockCarvable block = new BlockCarvable(data, i);
                 GameRegistry.registerBlock(block, ItemChiselBlock.class, block.getName());
-                //todo Seperate Client and server code more
+                for (int meta = 0; i < vars.length; i++) {
+                    if (vars[meta].group != null) {
+                        Carving.chisel.addVariation(vars[meta].group, block.getDefaultState().withProperty(block.metaProp, meta), meta + (i * 16));
+                    }
+                }
+                // todo Seperate Client and server code more
                 ChiselModelRegistry.register(block);
             }
 

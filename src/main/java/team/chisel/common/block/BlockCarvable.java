@@ -40,7 +40,7 @@ public class BlockCarvable extends Block implements ICarvable {
     /**
      * The Property for the variation of this block
      */
-    public PropertyInteger metaProperty;
+    public PropertyInteger metaProp;
 
     public static final PropertyRenderContextList CTX_LIST = new PropertyRenderContextList();
 
@@ -70,8 +70,8 @@ public class BlockCarvable extends Block implements ICarvable {
             max = data.variations.length;
         }
         this.metaVariations = max;
-        this.metaProperty = PropertyInteger.create("Variation", 0, max);
-        this.realBlockState = createRealBlockState(metaProperty);
+        this.metaProp = PropertyInteger.create("Variation", 0, max);
+        this.realBlockState = createRealBlockState(metaProp);
         setupStates();
         setUnlocalizedName(data.name);
         setHardness(data.hardness);
@@ -113,7 +113,7 @@ public class BlockCarvable extends Block implements ICarvable {
     private void setupStates() {
         this.setDefaultState(getExtendedBlockState()
         	.withProperty(CTX_LIST, new RenderContextList())
-        	.withProperty(metaProperty, 0));
+        	.withProperty(metaProp, 0));
     }
 
     public ExtendedBlockState getBaseExtendedState() {
@@ -131,12 +131,12 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getBlockState().getBaseState().withProperty(metaProperty, meta);
+        return getBlockState().getBaseState().withProperty(metaProp, meta);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(metaProperty);
+        return state.getValue(metaProp);
     }
 
 
@@ -185,7 +185,7 @@ public class BlockCarvable extends Block implements ICarvable {
 			return stateIn;
 		}
 		IExtendedBlockState state = (IExtendedBlockState) stateIn;
-        ClientVariationData data = (ClientVariationData) this.data.variations[state.getValue(metaProperty)];
+        ClientVariationData data = (ClientVariationData) this.data.variations[state.getValue(metaProp)];
         List<IBlockRenderType> types = data.getTypesUsed();
 
         RenderContextList ctxList = new RenderContextList(types, w, pos);
@@ -199,7 +199,7 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public int getLightValue(IBlockAccess world, BlockPos pos) {
-        return getVariationData(world.getBlockState(pos).getValue(metaProperty)).light;
+        return getVariationData(world.getBlockState(pos).getValue(metaProp)).light;
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -221,12 +221,12 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public boolean isBeaconBase(IBlockAccess world, BlockPos pos, BlockPos beacon){
-        return getVariationData(world.getBlockState(pos).getValue(metaProperty)).beaconBase;
+        return getVariationData(world.getBlockState(pos).getValue(metaProp)).beaconBase;
     }
 
     @Override
     public float getBlockHardness(World worldIn, BlockPos pos){
-        return getVariationData(worldIn.getBlockState(pos).getValue(metaProperty)).hardness;
+        return getVariationData(worldIn.getBlockState(pos).getValue(metaProp)).hardness;
     }
 
     @Override

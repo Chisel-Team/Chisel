@@ -94,7 +94,7 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
             BlockCarvable block = (BlockCarvable) state.getBlock();
             RenderContextList ctxList = state.getValue(BlockCarvable.CTX_LIST);
             List<BakedQuad> quadList = new ArrayList<BakedQuad>();
-            ClientVariationData varData = (ClientVariationData) block.getBlockData().variations[MathHelper.clamp_int(state.getValue(block.metaProperty),
+            ClientVariationData varData = (ClientVariationData) block.getBlockData().variations[MathHelper.clamp_int(state.getValue(block.metaProp),
                     0, block.getBlockData().variations.length)];
             for (EnumFacing facing : EnumFacing.VALUES){
                 ChiselFace face = varData.getFaceForSide(facing);

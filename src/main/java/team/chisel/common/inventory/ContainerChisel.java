@@ -4,9 +4,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import team.chisel.Chisel;
+import team.chisel.api.carving.ICarvingRegistry;
+import team.chisel.common.carving.Carving;
+import team.chisel.common.item.ItemChisel;
 
 public class ContainerChisel extends Container {
 
@@ -15,6 +19,7 @@ public class ContainerChisel extends Container {
     int chiselSlot;
     public ItemStack chisel;
     public boolean finished;
+    public ICarvingRegistry carving;
 
     private int totalSlots = 0;
 
@@ -53,6 +58,9 @@ public class ContainerChisel extends Container {
         }
         Chisel.debug("There are " + totalSlots + " slots but list is " + inventorySlots.size());
 
+//        Item item = chisel.getItem();
+        carving = Carving.chisel;
+        
         inventory.updateItems();
     }
 

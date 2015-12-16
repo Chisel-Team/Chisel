@@ -137,7 +137,7 @@ public class InventoryChiselSelection implements IInventory {
         if (Block.getBlockFromItem(item) == null)
             return;
 
-        List<ItemStack> list = OreDictionaryUtil.getVariations(chiseledItem);
+        List<ItemStack> list = container.carving.getItemsForChiseling(chiseledItem);
 
         activeVariations = 0;
         while (activeVariations < normalSlots && activeVariations < list.size()) {

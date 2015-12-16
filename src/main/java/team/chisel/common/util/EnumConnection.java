@@ -84,7 +84,7 @@ public enum EnumConnection {
 
     public boolean isValid(BlockPos origin, IBlockAccess w){
         if (w.getBlockState(origin).getBlock() instanceof BlockCarvable) {
-            return CTM.areBlocksEqual(w.getBlockState(origin), getBlockAt(origin, w), ((BlockCarvable) w.getBlockState(origin).getBlock()).metaProperty);
+            return CTM.areBlocksEqual(w.getBlockState(origin), getBlockAt(origin, w), ((BlockCarvable) w.getBlockState(origin).getBlock()).metaProp);
         }
         else {
             return false;
