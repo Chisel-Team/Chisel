@@ -6,10 +6,13 @@ import static net.minecraft.util.EnumFacing.NORTH;
 import static net.minecraft.util.EnumFacing.SOUTH;
 import static net.minecraft.util.EnumFacing.UP;
 import static net.minecraft.util.EnumFacing.WEST;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumFacing.AxisDirection;
-import team.chisel.client.render.ctx.CTMBlockRenderContext;
+import net.minecraft.world.IBlockAccess;
+import team.chisel.client.render.ctm.CTM;
 
 /**
  * Think of this class as a "Two dimensional ForgeDirection, with diagonals".
@@ -44,18 +47,33 @@ public enum Dir {
 	}
 
 	/**
-	 * Finds if this block is connected for the given side in this Dir.
-	 * 
-	 * @param ctx The CTM block render context
-	 * @param side The Side of the block that is being checked
-	 * @return Whether the block is connected on the specified side
-	 */
-	@SuppressWarnings("unchecked")
-	public boolean isConnected(CTMBlockRenderContext ctx, EnumFacing side) {
-		EnumFacing[] dirs = getNormalizedDirs(side);
-		EnumConnection connection = EnumConnection.fromFacings(dirs);
-		return ctx.isConnected(connection);
-	}
+     * Finds if this block is connected for the given side in this Dir.
+     * 
+     * @param inst
+     *            The CTM instance to use for logic.
+     * @param world
+     *            The world the block is in.
+     * @param x
+     *            The x coordinate of your block.
+     * @param y
+     *            The y coordinate of your block.
+     * @param z
+     *            The z coordinate of your block.
+     * @param sideIdx
+     *            The side index of the current face. This equivalent to {@link ForgeDirection#ordinal()}
+     * @param block
+     *            The block being rendered.
+     * @param meta
+     *            The metadata of the block.
+     * @return True if the block is connected in the given Dir, false otherwise.
+     */
+    public boolean isConnected(CTM inst, IBlockAccess world, BlockPos pos, EnumFacing side, IBlockState state) {
+        EnumFacing[] dirs = getNormalizedDirs(side);
+        for (EnumFacing dir : dirs) {
+            pos = pos.add(dir.getDirectionVec());
+        }
+        return inst.isConnected(world, pos, side, state);
+    }
 
 	private EnumFacing[] getNormalizedDirs(EnumFacing normal) {
 		if (normal == NORMAL) {

@@ -1,13 +1,13 @@
 package team.chisel.client.render.type;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.common.util.EnumConnection;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @BlockRenderType("CTMH")
 public class BlockRenderTypeCTMH extends BlockRenderTypeCTM {
@@ -28,6 +28,6 @@ public class BlockRenderTypeCTMH extends BlockRenderTypeCTM {
             connections.remove(EnumConnection.DOWN);
             connections.remove(EnumConnection.UP);
         }
-        return new CTMBlockRenderContext(connections);
+        return null; // TODO new CTMBlockRenderContext(connections);
     }
 }

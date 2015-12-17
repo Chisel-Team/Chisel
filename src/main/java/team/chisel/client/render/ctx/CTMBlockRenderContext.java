@@ -1,52 +1,26 @@
 package team.chisel.client.render.ctx;
 
+import java.util.EnumMap;
+
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.IBlockRenderContext;
-import team.chisel.common.util.EnumConnection;
+import team.chisel.client.render.ctm.CTM;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-/**
- * Block Render Context for CTM
- */
 public class CTMBlockRenderContext implements IBlockRenderContext {
 
-    private List<EnumConnection> connections;
+    private EnumMap<EnumFacing, CTM> ctmData = new EnumMap<>(EnumFacing.class);
 
-    public CTMBlockRenderContext(List<EnumConnection> connections){
-        this.connections = connections;
-    }
-
-    public CTMBlockRenderContext(){
-        this(new ArrayList<EnumConnection>());
-    }
-
-    public CTMBlockRenderContext(EnumConnection... connections){
-        this(Arrays.asList(connections));
-    }
-
-    public boolean isConnected(EnumConnection connection){
-        return connections.contains(connection);
-    }
-
-    public void addConnection(EnumConnection connection){
-        if (!connections.contains(connection)){
-            connections.add(connection);
+    public CTMBlockRenderContext(IBlockAccess world, BlockPos pos) {
+        for (EnumFacing face : EnumFacing.VALUES) {
+            CTM ctm = CTM.getInstance();
+            ctm.createSubmapIndices(world, pos, face);
+            ctmData.put(face, ctm);
         }
     }
 
-    public void removeConnection(EnumConnection connection){
-        if (connections.contains(connection)){
-            connections.remove(connection);
-        }
-    }
-
-    public String toString(){
-        String out = "{";
-        for (EnumConnection connection : connections){
-            out = out +","+connection;
-        }
-        return out+"}";
+    public CTM getCTM(EnumFacing face) {
+        return ctmData.get(face);
     }
 }

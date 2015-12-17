@@ -9,10 +9,6 @@ import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.texture.ChiselTextureCTM;
-import team.chisel.common.util.EnumConnection;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Block RenderType for CTM
@@ -21,26 +17,20 @@ import java.util.List;
 public class BlockRenderTypeCTM implements IBlockRenderType {
 
     @Override
-    public IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+    public IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
         return new ChiselTextureCTM(this, layer, sprites);
     }
 
     @Override
-    public CTMBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos){
-        List<EnumConnection> connections = new ArrayList<EnumConnection>();
-        for (EnumConnection connection : EnumConnection.values()) {
-            if (connection.isValid(pos, world)) {
-                connections.add(connection);
-            }
-        }
-        return new CTMBlockRenderContext(connections);
+    public CTMBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
+        return new CTMBlockRenderContext(world, pos);
     }
 
     @Override
-    public int getQuadsPerSide(){
+    public int getQuadsPerSide() {
         return 4;
     }
-    
+
     @Override
     public int requiredTextures() {
         return 2;

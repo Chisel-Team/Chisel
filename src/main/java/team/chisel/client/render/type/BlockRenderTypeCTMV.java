@@ -21,6 +21,6 @@ public class BlockRenderTypeCTMV extends BlockRenderTypeCTM {
                 connections.add(connection);
             }
         }
-        return new CTMBlockRenderContext(connections);
+        return null; // TODO new CTMBlockRenderContext(connections);
     }
 }

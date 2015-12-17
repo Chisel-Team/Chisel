@@ -2,14 +2,12 @@ package team.chisel.common.util;
 
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
-import team.chisel.client.render.ctm.CTM;
 import team.chisel.common.block.BlockCarvable;
+
+import com.google.common.collect.Maps;
 
 /**
  * Each of these represents a type connection that a ctm block has to another
@@ -71,25 +69,18 @@ public enum EnumConnection {
     		for (EnumConnection c : VALUES) {
     			if (c.positionVector.equals(vec)) {
     				vecMap.put(vec, c);
-    				ret = c;
-    			}
-    		}
-    	}
-    	return ret;
-    }
-    
-    public IBlockState getBlockAt(BlockPos origin, IBlockAccess w){
-        return w.getBlockState(origin.add(positionVector));
+                    ret = c;
+                }
+            }
+        }
+        return ret;
     }
 
-    public boolean isValid(BlockPos origin, IBlockAccess w){
+    public boolean isValid(BlockPos origin, IBlockAccess w) {
         if (w.getBlockState(origin).getBlock() instanceof BlockCarvable) {
-            return CTM.areBlocksEqual(w.getBlockState(origin), getBlockAt(origin, w), ((BlockCarvable) w.getBlockState(origin).getBlock()).metaProp);
-        }
-        else {
+            return w.getBlockState(origin).equals(w.getBlockState(origin.add(positionVector)));
+        } else {
             return false;
         }
     }
-
-
 }

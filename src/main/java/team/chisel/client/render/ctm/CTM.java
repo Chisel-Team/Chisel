@@ -13,19 +13,14 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.util.EnumMap;
 
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import team.chisel.api.IFacade;
-import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.common.util.Dir;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 
 // @formatter:off
@@ -118,6 +113,7 @@ public class CTM {
 
 	protected TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
 	protected EnumMap<Dir, Boolean> connectionMap = Maps.newEnumMap(Dir.class);
+	protected int[] submapCache;
 
 	protected CTM() {
 		for (Dir dir : Dir.VALUES) {
@@ -140,45 +136,54 @@ public class CTM {
 	 * 
 	 *         Indeces are in counter-clockwise order starting at bottom left.
 	 */
-	public int[] getSubmapIndices(CTMBlockRenderContext ctx, EnumFacing side) {
-		int[] ret = new int[] { 18, 19, 17, 16 };
+    public int[] createSubmapIndices(IBlockAccess world, BlockPos pos, EnumFacing side) {
+		submapCache = new int[] { 18, 19, 17, 16 };
 
-		buildConnectionMap(ctx, side);
+		if (world == null) {
+            return submapCache;
+        }
+
+		buildConnectionMap(world, pos, side);
 
 		// Map connections to submap indeces
 		for (int i = 0; i < 4; i++) {
-			fillSubmaps(ret, i);
+			fillSubmaps(i);
 		}
 
-		return ret;
+		return submapCache;
 	}
+    
+    public int[] getSubmapIndices() {
+        return submapCache;
+    }
 	
     public static boolean isDefaultTexture(int id) {
         return (id == 16 || id == 17 || id == 18 || id == 19);
     }
 
-	/**
-	 * Builds the connection map and stores it in this CTM instance. The {@link #connected(Dir)}, {@link #connectedAnd(Dir...)}, and {@link #connectedOr(Dir...)} methods can be used to access it.
-	 */
-	public void buildConnectionMap(CTMBlockRenderContext ctx, EnumFacing side) {
-		for (Dir dir : Dir.VALUES) {
-			connectionMap.put(dir, dir.isConnected(ctx, side));
-		}
-	}
+    /**
+     * Builds the connection map and stores it in this CTM instance. The {@link #connected(Dir)}, {@link #connectedAnd(Dir...)}, and {@link #connectedOr(Dir...)} methods can be used to access it.
+     */
+    public void buildConnectionMap(IBlockAccess world, BlockPos pos, EnumFacing side) {
+        IBlockState state = world.getBlockState(pos);
+        for (Dir dir : Dir.VALUES) {
+            connectionMap.put(dir, dir.isConnected(this, world, pos, side, state));
+        }
+    }
 
-	private void fillSubmaps(int[] ret, int idx) {
+	private void fillSubmaps(int idx) {
 		Dir[] dirs = submapMap.get(idx);
 		if (connectedOr(dirs[0], dirs[1])) {
 			if (connectedAnd(dirs)) {
 				// If all dirs are connected, we use the fully connected face,
 				// the base offset value.
-				ret[idx] = submapOffsets[idx];
+			    submapCache[idx] = submapOffsets[idx];
 			} else {
 				// This is a bit magic-y, but basically the array is ordered so
 				// the first dir requires an offset of 2, and the second dir
 				// requires an offset of 8, plus the initial offset for the
 				// corner.
-				ret[idx] = submapOffsets[idx] + (connected(dirs[0]) ? 2 : 0) + (connected(dirs[1]) ? 8 : 0);
+			    submapCache[idx] = submapOffsets[idx] + (connected(dirs[0]) ? 2 : 0) + (connected(dirs[1]) ? 8 : 0);
 			}
 		}
 	}
@@ -220,54 +225,62 @@ public class CTM {
 		return false;
 	}
 
-	/**
-	 * Whether it is connected on the specified side
-	 *
-	 * @param world
-	 *            The World
-	 * @param pos
-	 *            The Block pos
-	 * @param facing
-	 *            The Side
-	 * @return Whether it is connected
-	 */
-	public boolean isConnected(IBlockAccess world, BlockPos pos, EnumFacing facing) {
-		return blockStatesEqual(getBlockOrFacade(world, pos, facing), getBlockOrFacade(world, pos.offset(facing), facing));
-	}
-
-	/**
-	 * Whether it is connected on the specified side
-	 *
-	 * @param world
-	 *            The World
-	 * @param x
-	 *            The Block x position
-	 * @param y
-	 *            The Block y position
-	 * @param z
-	 *            The Block z position
-	 * @param facing
-	 *            The Side
-	 * @return Whether it is connected
-	 */
-	public boolean isConnected(IBlockAccess world, int x, int y, int z, EnumFacing facing) {
-		return isConnected(world, new BlockPos(x, y, z), facing);
-	}
-
-
-
-
     /**
-     * Whether the two positions
-     *
-     * @param w
-     * @param pos1
-     * @param pos2
-     * @return
+     * A simple check for if the given block can connect to the given direction on the given side.
+     * 
+     * @param world
+     * @param x
+     *            The x coordinate of the block to check <i>against</i>. This is not the position of your block.
+     * @param y
+     *            The y coordinate of the block to check <i>against</i>. This is not the position of your block.
+     * @param z
+     *            The z coordinate of the block to check <i>against</i>. This is not the position of your block.
+     * @param dir
+     *            The {@link ForgeDirection side} of the block to check for connection status. This is <i>not</i> the direction to check in.
+     * @param block
+     *            The block to check against for connection.
+     * @param meta
+     *            The metadata to check against for connection.
+     * @return True if the given block can connect to the given location on the given side.
      */
-    public boolean isConnected(World w, BlockPos pos1, BlockPos pos2, PropertyInteger metaProperty) {
-        return areBlocksEqual(w.getBlockState(pos1), w.getBlockState(pos2), metaProperty);
+    public boolean isConnected(IBlockAccess world, BlockPos pos, EnumFacing dir, IBlockState state) {
+    
+//        if (CTMLib.chiselLoaded() && connectionBlocked(world, x, y, z, dir.ordinal())) {
+//            return false;
+//        }
+        
+        BlockPos pos2 = pos.add(dir.getDirectionVec());
+
+        boolean disableObscured = disableObscuredFaceCheck.or(disableObscuredFaceCheckConfig);
+
+        IBlockState con = getBlockOrFacade(world, pos, dir);
+        IBlockState obscuring = disableObscured ? null : getBlockOrFacade(world, pos2, dir);
+
+        // no block or a bad API user
+        if (con == null) {
+            return false;
+        }
+
+        boolean ret = con.equals(state);
+
+        // no block obscuring this face
+        if (obscuring == null) {
+            return ret;
+        }
+
+        // check that we aren't already connected outwards from this side
+        ret &= !obscuring.equals(state);
+
+        return ret;
     }
+
+//    private boolean connectionBlocked(IBlockAccess world, int x, int y, int z, int side) {
+//        Block block = world.getBlock(x, y, z);
+//        if (block instanceof IConnectable) {
+//            return !((IConnectable) block).canConnectCTM(world, x, y, z, side);
+//        }
+//        return false;
+//    }
 
 	public IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, EnumFacing side) {
 		IBlockState state = world.getBlockState(pos);
@@ -276,37 +289,4 @@ public class CTM {
 		}
 		return state;
 	}
-
-	/**
-	 * Returns whether the two blocks are equal ctm blocks
-	 *
-	 * @param state1 First state
-	 * @param state2 Second state
-	 * @return Whether they are the same block
-	 */
-	public static boolean areBlocksEqual(IBlockState state1, IBlockState state2, PropertyInteger metaProperty) {
-		return (state1.getBlock() == state2.getBlock() && state1.getValue(metaProperty) == state2.getValue(metaProperty));
-	}
-
-
-	/**
-	 * Returns whether the two block states are equal to each other
-	 *
-	 * @param state1 The First Block State
-	 * @param state2 The Second Block State
-	 * @return Whether they are equal
-	 */
-	@SuppressWarnings("unchecked")
-	public boolean blockStatesEqual(IBlockState state1, IBlockState state2) {
-		for (IProperty p : (ImmutableSet<IProperty>) state1.getProperties().keySet()) {
-			if (!state2.getProperties().containsKey(p)) {
-				return false;
-			}
-			if (state1.getValue(p) != state2.getValue(p)) {
-				return false;
-			}
-		}
-		return state1.getBlock() == state2.getBlock();
-	}
-
 }

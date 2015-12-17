@@ -25,10 +25,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.ChiselBlockData;
 import team.chisel.api.block.ClientVariationData;
 import team.chisel.api.block.VariationData;
-import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.RenderContextList;
-import team.chisel.client.render.ctm.CTM;
 import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.PropertyRenderContextList;
 
@@ -49,8 +47,6 @@ public class BlockCarvable extends Block implements ICarvable {
     private int index;
 
     private BlockState realBlockState;
-
-    private final CTM ctm = CTM.getInstance();
 
     private int metaVariations;
 
