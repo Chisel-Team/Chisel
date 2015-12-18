@@ -14,10 +14,14 @@ public class CTMBlockRenderContext implements IBlockRenderContext {
 
     public CTMBlockRenderContext(IBlockAccess world, BlockPos pos) {
         for (EnumFacing face : EnumFacing.VALUES) {
-            CTM ctm = CTM.getInstance();
+            CTM ctm = createCTM();
             ctm.createSubmapIndices(world, pos, face);
             ctmData.put(face, ctm);
         }
+    }
+    
+    protected CTM createCTM() {
+        return CTM.getInstance();
     }
 
     public CTM getCTM(EnumFacing face) {

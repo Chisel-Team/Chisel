@@ -229,31 +229,27 @@ public class CTM {
      * A simple check for if the given block can connect to the given direction on the given side.
      * 
      * @param world
-     * @param x
-     *            The x coordinate of the block to check <i>against</i>. This is not the position of your block.
+     * @param current
+     *            The position of your block.
      * @param y
-     *            The y coordinate of the block to check <i>against</i>. This is not the position of your block.
-     * @param z
-     *            The z coordinate of the block to check <i>against</i>. This is not the position of your block.
+     *            The position of the block to check against.
      * @param dir
-     *            The {@link ForgeDirection side} of the block to check for connection status. This is <i>not</i> the direction to check in.
-     * @param block
-     *            The block to check against for connection.
-     * @param meta
-     *            The metadata to check against for connection.
+     *            The {@link EnumFacing side} of the block to check for connection status. This is <i>not</i> the direction to check in.
+     * @param state
+     *            The state to check against for connection.
      * @return True if the given block can connect to the given location on the given side.
      */
-    public boolean isConnected(IBlockAccess world, BlockPos pos, EnumFacing dir, IBlockState state) {
-    
+    public boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing dir, IBlockState state) {
+
 //        if (CTMLib.chiselLoaded() && connectionBlocked(world, x, y, z, dir.ordinal())) {
 //            return false;
 //        }
         
-        BlockPos pos2 = pos.add(dir.getDirectionVec());
+        BlockPos pos2 = connection.add(dir.getDirectionVec());
 
         boolean disableObscured = disableObscuredFaceCheck.or(disableObscuredFaceCheckConfig);
 
-        IBlockState con = getBlockOrFacade(world, pos, dir);
+        IBlockState con = getBlockOrFacade(world, connection, dir);
         IBlockState obscuring = disableObscured ? null : getBlockOrFacade(world, pos2, dir);
 
         // no block or a bad API user

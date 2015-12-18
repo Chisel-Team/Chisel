@@ -23,7 +23,6 @@ public abstract class AbstractChiselTexture implements IChiselTexture {
         this.sprites = sprites;
     }
 
-
     @Override
     public IBlockRenderType getBlockRenderType(){
         return this.type;

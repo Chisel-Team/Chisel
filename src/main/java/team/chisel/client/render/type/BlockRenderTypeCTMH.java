@@ -1,33 +1,25 @@
 package team.chisel.client.render.type;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
+import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
-import team.chisel.common.util.EnumConnection;
+import team.chisel.client.render.ctx.CTMHBlockRenderContext;
+import team.chisel.client.render.texture.ChiselTextureCTMH;
 
 @BlockRenderType("CTMH")
 public class BlockRenderTypeCTMH extends BlockRenderTypeCTM {
 
     @Override
-    public CTMBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos){
-        List<EnumConnection> connections = new ArrayList<EnumConnection>();
-        boolean sideConnect = false;
-        for (EnumConnection connection : EnumConnection.values()) {
-            if (connection.isValid(pos, world) ) {
-                connections.add(connection);
-                if (connection != EnumConnection.DOWN && connection != EnumConnection.UP){
-                    sideConnect = true;
-                }
-            }
-        }
-        if (sideConnect){
-            connections.remove(EnumConnection.DOWN);
-            connections.remove(EnumConnection.UP);
-        }
-        return null; // TODO new CTMBlockRenderContext(connections);
+    public IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
+        return new ChiselTextureCTMH(this, layer, sprites);
+    }
+
+    @Override
+    public CTMBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
+        return new CTMHBlockRenderContext(world, pos);
     }
 }

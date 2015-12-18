@@ -1,5 +1,8 @@
 package team.chisel.client.render;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockFaceUV;
 import net.minecraft.client.renderer.block.model.BlockPartFace;
@@ -8,13 +11,11 @@ import net.minecraft.client.renderer.block.model.FaceBakery;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
+
 import org.lwjgl.util.vector.Vector3f;
-import team.chisel.Chisel;
+
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.ctm.CTMFaceBakery;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Helper class for quad stuff
@@ -27,6 +28,10 @@ public class QuadHelper {
 
     private static final QuadPos quadPos = new QuadPos(new Vector3f(0, 0, 0), new Vector3f(16, 16, 16));
 
+    public static final float[] UVS_TOP_LEFT = new float[] { 0, 0, 8, 8 };
+    public static final float[] UVS_TOP_RIGHT = new float[] { 8, 0, 16, 8 };
+    public static final float[] UVS_BOTTOM_LEFT = new float[] { 0, 8, 8, 16 };
+    public static final float[] UVS_BOTTOM_RIGHT = new float[] { 8, 8, 16, 16 };
 
     /**
      * Make a normal quad for a face

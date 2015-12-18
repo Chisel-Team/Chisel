@@ -69,10 +69,11 @@ public enum Dir {
      */
     public boolean isConnected(CTM inst, IBlockAccess world, BlockPos pos, EnumFacing side, IBlockState state) {
         EnumFacing[] dirs = getNormalizedDirs(side);
+        BlockPos connection = pos;
         for (EnumFacing dir : dirs) {
-            pos = pos.add(dir.getDirectionVec());
+            connection = connection.offset(dir);
         }
-        return inst.isConnected(world, pos, side, state);
+        return inst.isConnected(world, pos, connection, side, state);
     }
 
 	private EnumFacing[] getNormalizedDirs(EnumFacing normal) {

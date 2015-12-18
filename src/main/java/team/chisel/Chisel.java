@@ -47,12 +47,16 @@ public class Chisel implements Reference {
         GameRegistry.registerItem(itemChisel, "itemChisel");
         GameRegistry.addShapedRecipe(new ItemStack(itemChisel), " x", "s ", 'x', Items.iron_ingot, 's', Items.stick);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
-        
+
         ChiselBlockFactory factory = ChiselBlockFactory.newFactory("chisel");
-        ChiselBlockData voidstone = factory.newBlock("voidstone").newVariation("normal", "test").
-                setTextureLocation(new ResourceLocation("chisel", "textures/blocks/voidstone/normal.json")).buildVariation().build();
+        ChiselBlockData voidstone = factory.newBlock("voidstone").newVariation("normal", "test").setTextureLocation(new ResourceLocation("chisel", "textures/blocks/voidstone/normal.json"))
+                .buildVariation().build();
         BlockRegistry.registerBlock(voidstone);
-        
+
+        ChiselBlockData bookshelf = factory.newBlock("bookshelf").newVariation("necromancer", "test").setTextureLocation(new ResourceLocation("chisel", "textures/blocks/bookshelf/necromancer.json"))
+                .buildVariation().build();
+        BlockRegistry.registerBlock(bookshelf);
+
         Carving.chisel.addVariation("test", Blocks.bedrock.getDefaultState(), 99);
         
         proxy.preInit(event);
