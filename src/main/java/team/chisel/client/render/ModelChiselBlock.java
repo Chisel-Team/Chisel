@@ -26,6 +26,7 @@ import team.chisel.common.block.ItemChiselBlock;
 /**
  * Model for all chisel blocks
  */
+@SuppressWarnings("deprecation")
 public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
 
     private List<BakedQuad> quads;
@@ -93,11 +94,11 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
             IExtendedBlockState state = (IExtendedBlockState) stateIn;
             BlockCarvable block = (BlockCarvable) state.getBlock();
             RenderContextList ctxList = state.getValue(BlockCarvable.CTX_LIST);
-            List<BakedQuad> quadList = new ArrayList<BakedQuad>();
-            ClientVariationData varData = (ClientVariationData) block.getBlockData().variations[MathHelper.clamp_int(state.getValue(block.metaProp),
+            quads = new ArrayList<BakedQuad>();
+            variationData = (ClientVariationData) block.getBlockData().variations[MathHelper.clamp_int(state.getValue(block.metaProp),
                     0, block.getBlockData().variations.length)];
             for (EnumFacing facing : EnumFacing.VALUES){
-                ChiselFace face = varData.getFaceForSide(facing);
+                ChiselFace face = variationData.getFaceForSide(facing);
                 if (MinecraftForgeClient.getRenderLayer() != face.getLayer()){
                     Chisel.debug("Skipping Layer "+ MinecraftForgeClient.getRenderLayer()+" for block "+state);
                     continue;
@@ -109,10 +110,10 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
                     }
                 }
                 for (IChiselTexture tex : face.getTextureList()){
-                    quadList.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getBlockRenderType()), singleGreatestQuadGoal));
+                    quads.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getBlockRenderType()), singleGreatestQuadGoal));
                 }
             }
-            return new ModelChiselBlock(quadList, varData);
+            return this;
         }
         else {
             return this;
@@ -124,15 +125,15 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
         //Chisel.debug("Handling item model for "+stack);
         if (stack.getItem() instanceof ItemChiselBlock){
             BlockCarvable block = (BlockCarvable) ((ItemChiselBlock)stack.getItem()).getBlock();
-            ClientVariationData varData = (ClientVariationData) block.getBlockData().getVariation(stack.getItemDamage());
-            List<BakedQuad> quads = new ArrayList<BakedQuad>();
+            variationData = (ClientVariationData) block.getBlockData().getVariation(stack.getItemDamage());
+            quads = new ArrayList<BakedQuad>();
             for (EnumFacing facing : EnumFacing.VALUES){
                 //quads.add(QuadHelper.makeNormalFaceQuad(facing, varData.getFaceForSide(facing).getParticle()));
-                for (IChiselTexture tex : varData.getFaceForSide(facing).getTextureList()){
+                for (IChiselTexture tex : variationData.getFaceForSide(facing).getTextureList()){
                     quads.addAll(tex.getSideQuads(facing, null, 1));
                 }
             }
-            return new ModelChiselBlock(quads, varData);
+            return new ModelChiselBlock(quads, variationData);
         }
         else {
             return this;
