@@ -9,7 +9,7 @@ import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctm.CTM;
-import team.chisel.client.render.ctx.CTMHBlockRenderContext;
+import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.type.BlockRenderTypeCTM;
 import team.chisel.common.util.Dir;
 
@@ -32,7 +32,7 @@ public class ChiselTextureCTMH extends AbstractChiselTexture {
             if (context == null) {
                 return Lists.newArrayList(QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), new float[] { 0, 0, 8, 8 }));
             }
-            CTM ctm = ((CTMHBlockRenderContext) context).getCTM(side);
+            CTM ctm = ((CTMBlockRenderContext) context).getCTM(side);
             return Lists.newArrayList(getQuad(side, ctm));
         }
     }

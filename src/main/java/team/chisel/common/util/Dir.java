@@ -44,36 +44,51 @@ public enum Dir {
 
 	private Dir(EnumFacing... dirs) {
 		this.dirs = dirs;
-	}
+    }
 
-	/**
+    /**
      * Finds if this block is connected for the given side in this Dir.
      * 
      * @param inst
      *            The CTM instance to use for logic.
      * @param world
      *            The world the block is in.
-     * @param x
-     *            The x coordinate of your block.
-     * @param y
-     *            The y coordinate of your block.
-     * @param z
-     *            The z coordinate of your block.
-     * @param sideIdx
-     *            The side index of the current face. This equivalent to {@link ForgeDirection#ordinal()}
-     * @param block
-     *            The block being rendered.
-     * @param meta
-     *            The metadata of the block.
+     * @param pos
+     *            The position of your block.
+     * @param side
+     *            The side of the current face.
      * @return True if the block is connected in the given Dir, false otherwise.
      */
-    public boolean isConnected(CTM inst, IBlockAccess world, BlockPos pos, EnumFacing side, IBlockState state) {
+    public boolean isConnected(CTM ctm, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return ctm.isConnected(world, pos, getConnection(pos, side), side);
+    }
+
+    /**
+     * Finds if this block is connected for the given side in this Dir.
+     * 
+     * @param inst
+     *            The CTM instance to use for logic.
+     * @param world
+     *            The world the block is in.
+     * @param pos
+     *            The position of your block.
+     * @param side
+     *            The side of the current face.
+     * @param side
+     *            The state to check for connection with.
+     * @return True if the block is connected in the given Dir, false otherwise.
+     */
+    public boolean isConnected(CTM ctm, IBlockAccess world, BlockPos pos, EnumFacing side, IBlockState state) {
+        return ctm.isConnected(world, pos, getConnection(pos, side), side, state);
+    }
+    
+    private BlockPos getConnection(BlockPos pos, EnumFacing side) {
         EnumFacing[] dirs = getNormalizedDirs(side);
         BlockPos connection = pos;
         for (EnumFacing dir : dirs) {
             connection = connection.offset(dir);
         }
-        return inst.isConnected(world, pos, connection, side, state);
+        return connection;
     }
 
 	private EnumFacing[] getNormalizedDirs(EnumFacing normal) {

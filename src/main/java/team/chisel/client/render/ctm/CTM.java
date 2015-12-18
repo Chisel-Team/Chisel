@@ -223,7 +223,25 @@ public class CTM {
 			}
 		}
 		return false;
-	}
+    }
+
+    /**
+     * A simple check for if the given block can connect to the given direction on the given side.
+     * 
+     * @param world
+     * @param current
+     *            The position of your block.
+     * @param y
+     *            The position of the block to check against.
+     * @param dir
+     *            The {@link EnumFacing side} of the block to check for connection status. This is <i>not</i> the direction to check in.
+     * @return True if the given block can connect to the given location on the given side.
+     */
+    public boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing dir) {
+
+        IBlockState state = world.getBlockState(current);
+        return isConnected(world, current, connection, dir, state);
+    }
 
     /**
      * A simple check for if the given block can connect to the given direction on the given side.
@@ -239,12 +257,12 @@ public class CTM {
      *            The state to check against for connection.
      * @return True if the given block can connect to the given location on the given side.
      */
-    public boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing dir, IBlockState state) {
+    public Boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing dir, IBlockState state) {
 
-//        if (CTMLib.chiselLoaded() && connectionBlocked(world, x, y, z, dir.ordinal())) {
-//            return false;
-//        }
-        
+//      if (CTMLib.chiselLoaded() && connectionBlocked(world, x, y, z, dir.ordinal())) {
+//          return false;
+//      }
+      
         BlockPos pos2 = connection.add(dir.getDirectionVec());
 
         boolean disableObscured = disableObscuredFaceCheck.or(disableObscuredFaceCheckConfig);
