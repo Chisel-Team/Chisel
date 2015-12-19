@@ -17,9 +17,10 @@ import net.minecraftforge.client.model.ISmartItemModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.Chisel;
 import team.chisel.api.block.ClientVariationData;
-import team.chisel.api.render.ChiselFace;
+import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
+import team.chisel.client.BlockFaceData;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
 
@@ -31,9 +32,9 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
 
     private List<BakedQuad> quads;
 
-    private ClientVariationData variationData;
+    private BlockFaceData.VariationFaceData variationData;
 
-    public ModelChiselBlock(List<BakedQuad> quads, ClientVariationData data){
+    public ModelChiselBlock(List<BakedQuad> quads, BlockFaceData.VariationFaceData data){
         this.quads = quads;
         this.variationData = data;
     }
@@ -95,10 +96,10 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
             BlockCarvable block = (BlockCarvable) state.getBlock();
             RenderContextList ctxList = state.getValue(BlockCarvable.CTX_LIST);
             quads = new ArrayList<BakedQuad>();
-            variationData = (ClientVariationData) block.getBlockData().variations[MathHelper.clamp_int(state.getValue(block.metaProp),
-                    0, block.getBlockData().variations.length)];
+            variationData = block.getBlockFaceData().getForMeta(MathHelper.clamp_int(state.getValue(block.metaProp),
+                    0, block.getBlockData().variations.length));
             for (EnumFacing facing : EnumFacing.VALUES){
-                ChiselFace face = variationData.getFaceForSide(facing);
+                IChiselFace face = variationData.getFaceForSide(facing);
                 if (MinecraftForgeClient.getRenderLayer() != face.getLayer()){
                     Chisel.debug("Skipping Layer "+ MinecraftForgeClient.getRenderLayer()+" for block "+state);
                     continue;
@@ -125,7 +126,7 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
         //Chisel.debug("Handling item model for "+stack);
         if (stack.getItem() instanceof ItemChiselBlock){
             BlockCarvable block = (BlockCarvable) ((ItemChiselBlock)stack.getItem()).getBlock();
-            variationData = (ClientVariationData) block.getBlockData().getVariation(stack.getItemDamage());
+            variationData = block.getBlockFaceData().getForMeta(stack.getItemDamage());
             quads = new ArrayList<BakedQuad>();
             for (EnumFacing facing : EnumFacing.VALUES){
                 //quads.add(QuadHelper.makeNormalFaceQuad(facing, varData.getFaceForSide(facing).getParticle()));

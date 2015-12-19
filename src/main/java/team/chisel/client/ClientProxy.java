@@ -1,5 +1,6 @@
 package team.chisel.client;
 
+import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import team.chisel.Chisel;
@@ -7,6 +8,7 @@ import team.chisel.api.block.ChiselBlockBuilder;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.CommonProxy;
+import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.init.TextureTypeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -50,6 +52,10 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new TextureStitcher());
         MinecraftForge.EVENT_BUS.register(new ChiselModelRegistry.BakedEventListener());
         MinecraftForge.EVENT_BUS.register(new DebugHandler());
+        if (Minecraft.getMinecraft().getResourceManager() instanceof SimpleReloadableResourceManager){
+            SimpleReloadableResourceManager manager = (SimpleReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
+            manager.registerReloadListener(new ChiselPackReloadListener());
+        }
     }
 
     @Override
@@ -59,5 +65,9 @@ public class ClientProxy extends CommonProxy {
         } catch (Exception exception){
             //Older version of forge, this is fine because it means this is not needed so no crash
         }
+    }
+    @Override
+    public void initiateFaceData(BlockCarvable carvable){
+        carvable.setBlockFaceData(new BlockFaceData(carvable.getBlockData().variations));
     }
 }

@@ -2,6 +2,7 @@ package team.chisel.common;
 
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import team.chisel.api.block.ChiselBlockBuilder;
+import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.util.ChiselBuilderServerImpl;
 
 /**
@@ -26,6 +27,10 @@ public class CommonProxy implements Reference{
     }
 
     public void preTextureStitch() {
+
+    }
+
+    public void initiateFaceData(BlockCarvable carvable){
 
     }
 }

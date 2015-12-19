@@ -6,9 +6,8 @@ import java.util.Map;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import team.chisel.api.render.ChiselFace;
-import team.chisel.api.render.ChiselFaceRegistry;
-import team.chisel.api.render.ChiselTextureRegistry;
+import team.chisel.Chisel;
+import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 
 import com.google.gson.Gson;
@@ -20,13 +19,17 @@ public class JsonHelper {
 
     private static Map<ResourceLocation, JsonObject> objectCache = new HashMap<ResourceLocation, JsonObject>();
 
-    private static ChiselFace createFace(ResourceLocation loc) {
+    private static Map<ResourceLocation, IChiselFace> faceCache = new HashMap<>();
+
+    private static Map<ResourceLocation, IChiselTexture> textureCache = new HashMap<>();
+
+    private static IChiselFace createFace(ResourceLocation loc) {
         checkCombined(true, loc);
 
         JsonObject object = objectCache.get(loc);
         JsonFace face = gson.fromJson(object, JsonFace.class);
-        ChiselFace cFace = face.get(loc);
-        ChiselFaceRegistry.putFace(loc, cFace);
+        IChiselFace cFace = face.get(loc);
+        faceCache.put(loc, cFace);
         return cFace;
     }
 
@@ -36,21 +39,28 @@ public class JsonHelper {
         JsonObject object = objectCache.get(loc);
         JsonTexture texture = gson.fromJson(object, JsonTexture.class);
         IChiselTexture cTexture = texture.get(loc);
-        ChiselTextureRegistry.putTexture(loc, cTexture);
+        textureCache.put(loc, cTexture);
         return cTexture;
     }
 
-    public static ChiselFace getOrCreateFace(ResourceLocation loc) {
-        if (ChiselFaceRegistry.isFace(loc)) {
-            return ChiselFaceRegistry.getFace(loc);
+    public static void flushCaches(){
+        objectCache = new HashMap<>();
+        faceCache = new HashMap<>();
+        textureCache = new HashMap<>();
+        Chisel.debug("Flushing Json caches");
+    }
+
+    public static IChiselFace getOrCreateFace(ResourceLocation loc) {
+        if (faceCache.containsKey(loc)) {
+            return faceCache.get(loc);
         } else {
             return createFace(loc);
         }
     }
 
     public static IChiselTexture getOrCreateTexture(ResourceLocation loc) {
-        if (ChiselTextureRegistry.isTex(loc)) {
-            return ChiselTextureRegistry.getTex(loc);
+        if (textureCache.containsKey(loc)) {
+            return textureCache.get(loc);
         } else {
             return createTexture(loc);
         }
@@ -78,6 +88,16 @@ public class JsonHelper {
         JsonObject object = objectCache.get(loc);
         return object.has("children") && !object.has("type");
     }
+
+    public static boolean isFace(ResourceLocation loc){
+        return faceCache.containsKey(loc);
+    }
+
+    public static boolean isTex(ResourceLocation loc){
+        return textureCache.containsKey(loc);
+    }
+
+
 
     public static void checkCombined(boolean isCombined, ResourceLocation loc) {
         boolean check = isCombined(loc);

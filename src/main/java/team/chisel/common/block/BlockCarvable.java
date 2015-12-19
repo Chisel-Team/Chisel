@@ -22,11 +22,13 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import team.chisel.Chisel;
 import team.chisel.api.block.ChiselBlockData;
 import team.chisel.api.block.ClientVariationData;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.RenderContextList;
+import team.chisel.client.BlockFaceData;
 import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.PropertyRenderContextList;
 
@@ -44,6 +46,9 @@ public class BlockCarvable extends Block implements ICarvable {
 
     private ChiselBlockData data;
 
+    @SideOnly(Side.CLIENT)
+    private BlockFaceData blockFaceData;
+
     private int index;
 
     private BlockState realBlockState;
@@ -54,9 +59,6 @@ public class BlockCarvable extends Block implements ICarvable {
         super(data.material);
         setCreativeTab(ChiselTabs.tab);
         this.data = data;
-        if (this.data == null){
-            throw new IllegalArgumentException("Data cannot be null!");
-        }
         this.index = index;
         int max;
         if (data.variations.length >= 16){
@@ -71,7 +73,17 @@ public class BlockCarvable extends Block implements ICarvable {
         setupStates();
         setUnlocalizedName(data.name);
         setHardness(data.hardness);
+        Chisel.proxy.initiateFaceData(this);
+    }
 
+    @SideOnly(Side.CLIENT)
+    public BlockFaceData getBlockFaceData(){
+        return this.blockFaceData;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void setBlockFaceData(BlockFaceData data){
+        this.blockFaceData = data;
     }
 
     public int getTotalMetaVariations(){
@@ -181,8 +193,7 @@ public class BlockCarvable extends Block implements ICarvable {
 			return stateIn;
 		}
 		IExtendedBlockState state = (IExtendedBlockState) stateIn;
-        ClientVariationData data = (ClientVariationData) this.data.variations[state.getValue(metaProp)];
-        List<IBlockRenderType> types = data.getTypesUsed();
+        List<IBlockRenderType> types = this.blockFaceData.getForMeta(state.getValue(metaProp)).getTypesUsed();
 
         RenderContextList ctxList = new RenderContextList(types, w, pos);
 
@@ -243,7 +254,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean canRenderInLayer(EnumWorldBlockLayer layer){
-        return this.data.isValid(layer);
+        return true;
     }
     @Override
     public boolean isFullBlock(){

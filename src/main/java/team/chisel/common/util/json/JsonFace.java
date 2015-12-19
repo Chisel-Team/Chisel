@@ -4,17 +4,16 @@ import java.util.List;
 
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ResourceLocation;
-import team.chisel.api.render.ChiselFace;
-import team.chisel.api.render.ChiselFaceRegistry;
-import team.chisel.api.render.ChiselTextureRegistry;
+import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 
 import com.google.common.base.Preconditions;
+import team.chisel.client.ChiselFace;
 
 /**
  * Json version of ChiselFace
  */
-public class JsonFace extends JsonObjectBase<ChiselFace> {
+public class JsonFace extends JsonObjectBase<IChiselFace> {
 
     /**
      * If this is the type COMBINED then these are the identifiers of the child textures
@@ -22,18 +21,18 @@ public class JsonFace extends JsonObjectBase<ChiselFace> {
     private String[] children;
 
     @Override
-    protected ChiselFace create(ResourceLocation loc) {
+    protected IChiselFace create(ResourceLocation loc) {
         Preconditions.checkNotNull(children, "COMBINED texture type must have children textures!");
-        ChiselFace face = new ChiselFace();
+        IChiselFace face = new ChiselFace(loc);
         for (String child : children) {
             if (JsonHelper.isLocalPath(child)) {
                 child = JsonHelper.toAbsolutePath(child, loc);
             }
             ResourceLocation childLoc = new ResourceLocation(child + ".json");
-            if (ChiselFaceRegistry.isFace(childLoc)) {
-                face.addChildFace(ChiselFaceRegistry.getFace(childLoc));
-            } else if (ChiselTextureRegistry.isTex(childLoc)) {
-                face.addTexture(ChiselTextureRegistry.getTex(childLoc));
+            if (JsonHelper.isFace(childLoc)) {
+                face.addChildFace(JsonHelper.getOrCreateFace(childLoc));
+            } else if (JsonHelper.isTex(childLoc)) {
+                face.addTexture(JsonHelper.getOrCreateTexture(childLoc));
             } else {
                 if (JsonHelper.isCombined(childLoc)) {
                     face.addChildFace(JsonHelper.getOrCreateFace(childLoc));

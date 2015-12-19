@@ -1,6 +1,9 @@
 package team.chisel.common.init;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -20,6 +23,8 @@ public class BlockRegistry {
 
     private static Map<String, ChiselBlockData> rawBlockData = new HashMap<String, ChiselBlockData>();
 
+    private static Map<String, BlockCarvable> blocks = new HashMap<>();
+
     public static void registerBlock(ChiselBlockData data){
         if (data == null){
             throw new IllegalArgumentException("Block Data cannot be null!");
@@ -30,6 +35,10 @@ public class BlockRegistry {
         else {
             throw new IllegalArgumentException("Block "+data.name+" has already been registered");
         }
+    }
+
+    public static Collection<ChiselBlockData> getAllBlockData(){
+        return rawBlockData.values();
     }
 
     public static void preInit(FMLPreInitializationEvent event){
@@ -43,6 +52,7 @@ public class BlockRegistry {
                 VariationData[] vars = split[i];
                 BlockCarvable block = new BlockCarvable(data, i);
                 GameRegistry.registerBlock(block, ItemChiselBlock.class, block.getName());
+                blocks.put(block.getName(), block);
                 for (int meta = 0; i < vars.length; i++) {
                     if (vars[meta].group != null) {
                         Carving.chisel.addVariation(vars[meta].group, block.getDefaultState().withProperty(block.metaProp, meta), meta + (i * 16));
@@ -55,6 +65,10 @@ public class BlockRegistry {
             }
 
         }
+    }
+
+    public static List<BlockCarvable> getAllBlocks(){
+        return new ArrayList<>(blocks.values());
     }
 
     private static VariationData[][] splitVariationArray(VariationData[] array) {

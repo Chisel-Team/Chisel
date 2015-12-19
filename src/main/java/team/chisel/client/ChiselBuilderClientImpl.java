@@ -7,10 +7,7 @@ import team.chisel.api.block.ChiselBlockBuilder;
 import team.chisel.api.block.ChiselRecipe;
 import team.chisel.api.block.ClientVariationData;
 import team.chisel.api.block.VariationData;
-import team.chisel.api.render.ChiselFace;
-import team.chisel.common.util.json.JsonHelper;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -21,12 +18,7 @@ public class ChiselBuilderClientImpl implements ChiselBlockBuilder.VariationBuil
     @Override
     public VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,
                                boolean beaconBase, ResourceLocation texLocation, Map<EnumFacing, ResourceLocation> overrideMap){
-        ChiselFace defaultFace = JsonHelper.getOrCreateFace(texLocation);
-        Map<EnumFacing, ChiselFace> faceMap = new HashMap<EnumFacing, ChiselFace>();
-        for (Map.Entry<EnumFacing, ResourceLocation> entry : overrideMap.entrySet()){
-            faceMap.put(entry.getKey(), JsonHelper.getOrCreateFace(entry.getValue()));
-        }
-        return new ClientVariationData(name, group, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index, defaultFace, faceMap);
+        return new ClientVariationData(name, group, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index, texLocation, overrideMap);
     }
 
 }

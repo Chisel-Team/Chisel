@@ -6,7 +6,7 @@ import java.util.Map;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import team.chisel.api.render.ChiselFace;
+import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
 
@@ -19,57 +19,18 @@ public class ClientVariationData extends VariationData {
     /**
      * The Default chisel texture for the sides of this block
      */
-    public ChiselFace defaultFace;
+    public ResourceLocation defaultFace;
 
     /**
      * The chisel texture for the sides of this block
      */
-    private Map<EnumFacing, ChiselFace> sideOverrides;
-
-    private List<IBlockRenderType> typesUsed;
+    public Map<EnumFacing, ResourceLocation> sideOverrides;
     
     public ClientVariationData(String name, String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted,
                                int light, float hardness, boolean beaconBase, int index,
-                               ChiselFace defaultFace, Map<EnumFacing, ChiselFace> sideOverrides){
+                               ResourceLocation defaultFace, Map<EnumFacing, ResourceLocation> sideOverrides){
         super(name, group, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index);
         this.defaultFace = defaultFace;
         this.sideOverrides = sideOverrides;
-        this.typesUsed = new ArrayList<IBlockRenderType>();
-        for (ChiselFace face : sideOverrides.values()){
-            for (IChiselTexture texture : face.getTextureList()) {
-                if (!typesUsed.contains(texture.getBlockRenderType())){
-                    typesUsed.add(texture.getBlockRenderType());
-                }
-            }
-        }
-        for (IChiselTexture texture : defaultFace.getTextureList()) {
-            if (!typesUsed.contains(texture.getBlockRenderType())) {
-                typesUsed.add(texture.getBlockRenderType());
-            }
-        }
     }
-
-    public List<ChiselFace> getAllFaces(){
-        List<ChiselFace> faces = new ArrayList<ChiselFace>();
-        faces.add(defaultFace);
-        faces.addAll(sideOverrides.values());
-        return faces;
-    }
-
-    public List<IBlockRenderType> getTypesUsed() {
-        return this.typesUsed;
-    }
-
-    public ChiselFace getFaceForSide(EnumFacing facing){
-        if (facing == null){
-            return defaultFace;
-        }
-        else if (sideOverrides.containsKey(facing)){
-            return sideOverrides.get(facing);
-        }
-        else {
-            return defaultFace;
-        }
-    }
-
 }
