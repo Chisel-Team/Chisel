@@ -2,7 +2,10 @@ package team.chisel.client;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
 import team.chisel.api.block.ChiselRecipe;
 import team.chisel.api.block.ClientVariationData;
@@ -23,6 +26,8 @@ import java.util.Map;
 public class BlockFaceData {
 
     private VariationFaceData[] variationData;
+
+    private List<EnumWorldBlockLayer> layers;
 
     public BlockFaceData(ClientVariationData[] clientVariationData){
         variationData = new VariationFaceData[clientVariationData.length];
@@ -45,6 +50,20 @@ public class BlockFaceData {
             Chisel.debug("Meta "+meta+" out of bounds");
             return this.variationData[meta];
         }
+    }
+
+    public boolean isValid(EnumWorldBlockLayer layer){
+        if (this.layers == null){
+            this.layers = new ArrayList<EnumWorldBlockLayer>();
+            for (VariationFaceData data : this.variationData){
+                for (IChiselFace face : data.getAllFaces()){
+                    if (!this.layers.contains(face.getLayer())){
+                        this.layers.add(face.getLayer());
+                    }
+                }
+            }
+        }
+        return this.layers.contains(layer);
     }
 
 

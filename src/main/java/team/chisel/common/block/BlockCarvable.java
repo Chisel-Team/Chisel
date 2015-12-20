@@ -254,7 +254,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean canRenderInLayer(EnumWorldBlockLayer layer){
-        return true;
+        return this.blockFaceData.isValid(layer);
     }
     @Override
     public boolean isFullBlock(){

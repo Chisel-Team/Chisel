@@ -48,7 +48,9 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
     public List<BakedQuad> getFaceQuads(EnumFacing facing){
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
         for (BakedQuad quad : this.quads){
-            toReturn.add(quad);
+            if (quad.getFace() == facing) {
+                toReturn.add(quad);
+            }
         }
         return toReturn;
     }

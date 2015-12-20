@@ -50,8 +50,6 @@ public class ChiselBlockData {
      */
     public boolean beaconBase;
 
-    @SideOnly(Side.CLIENT)
-    private List<EnumWorldBlockLayer> layers;
 
 
 
