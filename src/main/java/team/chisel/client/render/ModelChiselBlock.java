@@ -1,6 +1,7 @@
 package team.chisel.client.render;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
@@ -16,13 +17,14 @@ import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.Chisel;
-import team.chisel.api.block.ClientVariationData;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.BlockFaceData;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
+
+import com.google.common.collect.FluentIterable;
 
 /**
  * Model for all chisel blocks
@@ -43,21 +45,14 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
         this(new ArrayList<BakedQuad>(), null);
     }
 
-
     @Override
     public List<BakedQuad> getFaceQuads(EnumFacing facing){
-        List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
-        for (BakedQuad quad : this.quads){
-            if (quad.getFace() == facing) {
-                toReturn.add(quad);
-            }
-        }
-        return toReturn;
+        return FluentIterable.from(quads).filter(quad -> quad.getFace() == facing).toList();
     }
 
     @Override
-    public List<BakedQuad> getGeneralQuads(){
-        return this.quads;
+    public List<BakedQuad> getGeneralQuads() {
+        return Collections.emptyList(); // TODO this should be a separate list when we implement non-full blocks
     }
 
     @Override
