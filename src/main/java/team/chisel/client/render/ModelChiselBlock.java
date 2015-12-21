@@ -25,6 +25,7 @@ import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
 
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Ordering;
 
 /**
  * Model for all chisel blocks
@@ -101,14 +102,9 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
                     Chisel.debug("Skipping Layer "+ MinecraftForgeClient.getRenderLayer()+" for block "+state);
                     continue;
                 }
-                int singleGreatestQuadGoal = 1;
+                int quadGoal = Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getBlockRenderType().getQuadsPerSide()));
                 for (IChiselTexture tex : face.getTextureList()){
-                    if (tex.getBlockRenderType().getQuadsPerSide() > singleGreatestQuadGoal){
-                        singleGreatestQuadGoal = tex.getBlockRenderType().getQuadsPerSide();
-                    }
-                }
-                for (IChiselTexture tex : face.getTextureList()){
-                    quads.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getBlockRenderType()), singleGreatestQuadGoal));
+                    quads.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getBlockRenderType()), quadGoal));
                 }
             }
             return this;

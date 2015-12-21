@@ -57,6 +57,10 @@ public class Chisel implements Reference {
                 .buildVariation().build();
         BlockRegistry.registerBlock(bookshelf);
 
+        ChiselBlockData brick = factory.newBlock("brick").newVariation("aged-brick", "test").setTextureLocation(new ResourceLocation("chisel", "textures/blocks/brick/aged-brick.json"))
+                .buildVariation().build();
+        BlockRegistry.registerBlock(brick);
+
         Carving.chisel.addVariation("test", Blocks.bedrock.getDefaultState(), 99);
         
         proxy.preInit(event);
