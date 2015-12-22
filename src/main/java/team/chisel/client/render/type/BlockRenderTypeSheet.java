@@ -3,8 +3,9 @@ package team.chisel.client.render.type;
 import lombok.Getter;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
-import team.chisel.client.render.ctx.BlockRenderContextSheet;
+import team.chisel.client.render.ctx.BlockRenderContextPosition;
 
 /**
  * Abstract block render type for blocks that need to keep track of x/y/z modules
@@ -18,9 +19,9 @@ public abstract class BlockRenderTypeSheet implements IBlockRenderType {
         this.xSize = xSize;
         this.ySize = ySize;
     }
-
+    
     @Override
-    public BlockRenderContextSheet getBlockRenderContext(IBlockAccess world, BlockPos pos){
-        return new BlockRenderContextSheet(pos.getX(), pos.getY(), pos.getZ(), xSize, ySize);
+    public IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
+        return new BlockRenderContextPosition(pos);
     }
 }

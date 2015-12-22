@@ -11,7 +11,7 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
-import team.chisel.client.render.ctx.BlockRenderContextSheet;
+import team.chisel.client.render.ctx.BlockRenderContextPosition;
 import team.chisel.client.render.type.BlockRenderTypeV;
 
 /**
@@ -26,7 +26,7 @@ public class ChiselTextureV extends AbstractChiselTexture<BlockRenderTypeV> {
     @Override
     public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int quadGoal) {
 
-        BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextSheet)context).getPosition();
+        BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition)context).getPosition();
 
         int x = pos.getX();
         int y = pos.getY();
