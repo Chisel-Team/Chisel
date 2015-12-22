@@ -1,5 +1,6 @@
 package team.chisel.client.render.type;
 
+import lombok.Getter;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.IBlockRenderType;
@@ -10,9 +11,10 @@ import team.chisel.client.render.ctx.BlockRenderContextSheet;
  */
 public abstract class BlockRenderTypeSheet implements IBlockRenderType {
 
-    private int xSize, ySize;
+    @Getter
+    private final int xSize, ySize;
 
-    protected BlockRenderTypeSheet(int xSize, int ySize){
+    public BlockRenderTypeSheet(int xSize, int ySize){
         this.xSize = xSize;
         this.ySize = ySize;
     }

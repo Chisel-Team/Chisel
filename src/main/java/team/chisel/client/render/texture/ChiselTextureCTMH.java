@@ -10,17 +10,14 @@ import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctm.CTM;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
-import team.chisel.client.render.type.BlockRenderTypeCTM;
+import team.chisel.client.render.type.BlockRenderTypeCTMH;
 import team.chisel.common.util.Dir;
 
 import com.google.common.collect.Lists;
 
-/**
- * Chisel Texture for CTM
- */
-public class ChiselTextureCTMH extends AbstractChiselTexture {
+public class ChiselTextureCTMH extends AbstractChiselTexture<BlockRenderTypeCTMH> {
 
-    public ChiselTextureCTMH(BlockRenderTypeCTM type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+    public ChiselTextureCTMH(BlockRenderTypeCTMH type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
         super(type, layer, sprites);
     }
 
@@ -36,7 +33,7 @@ public class ChiselTextureCTMH extends AbstractChiselTexture {
             return Lists.newArrayList(getQuad(side, ctm));
         }
     }
-    
+
     private BakedQuad getQuad(EnumFacing side, CTM ctm) {
         if (ctm.connectedAnd(Dir.LEFT, Dir.RIGHT)) {
             return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), new float[] { 8, 0, 16, 8 });

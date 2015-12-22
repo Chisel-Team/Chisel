@@ -14,7 +14,7 @@ import team.chisel.client.render.type.BlockRenderTypeNormal;
 /**
  * Chisel texture for a normal texture
  */
-public class ChiselTextureNormal extends AbstractChiselTexture {
+public class ChiselTextureNormal extends AbstractChiselTexture<BlockRenderTypeNormal> {
 
     public ChiselTextureNormal(BlockRenderTypeNormal type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
         super(type, layer, sprites);

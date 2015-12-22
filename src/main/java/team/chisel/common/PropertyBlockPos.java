@@ -21,7 +21,7 @@ public class PropertyBlockPos implements IUnlistedProperty<BlockPos> {
     }
 
     @Override
-    public Class getType() {
+    public Class<BlockPos> getType() {
         return BlockPos.class;
     }
 

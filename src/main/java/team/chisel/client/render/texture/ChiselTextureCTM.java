@@ -7,14 +7,14 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
-import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
+import team.chisel.client.render.type.BlockRenderTypeCTM;
 
-public class ChiselTextureCTM extends AbstractChiselTexture {
+public class ChiselTextureCTM extends AbstractChiselTexture<BlockRenderTypeCTM> {
 
-    public ChiselTextureCTM(IBlockRenderType type, EnumWorldBlockLayer layer, TextureSpriteCallback[] sprites) {
+    public ChiselTextureCTM(BlockRenderTypeCTM type, EnumWorldBlockLayer layer, TextureSpriteCallback[] sprites) {
         super(type, layer, sprites);
     }
 

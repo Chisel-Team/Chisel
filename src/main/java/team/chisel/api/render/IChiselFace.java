@@ -1,15 +1,15 @@
 package team.chisel.api.render;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumWorldBlockLayer;
 
-import java.util.List;
-
 public interface IChiselFace {
 
-    List<IChiselTexture> getTextureList();
+    List<IChiselTexture<?>> getTextureList();
 
-    void addTexture(IChiselTexture texture);
+    void addTexture(IChiselTexture<?> texture);
 
     void addChildFace(IChiselFace face);
 

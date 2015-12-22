@@ -1,12 +1,13 @@
 package team.chisel.client.command;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
 
-import java.util.List;
+import com.google.common.collect.Lists;
 
 /**
  * Command for testing purposes
@@ -26,7 +27,7 @@ public class CommandTest implements ICommand {
     }
 
     @Override
-    public List getCommandAliases() {
+    public List<String> getCommandAliases() {
         return Lists.newArrayList();
     }
 
@@ -40,7 +41,7 @@ public class CommandTest implements ICommand {
     }
 
     @Override
-    public List addTabCompletionOptions(ICommandSender var1, String[] var2, BlockPos var3) {
+    public List<String> addTabCompletionOptions(ICommandSender var1, String[] var2, BlockPos var3) {
         return Lists.newArrayList();
     }
 

@@ -1,16 +1,16 @@
 package team.chisel.api.render;
 
+import java.util.List;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 
-import java.util.List;
-
 /**
  * Represents a Chisel Texture/resource
  */
-public interface IChiselTexture {
+public interface IChiselTexture<T extends IBlockRenderType> {
 
     /**
      * Gets a list of quads for the side for this texture
@@ -30,7 +30,7 @@ public interface IChiselTexture {
      * 
      * @return The Rendertype of this texture
      */
-    IBlockRenderType getBlockRenderType();
+    T getBlockRenderType();
 
     /**
      * Gets the texture for a particle

@@ -1,24 +1,20 @@
 package team.chisel.client;
 
-import net.minecraft.item.ItemStack;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
-import team.chisel.api.block.ChiselRecipe;
 import team.chisel.api.block.ClientVariationData;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.common.util.json.JsonHelper;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Block Face data for a block
@@ -99,13 +95,13 @@ public class BlockFaceData {
             this.sideOverrides = sideOverrides;
             this.typesUsed = new ArrayList<IBlockRenderType>();
             for (IChiselFace face : sideOverrides.values()){
-                for (IChiselTexture texture : face.getTextureList()) {
+                for (IChiselTexture<?> texture : face.getTextureList()) {
                     if (!typesUsed.contains(texture.getBlockRenderType())){
                         typesUsed.add(texture.getBlockRenderType());
                     }
                 }
             }
-            for (IChiselTexture texture : defaultFace.getTextureList()) {
+            for (IChiselTexture<?> texture : defaultFace.getTextureList()) {
                 if (!typesUsed.contains(texture.getBlockRenderType())) {
                     typesUsed.add(texture.getBlockRenderType());
                 }

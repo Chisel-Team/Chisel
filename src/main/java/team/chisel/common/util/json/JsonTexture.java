@@ -18,7 +18,7 @@ import com.google.common.base.Preconditions;
 /**
  * Raw version of IChiselTexture
  */
-public class JsonTexture extends JsonObjectBase<IChiselTexture> {
+public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
 
     /**
      * The String for the type of texture
@@ -37,7 +37,7 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture> {
     private String layer;
 
     @Override
-    protected IChiselTexture create(ResourceLocation loc) {
+    protected IChiselTexture<?> create(ResourceLocation loc) {
         Preconditions.checkArgument(TextureTypeRegistry.isValid(this.type), "Texture Type " + this.type + " is not valid");
 
         IBlockRenderType type = TextureTypeRegistry.getType(this.type);

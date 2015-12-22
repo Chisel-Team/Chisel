@@ -10,7 +10,7 @@ import team.chisel.client.render.texture.ChiselTextureCTMH;
 public class BlockRenderTypeCTMH extends BlockRenderTypeCTM {
 
     @Override
-    public IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
+    public IChiselTexture<BlockRenderTypeCTMH> makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
         return new ChiselTextureCTMH(this, layer, sprites);
     }
 }

@@ -1,7 +1,6 @@
 package team.chisel.client.render.texture;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -18,28 +17,23 @@ import team.chisel.client.render.type.BlockRenderTypeV;
 /**
  * Texture for V texture types
  */
-public class ChiselTextureV extends AbstractChiselTexture {
+public class ChiselTextureV extends AbstractChiselTexture<BlockRenderTypeV> {
 
     public ChiselTextureV(BlockRenderTypeV type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
         super(type, layer, sprites);
     }
 
     @Override
-    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext contextIn, int quadGoal) {
-        if (contextIn == null){
-            return Arrays.asList(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), new float[]{0, 0, 8, 8}));
-        }
+    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int quadGoal) {
 
-        BlockRenderContextSheet context = (BlockRenderContextSheet) contextIn;
-
-        BlockPos pos = context.getPosition();
+        BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextSheet)context).getPosition();
 
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
 
-        int xSize = context.getXSize();
-        int ySize = context.getYSize();
+        int xSize = getBlockRenderType().getXSize();
+        int ySize = getBlockRenderType().getYSize();
 
         int tx, ty;
 

@@ -6,9 +6,9 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.client.ChiselFace;
 
 import com.google.common.base.Preconditions;
-import team.chisel.client.ChiselFace;
 
 /**
  * Json version of ChiselFace
@@ -45,9 +45,9 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
         return face;
     }
 
-    private EnumWorldBlockLayer getLayer(List<IChiselTexture> textures) {
+    private EnumWorldBlockLayer getLayer(List<IChiselTexture<?>> list) {
         EnumWorldBlockLayer layer = EnumWorldBlockLayer.SOLID;
-        for (IChiselTexture tex : textures) {
+        for (IChiselTexture<?> tex : list) {
             EnumWorldBlockLayer texLayer = tex.getLayer();
             if (texLayer.ordinal() > layer.ordinal()) {
                 layer = texLayer;

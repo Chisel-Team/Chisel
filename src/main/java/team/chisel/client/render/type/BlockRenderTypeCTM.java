@@ -17,8 +17,8 @@ import team.chisel.client.render.texture.ChiselTextureCTM;
 public class BlockRenderTypeCTM implements IBlockRenderType {
 
     @Override
-    public IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
-        return new ChiselTextureCTM(this, layer, sprites);
+    public IChiselTexture<? extends BlockRenderTypeCTM> makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
+      return new ChiselTextureCTM(this, layer, sprites);
     }
 
     @Override

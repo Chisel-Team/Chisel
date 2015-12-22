@@ -14,7 +14,7 @@ import team.chisel.api.render.IChiselTexture;
  */
 public final class ChiselFace implements IChiselFace {
 
-    private List<IChiselTexture> textureList;
+    private List<IChiselTexture<?>> textureList;
 
     private List<IChiselFace> childFaces;
 
@@ -26,21 +26,19 @@ public final class ChiselFace implements IChiselFace {
         this(new ArrayList<>(), new ArrayList<>(), location);
     }
 
-    public ChiselFace(ResourceLocation location, EnumWorldBlockLayer layer){
+    public ChiselFace(ResourceLocation location, EnumWorldBlockLayer layer) {
         this(location);
         setLayer(layer);
     }
 
-    public ChiselFace(List<IChiselTexture> textureList, List<IChiselFace> childFaces,
-                      ResourceLocation location) {
+    public ChiselFace(List<IChiselTexture<?>> textureList, List<IChiselFace> childFaces, ResourceLocation location) {
         this.textureList = textureList;
         this.childFaces = childFaces;
         this.location = location;
-        this.layer = layer;
     }
 
-    public List<IChiselTexture> getTextureList(){
-        List<IChiselTexture> list = new ArrayList<IChiselTexture>();
+    public List<IChiselTexture<?>> getTextureList(){
+        List<IChiselTexture<?>> list = new ArrayList<>();
         list.addAll(this.textureList);
         for (IChiselFace face : childFaces){
             list.addAll(face.getTextureList());
@@ -48,7 +46,7 @@ public final class ChiselFace implements IChiselFace {
         return list;
     }
 
-    public void addTexture(IChiselTexture texture){
+    public void addTexture(IChiselTexture<?> texture){
         this.textureList.add(texture);
     }
 
@@ -56,7 +54,7 @@ public final class ChiselFace implements IChiselFace {
         this.childFaces.add(face);
     }
 
-    public boolean removeTexture(IChiselTexture texture){
+    public boolean removeTexture(IChiselTexture<?> texture){
         return this.textureList.remove(texture);
     }
 

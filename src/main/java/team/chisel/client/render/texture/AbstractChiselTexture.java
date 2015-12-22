@@ -10,21 +10,21 @@ import team.chisel.api.render.TextureSpriteCallback;
 /**
  * Abstract implementation of IChiselTexture
  */
-public abstract class AbstractChiselTexture implements IChiselTexture {
+public abstract class AbstractChiselTexture<T extends IBlockRenderType> implements IChiselTexture<T> {
 
-    protected IBlockRenderType type;
+    protected T type;
     protected EnumWorldBlockLayer layer;
 
     protected TextureSpriteCallback[] sprites;
 
-    public AbstractChiselTexture(IBlockRenderType type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
+    public AbstractChiselTexture(T type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
         this.type = type;
         this.layer = layer;
         this.sprites = sprites;
     }
 
     @Override
-    public IBlockRenderType getBlockRenderType(){
+    public T getBlockRenderType(){
         return this.type;
     }
 

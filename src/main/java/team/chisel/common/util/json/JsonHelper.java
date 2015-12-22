@@ -21,7 +21,7 @@ public class JsonHelper {
 
     private static Map<ResourceLocation, IChiselFace> faceCache = new HashMap<>();
 
-    private static Map<ResourceLocation, IChiselTexture> textureCache = new HashMap<>();
+    private static Map<ResourceLocation, IChiselTexture<?>> textureCache = new HashMap<>();
 
     private static IChiselFace createFace(ResourceLocation loc) {
         checkCombined(true, loc);
@@ -33,12 +33,12 @@ public class JsonHelper {
         return cFace;
     }
 
-    private static IChiselTexture createTexture(ResourceLocation loc) {
+    private static IChiselTexture<?> createTexture(ResourceLocation loc) {
         checkCombined(false, loc);
 
         JsonObject object = objectCache.get(loc);
         JsonTexture texture = gson.fromJson(object, JsonTexture.class);
-        IChiselTexture cTexture = texture.get(loc);
+        IChiselTexture<?> cTexture = texture.get(loc);
         textureCache.put(loc, cTexture);
         return cTexture;
     }
@@ -58,7 +58,7 @@ public class JsonHelper {
         }
     }
 
-    public static IChiselTexture getOrCreateTexture(ResourceLocation loc) {
+    public static IChiselTexture<?> getOrCreateTexture(ResourceLocation loc) {
         if (textureCache.containsKey(loc)) {
             return textureCache.get(loc);
         } else {

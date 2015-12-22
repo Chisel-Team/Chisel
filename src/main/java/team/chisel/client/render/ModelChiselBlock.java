@@ -103,7 +103,7 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
                     continue;
                 }
                 int quadGoal = Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getBlockRenderType().getQuadsPerSide()));
-                for (IChiselTexture tex : face.getTextureList()){
+                for (IChiselTexture<?> tex : face.getTextureList()){
                     quads.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getBlockRenderType()), quadGoal));
                 }
             }
@@ -123,7 +123,7 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
             quads = new ArrayList<BakedQuad>();
             for (EnumFacing facing : EnumFacing.VALUES){
                 //quads.add(QuadHelper.makeNormalFaceQuad(facing, varData.getFaceForSide(facing).getParticle()));
-                for (IChiselTexture tex : variationData.getFaceForSide(facing).getTextureList()){
+                for (IChiselTexture<?> tex : variationData.getFaceForSide(facing).getTextureList()){
                     quads.addAll(tex.getSideQuads(facing, null, 1));
                 }
             }

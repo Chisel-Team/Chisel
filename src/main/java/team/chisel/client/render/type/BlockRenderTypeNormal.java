@@ -17,7 +17,7 @@ import team.chisel.client.render.texture.ChiselTextureNormal;
 public class BlockRenderTypeNormal implements IBlockRenderType {
 
     @Override
-    public IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+    public IChiselTexture<BlockRenderTypeNormal> makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
         return new ChiselTextureNormal(this, layer, sprites);
     }
 

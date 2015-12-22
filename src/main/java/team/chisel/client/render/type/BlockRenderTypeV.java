@@ -15,7 +15,7 @@ public class BlockRenderTypeV extends BlockRenderTypeSheet {
     }
 
     @Override
-    public IChiselTexture makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+    public IChiselTexture<BlockRenderTypeV> makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
         return new ChiselTextureV(this, layer, sprites);
     }
 }
