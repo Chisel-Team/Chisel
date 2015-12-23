@@ -28,13 +28,13 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
             if (JsonHelper.isLocalPath(child)) {
                 child = JsonHelper.toAbsolutePath(child, loc);
             }
-            ResourceLocation childLoc = new ResourceLocation(child + ".json");
+            ResourceLocation childLoc = new ResourceLocation(child);
             if (JsonHelper.isFace(childLoc)) {
                 face.addChildFace(JsonHelper.getOrCreateFace(childLoc));
             } else if (JsonHelper.isTex(childLoc)) {
                 face.addTexture(JsonHelper.getOrCreateTexture(childLoc));
             } else {
-                if (JsonHelper.isCombined(childLoc)) {
+                if (JsonHelper.isValidFace(childLoc)) {
                     face.addChildFace(JsonHelper.getOrCreateFace(childLoc));
                 } else {
                     face.addTexture(JsonHelper.getOrCreateTexture(childLoc));

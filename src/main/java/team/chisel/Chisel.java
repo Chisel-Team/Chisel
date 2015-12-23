@@ -49,16 +49,14 @@ public class Chisel implements Reference {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
         ChiselBlockFactory factory = ChiselBlockFactory.newFactory("chisel");
-        ChiselBlockData voidstone = factory.newBlock("voidstone").newVariation("normal", "test").setTextureLocation(new ResourceLocation("chisel", "textures/blocks/voidstone/normal.json"))
-                .buildVariation().build();
+        ChiselBlockData voidstone = factory.newBlock("voidstone").newVariation("normal", "test").setTextureLocation(new ResourceLocation("chisel", "voidstone/normal")).buildVariation().build();
         BlockRegistry.registerBlock(voidstone);
 
-        ChiselBlockData bookshelf = factory.newBlock("bookshelf").newVariation("necromancer", "test").setTextureLocation(new ResourceLocation("chisel", "textures/blocks/bookshelf/necromancer.json"))
-                .buildVariation().build();
+        ChiselBlockData bookshelf = factory.newBlock("bookshelf").newVariation("necromancer", "test").setTextureLocation(new ResourceLocation("chisel", "bookshelf/necromancer")).buildVariation()
+                .build();
         BlockRegistry.registerBlock(bookshelf);
 
-        ChiselBlockData brick = factory.newBlock("brick").newVariation("aged-brick", "test").setTextureLocation(new ResourceLocation("chisel", "textures/blocks/brick/aged-brick.json"))
-                .buildVariation().build();
+        ChiselBlockData brick = factory.newBlock("brick").newVariation("aged-brick", "test").setTextureLocation(new ResourceLocation("chisel", "brick/aged")).buildVariation().build();
         BlockRegistry.registerBlock(brick);
 
         Carving.chisel.addVariation("test", Blocks.bedrock.getDefaultState(), 99);

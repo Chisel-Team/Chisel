@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
@@ -79,15 +80,19 @@ public class BlockFaceData {
         private List<IBlockRenderType> typesUsed;
 
         public VariationFaceData(ClientVariationData data){
-            this(JsonHelper.getOrCreateFace(data.defaultFace), transformMap(data.sideOverrides));
+            this(JsonHelper.getOrCreateFace(toBlock(data.defaultFace)), transformMap(data.sideOverrides));
         }
 
         private static Map<EnumFacing, IChiselFace> transformMap(Map<EnumFacing, ResourceLocation> mapIn){
             Map<EnumFacing, IChiselFace> map = new HashMap<>();
-            for (EnumFacing facing : mapIn.keySet()){
-                map.put(facing, JsonHelper.getOrCreateFace(mapIn.get(facing)));
+            for (Entry<EnumFacing, ResourceLocation> e : mapIn.entrySet()){
+                map.put(e.getKey(), JsonHelper.getOrCreateFace(toBlock(e.getValue())));
             }
             return map;
+        }
+        
+        private static ResourceLocation toBlock(ResourceLocation loc) {
+            return new ResourceLocation(loc.getResourceDomain(), loc.getResourcePath() + ".cb");
         }
 
         public VariationFaceData(IChiselFace defaultFace, Map<EnumFacing, IChiselFace> sideOverrides){

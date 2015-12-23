@@ -1,15 +1,7 @@
 package team.chisel.api.block;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.MathHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Data about a chisel block, contains all the data from the json
