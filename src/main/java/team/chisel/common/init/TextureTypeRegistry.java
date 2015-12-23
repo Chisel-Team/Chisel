@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import net.minecraft.util.StringUtils;
 import net.minecraftforge.fml.common.discovery.ASMDataTable.ASMData;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import team.chisel.api.render.BlockRenderType;
@@ -23,10 +24,23 @@ public class TextureTypeRegistry {
     public static void preInit(FMLPreInitializationEvent event) {
         Set<ASMData> annots = event.getAsmData().getAll(BlockRenderType.class.getName());
         for (ASMData data : annots) {
+            String name = (String) data.getAnnotationInfo().get("value");
+            if (StringUtils.isNullOrEmpty(name)) {
+                name = data.getObjectName();
+                name = name.substring(name.lastIndexOf('.') + 1);
+            }
             try {
-                String name = (String) data.getAnnotationInfo().get("value");
                 register(name, ((Class<? extends IBlockRenderType>) Class.forName(data.getClassName())).newInstance());
-            } catch (Exception e) {
+            } catch (InstantiationException e) {
+                // This might be a field, let's try that
+                try {
+                    Class<?> c = Class.forName(data.getClassName());
+                    register(name, (IBlockRenderType) c.getDeclaredField(data.getObjectName()).get(null));
+                } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | ClassNotFoundException e1) {
+                    // nope
+                    Throwables.propagate(e1);
+                }
+            } catch (IllegalAccessException | ClassNotFoundException e) {
                 Throwables.propagate(e);
             }
         }

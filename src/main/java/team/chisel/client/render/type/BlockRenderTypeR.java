@@ -17,11 +17,10 @@ public class BlockRenderTypeR extends BlockRenderTypeSheet {
         return new ChiselTextureR(this, layer, sprites);
     }
 
-    @BlockRenderType("R4")
-    public static class R4 extends BlockRenderTypeR {
-
-        public R4() {
-            super(2, 2);
-        }
-    }
+    @BlockRenderType
+    public static final BlockRenderTypeR R4 = new BlockRenderTypeR(2, 2);
+    @BlockRenderType
+    public static final BlockRenderTypeR R9 = new BlockRenderTypeR(3, 3);
+    @BlockRenderType
+    public static final BlockRenderTypeR R16 = new BlockRenderTypeR(4, 4);
 }

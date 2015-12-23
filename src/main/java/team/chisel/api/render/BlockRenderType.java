@@ -11,13 +11,15 @@ import java.lang.annotation.Target;
  * CLASSES THAT HAVE THIS ANNOTATION MUST HAVE A NO ARGUMENT CONSTRUCTOR
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target({ ElementType.TYPE, ElementType.FIELD })
 public @interface BlockRenderType {
 
     /**
-     * The String used for serialization/deserialization
-     * For example connected textures would be CTM
-     * @return
+     * The String used for serialization/deserialization For example connected textures would be CTM.
+     * 
+     * This value can be left out to use the name of the class/field being annotated.
+     * 
+     * @return The name of the block render type.
      */
-    String value();
+    String value() default "";
 }
