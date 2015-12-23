@@ -33,8 +33,8 @@ public class ChiselTextureR extends AbstractChiselTexture<BlockRenderTypeR> {
         rand.setSeed(MathHelper.getCoordinateRandom(pos.getX(), pos.getY(), pos.getZ()));
         rand.nextBoolean();
 
-        int w = getBlockRenderType().getXSize();
-        int h = getBlockRenderType().getYSize();
+        int w = getType().getXSize();
+        int h = getType().getYSize();
         float intervalX = 16 / w;
         float intervalY = 16 / h;
 

@@ -38,7 +38,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void construct(FMLPreInitializationEvent event){
-        ChiselBlockBuilder.VariationBuilder.setInterface(new ChiselBuilderClientImpl());
+        ChiselBlockBuilder.VariationBuilder.setDelegate(new ChiselBuilderClientImpl());
         TextureTypeRegistry.preInit(event);
     }
 

@@ -23,7 +23,7 @@ public class CommonProxy implements Reference{
     }
 
     public void construct(FMLPreInitializationEvent event){
-        ChiselBlockBuilder.VariationBuilder.setInterface(new ChiselBuilderServerImpl());
+        ChiselBlockBuilder.VariationBuilder.setDelegate(new ChiselBuilderServerImpl());
     }
 
     public void preTextureStitch() {

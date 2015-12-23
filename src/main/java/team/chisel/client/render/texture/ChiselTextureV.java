@@ -32,8 +32,8 @@ public class ChiselTextureV extends AbstractChiselTexture<BlockRenderTypeV> {
         int y = pos.getY();
         int z = pos.getZ();
 
-        int xSize = getBlockRenderType().getXSize();
-        int ySize = getBlockRenderType().getYSize();
+        int xSize = getType().getXSize();
+        int ySize = getType().getYSize();
 
         int tx, ty;
 

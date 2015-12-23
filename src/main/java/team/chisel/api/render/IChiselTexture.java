@@ -30,7 +30,7 @@ public interface IChiselTexture<T extends IBlockRenderType> {
      * 
      * @return The Rendertype of this texture
      */
-    T getBlockRenderType();
+    T getType();
 
     /**
      * Gets the texture for a particle

@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Implementation for builder stuff
  */
-public class ChiselBuilderServerImpl implements ChiselBlockBuilder.VariationBuilder.IChiselBuilderInterface {
+public class ChiselBuilderServerImpl implements ChiselBlockBuilder.VariationBuilder.IVariationBuilderDelegate {
 
     @Override
     public VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,

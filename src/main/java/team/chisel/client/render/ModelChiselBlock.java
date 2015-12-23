@@ -102,9 +102,9 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
                     Chisel.debug("Skipping Layer "+ MinecraftForgeClient.getRenderLayer()+" for block "+state);
                     continue;
                 }
-                int quadGoal = Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getBlockRenderType().getQuadsPerSide()));
+                int quadGoal = Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
                 for (IChiselTexture<?> tex : face.getTextureList()){
-                    quads.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getBlockRenderType()), quadGoal));
+                    quads.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getType()), quadGoal));
                 }
             }
             return this;

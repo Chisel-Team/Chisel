@@ -96,14 +96,14 @@ public class BlockFaceData {
             this.typesUsed = new ArrayList<IBlockRenderType>();
             for (IChiselFace face : sideOverrides.values()){
                 for (IChiselTexture<?> texture : face.getTextureList()) {
-                    if (!typesUsed.contains(texture.getBlockRenderType())){
-                        typesUsed.add(texture.getBlockRenderType());
+                    if (!typesUsed.contains(texture.getType())){
+                        typesUsed.add(texture.getType());
                     }
                 }
             }
             for (IChiselTexture<?> texture : defaultFace.getTextureList()) {
-                if (!typesUsed.contains(texture.getBlockRenderType())) {
-                    typesUsed.add(texture.getBlockRenderType());
+                if (!typesUsed.contains(texture.getType())) {
+                    typesUsed.add(texture.getType());
                 }
             }
         }

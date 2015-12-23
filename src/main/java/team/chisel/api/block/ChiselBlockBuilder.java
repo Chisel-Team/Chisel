@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -13,11 +15,13 @@ import net.minecraft.util.ResourceLocation;
 /**
  * Building a ChiselBlockData
  */
+@Setter
+@Accessors(chain = true)
 public class ChiselBlockBuilder {
 
-    private String domain;
+    private final String domain;
 
-    private String blockName;
+    private final String blockName;
 
     /**
      * The Material for this block
@@ -53,26 +57,6 @@ public class ChiselBlockBuilder {
         this.variations = new ArrayList<VariationBuilder>();
     }
 
-    public ChiselBlockBuilder setMaterial(Material material){
-        this.material = material;
-        return this;
-    }
-
-    public ChiselBlockBuilder setHardness(float hardness){
-        this.hardness = hardness;
-        return this;
-    }
-
-    public ChiselBlockBuilder setOpaqueCube(boolean opaqueCube){
-        this.isOpaqueCube = opaqueCube;
-        return this;
-    }
-
-    public ChiselBlockBuilder setBeaconBase(boolean beaconBase){
-        this.beaconBase = beaconBase;
-        return this;
-    }
-
     public VariationBuilder newVariation(String name, String group){
         VariationBuilder builder = new VariationBuilder(this, name, group, curIndex);
         curIndex++;
@@ -90,43 +74,44 @@ public class ChiselBlockBuilder {
         return new ChiselBlockData(this.blockName, vars, domain, material, hardness, isOpaqueCube, beaconBase);
     }
 
+    @Accessors(chain = true)
     public static class VariationBuilder {
 
         /**
          * For Internal chisel use only
          */
-        public interface IChiselBuilderInterface {
+        public interface IVariationBuilderDelegate {
 
             VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,
                                 boolean beaconBase, ResourceLocation texLocation, Map<EnumFacing, ResourceLocation> overrideMap);
 
         }
+        
+        private static IVariationBuilderDelegate delegate;
 
         private ChiselBlockBuilder parent;
 
         private String name;
-
         private String group;
         
         private int index;
 
+        @Setter
         private ChiselRecipe recipe;
 
         private ItemStack smeltedFrom;
-
         private int amountSmelted;
 
+        @Setter
         private int light;
-
+        @Setter
         private float hardness;
-
+        @Setter
         private boolean beaconBase;
 
-        private ResourceLocation texLocation;
-
+        @Setter
+        private ResourceLocation textureLocation;
         private Map<EnumFacing, ResourceLocation> overrideMap;
-
-        private static IChiselBuilderInterface builderInterface;
 
         private VariationBuilder(ChiselBlockBuilder parent, String name, String group, int index){
             this.parent = parent;
@@ -139,34 +124,9 @@ public class ChiselBlockBuilder {
             this.overrideMap = new HashMap<EnumFacing, ResourceLocation>();
         }
 
-        public VariationBuilder setRecipe(ChiselRecipe recipe){
-            this.recipe = recipe;
-            return this;
-        }
-
         public VariationBuilder setSmeltRecipe(ItemStack smeltedFrom, int amountSmelted){
             this.smeltedFrom = smeltedFrom;
             this.amountSmelted = amountSmelted;
-            return this;
-        }
-
-        public VariationBuilder setLight(int light){
-            this.light = light;
-            return this;
-        }
-
-        public VariationBuilder setHardness(float hardness){
-            this.hardness = hardness;
-            return this;
-        }
-
-        public VariationBuilder setBeaconBase(boolean beaconBase){
-            this.beaconBase = beaconBase;
-            return this;
-        }
-
-        public VariationBuilder setTextureLocation(ResourceLocation loc){
-            this.texLocation = loc;
             return this;
         }
 
@@ -181,14 +141,13 @@ public class ChiselBlockBuilder {
         }
 
         private VariationData doBuild(){
-            return builderInterface.build(name, group, index, recipe, smeltedFrom, amountSmelted, light, hardness,
-                    beaconBase, texLocation, overrideMap);
+            return delegate.build(name, group, index, recipe, smeltedFrom, amountSmelted, light, hardness,
+                    beaconBase, textureLocation, overrideMap);
         }
 
-
-        public static void setInterface(IChiselBuilderInterface inter){
-            if (builderInterface == null){
-                builderInterface = inter;
+        public static void setDelegate(IVariationBuilderDelegate inter){
+            if (delegate == null){
+                delegate = inter;
             }
         }
 
