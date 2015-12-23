@@ -9,36 +9,36 @@ entity.chisel.snowman.name=Schneegolem
 #Item localizations
 item.chisel.chisel_iron.name=Meißel
 
-item.chisel.chisel.desc.gui=Rechtsklick um die GUI zu öffnen
-item.chisel.chisel.desc.lc1=Links klicken, um einen Block in der Welt zu meiseln
-item.chisel.chisel.desc.lc2=Can target a block by leaving it in the inventory
-item.chisel.chisel.desc.modes=Verfügt über mehrere Modi zum meißeln.
+item.chisel.chisel.desc.gui=Rechtsklick, um die GUI zu öffnen
+item.chisel.chisel.desc.lc1=Linksklick, um einen Block in der Welt zu meißeln
+item.chisel.chisel.desc.lc2=Kann auf einen Block zielen, indem man ihn im Inventar lässt
+item.chisel.chisel.desc.modes=Verfügt über mehrere Modi zum Meißeln.
 
-item.chisel.chisel_diamond.name=Diamantener Meißel
-item.chisel.chisel_obsidian.name=Obsidian Meißel
+item.chisel.chisel_diamond.name=Diamantmeißel
+item.chisel.chisel_obsidian.name=Obsidianmeißel
 
 item.ballMoss.name=Moosball
-item.ballMoss.desc=Rechtsklicken, um ihn zu werfen. Verwandelt Pflasterstein in bemoosten Pflastrerstein.
+item.ballMoss.desc=Rechtsklick, um ihn zu werfen. Verwandelt Bruchstein in bemoosten Bruchstein.
 item.cloudBottle.name=Wolke in der Flasche
-item.cloudBottle.desc=Rechtsklicken, um sie zu werfen. An der Aufschlagstelle erscheint eine Wolke.
+item.cloudBottle.desc=Rechtsklick, um sie zu werfen. An der Aufschlagstelle erscheint eine Wolke.
 item.smashingRock.name=Zertrümmerfelsen
-item.smashingRock.desc=Rechtsklick , um ihn zu werfen. Beim Aufschlag verwandelt er Pflasterstein in Kies und Kies in Sand.
-item.upgrade_speed.name=Geschwindigkeits Upgrade
-item.upgrade_automation.name=Automatisierungs Upgrade
-item.upgrade_stack.name=Stapel Upgrade
-item.upgrade_reversion.name=Umkehr Upgrade
+item.smashingRock.desc=Rechtsklick, um ihn zu werfen. Beim Aufschlag verwandelt er Bruchstein in Kies und Kies in Sand.
+item.upgrade_speed.name=Geschwindigkeits-Upgrade
+item.upgrade_automation.name=Automatisierungs-Upgrade
+item.upgrade_stack.name=Stapel-Upgrade
+item.upgrade_reversion.name=Umkehr-Upgrade
 
 item.upgrade_speed.desc=Erhöht die Arbeitsgeschwindigkeit
 item.upgrade_automation.desc=Ermöglicht es, den automatischen Meißel automatisch zu bestücken
 item.upgrade_stack.desc=Ermöglicht es, komplette Stapel zu verarbeiten
-item.upgrade_reversion.desc=Verwandelt das Material wider in sein Original
+item.upgrade_reversion.desc=Verwandelt das Material wieder in sein Original
 
 # Block localizations
 
 #Chisel 2
 
 #Nation
-tile.chisel.nation.name=Imerialer Block
+tile.chisel.nation.name=Imperialer Block
 tile.chisel.rebel.name=Rebellischer Block
 tile.nation.0.desc=Getarnt
 tile.nation.1.desc=Getarnt (Abseits)
@@ -56,8 +56,8 @@ tile.shingles.4.desc=Schwarze kleine Vierecke
 tile.shingles.5.desc=Schwarze große Vierecke
 
 #Valentines
-tile.chisel.valentines.name=Valentins Block
-tile.valentines.0.desc=Valentins Ziegel
+tile.chisel.valentines.name=Valentinsblock
+tile.valentines.0.desc=Valentinsziegel
 tile.valentines.1.desc=Wenn es spricht, würde ich es nicht berühren!
 
 #AntiBlocks
@@ -65,14 +65,14 @@ tile.chisel.antiBlock.name=Antiblock
 tile.antiBlock.black.desc=Schwarzer Antiblock
 tile.antiBlock.blue.desc=Blauer Antiblock
 tile.antiBlock.brown.desc=Brauner Antiblock
-tile.antiBlock.cyan.desc=Türkieser Antiblock
+tile.antiBlock.cyan.desc=Türkiser Antiblock
 tile.antiBlock.green.desc=Grüner Antiblock
 tile.antiBlock.light_blue.desc=Hellblauer Antiblock
 tile.antiBlock.silver.desc=Hellgrauer Antiblock
 tile.antiBlock.lime.desc=Hellgrüner Antiblock
 tile.antiBlock.magenta.desc=Lila Antiblock
-tile.antiBlock.orange.desc=Orangener Antiblock
-tile.antiBlock.pink.desc=Rosaner Antiblock
+tile.antiBlock.orange.desc=Oranger Antiblock
+tile.antiBlock.pink.desc=Rosan Antiblock
 tile.antiBlock.purple.desc=Violetter Antiblock
 tile.antiBlock.red.desc=Roter Antiblock
 tile.antiBlock.white.desc=Weißer Antiblock
@@ -99,41 +99,41 @@ tile.andesite.4.desc=Gemeißelter Andesit
 tile.andesite.5.desc=Prismatischer Andesit
 tile.andesite.6.desc=Kleine Andesitkacheln
 
-#Granit
-tile.chisel.Granit.name=Granit
-tile.Granit.0.desc=Wird in der Welt erstellt
-tile.Granit.1.desc=Polierter Granit
-tile.Granit.2.desc=Granitsäule
-tile.Granit.3.desc=Granitziegel
-tile.Granit.4.desc=Gemeißelter Granit
-tile.Granit.5.desc=Prismatischer Granit
-tile.Granit.6.desc=Kleine Granitkacheln
+#Granite
+tile.chisel.granite.name=Granit
+tile.granite.0.desc=Wird in der Welt erstellt
+tile.granite.1.desc=Polierter Granit
+tile.granite.2.desc=Granitsäule
+tile.granite.3.desc=Granitziegel
+tile.granite.4.desc=Gemeißelter Granit
+tile.granite.5.desc=Prismatischer Granit
+tile.granite.6.desc=Kleine Granitkacheln
 
 #Auto Chisel
 tile.chisel.autoChisel.name=Automatischer Meißel
-autochisel.slot.chisel.tooltip=Meißel Slot
-autochisel.slot.target.tooltip=Ausgabe Slot
-autochisel.slot.speed.tooltip=Geschwindigkeits Upgrade
-autochisel.slot.automation.tooltip=Automatisierungs Upgrade
-autochisel.slot.stack.tooltip=Stapel Upgrade
-autochisel.slot.reversion.tooltip=Umkehr Upgrade
+autochisel.slot.chisel.tooltip=Meißel-Slot
+autochisel.slot.target.tooltip=Ausgabe-Slot
+autochisel.slot.speed.tooltip=Geschwindigkeits-Upgrade
+autochisel.slot.automation.tooltip=Automatisierungs-Upgrade
+autochisel.slot.stack.tooltip=Stapel-Upgrade
+autochisel.slot.reversion.tooltip=Umkehr-Upgrade
 
 #Beacon
-tile.chisel.beacon.name=Beacon
+tile.chisel.beacon.name=Leuchtfeuer
 tile.beacon.black.desc=Schwarz leuchtendes Leuchtfeuer
 tile.beacon.blue.desc=Blau leuchtendes Leuchtfeuer
 tile.beacon.brown.desc=Braun leuchtendes Leuchtfeuer
-tile.beacon.cyan.desc=Türkies leuchtendes Leuchtfeuer
+tile.beacon.cyan.desc=Türkis leuchtendes Leuchtfeuer
 tile.beacon.green.desc=Grün leuchtendes Leuchtfeuer
-tile.beacon.lightblue.desc=Hellblau leuchtendes Leuchtfeuer
+tile.beacon.lightBlue.desc=Hellblau leuchtendes Leuchtfeuer
 tile.beacon.silver.desc=Hellgrau leuchtendes Leuchtfeuer
 tile.beacon.lime.desc=Hellgrün leuchtendes Leuchtfeuer
 tile.beacon.magenta.desc=Lila leuchtendes Leuchtfeuer
 tile.beacon.orange.desc=Orange leuchtendes Leuchtfeuer
 tile.beacon.pink.desc=Rosa leuchtendes Leuchtfeuer
-tile.beacon.purple.desc=Violet leuchtendes Leuchtfeuer
+tile.beacon.purple.desc=Violett leuchtendes Leuchtfeuer
 tile.beacon.red.desc=Rot leuchtendes Leuchtfeuer
-tile.beacon.white.desc=Weiß leuchtendes Leuchtfeuer
+tile.beacon.white.desc=Regenbogen-Leuchtfeuer
 tile.beacon.yellow.desc=Gelb leuchtendes Leuchtfeuer
 tile.beacon.gray.desc=Grau leuchtendes Leuchtfeuer
 
@@ -158,7 +158,7 @@ tile.voidstone.5.desc=Leerenstein mit rotem Metallrand
 tile.voidstone.6.desc=Leerenstein mit Auge
 tile.voidstone.7.desc=Umrandeter Leerenstein
 tile.chisel.voidstoneRunic.name=Leerenstein mit Rune
-tile.voidstoneRunic.orange.desc=Leerenstein - Orangene Rune
+tile.voidstoneRunic.orange.desc=Leerenstein - Orange Rune
 tile.voidstoneRunic.magenta.desc=Leerenstein - Lila Rune
 tile.voidstoneRunic.lightblue.desc=Leerenstein - Hellblaue Rune
 tile.voidstoneRunic.yellow.desc=Leerenstein - Gelbe Rune
@@ -174,9 +174,9 @@ tile.voidstoneRunic.green.desc=Leerenstein - Grüne Rune
 tile.voidstoneRunic.red.desc=Leerenstein - Rote Rune
 tile.voidstoneRunic.black.desc=Leerenstein - Schwarze Rune
 
-#Void Stone Säules
-tile.chisel.voidstoneSäule.name=Leerenstein Säule
-tile.voidstoneSäule.0.desc=Gestreift Leerenstein Säule
+#Void Stone Pillars
+tile.chisel.voidstonePillar.name=Leerensteinsäule
+tile.voidstonePillar.0.desc=Gestreifte Leerensteinsäule
 
 #Warning
 tile.chisel.warningSign.name=Warnschild
@@ -207,9 +207,9 @@ tile.voidstone2.5.desc=Energetisierter Leerenstein mit rotem Metallrand
 tile.voidstone2.6.desc=Energetisierter Leerenstein mit Auge
 tile.voidstone2.7.desc=Umrandeter Leerenstein
 
-#Void Stone Säules
-tile.chisel.voidstoneSäule2.name=Energetisierte Leerenstein Säule
-tile.voidstoneSäule2.0.desc=Gestreift energetisierte Leerenstein Säule
+#Void Stone Pillars
+tile.chisel.voidstonePillar2.name=Energetisierte Leerensteinsäule
+tile.voidstonePillar2.0.desc=Gestreifte energetisierte Leerensteinsäule
 
 #Arcane
 tile.chisel.arcane.name=Arkaner Steinblock
@@ -222,16 +222,16 @@ tile.arcane.5.desc=Arkaner Ziegel
 tile.arcane.6.desc=Zeitlichleitung
 tile.arcane.7.desc=Braaainz
 tile.arcane.8.desc=Höllischer Arkane
-tile.arcane.9.desc=Fieße Nazca-Linien
-tile.arcane.10.desc=Feine Thaumaturgen Wappen
-tile.arcane.11.desc=Gebrochener Stein mit Eldritch Glühen
+tile.arcane.9.desc=Fiese Nazca-Linien
+tile.arcane.10.desc=Feines Thaumaturgenwappen
+tile.arcane.11.desc=Gebrochener Stein mit Eldritch-Glühen
 
 #Thaumium
-tile.chisel.thaumium.name=Thaumium Block
+tile.chisel.thaumium.name=Thaumiumblock
 tile.thaumium.0.desc=Gemeißeltes Muster
 tile.thaumium.1.desc=Tote Gesicheter
 tile.thaumium.2.desc=Ziegel
-tile.thaumium.3.desc=kleine Kacheln
+tile.thaumium.3.desc=Kleine Kacheln
 tile.thaumium.4.desc=Gitter
 tile.thaumium.5.desc=Begrenzte Bretter
 
@@ -261,7 +261,7 @@ tile.futura.4.desc=Violette angewandte labyrinthische Neonlinien
 tile.futuraCircuit.black.desc=Schwarz
 tile.futuraCircuit.blue.desc=Blau
 tile.futuraCircuit.brown.desc=Braun
-tile.futuraCircuit.cyan.desc=Türkies
+tile.futuraCircuit.cyan.desc=Türkis
 tile.futuraCircuit.green.desc=Grün
 tile.futuraCircuit.light_blue.desc=Hellblau
 tile.futuraCircuit.silver.desc=Hellgrau
@@ -269,7 +269,7 @@ tile.futuraCircuit.lime.desc=Hellgrün
 tile.futuraCircuit.magenta.desc=Lila
 tile.futuraCircuit.orange.desc=Orange
 tile.futuraCircuit.pink.desc=Rosa
-tile.futuraCircuit.purple.desc=Violet
+tile.futuraCircuit.purple.desc=Violett
 tile.futuraCircuit.red.desc=Rot
 tile.futuraCircuit.white.desc=Weiß
 tile.futuraCircuit.yellow.desc=Gelb
@@ -277,26 +277,26 @@ tile.futuraCircuit.gray.desc=Grau
 
 #Waterstone
 tile.chisel.waterstone.name=Wasserstein
-tile.waterstone.0.desc=Wasserstein Ziegel
+tile.waterstone.0.desc=Wassersteinziegel
 tile.waterstone.1.desc=Schwarer Wasserstein
-tile.waterstone.2.desc=WassersteinTeile
-tile.waterstone.3.desc=Chaotische Wasserstein Ziegel
-tile.waterstone.4.desc=Wasser mit Creeper in der Mitte
+tile.waterstone.2.desc=Wassersteinteile
+tile.waterstone.3.desc=Chaotische Wassersteinziegel
+tile.waterstone.4.desc=Wasserziegel mit Creeper in der Mitte
 tile.waterstone.5.desc=Wassertafel
 tile.waterstone.6.desc=Gemeißelte Wassertafel
 
 #Hex Plating
-tile.chisel.hexPlating.name=Sechsfach Teilung
+tile.chisel.hexPlating.name=Sechsfache Teilung
 tile.hexPlating.black.desc=Schwarze Teilung
 tile.hexPlating.blue.desc=Blaue Teilung
 tile.hexPlating.brown.desc=Braune Teilung
-tile.hexPlating.cyan.desc=Türkiese Teilung
+tile.hexPlating.cyan.desc=Türkise Teilung
 tile.hexPlating.green.desc=Grüne Teilung
 tile.hexPlating.light_blue.desc=Hellblaue Teilung
 tile.hexPlating.silver.desc=Hellgraue Teilung
 tile.hexPlating.lime.desc=Hellgrüne Teilung
 tile.hexPlating.magenta.desc=Lila Teilung
-tile.hexPlating.orange.desc=Orangene Teilung
+tile.hexPlating.orange.desc=Orange Teilung
 tile.hexPlating.pink.desc=Rosa Teilung
 tile.hexPlating.purple.desc=Violette Teilung
 tile.hexPlating.red.desc=Rote Teilung
@@ -305,41 +305,42 @@ tile.hexPlating.yellow.desc=Gelbe Teilung
 tile.hexPlating.gray.desc=Graue Teilung
 
 #Hex Large Plating
-tile.chisel.hexGroßPlating.name=Große schsfache Teilung
+tile.chisel.hexLargePlating.name=Große sechsfache Teilung
 
 #Grimstone
 tile.chisel.grimstone.name=Grimstone
 tile.grimstone.0.desc=Grimstone
-tile.grimstone.1.desc=Glatt Grimstone
-tile.grimstone.2.desc=Mystisches Grimstone Symbol
+tile.grimstone.1.desc=Glatter Grimstone
+tile.grimstone.2.desc=Mystisches Grimstonesymbol
 tile.grimstone.3.desc=Gemeißelter Grimstone
-tile.grimstone.4.desc=Grimstone Block
-tile.grimstone.5.desc=Rauher Grimstone Block
-tile.grimstone.6.desc=Grimstone Ziegel
-tile.grimstone.7.desc=Große Grimstone Ziegel
-tile.grimstone.8.desc=Grimstone Platform
-tile.grimstone.9.desc=Grimstone Platformteile
-tile.grimstone.10.desc=Fantastische Grimstone Konstruktion
-tile.grimstone.11.desc=Fantastische Grimstone Terile
-tile.grimstone.12.desc=Glatte Grimstone Platte
-tile.grimstone.13.desc=Grimstone Platte
+tile.grimstone.4.desc=Grimstoneblock
+tile.grimstone.5.desc=Rauer Grimstoneblock
+tile.grimstone.6.desc=Grimstoneziegel
+tile.grimstone.7.desc=Große Grimstoneziegel
+tile.grimstone.8.desc=Grimstone-Plattform
+tile.grimstone.9.desc=Grimstone-Plattformteile
+tile.grimstone.10.desc=Fantastische Grimstonekonstruktion
+tile.grimstone.11.desc=Fantastische Grimstonefliesen
+tile.grimstone.12.desc=Glatte Grimstoneplatte
+tile.grimstone.13.desc=Grimstoneplatte
 tile.grimstone.14.desc=Brüchiger Grimstone
 
 #Technical Block
 tile.chisel.technical.name=Technischer Block
 tile.chisel.technical2.name=Transparenter technischer Block
 tile.chisel.technical3.name=Industrieller technischer Block
+tile.chisel.technical4.name=Technischer Block
 tile.technical.0.desc=Gerüst
-tile.technical.1.desc=Platten mit Warn-Band
+tile.technical.1.desc=Platten mit Warnband
 tile.technical.2.desc=Eine altes Relikt aus dem Land der Oneteufy
-tile.technical.3.desc=Untergrundrohr (großes Rohr)
+tile.technical.3.desc=Untergrundrohr (groß)
 tile.technical.4.desc=Lüfter (Schnell)
-tile.technical.5.desc=Untergrundrohr (kleines Rohr)
+tile.technical.5.desc=Untergrundrohr (klein)
 tile.technical.6.desc=Lüfter (Aus)
 tile.technical.7.desc=Schlitze
 tile.technical.8.desc=Leuchtende Schlitze
 tile.technical.9.desc=Isolierung
-tile.technical.10.desc=Zahnrädern und Schwungräder
+tile.technical.10.desc=Zahnräder und Schwungräder
 tile.technical.11.desc=Kabel
 tile.technical.12.desc=Rostige Tafel
 tile.technical.13.desc=Gitter
@@ -347,9 +348,49 @@ tile.technical.14.desc=Lüfter (Fehlfunktion)
 tile.technical.15.desc=Rostiges Gitter
 tile.technical3.0.desc=Ich bin ein großer Fan von dieser massiven Lüfter!
 tile.technical3.1.desc=Industrielles Rüstungsteil
+tile.technical4.0.desc=Korrodierte Metallteile
+tile.technical4.1.desc=Verrostete Metallteile
+tile.technical4.2.desc=Robust
+tile.technical4.3.desc=MegaCell™-Batterie
+tile.technical4.4.desc=Thermal Exhaust-Platten
+tile.technical4.5.desc=Behelfsmäßige Platten
+tile.technical4.6.desc=Rohrtraum
+tile.technical4.7.desc=Abgenutzter Beton
+tile.technical4.16.desc=Bandlaufwerk? (Dafür bin ich zu jung)
+
+#End Stone
+tile.chisel.end_Stone.name=Endstein
+tile.end_Stone.0.desc=Endsteinziegel
+tile.end_Stone.1.desc=Chaotische Endsteinziegel
+tile.end_Stone.2.desc=Karierte Fliesen
+tile.end_Stone.3.desc=Ender-Schaltkreis
+tile.end_Stone.4.desc=Fantasievolle Ziegel
+tile.end_Stone.5.desc=Endsteinsäule
+tile.end_Stone.6.desc=Verätzter Endstein
+tile.end_Stone.7.desc=Prismatischer Endstein
+tile.end_Stone.8.desc=Endsteinbrocken
+tile.end_Stone.9.desc=Eingerahmter Endsteinbrocken
+tile.end_Stone.10.desc=Arkaner Endsteinblock
+tile.end_Stone.11.desc=Eingerahmter Endstein
+tile.end_Stone.12.desc=Endstein-Ornament
+tile.end_Stone.13.desc=Große Endsteinfliesen
+
+#Purpur
+tile.chisel.purpur.name=Purpurblock
+tile.purpur.0.desc=Mittelgroße Fliesen
+tile.purpur.1.desc=Säule
+tile.purpur.2.desc=Kein Shulker
+tile.purpur.3.desc=Kleine Fliesen
+tile.purpur.4.desc=Kaputte kleine Fliesen
+tile.purpur.5.desc=Prismatischer Purpur
+tile.purpur.6.desc=Grobe Ziegel
+tile.purpur.7.desc=Gebrochene Oberfläche
+tile.purpur.8.desc=Arkaner Purpurblock
+tile.purpur.9.desc=Große Purpurfliesen
+tile.purpur.10.desc=Purpur-Ornament
 
 #Metal Blocks
-tile.chisel.aluminumblock.name=Aluminumblock
+tile.chisel.aluminumblock.name=Aluminiumblock
 tile.chisel.bronzeblock.name=Bronzeblock
 tile.chisel.copperblock.name=Kupferblock
 tile.chisel.gold2.name=Goldblock
@@ -357,18 +398,18 @@ tile.chisel.iron2.name=Eisenblock
 tile.chisel.leadblock.name=Bleiblock
 tile.chisel.silverblock.name=Silberblock
 tile.chisel.steelblock.name=Stahlblock
-tile.chisel.tinblock.name=Zinnblich
+tile.chisel.tinblock.name=Zinnblock
 tile.chisel.uraniumblock.name=Uranblock
 tile.metalOre.0.desc=Vorsicht-Streifen
 tile.metalOre.1.desc=Transportkiste
 tile.metalOre.2.desc=Wärne
 tile.metalOre.3.desc=Eine altes Relikt aus dem Land der Oneteufy
 tile.metalOre.4.desc=Unerhört eingefaßter Block
-tile.metalOre.5.desc=Fantasievolle verschraubte Teile
+tile.metalOre.5.desc=Fantasievoll verschraubte Teile
 
 #Present Chest
 tile.chisel.present.name=Geschenk
-tile.chisel.present.desc=Eine Lustige Geschenkbox
+tile.chisel.present.desc=Eine lustige Geschenkbox
 
 #Brick
 tile.chisel.brickCustom.name=Ziegelblock
@@ -381,22 +422,22 @@ tile.brickCustom.6.desc=Gelbe Ziegel
 #Chisel 1
 
 #Cobblestone Blocks
-tile.chisel.cobblestone.name=Pflasterstein
-tile.cobblestone.0.desc=Ausgerichtete Pflastersteinziegel
-tile.cobblestone.1.desc=Detaillierte Pflastersteinziegel
-tile.cobblestone.2.desc=Kleine Pflastersteinziegel
-tile.cobblestone.3.desc=Große Pflastersteinteile
-tile.cobblestone.4.desc=Kleine Pflastersteinteile
-tile.cobblestone.5.desc=Französische Pflastersteinteile
-tile.cobblestone.6.desc=Französische Pflastersteinteile
-tile.cobblestone.7.desc=Creeper Pflastersteinteile
-tile.cobblestone.8.desc=Beschädigte Pflastersteinteile
-tile.cobblestone.9.desc=Rießige Pflastersteinteile
-tile.cobblestone.10.desc=Pflasterstein mit Creeper Tafel
-tile.cobblestone.11.desc=Pflasterstein mit Delle
-tile.cobblestone.12.desc=Pflasterstein mit Tafel
-tile.cobblestone.13.desc=Pflasterstein mit leuchtender Tafel
-tile.cobblestone.14.desc=Pflasterstein mit dunkler Tafel
+tile.chisel.cobblestone.name=Bruchstein
+tile.cobblestone.0.desc=Ausgerichtete Bruchsteinziegel
+tile.cobblestone.1.desc=Detaillierte Bruchsteinziegel
+tile.cobblestone.2.desc=Kleine Bruchsteinziegel
+tile.cobblestone.3.desc=Große Bruchsteinfliesen
+tile.cobblestone.4.desc=Kleine Bruchsteinfliesen
+tile.cobblestone.5.desc=Französische Bruchsteinfliesen
+tile.cobblestone.6.desc=Französische Bruchsteinfliesen
+tile.cobblestone.7.desc=Creeper-Bruchsteinfliesen
+tile.cobblestone.8.desc=Beschädigte Bruchsteinfliesen
+tile.cobblestone.9.desc=Riesige Bruchsteinfliesen
+tile.cobblestone.10.desc=Bruchstein mit Creeper-Tafel
+tile.cobblestone.11.desc=Bruchstein mit Delle
+tile.cobblestone.12.desc=Bruchstein mit Tafel
+tile.cobblestone.13.desc=Bruchstein mit leuchtender Tafel
+tile.cobblestone.14.desc=Bruchstein mit dunkler Tafel
 
 #Sandstone Blocks
 tile.chisel.sandstone.name=Sandstein
@@ -404,126 +445,126 @@ tile.chisel.sandstone.name=Sandstein
 #Marble Blocks
 tile.chisel.marble.name=Marmor
 tile.marble.0.desc=Roher Marmor
-tile.marble.1.desc=Marble Zeigel
-tile.marble.2.desc=Klassiche Marmor Tafel
-tile.marble.3.desc=Gemeißelt Marmor Tafel
-tile.marble.4.desc=Marmor Tafel
-tile.marble.5.desc=Marmor Block
-tile.marble.6.desc=Dunkler Creeper Marmor
-tile.marble.7.desc=Leuchtender Creeper Marmor
+tile.marble.1.desc=Marmorziegel
+tile.marble.2.desc=Klassiche Marmortafel
+tile.marble.3.desc=Gemeißelte Marmortafel
+tile.marble.4.desc=Marmortafel
+tile.marble.5.desc=Marmorblock
+tile.marble.6.desc=Dunkler Creeper-Marmor
+tile.marble.7.desc=Leuchtender Creeper-Marmor
 tile.marble.8.desc=Geschnitzter Marmor
 tile.marble.9.desc=Rund geschnitzter Marmor
 tile.marble.10.desc=Marmor mit Dellen
 tile.marble.11.desc=Marmor mit großen Dellen
-tile.marble.12.desc=Marmor mit Fliesen
-tile.marble.13.desc=Angeordnet Marmorfliesen
+tile.marble.12.desc=Marmorfliesen
+tile.marble.13.desc=Angeordnete Marmorfliesen
 tile.marble.14.desc=Fantasievolle Marmorfliesen
-tile.marble.15.desc=Marmor Blöcke
+tile.marble.15.desc=Marmorblöcke
 
-#Marmorplattes
-tile.chisel.marble_slab.name=Marmorplatte
-tile.marbleSlab.0.desc=Rohe Marmorplatte
-tile.marbleSlab.1.desc=Marmor Ziegelplatte
-tile.marbleSlab.2.desc=Klassische Marmorplatte
-tile.marbleSlab.3.desc=Gemeißelt Marmorplatte
-tile.marbleSlab.4.desc=Marmorfliesenplatte
-tile.marbleSlab.5.desc=Marmorblockplatte
-tile.marbleSlab.6.desc=Marmorplatte mit dunklem Creeper
-tile.marbleSlab.7.desc=Marmorplatte mit leuchtendem Creeper
-tile.marbleSlab.8.desc=Geschnitzte Marmorplatte
-tile.marbleSlab.9.desc=Rund geschnitzte Marmorplatte
-tile.marbleSlab.10.desc=Marmorplatte mit Dellen
-tile.marbleSlab.11.desc=Marmorplatte mit großen Dellen
-tile.marbleSlab.12.desc=Marmorplatte mit Fliesen
-tile.marbleSlab.13.desc=Angeordnet Marmorfliesenplatte
-tile.marbleSlab.14.desc=Fantasievolle Marmorfliesenplatte
-tile.marbleSlab.15.desc=Marmorblockplatte
+#Marmor Slabs
+tile.chisel.marble_slab.name=Marmorstufe
+tile.marbleSlab.0.desc=Rohe Marmorstufe
+tile.marbleSlab.1.desc=Stufe mit Marmorziegeln
+tile.marbleSlab.2.desc=Klassische Marmorstufe
+tile.marbleSlab.3.desc=Gemeißelte Marmorstufe
+tile.marbleSlab.4.desc=Stufe mit Marmorfliesen
+tile.marbleSlab.5.desc=Marmorblockstufe
+tile.marbleSlab.6.desc=Marmorstufe mit dunklem Creeper
+tile.marbleSlab.7.desc=Marmorstufe mit leuchtendem Creeper
+tile.marbleSlab.8.desc=Geschnitzte Marmorstufe
+tile.marbleSlab.9.desc=Rund geschnitzte Marmorstufe
+tile.marbleSlab.10.desc=Marmorstufe mit Dellen
+tile.marbleSlab.11.desc=Marmorstufe mit großen Dellen
+tile.marbleSlab.12.desc=Marmorstufe mit Fliesen
+tile.marbleSlab.13.desc=Angeordnete Marmorfliesenstufe
+tile.marbleSlab.14.desc=Fantasievolle Marmorfliesenstufe
+tile.marbleSlab.15.desc=Stufe mit Marmorblöcken
 
 #Marble Pillars (old)
 tile.chisel.marble_pillar.name=Marmorsäule
 tile.marblePillarOld.0.desc=Marmorsäule
-tile.marblePillarOld.1.desc=Marmorsäulen Schlußstein
-tile.marblePillarOld.2.desc=Marmorsäulen Basis
+tile.marblePillarOld.1.desc=Marmorsäulen-Schlussstein
+tile.marblePillarOld.2.desc=Marmorsäulen-Basis
 tile.marblePillarOld.3.desc=Schmale Marmorsäule
 tile.marblePillarOld.4.desc=Verzierte Marmorsäule
 tile.marblePillarOld.5.desc=Dekorative Marmorsäule
 tile.marblePillarOld.6.desc=Griechische Marmorsäule
 tile.marblePillarOld.7.desc=Glatte Marmorsäule
-tile.marblePillarOld.8.desc=Griechischer Marmorsäules Schlußstein
-tile.marblePillarOld.9.desc=Glatte Marmorsäulen Schlußstein
-tile.marblePillarOld.10.desc=Griechische Marmorsäulen Basis
-tile.marblePillarOld.11.desc=Glatte Marmorsäulen Basis
-tile.marblePillarOld.12.desc=Griechischer gemeißelter Marmorsäulen Schlußstein
-tile.marblePillarOld.13.desc=Glatter gemeißelter Marmorsäulen Schlußstein
-tile.marblePillarOld.14.desc=Griechische Gemeißelte Marmorsäulen Basis
-tile.marblePillarOld.15.desc=Glatte Gemeißelte Marmorsäulen Basis
+tile.marblePillarOld.8.desc=Griechischer Marmorsäulen-Schlussstein
+tile.marblePillarOld.9.desc=Glatter Marmorsäulen-Schlussstein
+tile.marblePillarOld.10.desc=Griechische Marmorsäulen-Basis
+tile.marblePillarOld.11.desc=Glatte Marmorsäulen-Basis
+tile.marblePillarOld.12.desc=Griechischer gemeißelter Marmorsäulen-Schlussstein
+tile.marblePillarOld.13.desc=Glatter gemeißelter Marmorsäulen-Schlussstein
+tile.marblePillarOld.14.desc=Griechische gemeißelte Marmorsäulen-Basis
+tile.marblePillarOld.15.desc=Glatte gemeißelte Marmorsäulen-Basis
 
-#Marmorsäules (current)
+#Marmor Pillars (current)
 tile.marblePillar.0.desc=Marmorsäule
 tile.marblePillar.1.desc=Originale Marmorsäule
 tile.marblePillar.2.desc=Einfache Marmorsäule
 tile.marblePillar.3.desc=Gewölbte Marmorsäule
-tile.marblePillar.4.desc=Rauhe Marmorsäule
-tile.marblePillar.5.desc=Griechische Marmorsäule mit gemeißeltm Schlußstein
+tile.marblePillar.4.desc=Raue Marmorsäule
+tile.marblePillar.5.desc=Griechische Marmorsäule mit gemeißeltem Schlussstein
 tile.marblePillar.6.desc=Griechisch Marmorsäule
-tile.marblePillar.7.desc=Griechisch Marmorsäule mit glattem Schlußstein
-tile.marblePillar.8.desc=Glatte Marmorsäule mit gemeißeltem Schlußstein
-tile.marblePillar.9.desc=Glatte Marmorsäule mit griechischem Schlußstein
+tile.marblePillar.7.desc=Griechisch Marmorsäule mit glattem Schlussstein
+tile.marblePillar.8.desc=Glatte Marmorsäule mit gemeißeltem Schlussstein
+tile.marblePillar.9.desc=Glatte Marmorsäule mit griechischem Schlussstein
 tile.marblePillar.10.desc=Glatte Marmorsäule
-tile.marblePillar.11.desc=Breite Marmorsäule mit gemeißeltem Schlußstein
-tile.marblePillar.12.desc=Breite Marmorsäule mit griechischem Schlußstein
-tile.marblePillar.13.desc=Breite Marmorsäule mit glattem Schlußstein
-tile.marblePillar.14.desc=Verzierter Säulenschlußstein
-tile.marblePillar.15.desc=Dekorativer Säulenschlußstein
+tile.marblePillar.11.desc=Breite Marmorsäule mit gemeißeltem Schlussstein
+tile.marblePillar.12.desc=Breite Marmorsäule mit griechischem Schlussstein
+tile.marblePillar.13.desc=Breite Marmorsäule mit glattem Schlussstein
+tile.marblePillar.14.desc=Verzierter Säulenschlussstein
+tile.marblePillar.15.desc=Dekorativer Säulenschlussstein
 
-#Marmorplattes (old)
+#Marmor Slabs (old)
 tile.chisel.marble_pillar_slab.name=Marmorsäulenstufe
 tile.marblePillarSlabOld.0.desc=Marmorsäulenstufe
-tile.marblePillarSlabOld.1.desc=Marmorsäule Schlußsteinstufe
-tile.marblePillarSlabOld.2.desc=Marmorsäule Basisstufe
+tile.marblePillarSlabOld.1.desc=Marmorsäulen-Schlusssteinstufe
+tile.marblePillarSlabOld.2.desc=Marmorsäulen-Basisstufe
 tile.marblePillarSlabOld.3.desc=Schmale Marmorsäulenstufe
 tile.marblePillarSlabOld.4.desc=Verzierte Marmorsäulenstufe
 tile.marblePillarSlabOld.5.desc=Dekorative Marmorsäulenstufe
 tile.marblePillarSlabOld.6.desc=Griechische Marmorsäulenstufe
 tile.marblePillarSlabOld.7.desc=Glatte Marmorsäulenstufe
-tile.marblePillarSlabOld.8.desc=Griechische Marmorsäulen Schlußsteinstufe
-tile.marblePillarSlabOld.9.desc=Glatte Marmorsäulen Schlußsteinstufe
-tile.marblePillarSlabOld.10.desc=Griechische Marmorsäulen Basisstufe
-tile.marblePillarSlabOld.11.desc=Glatte Marmorsäulen Basisstufe
-tile.marblePillarSlabOld.12.desc=Griechische Marmorsäule mit gemeißelter Schlußsteinstufe
-tile.marblePillarSlabOld.13.desc=Glatte Marmorsäule mit gemeißelter Schlußsteinstufe
+tile.marblePillarSlabOld.8.desc=Griechische Marmorsäulen-Schlusssteinstufe
+tile.marblePillarSlabOld.9.desc=Glatte Marmorsäulen-Schlusssteinstufe
+tile.marblePillarSlabOld.10.desc=Griechische Marmorsäulen-Basisstufe
+tile.marblePillarSlabOld.11.desc=Glatte Marmorsäulen-Basisstufe
+tile.marblePillarSlabOld.12.desc=Griechische Marmorsäule mit gemeißelter Schlusssteinstufe
+tile.marblePillarSlabOld.13.desc=Glatte Marmorsäule mit gemeißelter Schlusssteinstufe
 tile.marblePillarSlabOld.14.desc=Griechische Marmorsäule mit gemeißelter Basisstufe
 tile.marblePillarSlabOld.15.desc=Glatte Marmorsäule mit gemeißelter Basisstufe
 
-#Marmorplattes (current)
+#Marmor Slabs (current)
 tile.marblePillarSlab.0.desc=Marmorsäulenstufe
 tile.marblePillarSlab.1.desc=Originale Marmorsäulenstufe
 tile.marblePillarSlab.2.desc=Einfache Marmorsäulenstufe
 tile.marblePillarSlab.3.desc=Gewölbte Marmorsäulenstufe
-tile.marblePillarSlab.4.desc=Rauhe Marmorsäulenstufe
-tile.marblePillarSlab.5.desc=Griechische Marmorsäulenstufe mit gemeißeltem Schlußstein
+tile.marblePillarSlab.4.desc=Raue Marmorsäulenstufe
+tile.marblePillarSlab.5.desc=Griechische Marmorsäulenstufe mit gemeißeltem Schlussstein
 tile.marblePillarSlab.6.desc=Griechische Marmorsäulenstufe
-tile.marblePillarSlab.7.desc=Griechische Marmorsäulenstufe mit glattem Schlußstein
-tile.marblePillarSlab.8.desc=Glatte Marmorsäulenstufe mit gemeißeltem Schlußstein
-tile.marblePillarSlab.9.desc=Glatte Marmorsäulenstufe mit griechischem Schlußstein
+tile.marblePillarSlab.7.desc=Griechische Marmorsäulenstufe mit glattem Schlussstein
+tile.marblePillarSlab.8.desc=Glatte Marmorsäulenstufe mit gemeißeltem Schlussstein
+tile.marblePillarSlab.9.desc=Glatte Marmorsäulenstufe mit griechischem Schlussstein
 tile.marblePillarSlab.10.desc=Glatte Marmorsäulenstufe
-tile.marblePillarSlab.11.desc=Breite Marmorsäulenstufe mit gemeißeltem Schlußstein
-tile.marblePillarSlab.12.desc=Breite Marmorsäulenstufe mit griechischem Schlußstein
-tile.marblePillarSlab.13.desc=Breite Marmorsäulenstufe mit glattem Schlußstein
-tile.marblePillarSlab.14.desc=Verzierte Säuleschlußsteinstufe
-tile.marblePillarSlab.15.desc=Dekorative Säuleschlußsteinstufe
+tile.marblePillarSlab.11.desc=Breite Marmorsäulenstufe mit gemeißeltem Schlussstein
+tile.marblePillarSlab.12.desc=Breite Marmorsäulenstufe mit griechischem Schlussstein
+tile.marblePillarSlab.13.desc=Breite Marmorsäulenstufe mit glattem Schlussstein
+tile.marblePillarSlab.14.desc=Verzierte Säulenschlusssteinstufe
+tile.marblePillarSlab.15.desc=Dekorative Säulenschlusssteinstufe
 
 #Marble Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
 #Sorry!  It was the only way!
-tile.chisel.marble_stairs.0.name=Marmorstufe
-tile.chisel.marble_stairs.1.name=Marmorstufe
-tile.chisel.marble_stairs.2.name=Marmorstufe
-tile.chisel.marble_stairs.3.name=Marmorstufe
-tile.chisel.marble_stairs.4.name=Marmorstufe
-tile.chisel.marble_stairs.5.name=Marmorstufe
-tile.chisel.marble_stairs.6.name=Marmorstufe
-tile.chisel.marble_stairs.7.name=Marmorstufe
+tile.chisel.marble_stairs.0.name=Marmortreppe
+tile.chisel.marble_stairs.1.name=Marmortreppe
+tile.chisel.marble_stairs.2.name=Marmortreppe
+tile.chisel.marble_stairs.3.name=Marmortreppe
+tile.chisel.marble_stairs.4.name=Marmortreppe
+tile.chisel.marble_stairs.5.name=Marmortreppe
+tile.chisel.marble_stairs.6.name=Marmortreppe
+tile.chisel.marble_stairs.7.name=Marmortreppe
 
 #These are bugged.... so sad :,(
 tile.marbleStairs.0.desc=Rohe Marmortreppe
@@ -531,55 +572,55 @@ tile.marbleStairs.1.desc=Marmorziegeltreppe
 tile.marbleStairs.2.desc=Klassische Marmorfliesentreppe
 tile.marbleStairs.3.desc=Gemeißelte Marmorfliesentreppe
 tile.marbleStairs.4.desc=Marmorfliesentreppe
-tile.marbleStairs.5.desc=MarmorBlocktreppe
-tile.marbleStairs.6.desc=Dunkle Creeper Marmortreppe
-tile.marbleStairs.7.desc=Leuchtende Creeper Marmortreppe
+tile.marbleStairs.5.desc=Marmorblocktreppe
+tile.marbleStairs.6.desc=Dunkle Creeper-Marmortreppe
+tile.marbleStairs.7.desc=Leuchtende Creeper-Marmortreppe
 tile.marbleStairs.8.desc=Geschnitzte Marmortreppe
 tile.marbleStairs.9.desc=Rund geschnitzte Marmortreppe
 tile.marbleStairs.10.desc=Marmortreppe mit Delle
 tile.marbleStairs.11.desc=Marmortreppe mit großer Delle
-tile.marbleStairs.12.desc=Marmorfliessentreppe
-tile.marbleStairs.13.desc=Angeordnete Marmorfliessentreppe
-tile.marbleStairs.14.desc=Fantasievolle Marmor Tiled Stairs
+tile.marbleStairs.12.desc=Marmorfliesentreppe
+tile.marbleStairs.13.desc=Angeordnete Marmorfliesentreppe
+tile.marbleStairs.14.desc=Fantasievolle Marmorfliesentreppe
 tile.marbleStairs.15.desc=Marmorblocktreppe
 
 #Limestone
 tile.chisel.limestone.name=Hellgrüner Stein
 tile.limestone.0.desc=Hellgrüner Stein
-tile.limestone.1.desc=Schmale hellgrüne Steinfliessen
-tile.limestone.2.desc=Französische hellgrüne Steinfliessen
-tile.limestone.3.desc=Französische hellgrüne Steinfliessen
-tile.limestone.4.desc=Creeper hellgrüner Steinfliessen
+tile.limestone.1.desc=Schmale hellgrüne Steinfliesen
+tile.limestone.2.desc=Französische hellgrüne Steinfliesen
+tile.limestone.3.desc=Französische hellgrüne Steinfliesen
+tile.limestone.4.desc=Hellgrüne Steinfliesen mit Creeper
 tile.limestone.5.desc=Schmale hellgrüne Steinziegel
-tile.limestone.6.desc=Zerbrochene hellgrüne Steinfliessen
+tile.limestone.6.desc=Zerbrochene hellgrüne Steinfliesen
 tile.limestone.7.desc=Glatter hellgrüner Stein
-tile.limestone.8.desc=Hellgrüner Stein mit gemeißelten Fliessen
-tile.limestone.9.desc=Hellgrüner Stein mit gravierten gemeißelten Fliessen
-tile.limestone.10.desc=Hellgrüner Stein mit Creeper Fliesse
+tile.limestone.8.desc=Hellgrüner Stein mit gemeißelten Fliesen
+tile.limestone.9.desc=Hellgrüner Stein mit gravierten gemeißelten Fliesen
+tile.limestone.10.desc=Hellgrüner Stein mit Creeper-Fliesen
 tile.limestone.11.desc=Hellgrüner Stein mit Delle
-tile.limestone.12.desc=Hellgrüner Stein mit Fliessen
-tile.limestone.13.desc=Große hellgrüne Steinfliessen
-tile.limestone.14.desc=Hellgrüner Stein mit leuchtenden Fliessen
-tile.limestone.15.desc=Hellgrüner Stein mit Dunklen Fliessen
+tile.limestone.12.desc=Hellgrüner Stein mit Fliesen
+tile.limestone.13.desc=Große hellgrüne Steinfliesen
+tile.limestone.14.desc=Hellgrüner Stein mit leuchtenden Fliesen
+tile.limestone.15.desc=Hellgrüner Stein mit Dunklen Fliesen
 
 #Limestone Slab
 tile.chisel.limestone_slab.name=Hellgrüne Steinstufe
-tile.limestoneSlab.0.desc=Hellgrüner Steinstufe
-tile.limestoneSlab.1.desc=Schmale hellgrüne Steinfliessenstufe
-tile.limestoneSlab.2.desc=Französische hellgrüne Steinfliessenstufe
-tile.limestoneSlab.3.desc=Französische hellgrüne Steinfliessenstufe
-tile.limestoneSlab.4.desc=Creeper hellgrüne Steinfliessenstufe
+tile.limestoneSlab.0.desc=Hellgrüne Steinstufe
+tile.limestoneSlab.1.desc=Schmale hellgrüne Steinfliesenstufe
+tile.limestoneSlab.2.desc=Französische hellgrüne Steinfliesenstufe
+tile.limestoneSlab.3.desc=Französische hellgrüne Steinfliesenstufe
+tile.limestoneSlab.4.desc=Hellgrüne Steinfliesenstufe mit Creeper
 tile.limestoneSlab.5.desc=Schmale hellgrüne Steinziegelstufe
 tile.limestoneSlab.6.desc=Zerbrochene hellgrüne Steinfliessenstufe
 tile.limestoneSlab.7.desc=Glatte hellgrüne Steinstufe
-tile.limestoneSlab.8.desc=Hellgrüne Steinstufe mit Fliessen
-tile.limestoneSlab.9.desc=Hellgrüne Steinstufe mit gemeißelten Fliessen
-tile.limestoneSlab.10.desc=Hellgrüne Steinstufe mit Creeper Fliesse
+tile.limestoneSlab.8.desc=Hellgrüne Steinstufe mit Fliesen
+tile.limestoneSlab.9.desc=Hellgrüne Steinstufe mit gemeißelten Fliesen
+tile.limestoneSlab.10.desc=Hellgrüne Steinstufe mit Creeper Fliese
 tile.limestoneSlab.11.desc=Hellgrüne Steinstufe mit Delle
-tile.limestoneSlab.12.desc=Hellgrüne Steinstufe mit Fliessen
-tile.limestoneSlab.13.desc=Große hellgrüne SteinfliessenStufe
-tile.limestoneSlab.14.desc=Hellgrüne Steinstufe mit leuchtenden Fliessen
-tile.limestoneSlab.15.desc=Hellgrüne Steinstufe mit dunklen Fliessen
+tile.limestoneSlab.12.desc=Hellgrüne Steinstufe mit Fliesen
+tile.limestoneSlab.13.desc=Große hellgrüne Steinfliesenstufe
+tile.limestoneSlab.14.desc=Hellgrüne Steinstufe mit leuchtenden Fliesen
+tile.limestoneSlab.15.desc=Hellgrüne Steinstufe mit dunklen Fliesen
 
 #Limestone Stairs
 #The same name goes here 8 different times since stairs take up 8 block positions.
@@ -598,18 +639,18 @@ tile.limestoneStairs.0.desc=Hellgrüne Steintreppe
 tile.limestoneStairs.1.desc=Schmale hellgrüne Steinfliesentreppe
 tile.limestoneStairs.2.desc=Französische hellgrüne Steinfliesentreppe
 tile.limestoneStairs.3.desc=Französische hellgrüne Steinfliesentreppe
-tile.limestoneStairs.4.desc=Creeper Hellgrüne Steinfliesentreppe
+tile.limestoneStairs.4.desc=Hellgrüne Steinfliesentreppe mit Creeper
 tile.limestoneStairs.5.desc=Schmale hellgrüne Steinziegeltreppe
-tile.limestoneStairs.6.desc=Zerbrochende hellgrüne Steinfliesentreppe
+tile.limestoneStairs.6.desc=Zerbrochene hellgrüne Steinfliesentreppe
 tile.limestoneStairs.7.desc=Glatte hellgrüne Steintreppe
-tile.limestoneStairs.8.desc=Hellgrüne Steintreppe mit gemeißelten Fliessen
-tile.limestoneStairs.9.desc=Hellgrüne Steintreppe mit gemeißelten Fliessen
-tile.limestoneStairs.10.desc=Hellgrüne Steintreppe mit Creeper Fliesse
+tile.limestoneStairs.8.desc=Hellgrüne Steintreppe mit gemeißelten Fliesen
+tile.limestoneStairs.9.desc=Hellgrüne Steintreppe mit gemeißelten Fliesen
+tile.limestoneStairs.10.desc=Hellgrüne Steintreppe mit Creeper-Fliesen
 tile.limestoneStairs.11.desc=Hellgrüne Steintreppe mit Delle
-tile.limestoneStairs.12.desc=Hellgrüne Steintreppe mit Fliessen
+tile.limestoneStairs.12.desc=Hellgrüne Steintreppe mit Fliesen
 tile.limestoneStairs.13.desc=Große hellgrüne Steinfliesentreppe
-tile.limestoneStairs.14.desc=Hellgrüne Steintreppe mit leuchtenden Fliessen
-tile.limestoneStairs.15.desc=Hellgrüne Steintreppe mit dunklen FLiessen
+tile.limestoneStairs.14.desc=Hellgrüne Steintreppe mit leuchtenden Fliesen
+tile.limestoneStairs.15.desc=Hellgrüne Steintreppe mit dunklen Fliesen
 
 #Factory Blocks
 tile.chisel.factoryblock.name=Fabrikblock
@@ -639,9 +680,9 @@ tile.factory2.3.desc=Blaues Drahtgitter
 #Diamond blocks
 tile.chisel.diamond_block.name=Diamantblock
 tile.diamond.1.desc=Geprägter Diamantblock
-tile.diamond.2.desc=Diamantblock mit Fliessen
+tile.diamond.2.desc=Diamantblock mit Fliesen
 tile.diamond.3.desc=Diamantzellen
-tile.diamond.4.desc=Diamant mit Violettem Obsidian
+tile.diamond.4.desc=Diamant mit violettem Obsidian
 tile.diamond.5.desc=Diamant mit Obsidian
 tile.diamond.6.desc=Einfacher Diamantblock
 tile.diamond.7.desc=Bismuth-Diamantblock
@@ -661,12 +702,12 @@ tile.chisel.glass.name=Glas
 tile.glass.1.desc=Blasenglas
 tile.glass.2.desc=Chinesisches Glas
 tile.glass.3.desc=Japanisches(?) Glas
-tile.glass.4.desc=Verließglas
+tile.glass.4.desc=Verliesglas
 tile.glass.5.desc=Lichtglas
-tile.glass.6.desc=Randloßes Glas
+tile.glass.6.desc=Randloses Glas
 tile.glass.7.desc=Gemeißeltes Stahlglas
 tile.glass.8.desc=Bildschirm
-tile.glass.9.desc=Galssschiefer
+tile.glass.9.desc=Glasschiefer
 tile.glass.10.desc=Stahlrahmenglas
 tile.glass.11.desc=Steinrahmenglas
 tile.glass.12.desc=Streifenglas
@@ -675,7 +716,7 @@ tile.glass.14.desc=Dünnes Glasgitter
 tile.glass.15.desc=Moderner Eisenzaun
 
 tile.chisel.glass2.name=Glas
-tile.glass2.0.desc=Asymmetrische Bleiglas
+tile.glass2.0.desc=Asymmetrisches Bleiglas
 
 #Sandstone
 tile.chisel.sandstone.name=Sandstein
@@ -684,19 +725,19 @@ tile.sandstone.0.desc=Sandstein mit Glyphen
 tile.sandstone.1.desc=Sandpflaster
 tile.sandstone.2.desc=Sandstein mit Creeper
 
-tile.sandstone.3.desc=Verblaßter Sandstein
+tile.sandstone.3.desc=Verblasster Sandstein
 tile.sandstone.4.desc=Sandsteinsäule
-tile.sandstone.5.desc=Sandsteinsäulen Schlußstein
+tile.sandstone.5.desc=Sandsteinsäulen-Schlussstein
 tile.sandstone.6.desc=Schmale Sandsteinsäule
-tile.sandstone.7.desc=Sandsteinsäule Basis
-tile.sandstone.8.desc=Glatter & flaches Sandstein
-tile.sandstone.9.desc=Glattr Sandsteinsäulen Schlußstein
-tile.sandstone.10.desc=Schmale glatte Schlußstein
-tile.sandstone.11.desc=Glatte Schlußsteinn Basis
+tile.sandstone.7.desc=Sandsteinsäulen-Basis
+tile.sandstone.8.desc=Glatter & flacher Sandstein
+tile.sandstone.9.desc=Glatter Sandsteinsäulen-Schlussstein
+tile.sandstone.10.desc=Schmale glatte Sandsteinsäule
+tile.sandstone.11.desc=Glatte Sandsteinsäulen-Basis
 tile.sandstone.12.desc=Sandsteinblock
 tile.sandstone.13.desc=Schmaler Sandsteinblock
-tile.sandstone.14.desc=Sandstein Mosaik
-tile.sandstone.15.desc=Gestapelte Sandsteinfliessen
+tile.sandstone.14.desc=Sandsteinmosaik
+tile.sandstone.15.desc=Gestapelte Sandsteinfliesen
 
 #Sandstone scribbles
 tile.chisel.sandstone_scribbles.name=Sandstein mit Gekritzel
@@ -733,9 +774,9 @@ tile.iron.5.desc=Eisenplatten
 tile.iron.6.desc=Eisenplatten mit Nieten
 tile.iron.7.desc=Eisenmünzen nach oben gestapelt
 tile.iron.8.desc=Eisenmünzen nach unten gestapelt
-tile.iron.9.desc=Dunkele Eisenkiste
+tile.iron.9.desc=Dunkle Eisenkiste
 tile.iron.10.desc=Leuchtende Eisenkiste
-tile.iron.11.desc=Eisenblock mit Mond Dekoration
+tile.iron.11.desc=Eisenblock mit Monddekoration
 tile.iron.12.desc=Eisenblock mit violettem Obsidian
 tile.iron.13.desc=Eisenblock mit Obsidian
 tile.iron.14.desc=Eisenlüfter
@@ -754,7 +795,7 @@ tile.gold.8.desc=Leuchtende Goldkiste
 tile.gold.9.desc=Goldplatten
 tile.gold.10.desc=Goldplatten mit Nieten
 tile.gold.11.desc=Goldblock mit Sternen
-tile.gold.12.desc=Goldener Stern mit Violettem Obsidian
+tile.gold.12.desc=Goldener Stern mit violettem Obsidian
 tile.gold.13.desc=Goldener Stern mit Obsidian
 tile.gold.14.desc=Einfacher Goldblock
 
@@ -763,24 +804,24 @@ tile.chisel.glowstone.name=Glowstone
 tile.lightstone.1.desc=Glowstone mit Kopfsteinpflaster
 tile.lightstone.2.desc=Korrodierter Glowstone
 tile.lightstone.3.desc=Glowstone mit Glas
-tile.lightstone.4.desc=Neon Glowstone
+tile.lightstone.4.desc=Neon-Glowstone
 tile.lightstone.5.desc=Gemeißelter Glowstone
 tile.lightstone.6.desc=Felsiger Glowstone
 tile.lightstone.7.desc=Schieferförmiger Glowstone
 tile.lightstone.8.desc=Glowstone Fliessen
-tile.lightstone.9.desc=Fantasievolle Glowstone Lanterne
+tile.lightstone.9.desc=Fantasievolle Glowstonelaterne
 tile.lightstone.10.desc=Zerfallener Glowstone
 tile.lightstone.11.desc=Glowstone für organisches Wachstum
-tile.lightstone.12.desc=Glowstone Ebenen
+tile.lightstone.12.desc=Glowstoneebenen
 tile.lightstone.13.desc=Korrodierte Glowstone Fliessen
-tile.lightstone.14.desc=Glowstone Bismuth
-tile.lightstone.15.desc=Glowstone Bismuth Platte
+tile.lightstone.14.desc=Glowstone-Bismuth
+tile.lightstone.15.desc=Glowstone-Bismuthplatte
 
 #Lapis blocks
 tile.chisel.lapis_block.name=Lapislazuliblock
 tile.lapis.1.desc=Klobiger Lapislazuliblock
 tile.lapis.2.desc=Dunkler Lapislazuliblock
-tile.lapis.3.desc=Zelda Lapislazuliblock
+tile.lapis.3.desc=Zelda-Lapislazuliblock
 tile.lapis.4.desc=Gemeißelter Lapislazuliblock
 tile.lapis.5.desc=Lapislazuliteile
 tile.lapis.6.desc=Lapislazuliplatten
@@ -790,13 +831,13 @@ tile.lapis.8.desc=Lapislazuliblock mit gemeißelten Ebenen
 #Emerald Blocks
 tile.chisel.emerald_block.name=Smaragdblock
 tile.emerald.1.desc=Smaragdplatte
-tile.emerald.2.desc=Klassische Smaragdpplatte
+tile.emerald.2.desc=Klassische Smaragdplatte
 tile.emerald.3.desc=Glatter Smaragd
 tile.emerald.4.desc=Klobiger Smaragd
-tile.emerald.5.desc=Smaragd mit Gemeißelt Ebenen
-tile.emerald.6.desc=Zelda Smaragdblock
+tile.emerald.5.desc=Smaragd mit gemeißelten Ebenen
+tile.emerald.6.desc=Zelda-Smaragdblock
 tile.emerald.7.desc=Smaragdzelle
-tile.emerald.8.desc=Smaragd Bismuth
+tile.emerald.8.desc=Smaragd-Bismuth
 tile.emerald.9.desc=Schmaler Smaragdblock
 tile.emerald.10.desc=Schmaler gemeißelter Smaragdblock
 tile.emerald.11.desc=Gemeißelter Smaragdblock
@@ -810,8 +851,8 @@ tile.netherBrick.4.desc=Gutgemachte dunkle Netherziegel
 tile.netherBrick.5.desc=Schmale gutgemachte Netherziegel
 tile.netherBrick.6.desc=Blaue Netherziegel mit Lava
 tile.netherBrick.7.desc=Braune Netherziegel
-tile.netherBrick.8.desc=Obsidian Netherziegel
-tile.netherBrick.9.desc=Stein Netherziegel
+tile.netherBrick.8.desc=Obsidian-Netherziegel
+tile.netherBrick.9.desc=Stein-Netherziegel
 tile.netherBrick.10.desc=Netherziegel aus Fleisch
 tile.netherBrick.11.desc=Rote Netherziegel aus Fleisch
 tile.netherBrick.12.desc=Schmale Netherziegel aus Fleisch
@@ -837,22 +878,22 @@ tile.hellrock.13.desc=Dunkelroter Netherstein
 tile.hellrock.14.desc=Netherstein mit fließender Lava
 
 #Mossy Stone
-tile.chisel.mossy_cobblestone.name=Bemooster Pflasterstein
-tile.stoneMoss.1.desc=Ausgerichteter bemooster Pflastersteinziegel
-tile.stoneMoss.2.desc=Detaillierter bemooster Pflastersteinziegel
-tile.stoneMoss.3.desc=Schmale bemooste Pflastersteinziegel
-tile.stoneMoss.4.desc=Große bemooste Pflastersteinteile
-tile.stoneMoss.5.desc=Schmale bemooste Pflastersteinteile
-tile.stoneMoss.6.desc=Französische bemooste Pflastersteinteile
-tile.stoneMoss.7.desc=Französische bemooste Pflastersteinteile
-tile.stoneMoss.8.desc=Creeper bemooste Pflastersteinteile
-tile.stoneMoss.9.desc=Zerbrochene bemooste Pflastersteinteile
-tile.stoneMoss.10.desc=Große bemooste Pflastersteinteile
-tile.stoneMoss.11.desc=Bemooster Pflasterstein mit Creeper Fliesse
-tile.stoneMoss.12.desc=Bemooster Pflasterstein mit Delle
-tile.stoneMoss.13.desc=Bemooster Pflasterstein mit Fliessen
-tile.stoneMoss.14.desc=Bemooster Pflasterstein mit leuchtenden Fliessen
-tile.stoneMoss.15.desc=Bemooster Pflasterstein mit dunklen Fliessen
+tile.chisel.mossy_cobblestone.name=Bemooster Bruchstein
+tile.stoneMoss.1.desc=Ausgerichtete bemooste Bruchsteinziegel
+tile.stoneMoss.2.desc=Detaillierte bemooste Bruchsteinziegel
+tile.stoneMoss.3.desc=Schmale bemooste Bruchsteinziegel
+tile.stoneMoss.4.desc=Große bemooste Bruchsteinteile
+tile.stoneMoss.5.desc=Schmale bemooste Bruchsteinteile
+tile.stoneMoss.6.desc=Französische bemooste Bruchsteinteile
+tile.stoneMoss.7.desc=Französische bemooste Bruchsteinteile
+tile.stoneMoss.8.desc=Bemooste Bruchsteinteile mit Creeper
+tile.stoneMoss.9.desc=Zerbrochene bemooste Bruchsteinteile
+tile.stoneMoss.10.desc=Große bemooste Bruchsteinteile
+tile.stoneMoss.11.desc=Bemooster Bruchstein mit Creeper-Fliesen
+tile.stoneMoss.12.desc=Bemooster Bruchstein mit Delle
+tile.stoneMoss.13.desc=Bemooster Bruchstein mit Fliesen
+tile.stoneMoss.14.desc=Bemooster Bruchstein mit leuchtenden Fliesen
+tile.stoneMoss.15.desc=Bemooster Bruchstein mit dunklen Fliesen
 
 #Stone Ziegel
 tile.chisel.stonebricksmooth.name=Steinziegel
@@ -862,12 +903,12 @@ tile.stonebricksmooth.2.desc=Modernes mafisches Mauerwerk
 tile.stonebricksmooth.3.desc=Modernes Mischmauerwerk
 tile.stonebricksmooth.4.desc=Schmale Steinziegel
 tile.stonebricksmooth.5.desc=Breite Steinziegel
-tile.stonebricksmooth.6.desc=Kleine ungeordnete Stein Ziegel
+tile.stonebricksmooth.6.desc=Kleine ungeordnete Steinziegel
 tile.stonebricksmooth.7.desc=Ungeordnete Steinziegel
 tile.stonebricksmooth.8.desc=Ungeordnete Steinplatten
 tile.stonebricksmooth.9.desc=Steinziegel in einer fantasievollen Anordnung
-tile.stonebricksmooth.10.desc=Gemeißelte Steinziegelfliessen
-tile.stonebricksmooth.11.desc=Große gemeißelte Steinziegelfliessen
+tile.stonebricksmooth.10.desc=Gemeißelte Steinziegelfliesen
+tile.stonebricksmooth.11.desc=Große gemeißelte Steinziegelfliesen
 tile.stonebricksmooth.12.desc=Steinplatten
 tile.stonebricksmooth.13.desc=Verfallene Steinplatten
 tile.stonebricksmooth.14.desc=Gemeißelte Steinplatten
@@ -876,7 +917,7 @@ tile.stonebricksmooth.15.desc=Giftige Steinziegel
 #Dirt
 tile.chisel.dirt.name=Erde
 tile.dirt.0.desc=Erdziegel in Unordnung
-tile.dirt.1.desc=Erdeziegel in Netherziegelimitat
+tile.dirt.1.desc=Erdziegel in Netherziegelimitat
 tile.dirt.2.desc=Erdziegel
 tile.dirt.3.desc=Pflaster-Erde
 tile.dirt.4.desc=Verstärkte Pflaster-Erde
@@ -903,21 +944,21 @@ tile.ice.9.desc=Eingefallene Eisfliesen
 tile.ice.10.desc=Ungeordnete Eisfliesen
 tile.ice.11.desc=Eisplatten
 tile.ice.12.desc=Dunkle Eisstufe
-tile.ice.13.desc=Zelda Eisblock
-tile.ice.14.desc=Bismuth eisblock
+tile.ice.13.desc=Zelda-Eisblock
+tile.ice.14.desc=Bismuth-Eisblock
 tile.ice.15.desc=Giftiger Eisblock
 
-#Ice Säules
+#Ice Pillars
 tile.chisel.ice_pillar.name=Eissäule
-tile.iceSäule.0.desc=Glatte Eissäule mit glattem Schlußstein
-tile.iceSäule.1.desc=Glatte Eissäule mit griechischem Schlußstein
-tile.iceSäule.2.desc=Griechische Eissäule mit glattem Schlußstein
-tile.iceSäule.3.desc=Griechische Eissäule mit griechischem Schlußstein
-tile.iceSäule.4.desc=Geschnitzte Eissäule mit Schlußstein
-tile.iceSäule.5.desc=Verzierte Eissäule mit Schlußstein
-tile.iceSäule.6.desc=Gravierte Eissäule
+tile.icePillar.0.desc=Glatte Eissäule mit glattem Schlussstein
+tile.icePillar.1.desc=Glatte Eissäule mit griechischem Schlussstein
+tile.icePillar.2.desc=Griechische Eissäule mit glattem Schlussstein
+tile.icePillar.3.desc=Griechische Eissäule mit griechischem Schlussstein
+tile.icePillar.4.desc=Geschnitzte Eissäule mit Schlussstein
+tile.icePillar.5.desc=Verzierte Eissäule mit Schlussstein
+tile.icePillar.6.desc=Gravierte Eissäule
 
-#Eistreppe
+#Ice Stairs
 tile.chisel.ice_stairs.name=Eistreppe
 tile.chisel.ice_stairs.0.name=Eistreppe
 tile.chisel.ice_stairs.1.name=Eistreppe
@@ -958,18 +999,18 @@ tile.packedice.9.desc=Verfallene Packeisfliessen
 tile.packedice.10.desc=Ungeordnete Packeisfliessen
 tile.packedice.11.desc=Packeisplatten
 tile.packedice.12.desc=Packeisdoppelstufe
-tile.packedice.13.desc=Zelda Packeisblock
-tile.packedice.14.desc=Bismuth Packeisblock
+tile.packedice.13.desc=Zelda-Packeisblock
+tile.packedice.14.desc=Bismuth-Packeisblock
 tile.packedice.15.desc=Giftiger Packeisblock
 
 #Packed Ice Pillars
 tile.chisel.packedice_pillar.name=Packeissäule
-tile.packedice_pillar.0.desc=Glatte Packeissäule mit glattem Schlußstein
-tile.packedice_pillar.1.desc=Glatte Packeissäule mit griechischem Schlußstein
-tile.packedice_pillar.2.desc=Griechische Packeissäule mit glattem Schlußstein
-tile.packedice_pillar.3.desc=Griechische Packeissäule mit griechischem Schlußstein
-tile.packedice_pillar.4.desc=Geschnitzte Packeissäule mit Schlußstein
-tile.packedice_pillar.5.desc=Verzierte Packeissäule mit Schlußstein
+tile.packedice_pillar.0.desc=Glatte Packeissäule mit glattem Schlussstein
+tile.packedice_pillar.1.desc=Glatte Packeissäule mit griechischem Schlussstein
+tile.packedice_pillar.2.desc=Griechische Packeissäule mit glattem Schlussstein
+tile.packedice_pillar.3.desc=Griechische Packeissäule mit griechischem Schlussstein
+tile.packedice_pillar.4.desc=Geschnitzte Packeissäule mit Schlussstein
+tile.packedice_pillar.5.desc=Verzierte Packeissäule mit Schlussstein
 tile.packedice_pillar.6.desc=Gravierte Packeissäule
 
 #Packed Ice Stairs
@@ -995,8 +1036,8 @@ tile.packedice_stairs.9.desc=Verfallene Packeisfliessentreppe
 tile.packedice_stairs.10.desc=Ungeordnete Packeisfliessentreppe
 tile.packedice_stairs.11.desc=Packeisplattentreppe
 tile.packedice_stairs.12.desc=Packeisdoppelstufentreppe
-tile.packedice_stairs.13.desc=Zelda Packeistreppe
-tile.packedice_stairs.14.desc=Bismuth Packeistreppe
+tile.packedice_stairs.13.desc=Zelda-Packeistreppe
+tile.packedice_stairs.14.desc=Bismuth-Packeistreppe
 tile.packedice_stairs.15.desc=Giftige Packeistreppe
 
 #Obsidian
@@ -1006,14 +1047,14 @@ tile.obsidian.2.desc=Obsidiansäule
 tile.obsidian.3.desc=Gemeißelter Obsidian
 tile.obsidian.4.desc=Silberne Obsidianplatte
 tile.obsidian.5.desc=Obsidianplatte
-tile.obsidian.6.desc=Organisch aussehende Obsidian Brocken
-tile.obsidian.7.desc=Organisch aussehendes Obsidian Wachstum
+tile.obsidian.6.desc=Organisch aussehende Obsidianbrocken
+tile.obsidian.7.desc=Organisch aussehendes Obsidianwachstum
 tile.obsidian.8.desc=Obsidiankristall
 tile.obsidian.9.desc=Obsidianplatte mit Karte
 tile.obsidian.10.desc=Obsidianplatte mit regionaler Karte
-tile.obsidian.11.desc=Helle Obsidian Tafel
-tile.obsidian.12.desc=Obsidian Block
-tile.obsidian.13.desc=Obsidianfliessen
+tile.obsidian.11.desc=Helle Obsidiantafel
+tile.obsidian.12.desc=Obsidianblock
+tile.obsidian.13.desc=Obsidianfliesen
 tile.obsidian.14.desc=Leuchtender Obsidian mit griechischem Dekor
 tile.obsidian.15.desc=Schmaler Obsidian innerhalb einer Eichenholzkiste
 
@@ -1023,18 +1064,18 @@ tile.chisel.birch_planks.name=Birkenholzbretter
 tile.chisel.spruce_planks.name=Fichtenholzbretter
 tile.chisel.jungle_planks.name=Tropenholzbretter
 tile.chisel.dark_oak_planks.name=Schwarzeichenholzbretter
-tile.chisel.acacia_planks.name=Akazien Holzbretter
+tile.chisel.acacia_planks.name=Akazienholzbretter
 
 #Iron Fence
 tile.chisel.iron_bars.name=Eisengitter
-tile.iron_bars.1.desc=Eisengitter ohne Rehmen
-tile.iron_bars.2.desc=Bedrohlicher Eisenbarren
+tile.iron_bars.1.desc=Eisengitter ohne Rahmen
+tile.iron_bars.2.desc=Bedrohliches Eisengitter
 tile.iron_bars.3.desc=Eisenbarrenkäfig
 tile.iron_bars.4.desc=Bedrohliche Eisenspitzen
 tile.iron_bars.5.desc=Dicke Eisengitter
 tile.iron_bars.6.desc=Dünnes Eisengitter
-tile.iron_bars.7.desc=Gemeißelt Eisenplattenzaun
-tile.iron_bars.8.desc=Vertikale Eisenbarren
+tile.iron_bars.7.desc=Gemeißelter Eisenplattenzaun
+tile.iron_bars.8.desc=Vertikales Eisengitter
 tile.iron_bars.9.desc=Eisenspitzen
 
 #Glass Panes
@@ -1046,7 +1087,7 @@ tile.glass_pane.4.desc=Streifige Glasscheibe
 tile.glass_pane.12.desc=Chinesische Glasscheibe
 tile.glass_pane.13.desc=Chinesische Glasscheibe mit goldenem Rahmen
 tile.glass_pane.14.desc=Japanische Glasscheibe
-tile.glass_pane.15.desc=Gemeißelt japanische Glasscheibe
+tile.glass_pane.15.desc=Gemeißelte japanische Glasscheibe
 
 #Redstone block
 tile.chisel.redstone_block.name=Redstoneblock
@@ -1060,11 +1101,11 @@ tile.redstone_block.7.desc=Gemeißelter Redstone
 tile.redstone_block.8.desc=Redstone mit griechischem Dekor
 tile.redstone_block.9.desc=Gemeißelte Redstonefliessen
 tile.redstone_block.10.desc=Redstonesäule
-tile.redstone_block.11.desc=Redstonefliessen
+tile.redstone_block.11.desc=Redstonefliesen
 tile.redstone_block.12.desc=Redstoneschaltung
-tile.redstone_block.13.desc=Redstone Supaplex Schaltung
-tile.redstone_block.14.desc=Redstone Schädel
-tile.redstone_block.15.desc=Zelda Redstoneblock
+tile.redstone_block.13.desc=Redstone Supaplex-Schaltung
+tile.redstone_block.14.desc=Redstoneschädel
+tile.redstone_block.15.desc=Zelda-Redstoneblock
 
 #Holystone
 tile.chisel.holystone.name=Hühnergott
@@ -1072,14 +1113,14 @@ tile.holystone.0.desc=Hühnergott
 tile.holystone.1.desc=Glatter Hühnergott
 tile.holystone.2.desc=Geheimnisvoller Hühnergott mit Symbol
 tile.holystone.3.desc=Gemeißelter Hühnergott
-tile.holystone.4.desc=Hühnergottblocks
-tile.holystone.5.desc=Rauer Hühnergottblocks
+tile.holystone.4.desc=Hühnergottblöcke
+tile.holystone.5.desc=Rauer Hühnergottblöcke
 tile.holystone.6.desc=Hühnergottziegel
 tile.holystone.7.desc=Große Hühnergottziegel
 tile.holystone.8.desc=Hühnergottplatte
 tile.holystone.9.desc=Hühnergottplattenteile
-tile.holystone.10.desc=Fantasievolle Hühnergott Konstruktion
-tile.holystone.11.desc=Fantasievolle Hühnergott Fliessen
+tile.holystone.10.desc=Fantasievolle Hühnergottkonstruktion
+tile.holystone.11.desc=Fantasievolle Hühnergottfliesen
 tile.holystone.12.desc=Glatte Hühnergottplatte
 tile.holystone.13.desc=Hühnergottplatte
 
@@ -1087,9 +1128,9 @@ tile.holystone.13.desc=Hühnergottplatte
 tile.chisel.lavastone.name=Lavastein
 tile.lavastone.0.desc=Lavastein
 tile.lavastone.1.desc=Schwarzer Lavastein
-tile.lavastone.2.desc=Lavasteinfliessen
+tile.lavastone.2.desc=Lavasteinfliesen
 tile.lavastone.3.desc=Chaotische Lavasteinziegel
-tile.lavastone.4.desc=Lava Creeper in Fliessen
+tile.lavastone.4.desc=Lava-Creeper in Fliesen
 tile.lavastone.5.desc=Lavaplatten
 tile.lavastone.6.desc=Gemeißelte Lavaplatten
 tile.lavastone.7.desc=Dunkler Lavastein
@@ -1097,7 +1138,7 @@ tile.lavastone.7.desc=Dunkler Lavastein
 #Carpet
 tile.chisel.carpet_block.name=Teppich
 tile.carpet_block.0.desc=Weißer Teppich
-tile.carpet_block.1.desc=Orangener Teppich
+tile.carpet_block.1.desc=Oranger Teppich
 tile.carpet_block.2.desc=Lila Teppich
 tile.carpet_block.3.desc=Hellblauer Teppich
 tile.carpet_block.4.desc=Gelber Teppich
@@ -1116,7 +1157,7 @@ tile.carpet_block.15.desc=Schwarzer Teppich
 #Carpet floor
 tile.chisel.carpet.name=Teppichboden
 tile.carpet.0.desc=Weißer Teppich
-tile.carpet.1.desc=Orangener Teppich
+tile.carpet.1.desc=Oranger Teppich
 tile.carpet.2.desc=Lila Teppich
 tile.carpet.3.desc=Hellblauer Teppich
 tile.carpet.4.desc=Gelber Teppich
@@ -1134,21 +1175,21 @@ tile.carpet.15.desc=Schwarzer Teppich
 
 #Bookshelf
 tile.chisel.bookshelf.name=Bücherregal
-tile.bookshelf.1.desc=Bücherregal mit bunten Büchern
-tile.bookshelf.2.desc=Nekromanten Lehrlings Bücherregal
-tile.bookshelf.3.desc=Nekromanten Bücherregal
+tile.bookshelf.1.desc=Bücherregal mit Regenbogen-Büchern
+tile.bookshelf.2.desc=Bücherregal des Nekromantenlehrlings
+tile.bookshelf.3.desc=Bücherregal des Nekromanten 
 tile.bookshelf.4.desc=Bücherregal mit roten Wälzern
 tile.bookshelf.5.desc=Verlassenes Bücherregal
-tile.bookshelf.6.desc=Hamsterer Bücherregal
+tile.bookshelf.6.desc=Bücherregal des Hamsterers
 tile.bookshelf.7.desc=Bücherregal bis zum Rand mit langweiligen Bastelüchern gefüllt
-tile.bookshelf.8.desc=Historiker Bücherregal
+tile.bookshelf.8.desc=Bücherregal des Historikers
 
 #Tyrian
 tile.chisel.tyrian.name=Tyrian
 tile.tyrian.0.desc=Futuristisches Rüstungsteil
 tile.tyrian.1.desc=Düsteres futuristisches Rüstungsteil
 tile.tyrian.2.desc=Violettes futuristisches Rüstungsteil
-tile.tyrian.3.desc=Verblaßtes violettes futuristisches Rüstungsteil
+tile.tyrian.3.desc=Verblasstes violettes futuristisches Rüstungsteil
 tile.tyrian.4.desc=Verrostetes futuristisches Rüstungsteil
 tile.tyrian.5.desc=Aufwändiges futuristisches Rüstungsteil
 tile.tyrian.6.desc=Futuristisches Rüstungsteil mit vielen Nähten
@@ -1164,7 +1205,7 @@ tile.tyrian.15.desc=Silbernes futuristisches Rüstungsteil
 
 #Temple
 tile.chisel.templeblock.name=Tempelblock
-tile.templeblock.0.desc=Tempelpflasterstein
+tile.templeblock.0.desc=Tempelbruchstein
 tile.templeblock.1.desc=Gemeißelter Tempelblock
 tile.templeblock.2.desc=Tempelplatte
 tile.templeblock.3.desc=Zerbrochene Tempelplatte
@@ -1174,31 +1215,31 @@ tile.templeblock.6.desc=Verschlissene Tempelziegel
 tile.templeblock.7.desc=Tempelziegel in Auflösung
 tile.templeblock.8.desc=Tempelspalte
 tile.templeblock.9.desc=Tempelständer
-tile.templeblock.10.desc=Tempelmosaik Ständer
-tile.templeblock.11.desc=Tempel Creeper Ständer
-tile.templeblock.12.desc=Tempelfliessen
-tile.templeblock.13.desc=Schmale Tempelfliessen
-tile.templeblock.14.desc=Leuchtende Tempelfliessen
-tile.templeblock.15.desc=Schmale leuchtende Tempelfliessen
+tile.templeblock.10.desc=Tempel-Mosaikständer
+tile.templeblock.11.desc=Tempel-Creeperständer
+tile.templeblock.12.desc=Tempelfliesen
+tile.templeblock.13.desc=Schmale Tempelfliesen
+tile.templeblock.14.desc=Leuchtende Tempelfliesen
+tile.templeblock.15.desc=Schmale leuchtende Tempelfliesen
 
 #Temple Mossy
 tile.chisel.mossy_templeblock.name=Bemosster Tempelblock
-tile.mossy_templeblock.0.desc=Moosiger Tempelpflasterstein
+tile.mossy_templeblock.0.desc=Moosiger Tempelbruchstein
 tile.mossy_templeblock.1.desc=Gemeißelter bemooster Tempelblock
-tile.mossy_templeblock.2.desc=Bemosste Tempelplatte
-tile.mossy_templeblock.3.desc=Zerbrochen bemosste Tempelplatte
+tile.mossy_templeblock.2.desc=Bemooste Tempelplatte
+tile.mossy_templeblock.3.desc=Zerbrochen bemooste Tempelplatte
 tile.mossy_templeblock.4.desc=Bemooste Tempelziegel
 tile.mossy_templeblock.5.desc=Großer bemooste Tempelziegel
 tile.mossy_templeblock.6.desc=Verschlissene bemooste Tempelziegel
 tile.mossy_templeblock.7.desc=Bemooste Tempelziegel in Auflösung
-tile.mossy_templeblock.8.desc=Bemosste Tempelspalte
-tile.mossy_templeblock.9.desc=Bemosster Tempelständer
-tile.mossy_templeblock.10.desc=Bemosster Tempelmosaikständer
-tile.mossy_templeblock.11.desc=Bemosste Tempel Creeper Ständer
-tile.mossy_templeblock.12.desc=Bemosste Tempelfliessen
-tile.mossy_templeblock.13.desc=Schmale bemosste Tempelfliessen
-tile.mossy_templeblock.14.desc=Leuchtende bemosste Tempelfliessen
-tile.mossy_templeblock.15.desc=Schmale leuchtende bemosste Tempelfliessen
+tile.mossy_templeblock.8.desc=Bemooste Tempelspalte
+tile.mossy_templeblock.9.desc=Bemooster Tempelständer
+tile.mossy_templeblock.10.desc=Bemoooster Tempel-Mosaikständer
+tile.mossy_templeblock.11.desc=Bemooster Tempel-Creeperständer
+tile.mossy_templeblock.12.desc=Bemooste Tempelfliesen
+tile.mossy_templeblock.13.desc=Schmale bemooste Tempelfliesen
+tile.mossy_templeblock.14.desc=Leuchtende bemooste Tempelfliesen
+tile.mossy_templeblock.15.desc=Schmale leuchtende bemooste Tempelfliesen
 
 #Cloud
 tile.chisel.cloud.name=Wolken
@@ -1209,46 +1250,46 @@ tile.cloud.3.desc=Schmale vertikale Wolkenziegel
 tile.cloud.4.desc=Gerasterte Wolkeziegel
 
 #Stained glass T.T
-tile.chisel.stained_glass_white.name=Weißes farbiges Glas
-tile.chisel.stained_glass_orange.name=Orangenes farbiges Glas
-tile.chisel.stained_glass_magenta.name=Magenta farbiges Glas
-tile.chisel.stained_glass_lightblue.name=Hellblaues farbiges Glas
-tile.chisel.stained_glass_yellow.name=Gelbes farbiges Glas
-tile.chisel.stained_glass_lime.name=Hellgrünes farbiges Glas
-tile.chisel.stained_glass_pink.name=Rosanes farbiges Glas
-tile.chisel.stained_glass_gray.name=Graues farbiges Glas
-tile.chisel.stained_glass_lightgray.name=Hellgraues farbiges Glas
-tile.chisel.stained_glass_cyan.name=Türkises farbiges Glas
-tile.chisel.stained_glass_purple.name=Lila farbiges Glas
-tile.chisel.stained_glass_blue.name=Blaues farbiges Glas
-tile.chisel.stained_glass_brown.name=Braunes farbiges Glas
-tile.chisel.stained_glass_green.name=Graues farbiges Glas
-tile.chisel.stained_glass_red.name=Rotes farbiges Glas
-tile.chisel.stained_glass_black.name=Schwarzes farbiges Glas
+tile.chisel.stained_glass_white.name=Weißes Glas
+tile.chisel.stained_glass_orange.name=Oranges Glas
+tile.chisel.stained_glass_magenta.name=Magenta Glas
+tile.chisel.stained_glass_lightblue.name=Hellblaues Glas
+tile.chisel.stained_glass_yellow.name=Gelbes Glas
+tile.chisel.stained_glass_lime.name=Hellgrünes Glas
+tile.chisel.stained_glass_pink.name=Rosa Glas
+tile.chisel.stained_glass_gray.name=Graues Glas
+tile.chisel.stained_glass_lightgray.name=Hellgraues Glas
+tile.chisel.stained_glass_cyan.name=Türkises Glas
+tile.chisel.stained_glass_purple.name=Lila Glas
+tile.chisel.stained_glass_blue.name=Blaues Glas
+tile.chisel.stained_glass_brown.name=Braunes Glas
+tile.chisel.stained_glass_green.name=Graues Glas
+tile.chisel.stained_glass_red.name=Rotes Glas
+tile.chisel.stained_glass_black.name=Schwarzes Glas
 
 #Stained GlassPane T.T
-tile.chisel.stained_glass_pane_white.name=Weiße farbige Glasscheibe
-tile.chisel.stained_glass_pane_orange.name=Orangene farbige Glasscheibe
-tile.chisel.stained_glass_pane_magenta.name=Magenta farbige Glasscheibe
-tile.chisel.stained_glass_pane_lightblue.name=Hellblaue farbige Glasscheibe
-tile.chisel.stained_glass_pane_yellow.name=Gelbe farbige Glasscheibe
-tile.chisel.stained_glass_pane_lime.name=Hellgrüne farbige Glasscheibe
-tile.chisel.stained_glass_pane_pink.name=Rosane farbige Glasscheibe
-tile.chisel.stained_glass_pane_gray.name=Graue farbige Glasscheibe
-tile.chisel.stained_glass_pane_lightgray.name=Hellgraue farbige Glasscheibe
-tile.chisel.stained_glass_pane_cyan.name=Türkise farbige Glasscheibe
-tile.chisel.stained_glass_pane_purple.name=Lila farbige Glasscheibe
-tile.chisel.stained_glass_pane_blue.name=Blaue farbige Glasscheibe
-tile.chisel.stained_glass_pane_brown.name=Braune farbige Glasscheibe
-tile.chisel.stained_glass_pane_green.name=Grüne farbige Glasscheibe
-tile.chisel.stained_glass_pane_red.name=Rote farbige Glasscheibe
-tile.chisel.stained_glass_pane_black.name=Schwarze farbige Glasscheibe
+tile.chisel.stained_glass_pane_white.name=Weiße Glasscheibe
+tile.chisel.stained_glass_pane_orange.name=Orange Glasscheibe
+tile.chisel.stained_glass_pane_magenta.name=Magenta Glasscheibe
+tile.chisel.stained_glass_pane_lightblue.name=Hellblaue Glasscheibe
+tile.chisel.stained_glass_pane_yellow.name=Gelbe Glasscheibe
+tile.chisel.stained_glass_pane_lime.name=Hellgrün Glasscheibe
+tile.chisel.stained_glass_pane_pink.name=Rosa Glasscheibe
+tile.chisel.stained_glass_pane_gray.name=Graue Glasscheibe
+tile.chisel.stained_glass_pane_lightgray.name=Hellgraue Glasscheibe
+tile.chisel.stained_glass_pane_cyan.name=Türkise Glasscheibe
+tile.chisel.stained_glass_pane_purple.name=Lila Glasscheibe
+tile.chisel.stained_glass_pane_blue.name=Blaue Glasscheibe
+tile.chisel.stained_glass_pane_brown.name=Braune Glasscheibe
+tile.chisel.stained_glass_pane_green.name=Grüne Glasscheibe
+tile.chisel.stained_glass_pane_red.name=Rote Glasscheibe
+tile.chisel.stained_glass_pane_black.name=Schwarze Glasscheibe
 
 #Fantasy block
 tile.chisel.fantasyblock.name=Purpurner Fantasieblock
 tile.fantasyblock.0.desc=Purpurner Fantasieziegel
 tile.fantasyblock.1.desc=Purpurner verblassender Fantasieziegel
-tile.fantasyblock.2.desc=Purpurner Verschlissener Fantasieziegel
+tile.fantasyblock.2.desc=Purpurner verschlissener Fantasieziegel
 tile.fantasyblock.3.desc=Purpurner beschädigter Fantasieziegel
 tile.fantasyblock.4.desc=Purpurner Fantasieblock mit Dekoration
 tile.fantasyblock.5.desc=Purpurner fantastischer Dekorationsblock
@@ -1261,13 +1302,13 @@ tile.fantasyblock.11.desc=Purpurner fantastische goldene Kettendekoration
 tile.fantasyblock.12.desc=Purpurner fantastische dekorative Platte
 tile.fantasyblock.13.desc=Purpurner Fantasieblock
 tile.fantasyblock.14.desc=Purpurner Fantasieziegel in Auflösung
-tile.fantasyblock.15.desc=Purpurner ferschlissener Fantasieziegel in Auflösung
+tile.fantasyblock.15.desc=Purpurner verschlissener Fantasieziegel in Auflösung
 
 #Fantasy block 2
 tile.chisel.fantasyblock2.name=Purpurner Fantasieblock
 tile.fantasyblock2.0.desc=Purpurner Fantasieziegel
 tile.fantasyblock2.1.desc=Purpurner verblassender Fantasieziegel
-tile.fantasyblock2.2.desc=Purpurner Verschlissener Fantasieziegel
+tile.fantasyblock2.2.desc=Purpurner verschlissener Fantasieziegel
 tile.fantasyblock2.3.desc=Purpurner beschädigter Fantasieziegel
 tile.fantasyblock2.4.desc=Purpurner Fantasieblock mit Dekoration
 tile.fantasyblock2.5.desc=Purpurner fantastischer Dekorationsblock
@@ -1280,7 +1321,7 @@ tile.fantasyblock2.11.desc=Purpurner fantastische goldene Kettendekoration
 tile.fantasyblock2.12.desc=Purpurner fantastische dekorative Platte
 tile.fantasyblock2.13.desc=Purpurner Fantasieblock
 tile.fantasyblock2.14.desc=Purpurner Fantasieziegel in Auflösung
-tile.fantasyblock2.15.desc=Purpurner ferschlissener Fantasieziegel in Auflösung
+tile.fantasyblock2.15.desc=Purpurner verschlissener Fantasieziegel in Auflösung
 
 #Paperwall
 tile.chisel.paperwall.name=Papierwand
@@ -1291,22 +1332,22 @@ tile.paperwall.2.desc=Gekreuzte Papierwand
 tile.paperwall.3.desc=Sechsfach unterteilte Papierwand
 tile.paperwall.4.desc=Vertikal gestrichene Papierwand
 tile.paperwall.5.desc=Horizontal gestrichene Papierwand
-tile.paperwall.6.desc=Blumen geschmüskte Papierwand
+tile.paperwall.6.desc=Blumen geschmückte Papierwand
 tile.paperwall.7.desc=Glatte Papierwand
 tile.paperwall.8.desc=Türgeformte Papierwand
 
 #Woolen Clay
 tile.chisel.woolen_clay.name=Lehmige Wolle
 tile.woolenClay.0.desc=Weiße lehmige Wolle
-tile.woolenClay.1.desc=Orangene lehmige Wolle
+tile.woolenClay.1.desc=Orange lehmige Wolle
 tile.woolenClay.2.desc=Lila lehmige Wolle
 tile.woolenClay.3.desc=Hellblaue lehmige Wolle
 tile.woolenClay.4.desc=Gelbe lehmige Wolle
 tile.woolenClay.5.desc=Hellgrüne lehmige Wolle
-tile.woolenClay.6.desc=Rosane lehmige Wolle
+tile.woolenClay.6.desc=Rosa lehmige Wolle
 tile.woolenClay.7.desc=Graue lehmige Wolle
 tile.woolenClay.8.desc=Hellgraue lehmige Wolle
-tile.woolenClay.9.desc=Türkiese lehmige Wolle
+tile.woolenClay.9.desc=Türkise lehmige Wolle
 tile.woolenClay.10.desc=Violette lehmige Wolle
 tile.woolenClay.11.desc=Blaue lehmige Wolle
 tile.woolenClay.12.desc=Braune lehmige Wolle
@@ -1315,7 +1356,7 @@ tile.woolenClay.14.desc=Rote lehmige Wolle
 tile.woolenClay.15.desc=Schwarze lehmige Wolle
 
 #Colored Sand
-tile.chisel.colored_sand.name=gefärbter Sand
+tile.chisel.colored_sand.name=Gefärbter Sand
 tile.coloredSand.0.desc=Weiß gefärbter Sand
 tile.coloredSand.1.desc=Orange gefärbter Sand
 tile.coloredSand.2.desc=Lila gefärbter Sand
@@ -1325,8 +1366,8 @@ tile.coloredSand.5.desc=Hellgrün gefärbter Sand
 tile.coloredSand.6.desc=Rosa gefärbter Sand
 tile.coloredSand.7.desc=Grau gefärbter Sand
 tile.coloredSand.8.desc=Hellgrau gefärbter Sand
-tile.coloredSand.9.desc=Türkies gefärbter Sand
-tile.coloredSand.10.desc=Violet gefärbter Sand
+tile.coloredSand.9.desc=Türkis gefärbter Sand
+tile.coloredSand.10.desc=Violett gefärbter Sand
 tile.coloredSand.11.desc=Blau gefärbter Sand
 tile.coloredSand.12.desc=Braun gefärbter Sand
 tile.coloredSand.13.desc=Grün gefärbter Sand
@@ -1349,109 +1390,109 @@ tile.laboratory.10.desc=Unscharfe Platte
 tile.laboratory.11.desc=Große Stahlfliesen
 tile.laboratory.12.desc=Kleine Stahlfliesen
 tile.laboratory.13.desc=Gerichtete Konsole (Rechts)
-tile.laboratory.14.desc=Gerichtet Konsole (Links)
-tile.laboratory.15.desc=Information Konsole
+tile.laboratory.14.desc=Gerichtete Konsole (Links)
+tile.laboratory.15.desc=Informationskonsole
 
 #Planks (They go in order of creative tab appearance if that helps)
 #Oak
 tile.oak.planks.1.desc=Glatte Eichenholzbretter
 tile.oak.planks.2.desc=Kurze Eichenholzbretter
-tile.oak.planks.6.desc=Fantasievolle Eichenholzbretter Anordnung
+tile.oak.planks.6.desc=Fantasievolle Eichenholzbretteranordnung
 tile.oak.planks.8.desc=Eichenholzplatte
 tile.oak.planks.9.desc=Eichenholzdoppelstufe
-tile.oak.planks.10.desc=Eichenholz Kisten
-tile.oak.planks.11.desc=Fantasievolle Eichenholz Kisten
+tile.oak.planks.10.desc=Eichenholztruhe
+tile.oak.planks.11.desc=Fantasievolle Eichenholztruhe
 tile.oak.planks.13.desc=Große lange Eichenholzbretter
 tile.oak.planks.3.desc=Vertikale Eichenholzbretter
 tile.oak.planks.4.desc=Vertikale unebene Eichenholzbretter
 tile.oak.planks.5.desc=Eichenholzparkett
-tile.oak.planks.7.desc=Eichenholz Rollos
-tile.oak.planks.12.desc=Eichenholz Gerüst
+tile.oak.planks.7.desc=Eichenholz-Rollos
+tile.oak.planks.12.desc=Eichenholzgerüst
 tile.oak.planks.14.desc=Eichenholzbretter in Auflösung
 tile.oak.planks.15.desc=Vertikale Eichenholzbretter in Auflösung
 
 #Spruce
 tile.spruce.planks.1.desc=Glatte Fichtenholzbretter
 tile.spruce.planks.2.desc=Kurze Fichtenholzbretter
-tile.spruce.planks.6.desc=Fantasievolle Fichtenholzbretter Anordnung
+tile.spruce.planks.6.desc=Fantasievolle Fichtenholzbretteranordnung
 tile.spruce.planks.8.desc=Fichtenholzplatte
 tile.spruce.planks.9.desc=Fichtenholzdoppelstufe
-tile.spruce.planks.10.desc=Fichtenholz Kisten
-tile.spruce.planks.11.desc=Fantasievolle Fichtenholz Kisten
+tile.spruce.planks.10.desc=Fichtenholztruhe
+tile.spruce.planks.11.desc=Fantasievolle Fichtenholztruhe
 tile.spruce.planks.13.desc=Große lange Fichtenholzbretter
 tile.spruce.planks.3.desc=Vertikale Fichtenholzbretter
 tile.spruce.planks.4.desc=Vertikale unebene Fichtenholzbretter
 tile.spruce.planks.5.desc=Fichtenholzparkett
-tile.spruce.planks.7.desc=Fichtenholz Rollos
-tile.spruce.planks.12.desc=Fichtenholz Gerüst
+tile.spruce.planks.7.desc=Fichtenholz-Rollos
+tile.spruce.planks.12.desc=Fichtenholzgerüst
 tile.spruce.planks.14.desc=Fichtenholzbretter in Auflösung
 tile.spruce.planks.15.desc=Vertikale Fichtenholzbretter in Auflösung
 
 #Birch
 tile.birch.planks.1.desc=Glatte Birkenholzbretter
 tile.birch.planks.2.desc=Kurze Birkenholzbretter
-tile.birch.planks.6.desc=Fantasievolle Birkenholzbretter Anordnung
+tile.birch.planks.6.desc=Fantasievolle Birkenholzbretteranordnung
 tile.birch.planks.8.desc=Birkenholzplatte
 tile.birch.planks.9.desc=Birkenholzdoppelstufe
-tile.birch.planks.10.desc=Birkenholzkisten
-tile.birch.planks.11.desc=Fantasievolle Birkenholz Kisten
+tile.birch.planks.10.desc=Birkenholztruhe
+tile.birch.planks.11.desc=Fantasievolle Birkenholztruhe
 tile.birch.planks.13.desc=Große lange Birkenholzbretter
 tile.birch.planks.3.desc=Vertikale Birkenholzbretter
 tile.birch.planks.4.desc=Vertikale unebene Birkenholzbretter
 tile.birch.planks.5.desc=Birkenholzparkett
-tile.birch.planks.7.desc=Birkenholz Rollos
-tile.birch.planks.12.desc=Birkenholz Gerüst
+tile.birch.planks.7.desc=Birkenholz-Rollos
+tile.birch.planks.12.desc=Birkenholzgerüst
 tile.birch.planks.14.desc=Birkenholzbretter in Auflösung
 tile.birch.planks.15.desc=Vertikale Birkenholzbretter in Auflösung
 
 #Jungle
 tile.jungle.planks.1.desc=Glatte Tropenholzbretter
 tile.jungle.planks.2.desc=Kurze Tropenholzbretter
-tile.jungle.planks.6.desc=Fantasievolle Tropenholzbretter Anordnung
+tile.jungle.planks.6.desc=Fantasievolle Tropenholzbretteranordnung
 tile.jungle.planks.8.desc=Tropenholzplatte
 tile.jungle.planks.9.desc=Tropenholzdoppelstufe
-tile.jungle.planks.10.desc=Tropenholzkiste
-tile.jungle.planks.11.desc=Fantasievolle Tropenholz Kiste
+tile.jungle.planks.10.desc=Tropenholztruhe
+tile.jungle.planks.11.desc=Fantasievolle Tropenholztruhe
 tile.jungle.planks.13.desc=Große lange Tropenholzbretter
 tile.jungle.planks.3.desc=Vertikale Tropenholzbretter
 tile.jungle.planks.4.desc=Vertikale unebene Tropenholzbretter
 tile.jungle.planks.5.desc=Tropenholzparkett
-tile.jungle.planks.7.desc=Tropenholz Rollos
-tile.jungle.planks.12.desc=Tropenholz Gerüst
+tile.jungle.planks.7.desc=Tropenholz-Rollos
+tile.jungle.planks.12.desc=Tropenholzgerüst
 tile.jungle.planks.14.desc=Tropenholzbretter in Auflösung
 tile.jungle.planks.15.desc=Vertikale Tropenholzbretter in Auflösung
 
 #Acacia
 tile.acacia.planks.1.desc=Glatte Akazienholzplanken
 tile.acacia.planks.2.desc=Kurze Akazienholzplanken
-tile.acacia.planks.6.desc=Fantasievolle Akazienholzbretter Anordnung
+tile.acacia.planks.6.desc=Fantasievolle Akazienholzbretteranordnung
 tile.acacia.planks.8.desc=Akazienholzplatte
 tile.acacia.planks.9.desc=Akazienholzdoppelstufe
-tile.acacia.planks.10.desc=Akazienholzkiste
-tile.acacia.planks.11.desc=Fantasievolle Akazienholz Kiste
+tile.acacia.planks.10.desc=Akazienholztruhe
+tile.acacia.planks.11.desc=Fantasievolle Akazienholztruhe
 tile.acacia.planks.13.desc=Große lange Akazienholzplanken
 tile.acacia.planks.3.desc=Vertikale Akazienholzplanken
 tile.acacia.planks.4.desc=Vertikale unebene Akazienholzplanken
 tile.acacia.planks.5.desc=Akazienholzparkett
-tile.acacia.planks.7.desc=Akazienholz Rollos
-tile.acacia.planks.12.desc=Akazienholz Gerüst
+tile.acacia.planks.7.desc=Akazienholz-Rollos
+tile.acacia.planks.12.desc=Akazienholzgerüst
 tile.acacia.planks.14.desc=Akazienholzplanken in Auflösung
 tile.acacia.planks.15.desc=Vertikale Akazienholzplanken in Auflösung
 
 #Dark Oak
-tile.dark-oak.planks.1.desc=Glatt Schwarzeichenholzbretter
-tile.dark-oak.planks.2.desc=Short Schwarzeichenholzbretter
-tile.dark-oak.planks.6.desc=Fantasievolle Schwarzeichenholzbretter Anordnung
+tile.dark-oak.planks.1.desc=Glatte Schwarzeichenholzbretter
+tile.dark-oak.planks.2.desc=Kurze Schwarzeichenholzbretter
+tile.dark-oak.planks.6.desc=Fantasievolle Schwarzeichenholzbretteranordnung
 tile.dark-oak.planks.8.desc=Schwarzeichenholzplatte
 tile.dark-oak.planks.9.desc=Schwarzeichenholzdoppelstufe
-tile.dark-oak.planks.10.desc=Schwarzeichenholzkiste
-tile.dark-oak.planks.11.desc=Fantasievolle Schwarzeichenholz Kiste
+tile.dark-oak.planks.10.desc=Schwarzeichenholztruhe
+tile.dark-oak.planks.11.desc=Fantasievolle Schwarzeichenholztruhe
 tile.dark-oak.planks.13.desc=Große lange Schwarzeichenholzbretter
 tile.dark-oak.planks.3.desc=Vertikale Schwarzeichenholzbretter
 tile.dark-oak.planks.4.desc=Vertikale unebene Schwarzeichenholzbretter
 tile.dark-oak.planks.5.desc=Schwarzeichenholzparkett
-tile.dark-oak.planks.7.desc=Schwarzeichenholz Rollos
-tile.dark-oak.planks.12.desc=Schwarzeichenholz Gerüst
+tile.dark-oak.planks.7.desc=Schwarzeichenholz-Rollos
+tile.dark-oak.planks.12.desc=Schwarzeichenholzgerüst
 tile.dark-oak.planks.14.desc=Schwarzeichenholzbretter in Auflösung
 tile.dark-oak.planks.15.desc=Vertikale Schwarzeichenholzbretter in Auflösung
 
@@ -1459,195 +1500,211 @@ tile.dark-oak.planks.15.desc=Vertikale Schwarzeichenholzbretter in Auflösung
 white.bubble.desc=Weißes Blasenglas
 white.glass.desc=Weiße Glasscheibe
 white.glass.fancy.desc=Weiße fantasievolle Glasscheibe
-white.glass.noborder.desc=Weißes randloses Glass
+white.glass.noborder.desc=Weißes randloses Glas
+white.glass.forestry.desc=Weißes Forestry-Glas
 
-orange.bubble.desc=Orangene Blasenglas
-orange.glass.desc=Orangene Glasscheibe
-orange.glass.fancy.desc=Orangene fantasievolle Glasscheibe
-orange.glass.noborder.desc=Orangenes randloses Glass
+orange.bubble.desc=Oranges Blasenglas
+orange.glass.desc=Orange Glasscheibe
+orange.glass.fancy.desc=Orange fantasievolle Glasscheibe
+orange.glass.noborder.desc=Oranges randloses Glas
+orange.glass.forestry.desc=Oranges Forestry-Glas
 
 magenta.bubble.desc=Lila Blasenglas
 magenta.glass.desc=Lila Glasscheibe
 magenta.glass.fancy.desc=Lila fantasievolle Glasscheibe
-magenta.glass.noborder.desc=Lila randloses Glass
+magenta.glass.noborder.desc=Lila randloses Glas
+magenta.glass.forestry.desc=Lila Forestry-Glas
 
 lightblue.bubble.desc=Hellblaues Blasenglas
 lightblue.glass.desc=Hellblaue Glasscheibe
 lightblue.glass.fancy.desc=Hellblaue fantasievolle Glasscheibe
-lightblue.glass.noborder.desc=Hellblaues randloses Glass
+lightblue.glass.noborder.desc=Hellblaues randloses Glas
+lightblue.glass.forestry.desc=Hellblaues Forestry-Glas
 
 yellow.bubble.desc=Gelbes Blasenglas
 yellow.glass.desc=Gelbe Glasscheibe
 yellow.glass.fancy.desc=Gelbe fantasievolle Glasscheibe
-yellow.glass.noborder.desc=Gelbes randloses Glass
+yellow.glass.noborder.desc=Gelbes randloses Glas
+yellow.glass.forestry.desc=Gelbes Forestry-Glas
 
 lime.bubble.desc=Hellgrünes Blasenglas
 lime.glass.desc=Hellgrüne Glasscheibe
 lime.glass.fancy.desc=Hellgrüne fantasievolle Glasscheibe
-lime.glass.noborder.desc=Hellgrünes randloses Glass
+lime.glass.noborder.desc=Hellgrünes randloses Glas
+lime.glass.forestry.desc=Hellgrünes Forestry-Glas
 
-pink.bubble.desc=Rosanes Blasenglas
-pink.glass.desc=Rosane Glasscheibe
-pink.glass.fancy.desc=Rosanes fantasievolle Glasscheibe
-pink.glass.noborder.desc=Rosanes randloses Glass
+pink.bubble.desc=Rosa Blasenglas
+pink.glass.desc=Rosa Glasscheibe
+pink.glass.fancy.desc=Rosa fantasievolle Glasscheibe
+pink.glass.noborder.desc=Rosa randloses Glas
+pink.glass.forestry.desc=Rosa Forestry-Glas
 
 darkgray.bubble.desc=Graues Blasenglas
 darkgray.glass.desc=Graue Glasscheibe
 darkgray.glass.fancy.desc=Graue fantasievolle Glasscheibe
-darkgray.glass.noborder.desc=Graues randloses Glass
+darkgray.glass.noborder.desc=Graues randloses Glas
+darkgray.glass.forestry.desc=Graues Forestry-Glas
 
 lightgray.bubble.desc=Hellgraues Blasenglas
 lightgray.glass.desc=Hellgraue Glasscheibe
 lightgray.glass.fancy.desc=Hellgraue fantasievolle Glasscheibe
-lightgray.glass.noborder.desc=Hellgraues randloses Glass
+lightgray.glass.noborder.desc=Hellgraues randloses Glas
+lightgray.glass.forestry.desc=Hellgraues Forestry-Glas
 
-cyan.bubble.desc=Türkieses Blasenglas
-cyan.glass.desc=Türkiese Glasscheibe
-cyan.glass.fancy.desc=Türkiese fantasievolle Glasscheibe
-cyan.glass.noborder.desc=Türkieses randloses Glass
+cyan.bubble.desc=Türkises Blasenglas
+cyan.glass.desc=Türkise Glasscheibe
+cyan.glass.fancy.desc=Türkise fantasievolle Glasscheibe
+cyan.glass.noborder.desc=Türkises randloses Glas
+cyan.glass.forestry.desc=Türkises Forestry-Glas
 
 purple.bubble.desc=Violettes Blasenglas
 purple.glass.desc=Violette Glasscheibe
 purple.glass.fancy.desc=Violette fantasievolle Glasscheibe
-purple.glass.noborder.desc=Violettes randloses Glass
+purple.glass.noborder.desc=Violettes randloses Glas
+purple.glass.forestry.desc=Violettes Forestry-Glas
 
 blue.bubble.desc=Blaues Blasenglas
 blue.glass.desc=Blaue Glasscheibe
 blue.glass.fancy.desc=Blaue fantasievolle Glasscheibe
-blue.glass.noborder.desc=Blaues randloses Glass
+blue.glass.noborder.desc=Blaues randloses Glas
+blue.glass.forestry.desc=Blaues Forestry-Glas
 
 brown.bubble.desc=Braunes Blasenglas
 brown.glass.desc=Braune Glasscheibe
 brown.glass.fancy.desc=Braune fantasievolle Glasscheibe
-brown.glass.noborder.desc=Braunes randloses Glass
+brown.glass.noborder.desc=Braunes randloses Glas
+brown.glass.forestry.desc=Braunes Forestry-Glas
 
 green.bubble.desc=Grünes Blasenglas
 green.glass.desc=Grüne Glasscheibe
 green.glass.fancy.desc=Grüne fantasievolle Glasscheibe
-green.glass.noborder.desc=Grünes randloses Glass
+green.glass.noborder.desc=Grünes randloses Glas
+green.glass.forestry.desc=Grünes Forestry-Glas
 
 red.bubble.desc=Rotes Blasenglas
 red.glass.desc=Rote Glasscheibe
 red.glass.fancy.desc=Rote fantasievolle Glasscheibe
-red.glass.noborder.desc=Rotes randloses Glass
+red.glass.noborder.desc=Rotes randloses Glas
+red.glass.forestry.desc=Rotes Forestry-Glas
 
 black.bubble.desc=Schwarzes Blasenglas
 black.glass.desc=Schwarze Glasscheibe
 black.glass.fancy.desc=Schwarze fantasievolle Glasscheibe
-black.glass.noborder.desc=Schwarzes randloses Glass
+black.glass.noborder.desc=Schwarzes randloses Glas
+black.glass.forestry.desc=Schwarzes Forestry-Glas
 
 #Stained Glass Pane
 white.pane.bubble.desc=Weißes Blasenglas
 white.pane.glass.desc=Weiße Glasscheibe
 white.pane.glass.fancy.desc=Weiße fantasievolle Glasscheibe
-white.pane.glass.noborder.desc=Weißes randloses Glass
-white.pane.glass.quadrant.desc=Weißes quadratisches Glass
-white.pane.glass.fancyquadrant.desc=Weißes fantasievolles quadratisches Glass
+white.pane.glass.noborder.desc=Weißes randloses Glas
+white.pane.glass.quadrant.desc=Weißes quadratisches Glas
+white.pane.glass.fancyquadrant.desc=Weißes fantasievolles quadratisches Glas
 
-orange.pane.bubble.desc=Orangenes Blasenglas
-orange.pane.glass.desc=Orangene Glasscheibe
-orange.pane.glass.fancy.desc=Orangene fantasievolle Glasscheibe
-orange.pane.glass.noborder.desc=Orangenes randloses Glass
-orange.pane.glass.quadrant.desc=Orangenes quadratisches Glass
-orange.pane.glass.fancyquadrant.desc=Orangenes fantasievolles quadratisches Glass
+orange.pane.bubble.desc=Oranges Blasenglas
+orange.pane.glass.desc=Orange Glasscheibe
+orange.pane.glass.fancy.desc=Orange fantasievolle Glasscheibe
+orange.pane.glass.noborder.desc=Oranges randloses Glas
+orange.pane.glass.quadrant.desc=Oranges quadratisches Glas
+orange.pane.glass.fancyquadrant.desc=Oranges fantasievolles quadratisches Glas
 
 magenta.pane.bubble.desc=Lila Blasenglas
 magenta.pane.glass.desc=Lila Glasscheibe
 magenta.pane.glass.fancy.desc=Lila Fantasievolle Glasscheibe
-magenta.pane.glass.noborder.desc=Lila randloses Glass
-magenta.pane.glass.quadrant.desc=Lila quadratisches Glass
-magenta.pane.glass.fancyquadrant.desc=Lila fantasievolles quadratisches Glass
+magenta.pane.glass.noborder.desc=Lila randloses Glas
+magenta.pane.glass.quadrant.desc=Lila quadratisches Glas
+magenta.pane.glass.fancyquadrant.desc=Lila fantasievolles quadratisches Glas
 
 lightblue.pane.bubble.desc=Hellblaues Blasenglas
 lightblue.pane.glass.desc=Hellblaue Glasscheibe
 lightblue.pane.glass.fancy.desc=Hellblaue fantasievolle Glasscheibe
-lightblue.pane.glass.noborder.desc=Hellblaues randloses Glass
-lightblue.pane.glass.quadrant.desc=Hellblaues quadratisches Glass
-lightblue.pane.glass.fancyquadrant.desc=Hellblaues fantasievolles quadratisches Glass
+lightblue.pane.glass.noborder.desc=Hellblaues randloses Glas
+lightblue.pane.glass.quadrant.desc=Hellblaues quadratisches Glas
+lightblue.pane.glass.fancyquadrant.desc=Hellblaues fantasievolles quadratisches Glas
 
 yellow.pane.bubble.desc=Gelbes Blasenglas
 yellow.pane.glass.desc=Gelbe Glasscheibe
 yellow.pane.glass.fancy.desc=Gelbe fantasievolle Glasscheibe
-yellow.pane.glass.noborder.desc=Gelbes randloses Glass
-yellow.pane.glass.quadrant.desc=Gelbes quadratisches Glass
-yellow.pane.glass.fancyquadrant.desc=Gelbes fantasievolles quadratisches Glass
+yellow.pane.glass.noborder.desc=Gelbes randloses Glas
+yellow.pane.glass.quadrant.desc=Gelbes quadratisches Glas
+yellow.pane.glass.fancyquadrant.desc=Gelbes fantasievolles quadratisches Glas
 
 lime.pane.bubble.desc=Hellgrünes Blasenglas
 lime.pane.glass.desc=Hellgrüne Glasscheibe
 lime.pane.glass.fancy.desc=Hellgrüne fantasievolle Glasscheibe
-lime.pane.glass.noborder.desc=Hellgrünes randloses Glass
-lime.pane.glass.quadrant.desc=Hellgrünes quadratisches Glass
-lime.pane.glass.fancyquadrant.desc=Hellgrünes fantasievolles quadratisches Glass
+lime.pane.glass.noborder.desc=Hellgrünes randloses Glas
+lime.pane.glass.quadrant.desc=Hellgrünes quadratisches Glas
+lime.pane.glass.fancyquadrant.desc=Hellgrünes fantasievolles quadratisches Glas
 
-pink.pane.bubble.desc=Rosanes Blasenglas
-pink.pane.glass.desc=Rosane Glasscheibe
-pink.pane.glass.fancy.desc=Rosane fantasievolle Glasscheibe
-pink.pane.glass.noborder.desc=Rosanes randloses Glass
-pink.pane.glass.quadrant.desc=Rosanes quadratisches Glass
-pink.pane.glass.fancyquadrant.desc=Rosanes fantasievolles quadratisches Glass
+pink.pane.bubble.desc=Rosa Blasenglas
+pink.pane.glass.desc=Rosa Glasscheibe
+pink.pane.glass.fancy.desc=Rosa fantasievolle Glasscheibe
+pink.pane.glass.noborder.desc=Rosa randloses Glas
+pink.pane.glass.quadrant.desc=Rosa quadratisches Glas
+pink.pane.glass.fancyquadrant.desc=Rosa fantasievolles quadratisches Glas
 
 darkgray.pane.bubble.desc=Graues Blasenglas
 darkgray.pane.glass.desc=Graue Glasscheibe
 darkgray.pane.glass.fancy.desc=Graue fantasievolle Glasscheibe
-darkgray.pane.glass.noborder.desc=Graues randloses Glass
-darkgray.pane.glass.quadrant.desc=Graues quadratisches Glass
-darkgray.pane.glass.fancyquadrant.desc=Graues fantasievolles quadratisches Glass
+darkgray.pane.glass.noborder.desc=Graues randloses Glas
+darkgray.pane.glass.quadrant.desc=Graues quadratisches Glas
+darkgray.pane.glass.fancyquadrant.desc=Graues fantasievolles quadratisches Glas
 
 lightgray.pane.bubble.desc=Hellgraues Blasenglas
 lightgray.pane.glass.desc=Hellgraue Glasscheibe
 lightgray.pane.glass.fancy.desc=Hellgraue fantasievolle Glasscheibe
-lightgray.pane.glass.noborder.desc=Hellgraues randloses Glass
-lightgray.pane.glass.quadrant.desc=Hellgraues quadratisches Glass
-lightgray.pane.glass.fancyquadrant.desc=Hellgraues fantasievolles quadratisches Glass
+lightgray.pane.glass.noborder.desc=Hellgraues randloses Glas
+lightgray.pane.glass.quadrant.desc=Hellgraues quadratisches Glas
+lightgray.pane.glass.fancyquadrant.desc=Hellgraues fantasievolles quadratisches Glas
 
-cyan.pane.bubble.desc=Türkieses Blasenglas
-cyan.pane.glass.desc=Türkiese Glasscheibe
-cyan.pane.glass.fancy.desc=Türkiese fantasievolle Glasscheibe
-cyan.pane.glass.noborder.desc=Türkieses randloses Glass
-cyan.pane.glass.quadrant.desc=Türkieses quadratisches Glass
-cyan.pane.glass.fancyquadrant.desc=Türkieses fantasievolles quadratisches Glass
+cyan.pane.bubble.desc=Türkises Blasenglas
+cyan.pane.glass.desc=Türkise Glasscheibe
+cyan.pane.glass.fancy.desc=Türkise fantasievolle Glasscheibe
+cyan.pane.glass.noborder.desc=Türkises randloses Glas
+cyan.pane.glass.quadrant.desc=Türkises quadratisches Glas
+cyan.pane.glass.fancyquadrant.desc=Türkises fantasievolles quadratisches Glas
 
 purple.pane.bubble.desc=Violettes Blasenglas
 purple.pane.glass.desc=Violette Glasscheibe
 purple.pane.glass.fancy.desc=Violette fantasievolle Glasscheibe
-purple.pane.glass.noborder.desc=Violettes randloses Glass
-purple.pane.glass.quadrant.desc=Violettes quadratisches Glass
-purple.pane.glass.fancyquadrant.desc=Violettes fantasievolles quadratisches Glass
+purple.pane.glass.noborder.desc=Violettes randloses Glas
+purple.pane.glass.quadrant.desc=Violettes quadratisches Glas
+purple.pane.glass.fancyquadrant.desc=Violettes fantasievolles quadratisches Glas
 
 blue.pane.bubble.desc=Blaues Blasenglas
 blue.pane.glass.desc=Blaue Glasscheibe
 blue.pane.glass.fancy.desc=Blaue fantasievolle Glasscheibe
-blue.pane.glass.noborder.desc=Blaues randloses Glass
-blue.pane.glass.quadrant.desc=Blaues quadratisches Glass
-blue.pane.glass.fancyquadrant.desc=Blaues fantasievolles quadratisches Glass
+blue.pane.glass.noborder.desc=Blaues randloses Glas
+blue.pane.glass.quadrant.desc=Blaues quadratisches Glas
+blue.pane.glass.fancyquadrant.desc=Blaues fantasievolles quadratisches Glas
 
 brown.pane.bubble.desc=Braunes Blasenglas
 brown.pane.glass.desc=Braune Glasscheibe
 brown.pane.glass.fancy.desc=Braune fantasievolle Glasscheibe
-brown.pane.glass.noborder.desc=Braunes randloses Glass
-brown.pane.glass.quadrant.desc=Braunes quadratisches Glass
-brown.pane.glass.fancyquadrant.desc=Braunes fantasievolles quadratisches Glass
+brown.pane.glass.noborder.desc=Braunes randloses Glas
+brown.pane.glass.quadrant.desc=Braunes quadratisches Glas
+brown.pane.glass.fancyquadrant.desc=Braunes fantasievolles quadratisches Glas
 
 green.pane.bubble.desc=Grünes Blasenglas
 green.pane.glass.desc=Grüne Glasscheibe
 green.pane.glass.fancy.desc=Grüne fantasievolle Glasscheibe
-green.pane.glass.noborder.desc=Grünes randloses Glass
-green.pane.glass.quadrant.desc=Grünes quadratisches Glass
-green.pane.glass.fancyquadrant.desc=Grünes fantasievolles quadratisches Glass
+green.pane.glass.noborder.desc=Grünes randloses Glas
+green.pane.glass.quadrant.desc=Grünes quadratisches Glas
+green.pane.glass.fancyquadrant.desc=Grünes fantasievolles quadratisches Glas
 
 red.pane.bubble.desc=Rotes Blasenglas
 red.pane.glass.desc=Rote Glasscheibe
 red.pane.glass.fancy.desc=Rote fantasievolle Glasscheibe
-red.pane.glass.noborder.desc=Rotes randloses Glass
-red.pane.glass.quadrant.desc=Rotes quadratisches Glass
-red.pane.glass.fancyquadrant.desc=Rotes fantasievolles quadratisches Glass
+red.pane.glass.noborder.desc=Rotes randloses Glas
+red.pane.glass.quadrant.desc=Rotes quadratisches Glas
+red.pane.glass.fancyquadrant.desc=Rotes fantasievolles quadratisches Glas
 
 black.pane.bubble.desc=Schwarzes Blasenglas
 black.pane.glass.desc=Schwarze Glasscheibe
 black.pane.glass.fancy.desc=Schwarze fantasievolle Glasscheibe
-black.pane.glass.noborder.desc=Schwarzes randloses Glass
-black.pane.glass.quadrant.desc=Schwarzes quadratisches Glass
-black.pane.glass.fancyquadrant.desc=Schwarzes fantasievolles quadratisches Glass
+black.pane.glass.noborder.desc=Schwarzes randloses Glas
+black.pane.glass.quadrant.desc=Schwarzes quadratisches Glas
+black.pane.glass.fancyquadrant.desc=Schwarzes fantasievolles quadratisches Glas
 
 # Creative Tab localizations
 itemGroup.tabOtherChiselBlocks=Andere gemeißelte Blöcke
