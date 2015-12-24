@@ -29,7 +29,7 @@ public class JsonHelper {
     
     public static final String FACE_EXTENSION = ".cf";
     public static final String TEXTURE_EXTENSION = ".ctx";
-    public static final JsonObject NORMAL_TEXTURE = new Gson().fromJson("{\"type\": \"NORMAL\"}", JsonObject.class);
+    public static final JsonObject NORMAL_TEXTURE = gson.fromJson("{\"type\": \"NORMAL\"}", JsonObject.class);
 
     private static IChiselFace createFace(ResourceLocation loc) {
         if (isValidFace(loc)) {
