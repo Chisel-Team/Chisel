@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import team.chisel.Chisel;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.block.material.Material;
@@ -87,8 +88,6 @@ public class ChiselBlockBuilder {
 
         }
         
-        private static IVariationBuilderDelegate delegate;
-
         private ChiselBlockBuilder parent;
 
         private String name;
@@ -140,17 +139,9 @@ public class ChiselBlockBuilder {
             return this.parent;
         }
 
-        private VariationData doBuild(){
-            return delegate.build(name, group, index, recipe, smeltedFrom, amountSmelted, light, hardness,
-                    beaconBase, textureLocation, overrideMap);
+        private VariationData doBuild() {
+            return Chisel.proxy.getBuilderDelegate().build(name, group, index, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, textureLocation, overrideMap);
         }
-
-        public static void setDelegate(IVariationBuilderDelegate inter){
-            if (delegate == null){
-                delegate = inter;
-            }
-        }
-
 
         //todo I was here gonna implement ClientVariation stuff
     }
