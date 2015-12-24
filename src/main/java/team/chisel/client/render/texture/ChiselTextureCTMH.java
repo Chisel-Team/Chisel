@@ -36,13 +36,13 @@ public class ChiselTextureCTMH extends AbstractChiselTexture<BlockRenderTypeCTMH
 
     private BakedQuad getQuad(EnumFacing side, CTM ctm) {
         if (ctm.connectedAnd(Dir.LEFT, Dir.RIGHT)) {
-            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), new float[] { 8, 0, 16, 8 });
+            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), QuadHelper.UVS_TOP_RIGHT);
         } else if (ctm.connected(Dir.LEFT)) {
-            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), new float[] { 8, 8, 16, 16 });
+            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), QuadHelper.UVS_BOTTOM_RIGHT);
         } else if (ctm.connected(Dir.RIGHT)) {
-            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), new float[] { 0, 8, 8, 16 });
+            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), QuadHelper.UVS_BOTTOM_LEFT);
         } else {
-            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), new float[] { 0, 0, 8, 8 });
+            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), QuadHelper.UVS_TOP_LEFT);
         }
     }
 }

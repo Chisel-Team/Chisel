@@ -57,7 +57,9 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
                 String tex = this.textures[i];
                 if (JsonHelper.isLocalPath(tex)) {
                     // TODO a better way to fix prefixing
-                    tex = JsonHelper.toTexturePath(JsonHelper.toAbsolutePath(tex, loc).replace("chisel:", ""));
+                    String path = JsonHelper.toAbsolutePath(tex, loc);
+                    path = path.substring(path.indexOf(':') + 1);
+                    tex = JsonHelper.toTexturePath(path);
                 }
                 callbacks[i] = new TextureSpriteCallback(new ResourceLocation(loc.getResourceDomain(), tex));
                 TextureStitcher.register(callbacks[i]);

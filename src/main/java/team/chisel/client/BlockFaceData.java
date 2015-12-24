@@ -92,7 +92,7 @@ public class BlockFaceData {
         }
         
         private static ResourceLocation toBlock(ResourceLocation loc) {
-            return new ResourceLocation(loc.getResourceDomain(), loc.getResourcePath() + ".cb");
+            return new ResourceLocation(loc.getResourceDomain(), loc.getResourcePath() + JsonHelper.FACE_EXTENSION);
         }
 
         public VariationFaceData(IChiselFace defaultFace, Map<EnumFacing, IChiselFace> sideOverrides){

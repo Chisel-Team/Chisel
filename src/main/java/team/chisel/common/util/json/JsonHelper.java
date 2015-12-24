@@ -25,6 +25,9 @@ public class JsonHelper {
     private static Map<ResourceLocation, IChiselFace> faceCache = new HashMap<>();
 
     private static Map<ResourceLocation, IChiselTexture<?>> textureCache = new HashMap<>();
+    
+    public static final String FACE_EXTENSION = ".cf";
+    public static final String TEXTURE_EXTENSION = ".ctx";
 
     private static IChiselFace createFace(ResourceLocation loc) {
         if (isValidFace(loc)) {
@@ -140,7 +143,7 @@ public class JsonHelper {
     }
 
     public static String toTexturePath(String resourcePath) {
-        String s = resourcePath.replace("textures/", "").replace(".ctx", "");
+        String s = resourcePath.replace("textures/", "").replace(TEXTURE_EXTENSION, "");
         if (!s.startsWith("blocks")) {
             s = "blocks/".concat(s);
         }
