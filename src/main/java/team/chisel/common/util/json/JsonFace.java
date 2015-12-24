@@ -18,13 +18,13 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
     /**
      * If this is the type COMBINED then these are the identifiers of the child textures
      */
-    private String[] children;
+    private String[] textures;
 
     @Override
     protected IChiselFace create(ResourceLocation loc) {
-        Preconditions.checkNotNull(children, "COMBINED texture type must have children textures!");
+        Preconditions.checkNotNull(textures, JsonHelper.FACE_EXTENSION + " files must have a textures field!");
         IChiselFace face = new ChiselFace(loc);
-        for (String child : children) {
+        for (String child : textures) {
             if (JsonHelper.isLocalPath(child)) {
                 child = JsonHelper.toAbsolutePath(child, loc);
             }

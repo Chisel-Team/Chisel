@@ -13,6 +13,7 @@ import team.chisel.api.render.IChiselTexture;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 public class JsonHelper {
     
@@ -28,6 +29,7 @@ public class JsonHelper {
     
     public static final String FACE_EXTENSION = ".cf";
     public static final String TEXTURE_EXTENSION = ".ctx";
+    public static final JsonObject NORMAL_TEXTURE = new Gson().fromJson("{\"type\": \"NORMAL\"}", JsonObject.class);
 
     private static IChiselFace createFace(ResourceLocation loc) {
         if (isValidFace(loc)) {
@@ -84,7 +86,7 @@ public class JsonHelper {
         ResourceLocation absolute = new ResourceLocation(loc.getResourceDomain(), "models/block/" + loc.getResourcePath());
         if (isValid(loc, absolute)) {
             JsonObject obj = objectCache.get(loc);
-            return obj.has("children") && !obj.has("type");
+            return obj.has("textures") && !obj.has("type");
         }
         return false;
     }
@@ -94,19 +96,29 @@ public class JsonHelper {
         if (objectCache.containsKey(relative)) {
             return true;
         }
+        if (!isLoadable(absolute)) {
+            objectCache.put(relative, NORMAL_TEXTURE);
+            return true;
+        }
+        
         JsonObject object;
+
         try {
             object = gson.fromJson(new InputStreamReader(Minecraft.getMinecraft().getResourceManager().getResource(absolute).getInputStream()), JsonObject.class);
-        } catch (IOException e) {
-            cachedException = new RuntimeException(e);
+        } catch (JsonSyntaxException | IOException e) {
+            cachedException = new RuntimeException("Error loading file " + absolute, e);
             return false;
         }
-        if (object.has("children") || object.has("type")) {
+        if (object.has("textures") || object.has("type")) {
             objectCache.put(relative, object);
             return true;
         } else {
             throw new IllegalArgumentException(relative + " does not have a 'children' and/or 'type' field!");
         }
+    }
+    
+    private static boolean isLoadable(ResourceLocation loc) {
+        return loc.getResourcePath().endsWith(TEXTURE_EXTENSION) || loc.getResourcePath().endsWith(FACE_EXTENSION);
     }
 
     public static boolean isCombinedTexture(boolean combined, ResourceLocation loc) {

@@ -1,5 +1,5 @@
 {
-	"children":[
+	"textures":[
 		"./background.ctx",
 		"./bevel_border.ctx"
 	]
