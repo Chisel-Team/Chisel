@@ -24,7 +24,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
 import team.chisel.api.block.ChiselBlockData;
-import team.chisel.api.block.ClientVariationData;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.RenderContextList;
@@ -146,18 +145,6 @@ public class BlockCarvable extends Block implements ICarvable {
     public int getMetaFromState(IBlockState state) {
         return state.getValue(metaProp);
     }
-
-
-    @Override
-    public boolean equals(Object object) {
-        if (object instanceof BlockCarvable) {
-            BlockCarvable carv = (BlockCarvable) object;
-            return carv.getUnlocalizedName().equals(this.getUnlocalizedName());
-        }
-        return false;
-    }
-
-
 
     /**
      * Name used for texture path
