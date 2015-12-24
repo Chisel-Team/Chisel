@@ -1,13 +1,8 @@
-package team.chisel.common;
+package team.chisel.common.util;
 
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
-/**
- * Property for block position
- *
- * @author minecreatr
- */
 public class PropertyBlockPos implements IUnlistedProperty<BlockPos> {
 
     @Override

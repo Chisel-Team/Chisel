@@ -1,13 +1,10 @@
 package team.chisel.client;
 
+import java.util.Random;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
-/**
- * Client Utility stuff
- */
 public class ClientUtil {
 
     public static final Random rand = new Random();

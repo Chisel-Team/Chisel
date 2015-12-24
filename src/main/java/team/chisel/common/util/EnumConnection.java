@@ -10,9 +10,7 @@ import team.chisel.common.block.BlockCarvable;
 import com.google.common.collect.Maps;
 
 /**
- * Each of these represents a type connection that a ctm block has to another
- *
- * @author minecreatr
+ * Old connection code, may still be useful for something, but not currently used for anything.
  */
 public enum EnumConnection {
 
@@ -37,38 +35,33 @@ public enum EnumConnection {
     WEST_DOWN(pos().west().down());
 
     public static final EnumConnection[] VALUES = values();
-    
+
     private static final Map<BlockPos, EnumConnection> vecMap = Maps.newHashMap();
-    
+
     private BlockPos positionVector;
 
-
-    /**
-     * Constructor for EnumConnection, represents a connection
-     * @param positionVector The Vector of the relative location of the block that is connected
-     */
-    EnumConnection(BlockPos positionVector){
+    EnumConnection(BlockPos positionVector) {
         this.positionVector = positionVector;
     }
 
-    private static BlockPos pos(){
+    private static BlockPos pos() {
         return new BlockPos(0, 0, 0);
     }
 
     public static EnumConnection fromFacings(EnumFacing... facings) {
-    	BlockPos vec = pos();
-    	for (EnumFacing f : facings) {
-    		vec = vec.offset(f);
-    	}
-    	return fromVec(vec);
+        BlockPos vec = pos();
+        for (EnumFacing f : facings) {
+            vec = vec.offset(f);
+        }
+        return fromVec(vec);
     }
-    
+
     public static EnumConnection fromVec(BlockPos vec) {
-    	EnumConnection ret = vecMap.get(vec);
-    	if (ret == null) {
-    		for (EnumConnection c : VALUES) {
-    			if (c.positionVector.equals(vec)) {
-    				vecMap.put(vec, c);
+        EnumConnection ret = vecMap.get(vec);
+        if (ret == null) {
+            for (EnumConnection c : VALUES) {
+                if (c.positionVector.equals(vec)) {
+                    vecMap.put(vec, c);
                     ret = c;
                 }
             }

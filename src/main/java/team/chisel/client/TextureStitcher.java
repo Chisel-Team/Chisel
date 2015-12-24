@@ -1,18 +1,13 @@
 package team.chisel.client;
 
-import team.chisel.Chisel;
-import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import team.chisel.api.render.TextureSpriteCallback;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * To stitch textures
- *
- * @author minecreatr
- */
+import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import team.chisel.Chisel;
+import team.chisel.api.render.TextureSpriteCallback;
+
 public class TextureStitcher {
 
     private static List<TextureSpriteCallback> textures = new ArrayList<TextureSpriteCallback>();

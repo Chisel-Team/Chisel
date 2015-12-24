@@ -10,15 +10,11 @@ import team.chisel.api.block.VariationData;
 
 import java.util.Map;
 
-/**
- * Implementation for builder stuff
- */
 public class BuilderDelegateClient implements ChiselBlockBuilder.VariationBuilder.IVariationBuilderDelegate {
 
     @Override
-    public VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,
-                               boolean beaconBase, ResourceLocation texLocation, Map<EnumFacing, ResourceLocation> overrideMap){
+    public VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness, boolean beaconBase,
+            ResourceLocation texLocation, Map<EnumFacing, ResourceLocation> overrideMap) {
         return new ClientVariationData(name, group, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index, texLocation, overrideMap);
     }
-
 }

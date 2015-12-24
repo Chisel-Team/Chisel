@@ -63,8 +63,6 @@ public class BlockFaceData {
         return this.layers.contains(layer);
     }
 
-
-
     public static class VariationFaceData {
 
         /**

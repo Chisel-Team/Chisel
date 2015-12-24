@@ -15,8 +15,8 @@ import java.util.Map;
 public class BuilderDelegateServer implements ChiselBlockBuilder.VariationBuilder.IVariationBuilderDelegate {
 
     @Override
-    public VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,
-                               boolean beaconBase, ResourceLocation texLocation, Map<EnumFacing, ResourceLocation> overrideMap){
+    public VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness, boolean beaconBase,
+            ResourceLocation texLocation, Map<EnumFacing, ResourceLocation> overrideMap) {
         return new VariationData(name, group, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index);
     }
 
