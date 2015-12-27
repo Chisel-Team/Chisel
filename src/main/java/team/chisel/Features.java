@@ -2656,6 +2656,7 @@ public enum Features {
             technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/concrete/concreteBlocks",
                 new SubmapManagerCombinedCTM(9, "technical/new/concrete/concreteBlocks", TextureType.R9), 67);
             technical4.carverHelper.addVariation("tile.technical4.8.desc", 8, "technical/new/engineering", new SubmapManagerCombinedCTM(4, "technical/new/engineering", TextureType.V4), 68);
+            technical4.carverHelper.addVariation("tile.technical4.9.desc", 9, "technical/new/scaffoldLarge", new SubmapManagerCombinedCTM(4, "technical/new/scaffoldLarge", TextureType.V4), 69);
             // The animation is malfunctioning. :(
             // technical4.carverHelper.addVariation("tile.technical4.7.desc", 7, "technical/new/TapeDrive");
             technical4.carverHelper.registerBlock(technical4, "technical4");
