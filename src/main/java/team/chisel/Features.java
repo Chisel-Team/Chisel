@@ -1645,13 +1645,11 @@ public enum Features {
     			}
     		}
     	}
-    	
-    	private void addVariation(Block block, int type, int rot) {
-    		System.out.println("name: " + "log_" + (block == Blocks.log ? BlockOldLog.field_150168_M[type] : BlockNewLog.field_150169_M[type]));
-    		System.out.println("meta: " + ((rot << 2) | type));
+
+		private void addVariation(Block block, int type, int rot) {
 			Carving.chisel.addVariation("log_" + (block == Blocks.log ? BlockOldLog.field_150168_M[type] : BlockNewLog.field_150169_M[type]), block, (rot << 2) | type, rot);
-    	}
-    },
+		}
+	},
 
     MARBLE {
         @Override
