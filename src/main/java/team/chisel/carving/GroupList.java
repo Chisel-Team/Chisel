@@ -69,7 +69,7 @@ public class GroupList implements Set<ICarvingGroup> {
 
 		@Override
 		public ItemStack getStack() {
-			return new ItemStack(getBlock(), getBlockMeta());
+			return new ItemStack(getBlock(), 1, getBlockMeta());
 		}
 
 		@Override
