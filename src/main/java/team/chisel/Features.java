@@ -3,6 +3,8 @@ package team.chisel;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockNewLog;
+import net.minecraft.block.BlockOldLog;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -1628,6 +1630,27 @@ public enum Features {
         void addRecipes() {
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.limestone_slab, 6, 0), "***", '*', new ItemStack(ChiselBlocks.limestone, 1, OreDictionary.WILDCARD_VALUE));
         }
+    },
+    
+    LOG {
+    	
+    	@Override
+    	void addBlocks() {
+    		for (int rot = 0; rot < 4; rot++) {
+    			for (int type = 0; type < 4; type++) {
+    				addVariation(Blocks.log, type, rot);
+    			}
+    			for (int type = 0; type < 2; type++) {
+    				addVariation(Blocks.log2, type, rot);
+    			}
+    		}
+    	}
+    	
+    	private void addVariation(Block block, int type, int rot) {
+    		System.out.println("name: " + "log_" + (block == Blocks.log ? BlockOldLog.field_150168_M[type] : BlockNewLog.field_150169_M[type]));
+    		System.out.println("meta: " + ((rot << 2) | type));
+			Carving.chisel.addVariation("log_" + (block == Blocks.log ? BlockOldLog.field_150168_M[type] : BlockNewLog.field_150169_M[type]), block, (rot << 2) | type, rot);
+    	}
     },
 
     MARBLE {
