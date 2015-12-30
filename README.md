@@ -8,7 +8,7 @@ This version of the mod contains loads of new blocks, new features like the Auto
 
 There is also a WIP 1.8 port.
 
-It is maintained by [tterrag](github.com/tterrag1098), [Drullkus](github.com/Drullkus) (Artist), and [minecreatr](github.com/minecreatr) (1.8 Port).
+It is maintained by [tterrag](http://github.com/tterrag1098), [Drullkus](http://github.com/Drullkus) (Artist), and [minecreatr](http://github.com/minecreatr) (1.8 Port).
 
 Pull Requests
 ---------------
