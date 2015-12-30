@@ -163,12 +163,17 @@ public enum PerChunkData implements IChunkDataRegistry {
 		for (Entry<String, IChunkData<?>> e : data.entrySet()) {
 			NBTTagCompound tag = event.getData().getCompoundTag("chisel:" + e.getKey());
 			e.getValue().readFromNBT(event.getChunk(), tag);
+			updateClient(event.getChunk(), e.getKey(), e.getValue());
 		}
 	}
 
 	public void chunkModified(Chunk chunk, String key) {
 		IChunkData<?> cd = data.get(key);
 		chunk.isModified = true;
+		updateClient(chunk, key, cd);
+	}
+	
+	private void updateClient(Chunk chunk, String key, IChunkData<?> cd) {
 		if (cd.requiresClientSync()) {
 			NBTTagCompound tag = new NBTTagCompound();
 			cd.writeToNBT(chunk, tag);
