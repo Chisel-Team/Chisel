@@ -643,7 +643,6 @@ public enum Features {
 			cragRock.carverHelper.addVariation("tile.cragRock.13.desc", 14, "cragRock/terrain-pistonback-darkmarker");
 			cragRock.carverHelper.addVariation("tile.cragRock.14.desc", 15, "cragRock/terrain-pistonback-darkpanel");
 			cragRock.carverHelper.registerAll(cragRock, "cragRock");
-			Carving.chisel.registerOre("cragRock", "cragRock");
 		}
 	},
 
