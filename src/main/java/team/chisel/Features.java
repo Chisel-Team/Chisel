@@ -2940,7 +2940,7 @@ public enum Features {
 			for (int i = 0; i < 16; i++)
 				woolen_clay.carverHelper.addVariation("tile.woolenClay." + i + ".desc", i, "woolenClay/" + sGNames[i].replaceAll(" ", "").toLowerCase());
 			woolen_clay.carverHelper.registerAll(woolen_clay, "woolen_clay");
-
+			woolen_clay.setHarvestLevel("pickaxe", 0);
 			Carving.chisel.registerOre("woolen_clay", "woolen_clay");
 		}
 
