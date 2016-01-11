@@ -134,6 +134,11 @@ public class ChiselBlockBuilder {
             return this;
         }
 
+        public VariationBuilder setTextureLocation(ResourceLocation loc){
+            this.textureLocation = loc;
+            return this;
+        }
+
         public ChiselBlockBuilder buildVariation(){
             this.parent.variations.add(this);
             return this.parent;
