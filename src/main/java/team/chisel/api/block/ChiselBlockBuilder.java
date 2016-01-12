@@ -67,8 +67,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         T[] ret = (T[]) Array.newInstance(provider.getBlockClass(), data.length);
         for (int i = 0; i < ret.length; i++) {
             ret[i] = provider.createBlock(material, ret.length, i, data[i]);
-            ret[i].setRegistryName(domain, blockName);
-            ret[i].setUnlocalizedName(ret[i].getRegistryName().replace(':', '.'));
+            ret[i].setRegistryName(blockName);
+            ret[i].setUnlocalizedName(domain + '.' + blockName);
             if (sound != null) {
                 ret[i].stepSound = sound;
             }
@@ -149,6 +149,10 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         
         public VariationBuilder<T> next(String name, String group) {
             return buildVariation().newVariation(name, group);
+        }
+        
+        public T[] build() {
+            return buildVariation().build();
         }
 
         private VariationData doBuild() {
