@@ -8,6 +8,7 @@ import java.util.Map;
 
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import lombok.experimental.Tolerate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.SoundType;
 import net.minecraft.block.material.Material;
@@ -118,12 +119,22 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             this.group = group;
             this.index = index;
             this.overrideMap = new HashMap<EnumFacing, ResourceLocation>();
+            this.textureLocation = new ResourceLocation(parent.domain, parent.blockName + "/" + name);
         }
 
         public VariationBuilder<T> setSmeltRecipe(ItemStack smeltedFrom, int amountSmelted){
             this.smeltedFrom = smeltedFrom;
             this.amountSmelted = amountSmelted;
             return this;
+        }
+        
+        @Tolerate
+        public VariationBuilder<T> setTextureLocation(String path) {
+            return setTextureLocation(new ResourceLocation(parent.domain, path));
+        }
+        
+        public VariationBuilder<T> setTextureLocation(EnumFacing facing, String path){
+            return setTextureLocation(facing, new ResourceLocation(parent.domain, path));
         }
 
         public VariationBuilder<T> setTextureLocation(EnumFacing facing, ResourceLocation loc){
@@ -134,6 +145,10 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         public ChiselBlockBuilder<T> buildVariation(){
             this.parent.variations.add(this);
             return this.parent;
+        }
+        
+        public VariationBuilder<T> next(String name, String group) {
+            return buildVariation().newVariation(name, group);
         }
 
         private VariationData doBuild() {
