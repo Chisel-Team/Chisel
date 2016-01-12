@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
  */
 public class ClientVariationData extends VariationData {
 
-
     /**
      * The Default chisel texture for the sides of this block
      */
@@ -21,11 +20,10 @@ public class ClientVariationData extends VariationData {
      * The chisel texture for the sides of this block
      */
     public Map<EnumFacing, ResourceLocation> sideOverrides;
-    
-    public ClientVariationData(String name, String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted,
-                               int light, float hardness, boolean beaconBase, int index,
-                               ResourceLocation defaultFace, Map<EnumFacing, ResourceLocation> sideOverrides){
-        super(name, group, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, index);
+
+    public ClientVariationData(String name, String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int index, ResourceLocation defaultFace,
+            Map<EnumFacing, ResourceLocation> sideOverrides) {
+        super(name, group, recipe, smeltedFrom, amountSmelted, index);
         this.defaultFace = defaultFace;
         this.sideOverrides = sideOverrides;
     }

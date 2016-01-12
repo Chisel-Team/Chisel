@@ -34,35 +34,18 @@ public class VariationData {
      * Gets the amount of this block produced through smelting
      */
     public int amountSmelted;
-
-    /**
-     * The Light value provided by this block
-     */
-    public int light;
-
-    /**
-     * The Block hardness
-     */
-    public float hardness;
-
-    /**
-     * Whether this block can be used to construct a beacon base
-     */
-    public boolean beaconBase;
-
+    
     /**
      * The Index of this variation in the blocks total variations
      */
     public int index;
 
-    public VariationData(String name, @Nullable String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness, boolean beaconBase, int index) {
+    public VariationData(String name, @Nullable String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int index) {
         this.name = name;
         this.group = group;
         this.recipe = recipe;
         this.smeltedFrom = smeltedFrom;
         this.amountSmelted = amountSmelted;
-        this.light = light;
-        this.hardness = hardness;
-        this.beaconBase = beaconBase;
+        this.index = index;
     }
 }

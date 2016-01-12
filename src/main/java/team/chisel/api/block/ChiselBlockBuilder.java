@@ -1,94 +1,101 @@
 package team.chisel.api.block;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import team.chisel.Chisel;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import net.minecraft.block.Block;
+import net.minecraft.block.Block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import team.chisel.Chisel;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.client.render.ChiselModelRegistry;
+import team.chisel.common.init.BlockRegistry;
 
 /**
  * Building a ChiselBlockData
  */
 @Setter
 @Accessors(chain = true)
-public class ChiselBlockBuilder {
+public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
+    private final Material material;
     private final String domain;
-
     private final String blockName;
-
-    /**
-     * The Material for this block
-     */
-    private Material material;
-
-    /**
-     * The Blocks Hardness
-     */
-    private float hardness;
-
-    /**
-     * Whether the block is an opaque cube
-     */
-    private boolean isOpaqueCube;
-
-    /**
-     * Whether this block can be used to construct a beacon base
-     */
-    private boolean beaconBase;
+    
+    private SoundType sound;
 
     private int curIndex;
 
-    private List<VariationBuilder> variations;
+    private List<VariationBuilder<T>> variations;
+        
+    private BlockProvider<T> provider;
 
-    protected ChiselBlockBuilder(String domain, String blockName){
+    protected ChiselBlockBuilder(Material material, String domain, String blockName, BlockProvider<T> provider){
+        this.material = material;
         this.domain = domain;
         this.blockName = blockName;
-        this.material = Material.rock;
-        this.hardness = 1f;
-        this.isOpaqueCube = true;
-        this.beaconBase = false;
-        this.variations = new ArrayList<VariationBuilder>();
+        this.provider = provider;
+        this.variations = new ArrayList<VariationBuilder<T>>();
     }
 
-    public VariationBuilder newVariation(String name, String group){
-        VariationBuilder builder = new VariationBuilder(this, name, group, curIndex);
+    public VariationBuilder<T> newVariation(String name, String group){
+        VariationBuilder<T> builder = new VariationBuilder<>(this, name, group, curIndex);
         curIndex++;
         return builder;
     }
 
-    public ChiselBlockData build(){
+    @SuppressWarnings("unchecked")
+    public T[] build() {
         if (variations.size() == 0){
             throw new IllegalArgumentException("Must have at least one variation!");
         }
         VariationData[] vars = new VariationData[variations.size()];
-        for (int i = 0 ; i < variations.size() ; i++){
+        for (int i = 0; i < variations.size(); i++) {
             vars[i] = variations.get(i).doBuild();
         }
-        return new ChiselBlockData(this.blockName, vars, domain, material, hardness, isOpaqueCube, beaconBase);
+        VariationData[][] data = BlockRegistry.splitVariationArray(vars);
+        T[] ret = (T[]) Array.newInstance(provider.getBlockClass(), data.length);
+        for (int i = 0; i < ret.length; i++) {
+            ret[i] = provider.createBlock(material, ret.length, i, data[i]);
+            ret[i].setRegistryName(domain, blockName);
+            ret[i].setUnlocalizedName(ret[i].getRegistryName().replace(':', '.'));
+            if (sound != null) {
+                ret[i].stepSound = sound;
+            }
+            GameRegistry.registerBlock(ret[i], provider.getItemClass());
+            ChiselModelRegistry.INSTANCE.register(ret[i]);
+            for (int j = 0; j < data[i].length; j++) {
+                if (data[i][j].group != null) {
+                    CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), i * 16 + j);
+                }
+            }
+        }
+        return ret;
     }
 
     @Accessors(chain = true)
-    public static class VariationBuilder {
+    public static class VariationBuilder<T extends Block & ICarvable> {
 
         /**
          * For Internal chisel use only
          */
         public interface IVariationBuilderDelegate {
 
-            VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int light, float hardness,
-                                boolean beaconBase, ResourceLocation texLocation, Map<EnumFacing, ResourceLocation> overrideMap);
+            VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, ResourceLocation texLocation,
+                    Map<EnumFacing, ResourceLocation> overrideMap);
 
         }
         
-        private ChiselBlockBuilder parent;
+        private ChiselBlockBuilder<T> parent;
 
         private String name;
         private String group;
@@ -102,45 +109,35 @@ public class ChiselBlockBuilder {
         private int amountSmelted;
 
         @Setter
-        private int light;
-        @Setter
-        private float hardness;
-        @Setter
-        private boolean beaconBase;
-
-        @Setter
         private ResourceLocation textureLocation;
         private Map<EnumFacing, ResourceLocation> overrideMap;
 
-        private VariationBuilder(ChiselBlockBuilder parent, String name, String group, int index){
+        private VariationBuilder(ChiselBlockBuilder<T> parent, String name, String group, int index){
             this.parent = parent;
             this.name = name;
             this.group = group;
             this.index = index;
-            this.light = 0;
-            this.hardness = parent.hardness;
-            this.beaconBase = parent.beaconBase;
             this.overrideMap = new HashMap<EnumFacing, ResourceLocation>();
         }
 
-        public VariationBuilder setSmeltRecipe(ItemStack smeltedFrom, int amountSmelted){
+        public VariationBuilder<T> setSmeltRecipe(ItemStack smeltedFrom, int amountSmelted){
             this.smeltedFrom = smeltedFrom;
             this.amountSmelted = amountSmelted;
             return this;
         }
 
-        public VariationBuilder setTextureLocation(EnumFacing facing, ResourceLocation loc){
+        public VariationBuilder<T> setTextureLocation(EnumFacing facing, ResourceLocation loc){
             this.overrideMap.put(facing, loc);
             return this;
         }
 
-        public ChiselBlockBuilder buildVariation(){
+        public ChiselBlockBuilder<T> buildVariation(){
             this.parent.variations.add(this);
             return this.parent;
         }
 
         private VariationData doBuild() {
-            return Chisel.proxy.getBuilderDelegate().build(name, group, index, recipe, smeltedFrom, amountSmelted, light, hardness, beaconBase, textureLocation, overrideMap);
+            return Chisel.proxy.getBuilderDelegate().build(name, group, index, recipe, smeltedFrom, amountSmelted, textureLocation, overrideMap);
         }
 
         //todo I was here gonna implement ClientVariation stuff

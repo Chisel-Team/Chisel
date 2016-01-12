@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.IBakedModel;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
@@ -17,12 +18,13 @@ import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.Chisel;
+import team.chisel.api.block.ICarvable;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.BlockFaceData;
+import team.chisel.client.BlockFaceData.VariationFaceData;
 import team.chisel.common.block.BlockCarvable;
-import team.chisel.common.block.ItemChiselBlock;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Ordering;
@@ -86,16 +88,17 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
         return ItemCameraTransforms.DEFAULT;
     }
 
+    // TODO implement model caching, returning a new model every time is a HUGE waste of memory and CPU
+    
     @Override
     public IBakedModel handleBlockState(IBlockState stateIn){
         Chisel.debug("Handling blockstate "+stateIn);
-        if (stateIn.getBlock() instanceof BlockCarvable && stateIn instanceof IExtendedBlockState){
+        if (stateIn.getBlock() instanceof ICarvable && stateIn instanceof IExtendedBlockState){
             IExtendedBlockState state = (IExtendedBlockState) stateIn;
-            BlockCarvable block = (BlockCarvable) state.getBlock();
+            ICarvable block = (ICarvable) state.getBlock();
             RenderContextList ctxList = state.getValue(BlockCarvable.CTX_LIST);
-            quads = new ArrayList<BakedQuad>();
-            variationData = block.getBlockFaceData().getForMeta(MathHelper.clamp_int(state.getValue(block.metaProp),
-                    0, block.getBlockData().variations.length));
+            List<BakedQuad> quads = new ArrayList<BakedQuad>();
+            VariationFaceData variationData = block.getBlockFaceData().getForMeta(MathHelper.clamp_int(block.getVariationIndex(state), 0, block.getVariations().length));
             for (EnumFacing facing : EnumFacing.VALUES){
                 IChiselFace face = variationData.getFaceForSide(facing);
                 if (MinecraftForgeClient.getRenderLayer() != face.getLayer()){
@@ -107,7 +110,7 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
                     quads.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getType()), quadGoal));
                 }
             }
-            return this;
+            return new ModelChiselBlock(quads, variationData);
         }
         else {
             return this;
@@ -116,22 +119,16 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
 
     @Override
     public IBakedModel handleItemState(ItemStack stack) {
-        //Chisel.debug("Handling item model for "+stack);
-        if (stack.getItem() instanceof ItemChiselBlock){
-            BlockCarvable block = (BlockCarvable) ((ItemChiselBlock)stack.getItem()).getBlock();
-            variationData = block.getBlockFaceData().getForMeta(stack.getItemDamage());
-            quads = new ArrayList<BakedQuad>();
-            for (EnumFacing facing : EnumFacing.VALUES){
-                //quads.add(QuadHelper.makeNormalFaceQuad(facing, varData.getFaceForSide(facing).getParticle()));
-                for (IChiselTexture<?> tex : variationData.getFaceForSide(facing).getTextureList()){
-                    quads.addAll(tex.getSideQuads(facing, null, 1));
-                }
+        Chisel.debug("Handling item model for " + stack);
+        BlockCarvable block = (BlockCarvable) ((ItemBlock) stack.getItem()).getBlock();
+        VariationFaceData variationData = block.getBlockFaceData().getForMeta(stack.getItemDamage());
+        List<BakedQuad> quads = new ArrayList<>();
+        for (EnumFacing facing : EnumFacing.VALUES) {
+            // quads.add(QuadHelper.makeNormalFaceQuad(facing, varData.getFaceForSide(facing).getParticle()));
+            for (IChiselTexture<?> tex : variationData.getFaceForSide(facing).getTextureList()) {
+                quads.addAll(tex.getSideQuads(facing, null, 1));
             }
-            return new ModelChiselBlock(quads, variationData);
         }
-        else {
-            return this;
-        }
-
+        return new ModelChiselBlock(quads, variationData);
     }
 }

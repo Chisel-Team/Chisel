@@ -34,11 +34,11 @@ public class ClientProxy extends CommonProxy {
         // MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
         // MinecraftForge.EVENT_BUS.register(new NonCTMModelRegistry.BakedEventListener());
         MinecraftForge.EVENT_BUS.register(new TextureStitcher());
-        MinecraftForge.EVENT_BUS.register(new ChiselModelRegistry.BakedEventListener());
+        MinecraftForge.EVENT_BUS.register(ChiselModelRegistry.INSTANCE);
         MinecraftForge.EVENT_BUS.register(new DebugHandler());
         if (Minecraft.getMinecraft().getResourceManager() instanceof SimpleReloadableResourceManager) {
             SimpleReloadableResourceManager manager = (SimpleReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
-            manager.registerReloadListener(new ChiselPackReloadListener());
+            manager.registerReloadListener(ChiselPackReloadListener.INSTANCE);
         }
     }
 
@@ -58,7 +58,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void initiateFaceData(BlockCarvable carvable) {
-        carvable.setBlockFaceData(new BlockFaceData(carvable.getBlockData().variations));
+        carvable.setBlockFaceData(new BlockFaceData(carvable.getVariations()));
     }
 
     private static final IVariationBuilderDelegate CLIENT_DELEGATE = new BuilderDelegateClient();

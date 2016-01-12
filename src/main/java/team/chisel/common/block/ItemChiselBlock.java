@@ -1,14 +1,14 @@
 package team.chisel.common.block;
 
-import team.chisel.api.block.VariationData;
+import java.util.List;
+
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
+import team.chisel.api.block.VariationData;
 
 /**
  * Class for the items for the chisel block
@@ -28,7 +28,7 @@ public class ItemChiselBlock extends ItemBlock {
     @Override
     public String getUnlocalizedName(ItemStack stack) {
         try {
-            VariationData varData = block.getBlockData().getVariation(stack.getItemDamage());
+            VariationData varData = block.getVariationData(stack.getItemDamage());
             return super.getUnlocalizedName(stack) + "." + varData.name;
         } catch (Exception e) {
             return super.getUnlocalizedName(stack) + "." + "null";
@@ -37,7 +37,7 @@ public class ItemChiselBlock extends ItemBlock {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
         //VariationData varData = block.getBlockData().getVariation(stack.getItemDamage());
 //        for (String s : r.getLore()) {
 //            tooltip.add(StatCollector.translateToLocal(s));

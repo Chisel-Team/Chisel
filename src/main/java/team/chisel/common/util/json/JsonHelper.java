@@ -21,10 +21,8 @@ public class JsonHelper {
 
     private static final Gson gson = new Gson();
 
-    private static Map<ResourceLocation, JsonObject> objectCache = new HashMap<ResourceLocation, JsonObject>();
-
+    private static Map<ResourceLocation, JsonObject> objectCache = new HashMap<>();
     private static Map<ResourceLocation, IChiselFace> faceCache = new HashMap<>();
-
     private static Map<ResourceLocation, IChiselTexture<?>> textureCache = new HashMap<>();
     
     public static final String FACE_EXTENSION = ".cf";

@@ -39,7 +39,6 @@ public class ChiselTabs {
 
         public ChiselCreativeTab() {
             super("chiselCreativeTab");
-
         }
 
         @Override

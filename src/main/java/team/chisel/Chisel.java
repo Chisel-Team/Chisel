@@ -1,5 +1,7 @@
 package team.chisel;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -15,14 +17,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import team.chisel.api.block.ChiselBlockData;
+import team.chisel.api.block.BlockCreator;
 import team.chisel.api.block.ChiselBlockFactory;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.command.CommandTest;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
+import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.carving.Carving;
-import team.chisel.common.init.BlockRegistry;
 import team.chisel.common.item.ItemChisel;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME)
@@ -38,7 +41,11 @@ public class Chisel implements Reference {
 
     public static ItemChisel itemChisel;
 
-    public static final boolean debug = true;//StringUtils.isEmpty(System.getProperty("chisel.debug"));
+    public static final boolean debug = false;//StringUtils.isEmpty(System.getProperty("chisel.debug"));
+    
+    public Chisel() {
+        CarvingUtils.chisel = Carving.chisel;
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -48,22 +55,21 @@ public class Chisel implements Reference {
         GameRegistry.addShapedRecipe(new ItemStack(itemChisel), " x", "s ", 'x', Items.iron_ingot, 's', Items.stick);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
+        BlockCreator<BlockCarvable> creator = BlockCarvable::new;
+
         ChiselBlockFactory factory = ChiselBlockFactory.newFactory("chisel");
-        ChiselBlockData voidstone = factory.newBlock("voidstone").newVariation("normal", "test").setTextureLocation(new ResourceLocation("chisel", "voidstone/normal")).buildVariation().build();
-        BlockRegistry.registerBlock(voidstone);
+        BlockCarvable voidstone = factory.newBlock(Material.rock, "voidstone", creator, BlockCarvable.class).newVariation("normal", "test")
+                .setTextureLocation(new ResourceLocation("chisel", "voidstone/normal")).buildVariation().build()[0];
 
-        ChiselBlockData bookshelf = factory.newBlock("bookshelf").newVariation("necromancer", "test").setTextureLocation(new ResourceLocation("chisel", "bookshelf/necromancer")).buildVariation()
-                .build();
-        BlockRegistry.registerBlock(bookshelf);
+        BlockCarvable bookshelf = factory.newBlock(Material.wood, "bookshelf", creator, BlockCarvable.class).setSound(Block.soundTypeWood).newVariation("necromancer", "test")
+                .setTextureLocation(new ResourceLocation("chisel", "bookshelf/necromancer")).buildVariation().build()[0];
 
-        ChiselBlockData brick = factory.newBlock("brick").newVariation("aged-brick", "test").setTextureLocation(new ResourceLocation("chisel", "brick/aged")).buildVariation().build();
-        BlockRegistry.registerBlock(brick);
+        BlockCarvable brick = factory.newBlock(Material.rock, "brick", creator, BlockCarvable.class).newVariation("aged-brick", "test")
+                .setTextureLocation(new ResourceLocation("chisel", "brick/aged")).buildVariation().build()[0];
 
         Carving.chisel.addVariation("test", Blocks.bedrock.getDefaultState(), 99);
         
         proxy.preInit(event);
-        BlockRegistry.preInit(event);
-
     }
 
     @Mod.EventHandler

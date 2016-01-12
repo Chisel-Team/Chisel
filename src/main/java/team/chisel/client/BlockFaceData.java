@@ -26,13 +26,6 @@ public class BlockFaceData {
 
     private List<EnumWorldBlockLayer> layers;
 
-    public BlockFaceData(ClientVariationData[] clientVariationData){
-        variationData = new VariationFaceData[clientVariationData.length];
-        for (int i = 0 ; i < clientVariationData.length ; i++ ){
-            variationData[i] = new VariationFaceData(clientVariationData[i]);
-        }
-    }
-
     public BlockFaceData(VariationData[] clientVariationData){
         variationData = new VariationFaceData[clientVariationData.length];
         for (int i = 0 ; i < clientVariationData.length ; i++ ){

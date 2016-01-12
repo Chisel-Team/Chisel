@@ -36,8 +36,11 @@ version = "MC${minecraft_version}-${mod_version}.${buildnumber}"
 group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = dev ? "Chisel_DEV" : "Chisel"
 
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
 minecraft {
-    version = "${minecraft_version}-${forge_version}-${minecraft_version}"
+    version = "${minecraft_version}-${forge_version}"
     mappings = 'snapshot_20151128'
     runDir = "run"
 

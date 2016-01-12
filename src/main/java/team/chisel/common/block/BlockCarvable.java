@@ -2,10 +2,10 @@ package team.chisel.common.block;
 
 import java.util.List;
 
+import lombok.Getter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,19 +16,19 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
-import team.chisel.api.block.ChiselBlockData;
+import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.BlockFaceData;
 import team.chisel.common.init.ChiselTabs;
+import team.chisel.common.util.PropertyAnyInteger;
 import team.chisel.common.util.PropertyRenderContextList;
 
 /**
@@ -39,54 +39,54 @@ public class BlockCarvable extends Block implements ICarvable {
     /**
      * The Property for the variation of this block
      */
-    public PropertyInteger metaProp;
+    private final PropertyAnyInteger metaProp;
 
     public static final PropertyRenderContextList CTX_LIST = new PropertyRenderContextList();
 
-    private ChiselBlockData data;
+    private final int index;
 
     @SideOnly(Side.CLIENT)
     private BlockFaceData blockFaceData;
 
-    private int index;
+    @Getter
+    private final VariationData[] variations;
 
-    private BlockState realBlockState;
+    private final BlockState realBlockState;
 
-    private int metaVariations;
+    private final int maxVariation;
 
-    public BlockCarvable(ChiselBlockData data, int index){
-        super(data.material);
+    public BlockCarvable(Material material, int index, int max, VariationData... variations) {
+        super(material);
         setCreativeTab(ChiselTabs.tab);
-        this.data = data;
         this.index = index;
-        int max;
-        if (data.variations.length >= 16){
-            max = data.variations.length % 16;
-        }
-        else {
-            max = data.variations.length;
-        }
-        this.metaVariations = max;
-        this.metaProp = PropertyInteger.create("Variation", 0, max);
+        this.variations = variations;
+        this.maxVariation = max;
+        this.metaProp = PropertyAnyInteger.create("Variation", 0, max);
         this.realBlockState = createRealBlockState(metaProp);
         setupStates();
-        setUnlocalizedName(data.name);
-        setHardness(data.hardness);
         Chisel.proxy.initiateFaceData(this);
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockFaceData getBlockFaceData(){
+    @Override
+    public BlockFaceData getBlockFaceData() {
         return this.blockFaceData;
     }
 
     @SideOnly(Side.CLIENT)
-    public void setBlockFaceData(BlockFaceData data){
+    @Override
+    public void setBlockFaceData(BlockFaceData data) {
         this.blockFaceData = data;
     }
 
-    public int getTotalMetaVariations(){
-        return this.metaVariations;
+    @Override
+    public int getVariationIndex(IExtendedBlockState state) {
+        return getMetaFromState(state);
+    }
+
+    @Override
+    public int getTotalVariations() {
+        return this.maxVariation + 1; // off-by-one
     }
 
     @Override
@@ -94,23 +94,19 @@ public class BlockCarvable extends Block implements ICarvable {
         return this.realBlockState;
     }
 
-	@Override
-	public int getIndex() {
-		return this.index;
-	}
+    @Override
+    public int getIndex() {
+        return this.index;
+    }
 
-	@Override
-	public VariationData getVariationData(int meta) {
-		return this.data.variations[MathHelper.clamp_int(meta, 0, this.data.variations.length)];
-	}
+    @Override
+    public VariationData getVariationData(int meta) {
+        return this.variations[MathHelper.clamp_int(meta, 0, this.variations.length)];
+    }
 
-	public int getTotalVariations() {
-		return this.data.variations.length - (16 * getIndex());
-	}
-
-	private BlockState createRealBlockState(PropertyInteger p) {
-		return new ExtendedBlockState(this, new IProperty[] { p }, new IUnlistedProperty[] { CTX_LIST });
-	}
+    private BlockState createRealBlockState(PropertyAnyInteger p) {
+        return new ExtendedBlockState(this, new IProperty[] { p }, new IUnlistedProperty[] { CTX_LIST });
+    }
 
     @Override
     public BlockState createBlockState() {
@@ -118,9 +114,9 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     private void setupStates() {
-        this.setDefaultState(getExtendedBlockState()
-        	.withProperty(CTX_LIST, new RenderContextList())
-        	.withProperty(metaProp, 0));
+        IBlockState state = getExtendedBlockState().withProperty(CTX_LIST, new RenderContextList()).withProperty(metaProp, 0);
+        state = state.withProperty(metaProp, 0);
+        this.setDefaultState(state);
     }
 
     public ExtendedBlockState getBaseExtendedState() {
@@ -146,81 +142,47 @@ public class BlockCarvable extends Block implements ICarvable {
         return state.getValue(metaProp);
     }
 
-    /**
-     * Name used for texture path
-     *
-     * @return The Name
-     */
-    public String getName() {
-        return this.data.name;
-    }
-
-    public String getIndexName(){
-        if (index == 0){
-            return getName();
+    public String getIndexName() {
+        if (index == 0) {
+            return getUnlocalizedName();
+        } else {
+            return getUnlocalizedName() + index;
         }
-        else {
-            return getName()+index;
-        }
-    }
-
-    /**
-     * Gets the variation data for this block
-     *
-     * @return The Data
-     */
-    public ChiselBlockData getBlockData() {
-        return this.data;
     }
 
     @SideOnly(Side.CLIENT)
-	@Override
-	public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
-		if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial() == Material.air) {
-			return stateIn;
-		}
-		IExtendedBlockState state = (IExtendedBlockState) stateIn;
-        List<IBlockRenderType> types = this.blockFaceData.getForMeta(state.getValue(metaProp)).getTypesUsed();
+    @Override
+    public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
+        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial() == Material.air) {
+            return stateIn;
+        }
+        IExtendedBlockState state = (IExtendedBlockState) stateIn;
+        List<IBlockRenderType> types = this.blockFaceData.getForMeta(getMetaFromState(state)).getTypesUsed();
 
         RenderContextList ctxList = new RenderContextList(types, w, pos);
 
-		return state.withProperty(CTX_LIST, ctxList);
-	}
+        return state.withProperty(CTX_LIST, ctxList);
+    }
 
     public static BlockPos pos(int x, int y, int z) {
         return new BlockPos(x, y, z);
     }
 
-    @Override
-    public int getLightValue(IBlockAccess world, BlockPos pos) {
-        return getVariationData(world.getBlockState(pos).getValue(metaProp)).light;
-    }
-
     @SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
+    @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(Item item, CreativeTabs tab, List list) {
         int curIndex = 0;
-        for (VariationData var : this.data.variations) {
+        for (VariationData var : this.variations) {
             if (var == null) {
                 continue;
             }
             ItemStack stack = new ItemStack(item, 1, curIndex);
             curIndex++;
-            //CTMBlockResources r = SubBlockUtil.getResources(sub);
-            //setLore(stack, r.getLore());
+            // CTMBlockResources r = SubBlockUtil.getResources(sub);
+            // setLore(stack, r.getLore());
             list.add(stack);
         }
-    }
-
-    @Override
-    public boolean isBeaconBase(IBlockAccess world, BlockPos pos, BlockPos beacon){
-        return getVariationData(world.getBlockState(pos).getValue(metaProp)).beaconBase;
-    }
-
-    @Override
-    public float getBlockHardness(World worldIn, BlockPos pos){
-        return getVariationData(worldIn.getBlockState(pos).getValue(metaProp)).hardness;
     }
 
     @Override
@@ -229,22 +191,13 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     @Override
-    public boolean isOpaqueCube() {
-        if (this.data != null) {
-            return this.data.isOpaqueCube;
-        }
-        else {
-            return true;
-        }
+    @SideOnly(Side.CLIENT)
+    public boolean canRenderInLayer(EnumWorldBlockLayer layer) {
+        return this.blockFaceData.isValid(layer);
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public boolean canRenderInLayer(EnumWorldBlockLayer layer){
-        return this.blockFaceData.isValid(layer);
-    }
-    @Override
-    public boolean isFullBlock(){
+    public boolean isFullBlock() {
         return isOpaqueCube();
     }
 
