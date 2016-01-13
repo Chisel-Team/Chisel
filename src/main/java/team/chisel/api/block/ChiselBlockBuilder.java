@@ -16,6 +16,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
@@ -83,7 +84,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 ret[i].stepSound = sound;
             }
             GameRegistry.registerBlock(ret[i], provider.getItemClass());
-            ChiselModelRegistry.INSTANCE.register(ret[i]);
+            if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+                ChiselModelRegistry.INSTANCE.register(ret[i]);
+            }
             for (int j = 0; j < data[i].length; j++) {
                 if (data[i][j].group != null) {
                     CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), i * 16 + j);
