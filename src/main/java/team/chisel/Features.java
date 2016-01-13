@@ -41,21 +41,21 @@ public enum Features {
         }
     },
 
-    ANIMATED {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "animated", provider).setParentFolder("voidstone").newVariation("bevel").next("eye").next("metalborder").next("pillar").setTextureLocation("voidstone/animated/pillar-side").setTextureLocation("voidstone/animated/pillar-top", Axis.Y).next("quarters").next("raw").next("rune").next("skulls").next("smooth").build();
-        }
-    },
-
-    ANIMATIONS {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "animations", provider).newVariation("archetype2").next("hades").next("hadesX32").next("shroud").next("strobe").build();
-        }
-    },
+//    ANIMATED {
+//
+//        @Override
+//        void addBlocks(ChiselBlockFactory factory) {
+//            factory.newBlock(Material.rock, "animated", provider).setParentFolder("voidstone").newVariation("bevel").next("eye").next("metalborder").next("pillar").setTextureLocation("voidstone/animated/pillar-side").setTextureLocation("voidstone/animated/pillar-top", Axis.Y).next("quarters").next("raw").next("rune").next("skulls").next("smooth").build();
+//        }
+//    },
+//
+//    ANIMATIONS {
+//
+//        @Override
+//        void addBlocks(ChiselBlockFactory factory) {
+//            factory.newBlock(Material.rock, "animations", provider).newVariation("archetype2").next("hades").next("hadesX32").next("shroud").next("strobe").build();
+//        }
+//    },
 
     ANTIBLOCK {
 
@@ -73,13 +73,13 @@ public enum Features {
         }
     },
 
-    AUTO_CHISEL {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "autoChisel", provider).newVariation("autoChisel").next("autoChisel16").next("autoChiselOld").next("autoChisel_automation").next("autoChisel_speed").next("autoChisel_stack").build();
-        }
-    },
+//    AUTO_CHISEL {
+//
+//        @Override
+//        void addBlocks(ChiselBlockFactory factory) {
+//            factory.newBlock(Material.rock, "autoChisel", provider).newVariation("autoChisel").next("autoChisel16").next("autoChiselOld").next("autoChisel_automation").next("autoChisel_speed").next("autoChisel_stack").build();
+//        }
+//    },
 
     BIRDSTONE {
 
@@ -673,13 +673,13 @@ public enum Features {
         }
     },
 
-    PARTICLES {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "particles", provider).setParentFolder("grimstone").newVariation("star").build();
-        }
-    },
+//    PARTICLES {
+//
+//        @Override
+//        void addBlocks(ChiselBlockFactory factory) {
+//            factory.newBlock(Material.rock, "particles", provider).setParentFolder("grimstone").newVariation("star").build();
+//        }
+//    },
 
     PLANKS_ACACIA {
 
@@ -920,7 +920,7 @@ public enum Features {
             factory.newBlock(Material.rock, "terrasteel", provider).newVariation("adv").next("bolted").next("card").next("caution").next("crate").next("egregious").next("elementiumEye-0-0").next("elementiumEye-0-1").next("elementiumEye-1-0").next("elementiumEye-1-1").next("elementiumEye-2-0").next("elementiumEye-2-1").next("thermal").build();
         }
     },
-    
+
     THAUMIUM {
 
         @Override
@@ -1029,7 +1029,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "warning", provider).newVariation("acid").next("base").next("bio").next("cryogenic").next("death").next("explosion").next("fall").next("falling").next("fire").next("generic").next("illuminati").next("noentry").next("oxygen").next("rad").next("sound").next("underconstruction").next("voltage").build();
+            factory.newBlock(Material.rock, "warning", provider).newVariation("acid").next("bio").next("cryogenic").next("death").next("explosion").next("fall").next("falling").next("fire").next("generic").next("illuminati").next("noentry").next("oxygen").next("rad").next("sound").next("underconstruction").next("voltage").build();
         }
     },
 
@@ -1051,19 +1051,19 @@ public enum Features {
     ;
 
     private static final String[] dyeOres = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
-        "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
+            "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
     private static final BlockCreator<BlockCarvable> creator = BlockCarvable::new;
     private static final BlockProvider<BlockCarvable> provider = new BlockProvider<BlockCarvable>() {
         @Override
         public BlockCarvable createBlock(Material mat, int index, int maxVariation, VariationData... data) {
             return creator.createBlock(mat, index, maxVariation, data);
         }
-        
+
         @Override
         public Class<BlockCarvable> getBlockClass() {
             return BlockCarvable.class;
         }
-        
+
         @Override
         public Class<? extends ItemBlock> getItemClass() {
             return ItemChiselBlock.class;

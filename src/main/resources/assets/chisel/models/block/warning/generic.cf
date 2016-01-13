@@ -1,5 +1,6 @@
 {
     "textures":[
+        "./base.ctx",
         "./generic.ctx"
     ]
 }
