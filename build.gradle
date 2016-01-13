@@ -123,7 +123,6 @@ String getChangelogText() {
     return str
 }
 
-tasks.curseforge.dependsOn 'reobf'
 tasks.curseforge.enabled = !dev && project.hasProperty('curseforge_key')
     
 curseforge {
