@@ -29,14 +29,14 @@ public class ChiselTextureR extends AbstractChiselTexture<BlockRenderTypeR> {
     @Override
     public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int quadGoal) {
 
-        BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition)context).getPosition();
-        rand.setSeed(MathHelper.getCoordinateRandom(pos.getX(), pos.getY(), pos.getZ()));
+        BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition) context).getPosition();
+        rand.setSeed(MathHelper.getPositionRandom(pos) + side.ordinal());
         rand.nextBoolean();
 
         int w = getType().getXSize();
         int h = getType().getYSize();
-        float intervalX = 16 / w;
-        float intervalY = 16 / h;
+        float intervalX = 16f / w;
+        float intervalY = 16f / h;
 
         int unitsAcross = rand.nextInt(w) + 1;
         int unitsDown = rand.nextInt(h) + 1;
@@ -45,9 +45,9 @@ public class ChiselTextureR extends AbstractChiselTexture<BlockRenderTypeR> {
         float maxV = unitsDown * intervalY;
         List<BakedQuad> toReturn = new ArrayList<BakedQuad>();
         float[] uvs = new float[] { maxU - intervalX, maxV - intervalY, maxU, maxV };
-        for (EnumFacing f : EnumFacing.values()) {
-            toReturn.add(QuadHelper.makeUVFaceQuad(f, sprites[0].getSprite(), uvs));
-        }
+
+        toReturn.add(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), uvs));
+
         return toReturn;
     }
 }
