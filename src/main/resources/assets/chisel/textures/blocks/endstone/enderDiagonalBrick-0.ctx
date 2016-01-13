@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./enderDiagonalBrick-0",
+        "./enderDiagonalBrick-0-ctm"
+    ]
+}

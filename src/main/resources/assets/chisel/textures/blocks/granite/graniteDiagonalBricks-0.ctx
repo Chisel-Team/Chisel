@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./graniteDiagonalBricks-0",
+        "./graniteDiagonalBricks-0-ctm"
+    ]
+}

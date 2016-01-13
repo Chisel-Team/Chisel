@@ -1,0 +1,7 @@
+{
+	"type":"CTMH",
+	"textures":[
+        "./rainbow-top",
+        "./rainbow-ctmh"
+    ]
+}

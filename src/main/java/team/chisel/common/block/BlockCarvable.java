@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -15,7 +16,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
@@ -27,6 +30,7 @@ import team.chisel.api.block.VariationData;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.BlockFaceData;
+import team.chisel.client.ClientUtil;
 import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.PropertyAnyInteger;
 import team.chisel.common.util.PropertyRenderContextList;
@@ -61,7 +65,7 @@ public class BlockCarvable extends Block implements ICarvable {
         this.index = index;
         this.variations = variations;
         this.maxVariation = max;
-        this.metaProp = PropertyAnyInteger.create("Variation", 0, max);
+        this.metaProp = PropertyAnyInteger.create("Variation", 0, max > index * 16 ? 15 : max % 16);
         this.realBlockState = createRealBlockState(metaProp);
         setupStates();
         Chisel.proxy.initiateFaceData(this);
@@ -185,6 +189,18 @@ public class BlockCarvable extends Block implements ICarvable {
         }
     }
 
+    @Override
+    public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer) {
+        ClientUtil.addHitEffects(worldObj, target.getBlockPos(), target.sideHit);
+        return true;
+    }
+    
+    @Override
+    public boolean addDestroyEffects(World world, BlockPos pos, EffectRenderer effectRenderer) {
+        ClientUtil.addDestroyEffects(world, pos, world.getBlockState(pos));
+        return true;
+    }
+    
     @Override
     public int getRenderType() {
         return 3;

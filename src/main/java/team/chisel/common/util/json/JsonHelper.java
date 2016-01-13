@@ -1,5 +1,6 @@
 package team.chisel.common.util.json;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -47,6 +48,12 @@ public class JsonHelper {
             IChiselTexture<?> cTexture = texture.get(loc);
             textureCache.put(loc, cTexture);
             return cTexture;
+        }
+        if (cachedException != null && cachedException.getCause() instanceof FileNotFoundException) {
+            objectCache.put(loc, NORMAL_TEXTURE);
+            Chisel.logger.warn("Substituting default texture json for missing file " + loc);
+            clearException();
+            return createTexture(loc);
         }
         throw clearException();
     }
@@ -111,7 +118,7 @@ public class JsonHelper {
             objectCache.put(relative, object);
             return true;
         } else {
-            throw new IllegalArgumentException(relative + " does not have a 'children' and/or 'type' field!");
+            throw new IllegalArgumentException(relative + " does not have a 'textures' and/or 'type' field!");
         }
     }
     

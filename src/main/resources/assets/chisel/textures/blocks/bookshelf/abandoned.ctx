@@ -1,0 +1,7 @@
+{
+	"type":"CTMH",
+	"textures":[
+        "./abandoned-top",
+        "./abandoned-ctmh"
+    ]
+}

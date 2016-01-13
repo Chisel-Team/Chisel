@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./terrain-pistonback-darkdent",
+        "./terrain-pistonback-darkdent-ctm"
+    ]
+}

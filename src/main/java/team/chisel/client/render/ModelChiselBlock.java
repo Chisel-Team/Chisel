@@ -92,7 +92,7 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
     
     @Override
     public IBakedModel handleBlockState(IBlockState stateIn){
-        Chisel.debug("Handling blockstate "+stateIn);
+//        Chisel.debug("Handling blockstate "+stateIn);
         if (stateIn.getBlock() instanceof ICarvable && stateIn instanceof IExtendedBlockState){
             IExtendedBlockState state = (IExtendedBlockState) stateIn;
             ICarvable block = (ICarvable) state.getBlock();
@@ -119,7 +119,7 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
 
     @Override
     public IBakedModel handleItemState(ItemStack stack) {
-        Chisel.debug("Handling item model for " + stack);
+//        Chisel.debug("Handling item model for " + stack);
         BlockCarvable block = (BlockCarvable) ((ItemBlock) stack.getItem()).getBlock();
         VariationFaceData variationData = block.getBlockFaceData().getForMeta(stack.getItemDamage());
         List<BakedQuad> quads = new ArrayList<>();

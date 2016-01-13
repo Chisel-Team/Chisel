@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./light_blue-antiBlock",
+        "./light_blue-antiBlock-ctm"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./engineering-2",
+        "./engineering-2-ctm"
+    ]
+}

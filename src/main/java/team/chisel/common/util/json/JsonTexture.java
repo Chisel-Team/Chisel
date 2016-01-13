@@ -38,14 +38,14 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
 
     @Override
     protected IChiselTexture<?> create(ResourceLocation loc) {
-        Preconditions.checkArgument(TextureTypeRegistry.isValid(this.type), "Texture Type " + this.type + " is not valid");
+        Preconditions.checkArgument(TextureTypeRegistry.isValid(this.type), "Error loading texture %s. Texture Type " + this.type + " is not valid", loc);
 
         IBlockRenderType type = TextureTypeRegistry.getType(this.type);
-        Preconditions.checkArgument(textures != null || type.requiredTextures() == 1, "Texture type %s requires %d textures, the texture name can only be inferred for textures that require 1.",
-                this.type, type.requiredTextures());
+        Preconditions.checkArgument(textures != null || type.requiredTextures() == 1,
+                "Error loading texture %s. Texture type %s requires %s textures, the texture name can only be inferred for textures that require 1.", loc, this.type, type.requiredTextures());
         if (textures != null) {
-            Preconditions
-                    .checkArgument(textures.length == type.requiredTextures(), "Texture type %s requires %d textures. Only %d were provided.", this.type, type.requiredTextures(), textures.length);
+            Preconditions.checkArgument(textures.length == type.requiredTextures(), "Error loading texture %s. Texture type %s requires exactly %s textures. %s were provided.", loc, this.type,
+                    type.requiredTextures(), textures.length);
         }
 
         TextureSpriteCallback[] callbacks = new TextureSpriteCallback[type.requiredTextures()];

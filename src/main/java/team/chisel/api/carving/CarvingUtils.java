@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import team.chisel.api.block.ICarvable;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -92,7 +93,7 @@ public class CarvingUtils {
 
 		@Override
 		public ItemStack getStack() {
-			return new ItemStack(state.getBlock());
+			return new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
 		}
 
 		@Override

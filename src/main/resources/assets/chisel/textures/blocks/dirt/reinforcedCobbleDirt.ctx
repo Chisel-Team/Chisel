@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./reinforcedCobbleDirt",
+        "./reinforcedCobbleDirt-ctm"
+    ]
+}

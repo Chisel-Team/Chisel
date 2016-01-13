@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./RuneDiagonalBricks-2",
+        "./RuneDiagonalBricks-2-ctm"
+    ]
+}

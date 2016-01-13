@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./marble-arranged-bricks",
+        "./marble-arranged-bricks-ctm"
+    ]
+}

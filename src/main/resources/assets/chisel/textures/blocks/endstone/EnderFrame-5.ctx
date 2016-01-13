@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./EnderFrame-5",
+        "./EnderFrame-5-ctm"
+    ]
+}

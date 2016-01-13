@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./teal",
+        "./teal-ctm"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./screenMetallicWIP",
+        "./screenMetallicWIP-ctm"
+    ]
+}

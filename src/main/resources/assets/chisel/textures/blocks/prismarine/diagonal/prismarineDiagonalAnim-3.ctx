@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./prismarineDiagonalAnim-3",
+        "./prismarineDiagonalAnim-3-ctm"
+    ]
+}

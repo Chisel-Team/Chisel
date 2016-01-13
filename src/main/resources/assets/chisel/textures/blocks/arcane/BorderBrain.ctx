@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./BorderBrain",
+        "./BorderBrain-ctm"
+    ]
+}

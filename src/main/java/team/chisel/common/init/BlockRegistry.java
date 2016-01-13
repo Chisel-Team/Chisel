@@ -37,14 +37,20 @@ public class BlockRegistry {
         if (array.length <= 16) {
             return new VariationData[][]{array};
         }
-        int bound = ((int) array.length / 16) + 1;
-        VariationData[][] vars = new VariationData[bound][16];
+        int bound = array.length / 16;
+        if (array.length % 16 != 0) {
+            bound++;
+        }
+        VariationData[][] vars = new VariationData[bound][];
         for (int i = 0; i < array.length; i++) {
             int cur = (int) i / 16;
             if (cur >= bound) {
                 continue;
             }
             int leftover = (i % 16);
+            if (vars[cur] == null) {
+                vars[cur] = new VariationData[Math.min(16, array.length - i)];
+            }
             //Chisel.debug("cur: "+cur+" leftover: "+leftover);
             vars[cur][leftover] = array[i];
         }

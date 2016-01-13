@@ -29,17 +29,18 @@ public enum ChiselModelRegistry implements Reference {
     public <T extends Block & ICarvable> void register(T block) {
         for (int i = 0; i < block.getTotalVariations(); i++) {
             ModelResourceLocation location;
-            if (i == 0) {
+            int blockNum = i / 16;
+            if (blockNum == 0) {
                 location = new ModelResourceLocation(block.getRegistryName(), "variation=" + i);
             } else {
-                location = new ModelResourceLocation(block.getRegistryName() + i, "variation=" + i);
+                location = new ModelResourceLocation(block.getRegistryName() + blockNum, "variation=" + i);
             }
             register(location, new ModelChiselBlock());
             ModelResourceLocation inventoryLocation;
             if (i == 0) {
                 inventoryLocation = new ModelResourceLocation(block.getRegistryName(), "inventory");
             } else {
-                inventoryLocation = new ModelResourceLocation(block.getRegistryName() + i, "inventory");
+                inventoryLocation = new ModelResourceLocation(block.getRegistryName() + blockNum, "inventory");
             }
             register(inventoryLocation, new ModelChiselBlock());
             Chisel.debug("Setting custom resource location for Item " + Item.getItemFromBlock(block) + " with meta " + i + " to location " + inventoryLocation);

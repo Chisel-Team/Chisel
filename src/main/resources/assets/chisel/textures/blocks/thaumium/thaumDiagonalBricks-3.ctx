@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./thaumDiagonalBricks-3",
+        "./thaumDiagonalBricks-3-ctm"
+    ]
+}

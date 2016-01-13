@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./mazestoneDiagonals-3",
+        "./mazestoneDiagonals-3-ctm"
+    ]
+}

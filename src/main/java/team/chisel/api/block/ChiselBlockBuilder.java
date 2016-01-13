@@ -2,6 +2,7 @@ package team.chisel.api.block;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,9 @@ import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.init.BlockRegistry;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
+
 /**
  * Building a ChiselBlockData
  */
@@ -39,6 +43,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private List<VariationBuilder<T>> variations;
         
     private BlockProvider<T> provider;
+    
+    private String parentFolder = "";
 
     protected ChiselBlockBuilder(Material material, String domain, String blockName, BlockProvider<T> provider){
         this.material = material;
@@ -48,6 +54,10 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         this.variations = new ArrayList<VariationBuilder<T>>();
     }
 
+    public VariationBuilder<T> newVariation(String name) {
+        return newVariation(name, blockName);
+    }
+    
     public VariationBuilder<T> newVariation(String name, String group){
         VariationBuilder<T> builder = new VariationBuilder<>(this, name, group, curIndex);
         curIndex++;
@@ -66,8 +76,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         VariationData[][] data = BlockRegistry.splitVariationArray(vars);
         T[] ret = (T[]) Array.newInstance(provider.getBlockClass(), data.length);
         for (int i = 0; i < ret.length; i++) {
-            ret[i] = provider.createBlock(material, ret.length, i, data[i]);
-            ret[i].setRegistryName(blockName);
+            ret[i] = provider.createBlock(material, i, vars.length, data[i]);
+            ret[i].setRegistryName(blockName + (i == 0 ? "" : i));
             ret[i].setUnlocalizedName(domain + '.' + blockName);
             if (sound != null) {
                 ret[i].stepSound = sound;
@@ -119,7 +129,12 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             this.group = group;
             this.index = index;
             this.overrideMap = new HashMap<EnumFacing, ResourceLocation>();
-            this.textureLocation = new ResourceLocation(parent.domain, parent.blockName + "/" + name);
+            String path = parent.parentFolder;
+            if (!path.isEmpty()) {
+                path += "/";
+            }
+            path += parent.blockName + "/" + name;
+            this.textureLocation = new ResourceLocation(parent.domain, path);
         }
 
         public VariationBuilder<T> setSmeltRecipe(ItemStack smeltedFrom, int amountSmelted){
@@ -133,18 +148,38 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return setTextureLocation(new ResourceLocation(parent.domain, path));
         }
         
-        public VariationBuilder<T> setTextureLocation(EnumFacing facing, String path){
-            return setTextureLocation(facing, new ResourceLocation(parent.domain, path));
+        public VariationBuilder<T> setTextureLocation(String path, Predicate<EnumFacing> validFacings) {
+            return setTextureLocation(getForPath(path), validFacings);
+        }
+        
+        public VariationBuilder<T> setTextureLocation(ResourceLocation loc, Predicate<EnumFacing> validFacings) {
+            return setTextureLocation(loc, FluentIterable.from(Arrays.asList(EnumFacing.VALUES)).filter(validFacings).toArray(EnumFacing.class));
         }
 
-        public VariationBuilder<T> setTextureLocation(EnumFacing facing, ResourceLocation loc){
-            this.overrideMap.put(facing, loc);
+        @Tolerate
+        public VariationBuilder<T> setTextureLocation(String path, EnumFacing... facings){
+            return setTextureLocation(getForPath(path), facings);
+        }
+        
+        private ResourceLocation getForPath(String path) {
+            return new ResourceLocation(parent.domain, path);
+        }
+
+        @Tolerate
+        public VariationBuilder<T> setTextureLocation(ResourceLocation loc, EnumFacing... facings){
+            for (EnumFacing f : facings) {
+                this.overrideMap.put(f, loc);
+            }
             return this;
         }
 
         public ChiselBlockBuilder<T> buildVariation(){
             this.parent.variations.add(this);
             return this.parent;
+        }
+        
+        public VariationBuilder<T> next(String name) {
+            return buildVariation().newVariation(name);
         }
         
         public VariationBuilder<T> next(String name, String group) {

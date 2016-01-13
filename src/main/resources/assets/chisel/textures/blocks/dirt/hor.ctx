@@ -1,0 +1,7 @@
+{
+	"type":"CTMH",
+	"textures":[
+        "./hor-top",
+        "./hor-ctmh"
+    ]
+}

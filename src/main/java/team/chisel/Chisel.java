@@ -1,12 +1,11 @@
 package team.chisel;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
+import java.io.File;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -17,15 +16,13 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import team.chisel.api.block.BlockCreator;
-import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.command.CommandTest;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
-import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.carving.Carving;
+import team.chisel.common.config.Configurations;
 import team.chisel.common.item.ItemChisel;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME)
@@ -50,27 +47,27 @@ public class Chisel implements Reference {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         proxy.construct(event);
+
+        File configFile = event.getSuggestedConfigurationFile();
+        Configurations.configExists = configFile.exists();
+        Configurations.config = new Configuration(configFile);
+        Configurations.config.load();
+        Configurations.refreshConfig();
+
         itemChisel = new ItemChisel();
         GameRegistry.registerItem(itemChisel, "itemChisel");
         GameRegistry.addShapedRecipe(new ItemStack(itemChisel), " x", "s ", 'x', Items.iron_ingot, 's', Items.stick);
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
-        BlockCreator<BlockCarvable> creator = BlockCarvable::new;
-
-        ChiselBlockFactory factory = ChiselBlockFactory.newFactory("chisel");
-        BlockCarvable voidstone = factory.newBlock(Material.rock, "voidstone", creator, BlockCarvable.class).newVariation("normal", "test").buildVariation().build()[0];
-
-        BlockCarvable bookshelf = factory.newBlock(Material.wood, "bookshelf", creator, BlockCarvable.class).setSound(Block.soundTypeWood).newVariation("necromancer", "test").buildVariation().build()[0];
-
-        BlockCarvable brick = factory.newBlock(Material.rock, "brick", creator, BlockCarvable.class).newVariation("aged", "test").buildVariation().build()[0];
-
-        Carving.chisel.addVariation("test", Blocks.bedrock.getDefaultState(), 99);
-
+        Features.preInit();
+        
         proxy.preInit(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        Features.init();
+        
         proxy.init();
         // BlockRegistry.init(event);
         ClientCommandHandler.instance.registerCommand(new CommandTest());

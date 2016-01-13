@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./plate-rough",
+        "./plate-rough-ctm"
+    ]
+}

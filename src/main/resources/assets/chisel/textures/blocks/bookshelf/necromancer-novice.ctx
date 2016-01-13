@@ -1,0 +1,7 @@
+{
+	"type":"CTMH",
+	"textures":[
+        "./necromancer-novice-top",
+        "./necromancer-novice-ctmh"
+    ]
+}

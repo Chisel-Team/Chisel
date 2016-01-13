@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./insulationv2",
+        "./insulationv2-ctm"
+    ]
+}

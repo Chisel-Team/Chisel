@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./scaffoldLarge-1",
+        "./scaffoldLarge-1-ctm"
+    ]
+}

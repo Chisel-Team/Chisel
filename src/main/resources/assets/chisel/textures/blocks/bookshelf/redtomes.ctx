@@ -1,0 +1,7 @@
+{
+	"type":"CTMH",
+	"textures":[
+        "./redtomes-top",
+        "./redtomes-ctmh"
+    ]
+}

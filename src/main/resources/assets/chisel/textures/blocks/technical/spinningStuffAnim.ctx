@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./spinningStuffAnim",
+        "./spinningStuffAnim-ctm"
+    ]
+}

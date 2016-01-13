@@ -27,4 +27,7 @@ public class CommonProxy implements Reference {
     public IVariationBuilderDelegate getBuilderDelegate() {
         return SERVER_DELEGATE;
     }
+
+    public void registerTileEntities() {
+    }
 }

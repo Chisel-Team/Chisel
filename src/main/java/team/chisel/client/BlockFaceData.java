@@ -38,7 +38,7 @@ public class BlockFaceData {
             return this.variationData[meta];
         } catch (ArrayIndexOutOfBoundsException exception){
             Chisel.debug("Meta "+meta+" out of bounds");
-            return this.variationData[meta];
+            return this.variationData[0];
         }
     }
 

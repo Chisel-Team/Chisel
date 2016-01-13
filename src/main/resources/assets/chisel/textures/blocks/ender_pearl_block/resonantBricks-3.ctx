@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./resonantBricks-3",
+        "./resonantBricks-3-ctm"
+    ]
+}

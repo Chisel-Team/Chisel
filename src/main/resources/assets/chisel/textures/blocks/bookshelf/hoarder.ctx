@@ -1,0 +1,7 @@
+{
+	"type":"CTMH",
+	"textures":[
+        "./hoarder-top",
+        "./hoarder-ctmh"
+    ]
+}

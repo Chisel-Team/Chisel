@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./engineersBlockPrototype-v4",
+        "./engineersBlockPrototype-v4-ctm"
+    ]
+}

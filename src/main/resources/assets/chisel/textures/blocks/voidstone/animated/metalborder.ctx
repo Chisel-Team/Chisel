@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./metalborder",
+        "./metalborder-ctm"
+    ]
+}

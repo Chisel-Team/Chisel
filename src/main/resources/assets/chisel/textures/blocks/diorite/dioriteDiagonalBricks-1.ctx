@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./dioriteDiagonalBricks-1",
+        "./dioriteDiagonalBricks-1-ctm"
+    ]
+}

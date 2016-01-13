@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./terrain-glassstone",
+        "./terrain-glassstone-ctm"
+    ]
+}

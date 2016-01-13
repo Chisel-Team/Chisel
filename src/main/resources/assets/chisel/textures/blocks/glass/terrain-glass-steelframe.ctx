@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./terrain-glass-steelframe",
+        "./terrain-glass-steelframe-ctm"
+    ]
+}
