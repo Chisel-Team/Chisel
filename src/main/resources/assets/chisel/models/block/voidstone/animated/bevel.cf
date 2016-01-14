@@ -1,6 +1,6 @@
 {
     "textures":[
-    	"./background.ctx",
+        "./background.ctx",
         "./bevel.ctx"
     ]
 }

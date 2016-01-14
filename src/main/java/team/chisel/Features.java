@@ -796,7 +796,6 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "runes", provider).setParentFolder("voidstone/runes").newVariation("runeBlack").next("runeBlue").next("runeBrown").next("runeCyan").next("runeGray").next("runeGreen").next("runeLightBlue").next("runeLightGray").next("runeLime").next("runeMagenta").next("runeOrange").next("runePink").next("runePurple").next("runeRed").next("runeYellow").build();
         }
     },
 
@@ -1021,13 +1020,19 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "voidstone", provider)
-                .newVariation("bevel").next("eye").next("metalborder")
-                .next("pillar").setTextureLocation("voidstone/pillar-side").setTextureLocation("voidstone/pillar-top", Axis.Y)
-                .next("quarters").next("raw").next("rune").next("skulls").next("smooth").buildVariation()
+                .newVariation("bevel").next("eye").next("metalborder").next("quarters")
+                .next("raw").next("rune").next("skulls").next("smooth").build();
+                
+            factory.newBlock(Material.rock, "energizedVoidstone", provider)
                 .setParentFolder("voidstone/animated")
-                .newVariation("bevel").next("eye").next("metalborder")
-                .next("pillar").setTextureLocation("voidstone/animated/pillar-side").setTextureLocation("voidstone/animated/pillar-top", Axis.Y)
-                .next("quarters").next("raw").next("rune").next("skulls").next("smooth").build();
+                .newVariation("bevel").next("eye").next("metalborder").next("quarters")
+                .next("raw").next("rune").next("skulls").next("smooth").build();
+                
+            factory.newBlock(Material.rock, "voidstoneRunes", provider)
+                .setParentFolder("voidstone/runes")
+                .newVariation("runeBlack").next("runeBlue").next("runeBrown").next("runeCyan").next("runeGray")
+                .next("runeGreen").next("runeLightBlue").next("runeLightGray").next("runeLime").next("runeMagenta")
+                .next("runeOrange").next("runePink").next("runePurple").next("runeRed").next("runeYellow").build();
         }
     },
 

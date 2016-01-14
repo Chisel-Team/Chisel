@@ -22,6 +22,7 @@ public class ItemChiselBlock extends ItemBlock {
     public ItemChiselBlock(Block block) {
         super(block);
         this.block = (BlockCarvable) block;
+        this.setHasSubtypes(true);
     }
 
 

@@ -29,6 +29,7 @@ public class JsonHelper {
     public static final String FACE_EXTENSION = ".cf";
     public static final String TEXTURE_EXTENSION = ".ctx";
     public static final JsonObject NORMAL_TEXTURE = gson.fromJson("{\"type\": \"NORMAL\"}", JsonObject.class);
+    public static final String NORMAL_FACE = "{\"textures\":[\".%s\"]}";
 
     private static IChiselFace createFace(ResourceLocation loc) {
         if (isValidFace(loc)) {
@@ -37,6 +38,12 @@ public class JsonHelper {
             IChiselFace cFace = face.get(loc);
             faceCache.put(loc, cFace);
             return cFace;
+        }
+        if (cachedException != null && cachedException.getCause() instanceof FileNotFoundException) {
+            objectCache.put(loc, gson.fromJson(String.format(NORMAL_FACE, loc.getResourcePath().substring(loc.getResourcePath().lastIndexOf('/')).replace(".cf", ".ctx")), JsonObject.class));
+            Chisel.logger.warn("Substituting default face json for missing file " + loc);
+            clearException();
+            return createFace(loc);
         }
         throw clearException();
     }
