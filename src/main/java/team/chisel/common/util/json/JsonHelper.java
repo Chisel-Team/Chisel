@@ -59,10 +59,10 @@ public class JsonHelper {
     }
 
     public static void flushCaches(){
-        objectCache = new HashMap<>();
-        faceCache = new HashMap<>();
-        textureCache = new HashMap<>();
         Chisel.debug("Flushing Json caches");
+        objectCache.clear();
+        faceCache.clear();
+        textureCache.clear();
     }
 
     public static IChiselFace getOrCreateFace(ResourceLocation loc) {

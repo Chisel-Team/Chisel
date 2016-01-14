@@ -14,14 +14,14 @@ import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.config.Configurations;
 
-
 public enum Features {
 
+    // @formatter:off
     ALUMINUM {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "aluminum", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/aluminum/thermal-side").setTextureLocation("metals/aluminum/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "aluminum", provider).setParentFolder("metals/aluminum").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/aluminum/thermal-side").setTextureLocation("metals/aluminum/thermal-top", Axis.Y).build();
         }
     },
 
@@ -45,7 +45,6 @@ public enum Features {
 //
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newBlock(Material.rock, "animated", provider).setParentFolder("voidstone").newVariation("bevel").next("eye").next("metalborder").next("pillar").setTextureLocation("voidstone/animated/pillar-side").setTextureLocation("voidstone/animated/pillar-top", Axis.Y).next("quarters").next("raw").next("rune").next("skulls").next("smooth").build();
 //        }
 //    },
 //
@@ -117,7 +116,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "bronze", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/bronze/thermal-side").setTextureLocation("metals/bronze/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "bronze", provider).setParentFolder("metals/bronze").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/bronze/thermal-side").setTextureLocation("metals/bronze/thermal-top", Axis.Y).build();
         }
     },
 
@@ -133,7 +132,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "certus", provider).setParentFolder("quartz").newVariation("certusChiseled").next("certusPrismatic").next("certusPrismaticPattern").next("masonryCertus").build();
+            factory.newBlock(Material.rock, "certus", provider).setParentFolder("quartz/certus").newVariation("certusChiseled").next("certusPrismatic").next("certusPrismaticPattern").next("masonryCertus").build();
         }
     },
 
@@ -149,7 +148,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "cobalt", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/cobalt/thermal-side").setTextureLocation("metals/cobalt/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "cobalt", provider).setParentFolder("metals/cobalt").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/cobalt/thermal-side").setTextureLocation("metals/cobalt/thermal-top", Axis.Y).build();
         }
     },
 
@@ -189,7 +188,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "copper", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/copper/thermal-side").setTextureLocation("metals/copper/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "copper", provider).setParentFolder("metals/copper").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/copper/thermal-side").setTextureLocation("metals/copper/thermal-top", Axis.Y).build();
         }
     },
 
@@ -205,7 +204,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "diagonal", provider).setParentFolder("prismarine").newVariation("prismarineDiagonalAnim-0").next("prismarineDiagonalAnim-1").next("prismarineDiagonalAnim-2").next("prismarineDiagonalAnim-3").next("prismarineDiagonalAnim").build();
+            factory.newBlock(Material.rock, "diagonal", provider).setParentFolder("prismarine/diagonal").newVariation("prismarineDiagonalAnim-0").next("prismarineDiagonalAnim-1").next("prismarineDiagonalAnim-2").next("prismarineDiagonalAnim-3").next("prismarineDiagonalAnim").build();
         }
     },
 
@@ -261,7 +260,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "electrum", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/electrum/thermal-side").setTextureLocation("metals/electrum/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "electrum", provider).setParentFolder("metals/electrum").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/electrum/thermal-side").setTextureLocation("metals/electrum/thermal-top", Axis.Y).build();
         }
     },
 
@@ -269,7 +268,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "elementium", provider).setParentFolder("botania").newVariation("adv").next("bolted").next("caution").next("crate").next("egregious").next("elementiumEye-0-0").next("elementiumEye-0-1").next("elementiumEye-1-0").next("elementiumEye-1-1").next("elementiumEye-2-0").next("elementiumEye-2-1").next("thermal").build();
+            factory.newBlock(Material.rock, "elementium", provider).setParentFolder("botania/elementium").newVariation("adv").next("bolted").next("caution").next("crate").next("egregious").next("elementiumEye-0-0").next("elementiumEye-0-1").next("elementiumEye-1-0").next("elementiumEye-1-1").next("elementiumEye-2-0").next("elementiumEye-2-1").next("thermal").build();
         }
     },
 
@@ -429,7 +428,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "invar", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/invar/thermal-side").setTextureLocation("metals/invar/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "invar", provider).setParentFolder("metals/invar").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/invar/thermal-side").setTextureLocation("metals/invar/thermal-top", Axis.Y).build();
         }
     },
 
@@ -477,7 +476,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "lead", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/lead/thermal-side").setTextureLocation("metals/lead/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "lead", provider).setParentFolder("metals/lead").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/lead/thermal-side").setTextureLocation("metals/lead/thermal-top", Axis.Y).build();
         }
     },
 
@@ -517,7 +516,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "livingrock", provider).setParentFolder("botania").newVariation("masonryLivingstone").build();
+            factory.newBlock(Material.rock, "livingrock", provider).setParentFolder("botania/livingrock").newVariation("masonryLivingstone").build();
         }
     },
 
@@ -645,7 +644,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "new", provider).setParentFolder("technical").newVariation("engineering-0").next("engineering-1").next("engineering-2").next("engineering-3").next("engineering").next("ExhaustPlating").next("MakeshiftPanels").next("MegaCell-bottom").next("MegaCell").setTextureLocation("technical/new/MegaCell-side").setTextureLocation("technical/new/MegaCell-top", Axis.Y).next("OldeTimeyServerAnim").next("Piping").next("scaffoldLarge-0").next("scaffoldLarge-1").next("scaffoldLarge-2").next("scaffoldLarge-3").next("scaffoldLarge").next("Sturdy").next("TapeDrive").next("weatheredGreenPanels").next("weatheredOrangePanels").build();
+            factory.newBlock(Material.rock, "new", provider).setParentFolder("technical/new").newVariation("engineering-0").next("engineering-1").next("engineering-2").next("engineering-3").next("engineering").next("ExhaustPlating").next("MakeshiftPanels").next("MegaCell-bottom").next("MegaCell").setTextureLocation("technical/new/MegaCell-side").setTextureLocation("technical/new/MegaCell-top", Axis.Y).next("OldeTimeyServerAnim").next("Piping").next("scaffoldLarge-0").next("scaffoldLarge-1").next("scaffoldLarge-2").next("scaffoldLarge-3").next("scaffoldLarge").next("Sturdy").next("TapeDrive").next("weatheredGreenPanels").next("weatheredOrangePanels").build();
         }
     },
 
@@ -653,7 +652,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "nickel", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/nickel/thermal-side").setTextureLocation("metals/nickel/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "nickel", provider).setParentFolder("metals/nickel").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/nickel/thermal-side").setTextureLocation("metals/nickel/thermal-top", Axis.Y).build();
         }
     },
 
@@ -733,7 +732,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "platinum", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/platinum/thermal-side").setTextureLocation("metals/platinum/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "platinum", provider).setParentFolder("metals/platinum").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/platinum/thermal-side").setTextureLocation("metals/platinum/thermal-top", Axis.Y).build();
         }
     },
 
@@ -741,7 +740,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "present", provider).newVariation("presentChest0").next("presentChest0_double").next("presentChest1").next("presentChest10").next("presentChest10_double").next("presentChest11").next("presentChest11_double").next("presentChest12").next("presentChest12_double").next("presentChest13").next("presentChest13_double").next("presentChest14").next("presentChest14_double").next("presentChest15").next("presentChest15_double").next("presentChest1_double").next("presentChest2").next("presentChest2_double").next("presentChest3").next("presentChest3_double").next("presentChest4").next("presentChest4_double").next("presentChest5").next("presentChest5_double").next("presentChest6").next("presentChest6_double").next("presentChest7").next("presentChest7_double").next("presentChest8").next("presentChest8_double").next("presentChest9").next("presentChest9_double").next("red").build();
+            factory.newBlock(Material.rock, "present", provider).newVariation("presentChest0").next("presentChest1").next("presentChest10").next("presentChest11").next("presentChest12").next("presentChest13").next("presentChest14").next("presentChest15").next("presentChest2").next("presentChest3").next("presentChest4").next("presentChest5").next("presentChest6").next("presentChest7").next("presentChest8").next("presentChest9").next("red").build();
         }
     },
 
@@ -797,7 +796,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "runes", provider).setParentFolder("voidstone").newVariation("runeBlack").next("runeBlue").next("runeBrown").next("runeCyan").next("runeGray").next("runeGreen").next("runeLightBlue").next("runeLightGray").next("runeLime").next("runeMagenta").next("runeOrange").next("runePink").next("runePurple").next("runeRed").next("runeYellow").build();
+            factory.newBlock(Material.rock, "runes", provider).setParentFolder("voidstone/runes").newVariation("runeBlack").next("runeBlue").next("runeBrown").next("runeCyan").next("runeGray").next("runeGreen").next("runeLightBlue").next("runeLightGray").next("runeLime").next("runeMagenta").next("runeOrange").next("runePink").next("runePurple").next("runeRed").next("runeYellow").build();
         }
     },
 
@@ -805,7 +804,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "sandsnake", provider).setParentFolder("snakestone").newVariation("bot-tip").next("bot").next("crosssection").next("face-left").next("face-right").next("face").next("left-down").next("left-tip").next("left-up").next("right-down").next("right-tip").next("right-up").next("side").next("top-tip").next("top").build();
+            factory.newBlock(Material.rock, "sandsnake", provider).setParentFolder("snakestone/sandsnake").newVariation("bot-tip").next("bot").next("crosssection").next("face-left").next("face-right").next("face").next("left-down").next("left-tip").next("left-up").next("right-down").next("right-tip").next("right-up").next("side").next("top-tip").next("top").build();
         }
     },
 
@@ -845,7 +844,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "silver", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/silver/thermal-side").setTextureLocation("metals/silver/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "silver", provider).setParentFolder("metals/silver").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/silver/thermal-side").setTextureLocation("metals/silver/thermal-top", Axis.Y).build();
         }
     },
 
@@ -853,7 +852,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "snake", provider).setParentFolder("snakestone").newVariation("bot-tip").next("bot").next("crosssection").next("face-left").next("face-right").next("face").next("left-down").next("left-tip").next("left-up").next("right-down").next("right-tip").next("right-up").next("side").next("top-tip").next("top").build();
+            factory.newBlock(Material.rock, "snake", provider).setParentFolder("snakestone/snake").newVariation("bot-tip").next("bot").next("crosssection").next("face-left").next("face-right").next("face").next("left-down").next("left-tip").next("left-up").next("right-down").next("right-tip").next("right-up").next("side").next("top-tip").next("top").build();
         }
     },
 
@@ -861,7 +860,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "steel", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/steel/thermal-side").setTextureLocation("metals/steel/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "steel", provider).setParentFolder("metals/steel").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/steel/thermal-side").setTextureLocation("metals/steel/thermal-top", Axis.Y).build();
         }
     },
 
@@ -981,7 +980,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "tin", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/tin/thermal-side").setTextureLocation("metals/tin/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "tin", provider).setParentFolder("metals/tin").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/tin/thermal-side").setTextureLocation("metals/tin/thermal-top", Axis.Y).build();
         }
     },
 
@@ -1005,7 +1004,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "uranium", provider).setParentFolder("metals").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/uranium/thermal-side").setTextureLocation("metals/uranium/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "uranium", provider).setParentFolder("metals/uranium").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/uranium/thermal-side").setTextureLocation("metals/uranium/thermal-top", Axis.Y).build();
         }
     },
 
@@ -1021,7 +1020,14 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "voidstone", provider).newVariation("bevel").next("eye").next("metalborder").next("pillar").setTextureLocation("voidstone/pillar-side").setTextureLocation("voidstone/pillar-top", Axis.Y).next("quarters").next("raw").next("rune").next("skulls").next("smooth").build();
+            factory.newBlock(Material.rock, "voidstone", provider)
+                .newVariation("bevel").next("eye").next("metalborder")
+                .next("pillar").setTextureLocation("voidstone/pillar-side").setTextureLocation("voidstone/pillar-top", Axis.Y)
+                .next("quarters").next("raw").next("rune").next("skulls").next("smooth").buildVariation()
+                .setParentFolder("voidstone/animated")
+                .newVariation("bevel").next("eye").next("metalborder")
+                .next("pillar").setTextureLocation("voidstone/animated/pillar-side").setTextureLocation("voidstone/animated/pillar-top", Axis.Y)
+                .next("quarters").next("raw").next("rune").next("skulls").next("smooth").build();
         }
     },
 
@@ -1049,11 +1055,15 @@ public enum Features {
         }
     },
     ;
+    
+    //@formatter:on
 
     private static final String[] dyeOres = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
             "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
+
     private static final BlockCreator<BlockCarvable> creator = BlockCarvable::new;
     private static final BlockProvider<BlockCarvable> provider = new BlockProvider<BlockCarvable>() {
+
         @Override
         public BlockCarvable createBlock(Material mat, int index, int maxVariation, VariationData... data) {
             return creator.createBlock(mat, index, maxVariation, data);
@@ -1070,8 +1080,6 @@ public enum Features {
         }
     };
 
-    private static int meta = 0;
-
     static void init() {
         Chisel.logger.info("Starting init...");
         loadRecipes();
@@ -1086,8 +1094,7 @@ public enum Features {
             if (f.enabled()) {
                 f.addBlocks(factory);
                 ++num;
-            }
-            else {
+            } else {
                 logDisabled(f);
             }
         }
@@ -1104,8 +1111,7 @@ public enum Features {
             if (f.enabled()) {
                 f.addItems();
                 ++num;
-            }
-            else {
+            } else {
                 logDisabled(f);
             }
         }
@@ -1117,19 +1123,18 @@ public enum Features {
         int num = 0;
         for (Features f : values()) {
             if (f.enabled()) {
-                if (f.needsMetaRecipes()) {
-                    for (int i = 0; i < 16; i++) {
-                        meta = i;
-                        f.addRecipes();
-                    }
-                    meta = 0;
-                }
-                else {
-                    f.addRecipes();
-                }
+                // if (f.needsMetaRecipes()) {
+                // for (int i = 0; i < 16; i++) {
+                // meta = i;
+                // f.addRecipes();
+                // }
+                // meta = 0;
+                // }
+                // else {
+                f.addRecipes();
+                // }
                 ++num;
-            }
-            else {
+            } else {
                 logDisabled(f);
             }
         }
@@ -1139,11 +1144,9 @@ public enum Features {
     private static void logDisabled(Features f) {
         if (!f.hasParentFeature() && f.parent != null) {
             Chisel.logger.info("Skipping feature {} as its parent feature {} was disabled.", Configurations.featureName(f), Configurations.featureName(f.parent));
-        }
-        else if (!f.hasRequiredMod() && f.getRequiredMod() != null) {
+        } else if (!f.hasRequiredMod() && f.getRequiredMod() != null) {
             Chisel.logger.info("Skipping feature {} as its required mod {} was missing.", Configurations.featureName(f), f.getRequiredMod());
-        }
-        else {
+        } else {
             Chisel.logger.info("Skipping feature {} as it was disabled in the config.", Configurations.featureName(f));
         }
     }
@@ -1220,6 +1223,6 @@ public enum Features {
     private static void registerSlabTop(Block bottom, Block top) {
         ResourceLocation block = Block.blockRegistry.getNameForObject(bottom);
         String name = block.getResourcePath() + "_top";
-        //        GameRegistry.registerBlock(top, ItemCarvableSlab.class, name); TODO
+        // GameRegistry.registerBlock(top, ItemCarvableSlab.class, name); TODO
     }
 }

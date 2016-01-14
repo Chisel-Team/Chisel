@@ -66,6 +66,9 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
             }
         }
         
+        if (loc.getResourcePath().contains("animated")) {
+            System.out.println("test");
+        }
         EnumWorldBlockLayer layerObj = layer == null ? EnumWorldBlockLayer.SOLID : EnumWorldBlockLayer.valueOf(layer.toUpperCase(Locale.US));
         return type.makeTexture(layerObj, callbacks);
     }

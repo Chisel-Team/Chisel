@@ -2,7 +2,7 @@ package team.chisel.common;
 
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import team.chisel.api.block.ChiselBlockBuilder.VariationBuilder.IVariationBuilderDelegate;
-import team.chisel.common.block.BlockCarvable;
+import team.chisel.api.block.ICarvable;
 import team.chisel.common.util.BuilderDelegateServer;
 
 public class CommonProxy implements Reference {
@@ -19,7 +19,7 @@ public class CommonProxy implements Reference {
     public void preTextureStitch() {
     }
 
-    public void initiateFaceData(BlockCarvable carvable) {
+    public void initiateFaceData(ICarvable carvable) {
     }
 
     private static final IVariationBuilderDelegate SERVER_DELEGATE = new BuilderDelegateServer();

@@ -45,13 +45,14 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         
     private BlockProvider<T> provider;
     
-    private String parentFolder = "";
+    private String parentFolder;
 
     protected ChiselBlockBuilder(Material material, String domain, String blockName, BlockProvider<T> provider){
         this.material = material;
         this.domain = domain;
         this.blockName = blockName;
         this.provider = provider;
+        this.parentFolder = blockName;
         this.variations = new ArrayList<VariationBuilder<T>>();
     }
 
@@ -136,8 +137,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             if (!path.isEmpty()) {
                 path += "/";
             }
-            path += parent.blockName + "/" + name;
-            this.textureLocation = new ResourceLocation(parent.domain, path);
+            this.textureLocation = new ResourceLocation(parent.domain, path + name);
         }
 
         public VariationBuilder<T> setSmeltRecipe(ItemStack smeltedFrom, int amountSmelted){

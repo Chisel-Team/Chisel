@@ -12,10 +12,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
 import team.chisel.api.block.ChiselBlockBuilder.VariationBuilder.IVariationBuilderDelegate;
+import team.chisel.api.block.ICarvable;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.CommonProxy;
-import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.init.TextureTypeRegistry;
 
 @SideOnly(Side.CLIENT)
@@ -57,8 +57,8 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void initiateFaceData(BlockCarvable carvable) {
-        carvable.setBlockFaceData(new BlockFaceData(carvable.getVariations()));
+    public void initiateFaceData(ICarvable carvable) {
+        ChiselPackReloadListener.INSTANCE.registerListener(carvable);
     }
 
     private static final IVariationBuilderDelegate CLIENT_DELEGATE = new BuilderDelegateClient();

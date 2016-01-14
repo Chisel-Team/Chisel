@@ -1,5 +1,6 @@
 {
     "textures":[
-        "./eye.ctx"
+    	"./background.ctx",
+    	"./eye.ctx"
     ]
 }

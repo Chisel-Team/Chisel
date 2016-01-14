@@ -41,6 +41,9 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
                 }
             }
         }
+        if (loc.getResourcePath().contains("animated")) {
+            System.out.println("test");
+        }
         face.setLayer(getLayer(face.getTextureList()));
         return face;
     }

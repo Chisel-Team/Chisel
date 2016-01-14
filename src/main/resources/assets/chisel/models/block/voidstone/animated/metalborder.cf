@@ -1,5 +1,6 @@
 {
     "textures":[
+        "./background.ctx",
         "./metalborder.ctx"
     ]
 }
