@@ -44,9 +44,25 @@ minecraft {
     version = "${minecraft_version}-${forge_version}"
     mappings = 'snapshot_20151128'
     runDir = "run"
+	
+	useDepAts = true
 
     replaceIn "Chisel.java"
     replace "@VERSION@", project.version
+}
+
+repositories {
+	maven { // WAILA
+		url "http://mobiusstrip.eu/maven"
+	}
+	maven { // JEI
+		url "http://dvs1.progwml6.com/files/maven"
+	}
+}
+
+dependencies {
+	deobfCompile "mcp.mobius.waila:Waila:${waila_version}"
+	deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
 }
 
 lombok {
