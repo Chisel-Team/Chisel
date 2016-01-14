@@ -66,12 +66,12 @@ public class ChiselTextureV extends AbstractChiselTexture<BlockRenderTypeV> {
             ty += ySize;
         }
 
-        int intervalU = 16 / xSize;
-        int intervalV = 16 / ySize;
+        float intervalU = 16f / xSize;
+        float intervalV = 16f / ySize;
 
         // throw new RuntimeException(index % variationSize+" and "+index/variationSize);
-        int minU = intervalU * tx;
-        int minV = intervalV * ty;
+        float minU = intervalU * tx;
+        float minV = intervalV * ty;
         if (quadGoal != 4) {
             List<BakedQuad> list = new ArrayList<BakedQuad>();
             list.add(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), new float[] { minU, minV, minU + intervalU, minV + intervalV }));
