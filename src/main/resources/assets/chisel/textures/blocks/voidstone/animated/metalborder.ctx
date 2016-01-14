@@ -1,6 +1,6 @@
 {
-	"type":"CTM",
-	"textures":[
+    "type":"CTM",
+    "textures":[
         "./metalborder",
         "./metalborder-ctm"
     ]

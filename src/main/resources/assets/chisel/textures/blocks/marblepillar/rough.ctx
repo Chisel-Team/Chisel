@@ -1,0 +1,7 @@
+{
+    "type":"CTMV",
+    "textures": [
+        "./rough-top.ctx",
+        "./rough-ctmv.ctx"
+    ]
+}

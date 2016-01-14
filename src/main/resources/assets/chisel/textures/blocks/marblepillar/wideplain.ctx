@@ -1,0 +1,7 @@
+{
+    "type":"CTMV",
+    "textures": [
+        "./wideplain-top.ctx",
+        "./wideplain-ctmv.ctx"
+    ]
+}

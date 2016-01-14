@@ -1,0 +1,7 @@
+{
+    "type":"CTMV",
+    "textures": [
+        "./greekdecor-top.ctx",
+        "./greekdecor-ctmv.ctx"
+    ]
+}

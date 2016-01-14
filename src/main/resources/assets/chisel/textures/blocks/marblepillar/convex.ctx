@@ -1,0 +1,7 @@
+{
+    "type":"CTMV",
+    "textures": [
+        "./convex-top.ctx",
+        "./convex-ctmv.ctx"
+    ]
+}

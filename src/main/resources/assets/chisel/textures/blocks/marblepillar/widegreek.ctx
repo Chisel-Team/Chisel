@@ -1,0 +1,7 @@
+{
+    "type":"CTMV",
+    "textures": [
+        "./widegreek-top.ctx",
+        "./widegreek-ctmv.ctx"
+    ]
+}
