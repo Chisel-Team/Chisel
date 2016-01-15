@@ -58,6 +58,7 @@ public class ChiselRecipeCategory implements IRecipeCategory {
     public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper)
     {
         recipeLayout.getItemStacks().init(0, true, 10, 10);
+        recipeLayout.getItemStacks().set(0, recipeWrapper.getInputs());
 
         int rowWidth = 11;
 
