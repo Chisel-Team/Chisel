@@ -4,19 +4,30 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.vecmath.Matrix4f;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.client.model.Attributes;
+import net.minecraftforge.client.model.IFlexibleBakedModel;
+import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.client.model.ISmartBlockModel;
 import net.minecraftforge.client.model.ISmartItemModel;
 import net.minecraftforge.common.property.IExtendedBlockState;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
 import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.render.IChiselFace;
@@ -24,6 +35,7 @@ import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.BlockFaceData;
 import team.chisel.client.BlockFaceData.VariationFaceData;
+import team.chisel.client.ClientUtil;
 import team.chisel.common.block.BlockCarvable;
 
 import com.google.common.collect.FluentIterable;
@@ -33,7 +45,7 @@ import com.google.common.collect.Ordering;
  * Model for all chisel blocks
  */
 @SuppressWarnings("deprecation")
-public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
+public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPerspectiveAwareModel {
 
     private List<BakedQuad> quads;
 
@@ -130,5 +142,23 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel {
             }
         }
         return new ModelChiselBlock(quads, variationData);
+    }
+
+    @Override
+    public VertexFormat getFormat() {
+        return Attributes.DEFAULT_BAKED_FORMAT;
+    }
+
+    private Pair<IPerspectiveAwareModel, Matrix4f> thirdPersonTransform;
+    
+    @Override
+    public Pair<? extends IFlexibleBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
+        if (cameraTransformType == TransformType.THIRD_PERSON) {
+            if (thirdPersonTransform == null) {
+                thirdPersonTransform = ImmutablePair.of(this, ClientUtil.DEFAULT_BLOCK_THIRD_PERSON_MATRIX);
+            }
+            return thirdPersonTransform;
+        }
+        return Pair.of(this, null);
     }
 }

@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +25,7 @@ import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.item.ItemChisel;
+import team.chisel.common.item.ItemChisel.ChiselType;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME)
 public class Chisel implements Reference {
@@ -36,7 +38,7 @@ public class Chisel implements Reference {
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY, modId = MOD_ID)
     public static CommonProxy proxy;
 
-    public static ItemChisel itemChisel;
+    public static ItemChisel itemChiselIron, itemChiselDiamond;
 
     public static final boolean debug = true;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
 
@@ -54,9 +56,15 @@ public class Chisel implements Reference {
         Configurations.config.load();
         Configurations.refreshConfig();
 
-        itemChisel = new ItemChisel();
-        GameRegistry.registerItem(itemChisel, "itemChisel");
-        GameRegistry.addShapedRecipe(new ItemStack(itemChisel), " x", "s ", 'x', Items.iron_ingot, 's', Items.stick);
+        itemChiselIron = new ItemChisel(ChiselType.IRON);
+        itemChiselDiamond = new ItemChisel(ChiselType.DIAMOND);
+        
+        GameRegistry.registerItem(itemChiselIron);
+        GameRegistry.registerItem(itemChiselDiamond);
+        
+        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
+
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
         Features.preInit();

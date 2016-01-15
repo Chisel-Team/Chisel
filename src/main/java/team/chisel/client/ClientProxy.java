@@ -29,7 +29,9 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
 
-        ModelLoader.setCustomModelResourceLocation(Chisel.itemChisel, 0, new ModelResourceLocation(MOD_ID + ":itemChisel", "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselIron, 0, new ModelResourceLocation(Chisel.itemChiselIron.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselDiamond, 0, new ModelResourceLocation(Chisel.itemChiselDiamond.getRegistryName(), "inventory"));
+
         // ModelBakery.addVariantName(Chisel.itemChisel, MOD_ID+":itemChisel");
         // MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
         // MinecraftForge.EVENT_BUS.register(new NonCTMModelRegistry.BakedEventListener());

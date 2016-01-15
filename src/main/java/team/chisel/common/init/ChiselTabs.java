@@ -49,7 +49,7 @@ public class ChiselTabs {
         @Override
         @SideOnly(Side.CLIENT)
         public Item getTabIconItem() {
-            return Chisel.itemChisel;
+            return Chisel.itemChiselIron;
         }
     }
 

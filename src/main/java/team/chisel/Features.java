@@ -21,7 +21,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "aluminum", provider).setParentFolder("metals/aluminum").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/aluminum/thermal-side").setTextureLocation("metals/aluminum/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "aluminumblock", provider).setParentFolder("metals/aluminum").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/aluminum/thermal-side").setTextureLocation("metals/aluminum/thermal-top", Axis.Y).build();
         }
     },
 
@@ -37,7 +37,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "andesite", provider).newVariation("andesite").next("andesiteDiagonalBricks-0").next("andesiteDiagonalBricks-1").next("andesiteDiagonalBricks-2").next("andesiteDiagonalBricks-3").next("andesiteDiagonalBricks").next("andesiteLBrick").next("andesiteOrnate").next("andesitePillar").setTextureLocation("andesite/andesitePillar-side").setTextureLocation("andesite/andesitePillar-top", Axis.Y).next("andesitePolished").next("andesitePrism").next("andesitePrismatic").next("andesiteTiles").build();
+            factory.newBlock(Material.rock, "andesite", provider).newVariation("andesitePolished").next("andesitePillar").setTextureLocation("andesite/andesitePillar-side").setTextureLocation("andesite/andesitePillar-top", Axis.Y).next("andesiteLBrick").next("andesiteOrnate").next("andesitePrismatic").next("andesiteTiles").next("andesitePrism").next("andesiteDiagonalBricks").build();
         }
     },
 
@@ -1028,11 +1028,11 @@ public enum Features {
                 .newVariation("bevel").next("eye").next("metalborder").next("quarters")
                 .next("raw").next("rune").next("skulls").next("smooth").build();
                 
-            factory.newBlock(Material.rock, "voidstoneRunes", provider)
+            factory.newBlock(Material.rock, "voidstoneRunic", provider)
                 .setParentFolder("voidstone/runes")
-                .newVariation("runeBlack").next("runeBlue").next("runeBrown").next("runeCyan").next("runeGray")
-                .next("runeGreen").next("runeLightBlue").next("runeLightGray").next("runeLime").next("runeMagenta")
-                .next("runeOrange").next("runePink").next("runePurple").next("runeRed").next("runeYellow").build();
+                .newVariation("black").next("blue").next("brown").next("cyan").next("gray")
+                .next("green").next("lightblue").next("lightgray").next("lime").next("magenta")
+                .next("orange").next("pink").next("purple").next("red").next("yellow").build();
         }
     },
 
@@ -1040,7 +1040,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "warning", provider).newVariation("acid").next("bio").next("cryogenic").next("death").next("explosion").next("fall").next("falling").next("fire").next("generic").next("illuminati").next("noentry").next("oxygen").next("rad").next("sound").next("underconstruction").next("voltage").build();
+            factory.newBlock(Material.rock, "warningSign", provider).setParentFolder("warning").newVariation("acid").next("bio").next("cryogenic").next("death").next("explosion").next("fall").next("falling").next("fire").next("generic").next("illuminati").next("noentry").next("oxygen").next("rad").next("sound").next("underconstruction").next("voltage").build();
         }
     },
 
