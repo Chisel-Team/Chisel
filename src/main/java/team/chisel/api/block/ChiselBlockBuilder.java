@@ -46,6 +46,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private BlockProvider<T> provider;
     
     private String parentFolder;
+    
+    private String group;
 
     protected ChiselBlockBuilder(Material material, String domain, String blockName, BlockProvider<T> provider){
         this.material = material;
@@ -57,7 +59,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     }
 
     public VariationBuilder<T> newVariation(String name) {
-        return newVariation(name, blockName);
+        return newVariation(name, group == null ? blockName : group);
     }
     
     public VariationBuilder<T> newVariation(String name, String group){
