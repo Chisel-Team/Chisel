@@ -10,9 +10,6 @@ import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.texture.ChiselTextureCTM;
 
-/**
- * Block RenderType for CTM
- */
 @BlockRenderType("CTM")
 public class BlockRenderTypeCTM implements IBlockRenderType {
 

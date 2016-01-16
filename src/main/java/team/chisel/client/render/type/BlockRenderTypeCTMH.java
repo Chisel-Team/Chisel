@@ -13,4 +13,9 @@ public class BlockRenderTypeCTMH extends BlockRenderTypeCTM {
     public IChiselTexture<BlockRenderTypeCTMH> makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites) {
         return new ChiselTextureCTMH(this, layer, sprites);
     }
+    
+    @Override
+    public int getQuadsPerSide() {
+        return 1;
+    }
 }
