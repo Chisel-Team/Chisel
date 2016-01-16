@@ -66,13 +66,29 @@ public class QuadHelper {
      * @return The Quad
      */
     public static BakedQuad makeUVFaceQuad(EnumFacing f, TextureAtlasSprite sprite, float[] uvs){
-        return makeUVQuad(f, sprite, uvs, quadPos);
+        return makeUVFaceQuad(f, sprite, uvs, 0);
+    }
+    
+    /**
+     * Make a face quad with the specified uvs
+     * @param f The Face
+     * @param sprite The Sprite
+     * @param uvs The uvs
+     * @param rotation The uv rotation
+     * @return The Quad
+     */
+    public static BakedQuad makeUVFaceQuad(EnumFacing f, TextureAtlasSprite sprite, float[] uvs, int rotation){
+        return makeUVQuad(f, sprite, uvs, rotation, quadPos);
     }
 
     public static BakedQuad makeUVQuad(EnumFacing f, TextureAtlasSprite sprite, float[] uvs, QuadPos pos){
-        //Chisel.debug(uvs);
-        return bakery.makeBakedQuad(pos.from, pos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(uvs, 0)),
-                sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, true);
+        return makeUVQuad(f, sprite, uvs, 0, pos);
+    }
+
+    public static BakedQuad makeUVQuad(EnumFacing f, TextureAtlasSprite sprite, float[] uvs, int rotation, QuadPos pos) {
+        // Chisel.debug(uvs);
+        return bakery.makeBakedQuad(pos.from, pos.to, new BlockPartFace(f, -1, sprite.getIconName(), new BlockFaceUV(uvs, rotation)), sprite, f, ModelRotation.X0_Y0, new BlockPartRotation(
+                new Vector3f(1, 0, 0), f.getAxis(), 0, false), false, true);
     }
 
     /**
