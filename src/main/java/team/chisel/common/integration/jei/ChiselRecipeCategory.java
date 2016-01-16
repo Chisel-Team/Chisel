@@ -14,11 +14,9 @@ import net.minecraft.util.StatCollector;
 
 public class ChiselRecipeCategory implements IRecipeCategory {
 
-    private IGuiHelper guiHelper;
     private IDrawable background;
 
     public ChiselRecipeCategory(IGuiHelper guiHelper) {
-        this.guiHelper = guiHelper;
         ResourceLocation location = new ResourceLocation("chisel", "textures/chiselJEI.png");
         this.background = guiHelper.createDrawable(location, 0, 0, 170, 166);
     }
@@ -38,7 +36,7 @@ public class ChiselRecipeCategory implements IRecipeCategory {
     @Nonnull
     @Override
     public IDrawable getBackground() {
-        return guiHelper.createDrawable(new ResourceLocation("chisel", "textures/chiselJEI.png"), 0, 0, 165, 126);
+        return background;
     }
 
     @Override
