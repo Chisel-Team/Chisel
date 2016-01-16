@@ -5,6 +5,8 @@ itemGroup.chiselCreativeTab=Chisel
 
 container.chisel.title=Chisel Blocks
 
+chisel.jei.title=Chisel Recipes
+
 #Item localizations
 
 item.chisel.chisel_iron.name=Chisel

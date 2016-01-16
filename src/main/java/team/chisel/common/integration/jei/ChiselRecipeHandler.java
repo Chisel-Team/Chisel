@@ -1,38 +1,43 @@
 package team.chisel.common.integration.jei;
 
-import mezz.jei.api.recipe.IRecipeHandler;
-import mezz.jei.api.recipe.IRecipeWrapper;
-import team.chisel.api.carving.CarvingUtils;
-import team.chisel.api.carving.ICarvingGroup;
-
 import javax.annotation.Nonnull;
 
-public class ChiselRecipeHandler implements IRecipeHandler<CarvingUtils.SimpleCarvingGroup> {
+import lombok.AllArgsConstructor;
+import lombok.experimental.Delegate;
+import mezz.jei.api.recipe.IRecipeHandler;
+import mezz.jei.api.recipe.IRecipeWrapper;
+import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.common.integration.jei.ChiselRecipeHandler.CarvingGroupWrapper;
 
-    @Nonnull
-    @Override
-    public Class<CarvingUtils.SimpleCarvingGroup> getRecipeClass()
-    {
-        return CarvingUtils.SimpleCarvingGroup.class;
+public class ChiselRecipeHandler implements IRecipeHandler<CarvingGroupWrapper> {
+
+    @AllArgsConstructor
+    public static class CarvingGroupWrapper implements ICarvingGroup {
+
+        @Delegate
+        private ICarvingGroup group;
     }
 
     @Nonnull
     @Override
-    public String getRecipeCategoryUid()
-    {
+    public Class<CarvingGroupWrapper> getRecipeClass() {
+        return CarvingGroupWrapper.class;
+    }
+
+    @Nonnull
+    @Override
+    public String getRecipeCategoryUid() {
         return "chisel.chiseling";
     }
 
     @Nonnull
     @Override
-    public IRecipeWrapper getRecipeWrapper(CarvingUtils.SimpleCarvingGroup recipe)
-    {
+    public IRecipeWrapper getRecipeWrapper(CarvingGroupWrapper recipe) {
         return new ChiselRecipeWrapper(recipe);
     }
 
     @Override
-    public boolean isRecipeValid(CarvingUtils.SimpleCarvingGroup recipe)
-    {
+    public boolean isRecipeValid(CarvingGroupWrapper recipe) {
         return true;
     }
 }
