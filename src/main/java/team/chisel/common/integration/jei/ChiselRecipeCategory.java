@@ -17,8 +17,7 @@ public class ChiselRecipeCategory implements IRecipeCategory {
     private IDrawable background;
 
     public ChiselRecipeCategory(IGuiHelper guiHelper) {
-        ResourceLocation location = new ResourceLocation("chisel", "textures/chiselJEI.png");
-        this.background = guiHelper.createDrawable(location, 0, 0, 170, 166);
+        this.background = guiHelper.createDrawable(new ResourceLocation("chisel", "textures/chiselJEI.png"), 0, 0, 165, 126);
     }
 
     @Nonnull
