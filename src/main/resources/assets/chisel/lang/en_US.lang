@@ -63,23 +63,23 @@ tile.chisel.valentines.0.desc.1=Valentines Bricks
 tile.chisel.valentines.1.desc.1=If it speaks, I wouldn't touch it
 
 #AntiBlocks
-tile.chisel.antiBlock.name=Anti Block
-tile.chisel.antiBlock.black.desc.1=Black Anti Block
-tile.chisel.antiBlock.blue.desc.1=Blue Anti Block
-tile.chisel.antiBlock.brown.desc.1=Brown Anti Block
-tile.chisel.antiBlock.cyan.desc.1=Cyan Anti Block
-tile.chisel.antiBlock.green.desc.1=Green Anti Block
-tile.chisel.antiBlock.light_blue.desc.1=Light Blue Anti Block
-tile.chisel.antiBlock.silver.desc.1=Light Gray Anti Block
-tile.chisel.antiBlock.lime.desc.1=Lime Anti Block
-tile.chisel.antiBlock.magenta.desc.1=Magenta Anti Block
-tile.chisel.antiBlock.orange.desc.1=Orange Anti Block
-tile.chisel.antiBlock.pink.desc.1=Pink Anti Block
-tile.chisel.antiBlock.purple.desc.1=Purple Anti Block
-tile.chisel.antiBlock.red.desc.1=Red Anti Block
-tile.chisel.antiBlock.white.desc.1=White Anti Block
-tile.chisel.antiBlock.yellow.desc.1=Yellow Anti Block
-tile.chisel.antiBlock.gray.desc.1=Gray Anti Block
+tile.chisel.antiblock.name=Anti Block
+tile.chisel.antiblock.black.desc.1=Black Anti Block
+tile.chisel.antiblock.blue.desc.1=Blue Anti Block
+tile.chisel.antiblock.brown.desc.1=Brown Anti Block
+tile.chisel.antiblock.cyan.desc.1=Cyan Anti Block
+tile.chisel.antiblock.green.desc.1=Green Anti Block
+tile.chisel.antiblock.light_blue.desc.1=Light Blue Anti Block
+tile.chisel.antiblock.silver.desc.1=Light Gray Anti Block
+tile.chisel.antiblock.lime.desc.1=Lime Anti Block
+tile.chisel.antiblock.magenta.desc.1=Magenta Anti Block
+tile.chisel.antiblock.orange.desc.1=Orange Anti Block
+tile.chisel.antiblock.pink.desc.1=Pink Anti Block
+tile.chisel.antiblock.purple.desc.1=Purple Anti Block
+tile.chisel.antiblock.red.desc.1=Red Anti Block
+tile.chisel.antiblock.white.desc.1=White Anti Block
+tile.chisel.antiblock.yellow.desc.1=Yellow Anti Block
+tile.chisel.antiblock.gray.desc.1=Gray Anti Block
 
 #Diorite
 tile.chisel.diorite.name=Diorite
@@ -151,6 +151,7 @@ tile.chisel.leaves.12.desc.1=Christmas Lights
 
 #Void Stone Blocks
 tile.chisel.voidstone.name=Voidstone
+tile.chisel.energizedVoidstone.name=Energized Voidstone
 tile.chisel.voidstone.0.desc.1=Raw Voidstone
 tile.chisel.voidstone.1.desc.1=Large Voidstone Tiles
 tile.chisel.voidstone.2.desc.1=Smooth Voidstone
@@ -236,6 +237,60 @@ tile.chisel.thaumium.2.desc.1=Bricks
 tile.chisel.thaumium.3.desc.1=Small Tiles
 tile.chisel.thaumium.4.desc.1=Lattice
 tile.chisel.thaumium.5.desc.1=Bounded Planks
+
+#Bird Stone
+tile.chisel.birdstone.name=Birdstone
+
+#Certus Quartz
+tile.chisel.certus.name=Block of Certus Quartz
+
+#Crag Rock
+tile.chisel.cragRock.name=Crag Rock
+
+#Dreamwood Planks
+tile.chisel.dreamwood-planks.name=Dreamwood Planks
+
+#Dreamwood
+tile.chisel.dreamwood-raw=Dreamwood
+
+#Livingwood Planks
+tile.chisel.livingwood-planks.name=Livingwood Planks
+
+#Dyed glass
+tile.chisel.glassdyed.name=Stained Glass
+
+#Ender pearl
+tile.chisel.ender_pearl_block.name=Ender Pearl Block
+
+#Mazestone
+tile.chisel.mazestone.name=Mazestone
+
+#Mechanical
+tile.chisel.mechanical2.name=Mechanical Block
+
+#Military
+tile.chisel.military.name=Military Block
+
+#Prismarine
+tile.chisel.prismarine.name=Prismarine
+
+#Pumpkin
+tile.chisel.pumpkin.name=Pumpkin
+
+#Quartz
+tile.chisel.quartz.name=Block of Quartz
+
+#Redstone Lamp
+tile.chisel.redstoneLamp.name=Redstone Lamp
+
+#Sandsnake
+tile.chisel.sandsnake.name=Sandsnake
+
+#Sandstone Scribbles
+tile.chisel.sandstone-scribbles.name=Sandstone Scribbles
+
+#Snakestone
+tile.chisel.snake.name=Snakestone
 
 #Tallow
 tile.chisel.tallow.name=Block of Tallow
@@ -354,7 +409,7 @@ tile.chisel.technical3.1.desc.1=Industrial Armor Plating
 tile.chisel.technical4.0.desc.1=Corroded Metal Chunks
 tile.chisel.technical4.1.desc.1=Rusted Metal Chunks
 tile.chisel.technical4.2.desc.1=Sturdy
-tile.chisel.technical4.3.desc.1=MegaCell™ Battery
+tile.chisel.technical4.3.desc.1=MegaCellï¿½ Battery
 tile.chisel.technical4.4.desc.1=Thermal Exhaust Plating
 tile.chisel.technical4.5.desc.1=Makeshift Plating
 tile.chisel.technical4.6.desc.1=Pipe Dream
@@ -362,47 +417,55 @@ tile.chisel.technical4.7.desc.1=Worn Concrete
 tile.chisel.technical4.16.desc.1=Tape Drive? (I'm too young for this.)
 
 #End Stone
-tile.chisel.end_Stone.name=End Stone
-tile.chisel.end_Stone.0.desc.1=End Stone Bricks
-tile.chisel.end_Stone.1.desc.1=End Chaotic Bricks
-tile.chisel.end_Stone.2.desc.1=Checkered Tiles
-tile.chisel.end_Stone.3.desc.1=Ender Circuit
-tile.chisel.end_Stone.4.desc.1=Fancy Bricks
-tile.chisel.end_Stone.5.desc.1=End Stone Pillar
-tile.chisel.end_Stone.6.desc.1=Etched End Stone
-tile.chisel.end_Stone.7.desc.1=Prismatic End Stone
-tile.chisel.end_Stone.8.desc.1=End Stone Chunk
-tile.chisel.end_Stone.9.desc.1=Framed End Stone Chunk
-tile.chisel.end_Stone.10.desc.1=Arcane Block of End Stone
-tile.chisel.end_Stone.11.desc.1=Framed End Stone
-tile.chisel.end_Stone.12.desc.1=Ornate End Stone
-tile.chisel.end_Stone.13.desc.1=End Stone Large Tile
+tile.chisel.endstone.name=End Stone
+tile.chisel.endstone.0.desc.1=End Stone Bricks
+tile.chisel.endstone.1.desc.1=End Chaotic Bricks
+tile.chisel.endstone.2.desc.1=Checkered Tiles
+tile.chisel.endstone.3.desc.1=Ender Circuit
+tile.chisel.endstone.4.desc.1=Fancy Bricks
+tile.chisel.endstone.5.desc.1=End Stone Pillar
+tile.chisel.endstone.6.desc.1=Etched End Stone
+tile.chisel.endstone.7.desc.1=Prismatic End Stone
+tile.chisel.endstone.8.desc.1=End Stone Chunk
+tile.chisel.endstone.9.desc.1=Framed End Stone Chunk
+tile.chisel.endstone.10.desc.1=Arcane Block of End Stone
+tile.chisel.endstone.11.desc.1=Framed End Stone
+tile.chisel.endstone.12.desc.1=Ornate End Stone
+tile.chisel.endstone.13.desc.1=End Stone Large Tile
 
 #Purpur
-tile.chisel.purpur.name=Purpur Block
-tile.chisel.purpur.0.desc.1=Medium Tiles
-tile.chisel.purpur.1.desc.1=Pillar
-tile.chisel.purpur.2.desc.1=Not Shulker
-tile.chisel.purpur.3.desc.1=Small Tiles
-tile.chisel.purpur.4.desc.1=Broken Small Tiles
-tile.chisel.purpur.5.desc.1=Prismatic Purpur
-tile.chisel.purpur.6.desc.1=Rough Bricks
-tile.chisel.purpur.7.desc.1=Cracked Surface
-tile.chisel.purpur.8.desc.1=Arcane Block of Purpur
-tile.chisel.purpur.9.desc.1=Purpur Large Tile
-tile.chisel.purpur.10.desc.1=Ornate Purpur
+tile.chisel.end_purpur.name=Purpur Block
+tile.chisel.end_purpur.0.desc.1=Medium Tiles
+tile.chisel.end_purpur.1.desc.1=Pillar
+tile.chisel.end_purpur.2.desc.1=Not Shulker
+tile.chisel.end_purpur.3.desc.1=Small Tiles
+tile.chisel.end_purpur.4.desc.1=Broken Small Tiles
+tile.chisel.end_purpur.5.desc.1=Prismatic Purpur
+tile.chisel.end_purpur.6.desc.1=Rough Bricks
+tile.chisel.end_purpur.7.desc.1=Cracked Surface
+tile.chisel.end_purpur.8.desc.1=Arcane Block of Purpur
+tile.chisel.end_purpur.9.desc.1=Purpur Large Tile
+tile.chisel.end_purpur.10.desc.1=Ornate Purpur
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
-tile.chisel.bronzeblock.name=Block of Bronze
-tile.chisel.copperblock.name=Block of Copper
-tile.chisel.gold2.name=Block of Gold
-tile.chisel.iron2.name=Block of Iron
-tile.chisel.leadblock.name=Block of Lead
-tile.chisel.silverblock.name=Block of Silver
-tile.chisel.steelblock.name=Block of Steel
-tile.chisel.tinblock.name=Block of Tin
-tile.chisel.uraniumblock.name=Block of Uranium
+tile.chisel.bronze.name=Block of Bronze
+tile.chisel.copper.name=Block of Copper
+tile.chisel.cobalt.name=Block of Cobalt
+tile.chisel.nickel.name=Block of Nickel
+tile.chisel.platinum.name=Block of Platinum
+tile.chisel.electrum.name=Block of Electrum
+tile.chisel.elementium.name=Block of Elementium
+tile.chisel.manasteel.name=Block of Manasteel
+tile.chisel.terrasteel.name=Block of Terrasteel
+tile.chisel.invar.name=Block of Invar
+tile.chisel.gold.name=Block of Gold
+tile.chisel.iron.name=Block of Iron
+tile.chisel.lead.name=Block of Lead
+tile.chisel.silver.name=Block of Silver
+tile.chisel.steel.name=Block of Steel
+tile.chisel.tin.name=Block of Tin
+tile.chisel.uranium.name=Block of Uranium
 tile.chisel.metalOre.0.desc.1=Caution Stripes
 tile.chisel.metalOre.1.desc.1=Shipping Crate
 tile.chisel.metalOre.2.desc.1=Thermal
@@ -484,7 +547,7 @@ tile.chisel.marbleSlab.14.desc.1=Fancy Marble Tiled Slab
 tile.chisel.marbleSlab.15.desc.1=Marble Blocks Slab
 
 #Marble Pillars (old)
-tile.chisel.marble_pillar.name=Marble Pillar
+tile.chisel.marblepillar.name=Marble Pillar
 tile.chisel.marblePillarOld.0.desc.1=Marble Pillar
 tile.chisel.marblePillarOld.1.desc.1=Marble Pillar Capstone
 tile.chisel.marblePillarOld.2.desc.1=Marble Pillar Base
@@ -656,7 +719,7 @@ tile.chisel.limestoneStairs.14.desc.1=Limestone Stairs with Light Panel
 tile.chisel.limestoneStairs.15.desc.1=Limestone Stairs with Dark Panel
 
 #Factory Blocks
-tile.chisel.factoryblock.name=Factory Block
+tile.chisel.factory.name=Factory Block
 tile.chisel.factory.0.desc.1=Rusty Metal Plate with Dotted Pattern
 tile.chisel.factory.1.desc.1=Rusty Metal Plate
 tile.chisel.factory.2.desc.1=Very Rusty Metal Plate
@@ -681,7 +744,7 @@ tile.chisel.factory2.2.desc.1=Metallic Blue Circuit Plating
 tile.chisel.factory2.3.desc.1=Blue Wireframing
 
 #Diamond blocks
-tile.chisel.diamond_block.name=Diamond Block
+tile.chisel.diamond.name=Diamond Block
 tile.chisel.diamond.1.desc.1=Embossed Diamond Block
 tile.chisel.diamond.2.desc.1=Diamond Block with Panel
 tile.chisel.diamond.3.desc.1=Diamond Cells
@@ -803,7 +866,7 @@ tile.chisel.gold.13.desc.1=Golden Star in Obsidian
 tile.chisel.gold.14.desc.1=Simple Gold Block
 
 #Glowstone
-tile.chisel.glowstone.name=Glowstone
+tile.chisel.lightstone.name=Glowstone
 tile.chisel.lightstone.1.desc.1=Cobble Glowstone Block
 tile.chisel.lightstone.2.desc.1=Corroded Glowstone Blocks
 tile.chisel.lightstone.3.desc.1=Glowstone Blocks with Glass
@@ -821,7 +884,7 @@ tile.chisel.lightstone.14.desc.1=Glowstone Bismuth
 tile.chisel.lightstone.15.desc.1=Glowstone Bismuth Panel
 
 #Lapis blocks
-tile.chisel.lapis_block.name=Lapis Block
+tile.chisel.lapis.name=Lapis Block
 tile.chisel.lapis.1.desc.1=Chunky Lapis Block
 tile.chisel.lapis.2.desc.1=Dark Lapis Block
 tile.chisel.lapis.3.desc.1=Zelda Lapis Block
@@ -832,7 +895,7 @@ tile.chisel.lapis.7.desc.1=Smooth Lapis
 tile.chisel.lapis.8.desc.1=Lapis with Ornate Layer
 
 #Emerald Blocks
-tile.chisel.emerald_block.name=Emerald Block
+tile.chisel.emerald.name=Emerald Block
 tile.chisel.emerald.1.desc.1=Emerald Panel
 tile.chisel.emerald.2.desc.1=Classic emerald Panel
 tile.chisel.emerald.3.desc.1=Smooth Emerald
@@ -846,7 +909,7 @@ tile.chisel.emerald.10.desc.1=Small Ornate Emerald Blocks
 tile.chisel.emerald.11.desc.1=Ornate Emerald Block
 
 #Nether Brick
-tile.chisel.nether_brick.name=Nether Brick
+tile.chisel.netherbrick.name=Nether Brick
 tile.chisel.netherBrick.1.desc.1=Blue Nether Brick
 tile.chisel.netherBrick.2.desc.1=Spattered Nether Brick
 tile.chisel.netherBrick.3.desc.1=Nether Brick made of Guts
@@ -881,7 +944,7 @@ tile.chisel.hellrock.13.desc.1=Dark Red Netherrack
 tile.chisel.hellrock.14.desc.1=Netherrack with Flowing Lava
 
 #Mossy Stone
-tile.chisel.mossy_cobblestone.name=Mossy Cobblestone
+tile.chisel.cobblestonemossy.name=Mossy Cobblestone
 tile.chisel.stoneMoss.1.desc.1=Aligned Mossy Cobblestone Bricks
 tile.chisel.stoneMoss.2.desc.1=Detailed Mossy Cobblestone Bricks
 tile.chisel.stoneMoss.3.desc.1=Small Mossy Cobblestone Bricks
@@ -899,23 +962,23 @@ tile.chisel.stoneMoss.14.desc.1=Mossy Cobblestone with Light Panel
 tile.chisel.stoneMoss.15.desc.1=Mossy Cobblestone with Dark Panel
 
 #Stone Bricks
-tile.chisel.stonebricksmooth.name=Stone Bricks
-tile.chisel.stonebricksmooth.0.desc.1=Modern Neutral Masonry
-tile.chisel.stonebricksmooth.1.desc.1=Modern Felsic Masonry
-tile.chisel.stonebricksmooth.2.desc.1=Modern Mafic Masonry
-tile.chisel.stonebricksmooth.3.desc.1=Modern Mixed Masonry
-tile.chisel.stonebricksmooth.4.desc.1=Small Stone Bricks
-tile.chisel.stonebricksmooth.5.desc.1=Wide Stone Bricks
-tile.chisel.stonebricksmooth.6.desc.1=Small Disordered Stone Bricks
-tile.chisel.stonebricksmooth.7.desc.1=Disordered Stone Bricks
-tile.chisel.stonebricksmooth.8.desc.1=Disordered Stone Panels
-tile.chisel.stonebricksmooth.9.desc.1=Stone Bricks in a Fancy Arrangement
-tile.chisel.stonebricksmooth.10.desc.1=Ornate Stone Brick tiles
-tile.chisel.stonebricksmooth.11.desc.1=Large Ornate Stone Brick Tiles
-tile.chisel.stonebricksmooth.12.desc.1=Stone Panel
-tile.chisel.stonebricksmooth.13.desc.1=Sunken Stone Panel
-tile.chisel.stonebricksmooth.14.desc.1=Ornate Stone Panel
-tile.chisel.stonebricksmooth.15.desc.1=Poison Stone Brick
+tile.chisel.stonebrick.name=Stone Bricks
+tile.chisel.stonebrick.0.desc.1=Modern Neutral Masonry
+tile.chisel.stonebrick.1.desc.1=Modern Felsic Masonry
+tile.chisel.stonebrick.2.desc.1=Modern Mafic Masonry
+tile.chisel.stonebrick.3.desc.1=Modern Mixed Masonry
+tile.chisel.stonebrick.4.desc.1=Small Stone Bricks
+tile.chisel.stonebrick.5.desc.1=Wide Stone Bricks
+tile.chisel.stonebrick.6.desc.1=Small Disordered Stone Bricks
+tile.chisel.stonebrick.7.desc.1=Disordered Stone Bricks
+tile.chisel.stonebrick.8.desc.1=Disordered Stone Panels
+tile.chisel.stonebrick.9.desc.1=Stone Bricks in a Fancy Arrangement
+tile.chisel.stonebrick.10.desc.1=Ornate Stone Brick tiles
+tile.chisel.stonebrick.11.desc.1=Large Ornate Stone Brick Tiles
+tile.chisel.stonebrick.12.desc.1=Stone Panel
+tile.chisel.stonebrick.13.desc.1=Sunken Stone Panel
+tile.chisel.stonebrick.14.desc.1=Ornate Stone Panel
+tile.chisel.stonebrick.15.desc.1=Poison Stone Brick
 
 #Dirt
 tile.chisel.dirt.name=Dirt
@@ -952,7 +1015,7 @@ tile.chisel.ice.14.desc.1=Ice Bismuth Block
 tile.chisel.ice.15.desc.1=Ice Poison Block
 
 #Ice Pillars
-tile.chisel.ice_pillar.name=Ice Pillar
+tile.chisel.icepillar.name=Ice Pillar
 tile.chisel.icePillar.0.desc.1=Plain Ice Pillar with Plain Capstone
 tile.chisel.icePillar.1.desc.1=Plain Ice Pillar with Greek Capstone
 tile.chisel.icePillar.2.desc.1=Greek Ice Pillar with Plain Capstone
@@ -1062,12 +1125,12 @@ tile.chisel.obsidian.14.desc.1=Light Obsidian Blocks with Greek Decor
 tile.chisel.obsidian.15.desc.1=Small Obsidian Blocks inside an Oak Wood Crate
 
 #Wood
-tile.chisel.oak_planks.name=Oak Wood Planks
-tile.chisel.birch_planks.name=Birch Wood Planks
-tile.chisel.spruce_planks.name=Spruce Wood Planks
-tile.chisel.jungle_planks.name=Jungle Wood Planks
-tile.chisel.dark_oak_planks.name=Dark Oak Wood Planks
-tile.chisel.acacia_planks.name=Acacia Wood Planks
+tile.chisel.planks-oak.name=Oak Wood Planks
+tile.chisel.planks-birch.name=Birch Wood Planks
+tile.chisel.planks-spruce.name=Spruce Wood Planks
+tile.chisel.planks-jungle.name=Jungle Wood Planks
+tile.chisel.planks-dark-oak.name=Dark Oak Wood Planks
+tile.chisel.planks-acacia.name=Acacia Wood Planks
 
 #Iron Fence
 tile.chisel.iron_bars.name=Iron Bars
@@ -1093,22 +1156,22 @@ tile.chisel.glass_pane.14.desc.1=Japanese Glass Pane
 tile.chisel.glass_pane.15.desc.1=Ornate Japanese Glass Pane
 
 #Redstone block
-tile.chisel.redstone_block.name=Redstone Block
-tile.chisel.redstone_block.1.desc.1=Smooth Redstone
-tile.chisel.redstone_block.2.desc.1=Large Redstone Block
-tile.chisel.redstone_block.3.desc.1=Small Redstone Block
-tile.chisel.redstone_block.4.desc.1=Redstone Bricks
-tile.chisel.redstone_block.5.desc.1=Small Redstone Bricks
-tile.chisel.redstone_block.6.desc.1=Chaotic Redstone Bricks
-tile.chisel.redstone_block.7.desc.1=Chiseled Redstone
-tile.chisel.redstone_block.8.desc.1=Redstone Greek Decoration
-tile.chisel.redstone_block.9.desc.1=Ornate Redstone Tiles
-tile.chisel.redstone_block.10.desc.1=Redstone Pillar
-tile.chisel.redstone_block.11.desc.1=Redstone Tiles
-tile.chisel.redstone_block.12.desc.1=Redstone Circuit
-tile.chisel.redstone_block.13.desc.1=Redstone Supaplex Circuit
-tile.chisel.redstone_block.14.desc.1=Redstone Skulls
-tile.chisel.redstone_block.15.desc.1=Redstone Zelda Block
+tile.chisel.redstone.name=Redstone Block
+tile.chisel.redstone.1.desc.1=Smooth Redstone
+tile.chisel.redstone.2.desc.1=Large Redstone Block
+tile.chisel.redstone.3.desc.1=Small Redstone Block
+tile.chisel.redstone.4.desc.1=Redstone Bricks
+tile.chisel.redstone.5.desc.1=Small Redstone Bricks
+tile.chisel.redstone.6.desc.1=Chaotic Redstone Bricks
+tile.chisel.redstone.7.desc.1=Chiseled Redstone
+tile.chisel.redstone.8.desc.1=Redstone Greek Decoration
+tile.chisel.redstone.9.desc.1=Ornate Redstone Tiles
+tile.chisel.redstone.10.desc.1=Redstone Pillar
+tile.chisel.redstone.11.desc.1=Redstone Tiles
+tile.chisel.redstone.12.desc.1=Redstone Circuit
+tile.chisel.redstone.13.desc.1=Redstone Supaplex Circuit
+tile.chisel.redstone.14.desc.1=Redstone Skulls
+tile.chisel.redstone.15.desc.1=Redstone Zelda Block
 
 #Holystone
 tile.chisel.holystone.name=Holystone
@@ -1179,7 +1242,7 @@ tile.chisel.carpet.15.desc.1=Black Carpet
 #Bookshelf
 tile.chisel.bookshelf.name=Bookshelf
 tile.chisel.bookshelf.1.desc.1=Bookshelf with Rainbow Books
-tile.chisel.bookshelf.2.desc.1=Necromancer’s Apprentice Bookshelf
+tile.chisel.bookshelf.2.desc.1=Necromancerï¿½s Apprentice Bookshelf
 tile.chisel.bookshelf.3.desc.1=Necromancer's Bookshelf
 tile.chisel.bookshelf.4.desc.1=Bookshelf with Red Tomes
 tile.chisel.bookshelf.5.desc.1=Abandoned Bookshelf
@@ -1207,42 +1270,42 @@ tile.chisel.tyrian.14.desc.1=Black Futuristic Armor Plating Block with Opening
 tile.chisel.tyrian.15.desc.1=Shiny Futuristic Armor Plating
 
 #Temple
-tile.chisel.templeblock.name=Temple Block
-tile.chisel.templeblock.0.desc.1=Temple Cobblestone
-tile.chisel.templeblock.1.desc.1=Ornate Temple Block
-tile.chisel.templeblock.2.desc.1=Temple Plate
-tile.chisel.templeblock.3.desc.1=Cracked Temple Plate
-tile.chisel.templeblock.4.desc.1=Temple Bricks
-tile.chisel.templeblock.5.desc.1=Large Temple Bricks
-tile.chisel.templeblock.6.desc.1=Worn Temple Bricks
-tile.chisel.templeblock.7.desc.1=Temple Bricks in disarray
-tile.chisel.templeblock.8.desc.1=Temple Column
-tile.chisel.templeblock.9.desc.1=Temple Stand
-tile.chisel.templeblock.10.desc.1=Temple Mosaic Stand
-tile.chisel.templeblock.11.desc.1=Temple Creeper Stand
-tile.chisel.templeblock.12.desc.1=Temple Tiles
-tile.chisel.templeblock.13.desc.1=Small Temple Tiles
-tile.chisel.templeblock.14.desc.1=Light Temple Tiles
-tile.chisel.templeblock.15.desc.1=Small Light Temple Tiles
+tile.chisel.temple.name=Temple Block
+tile.chisel.temple.0.desc.1=Temple Cobblestone
+tile.chisel.temple.1.desc.1=Ornate Temple Block
+tile.chisel.temple.2.desc.1=Temple Plate
+tile.chisel.temple.3.desc.1=Cracked Temple Plate
+tile.chisel.temple.4.desc.1=Temple Bricks
+tile.chisel.temple.5.desc.1=Large Temple Bricks
+tile.chisel.temple.6.desc.1=Worn Temple Bricks
+tile.chisel.temple.7.desc.1=Temple Bricks in disarray
+tile.chisel.temple.8.desc.1=Temple Column
+tile.chisel.temple.9.desc.1=Temple Stand
+tile.chisel.temple.10.desc.1=Temple Mosaic Stand
+tile.chisel.temple.11.desc.1=Temple Creeper Stand
+tile.chisel.temple.12.desc.1=Temple Tiles
+tile.chisel.temple.13.desc.1=Small Temple Tiles
+tile.chisel.temple.14.desc.1=Light Temple Tiles
+tile.chisel.temple.15.desc.1=Small Light Temple Tiles
 
 #Temple Mossy
-tile.chisel.mossy_templeblock.name=Mossy Temple Block
-tile.chisel.mossy_templeblock.0.desc.1=Mossy Temple Cobblestone
-tile.chisel.mossy_templeblock.1.desc.1=Ornate Mossy Temple Block
-tile.chisel.mossy_templeblock.2.desc.1=Mossy Temple Plate
-tile.chisel.mossy_templeblock.3.desc.1=Cracked Mossy Temple Plate
-tile.chisel.mossy_templeblock.4.desc.1=Mossy Temple Bricks
-tile.chisel.mossy_templeblock.5.desc.1=Large Mossy Temple Bricks
-tile.chisel.mossy_templeblock.6.desc.1=Worn Mossy Temple Bricks
-tile.chisel.mossy_templeblock.7.desc.1=Mossy Temple Bricks in disarray
-tile.chisel.mossy_templeblock.8.desc.1=Mossy Temple Column
-tile.chisel.mossy_templeblock.9.desc.1=Mossy Temple Stand
-tile.chisel.mossy_templeblock.10.desc.1=Mossy Temple Mosaic Stand
-tile.chisel.mossy_templeblock.11.desc.1=Mossy Temple Creeper Stand
-tile.chisel.mossy_templeblock.12.desc.1=Mossy Temple Tiles
-tile.chisel.mossy_templeblock.13.desc.1=Small Mossy Temple Tiles
-tile.chisel.mossy_templeblock.14.desc.1=Light Mossy Temple Tiles
-tile.chisel.mossy_templeblock.15.desc.1=Small Light Mossy Temple Tiles
+tile.chisel.templemossy.name=Mossy Temple Block
+tile.chisel.templemossy.0.desc.1=Mossy Temple Cobblestone
+tile.chisel.templemossy.1.desc.1=Ornate Mossy Temple Block
+tile.chisel.templemossy.2.desc.1=Mossy Temple Plate
+tile.chisel.templemossy.3.desc.1=Cracked Mossy Temple Plate
+tile.chisel.templemossy.4.desc.1=Mossy Temple Bricks
+tile.chisel.templemossy.5.desc.1=Large Mossy Temple Bricks
+tile.chisel.templemossy.6.desc.1=Worn Mossy Temple Bricks
+tile.chisel.templemossy.7.desc.1=Mossy Temple Bricks in disarray
+tile.chisel.templemossy.8.desc.1=Mossy Temple Column
+tile.chisel.templemossy.9.desc.1=Mossy Temple Stand
+tile.chisel.templemossy.10.desc.1=Mossy Temple Mosaic Stand
+tile.chisel.templemossy.11.desc.1=Mossy Temple Creeper Stand
+tile.chisel.templemossy.12.desc.1=Mossy Temple Tiles
+tile.chisel.templemossy.13.desc.1=Small Mossy Temple Tiles
+tile.chisel.templemossy.14.desc.1=Light Mossy Temple Tiles
+tile.chisel.templemossy.15.desc.1=Small Light Mossy Temple Tiles
 
 #Cloud
 tile.chisel.cloud.name=Cloud
@@ -1290,42 +1353,42 @@ tile.chisel.stained_glass_pane_red.name=Stained Glass Pane
 tile.chisel.stained_glass_pane_black.name=Stained Glass Pane
 
 #Fantasy block
-tile.chisel.fantasyblock.name=Purpled Fantasy Block
-tile.chisel.fantasyblock.0.desc.1=Purpled Fantasy Brick
-tile.chisel.fantasyblock.1.desc.1=Purpled Faded Fantasy Brick
-tile.chisel.fantasyblock.2.desc.1=Purpled Worn Fantasy Brick
-tile.chisel.fantasyblock.3.desc.1=Purpled Damaged Fantasy Bricks
-tile.chisel.fantasyblock.4.desc.1=Purpled Fantasy Decoration
-tile.chisel.fantasyblock.5.desc.1=Purpled Fantasy Decoration Block
-tile.chisel.fantasyblock.6.desc.1=Purpled Fantasy Pillar
-tile.chisel.fantasyblock.7.desc.1=Purpled Fantasy Pillar Decoration
-tile.chisel.fantasyblock.8.desc.1=Purpled Fantasy Gold Snake Decoration
-tile.chisel.fantasyblock.9.desc.1=Purpled Fantasy Gold Noise Decoration
-tile.chisel.fantasyblock.10.desc.1=Purpled Fantasy Gold Engravings Decoration
-tile.chisel.fantasyblock.11.desc.1=Purpled Fantasy Gold Chains Decoration
-tile.chisel.fantasyblock.12.desc.1=Purpled Fantasy Plate Decoration
-tile.chisel.fantasyblock.13.desc.1=Purpled Fantasy Block
-tile.chisel.fantasyblock.14.desc.1=Purpled Fantasy Bricks in disarray
-tile.chisel.fantasyblock.15.desc.1=Purpled Worn Fantasy Bricks in disarray
+tile.chisel.fantasy.name=Purpled Fantasy Block
+tile.chisel.fantasy.0.desc.1=Purpled Fantasy Brick
+tile.chisel.fantasy.1.desc.1=Purpled Faded Fantasy Brick
+tile.chisel.fantasy.2.desc.1=Purpled Worn Fantasy Brick
+tile.chisel.fantasy.3.desc.1=Purpled Damaged Fantasy Bricks
+tile.chisel.fantasy.4.desc.1=Purpled Fantasy Decoration
+tile.chisel.fantasy.5.desc.1=Purpled Fantasy Decoration Block
+tile.chisel.fantasy.6.desc.1=Purpled Fantasy Pillar
+tile.chisel.fantasy.7.desc.1=Purpled Fantasy Pillar Decoration
+tile.chisel.fantasy.8.desc.1=Purpled Fantasy Gold Snake Decoration
+tile.chisel.fantasy.9.desc.1=Purpled Fantasy Gold Noise Decoration
+tile.chisel.fantasy.10.desc.1=Purpled Fantasy Gold Engravings Decoration
+tile.chisel.fantasy.11.desc.1=Purpled Fantasy Gold Chains Decoration
+tile.chisel.fantasy.12.desc.1=Purpled Fantasy Plate Decoration
+tile.chisel.fantasy.13.desc.1=Purpled Fantasy Block
+tile.chisel.fantasy.14.desc.1=Purpled Fantasy Bricks in disarray
+tile.chisel.fantasy.15.desc.1=Purpled Worn Fantasy Bricks in disarray
 
 #Fantasy block 2
-tile.chisel.fantasyblock2.name=Fantasy Block
-tile.chisel.fantasyblock2.0.desc.1=Fantasy Brick
-tile.chisel.fantasyblock2.1.desc.1=Faded Fantasy Brick
-tile.chisel.fantasyblock2.2.desc.1=Worn Fantasy Brick
-tile.chisel.fantasyblock2.3.desc.1=Damaged Fantasy Bricks
-tile.chisel.fantasyblock2.4.desc.1=Fantasy Decoration
-tile.chisel.fantasyblock2.5.desc.1=Fantasy Decoration Block
-tile.chisel.fantasyblock2.6.desc.1=Fantasy Pillar
-tile.chisel.fantasyblock2.7.desc.1=Fantasy Pillar Decoration
-tile.chisel.fantasyblock2.8.desc.1=Fantasy Gold Snake Decoration
-tile.chisel.fantasyblock2.9.desc.1=Fantasy Gold Noise Decoration
-tile.chisel.fantasyblock2.10.desc.1=Fantasy Gold Engravings Decoration
-tile.chisel.fantasyblock2.11.desc.1=Fantasy Gold Chains Decoration
-tile.chisel.fantasyblock2.12.desc.1=Fantasy Plate Decoration
-tile.chisel.fantasyblock2.13.desc.1=Fantasy Block
-tile.chisel.fantasyblock2.14.desc.1=Fantasy Bricks in disarray
-tile.chisel.fantasyblock2.15.desc.1=Worn Fantasy Bricks in disarray
+tile.chisel.fantasy2.name=Fantasy Block
+tile.chisel.fantasy2.0.desc.1=Fantasy Brick
+tile.chisel.fantasy2.1.desc.1=Faded Fantasy Brick
+tile.chisel.fantasy2.2.desc.1=Worn Fantasy Brick
+tile.chisel.fantasy2.3.desc.1=Damaged Fantasy Bricks
+tile.chisel.fantasy2.4.desc.1=Fantasy Decoration
+tile.chisel.fantasy2.5.desc.1=Fantasy Decoration Block
+tile.chisel.fantasy2.6.desc.1=Fantasy Pillar
+tile.chisel.fantasy2.7.desc.1=Fantasy Pillar Decoration
+tile.chisel.fantasy2.8.desc.1=Fantasy Gold Snake Decoration
+tile.chisel.fantasy2.9.desc.1=Fantasy Gold Noise Decoration
+tile.chisel.fantasy2.10.desc.1=Fantasy Gold Engravings Decoration
+tile.chisel.fantasy2.11.desc.1=Fantasy Gold Chains Decoration
+tile.chisel.fantasy2.12.desc.1=Fantasy Plate Decoration
+tile.chisel.fantasy2.13.desc.1=Fantasy Block
+tile.chisel.fantasy2.14.desc.1=Fantasy Bricks in disarray
+tile.chisel.fantasy2.15.desc.1=Worn Fantasy Bricks in disarray
 
 #Paperwall
 tile.chisel.paperwall.name=Paperwall
@@ -1341,7 +1404,7 @@ tile.chisel.paperwall.7.desc.1=Plain Paperwall
 tile.chisel.paperwall.8.desc.1=Door Shaped Paperwall
 
 #Woolen Clay
-tile.chisel.woolen_clay.name=Woolen Clay
+tile.chisel.woolenClay.name=Woolen Clay
 tile.chisel.woolenClay.0.desc.1=White Woolen Clay
 tile.chisel.woolenClay.1.desc.1=Orange Woolen Clay
 tile.chisel.woolenClay.2.desc.1=Magenta Woolen Clay
@@ -1360,7 +1423,7 @@ tile.chisel.woolenClay.14.desc.1=Red Woolen Clay
 tile.chisel.woolenClay.15.desc.1=Black Woolen Clay
 
 #Colored Sand
-tile.chisel.colored_sand.name=Colored Sand
+tile.chisel.coloredSand.name=Colored Sand
 tile.chisel.coloredSand.0.desc.1=White Colored Sand
 tile.chisel.coloredSand.1.desc.1=Orange Colored Sand
 tile.chisel.coloredSand.2.desc.1=Magenta Colored Sand
@@ -1379,7 +1442,7 @@ tile.chisel.coloredSand.14.desc.1=Red Colored Sand
 tile.chisel.coloredSand.15.desc.1=Black Colored Sand
 
 #Laboratory Block
-tile.chisel.laboratoryblock.name=Laboratory Block
+tile.chisel.laboratory.name=Laboratory Block
 tile.chisel.laboratory.0.desc.1=Wall Panel
 tile.chisel.laboratory.1.desc.1=Dotted Panel
 tile.chisel.laboratory.2.desc.1=Enamelled Wall
