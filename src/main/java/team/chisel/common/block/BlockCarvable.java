@@ -28,6 +28,7 @@ import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.render.IBlockRenderType;
+import team.chisel.api.render.IQuadMutator;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.BlockFaceData;
 import team.chisel.client.ClientUtil;
@@ -81,6 +82,12 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     public void setBlockFaceData(BlockFaceData data) {
         this.blockFaceData = data;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public IQuadMutator getQuadMutator(){
+        //todo finish this
     }
 
     @Override

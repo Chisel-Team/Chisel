@@ -9,9 +9,11 @@ import net.minecraft.client.renderer.block.model.BlockPartFace;
 import net.minecraft.client.renderer.block.model.BlockPartRotation;
 import net.minecraft.client.renderer.block.model.FaceBakery;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
 
+import net.minecraftforge.client.model.Attributes;
 import org.lwjgl.util.vector.Vector3f;
 
 import team.chisel.api.render.TextureSpriteCallback;
@@ -117,5 +119,21 @@ public class QuadHelper {
             realSprites[i] = sprites[i].getSprite();
         }
         return ctmBakery.makeCtmFace(side, realSprites, quads);
+    }
+
+    public static void transformQuad(BakedQuad quad, Vector3f vector, VertexFormat format){
+        for (int i = 0 ; i < 4 ; i ++){
+            int offset = i * format.getNextOffset();
+            float xPos = Float.intBitsToFloat(quad.vertexData[offset]) + vector.getX();
+            float yPos = Float.intBitsToFloat(quad.vertexData[offset + 1]) + vector.getY();
+            float zPos = Float.intBitsToFloat(quad.vertexData[offset + 1]) + vector.getZ();
+            quad.vertexData[offset] = Float.floatToIntBits(xPos);
+            quad.vertexData[offset + 1] = Float.floatToIntBits(yPos);
+            quad.vertexData[offset + 2] += Float.floatToIntBits(zPos);
+        }
+    }
+
+    public static void transformQuad(BakedQuad quad, Vector3f vector){
+        transformQuad(quad, vector, Attributes.DEFAULT_BAKED_FORMAT);
     }
 }

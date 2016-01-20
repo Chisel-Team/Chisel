@@ -3,6 +3,7 @@ package team.chisel.api.block;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import team.chisel.api.render.IQuadMutator;
 import team.chisel.client.BlockFaceData;
 
 public interface ICarvable {
@@ -46,4 +47,10 @@ public interface ICarvable {
 
     @SideOnly(Side.CLIENT)
     BlockFaceData getBlockFaceData();
+
+    /**
+     * Called to get the quad mutator, called multiple times so please cache this value
+     */
+    @SideOnly(Side.CLIENT)
+    IQuadMutator getQuadMutator();
 }
