@@ -1,5 +1,7 @@
 package team.chisel;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.BlockStone;
@@ -10,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import team.chisel.api.block.BlockCreator;
@@ -17,6 +20,7 @@ import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.api.block.VariationData;
 import team.chisel.common.block.BlockCarvable;
+import team.chisel.common.block.BlockCarvableBookshelf;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
@@ -28,7 +32,14 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "aluminumblock", provider).setParentFolder("metals/aluminum").newVariation("badGreggy").next("bolted").next("caution").next("crate").next("machine").next("scaffold").next("thermal-bottom").next("thermal").setTextureLocation("metals/aluminum/thermal-side").setTextureLocation("metals/aluminum/thermal-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "aluminumblock", provider).setParentFolder("metals/aluminum")
+            .newVariation("caution").next("crate")
+            .next("thermal")
+                .setTextureLocation("metals/aluminum/thermal-side")
+                .setTextureLocation("metals/aluminum/thermal-top", EnumFacing.UP)
+                .setTextureLocation("metals/aluminum/thermal-bottom", EnumFacing.DOWN)
+            .next("badGreggy").next("machine").next("bolted").next("scaffold")    
+            .build();
         }
     },
 
@@ -74,7 +85,10 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "antiblock", provider).newVariation("black-antiBlock").next("blue-antiBlock").next("brown-antiBlock").next("cyan-antiBlock").next("gray-antiBlock").next("green-antiBlock").next("light_blue-antiBlock").next("lime-antiBlock").next("magenta-antiBlock").next("orange-antiBlock").next("pink-antiBlock").next("purple-antiBlock").next("red-antiBlock").next("silver-antiBlock").next("white-antiBlock").next("yellow-antiBlock").build();
+            factory.newBlock(Material.rock, "antiblock", provider)
+            .newVariation("black").next("blue").next("brown").next("cyan").next("gray").next("green").next("light_blue").next("lime")
+            .next("magenta").next("orange").next("pink").next("purple").next("red").next("silver").next("white").next("yellow")
+            .build();
         }
     },
 
@@ -82,7 +96,10 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "arcane", provider).newVariation("ArcaneBorder").next("arcaneCrackAnim").next("arcaneMatrix").next("arcaneTile").next("bigBrick").next("BorderBrain").next("conduitGlowAnim").next("moonEngrave").next("moonGlowAnim").next("runes").next("runesGlow").next("runesGlowBase").next("runesGlowBase").next("runesGlowOverlay").next("runesGlowOverlay").next("singleRune").next("thaumcraftLogo").build();
+            factory.newBlock(Material.rock, "arcane", provider)
+            .newVariation("ArcaneBorder").next("arcaneCrackAnim").next("arcaneMatrix").next("arcaneTile").next("bigBrick").next("BorderBrain").next("conduitGlowAnim")
+            .next("moonEngrave").next("moonGlowAnim").next("runes").next("runesGlow").next("runesGlowBase").next("runesGlowBase").next("runesGlowOverlay").next("runesGlowOverlay")
+            .next("singleRune").next("thaumcraftLogo").build();
         }
     },
 
@@ -115,7 +132,9 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("bookshelf", Blocks.bookshelf.getDefaultState(), -1);
-            factory.newBlock(Material.rock, "bookshelf", provider).newVariation("abandoned").next("brim").next("default").next("historician").next("hoarder").next("necromancer").next("necromancer-novice").next("rainbow").next("redtomes").build();
+            factory.newBlock(Material.wood, "bookshelf", new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
+                .newVariation("abandoned").next("brim").next("default").next("historician").next("hoarder").next("necromancer").next("necromancer-novice").next("rainbow").next("redtomes")
+                .build(b -> b.setStepSound(Block.soundTypeWood).setHardness(1.5f));
         }
     },
 
@@ -605,17 +624,13 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "marblepillar", provider).newVariation("carved").next("convex").next("default").next("greekdecor").next("greekgreek").next("greekplain").next("ornamental").next("pillar").next("plaindecor").next("plaingreek").next("rough").next("simple").next("widedecor").next("widegreek").next("wideplain").build();
+            if (Configurations.oldPillars) {
+                factory.newBlock(Material.rock, "marblepillarold", provider).newVariation("a1-stoneornamental-marblegreek").setTextureLocation("marblepillarold/a1-stoneornamental-marblegreek-side").setTextureLocation("marblepillarold/a1-stoneornamental-marblegreek-top", Axis.Y).next("a1-stonepillar-greek").setTextureLocation("marblepillarold/a1-stonepillar-greek-side").setTextureLocation("marblepillarold/a1-stonepillar-greek-top", Axis.Y).next("a1-stonepillar-greekbottomgreek").setTextureLocation("marblepillarold/a1-stonepillar-greekbottomgreek-side").setTextureLocation("marblepillarold/a1-stonepillar-greekbottomgreek-top", Axis.Y).next("a1-stonepillar-greekbottomplain").setTextureLocation("marblepillarold/a1-stonepillar-greekbottomplain-side").setTextureLocation("marblepillarold/a1-stonepillar-greekbottomplain-top", Axis.Y).next("a1-stonepillar-greektopgreek").setTextureLocation("marblepillarold/a1-stonepillar-greektopgreek-side").setTextureLocation("marblepillarold/a1-stonepillar-greektopgreek-top", Axis.Y).next("a1-stonepillar-greektopplain").setTextureLocation("marblepillarold/a1-stonepillar-greektopplain-side").setTextureLocation("marblepillarold/a1-stonepillar-greektopplain-top", Axis.Y).next("a1-stonepillar-plain").setTextureLocation("marblepillarold/a1-stonepillar-plain-side").setTextureLocation("marblepillarold/a1-stonepillar-plain-top", Axis.Y).next("a1-stonepillar-plainbottomgreek").setTextureLocation("marblepillarold/a1-stonepillar-plainbottomgreek-side").setTextureLocation("marblepillarold/a1-stonepillar-plainbottomgreek-top", Axis.Y).next("a1-stonepillar-plainbottomplain").setTextureLocation("marblepillarold/a1-stonepillar-plainbottomplain-side").setTextureLocation("marblepillarold/a1-stonepillar-plainbottomplain-top", Axis.Y).next("a1-stonepillar-plaintopgreek").setTextureLocation("marblepillarold/a1-stonepillar-plaintopgreek-side").setTextureLocation("marblepillarold/a1-stonepillar-plaintopgreek-top", Axis.Y).next("a1-stonepillar-plaintopplain").setTextureLocation("marblepillarold/a1-stonepillar-plaintopplain-side").setTextureLocation("marblepillarold/a1-stonepillar-plaintopplain-top", Axis.Y).next("base").setTextureLocation("marblepillarold/base-side").setTextureLocation("marblepillarold/base-top", Axis.Y).next("capstone").setTextureLocation("marblepillarold/capstone-side").setTextureLocation("marblepillarold/capstone-top", Axis.Y).next("column").setTextureLocation("marblepillarold/column-side").setTextureLocation("marblepillarold/column-top", Axis.Y).next("pillar-carved").setTextureLocation("marblepillarold/pillar-carved-side").setTextureLocation("marblepillarold/pillar-carved-top", Axis.Y).next("small").setTextureLocation("marblepillarold/small-side").setTextureLocation("marblepillarold/small-top", Axis.Y).build();
+            } else {
+                factory.newBlock(Material.rock, "marblepillar", provider).newVariation("carved").next("convex").next("default").next("greekdecor").next("greekgreek").next("greekplain").next("ornamental").next("pillar").next("plaindecor").next("plaingreek").next("rough").next("simple").next("widedecor").next("widegreek").next("wideplain").build();
+            }
         }
     },
-
-//    MARBLEPILLAROLD {
-//
-//        @Override
-//        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newBlock(Material.rock, "marblepillarold", provider).newVariation("a1-stoneornamental-marblegreek").setTextureLocation("marblepillarold/a1-stoneornamental-marblegreek-side").setTextureLocation("marblepillarold/a1-stoneornamental-marblegreek-top", Axis.Y).next("a1-stonepillar-greek").setTextureLocation("marblepillarold/a1-stonepillar-greek-side").setTextureLocation("marblepillarold/a1-stonepillar-greek-top", Axis.Y).next("a1-stonepillar-greekbottomgreek").setTextureLocation("marblepillarold/a1-stonepillar-greekbottomgreek-side").setTextureLocation("marblepillarold/a1-stonepillar-greekbottomgreek-top", Axis.Y).next("a1-stonepillar-greekbottomplain").setTextureLocation("marblepillarold/a1-stonepillar-greekbottomplain-side").setTextureLocation("marblepillarold/a1-stonepillar-greekbottomplain-top", Axis.Y).next("a1-stonepillar-greektopgreek").setTextureLocation("marblepillarold/a1-stonepillar-greektopgreek-side").setTextureLocation("marblepillarold/a1-stonepillar-greektopgreek-top", Axis.Y).next("a1-stonepillar-greektopplain").setTextureLocation("marblepillarold/a1-stonepillar-greektopplain-side").setTextureLocation("marblepillarold/a1-stonepillar-greektopplain-top", Axis.Y).next("a1-stonepillar-plain").setTextureLocation("marblepillarold/a1-stonepillar-plain-side").setTextureLocation("marblepillarold/a1-stonepillar-plain-top", Axis.Y).next("a1-stonepillar-plainbottomgreek").setTextureLocation("marblepillarold/a1-stonepillar-plainbottomgreek-side").setTextureLocation("marblepillarold/a1-stonepillar-plainbottomgreek-top", Axis.Y).next("a1-stonepillar-plainbottomplain").setTextureLocation("marblepillarold/a1-stonepillar-plainbottomplain-side").setTextureLocation("marblepillarold/a1-stonepillar-plainbottomplain-top", Axis.Y).next("a1-stonepillar-plaintopgreek").setTextureLocation("marblepillarold/a1-stonepillar-plaintopgreek-side").setTextureLocation("marblepillarold/a1-stonepillar-plaintopgreek-top", Axis.Y).next("a1-stonepillar-plaintopplain").setTextureLocation("marblepillarold/a1-stonepillar-plaintopplain-side").setTextureLocation("marblepillarold/a1-stonepillar-plaintopplain-top", Axis.Y).next("base").setTextureLocation("marblepillarold/base-side").setTextureLocation("marblepillarold/base-top", Axis.Y).next("capstone").setTextureLocation("marblepillarold/capstone-side").setTextureLocation("marblepillarold/capstone-top", Axis.Y).next("column").setTextureLocation("marblepillarold/column-side").setTextureLocation("marblepillarold/column-top", Axis.Y).next("pillar-carved").setTextureLocation("marblepillarold/pillar-carved-side").setTextureLocation("marblepillarold/pillar-carved-top", Axis.Y).next("small").setTextureLocation("marblepillarold/small-side").setTextureLocation("marblepillarold/small-top", Axis.Y).build();
-//        }
-//    },
 
     MARBLEPILLARSLAB {
 
@@ -1141,21 +1156,20 @@ public enum Features {
             "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
 
     private static final BlockCreator<BlockCarvable> creator = BlockCarvable::new;
-    private static final BlockProvider<BlockCarvable> provider = new BlockProvider<BlockCarvable>() {
+    private static final ChiselBlockProvider<BlockCarvable> provider = new ChiselBlockProvider<>(creator, BlockCarvable.class);
+    
+    @RequiredArgsConstructor
+    private static class ChiselBlockProvider<T extends BlockCarvable> implements BlockProvider<T> {
+
+        private final BlockCreator<T> creator;
+        @Getter
+        private final Class<T> blockClass;
+        @Getter
+        private final Class<? extends ItemBlock> itemClass = ItemChiselBlock.class;
 
         @Override
-        public BlockCarvable createBlock(Material mat, int index, int maxVariation, VariationData... data) {
+        public T createBlock(Material mat, int index, int maxVariation, VariationData... data) {
             return creator.createBlock(mat, index, maxVariation, data);
-        }
-
-        @Override
-        public Class<BlockCarvable> getBlockClass() {
-            return BlockCarvable.class;
-        }
-
-        @Override
-        public Class<? extends ItemBlock> getItemClass() {
-            return ItemChiselBlock.class;
         }
     };
 
