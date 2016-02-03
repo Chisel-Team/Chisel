@@ -137,51 +137,50 @@ public enum Dir {
 	}
 
 	private EnumFacing rotate(EnumFacing facing, EnumFacing axisFacing) {
-		Axis axis = axisFacing.getAxis();
-		AxisDirection axisDir = axisFacing.getAxisDirection();
+        Axis axis = axisFacing.getAxis();
+        AxisDirection axisDir = axisFacing.getAxisDirection();
 
-		try {
-			if (axisDir == AxisDirection.POSITIVE) {
-				return facing.rotateAround(axis);
-			}
+        if (axisDir == AxisDirection.POSITIVE) {
+            return facing.rotateAround(axis);
+        }
 
-			switch (axis) {
-			case X:
-				// I did some manual testing and this is what worked...I don't get it either
-				switch (FACING_LOOKUP[facing.ordinal()]) {
-				case 1:
-					return NORTH;
-				case 2:
-				case 4:
-				default:
-					throw new IllegalStateException("Unable to get X-rotated facing of " + this);
-				case 3:
-					return SOUTH;
-				case 5:
-					return SOUTH;
-				case 6:
-					return NORTH;
-				}
-			case Y:
-				return facing.rotateYCCW();
-			case Z:
-				switch (FACING_LOOKUP[facing.ordinal()]) {
-				case 2:
-					return EAST;
-				case 3:
-				default:
-					throw new IllegalStateException("Unable to get Z-rotated facing of " + this);
-				case 4:
-					return WEST;
-				case 5:
-					return DOWN;
-				case 6:
-					return UP;
-				}
-			}
-		} catch (IllegalStateException e) {
-			// fall through
-		}
-		return facing;
+        if (facing.getAxis() != axis) {
+            switch (axis) {
+            case X:
+                // I did some manual testing and this is what worked...I don't get it either
+                switch (FACING_LOOKUP[facing.ordinal()]) {
+                case 1:
+                    return NORTH;
+                case 2:
+                case 4:
+                default:
+                    return facing; // Invalid but ignored
+                case 3:
+                    return SOUTH;
+                case 5:
+                    return SOUTH;
+                case 6:
+                    return NORTH;
+                }
+            case Y:
+                return facing.rotateYCCW();
+            case Z:
+                switch (FACING_LOOKUP[facing.ordinal()]) {
+                case 2:
+                    return EAST;
+                case 3:
+                default:
+                    return facing; // invalid but ignored
+                case 4:
+                    return WEST;
+                case 5:
+                    return DOWN;
+                case 6:
+                    return UP;
+                }
+            }
+        }
+
+        return facing;
 	}
 }
