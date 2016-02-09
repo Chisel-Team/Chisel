@@ -89,14 +89,15 @@ public class Quad {
         }
 
         public UVs normalize() {
-            return new UVs(sprite, normalize(sprite.getMinU(), sprite.getMaxU(), this.minU), normalize(sprite.getMinV(), sprite.getMaxV(), this.minV), normalize(sprite.getMinU(), sprite.getMaxU(), this.maxU),
-                    normalize(sprite.getMinV(), sprite.getMaxV(), this.maxV));
+            return new UVs(sprite, Quad.normalize(sprite.getMinU(), sprite.getMaxU(), this.minU), Quad.normalize(sprite.getMinV(), sprite.getMaxV(), this.minV), Quad.normalize(sprite.getMinU(),
+                    sprite.getMaxU(), this.maxU), Quad.normalize(sprite.getMinV(), sprite.getMaxV(), this.maxV));
         }
 
-        private float normalize(float min, float max, float x) {
-            return (x - min) / (max - min);
+        public UVs relativize() {
+            return new UVs(sprite, Quad.lerp(sprite.getMinU(), sprite.getMaxU(), this.minU), Quad.lerp(sprite.getMinV(), sprite.getMaxV(), this.minV), Quad.lerp(sprite.getMinU(), sprite.getMaxU(),
+                    this.maxU), Quad.lerp(sprite.getMinV(), sprite.getMaxV(), this.maxV));
         }
-        
+
         public Vector2f[] vectorize() {
             return new Vector2f[]{ new Vector2f(minU, minV), new Vector2f(minU, maxV), new Vector2f(maxU, maxV), new Vector2f(maxU, minV) };
         }
@@ -111,9 +112,13 @@ public class Quad {
     private final Builder builder;
     
     private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder) {
+        this(verts, new UVs(uvs), builder);
+    }
+    
+    private Quad(Vector3f[] verts, UVs uvs, Builder builder) {
         this.vertPos = verts;
-        this.vertUv = uvs;
-        this.uvs = new UVs(uvs);
+        this.vertUv = uvs.vectorize();
+        this.uvs = uvs;
         this.builder = builder;
     }
 
@@ -172,6 +177,7 @@ public class Quad {
                 secondQuad[i] = new Vector3f(vertPos[idx]);
             }
             
+            // TODO This is completly wrong...
             if (vertical) {
                 firstQuad[1].y = lerp(firstQuad[1].y, firstQuad[0].y, f);
                 firstQuad[2].y = lerp(firstQuad[2].y, firstQuad[3].y, f);
@@ -184,14 +190,20 @@ public class Quad {
                 secondQuad[3].x = lerp(secondQuad[3].x, secondQuad[0].x, f);
             }
 
-            return Pair.of(new Quad(firstQuad, first.vectorize(), builder), Optional.of(new Quad(secondQuad, second.vectorize(), builder)));
+            return Pair.of(new Quad(firstQuad, first.relativize(), builder), Optional.of(new Quad(secondQuad, second.relativize(), builder)));
         } else {
             return Pair.of(quad, Optional.absent());
         }
     }
     
-    private float lerp(float a, float b, float f) {
-        return a + f * (b - a);
+    private static float lerp(float a, float b, float f) {
+        float ret = (a * (1 - f)) + (b * f);
+        return ret;
+    }
+    
+    private static float normalize(float min, float max, float x) {
+        float ret = (x - min) / (max - min);
+        return ret;
     }
     
     public BakedQuad rebake() {
@@ -199,19 +211,20 @@ public class Quad {
         builder.setQuadOrientation(this.builder.quadOrientation);
         builder.setQuadTint(this.builder.quadTint);
 
-        for (int i = 0; i < 4; i++) {
-            for (VertexFormatElement ele : this.builder.vertexFormat.getElements()) {
+        for (int v = 0; v < 4; v++) {
+            for (int i = 0; i < this.builder.vertexFormat.getElementCount(); i++) {
+                VertexFormatElement ele = this.builder.vertexFormat.getElement(i);
                 switch (ele.getUsage()) {
                 case UV:
-                    Vector2f uv = vertUv[i];
-                    builder.put(ele.getIndex(), uv.x, uv.y, 0, 1);
+                    Vector2f uv = vertUv[v];
+                    builder.put(i, uv.x, uv.y, 0, 1);
                     break;
                 case POSITION:
-                    Vector3f p = vertPos[i];
-                    builder.put(ele.getIndex(), p.x, p.y, p.z, 1);
+                    Vector3f p = vertPos[v];
+                    builder.put(i, p.x, p.y, p.z, 1);
                     break;
                 default:
-                    builder.put(ele.getIndex(), this.builder.data.get(ele.getUsage()).get(i));
+                    builder.put(i, this.builder.data.get(ele.getUsage()).get(v));
                 }
             }
         }
@@ -219,6 +232,11 @@ public class Quad {
         BakedQuad q = builder.build();
         Quad test = from(q, this.builder.vertexFormat);
         return q;
+    }
+    
+    public Quad transformUVs(TextureAtlasSprite sprite) {
+        UVs uvs = getUvs().transform(sprite);
+        return new Quad(vertPos, uvs, this.builder);
     }
     
     public static Quad from(BakedQuad baked, VertexFormat fmt) {

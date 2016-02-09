@@ -24,8 +24,9 @@ public class ChiselTextureCTM extends AbstractChiselTexture<BlockRenderTypeCTM> 
         BakedQuad test = quad.rebake();
         Quad testQuad = Quad.from(test, DefaultVertexFormats.ITEM);
 
-        quad.getUvs().transform(sprites[0].getSprite());
+        quad = quad.transformUVs(sprites[0].getSprite());
 
-        return Arrays.stream(quad.subdivide(4)).map(q -> q.rebake()).collect(Collectors.toList());
+        Quad[] quads = quad.subdivide(4);
+        return Arrays.stream(quads).map(q -> q.rebake()).collect(Collectors.toList());
     }
 }
