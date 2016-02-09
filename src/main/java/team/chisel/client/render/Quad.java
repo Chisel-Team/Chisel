@@ -199,16 +199,21 @@ public class Quad {
         builder.setQuadOrientation(this.builder.quadOrientation);
         builder.setQuadTint(this.builder.quadTint);
 
-        for (Entry<EnumUsage, float[]> e : this.builder.data.entries()) {
-            if (e.getKey() != EnumUsage.UV && e.getKey() != EnumUsage.POSITION) {
-                builder.put(this.builder.elementLookup.get(e.getKey()).getIndex(), e.getValue());
+        for (int i = 0; i < 4; i++) {
+            for (VertexFormatElement ele : this.builder.vertexFormat.getElements()) {
+                switch (ele.getUsage()) {
+                case UV:
+                    Vector2f uv = vertUv[i];
+                    builder.put(ele.getIndex(), uv.x, uv.y, 0, 1);
+                    break;
+                case POSITION:
+                    Vector3f p = vertPos[i];
+                    builder.put(ele.getIndex(), p.x, p.y, p.z, 1);
+                    break;
+                default:
+                    builder.put(ele.getIndex(), this.builder.data.get(ele.getUsage()).get(i));
+                }
             }
-        }
-        for (Vector3f v : vertPos) {
-            builder.put(this.builder.elementLookup.get(EnumUsage.POSITION).getIndex(), new float[] { v.x, v.y, v.z, 0 });
-        }
-        for (Vector2f v : vertUv) {
-            builder.put(this.builder.elementLookup.get(EnumUsage.UV).getIndex(), new float[] { v.x, v.y, 0, 1 });
         }
 
         BakedQuad q = builder.build();
@@ -238,7 +243,6 @@ public class Quad {
         public void setQuadColored() {}
 
         private ListMultimap<EnumUsage, float[]> data = MultimapBuilder.enumKeys(EnumUsage.class).arrayListValues().build();
-        private EnumMap<EnumUsage, VertexFormatElement> elementLookup = new EnumMap<>(EnumUsage.class);
         
         @Override
         public void put(int element, float... data) {
@@ -246,7 +250,6 @@ public class Quad {
             System.arraycopy(data, 0, copy, 0, data.length);
             VertexFormatElement ele = vertexFormat.getElement(element);
             this.data.put(ele.getUsage(), copy);
-            this.elementLookup.put(ele.getUsage(), ele);
         }
         
         public Quad build() {
