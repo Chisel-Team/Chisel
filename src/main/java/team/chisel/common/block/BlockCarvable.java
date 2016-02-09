@@ -84,11 +84,11 @@ public class BlockCarvable extends Block implements ICarvable {
         this.blockFaceData = data;
     }
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IQuadMutator getQuadMutator(){
-        //todo finish this
-    }
+//    @SideOnly(Side.CLIENT)
+//    @Override
+//    public IQuadMutator getQuadMutator(){
+//        //todo finish this
+//    }
 
     @Override
     public int getVariationIndex(IExtendedBlockState state) {

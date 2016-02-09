@@ -9,7 +9,6 @@ import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctm.CTM;
-import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.type.BlockRenderTypeCTMH;
 import team.chisel.common.util.Dir;
 
@@ -22,7 +21,9 @@ public class ChiselTextureCTMH extends AbstractChiselTexture<BlockRenderTypeCTMH
     }
 
     @Override
-    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int target) {
+    public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
+        return Lists.newArrayList(quad);
+        /*
         if (side.getAxis().isVertical()) {
             return Lists.newArrayList(QuadHelper.makeNormalFaceQuad(side, sprites[0].getSprite()));
         } else {
@@ -32,6 +33,7 @@ public class ChiselTextureCTMH extends AbstractChiselTexture<BlockRenderTypeCTMH
             CTM ctm = ((CTMBlockRenderContext) context).getCTM(side);
             return Lists.newArrayList(getQuad(side, ctm));
         }
+        */
     }
 
     private BakedQuad getQuad(EnumFacing side, CTM ctm) {

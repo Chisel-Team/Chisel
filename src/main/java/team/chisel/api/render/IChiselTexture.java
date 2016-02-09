@@ -23,7 +23,7 @@ public interface IChiselTexture<T extends IBlockRenderType> {
      *            Amount of quads that should be made
      * @return A List of Quads
      */
-    List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int quadGoal);
+    List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal);
 
     /**
      * Gets the block render type of this texture

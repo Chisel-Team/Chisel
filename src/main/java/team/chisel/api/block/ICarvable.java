@@ -48,9 +48,9 @@ public interface ICarvable {
     @SideOnly(Side.CLIENT)
     BlockFaceData getBlockFaceData();
 
-    /**
-     * Called to get the quad mutator, called multiple times so please cache this value
-     */
-    @SideOnly(Side.CLIENT)
-    IQuadMutator getQuadMutator();
+//    /**
+//     * Called to get the quad mutator, called multiple times so please cache this value
+//     */
+//    @SideOnly(Side.CLIENT)
+//    IQuadMutator getQuadMutator();
 }

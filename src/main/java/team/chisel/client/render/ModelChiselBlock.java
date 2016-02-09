@@ -113,13 +113,15 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPer
             VariationFaceData variationData = block.getBlockFaceData().getForMeta(MathHelper.clamp_int(block.getVariationIndex(state), 0, block.getVariations().length));
             for (EnumFacing facing : EnumFacing.VALUES){
                 IChiselFace face = variationData.getFaceForSide(facing);
-                if (MinecraftForgeClient.getRenderLayer() != face.getLayer()){
-                    Chisel.debug("Skipping Layer "+ MinecraftForgeClient.getRenderLayer()+" for block "+state);
+                if (MinecraftForgeClient.getRenderLayer() != face.getLayer()) {
+                    Chisel.debug("Skipping Layer " + MinecraftForgeClient.getRenderLayer() + " for block " + state);
                     continue;
                 }
                 int quadGoal = Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
-                for (IChiselTexture<?> tex : face.getTextureList()){
-                    quads.addAll(tex.getSideQuads(facing, ctxList.getRenderContext(tex.getType()), quadGoal));
+                for (BakedQuad q : ChiselModelRegistry.INSTANCE.getBaseModel().getFaceQuads(facing)) {
+                    for (IChiselTexture<?> tex : face.getTextureList()) {
+                        quads.addAll(tex.transformQuad(q, ctxList.getRenderContext(tex.getType()), quadGoal));
+                    }
                 }
             }
             return new ModelChiselBlock(quads, variationData);
@@ -137,8 +139,10 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPer
         List<BakedQuad> quads = new ArrayList<>();
         for (EnumFacing facing : EnumFacing.VALUES) {
             // quads.add(QuadHelper.makeNormalFaceQuad(facing, varData.getFaceForSide(facing).getParticle()));
-            for (IChiselTexture<?> tex : variationData.getFaceForSide(facing).getTextureList()) {
-                quads.addAll(tex.getSideQuads(facing, null, 1));
+            for (BakedQuad q : ChiselModelRegistry.INSTANCE.getBaseModel().getFaceQuads(facing)) {
+                for (IChiselTexture<?> tex : variationData.getFaceForSide(facing).getTextureList()) {
+                    quads.addAll(tex.transformQuad(q, null, 1));
+                }
             }
         }
         return new ModelChiselBlock(quads, variationData);

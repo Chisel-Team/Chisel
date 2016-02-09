@@ -1,14 +1,13 @@
 package team.chisel.client.render.texture;
 
-import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.collect.Lists;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
-import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.type.BlockRenderTypeNormal;
 
 /**
@@ -21,7 +20,9 @@ public class ChiselTextureNormal extends AbstractChiselTexture<BlockRenderTypeNo
     }
 
     @Override
-    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int target){
+    public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
+        return Lists.newArrayList(quad);
+        /*
         if (target == 4){
             //Chisel.debug("Normal texture complying with quad goal of 4");
             return QuadHelper.makeFourQuads(side, sprites[0].getSprite(), new float[]{0, 0, 16, 16});
@@ -29,5 +30,6 @@ public class ChiselTextureNormal extends AbstractChiselTexture<BlockRenderTypeNo
         else {
             return Arrays.asList(QuadHelper.makeNormalFaceQuad(side, sprites[0].getSprite()));
         }
+        */
     }
 }

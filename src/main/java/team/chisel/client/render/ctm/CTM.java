@@ -1,13 +1,5 @@
 package team.chisel.client.render.ctm;
 
-import static team.chisel.common.util.Dir.BOTTOM;
-import static team.chisel.common.util.Dir.BOTTOM_LEFT;
-import static team.chisel.common.util.Dir.BOTTOM_RIGHT;
-import static team.chisel.common.util.Dir.LEFT;
-import static team.chisel.common.util.Dir.RIGHT;
-import static team.chisel.common.util.Dir.TOP;
-import static team.chisel.common.util.Dir.TOP_LEFT;
-import static team.chisel.common.util.Dir.TOP_RIGHT;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -22,6 +14,8 @@ import team.chisel.common.util.Dir;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
+
+import static team.chisel.common.util.Dir.*;
 
 // @formatter:off
 /**
@@ -73,37 +67,38 @@ import com.google.common.collect.Maps;
  * HAVE FUN!
  * -CptRageToaster-
  */
-// @formatter:on
 public class CTM {
 	
     /**
      * The Uvs for the specific "magic number" value
      */
-    public static final float[][] uvs = new float[][]{
+    public static final Submap[] uvs = new Submap[]{
             //Ctm texture
-            {0, 0, 4, 4},// 0
-            {4, 0, 8, 4}, // 1
-            {8, 0, 12, 4}, // 2
-            {12, 0, 16, 4}, // 3
-            {0, 4, 4, 8}, // 4
-            {4, 4, 8, 8}, // 5
-            {8, 4, 12, 8}, // 6
-            {12, 4, 16, 8}, // 7
-            {0, 8, 4, 12}, // 8
-            {4, 8, 8, 12}, // 9
-            {8, 8, 12, 12}, // 10
-            {12, 8, 16, 12}, // 11
-            {0, 12, 4, 16}, // 12
-            {4, 12, 8, 16}, // 13
-            {8, 12, 12, 16}, // 14
-            {12, 12, 16, 16}, // 15
+            new Submap(8, 8, 0, 0),   // 0
+            new Submap(8, 8, 4, 0),   // 1
+            new Submap(8, 8, 8, 0),   // 2
+            new Submap(8, 8, 12, 0),  // 3
+            new Submap(8, 8, 0, 4),   // 4
+            new Submap(8, 8, 4, 4),   // 5
+            new Submap(8, 8, 8, 4),   // 6
+            new Submap(8, 8, 12, 4),  // 7
+            new Submap(8, 8, 0, 8),   // 8
+            new Submap(8, 8, 4, 8),   // 9
+            new Submap(8, 8, 8, 8),   // 10
+            new Submap(8, 8, 12, 8),  // 11
+            new Submap(8, 8, 0, 12),  // 12
+            new Submap(8, 8, 4, 12),  // 13
+            new Submap(8, 8, 8, 12),  // 14
+            new Submap(8, 8, 12, 12), // 15
             // Default texture
-            {0, 0, 8, 8}, // 16
-            {8, 0, 16, 8}, // 17
-            {0, 8, 8, 16}, // 18
-            {8, 8, 16, 16} // 19
+            new Submap(8, 8, 0, 0),   // 16
+            new Submap(8, 8, 8, 0),   // 17
+            new Submap(8, 8, 0, 8),   // 18
+            new Submap(8, 8, 8, 8)    // 19
     };
     
+ // @formatter:on
+
 	/** Some hardcoded offset values for the different corner indeces */
 	protected static int[] submapOffsets = { 4, 5, 1, 0 };
 	/** For use via the Chisel 2 config only, altering this could cause unintended behavior */

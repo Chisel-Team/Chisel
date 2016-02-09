@@ -2,14 +2,14 @@ package team.chisel.client.render.texture;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
-import team.chisel.client.render.QuadHelper;
-import team.chisel.client.render.ctx.CTMBlockRenderContext;
+import team.chisel.client.render.Quad;
 import team.chisel.client.render.type.BlockRenderTypeCTM;
 
 public class ChiselTextureCTM extends AbstractChiselTexture<BlockRenderTypeCTM> {
@@ -19,11 +19,13 @@ public class ChiselTextureCTM extends AbstractChiselTexture<BlockRenderTypeCTM> 
     }
 
     @Override
-    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int quadGoal) {
-        if (context == null) {
-            return Arrays.asList(QuadHelper.makeNormalFaceQuad(side, sprites[0].getSprite()));
-        } else {
-            return QuadHelper.makeCtmFace(side, this.sprites, ((CTMBlockRenderContext) context).getCTM(side).getSubmapIndices());
-        }
+    public List<BakedQuad> transformQuad(BakedQuad bq, IBlockRenderContext context, int quadGoal) {
+        Quad quad = Quad.from(bq, DefaultVertexFormats.ITEM);
+        BakedQuad test = quad.rebake();
+        Quad testQuad = Quad.from(test, DefaultVertexFormats.ITEM);
+
+        quad.getUvs().transform(sprites[0].getSprite());
+
+        return Arrays.stream(quad.subdivide(4)).map(q -> q.rebake()).collect(Collectors.toList());
     }
 }

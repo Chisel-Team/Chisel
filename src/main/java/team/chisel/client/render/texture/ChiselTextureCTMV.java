@@ -1,8 +1,5 @@
 package team.chisel.client.render.texture;
 
-import static net.minecraft.util.EnumFacing.*;
-import static team.chisel.client.render.QuadHelper.*;
-
 import java.util.EnumSet;
 import java.util.List;
 
@@ -12,12 +9,14 @@ import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
-import team.chisel.client.render.ctx.CTMVBlockRenderContext;
 import team.chisel.client.render.ctx.CTMVBlockRenderContext.ConnectionData;
 import team.chisel.client.render.ctx.CTMVBlockRenderContext.Connections;
 import team.chisel.client.render.type.BlockRenderTypeCTMV;
 
 import com.google.common.collect.Lists;
+
+import static net.minecraft.util.EnumFacing.*;
+import static team.chisel.client.render.QuadHelper.*;
 
 public class ChiselTextureCTMV extends AbstractChiselTexture<BlockRenderTypeCTMV> {
 
@@ -26,11 +25,14 @@ public class ChiselTextureCTMV extends AbstractChiselTexture<BlockRenderTypeCTMV
     }
 
     @Override
-    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int target) {
+    public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
+        return Lists.newArrayList(quad);
+        /*
         if (context == null) {
             return Lists.newArrayList(makeUVFaceQuad(side, sprites[1].getSprite(), new float[] { 0, 0, 8, 8 }));
         }
         return Lists.newArrayList(getQuad(side, ((CTMVBlockRenderContext) context).getData()));
+        */
     }
 
     private BakedQuad getQuad(EnumFacing side, ConnectionData data) {

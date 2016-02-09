@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.collect.Lists;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -27,8 +29,9 @@ public class ChiselTextureR extends AbstractChiselTexture<BlockRenderTypeR> {
     }
 
     @Override
-    public List<BakedQuad> getSideQuads(EnumFacing side, IBlockRenderContext context, int quadGoal) {
-
+    public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
+        return Lists.newArrayList(quad);
+        /*
         BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition) context).getPosition();
         rand.setSeed(MathHelper.getPositionRandom(pos) + side.ordinal());
         rand.nextBoolean();
@@ -49,5 +52,6 @@ public class ChiselTextureR extends AbstractChiselTexture<BlockRenderTypeR> {
         toReturn.add(QuadHelper.makeUVFaceQuad(side, sprites[0].getSprite(), uvs));
 
         return toReturn;
+        */
     }
 }

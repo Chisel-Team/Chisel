@@ -122,15 +122,15 @@ public class QuadHelper {
     }
 
     public static void transformQuad(BakedQuad quad, Vector3f vector, VertexFormat format){
-        for (int i = 0 ; i < 4 ; i ++){
-            int offset = i * format.getNextOffset();
-            float xPos = Float.intBitsToFloat(quad.vertexData[offset]) + vector.getX();
-            float yPos = Float.intBitsToFloat(quad.vertexData[offset + 1]) + vector.getY();
-            float zPos = Float.intBitsToFloat(quad.vertexData[offset + 1]) + vector.getZ();
-            quad.vertexData[offset] = Float.floatToIntBits(xPos);
-            quad.vertexData[offset + 1] = Float.floatToIntBits(yPos);
-            quad.vertexData[offset + 2] += Float.floatToIntBits(zPos);
-        }
+//        for (int i = 0 ; i < 4 ; i ++){
+//            int offset = i * format.getNextOffset();
+//            float xPos = Float.intBitsToFloat(quad.vertexData[offset]) + vector.getX();
+//            float yPos = Float.intBitsToFloat(quad.vertexData[offset + 1]) + vector.getY();
+//            float zPos = Float.intBitsToFloat(quad.vertexData[offset + 1]) + vector.getZ();
+//            quad.vertexData[offset] = Float.floatToIntBits(xPos);
+//            quad.vertexData[offset + 1] = Float.floatToIntBits(yPos);
+//            quad.vertexData[offset + 2] += Float.floatToIntBits(zPos);
+//        }
     }
 
     public static void transformQuad(BakedQuad quad, Vector3f vector){
