@@ -7,10 +7,12 @@ import java.util.List;
 import javax.vecmath.Matrix4f;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.item.ItemBlock;
@@ -39,6 +41,7 @@ import team.chisel.client.ClientUtil;
 import team.chisel.common.block.BlockCarvable;
 
 import com.google.common.collect.FluentIterable;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 
 /**
@@ -86,11 +89,10 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPer
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture(){
-        if (this.variationData == null){
-            return null;
-        }
-        else {
+    public TextureAtlasSprite getParticleTexture() {
+        if (this.variationData == null) {
+            return Minecraft.getMinecraft().getTextureMapBlocks().getTextureExtry(TextureMap.LOCATION_MISSING_TEXTURE.toString());
+        } else {
             return this.variationData.defaultFace.getParticle();
         }
     }
@@ -118,7 +120,11 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPer
                     continue;
                 }
                 int quadGoal = Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
-                for (BakedQuad q : ChiselModelRegistry.INSTANCE.getBaseModel().getFaceQuads(facing)) {
+                List<BakedQuad> allQuads = Lists.newArrayList();
+                IBakedModel model = ChiselModelRegistry.INSTANCE.getBaseModel();
+                allQuads.addAll(model.getFaceQuads(facing));
+                allQuads.addAll(FluentIterable.from(model.getGeneralQuads()).filter(q -> q.getFace() == facing).toList());
+                for (BakedQuad q : allQuads) {
                     for (IChiselTexture<?> tex : face.getTextureList()) {
                         quads.addAll(tex.transformQuad(q, ctxList.getRenderContext(tex.getType()), quadGoal));
                     }

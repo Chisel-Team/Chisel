@@ -72,30 +72,32 @@ public class CTM {
     /**
      * The Uvs for the specific "magic number" value
      */
-    public static final Submap[] uvs = new Submap[]{
+    public static final ISubmap[] uvs = new ISubmap[]{
             //Ctm texture
-            new Submap(8, 8, 0, 0),   // 0
-            new Submap(8, 8, 4, 0),   // 1
-            new Submap(8, 8, 8, 0),   // 2
-            new Submap(8, 8, 12, 0),  // 3
-            new Submap(8, 8, 0, 4),   // 4
-            new Submap(8, 8, 4, 4),   // 5
-            new Submap(8, 8, 8, 4),   // 6
-            new Submap(8, 8, 12, 4),  // 7
-            new Submap(8, 8, 0, 8),   // 8
-            new Submap(8, 8, 4, 8),   // 9
-            new Submap(8, 8, 8, 8),   // 10
-            new Submap(8, 8, 12, 8),  // 11
-            new Submap(8, 8, 0, 12),  // 12
-            new Submap(8, 8, 4, 12),  // 13
-            new Submap(8, 8, 8, 12),  // 14
-            new Submap(8, 8, 12, 12), // 15
+            new Submap(4, 4, 0, 0),   // 0
+            new Submap(4, 4, 4, 0),   // 1
+            new Submap(4, 4, 8, 0),   // 2
+            new Submap(4, 4, 12, 0),  // 3
+            new Submap(4, 4, 0, 4),   // 4
+            new Submap(4, 4, 4, 4),   // 5
+            new Submap(4, 4, 8, 4),   // 6
+            new Submap(4, 4, 12, 4),  // 7
+            new Submap(4, 4, 0, 8),   // 8
+            new Submap(4, 4, 4, 8),   // 9
+            new Submap(4, 4, 8, 8),   // 10
+            new Submap(4, 4, 12, 8),  // 11
+            new Submap(4, 4, 0, 12),  // 12
+            new Submap(4, 4, 4, 12),  // 13
+            new Submap(4, 4, 8, 12),  // 14
+            new Submap(4, 4, 12, 12), // 15
             // Default texture
             new Submap(8, 8, 0, 0),   // 16
             new Submap(8, 8, 8, 0),   // 17
             new Submap(8, 8, 0, 8),   // 18
             new Submap(8, 8, 8, 8)    // 19
     };
+    
+    public static final ISubmap FULL_TEXTURE = new Submap(16, 16, 0, 0);
     
  // @formatter:on
 

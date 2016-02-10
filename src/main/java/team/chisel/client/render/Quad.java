@@ -1,8 +1,6 @@
 package team.chisel.client.render;
 
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import javax.annotation.Nullable;
 
@@ -27,7 +25,9 @@ import org.lwjgl.util.vector.Vector;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
-import com.google.common.base.Optional;
+import team.chisel.client.render.ctm.CTM;
+import team.chisel.client.render.ctm.ISubmap;
+
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.MultimapBuilder;
@@ -40,19 +40,18 @@ public class Quad {
         Vector3f pos;
         Vector2f uvs;
     }
+
+    private static final TextureAtlasSprite BASE = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
     
     @RequiredArgsConstructor
     @ToString
-    public static class UVs {
-
-        private static final TextureAtlasSprite BASE = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
-        private static final float BASE_WIDTH = BASE.getMaxU() - BASE.getMinU(), BASE_HEIGHT = BASE.getMaxV() - BASE.getMinV();
+    public class UVs {
+        
+        @Getter
+        final float minU, minV, maxU, maxV;
         
         @Getter
         private final TextureAtlasSprite sprite;
-                
-        @Getter
-        final float minU, minV, maxU, maxV;
         
         private UVs(Vector2f... data) {
             this(BASE, data);
@@ -76,50 +75,88 @@ public class Quad {
             this.maxV = maxV;
         }
 
-        public UVs transform(TextureAtlasSprite other) {
-            float scaleU = BASE_WIDTH / (other.getMaxU() - other.getMinU());
-            float scaleV = BASE_HEIGHT / (other.getMaxV() - other.getMinV());
+        public UVs transform(TextureAtlasSprite other, ISubmap submap) {
+            UVs normal = normalize();
+            float minU = normal.minU, minV = normal.minV;
+            float maxU = normal.maxU, maxV = normal.maxV;
 
-            float startU = (minU - BASE.getMinU()) * scaleU;
-            float startV = (minV - BASE.getMinV()) * scaleV;
-            float endU = (BASE.getMaxU() - maxU) * scaleU;
-            float endV = (BASE.getMaxV() - maxV) * scaleV;
+            int quadrant = normal.getQuadrant();
+            float minUInterp = quadrant == 1 || quadrant == 2 ? 0.5f : 0; 
+            float minVInterp = quadrant < 2 ? 0.5f : 0; 
+            float maxUInterp = quadrant == 0 || quadrant == 3 ? 0.5f : 1;
+            float maxVInterp = quadrant > 1 ? 0.5f : 1;
+            
+            minU = Quad.normalize(minUInterp, maxUInterp, minU);
+            minV = Quad.normalize(minVInterp, maxVInterp, minV);
+            maxU = Quad.normalize(minUInterp, maxUInterp, maxU);
+            maxV = Quad.normalize(minVInterp, maxVInterp, maxV);
 
-            return new UVs(other, startU + other.getMinU(), startV + other.getMinV(), other.getMaxU() - endU, other.getMaxV() - endV);
+            float width = maxU - minU;
+            float height = maxV - minV;
+            
+            minU = minU + (submap.getXOffset() * width);
+            minV = minV + (submap.getYOffset() * height);
+            maxU = minU + (width * submap.getWidth());
+            maxV = minV + (height * submap.getHeight());
+            
+            normal = new UVs(minU, minV, maxU, maxV, sprite);
+            return normal.relativize(other);
         }
 
         public UVs normalize() {
-            return new UVs(sprite, Quad.normalize(sprite.getMinU(), sprite.getMaxU(), this.minU), Quad.normalize(sprite.getMinV(), sprite.getMaxV(), this.minV), Quad.normalize(sprite.getMinU(),
-                    sprite.getMaxU(), this.maxU), Quad.normalize(sprite.getMinV(), sprite.getMaxV(), this.maxV));
+            return new UVs(Quad.normalize(sprite.getMinU(), sprite.getMaxU(), this.minU), Quad.normalize(sprite.getMinV(), sprite.getMaxV(), this.minV), Quad.normalize(sprite.getMinU(),
+                    sprite.getMaxU(), this.maxU), Quad.normalize(sprite.getMinV(), sprite.getMaxV(), this.maxV), sprite);
         }
 
         public UVs relativize() {
-            return new UVs(sprite, Quad.lerp(sprite.getMinU(), sprite.getMaxU(), this.minU), Quad.lerp(sprite.getMinV(), sprite.getMaxV(), this.minV), Quad.lerp(sprite.getMinU(), sprite.getMaxU(),
-                    this.maxU), Quad.lerp(sprite.getMinV(), sprite.getMaxV(), this.maxV));
+            return relativize(sprite);
+        }
+
+        public UVs relativize(TextureAtlasSprite sprite) {
+            return new UVs(lerp(sprite.getMinU(), sprite.getMaxU(), this.minU), lerp(sprite.getMinV(), sprite.getMaxV(), this.minV), lerp(sprite.getMinU(), sprite.getMaxU(), this.maxU), lerp(
+                    sprite.getMinV(), sprite.getMaxV(), this.maxV), sprite);
         }
 
         public Vector2f[] vectorize() {
             return new Vector2f[]{ new Vector2f(minU, minV), new Vector2f(minU, maxV), new Vector2f(maxU, maxV), new Vector2f(maxU, minV) };
         }
+        
+        public int getQuadrant() {
+            if (maxU <= 0.5f) {
+                if (maxV <= 0.5f) {
+                    return 3;
+                } else {
+                    return 0;
+                }
+            } else {
+                if (maxV <= 0.5f) {
+                    return 2;
+                } else {
+                    return 1;
+                }
+            }
+        }
     }
 
     private final Vector3f[] vertPos;
     private final Vector2f[] vertUv;
-    
+        
+    // Technically nonfinal, but treated as such except in constructor
     @Getter
-    private final UVs uvs;
+    private UVs uvs;
     
     private final Builder builder;
     
     private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder) {
-        this(verts, new UVs(uvs), builder);
+        this.vertPos = verts;
+        this.vertUv = uvs;
+        this.builder = builder;
+        this.uvs = new UVs(uvs);
     }
     
     private Quad(Vector3f[] verts, UVs uvs, Builder builder) {
-        this.vertPos = verts;
-        this.vertUv = uvs.vectorize();
+        this(verts, uvs.vectorize(), builder);
         this.uvs = uvs;
-        this.builder = builder;
     }
 
     public void compute() {
@@ -129,25 +166,28 @@ public class Quad {
     public Quad[] subdivide(int count) {
         List<Quad> rects = Lists.newArrayList();
 
-        Pair<Quad, Optional<Quad>> firstDivide = divide(this, false);
-        rects.add(firstDivide.getLeft());
-        if (firstDivide.getRight().isPresent()) {
-            Quad split = firstDivide.getRight().get();
-            rects.add(split);
-            Pair<Quad, Optional<Quad>> secondDivide = divide(split, true);
-            rects.add(secondDivide.getLeft());
-            if (secondDivide.getRight().isPresent()) {
-                rects.add(secondDivide.getRight().get());
-            }
+        Pair<Quad, Quad> firstDivide = divide(false);
+        Pair<Quad, Quad> secondDivide = firstDivide.getLeft().divide(true);
+        rects.add(secondDivide.getLeft());
+
+        if (firstDivide.getRight() != null) {
+            Pair<Quad, Quad> thirdDivide = firstDivide.getRight().divide(true);
+            rects.add(thirdDivide.getLeft());
+            rects.add(thirdDivide.getRight());
+        } else {
+            rects.add(null);
+            rects.add(null);
         }
+
+        rects.add(secondDivide.getRight());
 
         return rects.toArray(new Quad[rects.size()]);
     }
     
     @Nullable
-    private Pair<Quad, Optional<Quad>> divide(Quad quad, boolean vertical) {
+    private Pair<Quad, Quad> divide(boolean vertical) {
         float min, max;
-        UVs uvs = quad.getUvs().normalize();
+        UVs uvs = getUvs().normalize();
         if (vertical) {
             min = uvs.minV;
             max = uvs.maxV;
@@ -156,12 +196,12 @@ public class Quad {
             max = uvs.maxU;
         }
         if (min < 0.5 && max > 0.5) {
-            UVs first = new UVs(uvs.getSprite(), uvs.minU, uvs.minV, vertical ? uvs.maxU : 0.5f, vertical ? 0.5f : uvs.maxV);
-            UVs second = new UVs(uvs.getSprite(), vertical ? uvs.minU : 0.5f, vertical ? 0.5f : uvs.minV, uvs.maxU, uvs.maxV);
-
+            UVs first = new UVs(uvs.minU, uvs.minV, vertical ? uvs.maxU : 0.5f, vertical ? 0.5f : uvs.maxV, uvs.getSprite());
+            UVs second = new UVs(vertical ? uvs.minU : 0.5f, vertical ? 0.5f : uvs.minV, uvs.maxU, uvs.maxV, uvs.getSprite());
+            
             int firstIndex = 0;
             for (int i = 0; i < vertUv.length; i++) {
-                if (vertUv[i].y == quad.getUvs().minV && vertUv[i].x == quad.getUvs().minU) {
+                if (vertUv[i].y == getUvs().minV && vertUv[i].x == getUvs().minU) {
                     firstIndex = i;
                     break;
                 }
@@ -177,31 +217,39 @@ public class Quad {
                 secondQuad[i] = new Vector3f(vertPos[idx]);
             }
             
-            // TODO This is completly wrong...
-            if (vertical) {
-                firstQuad[1].y = lerp(firstQuad[1].y, firstQuad[0].y, f);
-                firstQuad[2].y = lerp(firstQuad[2].y, firstQuad[3].y, f);
-                secondQuad[1].y = lerp(secondQuad[1].y, secondQuad[0].y, f);
-                secondQuad[2].y = lerp(secondQuad[2].y, secondQuad[3].y, f);
-            } else {
-                firstQuad[2].x = lerp(firstQuad[2].x, firstQuad[1].x, f);
-                firstQuad[3].x = lerp(firstQuad[3].x, firstQuad[0].x, f);
-                secondQuad[2].x = lerp(secondQuad[2].x, secondQuad[1].x, f);
-                secondQuad[3].x = lerp(secondQuad[3].x, secondQuad[0].x, f);
-            }
+            int i1 = 0;
+            int i2 = vertical ? 1 : 3;
+            int j1 = vertical ? 3 : 1;
+            int j2 = 2;
+            
+            firstQuad[i1].x = lerp(firstQuad[i1].x, firstQuad[i2].x, f);
+            firstQuad[i1].y = lerp(firstQuad[i1].y, firstQuad[i2].y, f);
+            firstQuad[i1].z = lerp(firstQuad[i1].z, firstQuad[i2].z, f);
+            firstQuad[j1].x = lerp(firstQuad[j1].x, firstQuad[j2].x, f);
+            firstQuad[j1].y = lerp(firstQuad[j1].y, firstQuad[j2].y, f);
+            firstQuad[j1].z = lerp(firstQuad[j1].z, firstQuad[j2].z, f);
+            
+            secondQuad[i2].x = lerp(secondQuad[i1].x, secondQuad[i2].x, f);
+            secondQuad[i2].y = lerp(secondQuad[i1].y, secondQuad[i2].y, f);
+            secondQuad[i2].z = lerp(secondQuad[i1].z, secondQuad[i2].z, f);
+            secondQuad[j2].x = lerp(secondQuad[j1].x, secondQuad[j2].x, f);
+            secondQuad[j2].y = lerp(secondQuad[j1].y, secondQuad[j2].y, f);
+            secondQuad[j2].z = lerp(secondQuad[j1].z, secondQuad[j2].z, f);
 
-            return Pair.of(new Quad(firstQuad, first.relativize(), builder), Optional.of(new Quad(secondQuad, second.relativize(), builder)));
+            Quad q1 = new Quad(firstQuad, first.relativize(), builder);
+            Quad q2 = new Quad(secondQuad, second.relativize(), builder);
+            return Pair.of(q1, q2);
         } else {
-            return Pair.of(quad, Optional.absent());
+            return Pair.of(this, null);
         }
     }
     
-    private static float lerp(float a, float b, float f) {
+    static float lerp(float a, float b, float f) {
         float ret = (a * (1 - f)) + (b * f);
         return ret;
     }
     
-    private static float normalize(float min, float max, float x) {
+    static float normalize(float min, float max, float x) {
         float ret = (x - min) / (max - min);
         return ret;
     }
@@ -235,8 +283,11 @@ public class Quad {
     }
     
     public Quad transformUVs(TextureAtlasSprite sprite) {
-        UVs uvs = getUvs().transform(sprite);
-        return new Quad(vertPos, uvs, this.builder);
+        return transformUVs(sprite, CTM.FULL_TEXTURE.normalize());
+    }
+    
+    public Quad transformUVs(TextureAtlasSprite sprite, ISubmap submap) {
+        return new Quad(vertPos, getUvs().transform(sprite, submap), this.builder);
     }
     
     public static Quad from(BakedQuad baked, VertexFormat fmt) {
