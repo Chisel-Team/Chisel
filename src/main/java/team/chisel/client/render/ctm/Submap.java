@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 
 @Getter
 @AllArgsConstructor
-class Submap implements ISubmap {
+public class Submap implements ISubmap {
 
     private final float width, height;
     private final float xOffset, yOffset;

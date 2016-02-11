@@ -213,7 +213,7 @@ public class CTM {
 	 *            The directions to check connection in.
 	 * @return True if the cached connectionMap holds a connection in <i><b>one of</b></i> the given {@link Dir directions}.
 	 */
-	private boolean connectedOr(Dir... dirs) {
+	public boolean connectedOr(Dir... dirs) {
 		for (Dir dir : dirs) {
 			if (connected(dir)) {
 				return true;

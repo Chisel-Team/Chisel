@@ -3,6 +3,7 @@ package team.chisel.client.render.texture;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -36,9 +37,9 @@ public class ChiselTextureCTM extends AbstractChiselTexture<BlockRenderTypeCTM> 
             Quad q = quads[i];
             if (q != null) {
                 int ctmid = q.getUvs().normalize().getQuadrant();
-                quads[i] = q.transformUVs(sprites[ctm[ctmid] > 15 ? 0 : 1].getSprite(), CTM.uvs[ctm[ctmid]].normalize());
+                quads[i] = q.grow().transformUVs(sprites[ctm[ctmid] > 15 ? 0 : 1].getSprite(), CTM.uvs[ctm[ctmid]].normalize());
             }
         }
-        return Arrays.stream(quads).filter(q -> q != null).map(q -> q.rebake()).collect(Collectors.toList());
+        return Arrays.stream(quads).filter(Objects::nonNull).map(q -> q.rebake()).collect(Collectors.toList());
     }
 }

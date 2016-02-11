@@ -77,6 +77,24 @@ public class Quad {
 
         public UVs transform(TextureAtlasSprite other, ISubmap submap) {
             UVs normal = normalize();
+            submap = submap.normalize();
+            
+            float width = normal.maxU - normal.minU;
+            float height = normal.maxV - normal.minV;
+            
+            float minU = submap.getXOffset();
+            float minV = submap.getYOffset();
+            minU += normal.minU * submap.getWidth();
+            minV += normal.minV * submap.getHeight();
+            
+            float maxU = minU + (width * submap.getWidth());
+            float maxV = minV + (height * submap.getHeight());
+            
+            return new UVs(minU, minV, maxU, maxV, other).relativize();
+        }
+
+        UVs normalizeQuadrant() {
+            UVs normal = normalize();
             float minU = normal.minU, minV = normal.minV;
             float maxU = normal.maxU, maxV = normal.maxV;
 
@@ -90,19 +108,11 @@ public class Quad {
             minV = Quad.normalize(minVInterp, maxVInterp, minV);
             maxU = Quad.normalize(minUInterp, maxUInterp, maxU);
             maxV = Quad.normalize(minVInterp, maxVInterp, maxV);
-
-            float width = maxU - minU;
-            float height = maxV - minV;
-            
-            minU = minU + (submap.getXOffset() * width);
-            minV = minV + (submap.getYOffset() * height);
-            maxU = minU + (width * submap.getWidth());
-            maxV = minV + (height * submap.getHeight());
             
             normal = new UVs(minU, minV, maxU, maxV, sprite);
-            return normal.relativize(other);
+            return normal.relativize();
         }
-
+        
         public UVs normalize() {
             return new UVs(Quad.normalize(sprite.getMinU(), sprite.getMaxU(), this.minU), Quad.normalize(sprite.getMinV(), sprite.getMaxV(), this.minV), Quad.normalize(sprite.getMinU(),
                     sprite.getMaxU(), this.maxU), Quad.normalize(sprite.getMinV(), sprite.getMaxV(), this.maxV), sprite);
@@ -156,7 +166,7 @@ public class Quad {
     
     private Quad(Vector3f[] verts, UVs uvs, Builder builder) {
         this(verts, uvs.vectorize(), builder);
-        this.uvs = uvs;
+        this.uvs = new UVs(uvs.getSprite(), vertUv);
     }
 
     public void compute() {
@@ -196,8 +206,8 @@ public class Quad {
             max = uvs.maxU;
         }
         if (min < 0.5 && max > 0.5) {
-            UVs first = new UVs(uvs.minU, uvs.minV, vertical ? uvs.maxU : 0.5f, vertical ? 0.5f : uvs.maxV, uvs.getSprite());
-            UVs second = new UVs(vertical ? uvs.minU : 0.5f, vertical ? 0.5f : uvs.minV, uvs.maxU, uvs.maxV, uvs.getSprite());
+            UVs first = new UVs(vertical ? uvs.minU : 0.5f, vertical ? 0.5f : uvs.minV, uvs.maxU, uvs.maxV, uvs.getSprite());
+            UVs second = new UVs(uvs.minU, uvs.minV, vertical ? uvs.maxU : 0.5f, vertical ? 0.5f : uvs.maxV, uvs.getSprite());
             
             int firstIndex = 0;
             for (int i = 0; i < vertUv.length; i++) {
@@ -277,9 +287,7 @@ public class Quad {
             }
         }
 
-        BakedQuad q = builder.build();
-        Quad test = from(q, this.builder.vertexFormat);
-        return q;
+        return builder.build();
     }
     
     public Quad transformUVs(TextureAtlasSprite sprite) {
@@ -287,7 +295,11 @@ public class Quad {
     }
     
     public Quad transformUVs(TextureAtlasSprite sprite, ISubmap submap) {
-        return new Quad(vertPos, getUvs().transform(sprite, submap), this.builder);
+        return new Quad(vertPos, getUvs().transform(sprite, submap), builder);
+    }
+    
+    public Quad grow() {
+        return new Quad(vertPos, getUvs().normalizeQuadrant(), builder);
     }
     
     public static Quad from(BakedQuad baked, VertexFormat fmt) {

@@ -1,18 +1,20 @@
 package team.chisel.client.render.texture;
 
+import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
+import team.chisel.client.render.Quad;
 import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctm.CTM;
+import team.chisel.client.render.ctm.ISubmap;
+import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.type.BlockRenderTypeCTMH;
 import team.chisel.common.util.Dir;
-
-import com.google.common.collect.Lists;
 
 public class ChiselTextureCTMH extends AbstractChiselTexture<BlockRenderTypeCTMH> {
 
@@ -22,29 +24,26 @@ public class ChiselTextureCTMH extends AbstractChiselTexture<BlockRenderTypeCTMH
 
     @Override
     public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
-        return Lists.newArrayList(quad);
-        /*
-        if (side.getAxis().isVertical()) {
-            return Lists.newArrayList(QuadHelper.makeNormalFaceQuad(side, sprites[0].getSprite()));
+        Quad q = Quad.from(quad, DefaultVertexFormats.ITEM);
+        if (quad.getFace().getAxis().isVertical()) {
+            q = q.transformUVs(sprites[0].getSprite());
         } else {
-            if (context == null) {
-                return Lists.newArrayList(QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), new float[] { 0, 0, 8, 8 }));
-            }
-            CTM ctm = ((CTMBlockRenderContext) context).getCTM(side);
-            return Lists.newArrayList(getQuad(side, ctm));
+            CTM ctm = context == null ? null : ((CTMBlockRenderContext) context).getCTM(quad.getFace());
+            ISubmap submap = getQuad(ctm);
+            q = q.transformUVs(sprites[1].getSprite(), submap);
         }
-        */
+        return Collections.singletonList(q.rebake());
     }
 
-    private BakedQuad getQuad(EnumFacing side, CTM ctm) {
-        if (ctm.connectedAnd(Dir.LEFT, Dir.RIGHT)) {
-            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), QuadHelper.UVS_TOP_RIGHT);
+    private ISubmap getQuad(CTM ctm) {
+        if (ctm == null || !ctm.connectedOr(Dir.LEFT, Dir.RIGHT)) {
+            return QuadHelper.TOP_LEFT;
+        } else if (ctm.connectedAnd(Dir.LEFT, Dir.RIGHT)) {
+            return QuadHelper.TOP_RIGHT;
         } else if (ctm.connected(Dir.LEFT)) {
-            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), QuadHelper.UVS_BOTTOM_RIGHT);
-        } else if (ctm.connected(Dir.RIGHT)) {
-            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), QuadHelper.UVS_BOTTOM_LEFT);
+            return QuadHelper.BOTTOM_RIGHT;
         } else {
-            return QuadHelper.makeUVFaceQuad(side, sprites[1].getSprite(), QuadHelper.UVS_TOP_LEFT);
+            return QuadHelper.BOTTOM_LEFT;
         }
     }
 }

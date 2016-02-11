@@ -12,12 +12,14 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.resources.model.ModelRotation;
 import net.minecraft.util.EnumFacing;
-
 import net.minecraftforge.client.model.Attributes;
+
 import org.lwjgl.util.vector.Vector3f;
 
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.ctm.CTMFaceBakery;
+import team.chisel.client.render.ctm.ISubmap;
+import team.chisel.client.render.ctm.Submap;
 
 /**
  * Helper class for quad stuff
@@ -30,10 +32,10 @@ public class QuadHelper {
 
     private static final QuadPos quadPos = new QuadPos(new Vector3f(0, 0, 0), new Vector3f(16, 16, 16));
 
-    public static final float[] UVS_TOP_LEFT = new float[] { 0, 0, 8, 8 };
-    public static final float[] UVS_TOP_RIGHT = new float[] { 8, 0, 16, 8 };
-    public static final float[] UVS_BOTTOM_LEFT = new float[] { 0, 8, 8, 16 };
-    public static final float[] UVS_BOTTOM_RIGHT = new float[] { 8, 8, 16, 16 };
+    public static final ISubmap TOP_LEFT = new Submap(8, 8, 0, 0);
+    public static final ISubmap TOP_RIGHT = new Submap(8, 8, 8, 0);
+    public static final ISubmap BOTTOM_LEFT = new Submap(8, 8, 0, 8);
+    public static final ISubmap BOTTOM_RIGHT = new Submap(8, 8, 8, 8);
 
     /**
      * Make a normal quad for a face
