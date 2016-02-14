@@ -208,7 +208,7 @@ public class Quad {
         if (min < 0.5 && max > 0.5) {
             UVs first = new UVs(vertical ? uvs.minU : 0.5f, vertical ? 0.5f : uvs.minV, uvs.maxU, uvs.maxV, uvs.getSprite());
             UVs second = new UVs(uvs.minU, uvs.minV, vertical ? uvs.maxU : 0.5f, vertical ? 0.5f : uvs.maxV, uvs.getSprite());
-            
+                        
             int firstIndex = 0;
             for (int i = 0; i < vertUv.length; i++) {
                 if (vertUv[i].y == getUvs().minV && vertUv[i].x == getUvs().minU) {
@@ -263,6 +263,40 @@ public class Quad {
         float ret = (x - min) / (max - min);
         return ret;
     }
+
+    public Quad derotate() {
+        Vector2f[] uvs = new Vector2f[4];
+        int start = 0;
+        for (int i = 0; i < 4; i++) {
+            if (vertUv[i].x <= getUvs().minU && vertUv[i].y <= getUvs().minV) {
+                start = i;
+                break;
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            TextureAtlasSprite s = getUvs().getSprite();
+            Vector2f normalized = new Vector2f(normalize(s.getMinU(), s.getMaxU(), vertUv[i].x), normalize(s.getMinV(), s.getMaxV(), vertUv[i].y));
+            Vector2f uv;
+            switch (start) {
+            case 1:
+                uv = new Vector2f(normalized.y, 1 - normalized.x);
+                break;
+            case 2:
+                uv = new Vector2f(1 - normalized.x, 1 - normalized.y);
+                break;
+            case 3:
+                uv = new Vector2f(1 - normalized.y, normalized.x);
+                break;
+            default:
+                uv = new Vector2f(normalized.x, normalized.y);
+                break;
+            }
+            uvs[i] = new Vector2f(lerp(s.getMinU(), s.getMaxU(), uv.x), lerp(s.getMinV(), s.getMaxV(), uv.y));
+        }
+
+        return new Quad(vertPos, new UVs(getUvs().getSprite(), uvs), builder);
+    }
     
     public BakedQuad rebake() {
         UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(this.builder.vertexFormat);
@@ -305,7 +339,7 @@ public class Quad {
     public static Quad from(BakedQuad baked, VertexFormat fmt) {
         Builder b = new Builder(fmt);
         baked.pipe(b);
-        return b.build();
+        return b.build().derotate(); // for now we will ignore rotated UVs
     }
     
     @RequiredArgsConstructor
