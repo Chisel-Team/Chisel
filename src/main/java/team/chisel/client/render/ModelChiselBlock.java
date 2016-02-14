@@ -1,9 +1,9 @@
 package team.chisel.client.render;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.vecmath.Matrix4f;
 
 import net.minecraft.block.state.IBlockState;
@@ -50,27 +50,29 @@ import com.google.common.collect.Ordering;
 @SuppressWarnings("deprecation")
 public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPerspectiveAwareModel {
 
-    private List<BakedQuad> quads;
+    private List<BakedQuad> face;
+    private List<BakedQuad> general;
 
     private BlockFaceData.VariationFaceData variationData;
 
-    public ModelChiselBlock(List<BakedQuad> quads, BlockFaceData.VariationFaceData data){
-        this.quads = quads;
+    public ModelChiselBlock(List<BakedQuad> face, List<BakedQuad> general, BlockFaceData.VariationFaceData data){
+        this.face = face;
+        this.general = general;
         this.variationData = data;
     }
 
     public ModelChiselBlock(){
-        this(new ArrayList<BakedQuad>(), null);
+        this(Collections.emptyList(), Collections.emptyList(), null);
     }
 
     @Override
     public List<BakedQuad> getFaceQuads(EnumFacing facing){
-        return FluentIterable.from(quads).filter(quad -> quad.getFace() == facing).toList();
+        return FluentIterable.from(face).filter(quad -> quad.getFace() == facing).toList();
     }
 
     @Override
     public List<BakedQuad> getGeneralQuads() {
-        return Collections.emptyList(); // TODO this should be a separate list when we implement non-full blocks
+        return general;
     }
 
     @Override
@@ -103,55 +105,52 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPer
     }
 
     // TODO implement model caching, returning a new model every time is a HUGE waste of memory and CPU
-    
+
     @Override
-    public IBakedModel handleBlockState(IBlockState stateIn){
-//        Chisel.debug("Handling blockstate "+stateIn);
-        if (stateIn.getBlock() instanceof ICarvable && stateIn instanceof IExtendedBlockState){
+    public IBakedModel handleBlockState(IBlockState stateIn) {
+        if (stateIn.getBlock() instanceof ICarvable && stateIn instanceof IExtendedBlockState) {
             IExtendedBlockState state = (IExtendedBlockState) stateIn;
             ICarvable block = (ICarvable) state.getBlock();
             RenderContextList ctxList = state.getValue(BlockCarvable.CTX_LIST);
-            List<BakedQuad> quads = new ArrayList<BakedQuad>();
             VariationFaceData variationData = block.getBlockFaceData().getForMeta(MathHelper.clamp_int(block.getVariationIndex(state), 0, block.getVariations().length));
-            for (EnumFacing facing : EnumFacing.VALUES){
-                IChiselFace face = variationData.getFaceForSide(facing);
-                if (MinecraftForgeClient.getRenderLayer() != face.getLayer()) {
-                    Chisel.debug("Skipping Layer " + MinecraftForgeClient.getRenderLayer() + " for block " + state);
-                    continue;
-                }
-                int quadGoal = Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
-                List<BakedQuad> allQuads = Lists.newArrayList();
-                IBakedModel model = ChiselModelRegistry.INSTANCE.getBaseModel();
-                allQuads.addAll(model.getFaceQuads(facing));
-                allQuads.addAll(FluentIterable.from(model.getGeneralQuads()).filter(q -> q.getFace() == facing).toList());
-                for (BakedQuad q : allQuads) {
-                    for (IChiselTexture<?> tex : face.getTextureList()) {
-                        quads.addAll(tex.transformQuad(q, ctxList.getRenderContext(tex.getType()), quadGoal));
-                    }
-                }
-            }
-            return new ModelChiselBlock(quads, variationData);
-        }
-        else {
+            return createModel(block, variationData, ctxList);
+        } else {
             return this;
         }
     }
 
     @Override
     public IBakedModel handleItemState(ItemStack stack) {
-//        Chisel.debug("Handling item model for " + stack);
         BlockCarvable block = (BlockCarvable) ((ItemBlock) stack.getItem()).getBlock();
         VariationFaceData variationData = block.getBlockFaceData().getForMeta(stack.getItemDamage());
-        List<BakedQuad> quads = new ArrayList<>();
-        for (EnumFacing facing : EnumFacing.VALUES) {
-            // quads.add(QuadHelper.makeNormalFaceQuad(facing, varData.getFaceForSide(facing).getParticle()));
-            for (BakedQuad q : ChiselModelRegistry.INSTANCE.getBaseModel().getFaceQuads(facing)) {
-                for (IChiselTexture<?> tex : variationData.getFaceForSide(facing).getTextureList()) {
-                    quads.addAll(tex.transformQuad(q, null, 1));
-                }
+        return createModel(block, variationData, null);
+    }
+    
+    private ModelChiselBlock createModel(ICarvable block, VariationFaceData variationData, RenderContextList ctx) {
+        List<BakedQuad> faceQuads = Lists.newArrayList();
+        List<BakedQuad> generalQuads = Lists.newArrayList();
+        for (EnumFacing facing : EnumFacing.VALUES){
+            IChiselFace face = variationData.getFaceForSide(facing);
+            if (ctx != null && MinecraftForgeClient.getRenderLayer() != face.getLayer()) {
+                Chisel.debug("Skipping Layer " + MinecraftForgeClient.getRenderLayer() + " for block " + block);
+                continue;
+            }
+            int quadGoal = ctx == null ? 1 : Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
+            IBakedModel model = ChiselModelRegistry.INSTANCE.getBaseModel();
+            List<BakedQuad> origFaceQuads = model.getFaceQuads(facing);
+            List<BakedQuad> origGeneralQuads = FluentIterable.from(model.getGeneralQuads()).filter(q -> q.getFace() == facing).toList();
+            addAllQuads(origFaceQuads, face, ctx, quadGoal, faceQuads);
+            addAllQuads(origGeneralQuads, face, ctx, quadGoal, generalQuads);
+        }
+        return new ModelChiselBlock(faceQuads, generalQuads, variationData);
+    }
+    
+    private void addAllQuads(List<BakedQuad> from, IChiselFace face, @Nullable RenderContextList ctx, int quadGoal, List<BakedQuad> to) {
+        for (BakedQuad q : from) {
+            for (IChiselTexture<?> tex : face.getTextureList()) {
+                to.addAll(tex.transformQuad(q, ctx == null ? null : ctx.getRenderContext(tex.getType()), quadGoal));
             }
         }
-        return new ModelChiselBlock(quads, variationData);
     }
 
     @Override

@@ -292,10 +292,10 @@ public class Quad {
                 uv = new Vector2f(normalized.x, normalized.y);
                 break;
             }
-            uvs[i] = new Vector2f(lerp(s.getMinU(), s.getMaxU(), uv.x), lerp(s.getMinV(), s.getMaxV(), uv.y));
+            uvs[i] = uv;
         }
 
-        return new Quad(vertPos, new UVs(getUvs().getSprite(), uvs), builder);
+        return new Quad(vertPos, new UVs(getUvs().getSprite(), uvs).relativize(), builder);
     }
     
     public BakedQuad rebake() {
