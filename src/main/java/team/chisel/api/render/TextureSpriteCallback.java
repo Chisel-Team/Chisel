@@ -13,15 +13,15 @@ public class TextureSpriteCallback {
 
     private TextureAtlasSprite sprite;
 
-    public TextureSpriteCallback(ResourceLocation loc){
+    public TextureSpriteCallback(ResourceLocation loc) {
         this.location = loc;
     }
 
-    public void stitch(TextureMap map){
+    public void stitch(TextureMap map) {
         this.sprite = map.registerSprite(location);
     }
 
-    public TextureAtlasSprite getSprite(){
+    public TextureAtlasSprite getSprite() {
         return this.sprite;
     }
 }

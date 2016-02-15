@@ -1,8 +1,6 @@
 package team.chisel.api.render;
 
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.world.IBlockAccess;
 
 /**
  * Interface for chisel block render types MUST HAVE A NO ARGS CONSTRUCTOR

@@ -18,7 +18,6 @@ public class TextureStitcher {
         for (TextureSpriteCallback callback : textures) {
             callback.stitch(event.map);
         }
-        //CTMBlockResources.refreshAll(event.map);
     }
 
     public static void register(TextureSpriteCallback callback) {

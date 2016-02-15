@@ -3,7 +3,6 @@ package team.chisel.api.block;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import team.chisel.api.render.IQuadMutator;
 import team.chisel.client.BlockFaceData;
 
 public interface ICarvable {

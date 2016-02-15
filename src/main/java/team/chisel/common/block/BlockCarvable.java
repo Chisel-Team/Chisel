@@ -28,7 +28,6 @@ import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.render.IBlockRenderType;
-import team.chisel.api.render.IQuadMutator;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.BlockFaceData;
 import team.chisel.client.ClientUtil;

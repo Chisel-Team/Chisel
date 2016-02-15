@@ -9,7 +9,6 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
-import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctm.CTM;
 import team.chisel.client.render.ctm.ISubmap;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
@@ -37,13 +36,13 @@ public class ChiselTextureCTMH extends AbstractChiselTexture<BlockRenderTypeCTMH
 
     private ISubmap getQuad(CTM ctm) {
         if (ctm == null || !ctm.connectedOr(Dir.LEFT, Dir.RIGHT)) {
-            return QuadHelper.TOP_LEFT;
+            return Quad.TOP_LEFT;
         } else if (ctm.connectedAnd(Dir.LEFT, Dir.RIGHT)) {
-            return QuadHelper.TOP_RIGHT;
+            return Quad.TOP_RIGHT;
         } else if (ctm.connected(Dir.LEFT)) {
-            return QuadHelper.BOTTOM_RIGHT;
+            return Quad.BOTTOM_RIGHT;
         } else {
-            return QuadHelper.BOTTOM_LEFT;
+            return Quad.BOTTOM_LEFT;
         }
     }
 }

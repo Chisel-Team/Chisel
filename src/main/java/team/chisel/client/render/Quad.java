@@ -27,6 +27,7 @@ import org.lwjgl.util.vector.Vector3f;
 
 import team.chisel.client.render.ctm.CTM;
 import team.chisel.client.render.ctm.ISubmap;
+import team.chisel.client.render.ctm.Submap;
 
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
@@ -34,6 +35,11 @@ import com.google.common.collect.MultimapBuilder;
 
 @ToString(of = { "vertPos", "vertUv" })
 public class Quad {
+    
+    public static final ISubmap TOP_LEFT = new Submap(8, 8, 0, 0);
+    public static final ISubmap TOP_RIGHT = new Submap(8, 8, 8, 0);
+    public static final ISubmap BOTTOM_LEFT = new Submap(8, 8, 0, 8);
+    public static final ISubmap BOTTOM_RIGHT = new Submap(8, 8, 8, 8);
     
     @Value
     public static class Vertex {
