@@ -101,6 +101,7 @@ public class Quad {
             float maxU = minU + (width * submap.getWidth());
             float maxV = minV + (height * submap.getHeight());
 
+            // TODO this is horrid
             return new UVs(other, 
                     new Vector2f(data[0].x == this.minU ? minU : maxU, data[0].y == this.minV ? minV : maxV), 
                     new Vector2f(data[1].x == this.minU ? minU : maxU, data[1].y == this.minV ? minV : maxV), 
