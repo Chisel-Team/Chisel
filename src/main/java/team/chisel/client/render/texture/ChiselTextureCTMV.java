@@ -11,7 +11,9 @@ import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
+import team.chisel.client.render.QuadHelper;
 import team.chisel.client.render.ctm.ISubmap;
+import team.chisel.client.render.ctx.CTMVBlockRenderContext;
 import team.chisel.client.render.ctx.CTMVBlockRenderContext.ConnectionData;
 import team.chisel.client.render.ctx.CTMVBlockRenderContext.Connections;
 import team.chisel.client.render.type.BlockRenderTypeCTMV;
@@ -29,16 +31,14 @@ public class ChiselTextureCTMV extends AbstractChiselTexture<BlockRenderTypeCTMV
 
     @Override
     public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
-        return Lists.newArrayList(Quad.from(quad, DefaultVertexFormats.ITEM).transformUVs(sprites[0].getSprite()).rebake());
-        /*
         if (context == null) {
-            return Lists.newArrayList(makeUVFaceQuad(side, sprites[1].getSprite(), new float[] { 0, 0, 8, 8 }));
+            return Lists.newArrayList(Quad.from(quad, DefaultVertexFormats.ITEM).transformUVs(sprites[1].getSprite(), QuadHelper.TOP_LEFT).rebake());
         }
-        return Lists.newArrayList(getQuad(side, ((CTMVBlockRenderContext) context).getData()));
-        */
+        return Lists.newArrayList(getQuad(quad, ((CTMVBlockRenderContext) context).getData()));
     }
 
-    private BakedQuad getQuad(EnumFacing side, ConnectionData data) {
+    private BakedQuad getQuad(BakedQuad in, ConnectionData data) {
+        Quad q = Quad.from(in, DefaultVertexFormats.ITEM);
         Connections cons = data.getConnections();
         
         // This is the order of operations for connections
@@ -60,15 +60,15 @@ public class ChiselTextureCTMV extends AbstractChiselTexture<BlockRenderTypeCTMV
 
         int rotation = 0;
         ISubmap uvs = TOP_LEFT;
-        if (side.getAxis().isHorizontal() && cons.connectedOr(UP, DOWN)) {
+        if (in.getFace().getAxis().isHorizontal() && cons.connectedOr(UP, DOWN)) {
             uvs = getUVs(UP, DOWN, cons);
         } else if (cons.connectedOr(EAST, WEST)) {
-            rotation = 90;
+            rotation = 1;
             uvs = getUVs(EAST, WEST, cons);
         } else if (cons.connectedOr(NORTH, SOUTH)) {
             uvs = getUVs(NORTH, SOUTH, cons);
-            if (side == DOWN) {
-                rotation += 180;
+            if (in.getFace() == DOWN) {
+                rotation += 2;
             }
         }
 
@@ -76,30 +76,31 @@ public class ChiselTextureCTMV extends AbstractChiselTexture<BlockRenderTypeCTMV
 
         // Side textures need to be rotated to look correct
         if (connected && !cons.connectedOr(UP, DOWN)) {
-            if (side == EAST) {
-                rotation += 90;
+            if (in.getFace() == EAST) {
+                rotation += 1;
             }
-            if (side == NORTH) {
-                rotation += 180;
+            if (in.getFace() == NORTH) {
+                rotation += 2;
             }
-            if (side == WEST) {
-                rotation += 270;
+            if (in.getFace() == WEST) {
+                rotation += 3;
             }
         }
 
         // If there is a connection opposite this side, it is an end-cap, so render as unconnected
-        if (cons.connected(side.getOpposite())) {
+        if (cons.connected(in.getFace().getOpposite())) {
             connected = false;
         }
         // If there are no connections at all, and this is not the top or bottom, render the "short" column texture
-        if (cons.getConnections().isEmpty() && side.getAxis().isHorizontal()) {
+        if (cons.getConnections().isEmpty() && in.getFace().getAxis().isHorizontal()) {
             connected = true;
         }
         
+        q = q.rotate(rotation);
         if (connected) {
-            return makeUVFaceQuad(side, sprites[1].getSprite(), uvs.toArray(), rotation);
+            return q.transformUVs(sprites[1].getSprite(), uvs).rebake();
         }
-        return makeNormalFaceQuad(side, sprites[0].getSprite());
+        return q.transformUVs(sprites[0].getSprite()).rebake();
     }
 
     private ISubmap getUVs(EnumFacing face1, EnumFacing face2, Connections cons) {
