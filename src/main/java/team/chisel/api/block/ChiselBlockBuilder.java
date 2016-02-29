@@ -90,7 +90,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings("unchecked")
-    public T[] build(Consumer<T> after) {
+    public T[] build(Consumer<? super T> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
         }
@@ -220,7 +220,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return buildVariation().build();
         }
         
-        public T[] build(Consumer<T> after) {
+        public T[] build(Consumer<? super T> after) {
             return buildVariation().build(after);
         }
 

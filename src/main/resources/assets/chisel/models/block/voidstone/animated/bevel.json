@@ -1,0 +1,9 @@
+{
+    "model":"block/pane_ns",
+    "models": {},
+    
+    "face":"chisel:voidstone/animated/bevel.cf",
+    "overrides": {
+        "UP":"chisel:voidstone/animated/metalborder.cf"
+    }
+}

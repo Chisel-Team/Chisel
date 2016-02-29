@@ -1,10 +1,12 @@
 package team.chisel.api.render;
 
+import java.util.Collection;
 import java.util.List;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Represents a Chisel Texture/resource
@@ -24,6 +26,8 @@ public interface IChiselTexture<T extends IBlockRenderType> {
      */
     List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal);
 
+    Collection<ResourceLocation> getTextures();
+    
     /**
      * Gets the block render type of this texture
      * 

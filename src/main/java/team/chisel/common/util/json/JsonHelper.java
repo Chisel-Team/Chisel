@@ -121,6 +121,7 @@ public class JsonHelper {
             cachedException = new RuntimeException("Error loading file " + absolute, e);
             return false;
         }
+
         if (object.has("textures") || object.has("type")) {
             objectCache.put(relative, object);
             return true;

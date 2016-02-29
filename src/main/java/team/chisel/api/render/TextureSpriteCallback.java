@@ -1,5 +1,6 @@
 package team.chisel.api.render;
 
+import lombok.Getter;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.ResourceLocation;
@@ -7,10 +8,10 @@ import net.minecraft.util.ResourceLocation;
 /**
  * Callback when textures are stitched
  */
+@Getter
 public class TextureSpriteCallback {
 
     private ResourceLocation location;
-
     private TextureAtlasSprite sprite;
 
     public TextureSpriteCallback(ResourceLocation loc) {
@@ -19,9 +20,5 @@ public class TextureSpriteCallback {
 
     public void stitch(TextureMap map) {
         this.sprite = map.registerSprite(location);
-    }
-
-    public TextureAtlasSprite getSprite() {
-        return this.sprite;
     }
 }

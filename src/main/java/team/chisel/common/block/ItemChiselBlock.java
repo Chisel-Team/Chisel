@@ -10,6 +10,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
+import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 
 /**
@@ -19,11 +20,11 @@ import team.chisel.api.block.VariationData;
  */
 public class ItemChiselBlock extends ItemBlock {
 
-    private BlockCarvable block;
+    private ICarvable block;
 
     public ItemChiselBlock(Block block) {
         super(block);
-        this.block = (BlockCarvable) block;
+        this.block = (ICarvable) block;
         this.setHasSubtypes(true);
     }
 

@@ -11,16 +11,18 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import team.chisel.api.block.BlockCreator;
 import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
+import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
+import team.chisel.common.block.BlockCarvablePane;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
@@ -405,7 +407,12 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "glasspane", provider).newVariation("chinese").setTextureLocation("glasspane/chinese-side").setTextureLocation("glasspane/chinese-top", Axis.Y).next("chinese2").setTextureLocation("glasspane/chinese2-side").setTextureLocation("glasspane/chinese2-top", Axis.Y).next("japanese").setTextureLocation("glasspane/japanese-side").setTextureLocation("glasspane/japanese-top", Axis.Y).next("japanese2").setTextureLocation("glasspane/japanese2-side").setTextureLocation("glasspane/japanese2-top", Axis.Y).next("terrain-glass-screen").next("terrain-glassbubble").setTextureLocation("glasspane/terrain-glassbubble-side").setTextureLocation("glasspane/terrain-glassbubble-top", Axis.Y).next("terrain-glassnoborder").setTextureLocation("glasspane/terrain-glassnoborder-side").setTextureLocation("glasspane/terrain-glassnoborder-top", Axis.Y).next("terrain-glassstreak").setTextureLocation("glasspane/terrain-glassstreak-side").setTextureLocation("glasspane/terrain-glassstreak-top", Axis.Y).build();
+            factory.newBlock(Material.rock, "glasspane", new ChiselBlockProvider<BlockCarvablePane>(new BlockCreator<BlockCarvablePane>() {
+                @Override
+                public BlockCarvablePane createBlock(Material mat, int index, int maxVariation, VariationData... data) {
+                    return new BlockCarvablePane(mat, false, index, maxVariation, data);
+                }
+            }, BlockCarvablePane.class)).newVariation("chinese").setTextureLocation("glasspane/chinese-side").setTextureLocation("glasspane/chinese-top", Axis.Y).next("chinese2").setTextureLocation("glasspane/chinese2-side").setTextureLocation("glasspane/chinese2-top", Axis.Y).next("japanese").setTextureLocation("glasspane/japanese-side").setTextureLocation("glasspane/japanese-top", Axis.Y).next("japanese2").setTextureLocation("glasspane/japanese2-side").setTextureLocation("glasspane/japanese2-top", Axis.Y).next("terrain-glass-screen").next("terrain-glassbubble").setTextureLocation("glasspane/terrain-glassbubble-side").setTextureLocation("glasspane/terrain-glassbubble-top", Axis.Y).next("terrain-glassnoborder").setTextureLocation("glasspane/terrain-glassnoborder-side").setTextureLocation("glasspane/terrain-glassnoborder-top", Axis.Y).next("terrain-glassstreak").setTextureLocation("glasspane/terrain-glassstreak-side").setTextureLocation("glasspane/terrain-glassstreak-top", Axis.Y).build();
         }
     },
 
@@ -1159,7 +1166,7 @@ public enum Features {
     private static final ChiselBlockProvider<BlockCarvable> provider = new ChiselBlockProvider<>(creator, BlockCarvable.class);
     
     @RequiredArgsConstructor
-    private static class ChiselBlockProvider<T extends BlockCarvable> implements BlockProvider<T> {
+    private static class ChiselBlockProvider<T extends Block & ICarvable> implements BlockProvider<T> {
 
         private final BlockCreator<T> creator;
         @Getter

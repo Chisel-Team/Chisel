@@ -1,5 +1,6 @@
 package team.chisel.api.block;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -36,7 +37,7 @@ public interface ICarvable {
      *            The current {@link IExtendedBlockState}.
      * @return The variation index.
      */
-    int getVariationIndex(IExtendedBlockState state);
+    int getVariationIndex(IBlockState state);
 
     /**
      * Called whenever resources are reloaded. Used to update render information.

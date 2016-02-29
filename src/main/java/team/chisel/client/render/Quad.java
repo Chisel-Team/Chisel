@@ -125,7 +125,7 @@ public class Quad {
             float maxUInterp = quadrant == 0 || quadrant == 3 ? 0.5f : 1;
             float maxVInterp = quadrant > 1 ? 0.5f : 1;
             
-            normal = new UVs(sprite, normalize(new Vector2f(minUInterp, minVInterp), new Vector2f(maxUInterp, maxVInterp), data));
+            normal = new UVs(sprite, normalize(new Vector2f(minUInterp, minVInterp), new Vector2f(maxUInterp, maxVInterp), normal.vectorize()));
             return normal.relativize();
         }
         
@@ -308,6 +308,7 @@ public class Quad {
     
     public Quad rotate(int amount) {
         Vector2f[] uvs = new Vector2f[4];
+
         TextureAtlasSprite s = getUvs().getSprite();
 
         for (int i = 0; i < 4; i++) {
@@ -348,7 +349,11 @@ public class Quad {
             }
         }
         
-        return rotate((4 - start) % 4);
+        Vector2f[] uvs = new Vector2f[4];
+        for (int i = 0; i < 4; i++) {
+            uvs[i] = vertUv[(i + start) % 4];
+        }
+        return new Quad(vertPos, uvs, builder);
     }
     
     public BakedQuad rebake() {

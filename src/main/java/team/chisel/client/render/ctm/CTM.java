@@ -272,7 +272,8 @@ public class CTM {
             return false;
         }
 
-        boolean ret = con.equals(state);
+        // TODO VERY TEMPORARY
+        boolean ret = con.getBlock() == state.getBlock();
 
         // no block obscuring this face
         if (obscuring == null) {
@@ -280,7 +281,7 @@ public class CTM {
         }
 
         // check that we aren't already connected outwards from this side
-        ret &= !obscuring.equals(state);
+        ret &= !obscuring.getBlock().isFullCube() || !obscuring.equals(state);
 
         return ret;
     }

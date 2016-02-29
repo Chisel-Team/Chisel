@@ -3,18 +3,17 @@ package team.chisel.common.block;
 import java.util.List;
 
 import lombok.Getter;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
@@ -32,111 +31,43 @@ import team.chisel.api.render.RenderContextList;
 import team.chisel.client.BlockFaceData;
 import team.chisel.client.ClientUtil;
 import team.chisel.common.init.ChiselTabs;
+import team.chisel.common.init.TextureTypeRegistry;
 import team.chisel.common.util.PropertyAnyInteger;
-import team.chisel.common.util.PropertyRenderContextList;
 
-/**
- * Represents a Carvable (aka Chisilable) block
- */
-public class BlockCarvable extends Block implements ICarvable {
+import com.google.common.collect.Lists;
 
-    /**
-     * The Property for the variation of this block
-     */
+import static team.chisel.common.block.BlockCarvable.CTX_LIST;
+
+public class BlockCarvablePane extends BlockPane implements ICarvable {
+
+    // TODO this class is completely temporary. Need to make a helper object which does all this ICarvable logic
+    
     private final PropertyAnyInteger metaProp;
-
-    public static final PropertyRenderContextList CTX_LIST = new PropertyRenderContextList();
-
-    private final int index;
 
     @SideOnly(Side.CLIENT)
     private BlockFaceData blockFaceData;
-
+    
     @Getter
     private final VariationData[] variations;
-
-    private final BlockState realBlockState;
+    private int index;
 
     private final int maxVariation;
+    
+    private final BlockState realBlockState;
 
-    public BlockCarvable(Material material, int index, int max, VariationData... variations) {
-        super(material);
+    
+    public BlockCarvablePane(Material material, boolean canDrop, int index, int max, VariationData... variations) {
+        super(material, canDrop);
         setCreativeTab(ChiselTabs.tab);
         this.index = index;
         this.variations = variations;
         this.maxVariation = max;
         this.metaProp = PropertyAnyInteger.create("Variation", 0, max > index * 16 ? 15 : max % 16);
-        this.realBlockState = createRealBlockState(metaProp);
+        this.realBlockState = createRealBlockState();
         setupStates();
         Chisel.proxy.initiateFaceData(this);
     }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public BlockFaceData getBlockFaceData() {
-        return this.blockFaceData;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void setBlockFaceData(BlockFaceData data) {
-        this.blockFaceData = data;
-    }
-
-//    @SideOnly(Side.CLIENT)
-//    @Override
-//    public IQuadMutator getQuadMutator(){
-//        //todo finish this
-//    }
-
-    @Override
-    public int getVariationIndex(IBlockState state) {
-        return getMetaFromState(state);
-    }
-
-    @Override
-    public int getTotalVariations() {
-        return this.maxVariation + 1; // off-by-one
-    }
-
-    @Override
-    public BlockState getBlockState() {
-        return this.realBlockState;
-    }
-
-    @Override
-    public int getIndex() {
-        return this.index;
-    }
-
-    @Override
-    public VariationData getVariationData(int meta) {
-        return this.variations[MathHelper.clamp_int(meta, 0, this.variations.length - 1)];
-    }
-
-    private BlockState createRealBlockState(PropertyAnyInteger p) {
-        return new ExtendedBlockState(this, new IProperty[] { p }, new IUnlistedProperty[] { CTX_LIST });
-    }
-
-    @Override
-    public BlockState createBlockState() {
-        return Blocks.air.getBlockState();
-    }
-
-    private void setupStates() {
-        IBlockState state = getExtendedBlockState().withProperty(CTX_LIST, new RenderContextList()).withProperty(metaProp, 0);
-        state = state.withProperty(metaProp, 0);
-        this.setDefaultState(state);
-    }
-
-    public ExtendedBlockState getBaseExtendedState() {
-        return (ExtendedBlockState) this.getBlockState();
-    }
-
-    public IExtendedBlockState getExtendedBlockState() {
-        return (IExtendedBlockState) this.getBaseExtendedState().getBaseState();
-    }
-
+    
     @Override
     public int damageDropped(IBlockState state) {
         return getMetaFromState(state);
@@ -151,6 +82,7 @@ public class BlockCarvable extends Block implements ICarvable {
     public int getMetaFromState(IBlockState state) {
         return state.getValue(metaProp);
     }
+    
 
     public String getIndexName() {
         if (index == 0) {
@@ -167,7 +99,8 @@ public class BlockCarvable extends Block implements ICarvable {
             return stateIn;
         }
         IExtendedBlockState state = (IExtendedBlockState) stateIn;
-        List<IBlockRenderType> types = this.blockFaceData.getForMeta(getMetaFromState(state)).getTypesUsed();
+        List<IBlockRenderType> types = Lists.newArrayList(this.blockFaceData.getForMeta(getMetaFromState(state)).getTypesUsed());
+        types.add(TextureTypeRegistry.getType("CTM"));
 
         RenderContextList ctxList = new RenderContextList(types, w, pos);
 
@@ -194,6 +127,11 @@ public class BlockCarvable extends Block implements ICarvable {
             list.add(stack);
         }
     }
+    
+    @Override
+    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+        return super.shouldSideBeRendered(worldIn, pos, side);
+    }
 
     @Override
     public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer) {
@@ -207,29 +145,59 @@ public class BlockCarvable extends Block implements ICarvable {
         return true;
     }
     
-    @Override
-    public int getRenderType() {
-        return 3;
+    
+    private BlockState createRealBlockState() {
+        return new ExtendedBlockState(this, new IProperty[] { metaProp, NORTH, SOUTH, EAST, WEST }, new IUnlistedProperty[] { CTX_LIST });
     }
 
-    @Override
+    private void setupStates() {
+        IBlockState state = getExtendedBlockState().withProperty(CTX_LIST, new RenderContextList()).withProperty(metaProp, 0);
+        state = state.withProperty(metaProp, 0);
+        this.setDefaultState(state);
+    }
+    
+    public ExtendedBlockState getBaseExtendedState() {
+        return (ExtendedBlockState) this.getBlockState();
+    }
+
+    public IExtendedBlockState getExtendedBlockState() {
+        return (IExtendedBlockState) this.getBaseExtendedState().getBaseState();
+    }
+
     @SideOnly(Side.CLIENT)
-    public boolean canRenderInLayer(EnumWorldBlockLayer layer) {
-        return this.blockFaceData.isValid(layer);
+    @Override
+    public BlockFaceData getBlockFaceData() {
+        return this.blockFaceData;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void setBlockFaceData(BlockFaceData data) {
+        this.blockFaceData = data;
     }
 
     @Override
-    public boolean isFullBlock() {
-        return isOpaqueCube();
+    public int getVariationIndex(IBlockState state) {
+        return getMetaFromState(state);
     }
 
     @Override
-    public boolean isFullCube() {
-        return true;
+    public int getTotalVariations() {
+        return this.maxVariation + 1; // off-by-one
     }
 
     @Override
-    public boolean isVisuallyOpaque() {
-        return true;
+    public BlockState getBlockState() {
+        return this.realBlockState;
+    }
+
+    @Override
+    public int getIndex() {
+        return this.index;
+    }
+
+    @Override
+    public VariationData getVariationData(int meta) {
+        return this.variations[MathHelper.clamp_int(meta, 0, this.variations.length - 1)];
     }
 }

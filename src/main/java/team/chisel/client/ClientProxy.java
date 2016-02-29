@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -16,6 +17,7 @@ import team.chisel.api.block.ICarvable;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.handler.TooltipHandler;
 import team.chisel.client.render.ChiselModelRegistry;
+import team.chisel.client.render.ModelLoaderChisel;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.init.TextureTypeRegistry;
 
@@ -29,7 +31,9 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
-
+        
+        ModelLoaderRegistry.registerLoader(new ModelLoaderChisel());
+        
         ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselIron, 0, new ModelResourceLocation(Chisel.itemChiselIron.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselDiamond, 0, new ModelResourceLocation(Chisel.itemChiselDiamond.getRegistryName(), "inventory"));
 
