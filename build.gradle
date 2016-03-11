@@ -109,6 +109,22 @@ task apiJar(type: Jar) {
     classifier = 'api'
 }
 
+publishing {
+    tasks.publish.dependsOn 'build'
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourceJar
+            artifact apiJar
+        }
+    }
+
+    repositories {
+        if (project.hasProperty('mavendir')) {
+            maven { url mavendir }
+        }
+    }
+}
 
 String getChangelogText() {
     def changelogFile = file('changelog.txt')
