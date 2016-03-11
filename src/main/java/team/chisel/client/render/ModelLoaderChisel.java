@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import jline.internal.InputStreamReader;
-import net.minecraft.client.renderer.block.model.Hax;
+import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
@@ -19,9 +19,9 @@ import com.google.gson.Gson;
 
 public class ModelLoaderChisel implements ICustomModelLoader {
 
-    private static final String DEFAULT_MODEL = "{\"model\":\"block/cube\", \"face\":\"%s\"}";
+    private static final String DEFAULT_MODEL = "{\"model\": { \"model\": \"cube\" }, \"face\":\"%s\"}";
     
-    private final Gson gson = Hax.getGson();
+    private final Gson gson = ModelBlockDefinition.GSON;
     
     private IResourceManager manager;
     private Map<ResourceLocation, ModelChisel> loadedModels = Maps.newHashMap();
