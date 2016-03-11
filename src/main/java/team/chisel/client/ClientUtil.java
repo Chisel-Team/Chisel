@@ -64,7 +64,7 @@ public class ClientUtil {
             }
 
             ((EntityDiggingFX) Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.BLOCK_CRACK.getParticleID(), d0, d1, d2, 0.0D, 0.0D, 0.0D,
-                    Block.getIdFromBlock(state.getBlock()))).func_174846_a(pos).multiplyVelocity(0.2F).multipleParticleScaleBy(0.6F)
+                    Block.getIdFromBlock(state.getBlock()))).setBlockPos(pos).multiplyVelocity(0.2F).multipleParticleScaleBy(0.6F)
                     .setParticleIcon(Minecraft.getMinecraft().getBlockRendererDispatcher().getModelFromBlockState(state, world, pos).getParticleTexture());
             ;
         }
@@ -82,7 +82,7 @@ public class ClientUtil {
                     double d1 = (double) pos.getY() + ((double) k + 0.5D) / (double) i;
                     double d2 = (double) pos.getZ() + ((double) l + 0.5D) / (double) i;
                     ((EntityDiggingFX) Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.BLOCK_CRACK.getParticleID(), d0, d1, d2, d0 - pos.getX() - 0.5D, d1 - pos.getY()
-                            - 0.5D, d2 - pos.getZ() - 0.5D, Block.getIdFromBlock(state.getBlock()))).func_174846_a(pos).setParticleIcon(
+                            - 0.5D, d2 - pos.getZ() - 0.5D, Block.getIdFromBlock(state.getBlock()))).setBlockPos(pos).setParticleIcon(
                             Minecraft.getMinecraft().getBlockRendererDispatcher().getModelFromBlockState(state, world, pos).getParticleTexture());
                     ;
                 }
