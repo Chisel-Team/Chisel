@@ -8,10 +8,10 @@
             "to": [ 9, 16, 9 ],
             "shade": false,
             "faces": {
-                "down":  { "uv": [ 7, 0, 9, 9 ], "texture": "#edge", "cullface": "down" },
-                "up":    { "uv": [ 7, 0, 9, 9 ], "texture": "#edge", "cullface": "up" },
-                "north": { "uv": [ 7, 0, 9, 16 ], "texture": "#edge", "cullface": "north" },
-                "south": { "uv": [ 7, 0, 9, 16 ], "texture": "#edge", "cullface": "south" },
+                "down":  { "uv": [ 14, 0, 16, 9 ], "texture": "#edge", "cullface": "down" },
+                "up":    { "uv": [ 14, 0, 16, 9 ], "texture": "#edge", "cullface": "up" },
+                "north": { "uv": [ 14, 0, 16, 16 ], "texture": "#edge", "cullface": "north" },
+                "south": { "uv": [ 14, 0, 16, 16 ], "texture": "#edge", "cullface": "south" },
                 "west":  { "uv": [ 7, 0, 16, 16 ], "texture": "#pane" },
                 "east":  { "uv": [ 0, 0, 9, 16 ], "texture": "#pane" }
             }

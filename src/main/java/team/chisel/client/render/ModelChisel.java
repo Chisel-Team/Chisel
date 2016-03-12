@@ -39,7 +39,7 @@ public class ModelChisel implements IModel {
 
     private static StateMapperBase mapper = new DefaultStateMapper();
     
-    private String model;
+    private Variant model;
     private Map<String, Variant> models = Maps.newHashMap();;
     
     private String face;
@@ -57,7 +57,7 @@ public class ModelChisel implements IModel {
     
     @Override
     public Collection<ResourceLocation> getDependencies() {
-        List<ResourceLocation> list = Lists.newArrayList(new ResourceLocation(model));
+        List<ResourceLocation> list = Lists.newArrayList(model.getModelLocation());
         list.addAll(models.values().stream().map(v -> v.getModelLocation()).collect(Collectors.toList()));
         return list;
     }
@@ -71,7 +71,7 @@ public class ModelChisel implements IModel {
     @SneakyThrows
     public IFlexibleBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         Function<ResourceLocation, TextureAtlasSprite> dummyGetter = t -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
-        modelObj = ModelLoaderRegistry.getModel(new ResourceLocation(model)).bake(state, format, dummyGetter);
+        modelObj = ModelLoaderRegistry.getModel(model.getModelLocation()).bake(model.isUvLocked() ? new ModelLoader.UVLock(model.getState()) : model.getState(), format, dummyGetter);
         for (Entry<String, Variant> e : models.entrySet()) {
             Variant v = e.getValue();
             modelsObj.put(e.getKey(), ModelLoaderRegistry.getModel(v.getModelLocation()).bake(v.isUvLocked() ? new ModelLoader.UVLock(v.getState()) : v.getState(), format, dummyGetter));

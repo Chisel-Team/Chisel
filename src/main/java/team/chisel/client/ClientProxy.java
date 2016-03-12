@@ -58,7 +58,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preTextureStitch() {
         try {
-            ReflectionHelper.setPrivateValue(TextureMap.class, Minecraft.getMinecraft().getTextureMapBlocks(), false, "skipFirst");
+//            ReflectionHelper.setPrivateValue(TextureMap.class, Minecraft.getMinecraft().getTextureMapBlocks(), false, "skipFirst");
         } catch (Exception exception) {
             // Older version of forge, this is fine because it means this is not needed so no crash
         }
