@@ -114,6 +114,7 @@ public class ContainerChisel extends Container {
 			if (itemstack1.stackSize == 0) {
 				slot.putStack((ItemStack) null);
 			} else {
+				slot.putStack(itemstack1);
 				slot.onSlotChanged();
 			}
 			if (itemstack1.stackSize == itemstack.stackSize) {
