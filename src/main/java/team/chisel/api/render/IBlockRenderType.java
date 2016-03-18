@@ -1,6 +1,7 @@
 package team.chisel.api.render;
 
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
+
 
 /**
  * Interface for chisel block render types MUST HAVE A NO ARGS CONSTRUCTOR
@@ -19,7 +20,7 @@ public interface IBlockRenderType extends IRenderContextProvider{
      *            The Sprites
      * @return A Chisel Texture TODO This should probably take a bean, so that adding extra stuff later doesn't break API
      */
-    <T extends IBlockRenderType> IChiselTexture<? extends T> makeTexture(EnumWorldBlockLayer layer, TextureSpriteCallback... sprites);
+    <T extends IBlockRenderType> IChiselTexture<? extends T> makeTexture(BlockRenderLayer layer, TextureSpriteCallback... sprites);
 
 
     /**

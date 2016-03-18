@@ -2,15 +2,14 @@ package team.chisel.common.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import team.chisel.Chisel;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.carving.Carving;
-import team.chisel.common.item.ItemChisel;
 
 public class ContainerChisel extends Container {
 
@@ -70,13 +69,14 @@ public class ContainerChisel extends Container {
         return super.addSlotToContainer(slotIn);
     }
 
+    // TODO this has changed a lot, probaly won't work
     @Override
-    public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
+    public ItemStack /* slotClick */ func_184996_a(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
         // we need to subtract away all the other slots
-        int clickedSlot = par1 - inventory.getSizeInventory() - 27;
-        Chisel.debug("Slot clicked is "+par1+" and slot length is "+inventorySlots.size());
+        int clickedSlot = slotId - inventory.getSizeInventory() - 27;
+        Chisel.debug("Slot clicked is " + slotId + " and slot length is " + inventorySlots.size());
         try {
-            Slot slot = (Slot)inventorySlots.get(par1);
+            Slot slot = (Slot)inventorySlots.get(slotId);
             Chisel.debug("Slot is "+slot);
         } catch (Exception exception){
             Chisel.debug("Exception getting slot");
@@ -84,10 +84,10 @@ public class ContainerChisel extends Container {
         }
 
         // if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
-        if (clickedSlot == chiselSlot || (par3 == 2 && par2 == chiselSlot))
+        if (clickedSlot == chiselSlot || (clickTypeIn == ClickType.PICKUP && dragType == chiselSlot))
             return null;
 
-        return super.slotClick(par1, par2, par3, par4EntityPlayer);
+        return super.func_184996_a(slotId, dragType, clickTypeIn, player);
     }
 
     @Override

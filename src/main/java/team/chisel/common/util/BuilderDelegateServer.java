@@ -1,13 +1,13 @@
 package team.chisel.common.util;
 
+import java.util.Map;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.block.ChiselBlockBuilder;
 import team.chisel.api.block.ChiselRecipe;
 import team.chisel.api.block.VariationData;
-
-import java.util.Map;
 
 /**
  * Implementation for builder stuff

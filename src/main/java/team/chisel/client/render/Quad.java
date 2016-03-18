@@ -360,6 +360,7 @@ public class Quad {
         UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(this.builder.vertexFormat);
         builder.setQuadOrientation(this.builder.quadOrientation);
         builder.setQuadTint(this.builder.quadTint);
+        builder.setApplyDiffuseLighting(this.builder.applyDiffuseLighting);
 
         for (int v = 0; v < 4; v++) {
             for (int i = 0; i < this.builder.vertexFormat.getElementCount(); i++) {
@@ -412,9 +413,9 @@ public class Quad {
         @Setter
         private EnumFacing quadOrientation;
 
-        @Override
-        public void setQuadColored() {}
-
+        @Setter
+        private boolean applyDiffuseLighting;
+        
         private ListMultimap<EnumUsage, float[]> data = MultimapBuilder.enumKeys(EnumUsage.class).arrayListValues().build();
         
         @Override

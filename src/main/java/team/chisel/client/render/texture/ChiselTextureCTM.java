@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
@@ -18,7 +18,7 @@ import team.chisel.client.render.type.BlockRenderTypeCTM;
 
 public class ChiselTextureCTM extends AbstractChiselTexture<BlockRenderTypeCTM> {
 
-    public ChiselTextureCTM(BlockRenderTypeCTM type, EnumWorldBlockLayer layer, TextureSpriteCallback[] sprites) {
+    public ChiselTextureCTM(BlockRenderTypeCTM type, BlockRenderLayer layer, TextureSpriteCallback[] sprites) {
         super(type, layer, sprites);
     }
 

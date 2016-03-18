@@ -3,7 +3,7 @@ package team.chisel.api.render;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
 
 public interface IChiselFace {
 
@@ -15,7 +15,7 @@ public interface IChiselFace {
 
     TextureAtlasSprite getParticle();
 
-    void setLayer(EnumWorldBlockLayer layer);
+    void setLayer(BlockRenderLayer layer);
 
-    EnumWorldBlockLayer getLayer();
+    BlockRenderLayer getLayer();
 }

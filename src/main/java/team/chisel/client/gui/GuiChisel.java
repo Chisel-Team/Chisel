@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -53,7 +54,7 @@ public class GuiChisel extends GuiContainer {
     @Override
     public void updateScreen() {
         super.updateScreen();
-        ItemStack held = player.getCurrentEquippedItem();
+        ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND); // TODO
         if (held == null || !(held.getItem() instanceof ItemChisel)) {
             mc.displayGuiScreen(null);
         }

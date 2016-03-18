@@ -10,20 +10,19 @@ import java.util.stream.Collectors;
 import lombok.SneakyThrows;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelBlockDefinition.Variant;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.client.resources.model.IBakedModel;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.IFlexibleBakedModel;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.IModelState;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.client.model.ModelProcessingHelper;
 import net.minecraftforge.client.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.api.render.IChiselFace;
@@ -68,15 +67,21 @@ public class ModelChisel implements IModel {
     }
 
     @Override
-    @SneakyThrows
-    public IFlexibleBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
+    public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         Function<ResourceLocation, TextureAtlasSprite> dummyGetter = t -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
-        modelObj = ModelLoaderRegistry.getModel(model.getModelLocation()).bake(model.isUvLocked() ? new ModelLoader.UVLock(model.getState()) : model.getState(), format, dummyGetter);
+        modelObj = bake(model, format, dummyGetter);
         for (Entry<String, Variant> e : models.entrySet()) {
             Variant v = e.getValue();
-            modelsObj.put(e.getKey(), ModelLoaderRegistry.getModel(v.getModelLocation()).bake(v.isUvLocked() ? new ModelLoader.UVLock(v.getState()) : v.getState(), format, dummyGetter));
+            modelsObj.put(e.getKey(), bake(v, format, dummyGetter));
         }
         return new ModelChiselBlock(this);
+    }
+    
+    @SneakyThrows
+    private IBakedModel bake(Variant variant, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> getter) {
+        IModel imodel = ModelLoaderRegistry.getModel(variant.getModelLocation());
+        imodel = ModelProcessingHelper.uvlock(imodel, variant.isUvLock());
+        return imodel.bake(variant.getState(), format, getter);
     }
     
     void load() {

@@ -12,7 +12,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.experimental.Tolerate;
 import net.minecraft.block.Block;
-import net.minecraft.block.Block.SoundType;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -106,7 +106,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             ret[i].setUnlocalizedName(domain + '.' + blockName);
             ret[i].setHardness(1);
             if (sound != null) {
-                ret[i].stepSound = sound;
+                ret[i].setSoundType(sound);
             }
             GameRegistry.registerBlock(ret[i], provider.getItemClass());
 

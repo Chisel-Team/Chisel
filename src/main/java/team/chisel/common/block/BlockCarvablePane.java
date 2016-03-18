@@ -1,21 +1,22 @@
 package team.chisel.common.block;
 
+import static team.chisel.common.block.BlockCarvable.CTX_LIST;
+
 import java.util.List;
 
 import lombok.Getter;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
@@ -36,8 +37,6 @@ import team.chisel.common.util.PropertyAnyInteger;
 
 import com.google.common.collect.Lists;
 
-import static team.chisel.common.block.BlockCarvable.CTX_LIST;
-
 public class BlockCarvablePane extends BlockPane implements ICarvable {
 
     // TODO this class is completely temporary. Need to make a helper object which does all this ICarvable logic
@@ -53,7 +52,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 
     private final int maxVariation;
     
-    private final BlockState realBlockState;
+    private final BlockStateContainer realBlockState;
 
     
     public BlockCarvablePane(Material material, boolean canDrop, int index, int max, VariationData... variations) {
@@ -62,7 +61,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
         this.index = index;
         this.variations = variations;
         this.maxVariation = max;
-        this.metaProp = PropertyAnyInteger.create("Variation", 0, max > index * 16 ? 15 : max % 16);
+        this.metaProp = PropertyAnyInteger.create("variation", 0, max > index * 16 ? 15 : max % 16);
         this.realBlockState = createRealBlockState();
         setupStates();
         Chisel.proxy.initiateFaceData(this);
@@ -95,7 +94,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     @SideOnly(Side.CLIENT)
     @Override
     public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
-        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial() == Material.air) {
+        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial(stateIn) == Material.air) {
             return stateIn;
         }
         IExtendedBlockState state = (IExtendedBlockState) stateIn;
@@ -127,18 +126,13 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
             list.add(stack);
         }
     }
-    
-    @Override
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
-        return super.shouldSideBeRendered(worldIn, pos, side);
-    }
 
     @Override
-    public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer) {
+    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, EffectRenderer effectRenderer) {
         ClientUtil.addHitEffects(worldObj, target.getBlockPos(), target.sideHit);
         return true;
     }
-    
+
     @Override
     public boolean addDestroyEffects(World world, BlockPos pos, EffectRenderer effectRenderer) {
         ClientUtil.addDestroyEffects(world, pos, world.getBlockState(pos));
@@ -146,7 +140,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     }
     
     
-    private BlockState createRealBlockState() {
+    private BlockStateContainer createRealBlockState() {
         return new ExtendedBlockState(this, new IProperty[] { metaProp, NORTH, SOUTH, EAST, WEST }, new IUnlistedProperty[] { CTX_LIST });
     }
 
@@ -187,7 +181,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     }
 
     @Override
-    public BlockState getBlockState() {
+    public BlockStateContainer getBlockState() {
         return this.realBlockState;
     }
 

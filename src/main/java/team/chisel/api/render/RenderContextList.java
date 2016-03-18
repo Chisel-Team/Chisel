@@ -1,13 +1,13 @@
 package team.chisel.api.render;
 
 
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import team.chisel.Chisel;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import team.chisel.Chisel;
 
 /**
  * List of IBlockRenderContext's

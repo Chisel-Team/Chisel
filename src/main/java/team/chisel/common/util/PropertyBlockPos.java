@@ -1,6 +1,6 @@
 package team.chisel.common.util;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
 public class PropertyBlockPos implements IUnlistedProperty<BlockPos> {

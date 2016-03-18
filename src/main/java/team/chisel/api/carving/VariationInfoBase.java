@@ -1,6 +1,6 @@
 package team.chisel.api.carving;
 
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import team.chisel.api.render.IBlockRenderType;
 
 public class VariationInfoBase implements IVariationInfo {
@@ -22,7 +22,7 @@ public class VariationInfoBase implements IVariationInfo {
 
 	@Override
 	public String getDescription() {
-		return StatCollector.translateToLocal(unlocDesc);
+		return I18n.translateToLocal(unlocDesc);
 	}
 
 	@Override

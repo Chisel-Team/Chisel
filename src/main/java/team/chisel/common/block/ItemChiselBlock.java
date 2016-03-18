@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
@@ -36,7 +36,7 @@ public class ItemChiselBlock extends ItemBlock {
             int line = 1;
             String desc = stack.getUnlocalizedName() + "." + varData.name + ".desc.";
             String loc;
-            while (!(loc = StatCollector.translateToLocal(desc + line)).equals(desc + line)) {
+            while (!(loc = I18n.translateToLocal(desc + line)).equals(desc + line)) {
                 tooltip.add(loc);
                 desc.replace("." + line++, "." + line);
             }

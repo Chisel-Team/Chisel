@@ -1,10 +1,11 @@
 package team.chisel.client.gui;
 
-import team.chisel.common.inventory.ContainerChisel;
-import team.chisel.common.inventory.InventoryChiselSelection;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import team.chisel.common.inventory.ContainerChisel;
+import team.chisel.common.inventory.InventoryChiselSelection;
 
 /**
  * The Gui Handler
@@ -16,7 +17,7 @@ public class ChiselGuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         if (id == 0){
-            return new ContainerChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem()));
+            return new ContainerChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem(EnumHand.values()[x])));
         }
         else {
             return null;
@@ -26,7 +27,7 @@ public class ChiselGuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         if (id == 0) {
-            return new GuiChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem()));
+            return new GuiChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem(EnumHand.values()[x])));
         }
         return null;
     }

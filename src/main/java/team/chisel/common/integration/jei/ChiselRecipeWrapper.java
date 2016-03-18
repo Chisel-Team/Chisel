@@ -50,7 +50,7 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     }
 
     @Override
-    public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight){
+    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
     }
 
     @Override
@@ -60,5 +60,10 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     @Override
     public List<String> getTooltipStrings(int mouseX, int mouseY){
         return null;
+    }
+
+    @Override
+    public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
+        return false;
     }
 }

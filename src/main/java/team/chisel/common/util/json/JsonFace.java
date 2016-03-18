@@ -2,7 +2,7 @@ package team.chisel.common.util.json;
 
 import java.util.List;
 
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
@@ -48,10 +48,10 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
         return face;
     }
 
-    private EnumWorldBlockLayer getLayer(List<IChiselTexture<?>> list) {
-        EnumWorldBlockLayer layer = EnumWorldBlockLayer.SOLID;
+    private BlockRenderLayer getLayer(List<IChiselTexture<?>> list) {
+        BlockRenderLayer layer = BlockRenderLayer.SOLID;
         for (IChiselTexture<?> tex : list) {
-            EnumWorldBlockLayer texLayer = tex.getLayer();
+            BlockRenderLayer texLayer = tex.getLayer();
             if (texLayer.ordinal() > layer.ordinal()) {
                 layer = texLayer;
             }

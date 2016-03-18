@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -45,11 +45,11 @@ public interface IChiselTexture<T extends IBlockRenderType> {
     /**
      * The layer this texture requires. The layers will be prioritized for a face in the order:
      * <p>
-     * {@link EnumWorldBlockLayer#TRANSLUCENT}<br/>
-     * {@link EnumWorldBlockLayer#CUTOUT}<br/>
-     * {@link EnumWorldBlockLayer#SOLID}<br/>
+     * {@link BlockRenderLayer#TRANSLUCENT}<br/>
+     * {@link BlockRenderLayer#CUTOUT}<br/>
+     * {@link BlockRenderLayer#SOLID}<br/>
      * 
      * @return The layer of this texture.
      */
-    EnumWorldBlockLayer getLayer();
+    BlockRenderLayer getLayer();
 }

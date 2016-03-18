@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
@@ -69,7 +69,7 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
         if (loc.getResourcePath().contains("animated")) {
             System.out.println("test");
         }
-        EnumWorldBlockLayer layerObj = layer == null ? EnumWorldBlockLayer.SOLID : EnumWorldBlockLayer.valueOf(layer.toUpperCase(Locale.US));
+        BlockRenderLayer layerObj = layer == null ? BlockRenderLayer.SOLID : BlockRenderLayer.valueOf(layer.toUpperCase(Locale.US));
         return type.makeTexture(layerObj, callbacks);
     }
 }

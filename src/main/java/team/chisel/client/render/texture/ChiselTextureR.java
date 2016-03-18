@@ -6,10 +6,10 @@ import java.util.Random;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.util.MathHelper;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
@@ -25,7 +25,7 @@ public class ChiselTextureR extends AbstractChiselTexture<BlockRenderTypeR> {
 
     private static final Random rand = new Random();
 
-    public ChiselTextureR(BlockRenderTypeR type, EnumWorldBlockLayer layer, TextureSpriteCallback[] sprites) {
+    public ChiselTextureR(BlockRenderTypeR type, BlockRenderLayer layer, TextureSpriteCallback[] sprites) {
         super(type, layer, sprites);
     }
 

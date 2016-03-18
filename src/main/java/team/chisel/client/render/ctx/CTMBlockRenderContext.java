@@ -2,8 +2,8 @@ package team.chisel.client.render.ctx;
 
 import java.util.EnumMap;
 
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.client.render.ctm.CTM;

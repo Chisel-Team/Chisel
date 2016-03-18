@@ -16,7 +16,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import team.chisel.api.carving.CarvingUtils;
-import team.chisel.client.command.CommandTest;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
@@ -76,8 +75,6 @@ public class Chisel implements Reference {
         
         proxy.init();
         // BlockRegistry.init(event);
-        ClientCommandHandler.instance.registerCommand(new CommandTest());
-
     }
 
     /**

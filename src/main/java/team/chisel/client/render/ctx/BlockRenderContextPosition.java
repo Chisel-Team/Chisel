@@ -1,6 +1,6 @@
 package team.chisel.client.render.ctx;
 
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import team.chisel.api.render.IBlockRenderContext;
 
 public class BlockRenderContextPosition implements IBlockRenderContext {

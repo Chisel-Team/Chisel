@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
@@ -20,13 +20,13 @@ public final class ChiselFace implements IChiselFace {
 
     private ResourceLocation location;
 
-    private EnumWorldBlockLayer layer;
+    private BlockRenderLayer layer;
 
     public ChiselFace(ResourceLocation location) {
         this(new ArrayList<>(), new ArrayList<>(), location);
     }
 
-    public ChiselFace(ResourceLocation location, EnumWorldBlockLayer layer) {
+    public ChiselFace(ResourceLocation location, BlockRenderLayer layer) {
         this(location);
         setLayer(layer);
     }
@@ -76,11 +76,11 @@ public final class ChiselFace implements IChiselFace {
     }
 
 
-    public void setLayer(EnumWorldBlockLayer layer){
+    public void setLayer(BlockRenderLayer layer){
         this.layer = layer;
     }
 
-    public EnumWorldBlockLayer getLayer(){
+    public BlockRenderLayer getLayer(){
         return this.layer;
     }
 

@@ -1,7 +1,7 @@
 package team.chisel.client.render.type;
 
 import lombok.Getter;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;

@@ -9,19 +9,19 @@ import javax.vecmath.Matrix4f;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
+import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.renderer.vertex.VertexFormat;
-import net.minecraft.client.resources.model.IBakedModel;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.model.Attributes;
-import net.minecraftforge.client.model.IFlexibleBakedModel;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
-import net.minecraftforge.client.model.ISmartBlockModel;
-import net.minecraftforge.client.model.ISmartItemModel;
+import net.minecraftforge.client.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -41,46 +41,54 @@ import com.google.common.collect.Ordering;
 /**
  * Model for all chisel blocks
  */
-@SuppressWarnings("deprecation")
-public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPerspectiveAwareModel {
+public class ModelChiselBlock extends ItemOverrideList implements IPerspectiveAwareModel {
 
     private List<BakedQuad> face;
     private List<BakedQuad> general;
 
     private ModelChisel model;
 
-    public ModelChiselBlock(List<BakedQuad> face, List<BakedQuad> general, ModelChisel model){
+    public ModelChiselBlock(List<BakedQuad> face, List<BakedQuad> general, ModelChisel model) {
+        super(Lists.newArrayList());
         this.face = face;
         this.general = general;
         this.model = model;
     }
 
-    public ModelChiselBlock(ModelChisel model){
+    public ModelChiselBlock(ModelChisel model) {
         this(Collections.emptyList(), Collections.emptyList(), model);
     }
 
     @Override
-    public List<BakedQuad> getFaceQuads(EnumFacing facing){
-        return FluentIterable.from(face).filter(quad -> quad.getFace() == facing).toList();
+    public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
+        ModelChiselBlock baked;
+        if (state != null && state.getBlock() instanceof ICarvable && state instanceof IExtendedBlockState) {
+            IExtendedBlockState ext = (IExtendedBlockState) state;
+            RenderContextList ctxList = ext.getValue(BlockCarvable.CTX_LIST);
+            baked = createModel(ext, model, ctxList);
+        } else {
+            baked = this;
+        }
+        return side == null ? baked.general : FluentIterable.from(baked.face).filter(quad -> quad.getFace() == side).toList();
     }
 
     @Override
-    public List<BakedQuad> getGeneralQuads() {
-        return general;
+    public ItemOverrideList getOverrides() {
+        return this;
     }
 
     @Override
-    public boolean isAmbientOcclusion(){
+    public boolean isAmbientOcclusion() {
         return true;
     }
 
     @Override
-    public boolean isGui3d(){
+    public boolean isGui3d() {
         return true;
     }
 
     @Override
-    public boolean isBuiltInRenderer(){
+    public boolean isBuiltInRenderer() {
         return false;
     }
 
@@ -90,48 +98,37 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPer
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms(){
+    public ItemCameraTransforms getItemCameraTransforms() {
         return ItemCameraTransforms.DEFAULT;
     }
 
     // TODO implement model caching, returning a new model every time is a HUGE waste of memory and CPU
 
     @Override
-    public IBakedModel handleBlockState(IBlockState stateIn) {
-        if (stateIn.getBlock() instanceof ICarvable && stateIn instanceof IExtendedBlockState) {
-            IExtendedBlockState state = (IExtendedBlockState) stateIn;
-            RenderContextList ctxList = state.getValue(BlockCarvable.CTX_LIST);
-            return createModel(stateIn, model, ctxList);
-        } else {
-            return this;
-        }
-    }
-
-    @Override
-    public IBakedModel handleItemState(ItemStack stack) {
+    public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
         Block block = ((ItemBlock) stack.getItem()).getBlock();
         return createModel(block.getDefaultState(), model, null);
     }
-    
+
     private ModelChiselBlock createModel(IBlockState state, ModelChisel model, RenderContextList ctx) {
         List<BakedQuad> faceQuads = Lists.newArrayList();
         List<BakedQuad> generalQuads = Lists.newArrayList();
-        for (EnumFacing facing : EnumFacing.VALUES){
+        for (EnumFacing facing : EnumFacing.VALUES) {
             IChiselFace face = model.getFace(facing);
-//            if (ctx != null && MinecraftForgeClient.getRenderLayer() != face.getLayer()) {
-//                Chisel.debug("Skipping Layer " + MinecraftForgeClient.getRenderLayer() + " for block " + block);
-//                continue;
-//            }
+            // if (ctx != null && MinecraftForgeClient.getRenderLayer() != face.getLayer()) {
+            // Chisel.debug("Skipping Layer " + MinecraftForgeClient.getRenderLayer() + " for block " + block);
+            // continue;
+            // }
             int quadGoal = ctx == null ? 1 : Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
             IBakedModel baked = model.getModel(state);
-            List<BakedQuad> origFaceQuads = baked.getFaceQuads(facing);
-            List<BakedQuad> origGeneralQuads = FluentIterable.from(baked.getGeneralQuads()).filter(q -> q.getFace() == facing).toList();
+            List<BakedQuad> origFaceQuads = baked.getQuads(state, facing, 0);
+            List<BakedQuad> origGeneralQuads = FluentIterable.from(baked.getQuads(state, null, 0)).filter(q -> q.getFace() == facing).toList();
             addAllQuads(origFaceQuads, face, ctx, quadGoal, faceQuads);
             addAllQuads(origGeneralQuads, face, ctx, quadGoal, generalQuads);
         }
         return new ModelChiselBlock(faceQuads, generalQuads, model);
     }
-    
+
     private void addAllQuads(List<BakedQuad> from, IChiselFace face, @Nullable RenderContextList ctx, int quadGoal, List<BakedQuad> to) {
         for (BakedQuad q : from) {
             for (IChiselTexture<?> tex : face.getTextureList()) {
@@ -140,16 +137,11 @@ public class ModelChiselBlock implements ISmartBlockModel, ISmartItemModel, IPer
         }
     }
 
-    @Override
-    public VertexFormat getFormat() {
-        return Attributes.DEFAULT_BAKED_FORMAT;
-    }
-
     private Pair<IPerspectiveAwareModel, Matrix4f> thirdPersonTransform;
-    
+
     @Override
-    public Pair<? extends IFlexibleBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
-        if (cameraTransformType == TransformType.THIRD_PERSON) {
+    public Pair<? extends IPerspectiveAwareModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
+        if (cameraTransformType == TransformType.THIRD_PERSON_RIGHT_HAND || cameraTransformType == TransformType.THIRD_PERSON_LEFT_HAND) {
             if (thirdPersonTransform == null) {
                 thirdPersonTransform = ImmutablePair.of(this, ClientUtil.DEFAULT_BLOCK_THIRD_PERSON_MATRIX);
             }

@@ -8,10 +8,9 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
-import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import team.chisel.common.item.ItemChisel;
-import team.chisel.common.util.OreDictionaryUtil;
 
 public class InventoryChiselSelection implements IInventory {
 
@@ -101,8 +100,8 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public IChatComponent getDisplayName() {
-        return new ChatComponentTranslation(getName());
+    public ITextComponent getDisplayName() {
+        return new TextComponentTranslation(getName());
     }
 
     @Override

@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import net.minecraft.block.properties.PropertyHelper;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
@@ -38,5 +39,17 @@ public class PropertyAnyInteger extends PropertyHelper<Integer> {
     @Override
     public String getName(Integer value) {
         return value.toString();
+    }
+    
+    @Override
+    public Optional<Integer> parseValue(String value) {
+        Optional<Integer> ret = Optional.absent();
+        try {
+            int parsed = Integer.parseInt(value);
+            if (allowedValues.contains(parsed)) {
+                ret = Optional.of(parsed);
+            }
+        } catch (NumberFormatException e) {}
+        return ret;
     }
 }

@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.BlockStone.EnumType;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -136,7 +137,7 @@ public enum Features {
             Carving.chisel.addVariation("bookshelf", Blocks.bookshelf.getDefaultState(), -1);
             factory.newBlock(Material.wood, "bookshelf", new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
                 .newVariation("abandoned").next("brim").next("default").next("historician").next("hoarder").next("necromancer").next("necromancer-novice").next("rainbow").next("redtomes")
-                .build(b -> b.setStepSound(Block.soundTypeWood).setHardness(1.5f));
+                .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
         }
     },
 

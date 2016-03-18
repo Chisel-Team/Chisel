@@ -1,13 +1,25 @@
 package team.chisel.client.render.texture;
 
+import static net.minecraft.util.EnumFacing.DOWN;
+import static net.minecraft.util.EnumFacing.EAST;
+import static net.minecraft.util.EnumFacing.NORTH;
+import static net.minecraft.util.EnumFacing.SOUTH;
+import static net.minecraft.util.EnumFacing.UP;
+import static net.minecraft.util.EnumFacing.WEST;
+import static team.chisel.client.render.Quad.BOTTOM_LEFT;
+import static team.chisel.client.render.Quad.BOTTOM_RIGHT;
+import static team.chisel.client.render.Quad.TOP_LEFT;
+import static team.chisel.client.render.Quad.TOP_RIGHT;
+import static team.chisel.client.render.Quad.from;
+
 import java.util.EnumSet;
 import java.util.List;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
-import net.minecraft.util.EnumWorldBlockLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
@@ -19,12 +31,9 @@ import team.chisel.client.render.type.BlockRenderTypeCTMV;
 
 import com.google.common.collect.Lists;
 
-import static net.minecraft.util.EnumFacing.*;
-import static team.chisel.client.render.Quad.*;
-
 public class ChiselTextureCTMV extends AbstractChiselTexture<BlockRenderTypeCTMV> {
 
-    public ChiselTextureCTMV(BlockRenderTypeCTMV type, EnumWorldBlockLayer layer, TextureSpriteCallback[] sprites) {
+    public ChiselTextureCTMV(BlockRenderTypeCTMV type, BlockRenderLayer layer, TextureSpriteCallback[] sprites) {
         super(type, layer, sprites);
     }
 

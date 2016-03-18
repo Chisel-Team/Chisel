@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.Chisel;
 import team.chisel.api.block.ClientVariationData;
@@ -24,7 +24,7 @@ public class BlockFaceData {
 
     private VariationFaceData[] variationData;
 
-    private List<EnumWorldBlockLayer> layers;
+    private List<BlockRenderLayer> layers;
 
     public BlockFaceData(VariationData[] clientVariationData){
         variationData = new VariationFaceData[clientVariationData.length];
@@ -42,9 +42,9 @@ public class BlockFaceData {
         }
     }
 
-    public boolean isValid(EnumWorldBlockLayer layer){
+    public boolean isValid(BlockRenderLayer layer){
         if (this.layers == null){
-            this.layers = new ArrayList<EnumWorldBlockLayer>();
+            this.layers = new ArrayList<BlockRenderLayer>();
             for (VariationFaceData data : this.variationData){
                 for (IChiselFace face : data.getAllFaces()){
                     if (!this.layers.contains(face.getLayer())){

@@ -5,22 +5,22 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.Lists;
-
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.EnumWorldBlockLayer;
+import net.minecraft.util.BlockRenderLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.type.BlockRenderTypeNormal;
+
+import com.google.common.collect.Lists;
 
 /**
  * Chisel texture for a normal texture
  */
 public class ChiselTextureNormal extends AbstractChiselTexture<BlockRenderTypeNormal> {
 
-    public ChiselTextureNormal(BlockRenderTypeNormal type, EnumWorldBlockLayer layer, TextureSpriteCallback... sprites){
+    public ChiselTextureNormal(BlockRenderTypeNormal type, BlockRenderLayer layer, TextureSpriteCallback... sprites){
         super(type, layer, sprites);
     }
 

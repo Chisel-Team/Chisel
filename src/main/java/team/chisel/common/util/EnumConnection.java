@@ -2,8 +2,8 @@ package team.chisel.common.util;
 
 import java.util.Map;
 
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.common.block.BlockCarvable;
 

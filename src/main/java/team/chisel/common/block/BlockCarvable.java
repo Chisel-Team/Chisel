@@ -6,17 +6,18 @@ import lombok.Getter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumWorldBlockLayer;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.ExtendedBlockState;
@@ -55,7 +56,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @Getter
     private final VariationData[] variations;
 
-    private final BlockState realBlockState;
+    private final BlockStateContainer realBlockState;
 
     private final int maxVariation;
 
@@ -65,7 +66,7 @@ public class BlockCarvable extends Block implements ICarvable {
         this.index = index;
         this.variations = variations;
         this.maxVariation = max;
-        this.metaProp = PropertyAnyInteger.create("Variation", 0, max > index * 16 ? 15 : max % 16);
+        this.metaProp = PropertyAnyInteger.create("variation", 0, max > index * 16 ? 15 : max % 16);
         this.realBlockState = createRealBlockState(metaProp);
         setupStates();
         Chisel.proxy.initiateFaceData(this);
@@ -100,7 +101,7 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     @Override
-    public BlockState getBlockState() {
+    public BlockStateContainer getBlockState() {
         return this.realBlockState;
     }
 
@@ -109,17 +110,17 @@ public class BlockCarvable extends Block implements ICarvable {
         return this.index;
     }
 
-    @Override
+    @Override   
     public VariationData getVariationData(int meta) {
         return this.variations[MathHelper.clamp_int(meta, 0, this.variations.length - 1)];
     }
 
-    private BlockState createRealBlockState(PropertyAnyInteger p) {
+    private BlockStateContainer createRealBlockState(PropertyAnyInteger p) {
         return new ExtendedBlockState(this, new IProperty[] { p }, new IUnlistedProperty[] { CTX_LIST });
     }
 
     @Override
-    public BlockState createBlockState() {
+    public BlockStateContainer createBlockState() {
         return Blocks.air.getBlockState();
     }
 
@@ -163,7 +164,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @SideOnly(Side.CLIENT)
     @Override
     public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
-        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial() == Material.air) {
+        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial(stateIn) == Material.air) {
             return stateIn;
         }
         IExtendedBlockState state = (IExtendedBlockState) stateIn;
@@ -196,11 +197,11 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     @Override
-    public boolean addHitEffects(World worldObj, MovingObjectPosition target, EffectRenderer effectRenderer) {
+    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, EffectRenderer effectRenderer) {
         ClientUtil.addHitEffects(worldObj, target.getBlockPos(), target.sideHit);
         return true;
     }
-    
+
     @Override
     public boolean addDestroyEffects(World world, BlockPos pos, EffectRenderer effectRenderer) {
         ClientUtil.addDestroyEffects(world, pos, world.getBlockState(pos));
@@ -208,23 +209,23 @@ public class BlockCarvable extends Block implements ICarvable {
     }
     
     @Override
-    public int getRenderType() {
-        return 3;
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.MODEL;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean canRenderInLayer(EnumWorldBlockLayer layer) {
+    public boolean canRenderInLayer(BlockRenderLayer layer) {
         return this.blockFaceData.isValid(layer);
     }
 
     @Override
-    public boolean isFullBlock() {
-        return isOpaqueCube();
+    public boolean isFullBlock(IBlockState state) {
+        return isOpaqueCube(state);
     }
 
     @Override
-    public boolean isFullCube() {
+    public boolean isFullCube(IBlockState state) {
         return true;
     }
 
