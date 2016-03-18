@@ -969,9 +969,7 @@ public enum Features {
             
             factory.newBlock(Material.rock, "stonebrick", provider).newVariation("chaotic").next("chaoticbricks").next("fancy").next("fullsmooth")
                 .next("largebricks").next("largeornate").next("ornate").next("ornatepanel").next("panel-hard").next("poison").next("roughbricks")
-                .next("smallbricks").next("smallchaotic").next("sunken").next("masonBricksFelsic").next("masonBricksMafic").next("masonBricksMixed")
-                .next("masonBricksPlain").next("masonry2Blue").next("masonry2Both").next("masonry2Neutral").next("masonry2Red").next("masonryFelsic")
-                .next("masonryMafic").next("masonryMixed").next("masonryPlain").build();
+                .next("smallbricks").next("smallchaotic").next("sunken").next("masonry2Blue").next("masonry2Both").next("masonry2Neutral").next("masonry2Red").build();
         }
     },
 
@@ -995,7 +993,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "temple", provider).newVariation("bricks-disarray").next("bricks-large").next("bricks-weared").next("bricks").next("cobble").next("column").setTextureLocation("temple/column-side").setTextureLocation("temple/column-top", Axis.Y).next("ornate").next("plate-cracked").next("plate").next("smalltiles-light").next("smalltiles").next("stand-creeper").setTextureLocation("temple/stand-creeper-side").setTextureLocation("temple/stand-creeper-top", Axis.Y).next("stand-mosaic").setTextureLocation("temple/stand-mosaic-side").setTextureLocation("temple/stand-mosaic-top", Axis.Y).next("stand").setTextureLocation("temple/stand-side").setTextureLocation("temple/stand-top", Axis.Y).next("temple").setTextureLocation("temple/temple-side").setTextureLocation("temple/temple-top", Axis.Y).next("tiles-light").next("tiles").build();
+            factory.newBlock(Material.rock, "temple", provider).newVariation("bricks-disarray").next("bricks-large").next("bricks-weared").next("bricks").next("cobble").next("column").setTextureLocation("temple/column-side").setTextureLocation("temple/column-top", Axis.Y).next("ornate").next("plate-cracked").next("plate").next("smalltiles-light").next("smalltiles").next("stand-creeper").setTextureLocation("temple/stand-creeper-side").setTextureLocation("temple/stand-creeper-top", Axis.Y).next("stand-mosaic").setTextureLocation("temple/stand-mosaic-side").setTextureLocation("temple/stand-mosaic-top", Axis.Y).next("stand").setTextureLocation("temple/stand-side").setTextureLocation("temple/stand-top", Axis.Y).next("tiles-light").next("tiles").build();
         }
     },
 
@@ -1003,7 +1001,7 @@ public enum Features {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "templemossy", provider).newVariation("bricks-disarray").next("bricks-large").next("bricks-weared").next("bricks").next("cobble").next("column").setTextureLocation("templemossy/column-side").setTextureLocation("templemossy/column-top", Axis.Y).next("ornate").next("plate-cracked").next("plate").next("smalltiles-light").next("smalltiles").next("stand-creeper").setTextureLocation("templemossy/stand-creeper-side").setTextureLocation("templemossy/stand-creeper-top", Axis.Y).next("stand-mosaic").setTextureLocation("templemossy/stand-mosaic-side").setTextureLocation("templemossy/stand-mosaic-top", Axis.Y).next("stand").setTextureLocation("templemossy/stand-side").setTextureLocation("templemossy/stand-top", Axis.Y).next("temple").setTextureLocation("templemossy/temple-side").setTextureLocation("templemossy/temple-top", Axis.Y).next("tiles-light").next("tiles").build();
+            factory.newBlock(Material.rock, "templemossy", provider).newVariation("bricks-disarray").next("bricks-large").next("bricks-weared").next("bricks").next("cobble").next("column").setTextureLocation("templemossy/column-side").setTextureLocation("templemossy/column-top", Axis.Y).next("ornate").next("plate-cracked").next("plate").next("smalltiles-light").next("smalltiles").next("stand-creeper").setTextureLocation("templemossy/stand-creeper-side").setTextureLocation("templemossy/stand-creeper-top", Axis.Y).next("stand-mosaic").setTextureLocation("templemossy/stand-mosaic-side").setTextureLocation("templemossy/stand-mosaic-top", Axis.Y).next("stand").setTextureLocation("templemossy/stand-side").setTextureLocation("templemossy/stand-top", Axis.Y).next("tiles-light").next("tiles").build();
         }
     },
 
@@ -1023,7 +1021,7 @@ public enum Features {
         }
     },
 
-    THIN_WOOD_ACACIA {
+    /*THIN_WOOD_ACACIA {
 
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -1069,7 +1067,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "thinWood-spruce", provider).newVariation("chaotic-spaced").next("chaotic").next("large-spaced").next("large").next("normal-spaced").next("normal").build();
         }
-    },
+    },*/
 
     TIN {
 
