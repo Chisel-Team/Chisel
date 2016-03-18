@@ -1,7 +1,7 @@
 {
 	"type":"CTM",
 	"textures":[
-        "./purple-antiBlock",
-        "./purple-antiBlock-ctm"
+        "./purple",
+        "./purple-ctm"
     ]
 }

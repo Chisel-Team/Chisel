@@ -10,6 +10,7 @@
         "andesite/andesiteprism":[{"model":"ctm:chisel:andesite/andesitePrism.json"}],
         "andesite/andesiteprismatic":[{"model":"ctm:chisel:andesite/andesitePrismatic.json"}],
         "andesite/andesitetiles":[{"model":"ctm:chisel:andesite/andesiteTiles.json"}],
+        "antiblock/black":[{"model":"ctm:chisel:antiblock/black.json"}],
         "antiblock/blue":[{"model":"ctm:chisel:antiblock/blue.json"}],
         "antiblock/brown":[{"model":"ctm:chisel:antiblock/brown.json"}],
         "antiblock/cyan":[{"model":"ctm:chisel:antiblock/cyan.json"}],

@@ -1,7 +1,7 @@
 {
 	"type":"CTM",
 	"textures":[
-        "./lime-antiBlock",
-        "./lime-antiBlock-ctm"
+        "./lime",
+        "./lime-ctm"
     ]
 }
