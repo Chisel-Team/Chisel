@@ -24,8 +24,8 @@ public class GuiChisel extends GuiContainer {
     public EntityPlayer player;
     public ContainerChisel container;
 
-    public GuiChisel(InventoryPlayer iinventory, InventoryChiselSelection menu) {
-        super(new ContainerChisel(iinventory, menu));
+    public GuiChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, EnumHand hand) {
+        super(new ContainerChisel(iinventory, menu, hand));
         player = iinventory.player;
         xSize = 252;
         ySize = 202;
@@ -54,7 +54,7 @@ public class GuiChisel extends GuiContainer {
     @Override
     public void updateScreen() {
         super.updateScreen();
-        ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND); // TODO
+        ItemStack held = player.getHeldItem(container.getHand());
         if (held == null || !(held.getItem() instanceof ItemChisel)) {
             mc.displayGuiScreen(null);
         }

@@ -17,7 +17,8 @@ public class ChiselGuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         if (id == 0){
-            return new ContainerChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem(EnumHand.values()[x])));
+            EnumHand hand = EnumHand.values()[x];
+            return new ContainerChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem(hand)), hand);
         }
         else {
             return null;
@@ -27,7 +28,8 @@ public class ChiselGuiHandler implements IGuiHandler {
     @Override
     public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         if (id == 0) {
-            return new GuiChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem(EnumHand.values()[x])));
+            EnumHand hand = EnumHand.values()[x];
+            return new GuiChisel(player.inventory, new InventoryChiselSelection(player.getHeldItem(hand)), hand);
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package team.chisel.common.inventory;
 
+import lombok.Getter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -7,6 +8,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumHand;
 import team.chisel.Chisel;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.carving.Carving;
@@ -21,12 +23,16 @@ public class ContainerChisel extends Container {
     public ICarvingRegistry carving;
 
     private int totalSlots = 0;
+    
+    @Getter
+    private EnumHand hand;
 
-    public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv) {
+    public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {
         inventory = inv;
         playerInventory = inventoryplayer;
         chiselSlot = playerInventory.currentItem;
         inv.container = this;
+        this.hand = hand;
 
         int top = 8, left = 62;
 
@@ -84,7 +90,7 @@ public class ContainerChisel extends Container {
         }
 
         // if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
-        if (clickedSlot == chiselSlot || (clickTypeIn == ClickType.PICKUP && dragType == chiselSlot))
+        if (hand == EnumHand.MAIN_HAND && (clickedSlot == chiselSlot || (clickTypeIn == ClickType.SWAP && dragType == chiselSlot)))
             return null;
 
         return super.func_184996_a(slotId, dragType, clickTypeIn, player);
@@ -122,7 +128,7 @@ public class ContainerChisel extends Container {
                     entity.inventory.setItemStack(null);
                 }
 
-                if (!this.mergeItemStack(itemstack1, InventoryChiselSelection.normalSlots + 1, InventoryChiselSelection.normalSlots + 1 + 36, false)) {
+                if (!this.mergeItemStack(itemstack1, InventoryChiselSelection.normalSlots + 1, InventoryChiselSelection.normalSlots + 1 + 36, true)) {
                     return null;
                 }
             }
@@ -149,7 +155,7 @@ public class ContainerChisel extends Container {
 
     public void onChiselSlotChanged() {
         ItemStack stack = playerInventory.mainInventory[chiselSlot];
-        if (stack == null || !stack.isItemEqual(chisel))
+        if (stack == null || (hand == EnumHand.MAIN_HAND && !stack.isItemEqual(chisel)))
             finished = true;
 
         if (finished)

@@ -2,7 +2,6 @@ package team.chisel;
 
 import java.io.File;
 
-import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -37,7 +36,7 @@ public class Chisel implements Reference {
 
     public static ItemChisel itemChiselIron, itemChiselDiamond;
 
-    public static final boolean debug = true;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
+    public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
 
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;

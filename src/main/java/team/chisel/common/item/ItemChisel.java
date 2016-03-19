@@ -142,8 +142,9 @@ public class ItemChisel extends Item {
     @Override
     public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
         if (!worldIn.isRemote) {
-            playerIn.openGui(Chisel.instance, 0, worldIn, playerIn.getPosition().getX(), playerIn.getPosition().getY(), playerIn.getPosition().getZ());
+            playerIn.openGui(Chisel.instance, 0, worldIn, hand.ordinal(), 0, 0);
+            return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
         }
-        return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
+        return ActionResult.newResult(EnumActionResult.PASS, itemStackIn);
     }
 }
