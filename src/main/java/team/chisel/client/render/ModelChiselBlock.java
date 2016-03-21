@@ -22,7 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
-import net.minecraftforge.client.model.TRSRTransformation;
+import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -41,15 +41,28 @@ import com.google.common.collect.Ordering;
 /**
  * Model for all chisel blocks
  */
-public class ModelChiselBlock extends ItemOverrideList implements IPerspectiveAwareModel {
+public class ModelChiselBlock implements IPerspectiveAwareModel {
+	
+	private class Overrides extends ItemOverrideList {
+		
+		public Overrides() {
+			super(Lists.newArrayList());
+		}
+
+	    @Override
+	    public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
+	        Block block = ((ItemBlock) stack.getItem()).getBlock();
+	        return createModel(block.getDefaultState(), model, null);
+	    }
+	}
 
     private List<BakedQuad> face;
     private List<BakedQuad> general;
 
     private ModelChisel model;
-
+    private Overrides overrides = new Overrides();
+    
     public ModelChiselBlock(List<BakedQuad> face, List<BakedQuad> general, ModelChisel model) {
-        super(Lists.newArrayList());
         this.face = face;
         this.general = general;
         this.model = model;
@@ -74,7 +87,7 @@ public class ModelChiselBlock extends ItemOverrideList implements IPerspectiveAw
 
     @Override
     public ItemOverrideList getOverrides() {
-        return this;
+    	return overrides;
     }
 
     @Override
@@ -103,12 +116,6 @@ public class ModelChiselBlock extends ItemOverrideList implements IPerspectiveAw
     }
 
     // TODO implement model caching, returning a new model every time is a HUGE waste of memory and CPU
-
-    @Override
-    public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
-        Block block = ((ItemBlock) stack.getItem()).getBlock();
-        return createModel(block.getDefaultState(), model, null);
-    }
 
     private ModelChiselBlock createModel(IBlockState state, ModelChisel model, RenderContextList ctx) {
         List<BakedQuad> faceQuads = Lists.newArrayList();
