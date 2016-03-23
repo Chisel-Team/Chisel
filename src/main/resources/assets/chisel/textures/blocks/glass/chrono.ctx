@@ -3,5 +3,6 @@
 	"textures":[
         "./chrono",
         "./chrono-ctm"
-    ]
+    ],
+    "layer":"CUTOUT"
 }
