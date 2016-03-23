@@ -1,0 +1,7 @@
+{
+	"type":"NORMAL",
+	"textures":[
+        "./tiles"
+    ],
+    "layer":"TRANSLUCENT"
+}
