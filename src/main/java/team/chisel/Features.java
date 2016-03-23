@@ -3068,8 +3068,6 @@ public enum Features {
                     .next("spinningStuffAnim")
                     .next("vent")
                     .next("ventGlowing")
-                    .next("wallPads")
-                    .next("wires")
                     .build();
         }
     },

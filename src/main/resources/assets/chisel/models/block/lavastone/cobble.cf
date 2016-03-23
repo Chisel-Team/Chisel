@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "./lava_flow.ctx",
+        "./cobble.ctx"
+    ]
+}

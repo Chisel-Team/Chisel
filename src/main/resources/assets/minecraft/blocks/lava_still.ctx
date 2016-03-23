@@ -1,0 +1,6 @@
+{
+	"type":"NORMAL",
+	"textures":[
+        "./lava_still"
+    ]
+}
