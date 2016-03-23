@@ -392,7 +392,7 @@ public enum Features {
         }
     },
 
-    CRAG_ROCK {
+    /*CRAG_ROCK {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "cragRock", provider)
@@ -413,9 +413,9 @@ public enum Features {
                     .next("terrain-pistonback-dungeontile")
                     .build();
         }
-    },
+    }, // Pending retexture */
 
-    DIAGONAL {
+    /*DIAGONAL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "diagonal", provider)
@@ -427,34 +427,25 @@ public enum Features {
                     .next("prismarineDiagonalAnim")
                     .build();
         }
-    },
+    },// This shouldn't be here... I think*/
 
     DIAMOND {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("diamond", Blocks.diamond_block.getDefaultState(), -1);
             factory.newBlock(Material.rock, "diamond", provider)
-                    .newVariation("terrain-diamond-bismuth")
-                    .next("terrain-diamond-cells")
-                    .next("terrain-diamond-crushed")
-                    .next("terrain-diamond-embossed-bottom")
-                    .next("terrain-diamond-embossed")
-                    .setTextureLocation("diamond/terrain-diamond-embossed-side")
-                    .setTextureLocation("diamond/terrain-diamond-embossed-top", Axis.Y)
-                    .next("terrain-diamond-four")
-                    .next("terrain-diamond-fourornate")
-                    .next("terrain-diamond-gem-bottom")
+                    .newVariation("terrain-diamond-embossed")
                     .next("terrain-diamond-gem")
-                    .setTextureLocation("diamond/terrain-diamond-gem-side")
-                    .setTextureLocation("diamond/terrain-diamond-gem-top", Axis.Y)
-                    .next("terrain-diamond-ornatelayer")
-                    .next("terrain-diamond-simple-bottom")
-                    .next("terrain-diamond-simple")
-                    .setTextureLocation("diamond/terrain-diamond-simple-side")
-                    .setTextureLocation("diamond/terrain-diamond-simple-top", Axis.Y)
+                    .next("terrain-diamond-cells")
                     .next("terrain-diamond-space")
                     .next("terrain-diamond-spaceblack")
+                    .next("terrain-diamond-simple")
+                    .next("terrain-diamond-bismuth")
+                    .next("terrain-diamond-crushed")
+                    .next("terrain-diamond-four")
+                    .next("terrain-diamond-fourornate")
                     .next("terrain-diamond-zelda")
+                    .next("terrain-diamond-ornatelayer")
                     .build();
         }
     },
@@ -483,33 +474,27 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("dirt", Blocks.dirt.getDefaultState(), -1);
             factory.newBlock(Material.rock, "dirt", provider)
-                    .newVariation("bricks+dirt2")
-                    .setTextureLocation("dirt/bricks+dirt2-side")
-                    .setTextureLocation("dirt/bricks+dirt2-top", Axis.Y)
-                    .next("bricks")
-                    .next("bricks2")
-                    .next("bricks3")
-                    .next("chunky")
-                    .next("cobble")
-                    .next("happy")
-                    .next("hor")
-                    .next("horizontal")
-                    .next("layers")
+                    .newVariation("bricks")
                     .next("netherbricks")
-                    .next("plate")
+                    .next("bricks3")
+                    .next("cobble")
                     .next("reinforcedCobbleDirt")
                     .next("reinforcedDirt")
+                    .next("happy")
+                    .next("bricks2")
+                    .next("bricks+dirt2")
+                    .next("hor")
                     .next("vert")
-                    .setTextureLocation("dirt/vert-side")
-                    .setTextureLocation("dirt/vert-top", Axis.Y)
+                    .next("layers")
                     .next("vertical")
-                    .setTextureLocation("dirt/vertical-side")
-                    .setTextureLocation("dirt/vertical-top", Axis.Y)
+                    .next("chunky")
+                    .next("horizontal")
+                    .next("plate")
                     .build();
         }
     },
 
-    DREAMWOOD_PAPER {
+    /*DREAMWOOD_PAPER {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "dreamwood-paper", provider)
@@ -561,7 +546,7 @@ public enum Features {
                     .next("dreamwoodPileTop")
                     .build();
         }
-    },
+    }, // No dreamwood at this moment */
 
     ELECTRUM {
         @Override
@@ -579,7 +564,7 @@ public enum Features {
         }
     },
 
-    ELEMENTIUM {
+    /*ELEMENTIUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "elementium", provider)
@@ -589,36 +574,31 @@ public enum Features {
                     .next("caution")
                     .next("crate")
                     .next("egregious")
-                    .next("elementiumEye-0-0")
-                    .next("elementiumEye-0-1")
-                    .next("elementiumEye-1-0")
-                    .next("elementiumEye-1-1")
-                    .next("elementiumEye-2-0")
-                    .next("elementiumEye-2-1")
+                    .next("elementiumEye")
                     .next("thermal")
                     .build();
         }
-    },
+    }, // */
 
     EMERALD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("emerald", Blocks.emerald_block.getDefaultState(), -1);
             factory.newBlock(Material.rock, "emerald", provider)
-                    .newVariation("cell")
-                    .next("cellbismuth")
-                    .next("chunk")
-                    .next("emeraldCircle")
-                    .next("emeraldPrismatic")
-                    .next("four")
-                    .next("fourornate")
-                    .next("goldborder")
-                    .next("masonryEmerald")
-                    .next("ornate")
-                    .next("panel")
+                    .newVariation("panel")
                     .next("panelclassic")
                     .next("smooth")
+                    .next("chunk")
+                    .next("goldborder")
                     .next("zelda")
+                    .next("cell")
+                    .next("cellbismuth")
+                    .next("four")
+                    .next("fourornate")
+                    .next("ornate")
+                    .next("masonryEmerald")
+                    .next("emeraldCircle")
+                    .next("emeraldPrismatic")
                     .build();
         }
     },
@@ -627,28 +607,17 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "end_purpur", provider)
-                    .newVariation("arcanePurpur")
-                    .next("borderPurpur-0")
-                    .next("borderPurpur-1")
-                    .next("borderPurpur-2")
-                    .next("borderPurpur-3")
-                    .next("borderPurpur")
-                    .next("masonryPurpur")
-                    .next("prismaticPurpur")
+                    .newVariation("shulker")
+                    .next("tilePurpur")
+                    .next("tileBrokenPurpur")
+                    .next("purpurPrismarine")
                     .next("purpurBricks")
                     .next("purpurCobble")
+                    .next("arcanePurpur")
                     .next("purpurLargeTile")
+                    .next("borderPurpur")
                     .next("purpurOrnate")
-                    .next("purpurPrismarine")
-                    .next("purpur_block")
-                    .next("purpur_pillar")
-                    .setTextureLocation("end_purpur/purpur_pillar-side")
-                    .setTextureLocation("end_purpur/purpur_pillar-top", Axis.Y)
-                    .next("shulker")
-                    .setTextureLocation("end_purpur/shulker-side")
-                    .setTextureLocation("end_purpur/shulker-top", Axis.Y)
-                    .next("tileBrokenPurpur")
-                    .next("tilePurpur")
+                    .next("masonryPurpur")
                     .build();
         }
     },
@@ -657,20 +626,10 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "ender_pearl_block", provider)
-                    .newVariation("enderEye-0-0")
-                    .next("enderEye-0-1")
-                    .next("enderEye-1-0")
-                    .next("enderEye-1-1")
-                    .next("enderEye-2-0")
-                    .next("enderEye-2-1")
-                    .next("enderEye")
+                    .newVariation("resonantSolid")
                     .next("enderZelda")
-                    .next("resonantBricks-0")
-                    .next("resonantBricks-1")
-                    .next("resonantBricks-2")
-                    .next("resonantBricks-3")
+                    .next("enderEye")
                     .next("resonantBricks")
-                    .next("resonantSolid")
                     .build();
         }
     },
@@ -680,40 +639,21 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("endstone", Blocks.end_stone.getDefaultState(), -1);
             factory.newBlock(Material.rock, "endstone", provider)
-                    .newVariation("arcaneEndStone")
-                    .next("chaoticBricks")
+                    .newVariation("chaoticBricks")
                     .next("CheckeredTile")
                     .next("enderCircuit")
-                    .next("enderDiagonalBrick-0")
-                    .next("enderDiagonalBrick-1")
-                    .next("enderDiagonalBrick-2")
-                    .next("enderDiagonalBrick-3")
-                    .next("enderDiagonalBrick")
-                    .next("EnderFrame-0")
-                    .next("EnderFrame-1")
-                    .next("EnderFrame-2")
-                    .next("EnderFrame-3")
-                    .next("EnderFrame-4")
-                    .next("EnderFrame-5")
-                    .next("EnderFrame-6")
-                    .next("EnderFrame-7")
-                    .next("EnderFrame-8")
-                    .next("EnderFrame")
                     .next("endFrenchBricks")
                     .next("endPillar")
-                    .setTextureLocation("endstone/endPillar-side")
-                    .setTextureLocation("endstone/endPillar-top", Axis.Y)
+                    .next("endStoneEtched")
                     .next("endPrismatic")
                     .next("endStoneChunk")
-                    .next("endStoneEtched")
-                    .setTextureLocation("endstone/endStoneEtched-side")
-                    .setTextureLocation("endstone/endStoneEtched-top", Axis.Y)
-                    .next("endStoneLargeTile")
-                    .next("endStoneOrnate")
-                    .next("end_bricks")
+                    .next("EnderFrame")
+                    .next("arcaneEndStone")
                     .next("framedEndStone")
+                    .next("endStoneOrnate")
+                    .next("endStoneLargeTile")
+                    .next("enderDiagonalBrick")
                     .next("masonryEnder")
-                    .next("prismaticEndStone")
                     .build();
         }
     },
@@ -722,33 +662,27 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "factory", provider)
-                    .newVariation("circuit")
-                    .next("column")
-                    .setTextureLocation("factory/column-side")
-                    .setTextureLocation("factory/column-top", Axis.Y)
-                    .next("dots")
-                    .next("frameblue")
+                    .newVariation("dots")
+                    .next("rust2")
+                    .next("rust")
+                    .next("platex")
+                    .next("wireframewhite")
+                    .next("wireframe")
+                    .next("hazard")
+                    .next("hazardorange")
+                    .next("circuit")
+                    .next("metalbox")
                     .next("goldplate")
                     .next("goldplating")
                     .next("grinder")
-                    .next("hazard")
-                    .next("hazardorange")
-                    .next("iceiceice")
-                    .next("metalbox")
-                    .setTextureLocation("factory/metalbox-side")
-                    .setTextureLocation("factory/metalbox-top", Axis.Y)
-                    .next("platex")
                     .next("plating")
-                    .next("rust")
-                    .next("rust2")
                     .next("rustplates")
+                    .next("column")
+                    .next("frameblue")
+                    .next("iceiceice")
                     .next("tilemosaic")
                     .next("vent")
-                    .setTextureLocation("factory/vent-side")
-                    .setTextureLocation("factory/vent-top", Axis.Y)
-                    .next("wireframe")
                     .next("wireframeblue")
-                    .next("wireframewhite")
                     .build();
         }
     },
@@ -757,50 +691,22 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "fantasy", provider)
-                    .newVariation("block")
+                    .newVariation("brick")
                     .next("brick-faded")
-                    .setTextureLocation("fantasy/brick-faded-side")
-                    .setTextureLocation("fantasy/brick-faded-top", Axis.Y)
-                    .next("brick")
-                    .setTextureLocation("fantasy/brick-side")
-                    .setTextureLocation("fantasy/brick-top", Axis.Y)
                     .next("brick-wear")
-                    .setTextureLocation("fantasy/brick-wear-side")
-                    .setTextureLocation("fantasy/brick-wear-top", Axis.Y)
-                    .next("bricks-chaotic")
                     .next("bricks")
-                    .setTextureLocation("fantasy/bricks-side")
-                    .setTextureLocation("fantasy/bricks-top", Axis.Y)
-                    .next("bricks-wear")
-                    .setTextureLocation("fantasy/bricks-wear-side")
-                    .setTextureLocation("fantasy/bricks-wear-top", Axis.Y)
-                    .next("decor-block")
-                    .setTextureLocation("fantasy/decor-block-side")
-                    .setTextureLocation("fantasy/decor-block-top", Axis.Y)
                     .next("decor")
-                    .setTextureLocation("fantasy/decor-side")
-                    .setTextureLocation("fantasy/decor-top", Axis.Y)
-                    .next("gold-decor-1")
-                    .setTextureLocation("fantasy/gold-decor-1-side")
-                    .setTextureLocation("fantasy/gold-decor-1-top", Axis.Y)
-                    .next("gold-decor-2")
-                    .setTextureLocation("fantasy/gold-decor-2-side")
-                    .setTextureLocation("fantasy/gold-decor-2-top", Axis.Y)
-                    .next("gold-decor-3")
-                    .setTextureLocation("fantasy/gold-decor-3-side")
-                    .setTextureLocation("fantasy/gold-decor-3-top", Axis.Y)
-                    .next("gold-decor-4")
-                    .setTextureLocation("fantasy/gold-decor-4-side")
-                    .setTextureLocation("fantasy/gold-decor-4-top", Axis.Y)
-                    .next("pillar-decorated")
-                    .setTextureLocation("fantasy/pillar-decorated-side")
-                    .setTextureLocation("fantasy/pillar-decorated-top", Axis.Y)
+                    .next("decor-block")
                     .next("pillar")
-                    .setTextureLocation("fantasy/pillar-side")
-                    .setTextureLocation("fantasy/pillar-top", Axis.Y)
+                    .next("pillar-decorated")
+                    .next("gold-decor-1")
+                    .next("gold-decor-2")
+                    .next("gold-decor-3")
+                    .next("gold-decor-4")
                     .next("plate")
-                    .setTextureLocation("fantasy/plate-side")
-                    .setTextureLocation("fantasy/plate-top", Axis.Y)
+                    .next("block")
+                    .next("bricks-chaotic")
+                    .next("bricks-wear")
                     .build();
         }
     },
@@ -809,53 +715,27 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "fantasy2", provider)
-                    .newVariation("block")
+                    .newVariation("brick")
                     .next("brick-faded")
-                    .setTextureLocation("fantasy2/brick-faded-side")
-                    .setTextureLocation("fantasy2/brick-faded-top", Axis.Y)
-                    .next("brick")
-                    .setTextureLocation("fantasy2/brick-side")
-                    .setTextureLocation("fantasy2/brick-top", Axis.Y)
                     .next("brick-wear")
-                    .setTextureLocation("fantasy2/brick-wear-side")
-                    .setTextureLocation("fantasy2/brick-wear-top", Axis.Y)
-                    .next("bricks-chaotic")
                     .next("bricks")
-                    .setTextureLocation("fantasy2/bricks-side")
-                    .setTextureLocation("fantasy2/bricks-top", Axis.Y)
-                    .next("bricks-wear")
-                    .setTextureLocation("fantasy2/bricks-wear-side")
-                    .setTextureLocation("fantasy2/bricks-wear-top", Axis.Y)
-                    .next("decor-block")
-                    .setTextureLocation("fantasy2/decor-block-side")
-                    .setTextureLocation("fantasy2/decor-block-top", Axis.Y)
                     .next("decor")
-                    .setTextureLocation("fantasy2/decor-side")
-                    .setTextureLocation("fantasy2/decor-top", Axis.Y)
-                    .next("gold-decor-1")
-                    .setTextureLocation("fantasy2/gold-decor-1-side")
-                    .setTextureLocation("fantasy2/gold-decor-1-top", Axis.Y)
-                    .next("gold-decor-2")
-                    .setTextureLocation("fantasy2/gold-decor-2-side")
-                    .setTextureLocation("fantasy2/gold-decor-2-top", Axis.Y)
-                    .next("gold-decor-3")
-                    .setTextureLocation("fantasy2/gold-decor-3-side")
-                    .setTextureLocation("fantasy2/gold-decor-3-top", Axis.Y)
-                    .next("gold-decor-4")
-                    .setTextureLocation("fantasy2/gold-decor-4-side")
-                    .setTextureLocation("fantasy2/gold-decor-4-top", Axis.Y)
-                    .next("pillar-decorated")
-                    .setTextureLocation("fantasy2/pillar-decorated-side")
-                    .setTextureLocation("fantasy2/pillar-decorated-top", Axis.Y)
+                    .next("decor-block")
                     .next("pillar")
-                    .setTextureLocation("fantasy2/pillar-side")
-                    .setTextureLocation("fantasy2/pillar-top", Axis.Y)
+                    .next("pillar-decorated")
+                    .next("gold-decor-1")
+                    .next("gold-decor-2")
+                    .next("gold-decor-3")
+                    .next("gold-decor-4")
                     .next("plate")
-                    .setTextureLocation("fantasy2/plate-side")
-                    .setTextureLocation("fantasy2/plate-top", Axis.Y)
+                    .next("block")
+                    .next("bricks-chaotic")
+                    .next("bricks-wear")
                     .build();
         }
     },
+
+    //TODO: Futura - Where the fork did everything go
 
     FUTURA {
         @Override
@@ -871,23 +751,22 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("glass", Blocks.glass.getDefaultState(), -1);
             factory.newBlock(Material.rock, "glass", provider)
-                    .newVariation("a1-glasswindow-ironfencemodern")
-                    .next("chrono")
-                    .next("japanese")
+                    .newVariation("terrain-glassbubble")
                     .next("terrain-glass-chinese")
-                    .next("terrain-glass-ornatesteel")
-                    .next("terrain-glass-ornatesteel-old")
-                    .next("terrain-glass-screen")
-                    .next("terrain-glass-steelframe")
-                    .next("terrain-glass-thickgrid")
-                    .next("terrain-glass-thingrid")
-                    .next("terrain-glassbubble")
+                    .next("japanese")
                     .next("terrain-glassdungeon")
                     .next("terrain-glasslight")
                     .next("terrain-glassnoborder")
+                    .next("terrain-glass-ornatesteel")
+                    .next("terrain-glass-screen")
                     .next("terrain-glassshale")
+                    .next("terrain-glass-steelframe")
                     .next("terrain-glassstone")
                     .next("terrain-glassstreak")
+                    .next("terrain-glass-thickgrid")
+                    .next("terrain-glass-thingrid")
+                    .next("a1-glasswindow-ironfencemodern")
+                    .next("chrono")
                     .build();
         }
     },
@@ -895,88 +774,39 @@ public enum Features {
     GLASSDYED {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "glassdyed", provider)
-                    .newVariation("black-bubble")
-                    .next("black-forestry")
-                    .next("black-panel-fancy")
-                    .next("black-panel")
-                    .next("black-transparent")
-                    .next("blue-bubble")
-                    .next("blue-forestry")
-                    .next("blue-panel-fancy")
-                    .next("blue-panel")
-                    .next("blue-transparent")
-                    .next("brown-bubble")
-                    .next("brown-forestry")
-                    .next("brown-panel-fancy")
-                    .next("brown-panel")
-                    .next("brown-transparent")
-                    .next("cyan-bubble")
-                    .next("cyan-forestry")
-                    .next("cyan-panel-fancy")
-                    .next("cyan-panel")
-                    .next("cyan-transparent")
-                    .next("gray-bubble")
-                    .next("gray-forestry")
-                    .next("gray-panel-fancy")
-                    .next("gray-panel")
-                    .next("gray-transparent")
-                    .next("green-bubble")
-                    .next("green-forestry")
-                    .next("green-panel-fancy")
-                    .next("green-panel")
-                    .next("green-transparent")
-                    .next("lightblue-bubble")
-                    .next("lightblue-forestry")
-                    .next("lightblue-panel-fancy")
-                    .next("lightblue-panel")
-                    .next("lightblue-transparent")
-                    .next("lightgray-bubble")
-                    .next("lightgray-forestry")
-                    .next("lightgray-panel-fancy")
-                    .next("lightgray-panel")
-                    .next("lightgray-transparent")
-                    .next("lime-bubble")
-                    .next("lime-forestry")
-                    .next("lime-panel-fancy")
-                    .next("lime-panel")
-                    .next("lime-transparent")
-                    .next("magenta-bubble")
-                    .next("magenta-forestry")
-                    .next("magenta-panel-fancy")
-                    .next("magenta-panel")
-                    .next("magenta-transparent")
-                    .next("orange-bubble")
-                    .next("orange-forestry")
-                    .next("orange-panel-fancy")
-                    .next("orange-panel")
-                    .next("orange-transparent")
-                    .next("pink-bubble")
-                    .next("pink-forestry")
-                    .next("pink-panel-fancy")
-                    .next("pink-panel")
-                    .next("pink-transparent")
-                    .next("purple-bubble")
-                    .next("purple-forestry")
-                    .next("purple-panel-fancy")
-                    .next("purple-panel")
-                    .next("purple-transparent")
-                    .next("red-bubble")
-                    .next("red-forestry")
-                    .next("red-panel-fancy")
-                    .next("red-panel")
-                    .next("red-transparent")
-                    .next("white-bubble")
-                    .next("white-forestry")
-                    .next("white-panel-fancy")
-                    .next("white-panel")
-                    .next("white-transparent")
-                    .next("yellow-bubble")
-                    .next("yellow-forestry")
-                    .next("yellow-panel-fancy")
-                    .next("yellow-panel")
-                    .next("yellow-transparent")
-                    .build();
+
+            String[] dyeColors = {"black",
+            "red",
+            "green",
+            "brown",
+            "blue",
+            "purple",
+            "cyan",
+            "lightgray",
+            "gray",
+            "pink",
+            "lime",
+            "yellow",
+            "lightblue",
+            "magenta",
+            "orange",
+            "white"};
+
+            //System.out.println("Setting up dyed glass");
+
+            for(int c = 0; c < 16; c++)
+            {
+                //System.out.println("Setting up " + dyeColors[c] +" glass");
+
+                factory.newBlock(Material.rock, "glassdyed"+dyeColors[c], provider)
+                        .setParentFolder("glassdyed")
+                        .newVariation(dyeColors[c]+"-bubble")
+                        .next(dyeColors[c]+"-panel")
+                        .next(dyeColors[c]+"-panel-fancy")
+                        //.next(dyes[c]+"-transparent")
+                        //.next(dyes[c]+"-forestry")
+                        .build();
+            }
         }
     },
 
