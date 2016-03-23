@@ -1,0 +1,7 @@
+{
+	"type":"NORMAL",
+	"textures":[
+        "./terrain-glassstreak"
+    ],
+    "layer":"CUTOUT"
+}

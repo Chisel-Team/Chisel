@@ -1,0 +1,7 @@
+{
+	"type":"NORMAL",
+	"textures":[
+        "./japanese"
+    ],
+    "layer":"CUTOUT"
+}
