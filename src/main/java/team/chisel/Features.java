@@ -1770,7 +1770,6 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "lavastone", provider)
                     .newVariation("black")
-                    .next("black1")
                     .next("chaotic")
                     .next("cobble")
                     .next("creeper")
@@ -3397,8 +3396,9 @@ public enum Features {
                     .next("chaotic")
                     .next("cobble")
                     .next("creeper")
-                    .next("panel")
+                    .next("dark")
                     .next("panel-ornate")
+                    .next("panel")
                     .next("tiles")
                     .build();
         }
