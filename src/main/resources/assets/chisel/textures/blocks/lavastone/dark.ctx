@@ -3,5 +3,5 @@
 	"textures":[
         "./dark"
     ],
-    "layer":"CUTOUT"
+    "layer":"TRANSLUCENT"
 }
