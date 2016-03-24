@@ -1,7 +1,7 @@
 {
 	"type":"NORMAL",
 	"textures":[
-        "./black-transparent"
+        "./red-transparent"
     ],
     "layer":"TRANSLUCENT"
 }

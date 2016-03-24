@@ -1,7 +1,7 @@
 {
 	"type":"NORMAL",
 	"textures":[
-        "./black-panel-fancy"
+        "./lightgray-panel-fancy"
     ],
     "layer":"TRANSLUCENT"
 }

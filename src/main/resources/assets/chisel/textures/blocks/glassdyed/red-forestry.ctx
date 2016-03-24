@@ -1,7 +1,7 @@
 {
 	"type":"NORMAL",
 	"textures":[
-        "./black-forestry"
+        "./red-forestry"
     ],
     "layer":"TRANSLUCENT"
 }

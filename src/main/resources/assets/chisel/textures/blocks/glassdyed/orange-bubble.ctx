@@ -1,7 +1,7 @@
 {
 	"type":"NORMAL",
 	"textures":[
-        "./black-bubble"
+        "./orange-bubble"
     ],
     "layer":"TRANSLUCENT"
 }
