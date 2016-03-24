@@ -794,21 +794,12 @@ public enum Features {
 
             //System.out.println("Setting up dyed glass");
 
-            factory.newBlock(Material.glass, "glassdyedblack", provider)
-                    .setParentFolder("glassdyed")
-                    .newVariation("black-bubble")
-                    .next("black-panel")
-                    .next("black-panel-fancy")
-                    //.next(dyes[c]+"-transparent")
-                    //.next(dyes[c]+"-forestry")
-                    .build();
-
-            /*for(int c = 0; c < 16; c++)
+            for(int c = 0; c < 16; c++)
             {
                 //System.out.println("Setting up " + dyeColors[c] +" glass");
 
                 factory.newBlock(Material.rock, "glassdyed"+dyeColors[c], provider)
-                        .setParentFolder("glassdyed")
+                        //.setParentFolder("glassdyed")
                         .newVariation(dyeColors[c]+"-bubble")
                         .next(dyeColors[c]+"-panel")
                         .next(dyeColors[c]+"-panel-fancy")
