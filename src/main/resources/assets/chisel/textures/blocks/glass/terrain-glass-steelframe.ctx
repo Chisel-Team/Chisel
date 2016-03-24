@@ -3,5 +3,6 @@
 	"textures":[
         "./terrain-glass-steelframe",
         "./terrain-glass-steelframe-ctm"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

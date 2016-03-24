@@ -1237,6 +1237,7 @@
         "waterstone/chaotic":[{"model":"ctm:chisel:waterstone/chaotic.json"}],
         "waterstone/cobble":[{"model":"ctm:chisel:waterstone/cobble.json"}],
         "waterstone/creeper":[{"model":"ctm:chisel:waterstone/creeper.json"}],
+        "waterstone/dark":[{"model":"ctm:chisel:waterstone/dark.json"}],
         "waterstone/panel-ornate":[{"model":"ctm:chisel:waterstone/panel-ornate.json"}],
         "waterstone/panel":[{"model":"ctm:chisel:waterstone/panel.json"}],
         "waterstone/tiles":[{"model":"ctm:chisel:waterstone/tiles.json"}],

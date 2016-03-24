@@ -3,5 +3,6 @@
 	"textures":[
         "./terrain-glassnoborder",
         "./terrain-glassnoborder-ctm"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

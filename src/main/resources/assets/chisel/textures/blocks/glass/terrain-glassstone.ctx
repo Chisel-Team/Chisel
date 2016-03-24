@@ -3,5 +3,6 @@
 	"textures":[
         "./terrain-glassstone",
         "./terrain-glassstone-ctm"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

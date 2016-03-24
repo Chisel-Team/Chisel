@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "minecraft:blocks/lava_still.ctx",
+        "./chaotic.ctx"
+    ]
+}

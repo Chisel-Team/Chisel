@@ -3,5 +3,6 @@
 	"textures":[
         "./terrain-glassshale",
         "./terrain-glassshale-ctm"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

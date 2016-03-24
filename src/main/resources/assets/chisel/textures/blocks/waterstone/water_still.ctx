@@ -1,0 +1,7 @@
+{
+	"type":"NORMAL",
+	"textures":[
+        "minecraft:blocks/water_still"
+    ],
+    "layer":"TRANSLUCENT"
+}
