@@ -775,26 +775,9 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            String[] dyeColors = {"black",
-            "red",
-            "green",
-            "brown",
-            "blue",
-            "purple",
-            "cyan",
-            "lightgray",
-            "gray",
-            "pink",
-            "lime",
-            "yellow",
-            "lightblue",
-            "magenta",
-            "orange",
-            "white"};
-
-            for(int c = 0; c < 16; c++)
+            for(int c = 0; c < dyeColors.length; c++)
             {
-                factory.newBlock(Material.rock, "glassdyed"+dyeColors[c], provider)
+                factory.newBlock(Material.glass, "glassdyed"+dyeColors[c], provider)
                         .setParentFolder("glassdyed")
                         .newVariation(dyeColors[c]+"-bubble")
                         .next(dyeColors[c]+"-panel")
@@ -809,34 +792,20 @@ public enum Features {
     GLASSPANE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "glasspane", new ChiselBlockProvider<BlockCarvablePane>(new BlockCreator<BlockCarvablePane>() {
+            factory.newBlock(Material.glass, "glasspane", new ChiselBlockProvider<BlockCarvablePane>(new BlockCreator<BlockCarvablePane>() {
                 @Override
                 public BlockCarvablePane createBlock(Material mat, int index, int maxVariation, VariationData... data) {
                     return new BlockCarvablePane(mat, false, index, maxVariation, data);
                 }
             }, BlockCarvablePane.class))
                     .newVariation("chinese")
-                    .setTextureLocation("glasspane/chinese-side")
-                    .setTextureLocation("glasspane/chinese-top", Axis.Y)
                     .next("chinese2")
-                    .setTextureLocation("glasspane/chinese2-side")
-                    .setTextureLocation("glasspane/chinese2-top", Axis.Y)
                     .next("japanese")
-                    .setTextureLocation("glasspane/japanese-side")
-                    .setTextureLocation("glasspane/japanese-top", Axis.Y)
                     .next("japanese2")
-                    .setTextureLocation("glasspane/japanese2-side")
-                    .setTextureLocation("glasspane/japanese2-top", Axis.Y)
                     .next("terrain-glass-screen")
                     .next("terrain-glassbubble")
-                    .setTextureLocation("glasspane/terrain-glassbubble-side")
-                    .setTextureLocation("glasspane/terrain-glassbubble-top", Axis.Y)
                     .next("terrain-glassnoborder")
-                    .setTextureLocation("glasspane/terrain-glassnoborder-side")
-                    .setTextureLocation("glasspane/terrain-glassnoborder-top", Axis.Y)
                     .next("terrain-glassstreak")
-                    .setTextureLocation("glasspane/terrain-glassstreak-side")
-                    .setTextureLocation("glasspane/terrain-glassstreak-top", Axis.Y)
                     .build();
         }
     },
@@ -844,296 +813,18 @@ public enum Features {
     GLASSPANEDYED {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "glasspanedyed", provider)
-                    .newVariation("black-bubble")
-                    .setTextureLocation("glasspanedyed/black-bubble-side")
-                    .setTextureLocation("glasspanedyed/black-bubble-top", Axis.Y)
-                    .next("black-panel-fancy")
-                    .setTextureLocation("glasspanedyed/black-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/black-panel-fancy-top", Axis.Y)
-                    .next("black-panel")
-                    .setTextureLocation("glasspanedyed/black-panel-side")
-                    .setTextureLocation("glasspanedyed/black-panel-top", Axis.Y)
-                    .next("black-quad-fancy")
-                    .setTextureLocation("glasspanedyed/black-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/black-quad-fancy-top", Axis.Y)
-                    .next("black-quad")
-                    .setTextureLocation("glasspanedyed/black-quad-side")
-                    .setTextureLocation("glasspanedyed/black-quad-top", Axis.Y)
-                    .next("black-transparent")
-                    .setTextureLocation("glasspanedyed/black-transparent-side")
-                    .setTextureLocation("glasspanedyed/black-transparent-top", Axis.Y)
-                    .next("blue-bubble")
-                    .setTextureLocation("glasspanedyed/blue-bubble-side")
-                    .setTextureLocation("glasspanedyed/blue-bubble-top", Axis.Y)
-                    .next("blue-panel-fancy")
-                    .setTextureLocation("glasspanedyed/blue-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/blue-panel-fancy-top", Axis.Y)
-                    .next("blue-panel")
-                    .setTextureLocation("glasspanedyed/blue-panel-side")
-                    .setTextureLocation("glasspanedyed/blue-panel-top", Axis.Y)
-                    .next("blue-quad-fancy")
-                    .setTextureLocation("glasspanedyed/blue-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/blue-quad-fancy-top", Axis.Y)
-                    .next("blue-quad")
-                    .setTextureLocation("glasspanedyed/blue-quad-side")
-                    .setTextureLocation("glasspanedyed/blue-quad-top", Axis.Y)
-                    .next("blue-transparent")
-                    .setTextureLocation("glasspanedyed/blue-transparent-side")
-                    .setTextureLocation("glasspanedyed/blue-transparent-top", Axis.Y)
-                    .next("brown-bubble")
-                    .setTextureLocation("glasspanedyed/brown-bubble-side")
-                    .setTextureLocation("glasspanedyed/brown-bubble-top", Axis.Y)
-                    .next("brown-panel-fancy")
-                    .setTextureLocation("glasspanedyed/brown-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/brown-panel-fancy-top", Axis.Y)
-                    .next("brown-panel")
-                    .setTextureLocation("glasspanedyed/brown-panel-side")
-                    .setTextureLocation("glasspanedyed/brown-panel-top", Axis.Y)
-                    .next("brown-quad-fancy")
-                    .setTextureLocation("glasspanedyed/brown-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/brown-quad-fancy-top", Axis.Y)
-                    .next("brown-quad")
-                    .setTextureLocation("glasspanedyed/brown-quad-side")
-                    .setTextureLocation("glasspanedyed/brown-quad-top", Axis.Y)
-                    .next("brown-transparent")
-                    .setTextureLocation("glasspanedyed/brown-transparent-side")
-                    .setTextureLocation("glasspanedyed/brown-transparent-top", Axis.Y)
-                    .next("cyan-bubble")
-                    .setTextureLocation("glasspanedyed/cyan-bubble-side")
-                    .setTextureLocation("glasspanedyed/cyan-bubble-top", Axis.Y)
-                    .next("cyan-panel-fancy")
-                    .setTextureLocation("glasspanedyed/cyan-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/cyan-panel-fancy-top", Axis.Y)
-                    .next("cyan-panel")
-                    .setTextureLocation("glasspanedyed/cyan-panel-side")
-                    .setTextureLocation("glasspanedyed/cyan-panel-top", Axis.Y)
-                    .next("cyan-quad-fancy")
-                    .setTextureLocation("glasspanedyed/cyan-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/cyan-quad-fancy-top", Axis.Y)
-                    .next("cyan-quad")
-                    .setTextureLocation("glasspanedyed/cyan-quad-side")
-                    .setTextureLocation("glasspanedyed/cyan-quad-top", Axis.Y)
-                    .next("cyan-transparent")
-                    .setTextureLocation("glasspanedyed/cyan-transparent-side")
-                    .setTextureLocation("glasspanedyed/cyan-transparent-top", Axis.Y)
-                    .next("gray-bubble")
-                    .setTextureLocation("glasspanedyed/gray-bubble-side")
-                    .setTextureLocation("glasspanedyed/gray-bubble-top", Axis.Y)
-                    .next("gray-panel-fancy")
-                    .setTextureLocation("glasspanedyed/gray-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/gray-panel-fancy-top", Axis.Y)
-                    .next("gray-panel")
-                    .setTextureLocation("glasspanedyed/gray-panel-side")
-                    .setTextureLocation("glasspanedyed/gray-panel-top", Axis.Y)
-                    .next("gray-quad-fancy")
-                    .setTextureLocation("glasspanedyed/gray-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/gray-quad-fancy-top", Axis.Y)
-                    .next("gray-quad")
-                    .setTextureLocation("glasspanedyed/gray-quad-side")
-                    .setTextureLocation("glasspanedyed/gray-quad-top", Axis.Y)
-                    .next("gray-transparent")
-                    .setTextureLocation("glasspanedyed/gray-transparent-side")
-                    .setTextureLocation("glasspanedyed/gray-transparent-top", Axis.Y)
-                    .next("green-bubble")
-                    .setTextureLocation("glasspanedyed/green-bubble-side")
-                    .setTextureLocation("glasspanedyed/green-bubble-top", Axis.Y)
-                    .next("green-panel-fancy")
-                    .setTextureLocation("glasspanedyed/green-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/green-panel-fancy-top", Axis.Y)
-                    .next("green-panel")
-                    .setTextureLocation("glasspanedyed/green-panel-side")
-                    .setTextureLocation("glasspanedyed/green-panel-top", Axis.Y)
-                    .next("green-quad-fancy")
-                    .setTextureLocation("glasspanedyed/green-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/green-quad-fancy-top", Axis.Y)
-                    .next("green-quad")
-                    .setTextureLocation("glasspanedyed/green-quad-side")
-                    .setTextureLocation("glasspanedyed/green-quad-top", Axis.Y)
-                    .next("green-transparent")
-                    .setTextureLocation("glasspanedyed/green-transparent-side")
-                    .setTextureLocation("glasspanedyed/green-transparent-top", Axis.Y)
-                    .next("lightblue-bubble")
-                    .setTextureLocation("glasspanedyed/lightblue-bubble-side")
-                    .setTextureLocation("glasspanedyed/lightblue-bubble-top", Axis.Y)
-                    .next("lightblue-panel-fancy")
-                    .setTextureLocation("glasspanedyed/lightblue-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/lightblue-panel-fancy-top", Axis.Y)
-                    .next("lightblue-panel")
-                    .setTextureLocation("glasspanedyed/lightblue-panel-side")
-                    .setTextureLocation("glasspanedyed/lightblue-panel-top", Axis.Y)
-                    .next("lightblue-quad-fancy")
-                    .setTextureLocation("glasspanedyed/lightblue-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/lightblue-quad-fancy-top", Axis.Y)
-                    .next("lightblue-quad")
-                    .setTextureLocation("glasspanedyed/lightblue-quad-side")
-                    .setTextureLocation("glasspanedyed/lightblue-quad-top", Axis.Y)
-                    .next("lightblue-transparent")
-                    .setTextureLocation("glasspanedyed/lightblue-transparent-side")
-                    .setTextureLocation("glasspanedyed/lightblue-transparent-top", Axis.Y)
-                    .next("lightgray-bubble")
-                    .setTextureLocation("glasspanedyed/lightgray-bubble-side")
-                    .setTextureLocation("glasspanedyed/lightgray-bubble-top", Axis.Y)
-                    .next("lightgray-panel-fancy")
-                    .setTextureLocation("glasspanedyed/lightgray-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/lightgray-panel-fancy-top", Axis.Y)
-                    .next("lightgray-panel")
-                    .setTextureLocation("glasspanedyed/lightgray-panel-side")
-                    .setTextureLocation("glasspanedyed/lightgray-panel-top", Axis.Y)
-                    .next("lightgray-quad-fancy")
-                    .setTextureLocation("glasspanedyed/lightgray-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/lightgray-quad-fancy-top", Axis.Y)
-                    .next("lightgray-quad")
-                    .setTextureLocation("glasspanedyed/lightgray-quad-side")
-                    .setTextureLocation("glasspanedyed/lightgray-quad-top", Axis.Y)
-                    .next("lightgray-transparent")
-                    .setTextureLocation("glasspanedyed/lightgray-transparent-side")
-                    .setTextureLocation("glasspanedyed/lightgray-transparent-top", Axis.Y)
-                    .next("lime-bubble")
-                    .setTextureLocation("glasspanedyed/lime-bubble-side")
-                    .setTextureLocation("glasspanedyed/lime-bubble-top", Axis.Y)
-                    .next("lime-panel-fancy")
-                    .setTextureLocation("glasspanedyed/lime-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/lime-panel-fancy-top", Axis.Y)
-                    .next("lime-panel")
-                    .setTextureLocation("glasspanedyed/lime-panel-side")
-                    .setTextureLocation("glasspanedyed/lime-panel-top", Axis.Y)
-                    .next("lime-quad-fancy")
-                    .setTextureLocation("glasspanedyed/lime-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/lime-quad-fancy-top", Axis.Y)
-                    .next("lime-quad")
-                    .setTextureLocation("glasspanedyed/lime-quad-side")
-                    .setTextureLocation("glasspanedyed/lime-quad-top", Axis.Y)
-                    .next("lime-transparent")
-                    .setTextureLocation("glasspanedyed/lime-transparent-side")
-                    .setTextureLocation("glasspanedyed/lime-transparent-top", Axis.Y)
-                    .next("magenta-bubble")
-                    .setTextureLocation("glasspanedyed/magenta-bubble-side")
-                    .setTextureLocation("glasspanedyed/magenta-bubble-top", Axis.Y)
-                    .next("magenta-panel-fancy")
-                    .setTextureLocation("glasspanedyed/magenta-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/magenta-panel-fancy-top", Axis.Y)
-                    .next("magenta-panel")
-                    .setTextureLocation("glasspanedyed/magenta-panel-side")
-                    .setTextureLocation("glasspanedyed/magenta-panel-top", Axis.Y)
-                    .next("magenta-quad-fancy")
-                    .setTextureLocation("glasspanedyed/magenta-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/magenta-quad-fancy-top", Axis.Y)
-                    .next("magenta-quad")
-                    .setTextureLocation("glasspanedyed/magenta-quad-side")
-                    .setTextureLocation("glasspanedyed/magenta-quad-top", Axis.Y)
-                    .next("magenta-transparent")
-                    .setTextureLocation("glasspanedyed/magenta-transparent-side")
-                    .setTextureLocation("glasspanedyed/magenta-transparent-top", Axis.Y)
-                    .next("orange-bubble")
-                    .setTextureLocation("glasspanedyed/orange-bubble-side")
-                    .setTextureLocation("glasspanedyed/orange-bubble-top", Axis.Y)
-                    .next("orange-panel-fancy")
-                    .setTextureLocation("glasspanedyed/orange-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/orange-panel-fancy-top", Axis.Y)
-                    .next("orange-panel")
-                    .setTextureLocation("glasspanedyed/orange-panel-side")
-                    .setTextureLocation("glasspanedyed/orange-panel-top", Axis.Y)
-                    .next("orange-quad-fancy")
-                    .setTextureLocation("glasspanedyed/orange-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/orange-quad-fancy-top", Axis.Y)
-                    .next("orange-quad")
-                    .setTextureLocation("glasspanedyed/orange-quad-side")
-                    .setTextureLocation("glasspanedyed/orange-quad-top", Axis.Y)
-                    .next("orange-transparent")
-                    .setTextureLocation("glasspanedyed/orange-transparent-side")
-                    .setTextureLocation("glasspanedyed/orange-transparent-top", Axis.Y)
-                    .next("pink-bubble")
-                    .setTextureLocation("glasspanedyed/pink-bubble-side")
-                    .setTextureLocation("glasspanedyed/pink-bubble-top", Axis.Y)
-                    .next("pink-panel-fancy")
-                    .setTextureLocation("glasspanedyed/pink-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/pink-panel-fancy-top", Axis.Y)
-                    .next("pink-panel")
-                    .setTextureLocation("glasspanedyed/pink-panel-side")
-                    .setTextureLocation("glasspanedyed/pink-panel-top", Axis.Y)
-                    .next("pink-quad-fancy")
-                    .setTextureLocation("glasspanedyed/pink-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/pink-quad-fancy-top", Axis.Y)
-                    .next("pink-quad")
-                    .setTextureLocation("glasspanedyed/pink-quad-side")
-                    .setTextureLocation("glasspanedyed/pink-quad-top", Axis.Y)
-                    .next("pink-transparent")
-                    .setTextureLocation("glasspanedyed/pink-transparent-side")
-                    .setTextureLocation("glasspanedyed/pink-transparent-top", Axis.Y)
-                    .next("purple-bubble")
-                    .setTextureLocation("glasspanedyed/purple-bubble-side")
-                    .setTextureLocation("glasspanedyed/purple-bubble-top", Axis.Y)
-                    .next("purple-panel-fancy")
-                    .setTextureLocation("glasspanedyed/purple-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/purple-panel-fancy-top", Axis.Y)
-                    .next("purple-panel")
-                    .setTextureLocation("glasspanedyed/purple-panel-side")
-                    .setTextureLocation("glasspanedyed/purple-panel-top", Axis.Y)
-                    .next("purple-quad-fancy")
-                    .setTextureLocation("glasspanedyed/purple-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/purple-quad-fancy-top", Axis.Y)
-                    .next("purple-quad")
-                    .setTextureLocation("glasspanedyed/purple-quad-side")
-                    .setTextureLocation("glasspanedyed/purple-quad-top", Axis.Y)
-                    .next("purple-transparent")
-                    .setTextureLocation("glasspanedyed/purple-transparent-side")
-                    .setTextureLocation("glasspanedyed/purple-transparent-top", Axis.Y)
-                    .next("red-bubble")
-                    .setTextureLocation("glasspanedyed/red-bubble-side")
-                    .setTextureLocation("glasspanedyed/red-bubble-top", Axis.Y)
-                    .next("red-panel-fancy")
-                    .setTextureLocation("glasspanedyed/red-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/red-panel-fancy-top", Axis.Y)
-                    .next("red-panel")
-                    .setTextureLocation("glasspanedyed/red-panel-side")
-                    .setTextureLocation("glasspanedyed/red-panel-top", Axis.Y)
-                    .next("red-quad-fancy")
-                    .setTextureLocation("glasspanedyed/red-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/red-quad-fancy-top", Axis.Y)
-                    .next("red-quad")
-                    .setTextureLocation("glasspanedyed/red-quad-side")
-                    .setTextureLocation("glasspanedyed/red-quad-top", Axis.Y)
-                    .next("red-transparent")
-                    .setTextureLocation("glasspanedyed/red-transparent-side")
-                    .setTextureLocation("glasspanedyed/red-transparent-top", Axis.Y)
-                    .next("white-bubble")
-                    .setTextureLocation("glasspanedyed/white-bubble-side")
-                    .setTextureLocation("glasspanedyed/white-bubble-top", Axis.Y)
-                    .next("white-panel-fancy")
-                    .setTextureLocation("glasspanedyed/white-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/white-panel-fancy-top", Axis.Y)
-                    .next("white-panel")
-                    .setTextureLocation("glasspanedyed/white-panel-side")
-                    .setTextureLocation("glasspanedyed/white-panel-top", Axis.Y)
-                    .next("white-quad-fancy")
-                    .setTextureLocation("glasspanedyed/white-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/white-quad-fancy-top", Axis.Y)
-                    .next("white-quad")
-                    .setTextureLocation("glasspanedyed/white-quad-side")
-                    .setTextureLocation("glasspanedyed/white-quad-top", Axis.Y)
-                    .next("white-transparent")
-                    .setTextureLocation("glasspanedyed/white-transparent-side")
-                    .setTextureLocation("glasspanedyed/white-transparent-top", Axis.Y)
-                    .next("yellow-bubble")
-                    .setTextureLocation("glasspanedyed/yellow-bubble-side")
-                    .setTextureLocation("glasspanedyed/yellow-bubble-top", Axis.Y)
-                    .next("yellow-panel-fancy")
-                    .setTextureLocation("glasspanedyed/yellow-panel-fancy-side")
-                    .setTextureLocation("glasspanedyed/yellow-panel-fancy-top", Axis.Y)
-                    .next("yellow-panel")
-                    .setTextureLocation("glasspanedyed/yellow-panel-side")
-                    .setTextureLocation("glasspanedyed/yellow-panel-top", Axis.Y)
-                    .next("yellow-quad-fancy")
-                    .setTextureLocation("glasspanedyed/yellow-quad-fancy-side")
-                    .setTextureLocation("glasspanedyed/yellow-quad-fancy-top", Axis.Y)
-                    .next("yellow-quad")
-                    .setTextureLocation("glasspanedyed/yellow-quad-side")
-                    .setTextureLocation("glasspanedyed/yellow-quad-top", Axis.Y)
-                    .next("yellow-transparent")
-                    .setTextureLocation("glasspanedyed/yellow-transparent-side")
-                    .setTextureLocation("glasspanedyed/yellow-transparent-top", Axis.Y)
-                    .build();
+            for(int c = 0; c < dyeColors.length; c++)
+            {
+                factory.newBlock(Material.glass, "glasspanedyed"+dyeColors[c], provider)
+                        .setParentFolder("glasspanedyed")
+                        .newVariation(dyeColors[c]+"-bubble")
+                        .next(dyeColors[c]+"-panel")
+                        .next(dyeColors[c]+"-panel-fancy")
+                        .next(dyeColors[c]+"-transparent")
+                        .next(dyeColors[c]+"-quad")
+                        .next(dyeColors[c]+"-quad-fancy")
+                        .build();
+            }
         }
     },
 
@@ -1142,69 +833,21 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("gold", Blocks.gold_block.getDefaultState(), -1);
             factory.newBlock(Material.rock, "gold", provider)
-                    .newVariation("goldEye-0-0")
-                    .next("goldEye-0-1")
-                    .next("goldEye-1-0")
-                    .next("goldEye-1-1")
-                    .next("goldEye-2-0")
-                    .next("goldEye-2-1")
-                    .next("goldEye")
-                    .next("terrain-gold-brick-bottom")
-                    .next("terrain-gold-brick")
-                    .setTextureLocation("gold/terrain-gold-brick-side")
-                    .setTextureLocation("gold/terrain-gold-brick-top", Axis.Y)
-                    .next("terrain-gold-cart-bottom")
-                    .next("terrain-gold-cart")
-                    .setTextureLocation("gold/terrain-gold-cart-side")
-                    .setTextureLocation("gold/terrain-gold-cart-top", Axis.Y)
-                    .next("terrain-gold-coin-heads-bottom")
-                    .next("terrain-gold-coin-heads")
-                    .setTextureLocation("gold/terrain-gold-coin-heads-side")
-                    .setTextureLocation("gold/terrain-gold-coin-heads-top", Axis.Y)
-                    .next("terrain-gold-coin-tails-bottom")
-                    .next("terrain-gold-coin-tails")
-                    .setTextureLocation("gold/terrain-gold-coin-tails-side")
-                    .setTextureLocation("gold/terrain-gold-coin-tails-top", Axis.Y)
-                    .next("terrain-gold-crate-dark-bottom")
-                    .next("terrain-gold-crate-dark")
-                    .setTextureLocation("gold/terrain-gold-crate-dark-side")
-                    .setTextureLocation("gold/terrain-gold-crate-dark-top", Axis.Y)
-                    .next("terrain-gold-crate-light-bottom")
-                    .next("terrain-gold-crate-light")
-                    .setTextureLocation("gold/terrain-gold-crate-light-side")
-                    .setTextureLocation("gold/terrain-gold-crate-light-top", Axis.Y)
-                    .next("terrain-gold-largeingot-bottom")
+                    .newVariation("goldEye")
                     .next("terrain-gold-largeingot")
-                    .setTextureLocation("gold/terrain-gold-largeingot-side")
-                    .setTextureLocation("gold/terrain-gold-largeingot-top", Axis.Y)
-                    .next("terrain-gold-plates-bottom")
-                    .next("terrain-gold-plates")
-                    .setTextureLocation("gold/terrain-gold-plates-side")
-                    .setTextureLocation("gold/terrain-gold-plates-top", Axis.Y)
-                    .next("terrain-gold-rivets-bottom")
-                    .next("terrain-gold-rivets")
-                    .setTextureLocation("gold/terrain-gold-rivets-side")
-                    .setTextureLocation("gold/terrain-gold-rivets-top", Axis.Y)
-                    .next("terrain-gold-simple-bottom")
-                    .next("terrain-gold-simple")
-                    .setTextureLocation("gold/terrain-gold-simple-side")
-                    .setTextureLocation("gold/terrain-gold-simple-top", Axis.Y)
-                    .next("terrain-gold-smallingot-bottom")
                     .next("terrain-gold-smallingot")
-                    .setTextureLocation("gold/terrain-gold-smallingot-side")
-                    .setTextureLocation("gold/terrain-gold-smallingot-top", Axis.Y)
-                    .next("terrain-gold-space-bottom")
-                    .next("terrain-gold-space")
-                    .setTextureLocation("gold/terrain-gold-space-side")
-                    .setTextureLocation("gold/terrain-gold-space-top", Axis.Y)
-                    .next("terrain-gold-spaceblack-bottom")
-                    .next("terrain-gold-spaceblack")
-                    .setTextureLocation("gold/terrain-gold-spaceblack-side")
-                    .setTextureLocation("gold/terrain-gold-spaceblack-top", Axis.Y)
-                    .next("terrain-gold-star-bottom")
+                    .next("terrain-gold-brick")
+                    .next("terrain-gold-cart")
+                    .next("terrain-gold-coin-heads")
+                    .next("terrain-gold-coin-tails")
+                    .next("terrain-gold-crate-dark")
+                    .next("terrain-gold-crate-light")
+                    .next("terrain-gold-plates")
+                    .next("terrain-gold-rivets")
                     .next("terrain-gold-star")
-                    .setTextureLocation("gold/terrain-gold-star-side")
-                    .setTextureLocation("gold/terrain-gold-star-top", Axis.Y)
+                    .next("terrain-gold-space")
+                    .next("terrain-gold-spaceblack")
+                    .next("terrain-gold-simple")
                     .build();
         }
     },
@@ -1232,31 +875,23 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "grimstone", provider)
-                    .newVariation("blocks-rough")
-                    .next("blocks")
-                    .next("brick")
+                    .newVariation("grimstone")
+                    .next("smooth")
+                    .next("hate")
                     .next("chiseled")
-                    .setTextureLocation("grimstone/chiseled-side")
-                    .setTextureLocation("grimstone/chiseled-top", Axis.Y)
-                    .next("chunks")
+                    .next("blocks")
+                    .next("blocks-rough")
+                    .next("brick")
+                    .next("largebricks")
+                    .next("platform")
+                    .next("platform-tiles")
                     .next("construction")
                     .next("fancy-tiles")
-                    .next("flaky")
-                    .next("grimstone")
-                    .next("hate")
-                    .next("largebricks")
                     .next("plate")
                     .next("plate-rough")
-                    .next("platform-bottom")
-                    .next("platform-tiles-bottom")
-                    .next("platform-tiles")
-                    .setTextureLocation("grimstone/platform-tiles-side")
-                    .setTextureLocation("grimstone/platform-tiles-top", Axis.Y)
-                    .next("platform")
-                    .setTextureLocation("grimstone/platform-side")
-                    .setTextureLocation("grimstone/platform-top", Axis.Y)
+                    .next("flaky")
+                    .next("chunks")
                     .next("roughblocks")
-                    .next("smooth")
                     .next("tiles")
                     .build();
         }
@@ -1266,10 +901,8 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "hexPlating", provider)
-                    .newVariation("hexAnim")
-                    .next("hexBase")
+                    .newVariation("hexBase") //TODO: Colored+Glowy stuff
                     .next("hexNew")
-                    .next("hexOverlay")
                     .build();
         }
     },
@@ -1282,8 +915,6 @@ public enum Features {
                     .next("blocks")
                     .next("brick")
                     .next("chiseled")
-                    .setTextureLocation("holystone/chiseled-side")
-                    .setTextureLocation("holystone/chiseled-top", Axis.Y)
                     .next("construction")
                     .next("fancy-tiles")
                     .next("holystone")
@@ -1291,14 +922,8 @@ public enum Features {
                     .next("love")
                     .next("plate")
                     .next("plate-rough")
-                    .next("platform-bottom")
-                    .next("platform-tiles-bottom")
                     .next("platform-tiles")
-                    .setTextureLocation("holystone/platform-tiles-side")
-                    .setTextureLocation("holystone/platform-tiles-top", Axis.Y)
                     .next("platform")
-                    .setTextureLocation("holystone/platform-side")
-                    .setTextureLocation("holystone/platform-top", Axis.Y)
                     .next("smooth")
                     .build();
         }
@@ -1315,19 +940,13 @@ public enum Features {
                     .next("a1-stonecobble-icebricksmall")
                     .next("a1-stonecobble-icecobble")
                     .next("a1-stonecobble-icedungeon")
-                    .setTextureLocation("ice/a1-stonecobble-icedungeon-side")
-                    .setTextureLocation("ice/a1-stonecobble-icedungeon-top", Axis.Y)
                     .next("a1-stonecobble-icefour")
                     .next("a1-stonecobble-icefrench")
                     .next("a1-stonecobble-icepanel")
                     .next("a1-stoneslab-ice")
-                    .setTextureLocation("ice/a1-stoneslab-ice-side")
-                    .setTextureLocation("ice/a1-stoneslab-ice-top", Axis.Y)
                     .next("bismuth")
                     .next("poison")
                     .next("scribbles")
-                    .setTextureLocation("ice/scribbles-side")
-                    .setTextureLocation("ice/scribbles-top", Axis.Y)
                     .next("sunkentiles")
                     .next("tiles")
                     .next("zelda")
@@ -1340,26 +959,12 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "icepillar", provider)
                     .newVariation("carved")
-                    .setTextureLocation("icepillar/carved-side")
-                    .setTextureLocation("icepillar/carved-top", Axis.Y)
                     .next("convexplain")
-                    .setTextureLocation("icepillar/convexplain-side")
-                    .setTextureLocation("icepillar/convexplain-top", Axis.Y)
                     .next("greekgreek")
-                    .setTextureLocation("icepillar/greekgreek-side")
-                    .setTextureLocation("icepillar/greekgreek-top", Axis.Y)
                     .next("greekplain")
-                    .setTextureLocation("icepillar/greekplain-side")
-                    .setTextureLocation("icepillar/greekplain-top", Axis.Y)
                     .next("ornamental")
-                    .setTextureLocation("icepillar/ornamental-side")
-                    .setTextureLocation("icepillar/ornamental-top", Axis.Y)
                     .next("plaingreek")
-                    .setTextureLocation("icepillar/plaingreek-side")
-                    .setTextureLocation("icepillar/plaingreek-top", Axis.Y)
                     .next("plainplain")
-                    .setTextureLocation("icepillar/plainplain-side")
-                    .setTextureLocation("icepillar/plainplain-top", Axis.Y)
                     .build();
         }
     },
@@ -1385,58 +990,21 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("iron", Blocks.iron_block.getDefaultState(), -1);
             factory.newBlock(Material.rock, "iron", provider)
-                    .newVariation("terrain-iron-brick-bottom")
-                    .next("terrain-iron-brick")
-                    .setTextureLocation("iron/terrain-iron-brick-side")
-                    .setTextureLocation("iron/terrain-iron-brick-top", Axis.Y)
-                    .next("terrain-iron-coin-heads-bottom")
+                    .newVariation("terrain-iron-brick")
                     .next("terrain-iron-coin-heads")
-                    .setTextureLocation("iron/terrain-iron-coin-heads-side")
-                    .setTextureLocation("iron/terrain-iron-coin-heads-top", Axis.Y)
-                    .next("terrain-iron-coin-tails-bottom")
                     .next("terrain-iron-coin-tails")
-                    .setTextureLocation("iron/terrain-iron-coin-tails-side")
-                    .setTextureLocation("iron/terrain-iron-coin-tails-top", Axis.Y)
-                    .next("terrain-iron-crate-dark-bottom")
                     .next("terrain-iron-crate-dark")
-                    .setTextureLocation("iron/terrain-iron-crate-dark-side")
-                    .setTextureLocation("iron/terrain-iron-crate-dark-top", Axis.Y)
-                    .next("terrain-iron-crate-light-bottom")
                     .next("terrain-iron-crate-light")
-                    .setTextureLocation("iron/terrain-iron-crate-light-side")
-                    .setTextureLocation("iron/terrain-iron-crate-light-top", Axis.Y)
                     .next("terrain-iron-gears")
-                    .setTextureLocation("iron/terrain-iron-gears-side")
-                    .setTextureLocation("iron/terrain-iron-gears-top", Axis.Y)
-                    .next("terrain-iron-largeingot-bottom")
                     .next("terrain-iron-largeingot")
-                    .setTextureLocation("iron/terrain-iron-largeingot-side")
-                    .setTextureLocation("iron/terrain-iron-largeingot-top", Axis.Y)
-                    .next("terrain-iron-moon-bottom")
                     .next("terrain-iron-moon")
-                    .setTextureLocation("iron/terrain-iron-moon-side")
-                    .setTextureLocation("iron/terrain-iron-moon-top", Axis.Y)
-                    .next("terrain-iron-plates-bottom")
                     .next("terrain-iron-plates")
-                    .setTextureLocation("iron/terrain-iron-plates-side")
-                    .setTextureLocation("iron/terrain-iron-plates-top", Axis.Y)
-                    .next("terrain-iron-rivets-bottom")
                     .next("terrain-iron-rivets")
-                    .setTextureLocation("iron/terrain-iron-rivets-side")
-                    .setTextureLocation("iron/terrain-iron-rivets-top", Axis.Y)
-                    .next("terrain-iron-simple-bottom")
                     .next("terrain-iron-simple")
-                    .setTextureLocation("iron/terrain-iron-simple-side")
-                    .setTextureLocation("iron/terrain-iron-simple-top", Axis.Y)
-                    .next("terrain-iron-smallingot-bottom")
                     .next("terrain-iron-smallingot")
-                    .setTextureLocation("iron/terrain-iron-smallingot-side")
-                    .setTextureLocation("iron/terrain-iron-smallingot-top", Axis.Y)
                     .next("terrain-iron-space")
                     .next("terrain-iron-spaceblack")
                     .next("terrain-iron-vents")
-                    .setTextureLocation("iron/terrain-iron-vents-side")
-                    .setTextureLocation("iron/terrain-iron-vents-top", Axis.Y)
                     .build();
         }
     },
@@ -1449,37 +1017,16 @@ public enum Features {
                     .next("a1-ironbars-ironclassicnew")
                     .next("a1-ironbars-ironfence")
                     .next("a1-ironbars-ironfencemodern")
-                    .next("barbedwire-bottom")
                     .next("barbedwire")
-                    .setTextureLocation("ironpane/barbedwire-side")
-                    .setTextureLocation("ironpane/barbedwire-top", Axis.Y)
-                    .next("bars-bottom")
                     .next("bars")
-                    .setTextureLocation("ironpane/bars-side")
-                    .setTextureLocation("ironpane/bars-top", Axis.Y)
                     .next("cage")
-                    .setTextureLocation("ironpane/cage-side")
-                    .setTextureLocation("ironpane/cage-top", Axis.Y)
-                    .next("fenceIron-bottom")
                     .next("fenceIron")
-                    .setTextureLocation("ironpane/fenceIron-side")
-                    .setTextureLocation("ironpane/fenceIron-top", Axis.Y)
                     .next("fenceIron")
-                    .next("fenceIronTop-bottom")
                     .next("fenceIronTop")
-                    .setTextureLocation("ironpane/fenceIronTop-side")
-                    .setTextureLocation("ironpane/fenceIronTop-top", Axis.Y)
-                    .next("spikes-bottom")
                     .next("spikes")
-                    .setTextureLocation("ironpane/spikes-side")
-                    .setTextureLocation("ironpane/spikes-top", Axis.Y)
                     .next("terrain-glass-ornatesteel")
-                    .setTextureLocation("ironpane/terrain-glass-ornatesteel-side")
-                    .setTextureLocation("ironpane/terrain-glass-ornatesteel-top", Axis.Y)
                     .next("terrain-glass-thickgrid")
                     .next("terrain-glass-thingrid")
-                    .setTextureLocation("ironpane/terrain-glass-thingrid-side")
-                    .setTextureLocation("ironpane/terrain-glass-thingrid-top", Axis.Y)
                     .build();
         }
     },
@@ -1493,24 +1040,16 @@ public enum Features {
                     .next("directionleft")
                     .next("directionright")
                     .next("dottedpanel")
-                    .setTextureLocation("laboratory/dottedpanel-side")
-                    .setTextureLocation("laboratory/dottedpanel-top", Axis.Y)
                     .next("floortile")
                     .next("fuzzscreen")
                     .next("infocon")
                     .next("largesteel")
-                    .setTextureLocation("laboratory/largesteel-side")
-                    .setTextureLocation("laboratory/largesteel-top", Axis.Y)
                     .next("largetile")
                     .next("largewall")
                     .next("roundel")
                     .next("smallsteel")
-                    .setTextureLocation("laboratory/smallsteel-side")
-                    .setTextureLocation("laboratory/smallsteel-top", Axis.Y)
                     .next("smalltile")
                     .next("wallpanel")
-                    .setTextureLocation("laboratory/wallpanel-side")
-                    .setTextureLocation("laboratory/wallpanel-top", Axis.Y)
                     .next("wallvents")
                     .build();
         }
@@ -1566,7 +1105,7 @@ public enum Features {
         }
     },
 
-    LEAVES {
+    /*LEAVES {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "leaves", provider)
@@ -1586,7 +1125,7 @@ public enum Features {
                     .next("roses_opaque")
                     .build();
         }
-    },
+    },*/
 
     LIGHTSTONE {
         @Override
@@ -1650,7 +1189,7 @@ public enum Features {
         }
     },
 
-    LIVINGROCK {
+    /*LIVINGROCK {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "livingrock", provider)
@@ -1689,8 +1228,6 @@ public enum Features {
                     .next("crate")
                     .next("crateex")
                     .next("double")
-                    .setTextureLocation("livingwood-planks/double-side")
-                    .setTextureLocation("livingwood-planks/double-top", Axis.Y)
                     .next("fancy")
                     .next("large")
                     .next("panel-nails")
@@ -1733,15 +1270,13 @@ public enum Features {
                     .next("thermal")
                     .build();
         }
-    },
+    },*/
 
     MARBLE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "marble", provider)
                     .newVariation("a1-stoneornamental-marblebrick")
-                    .setTextureLocation("marble/a1-stoneornamental-marblebrick-side")
-                    .setTextureLocation("marble/a1-stoneornamental-marblebrick-top", Axis.Y)
                     .next("a1-stoneornamental-marblecarved")
                     .next("a1-stoneornamental-marblecarvedradial")
                     .next("a1-stoneornamental-marbleclassicpanel")
@@ -1754,11 +1289,7 @@ public enum Features {
                     .next("panel")
                     .next("raw")
                     .next("terrain-pistonback-marblecreeperdark")
-                    .setTextureLocation("marble/terrain-pistonback-marblecreeperdark-side")
-                    .setTextureLocation("marble/terrain-pistonback-marblecreeperdark-top", Axis.Y)
                     .next("terrain-pistonback-marblecreeperlight")
-                    .setTextureLocation("marble/terrain-pistonback-marblecreeperlight-side")
-                    .setTextureLocation("marble/terrain-pistonback-marblecreeperlight-top", Axis.Y)
                     .next("terrain-pistonback-marbledent")
                     .next("terrain-pistonback-marbledent-small")
                     .build();
@@ -1771,53 +1302,21 @@ public enum Features {
             if (Configurations.oldPillars) {
                 factory.newBlock(Material.rock, "marblepillarold", provider)
                         .newVariation("a1-stoneornamental-marblegreek")
-                        .setTextureLocation("marblepillarold/a1-stoneornamental-marblegreek-side")
-                        .setTextureLocation("marblepillarold/a1-stoneornamental-marblegreek-top", Axis.Y)
                         .next("a1-stonepillar-greek")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greek-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greek-top", Axis.Y)
                         .next("a1-stonepillar-greekbottomgreek")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greekbottomgreek-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greekbottomgreek-top", Axis.Y)
                         .next("a1-stonepillar-greekbottomplain")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greekbottomplain-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greekbottomplain-top", Axis.Y)
                         .next("a1-stonepillar-greektopgreek")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greektopgreek-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greektopgreek-top", Axis.Y)
                         .next("a1-stonepillar-greektopplain")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greektopplain-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-greektopplain-top", Axis.Y)
                         .next("a1-stonepillar-plain")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plain-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plain-top", Axis.Y)
                         .next("a1-stonepillar-plainbottomgreek")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plainbottomgreek-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plainbottomgreek-top", Axis.Y)
                         .next("a1-stonepillar-plainbottomplain")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plainbottomplain-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plainbottomplain-top", Axis.Y)
                         .next("a1-stonepillar-plaintopgreek")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plaintopgreek-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plaintopgreek-top", Axis.Y)
                         .next("a1-stonepillar-plaintopplain")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plaintopplain-side")
-                        .setTextureLocation("marblepillarold/a1-stonepillar-plaintopplain-top", Axis.Y)
                         .next("base")
-                        .setTextureLocation("marblepillarold/base-side")
-                        .setTextureLocation("marblepillarold/base-top", Axis.Y)
                         .next("capstone")
-                        .setTextureLocation("marblepillarold/capstone-side")
-                        .setTextureLocation("marblepillarold/capstone-top", Axis.Y)
                         .next("column")
-                        .setTextureLocation("marblepillarold/column-side")
-                        .setTextureLocation("marblepillarold/column-top", Axis.Y)
                         .next("pillar-carved")
-                        .setTextureLocation("marblepillarold/pillar-carved-side")
-                        .setTextureLocation("marblepillarold/pillar-carved-top", Axis.Y)
                         .next("small")
-                        .setTextureLocation("marblepillarold/small-side")
-                        .setTextureLocation("marblepillarold/small-top", Axis.Y)
                         .build();
             } else {
                 factory.newBlock(Material.rock, "marblepillar", provider)
@@ -1841,7 +1340,7 @@ public enum Features {
         }
     },
 
-    MARBLEPILLARSLAB {
+    /*MARBLEPILLARSLAB { //TODO: make a carpenters' blocks-esque system for this
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "marblepillarslab", provider)
@@ -1998,7 +1497,7 @@ public enum Features {
                     .setTextureLocation("marbleslab/terrain-pistonback-marbledent-top", Axis.Y)
                     .build();
         }
-    },
+    },//*/
 
     MAZESTONE {
         @Override
@@ -2008,25 +1507,9 @@ public enum Features {
                     .next("cobbled")
                     .next("intricate")
                     .next("masonryMazestone")
-                    .next("mazestoneDiagonals-0")
-                    .next("mazestoneDiagonals-1")
-                    .next("mazestoneDiagonals-2")
-                    .next("mazestoneDiagonals-3")
                     .next("mazestoneDiagonals")
                     .next("prismatic")
                     .next("prismaticMazestone")
-                    .build();
-        }
-    },
-
-    MECHANICAL2 {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "mechanical2", provider)
-                    .newVariation("gear")
-                    .next("hex")
-                    .next("vent-glow")
-                    .next("vent2")
                     .build();
         }
     },
@@ -2103,22 +1586,11 @@ public enum Features {
             factory.newBlock(Material.rock, "new", provider)
                     .setParentFolder("technical/new")
                     .newVariation("engineering-0")
-                    .next("engineering-1")
-                    .next("engineering-2")
-                    .next("engineering-3")
                     .next("engineering")
                     .next("ExhaustPlating")
                     .next("MakeshiftPanels")
-                    .next("MegaCell-bottom")
                     .next("MegaCell")
-                    .setTextureLocation("technical/new/MegaCell-side")
-                    .setTextureLocation("technical/new/MegaCell-top", Axis.Y)
-                    .next("OldeTimeyServerAnim")
                     .next("Piping")
-                    .next("scaffoldLarge-0")
-                    .next("scaffoldLarge-1")
-                    .next("scaffoldLarge-2")
-                    .next("scaffoldLarge-3")
                     .next("scaffoldLarge")
                     .next("Sturdy")
                     .next("TapeDrive")
@@ -2151,17 +1623,10 @@ public enum Features {
             factory.newBlock(Material.rock, "obsidian", provider)
                     .newVariation("blocks")
                     .next("chiseled")
-                    .setTextureLocation("obsidian/chiseled-side")
-                    .setTextureLocation("obsidian/chiseled-top", Axis.Y)
                     .next("chunks")
-                    .next("crate-bottom")
                     .next("crate")
-                    .setTextureLocation("obsidian/crate-side")
-                    .setTextureLocation("obsidian/crate-top", Axis.Y)
                     .next("crystal")
                     .next("greek")
-                    .setTextureLocation("obsidian/greek-side")
-                    .setTextureLocation("obsidian/greek-top", Axis.Y)
                     .next("growth")
                     .next("map-a")
                     .next("map-b")
@@ -2169,11 +1634,7 @@ public enum Features {
                     .next("panel-shiny")
                     .next("panel")
                     .next("pillar-quartz")
-                    .setTextureLocation("obsidian/pillar-quartz-side")
-                    .setTextureLocation("obsidian/pillar-quartz-top", Axis.Y)
                     .next("pillar")
-                    .setTextureLocation("obsidian/pillar-side")
-                    .setTextureLocation("obsidian/pillar-top", Axis.Y)
                     .next("tiles")
                     .build();
         }
@@ -2216,8 +1677,6 @@ public enum Features {
                     .next("crate")
                     .next("crateex")
                     .next("double")
-                    .setTextureLocation("planks-acacia/double-side")
-                    .setTextureLocation("planks-acacia/double-top", Axis.Y)
                     .next("fancy")
                     .next("large")
                     .next("panel-nails")
@@ -2241,8 +1700,6 @@ public enum Features {
                     .next("crate")
                     .next("crateex")
                     .next("double")
-                    .setTextureLocation("planks-birch/double-side")
-                    .setTextureLocation("planks-birch/double-top", Axis.Y)
                     .next("fancy")
                     .next("large")
                     .next("panel-nails")
@@ -2266,8 +1723,6 @@ public enum Features {
                     .next("crate")
                     .next("crateex")
                     .next("double")
-                    .setTextureLocation("planks-dark-oak/double-side")
-                    .setTextureLocation("planks-dark-oak/double-top", Axis.Y)
                     .next("fancy")
                     .next("large")
                     .next("panel-nails")
@@ -2291,8 +1746,6 @@ public enum Features {
                     .next("crate")
                     .next("crateex")
                     .next("double")
-                    .setTextureLocation("planks-jungle/double-side")
-                    .setTextureLocation("planks-jungle/double-top", Axis.Y)
                     .next("fancy")
                     .next("large")
                     .next("panel-nails")
@@ -2316,8 +1769,6 @@ public enum Features {
                     .next("crate")
                     .next("crateex")
                     .next("double")
-                    .setTextureLocation("planks-oak/double-side")
-                    .setTextureLocation("planks-oak/double-top", Axis.Y)
                     .next("fancy")
                     .next("large")
                     .next("panel-nails")
@@ -2341,8 +1792,6 @@ public enum Features {
                     .next("crate")
                     .next("crateex")
                     .next("double")
-                    .setTextureLocation("planks-spruce/double-side")
-                    .setTextureLocation("planks-spruce/double-top", Axis.Y)
                     .next("fancy")
                     .next("large")
                     .next("panel-nails")
@@ -2376,12 +1825,6 @@ public enum Features {
             factory.newBlock(Material.rock, "present", provider)
                     .newVariation("presentChest0")
                     .next("presentChest1")
-                    .next("presentChest10")
-                    .next("presentChest11")
-                    .next("presentChest12")
-                    .next("presentChest13")
-                    .next("presentChest14")
-                    .next("presentChest15")
                     .next("presentChest2")
                     .next("presentChest3")
                     .next("presentChest4")
@@ -2390,7 +1833,12 @@ public enum Features {
                     .next("presentChest7")
                     .next("presentChest8")
                     .next("presentChest9")
-                    .next("red")
+                    .next("presentChest10")
+                    .next("presentChest11")
+                    .next("presentChest12")
+                    .next("presentChest13")
+                    .next("presentChest14")
+                    .next("presentChest15")
                     .build();
         }
     },
@@ -2415,22 +1863,8 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("pumpkin", Blocks.pumpkin.getDefaultState(), -1);
             factory.newBlock(Material.rock, "pumpkin", provider)
-                    .newVariation("pumpkin_face_10_off")
-                    .next("pumpkin_face_10_on")
-                    .next("pumpkin_face_11_off")
-                    .next("pumpkin_face_11_on")
-                    .next("pumpkin_face_12_off")
-                    .next("pumpkin_face_12_on")
-                    .next("pumpkin_face_13_off")
-                    .next("pumpkin_face_13_on")
-                    .next("pumpkin_face_14_off")
-                    .next("pumpkin_face_14_on")
-                    .next("pumpkin_face_15_off")
-                    .next("pumpkin_face_15_on")
-                    .next("pumpkin_face_16_off")
-                    .next("pumpkin_face_16_on")
-                    .next("pumpkin_face_17_off")
-                    .next("pumpkin_face_17_on")
+                    .newVariation("pumpkin_face_off")
+                    .next("pumpkin_face_on")
                     .next("pumpkin_face_1_off")
                     .next("pumpkin_face_1_on")
                     .next("pumpkin_face_2_off")
@@ -2449,10 +1883,22 @@ public enum Features {
                     .next("pumpkin_face_8_on")
                     .next("pumpkin_face_9_off")
                     .next("pumpkin_face_9_on")
-                    .next("pumpkin_face_off")
-                    .next("pumpkin_face_on")
-                    .next("pumpkin_side")
-                    .next("pumpkin_top")
+                    .next("pumpkin_face_10_off")
+                    .next("pumpkin_face_10_on")
+                    .next("pumpkin_face_11_off")
+                    .next("pumpkin_face_11_on")
+                    .next("pumpkin_face_12_off")
+                    .next("pumpkin_face_12_on")
+                    .next("pumpkin_face_13_off")
+                    .next("pumpkin_face_13_on")
+                    .next("pumpkin_face_14_off")
+                    .next("pumpkin_face_14_on")
+                    .next("pumpkin_face_15_off")
+                    .next("pumpkin_face_15_on")
+                    .next("pumpkin_face_16_off")
+                    .next("pumpkin_face_16_on")
+                    .next("pumpkin_face_17_off")
+                    .next("pumpkin_face_17_on")
                     .build();
         }
     },
@@ -2481,15 +1927,11 @@ public enum Features {
                     .next("blocks")
                     .next("bricks")
                     .next("chiseled")
-                    .setTextureLocation("redstone/chiseled-side")
-                    .setTextureLocation("redstone/chiseled-top", Axis.Y)
                     .next("circuit")
                     .next("ere")
                     .next("masonryRedstone")
                     .next("ornate-tiles")
                     .next("pillar")
-                    .setTextureLocation("redstone/pillar-side")
-                    .setTextureLocation("redstone/pillar-top", Axis.Y)
                     .next("smallbricks")
                     .next("smallchaotic")
                     .next("smooth")
@@ -2500,7 +1942,7 @@ public enum Features {
         }
     },
 
-    REDSTONE_LAMP {
+    /*REDSTONE_LAMP {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("redstoneLamp", Blocks.redstone_lamp.getDefaultState(), -1);
@@ -2511,18 +1953,18 @@ public enum Features {
                     .next("square-on")
                     .build();
         }
-    },
+    },*/
 
-    ROOFING {
+    /*ROOFING {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "roofing", provider)
                     .newVariation("shingles")
                     .build();
         }
-    },
+    },*/
 
-    SANDSNAKE {
+    /*SANDSNAKE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "sandsnake", provider)
@@ -2545,7 +1987,7 @@ public enum Features {
                     .next("top")
                     .build();
         }
-    },
+    },*/
 
     SANDSTONE {
         @Override
@@ -2557,58 +1999,24 @@ public enum Features {
             Carving.chisel.addVariation("sandstone", ss.withProperty(prop, BlockSandStone.EnumType.CHISELED), -1);
 
             factory.newBlock(Material.rock, "sandstone", provider)
-                    .newVariation("a0-sandstonepreview-boxcreeper-bottom")
-                    .next("a0-sandstonepreview-boxcreeper")
-                    .setTextureLocation("sandstone/a0-sandstonepreview-boxcreeper-side")
-                    .setTextureLocation("sandstone/a0-sandstonepreview-boxcreeper-top", Axis.Y)
+                    .newVariation("a0-sandstonepreview-boxcreeper")
                     .next("base")
-                    .setTextureLocation("sandstone/base-side")
-                    .setTextureLocation("sandstone/base-top", Axis.Y)
                     .next("block")
                     .next("blocks")
                     .next("capstone")
-                    .setTextureLocation("sandstone/capstone-side")
-                    .setTextureLocation("sandstone/capstone-top", Axis.Y)
                     .next("column")
-                    .setTextureLocation("sandstone/column-side")
-                    .setTextureLocation("sandstone/column-top", Axis.Y)
-                    .next("faded-bottom")
                     .next("faded")
-                    .setTextureLocation("sandstone/faded-side")
-                    .setTextureLocation("sandstone/faded-top", Axis.Y)
                     .next("horizontal-tiles")
-                    .setTextureLocation("sandstone/horizontal-tiles-side")
-                    .setTextureLocation("sandstone/horizontal-tiles-top", Axis.Y)
                     .next("mosaic")
                     .next("small")
-                    .setTextureLocation("sandstone/small-side")
-                    .setTextureLocation("sandstone/small-top", Axis.Y)
                     .next("smooth-base")
-                    .setTextureLocation("sandstone/smooth-base-side")
-                    .setTextureLocation("sandstone/smooth-base-top", Axis.Y)
                     .next("smooth-cap")
-                    .setTextureLocation("sandstone/smooth-cap-side")
-                    .setTextureLocation("sandstone/smooth-cap-top", Axis.Y)
                     .next("smooth-small")
-                    .setTextureLocation("sandstone/smooth-small-side")
-                    .setTextureLocation("sandstone/smooth-small-top", Axis.Y)
                     .next("smooth")
-                    .next("terrain-sandstone-smoothglyph-bottom")
                     .next("terrain-sandstone-smoothglyph")
-                    .setTextureLocation("sandstone/terrain-sandstone-smoothglyph-side")
-                    .setTextureLocation("sandstone/terrain-sandstone-smoothglyph-top", Axis.Y)
-                    .next("terrain-sandstone-solidcobble-bottom")
                     .next("terrain-sandstone-solidcobble")
-                    .setTextureLocation("sandstone/terrain-sandstone-solidcobble-side")
-                    .setTextureLocation("sandstone/terrain-sandstone-solidcobble-top", Axis.Y)
-                    .next("a0-sandstonepreview-smoothflat-bottom")
                     .next("a0-sandstonepreview-smoothflat")
-                    .setTextureLocation("sandstone2/a0-sandstonepreview-smoothflat-side")
-                    .setTextureLocation("sandstone2/a0-sandstonepreview-smoothflat-top", Axis.Y)
-                    .next("terrain-sandstone-brickflat-bottom")
                     .next("terrain-sandstone-brickflat")
-                    .setTextureLocation("sandstone2/terrain-sandstone-brickflat-side")
-                    .setTextureLocation("sandstone2/terrain-sandstone-brickflat-top", Axis.Y)
                     .build();
         }
     },
@@ -2619,58 +2027,26 @@ public enum Features {
             factory.newBlock(Material.rock, "sandstone-scribbles", provider)
                     .setGroup("sandstone")
                     .newVariation("scribbles-0")
-                    .setTextureLocation("sandstone-scribbles/scribbles-0-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-0-top", Axis.Y)
                     .next("scribbles-1")
-                    .setTextureLocation("sandstone-scribbles/scribbles-1-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-1-top", Axis.Y)
-                    .next("scribbles-10")
-                    .setTextureLocation("sandstone-scribbles/scribbles-10-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-10-top", Axis.Y)
-                    .next("scribbles-11")
-                    .setTextureLocation("sandstone-scribbles/scribbles-11-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-11-top", Axis.Y)
-                    .next("scribbles-12")
-                    .setTextureLocation("sandstone-scribbles/scribbles-12-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-12-top", Axis.Y)
-                    .next("scribbles-13")
-                    .setTextureLocation("sandstone-scribbles/scribbles-13-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-13-top", Axis.Y)
-                    .next("scribbles-14")
-                    .setTextureLocation("sandstone-scribbles/scribbles-14-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-14-top", Axis.Y)
-                    .next("scribbles-15")
-                    .setTextureLocation("sandstone-scribbles/scribbles-15-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-15-top", Axis.Y)
                     .next("scribbles-2")
-                    .setTextureLocation("sandstone-scribbles/scribbles-2-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-2-top", Axis.Y)
                     .next("scribbles-3")
-                    .setTextureLocation("sandstone-scribbles/scribbles-3-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-3-top", Axis.Y)
                     .next("scribbles-4")
-                    .setTextureLocation("sandstone-scribbles/scribbles-4-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-4-top", Axis.Y)
                     .next("scribbles-5")
-                    .setTextureLocation("sandstone-scribbles/scribbles-5-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-5-top", Axis.Y)
                     .next("scribbles-6")
-                    .setTextureLocation("sandstone-scribbles/scribbles-6-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-6-top", Axis.Y)
                     .next("scribbles-7")
-                    .setTextureLocation("sandstone-scribbles/scribbles-7-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-7-top", Axis.Y)
                     .next("scribbles-8")
-                    .setTextureLocation("sandstone-scribbles/scribbles-8-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-8-top", Axis.Y)
                     .next("scribbles-9")
-                    .setTextureLocation("sandstone-scribbles/scribbles-9-side")
-                    .setTextureLocation("sandstone-scribbles/scribbles-9-top", Axis.Y)
+                    .next("scribbles-10")
+                    .next("scribbles-11")
+                    .next("scribbles-12")
+                    .next("scribbles-13")
+                    .next("scribbles-14")
+                    .next("scribbles-15")
                     .build();
         }
     },
 
-    SHINGLES {
+    /*SHINGLES {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "shingles", provider)
@@ -2682,7 +2058,7 @@ public enum Features {
                     .next("Shingle6")
                     .build();
         }
-    },
+    },*/
 
     SILVER {
         @Override
@@ -2768,7 +2144,7 @@ public enum Features {
         }
     },
 
-    TALLOW {
+    /*TALLOW {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "tallow", provider)
@@ -2778,7 +2154,7 @@ public enum Features {
                     .next("tallowblock_top")
                     .build();
         }
-    },
+    },*/
 
     TECHNICAL {
         @Override
@@ -2787,28 +2163,16 @@ public enum Features {
                     .newVariation("cables")
                     .next("cautiontape")
                     .next("fanFast")
-                    .setTextureLocation("technical/fanFast-side")
-                    .setTextureLocation("technical/fanFast-top", Axis.Y)
                     .next("fanFastTransparent")
-                    .setTextureLocation("technical/fanFastTransparent-side")
-                    .setTextureLocation("technical/fanFastTransparent-top", Axis.Y)
                     .next("fanMalfunction")
-                    .setTextureLocation("technical/fanMalfunction-side")
-                    .setTextureLocation("technical/fanMalfunction-top", Axis.Y)
                     .next("fanStill")
-                    .setTextureLocation("technical/fanStill-side")
-                    .setTextureLocation("technical/fanStill-top", Axis.Y)
                     .next("fanStillTransparent")
-                    .setTextureLocation("technical/fanStillTransparent-side")
-                    .setTextureLocation("technical/fanStillTransparent-top", Axis.Y)
                     .next("grate")
                     .next("grateRusty")
                     .next("hexArmorPlating")
                     .next("industrialrelic")
                     .next("insulationv2")
                     .next("malfunctionFan")
-                    .setTextureLocation("technical/malfunctionFan-side")
-                    .setTextureLocation("technical/malfunctionFan-top", Axis.Y)
                     .next("massiveFan")
                     .next("massiveHexPlating")
                     .next("old")
@@ -2835,22 +2199,14 @@ public enum Features {
                     .next("bricks")
                     .next("cobble")
                     .next("column")
-                    .setTextureLocation("temple/column-side")
-                    .setTextureLocation("temple/column-top", Axis.Y)
                     .next("ornate")
                     .next("plate-cracked")
                     .next("plate")
                     .next("smalltiles-light")
                     .next("smalltiles")
                     .next("stand-creeper")
-                    .setTextureLocation("temple/stand-creeper-side")
-                    .setTextureLocation("temple/stand-creeper-top", Axis.Y)
                     .next("stand-mosaic")
-                    .setTextureLocation("temple/stand-mosaic-side")
-                    .setTextureLocation("temple/stand-mosaic-top", Axis.Y)
                     .next("stand")
-                    .setTextureLocation("temple/stand-side")
-                    .setTextureLocation("temple/stand-top", Axis.Y)
                     .next("tiles-light")
                     .next("tiles")
                     .build();
@@ -2867,22 +2223,14 @@ public enum Features {
                     .next("bricks")
                     .next("cobble")
                     .next("column")
-                    .setTextureLocation("templemossy/column-side")
-                    .setTextureLocation("templemossy/column-top", Axis.Y)
                     .next("ornate")
                     .next("plate-cracked")
                     .next("plate")
                     .next("smalltiles-light")
                     .next("smalltiles")
                     .next("stand-creeper")
-                    .setTextureLocation("templemossy/stand-creeper-side")
-                    .setTextureLocation("templemossy/stand-creeper-top", Axis.Y)
                     .next("stand-mosaic")
-                    .setTextureLocation("templemossy/stand-mosaic-side")
-                    .setTextureLocation("templemossy/stand-mosaic-top", Axis.Y)
                     .next("stand")
-                    .setTextureLocation("templemossy/stand-side")
-                    .setTextureLocation("templemossy/stand-top", Axis.Y)
                     .next("tiles-light")
                     .next("tiles")
                     .build();
@@ -2909,12 +2257,7 @@ public enum Features {
                     .next("purplerunes")
                     .next("runes")
                     .next("small")
-                    .next("thaumDiagonalBricks-0")
-                    .next("thaumDiagonalBricks-1")
-                    .next("thaumDiagonalBricks-2")
-                    .next("thaumDiagonalBricks-3")
                     .next("thaumDiagonalBricks")
-                    .next("thaumicEyeSegment-0-0")
                     .next("thaumicEyeSegment")
                     .next("thaumiumBigBricks")
                     .next("thaumiumblock")
@@ -2992,7 +2335,6 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "torch", provider)
                     .newVariation("torch1")
-                    .next("torch10")
                     .next("torch2")
                     .next("torch3")
                     .next("torch4")
@@ -3001,6 +2343,7 @@ public enum Features {
                     .next("torch7")
                     .next("torch8")
                     .next("torch9")
+                    .next("torch10")
                     .build();
         }
     },
@@ -3152,7 +2495,7 @@ public enum Features {
         }
     },
 
-    WOOLEN_CLAY {
+    /*WOOLEN_CLAY {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "woolenClay", provider)
@@ -3174,7 +2517,24 @@ public enum Features {
                     .next("yellow")
                     .build();
         }
-    },;
+    },*/;
+
+    private static final String[] dyeColors = {"black",
+            "red",
+            "green",
+            "brown",
+            "blue",
+            "purple",
+            "cyan",
+            "lightgray",
+            "gray",
+            "pink",
+            "lime",
+            "yellow",
+            "lightblue",
+            "magenta",
+            "orange",
+            "white"};
 
     //@formatter:on
 
