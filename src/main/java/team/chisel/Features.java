@@ -750,7 +750,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("glass", Blocks.glass.getDefaultState(), -1);
-            factory.newBlock(Material.rock, "glass", provider)
+            factory.newBlock(Material.glass, "glass", provider)
                     .newVariation("terrain-glassbubble")
                     .next("terrain-glass-chinese")
                     .next("japanese")
@@ -794,7 +794,16 @@ public enum Features {
 
             //System.out.println("Setting up dyed glass");
 
-            for(int c = 0; c < 16; c++)
+            factory.newBlock(Material.glass, "glassdyedblack", provider)
+                    .setParentFolder("glassdyed")
+                    .newVariation("black-bubble")
+                    .next("black-panel")
+                    .next("black-panel-fancy")
+                    //.next(dyes[c]+"-transparent")
+                    //.next(dyes[c]+"-forestry")
+                    .build();
+
+            /*for(int c = 0; c < 16; c++)
             {
                 //System.out.println("Setting up " + dyeColors[c] +" glass");
 
@@ -806,7 +815,7 @@ public enum Features {
                         //.next(dyes[c]+"-transparent")
                         //.next(dyes[c]+"-forestry")
                         .build();
-            }
+            }//*/
         }
     },
 
