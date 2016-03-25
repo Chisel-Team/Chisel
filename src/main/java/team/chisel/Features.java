@@ -833,8 +833,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("gold", Blocks.gold_block.getDefaultState(), -1);
             factory.newBlock(Material.rock, "gold", provider)
-                    .newVariation("goldEye")
-                    .next("terrain-gold-largeingot")
+                    .newVariation("terrain-gold-largeingot")
                     .next("terrain-gold-smallingot")
                     .next("terrain-gold-brick")
                     .next("terrain-gold-cart")
@@ -848,6 +847,7 @@ public enum Features {
                     .next("terrain-gold-space")
                     .next("terrain-gold-spaceblack")
                     .next("terrain-gold-simple")
+                    .next("goldEye")
                     .build();
         }
     },
@@ -911,20 +911,20 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "holystone", provider)
-                    .newVariation("blocks-rough")
-                    .next("blocks")
-                    .next("brick")
+                    .newVariation("holystone")
+                    .next("smooth")
+                    .next("love")
                     .next("chiseled")
+                    .next("blocks")
+                    .next("blocks-rough")
+                    .next("brick")
+                    .next("largebricks")
+                    .next("platform")
+                    .next("platform-tiles")
                     .next("construction")
                     .next("fancy-tiles")
-                    .next("holystone")
-                    .next("largebricks")
-                    .next("love")
                     .next("plate")
                     .next("plate-rough")
-                    .next("platform-tiles")
-                    .next("platform")
-                    .next("smooth")
                     .build();
         }
     },
@@ -935,21 +935,21 @@ public enum Features {
             Carving.chisel.addVariation("ice", Blocks.ice.getDefaultState(), -1);
             factory.newBlock(Material.rock, "ice", provider)
                     .newVariation("a1-ice-light")
+                    .next("a1-stonecobble-icecobble")
                     .next("a1-netherbrick-ice")
                     .next("a1-stonecobble-icebrick")
                     .next("a1-stonecobble-icebricksmall")
-                    .next("a1-stonecobble-icecobble")
                     .next("a1-stonecobble-icedungeon")
                     .next("a1-stonecobble-icefour")
                     .next("a1-stonecobble-icefrench")
+                    .next("sunkentiles")
+                    .next("tiles")
                     .next("a1-stonecobble-icepanel")
                     .next("a1-stoneslab-ice")
+                    .next("zelda")
                     .next("bismuth")
                     .next("poison")
                     .next("scribbles")
-                    .next("sunkentiles")
-                    .next("tiles")
-                    .next("zelda")
                     .build();
         }
     },
@@ -958,13 +958,13 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "icepillar", provider)
-                    .newVariation("carved")
-                    .next("convexplain")
-                    .next("greekgreek")
-                    .next("greekplain")
-                    .next("ornamental")
+                    .newVariation("plainplain")
                     .next("plaingreek")
-                    .next("plainplain")
+                    .next("greekplain")
+                    .next("greekgreek")
+                    .next("convexplain")
+                    .next("carved")
+                    .next("ornamental")
                     .build();
         }
     },
@@ -990,21 +990,21 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("iron", Blocks.iron_block.getDefaultState(), -1);
             factory.newBlock(Material.rock, "iron", provider)
-                    .newVariation("terrain-iron-brick")
+                    .newVariation("terrain-iron-largeingot")
+                    .next("terrain-iron-smallingot")
+                    .next("terrain-iron-gears")
+                    .next("terrain-iron-brick")
+                    .next("terrain-iron-plates")
+                    .next("terrain-iron-rivets")
                     .next("terrain-iron-coin-heads")
                     .next("terrain-iron-coin-tails")
                     .next("terrain-iron-crate-dark")
                     .next("terrain-iron-crate-light")
-                    .next("terrain-iron-gears")
-                    .next("terrain-iron-largeingot")
                     .next("terrain-iron-moon")
-                    .next("terrain-iron-plates")
-                    .next("terrain-iron-rivets")
-                    .next("terrain-iron-simple")
-                    .next("terrain-iron-smallingot")
                     .next("terrain-iron-space")
                     .next("terrain-iron-spaceblack")
                     .next("terrain-iron-vents")
+                    .next("terrain-iron-simple")
                     .build();
         }
     },
@@ -1013,20 +1013,19 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "ironpane", provider)
-                    .newVariation("a1-ironbars-ironclassic")
+                    .newVariation("fenceIron")
+                    .next("barbedwire")
+                    .next("cage")
+                    .next("fenceIronTop")
+                    .next("terrain-glass-thickgrid")
+                    .next("terrain-glass-thingrid")
+                    .next("terrain-glass-ornatesteel")
+                    .next("bars")
+                    .next("spikes")
                     .next("a1-ironbars-ironclassicnew")
                     .next("a1-ironbars-ironfence")
                     .next("a1-ironbars-ironfencemodern")
-                    .next("barbedwire")
-                    .next("bars")
-                    .next("cage")
-                    .next("fenceIron")
-                    .next("fenceIron")
-                    .next("fenceIronTop")
-                    .next("spikes")
-                    .next("terrain-glass-ornatesteel")
-                    .next("terrain-glass-thickgrid")
-                    .next("terrain-glass-thingrid")
+                    .next("a1-ironbars-ironclassic")
                     .build();
         }
     },
@@ -1035,22 +1034,22 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "laboratory", provider)
-                    .newVariation("checkertile")
-                    .next("clearscreen")
-                    .next("directionleft")
-                    .next("directionright")
+                    .newVariation("wallpanel")
                     .next("dottedpanel")
-                    .next("floortile")
-                    .next("fuzzscreen")
-                    .next("infocon")
-                    .next("largesteel")
-                    .next("largetile")
                     .next("largewall")
                     .next("roundel")
-                    .next("smallsteel")
-                    .next("smalltile")
-                    .next("wallpanel")
                     .next("wallvents")
+                    .next("largetile")
+                    .next("smalltile")
+                    .next("floortile")
+                    .next("checkertile")
+                    .next("clearscreen")
+                    .next("fuzzscreen")
+                    .next("largesteel")
+                    .next("smallsteel")
+                    .next("directionright")
+                    .next("directionleft")
+                    .next("infocon")
                     .build();
         }
     },
@@ -1060,15 +1059,15 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("lapis", Blocks.lapis_block.getDefaultState(), -1);
             factory.newBlock(Material.rock, "lapis", provider)
-                    .newVariation("a1-blocklapis-ornatelayer")
-                    .next("a1-blocklapis-panel")
-                    .next("a1-blocklapis-smooth")
-                    .next("masonryLapis")
-                    .next("terrain-lapisblock-chunky")
+                    .newVariation("terrain-lapisblock-chunky")
                     .next("terrain-lapisblock-panel")
                     .next("terrain-lapisblock-zelda")
                     .next("terrain-lapisornate")
                     .next("terrain-lapistile")
+                    .next("a1-blocklapis-panel")
+                    .next("a1-blocklapis-smooth")
+                    .next("a1-blocklapis-ornatelayer")
+                    .next("masonryLapis")
                     .build();
         }
     },
@@ -1077,14 +1076,14 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "lavastone", provider)
-                    .newVariation("black")
-                    .next("chaotic")
-                    .next("cobble")
-                    .next("creeper")
-                    .next("dark")
-                    .next("panel-ornate")
-                    .next("panel")
+                    .newVariation("cobble")
+                    .next("black")
                     .next("tiles")
+                    .next("chaotic")
+                    .next("creeper")
+                    .next("panel")
+                    .next("panel-ornate")
+                    .next("dark")
                     .build();
         }
     },
@@ -1131,13 +1130,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "lightstone", provider)
-                    .newVariation("a1-glowstone-cobble")
-                    .next("a1-glowstone-growth")
-                    .next("a1-glowstone-layers")
-                    .next("a1-glowstone-tilecorroded")
-                    .next("glowstone-bismuth-panel")
-                    .next("glowstone-bismuth")
-                    .next("terrain-sulphur-cobble")
+                    .newVariation("terrain-sulphur-cobble")
                     .next("terrain-sulphur-corroded")
                     .next("terrain-sulphur-glass")
                     .next("terrain-sulphur-neon")
@@ -1146,6 +1139,12 @@ public enum Features {
                     .next("terrain-sulphur-shale")
                     .next("terrain-sulphur-tile")
                     .next("terrain-sulphur-weavelanternlight")
+                    .next("a1-glowstone-cobble")
+                    .next("a1-glowstone-growth")
+                    .next("a1-glowstone-layers")
+                    .next("a1-glowstone-tilecorroded")
+                    .next("glowstone-bismuth")
+                    .next("glowstone-bismuth-panel")
                     .build();
         }
     },
@@ -1154,11 +1153,12 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "limestone", provider)
-                    .newVariation("terrain-cob-french2light")
-                    .next("terrain-cob-frenchlight")
-                    .next("terrain-cob-smallbricklight")
+                    .newVariation("limestone")
                     .next("terrain-cobbsmalltilelight")
+                    .next("terrain-cob-frenchlight")
+                    .next("terrain-cob-french2light")
                     .next("terrain-cobmoss-creepdungeonlight")
+                    .next("terrain-cob-smallbricklight")
                     .next("terrain-mossysmalltilelight")
                     .next("terrain-pistonback-dungeon")
                     .next("terrain-pistonback-dungeonornate")
@@ -1276,22 +1276,22 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "marble", provider)
-                    .newVariation("a1-stoneornamental-marblebrick")
-                    .next("a1-stoneornamental-marblecarved")
-                    .next("a1-stoneornamental-marblecarvedradial")
+                    .newVariation("raw")
+                    .next("a1-stoneornamental-marblebrick")
                     .next("a1-stoneornamental-marbleclassicpanel")
                     .next("a1-stoneornamental-marbleornate")
-                    .next("block")
-                    .next("marble-arranged-bricks")
-                    .next("marble-blocks")
-                    .next("marble-bricks")
-                    .next("marble-fancy-bricks")
                     .next("panel")
-                    .next("raw")
+                    .next("block")
                     .next("terrain-pistonback-marblecreeperdark")
                     .next("terrain-pistonback-marblecreeperlight")
+                    .next("a1-stoneornamental-marblecarved")
+                    .next("a1-stoneornamental-marblecarvedradial")
                     .next("terrain-pistonback-marbledent")
                     .next("terrain-pistonback-marbledent-small")
+                    .next("marble-bricks")
+                    .next("marble-arranged-bricks")
+                    .next("marble-fancy-bricks")
+                    .next("marble-blocks")
                     .build();
         }
     },
@@ -1301,40 +1301,41 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             if (Configurations.oldPillars) {
                 factory.newBlock(Material.rock, "marblepillarold", provider)
-                        .newVariation("a1-stoneornamental-marblegreek")
-                        .next("a1-stonepillar-greek")
-                        .next("a1-stonepillar-greekbottomgreek")
-                        .next("a1-stonepillar-greekbottomplain")
-                        .next("a1-stonepillar-greektopgreek")
-                        .next("a1-stonepillar-greektopplain")
-                        .next("a1-stonepillar-plain")
-                        .next("a1-stonepillar-plainbottomgreek")
-                        .next("a1-stonepillar-plainbottomplain")
-                        .next("a1-stonepillar-plaintopgreek")
-                        .next("a1-stonepillar-plaintopplain")
-                        .next("base")
+                        .newVariation("column")
                         .next("capstone")
-                        .next("column")
-                        .next("pillar-carved")
+                        .next("base")
                         .next("small")
+                        .next("pillar-carved")
+                        .next("a1-stoneornamental-marblegreek")
+                        .next("a1-stonepillar-greek")
+                        .next("a1-stonepillar-plain")
+                        .next("a1-stonepillar-greektopplain")
+                        .next("a1-stonepillar-plaintopplain")
+                        .next("a1-stonepillar-greekbottomplain")
+                        .next("a1-stonepillar-plainbottomplain")
+                        .next("a1-stonepillar-greektopgreek")
+                        .next("a1-stonepillar-plaintopgreek")
+                        .next("a1-stonepillar-greekbottomgreek")
+                        .next("a1-stonepillar-plainbottomgreek")
                         .build();
             } else {
                 factory.newBlock(Material.rock, "marblepillar", provider)
-                        .newVariation("carved")
-                        .next("convex")
+                        .newVariation("pillar")
                         .next("default")
+                        .next("simple")
+                        .next("convex")
+                        .next("rough")
                         .next("greekdecor")
                         .next("greekgreek")
                         .next("greekplain")
-                        .next("ornamental")
-                        .next("pillar")
                         .next("plaindecor")
                         .next("plaingreek")
-                        .next("rough")
-                        .next("simple")
+                        .next("plainplain")
                         .next("widedecor")
                         .next("widegreek")
                         .next("wideplain")
+                        .next("carved")
+                        .next("ornamental")
                         .build();
             }
         }
@@ -1499,7 +1500,7 @@ public enum Features {
         }
     },//*/
 
-    MAZESTONE {
+    /*MAZESTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "mazestone", provider)
@@ -1512,7 +1513,7 @@ public enum Features {
                     .next("prismaticMazestone")
                     .build();
         }
-    },
+    },// Twilight forest is not out yet for 1.9 */
 
     MILITARY {
         @Override
@@ -1580,26 +1581,6 @@ public enum Features {
         }
     },
 
-    NEW {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "new", provider)
-                    .setParentFolder("technical/new")
-                    .newVariation("engineering-0")
-                    .next("engineering")
-                    .next("ExhaustPlating")
-                    .next("MakeshiftPanels")
-                    .next("MegaCell")
-                    .next("Piping")
-                    .next("scaffoldLarge")
-                    .next("Sturdy")
-                    .next("TapeDrive")
-                    .next("weatheredGreenPanels")
-                    .next("weatheredOrangePanels")
-                    .build();
-        }
-    },
-
     NICKEL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -1621,21 +1602,21 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("obsidian", Blocks.obsidian.getDefaultState(), -1);
             factory.newBlock(Material.rock, "obsidian", provider)
-                    .newVariation("blocks")
+                    .newVariation("pillar")
+                    .next("pillar-quartz")
                     .next("chiseled")
+                    .next("panel-shiny")
+                    .next("panel")
                     .next("chunks")
-                    .next("crate")
-                    .next("crystal")
-                    .next("greek")
                     .next("growth")
+                    .next("crystal")
                     .next("map-a")
                     .next("map-b")
                     .next("panel-light")
-                    .next("panel-shiny")
-                    .next("panel")
-                    .next("pillar-quartz")
-                    .next("pillar")
+                    .next("blocks")
                     .next("tiles")
+                    .next("greek")
+                    .next("crate")
                     .build();
         }
     },
@@ -1645,14 +1626,14 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "paper", provider)
                     .newVariation("box")
-                    .next("cross")
-                    .next("door")
-                    .next("floral")
-                    .next("horizontal")
-                    .next("plain")
-                    .next("sixSections")
                     .next("throughMiddle")
+                    .next("cross")
+                    .next("sixSections")
                     .next("vertical")
+                    .next("horizontal")
+                    .next("floral")
+                    .next("plain")
+                    .next("door")
                     .build();
         }
     },
@@ -1665,141 +1646,32 @@ public enum Features {
 //        }
 //    },
 
-    PLANKS_ACACIA {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "planks-acacia", provider)
-                    .newVariation("blinds")
-                    .next("chaotic-hor")
-                    .next("chaotic")
-                    .next("clean")
-                    .next("crate-fancy")
-                    .next("crate")
-                    .next("crateex")
-                    .next("double")
-                    .next("fancy")
-                    .next("large")
-                    .next("panel-nails")
-                    .next("parquet")
-                    .next("short")
-                    .next("vertical-uneven")
-                    .next("vertical")
-                    .build();
-        }
-    },
+    PLANKS {
+        private final String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
 
-    PLANKS_BIRCH {
         @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "planks-birch", provider)
-                    .newVariation("blinds")
-                    .next("chaotic-hor")
-                    .next("chaotic")
-                    .next("clean")
-                    .next("crate-fancy")
-                    .next("crate")
-                    .next("crateex")
-                    .next("double")
-                    .next("fancy")
-                    .next("large")
-                    .next("panel-nails")
-                    .next("parquet")
-                    .next("short")
-                    .next("vertical-uneven")
-                    .next("vertical")
-                    .build();
-        }
-    },
-
-    PLANKS_DARK_OAK {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "planks-dark-oak", provider)
-                    .newVariation("blinds")
-                    .next("chaotic-hor")
-                    .next("chaotic")
-                    .next("clean")
-                    .next("crate-fancy")
-                    .next("crate")
-                    .next("crateex")
-                    .next("double")
-                    .next("fancy")
-                    .next("large")
-                    .next("panel-nails")
-                    .next("parquet")
-                    .next("short")
-                    .next("vertical-uneven")
-                    .next("vertical")
-                    .build();
-        }
-    },
-
-    PLANKS_JUNGLE {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "planks-jungle", provider)
-                    .newVariation("blinds")
-                    .next("chaotic-hor")
-                    .next("chaotic")
-                    .next("clean")
-                    .next("crate-fancy")
-                    .next("crate")
-                    .next("crateex")
-                    .next("double")
-                    .next("fancy")
-                    .next("large")
-                    .next("panel-nails")
-                    .next("parquet")
-                    .next("short")
-                    .next("vertical-uneven")
-                    .next("vertical")
-                    .build();
-        }
-    },
-
-    PLANKS_OAK {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "planks-oak", provider)
-                    .newVariation("blinds")
-                    .next("chaotic-hor")
-                    .next("chaotic")
-                    .next("clean")
-                    .next("crate-fancy")
-                    .next("crate")
-                    .next("crateex")
-                    .next("double")
-                    .next("fancy")
-                    .next("large")
-                    .next("panel-nails")
-                    .next("parquet")
-                    .next("short")
-                    .next("vertical-uneven")
-                    .next("vertical")
-                    .build();
-        }
-    },
-
-    PLANKS_SPRUCE {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "planks-spruce", provider)
-                    .newVariation("blinds")
-                    .next("chaotic-hor")
-                    .next("chaotic")
-                    .next("clean")
-                    .next("crate-fancy")
-                    .next("crate")
-                    .next("crateex")
-                    .next("double")
-                    .next("fancy")
-                    .next("large")
-                    .next("panel-nails")
-                    .next("parquet")
-                    .next("short")
-                    .next("vertical-uneven")
-                    .next("vertical")
-                    .build();
+        void addBlocks(ChiselBlockFactory factory)
+        {
+            for (String plank_name : plank_names)
+            {
+                factory.newBlock(Material.rock, "planks-" + plank_name, provider)
+                        .newVariation("clean")
+                        .next("short")
+                        .next("fancy")
+                        .next("panel-nails")
+                        .next("double")
+                        .next("crate")
+                        .next("crate-fancy")
+                        .next("large")
+                        .next("vertical")
+                        .next("vertical-uneven")
+                        .next("parquet")
+                        .next("blinds")
+                        .next("crateex")
+                        .next("chaotic-hor")
+                        .next("chaotic")
+                        .build();
+            }
         }
     },
 
@@ -1847,13 +1719,10 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "prismarine", provider)
-                    .newVariation("masonryPrismarine")
-                    .next("masonryPrismarineAnim")
+                    .newVariation("prismarineCircular")
                     .next("prismarineBrick")
-                    .next("prismarineCircular")
-                    .next("prismarine_bricks")
-                    .next("prismarine_dark")
-                    .next("prismarine_rough")
+                    .next("masonryPrismarine")
+                    .next("masonryPrismarineAnim")
                     .build();
         }
     },
@@ -1907,10 +1776,9 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "quartz", provider)
-                    .newVariation("masonryQuartz")
-                    .next("quartzChiseled")
-                    .next("quartzPrismatic")
+                    .newVariation("quartzChiseled")
                     .next("quartzPrismaticPattern")
+                    .next("masonryQuartz")
                     .build();
         }
     },
@@ -1920,24 +1788,24 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("redstone", Blocks.redstone_block.getDefaultState(), -1);
             factory.newBlock(Material.rock, "redstone", provider)
-                    .newVariation("a1-blockredstone-redstonechunk")
-                    .next("a1-blockredstone-redstonezelda")
-                    .next("a1-blockredstone-skullred")
+                    .newVariation("smooth")
                     .next("block")
                     .next("blocks")
                     .next("bricks")
-                    .next("chiseled")
-                    .next("circuit")
-                    .next("ere")
-                    .next("masonryRedstone")
-                    .next("ornate-tiles")
-                    .next("pillar")
                     .next("smallbricks")
                     .next("smallchaotic")
-                    .next("smooth")
-                    .next("solid")
-                    .next("supaplex")
+                    .next("chiseled")
+                    .next("ere")
+                    .next("ornate-tiles")
+                    .next("pillar")
                     .next("tiles")
+                    .next("circuit")
+                    .next("supaplex")
+                    .next("a1-blockredstone-skullred")
+                    .next("a1-blockredstone-redstonezelda")
+                    .next("masonryRedstone")
+                    .next("a1-blockredstone-redstonechunk")
+                    .next("solid")
                     .build();
         }
     },
@@ -2185,6 +2053,20 @@ public enum Features {
                     .next("spinningStuffAnim")
                     .next("vent")
                     .next("ventGlowing")
+                    .build();
+
+            factory.newBlock(Material.rock, "new", provider)
+                    .setParentFolder("technical/new")
+                    .newVariation("engineering")
+                    .next("ExhaustPlating")
+                    .next("MakeshiftPanels")
+                    .next("MegaCell")
+                    .next("Piping")
+                    .next("scaffoldLarge")
+                    .next("Sturdy")
+                    .next("TapeDrive")
+                    .next("weatheredGreenPanels")
+                    .next("weatheredOrangePanels")
                     .build();
         }
     },
@@ -2483,14 +2365,14 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "waterstone", provider)
-                    .newVariation("black")
-                    .next("chaotic")
-                    .next("cobble")
-                    .next("creeper")
-                    .next("dark")
-                    .next("panel-ornate")
-                    .next("panel")
+                    .newVariation("cobble")
+                    .next("black")
                     .next("tiles")
+                    .next("chaotic")
+                    .next("creeper")
+                    .next("panel")
+                    .next("panel-ornate")
+                    .next("dark")
                     .build();
         }
     },
