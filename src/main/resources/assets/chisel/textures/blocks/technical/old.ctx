@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./old",
+        "./vent-top-ctm"
+    ]
+}
