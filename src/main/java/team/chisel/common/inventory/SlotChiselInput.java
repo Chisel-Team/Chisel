@@ -24,7 +24,6 @@ public class SlotChiselInput extends Slot {
     @Override
     public boolean canTakeStack(EntityPlayer par1EntityPlayer) {
         return !container.finished && super.canTakeStack(par1EntityPlayer);
-
     }
 
     @Override

@@ -56,7 +56,7 @@ public class ContainerChisel extends Container {
             addSlotToContainer(new Slot(inventoryplayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
         }
 
-        chisel = inventoryplayer.getCurrentItem();
+        chisel = inventoryplayer.player.getHeldItem(hand);
         if (chisel != null && chisel.getTagCompound() != null) {
             ItemStack stack = ItemStack.loadItemStackFromNBT(chisel.getTagCompound().getCompoundTag("chiselTarget"));
             inventory.setInventorySlotContents(InventoryChiselSelection.normalSlots, stack);
@@ -78,21 +78,24 @@ public class ContainerChisel extends Container {
     // TODO this has changed a lot, probaly won't work
     @Override
     public ItemStack /* slotClick */ func_184996_a(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-        // we need to subtract away all the other slots
-        int clickedSlot = slotId - inventory.getSizeInventory() - 27;
-        Chisel.debug("Slot clicked is " + slotId + " and slot length is " + inventorySlots.size());
-        try {
-            Slot slot = (Slot)inventorySlots.get(slotId);
-            Chisel.debug("Slot is "+slot);
-        } catch (Exception exception){
-            Chisel.debug("Exception getting slot");
-            exception.printStackTrace();
+
+        if (clickTypeIn != ClickType.QUICK_CRAFT) {
+            // we need to subtract away all the other slots
+            int clickedSlot = slotId - inventory.getSizeInventory() - 27;
+            Chisel.debug("Slot clicked is " + slotId + " and slot length is " + inventorySlots.size());
+            try {
+                Slot slot = (Slot) inventorySlots.get(slotId);
+                Chisel.debug("Slot is " + slot);
+            } catch (Exception exception) {
+                Chisel.debug("Exception getting slot");
+                exception.printStackTrace();
+            }
+
+            // if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
+            if (hand == EnumHand.MAIN_HAND && (clickedSlot == chiselSlot || (clickTypeIn == ClickType.SWAP && dragType == chiselSlot)))
+                return null;
         }
-
-        // if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
-        if (hand == EnumHand.MAIN_HAND && (clickedSlot == chiselSlot || (clickTypeIn == ClickType.SWAP && dragType == chiselSlot)))
-            return null;
-
+        
         return super.func_184996_a(slotId, dragType, clickTypeIn, player);
     }
 
@@ -155,7 +158,7 @@ public class ContainerChisel extends Container {
 
     public void onChiselSlotChanged() {
         ItemStack stack = playerInventory.mainInventory[chiselSlot];
-        if (stack == null || (hand == EnumHand.MAIN_HAND && !stack.isItemEqual(chisel)))
+        if (hand == EnumHand.MAIN_HAND && (stack == null || !stack.isItemEqual(chisel)))
             finished = true;
 
         if (finished)
@@ -169,8 +172,6 @@ public class ContainerChisel extends Container {
             inventory.getStackInSpecialSlot().writeToNBT(targetTag);
         }
         chisel.getTagCompound().setTag("chiselTarget", targetTag);
-
-        playerInventory.mainInventory[chiselSlot] = chisel;
     }
 
 }

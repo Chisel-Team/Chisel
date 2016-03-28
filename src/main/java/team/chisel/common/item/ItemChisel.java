@@ -145,6 +145,6 @@ public class ItemChisel extends Item {
             playerIn.openGui(Chisel.instance, 0, worldIn, hand.ordinal(), 0, 0);
             return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
         }
-        return ActionResult.newResult(EnumActionResult.PASS, itemStackIn);
+        return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
     }
 }
