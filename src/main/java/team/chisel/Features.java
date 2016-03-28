@@ -2033,12 +2033,13 @@ public enum Features {
         {
             IBlockState stoneBricks = Blocks.stonebrick.getDefaultState();
             IProperty<BlockStoneBrick.EnumType> prop = BlockStoneBrick.VARIANT;
-            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.DEFAULT), -4);
-            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.MOSSY), -3);
-            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CRACKED), -2);
-            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.MOSSY), -1);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.DEFAULT), -6);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.MOSSY), -5);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CRACKED), -4);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CHISELED), -3);
 
-            Carving.chisel.addVariation("stonebrick", Blocks.stone.getDefaultState(), -1);
+            Carving.chisel.addVariation("stonebrick", Blocks.stone.getDefaultState(), -2);
+            // TODO Carving.chisel.addVariation("stonebrick", Blocks.double_stone_slab.getDefaultState().withProperty(BlockDoubleStoneSlab.VARIANT, BlockDoubleStoneSlab.EnumType.STONE), -1);
 
             factory.newBlock(Material.rock, "stonebrick", provider)
                     .newVariation("masonry2Blue")
