@@ -1675,9 +1675,14 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory)
         {
-            for (String plank_name : plank_names)
+            IBlockState planks = Blocks.planks.getDefaultState();
+            IProperty<BlockPlanks.EnumType> prop = BlockPlanks.VARIANT;
+
+            for (int c = 0; c < plank_names.length; c++)
             {
-                factory.newBlock(Material.rock, "planks-" + plank_name, provider)
+                Carving.chisel.addVariation("planks-" + plank_names[c], planks.withProperty(prop, BlockPlanks.EnumType.byMetadata(c)), -1);
+
+                factory.newBlock(Material.rock, "planks-" + plank_names[c], provider)
                         .newVariation("clean")
                         .next("short")
                         .next("fancy")
@@ -1741,6 +1746,13 @@ public enum Features {
     PRISMARINE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            IBlockState prismarine = Blocks.prismarine.getDefaultState();
+            IProperty<BlockPrismarine.EnumType> prop = BlockPrismarine.VARIANT;
+            Carving.chisel.addVariation("end_purpur", prismarine.withProperty(prop, BlockPrismarine.EnumType.ROUGH), -3);
+            Carving.chisel.addVariation("end_purpur", prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -2);
+            Carving.chisel.addVariation("end_purpur", prismarine.withProperty(prop, BlockPrismarine.EnumType.DARK), -1);
+
             factory.newBlock(Material.rock, "prismarine", provider)
                     .newVariation("prismarineCircular")
                     .next("prismarineBrick")
@@ -1798,6 +1810,14 @@ public enum Features {
     QUARTZ {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            IBlockState quartzBlock = Blocks.quartz_block.getDefaultState();
+            IProperty<BlockQuartz.EnumType> prop = BlockQuartz.VARIANT;
+            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.DEFAULT), -5);
+            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.CHISELED), -4);
+            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_X), -3);
+            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Y), -2);
+            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Z), -1);
+
             factory.newBlock(Material.rock, "quartz", provider)
                     .newVariation("quartzChiseled")
                     .next("quartzPrismaticPattern")
@@ -2009,8 +2029,16 @@ public enum Features {
 
     STONEBRICK {
         @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("stonebrick", Blocks.stonebrick.getDefaultState(), -1);
+        void addBlocks(ChiselBlockFactory factory)
+        {
+            IBlockState stoneBricks = Blocks.stonebrick.getDefaultState();
+            IProperty<BlockStoneBrick.EnumType> prop = BlockStoneBrick.VARIANT;
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.DEFAULT), -4);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.MOSSY), -3);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CRACKED), -2);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.MOSSY), -1);
+
+            Carving.chisel.addVariation("stonebrick", Blocks.stone.getDefaultState(), -1);
 
             factory.newBlock(Material.rock, "stonebrick", provider)
                     .newVariation("masonry2Blue")
@@ -2111,12 +2139,7 @@ public enum Features {
                     .next("stand-creeper")
                     .next("stand-mosaic")
                     .build();
-        }
-    },
 
-    TEMPLEMOSSY {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "templemossy", provider)
                     .setGroup("temple")
                     .newVariation("cobble")
