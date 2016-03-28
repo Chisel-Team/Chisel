@@ -2,15 +2,13 @@ package team.chisel;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockSandStone;
-import net.minecraft.block.BlockStone;
+import net.minecraft.block.*;
 import net.minecraft.block.BlockStone.EnumType;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
@@ -606,6 +604,13 @@ public enum Features {
     END_PURPUR {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            IBlockState purpur_pillar = Blocks.purpur_pillar.getDefaultState();
+            IProperty<Axis> prop = BlockRotatedPillar.AXIS;
+            Carving.chisel.addVariation("end_purpur", Blocks.purpur_block.getDefaultState(), -5);
+            Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.X), -4);
+            Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.Y), -3);
+            Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.Z), -2);
+            //Carving.chisel.addVariation("end_purpur", Blocks.purpur_double_slab.getDefaultState(), -1);
             factory.newBlock(Material.rock, "end_purpur", provider)
                     .newVariation("shulker")
                     .next("tilePurpur")
@@ -637,7 +642,8 @@ public enum Features {
     ENDSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("endstone", Blocks.end_stone.getDefaultState(), -1);
+            Carving.chisel.addVariation("endstone", Blocks.end_stone.getDefaultState(), -2);
+            Carving.chisel.addVariation("endstone", Blocks.end_bricks.getDefaultState(), -1);
             factory.newBlock(Material.rock, "endstone", provider)
                     .newVariation("chaoticBricks")
                     .next("CheckeredTile")
@@ -715,6 +721,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "fantasy2", provider)
+                    .setGroup("fantasy")
                     .newVariation("brick")
                     .next("brick-faded")
                     .next("brick-wear")
@@ -774,9 +781,12 @@ public enum Features {
     GLASSDYED {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            IBlockState stainedGlass = Blocks.stained_glass.getDefaultState();
+            IProperty<EnumDyeColor> prop = BlockStainedGlass.COLOR;
 
             for(int c = 0; c < dyeColors.length; c++)
             {
+                Carving.chisel.addVariation("glassdyed"+dyeColors[c], stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
                 factory.newBlock(Material.glass, "glassdyed"+dyeColors[c], provider)
                         .setParentFolder("glassdyed")
                         .newVariation(dyeColors[c]+"-bubble")
@@ -792,7 +802,10 @@ public enum Features {
     GLASSPANE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.glass, "glasspane", new ChiselBlockProvider<BlockCarvablePane>(new BlockCreator<BlockCarvablePane>() {
+            Carving.chisel.addVariation("glasspane", Blocks.glass_pane.getDefaultState(), -1);
+
+            factory.newBlock(Material.glass, "glasspane", new ChiselBlockProvider<BlockCarvablePane>(new BlockCreator<BlockCarvablePane>()
+            {
                 @Override
                 public BlockCarvablePane createBlock(Material mat, int index, int maxVariation, VariationData... data) {
                     return new BlockCarvablePane(mat, false, index, maxVariation, data);
@@ -813,8 +826,13 @@ public enum Features {
     GLASSPANEDYED {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            IBlockState stainedGlassPane = Blocks.stained_glass_pane.getDefaultState();
+            IProperty<EnumDyeColor> prop = BlockStainedGlassPane.COLOR;
+
             for(int c = 0; c < dyeColors.length; c++)
             {
+                Carving.chisel.addVariation("glasspanedyed"+dyeColors[c], stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
                 factory.newBlock(Material.glass, "glasspanedyed"+dyeColors[c], provider)
                         .setParentFolder("glasspanedyed")
                         .newVariation(dyeColors[c]+"-bubble")
@@ -958,6 +976,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "icepillar", provider)
+                    .setGroup("ice")
                     .newVariation("plainplain")
                     .next("plaingreek")
                     .next("greekplain")
@@ -1012,6 +1031,7 @@ public enum Features {
     IRONPANE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            Carving.chisel.addVariation("ironpane", Blocks.iron_bars.getDefaultState(), -1);
             factory.newBlock(Material.rock, "ironpane", provider)
                     .newVariation("fenceIron")
                     .next("barbedwire")
@@ -1129,6 +1149,7 @@ public enum Features {
     LIGHTSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            Carving.chisel.addVariation("lightstone", Blocks.glowstone.getDefaultState(), -1);
             factory.newBlock(Material.rock, "lightstone", provider)
                     .newVariation("terrain-sulphur-cobble")
                     .next("terrain-sulphur-corroded")
@@ -1301,6 +1322,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             if (Configurations.oldPillars) {
                 factory.newBlock(Material.rock, "marblepillarold", provider)
+                        .setGroup("marble")
                         .newVariation("column")
                         .next("capstone")
                         .next("base")
@@ -1320,6 +1342,7 @@ public enum Features {
                         .build();
             } else {
                 factory.newBlock(Material.rock, "marblepillar", provider)
+                        .setGroup("marble")
                         .newVariation("pillar")
                         .next("default")
                         .next("simple")
@@ -2394,22 +2417,25 @@ public enum Features {
         }
     },*/;
 
-    private static final String[] dyeColors = {"black",
-            "red",
-            "green",
-            "brown",
-            "blue",
-            "purple",
-            "cyan",
-            "lightgray",
-            "gray",
-            "pink",
-            "lime",
-            "yellow",
-            "lightblue",
-            "magenta",
-            "orange",
-            "white"};
+    private static final String[] dyeColors =
+            {
+                    "black",
+                    "red",
+                    "green",
+                    "brown",
+                    "blue",
+                    "purple",
+                    "cyan",
+                    "lightgray",
+                    "gray",
+                    "pink",
+                    "lime",
+                    "yellow",
+                    "lightblue",
+                    "magenta",
+                    "orange",
+                    "white"
+            };
 
     //@formatter:on
 
