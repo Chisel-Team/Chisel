@@ -32,7 +32,7 @@ public enum Features {
     ALUMINUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "aluminumblock", provider)
+            factory.newBlock(Material.rock, "blockAluminum", provider)
                     .setParentFolder("metals/aluminum")
                     .newVariation("caution")
                     .next("crate")
@@ -128,11 +128,6 @@ public enum Features {
                     .next("moonGlowAnim")
                     .next("runes")
                     .next("runesGlow")
-                    .next("runesGlowBase")
-                    .next("runesGlowBase")
-                    .next("runesGlowOverlay")
-                    .next("runesGlowOverlay")
-                    .next("singleRune")
                     .next("thaumcraftLogo")
                     .build();
         }
@@ -204,7 +199,7 @@ public enum Features {
     BRONZE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "bronze", provider)
+            factory.newBlock(Material.rock, "blockBronze", provider)
                     .setParentFolder("metals/bronze")
                     .newVariation("caution")
                     .next("crate")
@@ -270,7 +265,7 @@ public enum Features {
     COBALT {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "cobalt", provider)
+            factory.newBlock(Material.rock, "blockCobalt", provider)
                     .setParentFolder("metals/cobalt")
                     .newVariation("caution")
                     .next("crate")
@@ -377,7 +372,7 @@ public enum Features {
     COPPER {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "copper", provider)
+            factory.newBlock(Material.rock, "blockCopper", provider)
                     .setParentFolder("metals/copper")
                     .newVariation("caution")
                     .next("crate")
@@ -549,7 +544,7 @@ public enum Features {
     ELECTRUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "electrum", provider)
+            factory.newBlock(Material.rock, "blockElectrum", provider)
                     .setParentFolder("metals/electrum")
                     .newVariation("caution")
                     .next("crate")
@@ -991,7 +986,7 @@ public enum Features {
     INVAR {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "invar", provider)
+            factory.newBlock(Material.rock, "blockInvar", provider)
                     .setParentFolder("metals/invar")
                     .newVariation("caution")
                     .next("crate")
@@ -1111,7 +1106,7 @@ public enum Features {
     LEAD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "lead", provider)
+            factory.newBlock(Material.rock, "blockLead", provider)
                     .setParentFolder("metals/lead")
                     .newVariation("caution")
                     .next("crate")
@@ -1607,7 +1602,7 @@ public enum Features {
     NICKEL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "nickel", provider)
+            factory.newBlock(Material.rock, "blockNickel", provider)
                     .setParentFolder("metals/nickel")
                     .newVariation("caution")
                     .next("crate")
@@ -1706,7 +1701,7 @@ public enum Features {
     PLATINUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "platinum", provider)
+            factory.newBlock(Material.rock, "blockPlatinum", provider)
                     .setParentFolder("metals/platinum")
                     .newVariation("caution")
                     .next("crate")
@@ -1974,7 +1969,7 @@ public enum Features {
     SILVER {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "silver", provider)
+            factory.newBlock(Material.rock, "blockSilver", provider)
                     .setParentFolder("metals/silver")
                     .newVariation("caution")
                     .next("crate")
@@ -2014,7 +2009,7 @@ public enum Features {
     STEEL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "steel", provider)
+            factory.newBlock(Material.rock, "blockSteel", provider)
                     .setParentFolder("metals/steel")
                     .newVariation("caution")
                     .next("crate")
@@ -2174,7 +2169,7 @@ public enum Features {
     THAUMIUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "thaumium", provider)
+            factory.newBlock(Material.rock, "blockThaumium", provider)
                     .newVariation("ornate")
                     .next("totem")
                     .next("thaumiumBigBricks")
@@ -2238,7 +2233,7 @@ public enum Features {
     TIN {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "tin", provider)
+            factory.newBlock(Material.rock, "blockTin", provider)
                     .setParentFolder("metals/tin")
                     .newVariation("caution")
                     .next("crate")
@@ -2296,7 +2291,7 @@ public enum Features {
     URANIUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.rock, "uranium", provider)
+            factory.newBlock(Material.rock, "blockUranium", provider)
                     .setParentFolder("metals/uranium")
                     .newVariation("caution")
                     .next("crate")
