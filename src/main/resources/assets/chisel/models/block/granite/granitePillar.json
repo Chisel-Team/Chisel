@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:granite/granitePillar-side.cf",
+  "overrides":{
+    "UP":"chisel:granite/granitePillar-top.cf",
+    "DOWN":"chisel:granite/granitePillar-top.cf"
+  }
+}
