@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:metals/nickel/thermal-side.cf",
+  "overrides":{
+    "UP":"chisel:metals/nickel/thermal-top.cf",
+    "DOWN":"chisel:metals/nickel/thermal-bottom.cf"
+  }
+}
