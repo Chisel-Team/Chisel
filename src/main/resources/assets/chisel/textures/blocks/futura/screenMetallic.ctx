@@ -3,5 +3,6 @@
 	"textures":[
         "./screenMetallic",
         "./screenMetallic-ctm"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

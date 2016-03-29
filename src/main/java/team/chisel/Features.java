@@ -736,13 +736,16 @@ public enum Features {
         }
     },
 
-    //TODO: Futura - Where the fork did everything go
-
     FUTURA {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "futura", provider)
-                    .newVariation("circuitPlate")
+                    .newVariation("screenMetallic")
+                    .next("screenCyan")
+                    .next("controller")
+                    .next("wavy")
+                    .next("controllerPurple")
+                    .next("uberWavy")
                     .build();
         }
     },
