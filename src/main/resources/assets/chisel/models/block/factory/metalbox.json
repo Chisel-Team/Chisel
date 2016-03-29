@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:factory/metalbox-side.cf",
+  "overrides":{
+    "UP":"chisel:factory/metalbox-top.cf",
+    "DOWN":"chisel:factory/metalbox-top.cf"
+  }
+}
