@@ -2460,14 +2460,13 @@ public enum Features {
 
     //@formatter:on
 
-    private static final String[] dyeOres = {"dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
-            "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite"};
+    private static final String[] dyeOres = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
+            "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
 
     private static final BlockCreator<BlockCarvable> creator = BlockCarvable::new;
     private static final ChiselBlockProvider<BlockCarvable> provider = new ChiselBlockProvider<>(creator, BlockCarvable.class);
 
-    @RequiredArgsConstructor
-    private static class ChiselBlockProvider<T extends Block & ICarvable> implements BlockProvider<T> {
+    @RequiredArgsConstructor private static class ChiselBlockProvider<T extends Block & ICarvable> implements BlockProvider<T> {
 
         private final BlockCreator<T> creator;
         @Getter
@@ -2475,8 +2474,7 @@ public enum Features {
         @Getter
         private final Class<? extends ItemBlock> itemClass = ItemChiselBlock.class;
 
-        @Override
-        public T createBlock(Material mat, int index, int maxVariation, VariationData... data) {
+        @Override public T createBlock(Material mat, int index, int maxVariation, VariationData... data) {
             return creator.createBlock(mat, index, maxVariation, data);
         }
     }

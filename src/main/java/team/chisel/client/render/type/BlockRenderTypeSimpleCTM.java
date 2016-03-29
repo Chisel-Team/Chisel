@@ -19,8 +19,8 @@ public class BlockRenderTypeSimpleCTM extends BlockRenderTypeCTM {
 
     @Override
     public CTMBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
-        return new CTMBlockRenderContext(world, pos)
-        {
+        return new CTMBlockRenderContext(world, pos) {
+
             @Override
             protected CTM createCTM() {
                 CTM ctm = super.createCTM();
@@ -33,8 +33,7 @@ public class BlockRenderTypeSimpleCTM extends BlockRenderTypeCTM {
     }
 
     @Override
-    public int getQuadsPerSide()
-    {
+    public int getQuadsPerSide() {
         return 1;
     }
 

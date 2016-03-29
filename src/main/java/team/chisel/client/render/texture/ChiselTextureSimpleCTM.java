@@ -17,54 +17,38 @@ import team.chisel.common.util.Dir;
 import java.util.Collections;
 import java.util.List;
 
-public class ChiselTextureSimpleCTM  extends AbstractChiselTexture<BlockRenderTypeSimpleCTM>
-{
+public class ChiselTextureSimpleCTM extends AbstractChiselTexture<BlockRenderTypeSimpleCTM> {
+
     public ChiselTextureSimpleCTM(BlockRenderTypeSimpleCTM type, BlockRenderLayer layer, TextureSpriteCallback... sprites) {
         super(type, layer, sprites);
     }
 
-    @Override
-    public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal)
-    {
+    @Override public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
         Quad q = Quad.from(quad, DefaultVertexFormats.ITEM);
 
-        if(context == null)
-        {
+        if (context == null) {
             return Collections.singletonList(q.transformUVs(sprites[0].getSprite(), Quad.TOP_LEFT).rebake());
         }
 
         return Collections.singletonList(q.transformUVs(sprites[0].getSprite(), getQuad(((CTMBlockRenderContext) context).getCTM(quad.getFace()))).rebake());
     }
 
-    private ISubmap getQuad(CTM ctm)
-    {
-        if(ctm == null)
-        {
+    private ISubmap getQuad(CTM ctm) {
+        if (ctm == null) {
             return Quad.TOP_LEFT;
         }
 
-        if (!ctm.connectedOr(Dir.TOP, Dir.RIGHT, Dir.BOTTOM, Dir.LEFT))
-        {
+        if (!ctm.connectedOr(Dir.TOP, Dir.RIGHT, Dir.BOTTOM, Dir.LEFT)) {
             return Quad.TOP_LEFT;
-        }
-        else if (ctm.connectedAnd(Dir.TOP, Dir.TOP_RIGHT, Dir.RIGHT, Dir.BOTTOM_RIGHT, Dir.BOTTOM, Dir.BOTTOM_LEFT, Dir.LEFT, Dir.TOP_LEFT))
-        {
+        } else if (ctm.connectedAnd(Dir.TOP, Dir.TOP_RIGHT, Dir.RIGHT, Dir.BOTTOM_RIGHT, Dir.BOTTOM, Dir.BOTTOM_LEFT, Dir.LEFT, Dir.TOP_LEFT)) {
             return Quad.BOTTOM_RIGHT;
-        }
-        else if (ctm.connectedAnd(Dir.TOP, Dir.RIGHT, Dir.BOTTOM, Dir.LEFT))
-        {
+        } else if (ctm.connectedAnd(Dir.TOP, Dir.RIGHT, Dir.BOTTOM, Dir.LEFT)) {
             return Quad.TOP_LEFT;
-        }
-        else if (ctm.connectedAnd(Dir.LEFT, Dir.RIGHT))
-        {
+        } else if (ctm.connectedAnd(Dir.LEFT, Dir.RIGHT)) {
             return Quad.TOP_RIGHT;
-        }
-        else if (ctm.connectedAnd(Dir.TOP, Dir.BOTTOM))
-        {
+        } else if (ctm.connectedAnd(Dir.TOP, Dir.BOTTOM)) {
             return Quad.BOTTOM_LEFT;
-        }
-        else
-        {
+        } else {
             return Quad.TOP_LEFT;
         }
     }
