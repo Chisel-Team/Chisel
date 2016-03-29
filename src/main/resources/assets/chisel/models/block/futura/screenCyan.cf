@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "./screenDiscoherent.ctx",
+        "./screenCyan.ctx"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+    "textures":[
+        "./linesInvalid.ctx",
+        "./rainbowLines.ctx",
+        "./linesPlating.ctx"
+    ]
+}
