@@ -8,13 +8,13 @@ public class TooltipHandler {
 
     @SubscribeEvent
     public void onTooltip(ItemTooltipEvent event){
-        if (!event.showAdvancedItemTooltips){
+        if (!event.isShowAdvancedItemTooltips()){
             return;
         }
-        if (OreDictionary.getOreIDs(event.itemStack).length != 0){
-            event.toolTip.add("Ore Dictionary:");
-            for (int oreId : OreDictionary.getOreIDs(event.itemStack)){
-                event.toolTip.add("-"+OreDictionary.getOreName(oreId));
+        if (OreDictionary.getOreIDs(event.getItemStack()).length != 0){
+            event.getToolTip().add("Ore Dictionary:");
+            for (int oreId : OreDictionary.getOreIDs(event.getItemStack())){
+                event.getToolTip().add("-"+OreDictionary.getOreName(oreId));
             }
         }
     }

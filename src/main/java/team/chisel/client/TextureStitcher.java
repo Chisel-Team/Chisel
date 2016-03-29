@@ -16,7 +16,7 @@ public class TextureStitcher {
     public void onTextureStitch(TextureStitchEvent.Pre event) {
         Chisel.proxy.preTextureStitch();
         for (TextureSpriteCallback callback : textures) {
-            callback.stitch(event.map);
+            callback.stitch(event.getMap());
         }
     }
 
