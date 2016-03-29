@@ -1,7 +1,7 @@
 {
     "type":"CTMV",
     "textures": [
-        "./bricks+dirt2-top.ctx",
-        "./bricks+dirt2-ctmv.ctx"
+        "./column-top.ctx",
+        "./column-ctmv.ctx"
     ]
 }

@@ -796,7 +796,7 @@ public enum Features {
     GLASSPANE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("glasspane", Blocks.glass_pane.getDefaultState(), -1);
+            //Carving.chisel.addVariation("glasspane", Blocks.glass_pane.getDefaultState(), -1);
 
             factory.newBlock(Material.glass, "glasspane", new ChiselBlockProvider<BlockCarvablePane>(new BlockCreator<BlockCarvablePane>()
             {
@@ -826,7 +826,7 @@ public enum Features {
 
             for(int c = 0; c < dyeColors.length; c++)
             {
-                Carving.chisel.addVariation("glasspanedyed"+dyeColors[c], stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
+                //Carving.chisel.addVariation("glasspanedyed"+dyeColors[c], stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
                 factory.newBlock(Material.glass, "glasspanedyed"+dyeColors[c], provider)
                         .setParentFolder("glasspanedyed")
                         .newVariation(dyeColors[c]+"-bubble")
@@ -2096,7 +2096,7 @@ public enum Features {
                     .next("massiveHexPlating")
                     .build();
 
-            factory.newBlock(Material.iron, "new", provider)
+            factory.newBlock(Material.iron, "technicalNew", provider)
                     .setGroup("technical")
                     .setParentFolder("technical/new")
                     .newVariation("engineering")

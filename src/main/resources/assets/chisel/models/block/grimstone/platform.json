@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:grimstone/platform-side.cf",
+  "overrides":{
+    "UP":"chisel:grimstone/platform-top.cf",
+    "DOWN":"chisel:grimstone/platform-bottom.cf"
+  }
+}

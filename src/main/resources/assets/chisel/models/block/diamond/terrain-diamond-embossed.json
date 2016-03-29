@@ -1,8 +1,8 @@
 {
   "model": { "model": "cube"},
-  "face":"chisel:terrain-diamond-embossed-side.cf",
+  "face":"chisel:diamond/terrain-diamond-embossed-side.cf",
   "overrides":{
-    "UP":"chisel:terrain-diamond-embossed-top.cf",
-    "DOWN":"chisel:terrain-diamond-embossed-bottom.cf"
+    "UP":"chisel:diamond/terrain-diamond-embossed-top.cf",
+    "DOWN":"chisel:diamond/terrain-diamond-embossed-bottom.cf"
   }
 }
