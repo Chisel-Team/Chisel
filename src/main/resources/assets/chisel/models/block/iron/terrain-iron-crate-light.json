@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:iron/terrain-iron-crate-light-side.cf",
+  "overrides":{
+    "UP":"chisel:iron/terrain-iron-crate-light-top.cf",
+    "DOWN":"chisel:iron/terrain-iron-crate-light-bottom.cf"
+  }
+}

@@ -847,7 +847,20 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("gold", Blocks.gold_block.getDefaultState(), -1);
+
+            factory.newBlock(Material.rock, "blockGold", provider)
+                    .setParentFolder("metals/gold")
+                    .newVariation("caution")
+                    .next("crate")
+                    .next("thermal")
+                    .next("machine")
+                    .next("badGreggy")
+                    .next("bolted")
+                    .next("scaffold")
+                    .build();
+
             factory.newBlock(Material.rock, "gold", provider)
+                    .setGroup("blockGold")
                     .newVariation("terrain-gold-largeingot")
                     .next("terrain-gold-smallingot")
                     .next("terrain-gold-brick")
@@ -1005,7 +1018,20 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("iron", Blocks.iron_block.getDefaultState(), -1);
+
+            factory.newBlock(Material.rock, "blockIron", provider)
+                    .setParentFolder("metals/iron")
+                    .newVariation("caution")
+                    .next("crate")
+                    .next("thermal")
+                    .next("machine")
+                    .next("badGreggy")
+                    .next("bolted")
+                    .next("scaffold")
+                    .build();
+
             factory.newBlock(Material.rock, "iron", provider)
+                    .setGroup("blockIron")
                     .newVariation("terrain-iron-largeingot")
                     .next("terrain-iron-smallingot")
                     .next("terrain-iron-gears")

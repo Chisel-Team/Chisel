@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:gold/terrain-gold-smallingot-side.cf",
+  "overrides":{
+    "UP":"chisel:gold/terrain-gold-smallingot-top.cf",
+    "DOWN":"chisel:gold/terrain-gold-smallingot-bottom.cf"
+  }
+}

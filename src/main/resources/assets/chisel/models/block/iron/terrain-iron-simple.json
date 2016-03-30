@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:iron/terrain-iron-simple-side.cf",
+  "overrides":{
+    "UP":"chisel:iron/terrain-iron-simple-top.cf",
+    "DOWN":"chisel:iron/terrain-iron-simple-bottom.cf"
+  }
+}
