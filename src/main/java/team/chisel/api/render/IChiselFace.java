@@ -9,13 +9,7 @@ public interface IChiselFace {
 
     List<IChiselTexture<?>> getTextureList();
 
-    void addTexture(IChiselTexture<?> texture);
-
-    void addChildFace(IChiselFace face);
-
     TextureAtlasSprite getParticle();
-
-    void setLayer(BlockRenderLayer layer);
 
     BlockRenderLayer getLayer();
 }

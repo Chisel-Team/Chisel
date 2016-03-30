@@ -19,11 +19,13 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
      * If this is the type COMBINED then these are the identifiers of the child textures
      */
     private String[] textures;
+    
+    private String particle;
 
     @Override
     protected IChiselFace create(ResourceLocation loc) {
         Preconditions.checkNotNull(textures, JsonHelper.FACE_EXTENSION + " files must have a textures field!");
-        IChiselFace face = new ChiselFace(loc);
+        ChiselFace face = new ChiselFace(loc);
         for (String child : textures) {
             if (JsonHelper.isLocalPath(child)) {
                 child = JsonHelper.toAbsolutePath(child, loc);
@@ -41,6 +43,14 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
                 }
             }
         }
+        
+        if (particle != null) {
+            if (JsonHelper.isLocalPath(particle)) {
+                particle = JsonHelper.toAbsolutePath(particle, loc);
+            }
+            face.setParticle(JsonHelper.getOrCreateTexture( new ResourceLocation(particle)).getParticle());
+        }
+        
         if (loc.getResourcePath().contains("animated")) {
             System.out.println("test");
         }
