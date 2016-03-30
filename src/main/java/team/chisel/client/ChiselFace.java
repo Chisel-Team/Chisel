@@ -15,15 +15,14 @@ import team.chisel.api.render.IChiselTexture;
 public final class ChiselFace implements IChiselFace {
 
     private List<IChiselTexture<?>> textureList;
-
+    private TextureAtlasSprite particle;
+    
     private List<IChiselFace> childFaces;
-
-    private ResourceLocation location;
 
     private BlockRenderLayer layer;
 
     public ChiselFace(ResourceLocation location) {
-        this(new ArrayList<>(), new ArrayList<>(), location);
+        this(new ArrayList<>(), new ArrayList<>());
     }
 
     public ChiselFace(ResourceLocation location, BlockRenderLayer layer) {
@@ -31,12 +30,12 @@ public final class ChiselFace implements IChiselFace {
         setLayer(layer);
     }
 
-    public ChiselFace(List<IChiselTexture<?>> textureList, List<IChiselFace> childFaces, ResourceLocation location) {
+    public ChiselFace(List<IChiselTexture<?>> textureList, List<IChiselFace> childFaces) {
         this.textureList = textureList;
         this.childFaces = childFaces;
-        this.location = location;
     }
 
+    @Override
     public List<IChiselTexture<?>> getTextureList(){
         List<IChiselTexture<?>> list = new ArrayList<>();
         list.addAll(this.textureList);
@@ -62,26 +61,28 @@ public final class ChiselFace implements IChiselFace {
         return this.childFaces.remove(face);
     }
 
-    public TextureAtlasSprite getParticle(){
-        if (textureList.get(0) != null) {
-            return textureList.get(0).getParticle();
+    @Override
+    public TextureAtlasSprite getParticle() {
+        if (particle == null) {
+            if (textureList.get(0) != null) {
+                particle = textureList.get(0).getParticle();
+            } else {
+                particle = childFaces.get(0).getParticle();
+            }
         }
-        else {
-            return childFaces.get(0).getParticle();
-        }
+        return particle;
     }
-
-    public ResourceLocation getLocation(){
-        return this.location;
+    
+    public void setParticle(TextureAtlasSprite sprite) {
+        particle = sprite;
     }
-
 
     public void setLayer(BlockRenderLayer layer){
         this.layer = layer;
     }
 
+    @Override
     public BlockRenderLayer getLayer(){
         return this.layer;
     }
-
 }
