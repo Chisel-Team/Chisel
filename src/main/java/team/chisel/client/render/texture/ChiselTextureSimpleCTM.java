@@ -23,7 +23,8 @@ public class ChiselTextureSimpleCTM extends AbstractChiselTexture<BlockRenderTyp
         super(type, layer, sprites);
     }
 
-    @Override public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
+    @Override
+    public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
         Quad q = Quad.from(quad, DefaultVertexFormats.ITEM);
 
         if (context == null) {
