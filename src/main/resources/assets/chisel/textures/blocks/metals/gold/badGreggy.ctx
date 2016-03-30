@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./badGreggy",
+        "./badGreggy-ctm"
+    ]
+}

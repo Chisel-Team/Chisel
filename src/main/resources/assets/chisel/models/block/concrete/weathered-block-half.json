@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:concrete/weathered-block-half-side.cf",
+  "overrides":{
+    "UP":"chisel:concrete/weathered-block-half-top.cf",
+    "DOWN":"chisel:concrete/weathered-block-half-bottom.cf"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:gold/terrain-gold-largeingot-side.cf",
+  "overrides":{
+    "UP":"chisel:gold/terrain-gold-largeingot-top.cf",
+    "DOWN":"chisel:gold/terrain-gold-largeingot-bottom.cf"
+  }
+}

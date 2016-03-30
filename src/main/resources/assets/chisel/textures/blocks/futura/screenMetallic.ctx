@@ -1,0 +1,8 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./screenMetallic",
+        "./screenMetallic-ctm"
+    ],
+    "layer":"CUTOUT"
+}

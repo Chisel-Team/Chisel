@@ -1,0 +1,7 @@
+{
+    "textures":[
+        "./linesInvalid.ctx",
+        "./purpleLines.ctx",
+        "./linesPlating.ctx"
+    ]
+}

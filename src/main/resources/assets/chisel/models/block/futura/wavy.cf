@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "./rainbowWave.ctx",
+        "./rainbowWaveBase.ctx"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:gold/terrain-gold-crate-light-side.cf",
+  "overrides":{
+    "UP":"chisel:gold/terrain-gold-crate-light-top.cf",
+    "DOWN":"chisel:gold/terrain-gold-crate-light-bottom.cf"
+  }
+}

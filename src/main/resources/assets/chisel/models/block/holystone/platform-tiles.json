@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:holystone/platform-tile-side.cf",
+  "overrides":{
+    "UP":"chisel:holystone/platform-tile-top.cf",
+    "DOWN":"chisel:holystone/platform-tile-bottom.cf"
+  }
+}

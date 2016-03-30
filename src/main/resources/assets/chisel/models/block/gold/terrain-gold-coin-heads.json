@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:gold/terrain-gold-coin-heads-side.cf",
+  "overrides":{
+    "UP":"chisel:gold/terrain-gold-coin-heads-top.cf",
+    "DOWN":"chisel:gold/terrain-gold-coin-heads-bottom.cf"
+  }
+}

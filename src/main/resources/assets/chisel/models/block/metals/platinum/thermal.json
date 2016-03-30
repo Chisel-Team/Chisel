@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:metals/platinum/thermal-side.cf",
+  "overrides":{
+    "UP":"chisel:metals/platinum/thermal-top.cf",
+    "DOWN":"chisel:metals/platinum/thermal-bottom.cf"
+  }
+}
