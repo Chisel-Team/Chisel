@@ -2,5 +2,6 @@
     "textures":[
         "./screenDiscoherent.ctx",
         "./screenMetallic.ctx"
-    ]
+    ],
+    "particle":"screenCyan.ctx"
 }

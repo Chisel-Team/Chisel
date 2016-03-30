@@ -3,5 +3,6 @@
         "./linesInvalid.ctx",
         "./rainbowLines.ctx",
         "./linesPlating.ctx"
-    ]
+    ],
+    "particle":"controllerParticle.ctx"
 }

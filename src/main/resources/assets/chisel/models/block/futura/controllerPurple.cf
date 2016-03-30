@@ -3,5 +3,6 @@
         "./linesInvalid.ctx",
         "./purpleLines.ctx",
         "./linesPlating.ctx"
-    ]
+    ],
+    "particle":"controllerParticle.ctx"
 }

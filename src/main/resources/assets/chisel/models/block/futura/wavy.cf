@@ -2,5 +2,6 @@
     "textures":[
         "./rainbowWave.ctx",
         "./rainbowWaveBase.ctx"
-    ]
+    ],
+    "particle":"rainbowWaveParticle"
 }

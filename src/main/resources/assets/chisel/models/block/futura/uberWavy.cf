@@ -3,5 +3,6 @@
         "./screenDiscoherent.ctx",
         "./uberRainbow.ctx",
         "./orangeFrame.ctx"
-    ]
+    ],
+    "particle":"orangeFrameParticle"
 }
