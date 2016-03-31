@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:sandstone/horizontal-tiles-side.cf",
+  "overrides":{
+    "UP":"chisel:sandstone/horizontal-tiles-top.cf",
+    "DOWN":"chisel:sandstone/horizontal-tiles-top.cf"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:sandstone/smooth-cap-side.cf",
+  "overrides":{
+    "UP":"chisel:sandstone/smooth-cap-top.cf",
+    "DOWN":"chisel:sandstone/smooth-cap-top.cf"
+  }
+}
