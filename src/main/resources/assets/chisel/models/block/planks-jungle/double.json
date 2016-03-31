@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:planks-jungle/double-side.cf",
+  "overrides":{
+    "UP":"chisel:planks-jungle/double-top.cf",
+    "DOWN":"chisel:planks-jungle/double-top.cf"
+  }
+}

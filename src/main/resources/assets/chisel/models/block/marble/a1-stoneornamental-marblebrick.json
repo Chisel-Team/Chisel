@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:marble/a1-stoneornamental-marblebrick-side.cf",
+  "overrides":{
+    "UP":"chisel:marble/a1-stoneornamental-marblebrick-top.cf",
+    "DOWN":"chisel:marble/a1-stoneornamental-marblebrick-top.cf"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:laboratory/largesteel-side.cf",
+  "overrides":{
+    "UP":"chisel:laboratory/largesteel-top.cf",
+    "DOWN":"chisel:laboratory/largesteel-top.cf"
+  }
+}

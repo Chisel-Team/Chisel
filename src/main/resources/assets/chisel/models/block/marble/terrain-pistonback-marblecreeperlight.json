@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:marble/terrain-pistonback-marblecreeperlight-side.cf",
+  "overrides":{
+    "UP":"chisel:marble/terrain-pistonback-marblecreeperlight-top.cf",
+    "DOWN":"chisel:marble/terrain-pistonback-marblecreeperlight-top.cf"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:planks-oak/double-side.cf",
+  "overrides":{
+    "UP":"chisel:planks-oak/double-top.cf",
+    "DOWN":"chisel:planks-oak/double-top.cf"
+  }
+}
