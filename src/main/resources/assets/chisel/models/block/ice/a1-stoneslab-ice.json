@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:ice/a1-stoneslab-ice-side.cf",
+  "overrides":{
+    "UP":"chisel:ice/a1-stoneslab-ice-top.cf",
+    "DOWN":"chisel:ice/a1-stoneslab-ice-top.cf"
+  }
+}

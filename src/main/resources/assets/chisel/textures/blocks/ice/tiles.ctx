@@ -1,7 +1,7 @@
 {
 	"type":"NORMAL",
 	"textures":[
-        "./a1-ice-light"
+        "./tiles"
     ],
     "layer":"TRANSLUCENT"
 }

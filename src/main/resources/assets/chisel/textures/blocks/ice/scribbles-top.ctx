@@ -1,7 +1,7 @@
 {
 	"type":"NORMAL",
 	"textures":[
-        "./bismuth"
+        "./scribbles-top"
     ],
     "layer":"TRANSLUCENT"
 }

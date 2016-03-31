@@ -1,7 +1,7 @@
 {
 	"type":"NORMAL",
 	"textures":[
-        "./a1-ice-light"
+        "./a1-stonecobble-icefour"
     ],
     "layer":"TRANSLUCENT"
 }

@@ -961,7 +961,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("ice", Blocks.ice.getDefaultState(), -1);
-            factory.newBlock(Material.rock, "ice", provider)
+            factory.newBlock(Material.ice, "ice", provider)
                     .newVariation("a1-ice-light")
                     .next("a1-stonecobble-icecobble")
                     .next("a1-netherbrick-ice")
