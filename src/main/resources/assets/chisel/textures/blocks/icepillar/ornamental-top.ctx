@@ -1,0 +1,7 @@
+{
+	"type":"NORMAL",
+	"textures":[
+        "./ornamental-top"
+    ],
+    "layer":"TRANSLUCENT"
+}

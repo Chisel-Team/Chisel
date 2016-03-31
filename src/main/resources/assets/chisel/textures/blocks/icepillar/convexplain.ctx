@@ -1,7 +1,8 @@
 {
     "type":"CTMV",
     "textures": [
-        "./bricks+dirt2-top.ctx",
-        "./bricks+dirt2-ctmv.ctx"
-    ]
+        "./convexplain-top.ctx",
+        "./convexplain-ctmv.ctx"
+    ],
+    "layer":"TRANSLUCENT"
 }
