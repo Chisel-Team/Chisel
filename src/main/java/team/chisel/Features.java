@@ -993,7 +993,7 @@ public enum Features {
                     .next("greekgreek")
                     .next("convexplain")
                     .next("carved")
-                    .next("ornamental")//*/
+                    .next("ornamental")
                     .build();
         }
     },
