@@ -3,5 +3,6 @@
 	"textures":[
         "./scaffoldTransparent",
         "./scaffoldTransparent-ctm"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

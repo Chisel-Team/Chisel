@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:technical/ventGlowing.cf",
+  "overrides":{
+    "UP":"chisel:technical/old.cf",
+    "DOWN":"chisel:technical/old.cf"
+  }
+}
