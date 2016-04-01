@@ -2102,9 +2102,8 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.iron, "technical", provider)
-                    .newVariation("scaffoldTransparent")
-                    .next("scaffold")
-                    /*.next("cautiontape")
+                    .newVariation("scaffold")
+                    .next("cautiontape")
                     .next("industrialrelic")
                     .next("pipesLarge")
                     .next("fanFast")
@@ -2123,10 +2122,10 @@ public enum Features {
                     .next("fanFastTransparent")
                     .next("fanStillTransparent")
                     .next("massiveFan")
-                    .next("massiveHexPlating")//*/
+                    .next("massiveHexPlating")
                     .build();
 
-            /*factory.newBlock(Material.iron, "technicalNew", provider)
+            factory.newBlock(Material.iron, "technicalNew", provider)
                     .setGroup("technical")
                     .setParentFolder("technical/new")
                     .newVariation("engineering")
@@ -2136,10 +2135,10 @@ public enum Features {
                     .next("Piping")
                     .next("scaffoldLarge")
                     .next("Sturdy")
-                    //TODO Retexture .next("TapeDrive")
                     .next("weatheredGreenPanels")
                     .next("weatheredOrangePanels")
-                    .build();//*/
+                    //TODO Retexture .next("TapeDrive")
+                    .build();
         }
     },
 
