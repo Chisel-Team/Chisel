@@ -3,5 +3,5 @@
 	"textures":[
         "./fanFastTransparent-side"
     ],
-    "layer":"TRANSLUCENT"
+    "layer":"CUTOUT"
 }

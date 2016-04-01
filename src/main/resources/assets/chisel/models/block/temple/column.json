@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:temple/column-side.cf",
+  "overrides":{
+    "UP":"chisel:temple/column-top.cf",
+    "DOWN":"chisel:temple/column-top.cf"
+  }
+}

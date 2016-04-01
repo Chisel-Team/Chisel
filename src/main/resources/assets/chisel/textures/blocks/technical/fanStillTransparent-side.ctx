@@ -1,7 +1,7 @@
 {
 	"type":"NORMAL",
 	"textures":[
-        "./fanFastTransparent-side"
+        "./fanStillTransparent-side"
     ],
     "layer":"CUTOUT"
 }

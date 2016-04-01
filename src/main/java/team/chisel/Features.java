@@ -2198,6 +2198,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "blockThaumium", provider)
+                    .setParentFolder("thaumium")
                     .newVariation("ornate")
                     .next("totem")
                     .next("thaumiumBigBricks")
