@@ -40,8 +40,7 @@ public enum ChiselModelRegistry implements Reference {
             @Override
             protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
                 VariationData data = block.getVariationData(block.getVariationIndex(state));
-                String name = block.getRegistryName();
-                name = name.substring(name.indexOf(":") + 1, name.length());
+                String name = block.getRegistryName().getResourcePath();
                 while (Character.isDigit(name.charAt(name.length() - 1))) {
                     name = name.substring(0, name.length() - 1);
                 }
@@ -49,14 +48,13 @@ public enum ChiselModelRegistry implements Reference {
             }
         });
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), new ItemMeshDefinition() {
-
+            
             @Override
             @SuppressWarnings("unchecked")
             public ModelResourceLocation getModelLocation(ItemStack stack) {
                 T block = (T) Block.getBlockFromItem(stack.getItem());
                 VariationData data = block.getVariationData(stack.getItemDamage());
-                String name = block.getRegistryName();
-                name = name.substring(name.indexOf(":") + 1, name.length());
+                String name = block.getRegistryName().getResourcePath();
                 while (Character.isDigit(name.charAt(name.length() - 1))) {
                     name = name.substring(0, name.length() - 1);
                 }
