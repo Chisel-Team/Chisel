@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./wallPads",
-        "./wallPads-ctm"
-    ]
-}

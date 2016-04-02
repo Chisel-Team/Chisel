@@ -601,9 +601,9 @@ public enum Features {
             IBlockState purpur_pillar = Blocks.purpur_pillar.getDefaultState();
             IProperty<Axis> prop = BlockRotatedPillar.AXIS;
             Carving.chisel.addVariation("end_purpur", Blocks.purpur_block.getDefaultState(), -5);
-            Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.X), -4);
+            //Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.X), -4);
             Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.Y), -3);
-            Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.Z), -2);
+            //Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.Z), -2);
             //Carving.chisel.addVariation("end_purpur", Blocks.purpur_double_slab.getDefaultState(), -1);
             factory.newBlock(Material.rock, "end_purpur", provider)
                     .newVariation("shulker")
@@ -846,7 +846,7 @@ public enum Features {
     GOLD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("gold", Blocks.gold_block.getDefaultState(), -1);
+            Carving.chisel.addVariation("blockGold", Blocks.gold_block.getDefaultState(), -1);
 
             factory.newBlock(Material.rock, "blockGold", provider)
                     .setParentFolder("metals/gold")
@@ -1017,7 +1017,7 @@ public enum Features {
     IRON {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("iron", Blocks.iron_block.getDefaultState(), -1);
+            Carving.chisel.addVariation("blockIron", Blocks.iron_block.getDefaultState(), -1);
 
             factory.newBlock(Material.rock, "blockIron", provider)
                     .setParentFolder("metals/iron")
@@ -1772,9 +1772,9 @@ public enum Features {
 
             IBlockState prismarine = Blocks.prismarine.getDefaultState();
             IProperty<BlockPrismarine.EnumType> prop = BlockPrismarine.VARIANT;
-            Carving.chisel.addVariation("end_purpur", prismarine.withProperty(prop, BlockPrismarine.EnumType.ROUGH), -3);
-            Carving.chisel.addVariation("end_purpur", prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -2);
-            Carving.chisel.addVariation("end_purpur", prismarine.withProperty(prop, BlockPrismarine.EnumType.DARK), -1);
+            Carving.chisel.addVariation("prismarine", prismarine.withProperty(prop, BlockPrismarine.EnumType.ROUGH), -3);
+            Carving.chisel.addVariation("prismarine", prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -2);
+            Carving.chisel.addVariation("prismarine", prismarine.withProperty(prop, BlockPrismarine.EnumType.DARK), -1);
 
             factory.newBlock(Material.rock, "prismarine", provider)
                     .newVariation("prismarineCircular")
@@ -1837,9 +1837,9 @@ public enum Features {
             IProperty<BlockQuartz.EnumType> prop = BlockQuartz.VARIANT;
             Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.DEFAULT), -5);
             Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.CHISELED), -4);
-            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_X), -3);
+            //Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_X), -3);
             Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Y), -2);
-            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Z), -1);
+            //Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Z), -1);
 
             factory.newBlock(Material.rock, "quartz", provider)
                     .newVariation("quartzChiseled")
@@ -2102,9 +2102,8 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.iron, "technical", provider)
-                    .newVariation("scaffoldTransparent")
-                    .next("scaffold")
-                    /*.next("cautiontape")
+                    .newVariation("scaffold")
+                    .next("cautiontape")
                     .next("industrialrelic")
                     .next("pipesLarge")
                     .next("fanFast")
@@ -2123,23 +2122,23 @@ public enum Features {
                     .next("fanFastTransparent")
                     .next("fanStillTransparent")
                     .next("massiveFan")
-                    .next("massiveHexPlating")//*/
+                    .next("massiveHexPlating")
                     .build();
 
-            /*factory.newBlock(Material.iron, "technicalNew", provider)
+            factory.newBlock(Material.iron, "technicalNew", provider)
                     .setGroup("technical")
                     .setParentFolder("technical/new")
-                    .newVariation("engineering")
+                    .newVariation("weatheredGreenPanels")
+                    .next("weatheredOrangePanels")
+                    .next("Sturdy")
+                    .next("MegaCell")
                     .next("ExhaustPlating")
                     .next("MakeshiftPanels")
-                    .next("MegaCell")
-                    .next("Piping")
+                    .next("engineering")
                     .next("scaffoldLarge")
-                    .next("Sturdy")
+                    .next("Piping")
                     //TODO Retexture .next("TapeDrive")
-                    .next("weatheredGreenPanels")
-                    .next("weatheredOrangePanels")
-                    .build();//*/
+                    .build();
         }
     },
 
@@ -2199,6 +2198,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.rock, "blockThaumium", provider)
+                    .setParentFolder("thaumium")
                     .newVariation("ornate")
                     .next("totem")
                     .next("thaumiumBigBricks")
@@ -2395,7 +2395,7 @@ public enum Features {
                     .next("lightblue")
                     .next("magenta")
                     .next("orange")
-                    .next("white")
+                    //.next("white")
                     .build();
         }
     },

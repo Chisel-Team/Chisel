@@ -21,6 +21,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
@@ -122,10 +123,10 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         List<BakedQuad> generalQuads = Lists.newArrayList();
         for (EnumFacing facing : EnumFacing.VALUES) {
             IChiselFace face = model.getFace(facing);
-            // if (ctx != null && MinecraftForgeClient.getRenderLayer() != face.getLayer()) {
-            // Chisel.debug("Skipping Layer " + MinecraftForgeClient.getRenderLayer() + " for block " + block);
-            // continue;
-            // }
+            if (ctx != null && MinecraftForgeClient.getRenderLayer() != face.getLayer()) {
+            //Chisel.debug("Skipping Layer " + MinecraftForgeClient.getRenderLayer() + " for block " + block);
+                continue;
+            }
             int quadGoal = ctx == null ? 1 : Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
             IBakedModel baked = model.getModel(state);
             List<BakedQuad> origFaceQuads = baked.getQuads(state, facing, 0);
