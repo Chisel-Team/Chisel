@@ -1,3 +1,8 @@
+0.0.4:
+Fixes
+- Fix block items only being able to place the first variation
+- Fix breaking texture crashing
+
 0.0.3:
 New
 - Ported everything to 1.9
