@@ -2496,13 +2496,16 @@ public enum Features {
     @RequiredArgsConstructor private static class ChiselBlockProvider<T extends Block & ICarvable> implements BlockProvider<T> {
 
         private final BlockCreator<T> creator;
-        @Getter
+        @Getter(onMethod = @__(@Override))
         private final Class<T> blockClass;
-        @Getter
-        private final Class<? extends ItemBlock> itemClass = ItemChiselBlock.class;
 
         @Override public T createBlock(Material mat, int index, int maxVariation, VariationData... data) {
             return creator.createBlock(mat, index, maxVariation, data);
+        }
+        
+        @Override
+        public ItemBlock createItemBlock(T block) {
+            return (ItemBlock) new ItemChiselBlock(block).setRegistryName(block.getRegistryName());
         }
     }
 
