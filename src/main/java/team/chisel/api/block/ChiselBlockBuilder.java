@@ -108,7 +108,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             if (sound != null) {
                 ret[i].setSoundType(sound);
             }
-            GameRegistry.registerBlock(ret[i], provider.getItemClass());
+            
+            GameRegistry.register(ret[i]);
+            GameRegistry.register(provider.createItemBlock(ret[i]));
 
             after.accept(ret[i]);
 

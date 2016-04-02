@@ -3,6 +3,7 @@ package team.chisel.api.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
+import team.chisel.common.block.ItemChiselBlock;
 
 /**
  * Factory to create builders to create blocks
@@ -37,8 +38,8 @@ public class ChiselBlockFactory {
             }
 
             @Override
-            public Class<? extends ItemBlock> getItemClass() {
-                return itemBlockClass;
+            public ItemBlock createItemBlock(T block) {
+                return (ItemBlock) new ItemChiselBlock(block).setRegistryName(block.getRegistryName());
             }
         });
     }

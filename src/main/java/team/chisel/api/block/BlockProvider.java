@@ -7,6 +7,7 @@ public interface BlockProvider<T extends Block & ICarvable> extends BlockCreator
 
     Class<T> getBlockClass();
 
-    Class<? extends ItemBlock> getItemClass();
-
+    default ItemBlock createItemBlock(T block) {
+        return (ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName());
+    }
 }
