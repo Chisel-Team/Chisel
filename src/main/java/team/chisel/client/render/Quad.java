@@ -361,6 +361,7 @@ public class Quad {
         builder.setQuadOrientation(this.builder.quadOrientation);
         builder.setQuadTint(this.builder.quadTint);
         builder.setApplyDiffuseLighting(this.builder.applyDiffuseLighting);
+        builder.setTexture(this.uvs.getSprite());
 
         for (int v = 0; v < 4; v++) {
             for (int i = 0; i < this.builder.vertexFormat.getElementCount(); i++) {
