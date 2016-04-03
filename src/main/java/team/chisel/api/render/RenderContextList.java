@@ -1,8 +1,8 @@
 package team.chisel.api.render;
 
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +16,7 @@ public class RenderContextList {
 
     private Map<IBlockRenderType, IBlockRenderContext> contextMap;
 
-    public RenderContextList(List<IBlockRenderType> types, IBlockAccess world, BlockPos pos){
+    public RenderContextList(Collection<IBlockRenderType> types, IBlockAccess world, BlockPos pos){
         contextMap = new HashMap<IBlockRenderType, IBlockRenderContext>();
         for (IBlockRenderType type : types){
             IBlockRenderContext ctx = type.getBlockRenderContext(world, pos);
