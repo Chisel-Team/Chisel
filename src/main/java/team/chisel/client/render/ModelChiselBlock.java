@@ -28,7 +28,6 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 
 import org.apache.commons.lang3.tuple.Pair;
 
-import team.chisel.api.block.ICarvable;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
@@ -76,7 +75,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     @Override
     public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
         ModelChiselBlock baked;
-        if (state != null && state.getBlock() instanceof ICarvable && state instanceof IExtendedBlockState) {
+        if (state != null && state instanceof IExtendedBlockState) {
             IExtendedBlockState ext = (IExtendedBlockState) state;
             RenderContextList ctxList = ext.getValue(BlockCarvable.CTX_LIST);
             baked = createModel(ext, model, ctxList);
@@ -124,7 +123,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         for (EnumFacing facing : EnumFacing.VALUES) {
             IChiselFace face = model.getFace(facing);
             if (ctx != null && MinecraftForgeClient.getRenderLayer() != face.getLayer()) {
-            //Chisel.debug("Skipping Layer " + MinecraftForgeClient.getRenderLayer() + " for block " + block);
+                // Chisel.debug("Skipping Layer " + MinecraftForgeClient.getRenderLayer() + " for block " + block);
                 continue;
             }
             int quadGoal = ctx == null ? 1 : Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
