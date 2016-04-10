@@ -3034,7 +3034,7 @@ public enum Features {
 
 	public static boolean oneModdedFeatureLoaded() {
 		for (Features f : values()) {
-			if (f.hasRequiredMod()) {
+			if (f.getRequiredMod() != null && f.hasRequiredMod()) {
 				return true;
 			}
 		}
