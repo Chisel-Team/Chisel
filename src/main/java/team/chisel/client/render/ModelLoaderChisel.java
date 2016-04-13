@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
-import jline.internal.InputStreamReader;
+import java.io.InputStreamReader;
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.client.resources.IResource;
 import net.minecraft.client.resources.IResourceManager;
