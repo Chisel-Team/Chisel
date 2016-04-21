@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "./terrain-mossysmalltiledark.ctx",
+        "./mossy-random.ctx"
+    ]
+}

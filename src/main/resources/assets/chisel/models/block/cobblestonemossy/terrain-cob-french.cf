@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "./terrain-cob-french.ctx",
+        "./mossy-random.ctx"
+    ]
+}

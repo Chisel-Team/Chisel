@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "./terrain-cobmoss-creepdungeon.ctx",
+        "./mossy-random.ctx"
+    ]
+}

@@ -1,0 +1,7 @@
+{
+	"type":"R4",
+	"textures":[
+        "./mossy-random"
+    ],
+    "layer":"CUTOUT"
+}
