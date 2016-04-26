@@ -1,4 +1,5 @@
 {
-    "type":"V4",
+    "type":"V",
+    "info":{"size":2},
     "layer":"CUTOUT"
 }

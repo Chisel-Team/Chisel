@@ -1,26 +1,35 @@
 package team.chisel.client.render.type;
 
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
+import team.chisel.api.render.IBlockRenderContext;
+import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureInfo;
 import team.chisel.api.render.TextureSpriteCallback;
+import team.chisel.client.render.ctx.BlockRenderContextPosition;
 import team.chisel.client.render.texture.ChiselTextureR;
 
-public class BlockRenderTypeR extends BlockRenderTypeSheet {
+@BlockRenderType("R")
+public class BlockRenderTypeR implements IBlockRenderType {
 
-    protected BlockRenderTypeR(int xSize, int ySize) {
-        super(xSize, ySize);
+
+    @Override
+    public IChiselTexture<BlockRenderTypeR> makeTexture(TextureInfo info) {
+        return new ChiselTextureR(this, info);
     }
 
     @Override
-    public IChiselTexture<BlockRenderTypeR> makeTexture(BlockRenderLayer layer, TextureSpriteCallback... sprites) {
-        return new ChiselTextureR(this, layer, sprites);
+    public IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
+        return new BlockRenderContextPosition(pos);
     }
 
-    @BlockRenderType
-    public static final BlockRenderTypeR R4 = new BlockRenderTypeR(2, 2);
-    @BlockRenderType
-    public static final BlockRenderTypeR R9 = new BlockRenderTypeR(3, 3);
-    @BlockRenderType
-    public static final BlockRenderTypeR R16 = new BlockRenderTypeR(4, 4);
+//    @BlockRenderType
+//    public static final BlockRenderTypeR R4 = new BlockRenderTypeR(2, 2);
+//    @BlockRenderType
+//    public static final BlockRenderTypeR R9 = new BlockRenderTypeR(3, 3);
+//    @BlockRenderType
+//    public static final BlockRenderTypeR R16 = new BlockRenderTypeR(4, 4);
 }

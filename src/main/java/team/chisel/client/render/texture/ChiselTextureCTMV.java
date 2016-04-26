@@ -21,6 +21,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import team.chisel.api.render.IBlockRenderContext;
+import team.chisel.api.render.TextureInfo;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.ISubmap;
@@ -33,20 +34,20 @@ import com.google.common.collect.Lists;
 
 public class ChiselTextureCTMV extends AbstractChiselTexture<BlockRenderTypeCTMV> {
 
-    public ChiselTextureCTMV(BlockRenderTypeCTMV type, BlockRenderLayer layer, TextureSpriteCallback[] sprites) {
-        super(type, layer, sprites);
+    public ChiselTextureCTMV(BlockRenderTypeCTMV type, TextureInfo info) {
+        super(type, info);
     }
 
     @Override
     public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
         if (context == null) {
-            return Lists.newArrayList(from(quad, DefaultVertexFormats.ITEM).transformUVs(sprites[1].getSprite(), TOP_LEFT).rebake());
+            return Lists.newArrayList(from(quad).transformUVs(sprites[1].getSprite(), TOP_LEFT).setFullbright(fullbright).rebake());
         }
         return Lists.newArrayList(getQuad(quad, ((CTMVBlockRenderContext) context).getData()));
     }
 
     private BakedQuad getQuad(BakedQuad in, ConnectionData data) {
-        Quad q = from(in, DefaultVertexFormats.ITEM);
+        Quad q = from(in).setFullbright(fullbright);
         Connections cons = data.getConnections();
         
         // This is the order of operations for connections

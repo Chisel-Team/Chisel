@@ -13,8 +13,8 @@ import team.chisel.client.render.texture.ChiselTextureSimpleCTM;
 public class BlockRenderTypeSimpleCTM extends BlockRenderTypeCTM {
 
     @Override
-    public IChiselTexture<BlockRenderTypeSimpleCTM> makeTexture(BlockRenderLayer layer, TextureSpriteCallback... sprites) {
-        return new ChiselTextureSimpleCTM(this, layer, sprites);
+    public IChiselTexture<BlockRenderTypeSimpleCTM> makeTexture(TextureInfo info) {
+        return new ChiselTextureSimpleCTM(this, info);
     }
 
     @Override

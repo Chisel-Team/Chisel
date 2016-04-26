@@ -7,6 +7,7 @@ import team.chisel.api.render.BlockRenderType;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureInfo;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.texture.ChiselTextureNormal;
 
@@ -17,8 +18,8 @@ import team.chisel.client.render.texture.ChiselTextureNormal;
 public class BlockRenderTypeNormal implements IBlockRenderType {
 
     @Override
-    public IChiselTexture<BlockRenderTypeNormal> makeTexture(BlockRenderLayer layer, TextureSpriteCallback... sprites){
-        return new ChiselTextureNormal(this, layer, sprites);
+    public IChiselTexture<BlockRenderTypeNormal> makeTexture(TextureInfo info){
+        return new ChiselTextureNormal(this, info);
     }
 
     @Override

@@ -14,10 +14,10 @@ import net.minecraft.util.ResourceLocation;
 public interface IChiselTexture<T extends IBlockRenderType> {
 
     /**
-     * Gets a list of quads for the side for this texture
+     * Transforms a quad to conform with this texture
      * 
-     * @param side
-     *            The Side
+     * @param quad
+     *            The Quad
      * @param context
      *            The Context NULL CONTEXT MEANS INVENTORY
      * @param quadGoal

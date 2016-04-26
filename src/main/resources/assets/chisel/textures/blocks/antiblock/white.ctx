@@ -3,5 +3,6 @@
 	"textures":[
         "./white",
         "./white-ctm"
-    ]
+    ],
+    "fullbright":true
 }

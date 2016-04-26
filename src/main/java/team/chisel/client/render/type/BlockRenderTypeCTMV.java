@@ -6,6 +6,7 @@ import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureInfo;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.ctx.CTMVBlockRenderContext;
 import team.chisel.client.render.texture.ChiselTextureCTMV;
@@ -14,8 +15,8 @@ import team.chisel.client.render.texture.ChiselTextureCTMV;
 public class BlockRenderTypeCTMV implements IBlockRenderType {
 
     @Override
-    public IChiselTexture<BlockRenderTypeCTMV> makeTexture(BlockRenderLayer layer, TextureSpriteCallback... sprites) {
-        return new ChiselTextureCTMV(this, layer, sprites);
+    public IChiselTexture<BlockRenderTypeCTMV> makeTexture(TextureInfo info) {
+        return new ChiselTextureCTMV(this, info);
     }
     
     @Override

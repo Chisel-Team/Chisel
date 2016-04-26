@@ -3,5 +3,6 @@
 	"textures":[
         "./magenta",
         "./magenta-ctm"
-    ]
+    ],
+    "fullbright":true
 }
