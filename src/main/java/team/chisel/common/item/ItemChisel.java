@@ -68,9 +68,9 @@ public class ItemChisel extends Item {
     public boolean getIsRepairable(ItemStack damagedItem, ItemStack repairMaterial) {
         switch (type) {
         case DIAMOND:
-            return repairMaterial.getItem().equals(Items.diamond);
+            return repairMaterial.getItem().equals(Items.DIAMOND);
         case IRON:
-            return repairMaterial.getItem().equals(Items.iron_ingot);
+            return repairMaterial.getItem().equals(Items.IRON_INGOT);
         }
 
         return false;

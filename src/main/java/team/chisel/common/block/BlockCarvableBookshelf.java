@@ -19,6 +19,6 @@ public class BlockCarvableBookshelf extends BlockCarvable {
     
     @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        return Blocks.bookshelf.getDrops(world, pos, state, fortune);
+        return Blocks.BOOKSHELF.getDrops(world, pos, state, fortune);
     }
 }

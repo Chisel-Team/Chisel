@@ -140,7 +140,7 @@ public class InventoryChiselSelection implements IInventory {
 
         activeVariations = 0;
         while (activeVariations < normalSlots && activeVariations < list.size()) {
-            if (Block.blockRegistry.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
+            if (Block.REGISTRY.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
                 inventory[activeVariations] = list.get(activeVariations);
                 activeVariations++;
             }

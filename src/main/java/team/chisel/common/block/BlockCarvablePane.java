@@ -10,7 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.particle.EffectRenderer;
+import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -94,7 +94,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     @SideOnly(Side.CLIENT)
     @Override
     public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
-        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial(stateIn) == Material.air) {
+        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial(stateIn) == Material.AIR) {
             return stateIn;
         }
         IExtendedBlockState state = (IExtendedBlockState) stateIn;
@@ -128,13 +128,13 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     }
 
     @Override
-    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, EffectRenderer effectRenderer) {
+    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager effectRenderer) {
         ClientUtil.addHitEffects(worldObj, target.getBlockPos(), target.sideHit);
         return true;
     }
 
     @Override
-    public boolean addDestroyEffects(World world, BlockPos pos, EffectRenderer effectRenderer) {
+    public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager effectRenderer) {
         ClientUtil.addDestroyEffects(world, pos, world.getBlockState(pos));
         return true;
     }

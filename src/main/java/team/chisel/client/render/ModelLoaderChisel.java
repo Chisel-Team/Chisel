@@ -2,7 +2,7 @@ package team.chisel.client.render;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader
+import java.io.InputStreamReader;
 import java.util.Map;
 
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;

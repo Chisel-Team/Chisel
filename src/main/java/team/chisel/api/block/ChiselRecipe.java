@@ -42,14 +42,14 @@ public class ChiselRecipe implements IRecipe {
 
     public ChiselRecipe withItemAt(int row, int collumn, Item item){
         if (!(row > 2 || row < 0 || collumn > 2 || collumn < 0)){
-            values[row][collumn] = new CraftingComponent(Item.itemRegistry.getNameForObject(item), false);
+            values[row][collumn] = new CraftingComponent(Item.REGISTRY.getNameForObject(item), false);
         }
         return this;
     }
 
     public ChiselRecipe withBlockAt(int row, int collumn, Block block){
         if (!(row > 2 || row < 0 || collumn > 2 || collumn < 0)){
-            values[row][collumn] = new CraftingComponent(Block.blockRegistry.getNameForObject(block), false);
+            values[row][collumn] = new CraftingComponent(Block.REGISTRY.getNameForObject(block), false);
         }
         return this;
     }
