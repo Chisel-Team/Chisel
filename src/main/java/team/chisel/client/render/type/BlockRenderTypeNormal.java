@@ -26,4 +26,14 @@ public class BlockRenderTypeNormal implements IBlockRenderType {
     public IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos){
         return null;
     }
+
+    @Override
+    public int getCompressedContextLength(){
+        return 0;
+    }
+
+    @Override
+    public IBlockRenderContext getContextFromData(long data){
+        return null;
+    }
 }

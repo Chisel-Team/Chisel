@@ -15,4 +15,14 @@ public interface IRenderContextProvider {
      * @return The block render context
      */
     IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos);
+
+    /**
+     * Gets the max length in bits of the compressed version of any context provided by this provider
+     */
+    int getCompressedContextLength();
+
+    /**
+     * Gets the render context from this compressed data. This int is just the data for this context
+     */
+    IBlockRenderContext getContextFromData(long data);
 }

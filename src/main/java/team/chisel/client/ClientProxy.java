@@ -14,6 +14,7 @@ import team.chisel.api.block.ChiselBlockBuilder.VariationBuilder.IVariationBuild
 import team.chisel.api.block.ICarvable;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.handler.TooltipHandler;
+import team.chisel.client.render.ChiselModelCache;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.client.render.ModelLoaderChisel;
 import team.chisel.common.CommonProxy;
@@ -21,6 +22,8 @@ import team.chisel.common.init.TextureTypeRegistry;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
+
+    public ChiselModelCache modelCache;
 
     @Override
     public void construct(FMLPreInitializationEvent event) {
@@ -46,6 +49,8 @@ public class ClientProxy extends CommonProxy {
             SimpleReloadableResourceManager manager = (SimpleReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
             manager.registerReloadListener(ChiselPackReloadListener.INSTANCE);
         }
+
+        modelCache = new ChiselModelCache();
     }
 
     @Override

@@ -4,6 +4,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
+import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.TextureInfo;
@@ -27,5 +28,15 @@ public class BlockRenderTypeCTMV implements IBlockRenderType {
     @Override
     public int requiredTextures() {
         return 2;
+    }
+
+    @Override
+    public int getCompressedContextLength(){
+        return 24;
+    }
+
+    @Override
+    public IBlockRenderContext getContextFromData(long data){
+        return new CTMVBlockRenderContext(data);
     }
 }
