@@ -13,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.client.renderer.vertex.VertexFormatElement.EnumUsage;
@@ -25,6 +26,7 @@ import org.lwjgl.util.vector.Vector;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
+import team.chisel.Chisel;
 import team.chisel.client.render.ctm.CTM;
 import team.chisel.client.render.ctm.ISubmap;
 import team.chisel.client.render.ctm.Submap;
@@ -198,16 +200,28 @@ public class Quad {
     private UVs uvs;
     
     private final Builder builder;
+
+    private boolean fullbright;
     
     private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder) {
+        this(verts, uvs, builder, false);
+    }
+
+    private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder, boolean fullbright) {
         this.vertPos = verts;
         this.vertUv = uvs;
         this.builder = builder;
         this.uvs = new UVs(uvs);
+        this.fullbright = fullbright;
     }
     
     private Quad(Vector3f[] verts, UVs uvs, Builder builder) {
         this(verts, uvs.vectorize(), builder);
+        this.uvs = new UVs(uvs.getSprite(), vertUv);
+    }
+
+    private Quad(Vector3f[] verts, UVs uvs, Builder builder, boolean fullbright) {
+        this(verts, uvs.vectorize(), builder, fullbright);
         this.uvs = new UVs(uvs.getSprite(), vertUv);
     }
 
@@ -288,8 +302,8 @@ public class Quad {
             secondQuad[j2].y = lerp(secondQuad[j1].y, secondQuad[j2].y, f);
             secondQuad[j2].z = lerp(secondQuad[j1].z, secondQuad[j2].z, f);
 
-            Quad q1 = new Quad(firstQuad, first.relativize(), builder);
-            Quad q2 = new Quad(secondQuad, second.relativize(), builder);
+            Quad q1 = new Quad(firstQuad, first.relativize(), builder, fullbright);
+            Quad q2 = new Quad(secondQuad, second.relativize(), builder, fullbright);
             return Pair.of(q1, q2);
         } else {
             return Pair.of(this, null);
@@ -335,7 +349,7 @@ public class Quad {
             uvs[i] = new Vector2f(lerp(s.getMinU(), s.getMaxU(), uvs[i].x), lerp(s.getMinV(), s.getMaxV(), uvs[i].y));
         }
 
-        Quad ret = new Quad(vertPos, uvs, builder);
+        Quad ret = new Quad(vertPos, uvs, builder, fullbright);
         ret.uvs = new UVs(getUvs().getSprite(), ret.vertUv);
         return ret;
     }
@@ -353,7 +367,7 @@ public class Quad {
         for (int i = 0; i < 4; i++) {
             uvs[i] = vertUv[(i + start) % 4];
         }
-        return new Quad(vertPos, uvs, builder);
+        return new Quad(vertPos, uvs, builder, fullbright);
     }
     
     public BakedQuad rebake() {
@@ -368,13 +382,25 @@ public class Quad {
                 VertexFormatElement ele = this.builder.vertexFormat.getElement(i);
                 switch (ele.getUsage()) {
                 case UV:
-                    Vector2f uv = vertUv[v];
-                    builder.put(i, uv.x, uv.y, 0, 1);
+                    //todo transform the UV_2S type that it used for lightmap coordinates to make fullbright
+                    if (ele.getIndex() == 1 && this.fullbright){
+                        //Stuff for fullbright
+                        builder.put(i, 1, 1);
+                        Chisel.debug("Doing fullbright stuff");
+                    }
+                    else if (ele == DefaultVertexFormats.TEX_2F) {
+                        Vector2f uv = vertUv[v];
+                        builder.put(i, uv.x, uv.y , 0, 1);
+                    }
+                    //Chisel.debug("Uv is "+ele + " and fullright is "+ this.fullbright);
                     break;
                 case POSITION:
                     Vector3f p = vertPos[v];
                     builder.put(i, p.x, p.y, p.z, 1);
                     break;
+                /*case COLOR:
+                    builder.put(i, 35, 162, 204); Pretty things
+                    break;*/
                 default:
                     builder.put(i, this.builder.data.get(ele.getUsage()).get(v));
                 }
@@ -389,15 +415,25 @@ public class Quad {
     }
     
     public Quad transformUVs(TextureAtlasSprite sprite, ISubmap submap) {
-        return new Quad(vertPos, getUvs().transform(sprite, submap), builder);
+        return new Quad(vertPos, getUvs().transform(sprite, submap), builder, fullbright);
     }
     
     public Quad grow() {
-        return new Quad(vertPos, getUvs().normalizeQuadrant(), builder);
+        return new Quad(vertPos, getUvs().normalizeQuadrant(), builder, fullbright);
+    }
+
+    public Quad setFullbright(boolean fullbright){
+        if (fullbright != this.fullbright) {
+            return new Quad(vertPos, getUvs(), builder, fullbright);
+        }
+        else {
+            return this;
+        }
     }
     
-    public static Quad from(BakedQuad baked, VertexFormat fmt) {
-        Builder b = new Builder(fmt);
+    public static Quad from(BakedQuad baked) {
+        Builder b = new Builder(baked.getFormat());
+        //Chisel.debug("Format: " + baked.getFormat().toString());
         baked.pipe(b);
         return b.build().derotate(); // for now we will ignore rotated UVs
     }

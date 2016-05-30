@@ -3,5 +3,6 @@
 	"textures":[
         "./yellow",
         "./yellow-ctm"
-    ]
+    ],
+    "fullbright":true
 }

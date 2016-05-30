@@ -50,7 +50,7 @@ public class Configurations {
     public static String getRoadLineTool;
     public static int roadLineToolLevel;
 
-    public static int[] configColors = new int[ItemDye.dyeColors.length];
+    public static int[] configColors = new int[ItemDye.DYE_COLORS.length];
 
     public static boolean fullBlockConcrete;
 
@@ -114,14 +114,14 @@ public class Configurations {
 
         for (EnumDyeColor c : EnumDyeColor.values()) {
             // tterrag... don't kill me over this formatting.
-            String temp = config.get(category, "hex" + c.getName(), "#" + Integer.toHexString(ItemDye.dyeColors[c.ordinal()]),
+            String temp = config.get(category, "hex" + c.getName(), "#" + Integer.toHexString(ItemDye.DYE_COLORS[c.ordinal()]),
                     StringUtils.capitalize(c.getName()) + " color for hex block overlay #RRGGBB").getString();
             // Or this
             try {
                 configColors[c.ordinal()] = Integer.decode(temp);
             } catch (NumberFormatException e) {
-                Chisel.logger.warn("Configuration error, " + temp + " was not recognized as a color.  Using default: #" + Integer.toHexString(ItemDye.dyeColors[c.ordinal()]));
-                configColors[c.ordinal()] = ItemDye.dyeColors[c.ordinal()];
+                Chisel.logger.warn("Configuration error, " + temp + " was not recognized as a color.  Using default: #" + Integer.toHexString(ItemDye.DYE_COLORS[c.ordinal()]));
+                configColors[c.ordinal()] = ItemDye.DYE_COLORS[c.ordinal()];
             }
         }
 

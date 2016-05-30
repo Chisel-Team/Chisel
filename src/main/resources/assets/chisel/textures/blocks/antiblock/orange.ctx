@@ -3,5 +3,6 @@
 	"textures":[
         "./orange",
         "./orange-ctm"
-    ]
+    ],
+    "fullbright":true
 }

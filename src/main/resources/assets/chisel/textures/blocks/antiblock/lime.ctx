@@ -3,5 +3,6 @@
 	"textures":[
         "./lime",
         "./lime-ctm"
-    ]
+    ],
+    "fullbright":true
 }

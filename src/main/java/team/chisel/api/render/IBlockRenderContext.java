@@ -5,4 +5,9 @@ package team.chisel.api.render;
  */
 public interface IBlockRenderContext {
 
+    /**
+     * Gets the compressed data, will only use bits up to the given compressed data length
+     */
+    long getCompressedData();
+
 }

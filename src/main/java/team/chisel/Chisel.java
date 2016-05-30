@@ -36,7 +36,7 @@ public class Chisel implements Reference {
 
     public static ItemChisel itemChiselIron, itemChiselDiamond;
 
-    public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
+    public static final boolean debug = true;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
 
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;

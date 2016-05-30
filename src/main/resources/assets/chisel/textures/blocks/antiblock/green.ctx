@@ -3,5 +3,6 @@
 	"textures":[
         "./green",
         "./green-ctm"
-    ]
+    ],
+    "fullbright":true
 }

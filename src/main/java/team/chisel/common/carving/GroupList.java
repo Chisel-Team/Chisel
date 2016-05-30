@@ -33,7 +33,7 @@ public class GroupList implements Set<ICarvingGroup> {
 				ItemStack stack1 = v.getStack(), stack2 = v2.getStack();
 				if (stack1.isItemEqual(stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2)) {
 					return true;
-				} else if (v.getBlock() != null && v.getBlock() != Blocks.air) {
+				} else if (v.getBlock() != null && v.getBlock() != Blocks.AIR) {
 					return v.getBlockState().equals(v2.getBlockState());
 				}
 			} else if (obj instanceof VariationWrapper) {

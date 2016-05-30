@@ -1,13 +1,16 @@
 package team.chisel.common.util.json;
 
 import java.util.Locale;
+import java.util.Optional;
 
 import javax.annotation.Nullable;
 
+import com.google.gson.JsonObject;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureInfo;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.TextureStitcher;
 import team.chisel.common.init.TextureTypeRegistry;
@@ -35,6 +38,11 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
 
     @Nullable
     private String layer;
+
+    @Nullable
+    private JsonObject info;
+
+    private boolean fullbright;
 
     @Override
     protected IChiselTexture<?> create(ResourceLocation loc) {
@@ -70,6 +78,13 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
             System.out.println("test");
         }
         BlockRenderLayer layerObj = layer == null ? BlockRenderLayer.SOLID : BlockRenderLayer.valueOf(layer.toUpperCase(Locale.US));
-        return type.makeTexture(layerObj, callbacks);
+        TextureInfo textureInfo;
+        if (info != null){
+            textureInfo = new TextureInfo(callbacks, Optional.of(info), layerObj, fullbright);
+        }
+        else {
+            textureInfo = new TextureInfo(callbacks, Optional.empty(), layerObj, fullbright);
+        }
+        return type.makeTexture(textureInfo);
     }
 }

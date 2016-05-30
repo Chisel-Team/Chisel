@@ -77,8 +77,7 @@ public class ContainerChisel extends Container {
 
     // TODO this has changed a lot, probaly won't work
     @Override
-    public ItemStack /* slotClick */ func_184996_a(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-
+    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
         if (clickTypeIn != ClickType.QUICK_CRAFT) {
             // we need to subtract away all the other slots
             int clickedSlot = slotId - inventory.getSizeInventory() - 27;
@@ -96,7 +95,7 @@ public class ContainerChisel extends Container {
                 return null;
         }
         
-        return super.func_184996_a(slotId, dragType, clickTypeIn, player);
+        return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
 
     @Override

@@ -3,5 +3,6 @@
 	"textures":[
         "./cyan",
         "./cyan-ctm"
-    ]
+    ],
+    "fullbright":true
 }

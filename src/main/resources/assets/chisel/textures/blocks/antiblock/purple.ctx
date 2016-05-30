@@ -3,5 +3,6 @@
 	"textures":[
         "./purple",
         "./purple-ctm"
-    ]
+    ],
+    "fullbright":true
 }

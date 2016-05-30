@@ -25,7 +25,7 @@ import team.chisel.client.render.ctm.CTM;
 public enum Dir {
 	// @formatter:off
     TOP(UP), 
-    TOP_RIGHT(UP, EAST), 
+    TOP_RIGHT(UP, EAST),
     RIGHT(EAST), 
     BOTTOM_RIGHT(DOWN, EAST), 
     BOTTOM(DOWN), 

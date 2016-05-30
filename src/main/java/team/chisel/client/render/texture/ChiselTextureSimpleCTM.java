@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.BlockRenderLayer;
 import team.chisel.api.render.IBlockRenderContext;
+import team.chisel.api.render.TextureInfo;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.CTM;
@@ -19,13 +20,13 @@ import java.util.List;
 
 public class ChiselTextureSimpleCTM extends AbstractChiselTexture<BlockRenderTypeSimpleCTM> {
 
-    public ChiselTextureSimpleCTM(BlockRenderTypeSimpleCTM type, BlockRenderLayer layer, TextureSpriteCallback... sprites) {
-        super(type, layer, sprites);
+    public ChiselTextureSimpleCTM(BlockRenderTypeSimpleCTM type, TextureInfo info) {
+        super(type, info);
     }
 
     @Override
     public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
-        Quad q = Quad.from(quad, DefaultVertexFormats.ITEM);
+        Quad q = Quad.from(quad).setFullbright(fullbright);
 
         if (context == null) {
             return Collections.singletonList(q.transformUVs(sprites[0].getSprite(), Quad.TOP_LEFT).rebake());

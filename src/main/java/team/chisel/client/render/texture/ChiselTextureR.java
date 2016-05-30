@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.google.gson.JsonObject;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.BlockRenderLayer;
@@ -11,6 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import team.chisel.api.render.IBlockRenderContext;
+import team.chisel.api.render.TextureInfo;
 import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.ISubmap;
@@ -23,10 +25,47 @@ import team.chisel.client.render.type.BlockRenderTypeR;
  */
 public class ChiselTextureR extends AbstractChiselTexture<BlockRenderTypeR> {
 
+    private int xSize;
+
+    private int ySize;
+
     private static final Random rand = new Random();
 
-    public ChiselTextureR(BlockRenderTypeR type, BlockRenderLayer layer, TextureSpriteCallback[] sprites) {
-        super(type, layer, sprites);
+    public ChiselTextureR(BlockRenderTypeR type, TextureInfo info) {
+        super(type, info);
+
+        if (!this.info.isPresent()){
+            throw new RuntimeException("Texture type V must have texture height and width or size associated with it!");
+        }
+        else {
+            JsonObject object = this.info.get();
+            if (object.has("width") && object.has("height")){
+                if (object.get("width").isJsonPrimitive() && object.get("width").getAsJsonPrimitive().isNumber()){
+                    this.xSize = object.get("width").getAsInt();
+                }
+                else {
+                    throw new RuntimeException("Width must be a number!");
+                }
+                if (object.get("height").isJsonPrimitive() && object.get("height").getAsJsonPrimitive().isNumber()){
+                    this.xSize = object.get("height").getAsInt();
+                }
+                else {
+                    throw new RuntimeException("Height must be a number!");
+                }
+            }
+            else if (object.has("size")){
+                if (object.get("size").isJsonPrimitive() && object.get("size").getAsJsonPrimitive().isNumber()){
+                    this.xSize = object.get("size").getAsInt();
+                    this.ySize = object.get("size").getAsInt();
+                }
+                else {
+                    throw new RuntimeException("Size must be a number!");
+                }
+            }
+            else {
+                throw new RuntimeException("Texture type V must have texture height and width or size associated with it!");
+            }
+        }
     }
 
     @Override
@@ -37,8 +76,8 @@ public class ChiselTextureR extends AbstractChiselTexture<BlockRenderTypeR> {
         rand.setSeed(MathHelper.getPositionRandom(pos) + side.ordinal());
         rand.nextBoolean();
 
-        int w = getType().getXSize();
-        int h = getType().getYSize();
+        int w = xSize;
+        int h = ySize;
         float intervalX = 16f / w;
         float intervalY = 16f / h;
 
@@ -49,6 +88,6 @@ public class ChiselTextureR extends AbstractChiselTexture<BlockRenderTypeR> {
         float maxV = unitsDown * intervalY;
         ISubmap uvs = new Submap(intervalX, intervalY, maxU - intervalX, maxV - intervalY);
 
-        return Collections.singletonList(Quad.from(quad, DefaultVertexFormats.ITEM).transformUVs(sprites[0].getSprite(), uvs).rebake());
+        return Collections.singletonList(Quad.from(quad).transformUVs(sprites[0].getSprite(), uvs).setFullbright(fullbright).rebake());
     }
 }

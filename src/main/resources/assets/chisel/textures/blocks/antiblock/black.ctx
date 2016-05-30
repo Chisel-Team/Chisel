@@ -3,5 +3,6 @@
 	"textures":[
         "./black",
         "./black-ctm"
-    ]
+    ],
+    "fullbright":true
 }

@@ -1,7 +1,9 @@
 package team.chisel.api.render;
 
+import com.google.gson.JsonObject;
 import net.minecraft.util.BlockRenderLayer;
 
+import javax.annotation.Nullable;
 
 /**
  * Interface for chisel block render types MUST HAVE A NO ARGS CONSTRUCTOR
@@ -14,13 +16,11 @@ public interface IBlockRenderType extends IRenderContextProvider{
      * Tip: You can explicitly type the return of this method without any warnings or errors. For instance <blockquote>
      * <code>public IChiselTexture{@literal <}MyRenderType{@literal >} makeTexture(...) {...}</code> </blockquote> Is a valid override of this method.
      * 
-     * @param layer
-     *            The texture layer
-     * @param sprites
-     *            The Sprites
+     * @param info A TextureInfo object which contains all the information that about this texture
+     *
      * @return A Chisel Texture TODO This should probably take a bean, so that adding extra stuff later doesn't break API
      */
-    <T extends IBlockRenderType> IChiselTexture<? extends T> makeTexture(BlockRenderLayer layer, TextureSpriteCallback... sprites);
+    <T extends IBlockRenderType> IChiselTexture<? extends T> makeTexture(TextureInfo info);
 
 
     /**
