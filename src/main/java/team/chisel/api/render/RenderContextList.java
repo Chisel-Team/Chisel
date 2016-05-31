@@ -1,7 +1,10 @@
 package team.chisel.api.render;
 
 
-import java.util.HashMap;
+import gnu.trove.set.TLongSet;
+import gnu.trove.set.hash.TLongHashSet;
+
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +20,7 @@ public class RenderContextList {
     private Map<IBlockRenderType, IBlockRenderContext> contextMap;
 
     public RenderContextList(List<IBlockRenderType> types, IBlockAccess world, BlockPos pos){
-        contextMap = new HashMap<IBlockRenderType, IBlockRenderContext>();
+        contextMap = new IdentityHashMap<>();
         for (IBlockRenderType type : types){
             IBlockRenderContext ctx = type.getBlockRenderContext(world, pos);
             if (ctx != null) {
@@ -41,5 +44,13 @@ public class RenderContextList {
 
     public RenderContextList(){
 
+    }
+
+    public TLongSet serialize() {
+        TLongSet ret = new TLongHashSet();
+        for (IBlockRenderContext ctx : contextMap.values()) {
+            ret.add(ctx.getCompressedData());
+        }
+        return ret;
     }
 }

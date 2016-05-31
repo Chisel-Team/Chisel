@@ -7,11 +7,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.BlockRenderLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureInfo;
-import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.CTM;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;

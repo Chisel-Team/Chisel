@@ -1,6 +1,5 @@
 package team.chisel.client.render.type;
 
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
@@ -8,7 +7,6 @@ import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.TextureInfo;
-import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.ctx.BlockRenderContextPosition;
 import team.chisel.client.render.texture.ChiselTextureV;
 
@@ -18,7 +16,6 @@ import team.chisel.client.render.texture.ChiselTextureV;
 @BlockRenderType("V")
 public class BlockRenderTypeV implements IBlockRenderType {
 
-
     @Override
     public IChiselTexture<BlockRenderTypeV> makeTexture(TextureInfo info){
         return new ChiselTextureV(this, info);
@@ -27,6 +24,11 @@ public class BlockRenderTypeV implements IBlockRenderType {
     @Override
     public IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
         return new BlockRenderContextPosition(pos);
+    }
+    
+    @Override
+    public IBlockRenderContext getContextFromData(long data) {
+        return new BlockRenderContextPosition(BlockPos.fromLong(data));
     }
 
 //    @BlockRenderType

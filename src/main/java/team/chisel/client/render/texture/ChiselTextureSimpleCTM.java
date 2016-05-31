@@ -1,22 +1,17 @@
 package team.chisel.client.render.texture;
 
-import com.google.common.base.Optional;
-import com.google.common.collect.Lists;
+import java.util.Collections;
+import java.util.List;
+
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.BlockRenderLayer;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureInfo;
-import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.CTM;
 import team.chisel.client.render.ctm.ISubmap;
 import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.type.BlockRenderTypeSimpleCTM;
 import team.chisel.common.util.Dir;
-
-import java.util.Collections;
-import java.util.List;
 
 public class ChiselTextureSimpleCTM extends AbstractChiselTexture<BlockRenderTypeSimpleCTM> {
 

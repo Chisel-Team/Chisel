@@ -1,10 +1,8 @@
 package team.chisel.client.render.type;
 
-import net.minecraft.util.BlockRenderLayer;
 import team.chisel.api.render.BlockRenderType;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.TextureInfo;
-import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.texture.ChiselTextureCTMH;
 
 @BlockRenderType("CTMH")

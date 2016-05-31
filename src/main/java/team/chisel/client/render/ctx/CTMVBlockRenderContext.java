@@ -14,7 +14,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.IBlockRenderContext;
-import team.chisel.client.render.ConnectionLocations;
 
 public class CTMVBlockRenderContext implements IBlockRenderContext {
 
@@ -48,14 +47,16 @@ public class CTMVBlockRenderContext implements IBlockRenderContext {
         private EnumFacing dir1;
         private EnumFacing dir2;
 
-        public static final List<ConnectionLocs> base = new ArrayList<ConnectionLocs>() {{
+        public static final List<ConnectionLocs> base = new ArrayList<ConnectionLocs>();
+        
+        static {
             base.add(NORTH);
             base.add(SOUTH);
             base.add(EAST);
             base.add(WEST);
             base.add(UP);
             base.add(DOWN);
-        }};
+        }
 
         private ConnectionLocs(int index, EnumFacing dir1, EnumFacing dir2){
             this.index = index;
@@ -165,20 +166,19 @@ public class CTMVBlockRenderContext implements IBlockRenderContext {
             return forPos(world, state, pos);
         }
 
-        public static Connections forData(long data, EnumFacing offset){
+        public static Connections forData(long data, EnumFacing offset) {
             EnumSet<EnumFacing> connections = EnumSet.noneOf(EnumFacing.class);
-            if (offset == null){
-                for (ConnectionLocs loc : ConnectionLocs.base){
-                    if ((data & loc.getMask()) != 0){
+            if (offset == null) {
+                for (ConnectionLocs loc : ConnectionLocs.base) {
+                    if ((data & loc.getMask()) != 0) {
                         connections.add(ConnectionLocs.fromLoc(loc));
                     }
                 }
-            }
-            else {
-                for (ConnectionLocs loc : ConnectionLocs.values()){
-                    if ((data & loc.getMask()) != 0){
+            } else {
+                for (ConnectionLocs loc : ConnectionLocs.values()) {
+                    if ((data & loc.getMask()) != 0) {
                         EnumFacing facing = loc.clipOrDestroy(offset);
-                        if (facing != null){
+                        if (facing != null) {
                             connections.add(facing);
                         }
                     }
@@ -236,7 +236,6 @@ public class CTMVBlockRenderContext implements IBlockRenderContext {
     public CTMVBlockRenderContext(IBlockAccess world, BlockPos pos) {
         data = new ConnectionData(world, pos);
 
-        compressedData = 0;
         for (ConnectionLocs loc : ConnectionLocs.values()){
             if (world.getBlockState(pos) == world.getBlockState(loc.transform(pos))){
                 compressedData = compressedData | loc.getMask();
@@ -246,7 +245,6 @@ public class CTMVBlockRenderContext implements IBlockRenderContext {
 
     public CTMVBlockRenderContext(long data){
         this.data = new ConnectionData(data);
-        this.compressedData = data;
     }
 
     @Override

@@ -1,15 +1,8 @@
 package team.chisel.client.render.ctm;
 
-import static team.chisel.common.util.Dir.BOTTOM;
-import static team.chisel.common.util.Dir.BOTTOM_LEFT;
-import static team.chisel.common.util.Dir.BOTTOM_RIGHT;
-import static team.chisel.common.util.Dir.LEFT;
-import static team.chisel.common.util.Dir.RIGHT;
-import static team.chisel.common.util.Dir.TOP;
-import static team.chisel.common.util.Dir.TOP_LEFT;
-import static team.chisel.common.util.Dir.TOP_RIGHT;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.set.TLongSet;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -24,6 +17,8 @@ import team.chisel.common.util.Dir;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
+
+import static team.chisel.common.util.Dir.*;
 
 // @formatter:off
 /**
@@ -315,7 +310,7 @@ public class CTM {
         }
 
         // check that we aren't already connected outwards from this side
-        ret &= !obscuring.getBlock().isFullCube(state) || !obscuring.equals(state);
+        ret &= !obscuring.isFullCube() || !obscuring.equals(state);
 
         return ret;
     }

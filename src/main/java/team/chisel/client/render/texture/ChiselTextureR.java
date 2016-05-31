@@ -4,21 +4,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import com.google.gson.JsonObject;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureInfo;
-import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.ISubmap;
 import team.chisel.client.render.ctm.Submap;
 import team.chisel.client.render.ctx.BlockRenderContextPosition;
 import team.chisel.client.render.type.BlockRenderTypeR;
+
+import com.google.gson.JsonObject;
 
 /**
  * Texture for R texture types

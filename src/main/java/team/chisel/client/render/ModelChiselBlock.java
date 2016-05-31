@@ -1,13 +1,17 @@
 package team.chisel.client.render;
 
+import gnu.trove.set.TLongSet;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
+import lombok.SneakyThrows;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
@@ -34,6 +38,8 @@ import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.common.block.BlockCarvable;
 
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -63,6 +69,10 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     private ModelChisel model;
     private Overrides overrides = new Overrides();
     
+    private TLongSet modelstate;
+    
+    private static Cache<Pair<IBlockState, TLongSet>, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(500).<Pair<IBlockState, TLongSet>, ModelChiselBlock>build();
+    
     public ModelChiselBlock(List<BakedQuad> face, List<BakedQuad> general, ModelChisel model) {
         this.face = face;
         this.general = general;
@@ -74,12 +84,19 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     }
 
     @Override
+    @SneakyThrows
     public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
         ModelChiselBlock baked;
         if (state != null && state.getBlock() instanceof ICarvable && state instanceof IExtendedBlockState) {
             IExtendedBlockState ext = (IExtendedBlockState) state;
+            IBlockState clean = ext.getClean();
             RenderContextList ctxList = ext.getValue(BlockCarvable.CTX_LIST);
-            baked = createModel(ext, model, ctxList);
+            TLongSet serialized = ctxList.serialize();
+            baked = modelcache.get(Pair.of(clean, serialized), () -> {
+                ModelChiselBlock m = createModel(ext, model, ctxList);
+                m.modelstate = serialized;
+                return m;
+            });
         } else {
             baked = this;
         }

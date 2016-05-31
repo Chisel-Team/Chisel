@@ -18,7 +18,7 @@ public interface IFacade {
      * @param pos   The Blocks position
      * @param side  The side being rendered, NOT the side being connected from.
      *              <p/>
-     *              This value can be -1 if no side is specified. Please handle this appropriately.
+     *              This value can be null if no side is specified. Please handle this appropriately.
      * @return The block inside of your facade block.
      */
     IBlockState getFacade(IBlockAccess world, BlockPos pos, EnumFacing side);

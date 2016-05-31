@@ -6,21 +6,19 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import com.google.gson.JsonObject;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.math.BlockPos;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureInfo;
-import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.ISubmap;
 import team.chisel.client.render.ctm.Submap;
 import team.chisel.client.render.ctx.BlockRenderContextPosition;
 import team.chisel.client.render.type.BlockRenderTypeV;
+
+import com.google.gson.JsonObject;
 
 /**
  * Texture for V texture types
@@ -76,7 +74,6 @@ public class ChiselTextureV extends AbstractChiselTexture<BlockRenderTypeV> {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
-
 
         int tx, ty;
 

@@ -1,14 +1,10 @@
 package team.chisel.api.render;
 
-import com.google.gson.JsonObject;
-import net.minecraft.util.BlockRenderLayer;
-
-import javax.annotation.Nullable;
 
 /**
  * Interface for chisel block render types MUST HAVE A NO ARGS CONSTRUCTOR
  */
-public interface IBlockRenderType extends IRenderContextProvider{
+public interface IBlockRenderType extends IRenderContextProvider {
 
     /**
      * Make a Chisel Texture from a list of sprites.

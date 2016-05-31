@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.google.gson.JsonObject;
 import lombok.Getter;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockRenderLayer;
@@ -14,6 +13,8 @@ import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.TextureInfo;
 import team.chisel.api.render.TextureSpriteCallback;
+
+import com.google.gson.JsonObject;
 
 
 /**
@@ -44,7 +45,6 @@ public abstract class AbstractChiselTexture<T extends IBlockRenderType> implemen
         this.sprites = info.getSprites();
         this.fullbright = info.getFullbright();
         this.info = info.getInfo();
-
     }
 
     @Override

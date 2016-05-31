@@ -18,4 +18,9 @@ public class BlockRenderContextPosition implements IBlockRenderContext {
     public BlockPos getPosition() {
         return position;
     }
+
+    @Override
+    public long getCompressedData() {
+        return position.toLong();
+    }
 }

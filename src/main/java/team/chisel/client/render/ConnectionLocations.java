@@ -1,14 +1,13 @@
 package team.chisel.client.render;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import team.chisel.client.render.ctm.CTM;
 import team.chisel.common.util.Dir;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents all the different spot for connection locations for a ctm block
@@ -66,10 +65,10 @@ public enum ConnectionLocations {
         return this.directionRelations[facing.getIndex()];
     }
 
-    public static List<ConnectionLocations> decode(long value){
+    public static List<ConnectionLocations> decode(long data) {
         List<ConnectionLocations> list = new ArrayList<>();
-        for (ConnectionLocations loc : values()){
-            if ((1 & (value >> loc.getOffset())) != 0){
+        for (ConnectionLocations loc : values()) {
+            if ((1 & (data >> loc.getOffset())) != 0) {
                 list.add(loc);
             }
         }
@@ -87,7 +86,7 @@ public enum ConnectionLocations {
             for (EnumFacing facing : loc.pos){
                 second = second.offset(facing);
             }
-            if (world.getBlockState(pos).equals(CTM.getBlockOrFacade(world, pos, loc.pos[0]))){
+            if (world.getBlockState(pos).equals(CTM.getBlockOrFacade(world, second, null))){
                 locs.add(loc);
             }
         }
@@ -102,6 +101,4 @@ public enum ConnectionLocations {
         }
         return data;
     }
-
-
 }
