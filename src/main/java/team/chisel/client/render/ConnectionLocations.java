@@ -14,61 +14,134 @@ import team.chisel.common.util.Dir;
  */
 public enum ConnectionLocations {
 
-    UP(0, EnumFacing.UP, null, null, Dir.TOP, Dir.TOP, Dir.TOP, Dir.TOP),
-    DOWN(1, EnumFacing.DOWN, null, null, Dir.BOTTOM, Dir.BOTTOM, Dir.BOTTOM, Dir.BOTTOM),
-    NORTH(2, EnumFacing.NORTH, Dir.TOP, Dir.TOP, null, null, Dir.LEFT, Dir.RIGHT),
-    SOUTH(3, EnumFacing.SOUTH, Dir.BOTTOM, Dir.BOTTOM, null, null, Dir.RIGHT, Dir.LEFT),
-    EAST(4, EnumFacing.EAST, Dir.RIGHT, Dir.RIGHT, Dir.LEFT, Dir.RIGHT, null, null),
-    WEST(5, EnumFacing.WEST, Dir.LEFT, Dir.LEFT, Dir.RIGHT, Dir.LEFT, null, null),
-    NORTH_EAST(7, new EnumFacing[]{EnumFacing.NORTH, EnumFacing.EAST}, Dir.TOP_RIGHT, Dir.TOP_RIGHT, null, null, null, null),
-    NORTH_WEST(8, new EnumFacing[]{EnumFacing.NORTH, EnumFacing.WEST}, Dir.TOP_LEFT, Dir.TOP_LEFT, null, null, null, null),
-    NORTH_UP(9, new EnumFacing[]{EnumFacing.NORTH, EnumFacing.UP}, null, null, null, null, Dir.TOP_LEFT, Dir.TOP_RIGHT),
-    NORTH_DOWN(10, new EnumFacing[]{EnumFacing.NORTH, EnumFacing.DOWN}, null, null, null, null, Dir.BOTTOM_LEFT, Dir.BOTTOM_RIGHT),
-    SOUTH_EAST(11, new EnumFacing[]{EnumFacing.SOUTH, EnumFacing.EAST}, Dir.BOTTOM_RIGHT, Dir.BOTTOM_RIGHT, null, null, null, null),
-    SOUTH_WEST(12, new EnumFacing[]{EnumFacing.SOUTH, EnumFacing.WEST}, Dir.BOTTOM_LEFT, Dir.BOTTOM_LEFT, null, null, null, null),
-    SOUTH_UP(13, new EnumFacing[]{EnumFacing.SOUTH, EnumFacing.UP}, null, null, null, null, Dir.TOP_RIGHT, Dir.TOP_LEFT),
-    SOUTH_DOWN(14, new EnumFacing[]{EnumFacing.SOUTH, EnumFacing.DOWN}, null, null, null, null, Dir.BOTTOM_RIGHT, Dir.BOTTOM_LEFT),
-    EAST_UP(15, new EnumFacing[]{EnumFacing.EAST, EnumFacing.UP}, null, null, Dir.TOP_LEFT, Dir.TOP_RIGHT, null, null),
-    EAST_DOWN(16, new EnumFacing[]{EnumFacing.EAST, EnumFacing.DOWN}, null, null, Dir.BOTTOM_LEFT, Dir.BOTTOM_RIGHT, null, null),
-    WEST_UP(17, new EnumFacing[]{EnumFacing.WEST, EnumFacing.UP}, null, null, Dir.TOP_RIGHT, Dir.TOP_LEFT, null, null),
-    WEST_DOWN(18, new EnumFacing[]{EnumFacing.WEST, EnumFacing.DOWN}, null, null, Dir.BOTTOM_RIGHT, Dir.BOTTOM_LEFT);
-
-    private int offset;
-
+    UP(Dir.TOP),
+    DOWN(Dir.BOTTOM),
+    NORTH(EnumFacing.EAST, Dir.RIGHT),
+    SOUTH(EnumFacing.EAST, Dir.LEFT),
+    EAST(Dir.RIGHT),
+    WEST(Dir.LEFT),
+    
+    NORTH_EAST(EnumFacing.UP, Dir.TOP_RIGHT),
+    NORTH_WEST(EnumFacing.UP, Dir.TOP_LEFT),
+    SOUTH_EAST(EnumFacing.UP, Dir.BOTTOM_RIGHT),
+    SOUTH_WEST(EnumFacing.UP, Dir.BOTTOM_LEFT),
+    
+    NORTH_UP(EnumFacing.EAST, Dir.TOP_RIGHT),
+    NORTH_DOWN(EnumFacing.EAST, Dir.BOTTOM_RIGHT),
+    SOUTH_UP(EnumFacing.EAST, Dir.TOP_LEFT),
+    SOUTH_DOWN(EnumFacing.EAST, Dir.BOTTOM_LEFT),
+    
+    EAST_UP(Dir.TOP_RIGHT),
+    EAST_DOWN(Dir.BOTTOM_RIGHT),
+    WEST_UP(Dir.TOP_LEFT),
+    WEST_DOWN(Dir.BOTTOM_LEFT),
+    
+    NORTH_EAST_UP(EnumFacing.EAST, Dir.TOP_RIGHT, true),
+    NORTH_EAST_DOWN(EnumFacing.EAST, Dir.BOTTOM_RIGHT, true),
+    
+    SOUTH_EAST_UP(EnumFacing.EAST, Dir.TOP_LEFT, true),
+    SOUTH_EAST_DOWN(EnumFacing.EAST, Dir.BOTTOM_LEFT, true),
+    
+    SOUTH_WEST_UP(EnumFacing.WEST, Dir.TOP_LEFT, true),
+    SOUTH_WEST_DOWN(EnumFacing.WEST, Dir.BOTTOM_LEFT, true),
+    
+    NORTH_WEST_UP(EnumFacing.WEST, Dir.TOP_RIGHT, true),
+    NORTH_WEST_DOWN(EnumFacing.WEST, Dir.BOTTOM_RIGHT, true),
+    
+    UP_UP(EnumFacing.UP, null, true),
+    DOWN_DOWN(EnumFacing.DOWN, null, true),
+    NORTH_NORTH(EnumFacing.NORTH, null, true),
+    SOUTH_SOUTH(EnumFacing.SOUTH, null, true),
+    EAST_EAST(EnumFacing.EAST, null, true),
+    WEST_WEST(EnumFacing.WEST, null, true),
+    
+    ;
+    
+    public static final ConnectionLocations[] VALUES = values();
+    
     /**
      * The enum facing directions needed to get to this connection location
      */
-    private EnumFacing[] pos;
+    private EnumFacing normal;
+    private Dir dir;
+    private boolean offset;
 
-    /**
-     * Represents the dir needed to get to this absolute CTM location from the direction ordinal index
-     */
-    private Dir[] directionRelations;
-
-    private ConnectionLocations(int offset, EnumFacing[] pos, Dir... directions){
-        this.offset = offset;
-        this.pos = pos;
-        this.directionRelations = directions;
+    private ConnectionLocations(Dir dir) {
+        this(EnumFacing.SOUTH, dir);
     }
-
-    private ConnectionLocations(int offset, EnumFacing pos, Dir... directions){
-        this.offset = offset;
-        this.pos = new EnumFacing[] {pos};
-        this.directionRelations = directions;
+    
+    private ConnectionLocations(Dir dir, boolean offset) {
+        this(EnumFacing.SOUTH, dir, offset);
     }
-
-    public int getOffset(){
-        return this.offset;
+    
+    private ConnectionLocations(EnumFacing normal, Dir dir){
+        this(normal, dir, false);
+    }
+    
+    private ConnectionLocations(EnumFacing normal, Dir dir, boolean offset) {
+        this.normal = normal;
+        this.dir = dir;
+        this.offset = offset;
     }
 
     public Dir getDirForSide(EnumFacing facing){
-        return this.directionRelations[facing.getIndex()];
+        return dir.relativize(facing);
+    }
+
+    public EnumFacing clipOrDestroy(EnumFacing direction) {
+        EnumFacing[] dirs = dir == null ? new EnumFacing[] {normal, normal} : dir.getNormalizedDirs(direction);
+        if (dirs[0] == direction) {
+            return dirs.length > 1 ? dirs[1] : null;
+        } else if (dirs.length > 1 && dirs[1] == direction) {
+            return dirs[0];
+        } else {
+            return null;
+        }
+    }
+
+    public BlockPos transform(BlockPos pos) {
+        if (dir != null) {
+            for (EnumFacing facing : dir.getNormalizedDirs(normal)) {
+                pos = pos.offset(facing);
+            }
+        } else {
+            pos = pos.offset(normal);
+        }
+
+        if (offset) {
+            pos = pos.offset(normal);
+        }
+        return pos;
+    }
+
+    public static ConnectionLocations fromFacing(EnumFacing facing){
+        switch (facing){
+            case NORTH: return NORTH;
+            case SOUTH: return SOUTH;
+            case EAST: return EAST;
+            case WEST: return WEST;
+            case UP: return UP;
+            case DOWN: return DOWN;
+            default: return NORTH;
+        }
+    }
+
+    public static EnumFacing toFacing(ConnectionLocations loc){
+        switch (loc){
+            case NORTH: return EnumFacing.NORTH;
+            case SOUTH: return EnumFacing.SOUTH;
+            case EAST: return EnumFacing.EAST;
+            case WEST: return EnumFacing.WEST;
+            case UP: return EnumFacing.UP;
+            case DOWN: return EnumFacing.DOWN;
+            default: return EnumFacing.NORTH;
+        }
     }
 
     public static List<ConnectionLocations> decode(long data) {
         List<ConnectionLocations> list = new ArrayList<>();
         for (ConnectionLocations loc : values()) {
-            if ((1 & (data >> loc.getOffset())) != 0) {
+            if ((1 & (data >> loc.ordinal())) != 0) {
                 list.add(loc);
             }
         }
@@ -76,16 +149,13 @@ public enum ConnectionLocations {
     }
 
     public long getMask(){
-        return 1 << getOffset();
+        return 1 << ordinal();
     }
 
     public static List<ConnectionLocations> getConnections(IBlockAccess world, BlockPos pos){
         List<ConnectionLocations> locs = new ArrayList<>();
-        for (ConnectionLocations loc : values()){
-            BlockPos second = pos;
-            for (EnumFacing facing : loc.pos){
-                second = second.offset(facing);
-            }
+        for (ConnectionLocations loc : VALUES){
+            BlockPos second = loc.transform(pos);
             if (world.getBlockState(pos).equals(CTM.getBlockOrFacade(world, second, null))){
                 locs.add(loc);
             }
@@ -99,6 +169,11 @@ public enum ConnectionLocations {
         for (ConnectionLocations loc : locs){
             data = data | loc.getMask();
         }
+        String s = Long.toBinaryString(data);
+        while (s.length() < 32) {
+            s = "0" + s;
+        }
+        System.out.println(pos + ": " + s);
         return data;
     }
 }

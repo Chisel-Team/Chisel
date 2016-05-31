@@ -2,7 +2,6 @@ package team.chisel.client.render.ctm;
 
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.set.TLongSet;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -194,7 +193,6 @@ public class CTM {
 				connectionMap.put(loc.getDirForSide(side), true);
 			}
 		}
-
 	}
 
 	private void fillSubmaps(int idx) {

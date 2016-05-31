@@ -1,27 +1,27 @@
 package team.chisel.api.render;
 
-
 import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import team.chisel.Chisel;
+
+import com.google.common.collect.Maps;
 
 /**
  * List of IBlockRenderContext's
  */
 public class RenderContextList {
 
-    private Map<IBlockRenderType, IBlockRenderContext> contextMap;
+    private Map<IBlockRenderType, IBlockRenderContext> contextMap = Maps.newIdentityHashMap();
 
-    public RenderContextList(List<IBlockRenderType> types, IBlockAccess world, BlockPos pos){
-        contextMap = new IdentityHashMap<>();
-        for (IBlockRenderType type : types){
+    public RenderContextList() {}
+
+    public RenderContextList(List<IBlockRenderType> types, IBlockAccess world, BlockPos pos) {
+        for (IBlockRenderType type : types) {
             IBlockRenderContext ctx = type.getBlockRenderContext(world, pos);
             if (ctx != null) {
                 contextMap.put(type, ctx);
@@ -29,21 +29,12 @@ public class RenderContextList {
         }
     }
 
-    public IBlockRenderContext getRenderContext(IBlockRenderType type){
-        try {
-            return this.contextMap.get(type);
-        } catch (ClassCastException exception){
-            Chisel.debug("Contextmap had a bad type context pair");
-            throw exception;
-        }
+    public IBlockRenderContext getRenderContext(IBlockRenderType type) {
+        return this.contextMap.get(type);
     }
 
-    public boolean contains(IBlockRenderType type){
+    public boolean contains(IBlockRenderType type) {
         return getRenderContext(type) != null;
-    }
-
-    public RenderContextList(){
-
     }
 
     public TLongSet serialize() {

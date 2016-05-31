@@ -1,11 +1,7 @@
 package team.chisel.common.util;
 
-import static net.minecraft.util.EnumFacing.DOWN;
-import static net.minecraft.util.EnumFacing.EAST;
-import static net.minecraft.util.EnumFacing.NORTH;
-import static net.minecraft.util.EnumFacing.SOUTH;
-import static net.minecraft.util.EnumFacing.UP;
-import static net.minecraft.util.EnumFacing.WEST;
+import java.util.Arrays;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
@@ -13,6 +9,8 @@ import net.minecraft.util.EnumFacing.AxisDirection;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.client.render.ctm.CTM;
+
+import static net.minecraft.util.EnumFacing.*;
 
 /**
  * Think of this class as a "Two dimensional ForgeDirection, with diagonals".
@@ -90,8 +88,27 @@ public enum Dir {
         }
         return connection;
     }
+    
+    public Dir relativize(EnumFacing normal) {
+        /*
+        if (normal == NORMAL) {
+            return this;
+        } else if (normal == NORMAL.getOpposite()) {
+            return getDirFor(getNormalizedDirs(normal));
+        } else {
+            if (dirs.length == 1) {
+                if (normal.getAxis() == dirs[0].getAxis()) {
+                    return null;
+                } else {
+                    return this;
+                }
+            }
+        }
+        */
+        return getDirFor(getNormalizedDirs(normal));
+    }
 
-	private EnumFacing[] getNormalizedDirs(EnumFacing normal) {
+	public EnumFacing[] getNormalizedDirs(EnumFacing normal) {
 		if (normal == NORMAL) {
 			return dirs;
 		} else if (normal == NORMAL.getOpposite()) {
@@ -122,6 +139,19 @@ public enum Dir {
 			}
 			return ret;
 		}
+	}
+	
+	private Dir getDirFor(EnumFacing[] dirs) {
+	    if (dirs == this.dirs) { // Short circuit for identical return from getNormalizedDirs
+	        return this; 
+	    }
+	    
+	    for (Dir dir : VALUES) {
+	        if (Arrays.equals(dir.dirs, dirs)) {
+	            return dir;
+	        }
+	    }
+	    return null;
 	}
 
 	// God why
