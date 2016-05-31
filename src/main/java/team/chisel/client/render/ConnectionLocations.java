@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import team.chisel.Chisel;
 import team.chisel.client.render.ctm.CTM;
 import team.chisel.common.util.Dir;
 
@@ -169,11 +170,13 @@ public enum ConnectionLocations {
         for (ConnectionLocations loc : locs){
             data = data | loc.getMask();
         }
-        String s = Long.toBinaryString(data);
-        while (s.length() < 32) {
-            s = "0" + s;
+        if (Chisel.debug) {
+            String s = Long.toBinaryString(data);
+            while (s.length() < 32) {
+                s = "0" + s;
+            }
+            System.out.println(pos + ": " + s);
         }
-        System.out.println(pos + ": " + s);
         return data;
     }
 }
