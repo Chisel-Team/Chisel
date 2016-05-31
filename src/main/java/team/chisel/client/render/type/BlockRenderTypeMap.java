@@ -1,26 +1,27 @@
 package team.chisel.client.render.type;
 
+import lombok.RequiredArgsConstructor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
-import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.TextureInfo;
 import team.chisel.client.render.ctx.BlockRenderContextPosition;
-import team.chisel.client.render.texture.ChiselTextureV;
+import team.chisel.client.render.texture.ChiselTextureMap;
+import team.chisel.client.render.texture.ChiselTextureMap.MapType;
 
-/**
- * Block Render type for V variations
- */
-@BlockRenderType("V")
-public class BlockRenderTypeV implements IBlockRenderType {
 
+@RequiredArgsConstructor
+public class BlockRenderTypeMap implements IBlockRenderType {
+
+    private final MapType type;
+    
     @Override
-    public IChiselTexture<BlockRenderTypeV> makeTexture(TextureInfo info){
-        return new ChiselTextureV(this, info);
+    public ChiselTextureMap makeTexture(TextureInfo info) {
+        return new ChiselTextureMap(this, info, type);
     }
-
+    
     @Override
     public IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
         return new BlockRenderContextPosition(pos);
@@ -30,11 +31,10 @@ public class BlockRenderTypeV implements IBlockRenderType {
     public IBlockRenderContext getContextFromData(long data) {
         return new BlockRenderContextPosition(BlockPos.fromLong(data));
     }
-
-//    @BlockRenderType
-//    public static final BlockRenderTypeV V4 = new BlockRenderTypeV(2, 2);
-//    @BlockRenderType
-//    public static final BlockRenderTypeV V9 = new BlockRenderTypeV(3, 3);
-//    @BlockRenderType
-//    public static final BlockRenderTypeV V16 = new BlockRenderTypeV(4, 4);
+    
+    @BlockRenderType("R")
+    public static final BlockRenderTypeMap R = new BlockRenderTypeMap(MapType.RANDOM);
+    
+    @BlockRenderType("V")
+    public static final BlockRenderTypeMap V = new BlockRenderTypeMap(MapType.PATTERNED);
 }

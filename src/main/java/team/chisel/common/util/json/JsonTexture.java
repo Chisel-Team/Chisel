@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
+
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IBlockRenderType;
@@ -85,6 +86,11 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
         else {
             textureInfo = new TextureInfo(callbacks, Optional.empty(), layerObj, fullbright);
         }
-        return type.makeTexture(textureInfo);
+
+        try {
+            return type.makeTexture(textureInfo);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Failed loading texture " + loc, e);
+        }
     }
 }
