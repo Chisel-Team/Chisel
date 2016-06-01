@@ -29,6 +29,9 @@ public class ChiselTextureCTMV extends AbstractChiselTexture<BlockRenderTypeCTMV
     @Override
     public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
         if (context == null) {
+            if (quad.getFace() != null && quad.getFace().getAxis().isVertical()) {
+                return Lists.newArrayList(from(quad).transformUVs(sprites[0].getSprite()).setFullbright(fullbright).rebake());
+            }
             return Lists.newArrayList(from(quad).transformUVs(sprites[1].getSprite(), TOP_LEFT).setFullbright(fullbright).rebake());
         }
         return Lists.newArrayList(getQuad(quad, ((CTMVBlockRenderContext) context).getData()));

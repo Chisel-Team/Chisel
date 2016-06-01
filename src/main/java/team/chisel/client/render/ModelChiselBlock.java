@@ -133,8 +133,6 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         return ItemCameraTransforms.DEFAULT;
     }
 
-    // TODO implement model caching, returning a new model every time is a HUGE waste of memory and CPU
-
     private ModelChiselBlock createModel(IBlockState state, ModelChisel model, RenderContextList ctx) {
         List<BakedQuad> faceQuads = Lists.newArrayList();
         List<BakedQuad> generalQuads = Lists.newArrayList();
