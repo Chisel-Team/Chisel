@@ -68,9 +68,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 
     private ModelChisel model;
     private Overrides overrides = new Overrides();
-    
-    private TLongSet modelstate;
-    
+        
     private static Cache<Pair<IBlockState, TLongSet>, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(500).<Pair<IBlockState, TLongSet>, ModelChiselBlock>build();
     
     public ModelChiselBlock(List<BakedQuad> face, List<BakedQuad> general, ModelChisel model) {
@@ -92,11 +90,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
             IBlockState clean = ext.getClean();
             RenderContextList ctxList = ext.getValue(BlockCarvable.CTX_LIST);
             TLongSet serialized = ctxList.serialize();
-            baked = modelcache.get(Pair.of(clean, serialized), () -> {
-                ModelChiselBlock m = createModel(ext, model, ctxList);
-                m.modelstate = serialized;
-                return m;
-            });
+            baked = modelcache.get(Pair.of(clean, serialized), () -> createModel(ext, model, ctxList));
         } else {
             baked = this;
         }

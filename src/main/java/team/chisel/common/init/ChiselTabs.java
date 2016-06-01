@@ -12,7 +12,7 @@ import team.chisel.Chisel;
  */
 public class ChiselTabs {
 
-    private static class CustomCreativeTab extends CreativeTabs {
+    public static class CustomCreativeTab extends CreativeTabs {
 
         private ItemStack stack;
 

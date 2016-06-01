@@ -94,7 +94,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     @SideOnly(Side.CLIENT)
     @Override
     public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
-        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial(stateIn) == Material.AIR) {
+        if (stateIn.getBlock() == null || stateIn.getMaterial() == Material.AIR) {
             return stateIn;
         }
         IExtendedBlockState state = (IExtendedBlockState) stateIn;

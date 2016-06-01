@@ -33,15 +33,14 @@ public class ClientUtil {
 
     public static void addHitEffects(World world, BlockPos pos, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);
-        Block block = state.getBlock();
-        state = block.getActualState(state, world, pos);
+        state = state.getActualState(world, pos);
 
-        if (block.getRenderType(state) != EnumBlockRenderType.INVISIBLE) {
+        if (state.getRenderType() != EnumBlockRenderType.INVISIBLE) {
             int i = pos.getX();
             int j = pos.getY();
             int k = pos.getZ();
             float f = 0.1F;
-            AxisAlignedBB bb = block.getBoundingBox(state, world, pos);
+            AxisAlignedBB bb = state.getBoundingBox(world, pos);
 
             double d0 = (double) i + rand.nextDouble() * (bb.maxX - bb.minX - (double) (f * 2.0F)) + (double) f + bb.minX;
             double d1 = (double) j + rand.nextDouble() * (bb.maxY - bb.minY - (double) (f * 2.0F)) + (double) f + bb.minY;
@@ -80,7 +79,7 @@ public class ClientUtil {
 
     public static void addDestroyEffects(World world, BlockPos pos, IBlockState state) {
 
-        state = state.getBlock().getActualState(state, world, pos);
+        state = state.getActualState(world, pos);
         int i = 4;
 
         for (int j = 0; j < i; ++j) {

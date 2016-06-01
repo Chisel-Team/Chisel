@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /**
  * Recipe for Chisel Blocks
@@ -95,10 +94,10 @@ public class ChiselRecipe implements IRecipe {
 
         public boolean matches(ItemStack stack){
             if (this.isBlock){
-                return Item.getItemFromBlock(GameRegistry.findBlock(domain, value)) == stack.getItem();
+                return Item.getItemFromBlock(Block.REGISTRY.getObject(new ResourceLocation(domain, value))) == stack.getItem();
             }
             else {
-                return GameRegistry.findItem(domain, value) == stack.getItem();
+                return Item.REGISTRY.getObject(new ResourceLocation(domain, value)) == stack.getItem();
             }
         }
     }

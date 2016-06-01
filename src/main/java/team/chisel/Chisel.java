@@ -55,8 +55,8 @@ public class Chisel implements Reference {
         itemChiselIron = new ItemChisel(ChiselType.IRON);
         itemChiselDiamond = new ItemChisel(ChiselType.DIAMOND);
         
-        GameRegistry.registerItem(itemChiselIron);
-        GameRegistry.registerItem(itemChiselDiamond);
+        GameRegistry.register(itemChiselIron);
+        GameRegistry.register(itemChiselDiamond);
         
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));

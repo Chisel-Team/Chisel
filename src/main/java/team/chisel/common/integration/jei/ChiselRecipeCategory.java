@@ -8,9 +8,9 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 
 public class ChiselRecipeCategory implements IRecipeCategory {
 
@@ -29,7 +29,7 @@ public class ChiselRecipeCategory implements IRecipeCategory {
     @Nonnull
     @Override
     public String getTitle() {
-        return I18n.translateToLocal("chisel.jei.title");
+        return I18n.format("chisel.jei.title");
     }
 
     @Nonnull

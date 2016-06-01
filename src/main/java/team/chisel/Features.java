@@ -789,9 +789,6 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            IBlockState stainedGlassPane = Blocks.STAINED_GLASS_PANE.getDefaultState();
-            IProperty<EnumDyeColor> prop = BlockStainedGlassPane.COLOR;
-
             for(int c = 0; c < dyeColors.length; c++)
             {
                 //Carving.chisel.addVariation("glasspanedyed"+dyeColors[c], stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);

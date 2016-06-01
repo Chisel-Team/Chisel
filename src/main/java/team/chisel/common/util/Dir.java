@@ -9,7 +9,6 @@ import net.minecraft.util.EnumFacing.AxisDirection;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.client.render.ctm.CTM;
-
 import static net.minecraft.util.EnumFacing.*;
 
 /**
@@ -105,7 +104,7 @@ public enum Dir {
             }
         }
         */
-        return getDirFor(getNormalizedDirs(normal));
+        throw new UnsupportedOperationException("Yell at tterrag to finish deserialization");
     }
 
 	public EnumFacing[] getNormalizedDirs(EnumFacing normal) {
@@ -141,7 +140,7 @@ public enum Dir {
 		}
 	}
 	
-	private Dir getDirFor(EnumFacing[] dirs) {
+	public Dir getDirFor(EnumFacing[] dirs) {
 	    if (dirs == this.dirs) { // Short circuit for identical return from getNormalizedDirs
 	        return this; 
 	    }

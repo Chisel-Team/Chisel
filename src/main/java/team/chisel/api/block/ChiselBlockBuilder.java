@@ -89,7 +89,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      *            registration.
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "deprecation" })
     public T[] build(Consumer<? super T> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");

@@ -86,7 +86,7 @@ public enum ConnectionLocations {
     }
 
     public Dir getDirForSide(EnumFacing facing){
-        return dir.relativize(facing);
+        return dir == null ? null : dir.relativize(facing);
     }
 
     public EnumFacing clipOrDestroy(EnumFacing direction) {

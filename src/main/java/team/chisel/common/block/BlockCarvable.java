@@ -164,7 +164,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @SideOnly(Side.CLIENT)
     @Override
     public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
-        if (stateIn.getBlock() == null || stateIn.getBlock().getMaterial(stateIn) == Material.AIR) {
+        if (stateIn.getBlock() == null || stateIn.getMaterial() == Material.AIR) {
             return stateIn;
         }
         IExtendedBlockState state = (IExtendedBlockState) stateIn;
@@ -221,7 +221,7 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public boolean isFullBlock(IBlockState state) {
-        return isOpaqueCube(state);
+        return state.isOpaqueCube();
     }
 
     @Override
