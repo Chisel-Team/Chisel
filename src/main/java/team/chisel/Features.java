@@ -2054,11 +2054,12 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.valentines, 4, 0), "***", "*X*", "***",
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.valentines, 4), "***", "*X*", "***",
                     '*', "stone",
                     'X', new ItemStack(Items.DYE, 1, 9)));
 
-            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.valentines, 32, 0), "***", "*X*", "***",
+            // Companion Cube, woo!
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.valentines, 32, 9), "***", "*X*", "***",
                     '*', "stone",
                     'X', new ItemStack(Items.SKULL, 1, OreDictionary.WILDCARD_VALUE)));
         }
