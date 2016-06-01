@@ -8,11 +8,17 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import team.chisel.api.block.BlockCreator;
 import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
@@ -24,6 +30,7 @@ import team.chisel.common.block.BlockCarvablePane;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
+import team.chisel.common.init.ChiselBlocks;
 
 public enum Features {
 
@@ -73,21 +80,6 @@ public enum Features {
         }
     },
 
-//    ANIMATED {
-//
-//        @Override
-//        void addBlocks(ChiselBlockFactory factory) {
-//        }
-//    },
-//
-//    ANIMATIONS {
-//
-//        @Override
-//        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newBlock(Material.ROCK, "animations", provider).newVariation("archetype2").next("hades").next("hadesX32").next("shroud").next("strobe").build();
-//        }
-//    },
-
     ANTIBLOCK {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -110,6 +102,12 @@ public enum Features {
                     .next("white")
                     .build();
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.antiblock, 8, 15), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone"));
+        }
     },
 
     ARCANE {
@@ -131,22 +129,6 @@ public enum Features {
                     .build();
         }
     },
-
-//    AUTO_CHISEL {
-//
-//        @Override
-//        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newBlock(Material.ROCK, "autoChisel", provider).newVariation("autoChisel").next("autoChisel16").next("autoChiselOld").next("autoChisel_automation").next("autoChisel_speed").next("autoChisel_stack").build();
-//        }
-//    },
-
-    /*BIRDSTONE {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "birdstone", provider).newVariation("birdstone-darkpanel").next("birdstone-dent").next("birdstone-emboss").next("birdstone-fourtile").next("birdstone-french-creep").next("birdstone-french").next("birdstone-french2").next("birdstone-marker").next("birdstone-ornate1").next("birdstone-ornate2").next("birdstone-rough").next("birdstone-smallbrick").next("birdstone-smallbroken").next("birdstone-smalltile").next("birdstone-smooth-creep").next("birdstone-smooth").build();
-        }
-    },*/
 
     BLOOD_MAGIC {
         @Override
@@ -192,7 +174,7 @@ public enum Features {
                     .next("aged")
                     .next("yellow")
                     .build();
-        }
+        } // TODO change names from brickCustom to bricks, after retexturing
     },
 
     BRONZE {
@@ -232,7 +214,7 @@ public enum Features {
                     .next("orange")
                     .next("white")
                     .build();
-        }
+        } // TODO have these chiseled from individual colored wools and carpets
     },
 
     /*CERTUS {
@@ -258,6 +240,12 @@ public enum Features {
                     .next("vertical")
                     .next("grid")
                     .build();
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.cloud, 32, 0), " S ", "S S", " S ", 'S', new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE)));
         }
     },
 
@@ -325,30 +313,6 @@ public enum Features {
         }
     },
 
-    /*COLORED_SAND {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "coloredSand", provider)
-                    .newVariation("black")
-                    .next("blue")
-                    .next("brown")
-                    .next("cyan")
-                    .next("gray")
-                    .next("green")
-                    .next("lightblue")
-                    .next("lightgray")
-                    .next("lime")
-                    .next("magenta")
-                    .next("orange")
-                    .next("pink")
-                    .next("purple")
-                    .next("red")
-                    .next("white")
-                    .next("yellow")
-                    .build();
-        }
-    },// Removed in 1.7 */
-
     CONCRETE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -365,6 +329,11 @@ public enum Features {
                     .next("weathered-block-half")
                     .next("asphalt")
                     .build();
+        }
+
+        @Override
+        void addRecipes() {
+            FurnaceRecipes.instance().addSmelting(new ItemStack(Blocks.GRAVEL).getItem(), new ItemStack(ChiselBlocks.concrete), 0.1F);
         }
     },
 
@@ -406,20 +375,6 @@ public enum Features {
                     .build();
         }
     }, // Pending retexture */
-
-    /*DIAGONAL {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "diagonal", provider)
-                    .setParentFolder("prismarine/diagonal")
-                    .newVariation("prismarineDiagonalAnim-0")
-                    .next("prismarineDiagonalAnim-1")
-                    .next("prismarineDiagonalAnim-2")
-                    .next("prismarineDiagonalAnim-3")
-                    .next("prismarineDiagonalAnim")
-                    .build();
-        }
-    },// This shouldn't be here... I think*/
 
     DIAMOND {
         @Override
@@ -556,22 +511,6 @@ public enum Features {
         }
     },
 
-    /*ELEMENTIUM {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "elementium", provider)
-                    .setParentFolder("botania/elementium")
-                    .newVariation("adv")
-                    .next("bolted")
-                    .next("caution")
-                    .next("crate")
-                    .next("egregious")
-                    .next("elementiumEye")
-                    .next("thermal")
-                    .build();
-        }
-    }, // */
-
     EMERALD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -631,6 +570,12 @@ public enum Features {
                     .next("resonantBricks")
                     .build();
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.ender_pearl_block), "SS", "SS", 'S', new ItemStack(Items.ENDER_PEARL));
+        }
     },
 
     ENDSTONE {
@@ -685,6 +630,14 @@ public enum Features {
                     .next("wireframeblue")
                     .build();
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.factory, 32, 0), "SXS", "X X", "SXS",
+                    'X', new ItemStack(Blocks.STONE, 1),
+                    'S', new ItemStack(Items.IRON_INGOT, 1));
+        }
     },
 
     FANTASY {
@@ -708,6 +661,12 @@ public enum Features {
                     .next("bricks-chaotic")
                     .next("bricks-wear")
                     .build();
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.fantasy, 16), "SSS", "SXS", "SSS", 'S', new ItemStack(Blocks.STONE), 'X', new ItemStack(Items.DYE, 1, 13));
         }
     },
 
@@ -747,6 +706,12 @@ public enum Features {
                     .next("controllerPurple")
                     .next("uberWavy")
                     .build();
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.futura, 8, 0), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustRedstone"));
         }
     },
 
@@ -923,6 +888,11 @@ public enum Features {
                     .next("tiles")
                     .build();
         }
+
+        @Override
+        void addRecipes() {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.grimstone, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.COAL, 1));
+        }
     },
 
     HEX_PLATING {
@@ -954,6 +924,12 @@ public enum Features {
                     .next("plate")
                     .next("plate-rough")
                     .build();
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.holystone, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.GOLD_NUGGET, 1));
         }
     },
 
@@ -1095,6 +1071,12 @@ public enum Features {
                     .next("infocon")
                     .build();
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.laboratory, 8), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.QUARTZ, 1));
+        }
     },
 
     LAPIS {
@@ -1128,6 +1110,12 @@ public enum Features {
                     .next("panel-ornate")
                     .next("dark")
                     .build();
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.lavastone, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.LAVA_BUCKET, 1));
         }
     },
 
@@ -1220,7 +1208,8 @@ public enum Features {
     LINE_MARKING {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "line-marking", provider)
+            factory.newBlock(Material.ROCK, "line_marking", provider)
+                    .setParentFolder("line-marking")
                     .newVariation("double-white-center")
                     .next("double-white-long")
                     .next("double-yellow-center")
@@ -1230,6 +1219,12 @@ public enum Features {
                     .next("yellow-center")
                     .next("yellow-long")
                     .build();
+        }
+
+        @Override
+        void addRecipes()
+        {
+
         }
     },
 
@@ -1291,27 +1286,6 @@ public enum Features {
                     .next("livingwoodLogTop")
                     .next("livingwoodPileSide")
                     .next("livingwoodPileTop")
-                    .build();
-        }
-    },
-
-    MANASTEEL {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "manasteel", provider)
-                    .newVariation("adv")
-                    .next("bolted")
-                    .next("card")
-                    .next("caution")
-                    .next("crate")
-                    .next("egregious")
-                    .next("elementiumEye-0-0")
-                    .next("elementiumEye-0-1")
-                    .next("elementiumEye-1-0")
-                    .next("elementiumEye-1-1")
-                    .next("elementiumEye-2-0")
-                    .next("elementiumEye-2-1")
-                    .next("thermal")
                     .build();
         }
     },*/
@@ -1387,165 +1361,6 @@ public enum Features {
         }
     },
 
-    /*MARBLEPILLARSLAB { //TODO: make a carpenters' blocks-esque system for this
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "marblepillarslab", provider)
-                    .newVariation("carved")
-                    .setTextureLocation("marblepillarslab/carved-side")
-                    .setTextureLocation("marblepillarslab/carved-top", Axis.Y)
-                    .next("convex")
-                    .setTextureLocation("marblepillarslab/convex-side")
-                    .setTextureLocation("marblepillarslab/convex-top", Axis.Y)
-                    .next("default")
-                    .setTextureLocation("marblepillarslab/default-side")
-                    .setTextureLocation("marblepillarslab/default-top", Axis.Y)
-                    .next("greekdecor")
-                    .setTextureLocation("marblepillarslab/greekdecor-side")
-                    .setTextureLocation("marblepillarslab/greekdecor-top", Axis.Y)
-                    .next("greekgreek")
-                    .setTextureLocation("marblepillarslab/greekgreek-side")
-                    .setTextureLocation("marblepillarslab/greekgreek-top", Axis.Y)
-                    .next("greekplain")
-                    .setTextureLocation("marblepillarslab/greekplain-side")
-                    .setTextureLocation("marblepillarslab/greekplain-top", Axis.Y)
-                    .next("ornamental")
-                    .setTextureLocation("marblepillarslab/ornamental-side")
-                    .setTextureLocation("marblepillarslab/ornamental-top", Axis.Y)
-                    .next("pillar")
-                    .setTextureLocation("marblepillarslab/pillar-side")
-                    .setTextureLocation("marblepillarslab/pillar-top", Axis.Y)
-                    .next("plaindecor")
-                    .setTextureLocation("marblepillarslab/plaindecor-side")
-                    .setTextureLocation("marblepillarslab/plaindecor-top", Axis.Y)
-                    .next("plaingreek")
-                    .setTextureLocation("marblepillarslab/plaingreek-side")
-                    .setTextureLocation("marblepillarslab/plaingreek-top", Axis.Y)
-                    .next("plainplain")
-                    .setTextureLocation("marblepillarslab/plainplain-side")
-                    .setTextureLocation("marblepillarslab/plainplain-top", Axis.Y)
-                    .next("rough")
-                    .setTextureLocation("marblepillarslab/rough-side")
-                    .setTextureLocation("marblepillarslab/rough-top", Axis.Y)
-                    .next("simple")
-                    .setTextureLocation("marblepillarslab/simple-side")
-                    .setTextureLocation("marblepillarslab/simple-top", Axis.Y)
-                    .next("widedecor")
-                    .setTextureLocation("marblepillarslab/widedecor-side")
-                    .setTextureLocation("marblepillarslab/widedecor-top", Axis.Y)
-                    .next("widegreek")
-                    .setTextureLocation("marblepillarslab/widegreek-side")
-                    .setTextureLocation("marblepillarslab/widegreek-top", Axis.Y)
-                    .next("wideplain")
-                    .setTextureLocation("marblepillarslab/wideplain-side")
-                    .setTextureLocation("marblepillarslab/wideplain-top", Axis.Y)
-                    .build();
-        }
-    },
-
-    MARBLEPILLARSLABOLD {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "marblepillarslabold", provider)
-                    .newVariation("a1-stoneornamental-marblegreek")
-                    .setTextureLocation("marblepillarslabold/a1-stoneornamental-marblegreek-side")
-                    .setTextureLocation("marblepillarslabold/a1-stoneornamental-marblegreek-top", Axis.Y)
-                    .next("a1-stonepillar-greek")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greek-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greek-top", Axis.Y)
-                    .next("a1-stonepillar-greekbottomgreek")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greekbottomgreek-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greekbottomgreek-top", Axis.Y)
-                    .next("a1-stonepillar-greekbottomplain")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greekbottomplain-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greekbottomplain-top", Axis.Y)
-                    .next("a1-stonepillar-greektopgreek")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greektopgreek-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greektopgreek-top", Axis.Y)
-                    .next("a1-stonepillar-greektopplain")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greektopplain-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-greektopplain-top", Axis.Y)
-                    .next("a1-stonepillar-plain")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plain-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plain-top", Axis.Y)
-                    .next("a1-stonepillar-plainbottomgreek")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plainbottomgreek-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plainbottomgreek-top", Axis.Y)
-                    .next("a1-stonepillar-plainbottomplain")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plainbottomplain-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plainbottomplain-top", Axis.Y)
-                    .next("a1-stonepillar-plaintopgreek")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plaintopgreek-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plaintopgreek-top", Axis.Y)
-                    .next("a1-stonepillar-plaintopplain")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plaintopplain-side")
-                    .setTextureLocation("marblepillarslabold/a1-stonepillar-plaintopplain-top", Axis.Y)
-                    .next("base")
-                    .setTextureLocation("marblepillarslabold/base-side")
-                    .setTextureLocation("marblepillarslabold/base-top", Axis.Y)
-                    .next("capstone")
-                    .setTextureLocation("marblepillarslabold/capstone-side")
-                    .setTextureLocation("marblepillarslabold/capstone-top", Axis.Y)
-                    .next("column")
-                    .setTextureLocation("marblepillarslabold/column-side")
-                    .setTextureLocation("marblepillarslabold/column-top", Axis.Y)
-                    .next("pillar-carved")
-                    .setTextureLocation("marblepillarslabold/pillar-carved-side")
-                    .setTextureLocation("marblepillarslabold/pillar-carved-top", Axis.Y)
-                    .next("small")
-                    .setTextureLocation("marblepillarslabold/small-side")
-                    .setTextureLocation("marblepillarslabold/small-top", Axis.Y)
-                    .build();
-        }
-    },
-
-    MARBLESLAB {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "marbleslab", provider)
-                    .newVariation("a1-stoneornamental-marblebrick")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marblebrick-side")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marblebrick-top", Axis.Y)
-                    .next("a1-stoneornamental-marblecarved")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marblecarved-side")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marblecarved-top", Axis.Y)
-                    .next("a1-stoneornamental-marblecarvedradial")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marblecarvedradial-side")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marblecarvedradial-top", Axis.Y)
-                    .next("a1-stoneornamental-marbleclassicpanel")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marbleclassicpanel-side")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marbleclassicpanel-top", Axis.Y)
-                    .next("a1-stoneornamental-marbleornate")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marbleornate-side")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marbleornate-top", Axis.Y)
-                    .next("a1-stoneornamental-marblepanel")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marblepanel-side")
-                    .setTextureLocation("marbleslab/a1-stoneornamental-marblepanel-top", Axis.Y)
-                    .next("marble-arranged-bricks")
-                    .next("marble-blocks")
-                    .next("marble-bricks")
-                    .next("marble-fancy-bricks")
-                    .setTextureLocation("marbleslab/marble-fancy-bricks-side")
-                    .setTextureLocation("marbleslab/marble-fancy-bricks-top", Axis.Y)
-                    .next("terrain-pistonback-marble")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marble-side")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marble-top", Axis.Y)
-                    .next("terrain-pistonback-marblecreeperdark")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marblecreeperdark-side")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marblecreeperdark-top", Axis.Y)
-                    .next("terrain-pistonback-marblecreeperlight")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marblecreeperlight-side")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marblecreeperlight-top", Axis.Y)
-                    .next("terrain-pistonback-marbledent-small")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marbledent-small-side")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marbledent-small-top", Axis.Y)
-                    .next("terrain-pistonback-marbledent")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marbledent-side")
-                    .setTextureLocation("marbleslab/terrain-pistonback-marbledent-top", Axis.Y)
-                    .build();
-        }
-    },//*/
-
     /*MAZESTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -1576,6 +1391,12 @@ public enum Features {
                     .next("rebelCautionWhite")
                     .next("rebelPlate")
                     .build();
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.military, 32), "xyx", "yzy", "xyx", 'x', "stone", 'y', Items.IRON_INGOT, 'z', Items.GOLD_NUGGET));
         }
     },
 
@@ -1682,15 +1503,13 @@ public enum Features {
                     .next("door")
                     .build();
         }
-    },
 
-//    PARTICLES {
-//
-//        @Override
-//        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newBlock(Material.ROCK, "particles", provider).setParentFolder("grimstone").newVariation("star").build();
-//        }
-//    },
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.paper, 32), "ppp", "psp", "ppp", 'p', Items.PAPER, 's', "stickWood"));
+        }
+    },
 
     PLANKS {
         private final String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
@@ -1764,6 +1583,12 @@ public enum Features {
                     .next("presentChest15")
                     .build();
         }
+
+        @Override
+        void addRecipes()
+        {
+            // TODO TEs. Or maybe remove wholesale
+        }
     },
 
     PRISMARINE {
@@ -1828,7 +1653,7 @@ public enum Features {
                     .next("pumpkin_face_17_on")
                     .build();
         }
-    },
+    }, // TODO Rotations
 
     QUARTZ {
         @Override
@@ -1875,53 +1700,6 @@ public enum Features {
                     .build();
         }
     },
-
-    /*REDSTONE_LAMP {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("redstoneLamp", Blocks.redstone_lamp.getDefaultState(), -1);
-            factory.newBlock(Material.ROCK, "redstoneLamp", provider)
-                    .newVariation("redstone_lamp_off")
-                    .next("redstone_lamp_on")
-                    .next("square-off")
-                    .next("square-on")
-                    .build();
-        }
-    },*/
-
-    /*ROOFING {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "roofing", provider)
-                    .newVariation("shingles")
-                    .build();
-        }
-    },*/
-
-    /*SANDSNAKE {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "sandsnake", provider)
-                    .setGroup("sandstone")
-                    .setParentFolder("snakestone/sandsnake")
-                    .newVariation("bot-tip")
-                    .next("bot")
-                    .next("crosssection")
-                    .next("face-left")
-                    .next("face-right")
-                    .next("face")
-                    .next("left-down")
-                    .next("left-tip")
-                    .next("left-up")
-                    .next("right-down")
-                    .next("right-tip")
-                    .next("right-up")
-                    .next("side")
-                    .next("top-tip")
-                    .next("top")
-                    .build();
-        }
-    },*/
 
     SANDSTONE {
         @Override
@@ -1980,20 +1758,6 @@ public enum Features {
         }
     },
 
-    /*SHINGLES {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "shingles", provider)
-                    .newVariation("Shingle1")
-                    .next("Shingle2")
-                    .next("Shingle3")
-                    .next("Shingle4")
-                    .next("Shingle5")
-                    .next("Shingle6")
-                    .build();
-        }
-    },*/
-
     SILVER {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -2009,30 +1773,6 @@ public enum Features {
                     .build();
         }
     },
-
-    /*SNAKE {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "snake", provider)
-                    .setParentFolder("snakestone/snake")
-                    .newVariation("bot-tip")
-                    .next("bot")
-                    .next("crosssection")
-                    .next("face-left")
-                    .next("face-right")
-                    .next("face")
-                    .next("left-down")
-                    .next("left-tip")
-                    .next("left-up")
-                    .next("right-down")
-                    .next("right-tip")
-                    .next("right-up")
-                    .next("side")
-                    .next("top-tip")
-                    .next("top")
-                    .build();
-        }
-    },*/
 
     STEEL {
         @Override
@@ -2062,7 +1802,7 @@ public enum Features {
             Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CHISELED), -3);
 
             Carving.chisel.addVariation("stonebrick", Blocks.STONE.getDefaultState(), -2);
-            // TODO Carving.chisel.addVariation("stonebrick", Blocks.double_stone_slab.getDefaultState().withProperty(BlockDoubleStoneSlab.VARIANT, BlockDoubleStoneSlab.EnumType.STONE), -1);
+            // Carving.chisel.addVariation("stonebrick", Blocks.double_stone_slab.getDefaultState().withProperty(BlockDoubleStoneSlab.VARIANT, BlockDoubleStoneSlab.EnumType.STONE), -1);
 
             factory.newBlock(Material.ROCK, "stonebrick", provider)
                     .newVariation("masonry2Blue")
@@ -2096,12 +1836,13 @@ public enum Features {
                     .next("tallowblock_top")
                     .build();
         }
-    },*/
+    }, Thaumcraft */
 
     TECHNICAL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.IRON, "technical", provider)
+                    .setGroup("factory")
                     .newVariation("scaffold")
                     .next("cautiontape")
                     .next("industrialrelic")
@@ -2126,7 +1867,7 @@ public enum Features {
                     .build();
 
             factory.newBlock(Material.IRON, "technicalNew", provider)
-                    .setGroup("technical")
+                    .setGroup("factory")
                     .setParentFolder("technical/new")
                     .newVariation("weatheredGreenPanels")
                     .next("weatheredOrangePanels")
@@ -2184,15 +1925,15 @@ public enum Features {
                     .next("stand-mosaic")
                     .build();
         }
-    },
-
-    /*TERRASTEEL {
 
         @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "terrasteel", provider).newVariation("adv").next("bolted").next("card").next("caution").next("crate").next("egregious").next("elementiumEye-0-0").next("elementiumEye-0-1").next("elementiumEye-1-0").next("elementiumEye-1-1").next("elementiumEye-2-0").next("elementiumEye-2-1").next("thermal").build();
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.temple, 8), "***", "*X*", "***",
+                    '*', new ItemStack(Blocks.STONE, 1),
+                    'X', new ItemStack(Items.DYE, 1, 6)));
         }
-    },*/
+    },
 
     THAUMIUM {
         @Override
@@ -2210,54 +1951,6 @@ public enum Features {
                     .build();
         }
     },
-
-    /*THIN_WOOD_ACACIA {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {Which
-            factory.newBlock(Material.ROCK, "thinWood-acacia", provider).newVariation("chaotic-spaced").next("chaotic").next("large-spaced").setTextureLocation("thinWood-acacia/large-spaced-side").setTextureLocation("thinWood-acacia/large-spaced-top", Axis.Y).next("large-spaced").next("large").next("normal-spaced").setTextureLocation("thinWood-acacia/normal-spaced-side").setTextureLocation("thinWood-acacia/normal-spaced-top", Axis.Y).next("normal-spaced").next("normal").setTextureLocation("thinWood-acacia/normal-side").setTextureLocation("thinWood-acacia/normal-top", Axis.Y).next("normal").build();
-        }
-    },
-
-    THIN_WOOD_BIRCH {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "thinWood-birch", provider).newVariation("chaotic-spaced").next("chaotic").next("large-spaced").next("large").next("normal-spaced").next("normal").build();
-        }
-    },
-
-    THIN_WOOD_DARK {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "thinWood-dark", provider).newVariation("chaotic-spaced").next("chaotic").next("large-spaced").next("large").next("normal-spaced").next("normal").build();
-        }
-    },
-
-    THIN_WOOD_JUNGLE {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "thinWood-jungle", provider).newVariation("chaotic-spaced").next("chaotic").next("large-spaced").next("large").next("normal-spaced").next("normal").build();
-        }
-    },
-
-    THIN_WOOD_OAK {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "thinWood-oak", provider).newVariation("chaotic-spaced").next("chaotic").next("large-spaced").next("large").next("normal-spaced").next("normal").build();
-        }
-    },
-
-    THIN_WOOD_SPRUCE {
-
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "thinWood-spruce", provider).newVariation("chaotic-spaced").next("chaotic").next("large-spaced").next("large").next("normal-spaced").next("normal").build();
-        }
-    },*/
 
     TIN {
         @Override
@@ -2290,7 +1983,7 @@ public enum Features {
                     .next("torch9")
                     .next("torch10")
                     .build();
-        }
+        } // TODO Torch Logic (Walls and such)
     },
 
     TYRIAN {
@@ -2314,6 +2007,14 @@ public enum Features {
                     .next("opening")
                     .next("plate")
                     .build();
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.factory, 32, 0), "SXS", "X X", "SXS",
+                    'S', new ItemStack(Blocks.STONE, 1),
+                    'X', new ItemStack(Items.IRON_INGOT, 1));
         }
     },
 
@@ -2349,6 +2050,19 @@ public enum Features {
                     .next("companion")
                     .build();
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.valentines, 4), "***", "*X*", "***",
+                    '*', "stone",
+                    'X', new ItemStack(Items.DYE, 1, 9)));
+
+            // Companion Cube, woo!
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.valentines, 32, 9), "***", "*X*", "***",
+                    '*', "stone",
+                    'X', new ItemStack(Items.SKULL, 1, OreDictionary.WILDCARD_VALUE)));
+        }
     },
 
     VOIDSTONE {
@@ -2366,6 +2080,7 @@ public enum Features {
                     .build();
 
             factory.newBlock(Material.ROCK, "energizedVoidstone", provider)
+                    .setGroup("voidstone")
                     .setParentFolder("voidstone/animated")
                     .newVariation("raw")
                     .next("quarters")
@@ -2398,13 +2113,25 @@ public enum Features {
                     //.next("white")
                     .build();
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.voidstone, 8, 0), "EOE", "OEO", "EOE",
+                    'E', new ItemStack(Items.ENDER_EYE),
+                    'O', new ItemStack(Blocks.OBSIDIAN));
+
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.voidstone, 16, 0), " P ", "PEP", " P ",
+                    'E', new ItemStack(Items.ENDER_PEARL),
+                    'P', new ItemStack(Blocks.PURPUR_BLOCK));
+        }
     },
 
     WARNING {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.ROCK, "warningSign", provider)
-                    .setParentFolder("warning")
+                    .setParentFolder("warningSign")
                     .newVariation("rad")
                     .next("bio")
                     .next("fire")
@@ -2423,6 +2150,14 @@ public enum Features {
                     .next("illuminati")
                     .build();
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.warningSign, 4, 0), "xxx", "xyx", "xxx",
+                    'x', "stone",
+                    'y', new ItemStack(Items.SIGN)));
+        }
     },
 
     WATERSTONE {
@@ -2439,31 +2174,15 @@ public enum Features {
                     .next("dark")
                     .build();
         }
-    },
 
-    /*WOOLEN_CLAY {
         @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "woolenClay", provider)
-                    .newVariation("black")
-                    .next("blue")
-                    .next("brown")
-                    .next("cyan")
-                    .next("gray")
-                    .next("green")
-                    .next("lightblue")
-                    .next("lightgray")
-                    .next("lime")
-                    .next("magenta")
-                    .next("orange")
-                    .next("pink")
-                    .next("purple")
-                    .next("red")
-                    .next("white")
-                    .next("yellow")
-                    .build();
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.waterstone, 8, 0), "***", "*X*", "***",
+                    '*', new ItemStack(Blocks.STONE, 1),
+                    'X', new ItemStack(Items.WATER_BUCKET, 1));
         }
-    },*/;
+    };
 
     private static final String[] dyeColors =
             {
