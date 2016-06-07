@@ -41,7 +41,7 @@ public class JsonHelper {
         }
         if (cachedException != null && cachedException.getCause() instanceof FileNotFoundException) {
             objectCache.put(loc, gson.fromJson(String.format(NORMAL_FACE, loc.getResourcePath().substring(loc.getResourcePath().lastIndexOf('/')).replace(".cf", ".ctx")), JsonObject.class));
-            Chisel.logger.warn("Substituting default face json for missing file " + loc);
+            Chisel.debug("Substituting default face json for missing file " + loc);
             clearException();
             return createFace(loc);
         }
@@ -58,7 +58,7 @@ public class JsonHelper {
         }
         if (cachedException != null && cachedException.getCause() instanceof FileNotFoundException) {
             objectCache.put(loc, NORMAL_TEXTURE);
-            Chisel.logger.warn("Substituting default texture json for missing file " + loc);
+            Chisel.debug("Substituting default texture json for missing file " + loc);
             clearException();
             return createTexture(loc);
         }
