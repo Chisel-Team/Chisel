@@ -119,7 +119,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             }
             for (int j = 0; j < data[i].length; j++) {
                 if (data[i][j].group != null) {
-                    CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), i * 16 + j);
+                    VariationBuilder<T> v = variations.get(data[i][j].index);
+                    CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), v.hasOrder ? v.order : i * 16 + j);
                 }
             }
         }
@@ -155,6 +156,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         @Setter
         private ResourceLocation textureLocation;
         private Map<EnumFacing, ResourceLocation> overrideMap;
+        
+        private int order;
+        private boolean hasOrder;
 
         private VariationBuilder(ChiselBlockBuilder<T> parent, String name, String group, int index) {
             this.parent = parent;
@@ -202,6 +206,12 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             for (EnumFacing f : facings) {
                 this.overrideMap.put(f, loc);
             }
+            return this;
+        }
+        
+        public VariationBuilder<T> setOrder(int order) {
+            this.order = order;
+            this.hasOrder = true;
             return this;
         }
 

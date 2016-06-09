@@ -382,7 +382,7 @@ public class Quad {
                 VertexFormatElement ele = this.builder.vertexFormat.getElement(i);
                 switch (ele.getUsage()) {
                 case UV:
-                    //todo transform the UV_2S type that it used for lightmap coordinates to make fullbright
+                    //TODO transform the UV_2S type that it used for lightmap coordinates to make fullbright
                     if (ele.getIndex() == 1 && this.fullbright){
                         //Stuff for fullbright
                         builder.put(i, 1, 1);
