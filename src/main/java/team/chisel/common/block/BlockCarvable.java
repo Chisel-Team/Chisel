@@ -15,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -226,9 +227,25 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public boolean isFullCube(IBlockState state) {
-        return true;
+        return state.isOpaqueCube();
     }
-
+    
+    @Override
+    @Deprecated
+    public boolean isOpaqueCube(IBlockState state) {
+        return blockFaceData.getForMeta(getMetaFromState(state)).getAllFaces().stream().filter(f -> f.getLayer() == BlockRenderLayer.SOLID).count() > 0;
+    }
+    
+    @Override
+    @Deprecated
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        IBlockState other = blockAccess.getBlockState(pos.offset(side));
+        if (other instanceof IExtendedBlockState) {
+            other = ((IExtendedBlockState)other).getClean();
+        }
+        return ((IExtendedBlockState)blockState).getClean() != other;
+    }
+    
     @Override
     public boolean isVisuallyOpaque() {
         return true;
