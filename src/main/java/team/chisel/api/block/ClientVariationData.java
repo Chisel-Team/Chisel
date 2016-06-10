@@ -21,9 +21,9 @@ public class ClientVariationData extends VariationData {
      */
     public Map<EnumFacing, ResourceLocation> sideOverrides;
 
-    public ClientVariationData(String name, String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int index, ResourceLocation defaultFace,
+    public ClientVariationData(String name, String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int index, boolean opaque, ResourceLocation defaultFace,
             Map<EnumFacing, ResourceLocation> sideOverrides) {
-        super(name, group, recipe, smeltedFrom, amountSmelted, index);
+        super(name, group, recipe, smeltedFrom, amountSmelted, index, opaque);
         this.defaultFace = defaultFace;
         this.sideOverrides = sideOverrides;
     }

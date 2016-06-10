@@ -135,7 +135,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
          */
         public interface IVariationBuilderDelegate {
 
-            VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, ResourceLocation texLocation,
+            VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, boolean opaque, ResourceLocation texLocation,
                     Map<EnumFacing, ResourceLocation> overrideMap);
 
         }
@@ -159,6 +159,10 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         
         private int order;
         private boolean hasOrder;
+        
+        @Setter
+        @Accessors(fluent = true)
+        private boolean opaque = true;
 
         private VariationBuilder(ChiselBlockBuilder<T> parent, String name, String group, int index) {
             this.parent = parent;
@@ -237,7 +241,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         }
 
         private VariationData doBuild() {
-            return Chisel.proxy.getBuilderDelegate().build(name, group, index, recipe, smeltedFrom, amountSmelted, textureLocation, overrideMap);
+            return Chisel.proxy.getBuilderDelegate().build(name, group, index, recipe, smeltedFrom, amountSmelted, opaque, textureLocation, overrideMap);
         }
 
         // todo I was here gonna implement ClientVariation stuff

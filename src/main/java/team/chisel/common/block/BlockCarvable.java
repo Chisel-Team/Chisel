@@ -233,7 +233,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     @Deprecated
     public boolean isOpaqueCube(IBlockState state) {
-        return blockFaceData.getForMeta(getMetaFromState(state)).getAllFaces().stream().filter(f -> f.getLayer() == BlockRenderLayer.SOLID).count() > 0;
+        return getVariationData(getMetaFromState(state)).opaque;
     }
     
     @Override

@@ -2,11 +2,13 @@ package team.chisel.api.block;
 
 import javax.annotation.Nullable;
 
+import lombok.AllArgsConstructor;
 import net.minecraft.item.ItemStack;
 
 /**
  * Represents data about a specific variation
  */
+@AllArgsConstructor
 public class VariationData {
 
     /**
@@ -39,13 +41,9 @@ public class VariationData {
      * The Index of this variation in the blocks total variations
      */
     public int index;
-
-    public VariationData(String name, @Nullable String group, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, int index) {
-        this.name = name;
-        this.group = group;
-        this.recipe = recipe;
-        this.smeltedFrom = smeltedFrom;
-        this.amountSmelted = amountSmelted;
-        this.index = index;
-    }
+    
+    /**
+     * If this variation is opaque, it will block light. Set this to false on any variation which has a see-through texture.
+     */
+    public boolean opaque;
 }

@@ -15,9 +15,9 @@ import team.chisel.api.block.VariationData;
 public class BuilderDelegateServer implements ChiselBlockBuilder.VariationBuilder.IVariationBuilderDelegate {
 
     @Override
-    public VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, ResourceLocation texLocation,
+    public VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, boolean opaque, ResourceLocation texLocation,
             Map<EnumFacing, ResourceLocation> overrideMap) {
-        return new VariationData(name, group, recipe, smeltedFrom, amountSmelted, index);
+        return new VariationData(name, group, recipe, smeltedFrom, amountSmelted, index, opaque);
     }
 
 }
