@@ -719,7 +719,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("glass", Blocks.GLASS.getDefaultState(), -1);
-            factory.newBlock(Material.GLASS, "glass", provider)
+            factory.newBlock(Material.GLASS, "glass", provider).opaque(false)
                     .newVariation("terrain-glassbubble")
                     .next("terrain-glass-chinese")
                     .next("japanese")
