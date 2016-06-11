@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:cobblestone/twisted-side.cf",
+  "overrides":{
+    "UP":"chisel:cobblestone/twisted-top.cf",
+    "DOWN":"chisel:cobblestone/twisted-top.cf"
+  }
+}
