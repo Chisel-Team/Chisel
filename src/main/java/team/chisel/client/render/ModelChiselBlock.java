@@ -92,7 +92,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
             if (ctxList == null) {
                 return model.getModel(state).getQuads(state, side, rand);
             }
-            TLongSet serialized = ctxList.serialize();
+            TLongSet serialized = ctxList.serialized();
             baked = modelcache.get(Pair.of(clean, serialized), () -> createModel(ext, model, ctxList));
         } else {
             baked = this;

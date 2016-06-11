@@ -16,7 +16,8 @@ import com.google.common.collect.Maps;
  */
 public class RenderContextList {
 
-    private Map<IBlockRenderType, IBlockRenderContext> contextMap = Maps.newIdentityHashMap();
+    private final Map<IBlockRenderType, IBlockRenderContext> contextMap = Maps.newIdentityHashMap();
+    private final TLongSet serialized = new TLongHashSet();
 
     public RenderContextList() {}
 
@@ -26,6 +27,10 @@ public class RenderContextList {
             if (ctx != null) {
                 contextMap.put(type, ctx);
             }
+        }
+        
+        for (IBlockRenderContext ctx : contextMap.values()) {
+            serialized.add(ctx.getCompressedData());
         }
     }
 
@@ -37,7 +42,7 @@ public class RenderContextList {
         return getRenderContext(type) != null;
     }
 
-    public TLongSet serialize() {
+    public TLongSet serialized() {
         TLongSet ret = new TLongHashSet();
         for (IBlockRenderContext ctx : contextMap.values()) {
             ret.add(ctx.getCompressedData());
