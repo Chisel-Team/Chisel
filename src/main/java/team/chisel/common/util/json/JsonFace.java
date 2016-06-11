@@ -50,10 +50,7 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
             }
             face.setParticle(JsonHelper.getOrCreateTexture( new ResourceLocation(particle)).getParticle());
         }
-        
-        if (loc.getResourcePath().contains("animated")) {
-            System.out.println("test");
-        }
+
         face.setLayer(getLayer(face.getTextureList()));
         return face;
     }

@@ -174,11 +174,10 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
             .put(TransformType.GROUND,                      get(0, 2, 0, 0, 0, 0, 0.25f))
             .put(TransformType.HEAD,                        get(0, 0, 0, 0, 0, 0, 1))
             .put(TransformType.FIXED,                       get(0, 0, 0, 0, 0, 0, 1))
-            .put(null,                                      get(0, 0, 0, 0, 0, 0, 1))
             .build();
 
     @Override
     public Pair<? extends IPerspectiveAwareModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
-        return Pair.of(this, transforms.get(cameraTransformType).getMatrix());
+        return Pair.of(this, transforms.getOrDefault(cameraTransformType, get(0, 0, 0, 0, 0, 0, 1)).getMatrix());
     }
 }

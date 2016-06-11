@@ -74,10 +74,7 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
                 TextureStitcher.register(callbacks[i]);
             }
         }
-        
-        if (loc.getResourcePath().contains("animated")) {
-            System.out.println("test");
-        }
+
         BlockRenderLayer layerObj = layer == null ? BlockRenderLayer.SOLID : BlockRenderLayer.valueOf(layer.toUpperCase(Locale.US));
         TextureInfo textureInfo;
         if (info != null){
