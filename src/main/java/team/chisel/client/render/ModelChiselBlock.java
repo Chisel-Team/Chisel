@@ -164,20 +164,20 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
             new Vector3f(s, s, s),
             null);
     }
-    
-    private static Map<TransformType, TRSRTransformation> transforms = ImmutableMap.<TransformType, TRSRTransformation>builder()
+        
+    private static final Map<TransformType, TRSRTransformation> TRANSFORMS = ImmutableMap.<TransformType, TRSRTransformation>builder()
             .put(TransformType.GUI,                         get(0, 0, 0, 30, 45, 0, 0.625f))
             .put(TransformType.THIRD_PERSON_RIGHT_HAND,     get(0, 2.5f, 0, 75, 45, 0, 0.375f))
             .put(TransformType.THIRD_PERSON_LEFT_HAND,      get(0, 2.5f, 0, 75, 45, 0, 0.375f))
             .put(TransformType.FIRST_PERSON_RIGHT_HAND,     get(0, 0, 0, 0, 45, 0, 0.4f))
             .put(TransformType.FIRST_PERSON_LEFT_HAND,      get(0, 0, 0, 0, 225, 0, 0.4f))
             .put(TransformType.GROUND,                      get(0, 2, 0, 0, 0, 0, 0.25f))
-            .put(TransformType.HEAD,                        get(0, 0, 0, 0, 0, 0, 1))
-            .put(TransformType.FIXED,                       get(0, 0, 0, 0, 0, 0, 1))
             .build();
+    
+    private static final TRSRTransformation DEFAULT_TRANSFORM = get(0, 0, 0, 0, 0, 0, 1);
 
     @Override
     public Pair<? extends IPerspectiveAwareModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
-        return Pair.of(this, transforms.getOrDefault(cameraTransformType, get(0, 0, 0, 0, 0, 0, 1)).getMatrix());
+        return Pair.of(this, TRANSFORMS.getOrDefault(cameraTransformType, DEFAULT_TRANSFORM).getMatrix());
     }
 }
