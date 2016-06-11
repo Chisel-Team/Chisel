@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./terrain-pistonback-marbledent",
-        "./terrain-pistonback-marbledent-ctm"
-    ]
-}
