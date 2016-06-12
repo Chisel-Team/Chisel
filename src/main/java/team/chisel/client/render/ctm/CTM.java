@@ -300,7 +300,7 @@ public class CTM {
         }
 
         // TODO VERY TEMPORARY
-        boolean ret = con.getBlock() == state.getBlock();
+        boolean ret = con == state;
 
         // no block obscuring this face
         if (obscuring == null) {
