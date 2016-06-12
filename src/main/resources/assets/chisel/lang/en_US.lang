@@ -37,7 +37,15 @@ item.upgrade_reversion.desc.1=Reverts the base slot to its original form
 
 # Block localizations
 
-#Chisel 2
+#Chisel
+
+#Basalt
+tile.chisel.basalt.name=Basalt
+tile.chisel.basaltextra.name=Basalt
+
+#Hardened Clay
+tile.chisel.hardenedclay.name=Hardened Clay
+tile.chisel.hardenedclayextra.name=Hardened Clay
 
 #Nation
 tile.chisel.nation.name=Imperialistic Block
@@ -434,18 +442,19 @@ tile.chisel.endstone.12.desc.1=Ornate End Stone
 tile.chisel.endstone.13.desc.1=End Stone Large Tile
 
 #Purpur
-tile.chisel.end_purpur.name=Purpur Block
-tile.chisel.end_purpur.0.desc.1=Medium Tiles
-tile.chisel.end_purpur.1.desc.1=Pillar
-tile.chisel.end_purpur.2.desc.1=Not Shulker
-tile.chisel.end_purpur.3.desc.1=Small Tiles
-tile.chisel.end_purpur.4.desc.1=Broken Small Tiles
-tile.chisel.end_purpur.5.desc.1=Prismatic Purpur
-tile.chisel.end_purpur.6.desc.1=Rough Bricks
-tile.chisel.end_purpur.7.desc.1=Cracked Surface
-tile.chisel.end_purpur.8.desc.1=Arcane Block of Purpur
-tile.chisel.end_purpur.9.desc.1=Purpur Large Tile
-tile.chisel.end_purpur.10.desc.1=Ornate Purpur
+tile.chisel.purpur.name=Purpur Block
+tile.chisel.purpurextra.name=Purpur Block
+tile.chisel.purpur.0.desc.1=Medium Tiles
+tile.chisel.purpur.1.desc.1=Pillar
+tile.chisel.purpur.2.desc.1=Not Shulker
+tile.chisel.purpur.3.desc.1=Small Tiles
+tile.chisel.purpur.4.desc.1=Broken Small Tiles
+tile.chisel.purpur.5.desc.1=Prismatic Purpur
+tile.chisel.purpur.6.desc.1=Rough Bricks
+tile.chisel.purpur.7.desc.1=Cracked Surface
+tile.chisel.purpur.8.desc.1=Arcane Block of Purpur
+tile.chisel.purpur.9.desc.1=Purpur Large Tile
+tile.chisel.purpur.10.desc.1=Ornate Purpur
 
 #Metal Blocks
 tile.chisel.aluminumblock.name=Block of Aluminum
@@ -477,18 +486,13 @@ tile.chisel.metalOre.5.desc.1=Fancy Bolted Plating
 tile.chisel.present.name=Present
 tile.chisel.present.desc.1=A pretty present chest
 
-#Brick
-tile.chisel.brickCustom.name=Brick Block
-tile.chisel.brickCustom.1.desc.1=Large Bricks
-tile.chisel.brickCustom.2.desc.1=Mortarless Bricks
-tile.chisel.brickCustom.3.desc.1=Varied Bricks
-tile.chisel.brickCustom.5.desc.1=Aged Bricks
-tile.chisel.brickCustom.6.desc.1=Yellow Bricks
-
-#Chisel 1
+#Bricks
+tile.chisel.bricks.name=Bricks
+tile.chisel.bricksextra.name=Bricks
 
 #Cobblestone Blocks
 tile.chisel.cobblestone.name=Cobblestone
+tile.chisel.cobblestoneextra.name=Cobblestone
 tile.chisel.cobblestone.0.desc.1=Aligned Cobblestone Bricks
 tile.chisel.cobblestone.1.desc.1=Detailed Cobblestone Bricks
 tile.chisel.cobblestone.2.desc.1=Small Cobblestone Bricks
@@ -510,6 +514,7 @@ tile.chisel.sandstone.name=Sandstone
 
 #Marble Blocks
 tile.chisel.marble.name=Marble
+tile.chisel.marbleextra.name=Marble
 tile.chisel.marble.0.desc.1=Raw Marble
 tile.chisel.marble.1.desc.1=Marble Brick
 tile.chisel.marble.2.desc.1=Classic Marble Panel
@@ -652,6 +657,7 @@ tile.chisel.marbleStairs.15.desc.1=Marble Block Stairs
 
 #Limestone
 tile.chisel.limestone.name=Limestone
+tile.chisel.limestoneextra.name=Limestone
 tile.chisel.limestone.0.desc.1=Limestone
 tile.chisel.limestone.1.desc.1=Small Limestone Tiles
 tile.chisel.limestone.2.desc.1=French Limestone Tiles
@@ -785,7 +791,8 @@ tile.chisel.glass2.name=Glass
 tile.chisel.glass2.0.desc.1=Asymmetrical Leaded Glass
 
 #Sandstone
-tile.chisel.sandstone.name=Sandstone
+tile.chisel.sandstoneyellow.name=Sandstone
+tile.chisel.sandstonered.name=Red Sandstone
 
 tile.chisel.sandstone.0.desc.1=Sandstone Glyphs
 tile.chisel.sandstone.1.desc.1=Sandcobble
@@ -962,23 +969,9 @@ tile.chisel.stoneMoss.14.desc.1=Mossy Cobblestone with Light Panel
 tile.chisel.stoneMoss.15.desc.1=Mossy Cobblestone with Dark Panel
 
 #Stone Bricks
-tile.chisel.stonebrick.name=Stone Bricks
-tile.chisel.stonebrick.0.desc.1=Modern Neutral Masonry
-tile.chisel.stonebrick.1.desc.1=Modern Felsic Masonry
-tile.chisel.stonebrick.2.desc.1=Modern Mafic Masonry
-tile.chisel.stonebrick.3.desc.1=Modern Mixed Masonry
-tile.chisel.stonebrick.4.desc.1=Small Stone Bricks
-tile.chisel.stonebrick.5.desc.1=Wide Stone Bricks
-tile.chisel.stonebrick.6.desc.1=Small Disordered Stone Bricks
-tile.chisel.stonebrick.7.desc.1=Disordered Stone Bricks
-tile.chisel.stonebrick.8.desc.1=Disordered Stone Panels
-tile.chisel.stonebrick.9.desc.1=Stone Bricks in a Fancy Arrangement
-tile.chisel.stonebrick.10.desc.1=Ornate Stone Brick tiles
-tile.chisel.stonebrick.11.desc.1=Large Ornate Stone Brick Tiles
-tile.chisel.stonebrick.12.desc.1=Stone Panel
-tile.chisel.stonebrick.13.desc.1=Sunken Stone Panel
-tile.chisel.stonebrick.14.desc.1=Ornate Stone Panel
-tile.chisel.stonebrick.15.desc.1=Poison Stone Brick
+tile.chisel.stone.name=Stone Bricks
+tile.chisel.stoneextra.name=Stone Bricks
+
 
 #Dirt
 tile.chisel.dirt.name=Dirt
