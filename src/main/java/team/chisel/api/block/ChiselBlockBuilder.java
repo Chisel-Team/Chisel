@@ -51,7 +51,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private String group;
     
     @Accessors(fluent = true)
-    private boolean opaque;
+    private boolean opaque = true;
 
     protected ChiselBlockBuilder(Material material, String domain, String blockName, BlockProvider<T> provider) {
         this.material = material;
