@@ -573,31 +573,55 @@ public enum Features {
         }
     },
 
-    /*END_PURPUR { TODO Retexture
+    END_PURPUR {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             IBlockState purpur_pillar = Blocks.PURPUR_PILLAR.getDefaultState();
             IProperty<Axis> prop = BlockRotatedPillar.AXIS;
-            Carving.chisel.addVariation("end_purpur", Blocks.PURPUR_BLOCK.getDefaultState(), -5);
+
+            Carving.chisel.addVariation("purpur", Blocks.PURPUR_BLOCK.getDefaultState(), -5);
             //Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.X), -4);
-            Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.Y), -3);
+            Carving.chisel.addVariation("purpur", purpur_pillar.withProperty(prop, Axis.Y), -3);
             //Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.Z), -2);
             //Carving.chisel.addVariation("end_purpur", Blocks.purpur_double_slab.getDefaultState(), -1);
-            factory.newBlock(Material.ROCK, "end_purpur", provider)
-                    .newVariation("shulker")
-                    .next("tilePurpur")
-                    .next("tileBrokenPurpur")
-                    .next("purpurPrismarine")
-                    .next("purpurBricks")
-                    .next("purpurCobble")
-                    .next("arcanePurpur")
-                    .next("purpurLargeTile")
-                    .next("borderPurpur")
-                    .next("purpurOrnate")
-                    .next("masonryPurpur")
+
+            factory.newBlock(Material.ROCK, "purpur", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .build();
+
+            factory.newBlock(Material.ROCK, "purpurextra", provider)
+                    .setGroup("purpur")
+                    .setParentFolder("purpur")
+                    .newVariation("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    //.next("tiles-medium")
+                    //.next("pillar")
+                    .next("twisted")
+                    .next("prism")
                     .build();
         }
-    },*/
+    },
 
     /*ENDER_PEARL_BLOCK { TODO Retexture
         @Override
@@ -1759,30 +1783,93 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             IBlockState ss = Blocks.SANDSTONE.getDefaultState();
             IProperty<BlockSandStone.EnumType> prop = BlockSandStone.TYPE;
-            Carving.chisel.addVariation("sandstone", ss.withProperty(prop, BlockSandStone.EnumType.DEFAULT), -3);
-            Carving.chisel.addVariation("sandstone", ss.withProperty(prop, BlockSandStone.EnumType.SMOOTH), -2);
-            Carving.chisel.addVariation("sandstone", ss.withProperty(prop, BlockSandStone.EnumType.CHISELED), -1);
+            Carving.chisel.addVariation("sandstoneyellow", ss.withProperty(prop, BlockSandStone.EnumType.DEFAULT), -3);
+            Carving.chisel.addVariation("sandstoneyellow", ss.withProperty(prop, BlockSandStone.EnumType.SMOOTH), -2);
+            Carving.chisel.addVariation("sandstoneyellow", ss.withProperty(prop, BlockSandStone.EnumType.CHISELED), -1);
 
-            /*factory.newBlock(Material.ROCK, "sandstone", provider) TODO Retexture
-                    .newVariation("terrain-sandstone-smoothglyph")
-                    .next("terrain-sandstone-solidcobble")
-                    .next("a0-sandstonepreview-boxcreeper")
-                    .next("faded")
-                    .next("column")
-                    .next("capstone")
-                    .next("small")
-                    .next("base")
-                    .next("smooth")
-                    .next("smooth-cap")
-                    .next("smooth-small")
-                    .next("smooth-base")
-                    .next("block")
-                    .next("blocks")
+            factory.newBlock(Material.ROCK, "sandstoneyellow", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
                     .next("mosaic")
-                    .next("horizontal-tiles")
-                    .next("a0-sandstonepreview-smoothflat")
-                    .next("terrain-sandstone-brickflat")
-                    .build();*/
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .build();
+
+            factory.newBlock(Material.ROCK, "sandstoneyellowextra", provider)
+                    .setGroup("sandstoneyellow")
+                    .setParentFolder("sandstoneyellow")
+                    .newVariation("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .build();
+        }
+    },
+
+    SANDSTONE_RED {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            IBlockState ss = Blocks.RED_SANDSTONE.getDefaultState();
+            IProperty<BlockRedSandstone.EnumType> prop = BlockRedSandstone.TYPE;
+
+            Carving.chisel.addVariation("sandstonered", ss.withProperty(prop, BlockRedSandstone.EnumType.DEFAULT), -3);
+            Carving.chisel.addVariation("sandstonered", ss.withProperty(prop, BlockRedSandstone.EnumType.SMOOTH), -2);
+            Carving.chisel.addVariation("sandstonered", ss.withProperty(prop, BlockRedSandstone.EnumType.CHISELED), -1);
+
+            factory.newBlock(Material.ROCK, "sandstonered", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .build();
+
+            factory.newBlock(Material.ROCK, "sandstoneredextra", provider)
+                    .setGroup("sandstonered")
+                    .setParentFolder("sandstonered")
+                    .newVariation("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .build();
         }
     },
 

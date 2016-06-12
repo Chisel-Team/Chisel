@@ -17,6 +17,9 @@ All images under the following directories
 - `/src/main/resources/assets/chisel/textures/blocks/hardenedclay/`
 - `/src/main/resources/assets/chisel/textures/blocks/limestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/marble/`
+- `/src/main/resources/assets/chisel/textures/blocks/purpur/`
+- `/src/main/resources/assets/chisel/textures/blocks/sandstonered/`
+- `/src/main/resources/assets/chisel/textures/blocks/sandstoneyellow/`
 - `/src/main/resources/assets/chisel/textures/blocks/stone/`
 
 are created by Drullkus, and are used with permission. It is licensed under CC BY-NC-SA 4.0.
