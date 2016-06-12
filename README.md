@@ -4,16 +4,19 @@ This is an extremely WIP port of chisel to 1.8.
 
 This mod is licensed under GPLv2.
 
-Images under this directory
+All images under this directory
 `/src/main/resources/assets/chisel/textures/blocks/bloodMagic/` are created by Yulife, and are used with permission.
 [It is licensed under CC BY-NC-SA 4.0](https://github.com/CyanideX/Unity/blob/master/LICENSE.md).
 
-Images under the following directories
+All images under the following directories
 
+- `/src/main/resources/assets/chisel/textures/blocks/basalt/`
+- `/src/main/resources/assets/chisel/textures/blocks/bricks/`
 - `/src/main/resources/assets/chisel/textures/blocks/cobblestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/dirt/`
+- `/src/main/resources/assets/chisel/textures/blocks/hardenedclay/`
 - `/src/main/resources/assets/chisel/textures/blocks/limestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/marble/`
 - `/src/main/resources/assets/chisel/textures/blocks/stone/`
 
-are created by Drullkus, and are used with permission. Drullkus reserves all rights to these images.
+are created by Drullkus, and are used with permission. It is licensed under CC BY-NC-SA 4.0.

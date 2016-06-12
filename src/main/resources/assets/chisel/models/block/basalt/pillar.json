@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:basalt/pillar-side.cf",
+  "overrides":{
+    "UP":"chisel:basalt/pillar-top.cf",
+    "DOWN":"chisel:basalt/pillar-top.cf"
+  }
+}

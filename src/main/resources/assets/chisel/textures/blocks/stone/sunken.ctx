@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./extra/sunken",
+        "./extra/sunken-ctm"
+    ]
+}
