@@ -198,12 +198,14 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager effectRenderer) {
         ClientUtil.addHitEffects(worldObj, target.getBlockPos(), target.sideHit);
         return true;
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager effectRenderer) {
         ClientUtil.addDestroyEffects(world, pos, world.getBlockState(pos));
         return true;
@@ -238,6 +240,7 @@ public class BlockCarvable extends Block implements ICarvable {
     
     @Override
     @Deprecated
+    @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         IBlockState other = blockAccess.getBlockState(pos.offset(side));
         if (other instanceof IExtendedBlockState) {
