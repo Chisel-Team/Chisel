@@ -222,7 +222,7 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public boolean isFullBlock(IBlockState state) {
-        return state.isOpaqueCube();
+        return true;
     }
 
     @Override
