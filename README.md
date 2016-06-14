@@ -14,6 +14,7 @@ All images under the following directories
 - `/src/main/resources/assets/chisel/textures/blocks/bricks/`
 - `/src/main/resources/assets/chisel/textures/blocks/cobblestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/dirt/`
+- `/src/main/resources/assets/chisel/textures/blocks/endstone/`
 - `/src/main/resources/assets/chisel/textures/blocks/hardenedclay/`
 - `/src/main/resources/assets/chisel/textures/blocks/limestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/marble/`

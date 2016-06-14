@@ -641,30 +641,48 @@ public enum Features {
         }
     },*/
 
-    /*ENDSTONE { TODO Retexture
+    ENDSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("endstone", Blocks.END_STONE.getDefaultState(), -2);
             Carving.chisel.addVariation("endstone", Blocks.END_BRICKS.getDefaultState(), -1);
+
             factory.newBlock(Material.ROCK, "endstone", provider)
-                    .newVariation("chaoticBricks")
-                    .next("CheckeredTile")
-                    .next("enderCircuit")
-                    .next("endFrenchBricks")
-                    .next("endPillar")
-                    .next("endStoneEtched")
-                    .next("endPrismatic")
-                    .next("endStoneChunk")
-                    .next("EnderFrame")
-                    .next("arcaneEndStone")
-                    .next("framedEndStone")
-                    .next("endStoneOrnate")
-                    .next("endStoneLargeTile")
-                    .next("enderDiagonalBrick")
-                    .next("masonryEnder")
+                    .newVariation("cracked")
+                    .next("bricks-solid")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .build();
+
+            factory.newBlock(Material.ROCK, "endstoneextra", provider)
+                    .setGroup("endstone")
+                    .setParentFolder("endstone")
+                    .newVariation("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
                     .build();
         }
-    },*/
+    },
 
     FACTORY {
         @Override
