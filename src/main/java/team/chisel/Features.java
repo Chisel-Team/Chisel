@@ -3,7 +3,6 @@ package team.chisel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.*;
-import net.minecraft.block.BlockStone.EnumType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -12,21 +11,15 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import team.chisel.api.block.BlockCreator;
-import team.chisel.api.block.BlockProvider;
-import team.chisel.api.block.ChiselBlockFactory;
-import team.chisel.api.block.ICarvable;
-import team.chisel.api.block.VariationData;
+import team.chisel.api.block.*;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
-import team.chisel.common.block.BlockCarvablePane;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
@@ -251,7 +244,7 @@ public enum Features {
     BRONZE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "blockBronze", provider)
+            factory.newBlock(Material.IRON, "blockBronze", provider)
                     .setParentFolder("metals/bronze")
                     .newVariation("caution")
                     .next("crate")
@@ -260,14 +253,14 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
         }
     },
 
     CARPET {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "carpet", provider)
+            factory.newBlock(Material.CLOTH, "carpet", provider)
                     .newVariation("black")
                     .next("red")
                     .next("green")
@@ -284,7 +277,7 @@ public enum Features {
                     .next("lily")
                     .next("orange")
                     .next("white")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
         } // TODO have these chiseled from individual colored wools and carpets
     },
 
@@ -304,13 +297,13 @@ public enum Features {
     CLOUD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "cloud", provider)
+            factory.newBlock(Material.CLOTH, "cloud", provider)
                     .newVariation("cloud")
                     .next("large")
                     .next("small")
                     .next("vertical")
                     .next("grid")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.3F));
         }
 
         @Override
@@ -323,7 +316,7 @@ public enum Features {
     COBALT {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "blockCobalt", provider)
+            factory.newBlock(Material.IRON, "blockCobalt", provider)
                     .setParentFolder("metals/cobalt")
                     .newVariation("caution")
                     .next("crate")
@@ -332,7 +325,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
         }
     },
 
@@ -433,7 +426,7 @@ public enum Features {
     COPPER {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "blockCopper", provider)
+            factory.newBlock(Material.IRON, "blockCopper", provider)
                     .setParentFolder("metals/copper")
                     .newVariation("caution")
                     .next("crate")
@@ -442,7 +435,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
         }
     },
 
@@ -473,7 +466,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("diamond", Blocks.DIAMOND_BLOCK.getDefaultState(), -1);
-            factory.newBlock(Material.ROCK, "diamond", provider)
+            factory.newBlock(Material.IRON, "diamond", provider)
                     .newVariation("terrain-diamond-embossed")
                     .next("terrain-diamond-gem")
                     .next("terrain-diamond-cells")
@@ -486,7 +479,7 @@ public enum Features {
                     .next("terrain-diamond-fourornate")
                     .next("terrain-diamond-zelda")
                     .next("terrain-diamond-ornatelayer")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
         }
     },
 
@@ -513,7 +506,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("dirt", Blocks.DIRT.getDefaultState(), -1);
-            factory.newBlock(Material.ROCK, "dirt", provider)
+            factory.newBlock(Material.GROUND, "dirt", provider)
                     .newVariation("bricks")
                     .next("netherbricks")
                     .next("bricks3")
@@ -530,14 +523,14 @@ public enum Features {
                     .next("chunky")
                     .next("horizontal")
                     .next("plate")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.GROUND).setHardness(0.5F));
         }
     },
 
     ELECTRUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "blockElectrum", provider)
+            factory.newBlock(Material.IRON, "blockElectrum", provider)
                     .setParentFolder("metals/electrum")
                     .newVariation("caution")
                     .next("crate")
@@ -546,7 +539,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
         }
     },
 
@@ -554,7 +547,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("emerald", Blocks.EMERALD_BLOCK.getDefaultState(), -1);
-            factory.newBlock(Material.ROCK, "emerald", provider)
+            factory.newBlock(Material.IRON, "emerald", provider)
                     .newVariation("panel")
                     .next("panelclassic")
                     .next("smooth")
@@ -569,7 +562,7 @@ public enum Features {
                     .next("masonryEmerald")
                     .next("emeraldCircle")
                     .next("emeraldPrismatic")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
         }
     },
 
@@ -687,7 +680,7 @@ public enum Features {
     FACTORY {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "factory", provider)
+            factory.newBlock(Material.IRON, "factory", provider)
                     .newVariation("dots")
                     .next("rust2")
                     .next("rust")
@@ -817,7 +810,7 @@ public enum Features {
                     .next("terrain-glass-thingrid")
                     .next("a1-glasswindow-ironfencemodern")
                     .next("chrono")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
         }
     },
 
@@ -837,7 +830,7 @@ public enum Features {
                         .next(dyeColors[c]+"-panel-fancy")
                         .next(dyeColors[c]+"-transparent")
                         .next(dyeColors[c]+"-forestry")
-                        .build();
+                        .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
         }
     },
@@ -891,7 +884,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("blockGold", Blocks.GOLD_BLOCK.getDefaultState(), -1);
 
-            factory.newBlock(Material.ROCK, "blockGold", provider)
+            factory.newBlock(Material.IRON, "blockGold", provider)
                     .setParentFolder("metals/gold")
                     .newVariation("caution")
                     .next("crate")
@@ -900,9 +893,9 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F));
 
-            factory.newBlock(Material.ROCK, "gold", provider)
+            factory.newBlock(Material.IRON, "gold", provider)
                     .setGroup("blockGold")
                     .newVariation("terrain-gold-largeingot")
                     .next("terrain-gold-smallingot")
@@ -919,7 +912,7 @@ public enum Features {
                     .next("terrain-gold-spaceblack")
                     .next("terrain-gold-simple")
                     .next("goldEye")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F));
         }
     },
 
@@ -1000,7 +993,7 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .build();
+                    .build(b-> b.setHardness(1.25f));
 
             factory.newBlock(Material.ROCK, "hardenedclayextra", provider)
                     .setGroup("hardenedclay")
@@ -1012,7 +1005,7 @@ public enum Features {
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
-                    .build();
+                    .build(b-> b.setHardness(1.25f));
         }
     },
 
@@ -1082,7 +1075,7 @@ public enum Features {
     ICEPILLAR {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "icepillar", provider)
+            factory.newBlock(Material.ICE, "icepillar", provider)
                     .setGroup("ice")
                     .newVariation("plainplain")
                     .next("plaingreek")
@@ -1091,14 +1084,14 @@ public enum Features {
                     .next("convexplain")
                     .next("carved")
                     .next("ornamental")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.GLASS).setHardness(0.5f));
         }
     },
 
     INVAR {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "blockInvar", provider)
+            factory.newBlock(Material.IRON, "blockInvar", provider)
                     .setParentFolder("metals/invar")
                     .newVariation("caution")
                     .next("crate")
@@ -1107,7 +1100,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
 
@@ -1116,7 +1109,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("blockIron", Blocks.IRON_BLOCK.getDefaultState(), -1);
 
-            factory.newBlock(Material.ROCK, "blockIron", provider)
+            factory.newBlock(Material.IRON, "blockIron", provider)
                     .setParentFolder("metals/iron")
                     .newVariation("caution")
                     .next("crate")
@@ -1125,9 +1118,9 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
 
-            factory.newBlock(Material.ROCK, "iron", provider)
+            factory.newBlock(Material.IRON, "iron", provider)
                     .setGroup("blockIron")
                     .newVariation("terrain-iron-largeingot")
                     .next("terrain-iron-smallingot")
@@ -1144,7 +1137,7 @@ public enum Features {
                     .next("terrain-iron-spaceblack")
                     .next("terrain-iron-vents")
                     .next("terrain-iron-simple")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
 
@@ -1152,7 +1145,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("ironpane", Blocks.IRON_BARS.getDefaultState(), -1);
-            factory.newBlock(Material.ROCK, "ironpane", provider)
+            factory.newBlock(Material.IRON, "ironpane", provider)
                     .newVariation("fenceIron")
                     .next("barbedwire")
                     .next("cage")
@@ -1166,7 +1159,7 @@ public enum Features {
                     .next("a1-ironbars-ironfence")
                     .next("a1-ironbars-ironfencemodern")
                     .next("a1-ironbars-ironclassic")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
 
@@ -1214,7 +1207,7 @@ public enum Features {
                     .next("a1-blocklapis-smooth")
                     .next("a1-blocklapis-ornatelayer")
                     .next("masonryLapis")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.STONE).setHardness(3.0f));
         }
     },
 
@@ -1243,7 +1236,7 @@ public enum Features {
     LEAD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "blockLead", provider)
+            factory.newBlock(Material.IRON, "blockLead", provider)
                     .setParentFolder("metals/lead")
                     .newVariation("caution")
                     .next("crate")
@@ -1252,7 +1245,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
 
@@ -1555,7 +1548,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
 
@@ -1586,7 +1579,7 @@ public enum Features {
     PAPER {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "paper", provider)
+            factory.newBlock(Material.PLANTS, "paper", provider)
                     .newVariation("box")
                     .next("throughMiddle")
                     .next("cross")
@@ -1596,7 +1589,8 @@ public enum Features {
                     .next("floral")
                     .next("plain")
                     .next("door")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.PLANT)
+                            .setHardness(1.5f));
         }
 
         @Override
@@ -1619,7 +1613,7 @@ public enum Features {
             {
                 Carving.chisel.addVariation("planks-" + plank_names[c], planks.withProperty(prop, BlockPlanks.EnumType.byMetadata(c)), -1);
 
-                factory.newBlock(Material.ROCK, "planks-" + plank_names[c], provider)
+                factory.newBlock(Material.WOOD, "planks-" + plank_names[c], provider)
                         .newVariation("clean")
                         .next("short")
                         .next("fancy")
@@ -1635,7 +1629,9 @@ public enum Features {
                         .next("crateex")
                         .next("chaotic-hor")
                         .next("chaotic")
-                        .build();
+                        .build(b -> b.setSoundType(SoundType.WOOD)
+                                .setHardness(1.5f));
+
             }
         }
     },
@@ -1643,7 +1639,7 @@ public enum Features {
     PLATINUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "blockPlatinum", provider)
+            factory.newBlock(Material.IRON, "blockPlatinum", provider)
                     .setParentFolder("metals/platinum")
                     .newVariation("caution")
                     .next("crate")
@@ -1652,7 +1648,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
-                    .build();
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
 
@@ -2165,7 +2161,7 @@ public enum Features {
     TYRIAN {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "tyrian", provider)
+            factory.newBlock(Material.IRON, "tyrian", provider)
                     .newVariation("shining")
                     .next("tyrian")
                     .next("chaotic")
