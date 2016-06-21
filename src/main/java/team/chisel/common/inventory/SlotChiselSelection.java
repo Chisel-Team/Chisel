@@ -4,6 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import team.chisel.common.item.ItemChisel;
 
 public class SlotChiselSelection extends Slot {
 
@@ -44,7 +45,9 @@ public class SlotChiselSelection extends Slot {
 
             if (selInventory.inventory[InventoryChiselSelection.normalSlots] == null)
                 return;
-
+            if (selInventory.chisel != null && selInventory.chisel.getItem() instanceof ItemChisel){
+                selInventory.chisel.damageItem(selInventory.inventory[InventoryChiselSelection.normalSlots].stackSize, player);
+            }
             player.inventory.setItemStack(new ItemStack(itemstack.getItem(), selInventory.inventory[InventoryChiselSelection.normalSlots].stackSize, itemstack.getItemDamage()));
             selInventory.setInventorySlotContents(InventoryChiselSelection.normalSlots, null);
         }
