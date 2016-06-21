@@ -1,7 +1,0 @@
-{
-    "type":"NORMAL",
-    "textures":[
-           "./fall"
-       ],
-    "layer":"CUTOUT"
-}

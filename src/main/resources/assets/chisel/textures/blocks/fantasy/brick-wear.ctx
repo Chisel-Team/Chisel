@@ -1,7 +1,0 @@
-{
-    "type":"CTMV",
-    "textures": [
-        "./brick-wear-top.ctx",
-        "./brick-wear-ctmv.ctx"
-    ]
-}

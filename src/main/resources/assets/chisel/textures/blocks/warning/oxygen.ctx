@@ -1,7 +1,0 @@
-{
-    "type":"NORMAL",
-    "textures":[
-           "./oxygen"
-       ],
-    "layer":"CUTOUT"
-}
