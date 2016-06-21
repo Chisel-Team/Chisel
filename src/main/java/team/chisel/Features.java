@@ -175,7 +175,6 @@ public enum Features {
                     .next("bloodRuneCarvedRadial")
                     .next("bloodRuneClassicPanel")
                     .next("bloodRuneTiles")
-                    .next("RuneDiagonalBricks")
                     .build();
         }
     },
@@ -1144,7 +1143,7 @@ public enum Features {
     IRONPANE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("ironpane", Blocks.IRON_BARS.getDefaultState(), -1);
+            //Carving.chisel.addVariation("ironpane", Blocks.IRON_BARS.getDefaultState(), -1); TODO fix model
             factory.newBlock(Material.IRON, "ironpane", provider)
                     .newVariation("fenceIron")
                     .next("barbedwire")
@@ -1158,7 +1157,7 @@ public enum Features {
                     .next("a1-ironbars-ironclassicnew")
                     .next("a1-ironbars-ironfence")
                     .next("a1-ironbars-ironfencemodern")
-                    .next("a1-ironbars-ironclassic")
+                    //.next("a1-ironbars-ironclassic") Repeat, rip
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
@@ -1519,8 +1518,8 @@ public enum Features {
             Carving.chisel.addVariation("netherrack", Blocks.NETHERRACK.getDefaultState(), -1);
             factory.newBlock(Material.ROCK, "netherrack", provider)
                     .newVariation("a1-netherrack-bloodgravel")
-                    .next("a1-netherrack-bloodROCK")
-                    .next("a1-netherrack-bloodROCKgrey")
+                    .next("a1-netherrack-bloodrock")
+                    .next("a1-netherrack-bloodrockgrey")
                     .next("a1-netherrack-brinstar")
                     .next("a1-netherrack-brinstarshale")
                     .next("a1-netherrack-classic")
@@ -1529,7 +1528,7 @@ public enum Features {
                     .next("a1-netherrack-gutsdark")
                     .next("a1-netherrack-meat")
                     .next("a1-netherrack-meatred")
-                    .next("a1-netherrack-meatROCK")
+                    .next("a1-netherrack-meatrock")
                     .next("a1-netherrack-red")
                     .next("a1-netherrack-wells")
                     .build();
@@ -1682,7 +1681,7 @@ public enum Features {
         }
     },*/
 
-    /*PRISMARINE { TODO Retexture
+    PRISMARINE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
@@ -1693,13 +1692,41 @@ public enum Features {
             Carving.chisel.addVariation("prismarine", prismarine.withProperty(prop, BlockPrismarine.EnumType.DARK), -1);
 
             factory.newBlock(Material.ROCK, "prismarine", provider)
-                    .newVariation("prismarineCircular")
-                    .next("prismarineBrick")
-                    .next("masonryPrismarine")
-                    .next("masonryPrismarineAnim")
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .build();
+
+            factory.newBlock(Material.ROCK, "prismarineextra", provider)
+                    .setGroup("prismarine")
+                    .setParentFolder("prismarine")
+                    .newVariation("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
                     .build();
         }
-    },*/
+    },
 
     /* PUMPKIN {
         @Override
