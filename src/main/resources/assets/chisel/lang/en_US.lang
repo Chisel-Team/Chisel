@@ -7,6 +7,11 @@ item.chisel.chisel.desc.lc2=Can target a block by leaving it in the inventory
 
 item.chisel.chisel.desc.modes=Has multiple modes for chiseling.
 
+container.chisel.title=Chisel
+
+itemGroup.chiselCreativeTab=Chisel
+chisel.jei.title=Chiseling
+
 tile.chisel.blockAluminum.name=Block of Aluminum
 tile.chisel.blockAluminum.caution.desc.1=Caution
 tile.chisel.blockAluminum.crate.desc.1=Shipping Crate
