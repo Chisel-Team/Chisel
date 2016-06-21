@@ -156,13 +156,6 @@ public class ContainerChisel extends Container {
     }
 
     public void onChiselSlotChanged() {
-        ItemStack stack = playerInventory.mainInventory[chiselSlot];
-        if (hand == EnumHand.MAIN_HAND && (stack == null || !stack.isItemEqual(chisel)))
-            finished = true;
-
-        if (finished)
-            return;
-
         if (!chisel.hasTagCompound()) {
             chisel.setTagCompound(new NBTTagCompound());
         }
