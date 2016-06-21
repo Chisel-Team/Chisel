@@ -169,7 +169,7 @@ tile.chisel.cloud.small.desc.1=Small Bricks
 tile.chisel.cloud.vertical.desc.1=Vertical Bricks
 tile.chisel.cloud.grid.desc.1=Small Tiles
 
-tile.chisel.blockCobalt.name=Block of Aluminum
+tile.chisel.blockCobalt.name=Block of Cobalt
 tile.chisel.blockCobalt.caution.desc.1=Caution
 tile.chisel.blockCobalt.crate.desc.1=Shipping Crate
 tile.chisel.blockCobalt.thermal.desc.1=Thermal
@@ -494,7 +494,7 @@ tile.chisel.hardenedclayextra.poison.desc.1=Poison
 
 tile.chisel.icepillar.name=Ice Pillar
 
-tile.chisel.blockInvar.name=Block of Aluminum
+tile.chisel.blockInvar.name=Block of Invar
 tile.chisel.blockInvar.caution.desc.1=Caution
 tile.chisel.blockInvar.crate.desc.1=Shipping Crate
 tile.chisel.blockInvar.thermal.desc.1=Thermal
