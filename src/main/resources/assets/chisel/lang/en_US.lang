@@ -73,13 +73,13 @@ tile.chisel.basaltextra.marker.desc.1=Marker
 tile.chisel.basaltextra.sunken.desc.1=Sunken
 tile.chisel.basaltextra.poison.desc.1=Poison
 
-tile.chisel.bloocMagic.name=Chiseled Rune
-tile.chisel.bloocMagic.bloodRuneArranged.desc.1=Arranged
-tile.chisel.bloocMagic.bloodRuneBricks.desc.1=Bricks
-tile.chisel.bloocMagic.bloodRuneCarved.desc.1=Carved
-tile.chisel.bloocMagic.bloodRuneCarvedRadial.desc.1=Radial
-tile.chisel.bloocMagic.bloodRuneClassicPanel.desc.1=Panel
-tile.chisel.bloocMagic.bloodRuneTiles.desc.1=Tiles
+tile.chisel.bloodMagic.name=Chiseled Rune
+tile.chisel.bloodMagic.bloodRuneArranged.desc.1=Arranged
+tile.chisel.bloodMagic.bloodRuneBricks.desc.1=Bricks
+tile.chisel.bloodMagic.bloodRuneCarved.desc.1=Carved
+tile.chisel.bloodMagic.bloodRuneCarvedRadial.desc.1=Radial
+tile.chisel.bloodMagic.bloodRuneClassicPanel.desc.1=Panel
+tile.chisel.bloodMagic.bloodRuneTiles.desc.1=Tiles
 
 tile.chisel.bookshelf.name=Bookshelf
 tile.chisel.bookshelf.rainbow.desc.1=Rainbow
