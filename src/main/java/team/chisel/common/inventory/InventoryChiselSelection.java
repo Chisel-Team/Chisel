@@ -106,7 +106,8 @@ public class InventoryChiselSelection implements IInventory {
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        return true;
+        ItemStack held = entityplayer.getHeldItem(container.getHand());
+        return held != null && held.getItem() instanceof ItemChisel;
     }
 
     public void clearItems() {
@@ -136,7 +137,7 @@ public class InventoryChiselSelection implements IInventory {
         if (Block.getBlockFromItem(item) == null)
             return;
 
-        List<ItemStack> list = container.carving.getItemsForChiseling(chiseledItem);
+        List<ItemStack> list = container.getCarving().getItemsForChiseling(chiseledItem);
 
         activeVariations = 0;
         while (activeVariations < normalSlots && activeVariations < list.size()) {

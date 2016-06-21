@@ -8,7 +8,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 
@@ -17,7 +16,6 @@ import org.lwjgl.opengl.GL11;
 import team.chisel.common.inventory.ContainerChisel;
 import team.chisel.common.inventory.InventoryChiselSelection;
 import team.chisel.common.inventory.SlotChiselInput;
-import team.chisel.common.item.ItemChisel;
 
 public class GuiChisel extends GuiContainer {
 
@@ -51,15 +49,6 @@ public class GuiChisel extends GuiContainer {
 //        }
     }
 
-    @Override
-    public void updateScreen() {
-        super.updateScreen();
-        ItemStack held = player.getHeldItem(container.getHand());
-        if (held == null || !(held.getItem() instanceof ItemChisel)) {
-            mc.displayGuiScreen(null);
-        }
-    }
-
 //    private void setButtonText() {
 //        ((GuiButton) buttonList.get(0)).displayString = I18n.format(container.inventory.getInventoryName() + ".mode." + currentMode.name().toLowerCase());
 //    }
@@ -75,7 +64,7 @@ public class GuiChisel extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int j, int i) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        String line = I18n.format(this.container.inventory.getName() + ".title");
+        String line = I18n.format(this.container.getInventoryChisel().getName() + ".title");
         List<String> lines = fontRendererObj.listFormattedStringToWidth(line, 40);
         int y = 60;
         for (String s : lines) {

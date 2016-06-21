@@ -4,18 +4,18 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import team.chisel.common.item.ItemChisel;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.MathHelper;
+import team.chisel.client.ClientUtil;
 
 public class SlotChiselSelection extends Slot {
 
     private final ContainerChisel container;
-    private final InventoryChiselSelection selInventory;
 
     public SlotChiselSelection(ContainerChisel container, InventoryChiselSelection inv, IInventory iinventory, int i, int j, int k) {
         super(iinventory, i, j, k);
-
         this.container = container;
-        selInventory = inv;
     }
 
     @Override
@@ -25,42 +25,47 @@ public class SlotChiselSelection extends Slot {
 
     @Override
     public boolean canTakeStack(EntityPlayer par1EntityPlayer) {
-        if (container.finished)
-            return false;
-
         return par1EntityPlayer.inventory.getItemStack() == null;
     }
 
     @Override
     public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack) {
         ItemStack heldStack = player.inventory.getItemStack();
-        ItemStack crafted = selInventory.inventory[InventoryChiselSelection.normalSlots];
+        ItemStack crafted = container.getInventoryChisel().inventory[InventoryChiselSelection.normalSlots];
+        ItemStack chisel = container.getChisel();
 
         if (heldStack == null) {
-            selInventory.decrStackSize(InventoryChiselSelection.normalSlots, 1);
+            container.getInventoryChisel().decrStackSize(InventoryChiselSelection.normalSlots, 1);
         } else {
             putStack(itemstack.copy());
 
             player.inventory.setItemStack(null);
 
-            if (selInventory.inventory[InventoryChiselSelection.normalSlots] == null)
-                return;
-            /*if (selInventory.chisel != null && selInventory.chisel.getItem() instanceof ItemChisel){
-                selInventory.chisel.damageItem(selInventory.inventory[InventoryChiselSelection.normalSlots].stackSize, player);
-            } TODO Chisel Damage */
-            player.inventory.setItemStack(new ItemStack(itemstack.getItem(), selInventory.inventory[InventoryChiselSelection.normalSlots].stackSize, itemstack.getItemDamage()));
-            selInventory.setInventorySlotContents(InventoryChiselSelection.normalSlots, null);
+            if (crafted != null) {
+                int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
+                int toCraft = Math.min(crafted.stackSize, damageLeft);
+                chisel.damageItem(toCraft, player);
+                if (chisel.stackSize <= 0) {
+                    if (container.getHand() == EnumHand.MAIN_HAND) {
+                        container.getInventoryPlayer().mainInventory[container.getChiselSlot()] = null;
+                    } else {
+                        container.getInventoryPlayer().offHandInventory[0] = null;
+                    }
+                }
+                player.inventory.setItemStack(new ItemStack(itemstack.getItem(), toCraft, itemstack.getItemDamage()));
+                crafted.stackSize -= toCraft;
+                container.getInventoryChisel().setInventorySlotContents(InventoryChiselSelection.normalSlots, crafted.stackSize <= 0 ? null : crafted);
+            }
         }
 
-        selInventory.updateItems();
-
-
+        container.getInventoryChisel().updateItems();
+        container.detectAndSendChanges();
+        
         if (player.worldObj.isRemote) {
-            //todo Add sound
-//            String sound = CarvableBlocks.fromItemStack(crafted).getSound();
-//            ClientUtil.playSound(player.worldObj, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound);
+            String sound = container.getCarving().getVariationSound(crafted);
+            ClientUtil.playSound(player.worldObj, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound, SoundCategory.BLOCKS);
         } else {
-            //container.playerInventory.player.addStat(Statistics.blocksChiseled, crafted.stackSize);
+            //container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.stackSize);
         }
     }
 }
