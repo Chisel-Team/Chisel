@@ -43,10 +43,6 @@ public class RenderContextList {
     }
 
     public TLongSet serialized() {
-        TLongSet ret = new TLongHashSet();
-        for (IBlockRenderContext ctx : contextMap.values()) {
-            ret.add(ctx.getCompressedData());
-        }
-        return ret;
+        return serialized;
     }
 }
