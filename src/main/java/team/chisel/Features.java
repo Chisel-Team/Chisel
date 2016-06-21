@@ -822,7 +822,7 @@ public enum Features {
             for(int c = 0; c < dyeColors.length; c++)
             {
                 Carving.chisel.addVariation("glassdyed"+dyeColors[c], stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
-                factory.newBlock(Material.GLASS, "glassdyed"+dyeColors[c], provider)
+                factory.newBlock(Material.GLASS, "glassdyed"+dyeColors[c], provider).opaque(false)
                         .setParentFolder("glassdyed")
                         .newVariation(dyeColors[c]+"-bubble")
                         .next(dyeColors[c]+"-panel")
