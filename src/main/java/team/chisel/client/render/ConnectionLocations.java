@@ -3,6 +3,7 @@ package team.chisel.client.render;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -155,9 +156,10 @@ public enum ConnectionLocations {
 
     public static List<ConnectionLocations> getConnections(IBlockAccess world, BlockPos pos){
         List<ConnectionLocations> locs = new ArrayList<>();
+        IBlockState state = world.getBlockState(pos);
         for (ConnectionLocations loc : VALUES){
             BlockPos second = loc.transform(pos);
-            if (world.getBlockState(pos).equals(CTM.getBlockOrFacade(world, second, null))){
+            if (state.equals(CTM.getBlockOrFacade(world, second, null))){
                 locs.add(loc);
             }
         }

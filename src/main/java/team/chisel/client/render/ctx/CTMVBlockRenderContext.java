@@ -88,9 +88,12 @@ public class CTMVBlockRenderContext implements IBlockRenderContext {
 
         public static Connections forPos(IBlockAccess world, IBlockState baseState, BlockPos pos) {
             EnumSet<EnumFacing> connections = EnumSet.noneOf(EnumFacing.class);
-            for (EnumFacing f : EnumFacing.VALUES) {
-                if (world.getBlockState(pos) == baseState && world.getBlockState(pos.offset(f)) == baseState) {
-                    connections.add(f);
+            IBlockState state = world.getBlockState(pos);
+            if (state == baseState) {
+                for (EnumFacing f : EnumFacing.VALUES) {
+                    if (world.getBlockState(pos.offset(f)) == baseState) {
+                        connections.add(f);
+                    }
                 }
             }
             return new Connections(connections);
@@ -132,8 +135,9 @@ public class CTMVBlockRenderContext implements IBlockRenderContext {
     public CTMVBlockRenderContext(IBlockAccess world, BlockPos pos) {
         data = new ConnectionData(world, pos);
 
+        IBlockState state = world.getBlockState(pos);
         for (ConnectionLocations loc : ALL_VALUES) {
-            if (world.getBlockState(pos) == world.getBlockState(loc.transform(pos))){
+            if (state == world.getBlockState(loc.transform(pos))){
                 compressedData = compressedData | loc.getMask();
             }
         }
