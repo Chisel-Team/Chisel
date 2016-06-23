@@ -23,7 +23,7 @@ import team.chisel.common.config.Configurations;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 
-@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.9, 1.11)")
+@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.9.4, 1.11)")
 public class Chisel implements Reference {
 
     public static final Logger logger = LogManager.getLogger(MOD_NAME);

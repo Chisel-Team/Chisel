@@ -168,6 +168,7 @@ curseforge {
         changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
         changelogType = 'html'
         releaseType = 'alpha'
+		addGameVersion '1.10'
         mainArtifact(jar) {
             displayName = "Chisel - ${version}"
         }
