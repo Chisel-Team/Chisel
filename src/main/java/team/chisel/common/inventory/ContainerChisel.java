@@ -24,6 +24,8 @@ public class ContainerChisel extends Container {
     private final ICarvingRegistry carving;
     
     private final EnumHand hand;
+    
+    private boolean chiselExists = false;
 
     public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {
         this.inventoryChisel = inv;
@@ -91,7 +93,7 @@ public class ContainerChisel extends Container {
     @Override
     public void onContainerClosed(EntityPlayer entityplayer) {
         inventoryChisel.clearItems();
-        if (inventoryChisel.getStackInSpecialSlot() != null) {
+        if (!chiselExists && inventoryChisel.getStackInSpecialSlot() != null) {
             entityplayer.dropItem(inventoryChisel.getStackInSpecialSlot(), false);
         }
         super.onContainerClosed(entityplayer);
@@ -99,7 +101,7 @@ public class ContainerChisel extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer) {
-        return inventoryChisel.isUseableByPlayer(entityplayer);
+        return chiselExists = inventoryChisel.isUseableByPlayer(entityplayer);
     }
 
     @Override
