@@ -239,6 +239,11 @@ public class BlockCarvable extends Block implements ICarvable {
     }
     
     @Override
+    public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return isOpaqueCube(state) ? 255 : 0;
+    }
+    
+    @Override
     @Deprecated
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
