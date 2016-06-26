@@ -120,7 +120,7 @@ public class GuiChisel extends GuiContainer {
     protected void drawSlot(Slot slot) {
         if (slot instanceof SlotChiselInput) {
             GL11.glPushMatrix();
-            GL11.glScalef(2, 2, 2);
+            GL11.glScalef(2, 2, 1);
             slot.xDisplayPosition -= 16;
             slot.yDisplayPosition -= 16;
             super.drawSlot(slot);
