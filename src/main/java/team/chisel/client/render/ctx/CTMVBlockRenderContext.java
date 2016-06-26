@@ -23,13 +23,13 @@ import static team.chisel.client.render.ConnectionLocations.*;
 
 public class CTMVBlockRenderContext implements IBlockRenderContext {
 
-    private static ConnectionLocations[] MAIN_VALUES = { UP, DOWN, NORTH, SOUTH, EAST, WEST };
-    private static ConnectionLocations[] OFFSET_VALUES = ArrayUtils.removeElements(ConnectionLocations.VALUES, ObjectArrays.concat(
+    private static final ConnectionLocations[] MAIN_VALUES = { UP, DOWN, NORTH, SOUTH, EAST, WEST };
+    private static final ConnectionLocations[] OFFSET_VALUES = ArrayUtils.removeElements(ConnectionLocations.VALUES, ObjectArrays.concat(
             new ConnectionLocations[] { NORTH_EAST_UP, NORTH_EAST_DOWN, NORTH_WEST_UP, NORTH_WEST_DOWN, SOUTH_WEST_UP, SOUTH_WEST_DOWN, SOUTH_EAST_UP, SOUTH_EAST_DOWN, },
             MAIN_VALUES,
             ConnectionLocations.class
     ));
-    private static ConnectionLocations[] ALL_VALUES = ObjectArrays.concat(MAIN_VALUES, OFFSET_VALUES, ConnectionLocations.class);
+    private static final ConnectionLocations[] ALL_VALUES = ObjectArrays.concat(MAIN_VALUES, OFFSET_VALUES, ConnectionLocations.class);
 
     @AllArgsConstructor
     @Getter

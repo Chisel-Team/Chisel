@@ -154,10 +154,10 @@ public enum ConnectionLocations {
         return 1 << ordinal();
     }
 
-    public static List<ConnectionLocations> getConnections(IBlockAccess world, BlockPos pos){
+    public static List<ConnectionLocations> getConnections(IBlockAccess world, BlockPos pos, ConnectionLocations[] values){
         List<ConnectionLocations> locs = new ArrayList<>();
         IBlockState state = world.getBlockState(pos);
-        for (ConnectionLocations loc : VALUES){
+        for (ConnectionLocations loc : values) {
             BlockPos second = loc.transform(pos);
             if (state.equals(CTM.getBlockOrFacade(world, second, null))){
                 locs.add(loc);
@@ -166,8 +166,8 @@ public enum ConnectionLocations {
         return locs;
     }
 
-    public static long getData(IBlockAccess world, BlockPos pos){
-        List<ConnectionLocations> locs = getConnections(world, pos);
+    public static long getData(IBlockAccess world, BlockPos pos, ConnectionLocations[] values){
+        List<ConnectionLocations> locs = getConnections(world, pos, values);
         long data = 0;
         for (ConnectionLocations loc : locs){
             data = data | loc.getMask();
