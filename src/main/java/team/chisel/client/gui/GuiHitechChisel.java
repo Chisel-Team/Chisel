@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.Set;
 
-import javax.annotation.Generated;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -21,22 +19,25 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
 import org.apache.commons.lang3.StringUtils;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
-import org.lwjgl.util.glu.GLU;
 
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
@@ -134,7 +135,7 @@ public class GuiHitechChisel extends GuiChisel {
 
         @Override
         public IBlockState getBlockState(BlockPos pos) {
-            return gui.button.getType().getPositions().contains(pos) ? state : Blocks.AIR.getDefaultState();
+            return gui.buttonPreview.getType().getPositions().contains(pos) ? state : Blocks.AIR.getDefaultState();
         }
 
         @Override
@@ -169,7 +170,7 @@ public class GuiHitechChisel extends GuiChisel {
     }
     
     private static final Rectangle slots = new Rectangle(0, 0, 1000, 1000);
-    private static final Rectangle panel = new Rectangle(8, 33, 74, 74);
+    private static final Rectangle panel = new Rectangle(8, 15, 74, 74);
     
     private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselGuiHitech.png");
     
@@ -178,11 +179,13 @@ public class GuiHitechChisel extends GuiChisel {
     private final FakeBlockAccess fakeworld = new FakeBlockAccess(this);
     
     private boolean panelClicked;
+    private long lastDragTime;
     private int clickX, clickY;
-    private int prevRotX, prevRotY;
-    private int rotX, rotY;
+    private float prevRotX, prevRotY;
+    private float rotX, rotY;
     
-    private PreviewModeButton button;
+    private PreviewModeButton buttonPreview;
+    private GuiButton buttonChisel;
     
     public GuiHitechChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, EnumHand hand) {
         super(iinventory, menu, hand);
@@ -194,7 +197,51 @@ public class GuiHitechChisel extends GuiChisel {
     @Override
     public void initGui() {
         super.initGui();
-        buttonList.add(button = new PreviewModeButton(0, guiLeft + panel.getX() - 1, guiTop + panel.getY() + panel.getHeight() + 2, 76, 20));
+        int x = guiLeft + panel.getX() - 1;
+        int y = guiTop + panel.getY() + panel.getHeight() + 3;
+        int w = 76, h = 20;
+        int id = 0;
+        
+        buttonList.add(buttonPreview = new PreviewModeButton(id++, x, y, w, h));
+
+        buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, "Chisel"));
+    }
+    
+    @Override
+    public void updateScreen() {
+        super.updateScreen();
+        
+        if (!panelClicked) {
+            prevRotX = rotX;
+            prevRotY = rotY;
+        }
+        
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+            buttonChisel.displayString = TextFormatting.YELLOW.toString() + "Chisel All";
+        } else {
+            buttonChisel.displayString = "Chisel";
+        }
+        
+        // Iffy math, scrolling value is nonstandard. Seems to be a decent speed though.
+        float scroll = -Mouse.getDWheel() / 300f;
+        if (containerHitech.getTarget() != null && scroll != 0) {
+            int idx = containerHitech.getTarget().getSlotIndex();
+            idx += Math.signum(scroll) * Math.ceil(Math.abs(scroll));
+            if (idx < 0) {
+                for (int i = containerHitech.getInventoryChisel().size - 1; i >= 0; i--) {
+                    if (containerHitech.getSlot(i).getHasStack()) {
+                        idx = i;
+                        break;
+                    }
+                }
+            } else if (idx >= containerHitech.getInventoryChisel().size || !containerHitech.getSlot(idx).getHasStack()) {
+                idx = 0;
+            } else {
+                
+            }
+
+            containerHitech.setTarget(containerHitech.getSlot(idx));
+        }
     }
     
     @Override
@@ -202,18 +249,35 @@ public class GuiHitechChisel extends GuiChisel {
         drawDefaultBackground();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        int i = width - xSize >> 1;
-        int j = height - ySize >> 1;
-
         Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-        drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
         
         if (containerHitech.getSelection() != null) {
-            drawTexturedModalRect(i + containerHitech.getSelection().xDisplayPosition - 1, j + containerHitech.getSelection().yDisplayPosition - 1, 0, 220, 18, 18);
+            Slot sel = containerHitech.getSelection();
+            if (sel.getStack() != null) {
+                drawSlotHighlight(sel, 0);
+                for (int i = containerHitech.getInventoryChisel().size + 1; i < containerHitech.inventorySlots.size(); i++) {
+                    Slot s = containerHitech.getSlot(i);
+                    if (sel != s && ItemStack.areItemsEqual(sel.getStack(), s.getStack())) {
+                        drawSlotHighlight(s, 18);
+                    }
+                }
+            }
         }
-        drawTexturedModalRect(i + containerHitech.getTarget().xDisplayPosition - 1, j + containerHitech.getTarget().yDisplayPosition - 1, 18, 220, 18, 18);
+        if (containerHitech.getTarget() != null && containerHitech.getTarget().getStack() != null) {
+            drawSlotHighlight(containerHitech.getTarget(), 36);
+        }
+        
+        if (!panelClicked && System.currentTimeMillis() - lastDragTime > 2000) {
+            rotY = prevRotY + (f * 2);
+        }
     }
     
+    private void drawSlotHighlight(Slot slot, int u) {
+        drawTexturedModalRect(guiLeft + slot.xDisplayPosition - 1, guiTop + slot.yDisplayPosition - 1, u, 220, 18, 18);
+    }
+    
+    @SuppressWarnings("deprecation")
     @Override
     protected void drawGuiContainerForegroundLayer(int j, int i) {
         if (panelClicked) {
@@ -225,7 +289,7 @@ public class GuiHitechChisel extends GuiChisel {
         Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
         
         zLevel = 1000;
-        drawTexturedModalRect(panel.getX() + 1, panel.getY() + 1, 36, 220, 16, 16);
+        drawTexturedModalRect(panel.getX() + 1, panel.getY() + 1, 0, 238, 16, 16);
         zLevel = 0;
 
         String s = "Preview";
@@ -234,38 +298,41 @@ public class GuiHitechChisel extends GuiChisel {
         try {
 
             BlockRendererDispatcher brd = this.mc.getBlockRendererDispatcher();
-            ItemStack stack = containerHitech.getTarget().getStack();
-            
-            if (stack != null) {
+            if (containerHitech.getTarget() != null) {
                 
-                GlStateManager.pushMatrix();
-                
-                GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
+                ItemStack stack = containerHitech.getTarget().getStack();
 
-                GlStateManager.translate(0.5, 1.5, 0.5);
-                float sc = button.getType().getScale();
-                GlStateManager.scale(-sc, -sc, -sc);
+                if (stack != null) {
 
-                GlStateManager.rotate(rotX, 1, 0, 0);
-                GlStateManager.rotate(rotY, 0, 1, 0);
-                GlStateManager.translate(-0.5, -1.5, -0.5);
+                    GlStateManager.pushMatrix();
 
-                Block block = Block.getBlockFromItem(stack.getItem());
-                IBlockState state = block.getStateFromMeta(stack.getMetadata());
-                if (state instanceof IExtendedBlockState) {
-                    state = ((IExtendedBlockState) state).getClean();
+                    GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
+
+                    GlStateManager.translate(0.5, 1.5, 0.5);
+                    float sc = buttonPreview.getType().getScale();
+                    GlStateManager.scale(-sc, -sc, -sc);
+
+                    GlStateManager.rotate(rotX, 1, 0, 0);
+                    GlStateManager.rotate(rotY, 0, 1, 0);
+                    GlStateManager.translate(-0.5, -1.5, -0.5);
+
+                    Block block = Block.getBlockFromItem(stack.getItem());
+                    IBlockState state = block.getStateFromMeta(stack.getMetadata());
+                    if (state instanceof IExtendedBlockState) {
+                        state = ((IExtendedBlockState) state).getClean();
+                    }
+
+                    fakeworld.setState(state);
+
+                    Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                    Tessellator.getInstance().getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
+                    for (BlockPos pos : buttonPreview.getType().getPositions()) {
+                        brd.renderBlock(state, pos, fakeworld, Tessellator.getInstance().getBuffer());
+                    }
+                    Tessellator.getInstance().draw();
+
+                    GlStateManager.popMatrix();
                 }
-                
-                fakeworld.setState(state);
-
-                Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-                Tessellator.getInstance().getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
-                for (BlockPos pos : button.getType().getPositions()) {
-                    brd.renderBlock(state, pos, fakeworld, Tessellator.getInstance().getBuffer());
-                }
-                Tessellator.getInstance().draw();
-
-                GlStateManager.popMatrix();
             }
         } catch (Throwable throwable) {
             throwable.printStackTrace();
@@ -287,6 +354,9 @@ public class GuiHitechChisel extends GuiChisel {
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int state) {
         super.mouseReleased(mouseX, mouseY, state);
+        if (panelClicked) {
+            lastDragTime = System.currentTimeMillis();
+        }
         panelClicked = false;
         prevRotX = rotX;
         prevRotY = rotY;

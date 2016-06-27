@@ -1,6 +1,7 @@
 package team.chisel.common.inventory;
 
 import lombok.Getter;
+import lombok.Setter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 
 @Getter
+@Setter
 public class ContainerChiselHitech extends ContainerChisel {
 
     private Slot selection, target;
@@ -39,8 +41,6 @@ public class ContainerChiselHitech extends ContainerChisel {
         for (int i = 0; i < 9; i++) {
             addSlotToContainer(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
         }
-        
-        target = getSlot(0);
     }
     
     @Override
@@ -50,7 +50,7 @@ public class ContainerChiselHitech extends ContainerChisel {
             if (slotId < getInventoryChisel().size) {
                 target = slot;
             } else {
-                target = getSlot(0);
+                target = null;
                 selection = slot;
                 ItemStack stack = slot.getStack();
                 getInventoryChisel().setInventorySlotContents(getInventoryChisel().size, stack == null ? null : stack.copy());
