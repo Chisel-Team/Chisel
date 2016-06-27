@@ -26,7 +26,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
@@ -184,6 +183,8 @@ public class GuiHitechChisel extends GuiChisel {
     private float prevRotX, prevRotY;
     private float rotX, rotY;
     
+    private int scrollAcc;
+    
     private PreviewModeButton buttonPreview;
     private GuiButton buttonChisel;
     
@@ -221,27 +222,6 @@ public class GuiHitechChisel extends GuiChisel {
         } else {
             buttonChisel.displayString = "Chisel";
         }
-        
-        // Iffy math, scrolling value is nonstandard. Seems to be a decent speed though.
-        float scroll = -Mouse.getDWheel() / 300f;
-        if (containerHitech.getTarget() != null && scroll != 0) {
-            int idx = containerHitech.getTarget().getSlotIndex();
-            idx += Math.signum(scroll) * Math.ceil(Math.abs(scroll));
-            if (idx < 0) {
-                for (int i = containerHitech.getInventoryChisel().size - 1; i >= 0; i--) {
-                    if (containerHitech.getSlot(i).getHasStack()) {
-                        idx = i;
-                        break;
-                    }
-                }
-            } else if (idx >= containerHitech.getInventoryChisel().size || !containerHitech.getSlot(idx).getHasStack()) {
-                idx = 0;
-            } else {
-                
-            }
-
-            containerHitech.setTarget(containerHitech.getSlot(idx));
-        }
     }
     
     @Override
@@ -270,6 +250,36 @@ public class GuiHitechChisel extends GuiChisel {
         
         if (!panelClicked && System.currentTimeMillis() - lastDragTime > 2000) {
             rotY = prevRotY + (f * 2);
+        }
+
+        if (containerHitech.getTarget() != null) {
+            scrollAcc += Mouse.getDWheel();
+            if (Math.abs(scrollAcc) >= 120) {
+                int idx = containerHitech.getTarget().getSlotIndex();
+                while (Math.abs(scrollAcc) >= 120) {
+                    if (scrollAcc > 0) {
+                        idx--;
+                        scrollAcc -= 120;
+                    } else {
+                        idx++;
+                        scrollAcc += 120;
+                    }
+                }
+                if (idx < 0) {
+                    for (int i = containerHitech.getInventoryChisel().size - 1; i >= 0; i--) {
+                        if (containerHitech.getSlot(i).getHasStack()) {
+                            idx = i;
+                            break;
+                        }
+                    }
+                } else if (idx >= containerHitech.getInventoryChisel().size || !containerHitech.getSlot(idx).getHasStack()) {
+                    idx = 0;
+                } else {
+
+                }
+
+                containerHitech.setTarget(containerHitech.getSlot(idx));
+            }
         }
     }
     
