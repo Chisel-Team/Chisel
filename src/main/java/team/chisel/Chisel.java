@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,7 +35,7 @@ public class Chisel implements Reference {
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY, modId = MOD_ID)
     public static CommonProxy proxy;
 
-    public static ItemChisel itemChiselIron, itemChiselDiamond;
+    public static ItemChisel itemChiselIron, itemChiselDiamond, itemChiselHitech;
 
     public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
 
@@ -54,12 +55,15 @@ public class Chisel implements Reference {
 
         itemChiselIron = new ItemChisel(ChiselType.IRON);
         itemChiselDiamond = new ItemChisel(ChiselType.DIAMOND);
+        itemChiselHitech = new ItemChisel(ChiselType.HITECH);
         
         GameRegistry.register(itemChiselIron);
         GameRegistry.register(itemChiselDiamond);
-        
+        GameRegistry.register(itemChiselHitech);
+
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 

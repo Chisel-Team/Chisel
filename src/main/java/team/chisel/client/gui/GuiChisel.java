@@ -94,7 +94,7 @@ public class GuiChisel extends GuiContainer {
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
 
-        Slot main = (Slot) container.inventorySlots.get(InventoryChiselSelection.normalSlots);
+        Slot main = (Slot) container.inventorySlots.get(container.getInventoryChisel().size);
         if (main.getStack() == null) {
             drawSlotOverlay(this, x + 14, y + 14, main, 0, ySize, 60);
         }
@@ -115,7 +115,7 @@ public class GuiChisel extends GuiContainer {
 //        }
 //        super.actionPerformed(button);
 //    }
-
+    
     @Override
     protected void drawSlot(Slot slot) {
         if (slot instanceof SlotChiselInput) {
