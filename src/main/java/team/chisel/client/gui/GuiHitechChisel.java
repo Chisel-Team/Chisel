@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -176,7 +177,6 @@ public class GuiHitechChisel extends GuiChisel {
         }
     }
     
-    private static final Rectangle slots = new Rectangle(0, 0, 1000, 1000);
     private static final Rectangle panel = new Rectangle(8, 14, 74, 74);
     
     private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselGuiHitech.png");
@@ -186,10 +186,11 @@ public class GuiHitechChisel extends GuiChisel {
     private final FakeBlockAccess fakeworld = new FakeBlockAccess(this);
     
     private boolean panelClicked;
+    private int clickButton;
     private long lastDragTime;
     private int clickX, clickY;
-    private float prevRotX, prevRotY;
-    private float rotX = -15, rotY;
+    private float prevRotX, prevRotY, prevZoom;
+    private float rotX = -15, rotY, zoom = 1;
     
     private int scrollAcc;
     
@@ -223,6 +224,7 @@ public class GuiHitechChisel extends GuiChisel {
         if (!panelClicked) {
             prevRotX = rotX;
             prevRotY = rotY;
+            prevZoom = zoom;
         }
     
         if (isShiftDown()) {
@@ -302,8 +304,12 @@ public class GuiHitechChisel extends GuiChisel {
     @Override
     protected void drawGuiContainerForegroundLayer(int j, int i) {
         if (panelClicked) {
-            rotX = prevRotX + Mouse.getY() - clickY;
-            rotY = prevRotY + Mouse.getX() - clickX;
+            if (clickButton == 0) {
+                rotX = prevRotX + Mouse.getY() - clickY;
+                rotY = prevRotY + Mouse.getX() - clickX;
+            } else if (clickButton == 1) {
+                zoom = Math.max(1, prevZoom + (clickY - Mouse.getY()));
+            }
         }
 
         String s = "Preview";
@@ -323,7 +329,8 @@ public class GuiHitechChisel extends GuiChisel {
                     GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2) - 2, 100);
 
                     GlStateManager.translate(0.5, 1.5, 0.5);
-                    float sc = buttonPreview.getType().getScale();
+                    // Makes zooming slower as zoom increases, but leaves 1 as the default zoom.
+                    double sc = buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9);
                     GlStateManager.scale(-sc, -sc, -sc);
 
                     GlStateManager.rotate(rotX, 1, 0, 0);
@@ -343,7 +350,12 @@ public class GuiHitechChisel extends GuiChisel {
                     for (BlockPos pos : buttonPreview.getType().getPositions()) {
                         brd.renderBlock(state, pos, fakeworld, Tessellator.getInstance().getBuffer());
                     }
+                    
+                    ScaledResolution sr = new ScaledResolution(mc);
+                    GL11.glEnable(GL11.GL_SCISSOR_TEST);
+                    GL11.glScissor((guiLeft + panel.getX()) * sr.getScaleFactor(), mc.displayHeight - ((guiTop + panel.getY() + panel.getHeight()) * sr.getScaleFactor()), panel.getWidth() * sr.getScaleFactor(), panel.getHeight() * sr.getScaleFactor());
                     Tessellator.getInstance().draw();
+                    GL11.glDisable(GL11.GL_SCISSOR_TEST);
 
                     GlStateManager.popMatrix();
                 }
@@ -358,7 +370,8 @@ public class GuiHitechChisel extends GuiChisel {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (mouseButton == 0 && panel.contains(mouseX - guiLeft, mouseY - guiTop)) {
+        if (panel.contains(mouseX - guiLeft, mouseY - guiTop)) {
+            clickButton = mouseButton;
             panelClicked = true;
             clickX = Mouse.getX();
             clickY = Mouse.getY();
@@ -374,6 +387,7 @@ public class GuiHitechChisel extends GuiChisel {
         panelClicked = false;
         prevRotX = rotX;
         prevRotY = rotY;
+        prevZoom = zoom;
     }
     
     @Override
