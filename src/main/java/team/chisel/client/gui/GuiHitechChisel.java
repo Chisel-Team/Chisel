@@ -41,6 +41,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.Rectangle;
 
 import team.chisel.Chisel;
@@ -177,6 +178,8 @@ public class GuiHitechChisel extends GuiChisel {
         }
     }
     
+    private static final boolean scissorAvailable = GLContext.getCapabilities().OpenGL20;
+    
     private static final Rectangle panel = new Rectangle(8, 14, 74, 74);
     
     private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselGuiHitech.png");
@@ -307,7 +310,7 @@ public class GuiHitechChisel extends GuiChisel {
             if (clickButton == 0) {
                 rotX = prevRotX + Mouse.getY() - clickY;
                 rotY = prevRotY + Mouse.getX() - clickX;
-            } else if (clickButton == 1) {
+            } else if (clickButton == 1 && scissorAvailable) {
                 zoom = Math.max(1, prevZoom + (clickY - Mouse.getY()));
             }
         }
@@ -350,12 +353,17 @@ public class GuiHitechChisel extends GuiChisel {
                     for (BlockPos pos : buttonPreview.getType().getPositions()) {
                         brd.renderBlock(state, pos, fakeworld, Tessellator.getInstance().getBuffer());
                     }
-                    
-                    ScaledResolution sr = new ScaledResolution(mc);
-                    GL11.glEnable(GL11.GL_SCISSOR_TEST);
-                    GL11.glScissor((guiLeft + panel.getX()) * sr.getScaleFactor(), mc.displayHeight - ((guiTop + panel.getY() + panel.getHeight()) * sr.getScaleFactor()), panel.getWidth() * sr.getScaleFactor(), panel.getHeight() * sr.getScaleFactor());
+
+                    if (scissorAvailable) {
+                        ScaledResolution sr = new ScaledResolution(mc);
+                        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+                        GL11.glScissor((guiLeft + panel.getX()) * sr.getScaleFactor(), mc.displayHeight - ((guiTop + panel.getY() + panel.getHeight()) * sr.getScaleFactor()),
+                                panel.getWidth() * sr.getScaleFactor(), panel.getHeight() * sr.getScaleFactor());
+                    }
                     Tessellator.getInstance().draw();
-                    GL11.glDisable(GL11.GL_SCISSOR_TEST);
+                    if (scissorAvailable) {
+                        GL11.glDisable(GL11.GL_SCISSOR_TEST);
+                    }
 
                     GlStateManager.popMatrix();
                 }
