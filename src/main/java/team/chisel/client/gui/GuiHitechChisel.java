@@ -1,7 +1,6 @@
 package team.chisel.client.gui;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -306,13 +305,6 @@ public class GuiHitechChisel extends GuiChisel {
             rotX = prevRotX + Mouse.getY() - clickY;
             rotY = prevRotY + Mouse.getX() - clickX;
         }
-        
-        GlStateManager.enableAlpha();
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
-        
-        zLevel = 1000;
-        drawTexturedModalRect(panel.getX() + 1, panel.getY() + 1, 0, 238, 16, 16);
-        zLevel = 0;
 
         String s = "Preview";
         fontRendererObj.drawString("Preview", panel.getX() + (panel.getWidth() / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
