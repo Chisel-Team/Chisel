@@ -8,7 +8,9 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -17,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.ChiselGuiHandler;
+import team.chisel.client.gui.PacketHitechChisel;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
@@ -38,6 +41,11 @@ public class Chisel implements Reference {
     public static ItemChisel itemChiselIron, itemChiselDiamond, itemChiselHitech;
 
     public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
+    
+    public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
+    static {
+        network.registerMessage(PacketHitechChisel.Handler.class, PacketHitechChisel.class, 0, Side.SERVER);
+    }
 
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;

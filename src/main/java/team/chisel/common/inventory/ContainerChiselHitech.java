@@ -1,5 +1,8 @@
 package team.chisel.common.inventory;
 
+import java.util.List;
+
+import team.chisel.api.carving.ICarvingGroup;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,14 +12,55 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 
+import com.google.common.collect.ImmutableList;
+
 @Getter
 @Setter
 public class ContainerChiselHitech extends ContainerChisel {
 
     private Slot selection, target;
+    private List<Slot> selectionDuplicates;
+    private ICarvingGroup currentGroup;
     
     public ContainerChiselHitech(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {
         super(inventoryplayer, inv, hand);
+    }
+    
+    public void setSelection(Slot slot) {
+        this.selection = slot;
+
+        if (slot == null || !slot.getHasStack()) {
+            currentGroup = null;
+            selectionDuplicates = ImmutableList.of();
+            setTarget(null);
+        } else {
+            ImmutableList.Builder<Slot> builder = ImmutableList.builder();
+            for (int i = getInventoryChisel().size + 1; i < inventorySlots.size(); i++) {
+                Slot s = getSlot(i);
+                if (slot != s && ItemStack.areItemsEqual(slot.getStack(), s.getStack())) {
+                    builder.add(s);
+                }
+            }
+            selectionDuplicates = builder.build();
+            
+            ICarvingGroup group = carving.getGroup(slot.getStack());
+            if (group != currentGroup) {
+                setTarget(null);
+            }
+            currentGroup = group;
+        }
+        
+        ItemStack stack = slot == null ? null : slot.getStack();
+        getInventoryChisel().setInventorySlotContents(getInventoryChisel().size, stack == null ? null : stack.copy());
+        getInventoryChisel().updateItems();
+    }
+    
+    public ItemStack getSelectionStack() {
+        return getSelection() == null ? null : getSelection().getStack();
+    }
+    
+    public ItemStack getTargetStack() {
+        return getTarget() == null ? null : getTarget().getStack();
     }
 
     @Override
@@ -48,13 +92,9 @@ public class ContainerChiselHitech extends ContainerChisel {
         if (slotId >= 0) {
             Slot slot = getSlot(slotId);
             if (slotId < getInventoryChisel().size) {
-                target = slot;
+                setTarget(slot);
             } else {
-                target = null;
-                selection = slot;
-                ItemStack stack = slot.getStack();
-                getInventoryChisel().setInventorySlotContents(getInventoryChisel().size, stack == null ? null : stack.copy());
-                getInventoryChisel().updateItems();
+                setSelection(slot);
             }
         }
         return null;

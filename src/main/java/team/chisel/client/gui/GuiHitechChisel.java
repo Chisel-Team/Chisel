@@ -1,6 +1,8 @@
 package team.chisel.client.gui;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -25,19 +27,24 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
 
+import team.chisel.Chisel;
+import team.chisel.client.ClientUtil;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
 
@@ -50,6 +57,8 @@ public class GuiHitechChisel extends GuiChisel {
     private enum PreviewType {
         PANEL(16, generateBetween(-1, 0, 0, 1, 2, 0)),
         
+        HOLLOW(16, ArrayUtils.removeElement(generateBetween(-1, 0, 0, 1, 2, 0), new BlockPos(0, 1, 0))),
+        
         PLUS(20,
             new BlockPos(0, 0, 0),
             new BlockPos(0, 1, 0),
@@ -57,8 +66,8 @@ public class GuiHitechChisel extends GuiChisel {
             new BlockPos(-1, 1, 0),
             new BlockPos(0, 2, 0)
         ),
-        
-        SINGLE(38, new BlockPos(0, 1, 0)),
+
+        SINGLE(39, new BlockPos(0, 1, 0)),
         
         ;
         
@@ -169,7 +178,7 @@ public class GuiHitechChisel extends GuiChisel {
     }
     
     private static final Rectangle slots = new Rectangle(0, 0, 1000, 1000);
-    private static final Rectangle panel = new Rectangle(8, 15, 74, 74);
+    private static final Rectangle panel = new Rectangle(8, 14, 74, 74);
     
     private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselGuiHitech.png");
     
@@ -181,7 +190,7 @@ public class GuiHitechChisel extends GuiChisel {
     private long lastDragTime;
     private int clickX, clickY;
     private float prevRotX, prevRotY;
-    private float rotX, rotY;
+    private float rotX = -15, rotY;
     
     private int scrollAcc;
     
@@ -216,12 +225,16 @@ public class GuiHitechChisel extends GuiChisel {
             prevRotX = rotX;
             prevRotY = rotY;
         }
-        
-        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+    
+        if (isShiftDown()) {
             buttonChisel.displayString = TextFormatting.YELLOW.toString() + "Chisel All";
         } else {
             buttonChisel.displayString = "Chisel";
         }
+    }
+
+    private boolean isShiftDown() {
+        return Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
     }
     
     @Override
@@ -231,55 +244,54 @@ public class GuiHitechChisel extends GuiChisel {
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-        
+
         if (containerHitech.getSelection() != null) {
             Slot sel = containerHitech.getSelection();
-            if (sel.getStack() != null) {
+            if (sel.getHasStack()) {
                 drawSlotHighlight(sel, 0);
-                for (int i = containerHitech.getInventoryChisel().size + 1; i < containerHitech.inventorySlots.size(); i++) {
-                    Slot s = containerHitech.getSlot(i);
-                    if (sel != s && ItemStack.areItemsEqual(sel.getStack(), s.getStack())) {
-                        drawSlotHighlight(s, 18);
-                    }
+                for (Slot s : containerHitech.getSelectionDuplicates()) {
+                    drawSlotHighlight(s, isShiftDown() ? 0 : 18);
                 }
             }
         }
         if (containerHitech.getTarget() != null && containerHitech.getTarget().getStack() != null) {
             drawSlotHighlight(containerHitech.getTarget(), 36);
         }
-        
+
         if (!panelClicked && System.currentTimeMillis() - lastDragTime > 2000) {
             rotY = prevRotY + (f * 2);
         }
-
-        if (containerHitech.getTarget() != null) {
-            scrollAcc += Mouse.getDWheel();
-            if (Math.abs(scrollAcc) >= 120) {
-                int idx = containerHitech.getTarget().getSlotIndex();
-                while (Math.abs(scrollAcc) >= 120) {
-                    if (scrollAcc > 0) {
-                        idx--;
-                        scrollAcc -= 120;
-                    } else {
-                        idx++;
-                        scrollAcc += 120;
-                    }
-                }
-                if (idx < 0) {
-                    for (int i = containerHitech.getInventoryChisel().size - 1; i >= 0; i--) {
-                        if (containerHitech.getSlot(i).getHasStack()) {
-                            idx = i;
-                            break;
-                        }
-                    }
-                } else if (idx >= containerHitech.getInventoryChisel().size || !containerHitech.getSlot(idx).getHasStack()) {
-                    idx = 0;
-                } else {
-
-                }
-
-                containerHitech.setTarget(containerHitech.getSlot(idx));
+        
+        scrollAcc += Mouse.getDWheel();
+        if (Math.abs(scrollAcc) >= 120) {
+            int idx = -1;
+            if (containerHitech.getTarget() != null) {
+                idx = containerHitech.getTarget().getSlotIndex();
             }
+            while (Math.abs(scrollAcc) >= 120) {
+                if (scrollAcc > 0) {
+                    idx--;
+                    scrollAcc -= 120;
+                } else {
+                    idx++;
+                    scrollAcc += 120;
+                }
+            }
+            if (idx < 0) {
+                for (int i = containerHitech.getInventoryChisel().size - 1; i >= 0; i--) {
+                    if (containerHitech.getSlot(i).getHasStack()) {
+                        idx = i;
+                        break;
+                    }
+                    if (i == 0) {
+                        idx = 0;
+                    }
+                }
+            } else if (idx >= containerHitech.getInventoryChisel().size || !containerHitech.getSlot(idx).getHasStack()) {
+                idx = 0;
+            }
+
+            containerHitech.setTarget(containerHitech.getSlot(idx));
         }
     }
     
@@ -303,7 +315,7 @@ public class GuiHitechChisel extends GuiChisel {
         zLevel = 0;
 
         String s = "Preview";
-        fontRendererObj.drawString("Preview", panel.getX() + (panel.getWidth() / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.getY() - 10, 0x404040);
+        fontRendererObj.drawString("Preview", panel.getX() + (panel.getWidth() / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
                 
         try {
 
@@ -316,7 +328,7 @@ public class GuiHitechChisel extends GuiChisel {
 
                     GlStateManager.pushMatrix();
 
-                    GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
+                    GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2) - 2, 100);
 
                     GlStateManager.translate(0.5, 1.5, 0.5);
                     float sc = buttonPreview.getType().getScale();
@@ -375,6 +387,55 @@ public class GuiHitechChisel extends GuiChisel {
     @Override
     protected void mouseClickMove(int mouseX, int mouseY, int clickedMouseButton, long timeSinceLastClick) {
         super.mouseClickMove(mouseX, mouseY, clickedMouseButton, timeSinceLastClick);
+    }
+    
+    @Override
+    protected void actionPerformed(GuiButton button) throws IOException {
+        super.actionPerformed(button);
+        
+        if (button == buttonChisel) {
+            Slot target = containerHitech.getTarget();
+            Slot selected = containerHitech.getSelection();
+            if (target != null && target.getHasStack() && selected != null && selected.getHasStack()) {
+                if (ItemStack.areItemsEqual(target.getStack(), selected.getStack())) {
+                    return;
+                }
+                ItemStack converted = target.getStack().copy();
+                converted.stackSize = selected.getStack().stackSize;
+                int[] slots = new int[] { selected.getSlotIndex() };
+                if (isShiftDown()) {
+                    slots = ArrayUtils.addAll(slots, containerHitech.getSelectionDuplicates().stream().mapToInt(Slot::getSlotIndex).toArray());
+                }
+                
+                Chisel.network.sendToServer(new PacketHitechChisel(converted, slots)); 
+                
+                for (int i : slots) {
+                    converted = converted.copy();
+                    converted.stackSize = containerHitech.getInventoryPlayer().getStackInSlot(i).stackSize;
+                    containerHitech.getInventoryPlayer().setInventorySlotContents(i, converted);
+                }
+                
+                String sound = container.getCarving().getVariationSound(target.getStack());
+                ClientUtil.playSound(player.worldObj, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound, SoundCategory.BLOCKS);
+                
+                if (!isShiftDown()) {
+                    List<Slot> dupes = containerHitech.getSelectionDuplicates();
+                    Slot next = selected;
+                    for (Slot s : dupes) {
+                        if (s.slotNumber > selected.slotNumber) {
+                            next = s;
+                            break;
+                        }
+                    }
+                    if (next == selected && dupes.size() > 0) {
+                        next = dupes.get(0);
+                    }
+                    containerHitech.setSelection(next);
+                } else {
+                    containerHitech.setSelection(selected); // Force duplicate recalc
+                }
+            }
+        }
     }
 
     // @Override
