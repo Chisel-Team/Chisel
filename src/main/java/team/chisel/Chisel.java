@@ -2,6 +2,7 @@ package team.chisel;
 
 import java.io.File;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -22,6 +23,7 @@ import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
+import team.chisel.common.worldgen.ChiselAllOfTheVillagesHandler;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.9.4, 1.11)")
 public class Chisel implements Reference {
@@ -73,6 +75,9 @@ public class Chisel implements Reference {
         Features.init();
         
         proxy.init();
+
+        MinecraftForge.TERRAIN_GEN_BUS.register(new ChiselAllOfTheVillagesHandler());
+
         // BlockRegistry.init(event);
     }
 
