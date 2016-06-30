@@ -167,12 +167,15 @@ public class Carving implements ICarvingRegistry {
 	}
 
 	private ICarvingGroup getOreGroup(ItemStack stack) {
-		int[] ids = OreDictionary.getOreIDs(stack);
-		if (ids.length > 0) {
-			for (int id : ids) {
-				ICarvingGroup oreGroup = groups.getGroupByOre(OreDictionary.getOreName(id));
-				if (oreGroup != null) {
-					return oreGroup;
+		if(stack != null)
+		{
+			int[] ids = OreDictionary.getOreIDs(stack);
+			if (ids.length > 0) {
+				for (int id : ids) {
+					ICarvingGroup oreGroup = groups.getGroupByOre(OreDictionary.getOreName(id));
+					if (oreGroup != null) {
+						return oreGroup;
+					}
 				}
 			}
 		}
