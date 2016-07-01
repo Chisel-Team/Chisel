@@ -1,7 +1,10 @@
 package team.chisel;
 
 import java.io.File;
+import java.util.Arrays;
 
+import net.minecraft.init.Biomes;
+import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
@@ -46,6 +49,8 @@ public class Chisel implements Reference {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        MapGenVillage.VILLAGE_SPAWN_BIOMES = Arrays.asList(Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA);
+
         proxy.construct(event);
 
         File configFile = event.getSuggestedConfigurationFile();

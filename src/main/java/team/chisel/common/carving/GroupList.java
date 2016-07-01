@@ -1,15 +1,18 @@
 package team.chisel.common.carving;
 
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import lombok.SneakyThrows;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 
@@ -48,6 +51,8 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 	}
 
+	private static final Method stackedBlockMethod = ReflectionHelper.findMethod(Block.class, null, new String[]{"createStackedBlock","func_180643_i"}, IBlockState.class);
+
 	private class BlockKey implements ICarvingVariation {
 
 		private IBlockState state;
@@ -66,9 +71,10 @@ public class GroupList implements Set<ICarvingGroup> {
 			return state;
 		}
 
+		@SneakyThrows
 		@Override
 		public ItemStack getStack() {
-			return new ItemStack(getBlock());
+			return (ItemStack) stackedBlockMethod.invoke(getBlock(), state);
 		}
 
 		@Override
