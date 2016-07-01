@@ -20,116 +20,100 @@ import java.util.Random;
 
 public class ChiselAllOfTheVillagesHandler {
 
+    private static final int chanceToChisel = 20;
     private static Random rng = new Random();
 
-    @SubscribeEvent(priority = EventPriority.NORMAL)
-    public void getVillageBlockID(BiomeEvent.GetVillageBlockID event)
-    {
-        final IBlockState originalState = event.getOriginal();
+    @SubscribeEvent(priority = EventPriority.LOW)
+    public void getVillageBlockID(BiomeEvent.GetVillageBlockID event) {
+        if (event.getOriginal() == null) {
+            return;
+        }
+
+        IBlockState originalState = event.getOriginal();
+
+        if (event.getReplacement() != originalState) {
+            originalState = event.getReplacement();
+        }
+
         final Biome eventBiome = event.getBiome();
         IBlockState newState = originalState;
 
-        if(!(originalState == null) && (!(originalState.getMaterial() == Material.AIR) || !originalState.getBlock().equals(Blocks.AIR)))
-        {
-            if(eventBiome == Biomes.DESERT)
-            {
-                if (originalState.getBlock() == Blocks.LOG || originalState.getBlock() == Blocks.LOG2)
-                {
+        if (!(originalState == null) && (!(originalState.getMaterial() == Material.AIR) || !originalState.getBlock().equals(Blocks.AIR))) {
+            if (eventBiome == Biomes.DESERT) {
+                if (originalState.getBlock() == Blocks.LOG || originalState.getBlock() == Blocks.LOG2) {
                     newState = Blocks.SANDSTONE.getDefaultState();
                 }
 
-                if (originalState.getBlock() == Blocks.COBBLESTONE)
-                {
+                if (originalState.getBlock() == Blocks.COBBLESTONE) {
                     newState = Blocks.SANDSTONE.getStateFromMeta(BlockSandStone.EnumType.DEFAULT.getMetadata());
                 }
 
-                if (originalState.getBlock() == Blocks.PLANKS)
-                {
+                if (originalState.getBlock() == Blocks.PLANKS) {
                     newState = Blocks.SANDSTONE.getStateFromMeta(BlockSandStone.EnumType.SMOOTH.getMetadata());
                 }
 
-                if (originalState.getBlock() == Blocks.OAK_STAIRS)
-                {
+                if (originalState.getBlock() == Blocks.OAK_STAIRS) {
                     newState = Blocks.SANDSTONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, originalState.getValue(BlockStairs.FACING));
                 }
 
-                if (originalState.getBlock() == Blocks.STONE_STAIRS)
-                {
+                if (originalState.getBlock() == Blocks.STONE_STAIRS) {
                     newState = Blocks.SANDSTONE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, originalState.getValue(BlockStairs.FACING));
                 }
 
-                if (originalState.getBlock() == Blocks.GRAVEL)
-                {
+                if (originalState.getBlock() == Blocks.GRAVEL) {
                     newState = Blocks.SANDSTONE.getDefaultState();
                 }
-            }
-            else if (eventBiome == Biomes.TAIGA)
-            {
-                if (originalState.getBlock() == Blocks.LOG || originalState.getBlock() == Blocks.LOG2)
-                {
+            } else if (eventBiome == Biomes.TAIGA) {
+                if (originalState.getBlock() == Blocks.LOG || originalState.getBlock() == Blocks.LOG2) {
                     newState = Blocks.LOG.getDefaultState().withProperty(BlockOldLog.VARIANT, BlockPlanks.EnumType.SPRUCE).withProperty(BlockLog.LOG_AXIS, originalState.getValue(BlockLog.LOG_AXIS));
                 }
 
-                if (originalState.getBlock() == Blocks.PLANKS)
-                {
+                if (originalState.getBlock() == Blocks.PLANKS) {
                     newState = Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.SPRUCE);
                 }
 
-                if (originalState.getBlock() == Blocks.OAK_STAIRS)
-                {
+                if (originalState.getBlock() == Blocks.OAK_STAIRS) {
                     newState = Blocks.SPRUCE_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, originalState.getValue(BlockStairs.FACING));
                 }
 
-                if (originalState.getBlock() == Blocks.OAK_FENCE)
-                {
+                if (originalState.getBlock() == Blocks.OAK_FENCE) {
                     newState = Blocks.SPRUCE_FENCE.getDefaultState();
                 }
-            }
-            else if (eventBiome == Biomes.SAVANNA)
-            {
-                if (originalState.getBlock() == Blocks.LOG || originalState.getBlock() == Blocks.LOG2)
-                {
+            } else if (eventBiome == Biomes.SAVANNA) {
+                if (originalState.getBlock() == Blocks.LOG || originalState.getBlock() == Blocks.LOG2) {
                     newState = Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA).withProperty(BlockLog.LOG_AXIS, originalState.getValue(BlockLog.LOG_AXIS));
                 }
 
-                if (originalState.getBlock() == Blocks.PLANKS)
-                {
+                if (originalState.getBlock() == Blocks.PLANKS) {
                     newState = Blocks.PLANKS.getDefaultState().withProperty(BlockPlanks.VARIANT, BlockPlanks.EnumType.ACACIA);
                 }
 
-                if (originalState.getBlock() == Blocks.OAK_STAIRS)
-                {
+                if (originalState.getBlock() == Blocks.OAK_STAIRS) {
                     newState = Blocks.ACACIA_STAIRS.getDefaultState().withProperty(BlockStairs.FACING, originalState.getValue(BlockStairs.FACING));
                 }
 
-                if (originalState.getBlock() == Blocks.COBBLESTONE)
-                {
+                if (originalState.getBlock() == Blocks.COBBLESTONE) {
                     newState = Blocks.LOG2.getDefaultState().withProperty(BlockNewLog.VARIANT, BlockPlanks.EnumType.ACACIA).withProperty(BlockLog.LOG_AXIS, BlockLog.EnumAxis.Y);
                 }
 
-                if (originalState.getBlock() == Blocks.OAK_FENCE)
-                {
+                if (originalState.getBlock() == Blocks.OAK_FENCE) {
                     newState = Blocks.ACACIA_FENCE.getDefaultState();
                 }
             }
 
-            if(Item.getItemFromBlock(originalState.getBlock()) != null)
-            {
-                ICarvingGroup group = CarvingUtils.getChiselRegistry().getGroup(originalState);
+            if ((rng.nextInt(chanceToChisel) == 1) && (Item.getItemFromBlock(originalState.getBlock()) != null)) {
+                ICarvingGroup group = CarvingUtils.getChiselRegistry().getGroup(newState);
 
-                if (!(group == null))
-                {
+                if (group != null) {
                     List<ICarvingVariation> variations = group.getVariations();
 
-                    if(!(variations == null))
-                    {
-                        newState = variations.get((rng.nextInt() % variations.size())).getBlockState();
+                    if (variations != null) {
+                        newState = variations.get(rng.nextInt(variations.size())).getBlockState();
                     }
                 }
             }
 
-            if(newState != originalState)
-            {
+            if (newState != originalState) {
                 event.setReplacement(newState);
 
                 event.setResult(Event.Result.DENY);

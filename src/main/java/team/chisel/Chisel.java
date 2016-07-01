@@ -1,9 +1,12 @@
 package team.chisel;
 
 import java.io.File;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import net.minecraft.init.Biomes;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeSnow;
 import net.minecraft.world.gen.structure.MapGenVillage;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -49,7 +52,8 @@ public class Chisel implements Reference {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        MapGenVillage.VILLAGE_SPAWN_BIOMES = Arrays.asList(Biomes.PLAINS, Biomes.DESERT, Biomes.SAVANNA, Biomes.TAIGA);
+        MapGenVillage.VILLAGE_SPAWN_BIOMES.add(Biomes.SAVANNA);
+        MapGenVillage.VILLAGE_SPAWN_BIOMES.add(Biomes.TAIGA);
 
         proxy.construct(event);
 
