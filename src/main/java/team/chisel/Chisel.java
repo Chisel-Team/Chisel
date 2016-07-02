@@ -2,6 +2,7 @@ package team.chisel;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import net.minecraft.init.Biomes;
@@ -16,6 +17,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.VillagerRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +32,7 @@ import team.chisel.common.config.Configurations;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.worldgen.ChiselAllOfTheVillagesHandler;
+import team.chisel.common.worldgen.VillageCreationConstructionYard;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.9.4, 1.11)")
 public class Chisel implements Reference {
@@ -52,9 +55,6 @@ public class Chisel implements Reference {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        MapGenVillage.VILLAGE_SPAWN_BIOMES.add(Biomes.SAVANNA);
-        MapGenVillage.VILLAGE_SPAWN_BIOMES.add(Biomes.TAIGA);
-
         proxy.construct(event);
 
         File configFile = event.getSuggestedConfigurationFile();
@@ -77,6 +77,11 @@ public class Chisel implements Reference {
         Features.preInit();
         
         proxy.preInit(event);
+
+        //TODO Fix
+        //MapGenVillage.VILLAGE_SPAWN_BIOMES.addAll(new ArrayList<>(Arrays.asList(new Biome[]{Biomes.TAIGA, Biomes.SAVANNA})));
+
+        VillageCreationConstructionYard.registerVillageComponents();
     }
 
     @Mod.EventHandler
@@ -86,6 +91,10 @@ public class Chisel implements Reference {
         proxy.init();
 
         MinecraftForge.TERRAIN_GEN_BUS.register(new ChiselAllOfTheVillagesHandler());
+
+        VillageCreationConstructionYard villageChiselHandler = new VillageCreationConstructionYard();
+        VillagerRegistry villagerRegistry = VillagerRegistry.instance();
+        villagerRegistry.registerVillageCreationHandler(villageChiselHandler);
 
         // BlockRegistry.init(event);
     }
