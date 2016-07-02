@@ -40,10 +40,12 @@ public class Configurations {
     public static boolean allowChiselDamage;
     public static int ironChiselMaxDamage;
     public static int diamondChiselMaxDamage;
+    public static int hitechChiselMaxDamage;
     public static boolean ironChiselCanLeftClick;
     public static boolean ironChiselHasModes;
     public static int ironChiselAttackDamage;
     public static int diamondChiselAttackDamage;
+    public static int hitechChiselAttackDamage;
     public static boolean allowChiselCrossColors;
 
     public static boolean useRoadLineTool;
@@ -92,14 +94,18 @@ public class Configurations {
         allowChiselDamage = config.get(category, "allowChiselDamage", true, "Should the chisel be damageable and take damage when it chisels something.").getBoolean();
         ironChiselMaxDamage = config.getInt("ironChiselMaxDamage", category, 500, 1, Short.MAX_VALUE, "The max damage of the standard iron chisel.");
         diamondChiselMaxDamage = config.getInt("diamondChiselMaxDamage", category, 5000, 1, Short.MAX_VALUE, "The max damage of the diamond chisel.");
+        hitechChiselMaxDamage = config.getInt("hitechChiselMaxDamage", category, 10000, 1, Short.MAX_VALUE, "The max damage of the iChisel.");
+
         ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
         ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
         allowChiselCrossColors = config.get(category, "allowChiselCrossColors", true, "Should someone be able to chisel something into a different color.").getBoolean();
 
         ironChiselAttackDamage = config
                 .get(category, "ironChiselAttackDamage", 2, "The extra attack damage points (in half hearts) that the iron chisel inflicts when it is used to attack an entity.").getInt();
-        diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 2,
+        diamondChiselAttackDamage = config.get(category, "diamondChiselAttackDamage", 3,
                 "The extra attack damage points (in half hearts) that the diamond chisel inflicts when it is used to attack an entity.").getInt();
+        hitechChiselAttackDamage = config
+                .get(category, "hitechChiselAttackDamage", 3, "The extra attack damage points (in half hearts) that the iChisel inflicts when it is used to attack an entity.").getInt();
 
         /* block */
         category = "block";

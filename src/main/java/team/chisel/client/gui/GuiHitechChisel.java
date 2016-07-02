@@ -139,7 +139,7 @@ public class GuiHitechChisel extends GuiChisel {
 
         @Override
         public int getCombinedLight(BlockPos pos, int lightValue) {
-            return 0xF0000F0;
+            return 0xF000F0;
         }
 
         @Override

@@ -30,7 +30,7 @@ public class ItemChisel extends Item {
     public enum ChiselType {
         IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage),
         DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage),
-        HITECH(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage)
+        HITECH(Configurations.hitechChiselMaxDamage, Configurations.hitechChiselAttackDamage)
         ;
 
         final int maxDamage;
