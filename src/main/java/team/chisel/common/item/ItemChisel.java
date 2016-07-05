@@ -154,4 +154,9 @@ public class ItemChisel extends Item {
         }
         return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
     }
+    
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return slotChanged || !ItemStack.areItemsEqual(oldStack, newStack);
+    }
 }

@@ -2,7 +2,8 @@ package team.chisel.common.inventory;
 
 import java.util.List;
 
-import team.chisel.api.carving.ICarvingGroup;
+import com.google.common.collect.ImmutableList;
+
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,8 +12,8 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
-
-import com.google.common.collect.ImmutableList;
+import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.common.util.NBTUtil;
 
 @Getter
 @Setter
@@ -24,6 +25,16 @@ public class ContainerChiselHitech extends ContainerChisel {
     
     public ContainerChiselHitech(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {
         super(inventoryplayer, inv, hand);
+        
+        int selectionSlot = NBTUtil.getHitechSelection(chisel);
+        if (selectionSlot >= 0) {
+            setSelection(getSlot(selectionSlot));
+        }
+        
+        int targetSlot = NBTUtil.getHitechTarget(chisel);
+        if (targetSlot >= 0) {
+            setTarget(getSlot(targetSlot));
+        }
     }
     
     public void setSelection(Slot slot) {

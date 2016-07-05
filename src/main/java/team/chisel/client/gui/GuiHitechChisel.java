@@ -2,8 +2,15 @@ package team.chisel.client.gui;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GLContext;
+import org.lwjgl.util.Rectangle;
+
+import com.google.common.base.Optional;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -36,70 +43,15 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.property.IExtendedBlockState;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GLContext;
-import org.lwjgl.util.Rectangle;
-
 import team.chisel.Chisel;
 import team.chisel.client.ClientUtil;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
-
-import com.google.common.collect.ImmutableSet;
+import team.chisel.common.util.NBTUtil;
 
 
 public class GuiHitechChisel extends GuiChisel {
     
-    @Getter
-    private enum PreviewType {
-        PANEL(16, generateBetween(-1, 0, 0, 1, 2, 0)),
-        
-        HOLLOW(16, ArrayUtils.removeElement(generateBetween(-1, 0, 0, 1, 2, 0), new BlockPos(0, 1, 0))),
-        
-        PLUS(20,
-            new BlockPos(0, 0, 0),
-            new BlockPos(0, 1, 0),
-            new BlockPos(1, 1, 0),
-            new BlockPos(-1, 1, 0),
-            new BlockPos(0, 2, 0)
-        ),
-
-        SINGLE(39, new BlockPos(0, 1, 0)),
-        
-        ;
-        
-        private static BlockPos[] generateBetween(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
-            BlockPos[] ret = new BlockPos[(maxX - minX + 1) * (maxY - minY + 1) * (maxZ - minZ + 1)];
-            int i = 0;
-            for (int x = minX; x <= maxX; x++) {
-                for (int y = minY; y <= maxY; y++) {
-                    for (int z = minZ; z <= maxZ; z++) {
-                        ret[i++] = new BlockPos(x, y, z);
-                    }
-                }
-            }
-            return ret;
-        }
-        
-        private float scale;
-        private Set<BlockPos> positions;
-        
-        private PreviewType(float scale, BlockPos... positions) {
-            this.scale = scale;
-            this.positions = ImmutableSet.copyOf(positions);
-        }
-        
-        @Override
-        public String toString() {
-            return StringUtils.capitalize(name().toLowerCase(Locale.US));
-        }
-    }
-
     private static class PreviewModeButton extends GuiButton {
 
         @Getter
@@ -260,6 +212,13 @@ public class GuiHitechChisel extends GuiChisel {
 
         buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, "Chisel"));
         buttonList.add(buttonRotate = new RotateButton(id++, guiLeft + panel.getX() + panel.getWidth() - 16, guiTop + panel.getY() + panel.getHeight() - 16));
+
+        ItemStack chisel = containerHitech.getChisel();
+        
+        buttonPreview.setType(NBTUtil.getHitechType(chisel));
+        buttonRotate.rotate = NBTUtil.getHitechRotate(chisel);
+
+        updateScreen();
     }
     
     @Override
@@ -279,6 +238,20 @@ public class GuiHitechChisel extends GuiChisel {
         } else {
             buttonChisel.displayString = "Chisel";
         }
+    }
+    
+    @Override
+    public void onGuiClosed() {
+        super.onGuiClosed();
+        
+        ItemStack stack = containerHitech.getChisel();
+        
+        NBTUtil.setHitechType(stack, buttonPreview.getType().ordinal());
+        NBTUtil.setHitechSelection(stack, Optional.fromNullable(containerHitech.getSelection()).transform(s -> s.slotNumber).or(-1));
+        NBTUtil.setHitechTarget(stack, Optional.fromNullable(containerHitech.getTarget()).transform(s -> s.slotNumber).or(-1));
+        NBTUtil.setHitechRotate(stack, buttonRotate.rotate());
+
+        Chisel.network.sendToServer(new PacketChiselNBT(NBTUtil.getChiselTag(containerHitech.getChisel()), containerHitech.getChiselSlot()));
     }
 
     private boolean isShiftDown() {
@@ -373,16 +346,15 @@ public class GuiHitechChisel extends GuiChisel {
 
                     GlStateManager.pushMatrix();
 
-                    GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2) - 2, 100);
+                    GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
 
-                    GlStateManager.translate(0.5, 1.5, 0.5);
                     // Makes zooming slower as zoom increases, but leaves 1 as the default zoom.
                     double sc = buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9);
                     GlStateManager.scale(-sc, -sc, -sc);
 
                     GlStateManager.rotate(rotX, 1, 0, 0);
                     GlStateManager.rotate(rotY, 0, 1, 0);
-                    GlStateManager.translate(-0.5, -1.5, -0.5);
+                    GlStateManager.translate(-1.5, -2.5, -0.5);
 
                     Block block = Block.getBlockFromItem(stack.getItem());
                     IBlockState state = block.getStateFromMeta(stack.getMetadata());
@@ -465,7 +437,7 @@ public class GuiHitechChisel extends GuiChisel {
                     slots = ArrayUtils.addAll(slots, containerHitech.getSelectionDuplicates().stream().mapToInt(Slot::getSlotIndex).toArray());
                 }
                 
-                Chisel.network.sendToServer(new PacketHitechChisel(converted, slots)); 
+                Chisel.network.sendToServer(new PacketChiselButton(converted, slots)); 
                 
                 for (int i : slots) {
                     converted = converted.copy();

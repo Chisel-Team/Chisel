@@ -1,5 +1,7 @@
 package team.chisel.client.gui;
 
+import java.util.Optional;
+
 import io.netty.buffer.ByteBuf;
 import lombok.NoArgsConstructor;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -10,12 +12,12 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 @NoArgsConstructor
-public class PacketHitechChisel implements IMessage {
+public class PacketChiselButton implements IMessage {
 
     private ItemStack target;
     private int[] slotIds;
 
-    public PacketHitechChisel(ItemStack target, int... slots) {
+    public PacketChiselButton(ItemStack target, int... slots) {
         this.target = target;
         this.slotIds = slots;
     }
@@ -39,15 +41,17 @@ public class PacketHitechChisel implements IMessage {
         }
     }
 
-    public static class Handler implements IMessageHandler<PacketHitechChisel, IMessage> {
+    public static class Handler implements IMessageHandler<PacketChiselButton, IMessage> {
 
         @Override
-        public IMessage onMessage(PacketHitechChisel message, MessageContext ctx) {
+        public IMessage onMessage(PacketChiselButton message, MessageContext ctx) {
             EntityPlayerMP player = ctx.getServerHandler().playerEntity;
             for (int i : message.slotIds) {
                 ItemStack stack = message.target.copy();
-                stack.stackSize = player.inventory.getStackInSlot(i).stackSize;
-                player.inventory.setInventorySlotContents(i, stack);
+                Optional.ofNullable(player.inventory.getStackInSlot(i)).ifPresent(s -> {
+                    stack.stackSize = s.stackSize;
+                    player.inventory.setInventorySlotContents(i, stack);
+                });
             }
             return null;
         }
