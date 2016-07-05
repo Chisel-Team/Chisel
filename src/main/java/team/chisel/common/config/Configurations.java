@@ -27,6 +27,7 @@ public class Configurations {
     public static boolean chiselStoneToCobbleBricks;
     public static boolean chiselBackToVanillaLeaves;
 
+    public static int basaltAmount;
     public static int marbleAmount;
     public static int limestoneAmount;
 
@@ -73,8 +74,9 @@ public class Configurations {
 
         /* worldgen */
         category = "worldgen";
-        marbleAmount = config.get(category, "marbleAmount", 7, "Amount of marble to generate in the world; use 0 for none").getInt(7);
-        limestoneAmount = config.get(category, "limestoneAmount", 8, "Amount of limestone to generate in the world; use 0 for none").getInt(8);
+        basaltAmount = config.get(category, "basaltAmount", 25, "Amount of basalt to generate in the world; use 0 for none").getInt(25);
+        marbleAmount = config.get(category, "marbleAmount", 25, "Amount of marble to generate in the world; use 0 for none").getInt(25);
+        limestoneAmount = config.get(category, "limestoneAmount", 15, "Amount of limestone to generate in the world; use 0 for none").getInt(15);
         
         /* client */
         category = "client";

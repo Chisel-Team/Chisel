@@ -21,6 +21,7 @@ public final class ChiselBlocks
     */
 
     public static final Block antiblock = null;
+    public static final Block basaltextra = null;
     public static final Block carpet = null;
     public static final Block cloud = null;
     public static final Block concrete = null;
@@ -33,8 +34,10 @@ public final class ChiselBlocks
     public static final Block laboratory = null;
     public static final Block lavastone = null;
     public static final Block limestone = null;
+    public static final Block limestoneextra = null;
     public static final Block line_marking = null;
     public static final Block marble = null;
+    public static final Block marbleextra = null;
     public static final Block military = null;
     public static final Block paper = null;
     public static final Block temple = null;
