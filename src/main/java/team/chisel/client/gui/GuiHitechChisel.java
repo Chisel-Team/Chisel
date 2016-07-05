@@ -437,13 +437,9 @@ public class GuiHitechChisel extends GuiChisel {
                     slots = ArrayUtils.addAll(slots, containerHitech.getSelectionDuplicates().stream().mapToInt(Slot::getSlotIndex).toArray());
                 }
                 
-                Chisel.network.sendToServer(new PacketChiselButton(converted, slots)); 
+                Chisel.network.sendToServer(new PacketChiselButton(converted, containerHitech.getChiselSlot(), slots));
                 
-                for (int i : slots) {
-                    converted = converted.copy();
-                    converted.stackSize = containerHitech.getInventoryPlayer().getStackInSlot(i).stackSize;
-                    containerHitech.getInventoryPlayer().setInventorySlotContents(i, converted);
-                }
+                PacketChiselButton.chiselAll(player, containerHitech.getChiselSlot(), converted, slots);
                 
                 String sound = container.getCarving().getVariationSound(target.getStack());
                 ClientUtil.playSound(player.worldObj, MathHelper.floor_double(player.posX), MathHelper.floor_double(player.posY), MathHelper.floor_double(player.posZ), sound, SoundCategory.BLOCKS);

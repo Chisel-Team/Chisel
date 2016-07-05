@@ -106,7 +106,7 @@ public class InventoryChiselSelection implements IInventory {
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        ItemStack held = entityplayer.getHeldItem(container.getHand());
+        ItemStack held = entityplayer.inventory.getStackInSlot(container.getChiselSlot());
         return held != null && held.getItem() instanceof ItemChisel;
     }
 
@@ -119,6 +119,10 @@ public class InventoryChiselSelection implements IInventory {
 
     public ItemStack getStackInSpecialSlot() {
         return inventory[size];
+    }
+    
+    public void setStackInSpecialSlot(ItemStack stack) {
+        inventory[size] = stack;
     }
 
     public void updateItems() {

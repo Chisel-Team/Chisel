@@ -23,20 +23,17 @@ public class ContainerChisel extends Container {
     protected final ItemStack chisel;
     protected final ICarvingRegistry carving;
     
-    protected final EnumHand hand;
-    
     private boolean chiselExists = false;
 
     public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
         
-        this.chiselSlot = getInventoryPlayer().currentItem;
-        this.chisel = inventoryplayer.player.getHeldItem(hand);
+        this.chiselSlot = hand == EnumHand.MAIN_HAND ? inventoryplayer.currentItem : inventoryplayer.getSizeInventory() - 1;
+        this.chisel = inventoryplayer.getStackInSlot(chiselSlot);
         this.carving = Carving.chisel;
 
         inv.container = this;
-        this.hand = hand;
 
         addSlots();
 
@@ -87,8 +84,9 @@ public class ContainerChisel extends Container {
             }
 
             // if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
-            if (hand == EnumHand.MAIN_HAND && (clickedSlot == chiselSlot || (clickTypeIn == ClickType.SWAP && dragType == chiselSlot)))
+            if (clickedSlot == chiselSlot || (clickTypeIn == ClickType.SWAP && dragType == chiselSlot)) {
                 return null;
+            }
         }
         
         return super.slotClick(slotId, dragType, clickTypeIn, player);
