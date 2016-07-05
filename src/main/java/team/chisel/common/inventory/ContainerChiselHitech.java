@@ -93,6 +93,15 @@ public class ContainerChiselHitech extends ContainerChisel {
             Slot slot = getSlot(slotId);
             if (slotId < getInventoryChisel().size) {
                 setTarget(slot);
+            } else if (dragType == 1) {
+                ItemStack toFind = slot.getStack();
+                if (toFind != null) {
+                    for (int i = 0; i < getInventoryChisel().size; i++) {
+                        if (ItemStack.areItemsEqual(toFind, getInventoryChisel().getStackInSlot(i))) {
+                            setTarget(getSlot(i));
+                        }
+                    }
+                }
             } else {
                 setSelection(slot);
             }

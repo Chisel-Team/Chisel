@@ -8,6 +8,7 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -124,6 +125,45 @@ public class GuiHitechChisel extends GuiChisel {
         }
     }
     
+    private class RotateButton extends GuiButton {
+
+        @Getter
+        @Accessors(fluent = true)
+        private boolean rotate = true;
+        
+        public RotateButton(int buttonId, int x, int y) {
+            super(buttonId, x, y, 16, 16, "");
+        }
+        
+        @Override
+        public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+            this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+
+            mc.getTextureManager().bindTexture(TEXTURE);
+            float a = isMouseOver() ? 1 : 0.2f;
+            int u = rotate ? 0 : 16;
+            int v = 238;
+            
+            GlStateManager.color(1, 1, 1, a);
+            GlStateManager.enableBlend();
+            GlStateManager.enableDepth();
+            zLevel = 1000;
+            drawTexturedModalRect(this.xPosition, this.yPosition, u, v, 16, 16);
+            zLevel = 0;
+            GlStateManager.color(1, 1, 1, 1);
+        }
+        
+        @Override
+        public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+            if (super.mousePressed(mc, mouseX, mouseY)) {
+                rotate = !rotate;
+                return true;
+            }
+            return false;
+        }
+        
+    }
+    
     @RequiredArgsConstructor
     private static class FakeBlockAccess implements IBlockAccess {
         
@@ -199,6 +239,7 @@ public class GuiHitechChisel extends GuiChisel {
     
     private PreviewModeButton buttonPreview;
     private GuiButton buttonChisel;
+    private RotateButton buttonRotate;
     
     public GuiHitechChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, EnumHand hand) {
         super(iinventory, menu, hand);
@@ -218,11 +259,14 @@ public class GuiHitechChisel extends GuiChisel {
         buttonList.add(buttonPreview = new PreviewModeButton(id++, x, y, w, h));
 
         buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, "Chisel"));
+        buttonList.add(buttonRotate = new RotateButton(id++, guiLeft + panel.getX() + panel.getWidth() - 16, guiTop + panel.getY() + panel.getHeight() - 16));
     }
     
     @Override
     public void updateScreen() {
         super.updateScreen();
+        
+        buttonChisel.enabled = containerHitech.getSelection() != null && containerHitech.getSelection().getHasStack() && containerHitech.getTarget() != null && containerHitech.getTarget().getHasStack();
         
         if (!panelClicked) {
             prevRotX = rotX;
@@ -262,7 +306,7 @@ public class GuiHitechChisel extends GuiChisel {
             drawSlotHighlight(containerHitech.getTarget(), 36);
         }
 
-        if (!panelClicked && System.currentTimeMillis() - lastDragTime > 2000) {
+        if (buttonRotate.rotate() && !panelClicked && System.currentTimeMillis() - lastDragTime > 2000) {
             rotY = prevRotY + (f * 2);
         }
         
@@ -378,7 +422,7 @@ public class GuiHitechChisel extends GuiChisel {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (panel.contains(mouseX - guiLeft, mouseY - guiTop)) {
+        if (!buttonRotate.isMouseOver() && panel.contains(mouseX - guiLeft, mouseY - guiTop)) {
             clickButton = mouseButton;
             panelClicked = true;
             clickX = Mouse.getX();
