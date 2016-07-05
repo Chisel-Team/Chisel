@@ -62,6 +62,7 @@ public interface ICarvingGroup {
 	 * @param variation
 	 *            An {@link ICarvingVariation} to add to this group
 	 */
+	@Deprecated
 	void addVariation(ICarvingVariation variation);
 
 	/**
@@ -70,5 +71,6 @@ public interface ICarvingGroup {
 	 * @param variation
 	 *            An {@link ICarvingVariation} to add to this group
 	 */
+	@Deprecated
 	boolean removeVariation(ICarvingVariation variation);
 }
