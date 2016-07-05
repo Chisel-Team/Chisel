@@ -1,10 +1,14 @@
 package team.chisel.common.init;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.Chisel;
 
 @GameRegistry.ObjectHolder(Chisel.MOD_ID)
+@ParametersAreNonnullByDefault
+@SuppressWarnings("null") // ObjectHolder will assure these fields are nonnull. Outside callers can assume the same.
 public final class ChiselBlocks
 {
     /*
