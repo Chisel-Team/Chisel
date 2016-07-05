@@ -1,8 +1,11 @@
 package team.chisel.api.carving;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.client.resources.I18n;
 import team.chisel.api.render.IBlockRenderType;
 
+@ParametersAreNonnullByDefault
 public class VariationInfoBase implements IVariationInfo {
 
 	private ICarvingVariation variation;

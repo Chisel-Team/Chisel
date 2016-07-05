@@ -4,6 +4,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -55,7 +59,7 @@ public class CarvingUtils {
 	 *            The sorting order.
 	 * @return A standard {@link ICarvingVariation} instance.
 	 */
-	public static ICarvingVariation getDefaultVariationFor(IBlockState state, int order) {
+	public static ICarvingVariation getDefaultVariationFor(@Nonnull IBlockState state, int order) {
 		return new SimpleCarvingVariation(state, order);
 	}
 
@@ -66,10 +70,11 @@ public class CarvingUtils {
 	 *            The name of the group.
 	 * @return A standard {@link ICarvingGroup} instance.
 	 */
-	public static ICarvingGroup getDefaultGroupFor(String name) {
+	public static ICarvingGroup getDefaultGroupFor(@Nonnull String name) {
 		return new SimpleCarvingGroup(name);
 	}
 
+	@ParametersAreNonnullByDefault
 	private static class SimpleCarvingVariation implements ICarvingVariation {
 
 		private int order;
@@ -101,11 +106,12 @@ public class CarvingUtils {
 		}
 	}
 
+	@ParametersAreNonnullByDefault
 	private static class SimpleCarvingGroup implements ICarvingGroup {
 
 		private String name;
-		private String sound;
-		private String oreName;
+		private @Nullable String sound;
+		private @Nullable String oreName;
 
 		private List<ICarvingVariation> variations = Lists.newArrayList();
 
@@ -124,7 +130,7 @@ public class CarvingUtils {
 			Collections.sort(variations, new Comparator<ICarvingVariation>() {
 
 				@Override
-				public int compare(ICarvingVariation o1, ICarvingVariation o2) {
+				public int compare(@Nullable ICarvingVariation o1, @Nullable ICarvingVariation o2) {
 					return CarvingUtils.compare(o1, o2);
 				}
 			});
@@ -147,22 +153,22 @@ public class CarvingUtils {
 		}
 
 		@Override
-		public String getSound() {
+		public @Nullable String getSound() {
 			return sound;
 		}
 
 		@Override
-		public void setSound(String sound) {
+		public void setSound(@Nullable String sound) {
 			this.sound = sound;
 		}
 
 		@Override
-		public String getOreName() {
+		public @Nullable String getOreName() {
 			return oreName;
 		}
 
 		@Override
-		public void setOreName(String oreName) {
+		public void setOreName(@Nullable String oreName) {
 			this.oreName = oreName;
 		}
 	}

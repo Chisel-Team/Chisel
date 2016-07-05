@@ -2,6 +2,8 @@ package team.chisel.common.block;
 
 import java.util.List;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +20,7 @@ import team.chisel.api.block.VariationData;
  *
  * @author minecreatr
  */
+@ParametersAreNonnullByDefault
 public class ItemChiselBlock extends ItemBlock {
 
     private ICarvable block;

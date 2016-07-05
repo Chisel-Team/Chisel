@@ -1,6 +1,9 @@
 package team.chisel.common.init;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -10,6 +13,7 @@ import team.chisel.Chisel;
 /**
  * Class file for the Chisel creative tabs
  */
+@ParametersAreNonnullByDefault
 public class ChiselTabs {
 
     public static class CustomCreativeTab extends CreativeTabs {
@@ -18,6 +22,7 @@ public class ChiselTabs {
 
         public CustomCreativeTab(String label) {
             super(label);
+            stack = new ItemStack(Blocks.STONE);
         }
 
         @Override

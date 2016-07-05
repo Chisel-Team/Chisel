@@ -2,15 +2,18 @@ package team.chisel.common.util;
 
 import java.util.Set;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import net.minecraft.block.properties.PropertyHelper;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import net.minecraft.block.properties.PropertyHelper;
+
 @EqualsAndHashCode(callSuper = true)
+@ParametersAreNonnullByDefault
 public class PropertyAnyInteger extends PropertyHelper<Integer> {
 
     @Getter
@@ -38,7 +41,7 @@ public class PropertyAnyInteger extends PropertyHelper<Integer> {
 
     @Override
     public String getName(Integer value) {
-        return value.toString();
+        return Optional.fromNullable(value.toString()).or("null");
     }
     
     @Override
