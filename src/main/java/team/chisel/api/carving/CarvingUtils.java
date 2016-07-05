@@ -70,7 +70,7 @@ public class CarvingUtils {
 		return new SimpleCarvingGroup(name);
 	}
 
-	public static class SimpleCarvingVariation implements ICarvingVariation {
+	private static class SimpleCarvingVariation implements ICarvingVariation {
 
 		private int order;
 		private IBlockState state;
@@ -101,7 +101,7 @@ public class CarvingUtils {
 		}
 	}
 
-	public static class SimpleCarvingGroup implements ICarvingGroup {
+	private static class SimpleCarvingGroup implements ICarvingGroup {
 
 		private String name;
 		private String sound;

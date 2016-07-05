@@ -240,7 +240,8 @@ public class GroupList implements Set<ICarvingGroup> {
 		return lookup.get(new VariationWrapper(variation));
 	}
 
-	public void addVariation(String name, ICarvingVariation variation) {
+	@SuppressWarnings("deprecation")
+    public void addVariation(String name, ICarvingVariation variation) {
 		ICarvingGroup g = groups.get(name);
 		if (g == null) {
 			throw new NullPointerException("No group exists for name " + name);
@@ -274,7 +275,8 @@ public class GroupList implements Set<ICarvingGroup> {
 		return removeVariation(new BlockKey(state), group);
 	}
 
-	public ICarvingVariation removeVariation(ICarvingVariation variation, String group) {
+	@SuppressWarnings("deprecation")
+    public ICarvingVariation removeVariation(ICarvingVariation variation, String group) {
 		ICarvingGroup g = null;
 		if (group != null) {
 			g = groups.get(group);
