@@ -17,6 +17,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -39,6 +40,8 @@ import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
+import team.chisel.common.util.GenerationHandler;
+import team.chisel.common.util.GenerationHandler.WorldGenInfo;
 
 public enum Features {
 
@@ -177,6 +180,11 @@ public enum Features {
                     .next("prism").setOrder(-100)
                     .next("raw")
                     .build();
+        }
+        
+        @Override
+        void addRecipes() {
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basalt.getDefaultState(), new WorldGenInfo(Configurations.basaltAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
 
@@ -1350,6 +1358,11 @@ public enum Features {
                     .next("raw")
                     .build();
         }
+        
+        @Override
+        void addRecipes() {
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestone.getDefaultState(), new WorldGenInfo(Configurations.limestoneAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
+        }
     },
 
     /*LINE_MARKING { TODO Potential omission candidate
@@ -1414,6 +1427,11 @@ public enum Features {
                     .next("prism").setOrder(-100)
                     .next("raw")
                     .build();
+        }
+        
+        @Override
+        void addRecipes() {
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marble.getDefaultState(), new WorldGenInfo(Configurations.marbleAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
 
