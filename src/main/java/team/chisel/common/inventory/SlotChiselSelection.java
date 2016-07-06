@@ -31,11 +31,11 @@ public class SlotChiselSelection extends Slot {
     @Override
     public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack) {
         ItemStack heldStack = player.inventory.getItemStack();
-        ItemStack crafted = container.getInventoryChisel().inventory[InventoryChiselSelection.normalSlots];
+        ItemStack crafted = container.getInventoryChisel().inventory[container.getInventoryChisel().size];
         ItemStack chisel = container.getChisel();
 
         if (heldStack == null) {
-            container.getInventoryChisel().decrStackSize(InventoryChiselSelection.normalSlots, 1);
+            container.getInventoryChisel().decrStackSize(container.getInventoryChisel().size, 1);
         } else {
             putStack(itemstack.copy());
 
@@ -46,15 +46,11 @@ public class SlotChiselSelection extends Slot {
                 int toCraft = Math.min(crafted.stackSize, damageLeft);
                 chisel.damageItem(toCraft, player);
                 if (chisel.stackSize <= 0) {
-                    if (container.getHand() == EnumHand.MAIN_HAND) {
-                        container.getInventoryPlayer().mainInventory[container.getChiselSlot()] = null;
-                    } else {
-                        container.getInventoryPlayer().offHandInventory[0] = null;
-                    }
+                    container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), null);
                 }
                 player.inventory.setItemStack(new ItemStack(itemstack.getItem(), toCraft, itemstack.getItemDamage()));
                 crafted.stackSize -= toCraft;
-                container.getInventoryChisel().setInventorySlotContents(InventoryChiselSelection.normalSlots, crafted.stackSize <= 0 ? null : crafted);
+                container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, crafted.stackSize <= 0 ? null : crafted);
             }
         }
 

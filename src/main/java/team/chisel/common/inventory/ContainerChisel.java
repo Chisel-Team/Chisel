@@ -16,14 +16,12 @@ import team.chisel.common.carving.Carving;
 @Getter
 public class ContainerChisel extends Container {
 
-    private final InventoryChiselSelection inventoryChisel;
-    private final InventoryPlayer inventoryPlayer;
+    protected final InventoryChiselSelection inventoryChisel;
+    protected final InventoryPlayer inventoryPlayer;
     
-    private final int chiselSlot;
-    private final ItemStack chisel;
-    private final ICarvingRegistry carving;
-    
-    private final EnumHand hand;
+    protected final int chiselSlot;
+    protected final ItemStack chisel;
+    protected final ICarvingRegistry carving;
     
     private boolean chiselExists = false;
 
@@ -31,22 +29,32 @@ public class ContainerChisel extends Container {
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
         
-        this.chiselSlot = getInventoryPlayer().currentItem;
-        this.chisel = inventoryplayer.player.getHeldItem(hand);
+        this.chiselSlot = hand == EnumHand.MAIN_HAND ? inventoryplayer.currentItem : inventoryplayer.getSizeInventory() - 1;
+        this.chisel = inventoryplayer.getStackInSlot(chiselSlot);
         this.carving = Carving.chisel;
 
         inv.container = this;
-        this.hand = hand;
 
+        addSlots();
+
+        if (chisel != null && chisel.getTagCompound() != null) {
+            ItemStack stack = ItemStack.loadItemStackFromNBT(chisel.getTagCompound().getCompoundTag("chiselTarget"));
+            inventoryChisel.setInventorySlotContents(getInventoryChisel().size, stack);
+        }
+        
+        inventoryChisel.updateItems();
+    }
+    
+    protected void addSlots() {
         int top = 8, left = 62;
 
         // selection slots
-        for (int i = 0; i < InventoryChiselSelection.normalSlots; i++) {
+        for (int i = 0; i < getInventoryChisel().size; i++) {
             addSlotToContainer(new SlotChiselSelection(this, inventoryChisel, inventoryChisel, i, left + ((i % 10) * 18), top + ((i / 10) * 18)));
         }
 
         // main slot
-        addSlotToContainer(new SlotChiselInput(this, inventoryChisel, InventoryChiselSelection.normalSlots, 24, 24));
+        addSlotToContainer(new SlotChiselInput(this, inventoryChisel, getInventoryChisel().size, 24, 24));
 
         top += 112;
         left += 9;
@@ -59,18 +67,11 @@ public class ContainerChisel extends Container {
         for (int i = 0; i < 9; i++) {
             addSlotToContainer(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
         }
-
-        if (chisel != null && chisel.getTagCompound() != null) {
-            ItemStack stack = ItemStack.loadItemStackFromNBT(chisel.getTagCompound().getCompoundTag("chiselTarget"));
-            inventoryChisel.setInventorySlotContents(InventoryChiselSelection.normalSlots, stack);
-        }
-        
-        inventoryChisel.updateItems();
     }
 
     @Override
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
-        if (clickTypeIn != ClickType.QUICK_CRAFT) {
+        if (clickTypeIn != ClickType.QUICK_CRAFT && slotId >= 0) {
             // we need to subtract away all the other slots
             int clickedSlot = slotId - inventoryChisel.getSizeInventory() - 27;
             Chisel.debug("Slot clicked is " + slotId + " and slot length is " + inventorySlots.size());
@@ -83,8 +84,9 @@ public class ContainerChisel extends Container {
             }
 
             // if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
-            if (hand == EnumHand.MAIN_HAND && (clickedSlot == chiselSlot || (clickTypeIn == ClickType.SWAP && dragType == chiselSlot)))
+            if (clickedSlot == chiselSlot || (clickTypeIn == ClickType.SWAP && dragType == chiselSlot)) {
                 return null;
+            }
         }
         
         return super.slotClick(slotId, dragType, clickTypeIn, player);
@@ -113,19 +115,19 @@ public class ContainerChisel extends Container {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
 
-            if (slotIdx > InventoryChiselSelection.normalSlots) {
-                if (!this.mergeItemStack(itemstack1, InventoryChiselSelection.normalSlots, InventoryChiselSelection.normalSlots + 1, false)) {
+            if (slotIdx > getInventoryChisel().size) {
+                if (!this.mergeItemStack(itemstack1, getInventoryChisel().size, getInventoryChisel().size + 1, false)) {
                     return null;
                 }
             } else {
-                if (slotIdx < InventoryChiselSelection.normalSlots + 1 && itemstack1 != null) {
+                if (slotIdx < getInventoryChisel().size + 1 && itemstack1 != null) {
                     entity.inventory.setItemStack(itemstack1.copy());
                     slot.onPickupFromSlot(entity, itemstack1);
                     itemstack1 = entity.inventory.getItemStack();
                     entity.inventory.setItemStack(null);
                 }
 
-                if (!this.mergeItemStack(itemstack1, InventoryChiselSelection.normalSlots + 1, InventoryChiselSelection.normalSlots + 1 + 36, true)) {
+                if (!this.mergeItemStack(itemstack1, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
                     return null;
                 }
             }
@@ -139,7 +141,7 @@ public class ContainerChisel extends Container {
             if (itemstack1.stackSize == itemstack.stackSize) {
                 return null;
             }
-            if (slotIdx >= InventoryChiselSelection.normalSlots) {
+            if (slotIdx >= getInventoryChisel().size) {
                 slot.onPickupFromSlot(entity, itemstack1);
             }
             if (itemstack1.stackSize == 0) {

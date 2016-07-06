@@ -1,6 +1,6 @@
 {
   "parent": "item/handheld",
   "textures": {
-    "layer0": "chisel:items/chisel_iron"
+    "layer0": "chisel:items/chisel_hitech"
   }
 }

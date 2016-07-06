@@ -10,14 +10,19 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.ChiselGuiHandler;
+import team.chisel.client.gui.PacketChiselButton;
+import team.chisel.client.gui.PacketChiselNBT;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
@@ -38,9 +43,15 @@ public class Chisel implements Reference {
     public static CommonProxy proxy;
 
     @SuppressWarnings("null")
-    public static @Nonnull ItemChisel itemChiselIron, itemChiselDiamond;
+    public static @Nonnull ItemChisel itemChiselIron, itemChiselDiamond, itemChiselHitech;
 
     public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
+    
+    public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
+    static {
+        network.registerMessage(PacketChiselButton.Handler.class, PacketChiselButton.class, 0, Side.SERVER);
+        network.registerMessage(PacketChiselNBT.Handler.class, PacketChiselNBT.class, 1, Side.SERVER);
+    }
 
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;
@@ -58,12 +69,15 @@ public class Chisel implements Reference {
 
         itemChiselIron = new ItemChisel(ChiselType.IRON);
         itemChiselDiamond = new ItemChisel(ChiselType.DIAMOND);
+        itemChiselHitech = new ItemChisel(ChiselType.HITECH);
         
         GameRegistry.register(itemChiselIron);
         GameRegistry.register(itemChiselDiamond);
-        
+        GameRegistry.register(itemChiselHitech);
+
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
+        GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
         
         GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
 

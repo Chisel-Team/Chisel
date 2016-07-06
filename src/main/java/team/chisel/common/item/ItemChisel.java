@@ -3,6 +3,7 @@ package team.chisel.common.item;
 import java.util.List;
 import java.util.Locale;
 
+import lombok.Getter;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -29,6 +30,7 @@ public class ItemChisel extends Item {
     public enum ChiselType {
         IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage),
         DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage),
+        HITECH(Configurations.hitechChiselMaxDamage, Configurations.hitechChiselAttackDamage)
         ;
 
         final int maxDamage;
@@ -40,6 +42,7 @@ public class ItemChisel extends Item {
         }
     }
     
+    @Getter
     private final ChiselType type;
     
     public ItemChisel(ChiselType type) {
@@ -68,6 +71,7 @@ public class ItemChisel extends Item {
     public boolean getIsRepairable(ItemStack damagedItem, ItemStack repairMaterial) {
         switch (type) {
         case DIAMOND:
+        case HITECH:
             return repairMaterial.getItem().equals(Items.DIAMOND);
         case IRON:
             return repairMaterial.getItem().equals(Items.IRON_INGOT);
@@ -149,5 +153,10 @@ public class ItemChisel extends Item {
             return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
         }
         return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
+    }
+    
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return slotChanged || !ItemStack.areItemsEqual(oldStack, newStack);
     }
 }

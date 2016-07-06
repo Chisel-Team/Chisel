@@ -15,15 +15,15 @@ import team.chisel.common.item.ItemChisel;
 public class InventoryChiselSelection implements IInventory {
 
     ItemStack chisel = null;
-    public final static int normalSlots = 60;
+    public final int size;
     public int activeVariations = 0;
     ContainerChisel container;
     ItemStack[] inventory;
 
-    public InventoryChiselSelection(ItemStack c) {
+    public InventoryChiselSelection(ItemStack c, int size) {
         super();
-
-        inventory = new ItemStack[normalSlots + 1];
+        this.size = size;
+        inventory = new ItemStack[size + 1];
         chisel = c;
     }
 
@@ -32,7 +32,7 @@ public class InventoryChiselSelection implements IInventory {
 
     @Override
     public int getSizeInventory() {
-        return normalSlots + 1;
+        return size + 1;
     }
 
     @Override
@@ -106,23 +106,27 @@ public class InventoryChiselSelection implements IInventory {
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer) {
-        ItemStack held = entityplayer.getHeldItem(container.getHand());
+        ItemStack held = entityplayer.inventory.getStackInSlot(container.getChiselSlot());
         return held != null && held.getItem() instanceof ItemChisel;
     }
 
     public void clearItems() {
         activeVariations = 0;
-        for (int i = 0; i < normalSlots; i++) {
+        for (int i = 0; i < size; i++) {
             inventory[i] = null;
         }
     }
 
     public ItemStack getStackInSpecialSlot() {
-        return inventory[normalSlots];
+        return inventory[size];
+    }
+    
+    public void setStackInSpecialSlot(ItemStack stack) {
+        inventory[size] = stack;
     }
 
     public void updateItems() {
-        ItemStack chiseledItem = inventory[normalSlots];
+        ItemStack chiseledItem = inventory[size];
         clearItems();
 
         if (chiseledItem == null) {
@@ -140,7 +144,7 @@ public class InventoryChiselSelection implements IInventory {
         List<ItemStack> list = container.getCarving().getItemsForChiseling(chiseledItem);
 
         activeVariations = 0;
-        while (activeVariations < normalSlots && activeVariations < list.size()) {
+        while (activeVariations < size && activeVariations < list.size()) {
             if (Block.REGISTRY.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
                 inventory[activeVariations] = list.get(activeVariations);
                 activeVariations++;
@@ -164,7 +168,7 @@ public class InventoryChiselSelection implements IInventory {
             return false;
         }
 
-        return !(stack != null && (stack.getItem() instanceof ItemChisel)) && i == normalSlots;
+        return !(stack != null && (stack.getItem() instanceof ItemChisel)) && i == size;
     }
 
     @Override

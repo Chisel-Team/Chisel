@@ -36,10 +36,15 @@ public enum GenerationHandler implements IWorldGenerator {
     private final List<Pair<WorldGenMinable, WorldGenInfo>> generators = Lists.newArrayList();
     
     public void addGeneration(IBlockState state, WorldGenInfo info) {
-        generators.add(Pair.of(new WorldGenMinable(state, info.getAmount(), info.getReplaceable()), info));
+        addGeneration(new WorldGenMinable(state, info.getAmount(), info.getReplaceable()), info);
     }
     
-	@Override
+    public void addGeneration(WorldGenMinable gen, WorldGenInfo info) {
+        generators.add(Pair.of(gen, info));
+    }
+    
+	@SuppressWarnings("null")
+    @Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
 	    for (Pair<WorldGenMinable, WorldGenInfo> p : generators) {
 	        generateSurface(world, random, p.getLeft(), p.getRight(), chunkX * 16, chunkZ * 16);

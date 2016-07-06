@@ -47,7 +47,7 @@ minecraft {
 	
 	useDepAts = true
 
-    replaceIn "Chisel.java"
+    replaceIn "Reference.java"
     replace "@VERSION@", project.version
 }
 
@@ -63,7 +63,7 @@ repositories {
 dependencies {
 	// no WAILA for 1.9
 	//deobfCompile "mcp.mobius.waila:Waila:${waila_version}"
-	deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
+	deobfCompile "mezz.jei:jei_1.9.4:${jei_version}"
 }
 
 lombok {
