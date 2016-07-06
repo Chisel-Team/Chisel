@@ -2,6 +2,8 @@ package team.chisel;
 
 import java.io.File;
 
+import javax.annotation.Nonnull;
+
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -35,7 +37,8 @@ public class Chisel implements Reference {
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY, modId = MOD_ID)
     public static CommonProxy proxy;
 
-    public static ItemChisel itemChiselIron, itemChiselDiamond;
+    @SuppressWarnings("null")
+    public static @Nonnull ItemChisel itemChiselIron, itemChiselDiamond;
 
     public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
 

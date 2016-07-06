@@ -1,0 +1,4 @@
+class net/minecraftforge/common/property/IExtendedBlockState
+withProperty
+ <V:Ljava/lang/Object;>(Lnet/minecraftforge/common/property/IUnlistedProperty<TV;>;TV;)Lnet/minecraftforge/common/property/IExtendedBlockState;
+ <V:Ljava/lang/Object;>(Lnet/minecraftforge/common/property/IUnlistedProperty<TV;>;TV;)L1net/minecraftforge/common/property/IExtendedBlockState;

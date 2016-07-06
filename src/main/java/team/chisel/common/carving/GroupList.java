@@ -6,6 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -13,16 +18,13 @@ import net.minecraft.item.ItemStack;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 public class GroupList implements Set<ICarvingGroup> {
 
 	private class VariationWrapper {
 
-		private ICarvingVariation v;
+		private @Nonnull ICarvingVariation v;
 
-		private VariationWrapper(ICarvingVariation v) {
+		private VariationWrapper(@Nonnull ICarvingVariation v) {
 			this.v = v;
 		}
 
@@ -57,7 +59,7 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 
 		@Override
-		public Block getBlock() {
+		public @Nonnull Block getBlock() {
 			return state.getBlock();
 		}
 
@@ -67,7 +69,7 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 
 		@Override
-		public ItemStack getStack() {
+		public @Nonnull ItemStack getStack() {
 			return new ItemStack(getBlock());
 		}
 
@@ -84,10 +86,10 @@ public class GroupList implements Set<ICarvingGroup> {
 
 	private class StackKey implements ICarvingVariation {
 
-		ItemStack stack;
+		@Nonnull ItemStack stack;
 		Block block;
 
-		private StackKey(ItemStack stack) {
+		private StackKey(@Nonnull ItemStack stack) {
 			this.stack = stack;
 			this.block = Block.getBlockFromItem(stack.getItem());
 		}
@@ -103,7 +105,7 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 
 		@Override
-		public ItemStack getStack() {
+		public @Nonnull ItemStack getStack() {
 			return stack;
 		}
 
@@ -162,7 +164,7 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 		for (ICarvingVariation v : group.getVariations()) {
 			ICarvingGroup g = lookup.get(v);
-			if (g == null) {
+			if (g == null && v != null) {
 				lookup.put(new VariationWrapper(v), group);
 			}
 		}
@@ -228,20 +230,20 @@ public class GroupList implements Set<ICarvingGroup> {
 		groups.clear();
 	}
 
-	public ICarvingGroup getGroup(IBlockState state) {
+	public ICarvingGroup getGroup(@Nonnull IBlockState state) {
 		return getGroup(new BlockKey(state));
 	}
 	
-	public ICarvingGroup getGroup(ItemStack stack) {
+	public ICarvingGroup getGroup(@Nonnull ItemStack stack) {
 		return getGroup(new StackKey(stack));
 	}
 	
-	public ICarvingGroup getGroup(ICarvingVariation variation) {
+	public ICarvingGroup getGroup(@Nonnull ICarvingVariation variation) {
 		return lookup.get(new VariationWrapper(variation));
 	}
 
 	@SuppressWarnings("deprecation")
-    public void addVariation(String name, ICarvingVariation variation) {
+    public void addVariation(String name, @Nonnull ICarvingVariation variation) {
 		ICarvingGroup g = groups.get(name);
 		if (g == null) {
 			throw new NullPointerException("No group exists for name " + name);
@@ -267,7 +269,7 @@ public class GroupList implements Set<ICarvingGroup> {
 		return groups.keySet();
 	}
 	
-	public ICarvingVariation removeVariation(ItemStack stack, String group) {
+	public ICarvingVariation removeVariation(@Nonnull ItemStack stack, String group) {
 		return removeVariation(new StackKey(stack), group);
 	}
 
@@ -276,7 +278,7 @@ public class GroupList implements Set<ICarvingGroup> {
 	}
 
 	@SuppressWarnings("deprecation")
-    public ICarvingVariation removeVariation(ICarvingVariation variation, String group) {
+    public ICarvingVariation removeVariation(@Nonnull ICarvingVariation variation, String group) {
 		ICarvingGroup g = null;
 		if (group != null) {
 			g = groups.get(group);

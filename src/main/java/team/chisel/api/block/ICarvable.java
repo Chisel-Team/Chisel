@@ -1,11 +1,15 @@
 package team.chisel.api.block;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.client.BlockFaceData;
 
+@ParametersAreNonnullByDefault
 public interface ICarvable {
 
     /**
@@ -46,7 +50,7 @@ public interface ICarvable {
     void setBlockFaceData(BlockFaceData blockFaceData);
 
     @SideOnly(Side.CLIENT)
-    BlockFaceData getBlockFaceData();
+    @Nullable BlockFaceData getBlockFaceData();
 
 //    /**
 //     * Called to get the quad mutator, called multiple times so please cache this value

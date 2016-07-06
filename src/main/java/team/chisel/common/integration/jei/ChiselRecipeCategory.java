@@ -1,6 +1,7 @@
 package team.chisel.common.integration.jei;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
@@ -12,6 +13,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+@ParametersAreNonnullByDefault
 public class ChiselRecipeCategory implements IRecipeCategory {
 
     private IDrawable background;
@@ -64,7 +66,10 @@ public class ChiselRecipeCategory implements IRecipeCategory {
             int y = yStart + (i / rowWidth) * 18;
             
             recipeLayout.getItemStacks().init(i + 1, false, x, y);
-            recipeLayout.getItemStacks().set(i + 1, (ItemStack) recipeWrapper.getOutputs().get(i));
+            ItemStack stack = (ItemStack) recipeWrapper.getOutputs().get(i);
+            if (stack != null) {
+                recipeLayout.getItemStacks().set(i + 1, stack);
+            }
         }
 
     }

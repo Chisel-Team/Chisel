@@ -2,6 +2,9 @@ package team.chisel.api.carving;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 /**
  * Represents a group of chiselable blocks.
  * <p>
@@ -10,6 +13,7 @@ import java.util.List;
  * <p>
  * It also defines what sound and oredict name the group as a whole has.
  */
+@ParametersAreNonnullByDefault
 public interface ICarvingGroup {
 
 	/**
@@ -24,7 +28,7 @@ public interface ICarvingGroup {
 	 * 
 	 * @return The string resource path of the sound to use for chiseling items in this group
 	 */
-	String getSound();
+	@Nullable String getSound();
 
 	/**
 	 * Sets the sound of this group
@@ -32,14 +36,14 @@ public interface ICarvingGroup {
 	 * @param sound
 	 *            A string resource path for the sound this group makes when chiseled
 	 */
-	void setSound(String sound);
+	void setSound(@Nullable String sound);
 
 	/**
 	 * The oredict name to match to this group. All items with this oredict name will be assumed to be part of this group.
 	 * 
 	 * @return An ore dictionary name
 	 */
-	String getOreName();
+	@Nullable String getOreName();
 
 	/**
 	 * Sets the oredict name for this group.
@@ -47,7 +51,7 @@ public interface ICarvingGroup {
 	 * @param oreName
 	 *            The String oredict name to be associated with this group.
 	 */
-	void setOreName(String oreName);
+	void setOreName(@Nullable String oreName);
 
 	/**
 	 * Gets all carving variations associated with this group.

@@ -1,5 +1,7 @@
 package team.chisel.api.block;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
@@ -8,6 +10,7 @@ import team.chisel.common.block.ItemChiselBlock;
 /**
  * Factory to create builders to create blocks
  */
+@ParametersAreNonnullByDefault
 public class ChiselBlockFactory {
 
     private String domain;

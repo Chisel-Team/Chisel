@@ -1,8 +1,19 @@
 package team.chisel;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockPrismarine;
+import net.minecraft.block.BlockRedSandstone;
+import net.minecraft.block.BlockRotatedPillar;
+import net.minecraft.block.BlockSandStone;
+import net.minecraft.block.BlockStainedGlass;
+import net.minecraft.block.BlockStoneBrick;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -17,7 +28,11 @@ import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
-import team.chisel.api.block.*;
+import team.chisel.api.block.BlockCreator;
+import team.chisel.api.block.BlockProvider;
+import team.chisel.api.block.ChiselBlockFactory;
+import team.chisel.api.block.ICarvable;
+import team.chisel.api.block.VariationData;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
 import team.chisel.common.block.ItemChiselBlock;
@@ -814,6 +829,7 @@ public enum Features {
     },
 
     GLASSDYED {
+        @SuppressWarnings("null")
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             IBlockState stainedGlass = Blocks.STAINED_GLASS.getDefaultState();
@@ -1602,6 +1618,7 @@ public enum Features {
     PLANKS {
         private final String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
 
+        @SuppressWarnings("null")
         @Override
         void addBlocks(ChiselBlockFactory factory)
         {
@@ -2408,10 +2425,12 @@ public enum Features {
     private static final String[] dyeOres = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
             "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
 
-    private static final BlockCreator<BlockCarvable> creator = BlockCarvable::new;
-    private static final ChiselBlockProvider<BlockCarvable> provider = new ChiselBlockProvider<>(creator, BlockCarvable.class);
+    private static final @Nonnull BlockCreator<BlockCarvable> creator = BlockCarvable::new;
+    private static final @Nonnull ChiselBlockProvider<BlockCarvable> provider = new ChiselBlockProvider<>(creator, BlockCarvable.class);
 
-    @RequiredArgsConstructor private static class ChiselBlockProvider<T extends Block & ICarvable> implements BlockProvider<T> {
+    @RequiredArgsConstructor
+    @ParametersAreNonnullByDefault
+    private static class ChiselBlockProvider<T extends Block & ICarvable> implements BlockProvider<T> {
 
         private final BlockCreator<T> creator;
         @Getter(onMethod = @__(@Override))
@@ -2569,7 +2588,7 @@ public enum Features {
         return false;
     }
 
-    private static void registerSlabTop(Block bottom, Block top) {
+    private static void registerSlabTop(@Nonnull Block bottom, Block top) {
         ResourceLocation block = Block.REGISTRY.getNameForObject(bottom);
         String name = block.getResourcePath() + "_top";
         // GameRegistry.registerBlock(top, ItemCarvableSlab.class, name); TODO

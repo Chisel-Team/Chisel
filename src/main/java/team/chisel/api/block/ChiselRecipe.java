@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 /**
  * Recipe for Chisel Blocks
  */
+@SuppressWarnings("null") // Don't care for now
 public class ChiselRecipe implements IRecipe {
 
     //Rows then collumns

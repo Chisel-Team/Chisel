@@ -77,6 +77,19 @@ task delombok(type: DelombokTask) {
     args("src/main/java", "-d", "build/sources/delomboked/java")
 }
 
+// Add external annotations
+eclipse.classpath.file {
+	withXml {
+    	def node = it.asNode()
+        node.get('classpathentry').each {
+        	// Allow external annotations on Minecraft/Forge and JRE
+        	if (it.attribute('path').contains('forgeSrc') || it.attribute('path').contains('JRE_CONTAINER')) {
+        		it.appendNode('attributes').appendNode('attribute', [name: 'annotationpath', value: '/Chisel/externalannotations/'])
+        	}
+        }
+    }
+}
+
 tasks.eclipse.dependsOn installLombok
 
 processResources {

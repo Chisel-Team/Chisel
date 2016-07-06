@@ -1,6 +1,10 @@
 package team.chisel.common.block;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Getter;
 import net.minecraft.block.Block;
@@ -40,6 +44,7 @@ import team.chisel.common.util.PropertyRenderContextList;
 /**
  * Represents a Carvable (aka Chisilable) block
  */
+@ParametersAreNonnullByDefault
 public class BlockCarvable extends Block implements ICarvable {
 
     /**
@@ -52,7 +57,7 @@ public class BlockCarvable extends Block implements ICarvable {
     private final int index;
 
     @SideOnly(Side.CLIENT)
-    private BlockFaceData blockFaceData;
+    private Optional<BlockFaceData> blockFaceData = Optional.empty();
 
     @Getter
     private final VariationData[] variations;
@@ -75,14 +80,14 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public BlockFaceData getBlockFaceData() {
-        return this.blockFaceData;
+    public @Nullable BlockFaceData getBlockFaceData() {
+        return this.blockFaceData.orElse(null);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void setBlockFaceData(BlockFaceData data) {
-        this.blockFaceData = data;
+        this.blockFaceData = Optional.ofNullable(data);
     }
 
 //    @SideOnly(Side.CLIENT)
@@ -111,6 +116,7 @@ public class BlockCarvable extends Block implements ICarvable {
         return this.index;
     }
 
+    @SuppressWarnings("null") // No type annotations
     @Override   
     public VariationData getVariationData(int meta) {
         return this.variations[MathHelper.clamp_int(meta, 0, this.variations.length - 1)];
@@ -165,15 +171,20 @@ public class BlockCarvable extends Block implements ICarvable {
     @SideOnly(Side.CLIENT)
     @Override
     public IBlockState getExtendedState(IBlockState stateIn, IBlockAccess w, BlockPos pos) {
-        if (stateIn.getBlock() == null || stateIn.getMaterial() == Material.AIR) {
+        if (stateIn.getMaterial() == Material.AIR) {
             return stateIn;
         }
-        IExtendedBlockState state = (IExtendedBlockState) stateIn;
-        List<IBlockRenderType> types = this.blockFaceData.getForMeta(getMetaFromState(state)).getTypesUsed();
+        
+        if (blockFaceData.isPresent()) {
+            IExtendedBlockState state = (IExtendedBlockState) stateIn;
+            List<IBlockRenderType> types = blockFaceData.get().getForMeta(getMetaFromState(state)).getTypesUsed();
 
-        RenderContextList ctxList = new RenderContextList(types, w, pos);
+            RenderContextList ctxList = new RenderContextList(types, w, pos);
 
-        return state.withProperty(CTX_LIST, ctxList);
+            return state.withProperty(CTX_LIST, ctxList);
+        }
+        
+        return stateIn;
     }
 
     public static BlockPos pos(int x, int y, int z) {
@@ -219,7 +230,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean canRenderInLayer(BlockRenderLayer layer) {
-        return this.blockFaceData.isValid(layer);
+        return blockFaceData.map(b -> b.isValid(layer)).orElse(false);
     }
 
     @Override

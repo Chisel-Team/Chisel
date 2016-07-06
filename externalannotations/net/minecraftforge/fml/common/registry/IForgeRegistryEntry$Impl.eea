@@ -1,0 +1,7 @@
+class net/minecraftforge/fml/common/registry/IForgeRegistryEntry$Impl
+setRegistryName
+ (Ljava/lang/String;Ljava/lang/String;)TT;
+ (Ljava/lang/String;Ljava/lang/String;)T1T;
+setRegistryName
+ (Lnet/minecraft/util/ResourceLocation;)TT;
+ (Lnet/minecraft/util/ResourceLocation;)T1T;

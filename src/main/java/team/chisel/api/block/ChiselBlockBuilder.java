@@ -6,7 +6,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Consumer;
+
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -24,21 +31,19 @@ import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.init.BlockRegistry;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
-
 /**
  * Building a ChiselBlockData
  */
 @Setter
 @Accessors(chain = true)
+@ParametersAreNonnullByDefault
 public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     private final Material material;
     private final String domain;
     private final String blockName;
 
-    private SoundType sound;
+    private @Nullable SoundType sound;
 
     private int curIndex;
 
@@ -48,7 +53,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     private String parentFolder;
 
-    private String group;
+    private @Nullable String group;
     
     @Accessors(fluent = true)
     private boolean opaque = true;
@@ -63,7 +68,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     }
 
     public VariationBuilder<T> newVariation(String name) {
-        return newVariation(name, group == null ? blockName : group);
+        return newVariation(name, Optional.ofNullable(group).orElse(blockName));
     }
 
     public VariationBuilder<T> newVariation(String name, String group) {
@@ -93,7 +98,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      *            registration.
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
-    @SuppressWarnings({ "unchecked", "deprecation" })
+    @SuppressWarnings({ "unchecked", "deprecation", "null" })
     public T[] build(Consumer<? super T> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
@@ -139,7 +144,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
          */
         public interface IVariationBuilderDelegate {
 
-            VariationData build(String name, String group, int index, ChiselRecipe recipe, ItemStack smeltedFrom, int amountSmelted, boolean opaque, ResourceLocation texLocation,
+            VariationData build(String name, String group, int index, @Nullable ChiselRecipe recipe, @Nullable ItemStack smeltedFrom, int amountSmelted, boolean opaque, ResourceLocation texLocation,
                     Map<EnumFacing, ResourceLocation> overrideMap);
 
         }
@@ -152,9 +157,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         private int index;
 
         @Setter
-        private ChiselRecipe recipe;
+        private @Nullable ChiselRecipe recipe;
 
-        private ItemStack smeltedFrom;
+        private @Nullable ItemStack smeltedFrom;
         private int amountSmelted;
 
         @Setter
