@@ -3,6 +3,9 @@ package team.chisel.client.gui;
 import java.io.IOException;
 import java.util.List;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -49,9 +52,10 @@ import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
 import team.chisel.common.util.NBTUtil;
 
-
+@ParametersAreNonnullByDefault
 public class GuiHitechChisel extends GuiChisel {
-    
+
+    @SuppressWarnings("null")
     private static class PreviewModeButton extends GuiButton {
 
         @Getter
@@ -71,7 +75,7 @@ public class GuiHitechChisel extends GuiChisel {
             return false;
         }
         
-        private void setType(PreviewType type) {
+        private final void setType(PreviewType type) {
             this.type = type;
             this.displayString = "< " + type.toString() + " >";
         }
@@ -125,7 +129,7 @@ public class GuiHitechChisel extends GuiChisel {
         private IBlockState state = Blocks.AIR.getDefaultState();
 
         @Override
-        public TileEntity getTileEntity(BlockPos pos) {
+        public @Nullable TileEntity getTileEntity(BlockPos pos) {
             return null;
         }
 
@@ -189,9 +193,9 @@ public class GuiHitechChisel extends GuiChisel {
     
     private int scrollAcc;
     
-    private PreviewModeButton buttonPreview;
-    private GuiButton buttonChisel;
-    private RotateButton buttonRotate;
+    private @Nullable PreviewModeButton buttonPreview;
+    private @Nullable GuiButton buttonChisel;
+    private @Nullable RotateButton buttonRotate;
     
     public GuiHitechChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, EnumHand hand) {
         super(iinventory, menu, hand);

@@ -2,6 +2,8 @@ package team.chisel.client.gui;
 
 import java.util.List;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
@@ -17,6 +19,7 @@ import team.chisel.common.inventory.ContainerChisel;
 import team.chisel.common.inventory.InventoryChiselSelection;
 import team.chisel.common.inventory.SlotChiselInput;
 
+@ParametersAreNonnullByDefault
 public class GuiChisel extends GuiContainer {
 
     public EntityPlayer player;
@@ -60,6 +63,7 @@ public class GuiChisel extends GuiContainer {
 //        return false;
 //    }
 
+    @SuppressWarnings("null")
     @Override
     protected void drawGuiContainerForegroundLayer(int j, int i) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);

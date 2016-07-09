@@ -2,6 +2,9 @@ package team.chisel.api.carving;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -12,6 +15,7 @@ import net.minecraft.world.World;
  * <p>
  * To obtain chisel's instance of this class, use {@link CarvingUtils#getChiselRegistry()}
  */
+@ParametersAreNonnullByDefault
 public interface ICarvingRegistry {
 
     /* Getters */
@@ -23,6 +27,7 @@ public interface ICarvingRegistry {
      *            The state of the variation
      * @return The {@link ICarvingGroup} that the block/meta pair belongs to
      */
+    @Nullable
     ICarvingGroup getGroup(IBlockState state);
 
     /**
@@ -32,6 +37,7 @@ public interface ICarvingRegistry {
      *            The ItemStack of the variation
      * @return The {@link ICarvingGroup} that the ItemStack pair belongs to
      */
+    @Nullable
     ICarvingGroup getGroup(ItemStack stack);
 
     /**
@@ -41,6 +47,7 @@ public interface ICarvingRegistry {
      *            The name of the group
      * @return An {@link ICarvingGroup}
      */
+    @Nullable
     ICarvingGroup getGroup(String name);
 
     /**
@@ -50,6 +57,7 @@ public interface ICarvingRegistry {
      *            The state of the variation
      * @return The {@link ICarvingVariation} containing this block/meta pair
      */
+    @Nullable
     ICarvingVariation getVariation(IBlockState state);
 
     /**
@@ -60,6 +68,7 @@ public interface ICarvingRegistry {
      * 
      * @return The {@link ICarvingVariation} containing this stack
      */
+    @Nullable
     ICarvingVariation getVariation(ItemStack stack);
 
     /**
@@ -78,6 +87,7 @@ public interface ICarvingRegistry {
      *            The state of the variation
      * @return A string oredict name for the group
      */
+    @Nullable
     String getOreName(IBlockState state);
 
     /**
@@ -96,6 +106,7 @@ public interface ICarvingRegistry {
      *            The state of the variation
      * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
      */
+    @Nullable
     public String getVariationSound(IBlockState state);
 
     /**
@@ -106,6 +117,7 @@ public interface ICarvingRegistry {
      * 
      * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
      */
+    @Nullable
     public String getVariationSound(ItemStack stack);
 
     /**
@@ -155,6 +167,7 @@ public interface ICarvingRegistry {
      *            The name of the group to remove.
      * @return The {@link ICarvingGroup} that was removed.
      */
+    @Nullable
     ICarvingGroup removeGroup(String groupName);
 
     /**
@@ -164,6 +177,7 @@ public interface ICarvingRegistry {
      *            The {@link IBlockState} of the {@link ICarvingVariation variation}
      * @return The ICarvingVariation that was removed. Null if nothing was removed.
      */
+    @Nullable
     ICarvingVariation removeVariation(IBlockState state);
 
     /**
@@ -175,6 +189,7 @@ public interface ICarvingRegistry {
      *            The name of the group that the variation should be removed from
      * @return The ICarvingVariation that was removed. Null if nothing was removed.
      */
+    @Nullable
     ICarvingVariation removeVariation(IBlockState state, String group);
 
     /**

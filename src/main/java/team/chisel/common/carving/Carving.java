@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -15,18 +19,19 @@ import team.chisel.api.carving.ICarvingVariation;
 
 import com.google.common.collect.Lists;
 
+@ParametersAreNonnullByDefault
 public class Carving implements ICarvingRegistry {
 
 	private static class ItemStackWrapper {
 
-		private ItemStack wrapped;
+		private @Nullable ItemStack wrapped;
 
-		private ItemStackWrapper(ItemStack stack) {
+		private ItemStackWrapper(@Nullable ItemStack stack) {
 			this.wrapped = stack;
 		}
 
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(@Nullable Object obj) {
 			if (this == obj) {
 				return true;
 			} else if (obj == null) {
@@ -105,7 +110,7 @@ public class Carving implements ICarvingRegistry {
 	}
 
 	@Override
-	public String getOreName(IBlockState state) {
+	public @Nullable String getOreName(IBlockState state) {
 		ICarvingGroup group = getGroup(state);
 		if (group == null)
 			return null;

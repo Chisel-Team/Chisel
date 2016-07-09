@@ -67,6 +67,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         this.variations = new ArrayList<VariationBuilder<T>>();
     }
 
+    @SuppressWarnings("null")
     public VariationBuilder<T> newVariation(String name) {
         return newVariation(name, Optional.ofNullable(group).orElse(blockName));
     }

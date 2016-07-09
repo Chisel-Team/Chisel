@@ -1,5 +1,9 @@
 package team.chisel.common.inventory;
 
+import java.util.Optional;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import lombok.Getter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,6 +18,7 @@ import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.carving.Carving;
 
 @Getter
+@ParametersAreNonnullByDefault
 public class ContainerChisel extends Container {
 
     protected final InventoryChiselSelection inventoryChisel;
@@ -30,7 +35,7 @@ public class ContainerChisel extends Container {
         this.inventoryPlayer = inventoryplayer;
         
         this.chiselSlot = hand == EnumHand.MAIN_HAND ? inventoryplayer.currentItem : inventoryplayer.getSizeInventory() - 1;
-        this.chisel = inventoryplayer.getStackInSlot(chiselSlot);
+        this.chisel = Optional.ofNullable(inventoryplayer.getStackInSlot(chiselSlot)).orElse(new ItemStack(Chisel.itemChiselIron));
         this.carving = Carving.chisel;
 
         inv.container = this;

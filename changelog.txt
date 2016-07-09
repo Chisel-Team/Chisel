@@ -1,3 +1,30 @@
+0.0.6:
+New
+- Hitech Chisel
+  - Completely new way to use the chisel
+  - No items are movable, just select slots to chisel to/from.
+  - Scroll to move through variants
+  - Hold shift to chisel all blocks of the same type
+  - Right click on a block in the inventory to target it
+- Some animations now use interpolation, makes them much smoother
+- Marble, Limestone, and Basalt now generate in world. Very basic, may change in the future.
+Fixes
+- Fix strange ordering of variations inside chisel GUI
+- Fix cursor item rendering underneath target slot
+
+0.0.5:
+New
+- Updated to 1.9.4/1.10
+- New textures for many blocks
+- Chiseling sounds are back!
+Fixes
+- Clean up block rendering all around
+- Fix most localizations
+- Improve performance drastically
+- Delete some unused textures
+- Fix issues with chisel GUI
+- Light no longer passes through all chisel blocks
+
 0.0.4:
 Fixes
 - Fix block items only being able to place the first variation
