@@ -1,7 +1,6 @@
 package team.chisel.common.block;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -57,7 +56,7 @@ public class BlockCarvable extends Block implements ICarvable {
     private final int index;
 
     @SideOnly(Side.CLIENT)
-    private Optional<BlockFaceData> blockFaceData = Optional.empty();
+    private @Nullable BlockFaceData blockFaceData;
 
     @Getter
     private final VariationData[] variations;
@@ -81,13 +80,13 @@ public class BlockCarvable extends Block implements ICarvable {
     @SideOnly(Side.CLIENT)
     @Override
     public @Nullable BlockFaceData getBlockFaceData() {
-        return this.blockFaceData.orElse(null);
+        return this.blockFaceData;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void setBlockFaceData(BlockFaceData data) {
-        this.blockFaceData = Optional.ofNullable(data);
+        this.blockFaceData = data;
     }
 
 //    @SideOnly(Side.CLIENT)
@@ -175,9 +174,10 @@ public class BlockCarvable extends Block implements ICarvable {
             return stateIn;
         }
         
-        if (blockFaceData.isPresent()) {
+        BlockFaceData data = this.blockFaceData;
+        if (data != null) {
             IExtendedBlockState state = (IExtendedBlockState) stateIn;
-            List<IBlockRenderType> types = blockFaceData.get().getForMeta(getMetaFromState(state)).getTypesUsed();
+            List<IBlockRenderType> types = data.getForMeta(getMetaFromState(state)).getTypesUsed();
 
             RenderContextList ctxList = new RenderContextList(types, w, pos);
 
@@ -230,7 +230,11 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean canRenderInLayer(BlockRenderLayer layer) {
-        return blockFaceData.map(b -> b.isValid(layer)).orElse(false);
+        final BlockFaceData data = blockFaceData;
+        if (data != null) {
+            return blockFaceData == null ? false : data.isValid(layer);
+        }
+        return false;
     }
 
     @Override
