@@ -49,6 +49,7 @@ public class BlockCarvable extends Block implements ICarvable {
     /**
      * The Property for the variation of this block
      */
+    @Getter
     private final PropertyAnyInteger metaProp;
 
     public static final PropertyRenderContextList CTX_LIST = new PropertyRenderContextList();

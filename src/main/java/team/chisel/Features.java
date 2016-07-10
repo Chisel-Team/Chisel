@@ -1,7 +1,5 @@
 package team.chisel;
 
-import java.util.Random;
-
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -27,10 +25,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.MutableBlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -190,25 +184,8 @@ public enum Features {
         
         @Override
         void addRecipes() {
-//            WorldGenMinable gen = new WorldGenMinable(ChiselBlocks.basalt.getDefaultState(), Configurations.basaltAmount) {
-//              
-//                @SuppressWarnings("null")
-//                @Override
-//                public boolean generate(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos position) {
-//                    MutableBlockPos pos = new MutableBlockPos(position);
-//                    for (int x = -2; x <= 2; x++) {
-//                        for (int y = -2; y <= 2; y++) {
-//                            for (int z = -2; z <= 2; z++) {
-//                                if (worldIn.getBlockState(pos.setPos(position).add(x, y, z)).getBlock() == Blocks.LAVA) {
-//                                    return super.generate(worldIn, rand, position);
-//                                }
-//                            }
-//                        }
-//                    }
-//                    return false;
-//                }  
-//            };
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basalt.getDefaultState(), new WorldGenInfo(Configurations.basaltAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basaltextra.getDefaultState().withProperty(ChiselBlocks.basaltextra.getMetaProp(), 7),
+                    new WorldGenInfo(Configurations.basaltAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
 
@@ -1385,7 +1362,8 @@ public enum Features {
         
         @Override
         void addRecipes() {
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestone.getDefaultState(), new WorldGenInfo(Configurations.limestoneAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestoneextra.getDefaultState().withProperty(ChiselBlocks.limestoneextra.getMetaProp(), 7), 
+                    new WorldGenInfo(Configurations.limestoneAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
 
@@ -1455,7 +1433,8 @@ public enum Features {
         
         @Override
         void addRecipes() {
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marble.getDefaultState(), new WorldGenInfo(Configurations.marbleAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marbleextra.getDefaultState().withProperty(ChiselBlocks.marbleextra.getMetaProp(), 7), 
+                    new WorldGenInfo(Configurations.marbleAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
 

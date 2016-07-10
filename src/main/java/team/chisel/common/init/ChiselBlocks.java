@@ -5,9 +5,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import net.minecraft.block.Block;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.Chisel;
+import team.chisel.common.block.BlockCarvable;
 
 @GameRegistry.ObjectHolder(Chisel.MOD_ID)
 @ParametersAreNonnullByDefault
@@ -25,32 +25,32 @@ public final class ChiselBlocks
             - minecreatr
     */
 
-    static Block antiblock = null;
-    static Block basalt = null;
-    static Block basaltextra = null;
-    static Block carpet = null;
-    static Block cloud = null;
-    static Block concrete = null;
-    static Block ender_pearl_block = null;
-    static Block factory = null;
-    static Block fantasy = null;
-    static Block futura = null;
-    static Block grimstone = null;
-    static Block holystone = null;
-    static Block laboratory = null;
-    static Block lavastone = null;
-    static Block limestone = null;
-    static Block limestoneextra = null;
-    static Block line_marking = null;
-    static Block marble = null;
-    static Block marbleextra = null;
-    static Block military = null;
-    static Block paper = null;
-    static Block temple = null;
-    static Block tyrian = null;
-    static Block valentines = null;
-    static Block voidstone = null;
-    static Block warningSign = null;
-    static Block waterstone = null;
+    static BlockCarvable antiblock = null;
+    static BlockCarvable basalt = null;
+    static BlockCarvable basaltextra = null;
+    static BlockCarvable carpet = null;
+    static BlockCarvable cloud = null;
+    static BlockCarvable concrete = null;
+    static BlockCarvable ender_pearl_block = null;
+    static BlockCarvable factory = null;
+    static BlockCarvable fantasy = null;
+    static BlockCarvable futura = null;
+    static BlockCarvable grimstone = null;
+    static BlockCarvable holystone = null;
+    static BlockCarvable laboratory = null;
+    static BlockCarvable lavastone = null;
+    static BlockCarvable limestone = null;
+    static BlockCarvable limestoneextra = null;
+    static BlockCarvable line_marking = null;
+    static BlockCarvable marble = null;
+    static BlockCarvable marbleextra = null;
+    static BlockCarvable military = null;
+    static BlockCarvable paper = null;
+    static BlockCarvable temple = null;
+    static BlockCarvable tyrian = null;
+    static BlockCarvable valentines = null;
+    static BlockCarvable voidstone = null;
+    static BlockCarvable warningSign = null;
+    static BlockCarvable waterstone = null;
 
 }
