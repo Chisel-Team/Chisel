@@ -153,7 +153,7 @@ public class GuiHitechChisel extends GuiChisel {
             return Biomes.PLAINS;
         }
 
-        @Override
+        // @Override 1.9 only. Not actually ever called, just here for compilation.
         public boolean extendedLevelsInChunkCache() {
             return false;
         }
