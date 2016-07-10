@@ -190,25 +190,25 @@ public enum Features {
         
         @Override
         void addRecipes() {
-            WorldGenMinable gen = new WorldGenMinable(ChiselBlocks.basalt.getDefaultState(), Configurations.basaltAmount) {
-              
-                @SuppressWarnings("null")
-                @Override
-                public boolean generate(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos position) {
-                    MutableBlockPos pos = new MutableBlockPos(position);
-                    for (int x = -2; x <= 2; x++) {
-                        for (int y = -2; y <= 2; y++) {
-                            for (int z = -2; z <= 2; z++) {
-                                if (worldIn.getBlockState(pos.setPos(position).add(x, y, z)).getBlock() == Blocks.LAVA) {
-                                    return super.generate(worldIn, rand, position);
-                                }
-                            }
-                        }
-                    }
-                    return false;
-                }  
-            };
-            GenerationHandler.INSTANCE.addGeneration(gen, new WorldGenInfo(Configurations.basaltAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
+//            WorldGenMinable gen = new WorldGenMinable(ChiselBlocks.basalt.getDefaultState(), Configurations.basaltAmount) {
+//              
+//                @SuppressWarnings("null")
+//                @Override
+//                public boolean generate(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos position) {
+//                    MutableBlockPos pos = new MutableBlockPos(position);
+//                    for (int x = -2; x <= 2; x++) {
+//                        for (int y = -2; y <= 2; y++) {
+//                            for (int z = -2; z <= 2; z++) {
+//                                if (worldIn.getBlockState(pos.setPos(position).add(x, y, z)).getBlock() == Blocks.LAVA) {
+//                                    return super.generate(worldIn, rand, position);
+//                                }
+//                            }
+//                        }
+//                    }
+//                    return false;
+//                }  
+//            };
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basalt.getDefaultState(), new WorldGenInfo(Configurations.basaltAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
 
