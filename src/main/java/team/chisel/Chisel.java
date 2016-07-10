@@ -4,6 +4,9 @@ import java.io.File;
 
 import javax.annotation.Nonnull;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -15,10 +18,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.client.gui.PacketChiselButton;
@@ -79,7 +78,7 @@ public class Chisel implements Reference {
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
         
-        // FIXME GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
+        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 

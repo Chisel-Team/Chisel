@@ -76,9 +76,9 @@ public class Configurations {
 
         /* worldgen */
         category = "worldgen";
-        basaltAmount = config.get(category, "basaltAmount", 15, "Amount of basalt to generate in the world; use 0 for none").getInt();
-        marbleAmount = config.get(category, "marbleAmount", 20, "Amount of marble to generate in the world; use 0 for none").getInt();
-        limestoneAmount = config.get(category, "limestoneAmount", 18, "Amount of limestone to generate in the world; use 0 for none").getInt();
+        basaltAmount = config.getInt("basaltAmount", category, 15, 0, 30, "Amount of basalt to generate in the world; use 0 for none");
+        marbleAmount = config.getInt("marbleAmount", category, 20, 0, 30, "Amount of marble to generate in the world; use 0 for none");
+        limestoneAmount = config.getInt("limestoneAmount", category, 18, 0, 30, "Amount of limestone to generate in the world; use 0 for none");
         
         /* client */
         category = "client";
