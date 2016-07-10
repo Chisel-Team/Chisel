@@ -1,13 +1,12 @@
 0.0.6:
 New
 - Hitech Chisel
-  - Completely new way to use the chisel
-  - No items are movable, just select slots to chisel to/from.
-  - Scroll to move through variants
-  - Hold shift to chisel all blocks of the same type
-  - Right click on a block in the inventory to target it
+-- Completely new way to use the chisel
+-- No items are movable, just select slots to chisel to/from.
+-- Scroll to move through variants
+-- Hold shift to chisel all blocks of the same type
+-- Right click on a block in the inventory to target it
 - Some animations now use interpolation, makes them much smoother
-- Marble, Limestone, and Basalt now generate in world. Very basic, may change in the future.
 Fixes
 - Fix strange ordering of variations inside chisel GUI
 - Fix cursor item rendering underneath target slot
