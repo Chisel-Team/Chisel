@@ -27,9 +27,12 @@ public class Configurations {
     public static boolean chiselStoneToCobbleBricks;
     public static boolean chiselBackToVanillaLeaves;
 
-    public static int basaltAmount;
     public static int marbleAmount;
     public static int limestoneAmount;
+    public static boolean basaltSpecialGen;
+    public static int basaltSideThickness;
+    public static int basaltBottomThickness;
+    public static int basaltVeinAmount;
 
     public static int particlesTickrate;
     public static boolean oldPillars;
@@ -76,10 +79,17 @@ public class Configurations {
 
         /* worldgen */
         category = "worldgen";
-        basaltAmount = config.getInt("basaltAmount", category, 15, 0, 30, "Amount of basalt to generate in the world; use 0 for none");
         marbleAmount = config.getInt("marbleAmount", category, 20, 0, 30, "Amount of marble to generate in the world; use 0 for none");
         limestoneAmount = config.getInt("limestoneAmount", category, 18, 0, 30, "Amount of limestone to generate in the world; use 0 for none");
+
+        category += ".basalt";
+        basaltSpecialGen = config.getBoolean("specialGen", category, true, "True to generate basalt only around lava lakes. False to do standard vein generation.");
+        basaltSideThickness = config.getInt("sideThickness", category, 1, 0, 5, "Thickness of the basalt around the sides of lava lakes. 0 for none.");
+        basaltBottomThickness = config.getInt("bottomThickness", category, 3, 0, 5, "Thickness of the basalt at the bottom of lava lakes. 0 for none.");
         
+        basaltVeinAmount = config.getInt("veinAmount", category, 15, 0, 30,
+                "Amount of basalt to generate in the world if not using special generation. Has no effect if basaltSpecialGen is true. Use 0 for none");
+
         /* client */
         category = "client";
         particlesTickrate = config.get(category, "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);

@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -79,6 +80,8 @@ public class Chisel implements Reference {
         GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
         
         GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
+        MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
+        MinecraftForge.TERRAIN_GEN_BUS.register(GenerationHandler.INSTANCE);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 

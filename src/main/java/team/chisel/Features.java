@@ -184,8 +184,10 @@ public enum Features {
         
         @Override
         void addRecipes() {
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basaltextra.getDefaultState().withProperty(ChiselBlocks.basaltextra.getMetaProp(), 7),
-                    new WorldGenInfo(Configurations.basaltAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
+            if (!Configurations.basaltSpecialGen) {
+                GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basaltextra.getDefaultState().withProperty(ChiselBlocks.basaltextra.getMetaProp(), 7), 
+                    new WorldGenInfo(Configurations.basaltVeinAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
+            }
         }
     },
 
