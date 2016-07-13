@@ -2,6 +2,7 @@ package team.chisel.client.render;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import lombok.Getter;
@@ -49,7 +50,7 @@ public class Quad {
         Vector2f uvs;
     }
 
-    private static final TextureAtlasSprite BASE = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
+    private static final @Nonnull TextureAtlasSprite BASE = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
     
     @ToString
     public class UVs {
@@ -58,7 +59,7 @@ public class Quad {
         private float minU, minV, maxU, maxV;
         
         @Getter
-        private final TextureAtlasSprite sprite;
+        private final @Nonnull TextureAtlasSprite sprite;
         
         private final Vector2f[] data;
         
@@ -66,7 +67,7 @@ public class Quad {
             this(BASE, data);
         }
         
-        private UVs(TextureAtlasSprite sprite, Vector2f... data) {
+        private UVs(@Nonnull TextureAtlasSprite sprite, Vector2f... data) {
             this.data = data;
             this.sprite = sprite;
             
@@ -85,7 +86,7 @@ public class Quad {
             this.maxV = maxV;
         }
 
-        public UVs(float minU, float minV, float maxU, float maxV, TextureAtlasSprite sprite) {
+        public UVs(float minU, float minV, float maxU, float maxV, @Nonnull TextureAtlasSprite sprite) {
             this.minU = minU;
             this.minV = minV;
             this.maxU = maxU;
@@ -94,7 +95,7 @@ public class Quad {
             this.data = vectorize();
         }
 
-        public UVs transform(TextureAtlasSprite other, ISubmap submap) {
+        public UVs transform(@Nonnull TextureAtlasSprite other, ISubmap submap) {
             UVs normal = normalize();
             submap = submap.normalize();
 
@@ -410,11 +411,11 @@ public class Quad {
         return builder.build();
     }
     
-    public Quad transformUVs(TextureAtlasSprite sprite) {
+    public Quad transformUVs(@Nonnull TextureAtlasSprite sprite) {
         return transformUVs(sprite, CTM.FULL_TEXTURE.normalize());
     }
     
-    public Quad transformUVs(TextureAtlasSprite sprite, ISubmap submap) {
+    public Quad transformUVs(@Nonnull TextureAtlasSprite sprite, ISubmap submap) {
         return new Quad(vertPos, getUvs().transform(sprite, submap), builder, fullbright);
     }
     
