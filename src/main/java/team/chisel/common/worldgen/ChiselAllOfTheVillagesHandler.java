@@ -20,10 +20,10 @@ import java.util.Random;
 
 public class ChiselAllOfTheVillagesHandler {
 
-    private static final int chanceToChisel = 20;
+    private static final int chanceToChisel = 100;
     private static Random rng = new Random();
 
-    @SubscribeEvent(priority = EventPriority.LOW)
+    @SubscribeEvent(priority = EventPriority.NORMAL)
     public void getVillageBlockID(BiomeEvent.GetVillageBlockID event) {
         if (event.getOriginal() == null) {
             return;
@@ -31,7 +31,7 @@ public class ChiselAllOfTheVillagesHandler {
 
         IBlockState originalState = event.getOriginal();
 
-        if (event.getReplacement() != originalState) {
+        if ((event.getReplacement() != null) && (event.getReplacement() != originalState)) {
             originalState = event.getReplacement();
         }
 

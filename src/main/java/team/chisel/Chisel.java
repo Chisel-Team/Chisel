@@ -79,7 +79,7 @@ public class Chisel implements Reference {
         proxy.preInit(event);
 
         //TODO Fix
-        //MapGenVillage.VILLAGE_SPAWN_BIOMES.addAll(new ArrayList<>(Arrays.asList(new Biome[]{Biomes.TAIGA, Biomes.SAVANNA})));
+        //MapGenVillage.VILLAGE_SPAWN_BIOMES.addAll(new ArrayList<>(Arrays.asList(new Biome[]{Biomes.TAIGA})));
 
         VillageCreationConstructionYard.registerVillageComponents();
     }
@@ -90,7 +90,8 @@ public class Chisel implements Reference {
         
         proxy.init();
 
-        MinecraftForge.TERRAIN_GEN_BUS.register(new ChiselAllOfTheVillagesHandler());
+        //TODO Config
+        //MinecraftForge.TERRAIN_GEN_BUS.register(new ChiselAllOfTheVillagesHandler());
 
         VillageCreationConstructionYard villageChiselHandler = new VillageCreationConstructionYard();
         VillagerRegistry villagerRegistry = VillagerRegistry.instance();

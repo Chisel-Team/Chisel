@@ -18,7 +18,7 @@ public class VillageCreationConstructionYard implements VillagerRegistry.IVillag
 
     @Override
     public StructureVillagePieces.PieceWeight getVillagePieceWeight(Random random, int size) {
-        return new StructureVillagePieces.PieceWeight(VillageHouseConstructionYard.class, 15, MathHelper.getRandomIntegerInRange(random, size, 1 + size));
+        return new StructureVillagePieces.PieceWeight(VillageHouseConstructionYard.class, 25, MathHelper.getRandomIntegerInRange(random, size, 1 + size));
     }
 
     @Override
