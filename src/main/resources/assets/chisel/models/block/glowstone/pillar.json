@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:glowstone/pillar-side.cf",
+  "overrides":{
+    "UP":"chisel:glowstone/pillar-top.cf",
+    "DOWN":"chisel:glowstone/pillar-top.cf"
+  }
+}

@@ -905,6 +905,53 @@ public enum Features {
         }
     },*/
 
+    GLOWSTONE {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            Carving.chisel.addVariation("glowstone", Blocks.GLOWSTONE.getDefaultState(), -1);
+            factory.newBlock(Material.ROCK, "glowstone", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .build();
+
+            factory.newBlock(Material.ROCK, "glowstoneextra", provider)
+                    .setGroup("glowstone")
+                    .setParentFolder("glowstone")
+                    .newVariation("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("bismuth")
+                    .next("tiles-large-bismuth")
+                    .next("tiles-medium-bismuth")
+                    .next("neon")
+                    .next("neon-panel")
+                    .build();
+        }
+    },
+
     GOLD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -1293,30 +1340,6 @@ public enum Features {
                     .next("red_roses_opaque")
                     .next("roses")
                     .next("roses_opaque")
-                    .build();
-        }
-    },*/
-
-    /*LIGHTSTONE { TODO Retexture
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("lightstone", Blocks.GLOWSTONE.getDefaultState(), -1);
-            factory.newBlock(Material.ROCK, "lightstone", provider)
-                    .newVariation("terrain-sulphur-cobble")
-                    .next("terrain-sulphur-corroded")
-                    .next("terrain-sulphur-glass")
-                    .next("terrain-sulphur-neon")
-                    .next("terrain-sulphur-ornate")
-                    .next("terrain-sulphur-ROCKy")
-                    .next("terrain-sulphur-shale")
-                    .next("terrain-sulphur-tile")
-                    .next("terrain-sulphur-weavelanternlight")
-                    .next("a1-glowstone-cobble")
-                    .next("a1-glowstone-growth")
-                    .next("a1-glowstone-layers")
-                    .next("a1-glowstone-tilecorroded")
-                    .next("glowstone-bismuth")
-                    .next("glowstone-bismuth-panel")
                     .build();
         }
     },*/
