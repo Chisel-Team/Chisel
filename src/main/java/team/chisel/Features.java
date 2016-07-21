@@ -36,6 +36,7 @@ import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
+import team.chisel.common.block.BlockCarvableRedstone;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
@@ -909,7 +910,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("glowstone", Blocks.GLOWSTONE.getDefaultState(), -1);
-            factory.newBlock(Material.ROCK, "glowstone", provider)
+            BlockCarvable[] blocks = factory.newBlock(Material.ROCK, "glowstone", provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -931,12 +932,7 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .build();
-
-            factory.newBlock(Material.ROCK, "glowstoneextra", provider)
-                    .setGroup("glowstone")
-                    .setParentFolder("glowstone")
-                    .newVariation("bricks-solid")
+                    .next("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -949,6 +945,9 @@ public enum Features {
                     .next("neon")
                     .next("neon-panel")
                     .build();
+            for (BlockCarvable block : blocks){
+                block.setLightLevel(1.0f);
+            }
         }
     },
 

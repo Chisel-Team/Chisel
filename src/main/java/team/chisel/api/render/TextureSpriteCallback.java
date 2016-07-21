@@ -14,11 +14,9 @@ import net.minecraft.util.ResourceLocation;
 @Getter
 @ParametersAreNonnullByDefault
 public class TextureSpriteCallback {
-    
-    private static final TextureAtlasSprite missing = Minecraft.getMinecraft().getTextureMapBlocks().getMissingSprite();
 
     private ResourceLocation location;
-    private TextureAtlasSprite sprite = missing;
+    private TextureAtlasSprite sprite;
 
     public TextureSpriteCallback(ResourceLocation loc) {
         this.location = loc;

@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.annotation.Nonnull;
 
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,6 +28,7 @@ import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
+import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.util.GenerationHandler;
@@ -116,6 +118,17 @@ public class Chisel implements Reference {
                 message = message + obj + " ";
             }
             debug(message + "]");
+        }
+    }
+
+    @Mod.EventHandler
+    public void onMissingMappings(FMLMissingMappingsEvent event){
+        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()){
+            if (mapping.type == GameRegistry.Type.BLOCK){
+                if (mapping.name.equalsIgnoreCase("glowstoneextra")){
+                    mapping.remap(ChiselBlocks.glowstone);
+                }
+            }
         }
     }
 
