@@ -919,7 +919,7 @@ public enum Features {
                     .next("tiles-medium-bismuth")
                     .next("neon")
                     .next("neon-panel")
-                    .build(b ->b.setRedstoneLevel(15).setLightLevel(1.0f));
+                    .build(b ->b.setLightLevel(1.0f));
         }
     },
 
@@ -1806,32 +1806,43 @@ public enum Features {
         }
     },*/
 
-    /*REDSTONE { TODO Retexture
+    REDSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("redstone", Blocks.REDSTONE_BLOCK.getDefaultState(), -1);
+
             factory.newBlock(Material.ROCK, "redstone", provider)
-                    .newVariation("smooth")
-                    .next("block")
-                    .next("blocks")
-                    .next("bricks")
-                    .next("smallbricks")
-                    .next("smallchaotic")
-                    .next("chiseled")
-                    .next("ere")
-                    .next("ornate-tiles")
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
                     .next("pillar")
-                    .next("tiles")
-                    .next("circuit")
-                    .next("supaplex")
-                    .next("a1-blockredstone-skullred")
-                    .next("a1-blockredstone-redstonezelda")
-                    .next("masonryRedstone")
-                    .next("a1-blockredstone-redstonechunk")
-                    .next("solid")
-                    .build();
+                    .next("twisted")
+                    .next("prism")
+                    .build(b->b.setRedstoneLevel(15));
         }
-    },*/
+    },
 
     SANDSTONE {
         @Override
