@@ -4,19 +4,24 @@ import java.io.File;
 
 import javax.annotation.Nonnull;
 
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -26,11 +31,8 @@ import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketChiselNBT;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
-import team.chisel.common.block.BlockCarvable;
-import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
-import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.util.GenerationHandler;
@@ -123,94 +125,23 @@ public class Chisel implements Reference {
         }
     }
 
-    private static ItemChiselBlock itemize(BlockCarvable block){
-        return new ItemChiselBlock(block);
-    }
-
     @Mod.EventHandler
-    public void onMissingMappings(FMLMissingMappingsEvent event){
-        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()){
-            if (mapping.type == GameRegistry.Type.BLOCK){
-                if (mapping.name.equalsIgnoreCase("glowstoneextra")){
-                    mapping.remap(ChiselBlocks.glowstone1);
-                }
-                else if (mapping.name.equalsIgnoreCase("basaltextra")){
-                    mapping.remap(ChiselBlocks.basalt1);
-                }
-                else if (mapping.name.equalsIgnoreCase("bricksextra")){
-                    mapping.remap(ChiselBlocks.bricks1);
-                }
-                else if (mapping.name.equalsIgnoreCase("cobblestoneextra")){
-                    mapping.remap(ChiselBlocks.cobblestone1);
-                }
-                else if (mapping.name.equalsIgnoreCase("purpurextra")){
-                    mapping.remap(ChiselBlocks.purpur1);
-                }
-                else if (mapping.name.equalsIgnoreCase("endstoneextra")){
-                    mapping.remap(ChiselBlocks.endstone1);
-                }
-                else if (mapping.name.equalsIgnoreCase("hardenedclayextra")){
-                    mapping.remap(ChiselBlocks.hardenedclay1);
-                }
-                else if (mapping.name.equalsIgnoreCase("limestoneextra")){
-                    mapping.remap(ChiselBlocks.limestone1);
-                }
-                else if (mapping.name.equalsIgnoreCase("marbleextra")){
-                    mapping.remap(ChiselBlocks.marble1);
-                }
-                else if (mapping.name.equalsIgnoreCase("prismarineextra")){
-                    mapping.remap(ChiselBlocks.prismarine1);
-                }
-                else if (mapping.name.equalsIgnoreCase("sandstoneyellowextra")){
-                    mapping.remap(ChiselBlocks.sandstoneyellow1);
-                }
-                else if (mapping.name.equalsIgnoreCase("sandstoneredextra")){
-                    mapping.remap(ChiselBlocks.sandstonered1);
-                }
-                else if (mapping.name.equalsIgnoreCase("stonebrickextra")){
-                    mapping.remap(ChiselBlocks.stonebrick1);
-                }
-
-            }
-            else if (mapping.type == GameRegistry.Type.ITEM){
-                if (mapping.name.equalsIgnoreCase("glowstoneextra")){
-                    mapping.remap(itemize(ChiselBlocks.glowstone1));
-                }
-                else if (mapping.name.equalsIgnoreCase("basaltextra")){
-                    mapping.remap(itemize(ChiselBlocks.basalt1));
-                }
-                else if (mapping.name.equalsIgnoreCase("bricksextra")){
-                    mapping.remap(itemize(ChiselBlocks.bricks1));
-                }
-                else if (mapping.name.equalsIgnoreCase("cobblestoneextra")){
-                    mapping.remap(itemize(ChiselBlocks.cobblestone1));
-                }
-                else if (mapping.name.equalsIgnoreCase("purpurextra")){
-                    mapping.remap(itemize(ChiselBlocks.purpur1));
-                }
-                else if (mapping.name.equalsIgnoreCase("endstoneextra")){
-                    mapping.remap(itemize(ChiselBlocks.endstone1));
-                }
-                else if (mapping.name.equalsIgnoreCase("hardenedclayextra")){
-                    mapping.remap(itemize(ChiselBlocks.hardenedclay1));
-                }
-                else if (mapping.name.equalsIgnoreCase("limestoneextra")){
-                    mapping.remap(itemize(ChiselBlocks.limestone1));
-                }
-                else if (mapping.name.equalsIgnoreCase("marbleextra")){
-                    mapping.remap(itemize(ChiselBlocks.marble1));
-                }
-                else if (mapping.name.equalsIgnoreCase("prismarineextra")){
-                    mapping.remap(itemize(ChiselBlocks.prismarine1));
-                }
-                else if (mapping.name.equalsIgnoreCase("sandstoneyellowextra")){
-                    mapping.remap(itemize(ChiselBlocks.sandstoneyellow1));
-                }
-                else if (mapping.name.equalsIgnoreCase("sandstoneredextra")){
-                    mapping.remap(itemize(ChiselBlocks.sandstonered1));
-                }
-                else if (mapping.name.equalsIgnoreCase("stonebrickextra")){
-                    mapping.remap(itemize(ChiselBlocks.stonebrick1));
+    public void onMissingMappings(FMLMissingMappingsEvent event) {
+        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
+            if (mapping.resourceLocation.getResourceDomain().equals(Reference.MOD_ID)) {
+                @Nonnull
+                String path = mapping.resourceLocation.getResourcePath();
+                if (path.endsWith("extra")) {
+                    path = path.replace("extra", "1");
+                    ResourceLocation newRes = new ResourceLocation(mapping.resourceLocation.getResourceDomain(), path);
+                    Block block = ForgeRegistries.BLOCKS.getValue(newRes);
+                    if (block != null) {
+                        if (mapping.type == Type.BLOCK) {
+                            mapping.remap(block);
+                        } else {
+                            mapping.remap(Item.getItemFromBlock(block));
+                        }
+                    }
                 }
             }
         }
