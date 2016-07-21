@@ -2,6 +2,8 @@ package team.chisel.common.init;
 
 import team.chisel.api.block.VariationData;
 
+import java.util.Arrays;
+
 /**
  * Registry for chisel blocks
  */
@@ -37,6 +39,8 @@ public class BlockRegistry {
         if (array.length <= 16) {
             return new VariationData[][]{array};
         }
+
+        VariationData[] first = Arrays.copyOf(array, 16);
         int bound = array.length / 16;
         if (array.length % 16 != 0) {
             bound++;

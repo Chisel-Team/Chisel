@@ -27,7 +27,7 @@ public final class ChiselBlocks
 
     public static final BlockCarvable antiblock = null;
     public static final BlockCarvable basalt = null;
-    public static final BlockCarvable basaltextra = null;
+    public static final BlockCarvable basalt1 = null;
     public static final BlockCarvable carpet = null;
     public static final BlockCarvable cloud = null;
     public static final BlockCarvable concrete = null;
@@ -40,10 +40,8 @@ public final class ChiselBlocks
     public static final BlockCarvable laboratory = null;
     public static final BlockCarvable lavastone = null;
     public static final BlockCarvable limestone = null;
-    public static final BlockCarvable limestoneextra = null;
     public static final BlockCarvable line_marking = null;
     public static final BlockCarvable marble = null;
-    public static final BlockCarvable marbleextra = null;
     public static final BlockCarvable military = null;
     public static final BlockCarvable paper = null;
     public static final BlockCarvable temple = null;
@@ -53,5 +51,17 @@ public final class ChiselBlocks
     public static final BlockCarvable warningSign = null;
     public static final BlockCarvable waterstone = null;
     public static final BlockCarvable glowstone = null;
+    public static final BlockCarvable glowstone1 = null;
+    public static final BlockCarvable bricks1 = null;
+    public static final BlockCarvable cobblestone1 = null;
+    public static final BlockCarvable purpur1 = null;
+    public static final BlockCarvable endstone1 = null;
+    public static final BlockCarvable hardenedclay1 = null;
+    public static final BlockCarvable limestone1 = null;
+    public static final BlockCarvable marble1 = null;
+    public static final BlockCarvable prismarine1 = null;
+    public static final BlockCarvable sandstoneyellow1 = null;
+    public static final BlockCarvable sandstonered1 = null;
+    public static final BlockCarvable stonebrick1 = null;
 
 }

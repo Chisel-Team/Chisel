@@ -66,6 +66,10 @@ public class BlockCarvable extends Block implements ICarvable {
 
     private final int maxVariation;
 
+    private int redstoneLevel = 0;
+
+    private float enchantPowerBonus = 0;
+
     public BlockCarvable(Material material, int index, int max, VariationData... variations) {
         super(material);
         setCreativeTab(ChiselTabs.tab);
@@ -135,6 +139,33 @@ public class BlockCarvable extends Block implements ICarvable {
         IBlockState state = getExtendedBlockState().withProperty(CTX_LIST, new RenderContextList()).withProperty(metaProp, 0);
         state = state.withProperty(metaProp, 0);
         this.setDefaultState(state);
+    }
+
+    public BlockCarvable setRedstoneLevel(int level){
+        this.redstoneLevel = level;
+        return this;
+    }
+
+    public BlockCarvable setEnchantPowerBonus(float bonus){
+        this.enchantPowerBonus = bonus;
+        return this;
+    }
+
+    @Override
+    public float getEnchantPowerBonus(World world, BlockPos pos){
+        return enchantPowerBonus;
+    }
+
+    @Override
+    public boolean canProvidePower(IBlockState state)
+    {
+        return this.redstoneLevel > 0;
+    }
+
+    @Override
+    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+        return this.redstoneLevel;
     }
 
     public ExtendedBlockState getBaseExtendedState() {
