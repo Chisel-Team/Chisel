@@ -63,16 +63,6 @@ public enum Features {
         }
     },
 
-    /*AMBER { TODO potential omission candidate
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "amber", provider)
-                    .newVariation("amberblock")
-                    .next("amberblock_top")
-                    .build();
-        }
-    },// Not yet */
-
     /*ANDESITE { TODO Retexture
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -80,7 +70,6 @@ public enum Features {
             IProperty<EnumType> prop = BlockStone.VARIANT;
             Carving.chisel.addVariation("andesite", stone.withProperty(prop, EnumType.ANDESITE), -2);
             Carving.chisel.addVariation("andesite", stone.withProperty(prop, EnumType.ANDESITE_SMOOTH), -1);
-
             factory.newBlock(Material.ROCK, "andesite", provider)
                     .newVariation("andesitePillar")
                     .next("andesiteLBrick")
@@ -167,22 +156,29 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "basaltextra", provider)
+                    .setGroup("basalt")
+                    .setParentFolder("basalt")
+                    .newVariation("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
-                    .next("prism").setOrder(-100)
-                    .next("raw")
-                    .build();
+                    .next("prism")
+                    .next("raw").setOrder(-100)
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
-        
+
         @Override
         void addRecipes() {
             if (!Configurations.basaltSpecialGen) {
-                GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basalt1.getDefaultState().withProperty(ChiselBlocks.basalt1.getMetaProp(), 7),
-                    new WorldGenInfo(Configurations.basaltVeinAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
+                GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basaltextra.getDefaultState().withProperty(ChiselBlocks.basaltextra.getMetaProp(), 7),
+                        new WorldGenInfo(Configurations.basaltVeinAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
             }
         }
     },
@@ -214,7 +210,7 @@ public enum Features {
                     .next("hoarder")
                     .next("brim")
                     .next("historician")
-                    .build(b -> b.setEnchantPowerBonus(1.0f).setSoundType(SoundType.WOOD)
+                    .build(b -> b.setSoundType(SoundType.WOOD)
                             .setHardness(1.5f));
         }
     },
@@ -246,14 +242,21 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "bricksextra", provider)
+                    .setGroup("bricks")
+                    .setParentFolder("bricks")
+                    .newVariation("bricks-solid")
                     //.next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
-                    .build();
+                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -372,7 +375,14 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "cobblestoneextra", provider)
+                    .setGroup("cobblestone")
+                    .setParentFolder("cobblestone")
+                    .newVariation("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -382,7 +392,7 @@ public enum Features {
                     .next("emboss")
                     .next("indent")
                     .next("marker")
-                    .build();
+                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -427,7 +437,6 @@ public enum Features {
                     .next("asphalt")
                     .build();
         }
-
         @Override
         void addRecipes() {
             FurnaceRecipes.instance().addSmelting(new ItemStack(Blocks.GRAVEL).getItem(), new ItemStack(ChiselBlocks.concrete), 0.1F);
@@ -501,7 +510,6 @@ public enum Features {
             IProperty<EnumType> prop = BlockStone.VARIANT;
             Carving.chisel.addVariation("diorite", stone.withProperty(prop, EnumType.DIORITE), -2);
             Carving.chisel.addVariation("diorite", stone.withProperty(prop, EnumType.DIORITE_SMOOTH), -1);
-
             factory.newBlock(Material.ROCK, "diorite", provider)
                     .newVariation("dioritePillar")
                     .next("dioriteLBrick")
@@ -611,14 +619,21 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "purpurextra", provider)
+                    .setGroup("purpur")
+                    .setParentFolder("purpur")
+                    .newVariation("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     //.next("tiles-medium")
                     //.next("pillar")
                     .next("twisted")
                     .next("prism")
-                    .build();
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -632,7 +647,6 @@ public enum Features {
                     .next("resonantBricks")
                     .build();
         }
-
         @Override
         void addRecipes()
         {
@@ -668,13 +682,20 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-small")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setHardness(3.0F).setResistance(15.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "endstoneextra", provider)
+                    .setGroup("endstone")
+                    .setParentFolder("endstone")
+                    .newVariation("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
-                    .build();
+                    .build(b -> b.setHardness(3.0F).setResistance(15.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -714,61 +735,6 @@ public enum Features {
                     'S', new ItemStack(Items.IRON_INGOT, 1));
         }
     },
-
-    /*FANTASY { TODO potential omission candidate
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "fantasy", provider)
-                    .newVariation("brick")
-                    .next("brick-faded")
-                    .next("brick-wear")
-                    .next("bricks")
-                    .next("decor")
-                    .next("decor-block")
-                    .next("pillar")
-                    .next("pillar-decorated")
-                    .next("gold-decor-1")
-                    .next("gold-decor-2")
-                    .next("gold-decor-3")
-                    .next("gold-decor-4")
-                    .next("plate")
-                    .next("block")
-                    .next("bricks-chaotic")
-                    .next("bricks-wear")
-                    .build();
-        }
-
-        @Override
-        void addRecipes()
-        {
-            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.fantasy, 16), "SSS", "SXS", "SSS", 'S', new ItemStack(Blocks.STONE), 'X', new ItemStack(Items.DYE, 1, 13));
-        }
-    },
-
-    FANTASY2 {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "fantasy2", provider)
-                    .setGroup("fantasy")
-                    .newVariation("brick")
-                    .next("brick-faded")
-                    .next("brick-wear")
-                    .next("bricks")
-                    .next("decor")
-                    .next("decor-block")
-                    .next("pillar")
-                    .next("pillar-decorated")
-                    .next("gold-decor-1")
-                    .next("gold-decor-2")
-                    .next("gold-decor-3")
-                    .next("gold-decor-4")
-                    .next("plate")
-                    .next("block")
-                    .next("bricks-chaotic")
-                    .next("bricks-wear")
-                    .build();
-        }
-    },*/
 
     FUTURA {
         @Override
@@ -841,7 +807,6 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             //Carving.chisel.addVariation("glasspane", Blocks.glass_pane.getDefaultState(), -1);
-
             factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<BlockCarvablePane>(new BlockCreator<BlockCarvablePane>()
             {
                 @Override
@@ -860,11 +825,9 @@ public enum Features {
                     .build();
         }
     },
-
     GLASSPANEDYED { TODO Remodel
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-
             for(int c = 0; c < dyeColors.length; c++)
             {
                 //Carving.chisel.addVariation("glasspanedyed"+dyeColors[c], stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
@@ -967,7 +930,6 @@ public enum Features {
             IProperty<EnumType> prop = BlockStone.VARIANT;
             Carving.chisel.addVariation("granite", stone.withProperty(prop, EnumType.GRANITE), -2);
             Carving.chisel.addVariation("granite", stone.withProperty(prop, EnumType.GRANITE_SMOOTH), -1);
-
             factory.newBlock(Material.ROCK, "granite", provider)
                     .newVariation("granitePillar")
                     .next("graniteLBrick")
@@ -1003,7 +965,6 @@ public enum Features {
                     .next("tiles")
                     .build();
         }
-
         @Override
         void addRecipes() {
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.grimstone, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.COAL, 1));
@@ -1037,14 +998,21 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b-> b.setHardness(1.25F).setResistance(7.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "hardenedclayextra", provider)
+                    .setGroup("hardenedclay")
+                    .setParentFolder("hardenedclay")
+                    .newVariation("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
-                    .build(b-> b.setHardness(1.25f));
+                    .build(b -> b.setHardness(1.25F).setResistance(7.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -1078,7 +1046,6 @@ public enum Features {
                     .next("plate-rough")
                     .build();
         }
-
         @Override
         void addRecipes()
         {
@@ -1246,7 +1213,7 @@ public enum Features {
                     .next("a1-blocklapis-smooth")
                     .next("a1-blocklapis-ornatelayer")
                     .next("masonryLapis")
-                    .build(b-> b.setSoundType(SoundType.STONE).setHardness(3.0f));
+                    .build(b-> b.setHardness(3.0F).setResistance(5.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -1264,7 +1231,6 @@ public enum Features {
                     .next("dark")
                     .build();
         }
-
         @Override
         void addRecipes()
         {
@@ -1335,20 +1301,27 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "limestoneextra", provider)
+                    .setGroup("limestone")
+                    .setParentFolder("limestone")
+                    .newVariation("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
-                    .next("prism").setOrder(-100)
-                    .next("raw")
-                    .build();
+                    .next("prism")
+                    .next("raw").setOrder(-100)
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
-        
+
         @Override
         void addRecipes() {
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestone1.getDefaultState().withProperty(ChiselBlocks.limestone1.getMetaProp(), 7),
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestoneextra.getDefaultState().withProperty(ChiselBlocks.limestoneextra.getMetaProp(), 7),
                     new WorldGenInfo(Configurations.limestoneAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
@@ -1368,11 +1341,9 @@ public enum Features {
                     .next("yellow-long")
                     .build();
         }
-
         @Override
         void addRecipes()
         {
-
         }
     },*/
 
@@ -1401,7 +1372,14 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "marbleextra", provider)
+                    .setGroup("marble")
+                    .setParentFolder("marble")
+                    .newVariation("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -1409,12 +1387,12 @@ public enum Features {
                     .next("twisted")
                     .next("prism").setOrder(-100)
                     .next("raw")
-                    .build();
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
-        
+
         @Override
         void addRecipes() {
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marble1.getDefaultState().withProperty(ChiselBlocks.marble1.getMetaProp(), 7),
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marbleextra.getDefaultState().withProperty(ChiselBlocks.marbleextra.getMetaProp(), 7),
                     new WorldGenInfo(Configurations.marbleAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
@@ -1441,7 +1419,7 @@ public enum Features {
                         .next("a1-stonepillar-plaintopgreek")
                         .next("a1-stonepillar-greekbottomgreek")
                         .next("a1-stonepillar-plainbottomgreek")
-                        .build();
+                        .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
             } else {
                 factory.newBlock(Material.ROCK, "marblepillar", provider)
                         .setGroup("marble")
@@ -1461,7 +1439,7 @@ public enum Features {
                         .next("wideplain")
                         .next("carved")
                         .next("ornamental")
-                        .build();
+                        .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
             }
         }
     },
@@ -1497,7 +1475,6 @@ public enum Features {
                     .next("rebelPlate")
                     .build();
         }
-
         @Override
         void addRecipes()
         {
@@ -1526,7 +1503,7 @@ public enum Features {
                     .next("a1-netherbrick-red")
                     .next("a1-netherbrick-redsmall")
                     .next("netherFancyBricks")
-                    .build();
+                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -1549,7 +1526,7 @@ public enum Features {
                     .next("a1-netherrack-meatrock")
                     .next("a1-netherrack-red")
                     .next("a1-netherrack-wells")
-                    .build();
+                    .build(b -> b.setHardness(0.4F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -1589,7 +1566,7 @@ public enum Features {
                     .next("tiles")
                     .next("greek")
                     .next("crate")
-                    .build();
+                    .build(b -> b.setHardness(50.0F).setResistance(2000.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -1647,8 +1624,7 @@ public enum Features {
                         .next("crateex")
                         .next("chaotic-hor")
                         .next("chaotic")
-                        .build(b -> b.setSoundType(SoundType.WOOD)
-                                .setHardness(1.5f));
+                        .build(b -> b.setHardness(2.0F).setResistance(5.0F).setSoundType(SoundType.WOOD));
 
             }
         }
@@ -1692,7 +1668,6 @@ public enum Features {
                     .next("presentChest15")
                     .build();
         }
-
         @Override
         void addRecipes()
         {
@@ -1732,13 +1707,20 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "prismarineextra", provider)
+                    .setGroup("prismarine")
+                    .setParentFolder("prismarine")
+                    .newVariation("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
-                    .build();
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -1797,7 +1779,6 @@ public enum Features {
             //Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_X), -3);
             Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Y), -2);
             //Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Z), -1);
-
             factory.newBlock(Material.ROCK, "quartz", provider)
                     .newVariation("quartzChiseled")
                     .next("quartzPrismaticPattern")
@@ -1840,7 +1821,7 @@ public enum Features {
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
-                    .build(b->b.setRedstoneLevel(15));
+                    .build(b->b.setRedstoneLevel(15).setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.METAL));
         }
     },
 
@@ -1875,14 +1856,21 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
+
+            factory.newBlock(Material.ROCK, "sandstoneyellowextra", provider)
+                    .setGroup("sandstoneyellow")
+                    .setParentFolder("sandstoneyellow")
+                    .newVariation("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
         }
     },
 
@@ -1918,14 +1906,21 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-solid")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
+
+            factory.newBlock(Material.ROCK, "sandstoneredextra", provider)
+                    .setGroup("sandstonered")
+                    .setParentFolder("sandstonered")
+                    .newVariation("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
         }
     },
 
@@ -1950,7 +1945,7 @@ public enum Features {
                     .next("scribbles-13")
                     .next("scribbles-14")
                     .next("scribbles-15")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
         }
     },
 
@@ -2023,7 +2018,14 @@ public enum Features {
                     .next("panel")
                     .next("road")
                     .next("slanted")
-                    .next("bricks-small")
+                    .next("zag")
+                    .next("circularct")
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            factory.newBlock(Material.ROCK, "stonebrickextra", provider)
+                    .setGroup("stonebrick")
+                    .setParentFolder("stone")
+                    .newVariation("bricks-small")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
@@ -2031,7 +2033,7 @@ public enum Features {
                     .next("largeornate")
                     .next("poison")
                     .next("sunken")
-                    .build();
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -2112,7 +2114,7 @@ public enum Features {
                     .next("smalltiles-light")
                     .next("stand-creeper")
                     .next("stand-mosaic")
-                    .build();
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "templemossy", provider)
                     .setGroup("temple")
@@ -2132,7 +2134,7 @@ public enum Features {
                     .next("smalltiles-light")
                     .next("stand-creeper")
                     .next("stand-mosaic")
-                    .build();
+                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
 
         @Override
@@ -2257,7 +2259,7 @@ public enum Features {
                     .next("8")
                     .next("9")
                     .next("companion")
-                    .build();
+                    .build(b -> b.setHardness(1.5F).setResistance(20.0F).setSoundType(SoundType.STONE));
         }
 
         @Override
@@ -2359,7 +2361,6 @@ public enum Features {
                     .next("illuminati")
                     .build();
         }
-
         @Override
         void addRecipes()
         {
@@ -2383,7 +2384,6 @@ public enum Features {
                     .next("dark")
                     .build();
         }
-
         @Override
         void addRecipes()
         {
@@ -2432,7 +2432,7 @@ public enum Features {
         @Override public T createBlock(Material mat, int index, int maxVariation, VariationData... data) {
             return creator.createBlock(mat, index, maxVariation, data);
         }
-        
+
         @Override
         public ItemBlock createItemBlock(T block) {
             return (ItemBlock) new ItemChiselBlock(block).setRegistryName(block.getRegistryName());
