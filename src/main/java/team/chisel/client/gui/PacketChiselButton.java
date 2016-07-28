@@ -62,6 +62,9 @@ public class PacketChiselButton implements IMessage {
         if (player.openContainer instanceof ContainerChisel) {
             ContainerChisel container = (ContainerChisel) player.openContainer;
             ItemStack chisel = player.inventory.getStackInSlot(chiselSlot);
+            if (chisel == null) {
+                return;
+            }
             for (int i : slots) {
                 ItemStack stack = target.copy();
                 int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
@@ -73,8 +76,18 @@ public class PacketChiselButton implements IMessage {
                     if (chisel.stackSize <= 0) {
                         container.getInventoryChisel().getStackInSpecialSlot().stackSize = s.stackSize - toCraft;
                         player.inventory.setInventorySlotContents(chiselSlot, null);
+                        if (s.stackSize > toCraft) {
+                            ItemStack remainder = s.copy();
+                            remainder.stackSize = s.stackSize - toCraft;
+                            if (!player.inventory.addItemStackToInventory(remainder)) {
+                                player.dropItem(remainder, false);
+                            }
+                        }
                     }
                 });
+                if (chisel.stackSize < 1) {
+                    return;
+                }
             }
         }
     }

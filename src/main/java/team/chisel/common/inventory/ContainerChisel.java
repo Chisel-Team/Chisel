@@ -27,10 +27,8 @@ public class ContainerChisel extends Container {
     protected final int chiselSlot;
     protected final ItemStack chisel;
     protected final ICarvingRegistry carving;
-    
-    private boolean chiselExists = false;
 
-    public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {
+    public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {        
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
         
@@ -100,15 +98,12 @@ public class ContainerChisel extends Container {
     @Override
     public void onContainerClosed(EntityPlayer entityplayer) {
         inventoryChisel.clearItems();
-        if (!chiselExists && inventoryChisel.getStackInSpecialSlot() != null) {
-            entityplayer.dropItem(inventoryChisel.getStackInSpecialSlot(), false);
-        }
         super.onContainerClosed(entityplayer);
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer) {
-        return chiselExists = inventoryChisel.isUseableByPlayer(entityplayer);
+        return inventoryChisel.isUseableByPlayer(entityplayer);
     }
 
     @Override
@@ -168,5 +163,10 @@ public class ContainerChisel extends Container {
         chisel.getTagCompound().setTag("chiselTarget", targetTag);
     }
 
-    
+    public void onChiselBroken() {
+        if (!getInventoryPlayer().player.worldObj.isRemote) {
+            getInventoryPlayer().player.dropItem(inventoryChisel.getStackInSpecialSlot(), false);
+        }
+    }
 }
+

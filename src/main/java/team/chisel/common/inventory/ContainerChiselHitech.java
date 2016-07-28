@@ -102,6 +102,7 @@ public class ContainerChiselHitech extends ContainerChisel {
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
         if (slotId >= 0) {
             Slot slot = getSlot(slotId);
+            System.out.println(slot.getStack().getTagCompound());
             if (slotId < getInventoryChisel().size) {
                 setTarget(slot);
             } else if (dragType == 1) {

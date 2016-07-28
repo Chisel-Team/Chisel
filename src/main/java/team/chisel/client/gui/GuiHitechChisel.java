@@ -247,15 +247,17 @@ public class GuiHitechChisel extends GuiChisel {
     @Override
     public void onGuiClosed() {
         super.onGuiClosed();
-        
-        ItemStack stack = containerHitech.getChisel();
-        
-        NBTUtil.setHitechType(stack, buttonPreview.getType().ordinal());
-        NBTUtil.setHitechSelection(stack, Optional.fromNullable(containerHitech.getSelection()).transform(s -> s.slotNumber).or(-1));
-        NBTUtil.setHitechTarget(stack, Optional.fromNullable(containerHitech.getTarget()).transform(s -> s.slotNumber).or(-1));
-        NBTUtil.setHitechRotate(stack, buttonRotate.rotate());
 
-        Chisel.network.sendToServer(new PacketChiselNBT(NBTUtil.getChiselTag(containerHitech.getChisel()), containerHitech.getChiselSlot()));
+        if (containerHitech.getChisel() == containerHitech.getInventoryChisel().getStackInSlot(containerHitech.getChiselSlot())) {
+            ItemStack stack = containerHitech.getChisel();
+
+            NBTUtil.setHitechType(stack, buttonPreview.getType().ordinal());
+            NBTUtil.setHitechSelection(stack, Optional.fromNullable(containerHitech.getSelection()).transform(s -> s.slotNumber).or(-1));
+            NBTUtil.setHitechTarget(stack, Optional.fromNullable(containerHitech.getTarget()).transform(s -> s.slotNumber).or(-1));
+            NBTUtil.setHitechRotate(stack, buttonRotate.rotate());
+
+            Chisel.network.sendToServer(new PacketChiselNBT(NBTUtil.getChiselTag(containerHitech.getChisel()), containerHitech.getChiselSlot()));
+        }
     }
 
     private boolean isShiftDown() {
