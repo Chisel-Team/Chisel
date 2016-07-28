@@ -90,7 +90,7 @@ public enum GenerationHandler implements IWorldGenerator {
     @SuppressWarnings("null")
     private void replace(World world, BlockPos pos) {
         if (basaltstate == null) {
-            basaltstate = ChiselBlocks.basalt1.getDefaultState().withProperty(ChiselBlocks.basalt1.getMetaProp(), 7);
+            basaltstate = ChiselBlocks.basaltextra.getDefaultState().withProperty(ChiselBlocks.basaltextra.getMetaProp(), 7);
         }
         IBlockState toReplace = world.getBlockState(pos);
         if (toReplace.getBlock().isReplaceableOreGen(toReplace, world, pos, replacecheck)) {

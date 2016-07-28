@@ -15,11 +15,13 @@ All images under the following directories
 - `/src/main/resources/assets/chisel/textures/blocks/cobblestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/dirt/`
 - `/src/main/resources/assets/chisel/textures/blocks/endstone/`
+- `/src/main/resources/assets/chisel/textures/blocks/glowstone/`
 - `/src/main/resources/assets/chisel/textures/blocks/hardenedclay/`
 - `/src/main/resources/assets/chisel/textures/blocks/limestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/marble/`
 - `/src/main/resources/assets/chisel/textures/blocks/prismarine/`
 - `/src/main/resources/assets/chisel/textures/blocks/purpur/`
+- `/src/main/resources/assets/chisel/textures/blocks/redstone/`
 - `/src/main/resources/assets/chisel/textures/blocks/sandstonered/`
 - `/src/main/resources/assets/chisel/textures/blocks/sandstoneyellow/`
 - `/src/main/resources/assets/chisel/textures/blocks/stone/`
