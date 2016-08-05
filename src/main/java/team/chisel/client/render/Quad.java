@@ -478,5 +478,8 @@ public class Quad {
             }
             return (T[]) ret;
         }
+        
+        //@Override //soft override, only exists in new forge versions
+        public void setTexture(TextureAtlasSprite texture) {}
     }
 }
