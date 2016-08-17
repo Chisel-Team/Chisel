@@ -3,7 +3,7 @@ item.chisel.chisel_diamond.name=Алмазная стамеска
 item.chisel.chisel_hitech.name=Высокотехнологичная стамеска
 
 item.chisel.chisel.desc.gui=ПКМ, чтобы открыть интерфейс
-item.chisel.chisel.desc.lc1=ЛКМ, чтобы высечь блоки в мире
+item.chisel.chisel.desc.lc1=§8§mЛКМ, чтобы высечь блоки в мире§r§7 Ещё не реализовано!
 item.chisel.chisel.desc.lc2=Может ориентироваться на блок в инвентаре
 
 item.chisel.chisel.desc.modes=Обладает разными режимами для обработки.
@@ -395,8 +395,8 @@ tile.chisel.futura.uberWavy.desc.1=Фантастическая волна
 
 tile.chisel.glass.name=Стекло
 tile.chisel.glass.terrain-glassbubble.desc.1=Пузырчатое
-tile.chisel.glass.terrain-glass-chinese.desc.1=Китайское
-tile.chisel.glass.japanese.desc.1=Японское
+tile.chisel.glass.terrain-glass-chinese.desc.1=Красное орнаментное
+tile.chisel.glass.japanese.desc.1=Коричневое орнаментное
 tile.chisel.glass.terrain-glassdungeon.desc.1=Подземелья
 tile.chisel.glass.terrain-glasslight.desc.1=Светлое
 tile.chisel.glass.terrain-glassnoborder.desc.1=Безграничное
