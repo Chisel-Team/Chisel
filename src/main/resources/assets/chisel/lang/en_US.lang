@@ -1,8 +1,9 @@
 item.chisel.chisel_iron.name=Chisel
 item.chisel.chisel_diamond.name=Diamond Chisel
+item.chisel.chisel_hitech.name=iChisel
 
 item.chisel.chisel.desc.gui=Right-Click to open GUI
-item.chisel.chisel.desc.lc1=Left click to chisel blocks in world
+item.chisel.chisel.desc.lc1=§8§mLeft click to chisel blocks in world§r§7 Not Implemented Yet!
 item.chisel.chisel.desc.lc2=Can target a block by leaving it in the inventory
 
 item.chisel.chisel.desc.modes=Has multiple modes for chiseling.
@@ -394,8 +395,8 @@ tile.chisel.futura.uberWavy.desc.1=Fabulously Wavy
 
 tile.chisel.glass.name=Glass
 tile.chisel.glass.terrain-glassbubble.desc.1=Bubble
-tile.chisel.glass.terrain-glass-chinese.desc.1=Red Asian
-tile.chisel.glass.japanese.desc.1=Brown Asian
+tile.chisel.glass.terrain-glass-chinese.desc.1=Red Ornamental
+tile.chisel.glass.japanese.desc.1=Brown Ornamental
 tile.chisel.glass.terrain-glassdungeon.desc.1=Dungeon
 tile.chisel.glass.terrain-glasslight.desc.1=Light
 tile.chisel.glass.terrain-glassnoborder.desc.1=Gray-Bordered
