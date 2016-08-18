@@ -12,7 +12,7 @@ import team.chisel.common.block.BlockCarvable;
 @GameRegistry.ObjectHolder(Chisel.MOD_ID)
 @ParametersAreNonnullByDefault
 @SuppressWarnings("null") // ObjectHolder will assure these fields are nonnull. Outside callers can assume the same.
-@FieldDefaults(makeFinal = true, level = AccessLevel.PUBLIC)
+//@FieldDefaults(makeFinal = true, level = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ChiselBlocks
 {
@@ -25,32 +25,33 @@ public final class ChiselBlocks
             - minecreatr
     */
 
-    static BlockCarvable antiblock = null;
-    static BlockCarvable basalt = null;
-    static BlockCarvable basaltextra = null;
-    static BlockCarvable carpet = null;
-    static BlockCarvable cloud = null;
-    static BlockCarvable concrete = null;
-    static BlockCarvable ender_pearl_block = null;
-    static BlockCarvable factory = null;
-    static BlockCarvable fantasy = null;
-    static BlockCarvable futura = null;
-    static BlockCarvable grimstone = null;
-    static BlockCarvable holystone = null;
-    static BlockCarvable laboratory = null;
-    static BlockCarvable lavastone = null;
-    static BlockCarvable limestone = null;
-    static BlockCarvable limestoneextra = null;
-    static BlockCarvable line_marking = null;
-    static BlockCarvable marble = null;
-    static BlockCarvable marbleextra = null;
-    static BlockCarvable military = null;
-    static BlockCarvable paper = null;
-    static BlockCarvable temple = null;
-    static BlockCarvable tyrian = null;
-    static BlockCarvable valentines = null;
-    static BlockCarvable voidstone = null;
-    static BlockCarvable warningSign = null;
-    static BlockCarvable waterstone = null;
+    public final static BlockCarvable antiblock = null;
+    public final static BlockCarvable basalt = null;
+    public final static BlockCarvable basaltextra = null;
+    public final static BlockCarvable carpet = null;
+    public final static BlockCarvable cloud = null;
+    public final static BlockCarvable concrete = null;
+    public final static BlockCarvable ender_pearl_block = null;
+    public final static BlockCarvable factory = null;
+    public final static BlockCarvable fantasy = null;
+    public final static BlockCarvable futura = null;
+    public final static BlockCarvable grimstone = null;
+    public final static BlockCarvable holystone = null;
+    public final static BlockCarvable laboratory = null;
+    public final static BlockCarvable lavastone = null;
+    public final static BlockCarvable limestone = null;
+    public final static BlockCarvable limestoneextra = null;
+    public final static BlockCarvable line_marking = null;
+    public final static BlockCarvable marble = null;
+    public final static BlockCarvable marbleextra = null;
+    public final static BlockCarvable military = null;
+    public final static BlockCarvable paper = null;
+    public final static BlockCarvable temple = null;
+    public final static BlockCarvable tyrian = null;
+    public final static BlockCarvable valentines = null;
+    public final static BlockCarvable voidstone = null;
+    public final static BlockCarvable warningSign = null;
+    public final static BlockCarvable waterstone = null;
+    public final static BlockCarvable icecream = null;
 
 }

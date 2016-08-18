@@ -35,6 +35,7 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
@@ -69,7 +70,14 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 	    @SneakyThrows
 	    public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
 	        Block block = ((ItemBlock) stack.getItem()).getBlock();
-	        return modelcache.get(State.of(((BlockCarvable)block).getStateFromMeta(stack.getMetadata()), null), () -> createModel(block.getDefaultState(), model, null));
+            //try {
+                return modelcache.get(State.of(((BlockCarvable) block).getStateFromMeta(stack.getMetadata()), null), () -> createModel(block.getDefaultState(), model, null));
+//            } catch (Exception e){
+//                Chisel.debug("Exception, really???: " + e.getMessage());
+//                //return originalModel;
+//                //return createModel(block.getDefaultState(), model, null);
+//            }
+            //return originalModel;
 	    }
 	}
 	

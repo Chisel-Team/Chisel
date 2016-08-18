@@ -43,6 +43,15 @@ public class Quad {
     public static final ISubmap TOP_RIGHT = new Submap(8, 8, 8, 0);
     public static final ISubmap BOTTOM_LEFT = new Submap(8, 8, 0, 8);
     public static final ISubmap BOTTOM_RIGHT = new Submap(8, 8, 8, 8);
+
+//    public static final VertexFormat ITEM_WITH_LIGHT = new VertexFormat();
+//
+//    static {
+//        ITEM_WITH_LIGHT.addElement(DefaultVertexFormats.POSITION_3F);
+//        ITEM_WITH_LIGHT.addElement(DefaultVertexFormats.COLOR_4UB);
+//        ITEM_WITH_LIGHT.addElement(DefaultVertexFormats.TEX_2F);
+//        ITEM_WITH_LIGHT.addElement(DefaultVertexFormats.TEX_2S);
+//    }
     
     @Value
     public static class Vertex {
@@ -372,21 +381,22 @@ public class Quad {
     }
     
     public BakedQuad rebake() {
-        UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(this.builder.vertexFormat);
+        VertexFormat format = (fullbright) ? DefaultVertexFormats.BLOCK : this.builder.vertexFormat;
+        UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
         builder.setQuadOrientation(this.builder.quadOrientation);
         builder.setQuadTint(this.builder.quadTint);
         builder.setApplyDiffuseLighting(this.builder.applyDiffuseLighting);
         builder.setTexture(this.uvs.getSprite());
 
         for (int v = 0; v < 4; v++) {
-            for (int i = 0; i < this.builder.vertexFormat.getElementCount(); i++) {
-                VertexFormatElement ele = this.builder.vertexFormat.getElement(i);
+            for (int i = 0; i < format.getElementCount(); i++) {
+                VertexFormatElement ele = format.getElement(i);
                 switch (ele.getUsage()) {
                 case UV:
                     //TODO transform the UV_2S type that it used for lightmap coordinates to make fullbright
                     if (ele.getIndex() == 1 && this.fullbright){
                         //Stuff for fullbright
-                        builder.put(i, 1, 1);
+                        builder.put(i, (32.0f / 0xffff) * 15);
                         Chisel.debug("Doing fullbright stuff");
                     }
                     else if (ele == DefaultVertexFormats.TEX_2F) {
@@ -399,10 +409,13 @@ public class Quad {
                     Vector3f p = vertPos[v];
                     builder.put(i, p.x, p.y, p.z, 1);
                     break;
-                /*case COLOR:
-                    builder.put(i, 35, 162, 204); Pretty things
-                    break;*/
+//                case COLOR:
+//                    builder.put(i, this.builder.data.get(ele.getUsage()).get(v));
+//                    break;
                 default:
+                    if (fullbright && ele.getUsage() == EnumUsage.NORMAL){
+                        continue;
+                    }
                     builder.put(i, this.builder.data.get(ele.getUsage()).get(v));
                 }
             }

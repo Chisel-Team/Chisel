@@ -11,6 +11,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.IFullbriteable;
 import team.chisel.api.render.TextureInfo;
 import team.chisel.api.render.TextureSpriteCallback;
 
@@ -20,7 +21,7 @@ import com.google.gson.JsonObject;
 /**
  * Abstract implementation of IChiselTexture
  */
-public abstract class AbstractChiselTexture<T extends IBlockRenderType> implements IChiselTexture<T> {
+public abstract class AbstractChiselTexture<T extends IBlockRenderType> implements IChiselTexture<T>, IFullbriteable {
 
     @Getter
     protected T type;
@@ -55,5 +56,10 @@ public abstract class AbstractChiselTexture<T extends IBlockRenderType> implemen
     @Override
     public Collection<ResourceLocation> getTextures() {
         return Arrays.stream(sprites).map(TextureSpriteCallback::getLocation).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean isFullbright(){
+        return this.fullbright;
     }
 }

@@ -1,5 +1,6 @@
 package team.chisel.client.render;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.List;
@@ -26,6 +27,9 @@ import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.api.render.IChiselFace;
+import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.IFullbriteable;
+import team.chisel.client.render.texture.AbstractChiselTexture;
 import team.chisel.common.util.json.JsonHelper;
 
 import com.google.common.base.Function;
@@ -53,6 +57,10 @@ public class ModelChisel implements IModel {
     private transient Map<IBlockState, IBakedModel> stateMap = Maps.newHashMap();
     
     private transient List<ResourceLocation> textures = Lists.newArrayList();
+
+    private boolean hasFullbright;
+
+    private boolean calculatedFullbright;
     
     @Override
     public Collection<ResourceLocation> getDependencies() {
@@ -122,5 +130,28 @@ public class ModelChisel implements IModel {
         }
         
         return stateMap.getOrDefault(state, modelObj);
+    }
+
+    public boolean hasFullbright(){
+        if (calculatedFullbright){
+            return this.hasFullbright;
+        }
+        List<IChiselFace> faces = new ArrayList<>();
+        faces.add(faceObj);
+        faces.addAll(overridesObj.values());
+        for (IChiselFace face : faces){
+            for (IChiselTexture texture : face.getTextureList()){
+                if (texture instanceof IFullbriteable){
+                    if (((IFullbriteable) texture).isFullbright()){
+                        this.hasFullbright = true;
+                        this.calculatedFullbright = true;
+                        return true;
+                    }
+                }
+            }
+        }
+        this.calculatedFullbright = true;
+        this.hasFullbright = false;
+        return false;
     }
 }

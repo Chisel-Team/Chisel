@@ -1078,6 +1078,26 @@ public enum Features {
         }
     },
 
+    ICECREAM {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            factory.newBlock(Material.SNOW, "icecream", provider)
+                    .setGroup("icecream")
+                    .newVariation("vanilla")
+                    .next("cookiecat")
+                    .next("lionlicker")
+                    .build(b-> b.setSoundType(SoundType.SNOW).setHardness(0.5f));
+        }
+
+        @Override
+        void addRecipes(){
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.icecream, 16), "XXX", "XyX", "XXX", 'X',
+                    new ItemStack(Blocks.ICE), 'y', new ItemStack(Items.MILK_BUCKET));
+        }
+
+
+    },
+
     ICEPILLAR {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
