@@ -7,25 +7,22 @@ import javax.annotation.Nonnull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.chunkdata.IChunkData;
+import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketChiselNBT;
@@ -34,8 +31,12 @@ import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.item.ItemChisel;
+import team.chisel.common.item.ItemOffsetTool;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.util.GenerationHandler;
+import team.chisel.common.util.PerChunkData;
+import team.chisel.common.util.PerChunkData.MessageChunkData;
+import team.chisel.common.util.PerChunkData.MessageChunkDataHandler;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.9.4, 1.11)")
 public class Chisel implements Reference {
@@ -50,6 +51,8 @@ public class Chisel implements Reference {
 
     @SuppressWarnings("null")
     public static @Nonnull ItemChisel itemChiselIron, itemChiselDiamond, itemChiselHitech;
+    @SuppressWarnings("null")
+    public static @Nonnull ItemOffsetTool itemOffsetTool;
 
     public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
     
@@ -57,6 +60,7 @@ public class Chisel implements Reference {
     static {
         network.registerMessage(PacketChiselButton.Handler.class, PacketChiselButton.class, 0, Side.SERVER);
         network.registerMessage(PacketChiselNBT.Handler.class, PacketChiselNBT.class, 1, Side.SERVER);
+        network.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, 2, Side.CLIENT);
     }
 
     public Chisel() {
@@ -77,14 +81,20 @@ public class Chisel implements Reference {
         itemChiselDiamond = new ItemChisel(ChiselType.DIAMOND);
         itemChiselHitech = new ItemChisel(ChiselType.HITECH);
         
+        itemOffsetTool = new ItemOffsetTool();
+        
         GameRegistry.register(itemChiselIron);
         GameRegistry.register(itemChiselDiamond);
         GameRegistry.register(itemChiselHitech);
+        
+        GameRegistry.register(itemOffsetTool);
 
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
         
+        MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
+
         GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
         MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
         MinecraftForge.TERRAIN_GEN_BUS.register(GenerationHandler.INSTANCE);

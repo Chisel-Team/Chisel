@@ -1,13 +1,15 @@
 package team.chisel.client.render.ctx;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.util.math.BlockPos;
 import team.chisel.api.render.IBlockRenderContext;
 
 public class BlockRenderContextPosition implements IBlockRenderContext {
 
-    private BlockPos position;
+    private @Nonnull BlockPos position;
 
-    public BlockRenderContextPosition(BlockPos pos) {
+    public BlockRenderContextPosition(@Nonnull BlockPos pos) {
         this.position = pos;
     }
 
@@ -15,12 +17,12 @@ public class BlockRenderContextPosition implements IBlockRenderContext {
         this(new BlockPos(x, y, z));
     }
 
-    public BlockPos getPosition() {
+    public @Nonnull BlockPos getPosition() {
         return position;
     }
 
     @Override
     public long getCompressedData() {
-        return position.toLong();
+        return getPosition().toLong();
     }
 }
