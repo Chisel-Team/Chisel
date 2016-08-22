@@ -1,5 +1,7 @@
 package team.chisel.client.render.type;
 
+import javax.annotation.Nonnull;
+
 import lombok.RequiredArgsConstructor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -23,8 +25,8 @@ public class BlockRenderTypeMap implements IBlockRenderType {
     }
     
     @Override
-    public IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
-        return new BlockRenderContextPosition(pos);
+    public IBlockRenderContext getBlockRenderContext(IBlockAccess world, @Nonnull BlockPos pos) {
+        return type.getContext(pos);
     }
     
     @Override

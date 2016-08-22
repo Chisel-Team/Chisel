@@ -7,21 +7,30 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
+
+import com.google.common.base.Preconditions;
+import com.google.gson.JsonObject;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
+import team.chisel.Chisel;
+import team.chisel.api.chunkdata.ChunkData;
+import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureInfo;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.ISubmap;
 import team.chisel.client.render.ctm.Submap;
+import team.chisel.client.render.ctx.BlockRenderContextOffset;
 import team.chisel.client.render.ctx.BlockRenderContextPosition;
 import team.chisel.client.render.type.BlockRenderTypeMap;
-
-import com.google.common.base.Preconditions;
-import com.google.gson.JsonObject;
+import team.chisel.common.util.PerChunkData;
 
 public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> {
 
@@ -56,8 +65,13 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
             @Override
             protected List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, IBlockRenderContext context, int quadGoal) {
                 EnumFacing side = quad.getFace();
-                BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition) context).getPosition();
-
+                @Nonnull BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition) context).getPosition();
+                
+                IOffsetData data = ChunkData.getOffsetForChunk(Minecraft.getMinecraft().theWorld, pos);
+                if (data != null) {
+                    pos.add(data.getOffset());
+                }
+                
                 int x = pos.getX();
                 int y = pos.getY();
                 int z = pos.getZ();
@@ -119,9 +133,18 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
                     return Arrays.stream(quads).filter(Objects::nonNull).map(Quad::rebake).collect(Collectors.toList());
                 }
             }
+            
+            @Override
+            public IBlockRenderContext getContext(@Nonnull BlockPos pos) {
+                return new BlockRenderContextOffset(pos);
+            }
         };
 
         protected abstract List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, IBlockRenderContext context, int quadGoal);
+        
+        public IBlockRenderContext getContext(@Nonnull BlockPos pos) {
+            return new BlockRenderContextPosition(pos);
+        }
     }
 
     private final int xSize;

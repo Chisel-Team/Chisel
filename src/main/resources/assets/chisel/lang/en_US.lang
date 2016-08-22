@@ -395,8 +395,8 @@ tile.chisel.futura.uberWavy.desc.1=Fabulously Wavy
 
 tile.chisel.glass.name=Glass
 tile.chisel.glass.terrain-glassbubble.desc.1=Bubble
-tile.chisel.glass.terrain-glass-chinese.desc.1=Red Ornamental
-tile.chisel.glass.japanese.desc.1=Brown Ornamental
+tile.chisel.glass.terrain-glass-chinese.desc.1=Chinese
+tile.chisel.glass.japanese.desc.1=Japanese
 tile.chisel.glass.terrain-glassdungeon.desc.1=Dungeon
 tile.chisel.glass.terrain-glasslight.desc.1=Light
 tile.chisel.glass.terrain-glassnoborder.desc.1=Gray-Bordered

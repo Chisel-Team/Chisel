@@ -1,5 +1,6 @@
 package team.chisel.common;
 
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import team.chisel.api.block.ChiselBlockBuilder.VariationBuilder.IVariationBuilderDelegate;
 import team.chisel.api.block.ICarvable;
@@ -29,5 +30,9 @@ public class CommonProxy implements Reference {
     }
 
     public void registerTileEntities() {
+    }
+
+    public World getClientWorld() {
+        return null;
     }
 }
