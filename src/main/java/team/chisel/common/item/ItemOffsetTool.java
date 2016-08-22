@@ -38,6 +38,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.common.init.ChiselTabs;
@@ -136,6 +137,14 @@ public class ItemOffsetTool extends Item {
     public void onBlockHighlight(DrawBlockHighlightEvent event) {
         RayTraceResult mop = event.getTarget();
         EntityPlayer player = event.getPlayer();
+        
+        if (mop.typeOfHit == Type.BLOCK && mop.getBlockPos() == null) {
+            Chisel.debug("Invalid DrawBlockHighlightEvent!");
+            if (Chisel.debug) {
+                Thread.dumpStack();
+            }
+            return;
+        }
 
         if (mop.typeOfHit == Type.BLOCK && canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.MAIN_HAND, mop.sideHit) || canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.OFF_HAND, mop.sideHit)) {
 
