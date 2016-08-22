@@ -188,7 +188,10 @@ public class GuiHitechChisel extends GuiChisel {
     private int clickButton;
     private long lastDragTime;
     private int clickX, clickY;
-    private float prevRotX, prevRotY, prevZoom;
+    private float initRotX, initRotY, initZoom;
+    private float prevRotX, prevRotY;
+    private float momentumX, momentumY;
+    private float momentumDampening = 0.98f;
     private float rotX = -15, rotY, zoom = 1;
     
     private int scrollAcc;
@@ -232,9 +235,9 @@ public class GuiHitechChisel extends GuiChisel {
         buttonChisel.enabled = containerHitech.getSelection() != null && containerHitech.getSelection().getHasStack() && containerHitech.getTarget() != null && containerHitech.getTarget().getHasStack();
         
         if (!panelClicked) {
-            prevRotX = rotX;
-            prevRotY = rotY;
-            prevZoom = zoom;
+            initRotX = rotX;
+            initRotY = rotY;
+            initZoom = zoom;
         }
     
         if (isShiftDown()) {
@@ -286,7 +289,7 @@ public class GuiHitechChisel extends GuiChisel {
         }
 
         if (buttonRotate.rotate() && !panelClicked && System.currentTimeMillis() - lastDragTime > 2000) {
-            rotY = prevRotY + (f * 2);
+            rotY = initRotY + (f * 2);
         }
         
         scrollAcc += Mouse.getDWheel();
@@ -329,13 +332,26 @@ public class GuiHitechChisel extends GuiChisel {
     @SuppressWarnings("deprecation")
     @Override
     protected void drawGuiContainerForegroundLayer(int j, int i) {
+        boolean doMomentum = true;
         if (panelClicked) {
             if (clickButton == 0) {
-                rotX = prevRotX + Mouse.getY() - clickY;
-                rotY = prevRotY + Mouse.getX() - clickX;
+                prevRotX = rotX;
+                prevRotY = rotY;
+                rotX = initRotX + Mouse.getY() - clickY;
+                rotY = initRotY + Mouse.getX() - clickX;
+                momentumX = rotX - prevRotX;
+                momentumY = rotY - prevRotY;
+                doMomentum = false;
             } else if (clickButton == 1 && scissorAvailable) {
-                zoom = Math.max(1, prevZoom + (clickY - Mouse.getY()));
+                zoom = Math.max(1, initZoom + (clickY - Mouse.getY()));
             }
+        } 
+        
+        if (doMomentum) {
+            rotX += momentumX;
+            rotY += momentumY;
+            momentumX *= momentumDampening;
+            momentumY *= momentumDampening;
         }
 
         String s = "Preview";
@@ -415,9 +431,9 @@ public class GuiHitechChisel extends GuiChisel {
             lastDragTime = System.currentTimeMillis();
         }
         panelClicked = false;
-        prevRotX = rotX;
-        prevRotY = rotY;
-        prevZoom = zoom;
+        initRotX = rotX;
+        initRotY = rotY;
+        initZoom = zoom;
     }
     
     @Override
