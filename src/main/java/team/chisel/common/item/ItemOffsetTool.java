@@ -137,16 +137,8 @@ public class ItemOffsetTool extends Item {
     public void onBlockHighlight(DrawBlockHighlightEvent event) {
         RayTraceResult mop = event.getTarget();
         EntityPlayer player = event.getPlayer();
-        
-        if (mop.typeOfHit == Type.BLOCK && mop.getBlockPos() == null) {
-            Chisel.debug("Invalid DrawBlockHighlightEvent!");
-            if (Chisel.debug) {
-                Thread.dumpStack();
-            }
-            return;
-        }
 
-        if (mop.typeOfHit == Type.BLOCK && canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.MAIN_HAND, mop.sideHit) || canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.OFF_HAND, mop.sideHit)) {
+        if (mop.typeOfHit == Type.BLOCK && (canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.MAIN_HAND, mop.sideHit) || canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.OFF_HAND, mop.sideHit))) {
 
             EnumFacing face = mop.sideHit;
             BlockPos pos = mop.getBlockPos();
@@ -198,7 +190,7 @@ public class ItemOffsetTool extends Item {
 
             buf.begin(GL11.GL_TRIANGLES, DefaultVertexFormats.POSITION);
             
-            GlStateManager.color(1, 1, 1, 0x55);
+            GlStateManager.color(1, 1, 1, 0x55 / 255f);
 
             EnumFacing moveDir = getMoveDir(face, hit.xCoord - pos.getX(), hit.yCoord - pos.getY(), hit.zCoord - pos.getZ());
             int clampedX = Math.max(0, moveDir.getFrontOffsetX());
@@ -211,7 +203,7 @@ public class ItemOffsetTool extends Item {
             // Always draw the center point first, then draw the next two points.
             // Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
             if (face.getFrontOffsetX() != 0) {
-                buf.pos(x, 0.5, 0.5);
+                buf.pos(x, 0.5, 0.5).endVertex();
                 buf.pos(x, isY ? clampedY : 0, isZ ? clampedZ : 0).endVertex();
                 buf.pos(x, isY ? clampedY : 1, isZ ? clampedZ : 1).endVertex();
             } else if (face.getFrontOffsetY() != 0) {
