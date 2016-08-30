@@ -1,6 +1,13 @@
-This is an extremely WIP port of chisel to 1.8.
+Chisel [![Curseforge](http://cf.way2muchnoise.eu/short_chisel.svg)]()
+===========
 
-*Dont poke it as it may explode*
+The Chisel mod adds many decorative blocks to the game.
+
+We use connected texture and other dark magic to make it look fancy!
+
+Join us on irc at esper.net on #ChiselTeam
+
+I cant think of anything else to say, heres the license stuff I guess.
 
 This mod is licensed under GPLv2.
 
