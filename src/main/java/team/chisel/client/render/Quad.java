@@ -389,7 +389,7 @@ public class Quad {
                         builder.put(i, 1, 1);
                         Chisel.debug("Doing fullbright stuff");
                     }
-                    else if (ele == DefaultVertexFormats.TEX_2F) {
+                    else {
                         Vector2f uv = vertUv[v];
                         builder.put(i, uv.x, uv.y , 0, 1);
                     }
