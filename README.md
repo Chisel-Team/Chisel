@@ -17,17 +17,22 @@ All images under this directory
 
 All images under the following directories
 
+- `/src/main/resources/assets/chisel/textures/blocks/andesite/`
 - `/src/main/resources/assets/chisel/textures/blocks/basalt/`
 - `/src/main/resources/assets/chisel/textures/blocks/bricks/`
+- `/src/main/resources/assets/chisel/textures/blocks/coal/`
 - `/src/main/resources/assets/chisel/textures/blocks/cobblestone/`
+- `/src/main/resources/assets/chisel/textures/blocks/diorite/`
 - `/src/main/resources/assets/chisel/textures/blocks/dirt/`
 - `/src/main/resources/assets/chisel/textures/blocks/endstone/`
 - `/src/main/resources/assets/chisel/textures/blocks/glowstone/`
+- `/src/main/resources/assets/chisel/textures/blocks/granite/`
 - `/src/main/resources/assets/chisel/textures/blocks/hardenedclay/`
 - `/src/main/resources/assets/chisel/textures/blocks/limestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/marble/`
 - `/src/main/resources/assets/chisel/textures/blocks/prismarine/`
 - `/src/main/resources/assets/chisel/textures/blocks/purpur/`
+- `/src/main/resources/assets/chisel/textures/blocks/quartz/`
 - `/src/main/resources/assets/chisel/textures/blocks/redstone/`
 - `/src/main/resources/assets/chisel/textures/blocks/sandstonered/`
 - `/src/main/resources/assets/chisel/textures/blocks/sandstoneyellow/`

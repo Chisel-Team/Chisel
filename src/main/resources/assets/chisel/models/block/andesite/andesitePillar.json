@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:andesite/andesitePillar-side.cf",
-  "overrides":{
-    "UP":"chisel:andesite/andesitePillar-top.cf",
-    "DOWN":"chisel:andesite/andesitePillar-top.cf"
-  }
-}

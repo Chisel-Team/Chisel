@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./dent",
+        "./dent-ctm"
+    ]
+}

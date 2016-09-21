@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:diorite/dioritePillar-side.cf",
-  "overrides":{
-    "UP":"chisel:diorite/dioritePillar-top.cf",
-    "DOWN":"chisel:diorite/dioritePillar-top.cf"
-  }
-}

@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:andesite/twisted-side.cf",
+  "overrides":{
+    "UP":"chisel:andesite/twisted-top.cf",
+    "DOWN":"chisel:andesite/twisted-top.cf"
+  }
+}
