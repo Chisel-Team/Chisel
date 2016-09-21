@@ -2071,9 +2071,9 @@ public enum Features {
                     .next("grate")
                     .next("malfunctionFan")
                     .next("grateRusty")
-                    .next("scaffoldTransparent")
-                    .next("fanFastTransparent")
-                    .next("fanStillTransparent")
+                    .next("scaffoldTransparent").opaque(false)
+                    .next("fanFastTransparent").opaque(false)
+                    .next("fanStillTransparent").opaque(false)
                     .next("massiveFan")
                     .next("massiveHexPlating")
                     .build();
