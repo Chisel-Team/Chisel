@@ -64,7 +64,7 @@ public enum GenerationHandler implements IWorldGenerator {
     @SubscribeEvent
     public void onLavaLakes(PopulateChunkEvent.Post event) {
         if (Configurations.basaltSpecialGen) {
-            BlockPos origin = new BlockPos(event.getChunkX() * 16, 0, event.getChunkZ() * 16);
+            BlockPos origin = new BlockPos(event.getChunkX() * 16 + 8, 0, event.getChunkZ() * 16 + 8);
             for (BlockPos pos : BlockPos.getAllInBoxMutable(origin, origin.add(15, 11, 15))) {
                 IBlockState here = event.getWorld().getBlockState(pos);
                 if (here.getMaterial() == Material.LAVA) {
