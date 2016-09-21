@@ -32,7 +32,7 @@ import team.chisel.common.init.ChiselBlocks;
 public enum GenerationHandler implements IWorldGenerator {
 
     INSTANCE;
-    
+
     @Value
     public static class WorldGenInfo {
 
@@ -41,28 +41,28 @@ public enum GenerationHandler implements IWorldGenerator {
         private double chance;
         private Predicate<IBlockState> replaceable;
     }
-    
+
     private final List<Pair<WorldGenMinable, WorldGenInfo>> generators = Lists.newArrayList();
-    
+
     public void addGeneration(IBlockState state, WorldGenInfo info) {
         addGeneration(new WorldGenMinable(state, info.getAmount(), info.getReplaceable()), info);
     }
-    
+
     public void addGeneration(WorldGenMinable gen, WorldGenInfo info) {
         generators.add(Pair.of(gen, info));
     }
-    
-	@SuppressWarnings("null")
+
+    @SuppressWarnings("null")
     @Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-	    for (Pair<WorldGenMinable, WorldGenInfo> p : generators) {
-	        generateSurface(world, random, p.getLeft(), p.getRight(), chunkX * 16, chunkZ * 16);
-	    }
-	}
-	
-	@SuppressWarnings("null")
+    public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+        for (Pair<WorldGenMinable, WorldGenInfo> p : generators) {
+            generateSurface(world, random, p.getLeft(), p.getRight(), chunkX * 16, chunkZ * 16);
+        }
+    }
+
+    @SuppressWarnings("null")
     @SubscribeEvent
-	public void onLavaLakes(PopulateChunkEvent.Post event) {
+    public void onLavaLakes(PopulateChunkEvent.Post event) {
         if (Configurations.basaltSpecialGen) {
             BlockPos origin = new BlockPos(event.getChunkX() * 16, 0, event.getChunkZ() * 16);
             for (BlockPos pos : BlockPos.getAllInBoxMutable(origin, origin.add(15, 11, 15))) {
@@ -70,12 +70,12 @@ public enum GenerationHandler implements IWorldGenerator {
                 if (here.getMaterial() == Material.LAVA) {
                     BlockPos p = pos.toImmutable();
                     World w = event.getWorld();
-                    
+
                     int size = Configurations.basaltSideThickness;
                     for (BlockPos p2 : BlockPos.getAllInBoxMutable(p.offset(EnumFacing.EAST, size).offset(EnumFacing.SOUTH, size), p.offset(EnumFacing.WEST, size).offset(EnumFacing.NORTH, size))) {
                         replace(w, p2);
                     }
-                    
+
                     for (int i = 1; i <= Configurations.basaltBottomThickness; i++) {
                         replace(w, p.offset(EnumFacing.DOWN, i));
                     }
@@ -83,7 +83,7 @@ public enum GenerationHandler implements IWorldGenerator {
             }
         }
     }
-	
+
     private static @Nullable IBlockState basaltstate;
     private static final Predicate<IBlockState> replacecheck = BlockMatcher.forBlock(Blocks.STONE);
 
@@ -98,10 +98,10 @@ public enum GenerationHandler implements IWorldGenerator {
         }
     }
 
-	int basaltHeight = 35;
+    int basaltHeight = 35;
     int marbleHeight = 100;
     int limestoneHeight = 40;
-    
+
     private void generateSurface(World world, Random rand, WorldGenMinable gen, WorldGenInfo info, int x, int z) {
         for (int k = 0; k < info.getAmount(); k++) {
             int firstX = x + rand.nextInt(16);
@@ -109,25 +109,6 @@ public enum GenerationHandler implements IWorldGenerator {
             int firstZ = z + rand.nextInt(16);
 
             gen.generate(world, rand, new BlockPos(firstX, firstY, firstZ));
-
-//            // Basalt Generation
-//            int basaltY = rand.nextInt(basaltHeight);
-//            BlockPos basaltPos = new BlockPos(firstBlockXCoord, basaltY, firstBlockZCoord);
-//            if (Configurations.basaltAmount > 0)
-//                (new WorldGenMinable(ChiselBlocks.basaltextra.getStateFromMeta(7), Configurations.basaltAmount)).generate(world, rand, basaltPos);
-//
-//            // Marble Generation
-//            int marbleY = rand.nextInt(marbleHeight);
-//            BlockPos marblePos = new BlockPos(firstBlockXCoord, marbleY, firstBlockZCoord);
-//            if (Configurations.marbleAmount > 0)
-//                (new WorldGenMinable(ChiselBlocks.marbleextra.getStateFromMeta(7), Configurations.marbleAmount)).generate(world, rand, marblePos);
-//
-//            // Limestone Generation
-//            int limestoneY = rand.nextInt(limestoneHeight);
-//            BlockPos limestonePos = new BlockPos(firstBlockXCoord, limestoneY, firstBlockZCoord);
-//            if (Configurations.limestoneAmount > 0)
-//                (new WorldGenMinable(ChiselBlocks.limestoneextra.getStateFromMeta(7), Configurations.limestoneAmount)).generate(world, rand, limestonePos);
         }
     }
 }
-
