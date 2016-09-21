@@ -1,0 +1,4 @@
+class net/minecraft/item/ItemStack
+getItem
+ ()Lnet/minecraft/item/Item;
+ ()L0net/minecraft/item/Item;

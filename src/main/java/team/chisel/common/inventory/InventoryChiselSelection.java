@@ -130,16 +130,17 @@ public class InventoryChiselSelection implements IInventory {
         clearItems();
 
         if (chiseledItem == null) {
-            container.onChiselSlotChanged();
             return;
         }
 
         Item item = chiseledItem.getItem();
-        if (item == null)
+        if (item == null) {
             return;
+        }
 
-        if (Block.getBlockFromItem(item) == null)
+        if (Block.getBlockFromItem(item) == null) {
             return;
+        }
 
         List<ItemStack> list = container.getCarving().getItemsForChiseling(chiseledItem);
 
@@ -150,8 +151,6 @@ public class InventoryChiselSelection implements IInventory {
                 activeVariations++;
             }
         }
-
-        container.onChiselSlotChanged();
     }
 
     @Override

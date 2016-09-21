@@ -15,6 +15,7 @@ public class SlotChiselInput extends Slot {
     @Override
     public void onSlotChanged() {
         super.onSlotChanged();
+        container.onChiselSlotChanged();
         container.getInventoryChisel().updateItems();
     }
 }
