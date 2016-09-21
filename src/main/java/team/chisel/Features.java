@@ -158,6 +158,7 @@ public enum Features {
                     .next("slanted")
                     .next("zag")
                     .next("circularct")
+                    //.next("weaver")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "basaltextra", provider)
@@ -2070,9 +2071,9 @@ public enum Features {
                     .next("grate")
                     .next("malfunctionFan")
                     .next("grateRusty")
-                    .next("scaffoldTransparent")
-                    .next("fanFastTransparent")
-                    .next("fanStillTransparent")
+                    .next("scaffoldTransparent").opaque(false)
+                    .next("fanFastTransparent").opaque(false)
+                    .next("fanStillTransparent").opaque(false)
                     .next("massiveFan")
                     .next("massiveHexPlating")
                     .build();
@@ -2223,7 +2224,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.factory, 32, 0), "SXS", "X X", "SXS",
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.tyrian, 32, 0), "SXS", "X X", "SXS",
                     'S', new ItemStack(Blocks.STONE, 1),
                     'X', new ItemStack(Items.IRON_INGOT, 1));
         }
