@@ -111,26 +111,6 @@ public enum Features {
         }
     },
 
-    /*ARCANE {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "arcane", provider)
-                    .newVariation("ArcaneBorder")
-                    .next("arcaneCrackAnim")
-                    .next("arcaneMatrix")
-                    .next("arcaneTile")
-                    .next("bigBrick")
-                    .next("BorderBrain")
-                    .next("conduitGlowAnim")
-                    .next("moonEngrave")
-                    .next("moonGlowAnim")
-                    .next("runes")
-                    .next("runesGlow")
-                    .next("thaumcraftLogo")
-                    .build();
-        }
-    },*/
-
     BASALT {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -1165,7 +1145,6 @@ public enum Features {
                     .next("a1-ironbars-ironclassicnew")
                     .next("a1-ironbars-ironfence")
                     .next("a1-ironbars-ironfencemodern")
-                    //.next("a1-ironbars-ironclassic") Repeat, rip
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
@@ -1647,35 +1626,6 @@ public enum Features {
         }
     },
 
-    /*PRESENT { TODO potential omission candidate
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "present", provider)
-                    .newVariation("presentChest0")
-                    .next("presentChest1")
-                    .next("presentChest2")
-                    .next("presentChest3")
-                    .next("presentChest4")
-                    .next("presentChest5")
-                    .next("presentChest6")
-                    .next("presentChest7")
-                    .next("presentChest8")
-                    .next("presentChest9")
-                    .next("presentChest10")
-                    .next("presentChest11")
-                    .next("presentChest12")
-                    .next("presentChest13")
-                    .next("presentChest14")
-                    .next("presentChest15")
-                    .build();
-        }
-        @Override
-        void addRecipes()
-        {
-            // TODO TEs. Or maybe remove wholesale
-        }
-    },*/
-
     PRISMARINE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -1724,51 +1674,6 @@ public enum Features {
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
-
-    /* PUMPKIN {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("pumpkin", Blocks.PUMPKIN.getDefaultState(), -1);
-            factory.newBlock(Material.ROCK, "pumpkin", provider)
-                    .newVariation("pumpkin_face_off")
-                    .next("pumpkin_face_on")
-                    .next("pumpkin_face_1_off")
-                    .next("pumpkin_face_1_on")
-                    .next("pumpkin_face_2_off")
-                    .next("pumpkin_face_2_on")
-                    .next("pumpkin_face_3_off")
-                    .next("pumpkin_face_3_on")
-                    .next("pumpkin_face_4_off")
-                    .next("pumpkin_face_4_on")
-                    .next("pumpkin_face_5_off")
-                    .next("pumpkin_face_5_on")
-                    .next("pumpkin_face_6_off")
-                    .next("pumpkin_face_6_on")
-                    .next("pumpkin_face_7_off")
-                    .next("pumpkin_face_7_on")
-                    .next("pumpkin_face_8_off")
-                    .next("pumpkin_face_8_on")
-                    .next("pumpkin_face_9_off")
-                    .next("pumpkin_face_9_on")
-                    .next("pumpkin_face_10_off")
-                    .next("pumpkin_face_10_on")
-                    .next("pumpkin_face_11_off")
-                    .next("pumpkin_face_11_on")
-                    .next("pumpkin_face_12_off")
-                    .next("pumpkin_face_12_on")
-                    .next("pumpkin_face_13_off")
-                    .next("pumpkin_face_13_on")
-                    .next("pumpkin_face_14_off")
-                    .next("pumpkin_face_14_on")
-                    .next("pumpkin_face_15_off")
-                    .next("pumpkin_face_15_on")
-                    .next("pumpkin_face_16_off")
-                    .next("pumpkin_face_16_on")
-                    .next("pumpkin_face_17_off")
-                    .next("pumpkin_face_17_on")
-                    .build();
-        }
-    }, // TODO Rotations or potential omission candidate */
 
     /*QUARTZ { TODO Retexture
         @Override
@@ -2038,18 +1943,6 @@ public enum Features {
         }
     },
 
-    /*TALLOW { TODO Retexture
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "tallow", provider)
-                    .newVariation("faces")
-                    .next("smooth")
-                    .next("tallowblock")
-                    .next("tallowblock_top")
-                    .build();
-        }
-    }, Thaumcraft */
-
     TECHNICAL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -2147,23 +2040,6 @@ public enum Features {
         }
     },
 
-    /*THAUMIUM { TODO Retexture
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "blockThaumium", provider)
-                    .setParentFolder("thaumium")
-                    .newVariation("ornate")
-                    .next("totem")
-                    .next("thaumiumBigBricks")
-                    .next("small")
-                    .next("lattice")
-                    .next("planks")
-                    .next("thaumDiagonalBricks")
-                    .next("thaumicEyeSegment")
-                    .build();
-        }
-    },*/
-
     TIN {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -2179,24 +2055,6 @@ public enum Features {
                     .build();
         }
     },
-
-   /*TORCH {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "torch", provider)
-                    .newVariation("torch1")
-                    .next("torch2")
-                    .next("torch3")
-                    .next("torch4")
-                    .next("torch5")
-                    .next("torch6")
-                    .next("torch7")
-                    .next("torch8")
-                    .next("torch9")
-                    .next("torch10")
-                    .build();
-        } // TODO Torch Logic (Walls and such) or Omit
-    },*/
 
     TYRIAN {
         @Override
@@ -2329,11 +2187,11 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.voidstone, 8, 0), "EOE", "OEO", "EOE",
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.voidstone, 16, 0), " E ", "OOO", " E ",
                     'E', new ItemStack(Items.ENDER_EYE),
                     'O', new ItemStack(Blocks.OBSIDIAN));
 
-            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.voidstone, 16, 0), " P ", "PEP", " P ",
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.voidstone, 48, 0), " P ", "PEP", " P ",
                     'E', new ItemStack(Items.ENDER_PEARL),
                     'P', new ItemStack(Blocks.PURPUR_BLOCK));
         }
