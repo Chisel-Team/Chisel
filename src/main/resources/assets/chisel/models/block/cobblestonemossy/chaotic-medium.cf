@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "chisel:cobblestone/chaotic-medium.ctx",
+        "./mossy.ctx"
+    ]
+}

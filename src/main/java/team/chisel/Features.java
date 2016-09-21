@@ -397,29 +397,45 @@ public enum Features {
         }
     },
 
-    /*COBBLESTONEMOSSY { TODO Retexture
+    COBBLESTONEMOSSY {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("cobblestonemossy", Blocks.MOSSY_COBBLESTONE.getDefaultState(), -1);
+            //Carving.chisel.addVariation("cobblestonemossy", Blocks.MOSSY_COBBLESTONE.getDefaultState(), -1);
             factory.newBlock(Material.ROCK, "cobblestonemossy", provider)
-                    .newVariation("terrain-cobb-brickaligned")
-                    .next("terrain-cob-detailedbrick")
-                    .next("terrain-cob-smallbrick")
-                    .next("terrain-cobblargetiledark")
-                    .next("terrain-cobbsmalltile")
-                    .next("terrain-cob-french")
-                    .next("terrain-cob-french2")
-                    .next("terrain-cobmoss-creepdungeon")
-                    .next("terrain-mossysmalltiledark")
-                    .next("terrain-pistonback-dungeontile")
-                    .next("terrain-pistonback-darkcreeper")
-                    .next("terrain-pistonback-darkdent")
-                    .next("terrain-pistonback-darkemboss")
-                    .next("terrain-pistonback-darkmarker")
-                    .next("terrain-pistonback-darkpanel")
-                    .build();
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
-    },*/
+    },
 
     /*CONCRETE { TODO Retexture
         @Override

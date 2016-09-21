@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "chisel:cobblestone/twisted-top.ctx",
+        "./mossy.ctx"
+    ]
+}
