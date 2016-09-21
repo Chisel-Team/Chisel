@@ -25,6 +25,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.event.terraingen.PopulateChunkEvent;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import team.chisel.Features;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 
@@ -63,7 +64,7 @@ public enum GenerationHandler implements IWorldGenerator {
     @SuppressWarnings("null")
     @SubscribeEvent
     public void onLavaLakes(PopulateChunkEvent.Post event) {
-        if (Configurations.basaltSpecialGen) {
+        if (Configurations.basaltSpecialGen && Features.BASALT.enabled()) {
             BlockPos origin = new BlockPos(event.getChunkX() * 16 + 8, 0, event.getChunkZ() * 16 + 8);
             for (BlockPos pos : BlockPos.getAllInBoxMutable(origin, origin.add(15, 11, 15))) {
                 IBlockState here = event.getWorld().getBlockState(pos);
@@ -97,10 +98,6 @@ public enum GenerationHandler implements IWorldGenerator {
             world.setBlockState(pos, basaltstate);
         }
     }
-
-    int basaltHeight = 35;
-    int marbleHeight = 100;
-    int limestoneHeight = 40;
 
     private void generateSurface(World world, Random rand, WorldGenMinable gen, WorldGenInfo info, int x, int z) {
         for (int k = 0; k < info.getAmount(); k++) {
