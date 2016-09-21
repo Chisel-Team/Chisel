@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./creeper"
-    ],
-    "layer":"TRANSLUCENT"
-}

@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./panel-ornate"
-    ],
-    "layer":"TRANSLUCENT"
-}

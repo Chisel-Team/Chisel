@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./terrain-pistonback-dungeontile",
-        "./terrain-pistonback-dungeontile-ctm"
-    ]
-}

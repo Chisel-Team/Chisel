@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./resonantSolid",
-        "./resonantSolid-ctm"
-    ]
-}

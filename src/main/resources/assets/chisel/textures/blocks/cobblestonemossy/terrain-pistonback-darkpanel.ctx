@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./terrain-pistonback-darkpanel",
-        "./terrain-pistonback-darkpanel-ctm"
-    ]
-}
