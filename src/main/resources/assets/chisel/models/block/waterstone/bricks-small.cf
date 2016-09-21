@@ -1,6 +1,6 @@
 {
     "textures":[
         "minecraft:blocks/water_still.ctx",
-        "chisel:fluid/panel.ctx"
+        "chisel:fluid/bricks-small.ctx"
     ]
 }

@@ -1242,26 +1242,49 @@ public enum Features {
         }
     },
 
-    /*LAVASTONE { TODO Retexture
+    LAVASTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.ROCK, "lavastone", provider)
-                    .newVariation("cobble")
-                    .next("black")
-                    .next("tiles")
-                    .next("chaotic")
-                    .next("creeper")
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
                     .next("panel")
-                    .next("panel-ornate")
-                    .next("dark")
-                    .build();
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .build(b -> b.setHardness(4.0F).setResistance(50.0F).setSoundType(SoundType.STONE));
         }
         @Override
         void addRecipes()
         {
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.lavastone, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.LAVA_BUCKET, 1));
         }
-    },*/
+    },
 
     LEAD {
         @Override
@@ -1470,44 +1493,6 @@ public enum Features {
             }
         }
     },
-
-    /*MAZESTONE { TODO Retexture
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "mazestone", provider)
-                    .newVariation("circular")
-                    .next("cobbled")
-                    .next("intricate")
-                    .next("masonryMazestone")
-                    .next("mazestoneDiagonals")
-                    .next("prismatic")
-                    .next("prismaticMazestone")
-                    .build();
-        }
-    },// Twilight forest is not out yet for 1.9 */
-
-    /*MILITARY { TODO potential omission candidate
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "military", provider)
-                    .newVariation("imperialCamo")
-                    .next("imperialCamoSecluded")
-                    .next("imperialCautionOrange")
-                    .next("imperialCautionWhite")
-                    .next("imperialPlate")
-                    .next("rebelCamo")
-                    .next("rebelCamoSecluded")
-                    .next("rebelCautionRed")
-                    .next("rebelCautionWhite")
-                    .next("rebelPlate")
-                    .build();
-        }
-        @Override
-        void addRecipes()
-        {
-            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.military, 32), "xyx", "yzy", "xyx", 'x', "stone", 'y', Items.IRON_INGOT, 'z', Items.GOLD_NUGGET));
-        }
-    },*/
 
     NETHERBRICK {
         @Override
@@ -2277,60 +2262,51 @@ public enum Features {
         }
     },
 
-    /*WARNING { TODO potential omission candidate
+    WATERSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "warningSign", provider)
-                    .setParentFolder("warningSign")
-                    .newVariation("rad")
-                    .next("bio")
-                    .next("fire")
-                    .next("explosion")
-                    .next("death")
-                    .next("falling")
-                    .next("fall")
-                    .next("voltage")
-                    .next("generic")
-                    .next("acid")
-                    .next("underconstruction")
-                    .next("sound")
-                    .next("noentry")
-                    .next("cryogenic")
-                    .next("oxygen")
-                    .next("illuminati")
-                    .build();
-        }
-        @Override
-        void addRecipes()
-        {
-            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.warningSign, 4, 0), "xxx", "xyx", "xxx",
-                    'x', "stone",
-                    'y', new ItemStack(Items.SIGN)));
-        }
-    },*/
-
-    /*WATERSTONE { TODO Retexture
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "waterstone", provider)
-                    .newVariation("cobble")
-                    .next("black")
-                    .next("tiles")
-                    .next("chaotic")
-                    .next("creeper")
+            factory.newBlock(Material.ROCK, "waterstone", provider).opaque(false)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
                     .next("panel")
-                    .next("panel-ornate")
-                    .next("dark")
-                    .build();
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .build(b -> b.setHardness(4.0F).setResistance(50.0F).setSoundType(SoundType.STONE));
         }
+
         @Override
-        void addRecipes()
-        {
+        void addRecipes() {
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.waterstone, 8, 0), "***", "*X*", "***",
                     '*', new ItemStack(Blocks.STONE, 1),
                     'X', new ItemStack(Items.WATER_BUCKET, 1));
         }
-    }*/;
+    };
 
     private static final String[] dyeColors =
             {

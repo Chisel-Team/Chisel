@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:end_purpur/shulker-side.cf",
-  "overrides":{
-    "UP":"chisel:end_purpur/shulker-top.cf",
-    "DOWN":"chisel:end_purpur/shulker-bottom.cf"
-  }
-}

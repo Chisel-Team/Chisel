@@ -1,7 +1,0 @@
-{
-    "textures":[
-        "./terrain-pistonback-darkmarker.ctx",
-        "./mossy-random.ctx"
-    ],
-    "particle":"pterrain-pistonback-darkmarker.ctx"
-}

@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:sandstone/a0-sandstonepreview-smoothflat-side.cf",
-  "overrides":{
-    "UP":"chisel:sandstone/a0-sandstonepreview-smoothflat-top.cf",
-    "DOWN":"chisel:sandstone/a0-sandstonepreview-smoothflat-top.cf"
-  }
-}

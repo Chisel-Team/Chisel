@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:fantasy2/gold-decor-3-side.cf",
-  "overrides":{
-    "UP":"chisel:fantasy2/gold-decor-3-top.cf",
-    "DOWN":"chisel:fantasy2/gold-decor-3-top.cf"
-  }
-}

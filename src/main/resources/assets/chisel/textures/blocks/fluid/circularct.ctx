@@ -1,0 +1,8 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./circular",
+        "./circular-ctm"
+    ],
+    "layer":"TRANSLUCENT"
+}

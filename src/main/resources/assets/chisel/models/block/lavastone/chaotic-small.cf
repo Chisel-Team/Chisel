@@ -1,6 +1,6 @@
 {
     "textures":[
         "minecraft:blocks/lava_still.ctx",
-        "chisel:fluid/panel.ctx"
+        "chisel:fluid/chaotic-small.ctx"
     ]
 }

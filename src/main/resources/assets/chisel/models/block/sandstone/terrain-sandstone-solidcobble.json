@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:sandstone/terrain-sandstone-solidcobble-side.cf",
-  "overrides":{
-    "UP":"chisel:sandstone/terrain-sandstone-solidcobble-top.cf",
-    "DOWN":"chisel:sandstone/terrain-sandstone-solidcobble-top.cf"
-  }
-}
