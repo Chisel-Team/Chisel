@@ -1,6 +1,7 @@
 package team.chisel.common.block;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -67,8 +68,14 @@ public class BlockCarvable extends Block implements ICarvable {
     private final int maxVariation;
 
     private int redstoneLevel = 0;
+    private int quantityDropped = 1;
+    private int bonusRandQuantity = 0;
+
+    private Item drop;
 
     private float enchantPowerBonus = 0;
+
+    private boolean canSilkHarvest = true;
 
     public BlockCarvable(Material material, int index, int max, VariationData... variations) {
         super(material);
@@ -148,6 +155,30 @@ public class BlockCarvable extends Block implements ICarvable {
 
     public BlockCarvable setEnchantPowerBonus(float bonus){
         this.enchantPowerBonus = bonus;
+        return this;
+    }
+
+    public BlockCarvable setQuantityDropped(int amount)
+    {
+        this.quantityDropped = amount;
+        return this;
+    }
+
+    public BlockCarvable setQuantityBonusDropped(int amount)
+    {
+        this.bonusRandQuantity = amount;
+        return this;
+    }
+
+    public BlockCarvable setDrop(Item drop)
+    {
+        this.drop = drop;
+        return this;
+    }
+
+    public BlockCarvable setCanSilkHarvest(boolean bool)
+    {
+        this.canSilkHarvest = bool;
         return this;
     }
 
@@ -304,5 +335,29 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     public boolean isVisuallyOpaque() {
         return true;
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return quantityDropped + random.nextInt(bonusRandQuantity+1);
+    }
+
+    @Override
+    @Nullable
+    public Item getItemDropped(IBlockState blockState, Random rand, int fortune)
+    {
+        if(drop == null)
+        {
+            return super.getItemDropped(blockState, rand, fortune);
+        }
+        else
+        {
+            return drop;
+        }
+    }
+
+    @Override
+    protected boolean canSilkHarvest() {
+        return this.canSilkHarvest;
     }
 }

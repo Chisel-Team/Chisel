@@ -822,7 +822,7 @@ public enum Features {
                     .next("terrain-glass-thingrid")
                     .next("a1-glasswindow-ironfencemodern")
                     .next("chrono")
-                    .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
+                    .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS).setHardness(0.3F));
         }
     },
 
@@ -843,7 +843,7 @@ public enum Features {
                         .next(dyeColors[c]+"-panel-fancy")
                         .next(dyeColors[c]+"-transparent")
                         .next(dyeColors[c]+"-forestry")
-                        .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
+                        .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
         }
     },
@@ -867,7 +867,7 @@ public enum Features {
                     .next("terrain-glassbubble")
                     .next("terrain-glassnoborder")
                     .next("terrain-glassstreak")
-                    .build();
+                    .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS));
         }
     },
     GLASSPANEDYED { TODO Remodel
@@ -884,7 +884,7 @@ public enum Features {
                         .next(dyeColors[c]+"-transparent")
                         .next(dyeColors[c]+"-quad")
                         .next(dyeColors[c]+"-quad-fancy")
-                        .build();
+                        .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS));
             }
         }
     },*/
@@ -927,8 +927,8 @@ public enum Features {
                     .next("tiles-medium-bismuth")
                     .next("neon")
                     .next("neon-panel")
-                    .build(b ->b.setLightLevel(1.0f));
-        }
+                    .build(b ->b/*.setDrop(Items.GLOWSTONE_DUST).setQuantityDropped(2).setQuantityBonusDropped(2)*/.setLightLevel(1.0f).setHardness(0.3f).setResistance(1.5f).setSoundType(SoundType.GLASS));
+        } //TODO Why isn't this dropping glowstone with meta 0 always? Drops glowstone with meta of block
     },
 
     GOLD {
