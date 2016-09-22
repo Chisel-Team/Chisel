@@ -57,7 +57,21 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
                 float maxV = unitsDown * intervalY;
                 ISubmap uvs = new Submap(intervalX, intervalY, maxU - intervalX, maxV - intervalY);
 
-                return Collections.singletonList(Quad.from(quad).transformUVs(tex.sprites[0].getSprite(), uvs).setFullbright(tex.fullbright).rebake());
+                Quad q = Quad.from(quad).setFullbright(tex.fullbright);
+                
+                // TODO move this code somewhere else, it's copied from below
+                if (quadGoal != 4) {
+                    return Collections.singletonList(q.transformUVs(tex.sprites[0].getSprite(), uvs).setFullbright(tex.fullbright).rebake());
+                } else {
+                    Quad[] quads = q.subdivide(4);
+
+                    for (int i = 0; i < quads.length; i++) {
+                        if (quads[i] != null) {
+                            quads[i] = quads[i].transformUVs(tex.sprites[0].getSprite(), uvs);
+                        }
+                    }
+                    return Arrays.stream(quads).filter(Objects::nonNull).map(Quad::rebake).collect(Collectors.toList());
+                }
             }
         },
         PATTERNED {
