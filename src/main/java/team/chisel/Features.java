@@ -26,6 +26,8 @@ import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
 import team.chisel.common.block.BlockCarvableRedstone;
@@ -42,6 +44,8 @@ public enum Features {
     ALUMINUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            CarvingUtils.getChiselRegistry().registerOre("blockAluminum", "blockAluminum");
+
             factory.newBlock(Material.ROCK, "blockAluminum", provider)
                     .setParentFolder("metals/aluminum")
                     .newVariation("caution")
@@ -60,8 +64,11 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             IBlockState stone = Blocks.STONE.getDefaultState();
             IProperty<BlockStone.EnumType> prop = BlockStone.VARIANT;
-            Carving.chisel.addVariation("andesite", stone.withProperty(prop, BlockStone.EnumType.ANDESITE), -2);
-            Carving.chisel.addVariation("andesite", stone.withProperty(prop, BlockStone.EnumType.ANDESITE_SMOOTH), -1);
+            Carving.chisel.addVariation("andesite", stone.withProperty(prop, BlockStone.EnumType.ANDESITE), -21);
+            Carving.chisel.addVariation("andesite", stone.withProperty(prop, BlockStone.EnumType.ANDESITE_SMOOTH), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("andesite", "stoneAndesite");
+            //CarvingUtils.getChiselRegistry().registerOre("andesite", "stoneAndesitePolished");
 
             factory.newBlock(Material.ROCK, "andesite", provider)
                     .newVariation("cracked")
@@ -132,6 +139,9 @@ public enum Features {
     BASALT {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            CarvingUtils.getChiselRegistry().registerOre("basalt", "stoneBasalt");
+            //CarvingUtils.getChiselRegistry().registerOre("basalt", "stoneBasaltPolished");
+
             factory.newBlock(Material.ROCK, "basalt", provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -276,6 +286,8 @@ public enum Features {
     BRONZE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            CarvingUtils.getChiselRegistry().registerOre("blockBronze", "blockBronze");
+
             factory.newBlock(Material.IRON, "blockBronze", provider)
                     .setParentFolder("metals/bronze")
                     .newVariation("caution")
@@ -348,6 +360,8 @@ public enum Features {
     COBALT {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            CarvingUtils.getChiselRegistry().registerOre("blockCobalt", "blockCobalt");
+
             factory.newBlock(Material.IRON, "blockCobalt", provider)
                     .setParentFolder("metals/cobalt")
                     .newVariation("caution")
@@ -364,7 +378,9 @@ public enum Features {
     COBBLESTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("cobblestone", Blocks.COBBLESTONE.getDefaultState(), -1);
+            Carving.chisel.addVariation("cobblestone", Blocks.COBBLESTONE.getDefaultState(), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("cobblestone", "cobblestone");
 
             factory.newBlock(Material.ROCK, "cobblestone", provider)
                     .newVariation("cracked")
@@ -413,7 +429,8 @@ public enum Features {
     COBBLESTONEMOSSY {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            //Carving.chisel.addVariation("cobblestonemossy", Blocks.MOSSY_COBBLESTONE.getDefaultState(), -1);
+            Carving.chisel.addVariation("cobblestonemossy", Blocks.MOSSY_COBBLESTONE.getDefaultState(), -1);
+
             factory.newBlock(Material.ROCK, "cobblestonemossy", provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -476,6 +493,8 @@ public enum Features {
     COPPER {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            CarvingUtils.getChiselRegistry().registerOre("blockCopper", "blockCopper");
+
             factory.newBlock(Material.IRON, "blockCopper", provider)
                     .setParentFolder("metals/copper")
                     .newVariation("caution")
@@ -515,7 +534,10 @@ public enum Features {
     DIAMOND {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("diamond", Blocks.DIAMOND_BLOCK.getDefaultState(), -1);
+            Carving.chisel.addVariation("diamond", Blocks.DIAMOND_BLOCK.getDefaultState(), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("blockDiamond", "blockDiamond");
+
             factory.newBlock(Material.IRON, "diamond", provider)
                     .newVariation("terrain-diamond-embossed")
                     .next("terrain-diamond-gem")
@@ -538,8 +560,11 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             IBlockState stone = Blocks.STONE.getDefaultState();
             IProperty<BlockStone.EnumType> prop = BlockStone.VARIANT;
-            Carving.chisel.addVariation("diorite", stone.withProperty(prop, BlockStone.EnumType.DIORITE), -2);
-            Carving.chisel.addVariation("diorite", stone.withProperty(prop, BlockStone.EnumType.DIORITE_SMOOTH), -1);
+            Carving.chisel.addVariation("diorite", stone.withProperty(prop, BlockStone.EnumType.DIORITE), -21);
+            Carving.chisel.addVariation("diorite", stone.withProperty(prop, BlockStone.EnumType.DIORITE_SMOOTH), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("diorite", "stoneDiorite");
+            //CarvingUtils.getChiselRegistry().registerOre("diorite", "stoneDioritePolished");
 
             factory.newBlock(Material.ROCK, "diorite", provider)
                     .newVariation("cracked")
@@ -605,6 +630,8 @@ public enum Features {
     ELECTRUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            CarvingUtils.getChiselRegistry().registerOre("blockElectrum", "blockElectrum");
+
             factory.newBlock(Material.IRON, "blockElectrum", provider)
                     .setParentFolder("metals/electrum")
                     .newVariation("caution")
@@ -622,6 +649,9 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("emerald", Blocks.EMERALD_BLOCK.getDefaultState(), -1);
+
+            CarvingUtils.getChiselRegistry().registerOre("blockEmerald", "blockEmerald");
+
             factory.newBlock(Material.IRON, "emerald", provider)
                     .newVariation("panel")
                     .next("panelclassic")
@@ -648,10 +678,10 @@ public enum Features {
             IProperty<Axis> prop = BlockRotatedPillar.AXIS;
 
             Carving.chisel.addVariation("purpur", Blocks.PURPUR_BLOCK.getDefaultState(), -5);
-            //Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.X), -4);
+            //Carving.chisel.addVariation("purpur", purpur_pillar.withProperty(prop, Axis.X), -4);
             Carving.chisel.addVariation("purpur", purpur_pillar.withProperty(prop, Axis.Y), -3);
-            //Carving.chisel.addVariation("end_purpur", purpur_pillar.withProperty(prop, Axis.Z), -2);
-            //Carving.chisel.addVariation("end_purpur", Blocks.purpur_double_slab.getDefaultState(), -1);
+            //Carving.chisel.addVariation("purpur", purpur_pillar.withProperty(prop, Axis.Z), -2);
+            //Carving.chisel.addVariation("purpur", Blocks.purpur_double_slab.getDefaultState(), -1);
 
             factory.newBlock(Material.ROCK, "purpur", provider)
                     .newVariation("cracked")
@@ -714,8 +744,10 @@ public enum Features {
     ENDSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("endstone", Blocks.END_STONE.getDefaultState(), -2);
-            Carving.chisel.addVariation("endstone", Blocks.END_BRICKS.getDefaultState(), -1);
+            Carving.chisel.addVariation("endstone", Blocks.END_STONE.getDefaultState(), -21);
+            Carving.chisel.addVariation("endstone", Blocks.END_BRICKS.getDefaultState(), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("endstone", "endstone");
 
             factory.newBlock(Material.ROCK, "endstone", provider)
                     .newVariation("cracked")
@@ -817,7 +849,10 @@ public enum Features {
     GLASS {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("glass", Blocks.GLASS.getDefaultState(), -1);
+            Carving.chisel.addVariation("glass", Blocks.GLASS.getDefaultState(), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("glass", "blockGlassColorless");
+
             factory.newBlock(Material.GLASS, "glass", provider).opaque(false)
                     .newVariation("terrain-glassbubble")
                     .next("terrain-glass-chinese")
@@ -848,14 +883,17 @@ public enum Features {
 
             for(int c = 0; c < dyeColors.length; c++)
             {
-                Carving.chisel.addVariation("glassdyed"+dyeColors[c], stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
-                factory.newBlock(Material.GLASS, "glassdyed"+dyeColors[c], provider).opaque(false)
+                Carving.chisel.addVariation("glassdyed" + (dyeColors[c].toLowerCase()), stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
+
+                CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
+
+                factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c].toLowerCase()), provider).opaque(false)
                         .setParentFolder("glassdyed")
-                        .newVariation(dyeColors[c]+"-bubble")
-                        .next(dyeColors[c]+"-panel")
-                        .next(dyeColors[c]+"-panel-fancy")
-                        .next(dyeColors[c]+"-transparent")
-                        .next(dyeColors[c]+"-forestry")
+                        .newVariation((dyeColors[c].toLowerCase())+"-bubble")
+                        .next((dyeColors[c].toLowerCase())+"-panel")
+                        .next((dyeColors[c].toLowerCase())+"-panel-fancy")
+                        .next((dyeColors[c].toLowerCase())+"-transparent")
+                        .next((dyeColors[c].toLowerCase())+"-forestry")
                         .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
         }
@@ -905,7 +943,10 @@ public enum Features {
     GLOWSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("glowstone", Blocks.GLOWSTONE.getDefaultState(), -1);
+            Carving.chisel.addVariation("glowstone", Blocks.GLOWSTONE.getDefaultState(), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("glowstone", "glowstone");
+
             factory.newBlock(Material.ROCK, "glowstone", provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -949,6 +990,8 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("blockGold", Blocks.GOLD_BLOCK.getDefaultState(), -1);
 
+            CarvingUtils.getChiselRegistry().registerOre("blockGold", "blockGold");
+
             factory.newBlock(Material.IRON, "blockGold", provider)
                     .setParentFolder("metals/gold")
                     .newVariation("caution")
@@ -986,8 +1029,11 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             IBlockState stone = Blocks.STONE.getDefaultState();
             IProperty<BlockStone.EnumType> prop = BlockStone.VARIANT;
-            Carving.chisel.addVariation("granite", stone.withProperty(prop, BlockStone.EnumType.GRANITE), -2);
-            Carving.chisel.addVariation("granite", stone.withProperty(prop, BlockStone.EnumType.GRANITE_SMOOTH), -1);
+            Carving.chisel.addVariation("granite", stone.withProperty(prop, BlockStone.EnumType.GRANITE), -21);
+            Carving.chisel.addVariation("granite", stone.withProperty(prop, BlockStone.EnumType.GRANITE_SMOOTH), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("granite", "stoneGranite");
+            //CarvingUtils.getChiselRegistry().registerOre("granite", "stoneGranitePolished");
 
             factory.newBlock(Material.ROCK, "granite", provider)
                     .newVariation("cracked")
@@ -1029,6 +1075,8 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("hardenedclay", Blocks.HARDENED_CLAY.getDefaultState(), -1);
+
+            CarvingUtils.getChiselRegistry().registerOre("hardenedclay", "hardenedClay");
 
             factory.newBlock(Material.ROCK, "hardenedclay", provider)
                     .newVariation("cracked")
@@ -1168,7 +1216,9 @@ public enum Features {
     IRON {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("blockIron", Blocks.IRON_BLOCK.getDefaultState(), -1);
+            Carving.chisel.addVariation("blockIron", Blocks.IRON_BLOCK.getDefaultState(), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("blockIron", "blockIron");
 
             factory.newBlock(Material.IRON, "blockIron", provider)
                     .setParentFolder("metals/iron")
@@ -1257,6 +1307,9 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("lapis", Blocks.LAPIS_BLOCK.getDefaultState(), -1);
+
+            CarvingUtils.getChiselRegistry().registerOre("lapis", "blockLapis");
+
             factory.newBlock(Material.ROCK, "lapis", provider)
                     .newVariation("terrain-lapisblock-chunky")
                     .next("terrain-lapisblock-panel")
@@ -1318,6 +1371,9 @@ public enum Features {
     LEAD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            CarvingUtils.getChiselRegistry().registerOre("blockLead", "blockLead");
+
             factory.newBlock(Material.IRON, "blockLead", provider)
                     .setParentFolder("metals/lead")
                     .newVariation("caution")
@@ -1356,6 +1412,10 @@ public enum Features {
     LIMESTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            CarvingUtils.getChiselRegistry().registerOre("limestone", "stoneLimestone");
+            //CarvingUtils.getChiselRegistry().registerOre("limestone", "stoneLimestonePolished");
+
             factory.newBlock(Material.ROCK, "limestone", provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -1404,30 +1464,13 @@ public enum Features {
         }
     },
 
-    /*LINE_MARKING { TODO Potential omission candidate
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "line_marking", provider)
-                    .setParentFolder("line-marking")
-                    .newVariation("double-white-center")
-                    .next("double-white-long")
-                    .next("double-yellow-center")
-                    .next("double-yellow-long")
-                    .next("white-center")
-                    .next("white-long")
-                    .next("yellow-center")
-                    .next("yellow-long")
-                    .build();
-        }
-        @Override
-        void addRecipes()
-        {
-        }
-    },*/
-
     MARBLE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            CarvingUtils.getChiselRegistry().registerOre("marble", "stoneMarble");
+            //CarvingUtils.getChiselRegistry().registerOre("marble", "stoneMarblePolished");
+
             factory.newBlock(Material.ROCK, "marble", provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -1551,7 +1594,10 @@ public enum Features {
     NETHERRACK {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("netherrack", Blocks.NETHERRACK.getDefaultState(), -1);
+            Carving.chisel.addVariation("netherrack", Blocks.NETHERRACK.getDefaultState(), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("netherrack", "netherrack");
+
             factory.newBlock(Material.ROCK, "netherrack", provider)
                     .newVariation("a1-netherrack-bloodgravel")
                     .next("a1-netherrack-bloodrock")
@@ -1574,6 +1620,9 @@ public enum Features {
     NICKEL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            CarvingUtils.getChiselRegistry().registerOre("blockNickel", "blockNickel");
+
             factory.newBlock(Material.ROCK, "blockNickel", provider)
                     .setParentFolder("metals/nickel")
                     .newVariation("caution")
@@ -1591,6 +1640,9 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("obsidian", Blocks.OBSIDIAN.getDefaultState(), -1);
+
+            CarvingUtils.getChiselRegistry().registerOre("obsidian", "obsidian");
+
             factory.newBlock(Material.ROCK, "obsidian", provider)
                     .newVariation("pillar")
                     .next("pillar-quartz")
@@ -1672,6 +1724,9 @@ public enum Features {
     PLATINUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            CarvingUtils.getChiselRegistry().registerOre("blockPlatinum", "blockPlatinum");
+
             factory.newBlock(Material.IRON, "blockPlatinum", provider)
                     .setParentFolder("metals/platinum")
                     .newVariation("caution")
@@ -1694,6 +1749,8 @@ public enum Features {
             Carving.chisel.addVariation("prismarine", prismarine.withProperty(prop, BlockPrismarine.EnumType.ROUGH), -3);
             Carving.chisel.addVariation("prismarine", prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -2);
             Carving.chisel.addVariation("prismarine", prismarine.withProperty(prop, BlockPrismarine.EnumType.DARK), -1);
+
+            CarvingUtils.getChiselRegistry().registerOre("prismarine", "prismarine");
 
             factory.newBlock(Material.ROCK, "prismarine", provider)
                     .newVariation("cracked")
@@ -1740,11 +1797,13 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             IBlockState quartzBlock = Blocks.QUARTZ_BLOCK.getDefaultState();
             IProperty<BlockQuartz.EnumType> prop = BlockQuartz.VARIANT;
-            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.DEFAULT), -5);
-            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.CHISELED), -4);
-            //Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_X), -3);
-            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Y), -2);
-            //Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Z), -1);
+            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.DEFAULT), -25);
+            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.CHISELED), -24);
+            //Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_X), -23);
+            Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Y), -22);
+            //Carving.chisel.addVariation("quartz", quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Z), -21);
+
+            CarvingUtils.getChiselRegistry().registerOre("quartz", "blockQuartz");
 
             factory.newBlock(Material.ROCK, "quartz", provider)
                     .newVariation("cracked")
@@ -1785,7 +1844,9 @@ public enum Features {
     REDSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("redstone", Blocks.REDSTONE_BLOCK.getDefaultState(), -1);
+            Carving.chisel.addVariation("redstone", Blocks.REDSTONE_BLOCK.getDefaultState(), -20);
+
+            CarvingUtils.getChiselRegistry().registerOre("blockRedstone", "blockRedstone");
 
             factory.newBlock(Material.ROCK, "redstone", provider)
                     .newVariation("cracked")
@@ -1949,6 +2010,9 @@ public enum Features {
     SILVER {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            CarvingUtils.getChiselRegistry().registerOre("blockSilver", "blockSilver");
+
             factory.newBlock(Material.ROCK, "blockSilver", provider)
                     .setParentFolder("metals/silver")
                     .newVariation("caution")
@@ -1965,6 +2029,9 @@ public enum Features {
     STEEL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            CarvingUtils.getChiselRegistry().registerOre("blockSteel", "blockSteel");
+
             factory.newBlock(Material.ROCK, "blockSteel", provider)
                     .setParentFolder("metals/steel")
                     .newVariation("caution")
@@ -1984,13 +2051,15 @@ public enum Features {
         {
             IBlockState stoneBricks = Blocks.STONEBRICK.getDefaultState();
             IProperty<BlockStoneBrick.EnumType> prop = BlockStoneBrick.VARIANT;
-            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.DEFAULT), -6);
-            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.MOSSY), -5);
-            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CRACKED), -4);
-            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CHISELED), -3);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.DEFAULT), -26);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.MOSSY), -25);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CRACKED), -24);
+            Carving.chisel.addVariation("stonebrick", stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CHISELED), -23);
 
-            Carving.chisel.addVariation("stonebrick", Blocks.STONE.getDefaultState(), -2);
-            // Carving.chisel.addVariation("stonebrick", Blocks.double_stone_slab.getDefaultState().withProperty(BlockDoubleStoneSlab.VARIANT, BlockDoubleStoneSlab.EnumType.STONE), -1);
+            Carving.chisel.addVariation("stonebrick", Blocks.STONE.getDefaultState(), -22);
+            // Carving.chisel.addVariation("stonebrick", Blocks.double_stone_slab.getDefaultState().withProperty(BlockDoubleStoneSlab.VARIANT, BlockDoubleStoneSlab.EnumType.STONE), -21);
+
+            CarvingUtils.getChiselRegistry().registerOre("stonebrick", "stone");
 
             factory.newBlock(Material.ROCK, "stonebrick", provider)
                     .setParentFolder("stone")
@@ -2135,6 +2204,9 @@ public enum Features {
     TIN {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            CarvingUtils.getChiselRegistry().registerOre("blockTin", "blockTin");
+
             factory.newBlock(Material.ROCK, "blockTin", provider)
                     .setParentFolder("metals/tin")
                     .newVariation("caution")
@@ -2183,6 +2255,9 @@ public enum Features {
     URANIUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+
+            CarvingUtils.getChiselRegistry().registerOre("blockUranium", "blockUranium");
+
             factory.newBlock(Material.ROCK, "blockUranium", provider)
                     .setParentFolder("metals/uranium")
                     .newVariation("caution")
@@ -2337,22 +2412,22 @@ public enum Features {
 
     private static final String[] dyeColors =
             {
-                    "black",
-                    "red",
-                    "green",
-                    "brown",
-                    "blue",
-                    "purple",
-                    "cyan",
-                    "lightgray",
-                    "gray",
-                    "pink",
-                    "lime",
-                    "yellow",
-                    "lightblue",
-                    "magenta",
-                    "orange",
-                    "white"
+                    "Black",
+                    "Red",
+                    "Green",
+                    "Brown",
+                    "Blue",
+                    "Purple",
+                    "Cyan",
+                    "LightGray",
+                    "Gray",
+                    "Pink",
+                    "Lime",
+                    "Yellow",
+                    "LightBlue",
+                    "Magenta",
+                    "Orange",
+                    "White"
             };
 
     //@formatter:on
