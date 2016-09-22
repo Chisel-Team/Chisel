@@ -36,6 +36,7 @@ public class SlotChiselSelection extends Slot {
 
         if (heldStack == null) {
             container.getInventoryChisel().decrStackSize(container.getInventoryChisel().size, 1);
+            container.onChiselSlotChanged();
         } else {
             putStack(itemstack.copy());
 
@@ -52,6 +53,7 @@ public class SlotChiselSelection extends Slot {
                 player.inventory.setItemStack(new ItemStack(itemstack.getItem(), toCraft, itemstack.getItemDamage()));
                 crafted.stackSize -= toCraft;
                 container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, crafted.stackSize <= 0 ? null : crafted);
+                container.onChiselSlotChanged();
             }
         }
 
