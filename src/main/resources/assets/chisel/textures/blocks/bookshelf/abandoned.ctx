@@ -1,7 +1,8 @@
 {
 	"type":"CTMH",
 	"textures":[
-        "./abandoned-top",
+        "minecraft:blocks/planks_oak",
         "./abandoned-ctmh"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

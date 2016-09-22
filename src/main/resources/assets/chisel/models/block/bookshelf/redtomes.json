@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:bookshelf/redtomes.cf",
+  "overrides":{
+    "UP":"minecraft:blocks/planks_oak.cf",
+    "DOWN":"minecraft:blocks/planks_oak.cf"
+  }
+}

@@ -1,7 +1,8 @@
 {
 	"type":"CTMH",
 	"textures":[
-        "./redtomes-top",
+        "minecraft:blocks/planks_oak",
         "./redtomes-ctmh"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

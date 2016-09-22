@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "minecraft:blocks/planks_acacia.ctx",
+        "chisel:bookshelf/brim.ctx"
+    ]
+}

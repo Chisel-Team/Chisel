@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "minecraft:blocks/planks_birch.ctx",
+        "chisel:bookshelf/necromancer-novice.ctx"
+    ]
+}

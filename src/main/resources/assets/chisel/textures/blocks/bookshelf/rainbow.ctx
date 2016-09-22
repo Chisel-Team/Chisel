@@ -1,7 +1,8 @@
 {
 	"type":"CTMH",
 	"textures":[
-        "./rainbow-top",
+        "minecraft:blocks/planks_oak",
         "./rainbow-ctmh"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

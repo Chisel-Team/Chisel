@@ -209,8 +209,21 @@ public enum Features {
                     .next("hoarder")
                     .next("brim")
                     .next("historician")
-                    .build(b -> b.setSoundType(SoundType.WOOD)
-                            .setHardness(1.5f));
+                    .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
+
+            for (int c = 1; c < plank_names.length; c++)
+            {   //Starting from one (spruce) instead of zero (oak), code above is for oak, I'm not remapping that!
+                factory.newBlock(Material.WOOD, "bookshelf_" + plank_names[c], new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
+                        .newVariation("rainbow")
+                        .next("necromancer-novice")
+                        .next("necromancer")
+                        .next("redtomes")
+                        .next("abandoned")
+                        .next("hoarder")
+                        .next("brim")
+                        .next("historician")
+                        .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
+            }
         }
     },
 
@@ -1623,8 +1636,6 @@ public enum Features {
     },
 
     PLANKS {
-        private final String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
-
         @SuppressWarnings("null")
         @Override
         void addBlocks(ChiselBlockFactory factory)
@@ -2348,6 +2359,8 @@ public enum Features {
 
     private static final String[] dyeOres = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
             "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
+
+    public final String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
 
     private static final @Nonnull BlockCreator<BlockCarvable> creator = BlockCarvable::new;
     private static final @Nonnull ChiselBlockProvider<BlockCarvable> provider = new ChiselBlockProvider<>(creator, BlockCarvable.class);

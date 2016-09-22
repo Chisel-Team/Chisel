@@ -19,6 +19,7 @@ All images under the following directories
 
 - `/src/main/resources/assets/chisel/textures/blocks/andesite/`
 - `/src/main/resources/assets/chisel/textures/blocks/basalt/`
+- `/src/main/resources/assets/chisel/textures/blocks/bookshelf/`
 - `/src/main/resources/assets/chisel/textures/blocks/bricks/`
 - `/src/main/resources/assets/chisel/textures/blocks/coal/`
 - `/src/main/resources/assets/chisel/textures/blocks/cobblestone/`

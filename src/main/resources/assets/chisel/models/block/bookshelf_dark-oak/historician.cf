@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "minecraft:blocks/planks_big_oak.ctx",
+        "chisel:bookshelf/historician.ctx"
+    ]
+}

@@ -1,7 +1,8 @@
 {
 	"type":"CTMH",
 	"textures":[
-        "./historician-top",
+        "minecraft:blocks/planks_oak",
         "./historician-ctmh"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

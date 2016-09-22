@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:bookshelf_acacia/necromancer-novice.cf",
+  "overrides":{
+    "UP":"minecraft:blocks/planks_acacia.cf",
+    "DOWN":"minecraft:blocks/planks_acacia.cf"
+  }
+}

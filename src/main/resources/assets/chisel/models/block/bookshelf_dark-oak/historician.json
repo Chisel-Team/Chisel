@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:bookshelf_dark-oak/historician.cf",
+  "overrides":{
+    "UP":"minecraft:blocks/planks_big_oak.cf",
+    "DOWN":"minecraft:blocks/planks_big_oak.cf"
+  }
+}

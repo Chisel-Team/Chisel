@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "minecraft:blocks/planks_oak.ctx",
+        "./necromancer-novice.ctx"
+    ]
+}

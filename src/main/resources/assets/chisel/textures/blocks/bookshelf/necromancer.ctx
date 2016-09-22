@@ -1,7 +1,8 @@
 {
 	"type":"CTMH",
 	"textures":[
-        "./necromancer-top",
+        "minecraft:blocks/planks_oak",
         "./necromancer-ctmh"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

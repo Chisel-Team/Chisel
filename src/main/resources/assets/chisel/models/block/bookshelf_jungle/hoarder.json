@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:bookshelf_jungle/hoarder.cf",
+  "overrides":{
+    "UP":"minecraft:blocks/planks_jungle.cf",
+    "DOWN":"minecraft:blocks/planks_jungle.cf"
+  }
+}

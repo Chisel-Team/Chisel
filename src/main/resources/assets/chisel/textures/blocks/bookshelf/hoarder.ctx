@@ -1,7 +1,8 @@
 {
 	"type":"CTMH",
 	"textures":[
-        "./hoarder-top",
+        "minecraft:blocks/planks_oak",
         "./hoarder-ctmh"
-    ]
+    ],
+    "layer":"CUTOUT"
 }

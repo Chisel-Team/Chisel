@@ -132,7 +132,7 @@ tile.chisel.bloodMagic.bloodRuneCarvedRadial.desc.1=Radial
 tile.chisel.bloodMagic.bloodRuneClassicPanel.desc.1=Panel
 tile.chisel.bloodMagic.bloodRuneTiles.desc.1=Tiles
 
-tile.chisel.bookshelf.name=Bookshelf
+tile.chisel.bookshelf.name=Oak Bookshelf
 tile.chisel.bookshelf.rainbow.desc.1=Rainbow
 tile.chisel.bookshelf.necromancer-novice.desc.1=Novice Necromancer
 tile.chisel.bookshelf.necromancer.desc.1=Necromancer
@@ -141,6 +141,56 @@ tile.chisel.bookshelf.abandoned.desc.1=Abandoned
 tile.chisel.bookshelf.hoarder.desc.1=Hoarder
 tile.chisel.bookshelf.brim.desc.1=Brim
 tile.chisel.bookshelf.historician.desc.1=Historican
+
+tile.chisel.bookshelf_acacia.name=Acacia Bookshelf
+tile.chisel.bookshelf_acacia.rainbow.desc.1=Rainbow
+tile.chisel.bookshelf_acacia.necromancer-novice.desc.1=Novice Necromancer
+tile.chisel.bookshelf_acacia.necromancer.desc.1=Necromancer
+tile.chisel.bookshelf_acacia.redtomes.desc.1=Red Tomes
+tile.chisel.bookshelf_acacia.abandoned.desc.1=Abandoned
+tile.chisel.bookshelf_acacia.hoarder.desc.1=Hoarder
+tile.chisel.bookshelf_acacia.brim.desc.1=Brim
+tile.chisel.bookshelf_acacia.historician.desc.1=Historican
+
+tile.chisel.bookshelf_birch.name=Birch Bookshelf
+tile.chisel.bookshelf_birch.rainbow.desc.1=Rainbow
+tile.chisel.bookshelf_birch.necromancer-novice.desc.1=Novice Necromancer
+tile.chisel.bookshelf_birch.necromancer.desc.1=Necromancer
+tile.chisel.bookshelf_birch.redtomes.desc.1=Red Tomes
+tile.chisel.bookshelf_birch.abandoned.desc.1=Abandoned
+tile.chisel.bookshelf_birch.hoarder.desc.1=Hoarder
+tile.chisel.bookshelf_birch.brim.desc.1=Brim
+tile.chisel.bookshelf_birch.historician.desc.1=Historican
+
+tile.chisel.bookshelf_dark-oak.name=Dark Oak Bookshelf
+tile.chisel.bookshelf_dark-oak.rainbow.desc.1=Rainbow
+tile.chisel.bookshelf_dark-oak.necromancer-novice.desc.1=Novice Necromancer
+tile.chisel.bookshelf_dark-oak.necromancer.desc.1=Necromancer
+tile.chisel.bookshelf_dark-oak.redtomes.desc.1=Red Tomes
+tile.chisel.bookshelf_dark-oak.abandoned.desc.1=Abandoned
+tile.chisel.bookshelf_dark-oak.hoarder.desc.1=Hoarder
+tile.chisel.bookshelf_dark-oak.brim.desc.1=Brim
+tile.chisel.bookshelf_dark-oak.historician.desc.1=Historican
+
+tile.chisel.bookshelf_jungle.name=Jungle Bookshelf
+tile.chisel.bookshelf_jungle.rainbow.desc.1=Rainbow
+tile.chisel.bookshelf_jungle.necromancer-novice.desc.1=Novice Necromancer
+tile.chisel.bookshelf_jungle.necromancer.desc.1=Necromancer
+tile.chisel.bookshelf_jungle.redtomes.desc.1=Red Tomes
+tile.chisel.bookshelf_jungle.abandoned.desc.1=Abandoned
+tile.chisel.bookshelf_jungle.hoarder.desc.1=Hoarder
+tile.chisel.bookshelf_jungle.brim.desc.1=Brim
+tile.chisel.bookshelf_jungle.historician.desc.1=Historican
+
+tile.chisel.bookshelf_spruce.name=Spruce Bookshelf
+tile.chisel.bookshelf_spruce.rainbow.desc.1=Rainbow
+tile.chisel.bookshelf_spruce.necromancer-novice.desc.1=Novice Necromancer
+tile.chisel.bookshelf_spruce.necromancer.desc.1=Necromancer
+tile.chisel.bookshelf_spruce.redtomes.desc.1=Red Tomes
+tile.chisel.bookshelf_spruce.abandoned.desc.1=Abandoned
+tile.chisel.bookshelf_spruce.hoarder.desc.1=Hoarder
+tile.chisel.bookshelf_spruce.brim.desc.1=Brim
+tile.chisel.bookshelf_spruce.historician.desc.1=Historican
 
 tile.chisel.bricks.name=Bricks
 tile.chisel.bricks.cracked.desc.1=Cracked

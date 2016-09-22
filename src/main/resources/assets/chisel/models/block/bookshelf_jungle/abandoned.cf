@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "minecraft:blocks/planks_jungle.ctx",
+        "chisel:bookshelf/abandoned.ctx"
+    ]
+}
