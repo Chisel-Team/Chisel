@@ -19,15 +19,8 @@ public final class ChiselFace implements IChiselFace {
     
     private List<IChiselFace> childFaces;
 
-    private BlockRenderLayer layer;
-
     public ChiselFace(ResourceLocation location) {
         this(new ArrayList<>(), new ArrayList<>());
-    }
-
-    public ChiselFace(ResourceLocation location, BlockRenderLayer layer) {
-        this(location);
-        setLayer(layer);
     }
 
     public ChiselFace(List<IChiselTexture<?>> textureList, List<IChiselFace> childFaces) {
@@ -75,14 +68,5 @@ public final class ChiselFace implements IChiselFace {
     
     public void setParticle(TextureAtlasSprite sprite) {
         particle = sprite;
-    }
-
-    public void setLayer(BlockRenderLayer layer){
-        this.layer = layer;
-    }
-
-    @Override
-    public BlockRenderLayer getLayer(){
-        return this.layer;
     }
 }

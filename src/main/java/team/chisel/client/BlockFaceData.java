@@ -1,10 +1,12 @@
 package team.chisel.client;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -24,7 +26,7 @@ public class BlockFaceData {
 
     private VariationFaceData[] variationData;
 
-    private List<BlockRenderLayer> layers;
+    private Set<BlockRenderLayer> layers;
 
     public BlockFaceData(VariationData[] clientVariationData){
         variationData = new VariationFaceData[clientVariationData.length];
@@ -44,11 +46,11 @@ public class BlockFaceData {
 
     public boolean isValid(BlockRenderLayer layer){
         if (this.layers == null){
-            this.layers = new ArrayList<BlockRenderLayer>();
+            this.layers = EnumSet.noneOf(BlockRenderLayer.class);
             for (VariationFaceData data : this.variationData){
                 for (IChiselFace face : data.getAllFaces()){
-                    if (!this.layers.contains(face.getLayer())){
-                        this.layers.add(face.getLayer());
+                    for (IChiselTexture<?> tex : face.getTextureList()) {
+                            this.layers.add(tex.getLayer());
                     }
                 }
             }

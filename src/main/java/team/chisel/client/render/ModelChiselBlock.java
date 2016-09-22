@@ -152,27 +152,24 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         for (BlockRenderLayer layer : LAYERS) {
             for (EnumFacing facing : EnumFacing.VALUES) {
                 IChiselFace face = model.getFace(facing);
-                if (ctx == null || layer == face.getLayer()) {
-                    int quadGoal = ctx == null ? 1 : Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
-                    List<BakedQuad> temp = baked.getQuads(state, facing, 0);
-                    addAllQuads(temp, face, ctx, quadGoal, quads);
-                    ret.faceQuads.put(layer, facing, ImmutableList.copyOf(quads));
-                    
-                    temp = FluentIterable.from(baked.getQuads(state, null, 0)).filter(q -> q.getFace() == facing).toList();
-                    addAllQuads(temp, face, ctx, quadGoal, quads);
-                    ret.genQuads.putAll(layer, temp);
-                } else {
-                    ret.faceQuads.put(layer, facing, Lists.newArrayList());
-                }
+                
+                int quadGoal = ctx == null ? 1 : Ordering.natural().max(FluentIterable.from(face.getTextureList()).transform(tex -> tex.getType().getQuadsPerSide()));
+                List<BakedQuad> temp = baked.getQuads(state, facing, 0);
+                addAllQuads(temp, face, layer, ctx, quadGoal, quads);
+                ret.faceQuads.put(layer, facing, ImmutableList.copyOf(quads));
+
+                temp = FluentIterable.from(baked.getQuads(state, null, 0)).filter(q -> q.getFace() == facing).toList();
+                addAllQuads(temp, face, layer, ctx, quadGoal, quads);
+                ret.genQuads.putAll(layer, temp);
             }
         }
         return ret;
     }
 
-    private void addAllQuads(List<BakedQuad> from, IChiselFace face, @Nullable RenderContextList ctx, int quadGoal, List<BakedQuad> to) {
+    private void addAllQuads(List<BakedQuad> from, IChiselFace face, BlockRenderLayer layer, @Nullable RenderContextList ctx, int quadGoal, List<BakedQuad> to) {
         to.clear();
         for (BakedQuad q : from) {
-            for (IChiselTexture<?> tex : face.getTextureList()) {
+            for (IChiselTexture<?> tex : face.getTextureList().stream().filter(t -> t.getLayer() == layer).collect(Collectors.toList())) {
                 to.addAll(tex.transformQuad(q, ctx == null ? null : ctx.getRenderContext(tex.getType()), quadGoal));
             }
         }

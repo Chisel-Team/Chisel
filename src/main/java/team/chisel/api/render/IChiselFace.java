@@ -10,6 +10,4 @@ public interface IChiselFace {
     List<IChiselTexture<?>> getTextureList();
 
     TextureAtlasSprite getParticle();
-
-    BlockRenderLayer getLayer();
 }

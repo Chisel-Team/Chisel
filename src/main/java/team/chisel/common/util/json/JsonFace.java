@@ -1,14 +1,10 @@
 package team.chisel.common.util.json;
 
-import java.util.List;
+import com.google.common.base.Preconditions;
 
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IChiselFace;
-import team.chisel.api.render.IChiselTexture;
 import team.chisel.client.ChiselFace;
-
-import com.google.common.base.Preconditions;
 
 /**
  * Json version of ChiselFace
@@ -51,18 +47,6 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
             face.setParticle(JsonHelper.getOrCreateTexture( new ResourceLocation(particle)).getParticle());
         }
 
-        face.setLayer(getLayer(face.getTextureList()));
         return face;
-    }
-
-    private BlockRenderLayer getLayer(List<IChiselTexture<?>> list) {
-        BlockRenderLayer layer = BlockRenderLayer.SOLID;
-        for (IChiselTexture<?> tex : list) {
-            BlockRenderLayer texLayer = tex.getLayer();
-            if (texLayer.ordinal() > layer.ordinal()) {
-                layer = texLayer;
-            }
-        }
-        return layer;
     }
 }
