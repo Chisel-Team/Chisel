@@ -1,0 +1,4 @@
+{
+  "model": { "model": "chisel:chisel_models/scaffold_model"},
+  "face":"chisel:technical/scaffold.cf"
+}
