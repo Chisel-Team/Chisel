@@ -1,0 +1,6 @@
+{
+    "textures":[
+        "minecraft:blocks/water_still.ctx",
+        "chisel:fluid/bricks-chaotic.ctx"
+    ]
+}
