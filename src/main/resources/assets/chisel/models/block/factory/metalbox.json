@@ -1,6 +1,6 @@
 {
   "model": { "model": "cube"},
-  "face":"chisel:thaumium/totem.cf",
+  "face":"chisel:factory/metalbox-side.cf",
   "overrides":{
     "UP":"chisel:factory/metalbox-top.cf",
     "DOWN":"chisel:factory/metalbox-top.cf"
