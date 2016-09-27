@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.annotation.Nonnull;
 
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -112,6 +113,11 @@ public class Chisel implements Reference {
         
         proxy.init();
         // BlockRegistry.init(event);
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event){
+        proxy.postInit();
     }
 
     /**

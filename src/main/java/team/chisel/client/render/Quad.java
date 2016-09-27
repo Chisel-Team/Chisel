@@ -44,6 +44,8 @@ public class Quad {
     public static final ISubmap BOTTOM_LEFT = new Submap(8, 8, 0, 8);
     public static final ISubmap BOTTOM_RIGHT = new Submap(8, 8, 8, 8);
 
+    public static final float[] FULLBRIGHT = new float[] {15, 15};
+
 //    public static final VertexFormat ITEM_WITH_LIGHT = new VertexFormat();
 //
 //    static {
@@ -396,12 +398,12 @@ public class Quad {
                     //TODO transform the UV_2S type that it used for lightmap coordinates to make fullbright
                     if (ele.getIndex() == 1 && this.fullbright){
                         //Stuff for fullbright
-                        builder.put(i, (32.0f / 0xffff) * 15);
+                        builder.put(i, FULLBRIGHT);
                         Chisel.debug("Doing fullbright stuff");
                     }
-                    else if (ele == DefaultVertexFormats.TEX_2F) {
+                    else if (ele.getIndex() == 0) {
                         Vector2f uv = vertUv[v];
-                        builder.put(i, uv.x, uv.y , 0, 1);
+                        builder.put(i, uv.x, uv.y);
                     }
                     //Chisel.debug("Uv is "+ele + " and fullright is "+ this.fullbright);
                     break;

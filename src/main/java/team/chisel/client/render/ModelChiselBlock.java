@@ -40,6 +40,7 @@ import team.chisel.api.block.ICarvable;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
+import team.chisel.client.core.PropertyWorldContext;
 import team.chisel.common.block.BlockCarvable;
 
 import com.google.common.cache.Cache;
@@ -106,6 +107,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         ModelChiselBlock baked;
         if (state != null && state.getBlock() instanceof ICarvable && state instanceof IExtendedBlockState) {
             IExtendedBlockState ext = (IExtendedBlockState) state;
+            System.out.println("Inserted prop: "+ext.getValue(PropertyWorldContext.INSTANCE));
             IBlockState clean = ext.getClean();
             RenderContextList ctxList = ext.getValue(BlockCarvable.CTX_LIST);
             if (ctxList == null) {

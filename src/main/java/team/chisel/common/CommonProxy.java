@@ -17,6 +17,10 @@ public class CommonProxy implements Reference {
     public void init() {
     }
 
+    public void postInit(){
+
+    }
+
     public void preTextureStitch() {
     }
 

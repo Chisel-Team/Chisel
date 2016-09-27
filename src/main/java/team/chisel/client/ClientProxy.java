@@ -8,17 +8,21 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
 import team.chisel.api.block.ChiselBlockBuilder.VariationBuilder.IVariationBuilderDelegate;
 import team.chisel.api.block.ICarvable;
+import team.chisel.client.core.BlockRendererDispatcherWrapper;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.handler.TooltipHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.client.render.ModelLoaderChisel;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.init.TextureTypeRegistry;
+
+import java.lang.reflect.Field;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
@@ -55,6 +59,18 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
 
+    }
+
+    @Override
+    public void postInit(){
+        try {
+            Field f = Minecraft.class.getDeclaredField("blockRenderDispatcher");
+            f.setAccessible(true);
+            f.set(Minecraft.getMinecraft(), new BlockRendererDispatcherWrapper(
+                    Minecraft.getMinecraft().getBlockRendererDispatcher()));
+        } catch (Exception exception){
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override
