@@ -28,10 +28,7 @@ import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingRegistry;
-import team.chisel.common.block.BlockCarvable;
-import team.chisel.common.block.BlockCarvableBookshelf;
-import team.chisel.common.block.BlockCarvableRedstone;
-import team.chisel.common.block.ItemChiselBlock;
+import team.chisel.common.block.*;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
@@ -307,30 +304,6 @@ public enum Features {
         }
     },
 
-    CARPET {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.CLOTH, "carpet", provider)
-                    .newVariation("black")
-                    .next("red")
-                    .next("green")
-                    .next("brown")
-                    .next("darkblue")
-                    .next("purple")
-                    .next("teal")
-                    .next("grey")
-                    .next("darkgrey")
-                    .next("pink")
-                    .next("lightgreen")
-                    .next("yellow")
-                    .next("lightblue")
-                    .next("lily")
-                    .next("orange")
-                    .next("white")
-                    .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
-        } // TODO have these chiseled from individual colored wools and carpets
-    },
-
     /*CERTUS { TODO Retexture
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -343,6 +316,29 @@ public enum Features {
                     .build();
         }
     }, // There is no AE yet */
+
+    CARPET {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+
+            IBlockState carpet = Blocks.CARPET.getDefaultState();
+            IProperty<EnumDyeColor> prop = BlockCarpet.COLOR;
+
+            for(int c = 0; c < dyeColors.length; c++)
+            {
+                // TODO Fix model; see Issue #239
+                Carving.chisel.addVariation("carpet_" + (dyeColors[c].toLowerCase()), carpet.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
+
+                //CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
+
+                factory.newBlock(Material.GLASS, "carpet_" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvableCarpet::new, BlockCarvableCarpet.class)).opaque(false)
+                        .setParentFolder("wool")
+                        .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
+                        .next("llama_"+(dyeColors[c].toLowerCase()))
+                        .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
+            }
+        }
+    },
 
     CLOUD {
         @Override
@@ -2407,6 +2403,28 @@ public enum Features {
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.waterstone, 8, 0), "***", "*X*", "***",
                     '*', new ItemStack(Blocks.STONE, 1),
                     'X', new ItemStack(Items.WATER_BUCKET, 1));
+        }
+    },
+
+    WOOL {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+
+            IBlockState wool = Blocks.WOOL.getDefaultState();
+            IProperty<EnumDyeColor> prop = BlockColored.COLOR;
+
+            for(int c = 0; c < dyeColors.length; c++)
+            {
+                Carving.chisel.addVariation("wool_" + (dyeColors[c].toLowerCase()), wool.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
+
+                //CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
+
+                factory.newBlock(Material.GLASS, "wool_" + (dyeColors[c].toLowerCase()), provider)
+                        .setParentFolder("wool")
+                        .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
+                        .next("llama_"+(dyeColors[c].toLowerCase()))
+                        .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
+            }
         }
     };
 
