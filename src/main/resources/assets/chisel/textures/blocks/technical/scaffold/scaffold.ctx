@@ -1,0 +1,8 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./scaffold",
+        "./scaffold-ctm"
+    ],
+    "layer":"CUTOUT"
+}

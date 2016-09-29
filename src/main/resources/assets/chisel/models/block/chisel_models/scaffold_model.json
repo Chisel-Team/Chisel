@@ -1,6 +1,5 @@
 {
   "parent": "chisel:block/chisel_block",
-  "__comment": "Model generated using MrCrayfish's Model Creator (http://mrcrayfish.com/modelcreator/)",
   "elements": [
     {
       "name": "NBFrame",
