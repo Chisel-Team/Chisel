@@ -158,9 +158,10 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
                 addAllQuads(temp, face, layer, ctx, quadGoal, quads);
                 ret.faceQuads.put(layer, facing, ImmutableList.copyOf(quads));
 
+                quads.clear();
                 temp = FluentIterable.from(baked.getQuads(state, null, 0)).filter(q -> q.getFace() == facing).toList();
                 addAllQuads(temp, face, layer, ctx, quadGoal, quads);
-                ret.genQuads.putAll(layer, temp);
+                ret.genQuads.putAll(layer, quads);
             }
         }
         return ret;
