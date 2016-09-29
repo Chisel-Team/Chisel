@@ -63,7 +63,7 @@ tile.chisel.andesite.indent.desc.1=Indented
 tile.chisel.andesite.marker.desc.1=Marker
 tile.chisel.andesite.sunken.desc.1=Sunken
 tile.chisel.andesite.poison.desc.1=Poison
-tile.chisel.andesite.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.andesite.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.antiblock.name=Antiblock
 tile.chisel.antiblock.black.desc.1=Black
@@ -109,7 +109,7 @@ tile.chisel.basalt.zag.desc.1=Zag
 tile.chisel.basalt.circularct.desc.1=Circular
 tile.chisel.basalt.circularct.desc.2=Has CTM
 tile.chisel.basalt.weaver.desc.1=Celtic
-tile.chisel.basalt.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.basalt.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.basaltextra.name=Basalt
 tile.chisel.basaltextra.bricks-solid.desc.1=Bricks
@@ -220,7 +220,7 @@ tile.chisel.bricks.zag.desc.1=Zag
 tile.chisel.bricks.circularct.desc.1=Circular
 tile.chisel.bricks.circularct.desc.2=Has CTM
 tile.chisel.bricks.weaver.desc.1=Celtic
-tile.chisel.bricks.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.bricks.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.bricksextra.name=Bricks
 tile.chisel.bricksextra.bricks-solid.desc.1=Bricks
@@ -308,7 +308,7 @@ tile.chisel.cobblestone.zag.desc.1=Zag
 tile.chisel.cobblestone.circularct.desc.1=Circular
 tile.chisel.cobblestone.circularct.desc.2=Has CTM
 tile.chisel.cobblestone.weaver.desc.1=Celtic
-tile.chisel.cobblestone.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.cobblestone.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.cobblestoneextra.name=Cobblestone
 tile.chisel.cobblestoneextra.bricks-solid.desc.1=Bricks
@@ -364,7 +364,7 @@ tile.chisel.cobblestonemossy.indent.desc.1=Indented
 tile.chisel.cobblestonemossy.marker.desc.1=Marker
 tile.chisel.cobblestonemossy.sunken.desc.1=Sunken
 tile.chisel.cobblestonemossy.poison.desc.1=Poison
-tile.chisel.cobblestonemossy.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.cobblestonemossy.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.blockCopper.name=Block of Copper
 tile.chisel.blockCopper.caution.desc.1=Caution
@@ -429,7 +429,7 @@ tile.chisel.diorite.indent.desc.1=Indented
 tile.chisel.diorite.marker.desc.1=Marker
 tile.chisel.diorite.sunken.desc.1=Sunken
 tile.chisel.diorite.poison.desc.1=Poison
-tile.chisel.diorite.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.diorite.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.dirt.name=Dirt
 tile.chisel.dirt.bricks.desc.1=Bricks
@@ -501,7 +501,7 @@ tile.chisel.endstone.zag.desc.1=Zag
 tile.chisel.endstone.circularct.desc.1=Circular
 tile.chisel.endstone.circularct.desc.2=Has CTM
 tile.chisel.endstone.weaver.desc.1=Celtic
-tile.chisel.endstone.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.endstone.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.endstoneextra.name=Endstone
 tile.chisel.endstoneextra.bricks-solid.desc.1=Bricks
@@ -628,7 +628,7 @@ tile.chisel.glowstone.tiles-large-bismuth.desc.1=Bismuth Tile
 tile.chisel.glowstone.tiles-medium-bismuth.desc.1=Bismuth Tiles
 tile.chisel.glowstone.neon.desc.1=Neon
 tile.chisel.glowstone.neon-panel.desc.1=Neon Panel
-tile.chisel.glowstone.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.glowstone.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.blockGold.name=Block of Gold
 tile.chisel.blockGold.caution.desc.1=Caution
@@ -696,7 +696,7 @@ tile.chisel.granite.indent.desc.1=Indented
 tile.chisel.granite.marker.desc.1=Marker
 tile.chisel.granite.sunken.desc.1=Sunken
 tile.chisel.granite.poison.desc.1=Poison
-tile.chisel.granite.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.granite.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.hardenedclay.name=Hardened Clay
 tile.chisel.hardenedclay.cracked.desc.1=Cracked
@@ -724,7 +724,7 @@ tile.chisel.hardenedclay.zag.desc.1=Zag
 tile.chisel.hardenedclay.circularct.desc.1=Circular
 tile.chisel.hardenedclay.circularct.desc.2=Has CTM
 tile.chisel.hardenedclay.weaver.desc.1=Celtic
-tile.chisel.hardenedclay.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.hardenedclay.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.hardenedclayextra.name=Hardened Clay
 tile.chisel.hardenedclayextra.bricks-solid.desc.1=Bricks
@@ -863,7 +863,7 @@ tile.chisel.lavastone.indent.desc.1=Indented
 tile.chisel.lavastone.marker.desc.1=Marker
 tile.chisel.lavastone.sunken.desc.1=Sunken
 tile.chisel.lavastone.poison.desc.1=Poison
-tile.chisel.lavastone.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.lavastone.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.blockLead.name=Block of Lead
 tile.chisel.blockLead.caution.desc.1=Caution
@@ -901,7 +901,7 @@ tile.chisel.limestone.zag.desc.1=Zag
 tile.chisel.limestone.circularct.desc.1=Circular
 tile.chisel.limestone.circularct.desc.2=Has CTM
 tile.chisel.limestone.weaver.desc.1=Celtic
-tile.chisel.limestone.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.limestone.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.limestoneextra.name=Limestone
 tile.chisel.limestoneextra.bricks-solid.desc.1=Bricks
@@ -944,7 +944,7 @@ tile.chisel.marble.zag.desc.1=Zag
 tile.chisel.marble.circularct.desc.1=Circular
 tile.chisel.marble.circularct.desc.2=Has CTM
 tile.chisel.marble.weaver.desc.1=Celtic
-tile.chisel.marble.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.marble.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.marbleextra.name=Marble
 tile.chisel.marbleextra.bricks-solid.desc.1=Bricks
@@ -1188,7 +1188,7 @@ tile.chisel.prismarine.zag.desc.1=Zag
 tile.chisel.prismarine.circularct.desc.1=Circular
 tile.chisel.prismarine.circularct.desc.2=Has CTM
 tile.chisel.prismarine.weaver.desc.1=Celtic
-tile.chisel.prismarine.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.prismarine.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.prismarineextra.name=Prismarine
 tile.chisel.prismarineextra.bricks-solid.desc.1=Bricks
@@ -1231,7 +1231,7 @@ tile.chisel.purpur.zag.desc.1=Zag
 tile.chisel.purpur.circularct.desc.1=Circular
 tile.chisel.purpur.circularct.desc.2=Has CTM
 tile.chisel.purpur.weaver.desc.1=Celtic
-tile.chisel.purpur.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.purpur.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.purpurextra.name=Purpur Block
 tile.chisel.purpurextra.bricks-solid.desc.1=Bricks
@@ -1287,7 +1287,7 @@ tile.chisel.quartz.indent.desc.1=Indented
 tile.chisel.quartz.marker.desc.1=Marker
 tile.chisel.quartz.sunken.desc.1=Sunken
 tile.chisel.quartz.poison.desc.1=Poison
-tile.chisel.quartz.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.quartz.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.redstone.name=Block of Redstone
 tile.chisel.redstone.cracked.desc.1=Cracked
@@ -1333,7 +1333,7 @@ tile.chisel.redstone.tiles-large-bismuth.desc.1=Bismuth Tile
 tile.chisel.redstone.tiles-medium-bismuth.desc.1=Bismuth Tiles
 tile.chisel.redstone.neon.desc.1=Neon
 tile.chisel.redstone.neon-panel.desc.1=Neon Panel
-tile.chisel.redstone.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.redstone.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.sandstoneyellow.name=Sandstone
 tile.chisel.sandstoneyellow.cracked.desc.1=Cracked
@@ -1361,7 +1361,7 @@ tile.chisel.sandstoneyellow.zag.desc.1=Zag
 tile.chisel.sandstoneyellow.circularct.desc.1=Circular
 tile.chisel.sandstoneyellow.circularct.desc.2=Has CTM
 tile.chisel.sandstoneyellow.weaver.desc.1=Celtic
-tile.chisel.sandstoneyellow.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.sandstoneyellow.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.sandstoneyellowextra.name=Sandstone
 tile.chisel.sandstoneyellowextra.bricks-solid.desc.1=Bricks
@@ -1404,7 +1404,7 @@ tile.chisel.sandstonered.zag.desc.1=Zag
 tile.chisel.sandstonered.circularct.desc.1=Circular
 tile.chisel.sandstonered.circularct.desc.2=Has CTM
 tile.chisel.sandstonered.weaver.desc.1=Celtic
-tile.chisel.sandstonered.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.sandstonered.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.sandstoneredextra.name=Red Sandstone
 tile.chisel.sandstoneredextra.bricks-solid.desc.1=Bricks
@@ -1469,7 +1469,7 @@ tile.chisel.stonebrick.zag.desc.1=Zag
 tile.chisel.stonebrick.circularct.desc.1=Circular
 tile.chisel.stonebrick.circularct.desc.2=Has CTM
 tile.chisel.stonebrick.weaver.desc.1=Celtic
-tile.chisel.stonebrick.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.stonebrick.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.stonebrickextra.name=Chiseled Stone
 tile.chisel.stonebrickextra.bricks-solid.desc.1=Bricks
@@ -1531,7 +1531,7 @@ tile.chisel.temple.plate-cracked.desc.1=Cracked Plate
 tile.chisel.temple.bricks.desc.1=Small Bricks
 tile.chisel.temple.bricks-large.desc.1=Bricks
 tile.chisel.temple.bricks-weared.desc.1=Damaged Bricks
-tile.chisel.temple.bricks-disarray.desc.1=Disarrayed Bricks
+tile.chisel.temple.bricks-disarray.desc.1=Trodden Bricks
 tile.chisel.temple.column.desc.1=Column
 tile.chisel.temple.stand.desc.1=Stand
 tile.chisel.temple.tiles.desc.1=Medium Tiles
@@ -1549,7 +1549,7 @@ tile.chisel.templemossy.plate-cracked.desc.1=Cracked Plate
 tile.chisel.templemossy.bricks.desc.1=Small Bricks
 tile.chisel.templemossy.bricks-large.desc.1=Bricks
 tile.chisel.templemossy.bricks-weared.desc.1=Damaged Bricks
-tile.chisel.templemossy.bricks-disarray.desc.1=Disarrayed Bricks
+tile.chisel.templemossy.bricks-disarray.desc.1=Trodden Bricks
 tile.chisel.templemossy.column.desc.1=Column
 tile.chisel.templemossy.stand.desc.1=Stand
 tile.chisel.templemossy.tiles.desc.1=Medium Tiles
@@ -1688,4 +1688,4 @@ tile.chisel.waterstone.indent.desc.1=Indented
 tile.chisel.waterstone.marker.desc.1=Marker
 tile.chisel.waterstone.sunken.desc.1=Sunken
 tile.chisel.waterstone.poison.desc.1=Poison
-tile.chisel.waterstone.bricks-chaotic.desc.1=Disarrayed Bricks
+tile.chisel.waterstone.bricks-chaotic.desc.1=Trodden Bricks
