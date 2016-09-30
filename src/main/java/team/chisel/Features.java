@@ -237,8 +237,10 @@ public enum Features {
             }
 
             String[] woodTypes = new String[]{"Oak", "Spruce", "Birch", "Jungle", "Acacia", "DarkOak"};
-            for (String woodType : woodTypes) {
-                CarvingUtils.getChiselRegistry().registerOre("bookshelf", "bookshelf" + woodType);
+
+            CarvingUtils.getChiselRegistry().registerOre("bookshelf", "bookshelf" + woodTypes[0]);
+            for (int c = 1; c < woodTypes.length; c++){
+                CarvingUtils.getChiselRegistry().registerOre("bookshelf_" + plank_names[c], "bookshelf" + woodTypes[c]);
             }
         }
 
