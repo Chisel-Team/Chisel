@@ -28,6 +28,11 @@ public final class ChiselBlocks
     static BlockCarvable antiblock = null;
     static BlockCarvable basalt = null;
     static BlockCarvable basaltextra = null;
+    static BlockCarvable bookshelf_spruce = null;
+    static BlockCarvable bookshelf_birch = null;
+    static BlockCarvable bookshelf_jungle = null;
+    static BlockCarvable bookshelf_acacia = null;
+    //static BlockCarvable bookshelf_dark-oak = null; TODO wtf
     static BlockCarvable carpet = null;
     static BlockCarvable cloud = null;
     static BlockCarvable concrete = null;

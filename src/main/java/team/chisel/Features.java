@@ -235,6 +235,23 @@ public enum Features {
                         .next("historician")
                         .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
             }
+
+            String[] woodTypes = new String[]{"Oak", "Spruce", "Birch", "Jungle", "Acacia", "DarkOak"};
+            for (String woodType : woodTypes) {
+                CarvingUtils.getChiselRegistry().registerOre("bookshelf", "bookshelf" + woodType);
+            }
+        }
+
+        @Override
+        void addRecipes()
+        {
+            BlockCarvable[] bookshelves = new BlockCarvable[]{ChiselBlocks.bookshelf_spruce, ChiselBlocks.bookshelf_birch, ChiselBlocks.bookshelf_jungle, ChiselBlocks.bookshelf_acacia};
+            Block[] stairs = new Block[]{Blocks.SPRUCE_STAIRS, Blocks.BIRCH_STAIRS, Blocks.JUNGLE_STAIRS, Blocks.ACACIA_STAIRS};
+
+            for (int c = 0; c < bookshelves.length; c++)
+            {   //Starting from one (spruce) instead of zero (oak)
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(bookshelves[c], 1), "S S", "BBB", "S S", 'S', new ItemStack(stairs[c], 1), 'B', new ItemStack(Items.BOOK, 1)));
+            }
         }
     },
 
