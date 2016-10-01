@@ -210,6 +210,8 @@ public enum Features {
     BOOKSHELF {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            String[] woodTypes = new String[]{"Oak", "Spruce", "Birch", "Jungle", "Acacia", "DarkOak"};
+
             Carving.chisel.addVariation("bookshelf", Blocks.BOOKSHELF.getDefaultState(), -1);
             factory.newBlock(Material.WOOD, "bookshelf", new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
                     .newVariation("rainbow")
@@ -235,8 +237,6 @@ public enum Features {
                         .next("historician")
                         .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
             }
-
-            String[] woodTypes = new String[]{"Oak", "Spruce", "Birch", "Jungle", "Acacia", "DarkOak"};
 
             CarvingUtils.getChiselRegistry().registerOre("bookshelf", "bookshelf" + woodTypes[0]);
             for (int c = 1; c < woodTypes.length; c++){
@@ -2472,7 +2472,7 @@ public enum Features {
     private static final String[] dyeOres = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
             "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
 
-    public final String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
+    public static final String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
 
     private static final @Nonnull BlockCreator<BlockCarvable> creator = BlockCarvable::new;
     private static final @Nonnull ChiselBlockProvider<BlockCarvable> provider = new ChiselBlockProvider<>(creator, BlockCarvable.class);

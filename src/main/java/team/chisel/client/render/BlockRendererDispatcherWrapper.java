@@ -62,7 +62,7 @@ public class BlockRendererDispatcherWrapper extends BlockRendererDispatcher {
                 case ENTITYBLOCK_ANIMATED:
                     return false;
                 case LIQUID:
-                    return this.fluidRenderer.renderFluid(blockAccess, state, pos, worldRendererIn);
+                    return this.parent.fluidRenderer.renderFluid(blockAccess, state, pos, worldRendererIn);
                 default:
                     return false;
                 }

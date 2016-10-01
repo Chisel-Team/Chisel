@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.annotation.Nonnull;
 
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -138,27 +139,36 @@ public class Chisel implements Reference {
         }
     }
 
-    //@Mod.EventHandler TODO fix
-    //public void onMissingMappings(FMLMissingMappingsEvent event) {
-    //    for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
-    //        if (mapping.resourceLocation.getResourceDomain().equals(Reference.MOD_ID)) {
-    //            @Nonnull
-    //            String path = mapping.resourceLocation.getResourcePath();
-    //            if (path.endsWith("extra")) {
-    //                path = path.replace("extra", "1");
-    //                ResourceLocation newRes = new ResourceLocation(mapping.resourceLocation.getResourceDomain(), path);
-    //                Block block = ForgeRegistries.BLOCKS.getValue(newRes);
-    //                if (block != null) {
-    //                    if (mapping.type == Type.BLOCK) {
-    //                        mapping.remap(block);
-    //                    } else {
-    //                        mapping.remap(Item.getItemFromBlock(block));
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+    /*@Mod.EventHandler //TODO fix
+    public void onMissingMappings(FMLMissingMappingsEvent event) {
+        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
+            if (mapping.resourceLocation.getResourceDomain().equals(Reference.MOD_ID)) {
+                @Nonnull
+                String path = mapping.resourceLocation.getResourcePath();
+                /*if (path.endsWith("extra")) {
+                    path = path.replace("extra", "1");
+                    ResourceLocation newRes = new ResourceLocation(mapping.resourceLocation.getResourceDomain(), path);
+                    Block block = ForgeRegistries.BLOCKS.getValue(newRes);
+                    if (block != null) {
+                        if (mapping.type == Type.BLOCK) {
+                            mapping.remap(block);
+                        } else {
+                            mapping.remap(Item.getItemFromBlock(block));
+                        }
+                    }
+                }
+
+                if(path.endsWith("bookshelf"))
+                {
+
+                }
+                else if (path.endsWith("bookshelf" + Features.plank_names[5]))
+                {
+
+                }
+            }
+        }
+    }//*/
 
     // @Mod.EventHandler
     // public void postInit(FMLPostInitializationEvent event){
