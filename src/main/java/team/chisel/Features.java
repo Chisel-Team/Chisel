@@ -212,21 +212,11 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             String[] woodTypes = new String[]{"Oak", "Spruce", "Birch", "Jungle", "Acacia", "DarkOak"};
 
-            Carving.chisel.addVariation("bookshelf", Blocks.BOOKSHELF.getDefaultState(), -1);
-            factory.newBlock(Material.WOOD, "bookshelf", new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
-                    .newVariation("rainbow")
-                    .next("necromancer-novice")
-                    .next("necromancer")
-                    .next("redtomes")
-                    .next("abandoned")
-                    .next("hoarder")
-                    .next("brim")
-                    .next("historician")
-                    .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
+            Carving.chisel.addVariation("bookshelf_oak", Blocks.BOOKSHELF.getDefaultState(), -1);
 
-            for (int c = 1; c < plank_names.length; c++)
-            {   //Starting from one (spruce) instead of zero (oak), code above is for oak, I'm not remapping that!
-                factory.newBlock(Material.WOOD, "bookshelf_" + plank_names[c], new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
+            for (int c = 0; c < woodTypes.length; c++)
+            {
+                factory.newBlock(Material.WOOD, "bookshelf_" + woodTypes[c].toLowerCase(), new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
                         .newVariation("rainbow")
                         .next("necromancer-novice")
                         .next("necromancer")
@@ -238,20 +228,19 @@ public enum Features {
                         .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
             }
 
-            CarvingUtils.getChiselRegistry().registerOre("bookshelf", "bookshelf" + woodTypes[0]);
             for (int c = 1; c < woodTypes.length; c++){
-                CarvingUtils.getChiselRegistry().registerOre("bookshelf_" + plank_names[c], "bookshelf" + woodTypes[c]);
+                CarvingUtils.getChiselRegistry().registerOre("bookshelf_" + woodTypes[c].toLowerCase(), "bookshelf" + woodTypes[c]);
             }
         }
 
         @Override
         void addRecipes()
         {
-            BlockCarvable[] bookshelves = new BlockCarvable[]{ChiselBlocks.bookshelf_spruce, ChiselBlocks.bookshelf_birch, ChiselBlocks.bookshelf_jungle, ChiselBlocks.bookshelf_acacia};
-            Block[] stairs = new Block[]{Blocks.SPRUCE_STAIRS, Blocks.BIRCH_STAIRS, Blocks.JUNGLE_STAIRS, Blocks.ACACIA_STAIRS};
+            BlockCarvable[] bookshelves = new BlockCarvable[]{ChiselBlocks.bookshelf_spruce, ChiselBlocks.bookshelf_birch, ChiselBlocks.bookshelf_jungle, ChiselBlocks.bookshelf_acacia, ChiselBlocks.bookshelf_darkoak};
+            Block[] stairs = new Block[]{Blocks.SPRUCE_STAIRS, Blocks.BIRCH_STAIRS, Blocks.JUNGLE_STAIRS, Blocks.ACACIA_STAIRS, Blocks.DARK_OAK_STAIRS};
 
             for (int c = 0; c < bookshelves.length; c++)
-            {   //Starting from one (spruce) instead of zero (oak)
+            {
                 GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(bookshelves[c], 1), "S S", "BBB", "S S", 'S', new ItemStack(stairs[c], 1), 'B', new ItemStack(Items.BOOK, 1)));
             }
         }

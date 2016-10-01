@@ -1,6 +1,6 @@
 {
   "model": { "model": "cube"},
-  "face":"chisel:bookshelf_dark-oak/rainbow.cf",
+  "face":"chisel:bookshelf_darkoak/rainbow.cf",
   "overrides":{
     "UP":"minecraft:blocks/planks_big_oak.cf",
     "DOWN":"minecraft:blocks/planks_big_oak.cf"

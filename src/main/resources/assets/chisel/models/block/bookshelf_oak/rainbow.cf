@@ -1,6 +1,6 @@
 {
     "textures":[
         "minecraft:blocks/planks_oak.ctx",
-        "./rainbow.ctx"
+        "chisel:bookshelf/rainbow.ctx"
     ]
 }

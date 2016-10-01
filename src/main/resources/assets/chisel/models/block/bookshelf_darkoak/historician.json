@@ -1,6 +1,6 @@
 {
   "model": { "model": "cube"},
-  "face":"chisel:bookshelf_dark-oak/necromancer-novice.cf",
+  "face":"chisel:bookshelf_darkoak/historician.cf",
   "overrides":{
     "UP":"minecraft:blocks/planks_big_oak.cf",
     "DOWN":"minecraft:blocks/planks_big_oak.cf"

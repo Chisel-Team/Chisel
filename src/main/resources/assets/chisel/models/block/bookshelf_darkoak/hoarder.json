@@ -1,6 +1,6 @@
 {
   "model": { "model": "cube"},
-  "face":"chisel:bookshelf_dark-oak/hoarder.cf",
+  "face":"chisel:bookshelf_darkoak/hoarder.cf",
   "overrides":{
     "UP":"minecraft:blocks/planks_big_oak.cf",
     "DOWN":"minecraft:blocks/planks_big_oak.cf"

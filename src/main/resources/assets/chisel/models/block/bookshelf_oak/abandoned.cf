@@ -1,6 +1,6 @@
 {
     "textures":[
         "minecraft:blocks/planks_oak.ctx",
-        "./historician.ctx"
+        "chisel:bookshelf/abandoned.ctx"
     ]
 }

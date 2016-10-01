@@ -1,6 +1,6 @@
 {
     "textures":[
         "minecraft:blocks/planks_oak.ctx",
-        "./hoarder.ctx"
+        "chisel:bookshelf/necromancer.ctx"
     ]
 }

@@ -4,7 +4,11 @@ import java.io.File;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -139,7 +143,7 @@ public class Chisel implements Reference {
         }
     }
 
-    /*@Mod.EventHandler //TODO fix
+    @Mod.EventHandler //TODO fix
     public void onMissingMappings(FMLMissingMappingsEvent event) {
         for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
             if (mapping.resourceLocation.getResourceDomain().equals(Reference.MOD_ID)) {
@@ -156,15 +160,35 @@ public class Chisel implements Reference {
                             mapping.remap(Item.getItemFromBlock(block));
                         }
                     }
-                }
+                }*/
 
                 if(path.endsWith("bookshelf"))
                 {
+                    path = path.replace("bookshelf", "bookshelf_oak");
+                    ResourceLocation newRes = new ResourceLocation(mapping.resourceLocation.getResourceDomain(), path);
+                    Block block = ForgeRegistries.BLOCKS.getValue(newRes);
 
+                    if (block != null) {
+                        if (mapping.type == GameRegistry.Type.BLOCK) {
+                            mapping.remap(block);
+                        } else {
+                            mapping.remap(Item.getItemFromBlock(block));
+                        }
+                    }
                 }
-                else if (path.endsWith("bookshelf" + Features.plank_names[5]))
+                else if (path.toLowerCase().endsWith("bookshelf_dark-oak"))
                 {
+                    path = path.replace("bookshelf_dark-oak", "bookshelf_darkoak");
+                    ResourceLocation newRes = new ResourceLocation(mapping.resourceLocation.getResourceDomain(), path);
+                    Block block = ForgeRegistries.BLOCKS.getValue(newRes);
 
+                    if (block != null) {
+                        if (mapping.type == GameRegistry.Type.BLOCK) {
+                            mapping.remap(block);
+                        } else {
+                            mapping.remap(Item.getItemFromBlock(block));
+                        }
+                    }
                 }
             }
         }
