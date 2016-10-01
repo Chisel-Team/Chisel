@@ -1,17 +1,34 @@
 package team.chisel.client.render;
 
-import gnu.trove.set.TLongSet;
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.collect.FluentIterable;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.MultimapBuilder;
+import com.google.common.collect.Ordering;
+import com.google.common.collect.Table;
+import com.google.common.collect.Tables;
+
+import gnu.trove.set.TLongSet;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.Value;
 import net.minecraft.block.Block;
@@ -27,38 +44,26 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import team.chisel.api.block.ICarvable;
+import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.common.block.BlockCarvable;
-
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.MultimapBuilder;
-import com.google.common.collect.Ordering;
-import com.google.common.collect.Table;
-import com.google.common.collect.Tables;
 
 /**
  * Model for all chisel blocks
  */
 public class ModelChiselBlock implements IPerspectiveAwareModel {
 	
+    @ParametersAreNonnullByDefault
 	private class Overrides extends ItemOverrideList {
 		
 		public Overrides() {
@@ -69,12 +74,12 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 	    @SneakyThrows
 	    public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
 	        Block block = ((ItemBlock) stack.getItem()).getBlock();
-	        return modelcache.get(State.of(((BlockCarvable)block).getStateFromMeta(stack.getMetadata()), null), () -> createModel(block.getDefaultState(), model, null));
+	        return modelcache.get(new State(((BlockCarvable)block).getStateFromMeta(stack.getMetadata()), null), () -> createModel(block.getDefaultState(), model, null));
 	    }
 	}
 	
 	@Value
-	@AllArgsConstructor(staticName = "of")
+	@AllArgsConstructor
 	private static class State {
 	    IBlockState cleanState;
 	    TLongSet serializedContext;
@@ -83,8 +88,9 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     private ListMultimap<BlockRenderLayer, BakedQuad> genQuads = MultimapBuilder.enumKeys(BlockRenderLayer.class).arrayListValues().build();
     private Table<BlockRenderLayer, EnumFacing, List<BakedQuad>> faceQuads = Tables.newCustomTable(Maps.newEnumMap(BlockRenderLayer.class), () -> Maps.newEnumMap(EnumFacing.class));
 
+    @Getter
     private ModelChisel model;
-    private Overrides overrides = new Overrides();
+    private @Nonnull Overrides overrides = new Overrides();
         
     private static Cache<State, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(500).<State, ModelChiselBlock>build();
     
@@ -92,29 +98,31 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         this.model = model;
     }
 
-    @Override
     @SneakyThrows
-    public List<BakedQuad> getQuads(IBlockState state, EnumFacing side, long rand) {
+    @Nonnull
+    public IBakedModel getModel(IBlockState state, @Nonnull BlockPos pos, @Nonnull IBlockAccess blockAccess) {
+
+        List<IBlockRenderType> types = model.getChiselTextures().stream().map(IChiselTexture::getType).collect(Collectors.toList());
+        RenderContextList ctxList = new RenderContextList(types, blockAccess, pos);
+
         ModelChiselBlock baked;
-        if (state != null && state.getBlock() instanceof ICarvable && state instanceof IExtendedBlockState) {
-            IExtendedBlockState ext = (IExtendedBlockState) state;
-            IBlockState clean = ext.getClean();
-            RenderContextList ctxList = ext.getValue(BlockCarvable.CTX_LIST);
-            if (ctxList == null) {
-                baked = modelcache.get(State.of(clean, null), () -> createModel(state, model, null));
-            } else {
-                TLongSet serialized = ctxList.serialized();
-                baked = modelcache.get(State.of(clean, serialized), () -> createModel(ext, model, ctxList));
-            }
+        if (state != null) {
+            TLongSet serialized = ctxList.serialized();
+            baked = modelcache.get(new State(state, serialized), () -> createModel(state, model, ctxList));
         } else {
             baked = this;
         }
+        return baked;
+    }
+    
+    @Override
+    public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
         BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
-        return side == null ? baked.genQuads.get(layer) : layer == null ? baked.faceQuads.column(side).values().stream().flatMap(List::stream).collect(Collectors.toList()) : baked.faceQuads.get(layer, side);
+        return side == null ? genQuads.get(layer) : layer == null ? faceQuads.column(side).values().stream().flatMap(List::stream).collect(Collectors.toList()) : faceQuads.get(layer, side);
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
+    public @Nonnull ItemOverrideList getOverrides() {
     	return overrides;
     }
 
@@ -134,12 +142,12 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
+    public @Nonnull TextureAtlasSprite getParticleTexture() {
         return this.model.getDefaultFace().getParticle();
     }
 
     @Override
-    public ItemCameraTransforms getItemCameraTransforms() {
+    public @Nonnull ItemCameraTransforms getItemCameraTransforms() {
         return ItemCameraTransforms.DEFAULT;
     }
 
@@ -158,10 +166,9 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
                 addAllQuads(temp, face, layer, ctx, quadGoal, quads);
                 ret.faceQuads.put(layer, facing, ImmutableList.copyOf(quads));
 
-                quads.clear();
                 temp = FluentIterable.from(baked.getQuads(state, null, 0)).filter(q -> q.getFace() == facing).toList();
                 addAllQuads(temp, face, layer, ctx, quadGoal, quads);
-                ret.genQuads.putAll(layer, quads);
+                ret.genQuads.putAll(layer, ImmutableList.copyOf(quads));
             }
         }
         return ret;

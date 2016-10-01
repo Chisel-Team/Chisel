@@ -2,12 +2,13 @@ package team.chisel.api.render;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.util.BlockRenderLayer;
 
 public interface IChiselFace {
 
     List<IChiselTexture<?>> getTextureList();
 
-    TextureAtlasSprite getParticle();
+    @Nonnull TextureAtlasSprite getParticle();
 }

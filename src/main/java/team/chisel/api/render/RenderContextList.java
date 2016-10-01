@@ -6,6 +6,9 @@ import gnu.trove.set.hash.TLongHashSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
@@ -14,6 +17,7 @@ import com.google.common.collect.Maps;
 /**
  * List of IBlockRenderContext's
  */
+@ParametersAreNonnullByDefault
 public class RenderContextList {
 
     private final Map<IBlockRenderType, IBlockRenderContext> contextMap = Maps.newIdentityHashMap();
@@ -34,7 +38,7 @@ public class RenderContextList {
         }
     }
 
-    public IBlockRenderContext getRenderContext(IBlockRenderType type) {
+    public @Nullable IBlockRenderContext getRenderContext(IBlockRenderType type) {
         return this.contextMap.get(type);
     }
 

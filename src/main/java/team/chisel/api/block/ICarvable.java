@@ -1,13 +1,9 @@
 package team.chisel.api.block;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import team.chisel.client.BlockFaceData;
 
 @ParametersAreNonnullByDefault
 public interface ICarvable {
@@ -42,15 +38,6 @@ public interface ICarvable {
      * @return The variation index.
      */
     int getVariationIndex(IBlockState state);
-
-    /**
-     * Called whenever resources are reloaded. Used to update render information.
-     */
-    @SideOnly(Side.CLIENT)
-    void setBlockFaceData(BlockFaceData blockFaceData);
-
-    @SideOnly(Side.CLIENT)
-    @Nullable BlockFaceData getBlockFaceData();
 
 //    /**
 //     * Called to get the quad mutator, called multiple times so please cache this value

@@ -26,6 +26,7 @@ import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.api.render.IChiselFace;
+import team.chisel.api.render.IChiselTexture;
 import team.chisel.common.util.json.JsonHelper;
 
 import com.google.common.base.Function;
@@ -103,6 +104,15 @@ public class ModelChisel implements IModel {
 
     public IChiselFace getDefaultFace() {
         return faceObj;
+    }
+    
+    public List<IChiselTexture<?>> getChiselTextures() {
+        List<IChiselTexture<?>> ret = Lists.newArrayList();
+        ret.addAll(getDefaultFace().getTextureList());
+        for (IChiselFace face : overridesObj.values()) {
+            ret.addAll(face.getTextureList());
+        }
+        return ret;
     }
 
     public IChiselFace getFace(EnumFacing facing) {

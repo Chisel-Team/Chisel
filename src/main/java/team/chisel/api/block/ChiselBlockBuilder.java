@@ -26,7 +26,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.init.BlockRegistry;
@@ -140,16 +139,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     @Accessors(chain = true)
     public static class VariationBuilder<T extends Block & ICarvable> {
 
-        /**
-         * For Internal chisel use only
-         */
-        public interface IVariationBuilderDelegate {
-
-            VariationData build(String name, String group, int index, @Nullable ChiselRecipe recipe, @Nullable ItemStack smeltedFrom, int amountSmelted, boolean opaque, ResourceLocation texLocation,
-                    Map<EnumFacing, ResourceLocation> overrideMap);
-
-        }
-
         private ChiselBlockBuilder<T> parent;
 
         private String name;
@@ -245,10 +234,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         }
 
         private VariationData doBuild() {
-            return Chisel.proxy.getBuilderDelegate().build(name, group, index, recipe, smeltedFrom, amountSmelted, opaque, textureLocation, overrideMap);
+            return new VariationData(name, group, recipe, smeltedFrom, amountSmelted, index, opaque);
         }
-
-        // todo I was here gonna implement ClientVariation stuff
     }
-
 }
