@@ -2,6 +2,7 @@ package team.chisel.client.render;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ import com.google.common.collect.Table;
 import com.google.common.collect.Tables;
 
 import gnu.trove.set.TLongSet;
+import gnu.trove.set.hash.TLongHashSet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -74,7 +76,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 	    @SneakyThrows
 	    public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
 	        Block block = ((ItemBlock) stack.getItem()).getBlock();
-	        return modelcache.get(new State(((BlockCarvable)block).getStateFromMeta(stack.getMetadata()), null), () -> createModel(block.getDefaultState(), model, null));
+	        return modelcache.get(new State(((BlockCarvable)block).getStateFromMeta(stack.getMetadata()), new TLongHashSet(new long[]{new Random().nextLong() })), () -> createModel(block.getDefaultState(), model, null));
 	    }
 	}
 	
@@ -118,7 +120,15 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     @Override
     public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
         BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
-        return side == null ? genQuads.get(layer) : layer == null ? faceQuads.column(side).values().stream().flatMap(List::stream).collect(Collectors.toList()) : faceQuads.get(layer, side);
+        if (side != null && layer != null) {
+            return faceQuads.get(layer, side);
+        } else if (side != null) {
+            return faceQuads.column(side).values().stream().flatMap(List::stream).collect(Collectors.toList());
+        } else if (layer != null) {
+            return genQuads.get(layer);
+        } else {
+            return Lists.newArrayList(genQuads.values());
+        }
     }
 
     @Override
@@ -168,7 +178,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 
                 temp = FluentIterable.from(baked.getQuads(state, null, 0)).filter(q -> q.getFace() == facing).toList();
                 addAllQuads(temp, face, layer, ctx, quadGoal, quads);
-                ret.genQuads.putAll(layer, ImmutableList.copyOf(quads));
+                ret.genQuads.putAll(layer, quads);
             }
         }
         return ret;
