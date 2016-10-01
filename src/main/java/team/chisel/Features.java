@@ -27,7 +27,6 @@ import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.carving.CarvingUtils;
-import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.block.*;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
@@ -214,9 +213,8 @@ public enum Features {
 
             Carving.chisel.addVariation("bookshelf_oak", Blocks.BOOKSHELF.getDefaultState(), -1);
 
-            for (int c = 0; c < woodTypes.length; c++)
-            {
-                factory.newBlock(Material.WOOD, "bookshelf_" + woodTypes[c].toLowerCase(), new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
+            for (String woodType : woodTypes) {
+                factory.newBlock(Material.WOOD, "bookshelf_" + woodType.toLowerCase(), new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
                         .newVariation("rainbow")
                         .next("necromancer-novice")
                         .next("necromancer")
@@ -226,10 +224,8 @@ public enum Features {
                         .next("brim")
                         .next("historician")
                         .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
-            }
 
-            for (int c = 1; c < woodTypes.length; c++){
-                CarvingUtils.getChiselRegistry().registerOre("bookshelf_" + woodTypes[c].toLowerCase(), "bookshelf" + woodTypes[c]);
+                CarvingUtils.getChiselRegistry().registerOre("bookshelf_" + woodType.toLowerCase(), "bookshelf" + woodType);
             }
         }
 
@@ -1988,7 +1984,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.ROCK, "sandstone-scribbles", provider)
-                    .setGroup("sandstone")
+                    .setGroup("sandstoneyellow")
                     .newVariation("scribbles-0")
                     .next("scribbles-1")
                     .next("scribbles-2")

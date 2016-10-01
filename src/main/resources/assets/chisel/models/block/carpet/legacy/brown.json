@@ -1,4 +1,4 @@
 {
-  "model": { "model": "chisel_carpet"},
+  "model": { "model": "chisel:carpet/chisel_carpet"},
   "face":"chisel:wool/legacy_brown.cf"
 }
