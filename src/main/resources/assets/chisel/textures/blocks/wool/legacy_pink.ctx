@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./legacy/pink",
+        "./legacy/pink-ctm"
+    ]
+}

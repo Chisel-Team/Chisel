@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./legacy/green",
+        "./legacy/green-ctm"
+    ]
+}

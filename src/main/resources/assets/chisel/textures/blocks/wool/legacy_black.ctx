@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./legacy/black",
+        "./legacy/black-ctm"
+    ]
+}

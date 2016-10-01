@@ -11,11 +11,11 @@ I cant think of anything else to say, heres the license stuff I guess.
 
 This mod is licensed under GPLv2.
 
-All images under this directory
+All images contained by this directory
 `/src/main/resources/assets/chisel/textures/blocks/bloodMagic/` are created by Yulife, and are used with permission.
 [It is licensed under CC BY-NC-SA 4.0](https://github.com/CyanideX/Unity/blob/master/LICENSE.md).
 
-All images under the following directories
+All images contained by the following directories
 
 - `/src/main/resources/assets/chisel/textures/blocks/andesite/`
 - `/src/main/resources/assets/chisel/textures/blocks/basalt/`
@@ -39,5 +39,6 @@ All images under the following directories
 - `/src/main/resources/assets/chisel/textures/blocks/sandstonered/`
 - `/src/main/resources/assets/chisel/textures/blocks/sandstoneyellow/`
 - `/src/main/resources/assets/chisel/textures/blocks/stone/`
+- `/src/main/resources/assets/chisel/textures/blocks/wool/llama/`
 
 are created by Drullkus, and are used with permission. It is licensed under CC BY-NC-SA 4.0.
