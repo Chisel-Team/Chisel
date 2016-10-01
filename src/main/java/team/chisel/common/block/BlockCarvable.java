@@ -32,6 +32,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.client.ClientUtil;
+import team.chisel.client.render.ModelChisel;
 import team.chisel.client.render.ModelChiselBlock;
 import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.PropertyAnyInteger;
@@ -233,7 +234,10 @@ public class BlockCarvable extends Block implements ICarvable {
     @SideOnly(Side.CLIENT)
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
         IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
-        return ((ModelChiselBlock)model).getModel().getChiselTextures().stream().map(t -> t.getLayer()).collect(Collectors.toList()).contains(layer);
+        if (model instanceof ModelChiselBlock) {
+            return ((ModelChiselBlock) model).getModel().getChiselTextures().stream().map(t -> t.getLayer()).collect(Collectors.toList()).contains(layer);
+        }
+        return super.canRenderInLayer(state, layer);
     }
 
     @Override
