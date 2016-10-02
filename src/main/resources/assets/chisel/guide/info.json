@@ -1,0 +1,6 @@
+{
+  "type": "mod",
+  "name": "Chisel",
+  "authors": ["Drullkus", "minecreatr", "tterrag"],
+  "icon": "chisel:textures/items/chisel_iron.png"
+}
