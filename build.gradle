@@ -55,15 +55,20 @@ repositories {
 	maven { // WAILA
 		url "http://mobiusstrip.eu/maven"
 	}
-	maven { // JEI
-		url "http://dvs1.progwml6.com/files/maven"
-	}
+    maven { // JEI
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+    maven { // Tehnut -- Used for Blood Magic
+        url "http://tehnut.info/maven"
+    }
 }
 
 dependencies {
 	// no WAILA for 1.9
-	//deobfCompile "mcp.mobius.waila:Waila:${waila_version}"
+	// deobfCompile "mcp.mobius.waila:Waila:${waila_version}"
 	deobfCompile "mezz.jei:jei_1.9.4:${jei_version}"
+    deobfCompile "info.amerifrance.guideapi:Guide-API:${guide_version}"
+    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}"
 }
 
 lombok {

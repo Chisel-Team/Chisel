@@ -126,13 +126,25 @@ tile.chisel.basaltextra.marker.desc.1=Marker
 tile.chisel.basaltextra.sunken.desc.1=Sunken
 tile.chisel.basaltextra.poison.desc.1=Poison
 
-tile.chisel.bloodMagic.name=Chiseled Rune
+tile.chisel.bloodMagic.name=Chiseled Blood Rune
 tile.chisel.bloodMagic.bloodRuneArranged.desc.1=Arranged
+tile.chisel.bloodMagic.bloodRuneArranged.desc.2=Safe for Decoration
+tile.chisel.bloodMagic.bloodRuneArranged.desc.3=Usable on Blood Altars
 tile.chisel.bloodMagic.bloodRuneBricks.desc.1=Bricks
+tile.chisel.bloodMagic.bloodRuneBricks.desc.2=Safe for Decoration
+tile.chisel.bloodMagic.bloodRuneBricks.desc.3=Usable on Blood Altars
 tile.chisel.bloodMagic.bloodRuneCarved.desc.1=Carved
+tile.chisel.bloodMagic.bloodRuneCarved.desc.2=Safe for Decoration
+tile.chisel.bloodMagic.bloodRuneCarved.desc.3=Usable on Blood Altars
 tile.chisel.bloodMagic.bloodRuneCarvedRadial.desc.1=Radial
+tile.chisel.bloodMagic.bloodRuneCarvedRadial.desc.2=Safe for Decoration
+tile.chisel.bloodMagic.bloodRuneCarvedRadial.desc.3=Usable on Blood Altars
 tile.chisel.bloodMagic.bloodRuneClassicPanel.desc.1=Panel
+tile.chisel.bloodMagic.bloodRuneClassicPanel.desc.2=Safe for Decoration
+tile.chisel.bloodMagic.bloodRuneClassicPanel.desc.3=Usable on Blood Altars
 tile.chisel.bloodMagic.bloodRuneTiles.desc.1=Tiles
+tile.chisel.bloodMagic.bloodRuneTiles.desc.2=Safe for Decoration
+tile.chisel.bloodMagic.bloodRuneTiles.desc.3=Usable on Blood Altars
 
 tile.chisel.bookshelf_oak.name=Oak Bookshelf
 tile.chisel.bookshelf_oak.rainbow.desc.1=Rainbow

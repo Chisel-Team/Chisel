@@ -195,7 +195,7 @@ public enum Features {
     BLOOD_MAGIC {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "bloodMagic", provider)
+            factory.newBlock(Material.ROCK, "bloodMagic", new ChiselBlockProvider<>(BlockCarvableAltarComponent::new, BlockCarvableAltarComponent.class))
                     .newVariation("bloodRuneArranged")
                     .next("bloodRuneBricks")
                     .next("bloodRuneCarved")
