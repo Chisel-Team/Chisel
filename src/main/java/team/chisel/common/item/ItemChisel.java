@@ -56,7 +56,7 @@ public class ItemChisel extends Item {
     }
     
     @Override
-    public int getMaxDamage(ItemStack stack) {
+    public int getMaxDamage() {
         if (Configurations.allowChiselDamage)
             return type.maxDamage;
         return 0;
