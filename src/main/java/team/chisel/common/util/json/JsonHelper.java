@@ -40,7 +40,12 @@ public class JsonHelper {
             return cFace;
         }
         if (cachedException != null && cachedException.getCause() instanceof FileNotFoundException) {
-            objectCache.put(loc, gson.fromJson(String.format(NORMAL_FACE, loc.getResourcePath().substring(loc.getResourcePath().lastIndexOf('/')).replace(".cf", ".ctx")), JsonObject.class));
+            String path = loc.getResourcePath();
+            if (loc.getResourcePath().indexOf('/') < 0) {
+                path = '/' + path;
+            }
+            path = path.substring(path.lastIndexOf('/')).replace(".cf", ".ctx");
+            objectCache.put(loc, gson.fromJson(String.format(NORMAL_FACE, path), JsonObject.class));
             Chisel.debug("Substituting default face json for missing file " + loc);
             clearException();
             return createFace(loc);
