@@ -112,7 +112,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
             RenderContextList ctxList = ext.getContextList(model);
 
             TLongSet serialized = ctxList.serialized();
-            baked = modelcache.get(new State(state, serialized), () -> createModel(state, model, ctxList));
+            baked = modelcache.get(new State(ext.getClean(), serialized), () -> createModel(state, model, ctxList));
         }
         
         BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
