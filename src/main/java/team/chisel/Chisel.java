@@ -57,7 +57,7 @@ public class Chisel implements Reference {
     @SuppressWarnings("null")
     public static @Nonnull ItemOffsetTool itemOffsetTool;
 
-    public static final boolean debug = true;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
+    public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
     
     public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
     static {
