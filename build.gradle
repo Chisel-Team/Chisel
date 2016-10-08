@@ -118,6 +118,8 @@ processResources {
 
 jar.manifest {
     attributes 'FMLAT': 'chisel_at.cfg'
+    attributes 'FMLCorePlugin': 'team.chisel.common.asm.ChiselCorePlugin'
+	attributes 'FMLCorePluginContainsFMLMod': 'true'
 }
 
 // Create API jar with sources and compiled files

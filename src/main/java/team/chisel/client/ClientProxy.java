@@ -1,8 +1,5 @@
 package team.chisel.client;
 
-import java.lang.reflect.Field;
-
-import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
@@ -11,13 +8,11 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.handler.TooltipHandler;
-import team.chisel.client.render.BlockRendererDispatcherWrapper;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.client.render.ModelLoaderChisel;
 import team.chisel.common.CommonProxy;
@@ -58,13 +53,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
 
-    }
-
-    @Override
-    @SneakyThrows
-    public void postInit() {
-        Field f = ReflectionHelper.findField(Minecraft.class, "field_175618_aM", "blockRenderDispatcher");
-        f.set(Minecraft.getMinecraft(), new BlockRendererDispatcherWrapper(Minecraft.getMinecraft().getBlockRendererDispatcher()));
     }
 
     @Override

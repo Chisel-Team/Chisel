@@ -58,6 +58,7 @@ import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
+import team.chisel.client.ChiselExtendedState;
 import team.chisel.common.block.BlockCarvable;
 
 /**
@@ -72,11 +73,12 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 			super(Lists.newArrayList());
 		}
 
-	    @Override
+	    @SuppressWarnings("deprecation")
+        @Override
 	    @SneakyThrows
 	    public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
 	        Block block = ((ItemBlock) stack.getItem()).getBlock();
-	        return modelcache.get(new State(((BlockCarvable)block).getStateFromMeta(stack.getMetadata()), new TLongHashSet(new long[]{new Random().nextLong() })), () -> createModel(block.getDefaultState(), model, null));
+	        return modelcache.get(new State(block.getStateFromMeta(stack.getMetadata()), new TLongHashSet(new long[]{new Random().nextLong() })), () -> createModel(block.getDefaultState(), model, null));
 	    }
 	}
 	
@@ -91,43 +93,37 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     private Table<BlockRenderLayer, EnumFacing, List<BakedQuad>> faceQuads = Tables.newCustomTable(Maps.newEnumMap(BlockRenderLayer.class), () -> Maps.newEnumMap(EnumFacing.class));
 
     @Getter
-    private ModelChisel model;
+    private @Nonnull ModelChisel model;
     private @Nonnull Overrides overrides = new Overrides();
         
     private static Cache<State, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(500).<State, ModelChiselBlock>build();
     
-    public ModelChiselBlock(ModelChisel model) {
+    public ModelChiselBlock(@Nonnull ModelChisel model) {
         this.model = model;
-    }
-
-    @SneakyThrows
-    @Nonnull
-    public IBakedModel getModel(IBlockState state, @Nonnull BlockPos pos, @Nonnull IBlockAccess blockAccess) {
-
-        List<IBlockRenderType> types = model.getChiselTextures().stream().map(IChiselTexture::getType).collect(Collectors.toList());
-        RenderContextList ctxList = new RenderContextList(types, blockAccess, pos);
-
-        ModelChiselBlock baked;
-        if (state != null) {
-            TLongSet serialized = ctxList.serialized();
-            baked = modelcache.get(new State(state, serialized), () -> createModel(state, model, ctxList));
-        } else {
-            baked = this;
-        }
-        return baked;
     }
     
     @Override
+    @SneakyThrows
     public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
+        ModelChiselBlock baked = this;
+        
+        if (state instanceof ChiselExtendedState) {            
+            ChiselExtendedState ext = (ChiselExtendedState) state;
+            RenderContextList ctxList = ext.getContextList(model);
+
+            TLongSet serialized = ctxList.serialized();
+            baked = modelcache.get(new State(state, serialized), () -> createModel(state, model, ctxList));
+        }
+        
         BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
         if (side != null && layer != null) {
-            return faceQuads.get(layer, side);
+            return baked.faceQuads.get(layer, side);
         } else if (side != null) {
-            return faceQuads.column(side).values().stream().flatMap(List::stream).collect(Collectors.toList());
+            return baked.faceQuads.column(side).values().stream().flatMap(List::stream).collect(Collectors.toList());
         } else if (layer != null) {
-            return genQuads.get(layer);
+            return baked.genQuads.get(layer);
         } else {
-            return Lists.newArrayList(genQuads.values());
+            return Lists.newArrayList(baked.genQuads.values());
         }
     }
 
@@ -163,7 +159,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 
     private static final BlockRenderLayer[] LAYERS = BlockRenderLayer.values();
     
-    private ModelChiselBlock createModel(IBlockState state, ModelChisel model, RenderContextList ctx) {
+    private ModelChiselBlock createModel(IBlockState state, @Nonnull ModelChisel model, RenderContextList ctx) {
         ModelChiselBlock ret = new ModelChiselBlock(model);
         IBakedModel baked = model.getModel(state);
         List<BakedQuad> quads = Lists.newArrayList();
