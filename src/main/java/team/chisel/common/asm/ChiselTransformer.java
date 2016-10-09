@@ -15,19 +15,23 @@ import org.objectweb.asm.tree.VarInsnNode;
 
 import static org.objectweb.asm.Opcodes.*;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.launchwrapper.IClassTransformer;
-import team.chisel.client.ChiselExtendedState;
 
 public class ChiselTransformer implements IClassTransformer {
 
     private static final String BLOCK_CLASS = "net.minecraft.block.Block";
     private static final String EXTENDED_STATE_METHOD_NAME = "getExtendedState";
-    
+    private static final String CAN_RENDER_IN_LAYER_METHOD_NAME = "canRenderInLayer";
+    private static final String CAN_RENDER_IN_LAYER_METHOD_DESC = "(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/util/BlockRenderLayer;)Z";
+
     private static final String WRAPPER_CLASS_NAME = "team/chisel/client/ChiselExtendedState";
     private static final String WRAPPER_CLASS_CONSTRUCTOR_NAME = "<init>";
     private static final String WRAPPER_CLASS_CONSTRUCTOR_DESC = "(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/world/IBlockAccess;Lnet/minecraft/util/math/BlockPos;)V";
+    
+    private static final String CHISEL_METHODS_CLASS_NAME = "team/chisel/common/asm/ChiselCoreMethods";
+    
+    private static final String CHISEL_METHODS_LAYER_NAME = "canRenderInLayer";
+    private static final String CHISEL_METHODS_LAYER_DESC = "(Lnet/minecraft/block/state/IBlockState;Lnet/minecraft/util/BlockRenderLayer;)Z";
     
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
@@ -49,7 +53,7 @@ public class ChiselTransformer implements IClassTransformer {
                         if (next instanceof InsnNode && ((InsnNode)next).getOpcode() == ARETURN) {
                             InsnList toAdd = new InsnList();
                             
-                            // TODO find a better way to do this, might not always be an ALOAD
+                            // FIXME find a better way to do this, might not always be an ALOAD
                             // Grab lvt ID of the current object on the stack
                             AbstractInsnNode load = m.instructions.get(i - 1);
                             int var = ((VarInsnNode)load).var;
@@ -69,6 +73,13 @@ public class ChiselTransformer implements IClassTransformer {
                             break;
                         }
                     }
+                } else if (m.name.equals(CAN_RENDER_IN_LAYER_METHOD_NAME) && m.desc.equals(CAN_RENDER_IN_LAYER_METHOD_DESC)) {
+                    m.instructions.clear(); // FIXME probably bad
+
+                    m.instructions.add(new VarInsnNode(ALOAD, 1));
+                    m.instructions.add(new VarInsnNode(ALOAD, 2));
+                    m.instructions.add(new MethodInsnNode(INVOKESTATIC, CHISEL_METHODS_CLASS_NAME, CHISEL_METHODS_LAYER_NAME, CHISEL_METHODS_LAYER_DESC, false));
+                    m.instructions.add(new InsnNode(IRETURN));
                 }
             }
 
@@ -80,5 +91,4 @@ public class ChiselTransformer implements IClassTransformer {
         
         return basicClass;
     }
-
 }
