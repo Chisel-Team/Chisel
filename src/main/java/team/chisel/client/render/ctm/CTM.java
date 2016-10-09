@@ -308,7 +308,7 @@ public class CTM {
         }
 
         // check that we aren't already connected outwards from this side
-        ret &= !obscuring.isFullCube() || !obscuring.equals(state);
+        ret &= !obscuring.equals(state);
 
         return ret;
     }
