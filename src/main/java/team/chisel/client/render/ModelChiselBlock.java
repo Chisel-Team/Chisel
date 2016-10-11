@@ -2,7 +2,6 @@ package team.chisel.client.render;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -28,7 +27,6 @@ import com.google.common.collect.Table;
 import com.google.common.collect.Tables;
 
 import gnu.trove.set.TLongSet;
-import gnu.trove.set.hash.TLongHashSet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -42,24 +40,19 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformT
 import net.minecraft.client.renderer.block.model.ItemOverrideList;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
-import net.minecraftforge.common.property.IExtendedBlockState;
-import team.chisel.api.block.ICarvable;
-import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.ChiselExtendedState;
-import team.chisel.common.block.BlockCarvable;
 
 /**
  * Model for all chisel blocks
@@ -73,12 +66,12 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 			super(Lists.newArrayList());
 		}
 
-	    @SuppressWarnings("deprecation")
+        @SuppressWarnings("null")
         @Override
 	    @SneakyThrows
 	    public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity) {
 	        Block block = ((ItemBlock) stack.getItem()).getBlock();
-	        return modelcache.get(new State(block.getStateFromMeta(stack.getMetadata()), new TLongHashSet(new long[]{new Random().nextLong() })), () -> createModel(block.getDefaultState(), model, null));
+	        return itemcache.get(Pair.of(stack.getItem(), stack.getItemDamage()), () -> createModel(block.getDefaultState(), model, null));
 	    }
 	}
 	
@@ -96,6 +89,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     private @Nonnull ModelChisel model;
     private @Nonnull Overrides overrides = new Overrides();
         
+    private static Cache<Pair<Item, Integer>, ModelChiselBlock> itemcache = CacheBuilder.newBuilder().expireAfterAccess(10, TimeUnit.SECONDS).<Pair<Item, Integer>, ModelChiselBlock>build();
     private static Cache<State, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(500).<State, ModelChiselBlock>build();
     
     public ModelChiselBlock(@Nonnull ModelChisel model) {
