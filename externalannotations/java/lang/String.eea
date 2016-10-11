@@ -2,3 +2,6 @@ class java/lang/String
 replace
  (Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
  (Ljava/lang/CharSequence;Ljava/lang/CharSequence;)L1java/lang/String;
+substring
+ (II)Ljava/lang/String;
+ (II)L1java/lang/String;
