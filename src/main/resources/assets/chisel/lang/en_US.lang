@@ -155,6 +155,8 @@ tile.chisel.bookshelf_oak.abandoned.desc.1=Abandoned
 tile.chisel.bookshelf_oak.hoarder.desc.1=Hoarder
 tile.chisel.bookshelf_oak.brim.desc.1=Brim
 tile.chisel.bookshelf_oak.historician.desc.1=Historican
+tile.chisel.bookshelf_oak.cans.desc.1=Cans
+tile.chisel.bookshelf_oak.papers.desc.1=Stacks Of Papers
 
 tile.chisel.bookshelf_acacia.name=Acacia Bookshelf
 tile.chisel.bookshelf_acacia.rainbow.desc.1=Rainbow
@@ -165,6 +167,8 @@ tile.chisel.bookshelf_acacia.abandoned.desc.1=Abandoned
 tile.chisel.bookshelf_acacia.hoarder.desc.1=Hoarder
 tile.chisel.bookshelf_acacia.brim.desc.1=Brim
 tile.chisel.bookshelf_acacia.historician.desc.1=Historican
+tile.chisel.bookshelf_acacia.cans.desc.1=Cans
+tile.chisel.bookshelf_acacia.papers.desc.1=Stacks Of Papers
 
 tile.chisel.bookshelf_birch.name=Birch Bookshelf
 tile.chisel.bookshelf_birch.rainbow.desc.1=Rainbow
@@ -175,6 +179,8 @@ tile.chisel.bookshelf_birch.abandoned.desc.1=Abandoned
 tile.chisel.bookshelf_birch.hoarder.desc.1=Hoarder
 tile.chisel.bookshelf_birch.brim.desc.1=Brim
 tile.chisel.bookshelf_birch.historician.desc.1=Historican
+tile.chisel.bookshelf_birch.cans.desc.1=Cans
+tile.chisel.bookshelf_birch.papers.desc.1=Stacks Of Papers
 
 tile.chisel.bookshelf_darkoak.name=Dark Oak Bookshelf
 tile.chisel.bookshelf_darkoak.rainbow.desc.1=Rainbow
@@ -185,6 +191,8 @@ tile.chisel.bookshelf_darkoak.abandoned.desc.1=Abandoned
 tile.chisel.bookshelf_darkoak.hoarder.desc.1=Hoarder
 tile.chisel.bookshelf_darkoak.brim.desc.1=Brim
 tile.chisel.bookshelf_darkoak.historician.desc.1=Historican
+tile.chisel.bookshelf_darkoak.cans.desc.1=Cans
+tile.chisel.bookshelf_darkoak.papers.desc.1=Stacks Of Papers
 
 tile.chisel.bookshelf_jungle.name=Jungle Bookshelf
 tile.chisel.bookshelf_jungle.rainbow.desc.1=Rainbow
@@ -195,6 +203,8 @@ tile.chisel.bookshelf_jungle.abandoned.desc.1=Abandoned
 tile.chisel.bookshelf_jungle.hoarder.desc.1=Hoarder
 tile.chisel.bookshelf_jungle.brim.desc.1=Brim
 tile.chisel.bookshelf_jungle.historician.desc.1=Historican
+tile.chisel.bookshelf_jungle.cans.desc.1=Cans
+tile.chisel.bookshelf_jungle.papers.desc.1=Stacks Of Papers
 
 tile.chisel.bookshelf_spruce.name=Spruce Bookshelf
 tile.chisel.bookshelf_spruce.rainbow.desc.1=Rainbow
@@ -205,6 +215,8 @@ tile.chisel.bookshelf_spruce.abandoned.desc.1=Abandoned
 tile.chisel.bookshelf_spruce.hoarder.desc.1=Hoarder
 tile.chisel.bookshelf_spruce.brim.desc.1=Brim
 tile.chisel.bookshelf_spruce.historician.desc.1=Historican
+tile.chisel.bookshelf_spruce.cans.desc.1=Cans
+tile.chisel.bookshelf_spruce.papers.desc.1=Stacks Of Papers
 
 tile.chisel.bricks.name=Bricks
 tile.chisel.bricks.cracked.desc.1=Cracked

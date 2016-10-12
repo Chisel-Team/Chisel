@@ -1,0 +1,8 @@
+{
+	"type":"CTMH",
+	"textures":[
+        "minecraft:blocks/planks_oak",
+        "./cans"
+    ],
+    "layer":"CUTOUT"
+}
