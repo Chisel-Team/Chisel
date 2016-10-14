@@ -265,7 +265,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @Deprecated
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        return blockState != blockAccess.getBlockState(pos.offset(side));
+        return super.shouldSideBeRendered(blockState, blockAccess, pos, side) && blockState != blockAccess.getBlockState(pos.offset(side));
     }
     
     @Override
