@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:bookshelf_acacia/cans.cf",
+  "overrides":{
+    "UP":  "minecraft:blocks/planks_acacia.cf",
+    "DOWN":"minecraft:blocks/planks_acacia.cf"
+  }
+}

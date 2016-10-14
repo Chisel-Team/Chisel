@@ -223,6 +223,8 @@ public enum Features {
                         .next("hoarder")
                         .next("brim")
                         .next("historician")
+                        .next("cans")
+                        .next("papers")
                         .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
 
                 CarvingUtils.getChiselRegistry().registerOre("bookshelf_" + woodType.toLowerCase(), "bookshelf" + woodType);
