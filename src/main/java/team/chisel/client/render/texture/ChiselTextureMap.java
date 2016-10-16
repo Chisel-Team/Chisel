@@ -97,14 +97,14 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
                 if (side.getAxis().isVertical()) {
                     // DOWN || UP
                     tx = x % tex.xSize;
-                    ty = z % tex.ySize;
+                    ty = (side.getFrontOffsetY() * z + 1) % tex.ySize;
                 } else if (side.getAxis() == Axis.Z) {
                     // NORTH || SOUTH
                     tx = x % tex.xSize;
                     ty = -y % tex.ySize;
                 } else {
                     // WEST || EAST
-                    tx = z % tex.xSize;
+                    tx = (z + 1) % tex.xSize;
                     ty = -y % tex.ySize;
                 }
 
