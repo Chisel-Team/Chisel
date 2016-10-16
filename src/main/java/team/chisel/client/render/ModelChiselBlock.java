@@ -101,7 +101,6 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     @SneakyThrows
     public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
         ModelChiselBlock baked = this;
-        modelcache.invalidateAll();
         
         if (state instanceof ChiselExtendedState) {            
             ChiselExtendedState ext = (ChiselExtendedState) state;
