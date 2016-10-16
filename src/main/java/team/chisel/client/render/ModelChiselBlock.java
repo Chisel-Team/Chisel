@@ -101,6 +101,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     @SneakyThrows
     public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
         ModelChiselBlock baked = this;
+        modelcache.invalidateAll();
         
         if (state instanceof ChiselExtendedState) {            
             ChiselExtendedState ext = (ChiselExtendedState) state;
@@ -109,8 +110,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
             TLongSet serialized = ctxList.serialized();
             baked = modelcache.get(new State(ext.getClean(), serialized), () -> createModel(state, model, ctxList));
         } else if (state != null)  {
-            baked = modelcache.get(new State(state, new TLongHashSet()), () -> createModel(state, model, null));
-
+            baked = modelcache.get(new State(state, null), () -> createModel(state, model, null));
         }
         
         BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
