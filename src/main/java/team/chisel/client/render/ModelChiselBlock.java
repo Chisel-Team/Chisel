@@ -11,6 +11,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
+import gnu.trove.set.hash.TLongHashSet;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.cache.Cache;
@@ -107,6 +108,9 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 
             TLongSet serialized = ctxList.serialized();
             baked = modelcache.get(new State(ext.getClean(), serialized), () -> createModel(state, model, ctxList));
+        } else if (state != null)  {
+            baked = modelcache.get(new State(state, new TLongHashSet()), () -> createModel(state, model, null));
+
         }
         
         BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
