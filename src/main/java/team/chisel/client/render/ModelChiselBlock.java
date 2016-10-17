@@ -11,6 +11,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
+import gnu.trove.set.hash.TLongHashSet;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.cache.Cache;
