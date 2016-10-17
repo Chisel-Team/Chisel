@@ -43,12 +43,15 @@ public class SlotChiselSelection extends Slot {
             player.inventory.setItemStack(null);
 
             if (crafted != null) {
-                int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
-                int toCraft = Math.min(crafted.stackSize, damageLeft);
-                chisel.damageItem(toCraft, player);
-                if (chisel.stackSize <= 0) {
-                    container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), null);
-                    container.onChiselBroken();
+                int toCraft = crafted.stackSize;
+                if (chisel.isItemStackDamageable()) {
+                    int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
+                    toCraft = Math.min(toCraft, damageLeft);
+                    chisel.damageItem(toCraft, player);
+                    if (chisel.stackSize <= 0) {
+                        container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), null);
+                        container.onChiselBroken();
+                    }
                 }
                 player.inventory.setItemStack(new ItemStack(itemstack.getItem(), toCraft, itemstack.getItemDamage()));
                 crafted.stackSize -= toCraft;
