@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import lombok.Getter;
 import lombok.SneakyThrows;
+import lombok.experimental.Accessors;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
@@ -44,6 +46,10 @@ public class ModelChisel implements IModel {
     
     private String face;
     private Map<EnumFacing, String> overrides = Maps.newHashMap();
+    
+    @Getter
+    @Accessors(fluent = true)
+    private boolean ignoreStates;
     
     private transient IChiselFace faceObj;
     private transient Map<EnumFacing, IChiselFace> overridesObj = new EnumMap<>(EnumFacing.class);

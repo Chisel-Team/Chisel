@@ -2,13 +2,19 @@ package team.chisel.client.render.ctx;
 
 import java.util.EnumMap;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.lang3.ArrayUtils;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.client.render.ConnectionLocations;
+import team.chisel.client.render.ModelChiselBlock;
 import team.chisel.client.render.ctm.CTM;
 
 import static team.chisel.client.render.ConnectionLocations.*;
@@ -21,9 +27,9 @@ public class CTMBlockRenderContext implements IBlockRenderContext {
 
     private long data;
 
-    public CTMBlockRenderContext(IBlockAccess world, BlockPos pos) {
+    public CTMBlockRenderContext(@Nonnull IBlockState state, IBlockAccess world, BlockPos pos) {
         for (EnumFacing face : EnumFacing.VALUES) {
-            CTM ctm = createCTM();
+            CTM ctm = createCTM(state);
             ctm.createSubmapIndices(world, pos, face);
             ctmData.put(face, ctm);
         }
@@ -33,14 +39,15 @@ public class CTMBlockRenderContext implements IBlockRenderContext {
     public CTMBlockRenderContext(long data){
         this.data = data;
         for(EnumFacing face : EnumFacing.VALUES){
-            CTM ctm = createCTM();
+            CTM ctm = createCTM(null); // FIXME
             ctm.createSubmapIndices(data, face);
             ctmData.put(face, ctm);
         }
     }
     
-    protected CTM createCTM() {
-        return CTM.getInstance();
+    protected CTM createCTM(@Nonnull IBlockState state) {
+        ModelChiselBlock model = (ModelChiselBlock) Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
+        return CTM.getInstance().ignoreStates(model.getModel().ignoreStates());
     }
 
     public CTM getCTM(EnumFacing face) {

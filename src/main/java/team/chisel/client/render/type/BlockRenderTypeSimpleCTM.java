@@ -1,5 +1,6 @@
 package team.chisel.client.render.type;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
@@ -20,12 +21,12 @@ public class BlockRenderTypeSimpleCTM extends BlockRenderTypeCTM {
     }
 
     @Override
-    public CTMBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
-        return new CTMBlockRenderContext(world, pos) {
+    public CTMBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return new CTMBlockRenderContext(state, world, pos) {
 
             @Override
-            protected CTM createCTM() {
-                CTM ctm = super.createCTM();
+            protected CTM createCTM(IBlockState state) {
+                CTM ctm = super.createCTM(state);
 
                 ctm.disableObscuredFaceCheck = Optional.of(true);
 

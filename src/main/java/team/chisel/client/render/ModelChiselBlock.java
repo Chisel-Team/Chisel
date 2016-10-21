@@ -104,7 +104,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         
         if (state instanceof ChiselExtendedState) {            
             ChiselExtendedState ext = (ChiselExtendedState) state;
-            RenderContextList ctxList = ext.getContextList(model);
+            RenderContextList ctxList = ext.getContextList(ext.getClean(), model);
 
             TLongSet serialized = ctxList.serialized();
             baked = modelcache.get(new State(ext.getClean(), serialized), () -> createModel(state, model, ctxList));

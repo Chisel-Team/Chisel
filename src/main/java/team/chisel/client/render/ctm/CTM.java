@@ -2,6 +2,9 @@ package team.chisel.client.render.ctm;
 
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -113,6 +116,10 @@ public class CTM {
 	protected TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
 	protected EnumMap<Dir, Boolean> connectionMap = Maps.newEnumMap(Dir.class);
 	protected int[] submapCache;
+	
+	@Setter
+	@Accessors(fluent = true, chain = true)
+	protected boolean ignoreStates;
 
 	protected CTM() {
 		for (Dir dir : Dir.VALUES) {
@@ -299,8 +306,7 @@ public class CTM {
             return false;
         }
 
-        // TODO VERY TEMPORARY
-        boolean ret = con == state;
+        boolean ret = ignoreStates ? con.getBlock() == state.getBlock() : con == state;
 
         // no block obscuring this face
         if (obscuring == null) {

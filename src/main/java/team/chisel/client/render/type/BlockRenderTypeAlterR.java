@@ -1,5 +1,6 @@
 package team.chisel.client.render.type;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.*;
@@ -21,7 +22,7 @@ public class BlockRenderTypeAlterR implements IBlockRenderType {
     }
 
     @Override
-    public IBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
+    public IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos) {
         return new BlockRenderContextPosition(pos);
     }
 

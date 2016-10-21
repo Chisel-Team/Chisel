@@ -68,9 +68,9 @@ public class ChiselExtendedState implements IExtendedBlockState {
     }
     
     @SuppressWarnings("null")
-    public RenderContextList getContextList(ModelChisel model) {
+    public RenderContextList getContextList(IBlockState state, ModelChisel model) {
         if (ctxCache == null) {
-            ctxCache = new RenderContextList(model.getChiselTextures().stream().map(IChiselTexture::getType).collect(Collectors.toList()), world, pos);
+            ctxCache = new RenderContextList(state, model.getChiselTextures().stream().map(IChiselTexture::getType).collect(Collectors.toList()), world, pos);
         }
         return ctxCache;
     }

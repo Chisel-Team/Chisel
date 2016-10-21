@@ -1,18 +1,18 @@
 package team.chisel.api.render;
 
-import gnu.trove.set.TLongSet;
-import gnu.trove.set.hash.TLongHashSet;
-
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.google.common.collect.Maps;
+
+import gnu.trove.set.TLongSet;
+import gnu.trove.set.hash.TLongHashSet;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-
-import com.google.common.collect.Maps;
 
 /**
  * List of IBlockRenderContext's
@@ -20,14 +20,16 @@ import com.google.common.collect.Maps;
 @ParametersAreNonnullByDefault
 public class RenderContextList {
 
+    private final IBlockState state;
+    
     private final Map<IBlockRenderType, IBlockRenderContext> contextMap = Maps.newIdentityHashMap();
     private final TLongSet serialized = new TLongHashSet();
 
-    public RenderContextList() {}
-
-    public RenderContextList(List<IBlockRenderType> types, IBlockAccess world, BlockPos pos) {
+    public RenderContextList(IBlockState state, List<IBlockRenderType> types, IBlockAccess world, BlockPos pos) {
+        this.state = state;
+        
         for (IBlockRenderType type : types) {
-            IBlockRenderContext ctx = type.getBlockRenderContext(world, pos);
+            IBlockRenderContext ctx = type.getBlockRenderContext(state, world, pos);
             if (ctx != null) {
                 contextMap.put(type, ctx);
             }

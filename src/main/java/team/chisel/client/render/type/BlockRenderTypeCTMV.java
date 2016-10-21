@@ -1,5 +1,6 @@
 package team.chisel.client.render.type;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
@@ -19,7 +20,7 @@ public class BlockRenderTypeCTMV implements IBlockRenderType {
     }
     
     @Override
-    public CTMVBlockRenderContext getBlockRenderContext(IBlockAccess world, BlockPos pos) {
+    public CTMVBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos) {
         return new CTMVBlockRenderContext(world, pos);
     }
     
