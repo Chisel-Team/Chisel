@@ -1,8 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./pink",
-        "./pink-ctm"
-    ],
-    "fullbright":true
-}

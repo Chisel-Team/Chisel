@@ -1,8 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./yellow",
-        "./yellow-ctm"
-    ],
-    "fullbright":true
-}

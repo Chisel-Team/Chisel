@@ -1,0 +1,8 @@
+{
+	"type":"CTM",
+	"textures":[
+		"./antiblock",
+		"./antiblock_ctm"
+	],
+	"layer":"CUTOUT"
+}
