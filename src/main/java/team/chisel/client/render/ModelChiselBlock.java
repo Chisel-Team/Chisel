@@ -209,4 +209,10 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     public Pair<? extends IPerspectiveAwareModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
         return Pair.of(this, TRANSFORMS.getOrDefault(cameraTransformType, DEFAULT_TRANSFORM).getMatrix());
     }
+
+    public static void invalidateCaches()
+    {
+        itemcache.invalidateAll();
+        modelcache.invalidateAll();
+    }
 }
