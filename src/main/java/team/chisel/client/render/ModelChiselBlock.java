@@ -186,7 +186,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         }
     }
 
-    private static TRSRTransformation get(float tx, float ty, float tz, float ax, float ay, float az, float s) {
+    private static @Nonnull TRSRTransformation get(float tx, float ty, float tz, float ax, float ay, float az, float s) {
         return new TRSRTransformation(
             new Vector3f(tx / 16, ty / 16, tz / 16),
             TRSRTransformation.quatFromXYZDegrees(new Vector3f(ax, ay, az)),
@@ -201,6 +201,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
             .put(TransformType.FIRST_PERSON_RIGHT_HAND,     get(0, 0, 0, 0, 45, 0, 0.4f))
             .put(TransformType.FIRST_PERSON_LEFT_HAND,      get(0, 0, 0, 0, 225, 0, 0.4f))
             .put(TransformType.GROUND,                      get(0, 2, 0, 0, 0, 0, 0.25f))
+            .put(TransformType.FIXED,                       get(0, 0, 0, 0, 0, 0, 0.5f))
             .build();
     
     private static final TRSRTransformation DEFAULT_TRANSFORM = get(0, 0, 0, 0, 0, 0, 1);
