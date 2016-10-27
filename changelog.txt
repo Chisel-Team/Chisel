@@ -1,3 +1,10 @@
+0.0.7:
+New
+- Dropped 1.9 Support
+- Lots of improvements to the rendering backend for easier usage by resource packs and mods
+Fixes
+- Improve performance even more!
+
 0.0.6:
 New
 - Hitech Chisel
