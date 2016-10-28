@@ -71,7 +71,7 @@ public class ModelLoaderChisel implements ICustomModelLoader {
             if (ele != null) {
                 return ele;
             }
-        } catch (IOException e) {}
+        } catch (Exception e) {}
         
         return JsonNull.INSTANCE;
     }
