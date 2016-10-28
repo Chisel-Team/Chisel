@@ -337,7 +337,7 @@ public enum Features {
 
                 //CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
 
-                factory.newBlock(Material.GLASS, "carpet_" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvableCarpet::new, BlockCarvableCarpet.class)).opaque(false)
+                factory.newBlock(Material.CARPET, "carpet_" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvableCarpet::new, BlockCarvableCarpet.class)).opaque(false)
                         .setParentFolder("wool")
                         .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
                         .next("llama_"+(dyeColors[c].toLowerCase()))
@@ -2425,7 +2425,7 @@ public enum Features {
 
                 //CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
 
-                factory.newBlock(Material.GLASS, "wool_" + (dyeColors[c].toLowerCase()), provider)
+                factory.newBlock(Material.CLOTH, "wool_" + (dyeColors[c].toLowerCase()), provider)
                         .setParentFolder("wool")
                         .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
                         .next("llama_"+(dyeColors[c].toLowerCase()))
