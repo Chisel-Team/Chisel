@@ -3,6 +3,8 @@ item.chisel.chisel_diamond.name=Diamond Chisel
 item.chisel.chisel_hitech.name=iChisel
 item.chisel.offsettool.name=Ender Offset Wand
 
+chisel.spawnwither=A Chisel can be a dangerous thing...
+
 item.chisel.chisel.desc.gui=Right-Click to open GUI
 item.chisel.chisel.desc.lc1=§8§mLeft click to chisel blocks in world§r§7 Not Implemented Yet!
 item.chisel.chisel.desc.lc2=Can target a block by leaving it in the inventory
