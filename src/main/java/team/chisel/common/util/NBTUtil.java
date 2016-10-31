@@ -26,7 +26,11 @@ public class NBTUtil {
     }
 
     public static @Nonnull NBTTagCompound getChiselTag(@Nonnull ItemStack stack) {
-        return getTag(stack).getCompoundTag(KEY_TAG);
+        NBTTagCompound tag = getTag(stack);
+        if (!tag.hasKey(KEY_TAG)) {
+            tag.setTag(KEY_TAG, new NBTTagCompound());
+        }
+        return tag.getCompoundTag(KEY_TAG);
     }
     
     public static void setChiselTag(@Nonnull ItemStack stack, @Nullable NBTTagCompound tag) {

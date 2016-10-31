@@ -33,6 +33,7 @@ import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
+import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.item.ItemOffsetTool;
@@ -98,6 +99,7 @@ public class Chisel implements Reference {
         GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
         
         MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(ChiselController.class);
 
         GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
         MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);

@@ -16,6 +16,7 @@ import net.minecraft.util.EnumHand;
 import team.chisel.Chisel;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.carving.Carving;
+import team.chisel.common.util.NBTUtil;
 
 @Getter
 @ParametersAreNonnullByDefault
@@ -41,7 +42,7 @@ public class ContainerChisel extends Container {
         addSlots();
 
         if (chisel != null && chisel.getTagCompound() != null) {
-            ItemStack stack = ItemStack.loadItemStackFromNBT(chisel.getTagCompound().getCompoundTag("chiselTarget"));
+            ItemStack stack = NBTUtil.getChiselTarget(chisel);
             inventoryChisel.setInventorySlotContents(getInventoryChisel().size, stack);
         }
         
@@ -154,14 +155,7 @@ public class ContainerChisel extends Container {
     }
 
     public void onChiselSlotChanged() {
-        if (!chisel.hasTagCompound()) {
-            chisel.setTagCompound(new NBTTagCompound());
-        }
-        NBTTagCompound targetTag = new NBTTagCompound();
-        if (inventoryChisel.getStackInSpecialSlot() != null) {
-            inventoryChisel.getStackInSpecialSlot().writeToNBT(targetTag);
-        }
-        chisel.getTagCompound().setTag("chiselTarget", targetTag);
+        NBTUtil.setChiselTarget(chisel, inventoryChisel.getStackInSpecialSlot());
     }
 
     public void onChiselBroken() {
