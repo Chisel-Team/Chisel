@@ -27,8 +27,12 @@ public class ClientUtil {
             10, -45, 170)), new Vector3f(0.375f, 0.375f, 0.375f), null);
     public static final Matrix4f DEFAULT_BLOCK_THIRD_PERSON_MATRIX = DEFAULT_BLOCK_THIRD_PERSON_TRANSOFRM.getMatrix();
 
-    public static void playSound(World world, int x, int y, int z, String sound, SoundCategory category) {
-        Minecraft.getMinecraft().theWorld.playSound(new BlockPos(x, y, z), new SoundEvent(new ResourceLocation(sound)), category, 0.3f + 0.7f * rand.nextFloat(), 0.6f + 0.4f * rand.nextFloat(), true);
+    public static void playSound(World world, BlockPos pos, String sound) {
+        playSound(world, pos, sound, SoundCategory.BLOCKS);
+    }
+    
+    public static void playSound(World world, BlockPos pos, String sound, SoundCategory category) {
+        Minecraft.getMinecraft().theWorld.playSound(pos, new SoundEvent(new ResourceLocation(sound)), category, 0.3f + 0.7f * rand.nextFloat(), 0.6f + 0.4f * rand.nextFloat(), true);
     }
 
     public static void addHitEffects(World world, BlockPos pos, EnumFacing side) {
