@@ -68,27 +68,27 @@ public class PacketChiselButton implements IMessage {
             for (int i : slots) {
                 Optional.ofNullable(player.inventory.getStackInSlot(i)).ifPresent(s -> {
                     ItemStack stack = target.copy();
-                    int toCraft = s.stackSize;
+                    int toCraft = s.func_190916_E();
                     if (chisel.isItemStackDamageable()) {
                         int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
                         toCraft = Math.min(toCraft, damageLeft);
-                        stack.stackSize = toCraft;
+                        stack.func_190920_e(toCraft);
                         chisel.damageItem(toCraft, player);
                     }
                     player.inventory.setInventorySlotContents(i, stack);
-                    if (chisel.stackSize <= 0) {
-                        container.getInventoryChisel().getStackInSpecialSlot().stackSize = s.stackSize - toCraft;
+                    if (chisel.func_190916_E() <= 0) {
+                        container.getInventoryChisel().getStackInSpecialSlot().func_190920_e(s.func_190916_E() - toCraft);
                         player.inventory.setInventorySlotContents(chiselSlot, null);
-                        if (s.stackSize > toCraft) {
+                        if (s.func_190916_E() > toCraft) {
                             ItemStack remainder = s.copy();
-                            remainder.stackSize = s.stackSize - toCraft;
+                            remainder.func_190920_e(s.func_190916_E() - toCraft);
                             if (!player.inventory.addItemStackToInventory(remainder)) {
                                 player.dropItem(remainder, false);
                             }
                         }
                     }
                 });
-                if (chisel.stackSize < 1) {
+                if (chisel.func_190916_E() < 1) {
                     return;
                 }
             }

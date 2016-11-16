@@ -59,7 +59,7 @@ public class DebugHandler {
         Minecraft mc = Minecraft.getMinecraft();
         if (mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == Type.BLOCK && mc.objectMouseOver.getBlockPos() != null) {
             BlockPos pos = mc.objectMouseOver.getBlockPos();
-            return mc.theWorld.getBlockState(pos).getBlock().getExtendedState(mc.theWorld.getBlockState(pos), mc.theWorld, pos);
+            return mc.world.getBlockState(pos).getBlock().getExtendedState(mc.world.getBlockState(pos), mc.world, pos);
         }
         return null;
     }

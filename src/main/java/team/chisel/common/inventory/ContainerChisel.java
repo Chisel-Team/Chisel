@@ -124,7 +124,7 @@ public class ContainerChisel extends Container {
                 if (slotIdx < getInventoryChisel().size + 1 && itemstack1 != null) {
                     ItemStack tempStack = entity.inventory.getItemStack();
                     entity.inventory.setItemStack(itemstack1.copy());
-                    slot.onPickupFromSlot(entity, itemstack1);
+                    slot.func_190901_a(entity, itemstack1);
                     itemstack1 = entity.inventory.getItemStack();
                     entity.inventory.setItemStack(tempStack);
                 }
@@ -135,18 +135,18 @@ public class ContainerChisel extends Container {
             }
             slot.onSlotChange(itemstack1, itemstack);
 
-            if (itemstack1.stackSize == 0) {
+            if (itemstack1.func_190916_E() == 0) {
                 slot.putStack((ItemStack) null);
             } else {
                 slot.onSlotChanged();
             }
-            if (itemstack1.stackSize == itemstack.stackSize) {
+            if (itemstack1.func_190916_E() == itemstack.func_190916_E()) {
                 return null;
             }
             if (slotIdx >= getInventoryChisel().size) {
-                slot.onPickupFromSlot(entity, itemstack1);
+                slot.func_190901_a(entity, itemstack1);
             }
-            if (itemstack1.stackSize == 0) {
+            if (itemstack1.func_190916_E() == 0) {
                 slot.putStack(null);
                 return null;
             }
@@ -159,7 +159,7 @@ public class ContainerChisel extends Container {
     }
 
     public void onChiselBroken() {
-        if (!getInventoryPlayer().player.worldObj.isRemote) {
+        if (!getInventoryPlayer().player.world.isRemote) {
             getInventoryPlayer().player.dropItem(inventoryChisel.getStackInSpecialSlot(), false);
         }
     }

@@ -81,7 +81,7 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
                 EnumFacing side = quad.getFace();
                 @Nonnull BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition) context).getPosition();
                 
-                IOffsetData data = ChunkData.getOffsetForChunk(Minecraft.getMinecraft().theWorld, pos);
+                IOffsetData data = ChunkData.getOffsetForChunk(Minecraft.getMinecraft().world, pos);
                 if (data != null) {
                     pos.add(data.getOffset());
                 }

@@ -38,7 +38,7 @@ public class NBTUtil {
     }
 
     public static @Nullable ItemStack getChiselTarget(@Nonnull ItemStack stack) {
-        return ItemStack.loadItemStackFromNBT(getChiselTag(stack).getCompoundTag(KEY_TARGET));
+        return new ItemStack(getChiselTag(stack).getCompoundTag(KEY_TARGET));
     }
 
     public static void setChiselTarget(@Nonnull ItemStack chisel, @Nullable ItemStack target) {

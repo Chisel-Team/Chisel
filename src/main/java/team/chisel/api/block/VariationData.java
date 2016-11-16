@@ -1,6 +1,7 @@
 package team.chisel.api.block;
 
 import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AllArgsConstructor;
 import net.minecraft.item.ItemStack;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
  * Represents data about a specific variation
  */
 @AllArgsConstructor
+@ParametersAreNonnullByDefault
 public class VariationData {
 
     /**

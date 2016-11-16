@@ -1,23 +1,20 @@
 package team.chisel.common.util;
 
+import java.util.List;
+
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.SkeletonType;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import team.chisel.common.item.ItemChisel;
-
-import java.util.List;
 
 /**
  * Just some little things for chiseling entities
@@ -39,31 +36,21 @@ public enum EntityChiseling {
                 event.setCanceled(true);
 
             }
-            else if (event.getTarget() instanceof EntitySkeleton) {
-                EntitySkeleton spooky = (EntitySkeleton) event.getTarget();
-                if (spooky.func_189771_df() == SkeletonType.WITHER){
-                    List<EntitySkeleton> scary = spooky.getEntityWorld().getEntitiesWithinAABB(EntitySkeleton.class, spooky.getEntityBoundingBox().expandXyz(3));
-                    int count = 0;
-                    for (EntitySkeleton skeleton : scary){
-                        if (skeleton.func_189771_df() == SkeletonType.WITHER){
-                            count++;
-                        }
+            else if (event.getTarget() instanceof EntityWitherSkeleton) {
+                EntityWitherSkeleton spooky = (EntityWitherSkeleton) event.getTarget();
+                List<EntityWitherSkeleton> scary = spooky.getEntityWorld().getEntitiesWithinAABB(EntityWitherSkeleton.class, spooky.getEntityBoundingBox().expandXyz(3));
+                if (scary.size() >= 3) {
+                    BlockPos pos = spooky.getPosition();
+                    for (EntityWitherSkeleton skeleton : scary) {
+                        skeleton.setHealth(0);
                     }
-                    if (count >= 3){
-                        BlockPos pos = spooky.getPosition();
-                        for (EntitySkeleton skeleton : scary){
-                            if (skeleton.func_189771_df() == SkeletonType.WITHER){
-                                skeleton.setHealth(0);
-                            }
-                        }
-                        spooky.getEntityWorld().spawnEntityInWorld(new EntityLightningBolt(spooky.getEntityWorld(), pos.getX(), pos.getY(), pos.getZ(), true));
-                        EntityWither wither = new EntityWither(event.getEntityPlayer().getEntityWorld());
-                        wither.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 0.55D, pos.getZ() + 0.5D, 0.0f, 0.0f);
-                        wither.renderYawOffset = 0.0f;
-                        wither.ignite();
-                        event.getEntityPlayer().getEntityWorld().spawnEntityInWorld(new EntityWither(spooky.getEntityWorld()));
-                        event.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("chisel.spawnwither").setStyle(new Style().setColor(TextFormatting.RED)));
-                    }
+                    spooky.getEntityWorld().spawnEntityInWorld(new EntityLightningBolt(spooky.getEntityWorld(), pos.getX(), pos.getY(), pos.getZ(), true));
+                    EntityWither wither = new EntityWither(event.getEntityPlayer().getEntityWorld());
+                    wither.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 0.55D, pos.getZ() + 0.5D, 0.0f, 0.0f);
+                    wither.renderYawOffset = 0.0f;
+                    wither.ignite();
+                    event.getEntityPlayer().getEntityWorld().spawnEntityInWorld(new EntityWither(spooky.getEntityWorld()));
+                    event.getEntityPlayer().addChatMessage(new TextComponentTranslation("chisel.spawnwither").setStyle(new Style().setColor(TextFormatting.RED)));
                 }
             }
         }

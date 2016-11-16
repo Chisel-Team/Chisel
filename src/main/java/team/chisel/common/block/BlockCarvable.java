@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
@@ -194,10 +195,9 @@ public class BlockCarvable extends Block implements ICarvable {
         return new BlockPos(x, y, z);
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, List list) {
+    public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
         int curIndex = 0;
         for (VariationData var : this.variations) {
             if (var == null) {
@@ -268,10 +268,11 @@ public class BlockCarvable extends Block implements ICarvable {
         return super.shouldSideBeRendered(blockState, blockAccess, pos, side) && blockState != blockAccess.getBlockState(pos.offset(side));
     }
     
-    @Override
-    public boolean isVisuallyOpaque() {
-        return true;
-    }
+    // TODO 1.11 did this change to something else? 
+//    @Override
+//    public boolean isVisuallyOpaque() {
+//        return true;
+//    }
 
     @Override
     public int quantityDropped(Random random) {

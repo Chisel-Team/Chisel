@@ -1,6 +1,9 @@
 package team.chisel.common.inventory;
 
 import java.util.List;
+import java.util.Optional;
+
+import javax.annotation.Nonnull;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,8 +39,8 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public ItemStack getStackInSlot(int var1) {
-        return inventory[var1];
+    public @Nonnull ItemStack getStackInSlot(int var1) {
+        return Optional.ofNullable(inventory[var1]).orElse(ItemStack.field_190927_a);
     }
 
     public void updateInventoryState(int slot) {
@@ -45,10 +48,10 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public ItemStack decrStackSize(int slot, int amount) {
+    public @Nonnull ItemStack decrStackSize(int slot, int amount) {
         if (this.inventory[slot] != null) {
             ItemStack stack;
-            if (this.inventory[slot].stackSize <= amount) {
+            if (this.inventory[slot].func_190916_E() <= amount) {
                 stack = this.inventory[slot];
                 this.inventory[slot] = null;
                 updateInventoryState(slot);
@@ -56,7 +59,7 @@ public class InventoryChiselSelection implements IInventory {
             } else {
                 stack = this.inventory[slot].splitStack(amount);
 
-                if (this.inventory[slot].stackSize == 0)
+                if (this.inventory[slot].func_190916_E() == 0)
                     this.inventory[slot] = null;
 
                 updateInventoryState(slot);
@@ -68,7 +71,7 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public ItemStack removeStackFromSlot(int slot){
+    public @Nonnull ItemStack removeStackFromSlot(int slot){
         ItemStack stack = getStackInSlot(slot);
 
         if (stack == null)
@@ -80,7 +83,7 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public String getName() {
+    public @Nonnull String getName() {
         return "container.chisel";
     }
 
@@ -100,7 +103,7 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public ITextComponent getDisplayName() {
+    public @Nonnull ITextComponent getDisplayName() {
         return new TextComponentTranslation(getName());
     }
 
@@ -197,6 +200,11 @@ public class InventoryChiselSelection implements IInventory {
     @Override
     public void closeInventory(EntityPlayer var1) {
 
+    }
+
+    @Override
+    public boolean func_191420_l() {
+        return false;
     }
 
 }

@@ -96,7 +96,7 @@ public class ItemOffsetTool extends Item {
     }
 
     @Override
-    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         IBlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof ICarvable) {
             if (world.isRemote) {
@@ -108,7 +108,7 @@ public class ItemOffsetTool extends Item {
                 PerChunkData.INSTANCE.chunkModified(world.getChunkFromBlockCoords(pos), DATA_KEY);
             }
         }
-        return super.onItemUse(stack, player, world, pos, hand, facing, hitX, hitY, hitZ);
+        return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
     }
 
     public EnumFacing getMoveDir(EnumFacing face, double xCoord, double yCoord, double zCoord) {
@@ -138,7 +138,7 @@ public class ItemOffsetTool extends Item {
         RayTraceResult mop = event.getTarget();
         EntityPlayer player = event.getPlayer();
 
-        if (mop.typeOfHit == Type.BLOCK && (canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.MAIN_HAND, mop.sideHit) || canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.OFF_HAND, mop.sideHit))) {
+        if (mop.typeOfHit == Type.BLOCK && (canOffset(player, player.world, mop.getBlockPos(), EnumHand.MAIN_HAND, mop.sideHit) || canOffset(player, player.world, mop.getBlockPos(), EnumHand.OFF_HAND, mop.sideHit))) {
 
             EnumFacing face = mop.sideHit;
             BlockPos pos = mop.getBlockPos();

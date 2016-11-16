@@ -150,12 +150,13 @@ public class ItemChisel extends Item implements IChiselItem {
 
     // TODO implement ChiselController
     @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-        if (!worldIn.isRemote) {
-            playerIn.openGui(Chisel.instance, 0, worldIn, hand.ordinal(), 0, 0);
-            return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        ItemStack stack = player.getHeldItem(hand);
+        if (!world.isRemote) {
+            player.openGui(Chisel.instance, 0, world, hand.ordinal(), 0, 0);
+            return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
         }
-        return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
+        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
     
     @Override

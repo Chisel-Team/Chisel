@@ -26,8 +26,8 @@ public class ChiselTabs {
         }
 
         @Override
-        public Item getTabIconItem() {
-            return stack.getItem();
+        public ItemStack getTabIconItem() {
+            return stack;
         }
 
         public void setTabIconItemStack(ItemStack stack) {
@@ -53,8 +53,8 @@ public class ChiselTabs {
 
         @Override
         @SideOnly(Side.CLIENT)
-        public Item getTabIconItem() {
-            return Chisel.itemChiselIron;
+        public ItemStack getTabIconItem() {
+            return new ItemStack(Chisel.itemChiselIron);
         }
     }
 
