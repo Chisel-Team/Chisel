@@ -4,15 +4,14 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.Lists;
+
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
-
-import com.google.common.collect.Lists;
 
 public class ChiselRecipeWrapper implements IRecipeWrapper {
 
@@ -21,41 +20,24 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     public ChiselRecipeWrapper(ICarvingGroup group){
         this.group = group;
     }
-
+    
     @Override
-    public List<ItemStack> getInputs(){
-        List<ItemStack> inputStack = Lists.newArrayList();
+    public void getIngredients(@Nonnull IIngredients ingredients) {
+        List<ItemStack> inputs = Lists.newArrayList();
         for (ICarvingVariation variation : this.group.getVariations()){
-            inputStack.add(variation.getStack());
+            inputs.add(variation.getStack());
         }
-        return inputStack;
-    }
-
-    @Override
-    public List<ItemStack> getOutputs(){
-        List<ItemStack> outputStack = Lists.newArrayList();
+        ingredients.setInputs(ItemStack.class, inputs);
+        
+        List<ItemStack> outputs = Lists.newArrayList();
         for (ICarvingVariation variation : this.group.getVariations()){
-            outputStack.add(variation.getStack());
+            outputs.add(variation.getStack());
         }
-        return outputStack;
+        ingredients.setOutputs(ItemStack.class, outputs);
     }
 
     @Override
-    public List<FluidStack> getFluidInputs(){
-        return null;
-    }
-
-    @Override
-    public List<FluidStack> getFluidOutputs(){
-        return null;
-    }
-
-    @Override
-    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-    }
-
-    @Override
-    public void drawAnimations(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight){
+    public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
     }
 
     @Override
@@ -64,11 +46,7 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     }
 
     @Override
-    public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
+    public boolean handleClick(@Nonnull Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
         return false;
-    }
-
-    @Override
-    public void getIngredients(IIngredients ingredients) {
     }
 }

@@ -1,6 +1,5 @@
 package team.chisel.common.integration.jei;
 
-import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AllArgsConstructor;
@@ -26,13 +25,8 @@ public class ChiselRecipeHandler implements IRecipeHandler<CarvingGroupWrapper> 
     }
 
     @Override
-    public String getRecipeCategoryUid() {
-        return "chisel.chiseling";
-    }
-    
-    @Override
     public String getRecipeCategoryUid(CarvingGroupWrapper recipe) {
-        return getRecipeCategoryUid();
+        return "chisel.chiseling";
     }
 
     @Override
