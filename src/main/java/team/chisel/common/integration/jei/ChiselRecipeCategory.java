@@ -1,6 +1,7 @@
 package team.chisel.common.integration.jei;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -24,9 +25,10 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
 
     private static final ResourceLocation TEXTURE_LOC = new ResourceLocation("chisel", "textures/chiselJEI.png");
     
-    private IDrawable background;
-    private IDrawable arrowUp, arrowDown;
-    
+    private final IDrawable background;
+    private final IDrawable arrowUp, arrowDown;
+
+    private @Nullable IRecipeLayout layout;
     private @Nullable IFocus<?> focus;
 
     public ChiselRecipeCategory(IGuiHelper guiHelper) {
@@ -55,8 +57,8 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
 
     @Override
     public void drawExtras(Minecraft minecraft) {
-        if (focus != null) {
-            if (focus.getMode() == IFocus.Mode.INPUT) {
+        if (layout != null) {
+            if (focus == null || focus.getMode() == IFocus.Mode.INPUT) {
                 arrowDown.draw(minecraft, 73, 21);
             } else {
                 arrowUp.draw(minecraft, 73, 21);
@@ -64,25 +66,33 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
         }
     }
 
+    @SuppressWarnings("null")
     @Override
     public void drawAnimations(Minecraft minecraft) {
 
     }
 
     @Override
-    public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull ChiselRecipeWrapper recipeWrapper) {
-        IFocus<?> focus = (this.focus = recipeLayout.getFocus());
+    public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper) {        
+    }
+    
+    public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper, IIngredients ingredients) {
+        this.layout = recipeLayout;
+        this.focus = layout.getFocus();
         
-        recipeLayout.getItemStacks().init(0, focus.getMode() == IFocus.Mode.INPUT, 73, 3);
-        ItemStack input = (ItemStack) focus.getValue();
-        recipeLayout.getItemStacks().set(0, input);
+        recipeLayout.getItemStacks().init(0, focus == null || focus.getMode() == IFocus.Mode.INPUT, 73, 3);
+        if (focus != null) {
+            recipeLayout.getItemStacks().set(0, (ItemStack) focus.getValue()); 
+        } else {
+            recipeLayout.getItemStacks().set(0, ingredients.getInputs(ItemStack.class).stream().flatMap(l -> l.stream()).collect(Collectors.toList()));
+        }
 
         int rowWidth = 9;
 
         int xStart = 2;
         int yStart = 36;
 
-        int outputs = recipeWrapper.getOutputs().size();
+        int outputs = ingredients.getOutputs(ItemStack.class).size();
         int MAX_SLOTS = 45;
         
         List<List<ItemStack>> stacks = Lists.newArrayList();
@@ -93,7 +103,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
                 stacks.add(Lists.newArrayList());
             }
          
-            ItemStack stack = (ItemStack) recipeWrapper.getOutputs().get(i);
+            ItemStack stack = (ItemStack) ingredients.getOutputs(ItemStack.class).get(i);
             stacks.get(slot).add(stack.copy());
         }
         
@@ -109,14 +119,9 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
             int x = xStart + (i % rowWidth) * 18;
             int y = yStart + (i / rowWidth) * 18;
             
-            recipeLayout.getItemStacks().init(i + 1,  focus.getMode() == IFocus.Mode.OUTPUT, x, y);
+            recipeLayout.getItemStacks().init(i + 1, focus != null && focus.getMode() == IFocus.Mode.OUTPUT, x, y);
             recipeLayout.getItemStacks().set(i + 1, stacks.get(i));
         }
-    }
-
-    @Override
-    public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper, IIngredients ingredients) {
-        setRecipe(recipeLayout, recipeWrapper);
     }
 
     @Override

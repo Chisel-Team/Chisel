@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -14,7 +13,6 @@ import net.minecraftforge.fluids.FluidStack;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 
-@ParametersAreNonnullByDefault
 public class ChiselRecipeWrapper implements IRecipeWrapper {
 
     private ICarvingGroup group;
@@ -22,33 +20,17 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     public ChiselRecipeWrapper(ICarvingGroup group){
         this.group = group;
     }
-
+    
     @Override
-    public List<ItemStack> getInputs(){
-        return CarvingUtils.getChiselRegistry().getItemsForChiseling(this.group);
+    public void getIngredients(@Nonnull IIngredients ingredients) {
+        List<ItemStack> variants = CarvingUtils.getChiselRegistry().getItemsForChiseling(group);
+        
+        ingredients.setInputs(ItemStack.class, variants);
+        ingredients.setOutputs(ItemStack.class, variants);
     }
-
+    
     @Override
-    public List<ItemStack> getOutputs(){
-        return getInputs();
-    }
-
-    @Override
-    public List<FluidStack> getFluidInputs(){
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<FluidStack> getFluidOutputs(){
-        return Collections.emptyList();
-    }
-
-    @Override
-    public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-    }
-
-    @Override
-    public void drawAnimations(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight){
+    public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
     }
 
     @Override
@@ -57,11 +39,31 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     }
 
     @Override
-    public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
+    public boolean handleClick(@Nonnull Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
         return false;
     }
 
     @Override
-    public void getIngredients(IIngredients ingredients) {
+    public List<ItemStack> getInputs() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<ItemStack> getOutputs() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<FluidStack> getFluidInputs() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public List<FluidStack> getFluidOutputs() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public void drawAnimations(Minecraft minecraft, int recipeWidth, int recipeHeight) {        
     }
 }
