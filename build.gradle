@@ -66,7 +66,7 @@ repositories {
 dependencies {
 	// no WAILA for 1.9
 	// deobfCompile "mcp.mobius.waila:Waila:${waila_version}"
-	deobfCompile "mezz.jei:jei_1.10.2:${jei_version}"
+	deobfCompile "mezz.jei:jei_1.11:${jei_version}"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
 }
 
