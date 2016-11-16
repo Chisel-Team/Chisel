@@ -15,6 +15,11 @@ public class VariationData {
      * The Name of this variation
      */
     public String name;
+    
+    /**
+     * The path for the blockstate/model information
+     */
+    public String path;
 
     /**
      * The carving group of this variation

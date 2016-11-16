@@ -32,7 +32,7 @@ public enum ChiselModelRegistry implements Reference {
                 while (Character.isDigit(name.charAt(name.length() - 1))) {
                     name = name.substring(0, name.length() - 1);
                 }
-                return new ModelResourceLocation(new ResourceLocation("chisel", "default"), name + "/" + data.name);
+                return new ModelResourceLocation(new ResourceLocation("chisel", "default"), data.path);
             }
         });
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(block), new ItemMeshDefinition() {
@@ -46,7 +46,7 @@ public enum ChiselModelRegistry implements Reference {
                 while (Character.isDigit(name.charAt(name.length() - 1))) {
                     name = name.substring(0, name.length() - 1);
                 }
-                return new ModelResourceLocation(new ResourceLocation("chisel", "default"), name + "/" + data.name);
+                return new ModelResourceLocation(new ResourceLocation("chisel", "default"), data.path);
             }
         });
     }
