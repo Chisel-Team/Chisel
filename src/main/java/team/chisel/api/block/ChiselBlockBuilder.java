@@ -151,10 +151,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
         private @Nullable ItemStack smeltedFrom;
         private int amountSmelted;
-
-        @Setter
-        private ResourceLocation textureLocation;
-        private Map<EnumFacing, ResourceLocation> overrideMap;
         
         @Setter
         private int order;
@@ -168,47 +164,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             this.name = name;
             this.group = group;
             this.index = index;
-            this.overrideMap = new HashMap<EnumFacing, ResourceLocation>();
-            String path = parent.parentFolder;
-            if (!path.isEmpty()) {
-                path += "/";
-            }
-            this.textureLocation = new ResourceLocation(parent.domain, path + name);
         }
 
         public VariationBuilder<T> setSmeltRecipe(ItemStack smeltedFrom, int amountSmelted) {
             this.smeltedFrom = smeltedFrom;
             this.amountSmelted = amountSmelted;
-            return this;
-        }
-
-        @Tolerate
-        public VariationBuilder<T> setTextureLocation(String path) {
-            return setTextureLocation(new ResourceLocation(parent.domain, path));
-        }
-
-        public VariationBuilder<T> setTextureLocation(String path, Predicate<EnumFacing> validFacings) {
-            return setTextureLocation(getForPath(path), validFacings);
-        }
-
-        public VariationBuilder<T> setTextureLocation(ResourceLocation loc, Predicate<EnumFacing> validFacings) {
-            return setTextureLocation(loc, FluentIterable.from(Arrays.asList(EnumFacing.VALUES)).filter(validFacings).toArray(EnumFacing.class));
-        }
-
-        @Tolerate
-        public VariationBuilder<T> setTextureLocation(String path, EnumFacing... facings) {
-            return setTextureLocation(getForPath(path), facings);
-        }
-
-        private ResourceLocation getForPath(String path) {
-            return new ResourceLocation(parent.domain, path);
-        }
-
-        @Tolerate
-        public VariationBuilder<T> setTextureLocation(ResourceLocation loc, EnumFacing... facings) {
-            for (EnumFacing f : facings) {
-                this.overrideMap.put(f, loc);
-            }
             return this;
         }
 
@@ -234,7 +194,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         }
 
         private VariationData doBuild() {
-            return new VariationData(name, group, recipe, smeltedFrom, amountSmelted, index, opaque);
+            return new VariationData(name, parent.parentFolder + "/" + name, group, recipe, smeltedFrom, amountSmelted, index, opaque);
         }
     }
 }
