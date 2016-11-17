@@ -14,6 +14,7 @@ import com.google.common.collect.Maps;
 
 import static net.minecraft.util.EnumFacing.*;
 
+import lombok.ToString;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
@@ -47,7 +48,8 @@ import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.ChunkDataBase;
 
 public class ItemOffsetTool extends Item {
-
+    
+    @ToString
     public static class OffsetData implements NBTSaveable, IOffsetData {
 
         private @Nonnull BlockPos offset = BlockPos.ORIGIN;

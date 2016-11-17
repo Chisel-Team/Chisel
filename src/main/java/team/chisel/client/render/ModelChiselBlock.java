@@ -34,6 +34,7 @@ import lombok.SneakyThrows;
 import lombok.Value;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -50,6 +51,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
+import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
@@ -102,7 +104,9 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
         ModelChiselBlock baked = this;
         
-        if (state instanceof ChiselExtendedState) {            
+        if (state instanceof ChiselExtendedState) {
+            System.out.println(ChunkData.getOffsetForChunk(Minecraft.getMinecraft().theWorld, ((ChiselExtendedState) state).getPos()));
+
             ChiselExtendedState ext = (ChiselExtendedState) state;
             RenderContextList ctxList = ext.getContextList(ext.getClean(), model);
 
