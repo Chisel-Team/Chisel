@@ -11,7 +11,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'com.matthewprenger.gradle:ForgeGradle:2.2-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }

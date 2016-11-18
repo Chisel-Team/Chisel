@@ -1,6 +1,5 @@
 package team.chisel.client.gui;
 
-import java.awt.Container;
 import java.util.Optional;
 
 import io.netty.buffer.ByteBuf;

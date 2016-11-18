@@ -48,8 +48,9 @@ public class Chisel implements Reference {
 
     public static final Logger logger = LogManager.getLogger(MOD_NAME);
 
+    @SuppressWarnings("null")
     @Mod.Instance(MOD_ID)
-    public static Chisel instance;
+    public static @Nonnull Chisel instance;
 
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY, modId = MOD_ID)
     public static CommonProxy proxy;

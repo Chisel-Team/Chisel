@@ -1,16 +1,16 @@
 package team.chisel.common.inventory;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import team.chisel.api.IChiselItem;
 import team.chisel.client.ClientUtil;
 
+@ParametersAreNonnullByDefault
 public class SlotChiselSelection extends Slot {
 
     private final ContainerChisel container;
@@ -27,32 +27,33 @@ public class SlotChiselSelection extends Slot {
 
     @Override
     public boolean canTakeStack(EntityPlayer par1EntityPlayer) {
-        return par1EntityPlayer.inventory.getItemStack() == null;
+        return par1EntityPlayer.inventory.getItemStack().isEmpty();
     }
 
     @Override
     public ItemStack onTake(EntityPlayer player, ItemStack itemstack) {
         ItemStack heldStack = player.inventory.getItemStack();
-        ItemStack crafted = container.getInventoryChisel().inventory[container.getInventoryChisel().size];
+        ItemStack crafted = container.getInventoryChisel().getStackInSpecialSlot();
         ItemStack chisel = container.getChisel();
 
-        if (heldStack == null) {
+        if (heldStack.isEmpty()) {
             container.getInventoryChisel().decrStackSize(container.getInventoryChisel().size, 1);
             container.onChiselSlotChanged();
         } else {
             putStack(itemstack.copy());
 
-            player.inventory.setItemStack(null);
+            player.inventory.setItemStack(ItemStack.EMPTY);
 
-            if (crafted != null) {
+            if (!crafted.isEmpty()) {
                 IChiselItem item = (IChiselItem) container.getChisel().getItem();
+                @SuppressWarnings("null")
                 ItemStack res = item.craftItem(chisel, crafted, container.carving.getVariation(itemstack), player);
                 if (chisel.getCount() == 0) {
-                    container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), null);
+                    container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
                     container.onChiselBroken();
                 }
                 player.inventory.setItemStack(res);
-                container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, crafted.getCount() == 0 ? null : crafted);
+                container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, crafted.getCount() == 0 ? ItemStack.EMPTY : crafted);
                 container.onChiselSlotChanged();
             }
         }

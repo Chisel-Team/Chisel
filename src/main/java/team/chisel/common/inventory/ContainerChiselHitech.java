@@ -2,6 +2,9 @@ package team.chisel.common.inventory;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.google.common.collect.ImmutableList;
 
 import lombok.Getter;
@@ -17,11 +20,12 @@ import team.chisel.common.util.NBTUtil;
 
 @Getter
 @Setter
+@ParametersAreNonnullByDefault
 public class ContainerChiselHitech extends ContainerChisel {
 
-    private Slot selection, target;
-    private List<Slot> selectionDuplicates;
-    private ICarvingGroup currentGroup;
+    private @Nullable Slot selection, target;
+    private List<Slot> selectionDuplicates = ImmutableList.of();
+    private @Nullable ICarvingGroup currentGroup;
     
     public ContainerChiselHitech(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {
         super(inventoryplayer, inv, hand);
@@ -37,7 +41,7 @@ public class ContainerChiselHitech extends ContainerChisel {
         }
     }
     
-    public void setSelection(Slot slot) {
+    public void setSelection(@Nullable Slot slot) {
         this.selection = slot;
 
         if (slot == null || !slot.getHasStack()) {
@@ -61,17 +65,19 @@ public class ContainerChiselHitech extends ContainerChisel {
             currentGroup = group;
         }
         
-        ItemStack stack = slot == null ? null : slot.getStack();
-        getInventoryChisel().setInventorySlotContents(getInventoryChisel().size, stack == null ? null : stack.copy());
+        ItemStack stack = slot == null ? ItemStack.EMPTY : slot.getStack();
+        getInventoryChisel().setInventorySlotContents(getInventoryChisel().size, stack);
         getInventoryChisel().updateItems();
     }
     
-    public ItemStack getSelectionStack() {
-        return getSelection() == null ? null : getSelection().getStack();
+    public @Nullable ItemStack getSelectionStack() {
+        Slot slot = getSelection();
+        return slot == null ? ItemStack.EMPTY : slot.getStack();
     }
     
     public ItemStack getTargetStack() {
-        return getTarget() == null ? null : getTarget().getStack();
+        Slot slot = getTarget();
+        return slot == null ? ItemStack.EMPTY : slot.getStack();    
     }
 
     @Override

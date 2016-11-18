@@ -1,32 +1,35 @@
 package team.chisel.common.inventory;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemTool;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 import team.chisel.common.item.ItemChisel;
 
+@ParametersAreNonnullByDefault
 public class InventoryChiselSelection implements IInventory {
 
-    ItemStack chisel = null;
+    ItemStack chisel = ItemStack.EMPTY;
     public final int size;
     public int activeVariations = 0;
-    ContainerChisel container;
-    ItemStack[] inventory;
+    @Nullable ContainerChisel container;
+    NonNullList<ItemStack> inventory;
 
     public InventoryChiselSelection(ItemStack c, int size) {
         super();
         this.size = size;
-        inventory = new ItemStack[size + 1];
+        inventory = NonNullList.withSize(size + 1, ItemStack.EMPTY);
         chisel = c;
     }
 
@@ -39,8 +42,8 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public @Nonnull ItemStack getStackInSlot(int var1) {
-        return Optional.ofNullable(inventory[var1]).orElse(ItemStack.EMPTY);
+    public ItemStack getStackInSlot(int var1) {
+        return inventory.get(var1);
     }
 
     public void updateInventoryState(int slot) {
@@ -48,42 +51,41 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public @Nonnull ItemStack decrStackSize(int slot, int amount) {
-        if (this.inventory[slot] != null) {
-            ItemStack stack;
-            if (this.inventory[slot].getCount() <= amount) {
-                stack = this.inventory[slot];
-                this.inventory[slot] = null;
+    public ItemStack decrStackSize(int slot, int amount) {
+        ItemStack stack = inventory.get(slot);
+        if (!stack.isEmpty()) {
+            if (stack.getCount() <= amount) {
+                setInventorySlotContents(slot, ItemStack.EMPTY);
                 updateInventoryState(slot);
                 return stack;
             } else {
-                stack = this.inventory[slot].splitStack(amount);
+                ItemStack split = stack.splitStack(amount);
 
-                if (this.inventory[slot].getCount() == 0)
-                    this.inventory[slot] = null;
-
+                if (stack.getCount() == 0) {
+                    setInventorySlotContents(slot, ItemStack.EMPTY);
+                }
+                
                 updateInventoryState(slot);
 
-                return stack;
+                return split;
             }
-        } else
-            return null;
+        }
+        return ItemStack.EMPTY;
     }
 
     @Override
-    public @Nonnull ItemStack removeStackFromSlot(int slot){
+    public ItemStack removeStackFromSlot(int slot){
         ItemStack stack = getStackInSlot(slot);
 
-        if (stack == null)
-            return null;
-        inventory[slot] = null;
+        setInventorySlotContents(slot, ItemStack.EMPTY);
+        inventory.set(slot, ItemStack.EMPTY);
 
         updateInventoryState(slot);
         return stack;
     }
 
     @Override
-    public @Nonnull String getName() {
+    public String getName() {
         return "container.chisel";
     }
 
@@ -110,38 +112,34 @@ public class InventoryChiselSelection implements IInventory {
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityplayer) {
         ItemStack held = entityplayer.inventory.getStackInSlot(container.getChiselSlot());
-        return held != null && held.getItem() instanceof ItemChisel;
+        return !held.isEmpty() && held.getItem() instanceof ItemChisel;
     }
 
     public void clearItems() {
         activeVariations = 0;
         for (int i = 0; i < size; i++) {
-            inventory[i] = null;
+            setInventorySlotContents(i, ItemStack.EMPTY);
         }
     }
 
     public ItemStack getStackInSpecialSlot() {
-        return inventory[size];
+        return inventory.get(size);
     }
     
     public void setStackInSpecialSlot(ItemStack stack) {
-        inventory[size] = stack;
+        setInventorySlotContents(size, stack);
     }
 
     public void updateItems() {
-        ItemStack chiseledItem = inventory[size];
+        ItemStack chiseledItem = getStackInSpecialSlot();
         clearItems();
 
-        if (chiseledItem == null) {
+        if (chiseledItem.isEmpty()) {
             return;
         }
 
         Item item = chiseledItem.getItem();
-        if (item == null) {
-            return;
-        }
-
-        if (Block.getBlockFromItem(item) == null) {
+        if (Block.getBlockFromItem(item) == Blocks.AIR) {
             return;
         }
 
@@ -149,33 +147,26 @@ public class InventoryChiselSelection implements IInventory {
 
         activeVariations = 0;
         while (activeVariations < size && activeVariations < list.size()) {
-            if (Block.REGISTRY.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
-                inventory[activeVariations] = list.get(activeVariations);
-                activeVariations++;
-            }
+            setInventorySlotContents(activeVariations, list.get(activeVariations));
+            activeVariations++;
         }
     }
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack) {
-        inventory[slot] = stack;
+        inventory.set(slot, stack);
         updateInventoryState(slot);
     }
 
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack stack) {
-        //Really didn't think people would chisel a shovel
-        if (stack.getItem() instanceof ItemTool) {
-            return false;
-        }
-
-        return !(stack != null && (stack.getItem() instanceof ItemChisel)) && i == size;
+        return !(!stack.isEmpty() && (stack.getItem() instanceof ItemChisel)) && i == size;
     }
 
     @Override
     public void clear() {
-        inventory = new ItemStack[inventory.length];
+        inventory.clear();
     }
 
     @Override
@@ -204,6 +195,6 @@ public class InventoryChiselSelection implements IInventory {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return inventory.isEmpty();
     }
 }

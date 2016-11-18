@@ -1,18 +1,24 @@
 package team.chisel.common.item;
 
+import static net.minecraft.util.EnumFacing.DOWN;
+import static net.minecraft.util.EnumFacing.EAST;
+import static net.minecraft.util.EnumFacing.NORTH;
+import static net.minecraft.util.EnumFacing.SOUTH;
+import static net.minecraft.util.EnumFacing.UP;
+import static net.minecraft.util.EnumFacing.WEST;
+
 import java.awt.geom.Line2D;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
-import static net.minecraft.util.EnumFacing.*;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
@@ -23,22 +29,20 @@ import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.common.init.ChiselTabs;
@@ -46,11 +50,12 @@ import team.chisel.common.util.NBTSaveable;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.ChunkDataBase;
 
+@ParametersAreNonnullByDefault
 public class ItemOffsetTool extends Item {
 
     public static class OffsetData implements NBTSaveable, IOffsetData {
 
-        private @Nonnull BlockPos offset = BlockPos.ORIGIN;
+        private BlockPos offset = BlockPos.ORIGIN;
 
         @Override
         public void write(NBTTagCompound tag) {
@@ -63,7 +68,7 @@ public class ItemOffsetTool extends Item {
             offset = new BlockPos((data >> 8) & 0xF, (data >> 4) & 0xF, data & 0xF);
         }
 
-        void move(@Nonnull EnumFacing dir) {
+        void move(EnumFacing dir) {
             offset = wrap(offset.offset(dir.getOpposite()));
         }
 
@@ -76,7 +81,7 @@ public class ItemOffsetTool extends Item {
             return (num + denom) % denom;
         }
         
-        private @Nonnull BlockPos wrap(@Nonnull BlockPos pos) {
+        private BlockPos wrap(BlockPos pos) {
             return new BlockPos(positiveModulo(pos.getX(), 16), positiveModulo(pos.getY(), 16), positiveModulo(pos.getZ(), 16));
         }
     }
@@ -223,7 +228,7 @@ public class ItemOffsetTool extends Item {
 
     private boolean canOffset(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);
-        if (player.getHeldItem(hand) != null && player.getHeldItem(hand).getItem() == this && state.getBlock() instanceof ICarvable) {
+        if (!player.getHeldItem(hand).isEmpty() && player.getHeldItem(hand).getItem() == this && state.getBlock() instanceof ICarvable) {
             ICarvable carvable = (ICarvable) state.getBlock();
 //            IVariationInfo info = carvable.getManager(player.worldObj.getBlockMetadata(x, y, z));
 //            if (info.getManager() instanceof IOffsetRendered) {

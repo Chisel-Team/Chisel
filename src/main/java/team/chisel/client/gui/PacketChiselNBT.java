@@ -1,5 +1,7 @@
 package team.chisel.client.gui;
 
+import javax.annotation.Nonnull;
+
 import io.netty.buffer.ByteBuf;
 import lombok.NoArgsConstructor;
 import net.minecraft.item.ItemStack;
@@ -13,10 +15,10 @@ import team.chisel.common.util.NBTUtil;
 @NoArgsConstructor
 public class PacketChiselNBT implements IMessage {
 
-    private NBTTagCompound tag;
+    private @Nonnull NBTTagCompound tag;
     private int chiselSlot;
 
-    public PacketChiselNBT(NBTTagCompound tag, int chiselSlot) {
+    public PacketChiselNBT(@Nonnull NBTTagCompound tag, int chiselSlot) {
         this.tag = tag;
         this.chiselSlot = chiselSlot;
     }
@@ -27,6 +29,7 @@ public class PacketChiselNBT implements IMessage {
         buf.writeByte(chiselSlot);
     }
 
+    @SuppressWarnings("null")
     @Override
     public void fromBytes(ByteBuf buf) {
         this.tag = ByteBufUtils.readTag(buf);
@@ -38,7 +41,7 @@ public class PacketChiselNBT implements IMessage {
         @Override
         public IMessage onMessage(PacketChiselNBT message, MessageContext ctx) {
             ItemStack stack = ctx.getServerHandler().playerEntity.inventory.getStackInSlot(message.chiselSlot);
-            if (stack != null) {
+            if (!stack.isEmpty()) {
                 NBTUtil.setChiselTag(stack, message.tag);
             }
             return null;

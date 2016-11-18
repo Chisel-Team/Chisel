@@ -3,6 +3,8 @@ package team.chisel.common.item;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
@@ -29,6 +31,7 @@ import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselTabs;
 
+@ParametersAreNonnullByDefault
 public class ItemChisel extends Item implements IChiselItem {
     
     public enum ChiselType {

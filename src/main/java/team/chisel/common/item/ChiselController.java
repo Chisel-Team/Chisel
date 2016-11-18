@@ -2,6 +2,9 @@ package team.chisel.common.item;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,6 +24,7 @@ import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.client.ClientUtil;
 import team.chisel.common.util.NBTUtil;
 
+@ParametersAreNonnullByDefault
 public class ChiselController {
     
     @SubscribeEvent
@@ -42,10 +46,12 @@ public class ChiselController {
                 return;
             }
             
-            if (target != null) {
+            if (!target.isEmpty()) {
                 ICarvingGroup sourceGroup = registry.getGroup(target);
 
                 if (blockGroup == sourceGroup) {
+                    @SuppressWarnings("null")
+                    @Nonnull
                     ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(target);
                     updateState(event.getWorld(), event.getPos(), variation.getBlockState());
                     damageItem(held, player);
@@ -67,7 +73,7 @@ public class ChiselController {
     private static void damageItem(ItemStack stack, EntityPlayer player) {
         stack.damageItem(1, player);
         if (stack.getCount() <= 0) {
-            player.setHeldItem(EnumHand.MAIN_HAND, (ItemStack)null);
+            player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
             ForgeEventFactory.onPlayerDestroyItem(player, stack, EnumHand.MAIN_HAND);
         }
     }
@@ -86,7 +92,7 @@ public class ChiselController {
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         ItemStack stack = event.getPlayer().getHeldItemMainhand();
-        if (event.getPlayer().capabilities.isCreativeMode && stack != null && stack.getItem() instanceof ItemChisel) {
+        if (event.getPlayer().capabilities.isCreativeMode && !stack.isEmpty() && stack.getItem() instanceof ItemChisel) {
             event.setCanceled(true);
         }
     }

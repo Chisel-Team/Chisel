@@ -1,5 +1,7 @@
 package team.chisel.api;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,6 +12,7 @@ import team.chisel.api.carving.ICarvingVariation;
 /**
  * Implement this on items which can be used to chisel blocks.
  */
+@ParametersAreNonnullByDefault
 public interface IChiselItem {
 
     /**
