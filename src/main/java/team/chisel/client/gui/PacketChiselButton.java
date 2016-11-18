@@ -62,33 +62,33 @@ public class PacketChiselButton implements IMessage {
         if (player.openContainer instanceof ContainerChisel) {
             ContainerChisel container = (ContainerChisel) player.openContainer;
             ItemStack chisel = player.inventory.getStackInSlot(chiselSlot);
-            if (chisel == null) {
+            if (chisel.isEmpty()) {
                 return;
             }
             for (int i : slots) {
                 Optional.ofNullable(player.inventory.getStackInSlot(i)).ifPresent(s -> {
                     ItemStack stack = target.copy();
-                    int toCraft = s.func_190916_E();
+                    int toCraft = s.getCount();
                     if (chisel.isItemStackDamageable()) {
                         int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
                         toCraft = Math.min(toCraft, damageLeft);
-                        stack.func_190920_e(toCraft);
+                        stack.setCount(toCraft);
                         chisel.damageItem(toCraft, player);
                     }
                     player.inventory.setInventorySlotContents(i, stack);
-                    if (chisel.func_190916_E() <= 0) {
-                        container.getInventoryChisel().getStackInSpecialSlot().func_190920_e(s.func_190916_E() - toCraft);
-                        player.inventory.setInventorySlotContents(chiselSlot, null);
-                        if (s.func_190916_E() > toCraft) {
+                    if (chisel.getCount() <= 0) {
+                        container.getInventoryChisel().getStackInSpecialSlot().shrink(toCraft);
+                        player.inventory.setInventorySlotContents(chiselSlot, ItemStack.EMPTY);
+                        if (s.getCount() > toCraft) {
                             ItemStack remainder = s.copy();
-                            remainder.func_190920_e(s.func_190916_E() - toCraft);
+                            remainder.shrink(toCraft);
                             if (!player.inventory.addItemStackToInventory(remainder)) {
                                 player.dropItem(remainder, false);
                             }
                         }
                     }
                 });
-                if (chisel.func_190916_E() < 1) {
+                if (chisel.getCount() < 1) {
                     return;
                 }
             }

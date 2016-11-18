@@ -326,7 +326,7 @@ public class GuiHitechChisel extends GuiChisel {
     }
     
     private void drawSlotHighlight(Slot slot, int u) {
-        drawTexturedModalRect(guiLeft + slot.xDisplayPosition - 1, guiTop + slot.yDisplayPosition - 1, u, 220, 18, 18);
+        drawTexturedModalRect(guiLeft + slot.xPos - 1, guiTop + slot.yPos - 1, u, 220, 18, 18);
     }
     
     @SuppressWarnings("deprecation")
@@ -453,7 +453,7 @@ public class GuiHitechChisel extends GuiChisel {
                     return;
                 }
                 ItemStack converted = target.getStack().copy();
-                converted.func_190920_e(selected.getStack().func_190916_E());
+                converted.setCount(selected.getStack().getCount());
                 int[] slots = new int[] { selected.getSlotIndex() };
                 if (isShiftDown()) {
                     slots = ArrayUtils.addAll(slots, containerHitech.getSelectionDuplicates().stream().mapToInt(Slot::getSlotIndex).toArray());

@@ -125,11 +125,11 @@ public class GuiChisel extends GuiContainer {
         if (slot instanceof SlotChiselInput) {
             GL11.glPushMatrix();
             GL11.glScalef(2, 2, 1);
-            slot.xDisplayPosition -= 16;
-            slot.yDisplayPosition -= 16;
+            slot.xPos -= 16;
+            slot.yPos -= 16;
             super.drawSlot(slot);
-            slot.xDisplayPosition += 16;
-            slot.yDisplayPosition += 16;
+            slot.xPos += 16;
+            slot.yPos += 16;
             GL11.glPopMatrix();
         } else {
             super.drawSlot(slot);
@@ -138,6 +138,6 @@ public class GuiChisel extends GuiContainer {
 
     public static void drawSlotOverlay(GuiContainer gui, int x, int y, Slot slot, int u, int v, int padding) {
         padding /= 2;
-        gui.drawTexturedModalRect(x + (slot.xDisplayPosition - padding), y + (slot.yDisplayPosition - padding), u, v, 18 + padding, 18 + padding);
+        gui.drawTexturedModalRect(x + (slot.xPos - padding), y + (slot.yPos - padding), u, v, 18 + padding, 18 + padding);
     }
 }

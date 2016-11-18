@@ -114,7 +114,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @SuppressWarnings("null") // No type annotations
     @Override   
     public VariationData getVariationData(int meta) {
-        return this.variations[MathHelper.clamp_int(meta, 0, this.variations.length - 1)];
+        return this.variations[MathHelper.clamp(meta, 0, this.variations.length - 1)];
     }
 
     public BlockCarvable setRedstoneLevel(int level){

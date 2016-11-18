@@ -66,7 +66,7 @@ public class ChiselController {
     
     private static void damageItem(ItemStack stack, EntityPlayer player) {
         stack.damageItem(1, player);
-        if (stack.func_190916_E() <= 0) {
+        if (stack.getCount() <= 0) {
             player.setHeldItem(EnumHand.MAIN_HAND, (ItemStack)null);
             ForgeEventFactory.onPlayerDestroyItem(player, stack, EnumHand.MAIN_HAND);
         }

@@ -106,7 +106,7 @@ public class ContainerChiselHitech extends ContainerChisel {
                 setTarget(slot);
             } else if (dragType == 1) {
                 ItemStack toFind = slot.getStack();
-                if (!toFind.func_190926_b()) {
+                if (!toFind.isEmpty()) {
                     for (int i = 0; i < getInventoryChisel().size; i++) {
                         if (ItemStack.areItemsEqual(toFind, getInventoryChisel().getStackInSlot(i))) {
                             setTarget(getSlot(i));
@@ -117,6 +117,6 @@ public class ContainerChiselHitech extends ContainerChisel {
                 setSelection(slot);
             }
         }
-        return ItemStack.field_190927_a;
+        return ItemStack.EMPTY;
     }
 }

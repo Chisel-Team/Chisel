@@ -84,15 +84,15 @@ public interface IChiselItem {
     boolean hasModes(EntityPlayer player, ItemStack chisel);
     
     default ItemStack craftItem(ItemStack chisel, ItemStack source, ICarvingVariation target, EntityPlayer player) {
-        int toCraft = source.func_190916_E();
+        int toCraft = source.getCount();
         if (chisel.isItemStackDamageable()) {
             int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
             toCraft = Math.min(toCraft, damageLeft);
             chisel.damageItem(toCraft, player);
         }
         ItemStack res = target.getStack().copy();
-        source.func_190920_e(source.func_190916_E() - toCraft);
-        res.func_190920_e(toCraft);
+        source.shrink(toCraft);
+        res.setCount(toCraft);
         return res;
     }
 }

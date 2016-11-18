@@ -104,7 +104,7 @@ public class ContainerChisel extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer) {
-        return inventoryChisel.isUseableByPlayer(entityplayer);
+        return inventoryChisel.isUsableByPlayer(entityplayer);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class ContainerChisel extends Container {
                 if (slotIdx < getInventoryChisel().size + 1 && itemstack1 != null) {
                     ItemStack tempStack = entity.inventory.getItemStack();
                     entity.inventory.setItemStack(itemstack1.copy());
-                    slot.func_190901_a(entity, itemstack1);
+                    slot.onTake(entity, itemstack1);
                     itemstack1 = entity.inventory.getItemStack();
                     entity.inventory.setItemStack(tempStack);
                 }
@@ -135,18 +135,18 @@ public class ContainerChisel extends Container {
             }
             slot.onSlotChange(itemstack1, itemstack);
 
-            if (itemstack1.func_190916_E() == 0) {
+            if (itemstack1.getCount() == 0) {
                 slot.putStack((ItemStack) null);
             } else {
                 slot.onSlotChanged();
             }
-            if (itemstack1.func_190916_E() == itemstack.func_190916_E()) {
+            if (itemstack1.getCount() == itemstack.getCount()) {
                 return null;
             }
             if (slotIdx >= getInventoryChisel().size) {
-                slot.func_190901_a(entity, itemstack1);
+                slot.onTake(entity, itemstack1);
             }
-            if (itemstack1.func_190916_E() == 0) {
+            if (itemstack1.getCount() == 0) {
                 slot.putStack(null);
                 return null;
             }

@@ -40,7 +40,7 @@ public class InventoryChiselSelection implements IInventory {
 
     @Override
     public @Nonnull ItemStack getStackInSlot(int var1) {
-        return Optional.ofNullable(inventory[var1]).orElse(ItemStack.field_190927_a);
+        return Optional.ofNullable(inventory[var1]).orElse(ItemStack.EMPTY);
     }
 
     public void updateInventoryState(int slot) {
@@ -51,7 +51,7 @@ public class InventoryChiselSelection implements IInventory {
     public @Nonnull ItemStack decrStackSize(int slot, int amount) {
         if (this.inventory[slot] != null) {
             ItemStack stack;
-            if (this.inventory[slot].func_190916_E() <= amount) {
+            if (this.inventory[slot].getCount() <= amount) {
                 stack = this.inventory[slot];
                 this.inventory[slot] = null;
                 updateInventoryState(slot);
@@ -59,7 +59,7 @@ public class InventoryChiselSelection implements IInventory {
             } else {
                 stack = this.inventory[slot].splitStack(amount);
 
-                if (this.inventory[slot].func_190916_E() == 0)
+                if (this.inventory[slot].getCount() == 0)
                     this.inventory[slot] = null;
 
                 updateInventoryState(slot);
@@ -108,7 +108,7 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+    public boolean isUsableByPlayer(EntityPlayer entityplayer) {
         ItemStack held = entityplayer.inventory.getStackInSlot(container.getChiselSlot());
         return held != null && held.getItem() instanceof ItemChisel;
     }
@@ -203,8 +203,7 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public boolean func_191420_l() {
+    public boolean isEmpty() {
         return false;
     }
-
 }

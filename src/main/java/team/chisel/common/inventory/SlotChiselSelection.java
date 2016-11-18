@@ -30,9 +30,8 @@ public class SlotChiselSelection extends Slot {
         return par1EntityPlayer.inventory.getItemStack() == null;
     }
 
-    // TODO 1.11 this is onPickupFromSlot
     @Override
-    public ItemStack func_190901_a(EntityPlayer player, ItemStack itemstack) {
+    public ItemStack onTake(EntityPlayer player, ItemStack itemstack) {
         ItemStack heldStack = player.inventory.getItemStack();
         ItemStack crafted = container.getInventoryChisel().inventory[container.getInventoryChisel().size];
         ItemStack chisel = container.getChisel();
@@ -48,12 +47,12 @@ public class SlotChiselSelection extends Slot {
             if (crafted != null) {
                 IChiselItem item = (IChiselItem) container.getChisel().getItem();
                 ItemStack res = item.craftItem(chisel, crafted, container.carving.getVariation(itemstack), player);
-                if (chisel.func_190916_E() == 0) {
+                if (chisel.getCount() == 0) {
                     container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), null);
                     container.onChiselBroken();
                 }
                 player.inventory.setItemStack(res);
-                container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, crafted.func_190916_E() == 0 ? null : crafted);
+                container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, crafted.getCount() == 0 ? null : crafted);
                 container.onChiselSlotChanged();
             }
         }
@@ -65,9 +64,9 @@ public class SlotChiselSelection extends Slot {
             String sound = container.getCarving().getVariationSound(crafted);
             ClientUtil.playSound(player.world, new BlockPos(player), sound);
         } else {
-            //container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.func_190916_E());
+            //container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.getCount());
         }
         
-        return ItemStack.field_190927_a; // TODO 1.11 ???
+        return ItemStack.EMPTY; // TODO 1.11 ???
     }
 }

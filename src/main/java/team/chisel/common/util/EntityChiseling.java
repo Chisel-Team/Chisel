@@ -44,13 +44,13 @@ public enum EntityChiseling {
                     for (EntityWitherSkeleton skeleton : scary) {
                         skeleton.setHealth(0);
                     }
-                    spooky.getEntityWorld().spawnEntityInWorld(new EntityLightningBolt(spooky.getEntityWorld(), pos.getX(), pos.getY(), pos.getZ(), true));
+                    spooky.getEntityWorld().spawnEntity(new EntityLightningBolt(spooky.getEntityWorld(), pos.getX(), pos.getY(), pos.getZ(), true));
                     EntityWither wither = new EntityWither(event.getEntityPlayer().getEntityWorld());
                     wither.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 0.55D, pos.getZ() + 0.5D, 0.0f, 0.0f);
                     wither.renderYawOffset = 0.0f;
                     wither.ignite();
-                    event.getEntityPlayer().getEntityWorld().spawnEntityInWorld(new EntityWither(spooky.getEntityWorld()));
-                    event.getEntityPlayer().addChatMessage(new TextComponentTranslation("chisel.spawnwither").setStyle(new Style().setColor(TextFormatting.RED)));
+                    event.getEntityPlayer().getEntityWorld().spawnEntity(new EntityWither(spooky.getEntityWorld()));
+                    event.getEntityPlayer().sendMessage(new TextComponentTranslation("chisel.spawnwither").setStyle(new Style().setColor(TextFormatting.RED)));
                 }
             }
         }
