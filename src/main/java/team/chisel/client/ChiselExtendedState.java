@@ -13,6 +13,7 @@ import com.google.common.collect.ImmutableMap;
 import lombok.Getter;
 import lombok.experimental.Delegate;
 import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockStateBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.BlockPos;
@@ -26,7 +27,7 @@ import team.chisel.api.render.RenderContextList;
 import team.chisel.client.render.ModelChisel;
 
 @ParametersAreNonnullByDefault
-public class ChiselExtendedState implements IExtendedBlockState {
+public class ChiselExtendedState extends BlockStateBase implements IExtendedBlockState {
 
     interface Exclusions {
         public <T extends Comparable<T>> T getValue(IProperty<T> property);
