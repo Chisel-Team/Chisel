@@ -105,8 +105,6 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         ModelChiselBlock baked = this;
         
         if (state instanceof ChiselExtendedState) {
-            System.out.println(ChunkData.getOffsetForChunk(Minecraft.getMinecraft().theWorld, ((ChiselExtendedState) state).getPos()));
-
             ChiselExtendedState ext = (ChiselExtendedState) state;
             RenderContextList ctxList = ext.getContextList(ext.getClean(), model);
 
