@@ -544,8 +544,8 @@ tile.chisel.futura.uberWavy.desc.1=Фантастическая волна
 
 tile.chisel.glass.name=Стекло
 tile.chisel.glass.terrain-glassbubble.desc.1=Пузырчатое
-tile.chisel.glass.terrain-glass-chinese.desc.1=Китайское
-tile.chisel.glass.japanese.desc.1=Японское
+tile.chisel.glass.terrain-glass-chinese.desc.1=Красное орнаментное
+tile.chisel.glass.japanese.desc.1=Коричневое орнаментное
 tile.chisel.glass.terrain-glassdungeon.desc.1=Подземелья
 tile.chisel.glass.terrain-glasslight.desc.1=Светлое
 tile.chisel.glass.terrain-glassnoborder.desc.1=Безграничное
