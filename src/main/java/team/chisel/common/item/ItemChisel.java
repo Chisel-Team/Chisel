@@ -24,7 +24,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.chisel.Chisel;
+import team.chisel.api.IChiselGuiType;
 import team.chisel.api.IChiselItem;
+import team.chisel.api.IChiselGuiType.ChiselGuiType;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselTabs;
@@ -124,8 +126,13 @@ public class ItemChisel extends Item implements IChiselItem {
     }
     
     @Override
-    public boolean canOpenGui(World world, EntityPlayer player, ItemStack chisel) {
+    public boolean canOpenGui(World world, EntityPlayer player, EnumHand hand) {
         return true;
+    }
+    
+    @Override
+    public IChiselGuiType getGuiType(World world, EntityPlayer player, EnumHand hand) {
+        return type == ChiselType.HITECH ? ChiselGuiType.HITECH : ChiselGuiType.NORMAL;
     }
 
     @Override
@@ -139,24 +146,24 @@ public class ItemChisel extends Item implements IChiselItem {
     }
 
     @Override
-    public boolean canChiselBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state) {
+    public boolean canChiselBlock(World world, EntityPlayer player, EnumHand hand, BlockPos pos, IBlockState state) {
         return type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
     }
 
     @Override
-    public boolean hasModes(EntityPlayer player, ItemStack chisel) {
+    public boolean hasModes(EntityPlayer player, EnumHand hand) {
         return type == ChiselType.DIAMOND || Configurations.ironChiselHasModes;
     }
 
     // TODO implement ChiselController
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-        if (!worldIn.isRemote) {
-            playerIn.openGui(Chisel.instance, 0, worldIn, hand.ordinal(), 0, 0);
-            return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
-        }
-        return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
-    }
+//    @Override
+//    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+//        if (!worldIn.isRemote) {
+//            playerIn.openGui(Chisel.instance, 0, worldIn, hand.ordinal(), 0, 0);
+//            return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
+//        }
+//        return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
+//    }
     
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {

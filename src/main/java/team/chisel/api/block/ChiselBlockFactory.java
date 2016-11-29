@@ -47,6 +47,10 @@ public class ChiselBlockFactory {
         });
     }
 
+
+    /**
+     * Test
+     */
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockProvider<T> provider) {
         return new ChiselBlockBuilder<T>(material, domain, blockName, provider);
     }
