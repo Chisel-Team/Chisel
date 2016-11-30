@@ -1,5 +1,7 @@
 package team.chisel.api;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -11,6 +13,7 @@ import team.chisel.api.carving.ICarvingVariation;
 /**
  * Implement this on items which can be used to chisel blocks.
  */
+@ParametersAreNonnullByDefault
 public interface IChiselItem {
 
     /**
@@ -101,14 +104,28 @@ public interface IChiselItem {
      */
     boolean hasModes(EntityPlayer player, EnumHand hand);
     
-    default ItemStack craftItem(ItemStack chisel, ItemStack source, ICarvingVariation target, EntityPlayer player) {
+    /**
+     * Chisels a stack into another stack, taking into consideration this chisel's damage
+     * 
+     * @param chisel
+     *            The {@link ItemStack} being used as a chisel.
+     * @param source
+     *            The source {@link ItemStack}. This is the stack of items that is being chiseled into something else. This must be modified by this function. i.e. if the chisel has only 1 damage
+     *            left, the source stack size should be decremented by 1.
+     * @param target
+     *            The target stack, the type of which the source stack is being chiseled into. Do NOT modify this stack, instead return the result of the craft.
+     * @param player
+     *            The player doing the chiseling.
+     * @return The result of the craft.
+     */
+    default ItemStack craftItem(ItemStack chisel, ItemStack source, ItemStack target, EntityPlayer player) {
         int toCraft = source.stackSize;
         if (chisel.isItemStackDamageable()) {
             int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
             toCraft = Math.min(toCraft, damageLeft);
             chisel.damageItem(toCraft, player);
         }
-        ItemStack res = target.getStack().copy();
+        ItemStack res = target.copy();
         source.stackSize -= toCraft;
         res.stackSize = toCraft;
         return res;

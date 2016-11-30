@@ -9,6 +9,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.client.ClientUtil;
 
 public class SlotChiselSelection extends Slot {
@@ -46,7 +48,8 @@ public class SlotChiselSelection extends Slot {
 
             if (crafted != null) {
                 IChiselItem item = (IChiselItem) container.getChisel().getItem();
-                ItemStack res = item.craftItem(chisel, crafted, container.carving.getVariation(itemstack), player);
+                ICarvingVariation var = container.carving.getVariation(itemstack);
+                ItemStack res = item.craftItem(chisel, crafted, itemstack, player);
                 if (chisel.stackSize == 0) {
                     container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), null);
                     container.onChiselBroken();
