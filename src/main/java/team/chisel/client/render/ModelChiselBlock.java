@@ -12,6 +12,7 @@ import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
 import gnu.trove.set.hash.TLongHashSet;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.cache.Cache;
@@ -51,6 +52,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
+import team.chisel.Chisel;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
@@ -104,7 +106,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
         ModelChiselBlock baked = this;
         
-        if (state instanceof ChiselExtendedState) {
+        if (Chisel.proxy.getClientWorld() != null && state instanceof ChiselExtendedState) {
             ChiselExtendedState ext = (ChiselExtendedState) state;
             RenderContextList ctxList = ext.getContextList(ext.getClean(), model);
 
