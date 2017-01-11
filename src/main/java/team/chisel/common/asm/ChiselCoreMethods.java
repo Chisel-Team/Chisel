@@ -17,7 +17,7 @@ public class ChiselCoreMethods {
         if (model instanceof ModelChiselBlock) {
             return ((ModelChiselBlock) model).getModel().getChiselTextures().stream().map(t -> t.getLayer()).collect(Collectors.toList()).contains(layer);
         }
-        return state.getBlock().canRenderInLayer(state, layer);
+        return state.getBlock().getBlockLayer() == layer; // Vanilla logic. Should be updated if vanilla changes. Any override will skip our patch anyways. 
     }
 
 }
