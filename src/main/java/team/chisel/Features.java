@@ -389,7 +389,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("cobblestone", Blocks.COBBLESTONE.getDefaultState(), -20);
 
-            CarvingUtils.getChiselRegistry().registerOre("cobblestone", "cobblestone");
+//            CarvingUtils.getChiselRegistry().registerOre("cobblestone", "cobblestone");
 
             factory.newBlock(Material.ROCK, "cobblestone", provider)
                     .newVariation("cracked")
@@ -2059,7 +2059,7 @@ public enum Features {
             Carving.chisel.addVariation("stonebrick", Blocks.STONE.getDefaultState(), -22);
             // Carving.chisel.addVariation("stonebrick", Blocks.double_stone_slab.getDefaultState().withProperty(BlockDoubleStoneSlab.VARIANT, BlockDoubleStoneSlab.EnumType.STONE), -21);
 
-            CarvingUtils.getChiselRegistry().registerOre("stonebrick", "stone");
+//            CarvingUtils.getChiselRegistry().registerOre("stonebrick", "stone");
 
             factory.newBlock(Material.ROCK, "stonebrick", provider)
                     .setParentFolder("stone")
