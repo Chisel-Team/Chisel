@@ -25,6 +25,7 @@ import team.chisel.common.util.NBTUtil;
 
 public class ChiselController {
     
+    @SuppressWarnings({ "null", "unused" })
     @SubscribeEvent
     public static void onPlayerInteract(PlayerInteractEvent.LeftClickBlock event) {
 
@@ -44,6 +45,10 @@ public class ChiselController {
             }
             
             ItemStack inWorldStack = state.getBlock().getPickBlock(state, new RayTraceResult(event.getHitVec(), event.getFace()), event.getWorld(), event.getPos(), player);
+            if (inWorldStack == null) {
+                return;
+            }
+            
             ICarvingGroup blockGroup = registry.getGroup(inWorldStack);
             if (blockGroup == null) {
                 return;
