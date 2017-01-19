@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.IFacade;
 import team.chisel.client.render.ConnectionLocations;
+import team.chisel.common.util.BitUtil;
 import team.chisel.common.util.Dir;
 
 import com.google.common.base.Optional;
@@ -114,7 +115,7 @@ public class CTM {
 	public Optional<Boolean> disableObscuredFaceCheck = Optional.absent();
 
 	protected TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
-	protected EnumMap<Dir, Boolean> connectionMap = Maps.newEnumMap(Dir.class);
+	protected byte connectionMap;
 	protected int[] submapCache;
 	
 	@Setter
@@ -122,10 +123,6 @@ public class CTM {
 	protected boolean ignoreStates;
 
 	protected CTM() {
-		for (Dir dir : Dir.VALUES) {
-			connectionMap.put(dir, false);
-		}
-
 		// Mapping the different corner indeces to their respective dirs
 		submapMap.put(0, new Dir[] { BOTTOM, LEFT, BOTTOM_LEFT });
 		submapMap.put(1, new Dir[] { BOTTOM, RIGHT, BOTTOM_RIGHT });
@@ -179,6 +176,14 @@ public class CTM {
     public static boolean isDefaultTexture(int id) {
         return (id == 16 || id == 17 || id == 18 || id == 19);
     }
+    
+    protected void setConnectedState(Dir dir, boolean connected) {
+        if (connected) {
+            connectionMap |= 1 << dir.ordinal();
+        } else {
+            connectionMap &= ~(1 << dir.ordinal());
+        }
+    }
 
     /**
      * Builds the connection map and stores it in this CTM instance. The {@link #connected(Dir)}, {@link #connectedAnd(Dir...)}, and {@link #connectedOr(Dir...)} methods can be used to access it.
@@ -186,21 +191,19 @@ public class CTM {
     public void buildConnectionMap(IBlockAccess world, BlockPos pos, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);
         for (Dir dir : Dir.VALUES) {
-            connectionMap.put(dir, dir.isConnected(this, world, pos, side, state));
+            setConnectedState(dir, dir.isConnected(this, world, pos, side, state));
         }
     }
 
-	public void buildConnectionMap(long data, EnumFacing side){
-		for (Dir dir : Dir.VALUES){
-			connectionMap.put(dir, false);
-		}
-		List<ConnectionLocations> connections = ConnectionLocations.decode(data);
-		for (ConnectionLocations loc : connections){
-			if (loc.getDirForSide(side) != null){
-				connectionMap.put(loc.getDirForSide(side), true);
-			}
-		}
-	}
+    public void buildConnectionMap(long data, EnumFacing side) {
+        connectionMap = 0; // Clear all connections
+        List<ConnectionLocations> connections = ConnectionLocations.decode(data);
+        for (ConnectionLocations loc : connections) {
+            if (loc.getDirForSide(side) != null) {
+                setConnectedState(loc.getDirForSide(side), true);
+            }
+        }
+    }
 
 	private void fillSubmaps(int idx) {
 		Dir[] dirs = submapMap.get(idx);
@@ -225,7 +228,7 @@ public class CTM {
 	 * @return True if the cached connectionMap holds a connection in this {@link Dir direction}.
 	 */
 	public boolean connected(Dir dir) {
-		return connectionMap.get(dir);
+		return ((connectionMap >> dir.ordinal()) & 1) == 1;
 	}
 
 	/**
