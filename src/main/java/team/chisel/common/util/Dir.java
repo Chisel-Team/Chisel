@@ -1,9 +1,12 @@
 package team.chisel.common.util;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import static net.minecraft.util.EnumFacing.*;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
@@ -12,7 +15,6 @@ import net.minecraft.util.EnumFacing.AxisDirection;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.client.render.ctm.CTM;
-import static net.minecraft.util.EnumFacing.*;
 
 /**
  * Think of this class as a "Two dimensional ForgeDirection, with diagonals".
@@ -112,39 +114,44 @@ public enum Dir {
         throw new UnsupportedOperationException("Yell at tterrag to finish deserialization");
     }
 
-	@SuppressWarnings("null")
+    private final EnumMap<EnumFacing, EnumFacing[]> normalizedCache = new EnumMap<>(EnumFacing.class);
+    
+    @SuppressWarnings("null")
     public EnumFacing[] getNormalizedDirs(EnumFacing normal) {
-		if (normal == NORMAL) {
-			return dirs;
-		} else if (normal == NORMAL.getOpposite()) {
-			// If this is the opposite direction of the default normal, we
-			// need to mirror the dirs
-			// A mirror version does not affect y+ and y- so we ignore those
-			EnumFacing[] ret = new EnumFacing[dirs.length];
-			for (int i = 0; i < ret.length; i++) {
-				ret[i] = dirs[i].getFrontOffsetY() != 0 ? dirs[i] : dirs[i].getOpposite();
-			}
-			return ret;
-		} else {
-			EnumFacing axis = null;
-			// Next, we need different a different rotation axis depending
-			// on if this is up/down or not
-			if (normal.getFrontOffsetY() == 0) {
-				// If it is not up/down, pick either the left or right-hand
-				// rotation
-				axis = normal == NORMAL.rotateY() ? UP : DOWN;
-			} else {
-				// If it is up/down, pick either the up or down rotation.
-				axis = normal == UP ? NORMAL.rotateYCCW() : NORMAL.rotateY();
-			}
-			EnumFacing[] ret = new EnumFacing[dirs.length];
-			// Finally apply all the rotations
-			for (int i = 0; i < ret.length; i++) {
-				ret[i] = rotate(dirs[i], axis);
-			}
-			return ret;
-		}
-	}
+        if (!normalizedCache.containsKey(normal)) {
+            if (normal == NORMAL) {
+                normalizedCache.put(normal, dirs);
+            } else if (normal == NORMAL.getOpposite()) {
+                // If this is the opposite direction of the default normal, we
+                // need to mirror the dirs
+                // A mirror version does not affect y+ and y- so we ignore those
+                EnumFacing[] ret = new EnumFacing[dirs.length];
+                for (int i = 0; i < ret.length; i++) {
+                    ret[i] = dirs[i].getFrontOffsetY() != 0 ? dirs[i] : dirs[i].getOpposite();
+                }
+                normalizedCache.put(normal, ret);
+            } else {
+                EnumFacing axis = null;
+                // Next, we need different a different rotation axis depending
+                // on if this is up/down or not
+                if (normal.getFrontOffsetY() == 0) {
+                    // If it is not up/down, pick either the left or right-hand
+                    // rotation
+                    axis = normal == NORMAL.rotateY() ? UP : DOWN;
+                } else {
+                    // If it is up/down, pick either the up or down rotation.
+                    axis = normal == UP ? NORMAL.rotateYCCW() : NORMAL.rotateY();
+                }
+                EnumFacing[] ret = new EnumFacing[dirs.length];
+                // Finally apply all the rotations
+                for (int i = 0; i < ret.length; i++) {
+                    ret[i] = rotate(dirs[i], axis);
+                }
+                normalizedCache.put(normal, ret);
+            }
+        }
+        return normalizedCache.get(normal);
+    }
 	
 	public @Nullable Dir getDirFor(EnumFacing[] dirs) {
 	    if (dirs == this.dirs) { // Short circuit for identical return from getNormalizedDirs
