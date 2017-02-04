@@ -3,6 +3,9 @@ package team.chisel.client.render;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -14,6 +17,7 @@ import team.chisel.common.util.Dir;
 /**
  * Represents all the different spot for connection locations for a ctm block
  */
+@ParametersAreNonnullByDefault
 public enum ConnectionLocations {
 
     UP(Dir.TOP),
@@ -64,33 +68,33 @@ public enum ConnectionLocations {
     /**
      * The enum facing directions needed to get to this connection location
      */
-    private EnumFacing normal;
-    private Dir dir;
+    private final EnumFacing normal;
+    private final @Nullable Dir dir;
     private boolean offset;
 
-    private ConnectionLocations(Dir dir) {
+    private ConnectionLocations(@Nullable Dir dir) {
         this(EnumFacing.SOUTH, dir);
     }
     
-    private ConnectionLocations(Dir dir, boolean offset) {
+    private ConnectionLocations(@Nullable Dir dir, boolean offset) {
         this(EnumFacing.SOUTH, dir, offset);
     }
     
-    private ConnectionLocations(EnumFacing normal, Dir dir){
+    private ConnectionLocations(EnumFacing normal, @Nullable Dir dir){
         this(normal, dir, false);
     }
     
-    private ConnectionLocations(EnumFacing normal, Dir dir, boolean offset) {
+    private ConnectionLocations(EnumFacing normal, @Nullable Dir dir, boolean offset) {
         this.normal = normal;
         this.dir = dir;
         this.offset = offset;
     }
 
-    public Dir getDirForSide(EnumFacing facing){
+    public @Nullable Dir getDirForSide(EnumFacing facing){
         return dir == null ? null : dir.relativize(facing);
     }
 
-    public EnumFacing clipOrDestroy(EnumFacing direction) {
+    public @Nullable EnumFacing clipOrDestroy(EnumFacing direction) {
         EnumFacing[] dirs = dir == null ? new EnumFacing[] {normal, normal} : dir.getNormalizedDirs(direction);
         if (dirs[0] == direction) {
             return dirs.length > 1 ? dirs[1] : null;
@@ -101,6 +105,7 @@ public enum ConnectionLocations {
         }
     }
 
+    @SuppressWarnings("null")
     public BlockPos transform(BlockPos pos) {
         if (dir != null) {
             for (EnumFacing facing : dir.getNormalizedDirs(normal)) {

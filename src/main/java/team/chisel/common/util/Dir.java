@@ -2,6 +2,9 @@ package team.chisel.common.util;
 
 import java.util.Arrays;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
@@ -19,6 +22,7 @@ import static net.minecraft.util.EnumFacing.*;
  * Note that, for example, {@link #TOP_RIGHT} does not mean connected to the {@link #TOP} and {@link #RIGHT}, but connected in the diagonal direction represented by {@link #TOP_RIGHT}. This is used
  * for inner corner rendering.
  */
+@ParametersAreNonnullByDefault
 public enum Dir {
 	// @formatter:off
     TOP(UP), 
@@ -79,6 +83,7 @@ public enum Dir {
         return ctm.isConnected(world, pos, getConnection(pos, side), side, state);
     }
     
+    @SuppressWarnings("null")
     private BlockPos getConnection(BlockPos pos, EnumFacing side) {
         EnumFacing[] dirs = getNormalizedDirs(side);
         BlockPos connection = pos;
@@ -107,7 +112,8 @@ public enum Dir {
         throw new UnsupportedOperationException("Yell at tterrag to finish deserialization");
     }
 
-	public EnumFacing[] getNormalizedDirs(EnumFacing normal) {
+	@SuppressWarnings("null")
+    public EnumFacing[] getNormalizedDirs(EnumFacing normal) {
 		if (normal == NORMAL) {
 			return dirs;
 		} else if (normal == NORMAL.getOpposite()) {
@@ -140,7 +146,7 @@ public enum Dir {
 		}
 	}
 	
-	public Dir getDirFor(EnumFacing[] dirs) {
+	public @Nullable Dir getDirFor(EnumFacing[] dirs) {
 	    if (dirs == this.dirs) { // Short circuit for identical return from getNormalizedDirs
 	        return this; 
 	    }
