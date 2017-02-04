@@ -1,8 +1,10 @@
 package team.chisel.common.integration.jei;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -14,6 +16,7 @@ import team.chisel.api.carving.ICarvingVariation;
 
 import com.google.common.collect.Lists;
 
+@ParametersAreNonnullByDefault
 public class ChiselRecipeWrapper implements IRecipeWrapper {
 
     private ICarvingGroup group;
@@ -42,12 +45,12 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
 
     @Override
     public List<FluidStack> getFluidInputs(){
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
     public List<FluidStack> getFluidOutputs(){
-        return null;
+        return Collections.emptyList();
     }
 
     @Override
@@ -60,7 +63,7 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
 
     @Override
     public List<String> getTooltipStrings(int mouseX, int mouseY){
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

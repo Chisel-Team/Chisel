@@ -1,6 +1,5 @@
 package team.chisel.common.integration.jei;
 
-import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AllArgsConstructor;

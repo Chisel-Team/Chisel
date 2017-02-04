@@ -2,6 +2,8 @@ package team.chisel.common.integration.jei;
 
 import java.util.stream.Collectors;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -12,6 +14,7 @@ import team.chisel.common.carving.Carving;
 import team.chisel.common.integration.jei.ChiselRecipeHandler.CarvingGroupWrapper;
 
 @JEIPlugin
+@ParametersAreNonnullByDefault
 public class ChiselJEIPlugin implements IModPlugin {
 
     @Override

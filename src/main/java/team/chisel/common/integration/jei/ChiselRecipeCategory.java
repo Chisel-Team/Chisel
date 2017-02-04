@@ -3,6 +3,7 @@ package team.chisel.common.integration.jei;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
@@ -13,22 +14,20 @@ import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 @ParametersAreNonnullByDefault
-public class ChiselRecipeCategory implements IRecipeCategory {
+public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper> {
 
     private static final ResourceLocation TEXTURE_LOC = new ResourceLocation("chisel", "textures/chiselJEI.png");
     
     private IDrawable background;
     private IDrawable arrowUp, arrowDown;
     
-    private IRecipeLayout layout;
-    private IFocus<?> focus;
+    private @Nullable IFocus<?> focus;
 
     public ChiselRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.createDrawable(TEXTURE_LOC, 0, 0, 165, 126);
@@ -56,7 +55,7 @@ public class ChiselRecipeCategory implements IRecipeCategory {
 
     @Override
     public void drawExtras(Minecraft minecraft) {
-        if (layout != null) {
+        if (focus != null) {
             if (focus.getMode() == IFocus.Mode.INPUT) {
                 arrowDown.draw(minecraft, 73, 21);
             } else {
@@ -71,9 +70,8 @@ public class ChiselRecipeCategory implements IRecipeCategory {
     }
 
     @Override
-    public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper) {
-        this.layout = recipeLayout;
-        this.focus = layout.getFocus();
+    public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull ChiselRecipeWrapper recipeWrapper) {
+        IFocus<?> focus = (this.focus = recipeLayout.getFocus());
         
         recipeLayout.getItemStacks().init(0, focus.getMode() == IFocus.Mode.INPUT, 73, 3);
         ItemStack input = (ItemStack) focus.getValue();
@@ -117,7 +115,13 @@ public class ChiselRecipeCategory implements IRecipeCategory {
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, IRecipeWrapper recipeWrapper, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper, IIngredients ingredients) {
         setRecipe(recipeLayout, recipeWrapper);
+    }
+
+    @Override
+    @Nullable
+    public IDrawable getIcon() {
+        return null;
     }
 }
