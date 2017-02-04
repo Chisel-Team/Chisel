@@ -302,6 +302,7 @@ public class CTM {
      *            The state to check against for connection.
      * @return True if the given block can connect to the given location on the given side.
      */
+    @SuppressWarnings({ "unused", "null" })
     public boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing dir, IBlockState state) {
 
 //      if (CTMLib.chiselLoaded() && connectionBlocked(world, x, y, z, dir.ordinal())) {
@@ -316,7 +317,9 @@ public class CTM {
         IBlockState obscuring = disableObscured ? null : getBlockOrFacade(world, pos2, dir);
 
         // bad API user
-        Preconditions.checkNotNull(con, "Error, received null blockstate as facade from block %s", world.getBlockState(connection));
+        if (con == null) {
+            throw new IllegalStateException("Error, received null blockstate as facade from block " + world.getBlockState(connection));
+        }
 
         boolean ret = ignoreStates ? con.getBlock() == state.getBlock() : con == state;
 
