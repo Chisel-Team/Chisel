@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
@@ -16,15 +15,13 @@ import com.google.gson.JsonObject;
 
 import lombok.Getter;
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureInfo;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.ISubmap;
 import team.chisel.client.render.ctm.Submap;
-import team.chisel.client.render.ctx.BlockRenderContextPattern;
+import team.chisel.client.render.ctx.BlockRenderContextGridTexture;
 import team.chisel.client.render.ctx.BlockRenderContextPosition;
 import team.chisel.client.render.type.BlockRenderTypeMap;
 
@@ -35,22 +32,14 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
 
             @Override
             protected List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, @Nullable IBlockRenderContext context, int quadGoal) {
-                EnumFacing side = quad.getFace();
 
-                BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition) context).getPosition();
-                rand.setSeed(MathHelper.getPositionRandom(pos) + side.ordinal());
-                rand.nextBoolean();
-
-                int w = tex.xSize;
-                int h = tex.ySize;
-                float intervalX = 16f / w;
-                float intervalY = 16f / h;
-
-                int unitsAcross = rand.nextInt(w) + 1;
-                int unitsDown = rand.nextInt(h) + 1;
-
-                float maxU = unitsAcross * intervalX;
-                float maxV = unitsDown * intervalY;
+                Point2i textureCoords = context == null ? new Point2i(0, 0) : ((BlockRenderContextGridTexture)context).getTextureCoords(quad.getFace());
+                
+                float intervalX = 16f / tex.getXSize();
+                float intervalY = 16f / tex.getYSize();
+                
+                float maxU = textureCoords.x * intervalX;
+                float maxV = textureCoords.y * intervalY;
                 ISubmap uvs = new Submap(intervalX, intervalY, maxU - intervalX, maxV - intervalY);
 
                 Quad q = Quad.from(quad).setFullbright(tex.fullbright);
@@ -69,13 +58,18 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
                     return Arrays.stream(quads).filter(Objects::nonNull).map(Quad::rebake).collect(Collectors.toList());
                 }
             }
+            
+            @Override
+            public IBlockRenderContext getContext(@Nonnull BlockPos pos, @Nonnull ChiselTextureMap tex) {
+                return new BlockRenderContextGridTexture.Random(pos, tex).applyOffset();
+            }
         },
         PATTERNED {
 
             @Override
             protected List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, @Nullable IBlockRenderContext context, int quadGoal) {
                 
-                Point2i textureCoords = context == null ? new Point2i(0, 0) : ((BlockRenderContextPattern)context).getTextureCoords(quad.getFace());
+                Point2i textureCoords = context == null ? new Point2i(0, 0) : ((BlockRenderContextGridTexture)context).getTextureCoords(quad.getFace());
                 
                 float intervalU = 16f / tex.xSize;
                 float intervalV = 16f / tex.ySize;
@@ -106,7 +100,7 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
             
             @Override
             public IBlockRenderContext getContext(@Nonnull BlockPos pos, @Nonnull ChiselTextureMap tex) {
-                return new BlockRenderContextPattern(pos, tex).applyOffset();
+                return new BlockRenderContextGridTexture.Patterned(pos, tex).applyOffset();
             }
         };
 
@@ -123,8 +117,6 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
     private final int ySize;
 
     private final MapType map;
-
-    private static final Random rand = new Random();
 
     public ChiselTextureMap(BlockRenderTypeMap type, TextureInfo info, MapType map) {
         super(type, info);
