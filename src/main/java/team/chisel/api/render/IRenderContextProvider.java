@@ -16,9 +16,10 @@ public interface IRenderContextProvider {
      *            The world block access
      * @param pos
      *            The block position
+     * @param tex 
      * @return The block render context
      */
-    IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, @Nonnull BlockPos pos);
+    IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, @Nonnull BlockPos pos, IChiselTexture<?> tex);
 
     /**
      * Gets the render context from this compressed data. This int is just the data for this context

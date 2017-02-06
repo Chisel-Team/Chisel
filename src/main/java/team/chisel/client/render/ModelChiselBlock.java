@@ -11,8 +11,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
-import gnu.trove.set.hash.TLongHashSet;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.cache.Cache;
@@ -53,11 +51,11 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IPerspectiveAwareModel;
 import net.minecraftforge.common.model.TRSRTransformation;
 import team.chisel.Chisel;
-import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.ChiselExtendedState;
+import team.chisel.common.util.ProfileUtil;
 
 /**
  * Model for all chisel blocks
@@ -104,28 +102,36 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     @Override
     @SneakyThrows
     public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
+        ProfileUtil.start("chisel_models");
         ModelChiselBlock baked = this;
         
         if (Chisel.proxy.getClientWorld() != null && state instanceof ChiselExtendedState) {
+            ProfileUtil.start("state_creation");
             ChiselExtendedState ext = (ChiselExtendedState) state;
             RenderContextList ctxList = ext.getContextList(ext.getClean(), model);
 
             TLongSet serialized = ctxList.serialized();
+            ProfileUtil.end();
             baked = modelcache.get(new State(ext.getClean(), serialized), () -> createModel(state, model, ctxList));
-        } else if (state != null)  {
+        } else if (state != null) {
             baked = modelcache.get(new State(state, null), () -> createModel(state, model, null));
         }
         
+        ProfileUtil.start("quad_lookup");
         BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
+        List<BakedQuad> ret;
         if (side != null && layer != null) {
-            return baked.faceQuads.get(layer, side);
+            ret = baked.faceQuads.get(layer, side);
         } else if (side != null) {
-            return baked.faceQuads.column(side).values().stream().flatMap(List::stream).collect(Collectors.toList());
+            ret = baked.faceQuads.column(side).values().stream().flatMap(List::stream).collect(Collectors.toList());
         } else if (layer != null) {
-            return baked.genQuads.get(layer);
+            ret = baked.genQuads.get(layer);
         } else {
-            return Lists.newArrayList(baked.genQuads.values());
+            ret = Lists.newArrayList(baked.genQuads.values());
         }
+        ProfileUtil.end();
+        ProfileUtil.end();
+        return ret;
     }
 
     @Override
@@ -161,6 +167,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     private static final BlockRenderLayer[] LAYERS = BlockRenderLayer.values();
     
     private ModelChiselBlock createModel(IBlockState state, @Nonnull ModelChisel model, RenderContextList ctx) {
+        Minecraft.getMinecraft().mcProfiler.startSection("baking");
         ModelChiselBlock ret = new ModelChiselBlock(model);
         IBakedModel baked = model.getModel(state);
         List<BakedQuad> quads = Lists.newArrayList();
@@ -178,6 +185,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
                 ret.genQuads.putAll(layer, quads);
             }
         }
+        Minecraft.getMinecraft().mcProfiler.endSection();
         return ret;
     }
 

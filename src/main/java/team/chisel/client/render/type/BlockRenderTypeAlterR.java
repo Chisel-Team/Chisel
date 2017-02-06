@@ -22,7 +22,7 @@ public class BlockRenderTypeAlterR implements IBlockRenderType {
     }
 
     @Override
-    public IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos, IChiselTexture<?> tex) {
         return new BlockRenderContextPosition(pos);
     }
 

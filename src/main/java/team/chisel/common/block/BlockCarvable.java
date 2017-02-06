@@ -233,10 +233,6 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
-        if (model instanceof ModelChiselBlock) {
-            return ((ModelChiselBlock) model).getModel().getChiselTextures().stream().map(t -> t.getLayer()).collect(Collectors.toList()).contains(layer);
-        }
         return super.canRenderInLayer(state, layer);
     }
 

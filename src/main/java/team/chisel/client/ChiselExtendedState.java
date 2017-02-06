@@ -25,6 +25,7 @@ import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.render.ModelChisel;
+import team.chisel.common.util.ProfileUtil;
 
 @ParametersAreNonnullByDefault
 public class ChiselExtendedState extends BlockStateBase implements IExtendedBlockState {
@@ -53,6 +54,7 @@ public class ChiselExtendedState extends BlockStateBase implements IExtendedBloc
     
     @SuppressWarnings("null")
     public ChiselExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
+        ProfileUtil.start("chisel_extended_state");
         this.wrapped = state;
         this.world = world;
         this.pos = pos;
@@ -65,6 +67,7 @@ public class ChiselExtendedState extends BlockStateBase implements IExtendedBloc
             extState = null;
             clean = wrapped;
         }
+        ProfileUtil.end();
     }
 
     public ChiselExtendedState(IBlockState state, ChiselExtendedState parent) {
@@ -74,7 +77,7 @@ public class ChiselExtendedState extends BlockStateBase implements IExtendedBloc
     @SuppressWarnings("null")
     public RenderContextList getContextList(IBlockState state, ModelChisel model) {
         if (ctxCache == null) {
-            ctxCache = new RenderContextList(state, model.getChiselTextures().stream().map(IChiselTexture::getType).collect(Collectors.toList()), world, pos);
+            ctxCache = new RenderContextList(state, model.getChiselTextures(), world, pos);
         }
         return ctxCache;
     }

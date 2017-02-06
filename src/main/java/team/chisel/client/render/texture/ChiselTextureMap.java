@@ -8,29 +8,25 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.vecmath.Point2i;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 
-import net.minecraft.client.Minecraft;
+import lombok.Getter;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import team.chisel.Chisel;
-import team.chisel.api.chunkdata.ChunkData;
-import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.TextureInfo;
 import team.chisel.client.render.Quad;
 import team.chisel.client.render.ctm.ISubmap;
 import team.chisel.client.render.ctm.Submap;
-import team.chisel.client.render.ctx.BlockRenderContextOffset;
+import team.chisel.client.render.ctx.BlockRenderContextPattern;
 import team.chisel.client.render.ctx.BlockRenderContextPosition;
 import team.chisel.client.render.type.BlockRenderTypeMap;
-import team.chisel.common.util.PerChunkData;
 
 public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> {
 
@@ -38,7 +34,7 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
         RANDOM {
 
             @Override
-            protected List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, IBlockRenderContext context, int quadGoal) {
+            protected List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, @Nullable IBlockRenderContext context, int quadGoal) {
                 EnumFacing side = quad.getFace();
 
                 BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition) context).getPosition();
@@ -77,56 +73,16 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
         PATTERNED {
 
             @Override
-            protected List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, IBlockRenderContext context, int quadGoal) {
-                EnumFacing side = quad.getFace();
-                @Nonnull BlockPos pos = context == null ? new BlockPos(0, 0, 0) : ((BlockRenderContextPosition) context).getPosition();
+            protected List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, @Nullable IBlockRenderContext context, int quadGoal) {
                 
-                IOffsetData data = ChunkData.getOffsetForChunk(Minecraft.getMinecraft().theWorld, pos);
-                if (data != null) {
-                    pos.add(data.getOffset());
-                }
+                Point2i textureCoords = context == null ? new Point2i(0, 0) : ((BlockRenderContextPattern)context).getTextureCoords(quad.getFace());
                 
-                int x = pos.getX();
-                int y = pos.getY();
-                int z = pos.getZ();
-
-                int tx, ty;
-
-                // Calculate submap x/y from x/y/z by ignoring the direction which the side is offset on
-                // Negate the y coordinate when calculating non-vertical directions, otherwise it is reverse order
-                if (side.getAxis().isVertical()) {
-                    // DOWN || UP
-                    tx = x % tex.xSize;
-                    ty = (side.getFrontOffsetY() * z + 1) % tex.ySize;
-                } else if (side.getAxis() == Axis.Z) {
-                    // NORTH || SOUTH
-                    tx = x % tex.xSize;
-                    ty = -y % tex.ySize;
-                } else {
-                    // WEST || EAST
-                    tx = (z + 1) % tex.xSize;
-                    ty = -y % tex.ySize;
-                }
-
-                // Reverse x order for north and east
-                if (side == EnumFacing.NORTH || side == EnumFacing.EAST) {
-                    tx = (tex.xSize - tx - 1) % tex.xSize;
-                }
-
-                // Remainder can produce negative values, so wrap around
-                if (tx < 0) {
-                    tx += tex.xSize;
-                }
-                if (ty < 0) {
-                    ty += tex.ySize;
-                }
-
                 float intervalU = 16f / tex.xSize;
                 float intervalV = 16f / tex.ySize;
 
                 // throw new RuntimeException(index % variationSize+" and "+index/variationSize);
-                float minU = intervalU * tx;
-                float minV = intervalV * ty;
+                float minU = intervalU * textureCoords.x;
+                float minV = intervalV * textureCoords.y;
 
                 ISubmap submap = new Submap(intervalU, intervalV, minU, minV);
 
@@ -149,19 +105,21 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
             }
             
             @Override
-            public IBlockRenderContext getContext(@Nonnull BlockPos pos) {
-                return new BlockRenderContextOffset(pos);
+            public IBlockRenderContext getContext(@Nonnull BlockPos pos, @Nonnull ChiselTextureMap tex) {
+                return new BlockRenderContextPattern(pos, tex).applyOffset();
             }
         };
 
-        protected abstract List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, IBlockRenderContext context, int quadGoal);
+        protected abstract List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, @Nullable IBlockRenderContext context, int quadGoal);
         
-        public IBlockRenderContext getContext(@Nonnull BlockPos pos) {
+        public IBlockRenderContext getContext(@Nonnull BlockPos pos, @Nonnull ChiselTextureMap tex) {
             return new BlockRenderContextPosition(pos);
         }
     }
 
+    @Getter
     private final int xSize;
+    @Getter
     private final int ySize;
 
     private final MapType map;
