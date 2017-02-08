@@ -36,6 +36,7 @@ public final class ChiselBlocks
     static BlockCarvable carpet = null;
     static BlockCarvable cloud = null;
     static BlockCarvable concrete = null;
+    static BlockCarvable dirt = null;
     static BlockCarvable ender_pearl_block = null;
     static BlockCarvable factory = null;
     static BlockCarvable fantasy = null;
@@ -44,12 +45,15 @@ public final class ChiselBlocks
     static BlockCarvable holystone = null;
     static BlockCarvable laboratory = null;
     static BlockCarvable lavastone = null;
+    static BlockCarvable lavastone1 = null;
+    static BlockCarvable lavastone2 = null;
     static BlockCarvable limestone = null;
     static BlockCarvable limestoneextra = null;
     static BlockCarvable line_marking = null;
     static BlockCarvable marble = null;
     static BlockCarvable marbleextra = null;
     static BlockCarvable military = null;
+    static BlockCarvable netherrack = null;
     static BlockCarvable paper = null;
     static BlockCarvable temple = null;
     static BlockCarvable tyrian = null;
@@ -57,5 +61,7 @@ public final class ChiselBlocks
     static BlockCarvable voidstone = null;
     static BlockCarvable warningSign = null;
     static BlockCarvable waterstone = null;
+    static BlockCarvable waterstone1 = null;
+    static BlockCarvable waterstone2 = null;
 
 }

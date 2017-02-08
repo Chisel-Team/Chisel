@@ -619,7 +619,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("dirt", Blocks.DIRT.getDefaultState(), -1);
-            factory.newBlock(Material.GROUND, "dirt", provider)
+            factory.newBlock(Material.GROUND, "dirt", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
                     .newVariation("bricks")
                     .next("netherbricks")
                     .next("bricks3")
@@ -1318,7 +1318,7 @@ public enum Features {
     LAVASTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "lavastone", provider)
+            factory.newBlock(Material.ROCK, "lavastone", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1594,7 +1594,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("netherrack", "netherrack");
 
-            factory.newBlock(Material.ROCK, "netherrack", provider)
+            factory.newBlock(Material.ROCK, "netherrack", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
                     .newVariation("a1-netherrack-bloodgravel")
                     .next("a1-netherrack-bloodrock")
                     .next("a1-netherrack-bloodrockgrey")
@@ -2368,7 +2368,7 @@ public enum Features {
     WATERSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "waterstone", provider).opaque(false)
+            factory.newBlock(Material.ROCK, "waterstone", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class)).opaque(false)
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
