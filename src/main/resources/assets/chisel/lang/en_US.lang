@@ -16,6 +16,8 @@ container.chisel.title=Chisel
 itemGroup.chiselCreativeTab=Chisel
 chisel.jei.title=Chiseling
 
+chisel.tooltip.blockname=%1$s (%2$s)
+
 tile.chisel.blockAluminum.name=Block of Aluminum
 tile.chisel.blockAluminum.caution.desc.1=Caution
 tile.chisel.blockAluminum.crate.desc.1=Shipping Crate
