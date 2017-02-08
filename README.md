@@ -27,6 +27,7 @@ All images contained by the following directories
 - `/src/main/resources/assets/chisel/textures/blocks/dirt/`
 - `/src/main/resources/assets/chisel/textures/blocks/endstone/`
 - `/src/main/resources/assets/chisel/textures/blocks/fluid/`
+- `/src/main/resources/assets/chisel/textures/blocks/glass_stained/`
 - `/src/main/resources/assets/chisel/textures/blocks/glowstone/`
 - `/src/main/resources/assets/chisel/textures/blocks/granite/`
 - `/src/main/resources/assets/chisel/textures/blocks/hardenedclay/`

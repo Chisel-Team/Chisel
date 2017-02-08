@@ -1,0 +1,8 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./panel",
+        "./panel_ct"
+    ],
+    "layer":"TRANSLUCENT"
+}
