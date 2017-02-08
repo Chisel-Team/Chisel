@@ -3,15 +3,14 @@ package team.chisel.client.render.type;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import team.chisel.api.render.*;
-import team.chisel.client.render.ctm.CTM;
+import team.chisel.api.render.BlockRenderType;
+import team.chisel.api.render.IBlockRenderContext;
+import team.chisel.api.render.IBlockRenderType;
+import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.TextureInfo;
+import team.chisel.client.render.ctx.BlockRenderContextAlterR;
 import team.chisel.client.render.ctx.BlockRenderContextPosition;
-import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.texture.ChiselTextureAlterR;
-import team.chisel.client.render.texture.ChiselTextureMap;
-import team.chisel.client.render.texture.ChiselTextureSimpleCTM;
-
-import com.google.common.base.Optional;
 
 @BlockRenderType("AR") /* Alernating Random */
 public class BlockRenderTypeAlterR implements IBlockRenderType {
@@ -22,8 +21,8 @@ public class BlockRenderTypeAlterR implements IBlockRenderType {
     }
 
     @Override
-    public IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return new BlockRenderContextPosition(pos);
+    public IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos, IChiselTexture<?> tex) {
+        return new BlockRenderContextAlterR(pos, (ChiselTextureAlterR) tex);
     }
 
     @Override

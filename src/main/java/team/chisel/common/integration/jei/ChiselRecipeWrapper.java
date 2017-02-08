@@ -1,8 +1,10 @@
 package team.chisel.common.integration.jei;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
 
@@ -13,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 
+@ParametersAreNonnullByDefault
 public class ChiselRecipeWrapper implements IRecipeWrapper {
 
     private ICarvingGroup group;
@@ -42,7 +45,7 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
 
     @Override
     public List<String> getTooltipStrings(int mouseX, int mouseY){
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

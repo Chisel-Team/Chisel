@@ -25,11 +25,12 @@ public class RenderContextList {
     private final Map<IBlockRenderType, IBlockRenderContext> contextMap = Maps.newIdentityHashMap();
     private final TLongSet serialized = new TLongHashSet();
 
-    public RenderContextList(IBlockState state, List<IBlockRenderType> types, IBlockAccess world, BlockPos pos) {
+    public RenderContextList(IBlockState state, List<IChiselTexture<?>> textures, IBlockAccess world, BlockPos pos) {
         this.state = state;
         
-        for (IBlockRenderType type : types) {
-            IBlockRenderContext ctx = type.getBlockRenderContext(state, world, pos);
+        for (IChiselTexture<?> tex : textures) {
+            IBlockRenderType type = tex.getType();
+            IBlockRenderContext ctx = type.getBlockRenderContext(state, world, pos, tex);
             if (ctx != null) {
                 contextMap.put(type, ctx);
             }

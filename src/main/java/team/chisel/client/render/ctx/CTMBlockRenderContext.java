@@ -15,6 +15,7 @@ import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.client.render.ConnectionLocations;
 import team.chisel.client.render.ModelChiselBlock;
+import team.chisel.client.render.RegionCache;
 import team.chisel.client.render.ctm.CTM;
 
 import static team.chisel.client.render.ConnectionLocations.*;
@@ -28,6 +29,7 @@ public class CTMBlockRenderContext implements IBlockRenderContext {
     private long data;
 
     public CTMBlockRenderContext(@Nonnull IBlockState state, IBlockAccess world, BlockPos pos) {
+        world = new RegionCache(pos, 1, world);
         for (EnumFacing face : EnumFacing.VALUES) {
             CTM ctm = createCTM(state);
             ctm.createSubmapIndices(world, pos, face);

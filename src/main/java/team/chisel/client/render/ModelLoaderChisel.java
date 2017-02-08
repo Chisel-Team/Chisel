@@ -6,9 +6,6 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
-import org.apache.logging.log4j.message.MessageFormatMessage;
-
-import com.google.common.base.Throwables;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

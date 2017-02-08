@@ -8,6 +8,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.client.ClientUtil;
 
 @ParametersAreNonnullByDefault
@@ -45,9 +47,9 @@ public class SlotChiselSelection extends Slot {
             player.inventory.setItemStack(ItemStack.EMPTY);
 
             if (!crafted.isEmpty()) {
+                
                 IChiselItem item = (IChiselItem) container.getChisel().getItem();
-                @SuppressWarnings("null")
-                ItemStack res = item.craftItem(chisel, crafted, container.carving.getVariation(itemstack), player);
+                ItemStack res = item.craftItem(chisel, crafted, itemstack, player);
                 if (chisel.getCount() == 0) {
                     container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
                     container.onChiselBroken();

@@ -9,15 +9,21 @@ import lombok.experimental.Accessors;
 import java.util.EnumMap;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.IFacade;
 import team.chisel.client.render.ConnectionLocations;
+import team.chisel.common.util.BitUtil;
 import team.chisel.common.util.Dir;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
 import static team.chisel.common.util.Dir.*;
@@ -72,6 +78,7 @@ import static team.chisel.common.util.Dir.*;
  * HAVE FUN!
  * -CptRageToaster-
  */
+@ParametersAreNonnullByDefault
 public class CTM {
 	
     /**
@@ -104,34 +111,29 @@ public class CTM {
     
     public static final ISubmap FULL_TEXTURE = new Submap(16, 16, 0, 0);
     
- // @formatter:on
+    // @formatter:on
 
 	/** Some hardcoded offset values for the different corner indeces */
 	protected static int[] submapOffsets = { 4, 5, 1, 0 };
-	/** For use via the Chisel 2 config only, altering this could cause unintended behavior */
+	/** For use via the config only, altering this could cause unintended behavior */
 	public static boolean disableObscuredFaceCheckConfig = false;
 
 	public Optional<Boolean> disableObscuredFaceCheck = Optional.absent();
 
-	protected TIntObjectMap<Dir[]> submapMap = new TIntObjectHashMap<Dir[]>();
-	protected EnumMap<Dir, Boolean> connectionMap = Maps.newEnumMap(Dir.class);
-	protected int[] submapCache;
+    // Mapping the different corner indeces to their respective dirs
+	protected static final Dir[][] submapMap = new Dir[][] {
+	    { BOTTOM, LEFT, BOTTOM_LEFT },
+	    { BOTTOM, RIGHT, BOTTOM_RIGHT },
+	    { TOP, RIGHT, TOP_RIGHT },
+	    { TOP, LEFT, TOP_LEFT }
+	};
+	
+	protected byte connectionMap;
+	protected int[] submapCache = new int[] { 18, 19, 17, 16 };
 	
 	@Setter
 	@Accessors(fluent = true, chain = true)
 	protected boolean ignoreStates;
-
-	protected CTM() {
-		for (Dir dir : Dir.VALUES) {
-			connectionMap.put(dir, false);
-		}
-
-		// Mapping the different corner indeces to their respective dirs
-		submapMap.put(0, new Dir[] { BOTTOM, LEFT, BOTTOM_LEFT });
-		submapMap.put(1, new Dir[] { BOTTOM, RIGHT, BOTTOM_RIGHT });
-		submapMap.put(2, new Dir[] { TOP, RIGHT, TOP_RIGHT });
-		submapMap.put(3, new Dir[] { TOP, LEFT, TOP_LEFT });
-	}
 
 	public static CTM getInstance() {
 		return new CTM();
@@ -142,9 +144,7 @@ public class CTM {
 	 * 
 	 *         Indeces are in counter-clockwise order starting at bottom left.
 	 */
-    public int[] createSubmapIndices(IBlockAccess world, BlockPos pos, EnumFacing side) {
-		submapCache = new int[] { 18, 19, 17, 16 };
-
+    public int[] createSubmapIndices(@Nullable IBlockAccess world, BlockPos pos, EnumFacing side) {
 		if (world == null) {
             return submapCache;
         }
@@ -179,31 +179,43 @@ public class CTM {
     public static boolean isDefaultTexture(int id) {
         return (id == 16 || id == 17 || id == 18 || id == 19);
     }
+    
+    protected void setConnectedState(Dir dir, boolean connected) {
+        if (connected) {
+            connectionMap |= 1 << dir.ordinal();
+        } else {
+            connectionMap &= ~(1 << dir.ordinal());
+        }
+    }
 
     /**
      * Builds the connection map and stores it in this CTM instance. The {@link #connected(Dir)}, {@link #connectedAnd(Dir...)}, and {@link #connectedOr(Dir...)} methods can be used to access it.
      */
     public void buildConnectionMap(IBlockAccess world, BlockPos pos, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);
-        for (Dir dir : Dir.VALUES) {
-            connectionMap.put(dir, dir.isConnected(this, world, pos, side, state));
+        if (state.shouldSideBeRendered(world, pos, side)) {
+            for (Dir dir : Dir.VALUES) {
+                setConnectedState(dir, dir.isConnected(this, world, pos, side, state));
+            }
         }
     }
 
-	public void buildConnectionMap(long data, EnumFacing side){
-		for (Dir dir : Dir.VALUES){
-			connectionMap.put(dir, false);
-		}
-		List<ConnectionLocations> connections = ConnectionLocations.decode(data);
-		for (ConnectionLocations loc : connections){
-			if (loc.getDirForSide(side) != null){
-				connectionMap.put(loc.getDirForSide(side), true);
-			}
-		}
-	}
+    public void buildConnectionMap(long data, EnumFacing side) {
+        connectionMap = 0; // Clear all connections
+        List<ConnectionLocations> connections = ConnectionLocations.decode(data);
+        for (ConnectionLocations loc : connections) {
+            if (loc.getDirForSide(side) != null) {
+                Dir dir = loc.getDirForSide(side);
+                if (dir != null) {
+                    setConnectedState(dir, true);
+                }
+            }
+        }
+    }
 
-	private void fillSubmaps(int idx) {
-		Dir[] dirs = submapMap.get(idx);
+	@SuppressWarnings("null")
+    private void fillSubmaps(int idx) {
+		Dir[] dirs = submapMap[idx];
 		if (connectedOr(dirs[0], dirs[1])) {
 			if (connectedAnd(dirs)) {
 				// If all dirs are connected, we use the fully connected face,
@@ -225,7 +237,7 @@ public class CTM {
 	 * @return True if the cached connectionMap holds a connection in this {@link Dir direction}.
 	 */
 	public boolean connected(Dir dir) {
-		return connectionMap.get(dir);
+		return ((connectionMap >> dir.ordinal()) & 1) == 1;
 	}
 
 	/**
@@ -233,7 +245,8 @@ public class CTM {
 	 *            The directions to check connection in.
 	 * @return True if the cached connectionMap holds a connection in <i><b>all</b></i> the given {@link Dir directions}.
 	 */
-	public boolean connectedAnd(Dir... dirs) {
+	@SuppressWarnings("null")
+    public boolean connectedAnd(Dir... dirs) {
 		for (Dir dir : dirs) {
 			if (!connected(dir)) {
 				return false;
@@ -247,7 +260,8 @@ public class CTM {
 	 *            The directions to check connection in.
 	 * @return True if the cached connectionMap holds a connection in <i><b>one of</b></i> the given {@link Dir directions}.
 	 */
-	public boolean connectedOr(Dir... dirs) {
+	@SuppressWarnings("null")
+    public boolean connectedOr(Dir... dirs) {
 		for (Dir dir : dirs) {
 			if (connected(dir)) {
 				return true;
@@ -288,6 +302,7 @@ public class CTM {
      *            The state to check against for connection.
      * @return True if the given block can connect to the given location on the given side.
      */
+    @SuppressWarnings({ "unused", "null" })
     public boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing dir, IBlockState state) {
 
 //      if (CTMLib.chiselLoaded() && connectionBlocked(world, x, y, z, dir.ordinal())) {
@@ -301,9 +316,9 @@ public class CTM {
         IBlockState con = getBlockOrFacade(world, connection, dir);
         IBlockState obscuring = disableObscured ? null : getBlockOrFacade(world, pos2, dir);
 
-        // no block or a bad API user
+        // bad API user
         if (con == null) {
-            return false;
+            throw new IllegalStateException("Error, received null blockstate as facade from block " + world.getBlockState(connection));
         }
 
         boolean ret = ignoreStates ? con.getBlock() == state.getBlock() : con == state;
@@ -327,7 +342,7 @@ public class CTM {
 //        return false;
 //    }
 
-	public static IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, EnumFacing side) {
+	public static IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof IFacade) {
 			return ((IFacade) state.getBlock()).getFacade(world, pos, side);

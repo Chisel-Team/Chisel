@@ -20,7 +20,7 @@ public class BlockRenderTypeCTM implements IBlockRenderType {
     }
 
     @Override
-    public CTMBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public CTMBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos, IChiselTexture<?> tex) {
         return new CTMBlockRenderContext(state, world, pos);
     }
 

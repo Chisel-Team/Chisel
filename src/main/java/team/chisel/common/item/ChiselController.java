@@ -17,6 +17,8 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import team.chisel.Chisel;
+import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingRegistry;
@@ -27,20 +29,30 @@ import team.chisel.common.util.NBTUtil;
 @ParametersAreNonnullByDefault
 public class ChiselController {
     
+    @SuppressWarnings({ "null", "unused" })
     @SubscribeEvent
     public static void onPlayerInteract(PlayerInteractEvent.LeftClickBlock event) {
 
         EntityPlayer player = event.getEntityPlayer();
         ItemStack held = event.getItemStack();
         
-        if (held != null && held.getItem() instanceof ItemChisel) {
+        if (held != null && held.getItem() instanceof IChiselItem) {
 
             ItemStack target = NBTUtil.getChiselTarget(held);
+            IChiselItem chisel = (IChiselItem) held.getItem();
             
             ICarvingRegistry registry = CarvingUtils.getChiselRegistry();
             IBlockState state = event.getWorld().getBlockState(event.getPos());
             
+            if (!chisel.canChiselBlock(event.getWorld(), player, event.getHand(), event.getPos(), state)) {
+                return;
+            }
+            
             ItemStack inWorldStack = state.getBlock().getPickBlock(state, new RayTraceResult(event.getHitVec(), event.getFace()), event.getWorld(), event.getPos(), player);
+            if (inWorldStack == null) {
+                return;
+            }
+            
             ICarvingGroup blockGroup = registry.getGroup(inWorldStack);
             if (blockGroup == null) {
                 return;
@@ -69,7 +81,20 @@ public class ChiselController {
             }
         }
     }
-    
+
+    @SubscribeEvent
+    public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+        if (!event.getWorld().isRemote) {
+            ItemStack stack = event.getItemStack();
+            if (stack != null && stack.getItem() instanceof IChiselItem) {
+                IChiselItem chisel = (IChiselItem) stack.getItem();
+                if (chisel.canOpenGui(event.getWorld(), event.getEntityPlayer(), event.getHand())) {
+                    event.getEntityPlayer().openGui(Chisel.instance, 0, event.getWorld(), event.getHand().ordinal(), 0, 0);
+                }
+            }
+        }    
+     }
+
     private static void damageItem(ItemStack stack, EntityPlayer player) {
         stack.damageItem(1, player);
         if (stack.getCount() <= 0) {
@@ -92,7 +117,7 @@ public class ChiselController {
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         ItemStack stack = event.getPlayer().getHeldItemMainhand();
-        if (event.getPlayer().capabilities.isCreativeMode && !stack.isEmpty() && stack.getItem() instanceof ItemChisel) {
+        if (event.getPlayer().capabilities.isCreativeMode && !stack.isEmpty() && stack.getItem() instanceof IChiselItem) {
             event.setCanceled(true);
         }
     }

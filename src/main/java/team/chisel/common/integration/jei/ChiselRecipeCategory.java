@@ -57,8 +57,8 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
 
     @Override
     public void drawExtras(Minecraft minecraft) {
-        if (layout != null) {
-            if (focus == null || focus.getMode() == IFocus.Mode.INPUT) {
+        if (focus != null) {
+            if (focus.getMode() == IFocus.Mode.INPUT) {
                 arrowDown.draw(minecraft, 73, 21);
             } else {
                 arrowUp.draw(minecraft, 73, 21);
@@ -66,11 +66,9 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
         }
     }
 
-    @SuppressWarnings("null")
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper, IIngredients ingredients) {
-        this.layout = recipeLayout;
-        this.focus = layout.getFocus();
+        IFocus<?> focus = (this.focus = recipeLayout.getFocus());
         
         recipeLayout.getItemStacks().init(0, focus == null || focus.getMode() == IFocus.Mode.INPUT, 73, 3);
         if (focus != null) {

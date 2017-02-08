@@ -20,7 +20,7 @@ public class BlockRenderTypeCTMV implements IBlockRenderType {
     }
     
     @Override
-    public CTMVBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public CTMVBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos, IChiselTexture<?> tex) {
         return new CTMVBlockRenderContext(world, pos);
     }
     

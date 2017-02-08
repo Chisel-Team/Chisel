@@ -1,19 +1,23 @@
 package team.chisel.common.util;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.annotation.Nonnull;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Throwables;
-import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Table;
 
 import io.netty.buffer.ByteBuf;
+import lombok.val;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.management.PlayerChunkMapEntry;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -89,7 +93,7 @@ public enum PerChunkData implements IChunkDataRegistry {
      */
     public static class ChunkDataBase<T extends NBTSaveable> implements IChunkData<T> {
 
-        protected final Table<Integer, ChunkPos, T> data = HashBasedTable.create();
+        protected final Map<Pair<Integer, ChunkPos>, T> data = new HashMap<>();
         protected final Class<? extends T> clazz;
         private final boolean needsClientSync;
 
@@ -100,7 +104,7 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         @Override
         public void writeToNBT(@Nonnull Chunk chunk, @Nonnull NBTTagCompound tag) {
-            T t = data.get(chunk.getWorld().provider.getDimension(), chunk.getChunkCoordIntPair());
+            T t = data.get(Pair.of(chunk.getWorld().provider.getDimension(), chunk.getChunkCoordIntPair()));
             if (t != null) {
                 t.write(tag);
             }
@@ -118,18 +122,17 @@ public enum PerChunkData implements IChunkDataRegistry {
             t.read(tag);
         }
         
-        @SuppressWarnings("null")
         protected T getOrCreateNew(int dimID, @Nonnull ChunkPos coords) {
-            T t = data.get(dimID, coords);
+            val pair = Pair.of(dimID, coords);
+            T t = data.get(pair);
             if (t == null) {
                 try {
                     t = clazz.newInstance();
                 } catch (Exception e) {
-                    Chisel.logger.error("Could not instantiate NBTSaveable " + clazz.getName() + "!");
-                    Throwables.propagate(e);
+                    throw new RuntimeException("Could not instantiate NBTSaveable " + clazz.getName() + "!", e);
                 }
             }
-            data.put(dimID, coords, t);
+            data.put(pair, t);
             return t;
         }
 
@@ -188,7 +191,10 @@ public enum PerChunkData implements IChunkDataRegistry {
         if (cd.requiresClientSync()) {
             NBTTagCompound tag = new NBTTagCompound();
             cd.writeToNBT(chunk, tag);
-            Chisel.network.sendToAll(new MessageChunkData(chunk, key, tag));
+            PlayerChunkMapEntry entry = ((WorldServer)chunk.getWorld()).getPlayerChunkMap().getEntry(chunk.xPosition, chunk.zPosition);
+            if (entry != null) {
+                entry.sendPacket(Chisel.network.getPacketFrom(new MessageChunkData(chunk, key, tag)));
+            }
         }
     }
 }

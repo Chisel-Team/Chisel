@@ -16,6 +16,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.client.render.ConnectionLocations;
+import team.chisel.client.render.RegionCache;
 
 import com.google.common.collect.ObjectArrays;
 
@@ -133,6 +134,7 @@ public class CTMVBlockRenderContext implements IBlockRenderContext {
     private long compressedData;
     
     public CTMVBlockRenderContext(IBlockAccess world, BlockPos pos) {
+        world = new RegionCache(pos, 2, world);
         data = new ConnectionData(world, pos);
 
         IBlockState state = world.getBlockState(pos);

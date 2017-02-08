@@ -9,14 +9,19 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.util.BlockRenderLayer;
 import team.chisel.client.render.ModelChiselBlock;
+import team.chisel.common.util.ProfileUtil;
 
 public class ChiselCoreMethods {
     
     public static boolean canRenderInLayer(@Nonnull IBlockState state, @Nonnull BlockRenderLayer layer) {
+        ProfileUtil.start("chisel_render_in_layer");
         IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
         if (model instanceof ModelChiselBlock) {
-            return ((ModelChiselBlock) model).getModel().getChiselTextures().stream().map(t -> t.getLayer()).collect(Collectors.toList()).contains(layer);
+            boolean canRender = ((ModelChiselBlock) model).getModel().getChiselTextures().stream().map(t -> t.getLayer()).collect(Collectors.toList()).contains(layer);
+            ProfileUtil.end();
+            return canRender;
         }
+        ProfileUtil.end();
         return state.getBlock().getBlockLayer() == layer; // Vanilla logic. Should be updated if vanilla changes. Any override will skip our patch anyways. 
     }
 

@@ -9,6 +9,7 @@ import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.BlockRenderType;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
+import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.TextureInfo;
 import team.chisel.client.render.ctx.BlockRenderContextPosition;
 import team.chisel.client.render.texture.ChiselTextureMap;
@@ -26,8 +27,8 @@ public class BlockRenderTypeMap implements IBlockRenderType {
     }
     
     @Override
-    public IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, @Nonnull BlockPos pos) {
-        return type.getContext(pos);
+    public IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, @Nonnull BlockPos pos, IChiselTexture<?> tex) {
+        return type.getContext(pos, (ChiselTextureMap) tex);
     }
     
     @Override

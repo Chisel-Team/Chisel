@@ -22,7 +22,7 @@ public class BlockRenderTypeNormal implements IBlockRenderType {
     }
 
     @Override
-    public IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos){
+    public IBlockRenderContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos, IChiselTexture<?> tex){
         return null;
     }
 
