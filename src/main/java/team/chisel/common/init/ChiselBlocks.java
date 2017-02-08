@@ -27,7 +27,6 @@ public final class ChiselBlocks
 
     static BlockCarvable antiblock = null;
     static BlockCarvable basalt = null;
-    static BlockCarvable basaltextra = null;
     static BlockCarvable bookshelf_spruce = null;
     static BlockCarvable bookshelf_birch = null;
     static BlockCarvable bookshelf_jungle = null;
@@ -45,10 +44,8 @@ public final class ChiselBlocks
     static BlockCarvable laboratory = null;
     static BlockCarvable lavastone = null;
     static BlockCarvable limestone = null;
-    static BlockCarvable limestoneextra = null;
     static BlockCarvable line_marking = null;
     static BlockCarvable marble = null;
-    static BlockCarvable marbleextra = null;
     static BlockCarvable military = null;
     static BlockCarvable paper = null;
     static BlockCarvable temple = null;

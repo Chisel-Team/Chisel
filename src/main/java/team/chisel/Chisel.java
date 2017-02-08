@@ -154,18 +154,18 @@ public class Chisel implements Reference {
             if (mapping.resourceLocation.getResourceDomain().equals(Reference.MOD_ID)) {
                 @Nonnull
                 String path = mapping.resourceLocation.getResourcePath();
-                /*if (path.endsWith("extra")) {
-                    path = path.replace("extra", "1");
+                if (path.endsWith("extra")) {
+                    path = path.replace("extra", "2");
                     ResourceLocation newRes = new ResourceLocation(mapping.resourceLocation.getResourceDomain(), path);
                     Block block = ForgeRegistries.BLOCKS.getValue(newRes);
                     if (block != null) {
-                        if (mapping.type == Type.BLOCK) {
+                        if (mapping.type == GameRegistry.Type.BLOCK) {
                             mapping.remap(block);
                         } else {
                             mapping.remap(Item.getItemFromBlock(block));
                         }
                     }
-                }*/
+                }
 
                 if(path.endsWith("bookshelf"))
                 {

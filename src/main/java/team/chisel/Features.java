@@ -40,7 +40,7 @@ public enum Features {
     ALUMINUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            
+
             factory.newBlock(Material.ROCK, "blockAluminum", provider)
                     .setParentFolder("metals/aluminum")
                     .newVariation("caution")
@@ -51,7 +51,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build();
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockAluminum", "blockAluminum");
         }
     },
@@ -138,7 +138,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "basalt", provider)
+            factory.newBlock(Material.ROCK, "basalt", provider) // REMAP!
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -164,12 +164,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-
-            factory.newBlock(Material.ROCK, "basaltextra", provider)
-                    .setGroup("basalt")
-                    .setParentFolder("basalt")
-                    .newVariation("bricks-solid")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -178,7 +180,7 @@ public enum Features {
                     .next("prism")
                     .next("raw").setOrder(-100)
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("basalt", "stoneBasalt");
             //CarvingUtils.getChiselRegistry().registerOre("basalt", "stoneBasaltPolished");
         }
@@ -186,7 +188,7 @@ public enum Features {
         @Override
         void addRecipes() {
             if (!Configurations.basaltSpecialGen) {
-                GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basaltextra.getDefaultState().withProperty(ChiselBlocks.basaltextra.getMetaProp(), 7),
+                GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basalt.getDefaultState().withProperty(ChiselBlocks.basalt.getMetaProp(), 7),
                         new WorldGenInfo(Configurations.basaltVeinAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
             }
         }
@@ -249,7 +251,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("bricks", Blocks.BRICK_BLOCK.getDefaultState(), -1);
 
-            factory.newBlock(Material.ROCK, "bricks", provider)
+            factory.newBlock(Material.ROCK, "bricks", provider) // REMAP!
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -275,12 +277,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
-
-            factory.newBlock(Material.ROCK, "bricksextra", provider)
-                    .setGroup("bricks")
-                    .setParentFolder("bricks")
-                    .newVariation("bricks-solid")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
                     //.next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -305,7 +309,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockBronze", "blockBronze");
         }
     },
@@ -379,7 +383,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockCobalt", "blockCobalt");
         }
     },
@@ -389,9 +393,9 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("cobblestone", Blocks.COBBLESTONE.getDefaultState(), -20);
 
-//            CarvingUtils.getChiselRegistry().registerOre("cobblestone", "cobblestone");
+            //CarvingUtils.getChiselRegistry().registerOre("cobblestone", "cobblestone");
 
-            factory.newBlock(Material.ROCK, "cobblestone", provider)
+            factory.newBlock(Material.ROCK, "cobblestone", provider) // REMAP!
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -417,12 +421,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
-
-            factory.newBlock(Material.ROCK, "cobblestoneextra", provider)
-                    .setGroup("cobblestone")
-                    .setParentFolder("cobblestone")
-                    .newVariation("bricks-solid")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -515,7 +521,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockCopper", "blockCopper");
         }
     },
@@ -654,7 +660,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockElectrum", "blockElectrum");
         }
     },
@@ -697,7 +703,7 @@ public enum Features {
             //Carving.chisel.addVariation("purpur", purpur_pillar.withProperty(prop, Axis.Z), -2);
             //Carving.chisel.addVariation("purpur", Blocks.purpur_double_slab.getDefaultState(), -1);
 
-            factory.newBlock(Material.ROCK, "purpur", provider)
+            factory.newBlock(Material.ROCK, "purpur", provider) // REMAP!
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -723,12 +729,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-
-            factory.newBlock(Material.ROCK, "purpurextra", provider)
-                    .setGroup("purpur")
-                    .setParentFolder("purpur")
-                    .newVariation("bricks-solid")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     //.next("tiles-medium")
@@ -764,9 +772,9 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("endstone", "endstone");
 
-            factory.newBlock(Material.ROCK, "endstone", provider)
+            factory.newBlock(Material.ROCK, "endstone", provider) // REMAP!
                     .newVariation("cracked")
-                    .next("bricks-solid")
+                    .next("bricks-soft")
                     .next("bricks-cracked")
                     .next("bricks-triple")
                     .next("bricks-encased")
@@ -790,12 +798,15 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setHardness(3.0F).setResistance(15.0F).setSoundType(SoundType.STONE));
-
-            factory.newBlock(Material.ROCK, "endstoneextra", provider)
-                    .setGroup("endstone")
-                    .setParentFolder("endstone")
-                    .newVariation("bricks-small")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
+                    .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
                     .next("pillar")
@@ -904,12 +915,13 @@ public enum Features {
                 CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
 
                 factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c].toLowerCase()), provider).opaque(false)
-                        .setParentFolder("glassdyed")
-                        .newVariation((dyeColors[c].toLowerCase())+"-bubble")
-                        .next((dyeColors[c].toLowerCase())+"-panel")
-                        .next((dyeColors[c].toLowerCase())+"-panel-fancy")
-                        .next((dyeColors[c].toLowerCase())+"-transparent")
-                        .next((dyeColors[c].toLowerCase())+"-forestry")
+                        .setParentFolder("glass_stained")
+                        .newVariation((dyeColors[c].toLowerCase())+"/panel")
+                        .next((dyeColors[c].toLowerCase())+"/framed")
+                        .next((dyeColors[c].toLowerCase())+"/framed_fancy")
+                        .next((dyeColors[c].toLowerCase())+"/streaks")
+                        .next((dyeColors[c].toLowerCase())+"/rough")
+                        .next((dyeColors[c].toLowerCase())+"/brick")
                         .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
         }
@@ -1095,7 +1107,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("hardenedclay", "hardenedClay");
 
-            factory.newBlock(Material.ROCK, "hardenedclay", provider)
+            factory.newBlock(Material.ROCK, "hardenedclay", provider) // REMAP
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1374,7 +1386,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockLead", "blockLead");
         }
     },
@@ -1405,7 +1417,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "limestone", provider)
+            factory.newBlock(Material.ROCK, "limestone", provider) // REMAP!
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1431,12 +1443,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-
-            factory.newBlock(Material.ROCK, "limestoneextra", provider)
-                    .setGroup("limestone")
-                    .setParentFolder("limestone")
-                    .newVariation("bricks-solid")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -1445,7 +1459,7 @@ public enum Features {
                     .next("prism")
                     .next("raw").setOrder(-100)
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("limestone", "stoneLimestone");
             //CarvingUtils.getChiselRegistry().registerOre("limestone", "stoneLimestonePolished");
 
@@ -1453,7 +1467,7 @@ public enum Features {
 
         @Override
         void addRecipes() {
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestoneextra.getDefaultState().withProperty(ChiselBlocks.limestoneextra.getMetaProp(), 7),
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestone.getDefaultState().withProperty(ChiselBlocks.limestone.getMetaProp(), 7),
                     new WorldGenInfo(Configurations.limestoneAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
@@ -1462,7 +1476,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "marble", provider)
+            factory.newBlock(Material.ROCK, "marble", provider) // REMAP
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1488,12 +1502,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-
-            factory.newBlock(Material.ROCK, "marbleextra", provider)
-                    .setGroup("marble")
-                    .setParentFolder("marble")
-                    .newVariation("bricks-solid")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -1502,7 +1518,7 @@ public enum Features {
                     .next("prism").setOrder(-100)
                     .next("raw")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-            
+
 
             CarvingUtils.getChiselRegistry().registerOre("marble", "stoneMarble");
             //CarvingUtils.getChiselRegistry().registerOre("marble", "stoneMarblePolished");
@@ -1510,7 +1526,7 @@ public enum Features {
 
         @Override
         void addRecipes() {
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marbleextra.getDefaultState().withProperty(ChiselBlocks.marbleextra.getMetaProp(), 7),
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marble.getDefaultState().withProperty(ChiselBlocks.marble.getMetaProp(), 7),
                     new WorldGenInfo(Configurations.marbleAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
@@ -1627,7 +1643,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockNickel", "blockNickel");
         }
     },
@@ -1731,7 +1747,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockPlatinum", "blockPlatinum");
         }
     },
@@ -1748,7 +1764,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("prismarine", "prismarine");
 
-            factory.newBlock(Material.ROCK, "prismarine", provider)
+            factory.newBlock(Material.ROCK, "prismarine", provider) //REMAP!
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1774,12 +1790,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-
-            factory.newBlock(Material.ROCK, "prismarineextra", provider)
-                    .setGroup("prismarine")
-                    .setParentFolder("prismarine")
-                    .newVariation("bricks-solid")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -1888,7 +1906,7 @@ public enum Features {
             Carving.chisel.addVariation("sandstoneyellow", ss.withProperty(prop, BlockSandStone.EnumType.SMOOTH), -2);
             Carving.chisel.addVariation("sandstoneyellow", ss.withProperty(prop, BlockSandStone.EnumType.CHISELED), -1);
 
-            factory.newBlock(Material.ROCK, "sandstoneyellow", provider)
+            factory.newBlock(Material.ROCK, "sandstoneyellow", provider) // REMAP!
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1914,12 +1932,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
-
-            factory.newBlock(Material.ROCK, "sandstoneyellowextra", provider)
-                    .setGroup("sandstoneyellow")
-                    .setParentFolder("sandstoneyellow")
-                    .newVariation("bricks-solid")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -1940,7 +1960,7 @@ public enum Features {
             Carving.chisel.addVariation("sandstonered", ss.withProperty(prop, BlockRedSandstone.EnumType.SMOOTH), -2);
             Carving.chisel.addVariation("sandstonered", ss.withProperty(prop, BlockRedSandstone.EnumType.CHISELED), -1);
 
-            factory.newBlock(Material.ROCK, "sandstonered", provider)
+            factory.newBlock(Material.ROCK, "sandstonered", provider) // REMAP!
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1966,12 +1986,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
-
-            factory.newBlock(Material.ROCK, "sandstoneredextra", provider)
-                    .setGroup("sandstonered")
-                    .setParentFolder("sandstonered")
-                    .newVariation("bricks-solid")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-solid")
                     .next("bricks-small")
                     .next("circular")
                     .next("tiles-medium")
@@ -2021,7 +2043,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build();
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockSilver", "blockSilver");
         }
     },
@@ -2059,9 +2081,9 @@ public enum Features {
             Carving.chisel.addVariation("stonebrick", Blocks.STONE.getDefaultState(), -22);
             // Carving.chisel.addVariation("stonebrick", Blocks.double_stone_slab.getDefaultState().withProperty(BlockDoubleStoneSlab.VARIANT, BlockDoubleStoneSlab.EnumType.STONE), -21);
 
-//            CarvingUtils.getChiselRegistry().registerOre("stonebrick", "stone");
+            //CarvingUtils.getChiselRegistry().registerOre("stonebrick", "stone");
 
-            factory.newBlock(Material.ROCK, "stonebrick", provider)
+            factory.newBlock(Material.ROCK, "stonebrick", provider) // REMAP!
                     .setParentFolder("stone")
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -2088,12 +2110,14 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-
-            factory.newBlock(Material.ROCK, "stonebrickextra", provider)
-                    .setGroup("stonebrick")
-                    .setParentFolder("stone")
-                    .newVariation("bricks-small")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("")
+                    .next("bricks-small")
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
@@ -2216,7 +2240,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build();
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockTin", "blockTin");
         }
     },
@@ -2267,7 +2291,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .build();
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockUranium", "blockUranium");
         }
     },
