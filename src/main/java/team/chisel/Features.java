@@ -963,7 +963,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("glowstone", "glowstone");
 
-            factory.newBlock(Material.ROCK, "glowstone", provider)
+            factory.newBlock(Material.ROCK, "glowstone", new ChiselBlockProvider<>(BlockCarvableAltarComponent::new, BlockCarvableAltarComponent.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")

@@ -25,7 +25,9 @@ public final class ChiselBlocks
 
     public static final BlockCarvable antiblock = null;
     public static final BlockCarvable basalt = null;
+    public static final BlockCarvable basalt1 = null;
     public static final BlockCarvable basaltextra = null;
+    public static final BlockCarvable bloodMagic = null;
     public static final BlockCarvable bookshelf_spruce = null;
     public static final BlockCarvable bookshelf_birch = null;
     public static final BlockCarvable bookshelf_jungle = null;
@@ -33,33 +35,30 @@ public final class ChiselBlocks
     public static final BlockCarvable bookshelf_darkoak = null;
     public static final BlockCarvable carpet = null;
     public static final BlockCarvable cloud = null;
-    public static final BlockCarvable concrete = null;
     public static final BlockCarvable dirt = null;
-    public static final BlockCarvable ender_pearl_block = null;
     public static final BlockCarvable factory = null;
-    public static final BlockCarvable fantasy = null;
     public static final BlockCarvable futura = null;
-    public static final BlockCarvable grimstone = null;
-    public static final BlockCarvable holystone = null;
+    public static final BlockCarvable glowstone = null;
+    public static final BlockCarvable glowstone1 = null;
+    public static final BlockCarvable glowstone2 = null;
     public static final BlockCarvable laboratory = null;
     public static final BlockCarvable lavastone = null;
     public static final BlockCarvable lavastone1 = null;
-    public static final BlockCarvable lavastone2 = null;
+    public static final BlockCarvable lavastoneextra = null;
     public static final BlockCarvable limestone = null;
+    public static final BlockCarvable limestone1 = null;
     public static final BlockCarvable limestoneextra = null;
-    public static final BlockCarvable line_marking = null;
     public static final BlockCarvable marble = null;
+    public static final BlockCarvable marble1 = null;
     public static final BlockCarvable marbleextra = null;
-    public static final BlockCarvable military = null;
     public static final BlockCarvable netherrack = null;
     public static final BlockCarvable paper = null;
     public static final BlockCarvable temple = null;
     public static final BlockCarvable tyrian = null;
     public static final BlockCarvable valentines = null;
     public static final BlockCarvable voidstone = null;
-    public static final BlockCarvable warningSign = null;
     public static final BlockCarvable waterstone = null;
     public static final BlockCarvable waterstone1 = null;
-    public static final BlockCarvable waterstone2 = null;
+    public static final BlockCarvable waterstoneextra = null;
 
 }
