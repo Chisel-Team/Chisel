@@ -33,7 +33,7 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
             @Override
             protected List<BakedQuad> transformQuad(ChiselTextureMap tex, BakedQuad quad, @Nullable IBlockRenderContext context, int quadGoal) {
 
-                Point2i textureCoords = context == null ? new Point2i(0, 0) : ((BlockRenderContextGridTexture)context).getTextureCoords(quad.getFace());
+                Point2i textureCoords = context == null ? new Point2i(1, 1) : ((BlockRenderContextGridTexture)context).getTextureCoords(quad.getFace());
                 
                 float intervalX = 16f / tex.getXSize();
                 float intervalY = 16f / tex.getYSize();
