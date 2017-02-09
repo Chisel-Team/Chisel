@@ -904,12 +904,13 @@ public enum Features {
                 CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
 
                 factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c].toLowerCase()), provider).opaque(false)
-                        .setParentFolder("glassdyed")
-                        .newVariation((dyeColors[c].toLowerCase())+"-bubble")
-                        .next((dyeColors[c].toLowerCase())+"-panel")
-                        .next((dyeColors[c].toLowerCase())+"-panel-fancy")
-                        .next((dyeColors[c].toLowerCase())+"-transparent")
-                        .next((dyeColors[c].toLowerCase())+"-forestry")
+                        .setParentFolder("glass_stained")
+                        .newVariation((dyeColors[c].toLowerCase())+"/panel")
+                        .next((dyeColors[c].toLowerCase())+"/framed")
+                        .next((dyeColors[c].toLowerCase())+"/framed_fancy")
+                        .next((dyeColors[c].toLowerCase())+"/streaks")
+                        .next((dyeColors[c].toLowerCase())+"/rough")
+                        .next((dyeColors[c].toLowerCase())+"/brick")
                         .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
         }
