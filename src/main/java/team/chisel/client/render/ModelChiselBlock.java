@@ -93,7 +93,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     private @Nonnull Overrides overrides = new Overrides();
         
     private static Cache<Pair<Item, Integer>, ModelChiselBlock> itemcache = CacheBuilder.newBuilder().expireAfterAccess(10, TimeUnit.SECONDS).<Pair<Item, Integer>, ModelChiselBlock>build();
-    private static Cache<State, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(500).<State, ModelChiselBlock>build();
+    private static Cache<State, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(5000).<State, ModelChiselBlock>build();
     
     public ModelChiselBlock(@Nonnull ModelChisel model) {
         this.model = model;
