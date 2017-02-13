@@ -25,7 +25,7 @@ import team.chisel.common.util.NBTUtil;
 
 public class ChiselController {
     
-    @SuppressWarnings({ "null", "unused" })
+    @SuppressWarnings({ "unused" })
     @SubscribeEvent
     public static void onPlayerInteract(PlayerInteractEvent.LeftClickBlock event) {
 
@@ -59,8 +59,12 @@ public class ChiselController {
 
                 if (blockGroup == sourceGroup) {
                     ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(target);
-                    updateState(event.getWorld(), event.getPos(), variation.getBlockState());
-                    damageItem(held, player);
+                    if (variation != null) {
+                        updateState(event.getWorld(), event.getPos(), variation.getBlockState());
+                        damageItem(held, player);
+                    } else {
+                        Chisel.logger.warn("Found itemstack {} in group {}, but it has no variation!", target, sourceGroup.getName());
+                    }
                 }
             } else {
                 ICarvingVariation current = registry.getVariation(inWorldStack);
