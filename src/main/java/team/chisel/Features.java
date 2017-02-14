@@ -341,7 +341,7 @@ public enum Features {
                         .setParentFolder("wool")
                         .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
                         .next("llama_"+(dyeColors[c].toLowerCase()))
-                        .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
+                        .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.1F).setLightOpacity(0));
             }
         }
     },
