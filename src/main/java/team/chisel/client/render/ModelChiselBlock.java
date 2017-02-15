@@ -105,6 +105,11 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         ProfileUtil.start("chisel_models");
         ModelChiselBlock baked = this;
         
+        BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
+        if (state != null && layer == null) {
+            return model.getModel(state).getQuads(state, side, rand);
+        }
+        
         if (Chisel.proxy.getClientWorld() != null && state instanceof ChiselExtendedState) {
             ProfileUtil.start("state_creation");
             ChiselExtendedState ext = (ChiselExtendedState) state;
@@ -118,7 +123,6 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         }
         
         ProfileUtil.start("quad_lookup");
-        BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
         List<BakedQuad> ret;
         if (side != null && layer != null) {
             ret = baked.faceQuads.get(layer, side);
