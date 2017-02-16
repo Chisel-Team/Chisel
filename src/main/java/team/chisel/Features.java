@@ -332,13 +332,12 @@ public enum Features {
 
             for(int c = 0; c < dyeColors.length; c++)
             {
-                // TODO Fix model; see Issue #239
                 Carving.chisel.addVariation("carpet_" + (dyeColors[c].toLowerCase()), carpet.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
 
                 //CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
 
                 factory.newBlock(Material.CARPET, "carpet_" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvableCarpet::new, BlockCarvableCarpet.class)).opaque(false)
-                        .setParentFolder("wool")
+                        .setParentFolder("carpet")
                         .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
                         .next("llama_"+(dyeColors[c].toLowerCase()))
                         .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.1F).setLightOpacity(0));
