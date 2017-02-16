@@ -4,25 +4,17 @@ import java.util.EnumMap;
 
 import javax.annotation.Nonnull;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.IBlockRenderContext;
-import team.chisel.client.render.ConnectionLocations;
 import team.chisel.client.render.ModelChiselBlock;
 import team.chisel.client.render.RegionCache;
 import team.chisel.client.render.ctm.CTM;
 
-import static team.chisel.client.render.ConnectionLocations.*;
-
 public class CTMBlockRenderContext implements IBlockRenderContext {
-
-    private static final ConnectionLocations[] CACHED_LOCATIONS = ArrayUtils.removeElements(ConnectionLocations.VALUES, UP_UP, DOWN_DOWN, EAST_EAST, WEST_WEST, NORTH_NORTH, SOUTH_SOUTH);
     
     private EnumMap<EnumFacing, CTM> ctmData = new EnumMap<>(EnumFacing.class);
 
@@ -34,8 +26,8 @@ public class CTMBlockRenderContext implements IBlockRenderContext {
             CTM ctm = createCTM(state);
             ctm.createSubmapIndices(world, pos, face);
             ctmData.put(face, ctm);
+            this.data |= ctm.serialized() << (face.ordinal() * 8);
         }
-        this.data = ConnectionLocations.getData(world, pos, CACHED_LOCATIONS);
     }
 
     public CTMBlockRenderContext(long data){

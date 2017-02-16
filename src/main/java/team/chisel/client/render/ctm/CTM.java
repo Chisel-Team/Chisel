@@ -1,32 +1,23 @@
 package team.chisel.client.render.ctm;
 
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-
-import java.util.EnumMap;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.google.common.base.Optional;
+
+import static team.chisel.common.util.Dir.*;
+
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.IFacade;
 import team.chisel.client.render.ConnectionLocations;
-import team.chisel.common.util.BitUtil;
 import team.chisel.common.util.Dir;
-
-import com.google.common.base.Optional;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
-
-import static team.chisel.common.util.Dir.*;
 
 // @formatter:off
 /**
@@ -174,6 +165,10 @@ public class CTM {
     
     public int[] getSubmapIndices() {
         return submapCache;
+    }
+    
+    public long serialized() {
+        return Byte.toUnsignedLong(connectionMap);
     }
 	
     public static boolean isDefaultTexture(int id) {
