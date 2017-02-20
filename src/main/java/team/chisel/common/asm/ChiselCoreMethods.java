@@ -6,7 +6,10 @@ import lombok.SneakyThrows;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import team.chisel.client.render.ModelChiselBlock;
 import team.chisel.common.util.ProfileUtil;
 
@@ -26,5 +29,15 @@ public class ChiselCoreMethods {
         }
         ProfileUtil.end();
         return ret;
+    }
+    
+    public static ThreadLocal<Boolean> renderingDamageModel = ThreadLocal.withInitial(() -> false);
+    
+    public static void preDamageModel() {
+        renderingDamageModel.set(true);
+    }
+    
+    public static void postDamageModel() {
+        renderingDamageModel.set(false);
     }
 }

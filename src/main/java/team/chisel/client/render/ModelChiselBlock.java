@@ -55,6 +55,7 @@ import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.ChiselExtendedState;
+import team.chisel.common.asm.ChiselCoreMethods;
 import team.chisel.common.util.ProfileUtil;
 
 /**
@@ -101,15 +102,16 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     
     @Override
     @SneakyThrows
-    public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
-        ProfileUtil.start("chisel_models");
-        ModelChiselBlock baked = this;
-        
-        BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
-        if (state != null && layer == null) {
+    public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {        
+        if (ChiselCoreMethods.renderingDamageModel.get()) {
             return model.getModel(state).getQuads(state, side, rand);
         }
         
+        ProfileUtil.start("chisel_models");
+        
+        ModelChiselBlock baked = this;
+        BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
+
         if (Chisel.proxy.getClientWorld() != null && state instanceof ChiselExtendedState) {
             ProfileUtil.start("state_creation");
             ChiselExtendedState ext = (ChiselExtendedState) state;
