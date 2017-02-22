@@ -188,7 +188,7 @@ public enum Features {
         @Override
         void addRecipes() {
             if (!Configurations.basaltSpecialGen) {
-                GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basalt.getDefaultState().withProperty(ChiselBlocks.basalt.getMetaProp(), 7),
+                GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basalt2.getDefaultState().withProperty(ChiselBlocks.basalt2.getMetaProp(), 7),
                         new WorldGenInfo(Configurations.basaltVeinAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
             }
         }
@@ -1466,7 +1466,7 @@ public enum Features {
 
         @Override
         void addRecipes() {
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestone.getDefaultState().withProperty(ChiselBlocks.limestone.getMetaProp(), 7),
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestone2.getDefaultState().withProperty(ChiselBlocks.limestone2.getMetaProp(), 7),
                     new WorldGenInfo(Configurations.limestoneAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },
@@ -1525,7 +1525,7 @@ public enum Features {
 
         @Override
         void addRecipes() {
-            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marble.getDefaultState().withProperty(ChiselBlocks.marble.getMetaProp(), 7),
+            GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marble2.getDefaultState().withProperty(ChiselBlocks.marble2.getMetaProp(), 7),
                     new WorldGenInfo(Configurations.marbleAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
     },

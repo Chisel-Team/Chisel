@@ -26,6 +26,7 @@ public final class ChiselBlocks
     public static final BlockCarvable antiblock = null;
     public static final BlockCarvable basalt = null;
     public static final BlockCarvable basalt1 = null;
+    public static final BlockCarvable basalt2 = null;
     public static final BlockCarvable bloodMagic = null;
     public static final BlockCarvable bookshelf_spruce = null;
     public static final BlockCarvable bookshelf_birch = null;
@@ -44,10 +45,9 @@ public final class ChiselBlocks
     public static final BlockCarvable lavastone = null;
     public static final BlockCarvable lavastone1 = null;
     public static final BlockCarvable limestone = null;
-    public static final BlockCarvable limestone1 = null;
+    public static final BlockCarvable limestone2 = null;
     public static final BlockCarvable marble = null;
-    public static final BlockCarvable marble1 = null;
-    public static final BlockCarvable marbleextra = null;
+    public static final BlockCarvable marble2 = null;
     public static final BlockCarvable netherrack = null;
     public static final BlockCarvable paper = null;
     public static final BlockCarvable temple = null;
