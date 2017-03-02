@@ -18,9 +18,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @Optional.InterfaceList({
-        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.ITranquilityHandler", modid = "BloodMagic"),
-        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.TranquilityStack", modid = "BloodMagic"),
-        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.EnumTranquilityType", modid = "BloodMagic")
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.ITranquilityHandler", modid = "bloodmagic"),
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.TranquilityStack", modid = "bloodmagic"),
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.EnumTranquilityType", modid = "bloodmagic")
     })
 
 @ParametersAreNonnullByDefault
@@ -29,20 +29,20 @@ public class BlockCarvableTranquility extends BlockCarvable implements ITranquil
     public BlockCarvableTranquility(Material material, int index, int max, VariationData... variations) {
         super(material, index, max, variations);
 
-        if (Loader.isModLoaded("BloodMagic"))
+        if (Loader.isModLoaded("bloodmagic"))
         {
             addHandler();
         }
     }
 
-    @Optional.Method(modid = "BloodMagic")
+    @Optional.Method(modid = "bloodmagic")
     private void addHandler() {
         IncenseTranquilityRegistry.registerTranquilityHandler(this);
     }
 
     @Nonnull
     @Override
-    @Optional.Method(modid = "BloodMagic")
+    @Optional.Method(modid = "bloodmagic")
     public TranquilityStack getTranquilityOfBlock(World world, BlockPos pos, Block block, IBlockState state) {
         if (block instanceof BlockCarvableTranquility)
         {

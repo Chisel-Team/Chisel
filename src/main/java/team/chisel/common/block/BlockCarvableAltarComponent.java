@@ -14,7 +14,7 @@ import team.chisel.common.init.ChiselBlocks;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@Optional.Interface(iface = "WayofTime.bloodmagic.api.altar.IAltarComponent", modid = "BloodMagic")
+@Optional.Interface(iface = "WayofTime.bloodmagic.api.altar.IAltarComponent", modid = "bloodmagic")
 
 @ParametersAreNonnullByDefault
 public class BlockCarvableAltarComponent extends BlockCarvable implements IAltarComponent {
@@ -25,13 +25,13 @@ public class BlockCarvableAltarComponent extends BlockCarvable implements IAltar
 
     @Nullable
     @Override
-    @Optional.Method(modid = "BloodMagic")
+    @Optional.Method(modid = "bloodmagic")
     public WayofTime.bloodmagic.api.altar.EnumAltarComponent getType(World world, IBlockState state, BlockPos pos) {
         IBlockState blockFromWorld = world.getBlockState(pos);
 
         Block block = blockFromWorld.getBlock();
 
-        if (block == ChiselBlocks.bloodMagic)
+        if (block == ChiselBlocks.bloodmagic)
         {
             return EnumAltarComponent.BLOODRUNE;
         } else if (block == ChiselBlocks.glowstone || block == ChiselBlocks.glowstone1 || block == ChiselBlocks.glowstone2)
