@@ -18,9 +18,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @Optional.InterfaceList({
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.EnumTranquilityType", modid = "bloodmagic"),
         @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.ITranquilityHandler", modid = "bloodmagic"),
-        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.TranquilityStack", modid = "bloodmagic"),
-        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.EnumTranquilityType", modid = "bloodmagic")
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.IncenseTranquilityRegistry", modid = "bloodmagic"),
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.TranquilityStack", modid = "bloodmagic")
     })
 
 @ParametersAreNonnullByDefault
