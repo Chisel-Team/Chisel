@@ -14,7 +14,10 @@ import team.chisel.common.init.ChiselBlocks;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@Optional.Interface(iface = "WayofTime.bloodmagic.api.altar.IAltarComponent", modid = "BloodMagic")
+@Optional.InterfaceList({
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.EnumAltarComponent", modid = "BloodMagic"),
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.IAltarComponent", modid = "BloodMagic")
+})
 
 @ParametersAreNonnullByDefault
 public class BlockCarvableAltarComponent extends BlockCarvable implements IAltarComponent {
