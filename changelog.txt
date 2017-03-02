@@ -1,3 +1,17 @@
+0.0.8:
+New
+- Implemented compatibility with BloodMagic for tranquility and runes
+- Config for showing variant names in item/block name is now functional
+- Add new stained glass textures
+Changes
+- JEI plugin updated, new features in API implemented
+- Update FTBUtilities guide page
+Fixes
+- Widespread performance improvements
+- Size of model cache increased, should result in more RAM usage but a smoother experience overall
+- #295 crash on world exit
+- #347 crash when left clicking a chisel
+
 0.0.7:
 New
 - Dropped 1.9 Support

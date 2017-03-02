@@ -336,16 +336,15 @@ public enum Features {
 
             for(int c = 0; c < dyeColors.length; c++)
             {
-                // TODO Fix model; see Issue #239
                 Carving.chisel.addVariation("carpet_" + (dyeColors[c].toLowerCase()), carpet.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
 
                 //CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
 
                 factory.newBlock(Material.CARPET, "carpet_" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvableCarpet::new, BlockCarvableCarpet.class)).opaque(false)
-                        .setParentFolder("wool")
+                        .setParentFolder("carpet")
                         .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
                         .next("llama_"+(dyeColors[c].toLowerCase()))
-                        .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
+                        .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.1F).setLightOpacity(0));
             }
         }
     },
@@ -625,7 +624,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("dirt", Blocks.DIRT.getDefaultState(), -1);
-            factory.newBlock(Material.GROUND, "dirt", provider)
+            factory.newBlock(Material.GROUND, "dirt", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
                     .newVariation("bricks")
                     .next("netherbricks")
                     .next("bricks3")
@@ -975,7 +974,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("glowstone", "glowstone");
 
-            factory.newBlock(Material.ROCK, "glowstone", provider)
+            factory.newBlock(Material.ROCK, "glowstone", new ChiselBlockProvider<>(BlockCarvableAltarComponent::new, BlockCarvableAltarComponent.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1330,7 +1329,7 @@ public enum Features {
     LAVASTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "lavastone", provider)
+            factory.newBlock(Material.ROCK, "lavastone", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1610,7 +1609,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("netherrack", "netherrack");
 
-            factory.newBlock(Material.ROCK, "netherrack", provider)
+            factory.newBlock(Material.ROCK, "netherrack", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
                     .newVariation("a1-netherrack-bloodgravel")
                     .next("a1-netherrack-bloodrock")
                     .next("a1-netherrack-bloodrockgrey")
@@ -2392,7 +2391,7 @@ public enum Features {
     WATERSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "waterstone", provider).opaque(false)
+            factory.newBlock(Material.ROCK, "waterstone", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class)).opaque(false)
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")

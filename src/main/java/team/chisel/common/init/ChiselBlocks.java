@@ -4,7 +4,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import lombok.experimental.FieldDefaults;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.Chisel;
 import team.chisel.common.block.BlockCarvable;
@@ -12,7 +11,6 @@ import team.chisel.common.block.BlockCarvable;
 @GameRegistry.ObjectHolder(Chisel.MOD_ID)
 @ParametersAreNonnullByDefault
 @SuppressWarnings("null") // ObjectHolder will assure these fields are nonnull. Outside callers can assume the same.
-@FieldDefaults(makeFinal = true, level = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ChiselBlocks
 {
@@ -25,34 +23,39 @@ public final class ChiselBlocks
             - minecreatr
     */
 
-    static BlockCarvable antiblock = null;
-    static BlockCarvable basalt = null;
-    static BlockCarvable bookshelf_spruce = null;
-    static BlockCarvable bookshelf_birch = null;
-    static BlockCarvable bookshelf_jungle = null;
-    static BlockCarvable bookshelf_acacia = null;
-    static BlockCarvable bookshelf_darkoak = null;
-    static BlockCarvable carpet = null;
-    static BlockCarvable cloud = null;
-    static BlockCarvable concrete = null;
-    static BlockCarvable ender_pearl_block = null;
-    static BlockCarvable factory = null;
-    static BlockCarvable fantasy = null;
-    static BlockCarvable futura = null;
-    static BlockCarvable grimstone = null;
-    static BlockCarvable holystone = null;
-    static BlockCarvable laboratory = null;
-    static BlockCarvable lavastone = null;
-    static BlockCarvable limestone = null;
-    static BlockCarvable line_marking = null;
-    static BlockCarvable marble = null;
-    static BlockCarvable military = null;
-    static BlockCarvable paper = null;
-    static BlockCarvable temple = null;
-    static BlockCarvable tyrian = null;
-    static BlockCarvable valentines = null;
-    static BlockCarvable voidstone = null;
-    static BlockCarvable warningSign = null;
-    static BlockCarvable waterstone = null;
+    public static final BlockCarvable antiblock = null;
+    public static final BlockCarvable basalt = null;
+    public static final BlockCarvable basalt1 = null;
+    public static final BlockCarvable bloodMagic = null;
+    public static final BlockCarvable bookshelf_spruce = null;
+    public static final BlockCarvable bookshelf_birch = null;
+    public static final BlockCarvable bookshelf_jungle = null;
+    public static final BlockCarvable bookshelf_acacia = null;
+    public static final BlockCarvable bookshelf_darkoak = null;
+    public static final BlockCarvable carpet = null;
+    public static final BlockCarvable cloud = null;
+    public static final BlockCarvable dirt = null;
+    public static final BlockCarvable factory = null;
+    public static final BlockCarvable futura = null;
+    public static final BlockCarvable glowstone = null;
+    public static final BlockCarvable glowstone1 = null;
+    public static final BlockCarvable glowstone2 = null;
+    public static final BlockCarvable laboratory = null;
+    public static final BlockCarvable lavastone = null;
+    public static final BlockCarvable lavastone1 = null;
+    public static final BlockCarvable limestone = null;
+    public static final BlockCarvable limestone1 = null;
+    public static final BlockCarvable marble = null;
+    public static final BlockCarvable marble1 = null;
+    public static final BlockCarvable marbleextra = null;
+    public static final BlockCarvable netherrack = null;
+    public static final BlockCarvable paper = null;
+    public static final BlockCarvable temple = null;
+    public static final BlockCarvable tyrian = null;
+    public static final BlockCarvable valentines = null;
+    public static final BlockCarvable voidstone = null;
+    public static final BlockCarvable waterstone = null;
+    public static final BlockCarvable waterstone1 = null;
+    public static final BlockCarvable waterstoneextra = null;
 
 }

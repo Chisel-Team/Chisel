@@ -49,5 +49,7 @@ public enum ChiselModelRegistry implements Reference {
                 return new ModelResourceLocation(new ResourceLocation("chisel", "default"), data.path);
             }
         });
+        // Nope
+        ModelLoader.registerItemVariants(Item.getItemFromBlock(block));
     }
 }

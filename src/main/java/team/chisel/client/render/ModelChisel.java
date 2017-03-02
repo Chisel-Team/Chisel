@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.VertexFormat;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
@@ -61,6 +62,8 @@ public class ModelChisel implements IModel {
     
     private transient List<ResourceLocation> textures = Lists.newArrayList();
     
+    private transient byte layers;
+    
     @Override
     public Collection<ResourceLocation> getDependencies() {
         List<ResourceLocation> list = Lists.newArrayList(model.getModelLocation());
@@ -80,6 +83,10 @@ public class ModelChisel implements IModel {
         for (Entry<String, Variant> e : models.entrySet()) {
             Variant v = e.getValue();
             modelsObj.put(e.getKey(), bake(v, format, dummyGetter));
+        }
+        layers = 0;
+        for (IChiselTexture<?> tex : getChiselTextures()) {
+            layers |= 1 << tex.getLayer().ordinal();
         }
         return new ModelChiselBlock(this);
     }
@@ -138,5 +145,9 @@ public class ModelChisel implements IModel {
         }
         
         return stateMap.getOrDefault(state, modelObj);
+    }
+
+    public boolean canRenderInLayer(BlockRenderLayer layer) {
+        return ((layers >> layer.ordinal()) & 1) == 1;
     }
 }

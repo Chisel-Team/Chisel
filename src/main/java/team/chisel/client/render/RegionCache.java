@@ -2,11 +2,11 @@ package team.chisel.client.render;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import lombok.RequiredArgsConstructor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -18,7 +18,6 @@ import net.minecraft.world.biome.Biome;
 /**
  * Used by render state creation to avoid unnecessary block lookups through the world.
  */
-@RequiredArgsConstructor
 @ParametersAreNonnullByDefault
 public class RegionCache implements IBlockAccess {
 
@@ -36,8 +35,15 @@ public class RegionCache implements IBlockAccess {
     private final int radius;
     
     private final IBlockAccess passthrough;
-    
+    private final Function<BlockPos, IBlockState> lookupFunc;
     private final Map<BlockPos, IBlockState> stateCache = new HashMap<>();
+
+    public RegionCache(BlockPos center, int radius, IBlockAccess passthrough) {
+        this.center = center;
+        this.radius = radius;
+        this.passthrough = passthrough;
+        this.lookupFunc = passthrough::getBlockState;
+    }
 
     @Override
     @Nullable
@@ -55,7 +61,7 @@ public class RegionCache implements IBlockAccess {
     @SuppressWarnings("null")
     @Override
     public IBlockState getBlockState(BlockPos pos) {
-        return stateCache.computeIfAbsent(pos, passthrough::getBlockState);
+        return stateCache.computeIfAbsent(pos, lookupFunc);
     }
 
     @Override

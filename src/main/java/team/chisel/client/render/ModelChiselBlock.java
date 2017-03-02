@@ -55,6 +55,7 @@ import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.ChiselExtendedState;
+import team.chisel.common.asm.ChiselCoreMethods;
 import team.chisel.common.util.ProfileUtil;
 
 /**
@@ -93,7 +94,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     private @Nonnull Overrides overrides = new Overrides();
         
     private static Cache<Pair<Item, Integer>, ModelChiselBlock> itemcache = CacheBuilder.newBuilder().expireAfterAccess(10, TimeUnit.SECONDS).<Pair<Item, Integer>, ModelChiselBlock>build();
-    private static Cache<State, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(500).<State, ModelChiselBlock>build();
+    private static Cache<State, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(5000).<State, ModelChiselBlock>build();
     
     public ModelChiselBlock(@Nonnull ModelChisel model) {
         this.model = model;
@@ -101,10 +102,16 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
     
     @Override
     @SneakyThrows
-    public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
-        ProfileUtil.start("chisel_models");
-        ModelChiselBlock baked = this;
+    public @Nonnull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {        
+        if (ChiselCoreMethods.renderingDamageModel.get()) {
+            return model.getModel(state).getQuads(state, side, rand);
+        }
         
+        ProfileUtil.start("chisel_models");
+        
+        ModelChiselBlock baked = this;
+        BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
+
         if (Chisel.proxy.getClientWorld() != null && state instanceof ChiselExtendedState) {
             ProfileUtil.start("state_creation");
             ChiselExtendedState ext = (ChiselExtendedState) state;
@@ -118,7 +125,6 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
         }
         
         ProfileUtil.start("quad_lookup");
-        BlockRenderLayer layer = MinecraftForgeClient.getRenderLayer();
         List<BakedQuad> ret;
         if (side != null && layer != null) {
             ret = baked.faceQuads.get(layer, side);
