@@ -9,6 +9,8 @@ import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.google.common.base.Strings;
+
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.block.Block;
@@ -118,7 +120,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 ChiselModelRegistry.INSTANCE.register(ret[i]);
             }
             for (int j = 0; j < data[i].length; j++) {
-                if (data[i][j].group != null) {
+                if (Strings.emptyToNull(data[i][j].name) != null && data[i][j].group != null) {
                     VariationBuilder<T> v = variations.get(data[i][j].index);
                     CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), v.order);
                 }
