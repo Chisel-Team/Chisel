@@ -50,9 +50,9 @@ public class BlockCarvableTranquility extends BlockCarvable implements ITranquil
                 return new TranquilityStack(EnumTranquilityType.EARTHEN, 0.25);
             } else if (block == ChiselBlocks.netherrack) {
                 return new TranquilityStack(EnumTranquilityType.FIRE, 0.5);
-            } else if (block == ChiselBlocks.lavastone || block == ChiselBlocks.lavastone1 || block == ChiselBlocks.lavastoneextra) {
+            } else if (block == ChiselBlocks.lavastone || block == ChiselBlocks.lavastone1 || block == ChiselBlocks.lavastone2) {
                 return new TranquilityStack(EnumTranquilityType.LAVA, 1.2);
-            } else if (block == ChiselBlocks.waterstone || block == ChiselBlocks.waterstone1 || block == ChiselBlocks.waterstoneextra) {
+            } else if (block == ChiselBlocks.waterstone || block == ChiselBlocks.waterstone1 || block == ChiselBlocks.waterstone2) {
                 return new TranquilityStack(EnumTranquilityType.WATER, 1);
             }
         }

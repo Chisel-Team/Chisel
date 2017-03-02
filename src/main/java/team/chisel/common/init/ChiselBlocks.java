@@ -44,6 +44,7 @@ public final class ChiselBlocks
     public static final BlockCarvable laboratory = null;
     public static final BlockCarvable lavastone = null;
     public static final BlockCarvable lavastone1 = null;
+    public static final BlockCarvable lavastone2 = null;
     public static final BlockCarvable limestone = null;
     public static final BlockCarvable limestone2 = null;
     public static final BlockCarvable marble = null;
@@ -56,6 +57,7 @@ public final class ChiselBlocks
     public static final BlockCarvable voidstone = null;
     public static final BlockCarvable waterstone = null;
     public static final BlockCarvable waterstone1 = null;
+    public static final BlockCarvable waterstone2 = null;
     public static final BlockCarvable waterstoneextra = null;
 
 }
