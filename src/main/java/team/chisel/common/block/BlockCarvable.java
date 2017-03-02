@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.google.common.base.Strings;
+
 import lombok.Getter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -200,7 +202,7 @@ public class BlockCarvable extends Block implements ICarvable {
     public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
         int curIndex = 0;
         for (VariationData var : this.variations) {
-            if (var == null) {
+            if (var == null || Strings.emptyToNull(var.name) == null) {
                 continue;
             }
             ItemStack stack = new ItemStack(item, 1, curIndex);
