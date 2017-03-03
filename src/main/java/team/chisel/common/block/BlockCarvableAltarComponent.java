@@ -15,8 +15,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @Optional.InterfaceList({
-        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.EnumAltarComponent", modid = "bloodmagic"),
-        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.IAltarComponent", modid = "bloodmagic")
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.altar.EnumAltarComponent", modid = "bloodmagic"),
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.altar.IAltarComponent", modid = "bloodmagic")
 })
 @ParametersAreNonnullByDefault
 public class BlockCarvableAltarComponent extends BlockCarvable implements IAltarComponent {
@@ -28,7 +28,7 @@ public class BlockCarvableAltarComponent extends BlockCarvable implements IAltar
     @Nullable
     @Override
     @Optional.Method(modid = "bloodmagic")
-    public WayofTime.bloodmagic.api.altar.EnumAltarComponent getType(World world, IBlockState state, BlockPos pos) {
+    public EnumAltarComponent getType(World world, IBlockState state, BlockPos pos) {
         IBlockState blockFromWorld = world.getBlockState(pos);
 
         Block block = blockFromWorld.getBlock();
