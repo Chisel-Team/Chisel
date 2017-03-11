@@ -12,7 +12,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
 import team.chisel.client.handler.DebugHandler;
-import team.chisel.client.handler.TooltipHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.client.render.ModelLoaderChisel;
 import team.chisel.common.CommonProxy;
@@ -43,7 +42,6 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new TextureStitcher());
         MinecraftForge.EVENT_BUS.register(ChiselModelRegistry.INSTANCE);
         MinecraftForge.EVENT_BUS.register(new DebugHandler());
-        MinecraftForge.EVENT_BUS.register(new TooltipHandler());
         if (Minecraft.getMinecraft().getResourceManager() instanceof SimpleReloadableResourceManager) {
             SimpleReloadableResourceManager manager = (SimpleReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
             manager.registerReloadListener(ChiselPackReloadListener.INSTANCE);
