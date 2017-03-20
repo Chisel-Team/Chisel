@@ -121,7 +121,7 @@ public class ContainerChisel extends Container {
                     return null;
                 }
             } else {
-                if (slotIdx < getInventoryChisel().size + 1 && itemstack1 != null) {
+                if (slotIdx < getInventoryChisel().size + 1) {
                     ItemStack tempStack = entity.inventory.getItemStack();
                     entity.inventory.setItemStack(itemstack1.copy());
                     slot.onPickupFromSlot(entity, itemstack1);
@@ -149,6 +149,9 @@ public class ContainerChisel extends Container {
             if (itemstack1.stackSize == 0) {
                 slot.putStack(null);
                 return null;
+            } else {
+                slot.putStack(itemstack1);
+                return itemstack1;
             }
         }
         return itemstack;
