@@ -11,10 +11,8 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
-import team.chisel.api.carving.ICarvingVariation;
-
-import com.google.common.collect.Lists;
 
 @ParametersAreNonnullByDefault
 public class ChiselRecipeWrapper implements IRecipeWrapper {
@@ -27,20 +25,12 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
 
     @Override
     public List<ItemStack> getInputs(){
-        List<ItemStack> inputStack = Lists.newArrayList();
-        for (ICarvingVariation variation : this.group.getVariations()){
-            inputStack.add(variation.getStack());
-        }
-        return inputStack;
+        return CarvingUtils.getChiselRegistry().getItemsForChiseling(this.group);
     }
 
     @Override
     public List<ItemStack> getOutputs(){
-        List<ItemStack> outputStack = Lists.newArrayList();
-        for (ICarvingVariation variation : this.group.getVariations()){
-            outputStack.add(variation.getStack());
-        }
-        return outputStack;
+        return getInputs();
     }
 
     @Override

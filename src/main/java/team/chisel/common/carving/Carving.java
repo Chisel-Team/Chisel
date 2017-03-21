@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -120,14 +119,18 @@ public class Carving implements ICarvingRegistry {
 
 	@Override
 	public List<ItemStack> getItemsForChiseling(ItemStack chiseledItem) {
-		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-
 		ICarvingGroup group = null;
 		
 		group = getGroup(chiseledItem);
+        if (group == null) {
+            return Collections.emptyList();
+        }
 
-		if (group == null)
-			return items;
+		return getItemsForChiseling(group);
+	}
+
+    public List<ItemStack> getItemsForChiseling(ICarvingGroup group) {
+        ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 
 		List<ICarvingVariation> variations = group.getVariations();
 		List<ItemStackWrapper> found = Lists.newArrayList();
@@ -147,7 +150,7 @@ public class Carving implements ICarvingRegistry {
 		}
 
 		return items;
-	}
+    }
 	
 	private void addNewStackToList(ItemStack stack, List<ItemStack> list, List<ItemStackWrapper> found) {
 		ItemStackWrapper wrapper = new ItemStackWrapper(stack);
