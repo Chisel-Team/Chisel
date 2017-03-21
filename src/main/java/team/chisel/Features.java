@@ -15,8 +15,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
@@ -1594,7 +1597,14 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("netherrack", "netherrack");
 
-            factory.newBlock(Material.ROCK, "netherrack", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
+            BlockCreator<BlockCarvableTranquility> netherrackProvider = (mat, index, maxVariation, data) -> new BlockCarvableTranquility(mat, index, maxVariation, data) {
+                @Override
+                public boolean isFireSource(@Nonnull World world, BlockPos pos, EnumFacing side) {
+                    return side == EnumFacing.UP;
+                }
+            };
+
+            factory.newBlock(Material.ROCK, "netherrack", new ChiselBlockProvider<>(netherrackProvider, BlockCarvableTranquility.class))
                     .newVariation("a1-netherrack-bloodgravel")
                     .next("a1-netherrack-bloodrock")
                     .next("a1-netherrack-bloodrockgrey")
