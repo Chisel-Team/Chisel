@@ -25,8 +25,13 @@ public class ChiselRecipeHandler implements IRecipeHandler<CarvingGroupWrapper> 
     }
 
     @Override
-    public String getRecipeCategoryUid(CarvingGroupWrapper recipe) {
+    public String getRecipeCategoryUid() {
         return "chisel.chiseling";
+    }
+
+    @Override
+    public String getRecipeCategoryUid(CarvingGroupWrapper recipe) {
+        return getRecipeCategoryUid();
     }
 
     @Override
