@@ -63,9 +63,9 @@ public class SlotChiselSelection extends Slot {
         container.getInventoryChisel().updateItems();
         container.detectAndSendChanges();
         
-        if (player.worldObj.isRemote) {
+        if (player.world.isRemote) {
             String sound = container.getCarving().getVariationSound(crafted);
-            ClientUtil.playSound(player.worldObj, new BlockPos(player), sound);
+            ClientUtil.playSound(player.world, new BlockPos(player), sound);
         } else {
             //container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.stackSize);
         }

@@ -32,7 +32,7 @@ public class ClientUtil {
     }
     
     public static void playSound(World world, BlockPos pos, String sound, SoundCategory category) {
-        Minecraft.getMinecraft().theWorld.playSound(pos, new SoundEvent(new ResourceLocation(sound)), category, 0.3f + 0.7f * rand.nextFloat(), 0.6f + 0.4f * rand.nextFloat(), true);
+        Minecraft.getMinecraft().world.playSound(pos, new SoundEvent(new ResourceLocation(sound)), category, 0.3f + 0.7f * rand.nextFloat(), 0.6f + 0.4f * rand.nextFloat(), true);
     }
 
     public static void addHitEffects(World world, BlockPos pos, EnumFacing side) {

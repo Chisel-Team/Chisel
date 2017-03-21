@@ -140,7 +140,7 @@ public class ItemOffsetTool extends Item {
         RayTraceResult mop = event.getTarget();
         EntityPlayer player = event.getPlayer();
 
-        if (mop.typeOfHit == Type.BLOCK && (canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.MAIN_HAND, mop.sideHit) || canOffset(player, player.worldObj, mop.getBlockPos(), EnumHand.OFF_HAND, mop.sideHit))) {
+        if (mop.typeOfHit == Type.BLOCK && (canOffset(player, player.world, mop.getBlockPos(), EnumHand.MAIN_HAND, mop.sideHit) || canOffset(player, player.world, mop.getBlockPos(), EnumHand.OFF_HAND, mop.sideHit))) {
 
             EnumFacing face = mop.sideHit;
             BlockPos pos = mop.getBlockPos();

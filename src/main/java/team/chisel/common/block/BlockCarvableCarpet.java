@@ -36,7 +36,7 @@ public class BlockCarvableCarpet extends BlockCarvable {
     }
     
     @Override
-    public boolean isVisuallyOpaque() {
+    public boolean causesSuffocation() {
         return false;
     }
 

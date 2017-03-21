@@ -41,18 +41,18 @@ public enum EntityChiseling {
             }
             else if (event.getTarget() instanceof EntitySkeleton) {
                 EntitySkeleton spooky = (EntitySkeleton) event.getTarget();
-                if (spooky.func_189771_df() == SkeletonType.WITHER){
+                if (spooky.getSkeletonType() == SkeletonType.WITHER){
                     List<EntitySkeleton> scary = spooky.getEntityWorld().getEntitiesWithinAABB(EntitySkeleton.class, spooky.getEntityBoundingBox().expandXyz(3));
                     int count = 0;
                     for (EntitySkeleton skeleton : scary){
-                        if (skeleton.func_189771_df() == SkeletonType.WITHER){
+                        if (skeleton.getSkeletonType() == SkeletonType.WITHER){
                             count++;
                         }
                     }
                     if (count >= 3){
                         BlockPos pos = spooky.getPosition();
                         for (EntitySkeleton skeleton : scary){
-                            if (skeleton.func_189771_df() == SkeletonType.WITHER){
+                            if (skeleton.getSkeletonType() == SkeletonType.WITHER){
                                 skeleton.setHealth(0);
                             }
                         }

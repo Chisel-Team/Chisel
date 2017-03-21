@@ -104,7 +104,7 @@ public class ContainerChisel extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer entityplayer) {
-        return inventoryChisel.isUseableByPlayer(entityplayer);
+        return inventoryChisel.isUsableByPlayer(entityplayer);
     }
 
     @Override
@@ -162,7 +162,7 @@ public class ContainerChisel extends Container {
     }
 
     public void onChiselBroken() {
-        if (!getInventoryPlayer().player.worldObj.isRemote) {
+        if (!getInventoryPlayer().player.world.isRemote) {
             getInventoryPlayer().player.dropItem(inventoryChisel.getStackInSpecialSlot(), false);
         }
     }

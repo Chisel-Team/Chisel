@@ -113,7 +113,7 @@ public class BlockCarvable extends Block implements ICarvable {
     @SuppressWarnings("null") // No type annotations
     @Override   
     public VariationData getVariationData(int meta) {
-        return this.variations[MathHelper.clamp_int(meta, 0, this.variations.length - 1)];
+        return this.variations[MathHelper.clamp(meta, 0, this.variations.length - 1)];
     }
 
     public BlockCarvable setRedstoneLevel(int level){
@@ -263,9 +263,9 @@ public class BlockCarvable extends Block implements ICarvable {
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         return super.shouldSideBeRendered(blockState, blockAccess, pos, side) && blockState != blockAccess.getBlockState(pos.offset(side));
     }
-    
+
     @Override
-    public boolean isVisuallyOpaque() {
+    public boolean causesSuffocation() {
         return true;
     }
 
