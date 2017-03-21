@@ -42,7 +42,7 @@ targetCompatibility = '1.8'
 
 minecraft {
     version = "${minecraft_version}-${forge_version}"
-    mappings = 'snapshot_20160523'
+    mappings = 'snapshot_20161116'
     runDir = "run"
 	
 	useDepAts = true
@@ -66,7 +66,7 @@ repositories {
 dependencies {
 	// no WAILA for 1.9
 	// deobfCompile "mcp.mobius.waila:Waila:${waila_version}"
-	deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
+    deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
 }
 
