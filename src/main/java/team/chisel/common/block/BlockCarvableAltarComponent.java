@@ -15,8 +15,8 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @Optional.InterfaceList({
-        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.EnumAltarComponent", modid = "BloodMagic"),
-        @Optional.Interface(iface = "WayofTime.bloodmagic.api.incense.IAltarComponent", modid = "BloodMagic")
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.altar.EnumAltarComponent", modid = "BloodMagic"),
+        @Optional.Interface(iface = "WayofTime.bloodmagic.api.altar.IAltarComponent", modid = "BloodMagic")
 })
 
 @ParametersAreNonnullByDefault
