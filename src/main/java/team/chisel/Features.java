@@ -1,6 +1,7 @@
 package team.chisel;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Getter;
@@ -13,12 +14,15 @@ import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -36,6 +40,10 @@ import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.GenerationHandler.WorldGenInfo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public enum Features {
 
@@ -223,8 +231,20 @@ public enum Features {
 
             Carving.chisel.addVariation("bookshelf_oak", Blocks.BOOKSHELF.getDefaultState(), -1);
 
+            BlockCreator<BlockCarvable> bookshelfProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                @Override
+                public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+                    return Blocks.BOOKSHELF.getDrops(world, pos, state, fortune);
+                }
+
+                @Override
+                public float getEnchantPowerBonus(World world, BlockPos pos){
+                    return 1;
+                }
+            };
+
             for (String woodType : woodTypes) {
-                factory.newBlock(Material.WOOD, "bookshelf_" + woodType.toLowerCase(), new ChiselBlockProvider<>(BlockCarvableBookshelf::new, BlockCarvableBookshelf.class))
+                factory.newBlock(Material.WOOD, "bookshelf_" + woodType.toLowerCase(), new ChiselBlockProvider<>(bookshelfProvider, BlockCarvable.class))
                         .newVariation("rainbow")
                         .next("necromancer-novice")
                         .next("necromancer")
@@ -894,7 +914,19 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("glass", "blockGlassColorless");
 
-            factory.newBlock(Material.GLASS, "glass", provider).opaque(false)
+            BlockCreator<BlockCarvable> glassProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                @Override
+                public int quantityDropped(Random random) {
+                    return 0;
+                }
+
+                @Override
+                protected boolean canSilkHarvest() {
+                    return true;
+                }
+            };
+
+            factory.newBlock(Material.GLASS, "glass", new ChiselBlockProvider<>(glassProvider, BlockCarvable.class)).opaque(false)
                     .newVariation("terrain-glassbubble")
                     .next("terrain-glass-chinese")
                     .next("japanese")
@@ -912,7 +944,8 @@ public enum Features {
                     .next("a1-glasswindow-ironfencemodern")
                     .next("chrono")
                     .addOreDict("blockGlass")
-                    .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS).setHardness(0.3F));
+                    .addOreDict("blockGlassColorless")
+                    .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
         }
     },
 
@@ -923,13 +956,25 @@ public enum Features {
             IBlockState stainedGlass = Blocks.STAINED_GLASS.getDefaultState();
             IProperty<EnumDyeColor> prop = BlockStainedGlass.COLOR;
 
+            BlockCreator<BlockCarvable> glassProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                @Override
+                public int quantityDropped(Random random) {
+                    return 0;
+                }
+
+                @Override
+                protected boolean canSilkHarvest() {
+                    return true;
+                }
+            };
+
             for(int c = 0; c < dyeColors.length; c++)
             {
                 Carving.chisel.addVariation("glassdyed" + (dyeColors[c].toLowerCase()), stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
 
                 CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
 
-                factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c].toLowerCase()), provider).opaque(false)
+                factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(glassProvider, BlockCarvable.class)).opaque(false)
                         .setParentFolder("glass_stained")
                         .newVariation((dyeColors[c].toLowerCase())+"/panel")
                         .next((dyeColors[c].toLowerCase())+"/framed")
@@ -939,7 +984,7 @@ public enum Features {
                         .next((dyeColors[c].toLowerCase())+"/brick")
                         .addOreDict("blockGlass")
                         .addOreDict("blockGlass"+dyeColors[c])
-                        .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS).setHardness(0.3F));
+                        .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
         }
     },
@@ -992,7 +1037,35 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("glowstone", "glowstone");
 
-            factory.newBlock(Material.ROCK, "glowstone", new ChiselBlockProvider<>(BlockCarvableAltarComponent::new, BlockCarvableAltarComponent.class))
+            BlockCreator<BlockCarvable> glowstoneProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                @Override
+                public int quantityDroppedWithBonus(int fortune, Random random) {
+                    return MathHelper.clamp(this.quantityDropped(random) + random.nextInt(fortune + 1), 1, 4);
+                }
+
+                @Override
+                public int quantityDropped(Random random) {
+                    return 2 + random.nextInt(3);
+                }
+
+                @Override
+                @Nullable
+                public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+                    return Items.GLOWSTONE_DUST;
+                }
+
+                @Override
+                public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+                    ArrayList drops = new ArrayList();
+                    Random rand = world instanceof World?((World)world).rand:RANDOM;
+
+                    drops.add(new ItemStack(Items.GLOWSTONE_DUST, this.quantityDropped(state, fortune, rand)));
+
+                    return drops;
+                }
+            };
+
+            factory.newBlock(Material.GLASS, "glowstone", new ChiselBlockProvider<>(glowstoneProvider, BlockCarvable.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1027,8 +1100,8 @@ public enum Features {
                     .next("neon")
                     .next("neon-panel")
                     .addOreDict("glowstone")
-                    .build(b ->b/*.setDrop(Items.GLOWSTONE_DUST).setQuantityDropped(2).setQuantityBonusDropped(2)*/.setLightLevel(1.0f).setHardness(0.3f).setResistance(1.5f).setSoundType(SoundType.GLASS));
-        } //TODO Why isn't this dropping glowstone with meta 0 always? Drops glowstone with meta of block
+                    .build(b ->b.setLightLevel(1.0f).setHardness(0.3f).setResistance(1.5f).setSoundType(SoundType.GLASS));
+        }
     },
 
     GOLD {
@@ -1920,7 +1993,21 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("redstone", "blockRedstone");
 
-            factory.newBlock(Material.ROCK, "redstone", provider)
+            BlockCreator<BlockCarvable> redstoneProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                @Override
+                public boolean canProvidePower(IBlockState state)
+                {
+                    return true;
+                }
+
+                @Override
+                public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+                {
+                    return 15;
+                }
+            };
+
+            factory.newBlock(Material.IRON, "redstone", new ChiselBlockProvider<>(redstoneProvider, BlockCarvable.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1950,7 +2037,7 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .addOreDict("blockRedstone")
-                    .build(b->b.setRedstoneLevel(15).setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.METAL));
+                    .build(b->b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.METAL));
         }
     },
 

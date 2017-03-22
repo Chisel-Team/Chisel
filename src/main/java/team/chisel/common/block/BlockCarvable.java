@@ -56,16 +56,6 @@ public class BlockCarvable extends Block implements ICarvable {
 
     private final int maxVariation;
 
-    private int redstoneLevel = 0;
-    private int quantityDropped = 1;
-    private int bonusRandQuantity = 0;
-
-    private @Nullable Item drop;
-
-    private float enchantPowerBonus = 0;
-
-    private boolean canSilkHarvest = true;
-
     private final BlockStateContainer states;
     
     public BlockCarvable(Material material, int index, int max, VariationData... variations) {
@@ -114,57 +104,6 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override   
     public VariationData getVariationData(int meta) {
         return this.variations[MathHelper.clamp(meta, 0, this.variations.length - 1)];
-    }
-
-    public BlockCarvable setRedstoneLevel(int level){
-        this.redstoneLevel = level;
-        return this;
-    }
-
-    public BlockCarvable setEnchantPowerBonus(float bonus){
-        this.enchantPowerBonus = bonus;
-        return this;
-    }
-
-    public BlockCarvable setQuantityDropped(int amount)
-    {
-        this.quantityDropped = amount;
-        return this;
-    }
-
-    public BlockCarvable setQuantityBonusDropped(int amount)
-    {
-        this.bonusRandQuantity = amount;
-        return this;
-    }
-
-    public BlockCarvable setDrop(Item drop)
-    {
-        this.drop = drop;
-        return this;
-    }
-
-    public BlockCarvable setCanSilkHarvest(boolean bool)
-    {
-        this.canSilkHarvest = bool;
-        return this;
-    }
-
-    @Override
-    public float getEnchantPowerBonus(World world, BlockPos pos){
-        return enchantPowerBonus;
-    }
-
-    @Override
-    public boolean canProvidePower(IBlockState state)
-    {
-        return this.redstoneLevel > 0;
-    }
-
-    @Override
-    public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-    {
-        return this.redstoneLevel;
     }
     
     @Override
@@ -267,21 +206,5 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     public boolean causesSuffocation() {
         return true;
-    }
-
-    @Override
-    public int quantityDropped(Random random) {
-        return quantityDropped + random.nextInt(bonusRandQuantity+1);
-    }
-
-    @Override
-    @Nullable
-    public Item getItemDropped(IBlockState blockState, Random rand, int fortune) {
-        return drop == null ? super.getItemDropped(blockState, rand, fortune) : drop;
-    }
-
-    @Override
-    protected boolean canSilkHarvest() {
-        return this.canSilkHarvest;
     }
 }
