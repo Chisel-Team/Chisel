@@ -5,6 +5,7 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.SkeletonType;
 import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -40,29 +41,45 @@ public enum EntityChiseling {
 
             }
             else if (event.getTarget() instanceof EntitySkeleton) {
-                EntitySkeleton spooky = (EntitySkeleton) event.getTarget();
-                if (spooky.getSkeletonType() == SkeletonType.WITHER){
-                    List<EntitySkeleton> scary = spooky.getEntityWorld().getEntitiesWithinAABB(EntitySkeleton.class, spooky.getEntityBoundingBox().expandXyz(3));
-                    int count = 0;
-                    for (EntitySkeleton skeleton : scary){
-                        if (skeleton.getSkeletonType() == SkeletonType.WITHER){
-                            count++;
+                ItemStack[] inventory = event.getEntityPlayer().inventory.mainInventory;
+
+                for(int i = 0; i < inventory.length; i++)
+                {
+                    if(inventory[i].getItem() == Items.CLAY_BALL && inventory[i].stackSize >= 4)
+                    {
+                        inventory[i].stackSize = inventory[i].stackSize - 4;
+                        if(inventory[i].stackSize == 0)
+                        {
+                            inventory[i] = null;
                         }
-                    }
-                    if (count >= 3){
-                        BlockPos pos = spooky.getPosition();
-                        for (EntitySkeleton skeleton : scary){
-                            if (skeleton.getSkeletonType() == SkeletonType.WITHER){
-                                skeleton.setHealth(0);
+
+                        EntitySkeleton spooky = (EntitySkeleton) event.getTarget();
+                        if (spooky.getSkeletonType() == SkeletonType.WITHER){
+                            List<EntitySkeleton> scary = spooky.getEntityWorld().getEntitiesWithinAABB(EntitySkeleton.class, spooky.getEntityBoundingBox().expandXyz(3));
+                            int count = 0;
+                            for (EntitySkeleton skeleton : scary){
+                                if (skeleton.getSkeletonType() == SkeletonType.WITHER){
+                                    count++;
+                                }
+                            }
+                            if (count >= 3){
+                                BlockPos pos = spooky.getPosition();
+                                for (EntitySkeleton skeleton : scary){
+                                    if (skeleton.getSkeletonType() == SkeletonType.WITHER){
+                                        skeleton.setHealth(0);
+                                    }
+                                }
+                                System.out.print(spooky.getEntityWorld().spawnEntityInWorld(new EntityLightningBolt(spooky.getEntityWorld(), pos.getX(), pos.getY(), pos.getZ(), true)));
+                                EntityWither wither = new EntityWither(event.getEntityPlayer().getEntityWorld());
+                                wither.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 0.55D, pos.getZ() + 0.5D, 0.0f, 0.0f);
+                                wither.renderYawOffset = 0.0f;
+                                wither.ignite();
+                                event.getEntityPlayer().getEntityWorld().spawnEntityInWorld(wither);
+                                event.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("chisel.spawnwither").setStyle(new Style().setColor(TextFormatting.RED)));
                             }
                         }
-                        spooky.getEntityWorld().spawnEntityInWorld(new EntityLightningBolt(spooky.getEntityWorld(), pos.getX(), pos.getY(), pos.getZ(), true));
-                        EntityWither wither = new EntityWither(event.getEntityPlayer().getEntityWorld());
-                        wither.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() + 0.55D, pos.getZ() + 0.5D, 0.0f, 0.0f);
-                        wither.renderYawOffset = 0.0f;
-                        wither.ignite();
-                        event.getEntityPlayer().getEntityWorld().spawnEntityInWorld(new EntityWither(spooky.getEntityWorld()));
-                        event.getEntityPlayer().addChatComponentMessage(new TextComponentTranslation("chisel.spawnwither").setStyle(new Style().setColor(TextFormatting.RED)));
+
+                        break;
                     }
                 }
             }
