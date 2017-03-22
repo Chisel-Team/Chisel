@@ -53,6 +53,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockAluminum")
                     .build();
             
             CarvingUtils.getChiselRegistry().registerOre("blockAluminum", "blockAluminum");
@@ -103,6 +104,8 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .addOreDict("stoneAndesite")
+                    .addOreDict("stoneAndesitePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(30.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -167,6 +170,8 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("stoneBasalt")
+                    .addOreDict("stoneBasaltPolished")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "basaltextra", provider)
@@ -180,6 +185,8 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("raw").setOrder(-100)
+                    .addOreDict("stoneBasalt")
+                    .addOreDict("stoneBasaltPolished")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
             
             CarvingUtils.getChiselRegistry().registerOre("basalt", "stoneBasalt");
@@ -228,6 +235,8 @@ public enum Features {
                         .next("historician")
                         .next("cans")
                         .next("papers")
+                        .addOreDict("bookshelf")
+                        .addOreDict("bookshelf" + woodType)
                         .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
 
                 CarvingUtils.getChiselRegistry().registerOre("bookshelf_" + woodType.toLowerCase(), "bookshelf" + woodType);
@@ -307,6 +316,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockBronze")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
             
             CarvingUtils.getChiselRegistry().registerOre("blockBronze", "blockBronze");
@@ -380,6 +390,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockCobalt")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
             
             CarvingUtils.getChiselRegistry().registerOre("blockCobalt", "blockCobalt");
@@ -419,6 +430,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("cobblestone")
                     .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "cobblestoneextra", provider)
@@ -434,6 +446,7 @@ public enum Features {
                     .next("emboss")
                     .next("indent")
                     .next("marker")
+                    .addOreDict("cobblestone")
                     .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -476,6 +489,7 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .addOreDict("blockMossy")
                     .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -516,6 +530,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockCopper")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
             
             CarvingUtils.getChiselRegistry().registerOre("blockCopper", "blockCopper");
@@ -565,6 +580,7 @@ public enum Features {
                     .next("terrain-diamond-fourornate")
                     .next("terrain-diamond-zelda")
                     .next("terrain-diamond-ornatelayer")
+                    .addOreDict("blockDiamond")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
         }
     },
@@ -613,6 +629,8 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .addOreDict("stoneDiorite")
+                    .addOreDict("stoneDioritePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(30.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -638,6 +656,7 @@ public enum Features {
                     .next("chunky")
                     .next("horizontal")
                     .next("plate")
+                    .addOreDict("dirt")
                     .build(b -> b.setSoundType(SoundType.GROUND).setHardness(0.5F));
         }
     },
@@ -655,6 +674,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockElectrum")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
             
             CarvingUtils.getChiselRegistry().registerOre("blockElectrum", "blockElectrum");
@@ -683,6 +703,7 @@ public enum Features {
                     .next("masonryEmerald")
                     .next("emeraldCircle")
                     .next("emeraldPrismatic")
+                    .addOreDict("blockEmerald")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
         }
     },
@@ -792,6 +813,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("endstone")
                     .build(b -> b.setHardness(3.0F).setResistance(15.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "endstoneextra", provider)
@@ -803,6 +825,7 @@ public enum Features {
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
+                    .addOreDict("endstone")
                     .build(b -> b.setHardness(3.0F).setResistance(15.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -888,6 +911,7 @@ public enum Features {
                     .next("terrain-glass-thingrid")
                     .next("a1-glasswindow-ironfencemodern")
                     .next("chrono")
+                    .addOreDict("blockGlass")
                     .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS).setHardness(0.3F));
         }
     },
@@ -913,6 +937,8 @@ public enum Features {
                         .next((dyeColors[c].toLowerCase())+"/streaks")
                         .next((dyeColors[c].toLowerCase())+"/rough")
                         .next((dyeColors[c].toLowerCase())+"/brick")
+                        .addOreDict("blockGlass")
+                        .addOreDict("blockGlass"+dyeColors[c])
                         .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
         }
@@ -1000,6 +1026,7 @@ public enum Features {
                     .next("tiles-medium-bismuth")
                     .next("neon")
                     .next("neon-panel")
+                    .addOreDict("glowstone")
                     .build(b ->b/*.setDrop(Items.GLOWSTONE_DUST).setQuantityDropped(2).setQuantityBonusDropped(2)*/.setLightLevel(1.0f).setHardness(0.3f).setResistance(1.5f).setSoundType(SoundType.GLASS));
         } //TODO Why isn't this dropping glowstone with meta 0 always? Drops glowstone with meta of block
     },
@@ -1020,6 +1047,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockGold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F));
 
             factory.newBlock(Material.IRON, "gold", provider)
@@ -1039,6 +1067,7 @@ public enum Features {
                     .next("terrain-gold-spaceblack")
                     .next("terrain-gold-simple")
                     .next("goldEye")
+                    .addOreDict("blockGold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F));
         }
     },
@@ -1087,6 +1116,8 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .addOreDict("stoneGranite")
+                    .addOreDict("stoneGranitePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(30.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -1124,6 +1155,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("hardenedClay")
                     .build(b-> b.setHardness(1.25F).setResistance(7.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "hardenedclayextra", provider)
@@ -1136,6 +1168,7 @@ public enum Features {
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
+                    .addOreDict("hardenedClay")
                     .build(b -> b.setHardness(1.25F).setResistance(7.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -1187,6 +1220,8 @@ public enum Features {
                     .next("convexplain")
                     .next("carved")
                     .next("ornamental")
+                    .addOreDict("ice")
+                    .addOreDict("blockIce")
                     .build(b-> b.setSoundType(SoundType.GLASS).setHardness(0.5f));
         }
     },
@@ -1203,6 +1238,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockInvar")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
@@ -1223,6 +1259,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockIron")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
 
             factory.newBlock(Material.IRON, "iron", provider)
@@ -1242,6 +1279,7 @@ public enum Features {
                     .next("terrain-iron-spaceblack")
                     .next("terrain-iron-vents")
                     .next("terrain-iron-simple")
+                    .addOreDict("blockIron")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
     },
@@ -1314,6 +1352,7 @@ public enum Features {
                     .next("a1-blocklapis-smooth")
                     .next("a1-blocklapis-ornatelayer")
                     .next("masonryLapis")
+                    .addOreDict("blockLapis")
                     .build(b-> b.setHardness(3.0F).setResistance(5.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -1376,6 +1415,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockLead")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
             
             CarvingUtils.getChiselRegistry().registerOre("blockLead", "blockLead");
@@ -1434,6 +1474,8 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("stoneLimestone")
+                    .addOreDict("stoneLimestonePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "limestoneextra", provider)
@@ -1447,6 +1489,8 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("raw").setOrder(-100)
+                    .addOreDict("stoneLimestone")
+                    .addOreDict("stoneLimestonePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
             
             CarvingUtils.getChiselRegistry().registerOre("limestone", "stoneLimestone");
@@ -1491,6 +1535,8 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("stoneMarble")
+                    .addOreDict("stoneMarblePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "marbleextra", provider)
@@ -1502,8 +1548,10 @@ public enum Features {
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
-                    .next("prism").setOrder(-100)
-                    .next("raw")
+                    .next("prism")
+                    .next("raw").setOrder(-100)
+                    .addOreDict("stoneMarble")
+                    .addOreDict("stoneMarblePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
             
 
@@ -1540,6 +1588,8 @@ public enum Features {
                         .next("a1-stonepillar-plaintopgreek")
                         .next("a1-stonepillar-greekbottomgreek")
                         .next("a1-stonepillar-plainbottomgreek")
+                        .addOreDict("stoneMarble")
+                        .addOreDict("stoneMarblePolished")
                         .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
             } else {
                 factory.newBlock(Material.ROCK, "marblepillar", provider)
@@ -1560,6 +1610,8 @@ public enum Features {
                         .next("wideplain")
                         .next("carved")
                         .next("ornamental")
+                        .addOreDict("stoneMarble")
+                        .addOreDict("stoneMarblePolished")
                         .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
             }
         }
@@ -1619,6 +1671,7 @@ public enum Features {
                     .next("a1-netherrack-meatrock")
                     .next("a1-netherrack-red")
                     .next("a1-netherrack-wells")
+                    .addOreDict("netherrack")
                     .build(b -> b.setHardness(0.4F).setSoundType(SoundType.STONE));
         }
     },
@@ -1636,6 +1689,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockNickel")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
             
             CarvingUtils.getChiselRegistry().registerOre("blockNickel", "blockNickel");
@@ -1665,6 +1719,7 @@ public enum Features {
                     .next("tiles")
                     .next("greek")
                     .next("crate")
+                    .addOreDict("obsidian")
                     .build(b -> b.setHardness(50.0F).setResistance(2000.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -1721,6 +1776,7 @@ public enum Features {
                         .next("crateex")
                         .next("chaotic-hor")
                         .next("chaotic")
+                        .addOreDict("plankWood")
                         .build(b -> b.setHardness(2.0F).setResistance(5.0F).setSoundType(SoundType.WOOD));
 
             }
@@ -1740,6 +1796,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockPlatinum")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
             
             CarvingUtils.getChiselRegistry().registerOre("blockPlatinum", "blockPlatinum");
@@ -1784,6 +1841,9 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("prismarine")
+                    .addOreDict("prismarineBrick")
+                    .addOreDict("prismarineDark")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "prismarineextra", provider)
@@ -1795,6 +1855,9 @@ public enum Features {
                     .next("tiles-medium")
                     .next("pillar")
                     .next("twisted")
+                    .addOreDict("prismarine")
+                    .addOreDict("prismarineBrick")
+                    .addOreDict("prismarineDark")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -1845,6 +1908,7 @@ public enum Features {
                     //.next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .addOreDict("blockQuartz")
                     .build(b -> b.setHardness(0.8F).setResistance(4.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -1885,6 +1949,7 @@ public enum Features {
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
+                    .addOreDict("blockRedstone")
                     .build(b->b.setRedstoneLevel(15).setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.METAL));
         }
     },
@@ -1924,6 +1989,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("sandstone")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
 
             factory.newBlock(Material.ROCK, "sandstoneyellowextra", provider)
@@ -1936,6 +2002,7 @@ public enum Features {
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
+                    .addOreDict("sandstone")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
         }
     },
@@ -1976,6 +2043,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("sandstone")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
 
             factory.newBlock(Material.ROCK, "sandstoneredextra", provider)
@@ -1988,6 +2056,7 @@ public enum Features {
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
+                    .addOreDict("sandstone")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
         }
     },
@@ -2013,6 +2082,7 @@ public enum Features {
                     .next("scribbles-13")
                     .next("scribbles-14")
                     .next("scribbles-15")
+                    .addOreDict("sandstone")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
         }
     },
@@ -2030,6 +2100,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockSilver")
                     .build();
             
             CarvingUtils.getChiselRegistry().registerOre("blockSilver", "blockSilver");
@@ -2049,6 +2120,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockSteel")
                     .build();
 
             CarvingUtils.getChiselRegistry().registerOre("blockSteel", "blockSteel");
@@ -2098,6 +2170,8 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
+                    .addOreDict("stone")
+                    .addOreDict("brickStone")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "stonebrickextra", provider)
@@ -2111,6 +2185,8 @@ public enum Features {
                     .next("largeornate")
                     .next("poison")
                     .next("sunken")
+                    .addOreDict("stone")
+                    .addOreDict("brickStone")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
@@ -2225,6 +2301,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockTin")
                     .build();
             
             CarvingUtils.getChiselRegistry().registerOre("blockTin", "blockTin");
@@ -2276,6 +2353,7 @@ public enum Features {
                     .next("badGreggy")
                     .next("bolted")
                     .next("scaffold")
+                    .addOreDict("blockUranium")
                     .build();
             
             CarvingUtils.getChiselRegistry().registerOre("blockUranium", "blockUranium");
@@ -2439,6 +2517,7 @@ public enum Features {
                         .setParentFolder("wool")
                         .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
                         .next("llama_"+(dyeColors[c].toLowerCase()))
+                        .addOreDict("blockWool")
                         .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
             }
         }
