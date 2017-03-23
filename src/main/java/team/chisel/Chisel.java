@@ -37,7 +37,6 @@ import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.item.ItemOffsetTool;
-import team.chisel.common.util.EntityChiseling;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
@@ -103,7 +102,7 @@ public class Chisel implements Reference {
 
         GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
         MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(EntityChiseling.INSTANCE);
+        //MinecraftForge.EVENT_BUS.register(EntityChiseling.INSTANCE);
         MinecraftForge.TERRAIN_GEN_BUS.register(GenerationHandler.INSTANCE);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
