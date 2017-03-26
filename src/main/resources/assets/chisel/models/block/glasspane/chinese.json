@@ -16,5 +16,5 @@
         "east=false, north=true , south=true , west=true" : { "model": "chisel:pane/pane_nse", "y": 180 },
         "east=true , north=true , south=false, west=true" : { "model": "chisel:pane/pane_nse", "y": 270 }
 	},
-	"face":"chisel:glass/chinese.cf"
+	"face":"chisel:glass/terrain-glass-chinese.cf"
 }
