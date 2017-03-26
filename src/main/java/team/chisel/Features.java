@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -51,8 +52,8 @@ public enum Features {
     ALUMINUM {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            
-            factory.newBlock(Material.ROCK, "blockAluminum", provider)
+
+            factory.newBlock(Material.ROCK, "blockAluminum", beaconBaseProvider)
                     .setParentFolder("metals/aluminum")
                     .newVariation("caution")
                     .next("crate")
@@ -327,7 +328,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockBronze", provider)
+            factory.newBlock(Material.IRON, "blockBronze", beaconBaseProvider)
                     .setParentFolder("metals/bronze")
                     .newVariation("caution")
                     .next("crate")
@@ -401,7 +402,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockCobalt", provider)
+            factory.newBlock(Material.IRON, "blockCobalt", beaconBaseProvider)
                     .setParentFolder("metals/cobalt")
                     .newVariation("caution")
                     .next("crate")
@@ -541,7 +542,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockCopper", provider)
+            factory.newBlock(Material.IRON, "blockCopper", beaconBaseProvider)
                     .setParentFolder("metals/copper")
                     .newVariation("caution")
                     .next("crate")
@@ -587,7 +588,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("diamond", "blockDiamond");
 
-            factory.newBlock(Material.IRON, "diamond", provider)
+            factory.newBlock(Material.IRON, "diamond", beaconBaseProvider)
                     .newVariation("terrain-diamond-embossed")
                     .next("terrain-diamond-gem")
                     .next("terrain-diamond-cells")
@@ -685,7 +686,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockElectrum", provider)
+            factory.newBlock(Material.IRON, "blockElectrum", beaconBaseProvider)
                     .setParentFolder("metals/electrum")
                     .newVariation("caution")
                     .next("crate")
@@ -708,7 +709,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("emerald", "blockEmerald");
 
-            factory.newBlock(Material.IRON, "emerald", provider)
+            factory.newBlock(Material.IRON, "emerald", beaconBaseProvider)
                     .newVariation("panel")
                     .next("panelclassic")
                     .next("smooth")
@@ -956,20 +957,29 @@ public enum Features {
             IBlockState stainedGlass = Blocks.STAINED_GLASS.getDefaultState();
             IProperty<EnumDyeColor> prop = BlockStainedGlass.COLOR;
 
-            BlockCreator<BlockCarvable> glassProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
-                @Override
-                public int quantityDropped(Random random) {
-                    return 0;
-                }
-
-                @Override
-                protected boolean canSilkHarvest() {
-                    return true;
-                }
-            };
-
             for(int c = 0; c < dyeColors.length; c++)
             {
+                final int i = c;
+
+                BlockCreator<BlockCarvable> glassProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                    float[] beaconFloats = EntitySheep.getDyeRgb(EnumDyeColor.byMetadata(15-i));
+
+                    @Override
+                    public int quantityDropped(Random random) {
+                        return 0;
+                    }
+
+                    @Override
+                    protected boolean canSilkHarvest() {
+                        return true;
+                    }
+
+                    @Override
+                    public float[] getBeaconColorMultiplier(IBlockState state, World world, BlockPos pos, BlockPos beaconPos) {
+                        return beaconFloats;
+                    }
+                };
+
                 Carving.chisel.addVariation("glassdyed" + (dyeColors[c].toLowerCase()), stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
 
                 CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
@@ -1111,7 +1121,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("blockGold", "blockGold");
 
-            factory.newBlock(Material.IRON, "blockGold", provider)
+            factory.newBlock(Material.IRON, "blockGold", beaconBaseProvider)
                     .setParentFolder("metals/gold")
                     .newVariation("caution")
                     .next("crate")
@@ -1123,7 +1133,7 @@ public enum Features {
                     .addOreDict("blockGold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F));
 
-            factory.newBlock(Material.IRON, "gold", provider)
+            factory.newBlock(Material.IRON, "gold", beaconBaseProvider)
                     .setGroup("blockGold")
                     .newVariation("terrain-gold-largeingot")
                     .next("terrain-gold-smallingot")
@@ -1302,7 +1312,7 @@ public enum Features {
     INVAR {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.IRON, "blockInvar", provider)
+            factory.newBlock(Material.IRON, "blockInvar", beaconBaseProvider)
                     .setParentFolder("metals/invar")
                     .newVariation("caution")
                     .next("crate")
@@ -1323,7 +1333,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("blockIron", "blockIron");
 
-            factory.newBlock(Material.IRON, "blockIron", provider)
+            factory.newBlock(Material.IRON, "blockIron", beaconBaseProvider)
                     .setParentFolder("metals/iron")
                     .newVariation("caution")
                     .next("crate")
@@ -1335,7 +1345,7 @@ public enum Features {
                     .addOreDict("blockIron")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
 
-            factory.newBlock(Material.IRON, "iron", provider)
+            factory.newBlock(Material.IRON, "iron", beaconBaseProvider)
                     .setGroup("blockIron")
                     .newVariation("terrain-iron-largeingot")
                     .next("terrain-iron-smallingot")
@@ -1479,7 +1489,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockLead", provider)
+            factory.newBlock(Material.IRON, "blockLead", beaconBaseProvider)
                     .setParentFolder("metals/lead")
                     .newVariation("caution")
                     .next("crate")
@@ -1753,7 +1763,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockNickel", provider)
+            factory.newBlock(Material.ROCK, "blockNickel", beaconBaseProvider)
                     .setParentFolder("metals/nickel")
                     .newVariation("caution")
                     .next("crate")
@@ -1860,7 +1870,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockPlatinum", provider)
+            factory.newBlock(Material.IRON, "blockPlatinum", beaconBaseProvider)
                     .setParentFolder("metals/platinum")
                     .newVariation("caution")
                     .next("crate")
@@ -2178,7 +2188,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockSilver", provider)
+            factory.newBlock(Material.ROCK, "blockSilver", beaconBaseProvider)
                     .setParentFolder("metals/silver")
                     .newVariation("caution")
                     .next("crate")
@@ -2198,7 +2208,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockSteel", provider)
+            factory.newBlock(Material.ROCK, "blockSteel", beaconBaseProvider)
                     .setParentFolder("metals/steel")
                     .newVariation("caution")
                     .next("crate")
@@ -2379,7 +2389,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockTin", provider)
+            factory.newBlock(Material.ROCK, "blockTin", beaconBaseProvider)
                     .setParentFolder("metals/tin")
                     .newVariation("caution")
                     .next("crate")
@@ -2431,7 +2441,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockUranium", provider)
+            factory.newBlock(Material.ROCK, "blockUranium", beaconBaseProvider)
                     .setParentFolder("metals/uranium")
                     .newVariation("caution")
                     .next("crate")
@@ -2639,6 +2649,15 @@ public enum Features {
 
     private static final @Nonnull BlockCreator<BlockCarvable> creator = BlockCarvable::new;
     private static final @Nonnull ChiselBlockProvider<BlockCarvable> provider = new ChiselBlockProvider<>(creator, BlockCarvable.class);
+
+    private static final @Nonnull BlockCreator<BlockCarvable> beaconBaseCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+        @Override
+        public boolean isBeaconBase(IBlockAccess worldObj, BlockPos pos, BlockPos beacon) {
+            return true;
+        }
+    };
+
+    private static final @Nonnull ChiselBlockProvider<BlockCarvable> beaconBaseProvider = new ChiselBlockProvider<>(beaconBaseCreator, BlockCarvable.class);
 
     @RequiredArgsConstructor
     @ParametersAreNonnullByDefault
