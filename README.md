@@ -7,9 +7,20 @@ We use connected texture and other dark magic to make it look fancy!
 
 Join us on irc at esper.net on #ChiselTeam
 
-I cant think of anything else to say, heres the license stuff I guess.
+Launching
+===========
 
-This mod is licensed under GPLv2.
+Before you launch Chisel in your dev space, be sure to register the coremod with this parameter into the program arguments:
+
+`-Dfml.coreMods.load=team.chisel.common.asm.ChiselCorePlugin`
+
+
+Licensing
+===========
+
+I cant think of anything else to say, here's the license stuff.
+
+This mod is licensed under GPLv2. See LICENSE.md for more.
 
 All images contained by this directory
 `/src/main/resources/assets/chisel/textures/blocks/bloodMagic/` are created by Yulife, and are used with permission.
