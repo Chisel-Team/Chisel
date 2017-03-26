@@ -962,7 +962,7 @@ public enum Features {
                 final int i = c;
 
                 BlockCreator<BlockCarvable> glassProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
-                    float[] beaconFloats = EntitySheep.getDyeRgb(EnumDyeColor.byMetadata(15-i));
+                    float[] beaconFloats = EntitySheep.getDyeRgb(EnumDyeColor.byDyeDamage(i));
 
                     @Override
                     public int quantityDropped(Random random) {
