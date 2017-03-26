@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import team.chisel.api.IChiselItem;
 import team.chisel.common.item.ItemChisel;
 
 public class InventoryChiselSelection implements IInventory {
@@ -107,7 +108,7 @@ public class InventoryChiselSelection implements IInventory {
     @Override
     public boolean isUsableByPlayer(EntityPlayer entityplayer) {
         ItemStack held = entityplayer.inventory.getStackInSlot(container.getChiselSlot());
-        return held != null && held.getItem() instanceof ItemChisel;
+        return held != null && held.getItem() instanceof IChiselItem;
     }
 
     public void clearItems() {
