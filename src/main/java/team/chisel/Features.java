@@ -1405,8 +1405,8 @@ public enum Features {
                     .next("fuzzscreen")
                     .next("largesteel")
                     .next("smallsteel")
-                    .next("directionright")
                     .next("directionleft")
+                    .next("directionright")
                     .next("infocon")
                     .build();
         }
