@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -45,6 +46,8 @@ import team.chisel.common.util.GenerationHandler.WorldGenInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static team.chisel.common.config.Configurations.concreteVelocityMult;
 
 public enum Features {
 
@@ -232,7 +235,7 @@ public enum Features {
 
             Carving.chisel.addVariation("bookshelf_oak", Blocks.BOOKSHELF.getDefaultState(), -1);
 
-            BlockCreator<BlockCarvable> bookshelfProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+            BlockCreator<BlockCarvable> bookshelfCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
                 public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
                     return Blocks.BOOKSHELF.getDrops(world, pos, state, fortune);
@@ -245,7 +248,7 @@ public enum Features {
             };
 
             for (String woodType : woodTypes) {
-                factory.newBlock(Material.WOOD, "bookshelf_" + woodType.toLowerCase(), new ChiselBlockProvider<>(bookshelfProvider, BlockCarvable.class))
+                factory.newBlock(Material.WOOD, "bookshelf_" + woodType.toLowerCase(), new ChiselBlockProvider<>(bookshelfCreator, BlockCarvable.class))
                         .newVariation("rainbow")
                         .next("necromancer-novice")
                         .next("necromancer")
@@ -341,6 +344,42 @@ public enum Features {
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
             
             CarvingUtils.getChiselRegistry().registerOre("blockBronze", "blockBronze");
+        }
+    },
+
+    BROWNSTONE {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+
+            BlockCreator<BlockCarvable> brownstoneCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                @Override
+                public void onEntityWalk(World world, BlockPos pos, Entity entity) {
+                    entity.motionX *= concreteVelocityMult + 0.05;
+                    entity.motionZ *= concreteVelocityMult + 0.05;
+                }
+            };
+
+            factory.newBlock(Material.ROCK, "brownstone", new ChiselBlockProvider<>(brownstoneCreator, BlockCarvable.class))
+                    .newVariation("default")
+                    .next("block")
+                    .next("doubleslab")
+                    .next("blocks")
+                    .next("weathered")
+                    .next("weathered-block")
+                    .next("weathered-doubleslab")
+                    .next("weathered-blocks")
+                    .next("weathered-half")
+                    .next("weathered-block-half")
+                    .next("asphalt")
+                    .build();
+        }
+
+        @Override
+        void addRecipes()
+        {
+            //FurnaceRecipes.instance().addSmelting(new ItemStack(Blocks.GRAVEL).getItem(), new ItemStack(ChiselBlocks.brownstone), 0.1F);
+
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.brownstone, 4, 0), " S ", "SCS", " S ", 'S', new ItemStack(Blocks.GRAVEL, 1), 'C', new ItemStack(Items.CLAY_BALL, 1)));
         }
     },
 
@@ -514,29 +553,6 @@ public enum Features {
                     .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
-
-    /*CONCRETE { TODO Retexture
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "concrete", provider)
-                    .newVariation("default")
-                    .next("block")
-                    .next("doubleslab")
-                    .next("blocks")
-                    .next("weathered")
-                    .next("weathered-block")
-                    .next("weathered-doubleslab")
-                    .next("weathered-blocks")
-                    .next("weathered-half")
-                    .next("weathered-block-half")
-                    .next("asphalt")
-                    .build();
-        }
-        @Override
-        void addRecipes() {
-            FurnaceRecipes.instance().addSmelting(new ItemStack(Blocks.GRAVEL).getItem(), new ItemStack(ChiselBlocks.concrete), 0.1F);
-        }
-    },*/
 
     COPPER {
         @Override
@@ -915,7 +931,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("glass", "blockGlassColorless");
 
-            BlockCreator<BlockCarvable> glassProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+            BlockCreator<BlockCarvable> glassCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
                 public int quantityDropped(Random random) {
                     return 0;
@@ -927,7 +943,7 @@ public enum Features {
                 }
             };
 
-            factory.newBlock(Material.GLASS, "glass", new ChiselBlockProvider<>(glassProvider, BlockCarvable.class)).opaque(false)
+            factory.newBlock(Material.GLASS, "glass", new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
                     .newVariation("terrain-glassbubble")
                     .next("terrain-glass-chinese")
                     .next("japanese")
@@ -961,7 +977,7 @@ public enum Features {
             {
                 final int i = c;
 
-                BlockCreator<BlockCarvable> glassProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                BlockCreator<BlockCarvable> glassCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                     float[] beaconFloats = EntitySheep.getDyeRgb(EnumDyeColor.byDyeDamage(i));
 
                     @Override
@@ -984,7 +1000,7 @@ public enum Features {
 
                 CarvingUtils.getChiselRegistry().registerOre("glassdyed" + (dyeColors[c].toLowerCase()), "blockGlass" + dyeColors[c]);
 
-                factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(glassProvider, BlockCarvable.class)).opaque(false)
+                factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
                         .setParentFolder("glass_stained/"+dyeColors[c].toLowerCase())
                         .newVariation("panel")
                         .next("framed")
@@ -1047,7 +1063,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("glowstone", "glowstone");
 
-            BlockCreator<BlockCarvable> glowstoneProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+            BlockCreator<BlockCarvable> glowstoneCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
                 public int quantityDroppedWithBonus(int fortune, Random random) {
                     return MathHelper.clamp(this.quantityDropped(random) + random.nextInt(fortune + 1), 1, 4);
@@ -1074,8 +1090,8 @@ public enum Features {
                     return drops;
                 }
             };
-
-            factory.newBlock(Material.GLASS, "glowstone", new ChiselBlockProvider<>(glowstoneProvider, BlockCarvable.class))
+            
+            factory.newBlock(Material.GLASS, "glowstone", new ChiselBlockProvider<>(glowstoneCreator, BlockCarvable.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1732,14 +1748,14 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("netherrack", "netherrack");
 
-            BlockCreator<BlockCarvableTranquility> netherrackProvider = (mat, index, maxVariation, data) -> new BlockCarvableTranquility(mat, index, maxVariation, data) {
+            BlockCreator<BlockCarvableTranquility> netherrackCreator = (mat, index, maxVariation, data) -> new BlockCarvableTranquility(mat, index, maxVariation, data) {
                 @Override
                 public boolean isFireSource(@Nonnull World world, BlockPos pos, EnumFacing side) {
                     return side == EnumFacing.UP;
                 }
             };
 
-            factory.newBlock(Material.ROCK, "netherrack", new ChiselBlockProvider<>(netherrackProvider, BlockCarvableTranquility.class))
+            factory.newBlock(Material.ROCK, "netherrack", new ChiselBlockProvider<>(netherrackCreator, BlockCarvableTranquility.class))
                     .newVariation("a1-netherrack-bloodgravel")
                     .next("a1-netherrack-bloodrock")
                     .next("a1-netherrack-bloodrockgrey")
@@ -2003,7 +2019,7 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("redstone", "blockRedstone");
 
-            BlockCreator<BlockCarvable> redstoneProvider = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+            BlockCreator<BlockCarvable> redstoneCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
                 public boolean canProvidePower(IBlockState state)
                 {
@@ -2017,7 +2033,7 @@ public enum Features {
                 }
             };
 
-            factory.newBlock(Material.IRON, "redstone", new ChiselBlockProvider<>(redstoneProvider, BlockCarvable.class))
+            factory.newBlock(Material.IRON, "redstone", new ChiselBlockProvider<>(redstoneCreator, BlockCarvable.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")

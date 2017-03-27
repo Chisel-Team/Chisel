@@ -33,6 +33,7 @@ public final class ChiselBlocks
     public static final BlockCarvable bookshelf_jungle = null;
     public static final BlockCarvable bookshelf_acacia = null;
     public static final BlockCarvable bookshelf_darkoak = null;
+    public static final BlockCarvable brownstone = null;
     public static final BlockCarvable carpet = null;
     public static final BlockCarvable cloud = null;
     public static final BlockCarvable dirt = null;
