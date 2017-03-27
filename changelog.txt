@@ -1,3 +1,17 @@
+0.0.9:
+New
+- Ender Offset Wand works again, has Recipe now. You can use this to shift multi-block textures like the Factory Blocks' Massive Fan.
+- Brownstone is back! It used to be Concrete, but it still will accelerate your player as your player walks!
+- You can craft Marble and Limestone in Thermal Expansion's Compactor - Presser Mode.
+- Re-Implemented IMC, allowing other mods to add and remove blocks to Carving Groups via Forge's Inter-Mod Communications.
+Changes
+- Chiseled Blocks of Metal are now legal Beacon Bases.
+- Chiseled Stained Glass will now affect the color of the Beacon Beam.
+Fixes
+- Cloud Blocks are now translucent again.
+- Fixed Dupe with DE
+- Filled some missing Language keys in en_us.
+
 0.0.8:
 New
 - Implemented compatibility with BloodMagic for tranquility and runes
