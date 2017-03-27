@@ -5,6 +5,7 @@ import java.io.File;
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
@@ -96,13 +97,13 @@ public class Chisel implements Reference {
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
+        GameRegistry.addRecipe(new ShapedOreRecipe(itemOffsetTool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron"));
         
         MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
         MinecraftForge.EVENT_BUS.register(ChiselController.class);
 
         GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
         MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
-        //MinecraftForge.EVENT_BUS.register(EntityChiseling.INSTANCE);
         MinecraftForge.TERRAIN_GEN_BUS.register(GenerationHandler.INSTANCE);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
