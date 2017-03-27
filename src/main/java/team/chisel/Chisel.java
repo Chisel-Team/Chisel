@@ -5,10 +5,14 @@ import java.io.File;
 import javax.annotation.Nonnull;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,9 +21,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -34,6 +35,7 @@ import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
+import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
@@ -119,8 +121,26 @@ public class Chisel implements Reference {
         
         proxy.init();
         // BlockRegistry.init(event);
+
+        addCompactorPressRecipe(4000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestoneextra, 1, 7));
+        addCompactorPressRecipe(4000, new ItemStack(ChiselBlocks.limestoneextra, 1, 7), new ItemStack(ChiselBlocks.marbleextra, 1, 7));
     }
-    
+
+    private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output)
+    {
+
+        NBTTagCompound message = new NBTTagCompound();
+
+        message.setInteger("energy", energy);
+        message.setTag("input", new NBTTagCompound());
+        message.setTag("output", new NBTTagCompound());
+
+        input.writeToNBT(message.getCompoundTag("input"));
+        output.writeToNBT(message.getCompoundTag("output"));
+
+        FMLInterModComms.sendMessage("thermalexpansion", "addcompactorpressrecipe", message);
+    }
+
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
