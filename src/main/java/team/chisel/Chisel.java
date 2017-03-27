@@ -123,8 +123,8 @@ public class Chisel implements Reference {
         proxy.init();
         // BlockRegistry.init(event);
 
-        addCompactorPressRecipe(4000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestoneextra, 1, 7));
-        addCompactorPressRecipe(4000, new ItemStack(ChiselBlocks.limestoneextra, 1, 7), new ItemStack(ChiselBlocks.marbleextra, 1, 7));
+        addCompactorPressRecipe(1000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestoneextra, 1, 7));
+        addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestoneextra, 1, 7), new ItemStack(ChiselBlocks.marbleextra, 1, 7));
 
         /*
         Example of IMC
