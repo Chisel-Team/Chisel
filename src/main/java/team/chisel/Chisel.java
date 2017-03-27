@@ -34,6 +34,7 @@ import team.chisel.client.gui.PacketChiselNBT;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
+import team.chisel.common.compat.IMCHandler;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.item.ChiselController;
@@ -124,6 +125,14 @@ public class Chisel implements Reference {
 
         addCompactorPressRecipe(4000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestoneextra, 1, 7));
         addCompactorPressRecipe(4000, new ItemStack(ChiselBlocks.limestoneextra, 1, 7), new ItemStack(ChiselBlocks.marbleextra, 1, 7));
+
+        /*
+        Example of IMC
+
+        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
+        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|1");
+        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|2");
+        */
     }
 
     private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output)
@@ -164,6 +173,13 @@ public class Chisel implements Reference {
                 message = message + obj + " ";
             }
             debug(message + "]");
+        }
+    }
+
+    @Mod.EventHandler
+    public void onIMC(FMLInterModComms.IMCEvent event) {
+        for (FMLInterModComms.IMCMessage msg : event.getMessages()) {
+            IMCHandler.INSTANCE.handleMessage(msg);
         }
     }
 
@@ -216,7 +232,7 @@ public class Chisel implements Reference {
                 }
             }
         }
-    }//*/
+    }
 
     // @Mod.EventHandler
     // public void postInit(FMLPostInitializationEvent event){
