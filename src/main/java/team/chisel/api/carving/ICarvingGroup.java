@@ -1,5 +1,6 @@
 package team.chisel.api.carving;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -14,7 +15,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
  * It also defines what sound and oredict name the group as a whole has.
  */
 @ParametersAreNonnullByDefault
-public interface ICarvingGroup {
+public interface ICarvingGroup extends Iterable<ICarvingVariation> {
 
 	/**
 	 * The name of this group. Used for internal identification.
@@ -59,6 +60,11 @@ public interface ICarvingGroup {
 	 * @return A {@link List} of {@link ICarvingVariation}s
 	 */
 	List<ICarvingVariation> getVariations();
+	
+	@SuppressWarnings("null")
+    default Iterator<ICarvingVariation> iterator() {
+	    return getVariations().iterator();
+	}
 
 	/**
 	 * Adds a variation to this group. Do not call this from external code, as it will fail to remove the inverse lookup from the registry.

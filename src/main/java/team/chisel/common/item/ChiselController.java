@@ -2,6 +2,8 @@ package team.chisel.common.item;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -44,12 +46,7 @@ public class ChiselController {
                 return;
             }
             
-            ItemStack inWorldStack = state.getBlock().getPickBlock(state, new RayTraceResult(event.getHitVec(), event.getFace()), event.getWorld(), event.getPos(), player);
-            if (inWorldStack == null) {
-                return;
-            }
-            
-            ICarvingGroup blockGroup = registry.getGroup(inWorldStack);
+            ICarvingGroup blockGroup = registry.getGroup(state);
             if (blockGroup == null) {
                 return;
             }
@@ -67,7 +64,7 @@ public class ChiselController {
                     }
                 }
             } else {
-                ICarvingVariation current = registry.getVariation(inWorldStack);
+                ICarvingVariation current = registry.getVariation(state);
                 List<ICarvingVariation> variations = blockGroup.getVariations();
                 int index = variations.indexOf(current);
                 index = player.isSneaking() ? index - 1 : index + 1;
