@@ -382,7 +382,7 @@ public enum Features {
     CLOUD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.CLOTH, "cloud", provider)
+            factory.newBlock(Material.CLOTH, "cloud", provider).opaque(false)
                     .newVariation("cloud")
                     .next("large")
                     .next("small")
