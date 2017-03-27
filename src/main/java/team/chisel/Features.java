@@ -370,7 +370,6 @@ public enum Features {
                     .next("weathered-blocks")
                     .next("weathered-half")
                     .next("weathered-block-half")
-                    .next("asphalt")
                     .build();
         }
 
@@ -379,7 +378,7 @@ public enum Features {
         {
             //FurnaceRecipes.instance().addSmelting(new ItemStack(Blocks.GRAVEL).getItem(), new ItemStack(ChiselBlocks.brownstone), 0.1F);
 
-            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.brownstone, 4, 0), " S ", "SCS", " S ", 'S', new ItemStack(Blocks.GRAVEL, 1), 'C', new ItemStack(Items.CLAY_BALL, 1)));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.brownstone, 4, 0), " S ", "SCS", " S ", 'S', "sandstone", 'C', new ItemStack(Items.CLAY_BALL, 1)));
         }
     },
 

@@ -341,6 +341,18 @@ tile.chisel.blockCobalt.badGreggy.desc.1=Egregious
 tile.chisel.blockCobalt.bolted.desc.1=Bolted
 tile.chisel.blockCobalt.scaffold.desc.1=Scaffold
 
+tile.chisel.brownstone.name=Brownstone
+tile.chisel.brownstone.default.desc.1=Raw
+tile.chisel.brownstone.block.desc.1=Big Tiled
+tile.chisel.brownstone.blocks.desc.1=Tiled
+tile.chisel.brownstone.doubleslab.desc.1=Bisected
+tile.chisel.brownstone.weathered.desc.1=Weathered
+tile.chisel.brownstone.weathered-block.desc.1=Weathered Big Tile
+tile.chisel.brownstone.weathered-doubleslab.desc.1=Weathered Bisected
+tile.chisel.brownstone.weathered-blocks.desc.1=Weathered Tiles
+tile.chisel.brownstone.weathered-half.desc.1=Half-Weathered
+tile.chisel.brownstone.weathered-block-half.desc.1=Half-Weathered Big Tile
+
 tile.chisel.cobblestone.name=Cobblestone
 tile.chisel.cobblestone.cracked.desc.1=Cracked
 tile.chisel.cobblestone.bricks-soft.desc.1=Weathered Bricks
