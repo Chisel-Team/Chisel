@@ -7,16 +7,6 @@ We use connected texture and other dark magic to make it look fancy!
 
 Join us on irc at esper.net on #ChiselTeam
 
-Launching
-===========
-
-Before you launch Chisel in your dev space, be sure to register the coremod with this parameter into the VM arguments:
-
-`-Dfml.coreMods.load=team.chisel.common.asm.ChiselCorePlugin`
-
-Or else some of the fancy rendering won't work.
-
-
 Licensing
 ===========
 
