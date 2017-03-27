@@ -44,6 +44,8 @@ minecraft {
     version = "${minecraft_version}-${forge_version}"
     mappings = 'snapshot_20161116'
     runDir = "run"
+    
+    clientJvmArgs += '-Dfml.coreMods.load=team.chisel.common.asm.ChiselCorePlugin'
 	
 	useDepAts = true
 
