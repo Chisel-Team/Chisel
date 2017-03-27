@@ -1,5 +1,6 @@
 package team.chisel.common.integration.jei;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -122,6 +123,12 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
             recipeLayout.getItemStacks().init(i + 1, focus != null && focus.getMode() == IFocus.Mode.OUTPUT, x, y);
             recipeLayout.getItemStacks().set(i + 1, stacks.get(i));
         }
+    }
+
+    @Nonnull
+    @Override
+    public List<String> getTooltipStrings(int mouseX, int mouseY) {
+        return Collections.emptyList();
     }
 
     @Override
