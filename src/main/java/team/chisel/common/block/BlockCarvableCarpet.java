@@ -35,11 +35,10 @@ public class BlockCarvableCarpet extends BlockCarvable {
         return false;
     }
     
-    // TODO 1.11 did this change to something else? 
-//    @Override
-//    public boolean isVisuallyOpaque() {
-//        return false;
-//    }
+    @Override
+    public boolean causesSuffocation(IBlockState state) {
+        return false;
+    }
 
     @Override
     public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {

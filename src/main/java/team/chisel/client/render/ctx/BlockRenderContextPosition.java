@@ -10,7 +10,7 @@ import team.chisel.api.render.IBlockRenderContext;
 
 public class BlockRenderContextPosition implements IBlockRenderContext {
 
-    private @Nonnull BlockPos position;
+    protected @Nonnull BlockPos position;
 
     public BlockRenderContextPosition(@Nonnull BlockPos pos) {
         this.position = pos;

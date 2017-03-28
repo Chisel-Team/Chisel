@@ -1,4 +1,4 @@
-Chisel [![Curseforge](http://cf.way2muchnoise.eu/short_chisel.svg)](https://minecraft.curseforge.com/projects/chisel)
+Chisel [![Curseforge](http://cf.way2muchnoise.eu/full_chisel_downloads.svg)](https://minecraft.curseforge.com/projects/chisel) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_chisel_all.svg)](https://minecraft.curseforge.com/projects/chisel)
 ===========
 
 The Chisel mod adds many decorative blocks to the game.
@@ -7,9 +7,12 @@ We use connected texture and other dark magic to make it look fancy!
 
 Join us on irc at esper.net on #ChiselTeam
 
-I cant think of anything else to say, heres the license stuff I guess.
+Licensing
+===========
 
-This mod is licensed under GPLv2.
+I cant think of anything else to say, here's the license stuff.
+
+This mod is licensed under GPLv2. See LICENSE.md for more.
 
 All images contained by this directory
 `/src/main/resources/assets/chisel/textures/blocks/bloodMagic/` are created by Yulife, and are used with permission.

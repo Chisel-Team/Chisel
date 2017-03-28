@@ -339,6 +339,18 @@ tile.chisel.blockCobalt.badGreggy.desc.1=Egregious
 tile.chisel.blockCobalt.bolted.desc.1=Bolted
 tile.chisel.blockCobalt.scaffold.desc.1=Scaffold
 
+tile.chisel.brownstone.name=Brownstone
+tile.chisel.brownstone.default.desc.1=Raw
+tile.chisel.brownstone.block.desc.1=Big Tiled
+tile.chisel.brownstone.blocks.desc.1=Tiled
+tile.chisel.brownstone.doubleslab.desc.1=Bisected
+tile.chisel.brownstone.weathered.desc.1=Weathered
+tile.chisel.brownstone.weathered-block.desc.1=Weathered Big Tile
+tile.chisel.brownstone.weathered-doubleslab.desc.1=Weathered Bisected
+tile.chisel.brownstone.weathered-blocks.desc.1=Weathered Tiles
+tile.chisel.brownstone.weathered-half.desc.1=Half-Weathered
+tile.chisel.brownstone.weathered-block-half.desc.1=Half-Weathered Big Tile
+
 tile.chisel.cobblestone.name=Cobblestone
 tile.chisel.cobblestone.cracked.desc.1=Cracked
 tile.chisel.cobblestone.bricks-soft.desc.1=Weathered Bricks
@@ -639,6 +651,118 @@ tile.chisel.glassdyedmagenta.name=Magenta Stained Glass
 tile.chisel.glassdyedorange.name=Orange Stained Glass
 tile.chisel.glassdyedwhite.name=White Stained Glass
 
+tile.chisel.glassdyedblack.brick.desc.1=Brick
+tile.chisel.glassdyedblack.framed.desc.1=Framed
+tile.chisel.glassdyedblack.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedblack.panel.desc.1=Panel
+tile.chisel.glassdyedblack.rough.desc.1=Rough
+tile.chisel.glassdyedblack.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedred.brick.desc.1=Brick
+tile.chisel.glassdyedred.framed.desc.1=Framed
+tile.chisel.glassdyedred.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedred.panel.desc.1=Panel
+tile.chisel.glassdyedred.rough.desc.1=Rough
+tile.chisel.glassdyedred.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedgreen.brick.desc.1=Brick
+tile.chisel.glassdyedgreen.framed.desc.1=Framed
+tile.chisel.glassdyedgreen.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedgreen.panel.desc.1=Panel
+tile.chisel.glassdyedgreen.rough.desc.1=Rough
+tile.chisel.glassdyedgreen.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedbrown.brick.desc.1=Brick
+tile.chisel.glassdyedbrown.framed.desc.1=Framed
+tile.chisel.glassdyedbrown.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedbrown.panel.desc.1=Panel
+tile.chisel.glassdyedbrown.rough.desc.1=Rough
+tile.chisel.glassdyedbrown.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedblue.brick.desc.1=Brick
+tile.chisel.glassdyedblue.framed.desc.1=Framed
+tile.chisel.glassdyedblue.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedblue.panel.desc.1=Panel
+tile.chisel.glassdyedblue.rough.desc.1=Rough
+tile.chisel.glassdyedblue.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedpurple.brick.desc.1=Brick
+tile.chisel.glassdyedpurple.framed.desc.1=Framed
+tile.chisel.glassdyedpurple.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedpurple.panel.desc.1=Panel
+tile.chisel.glassdyedpurple.rough.desc.1=Rough
+tile.chisel.glassdyedpurple.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedcyan.brick.desc.1=Brick
+tile.chisel.glassdyedcyan.framed.desc.1=Framed
+tile.chisel.glassdyedcyan.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedcyan.panel.desc.1=Panel
+tile.chisel.glassdyedcyan.rough.desc.1=Rough
+tile.chisel.glassdyedcyan.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedlightgray.brick.desc.1=Brick
+tile.chisel.glassdyedlightgray.framed.desc.1=Framed
+tile.chisel.glassdyedlightgray.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedlightgray.panel.desc.1=Panel
+tile.chisel.glassdyedlightgray.rough.desc.1=Rough
+tile.chisel.glassdyedlightgray.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedgray.brick.desc.1=Brick
+tile.chisel.glassdyedgray.framed.desc.1=Framed
+tile.chisel.glassdyedgray.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedgray.panel.desc.1=Panel
+tile.chisel.glassdyedgray.rough.desc.1=Rough
+tile.chisel.glassdyedgray.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedpink.brick.desc.1=Brick
+tile.chisel.glassdyedpink.framed.desc.1=Framed
+tile.chisel.glassdyedpink.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedpink.panel.desc.1=Panel
+tile.chisel.glassdyedpink.rough.desc.1=Rough
+tile.chisel.glassdyedpink.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedlime.brick.desc.1=Brick
+tile.chisel.glassdyedlime.framed.desc.1=Framed
+tile.chisel.glassdyedlime.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedlime.panel.desc.1=Panel
+tile.chisel.glassdyedlime.rough.desc.1=Rough
+tile.chisel.glassdyedlime.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedyellow.brick.desc.1=Brick
+tile.chisel.glassdyedyellow.framed.desc.1=Framed
+tile.chisel.glassdyedyellow.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedyellow.panel.desc.1=Panel
+tile.chisel.glassdyedyellow.rough.desc.1=Rough
+tile.chisel.glassdyedyellow.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedlightblue.brick.desc.1=Brick
+tile.chisel.glassdyedlightblue.framed.desc.1=Framed
+tile.chisel.glassdyedlightblue.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedlightblue.panel.desc.1=Panel
+tile.chisel.glassdyedlightblue.rough.desc.1=Rough
+tile.chisel.glassdyedlightblue.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedmagenta.brick.desc.1=Brick
+tile.chisel.glassdyedmagenta.framed.desc.1=Framed
+tile.chisel.glassdyedmagenta.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedmagenta.panel.desc.1=Panel
+tile.chisel.glassdyedmagenta.rough.desc.1=Rough
+tile.chisel.glassdyedmagenta.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedorange.brick.desc.1=Brick
+tile.chisel.glassdyedorange.framed.desc.1=Framed
+tile.chisel.glassdyedorange.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedorange.panel.desc.1=Panel
+tile.chisel.glassdyedorange.rough.desc.1=Rough
+tile.chisel.glassdyedorange.streaks.desc.1=Streaked
+
+tile.chisel.glassdyedwhite.brick.desc.1=Brick
+tile.chisel.glassdyedwhite.framed.desc.1=Framed
+tile.chisel.glassdyedwhite.framed_fancy.desc.1=Fancy-Framed
+tile.chisel.glassdyedwhite.panel.desc.1=Panel
+tile.chisel.glassdyedwhite.rough.desc.1=Rough
+tile.chisel.glassdyedwhite.streaks.desc.1=Streaked
+
 tile.chisel.glowstone.name=Glowstone
 tile.chisel.glowstone.cracked.desc.1=Cracked
 tile.chisel.glowstone.bricks-soft.desc.1=Weathered Bricks
@@ -796,6 +920,13 @@ tile.chisel.hardenedclay.sunken.desc.1=Sunken
 tile.chisel.hardenedclay.poison.desc.1=Poison
 
 tile.chisel.icepillar.name=Ice Pillar
+tile.chisel.icepillar.plainplain.desc.1=Plain-Capped Plain Pillar
+tile.chisel.icepillar.plaingreek.desc.1=Greek-Capped Plain Pillar
+tile.chisel.icepillar.greekplain.desc.1=Plain-Capped Greek Pillar
+tile.chisel.icepillar.greekgreek.desc.1=Greek-Capped Greek Pillar
+tile.chisel.icepillar.convexplain.desc.1=Convexed-Capped Plain Pillar
+tile.chisel.icepillar.carved.desc.1=Scribed Pillar
+tile.chisel.icepillar.ornamental.desc.1=Ornamental Pillar
 
 tile.chisel.blockInvar.name=Block of Invar
 tile.chisel.blockInvar.caution.desc.1=Caution
@@ -1045,6 +1176,7 @@ tile.chisel.netherbrick.a1-netherbrick-meatred.desc.1=Red Nether Brick made of M
 tile.chisel.netherbrick.a1-netherbrick-meatredsmall.desc.1=Small Nether Brick made of Meat
 tile.chisel.netherbrick.a1-netherbrick-meatsmall.desc.1=Small Red Nether Brick made of Meat
 tile.chisel.netherbrick.a1-netherbrick-red.desc.1=Red Nether Brick
+tile.chisel.netherbrick.a1-netherbrick-redsmall.desc.1=Small Red Nether Brick
 tile.chisel.netherbrick.netherFancyBricks.desc.1=Disordered Nether Bricks
 
 tile.chisel.netherrack.name=Netherrack
@@ -1644,7 +1776,7 @@ tile.chisel.blockUranium.bolted.desc.1=Bolted
 tile.chisel.blockUranium.scaffold.desc.1=Scaffold
 
 tile.chisel.valentines.name=Valentines' Block
-tile.chisel.valentines.1.desc.1=
+tile.chisel.valentines.1.desc.1=Pink Marker
 tile.chisel.valentines.2.desc.1=Gray Rocky
 tile.chisel.valentines.3.desc.1=Pink Heart
 tile.chisel.valentines.4.desc.1=Pink Rocky

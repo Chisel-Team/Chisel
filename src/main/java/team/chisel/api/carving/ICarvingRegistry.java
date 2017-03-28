@@ -100,6 +100,13 @@ public interface ICarvingRegistry {
     List<ItemStack> getItemsForChiseling(ItemStack chiseled);
 
     /**
+     * A convenience version of {@link ICarvingRegistry#getItemsForChiseling(ItemStack)} which takes an already computed group.
+     * 
+     * @see ICarvingRegistry#getItemsForChiseling(ItemStack)
+     */
+    List<ItemStack> getItemsForChiseling(ICarvingGroup group);
+
+    /**
      * Gets the sound resource string for the group represented by this block/meta pair.
      * 
      * @param state

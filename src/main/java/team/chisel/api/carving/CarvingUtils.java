@@ -4,16 +4,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+
+import com.google.common.collect.Lists;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 
-import com.google.common.collect.Lists;
-
+@ParametersAreNonnullByDefault
 public class CarvingUtils {
 
 	/**
@@ -37,14 +37,14 @@ public class CarvingUtils {
 		return variation.getStack();
 	}
 
-	public static ICarvingRegistry chisel;
+	public static @Nullable ICarvingRegistry chisel;
 
 	/**
 	 * @return The instance of the chisel carving registry from the chisel mod.
 	 *         <p>
 	 *         If chisel is not installed this will return null.
 	 */
-	public static ICarvingRegistry getChiselRegistry() {
+	public static @Nullable ICarvingRegistry getChiselRegistry() {
 		return chisel;
 	}
 
@@ -59,7 +59,7 @@ public class CarvingUtils {
 	 *            The sorting order.
 	 * @return A standard {@link ICarvingVariation} instance.
 	 */
-	public static ICarvingVariation getDefaultVariationFor(@Nonnull IBlockState state, int order) {
+	public static ICarvingVariation getDefaultVariationFor(IBlockState state, int order) {
 		return new SimpleCarvingVariation(state, order);
 	}
 
@@ -70,12 +70,10 @@ public class CarvingUtils {
 	 *            The name of the group.
 	 * @return A standard {@link ICarvingGroup} instance.
 	 */
-	@Nonnull
-	public static ICarvingGroup getDefaultGroupFor(@Nonnull String name) {
+	public static ICarvingGroup getDefaultGroupFor(String name) {
 		return new SimpleCarvingGroup(name);
 	}
 
-	@ParametersAreNonnullByDefault
 	private static class SimpleCarvingVariation implements ICarvingVariation {
 
 		private int order;
@@ -107,7 +105,6 @@ public class CarvingUtils {
 		}
 	}
 
-	@ParametersAreNonnullByDefault
 	private static class SimpleCarvingGroup implements ICarvingGroup {
 
 		private String name;
@@ -130,8 +127,9 @@ public class CarvingUtils {
 			variations.add(variation);
 			Collections.sort(variations, new Comparator<ICarvingVariation>() {
 
-				@Override
-				public int compare(@Nullable ICarvingVariation o1, @Nullable ICarvingVariation o2) {
+				@SuppressWarnings("null")
+                @Override
+				public int compare(ICarvingVariation o1, ICarvingVariation o2) {
 					return CarvingUtils.compare(o1, o2);
 				}
 			});

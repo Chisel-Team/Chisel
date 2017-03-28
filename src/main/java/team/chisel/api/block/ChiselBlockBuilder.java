@@ -19,6 +19,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.init.BlockRegistry;
@@ -45,6 +46,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     private String parentFolder;
 
+    private List<String> oreStrings = new ArrayList<>();
+
     private @Nullable String group;
     
     @Accessors(fluent = true)
@@ -57,6 +60,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         this.provider = provider;
         this.parentFolder = blockName;
         this.variations = new ArrayList<VariationBuilder<T>>();
+    }
+
+    public void addOreDict(String oreDict)
+    {
+        this.oreStrings.add(oreDict);
     }
 
     @SuppressWarnings("null")
@@ -123,6 +131,14 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 if (Strings.emptyToNull(data[i][j].name) != null && data[i][j].group != null) {
                     VariationBuilder<T> v = variations.get(data[i][j].index);
                     CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), v.order);
+
+                    if (!oreStrings.isEmpty())
+                    {
+                        for (String oreEntry : oreStrings)
+                        {
+                            OreDictionary.registerOre(oreEntry, new ItemStack(ret[i], 1, j));
+                        }
+                    }
                 }
             }
         }
@@ -188,6 +204,13 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
         private VariationData doBuild() {
             return new VariationData(name, parent.parentFolder + "/" + name, group, recipe, smeltedFrom, amountSmelted, index, opaque);
+        }
+
+        public VariationBuilder<T> addOreDict(String oreDict)
+        {
+            this.parent.addOreDict(oreDict);
+
+            return this;
         }
     }
 }

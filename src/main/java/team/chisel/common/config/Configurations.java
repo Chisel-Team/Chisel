@@ -67,13 +67,9 @@ public class Configurations {
         /* general */
         category = "general";
         concreteVelocityMult = config.get(category, "concreteVelocityMult", 1.35, "The factor that concrete increases your velocity. Default is 1.35, set to 1 for no change.").getDouble();
-        fullBlockConcrete = config.get(category, "fullBlockConcrete", false, "Should concrete be a full block. This will also unavoidably disable speed increase if set to true.").getBoolean(false);
         ghostCloud = config.get(category, "doesCloudRenderLikeGhost", true).getBoolean(true);
-        factoryBlockAmount = config.get(category, "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
         allowMossy = config.get(category, "allowBrickToMossyInChisel", true, "If true, you can chisel stone brick to mossy stone brick.").getBoolean(true);
-        allowSmoothStone = config.get(category, "allowSmoothStoneToStoneBricksAndBack", true).getBoolean(true);
         chiselRecipe = config.get(category, "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
-        chiselStoneToCobbleBricks = config.get(category, "chiselStoneToCobbleBricks", true, "Chisel stone to cobblestone and bricks by left clicking.").getBoolean(false);
         chiselBackToVanillaLeaves = config
                 .get(category, "chiselBackToVanillaLeaves", false, "If this is true, you can chisel from the chisel leaves back to vanilla ones. If it is false, you cannot.").getBoolean(false);
 
@@ -92,7 +88,6 @@ public class Configurations {
 
         /* client */
         category = "client";
-        particlesTickrate = config.get(category, "particleTickrate", 1, "Particle tick rate. Greater value = less particles.").getInt(1);
         oldPillars = config.get(category, "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
         disableCTM = !config.get(category, "connectedTextures", true, "Enable connected textures").getBoolean(true);
         CTM.disableObscuredFaceCheckConfig = connectInsideCTM = config.get(category, "connectInsideCTM", false,

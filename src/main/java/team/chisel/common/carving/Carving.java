@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -69,16 +68,16 @@ public class Carving implements ICarvingRegistry {
 	}
 
 	@Override
-	public ICarvingVariation getVariation(IBlockState state) {
+	public @Nullable ICarvingVariation getVariation(IBlockState state) {
 		return getVariation(state, getGroup(state));
 	}
 	
 	@Override
-	public ICarvingVariation getVariation(ItemStack stack) {
+	public @Nullable ICarvingVariation getVariation(ItemStack stack) {
 		return getVariation(stack, getGroup(stack));
     }
 
-    private ICarvingVariation getVariation(IBlockState state, ICarvingGroup group) {
+    private @Nullable ICarvingVariation getVariation(IBlockState state, @Nullable ICarvingGroup group) {
         if (group != null) {
             for (ICarvingVariation v : group.getVariations()) {
                 if (v.getBlockState().equals(state)) {
@@ -89,7 +88,7 @@ public class Carving implements ICarvingRegistry {
         return null;
 	}
 
-	private ICarvingVariation getVariation(ItemStack stack, ICarvingGroup group) {
+	private @Nullable ICarvingVariation getVariation(ItemStack stack, @Nullable ICarvingGroup group) {
 		if (group != null) {
 			for (ICarvingVariation v : group.getVariations()) {
 				if (stack.isItemEqual(v.getStack()) && ItemStack.areItemStackTagsEqual(stack, v.getStack())) {
@@ -100,34 +99,41 @@ public class Carving implements ICarvingRegistry {
 		return null;
 	}
 	
-	@Override
+	@SuppressWarnings("null")
+    @Override
 	public List<ICarvingVariation> getGroupVariations(IBlockState state) {
 		ICarvingGroup group = getGroup(state);
 		if (group == null)
-			return null;
+			return Collections.emptyList();
 
 		return group.getVariations();
 	}
 
-	@Override
-	public @Nullable String getOreName(IBlockState state) {
-		ICarvingGroup group = getGroup(state);
-		if (group == null)
-			return null;
+    @Override
+    public @Nullable String getOreName(IBlockState state) {
+        ICarvingGroup group = getGroup(state);
+        if (group == null)
+            return null;
 
-		return group.getOreName();
-	}
+        return group.getOreName();
+    }
 
-	@Override
+	@SuppressWarnings("null")
+    @Override
 	public List<ItemStack> getItemsForChiseling(ItemStack chiseledItem) {
-		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-
 		ICarvingGroup group = null;
 		
 		group = getGroup(chiseledItem);
+        if (group == null) {
+            return Collections.emptyList();
+        }
 
-		if (group == null)
-			return items;
+		return getItemsForChiseling(group);
+	}
+
+    @SuppressWarnings("null")
+    public List<ItemStack> getItemsForChiseling(ICarvingGroup group) {
+        ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 
 		List<ICarvingVariation> variations = group.getVariations();
 		List<ItemStackWrapper> found = Lists.newArrayList();
@@ -147,7 +153,7 @@ public class Carving implements ICarvingRegistry {
 		}
 
 		return items;
-	}
+    }
 	
 	private void addNewStackToList(ItemStack stack, List<ItemStack> list, List<ItemStackWrapper> found) {
 		ItemStackWrapper wrapper = new ItemStackWrapper(stack);
@@ -157,21 +163,21 @@ public class Carving implements ICarvingRegistry {
 		}
 	}
 
+    @Override
+    public @Nullable ICarvingGroup getGroup(IBlockState state) {
+        ICarvingVariation variation = getVariation(state, groups.getGroup(state));
+        ItemStack stack = variation == null ? null : variation.getStack();
+        ICarvingGroup ore = getOreGroup(stack);
+        return ore == null ? groups.getGroup(state) : ore;
+    }
+
 	@Override
-	public ICarvingGroup getGroup(IBlockState state) {
-		ICarvingVariation variation = getVariation(state, groups.getGroup(state));
-		ItemStack stack = variation == null ? null : variation.getStack();
-		ICarvingGroup ore = getOreGroup(stack);
-		return ore == null ? groups.getGroup(state) : ore;
-	}
-	
-	@Override
-	public ICarvingGroup getGroup(ItemStack stack) {
+	public @Nullable ICarvingGroup getGroup(ItemStack stack) {
 		ICarvingGroup ore = getOreGroup(stack);
 		return ore == null ? groups.getGroup(stack) : ore;
 	}
 
-	private ICarvingGroup getOreGroup(ItemStack stack) {
+	private @Nullable ICarvingGroup getOreGroup(@Nullable ItemStack stack) {
 		if(stack != null)
 		{
 			int[] ids = OreDictionary.getOreIDs(stack);
@@ -188,44 +194,38 @@ public class Carving implements ICarvingRegistry {
 	}
 
 	@Override
-	public ICarvingGroup getGroup(String name) {
+	public @Nullable ICarvingGroup getGroup(String name) {
 		return groups.getGroupByName(name);
 	}
 
 	@Override
-	public ICarvingGroup removeGroup(String groupName) {
+	public @Nullable ICarvingGroup removeGroup(String groupName) {
 		ICarvingGroup g = groups.getGroupByName(groupName);
 		return groups.remove(g) ? g : null;
 	}
 
 	@Override
-	public ICarvingVariation removeVariation(IBlockState state) {
-		return removeVariation(state, null);
+	public @Nullable ICarvingVariation removeVariation(IBlockState state) {
+	    ICarvingGroup group = getGroup(state);
+	    if (group == null) {
+	        return null;
+	    }
+		return removeVariation(state, group.getName());
 	}
 
 	@Override
-	public ICarvingVariation removeVariation(IBlockState state, String group) {
+	public @Nullable ICarvingVariation removeVariation(IBlockState state, String group) {
 		return groups.removeVariation(state, group);
 	}
 
 	@Override
 	public void addVariation(String groupName, IBlockState state, int order) {
-		if (state == null) {
-			throw new NullPointerException("Cannot add variation in group " + groupName + " for null state.");
-		}
-
 		ICarvingVariation variation = CarvingUtils.getDefaultVariationFor(state, order);
 		addVariation(groupName, variation);
 	}
 
 	@Override
 	public void addVariation(String groupName, ICarvingVariation variation) {
-		if (groupName == null) {
-			throw new NullPointerException("Cannot add variation to null group name.");
-		} else if (variation == null) {
-			throw new NullPointerException("Cannot add variation in group " + groupName + " for null variation.");
-		}
-
 		ICarvingGroup group = groups.getGroupByName(groupName);
 
 		if (group == null) {
@@ -273,7 +273,7 @@ public class Carving implements ICarvingRegistry {
 		return getSound(group);
 	}
 
-	private String getSound(ICarvingGroup group) {
+	private String getSound(@Nullable ICarvingGroup group) {
 		String sound = group == null ? null : group.getSound();
 		return sound == null ? Chisel.MOD_ID + ":chisel.fallback" : sound;
 	}

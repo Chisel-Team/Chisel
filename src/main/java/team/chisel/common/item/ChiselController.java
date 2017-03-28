@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -48,12 +47,7 @@ public class ChiselController {
                 return;
             }
             
-            ItemStack inWorldStack = state.getBlock().getPickBlock(state, new RayTraceResult(event.getHitVec(), event.getFace()), event.getWorld(), event.getPos(), player);
-            if (inWorldStack == null) {
-                return;
-            }
-            
-            ICarvingGroup blockGroup = registry.getGroup(inWorldStack);
+            ICarvingGroup blockGroup = registry.getGroup(state);
             if (blockGroup == null) {
                 return;
             }
@@ -73,7 +67,7 @@ public class ChiselController {
                     }
                 }
             } else {
-                ICarvingVariation current = registry.getVariation(inWorldStack);
+                ICarvingVariation current = registry.getVariation(state);
                 List<ICarvingVariation> variations = blockGroup.getVariations();
                 int index = variations.indexOf(current);
                 index = player.isSneaking() ? index - 1 : index + 1;

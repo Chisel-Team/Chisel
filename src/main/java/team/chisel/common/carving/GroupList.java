@@ -1,10 +1,12 @@
 package team.chisel.common.carving;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
+import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
 
@@ -13,7 +15,6 @@ import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
@@ -33,10 +34,9 @@ public class GroupList implements Set<ICarvingGroup> {
 			if (obj instanceof ICarvingVariation) {
 				ICarvingVariation v2 = (ICarvingVariation) obj;
 				ItemStack stack1 = v.getStack(), stack2 = v2.getStack();
+				
 				if (stack1.isItemEqual(stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2)) {
-					return true;
-				} else if (v.getBlock() != null && v.getBlock() != Blocks.AIR) {
-					return v.getBlockState().equals(v2.getBlockState());
+                    return true;
 				}
 			} else if (obj instanceof VariationWrapper) {
 				return equals(((VariationWrapper) obj).v);
@@ -50,58 +50,22 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 	}
 
-	private class BlockKey implements ICarvingVariation {
-
-		private IBlockState state;
-
-		private BlockKey(IBlockState state) {
-			this.state = state;
-		}
-
-		@Override
-		public @Nonnull Block getBlock() {
-			return state.getBlock();
-		}
-
-		@Override
-		public IBlockState getBlockState() {
-			return state;
-		}
-
-		@Override
-		public @Nonnull ItemStack getStack() {
-			return new ItemStack(getBlock());
-		}
-
-		@Override
-		public int getOrder() {
-			return 0;
-		}
-
-		@Override
-		public String toString() {
-			return state.toString();
-		}
-	}
-
 	private class StackKey implements ICarvingVariation {
 
 		@Nonnull ItemStack stack;
-		Block block;
 
 		private StackKey(@Nonnull ItemStack stack) {
 			this.stack = stack;
-			this.block = Block.getBlockFromItem(stack.getItem());
 		}
 
 		@Override
 		public Block getBlock() {
-			return block;
+			return null;
 		}
 
 		@Override
 		public IBlockState getBlockState() {
-			return block.getDefaultState();
+			return null;
 		}
 
 		@Override
@@ -120,8 +84,9 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 	}
 
-	private HashMap<String, ICarvingGroup> groups = Maps.newHashMap();
-	private HashMap<VariationWrapper, ICarvingGroup> lookup = Maps.newHashMap();
+	private Map<String, ICarvingGroup> groups = Maps.newHashMap();
+	private Map<VariationWrapper, ICarvingGroup> lookup = Maps.newHashMap();
+    private Map<IBlockState, ICarvingGroup> stateGroups = Maps.newIdentityHashMap();
 
 	@Override
 	public int size() {
@@ -162,10 +127,15 @@ public class GroupList implements Set<ICarvingGroup> {
 		if (groups.containsKey(key)) {
 			return false;
 		}
-		for (ICarvingVariation v : group.getVariations()) {
-			ICarvingGroup g = lookup.get(v);
-			if (g == null && v != null) {
+        for (ICarvingVariation v : group.getVariations()) {
+            if (v == null) {
+                continue;
+            }
+			if (!lookup.containsKey(new VariationWrapper(v))) {
 				lookup.put(new VariationWrapper(v), group);
+			}
+			if (v.getBlockState() != null) {
+			    stateGroups.put(v.getBlockState(), group);
 			}
 		}
 		groups.put(key, group);
@@ -175,15 +145,9 @@ public class GroupList implements Set<ICarvingGroup> {
 	@Override
 	public boolean remove(Object o) {
 		if (o instanceof ICarvingGroup) {
-			List<VariationWrapper> toRemove = Lists.newArrayList();
-			for (VariationWrapper v : lookup.keySet()) {
-				if (lookup.get(v).getName().equals(((ICarvingGroup) o).getName())) {
-					toRemove.add(v);
-				}
-			}
-			for (VariationWrapper v : toRemove) {
-				lookup.remove(v);
-			}
+		    Predicate<Entry<?, ICarvingGroup>> test = e -> e.getValue().getName().equals(((ICarvingGroup)o).getName());
+			lookup.entrySet().removeIf(test);
+			stateGroups.entrySet().removeIf(test);
 			return groups.remove(((ICarvingGroup) o).getName()) != null;
 		}
 		return false;
@@ -231,7 +195,7 @@ public class GroupList implements Set<ICarvingGroup> {
 	}
 
 	public ICarvingGroup getGroup(@Nonnull IBlockState state) {
-		return getGroup(new BlockKey(state));
+		return stateGroups.get(state);
 	}
 	
 	public ICarvingGroup getGroup(@Nonnull ItemStack stack) {
@@ -250,6 +214,9 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 		g.addVariation(variation);
 		lookup.put(new VariationWrapper(variation), g);
+		if (variation.getBlockState() != null) {
+		    stateGroups.put(variation.getBlockState(), g);
+		}
 	}
 
 	public ICarvingGroup getGroupByName(String groupName) {
@@ -274,7 +241,17 @@ public class GroupList implements Set<ICarvingGroup> {
 	}
 
 	public ICarvingVariation removeVariation(IBlockState state, String group) {
-		return removeVariation(new BlockKey(state), group);
+	    ICarvingGroup carvingGroup = groups.get(group);
+	    ICarvingVariation variation = null;
+	    for (ICarvingVariation v : carvingGroup) {
+	        if (v.getBlockState() == state) {
+	            variation = v;
+	        }
+	    }
+	    if (variation == null) {
+	        return null;
+	    }
+		return removeVariation(variation, group);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -288,15 +265,18 @@ public class GroupList implements Set<ICarvingGroup> {
 			groups.remove(g.getName());
 		}
 		List<VariationWrapper> toRemove = Lists.newArrayList();
-		for (VariationWrapper v : lookup.keySet()) {
-			if ((g == null || lookup.get(v).getName().equals(g.getName())) && v.equals(new VariationWrapper(variation))) {
-				lookup.get(v).removeVariation(v.v);
-				toRemove.add(v);
+		for (VariationWrapper vw : lookup.keySet()) {
+			if ((g == null || lookup.get(vw).getName().equals(g.getName())) && vw.equals(new VariationWrapper(variation))) {
+				lookup.get(vw).removeVariation(vw.v);
+				toRemove.add(vw);
 			}
 		}
-		for (VariationWrapper v : toRemove) {
-			lookup.remove(v);
+		for (VariationWrapper vw : toRemove) {
+			lookup.remove(vw);
 		}
+        if (variation.getBlockState() != null) {
+            stateGroups.remove(variation.getBlockState());
+        }
 		return toRemove.isEmpty() ? null : toRemove.get(0).v;
 	}
 

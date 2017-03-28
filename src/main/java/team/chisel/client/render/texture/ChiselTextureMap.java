@@ -61,7 +61,7 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
             
             @Override
             public IBlockRenderContext getContext(@Nonnull BlockPos pos, @Nonnull ChiselTextureMap tex) {
-                return new BlockRenderContextGridTexture.Random(pos, tex).applyOffset();
+                return new BlockRenderContextGridTexture.Random(pos, tex, true);
             }
         },
         PATTERNED {
@@ -100,7 +100,7 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
             
             @Override
             public IBlockRenderContext getContext(@Nonnull BlockPos pos, @Nonnull ChiselTextureMap tex) {
-                return new BlockRenderContextGridTexture.Patterned(pos, tex).applyOffset();
+                return new BlockRenderContextGridTexture.Patterned(pos, tex, true);
             }
         };
 

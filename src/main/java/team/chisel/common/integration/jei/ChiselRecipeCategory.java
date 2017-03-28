@@ -1,5 +1,6 @@
 package team.chisel.common.integration.jei;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +28,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
     
     private final IDrawable background;
     private final IDrawable arrowUp, arrowDown;
-    
+
     private @Nullable IRecipeLayout layout;
     private @Nullable IFocus<?> focus;
 
@@ -57,8 +58,8 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
 
     @Override
     public void drawExtras(Minecraft minecraft) {
-        if (focus != null) {
-            if (focus.getMode() == IFocus.Mode.INPUT) {
+        if (layout != null) {
+            if (focus == null || focus.getMode() == IFocus.Mode.INPUT) {
                 arrowDown.draw(minecraft, 73, 21);
             } else {
                 arrowUp.draw(minecraft, 73, 21);
@@ -66,6 +67,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
         }
     }
 
+    @SuppressWarnings("null")
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IFocus<?> focus = (this.focus = recipeLayout.getFocus());
@@ -112,6 +114,11 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
             recipeLayout.getItemStacks().init(i + 1, focus != null && focus.getMode() == IFocus.Mode.OUTPUT, x, y);
             recipeLayout.getItemStacks().set(i + 1, stacks.get(i));
         }
+    }
+
+    @Override
+    public List<String> getTooltipStrings(int mouseX, int mouseY) {
+        return Collections.emptyList();
     }
 
     @Override

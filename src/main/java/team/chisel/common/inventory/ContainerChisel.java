@@ -146,6 +146,9 @@ public class ContainerChisel extends Container {
             if (itemstack1.getCount() == 0) {
                 slot.putStack(ItemStack.EMPTY);
                 return ItemStack.EMPTY;
+            } else {
+                slot.putStack(itemstack1);
+                return itemstack1;
             }
         }
         return itemstack;
