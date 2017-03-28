@@ -36,6 +36,7 @@ import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.*;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
@@ -66,7 +67,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .addOreDict("blockAluminum")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL));
             
             CarvingUtils.getChiselRegistry().registerOre("blockAluminum", "blockAluminum");
         }
@@ -341,7 +342,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .addOreDict("blockBronze")
-                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
+                    .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
             
             CarvingUtils.getChiselRegistry().registerOre("blockBronze", "blockBronze");
         }
@@ -617,7 +618,7 @@ public enum Features {
                     .next("terrain-diamond-zelda")
                     .next("terrain-diamond-ornatelayer")
                     .addOreDict("blockDiamond")
-                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
+                    .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
         }
     },
 
@@ -740,7 +741,7 @@ public enum Features {
                     .next("emeraldCircle")
                     .next("emeraldPrismatic")
                     .addOreDict("blockEmerald")
-                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(5.0F));
+                    .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
         }
     },
 
@@ -891,7 +892,7 @@ public enum Features {
                     .next("tilemosaic")
                     .next("vent")
                     .next("wireframeblue")
-                    .build();
+                    .build(b -> b.setSoundType(ChiselSoundTypes.METAL));
         }
 
         @Override
@@ -913,7 +914,7 @@ public enum Features {
                     .next("wavy")
                     .next("controllerPurple")
                     .next("uberWavy")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL));
         }
 
         @Override
@@ -1423,7 +1424,7 @@ public enum Features {
                     .next("directionleft")
                     .next("directionright")
                     .next("infocon")
-                    .build();
+                    .build(b -> b.setSoundType(ChiselSoundTypes.METAL));
         }
 
         @Override
@@ -2213,7 +2214,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .addOreDict("blockSilver")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL));
             
             CarvingUtils.getChiselRegistry().registerOre("blockSilver", "blockSilver");
         }
@@ -2233,7 +2234,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .addOreDict("blockSteel")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL));
 
             CarvingUtils.getChiselRegistry().registerOre("blockSteel", "blockSteel");
         }
@@ -2329,7 +2330,7 @@ public enum Features {
                     .next("fanStillTransparent").opaque(false)
                     .next("massiveFan")
                     .next("massiveHexPlating")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL));
 
             factory.newBlock(Material.IRON, "technicalNew", provider)
                     .setGroup("factory")
@@ -2344,7 +2345,7 @@ public enum Features {
                     .next("scaffoldLarge")
                     .next("Piping")
                     //TODO Retexture .next("TapeDrive")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL));
         }
     },
 
@@ -2414,7 +2415,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .addOreDict("blockTin")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL));
             
             CarvingUtils.getChiselRegistry().registerOre("blockTin", "blockTin");
         }
@@ -2440,7 +2441,7 @@ public enum Features {
                     .next("black2")
                     .next("opening")
                     .next("plate")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL));
         }
 
         @Override
@@ -2466,7 +2467,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .addOreDict("blockUranium")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.METAL));
             
             CarvingUtils.getChiselRegistry().registerOre("blockUranium", "blockUranium");
         }
