@@ -215,6 +215,8 @@ public class GuiHitechChisel extends GuiChisel {
         int w = 76, h = 20;
         int id = 0;
         
+        boolean firstInit = buttonPreview == null;
+        
         buttonList.add(buttonPreview = new PreviewModeButton(id++, x, y, w, h));
 
         buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, "Chisel"));
@@ -222,12 +224,15 @@ public class GuiHitechChisel extends GuiChisel {
 
         ItemStack chisel = containerHitech.getChisel();
         
-        buttonPreview.setType(NBTUtil.getHitechType(chisel));
-        buttonRotate.rotate = NBTUtil.getHitechRotate(chisel);
+        if (firstInit) {
+            buttonPreview.setType(NBTUtil.getHitechType(chisel));
+            buttonRotate.rotate = NBTUtil.getHitechRotate(chisel);
+        }
 
         try {
             updateScreen();
         } catch (Exception e) {
+            e.printStackTrace();
             Chisel.logger.info("iChisel crash avoided, please consider updating NEI.");
         }
     }
