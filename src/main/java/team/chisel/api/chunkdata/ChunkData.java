@@ -36,7 +36,7 @@ public class ChunkData {
     }
 
     public static IOffsetData getOffsetForChunk(Chunk chunk) {
-        return getOffsetForChunk(chunk.getWorld().provider.getDimension(), chunk.getChunkCoordIntPair());
+        return getOffsetForChunk(chunk.getWorld().provider.getDimension(), chunk.getPos());
     }
 
     public static IOffsetData getOffsetForChunk(int dimID, ChunkPos chunk) {

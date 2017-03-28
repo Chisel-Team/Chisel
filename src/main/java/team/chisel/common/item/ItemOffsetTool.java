@@ -112,7 +112,7 @@ public class ItemOffsetTool extends Item {
                 return canOffset(player, world, pos, hand, facing) ? EnumActionResult.SUCCESS : EnumActionResult.PASS;
             } else {
                 ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.getData(DATA_KEY);
-                OffsetData data = cd.getDataForChunk(world.provider.getDimension(), world.getChunkFromBlockCoords(pos).getChunkCoordIntPair());
+                OffsetData data = cd.getDataForChunk(world.provider.getDimension(), world.getChunkFromBlockCoords(pos).getPos());
                 data.move(getMoveDir(facing, hitX, hitY, hitZ));
                 PerChunkData.INSTANCE.chunkModified(world.getChunkFromBlockCoords(pos), DATA_KEY);
             }

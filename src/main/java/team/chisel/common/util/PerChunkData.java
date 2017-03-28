@@ -45,7 +45,7 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         public MessageChunkData(Chunk chunk, String key, @Nonnull NBTTagCompound tag) {
-            this.chunk = chunk.getChunkCoordIntPair();
+            this.chunk = chunk.getPos();
             this.key = key;
             this.tag = tag;
         }
@@ -104,7 +104,7 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         @Override
         public void writeToNBT(@Nonnull Chunk chunk, @Nonnull NBTTagCompound tag) {
-            T t = data.get(Pair.of(chunk.getWorld().provider.getDimension(), chunk.getChunkCoordIntPair()));
+            T t = data.get(Pair.of(chunk.getWorld().provider.getDimension(), chunk.getPos()));
             if (t != null) {
                 t.write(tag);
             }
@@ -113,7 +113,7 @@ public enum PerChunkData implements IChunkDataRegistry {
         @Override
         public void readFromNBT(@Nonnull Chunk chunk, @Nonnull NBTTagCompound tag) {
             int dimID = chunk.getWorld().provider.getDimension();
-            ChunkPos coords = chunk.getChunkCoordIntPair();
+            ChunkPos coords = chunk.getPos();
             if (tag.hasNoTags()) {
                 data.remove(dimID, coords);
                 return;

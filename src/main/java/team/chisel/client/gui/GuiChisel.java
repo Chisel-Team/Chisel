@@ -69,10 +69,10 @@ public class GuiChisel extends GuiContainer {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         String line = I18n.format(this.container.getInventoryChisel().getName() + ".title");
-        List<String> lines = fontRendererObj.listFormattedStringToWidth(line, 40);
+        List<String> lines = fontRenderer.listFormattedStringToWidth(line, 40);
         int y = 60;
         for (String s : lines) {
-            fontRendererObj.drawString(s, 32 - fontRendererObj.getStringWidth(s) / 2, y, 0x404040);
+            fontRenderer.drawString(s, 32 - fontRenderer.getStringWidth(s) / 2, y, 0x404040);
             y += 10;
         }
 

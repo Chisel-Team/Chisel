@@ -40,7 +40,7 @@ public class PacketChiselNBT implements IMessage {
 
         @Override
         public IMessage onMessage(PacketChiselNBT message, MessageContext ctx) {
-            ItemStack stack = ctx.getServerHandler().playerEntity.inventory.getStackInSlot(message.chiselSlot);
+            ItemStack stack = ctx.getServerHandler().player.inventory.getStackInSlot(message.chiselSlot);
             if (!stack.isEmpty()) {
                 NBTUtil.setChiselTag(stack, message.tag);
             }

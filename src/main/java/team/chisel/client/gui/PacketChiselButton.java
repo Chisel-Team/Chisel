@@ -51,7 +51,7 @@ public class PacketChiselButton implements IMessage {
 
         @Override
         public IMessage onMessage(PacketChiselButton message, MessageContext ctx) {
-            EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+            EntityPlayerMP player = ctx.getServerHandler().player;
             chiselAll(player, message.chiselSlot, message.target, message.slotIds);
             return null;
         }

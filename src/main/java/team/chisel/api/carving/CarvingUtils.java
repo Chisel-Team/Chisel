@@ -70,6 +70,7 @@ public class CarvingUtils {
 	 *            The name of the group.
 	 * @return A standard {@link ICarvingGroup} instance.
 	 */
+	@Nonnull
 	public static ICarvingGroup getDefaultGroupFor(@Nonnull String name) {
 		return new SimpleCarvingGroup(name);
 	}

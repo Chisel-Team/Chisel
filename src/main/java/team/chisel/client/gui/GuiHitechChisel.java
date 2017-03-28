@@ -355,7 +355,7 @@ public class GuiHitechChisel extends GuiChisel {
         }
 
         String s = "Preview";
-        fontRendererObj.drawString("Preview", panel.getX() + (panel.getWidth() / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
+        fontRenderer.drawString("Preview", panel.getX() + (panel.getWidth() / 2) - (fontRenderer.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
                 
         try {
 
