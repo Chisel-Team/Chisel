@@ -225,7 +225,11 @@ public class GuiHitechChisel extends GuiChisel {
         buttonPreview.setType(NBTUtil.getHitechType(chisel));
         buttonRotate.rotate = NBTUtil.getHitechRotate(chisel);
 
-        updateScreen();
+        try {
+            updateScreen();
+        } catch (Exception e) {
+            Chisel.logger.info("iChisel crash avoided, please consider updating NEI.");
+        }
     }
     
     @Override
