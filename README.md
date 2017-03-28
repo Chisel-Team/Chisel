@@ -1,4 +1,4 @@
-Chisel [![Curseforge](http://cf.way2muchnoise.eu/short_chisel.svg)](https://minecraft.curseforge.com/projects/chisel)
+Chisel [![Curseforge](http://cf.way2muchnoise.eu/full_chisel_downloads.svg)](https://minecraft.curseforge.com/projects/chisel) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_chisel_all.svg)](https://minecraft.curseforge.com/projects/chisel)
 ===========
 
 The Chisel mod adds many decorative blocks to the game.
