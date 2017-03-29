@@ -215,6 +215,8 @@ public class GuiHitechChisel extends GuiChisel {
         int w = 76, h = 20;
         int id = 0;
         
+        boolean firstInit = buttonPreview == null;
+        
         buttonList.add(buttonPreview = new PreviewModeButton(id++, x, y, w, h));
 
         buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, "Chisel"));
@@ -222,10 +224,17 @@ public class GuiHitechChisel extends GuiChisel {
 
         ItemStack chisel = containerHitech.getChisel();
         
-        buttonPreview.setType(NBTUtil.getHitechType(chisel));
-        buttonRotate.rotate = NBTUtil.getHitechRotate(chisel);
+        if (firstInit) {
+            buttonPreview.setType(NBTUtil.getHitechType(chisel));
+            buttonRotate.rotate = NBTUtil.getHitechRotate(chisel);
+        }
 
-        updateScreen();
+        try {
+            updateScreen();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Chisel.logger.info("iChisel crash avoided, please consider updating NEI.");
+        }
     }
     
     @Override
@@ -251,16 +260,17 @@ public class GuiHitechChisel extends GuiChisel {
     public void onGuiClosed() {
         super.onGuiClosed();
 
-        if (containerHitech.getChisel() == containerHitech.getInventoryChisel().getStackInSlot(containerHitech.getChiselSlot())) {
-            ItemStack stack = containerHitech.getChisel();
-
-            NBTUtil.setHitechType(stack, buttonPreview.getType().ordinal());
-            NBTUtil.setHitechSelection(stack, Optional.fromNullable(containerHitech.getSelection()).transform(s -> s.slotNumber).or(-1));
-            NBTUtil.setHitechTarget(stack, Optional.fromNullable(containerHitech.getTarget()).transform(s -> s.slotNumber).or(-1));
-            NBTUtil.setHitechRotate(stack, buttonRotate.rotate());
-
-            Chisel.network.sendToServer(new PacketChiselNBT(NBTUtil.getChiselTag(containerHitech.getChisel()), containerHitech.getChiselSlot()));
+        ItemStack stack = containerHitech.getChisel();
+        if (stack == null) {
+            return;
         }
+
+        NBTUtil.setHitechType(stack, buttonPreview.getType().ordinal());
+        NBTUtil.setHitechSelection(stack, Optional.fromNullable(containerHitech.getSelection()).transform(s -> s.slotNumber).or(-1));
+        NBTUtil.setHitechTarget(stack, Optional.fromNullable(containerHitech.getTarget()).transform(s -> s.slotNumber).or(-1));
+        NBTUtil.setHitechRotate(stack, buttonRotate.rotate());
+
+        Chisel.network.sendToServer(new PacketChiselNBT(NBTUtil.getChiselTag(containerHitech.getChisel()), containerHitech.getChiselSlot()));
     }
 
     private boolean isShiftDown() {
