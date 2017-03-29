@@ -23,9 +23,9 @@ public class Carving implements ICarvingRegistry {
 
 	private static class ItemStackWrapper {
 
-		private @Nullable ItemStack wrapped;
+		private ItemStack wrapped;
 
-		private ItemStackWrapper(@Nullable ItemStack stack) {
+		private ItemStackWrapper(ItemStack stack) {
 			this.wrapped = stack;
 		}
 
@@ -38,17 +38,10 @@ public class Carving implements ICarvingRegistry {
 			} else if (getClass() != obj.getClass()) {
 				return false;
 			}
-			
-			ItemStackWrapper other = (ItemStackWrapper) obj;
-			if (wrapped == null) {
-				if (other.wrapped != null) {
-					return false;
-				}
-			} else {
-				return ItemStack.areItemStacksEqual(wrapped, other.wrapped) && ItemStack.areItemStackTagsEqual(wrapped, other.wrapped);
-			}
-			return true;
-		}
+
+            ItemStackWrapper other = (ItemStackWrapper) obj;
+            return ItemStack.areItemStacksEqual(wrapped, other.wrapped) && ItemStack.areItemStackTagsEqual(wrapped, other.wrapped);
+        }
 
 	}
 
@@ -166,7 +159,7 @@ public class Carving implements ICarvingRegistry {
     @Override
     public @Nullable ICarvingGroup getGroup(IBlockState state) {
         ICarvingVariation variation = getVariation(state, groups.getGroup(state));
-        ItemStack stack = variation == null ? null : variation.getStack();
+        ItemStack stack = variation == null ? ItemStack.EMPTY : variation.getStack();
         ICarvingGroup ore = getOreGroup(stack);
         return ore == null ? groups.getGroup(state) : ore;
     }
@@ -177,8 +170,8 @@ public class Carving implements ICarvingRegistry {
 		return ore == null ? groups.getGroup(stack) : ore;
 	}
 
-	private @Nullable ICarvingGroup getOreGroup(@Nullable ItemStack stack) {
-		if(stack != null)
+	private @Nullable ICarvingGroup getOreGroup(ItemStack stack) {
+		if(!stack.isEmpty())
 		{
 			int[] ids = OreDictionary.getOreIDs(stack);
 			if (ids.length > 0) {
