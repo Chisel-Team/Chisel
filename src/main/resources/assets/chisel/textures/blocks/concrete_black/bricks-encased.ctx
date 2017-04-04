@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./bricks-encased",
+        "./bricks-encased-ctm"
+    ]
+}

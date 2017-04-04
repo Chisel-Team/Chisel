@@ -36,6 +36,24 @@ public final class ChiselBlocks
     public static final BlockCarvable brownstone = null;
     public static final BlockCarvable carpet = null;
     public static final BlockCarvable cloud = null;
+    public static final BlockCarvable concrete = null;
+    public static final BlockCarvable concrete_white = null;
+    public static final BlockCarvable concrete_orange = null;
+    public static final BlockCarvable concrete_lightblue = null;
+    public static final BlockCarvable concrete_magenta = null;
+    public static final BlockCarvable concrete_lime = null;
+    public static final BlockCarvable concrete_yellow = null;
+    public static final BlockCarvable concrete_pink = null;
+    public static final BlockCarvable concrete_gray = null;
+    public static final BlockCarvable concrete_lightgray = null;
+    public static final BlockCarvable concrete_blue = null;
+    public static final BlockCarvable concrete_cyan = null;
+    public static final BlockCarvable concrete_purple = null;
+    public static final BlockCarvable concrete_green = null;
+    public static final BlockCarvable concrete_brown = null;
+    public static final BlockCarvable concrete_red = null;
+    public static final BlockCarvable concrete_black = null;
+    public static final BlockCarvable concrete_powder = null;
     public static final BlockCarvable dirt = null;
     public static final BlockCarvable factory = null;
     public static final BlockCarvable futura = null;
@@ -61,5 +79,4 @@ public final class ChiselBlocks
     public static final BlockCarvable waterstone = null;
     public static final BlockCarvable waterstone1 = null;
     public static final BlockCarvable waterstoneextra = null;
-
 }

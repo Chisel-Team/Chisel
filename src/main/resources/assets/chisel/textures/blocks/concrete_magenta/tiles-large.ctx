@@ -1,0 +1,7 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./tiles-large",
+        "./tiles-large-ctm"
+    ]
+}

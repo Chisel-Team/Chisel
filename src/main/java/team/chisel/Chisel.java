@@ -11,8 +11,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,6 +36,7 @@ import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.compat.IMCHandler;
 import team.chisel.common.config.Configurations;
+import team.chisel.common.entity.EntityFallingBlockCarvable;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ItemChisel;
@@ -112,7 +113,9 @@ public class Chisel implements Reference {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
         Features.preInit();
-        
+
+        //EntityRegistry.registerModEntity(EntityFallingBlockCarvable.class, "falling_block", 60, Chisel.instance, 64, 3, false);
+
         proxy.preInit(event);
     }
 
