@@ -71,6 +71,17 @@ public enum Features {
             
             CarvingUtils.getChiselRegistry().registerOre("blockAluminum", "blockAluminum");
         }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Aluminum";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
+        }
     },
 
     ANDESITE {
@@ -348,6 +359,17 @@ public enum Features {
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
             
             CarvingUtils.getChiselRegistry().registerOre("blockBronze", "blockBronze");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Bronze";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
         }
     },
 
@@ -676,6 +698,17 @@ public enum Features {
             
             CarvingUtils.getChiselRegistry().registerOre("blockCopper", "blockCopper");
         }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Copper";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
+        }
     },
 
     /*CRAG_ROCK { TODO Retexture
@@ -723,6 +756,12 @@ public enum Features {
                     .next("terrain-diamond-ornatelayer")
                     .addOreDict("blockDiamond")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.DIAMOND, 9), "X", 'X', "blockDiamond"));
         }
     },
 
@@ -821,6 +860,17 @@ public enum Features {
             
             CarvingUtils.getChiselRegistry().registerOre("blockElectrum", "blockElectrum");
         }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Electrum";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
+        }
     },
 
     EMERALD {
@@ -847,6 +897,12 @@ public enum Features {
                     .next("emeraldPrismatic")
                     .addOreDict("blockEmerald")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.EMERALD, 9), "X", 'X', "blockEmerald"));
         }
     },
 
@@ -1276,6 +1332,17 @@ public enum Features {
                     .addOreDict("blockGold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F));
         }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Gold";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
+        }
     },
 
     GRANITE {
@@ -1449,6 +1516,17 @@ public enum Features {
                     .addOreDict("blockInvar")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Invar";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
+        }
     },
 
     IRON {
@@ -1489,6 +1567,17 @@ public enum Features {
                     .next("terrain-iron-simple")
                     .addOreDict("blockIron")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
+        }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Iron";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
         }
     },
 
@@ -1628,6 +1717,17 @@ public enum Features {
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
             
             CarvingUtils.getChiselRegistry().registerOre("blockLead", "blockLead");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Lead";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
         }
     },
 
@@ -1905,6 +2005,17 @@ public enum Features {
             
             CarvingUtils.getChiselRegistry().registerOre("blockNickel", "blockNickel");
         }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Nickel";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
+        }
     },
 
     OBSIDIAN {
@@ -2011,6 +2122,17 @@ public enum Features {
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
             
             CarvingUtils.getChiselRegistry().registerOre("blockPlatinum", "blockPlatinum");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Platinum";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
         }
     },
 
@@ -2179,6 +2301,12 @@ public enum Features {
                     .addOreDict("blockRedstone")
                     .build(b->b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.METAL));
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.REDSTONE, 9), "X", 'X', "blockRedstone"));
+        }
     },
 
     SANDSTONE {
@@ -2334,6 +2462,17 @@ public enum Features {
             
             CarvingUtils.getChiselRegistry().registerOre("blockSilver", "blockSilver");
         }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Silver";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
+        }
     },
 
     STEEL {
@@ -2353,6 +2492,17 @@ public enum Features {
                     .build(b -> b.setSoundType(SoundType.METAL));
 
             CarvingUtils.getChiselRegistry().registerOre("blockSteel", "blockSteel");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Steel";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
         }
     },
 
@@ -2536,6 +2686,17 @@ public enum Features {
             
             CarvingUtils.getChiselRegistry().registerOre("blockTin", "blockTin");
         }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Tin";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
+        }
     },
 
     TYRIAN {
@@ -2587,6 +2748,17 @@ public enum Features {
                     .build(b -> b.setSoundType(SoundType.METAL));
             
             CarvingUtils.getChiselRegistry().registerOre("blockUranium", "blockUranium");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            String name = "Uranium";
+
+            if(OreDictionary.doesOreNameExist("ingot"+name)) {
+                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
+            }
         }
     },
 
