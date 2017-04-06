@@ -443,6 +443,58 @@ public enum Features {
         }
     },
 
+    CHARCOAL {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            factory.newBlock(Material.ROCK, "block_charcoal", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .next("raw")
+                    .addOreDict("blockCharcoal")
+                    .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            CarvingUtils.getChiselRegistry().registerOre("block_charcoal", "blockCharcoal");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.COAL, 9, 1), "X", 'X', "blockCharcoal"));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.block_charcoal2, 1, 1), "XXX", "XXX", "XXX", 'X', "charcoal"));
+        }
+    },
+
     CLOUD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -534,6 +586,114 @@ public enum Features {
                     .next("marker")
                     .addOreDict("cobblestone")
                     .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+        }
+    },
+
+    COAL {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            Carving.chisel.addVariation("block_coal", Blocks.COAL_BLOCK.getDefaultState(), -21);
+
+            CarvingUtils.getChiselRegistry().registerOre("block_coal", "blockCoal");
+
+            factory.newBlock(Material.ROCK, "block_coal", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .next("raw")
+                    .addOreDict("blockCoal")
+                    .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.COAL, 9), "X", 'X', "blockCoal"));
+        }
+    },
+
+    COAL_COKE {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            factory.newBlock(Material.ROCK, "block_coal_coke", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .next("raw")
+                    .addOreDict("blockFuelCoke")
+                    .addOreDict("blockCoalCoke")
+                    .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            CarvingUtils.getChiselRegistry().registerOre("block_coal_coke", "blockFuelCoke");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            if(OreDictionary.doesOreNameExist("fuelCoke")) {
+                ItemStack result = OreDictionary.getOres("fuelCoke").get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "blockFuelCoke"));
+            }
         }
     },
 

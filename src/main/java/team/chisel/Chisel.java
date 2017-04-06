@@ -38,6 +38,7 @@ import team.chisel.common.compat.IMCHandler;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.entity.EntityFallingBlockCarvable;
 import team.chisel.common.init.ChiselBlocks;
+import team.chisel.common.init.ChiselFuelHandler;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
@@ -125,6 +126,8 @@ public class Chisel implements Reference {
         
         proxy.init();
         // BlockRegistry.init(event);
+
+        GameRegistry.registerFuelHandler(new ChiselFuelHandler());
 
         addCompactorPressRecipe(1000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestoneextra, 1, 7));
         addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestoneextra, 1, 7), new ItemStack(ChiselBlocks.marbleextra, 1, 7));

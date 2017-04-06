@@ -27,6 +27,7 @@ public final class ChiselBlocks
     public static final BlockCarvable basalt = null;
     public static final BlockCarvable basalt1 = null;
     public static final BlockCarvable basaltextra = null;
+    public static final BlockCarvable block_charcoal2 = null;
     public static final BlockCarvable bloodMagic = null;
     public static final BlockCarvable bookshelf_spruce = null;
     public static final BlockCarvable bookshelf_birch = null;
