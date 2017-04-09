@@ -1709,6 +1709,11 @@ black.pane.glass.noborder.desc=Black Borderless Glass
 black.pane.glass.quadrant.desc=Black Quadrant Glass
 black.pane.glass.fancyquadrant.desc=Black Fancy Quadrant Glass
 
+#Stair localizations
+tile.chisel.aluminum_stairs.0.name=Aluminum Stairs
+tile.chisel.aluminum_stairs.1.name=Aluminum Stairs
+tile.chisel.aluminum_stairs.2.name=Aluminum Stairs
+
 # Creative Tab localizations
 itemGroup.tabOtherChiselBlocks=Other Chisel Blocks
 itemGroup.tabStoneChiselBlocks=Stone Chisel Blocks

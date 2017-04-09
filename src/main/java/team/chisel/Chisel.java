@@ -2,11 +2,13 @@ package team.chisel;
 
 import java.io.File;
 
+import com.cricketcraft.chisel.api.IChiselItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
+import net.minecraftforge.event.world.BlockEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -192,6 +194,13 @@ public class Chisel {
 	public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
 		if (event.modID.equals("chisel")) {
 			Configurations.refreshConfig();
+		}
+	}
+
+	@SubscribeEvent
+	public void onBlockBreak(BlockEvent.BreakEvent event) {
+		if(event.getPlayer().getCurrentEquippedItem().getItem() instanceof IChiselItem) {
+			event.setCanceled(true);
 		}
 	}
 }

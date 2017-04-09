@@ -21,12 +21,12 @@ public class CarvableStairsMaker {
 		carverHelper = new CarvableHelper(base);
 	}
 
-	public void create(String name, Block[] blocks) {
-		create(null, name, blocks);
+	public void create(String name, Block[] blocks, int size) {
+		create(null, name, blocks, size);
 	}
 
-	public void create(IStairsCreator creator, String name, Block[] blocks) {
-		for (int i = 0; i < blocks.length; i++) {
+	public void create(IStairsCreator creator, String name, Block[] blocks, int size) {
+		for (int i = 0; i < size / 2; i++) {
 			String n = name + "." + i;
 			blocks[i] = creator == null ? new BlockCarvableStairs(blockBase, i * 2, carverHelper) : creator.create(blockBase, i * 2, carverHelper);
 
