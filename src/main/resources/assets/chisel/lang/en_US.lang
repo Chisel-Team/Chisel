@@ -16,6 +16,8 @@ container.chisel.title=Chisel
 itemGroup.chiselCreativeTab=Chisel
 chisel.jei.title=Chiseling
 
+jei.chisel.desc.concrete_making=Just add water and you can make your very own Concrete!\n\nSubmerge Concrete Powder into water by placing it next to water, or letting it fall into water as a falling block.
+
 chisel.tooltip.blockname=%1$s (%2$s)
 
 tile.chisel.blockAluminum.name=Block of Aluminum

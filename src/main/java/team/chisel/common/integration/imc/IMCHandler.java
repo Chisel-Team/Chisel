@@ -1,7 +1,6 @@
-package team.chisel.common.compat;
+package team.chisel.common.integration.imc;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import team.chisel.Chisel;
