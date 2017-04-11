@@ -568,7 +568,43 @@ tile.chisel.cobblestonemossy.poison.desc.1=Poison
 tile.chisel.cobblestonemossy.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.cobblestonemossy.cuts.desc.1=Cuts
 
-tile.chisel.concrete_black.name=Concrete
+tile.chisel.concrete_powder.name=Concrete Powder
+tile.chisel.concrete_powder.black.desc.1=Black
+tile.chisel.concrete_powder.blue.desc.1=Blue
+tile.chisel.concrete_powder.brown.desc.1=Brown
+tile.chisel.concrete_powder.cyan.desc.1=Cyan
+tile.chisel.concrete_powder.gray.desc.1=Gray
+tile.chisel.concrete_powder.green.desc.1=Green
+tile.chisel.concrete_powder.lightblue.desc.1=Light Blue
+tile.chisel.concrete_powder.lightgray.desc.1=Light Gray
+tile.chisel.concrete_powder.lime.desc.1=Lime
+tile.chisel.concrete_powder.magenta.desc.1=Magenta
+tile.chisel.concrete_powder.orange.desc.1=Orange
+tile.chisel.concrete_powder.pink.desc.1=Pink
+tile.chisel.concrete_powder.purple.desc.1=Purple
+tile.chisel.concrete_powder.red.desc.1=Red
+tile.chisel.concrete_powder.white.desc.1=White
+tile.chisel.concrete_powder.yellow.desc.1=Yellow
+
+tile.chisel.concrete.name=Concrete
+tile.chisel.concrete.black.desc.1=Black
+tile.chisel.concrete.blue.desc.1=Blue
+tile.chisel.concrete.brown.desc.1=Brown
+tile.chisel.concrete.cyan.desc.1=Cyan
+tile.chisel.concrete.gray.desc.1=Gray
+tile.chisel.concrete.green.desc.1=Green
+tile.chisel.concrete.lightblue.desc.1=Light Blue
+tile.chisel.concrete.lightgray.desc.1=Light Gray
+tile.chisel.concrete.lime.desc.1=Lime
+tile.chisel.concrete.magenta.desc.1=Magenta
+tile.chisel.concrete.orange.desc.1=Orange
+tile.chisel.concrete.pink.desc.1=Pink
+tile.chisel.concrete.purple.desc.1=Purple
+tile.chisel.concrete.red.desc.1=Red
+tile.chisel.concrete.white.desc.1=White
+tile.chisel.concrete.yellow.desc.1=Yellow
+
+tile.chisel.concrete_black.name=Black Concrete
 tile.chisel.concrete_black.cracked.desc.1=Cracked
 tile.chisel.concrete_black.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_black.bricks-cracked.desc.1=Cracked Bricks
@@ -610,7 +646,7 @@ tile.chisel.concrete_black.poison.desc.1=Poison
 tile.chisel.concrete_black.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_black.cuts.desc.1=Cuts
 
-tile.chisel.concrete_blue.name=Concrete
+tile.chisel.concrete_blue.name=Blue Concrete
 tile.chisel.concrete_blue.cracked.desc.1=Cracked
 tile.chisel.concrete_blue.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_blue.bricks-cracked.desc.1=Cracked Bricks
@@ -652,7 +688,7 @@ tile.chisel.concrete_blue.poison.desc.1=Poison
 tile.chisel.concrete_blue.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_blue.cuts.desc.1=Cuts
 
-tile.chisel.concrete_brown.name=Concrete
+tile.chisel.concrete_brown.name=Brown Concrete
 tile.chisel.concrete_brown.cracked.desc.1=Cracked
 tile.chisel.concrete_brown.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_brown.bricks-cracked.desc.1=Cracked Bricks
@@ -694,7 +730,7 @@ tile.chisel.concrete_brown.poison.desc.1=Poison
 tile.chisel.concrete_brown.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_brown.cuts.desc.1=Cuts
 
-tile.chisel.concrete_cyan.name=Concrete
+tile.chisel.concrete_cyan.name=Cyan Concrete
 tile.chisel.concrete_cyan.cracked.desc.1=Cracked
 tile.chisel.concrete_cyan.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_cyan.bricks-cracked.desc.1=Cracked Bricks
@@ -736,7 +772,7 @@ tile.chisel.concrete_cyan.poison.desc.1=Poison
 tile.chisel.concrete_cyan.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_cyan.cuts.desc.1=Cuts
 
-tile.chisel.concrete_gray.name=Concrete
+tile.chisel.concrete_gray.name=Gray Concrete
 tile.chisel.concrete_gray.cracked.desc.1=Cracked
 tile.chisel.concrete_gray.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_gray.bricks-cracked.desc.1=Cracked Bricks
@@ -778,7 +814,7 @@ tile.chisel.concrete_gray.poison.desc.1=Poison
 tile.chisel.concrete_gray.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_gray.cuts.desc.1=Cuts
 
-tile.chisel.concrete_green.name=Concrete
+tile.chisel.concrete_green.name=Green Concrete
 tile.chisel.concrete_green.cracked.desc.1=Cracked
 tile.chisel.concrete_green.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_green.bricks-cracked.desc.1=Cracked Bricks
@@ -820,7 +856,7 @@ tile.chisel.concrete_green.poison.desc.1=Poison
 tile.chisel.concrete_green.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_green.cuts.desc.1=Cuts
 
-tile.chisel.concrete_lightblue.name=Concrete
+tile.chisel.concrete_lightblue.name=Light Blue Concrete
 tile.chisel.concrete_lightblue.cracked.desc.1=Cracked
 tile.chisel.concrete_lightblue.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_lightblue.bricks-cracked.desc.1=Cracked Bricks
@@ -862,7 +898,7 @@ tile.chisel.concrete_lightblue.poison.desc.1=Poison
 tile.chisel.concrete_lightblue.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_lightblue.cuts.desc.1=Cuts
 
-tile.chisel.concrete_lightgray.name=Concrete
+tile.chisel.concrete_lightgray.name=Light Gray Concrete
 tile.chisel.concrete_lightgray.cracked.desc.1=Cracked
 tile.chisel.concrete_lightgray.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_lightgray.bricks-cracked.desc.1=Cracked Bricks
@@ -904,7 +940,7 @@ tile.chisel.concrete_lightgray.poison.desc.1=Poison
 tile.chisel.concrete_lightgray.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_lightgray.cuts.desc.1=Cuts
 
-tile.chisel.concrete_lime.name=Concrete
+tile.chisel.concrete_lime.name=Lime Concrete
 tile.chisel.concrete_lime.cracked.desc.1=Cracked
 tile.chisel.concrete_lime.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_lime.bricks-cracked.desc.1=Cracked Bricks
@@ -946,7 +982,7 @@ tile.chisel.concrete_lime.poison.desc.1=Poison
 tile.chisel.concrete_lime.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_lime.cuts.desc.1=Cuts
 
-tile.chisel.concrete_magenta.name=Concrete
+tile.chisel.concrete_magenta.name=Magenta Concrete
 tile.chisel.concrete_magenta.cracked.desc.1=Cracked
 tile.chisel.concrete_magenta.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_magenta.bricks-cracked.desc.1=Cracked Bricks
@@ -988,7 +1024,7 @@ tile.chisel.concrete_magenta.poison.desc.1=Poison
 tile.chisel.concrete_magenta.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_magenta.cuts.desc.1=Cuts
 
-tile.chisel.concrete_orange.name=Concrete
+tile.chisel.concrete_orange.name=Orange Concrete
 tile.chisel.concrete_orange.cracked.desc.1=Cracked
 tile.chisel.concrete_orange.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_orange.bricks-cracked.desc.1=Cracked Bricks
@@ -1030,7 +1066,7 @@ tile.chisel.concrete_orange.poison.desc.1=Poison
 tile.chisel.concrete_orange.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_orange.cuts.desc.1=Cuts
 
-tile.chisel.concrete_pink.name=Concrete
+tile.chisel.concrete_pink.name=Pink Concrete
 tile.chisel.concrete_pink.cracked.desc.1=Cracked
 tile.chisel.concrete_pink.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_pink.bricks-cracked.desc.1=Cracked Bricks
@@ -1072,7 +1108,7 @@ tile.chisel.concrete_pink.poison.desc.1=Poison
 tile.chisel.concrete_pink.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_pink.cuts.desc.1=Cuts
 
-tile.chisel.concrete_purple.name=Concrete
+tile.chisel.concrete_purple.name=Purple Concrete
 tile.chisel.concrete_purple.cracked.desc.1=Cracked
 tile.chisel.concrete_purple.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_purple.bricks-cracked.desc.1=Cracked Bricks
@@ -1114,7 +1150,7 @@ tile.chisel.concrete_purple.poison.desc.1=Poison
 tile.chisel.concrete_purple.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_purple.cuts.desc.1=Cuts
 
-tile.chisel.concrete_red.name=Concrete
+tile.chisel.concrete_red.name=Red Concrete
 tile.chisel.concrete_red.cracked.desc.1=Cracked
 tile.chisel.concrete_red.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_red.bricks-cracked.desc.1=Cracked Bricks
@@ -1156,7 +1192,7 @@ tile.chisel.concrete_red.poison.desc.1=Poison
 tile.chisel.concrete_red.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_red.cuts.desc.1=Cuts
 
-tile.chisel.concrete_white.name=Concrete
+tile.chisel.concrete_white.name=White Concrete
 tile.chisel.concrete_white.cracked.desc.1=Cracked
 tile.chisel.concrete_white.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_white.bricks-cracked.desc.1=Cracked Bricks
@@ -1198,7 +1234,7 @@ tile.chisel.concrete_white.poison.desc.1=Poison
 tile.chisel.concrete_white.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.concrete_white.cuts.desc.1=Cuts
 
-tile.chisel.concrete_yellow.name=Concrete
+tile.chisel.concrete_yellow.name=Yellow Concrete
 tile.chisel.concrete_yellow.cracked.desc.1=Cracked
 tile.chisel.concrete_yellow.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.concrete_yellow.bricks-cracked.desc.1=Cracked Bricks
