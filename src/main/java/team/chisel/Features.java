@@ -764,6 +764,8 @@ public enum Features {
                     .addOreDict("sandConcrete")
                     .build(b -> b.setSoundType(SoundType.GROUND).setHardness(0.8F));
 
+            Carving.chisel.removeGroup("concrete_powder");
+
             BlockCreator<BlockCarvable> concreteCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
                 public void onEntityWalk(World world, BlockPos pos, Entity entity) {

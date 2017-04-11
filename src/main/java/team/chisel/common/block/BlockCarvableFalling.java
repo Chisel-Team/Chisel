@@ -11,6 +11,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.VariationData;
 import team.chisel.common.entity.EntityFallingBlockCarvable;
+import team.chisel.common.init.ChiselBlocks;
 
 import java.util.Random;
 
@@ -22,16 +23,61 @@ public class BlockCarvableFalling extends BlockCarvable {
     private static boolean fallInstantly;
 
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+        /*if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1)).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1)).getMaterial() == Material.WATER)
+        {
+            worldIn.setBlockState(pos, ChiselBlocks.concrete.getStateFromMeta(ChiselBlocks.concrete_powder.getMetaFromState(state)), 3);
+
+            worldIn.scheduleUpdate(pos, ChiselBlocks.concrete, this.tickRate(worldIn));
+        } else*/
+            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
     }
 
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-        worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+        /*if(worldIn.getBlockState(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1)).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1)).getMaterial() == Material.WATER)
+        {
+            worldIn.setBlockState(pos, ChiselBlocks.concrete.getStateFromMeta(ChiselBlocks.concrete_powder.getMetaFromState(state)), 3);
+
+            worldIn.scheduleUpdate(pos, ChiselBlocks.concrete, this.tickRate(worldIn));
+        } else*/
+            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
     }
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if(!worldIn.isRemote) {
+        if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1)).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1)).getMaterial() == Material.WATER)
+        {
+            worldIn.setBlockState(pos, ChiselBlocks.concrete.getStateFromMeta(ChiselBlocks.concrete_powder.getMetaFromState(state)), 3);
+        } else if(!worldIn.isRemote) {
             this.checkFallable(worldIn, pos);
+        }
+    }
+
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn) {
+        if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY()-1, pos.getZ())).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()+1)).getMaterial() == Material.WATER ||
+                worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ()-1)).getMaterial() == Material.WATER)
+        {
+            worldIn.setBlockState(pos, ChiselBlocks.concrete.getStateFromMeta(ChiselBlocks.concrete_powder.getMetaFromState(state)), 3);
         }
     }
 
