@@ -761,7 +761,7 @@ public enum Features {
                     .next("green")
                     .next("red")
                     .next("black")
-                    .addOreDict("sandConcrete")
+                    .addOreDict("powderConcrete")
                     .build(b -> b.setSoundType(SoundType.GROUND).setHardness(0.8F));
 
             Carving.chisel.removeGroup("concrete_powder");
@@ -838,6 +838,17 @@ public enum Features {
                         .addOreDict("blockConcrete")
                         .addOreDict("blockConcrete"+dyeColors[i])
                         .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.5F));
+            }
+        }
+
+        @Override
+        void addRecipes()
+        {
+            int i = 0;
+
+            for (String dye : dyeOres)
+            {
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.concrete_powder, 8, 15-i++), "SGS", "GDG", "SGS", 'S', "gravel", 'G', "sand", 'D', dye));
             }
         }
     },
