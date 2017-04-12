@@ -75,12 +75,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Aluminum";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Aluminum");
         }
     },
 
@@ -364,12 +359,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Bronze";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Bronze");
         }
     },
 
@@ -532,6 +522,12 @@ public enum Features {
             
             CarvingUtils.getChiselRegistry().registerOre("blockCobalt", "blockCobalt");
         }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Cobalt");
+        }
     },
 
     COBBLESTONE {
@@ -690,10 +686,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            if(OreDictionary.doesOreNameExist("fuelCoke")) {
-                ItemStack result = OreDictionary.getOres("fuelCoke").get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "blockFuelCoke"));
-            }
+            registerOreUncraftRecipe("blockFuelCoke", "fuelCoke");
         }
     },
 
@@ -875,12 +868,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Copper";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Copper");
         }
     },
 
@@ -1037,12 +1025,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Electrum";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Electrum");
         }
     },
 
@@ -1509,12 +1492,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Gold";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Gold");
         }
     },
 
@@ -1693,12 +1671,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Invar";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Invar");
         }
     },
 
@@ -1745,12 +1718,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Iron";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Iron");
         }
     },
 
@@ -1895,12 +1863,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Lead";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Lead");
         }
     },
 
@@ -2182,12 +2145,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Nickel";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Nickel");
         }
     },
 
@@ -2300,12 +2258,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Platinum";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Platinum");
         }
     },
 
@@ -2639,12 +2592,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Silver";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Silver");
         }
     },
 
@@ -2670,12 +2618,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Steel";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Steel");
         }
     },
 
@@ -2863,12 +2806,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Tin";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Tin");
         }
     },
 
@@ -2926,12 +2864,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            String name = "Uranium";
-
-            if(OreDictionary.doesOreNameExist("ingot"+name)) {
-                ItemStack result = OreDictionary.getOres("ingot"+name).get(0);
-                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', "block"+name));
-            }
+            registerIngotUncraftRecipe("Uranium");
         }
     },
 
@@ -3302,5 +3235,23 @@ public enum Features {
         ResourceLocation block = Block.REGISTRY.getNameForObject(bottom);
         String name = block.getResourcePath() + "_top";
         // GameRegistry.registerBlock(top, ItemCarvableSlab.class, name); TODO
+    }
+
+    private static void registerIngotUncraftRecipe(String ore)
+    {
+        registerOreUncraftRecipe("block" + ore, "ingot" + ore);
+    }
+
+    private static void registerOreUncraftRecipe(String blockOre, String endOre)
+    {
+        if(OreDictionary.doesOreNameExist(endOre)) {
+            List<ItemStack> oreList = OreDictionary.getOres(endOre);
+
+            if(oreList.size() > 0)
+            {
+                ItemStack result = oreList.get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', blockOre));
+            }
+        }
     }
 }
