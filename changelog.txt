@@ -7,6 +7,8 @@ New
 Changes
 - Fixed a few Lang Problems
 - Fixed NEI crash
+Fixes
+- HOTIFX: Fixed ArrayOutOfBoundsException related to recipes
 
 0.0.9:
 New
