@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:coal/coalcoke/pillar-side.cf",
+  "overrides":{
+    "UP":"chisel:coal/coalcoke/pillar-top.cf",
+    "DOWN":"chisel:coal/coalcoke/pillar-top.cf"
+  }
+}

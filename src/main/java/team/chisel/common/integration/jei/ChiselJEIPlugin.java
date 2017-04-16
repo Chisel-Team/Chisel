@@ -1,5 +1,7 @@
 package team.chisel.common.integration.jei;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -13,6 +15,7 @@ import mezz.jei.api.ingredients.IModIngredientRegistration;
 import net.minecraft.item.ItemStack;
 import team.chisel.Chisel;
 import team.chisel.common.carving.Carving;
+import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.integration.jei.ChiselRecipeHandler.CarvingGroupWrapper;
 
 @JEIPlugin
@@ -30,6 +33,16 @@ public class ChiselJEIPlugin implements IModPlugin {
         registry.addRecipeCategoryCraftingItem(new ItemStack(Chisel.itemChiselIron), category.getUid());
         registry.addRecipeCategoryCraftingItem(new ItemStack(Chisel.itemChiselDiamond), category.getUid());
         registry.addRecipeCategoryCraftingItem(new ItemStack(Chisel.itemChiselHitech), category.getUid());
+
+        ArrayList<ItemStack> itemStacks = new ArrayList<ItemStack>();
+
+        for(int i = 0; i < 16; i++)
+        {
+            itemStacks.add(new ItemStack(ChiselBlocks.concrete_powder, 1, i));
+            itemStacks.add(new ItemStack(ChiselBlocks.concrete, 1, i));
+        }
+
+        registry.addDescription(itemStacks, "jei.chisel.desc.concrete_making");
     }
 
     @Override

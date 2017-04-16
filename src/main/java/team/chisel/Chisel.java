@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
@@ -34,9 +33,10 @@ import team.chisel.client.gui.PacketChiselNBT;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
-import team.chisel.common.compat.IMCHandler;
+import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
+import team.chisel.common.init.ChiselFuelHandler;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
@@ -64,7 +64,7 @@ public class Chisel implements Reference {
     public static @Nonnull ItemOffsetTool itemOffsetTool;
 
     public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
-    
+
     public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
     static {
         network.registerMessage(PacketChiselButton.Handler.class, PacketChiselButton.class, 0, Side.SERVER);
@@ -89,20 +89,20 @@ public class Chisel implements Reference {
         itemChiselIron = new ItemChisel(ChiselType.IRON);
         itemChiselDiamond = new ItemChisel(ChiselType.DIAMOND);
         itemChiselHitech = new ItemChisel(ChiselType.HITECH);
-        
+
         itemOffsetTool = new ItemOffsetTool();
-        
+
         GameRegistry.register(itemChiselIron);
         GameRegistry.register(itemChiselDiamond);
         GameRegistry.register(itemChiselHitech);
-        
+
         GameRegistry.register(itemOffsetTool);
 
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
         GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
         GameRegistry.addRecipe(new ShapedOreRecipe(itemOffsetTool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron"));
-        
+
         MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
         MinecraftForge.EVENT_BUS.register(ChiselController.class);
 
@@ -113,16 +113,20 @@ public class Chisel implements Reference {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
         Features.preInit();
-        
+
+        //EntityRegistry.registerModEntity(EntityFallingBlockCarvable.class, "falling_block", 60, Chisel.instance, 64, 3, false);
+
         proxy.preInit(event);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         Features.init();
-        
+
         proxy.init();
         // BlockRegistry.init(event);
+
+        GameRegistry.registerFuelHandler(new ChiselFuelHandler());
 
         addCompactorPressRecipe(1000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestone2, 1, 7));
         addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestone2, 1, 7), new ItemStack(ChiselBlocks.marble2, 1, 7));
@@ -158,7 +162,7 @@ public class Chisel implements Reference {
 
     /**
      * Sends a debug message, basically a wrapper for the logger that only prints when debugging is enabled
-     * 
+     *
      * @param message
      */
     public static void debug(String message) {

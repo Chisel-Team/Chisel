@@ -1,3 +1,15 @@
+0.0.10:
+New
+- Concrete Powder and Concrete Blocks.
+- Coal, Charcoal, and Coke Fuel blocks. They are usable in furnaces.
+- Drop Concrete Powder into Water to make Concrete Blocks. Just Add Water™!
+- Reversable Crafting for Metal Blocks (Block -> 9 Ingots)
+Changes
+- Fixed a few Lang Problems
+- Fixed NEI crash
+Fixes
+- HOTIFX: Fixed ArrayOutOfBoundsException related to recipes
+
 0.0.9:
 New
 - Netherrack stays on fire now. Forever.

@@ -68,8 +68,14 @@ public enum Features {
                     .next("scaffold")
                     .addOreDict("blockAluminum")
                     .build(b -> b.setSoundType(SoundType.METAL));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockAluminum", "blockAluminum");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Aluminum");
         }
     },
 
@@ -117,6 +123,7 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .next("cuts")
                     .addOreDict("stoneAndesite")
                     .addOreDict("stoneAndesitePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(30.0F).setSoundType(SoundType.STONE));
@@ -183,7 +190,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -312,7 +319,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -345,8 +352,14 @@ public enum Features {
                     .next("scaffold")
                     .addOreDict("blockBronze")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockBronze", "blockBronze");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Bronze");
         }
     },
 
@@ -373,7 +386,7 @@ public enum Features {
                     .next("weathered-blocks")
                     .next("weathered-half")
                     .next("weathered-block-half")
-                    .build();
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.0F));
         }
 
         @Override
@@ -420,6 +433,58 @@ public enum Features {
         }
     },
 
+    CHARCOAL {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            factory.newBlock(Material.ROCK, "block_charcoal", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .next("raw")
+                    .addOreDict("blockCharcoal")
+                    .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            CarvingUtils.getChiselRegistry().registerOre("block_charcoal", "blockCharcoal");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.COAL, 9, 1), "X", 'X', "blockCharcoal"));
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.block_charcoal2, 1, 1), "XXX", "XXX", "XXX", 'X', "charcoal"));
+        }
+    },
+
     CLOUD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -457,6 +522,12 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("blockCobalt", "blockCobalt");
         }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Cobalt");
+        }
     },
 
     COBBLESTONE {
@@ -492,7 +563,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -511,6 +582,111 @@ public enum Features {
                     .next("marker")
                     .addOreDict("cobblestone")
                     .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+        }
+    },
+
+    COAL {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            Carving.chisel.addVariation("block_coal", Blocks.COAL_BLOCK.getDefaultState(), -21);
+
+            CarvingUtils.getChiselRegistry().registerOre("block_coal", "blockCoal");
+
+            factory.newBlock(Material.ROCK, "block_coal", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .next("raw")
+                    .addOreDict("blockCoal")
+                    .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.COAL, 9), "X", 'X', "blockCoal"));
+        }
+    },
+
+    COAL_COKE {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            factory.newBlock(Material.ROCK, "block_coal_coke", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .next("raw")
+                    .addOreDict("blockFuelCoke")
+                    .addOreDict("blockCoalCoke")
+                    .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+
+            CarvingUtils.getChiselRegistry().registerOre("block_coal_coke", "blockFuelCoke");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerOreUncraftRecipe("blockFuelCoke", "fuelCoke");
         }
     },
 
@@ -552,8 +728,121 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .next("cuts")
                     .addOreDict("blockMossy")
                     .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+        }
+    },
+
+    CONCRETE {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            factory.newBlock(Material.GROUND, "concrete_powder", new ChiselBlockProvider<>(BlockCarvableFalling::new, BlockCarvableFalling.class))
+                    .newVariation("white")
+                    .next("orange")
+                    .next("magenta")
+                    .next("lightblue")
+                    .next("yellow")
+                    .next("lime")
+                    .next("pink")
+                    .next("gray")
+                    .next("lightgray")
+                    .next("cyan")
+                    .next("purple")
+                    .next("blue")
+                    .next("brown")
+                    .next("green")
+                    .next("red")
+                    .next("black")
+                    .addOreDict("powderConcrete")
+                    .build(b -> b.setSoundType(SoundType.GROUND).setHardness(0.8F));
+
+            Carving.chisel.removeGroup("concrete_powder");
+
+            BlockCreator<BlockCarvable> concreteCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                @Override
+                public void onEntityWalk(World world, BlockPos pos, Entity entity) {
+                    entity.motionX *= concreteVelocityMult + 0.05;
+                    entity.motionZ *= concreteVelocityMult + 0.05;
+                }
+            };
+
+            factory.newBlock(Material.ROCK, "concrete", new ChiselBlockProvider<>(concreteCreator, BlockCarvable.class))
+                    .setParentFolder("concrete")
+                    .newVariation("white")
+                    .next("orange")
+                    .next("magenta")
+                    .next("lightblue")
+                    .next("yellow")
+                    .next("lime")
+                    .next("pink")
+                    .next("gray")
+                    .next("lightgray")
+                    .next("cyan")
+                    .next("purple")
+                    .next("blue")
+                    .next("brown")
+                    .next("green")
+                    .next("red")
+                    .next("black")
+                    .addOreDict("blockConcrete")
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.5F));
+
+            Carving.chisel.removeGroup("concrete");
+
+            for (int i = 0; i < dyeColors.length; i++) {
+                Carving.chisel.addVariation("concrete_" + (dyeColors[i].toLowerCase()), Block.REGISTRY.getObject(new ResourceLocation(Chisel.MOD_ID, "concrete")).getStateFromMeta(15-i), -1);
+
+                factory.newBlock(Material.ROCK, "concrete_" + (dyeColors[i].toLowerCase()), new ChiselBlockProvider<>(concreteCreator, BlockCarvable.class))
+                        .setParentFolder("concrete_" + dyeColors[i].toLowerCase())
+                        .newVariation("cracked")
+                        .next("bricks-soft")
+                        .next("bricks-cracked")
+                        .next("bricks-triple")
+                        .next("bricks-encased")
+                        .next("braid")
+                        .next("array")
+                        .next("tiles-large")
+                        .next("tiles-small")
+                        .next("chaotic-medium")
+                        .next("chaotic-small")
+                        .next("dent")
+                        .next("french-1")
+                        .next("french-2")
+                        .next("jellybean")
+                        .next("layers")
+                        .next("mosaic")
+                        .next("ornate")
+                        .next("panel")
+                        .next("road")
+                        .next("slanted")
+                        .next("zag")
+                        .next("circularct")
+                        .next("weaver")
+                        .next("bricks-solid")
+                        .next("bricks-small")
+                        .next("circular")
+                        .next("tiles-medium")
+                        .next("pillar")
+                        .next("twisted")
+                        .next("prism")
+                        .next("bricks-chaotic")
+                        .next("cuts")
+                        .addOreDict("blockConcrete")
+                        .addOreDict("blockConcrete"+dyeColors[i])
+                        .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.5F));
+            }
+        }
+
+        @Override
+        void addRecipes()
+        {
+            int i = 0;
+
+            for (String dye : dyeOres)
+            {
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ChiselBlocks.concrete_powder, 8, 15-i++), "SGS", "GDG", "SGS", 'S', "gravel", 'G', "sand", 'D', dye));
+            }
         }
     },
 
@@ -574,6 +863,12 @@ public enum Features {
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
 
             CarvingUtils.getChiselRegistry().registerOre("blockCopper", "blockCopper");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Copper");
         }
     },
 
@@ -623,6 +918,12 @@ public enum Features {
                     .addOreDict("blockDiamond")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.DIAMOND, 9), "X", 'X', "blockDiamond"));
+        }
     },
 
     DIORITE {
@@ -669,6 +970,7 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .next("cuts")
                     .addOreDict("stoneDiorite")
                     .addOreDict("stoneDioritePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(30.0F).setSoundType(SoundType.STONE));
@@ -719,6 +1021,12 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("blockElectrum", "blockElectrum");
         }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Electrum");
+        }
     },
 
     EMERALD {
@@ -745,6 +1053,12 @@ public enum Features {
                     .next("emeraldPrismatic")
                     .addOreDict("blockEmerald")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
+        }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.EMERALD, 9), "X", 'X', "blockEmerald"));
         }
     },
 
@@ -786,7 +1100,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -855,7 +1169,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -1097,7 +1411,7 @@ public enum Features {
                     return drops;
                 }
             };
-            
+
             factory.newBlock(Material.GLASS, "glowstone", new ChiselBlockProvider<>(glowstoneCreator, BlockCarvable.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -1176,6 +1490,12 @@ public enum Features {
                     .addOreDict("blockGold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F));
         }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Gold");
+        }
     },
 
     GRANITE {
@@ -1222,6 +1542,7 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .next("cuts")
                     .addOreDict("stoneGranite")
                     .addOreDict("stoneGranitePolished")
                     .build(b -> b.setHardness(1.5F).setResistance(30.0F).setSoundType(SoundType.STONE));
@@ -1261,7 +1582,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -1348,6 +1669,12 @@ public enum Features {
                     .addOreDict("blockInvar")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
         }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Invar");
+        }
     },
 
     IRON {
@@ -1388,6 +1715,12 @@ public enum Features {
                     .next("terrain-iron-simple")
                     .addOreDict("blockIron")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Iron");
         }
     },
 
@@ -1500,6 +1833,7 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .next("cuts")
                     .build(b -> b.setHardness(4.0F).setResistance(50.0F).setSoundType(SoundType.STONE));
         }
         @Override
@@ -1526,6 +1860,12 @@ public enum Features {
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
 
             CarvingUtils.getChiselRegistry().registerOre("blockLead", "blockLead");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Lead");
         }
     },
 
@@ -1581,7 +1921,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -1642,7 +1982,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -1801,6 +2141,12 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("blockNickel", "blockNickel");
         }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Nickel");
+        }
     },
 
     OBSIDIAN {
@@ -1908,6 +2254,12 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("blockPlatinum", "blockPlatinum");
         }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Platinum");
+        }
     },
 
     PRISMARINE {
@@ -1948,7 +2300,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -2014,6 +2366,7 @@ public enum Features {
                     //.next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .next("cuts")
                     .addOreDict("blockQuartz")
                     .build(b -> b.setHardness(0.8F).setResistance(4.0F).setSoundType(SoundType.STONE));
         }
@@ -2072,6 +2425,12 @@ public enum Features {
                     .addOreDict("blockRedstone")
                     .build(b->b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.METAL));
         }
+
+        @Override
+        void addRecipes()
+        {
+            GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(Items.REDSTONE, 9), "X", 'X', "blockRedstone"));
+        }
     },
 
     SANDSTONE {
@@ -2109,7 +2468,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -2164,7 +2523,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -2224,8 +2583,14 @@ public enum Features {
                     .next("scaffold")
                     .addOreDict("blockSilver")
                     .build(b -> b.setSoundType(SoundType.METAL));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockSilver", "blockSilver");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Silver");
         }
     },
 
@@ -2246,6 +2611,12 @@ public enum Features {
                     .build(b -> b.setSoundType(SoundType.METAL));
 
             CarvingUtils.getChiselRegistry().registerOre("blockSteel", "blockSteel");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Steel");
         }
     },
 
@@ -2292,7 +2663,7 @@ public enum Features {
                     .next("circularct")
                     .next("weaver")
                     .next("bricks-chaotic")
-                    .next("")
+                    .next("cuts")
                     .next("")
                     .next("")
                     .next("")
@@ -2425,8 +2796,14 @@ public enum Features {
                     .next("scaffold")
                     .addOreDict("blockTin")
                     .build(b -> b.setSoundType(SoundType.METAL));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockTin", "blockTin");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Tin");
         }
     },
 
@@ -2477,8 +2854,14 @@ public enum Features {
                     .next("scaffold")
                     .addOreDict("blockUranium")
                     .build(b -> b.setSoundType(SoundType.METAL));
-            
+
             CarvingUtils.getChiselRegistry().registerOre("blockUranium", "blockUranium");
+        }
+
+        @Override
+        void addRecipes()
+        {
+            registerIngotUncraftRecipe("Uranium");
         }
     },
 
@@ -2611,6 +2994,7 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .next("bricks-chaotic")
+                    .next("cuts")
                     .build(b -> b.setHardness(4.0F).setResistance(50.0F).setSoundType(SoundType.STONE));
         }
 
@@ -2848,5 +3232,23 @@ public enum Features {
         ResourceLocation block = Block.REGISTRY.getNameForObject(bottom);
         String name = block.getResourcePath() + "_top";
         // GameRegistry.registerBlock(top, ItemCarvableSlab.class, name); TODO
+    }
+
+    private static void registerIngotUncraftRecipe(String ore)
+    {
+        registerOreUncraftRecipe("block" + ore, "ingot" + ore);
+    }
+
+    private static void registerOreUncraftRecipe(String blockOre, String endOre)
+    {
+        if(OreDictionary.doesOreNameExist(endOre)) {
+            List<ItemStack> oreList = OreDictionary.getOres(endOre);
+
+            if(oreList.size() > 0)
+            {
+                ItemStack result = oreList.get(0);
+                GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', blockOre));
+            }
+        }
     }
 }

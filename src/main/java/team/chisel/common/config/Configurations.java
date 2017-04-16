@@ -66,7 +66,7 @@ public class Configurations {
 
         /* general */
         category = "general";
-        concreteVelocityMult = config.get(category, "concreteVelocityMult", 1.35, "The factor that concrete increases your velocity. Default is 1.35, set to 1 for no change.").getDouble();
+        concreteVelocityMult = config.get(category, "concreteVelocityMult", 1.35, "The factor that concrete_white increases your velocity. Default is 1.35, set to 1 for no change.").getDouble();
         ghostCloud = config.get(category, "doesCloudRenderLikeGhost", true).getBoolean(true);
         allowMossy = config.get(category, "allowBrickToMossyInChisel", true, "If true, you can chisel stone brick to mossy stone brick.").getBoolean(true);
         chiselRecipe = config.get(category, "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
