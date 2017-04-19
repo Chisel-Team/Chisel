@@ -88,7 +88,7 @@ public class BlockCarvableFalling extends BlockCarvable {
                 if(!worldIn.isRemote) {
                     EntityFallingBlockCarvable state1 = new EntityFallingBlockCarvable(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, worldIn.getBlockState(pos));
                     this.onStartFalling(state1);
-                    worldIn.spawnEntityInWorld(state1);
+                    worldIn.spawnEntity(state1);
                 }
             } else {
                 IBlockState state = worldIn.getBlockState(pos);
