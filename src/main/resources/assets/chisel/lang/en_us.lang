@@ -22,13 +22,17 @@ chisel.tooltip.blockname=%1$s (%2$s)
 
 tile.chisel.blockAluminum.name=Block of Aluminum
 tile.chisel.blockAluminum.caution.desc.1=Caution
+tile.chisel.blockAluminum.caution.desc.2=Has CTM
 tile.chisel.blockAluminum.crate.desc.1=Shipping Crate
+tile.chisel.blockAluminum.crate.desc.2=Has CTM
 tile.chisel.blockAluminum.thermal.desc.1=Thermal
 tile.chisel.blockAluminum.machine.desc.1=An Old Relic From The
 tile.chisel.blockAluminum.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockAluminum.badGreggy.desc.1=Egregious
+tile.chisel.blockAluminum.badGreggy.desc.2=Has CTM
 tile.chisel.blockAluminum.bolted.desc.1=Bolted
 tile.chisel.blockAluminum.scaffold.desc.1=Scaffold
+tile.chisel.blockAluminum.scaffold.desc.2=Has CTM
 
 tile.chisel.andesite.name=Andesite
 tile.chisel.andesite.cracked.desc.1=Cracked
@@ -74,21 +78,37 @@ tile.chisel.andesite.cuts.desc.1=Cuts
 
 tile.chisel.antiblock.name=Antiblock
 tile.chisel.antiblock.black.desc.1=Black
+tile.chisel.antiblock.black.desc.2=Has CTM
 tile.chisel.antiblock.red.desc.1=Red
+tile.chisel.antiblock.red.desc.2=Has CTM
 tile.chisel.antiblock.green.desc.1=Green
+tile.chisel.antiblock.green.desc.2=Has CTM
 tile.chisel.antiblock.brown.desc.1=Brown
+tile.chisel.antiblock.brown.desc.2=Has CTM
 tile.chisel.antiblock.blue.desc.1=Blue
+tile.chisel.antiblock.blue.desc.2=Has CTM
 tile.chisel.antiblock.purple.desc.1=Purple
+tile.chisel.antiblock.purple.desc.2=Has CTM
 tile.chisel.antiblock.cyan.desc.1=Cyan
+tile.chisel.antiblock.cyan.desc.2=Has CTM
 tile.chisel.antiblock.silver.desc.1=Light Gray
+tile.chisel.antiblock.silver.desc.2=Has CTM
 tile.chisel.antiblock.gray.desc.1=Gray
+tile.chisel.antiblock.gray.desc.2=Has CTM
 tile.chisel.antiblock.pink.desc.1=Pink
+tile.chisel.antiblock.pink.desc.2=Has CTM
 tile.chisel.antiblock.lime.desc.1=Lime
+tile.chisel.antiblock.lime.desc.2=Has CTM
 tile.chisel.antiblock.yellow.desc.1=Yellow
+tile.chisel.antiblock.yellow.desc.2=Has CTM
 tile.chisel.antiblock.light_blue.desc.1=Light Blue
+tile.chisel.antiblock.light_blue.desc.2=Has CTM
 tile.chisel.antiblock.magenta.desc.1=Magenta
+tile.chisel.antiblock.magenta.desc.2=Has CTM
 tile.chisel.antiblock.orange.desc.1=Orange
+tile.chisel.antiblock.orange.desc.2=Has CTM
 tile.chisel.antiblock.white.desc.1=White
+tile.chisel.antiblock.white.desc.2=Has CTM
 
 tile.chisel.basalt.name=Basalt
 tile.chisel.basalt.cracked.desc.1=Cracked
@@ -396,13 +416,17 @@ tile.chisel.bricks.cuts.desc.1=Cuts
 
 tile.chisel.blockBronze.name=Block of Bronze
 tile.chisel.blockBronze.caution.desc.1=Caution
+tile.chisel.blockBronze.caution.desc.2=Has CTM
 tile.chisel.blockBronze.crate.desc.1=Shipping Crate
+tile.chisel.blockBronze.crate.desc.2=Has CTM
 tile.chisel.blockBronze.thermal.desc.1=Thermal
 tile.chisel.blockBronze.machine.desc.1=An Old Relic From The
 tile.chisel.blockBronze.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockBronze.badGreggy.desc.1=Egregious
+tile.chisel.blockBronze.badGreggy.desc.2=Has CTM
 tile.chisel.blockBronze.bolted.desc.1=Bolted
 tile.chisel.blockBronze.scaffold.desc.1=Scaffold
+tile.chisel.blockBronze.scaffold.desc.2=Has CTM
 
 tile.chisel.carpet_white.name=Wool
 tile.chisel.carpet_white.legacy_white.desc.1=Legacy Carpet
@@ -462,13 +486,17 @@ tile.chisel.cloud.grid.desc.1=Small Tiles
 
 tile.chisel.blockCobalt.name=Block of Cobalt
 tile.chisel.blockCobalt.caution.desc.1=Caution
+tile.chisel.blockCobalt.caution.desc.2=Has CTM
 tile.chisel.blockCobalt.crate.desc.1=Shipping Crate
+tile.chisel.blockCobalt.crate.desc.2=Has CTM
 tile.chisel.blockCobalt.thermal.desc.1=Thermal
 tile.chisel.blockCobalt.machine.desc.1=An Old Relic From The
 tile.chisel.blockCobalt.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockCobalt.badGreggy.desc.1=Egregious
+tile.chisel.blockCobalt.badGreggy.desc.2=Has CTM
 tile.chisel.blockCobalt.bolted.desc.1=Bolted
 tile.chisel.blockCobalt.scaffold.desc.1=Scaffold
+tile.chisel.blockCobalt.scaffold.desc.2=Has CTM
 
 tile.chisel.brownstone.name=Brownstone
 tile.chisel.brownstone.default.desc.1=Raw
@@ -1277,13 +1305,17 @@ tile.chisel.concrete_yellow.cuts.desc.1=Cuts
 
 tile.chisel.blockCopper.name=Block of Copper
 tile.chisel.blockCopper.caution.desc.1=Caution
+tile.chisel.blockCopper.caution.desc.2=Has CTM
 tile.chisel.blockCopper.crate.desc.1=Shipping Crate
+tile.chisel.blockCopper.crate.desc.2=Has CTM
 tile.chisel.blockCopper.thermal.desc.1=Thermal
 tile.chisel.blockCopper.machine.desc.1=An Old Relic From The
 tile.chisel.blockCopper.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockCopper.badGreggy.desc.1=Egregious
+tile.chisel.blockCopper.badGreggy.desc.2=Has CTM
 tile.chisel.blockCopper.bolted.desc.1=Bolted
 tile.chisel.blockCopper.scaffold.desc.1=Scaffold
+tile.chisel.blockCopper.scaffold.desc.2=Has CTM
 
 tile.chisel.diamond.name=Block of Diamond
 tile.chisel.diamond.terrain-diamond-embossed.desc.1=Embossed
@@ -1361,13 +1393,17 @@ tile.chisel.dirt.plate.desc.1=Plate
 
 tile.chisel.blockElectrum.name=Block of Electrum
 tile.chisel.blockElectrum.caution.desc.1=Caution
+tile.chisel.blockElectrum.caution.desc.2=Has CTM
 tile.chisel.blockElectrum.crate.desc.1=Shipping Crate
+tile.chisel.blockElectrum.crate.desc.2=Has CTM
 tile.chisel.blockElectrum.thermal.desc.1=Thermal
 tile.chisel.blockElectrum.machine.desc.1=An Old Relic From The
 tile.chisel.blockElectrum.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockElectrum.badGreggy.desc.1=Egregious
+tile.chisel.blockElectrum.badGreggy.desc.2=Has CTM
 tile.chisel.blockElectrum.bolted.desc.1=Bolted
 tile.chisel.blockElectrum.scaffold.desc.1=Scaffold
+tile.chisel.blockElectrum.scaffold.desc.2=Has CTM
 
 tile.chisel.emerald.name=Block of Emerald
 tile.chisel.emerald.panel.desc.1=Tile
@@ -1654,13 +1690,17 @@ tile.chisel.glowstone.bricks-chaotic.desc.1=Trodden Bricks
 
 tile.chisel.blockGold.name=Block of Gold
 tile.chisel.blockGold.caution.desc.1=Caution
+tile.chisel.blockGold.caution.desc.2=Has CTM
 tile.chisel.blockGold.crate.desc.1=Shipping Crate
+tile.chisel.blockGold.crate.desc.2=Has CTM
 tile.chisel.blockGold.thermal.desc.1=Thermal
 tile.chisel.blockGold.machine.desc.1=An Old Relic From The
 tile.chisel.blockGold.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockGold.badGreggy.desc.1=Egregious
+tile.chisel.blockGold.badGreggy.desc.2=Has CTM
 tile.chisel.blockGold.bolted.desc.1=Bolted
 tile.chisel.blockGold.scaffold.desc.1=Scaffold
+tile.chisel.blockGold.scaffold.desc.2=Has CTM
 
 tile.chisel.gold.name=Block of Gold
 tile.chisel.gold.terrain-gold-largeingot.desc.1=Large Ingots
@@ -1775,23 +1815,31 @@ tile.chisel.icepillar.ornamental.desc.1=Ornamental Pillar
 
 tile.chisel.blockInvar.name=Block of Invar
 tile.chisel.blockInvar.caution.desc.1=Caution
+tile.chisel.blockInvar.caution.desc.2=Has CTM
 tile.chisel.blockInvar.crate.desc.1=Shipping Crate
+tile.chisel.blockInvar.crate.desc.2=Has CTM
 tile.chisel.blockInvar.thermal.desc.1=Thermal
 tile.chisel.blockInvar.machine.desc.1=An Old Relic From The
 tile.chisel.blockInvar.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockInvar.badGreggy.desc.1=Egregious
+tile.chisel.blockInvar.badGreggy.desc.2=Has CTM
 tile.chisel.blockInvar.bolted.desc.1=Bolted
 tile.chisel.blockInvar.scaffold.desc.1=Scaffold
+tile.chisel.blockInvar.scaffold.desc.2=Has CTM
 
 tile.chisel.blockIron.name=Block of Iron
 tile.chisel.blockIron.caution.desc.1=Caution
+tile.chisel.blockIron.caution.desc.2=Has CTM
 tile.chisel.blockIron.crate.desc.1=Shipping Crate
+tile.chisel.blockIron.crate.desc.2=Has CTM
 tile.chisel.blockIron.thermal.desc.1=Thermal
 tile.chisel.blockIron.machine.desc.1=An Old Relic From The
 tile.chisel.blockIron.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockIron.badGreggy.desc.1=Egregious
+tile.chisel.blockIron.badGreggy.desc.2=Has CTM
 tile.chisel.blockIron.bolted.desc.1=Bolted
 tile.chisel.blockIron.scaffold.desc.1=Scaffold
+tile.chisel.blockIron.scaffold.desc.2=Has CTM
 
 tile.chisel.iron.name=Block of Iron
 tile.chisel.iron.terrain-iron-largeingot.desc.1=Large Ingot
@@ -1898,13 +1946,17 @@ tile.chisel.lavastone.cuts.desc.1=Cuts
 
 tile.chisel.blockLead.name=Block of Lead
 tile.chisel.blockLead.caution.desc.1=Caution
+tile.chisel.blockLead.caution.desc.2=Has CTM
 tile.chisel.blockLead.crate.desc.1=Shipping Crate
+tile.chisel.blockLead.crate.desc.2=Has CTM
 tile.chisel.blockLead.thermal.desc.1=Thermal
 tile.chisel.blockLead.machine.desc.1=An Old Relic From The
 tile.chisel.blockLead.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockLead.badGreggy.desc.1=Egregious
+tile.chisel.blockLead.badGreggy.desc.2=Has CTM
 tile.chisel.blockLead.bolted.desc.1=Bolted
 tile.chisel.blockLead.scaffold.desc.1=Scaffold
+tile.chisel.blockLead.scaffold.desc.2=Has CTM
 
 tile.chisel.limestone.name=Limestone
 tile.chisel.limestone.cracked.desc.1=Cracked
@@ -2045,13 +2097,17 @@ tile.chisel.netherrack.a1-netherrack-wells.desc.1=Bloody Blue
 
 tile.chisel.blockNickel.name=Block of Nickel
 tile.chisel.blockNickel.caution.desc.1=Caution
+tile.chisel.blockNickel.caution.desc.2=Has CTM
 tile.chisel.blockNickel.crate.desc.1=Shipping Crate
+tile.chisel.blockNickel.crate.desc.2=Has CTM
 tile.chisel.blockNickel.thermal.desc.1=Thermal
 tile.chisel.blockNickel.machine.desc.1=An Old Relic From The
 tile.chisel.blockNickel.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockNickel.badGreggy.desc.1=Egregious
+tile.chisel.blockNickel.badGreggy.desc.2=Has CTM
 tile.chisel.blockNickel.bolted.desc.1=Bolted
 tile.chisel.blockNickel.scaffold.desc.1=Scaffold
+tile.chisel.blockNickel.scaffold.desc.2=Has CTM
 
 tile.chisel.obsidian.name=Obsidian
 tile.chisel.obsidian.pillar.desc.1=Large Pillar
@@ -2185,13 +2241,17 @@ tile.chisel.planks-dark-oak.chaotic.desc.1=Disarray Vertical
 
 tile.chisel.blockPlatinum.name=Block of Platinum
 tile.chisel.blockPlatinum.caution.desc.1=Caution
+tile.chisel.blockPlatinum.caution.desc.2=Has CTM
 tile.chisel.blockPlatinum.crate.desc.1=Shipping Crate
+tile.chisel.blockPlatinum.crate.desc.2=Has CTM
 tile.chisel.blockPlatinum.thermal.desc.1=Thermal
 tile.chisel.blockPlatinum.machine.desc.1=An Old Relic From The
 tile.chisel.blockPlatinum.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockPlatinum.badGreggy.desc.1=Egregious
+tile.chisel.blockPlatinum.badGreggy.desc.2=Has CTM
 tile.chisel.blockPlatinum.bolted.desc.1=Bolted
 tile.chisel.blockPlatinum.scaffold.desc.1=Scaffold
+tile.chisel.blockPlatinum.scaffold.desc.2=Has CTM
 
 tile.chisel.prismarine.name=Prismarine
 tile.chisel.prismarine.cracked.desc.1=Cracked
@@ -2458,23 +2518,31 @@ tile.chisel.sandstone-scribbles.name=Sandstone Scribbles
 
 tile.chisel.blockSilver.name=Block of Silver
 tile.chisel.blockSilver.caution.desc.1=Caution
+tile.chisel.blockSilver.caution.desc.2=Has CTM
 tile.chisel.blockSilver.crate.desc.1=Shipping Crate
+tile.chisel.blockSilver.crate.desc.2=Has CTM
 tile.chisel.blockSilver.thermal.desc.1=Thermal
 tile.chisel.blockSilver.machine.desc.1=An Old Relic From The
 tile.chisel.blockSilver.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockSilver.badGreggy.desc.1=Egregious
+tile.chisel.blockSilver.badGreggy.desc.2=Has CTM
 tile.chisel.blockSilver.bolted.desc.1=Bolted
 tile.chisel.blockSilver.scaffold.desc.1=Scaffold
+tile.chisel.blockSilver.scaffold.desc.2=Has CTM
 
 tile.chisel.blockSteel.name=Block of Steel
 tile.chisel.blockSteel.caution.desc.1=Caution
+tile.chisel.blockSteel.caution.desc.2=Has CTM
 tile.chisel.blockSteel.crate.desc.1=Shipping Crate
+tile.chisel.blockSteel.crate.desc.2=Has CTM
 tile.chisel.blockSteel.thermal.desc.1=Thermal
 tile.chisel.blockSteel.machine.desc.1=An Old Relic From The
 tile.chisel.blockSteel.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockSteel.badGreggy.desc.1=Egregious
+tile.chisel.blockSteel.badGreggy.desc.2=Has CTM
 tile.chisel.blockSteel.bolted.desc.1=Bolted
 tile.chisel.blockSteel.scaffold.desc.1=Scaffold
+tile.chisel.blockSteel.scaffold.desc.2=Has CTM
 
 tile.chisel.stonebrick.name=Chiseled Stone
 tile.chisel.stonebrick.cracked.desc.1=Cracked
@@ -2594,13 +2662,17 @@ tile.chisel.templemossy.stand-mosaic.desc.1=Mosaic Stand
 
 tile.chisel.blockTin.name=Block of Tin
 tile.chisel.blockTin.caution.desc.1=Caution
+tile.chisel.blockTin.caution.desc.2=Has CTM
 tile.chisel.blockTin.crate.desc.1=Shipping Crate
+tile.chisel.blockTin.crate.desc.2=Has CTM
 tile.chisel.blockTin.thermal.desc.1=Thermal
 tile.chisel.blockTin.machine.desc.1=An Old Relic From The
 tile.chisel.blockTin.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockTin.badGreggy.desc.1=Egregious
+tile.chisel.blockTin.badGreggy.desc.2=Has CTM
 tile.chisel.blockTin.bolted.desc.1=Bolted
 tile.chisel.blockTin.scaffold.desc.1=Scaffold
+tile.chisel.blockTin.scaffold.desc.2=Has CTM
 
 tile.chisel.tyrian.name=Tyrian
 tile.chisel.tyrian.shining.desc.1=Disordered Metal Bits
@@ -2622,13 +2694,17 @@ tile.chisel.tyrian.plate.desc.1=Shiny Plate
 
 tile.chisel.blockUranium.name=Block of Uranium
 tile.chisel.blockUranium.caution.desc.1=Caution
+tile.chisel.blockUranium.caution.desc.2=Has CTM
 tile.chisel.blockUranium.crate.desc.1=Shipping Crate
+tile.chisel.blockUranium.crate.desc.2=Has CTM
 tile.chisel.blockUranium.thermal.desc.1=Thermal
 tile.chisel.blockUranium.machine.desc.1=An Old Relic From The
 tile.chisel.blockUranium.machine.desc.2=Land Of OneTeuFyv
 tile.chisel.blockUranium.badGreggy.desc.1=Egregious
+tile.chisel.blockUranium.badGreggy.desc.2=Has CTM
 tile.chisel.blockUranium.bolted.desc.1=Bolted
 tile.chisel.blockUranium.scaffold.desc.1=Scaffold
+tile.chisel.blockUranium.scaffold.desc.2=Has CTM
 
 tile.chisel.valentines.name=Valentines' Block
 tile.chisel.valentines.1.desc.1=Pink Marker
