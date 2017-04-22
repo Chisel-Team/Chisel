@@ -308,8 +308,8 @@ public class CTM {
 
         boolean disableObscured = disableObscuredFaceCheck.or(disableObscuredFaceCheckConfig);
 
-        IBlockState con = getBlockOrFacade(world, connection, dir);
-        IBlockState obscuring = disableObscured ? null : getBlockOrFacade(world, pos2, dir);
+        IBlockState con = getBlockOrFacade(world, connection, dir, state);
+        IBlockState obscuring = disableObscured ? null : getBlockOrFacade(world, pos2, dir, state);
 
         // bad API user
         if (con == null) {
@@ -337,10 +337,10 @@ public class CTM {
 //        return false;
 //    }
 
-	public static IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
+	public static IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, @Nullable EnumFacing side, IBlockState neighbor) {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof IFacade) {
-			return ((IFacade) state.getBlock()).getFacade(world, pos, side);
+			return ((IFacade) state.getBlock()).getFacade(world, pos, side, neighbor);
 		}
 		return state;
 	}

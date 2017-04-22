@@ -164,7 +164,7 @@ public enum ConnectionLocations {
         IBlockState state = world.getBlockState(pos);
         for (ConnectionLocations loc : values) {
             BlockPos second = loc.transform(pos);
-            if (state.equals(CTM.getBlockOrFacade(world, second, null))){
+            if (state.equals(CTM.getBlockOrFacade(world, second, null, state))){
                 locs.add(loc);
             }
         }
