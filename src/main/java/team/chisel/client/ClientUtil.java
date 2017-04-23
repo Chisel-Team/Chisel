@@ -1,8 +1,12 @@
 package team.chisel.client;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
@@ -24,12 +28,15 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
+import team.chisel.client.render.texture.MetadataSectionChisel;
 
+@ParametersAreNonnullByDefault
 public class ClientUtil {
 
     public static final Random rand = new Random();
     public static final TRSRTransformation DEFAULT_BLOCK_THIRD_PERSON_TRANSOFRM = new TRSRTransformation(new Vector3f(0, 1.5f / 16f, -2.75f / 16f), TRSRTransformation.quatFromXYZDegrees(new Vector3f(
             10, -45, 170)), new Vector3f(0.375f, 0.375f, 0.375f), null);
+    @SuppressWarnings("null")
     public static final Matrix4f DEFAULT_BLOCK_THIRD_PERSON_MATRIX = DEFAULT_BLOCK_THIRD_PERSON_TRANSOFRM.getMatrix();
 
     public static void playSound(World world, BlockPos pos, String sound) {
@@ -106,8 +113,12 @@ public class ClientUtil {
         }
     }
     
+    public static ResourceLocation toResourceLocation(TextureAtlasSprite sprite) {
+        return new ResourceLocation(sprite.getIconName());
+    }
+    
     public static IResource getResource(TextureAtlasSprite sprite) {
-        return getResource(spriteToAbsolute(new ResourceLocation(sprite.getIconName())));
+        return getResource(spriteToAbsolute(toResourceLocation(sprite)));
     }
     
     public static ResourceLocation spriteToAbsolute(ResourceLocation sprite) {
@@ -126,5 +137,25 @@ public class ClientUtil {
         } catch (IOException e) {
             throw Throwables.propagate(e);
         }
+    }
+    
+    private static final Map<ResourceLocation, MetadataSectionChisel> metadataCache = new HashMap<>();
+
+    public static @Nullable MetadataSectionChisel getMetadata(ResourceLocation res) {
+        // Note, semantically different from computeIfAbsent, as we DO care about keys mapped to null values
+        if (metadataCache.containsKey(res)) {
+            return metadataCache.get(res);
+        }
+        MetadataSectionChisel ret;
+        metadataCache.put(res, ret = getResource(res).getMetadata(MetadataSectionChisel.SECTION_NAME));
+        return ret;
+    }
+    
+    public static @Nullable MetadataSectionChisel getMetadata(TextureAtlasSprite sprite) {
+        return getMetadata(spriteToAbsolute(toResourceLocation(sprite)));
+    }
+    
+    public static void invalidateCaches() {
+        metadataCache.clear();
     }
 }

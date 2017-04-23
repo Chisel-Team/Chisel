@@ -84,7 +84,7 @@ public class ModelChisel implements IModelChisel {
         }
         textureDependencies = new HashSet<>();
         for (ResourceLocation rl : textures) {
-            MetadataSectionChisel.V1 meta = ClientUtil.getResource(ClientUtil.spriteToAbsolute(rl)).getMetadata(MetadataSectionChisel.SECTION_NAME);
+            MetadataSectionChisel meta = ClientUtil.getMetadata(ClientUtil.spriteToAbsolute(rl));
             textureDependencies.add(rl);
             if (meta != null) {
                 textureDependencies.addAll(Arrays.asList(meta.getAdditionalTextures()));
@@ -131,6 +131,11 @@ public class ModelChisel implements IModelChisel {
     @Override
     public IChiselFace getDefaultFace() {
         return null;
+    }
+    
+    @Override
+    public TextureAtlasSprite getSprite(ResourceLocation resourceLocation) {
+        return spritecache.get(resourceLocation);
     }
 
     public boolean canRenderInLayer(BlockRenderLayer layer) {

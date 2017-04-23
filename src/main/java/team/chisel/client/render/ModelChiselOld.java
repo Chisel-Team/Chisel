@@ -153,6 +153,11 @@ public class ModelChiselOld implements IModelChisel {
         return stateMap.getOrDefault(state, modelObj);
     }
     
+    @Override
+    public TextureAtlasSprite getSprite(ResourceLocation resourceLocation) {
+        return Minecraft.getMinecraft().getTextureMapBlocks().getMissingSprite();
+    }
+    
     public boolean canRenderInLayer(BlockRenderLayer layer) {
         return ((layers >> layer.ordinal()) & 1) == 1;
     }
