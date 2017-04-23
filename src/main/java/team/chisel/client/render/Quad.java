@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.client.renderer.vertex.VertexFormatElement.EnumUsage;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.client.model.b3d.B3DModel.Texture;
 import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 
@@ -204,26 +205,24 @@ public class Quad {
 
     private boolean fullbright;
     
-    private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder) {
-        this(verts, uvs, builder, false);
+    private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder, @Nonnull TextureAtlasSprite sprite) {
+        this(verts, uvs, builder, sprite, false);
     }
 
-    private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder, boolean fullbright) {
+    private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder, @Nonnull TextureAtlasSprite sprite, boolean fullbright) {
         this.vertPos = verts;
         this.vertUv = uvs;
         this.builder = builder;
-        this.uvs = new UVs(uvs);
+        this.uvs = new UVs(sprite, uvs);
         this.fullbright = fullbright;
     }
     
     private Quad(Vector3f[] verts, UVs uvs, Builder builder) {
-        this(verts, uvs.vectorize(), builder);
-        this.uvs = new UVs(uvs.getSprite(), vertUv);
+        this(verts, uvs.vectorize(), builder, uvs.getSprite());
     }
 
     private Quad(Vector3f[] verts, UVs uvs, Builder builder, boolean fullbright) {
-        this(verts, uvs.vectorize(), builder, fullbright);
-        this.uvs = new UVs(uvs.getSprite(), vertUv);
+        this(verts, uvs.vectorize(), builder, uvs.getSprite(), fullbright);
     }
 
     public void compute() {
@@ -350,8 +349,7 @@ public class Quad {
             uvs[i] = new Vector2f(lerp(s.getMinU(), s.getMaxU(), uvs[i].x), lerp(s.getMinV(), s.getMaxV(), uvs[i].y));
         }
 
-        Quad ret = new Quad(vertPos, uvs, builder, fullbright);
-        ret.uvs = new UVs(getUvs().getSprite(), ret.vertUv);
+        Quad ret = new Quad(vertPos, uvs, builder, getUvs().getSprite(), fullbright);
         return ret;
     }
 
@@ -368,7 +366,7 @@ public class Quad {
         for (int i = 0; i < 4; i++) {
             uvs[i] = vertUv[(i + start) % 4];
         }
-        return new Quad(vertPos, uvs, builder, fullbright);
+        return new Quad(vertPos, uvs, builder, getUvs().getSprite(), fullbright);
     }
     
     public BakedQuad rebake() {
@@ -433,7 +431,7 @@ public class Quad {
     }
     
     public static Quad from(BakedQuad baked) {
-        Builder b = new Builder(baked.getFormat());
+        Builder b = new Builder(baked.getFormat(), baked.getSprite());
         //Chisel.debug("Format: " + baked.getFormat().toString());
         baked.pipe(b);
         return b.build().derotate(); // for now we will ignore rotated UVs
@@ -444,6 +442,8 @@ public class Quad {
 
         @Getter
         private final VertexFormat vertexFormat;
+        @Getter
+        private final TextureAtlasSprite sprite;
 
         @Setter
         private int quadTint;
@@ -467,7 +467,7 @@ public class Quad {
         public Quad build() {
             Vector3f[] verts = fromData(data.get(EnumUsage.POSITION), 3); 
             Vector2f[] uvs = fromData(data.get(EnumUsage.UV), 2);
-            return new Quad(verts, uvs, this);
+            return new Quad(verts, uvs, this, getSprite());
         }
 
         @SuppressWarnings("unchecked")

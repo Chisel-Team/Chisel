@@ -32,8 +32,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.client.ClientUtil;
-import team.chisel.client.render.ModelChisel;
-import team.chisel.client.render.ModelChiselBlock;
+import team.chisel.client.render.ModelChiselOld;
+import team.chisel.client.render.ModelChiselBlockOld;
 import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.PropertyAnyInteger;
 

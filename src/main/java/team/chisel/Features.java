@@ -2809,6 +2809,15 @@ public enum Features {
             registerIngotUncraftRecipe("Tin");
         }
     },
+    
+    TEST_BLOCK {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            factory.newBlock(Material.ROCK, "testblock", provider)
+                .newVariation("test_block")
+                .build();
+        }
+    },
 
     TYRIAN {
         @Override

@@ -6,11 +6,8 @@ import lombok.SneakyThrows;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import team.chisel.client.render.ModelChiselBlock;
+import team.chisel.client.render.ModelChiselBlockOld;
 import team.chisel.common.util.ProfileUtil;
 
 public class ChiselCoreMethods {
@@ -22,8 +19,8 @@ public class ChiselCoreMethods {
         IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
 
         boolean ret;
-        if (model instanceof ModelChiselBlock) {
-            ret = ((ModelChiselBlock)model).getModel().canRenderInLayer(layer);
+        if (model instanceof ModelChiselBlockOld) {
+            ret = ((ModelChiselBlockOld)model).getModel().canRenderInLayer(layer);
         } else {
             ret = state.getBlock().canRenderInLayer(layer);
         }

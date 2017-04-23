@@ -1,6 +1,6 @@
 package team.chisel.api.render;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 import javax.annotation.Nullable;
@@ -25,7 +25,7 @@ public class RenderContextList {
     private final Map<IBlockRenderType, IBlockRenderContext> contextMap = Maps.newIdentityHashMap();
     private final TLongSet serialized = new TLongHashSet();
 
-    public RenderContextList(IBlockState state, List<IChiselTexture<?>> textures, IBlockAccess world, BlockPos pos) {
+    public RenderContextList(IBlockState state, Collection<IChiselTexture<?>> textures, IBlockAccess world, BlockPos pos) {
         this.state = state;
         
         for (IChiselTexture<?> tex : textures) {

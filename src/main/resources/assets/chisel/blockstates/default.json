@@ -2504,6 +2504,7 @@
      "voidstone/runes/purple":[{"model":"ctm:chisel:voidstone/runes/purple"}],
      "voidstone/runes/red":[{"model":"ctm:chisel:voidstone/runes/red"}],
      "voidstone/runes/white":[{"model":"ctm:chisel:voidstone/runes/white"}],
-     "voidstone/runes/yellow":[{"model":"ctm:chisel:voidstone/runes/yellow"}]
+     "voidstone/runes/yellow":[{"model":"ctm:chisel:voidstone/runes/yellow"}],
+     "testblock/test_block":[{"model":"chisel:testblock/test_block"}]
     }
 }

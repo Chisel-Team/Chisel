@@ -14,6 +14,7 @@ import team.chisel.Chisel;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.client.render.ModelLoaderChisel;
+import team.chisel.client.render.texture.MetadataSectionChisel;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.init.TextureTypeRegistry;
 
@@ -27,6 +28,8 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
+        
+        Minecraft.getMinecraft().metadataSerializer_.registerMetadataSectionType(new MetadataSectionChisel.Serializer(), MetadataSectionChisel.class);
         
         ModelLoaderRegistry.registerLoader(new ModelLoaderChisel());
         

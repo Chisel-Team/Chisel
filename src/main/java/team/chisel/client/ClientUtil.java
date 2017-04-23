@@ -1,14 +1,19 @@
 package team.chisel.client;
 
+import java.io.IOException;
 import java.util.Random;
 
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
+import com.google.common.base.Throwables;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleDigging;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.IResource;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -98,6 +103,28 @@ public class ClientUtil {
                     ;
                 }
             }
+        }
+    }
+    
+    public static IResource getResource(TextureAtlasSprite sprite) {
+        return getResource(spriteToAbsolute(new ResourceLocation(sprite.getIconName())));
+    }
+    
+    public static ResourceLocation spriteToAbsolute(ResourceLocation sprite) {
+        if (!sprite.getResourcePath().startsWith("textures/")) {
+            sprite = new ResourceLocation(sprite.getResourceDomain(), "textures/" + sprite.getResourcePath());
+        }
+        if (!sprite.getResourcePath().endsWith(".png")) {
+            sprite = new ResourceLocation(sprite.getResourceDomain(), sprite.getResourcePath() + ".png");
+        }
+        return sprite;
+    }
+    
+    public static IResource getResource(ResourceLocation res) {
+        try {
+            return Minecraft.getMinecraft().getResourceManager().getResource(res);
+        } catch (IOException e) {
+            throw Throwables.propagate(e);
         }
     }
 }

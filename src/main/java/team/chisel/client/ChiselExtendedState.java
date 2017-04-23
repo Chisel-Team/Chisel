@@ -23,6 +23,7 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.api.render.IChiselTexture;
+import team.chisel.api.render.IModelChisel;
 import team.chisel.api.render.RenderContextList;
 import team.chisel.client.render.ModelChisel;
 import team.chisel.common.util.ProfileUtil;
@@ -75,7 +76,7 @@ public class ChiselExtendedState extends BlockStateBase implements IExtendedBloc
     }
     
     @SuppressWarnings("null")
-    public RenderContextList getContextList(IBlockState state, ModelChisel model) {
+    public RenderContextList getContextList(IBlockState state, IModelChisel model) {
         if (ctxCache == null) {
             ctxCache = new RenderContextList(state, model.getChiselTextures(), world, pos);
         }

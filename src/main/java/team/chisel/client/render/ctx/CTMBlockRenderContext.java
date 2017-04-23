@@ -6,11 +6,12 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.api.render.IBlockRenderContext;
-import team.chisel.client.render.ModelChiselBlock;
+import team.chisel.client.render.ModelChiselBlockOld;
 import team.chisel.client.render.RegionCache;
 import team.chisel.client.render.ctm.CTM;
 
@@ -40,8 +41,11 @@ public class CTMBlockRenderContext implements IBlockRenderContext {
     }
     
     protected CTM createCTM(@Nonnull IBlockState state) {
-        ModelChiselBlock model = (ModelChiselBlock) Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
-        return CTM.getInstance().ignoreStates(model.getModel().ignoreStates());
+        IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
+        if (model instanceof ModelChiselBlockOld) {
+            return CTM.getInstance().ignoreStates(((ModelChiselBlockOld)model).getModel().ignoreStates());
+        }
+        return CTM.getInstance();
     }
 
     public CTM getCTM(EnumFacing face) {

@@ -34,14 +34,14 @@ public enum ModelCache {
         TLongSet serializedContext;
     }
 
-    private static final Cache<State, ModelChiselBlock> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(500).<State, ModelChiselBlock>build();
+    private static final Cache<State, ModelChiselBlockOld> modelcache = CacheBuilder.newBuilder().expireAfterAccess(1, TimeUnit.MINUTES).maximumSize(500).<State, ModelChiselBlockOld>build();
     
     // TODO test if this invalidation strategy works. Otherwise switch to event handler invalidation.
     private static final Cache<Pair<IBlockAccess, BlockPos>, State> statecache = CacheBuilder.newBuilder().expireAfterWrite(100, TimeUnit.MILLISECONDS).build();
     
     @SneakyThrows
     @Nonnull
-    ModelChiselBlock getModel(@Nonnull State state, @Nonnull Callable<ModelChiselBlock> loader) {
+    ModelChiselBlockOld getModel(@Nonnull State state, @Nonnull Callable<ModelChiselBlockOld> loader) {
         return modelcache.get(state, loader);
     }
     
