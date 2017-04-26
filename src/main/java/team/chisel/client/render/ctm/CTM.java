@@ -277,10 +277,10 @@ public class CTM {
      *            The {@link EnumFacing side} of the block to check for connection status. This is <i>not</i> the direction to check in.
      * @return True if the given block can connect to the given location on the given side.
      */
-    public boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing dir) {
+    public boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing side, Dir dir) {
 
         IBlockState state = world.getBlockState(current);
-        return isConnected(world, current, connection, dir, state);
+        return isConnected(world, current, connection, side, dir, state);
     }
 
     /**
@@ -298,18 +298,18 @@ public class CTM {
      * @return True if the given block can connect to the given location on the given side.
      */
     @SuppressWarnings({ "unused", "null" })
-    public boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing dir, IBlockState state) {
+    public boolean isConnected(IBlockAccess world, BlockPos current, BlockPos connection, EnumFacing side, Dir dir, IBlockState state) {
 
 //      if (CTMLib.chiselLoaded() && connectionBlocked(world, x, y, z, dir.ordinal())) {
 //          return false;
 //      }
       
-        BlockPos pos2 = connection.add(dir.getDirectionVec());
+        BlockPos pos2 = connection.add(side.getDirectionVec());
 
         boolean disableObscured = disableObscuredFaceCheck.or(disableObscuredFaceCheckConfig);
 
-        IBlockState con = getBlockOrFacade(world, connection, dir);
-        IBlockState obscuring = disableObscured ? null : getBlockOrFacade(world, pos2, dir);
+        IBlockState con = getBlockOrFacade(world, connection, side, dir, state);
+        IBlockState obscuring = disableObscured ? null : getBlockOrFacade(world, pos2, side, dir, state);
 
         // bad API user
         if (con == null) {
@@ -337,10 +337,10 @@ public class CTM {
 //        return false;
 //    }
 
-	public static IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, @Nullable EnumFacing side) {
+	public static IBlockState getBlockOrFacade(IBlockAccess world, BlockPos pos, @Nullable EnumFacing side, Dir dir, IBlockState neighbor) {
 		IBlockState state = world.getBlockState(pos);
 		if (state.getBlock() instanceof IFacade) {
-			return ((IFacade) state.getBlock()).getFacade(world, pos, side);
+			return ((IFacade) state.getBlock()).getFacade(world, pos, side, dir, neighbor);
 		}
 		return state;
 	}

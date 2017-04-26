@@ -63,7 +63,7 @@ public enum Dir {
      * @return True if the block is connected in the given Dir, false otherwise.
      */
     public boolean isConnected(CTM ctm, IBlockAccess world, BlockPos pos, EnumFacing side) {
-        return ctm.isConnected(world, pos, getConnection(pos, side), side);
+        return ctm.isConnected(world, pos, getConnection(pos, side), side, this);
     }
 
     /**
@@ -82,7 +82,7 @@ public enum Dir {
      * @return True if the block is connected in the given Dir, false otherwise.
      */
     public boolean isConnected(CTM ctm, IBlockAccess world, BlockPos pos, EnumFacing side, IBlockState state) {
-        return ctm.isConnected(world, pos, getConnection(pos, side), side, state);
+        return ctm.isConnected(world, pos, getConnection(pos, side), side, this, state);
     }
     
     @SuppressWarnings("null")
