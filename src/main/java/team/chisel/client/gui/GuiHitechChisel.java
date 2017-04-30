@@ -270,7 +270,7 @@ public class GuiHitechChisel extends GuiChisel {
         NBTUtil.setHitechTarget(stack, Optional.fromNullable(containerHitech.getTarget()).transform(s -> s.slotNumber).or(-1));
         NBTUtil.setHitechRotate(stack, buttonRotate.rotate());
 
-        Chisel.network.sendToServer(new PacketChiselNBT(NBTUtil.getChiselTag(containerHitech.getChisel()), containerHitech.getChiselSlot()));
+        Chisel.network.sendToServer(new PacketHitechSettings(containerHitech.getChisel(), containerHitech.getChiselSlot()));
     }
 
     private boolean isShiftDown() {
