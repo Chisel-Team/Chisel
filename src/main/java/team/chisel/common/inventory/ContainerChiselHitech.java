@@ -27,12 +27,12 @@ public class ContainerChiselHitech extends ContainerChisel {
         super(inventoryplayer, inv, hand);
         
         int selectionSlot = NBTUtil.getHitechSelection(chisel);
-        if (selectionSlot >= 0) {
+        if (selectionSlot >= inv.getSizeInventory()) {
             setSelection(getSlot(selectionSlot));
         }
         
         int targetSlot = NBTUtil.getHitechTarget(chisel);
-        if (targetSlot >= 0) {
+        if (targetSlot < inv.getSizeInventory() - 1) {
             setTarget(getSlot(targetSlot));
         }
     }
