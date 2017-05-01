@@ -161,10 +161,10 @@ public enum ConnectionLocations {
 
     public static List<ConnectionLocations> getConnections(IBlockAccess world, BlockPos pos, ConnectionLocations[] values){
         List<ConnectionLocations> locs = new ArrayList<>();
-        IBlockState state = world.getBlockState(pos);
         for (ConnectionLocations loc : values) {
             BlockPos second = loc.transform(pos);
-            if (state.equals(CTM.getBlockOrFacade(world, second, null))){
+            IBlockState state = CTM.getBlockOrFacade(world, pos, null, second);
+            if (state.equals(CTM.getBlockOrFacade(world, second, null, pos))){
                 locs.add(loc);
             }
         }
