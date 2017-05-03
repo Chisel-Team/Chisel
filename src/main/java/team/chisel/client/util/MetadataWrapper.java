@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static team.chisel.client.ClientUtil.getMetadata;
@@ -36,22 +37,30 @@ public final class MetadataWrapper implements IBakedModel {
     @SuppressWarnings({"ConstantConditions", "Convert2streamapi"})
     @Override
     public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
-        if (state != null && !state.getBlock().getUnlocalizedName().startsWith("chisel") && parent instanceof IModelChisel)
-            System.out.println("oh no");
         List<BakedQuad> parentQuads = parent.getQuads(state, side, rand);
         List<BakedQuad> filtered = Lists.newArrayList();
         if (parentQuads == null) return filtered;
-        for (BakedQuad quad : parentQuads) if (predicateQuad(quad)) filtered.add(quad);
+        for (BakedQuad quad : parentQuads) {
+            String type = getType(quad);
+            if (type != null) {
+                if (type.equals("no_shade")) {
+                    BakedQuad newQuad = new BakedQuad(quad.getVertexData(), quad.getTintIndex(), quad.getFace(), quad.getSprite(), false, quad.getFormat());
+                    filtered.add(newQuad);
+                } else filtered.add(quad);
+            }
+        }
         return filtered;
     }
 
-    private boolean predicateQuad(BakedQuad quad) {
+    private String getType(BakedQuad quad) {
         try {
             MetadataSectionChisel metadata = ClientUtil.getMetadata(quad.getSprite());
-            return metadata != null && metadata.isGlow();
+            if (metadata != null)
+                return metadata.getGlowType();
         } catch (RuntimeException e) {
-            return false;
+            // NO-OP
         }
+        return null;
     }
 
     @Override

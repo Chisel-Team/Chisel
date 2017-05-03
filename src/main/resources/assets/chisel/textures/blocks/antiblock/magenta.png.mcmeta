@@ -1,6 +1,6 @@
 {
     "ctm": {
         "ctm_version": 1,
-        "glow": true
+        "glow": "no_shade"
     }
 }
