@@ -59,6 +59,8 @@ public class GlowRenderer {
     }
 
     public static boolean glow(BlockModelRenderer blockModelRenderer, IBlockAccess world, IBakedModel model, IBlockState state, BlockPos pos, VertexBuffer buf) {
+        if (!(model instanceof AbstractChiselBakedModel)) return false;
+        
         IBakedModel newModel = createNewModel(model);
 
         boolean prev = ForgeModContainer.forgeLightPipelineEnabled;
