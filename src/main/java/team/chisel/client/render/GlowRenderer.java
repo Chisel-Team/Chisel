@@ -12,16 +12,12 @@ import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import team.chisel.client.util.BlockStateWrapper;
+import team.chisel.client.ChiselExtendedState;
 import team.chisel.client.util.MetadataWrapper;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author WireSegal
@@ -46,12 +42,6 @@ public class GlowRenderer {
     }
 
     private static final ThreadLocal<MetadataWrapper> wrapper = ThreadLocal.withInitial(MetadataWrapper::new);
-    private static final ThreadLocal<BlockStateWrapper> stateWrapper = ThreadLocal.withInitial(() -> new BlockStateWrapper() {
-        @Override
-        public int getPackedLightmapCoords(IBlockAccess source, BlockPos pos) {
-            return 0xF000F0;
-        }
-    });
 
     private static IBakedModel createNewModel(IBakedModel model) {
         return wrapper.get().withParent(model);
@@ -75,7 +65,14 @@ public class GlowRenderer {
 
         boolean prev = ForgeModContainer.forgeLightPipelineEnabled;
         ForgeModContainer.forgeLightPipelineEnabled = false;
-        boolean ret = blockModelRenderer.renderModel(world, newModel, stateWrapper.get().withParent(state), pos, buf, true);
+        IBlockState wrapped = new ChiselExtendedState(state, world, pos) {
+            @Override
+            public int getPackedLightmapCoords(IBlockAccess source, BlockPos pos) {
+                return 0xF000F0;
+            }
+        };
+
+        boolean ret = blockModelRenderer.renderModel(world, newModel, wrapped, pos, buf, true);
         ForgeModContainer.forgeLightPipelineEnabled = prev;
         return ret;
     }
