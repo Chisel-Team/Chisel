@@ -23,8 +23,6 @@ import com.google.common.collect.MultimapBuilder;
 import com.google.common.collect.Table;
 import com.google.common.collect.Tables;
 
-import static team.chisel.client.render.AbstractChiselBakedModel.*;
-
 import gnu.trove.set.TLongSet;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

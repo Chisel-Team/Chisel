@@ -29,6 +29,8 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
     public abstract int getVersion();
     
     public abstract IBlockRenderType getType();
+
+    public abstract boolean isGlow();
     
     public abstract BlockRenderLayer getLayer();
     
@@ -41,6 +43,7 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
         private IBlockRenderType type;
         private BlockRenderLayer layer;
         private ResourceLocation[] additionalTextures;
+        private boolean glow;
 
         @Override
         public int getVersion() {
@@ -86,6 +89,14 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
                     }
                 }
             }
+
+            if (obj.has("glow")) {
+                JsonElement glowEle = obj.get("glow");
+                if (glowEle.isJsonPrimitive()) {
+                    ret.glow = glowEle.getAsJsonPrimitive().getAsBoolean();
+                }
+            }
+
             return ret;
         }
     }
