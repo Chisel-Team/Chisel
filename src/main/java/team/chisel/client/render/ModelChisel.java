@@ -7,6 +7,13 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
@@ -32,11 +39,6 @@ import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.common.util.json.JsonHelper;
 
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
 
 public class ModelChisel implements IModel {
 
@@ -51,6 +53,10 @@ public class ModelChisel implements IModel {
     @Getter
     @Accessors(fluent = true)
     private boolean ignoreStates;
+    
+    @Getter
+    @Accessors(fluent = true)
+    private boolean ambientOcclusion = true;
     
     private transient IChiselFace faceObj;
     private transient Map<EnumFacing, IChiselFace> overridesObj = new EnumMap<>(EnumFacing.class);
@@ -87,6 +93,14 @@ public class ModelChisel implements IModel {
         layers = 0;
         for (IChiselTexture<?> tex : getChiselTextures()) {
             layers |= 1 << tex.getLayer().ordinal();
+        }
+        
+        JsonObject rawmodel = ModelLoaderChisel.INSTANCE.getJSON(model.getModelLocation()).getAsJsonObject();
+        if (rawmodel.has("ambientocclusion")) {
+            JsonElement ao = rawmodel.get("ambientocclusion");
+            if (ao.isJsonPrimitive() && ao.getAsJsonPrimitive().isBoolean()) {
+                this.ambientOcclusion = ao.getAsBoolean();
+            }
         }
         return new ModelChiselBlock(this);
     }

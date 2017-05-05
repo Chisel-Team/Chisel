@@ -147,7 +147,7 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 
     @Override
     public boolean isAmbientOcclusion() {
-        return model.getModel(null).isAmbientOcclusion();
+        return model.ambientOcclusion();
     }
 
     @Override

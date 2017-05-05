@@ -28,7 +28,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         
-        ModelLoaderRegistry.registerLoader(new ModelLoaderChisel());
+        ModelLoaderRegistry.registerLoader(ModelLoaderChisel.INSTANCE);
         
         ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselIron, 0, new ModelResourceLocation(Chisel.itemChiselIron.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselDiamond, 0, new ModelResourceLocation(Chisel.itemChiselDiamond.getRegistryName(), "inventory"));

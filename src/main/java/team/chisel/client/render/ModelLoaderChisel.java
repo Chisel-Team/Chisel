@@ -21,7 +21,9 @@ import net.minecraftforge.client.model.ICustomModelLoader;
 import net.minecraftforge.client.model.IModel;
 import team.chisel.Chisel;
 
-public class ModelLoaderChisel implements ICustomModelLoader {
+public enum ModelLoaderChisel implements ICustomModelLoader {
+    
+    INSTANCE;
 
     private static final String DEFAULT_MODEL = "{\"model\": { \"model\": \"cube\" }, \"face\":\"%s\"}";
     
@@ -59,8 +61,12 @@ public class ModelLoaderChisel implements ICustomModelLoader {
     }
     
     @SuppressWarnings("null")
-    private @Nonnull JsonElement getJSON(ResourceLocation modelLocation) {
-        ResourceLocation absolute = new ResourceLocation(modelLocation.getResourceDomain(), modelLocation.getResourcePath() + ".json");
+    public @Nonnull JsonElement getJSON(ResourceLocation modelLocation) {
+        String path = modelLocation.getResourcePath() + ".json";
+        if (!path.startsWith("models/")) {
+            path = "models/" + path;
+        }
+        ResourceLocation absolute = new ResourceLocation(modelLocation.getResourceDomain(), path);
 
         try {
             IResource resource = manager.getResource(absolute);
