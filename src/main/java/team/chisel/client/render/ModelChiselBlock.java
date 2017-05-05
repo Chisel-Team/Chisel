@@ -147,12 +147,12 @@ public class ModelChiselBlock implements IPerspectiveAwareModel {
 
     @Override
     public boolean isAmbientOcclusion() {
-        return true;
+        return model.getModel(null).isAmbientOcclusion();
     }
 
     @Override
     public boolean isGui3d() {
-        return true;
+        return model.getModel(null).isGui3d();
     }
 
     @Override
