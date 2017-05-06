@@ -1,4 +1,5 @@
 {
     "type":"SCTM",
-    "layer":"CUTOUT"
+    "layer":"CUTOUT",
+    "fullbright":true
 }
