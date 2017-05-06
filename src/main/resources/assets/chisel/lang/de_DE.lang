@@ -2589,8 +2589,8 @@ tile.chisel.templemossy.tiles.desc.1=Mittelgroße Fliesen
 tile.chisel.templemossy.smalltiles.desc.1=Kleine Fliesen
 tile.chisel.templemossy.tiles-light.desc.1=Leichte Mittelgroße Fliesen
 tile.chisel.templemossy.smalltiles-light.desc.1=Kleine Leichte Fliesen
-tile.chisel.templemossy.stand-creeper.desc.1=Creeper-Stand
-tile.chisel.templemossy.stand-mosaic.desc.1=Mosaik-Stand
+tile.chisel.templemossy.stand-creeper.desc.1=Creeperstand
+tile.chisel.templemossy.stand-mosaic.desc.1=Mosaikstand
 
 tile.chisel.blockTin.name=Zinnblock
 tile.chisel.blockTin.caution.desc.1=Vorsicht
