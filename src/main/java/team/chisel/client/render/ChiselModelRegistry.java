@@ -91,7 +91,7 @@ public enum ChiselModelRegistry implements Reference {
         Map<ModelResourceLocation, IModel> stateModels = ReflectionHelper.getPrivateValue(ModelLoader.class, event.getModelLoader(), "stateModels");
         for (ModelResourceLocation mrl : event.getModelRegistry().getKeys()) {
             IModel model = stateModels.get(mrl);
-            if (!(model instanceof IModelChisel) && Collections.disjoint(model.getDependencies(), ModelLoaderChisel.parsedLocations)) {
+            if (model != null && !(model instanceof IModelChisel) && Collections.disjoint(model.getDependencies(), ModelLoaderChisel.parsedLocations)) {
                 Collection<ResourceLocation> textures = model.getTextures();
                 // FORGE WHY
                 if (multipartModelClass.isAssignableFrom(model.getClass())) {

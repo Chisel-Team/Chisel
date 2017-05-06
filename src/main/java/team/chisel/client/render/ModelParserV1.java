@@ -5,12 +5,12 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import lombok.SneakyThrows;
 import net.minecraft.client.renderer.block.model.ModelBlock;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
@@ -21,7 +21,8 @@ import team.chisel.api.render.IModelParser;
 public class ModelParserV1 implements IModelParser {
     
     private static final Deque<ResourceLocation> _loadingModels = ReflectionHelper.getPrivateValue(ModelLoaderRegistry.class, null, "loadingModels");
-
+    private static final Gson GSON = new Gson();
+    
     @Override
     @Nonnull
     @SneakyThrows
@@ -33,7 +34,7 @@ public class ModelParserV1 implements IModelParser {
         IModel vanillamodel = ModelLoaderRegistry.getModel(new ResourceLocation(res.getResourceDomain(), res.getResourcePath().replace("models/", "")));
         _loadingModels.addLast(prev);
 
-        Map<String, String[]> faces = ModelBlock.SERIALIZER.fromJson(json.getAsJsonObject("faces"), new TypeToken<Map<String, String[]>>(){}.getType());
+        Map<String, String[]> faces = GSON.fromJson(json.getAsJsonObject("faces"), new TypeToken<Map<String, String[]>>(){}.getType());
         return new ModelChisel(modelinfo, vanillamodel, faces);
     }
 }

@@ -11,19 +11,11 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import net.minecraft.client.renderer.block.model.BlockFaceUV;
-import net.minecraft.client.renderer.block.model.BlockPart;
-import net.minecraft.client.renderer.block.model.BlockPartFace;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.block.model.ItemOverride;
-import net.minecraft.client.renderer.block.model.ItemTransformVec3f;
-import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.client.renderer.block.model.ModelBlockDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.IResource;
@@ -39,17 +31,7 @@ import team.chisel.api.render.IModelParser;
 public class ModelLoaderChisel implements ICustomModelLoader {
 
     private static final String DEFAULT_MODEL = "{\"model\": { \"model\": \"cube\" }, \"face\":\"%s\"}";
-    
-    // This comes from ModelBlock#SERIALIZER
-    static final Gson SERIALIZER = new GsonBuilder()
-            .registerTypeAdapter(ModelBlock.class, new ModelBlock.Deserializer())
-            .registerTypeAdapter(BlockPart.class, new BlockPart.Deserializer())
-            .registerTypeAdapter(BlockPartFace.class, new BlockPartFace.Deserializer())
-            .registerTypeAdapter(BlockFaceUV.class, new BlockFaceUV.Deserializer())
-            .registerTypeAdapter(ItemTransformVec3f.class, new ItemTransformVec3f.Deserializer())
-            .registerTypeAdapter(ItemCameraTransforms.class, new ItemCameraTransforms.Deserializer())
-            .registerTypeAdapter(ItemOverride.class, new ItemOverride.Deserializer()).create();
-    
+        
     private static final Map<Integer, IModelParser> parserVersions = ImmutableMap.of(1, new ModelParserV1());
 
     private final Gson gson = ModelBlockDefinition.GSON;
