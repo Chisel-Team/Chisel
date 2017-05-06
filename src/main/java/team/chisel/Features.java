@@ -1,12 +1,30 @@
 package team.chisel;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import static team.chisel.common.config.Configurations.concreteVelocityMult;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockCarpet;
+import net.minecraft.block.BlockColored;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockPrismarine;
+import net.minecraft.block.BlockQuartz;
+import net.minecraft.block.BlockRedSandstone;
+import net.minecraft.block.BlockRotatedPillar;
+import net.minecraft.block.BlockSandStone;
+import net.minecraft.block.BlockStainedGlass;
+import net.minecraft.block.BlockStone;
+import net.minecraft.block.BlockStoneBrick;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -37,18 +55,17 @@ import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.sound.ChiselSoundTypes;
-import team.chisel.common.block.*;
+import team.chisel.common.block.BlockCarvable;
+import team.chisel.common.block.BlockCarvableAltarComponent;
+import team.chisel.common.block.BlockCarvableCarpet;
+import team.chisel.common.block.BlockCarvableFalling;
+import team.chisel.common.block.BlockCarvableTranquility;
+import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.GenerationHandler.WorldGenInfo;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import static team.chisel.common.config.Configurations.concreteVelocityMult;
 
 public enum Features {
 

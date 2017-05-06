@@ -88,7 +88,7 @@ public class ModelLoaderChisel implements ICustomModelLoader {
     @Override
     public IModel loadModel(ResourceLocation modelLocation) throws IOException {
         loading.add(modelLocation);
-        loadedModels.computeIfAbsent(modelLocation, this::loadFromFile);
+        loadedModels.computeIfAbsent(modelLocation, res -> loadFromFile(res, true));
         IModelChisel model = loadedModels.get(modelLocation);
         if (model != null) {
             model.load();
@@ -113,8 +113,10 @@ public class ModelLoaderChisel implements ICustomModelLoader {
             return JsonNull.INSTANCE;
         });
     }
+    
+    public static final Set<ResourceLocation> parsedLocations = new HashSet<>();
 
-    private IModelChisel loadFromFile(ResourceLocation res) {
+    private IModelChisel loadFromFile(ResourceLocation res, boolean forLoad) {
         if (res.getResourceDomain().equals("ctm")) {
             @Nonnull String domain = res.getResourcePath();
             String path = "models/block/" + domain.substring(domain.indexOf(":") + 1, domain.length());
@@ -123,6 +125,9 @@ public class ModelLoaderChisel implements ICustomModelLoader {
             res = new ResourceLocation(domain, path);
         }
         
+        if (forLoad) {
+            parsedLocations.add(new ResourceLocation(res.getResourceDomain(), res.getResourcePath().replace("models/", "")));
+        }
         JsonElement json = getJSON(res);
 
         if (json.isJsonObject()) {
@@ -139,7 +144,7 @@ public class ModelLoaderChisel implements ICustomModelLoader {
                 if (ctm.isJsonObject()) {
                     obj = ctm.getAsJsonObject();
                 } else if (ctm.isJsonPrimitive() && ctm.getAsString().equals("parent")) {
-                    return loadFromFile(new ResourceLocation(obj.get("parent").getAsString()));
+                    return loadFromFile(new ResourceLocation(obj.get("parent").getAsString()), true);
                 }
             }
             return gson.fromJson(obj, ModelChiselOld.class);

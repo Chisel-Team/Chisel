@@ -1,5 +1,6 @@
 package team.chisel.client.render;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.google.common.collect.ObjectArrays;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockRenderLayer;
@@ -50,12 +52,15 @@ public class ModelChiselBlock extends AbstractChiselBakedModel {
                     quads = ret.genQuads.get(layer);
                 }
                 for (BakedQuad q : parentQuads) {
-                    TextureAtlasSprite sprite = this.getModel().getSprite(ClientUtil.toResourceLocation(q.getSprite()));
+                    TextureAtlasSprite sprite = q.getSprite();
                     if (sprite == null) {
                         continue;
                     }
 
-                    MetadataSectionChisel chiselmeta = ClientUtil.getMetadata(sprite);
+                    MetadataSectionChisel chiselmeta = null;
+                    try {
+                        chiselmeta = ClientUtil.getMetadata(sprite);
+                    } catch (IOException e) {}
                     
                     if (chiselmeta == null) {
                         quads.add(q);

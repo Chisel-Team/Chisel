@@ -117,7 +117,7 @@ public class ClientUtil {
         return new ResourceLocation(sprite.getIconName());
     }
     
-    public static IResource getResource(TextureAtlasSprite sprite) {
+    public static IResource getResource(TextureAtlasSprite sprite) throws IOException {
         return getResource(spriteToAbsolute(toResourceLocation(sprite)));
     }
     
@@ -131,9 +131,13 @@ public class ClientUtil {
         return sprite;
     }
     
-    public static IResource getResource(ResourceLocation res) {
+    public static IResource getResource(ResourceLocation res) throws IOException {
+        return Minecraft.getMinecraft().getResourceManager().getResource(res);
+    }
+    
+    public static IResource getResourceUnsafe(ResourceLocation res) {
         try {
-            return Minecraft.getMinecraft().getResourceManager().getResource(res);
+            return getResource(res);
         } catch (IOException e) {
             throw Throwables.propagate(e);
         }
@@ -141,7 +145,7 @@ public class ClientUtil {
     
     private static final Map<ResourceLocation, MetadataSectionChisel> metadataCache = new HashMap<>();
 
-    public static @Nullable MetadataSectionChisel getMetadata(ResourceLocation res) {
+    public static @Nullable MetadataSectionChisel getMetadata(ResourceLocation res) throws IOException {
         // Note, semantically different from computeIfAbsent, as we DO care about keys mapped to null values
         if (metadataCache.containsKey(res)) {
             return metadataCache.get(res);
@@ -151,7 +155,7 @@ public class ClientUtil {
         return ret;
     }
     
-    public static @Nullable MetadataSectionChisel getMetadata(TextureAtlasSprite sprite) {
+    public static @Nullable MetadataSectionChisel getMetadata(TextureAtlasSprite sprite) throws IOException {
         return getMetadata(spriteToAbsolute(toResourceLocation(sprite)));
     }
     

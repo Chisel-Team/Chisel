@@ -27,6 +27,4 @@ public interface IModelChisel extends IModel {
 
     boolean canRenderInLayer(BlockRenderLayer layer);
 
-    TextureAtlasSprite getSprite(ResourceLocation resourceLocation);
-
 }

@@ -1,18 +1,34 @@
 package team.chisel.client.render;
 
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Map;
+
 import javax.annotation.Nonnull;
+
+import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.ModelBakeEvent;
+import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
+import team.chisel.api.render.IModelChisel;
+import team.chisel.client.ClientUtil;
+import team.chisel.client.render.texture.MetadataSectionChisel;
 import team.chisel.common.Reference;
 
 /**
@@ -51,5 +67,30 @@ public enum ChiselModelRegistry implements Reference {
         });
         // Nope
         ModelLoader.registerItemVariants(Item.getItemFromBlock(block));
+    }
+    
+    @SubscribeEvent(priority = EventPriority.LOWEST) // low priority to capture all event-registered models
+    public void onModelBake(ModelBakeEvent event) {
+        Map<ModelResourceLocation, IModel> stateModels = ReflectionHelper.getPrivateValue(ModelLoader.class, event.getModelLoader(), "stateModels");
+        for (ModelResourceLocation mrl : event.getModelRegistry().getKeys()) {
+            IModel model = stateModels.get(mrl);
+            if (!(model instanceof IModelChisel) && Collections.disjoint(model.getDependencies(), ModelLoaderChisel.parsedLocations)) {
+                for (ResourceLocation tex : model.getTextures()) {
+                    MetadataSectionChisel meta = null;
+                    try {
+                        meta = ClientUtil.getMetadata(ClientUtil.spriteToAbsolute(tex));
+                    } catch (IOException e) {} // Fallthrough
+                    if (meta != null) {
+                        event.getModelRegistry().putObject(mrl, wrap(model, event.getModelRegistry().getObject(mrl)));
+                    }
+                }
+            }
+        }
+    }
+
+    private @Nonnull IBakedModel wrap(IModel model, IBakedModel object) {
+        ModelChisel modelchisel = new ModelChisel(null, model, Collections.emptyMap());
+        modelchisel.setBakedparent(object);
+        return new ModelChiselBlock(modelchisel);
     }
 }
