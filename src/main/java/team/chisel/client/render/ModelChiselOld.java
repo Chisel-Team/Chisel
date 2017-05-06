@@ -139,6 +139,9 @@ public class ModelChiselOld implements IModelChisel {
 
     @Override
     public IBakedModel getModel(IBlockState state) {
+        if (state == null) {
+            return modelObj;
+        }
         if (state instanceof IExtendedBlockState) {
             state = ((IExtendedBlockState)state).getClean();
         }

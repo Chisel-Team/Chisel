@@ -1,19 +1,25 @@
 package team.chisel.client.render;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 
-import com.google.common.collect.Maps;
+import com.google.common.base.Throwables;
 
+import lombok.SneakyThrows;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.multipart.Selector;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -69,19 +75,39 @@ public enum ChiselModelRegistry implements Reference {
         ModelLoader.registerItemVariants(Item.getItemFromBlock(block));
     }
     
+    private static final Class<?> multipartModelClass;
+    static {
+        try {
+            multipartModelClass = Class.forName("net.minecraftforge.client.model.ModelLoader$MultipartModel");
+        } catch (ClassNotFoundException e) {
+            throw Throwables.propagate(e);
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
     @SubscribeEvent(priority = EventPriority.LOWEST) // low priority to capture all event-registered models
+    @SneakyThrows
     public void onModelBake(ModelBakeEvent event) {
         Map<ModelResourceLocation, IModel> stateModels = ReflectionHelper.getPrivateValue(ModelLoader.class, event.getModelLoader(), "stateModels");
         for (ModelResourceLocation mrl : event.getModelRegistry().getKeys()) {
             IModel model = stateModels.get(mrl);
             if (!(model instanceof IModelChisel) && Collections.disjoint(model.getDependencies(), ModelLoaderChisel.parsedLocations)) {
-                for (ResourceLocation tex : model.getTextures()) {
+                Collection<ResourceLocation> textures = model.getTextures();
+                // FORGE WHY
+                if (multipartModelClass.isAssignableFrom(model.getClass())) {
+                    Field _partModels = multipartModelClass.getDeclaredField("partModels");
+                    _partModels.setAccessible(true);
+                    Map<?, IModel> partModels = (Map<?, IModel>) _partModels.get(model);
+                    textures = partModels.values().stream().map(m -> m.getTextures()).flatMap(Collection::stream).collect(Collectors.toList());
+                }
+                for (ResourceLocation tex : textures) {
                     MetadataSectionChisel meta = null;
                     try {
                         meta = ClientUtil.getMetadata(ClientUtil.spriteToAbsolute(tex));
                     } catch (IOException e) {} // Fallthrough
                     if (meta != null) {
                         event.getModelRegistry().putObject(mrl, wrap(model, event.getModelRegistry().getObject(mrl)));
+                        break;
                     }
                 }
             }

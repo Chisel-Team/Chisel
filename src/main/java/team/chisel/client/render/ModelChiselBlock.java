@@ -62,7 +62,7 @@ public class ModelChiselBlock extends AbstractChiselBakedModel {
                         chiselmeta = ClientUtil.getMetadata(sprite);
                     } catch (IOException e) {}
                     
-                    if (chiselmeta == null) {
+                    if (!(state instanceof ChiselExtendedState) || chiselmeta == null) {
                         quads.add(q);
                     } else {
                         IBlockRenderType type = chiselmeta.getType();
