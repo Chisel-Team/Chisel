@@ -11,6 +11,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
 
+import lombok.*;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.cache.Cache;
@@ -23,14 +24,7 @@ import com.google.common.collect.MultimapBuilder;
 import com.google.common.collect.Table;
 import com.google.common.collect.Tables;
 
-import static team.chisel.client.render.AbstractChiselBakedModel.*;
-
 import gnu.trove.set.TLongSet;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import lombok.Value;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
