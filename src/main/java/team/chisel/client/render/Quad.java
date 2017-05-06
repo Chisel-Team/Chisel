@@ -375,9 +375,13 @@ public class Quad {
     private static final float FULL_BRIGHTNESS = (15f * 0x20) / 0xFFFF; // idk ask fry
     
     public BakedQuad rebake() {
-        VertexFormat format = new VertexFormat(this.builder.vertexFormat);
+        @Nonnull VertexFormat format = this.builder.vertexFormat;
         if (this.fullbright) {
-            format.addElement(DefaultVertexFormats.TEX_2S);
+            if (format == DefaultVertexFormats.ITEM) { // ITEM is convertable to BLOCK (replace normal+padding with lmap)
+                format = DefaultVertexFormats.BLOCK;
+            } else if (!format.getElements().contains(DefaultVertexFormats.TEX_2S)) { // Otherwise, this format is unknown, add TEX_2S if it does not exist
+                format = new VertexFormat(format).addElement(DefaultVertexFormats.TEX_2S);
+            }
         }
         
         UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
@@ -450,6 +454,7 @@ public class Quad {
     public static class Builder implements IVertexConsumer {
 
         @Getter
+        @Nonnull
         private final VertexFormat vertexFormat;
 
         @Setter
