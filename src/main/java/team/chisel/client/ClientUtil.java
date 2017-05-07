@@ -159,6 +159,14 @@ public class ClientUtil {
         return getMetadata(spriteToAbsolute(toResourceLocation(sprite)));
     }
     
+    public static @Nullable MetadataSectionChisel getMetadataUnsafe(TextureAtlasSprite sprite) {
+        try {
+            return getMetadata(sprite);
+        } catch (IOException e) {
+            throw Throwables.propagate(e);
+        }
+    }
+    
     public static void invalidateCaches() {
         metadataCache.clear();
     }

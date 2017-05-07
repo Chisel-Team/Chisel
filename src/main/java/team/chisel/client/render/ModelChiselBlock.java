@@ -52,28 +52,14 @@ public class ModelChiselBlock extends AbstractChiselBakedModel {
                     quads = ret.genQuads.get(layer);
                 }
                 for (BakedQuad q : parentQuads) {
-                    TextureAtlasSprite sprite = q.getSprite();
-                    if (sprite == null) {
-                        continue;
-                    }
+                    IChiselTexture<?> tex = this.getModel().getTexture(q.getSprite().getIconName());
 
-                    MetadataSectionChisel chiselmeta = null;
-                    try {
-                        chiselmeta = ClientUtil.getMetadata(sprite);
-                    } catch (IOException e) {}
-                    
-                    if (!(state instanceof ChiselExtendedState) || chiselmeta == null) {
+                    if (!(state instanceof ChiselExtendedState) || tex == null) {
                         quads.add(q);
                     } else {
-                        IBlockRenderType type = chiselmeta.getType();
+                        IBlockRenderType type = tex.getType();
                         ChiselExtendedState extstate = (ChiselExtendedState) state;
-                        // TODO VERY TEMPORARY
-                        IChiselTexture<?> tex = type.makeTexture(new TextureInfo(
-                                                    Arrays.stream(ObjectArrays.concat(new ResourceLocation(sprite.getIconName()), chiselmeta.getAdditionalTextures())).map(TextureSpriteCallback::new).toArray(TextureSpriteCallback[]::new), 
-                                                    Optional.empty(), 
-                                                    chiselmeta.getLayer(), 
-                                                    false
-                                                ));
+
                         IBlockRenderContext brc = type.getBlockRenderContext(extstate.getClean(), extstate.getWorld(), extstate.getPos(), tex);
                         quads.addAll(tex.transformQuad(q, brc, type.getQuadsPerSide()));
                     }

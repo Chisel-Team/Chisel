@@ -6,16 +6,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 
 import com.google.common.base.Function;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.ObjectArrays;
 
 import lombok.Setter;
 import net.minecraft.block.state.IBlockState;
@@ -32,6 +29,8 @@ import net.minecraftforge.common.model.TRSRTransformation;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.IModelChisel;
+import team.chisel.api.render.TextureInfo;
+import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.ClientUtil;
 import team.chisel.client.render.texture.MetadataSectionChisel;
 
@@ -47,7 +46,8 @@ public class ModelChisel implements IModelChisel {
     
     private transient byte layers;
 
-    private Multimap<ResourceLocation, IChiselTexture<?>> textures = HashMultimap.create();
+    private Map<String, IChiselTexture<?>> textures = new HashMap<>();
+    private boolean hasVanillaTextures;
     
     public ModelChisel(ModelBlock modelinfo, IModel parent, Map<String, String[]> textureLists) {
         this.modelinfo = modelinfo;
@@ -101,7 +101,30 @@ public class ModelChisel implements IModelChisel {
 
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
-        bakedparent = parent.bake(state, format, bakedTextureGetter);
+        bakedparent = parent.bake(state, format, rl -> {
+            TextureAtlasSprite sprite = bakedTextureGetter.apply(rl);
+            MetadataSectionChisel chiselmeta = null;
+            try {
+                chiselmeta = ClientUtil.getMetadata(sprite);
+            } catch (IOException e) {}
+            if (chiselmeta != null) {
+                final MetadataSectionChisel meta = chiselmeta;
+                textures.computeIfAbsent(sprite.getIconName(), s -> {
+                    // TODO VERY TEMPORARY
+                    IChiselTexture<?> tex = meta.getType().makeTexture(new TextureInfo(
+                            Arrays.stream(ObjectArrays.concat(new ResourceLocation(sprite.getIconName()), meta.getAdditionalTextures())).map(TextureSpriteCallback::new).toArray(TextureSpriteCallback[]::new), 
+                            Optional.empty(), 
+                            meta.getLayer(),
+                            false
+                    ));
+                    layers |= 1 << tex.getLayer().ordinal();
+                    return tex;
+                });
+            } else {
+                hasVanillaTextures = true;
+            }
+            return sprite;
+        });
         return new ModelChiselBlock(this);
     }
 
@@ -116,6 +139,11 @@ public class ModelChisel implements IModelChisel {
     @Override
     public Collection<IChiselTexture<?>> getChiselTextures() {
         return textures.values();
+    }
+    
+    @Override
+    public IChiselTexture<?> getTexture(String iconName) {
+        return textures.get(iconName);
     }
 
     @Override
@@ -135,7 +163,7 @@ public class ModelChisel implements IModelChisel {
     
     @Override
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return state.getBlock().getBlockLayer() == layer || ((layers >> layer.ordinal()) & 1) == 1;
+        return (hasVanillaTextures && state.getBlock().getBlockLayer() == layer) || ((layers >> layer.ordinal()) & 1) == 1;
     }
 
     @Override

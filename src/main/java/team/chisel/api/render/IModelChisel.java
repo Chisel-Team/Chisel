@@ -16,6 +16,8 @@ public interface IModelChisel extends IModel {
     void load();
 
     Collection<IChiselTexture<?>> getChiselTextures();
+    
+    IChiselTexture<?> getTexture(String iconName);
 
     IBakedModel getModel(IBlockState state);
 

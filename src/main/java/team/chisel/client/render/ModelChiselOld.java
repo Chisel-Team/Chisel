@@ -131,6 +131,11 @@ public class ModelChiselOld implements IModelChisel {
         }
         return ret;
     }
+    
+    @Override
+    public IChiselTexture<?> getTexture(String iconName) {
+        return null;
+    }
 
     @Override
     public IChiselFace getFace(EnumFacing facing) {
