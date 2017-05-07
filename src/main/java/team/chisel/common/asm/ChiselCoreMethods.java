@@ -20,7 +20,7 @@ public class ChiselCoreMethods {
 
         boolean ret;
         if (model instanceof AbstractChiselBakedModel) {
-            ret = ((AbstractChiselBakedModel)model).getModel().canRenderInLayer(layer);
+            ret = ((AbstractChiselBakedModel)model).getModel().canRenderInLayer(state, layer);
         } else {
             ret = state.getBlock().canRenderInLayer(layer);
         }

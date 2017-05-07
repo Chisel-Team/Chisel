@@ -132,8 +132,10 @@ public class ModelChisel implements IModelChisel {
     public IChiselFace getDefaultFace() {
         return null;
     }
-    public boolean canRenderInLayer(BlockRenderLayer layer) {
-        return ((layers >> layer.ordinal()) & 1) == 1;
+    
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+        return state.getBlock().getBlockLayer() == layer || ((layers >> layer.ordinal()) & 1) == 1;
     }
 
     @Override

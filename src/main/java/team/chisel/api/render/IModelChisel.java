@@ -25,6 +25,6 @@ public interface IModelChisel extends IModel {
 
     boolean ignoreStates();
 
-    boolean canRenderInLayer(BlockRenderLayer layer);
+    boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer);
 
 }

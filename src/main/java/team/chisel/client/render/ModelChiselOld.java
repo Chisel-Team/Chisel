@@ -156,7 +156,8 @@ public class ModelChiselOld implements IModelChisel {
         return stateMap.getOrDefault(state, modelObj);
     }
 
-    public boolean canRenderInLayer(BlockRenderLayer layer) {
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
         return ((layers >> layer.ordinal()) & 1) == 1;
     }
 }
