@@ -7,7 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.util.BlockRenderLayer;
-import team.chisel.client.render.ModelChiselBlockOld;
+import team.chisel.client.render.AbstractChiselBakedModel;
 import team.chisel.common.util.ProfileUtil;
 
 public class ChiselCoreMethods {
@@ -19,8 +19,8 @@ public class ChiselCoreMethods {
         IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state);
 
         boolean ret;
-        if (model instanceof ModelChiselBlockOld) {
-            ret = ((ModelChiselBlockOld)model).getModel().canRenderInLayer(layer);
+        if (model instanceof AbstractChiselBakedModel) {
+            ret = ((AbstractChiselBakedModel)model).getModel().canRenderInLayer(layer);
         } else {
             ret = state.getBlock().canRenderInLayer(layer);
         }
