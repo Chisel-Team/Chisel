@@ -1,10 +1,7 @@
 package team.chisel.client.render;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -13,22 +10,16 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.google.common.collect.ObjectArrays;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.IModelChisel;
 import team.chisel.api.render.RenderContextList;
-import team.chisel.api.render.TextureInfo;
-import team.chisel.api.render.TextureSpriteCallback;
 import team.chisel.client.ChiselExtendedState;
-import team.chisel.client.ClientUtil;
-import team.chisel.client.render.texture.MetadataSectionChisel;
 
 @ParametersAreNonnullByDefault
 public class ModelChiselBlock extends AbstractChiselBakedModel {
@@ -54,9 +45,9 @@ public class ModelChiselBlock extends AbstractChiselBakedModel {
                 for (BakedQuad q : parentQuads) {
                     IChiselTexture<?> tex = this.getModel().getTexture(q.getSprite().getIconName());
 
-                    if (!(state instanceof ChiselExtendedState) || tex == null) {
+                    if (!(state instanceof ChiselExtendedState) || (tex == null && layer == state.getBlock().getBlockLayer())) {
                         quads.add(q);
-                    } else {
+                    } else if (tex != null && layer == tex.getLayer()) {
                         IBlockRenderType type = tex.getType();
                         ChiselExtendedState extstate = (ChiselExtendedState) state;
 
