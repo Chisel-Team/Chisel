@@ -10,7 +10,10 @@ public class ChiselCorePlugin implements IFMLLoadingPlugin {
 
     @Override
     public String[] getASMTransformerClass() {
-        return new String[] { "team.chisel.common.asm.ChiselTransformer" };
+        return new String[] {
+                "team.chisel.common.asm.ChiselTransformer",
+                "team.chisel.common.asm.ChiselGlowTransformer"
+        };
     }
 
     @Override
