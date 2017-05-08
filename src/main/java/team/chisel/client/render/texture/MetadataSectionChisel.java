@@ -3,6 +3,8 @@ package team.chisel.client.render.texture;
 import java.lang.reflect.Type;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
@@ -12,8 +14,6 @@ import com.google.gson.JsonParseException;
 
 import lombok.Getter;
 import lombok.ToString;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.data.IMetadataSection;
 import net.minecraft.client.resources.data.IMetadataSectionSerializer;
 import net.minecraft.util.BlockRenderLayer;
@@ -22,9 +22,10 @@ import team.chisel.Chisel;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.common.init.TextureTypeRegistry;
 
+@ParametersAreNonnullByDefault
 public abstract class MetadataSectionChisel implements IMetadataSection {
     
-    public static final @Nonnull String SECTION_NAME = "ctm";
+    public static final String SECTION_NAME = "ctm";
     
     public abstract int getVersion();
     
@@ -38,9 +39,10 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
     @Getter
     public static class V1 extends MetadataSectionChisel {
         
-        private IBlockRenderType type;
-        private BlockRenderLayer layer;
-        private ResourceLocation[] additionalTextures;
+        @SuppressWarnings("null")
+        private IBlockRenderType type = TextureTypeRegistry.getType("NORMAL");
+        private BlockRenderLayer layer = BlockRenderLayer.SOLID;
+        private ResourceLocation[] additionalTextures = new ResourceLocation[0];
 
         @Override
         public int getVersion() {
@@ -53,9 +55,11 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
             if (obj.has("type")) {
                 JsonElement typeEle = obj.get("type");
                 if (typeEle.isJsonPrimitive() && typeEle.getAsJsonPrimitive().isString()) {
-                    ret.type = TextureTypeRegistry.getType(typeEle.getAsString());
-                    if (ret.type == null) {
+                    IBlockRenderType type = TextureTypeRegistry.getType(typeEle.getAsString());
+                    if (type == null) {
                         Chisel.logger.error("Invalid render type given: {}", typeEle);
+                    } else {
+                        ret.type = type;
                     }
                 }
             }
@@ -67,7 +71,6 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
                         ret.layer = BlockRenderLayer.valueOf(layerEle.getAsString());
                     } catch (IllegalArgumentException e) {
                         Chisel.logger.error("Invalid block layer given: {}", layerEle);
-                        ret.layer = BlockRenderLayer.SOLID;
                     }
                 }
             }
@@ -77,7 +80,6 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
                 if (texturesEle.isJsonArray()) {
                     JsonArray texturesArr = texturesEle.getAsJsonArray();
                     ret.additionalTextures = new ResourceLocation[texturesArr.size()];
-                    TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
                     for (int i = 0; i < texturesArr.size(); i++) {
                         JsonElement e = texturesArr.get(i);
                         if (e.isJsonPrimitive() && e.getAsJsonPrimitive().isString()) {
@@ -93,8 +95,8 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
     public static class Serializer implements IMetadataSectionSerializer<MetadataSectionChisel> {
 
         @Override
-        public MetadataSectionChisel deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            if (json.isJsonObject()) {
+        public @Nullable MetadataSectionChisel deserialize(@Nullable JsonElement json, @Nullable Type typeOfT, @Nullable JsonDeserializationContext context) throws JsonParseException {
+            if (json != null && json.isJsonObject()) {
                 JsonObject obj = json.getAsJsonObject();
                 if (obj.has("ctm_version")) {
                     JsonElement version = obj.get("ctm_version");
