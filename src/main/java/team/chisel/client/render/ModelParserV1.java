@@ -1,5 +1,6 @@
 package team.chisel.client.render;
 
+import java.util.Collections;
 import java.util.Deque;
 import java.util.Map;
 
@@ -35,6 +36,9 @@ public class ModelParserV1 implements IModelParser {
         _loadingModels.addLast(prev);
 
         Map<String, String[]> faces = GSON.fromJson(json.getAsJsonObject("faces"), new TypeToken<Map<String, String[]>>(){}.getType());
+        if (faces == null) {
+            faces = Collections.emptyMap();
+        }
         return new ModelChisel(modelinfo, vanillamodel, faces);
     }
 }
