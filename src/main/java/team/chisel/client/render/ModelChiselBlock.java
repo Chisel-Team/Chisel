@@ -6,14 +6,21 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
+import javax.vecmath.Matrix4f;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.collect.ObjectArrays;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.client.model.IPerspectiveAwareModel;
+import net.minecraftforge.common.model.TRSRTransformation;
 import team.chisel.api.render.IBlockRenderContext;
 import team.chisel.api.render.IBlockRenderType;
 import team.chisel.api.render.IChiselTexture;
@@ -63,5 +70,15 @@ public class ModelChiselBlock extends AbstractChiselBakedModel {
     @Override
     public @Nonnull TextureAtlasSprite getParticleTexture() {
         return getModel().getModel(null).getParticleTexture();
+    }
+    
+    @Override
+    public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType) {
+        IBakedModel parent = getModel().getModel(null);
+        if (parent instanceof IPerspectiveAwareModel) {
+            return ((IPerspectiveAwareModel) parent).handlePerspective(cameraTransformType);
+        } else {
+            return Pair.of(this, new TRSRTransformation(parent.getItemCameraTransforms().getTransform(cameraTransformType)).getMatrix());
+        }
     }
 }
