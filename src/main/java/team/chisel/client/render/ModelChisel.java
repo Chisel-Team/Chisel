@@ -65,7 +65,7 @@ public class ModelChisel implements IModelChisel {
         if (textureDependencies != null) {
             return textureDependencies;
         }
-        Set<ResourceLocation> textures = new HashSet<>();
+        textureDependencies = new HashSet<>();
         Map<ResourceLocation, String[]> resolvedTextureLists = new HashMap<>();
         if (modelinfo != null) {
             for (Entry<String, String[]> e : textureLists.entrySet()) {
@@ -79,21 +79,10 @@ public class ModelChisel implements IModelChisel {
         for (ResourceLocation rl : parent.getTextures()) {
             if (resolvedTextureLists.containsKey(rl)) {
                 for (String s : resolvedTextureLists.get(rl)) {
-                    textures.add(new ResourceLocation(s));
+                    textureDependencies.add(new ResourceLocation(s));
                 }
             } else {
-                textures.add(rl);
-            }
-        }
-        textureDependencies = new HashSet<>();
-        for (ResourceLocation rl : textures) {
-            MetadataSectionChisel meta = null;
-            try {
-                meta = ClientUtil.getMetadata(ClientUtil.spriteToAbsolute(rl));
-            } catch (IOException e) {}
-            textureDependencies.add(rl);
-            if (meta != null) {
-                textureDependencies.addAll(Arrays.asList(meta.getAdditionalTextures()));
+                textureDependencies.add(rl);
             }
         }
         return getTextures();
