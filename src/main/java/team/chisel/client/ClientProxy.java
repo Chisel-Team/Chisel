@@ -31,7 +31,7 @@ public class ClientProxy extends CommonProxy {
         
         Minecraft.getMinecraft().metadataSerializer_.registerMetadataSectionType(new MetadataSectionChisel.Serializer(), MetadataSectionChisel.class);
         
-        ModelLoaderRegistry.registerLoader(new ModelLoaderChisel());
+        ModelLoaderRegistry.registerLoader(ModelLoaderChisel.INSTANCE);
         
         ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselIron, 0, new ModelResourceLocation(Chisel.itemChiselIron.getRegistryName(), "inventory"));
         ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselDiamond, 0, new ModelResourceLocation(Chisel.itemChiselDiamond.getRegistryName(), "inventory"));

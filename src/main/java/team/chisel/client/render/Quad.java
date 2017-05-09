@@ -22,6 +22,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.model.b3d.B3DModel.Texture;
 import net.minecraftforge.client.model.pipeline.IVertexConsumer;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
+import scala.collection.immutable.SortedMap.Default;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.lwjgl.util.vector.Vector;
@@ -384,26 +385,36 @@ public class Quad {
         // TODO Auto-generated method stub
         return null;
     }
+
+    private static final float FULL_BRIGHTNESS = (15f * 0x20) / 0xFFFF; // idk ask fry
     
     public BakedQuad rebake() {
-        UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(this.builder.vertexFormat);
+        @Nonnull VertexFormat format = this.builder.vertexFormat;
+        if (this.fullbright) {
+            if (format == DefaultVertexFormats.ITEM) { // ITEM is convertable to BLOCK (replace normal+padding with lmap)
+                format = DefaultVertexFormats.BLOCK;
+            } else if (!format.getElements().contains(DefaultVertexFormats.TEX_2S)) { // Otherwise, this format is unknown, add TEX_2S if it does not exist
+                format = new VertexFormat(format).addElement(DefaultVertexFormats.TEX_2S);
+            }
+        }
+        
+        UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(format);
         builder.setQuadOrientation(this.builder.quadOrientation);
         builder.setQuadTint(this.builder.quadTint);
         builder.setApplyDiffuseLighting(this.builder.applyDiffuseLighting);
         builder.setTexture(this.uvs.getSprite());
 
         for (int v = 0; v < 4; v++) {
-            for (int i = 0; i < this.builder.vertexFormat.getElementCount(); i++) {
-                VertexFormatElement ele = this.builder.vertexFormat.getElement(i);
+            for (int i = 0; i < format.getElementCount(); i++) {
+                VertexFormatElement ele = format.getElement(i);
                 switch (ele.getUsage()) {
                 case UV:
                     //TODO transform the UV_2S type that it used for lightmap coordinates to make fullbright
-                    if (ele.getIndex() == 1 && this.fullbright){
+                    if (ele.getIndex() == 1 && this.fullbright) {
                         //Stuff for fullbright
-                        builder.put(i, 1, 1);
+                        builder.put(i, FULL_BRIGHTNESS, FULL_BRIGHTNESS);
                         Chisel.debug("Doing fullbright stuff");
-                    }
-                    else if (ele.getIndex() == 0) {
+                    } else if (ele.getIndex() == 0) {
                         Vector2f uv = vertUv[v];
                         builder.put(i, uv.x, uv.y , 0, 1);
                     }
@@ -457,6 +468,7 @@ public class Quad {
     public static class Builder implements IVertexConsumer {
 
         @Getter
+        @Nonnull
         private final VertexFormat vertexFormat;
         @Getter
         private final TextureAtlasSprite sprite;

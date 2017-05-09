@@ -150,7 +150,14 @@ public enum Features {
     ANTIBLOCK {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "antiblock", provider)
+            /*BlockCreator<BlockCarvable> antiblockCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                @Override
+                public int getPackedLightmapCoords(IBlockState state, IBlockAccess access, BlockPos pos) {
+                    return 0xF000F0;
+                }
+            };*/
+
+            factory.newBlock(Material.ROCK, "antiblock", provider) /*new ChiselBlockProvider<>(antiblockCreator, BlockCarvable.class)*/
                     .newVariation("black")
                     .next("red")
                     .next("green")

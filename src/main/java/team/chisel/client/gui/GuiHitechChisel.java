@@ -270,7 +270,7 @@ public class GuiHitechChisel extends GuiChisel {
         NBTUtil.setHitechTarget(stack, Optional.fromNullable(containerHitech.getTarget()).transform(s -> s.slotNumber).or(-1));
         NBTUtil.setHitechRotate(stack, buttonRotate.rotate());
 
-        Chisel.network.sendToServer(new PacketChiselNBT(NBTUtil.getChiselTag(containerHitech.getChisel()), containerHitech.getChiselSlot()));
+        Chisel.network.sendToServer(new PacketHitechSettings(containerHitech.getChisel(), containerHitech.getChiselSlot()));
     }
 
     private boolean isShiftDown() {
@@ -469,9 +469,9 @@ public class GuiHitechChisel extends GuiChisel {
                     slots = ArrayUtils.addAll(slots, containerHitech.getSelectionDuplicates().stream().mapToInt(Slot::getSlotIndex).toArray());
                 }
                 
-                Chisel.network.sendToServer(new PacketChiselButton(converted, containerHitech.getChiselSlot(), slots));
+                Chisel.network.sendToServer(new PacketChiselButton(slots));
                 
-                PacketChiselButton.chiselAll(player, containerHitech.getChiselSlot(), converted, slots);
+                PacketChiselButton.chiselAll(player, slots);
                 
                 String sound = container.getCarving().getVariationSound(target.getStack());
                 ClientUtil.playSound(player.world, new BlockPos(player), sound);

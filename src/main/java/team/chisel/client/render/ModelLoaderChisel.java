@@ -28,7 +28,9 @@ import team.chisel.api.render.IModelChisel;
 import team.chisel.api.render.IModelParser;
 
 @SuppressWarnings("deprecation")
-public class ModelLoaderChisel implements ICustomModelLoader {
+public enum ModelLoaderChisel implements ICustomModelLoader {
+    
+    INSTANCE;
 
     private static final String DEFAULT_MODEL = "{\"model\": { \"model\": \"cube\" }, \"face\":\"%s\"}";
         
@@ -80,9 +82,13 @@ public class ModelLoaderChisel implements ICustomModelLoader {
     }
     
     @SuppressWarnings("null")
-    private @Nonnull JsonElement getJSON(ResourceLocation modelLocation) {
+    public @Nonnull JsonElement getJSON(ResourceLocation modelLocation) {
         return jsonCache.computeIfAbsent(modelLocation, res -> {
-            ResourceLocation absolute = new ResourceLocation(res.getResourceDomain(), res.getResourcePath() + ".json");
+            String path = modelLocation.getResourcePath() + ".json";
+            if (!path.startsWith("models/")) {
+                path = "models/" + path;
+            }
+            ResourceLocation absolute = new ResourceLocation(modelLocation.getResourceDomain(), path);
 
             try {
                 IResource resource = manager.getResource(absolute);

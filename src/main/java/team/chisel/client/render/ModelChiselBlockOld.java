@@ -98,4 +98,9 @@ public class ModelChiselBlockOld extends AbstractChiselBakedModel {
             }
         }
     }
+    
+    @Override
+    public boolean isAmbientOcclusion() {
+        return ((ModelChiselOld)getModel()).ambientOcclusion();
+    }
 }
