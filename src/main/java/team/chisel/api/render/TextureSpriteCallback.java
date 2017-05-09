@@ -23,10 +23,7 @@ public class TextureSpriteCallback {
 
     public TextureSpriteCallback(ResourceLocation loc) {
         this.location = loc;
-        TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(loc.toString());
-        if (sprite != Minecraft.getMinecraft().getTextureMapBlocks().getMissingSprite()) {
-            this.sprite = sprite;
-        }
+        this.sprite = Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(loc.toString());
     }
 
     public TextureSpriteCallback(TextureAtlasSprite sprite) {
