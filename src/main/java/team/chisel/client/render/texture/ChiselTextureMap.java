@@ -42,7 +42,7 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
                 float maxV = textureCoords.y * intervalY;
                 ISubmap uvs = new Submap(intervalX, intervalY, maxU - intervalX, maxV - intervalY);
 
-                Quad q = Quad.from(quad).setFullbright(tex.fullbright);
+                Quad q = tex.makeQuad(quad).setFullbright(tex.fullbright);
                 
                 // TODO move this code somewhere else, it's copied from below
                 if (quadGoal != 4) {
@@ -80,7 +80,7 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
 
                 ISubmap submap = new Submap(intervalU, intervalV, minU, minV);
 
-                Quad q = Quad.from(quad).setFullbright(tex.fullbright);
+                Quad q = tex.makeQuad(quad).setFullbright(tex.fullbright);
                 if (quadGoal != 4) {
                     return Collections.singletonList(q.transformUVs(tex.sprites[0].getSprite(), submap).rebake());
                 } else {

@@ -30,15 +30,15 @@ public class ChiselTextureCTMV extends AbstractChiselTexture<BlockRenderTypeCTMV
     public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
         if (context == null) {
             if (quad.getFace() != null && quad.getFace().getAxis().isVertical()) {
-                return Lists.newArrayList(from(quad).transformUVs(sprites[0].getSprite()).setFullbright(fullbright).rebake());
+                return Lists.newArrayList(from(quad).transformUVs(sprites[0].getSprite()).rebake());
             }
-            return Lists.newArrayList(from(quad).transformUVs(sprites[1].getSprite(), TOP_LEFT).setFullbright(fullbright).rebake());
+            return Lists.newArrayList(from(quad).transformUVs(sprites[1].getSprite(), TOP_LEFT).rebake());
         }
         return Lists.newArrayList(getQuad(quad, ((CTMVBlockRenderContext) context).getData()));
     }
 
     private BakedQuad getQuad(BakedQuad in, ConnectionData data) {
-        Quad q = from(in).setFullbright(fullbright);
+        Quad q = from(in);
         Connections cons = data.getConnections();
         
         // This is the order of operations for connections

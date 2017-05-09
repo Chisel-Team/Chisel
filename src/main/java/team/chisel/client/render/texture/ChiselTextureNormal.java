@@ -25,8 +25,8 @@ public class ChiselTextureNormal extends AbstractChiselTexture<BlockRenderTypeNo
     @Override
     public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
         if (quadGoal == 4) {
-            return Arrays.stream(Quad.from(quad).transformUVs(sprites[0].getSprite()).setFullbright(fullbright).subdivide(4)).filter(Objects::nonNull).map(qu -> qu.rebake()).collect(Collectors.toList());
+            return Arrays.stream(makeQuad(quad).transformUVs(sprites[0].getSprite()).subdivide(4)).filter(Objects::nonNull).map(qu -> qu.rebake()).collect(Collectors.toList());
         }
-        return Lists.newArrayList(Quad.from(quad).transformUVs(sprites[0].getSprite()).setFullbright(fullbright).rebake());
+        return Lists.newArrayList(makeQuad(quad).transformUVs(sprites[0].getSprite()).rebake());
     }
 }

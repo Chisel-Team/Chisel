@@ -21,7 +21,7 @@ public class ChiselTextureCTMH extends AbstractChiselTexture<BlockRenderTypeCTMH
 
     @Override
     public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
-        Quad q = Quad.from(quad).setFullbright(fullbright);
+        Quad q = makeQuad(quad);
         if (quad.getFace().getAxis().isVertical()) {
             q = q.transformUVs(sprites[0].getSprite());
         } else {

@@ -382,15 +382,12 @@ public class Quad {
     }
 
     public Quad setLight(int blocklight, int skylight) {
-        // TODO Auto-generated method stub
-        return null;
+        return new Quad(this.vertPos, uvs, builder, blocklight, skylight);
     }
-
-    private static final float FULL_BRIGHTNESS = (15f * 0x20) / 0xFFFF; // idk ask fry
     
     public BakedQuad rebake() {
         @Nonnull VertexFormat format = this.builder.vertexFormat;
-        if (this.fullbright) {
+        if (this.blocklight > 0 || this.skylight > 0) {
             if (format == DefaultVertexFormats.ITEM) { // ITEM is convertable to BLOCK (replace normal+padding with lmap)
                 format = DefaultVertexFormats.BLOCK;
             } else if (!format.getElements().contains(DefaultVertexFormats.TEX_2S)) { // Otherwise, this format is unknown, add TEX_2S if it does not exist
@@ -410,9 +407,9 @@ public class Quad {
                 switch (ele.getUsage()) {
                 case UV:
                     //TODO transform the UV_2S type that it used for lightmap coordinates to make fullbright
-                    if (ele.getIndex() == 1 && this.fullbright) {
+                    if (ele.getIndex() == 1) {
                         //Stuff for fullbright
-                        builder.put(i, FULL_BRIGHTNESS, FULL_BRIGHTNESS);
+                        builder.put(i, ((float) blocklight * 0x20) / 0xFFFF, ((float) skylight * 0x20) / 0xFFFF);
                         Chisel.debug("Doing fullbright stuff");
                     } else if (ele.getIndex() == 0) {
                         Vector2f uv = vertUv[v];

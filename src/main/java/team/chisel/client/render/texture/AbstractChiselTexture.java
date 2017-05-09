@@ -84,8 +84,14 @@ public abstract class AbstractChiselTexture<T extends IBlockRenderType> implemen
     public Collection<ResourceLocation> getTextures() {
         return Arrays.stream(sprites).map(TextureSpriteCallback::getLocation).collect(Collectors.toList());
     }
-    
-    protected Quad makeQuad(BakedQuad q) {
-        return Quad.from(q).setLight(blocklight, skylight);
+
+    protected Quad makeQuad(BakedQuad bq) {
+        Quad q = Quad.from(bq);
+        if (hasLight) {
+            q = q.setLight(blocklight, skylight);
+        } else {
+            q = q.setFullbright(fullbright);
+        }
+        return q;
     }
 }

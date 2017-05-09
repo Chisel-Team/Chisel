@@ -22,7 +22,7 @@ public class ChiselTextureCTM extends AbstractChiselTexture<BlockRenderTypeCTM> 
 
     @Override
     public List<BakedQuad> transformQuad(BakedQuad bq, IBlockRenderContext context, int quadGoal) {
-        Quad quad = Quad.from(bq).setFullbright(fullbright);
+        Quad quad = makeQuad(bq);
         if (context == null) {
             return Collections.singletonList(quad.transformUVs(sprites[0].getSprite()).rebake());
         }

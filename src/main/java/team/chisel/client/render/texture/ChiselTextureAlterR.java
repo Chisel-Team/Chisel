@@ -39,6 +39,6 @@ public class ChiselTextureAlterR extends AbstractChiselTexture<BlockRenderTypeAl
                 break;
         }
 
-        return Collections.singletonList(Quad.from(quad).transformUVs(sprites[0].getSprite(), outputQuad).setFullbright(fullbright).rebake());
+        return Collections.singletonList(makeQuad(quad).transformUVs(sprites[0].getSprite(), outputQuad).rebake());
     }
 }
