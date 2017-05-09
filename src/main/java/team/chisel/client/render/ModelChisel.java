@@ -102,7 +102,7 @@ public class ModelChisel implements IModelChisel {
                     // TODO VERY TEMPORARY
                     IChiselTexture<?> tex = meta.getType().makeTexture(new TextureInfo(
                             Arrays.stream(ObjectArrays.concat(new ResourceLocation(sprite.getIconName()), meta.getAdditionalTextures())).map(TextureSpriteCallback::new).toArray(TextureSpriteCallback[]::new), 
-                            Optional.empty(), 
+                            Optional.of(meta.getExtraData()), 
                             meta.getLayer(),
                             false
                     ));

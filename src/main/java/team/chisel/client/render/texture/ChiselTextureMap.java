@@ -123,8 +123,8 @@ public class ChiselTextureMap extends AbstractChiselTexture<BlockRenderTypeMap> 
 
         this.map = map;
 
-        if (this.info.isPresent()) {
-            JsonObject object = this.info.get();
+        if (info.getInfo().isPresent()) {
+            JsonObject object = info.getInfo().get();
             if (object.has("width") && object.has("height")) {
                 Preconditions.checkArgument(object.get("width").isJsonPrimitive() && object.get("width").getAsJsonPrimitive().isNumber(), "width must be a number!");
                 Preconditions.checkArgument(object.get("height").isJsonPrimitive() && object.get("height").getAsJsonPrimitive().isNumber(), "height must be a number!");

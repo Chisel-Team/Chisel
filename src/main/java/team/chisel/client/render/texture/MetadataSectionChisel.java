@@ -35,6 +35,8 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
     
     public abstract ResourceLocation[] getAdditionalTextures();
     
+    public abstract JsonObject getExtraData();
+    
     @ToString
     @Getter
     public static class V1 extends MetadataSectionChisel {
@@ -43,6 +45,7 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
         private IBlockRenderType type = TextureTypeRegistry.getType("NORMAL");
         private BlockRenderLayer layer = BlockRenderLayer.SOLID;
         private ResourceLocation[] additionalTextures = new ResourceLocation[0];
+        private JsonObject extraData = new JsonObject();
 
         @Override
         public int getVersion() {
@@ -87,6 +90,10 @@ public abstract class MetadataSectionChisel implements IMetadataSection {
                         }
                     }
                 }
+            }
+            
+            if (obj.has("extra") && obj.get("extra").isJsonObject()) {
+                ret.extraData = obj.getAsJsonObject("extra");
             }
             return ret;
         }

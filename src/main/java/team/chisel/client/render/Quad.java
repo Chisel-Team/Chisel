@@ -203,26 +203,37 @@ public class Quad {
     
     private final Builder builder;
 
-    private boolean fullbright;
+    private final int blocklight, skylight;
     
     private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder, @Nonnull TextureAtlasSprite sprite) {
-        this(verts, uvs, builder, sprite, false);
+        this(verts, uvs, builder, sprite, 0, 0);
     }
 
+    @Deprecated
     private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder, @Nonnull TextureAtlasSprite sprite, boolean fullbright) {
+        this(verts, uvs, builder, sprite, fullbright ? 15 : 0, fullbright ? 15 : 0);
+    }
+    
+    private Quad(Vector3f[] verts, Vector2f[] uvs, Builder builder, @Nonnull TextureAtlasSprite sprite, int blocklight, int skylight) {
         this.vertPos = verts;
         this.vertUv = uvs;
         this.builder = builder;
         this.uvs = new UVs(sprite, uvs);
-        this.fullbright = fullbright;
+        this.blocklight = blocklight;
+        this.skylight = skylight;
     }
     
     private Quad(Vector3f[] verts, UVs uvs, Builder builder) {
         this(verts, uvs.vectorize(), builder, uvs.getSprite());
     }
 
+    @Deprecated
     private Quad(Vector3f[] verts, UVs uvs, Builder builder, boolean fullbright) {
         this(verts, uvs.vectorize(), builder, uvs.getSprite(), fullbright);
+    }
+    
+    private Quad(Vector3f[] verts, UVs uvs, Builder builder, int blocklight, int skylight) {
+        this(verts, uvs.vectorize(), builder, uvs.getSprite(), blocklight, skylight);
     }
 
     public void compute() {
@@ -302,8 +313,8 @@ public class Quad {
             secondQuad[j2].y = lerp(secondQuad[j1].y, secondQuad[j2].y, f);
             secondQuad[j2].z = lerp(secondQuad[j1].z, secondQuad[j2].z, f);
 
-            Quad q1 = new Quad(firstQuad, first.relativize(), builder, fullbright);
-            Quad q2 = new Quad(secondQuad, second.relativize(), builder, fullbright);
+            Quad q1 = new Quad(firstQuad, first.relativize(), builder, blocklight, skylight);
+            Quad q2 = new Quad(secondQuad, second.relativize(), builder, blocklight, skylight);
             return Pair.of(q1, q2);
         } else {
             return Pair.of(this, null);
@@ -349,7 +360,7 @@ public class Quad {
             uvs[i] = new Vector2f(lerp(s.getMinU(), s.getMaxU(), uvs[i].x), lerp(s.getMinV(), s.getMaxV(), uvs[i].y));
         }
 
-        Quad ret = new Quad(vertPos, uvs, builder, getUvs().getSprite(), fullbright);
+        Quad ret = new Quad(vertPos, uvs, builder, getUvs().getSprite(), blocklight, skylight);
         return ret;
     }
 
@@ -366,7 +377,12 @@ public class Quad {
         for (int i = 0; i < 4; i++) {
             uvs[i] = vertUv[(i + start) % 4];
         }
-        return new Quad(vertPos, uvs, builder, getUvs().getSprite(), fullbright);
+        return new Quad(vertPos, uvs, builder, getUvs().getSprite(), blocklight, skylight);
+    }
+
+    public Quad setLight(int blocklight, int skylight) {
+        // TODO Auto-generated method stub
+        return null;
     }
     
     public BakedQuad rebake() {
@@ -414,18 +430,18 @@ public class Quad {
     }
     
     public Quad transformUVs(@Nonnull TextureAtlasSprite sprite, ISubmap submap) {
-        return new Quad(vertPos, getUvs().transform(sprite, submap), builder, fullbright);
+        return new Quad(vertPos, getUvs().transform(sprite, submap), builder, blocklight, skylight);
     }
     
     public Quad grow() {
-        return new Quad(vertPos, getUvs().normalizeQuadrant(), builder, fullbright);
+        return new Quad(vertPos, getUvs().normalizeQuadrant(), builder, blocklight, skylight);
     }
 
+    @Deprecated
     public Quad setFullbright(boolean fullbright){
-        if (fullbright != this.fullbright) {
+        if (this.blocklight == 15 != fullbright || this.skylight == 15 != fullbright) {
             return new Quad(vertPos, getUvs(), builder, fullbright);
-        }
-        else {
+        } else {
             return this;
         }
     }
