@@ -37,9 +37,8 @@ import team.chisel.client.render.texture.MetadataSectionChisel;
 public class ModelChisel implements IModelChisel {
 
     private final ModelBlock modelinfo;
-    private final IModel parent;
-    @Setter
-    private IBakedModel bakedparent;
+    private final IModel parentmodel;
+
     private final Map<String, String[]> textureLists;
     
     private Collection<ResourceLocation> textureDependencies;
@@ -51,7 +50,7 @@ public class ModelChisel implements IModelChisel {
     
     public ModelChisel(ModelBlock modelinfo, IModel parent, Map<String, String[]> textureLists) {
         this.modelinfo = modelinfo;
-        this.parent = parent;
+        this.parentmodel = parent;
         this.textureLists = textureLists;
     }
 
@@ -76,7 +75,7 @@ public class ModelChisel implements IModelChisel {
                 }
             }
         }
-        for (ResourceLocation rl : parent.getTextures()) {
+        for (ResourceLocation rl : parentmodel.getTextures()) {
             if (resolvedTextureLists.containsKey(rl)) {
                 for (String s : resolvedTextureLists.get(rl)) {
                     textureDependencies.add(new ResourceLocation(s));
@@ -90,7 +89,7 @@ public class ModelChisel implements IModelChisel {
 
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
-        bakedparent = parent.bake(state, format, rl -> {
+        IBakedModel parent = parentmodel.bake(state, format, rl -> {
             TextureAtlasSprite sprite = bakedTextureGetter.apply(rl);
             MetadataSectionChisel chiselmeta = null;
             try {
@@ -114,7 +113,7 @@ public class ModelChisel implements IModelChisel {
             }
             return sprite;
         });
-        return new ModelChiselBlock(this);
+        return new ModelChiselBlock(this, parent);
     }
 
     @Override
@@ -133,11 +132,6 @@ public class ModelChisel implements IModelChisel {
     @Override
     public IChiselTexture<?> getTexture(String iconName) {
         return textures.get(iconName);
-    }
-
-    @Override
-    public IBakedModel getModel(IBlockState state) {
-        return this.bakedparent;
     }
 
     @Override

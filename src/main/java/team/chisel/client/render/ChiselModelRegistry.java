@@ -120,7 +120,6 @@ public enum ChiselModelRegistry implements Reference {
     private @Nonnull IBakedModel wrap(IModel model, IBakedModel object) {
         ModelChisel modelchisel = new ModelChisel(null, model, Collections.emptyMap());
         modelchisel.bake(TRSRTransformation.identity(), DefaultVertexFormats.ITEM, rl -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(rl.toString()));
-        modelchisel.setBakedparent(object);
-        return new ModelChiselBlock(modelchisel);
+        return new ModelChiselBlock(modelchisel, object);
     }
 }

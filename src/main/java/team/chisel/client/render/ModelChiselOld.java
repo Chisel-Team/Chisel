@@ -21,8 +21,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.Variant;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.VertexFormat;
@@ -34,7 +32,6 @@ import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.client.model.ModelProcessingHelper;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
-import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.api.render.IChiselFace;
 import team.chisel.api.render.IChiselTexture;
 import team.chisel.api.render.IModelChisel;
@@ -42,8 +39,6 @@ import team.chisel.common.util.json.JsonHelper;
 
 @Deprecated
 public class ModelChiselOld implements IModelChisel {
-
-    private static StateMapperBase mapper = new DefaultStateMapper();
     
     private Variant model;
     private Map<String, Variant> models = Maps.newHashMap();;
@@ -61,11 +56,6 @@ public class ModelChiselOld implements IModelChisel {
     
     private transient IChiselFace faceObj;
     private transient Map<EnumFacing, IChiselFace> overridesObj = new EnumMap<>(EnumFacing.class);
-    private transient IBakedModel modelObj;
-    
-    private transient Map<String, IBakedModel> modelsObj = Maps.newHashMap();
-    
-    private transient Map<IBlockState, IBakedModel> stateMap = Maps.newHashMap();
     
     private transient List<ResourceLocation> textures = Lists.newArrayList();
     
@@ -86,11 +76,8 @@ public class ModelChiselOld implements IModelChisel {
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         Function<ResourceLocation, TextureAtlasSprite> dummyGetter = t -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
-        modelObj = bake(model, format, dummyGetter);
-        for (Entry<String, Variant> e : models.entrySet()) {
-            Variant v = e.getValue();
-            modelsObj.put(e.getKey(), bake(v, format, dummyGetter));
-        }
+        IBakedModel parent = bake(model, format, dummyGetter);
+
         layers = 0;
         for (IChiselTexture<?> tex : getChiselTextures()) {
             layers |= 1 << tex.getLayer().ordinal();
@@ -103,7 +90,8 @@ public class ModelChiselOld implements IModelChisel {
                 this.ambientOcclusion = ao.getAsBoolean();
             }
         }
-        return new ModelChiselBlockOld(this);
+        
+        return new ModelChiselBlockOld(this, parent);
     }
     
     @SneakyThrows
@@ -154,26 +142,6 @@ public class ModelChiselOld implements IModelChisel {
     @Override
     public IChiselFace getFace(EnumFacing facing) {
         return overridesObj.getOrDefault(facing, faceObj);
-    }
-
-    @Override
-    public IBakedModel getModel(IBlockState state) {
-        if (state == null) {
-            return modelObj;
-        }
-        
-        if (state instanceof IExtendedBlockState) {
-            state = ((IExtendedBlockState)state).getClean();
-        }
-        String stateStr = mapper.getPropertyString(state.getProperties());
-        stateStr = stateStr.substring(stateStr.indexOf(",") + 1, stateStr.length());
-        
-        final String capture = stateStr;
-        if (modelsObj.containsKey(stateStr)) {
-            stateMap.computeIfAbsent(state, s -> modelsObj.get(capture));
-        }
-        
-        return stateMap.getOrDefault(state, modelObj);
     }
 
     @Override

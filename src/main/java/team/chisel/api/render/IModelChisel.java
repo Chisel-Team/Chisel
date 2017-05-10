@@ -1,14 +1,10 @@
 package team.chisel.api.render;
 
 import java.util.Collection;
-import java.util.List;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 
 public interface IModelChisel extends IModel {
@@ -18,8 +14,6 @@ public interface IModelChisel extends IModel {
     Collection<IChiselTexture<?>> getChiselTextures();
     
     IChiselTexture<?> getTexture(String iconName);
-
-    IBakedModel getModel(IBlockState state);
 
     IChiselFace getFace(EnumFacing facing);
 

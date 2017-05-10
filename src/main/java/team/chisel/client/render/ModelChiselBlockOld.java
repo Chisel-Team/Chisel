@@ -64,14 +64,14 @@ import team.chisel.common.util.ProfileUtil;
 @Deprecated
 public class ModelChiselBlockOld extends AbstractChiselBakedModel {
 
-    public ModelChiselBlockOld(@Nonnull IModelChisel model) {
-        super(model);
+    public ModelChiselBlockOld(@Nonnull IModelChisel model, @Nonnull IBakedModel parent) {
+        super(model, parent);
     }
     
     @Override
     protected AbstractChiselBakedModel createModel(IBlockState state, @Nonnull IModelChisel model, RenderContextList ctx) {
-        ModelChiselBlockOld ret = new ModelChiselBlockOld(model);
-        IBakedModel baked = model.getModel(state);
+        IBakedModel baked = getParent();
+        ModelChiselBlockOld ret = new ModelChiselBlockOld(model, baked);
         List<BakedQuad> quads = Lists.newArrayList();
         for (BlockRenderLayer layer : LAYERS) {
             for (EnumFacing facing : EnumFacing.VALUES) {

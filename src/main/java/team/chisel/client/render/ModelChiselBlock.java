@@ -31,18 +31,21 @@ import team.chisel.client.ChiselExtendedState;
 @ParametersAreNonnullByDefault
 public class ModelChiselBlock extends AbstractChiselBakedModel {
     
-    public ModelChiselBlock(IModelChisel model) {
-        super(model);
+    private final IBakedModel parent;
+    
+    public ModelChiselBlock(IModelChisel model, IBakedModel parent) {
+        super(model, parent);
+        this.parent = parent;
     }
 
     private static final EnumFacing[] FACINGS = ObjectArrays.concat(EnumFacing.VALUES, (EnumFacing) null);
 
     @Override
     protected AbstractChiselBakedModel createModel(@Nullable IBlockState state, IModelChisel model, @Nullable RenderContextList ctx) {
-        AbstractChiselBakedModel ret = new ModelChiselBlock(model);
+        AbstractChiselBakedModel ret = new ModelChiselBlock(model, parent);
         for (BlockRenderLayer layer : LAYERS) {
             for (EnumFacing facing : FACINGS) {
-                List<BakedQuad> parentQuads = model.getModel(null).getQuads(state, facing, 0);
+                List<BakedQuad> parentQuads = parent.getQuads(state, facing, 0);
                 List<BakedQuad> quads;
                 if (facing != null) {
                     ret.faceQuads.put(layer, facing, quads = new ArrayList<>());
@@ -69,12 +72,11 @@ public class ModelChiselBlock extends AbstractChiselBakedModel {
 
     @Override
     public @Nonnull TextureAtlasSprite getParticleTexture() {
-        return getModel().getModel(null).getParticleTexture();
+        return parent.getParticleTexture();
     }
     
     @Override
     public Pair<? extends IBakedModel, Matrix4f> handlePerspective(TransformType cameraTransformType) {
-        IBakedModel parent = getModel().getModel(null);
         if (parent instanceof IPerspectiveAwareModel) {
             return ((IPerspectiveAwareModel) parent).handlePerspective(cameraTransformType);
         } else {

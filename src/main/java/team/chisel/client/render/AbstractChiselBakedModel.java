@@ -87,6 +87,8 @@ public abstract class AbstractChiselBakedModel implements IPerspectiveAwareModel
     
     @Getter
     private final @Nonnull IModelChisel model;
+    @Getter
+    private final @Nonnull IBakedModel parent;
     private final @Nonnull Overrides overrides = new Overrides();
 
     protected final ListMultimap<BlockRenderLayer, BakedQuad> genQuads = MultimapBuilder.enumKeys(BlockRenderLayer.class).arrayListValues().build();
@@ -96,7 +98,7 @@ public abstract class AbstractChiselBakedModel implements IPerspectiveAwareModel
     @SneakyThrows
     public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {        
         if (ChiselCoreMethods.renderingDamageModel.get()) {
-            return model.getModel(state).getQuads(state, side, rand);
+            return parent.getQuads(state, side, rand);
         }
         
         ProfileUtil.start("chisel_models");
@@ -142,12 +144,12 @@ public abstract class AbstractChiselBakedModel implements IPerspectiveAwareModel
 
     @Override
     public boolean isAmbientOcclusion() {
-        return model.getModel(null).isAmbientOcclusion();
+        return parent.isAmbientOcclusion();
     }
 
     @Override
     public boolean isGui3d() {
-        return model.getModel(null).isGui3d();
+        return parent.isGui3d();
     }
 
     @Override
