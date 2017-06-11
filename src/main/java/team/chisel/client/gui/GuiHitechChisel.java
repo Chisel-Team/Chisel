@@ -91,8 +91,9 @@ public class GuiHitechChisel extends GuiChisel {
             super(buttonId, x, y, 16, 16, "");
         }
         
+        
         @Override
-        public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+        public void /* drawButton */ func_191745_a(Minecraft mc, int mouseX, int mouseY, float partialTick) {
             this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
 
             mc.getTextureManager().bindTexture(TEXTURE);

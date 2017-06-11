@@ -20,15 +20,13 @@ import org.lwjgl.opengl.GL11;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-import static net.minecraft.util.EnumFacing.*;
-
 import lombok.ToString;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -151,7 +149,7 @@ public class ItemOffsetTool extends Item {
 
             EnumFacing face = mop.sideHit;
             BlockPos pos = mop.getBlockPos();
-            VertexBuffer buf = Tessellator.getInstance().getBuffer();
+            BufferBuilder buf = Tessellator.getInstance().getBuffer();
             GlStateManager.pushMatrix();
             GlStateManager.disableLighting();
             GlStateManager.disableTexture2D();

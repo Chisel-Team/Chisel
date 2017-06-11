@@ -3,6 +3,7 @@ package team.chisel.common.item;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.HashMultimap;
@@ -11,6 +12,7 @@ import com.google.common.collect.Multimap;
 import lombok.Getter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -91,7 +93,7 @@ public class ItemChisel extends Item implements IChiselItem {
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean held) {
+    public void addInformation(ItemStack stack, @Nullable World world, List list, ITooltipFlag flag) {
         String base = "item.chisel.chisel.desc.";
         String gui = I18n.format(base + "gui");
         String lc1 = I18n.format(base + "lc1");

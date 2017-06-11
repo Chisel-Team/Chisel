@@ -138,13 +138,13 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
         int curIndex = 0;
         for (VariationData var : this.variations) {
             if (var == null || Strings.emptyToNull(var.name) == null) {
                 continue;
             }
-            ItemStack stack = new ItemStack(item, 1, curIndex);
+            ItemStack stack = new ItemStack(this, 1, curIndex);
             curIndex++;
             // CTMBlockResources r = SubBlockUtil.getResources(sub);
             // setLore(stack, r.getLore());

@@ -8,6 +8,7 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import mcp.mobius.waila.api.WailaPlugin;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,7 +39,7 @@ public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
             ItemChiselBlock item = (ItemChiselBlock) ForgeRegistries.ITEMS.getValue(accessor.getBlock().getRegistryName());
             ICarvable block = (ICarvable) accessor.getBlock();
             int variation = block.getVariationIndex(accessor.getBlockState());
-            item.addInformation(new ItemStack(item, 1, variation), accessor.getPlayer(), strings, false);
+            item.addInformation(new ItemStack(item, 1, variation), accessor.getWorld(), strings, ITooltipFlag.TooltipFlags.NORMAL);
         }
         return strings;
     }

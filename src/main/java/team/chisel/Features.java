@@ -3127,20 +3127,12 @@ public enum Features {
     }
 
     private static void loadRecipes() {
+        if (true) return; // TODO once forge has recipes
         Chisel.logger.info("Loading recipes...");
         int num = 0;
         for (Features f : values()) {
             if (f.enabled()) {
-                // if (f.needsMetaRecipes()) {
-                // for (int i = 0; i < 16; i++) {
-                // meta = i;
-                // f.addRecipes();
-                // }
-                // meta = 0;
-                // }
-                // else {
                 f.addRecipes();
-                // }
                 ++num;
             } else {
                 logDisabled(f);

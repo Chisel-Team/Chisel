@@ -11,7 +11,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.matthewprenger.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
@@ -67,7 +67,7 @@ repositories {
 
 dependencies {
 	deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
-	deobfCompile "mezz.jei:jei_1.11.2:${jei_version}"
+	deobfCompile "mezz.jei:jei_1.12:${jei_version}"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
 }
 

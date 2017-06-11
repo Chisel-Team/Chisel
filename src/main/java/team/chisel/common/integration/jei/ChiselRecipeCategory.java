@@ -20,6 +20,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import team.chisel.Chisel;
 
 @ParametersAreNonnullByDefault
 public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper> {
@@ -125,5 +126,10 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
     @Nullable
     public IDrawable getIcon() {
         return null;
+    }
+
+    @Override
+    public String getModName() {
+        return Chisel.MOD_NAME;
     }
 }
