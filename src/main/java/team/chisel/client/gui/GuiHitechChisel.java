@@ -93,8 +93,8 @@ public class GuiHitechChisel extends GuiChisel {
         
         
         @Override
-        public void /* drawButton */ func_191745_a(Minecraft mc, int mouseX, int mouseY, float partialTick) {
-            this.hovered = mouseX >= this.xPosition && mouseY >= this.yPosition && mouseX < this.xPosition + this.width && mouseY < this.yPosition + this.height;
+        public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTick) {
+            this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
             mc.getTextureManager().bindTexture(TEXTURE);
             float a = isMouseOver() ? 1 : 0.2f;
@@ -105,7 +105,7 @@ public class GuiHitechChisel extends GuiChisel {
             GlStateManager.enableBlend();
             GlStateManager.enableDepth();
             zLevel = 1000;
-            drawTexturedModalRect(this.xPosition, this.yPosition, u, v, 16, 16);
+            drawTexturedModalRect(this.x, this.y, u, v, 16, 16);
             zLevel = 0;
             GlStateManager.color(1, 1, 1, 1);
         }

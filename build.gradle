@@ -42,7 +42,7 @@ targetCompatibility = '1.8'
 
 minecraft {
     version = "${minecraft_version}-${forge_version}"
-    mappings = 'snapshot_20170326'
+    mappings = 'snapshot_20170613'
     runDir = "run"
     
     clientJvmArgs += '-Dfml.coreMods.load=team.chisel.common.asm.ChiselCorePlugin'

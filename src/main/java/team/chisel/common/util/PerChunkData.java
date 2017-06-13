@@ -52,8 +52,8 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         @Override
         public void toBytes(ByteBuf buf) {
-            buf.writeInt(chunk.chunkXPos);
-            buf.writeInt(chunk.chunkZPos);
+            buf.writeInt(chunk.x);
+            buf.writeInt(chunk.z);
             ByteBufUtils.writeUTF8String(buf, key);
             ByteBufUtils.writeTag(buf, tag);
         }
@@ -74,11 +74,11 @@ public enum PerChunkData implements IChunkDataRegistry {
                 
                 @Override
                 public void run() {
-                    Chunk chunk = Chisel.proxy.getClientWorld().getChunkFromChunkCoords(message.chunk.chunkXPos, message.chunk.chunkZPos);
+                    Chunk chunk = Chisel.proxy.getClientWorld().getChunkFromChunkCoords(message.chunk.x, message.chunk.z);
                     IChunkData<?> data = INSTANCE.data.get(message.key);
                     data.readFromNBT(chunk, message.tag);
-                    int x = chunk.xPosition << 4;
-                    int z = chunk.zPosition << 4;
+                    int x = chunk.x << 4;
+                    int z = chunk.z << 4;
                     Chisel.proxy.getClientWorld().markBlockRangeForRenderUpdate(x, 0, z, x, 255, z);
                 }
             });
@@ -191,7 +191,7 @@ public enum PerChunkData implements IChunkDataRegistry {
         if (cd.requiresClientSync()) {
             NBTTagCompound tag = new NBTTagCompound();
             cd.writeToNBT(chunk, tag);
-            PlayerChunkMapEntry entry = ((WorldServer)chunk.getWorld()).getPlayerChunkMap().getEntry(chunk.xPosition, chunk.zPosition);
+            PlayerChunkMapEntry entry = ((WorldServer)chunk.getWorld()).getPlayerChunkMap().getEntry(chunk.x, chunk.z);
             if (entry != null) {
                 entry.sendPacket(Chisel.network.getPacketFrom(new MessageChunkData(chunk, key, tag)));
             }

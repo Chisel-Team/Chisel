@@ -199,7 +199,7 @@ public class ItemOffsetTool extends Item {
             
             GlStateManager.color(1, 1, 1, 0x55 / 255f);
 
-            EnumFacing moveDir = getMoveDir(face, hit.xCoord - pos.getX(), hit.yCoord - pos.getY(), hit.zCoord - pos.getZ());
+            EnumFacing moveDir = getMoveDir(face, hit.x - pos.getX(), hit.y - pos.getY(), hit.z - pos.getZ());
             int clampedX = Math.max(0, moveDir.getFrontOffsetX());
             int clampedY = Math.max(0, moveDir.getFrontOffsetY());
             int clampedZ = Math.max(0, moveDir.getFrontOffsetZ());
