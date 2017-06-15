@@ -6,15 +6,15 @@ import java.util.List;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
-import team.chisel.api.render.IChiselFace;
-import team.chisel.api.render.IChiselTexture;
+import team.chisel.ctm.api.texture.ICTMTexture;
+import team.chisel.ctm.api.texture.IChiselFace;
 
 /**
  * Chisel Face, basically a list of IChiselTexture's
  */
 public final class ChiselFace implements IChiselFace {
 
-    private List<IChiselTexture<?>> textureList;
+    private List<ICTMTexture<?>> textureList;
     private TextureAtlasSprite particle;
     
     private List<IChiselFace> childFaces;
@@ -23,14 +23,14 @@ public final class ChiselFace implements IChiselFace {
         this(new ArrayList<>(), new ArrayList<>());
     }
 
-    public ChiselFace(List<IChiselTexture<?>> textureList, List<IChiselFace> childFaces) {
+    public ChiselFace(List<ICTMTexture<?>> textureList, List<IChiselFace> childFaces) {
         this.textureList = textureList;
         this.childFaces = childFaces;
     }
 
     @Override
-    public List<IChiselTexture<?>> getTextureList(){
-        List<IChiselTexture<?>> list = new ArrayList<>();
+    public List<ICTMTexture<?>> getTextureList(){
+        List<ICTMTexture<?>> list = new ArrayList<>();
         list.addAll(this.textureList);
         for (IChiselFace face : childFaces){
             list.addAll(face.getTextureList());
@@ -38,7 +38,7 @@ public final class ChiselFace implements IChiselFace {
         return list;
     }
 
-    public void addTexture(IChiselTexture<?> texture){
+    public void addTexture(ICTMTexture<?> texture){
         this.textureList.add(texture);
     }
 
@@ -46,7 +46,7 @@ public final class ChiselFace implements IChiselFace {
         this.childFaces.add(face);
     }
 
-    public boolean removeTexture(IChiselTexture<?> texture){
+    public boolean removeTexture(ICTMTexture<?> texture){
         return this.textureList.remove(texture);
     }
 

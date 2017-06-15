@@ -1,14 +1,17 @@
 package team.chisel.common.util.json;
 
+import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
-import team.chisel.api.render.IChiselFace;
 import team.chisel.client.ChiselFace;
+import team.chisel.ctm.api.texture.IChiselFace;
 
 /**
  * Json version of ChiselFace
  */
+@Deprecated
 public class JsonFace extends JsonObjectBase<IChiselFace> {
 
     /**
@@ -44,7 +47,7 @@ public class JsonFace extends JsonObjectBase<IChiselFace> {
             if (JsonHelper.isLocalPath(particle)) {
                 particle = JsonHelper.toAbsolutePath(particle, loc);
             }
-            face.setParticle(JsonHelper.getOrCreateTexture( new ResourceLocation(particle)).getParticle());
+            face.setParticle(JsonHelper.getOrCreateTexture(new ResourceLocation(particle)).getParticle());
         }
 
         return face;

@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import team.chisel.Chisel;
 import team.chisel.Features;
-import team.chisel.client.render.ctm.CTM;
+import team.chisel.ctm.client.util.CTMLogic;
 
 public class Configurations {
 
@@ -90,7 +90,7 @@ public class Configurations {
         category = "client";
         oldPillars = config.get(category, "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
         disableCTM = !config.get(category, "connectedTextures", true, "Enable connected textures").getBoolean(true);
-        CTM.disableObscuredFaceCheckConfig = connectInsideCTM = config.get(category, "connectInsideCTM", false,
+        CTMLogic.disableObscuredFaceCheckConfig = connectInsideCTM = config.get(category, "connectInsideCTM", false,
                 "Choose whether the inside corner is disconnected on a CTM block - http://imgur.com/eUywLZ4").getBoolean(false);
         blockDescriptions = config.get(category, "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.")
                 .getBoolean(true);

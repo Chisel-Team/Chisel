@@ -8,8 +8,9 @@ import lombok.Getter;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import team.chisel.client.render.texture.ChiselTextureAlterR;
+import team.chisel.ctm.client.texture.ctx.TextureContextPosition;
 
-public class BlockRenderContextAlterR extends BlockRenderContextPosition {
+public class BlockRenderContextAlterR extends TextureContextPosition {
     
     @Getter
     private final int texture;
