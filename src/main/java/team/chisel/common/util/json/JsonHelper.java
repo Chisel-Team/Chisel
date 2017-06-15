@@ -6,15 +6,15 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ResourceLocation;
-import team.chisel.Chisel;
-import team.chisel.api.render.IChiselFace;
-import team.chisel.api.render.IChiselTexture;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
+import team.chisel.Chisel;
+import team.chisel.ctm.api.texture.ICTMTexture;
+import team.chisel.ctm.api.texture.IChiselFace;
 
 public class JsonHelper {
     
@@ -24,7 +24,7 @@ public class JsonHelper {
 
     private static Map<ResourceLocation, JsonObject> objectCache = new HashMap<>();
     private static Map<ResourceLocation, IChiselFace> faceCache = new HashMap<>();
-    private static Map<ResourceLocation, IChiselTexture<?>> textureCache = new HashMap<>();
+    private static Map<ResourceLocation, ICTMTexture<?>> textureCache = new HashMap<>();
     
     public static final String FACE_EXTENSION = ".cf";
     public static final String TEXTURE_EXTENSION = ".ctx";
@@ -53,11 +53,11 @@ public class JsonHelper {
         throw clearException();
     }
 
-    private static IChiselTexture<?> createTexture(ResourceLocation loc) {
+    private static ICTMTexture<?> createTexture(ResourceLocation loc) {
         if (isCombinedTexture(false, loc)) {
             JsonObject object = objectCache.get(loc);
             JsonTexture texture = gson.fromJson(object, JsonTexture.class);
-            IChiselTexture<?> cTexture = texture.get(loc);
+            ICTMTexture<?> cTexture = texture.get(loc);
             textureCache.put(loc, cTexture);
             return cTexture;
         }
@@ -85,7 +85,7 @@ public class JsonHelper {
         }
     }
 
-    public static IChiselTexture<?> getOrCreateTexture(ResourceLocation loc) {
+    public static ICTMTexture<?> getOrCreateTexture(ResourceLocation loc) {
         if (textureCache.containsKey(loc)) {
             return textureCache.get(loc);
         } else {

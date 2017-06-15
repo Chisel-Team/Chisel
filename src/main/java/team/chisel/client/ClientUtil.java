@@ -1,23 +1,15 @@
 package team.chisel.client;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
-
-import com.google.common.base.Throwables;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleDigging;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.IResource;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -28,7 +20,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
-import team.chisel.client.render.texture.MetadataSectionChisel;
 
 @ParametersAreNonnullByDefault
 public class ClientUtil {
@@ -111,63 +102,5 @@ public class ClientUtil {
                 }
             }
         }
-    }
-    
-    public static ResourceLocation toResourceLocation(TextureAtlasSprite sprite) {
-        return new ResourceLocation(sprite.getIconName());
-    }
-    
-    public static IResource getResource(TextureAtlasSprite sprite) throws IOException {
-        return getResource(spriteToAbsolute(toResourceLocation(sprite)));
-    }
-    
-    public static ResourceLocation spriteToAbsolute(ResourceLocation sprite) {
-        if (!sprite.getResourcePath().startsWith("textures/")) {
-            sprite = new ResourceLocation(sprite.getResourceDomain(), "textures/" + sprite.getResourcePath());
-        }
-        if (!sprite.getResourcePath().endsWith(".png")) {
-            sprite = new ResourceLocation(sprite.getResourceDomain(), sprite.getResourcePath() + ".png");
-        }
-        return sprite;
-    }
-    
-    public static IResource getResource(ResourceLocation res) throws IOException {
-        return Minecraft.getMinecraft().getResourceManager().getResource(res);
-    }
-    
-    public static IResource getResourceUnsafe(ResourceLocation res) {
-        try {
-            return getResource(res);
-        } catch (IOException e) {
-            throw Throwables.propagate(e);
-        }
-    }
-    
-    private static final Map<ResourceLocation, MetadataSectionChisel> metadataCache = new HashMap<>();
-
-    public static @Nullable MetadataSectionChisel getMetadata(ResourceLocation res) throws IOException {
-        // Note, semantically different from computeIfAbsent, as we DO care about keys mapped to null values
-        if (metadataCache.containsKey(res)) {
-            return metadataCache.get(res);
-        }
-        MetadataSectionChisel ret;
-        metadataCache.put(res, ret = getResource(res).getMetadata(MetadataSectionChisel.SECTION_NAME));
-        return ret;
-    }
-    
-    public static @Nullable MetadataSectionChisel getMetadata(TextureAtlasSprite sprite) throws IOException {
-        return getMetadata(spriteToAbsolute(toResourceLocation(sprite)));
-    }
-    
-    public static @Nullable MetadataSectionChisel getMetadataUnsafe(TextureAtlasSprite sprite) {
-        try {
-            return getMetadata(sprite);
-        } catch (IOException e) {
-            throw Throwables.propagate(e);
-        }
-    }
-    
-    public static void invalidateCaches() {
-        metadataCache.clear();
     }
 }

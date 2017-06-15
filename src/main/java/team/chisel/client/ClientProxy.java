@@ -1,5 +1,7 @@
 package team.chisel.client;
 
+import java.util.function.BiFunction;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
@@ -11,25 +13,18 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
+import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.client.render.ModelLoaderChisel;
-import team.chisel.client.render.texture.MetadataSectionChisel;
 import team.chisel.common.CommonProxy;
-import team.chisel.common.init.TextureTypeRegistry;
+import team.chisel.ctm.client.texture.ctx.OffsetProviderRegistry;
 
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
     @Override
-    public void construct(FMLPreInitializationEvent event) {
-        TextureTypeRegistry.preInit(event);
-    }
-
-    @Override
     public void preInit(FMLPreInitializationEvent event) {
-        
-        Minecraft.getMinecraft().metadataSerializer_.registerMetadataSectionType(new MetadataSectionChisel.Serializer(), MetadataSectionChisel.class);
         
         ModelLoaderRegistry.registerLoader(ModelLoaderChisel.INSTANCE);
         
@@ -49,6 +44,8 @@ public class ClientProxy extends CommonProxy {
             SimpleReloadableResourceManager manager = (SimpleReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
             manager.registerReloadListener(ChiselPackReloadListener.INSTANCE);
         }
+        
+        OffsetProviderRegistry.INSTANCE.registerProvider((world, pos) -> ChunkData.getOffsetForChunk(world, pos).getOffset());
     }
 
     @Override

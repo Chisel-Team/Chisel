@@ -5,24 +5,25 @@ import java.util.Optional;
 
 import javax.annotation.Nullable;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
-import team.chisel.api.render.IBlockRenderType;
-import team.chisel.api.render.IChiselTexture;
-import team.chisel.api.render.TextureInfo;
-import team.chisel.api.render.TextureSpriteCallback;
-import team.chisel.client.TextureStitcher;
-import team.chisel.common.init.TextureTypeRegistry;
-
-import com.google.common.base.Preconditions;
+import team.chisel.client.TextureStitcher.MagicStitchingSprite;
+import team.chisel.client.render.texture.TextureInfoFullbright;
+import team.chisel.ctm.api.texture.ICTMTexture;
+import team.chisel.ctm.api.texture.ITextureType;
+import team.chisel.ctm.api.util.TextureInfo;
+import team.chisel.ctm.client.texture.type.TextureTypeRegistry;
 
 
 /**
  * Raw version of IChiselTexture
  */
-public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
+@Deprecated
+public class JsonTexture extends JsonObjectBase<ICTMTexture<?>> {
 
     /**
      * The String for the type of texture
@@ -46,10 +47,10 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
     private boolean fullbright;
 
     @Override
-    protected IChiselTexture<?> create(ResourceLocation loc) {
+    protected ICTMTexture<?> create(ResourceLocation loc) {
         Preconditions.checkArgument(TextureTypeRegistry.isValid(this.type), "Error loading texture %s. Texture Type " + this.type + " is not valid", loc);
 
-        IBlockRenderType type = TextureTypeRegistry.getType(this.type);
+        ITextureType type = TextureTypeRegistry.getType(this.type);
         Preconditions.checkArgument(textures != null || type.requiredTextures() == 1,
                 "Error loading texture %s. Texture type %s requires %s textures, the texture name can only be inferred for textures that require 1.", loc, this.type, type.requiredTextures());
         if (textures != null) {
@@ -57,10 +58,9 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
                     type.requiredTextures(), textures.length);
         }
 
-        TextureSpriteCallback[] callbacks = new TextureSpriteCallback[type.requiredTextures()];
+        TextureAtlasSprite[] sprites = new TextureAtlasSprite[type.requiredTextures()];
         if (textures == null) {
-            callbacks[0] = new TextureSpriteCallback(new ResourceLocation(loc.getResourceDomain(), JsonHelper.toTexturePath(loc.getResourcePath())));
-            TextureStitcher.register(callbacks[0]);
+            sprites[0] = new MagicStitchingSprite(new ResourceLocation(loc.getResourceDomain(), JsonHelper.toTexturePath(loc.getResourcePath())));
         } else {
             for (int i = 0; i < this.textures.length; i++) {
                 String tex = this.textures[i];
@@ -70,19 +70,12 @@ public class JsonTexture extends JsonObjectBase<IChiselTexture<?>> {
                     path = path.substring(path.indexOf(':') + 1);
                     tex = JsonHelper.toTexturePath(path);
                 }
-                callbacks[i] = new TextureSpriteCallback(new ResourceLocation(loc.getResourceDomain(), tex));
-                TextureStitcher.register(callbacks[i]);
+                sprites[i] = new MagicStitchingSprite(new ResourceLocation(loc.getResourceDomain(), tex));
             }
         }
 
         BlockRenderLayer layerObj = layer == null ? BlockRenderLayer.SOLID : BlockRenderLayer.valueOf(layer.toUpperCase(Locale.US));
-        TextureInfo textureInfo;
-        if (info != null){
-            textureInfo = new TextureInfo(callbacks, Optional.of(info), layerObj, fullbright);
-        }
-        else {
-            textureInfo = new TextureInfo(callbacks, Optional.empty(), layerObj, fullbright);
-        }
+        TextureInfo textureInfo = new TextureInfoFullbright(sprites, Optional.ofNullable(info), layerObj, fullbright);
 
         try {
             return type.makeTexture(textureInfo);

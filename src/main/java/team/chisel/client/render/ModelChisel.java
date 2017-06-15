@@ -1,119 +1,123 @@
 package team.chisel.client.render;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Optional;
+import java.util.stream.Collectors;
+
+import javax.annotation.Nullable;
 
 import com.google.common.base.Function;
-import com.google.common.collect.ObjectArrays;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
-import lombok.Setter;
+import lombok.Getter;
+import lombok.SneakyThrows;
+import lombok.experimental.Accessors;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ModelBlock;
+import net.minecraft.client.renderer.block.model.Variant;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
+import net.minecraftforge.client.model.ModelProcessingHelper;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
-import net.minecraftforge.common.property.IExtendedBlockState;
-import team.chisel.api.render.IChiselFace;
-import team.chisel.api.render.IChiselTexture;
-import team.chisel.api.render.IModelChisel;
-import team.chisel.api.render.TextureInfo;
-import team.chisel.api.render.TextureSpriteCallback;
-import team.chisel.client.ClientUtil;
-import team.chisel.client.render.texture.MetadataSectionChisel;
+import team.chisel.common.util.json.JsonHelper;
+import team.chisel.ctm.api.model.IModelCTM;
+import team.chisel.ctm.api.texture.ICTMTexture;
+import team.chisel.ctm.api.texture.IChiselFace;
+import team.chisel.ctm.client.model.parsing.ModelLoaderCTM;
 
-public class ModelChisel implements IModelChisel {
-
-    private final ModelBlock modelinfo;
-    private final IModel parentmodel;
-
-    private final Map<String, String[]> textureLists;
+@Deprecated
+public class ModelChisel implements IModelCTM {
     
-    private Collection<ResourceLocation> textureDependencies;
+    private Variant model;
+    private Map<String, Variant> models = Maps.newHashMap();
+    
+    private String face;
+    private Map<EnumFacing, String> overrides = Maps.newHashMap();
+    
+    @Getter(onMethod = @__({@Override}))
+    @Accessors(fluent = true)
+    private boolean ignoreStates;
+    
+    @Getter
+    @Accessors(fluent = true)
+    private boolean ambientOcclusion = true;
+    
+    private transient IChiselFace faceObj;
+    private transient Map<EnumFacing, IChiselFace> overridesObj = new EnumMap<>(EnumFacing.class);
+    
+    private transient List<ResourceLocation> textures = Lists.newArrayList();
     
     private transient byte layers;
-
-    private Map<String, IChiselTexture<?>> textures = new HashMap<>();
-    private boolean hasVanillaTextures;
     
-    public ModelChisel(ModelBlock modelinfo, IModel parent, Map<String, String[]> textureLists) {
-        this.modelinfo = modelinfo;
-        this.parentmodel = parent;
-        this.textureLists = textureLists;
-    }
-
     @Override
     public Collection<ResourceLocation> getDependencies() {
-        return Collections.emptySet();
+        List<ResourceLocation> list = Lists.newArrayList(model.getModelLocation());
+        list.addAll(models.values().stream().map(v -> v.getModelLocation()).collect(Collectors.toList()));
+        return list;
     }
 
     @Override
     public Collection<ResourceLocation> getTextures() {
-        if (textureDependencies != null) {
-            return textureDependencies;
-        }
-        textureDependencies = new HashSet<>();
-        Map<ResourceLocation, String[]> resolvedTextureLists = new HashMap<>();
-        if (modelinfo != null) {
-            for (Entry<String, String[]> e : textureLists.entrySet()) {
-                if (modelinfo.isTexturePresent(e.getKey())) {
-                    resolvedTextureLists.put(new ResourceLocation(modelinfo.textures.get(e.getKey())), e.getValue());
-                } else {
-                    resolvedTextureLists.put(new ResourceLocation(e.getKey()), e.getValue());
-                }
-            }
-        }
-        for (ResourceLocation rl : parentmodel.getTextures()) {
-            if (resolvedTextureLists.containsKey(rl)) {
-                for (String s : resolvedTextureLists.get(rl)) {
-                    textureDependencies.add(new ResourceLocation(s));
-                }
-            } else {
-                textureDependencies.add(rl);
-            }
-        }
-        return getTextures();
+        return ImmutableList.copyOf(textures);
     }
 
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
-        IBakedModel parent = parentmodel.bake(state, format, rl -> {
-            TextureAtlasSprite sprite = bakedTextureGetter.apply(rl);
-            MetadataSectionChisel chiselmeta = null;
-            try {
-                chiselmeta = ClientUtil.getMetadata(sprite);
-            } catch (IOException e) {}
-            if (chiselmeta != null) {
-                final MetadataSectionChisel meta = chiselmeta;
-                textures.computeIfAbsent(sprite.getIconName(), s -> {
-                    // TODO VERY TEMPORARY
-                    IChiselTexture<?> tex = meta.getType().makeTexture(new TextureInfo(
-                            Arrays.stream(ObjectArrays.concat(new ResourceLocation(sprite.getIconName()), meta.getAdditionalTextures())).map(TextureSpriteCallback::new).toArray(TextureSpriteCallback[]::new), 
-                            Optional.of(meta.getExtraData()), 
-                            meta.getLayer(),
-                            false
-                    ));
-                    layers |= 1 << tex.getLayer().ordinal();
-                    return tex;
-                });
-            } else {
-                hasVanillaTextures = true;
+        Function<ResourceLocation, TextureAtlasSprite> dummyGetter = t -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
+        IBakedModel parent = bake(model, format, dummyGetter);
+
+        layers = 0;
+        for (ICTMTexture<?> tex : getChiselTextures()) {
+            BlockRenderLayer layer = tex.getLayer();
+            if (layer != null) {
+                layers |= 1 << layer.ordinal();
             }
-            return sprite;
-        });
+        }
+        
+        JsonObject rawmodel = ModelLoaderCTM.INSTANCE.getJSON(model.getModelLocation()).getAsJsonObject();
+        if (rawmodel.has("ambientocclusion")) {
+            JsonElement ao = rawmodel.get("ambientocclusion");
+            if (ao.isJsonPrimitive() && ao.getAsJsonPrimitive().isBoolean()) {
+                this.ambientOcclusion = ao.getAsBoolean();
+            }
+        }
+        
         return new ModelChiselBlock(this, parent);
+    }
+    
+    @SneakyThrows
+    private IBakedModel bake(Variant variant, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> getter) {
+        IModel imodel = ModelLoaderRegistry.getModel(variant.getModelLocation());
+        imodel = ModelProcessingHelper.uvlock(imodel, variant.isUvLock());
+        return imodel.bake(variant.getState(), format, getter);
+    }
+    
+    @Override
+    public void load() {
+        if (faceObj != null) {
+            return;
+        }
+        faceObj = JsonHelper.getOrCreateFace(new ResourceLocation(face));
+        for (Entry<EnumFacing, String> e : overrides.entrySet()) {
+            overridesObj.put(e.getKey(), JsonHelper.getOrCreateFace(new ResourceLocation(e.getValue())));
+        }
+        faceObj.getTextureList().forEach(t -> textures.addAll(t.getTextures()));
+        overridesObj.values().forEach(f -> f.getTextureList().forEach(t -> textures.addAll(t.getTextures())));
     }
 
     @Override
@@ -122,35 +126,44 @@ public class ModelChisel implements IModelChisel {
     }
 
     @Override
-    public void load() {}
-
-    @Override
-    public Collection<IChiselTexture<?>> getChiselTextures() {
-        return textures.values();
+    public IChiselFace getDefaultFace() {
+        return faceObj;
     }
     
     @Override
-    public IChiselTexture<?> getTexture(String iconName) {
-        return textures.get(iconName);
+    public List<ICTMTexture<?>> getChiselTextures() {
+        List<ICTMTexture<?>> ret = Lists.newArrayList();
+        ret.addAll(getDefaultFace().getTextureList());
+        for (IChiselFace face : overridesObj.values()) {
+            ret.addAll(face.getTextureList());
+        }
+        return ret;
+    }
+    
+    @Override
+    public ICTMTexture<?> getTexture(String iconName) {
+        return null;
     }
 
     @Override
     public IChiselFace getFace(EnumFacing facing) {
-        return null;
+        return overridesObj.getOrDefault(facing, faceObj);
     }
 
-    @Override
-    public IChiselFace getDefaultFace() {
-        return null;
-    }
-    
     @Override
     public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return (hasVanillaTextures && state.getBlock().getBlockLayer() == layer) || ((layers >> layer.ordinal()) & 1) == 1;
+        return ((layers >> layer.ordinal()) & 1) == 1;
     }
 
     @Override
-    public boolean ignoreStates() {
-        return false;
+    @Nullable
+    public TextureAtlasSprite getOverrideSprite(int tintIndex) {
+        return null;
+    }
+
+    @Override
+    @Nullable
+    public ICTMTexture<?> getOverrideTexture(int tintIndex, String sprite) {
+        return null;
     }
 }

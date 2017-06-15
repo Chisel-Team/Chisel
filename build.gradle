@@ -44,8 +44,6 @@ minecraft {
     version = "${minecraft_version}-${forge_version}"
     mappings = 'snapshot_20161116'
     runDir = "run"
-    
-    clientJvmArgs += '-Dfml.coreMods.load=team.chisel.common.asm.ChiselCorePlugin'
 	
 	useDepAts = true
 
@@ -54,18 +52,22 @@ minecraft {
 }
 
 repositories {
+	maven { // CTM
+		url "http://maven.tterrag.com/"
+	}
 	maven { // WAILA
 		url "http://mobiusstrip.eu/maven"
 	}
     maven { // JEI
         url "http://dvs1.progwml6.com/files/maven"
     }
-    maven { // Tehnut -- Used for Blood Magic
+    maven { // Blood Magic
         url "http://tehnut.info/maven"
     }
 }
 
 dependencies {
+	deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
 	deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
     deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
@@ -118,8 +120,6 @@ processResources {
 
 jar.manifest {
     attributes 'FMLAT': 'chisel_at.cfg'
-    attributes 'FMLCorePlugin': 'team.chisel.common.asm.ChiselCorePlugin'
-	attributes 'FMLCorePluginContainsFMLMod': 'true'
 }
 
 // Create API jar with sources and compiled files

@@ -4,33 +4,34 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import team.chisel.api.render.IBlockRenderContext;
-import team.chisel.api.render.TextureInfo;
-import team.chisel.client.render.Quad;
-import team.chisel.client.render.ctm.CTM;
-import team.chisel.client.render.ctm.ISubmap;
-import team.chisel.client.render.ctx.CTMBlockRenderContext;
 import team.chisel.client.render.type.BlockRenderTypeSimpleCTM;
-import team.chisel.common.util.Dir;
+import team.chisel.ctm.api.texture.ISubmap;
+import team.chisel.ctm.api.texture.ITextureContext;
+import team.chisel.ctm.api.util.TextureInfo;
+import team.chisel.ctm.client.texture.ctx.TextureContextCTM;
+import team.chisel.ctm.client.texture.render.AbstractTexture;
+import team.chisel.ctm.client.util.CTMLogic;
+import team.chisel.ctm.client.util.Dir;
+import team.chisel.ctm.client.util.Quad;
 
-public class ChiselTextureSimpleCTM extends AbstractChiselTexture<BlockRenderTypeSimpleCTM> {
+public class ChiselTextureSimpleCTM extends AbstractTexture<BlockRenderTypeSimpleCTM> {
 
     public ChiselTextureSimpleCTM(BlockRenderTypeSimpleCTM type, TextureInfo info) {
         super(type, info);
     }
 
     @Override
-    public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
-        Quad q = makeQuad(quad);
+    public List<BakedQuad> transformQuad(BakedQuad quad, ITextureContext context, int quadGoal) {
+        Quad q = makeQuad(quad, context);
 
         if (context == null) {
-            return Collections.singletonList(q.transformUVs(sprites[0].getSprite(), Quad.TOP_LEFT).rebake());
+            return Collections.singletonList(q.transformUVs(sprites[0], Quad.TOP_LEFT).rebake());
         }
 
-        return Collections.singletonList(q.transformUVs(sprites[0].getSprite(), getQuad(((CTMBlockRenderContext) context).getCTM(quad.getFace()))).rebake());
+        return Collections.singletonList(q.transformUVs(sprites[0], getQuad(((TextureContextCTM) context).getCTM(quad.getFace()))).rebake());
     }
 
-    private ISubmap getQuad(CTM ctm) {
+    private ISubmap getQuad(CTMLogic ctm) {
         if (ctm == null) {
             return Quad.TOP_LEFT;
         }
