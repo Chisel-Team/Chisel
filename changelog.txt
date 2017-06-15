@@ -1,3 +1,13 @@
+0.0.11:
+New
+- Most render logic moved to new mod, CTM
+Changes
+- Futura blocks are back to their former glory!
+- Antiblocks GLOW (and a few other blocks do too!)
+- Fix some potential packet exploits
+Fixes
+- Fix companion cube subtext
+
 0.0.10:
 New
 - Concrete Powder and Concrete Blocks.
