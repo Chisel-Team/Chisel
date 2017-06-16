@@ -2,15 +2,13 @@ package team.chisel.common.config;
 
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemDye;
 import net.minecraftforge.common.config.Configuration;
-
-import org.apache.commons.lang3.StringUtils;
-
 import team.chisel.Chisel;
 import team.chisel.Features;
-import team.chisel.ctm.client.util.CTMLogic;
 
 public class Configurations {
 
@@ -89,9 +87,6 @@ public class Configurations {
         /* client */
         category = "client";
         oldPillars = config.get(category, "pillarOldGraphics", false, "Use old pillar textures").getBoolean(false);
-        disableCTM = !config.get(category, "connectedTextures", true, "Enable connected textures").getBoolean(true);
-        CTMLogic.disableObscuredFaceCheckConfig = connectInsideCTM = config.get(category, "connectInsideCTM", false,
-                "Choose whether the inside corner is disconnected on a CTM block - http://imgur.com/eUywLZ4").getBoolean(false);
         blockDescriptions = config.get(category, "tooltipsUseBlockDescriptions", true, "Make variations of blocks have the same name, and use the description in tooltip to distinguish them.")
                 .getBoolean(true);
         imTooGoodForDescriptions = config.get(category, "imTooGoodForBlockDescriptions", false, "For those people who just hate block descriptions on the world gen!").getBoolean();

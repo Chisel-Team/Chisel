@@ -191,6 +191,9 @@ curseforge {
         mainArtifact(jar) {
             displayName = "Chisel - ${version}"
         }
+        relations {
+        	requiredLibrary 'ctm'
+        }
         addArtifact(apiJar)
     }
 }
