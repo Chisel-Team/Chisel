@@ -4,6 +4,12 @@ import java.io.File;
 
 import javax.annotation.Nonnull;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.google.common.collect.ImmutableSet;
+
+import lombok.SneakyThrows;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -11,18 +17,26 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.MissingModsException;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
+import net.minecraftforge.fml.common.versioning.InvalidVersionSpecificationException;
+import net.minecraftforge.fml.common.versioning.VersionRange;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -34,10 +48,10 @@ import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
-import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselFuelHandler;
+import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
@@ -47,7 +61,7 @@ import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkDataHandler;
 
-@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, dependencies = "required-after:ctm@[MC1.10.2-0.1.0.8,)", acceptedMinecraftVersions = "[1.9.4, 1.11)")
+@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.9.4, 1.11)")
 public class Chisel implements Reference {
 
     public static final Logger logger = LogManager.getLogger(MOD_NAME);
@@ -71,10 +85,21 @@ public class Chisel implements Reference {
         network.registerMessage(PacketHitechSettings.Handler.class, PacketHitechSettings.class, 1, Side.SERVER);
         network.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, 2, Side.CLIENT);
     }
-
+    
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;
         ChiselAPIProps.MOD_ID = MOD_ID;
+    }
+    
+    @Mod.EventHandler
+    @SneakyThrows
+    public void onConstruct(FMLConstructionEvent event) {
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            VersionRange range = VersionRange.createFromVersionSpec("[MC1.10.2-0.1.0.10,)");
+            if (!Loader.isModLoaded("ctm") || !range.containsVersion(Loader.instance().getIndexedModList().get("ctm").getProcessedVersion())) {
+                throw new MissingModsException(ImmutableSet.of(new DefaultArtifactVersion("ctm", range)), MOD_ID, MOD_NAME);
+            }
+        }
     }
 
     @Mod.EventHandler
