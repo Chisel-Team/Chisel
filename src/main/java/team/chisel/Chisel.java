@@ -96,7 +96,7 @@ public class Chisel implements Reference {
     @SneakyThrows
     public void onConstruct(FMLConstructionEvent event) {
         if (FMLCommonHandler.instance().getSide().isClient()) {
-            VersionRange range = VersionRange.createFromVersionSpec("[MC1.10.2-0.1.0.10,)");
+            VersionRange range = VersionRange.createFromVersionSpec("[MC1.11.2-0.1.0.2,)");
             if (!Loader.isModLoaded("ctm") || !range.containsVersion(Loader.instance().getIndexedModList().get("ctm").getProcessedVersion())) {
                 throw new MissingModsException(ImmutableSet.of(new DefaultArtifactVersion("ctm", range)), MOD_ID, MOD_NAME);
             }
