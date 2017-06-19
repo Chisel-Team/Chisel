@@ -308,7 +308,7 @@ public enum Features {
 
             for (int c = 0; c < bookshelves.length; c++)
             {
-                addShapedRecipe("bookshelf" + c, new ItemStack(bookshelves[c], 1), "S S", "BBB", "S S", 'S', new ItemStack(stairs[c], 1), 'B', new ItemStack(Items.BOOK, 1));
+                Features.addShapedRecipe("bookshelf" + c, new ItemStack(bookshelves[c], 1), "S S", "BBB", "S S", 'S', new ItemStack(stairs[c], 1), 'B', new ItemStack(Items.BOOK, 1));
             }
         }
     },
@@ -505,7 +505,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            addShapedRecipe("charcoal_uncraft", new ItemStack(Items.COAL, 9, 1), "X", 'X', "blockCharcoal");
+            Features.addShapedRecipe("charcoal_uncraft", new ItemStack(Items.COAL, 9, 1), "X", 'X', "blockCharcoal");
             addShapedRecipe(new ItemStack(ChiselBlocks.block_charcoal2, 1, 1), "XXX", "XXX", "XXX", 'X', "charcoal");
         }
     },
@@ -866,7 +866,7 @@ public enum Features {
 
             for (String dye : dyeOres)
             {
-                addShapedRecipe("concrete_" + EnumDyeColor.byDyeDamage(i).getName(), new ItemStack(ChiselBlocks.concrete_powder, 8, 15-i++), "SGS", "GDG", "SGS", 'S', "gravel", 'G', "sand", 'D', dye);
+                Features.addShapedRecipe("concrete_" + EnumDyeColor.byDyeDamage(i).getName(), new ItemStack(ChiselBlocks.concrete_powder, 8, 15-i++), "SGS", "GDG", "SGS", 'S', "gravel", 'G', "sand", 'D', dye);
             }
         }
     },
@@ -2924,7 +2924,7 @@ public enum Features {
                     'X', new ItemStack(Items.DYE, 1, 9));
 
             // Companion Cube, woo!
-            addShapedRecipe("companion_cube", new ItemStack(ChiselBlocks.valentines, 32, 9), "***", "*X*", "***",
+            Features.addShapedRecipe("companion_cube", new ItemStack(ChiselBlocks.valentines, 32, 9), "***", "*X*", "***",
                     '*', "stone",
                     'X', new ItemStack(Items.SKULL, 1, OreDictionary.WILDCARD_VALUE));
         }
@@ -2986,7 +2986,7 @@ public enum Features {
                     'E', new ItemStack(Items.ENDER_EYE),
                     'O', new ItemStack(Blocks.OBSIDIAN));
 
-            addShapedRecipe("voidstone2", new ItemStack(ChiselBlocks.voidstone, 48, 0), " P ", "PEP", " P ",
+            Features.addShapedRecipe("voidstone2", new ItemStack(ChiselBlocks.voidstone, 48, 0), " P ", "PEP", " P ",
                     'E', new ItemStack(Items.ENDER_PEARL),
                     'P', new ItemStack(Blocks.PURPUR_BLOCK));
         }
