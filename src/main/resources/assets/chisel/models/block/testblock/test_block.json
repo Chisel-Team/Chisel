@@ -1,0 +1,10 @@
+{
+	"parent":"chisel:models/block/chisel_block",
+	"ctm": "parent",
+	"faces": {
+		"face":"chisel:stone.cf"
+	},
+	"textures": {
+		"up": "blocks/stone"
+	}
+}

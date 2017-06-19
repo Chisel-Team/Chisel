@@ -1,12 +1,7 @@
 package team.chisel;
 
-import java.io.File;
-
-import javax.annotation.Nonnull;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.google.common.collect.ImmutableSet;
+import lombok.SneakyThrows;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -15,22 +10,22 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.*;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
+import net.minecraftforge.fml.common.versioning.VersionRange;
 import net.minecraftforge.fml.relauncher.Side;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import team.chisel.api.ChiselAPIProps;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.client.gui.PacketChiselButton;
-import team.chisel.client.gui.PacketChiselNBT;
+import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
@@ -46,6 +41,9 @@ import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkDataHandler;
+
+import javax.annotation.Nonnull;
+import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.12, 1.12.1)")
 public class Chisel implements Reference {
@@ -69,12 +67,24 @@ public class Chisel implements Reference {
     public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
     static {
         network.registerMessage(PacketChiselButton.Handler.class, PacketChiselButton.class, 0, Side.SERVER);
-        network.registerMessage(PacketChiselNBT.Handler.class, PacketChiselNBT.class, 1, Side.SERVER);
+        network.registerMessage(PacketHitechSettings.Handler.class, PacketHitechSettings.class, 1, Side.SERVER);
         network.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, 2, Side.CLIENT);
     }
-
+    
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;
+        ChiselAPIProps.MOD_ID = MOD_ID;
+    }
+    
+    @Mod.EventHandler
+    @SneakyThrows
+    public void onConstruct(FMLConstructionEvent event) {
+        if (FMLCommonHandler.instance().getSide().isClient()) {
+            VersionRange range = VersionRange.createFromVersionSpec("[MC1.11.2-0.1.0.2,)");
+            if (!Loader.isModLoaded("ctm") || !range.containsVersion(Loader.instance().getIndexedModList().get("ctm").getProcessedVersion())) {
+                throw new MissingModsException(ImmutableSet.of(new DefaultArtifactVersion("ctm", range)), MOD_ID, MOD_NAME);
+            }
+        }
     }
 
     @Mod.EventHandler

@@ -52,4 +52,5 @@ public enum ChiselModelRegistry implements Reference {
         // Nope
         ModelLoader.registerItemVariants(Item.getItemFromBlock(block));
     }
+
 }

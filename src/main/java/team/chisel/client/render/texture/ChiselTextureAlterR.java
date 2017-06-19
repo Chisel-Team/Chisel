@@ -4,21 +4,22 @@ import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
-import team.chisel.api.render.IBlockRenderContext;
-import team.chisel.api.render.TextureInfo;
-import team.chisel.client.render.Quad;
-import team.chisel.client.render.ctm.ISubmap;
 import team.chisel.client.render.ctx.BlockRenderContextAlterR;
 import team.chisel.client.render.type.BlockRenderTypeAlterR;
+import team.chisel.ctm.api.texture.ISubmap;
+import team.chisel.ctm.api.texture.ITextureContext;
+import team.chisel.ctm.api.util.TextureInfo;
+import team.chisel.ctm.client.texture.render.AbstractTexture;
+import team.chisel.ctm.client.util.Quad;
 
-public class ChiselTextureAlterR extends AbstractChiselTexture<BlockRenderTypeAlterR> {
+public class ChiselTextureAlterR extends AbstractTexture<BlockRenderTypeAlterR> {
 
     public ChiselTextureAlterR(BlockRenderTypeAlterR type, TextureInfo info) {
         super(type, info);
     }
 
     @Override
-    public List<BakedQuad> transformQuad(BakedQuad quad, IBlockRenderContext context, int quadGoal) {
+    public List<BakedQuad> transformQuad(BakedQuad quad, ITextureContext context, int quadGoal) {
         
         ISubmap outputQuad;
         int num = context == null ? 0 : ((BlockRenderContextAlterR)context).getTexture();
@@ -39,6 +40,6 @@ public class ChiselTextureAlterR extends AbstractChiselTexture<BlockRenderTypeAl
                 break;
         }
 
-        return Collections.singletonList(Quad.from(quad).transformUVs(sprites[0].getSprite(), outputQuad).setFullbright(fullbright).rebake());
+        return Collections.singletonList(makeQuad(quad, context).transformUVs(sprites[0], outputQuad).rebake());
     }
 }

@@ -7,6 +7,15 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
+
+import com.google.common.base.Function;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import lombok.Getter;
 import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
@@ -14,8 +23,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.Variant;
-import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.VertexFormat;
@@ -27,38 +34,31 @@ import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.client.model.ModelProcessingHelper;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
-import net.minecraftforge.common.property.IExtendedBlockState;
-import team.chisel.api.render.IChiselFace;
-import team.chisel.api.render.IChiselTexture;
 import team.chisel.common.util.json.JsonHelper;
+import team.chisel.ctm.api.model.IModelCTM;
+import team.chisel.ctm.api.texture.ICTMTexture;
+import team.chisel.ctm.api.texture.IChiselFace;
+import team.chisel.ctm.client.model.parsing.ModelLoaderCTM;
 
-import com.google.common.base.Function;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-
-public class ModelChisel implements IModel {
-
-    private static StateMapperBase mapper = new DefaultStateMapper();
+@Deprecated
+public class ModelChisel implements IModelCTM {
     
     private Variant model;
-    private Map<String, Variant> models = Maps.newHashMap();;
+    private Map<String, Variant> models = Maps.newHashMap();
     
     private String face;
     private Map<EnumFacing, String> overrides = Maps.newHashMap();
     
-    @Getter
+    @Getter(onMethod = @__({@Override}))
     @Accessors(fluent = true)
     private boolean ignoreStates;
     
+    @Getter
+    @Accessors(fluent = true)
+    private boolean ambientOcclusion = true;
+    
     private transient IChiselFace faceObj;
     private transient Map<EnumFacing, IChiselFace> overridesObj = new EnumMap<>(EnumFacing.class);
-    private transient IBakedModel modelObj;
-    
-    private transient Map<String, IBakedModel> modelsObj = Maps.newHashMap();
-    
-    private transient Map<IBlockState, IBakedModel> stateMap = Maps.newHashMap();
     
     private transient List<ResourceLocation> textures = Lists.newArrayList();
     
@@ -79,16 +79,25 @@ public class ModelChisel implements IModel {
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         Function<ResourceLocation, TextureAtlasSprite> dummyGetter = t -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
-        modelObj = bake(model, format, dummyGetter);
-        for (Entry<String, Variant> e : models.entrySet()) {
-            Variant v = e.getValue();
-            modelsObj.put(e.getKey(), bake(v, format, dummyGetter));
-        }
+        IBakedModel parent = bake(model, format, dummyGetter);
+
         layers = 0;
-        for (IChiselTexture<?> tex : getChiselTextures()) {
-            layers |= 1 << tex.getLayer().ordinal();
+        for (ICTMTexture<?> tex : getChiselTextures()) {
+            BlockRenderLayer layer = tex.getLayer();
+            if (layer != null) {
+                layers |= 1 << layer.ordinal();
+            }
         }
-        return new ModelChiselBlock(this);
+        
+        JsonObject rawmodel = ModelLoaderCTM.INSTANCE.getJSON(model.getModelLocation()).getAsJsonObject();
+        if (rawmodel.has("ambientocclusion")) {
+            JsonElement ao = rawmodel.get("ambientocclusion");
+            if (ao.isJsonPrimitive() && ao.getAsJsonPrimitive().isBoolean()) {
+                this.ambientOcclusion = ao.getAsBoolean();
+            }
+        }
+        
+        return new ModelChiselBlock(this, parent);
     }
     
     @SneakyThrows
@@ -98,7 +107,8 @@ public class ModelChisel implements IModel {
         return imodel.bake(variant.getState(), format, getter);
     }
     
-    void load() {
+    @Override
+    public void load() {
         if (faceObj != null) {
             return;
         }
@@ -115,39 +125,45 @@ public class ModelChisel implements IModel {
         return TRSRTransformation.identity();
     }
 
+    @Override
     public IChiselFace getDefaultFace() {
         return faceObj;
     }
     
-    public List<IChiselTexture<?>> getChiselTextures() {
-        List<IChiselTexture<?>> ret = Lists.newArrayList();
+    @Override
+    public List<ICTMTexture<?>> getChiselTextures() {
+        List<ICTMTexture<?>> ret = Lists.newArrayList();
         ret.addAll(getDefaultFace().getTextureList());
         for (IChiselFace face : overridesObj.values()) {
             ret.addAll(face.getTextureList());
         }
         return ret;
     }
+    
+    @Override
+    public ICTMTexture<?> getTexture(String iconName) {
+        return null;
+    }
 
+    @Override
     public IChiselFace getFace(EnumFacing facing) {
         return overridesObj.getOrDefault(facing, faceObj);
     }
 
-    public IBakedModel getModel(IBlockState state) {
-        if (state instanceof IExtendedBlockState) {
-            state = ((IExtendedBlockState)state).getClean();
-        }
-        String stateStr = mapper.getPropertyString(state.getProperties());
-        stateStr = stateStr.substring(stateStr.indexOf(",") + 1, stateStr.length());
-        
-        final String capture = stateStr;
-        if (modelsObj.containsKey(stateStr)) {
-            stateMap.computeIfAbsent(state, s -> modelsObj.get(capture));
-        }
-        
-        return stateMap.getOrDefault(state, modelObj);
+    @Override
+    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+        return ((layers >> layer.ordinal()) & 1) == 1;
     }
 
-    public boolean canRenderInLayer(BlockRenderLayer layer) {
-        return ((layers >> layer.ordinal()) & 1) == 1;
+    @Override
+    @Nullable
+    public TextureAtlasSprite getOverrideSprite(int tintIndex) {
+        return null;
+    }
+
+    @Override
+    @Nullable
+    public ICTMTexture<?> getOverrideTexture(int tintIndex, String sprite) {
+        return null;
     }
 }

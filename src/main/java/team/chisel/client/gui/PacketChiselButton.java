@@ -2,34 +2,31 @@ package team.chisel.client.gui;
 
 import java.util.Optional;
 
+import javax.annotation.Nonnull;
+
 import io.netty.buffer.ByteBuf;
 import lombok.NoArgsConstructor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import team.chisel.common.inventory.ContainerChisel;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingRegistry;
+import team.chisel.common.inventory.ContainerChiselHitech;
 
 @NoArgsConstructor
 public class PacketChiselButton implements IMessage {
 
-    private ItemStack target;
-    private int chiselSlot;
     private int[] slotIds;
 
-    public PacketChiselButton(ItemStack target, int chiselSlot, int... slots) {
-        this.target = target;
-        this.chiselSlot = chiselSlot;
+    public PacketChiselButton(int... slots) {
         this.slotIds = slots;
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
-        ByteBufUtils.writeItemStack(buf, target);
-        buf.writeByte(chiselSlot);
         buf.writeByte(slotIds.length);
         for (int i : slotIds) {
             buf.writeByte(i);
@@ -38,8 +35,6 @@ public class PacketChiselButton implements IMessage {
 
     @Override
     public void fromBytes(ByteBuf buf) {
-        target = ByteBufUtils.readItemStack(buf);
-        chiselSlot = buf.readByte();
         int len = buf.readByte();
         slotIds = new int[len];
         for (int i = 0; i < slotIds.length; i++) {
@@ -52,20 +47,32 @@ public class PacketChiselButton implements IMessage {
         @Override
         public IMessage onMessage(PacketChiselButton message, MessageContext ctx) {
             EntityPlayerMP player = ctx.getServerHandler().player;
-            chiselAll(player, message.chiselSlot, message.target, message.slotIds);
+            ctx.getServerHandler().player.getServerWorld().addScheduledTask(
+                    () -> chiselAll(player, message.slotIds)
+            );
             return null;
         }
     }
     
-    public static void chiselAll(EntityPlayer player, int chiselSlot, ItemStack target, int[] slots) {
-        if (player.openContainer instanceof ContainerChisel) {
-            ContainerChisel container = (ContainerChisel) player.openContainer;
-            ItemStack chisel = player.inventory.getStackInSlot(chiselSlot);
-            if (chisel.isEmpty()) {
+    public static void chiselAll(EntityPlayer player, int[] slots) {
+        if (player.openContainer instanceof ContainerChiselHitech) {
+            ContainerChiselHitech container = (ContainerChiselHitech) player.openContainer;
+            ItemStack chisel = container.getChisel();
+            ItemStack target = container.getTargetStack();
+
+            @SuppressWarnings("null")
+            @Nonnull
+            ICarvingRegistry carving = CarvingUtils.getChiselRegistry();
+
+            if (chisel.isEmpty() || target.isEmpty()) {
                 return;
             }
+
             for (int i : slots) {
-                Optional.ofNullable(player.inventory.getStackInSlot(i)).ifPresent(s -> {
+                Optional.ofNullable(player.inventory.getStackInSlot(i)).ifPresent((@Nonnull ItemStack s) -> {
+                    if (carving.getGroup(target) != carving.getGroup(s)) {
+                        return;
+                    }
                     ItemStack stack = target.copy();
                     int toCraft = s.getCount();
                     if (chisel.isItemStackDamageable()) {
@@ -77,7 +84,7 @@ public class PacketChiselButton implements IMessage {
                     player.inventory.setInventorySlotContents(i, stack);
                     if (chisel.getCount() <= 0) {
                         container.getInventoryChisel().getStackInSpecialSlot().shrink(toCraft);
-                        player.inventory.setInventorySlotContents(chiselSlot, ItemStack.EMPTY);
+                        player.inventory.setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
                         if (s.getCount() > toCraft) {
                             ItemStack remainder = s.copy();
                             remainder.shrink(toCraft);
