@@ -1,6 +1,14 @@
 package team.chisel;
 
+import java.io.File;
+
+import javax.annotation.Nonnull;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.google.common.collect.ImmutableSet;
+
 import lombok.SneakyThrows;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -10,8 +18,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.*;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.event.RegistryEvent.MissingMappings;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.MissingModsException;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -19,8 +36,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
 import net.minecraftforge.fml.common.versioning.VersionRange;
 import net.minecraftforge.fml.relauncher.Side;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import team.chisel.api.ChiselAPIProps;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.ChiselGuiHandler;
@@ -34,16 +49,10 @@ import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselFuelHandler;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
-import team.chisel.common.item.ItemChisel;
-import team.chisel.common.item.ItemChisel.ChiselType;
-import team.chisel.common.item.ItemOffsetTool;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkDataHandler;
-
-import javax.annotation.Nonnull;
-import java.io.File;
 
 @Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, acceptedMinecraftVersions = "[1.12, 1.12.1)")
 public class Chisel implements Reference {
@@ -56,11 +65,6 @@ public class Chisel implements Reference {
 
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY, modId = MOD_ID)
     public static CommonProxy proxy;
-
-    @SuppressWarnings("null")
-    public static @Nonnull ItemChisel itemChiselIron, itemChiselDiamond, itemChiselHitech;
-    @SuppressWarnings("null")
-    public static @Nonnull ItemOffsetTool itemOffsetTool;
 
     public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
 
@@ -97,18 +101,6 @@ public class Chisel implements Reference {
         Configurations.config.load();
         Configurations.refreshConfig();
 
-        itemChiselIron = new ItemChisel(ChiselType.IRON);
-        itemChiselDiamond = new ItemChisel(ChiselType.DIAMOND);
-        itemChiselHitech = new ItemChisel(ChiselType.HITECH);
-
-        itemOffsetTool = new ItemOffsetTool();
-
-        GameRegistry.register(itemChiselIron);
-        GameRegistry.register(itemChiselDiamond);
-        GameRegistry.register(itemChiselHitech);
-
-        GameRegistry.register(itemOffsetTool);
-
         // TODO once forge has recipes
 //        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
 //        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
@@ -124,8 +116,6 @@ public class Chisel implements Reference {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
-        Features.preInit();
-
         //EntityRegistry.registerModEntity(EntityFallingBlockCarvable.class, "falling_block", 60, Chisel.instance, 64, 3, false);
 
         proxy.preInit(event);
@@ -133,8 +123,6 @@ public class Chisel implements Reference {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        Features.init();
-
         proxy.init();
         // BlockRegistry.init(event);
 
@@ -199,79 +187,4 @@ public class Chisel implements Reference {
             IMCHandler.INSTANCE.handleMessage(msg);
         }
     }
-
-    @Mod.EventHandler //TODO fix
-    public void onMissingMappings(FMLMissingMappingsEvent event) {
-        for (FMLMissingMappingsEvent.MissingMapping mapping : event.get()) {
-            if (mapping.resourceLocation.getResourceDomain().equals(Reference.MOD_ID)) {
-                @Nonnull
-                String path = mapping.resourceLocation.getResourcePath();
-                if (path.endsWith("extra")) {
-                    path = path.replace("extra", "2");
-                    ResourceLocation newRes = new ResourceLocation(mapping.resourceLocation.getResourceDomain(), path);
-                    Block block = ForgeRegistries.BLOCKS.getValue(newRes);
-                    if (block != null) {
-                        if (mapping.type == GameRegistry.Type.BLOCK) {
-                            mapping.remap(block);
-                        } else {
-                            mapping.remap(Item.getItemFromBlock(block));
-                        }
-                    }
-                }
-
-                if(path.endsWith("bookshelf"))
-                {
-                    path = path.replace("bookshelf", "bookshelf_oak");
-                    ResourceLocation newRes = new ResourceLocation(mapping.resourceLocation.getResourceDomain(), path);
-                    Block block = ForgeRegistries.BLOCKS.getValue(newRes);
-
-                    if (block != null) {
-                        if (mapping.type == GameRegistry.Type.BLOCK) {
-                            mapping.remap(block);
-                        } else {
-                            mapping.remap(Item.getItemFromBlock(block));
-                        }
-                    }
-                }
-                else if (path.toLowerCase().endsWith("bookshelf_dark-oak"))
-                {
-                    path = path.replace("bookshelf_dark-oak", "bookshelf_darkoak");
-                    ResourceLocation newRes = new ResourceLocation(mapping.resourceLocation.getResourceDomain(), path);
-                    Block block = ForgeRegistries.BLOCKS.getValue(newRes);
-
-                    if (block != null) {
-                        if (mapping.type == GameRegistry.Type.BLOCK) {
-                            mapping.remap(block);
-                        } else {
-                            mapping.remap(Item.getItemFromBlock(block));
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    // @Mod.EventHandler
-    // public void postInit(FMLPostInitializationEvent event){
-    // Map ro;
-    // try {
-    // Field f = Minecraft.class.getDeclaredField("modelManager");
-    // f.setAccessible(true);
-    // ModelManager m=(ModelManager)f.get(Minecraft.getMinecraft());
-    // Field f2 = ModelManager.class.getDeclaredField("modelRegistry");
-    // f2.setAccessible(true);
-    // IRegistry r = (IRegistry)f2.get(m);
-    // Field f3 = r.getClass().getDeclaredField("registryObjects");
-    // f3.setAccessible(true);
-    // ro = (Map)f3.get(r);
-    // } catch (Exception exception){
-    // throw new RuntimeException(exception);
-    // }
-    // for (Map.Entry e : (Set<Map.Entry>)ro.entrySet()){
-    // logger.info(e.getKey().toString()+" "+e.getValue().toString());
-    // }
-    // throw new RuntimeException("look");
-    //
-    // }
-
 }

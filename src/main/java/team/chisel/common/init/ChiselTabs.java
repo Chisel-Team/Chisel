@@ -54,7 +54,7 @@ public class ChiselTabs {
         @Override
         @SideOnly(Side.CLIENT)
         public ItemStack getTabIconItem() {
-            return new ItemStack(Chisel.itemChiselIron);
+            return new ItemStack(ChiselItems.chisel_iron);
         }
     }
 

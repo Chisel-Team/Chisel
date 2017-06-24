@@ -37,6 +37,7 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
@@ -44,11 +45,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import net.minecraftforge.registries.IForgeRegistry;
 import team.chisel.api.block.BlockCreator;
 import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
@@ -65,9 +70,13 @@ import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
+import team.chisel.common.item.ItemChisel;
+import team.chisel.common.item.ItemOffsetTool;
+import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.GenerationHandler.WorldGenInfo;
 
+@EventBusSubscriber
 public enum Features {
 
     // @formatter:off
@@ -91,9 +100,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Aluminum");
+            registerIngotUncraftRecipe(registry, "Aluminum");
         }
     },
 
@@ -179,9 +188,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.antiblock, 8, 15), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone");
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.antiblock, 8, 15), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone");
         }
     },
 
@@ -239,7 +248,7 @@ public enum Features {
         }
 
         @Override
-        void addRecipes() {
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
             if (!Configurations.basaltSpecialGen) {
                 GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.basalt2.getDefaultState().withProperty(ChiselBlocks.basalt2.getMetaProp(), 7),
                         new WorldGenInfo(Configurations.basaltVeinAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
@@ -301,14 +310,14 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
             BlockCarvable[] bookshelves = new BlockCarvable[]{ChiselBlocks.bookshelf_spruce, ChiselBlocks.bookshelf_birch, ChiselBlocks.bookshelf_jungle, ChiselBlocks.bookshelf_acacia, ChiselBlocks.bookshelf_darkoak};
             Block[] stairs = new Block[]{Blocks.SPRUCE_STAIRS, Blocks.BIRCH_STAIRS, Blocks.JUNGLE_STAIRS, Blocks.ACACIA_STAIRS, Blocks.DARK_OAK_STAIRS};
 
             for (int c = 0; c < bookshelves.length; c++)
             {
-                Features.addShapedRecipe("bookshelf" + c, new ItemStack(bookshelves[c], 1), "S S", "BBB", "S S", 'S', new ItemStack(stairs[c], 1), 'B', new ItemStack(Items.BOOK, 1));
+                Features.addShapedRecipe(registry, "bookshelf" + c, new ItemStack(bookshelves[c], 1), "S S", "BBB", "S S", 'S', new ItemStack(stairs[c], 1), 'B', new ItemStack(Items.BOOK, 1));
             }
         }
     },
@@ -382,9 +391,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Bronze");
+            registerIngotUncraftRecipe(registry, "Bronze");
         }
     },
 
@@ -415,11 +424,11 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
             //FurnaceRecipes.instance().addSmelting(new ItemStack(Blocks.GRAVEL).getItem(), new ItemStack(ChiselBlocks.brownstone), 0.1F);
 
-            addShapedRecipe(new ItemStack(ChiselBlocks.brownstone, 4, 0), " S ", "SCS", " S ", 'S', "sandstone", 'C', new ItemStack(Items.CLAY_BALL, 1));
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.brownstone, 4, 0), " S ", "SCS", " S ", 'S', "sandstone", 'C', new ItemStack(Items.CLAY_BALL, 1));
         }
     },
 
@@ -503,10 +512,21 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            Features.addShapedRecipe("charcoal_uncraft", new ItemStack(Items.COAL, 9, 1), "X", 'X', "blockCharcoal");
-            addShapedRecipe(new ItemStack(ChiselBlocks.block_charcoal2, 1, 1), "XXX", "XXX", "XXX", 'X', "charcoal");
+            Features.addShapedRecipe(registry, "charcoal_uncraft", new ItemStack(Items.COAL, 9, 1), "X", 'X', "blockCharcoal");
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.block_charcoal2, 1, 1), "XXX", "XXX", "XXX", 'X', "charcoal");
+        }
+    },
+    
+    CHISEL {
+        @Override
+        void addItems(IForgeRegistry<Item> registry) {
+            registry.register(new ItemChisel(ChiselType.IRON));
+            registry.register(new ItemChisel(ChiselType.DIAMOND));
+            registry.register(new ItemChisel(ChiselType.HITECH));
+
+            registry.register(new ItemOffsetTool());
         }
     },
 
@@ -523,9 +543,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.cloud, 32, 0), " S ", "S S", " S ", 'S', new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.cloud, 32, 0), " S ", "S S", " S ", 'S', new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
         }
     },
 
@@ -549,9 +569,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Cobalt");
+            registerIngotUncraftRecipe(registry, "Cobalt");
         }
     },
 
@@ -657,9 +677,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(Items.COAL, 9), "X", 'X', "blockCoal");
+            addShapedRecipe(registry, new ItemStack(Items.COAL, 9), "X", 'X', "blockCoal");
         }
     },
 
@@ -709,9 +729,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerOreUncraftRecipe("blockFuelCoke", "fuelCoke");
+            registerOreUncraftRecipe(registry, "blockFuelCoke", "fuelCoke");
         }
     },
 
@@ -860,13 +880,13 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
             int i = 0;
 
             for (String dye : dyeOres)
             {
-                Features.addShapedRecipe("concrete_" + EnumDyeColor.byDyeDamage(i).getName(), new ItemStack(ChiselBlocks.concrete_powder, 8, 15-i++), "SGS", "GDG", "SGS", 'S', "gravel", 'G', "sand", 'D', dye);
+                Features.addShapedRecipe(registry, "concrete_" + EnumDyeColor.byDyeDamage(i).getName(), new ItemStack(ChiselBlocks.concrete_powder, 8, 15-i++), "SGS", "GDG", "SGS", 'S', "gravel", 'G', "sand", 'D', dye);
             }
         }
     },
@@ -891,9 +911,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Copper");
+            registerIngotUncraftRecipe(registry, "Copper");
         }
     },
 
@@ -945,9 +965,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(Items.DIAMOND, 9), "X", 'X', "blockDiamond");
+            addShapedRecipe(registry, new ItemStack(Items.DIAMOND, 9), "X", 'X', "blockDiamond");
         }
     },
 
@@ -1048,9 +1068,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Electrum");
+            registerIngotUncraftRecipe(registry, "Electrum");
         }
     },
 
@@ -1081,9 +1101,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(Items.EMERALD, 9), "X", 'X', "blockEmerald");
+            addShapedRecipe(registry, new ItemStack(Items.EMERALD, 9), "X", 'X', "blockEmerald");
         }
     },
 
@@ -1154,7 +1174,7 @@ public enum Features {
                     .build();
         }
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
             GameRegistry.addRecipe(new ItemStack(ChiselBlocks.ender_pearl_block), "SS", "SS", 'S', new ItemStack(Items.ENDER_PEARL));
         }
@@ -1242,9 +1262,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.factory, 32, 0), "SXS", "X X", "SXS",
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.factory, 32, 0), "SXS", "X X", "SXS",
                     'X', new ItemStack(Blocks.STONE, 1),
                     'S', new ItemStack(Items.IRON_INGOT, 1));
         }
@@ -1264,9 +1284,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.futura, 8, 0), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustRedstone");
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.futura, 8, 0), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustRedstone");
         }
     },
 
@@ -1517,9 +1537,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Gold");
+            registerIngotUncraftRecipe(registry, "Gold");
         }
     },
 
@@ -1696,9 +1716,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Invar");
+            registerIngotUncraftRecipe(registry, "Invar");
         }
     },
 
@@ -1743,9 +1763,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Iron");
+            registerIngotUncraftRecipe(registry, "Iron");
         }
     },
 
@@ -1794,9 +1814,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.laboratory, 8), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.QUARTZ, 1));
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.laboratory, 8), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.QUARTZ, 1));
         }
     },
 
@@ -1862,9 +1882,9 @@ public enum Features {
                     .build(b -> b.setHardness(4.0F).setResistance(50.0F).setSoundType(SoundType.STONE));
         }
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.lavastone, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.LAVA_BUCKET, 1));
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.lavastone, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.LAVA_BUCKET, 1));
         }
     },
 
@@ -1888,9 +1908,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Lead");
+            registerIngotUncraftRecipe(registry, "Lead");
         }
     },
 
@@ -1971,7 +1991,7 @@ public enum Features {
         }
 
         @Override
-        void addRecipes() {
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
             GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.limestone2.getDefaultState().withProperty(ChiselBlocks.limestone2.getMetaProp(), 7),
                     new WorldGenInfo(Configurations.limestoneAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
@@ -2032,7 +2052,7 @@ public enum Features {
         }
 
         @Override
-        void addRecipes() {
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
             GenerationHandler.INSTANCE.addGeneration(ChiselBlocks.marble2.getDefaultState().withProperty(ChiselBlocks.marble2.getMetaProp(), 7),
                     new WorldGenInfo(Configurations.marbleAmount, 32, 64, 1, BlockMatcher.forBlock(Blocks.STONE)));
         }
@@ -2168,9 +2188,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Nickel");
+            registerIngotUncraftRecipe(registry, "Nickel");
         }
     },
 
@@ -2220,9 +2240,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.paper, 32), "ppp", "psp", "ppp", 'p', Items.PAPER, 's', "stickWood");
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.paper, 32), "ppp", "psp", "ppp", 'p', Items.PAPER, 's', "stickWood");
         }
     },
 
@@ -2281,9 +2301,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Platinum");
+            registerIngotUncraftRecipe(registry, "Platinum");
         }
     },
 
@@ -2452,9 +2472,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(Items.REDSTONE, 9), "X", 'X', "blockRedstone");
+            addShapedRecipe(registry, new ItemStack(Items.REDSTONE, 9), "X", 'X', "blockRedstone");
         }
     },
 
@@ -2613,9 +2633,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Silver");
+            registerIngotUncraftRecipe(registry, "Silver");
         }
     },
 
@@ -2639,9 +2659,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Steel");
+            registerIngotUncraftRecipe(registry, "Steel");
         }
     },
 
@@ -2798,9 +2818,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.temple, 8), "***", "*X*", "***",
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.temple, 8), "***", "*X*", "***",
                     '*', new ItemStack(Blocks.STONE, 1),
                     'X', new ItemStack(Items.DYE, 1, 6));
         }
@@ -2826,9 +2846,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Tin");
+            registerIngotUncraftRecipe(registry, "Tin");
         }
     },
     
@@ -2865,9 +2885,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.tyrian, 32, 0), "SXS", "X X", "SXS",
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.tyrian, 32, 0), "SXS", "X X", "SXS",
                     'S', new ItemStack(Blocks.STONE, 1),
                     'X', new ItemStack(Items.IRON_INGOT, 1));
         }
@@ -2893,9 +2913,9 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            registerIngotUncraftRecipe("Uranium");
+            registerIngotUncraftRecipe(registry, "Uranium");
         }
     },
 
@@ -2917,14 +2937,14 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.valentines, 4), "***", "*X*", "***",
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.valentines, 4), "***", "*X*", "***",
                     '*', "stone",
                     'X', new ItemStack(Items.DYE, 1, 9));
 
             // Companion Cube, woo!
-            Features.addShapedRecipe("companion_cube", new ItemStack(ChiselBlocks.valentines, 32, 9), "***", "*X*", "***",
+            Features.addShapedRecipe(registry, "companion_cube", new ItemStack(ChiselBlocks.valentines, 32, 9), "***", "*X*", "***",
                     '*', "stone",
                     'X', new ItemStack(Items.SKULL, 1, OreDictionary.WILDCARD_VALUE));
         }
@@ -2980,13 +3000,13 @@ public enum Features {
         }
 
         @Override
-        void addRecipes()
+        void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(new ItemStack(ChiselBlocks.voidstone, 16, 0), " E ", "OOO", " E ",
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.voidstone, 16, 0), " E ", "OOO", " E ",
                     'E', new ItemStack(Items.ENDER_EYE),
                     'O', new ItemStack(Blocks.OBSIDIAN));
 
-            Features.addShapedRecipe("voidstone2", new ItemStack(ChiselBlocks.voidstone, 48, 0), " P ", "PEP", " P ",
+            Features.addShapedRecipe(registry, "voidstone2", new ItemStack(ChiselBlocks.voidstone, 48, 0), " P ", "PEP", " P ",
                     'E', new ItemStack(Items.ENDER_PEARL),
                     'P', new ItemStack(Blocks.PURPUR_BLOCK));
         }
@@ -3033,8 +3053,8 @@ public enum Features {
         }
 
         @Override
-        void addRecipes() {
-            addShapedRecipe(new ItemStack(ChiselBlocks.waterstone, 8, 0), "***", "*X*", "***",
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.waterstone, 8, 0), "***", "*X*", "***",
                     '*', new ItemStack(Blocks.STONE, 1),
                     'X', new ItemStack(Items.WATER_BUCKET, 1));
         }
@@ -3122,16 +3142,11 @@ public enum Features {
 
     ;
 
-    static void init() {
-        Chisel.logger.info("Starting init...");
-        loadRecipes();
-        Chisel.logger.info("Init finished.");
-    }
-
-    private static void loadBlocks() {
+    @SubscribeEvent
+    public static void loadBlocks(RegistryEvent.Register<Block> event) {
         Chisel.logger.info("Loading blocks...");
         int num = 0;
-        ChiselBlockFactory factory = ChiselBlockFactory.newFactory(Chisel.MOD_ID);
+        ChiselBlockFactory factory = ChiselBlockFactory.newFactory(event.getRegistry(), Chisel.MOD_ID);
         for (Features f : values()) {
             if (f.enabled()) {
                 f.addBlocks(factory);
@@ -3146,12 +3161,13 @@ public enum Features {
         Chisel.logger.info("Tile Entities loaded.");
     }
 
-    private static void loadItems() {
+    @SubscribeEvent
+    public static void loadItems(RegistryEvent.Register<Item> event) {
         Chisel.logger.info("Loading items...");
         int num = 0;
         for (Features f : values()) {
             if (f.enabled()) {
-                f.addItems();
+                f.addItems(event.getRegistry());
                 ++num;
             } else {
                 logDisabled(f);
@@ -3160,12 +3176,13 @@ public enum Features {
         Chisel.logger.info(num + " Feature's items loaded.");
     }
 
-    private static void loadRecipes() {
+    @SubscribeEvent
+    public static void loadRecipes(RegistryEvent.Register<IRecipe> event) {
         Chisel.logger.info("Loading recipes...");
         int num = 0;
         for (Features f : values()) {
             if (f.enabled()) {
-                f.addRecipes();
+                f.addRecipes(event.getRegistry());
                 ++num;
             } else {
                 logDisabled(f);
@@ -3193,13 +3210,6 @@ public enum Features {
         return false;
     }
 
-    static void preInit() {
-        Chisel.logger.info("Starting pre-init...");
-        loadBlocks();
-        loadItems();
-        Chisel.logger.info("Pre-init finished.");
-    }
-
     private Features parent;
 
     private String requiredMod;
@@ -3225,11 +3235,11 @@ public enum Features {
         ;
     }
 
-    void addItems() {
+    void addItems(IForgeRegistry<Item> registry) {
         ;
     }
 
-    void addRecipes() {
+    void addRecipes(IForgeRegistry<IRecipe> registry) {
         ;
     }
 
@@ -3259,12 +3269,12 @@ public enum Features {
         // GameRegistry.registerBlock(top, ItemCarvableSlab.class, name); TODO
     }
 
-    private static void registerIngotUncraftRecipe(String ore)
+    private static void registerIngotUncraftRecipe(IForgeRegistry<IRecipe> registry, String ore)
     {
-        registerOreUncraftRecipe("block" + ore, "ingot" + ore);
+        registerOreUncraftRecipe(registry, "block" + ore, "ingot" + ore);
     }
 
-    private static void registerOreUncraftRecipe(String blockOre, String endOre)
+    private static void registerOreUncraftRecipe(IForgeRegistry<IRecipe> registry, String blockOre, String endOre)
     {
         if(OreDictionary.doesOreNameExist(endOre)) {
             List<ItemStack> oreList = OreDictionary.getOres(endOre);
@@ -3272,50 +3282,50 @@ public enum Features {
             if(oreList.size() > 0)
             {
                 ItemStack result = oreList.get(0);
-                addShapedRecipe("uncraft_" + blockOre, new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', blockOre);
+                addShapedRecipe(registry, "uncraft_" + blockOre, new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', blockOre);
             }
         }
     }
     
     private static final ResourceLocation RECIPE_GROUP = new ResourceLocation("", "");
     
-    private void addShapelessRecipe(ItemStack result, Object... ingredients) { 
-        addShapelessRecipe(Configurations.featureName(this), result, ingredients); 
+    private void addShapelessRecipe(IForgeRegistry<IRecipe> registry, ItemStack result, Object... ingredients) { 
+        addShapelessRecipe(registry, Configurations.featureName(this), result, ingredients); 
     }
-    private void addShapelessRecipe(Block result, Object... ingredients) {
-        addShapelessRecipe(Configurations.featureName(this), result, ingredients); 
+    private void addShapelessRecipe(IForgeRegistry<IRecipe> registry, Block result, Object... ingredients) {
+        addShapelessRecipe(registry, Configurations.featureName(this), result, ingredients); 
     }
-    private void addShapelessRecipe(Item result, Object... ingredients) {
-        addShapelessRecipe(Configurations.featureName(this), result, ingredients); 
+    private void addShapelessRecipe(IForgeRegistry<IRecipe> registry, Item result, Object... ingredients) {
+        addShapelessRecipe(registry, Configurations.featureName(this), result, ingredients); 
     }
     
-    private static void addShapelessRecipe(String name, ItemStack result, Object... ingredients) {
-        GameRegistry.register(new ShapelessOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
+    private static void addShapelessRecipe(IForgeRegistry<IRecipe> registry, String name, ItemStack result, Object... ingredients) {
+        registry.register(new ShapelessOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
     }  
-    private static void addShapelessRecipe(String name, Block result, Object... ingredients) {
-        GameRegistry.register(new ShapelessOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
+    private static void addShapelessRecipe(IForgeRegistry<IRecipe> registry, String name, Block result, Object... ingredients) {
+        registry.register(new ShapelessOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
     }
-    private static void addShapelessRecipe(String name, Item result, Object... ingredients) {
-        GameRegistry.register(new ShapelessOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
-    }
-    
-    void addShapedRecipe(ItemStack result, Object... ingredients) { 
-        addShapedRecipe(Configurations.featureName(this), result, ingredients); 
-    }
-    void addShapedRecipe(Block result, Object... ingredients) {
-        addShapedRecipe(Configurations.featureName(this), result, ingredients); 
-    }
-    void addShapedRecipe(Item result, Object... ingredients) {
-        addShapedRecipe(Configurations.featureName(this), result, ingredients); 
+    private static void addShapelessRecipe(IForgeRegistry<IRecipe> registry, String name, Item result, Object... ingredients) {
+        registry.register(new ShapelessOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
     }
     
-    private static void addShapedRecipe(String name, ItemStack result, Object... ingredients) {
-        GameRegistry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
+    void addShapedRecipe(IForgeRegistry<IRecipe> registry, ItemStack result, Object... ingredients) { 
+        addShapedRecipe(registry, Configurations.featureName(this), result, ingredients); 
     }
-    private static void addShapedRecipe(String name, Block result, Object... ingredients) {
-        GameRegistry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
+    void addShapedRecipe(IForgeRegistry<IRecipe> registry, Block result, Object... ingredients) {
+        addShapedRecipe(registry, Configurations.featureName(this), result, ingredients); 
     }
-    private static void addShapedRecipe(String name, Item result, Object... ingredients) {
-        GameRegistry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
+    void addShapedRecipe(IForgeRegistry<IRecipe> registry, Item result, Object... ingredients) {
+        addShapedRecipe(registry, Configurations.featureName(this), result, ingredients); 
+    }
+    
+    private static void addShapedRecipe(IForgeRegistry<IRecipe> registry, String name, @Nonnull ItemStack result, Object... ingredients) {
+        registry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
+    }
+    private static void addShapedRecipe(IForgeRegistry<IRecipe> registry, String name, Block result, Object... ingredients) {
+        registry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
+    }
+    private static void addShapedRecipe(IForgeRegistry<IRecipe> registry, String name, Item result, Object... ingredients) {
+        registry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
     }
 }

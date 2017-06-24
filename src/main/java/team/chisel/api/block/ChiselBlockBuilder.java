@@ -18,8 +18,10 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.common.init.BlockRegistry;
@@ -32,6 +34,7 @@ import team.chisel.common.init.BlockRegistry;
 @ParametersAreNonnullByDefault
 public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
+    private final IForgeRegistry<Block> registry;
     private final Material material;
     private final String domain;
     private final String blockName;
@@ -53,7 +56,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     @Accessors(fluent = true)
     private boolean opaque = true;
 
-    protected ChiselBlockBuilder(Material material, String domain, String blockName, BlockProvider<T> provider) {
+    protected ChiselBlockBuilder(IForgeRegistry<Block> registry, Material material, String domain, String blockName, BlockProvider<T> provider) {
+        this.registry = registry;
         this.material = material;
         this.domain = domain;
         this.blockName = blockName;
@@ -119,8 +123,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 ret[i].setSoundType(sound);
             }
             
-            GameRegistry.register(ret[i]);
-            GameRegistry.register(provider.createItemBlock(ret[i]));
+            registry.register(ret[i]);
+            ForgeRegistries.ITEMS.register(provider.createItemBlock(ret[i])); // TODO this sucks
 
             after.accept(ret[i]);
 

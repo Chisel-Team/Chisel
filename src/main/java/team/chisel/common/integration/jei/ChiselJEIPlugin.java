@@ -16,6 +16,7 @@ import net.minecraft.item.ItemStack;
 import team.chisel.Chisel;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.init.ChiselBlocks;
+import team.chisel.common.init.ChiselItems;
 import team.chisel.common.integration.jei.ChiselRecipeHandler.CarvingGroupWrapper;
 
 @JEIPlugin
@@ -30,9 +31,9 @@ public class ChiselJEIPlugin implements IModPlugin {
         registry.addRecipeHandlers(new ChiselRecipeHandler());
         registry.addRecipes(Carving.chisel.getSortedGroupNames().stream().map(s -> Carving.chisel.getGroup(s)).map(g -> new CarvingGroupWrapper(g)).collect(Collectors.toList()), category.getUid());
         
-        registry.addRecipeCatalyst(new ItemStack(Chisel.itemChiselIron), category.getUid());
-        registry.addRecipeCatalyst(new ItemStack(Chisel.itemChiselDiamond), category.getUid());
-        registry.addRecipeCatalyst(new ItemStack(Chisel.itemChiselHitech), category.getUid());
+        registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_iron), category.getUid());
+        registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_diamond), category.getUid());
+        registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_hitech), category.getUid());
 
         ArrayList<ItemStack> itemStacks = new ArrayList<ItemStack>();
 

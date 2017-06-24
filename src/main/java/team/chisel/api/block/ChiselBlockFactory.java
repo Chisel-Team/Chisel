@@ -2,25 +2,26 @@ package team.chisel.api.block;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.registries.IForgeRegistry;
 import team.chisel.common.block.ItemChiselBlock;
 
 /**
  * Factory to create builders to create blocks
  */
 @ParametersAreNonnullByDefault
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselBlockFactory {
 
-    private String domain;
+    private final IForgeRegistry<Block> registry;
+    private final String domain;
 
-    private ChiselBlockFactory(String domain) {
-        this.domain = domain;
-    }
-
-    public static ChiselBlockFactory newFactory(String domain) {
-        return new ChiselBlockFactory(domain);
+    public static ChiselBlockFactory newFactory(IForgeRegistry<Block> registry, String domain) {
+        return new ChiselBlockFactory(registry, domain);
     }
 
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass) {
@@ -52,6 +53,6 @@ public class ChiselBlockFactory {
      * Test
      */
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockProvider<T> provider) {
-        return new ChiselBlockBuilder<T>(material, domain, blockName, provider);
+        return new ChiselBlockBuilder<T>(registry, material, domain, blockName, provider);
     }
 }
