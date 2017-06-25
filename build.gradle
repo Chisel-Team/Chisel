@@ -67,7 +67,7 @@ repositories {
 }
 
 dependencies {
-	deobfCompile "team.chisel.ctm:CTM:MC1.11.2-${ctm_version}"
+	deobfCompile "team.chisel.ctm:CTM:MC1.12-${ctm_version}"
 	deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
 	deobfCompile "mezz.jei:jei_1.12:${jei_version}"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"

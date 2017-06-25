@@ -5,11 +5,11 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -31,7 +31,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
-import net.minecraftforge.client.model.ModelProcessingHelper;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
 import team.chisel.common.util.json.JsonHelper;
@@ -103,7 +102,7 @@ public class ModelChisel implements IModelCTM {
     @SneakyThrows
     private IBakedModel bake(Variant variant, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> getter) {
         IModel imodel = ModelLoaderRegistry.getModel(variant.getModelLocation());
-        imodel = ModelProcessingHelper.uvlock(imodel, variant.isUvLock());
+        imodel = imodel.uvlock(variant.isUvLock());
         return imodel.bake(variant.getState(), format, getter);
     }
     

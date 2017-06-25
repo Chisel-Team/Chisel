@@ -49,7 +49,7 @@ import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkDataHandler;
 
-@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, dependencies = "required-after:forge@[14.21.0.2349,);", acceptedMinecraftVersions = "[1.12, 1.12.1)")
+@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, dependencies = "required-after:forge@[14.21.0.2363,);", acceptedMinecraftVersions = "[1.12, 1.12.1)")
 public class Chisel implements Reference {
 
     public static final Logger logger = LogManager.getLogger(MOD_NAME);
