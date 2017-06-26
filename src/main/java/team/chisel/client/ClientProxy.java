@@ -21,7 +21,7 @@ import team.chisel.common.init.ChiselItems;
 import team.chisel.ctm.client.texture.ctx.OffsetProviderRegistry;
 
 @SideOnly(Side.CLIENT)
-@EventBusSubscriber
+@EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
