@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableSet;
 import lombok.SneakyThrows;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -78,7 +79,7 @@ public class Chisel implements Reference {
     @Mod.EventHandler
     @SneakyThrows
     public void onConstruct(FMLConstructionEvent event) {
-        if (FMLCommonHandler.instance().getSide().isClient()) {
+        if (FMLCommonHandler.instance().getSide().isClient() && !(Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
             VersionRange range = VersionRange.createFromVersionSpec("[MC1.11.2-0.1.0.2,)");
             if (!Loader.isModLoaded("ctm") || !range.containsVersion(Loader.instance().getIndexedModList().get("ctm").getProcessedVersion())) {
                 throw new MissingModsException(ImmutableSet.of(new DefaultArtifactVersion("ctm", range)), MOD_ID, MOD_NAME);
@@ -95,12 +96,6 @@ public class Chisel implements Reference {
         Configurations.config = new Configuration(configFile);
         Configurations.config.load();
         Configurations.refreshConfig();
-
-        // TODO once forge has recipes
-//        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
-//        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
-//        GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
-//        GameRegistry.addRecipe(new ShapedOreRecipe(itemOffsetTool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron"));
 
         MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
         MinecraftForge.EVENT_BUS.register(ChiselController.class);

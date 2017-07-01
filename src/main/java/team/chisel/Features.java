@@ -1,5 +1,7 @@
 package team.chisel;
 
+import static team.chisel.common.config.Configurations.concreteVelocityMult;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,8 +9,6 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import static team.chisel.common.config.Configurations.concreteVelocityMult;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +30,6 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -49,7 +48,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -70,9 +68,10 @@ import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
+import team.chisel.common.init.ChiselItems;
 import team.chisel.common.item.ItemChisel;
-import team.chisel.common.item.ItemOffsetTool;
 import team.chisel.common.item.ItemChisel.ChiselType;
+import team.chisel.common.item.ItemOffsetTool;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.GenerationHandler.WorldGenInfo;
 
@@ -527,6 +526,15 @@ public enum Features {
             registry.register(new ItemChisel(ChiselType.HITECH));
 
             registry.register(new ItemOffsetTool());
+        }
+        
+        @Override
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
+            addShapedRecipe(registry, "chisel_iron", ChiselItems.chisel_iron, " x", "s ", 'x', "ingotIron", 's', "stickWood");
+            addShapedRecipe(registry, "chisel_diamond", ChiselItems.chisel_diamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood");
+            addShapelessRecipe(registry, "chisel_hitech", ChiselItems.chisel_hitech, ChiselItems.chisel_diamond, "dustRedstone", "ingotGold");
+
+            addShapedRecipe(registry, "offsettool", ChiselItems.offsettool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron");
         }
     },
 
@@ -3289,13 +3297,13 @@ public enum Features {
     
     private static final ResourceLocation RECIPE_GROUP = new ResourceLocation("", "");
     
-    private void addShapelessRecipe(IForgeRegistry<IRecipe> registry, ItemStack result, Object... ingredients) { 
+    void addShapelessRecipe(IForgeRegistry<IRecipe> registry, ItemStack result, Object... ingredients) { 
         addShapelessRecipe(registry, Configurations.featureName(this), result, ingredients); 
     }
-    private void addShapelessRecipe(IForgeRegistry<IRecipe> registry, Block result, Object... ingredients) {
+    void addShapelessRecipe(IForgeRegistry<IRecipe> registry, Block result, Object... ingredients) {
         addShapelessRecipe(registry, Configurations.featureName(this), result, ingredients); 
     }
-    private void addShapelessRecipe(IForgeRegistry<IRecipe> registry, Item result, Object... ingredients) {
+    void addShapelessRecipe(IForgeRegistry<IRecipe> registry, Item result, Object... ingredients) {
         addShapelessRecipe(registry, Configurations.featureName(this), result, ingredients); 
     }
     
