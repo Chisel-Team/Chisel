@@ -530,11 +530,11 @@ public enum Features {
         
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
-            addShapedRecipe(registry, "chisel_iron", ChiselItems.chisel_iron, " x", "s ", 'x', "ingotIron", 's', "stickWood");
-            addShapedRecipe(registry, "chisel_diamond", ChiselItems.chisel_diamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood");
-            addShapelessRecipe(registry, "chisel_hitech", ChiselItems.chisel_hitech, ChiselItems.chisel_diamond, "dustRedstone", "ingotGold");
+            Features.addShapedRecipe(registry, "chisel_iron", ChiselItems.chisel_iron, " x", "s ", 'x', "ingotIron", 's', "stickWood");
+            Features.addShapedRecipe(registry, "chisel_diamond", ChiselItems.chisel_diamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood");
+            Features.addShapelessRecipe(registry, "chisel_hitech", ChiselItems.chisel_hitech, ChiselItems.chisel_diamond, "dustRedstone", "ingotGold");
 
-            addShapedRecipe(registry, "offsettool", ChiselItems.offsettool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron");
+            Features.addShapedRecipe(registry, "offsettool", ChiselItems.offsettool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron");
         }
     },
 
