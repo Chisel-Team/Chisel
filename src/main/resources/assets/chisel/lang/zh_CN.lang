@@ -477,10 +477,10 @@ tile.chisel.brownstone.default.desc.1=天然
 tile.chisel.brownstone.block.desc.1=大块瓷砖
 tile.chisel.brownstone.blocks.desc.1=瓷砖
 tile.chisel.brownstone.doubleslab.desc.1=Bisected
-tile.chisel.brownstone.weathered.desc.1=Weathered
+tile.chisel.brownstone.weathered.desc.1=风化
 tile.chisel.brownstone.weathered-block.desc.1=风化大块瓷砖
 tile.chisel.brownstone.weathered-doubleslab.desc.1=风化Bisected
-tile.chisel.brownstone.weathered-blocks.desc.1=风化Tiles
+tile.chisel.brownstone.weathered-blocks.desc.1=风化瓷砖
 tile.chisel.brownstone.weathered-half.desc.1=半风化
 tile.chisel.brownstone.weathered-block-half.desc.1=半风化大块瓷砖
 
