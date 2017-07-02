@@ -63,6 +63,13 @@ public class GuiChisel extends GuiContainer {
 //        return false;
 //    }
 
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
+    
     @SuppressWarnings("null")
     @Override
     protected void drawGuiContainerForegroundLayer(int j, int i) {
@@ -84,7 +91,6 @@ public class GuiChisel extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int mx, int my) {
-        drawDefaultBackground();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         int i = width - xSize >> 1;
