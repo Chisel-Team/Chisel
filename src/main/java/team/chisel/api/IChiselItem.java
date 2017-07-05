@@ -1,5 +1,6 @@
 package team.chisel.api;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.state.IBlockState;
@@ -103,6 +104,23 @@ public interface IChiselItem {
      * @return True if the chisel supports modes. False otherwise.
      */
     boolean hasModes(EntityPlayer player, EnumHand hand);
+    
+    /**
+     * Allows this chisel to provide a different sound for the given {@link ICarvingVariation}.
+     * 
+     * @param world
+     *            World object.
+     * @param player
+     *            {@link EntityPlayer The player} holding the chisel
+     * @param chisel
+     *            The {@link ItemStack} representing the chisel
+     * @param target
+     *            The {@link ICarvingVariation} representing the target item
+     * @return A sound to play, instead of the variation's sound, or null for default.
+     */
+    default @Nullable String getOverrideSound(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
+        return null;
+    }
     
     /**
      * Chisels a stack into another stack, taking into consideration this chisel's damage

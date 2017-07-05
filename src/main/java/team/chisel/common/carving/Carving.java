@@ -272,6 +272,12 @@ public class Carving implements ICarvingRegistry {
 		ICarvingGroup group = groups.getGroup(stack);
 		return getSound(group);
 	}
+	
+	@Override
+	public String getVariationSound(@Nullable ICarvingVariation variation) {
+	    ICarvingGroup group = variation == null ? null : groups.getGroup(variation);
+	    return getSound(group);
+	}
 
 	private String getSound(@Nullable ICarvingGroup group) {
 		String sound = group == null ? null : group.getSound();
