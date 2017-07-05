@@ -15,19 +15,17 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.inventory.EntityEquipmentSlot.Type;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselGuiType;
-import team.chisel.api.IChiselItem;
 import team.chisel.api.IChiselGuiType.ChiselGuiType;
+import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselTabs;
 
@@ -151,8 +149,8 @@ public class ItemChisel extends Item implements IChiselItem {
     }
 
     @Override
-    public boolean hasModes(EntityPlayer player, EnumHand hand) {
-        return type == ChiselType.DIAMOND || Configurations.ironChiselHasModes;
+    public boolean supportsMode(EntityPlayer player, IChiselMode mode) {
+        return (type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) && mode != ChiselMode.CONTIGUOUS;
     }
 
     // TODO implement ChiselController

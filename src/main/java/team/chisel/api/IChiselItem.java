@@ -9,6 +9,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.IChiselMode;
 
 /**
  * Implement this on items which can be used to chisel blocks.
@@ -94,15 +95,15 @@ public interface IChiselItem {
     boolean canChiselBlock(World world, EntityPlayer player, EnumHand hand, BlockPos pos, IBlockState state);
 
     /**
-     * Allows you to control if your item has chiseling modes.
+     * Allows you to control if your item supports a given chisel mode.
      * 
      * @param player
      *            {@link EntityPlayer The player} holding the chisel.
-     * @param hand
-     *            The {@link EnumHand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
-     * @return True if the chisel supports modes. False otherwise.
+     * @param mode
+     *            The current {@link IChiselMode}.
+     * @return True if the chisel supports this mode. False otherwise.
      */
-    boolean hasModes(EntityPlayer player, EnumHand hand);
+    boolean supportsMode(EntityPlayer player, IChiselMode mode);
     
     /**
      * Chisels a stack into another stack, taking into consideration this chisel's damage

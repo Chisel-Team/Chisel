@@ -1,16 +1,20 @@
 package team.chisel.api.carving;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import team.chisel.common.util.NonnullType;
 
+@ParametersAreNonnullByDefault
 public interface IChiselMode {
-
-	/**
-	 * NOTE: This method is responsible for increasing the "Blocks Chiseled" statistic found in the Statistics class.
-	 */
-	void chiselAll(EntityPlayer player, World world, int x, int y, int z, EnumFacing side, ICarvingVariation variation);
-
+    
+    Iterable<@NonnullType ? extends BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side);
+    
+    AxisAlignedBB getBounds(EnumFacing side);
+    
 	/**
 	 * Implemented implicitly by enums. If your IChiselMode is not an enum constant, this needs to be implemented explicitly.
 	 * 

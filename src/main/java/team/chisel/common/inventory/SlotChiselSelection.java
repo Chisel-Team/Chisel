@@ -11,7 +11,7 @@ import net.minecraft.util.math.MathHelper;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
-import team.chisel.client.ClientUtil;
+import team.chisel.client.util.ClientUtil;
 
 public class SlotChiselSelection extends Slot {
 
