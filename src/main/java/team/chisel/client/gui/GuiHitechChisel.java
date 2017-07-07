@@ -1,5 +1,6 @@
 package team.chisel.client.gui;
 
+import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.List;
 
@@ -11,7 +12,6 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.util.Rectangle;
 
 import com.google.common.base.Optional;
 
@@ -208,17 +208,17 @@ public class GuiHitechChisel extends GuiChisel {
     @Override
     public void initGui() {
         super.initGui();
-        int x = guiLeft + panel.getX() - 1;
-        int y = guiTop + panel.getY() + panel.getHeight() + 3;
+        int x = guiLeft + panel.x - 1;
+        int y = guiTop + panel.y + panel.height + 3;
         int w = 76, h = 20;
-        int id = 0;
+        int id = 10;
         
         boolean firstInit = buttonPreview == null;
         
         buttonList.add(buttonPreview = new PreviewModeButton(id++, x, y, w, h));
 
         buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, "Chisel"));
-        buttonList.add(buttonRotate = new RotateButton(id++, guiLeft + panel.getX() + panel.getWidth() - 16, guiTop + panel.getY() + panel.getHeight() - 16));
+        buttonList.add(buttonRotate = new RotateButton(id++, guiLeft + panel.x + panel.width - 16, guiTop + panel.y + panel.height - 16));
 
         ItemStack chisel = containerHitech.getChisel();
         
@@ -233,6 +233,13 @@ public class GuiHitechChisel extends GuiChisel {
             e.printStackTrace();
             Chisel.logger.info("iChisel crash avoided, please consider updating NEI.");
         }
+    }
+    
+    @Override
+    protected Rectangle getModeButtonArea() {
+        int down = 133;
+        int padding = 7;
+        return new Rectangle(guiLeft + padding, guiTop + down + padding, 76, ySize - down - (padding * 2));
     }
     
     @Override
@@ -331,6 +338,9 @@ public class GuiHitechChisel extends GuiChisel {
 
             containerHitech.setTarget(containerHitech.getSlot(idx));
         }
+        
+//        Rectangle area = getModeButtonArea();
+//        drawRect(area.x, area.y, area.x + area.width, area.y + area.height, 0x669999FF);
     }
     
     private void drawSlotHighlight(Slot slot, int u) {
@@ -363,7 +373,7 @@ public class GuiHitechChisel extends GuiChisel {
         }
 
         String s = "Preview";
-        fontRendererObj.drawString("Preview", panel.getX() + (panel.getWidth() / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
+        fontRendererObj.drawString("Preview", panel.x + (panel.width / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.y - 9, 0x404040);
                 
         try {
 
@@ -403,8 +413,8 @@ public class GuiHitechChisel extends GuiChisel {
                     if (scissorAvailable) {
                         ScaledResolution sr = new ScaledResolution(mc);
                         GL11.glEnable(GL11.GL_SCISSOR_TEST);
-                        GL11.glScissor((guiLeft + panel.getX()) * sr.getScaleFactor(), mc.displayHeight - ((guiTop + panel.getY() + panel.getHeight()) * sr.getScaleFactor()),
-                                panel.getWidth() * sr.getScaleFactor(), panel.getHeight() * sr.getScaleFactor());
+                        GL11.glScissor((guiLeft + panel.x) * sr.getScaleFactor(), mc.displayHeight - ((guiTop + panel.y + panel.height) * sr.getScaleFactor()),
+                                panel.width * sr.getScaleFactor(), panel.height * sr.getScaleFactor());
                     }
                     Tessellator.getInstance().draw();
                     if (scissorAvailable) {

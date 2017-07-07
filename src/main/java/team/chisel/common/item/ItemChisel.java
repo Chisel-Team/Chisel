@@ -145,12 +145,12 @@ public class ItemChisel extends Item implements IChiselItem {
 
     @Override
     public boolean canChiselBlock(World world, EntityPlayer player, EnumHand hand, BlockPos pos, IBlockState state) {
-        return type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
+        return type == ChiselType.HITECH || type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
     }
 
     @Override
     public boolean supportsMode(EntityPlayer player, IChiselMode mode) {
-        return (type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) && mode != ChiselMode.CONTIGUOUS;
+        return type == ChiselType.HITECH || ((type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) && mode != ChiselMode.CONTIGUOUS && mode != ChiselMode.CONTIGUOUS_2D);
     }
 
     // TODO implement ChiselController

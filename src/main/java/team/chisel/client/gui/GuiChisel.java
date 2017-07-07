@@ -1,10 +1,15 @@
 package team.chisel.client.gui;
 
+import java.awt.Rectangle;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,12 +17,13 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
+import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.inventory.ContainerChisel;
 import team.chisel.common.inventory.InventoryChiselSelection;
 import team.chisel.common.inventory.SlotChiselInput;
+import team.chisel.common.item.ChiselMode;
+import team.chisel.common.util.NBTUtil;
 
 @ParametersAreNonnullByDefault
 public class GuiChisel extends GuiContainer {
@@ -44,24 +50,28 @@ public class GuiChisel extends GuiContainer {
     public void initGui() {
         super.initGui();
 
-//        if (showMode()) {
-//            int x = this.width / 2 - 120;
-//            int y = this.height / 2 - 6;
-//            buttonList.add(new GuiButton(0, x, y, 53, 20, ""));
-//            setButtonText();
-//        }
+        int id = 0;
+        Rectangle area = getModeButtonArea();
+        int buttonsPerRow = area.width / 20;
+        int padding = (area.width - (buttonsPerRow * 20)) / buttonsPerRow;
+        for (IChiselMode mode : ChiselMode.values()) {
+            if (((IChiselItem) container.getChisel().getItem()).supportsMode(player, mode)) {
+                int x = area.x + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
+                int y = area.y + ((id / buttonsPerRow) * (20 + padding));
+                setButtonText(addButton(new ButtonChiselMode(id++, x, y, mode)));
+            }
+        }
+    }
+    
+    protected Rectangle getModeButtonArea() {
+        int down = 67;
+        int padding = 7;
+        return new Rectangle(guiLeft + padding, guiTop + down + padding, 50, ySize - down - (padding * 2));
     }
 
-//    private void setButtonText() {
-//        ((GuiButton) buttonList.get(0)).displayString = I18n.format(container.inventory.getInventoryName() + ".mode." + currentMode.name().toLowerCase());
-//    }
-
-//    private boolean showMode() {
-//        if (container.chisel != null && container.chisel.getItem() instanceof IChiselItem) {
-//            return ((IChiselItem) container.chisel.getItem()).hasModes(container.chisel);
-//        }
-//        return false;
-//    }
+    private void setButtonText(ButtonChiselMode button) {
+//        button.displayString = I18n.format(container.getInventoryChisel().getName() + ".mode." + button.getMode().name().toLowerCase());
+    }
 
     @SuppressWarnings("null")
     @Override
@@ -104,8 +114,17 @@ public class GuiChisel extends GuiContainer {
         }
     }
 
-//    @Override
-//    protected void actionPerformed(GuiButton button) {
+    @Override
+    protected void actionPerformed(GuiButton button) throws IOException {
+        if (button instanceof ButtonChiselMode) {
+            button.enabled = false;
+            NBTUtil.setChiselMode(container.getChisel(), ((ButtonChiselMode) button).getMode());
+            for (GuiButton other : buttonList) {
+                if (other != button && other instanceof ButtonChiselMode) {
+                    other.enabled = true;
+                }
+            }
+        }
 //        if (button.id == 0) {
 //            if (container.chisel != null && container.chisel.getItem() instanceof IAdvancedChisel) {
 //                IAdvancedChisel items = (IAdvancedChisel) container.chisel.getItem();
@@ -117,8 +136,8 @@ public class GuiChisel extends GuiContainer {
 //                setButtonText();
 //            }
 //        }
-//        super.actionPerformed(button);
-//    }
+        super.actionPerformed(button);
+    }
     
     @Override
     protected void drawSlot(Slot slot) {
