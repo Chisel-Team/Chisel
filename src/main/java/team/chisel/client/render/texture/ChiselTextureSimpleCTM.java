@@ -10,11 +10,12 @@ import team.chisel.ctm.api.texture.ITextureContext;
 import team.chisel.ctm.api.util.TextureInfo;
 import team.chisel.ctm.client.texture.ctx.TextureContextCTM;
 import team.chisel.ctm.client.texture.render.AbstractTexture;
+import team.chisel.ctm.client.texture.render.TextureCTM;
 import team.chisel.ctm.client.util.CTMLogic;
 import team.chisel.ctm.client.util.Dir;
 import team.chisel.ctm.client.util.Quad;
 
-public class ChiselTextureSimpleCTM extends AbstractTexture<BlockRenderTypeSimpleCTM> {
+public class ChiselTextureSimpleCTM extends TextureCTM<BlockRenderTypeSimpleCTM> {
 
     public ChiselTextureSimpleCTM(BlockRenderTypeSimpleCTM type, TextureInfo info) {
         super(type, info);
