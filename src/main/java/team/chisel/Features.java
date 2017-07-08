@@ -1,5 +1,7 @@
 package team.chisel;
 
+import static team.chisel.common.config.Configurations.concreteVelocityMult;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -7,8 +9,6 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import static team.chisel.common.config.Configurations.concreteVelocityMult;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -2831,15 +2831,6 @@ public enum Features {
         void addRecipes()
         {
             registerIngotUncraftRecipe("Tin");
-        }
-    },
-    
-    TEST_BLOCK {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "testblock", provider)
-                .newVariation("test_block")
-                .build();
         }
     },
 
