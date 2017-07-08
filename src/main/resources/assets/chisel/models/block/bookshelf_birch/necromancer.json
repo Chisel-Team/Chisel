@@ -1,8 +1,7 @@
 {
-  "model": { "model": "cube"},
-  "face":"chisel:bookshelf_birch/necromancer.cf",
-  "overrides":{
-    "UP":"minecraft:blocks/planks_birch.cf",
-    "DOWN":"minecraft:blocks/planks_birch.cf"
-  }
+  "parent": "chisel:block/bookshelf_birch/_base",
+  "textures": {
+  	"overlay": "chisel:blocks/bookshelf/necromancer"
+  },
+  "ctm_version": 1
 }
