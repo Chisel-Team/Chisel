@@ -36,7 +36,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
-import net.minecraftforge.fml.common.versioning.InvalidVersionSpecificationException;
 import net.minecraftforge.fml.common.versioning.VersionRange;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -96,7 +95,7 @@ public class Chisel implements Reference {
     @SneakyThrows
     public void onConstruct(FMLConstructionEvent event) {
         if (FMLCommonHandler.instance().getSide().isClient() && !(Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
-            VersionRange range = VersionRange.createFromVersionSpec("[MC1.10.2-0.1.0.10,)");
+            VersionRange range = VersionRange.createFromVersionSpec("[MC1.10.2-0.2.0.18,)");
             if (!Loader.isModLoaded("ctm") || !range.containsVersion(Loader.instance().getIndexedModList().get("ctm").getProcessedVersion())) {
                 throw new MissingModsException(ImmutableSet.of(new DefaultArtifactVersion("ctm", range)), MOD_ID, MOD_NAME);
             }
