@@ -1668,31 +1668,50 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("ice", Blocks.ICE.getDefaultState(), -1);
-            /*factory.newBlock(Material.ICE, "ice", provider) TODO Retexture
-                    .newVariation("a1-ice-light")
-                    .next("a1-stonecobble-icecobble")
-                    .next("a1-netherbrick-ice")
-                    .next("a1-stonecobble-icebrick")
-                    .next("a1-stonecobble-icebricksmall")
-                    .next("a1-stonecobble-icedungeon")
-                    .next("a1-stonecobble-icefour")
-                    .next("a1-stonecobble-icefrench")
-                    .next("sunkentiles")
-                    .next("tiles")
-                    .next("a1-stonecobble-icepanel")
-                    .next("a1-stoneslab-ice")
-                    .next("zelda")
-                    .next("bismuth")
-                    .next("poison")
-                    .next("scribbles")
-                    .build();*/
-        }
-    },
 
-    ICEPILLAR {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ICE, "icepillar", provider)
+            BlockCreator<BlockCarvable> iceCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) { {
+                    this.slipperiness = 0.98F;
+            } };
+
+            factory.newBlock(Material.ICE, "ice", new ChiselBlockProvider<>(iceCreator, BlockCarvable.class)).opaque(false)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .addOreDict("ice")
+                    .addOreDict("blockIce")
+                    .build(b -> b.setHardness(0.5F).setLightOpacity(3).setSoundType(SoundType.GLASS));
+
+            factory.newBlock(Material.ICE, "icepillar", new ChiselBlockProvider<>(iceCreator, BlockCarvable.class)).opaque(false)
                     .setGroup("ice")
                     .newVariation("plainplain")
                     .next("plaingreek")
@@ -1703,7 +1722,7 @@ public enum Features {
                     .next("ornamental")
                     .addOreDict("ice")
                     .addOreDict("blockIce")
-                    .build(b-> b.setSoundType(SoundType.GLASS).setHardness(0.5f));
+                    .build(b -> b.setHardness(0.5F).setLightOpacity(3).setSoundType(SoundType.GLASS));
         }
     },
 
@@ -2857,15 +2876,6 @@ public enum Features {
         void addRecipes(IForgeRegistry<IRecipe> registry)
         {
             registerIngotUncraftRecipe(registry, "Tin");
-        }
-    },
-    
-    TEST_BLOCK {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "testblock", provider)
-                .newVariation("test_block")
-                .build();
         }
     },
 

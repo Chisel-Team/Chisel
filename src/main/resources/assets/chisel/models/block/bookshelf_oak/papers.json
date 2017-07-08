@@ -1,8 +1,7 @@
 {
-  "model": { "model": "cube"},
-  "face":"chisel:bookshelf_oak/papers.cf",
-  "overrides":{
-    "UP":  "minecraft:blocks/planks_oak.cf",
-    "DOWN":"minecraft:blocks/planks_oak.cf"
-  }
+  "parent": "chisel:block/bookshelf_oak/_base",
+  "textures": {
+  	"overlay": "chisel:blocks/bookshelf/papers"
+  },
+  "ctm_version": 1
 }
