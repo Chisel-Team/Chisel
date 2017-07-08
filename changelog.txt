@@ -1,3 +1,11 @@
+0.0.12:
+New
+- Now requires version 0.2.0 of CTM or higher
+- IChiselItem now has a method to override the noise played
+- Add ice variants (Drullkus)
+Fixes
+- Remove debug block
+
 0.0.11:
 New
 - Most render logic moved to new mod, CTM
