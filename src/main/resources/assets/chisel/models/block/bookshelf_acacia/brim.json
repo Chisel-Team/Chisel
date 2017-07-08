@@ -1,8 +1,7 @@
 {
-  "model": { "model": "cube"},
-  "face":"chisel:bookshelf_acacia/brim.cf",
-  "overrides":{
-    "UP":"minecraft:blocks/planks_acacia.cf",
-    "DOWN":"minecraft:blocks/planks_acacia.cf"
-  }
+  "parent": "chisel:block/bookshelf_acacia/_base",
+  "textures": {
+  	"overlay": "chisel:blocks/bookshelf/brim"
+  },
+  "ctm_version": 1
 }

@@ -113,7 +113,6 @@ public interface ICarvingRegistry {
      *            The state of the variation
      * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
      */
-    @Nullable
     public String getVariationSound(IBlockState state);
 
     /**
@@ -124,8 +123,16 @@ public interface ICarvingRegistry {
      * 
      * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
      */
-    @Nullable
     public String getVariationSound(ItemStack stack);
+
+    /**
+     * Gets the sound resource string for the group represented by this {@link ICarvingVariation}.
+     * 
+     * @param variation
+     * 
+     * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
+     */
+    String getVariationSound(@Nullable ICarvingVariation variation);
 
     /**
      * @return A list of all registered group names, sorted alphabetically.

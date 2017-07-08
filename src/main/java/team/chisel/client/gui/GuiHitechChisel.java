@@ -47,6 +47,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.Chisel;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.ClientUtil;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
@@ -473,8 +474,7 @@ public class GuiHitechChisel extends GuiChisel {
                 
                 PacketChiselButton.chiselAll(player, slots);
                 
-                String sound = container.getCarving().getVariationSound(target.getStack());
-                ClientUtil.playSound(player.world, new BlockPos(player), sound);
+                ClientUtil.playSound(player.world, player, containerHitech.getChisel(), CarvingUtils.getChiselRegistry().getVariation(target.getStack()));
                 
                 if (!isShiftDown()) {
                     List<Slot> dupes = containerHitech.getSelectionDuplicates();

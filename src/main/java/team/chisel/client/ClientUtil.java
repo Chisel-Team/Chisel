@@ -1,7 +1,10 @@
 package team.chisel.client;
 
+import java.util.Optional;
 import java.util.Random;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.vecmath.Matrix4f;
 import javax.vecmath.Vector3f;
@@ -10,6 +13,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleDigging;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -20,6 +25,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
+import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingVariation;
 
 @ParametersAreNonnullByDefault
 public class ClientUtil {
@@ -29,6 +37,19 @@ public class ClientUtil {
             10, -45, 170)), new Vector3f(0.375f, 0.375f, 0.375f), null);
     @SuppressWarnings("null")
     public static final Matrix4f DEFAULT_BLOCK_THIRD_PERSON_MATRIX = DEFAULT_BLOCK_THIRD_PERSON_TRANSOFRM.getMatrix();
+
+    @SuppressWarnings("null")
+    public static void playSound(World world, EntityPlayer player, @Nullable ItemStack stack, @Nullable ICarvingVariation variation) {
+        if (stack != null && stack.getItem() instanceof IChiselItem) {
+            @Nonnull String sound;
+            if (variation != null) {
+                sound = Optional.ofNullable(((IChiselItem)stack.getItem()).getOverrideSound(world, player, stack, variation)).orElse(CarvingUtils.getChiselRegistry().getVariationSound(variation));
+            } else {
+                sound = CarvingUtils.getChiselRegistry().getVariationSound(variation);
+            }
+            playSound(world, player.getPosition(), sound);
+        }
+    }
 
     public static void playSound(World world, BlockPos pos, String sound) {
         playSound(world, pos, sound, SoundCategory.BLOCKS);

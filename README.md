@@ -3,9 +3,9 @@ Chisel [![Curseforge](http://cf.way2muchnoise.eu/full_chisel_downloads.svg)](htt
 
 The Chisel mod adds many decorative blocks to the game.
 
-We use connected texture and other dark magic to make it look fancy!
+We use connected textures and other dark magic through [CTM](https://github.com/Chisel-Team/ConnectedTexturesMod) to make it look fancy!
 
-Join us on irc at esper.net on #ChiselTeam
+Join us on our Discord at [with the invite code 0vVjLvWg5kyQwnHG](https://discord.gg/0vVjLvWg5kyQwnHG)
 
 Licensing
 ===========
@@ -34,6 +34,7 @@ All images contained by the following directories
 - `/src/main/resources/assets/chisel/textures/blocks/glowstone/`
 - `/src/main/resources/assets/chisel/textures/blocks/granite/`
 - `/src/main/resources/assets/chisel/textures/blocks/hardenedclay/`
+- `/src/main/resources/assets/chisel/textures/blocks/ice/`
 - `/src/main/resources/assets/chisel/textures/blocks/limestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/marble/`
 - `/src/main/resources/assets/chisel/textures/blocks/prismarine/`

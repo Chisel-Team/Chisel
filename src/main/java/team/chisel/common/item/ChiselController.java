@@ -60,7 +60,7 @@ public class ChiselController {
                     @Nonnull
                     ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(target);
                     if (variation != null) {
-                        updateState(event.getWorld(), event.getPos(), variation.getBlockState());
+                        updateState(event.getWorld(), event.getPos(), held, event.getEntityPlayer(), variation);
                         damageItem(held, player);
                     } else {
                         Chisel.logger.warn("Found itemstack {} in group {}, but it has no variation!", target, sourceGroup.getName());
@@ -74,7 +74,7 @@ public class ChiselController {
                 index = (index + variations.size()) % variations.size();
                 
                 ICarvingVariation next = variations.get(index);
-                updateState(event.getWorld(), event.getPos(), next.getBlockState());
+                updateState(event.getWorld(), event.getPos(), held, event.getEntityPlayer(), next);
                 damageItem(held, player);
             }
         }
@@ -101,13 +101,13 @@ public class ChiselController {
         }
     }
     
-    private static void updateState(World world, BlockPos pos, IBlockState state) {
+    private static void updateState(World world, BlockPos pos, ItemStack stack, EntityPlayer player, ICarvingVariation next) {
         IBlockState current = world.getBlockState(pos);
-        if (current != state) {
-            world.setBlockState(pos, state);
+        if (current != next.getBlockState()) {
+            world.setBlockState(pos, next.getBlockState());
             if (world.isRemote) {
-                ClientUtil.playSound(world, pos, CarvingUtils.getChiselRegistry().getVariationSound(current), SoundCategory.BLOCKS);
-                ClientUtil.addDestroyEffects(world, pos, state);
+                ClientUtil.playSound(world, player, stack, next);
+                ClientUtil.addDestroyEffects(world, pos, next.getBlockState());
             }
         }
     }

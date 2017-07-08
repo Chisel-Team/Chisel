@@ -1,8 +1,7 @@
 {
-  "model": { "model": "cube"},
-  "face":"chisel:bookshelf_darkoak/necromancer.cf",
-  "overrides":{
-    "UP":"minecraft:blocks/planks_big_oak.cf",
-    "DOWN":"minecraft:blocks/planks_big_oak.cf"
-  }
+  "parent": "chisel:block/bookshelf_darkoak/_base",
+  "textures": {
+  	"overlay": "chisel:blocks/bookshelf/necromancer"
+  },
+  "ctm_version": 1
 }
