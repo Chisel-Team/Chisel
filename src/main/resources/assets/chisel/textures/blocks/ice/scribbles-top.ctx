@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./scribbles-top"
-    ],
-    "layer":"TRANSLUCENT"
-}
