@@ -2786,4 +2786,4 @@ tile.chisel.wool_black.name=黑色地毯
 tile.chisel.wool_black.legacy_black.desc.1=传统
 tile.chisel.wool_black.llama_black.desc.1=美洲驼
 
-tile.chisel.testblock.name=测试方块s
+tile.chisel.testblock.name=测试方块
