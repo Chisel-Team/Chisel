@@ -1,21 +1,28 @@
 package team.chisel;
 
 import java.io.File;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.annotation.Nonnull;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 import lombok.SneakyThrows;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent.MissingMappings;
+import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.MissingModsException;
@@ -26,6 +33,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -71,6 +79,8 @@ public class Chisel implements Reference {
         network.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, 2, Side.CLIENT);
     }
     
+    private static Map<String, Block> remaps = ImmutableMap.of();
+    
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;
         ChiselAPIProps.MOD_ID = MOD_ID;
@@ -89,6 +99,8 @@ public class Chisel implements Reference {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+        
         proxy.construct(event);
 
         File configFile = event.getSuggestedConfigurationFile();
@@ -115,6 +127,12 @@ public class Chisel implements Reference {
     public void init(FMLInitializationEvent event) {
         proxy.init();
         // BlockRegistry.init(event);
+        
+        // If we add a future vanilla block, it should be added here once the vanilla version exists
+        remaps = ImmutableMap.<String, Block>builder()
+                .put("concrete_powder", Blocks.CONCRETE_POWDER)
+                .put("concrete", Blocks.CONCRETE)
+                .build();
 
         GameRegistry.registerFuelHandler(new ChiselFuelHandler());
 
@@ -175,6 +193,20 @@ public class Chisel implements Reference {
     public void onIMC(FMLInterModComms.IMCEvent event) {
         for (FMLInterModComms.IMCMessage msg : event.getMessages()) {
             IMCHandler.INSTANCE.handleMessage(msg);
+        }
+    }
+    
+    @SubscribeEvent
+    public void onMissingBlock(MissingMappings<Block> event) {
+        for (Mapping<Block> mapping : event.getMappings()) {
+            Optional.ofNullable(remaps.get(mapping.key.getResourcePath())).ifPresent(mapping::remap);
+        }
+    }
+    
+    @SubscribeEvent
+    public void onMissingItem(MissingMappings<Item> event) {
+        for (Mapping<Item> mapping : event.getMappings()) {
+            Optional.ofNullable(remaps.get(mapping.key.getResourcePath())).map(Item::getItemFromBlock).ifPresent(mapping::remap);
         }
     }
 }

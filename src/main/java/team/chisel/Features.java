@@ -790,63 +790,11 @@ public enum Features {
     CONCRETE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.GROUND, "concrete_powder", new ChiselBlockProvider<>(BlockCarvableFalling::new, BlockCarvableFalling.class))
-                    .newVariation("white")
-                    .next("orange")
-                    .next("magenta")
-                    .next("lightblue")
-                    .next("yellow")
-                    .next("lime")
-                    .next("pink")
-                    .next("gray")
-                    .next("lightgray")
-                    .next("cyan")
-                    .next("purple")
-                    .next("blue")
-                    .next("brown")
-                    .next("green")
-                    .next("red")
-                    .next("black")
-                    .addOreDict("powderConcrete")
-                    .build(b -> b.setSoundType(SoundType.GROUND).setHardness(0.8F));
-
-            Carving.chisel.removeGroup("concrete_powder");
-
-            BlockCreator<BlockCarvable> concreteCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
-                @Override
-                public void onEntityWalk(World world, BlockPos pos, Entity entity) {
-                    entity.motionX *= concreteVelocityMult + 0.05;
-                    entity.motionZ *= concreteVelocityMult + 0.05;
-                }
-            };
-
-            factory.newBlock(Material.ROCK, "concrete", new ChiselBlockProvider<>(concreteCreator, BlockCarvable.class))
-                    .setParentFolder("concrete")
-                    .newVariation("white")
-                    .next("orange")
-                    .next("magenta")
-                    .next("lightblue")
-                    .next("yellow")
-                    .next("lime")
-                    .next("pink")
-                    .next("gray")
-                    .next("lightgray")
-                    .next("cyan")
-                    .next("purple")
-                    .next("blue")
-                    .next("brown")
-                    .next("green")
-                    .next("red")
-                    .next("black")
-                    .addOreDict("blockConcrete")
-                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.5F));
-
-            Carving.chisel.removeGroup("concrete");
 
             for (int i = 0; i < dyeColors.length; i++) {
-                Carving.chisel.addVariation("concrete_" + (dyeColors[i].toLowerCase()), Block.REGISTRY.getObject(new ResourceLocation(Chisel.MOD_ID, "concrete")).getStateFromMeta(15-i), -1);
+                Carving.chisel.addVariation("concrete_" + (dyeColors[i].toLowerCase()), Blocks.CONCRETE.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byDyeDamage(i)), -1);
 
-                factory.newBlock(Material.ROCK, "concrete_" + (dyeColors[i].toLowerCase()), new ChiselBlockProvider<>(concreteCreator, BlockCarvable.class))
+                factory.newBlock(Material.ROCK, "concrete_" + (dyeColors[i].toLowerCase()), provider)
                         .setParentFolder("concrete_" + dyeColors[i].toLowerCase())
                         .newVariation("cracked")
                         .next("bricks-soft")
@@ -884,17 +832,6 @@ public enum Features {
                         .addOreDict("blockConcrete")
                         .addOreDict("blockConcrete"+dyeColors[i])
                         .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.5F));
-            }
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            int i = 0;
-
-            for (String dye : dyeOres)
-            {
-                Features.addShapedRecipe(registry, "concrete_" + EnumDyeColor.byDyeDamage(i).getName(), new ItemStack(ChiselBlocks.concrete_powder, 8, 15-i++), "SGS", "GDG", "SGS", 'S', "gravel", 'G', "sand", 'D', dye);
             }
         }
     },
