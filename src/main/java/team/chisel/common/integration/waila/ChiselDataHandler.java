@@ -16,6 +16,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.ICarvable;
 import team.chisel.common.block.ItemChiselBlock;
 
@@ -34,6 +36,7 @@ public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
 
     @SuppressWarnings("null")
     @Override
+    @SideOnly(Side.CLIENT)
     public List<String> getWailaBody(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
         if (accessor.getBlock() instanceof ICarvable) {
             ItemChiselBlock item = (ItemChiselBlock) ForgeRegistries.ITEMS.getValue(accessor.getBlock().getRegistryName());
