@@ -114,11 +114,11 @@ public interface IChiselItem {
      *            {@link EntityPlayer The player} holding the chisel
      * @param chisel
      *            The {@link ItemStack} representing the chisel
-     * @param target
-     *            The {@link ICarvingVariation} representing the target item
+     * @param next
+     *            The {@link IBlockState} representing the target
      * @return A sound to play, instead of the variation's sound, or null for default.
      */
-    default @Nullable String getOverrideSound(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
+    default @Nullable String getOverrideSound(World world, EntityPlayer player, ItemStack chisel, IBlockState next) {
         return null;
     }
     
