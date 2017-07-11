@@ -99,6 +99,12 @@ public class ContainerChiselHitech extends ContainerChisel {
     }
     
     @Override
+    public void onContainerClosed(EntityPlayer entityplayer) {
+        NBTUtil.setChiselTarget(getChisel(), getTargetStack());
+        super.onContainerClosed(entityplayer);
+    }
+    
+    @Override
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
         if (slotId >= 0) {
             Slot slot = getSlot(slotId);
