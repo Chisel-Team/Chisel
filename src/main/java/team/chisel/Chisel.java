@@ -20,6 +20,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.MissingModsException;
@@ -37,6 +38,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
 import net.minecraftforge.fml.common.versioning.VersionRange;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -89,17 +91,6 @@ public class Chisel implements Reference {
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;
         ChiselAPIProps.MOD_ID = MOD_ID;
-    }
-    
-    @Mod.EventHandler
-    @SneakyThrows
-    public void onConstruct(FMLConstructionEvent event) {
-        if (FMLCommonHandler.instance().getSide().isClient() && !(Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
-            VersionRange range = VersionRange.createFromVersionSpec("[MC1.10.2-0.2.0.18,)");
-            if (!Loader.isModLoaded("ctm") || !range.containsVersion(Loader.instance().getIndexedModList().get("ctm").getProcessedVersion())) {
-                throw new MissingModsException(ImmutableSet.of(new DefaultArtifactVersion("ctm", range)), MOD_ID, MOD_NAME);
-            }
-        }
     }
 
     @Mod.EventHandler
