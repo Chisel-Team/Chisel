@@ -201,6 +201,8 @@ public class GuiHitechChisel extends GuiChisel {
     private @Nullable GuiButton buttonChisel;
     private @Nullable RotateButton buttonRotate;
     
+    private @Nullable IBlockState erroredState;
+    
     public GuiHitechChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, EnumHand hand) {
         super(iinventory, menu, hand);
         inventorySlots = containerHitech = new ContainerChiselHitech(iinventory, menu, hand);
@@ -280,7 +282,6 @@ public class GuiHitechChisel extends GuiChisel {
     
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int mx, int my) {
-        drawDefaultBackground();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
@@ -368,59 +369,66 @@ public class GuiHitechChisel extends GuiChisel {
         String s = "Preview";
         fontRendererObj.drawString("Preview", panel.getX() + (panel.getWidth() / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
                 
-        try {
+        BlockRendererDispatcher brd = this.mc.getBlockRendererDispatcher();
+        if (containerHitech.getTarget() != null) {
 
-            BlockRendererDispatcher brd = this.mc.getBlockRendererDispatcher();
-            if (containerHitech.getTarget() != null) {
-                
-                ItemStack stack = containerHitech.getTarget().getStack();
+            ItemStack stack = containerHitech.getTarget().getStack();
 
-                if (stack != null) {
+            if (stack != null) {
 
-                    GlStateManager.pushMatrix();
+                GlStateManager.pushMatrix();
 
-                    GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
+                GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
 
-                    // Makes zooming slower as zoom increases, but leaves 1 as the default zoom.
-                    double sc = buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9);
-                    GlStateManager.scale(-sc, -sc, -sc);
+                // Makes zooming slower as zoom increases, but leaves 1 as the default zoom.
+                double sc = buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9);
+                GlStateManager.scale(-sc, -sc, -sc);
 
-                    GlStateManager.rotate(rotX, 1, 0, 0);
-                    GlStateManager.rotate(rotY, 0, 1, 0);
-                    GlStateManager.translate(-1.5, -2.5, -0.5);
+                GlStateManager.rotate(rotX, 1, 0, 0);
+                GlStateManager.rotate(rotY, 0, 1, 0);
+                GlStateManager.translate(-1.5, -2.5, -0.5);
 
-                    Block block = Block.getBlockFromItem(stack.getItem());
-                    IBlockState state = block.getStateFromMeta(stack.getMetadata());
-                    if (state instanceof IExtendedBlockState) {
-                        state = ((IExtendedBlockState) state).getClean();
-                    }
+                Block block = Block.getBlockFromItem(stack.getItem());
+                IBlockState state = block.getStateFromMeta(stack.getMetadata());
+                if (state instanceof IExtendedBlockState) {
+                    state = ((IExtendedBlockState) state).getClean();
+                }
+
+                if (state != erroredState) {
+                    erroredState = null;
 
                     fakeworld.setState(state);
 
                     Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
                     Tessellator.getInstance().getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
-                    for (BlockPos pos : buttonPreview.getType().getPositions()) {
-                        brd.renderBlock(state, pos, fakeworld, Tessellator.getInstance().getBuffer());
-                    }
+                    try {
+                        for (BlockPos pos : buttonPreview.getType().getPositions()) {
+                            brd.renderBlock(state, pos, fakeworld, Tessellator.getInstance().getBuffer());
+                        }
 
-                    if (scissorAvailable) {
-                        ScaledResolution sr = new ScaledResolution(mc);
-                        GL11.glEnable(GL11.GL_SCISSOR_TEST);
-                        GL11.glScissor((guiLeft + panel.getX()) * sr.getScaleFactor(), mc.displayHeight - ((guiTop + panel.getY() + panel.getHeight()) * sr.getScaleFactor()),
-                                panel.getWidth() * sr.getScaleFactor(), panel.getHeight() * sr.getScaleFactor());
-                    }
-                    Tessellator.getInstance().draw();
-                    if (scissorAvailable) {
-                        GL11.glDisable(GL11.GL_SCISSOR_TEST);
-                    }
+                        if (scissorAvailable) {
+                            ScaledResolution sr = new ScaledResolution(mc);
+                            GL11.glEnable(GL11.GL_SCISSOR_TEST);
+                            GL11.glScissor((guiLeft + panel.getX()) * sr.getScaleFactor(), mc.displayHeight - ((guiTop + panel.getY() + panel.getHeight()) * sr.getScaleFactor()),
+                                    panel.getWidth() * sr.getScaleFactor(), panel.getHeight() * sr.getScaleFactor());
+                        }
+                    } catch (Exception e) {
+                        erroredState = state;
+                        Chisel.logger.error("Exception rendering block " + state, e);
+                    } finally {
+                        if (erroredState == null) {
+                            Tessellator.getInstance().draw();
+                        }
+                        if (scissorAvailable) {
+                            GL11.glDisable(GL11.GL_SCISSOR_TEST);
+                        }
 
-                    GlStateManager.popMatrix();
+                        GlStateManager.popMatrix();
+                    }
                 }
             }
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
         }
-        
+
         GlStateManager.disableAlpha();
     }
     
