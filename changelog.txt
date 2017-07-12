@@ -1,3 +1,13 @@
+0.0.13:
+Changes
+- Chisel concrete and concrete powder has been removed. If you had some placed in world, or in item form, they will be converted to the vanilla version.
+Fixes
+- In-world chiseling will now work on oredict variants
+- The iChisel target will now be considered for in-world chiseling
+- Fix #480 when CTM is missing, the missing mods GUI will now be displayed instead of just a crash
+- Fix #476 chisel blocks do not block light when used in worldgen
+- Fix crash with HWYLA
+
 0.0.12:
 New
 - Now requires version 0.2.0 of CTM or higher

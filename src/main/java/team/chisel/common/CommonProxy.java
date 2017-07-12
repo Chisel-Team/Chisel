@@ -26,4 +26,8 @@ public class CommonProxy implements Reference {
     public World getClientWorld() {
         return null;
     }
+    
+    public boolean isCTMPresent() {
+        return true;
+    }
 }

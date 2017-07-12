@@ -39,13 +39,13 @@ public class ClientUtil {
     public static final Matrix4f DEFAULT_BLOCK_THIRD_PERSON_MATRIX = DEFAULT_BLOCK_THIRD_PERSON_TRANSOFRM.getMatrix();
 
     @SuppressWarnings("null")
-    public static void playSound(World world, EntityPlayer player, @Nullable ItemStack stack, @Nullable ICarvingVariation variation) {
+    public static void playSound(World world, EntityPlayer player, @Nullable ItemStack stack, @Nullable IBlockState next) {
         if (stack != null && stack.getItem() instanceof IChiselItem) {
             @Nonnull String sound;
-            if (variation != null) {
-                sound = Optional.ofNullable(((IChiselItem)stack.getItem()).getOverrideSound(world, player, stack, variation)).orElse(CarvingUtils.getChiselRegistry().getVariationSound(variation));
+            if (next != null) {
+                sound = Optional.ofNullable(((IChiselItem)stack.getItem()).getOverrideSound(world, player, stack, next)).orElse(CarvingUtils.getChiselRegistry().getVariationSound(next));
             } else {
-                sound = CarvingUtils.getChiselRegistry().getVariationSound(variation);
+                sound = CarvingUtils.getChiselRegistry().getVariationSound(next);
             }
             playSound(world, player.getPosition(), sound);
         }

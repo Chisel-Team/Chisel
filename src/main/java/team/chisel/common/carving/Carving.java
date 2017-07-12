@@ -159,7 +159,7 @@ public class Carving implements ICarvingRegistry {
     @Override
     public @Nullable ICarvingGroup getGroup(IBlockState state) {
         ICarvingVariation variation = getVariation(state, groups.getGroup(state));
-        ItemStack stack = variation == null ? ItemStack.EMPTY : variation.getStack();
+        ItemStack stack = variation == null ? new ItemStack(state.getBlock(), 1, state.getBlock().damageDropped(state)) : variation.getStack();
         ICarvingGroup ore = getOreGroup(stack);
         return ore == null ? groups.getGroup(state) : ore;
     }

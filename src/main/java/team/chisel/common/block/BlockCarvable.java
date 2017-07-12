@@ -194,7 +194,7 @@ public class BlockCarvable extends Block implements ICarvable {
     }
     
     @Override
-    public int getLightOpacity(IBlockState state, IBlockAccess world, BlockPos pos) {
+    public int getLightOpacity(IBlockState state) {
         return isOpaqueCube(state) ? 255 : 0;
     }
     
