@@ -1,12 +1,14 @@
 package team.chisel.common.item;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -16,6 +18,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.oredict.OreDictionary;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -60,7 +63,7 @@ public class ChiselController {
                     @Nonnull
                     ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(target);
                     if (variation != null) {
-                        updateState(event.getWorld(), event.getPos(), held, event.getEntityPlayer(), variation);
+                        updateState(event.getWorld(), event.getPos(), held, event.getEntityPlayer(), variation.getBlockState());
                         damageItem(held, player);
                     } else {
                         Chisel.logger.warn("Found itemstack {} in group {}, but it has no variation!", target, sourceGroup.getName());
@@ -68,12 +71,27 @@ public class ChiselController {
                 }
             } else {
                 ICarvingVariation current = registry.getVariation(state);
-                List<ICarvingVariation> variations = blockGroup.getVariations();
-                int index = variations.indexOf(current);
+                if (current == null) { // oredict
+                    current = CarvingUtils.getDefaultVariationFor(state, Integer.MAX_VALUE);
+                }
+                List<IBlockState> variations = blockGroup.getVariations().stream().map(ICarvingVariation::getBlockState).collect(Collectors.toList());
+                String ore = blockGroup.getOreName();
+
+                // FIXME oredict blocks
+                variations.addAll(
+                        OreDictionary.getOres(ore).stream()
+                        .filter(stack -> (stack.getItem() instanceof ItemBlock))
+                        .map(stack -> ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getItem().getMetadata(stack.getItemDamage())))
+                        .collect(Collectors.toList())
+                );
+                
+                variations = variations.stream().distinct().collect(Collectors.toList());
+                        
+                int index = variations.indexOf(current.getBlockState());
                 index = player.isSneaking() ? index - 1 : index + 1;
                 index = (index + variations.size()) % variations.size();
                 
-                ICarvingVariation next = variations.get(index);
+                IBlockState next = variations.get(index);
                 updateState(event.getWorld(), event.getPos(), held, event.getEntityPlayer(), next);
                 damageItem(held, player);
             }
@@ -90,8 +108,8 @@ public class ChiselController {
                     event.getEntityPlayer().openGui(Chisel.instance, 0, event.getWorld(), event.getHand().ordinal(), 0, 0);
                 }
             }
-        }    
-     }
+        }
+    }
 
     private static void damageItem(ItemStack stack, EntityPlayer player) {
         stack.damageItem(1, player);
@@ -101,13 +119,13 @@ public class ChiselController {
         }
     }
     
-    private static void updateState(World world, BlockPos pos, ItemStack stack, EntityPlayer player, ICarvingVariation next) {
+    private static void updateState(World world, BlockPos pos, ItemStack stack, EntityPlayer player, IBlockState next) {
         IBlockState current = world.getBlockState(pos);
-        if (current != next.getBlockState()) {
-            world.setBlockState(pos, next.getBlockState());
+        if (current != next) {
+            world.setBlockState(pos, next);
             if (world.isRemote) {
                 ClientUtil.playSound(world, player, stack, next);
-                ClientUtil.addDestroyEffects(world, pos, next.getBlockState());
+                ClientUtil.addDestroyEffects(world, pos, next);
             }
         }
     }
