@@ -49,13 +49,14 @@ public class SlotChiselSelection extends Slot {
             if (!crafted.isEmpty()) {
                 
                 IChiselItem item = (IChiselItem) container.getChisel().getItem();
-                ItemStack res = item.craftItem(chisel, crafted, itemstack, player);
+                ItemStack source = crafted.copy();
+                ItemStack res = item.craftItem(chisel, source, itemstack, player);
                 if (chisel.getCount() == 0) {
                     container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
                     container.onChiselBroken();
                 }
                 player.inventory.setItemStack(res);
-                container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, crafted.getCount() == 0 ? ItemStack.EMPTY : crafted);
+                container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, source);
                 container.onChiselSlotChanged();
             }
         }
