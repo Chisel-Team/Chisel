@@ -1,8 +1,13 @@
 package team.chisel.common.inventory;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -64,7 +69,16 @@ public class SlotChiselSelection extends Slot {
         container.detectAndSendChanges();
         
         if (player.world.isRemote) {
-            ClientUtil.playSound(player.world, player, chisel, CarvingUtils.getChiselRegistry().getVariation(crafted).getBlockState());
+            ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(crafted);
+            IBlockState state = v == null ? null : v.getBlockState();
+            if (state == null) {
+                if (crafted.getItem() instanceof ItemBlock) {
+                    state = ((ItemBlock)crafted.getItem()).getBlock().getStateFromMeta(crafted.getItem().getMetadata(crafted.getItemDamage()));
+                } else {
+                    state = Blocks.STONE.getDefaultState(); // fallback
+                }
+            }
+            ClientUtil.playSound(player.world, player, chisel, state);
         } else {
             //container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.stackSize);
         }
