@@ -221,8 +221,9 @@ public class CarvingUtils {
 		public boolean removeVariation(ICarvingVariation variation) {
 			ICarvingVariation toRemove = null;
 			for (ICarvingVariation v : variations) {
-				if (v.getBlockState().equals(variation.getBlockState())) {
+				if (ItemStack.areItemsEqual(v.getStack(), variation.getStack()) || (v.getBlockState() != null && v.getBlockState().equals(variation.getBlockState()))) {
 					toRemove = v;
+					break;
 				}
 			}
 			return toRemove == null ? false : variations.remove(toRemove);

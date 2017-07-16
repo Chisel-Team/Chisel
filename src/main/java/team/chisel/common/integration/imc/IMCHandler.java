@@ -1,5 +1,7 @@
 package team.chisel.common.integration.imc;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 
@@ -32,6 +34,24 @@ public class IMCHandler {
                 handle(message, imc);
             }
         }
+    }
+    
+    private Pair<ItemStack, IBlockState> parseNBT(NBTTagCompound tag) {
+        NBTTagCompound stacktag = tag.getCompoundTag("stack");
+        String blockname = tag.getString("block");
+        int blockmeta = tag.getInteger("meta");
+        Preconditions.checkArgument(!(stacktag.hasNoTags() && blockname.isEmpty()), "Must provide stack or blockstate.");
+        ItemStack stack = null;
+        if (!stacktag.hasNoTags()) {
+            stack = ItemStack.loadItemStackFromNBT(stacktag);
+        }
+        IBlockState state = null;
+        if (!blockname.isEmpty()) {
+            Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockname));
+            Preconditions.checkNotNull(block, "Could not find block %s in registry!", blockname);
+            state = block.getStateFromMeta(blockmeta);
+        }
+        return Pair.of(stack, state);
     }
 
     private void handle(FMLInterModComms.IMCMessage message, IMC type) {
@@ -69,29 +89,38 @@ public class IMCHandler {
                 NBTTagCompound tag = message.getNBTValue();
                 String group = tag.getString("group");
                 Preconditions.checkNotNull(Strings.emptyToNull(group), "No variation specified");
-                NBTTagCompound stacktag = tag.getCompoundTag("stack");
-                String blockname = tag.getString("block");
-                int blockmeta = tag.getInteger("meta");
-                Preconditions.checkArgument(!(stacktag.hasNoTags() && blockname.isEmpty()), "Must provide stack or blockstate.");
-                ItemStack stack = null;
-                if (!stacktag.hasNoTags()) {
-                    stack = ItemStack.loadItemStackFromNBT(stacktag);
-                }
-                IBlockState state = null;
-                if (!blockname.isEmpty()) {
-                    Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockname));
-                    Preconditions.checkNotNull(block, "Could not find block %s in registry!", blockname);
-                    state = block.getStateFromMeta(blockmeta);
-                }
+                
+                Pair<ItemStack, IBlockState> variationdata = parseNBT(tag);
                 ICarvingVariation v;
-                if (stack == null) {
-                    v = CarvingUtils.variationFor(state, order++);
-                } else if (state == null) {
-                    v = CarvingUtils.variationFor(stack, order++);
+                if (variationdata.getLeft() == null) {
+                    v = CarvingUtils.variationFor(variationdata.getRight(), order++);
+                } else if (variationdata.getRight() == null) {
+                    v = CarvingUtils.variationFor(variationdata.getLeft(), order++);
                 } else {
-                    v = CarvingUtils.variationFor(stack, state, order++);
+                    v = CarvingUtils.variationFor(variationdata.getLeft(), variationdata.getRight(), order++);
                 }
                 reg.addVariation(group, v);
+                break;
+            }
+            case REMOVE_VARIATION_V2:{
+                NBTTagCompound tag = message.getNBTValue();
+                String group = tag.getString("group");
+                Pair<ItemStack, IBlockState> variationdata = parseNBT(tag);
+                if (Strings.isNullOrEmpty(group)) {
+                    if (variationdata.getLeft() != null) {
+                        reg.removeVariation(variationdata.getLeft());
+                    }
+                    if (variationdata.getRight() != null) {
+                        reg.removeVariation(variationdata.getRight());
+                    }
+                } else {
+                    if (variationdata.getLeft() != null) {
+                        reg.removeVariation(variationdata.getLeft(), group);
+                    }
+                    if (variationdata.getRight() != null) {
+                        reg.removeVariation(variationdata.getRight(), group);
+                    }
+                }
                 break;
             }
             default: {

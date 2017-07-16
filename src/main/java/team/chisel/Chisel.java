@@ -137,7 +137,28 @@ public class Chisel implements Reference {
         //EntityRegistry.registerModEntity(EntityFallingBlockCarvable.class, "falling_block", 60, Chisel.instance, 64, 3, false);
 
         proxy.preInit(event);
+    }
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        Features.init();
         
+        proxy.init();
+        // BlockRegistry.init(event);
+
+        GameRegistry.registerFuelHandler(new ChiselFuelHandler());
+
+        addCompactorPressRecipe(1000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestoneextra, 1, 7));
+        addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestoneextra, 1, 7), new ItemStack(ChiselBlocks.marbleextra, 1, 7));
+
+//        /*
+//        Example of IMC
+
+//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
+//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|1");
+//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|2");
+        
+                
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION.toString(), "marble|minecraft:dirt|0");
         NBTTagCompound testtag = new NBTTagCompound();
         testtag.setString("group", "marble");
@@ -157,27 +178,21 @@ public class Chisel implements Reference {
         testtag.setTag("stack", new ItemStack(Items.REDSTONE).serializeNBT());
         testtag.setString("block", Blocks.REDSTONE_WIRE.getRegistryName().toString());
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
-    }
-
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        Features.init();
         
-        proxy.init();
-        // BlockRegistry.init(event);
-
-        GameRegistry.registerFuelHandler(new ChiselFuelHandler());
-
-        addCompactorPressRecipe(1000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestoneextra, 1, 7));
-        addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestoneextra, 1, 7), new ItemStack(ChiselBlocks.marbleextra, 1, 7));
-
-        /*
-        Example of IMC
-
-        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
-        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|1");
-        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|2");
-        */
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setTag("stack", new ItemStack(ChiselBlocks.marble, 1, 3).serializeNBT());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
+        testtag.setInteger("meta", 5);
+        FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
+//        */
     }
 
     private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output)

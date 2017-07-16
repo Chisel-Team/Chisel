@@ -74,11 +74,20 @@ public enum IMC {
      * return new ItemStack(state.getBlock(), 1, state.getBlock().damageDropped(state))
      * </pre>
      * 
-     * If this does not work for you, use {@link #ADD_VARIATION_CUSTOM}.
+     * @since 0.0.14
+     */
+    ADD_VARIATION_V2("add_variation"),
+    
+    /**
+     * Remove a variation. Will attempt to match for a variation by ItemStack, then blockstate, if both are provided.
+     * <p>
+     * This IMC message is expected to be an {@link NBTTagCompound}, with the same data used for adding a variation, except that "group" can be left out to remove a variation from multiple groups.
+     * 
+     * @see {@link #ADD_VARIATION_V2}
      * 
      * @since 0.0.14
      */
-    ADD_VARIATION_V2("variation:addv2"),
+    REMOVE_VARIATION_V2("remove_variation"),
     
     ;
 

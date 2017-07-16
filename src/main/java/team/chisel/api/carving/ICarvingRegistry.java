@@ -188,7 +188,7 @@ public interface ICarvingRegistry {
     ICarvingGroup removeGroup(String groupName);
 
     /**
-     * Removes a varaition with the passed {@link Block} and metadata from the registry. If this variation is registered with mutiple groups, it will remove it from all of them.
+     * Removes a variation with the passed {@link Block} and metadata from the registry. If this variation is registered with multiple groups, it will remove it from all of them.
      * 
      * @param state
      *            The {@link IBlockState} of the {@link ICarvingVariation variation}
@@ -198,7 +198,7 @@ public interface ICarvingRegistry {
     ICarvingVariation removeVariation(IBlockState state);
 
     /**
-     * Removes a varaition with the passed {@link Block} and metadata from the registry, but only from the specified {@link ICarvingGroup} name.
+     * Removes a variation with the passed {@link Block} and metadata from the registry, but only from the specified {@link ICarvingGroup} name.
      * 
      * @param state
      *            The {@link IBlockState} of the {@link ICarvingVariation variation}
@@ -208,6 +208,28 @@ public interface ICarvingRegistry {
      */
     @Nullable
     ICarvingVariation removeVariation(IBlockState state, String group);
+    
+    /**
+     * Removes a variation with the passed ItemStack from the registry. If this variation is registered with multiple groups, it will remove it from all of them.
+     * 
+     * @param stack
+     *            The {@link ItemStack} of the {@link ICarvingVariation variation}
+     * @return The ICarvingVariation that was removed. Null if nothing was removed.
+     */
+    @Nullable
+    ICarvingVariation removeVariation(ItemStack stack);
+
+    /**
+     * Removes a variation with the passed ItemStack from the registry, but only from the specified {@link ICarvingGroup} name.
+     * 
+     * @param stack
+     *            The {@link ItemStack} of the {@link ICarvingVariation variation}
+     * @param group
+     *            The name of the group that the variation should be removed from
+     * @return The ICarvingVariation that was removed. Null if nothing was removed.
+     */
+    @Nullable
+    ICarvingVariation removeVariation(ItemStack stack, String group);
 
     /**
      * Registers a group to an oredict name.
