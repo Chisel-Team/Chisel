@@ -38,6 +38,7 @@ All images contained by the following directories
 - `/src/main/resources/assets/chisel/textures/blocks/limestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/marble/`
 - `/src/main/resources/assets/chisel/textures/blocks/prismarine/`
+- `/src/main/resources/assets/chisel/textures/blocks/prismarineanim/`
 - `/src/main/resources/assets/chisel/textures/blocks/purpur/`
 - `/src/main/resources/assets/chisel/textures/blocks/quartz/`
 - `/src/main/resources/assets/chisel/textures/blocks/redstone/`
