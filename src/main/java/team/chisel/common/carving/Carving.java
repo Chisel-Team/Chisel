@@ -158,7 +158,7 @@ public class Carving implements ICarvingRegistry {
 	private void addNewStackToList(ItemStack stack, List<ItemStack> list, List<ItemStackWrapper> found) {
 		ItemStackWrapper wrapper = new ItemStackWrapper(stack);
 		if (!found.contains(wrapper)) {
-			list.add(stack);
+			list.add(stack.copy());
 			found.add(wrapper);
 		}
 	}

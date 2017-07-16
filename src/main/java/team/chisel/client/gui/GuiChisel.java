@@ -46,7 +46,8 @@ public class GuiChisel extends GuiContainer {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         
         // if this is a selection slot, no double clicking
-        if (getSlotAtPosition(mouseX, mouseY).slotNumber < container.getInventoryChisel().size - 1) {
+        Slot slot = getSlotAtPosition(mouseX, mouseY); 
+        if (slot != null && slot.slotNumber < container.getInventoryChisel().size - 1) {
             this.doubleClick = false;
         }
     }

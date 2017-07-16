@@ -120,12 +120,13 @@ public class ContainerChisel extends Container {
                     return null;
                 }
             } else {
-                if (slotIdx < getInventoryChisel().size + 1) {
-                    ItemStack tempStack = entity.inventory.getItemStack();
-                    entity.inventory.setItemStack(itemstack1.copy());
-                    slot.onPickupFromSlot(entity, itemstack1);
-                    itemstack1 = entity.inventory.getItemStack();
-                    entity.inventory.setItemStack(tempStack);
+                if (slotIdx < getInventoryChisel().size) {
+                    SlotChiselSelection selectslot = (SlotChiselSelection) slot;
+                    ItemStack check = selectslot.craft(entity, itemstack1, true);
+                    if (check == null) {
+                        return null;
+                    }
+                    itemstack1 = selectslot.craft(entity, itemstack1, false);
                 }
 
                 if (!this.mergeItemStack(itemstack1, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
