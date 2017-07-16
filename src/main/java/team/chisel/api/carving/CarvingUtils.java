@@ -9,8 +9,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 @ParametersAreNonnullByDefault
@@ -59,9 +63,31 @@ public class CarvingUtils {
 	 *            The sorting order.
 	 * @return A standard {@link ICarvingVariation} instance.
 	 */
+	@Deprecated
 	public static ICarvingVariation getDefaultVariationFor(IBlockState state, int order) {
 		return new SimpleCarvingVariation(state, order);
 	}
+
+	/**
+     * Creates a new variation for the given blockstate, with automatic (flawed) conversion to ItemStack when necessary.
+     */
+    public static ICarvingVariation variationFor(IBlockState state, int order) {
+        return new VariationForState(state, order);
+    }
+
+    /**
+     * Creates a new variation for the given ItemStack, with automatic (flawed) conversion to blockstate when necessary.
+     */
+    public static ICarvingVariation variationFor(ItemStack stack, int order) {
+        return new VariationForStack(stack, order);
+    }
+
+    /**
+     * Creates a new variation for the given ItemStack and blockstate. Use this for full control over ItemStack/blockstate conversion.
+     */
+    public static ICarvingVariation variationFor(ItemStack stack, @Nullable IBlockState state, int order) {
+        return new SimpleVariation(stack, state, order);
+    }
 
 	/**
 	 * Creates a standard {@link ICarvingGroup} for the given name. Use this if you do not need any custom behavior in your own group.
@@ -73,18 +99,25 @@ public class CarvingUtils {
 	public static ICarvingGroup getDefaultGroupFor(String name) {
 		return new SimpleCarvingGroup(name);
 	}
+	
+	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+	@Getter
+	private static abstract class SimpleVariationBase implements ICarvingVariation {
+	    private final int order;
+	}
 
-	private static class SimpleCarvingVariation implements ICarvingVariation {
+	@Deprecated
+	private static class SimpleCarvingVariation extends SimpleVariationBase {
 
-		private int order;
 		private IBlockState state;
 
 		public SimpleCarvingVariation(IBlockState state, int order) {
-			this.order = order;
+		    super(order);
 			this.state = state;
 		}
 
 		@Override
+		@Deprecated
 		public Block getBlock() {
 			return state.getBlock();
 		}
@@ -96,14 +129,63 @@ public class CarvingUtils {
 
 		@Override
 		public ItemStack getStack() {
-			return new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
-		}
-
-		@Override
-		public int getOrder() {
-			return order;
+			return new ItemStack(state.getBlock(), 1, state.getBlock().damageDropped(state));
 		}
 	}
+	
+	private static class VariationForState extends SimpleCarvingVariation {
+
+        public VariationForState(IBlockState state, int order) {
+            super(state, order);
+        }	    
+	}
+	
+	private static class VariationForStack extends SimpleVariationBase {
+	    
+	    @Getter
+	    private final ItemStack stack;
+	    private final boolean hasBlock;
+	    
+	    public VariationForStack(ItemStack stack, int order) {
+	        super(order);
+	        this.stack = stack;
+	        this.hasBlock = stack.getItem() instanceof ItemBlock;
+	    }
+
+        @Override
+        @Nullable
+        @Deprecated
+        public Block getBlock() {
+            return hasBlock ? ((ItemBlock)stack.getItem()).getBlock() : null;
+        }
+
+        @SuppressWarnings("deprecation")
+        @Override
+        @Nullable
+        public IBlockState getBlockState() {
+            return hasBlock ? ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getItemDamage()) : null;
+        }	    
+	}
+	
+    @Getter
+    private static class SimpleVariation extends SimpleVariationBase {
+
+        private final ItemStack stack;
+        @Nullable
+        private final IBlockState blockState;
+
+        public SimpleVariation(ItemStack stack, @Nullable IBlockState state, int order) {
+            super(order);
+            this.stack = stack;
+            this.blockState = state;
+        }
+
+        @Override
+        @Nullable
+        public Block getBlock() {
+            return blockState == null ? null : blockState.getBlock();
+        }
+    }
 
 	private static class SimpleCarvingGroup implements ICarvingGroup {
 

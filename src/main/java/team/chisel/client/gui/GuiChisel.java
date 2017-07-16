@@ -1,5 +1,6 @@
 package team.chisel.client.gui;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -38,6 +39,16 @@ public class GuiChisel extends GuiContainer {
     public void onGuiClosed() {
         super.onGuiClosed();
         inventorySlots.onContainerClosed(player);
+    }
+    
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        
+        // if this is a selection slot, no double clicking
+        if (getSlotAtPosition(mouseX, mouseY).slotNumber < container.getInventoryChisel().size - 1) {
+            this.doubleClick = false;
+        }
     }
 
     @Override

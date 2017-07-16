@@ -80,7 +80,7 @@ public class Carving implements ICarvingRegistry {
     private @Nullable ICarvingVariation getVariation(IBlockState state, @Nullable ICarvingGroup group) {
         if (group != null) {
             for (ICarvingVariation v : group.getVariations()) {
-                if (v.getBlockState().equals(state)) {
+                if (v.getBlockState() != null && v.getBlockState().equals(state)) {
                     return v;
                 }
             }
@@ -219,8 +219,9 @@ public class Carving implements ICarvingRegistry {
 	}
 
 	@Override
+	@Deprecated
 	public void addVariation(String groupName, IBlockState state, int order) {
-		ICarvingVariation variation = CarvingUtils.getDefaultVariationFor(state, order);
+		ICarvingVariation variation = CarvingUtils.variationFor(state, order);
 		addVariation(groupName, variation);
 	}
 

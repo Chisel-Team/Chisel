@@ -150,7 +150,10 @@ public interface ICarvingRegistry {
      *            The state of the variation
      * @param order
      *            The order of the variation in the list of all variations in the group. Higher numbers are sorted at the end.
+     * 
+     * @deprecated Use {@link #addVariation(String, ICarvingVariation)} and {@link CarvingUtils#variationFor(IBlockState, int)}.
      */
+    @Deprecated
     void addVariation(String groupName, IBlockState state, int order);
 
     /**

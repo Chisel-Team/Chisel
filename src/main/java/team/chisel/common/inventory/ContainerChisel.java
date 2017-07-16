@@ -11,7 +11,6 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import team.chisel.Chisel;
 import team.chisel.api.carving.ICarvingRegistry;
@@ -133,13 +132,21 @@ public class ContainerChisel extends Container {
                     return null;
                 }
             }
+            
+            boolean clearSlot = slotIdx >= getInventoryChisel().size || getInventoryChisel().getStackInSpecialSlot() == null || getInventoryChisel().getStackInSpecialSlot().stackSize == 0;
+
             slot.onSlotChange(itemstack1, itemstack);
 
             if (itemstack1.stackSize == 0) {
-                slot.putStack((ItemStack) null);
+                if (clearSlot) {
+                    slot.putStack((ItemStack) null);
+                }
             } else {
                 slot.onSlotChanged();
             }
+
+            getInventoryChisel().updateItems();
+
             if (itemstack1.stackSize == itemstack.stackSize) {
                 return null;
             }
@@ -147,7 +154,9 @@ public class ContainerChisel extends Container {
                 slot.onPickupFromSlot(entity, itemstack1);
             }
             if (itemstack1.stackSize == 0) {
-                slot.putStack(null);
+                if (clearSlot) {
+                    slot.putStack(null);
+                }
                 return null;
             } else {
                 slot.putStack(itemstack1);
