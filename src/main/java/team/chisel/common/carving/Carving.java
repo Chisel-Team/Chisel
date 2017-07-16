@@ -206,17 +206,36 @@ public class Carving implements ICarvingRegistry {
 
 	@Override
 	public @Nullable ICarvingVariation removeVariation(IBlockState state) {
-	    ICarvingGroup group = getGroup(state);
-	    if (group == null) {
-	        return null;
-	    }
-		return removeVariation(state, group.getName());
-	}
+        ICarvingGroup group = groups.getGroup(state);
+        ICarvingVariation ret = null;
+        while (group != null) {
+            ret = removeVariation(state, group.getName());
+            group = groups.getGroup(state);
+        }
+        return ret; // TODO return multiple?
+    }
 
-	@Override
-	public @Nullable ICarvingVariation removeVariation(IBlockState state, String group) {
-		return groups.removeVariation(state, group);
-	}
+    @Override
+    public @Nullable ICarvingVariation removeVariation(IBlockState state, String group) {
+        return groups.removeVariation(state, group);
+    }
+
+    @Override
+    public @Nullable ICarvingVariation removeVariation(ItemStack stack) {
+        ICarvingGroup group = groups.getGroup(stack);
+        ICarvingVariation ret = null;
+        while (group != null) {
+            ret = removeVariation(stack, group.getName());
+            group = groups.getGroup(stack);
+        }
+        return ret; // TODO return multiple?
+    }
+    
+    @Override
+    @Nullable
+    public ICarvingVariation removeVariation(ItemStack stack, String group) {
+        return groups.removeVariation(stack, group);
+    }
 
 	@Override
 	@Deprecated
