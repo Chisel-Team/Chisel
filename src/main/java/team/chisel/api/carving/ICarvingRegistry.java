@@ -88,6 +88,7 @@ public interface ICarvingRegistry {
      * @return A string oredict name for the group
      */
     @Nullable
+    @Deprecated
     String getOreName(IBlockState state);
 
     /**
@@ -241,6 +242,7 @@ public interface ICarvingRegistry {
      * @param oreName
      *            The oredict name
      */
+    @Deprecated
     void registerOre(String groupName, String oreName);
 
     /**

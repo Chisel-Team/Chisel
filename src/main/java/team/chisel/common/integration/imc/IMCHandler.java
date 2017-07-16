@@ -54,6 +54,7 @@ public class IMCHandler {
         return Pair.of(stack, state);
     }
 
+    @SuppressWarnings("deprecation")
     private void handle(FMLInterModComms.IMCMessage message, IMC type) {
         Chisel.logger.info("Received IMC from {}, of type {}.", message.getSender(), message.key);
         if (type.isDeprecated()) {

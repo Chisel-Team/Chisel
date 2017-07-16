@@ -223,15 +223,6 @@ public class GroupList implements Set<ICarvingGroup> {
 		return groups.get(groupName);
 	}
 
-	public ICarvingGroup getGroupByOre(String oreName) {
-		for (ICarvingGroup group : groups.values()) {
-			if (oreName.equals(group.getOreName())) {
-				return group;
-			}
-		}
-		return null;
-	}
-
 	public Collection<? extends String> getNames() {
 		return groups.keySet();
 	}

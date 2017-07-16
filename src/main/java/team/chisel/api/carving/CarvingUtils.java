@@ -191,7 +191,6 @@ public class CarvingUtils {
 
 		private String name;
 		private @Nullable String sound;
-		private @Nullable String oreName;
 
 		private List<ICarvingVariation> variations = Lists.newArrayList();
 
@@ -245,13 +244,13 @@ public class CarvingUtils {
 		}
 
 		@Override
+		@Deprecated
 		public @Nullable String getOreName() {
-			return oreName;
+			return null;
 		}
 
 		@Override
-		public void setOreName(@Nullable String oreName) {
-			this.oreName = oreName;
-		}
+		@Deprecated
+		public void setOreName(@Nullable String oreName) {}
 	}
 }
