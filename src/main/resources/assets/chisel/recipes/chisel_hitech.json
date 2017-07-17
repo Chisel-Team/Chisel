@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "chisel:chisel_diamond" },
+    { "ore": "dustRedstone", "type": "forge:ore_dict" },
+    { "ore": "ingotGold", "type": "forge:ore_dict" }
+  ],
+  "result": { "item": "chisel:chisel_hitech" }
+}

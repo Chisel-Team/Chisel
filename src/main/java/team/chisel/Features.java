@@ -1,30 +1,8 @@
 package team.chisel;
 
-import static team.chisel.common.config.Configurations.concreteVelocityMult;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockCarpet;
-import net.minecraft.block.BlockColored;
-import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.BlockPrismarine;
-import net.minecraft.block.BlockQuartz;
-import net.minecraft.block.BlockRedSandstone;
-import net.minecraft.block.BlockRotatedPillar;
-import net.minecraft.block.BlockSandStone;
-import net.minecraft.block.BlockStainedGlass;
-import net.minecraft.block.BlockStone;
-import net.minecraft.block.BlockStoneBrick;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
@@ -52,28 +30,27 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
-import team.chisel.api.block.BlockCreator;
-import team.chisel.api.block.BlockProvider;
-import team.chisel.api.block.ChiselBlockFactory;
-import team.chisel.api.block.ICarvable;
-import team.chisel.api.block.VariationData;
+import team.chisel.api.block.*;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.sound.ChiselSoundTypes;
-import team.chisel.common.block.BlockCarvable;
-import team.chisel.common.block.BlockCarvableAltarComponent;
-import team.chisel.common.block.BlockCarvableCarpet;
-import team.chisel.common.block.BlockCarvableFalling;
-import team.chisel.common.block.BlockCarvableTranquility;
-import team.chisel.common.block.ItemChiselBlock;
+import team.chisel.common.block.*;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
-import team.chisel.common.init.ChiselItems;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.item.ItemOffsetTool;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.GenerationHandler.WorldGenInfo;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import static team.chisel.common.config.Configurations.concreteVelocityMult;
 
 @EventBusSubscriber
 public enum Features {
@@ -526,15 +503,6 @@ public enum Features {
             registry.register(new ItemChisel(ChiselType.HITECH));
 
             registry.register(new ItemOffsetTool());
-        }
-        
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry) {
-            Features.addShapedRecipe(registry, "chisel_iron", ChiselItems.chisel_iron, " x", "s ", 'x', "ingotIron", 's', "stickWood");
-            Features.addShapedRecipe(registry, "chisel_diamond", ChiselItems.chisel_diamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood");
-            Features.addShapelessRecipe(registry, "chisel_hitech", ChiselItems.chisel_hitech, ChiselItems.chisel_diamond, "dustRedstone", "ingotGold");
-
-            Features.addShapedRecipe(registry, "offsettool", ChiselItems.offsettool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron");
         }
     },
 

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "chisel",
+  "pattern": [ "XE", "SX" ],
+  "key": {
+    "X": { "ore": "ingotIron", "type": "forge:ore_dict" },
+    "E": { "item": "minecraft:ender_pearl" },
+    "S": { "ore": "stickWood", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:offsettool" }
+}
