@@ -7,7 +7,7 @@ import java.util.function.BooleanSupplier;
 
 import com.google.common.base.Converter;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.JsonParseException;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;
@@ -25,7 +25,7 @@ public final class JsonFeatureFactory implements IConditionFactory {
         try {
             feature = Features.valueOf(name);
         } catch (IllegalArgumentException e) {
-            throw new JsonSyntaxException("Unknown feature: " + value);
+            throw new JsonParseException("Unknown feature: " + value);
         }
         return feature::enabled;
     }
