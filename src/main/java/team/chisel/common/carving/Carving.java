@@ -90,7 +90,7 @@ public class Carving implements ICarvingRegistry {
 	private @Nullable ICarvingVariation getVariation(ItemStack stack, @Nullable ICarvingGroup group) {
 		if (group != null) {
 			for (ICarvingVariation v : group.getVariations()) {
-				if (stack.isItemEqual(v.getStack()) && ItemStack.areItemStackTagsEqual(stack, v.getStack())) {
+				if (stack.isItemEqual(v.getStack()) && (v.getStack().getTagCompound() == null || ItemStack.areItemStackTagsEqual(stack, v.getStack()))) {
 					return v;
 				}
 			}

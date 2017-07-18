@@ -218,14 +218,11 @@ public class CarvingUtils {
 
 		@Override
 		public boolean removeVariation(ICarvingVariation variation) {
-			ICarvingVariation toRemove = null;
-			for (ICarvingVariation v : variations) {
-				if (ItemStack.areItemsEqual(v.getStack(), variation.getStack()) || (v.getBlockState() != null && v.getBlockState().equals(variation.getBlockState()))) {
-					toRemove = v;
-					break;
-				}
-			}
-			return toRemove == null ? false : variations.remove(toRemove);
+		    return variations.removeIf(v -> 
+				           (ItemStack.areItemsEqual(v.getStack(), variation.getStack()) 
+				        && (v.getStack().getTagCompound() == null || ItemStack.areItemStackTagsEqual(v.getStack(), variation.getStack()))) 
+				||  (v.getBlockState() != null && v.getBlockState().equals(variation.getBlockState()))
+		    );
 		}
 
 		@Override
