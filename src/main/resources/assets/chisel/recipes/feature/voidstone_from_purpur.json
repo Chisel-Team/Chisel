@@ -5,7 +5,7 @@
     "type": "chisel:feature",
     "feature": "voidstone"
   }],
-  "pattern": [ " P ", "OOO", " P " ],
+  "pattern": [ " P ", "PEP", " P " ],
   "key": {
     "E": { "ore": "enderpearl", "type": "forge:ore_dict" },
     "P": { "item": "minecraft:purpur_block" }
