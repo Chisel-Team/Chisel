@@ -1,0 +1,5 @@
+{
+  "conditions": {
+    "feature": "team.chisel.common.util.json.JsonFeatureFactory"
+  }
+}
