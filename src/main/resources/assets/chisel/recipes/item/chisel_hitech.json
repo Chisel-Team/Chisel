@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "tool",
+  "group": "chisel",
   "ingredients": [
     { "item": "chisel:chisel_diamond" },
     { "ore": "dustRedstone", "type": "forge:ore_dict" },

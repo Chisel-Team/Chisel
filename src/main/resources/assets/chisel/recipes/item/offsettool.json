@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "tool",
+  "group": "chisel",
   "pattern": [ "XE", "SX" ],
   "key": {
     "X": { "ore": "ingotIron", "type": "forge:ore_dict" },
