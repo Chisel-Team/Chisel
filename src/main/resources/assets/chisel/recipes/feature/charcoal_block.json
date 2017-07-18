@@ -7,7 +7,7 @@
   }],
   "pattern": [ "CCC", "CCC", "CCC" ],
   "key": {
-    "C": { "ore": "charcoal", "type": "forge:ore_dict" }
+    "C": { "item": "minecraft:coal", "data": 1 }
   },
   "result": { "item": "chisel:block_charcoal2", "data": 1, "count": 1 }
 }
