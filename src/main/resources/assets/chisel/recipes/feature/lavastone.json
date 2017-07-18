@@ -8,7 +8,7 @@
   "pattern": [ "SSS", "SLS", "SSS" ],
   "key": {
     "S": { "ore": "stone", "type": "forge:ore_dict" },
-	"L": { "item": "minecraft:lava_bucket" }
+    "L": { "item": "minecraft:lava_bucket" }
   },
   "result": { "item": "chisel:lavastone", "data": 0, "count": 8 }
 }

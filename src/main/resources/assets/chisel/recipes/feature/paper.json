@@ -8,7 +8,7 @@
   "pattern": [ "PPP", "PSP", "PPP" ],
   "key": {
     "P": { "ore": "paper", "type": "forge:ore_dict" },
-	"S": { "ore": "stickWood", "type": "forge:ore_dict" }
+    "S": { "ore": "stickWood", "type": "forge:ore_dict" }
   },
   "result": { "item": "chisel:paper", "data": 0, "count": 32 }
 }

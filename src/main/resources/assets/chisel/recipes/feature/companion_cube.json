@@ -8,7 +8,7 @@
   "pattern": [ "SSS", "SKS", "SSS" ],
   "key": {
     "S": { "ore": "stone", "type": "forge:ore_dict" },
-	"K": { "item": "minecraft:skull", "data": 32767 }
+    "K": { "item": "minecraft:skull", "data": 32767 }
   },
   "result": { "item": "chisel:valentines", "data": 9, "count": 32 }
 }
