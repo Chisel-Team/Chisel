@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "cloud"
+  }],
+  "pattern": [ " W ", "W W", " W " ],
+  "key": {
+    "W": { "item": "minecraft:wool", "data": 32767 }
+  },
+  "result": { "item": "chisel:cloud", "data": 0, "count": 32 }
+}

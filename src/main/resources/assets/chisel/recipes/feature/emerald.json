@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "emerald"
+  }],
+  "ingredients": [
+    { "ore": "blockEmerald", "type": "forge:ore_dict" }
+  ],
+  "result": { "item": "minecraft:emerald", "count": 9 }
+}

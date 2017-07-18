@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "lavastone"
+  }],
+  "pattern": [ "SSS", "SLS", "SSS" ],
+  "key": {
+    "S": { "ore": "stone", "type": "forge:ore_dict" },
+	"L": { "item": "minecraft:lava_bucket" }
+  },
+  "result": { "item": "chisel:lavastone", "data": 0, "count": 8 }
+}

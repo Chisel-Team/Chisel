@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "temple"
+  }],
+  "pattern": [ "SSS", "SDS", "SSS" ],
+  "key": {
+    "S": { "ore": "stone", "type": "forge:ore_dict" },
+	"D": { "ore": "dyeCyan", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:temple", "data": 0, "count": 8 }
+}

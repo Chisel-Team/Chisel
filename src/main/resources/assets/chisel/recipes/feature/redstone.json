@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "redstone"
+  }],
+  "ingredients": [
+    { "ore": "blockRedstone", "type": "forge:ore_dict" }
+  ],
+  "result": { "item": "minecraft:redstone", "count": 9 }
+}

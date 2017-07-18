@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "paper"
+  }],
+  "pattern": [ "PPP", "PSP", "PPP" ],
+  "key": {
+    "P": { "ore": "paper", "type": "forge:ore_dict" },
+	"S": { "ore": "stickWood", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:paper", "data": 0, "count": 32 }
+}

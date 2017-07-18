@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "charcoal"
+  }],
+  "pattern": [ "CCC", "CCC", "CCC" ],
+  "key": {
+    "C": { "ore": "charcoal", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:block_charcoal2", "data": 1, "count": 1 }
+}

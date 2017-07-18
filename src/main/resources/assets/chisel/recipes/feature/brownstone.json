@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "brownstone"
+  }],
+  "pattern": [ " S ", "SCS", " S " ],
+  "key": {
+    "S": { "ore": "sandstone", "type": "forge:ore_dict" },
+    "C": { "item": "minecraft:clay_ball" }
+  },
+  "result": { "item": "chisel:brownstone", "data": 0, "count": 4 }
+}

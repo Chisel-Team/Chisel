@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "futura"
+  }],
+  "pattern": [ "SSS", "SRS", "SSS" ],
+  "key": {
+    "S": { "ore": "stone", "type": "forge:ore_dict" },
+	"R": { "ore": "dustRedstone", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:futura", "data": 0, "count": 8 }
+}

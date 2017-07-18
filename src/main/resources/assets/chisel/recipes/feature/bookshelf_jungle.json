@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "bookshelf"
+  }],
+  "pattern": [ "S S", "BBB", "S S" ],
+  "key": {
+    "S": { "item": "minecraft:jungle_stairs" },
+    "B": { "item": "minecraft:book" }
+  },
+  "result": { "item": "chisel:bookshelf_jungle", "data": 0 }
+}

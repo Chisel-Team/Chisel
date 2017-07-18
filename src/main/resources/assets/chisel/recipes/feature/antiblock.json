@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "antiblock"
+  }],
+  "pattern": [ "SSS", "SGS", "SSS" ],
+  "key": {
+    "S": { "ore": "stone", "type": "forge:ore_dict" },
+    "G": { "ore": "dustGlowstone", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:antiblock", "data": 15, "count": 8 }
+}

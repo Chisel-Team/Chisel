@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "voidstone"
+  }],
+  "pattern": [ " E ", "OOO", " E " ],
+  "key": {
+    "E": { "item": "minecraft:ender_eye" },
+	"O": { "ore": "obsidian", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:voidstone", "data": 0, "count": 16 }
+}

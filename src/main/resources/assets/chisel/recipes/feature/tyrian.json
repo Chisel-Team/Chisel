@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "tyrian"
+  }],
+  "pattern": [ "SIS", "I I", "SIS" ],
+  "key": {
+    "S": { "ore": "stone", "type": "forge:ore_dict" },
+	"I": { "ore": "ingotIron", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:tyrian", "data": 0, "count": 32 }
+}

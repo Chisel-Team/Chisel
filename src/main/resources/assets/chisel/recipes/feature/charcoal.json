@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "charcoal"
+  }],
+  "ingredients": [
+    { "ore": "blockCharcoal", "type": "forge:ore_dict" }
+  ],
+  "result": { "item": "minecraft:coal", "data": 1, "count": 9 }
+}

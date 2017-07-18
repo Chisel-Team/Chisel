@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "valentines"
+  }],
+  "pattern": [ "SSS", "SDS", "SSS" ],
+  "key": {
+    "S": { "ore": "stone", "type": "forge:ore_dict" },
+	"D": { "ore": "dyePink", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:valentines", "data": 0, "count": 4 }
+}

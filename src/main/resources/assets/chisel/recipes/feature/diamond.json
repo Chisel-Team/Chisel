@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "diamond"
+  }],
+  "ingredients": [
+    { "ore": "blockDiamond", "type": "forge:ore_dict" }
+  ],
+  "result": { "item": "minecraft:diamond", "count": 9 }
+}
