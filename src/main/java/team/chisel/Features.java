@@ -62,13 +62,11 @@ import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableAltarComponent;
 import team.chisel.common.block.BlockCarvableCarpet;
-import team.chisel.common.block.BlockCarvableFalling;
 import team.chisel.common.block.BlockCarvableTranquility;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
-import team.chisel.common.init.ChiselItems;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.item.ItemOffsetTool;
@@ -184,12 +182,6 @@ public enum Features {
                     .next("orange")
                     .next("white")
                     .build();
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.antiblock, 8, 15), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone");
         }
     },
 
@@ -307,18 +299,6 @@ public enum Features {
                 CarvingUtils.getChiselRegistry().registerOre("bookshelf_" + woodType.toLowerCase(), "bookshelf" + woodType);
             }
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            BlockCarvable[] bookshelves = new BlockCarvable[]{ChiselBlocks.bookshelf_spruce, ChiselBlocks.bookshelf_birch, ChiselBlocks.bookshelf_jungle, ChiselBlocks.bookshelf_acacia, ChiselBlocks.bookshelf_darkoak};
-            Block[] stairs = new Block[]{Blocks.SPRUCE_STAIRS, Blocks.BIRCH_STAIRS, Blocks.JUNGLE_STAIRS, Blocks.ACACIA_STAIRS, Blocks.DARK_OAK_STAIRS};
-
-            for (int c = 0; c < bookshelves.length; c++)
-            {
-                Features.addShapedRecipe(registry, "bookshelf" + c, new ItemStack(bookshelves[c], 1), "S S", "BBB", "S S", 'S', new ItemStack(stairs[c], 1), 'B', new ItemStack(Items.BOOK, 1));
-            }
-        }
     },
 
     BRICKS {
@@ -421,14 +401,6 @@ public enum Features {
                     .next("weathered-block-half")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.0F));
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            //FurnaceRecipes.instance().addSmelting(new ItemStack(Blocks.GRAVEL).getItem(), new ItemStack(ChiselBlocks.brownstone), 0.1F);
-
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.brownstone, 4, 0), " S ", "SCS", " S ", 'S', "sandstone", 'C', new ItemStack(Items.CLAY_BALL, 1));
-        }
     },
 
     /*CERTUS { TODO Retexture
@@ -509,13 +481,6 @@ public enum Features {
 
             CarvingUtils.getChiselRegistry().registerOre("block_charcoal", "blockCharcoal");
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            Features.addShapedRecipe(registry, "charcoal_uncraft", new ItemStack(Items.COAL, 9, 1), "X", 'X', "blockCharcoal");
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.block_charcoal2, 1, 1), "XXX", "XXX", "XXX", 'X', "charcoal");
-        }
     },
     
     CHISEL {
@@ -539,12 +504,6 @@ public enum Features {
                     .next("vertical")
                     .next("grid")
                     .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.3F));
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.cloud, 32, 0), " S ", "S S", " S ", 'S', new ItemStack(Blocks.WOOL, 1, OreDictionary.WILDCARD_VALUE));
         }
     },
 
@@ -673,12 +632,6 @@ public enum Features {
                     .next("raw")
                     .addOreDict("blockCoal")
                     .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(Items.COAL, 9), "X", 'X', "blockCoal");
         }
     },
 
@@ -899,12 +852,6 @@ public enum Features {
                     .addOreDict("blockDiamond")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(Items.DIAMOND, 9), "X", 'X', "blockDiamond");
-        }
     },
 
     DIORITE {
@@ -1034,12 +981,6 @@ public enum Features {
                     .next("emeraldPrismatic")
                     .addOreDict("blockEmerald")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(Items.EMERALD, 9), "X", 'X', "blockEmerald");
         }
     },
 
@@ -1196,14 +1137,6 @@ public enum Features {
                     .next("wireframeblue")
                     .build(b -> b.setSoundType(ChiselSoundTypes.METAL));
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.factory, 32, 0), "SXS", "X X", "SXS",
-                    'X', new ItemStack(Blocks.STONE, 1),
-                    'S', new ItemStack(Items.IRON_INGOT, 1));
-        }
     },
 
     FUTURA {
@@ -1217,12 +1150,6 @@ public enum Features {
                     .next("controllerPurple")
                     .next("uberWavy")
                     .build(b -> b.setSoundType(SoundType.METAL));
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.futura, 8, 0), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustRedstone");
         }
     },
 
@@ -1767,12 +1694,6 @@ public enum Features {
                     .next("infocon")
                     .build(b -> b.setSoundType(ChiselSoundTypes.METAL));
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.laboratory, 8), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.QUARTZ, 1));
-        }
     },
 
     LAPIS {
@@ -1835,11 +1756,6 @@ public enum Features {
                     .next("bricks-chaotic")
                     .next("cuts")
                     .build(b -> b.setHardness(4.0F).setResistance(50.0F).setSoundType(SoundType.STONE));
-        }
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.lavastone, 8, 0), "***", "*X*", "***", '*', new ItemStack(Blocks.STONE, 1), 'X', new ItemStack(Items.LAVA_BUCKET, 1));
         }
     },
 
@@ -2193,12 +2109,6 @@ public enum Features {
                     .build(b -> b.setSoundType(SoundType.PLANT)
                             .setHardness(1.5f));
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.paper, 32), "ppp", "psp", "ppp", 'p', Items.PAPER, 's', "stickWood");
-        }
     },
 
     PLANKS {
@@ -2424,12 +2334,6 @@ public enum Features {
                     .next("prism")
                     .addOreDict("blockRedstone")
                     .build(b->b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.METAL));
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(Items.REDSTONE, 9), "X", 'X', "blockRedstone");
         }
     },
 
@@ -2771,14 +2675,6 @@ public enum Features {
                     .next("stand-mosaic")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.temple, 8), "***", "*X*", "***",
-                    '*', new ItemStack(Blocks.STONE, 1),
-                    'X', new ItemStack(Items.DYE, 1, 6));
-        }
     },
 
     TIN {
@@ -2829,14 +2725,6 @@ public enum Features {
                     .next("plate")
                     .build(b -> b.setSoundType(SoundType.METAL));
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.tyrian, 32, 0), "SXS", "X X", "SXS",
-                    'S', new ItemStack(Blocks.STONE, 1),
-                    'X', new ItemStack(Items.IRON_INGOT, 1));
-        }
     },
 
     URANIUM {
@@ -2880,19 +2768,6 @@ public enum Features {
                     .next("9")
                     .next("companion")
                     .build(b -> b.setHardness(1.5F).setResistance(20.0F).setSoundType(SoundType.STONE));
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.valentines, 4), "***", "*X*", "***",
-                    '*', "stone",
-                    'X', new ItemStack(Items.DYE, 1, 9));
-
-            // Companion Cube, woo!
-            Features.addShapedRecipe(registry, "companion_cube", new ItemStack(ChiselBlocks.valentines, 32, 9), "***", "*X*", "***",
-                    '*', "stone",
-                    'X', new ItemStack(Items.SKULL, 1, OreDictionary.WILDCARD_VALUE));
         }
     },
 
@@ -2944,18 +2819,6 @@ public enum Features {
                     //.next("white")
                     .build();
         }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry)
-        {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.voidstone, 16, 0), " E ", "OOO", " E ",
-                    'E', new ItemStack(Items.ENDER_EYE),
-                    'O', new ItemStack(Blocks.OBSIDIAN));
-
-            Features.addShapedRecipe(registry, "voidstone2", new ItemStack(ChiselBlocks.voidstone, 48, 0), " P ", "PEP", " P ",
-                    'E', new ItemStack(Items.ENDER_PEARL),
-                    'P', new ItemStack(Blocks.PURPUR_BLOCK));
-        }
     },
 
     WATERSTONE {
@@ -2996,13 +2859,6 @@ public enum Features {
                     .next("bricks-chaotic")
                     .next("cuts")
                     .build(b -> b.setHardness(4.0F).setResistance(50.0F).setSoundType(SoundType.STONE));
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry) {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.waterstone, 8, 0), "***", "*X*", "***",
-                    '*', new ItemStack(Blocks.STONE, 1),
-                    'X', new ItemStack(Items.WATER_BUCKET, 1));
         }
     },
 
