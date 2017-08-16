@@ -58,7 +58,7 @@ public class ModelChiselBlock extends AbstractCTMBakedModel {
         to.clear();
         for (BakedQuad q : from) {
             for (ICTMTexture<?> tex : face.getTextureList().stream().filter(t -> t.getLayer() == layer).collect(Collectors.toList())) {
-                to.addAll(tex.transformQuad(q, ctx == null ? null : ctx.getRenderContext(tex.getType()), quadGoal));
+                to.addAll(tex.transformQuad(q, ctx == null ? null : ctx.getRenderContext(tex), quadGoal));
             }
         }
     }
