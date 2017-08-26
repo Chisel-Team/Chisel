@@ -13,6 +13,7 @@ import com.google.common.collect.Sets;
 
 import lombok.Value;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.AxisDirection;
@@ -90,6 +91,11 @@ public enum ChiselMode implements IChiselMode {
         public AxisAlignedBB getBounds(EnumFacing side) {
             return PANEL.getBounds(side);
         }
+        
+        @Override
+        public long[] getCacheState(BlockPos origin, EnumFacing side) {
+            return ArrayUtils.add(super.getCacheState(origin, side), Minecraft.getMinecraft().player.getHorizontalFacing().ordinal());
+        }
     },
     ROW {
 
@@ -118,6 +124,11 @@ public enum ChiselMode implements IChiselMode {
         @Override
         public AxisAlignedBB getBounds(EnumFacing side) {
             return PANEL.getBounds(side);
+        }
+        
+        @Override
+        public long[] getCacheState(BlockPos origin, EnumFacing side) {
+            return COLUMN.getCacheState(origin, side);
         }
     }, 
     CONTIGUOUS {

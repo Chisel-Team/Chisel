@@ -13,6 +13,7 @@ import com.google.common.collect.Lists;
 
 import gnu.trove.list.TDoubleList;
 import gnu.trove.list.array.TDoubleArrayList;
+import lombok.Setter;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -30,6 +31,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.IWorldEventListener;
 import net.minecraft.world.World;
+import scala.actors.threadpool.Arrays;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.util.NonnullType;
 import team.chisel.ctm.client.util.RegionCache;
@@ -37,9 +39,14 @@ import team.chisel.ctm.client.util.RegionCache;
 @ParametersAreNonnullByDefault
 public class ChiselModeGeometryCache implements IWorldEventListener {
     
+    @Setter
     private IChiselMode mode;
+    @Setter
     private BlockPos origin;
+    @Setter
     private EnumFacing side;
+    
+    private long[] cacheState = {};
     
     private List<BlockPos> candidateCache = new ArrayList<>();
     private AxisAlignedBB candidateBounds = new AxisAlignedBB(BlockPos.ORIGIN);
@@ -52,10 +59,15 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         updateCache();
     }
     
-    private void updateCache() {
+    protected boolean checkDirty() {
+        return !Arrays.equals(cacheState, mode.getCacheState(origin, side));
+    }
+    
+    protected void updateCache() {
         IBlockState state = Minecraft.getMinecraft().world.getBlockState(origin);
         this.candidateCache = Lists.newArrayList(mode.getCandidates(Minecraft.getMinecraft().player, origin, side)).stream().filter(pos -> Minecraft.getMinecraft().world.getBlockState(pos) == state).collect(Collectors.toList());
         this.candidateBounds = mode.getBounds(side).offset(origin);
+        this.cacheState = mode.getCacheState(origin, side);
         draw(Tessellator.getInstance().getBuffer(), state);
     }
     
@@ -136,27 +148,6 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         geometryCache.add(z);
     }
     
-    public void setMode(IChiselMode mode) {
-        if (mode != this.mode) {
-            this.mode = mode;
-            updateCache();
-        }
-    }
-    
-    public void setOrigin(BlockPos origin) {
-        if (!origin.equals(this.origin)) {
-            this.origin = origin;
-            updateCache();
-        }
-    }
-    
-    public void setSide(EnumFacing side) {
-        if (side != this.side) {
-            this.side = side;
-            updateCache();
-        }
-    }
-    
     public Iterable<@NonnullType ? extends BlockPos> getCandidates() {
         return candidateCache;
     }
@@ -178,6 +169,10 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
     }
     
     public void draw() {
+        if (checkDirty()) {
+            updateCache();
+        }
+
         Timer timer = ClientUtil.getTimer();
         float c = 1;
         float a = 0.2f;

@@ -21,4 +21,8 @@ public interface IChiselMode {
 	 * @return The name of the mode.
 	 */
 	String name();
+
+    default long[] getCacheState(BlockPos origin, EnumFacing side) {
+        return new long[] {origin.toLong(), side.ordinal()};
+    }
 }
