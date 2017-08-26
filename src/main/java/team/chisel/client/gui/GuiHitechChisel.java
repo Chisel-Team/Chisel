@@ -389,12 +389,12 @@ public class GuiHitechChisel extends GuiChisel {
                 GlStateManager.translate(-1.5, -2.5, -0.5);
 
                 Block block = Block.getBlockFromItem(stack.getItem());
-                IBlockState state = block.getStateFromMeta(stack.getMetadata());
+                IBlockState state = block == null ? null : block.getStateFromMeta(stack.getMetadata());
                 if (state instanceof IExtendedBlockState) {
                     state = ((IExtendedBlockState) state).getClean();
                 }
 
-                if (state != erroredState) {
+                if (state != null && state != erroredState) {
                     erroredState = null;
 
                     fakeworld.setState(state);
@@ -425,6 +425,8 @@ public class GuiHitechChisel extends GuiChisel {
 
                         GlStateManager.popMatrix();
                     }
+                } else {
+                    GlStateManager.popMatrix();
                 }
             }
         }

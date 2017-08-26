@@ -68,19 +68,7 @@ public class ChiselController {
                 }
             } else {
                 ICarvingVariation current = registry.getVariation(state);
-                if (current == null) { // oredict
-                    current = CarvingUtils.getDefaultVariationFor(state, Integer.MAX_VALUE);
-                }
                 List<IBlockState> variations = blockGroup.getVariations().stream().map(ICarvingVariation::getBlockState).collect(Collectors.toList());
-                String ore = blockGroup.getOreName();
-
-                // FIXME oredict blocks
-                variations.addAll(
-                        OreDictionary.getOres(ore).stream()
-                        .filter(stack -> (stack.getItem() instanceof ItemBlock))
-                        .map(stack -> ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getItem().getMetadata(stack.getItemDamage())))
-                        .collect(Collectors.toList())
-                );
                 
                 variations = variations.stream().distinct().collect(Collectors.toList());
                         

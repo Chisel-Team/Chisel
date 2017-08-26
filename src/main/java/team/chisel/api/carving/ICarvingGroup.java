@@ -37,21 +37,28 @@ public interface ICarvingGroup extends Iterable<ICarvingVariation> {
 	 * @param sound
 	 *            A string resource path for the sound this group makes when chiseled
 	 */
-	void setSound(@Nullable String sound);
+    void setSound(@Nullable String sound);
 
-	/**
-	 * The oredict name to match to this group. All items with this oredict name will be assumed to be part of this group.
-	 * 
-	 * @return An ore dictionary name
-	 */
-	@Nullable String getOreName();
+    /**
+     * The oredict name to match to this group. All items with this oredict name will be assumed to be part of this group.
+     * 
+     * @deprecated Unused.
+     * 
+     * @return An ore dictionary name
+     */
+    @Deprecated
+    @Nullable
+    String getOreName();
 
-	/**
-	 * Sets the oredict name for this group.
-	 * 
-	 * @param oreName
-	 *            The String oredict name to be associated with this group.
-	 */
+    /**
+     * Sets the oredict name for this group.
+     * 
+     * @deprecated Unused.
+     * 
+     * @param oreName
+     *            The String oredict name to be associated with this group.
+     */
+	@Deprecated
 	void setOreName(@Nullable String oreName);
 
 	/**
