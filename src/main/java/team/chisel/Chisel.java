@@ -151,7 +151,7 @@ public class Chisel implements Reference {
         addCompactorPressRecipe(1000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestoneextra, 1, 7));
         addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestoneextra, 1, 7), new ItemStack(ChiselBlocks.marbleextra, 1, 7));
 
-//        /*
+        /*
 //        Example of IMC
 
 //        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
@@ -192,7 +192,7 @@ public class Chisel implements Reference {
         testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
         testtag.setInteger("meta", 5);
         FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
-//        */
+        */
     }
 
     private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output)
