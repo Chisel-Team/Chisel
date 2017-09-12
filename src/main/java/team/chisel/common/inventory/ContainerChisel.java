@@ -118,33 +118,44 @@ public class ContainerChisel extends Container {
                     return ItemStack.EMPTY;
                 }
             } else {
-                if (slotIdx < getInventoryChisel().size + 1 && !itemstack1.isEmpty()) {
-                    ItemStack tempStack = entity.inventory.getItemStack();
-                    entity.inventory.setItemStack(itemstack1.copy());
-                    slot.onTake(entity, itemstack1);
-                    itemstack1 = entity.inventory.getItemStack();
-                    entity.inventory.setItemStack(tempStack);
+                if (slotIdx < getInventoryChisel().size && !itemstack1.isEmpty()) {
+                    SlotChiselSelection selectslot = (SlotChiselSelection) slot;
+                    ItemStack check = selectslot.craft(entity, itemstack1, true);
+                    if (check.isEmpty()) {
+                        return ItemStack.EMPTY;
+                    }
+                    itemstack1 = selectslot.craft(entity, itemstack1, false);
                 }
 
                 if (!this.mergeItemStack(itemstack1, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
                     return ItemStack.EMPTY;
                 }
             }
+            
+            boolean clearSlot = slotIdx >= getInventoryChisel().size || getInventoryChisel().getStackInSpecialSlot().isEmpty();
+
             slot.onSlotChange(itemstack1, itemstack);
 
-            if (itemstack1.getCount() == 0) {
-                slot.putStack(ItemStack.EMPTY);
+            if (itemstack1.isEmpty()) {
+                if (clearSlot) {
+                    slot.putStack(ItemStack.EMPTY);
+                }
             } else {
                 slot.onSlotChanged();
             }
+
+            getInventoryChisel().updateItems();
+
             if (itemstack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;
             }
             if (slotIdx >= getInventoryChisel().size) {
                 slot.onTake(entity, itemstack1);
             }
-            if (itemstack1.getCount() == 0) {
-                slot.putStack(ItemStack.EMPTY);
+            if (itemstack1.isEmpty()) {
+                if (clearSlot) {
+                    slot.putStack(ItemStack.EMPTY);
+                }
                 return ItemStack.EMPTY;
             } else {
                 slot.putStack(itemstack1);

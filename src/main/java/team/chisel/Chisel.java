@@ -11,8 +11,10 @@ import com.google.common.collect.ImmutableSet;
 
 import lombok.SneakyThrows;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockColored;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.launchwrapper.Launch;
@@ -43,6 +45,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import team.chisel.api.ChiselAPIProps;
+import team.chisel.api.IMC;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.client.gui.PacketChiselButton;
@@ -150,11 +153,46 @@ public class Chisel implements Reference {
         addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestone2, 1, 7), new ItemStack(ChiselBlocks.marble2, 1, 7));
 
         /*
-        Example of IMC
+//        Example of IMC
 
-        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
-        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|1");
-        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|2");
+//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
+//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|1");
+//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|2");
+        
+                
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION.toString(), "marble|minecraft:dirt|0");
+        NBTTagCompound testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setTag("stack", new ItemStack(Items.DIAMOND_PICKAXE, 1, 100).serializeNBT());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", Blocks.WOOL.getRegistryName().toString());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", Blocks.WOOL.getRegistryName().toString());
+        testtag.setInteger("meta", Blocks.WOOL.getMetaFromState(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BROWN)));
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setTag("stack", new ItemStack(Items.REDSTONE).serializeNBT());
+        testtag.setString("block", Blocks.REDSTONE_WIRE.getRegistryName().toString());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
+        
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setTag("stack", new ItemStack(ChiselBlocks.marble, 1, 3).serializeNBT());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
+        testtag.setInteger("meta", 5);
+        FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
         */
     }
 

@@ -71,19 +71,7 @@ public class ChiselController {
                 }
             } else {
                 ICarvingVariation current = registry.getVariation(state);
-                if (current == null) { // oredict
-                    current = CarvingUtils.getDefaultVariationFor(state, Integer.MAX_VALUE);
-                }
                 List<IBlockState> variations = blockGroup.getVariations().stream().map(ICarvingVariation::getBlockState).collect(Collectors.toList());
-                String ore = blockGroup.getOreName();
-
-                // FIXME oredict blocks
-                variations.addAll(
-                        OreDictionary.getOres(ore).stream()
-                        .filter(stack -> (stack.getItem() instanceof ItemBlock))
-                        .map(stack -> ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getItem().getMetadata(stack.getItemDamage())))
-                        .collect(Collectors.toList())
-                );
                 
                 variations = variations.stream().distinct().collect(Collectors.toList());
                         
@@ -102,11 +90,21 @@ public class ChiselController {
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
         if (!event.getWorld().isRemote) {
             ItemStack stack = event.getItemStack();
-            if (stack != null && stack.getItem() instanceof IChiselItem) {
+            if (stack.getItem() instanceof IChiselItem) {
                 IChiselItem chisel = (IChiselItem) stack.getItem();
                 if (chisel.canOpenGui(event.getWorld(), event.getEntityPlayer(), event.getHand())) {
                     event.getEntityPlayer().openGui(Chisel.instance, 0, event.getWorld(), event.getHand().ordinal(), 0, 0);
                 }
+            }
+        }
+    }
+    
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getHand() == EnumHand.OFF_HAND) {
+            ItemStack mainhandStack = event.getEntityPlayer().getHeldItemMainhand();
+            if (mainhandStack.getItem() instanceof IChiselItem) {
+                event.setCanceled(true);
             }
         }
     }

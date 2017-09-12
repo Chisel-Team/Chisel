@@ -74,17 +74,17 @@ public class PacketChiselButton implements IMessage {
                         return;
                     }
                     ItemStack stack = target.copy();
-                    int toCraft = s.getCount();
+                    int toCraft = Math.min(s.getCount(), stack.getMaxStackSize());
                     if (chisel.isItemStackDamageable()) {
                         int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
                         toCraft = Math.min(toCraft, damageLeft);
                         stack.setCount(toCraft);
                         chisel.damageItem(toCraft, player);
                     }
-                    player.inventory.setInventorySlotContents(i, stack);
-                    if (chisel.getCount() <= 0) {
+                    if (chisel.isEmpty()) {
+                        player.inventory.setInventorySlotContents(i, stack);
                         container.getInventoryChisel().getStackInSpecialSlot().shrink(toCraft);
-                        player.inventory.setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
+                        player.inventory.setInventorySlotContents(container.getChiselSlot(), null);
                         if (s.getCount() > toCraft) {
                             ItemStack remainder = s.copy();
                             remainder.shrink(toCraft);
@@ -92,6 +92,13 @@ public class PacketChiselButton implements IMessage {
                                 player.dropItem(remainder, false);
                             }
                         }
+                    } else if (toCraft < s.getCount()) {
+                        s.shrink(toCraft);
+                        if (!player.inventory.addItemStackToInventory(stack)) {
+                            player.dropItem(stack, false);
+                        }
+                    } else {
+                        player.inventory.setInventorySlotContents(i, stack);
                     }
                 });
                 if (chisel.getCount() < 1) {

@@ -140,9 +140,6 @@ public class InventoryChiselSelection implements IInventory {
         }
 
         Item item = chiseledItem.getItem();
-        if (Block.getBlockFromItem(item) == Blocks.AIR) {
-            return;
-        }
 
         List<ItemStack> list = container.getCarving().getItemsForChiseling(chiseledItem);
 
