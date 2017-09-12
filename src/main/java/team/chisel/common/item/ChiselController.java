@@ -95,6 +95,16 @@ public class ChiselController {
             }
         }
     }
+    
+    @SubscribeEvent
+    public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        if (event.getHand() == EnumHand.OFF_HAND) {
+            ItemStack mainhandStack = event.getEntityPlayer().getHeldItemMainhand();
+            if (mainhandStack != null && mainhandStack.getItem() instanceof IChiselItem) {
+                event.setCanceled(true);
+            }
+        }
+    }
 
     private static void damageItem(ItemStack stack, EntityPlayer player) {
         stack.damageItem(1, player);
