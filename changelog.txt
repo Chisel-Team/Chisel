@@ -1,3 +1,18 @@
+0.0.14:
+New
+- Carving registry now supports any kind of item/block, including unstackable items
+Changes
+- IMC has been rewritten, mods using the old IMC should update soon
+- Oredict variants have been removed. Mods wishing to add their own variants should use IMC. Users should seek out an external solution like ModTweaker.
+- Carving system has been rewritten in a few places to accomodate these major changes. New bugs may have been introduced.
+Fixes
+- #443 removing a variation also removes the group
+- Clean up ItemStack equality checks to ensure consistent behavior
+- #532 futura particles are broken, searching in the minecraft domain
+- #530 blue carpets have no description
+- #469 off-hand places blocks when opening chisel
+- #431 concrete/brownstone can accelerate to ludicrous speeds when underwater
+
 0.0.13:
 Changes
 - Chisel concrete and concrete powder has been removed. If you had some placed in world, or in item form, they will be converted to the vanilla version.

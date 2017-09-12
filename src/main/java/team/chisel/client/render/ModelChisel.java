@@ -63,6 +63,8 @@ public class ModelChisel implements IModelCTM {
     
     private transient byte layers;
     
+    private transient IModel vanillaparent;
+    
     @Override
     public Collection<ResourceLocation> getDependencies() {
         List<ResourceLocation> list = Lists.newArrayList(model.getModelLocation());
@@ -99,11 +101,14 @@ public class ModelChisel implements IModelCTM {
         return new ModelChiselBlock(this, parent);
     }
     
-    @SneakyThrows
     private IBakedModel bake(Variant variant, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> getter) {
-        IModel imodel = ModelLoaderRegistry.getModel(variant.getModelLocation());
-        imodel = imodel.uvlock(variant.isUvLock());
-        return imodel.bake(variant.getState(), format, getter);
+        return getVanillaParent().bake(variant.getState(), format, getter);
+    }
+    
+    @SneakyThrows
+    private void initVanillaParent() {
+        vanillaparent = ModelLoaderRegistry.getModel(model.getModelLocation());
+        vanillaparent = vanillaparent.uvlock(model.isUvLock());
     }
     
     @Override
@@ -164,5 +169,13 @@ public class ModelChisel implements IModelCTM {
     @Nullable
     public ICTMTexture<?> getOverrideTexture(int tintIndex, String sprite) {
         return null;
+    }
+
+    // @Override FIXME soft for now
+    public IModel getVanillaParent() {
+        if (vanillaparent == null) {
+            initVanillaParent();
+        }
+        return vanillaparent;
     }
 }

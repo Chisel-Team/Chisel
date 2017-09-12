@@ -18,17 +18,24 @@ public interface ICarvingVariation {
 	 * @return A {@link Block} that is the base of this variation
 	 */
 	@Nullable
-	Block getBlock();
+    @Deprecated
+    Block getBlock();
 
-	IBlockState getBlockState();
+    /**
+     * The base blockstate of this variation.
+     * 
+     * @return A {@link IBlockState} that is the base of this variation, or null if none exists.
+     */
+    @Nullable
+    IBlockState getBlockState();
 
-	/**
-	 * The {@link ItemStack} of this variation. This can be customized to allow for variations that differ on NBT alone.
-	 * <p>
-	 * This ItemStack should be a copy (or a new instance) of the stack, callers of this method are not required to leave the stack unmodified.
-	 * 
-	 * @return An {@link ItemStack} that represents this variation.
-	 */
+    /**
+     * The {@link ItemStack} of this variation. This can be customized to allow for variations that differ on NBT alone.
+     * <p>
+     * This ItemStack should be a copy (or a new instance) of the stack, callers of this method are not required to leave the stack unmodified.
+     * 
+     * @return An {@link ItemStack} that represents this variation.
+     */
 	@Nonnull
 	ItemStack getStack();
 

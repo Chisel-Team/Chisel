@@ -137,7 +137,7 @@ public interface IChiselItem {
      * @return The result of the craft.
      */
     default ItemStack craftItem(ItemStack chisel, ItemStack source, ItemStack target, EntityPlayer player) {
-        int toCraft = source.getCount();
+        int toCraft = Math.min(source.getCount(), target.getMaxStackSize());
         if (chisel.isItemStackDamageable()) {
             int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
             toCraft = Math.min(toCraft, damageLeft);
