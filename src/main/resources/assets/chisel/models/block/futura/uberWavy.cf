@@ -4,5 +4,5 @@
         "./uberRainbow.ctx",
         "./orangeFrame.ctx"
     ],
-    "particle":"orangeFrameParticle"
+    "particle":"./orangeFrameParticle"
 }

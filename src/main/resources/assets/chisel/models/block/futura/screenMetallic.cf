@@ -3,5 +3,5 @@
         "./screenDiscoherent.ctx",
         "./screenMetallic.ctx"
     ],
-    "particle":"screenCyan.ctx"
+    "particle":"./screenMetallic.ctx"
 }
