@@ -54,6 +54,7 @@ import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.client.handler.BlockSpeedHandler;
 import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableAltarComponent;
@@ -384,15 +385,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            BlockCreator<BlockCarvable> brownstoneCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
-                @Override
-                public void onEntityWalk(World world, BlockPos pos, Entity entity) {
-                    entity.motionX *= concreteVelocityMult + 0.05;
-                    entity.motionZ *= concreteVelocityMult + 0.05;
-                }
-            };
-
-            factory.newBlock(Material.ROCK, "brownstone", new ChiselBlockProvider<>(brownstoneCreator, BlockCarvable.class))
+            factory.newBlock(Material.ROCK, "brownstone", new ChiselBlockProvider<>(creator, BlockCarvable.class))
                     .newVariation("default")
                     .next("block")
                     .next("doubleslab")
@@ -403,7 +396,10 @@ public enum Features {
                     .next("weathered-blocks")
                     .next("weathered-half")
                     .next("weathered-block-half")
-                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.0F));
+                    .build(b -> { 
+                        b.setSoundType(SoundType.STONE).setHardness(1.0F);
+                        BlockSpeedHandler.speedupBlocks.add(b);
+                    });
         }
 
         @Override
@@ -770,15 +766,7 @@ public enum Features {
 
             Carving.chisel.removeGroup("concrete_powder");
 
-            BlockCreator<BlockCarvable> concreteCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
-                @Override
-                public void onEntityWalk(World world, BlockPos pos, Entity entity) {
-                    entity.motionX *= concreteVelocityMult + 0.05;
-                    entity.motionZ *= concreteVelocityMult + 0.05;
-                }
-            };
-
-            factory.newBlock(Material.ROCK, "concrete", new ChiselBlockProvider<>(concreteCreator, BlockCarvable.class))
+            factory.newBlock(Material.ROCK, "concrete", new ChiselBlockProvider<>(creator, BlockCarvable.class))
                     .setParentFolder("concrete")
                     .newVariation("white")
                     .next("orange")
@@ -797,14 +785,17 @@ public enum Features {
                     .next("red")
                     .next("black")
                     .addOreDict("blockConcrete")
-                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.5F));
+                    .build(b -> {
+                        b.setSoundType(SoundType.STONE).setHardness(1.5F);
+                        BlockSpeedHandler.speedupBlocks.add(b);
+                    });
 
             Carving.chisel.removeGroup("concrete");
 
             for (int i = 0; i < dyeColors.length; i++) {
                 Carving.chisel.addVariation("concrete_" + (dyeColors[i].toLowerCase()), CarvingUtils.variationFor(Block.REGISTRY.getObject(new ResourceLocation(Chisel.MOD_ID, "concrete")).getStateFromMeta(15-i), -1));
 
-                factory.newBlock(Material.ROCK, "concrete_" + (dyeColors[i].toLowerCase()), new ChiselBlockProvider<>(concreteCreator, BlockCarvable.class))
+                factory.newBlock(Material.ROCK, "concrete_" + (dyeColors[i].toLowerCase()), new ChiselBlockProvider<>(creator, BlockCarvable.class))
                         .setParentFolder("concrete_" + dyeColors[i].toLowerCase())
                         .newVariation("cracked")
                         .next("bricks-soft")
@@ -841,7 +832,10 @@ public enum Features {
                         .next("cuts")
                         .addOreDict("blockConcrete")
                         .addOreDict("blockConcrete"+dyeColors[i])
-                        .build(b -> b.setSoundType(SoundType.STONE).setHardness(1.5F));
+                        .build(b -> {
+                            b.setSoundType(SoundType.STONE).setHardness(1.5F);
+                            BlockSpeedHandler.speedupBlocks.add(b);
+                        });
             }
         }
 
