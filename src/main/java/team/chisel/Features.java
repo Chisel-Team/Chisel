@@ -819,6 +819,8 @@ public enum Features {
                             BlockSpeedHandler.speedupBlocks.add(b);
                         });
             }
+            
+            BlockSpeedHandler.speedupBlocks.add(Blocks.CONCRETE);
         }
     },
 
