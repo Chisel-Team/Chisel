@@ -1,0 +1,13 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "convexplain": [{"textures":{"all":"chisel:blocks/icepillar/convexplain"}}],
+        "plaingreek": [{"textures":{"all":"chisel:blocks/icepillar/plaingreek"}}],
+        "plainplain": [{"textures":{"all":"chisel:blocks/icepillar/plainplain"}}],
+        "greekgreek": [{"textures":{"all":"chisel:blocks/icepillar/greekgreek"}}],
+        "carved": [{"textures":{"all":"chisel:blocks/icepillar/carved"}}],
+        "ornamental": [{"textures":{"all":"chisel:blocks/icepillar/ornamental"}}],
+        "greekplain": [{"textures":{"all":"chisel:blocks/icepillar/greekplain"}}]
+    }
+}

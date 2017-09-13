@@ -1,0 +1,17 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "scaffoldlarge": [{"textures":{"all":"chisel:blocks/technical/new/scaffoldLarge"}}],
+        "piping": [{"textures":{"all":"chisel:blocks/technical/new/Piping"}}],
+        "weatheredorangepanels": [{"textures":{"all":"chisel:blocks/technical/new/weatheredOrangePanels"}}],
+        "makeshiftpanels": [{"textures":{"all":"chisel:blocks/technical/new/MakeshiftPanels"}}],
+        "sturdy": [{"textures":{"all":"chisel:blocks/technical/new/Sturdy"}}],
+        "tapedrive": [{"textures":{"all":"chisel:blocks/technical/new/TapeDrive"}}],
+        "megacell": [{"textures":{"all":"chisel:blocks/technicalnew/MegaCell"}}],
+        "engineering": [{"textures":{"all":"chisel:blocks/technical/new/engineering"}}],
+        "weatheredgreenpanels": [{"textures":{"all":"chisel:blocks/technical/new/weatheredGreenPanels"}}],
+        "oldetimeyserveranim": [{"textures":{"all":"chisel:blocks/technical/new/OldeTimeyServerAnim"}}],
+        "exhaustplating": [{"textures":{"all":"chisel:blocks/technical/new/ExhaustPlating"}}]
+    }
+}

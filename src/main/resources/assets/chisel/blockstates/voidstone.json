@@ -1,0 +1,14 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "eye": [{"textures":{"all":"chisel:blocks/voidstone/eye"}}],
+        "skulls": [{"textures":{"all":"chisel:blocks/voidstone/skulls"}}],
+        "quarters": [{"textures":{"all":"chisel:blocks/voidstone/quarters"}}],
+        "metalborder": [{"textures":{"all":"chisel:blocks/voidstone/metalborder"}}],
+        "raw": [{"textures":{"all":"chisel:blocks/voidstone/raw"}}],
+        "bevel": [{"textures":{"all":"chisel:blocks/voidstone/bevel"}}],
+        "rune": [{"textures":{"all":"chisel:blocks/voidstone/rune"}}],
+        "smooth": [{"textures":{"all":"chisel:blocks/voidstone/smooth"}}]
+    }
+}

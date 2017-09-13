@@ -1,0 +1,21 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "terrain-gold-space": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-space"}}],
+        "terrain-gold-coin-tails": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-coin-tails"}}],
+        "terrain-gold-star": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-star"}}],
+        "terrain-gold-largeingot": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-largeingot"}}],
+        "terrain-gold-smallingot": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-smallingot"}}],
+        "terrain-gold-crate-light": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-crate-light"}}],
+        "terrain-gold-brick": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-brick"}}],
+        "terrain-gold-cart": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-cart"}}],
+        "terrain-gold-spaceblack": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-spaceblack"}}],
+        "terrain-gold-rivets": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-rivets"}}],
+        "terrain-gold-plates": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-plates"}}],
+        "terrain-gold-simple": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-simple"}}],
+        "terrain-gold-coin-heads": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-coin-heads"}}],
+        "terrain-gold-crate-dark": [{"textures":{"all":"chisel:blocks/gold/terrain-gold-crate-dark"}}],
+        "goldeye": [{"textures":{"all":"chisel:blocks/gold/goldEye"}}]
+    }
+}

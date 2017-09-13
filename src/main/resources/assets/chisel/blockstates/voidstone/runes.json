@@ -1,0 +1,22 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "magenta": [{"textures":{"all":"chisel:blocks/voidstone/runes/magenta"}}],
+        "pink": [{"textures":{"all":"chisel:blocks/voidstone/runes/pink"}}],
+        "green": [{"textures":{"all":"chisel:blocks/voidstone/runes/green"}}],
+        "lime": [{"textures":{"all":"chisel:blocks/voidstone/runes/lime"}}],
+        "black": [{"textures":{"all":"chisel:blocks/voidstone/runes/black"}}],
+        "yellow": [{"textures":{"all":"chisel:blocks/voidstone/runes/yellow"}}],
+        "brown": [{"textures":{"all":"chisel:blocks/voidstone/runes/brown"}}],
+        "cyan": [{"textures":{"all":"chisel:blocks/voidstone/runes/cyan"}}],
+        "orange": [{"textures":{"all":"chisel:blocks/voidstone/runes/orange"}}],
+        "red": [{"textures":{"all":"chisel:blocks/voidstone/runes/red"}}],
+        "gray": [{"textures":{"all":"chisel:blocks/voidstone/runes/gray"}}],
+        "blue": [{"textures":{"all":"chisel:blocks/voidstone/runes/blue"}}],
+        "lightblue": [{"textures":{"all":"chisel:blocks/voidstone/runes/lightblue"}}],
+        "white": [{"textures":{"all":"chisel:blocks/voidstone/runes/white"}}],
+        "purple": [{"textures":{"all":"chisel:blocks/voidstone/runes/purple"}}],
+        "lightgray": [{"textures":{"all":"chisel:blocks/voidstone/runes/lightgray"}}]
+    }
+}

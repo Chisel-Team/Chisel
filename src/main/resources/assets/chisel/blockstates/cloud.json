@@ -1,0 +1,11 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "cloud": [{"textures":{"all":"chisel:blocks/cloud/cloud"}}],
+        "small": [{"textures":{"all":"chisel:blocks/cloud/small"}}],
+        "large": [{"textures":{"all":"chisel:blocks/cloud/large"}}],
+        "grid": [{"textures":{"all":"chisel:blocks/cloud/grid"}}],
+        "vertical": [{"textures":{"all":"chisel:blocks/cloud/vertical"}}]
+    }
+}

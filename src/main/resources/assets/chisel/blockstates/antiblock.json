@@ -1,0 +1,22 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "magenta": [{"textures":{"all":"chisel:blocks/antiblock/magenta"}}],
+        "pink": [{"textures":{"all":"chisel:blocks/antiblock/pink"}}],
+        "green": [{"textures":{"all":"chisel:blocks/antiblock/green"}}],
+        "lime": [{"textures":{"all":"chisel:blocks/antiblock/lime"}}],
+        "black": [{"textures":{"all":"chisel:blocks/antiblock/black"}}],
+        "yellow": [{"textures":{"all":"chisel:blocks/antiblock/yellow"}}],
+        "light_blue": [{"textures":{"all":"chisel:blocks/antiblock/light_blue"}}],
+        "brown": [{"textures":{"all":"chisel:blocks/antiblock/brown"}}],
+        "cyan": [{"textures":{"all":"chisel:blocks/antiblock/cyan"}}],
+        "orange": [{"textures":{"all":"chisel:blocks/antiblock/orange"}}],
+        "red": [{"textures":{"all":"chisel:blocks/antiblock/red"}}],
+        "gray": [{"textures":{"all":"chisel:blocks/antiblock/gray"}}],
+        "blue": [{"textures":{"all":"chisel:blocks/antiblock/blue"}}],
+        "white": [{"textures":{"all":"chisel:blocks/antiblock/white"}}],
+        "purple": [{"textures":{"all":"chisel:blocks/antiblock/purple"}}],
+        "silver": [{"textures":{"all":"chisel:blocks/antiblock/silver"}}]
+    }
+}

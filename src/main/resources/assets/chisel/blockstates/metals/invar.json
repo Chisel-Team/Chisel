@@ -1,0 +1,13 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "scaffold": [{"textures":{"all":"chisel:blocks/metals/invar/scaffold"}}],
+        "machine": [{"textures":{"all":"chisel:blocks/metals/invar/machine"}}],
+        "badgreggy": [{"textures":{"all":"chisel:blocks/metals/invar/badGreggy"}}],
+        "thermal": [{"textures":{"all":"chisel:blocks/metals/invar/thermal"}}],
+        "crate": [{"textures":{"all":"chisel:blocks/metals/invar/crate"}}],
+        "bolted": [{"textures":{"all":"chisel:blocks/metals/invar/bolted"}}],
+        "caution": [{"textures":{"all":"chisel:blocks/metals/invar/caution"}}]
+    }
+}

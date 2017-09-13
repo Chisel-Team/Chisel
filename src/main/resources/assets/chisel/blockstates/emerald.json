@@ -1,0 +1,20 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "panelclassic": [{"textures":{"all":"chisel:blocks/emerald/panelclassic"}}],
+        "masonryemerald": [{"textures":{"all":"chisel:blocks/emerald/masonryEmerald"}}],
+        "ornate": [{"textures":{"all":"chisel:blocks/emerald/ornate"}}],
+        "chunk": [{"textures":{"all":"chisel:blocks/emerald/chunk"}}],
+        "cell": [{"textures":{"all":"chisel:blocks/emerald/cell"}}],
+        "fourornate": [{"textures":{"all":"chisel:blocks/emerald/fourornate"}}],
+        "four": [{"textures":{"all":"chisel:blocks/emerald/four"}}],
+        "emeraldprismatic": [{"textures":{"all":"chisel:blocks/emerald/emeraldPrismatic"}}],
+        "emeraldcircle": [{"textures":{"all":"chisel:blocks/emerald/emeraldCircle"}}],
+        "zelda": [{"textures":{"all":"chisel:blocks/emerald/zelda"}}],
+        "cellbismuth": [{"textures":{"all":"chisel:blocks/emerald/cellbismuth"}}],
+        "panel": [{"textures":{"all":"chisel:blocks/emerald/panel"}}],
+        "goldborder": [{"textures":{"all":"chisel:blocks/emerald/goldborder"}}],
+        "smooth": [{"textures":{"all":"chisel:blocks/emerald/smooth"}}]
+    }
+}

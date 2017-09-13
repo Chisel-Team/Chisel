@@ -1,0 +1,15 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "floral": [{"textures":{"all":"chisel:blocks/paper/floral"}}],
+        "sixsections": [{"textures":{"all":"chisel:blocks/paper/sixSections"}}],
+        "door": [{"textures":{"all":"chisel:blocks/paper/door"}}],
+        "horizontal": [{"textures":{"all":"chisel:blocks/paper/horizontal"}}],
+        "throughmiddle": [{"textures":{"all":"chisel:blocks/paper/throughMiddle"}}],
+        "plain": [{"textures":{"all":"chisel:blocks/paper/plain"}}],
+        "cross": [{"textures":{"all":"chisel:blocks/paper/cross"}}],
+        "box": [{"textures":{"all":"chisel:blocks/paper/box"}}],
+        "vertical": [{"textures":{"all":"chisel:blocks/paper/vertical"}}]
+    }
+}

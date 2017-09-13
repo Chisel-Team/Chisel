@@ -1,0 +1,18 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "terrain-diamond-bismuth": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-bismuth"}}],
+        "terrain-diamond-spaceblack": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-spaceblack"}}],
+        "terrain-diamond-zelda": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-zelda"}}],
+        "terrain-diamond-cells": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-cells"}}],
+        "terrain-diamond-space": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-space"}}],
+        "terrain-diamond-simple": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-simple"}}],
+        "terrain-diamond-crushed": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-crushed"}}],
+        "terrain-diamond-four": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-four"}}],
+        "terrain-diamond-fourornate": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-fourornate"}}],
+        "terrain-diamond-ornatelayer": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-ornatelayer"}}],
+        "terrain-diamond-embossed": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-embossed"}}],
+        "terrain-diamond-gem": [{"textures":{"all":"chisel:blocks/diamond/terrain-diamond-gem"}}]
+    }
+}

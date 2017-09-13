@@ -1,0 +1,23 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "terrain-glass-ornatesteel": [{"textures":{"all":"chisel:blocks/glass/terrain-glass-ornatesteel"}}],
+        "terrain-glassshale": [{"textures":{"all":"chisel:blocks/glass/terrain-glassshale"}}],
+        "terrain-glassbubble": [{"textures":{"all":"chisel:blocks/glass/terrain-glassbubble"}}],
+        "terrain-glass-steelframe": [{"textures":{"all":"chisel:blocks/glass/terrain-glass-steelframe"}}],
+        "terrain-glass-thickgrid": [{"textures":{"all":"chisel:blocks/glass/terrain-glass-thickgrid"}}],
+        "a1-glasswindow-ironfencemodern": [{"textures":{"all":"chisel:blocks/glass/a1-glasswindow-ironfencemodern"}}],
+        "terrain-glassstone": [{"textures":{"all":"chisel:blocks/glass/terrain-glassstone"}}],
+        "terrain-glass-thingrid": [{"textures":{"all":"chisel:blocks/glass/terrain-glass-thingrid"}}],
+        "terrain-glass-ornatesteel-old": [{"textures":{"all":"chisel:blocks/glass/terrain-glass-ornatesteel-old"}}],
+        "terrain-glasslight": [{"textures":{"all":"chisel:blocks/glass/terrain-glasslight"}}],
+        "terrain-glassdungeon": [{"textures":{"all":"chisel:blocks/glass/terrain-glassdungeon"}}],
+        "japanese": [{"textures":{"all":"chisel:blocks/glass/japanese"}}],
+        "terrain-glassnoborder": [{"textures":{"all":"chisel:blocks/glass/terrain-glassnoborder"}}],
+        "terrain-glass-chinese": [{"textures":{"all":"chisel:blocks/glass/terrain-glass-chinese"}}],
+        "terrain-glassstreak": [{"textures":{"all":"chisel:blocks/glass/terrain-glassstreak"}}],
+        "terrain-glass-screen": [{"textures":{"all":"chisel:blocks/glass/terrain-glass-screen"}}],
+        "chrono": [{"textures":{"all":"chisel:blocks/glass/chrono"}}]
+    }
+}
