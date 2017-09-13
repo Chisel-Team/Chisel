@@ -68,6 +68,13 @@ public class CtxToMcmeta {
                     
                     Optional<String> layer = Optional.ofNullable(data.get("layer")).map(JsonElement::getAsString);
                     Optional<JsonObject> info = Optional.ofNullable(data.getAsJsonObject("info"));
+                    Optional<Boolean> fullbright = Optional.ofNullable(data.get("fullbright")).map(JsonElement::getAsBoolean);
+                    
+                    if (fullbright.orElse(false)) {
+                        JsonObject obj = info.orElse(new JsonObject());
+                        obj.add("light", new JsonPrimitive(15));
+                        info = Optional.of(obj);    
+                    }
                     
                     JsonObject output = new JsonObject();
 
