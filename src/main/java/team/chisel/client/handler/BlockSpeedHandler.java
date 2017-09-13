@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.common.config.Configurations;
 
 @EventBusSubscriber(Side.CLIENT)
@@ -22,9 +23,11 @@ public class BlockSpeedHandler {
     // FIXME temporary hack
     public static final Set<Block> speedupBlocks = new HashSet<>();
 
+    @SideOnly(Side.CLIENT)
     private static MovementInput manualInputCheck;
 
     @SubscribeEvent
+    @SideOnly(Side.CLIENT)
     public static void speedupPlayer(PlayerTickEvent event) {
         if (event.phase == Phase.START && event.side.isClient() && event.player.onGround && event.player instanceof EntityPlayerSP) {
             if (manualInputCheck == null) {
