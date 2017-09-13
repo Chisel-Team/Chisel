@@ -1,0 +1,17 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "rainbow": [{"textures":{"all":"chisel:bookshelf_birch/rainbow"}}],
+        "default": [{"textures":{"all":"chisel:bookshelf_birch/default"}}],
+        "necromancer-novice": [{"textures":{"all":"chisel:bookshelf_birch/necromancer-novice"}}],
+        "necromancer": [{"textures":{"all":"chisel:bookshelf_birch/necromancer"}}],
+        "historician": [{"textures":{"all":"chisel:bookshelf_birch/historician"}}],
+        "hoarder": [{"textures":{"all":"chisel:bookshelf_birch/hoarder"}}],
+        "redtomes": [{"textures":{"all":"chisel:bookshelf_birch/redtomes"}}],
+        "brim": [{"textures":{"all":"chisel:bookshelf_birch/brim"}}],
+        "abandoned": [{"textures":{"all":"chisel:bookshelf_birch/abandoned"}}],
+        "cans": [{"textures":{"all":"chisel:bookshelf_birch/cans"}}],
+        "papers": [{"textures":{"all":"chisel:bookshelf_birch/papers"}}]
+    }
+}

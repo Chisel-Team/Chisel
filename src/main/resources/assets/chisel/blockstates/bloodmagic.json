@@ -1,0 +1,14 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "bloodrunebrickstop": [{"textures":{"all":"chisel:blocks/bloodMagic/bloodRuneBricksTop"}}],
+        "blankrune": [{"textures":{"all":"chisel:blocks/bloodMagic/BlankRune"}}],
+        "bloodrunebricks": [{"textures":{"all":"chisel:blocks/bloodMagic/bloodRuneBricks"}}],
+        "bloodrunearranged": [{"textures":{"all":"chisel:blocks/bloodMagic/bloodRuneArranged"}}],
+        "bloodrunecarvedradial": [{"textures":{"all":"chisel:blocks/bloodMagic/bloodRuneCarvedRadial"}}],
+        "bloodrunetiles": [{"textures":{"all":"chisel:blocks/bloodMagic/bloodRuneTiles"}}],
+        "bloodruneclassicpanel": [{"textures":{"all":"chisel:blocks/bloodMagic/bloodRuneClassicPanel"}}],
+        "bloodrunecarved": [{"textures":{"all":"chisel:blocks/bloodMagic/bloodRuneCarved"}}]
+    }
+}

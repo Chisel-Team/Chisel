@@ -38,7 +38,8 @@ public enum ChiselModelRegistry implements Reference {
             while (Character.isDigit(name.charAt(name.length() - 1))) {
                 name = name.substring(0, name.length() - 1);
             }
-            return new ModelResourceLocation(new ResourceLocation("chisel", name), data.name);
+            int lastslash = data.path.lastIndexOf('/');
+            return new ModelResourceLocation(new ResourceLocation("chisel", data.path.substring(0, lastslash)), data.path.substring(lastslash + 1));
         }
     }
 

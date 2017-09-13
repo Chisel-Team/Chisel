@@ -1,0 +1,21 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "blinds": [{"textures":{"all":"chisel:blocks/planks-spruce/blinds"}}],
+        "fancy": [{"textures":{"all":"chisel:blocks/planks-spruce/fancy"}}],
+        "large": [{"textures":{"all":"chisel:blocks/planks-spruce/large"}}],
+        "double": [{"textures":{"all":"chisel:blocks/planks-spruce/double"}}],
+        "crateex": [{"textures":{"all":"chisel:blocks/planks-spruce/crateex"}}],
+        "vertical": [{"textures":{"all":"chisel:blocks/planks-spruce/vertical"}}],
+        "crate": [{"textures":{"all":"chisel:blocks/planks-spruce/crate"}}],
+        "clean": [{"textures":{"all":"chisel:blocks/planks-spruce/clean"}}],
+        "parquet": [{"textures":{"all":"chisel:blocks/planks-spruce/parquet"}}],
+        "panel-nails": [{"textures":{"all":"chisel:blocks/planks-spruce/panel-nails"}}],
+        "vertical-uneven": [{"textures":{"all":"chisel:blocks/planks-spruce/vertical-uneven"}}],
+        "chaotic": [{"textures":{"all":"chisel:blocks/planks-spruce/chaotic"}}],
+        "chaotic-hor": [{"textures":{"all":"chisel:blocks/planks-spruce/chaotic-hor"}}],
+        "crate-fancy": [{"textures":{"all":"chisel:blocks/planks-spruce/crate-fancy"}}],
+        "short": [{"textures":{"all":"chisel:blocks/planks-spruce/short"}}]
+    }
+}

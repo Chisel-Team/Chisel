@@ -1,0 +1,22 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "infocon": [{"textures":{"all":"chisel:laboratory/infocon"}}],
+        "roundel": [{"textures":{"all":"chisel:blocks/laboratory/roundel"}}],
+        "largewall": [{"textures":{"all":"chisel:blocks/laboratory/largewall"}}],
+        "largesteel": [{"textures":{"all":"chisel:blocks/laboratory/largesteel"}}],
+        "directionright": [{"textures":{"all":"chisel:laboratory/directionright"}}],
+        "floortile": [{"textures":{"all":"chisel:blocks/laboratory/floortile"}}],
+        "wallvents": [{"textures":{"all":"chisel:laboratory/wallvents"}}],
+        "fuzzscreen": [{"textures":{"all":"chisel:blocks/laboratory/fuzzscreen"}}],
+        "smallsteel": [{"textures":{"all":"chisel:blocks/laboratory/smallsteel"}}],
+        "checkertile": [{"textures":{"all":"chisel:blocks/laboratory/checkertile"}}],
+        "dottedpanel": [{"textures":{"all":"chisel:blocks/laboratory/dottedpanel"}}],
+        "directionleft": [{"textures":{"all":"chisel:laboratory/directionleft"}}],
+        "clearscreen": [{"textures":{"all":"chisel:blocks/laboratory/clearscreen"}}],
+        "largetile": [{"textures":{"all":"chisel:blocks/laboratory/largetile"}}],
+        "smalltile": [{"textures":{"all":"chisel:blocks/laboratory/smalltile"}}],
+        "wallpanel": [{"textures":{"all":"chisel:blocks/laboratory/wallpanel"}}]
+    }
+}

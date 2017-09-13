@@ -1,0 +1,16 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "weathered-blocks": [{"textures":{"all":"chisel:blocks/concrete/weathered-blocks"}}],
+        "default": [{"textures":{"all":"chisel:blocks/concrete/default"}}],
+        "doubleslab": [{"textures":{"all":"chisel:blocks/concrete/doubleslab"}}],
+        "weathered-block": [{"textures":{"all":"chisel:blocks/concrete/weathered-block"}}],
+        "blocks": [{"textures":{"all":"chisel:blocks/concrete/blocks"}}],
+        "weathered-half": [{"textures":{"all":"chisel:blocks/concrete/weathered-half"}}],
+        "weathered-block-half": [{"textures":{"all":"chisel:blocks/concrete/weathered-block-half"}}],
+        "block": [{"textures":{"all":"chisel:blocks/concrete/block_ctm"}}],
+        "weathered": [{"textures":{"all":"chisel:blocks/concrete/weathered"}}],
+        "weathered-doubleslab": [{"textures":{"all":"chisel:blocks/concrete/weathered-doubleslab"}}]
+    }
+}

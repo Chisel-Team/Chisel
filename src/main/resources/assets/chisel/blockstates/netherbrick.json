@@ -1,0 +1,22 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "a1-netherbrick-lavastonedark": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-lavastonedark"}}],
+        "a1-netherbrick-meatredsmall": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-meatredsmall"}}],
+        "a1-netherbrick-redsmall": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-redsmall"}}],
+        "a1-netherbrick-gutssmall": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-gutssmall"}}],
+        "a1-netherbrick-meatsmall": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-meatsmall"}}],
+        "a1-netherbrick-classicspatter": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-classicspatter"}}],
+        "a1-netherbrick-lavabrown": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-lavabrown"}}],
+        "a1-netherbrick-meatred": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-meatred"}}],
+        "a1-netherbrick-red": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-red"}}],
+        "a1-netherbrick-meat": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-meat"}}],
+        "a1-netherbrick-brinstar": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-brinstar"}}],
+        "a1-netherbrick-gutsdark": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-gutsdark"}}],
+        "netherfancybricks": [{"textures":{"all":"chisel:blocks/netherbrick/netherFancyBricks"}}],
+        "a1-netherbrick-guts": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-guts"}}],
+        "a1-netherbrick-lavabrinstar": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-lavabrinstar"}}],
+        "a1-netherbrick-lavaobsidian": [{"textures":{"all":"chisel:blocks/netherbrick/a1-netherbrick-lavaobsidian"}}]
+    }
+}

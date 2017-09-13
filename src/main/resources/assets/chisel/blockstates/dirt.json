@@ -1,0 +1,22 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "bricks": [{"textures":{"all":"chisel:blocks/dirt/bricks"}}],
+        "bricks3": [{"textures":{"all":"chisel:blocks/dirt/bricks3"}}],
+        "bricks2": [{"textures":{"all":"chisel:blocks/dirt/bricks2"}}],
+        "reinforceddirt": [{"textures":{"all":"chisel:blocks/dirt/reinforcedDirt"}}],
+        "vert": [{"textures":{"all":"chisel:blocks/dirt/vert"}}],
+        "happy": [{"textures":{"all":"chisel:blocks/dirt/happy"}}],
+        "hor": [{"textures":{"all":"chisel:dirt/hor"}}],
+        "plate": [{"textures":{"all":"chisel:blocks/dirt/plate"}}],
+        "vertical": [{"textures":{"all":"chisel:blocks/dirt/vertical"}}],
+        "chunky": [{"textures":{"all":"chisel:blocks/dirt/chunky"}}],
+        "horizontal": [{"textures":{"all":"chisel:blocks/dirt/horizontal"}}],
+        "reinforcedcobbledirt": [{"textures":{"all":"chisel:blocks/dirt/reinforcedCobbleDirt"}}],
+        "layers": [{"textures":{"all":"chisel:blocks/dirt/layers"}}],
+        "netherbricks": [{"textures":{"all":"chisel:blocks/dirt/netherbricks"}}],
+        "bricks+dirt2": [{"textures":{"all":"chisel:blocks/dirt/bricks+dirt2"}}],
+        "cobble": [{"textures":{"all":"chisel:blocks/dirt/cobble"}}]
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "terrain-iron-spaceblack": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-spaceblack"}}],
+        "terrain-iron-simple": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-simple"}}],
+        "terrain-iron-largeingot": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-largeingot"}}],
+        "terrain-iron-vents": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-vents"}}],
+        "terrain-iron-smallingot": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-smallingot"}}],
+        "terrain-iron-space": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-space"}}],
+        "terrain-iron-plates": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-plates"}}],
+        "terrain-iron-brick": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-brick"}}],
+        "terrain-iron-gears": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-gears"}}],
+        "terrain-iron-coin-tails": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-coin-tails"}}],
+        "terrain-iron-moon": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-moon"}}],
+        "terrain-iron-crate-light": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-crate-light"}}],
+        "terrain-iron-coin-heads": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-coin-heads"}}],
+        "terrain-iron-crate-dark": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-crate-dark"}}],
+        "terrain-iron-rivets": [{"textures":{"all":"chisel:blocks/iron/terrain-iron-rivets"}}]
+    }
+}

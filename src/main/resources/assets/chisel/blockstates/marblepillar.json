@@ -1,0 +1,22 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "plaingreek": [{"textures":{"all":"chisel:blocks/marblepillar/plaingreek"}}],
+        "rough": [{"textures":{"all":"chisel:blocks/marblepillar/rough"}}],
+        "wideplain": [{"textures":{"all":"chisel:blocks/marblepillar/wideplain"}}],
+        "greekgreek": [{"textures":{"all":"chisel:blocks/marblepillar/greekgreek"}}],
+        "simple": [{"textures":{"all":"chisel:blocks/marblepillar/simple"}}],
+        "ornamental": [{"textures":{"all":"chisel:blocks/marblepillar/ornamental"}}],
+        "greekplain": [{"textures":{"all":"chisel:blocks/marblepillar/greekplain"}}],
+        "default": [{"textures":{"all":"chisel:blocks/marblepillar/default"}}],
+        "plainplain": [{"textures":{"all":"chisel:blocks/marblepillar/plainplain"}}],
+        "pillar": [{"textures":{"all":"chisel:blocks/marblepillar/pillar"}}],
+        "widedecor": [{"textures":{"all":"chisel:blocks/marblepillar/widedecor"}}],
+        "convex": [{"textures":{"all":"chisel:blocks/marblepillar/convex"}}],
+        "widegreek": [{"textures":{"all":"chisel:blocks/marblepillar/widegreek"}}],
+        "greekdecor": [{"textures":{"all":"chisel:blocks/marblepillar/greekdecor"}}],
+        "carved": [{"textures":{"all":"chisel:blocks/marblepillar/carved"}}],
+        "plaindecor": [{"textures":{"all":"chisel:blocks/marblepillar/plaindecor"}}]
+    }
+}

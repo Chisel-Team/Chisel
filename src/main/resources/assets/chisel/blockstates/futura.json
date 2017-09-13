@@ -1,0 +1,13 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "controllerpurple": [{"textures":{"all":"chisel:blocks/futura/controllerpurple"}}],
+        "controller": [{"textures":{"all":"chisel:blocks/futura/controller"}}],
+        "uberwavy": [{"textures":{"all":"chisel:blocks/futura/uberWavy"}}],
+        "screencyan": [{"textures":{"all":"chisel:blocks/futura/screenCyan"}}],
+        "wavy": [{"textures":{"all":"chisel:blocks/futura/wavy"}}],
+        "screenmetallic": [{"textures":{"all":"chisel:blocks/futura/screenMetallic"}}],
+        "circuitplate": [{"textures":{"all":"chisel:blocks/futura/circuitPlate"}}]
+    }
+}

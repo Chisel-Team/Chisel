@@ -1,0 +1,12 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "streaks": [{"textures":{"all":"chisel:blocks/glass_stained/orange/streaks"}}],
+        "framed_fancy": [{"textures":{"all":"chisel:blocks/glass_stained/orange/framed_fancy"}}],
+        "rough": [{"textures":{"all":"chisel:blocks/glass_stained/orange/rough"}}],
+        "framed": [{"textures":{"all":"chisel:blocks/glass_stained/orange/framed"}}],
+        "brick": [{"textures":{"all":"chisel:blocks/glass_stained/orange/brick"}}],
+        "panel": [{"textures":{"all":"chisel:blocks/glass_stained/orange/panel"}}]
+    }
+}

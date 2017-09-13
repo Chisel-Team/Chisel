@@ -1,0 +1,20 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "red_roses": [{"textures":{"all":"chisel:blocks/leaves/red_roses"}}],
+        "fancy": [{"textures":{"all":"chisel:blocks/leaves/fancy"}}],
+        "fancy_opaque": [{"textures":{"all":"chisel:blocks/leaves/fancy_opaque"}}],
+        "christmasballs": [{"textures":{"all":"chisel:blocks/leaves/christmasBalls"}}],
+        "roses_opaque": [{"textures":{"all":"chisel:blocks/leaves/roses_opaque"}}],
+        "christmaslights_opaque": [{"textures":{"all":"chisel:blocks/leaves/christmasLights_opaque"}}],
+        "red_roses_opaque": [{"textures":{"all":"chisel:blocks/leaves/red_roses_opaque"}}],
+        "dead": [{"textures":{"all":"chisel:blocks/leaves/dead"}}],
+        "christmaslights": [{"textures":{"all":"chisel:blocks/leaves/christmasLights"}}],
+        "pinkpetal_opaque": [{"textures":{"all":"chisel:blocks/leaves/pinkpetal_opaque"}}],
+        "dead_opaque": [{"textures":{"all":"chisel:blocks/leaves/dead_opaque"}}],
+        "pinkpetal": [{"textures":{"all":"chisel:blocks/leaves/pinkpetal"}}],
+        "christmasballs_opaque": [{"textures":{"all":"chisel:blocks/leaves/christmasBalls_opaque"}}],
+        "roses": [{"textures":{"all":"chisel:blocks/leaves/roses"}}]
+    }
+}

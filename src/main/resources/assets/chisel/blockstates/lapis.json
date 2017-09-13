@@ -1,0 +1,15 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "a1-blocklapis-ornatelayer": [{"textures":{"all":"chisel:blocks/lapis/a1-blocklapis-ornatelayer"}}],
+        "terrain-lapisblock-panel": [{"textures":{"all":"chisel:blocks/lapis/terrain-lapisblock-panel"}}],
+        "a1-blocklapis-panel": [{"textures":{"all":"chisel:blocks/lapis/a1-blocklapis-panel"}}],
+        "terrain-lapisblock-zelda": [{"textures":{"all":"chisel:blocks/lapis/terrain-lapisblock-zelda"}}],
+        "masonrylapis": [{"textures":{"all":"chisel:blocks/lapis/masonryLapis"}}],
+        "a1-blocklapis-smooth": [{"textures":{"all":"chisel:blocks/lapis/a1-blocklapis-smooth"}}],
+        "terrain-lapistile": [{"textures":{"all":"chisel:blocks/lapis/terrain-lapistile"}}],
+        "terrain-lapisornate": [{"textures":{"all":"chisel:blocks/lapis/terrain-lapisornate"}}],
+        "terrain-lapisblock-chunky": [{"textures":{"all":"chisel:blocks/lapis/terrain-lapisblock-chunky"}}]
+    }
+}

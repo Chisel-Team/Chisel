@@ -1,0 +1,22 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "scribbles-1": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-1"}}],
+        "scribbles-0": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-0"}}],
+        "scribbles-9": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-9"}}],
+        "scribbles-8": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-8"}}],
+        "scribbles-7": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-7"}}],
+        "scribbles-6": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-6"}}],
+        "scribbles-5": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-5"}}],
+        "scribbles-4": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-4"}}],
+        "scribbles-3": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-3"}}],
+        "scribbles-2": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-2"}}],
+        "scribbles-10": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-10"}}],
+        "scribbles-12": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-12"}}],
+        "scribbles-11": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-11"}}],
+        "scribbles-14": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-14"}}],
+        "scribbles-13": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-13"}}],
+        "scribbles-15": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-15"}}]
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "forge_marker": 1,
+    "defaults": {"model":"cube_all"},
+    "variants": {
+        "vent2": [{"textures":{"all":"chisel:blocks/mechanical2/vent2"}}],
+        "vent-glow": [{"textures":{"all":"chisel:blocks/mechanical2/vent-glow"}}],
+        "hex": [{"textures":{"all":"chisel:blocks/mechanical2/hex"}}],
+        "gear": [{"textures":{"all":"chisel:blocks/mechanical2/gear"}}]
+    }
+}
