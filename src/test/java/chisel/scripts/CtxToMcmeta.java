@@ -91,7 +91,7 @@ public class CtxToMcmeta {
                         JsonArray arr = new JsonArray();
                         Arrays.stream(ArrayUtils.remove(textures, 0))
                                 .map(s -> toAbsoluteTexture(texturesFolder, path, s))
-                                .forEach(s -> arr.add(new JsonPrimitive(s)));
+                                .forEach(s -> arr.add(new JsonPrimitive("chisel:blocks/" + s)));
                         ctm.add("textures", arr);
                     }
                     
@@ -116,6 +116,12 @@ public class CtxToMcmeta {
                     e.printStackTrace();
                 } finally {
                     IOUtils.closeQuietly(fr);
+                }
+                
+                try {
+                    Files.delete(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             });
     }
