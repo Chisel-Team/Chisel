@@ -349,7 +349,7 @@ public class GuiHitechChisel extends GuiChisel {
                 int scale = new ScaledResolution(mc).getScaleFactor();
                 Project.gluPerspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000);
                 GlStateManager.matrixMode(GL11.GL_MODELVIEW);
-                GlStateManager.translate( - panel.getX() - panel.getWidth() / 2,  - panel.getY() - panel.getHeight() / 2, 0);
+                GlStateManager.translate(-panel.getX() - panel.getWidth() / 2, -panel.getY() - panel.getHeight() / 2, 0);
                 GlStateManager.viewport((guiLeft + panel.getX()) * scale, mc.displayHeight - (guiTop + panel.getY() + panel.getHeight()) * scale, panel.getWidth() * scale, panel.getHeight() * scale);
                 GlStateManager.clear(GL11.GL_DEPTH_BUFFER_BIT);
 
