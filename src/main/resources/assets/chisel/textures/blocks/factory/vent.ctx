@@ -1,7 +1,0 @@
-{
-    "type":"CTMV",
-    "textures": [
-        "./vent-top.ctx",
-        "./vent-ctmv.ctx"
-    ]
-}

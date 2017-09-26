@@ -1,0 +1,10 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "pattern",
+        "layer": "CUTOUT",
+        "extra": {
+            "size": 3
+        }
+    }
+}

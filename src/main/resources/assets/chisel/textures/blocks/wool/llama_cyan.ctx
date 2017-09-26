@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./llama/cyan",
-        "./llama/cyan-ctm"
-    ]
-}

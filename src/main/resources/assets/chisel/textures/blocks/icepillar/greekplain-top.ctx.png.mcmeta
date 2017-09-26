@@ -1,0 +1,10 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "pillar",
+        "layer": "TRANSLUCENT",
+        "textures": [
+            "chisel:blocks/icepillar/greekplain-ctmv.ctx"
+        ]
+    }
+}

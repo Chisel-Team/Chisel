@@ -1,8 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./terrain-glass-ornatesteel",
-        "./terrain-glass-ornatesteel-ctm"
-    ],
-    "layer":"CUTOUT"
-}

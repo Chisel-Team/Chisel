@@ -1,8 +1,0 @@
-{
-    "type":"CTM",
-    "layer":"CUTOUT",
-    "textures":[
-        "./bevel",
-        "./bevel-ctm"
-    ]
-}

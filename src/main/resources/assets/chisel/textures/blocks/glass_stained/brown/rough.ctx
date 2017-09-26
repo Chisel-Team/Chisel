@@ -1,8 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./rough",
-        "./rough_ct"
-    ],
-    "layer":"TRANSLUCENT"
-}

@@ -1,8 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./framed",
-        "./framed_fancy_ct"
-    ],
-    "layer":"TRANSLUCENT"
-}

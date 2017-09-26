@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./legacy/magenta",
-        "./legacy/magenta-ctm"
-    ]
-}

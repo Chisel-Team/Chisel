@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./carved-top"
-    ],
-    "layer":"TRANSLUCENT"
-}

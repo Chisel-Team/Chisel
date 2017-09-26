@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./rust2",
-        "./rust2-ctm"
-    ]
-}

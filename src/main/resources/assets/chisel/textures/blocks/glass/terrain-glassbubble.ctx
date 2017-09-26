@@ -1,8 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./terrain-glassbubble",
-        "./terrain-glassbubble-ctm"
-    ],
-    "layer":"CUTOUT"
-}

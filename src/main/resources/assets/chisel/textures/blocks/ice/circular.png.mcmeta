@@ -1,0 +1,10 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "ctm",
+        "layer": "TRANSLUCENT",
+        "textures": [
+            "chisel:blocks/ice/circular-ctm"
+        ]
+    }
+}

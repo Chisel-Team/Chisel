@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./engineering",
-        "./engineering-ctm"
-    ]
-}

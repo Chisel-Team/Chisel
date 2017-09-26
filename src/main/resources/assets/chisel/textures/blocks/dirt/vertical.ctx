@@ -1,7 +1,0 @@
-{
-    "type":"CTMV",
-    "textures": [
-        "./vertical-top.ctx",
-        "./vertical-ctmv.ctx"
-    ]
-}

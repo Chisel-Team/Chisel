@@ -1,0 +1,9 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "ctm",
+        "textures": [
+            "chisel:blocks/concrete_purple/tiles-large-ctm"
+        ]
+    }
+}

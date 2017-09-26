@@ -1,7 +1,0 @@
-{
-    "type":"CTMV",
-    "textures": [
-        "./plaingreek-top.ctx",
-        "./plaingreek-ctmv.ctx"
-    ]
-}

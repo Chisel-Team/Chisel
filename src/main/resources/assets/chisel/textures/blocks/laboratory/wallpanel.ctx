@@ -1,7 +1,0 @@
-{
-    "type":"CTMV",
-    "textures": [
-        "./wallpanel-top.ctx",
-        "./wallpanel-ctmv.ctx"
-    ]
-}

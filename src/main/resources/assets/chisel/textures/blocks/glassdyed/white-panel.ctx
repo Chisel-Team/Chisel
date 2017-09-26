@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./white-panel"
-    ],
-    "layer":"TRANSLUCENT"
-}

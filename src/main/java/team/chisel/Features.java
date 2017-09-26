@@ -3196,7 +3196,7 @@ public enum Features {
     }
 
     public boolean enabled() {
-        return Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
+        return this == Features.ANDESITE && Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
     }
 
     private final boolean hasParentFeature() {
