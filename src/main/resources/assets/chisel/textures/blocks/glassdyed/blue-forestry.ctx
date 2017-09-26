@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./blue-forestry"
-    ],
-    "layer":"TRANSLUCENT"
-}

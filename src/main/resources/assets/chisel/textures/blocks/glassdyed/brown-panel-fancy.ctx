@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./brown-panel-fancy"
-    ],
-    "layer":"TRANSLUCENT"
-}

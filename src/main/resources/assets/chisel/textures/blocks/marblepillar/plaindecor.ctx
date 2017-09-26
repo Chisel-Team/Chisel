@@ -1,7 +1,0 @@
-{
-    "type":"CTMV",
-    "textures": [
-        "./plaindecor-top.ctx",
-        "./plaindecor-ctmv.ctx"
-    ]
-}

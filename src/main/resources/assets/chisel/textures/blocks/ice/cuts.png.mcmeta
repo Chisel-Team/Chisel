@@ -1,0 +1,10 @@
+{
+    "ctm": {
+        "ctm_version": 1,
+        "type": "random",
+        "layer": "TRANSLUCENT",
+        "extra": {
+            "size": 4
+        }
+    }
+}

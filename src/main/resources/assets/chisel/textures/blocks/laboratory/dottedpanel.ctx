@@ -1,7 +1,0 @@
-{
-    "type":"CTMV",
-    "textures": [
-        "./dottedpanel-top.ctx",
-        "./dottedpanel-ctmv.ctx"
-    ]
-}

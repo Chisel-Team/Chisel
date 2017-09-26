@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./pink-transparent"
-    ],
-    "layer":"TRANSLUCENT"
-}

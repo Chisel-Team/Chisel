@@ -1,7 +1,0 @@
-{
-	"type":"CTM",
-	"textures":[
-        "./platex",
-        "./platex-ctm"
-    ]
-}

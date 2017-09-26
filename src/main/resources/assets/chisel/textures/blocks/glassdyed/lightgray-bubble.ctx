@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./lightgray-bubble"
-    ],
-    "layer":"TRANSLUCENT"
-}

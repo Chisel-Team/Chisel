@@ -18,19 +18,37 @@
         "largeornate": [{"textures":{"all":"chisel:blocks/andesite/largeornate"}}],
         "chaotic-small": [{"textures":{"all":"chisel:blocks/andesite/chaotic-small"}}],
         "panel": [{"textures":{"all":"chisel:blocks/andesite/panel"}}],
-        "circularct": [{"textures":{"all":"chisel:blocks/andesite/circularct"}}],
+        "circularct": [{
+            "model": "chisel:base/cube_all_ctm_override",
+            "textures": {
+                "all":"chisel:blocks/andesite/circular",
+                "ctm": "chisel:blocks/andesite/circular-ctm"
+            }
+        }],
         "prism": [{"textures":{"all":"chisel:blocks/andesite/prism"}}],
         "cuts": [{"textures":{"all":"chisel:blocks/andesite/cuts"}}],
         "zag": [{"textures":{"all":"chisel:blocks/andesite/zag"}}],
         "ornate": [{"textures":{"all":"chisel:blocks/andesite/ornate"}}],
         "bricks-triple": [{"textures":{"all":"chisel:blocks/andesite/bricks-triple"}}],
-        "twisted": [{"textures":{"all":"chisel:blocks/andesite/twisted"}}],
+        "twisted": [{
+            "model": "cube_column",
+            "textures": {
+                "side": "chisel:blocks/andesite/twisted-side",
+                "end":  "chisel:blocks/andesite/twisted-top"
+            }
+        }],
         "dent": [{"textures":{"all":"chisel:blocks/andesite/dent"}}],
         "raw": [{"textures":{"all":"chisel:blocks/andesite/extra/raw"}}],
         "french-1": [{"textures":{"all":"chisel:blocks/andesite/french-1"}}],
         "circular": [{"textures":{"all":"chisel:blocks/andesite/circular"}}],
         "french-2": [{"textures":{"all":"chisel:blocks/andesite/french-2"}}],
-        "pillar": [{"textures":{"all":"chisel:blocks/andesite/pillar"}}],
+        "pillar": [{
+            "model": "cube_column",
+            "textures": {
+                "side": "chisel:blocks/andesite/pillar-side",
+                "end":  "chisel:blocks/andesite/pillar-top"
+            }
+        }],
         "braid": [{"textures":{"all":"chisel:blocks/andesite/braid"}}],
         "marker": [{"textures":{"all":"chisel:blocks/andesite/marker"}}],
         "bricks-cracked": [{"textures":{"all":"chisel:blocks/andesite/bricks-cracked"}}],

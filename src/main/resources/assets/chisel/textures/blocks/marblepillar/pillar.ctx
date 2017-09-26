@@ -1,7 +1,0 @@
-{
-    "type":"CTMV",
-    "textures": [
-        "./pillar-top.ctx",
-        "./pillar-ctmv.ctx"
-    ]
-}

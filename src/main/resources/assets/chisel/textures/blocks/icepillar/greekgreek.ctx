@@ -1,8 +1,0 @@
-{
-    "type":"CTMV",
-    "textures": [
-        "./greekgreek-top.ctx",
-        "./greekgreek-ctmv.ctx"
-    ],
-    "layer":"TRANSLUCENT"
-}
