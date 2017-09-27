@@ -1005,7 +1005,7 @@ public enum Features {
                     .next("horizontal")
                     .next("plate")
                     .addOreDict("dirt")
-                    .build(b -> b.setSoundType(SoundType.GROUND).setHardness(0.5F));
+                    .build(b -> b.setSoundType(SoundType.GROUND).setHardness(0.5F).setHarvestLevel("shovel", 0));
         }
     },
 
