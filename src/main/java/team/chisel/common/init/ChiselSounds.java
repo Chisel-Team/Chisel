@@ -52,6 +52,9 @@ public class ChiselSounds {
     @SoundName("chisel.wood")
     public static final SoundEvent wood_chisel = null;
     
+    @SoundName("chisel.dirt")
+    public static final SoundEvent dirt_chisel = null;
+    
     public static void init() {}
 
     static {

@@ -19,7 +19,17 @@
          "chisel:chisel/wood11"
       ]
    },
-  
+   "chisel.dirt":{
+      "category":"player",
+      "subtitle":"subtitle.chisel.chiseling.dirt",
+      "sounds":[
+         "chisel:chisel/dirt1",
+         "chisel:chisel/dirt2",
+         "chisel:chisel/dirt3",
+         "chisel:chisel/dirt4"
+      ]
+   },
+
    "block.metal.break":{
       "category":"block",
       "subtitle": "subtitles.block.generic.break",

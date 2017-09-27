@@ -986,6 +986,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("dirt", CarvingUtils.variationFor(Blocks.DIRT.getDefaultState(), -1));
+            Carving.chisel.setVariationSound("dirt", ChiselSounds.dirt_chisel);
             factory.newBlock(Material.GROUND, "dirt", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
                     .newVariation("bricks")
                     .next("netherbricks")
