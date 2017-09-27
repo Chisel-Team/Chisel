@@ -27,7 +27,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.model.TRSRTransformation;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
-import team.chisel.api.carving.ICarvingVariation;
 
 @ParametersAreNonnullByDefault
 public class ClientUtil {
@@ -37,27 +36,6 @@ public class ClientUtil {
             10, -45, 170)), new Vector3f(0.375f, 0.375f, 0.375f), null);
     @SuppressWarnings("null")
     public static final Matrix4f DEFAULT_BLOCK_THIRD_PERSON_MATRIX = DEFAULT_BLOCK_THIRD_PERSON_TRANSOFRM.getMatrix();
-
-    @SuppressWarnings("null")
-    public static void playSound(World world, EntityPlayer player, @Nullable ItemStack stack, @Nullable IBlockState next) {
-        if (stack != null && stack.getItem() instanceof IChiselItem) {
-            @Nonnull String sound;
-            if (next != null) {
-                sound = Optional.ofNullable(((IChiselItem)stack.getItem()).getOverrideSound(world, player, stack, next)).orElse(CarvingUtils.getChiselRegistry().getVariationSound(next));
-            } else {
-                sound = CarvingUtils.getChiselRegistry().getVariationSound(next);
-            }
-            playSound(world, player.getPosition(), sound);
-        }
-    }
-
-    public static void playSound(World world, BlockPos pos, String sound) {
-        playSound(world, pos, sound, SoundCategory.BLOCKS);
-    }
-    
-    public static void playSound(World world, BlockPos pos, String sound, SoundCategory category) {
-        Minecraft.getMinecraft().world.playSound(pos, new SoundEvent(new ResourceLocation(sound)), category, 0.3f + 0.7f * rand.nextFloat(), 0.6f + 0.4f * rand.nextFloat(), true);
-    }
 
     public static void addHitEffects(World world, BlockPos pos, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);

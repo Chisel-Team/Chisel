@@ -65,6 +65,10 @@ import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
+import team.chisel.common.init.ChiselSounds;
+import team.chisel.common.item.ItemChisel;
+import team.chisel.common.item.ItemChisel.ChiselType;
+import team.chisel.common.item.ItemOffsetTool;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.GenerationHandler.WorldGenInfo;
 
@@ -2211,7 +2215,9 @@ public enum Features {
 
             for (int c = 0; c < plank_names.length; c++)
             {
-                Carving.chisel.addVariation("planks-" + plank_names[c], CarvingUtils.variationFor(planks.withProperty(prop, BlockPlanks.EnumType.byMetadata(c)), -1));
+                String groupName = "planks-" + plank_names[c];
+                Carving.chisel.addVariation(groupName, CarvingUtils.variationFor(planks.withProperty(prop, BlockPlanks.EnumType.byMetadata(c)), -1));
+                Carving.chisel.setVariationSound(groupName, ChiselSounds.wood_chisel);
 
                 factory.newBlock(Material.WOOD, "planks-" + plank_names[c], provider)
                         .newVariation("clean")

@@ -8,6 +8,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 /**
@@ -114,7 +115,7 @@ public interface ICarvingRegistry {
      *            The state of the variation
      * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
      */
-    public String getVariationSound(IBlockState state);
+    public SoundEvent getVariationSound(IBlockState state);
 
     /**
      * Gets the sound resource string for the group represented by this ItemStack.
@@ -124,7 +125,7 @@ public interface ICarvingRegistry {
      * 
      * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
      */
-    public String getVariationSound(ItemStack stack);
+    public SoundEvent getVariationSound(ItemStack stack);
 
     /**
      * Gets the sound resource string for the group represented by this {@link ICarvingVariation}.
@@ -133,7 +134,7 @@ public interface ICarvingRegistry {
      * 
      * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
      */
-    String getVariationSound(@Nullable ICarvingVariation variation);
+    SoundEvent getVariationSound(@Nullable ICarvingVariation variation);
 
     /**
      * @return A list of all registered group names, sorted alphabetically.
@@ -256,5 +257,5 @@ public interface ICarvingRegistry {
      * @param sound
      *            The resource string for the sound
      */
-    void setVariationSound(String name, String sound);
+    void setVariationSound(String name, SoundEvent sound);
 }

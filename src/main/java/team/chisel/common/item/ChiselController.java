@@ -27,6 +27,7 @@ import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.client.ClientUtil;
 import team.chisel.common.util.NBTUtil;
+import team.chisel.common.util.SoundUtil;
 
 public class ChiselController {
     
@@ -118,8 +119,8 @@ public class ChiselController {
         IBlockState current = world.getBlockState(pos);
         if (current != next) {
             world.setBlockState(pos, next);
+            SoundUtil.playSound(player, stack, next);
             if (world.isRemote) {
-                ClientUtil.playSound(world, player, stack, next);
                 ClientUtil.addDestroyEffects(world, pos, next);
             }
         }

@@ -17,6 +17,7 @@ import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.client.ClientUtil;
+import team.chisel.common.util.SoundUtil;
 
 public class SlotChiselSelection extends Slot {
 
@@ -74,7 +75,7 @@ public class SlotChiselSelection extends Slot {
             container.getInventoryChisel().updateItems();
             container.detectAndSendChanges();
 
-            if (player.world.isRemote) {
+//            if (player.world.isRemote) {
                 ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(crafted);
                 IBlockState state = v == null ? null : v.getBlockState();
                 if (state == null) {
@@ -84,10 +85,10 @@ public class SlotChiselSelection extends Slot {
                         state = Blocks.STONE.getDefaultState(); // fallback
                     }
                 }
-                ClientUtil.playSound(player.world, player, chisel, state);
-            } else {
-                // container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.stackSize);
-            }
+                SoundUtil.playSound(player, chisel, state);
+//            } else {
+//                // container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.stackSize);
+//            }
         }
         
         return res;

@@ -11,11 +11,13 @@ import com.google.common.collect.Lists;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvent;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.common.init.ChiselSounds;
 
 @ParametersAreNonnullByDefault
 public class Carving implements ICarvingRegistry {
@@ -233,7 +235,7 @@ public class Carving implements ICarvingRegistry {
 	public void registerOre(String name, String oreName) {}
 
 	@Override
-	public void setVariationSound(String name, String sound) {
+	public void setVariationSound(String name, SoundEvent sound) {
 		ICarvingGroup group = groups.getGroupByName(name);
 		if (group != null) {
 			group.setSound(sound);
@@ -243,26 +245,26 @@ public class Carving implements ICarvingRegistry {
 	}
 
 	@Override
-	public String getVariationSound(IBlockState state) {
+	public SoundEvent getVariationSound(IBlockState state) {
 		ICarvingGroup group = groups.getGroup(state);
 		return getSound(group);
 	}
 
 	@Override
-	public String getVariationSound(ItemStack stack) {
+	public SoundEvent getVariationSound(ItemStack stack) {
 		ICarvingGroup group = groups.getGroup(stack);
 		return getSound(group);
 	}
 	
 	@Override
-	public String getVariationSound(@Nullable ICarvingVariation variation) {
+	public SoundEvent getVariationSound(@Nullable ICarvingVariation variation) {
 	    ICarvingGroup group = variation == null ? null : groups.getGroup(variation);
 	    return getSound(group);
 	}
 
-	private String getSound(@Nullable ICarvingGroup group) {
-		String sound = group == null ? null : group.getSound();
-		return sound == null ? Chisel.MOD_ID + ":chisel.fallback" : sound;
+	private SoundEvent getSound(@Nullable ICarvingGroup group) {
+	    SoundEvent sound = group == null ? null : group.getSound();
+		return sound == null ? ChiselSounds.fallback : sound;
 	}
 
 	@Override

@@ -56,6 +56,7 @@ import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselFuelHandler;
+import team.chisel.common.init.ChiselSounds;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ItemChisel;
@@ -98,6 +99,8 @@ public class Chisel implements Reference {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        ChiselSounds.init();
+        
         proxy.construct(event);
 
         File configFile = event.getSuggestedConfigurationFile();

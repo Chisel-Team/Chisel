@@ -20,6 +20,9 @@ jei.chisel.desc.concrete_making=Just add water and you can make your very own Co
 
 chisel.tooltip.blockname=%1$s (%2$s)
 
+subtitle.chisel.chiseling.fallback=Object Chiseled
+subtitle.chisel.chiseling.wood=Wood Chiseled
+
 tile.chisel.blockAluminum.name=Block of Aluminum
 tile.chisel.blockAluminum.caution.desc.1=Caution
 tile.chisel.blockAluminum.crate.desc.1=Shipping Crate

@@ -7,6 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.chisel.api.carving.ICarvingVariation;
@@ -118,7 +119,7 @@ public interface IChiselItem {
      *            The {@link IBlockState} representing the target
      * @return A sound to play, instead of the variation's sound, or null for default.
      */
-    default @Nullable String getOverrideSound(World world, EntityPlayer player, ItemStack chisel, IBlockState next) {
+    default @Nullable SoundEvent getOverrideSound(World world, EntityPlayer player, ItemStack chisel, IBlockState next) {
         return null;
     }
     

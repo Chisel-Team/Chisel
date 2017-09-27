@@ -50,6 +50,7 @@ import team.chisel.client.ClientUtil;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
 import team.chisel.common.util.NBTUtil;
+import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
 public class GuiHitechChisel extends GuiChisel {
@@ -483,7 +484,7 @@ public class GuiHitechChisel extends GuiChisel {
                 
                 PacketChiselButton.chiselAll(player, slots);
                 
-                ClientUtil.playSound(player.world, player, containerHitech.getChisel(), CarvingUtils.getChiselRegistry().getVariation(target.getStack()).getBlockState());
+                SoundUtil.playSound(player, containerHitech.getChisel(), CarvingUtils.getChiselRegistry().getVariation(target.getStack()).getBlockState());
                 
                 if (!isShiftDown()) {
                     List<Slot> dupes = containerHitech.getSelectionDuplicates();

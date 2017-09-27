@@ -16,6 +16,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvent;
 
 @ParametersAreNonnullByDefault
 public class CarvingUtils {
@@ -190,7 +191,7 @@ public class CarvingUtils {
 	private static class SimpleCarvingGroup implements ICarvingGroup {
 
 		private String name;
-		private @Nullable String sound;
+		private @Nullable SoundEvent sound;
 
 		private List<ICarvingVariation> variations = Lists.newArrayList();
 
@@ -231,12 +232,12 @@ public class CarvingUtils {
 		}
 
 		@Override
-		public @Nullable String getSound() {
+		public @Nullable SoundEvent getSound() {
 			return sound;
 		}
 
 		@Override
-		public void setSound(@Nullable String sound) {
+		public void setSound(@Nullable SoundEvent sound) {
 			this.sound = sound;
 		}
 
