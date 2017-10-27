@@ -3,6 +3,8 @@ package team.chisel.api.carving;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -17,6 +19,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.oredict.OreDictionary;
+import team.chisel.common.util.NonnullType;
 
 @ParametersAreNonnullByDefault
 public class CarvingUtils {
@@ -97,9 +101,37 @@ public class CarvingUtils {
 	 *            The name of the group.
 	 * @return A standard {@link ICarvingGroup} instance.
 	 */
-	public static ICarvingGroup getDefaultGroupFor(String name) {
-		return new SimpleCarvingGroup(name);
-	}
+    public static ICarvingGroup getDefaultGroupFor(String name) {
+        return new SimpleCarvingGroup(name);
+    }
+
+    /**
+     * Creates a group which proxies to the Ore Dictionary entries for the given name.
+     * <p>
+     * To add/remove variations to/from this group, modify the Ore Dictionary directly, the add/remove methods on this group will throw {@link UnsupportedOperationException}.
+     * 
+     * @param ore
+     *            The name of the Ore Dictionary entry.
+     * @return An {@link ICarvingGroup} for this entry.
+     */
+    public static ICarvingGroup getOreGroup(String ore) {
+        return new OreDictionaryGroup(ore);
+    }
+
+    /**
+     * Shorthand method for
+     * 
+     * <pre>
+     * CarvingUtils.getChiselRegistry().addGroup(CarvingUtils.getOreGroup(ore));
+     * </pre>
+     * 
+     * @param ore
+     *            The name of the Ore Dictionary entry.
+     * @see #getOreGroup(String)
+     */
+    public static void addOreGroup(String ore) {
+        getChiselRegistry().addGroup(getOreGroup(ore));
+    }
 	
 	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 	@Getter
@@ -250,5 +282,28 @@ public class CarvingUtils {
 		@Override
 		@Deprecated
 		public void setOreName(@Nullable String oreName) {}
+	}
+	
+	private static class OreDictionaryGroup extends SimpleCarvingGroup {
+
+        public OreDictionaryGroup(String name) {
+            super(name);
+        }
+	    
+        @Override
+        public List<ICarvingVariation> getVariations() {
+            List<@NonnullType ItemStack> ores = OreDictionary.getOres(getName());
+            return IntStream.range(0, ores.size()).mapToObj(i -> new VariationForStack(ores.get(i), i)).collect(Collectors.toList());
+        }
+        
+        @Override
+        public void addVariation(ICarvingVariation variation) {
+            throw new UnsupportedOperationException("Cannot add to Ore Dictionary Group.");
+        }
+        
+        @Override
+        public boolean removeVariation(ICarvingVariation variation) {
+            throw new UnsupportedOperationException("Cannot remove from Ore Dictionary Group.");
+        }
 	}
 }

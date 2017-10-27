@@ -79,7 +79,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockAluminum", beaconBaseProvider)
+            factory.newBlock(Material.ROCK, "blockAluminum", null, beaconBaseProvider)
                     .setParentFolder("metals/aluminum")
                     .newVariation("caution")
                     .next("crate")
@@ -91,6 +91,7 @@ public enum Features {
                     .addOreDict("blockAluminum")
                     .build(b -> b.setSoundType(SoundType.METAL));
             
+            CarvingUtils.addOreGroup("blockAluminum");
         }
 
         @Override
@@ -364,7 +365,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockBronze", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "blockBronze", null, beaconBaseProvider)
                     .setParentFolder("metals/bronze")
                     .newVariation("caution")
                     .next("crate")
@@ -376,6 +377,7 @@ public enum Features {
                     .addOreDict("blockBronze")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
             
+            CarvingUtils.addOreGroup("blockBronze");
         }
 
         @Override
@@ -452,7 +454,7 @@ public enum Features {
     CHARCOAL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "block_charcoal", provider)
+            factory.newBlock(Material.ROCK, "block_charcoal", null, provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -489,6 +491,8 @@ public enum Features {
                     .next("raw")
                     .addOreDict("blockCharcoal")
                     .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+            
+            CarvingUtils.addOreGroup("blockCharcoal");
 
         }
 
@@ -523,7 +527,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockCobalt", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "blockCobalt", null, beaconBaseProvider)
                     .setParentFolder("metals/cobalt")
                     .newVariation("caution")
                     .next("crate")
@@ -534,6 +538,8 @@ public enum Features {
                     .next("scaffold")
                     .addOreDict("blockCobalt")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
+            
+            CarvingUtils.addOreGroup("blockCobalt");
             
         }
 
@@ -601,10 +607,8 @@ public enum Features {
     COAL {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("block_coal", CarvingUtils.variationFor(Blocks.COAL_BLOCK.getDefaultState(), -21));
 
-
-            factory.newBlock(Material.ROCK, "block_coal", provider)
+            factory.newBlock(Material.ROCK, "block_coal", null, provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -641,6 +645,8 @@ public enum Features {
                     .next("raw")
                     .addOreDict("blockCoal")
                     .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+            
+            CarvingUtils.addOreGroup("blockCoal");
         }
 
         @Override
@@ -692,6 +698,7 @@ public enum Features {
                     .addOreDict("blockCoalCoke")
                     .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
+            CarvingUtils.addOreGroup("blockCoalCoke");
         }
 
         @Override
@@ -859,7 +866,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockCopper", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "blockCopper", null, beaconBaseProvider)
                     .setParentFolder("metals/copper")
                     .newVariation("caution")
                     .next("crate")
@@ -871,6 +878,7 @@ public enum Features {
                     .addOreDict("blockCopper")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
             
+            CarvingUtils.addOreGroup("blockCopper");
         }
 
         @Override
@@ -906,10 +914,8 @@ public enum Features {
     DIAMOND {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("diamond", CarvingUtils.variationFor(Blocks.DIAMOND_BLOCK.getDefaultState(), -20));
 
-
-            factory.newBlock(Material.IRON, "diamond", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "diamond", null, beaconBaseProvider)
                     .newVariation("terrain-diamond-embossed")
                     .next("terrain-diamond-gem")
                     .next("terrain-diamond-cells")
@@ -924,6 +930,8 @@ public enum Features {
                     .next("terrain-diamond-ornatelayer")
                     .addOreDict("blockDiamond")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
+            
+            CarvingUtils.addOreGroup("blockDiamond");
         }
 
         @Override
@@ -1013,7 +1021,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockElectrum", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "blockElectrum", null, beaconBaseProvider)
                     .setParentFolder("metals/electrum")
                     .newVariation("caution")
                     .next("crate")
@@ -1025,6 +1033,7 @@ public enum Features {
                     .addOreDict("blockElectrum")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
             
+            CarvingUtils.addOreGroup("blockElectrum");
         }
 
         @Override
@@ -1037,10 +1046,8 @@ public enum Features {
     EMERALD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("emerald", CarvingUtils.variationFor(Blocks.EMERALD_BLOCK.getDefaultState(), -1));
 
-
-            factory.newBlock(Material.IRON, "emerald", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "emerald", null, beaconBaseProvider)
                     .newVariation("panel")
                     .next("panelclassic")
                     .next("smooth")
@@ -1057,6 +1064,8 @@ public enum Features {
                     .next("emeraldPrismatic")
                     .addOreDict("blockEmerald")
                     .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F));
+            
+            CarvingUtils.addOreGroup("blockEmerald");
         }
 
         @Override
@@ -1452,10 +1461,8 @@ public enum Features {
     GOLD {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("blockGold", CarvingUtils.variationFor(Blocks.GOLD_BLOCK.getDefaultState(), -1));
 
-
-            factory.newBlock(Material.IRON, "blockGold", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "blockGold", null, beaconBaseProvider)
                     .setParentFolder("metals/gold")
                     .newVariation("caution")
                     .next("crate")
@@ -1467,7 +1474,7 @@ public enum Features {
                     .addOreDict("blockGold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F));
 
-            factory.newBlock(Material.IRON, "gold", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "gold", null, beaconBaseProvider)
                     .setGroup("blockGold")
                     .newVariation("terrain-gold-largeingot")
                     .next("terrain-gold-smallingot")
@@ -1486,6 +1493,8 @@ public enum Features {
                     .next("goldEye")
                     .addOreDict("blockGold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F));
+            
+            CarvingUtils.addOreGroup("blockGold");
         }
 
         @Override
@@ -1670,7 +1679,7 @@ public enum Features {
     INVAR {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.IRON, "blockInvar", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "blockInvar", null, beaconBaseProvider)
                     .setParentFolder("metals/invar")
                     .newVariation("caution")
                     .next("crate")
@@ -1681,6 +1690,8 @@ public enum Features {
                     .next("scaffold")
                     .addOreDict("blockInvar")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
+            
+            CarvingUtils.addOreGroup("blockInvar");
         }
 
         @Override
@@ -1693,10 +1704,8 @@ public enum Features {
     IRON {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("blockIron", CarvingUtils.variationFor(Blocks.IRON_BLOCK.getDefaultState(), -20));
 
-
-            factory.newBlock(Material.IRON, "blockIron", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "blockIron", null, beaconBaseProvider)
                     .setParentFolder("metals/iron")
                     .newVariation("caution")
                     .next("crate")
@@ -1708,8 +1717,7 @@ public enum Features {
                     .addOreDict("blockIron")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
 
-            factory.newBlock(Material.IRON, "iron", beaconBaseProvider)
-                    .setGroup("blockIron")
+            factory.newBlock(Material.IRON, "iron", null, beaconBaseProvider)
                     .newVariation("terrain-iron-largeingot")
                     .next("terrain-iron-smallingot")
                     .next("terrain-iron-gears")
@@ -1727,6 +1735,8 @@ public enum Features {
                     .next("terrain-iron-simple")
                     .addOreDict("blockIron")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
+            
+            CarvingUtils.addOreGroup("blockIron");
         }
 
         @Override
@@ -1790,10 +1800,8 @@ public enum Features {
     LAPIS {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("lapis", CarvingUtils.variationFor(Blocks.LAPIS_BLOCK.getDefaultState(), -1));
 
-
-            factory.newBlock(Material.ROCK, "lapis", provider)
+            factory.newBlock(Material.ROCK, "lapis", null, provider)
                     .newVariation("terrain-lapisblock-chunky")
                     .next("terrain-lapisblock-panel")
                     .next("terrain-lapisblock-zelda")
@@ -1805,6 +1813,8 @@ public enum Features {
                     .next("masonryLapis")
                     .addOreDict("blockLapis")
                     .build(b-> b.setHardness(3.0F).setResistance(5.0F).setSoundType(SoundType.STONE));
+            
+            CarvingUtils.addOreGroup("blockLapis");
         }
     },
 
@@ -1858,7 +1868,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockLead", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "blockLead", null, beaconBaseProvider)
                     .setParentFolder("metals/lead")
                     .newVariation("caution")
                     .next("crate")
@@ -1870,6 +1880,7 @@ public enum Features {
                     .addOreDict("blockLead")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
             
+            CarvingUtils.addOreGroup("blockLead");
         }
 
         @Override
@@ -2134,7 +2145,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockNickel", beaconBaseProvider)
+            factory.newBlock(Material.ROCK, "blockNickel", null, beaconBaseProvider)
                     .setParentFolder("metals/nickel")
                     .newVariation("caution")
                     .next("crate")
@@ -2145,7 +2156,8 @@ public enum Features {
                     .next("scaffold")
                     .addOreDict("blockNickel")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
-            
+
+            CarvingUtils.addOreGroup("blockNickel");
         }
 
         @Override
@@ -2247,7 +2259,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.IRON, "blockPlatinum", beaconBaseProvider)
+            factory.newBlock(Material.IRON, "blockPlatinum", null, beaconBaseProvider)
                     .setParentFolder("metals/platinum")
                     .newVariation("caution")
                     .next("crate")
@@ -2259,6 +2271,7 @@ public enum Features {
                     .addOreDict("blockPlatinum")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f));
             
+            CarvingUtils.addOreGroup("blockPlatinum");
         }
 
         @Override
@@ -2577,7 +2590,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockSilver", beaconBaseProvider)
+            factory.newBlock(Material.ROCK, "blockSilver", null, beaconBaseProvider)
                     .setParentFolder("metals/silver")
                     .newVariation("caution")
                     .next("crate")
@@ -2589,6 +2602,7 @@ public enum Features {
                     .addOreDict("blockSilver")
                     .build(b -> b.setSoundType(SoundType.METAL));
             
+            CarvingUtils.addOreGroup("blockSilver");
         }
 
         @Override
@@ -2602,7 +2616,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockSteel", beaconBaseProvider)
+            factory.newBlock(Material.ROCK, "blockSteel", null, beaconBaseProvider)
                     .setParentFolder("metals/steel")
                     .newVariation("caution")
                     .next("crate")
@@ -2614,6 +2628,7 @@ public enum Features {
                     .addOreDict("blockSteel")
                     .build(b -> b.setSoundType(SoundType.METAL));
 
+            CarvingUtils.addOreGroup("blockSteel");
         }
 
         @Override
@@ -2788,7 +2803,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockTin", beaconBaseProvider)
+            factory.newBlock(Material.ROCK, "blockTin", null, beaconBaseProvider)
                     .setParentFolder("metals/tin")
                     .newVariation("caution")
                     .next("crate")
@@ -2799,7 +2814,8 @@ public enum Features {
                     .next("scaffold")
                     .addOreDict("blockTin")
                     .build(b -> b.setSoundType(SoundType.METAL));
-            
+
+            CarvingUtils.addOreGroup("blockTin");
         }
 
         @Override
@@ -2845,7 +2861,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newBlock(Material.ROCK, "blockUranium", beaconBaseProvider)
+            factory.newBlock(Material.ROCK, "blockUranium", null, beaconBaseProvider)
                     .setParentFolder("metals/uranium")
                     .newVariation("caution")
                     .next("crate")
@@ -2857,6 +2873,7 @@ public enum Features {
                     .addOreDict("blockUranium")
                     .build(b -> b.setSoundType(SoundType.METAL));
             
+            CarvingUtils.addOreGroup("blockUranium");
         }
 
         @Override
