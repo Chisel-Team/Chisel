@@ -89,7 +89,7 @@ public class IMCHandler {
             case ADD_VARIATION_V2: {
                 NBTTagCompound tag = message.getNBTValue();
                 String group = tag.getString("group");
-                Preconditions.checkNotNull(Strings.emptyToNull(group), "No variation specified");
+                Preconditions.checkNotNull(Strings.emptyToNull(group), "No group specified");
                 
                 Pair<ItemStack, IBlockState> variationdata = parseNBT(tag);
                 ICarvingVariation v;
