@@ -1,0 +1,8 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./tiles-large",
+        "./tiles-large-ctm"
+    ],
+    "layer":"TRANSLUCENT"
+}

@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.inventory.ContainerChiselHitech;
+import team.chisel.common.util.SoundUtil;
 
 @NoArgsConstructor
 public class PacketChiselButton implements IMessage {
@@ -67,22 +68,25 @@ public class PacketChiselButton implements IMessage {
             if (chisel == null || target == null) {
                 return;
             }
+            
+            boolean playSound = false;
 
             for (int i : slots) {
-                Optional.ofNullable(player.inventory.getStackInSlot(i)).ifPresent((@Nonnull ItemStack s) -> {
+                ItemStack s = player.inventory.getStackInSlot(i);
+                if (s != null) {
                     if (carving.getGroup(target) != carving.getGroup(s)) {
                         return;
                     }
                     ItemStack stack = target.copy();
-                    int toCraft = s.stackSize;
+                    int toCraft = Math.min(s.stackSize, stack.getMaxStackSize());
                     if (chisel.isItemStackDamageable()) {
                         int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
                         toCraft = Math.min(toCraft, damageLeft);
                         stack.stackSize = toCraft;
                         chisel.damageItem(toCraft, player);
                     }
-                    player.inventory.setInventorySlotContents(i, stack);
                     if (chisel.stackSize <= 0) {
+                        player.inventory.setInventorySlotContents(i, stack);
                         container.getInventoryChisel().getStackInSpecialSlot().stackSize = s.stackSize - toCraft;
                         player.inventory.setInventorySlotContents(container.getChiselSlot(), null);
                         if (s.stackSize > toCraft) {
@@ -92,11 +96,24 @@ public class PacketChiselButton implements IMessage {
                                 player.dropItem(remainder, false);
                             }
                         }
+                    } else if (toCraft < s.stackSize) {
+                        s.stackSize -= toCraft;
+                        if (!player.inventory.addItemStackToInventory(stack)) {
+                            player.dropItem(stack, false);
+                        }
+                    } else {
+                        player.inventory.setInventorySlotContents(i, stack);
                     }
-                });
+                    
+                    playSound = true;
+                }
                 if (chisel.stackSize < 1) {
                     return;
                 }
+            }
+            
+            if (playSound) {
+                SoundUtil.playSound(player, chisel, carving.getVariation(target).getBlockState());
             }
         }
     }

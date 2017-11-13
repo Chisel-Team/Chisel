@@ -1,0 +1,8 @@
+{
+	"type":"CTM",
+	"textures":[
+        "./bricks-encased",
+        "./bricks-encased-ctm"
+    ],
+    "layer":"TRANSLUCENT"
+}

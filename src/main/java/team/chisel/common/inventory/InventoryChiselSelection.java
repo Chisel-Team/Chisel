@@ -139,18 +139,12 @@ public class InventoryChiselSelection implements IInventory {
             return;
         }
 
-        if (Block.getBlockFromItem(item) == null) {
-            return;
-        }
-
         List<ItemStack> list = container.getCarving().getItemsForChiseling(chiseledItem);
 
         activeVariations = 0;
         while (activeVariations < size && activeVariations < list.size()) {
-            if (Block.REGISTRY.getNameForObject(Block.getBlockFromItem(list.get(activeVariations).getItem())) != null) {
-                inventory[activeVariations] = list.get(activeVariations);
-                activeVariations++;
-            }
+            inventory[activeVariations] = list.get(activeVariations);
+            activeVariations++;
         }
     }
 

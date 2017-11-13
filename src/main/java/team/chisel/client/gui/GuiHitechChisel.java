@@ -1,6 +1,5 @@
 package team.chisel.client.gui;
 
-import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.List;
 
@@ -11,7 +10,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.util.Rectangle;
+import org.lwjgl.util.glu.Project;
 
 import com.google.common.base.Optional;
 
@@ -45,10 +45,11 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.Chisel;
-import team.chisel.client.util.ClientUtil;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
 import team.chisel.common.util.NBTUtil;
+import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
 public class GuiHitechChisel extends GuiChisel {
@@ -172,8 +173,6 @@ public class GuiHitechChisel extends GuiChisel {
         }
     }
     
-    private static final boolean scissorAvailable = GLContext.getCapabilities().OpenGL20;
-    
     private static final Rectangle panel = new Rectangle(8, 14, 74, 74);
     
     private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselGuiHitech.png");
@@ -190,13 +189,15 @@ public class GuiHitechChisel extends GuiChisel {
     private float prevRotX, prevRotY;
     private float momentumX, momentumY;
     private float momentumDampening = 0.98f;
-    private float rotX = -15, rotY, zoom = 1;
+    private float rotX = 165, rotY, zoom = 1;
     
     private int scrollAcc;
     
     private @Nullable PreviewModeButton buttonPreview;
     private @Nullable GuiButton buttonChisel;
     private @Nullable RotateButton buttonRotate;
+    
+    private @Nullable IBlockState erroredState;
     
     public GuiHitechChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, EnumHand hand) {
         super(iinventory, menu, hand);
@@ -284,10 +285,9 @@ public class GuiHitechChisel extends GuiChisel {
     
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int mx, int my) {
-        drawDefaultBackground();
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
+        mc.getTextureManager().bindTexture(TEXTURE);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
         if (containerHitech.getSelection() != null) {
@@ -338,9 +338,75 @@ public class GuiHitechChisel extends GuiChisel {
 
             containerHitech.setTarget(containerHitech.getSlot(idx));
         }
-        
-//        Rectangle area = getModeButtonArea();
-//        drawRect(area.x, area.y, area.x + area.width, area.y + area.height, 0x669999FF);
+
+        // Rectangle area = getModeButtonArea();
+        // drawRect(area.x, area.y, area.x + area.width, area.y + area.height, 0x669999FF);
+
+        BlockRendererDispatcher brd = this.mc.getBlockRendererDispatcher();
+        if (containerHitech.getTarget() != null) {
+
+            ItemStack stack = containerHitech.getTarget().getStack();
+
+            if (stack != null) {
+
+                GlStateManager.pushMatrix();
+
+                GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
+
+                GlStateManager.matrixMode(GL11.GL_PROJECTION);
+                GlStateManager.pushMatrix();
+                GlStateManager.loadIdentity();
+                int scale = new ScaledResolution(mc).getScaleFactor();
+                Project.gluPerspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000);
+                GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+                GlStateManager.translate(-panel.getX() - panel.getWidth() / 2, -panel.getY() - panel.getHeight() / 2, 0);
+                GlStateManager.viewport((guiLeft + panel.getX()) * scale, mc.displayHeight - (guiTop + panel.getY() + panel.getHeight()) * scale, panel.getWidth() * scale, panel.getHeight() * scale);
+                GlStateManager.clear(GL11.GL_DEPTH_BUFFER_BIT);
+
+                // Makes zooming slower as zoom increases, but leaves 1 as the default zoom.
+                double sc = 300 + 8 * buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9);
+                GlStateManager.scale(-sc, -sc, sc);
+
+                GlStateManager.rotate(rotX, 1, 0, 0);
+                GlStateManager.rotate(rotY, 0, 1, 0);
+                GlStateManager.translate(-1.5, -2.5, -0.5);
+
+                Block block = Block.getBlockFromItem(stack.getItem());
+                IBlockState state = block == null ? null : block.getStateFromMeta(stack.getMetadata());
+                if (state instanceof IExtendedBlockState) {
+                    state = ((IExtendedBlockState) state).getClean();
+                }
+
+                if (state != null && state != erroredState) {
+                    erroredState = null;
+
+                    fakeworld.setState(state);
+
+                    mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                    Tessellator.getInstance().getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
+                    try {
+                        for (BlockPos pos : buttonPreview.getType().getPositions()) {
+                            brd.renderBlock(state, pos, fakeworld, Tessellator.getInstance().getBuffer());
+                        }
+                    } catch (Exception e) {
+                        erroredState = state;
+                        Chisel.logger.error("Exception rendering block {}", state, e);
+                    } finally {
+                        if (erroredState == null) {
+                            Tessellator.getInstance().draw();
+                        } else {
+                            Tessellator.getInstance().getBuffer().finishDrawing();
+                        }
+                    }
+                }
+
+                GlStateManager.popMatrix();
+                GlStateManager.matrixMode(GL11.GL_PROJECTION);
+                GlStateManager.popMatrix();
+                GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+                GlStateManager.viewport(0, 0, mc.displayWidth, mc.displayHeight);
+            }
+        }
     }
     
     private void drawSlotHighlight(Slot slot, int u) {
@@ -360,7 +426,7 @@ public class GuiHitechChisel extends GuiChisel {
                 momentumX = rotX - prevRotX;
                 momentumY = rotY - prevRotY;
                 doMomentum = false;
-            } else if (clickButton == 1 && scissorAvailable) {
+            } else if (clickButton == 1) {
                 zoom = Math.max(1, initZoom + (clickY - Mouse.getY()));
             }
         } 
@@ -373,61 +439,7 @@ public class GuiHitechChisel extends GuiChisel {
         }
 
         String s = "Preview";
-        fontRendererObj.drawString("Preview", panel.x + (panel.width / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.y - 9, 0x404040);
-                
-        try {
-
-            BlockRendererDispatcher brd = this.mc.getBlockRendererDispatcher();
-            if (containerHitech.getTarget() != null) {
-                
-                ItemStack stack = containerHitech.getTarget().getStack();
-
-                if (stack != null) {
-
-                    GlStateManager.pushMatrix();
-
-                    GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
-
-                    // Makes zooming slower as zoom increases, but leaves 1 as the default zoom.
-                    double sc = buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9);
-                    GlStateManager.scale(-sc, -sc, -sc);
-
-                    GlStateManager.rotate(rotX, 1, 0, 0);
-                    GlStateManager.rotate(rotY, 0, 1, 0);
-                    GlStateManager.translate(-1.5, -2.5, -0.5);
-
-                    Block block = Block.getBlockFromItem(stack.getItem());
-                    IBlockState state = block.getStateFromMeta(stack.getMetadata());
-                    if (state instanceof IExtendedBlockState) {
-                        state = ((IExtendedBlockState) state).getClean();
-                    }
-
-                    fakeworld.setState(state);
-
-                    Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-                    Tessellator.getInstance().getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
-                    for (BlockPos pos : buttonPreview.getType().getPositions()) {
-                        brd.renderBlock(state, pos, fakeworld, Tessellator.getInstance().getBuffer());
-                    }
-
-                    if (scissorAvailable) {
-                        ScaledResolution sr = new ScaledResolution(mc);
-                        GL11.glEnable(GL11.GL_SCISSOR_TEST);
-                        GL11.glScissor((guiLeft + panel.x) * sr.getScaleFactor(), mc.displayHeight - ((guiTop + panel.y + panel.height) * sr.getScaleFactor()),
-                                panel.width * sr.getScaleFactor(), panel.height * sr.getScaleFactor());
-                    }
-                    Tessellator.getInstance().draw();
-                    if (scissorAvailable) {
-                        GL11.glDisable(GL11.GL_SCISSOR_TEST);
-                    }
-
-                    GlStateManager.popMatrix();
-                }
-            }
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        
+        fontRendererObj.drawString("Preview", panel.getX() + (panel.getWidth() / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
         GlStateManager.disableAlpha();
     }
     
@@ -481,8 +493,7 @@ public class GuiHitechChisel extends GuiChisel {
                 
                 PacketChiselButton.chiselAll(player, slots);
                 
-                String sound = container.getCarving().getVariationSound(target.getStack());
-                ClientUtil.playSound(player.world, new BlockPos(player), sound);
+                SoundUtil.playSound(player, containerHitech.getChisel(), CarvingUtils.getChiselRegistry().getVariation(target.getStack()).getBlockState());
                 
                 if (!isShiftDown()) {
                     List<Slot> dupes = containerHitech.getSelectionDuplicates();

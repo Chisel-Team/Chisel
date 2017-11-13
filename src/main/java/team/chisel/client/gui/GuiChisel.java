@@ -45,6 +45,17 @@ public class GuiChisel extends GuiContainer {
         super.onGuiClosed();
         inventorySlots.onContainerClosed(player);
     }
+    
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        
+        // if this is a selection slot, no double clicking
+        Slot slot = getSlotAtPosition(mouseX, mouseY); 
+        if (slot != null && slot.slotNumber < container.getInventoryChisel().size - 1) {
+            this.doubleClick = false;
+        }
+    }
 
     @Override
     public void initGui() {

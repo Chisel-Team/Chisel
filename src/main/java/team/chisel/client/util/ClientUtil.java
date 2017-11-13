@@ -16,9 +16,6 @@ import net.minecraft.client.particle.ParticleDigging;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.Timer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -34,14 +31,6 @@ public class ClientUtil {
             10, -45, 170)), new Vector3f(0.375f, 0.375f, 0.375f), null);
     @SuppressWarnings("null")
     public static final Matrix4f DEFAULT_BLOCK_THIRD_PERSON_MATRIX = DEFAULT_BLOCK_THIRD_PERSON_TRANSOFRM.getMatrix();
-
-    public static void playSound(World world, BlockPos pos, String sound) {
-        playSound(world, pos, sound, SoundCategory.BLOCKS);
-    }
-    
-    public static void playSound(World world, BlockPos pos, String sound, SoundCategory category) {
-        Minecraft.getMinecraft().world.playSound(pos, new SoundEvent(new ResourceLocation(sound)), category, 0.3f + 0.7f * world.rand.nextFloat(), 0.6f + 0.4f * world.rand.nextFloat(), true);
-    }
 
     public static void addHitEffects(World world, BlockPos pos, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);

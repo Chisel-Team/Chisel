@@ -1,3 +1,32 @@
+0.0.14:
+New
+- Carving registry now supports any kind of item/block, including unstackable items
+Changes
+- IMC has been rewritten, mods using the old IMC should update soon
+- Oredict variants have been removed. Mods wishing to add their own variants should use IMC. Users should seek out an external solution like ModTweaker.
+- Carving system has been rewritten in a few places to accomodate these major changes. New bugs may have been introduced.
+Fixes
+- #443 removing a variation also removes the group
+- Clean up ItemStack equality checks to ensure consistent behavior
+- #532 futura particles are broken, searching in the minecraft domain
+- #530 blue carpets have no description
+- #469 off-hand places blocks when opening chisel
+- #431 concrete/brownstone can accelerate to ludicrous speeds when underwater
+
+0.0.13:
+Fixes
+- In-world chiseling will now work on oredict variants
+- The iChisel target will now be considered for in-world chiseling
+- Fix #480 when CTM is missing, the missing mods GUI will now be displayed instead of just a crash
+
+0.0.12:
+New
+- Now requires version 0.2.0 of CTM or higher
+- IChiselItem now has a method to override the noise played
+- Add ice variants (Drullkus)
+Fixes
+- Remove debug block
+
 0.0.11:
 New
 - Most render logic moved to new mod, CTM

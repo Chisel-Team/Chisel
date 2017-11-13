@@ -223,15 +223,6 @@ public class GroupList implements Set<ICarvingGroup> {
 		return groups.get(groupName);
 	}
 
-	public ICarvingGroup getGroupByOre(String oreName) {
-		for (ICarvingGroup group : groups.values()) {
-			if (oreName.equals(group.getOreName())) {
-				return group;
-			}
-		}
-		return null;
-	}
-
 	public Collection<? extends String> getNames() {
 		return groups.keySet();
 	}
@@ -262,7 +253,6 @@ public class GroupList implements Set<ICarvingGroup> {
 			if (g == null) {
 				throw new IllegalArgumentException("No such group " + group);
 			}
-			groups.remove(g.getName());
 		}
 		List<VariationWrapper> toRemove = Lists.newArrayList();
 		for (VariationWrapper vw : lookup.keySet()) {
@@ -273,10 +263,10 @@ public class GroupList implements Set<ICarvingGroup> {
 		}
 		for (VariationWrapper vw : toRemove) {
 			lookup.remove(vw);
+	        if (vw.v.getBlockState() != null) {
+	            stateGroups.remove(vw.v.getBlockState());
+	        }
 		}
-        if (variation.getBlockState() != null) {
-            stateGroups.remove(variation.getBlockState());
-        }
 		return toRemove.isEmpty() ? null : toRemove.get(0).v;
 	}
 

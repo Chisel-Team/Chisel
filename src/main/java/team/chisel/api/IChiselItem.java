@@ -1,11 +1,13 @@
 package team.chisel.api;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.chisel.api.carving.ICarvingVariation;
@@ -106,6 +108,23 @@ public interface IChiselItem {
     boolean supportsMode(EntityPlayer player, IChiselMode mode);
     
     /**
+     * Allows this chisel to provide a different sound for the given {@link ICarvingVariation}.
+     * 
+     * @param world
+     *            World object.
+     * @param player
+     *            {@link EntityPlayer The player} holding the chisel
+     * @param chisel
+     *            The {@link ItemStack} representing the chisel
+     * @param next
+     *            The {@link IBlockState} representing the target
+     * @return A sound to play, instead of the variation's sound, or null for default.
+     */
+    default @Nullable SoundEvent getOverrideSound(World world, EntityPlayer player, ItemStack chisel, IBlockState next) {
+        return null;
+    }
+    
+    /**
      * Chisels a stack into another stack, taking into consideration this chisel's damage
      * 
      * @param chisel
@@ -120,7 +139,7 @@ public interface IChiselItem {
      * @return The result of the craft.
      */
     default ItemStack craftItem(ItemStack chisel, ItemStack source, ItemStack target, EntityPlayer player) {
-        int toCraft = source.stackSize;
+        int toCraft = Math.min(source.stackSize, target.getMaxStackSize());
         if (chisel.isItemStackDamageable()) {
             int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
             toCraft = Math.min(toCraft, damageLeft);

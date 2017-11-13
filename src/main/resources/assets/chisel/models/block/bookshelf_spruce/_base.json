@@ -1,0 +1,6 @@
+{
+	"parent": "chisel:block/base/sides_overlay",
+	"textures": {
+		"base": "blocks/planks_spruce"
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "chisel:blocks/laboratory/infocon-top",
+		"side": "chisel:blocks/laboratory/infocon-ctmh"
+	}
+}

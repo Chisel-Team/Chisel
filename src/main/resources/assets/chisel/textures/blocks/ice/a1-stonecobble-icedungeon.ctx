@@ -1,7 +1,0 @@
-{
-	"type":"NORMAL",
-	"textures":[
-        "./a1-stonecobble-icedungeon"
-    ],
-    "layer":"TRANSLUCENT"
-}

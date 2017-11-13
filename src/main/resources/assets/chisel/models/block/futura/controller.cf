@@ -4,5 +4,5 @@
         "./rainbowLines.ctx",
         "./linesPlating.ctx"
     ],
-    "particle":"controllerParticle.ctx"
+    "particle":"./controllerParticle.ctx"
 }

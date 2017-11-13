@@ -1,8 +1,0 @@
-{
-	"type":"CTMH",
-	"textures":[
-        "minecraft:blocks/planks_oak",
-        "./brim-ctmh"
-    ],
-    "layer":"CUTOUT"
-}

@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:ice/a1-stonecobble-icedungeon-side.cf",
-  "overrides":{
-    "UP":"chisel:ice/a1-stonecobble-icedungeon-top.cf",
-    "DOWN":"chisel:ice/a1-stonecobble-icedungeon-top.cf"
-  }
-}
