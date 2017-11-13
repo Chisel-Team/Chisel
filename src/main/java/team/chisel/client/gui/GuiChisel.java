@@ -17,12 +17,14 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.inventory.ContainerChisel;
 import team.chisel.common.inventory.InventoryChiselSelection;
 import team.chisel.common.inventory.SlotChiselInput;
 import team.chisel.common.item.ChiselMode;
+import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.NBTUtil;
 
 @ParametersAreNonnullByDefault
@@ -65,11 +67,16 @@ public class GuiChisel extends GuiContainer {
         Rectangle area = getModeButtonArea();
         int buttonsPerRow = area.getWidth() / 20;
         int padding = (area.getWidth() - (buttonsPerRow * 20)) / buttonsPerRow;
+        IChiselMode currentMode = NBTUtil.getChiselMode(container.getChisel());
         for (IChiselMode mode : ChiselMode.values()) {
             if (((IChiselItem) container.getChisel().getItem()).supportsMode(player, mode)) {
                 int x = area.getX() + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
                 int y = area.getY() + ((id / buttonsPerRow) * (20 + padding));
-                setButtonText(addButton(new ButtonChiselMode(id++, x, y, mode)));
+                ButtonChiselMode button = new ButtonChiselMode(id++, x, y, mode);
+                if (mode == currentMode) {
+                    button.enabled = false;
+                }
+                setButtonText(addButton(button));
             }
         }
     }
@@ -129,7 +136,9 @@ public class GuiChisel extends GuiContainer {
     protected void actionPerformed(GuiButton button) throws IOException {
         if (button instanceof ButtonChiselMode) {
             button.enabled = false;
-            NBTUtil.setChiselMode(container.getChisel(), ((ButtonChiselMode) button).getMode());
+            IChiselMode mode = ((ButtonChiselMode) button).getMode();
+            NBTUtil.setChiselMode(container.getChisel(), mode);
+            Chisel.network.sendToServer(new PacketChiselMode(container.getChiselSlot(), mode));
             for (GuiButton other : buttonList) {
                 if (other != button && other instanceof ButtonChiselMode) {
                     other.enabled = true;

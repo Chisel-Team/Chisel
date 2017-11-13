@@ -7,6 +7,8 @@ import java.util.LinkedHashSet;
 import java.util.Queue;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.Sets;
@@ -23,6 +25,7 @@ import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import team.chisel.Chisel;
 import team.chisel.api.carving.IChiselMode;
 
 @SuppressWarnings("null")
@@ -46,12 +49,12 @@ public enum ChiselMode implements IChiselMode {
         private final BlockPos NEG_ONE = new BlockPos(-1, -1, -1);
 
         @Override
-        public Iterable<MutableBlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side) {
+        public Iterable<BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side) {
             if (side.getAxisDirection() == AxisDirection.NEGATIVE) {
                 side = side.getOpposite();
             }
             Vec3i offset = side.getDirectionVec();
-            return BlockPos.getAllInBoxMutable(NEG_ONE.add(offset).add(pos), ONE.subtract(offset).add(pos));
+            return BlockPos.getAllInBox(NEG_ONE.add(offset).add(pos), ONE.subtract(offset).add(pos));
         }
         
         @Override
@@ -207,12 +210,24 @@ public enum ChiselMode implements IChiselMode {
         };
     }
 
-
     public static ChiselMode next(IChiselMode currentMode) {
         if (currentMode instanceof ChiselMode) {
             ChiselMode[] values = values();
             return values[(((ChiselMode) currentMode).ordinal() + 1) % values.length];
         }
         return SINGLE;
+    }
+    
+    @Nonnull
+    public static ChiselMode fromString(String mode) {
+        if (mode.isEmpty()) {
+            return ChiselMode.CONTIGUOUS;
+        }
+        try {
+            return ChiselMode.valueOf(mode);
+        } catch (IllegalArgumentException e) {
+            Chisel.logger.error("Invalid mode found saved on chisel: " + mode);
+            return ChiselMode.SINGLE;
+        }
     }
 }

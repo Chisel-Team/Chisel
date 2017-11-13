@@ -1,5 +1,7 @@
 package team.chisel.client.gui;
 
+import javax.annotation.Nonnull;
+
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -8,6 +10,7 @@ import team.chisel.api.carving.IChiselMode;
 public class ButtonChiselMode extends GuiButton {
 
     @Getter
+    @Nonnull
     private final IChiselMode mode;
     
     public ButtonChiselMode(int buttonId, int x, int y, IChiselMode mode) {
@@ -16,12 +19,12 @@ public class ButtonChiselMode extends GuiButton {
     }
     
     @Override
-    public void drawButton(Minecraft mc, int mouseX, int mouseY) {
+    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY) {
         super.drawButton(mc, mouseX, mouseY);
     }
     
     @Override
-    public boolean mousePressed(Minecraft mc, int mouseX, int mouseY) {
+    public boolean mousePressed(@Nonnull Minecraft mc, int mouseX, int mouseY) {
         return super.mousePressed(mc, mouseX, mouseY);
     }
 }

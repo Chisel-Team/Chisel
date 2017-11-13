@@ -39,7 +39,6 @@ import team.chisel.ctm.client.util.RegionCache;
 @ParametersAreNonnullByDefault
 public class ChiselModeGeometryCache implements IWorldEventListener {
     
-    @Setter
     private IChiselMode mode;
     @Setter
     private BlockPos origin;
@@ -59,6 +58,13 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         updateCache();
     }
     
+    public void setMode(IChiselMode mode) {
+        if (this.mode != mode) {
+            this.mode = mode;
+            updateCache();
+        }
+    }
+    
     protected boolean checkDirty() {
         return !Arrays.equals(cacheState, mode.getCacheState(origin, side));
     }
@@ -68,10 +74,10 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         this.candidateCache = Lists.newArrayList(mode.getCandidates(Minecraft.getMinecraft().player, origin, side)).stream().filter(pos -> Minecraft.getMinecraft().world.getBlockState(pos) == state).collect(Collectors.toList());
         this.candidateBounds = mode.getBounds(side).offset(origin);
         this.cacheState = mode.getCacheState(origin, side);
-        draw(Tessellator.getInstance().getBuffer(), state);
+        draw(state);
     }
     
-    private void draw(VertexBuffer buf, IBlockState state) {
+    private void draw(IBlockState state) {
 //        Pair<ResourceLocation, ResourceLocation> overlay = mode.getOverlayTex();
 //        TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
 //        TextureInfo info = new TextureInfo(new TextureAtlasSprite[] {map.getAtlasSprite(overlay.getLeft().toString()), map.getAtlasSprite(overlay.getRight().toString())}, Optional.empty(), BlockRenderLayer.TRANSLUCENT);
@@ -81,7 +87,7 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         RegionCache world = new RegionCache(origin, 20, Minecraft.getMinecraft().world);
         for (BlockPos pos : getCandidates()) {
             AxisAlignedBB bb = state.getSelectedBoundingBox(Minecraft.getMinecraft().world, pos);
-            drawCulledBox(buf, bb, world, pos);
+            drawCulledBox(bb, world, pos);
             // UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(DefaultVertexFormats.POSITION_COLOR);
             // float[] vpos = new float[]{ (float) bb.minX, (float) bb.minY, (float) bb.maxZ, (float) bb.maxX, (float) bb.minY, (float) bb.maxZ, (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ,
             // (float) bb.minX, (float) bb.maxY, (float) bb.maxZ };
@@ -102,7 +108,7 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         }
     }
 
-    private void drawCulledBox(VertexBuffer buf, AxisAlignedBB bb, IBlockAccess world, BlockPos pos) {
+    private void drawCulledBox(AxisAlignedBB bb, IBlockAccess world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
         if (state.shouldSideBeRendered(world, pos, EnumFacing.DOWN)) {
             pos(bb.maxX, bb.minY, bb.minZ);

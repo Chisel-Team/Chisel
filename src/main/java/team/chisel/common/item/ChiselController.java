@@ -79,7 +79,7 @@ public class ChiselController {
                 
                 variations = variations.stream().distinct().collect(Collectors.toList());
                         
-                int index = variations.indexOf(current.getBlockState());
+                int index = variations.indexOf(current);
                 index = player.isSneaking() ? index - 1 : index + 1;
                 index = (index + variations.size()) % variations.size();
                 

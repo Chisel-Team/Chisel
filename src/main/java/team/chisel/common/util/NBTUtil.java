@@ -88,15 +88,7 @@ public class NBTUtil {
 
     public static IChiselMode getChiselMode(@Nonnull ItemStack chisel) {
         String mode = getChiselTag(chisel).getString(KEY_MODE);
-        if (mode.isEmpty()) {
-            return ChiselMode.CONTIGUOUS;
-        }
-        try {
-            return ChiselMode.valueOf(mode);
-        } catch (IllegalArgumentException e) {
-            Chisel.logger.error("Invalid mode found saved on chisel: " + mode);
-            return ChiselMode.SINGLE;
-        }
+        return ChiselMode.fromString(mode);
 //        String name = chisel.stackTagCompound.getString(MODE_KEY);
 //        if (chisel.getItem() instanceof IAdvancedChisel) {
 //            return ((IAdvancedChisel) chisel.getItem()).getMode(chisel, name);

@@ -339,8 +339,8 @@ public class GuiHitechChisel extends GuiChisel {
             containerHitech.setTarget(containerHitech.getSlot(idx));
         }
 
-        // Rectangle area = getModeButtonArea();
-        // drawRect(area.x, area.y, area.x + area.width, area.y + area.height, 0x669999FF);
+        Rectangle area = getModeButtonArea();
+        drawRect(area.getX(), area.getY(), area.getX() + area.getWidth(), area.getY() + area.getHeight(), 0x669999FF);
 
         BlockRendererDispatcher brd = this.mc.getBlockRendererDispatcher();
         if (containerHitech.getTarget() != null) {
