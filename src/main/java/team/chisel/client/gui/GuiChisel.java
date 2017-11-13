@@ -1,12 +1,12 @@
 package team.chisel.client.gui;
 
-import java.awt.Rectangle;
 import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.Rectangle;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -63,12 +63,12 @@ public class GuiChisel extends GuiContainer {
 
         int id = 0;
         Rectangle area = getModeButtonArea();
-        int buttonsPerRow = area.width / 20;
-        int padding = (area.width - (buttonsPerRow * 20)) / buttonsPerRow;
+        int buttonsPerRow = area.getWidth() / 20;
+        int padding = (area.getWidth() - (buttonsPerRow * 20)) / buttonsPerRow;
         for (IChiselMode mode : ChiselMode.values()) {
             if (((IChiselItem) container.getChisel().getItem()).supportsMode(player, mode)) {
-                int x = area.x + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
-                int y = area.y + ((id / buttonsPerRow) * (20 + padding));
+                int x = area.getX() + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
+                int y = area.getY() + ((id / buttonsPerRow) * (20 + padding));
                 setButtonText(addButton(new ButtonChiselMode(id++, x, y, mode)));
             }
         }

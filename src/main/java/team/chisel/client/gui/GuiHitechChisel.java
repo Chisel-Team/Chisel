@@ -209,8 +209,8 @@ public class GuiHitechChisel extends GuiChisel {
     @Override
     public void initGui() {
         super.initGui();
-        int x = guiLeft + panel.x - 1;
-        int y = guiTop + panel.y + panel.height + 3;
+        int x = guiLeft + panel.getX() - 1;
+        int y = guiTop + panel.getY() + panel.getHeight() + 3;
         int w = 76, h = 20;
         int id = 10;
         
@@ -219,7 +219,7 @@ public class GuiHitechChisel extends GuiChisel {
         buttonList.add(buttonPreview = new PreviewModeButton(id++, x, y, w, h));
 
         buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, "Chisel"));
-        buttonList.add(buttonRotate = new RotateButton(id++, guiLeft + panel.x + panel.width - 16, guiTop + panel.y + panel.height - 16));
+        buttonList.add(buttonRotate = new RotateButton(id++, guiLeft + panel.getX() + panel.getWidth() - 16, guiTop + panel.getY() + panel.getHeight() - 16));
 
         ItemStack chisel = containerHitech.getChisel();
         
