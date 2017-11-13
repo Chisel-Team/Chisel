@@ -6,11 +6,9 @@ import com.google.common.collect.ImmutableSet;
 
 import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -23,7 +21,6 @@ import net.minecraftforge.fml.common.versioning.VersionRange;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import team.chisel.Chisel;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
@@ -65,12 +62,11 @@ public class ClientProxy extends CommonProxy {
     private void preInit_impl() {
         
         ModelLoaderRegistry.registerLoader(ModelLoaderChisel.INSTANCE);
+//        ModelLoaderRegistry.registerLoader(ModelChiselItem.Loader.INSTANCE);
         
-        ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselIron, 0, new ModelResourceLocation(Chisel.itemChiselIron.getRegistryName(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselDiamond, 0, new ModelResourceLocation(Chisel.itemChiselDiamond.getRegistryName(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselHitech, 0, new ModelResourceLocation(Chisel.itemChiselHitech.getRegistryName(), "inventory"));
-
-        ModelLoader.setCustomModelResourceLocation(Chisel.itemOffsetTool, 0, new ModelResourceLocation(Chisel.itemOffsetTool.getRegistryName(), "inventory"));
+//        ModelChiselItem.Loader.INSTANCE.addModel(Chisel.itemChiselIron);
+//        ModelChiselItem.Loader.INSTANCE.addModel(Chisel.itemChiselDiamond);
+//        ModelChiselItem.Loader.INSTANCE.addModel(Chisel.itemChiselHitech);
 
         // ModelBakery.addVariantName(Chisel.itemChisel, MOD_ID+":itemChisel");
         // MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());

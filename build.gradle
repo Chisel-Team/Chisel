@@ -85,6 +85,8 @@ task delombok(type: DelombokTask) {
 }
 
 // Add external annotations
+// Disabled for now
+/*
 eclipse.classpath.file {
 	withXml {
     	def node = it.asNode()
@@ -96,6 +98,7 @@ eclipse.classpath.file {
         }
     }
 }
+*/
 
 tasks.eclipse.dependsOn installLombok
 

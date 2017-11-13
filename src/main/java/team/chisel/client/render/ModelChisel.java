@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -81,7 +82,7 @@ public class ModelChisel implements IModelCTM {
     @Override
     public IBakedModel bake(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         Function<ResourceLocation, TextureAtlasSprite> dummyGetter = t -> Minecraft.getMinecraft().getTextureMapBlocks().getAtlasSprite(TextureMap.LOCATION_MISSING_TEXTURE.toString());
-        IBakedModel parent = bake(model, format, dummyGetter);
+        IBakedModel parent = bake(state, model, format, dummyGetter);
 
         layers = 0;
         for (ICTMTexture<?> tex : getChiselTextures()) {
@@ -102,8 +103,10 @@ public class ModelChisel implements IModelCTM {
         return new ModelChiselBlock(this, parent);
     }
     
-    private IBakedModel bake(Variant variant, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> getter) {
-        return getVanillaParent().bake(variant.getState(), format, getter);
+    private IBakedModel bake(IModelState state, Variant variant, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> getter) {
+        TRSRTransformation variantState = variant.getState().apply(Optional.absent()).or(TRSRTransformation.identity());
+        Optional<TRSRTransformation> parentState = state.apply(Optional.absent());
+        return getVanillaParent().bake(parentState.transform(trsr -> variantState.compose(trsr)).or(variantState), format, getter);
     }
     
     @SneakyThrows
