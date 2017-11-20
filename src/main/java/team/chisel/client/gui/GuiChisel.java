@@ -23,6 +23,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.inventory.ContainerChisel;
 import team.chisel.common.inventory.InventoryChiselSelection;
@@ -72,7 +73,7 @@ public class GuiChisel extends GuiContainer {
         int buttonsPerRow = area.getWidth() / 20;
         int padding = (area.getWidth() - (buttonsPerRow * 20)) / buttonsPerRow;
         IChiselMode currentMode = NBTUtil.getChiselMode(container.getChisel());
-        for (IChiselMode mode : ChiselMode.values()) {
+        for (IChiselMode mode : CarvingUtils.getModeRegistry().getAllModes()) {
             if (((IChiselItem) container.getChisel().getItem()).supportsMode(player, mode)) {
                 int x = area.getX() + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
                 int y = area.getY() + ((id / buttonsPerRow) * (20 + padding));
@@ -163,17 +164,7 @@ public class GuiChisel extends GuiContainer {
                 }
             }
         }
-//        if (button.id == 0) {
-//            if (container.chisel != null && container.chisel.getItem() instanceof IAdvancedChisel) {
-//                IAdvancedChisel items = (IAdvancedChisel) container.chisel.getItem();
-//                currentMode = items.getNextMode(container.chisel, currentMode);
-//                PacketHandler.INSTANCE.sendToServer(new MessageChiselMode(currentMode));
-//            } else {
-//                currentMode = ChiselMode.next(currentMode);
-//                PacketHandler.INSTANCE.sendToServer(new MessageChiselMode(currentMode));
-//                setButtonText();
-//            }
-//        }
+
         super.actionPerformed(button);
     }
     

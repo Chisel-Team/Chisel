@@ -8,8 +8,10 @@ import com.google.common.base.Strings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import team.chisel.Chisel;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.client.gui.PreviewType;
+import team.chisel.common.carving.ChiselModes;
 import team.chisel.common.item.ChiselMode;
 
 public class NBTUtil {
@@ -88,7 +90,7 @@ public class NBTUtil {
 
     public static IChiselMode getChiselMode(@Nonnull ItemStack chisel) {
         String mode = getChiselTag(chisel).getString(KEY_MODE);
-        return ChiselMode.fromString(mode);
+        return CarvingUtils.getModeRegistry().getModeByName(mode);
 //        String name = chisel.stackTagCompound.getString(MODE_KEY);
 //        if (chisel.getItem() instanceof IAdvancedChisel) {
 //            return ((IAdvancedChisel) chisel.getItem()).getMode(chisel, name);

@@ -47,6 +47,7 @@ public class CarvingUtils {
 	}
 
 	public static @Nullable ICarvingRegistry chisel;
+	public static @Nullable IModeRegistry modes;
 
 	/**
 	 * @return The instance of the chisel carving registry from the chisel mod.
@@ -55,6 +56,10 @@ public class CarvingUtils {
 	 */
 	public static @Nullable ICarvingRegistry getChiselRegistry() {
 		return chisel;
+	}
+	
+	public static @Nullable IModeRegistry getModeRegistry() {
+	    return modes;
 	}
 
 	/**

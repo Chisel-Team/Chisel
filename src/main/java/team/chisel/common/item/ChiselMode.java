@@ -7,7 +7,6 @@ import java.util.LinkedHashSet;
 import java.util.Queue;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
 import javax.vecmath.Point2i;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -22,11 +21,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.AxisDirection;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
-import team.chisel.Chisel;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 
 @SuppressWarnings("null")
@@ -210,26 +208,10 @@ public enum ChiselMode implements IChiselMode {
             }
         };
     }
-
-    public static ChiselMode next(IChiselMode currentMode) {
-        if (currentMode instanceof ChiselMode) {
-            ChiselMode[] values = values();
-            return values[(((ChiselMode) currentMode).ordinal() + 1) % values.length];
-        }
-        return SINGLE;
-    }
     
-    @Nonnull
-    public static ChiselMode fromString(String mode) {
-        if (mode.isEmpty()) {
-            return ChiselMode.CONTIGUOUS;
-        }
-        try {
-            return ChiselMode.valueOf(mode);
-        } catch (IllegalArgumentException e) {
-            Chisel.logger.error("Invalid mode found saved on chisel: " + mode);
-            return ChiselMode.SINGLE;
-        }
+    // Register all enum constants to the mode registry
+    {
+        CarvingUtils.getModeRegistry().registerMode(this);
     }
     
     @Override

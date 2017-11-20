@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.util.NBTUtil;
 
@@ -32,7 +33,7 @@ public class PacketChiselMode implements IMessage {
     @Override
     public void fromBytes(ByteBuf buf) {
         this.slot = buf.readInt();
-        this.mode = ChiselMode.fromString(ByteBufUtils.readUTF8String(buf));
+        this.mode = CarvingUtils.getModeRegistry().getModeByName(ByteBufUtils.readUTF8String(buf));
     }
 
     public static class Handler implements IMessageHandler<PacketChiselMode, IMessage> {
