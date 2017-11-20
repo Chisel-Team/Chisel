@@ -8,6 +8,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
 
+import com.google.common.collect.Lists;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -17,6 +19,8 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.client.config.GuiUtils;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.IChiselMode;
@@ -104,10 +108,24 @@ public class GuiChisel extends GuiContainer {
             y += 10;
         }
 
+        drawButtonTooltips(j, i);
 //        if (showMode()) {
 //            line = I18n.format(this.container.inventory.getInventoryName() + ".mode");
 //            fontRendererObj.drawString(line, fontRendererObj.getStringWidth(line) / 2 + 6, 85, 0x404040);
 //        }
+    }
+    
+    protected void drawButtonTooltips(int mx, int my) {
+        for (GuiButton button : buttonList) {
+            if (button.isMouseOver() && button instanceof ButtonChiselMode) {
+                String unloc = ((ButtonChiselMode)button).getMode().getUnlocName();
+                List<String> ttLines = Lists.newArrayList(
+                        I18n.format(unloc + ".name"),
+                        TextFormatting.GRAY + I18n.format(unloc + ".desc")
+                );
+                GuiUtils.drawHoveringText(ttLines, mx - guiLeft, my - guiTop, width - guiLeft, height - guiTop, -1, fontRendererObj);
+            }
+        }
     }
 
     @Override

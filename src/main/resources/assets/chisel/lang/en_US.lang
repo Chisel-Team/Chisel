@@ -12,6 +12,25 @@ item.chisel.chisel.desc.lc2=Target a block by leaving it in the inventory
 item.chisel.chisel.desc.modes=Has multiple chiseling modes.
 
 container.chisel.title=Chisel
+container.chisel.hitech.preview=Preview
+
+chisel.mode.single.name=Single
+chisel.mode.single.desc=Chisel a single block.
+
+chisel.mode.panel.name=Panel
+chisel.mode.panel.desc=Chisel a 3x3 square of blocks.
+
+chisel.mode.column.name=Column
+chisel.mode.column.desc=Chisel a 3x1 column of blocks.
+
+chisel.mode.row.name=Row
+chisel.mode.row.desc=Chisel a 1x3 row of blocks.
+
+chisel.mode.contiguous.name=Contiguous
+chisel.mode.contiguous.desc=Chisel an area of alike blocks, extending 10 blocks in any direciton.
+
+chisel.mode.contiguous_2d.name=Contiguous 2D
+chisel.mode.contiguous_2d.desc=Chisel an area of alike blocks, extending 10 blocks along the plane of the current side.
 
 itemGroup.chiselCreativeTab=Chisel
 chisel.jei.title=Chiseling

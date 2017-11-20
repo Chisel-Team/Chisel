@@ -8,6 +8,7 @@ import java.util.Queue;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
+import javax.vecmath.Point2i;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -229,5 +230,10 @@ public enum ChiselMode implements IChiselMode {
             Chisel.logger.error("Invalid mode found saved on chisel: " + mode);
             return ChiselMode.SINGLE;
         }
+    }
+    
+    @Override
+    public Point2i getSpritePos() {
+        return new Point2i((ordinal() % 10) * 24, (ordinal() / 10) * 24);
     }
 }

@@ -1,6 +1,7 @@
 package team.chisel.client.gui;
 
 import javax.annotation.Nonnull;
+import javax.vecmath.Point2i;
 
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
@@ -13,14 +14,17 @@ public class ButtonChiselMode extends GuiButton {
     @Nonnull
     private final IChiselMode mode;
     
-    public ButtonChiselMode(int buttonId, int x, int y, IChiselMode mode) {
-        super(buttonId, x, y, 20, 20, mode.name().substring(0, 1));
+    public ButtonChiselMode(int buttonId, int x, int y, @Nonnull IChiselMode mode) {
+        super(buttonId, x, y, 20, 20, "");
         this.mode = mode;
     }
     
     @Override
     public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY) {
         super.drawButton(mc, mouseX, mouseY);
+        mc.getTextureManager().bindTexture(mode.getSpriteSheet());
+        Point2i uv = mode.getSpritePos();
+        drawScaledCustomSizeModalRect(xPosition + 4, yPosition + 4, uv.x, uv.y, 24, 24, 12, 12, 256, 256);
     }
     
     @Override
