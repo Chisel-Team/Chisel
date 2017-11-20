@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.util.NBTUtil;
@@ -46,7 +47,7 @@ public class PacketChiselMode implements IMessage {
         public IMessage onMessage(PacketChiselMode message, MessageContext ctx) {
             ctx.getServerHandler().playerEntity.getServer().addScheduledTask(() -> {
                 ItemStack stack = ctx.getServerHandler().playerEntity.inventory.getStackInSlot(message.slot);
-                if (stack != null) {
+                if (stack != null && stack.getItem() instanceof IChiselItem && ((IChiselItem) stack.getItem()).supportsMode(ctx.getServerHandler().playerEntity, message.mode)) {
                     NBTUtil.setChiselMode(stack, message.mode);
                 }
             });
