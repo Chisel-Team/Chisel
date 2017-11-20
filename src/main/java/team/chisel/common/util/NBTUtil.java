@@ -1,5 +1,7 @@
 package team.chisel.common.util;
 
+import java.util.Optional;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -90,11 +92,8 @@ public class NBTUtil {
 
     public static IChiselMode getChiselMode(@Nonnull ItemStack chisel) {
         String mode = getChiselTag(chisel).getString(KEY_MODE);
-        return CarvingUtils.getModeRegistry().getModeByName(mode);
-//        String name = chisel.stackTagCompound.getString(MODE_KEY);
-//        if (chisel.getItem() instanceof IAdvancedChisel) {
-//            return ((IAdvancedChisel) chisel.getItem()).getMode(chisel, name);
-//        }
+        return Optional.ofNullable(CarvingUtils.getModeRegistry().getModeByName(mode))
+                .orElse(ChiselMode.SINGLE);
     }
 
     public static void setChiselMode(@Nonnull ItemStack chisel, @Nonnull IChiselMode mode) {

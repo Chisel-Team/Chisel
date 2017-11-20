@@ -30,10 +30,14 @@ public class PacketChiselMode implements IMessage {
         ByteBufUtils.writeUTF8String(buf, this.mode.name());
     }
 
+    @SuppressWarnings({ "null", "unused" })
     @Override
     public void fromBytes(ByteBuf buf) {
         this.slot = buf.readInt();
         this.mode = CarvingUtils.getModeRegistry().getModeByName(ByteBufUtils.readUTF8String(buf));
+        if (this.mode == null) {
+            this.mode = ChiselMode.SINGLE;
+        }
     }
 
     public static class Handler implements IMessageHandler<PacketChiselMode, IMessage> {
