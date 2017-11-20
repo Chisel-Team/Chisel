@@ -1,10 +1,5 @@
 package team.chisel.common.block;
 
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.base.Strings;
@@ -14,12 +9,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -35,8 +27,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.client.ClientUtil;
-import team.chisel.client.render.ModelChisel;
-import team.chisel.client.render.ModelChiselBlock;
 import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.PropertyAnyInteger;
 
@@ -137,7 +127,6 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
     public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
         int curIndex = 0;
         for (VariationData var : this.variations) {
