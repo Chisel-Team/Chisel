@@ -200,8 +200,8 @@ public enum ChiselMode implements IChiselMode {
                         BlockPos bp = ret.getPos().offset(face);
                         if (!seen.contains(bp) && world.getBlockState(bp) == state) {
                             search.offer(new Node(bp, ret.getDistance() + 1));
-                            seen.add(bp);
                         }
+                        seen.add(bp);
                     }
                 }
                 return ret.getPos();
