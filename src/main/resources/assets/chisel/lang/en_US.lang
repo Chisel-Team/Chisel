@@ -5,11 +5,12 @@ item.chisel.offsettool.name=Ender Offset Wand
 
 chisel.spawnwither=A Chisel can be a dangerous thing...
 
-item.chisel.chisel.desc.gui=Right-click to open GUI
-item.chisel.chisel.desc.lc1=Left-click to chisel blocks in the world
-item.chisel.chisel.desc.lc2=Target a block by leaving it in the inventory
+item.chisel.chisel.desc.gui=%sRight-click%s to open GUI
+item.chisel.chisel.desc.lc1=%sLeft-click%s to chisel blocks in the world
+item.chisel.chisel.desc.lc2=%sTarget a block%s by leaving it in the inventory
 
 item.chisel.chisel.desc.modes=Has multiple chiseling modes.
+item.chisel.chisel.desc.modes.selected=Selected mode: %s
 
 container.chisel.title=Chisel
 container.chisel.hitech.preview=Preview
