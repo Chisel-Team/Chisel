@@ -13,7 +13,7 @@ import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.client.gui.PreviewType;
-import team.chisel.common.carving.ChiselModes;
+import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.item.ChiselMode;
 
 public class NBTUtil {

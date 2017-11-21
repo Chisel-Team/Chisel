@@ -10,7 +10,7 @@ import javax.annotation.Nonnull;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.api.carving.IModeRegistry;
 
-public enum ChiselModes implements IModeRegistry {
+public enum ChiselModeRegistry implements IModeRegistry {
     
     INSTANCE;
     

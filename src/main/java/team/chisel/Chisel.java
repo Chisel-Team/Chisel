@@ -38,7 +38,7 @@ import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
-import team.chisel.common.carving.ChiselModes;
+import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselFuelHandler;
@@ -83,7 +83,7 @@ public class Chisel implements Reference {
     
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;
-        CarvingUtils.modes = ChiselModes.INSTANCE;
+        CarvingUtils.modes = ChiselModeRegistry.INSTANCE;
         ChiselMode.values(); // static init our modes
         ChiselAPIProps.MOD_ID = MOD_ID;
     }
