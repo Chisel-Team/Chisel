@@ -15,21 +15,23 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import team.chisel.Features;
+import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.init.ChiselItems;
-import team.chisel.common.integration.jei.ChiselRecipeHandler.CarvingGroupWrapper;
 
 @JEIPlugin
 @ParametersAreNonnullByDefault
 public class ChiselJEIPlugin implements IModPlugin {
     
+    @SuppressWarnings("null")
     private ChiselRecipeCategory category;
 
+    @SuppressWarnings("null")
     @Override
     public void register(IModRegistry registry){
 
-        registry.addRecipeHandlers(new ChiselRecipeHandler());
-        registry.addRecipes(Carving.chisel.getSortedGroupNames().stream().map(s -> Carving.chisel.getGroup(s)).map(g -> new CarvingGroupWrapper(g)).collect(Collectors.toList()), category.getUid());
+        registry.handleRecipes(ICarvingGroup.class, ChiselRecipeWrapper::new, "chisel.chiseling");
+        registry.addRecipes(Carving.chisel.getSortedGroupNames().stream().map(s -> Carving.chisel.getGroup(s)).collect(Collectors.toList()), category.getUid());
 
         if (Features.CHISEL.enabled()) {
             registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_iron), category.getUid());
