@@ -12,10 +12,10 @@ import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import team.chisel.Chisel;
+import team.chisel.Features;
 import team.chisel.common.carving.Carving;
-import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.integration.jei.ChiselRecipeHandler.CarvingGroupWrapper;
 
@@ -30,20 +30,22 @@ public class ChiselJEIPlugin implements IModPlugin {
 
         registry.addRecipeHandlers(new ChiselRecipeHandler());
         registry.addRecipes(Carving.chisel.getSortedGroupNames().stream().map(s -> Carving.chisel.getGroup(s)).map(g -> new CarvingGroupWrapper(g)).collect(Collectors.toList()), category.getUid());
-        
-        registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_iron), category.getUid());
-        registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_diamond), category.getUid());
-        registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_hitech), category.getUid());
+
+        if (Features.CHISEL.enabled()) {
+            registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_iron), category.getUid());
+            registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_diamond), category.getUid());
+            registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_hitech), category.getUid());
+        }
 
         ArrayList<ItemStack> itemStacks = new ArrayList<ItemStack>();
 
         for(int i = 0; i < 16; i++)
         {
-            itemStacks.add(new ItemStack(ChiselBlocks.concrete_powder, 1, i));
-            itemStacks.add(new ItemStack(ChiselBlocks.concrete, 1, i));
+            itemStacks.add(new ItemStack(Blocks.CONCRETE_POWDER, 1, i));
+            itemStacks.add(new ItemStack(Blocks.CONCRETE, 1, i));
         }
 
-        registry.addDescription(itemStacks, "jei.chisel.desc.concrete_making");
+        registry.addIngredientInfo(itemStacks, ItemStack.class, "jei.chisel.desc.concrete_making");
     }
 
     @Override
