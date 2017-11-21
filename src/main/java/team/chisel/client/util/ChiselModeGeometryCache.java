@@ -2,7 +2,6 @@ package team.chisel.client.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -13,7 +12,7 @@ import com.google.common.collect.Lists;
 
 import gnu.trove.list.TDoubleList;
 import gnu.trove.list.array.TDoubleArrayList;
-import lombok.Setter;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -32,6 +31,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.IWorldEventListener;
 import net.minecraft.world.World;
 import scala.actors.threadpool.Arrays;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.util.NonnullType;
 import team.chisel.ctm.client.util.RegionCache;
@@ -40,9 +41,7 @@ import team.chisel.ctm.client.util.RegionCache;
 public class ChiselModeGeometryCache implements IWorldEventListener {
     
     private IChiselMode mode;
-    @Setter
     private BlockPos origin;
-    @Setter
     private EnumFacing side;
     
     private long[] cacheState = {};
@@ -65,15 +64,44 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         }
     }
     
+    public void setOrigin(BlockPos origin) {
+        if (!this.origin.equals(origin)) {
+            this.origin = origin;
+            if (checkDirty()) {
+                updateCache();
+            }
+        }
+    }
+    
+    public void setSide(EnumFacing side) {
+        if (this.side != side) {
+            this.side = side;
+            if (checkDirty()) {
+                updateCache();
+            }
+        }
+    }
+    
+    public int size() {
+        return candidateCache.size();
+    }
+    
     protected boolean checkDirty() {
         return !Arrays.equals(cacheState, mode.getCacheState(origin, side));
     }
     
     protected void updateCache() {
         IBlockState state = Minecraft.getMinecraft().world.getBlockState(origin);
-        this.candidateCache = Lists.newArrayList(mode.getCandidates(Minecraft.getMinecraft().player, origin, side)).stream().filter(pos -> Minecraft.getMinecraft().world.getBlockState(pos) == state).collect(Collectors.toList());
-        this.candidateBounds = mode.getBounds(side).offset(origin);
-        this.cacheState = mode.getCacheState(origin, side);
+        ICarvingGroup group = CarvingUtils.getChiselRegistry().getGroup(state);
+        if (group != null) {
+            this.candidateCache = Lists.newArrayList(mode.getCandidates(Minecraft.getMinecraft().player, origin, side));
+            this.candidateBounds = mode.getBounds(side).offset(origin);
+            this.cacheState = mode.getCacheState(origin, side);
+        } else {
+            this.candidateCache.clear();
+            this.candidateBounds = Block.FULL_BLOCK_AABB.offset(origin);
+            this.cacheState = new long[0];
+        }
         draw(state);
     }
     

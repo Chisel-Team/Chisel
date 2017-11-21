@@ -15,9 +15,20 @@ import team.chisel.common.util.NonnullType;
 
 @ParametersAreNonnullByDefault
 public interface IChiselMode {
-    
+
+    /**
+     * Retrieve all valid positions that can be chiseled from where the player is targeting. Must consider state equality, if necessary.
+     * 
+     * @param player
+     *            The player.
+     * @param pos
+     *            The position of the targeted block.
+     * @param side
+     *            The side of the block being targeted.
+     * @return All valid positions to be chiseled.
+     */
     Iterable<@NonnullType ? extends BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side);
-    
+
     AxisAlignedBB getBounds(EnumFacing side);
     
 	/**

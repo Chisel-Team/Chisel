@@ -1,6 +1,7 @@
 package team.chisel.common.item;
 
 import java.util.ArrayDeque;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -53,7 +54,7 @@ public enum ChiselMode implements IChiselMode {
                 side = side.getOpposite();
             }
             Vec3i offset = side.getDirectionVec();
-            return BlockPos.getAllInBox(NEG_ONE.add(offset).add(pos), ONE.subtract(offset).add(pos));
+            return filteredIterable(Sets.newHashSet(BlockPos.getAllInBox(NEG_ONE.add(offset).add(pos), ONE.subtract(offset).add(pos))), player.world, player.world.getBlockState(pos));
         }
         
         @Override
@@ -86,7 +87,7 @@ public enum ChiselMode implements IChiselMode {
                     }
                 }
             }
-            return ret;
+            return filteredIterable(ret, player.world, player.world.getBlockState(pos));
         }
         
         @Override
@@ -120,7 +121,7 @@ public enum ChiselMode implements IChiselMode {
                     }
                 }
             }
-            return ret;
+            return filteredIterable(ret, player.world, player.world.getBlockState(pos));
         }
         
         @Override
@@ -207,6 +208,10 @@ public enum ChiselMode implements IChiselMode {
                 return ret.getPos();
             }
         };
+    }
+    
+    private static Iterable<BlockPos> filteredIterable(Collection<BlockPos> source, World world, IBlockState state) {
+        return source.stream().filter(p -> world.getBlockState(p) == state)::iterator;
     }
     
     // Register all enum constants to the mode registry

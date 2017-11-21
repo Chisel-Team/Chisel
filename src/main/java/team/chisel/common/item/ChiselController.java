@@ -140,6 +140,20 @@ public class ChiselController {
             
             IChiselMode mode = NBTUtil.getChiselMode(held);
             
+            if (cache == null) {
+                cache = new ChiselModeGeometryCache(mode, event.getTarget().getBlockPos(), event.getTarget().sideHit);
+                Minecraft.getMinecraft().world.addEventListener(cache);
+            } else {
+                cache.setMode(mode);
+                cache.setOrigin(event.getTarget().getBlockPos());
+                cache.setSide(event.getTarget().sideHit);
+            }
+            
+            // Don't bother rendering fancy for a single block
+            if (cache.size() <= 1) {
+                return;
+            }
+            
             double px = player.lastTickPosX + (player.posX - player.lastTickPosX) * event.getPartialTicks();
             double py = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.getPartialTicks();
             double pz = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.getPartialTicks();
@@ -151,15 +165,6 @@ public class ChiselController {
             GlStateManager.tryBlendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ZERO);
             GlStateManager.enableAlpha();
             GlStateManager.alphaFunc(GL11.GL_GREATER, 0);
-            
-            if (cache == null) {
-                cache = new ChiselModeGeometryCache(mode, event.getTarget().getBlockPos(), event.getTarget().sideHit);
-                Minecraft.getMinecraft().world.addEventListener(cache);
-            } else {
-                cache.setMode(mode);
-                cache.setOrigin(event.getTarget().getBlockPos());
-                cache.setSide(event.getTarget().sideHit);
-            }
 
             Tessellator.getInstance().getBuffer().setTranslation(-px, -py, -pz);
 
