@@ -2,7 +2,7 @@ package team.chisel.common.carving;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
@@ -14,7 +14,7 @@ public enum ChiselModes implements IModeRegistry {
     
     INSTANCE;
     
-    private final Map<String, IChiselMode> modes = new HashMap<>();
+    private final Map<String, IChiselMode> modes = new LinkedHashMap<>();
 
     @Override
     public void registerMode(@Nonnull IChiselMode mode) {
