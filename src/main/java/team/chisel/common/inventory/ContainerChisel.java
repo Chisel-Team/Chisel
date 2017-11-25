@@ -24,6 +24,7 @@ public class ContainerChisel extends Container {
     protected final InventoryChiselSelection inventoryChisel;
     protected final InventoryPlayer inventoryPlayer;
     
+    protected final EnumHand hand;
     protected final int chiselSlot;
     protected final ItemStack chisel;
     protected final ICarvingRegistry carving;
@@ -32,6 +33,7 @@ public class ContainerChisel extends Container {
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
         
+        this.hand = hand;
         this.chiselSlot = hand == EnumHand.MAIN_HAND ? inventoryplayer.currentItem : inventoryplayer.getSizeInventory() - 1;
         this.chisel = Optional.ofNullable(inventoryplayer.getStackInSlot(chiselSlot)).orElse(new ItemStack(Chisel.itemChiselIron));
         this.carving = Carving.chisel;

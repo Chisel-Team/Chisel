@@ -20,7 +20,7 @@ import team.chisel.api.carving.IChiselMode;
 public interface IChiselItem {
 
     /**
-     * Checks whether the chisel can have its GUI opened
+     * Checks whether the chisel can have its GUI opened, and will be called every tick to assure the GUI can <i>remain</i> open.
      * 
      * @param world
      *            {@link World} object
