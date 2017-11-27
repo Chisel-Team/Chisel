@@ -112,8 +112,13 @@ public class Chisel implements Reference {
         
         GameRegistry.register(itemOffsetTool);
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
+        if (!Configurations.chiselRecipe) {
+            GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
+            GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
+        } else {
+            GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " xx", " xx", "s  ", 'x', "ingotIron", 's', "stickWood"));
+            GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " xx", " xx", "s  ", 'x', "gemDiamond", 's', "stickWood"));
+        }
         GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
         GameRegistry.addRecipe(new ShapedOreRecipe(itemOffsetTool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron"));
         

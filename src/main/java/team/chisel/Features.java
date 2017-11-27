@@ -1229,7 +1229,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.factory, 32, 0), "SXS", "X X", "SXS",
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.factory, Configurations.factoryBlockAmount, 0), "SXS", "X X", "SXS",
                     'X', new ItemStack(Blocks.STONE, 1),
                     'S', new ItemStack(Items.IRON_INGOT, 1));
         }
@@ -2642,10 +2642,16 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory)
         {
+            if (Configurations.chiselStoneToCobbleBricks) {
+                Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(Blocks.STONE.getDefaultState(), -100));
+            }
+            
             IBlockState stoneBricks = Blocks.STONEBRICK.getDefaultState();
             IProperty<BlockStoneBrick.EnumType> prop = BlockStoneBrick.VARIANT;
             Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.DEFAULT), -26));
-            Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.MOSSY), -25));
+            if (Configurations.allowMossy) {
+                Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.MOSSY), -25));
+            }
             Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CRACKED), -24));
             Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CHISELED), -23));
 
