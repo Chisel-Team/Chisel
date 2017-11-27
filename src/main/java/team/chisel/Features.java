@@ -2689,6 +2689,7 @@ public enum Features {
                     .next("cuts")
                     .addOreDict("stone")
                     .addOreDict("brickStone")
+                    .addOreDict("bricksStone")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 
             factory.newBlock(Material.ROCK, "stonebrickextra", provider)
@@ -2704,6 +2705,7 @@ public enum Features {
                     .next("sunken")
                     .addOreDict("stone")
                     .addOreDict("brickStone")
+                    .addOreDict("bricksStone")
                     .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
         }
     },
