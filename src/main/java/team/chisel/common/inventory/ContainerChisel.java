@@ -128,10 +128,11 @@ public class ContainerChisel extends Container {
                     if (check == null) {
                         return null;
                     }
+                    if (!this.mergeItemStack(check, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
+                        return null;
+                    }
                     itemstack1 = selectslot.craft(entity, itemstack1, false);
-                }
-
-                if (!this.mergeItemStack(itemstack1, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
+                } else if (!this.mergeItemStack(itemstack1, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
                     return null;
                 }
             }

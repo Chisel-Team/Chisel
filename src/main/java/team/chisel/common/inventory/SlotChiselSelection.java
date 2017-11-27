@@ -33,11 +33,11 @@ public class SlotChiselSelection extends Slot {
     
     public ItemStack craft(EntityPlayer player, ItemStack itemstack, boolean simulate) {
         ItemStack heldStack = player.inventory.getItemStack();
-        ItemStack crafted = container.getInventoryChisel().inventory[container.getInventoryChisel().size];
+        ItemStack crafted = container.getInventoryChisel().getStackInSpecialSlot();
         ItemStack chisel = container.getChisel();
         if (simulate) {
             itemstack = itemstack.copy();
-            crafted = crafted.copy();
+            crafted = crafted == null ? null : crafted.copy();
             chisel = chisel.copy();
         }
         ItemStack res = null;
@@ -58,7 +58,7 @@ public class SlotChiselSelection extends Slot {
                         container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), null);
                         container.onChiselBroken();
                     }
-                    container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, crafted.stackSize == 0 ? null : crafted);
+                    container.getInventoryChisel().setStackInSpecialSlot(crafted.stackSize == 0 ? null : crafted);
                     container.onChiselSlotChanged();
                     item.onChisel(player.world, player, chisel, CarvingUtils.getChiselRegistry().getVariation(itemstack));
                 }
