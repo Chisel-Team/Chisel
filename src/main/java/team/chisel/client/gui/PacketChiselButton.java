@@ -84,7 +84,7 @@ public class PacketChiselButton implements IMessage {
                     if (chisel.isEmpty()) {
                         player.inventory.setInventorySlotContents(i, stack);
                         container.getInventoryChisel().getStackInSpecialSlot().shrink(toCraft);
-                        player.inventory.setInventorySlotContents(container.getChiselSlot(), null);
+                        player.inventory.setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
                         if (s.getCount() > toCraft) {
                             ItemStack remainder = s.copy();
                             remainder.shrink(toCraft);
