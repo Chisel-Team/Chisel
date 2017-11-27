@@ -77,7 +77,7 @@ public class GuiHitechChisel extends GuiChisel {
         
         private final void setType(PreviewType type) {
             this.type = type;
-            this.displayString = "< " + type.toString() + " >";
+            this.displayString = "< " + I18n.format(type.toString()) + " >";
         }
     }
     
@@ -219,7 +219,7 @@ public class GuiHitechChisel extends GuiChisel {
         
         buttonList.add(buttonPreview = new PreviewModeButton(id++, x, y, w, h));
 
-        buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, "Chisel"));
+        buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, I18n.format("container.chisel.hitech.chisel")));
         buttonList.add(buttonRotate = new RotateButton(id++, guiLeft + panel.getX() + panel.getWidth() - 16, guiTop + panel.getY() + panel.getHeight() - 16));
 
         ItemStack chisel = containerHitech.getChisel();
@@ -257,9 +257,9 @@ public class GuiHitechChisel extends GuiChisel {
         }
     
         if (isShiftDown()) {
-            buttonChisel.displayString = TextFormatting.YELLOW.toString() + "Chisel All";
+            buttonChisel.displayString = TextFormatting.YELLOW.toString() + I18n.format("container.chisel.hitech.chisel_all");
         } else {
-            buttonChisel.displayString = "Chisel";
+            buttonChisel.displayString = I18n.format("container.chisel.hitech.chisel");
         }
     }
     

@@ -14,6 +14,13 @@ item.chisel.chisel.desc.modes.selected=Selected mode: %s
 
 container.chisel.title=Chisel
 container.chisel.hitech.preview=Preview
+container.chisel.hitech.preview.panel=Panel
+container.chisel.hitech.preview.hollow=Hollow
+container.chisel.hitech.preview.plus=Plus
+container.chisel.hitech.preview.single=Single
+
+container.chisel.hitech.chisel=Chisel
+container.chisel.hitech.chisel_all=Chisel All
 
 chisel.mode.single.name=Single
 chisel.mode.single.desc=Chisel a single block.
