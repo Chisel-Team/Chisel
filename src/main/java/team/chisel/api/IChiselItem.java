@@ -58,7 +58,7 @@ public interface IChiselItem {
      *            The {@link ItemStack} representing the chisel
      * @param target
      *            The {@link ICarvingVariation} representing the target item
-     * @return True if the chisel should be damaged. False otherwise.
+     * @return Unused.
      */
     boolean onChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target);
 

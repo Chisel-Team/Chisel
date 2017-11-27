@@ -3,7 +3,11 @@ package team.chisel.common.item;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
+
 import org.lwjgl.opengl.GL11;
+
+import com.google.common.base.Preconditions;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -68,7 +72,9 @@ public class ChiselController {
                 if (blockGroup == sourceGroup) {
                     ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(target);
                     if (variation != null) {
-                        setAll(candidates, player, state, variation);
+                        if (variation.getBlockState() != null) {
+                            setAll(candidates, player, state, variation);
+                        }
                     } else {
                         Chisel.logger.warn("Found itemstack {} in group {}, but it has no variation!", target, sourceGroup.getName());
                     }
@@ -77,7 +83,7 @@ public class ChiselController {
                 ICarvingVariation current = registry.getVariation(state);
                 List<ICarvingVariation> variations = blockGroup.getVariations();
                 
-                variations = variations.stream().distinct().collect(Collectors.toList());
+                variations = variations.stream().filter(v -> v.getBlockState() != null).collect(Collectors.toList());
                         
                 int index = variations.indexOf(current);
                 index = player.isSneaking() ? index - 1 : index + 1;
@@ -97,7 +103,10 @@ public class ChiselController {
     /**
      * Assumes that the player is holding a chisel
      */
-    private static void setVariation(EntityPlayer player, BlockPos pos, IBlockState origState, ICarvingVariation v) {
+    private static void setVariation(EntityPlayer player, @Nonnull BlockPos pos, IBlockState origState, ICarvingVariation v) {
+        IBlockState targetState = v.getBlockState();
+        Preconditions.checkNotNull(targetState, "Variation state cannot be null!");
+        
         World world = player.world;
         IBlockState curState = world.getBlockState(pos);
         ItemStack held = player.getHeldItemMainhand();
@@ -109,18 +118,22 @@ public class ChiselController {
         }
 
         if (held != null && held.getItem() instanceof IChiselItem) {
-            world.setBlockState(pos, v.getBlockState());
+            world.setBlockState(pos, targetState);
 //            player.addStat(Statistics.blocksChiseled, 1); // TODO statistics
             boolean breakChisel = false;
-            if (((IChiselItem) player.getHeldItemMainhand().getItem()).onChisel(world, player, player.getHeldItemMainhand(), v)) {
-                player.getHeldItemMainhand().damageItem(1, player);
-                if (player.getHeldItemMainhand().stackSize <= 0) {
-                    player.inventory.mainInventory[player.inventory.currentItem] = null;
-                    breakChisel = true;
-                }
+            IChiselItem chisel = ((IChiselItem)held.getItem());
+            ItemStack current = CarvingUtils.getChiselRegistry().getVariation(curState).getStack();
+            current.stackSize = 1;
+            ItemStack target = v.getStack();
+            target.stackSize = 1;
+            chisel.craftItem(held, current, target, player);
+            chisel.onChisel(player.world, player, held, v);
+            if (held.stackSize <= 0) {
+                player.inventory.mainInventory[player.inventory.currentItem] = null;
+                breakChisel = true;
             }
             if (world.isRemote) {
-                SoundUtil.playSound(player, held, v.getBlockState());
+                SoundUtil.playSound(player, held, targetState);
                 ClientUtil.addDestroyEffects(world, pos, curState);
             }
         }

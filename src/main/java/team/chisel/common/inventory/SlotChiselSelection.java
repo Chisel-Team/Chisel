@@ -60,6 +60,7 @@ public class SlotChiselSelection extends Slot {
                     }
                     container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, crafted.stackSize == 0 ? null : crafted);
                     container.onChiselSlotChanged();
+                    item.onChisel(player.world, player, chisel, CarvingUtils.getChiselRegistry().getVariation(itemstack));
                 }
             }
 //        }
