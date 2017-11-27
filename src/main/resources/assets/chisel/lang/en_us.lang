@@ -1721,7 +1721,7 @@ tile.chisel.granite.poison.desc.1=Poison
 tile.chisel.granite.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.granite.cuts.desc.1=Cuts
 
-tile.chisel.hardenedclay.name=Hardened Clay
+tile.chisel.hardenedclay.name=Terracotta
 tile.chisel.hardenedclay.cracked.desc.1=Cracked
 tile.chisel.hardenedclay.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.hardenedclay.bricks-cracked.desc.1=Cracked Bricks
@@ -1748,7 +1748,6 @@ tile.chisel.hardenedclay.circularct.desc.1=Circular
 tile.chisel.hardenedclay.circularct.desc.2=Has CTM
 tile.chisel.hardenedclay.weaver.desc.1=Celtic
 tile.chisel.hardenedclay.bricks-chaotic.desc.1=Trodden Bricks
-tile.chisel.hardenedclay.name=Hardened Clay
 tile.chisel.hardenedclay.bricks-solid.desc.1=Bricks
 tile.chisel.hardenedclay.bricks-small.desc.1=Small Bricks
 tile.chisel.hardenedclay.circular.desc.1=Circular
