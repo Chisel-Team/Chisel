@@ -58,7 +58,7 @@ public class SlotChiselSelection extends Slot {
                 
                 IChiselItem item = (IChiselItem) container.getChisel().getItem();
                 ItemStack source = crafted.copy();
-                res = item.craftItem(chisel, source, itemstack, player);
+                res = item.craftItem(chisel, crafted, itemstack, player);
                 if (!simulate) {
                     if (chisel.getCount() == 0) {
                         container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
