@@ -135,7 +135,8 @@ public class ChiselController {
             chisel.craftItem(held, current, target, player);
             chisel.onChisel(player.world, player, held, v);
             if (held.stackSize <= 0) {
-                player.inventory.mainInventory[player.inventory.currentItem] = null;
+                ItemStack targetStack = NBTUtil.getChiselTarget(held);
+                player.inventory.mainInventory[player.inventory.currentItem] = targetStack;
                 breakChisel = true;
             }
             if (world.isRemote) {
