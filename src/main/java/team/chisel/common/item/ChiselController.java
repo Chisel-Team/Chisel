@@ -15,14 +15,20 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.item.EntityPainting;
+import net.minecraft.entity.item.EntityPainting.EnumArt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -144,7 +150,7 @@ public class ChiselController {
     @SubscribeEvent
     public static void onBlockHighlight(DrawBlockHighlightEvent event) {
         ItemStack held = event.getPlayer().getHeldItemMainhand();
-        if (held != null && held.getItem() instanceof IChiselItem) {
+        if (held != null && held.getItem() instanceof IChiselItem && event.getTarget().typeOfHit == Type.BLOCK) {
             EntityPlayer player = event.getPlayer();
             IBlockState state = player.world.getBlockState(event.getTarget().getBlockPos());
             if (state.getBlock() == Blocks.AIR) {
@@ -220,6 +226,24 @@ public class ChiselController {
         if (event.getHand() == EnumHand.OFF_HAND) {
             ItemStack mainhandStack = event.getEntityPlayer().getHeldItemMainhand();
             if (mainhandStack != null && mainhandStack.getItem() instanceof IChiselItem) {
+                event.setCanceled(true);
+            }
+        }
+    }
+    
+    @SubscribeEvent
+    public static void onLeftClickEntity(AttackEntityEvent event) {
+        if (event.getTarget() instanceof EntityPainting) {
+            ItemStack held = event.getEntityPlayer().getHeldItemMainhand();
+            if (held != null && held.getItem() instanceof IChiselItem) {
+                EntityPainting painting = (EntityPainting) event.getTarget();
+                EnumArt[] values = EnumArt.values();
+                do {
+                    painting.art = values[((painting.art.ordinal() + (event.getEntityPlayer().isSneaking() ? -1 : 1)) + values.length) % values.length];
+                    painting.updateFacingWithBoundingBox(painting.facingDirection);
+                } while (!painting.onValidSurface());
+                damageItem(held, event.getEntityPlayer());
+                event.getEntityPlayer().world.playSound(event.getEntityPlayer(), event.getTarget().getPosition(), SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.NEUTRAL, 1, 1);
                 event.setCanceled(true);
             }
         }
