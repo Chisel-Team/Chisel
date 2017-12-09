@@ -151,12 +151,7 @@ public class Chisel implements Reference {
         addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestoneextra, 1, 7), new ItemStack(ChiselBlocks.marbleextra, 1, 7));
 
         /*
-//        Example of IMC
-
-//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
-//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|1");
-//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|2");
-        
+//      Example of IMC
                 
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION.toString(), "marble|minecraft:dirt|0");
         NBTTagCompound testtag = new NBTTagCompound();

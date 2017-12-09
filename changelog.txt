@@ -1,3 +1,26 @@
+0.1.0:
+New
+- First beta release!
+- Chisel modes are back and better than ever. The diamond chisel supports the good old 4 modes you know and love, and the iChisel has two new extra-powerful modes for mass chiseling.
+- New sounds for chiseling dirt blocks
+- All config options are now functional
+- #86 Paintings can now be chiseled
+Changes
+- iChisel preview is now rendered with perspective
+- Did a pass over all sounds in the mod, to make sure they work on servers
+- Improve readability of chisel tooltips
+- Improvements to the IChiselItem API
+Fixes
+- #554 chiseled dirt does not have an effective tool
+- Ingot blocks will now work with oredictionary variants
+- Fixed all block harvest tools, should fix exploits with obsidian etc
+- #580 Items are no longer voided when shift clicking from the chisel results into a full inventory
+- #439 add "bricksStone" as oredict entry to chiseled stone bricks
+- Fix iChisel adding its NBT to non-chisel items when broken
+- #435 Fix target stack being deleted when chisel breaks during in-world chiseling
+- #185 Remove remaining hardcoded strings in iChisel GUI
+- #590 Drastically reduce the amount of logging from IMC messages
+
 0.0.14:
 New
 - Carving registry now supports any kind of item/block, including unstackable items

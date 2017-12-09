@@ -11,7 +11,6 @@ import com.google.common.collect.ImmutableSet;
 
 import lombok.Getter;
 import net.minecraft.util.math.BlockPos;
-import team.chisel.Chisel;
 
 @Getter 
 public enum PreviewType {
