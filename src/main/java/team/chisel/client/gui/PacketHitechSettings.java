@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import team.chisel.api.IChiselItem;
 import team.chisel.common.util.NBTUtil;
 
 @NoArgsConstructor
@@ -51,7 +52,7 @@ public class PacketHitechSettings implements IMessage {
         @Override
         public IMessage onMessage(PacketHitechSettings message, MessageContext ctx) {
             ItemStack stack = ctx.getServerHandler().player.inventory.getStackInSlot(message.chiselSlot);
-            if (stack != null) {
+            if (stack.getItem() instanceof IChiselItem) { // instanceof check for broken chisel
                 NBTUtil.setHitechType(stack, message.type);
                 NBTUtil.setHitechSelection(stack, message.selection);
                 NBTUtil.setHitechTarget(stack, message.target);

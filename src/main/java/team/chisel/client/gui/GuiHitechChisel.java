@@ -10,8 +10,8 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.Rectangle;
+import org.lwjgl.util.glu.Project;
 
 import com.google.common.base.Optional;
 
@@ -29,6 +29,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
@@ -38,9 +39,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.WorldType;
@@ -48,10 +47,10 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
-import team.chisel.client.ClientUtil;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
 import team.chisel.common.util.NBTUtil;
+import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
 public class GuiHitechChisel extends GuiChisel {
@@ -78,7 +77,7 @@ public class GuiHitechChisel extends GuiChisel {
         
         private final void setType(PreviewType type) {
             this.type = type;
-            this.displayString = "< " + type.toString() + " >";
+            this.displayString = "< " + I18n.format(type.toString()) + " >";
         }
     }
     
@@ -175,8 +174,6 @@ public class GuiHitechChisel extends GuiChisel {
         }
     }
     
-    private static final boolean scissorAvailable = GLContext.getCapabilities().OpenGL20;
-    
     private static final Rectangle panel = new Rectangle(8, 14, 74, 74);
     
     private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselGuiHitech.png");
@@ -193,7 +190,7 @@ public class GuiHitechChisel extends GuiChisel {
     private float prevRotX, prevRotY;
     private float momentumX, momentumY;
     private float momentumDampening = 0.98f;
-    private float rotX = -15, rotY, zoom = 1;
+    private float rotX = 165, rotY, zoom = 1;
     
     private int scrollAcc;
     
@@ -216,13 +213,13 @@ public class GuiHitechChisel extends GuiChisel {
         int x = guiLeft + panel.getX() - 1;
         int y = guiTop + panel.getY() + panel.getHeight() + 3;
         int w = 76, h = 20;
-        int id = 0;
+        int id = 10;
         
         boolean firstInit = buttonPreview == null;
         
         buttonList.add(buttonPreview = new PreviewModeButton(id++, x, y, w, h));
 
-        buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, "Chisel"));
+        buttonList.add(buttonChisel = new GuiButton(id++, x, y += h + 2, w, h, I18n.format("container.chisel.hitech.chisel")));
         buttonList.add(buttonRotate = new RotateButton(id++, guiLeft + panel.getX() + panel.getWidth() - 16, guiTop + panel.getY() + panel.getHeight() - 16));
 
         ItemStack chisel = containerHitech.getChisel();
@@ -241,6 +238,13 @@ public class GuiHitechChisel extends GuiChisel {
     }
     
     @Override
+    protected Rectangle getModeButtonArea() {
+        int down = 133;
+        int padding = 7;
+        return new Rectangle(guiLeft + padding, guiTop + down + padding, 76, ySize - down - (padding * 2));
+    }
+    
+    @Override
     public void updateScreen() {
         super.updateScreen();
         
@@ -253,9 +257,9 @@ public class GuiHitechChisel extends GuiChisel {
         }
     
         if (isShiftDown()) {
-            buttonChisel.displayString = TextFormatting.YELLOW.toString() + "Chisel All";
+            buttonChisel.displayString = TextFormatting.YELLOW.toString() + I18n.format("container.chisel.hitech.chisel_all");
         } else {
-            buttonChisel.displayString = "Chisel";
+            buttonChisel.displayString = I18n.format("container.chisel.hitech.chisel");
         }
     }
     
@@ -282,9 +286,9 @@ public class GuiHitechChisel extends GuiChisel {
     
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int mx, int my) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TEXTURE);
+        mc.getTextureManager().bindTexture(TEXTURE);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
         if (containerHitech.getSelection() != null) {
@@ -335,40 +339,7 @@ public class GuiHitechChisel extends GuiChisel {
 
             containerHitech.setTarget(containerHitech.getSlot(idx));
         }
-    }
-    
-    private void drawSlotHighlight(Slot slot, int u) {
-        drawTexturedModalRect(guiLeft + slot.xPos - 1, guiTop + slot.yPos - 1, u, 220, 18, 18);
-    }
-    
-    @SuppressWarnings("deprecation")
-    @Override
-    protected void drawGuiContainerForegroundLayer(int j, int i) {
-        boolean doMomentum = true;
-        if (panelClicked) {
-            if (clickButton == 0) {
-                prevRotX = rotX;
-                prevRotY = rotY;
-                rotX = initRotX + Mouse.getY() - clickY;
-                rotY = initRotY + Mouse.getX() - clickX;
-                momentumX = rotX - prevRotX;
-                momentumY = rotY - prevRotY;
-                doMomentum = false;
-            } else if (clickButton == 1 && scissorAvailable) {
-                zoom = Math.max(1, initZoom + (clickY - Mouse.getY()));
-            }
-        } 
-        
-        if (doMomentum) {
-            rotX += momentumX;
-            rotY += momentumY;
-            momentumX *= momentumDampening;
-            momentumY *= momentumDampening;
-        }
 
-        String s = "Preview";
-        fontRenderer.drawString("Preview", panel.getX() + (panel.getWidth() / 2) - (fontRenderer.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
-                
         BlockRendererDispatcher brd = this.mc.getBlockRendererDispatcher();
         if (containerHitech.getTarget() != null) {
 
@@ -380,9 +351,19 @@ public class GuiHitechChisel extends GuiChisel {
 
                 GlStateManager.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
 
+                GlStateManager.matrixMode(GL11.GL_PROJECTION);
+                GlStateManager.pushMatrix();
+                GlStateManager.loadIdentity();
+                int scale = new ScaledResolution(mc).getScaleFactor();
+                Project.gluPerspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000);
+                GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+                GlStateManager.translate(-panel.getX() - panel.getWidth() / 2, -panel.getY() - panel.getHeight() / 2, 0);
+                GlStateManager.viewport((guiLeft + panel.getX()) * scale, mc.displayHeight - (guiTop + panel.getY() + panel.getHeight()) * scale, panel.getWidth() * scale, panel.getHeight() * scale);
+                GlStateManager.clear(GL11.GL_DEPTH_BUFFER_BIT);
+
                 // Makes zooming slower as zoom increases, but leaves 1 as the default zoom.
-                double sc = buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9);
-                GlStateManager.scale(-sc, -sc, -sc);
+                double sc = 300 + 8 * buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9);
+                GlStateManager.scale(-sc, -sc, sc);
 
                 GlStateManager.rotate(rotX, 1, 0, 0);
                 GlStateManager.rotate(rotY, 0, 1, 0);
@@ -399,39 +380,67 @@ public class GuiHitechChisel extends GuiChisel {
 
                     fakeworld.setState(state);
 
-                    Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                    mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
                     Tessellator.getInstance().getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
                     try {
                         for (BlockPos pos : buttonPreview.getType().getPositions()) {
                             brd.renderBlock(state, pos, fakeworld, Tessellator.getInstance().getBuffer());
                         }
-
-                        if (scissorAvailable) {
-                            ScaledResolution sr = new ScaledResolution(mc);
-                            GL11.glEnable(GL11.GL_SCISSOR_TEST);
-                            GL11.glScissor((guiLeft + panel.getX()) * sr.getScaleFactor(), mc.displayHeight - ((guiTop + panel.getY() + panel.getHeight()) * sr.getScaleFactor()),
-                                    panel.getWidth() * sr.getScaleFactor(), panel.getHeight() * sr.getScaleFactor());
-                        }
                     } catch (Exception e) {
                         erroredState = state;
-                        Chisel.logger.error("Exception rendering block " + state, e);
+                        Chisel.logger.error("Exception rendering block {}", state, e);
                     } finally {
                         if (erroredState == null) {
                             Tessellator.getInstance().draw();
+                        } else {
+                            Tessellator.getInstance().getBuffer().finishDrawing();
                         }
-                        if (scissorAvailable) {
-                            GL11.glDisable(GL11.GL_SCISSOR_TEST);
-                        }
-
-                        GlStateManager.popMatrix();
                     }
-                } else {
-                    GlStateManager.popMatrix();
                 }
+
+                GlStateManager.popMatrix();
+                GlStateManager.matrixMode(GL11.GL_PROJECTION);
+                GlStateManager.popMatrix();
+                GlStateManager.matrixMode(GL11.GL_MODELVIEW);
+                GlStateManager.viewport(0, 0, mc.displayWidth, mc.displayHeight);
             }
         }
+    }
+    
+    private void drawSlotHighlight(Slot slot, int u) {
+        drawTexturedModalRect(guiLeft + slot.xDisplayPosition - 1, guiTop + slot.yDisplayPosition - 1, u, 220, 18, 18);
+    }
+    
+    @SuppressWarnings("deprecation")
+    @Override
+    protected void drawGuiContainerForegroundLayer(int j, int i) {
+        boolean doMomentum = true;
+        if (panelClicked) {
+            if (clickButton == 0) {
+                prevRotX = rotX;
+                prevRotY = rotY;
+                rotX = initRotX + Mouse.getY() - clickY;
+                rotY = initRotY + Mouse.getX() - clickX;
+                momentumX = rotX - prevRotX;
+                momentumY = rotY - prevRotY;
+                doMomentum = false;
+            } else if (clickButton == 1) {
+                zoom = Math.max(1, initZoom + (clickY - Mouse.getY()));
+            }
+        } 
+        
+        if (doMomentum) {
+            rotX += momentumX;
+            rotY += momentumY;
+            momentumX *= momentumDampening;
+            momentumY *= momentumDampening;
+        }
 
+        String s = I18n.format("container.chisel.hitech.preview");
+        fontRendererObj.drawString(s, panel.getX() + (panel.getWidth() / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
         GlStateManager.disableAlpha();
+        
+        drawButtonTooltips(j, i);
     }
     
     @Override
@@ -484,7 +493,7 @@ public class GuiHitechChisel extends GuiChisel {
                 
                 PacketChiselButton.chiselAll(player, slots);
                 
-                ClientUtil.playSound(player.world, player, containerHitech.getChisel(), CarvingUtils.getChiselRegistry().getVariation(target.getStack()).getBlockState());
+                SoundUtil.playSound(player, containerHitech.getChisel(), CarvingUtils.getChiselRegistry().getVariation(target.getStack()).getBlockState());
                 
                 if (!isShiftDown()) {
                     List<Slot> dupes = containerHitech.getSelectionDuplicates();

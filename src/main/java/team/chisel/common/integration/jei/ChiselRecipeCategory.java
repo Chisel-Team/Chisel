@@ -67,7 +67,6 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
         }
     }
 
-    @SuppressWarnings("null")
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IFocus<?> focus = (this.focus = recipeLayout.getFocus());

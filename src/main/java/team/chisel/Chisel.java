@@ -7,28 +7,17 @@ import javax.annotation.Nonnull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.google.common.collect.ImmutableSet;
-
-import lombok.SneakyThrows;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockColored;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.MissingModsException;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
@@ -38,14 +27,10 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.versioning.DefaultArtifactVersion;
-import net.minecraftforge.fml.common.versioning.VersionRange;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import team.chisel.api.ChiselAPIProps;
-import team.chisel.api.IMC;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.client.gui.PacketChiselButton;
@@ -53,14 +38,18 @@ import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
+import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselFuelHandler;
+import team.chisel.common.init.ChiselSounds;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
+import team.chisel.common.item.ChiselMode;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.item.ItemOffsetTool;
+import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
@@ -90,15 +79,20 @@ public class Chisel implements Reference {
         network.registerMessage(PacketChiselButton.Handler.class, PacketChiselButton.class, 0, Side.SERVER);
         network.registerMessage(PacketHitechSettings.Handler.class, PacketHitechSettings.class, 1, Side.SERVER);
         network.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, 2, Side.CLIENT);
+        network.registerMessage(PacketChiselMode.Handler.class, PacketChiselMode.class, 3, Side.SERVER);
     }
     
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;
+        CarvingUtils.modes = ChiselModeRegistry.INSTANCE;
+        ChiselMode.values(); // static init our modes
         ChiselAPIProps.MOD_ID = MOD_ID;
     }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        ChiselSounds.init();
+        
         proxy.construct(event);
 
         File configFile = event.getSuggestedConfigurationFile();
@@ -119,8 +113,13 @@ public class Chisel implements Reference {
 
         GameRegistry.register(itemOffsetTool);
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
-        GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
+        if (!Configurations.chiselRecipe) {
+            GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " x", "s ", 'x', "ingotIron", 's', "stickWood"));
+            GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood"));
+        } else {
+            GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselIron, " xx", " xx", "s  ", 'x', "ingotIron", 's', "stickWood"));
+            GameRegistry.addRecipe(new ShapedOreRecipe(itemChiselDiamond, " xx", " xx", "s  ", 'x', "gemDiamond", 's', "stickWood"));
+        }
         GameRegistry.addRecipe(new ShapelessOreRecipe(itemChiselHitech, itemChiselDiamond, "dustRedstone", "ingotGold"));
         GameRegistry.addRecipe(new ShapedOreRecipe(itemOffsetTool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron"));
 
@@ -153,12 +152,7 @@ public class Chisel implements Reference {
         addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestone2, 1, 7), new ItemStack(ChiselBlocks.marble2, 1, 7));
 
         /*
-//        Example of IMC
-
-//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
-//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|1");
-//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|2");
-        
+//      Example of IMC
                 
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION.toString(), "marble|minecraft:dirt|0");
         NBTTagCompound testtag = new NBTTagCompound();
@@ -242,6 +236,11 @@ public class Chisel implements Reference {
         for (FMLInterModComms.IMCMessage msg : event.getMessages()) {
             IMCHandler.INSTANCE.handleMessage(msg);
         }
+        IMCHandler.INSTANCE.imcCounts.forEachEntry((s, c) -> {
+            Chisel.logger.info("Received {} IMC messages from mod {}.", c, s);
+            return true;
+        });
+        IMCHandler.INSTANCE.imcCounts.clear();
     }
 
     @Mod.EventHandler //TODO fix

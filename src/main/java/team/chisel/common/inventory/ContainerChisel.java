@@ -22,6 +22,7 @@ public class ContainerChisel extends Container {
     protected final InventoryChiselSelection inventoryChisel;
     protected final InventoryPlayer inventoryPlayer;
     
+    protected final EnumHand hand;
     protected final int chiselSlot;
     protected final ItemStack chisel;
     protected final ICarvingRegistry carving;
@@ -30,6 +31,7 @@ public class ContainerChisel extends Container {
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
         
+        this.hand = hand;
         this.chiselSlot = hand == EnumHand.MAIN_HAND ? inventoryplayer.currentItem : inventoryplayer.getSizeInventory() - 1;
         this.chisel = inventoryplayer.getStackInSlot(chiselSlot);
         this.carving = Carving.chisel;
@@ -124,10 +126,12 @@ public class ContainerChisel extends Container {
                     if (check.isEmpty()) {
                         return ItemStack.EMPTY;
                     }
+                    if (!this.mergeItemStack(check, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
+                        return null;
+                    }
                     itemstack1 = selectslot.craft(entity, itemstack1, false);
-                }
 
-                if (!this.mergeItemStack(itemstack1, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
+                } else if (!this.mergeItemStack(itemstack1, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
                     return ItemStack.EMPTY;
                 }
             }

@@ -7,9 +7,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.IChiselMode;
 
 /**
  * Implement this on items which can be used to chisel blocks.
@@ -18,7 +20,7 @@ import team.chisel.api.carving.ICarvingVariation;
 public interface IChiselItem {
 
     /**
-     * Checks whether the chisel can have its GUI opened
+     * Checks whether the chisel can have its GUI opened, and will be called every tick to assure the GUI can <i>remain</i> open.
      * 
      * @param world
      *            {@link World} object
@@ -56,7 +58,7 @@ public interface IChiselItem {
      *            The {@link ItemStack} representing the chisel
      * @param target
      *            The {@link ICarvingVariation} representing the target item
-     * @return True if the chisel should be damaged. False otherwise.
+     * @return Unused.
      */
     boolean onChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target);
 
@@ -95,15 +97,15 @@ public interface IChiselItem {
     boolean canChiselBlock(World world, EntityPlayer player, EnumHand hand, BlockPos pos, IBlockState state);
 
     /**
-     * Allows you to control if your item has chiseling modes.
+     * Allows you to control if your item supports a given chisel mode.
      * 
      * @param player
      *            {@link EntityPlayer The player} holding the chisel.
-     * @param hand
-     *            The {@link EnumHand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
-     * @return True if the chisel supports modes. False otherwise.
+     * @param mode
+     *            The current {@link IChiselMode}.
+     * @return True if the chisel supports this mode. False otherwise.
      */
-    boolean hasModes(EntityPlayer player, EnumHand hand);
+    boolean supportsMode(EntityPlayer player, IChiselMode mode);
     
     /**
      * Allows this chisel to provide a different sound for the given {@link ICarvingVariation}.
@@ -118,7 +120,7 @@ public interface IChiselItem {
      *            The {@link IBlockState} representing the target
      * @return A sound to play, instead of the variation's sound, or null for default.
      */
-    default @Nullable String getOverrideSound(World world, EntityPlayer player, ItemStack chisel, IBlockState next) {
+    default @Nullable SoundEvent getOverrideSound(World world, EntityPlayer player, ItemStack chisel, IBlockState next) {
         return null;
     }
     

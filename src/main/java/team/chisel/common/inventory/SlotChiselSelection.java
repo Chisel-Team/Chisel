@@ -13,7 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
-import team.chisel.client.ClientUtil;
+import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
 public class SlotChiselSelection extends Slot {
@@ -41,7 +41,7 @@ public class SlotChiselSelection extends Slot {
         ItemStack chisel = container.getChisel();
         if (simulate) {
             itemstack = itemstack.copy();
-            crafted = crafted.copy();
+            crafted = crafted == null ? null : crafted.copy();
             chisel = chisel.copy();
         }
         ItemStack res = null;
@@ -64,8 +64,9 @@ public class SlotChiselSelection extends Slot {
                         container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
                         container.onChiselBroken();
                     }
-                    container.getInventoryChisel().setInventorySlotContents(container.getInventoryChisel().size, source);
+                    container.getInventoryChisel().setStackInSpecialSlot(crafted.getCount() == 0 ? ItemStack.EMPTY : crafted);
                     container.onChiselSlotChanged();
+                    item.onChisel(player.world, player, chisel, CarvingUtils.getChiselRegistry().getVariation(itemstack));
                 }
             }
 //        }
@@ -74,7 +75,7 @@ public class SlotChiselSelection extends Slot {
             container.getInventoryChisel().updateItems();
             container.detectAndSendChanges();
 
-            if (player.world.isRemote) {
+//            if (player.world.isRemote) {
                 ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(crafted);
                 IBlockState state = v == null ? null : v.getBlockState();
                 if (state == null) {
@@ -84,10 +85,10 @@ public class SlotChiselSelection extends Slot {
                         state = Blocks.STONE.getDefaultState(); // fallback
                     }
                 }
-                ClientUtil.playSound(player.world, player, chisel, state);
-            } else {
-                // container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.stackSize);
-            }
+                SoundUtil.playSound(player, chisel, state);
+//            } else {
+//                // container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.stackSize);
+//            }
         }
         
         return res;

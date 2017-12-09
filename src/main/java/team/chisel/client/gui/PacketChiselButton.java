@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.inventory.ContainerChiselHitech;
+import team.chisel.common.util.SoundUtil;
 
 @NoArgsConstructor
 public class PacketChiselButton implements IMessage {
@@ -67,9 +68,12 @@ public class PacketChiselButton implements IMessage {
             if (chisel.isEmpty() || target.isEmpty()) {
                 return;
             }
+            
+            boolean playSound = false;
 
             for (int i : slots) {
-                Optional.ofNullable(player.inventory.getStackInSlot(i)).ifPresent((@Nonnull ItemStack s) -> {
+                ItemStack s = player.inventory.getStackInSlot(i);
+                if (s != null) {
                     if (carving.getGroup(target) != carving.getGroup(s)) {
                         return;
                     }
@@ -100,10 +104,16 @@ public class PacketChiselButton implements IMessage {
                     } else {
                         player.inventory.setInventorySlotContents(i, stack);
                     }
-                });
+                    
+                    playSound = true;
+                }
                 if (chisel.getCount() < 1) {
                     return;
                 }
+            }
+            
+            if (playSound) {
+                SoundUtil.playSound(player, chisel, carving.getVariation(target).getBlockState());
             }
         }
     }

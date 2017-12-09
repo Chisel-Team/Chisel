@@ -1,5 +1,6 @@
 package team.chisel.api.block;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.Block;
@@ -47,11 +48,11 @@ public class ChiselBlockFactory {
         });
     }
 
-
-    /**
-     * Test
-     */
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockProvider<T> provider) {
-        return new ChiselBlockBuilder<T>(material, domain, blockName, provider);
+        return newBlock(material, blockName, blockName, provider);
+    }
+    
+    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, @Nullable String group, BlockProvider<T> provider) {
+        return new ChiselBlockBuilder<T>(material, domain, blockName, group, provider);
     }
 }
