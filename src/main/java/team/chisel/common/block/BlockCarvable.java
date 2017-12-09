@@ -57,7 +57,7 @@ public class BlockCarvable extends Block implements ICarvable {
         this.index = index;
         this.variations = variations;
         this.maxVariation = max;
-        this.metaProp = PropertyAnyInteger.create("variation", 0, max > index * 16 ? 15 : max % 16);
+        this.metaProp = PropertyAnyInteger.create("variation", 0, max > index * 16 ? 15 : max % 16, i -> !getVariationData(i).name.isEmpty());
         this.states = new BlockStateContainer(this, metaProp);
         setDefaultState(getBlockState().getBaseState());
     }

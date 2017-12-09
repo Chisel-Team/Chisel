@@ -1,6 +1,7 @@
 package team.chisel.common.util;
 
 import java.util.Set;
+import java.util.function.IntPredicate;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -19,7 +20,7 @@ public class PropertyAnyInteger extends PropertyHelper<Integer> {
     @Getter
     private final ImmutableSet<Integer> allowedValues;
 
-    protected PropertyAnyInteger(String name, int min, int max) {
+    protected PropertyAnyInteger(String name, int min, int max, IntPredicate predicate) {
         super(name, Integer.class);
 
         if (min < 0) {
@@ -28,7 +29,7 @@ public class PropertyAnyInteger extends PropertyHelper<Integer> {
             throw new IllegalArgumentException("Max value of " + name + " must be greater than min (" + min + ")");
         } else {
             Set<Integer> set = Sets.newHashSet();
-            for (int i = min; i <= max; ++i) {
+            for (int i = min; i <= max && predicate.test(i); ++i) {
                 set.add(Integer.valueOf(i));
             }
             this.allowedValues = ImmutableSet.copyOf(set);
@@ -36,7 +37,11 @@ public class PropertyAnyInteger extends PropertyHelper<Integer> {
     }
 
     public static PropertyAnyInteger create(String name, int min, int max) {
-        return new PropertyAnyInteger(name, min, max);
+        return create(name, min, max, i -> true);
+    }
+    
+    public static PropertyAnyInteger create(String name, int min, int max, IntPredicate predicate) {
+        return new PropertyAnyInteger(name, min, max, predicate);
     }
 
     @Override
