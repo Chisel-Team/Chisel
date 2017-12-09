@@ -46,6 +46,7 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import team.chisel.Chisel;
+import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
@@ -268,7 +269,7 @@ public class GuiHitechChisel extends GuiChisel {
         super.onGuiClosed();
 
         ItemStack stack = containerHitech.getChisel();
-        if (stack == null) {
+        if (!(stack.getItem() instanceof IChiselItem)) {
             return;
         }
 
@@ -300,7 +301,7 @@ public class GuiHitechChisel extends GuiChisel {
                 }
             }
         }
-        if (containerHitech.getTarget() != null && containerHitech.getTarget().getStack() != null) {
+        if (containerHitech.getTarget() != null && !containerHitech.getTarget().getStack().isEmpty()) {
             drawSlotHighlight(containerHitech.getTarget(), 36);
         }
 
@@ -345,7 +346,7 @@ public class GuiHitechChisel extends GuiChisel {
 
             ItemStack stack = containerHitech.getTarget().getStack();
 
-            if (stack != null) {
+            if (!stack.isEmpty()) {
 
                 GlStateManager.pushMatrix();
 
@@ -408,7 +409,7 @@ public class GuiHitechChisel extends GuiChisel {
     }
     
     private void drawSlotHighlight(Slot slot, int u) {
-        drawTexturedModalRect(guiLeft + slot.xDisplayPosition - 1, guiTop + slot.yDisplayPosition - 1, u, 220, 18, 18);
+        drawTexturedModalRect(guiLeft + slot.xPos - 1, guiTop + slot.yPos - 1, u, 220, 18, 18);
     }
     
     @SuppressWarnings("deprecation")
@@ -437,7 +438,7 @@ public class GuiHitechChisel extends GuiChisel {
         }
 
         String s = I18n.format("container.chisel.hitech.preview");
-        fontRendererObj.drawString(s, panel.getX() + (panel.getWidth() / 2) - (fontRendererObj.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
+        fontRenderer.drawString(s, panel.getX() + (panel.getWidth() / 2) - (fontRenderer.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
         GlStateManager.disableAlpha();
         
         drawButtonTooltips(j, i);

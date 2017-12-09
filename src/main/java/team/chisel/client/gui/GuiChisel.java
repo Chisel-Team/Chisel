@@ -124,7 +124,7 @@ public class GuiChisel extends GuiContainer {
                         I18n.format(unloc + ".name"),
                         TextFormatting.GRAY + I18n.format(unloc + ".desc")
                 );
-                GuiUtils.drawHoveringText(ttLines, mx - guiLeft, my - guiTop, width - guiLeft, height - guiTop, -1, fontRendererObj);
+                GuiUtils.drawHoveringText(ttLines, mx - guiLeft, my - guiTop, width - guiLeft, height - guiTop, -1, fontRenderer);
             }
         }
     }

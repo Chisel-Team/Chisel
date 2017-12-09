@@ -73,7 +73,7 @@ public class PacketChiselButton implements IMessage {
 
             for (int i : slots) {
                 ItemStack s = player.inventory.getStackInSlot(i);
-                if (s != null) {
+                if (!s.isEmpty()) {
                     if (carving.getGroup(target) != carving.getGroup(s)) {
                         return;
                     }

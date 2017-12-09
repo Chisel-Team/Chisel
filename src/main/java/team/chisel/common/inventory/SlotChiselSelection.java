@@ -41,10 +41,10 @@ public class SlotChiselSelection extends Slot {
         ItemStack chisel = container.getChisel();
         if (simulate) {
             itemstack = itemstack.copy();
-            crafted = crafted == null ? null : crafted.copy();
+            crafted = crafted.isEmpty() ? ItemStack.EMPTY : crafted.copy();
             chisel = chisel.copy();
         }
-        ItemStack res = null;
+        ItemStack res = ItemStack.EMPTY;
 
 //        if (heldStack == null) {
 //            if (!simulate) {

@@ -101,7 +101,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
         if (outputs > MAX_SLOTS) {
             int leftover = outputs % MAX_SLOTS;
             for (int i = leftover; i < MAX_SLOTS; i++) {
-                stacks.get(i).add(null);
+                stacks.get(i).add(ItemStack.EMPTY);
             }
         }
         

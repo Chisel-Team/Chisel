@@ -54,7 +54,7 @@ public class ChiselController {
         EntityPlayer player = event.getEntityPlayer();
         ItemStack held = event.getItemStack();
         
-        if (held != null && held.getItem() instanceof IChiselItem) {
+        if (held.getItem() instanceof IChiselItem) {
 
             ItemStack target = NBTUtil.getChiselTarget(held);
             IChiselItem chisel = (IChiselItem) held.getItem();
@@ -79,7 +79,6 @@ public class ChiselController {
 
                 if (blockGroup == sourceGroup) {
                     @SuppressWarnings("null")
-                    @Nonnull
                     ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(target);
                     if (variation != null) {
                         if (variation.getBlockState() != null) {
@@ -113,7 +112,7 @@ public class ChiselController {
     /**
      * Assumes that the player is holding a chisel
      */
-    private static void setVariation(EntityPlayer player, @Nonnull BlockPos pos, IBlockState origState, ICarvingVariation v) {
+    private static void setVariation(EntityPlayer player, BlockPos pos, IBlockState origState, ICarvingVariation v) {
         IBlockState targetState = v.getBlockState();
         Preconditions.checkNotNull(targetState, "Variation state cannot be null!");
         
@@ -127,7 +126,7 @@ public class ChiselController {
             return; // don't chisel if this doesn't match the target block (for the AOE modes)
         }
 
-        if (held != null && held.getItem() instanceof IChiselItem) {
+        if (held.getItem() instanceof IChiselItem) {
             world.setBlockState(pos, targetState);
 //            player.addStat(Statistics.blocksChiseled, 1); // TODO statistics
             boolean breakChisel = false;
@@ -155,7 +154,7 @@ public class ChiselController {
     @SubscribeEvent
     public static void onBlockHighlight(DrawBlockHighlightEvent event) {
         ItemStack held = event.getPlayer().getHeldItemMainhand();
-        if (held != null && held.getItem() instanceof IChiselItem && event.getTarget().typeOfHit == Type.BLOCK) {
+        if (held.getItem() instanceof IChiselItem && event.getTarget().typeOfHit == Type.BLOCK) {
             EntityPlayer player = event.getPlayer();
             IBlockState state = player.world.getBlockState(event.getTarget().getBlockPos());
             if (state.getBlock() == Blocks.AIR) {
@@ -240,7 +239,7 @@ public class ChiselController {
     public static void onLeftClickEntity(AttackEntityEvent event) {
         if (event.getTarget() instanceof EntityPainting) {
             ItemStack held = event.getEntityPlayer().getHeldItemMainhand();
-            if (held != null && held.getItem() instanceof IChiselItem) {
+            if (held.getItem() instanceof IChiselItem) {
                 EntityPainting painting = (EntityPainting) event.getTarget();
                 EnumArt[] values = EnumArt.values();
                 do {

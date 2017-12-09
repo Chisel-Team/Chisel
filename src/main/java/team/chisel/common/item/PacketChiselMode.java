@@ -45,9 +45,9 @@ public class PacketChiselMode implements IMessage {
         
         @Override
         public IMessage onMessage(PacketChiselMode message, MessageContext ctx) {
-            ctx.getServerHandler().playerEntity.getServer().addScheduledTask(() -> {
-                ItemStack stack = ctx.getServerHandler().playerEntity.inventory.getStackInSlot(message.slot);
-                if (stack != null && stack.getItem() instanceof IChiselItem && ((IChiselItem) stack.getItem()).supportsMode(ctx.getServerHandler().playerEntity, message.mode)) {
+            ctx.getServerHandler().player.getServer().addScheduledTask(() -> {
+                ItemStack stack = ctx.getServerHandler().player.inventory.getStackInSlot(message.slot);
+                if (stack.getItem() instanceof IChiselItem && ((IChiselItem) stack.getItem()).supportsMode(ctx.getServerHandler().player, message.mode)) {
                     NBTUtil.setChiselMode(stack, message.mode);
                 }
             });
