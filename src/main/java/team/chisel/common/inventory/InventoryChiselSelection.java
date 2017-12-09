@@ -111,9 +111,9 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public boolean isUsableByPlayer(EntityPlayer entityplayer) {
-        ItemStack held = entityplayer.inventory.getStackInSlot(container.getChiselSlot());
-        return !held.isEmpty() && held.getItem() instanceof IChiselItem;
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        ItemStack held = player.inventory.getStackInSlot(container.getChiselSlot());
+        return !held.isEmpty() && held.getItem() instanceof IChiselItem && ((IChiselItem)held.getItem()).canOpenGui(player.world, player, container.hand);
     }
 
     public void clearItems() {

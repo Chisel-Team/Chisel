@@ -22,7 +22,7 @@ public class ChiselGuiHandler implements IGuiHandler {
             @Nonnull
             EnumHand hand = EnumHand.values()[x];
             ItemStack held = player.getHeldItem(hand);
-            if (held != null && held.getItem() instanceof IChiselItem) {
+            if (held.getItem() instanceof IChiselItem) {
                 // FIXME unsafe cast
                 switch ((ChiselGuiType) ((IChiselItem) held.getItem()).getGuiType(world, player, hand)) {
                 case NORMAL:
@@ -42,7 +42,7 @@ public class ChiselGuiHandler implements IGuiHandler {
             @Nonnull
             EnumHand hand = EnumHand.values()[x];
             ItemStack held = player.getHeldItem(hand);
-            if (held != null && held.getItem() instanceof IChiselItem) {
+            if (held.getItem() instanceof IChiselItem) {
                 // FIXME unsafe cast
                 switch ((ChiselGuiType) ((IChiselItem) held.getItem()).getGuiType(world, player, hand)) {
                 case NORMAL:

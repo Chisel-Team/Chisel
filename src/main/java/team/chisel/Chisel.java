@@ -12,10 +12,8 @@ import org.apache.logging.log4j.Logger;
 import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockColored;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -35,7 +33,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import team.chisel.api.ChiselAPIProps;
-import team.chisel.api.IMC;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.client.gui.PacketChiselButton;
@@ -43,11 +40,15 @@ import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.carving.Carving;
+import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselFuelHandler;
+import team.chisel.common.init.ChiselSounds;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
+import team.chisel.common.item.ChiselMode;
+import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
@@ -72,18 +73,22 @@ public class Chisel implements Reference {
         network.registerMessage(PacketChiselButton.Handler.class, PacketChiselButton.class, 0, Side.SERVER);
         network.registerMessage(PacketHitechSettings.Handler.class, PacketHitechSettings.class, 1, Side.SERVER);
         network.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, 2, Side.CLIENT);
+        network.registerMessage(PacketChiselMode.Handler.class, PacketChiselMode.class, 3, Side.SERVER);
     }
     
     private static Map<String, Block> remaps = ImmutableMap.of();
     
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;
+        CarvingUtils.modes = ChiselModeRegistry.INSTANCE;
+        ChiselMode.values(); // static init our modes
         ChiselAPIProps.MOD_ID = MOD_ID;
     }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
+        ChiselSounds.init();
         
         proxy.construct(event);
 
@@ -124,12 +129,7 @@ public class Chisel implements Reference {
         addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestone2, 1, 7), new ItemStack(ChiselBlocks.marble2, 1, 7));
 
         /*
-//        Example of IMC
-
-//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
-//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|1");
-//        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|2");
-        
+//      Example of IMC
                 
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION.toString(), "marble|minecraft:dirt|0");
         NBTTagCompound testtag = new NBTTagCompound();
@@ -213,6 +213,11 @@ public class Chisel implements Reference {
         for (FMLInterModComms.IMCMessage msg : event.getMessages()) {
             IMCHandler.INSTANCE.handleMessage(msg);
         }
+        IMCHandler.INSTANCE.imcCounts.forEachEntry((s, c) -> {
+            Chisel.logger.info("Received {} IMC messages from mod {}.", c, s);
+            return true;
+        });
+        IMCHandler.INSTANCE.imcCounts.clear();
     }
     
     @SubscribeEvent

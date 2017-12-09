@@ -5,13 +5,40 @@ item.chisel.offsettool.name=Ender Offset Wand
 
 chisel.spawnwither=A Chisel can be a dangerous thing...
 
-item.chisel.chisel.desc.gui=Right-click to open GUI
-item.chisel.chisel.desc.lc1=Left-click to chisel blocks in the world
-item.chisel.chisel.desc.lc2=Target a block by leaving it in the inventory
+item.chisel.chisel.desc.gui=%sRight-click%s to open GUI
+item.chisel.chisel.desc.lc1=%sLeft-click%s to chisel blocks in the world
+item.chisel.chisel.desc.lc2=%sTarget a block%s by leaving it in the inventory
 
 item.chisel.chisel.desc.modes=Has multiple chiseling modes.
+item.chisel.chisel.desc.modes.selected=Selected mode: %s
 
 container.chisel.title=Chisel
+container.chisel.hitech.preview=Preview
+container.chisel.hitech.preview.panel=Panel
+container.chisel.hitech.preview.hollow=Hollow
+container.chisel.hitech.preview.plus=Plus
+container.chisel.hitech.preview.single=Single
+
+container.chisel.hitech.chisel=Chisel
+container.chisel.hitech.chisel_all=Chisel All
+
+chisel.mode.single.name=Single
+chisel.mode.single.desc=Chisel a single block.
+
+chisel.mode.panel.name=Panel
+chisel.mode.panel.desc=Chisel a 3x3 square of blocks.
+
+chisel.mode.column.name=Column
+chisel.mode.column.desc=Chisel a 3x1 column of blocks.
+
+chisel.mode.row.name=Row
+chisel.mode.row.desc=Chisel a 1x3 row of blocks.
+
+chisel.mode.contiguous.name=Contiguous
+chisel.mode.contiguous.desc=Chisel an area of alike blocks, extending 10 blocks in any direciton.
+
+chisel.mode.contiguous_2d.name=Contiguous 2D
+chisel.mode.contiguous_2d.desc=Chisel an area of alike blocks, extending 10 blocks along the plane of the current side.
 
 itemGroup.chiselCreativeTab=Chisel
 chisel.jei.title=Chiseling
@@ -19,6 +46,9 @@ chisel.jei.title=Chiseling
 jei.chisel.desc.concrete_making=Just add water and you can make your very own Concrete!\n\nSubmerge Concrete Powder into water by placing it next to water, or letting it fall into water as a falling block.
 
 chisel.tooltip.blockname=%1$s (%2$s)
+
+subtitle.chisel.chiseling.fallback=Object Chiseled
+subtitle.chisel.chiseling.wood=Wood Chiseled
 
 tile.chisel.blockAluminum.name=Block of Aluminum
 tile.chisel.blockAluminum.caution.desc.1=Caution

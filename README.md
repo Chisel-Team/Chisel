@@ -48,3 +48,5 @@ All images contained by the following directories
 - `/src/main/resources/assets/chisel/textures/blocks/wool/llama/`
 
 are created by Drullkus, and are used with permission. It is licensed under CC BY-NC-SA 4.0.
+
+Sounds dirt1, dirt2, dirt3, and dirt4 in `/src/main/resources/assets/chisel/sounds/chisel/` are sampled from http://freesound.org/people/Piggimon/sounds/366387/ and licensed under CC BY-NC

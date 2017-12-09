@@ -1,5 +1,6 @@
 package team.chisel.common;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -24,6 +25,10 @@ public class CommonProxy implements Reference {
     }
 
     public World getClientWorld() {
+        return null;
+    }
+    
+    public EntityPlayer getClientPlayer() {
         return null;
     }
     

@@ -8,6 +8,7 @@ import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -47,7 +48,7 @@ public class ClientProxy extends CommonProxy {
         super.construct(event);
         if (!(Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
             Field missingException = ReflectionHelper.findField(FMLClientHandler.class, "modsMissing");
-            VersionRange range = VersionRange.createFromVersionSpec("[MC1.12-0.2.0.3,)");
+            VersionRange range = VersionRange.createFromVersionSpec("[MC1.12-0.2.3.8,)");
             if (!Loader.isModLoaded("ctm") || !range.containsVersion(Loader.instance().getIndexedModList().get("ctm").getProcessedVersion())) {
                 if (missingException.get(FMLClientHandler.instance()) == null) {
                     missingException.set(FMLClientHandler.instance(), new MissingModsException(ImmutableSet.of(new DefaultArtifactVersion("CTM", range)), MOD_ID, MOD_NAME));
@@ -107,6 +108,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public World getClientWorld() {
         return Minecraft.getMinecraft().world;
+    }
+    
+    @Override
+    public EntityPlayer getClientPlayer() {
+        return Minecraft.getMinecraft().player;
     }
     
     @Override

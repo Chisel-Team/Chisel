@@ -2,6 +2,7 @@ package team.chisel.client.render.texture;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import team.chisel.client.render.type.BlockRenderTypeSimpleCTM;
@@ -50,5 +51,10 @@ public class ChiselTextureSimpleCTM extends TextureCTM<BlockRenderTypeSimpleCTM>
         } else {
             return Quad.TOP_LEFT;
         }
+    }
+    
+    @Override
+    public Optional<Boolean> connectInside() {
+        return Optional.of(true);
     }
 }

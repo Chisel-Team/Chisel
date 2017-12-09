@@ -56,13 +56,14 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     @Accessors(fluent = true)
     private boolean opaque = true;
 
-    protected ChiselBlockBuilder(IForgeRegistry<Block> registry, Material material, String domain, String blockName, BlockProvider<T> provider) {
+    protected ChiselBlockBuilder(IForgeRegistry<Block> registry, Material material, String domain, String blockName, @Nullable String group, BlockProvider<T> provider) {
         this.registry = registry;
         this.material = material;
         this.domain = domain;
         this.blockName = blockName;
         this.provider = provider;
         this.parentFolder = blockName;
+        this.group = group;
         this.variations = new ArrayList<VariationBuilder<T>>();
     }
 
@@ -73,7 +74,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     @SuppressWarnings("null")
     public VariationBuilder<T> newVariation(String name) {
-        return newVariation(name, Optional.ofNullable(group).orElse(blockName));
+        return newVariation(name, group);
     }
 
     public VariationBuilder<T> newVariation(String name, String group) {
@@ -135,13 +136,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 if (Strings.emptyToNull(data[i][j].name) != null && data[i][j].group != null) {
                     VariationBuilder<T> v = variations.get(data[i][j].index);
                     CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), v.order);
+                }
 
-                    if (!oreStrings.isEmpty())
-                    {
-                        for (String oreEntry : oreStrings)
-                        {
-                            OreDictionary.registerOre(oreEntry, new ItemStack(ret[i], 1, j));
-                        }
+                if (!oreStrings.isEmpty()) {
+                    for (String oreEntry : oreStrings) {
+                        OreDictionary.registerOre(oreEntry, new ItemStack(ret[i], 1, j));
                     }
                 }
             }
@@ -155,7 +154,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         private ChiselBlockBuilder<T> parent;
 
         private String name;
-        private String group;
+        private @Nullable String group;
 
         private int index;
 
@@ -172,7 +171,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         @Accessors(fluent = true)
         private boolean opaque;
 
-        private VariationBuilder(ChiselBlockBuilder<T> parent, String name, String group, int index) {
+        private VariationBuilder(ChiselBlockBuilder<T> parent, String name, @Nullable String group, int index) {
             this.parent = parent;
             this.name = name;
             this.group = group;
