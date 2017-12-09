@@ -20,6 +20,8 @@ Fixes
 - #435 Fix target stack being deleted when chisel breaks during in-world chiseling
 - #185 Remove remaining hardcoded strings in iChisel GUI
 - #590 Drastically reduce the amount of logging from IMC messages
+- #516 Dupe bug
+- #564 Crash when iChisel breaks during shift-click
 
 0.0.14:
 New
