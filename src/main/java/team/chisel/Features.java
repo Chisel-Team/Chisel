@@ -2655,7 +2655,6 @@ public enum Features {
             Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CRACKED), -24));
             Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.CHISELED), -23));
 
-            Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(Blocks.STONE.getDefaultState(), -22));
             // Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(Blocks.double_stone_slab.getDefaultState().withProperty(BlockDoubleStoneSlab.VARIANT, BlockDoubleStoneSlab.EnumType.STONE), -21));
 
 
