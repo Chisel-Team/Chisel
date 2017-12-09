@@ -67,10 +67,8 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
         }
     }
 
-    @SuppressWarnings("null")
     @Override
     public void drawAnimations(Minecraft minecraft) {
-
     }
 
     @Override
