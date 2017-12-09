@@ -240,6 +240,11 @@ public class Chisel implements Reference {
         for (FMLInterModComms.IMCMessage msg : event.getMessages()) {
             IMCHandler.INSTANCE.handleMessage(msg);
         }
+        IMCHandler.INSTANCE.imcCounts.forEachEntry((s, c) -> {
+            Chisel.logger.info("Received {} IMC messages from mod {}.", c, s);
+            return true;
+        });
+        IMCHandler.INSTANCE.imcCounts.clear();
     }
 
     @Mod.EventHandler //TODO fix
