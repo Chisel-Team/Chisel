@@ -10,6 +10,7 @@ Changes
 - Did a pass over all sounds in the mod, to make sure they work on servers
 - Improve readability of chisel tooltips
 - Improvements to the IChiselItem API
+- #581 rename Hardened Clay to Terracotta
 Fixes
 - #554 chiseled dirt does not have an effective tool
 - Ingot blocks will now work with oredictionary variants
@@ -22,6 +23,9 @@ Fixes
 - #590 Drastically reduce the amount of logging from IMC messages
 - #516 Dupe bug
 - #564 Crash when iChisel breaks during shift-click
+- asiekierka/UnlimitedChiselWorks#12 remove unnecessary @SideOnly causing crash
+- Fix some errors from JEI plugin
+- #588 Clean up some errors from model loading
 
 0.0.14:
 New
