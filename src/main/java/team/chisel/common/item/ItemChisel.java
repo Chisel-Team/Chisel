@@ -151,7 +151,7 @@ public class ItemChisel extends Item implements IChiselItem {
     }
 
     @Override
-    public boolean supportsMode(EntityPlayer player, IChiselMode mode) {
+    public boolean supportsMode(EntityPlayer player, ItemStack chisel, IChiselMode mode) {
         return type == ChiselType.HITECH || ((type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) && mode != ChiselMode.CONTIGUOUS && mode != ChiselMode.CONTIGUOUS_2D);
     }
 
