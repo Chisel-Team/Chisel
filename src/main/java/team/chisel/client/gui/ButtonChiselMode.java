@@ -20,11 +20,11 @@ public class ButtonChiselMode extends GuiButton {
     }
     
     @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY) {
-        super.drawButton(mc, mouseX, mouseY);
+    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+        super.drawButton(mc, mouseX, mouseY, partialTicks);
         mc.getTextureManager().bindTexture(mode.getSpriteSheet());
         Point2i uv = mode.getSpritePos();
-        drawScaledCustomSizeModalRect(xPosition + 4, yPosition + 4, uv.x, uv.y, 24, 24, 12, 12, 256, 256);
+        drawScaledCustomSizeModalRect(x + 4, y + 4, uv.x, uv.y, 24, 24, 12, 12, 256, 256);
     }
     
     @Override

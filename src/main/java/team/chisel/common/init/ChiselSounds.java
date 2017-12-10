@@ -15,7 +15,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
-import net.minecraftforge.fml.common.registry.ObjectHolderRegistry;
+import net.minecraftforge.registries.ObjectHolderRegistry;
 import team.chisel.Chisel;
 
 @ObjectHolder(Chisel.MOD_ID)

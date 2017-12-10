@@ -15,9 +15,9 @@ import gnu.trove.list.array.TDoubleArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -197,7 +197,7 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
     }
     
     private void checkRedraw(AxisAlignedBB updateRange) {
-        if (updateRange.intersectsWith(candidateBounds)) {
+        if (updateRange.intersects(candidateBounds)) {
             Minecraft.getMinecraft().addScheduledTask(this::updateCache);
         }
     }
@@ -216,7 +216,7 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         }
         
         GlStateManager.pushMatrix();
-        VertexBuffer buf = Tessellator.getInstance().getBuffer();
+        BufferBuilder buf = Tessellator.getInstance().getBuffer();
         buf.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
         for (int i = 0; i < geometryCache.size(); i += 3) {
             buf.pos(geometryCache.get(i), geometryCache.get(i + 1), geometryCache.get(i + 2)).color(c, c, c, a).endVertex();
