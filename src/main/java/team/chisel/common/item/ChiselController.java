@@ -32,6 +32,8 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -146,9 +148,11 @@ public class ChiselController {
         }
     }
     
+    @SideOnly(Side.CLIENT)
     private static ChiselModeGeometryCache cache;
     
     @SubscribeEvent
+    @SideOnly(Side.CLIENT)
     public static void onBlockHighlight(DrawBlockHighlightEvent event) {
         ItemStack held = event.getPlayer().getHeldItemMainhand();
         if (held != null && held.getItem() instanceof IChiselItem && event.getTarget().typeOfHit == Type.BLOCK) {
