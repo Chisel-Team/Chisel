@@ -191,6 +191,7 @@ curseforge {
         changelogType = 'html'
         releaseType = project.curse_type
        	addGameVersion '1.12.1'
+		addGameVersion '1.12.2'
         mainArtifact(jar) {
             displayName = "Chisel - ${version}"
         }
