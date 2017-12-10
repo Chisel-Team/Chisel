@@ -136,9 +136,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 if (Strings.emptyToNull(data[i][j].name) != null && data[i][j].group != null) {
                     VariationBuilder<T> v = variations.get(data[i][j].index);
                     CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), v.order);
-                }
-
-                if (!oreStrings.isEmpty()) {
+                    
                     for (String oreEntry : oreStrings) {
                         OreDictionary.registerOre(oreEntry, new ItemStack(ret[i], 1, j));
                     }
