@@ -74,7 +74,7 @@ public class GuiChisel extends GuiContainer {
         int padding = (area.getWidth() - (buttonsPerRow * 20)) / buttonsPerRow;
         IChiselMode currentMode = NBTUtil.getChiselMode(container.getChisel());
         for (IChiselMode mode : CarvingUtils.getModeRegistry().getAllModes()) {
-            if (((IChiselItem) container.getChisel().getItem()).supportsMode(player, mode)) {
+            if (((IChiselItem) container.getChisel().getItem()).supportsMode(player, container.getChisel(), mode)) {
                 int x = area.getX() + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
                 int y = area.getY() + ((id / buttonsPerRow) * (20 + padding));
                 ButtonChiselMode button = new ButtonChiselMode(id++, x, y, mode);

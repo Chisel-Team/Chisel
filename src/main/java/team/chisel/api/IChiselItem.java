@@ -101,11 +101,13 @@ public interface IChiselItem {
      * 
      * @param player
      *            {@link EntityPlayer The player} holding the chisel.
+     * @param chisel
+     *            The {@link ItemStack} of the current chisel.
      * @param mode
      *            The current {@link IChiselMode}.
      * @return True if the chisel supports this mode. False otherwise.
      */
-    boolean supportsMode(EntityPlayer player, IChiselMode mode);
+    boolean supportsMode(EntityPlayer player, ItemStack chisel, IChiselMode mode);
     
     /**
      * Allows this chisel to provide a different sound for the given {@link ICarvingVariation}.
