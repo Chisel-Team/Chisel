@@ -2735,3 +2735,5 @@ tile.chisel.ice.sunken.desc.1=凹陷
 tile.chisel.ice.poison.desc.1=污染
 tile.chisel.ice.bricks-chaotic.desc.1=人行道砖
 tile.chisel.ice.cuts.desc.1=切口
+subtitle.chisel.chiseling.fallback=物体被雕凿
+subtitle.chisel.chiseling.wood=木材被雕凿
