@@ -258,4 +258,18 @@ public interface ICarvingRegistry {
      *            The resource string for the sound
      */
     void setVariationSound(String name, SoundEvent sound);
+
+    /**
+     * Adds a reverse mapping from an oredict name to a group.
+     * <p>
+     * This is required whenever a group's contents rely on an oredict entry.
+     * <p>
+     * You do not need to call this if using {@link CarvingUtils#addOreGroup(String)}.
+     * 
+     * @param group
+     *            The group which should be mapped to the ore name
+     * @param ore
+     *            The ore name
+     */
+    void setOreName(ICarvingGroup group, String ore);
 }

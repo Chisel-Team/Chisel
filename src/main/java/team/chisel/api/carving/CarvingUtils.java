@@ -135,7 +135,9 @@ public class CarvingUtils {
      * @see #getOreGroup(String)
      */
     public static void addOreGroup(String ore) {
-        getChiselRegistry().addGroup(getOreGroup(ore));
+        ICarvingGroup group = getOreGroup(ore);
+        getChiselRegistry().addGroup(group);
+        getChiselRegistry().setOreName(group, ore);
     }
 	
 	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
