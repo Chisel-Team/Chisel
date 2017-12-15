@@ -2827,7 +2827,7 @@ public enum Features {
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry)
         {
-            addShapedRecipe(registry, new ItemStack(ChiselBlocks.tyrian, 32, 0), "SXS", "X X", "SXS",
+            addShapedRecipe(registry, new ItemStack(ChiselBlocks.tyrian, 32, 0), "SSS", "SXS", "SSS",
                     'S', new ItemStack(Blocks.STONE, 1),
                     'X', new ItemStack(Items.IRON_INGOT, 1));
         }
