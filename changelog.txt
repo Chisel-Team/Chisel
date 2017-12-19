@@ -1,3 +1,14 @@
+0.1.1:
+New
+- Default chisel durabilities were slightly buffed, to make them even multiples of 64. To get these new values, remove the durability configs from your config file.
+Fixes
+- #594 Fix factory block recipe output being an empty stack
+- #598 Fix oredict conversion groups only working one-way, it should now actually be possible to create chisel's ingot blocks!
+- #606 Fix crash when in-world chiseling oredict variants
+- #605 Fix factory blocks having the same recipe as Tyrian (Tyrian recipe was corrected)
+- Fix iron/diamond chisel incorrectly handling a chisel breaking partially through crafting a stack
+- Fix chisel sound playing twice in iChisel
+
 0.1.0:
 New
 - First beta release!
