@@ -494,8 +494,6 @@ public class GuiHitechChisel extends GuiChisel {
                 
                 PacketChiselButton.chiselAll(player, slots);
                 
-                SoundUtil.playSound(player, containerHitech.getChisel(), CarvingUtils.getChiselRegistry().getVariation(target.getStack()).getBlockState());
-                
                 if (!isShiftDown()) {
                     List<Slot> dupes = containerHitech.getSelectionDuplicates();
                     Slot next = selected;

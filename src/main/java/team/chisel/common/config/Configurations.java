@@ -55,6 +55,7 @@ public class Configurations {
         category = "general";
         concreteVelocityMult = config.get(category, "concreteVelocityMult", 1.35, "The factor that concrete_white increases your velocity. Default is 1.35, set to 1 for no change.").getDouble();
         allowMossy = config.get(category, "allowBrickToMossyInChisel", true, "If true, you can chisel stone brick to mossy stone brick.").getBoolean(true);
+        factoryBlockAmount = config.get(category, "amountYouGetFromFactoryBlockCrafting", 32).getInt(32);
         chiselRecipe = config.get(category, "chiselAlternateRecipe", false, "Use alternative crafting recipe for the chisel").getBoolean(false);
         chiselStoneToCobbleBricks = config.get(category, "chiselStoneToStoneBricks", true, "Allow stone to be chiseled to/from stone bricks.").getBoolean(true);
         chiselBackToVanillaLeaves = config
@@ -82,9 +83,9 @@ public class Configurations {
         /* chisel */
         category = "chisel";
         allowChiselDamage = config.get(category, "allowChiselDamage", true, "Should the chisel be damageable and take damage when it chisels something.").getBoolean();
-        ironChiselMaxDamage = config.getInt("ironChiselMaxDamage", category, 500, 1, Short.MAX_VALUE, "The max damage of the standard iron chisel.");
-        diamondChiselMaxDamage = config.getInt("diamondChiselMaxDamage", category, 5000, 1, Short.MAX_VALUE, "The max damage of the diamond chisel.");
-        hitechChiselMaxDamage = config.getInt("hitechChiselMaxDamage", category, 10000, 1, Short.MAX_VALUE, "The max damage of the iChisel.");
+        ironChiselMaxDamage = config.getInt("ironChiselMaxDamage", category, 512, 1, Short.MAX_VALUE, "The max damage of the standard iron chisel.");
+        diamondChiselMaxDamage = config.getInt("diamondChiselMaxDamage", category, 5056, 1, Short.MAX_VALUE, "The max damage of the diamond chisel.");
+        hitechChiselMaxDamage = config.getInt("hitechChiselMaxDamage", category, 10048, 1, Short.MAX_VALUE, "The max damage of the iChisel.");
 
         ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
         ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();

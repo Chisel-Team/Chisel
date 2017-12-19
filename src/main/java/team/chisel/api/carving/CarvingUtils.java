@@ -135,7 +135,9 @@ public class CarvingUtils {
      * @see #getOreGroup(String)
      */
     public static void addOreGroup(String ore) {
-        getChiselRegistry().addGroup(getOreGroup(ore));
+        ICarvingGroup group = getOreGroup(ore);
+        getChiselRegistry().addGroup(group);
+        getChiselRegistry().setOreName(group, ore);
     }
 	
 	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
@@ -180,7 +182,6 @@ public class CarvingUtils {
 	
 	private static class VariationForStack extends SimpleVariationBase {
 	    
-	    @Getter
 	    private final ItemStack stack;
 	    private final boolean hasBlock;
 	    
@@ -188,6 +189,11 @@ public class CarvingUtils {
 	        super(order);
 	        this.stack = stack;
 	        this.hasBlock = stack.getItem() instanceof ItemBlock;
+	    }
+	    
+	    @Override
+	    public ItemStack getStack() {
+	        return stack.copy();
 	    }
 
         @Override
@@ -205,17 +211,22 @@ public class CarvingUtils {
         }	    
 	}
 	
-    @Getter
     private static class SimpleVariation extends SimpleVariationBase {
 
         private final ItemStack stack;
         @Nullable
+        @Getter
         private final IBlockState blockState;
 
         public SimpleVariation(ItemStack stack, @Nullable IBlockState state, int order) {
             super(order);
             this.stack = stack;
             this.blockState = state;
+        }
+        
+        @Override
+        public ItemStack getStack() {
+            return stack.copy();
         }
 
         @Override

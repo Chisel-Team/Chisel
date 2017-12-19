@@ -2851,7 +2851,7 @@ public enum Features {
         @Override
         void addRecipes()
         {
-            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.tyrian, 32, 0), "SXS", "X X", "SXS",
+            GameRegistry.addRecipe(new ItemStack(ChiselBlocks.tyrian, 32, 0), "SSS", "SXS", "SSS",
                     'S', new ItemStack(Blocks.STONE, 1),
                     'X', new ItemStack(Items.IRON_INGOT, 1));
         }
