@@ -54,10 +54,10 @@ public class SlotChiselSelection extends Slot {
 //        } else {
 //            player.inventory.setItemStack(null);
 
+            ItemStack source = crafted.copy();
             if (!crafted.isEmpty()) {
                 
                 IChiselItem item = (IChiselItem) container.getChisel().getItem();
-                ItemStack source = crafted.copy();
                 res = item.craftItem(chisel, crafted, itemstack, player);
                 if (!simulate) {
                     container.getInventoryChisel().setStackInSpecialSlot(crafted.getCount() == 0 ? ItemStack.EMPTY : crafted);
@@ -71,16 +71,16 @@ public class SlotChiselSelection extends Slot {
             }
 //        }
 
-        if (!simulate && !crafted.isEmpty() && !chisel.isEmpty()) {
+        if (!simulate && !res.isEmpty() && !chisel.isEmpty()) {
             container.getInventoryChisel().updateItems();
             container.detectAndSendChanges();
 
 //            if (player.world.isRemote) {
-                ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(crafted);
+                ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(source);
                 IBlockState state = v == null ? null : v.getBlockState();
                 if (state == null) {
-                    if (crafted.getItem() instanceof ItemBlock) {
-                        state = ((ItemBlock) crafted.getItem()).getBlock().getStateFromMeta(crafted.getItem().getMetadata(crafted.getItemDamage()));
+                    if (source.getItem() instanceof ItemBlock) {
+                        state = ((ItemBlock) source.getItem()).getBlock().getStateFromMeta(source.getItem().getMetadata(source.getItemDamage()));
                     } else {
                         state = Blocks.STONE.getDefaultState(); // fallback
                     }
