@@ -83,9 +83,9 @@ public class Configurations {
         /* chisel */
         category = "chisel";
         allowChiselDamage = config.get(category, "allowChiselDamage", true, "Should the chisel be damageable and take damage when it chisels something.").getBoolean();
-        ironChiselMaxDamage = config.getInt("ironChiselMaxDamage", category, 500, 1, Short.MAX_VALUE, "The max damage of the standard iron chisel.");
-        diamondChiselMaxDamage = config.getInt("diamondChiselMaxDamage", category, 5000, 1, Short.MAX_VALUE, "The max damage of the diamond chisel.");
-        hitechChiselMaxDamage = config.getInt("hitechChiselMaxDamage", category, 10000, 1, Short.MAX_VALUE, "The max damage of the iChisel.");
+        ironChiselMaxDamage = config.getInt("ironChiselMaxDamage", category, 512, 1, Short.MAX_VALUE, "The max damage of the standard iron chisel.");
+        diamondChiselMaxDamage = config.getInt("diamondChiselMaxDamage", category, 5056, 1, Short.MAX_VALUE, "The max damage of the diamond chisel.");
+        hitechChiselMaxDamage = config.getInt("hitechChiselMaxDamage", category, 10048, 1, Short.MAX_VALUE, "The max damage of the iChisel.");
 
         ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
         ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
