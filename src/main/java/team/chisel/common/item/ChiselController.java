@@ -78,7 +78,7 @@ public class ChiselController {
                 ICarvingGroup sourceGroup = registry.getGroup(target);
 
                 if (blockGroup == sourceGroup) {
-                    ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(target);
+                    ICarvingVariation variation = registry.getVariation(target);
                     if (variation != null) {
                         if (variation.getBlockState() != null) {
                             setAll(candidates, player, state, variation);
