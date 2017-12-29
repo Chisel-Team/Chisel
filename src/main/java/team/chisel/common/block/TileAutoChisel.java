@@ -186,12 +186,17 @@ public class TileAutoChisel extends TileEntity implements ITickable {
         chisel = chisel == null ? chisel : chisel.copy();
         
         ICarvingVariation v = target == null ? null : CarvingUtils.getChiselRegistry().getVariation(target);
-        ICarvingGroup g = CarvingUtils.getChiselRegistry().getGroup(target);
+        ICarvingGroup g = target == null ? null : CarvingUtils.getChiselRegistry().getGroup(target);
 
         if (chisel == null || chisel.stackSize < 1 || v == null) {
             sourceSlot = -1;
             progress = 0;
             return;
+        }
+        
+        // Force a source slot recalc if the stack has changed to something that cannot be converted to the target
+        if (source != null && CarvingUtils.getChiselRegistry().getVariation(source) != v) {
+            source = null;
         }
         
         IChiselItem chiselitem = (IChiselItem) chisel.getItem();
@@ -267,6 +272,7 @@ public class TileAutoChisel extends TileEntity implements ITickable {
         compound.setTag("input", inputInv.serializeNBT());
         compound.setTag("output", outputInv.serializeNBT());
         compound.setInteger("progress", getProgress());
+        compound.setInteger("source", sourceSlot);
         return super.writeToNBT(compound);
     }
     
@@ -277,5 +283,6 @@ public class TileAutoChisel extends TileEntity implements ITickable {
         this.inputInv.deserializeNBT(compound.getCompoundTag("input"));
         this.outputInv.deserializeNBT(compound.getCompoundTag("output"));
         this.progress = compound.getInteger("progress");
+        this.sourceSlot = compound.getInteger("source");
     }
 }
