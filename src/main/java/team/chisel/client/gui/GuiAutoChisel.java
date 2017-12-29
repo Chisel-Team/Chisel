@@ -24,9 +24,16 @@ public class GuiAutoChisel extends GuiContainer {
         mc.getTextureManager().bindTexture(TEXTURE);
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        if (container.getTe().getProgress() > 0) {
-            int scaledProg = (int) (((float) container.getTe().getProgress() / container.getTe().getMaxProgress()) * PROG_BAR_LENGTH);
+        if (container.te.getProgress() > 0) {
+            int scaledProg = (int) (((float) container.te.getProgress() / container.te.getMaxProgress()) * PROG_BAR_LENGTH);
             drawTexturedModalRect(guiLeft + 63, guiTop + 19 + 9, 176, 18, scaledProg + 1, 17);
         }
+    }
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        String s = container.te.getDisplayName().getUnformattedText();
+        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 0x404040);
+        this.fontRendererObj.drawString(container.invPlayer.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 0x404040);
     }
 }

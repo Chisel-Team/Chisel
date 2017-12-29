@@ -11,11 +11,16 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.IWorldNameable;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayerFactory;
@@ -30,7 +35,7 @@ import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
-public class TileAutoChisel extends TileEntity implements ITickable {
+public class TileAutoChisel extends TileEntity implements ITickable, IWorldNameable {
     
     private class DirtyingStackHandler extends ItemStackHandler {
         
@@ -140,6 +145,9 @@ public class TileAutoChisel extends TileEntity implements ITickable {
     @Getter
     @Setter
     private int progress = 0;
+    
+    @Setter
+    private @Nullable String customName;
     
     public IItemHandler getOtherInv() {
         return otherInv;
@@ -277,12 +285,44 @@ public class TileAutoChisel extends TileEntity implements ITickable {
     }
     
     @Override
+    @Nullable
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(getPos(), getBlockMetadata(), getUpdateTag());
+    }
+    
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        NBTTagCompound ret = super.getUpdateTag();
+        if (hasCustomName()) {
+            ret.setString("customName", getName());
+        }
+        return ret;
+    }
+    
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        handleUpdateTag(pkt.getNbtCompound());
+        super.onDataPacket(net, pkt);
+    }
+    
+    @Override
+    public void handleUpdateTag(NBTTagCompound tag) {
+        if (tag.hasKey("customName")) {
+            this.customName = tag.getString("customName");
+        }
+        super.handleUpdateTag(tag);
+    }
+    
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("other", otherInv.serializeNBT());
         compound.setTag("input", inputInv.serializeNBT());
         compound.setTag("output", outputInv.serializeNBT());
         compound.setInteger("progress", getProgress());
         compound.setInteger("source", sourceSlot);
+        if (hasCustomName()) {
+            compound.setString("customName", getName());
+        }
         return super.writeToNBT(compound);
     }
     
@@ -294,5 +334,29 @@ public class TileAutoChisel extends TileEntity implements ITickable {
         this.outputInv.deserializeNBT(compound.getCompoundTag("output"));
         this.progress = compound.getInteger("progress");
         this.sourceSlot = compound.getInteger("source");
+        if (compound.hasKey("customName")) {
+            this.customName = compound.getString("customName");
+        }
+    }
+    
+    /* == IWorldNameable == */
+    
+    @Override
+    public ITextComponent getDisplayName() {
+        return hasCustomName() ? new TextComponentString(getName()) : new TextComponentTranslation(getName());
+    }
+
+    @Override
+    public String getName() {
+        String name = customName;
+        if (name == null) {
+            name = "container.autochisel.title";
+        }
+        return name;
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return customName != null;
     }
 }

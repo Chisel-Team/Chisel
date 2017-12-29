@@ -34,9 +34,8 @@ public class ContainerAutoChisel extends Container {
         }
     }
 
-    private final InventoryPlayer invPlayer;
-    @Getter
-    private final TileAutoChisel te;
+    public final InventoryPlayer invPlayer;
+    public final TileAutoChisel te;
     
     private final int beginInputSlots, endInputSlots;
     private final int chiselSlot, targetSlot;
