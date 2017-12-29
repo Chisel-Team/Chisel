@@ -79,7 +79,7 @@ public class TileAutoChisel extends TileEntity implements ITickable {
             if (slot >= 0 && slot < input.getSlots()) {
                 return input.insertItem(slot, stack, simulate);
             }
-            return null;
+            return stack;
         }
 
         @Override
@@ -123,7 +123,16 @@ public class TileAutoChisel extends TileEntity implements ITickable {
             return stack;
         }
     };
-    private final ItemStackHandler inputInv = new DirtyingStackHandler(INPUT_COUNT);
+    private final ItemStackHandler inputInv = new DirtyingStackHandler(INPUT_COUNT) {
+
+        @Override
+        public @Nullable ItemStack insertItem(int slot, @Nullable ItemStack stack, boolean simulate) {
+            if (stack != null && CarvingUtils.getChiselRegistry().getVariation(stack) != null) {
+                return super.insertItem(slot, stack, simulate);
+            }
+            return stack;
+        }
+    };
     private final ItemStackHandler outputInv = new DirtyingStackHandler(OUTPUT_COUNT);
     
     private int sourceSlot = -1;
