@@ -62,12 +62,12 @@ public class ContainerAutoChisel extends Container {
         beginInputSlots = inventorySlots.size();
         IItemHandler inv = te.getInputInv();
         for (int i = 0; i < inv.getSlots(); i++) {
-            this.addSlotToContainer(new ChiselableSlot(inv, i, 8 + 18 * (i / 4), yStart + 18 * (i % 4)));
+            this.addSlotToContainer(new ChiselableSlot(inv, i, 8 + 18 * (i % 3), yStart + 18 * (i / 3)));
         }
         endInputSlots = beginOutputSlots = inventorySlots.size();
         inv = te.getOutputInv();
         for (int i = 0; i < inv.getSlots(); i++) {
-            this.addSlotToContainer(new SlotItemHandler(inv, i, 8 + 108 + 18 * (i / 4), yStart + 18 * (i % 4)) {
+            this.addSlotToContainer(new SlotItemHandler(inv, i, 8 + 108 + 18 * (i % 3), yStart + 18 * (i / 3)) {
 
                 @Override
                 public boolean isItemValid(@Nullable ItemStack stack) {

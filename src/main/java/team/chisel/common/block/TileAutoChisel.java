@@ -204,7 +204,7 @@ public class TileAutoChisel extends TileEntity implements ITickable {
         }
         
         // Force a source slot recalc if the stack has changed to something that cannot be converted to the target
-        if (source != null && CarvingUtils.getChiselRegistry().getVariation(source) != v) {
+        if (source != null && CarvingUtils.getChiselRegistry().getGroup(source) != g) {
             source = null;
         }
         
@@ -254,7 +254,8 @@ public class TileAutoChisel extends TileEntity implements ITickable {
                 otherInv.setStackInSlot(0, chisel.stackSize == 0 ? null : chisel);
                 
                 mergeOutput(res);
-                sourceSlot = -1;
+                // Try the next slot, if this is invalid it will be fixed next update
+                sourceSlot = (sourceSlot + 1) % getInputInv().getSlots();
                 progress = 0;
             }
         } else {
