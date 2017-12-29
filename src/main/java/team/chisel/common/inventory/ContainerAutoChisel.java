@@ -139,8 +139,8 @@ public class ContainerAutoChisel extends Container {
                 slot.onSlotChange(itemstack1, itemstack);
             } else if (index >= beginPlayerSlots) {
                 if (CarvingUtils.getChiselRegistry().getGroup(itemstack1) != null) {
-                    if (!this.mergeItemStack(itemstack1, beginInputSlots, endInputSlots, false)) {
-                        if (!this.mergeItemStack(itemstack1, targetSlot, targetSlot + 1, false)) {
+                    if (!this.mergeItemStack(itemstack1, targetSlot, targetSlot + 1, false)) {
+                        if (!this.mergeItemStack(itemstack1, beginInputSlots, endInputSlots, false)) {
                             return null;
                         }
                     }
