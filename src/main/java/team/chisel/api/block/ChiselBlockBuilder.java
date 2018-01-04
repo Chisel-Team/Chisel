@@ -133,10 +133,12 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 ChiselModelRegistry.INSTANCE.register(ret[i]);
             }
             for (int j = 0; j < data[i].length; j++) {
-                if (Strings.emptyToNull(data[i][j].name) != null && data[i][j].group != null) {
-                    VariationBuilder<T> v = variations.get(data[i][j].index);
-                    CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), v.order);
-                    
+                if (Strings.emptyToNull(data[i][j].name) != null) {
+                    if (data[i][j].group != null) {
+                        VariationBuilder<T> v = variations.get(data[i][j].index);
+                        CarvingUtils.getChiselRegistry().addVariation(data[i][j].group, ret[i].getStateFromMeta(j), v.order);
+                    }
+
                     for (String oreEntry : oreStrings) {
                         OreDictionary.registerOre(oreEntry, new ItemStack(ret[i], 1, j));
                     }
