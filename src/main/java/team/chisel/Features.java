@@ -61,10 +61,8 @@ import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.handler.BlockSpeedHandler;
 import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
-import team.chisel.common.block.BlockCarvableAltarComponent;
 import team.chisel.common.block.BlockCarvableCarpet;
 import team.chisel.common.block.BlockCarvableFalling;
-import team.chisel.common.block.BlockCarvableTranquility;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
@@ -256,7 +254,7 @@ public enum Features {
     BLOOD_MAGIC("bloodmagic") {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "bloodMagic", new ChiselBlockProvider<>(BlockCarvableAltarComponent::new, BlockCarvableAltarComponent.class))
+            factory.newBlock(Material.ROCK, "bloodMagic", new ChiselBlockProvider<>(BlockCarvable::new, BlockCarvable.class))
                     .newVariation("bloodRuneArranged")
                     .next("bloodRuneBricks")
                     .next("bloodRuneCarved")
@@ -970,7 +968,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("dirt", CarvingUtils.variationFor(Blocks.DIRT.getDefaultState(), -1));
             Carving.chisel.setVariationSound("dirt", ChiselSounds.dirt_chisel);
-            factory.newBlock(Material.GROUND, "dirt", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
+            factory.newBlock(Material.GROUND, "dirt", new ChiselBlockProvider<>(BlockCarvable::new, BlockCarvable.class))
                     .newVariation("bricks")
                     .next("netherbricks")
                     .next("bricks3")
@@ -1798,7 +1796,7 @@ public enum Features {
     LAVASTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "lavastone", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class))
+            factory.newBlock(Material.ROCK, "lavastone", new ChiselBlockProvider<>(BlockCarvable::new, BlockCarvable.class))
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -2088,14 +2086,14 @@ public enum Features {
             Carving.chisel.addVariation("netherrack", CarvingUtils.variationFor(Blocks.NETHERRACK.getDefaultState(), -20));
 
 
-            BlockCreator<BlockCarvableTranquility> netherrackCreator = (mat, index, maxVariation, data) -> new BlockCarvableTranquility(mat, index, maxVariation, data) {
+            BlockCreator<BlockCarvable> netherrackCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
                 public boolean isFireSource(@Nonnull World world, BlockPos pos, EnumFacing side) {
                     return side == EnumFacing.UP;
                 }
             };
 
-            factory.newBlock(Material.ROCK, "netherrack", new ChiselBlockProvider<>(netherrackCreator, BlockCarvableTranquility.class))
+            factory.newBlock(Material.ROCK, "netherrack", new ChiselBlockProvider<>(netherrackCreator, BlockCarvable.class))
                     .newVariation("a1-netherrack-bloodgravel")
                     .next("a1-netherrack-bloodrock")
                     .next("a1-netherrack-bloodrockgrey")
@@ -2955,7 +2953,7 @@ public enum Features {
     WATERSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "waterstone", new ChiselBlockProvider<>(BlockCarvableTranquility::new, BlockCarvableTranquility.class)).opaque(false)
+            factory.newBlock(Material.ROCK, "waterstone", new ChiselBlockProvider<>(BlockCarvable::new, BlockCarvable.class)).opaque(false)
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
