@@ -33,13 +33,13 @@ public class ChiselBMPlugin implements IBloodMagicPlugin {
 
     private static void setAltarComponent(Features feature, BlockCarvable block, String componentType) {
         if (feature.enabled())
-            for (int i = 0; i < block.getTotalVariations(); i++)
+            for (int i = 0; i < block.getBlockState().getValidStates().size(); i++)
                 api.registerAltarComponent(block.getStateFromMeta(i), componentType);
     }
 
     private static void setTranquility(Features feature, BlockCarvable block, String tranquilityType, double value) {
         if (feature.enabled())
-            for (int i = 0; i < block.getTotalVariations(); i++)
+            for (int i = 0; i < block.getBlockState().getValidStates().size(); i++)
                 api.getValueManager().setTranquility(block.getStateFromMeta(i), tranquilityType, value);
     }
 }
