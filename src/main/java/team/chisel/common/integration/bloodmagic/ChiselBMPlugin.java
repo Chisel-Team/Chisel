@@ -3,6 +3,7 @@ package team.chisel.common.integration.bloodmagic;
 import WayofTime.bloodmagic.api.BloodMagicPlugin;
 import WayofTime.bloodmagic.api.IBloodMagicAPI;
 import WayofTime.bloodmagic.api.IBloodMagicPlugin;
+import net.minecraft.block.state.IBlockState;
 import team.chisel.Features;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.init.ChiselBlocks;
@@ -33,13 +34,13 @@ public class ChiselBMPlugin implements IBloodMagicPlugin {
 
     private static void setAltarComponent(Features feature, BlockCarvable block, String componentType) {
         if (feature.enabled())
-            for (int i = 0; i < block.getTotalVariations(); i++)
-                api.registerAltarComponent(block.getStateFromMeta(i), componentType);
+            for (IBlockState state : block.getBlockState().getValidStates())
+                api.registerAltarComponent(state, componentType);
     }
 
     private static void setTranquility(Features feature, BlockCarvable block, String tranquilityType, double value) {
         if (feature.enabled())
-            for (int i = 0; i < block.getTotalVariations(); i++)
-                api.getValueManager().setTranquility(block.getStateFromMeta(i), tranquilityType, value);
+            for (IBlockState state : block.getBlockState().getValidStates())
+                api.getValueManager().setTranquility(state, tranquilityType, value);
     }
 }
