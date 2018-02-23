@@ -1,0 +1,32 @@
+{
+  "parent": "block",
+  "textures": {
+    "glass": "blocks/glass"
+  },
+  "elements": [
+    {
+      "from": [  0.5, 10  ,  0.5 ],
+      "to":   [ 15.5, 15.5, 15.5 ],
+      "shade": false,
+      "faces": {
+        "up":  { "texture": "#glass" },
+        "north": { "texture": "#glass" },
+        "south": { "texture": "#glass" },
+        "west":  { "texture": "#glass" },
+        "east":  { "texture": "#glass" }
+      }
+    },
+    {
+      "from": [ 15.5, 15.5, 15.5 ],
+      "to":   [  0.5, 10  ,  0.5 ],
+      "shade": false,
+      "faces": {
+        "down":  { "texture": "#glass" },
+        "north": { "texture": "#glass" },
+        "south": { "texture": "#glass" },
+        "west":  { "texture": "#glass" },
+        "east":  { "texture": "#glass" }
+      }
+    }
+  ]
+}

@@ -102,18 +102,6 @@
         "west":  { "texture": "#side", "cullface": "west"  },
         "east":  { "texture": "#side", "cullface": "east"  }
       }
-    },
-    {
-      "from": [ 15.5, 15.5, 15.5 ],
-      "to":   [  0.5, 10  ,  0.5 ],
-      "shade": false,
-      "faces": {
-        "down":  { "texture": "#glass" },
-        "north": { "texture": "#glass" },
-        "south": { "texture": "#glass" },
-        "west":  { "texture": "#glass" },
-        "east":  { "texture": "#glass" }
-      }
     }
   ]
 }

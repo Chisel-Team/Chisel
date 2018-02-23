@@ -1,5 +1,19 @@
 {
+    "forge_marker": 1,
+    "defaults": {
+        "model": "forge:multi-layer",
+        "custom": {
+            "Solid": "chisel:auto_chisel#base",
+            "Cutout": "chisel:auto_chisel#glass"
+        }
+    },
     "variants": {
-        "normal": { "model": "chisel:autochisel/autochisel" }
+        "normal": [{}],
+        "base": [{
+            "model": "chisel:auto_chisel/base"
+        }],
+        "glass": [{
+            "model": "chisel:auto_chisel/glass"
+        }]
     }
 }
