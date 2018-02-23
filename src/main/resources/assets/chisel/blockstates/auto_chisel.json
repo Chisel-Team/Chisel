@@ -3,6 +3,7 @@
     "defaults": {
         "model": "forge:multi-layer",
         "custom": {
+		    "base": "chisel:auto_chisel#base",
             "Solid": "chisel:auto_chisel#base",
             "Cutout": "chisel:auto_chisel#glass"
         },
