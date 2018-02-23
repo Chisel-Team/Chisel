@@ -239,32 +239,38 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         if (sourceSlot >= 0) {
             source = getInputInv().getStackInSlot(sourceSlot);
             Validate.notNull(source);
-            if (progress < MAX_PROGRESS) {
-                progress++;
-            } else {                
-                ItemStack res = v.getStack();
-                source = source.copy();
-                chisel = chisel.copy();
+            if (CarvingUtils.getChiselRegistry().getVariation(source) != v) {
+                if (progress < MAX_PROGRESS) {
+                    progress++;
+                } else {
+                    ItemStack res = v.getStack();
+                    source = source.copy();
+                    chisel = chisel.copy();
 
-                EntityPlayerMP player = FakePlayerFactory.getMinecraft((WorldServer) getWorld());
-                player.inventory.mainInventory[player.inventory.currentItem] = chisel;
-                res = chiselitem.craftItem(chisel, source, res, player);
-                player.inventory.mainInventory[player.inventory.currentItem] = null;
-                
-                chiselitem.onChisel(getWorld(), player, chisel, v);
-                
-                inputInv.setStackInSlot(sourceSlot, source.stackSize == 0 ? null : source);
-                
-                SoundUtil.playSound(player, chisel, v.getBlockState());
-                if (chisel.stackSize == 0) {
-                    getWorld().playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
+                    EntityPlayerMP player = FakePlayerFactory.getMinecraft((WorldServer) getWorld());
+                    player.inventory.mainInventory[player.inventory.currentItem] = chisel;
+                    res = chiselitem.craftItem(chisel, source, res, player);
+                    player.inventory.mainInventory[player.inventory.currentItem] = null;
+
+                    chiselitem.onChisel(getWorld(), player, chisel, v);
+
+                    inputInv.setStackInSlot(sourceSlot, source.stackSize == 0 ? null : source);
+
+                    SoundUtil.playSound(player, chisel, v.getBlockState());
+                    if (chisel.stackSize == 0) {
+                        getWorld().playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
+                    }
+                    otherInv.setStackInSlot(0, chisel.stackSize == 0 ? null : chisel);
+
+                    mergeOutput(res);
+                    // Try the next slot, if this is invalid it will be fixed next update
+                    sourceSlot = (sourceSlot + 1) % getInputInv().getSlots();
+                    progress = 0;
                 }
-                otherInv.setStackInSlot(0, chisel.stackSize == 0 ? null : chisel);
-                
-                mergeOutput(res);
-                // Try the next slot, if this is invalid it will be fixed next update
-                sourceSlot = (sourceSlot + 1) % getInputInv().getSlots();
-                progress = 0;
+            } else {
+                // This is the same variation, so just move it to the output
+                inputInv.setStackInSlot(sourceSlot, null);
+                mergeOutput(source);
             }
         } else {
             progress = 0;
