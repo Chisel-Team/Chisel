@@ -13,6 +13,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import team.chisel.api.IChiselItem;
@@ -79,32 +80,37 @@ public class ContainerAutoChisel extends Container {
 
         for (int r = 0; r < 3; ++r) {
             for (int c = 0; c < 9; ++c) {
-                this.addSlotToContainer(new Slot(invPlayer, c + r * 9 + 9, 8 + c * 18, 109 + r * 18));
+                this.addSlotToContainer(new Slot(invPlayer, c + r * 9 + 9, 8 + c * 18, 118 + r * 18));
             }
         }
 
         for (int i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(invPlayer, i, 8 + i * 18, 167));
+            this.addSlotToContainer(new Slot(invPlayer, i, 8 + i * 18, 176));
         }
         
         endPlayerSlots = inventorySlots.size();
     }
 
-    private int progress;
+    private int progress, power;
 
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
         int prog = te.getProgress();
+        int pow = te.getCapability(CapabilityEnergy.ENERGY, null).getEnergyStored();
 
         for (IContainerListener listener : listeners) {
             if (prog != progress) {
                 listener.sendProgressBarUpdate(this, 0, prog);
             }
+            if (pow != power) {
+                listener.sendProgressBarUpdate(this, 1, pow);
+            }
         }
 
         this.progress = prog;
+        this.power = pow;
     }
 
     @Override
@@ -112,6 +118,8 @@ public class ContainerAutoChisel extends Container {
         super.updateProgressBar(id, data);
         if (id == 0) {
             this.te.setProgress(data);
+        } else if (id == 1) {
+            te.setEnergy(data);
         }
     }
 

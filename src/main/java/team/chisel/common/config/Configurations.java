@@ -46,6 +46,9 @@ public class Configurations {
     public static boolean useRoadLineTool;
     public static String getRoadLineTool;
     public static int roadLineToolLevel;
+    
+    public static boolean autoChiselPowered = true;
+    public static boolean autoChiselNeedsPower = false;
 
     public static boolean refreshConfig() {
 
@@ -106,6 +109,9 @@ public class Configurations {
 //                "The lowest harvest level of the tool able to break the road lines (requires useRoadLineTool to be true to take effect) (0 = Wood/Gold, 1 = Stone, 2 = Iron, 3 = Diamond) Default: 0")
 //                .getInt();
 
+        category = "autochisel";
+        autoChiselPowered = config.get(category, "autoChiselTakesPower", autoChiselPowered, "If false, the auto chisel will always run at full speed, and will not accept FE.").getBoolean();
+        autoChiselNeedsPower = config.get(category, "autoChiselNeedsPower", autoChiselNeedsPower, "If true, the auto chisel will not function at all without power.").getBoolean();
         if (config.hasChanged()) {
             config.save();
         }

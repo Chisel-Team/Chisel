@@ -13,10 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.profiler.Profiler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -24,6 +26,11 @@ import net.minecraft.world.IWorldNameable;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.server.FMLServerHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -32,6 +39,7 @@ import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.common.config.Configurations;
 import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
@@ -49,11 +57,11 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         }
     }
     
-    private class View implements IItemHandlerModifiable {
+    private class ItemView implements IItemHandlerModifiable {
         
         private final IItemHandlerModifiable input, output;
         
-        View(EnumFacing side) {
+        ItemView(EnumFacing side) {
             if (side.getAxis().isVertical()) {
                 this.input = inputInv;
                 this.output = outputInv;
@@ -111,7 +119,10 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     private static final int INPUT_COUNT = 12;
     private static final int OUTPUT_COUNT = INPUT_COUNT;
     
-    private static final int MAX_PROGRESS = 20 * 5;
+    private static final int MAX_PROGRESS = 1024;
+    private static final int BASE_PROGRESS = 16;
+    private static final int SPEEDUP_PROGRESS = 64;
+    private static final int POWER_PER_TICK = 20;
     
     private final ItemStackHandler otherInv = new DirtyingStackHandler(2) {
         @Override
@@ -139,6 +150,31 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         }
     };
     private final ItemStackHandler outputInv = new DirtyingStackHandler(OUTPUT_COUNT);
+    
+    private static class EnergyStorageMutable extends EnergyStorage {
+        
+        public EnergyStorageMutable(int capacity, int maxReceive, int maxExtract) {
+            super(capacity, maxReceive, maxExtract);
+        }
+
+        public void setEnergyStored(int energy) {
+            this.energy = MathHelper.clamp(energy, 0, getMaxEnergyStored());
+        }
+    };
+    private final EnergyStorageMutable energyStorage = new EnergyStorageMutable(10000, POWER_PER_TICK * 2, POWER_PER_TICK);
+    
+    private class EnergyView extends EnergyStorageMutable {
+        
+        public EnergyView() {
+            super(energyStorage.getMaxEnergyStored(), POWER_PER_TICK * 2, 0);
+            this.setEnergyStored(energyStorage.getEnergyStored());
+        }
+        
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            return energyStorage.receiveEnergy(maxReceive, simulate);
+        }
+    }
     
     private int sourceSlot = -1;
     
@@ -173,6 +209,22 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         return MAX_PROGRESS;
     }
     
+    public float getSpeedFactor() {
+        return Configurations.autoChiselPowered ? (float) energyStorage.getEnergyStored() / energyStorage.getMaxEnergyStored() : 1;
+    }
+    
+    public int getPowerProgressPerTick() {
+        return (int) Math.ceil(getSpeedFactor() * SPEEDUP_PROGRESS);
+    }
+    
+    public int getUsagePerTick() {
+        return (int) Math.ceil(getSpeedFactor() * POWER_PER_TICK);
+    }
+    
+    public void setEnergy(int energy) {
+        this.energyStorage.setEnergyStored(energy);
+    }
+
     protected boolean canOutput(ItemStack stack) {
         ItemStack res = stack;
         for (int i = 0; i < getOutputInv().getSlots(); i++) {
@@ -196,14 +248,18 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         if (getWorld() == null || getWorld().isRemote) {
             return;
         }
+                
+        if (energyStorage.getEnergyStored() == 0 && Configurations.autoChiselNeedsPower) {
+            return;
+        }
         
         ItemStack target = getTarget();
         ItemStack chisel = getChisel();
         ItemStack source = sourceSlot < 0 ? null : getInputInv().getStackInSlot(sourceSlot);
         chisel = chisel == null ? chisel : chisel.copy();
         
-        ICarvingVariation v = target == null ? null : CarvingUtils.getChiselRegistry().getVariation(target);
-        ICarvingGroup g = target == null ? null : CarvingUtils.getChiselRegistry().getGroup(target);
+        ICarvingVariation v = target == null || chisel == null ? null : CarvingUtils.getChiselRegistry().getVariation(target);
+        ICarvingGroup g = target == null || chisel == null ? null : CarvingUtils.getChiselRegistry().getGroup(target);
 
         if (chisel == null || chisel.stackSize < 1 || v == null) {
             sourceSlot = -1;
@@ -219,29 +275,48 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         IChiselItem chiselitem = (IChiselItem) chisel.getItem();
         
         // Make sure to run this block if the source stack is removed, so a new one can be found
-        if ((sourceSlot < 0 && getWorld().getTotalWorldTime() % 20 == 0) || (sourceSlot >= 0 && source == null)) {
+        if ((sourceSlot < 0 && getWorld().getTotalWorldTime() % 20 == 0) || sourceSlot >= 0) {
             // Reset source slot if it's been removed
             if (source == null) {
                 sourceSlot = -1;
             }
-            for (int i = 0; sourceSlot < 0 && i < getInputInv().getSlots(); i++) {
-                ItemStack stack = getInputInv().getStackInSlot(i);
-                if (stack != null && g == CarvingUtils.getChiselRegistry().getGroup(stack)) {
-                    ItemStack res = v.getStack();
-                    res.stackSize = stack.stackSize;
-                    if (canOutput(res) && chiselitem.canChisel(getWorld(), FakePlayerFactory.getMinecraft((WorldServer) getWorld()), chisel, v)) {
-                        sourceSlot = i;
+            // Make sure we can output this stack
+            ItemStack res = v.getStack();
+            if (source != null) {
+                res.stackSize = source.stackSize;
+            }
+            if (source == null || canOutput(res)) {
+                for (int i = 0; sourceSlot < 0 && i < getInputInv().getSlots(); i++) {
+                    ItemStack stack = getInputInv().getStackInSlot(i);
+                    if (stack != null && g == CarvingUtils.getChiselRegistry().getGroup(stack)) {
+                        res.stackSize = stack.stackSize;
+                        if (canOutput(res) && chiselitem.canChisel(getWorld(), FakePlayerFactory.getMinecraft((WorldServer) getWorld()), chisel, v)) {
+                            sourceSlot = i;
+                            source = res.copy();
+                        }
                     }
                 }
+            } else {
+                sourceSlot = -1;
             }
         }
-
+        
         if (sourceSlot >= 0) {
             source = getInputInv().getStackInSlot(sourceSlot);
             Validate.notNull(source);
             if (CarvingUtils.getChiselRegistry().getVariation(source) != v) {
                 if (progress < MAX_PROGRESS) {
-                    progress++;
+                    // Add constant progress
+                    progress = Math.min(MAX_PROGRESS, progress + BASE_PROGRESS);
+                    // Compute progress added by FE
+                    int toUse = Math.min(MAX_PROGRESS - progress, getPowerProgressPerTick());
+                    // Compute FE usage
+                    int powerToUse = getUsagePerTick();
+                    // Avoid NaN
+                    if (toUse > 0 && powerToUse > 0) {
+                        int used = energyStorage.extractEnergy(powerToUse, false);
+                        progress += toUse * ((float) used / powerToUse);
+                    }
                 } else {
                     ItemStack res = v.getStack();
                     source = source.copy();
@@ -279,13 +354,17 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     
     @Override
     public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || 
+               (Configurations.autoChiselPowered && capability == CapabilityEnergy.ENERGY) || 
+               super.hasCapability(capability, facing);
     }
 
     @Override
     public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.new View(facing));
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.new ItemView(facing));
+        } else if (Configurations.autoChiselPowered && capability == CapabilityEnergy.ENERGY) {
+            return CapabilityEnergy.ENERGY.cast(this.new EnergyView());
         }
         return super.getCapability(capability, facing);
     }
@@ -324,6 +403,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         compound.setTag("other", otherInv.serializeNBT());
         compound.setTag("input", inputInv.serializeNBT());
         compound.setTag("output", outputInv.serializeNBT());
+        compound.setInteger("energy", energyStorage.getEnergyStored());
         compound.setInteger("progress", getProgress());
         compound.setInteger("source", sourceSlot);
         if (hasCustomName()) {
@@ -338,6 +418,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         this.otherInv.deserializeNBT(compound.getCompoundTag("other"));
         this.inputInv.deserializeNBT(compound.getCompoundTag("input"));
         this.outputInv.deserializeNBT(compound.getCompoundTag("output"));
+        this.energyStorage.setEnergyStored(compound.getInteger("energy"));
         this.progress = compound.getInteger("progress");
         this.sourceSlot = compound.getInteger("source");
         if (compound.hasKey("customName")) {
