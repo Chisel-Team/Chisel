@@ -3,17 +3,14 @@ package team.chisel.common.inventory;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import lombok.Getter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
-import net.minecraft.inventory.IInventoryChangedListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import team.chisel.api.IChiselItem;
@@ -98,7 +95,8 @@ public class ContainerAutoChisel extends Container {
         super.detectAndSendChanges();
 
         int prog = te.getProgress();
-        int pow = te.getCapability(CapabilityEnergy.ENERGY, null).getEnergyStored();
+        IEnergyStorage energy = te.getCapability(CapabilityEnergy.ENERGY, null); 
+        int pow = energy == null ? 0 : energy.getEnergyStored();
 
         for (IContainerListener listener : listeners) {
             if (prog != progress) {

@@ -214,7 +214,8 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     }
     
     public int getPowerProgressPerTick() {
-        return (int) Math.ceil(getSpeedFactor() * SPEEDUP_PROGRESS);
+        int maxPerTick = Configurations.autoChiselNeedsPower ? (BASE_PROGRESS + SPEEDUP_PROGRESS) : SPEEDUP_PROGRESS;
+        return (int) Math.ceil(getSpeedFactor() * maxPerTick);
     }
     
     public int getUsagePerTick() {
@@ -306,16 +307,22 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
             Validate.notNull(source);
             if (CarvingUtils.getChiselRegistry().getVariation(source) != v) {
                 if (progress < MAX_PROGRESS) {
-                    // Add constant progress
-                    progress = Math.min(MAX_PROGRESS, progress + BASE_PROGRESS);
+                    if (!Configurations.autoChiselNeedsPower) {
+                        // Add constant progress
+                        progress = Math.min(MAX_PROGRESS, progress + BASE_PROGRESS);
+                    }
                     // Compute progress added by FE
                     int toUse = Math.min(MAX_PROGRESS - progress, getPowerProgressPerTick());
                     // Compute FE usage
                     int powerToUse = getUsagePerTick();
                     // Avoid NaN
                     if (toUse > 0 && powerToUse > 0) {
-                        int used = energyStorage.extractEnergy(powerToUse, false);
-                        progress += toUse * ((float) used / powerToUse);
+                        if (Configurations.autoChiselPowered) {
+                            int used = energyStorage.extractEnergy(powerToUse, false);
+                            progress += toUse * ((float) used / powerToUse);
+                        } else {
+                            progress += toUse;
+                        }
                     }
                 } else {
                     ItemStack res = v.getStack();
