@@ -15,6 +15,7 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import team.chisel.Chisel;
@@ -83,6 +84,11 @@ public class BlockAutoChisel extends Block {
                 InventoryHelper.spawnItemStack(worldIn, x, y, z, stack);
             }
         }
+    }
+    
+    @Override
+    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+        return face == EnumFacing.DOWN;
     }
     
     @Override
