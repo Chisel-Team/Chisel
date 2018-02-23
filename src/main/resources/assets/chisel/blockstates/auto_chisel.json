@@ -5,7 +5,8 @@
         "custom": {
             "Solid": "chisel:auto_chisel#base",
             "Cutout": "chisel:auto_chisel#glass"
-        }
+        },
+		"transform": "forge:default-block"
     },
     "variants": {
         "normal": [{}],

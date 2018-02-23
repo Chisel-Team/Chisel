@@ -3,8 +3,7 @@
   "textures": {
     "frame": "chisel:blocks/autochisel/autochisel_frame",
     "side":  "chisel:blocks/autochisel/autochisel_side" ,
-    "end":   "chisel:blocks/autochisel/autochisel_top"  ,
-    "glass": "blocks/glass"
+    "end":   "chisel:blocks/autochisel/autochisel_top"
   },
   "elements": [
     {

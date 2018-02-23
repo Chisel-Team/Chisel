@@ -23,7 +23,9 @@ import team.chisel.Chisel;
 public class BlockAutoChisel extends Block {
 
     public BlockAutoChisel() {
-        super(Material.ROCK);
+        super(Material.IRON);
+        setHardness(2.5f);
+        setHarvestLevel("pickaxe", 1);
         setUnlocalizedName("chisel.autochisel");
     }
 
