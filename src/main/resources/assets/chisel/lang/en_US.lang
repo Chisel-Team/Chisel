@@ -40,6 +40,11 @@ chisel.mode.contiguous.desc=Chisel an area of alike blocks, extending 10 blocks 
 chisel.mode.contiguous_2d.name=Contiguous 2D
 chisel.mode.contiguous_2d.desc=Chisel an area of alike blocks, extending 10 blocks along the plane of the current side.
 
+tile.chisel.autochisel.name=Auto Chisel
+container.autochisel.title=Auto Chisel
+chisel.tooltip.power.stored=%s/%s FE
+chisel.tooltip.power.pertick=%s FE/t
+
 itemGroup.chiselCreativeTab=Chisel
 chisel.jei.title=Chiseling
 
