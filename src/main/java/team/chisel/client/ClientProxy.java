@@ -16,6 +16,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.MissingModsException;
 import net.minecraftforge.fml.common.Optional;
@@ -31,7 +32,9 @@ import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.client.render.ModelLoaderChisel;
+import team.chisel.client.render.RenderAutoChisel;
 import team.chisel.common.CommonProxy;
+import team.chisel.common.block.TileAutoChisel;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.ctm.client.texture.ctx.OffsetProviderRegistry;
 
@@ -77,6 +80,7 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(Chisel.itemOffsetTool, 0, new ModelResourceLocation(Chisel.itemOffsetTool.getRegistryName(), "inventory"));
         
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ChiselBlocks.auto_chisel), 0, new ModelResourceLocation(ChiselBlocks.auto_chisel.getRegistryName(), "normal"));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileAutoChisel.class, new RenderAutoChisel());
 
         // ModelBakery.addVariantName(Chisel.itemChisel, MOD_ID+":itemChisel");
         // MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());

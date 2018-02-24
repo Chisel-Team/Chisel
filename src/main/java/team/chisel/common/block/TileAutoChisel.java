@@ -7,15 +7,20 @@ import org.apache.commons.lang3.Validate;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleDigging;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.profiler.Profiler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
@@ -28,13 +33,11 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
-import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.server.FMLServerHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
@@ -177,6 +180,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     }
     
     private int sourceSlot = -1;
+    private int prevSource = -1;
     
     @Getter
     @Setter
@@ -237,6 +241,17 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         return false;
     }
     
+    protected void setSourceSlot(int slot) {
+        this.sourceSlot = slot;
+    }
+    
+    protected void updateClientSlot() {
+        if (sourceSlot != prevSource) {
+            Chisel.network.sendToDimension(new MessageUpdateAutochiselSource(getPos(), sourceSlot < 0 ? null : inputInv.getStackInSlot(sourceSlot)), getWorld().provider.getDimension());
+        }
+        prevSource = sourceSlot;
+    }
+    
     @SuppressWarnings("null")
     protected void mergeOutput(ItemStack stack) {
         for (int i = 0; stack != null && i < getOutputInv().getSlots(); i++) {
@@ -263,8 +278,9 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         ICarvingGroup g = target == null || chisel == null ? null : CarvingUtils.getChiselRegistry().getGroup(target);
 
         if (chisel == null || chisel.stackSize < 1 || v == null) {
-            sourceSlot = -1;
+            setSourceSlot(-1);
             progress = 0;
+            updateClientSlot();
             return;
         }
         
@@ -279,7 +295,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         if ((sourceSlot < 0 && getWorld().getTotalWorldTime() % 20 == 0) || sourceSlot >= 0) {
             // Reset source slot if it's been removed
             if (source == null) {
-                sourceSlot = -1;
+                setSourceSlot(-1);
             }
             // Make sure we can output this stack
             ItemStack res = v.getStack();
@@ -292,20 +308,21 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
                     if (stack != null && g == CarvingUtils.getChiselRegistry().getGroup(stack)) {
                         res.stackSize = stack.stackSize;
                         if (canOutput(res) && chiselitem.canChisel(getWorld(), FakePlayerFactory.getMinecraft((WorldServer) getWorld()), chisel, v)) {
-                            sourceSlot = i;
+                            setSourceSlot(i);
                             source = res.copy();
                         }
                     }
                 }
             } else {
-                sourceSlot = -1;
+                setSourceSlot(-1);
             }
         }
         
         if (sourceSlot >= 0) {
             source = getInputInv().getStackInSlot(sourceSlot);
             Validate.notNull(source);
-            if (CarvingUtils.getChiselRegistry().getVariation(source) != v) {
+            ICarvingVariation sourceVar = CarvingUtils.getChiselRegistry().getVariation(source);
+            if (sourceVar != v) {
                 if (progress < MAX_PROGRESS) {
                     if (!Configurations.autoChiselNeedsPower) {
                         // Add constant progress
@@ -337,16 +354,14 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
                     chiselitem.onChisel(getWorld(), player, chisel, v);
 
                     inputInv.setStackInSlot(sourceSlot, source.stackSize == 0 ? null : source);
+                    
+                    Chisel.network.sendToDimension(new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlockState()), getWorld().provider.getDimension());
 
-                    SoundUtil.playSound(player, chisel, v.getBlockState());
-                    if (chisel.stackSize == 0) {
-                        getWorld().playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
-                    }
                     otherInv.setStackInSlot(0, chisel.stackSize == 0 ? null : chisel);
 
                     mergeOutput(res);
                     // Try the next slot, if this is invalid it will be fixed next update
-                    sourceSlot = (sourceSlot + 1) % getInputInv().getSlots();
+                    setSourceSlot((sourceSlot + 1) % getInputInv().getSlots());
                     progress = 0;
                 }
             } else {
@@ -357,6 +372,8 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         } else {
             progress = 0;
         }
+        
+        updateClientSlot();
     }
     
     @Override
@@ -452,5 +469,35 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     @Override
     public boolean hasCustomName() {
         return customName != null;
+    }
+    
+    /* == Rendering Data == */
+    
+    @Setter
+    @Getter
+    private @Nullable ItemStack source;
+
+    @SuppressWarnings("null")
+    public void spawnCompletionFX(EntityPlayer player, ItemStack chisel, IBlockState source) {
+        SoundUtil.playSound(player, getPos(), SoundUtil.getSound(player, chisel, source));
+        if (chisel.stackSize == 0) {
+            getWorld().playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
+        }
+        int i = 3;
+        float mid = i / 2f;
+        for (int j = 0; j < i; ++j) {
+            for (int k = 0; k < i; ++k) {
+                for (int l = 0; l < i; ++l) {
+                    double vx = (mid - j) * 0.05;
+                    double vz = (mid - l) * 0.05;
+                    ((ParticleDigging) Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(
+                            EnumParticleTypes.BLOCK_CRACK.getParticleID(), 
+                            pos.getX() + 0.5, pos.getY() + 10/16D, pos.getZ() + 0.5, 
+                            vx, 0, vz,
+                            Block.getIdFromBlock(source.getBlock())))
+                    .setBlockPos(pos).setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(source).getParticleTexture());
+                }
+            }
+        }
     }
 }
