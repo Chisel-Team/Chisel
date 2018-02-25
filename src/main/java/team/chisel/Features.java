@@ -1,7 +1,5 @@
 package team.chisel;
 
-import static team.chisel.common.config.Configurations.concreteVelocityMult;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,7 +27,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -69,9 +66,6 @@ import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselSounds;
-import team.chisel.common.item.ItemChisel;
-import team.chisel.common.item.ItemChisel.ChiselType;
-import team.chisel.common.item.ItemOffsetTool;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.GenerationHandler.WorldGenInfo;
 

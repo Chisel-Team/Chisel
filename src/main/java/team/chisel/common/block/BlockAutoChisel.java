@@ -25,6 +25,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import team.chisel.Chisel;
+import team.chisel.common.init.ChiselTabs;
 
 @ParametersAreNonnullByDefault
 public class BlockAutoChisel extends Block {
@@ -43,6 +44,7 @@ public class BlockAutoChisel extends Block {
         setHardness(2.5f);
         setHarvestLevel("pickaxe", 1);
         setUnlocalizedName("chisel.autochisel");
+        setCreativeTab(ChiselTabs.tab);
         useNeighborBrightness = true;
     }
 
