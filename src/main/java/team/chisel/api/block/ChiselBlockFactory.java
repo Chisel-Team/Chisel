@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -18,6 +19,7 @@ import team.chisel.common.block.ItemChiselBlock;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselBlockFactory {
 
+    @Getter
     private final IForgeRegistry<Block> registry;
     private final String domain;
 

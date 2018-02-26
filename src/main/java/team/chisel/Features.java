@@ -195,7 +195,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             String name = "auto_chisel";
-            GameRegistry.register(new BlockAutoChisel().setRegistryName(name));
+            factory.getRegistry().register(new BlockAutoChisel().setRegistryName(name));
             GameRegistry.registerTileEntity(TileAutoChisel.class, Chisel.MOD_ID + ":" + name);
         }
         

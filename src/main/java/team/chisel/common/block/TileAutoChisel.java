@@ -1,5 +1,6 @@
 package team.chisel.common.block;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -64,8 +65,8 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         
         private final IItemHandlerModifiable input, output;
         
-        ItemView(EnumFacing side) {
-            if (side.getAxis().isVertical()) {
+        ItemView(@Nullable EnumFacing side) {
+            if (side == null || side.getAxis().isVertical()) {
                 this.input = inputInv;
                 this.output = outputInv;
             } else {
@@ -79,7 +80,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         }
 
         @Override
-        public @Nullable ItemStack getStackInSlot(int slot) {
+        public ItemStack getStackInSlot(int slot) {
             if (slot >= 0 && slot < getSlots()) {
                 if (slot < input.getSlots()) {
                     return input.getStackInSlot(slot); 
@@ -87,11 +88,11 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
                     return output.getStackInSlot(slot - input.getSlots());
                 }
             }
-            return null;
+            return ItemStack.EMPTY;
         }
 
         @Override
-        public @Nullable ItemStack insertItem(int slot, @Nullable ItemStack stack, boolean simulate) {
+        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
             if (slot >= 0 && slot < input.getSlots()) {
                 return input.insertItem(slot, stack, simulate);
             }
@@ -99,16 +100,16 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         }
 
         @Override
-        public @Nullable ItemStack extractItem(int slot, int amount, boolean simulate) {
+        public ItemStack extractItem(int slot, int amount, boolean simulate) {
             if (slot >= input.getSlots() && slot < getSlots()) {
                 slot -= input.getSlots();
                 return output.extractItem(slot, amount, simulate);
             }
-            return null;
+            return ItemStack.EMPTY;
         }
 
         @Override
-        public void setStackInSlot(int slot, @Nullable ItemStack stack) {
+        public void setStackInSlot(int slot, ItemStack stack) {
             if (slot >= 0 && slot < getSlots()) {
                 if (slot < input.getSlots()) {
                     input.setStackInSlot(slot, stack);
@@ -116,6 +117,11 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
                     output.setStackInSlot(slot - input.getSlots(), stack);
                 }
             }
+        }
+
+        @Override
+        public int getSlotLimit(int slot) {
+            return 64;
         }
     }
      
@@ -129,9 +135,9 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     
     private final ItemStackHandler otherInv = new DirtyingStackHandler(2) {
         @Override
-        public @Nullable ItemStack insertItem(int slot, @Nullable ItemStack stack, boolean simulate) {
-            if (stack == null) {
-                return null;
+        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+            if (stack.isEmpty()) {
+                return stack;
             }
             if (slot == 0 && stack.getItem() instanceof IChiselItem) {
                 return super.insertItem(slot, stack, simulate);
@@ -145,8 +151,8 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     private final ItemStackHandler inputInv = new DirtyingStackHandler(INPUT_COUNT) {
 
         @Override
-        public @Nullable ItemStack insertItem(int slot, @Nullable ItemStack stack, boolean simulate) {
-            if (stack != null && CarvingUtils.getChiselRegistry().getVariation(stack) != null) {
+        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+            if (!stack.isEmpty() && CarvingUtils.getChiselRegistry().getVariation(stack) != null) {
                 return super.insertItem(slot, stack, simulate);
             }
             return stack;
@@ -193,11 +199,11 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         return otherInv;
     }
     
-    public @Nullable ItemStack getChisel() {
+    public ItemStack getChisel() {
         return getOtherInv().getStackInSlot(0);
     }
     
-    public @Nullable ItemStack getTarget() {
+    public ItemStack getTarget() {
         return getOtherInv().getStackInSlot(1);
     }
     
@@ -234,7 +240,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         ItemStack res = stack;
         for (int i = 0; i < getOutputInv().getSlots(); i++) {
             res = getOutputInv().insertItem(i, res, true);
-            if (res == null) {
+            if (res.isEmpty()) {
                 return true;
             }
         }
@@ -269,15 +275,15 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
             return;
         }
         
-        ItemStack target = getTarget();
-        ItemStack chisel = getChisel();
-        ItemStack source = sourceSlot < 0 ? null : getInputInv().getStackInSlot(sourceSlot);
-        chisel = chisel == null ? chisel : chisel.copy();
+        @Nonnull ItemStack target = getTarget();
+        @Nonnull ItemStack chisel = getChisel();
+        @Nonnull ItemStack source = sourceSlot < 0 ? ItemStack.EMPTY : getInputInv().getStackInSlot(sourceSlot);
+        chisel = chisel.isEmpty() ? ItemStack.EMPTY : chisel.copy();
         
-        ICarvingVariation v = target == null || chisel == null ? null : CarvingUtils.getChiselRegistry().getVariation(target);
-        ICarvingGroup g = target == null || chisel == null ? null : CarvingUtils.getChiselRegistry().getGroup(target);
+        ICarvingVariation v = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getVariation(target);
+        ICarvingGroup g = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getGroup(target);
 
-        if (chisel == null || chisel.stackSize < 1 || v == null) {
+        if (chisel.isEmpty() || v == null) {
             setSourceSlot(-1);
             progress = 0;
             updateClientSlot();
@@ -285,8 +291,8 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         }
         
         // Force a source slot recalc if the stack has changed to something that cannot be converted to the target
-        if (source != null && CarvingUtils.getChiselRegistry().getGroup(source) != g) {
-            source = null;
+        if (!source.isEmpty() && CarvingUtils.getChiselRegistry().getGroup(source) != g) {
+            source = ItemStack.EMPTY;
         }
         
         IChiselItem chiselitem = (IChiselItem) chisel.getItem();
@@ -294,19 +300,19 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
         // Make sure to run this block if the source stack is removed, so a new one can be found
         if ((sourceSlot < 0 && getWorld().getTotalWorldTime() % 20 == 0) || sourceSlot >= 0) {
             // Reset source slot if it's been removed
-            if (source == null) {
+            if (source.isEmpty()) {
                 setSourceSlot(-1);
             }
             // Make sure we can output this stack
             ItemStack res = v.getStack();
-            if (source != null) {
-                res.stackSize = source.stackSize;
+            if (!source.isEmpty()) {
+                res.setCount(source.getCount());
             }
-            if (source == null || canOutput(res)) {
+            if (source.isEmpty() || canOutput(res)) {
                 for (int i = 0; sourceSlot < 0 && i < getInputInv().getSlots(); i++) {
                     ItemStack stack = getInputInv().getStackInSlot(i);
-                    if (stack != null && g == CarvingUtils.getChiselRegistry().getGroup(stack)) {
-                        res.stackSize = stack.stackSize;
+                    if (!stack.isEmpty() && g == CarvingUtils.getChiselRegistry().getGroup(stack)) {
+                        res.setCount(stack.getCount());
                         if (canOutput(res) && chiselitem.canChisel(getWorld(), FakePlayerFactory.getMinecraft((WorldServer) getWorld()), chisel, v)) {
                             setSourceSlot(i);
                             source = res.copy();
@@ -347,17 +353,17 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
                     chisel = chisel.copy();
 
                     EntityPlayerMP player = FakePlayerFactory.getMinecraft((WorldServer) getWorld());
-                    player.inventory.mainInventory[player.inventory.currentItem] = chisel;
+                    player.inventory.mainInventory.set(player.inventory.currentItem, chisel);
                     res = chiselitem.craftItem(chisel, source, res, player);
-                    player.inventory.mainInventory[player.inventory.currentItem] = null;
+                    player.inventory.mainInventory.set(player.inventory.currentItem, ItemStack.EMPTY);
 
                     chiselitem.onChisel(getWorld(), player, chisel, v);
 
-                    inputInv.setStackInSlot(sourceSlot, source.stackSize == 0 ? null : source);
+                    inputInv.setStackInSlot(sourceSlot, source);
                     
                     Chisel.network.sendToDimension(new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlockState()), getWorld().provider.getDimension());
 
-                    otherInv.setStackInSlot(0, chisel.stackSize == 0 ? null : chisel);
+                    otherInv.setStackInSlot(0, chisel);
 
                     mergeOutput(res);
                     // Try the next slot, if this is invalid it will be fixed next update
@@ -366,7 +372,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
                 }
             } else {
                 // This is the same variation, so just move it to the output
-                inputInv.setStackInSlot(sourceSlot, null);
+                inputInv.setStackInSlot(sourceSlot, ItemStack.EMPTY);
                 mergeOutput(source);
             }
         } else {
@@ -377,14 +383,15 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     }
     
     @Override
-    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || 
                (Configurations.autoChiselPowered && capability == CapabilityEnergy.ENERGY) || 
                super.hasCapability(capability, facing);
     }
 
     @Override
-    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+    @Nullable
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.new ItemView(facing));
         } else if (Configurations.autoChiselPowered && capability == CapabilityEnergy.ENERGY) {
@@ -480,7 +487,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     @SuppressWarnings("null")
     public void spawnCompletionFX(EntityPlayer player, ItemStack chisel, IBlockState source) {
         SoundUtil.playSound(player, getPos(), SoundUtil.getSound(player, chisel, source));
-        if (chisel.stackSize == 0) {
+        if (chisel.isEmpty()) {
             getWorld().playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
         }
         int i = 3;

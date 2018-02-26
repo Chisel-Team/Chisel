@@ -12,7 +12,7 @@ import team.chisel.common.block.TileAutoChisel;
 public class RenderAutoChisel extends TileEntitySpecialRenderer<TileAutoChisel> {
     
     @Override
-    public void renderTileEntityAt(@Nonnull TileAutoChisel te, double x, double y, double z, float partialTicks, int destroyStage) {
+    public void render(@Nonnull TileAutoChisel te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         if (te instanceof TileAutoChisel) {
             ItemStack source = te.getSource();
 

@@ -17,12 +17,13 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import team.chisel.Chisel;
+import team.chisel.common.init.ChiselItems;
 import team.chisel.common.inventory.ContainerAutoChisel;
 
 public class GuiAutoChisel extends GuiContainer {
     
     @Nonnull
-    private static final ResourceLocation TEXTURE = new ResourceLocation(Chisel.MOD_ID, "textures/autoChisel.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(Chisel.MOD_ID, "textures/autochisel.png");
     
     private static final int PROG_BAR_LENGTH = 50;
     private static final int POWER_BAR_LENGTH = 160;
@@ -30,12 +31,19 @@ public class GuiAutoChisel extends GuiContainer {
     private final ContainerAutoChisel container;
     
     @Nonnull
-    private final ItemStack fakeChisel = new ItemStack(Chisel.itemChiselIron);
+    private final ItemStack fakeChisel = new ItemStack(ChiselItems.chisel_iron);
     
     public GuiAutoChisel(ContainerAutoChisel container) {
         super(container);
         this.container = container;
         this.ySize = 200;
+    }
+    
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
     }
 
     @Override
@@ -78,8 +86,8 @@ public class GuiAutoChisel extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String s = container.te.getDisplayName().getUnformattedText();
-        this.fontRendererObj.drawString(s, this.xSize / 2 - this.fontRendererObj.getStringWidth(s) / 2, 6, 0x404040);
-        this.fontRendererObj.drawString(container.invPlayer.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 0x404040);
+        this.fontRenderer.drawString(s, this.xSize / 2 - this.fontRenderer.getStringWidth(s) / 2, 6, 0x404040);
+        this.fontRenderer.drawString(container.invPlayer.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 0x404040);
         
         mouseX -= guiLeft;
         mouseY -= guiTop;

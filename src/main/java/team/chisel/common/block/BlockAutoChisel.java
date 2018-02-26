@@ -59,8 +59,7 @@ public class BlockAutoChisel extends Block {
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, @Nullable ItemStack heldItem, EnumFacing side, float hitX, float hitY,
-            float hitZ) {
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
             playerIn.openGui(Chisel.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
@@ -98,14 +97,14 @@ public class BlockAutoChisel extends Block {
         double x = pos.getX(), y = pos.getY(), z = pos.getZ();
         for (int i = 0; i < inv.getSlots(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
-            if (stack != null) {
+            if (!stack.isEmpty()) {
                 InventoryHelper.spawnItemStack(worldIn, x, y, z, stack);
             }
         }
     }
     
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn) {
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         BOXES.forEach(bb -> addCollisionBoxToList(pos, entityBox, collidingBoxes, bb));
     }
     

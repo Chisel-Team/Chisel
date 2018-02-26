@@ -19,13 +19,14 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import team.chisel.Chisel;
+import team.chisel.common.init.ChiselItems;
 
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageAutochiselFX implements IMessage {
     
     private @Nonnull BlockPos pos = BlockPos.ORIGIN;
-    private @Nonnull ItemStack chisel = new ItemStack(Chisel.itemChiselIron);
+    private @Nonnull ItemStack chisel = new ItemStack(ChiselItems.chisel_iron);
     private @Nonnull IBlockState state = Blocks.AIR.getDefaultState();
     
     @Override
