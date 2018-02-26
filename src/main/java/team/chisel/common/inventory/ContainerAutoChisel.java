@@ -36,7 +36,7 @@ public class ContainerAutoChisel extends Container {
     public final TileAutoChisel te;
     
     private final int beginInputSlots, endInputSlots;
-    private final int chiselSlot, targetSlot;
+    public  final int chiselSlot, targetSlot;
     private final int beginOutputSlots, endOutputSlots;
     private final int beginPlayerSlots, endPlayerSlots;
 

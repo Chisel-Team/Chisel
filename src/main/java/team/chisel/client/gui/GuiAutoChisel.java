@@ -3,10 +3,15 @@ package team.chisel.client.gui;
 import java.text.NumberFormat;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.Lists;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.energy.CapabilityEnergy;
@@ -16,12 +21,16 @@ import team.chisel.common.inventory.ContainerAutoChisel;
 
 public class GuiAutoChisel extends GuiContainer {
     
+    @Nonnull
     private static final ResourceLocation TEXTURE = new ResourceLocation(Chisel.MOD_ID, "textures/autoChisel.png");
     
     private static final int PROG_BAR_LENGTH = 50;
     private static final int POWER_BAR_LENGTH = 160;
 
     private final ContainerAutoChisel container;
+    
+    @Nonnull
+    private final ItemStack fakeChisel = new ItemStack(Chisel.itemChiselIron);
     
     public GuiAutoChisel(ContainerAutoChisel container) {
         super(container);
@@ -46,6 +55,24 @@ public class GuiAutoChisel extends GuiContainer {
                 drawTexturedModalRect(guiLeft + 8, guiTop + 94, 8, 206, (int) (((float) energy.getEnergyStored() / energy.getMaxEnergyStored()) * POWER_BAR_LENGTH) + 1, 4);
             }
         }
+        
+        if (!container.getSlot(container.chiselSlot).getHasStack()) {
+            drawGhostItem(fakeChisel, guiLeft + 80, guiTop + 28);
+        }
+        if (!container.getSlot(container.targetSlot).getHasStack()) {
+            drawTexturedModalRect(guiLeft + 80, guiTop + 64, 176, 34, 16, 16);
+        }
+    }
+    
+    private void drawGhostItem(@Nonnull ItemStack stack, int x, int y) {
+        mc.getRenderItem().renderItemIntoGUI(stack, x, y);
+        mc.getTextureManager().bindTexture(TEXTURE);
+        float z = zLevel;
+        zLevel = 101;
+        GlStateManager.color(1, 1, 1, 0.5f);
+        drawTexturedModalRect(x, y, x - guiLeft, y - guiTop, 16, 16);
+        GlStateManager.color(1, 1, 1, 1);
+        zLevel = z;
     }
 
     @Override
