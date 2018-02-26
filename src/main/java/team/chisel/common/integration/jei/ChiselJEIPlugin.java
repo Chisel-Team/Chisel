@@ -1,6 +1,7 @@
 package team.chisel.common.integration.jei;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -13,8 +14,8 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import team.chisel.Features;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.init.ChiselItems;
@@ -31,13 +32,19 @@ public class ChiselJEIPlugin implements IModPlugin {
     public void register(IModRegistry registry){
 
         registry.handleRecipes(ICarvingGroup.class, ChiselRecipeWrapper::new, "chisel.chiseling");
-        registry.addRecipes(Carving.chisel.getSortedGroupNames().stream().map(s -> Carving.chisel.getGroup(s)).collect(Collectors.toList()), category.getUid());
-
-        if (Features.CHISEL.enabled()) {
-            registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_iron), category.getUid());
-            registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_diamond), category.getUid());
-            registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_hitech), category.getUid());
-        }
+        registry.addRecipes(Carving.chisel.getSortedGroupNames().stream()
+                            .map(s -> Carving.chisel.getGroup(s))
+                            .collect(Collectors.toList()), category.getUid());
+        
+        Arrays.stream(new Item[] {ChiselItems.chisel_iron, ChiselItems.chisel_diamond, ChiselItems.chisel_hitech})
+              .map(ItemStack::new)
+              .forEach(stack -> {
+                  registry.addRecipeCatalyst(stack, category.getUid());
+                  registry.addIngredientInfo(stack, ItemStack.class,
+                          "jei.chisel.desc.chisel_generic", 
+                          "\n",
+                          "jei.chisel.desc." + stack.getItem().getRegistryName().getResourcePath());
+              });
 
         ArrayList<ItemStack> itemStacks = new ArrayList<ItemStack>();
 

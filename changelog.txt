@@ -1,3 +1,9 @@
+0.2.0:
+New
+- The Auto Chisel has made its glorious return! It can now accept FE (Forge Energy) to increase its speed, but will run without any power. No more upgrades!
+- Added JEI descriptions for chisels
+- #645 Optimized all of our textures, for a sweet 75% decrease in jar size
+
 0.1.1:
 New
 - Default chisel durabilities were slightly buffed, to make them even multiples of 64. To get these new values, remove the durability configs from your config file.

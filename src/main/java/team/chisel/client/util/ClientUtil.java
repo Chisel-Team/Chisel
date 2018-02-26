@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.ParticleDigging;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -82,6 +83,8 @@ public class ClientUtil {
 
         state = state.getActualState(world, pos);
         int i = 4;
+        
+        TextureAtlasSprite texture = Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state).getParticleTexture();
 
         for (int j = 0; j < i; ++j) {
             for (int k = 0; k < i; ++k) {
@@ -89,10 +92,8 @@ public class ClientUtil {
                     double d0 = (double) pos.getX() + ((double) j + 0.5D) / (double) i;
                     double d1 = (double) pos.getY() + ((double) k + 0.5D) / (double) i;
                     double d2 = (double) pos.getZ() + ((double) l + 0.5D) / (double) i;
-                    ((ParticleDigging) Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.BLOCK_CRACK.getParticleID(), d0, d1, d2, d0 - pos.getX() - 0.5D, d1 - pos.getY()
-                            - 0.5D, d2 - pos.getZ() - 0.5D, Block.getIdFromBlock(state.getBlock()))).setBlockPos(pos).setParticleTexture(
-                            Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state).getParticleTexture());
-                    ;
+                    ((ParticleDigging) Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.BLOCK_CRACK.getParticleID(), d0, d1, d2, d0 - pos.getX() - 0.5D,
+                            d1 - pos.getY() - 0.5D, d2 - pos.getZ() - 0.5D, Block.getIdFromBlock(state.getBlock()))).setBlockPos(pos).setParticleTexture(texture);
                 }
             }
         }

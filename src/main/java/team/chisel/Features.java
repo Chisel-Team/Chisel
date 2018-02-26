@@ -1,7 +1,5 @@
 package team.chisel;
 
-import static team.chisel.common.config.Configurations.concreteVelocityMult;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,7 +27,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
-import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -48,6 +45,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -60,10 +58,11 @@ import team.chisel.api.block.VariationData;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.handler.BlockSpeedHandler;
 import team.chisel.client.sound.ChiselSoundTypes;
+import team.chisel.common.block.BlockAutoChisel;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableCarpet;
-import team.chisel.common.block.BlockCarvableFalling;
 import team.chisel.common.block.ItemChiselBlock;
+import team.chisel.common.block.TileAutoChisel;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
@@ -188,6 +187,21 @@ public enum Features {
         void addRecipes(IForgeRegistry<IRecipe> registry)
         {
             addShapedRecipe(registry, new ItemStack(ChiselBlocks.antiblock, 8, 15), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone");
+        }
+    },
+    
+    AUTOCHISEL {
+        
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            String name = "auto_chisel";
+            GameRegistry.register(new BlockAutoChisel().setRegistryName(name));
+            GameRegistry.registerTileEntity(TileAutoChisel.class, Chisel.MOD_ID + ":" + name);
+        }
+        
+        @Override
+        void addItems(IForgeRegistry<Item> registry) {
+            registry.register(new ItemBlock(ChiselBlocks.auto_chisel).setRegistryName(ChiselBlocks.auto_chisel.getRegistryName()));
         }
     },
 

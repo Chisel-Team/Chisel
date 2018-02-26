@@ -39,6 +39,8 @@ import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
+import team.chisel.common.block.MessageAutochiselFX;
+import team.chisel.common.block.MessageUpdateAutochiselSource;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.config.Configurations;
@@ -74,6 +76,8 @@ public class Chisel implements Reference {
         network.registerMessage(PacketHitechSettings.Handler.class, PacketHitechSettings.class, 1, Side.SERVER);
         network.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, 2, Side.CLIENT);
         network.registerMessage(PacketChiselMode.Handler.class, PacketChiselMode.class, 3, Side.SERVER);
+        network.registerMessage(MessageUpdateAutochiselSource.Handler.class, MessageUpdateAutochiselSource.class, 4, Side.CLIENT);
+        network.registerMessage(MessageAutochiselFX.Handler.class, MessageAutochiselFX.class, 5, Side.CLIENT);
     }
     
     private static Map<String, Block> remaps = ImmutableMap.of();

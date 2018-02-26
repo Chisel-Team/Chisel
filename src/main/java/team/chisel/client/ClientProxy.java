@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -16,6 +17,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.MissingModsException;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -33,6 +35,7 @@ import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.client.render.ModelLoaderChisel;
 import team.chisel.common.CommonProxy;
+import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.ctm.client.texture.ctx.OffsetProviderRegistry;
 
@@ -76,6 +79,9 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(ChiselItems.chisel_hitech, 0, new ModelResourceLocation(ChiselItems.chisel_hitech.getRegistryName(), "inventory"));
 
         ModelLoader.setCustomModelResourceLocation(ChiselItems.offsettool, 0, new ModelResourceLocation(ChiselItems.offsettool.getRegistryName(), "inventory"));
+        
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ChiselBlocks.auto_chisel), 0, new ModelResourceLocation(ChiselBlocks.auto_chisel.getRegistryName(), "normal"));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileAutoChisel.class, new RenderAutoChisel());
 
         // ModelBakery.addVariantName(Chisel.itemChisel, MOD_ID+":itemChisel");
         // MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
