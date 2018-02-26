@@ -31,7 +31,7 @@ import team.chisel.common.init.ChiselTabs;
 public class BlockAutoChisel extends Block {
     
     private static final ImmutableList<AxisAlignedBB> BOXES = ImmutableList.<AxisAlignedBB>builder()
-            .add(new AxisAlignedBB(0, 0, 0, 16, 10/16f, 16))
+            .add(new AxisAlignedBB(0, 0, 0, 1, 10/16f, 1))
             .add(new AxisAlignedBB(0, 10/16f, 0, 1/16f, 1, 1))
             .add(new AxisAlignedBB(15/16f, 10/16f, 0, 1, 1, 1))
             .add(new AxisAlignedBB(0, 10/16f, 0, 1, 1, 1/16f))
