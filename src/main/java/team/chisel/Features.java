@@ -35,6 +35,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -288,8 +289,8 @@ public enum Features {
 
             BlockCreator<BlockCarvable> bookshelfCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
-                public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-                    return Blocks.BOOKSHELF.getDrops(world, pos, state, fortune);
+                public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+                    Blocks.BOOKSHELF.getDrops(drops, world, pos, state, fortune);
                 }
 
                 @Override
@@ -1398,13 +1399,9 @@ public enum Features {
                 }
 
                 @Override
-                public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-                    ArrayList drops = new ArrayList();
-                    Random rand = world instanceof World?((World)world).rand:RANDOM;
-
+                public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+                    Random rand = world instanceof World ? ((World)world).rand : RANDOM;
                     drops.add(new ItemStack(Items.GLOWSTONE_DUST, this.quantityDropped(state, fortune, rand)));
-
-                    return drops;
                 }
             };
 
