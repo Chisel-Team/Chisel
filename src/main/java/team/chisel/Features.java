@@ -1,6 +1,5 @@
 package team.chisel;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -35,8 +34,8 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -206,8 +205,8 @@ public enum Features {
         }
         
         @Override
-        void addRecipes() {
-            GameRegistry.addRecipe(new ShapedOreRecipe(ChiselBlocks.auto_chisel, "GGG", "GRG", "III", 'G', "blockGlass", 'R', "dustRedstone", 'I', "ingotIron"));
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
+            addShapedRecipe(registry, ChiselBlocks.auto_chisel, "GGG", "GRG", "III", 'G', "blockGlass", 'R', "dustRedstone", 'I', "ingotIron");
         }
     },
 
