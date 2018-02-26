@@ -197,6 +197,11 @@ public enum Features {
         void addItems() {
             GameRegistry.register(new ItemBlock(ChiselBlocks.auto_chisel).setRegistryName(ChiselBlocks.auto_chisel.getRegistryName()));
         }
+        
+        @Override
+        void addRecipes() {
+            GameRegistry.addRecipe(new ShapedOreRecipe(ChiselBlocks.auto_chisel, "GGG", "GRG", "III", 'G', "blockGlass", 'R', "dustRedstone", 'I', "ingotIron"));
+        }
     },
 
     BASALT {
