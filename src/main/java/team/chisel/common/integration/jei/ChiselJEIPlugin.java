@@ -1,7 +1,7 @@
 package team.chisel.common.integration.jei;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -12,6 +12,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import team.chisel.Chisel;
 import team.chisel.common.carving.Carving;
@@ -22,17 +23,27 @@ import team.chisel.common.integration.jei.ChiselRecipeHandler.CarvingGroupWrappe
 @ParametersAreNonnullByDefault
 public class ChiselJEIPlugin implements IModPlugin {
 
+    @SuppressWarnings("null")
     @Override
     public void register(IModRegistry registry){
         ChiselRecipeCategory category = new ChiselRecipeCategory(registry.getJeiHelpers().getGuiHelper()); 
         registry.addRecipeCategories(category);
         
         registry.addRecipeHandlers(new ChiselRecipeHandler());
-        registry.addRecipes(Carving.chisel.getSortedGroupNames().stream().map(s -> Carving.chisel.getGroup(s)).map(g -> new CarvingGroupWrapper(g)).collect(Collectors.toList()));
+        registry.addRecipes(Carving.chisel.getSortedGroupNames().stream()
+                            .map(s -> Carving.chisel.getGroup(s))
+                            .map(g -> new CarvingGroupWrapper(g))
+                            .collect(Collectors.toList()));
         
-        registry.addRecipeCategoryCraftingItem(new ItemStack(Chisel.itemChiselIron), category.getUid());
-        registry.addRecipeCategoryCraftingItem(new ItemStack(Chisel.itemChiselDiamond), category.getUid());
-        registry.addRecipeCategoryCraftingItem(new ItemStack(Chisel.itemChiselHitech), category.getUid());
+        Arrays.stream(new Item[] {Chisel.itemChiselIron, Chisel.itemChiselDiamond, Chisel.itemChiselHitech})
+              .map(ItemStack::new)
+              .forEach(stack -> {
+                  registry.addRecipeCategoryCraftingItem(stack, category.getUid());
+                  registry.addDescription(stack, 
+                          "jei.chisel.desc.chisel_generic", 
+                          "\n",
+                          "jei.chisel.desc." + stack.getItem().getRegistryName().getResourcePath());
+              });
 
         ArrayList<ItemStack> itemStacks = new ArrayList<ItemStack>();
 

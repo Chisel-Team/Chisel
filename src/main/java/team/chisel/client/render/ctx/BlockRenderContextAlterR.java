@@ -1,8 +1,8 @@
 package team.chisel.client.render.ctx;
 
-import javax.annotation.Nonnull;
+import java.util.Random;
 
-import static team.chisel.client.ClientUtil.rand;
+import javax.annotation.Nonnull;
 
 import lombok.Getter;
 import net.minecraft.util.math.BlockPos;
@@ -11,7 +11,9 @@ import team.chisel.client.render.texture.ChiselTextureAlterR;
 import team.chisel.ctm.client.texture.ctx.TextureContextPosition;
 
 public class BlockRenderContextAlterR extends TextureContextPosition {
-    
+
+    private static final Random rand = new Random();
+
     @Getter
     private final int texture;
 

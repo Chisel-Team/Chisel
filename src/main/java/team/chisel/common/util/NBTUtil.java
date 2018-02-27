@@ -1,11 +1,20 @@
 package team.chisel.common.util;
 
+import java.util.Optional;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.google.common.base.Strings;
+
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import team.chisel.Chisel;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.client.gui.PreviewType;
+import team.chisel.common.carving.ChiselModeRegistry;
+import team.chisel.common.item.ChiselMode;
 
 public class NBTUtil {
 
@@ -15,6 +24,7 @@ public class NBTUtil {
     private static final @Nonnull String KEY_SELECTION_SLOT = "selectslot";
     private static final @Nonnull String KEY_TARGET_SLOT = "targetslot";
     private static final @Nonnull String KEY_ROTATE = "rotate";
+    private static final @Nonnull String KEY_MODE = "mode";
 
     @SuppressWarnings("null")
     public static @Nonnull NBTTagCompound getTag(@Nonnull ItemStack stack) {
@@ -78,5 +88,15 @@ public class NBTUtil {
 
     public static void setHitechRotate(@Nonnull ItemStack chisel, boolean rotate) {
         getChiselTag(chisel).setBoolean(KEY_ROTATE, rotate);
+    }
+
+    public static IChiselMode getChiselMode(@Nonnull ItemStack chisel) {
+        String mode = getChiselTag(chisel).getString(KEY_MODE);
+        return Optional.ofNullable(CarvingUtils.getModeRegistry().getModeByName(mode))
+                .orElse(ChiselMode.SINGLE);
+    }
+
+    public static void setChiselMode(@Nonnull ItemStack chisel, @Nonnull IChiselMode mode) {
+        getChiselTag(chisel).setString(KEY_MODE, mode.name());
     }
 }

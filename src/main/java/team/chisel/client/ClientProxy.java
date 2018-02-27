@@ -8,12 +8,15 @@ import lombok.SneakyThrows;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.MissingModsException;
 import net.minecraftforge.fml.common.Optional;
@@ -24,11 +27,15 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
+import team.chisel.api.block.ChiselBlockBuilder;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
 import team.chisel.client.render.ModelLoaderChisel;
+import team.chisel.client.render.RenderAutoChisel;
 import team.chisel.common.CommonProxy;
+import team.chisel.common.block.TileAutoChisel;
+import team.chisel.common.init.ChiselBlocks;
 import team.chisel.ctm.client.texture.ctx.OffsetProviderRegistry;
 
 @SideOnly(Side.CLIENT)
@@ -43,7 +50,7 @@ public class ClientProxy extends CommonProxy {
 
         if (!(Boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment")) {
             Field missingException = ReflectionHelper.findField(FMLClientHandler.class, "modsMissing");
-            VersionRange range = VersionRange.createFromVersionSpec("[MC1.10.2-0.2.0.18,)");
+            VersionRange range = VersionRange.createFromVersionSpec("[MC1.10.2-0.2.3.26,)");
             if (!Loader.isModLoaded("ctm") || !range.containsVersion(Loader.instance().getIndexedModList().get("ctm").getProcessedVersion())) {
                 if (missingException.get(FMLClientHandler.instance()) == null) {
                     missingException.set(FMLClientHandler.instance(), new MissingModsException(ImmutableSet.of(new DefaultArtifactVersion("CTM", range)), MOD_ID, MOD_NAME));
@@ -71,6 +78,9 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(Chisel.itemChiselHitech, 0, new ModelResourceLocation(Chisel.itemChiselHitech.getRegistryName(), "inventory"));
 
         ModelLoader.setCustomModelResourceLocation(Chisel.itemOffsetTool, 0, new ModelResourceLocation(Chisel.itemOffsetTool.getRegistryName(), "inventory"));
+        
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ChiselBlocks.auto_chisel), 0, new ModelResourceLocation(ChiselBlocks.auto_chisel.getRegistryName(), "normal"));
+        ClientRegistry.bindTileEntitySpecialRenderer(TileAutoChisel.class, new RenderAutoChisel());
 
         // ModelBakery.addVariantName(Chisel.itemChisel, MOD_ID+":itemChisel");
         // MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
@@ -103,6 +113,11 @@ public class ClientProxy extends CommonProxy {
     @Override
     public World getClientWorld() {
         return Minecraft.getMinecraft().world;
+    }
+    
+    @Override
+    public EntityPlayer getClientPlayer() {
+        return Minecraft.getMinecraft().player;
     }
     
     @Override

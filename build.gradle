@@ -17,7 +17,7 @@ buildscript {
 }
 plugins {
     id 'net.franz-becker.gradle-lombok' version '1.5'
-	id 'com.matthewprenger.cursegradle' version '1.0.8'
+	id 'com.matthewprenger.cursegradle' version '1.0.10'
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -189,7 +189,7 @@ curseforge {
         id = project.projectId
         changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
         changelogType = 'html'
-        releaseType = 'alpha'
+        releaseType = project.curse_type
 		addGameVersion '1.10'
 		addGameVersion '1.10.2'
         mainArtifact(jar) {

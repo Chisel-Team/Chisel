@@ -1,10 +1,16 @@
 package team.chisel.common.integration.imc;
 
+import java.util.Set;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 
+import gnu.trove.map.TObjectIntMap;
+import gnu.trove.map.hash.TObjectIntHashMap;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
@@ -22,6 +28,8 @@ import team.chisel.common.carving.Carving;
 public class IMCHandler {
 
     public static final IMCHandler INSTANCE = new IMCHandler();
+    
+    public final TObjectIntMap<String> imcCounts = new TObjectIntHashMap<>();
 
     private int order = 1000;
 
@@ -53,12 +61,17 @@ public class IMCHandler {
         }
         return Pair.of(stack, state);
     }
+    
+    private SetMultimap<String, String> deprecatedUses = HashMultimap.create();
 
     @SuppressWarnings("deprecation")
     private void handle(FMLInterModComms.IMCMessage message, IMC type) {
-        Chisel.logger.info("Received IMC from {}, of type {}.", message.getSender(), message.key);
+        imcCounts.adjustOrPutValue(message.getSender(), 1, 1);
         if (type.isDeprecated()) {
-            Chisel.logger.warn("MOD {} IS USING DEPRECATED IMC {}. This IMC type may be removed soon, please notify the author of this mod.", message.getSender(), type);
+            Set<String> usedForMod = deprecatedUses.get(message.getSender());
+            if (usedForMod.add(type.toString())) {
+                Chisel.logger.warn("Mod {} is using deprecated IMC {}! This IMC type may be removed soon, please notify the author of this mod.", message.getSender(), type);
+            }
         }
 
         ICarvingRegistry reg = Carving.chisel;
@@ -89,7 +102,7 @@ public class IMCHandler {
             case ADD_VARIATION_V2: {
                 NBTTagCompound tag = message.getNBTValue();
                 String group = tag.getString("group");
-                Preconditions.checkNotNull(Strings.emptyToNull(group), "No variation specified");
+                Preconditions.checkNotNull(Strings.emptyToNull(group), "No group specified");
                 
                 Pair<ItemStack, IBlockState> variationdata = parseNBT(tag);
                 ICarvingVariation v;

@@ -1,21 +1,30 @@
 package team.chisel.common.carving;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.google.common.base.Joiner;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import team.chisel.Chisel;
+import net.minecraft.util.SoundEvent;
+import net.minecraftforge.oredict.OreDictionary;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.common.init.ChiselSounds;
 
 @ParametersAreNonnullByDefault
 public class Carving implements ICarvingRegistry {
@@ -52,6 +61,8 @@ public class Carving implements ICarvingRegistry {
 	}
 
 	GroupList groups = new GroupList();
+	
+	private final Multimap<String, ICarvingGroup> oreLookup = HashMultimap.create();
 
 	public static final ICarvingRegistry chisel = new Carving();
 	public static final Carving needle = new Carving();
@@ -155,9 +166,32 @@ public class Carving implements ICarvingRegistry {
         return groups.getGroup(state);
     }
 
-	@Override
+	@SuppressWarnings("deprecation")
+    @Override
 	public @Nullable ICarvingGroup getGroup(ItemStack stack) {
-	    return groups.getGroup(stack);
+	    ICarvingGroup group = groups.getGroup(stack);
+	    List<ICarvingGroup> oreGroups = Arrays.stream(OreDictionary.getOreIDs(stack))
+	                                          .mapToObj(OreDictionary::getOreName)
+	                                          .map(oreLookup::get)
+	                                          .flatMap(Collection::stream)
+	                                          .filter(Objects::nonNull)
+	                                          .collect(Collectors.toList());
+	        
+        if (oreGroups.isEmpty() || (group != null && oreGroups.get(0).getName().equals(group.getName()))) {
+            return group;
+        } else if (group == null && oreGroups.size() == 1) {
+            return oreGroups.get(0);
+        } else {
+            if (group != null) {
+                oreGroups.add(0, group);
+            }
+            String name = Joiner.on("+").join(oreGroups.stream().map(ICarvingGroup::getName).iterator());
+            ICarvingGroup ret = CarvingUtils.getDefaultGroupFor(name);
+            for (ICarvingGroup v : oreGroups) {
+                v.getVariations().forEach(ret::addVariation);
+            }
+            return ret;
+        }
 	}
 
 	@Override
@@ -167,8 +201,11 @@ public class Carving implements ICarvingRegistry {
 
 	@Override
 	public @Nullable ICarvingGroup removeGroup(String groupName) {
-		ICarvingGroup g = groups.getGroupByName(groupName);
-		return groups.remove(g) ? g : null;
+		ICarvingGroup group = groups.getGroupByName(groupName);
+		for (Collection<ICarvingGroup> oregroups : oreLookup.asMap().values()) {
+		    oregroups.removeIf(g -> g.getName().equals(groupName));
+		}
+		return groups.remove(group) ? group : null;
 	}
 
 	@Override
@@ -233,7 +270,7 @@ public class Carving implements ICarvingRegistry {
 	public void registerOre(String name, String oreName) {}
 
 	@Override
-	public void setVariationSound(String name, String sound) {
+	public void setVariationSound(String name, SoundEvent sound) {
 		ICarvingGroup group = groups.getGroupByName(name);
 		if (group != null) {
 			group.setSound(sound);
@@ -243,26 +280,26 @@ public class Carving implements ICarvingRegistry {
 	}
 
 	@Override
-	public String getVariationSound(IBlockState state) {
+	public SoundEvent getVariationSound(IBlockState state) {
 		ICarvingGroup group = groups.getGroup(state);
 		return getSound(group);
 	}
 
 	@Override
-	public String getVariationSound(ItemStack stack) {
+	public SoundEvent getVariationSound(ItemStack stack) {
 		ICarvingGroup group = groups.getGroup(stack);
 		return getSound(group);
 	}
 	
 	@Override
-	public String getVariationSound(@Nullable ICarvingVariation variation) {
+	public SoundEvent getVariationSound(@Nullable ICarvingVariation variation) {
 	    ICarvingGroup group = variation == null ? null : groups.getGroup(variation);
 	    return getSound(group);
 	}
 
-	private String getSound(@Nullable ICarvingGroup group) {
-		String sound = group == null ? null : group.getSound();
-		return sound == null ? Chisel.MOD_ID + ":chisel.fallback" : sound;
+	private SoundEvent getSound(@Nullable ICarvingGroup group) {
+	    SoundEvent sound = group == null ? null : group.getSound();
+		return sound == null ? ChiselSounds.fallback : sound;
 	}
 
 	@Override
@@ -271,5 +308,10 @@ public class Carving implements ICarvingRegistry {
 		names.addAll(groups.getNames());
 		Collections.sort(names);
 		return names;
+	}
+	
+	@Override
+	public void setOreName(ICarvingGroup group, String ore) {
+	    oreLookup.put(ore, group);
 	}
 }
