@@ -1,7 +1,6 @@
 package team.chisel.common.block;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import io.netty.buffer.ByteBuf;
 import lombok.AllArgsConstructor;
@@ -21,7 +20,7 @@ import team.chisel.Chisel;
 public class MessageUpdateAutochiselSource implements IMessage {
     
     private @Nonnull BlockPos pos = BlockPos.ORIGIN;
-    private @Nullable ItemStack stack;
+    private @Nonnull ItemStack stack;
     
     @Override
     public void toBytes(ByteBuf buf) {

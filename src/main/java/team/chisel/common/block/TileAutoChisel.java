@@ -253,7 +253,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     
     protected void updateClientSlot() {
         if (sourceSlot != prevSource) {
-            Chisel.network.sendToDimension(new MessageUpdateAutochiselSource(getPos(), sourceSlot < 0 ? null : inputInv.getStackInSlot(sourceSlot)), getWorld().provider.getDimension());
+            Chisel.network.sendToDimension(new MessageUpdateAutochiselSource(getPos(), sourceSlot < 0 ? ItemStack.EMPTY : inputInv.getStackInSlot(sourceSlot)), getWorld().provider.getDimension());
         }
         prevSource = sourceSlot;
     }
