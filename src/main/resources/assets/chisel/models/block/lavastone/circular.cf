@@ -1,6 +1,0 @@
-{
-    "textures":[
-        "minecraft:blocks/lava_still.ctx",
-        "chisel:fluid/circular.ctx"
-    ]
-}

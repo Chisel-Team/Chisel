@@ -1,6 +1,6 @@
 {
   "parent": "chisel:block/block_no_ao",
-  "ambientocclusion": false,
+  "ambientocclusion": true,
   "elements": [
     {
       "from": [  0,  0,  0 ],

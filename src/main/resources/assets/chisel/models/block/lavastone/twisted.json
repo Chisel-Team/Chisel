@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:lavastone/twisted-side.cf",
-  "overrides":{
-    "UP":"chisel:lavastone/twisted-top.cf",
-    "DOWN":"chisel:lavastone/twisted-top.cf"
-  }
-}

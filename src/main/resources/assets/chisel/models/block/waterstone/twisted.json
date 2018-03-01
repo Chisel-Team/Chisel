@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:waterstone/twisted-side.cf",
-  "overrides":{
-    "UP":"chisel:waterstone/twisted-top.cf",
-    "DOWN":"chisel:waterstone/twisted-top.cf"
-  }
-}

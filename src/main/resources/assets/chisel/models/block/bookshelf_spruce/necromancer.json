@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/bookshelf_spruce/_base",
-  "textures": {
-  	"overlay": "chisel:blocks/bookshelf/necromancer"
-  },
-  "ctm_version": 1
-}

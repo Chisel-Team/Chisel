@@ -3,19 +3,15 @@
     "defaults": {
         "model": "forge:multi-layer",
         "custom": {
-		    "base": "chisel:auto_chisel#base",
-            "Solid": "chisel:auto_chisel#base",
+		        "base"  : "chisel:auto_chisel#base",
+            "Solid" : "chisel:auto_chisel#base",
             "Cutout": "chisel:auto_chisel#glass"
         },
-		"transform": "forge:default-block"
+		    "transform": "forge:default-block"
     },
     "variants": {
         "normal": [{}],
-        "base": [{
-            "model": "chisel:auto_chisel/base"
-        }],
-        "glass": [{
-            "model": "chisel:auto_chisel/glass"
-        }]
+        "base"  : [{ "model": "chisel:auto_chisel/base"  }],
+        "glass" : [{ "model": "chisel:auto_chisel/glass" }]
     }
 }
