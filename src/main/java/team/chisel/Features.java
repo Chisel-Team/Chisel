@@ -193,7 +193,6 @@ public enum Features {
     },
     
     AUTOCHISEL {
-        
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             String name = "auto_chisel";
@@ -3196,7 +3195,7 @@ public enum Features {
     }
 
     public boolean enabled() {
-        return this == Features.ANDESITE && Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
+        return Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
     }
 
     private final boolean hasParentFeature() {
