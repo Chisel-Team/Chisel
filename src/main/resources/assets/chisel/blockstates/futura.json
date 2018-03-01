@@ -1,13 +1,62 @@
 {
-    "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
-    "variants": {
-        "controllerpurple": [{"textures":{"all":"chisel:blocks/futura/controllerpurple"}}],
-        "controller": [{"textures":{"all":"chisel:blocks/futura/controller"}}],
-        "uberwavy": [{"textures":{"all":"chisel:blocks/futura/uberWavy"}}],
-        "screencyan": [{"textures":{"all":"chisel:blocks/futura/screenCyan"}}],
-        "wavy": [{"textures":{"all":"chisel:blocks/futura/wavy"}}],
-        "screenmetallic": [{"textures":{"all":"chisel:blocks/futura/screenMetallic"}}],
-        "circuitplate": [{"textures":{"all":"chisel:blocks/futura/circuitPlate"}}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "chisel:cube_2_layer_topshaded"
+  },
+  "variants": {
+    "circuitplate": [{
+      "textures": {
+        "particle": "chisel:blocks/futura/circuit_plate",
+        "top"     : "chisel:blocks/futura/circuit_plate"
+      }
+    }],
+    "controllerpurple": [{
+      "model"   : "chisel:cube_3_layer_topshaded",
+      "textures": {
+        "particle": "chisel:blocks/futura/controller_unity_particle",
+        "top"     : "chisel:blocks/futura/unity_lines_plating",
+        "mid"     : "chisel:blocks/futura/unity_lines",
+        "bot"     : "chisel:blocks/futura/lines_invalid"
+      }
+    }],
+    "controller": [{
+      "model"   : "chisel:cube_3_layer_topshaded",
+      "textures": {
+        "particle": "chisel:blocks/futura/controller_particle",
+        "top"     : "chisel:blocks/futura/lines_plating",
+        "mid"     : "chisel:blocks/futura/rainbow_lines",
+        "bot"     : "chisel:blocks/futura/lines_invalid"
+      }
+    }],
+    "screencyan": [{
+      "textures": {
+        "particle": "chisel:blocks/futura/screen_cyan",
+        "top"     : "chisel:blocks/futura/screen_cyan",
+        "bot"     : "chisel:blocks/futura/screen_discoherent"
+      }
+    }],
+    "screenmetallic": [{
+      "textures": {
+        "particle": "chisel:blocks/futura/screen_metallic",
+        "top"     : "chisel:blocks/futura/screen_metallic",
+        "bot"     : "chisel:blocks/futura/screen_discoherent"
+      }
+    }],
+    "uberwavy": [{
+      "model"   : "chisel:cube_3_layer_topshaded",
+      "textures": {
+        "particle": "chisel:blocks/futura/orange_frame_particle",
+        "top"     : "chisel:blocks/futura/orange_frame",
+        "mid"     : "chisel:blocks/futura/uber_rainbow",
+        "bot"     : "chisel:blocks/futura/screen_discoherent"
+      }
+    }],
+    "wavy": [{
+      "textures": {
+        "particle": "chisel:blocks/futura/rainbow_wave_particle",
+        "top"     : "chisel:blocks/futura/rainbow_wave_base",
+        "bot"     : "chisel:blocks/futura/rainbow_wave"
+      }
+    }]
+  }
 }

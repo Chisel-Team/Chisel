@@ -1,0 +1,15 @@
+{
+  "ctm": {
+    "ctm_version": 1,
+    "type": "ctm",
+    "layer": "CUTOUT",
+    "textures": [
+        "chisel:blocks/futura/screen_cyan_ctm"
+    ],
+    "extra": {
+      "connect_to": [
+        { "block": "chisel:futura", "predicate": { "variation": [ "0", "1" ] }}
+      ]
+    }
+  }
+}

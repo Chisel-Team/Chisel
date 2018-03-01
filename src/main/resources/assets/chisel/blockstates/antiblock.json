@@ -1,22 +1,28 @@
 {
-    "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
-    "variants": {
-        "magenta": [{"textures":{"all":"chisel:blocks/antiblock/magenta"}}],
-        "pink": [{"textures":{"all":"chisel:blocks/antiblock/pink"}}],
-        "green": [{"textures":{"all":"chisel:blocks/antiblock/green"}}],
-        "lime": [{"textures":{"all":"chisel:blocks/antiblock/lime"}}],
-        "black": [{"textures":{"all":"chisel:blocks/antiblock/black"}}],
-        "yellow": [{"textures":{"all":"chisel:blocks/antiblock/yellow"}}],
-        "light_blue": [{"textures":{"all":"chisel:blocks/antiblock/light_blue"}}],
-        "brown": [{"textures":{"all":"chisel:blocks/antiblock/brown"}}],
-        "cyan": [{"textures":{"all":"chisel:blocks/antiblock/cyan"}}],
-        "orange": [{"textures":{"all":"chisel:blocks/antiblock/orange"}}],
-        "red": [{"textures":{"all":"chisel:blocks/antiblock/red"}}],
-        "gray": [{"textures":{"all":"chisel:blocks/antiblock/gray"}}],
-        "blue": [{"textures":{"all":"chisel:blocks/antiblock/blue"}}],
-        "white": [{"textures":{"all":"chisel:blocks/antiblock/white"}}],
-        "purple": [{"textures":{"all":"chisel:blocks/antiblock/purple"}}],
-        "silver": [{"textures":{"all":"chisel:blocks/antiblock/silver"}}]
+  "forge_marker": 1,
+  "defaults": {
+    "model"   : "chisel:cube_2_layer",
+    "textures": {
+      "top"     : "chisel:blocks/antiblock/antiblock",
+      "particle": "#bot"
     }
+  },
+  "variants": {
+    "magenta"   : [{ "textures": { "bot": "chisel:blocks/antiblock/magenta"    } }],
+    "pink"      : [{ "textures": { "bot": "chisel:blocks/antiblock/pink"       } }],
+    "green"     : [{ "textures": { "bot": "chisel:blocks/antiblock/green"      } }],
+    "lime"      : [{ "textures": { "bot": "chisel:blocks/antiblock/lime"       } }],
+    "black"     : [{ "textures": { "bot": "chisel:blocks/antiblock/black"      } }],
+    "yellow"    : [{ "textures": { "bot": "chisel:blocks/antiblock/yellow"     } }],
+    "light_blue": [{ "textures": { "bot": "chisel:blocks/antiblock/light_blue" } }],
+    "brown"     : [{ "textures": { "bot": "chisel:blocks/antiblock/brown"      } }],
+    "cyan"      : [{ "textures": { "bot": "chisel:blocks/antiblock/cyan"       } }],
+    "orange"    : [{ "textures": { "bot": "chisel:blocks/antiblock/orange"     } }],
+    "red"       : [{ "textures": { "bot": "chisel:blocks/antiblock/red"        } }],
+    "gray"      : [{ "textures": { "bot": "chisel:blocks/antiblock/gray"       } }],
+    "blue"      : [{ "textures": { "bot": "chisel:blocks/antiblock/blue"       } }],
+    "white"     : [{ "textures": { "bot": "chisel:blocks/antiblock/white"      } }],
+    "purple"    : [{ "textures": { "bot": "chisel:blocks/antiblock/purple"     } }],
+    "silver"    : [{ "textures": { "bot": "chisel:blocks/antiblock/silver"     } }]
+  }
 }

@@ -1,13 +1,20 @@
 {
     "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
+    "defaults": { "model": "cube_all" },
     "variants": {
-        "scaffold": [{"textures":{"all":"chisel:blocks/metals/gold/scaffold"}}],
-        "machine": [{"textures":{"all":"chisel:blocks/metals/gold/machine"}}],
-        "badgreggy": [{"textures":{"all":"chisel:blocks/metals/gold/badGreggy"}}],
-        "thermal": [{"textures":{"all":"chisel:blocks/metals/gold/thermal"}}],
-        "crate": [{"textures":{"all":"chisel:blocks/metals/gold/crate"}}],
-        "bolted": [{"textures":{"all":"chisel:blocks/metals/gold/bolted"}}],
-        "caution": [{"textures":{"all":"chisel:blocks/metals/gold/caution"}}]
+        "scaffold":  [{ "textures": { "all": "chisel:blocks/metals/gold/scaffold"  } }],
+        "machine":   [{ "textures": { "all": "chisel:blocks/metals/gold/machine"   } }],
+        "badgreggy": [{ "textures": { "all": "chisel:blocks/metals/gold/badGreggy" } }],
+        "thermal":   [{
+            "model": "cube_bottom_top",
+            "textures": {
+                "top":    "chisel:blocks/metals/gold/thermal-top",
+                "side":   "chisel:blocks/metals/gold/thermal-side",
+                "bottom": "chisel:blocks/metals/gold/thermal-bottom"
+            }
+        }],
+        "crate":     [{ "textures": { "all": "chisel:blocks/metals/gold/crate"     } }],
+        "bolted":    [{ "textures": { "all": "chisel:blocks/metals/gold/bolted"    } }],
+        "caution":   [{ "textures": { "all": "chisel:blocks/metals/gold/caution"   } }]
     }
 }

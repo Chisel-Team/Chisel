@@ -1,0 +1,18 @@
+{
+  "animation": {
+    "interpolate": true,
+    "frametime": 2
+  },
+  "ctm": {
+    "ctm_version": 1,
+    "type": "sctm",
+    "layer": "CUTOUT",
+    "extra": {
+      "light": 15,
+      "connect_to": [
+        { "block": "chisel:futura", "predicate": { "variation": [ "2", "4" ] } },
+        { "block": "appliedenergistics2:controller" }
+      ]
+    }
+  }
+}
