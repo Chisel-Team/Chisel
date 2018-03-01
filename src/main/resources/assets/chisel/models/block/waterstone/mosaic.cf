@@ -1,6 +1,0 @@
-{
-    "textures":[
-        "minecraft:blocks/water_still.ctx",
-        "chisel:fluid/mosaic.ctx"
-    ]
-}

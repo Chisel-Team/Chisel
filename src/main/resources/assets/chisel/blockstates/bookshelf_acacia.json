@@ -1,17 +1,20 @@
 {
-    "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
-    "variants": {
-        "rainbow": [{"textures":{"all":"chisel:bookshelf_acacia/rainbow"}}],
-        "default": [{"textures":{"all":"chisel:bookshelf_acacia/default"}}],
-        "necromancer-novice": [{"textures":{"all":"chisel:bookshelf_acacia/necromancer-novice"}}],
-        "necromancer": [{"textures":{"all":"chisel:bookshelf_acacia/necromancer"}}],
-        "historician": [{"textures":{"all":"chisel:bookshelf_acacia/historician"}}],
-        "hoarder": [{"textures":{"all":"chisel:bookshelf_acacia/hoarder"}}],
-        "redtomes": [{"textures":{"all":"chisel:bookshelf_acacia/redtomes"}}],
-        "brim": [{"textures":{"all":"chisel:bookshelf_acacia/brim"}}],
-        "abandoned": [{"textures":{"all":"chisel:bookshelf_acacia/abandoned"}}],
-        "cans": [{"textures":{"all":"chisel:bookshelf_acacia/cans"}}],
-        "papers": [{"textures":{"all":"chisel:bookshelf_acacia/papers"}}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "chisel:cube_2_layer_sides",
+    "textures": { "all": "blocks/planks_acacia" }
+  },
+  "variants": {
+    "abandoned"         : [{ "textures": { "side": "chisel:blocks/bookshelf/abandoned"          } }],
+    "brim"              : [{ "textures": { "side": "chisel:blocks/bookshelf/brim"               } }],
+    "cans"              : [{ "textures": { "side": "chisel:blocks/bookshelf/cans"               } }],
+    "default"           : [{ "textures": { "side": "chisel:blocks/bookshelf/default"            } }],
+    "historician"       : [{ "textures": { "side": "chisel:blocks/bookshelf/historician"        } }],
+    "hoarder"           : [{ "textures": { "side": "chisel:blocks/bookshelf/hoarder"            } }],
+    "necromancer"       : [{ "textures": { "side": "chisel:blocks/bookshelf/necromancer"        } }],
+    "necromancer-novice": [{ "textures": { "side": "chisel:blocks/bookshelf/necromancer-novice" } }],
+    "rainbow"           : [{ "textures": { "side": "chisel:blocks/bookshelf/rainbow"            } }],
+    "redtomes"          : [{ "textures": { "side": "chisel:blocks/bookshelf/redtomes"           } }],
+    "papers"            : [{ "textures": { "side": "chisel:blocks/bookshelf/papers"             } }]
+  }
 }

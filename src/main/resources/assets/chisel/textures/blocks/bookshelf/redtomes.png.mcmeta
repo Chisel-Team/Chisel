@@ -2,6 +2,9 @@
     "ctm": {
         "ctm_version": 1,
         "type":"CTMH",
-        "layer":"CUTOUT"
+        "layer":"CUTOUT",
+        "extra": {
+            "ignore_states": true
+        }
     }
 }

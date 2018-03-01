@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/bookshelf_oak/_base",
-  "textures": {
-  	"overlay": "chisel:blocks/bookshelf/historician"
-  },
-  "ctm_version": 1
-}
