@@ -1,0 +1,13 @@
+{
+  "ctm": {
+    "ctm_version": 1,
+    "type": "sctm",
+    "layer": "CUTOUT",
+    "extra": {
+      "connect_to": [
+        { "block": "chisel:futura", "predicate": { "variation": [ "2", "4" ] } },
+        { "block": "appliedenergistics2:controller" }
+      ]
+    }
+  }
+}

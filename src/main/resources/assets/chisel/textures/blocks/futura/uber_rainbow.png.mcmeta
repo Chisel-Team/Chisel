@@ -1,0 +1,13 @@
+{
+	"animation": {
+        "interpolate": true
+    },
+    "ctm": {
+        "ctm_version": 1,
+        "type": "sctm",
+        "layer": "CUTOUT",
+        "extra": {
+            "light": 15
+        }
+    }
+}

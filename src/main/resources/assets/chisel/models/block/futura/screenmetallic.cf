@@ -1,7 +1,0 @@
-{
-    "textures":[
-        "./screenDiscoherent.ctx",
-        "./screenMetallic.ctx"
-    ],
-    "particle":"./screenMetallic.ctx"
-}

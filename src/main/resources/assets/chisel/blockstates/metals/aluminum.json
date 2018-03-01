@@ -1,13 +1,20 @@
 {
     "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
+    "defaults": { "model": "cube_all" },
     "variants": {
-        "scaffold": [{"textures":{"all":"chisel:blocks/metals/aluminum/scaffold"}}],
-        "machine": [{"textures":{"all":"chisel:blocks/metals/aluminum/machine"}}],
-        "badgreggy": [{"textures":{"all":"chisel:blocks/metals/aluminum/badGreggy"}}],
-        "thermal": [{"textures":{"all":"chisel:blocks/metals/aluminum/thermal"}}],
-        "crate": [{"textures":{"all":"chisel:blocks/metals/aluminum/crate"}}],
-        "bolted": [{"textures":{"all":"chisel:blocks/metals/aluminum/bolted"}}],
-        "caution": [{"textures":{"all":"chisel:blocks/metals/aluminum/caution"}}]
+        "scaffold":  [{ "textures": { "all": "chisel:blocks/metals/aluminum/scaffold"  } }],
+        "machine":   [{ "textures": { "all": "chisel:blocks/metals/aluminum/machine"   } }],
+        "badgreggy": [{ "textures": { "all": "chisel:blocks/metals/aluminum/badGreggy" } }],
+        "thermal":   [{
+            "model": "cube_bottom_top",
+            "textures": {
+                "top":    "chisel:blocks/metals/aluminum/thermal-top",
+                "side":   "chisel:blocks/metals/aluminum/thermal-side",
+                "bottom": "chisel:blocks/metals/aluminum/thermal-bottom"
+            }
+        }],
+        "crate":     [{ "textures": { "all": "chisel:blocks/metals/aluminum/crate"     } }],
+        "bolted":    [{ "textures": { "all": "chisel:blocks/metals/aluminum/bolted"    } }],
+        "caution":   [{ "textures": { "all": "chisel:blocks/metals/aluminum/caution"   } }]
     }
 }
