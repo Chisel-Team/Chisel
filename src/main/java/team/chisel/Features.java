@@ -106,6 +106,51 @@ public enum Features {
         }
     },
 
+    /*ANCIENT_STONE ("thaumcraft") {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            Carving.chisel.addVariation("ancient_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_ancient").getDefaultState(), -64));
+            Carving.chisel.addVariation("ancient_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_ancient_tile").getDefaultState(), -63));
+            Carving.chisel.addVariation("ancient_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_ancient_glyphed").getDefaultState(), -62));
+
+            factory.newBlock(Material.ROCK, "ancient_stone", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("raw")
+                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+        }
+    },*/
+
     ANDESITE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -191,6 +236,50 @@ public enum Features {
             addShapedRecipe(registry, new ItemStack(ChiselBlocks.antiblock, 8, 15), "SSS", "SGS", "SSS", 'S', "stone", 'G', "dustGlowstone");
         }
     },
+
+    ARCANE_STONE ("thaumcraft") {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_arcane").getDefaultState(), -64));
+            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_arcane_brick").getDefaultState(), -63));
+
+            factory.newBlock(Material.ROCK, "arcane_stone", provider)
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("raw")
+                    .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+        }
+    },
     
     AUTOCHISEL {
         @Override
@@ -274,7 +363,9 @@ public enum Features {
     BLOOD_MAGIC("bloodmagic") {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            factory.newBlock(Material.ROCK, "bloodMagic", new ChiselBlockProvider<>(BlockCarvable::new, BlockCarvable.class))
+            Carving.chisel.addVariation("bloodMagic", CarvingUtils.variationFor(GameRegistry.findBlock("bloodmagic", "BlockBloodRune").getDefaultState(), -64));
+
+            factory.newBlock(Material.ROCK, "bloodMagic", new ChiselBlockProvider<>(BlockCarvableAltarComponent::new, BlockCarvableAltarComponent.class))
                     .newVariation("bloodRuneArranged")
                     .next("bloodRuneBricks")
                     .next("bloodRuneCarved")
@@ -441,18 +532,51 @@ public enum Features {
         }
     },
 
-    /*CERTUS { TODO Retexture
+    CERTUS ("appliedenergistics2") {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(GameRegistry.findBlock("appliedenergistics2", "quartz_block").getDefaultState(), -64));
+            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(GameRegistry.findBlock("appliedenergistics2", "quartz_pillar").getDefaultState(), -63));
+            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(GameRegistry.findBlock("appliedenergistics2", "chiseled_quartz_block").getDefaultState(), -62));
+
             factory.newBlock(Material.ROCK, "certus", provider)
-                    .setParentFolder("quartz/certus")
-                    .newVariation("certusChiseled")
-                    .next("certusPrismatic")
-                    .next("certusPrismaticPattern")
-                    .next("masonryCertus")
-                    .build();
+                    .newVariation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                    .next("twisted")
+                    .next("prism")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .next("raw")
+                    .build(b -> b.setHardness(0.8F).setResistance(4.0F).setSoundType(SoundType.STONE));
         }
-    }, // There is no AE yet */
+    },
 
     CARPET {
         @Override
@@ -3165,19 +3289,19 @@ public enum Features {
 
     private String requiredMod;
 
-    private Features() {
+    Features() {
         this(null, null);
     }
 
-    private Features(Features parent) {
+    Features(Features parent) {
         this(null, parent);
     }
 
-    private Features(String requiredMod) {
+    Features(String requiredMod) {
         this(requiredMod, null);
     }
 
-    private Features(String requriedMod, Features parent) {
+    Features(String requriedMod, Features parent) {
         this.requiredMod = requriedMod;
         this.parent = parent;
     }
@@ -3195,14 +3319,14 @@ public enum Features {
     }
 
     public boolean enabled() {
-        return Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
+        return /*(this == Features.BASALT || this == Features.END_PURPUR) &&*/ Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
     }
 
-    private final boolean hasParentFeature() {
+    private boolean hasParentFeature() {
         return parent == null || parent.enabled();
     }
 
-    private final boolean hasRequiredMod() {
+    private boolean hasRequiredMod() {
         return getRequiredMod() == null || Loader.isModLoaded(getRequiredMod());
     }
 
