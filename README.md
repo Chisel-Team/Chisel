@@ -20,10 +20,13 @@ All images contained by this directory
 
 All images contained by the following directories
 
+- `/src/main/resources/assets/chisel/textures/blocks/ancient_stone/`
 - `/src/main/resources/assets/chisel/textures/blocks/andesite/`
+- `/src/main/resources/assets/chisel/textures/blocks/arcane_stone/`
 - `/src/main/resources/assets/chisel/textures/blocks/basalt/`
 - `/src/main/resources/assets/chisel/textures/blocks/bookshelf/`
 - `/src/main/resources/assets/chisel/textures/blocks/bricks/`
+- `/src/main/resources/assets/chisel/textures/blocks/certus/`
 - `/src/main/resources/assets/chisel/textures/blocks/coal/`
 - `/src/main/resources/assets/chisel/textures/blocks/cobblestone/`
 - `/src/main/resources/assets/chisel/textures/blocks/diorite/`

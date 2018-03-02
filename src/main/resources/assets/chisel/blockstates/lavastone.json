@@ -42,7 +42,7 @@
             "model"   : "chisel:lavastone/column_lava",
             "textures": {
                 "side": "chisel:blocks/fluid/pillar-side",
-                "end" : "chisel:blocks/fluid/pillar-top"
+                "top" : "chisel:blocks/fluid/pillar-top"
             }
         }],
         "prism"         : [{ "textures": { "top": "chisel:blocks/fluid/prism"          } }],
@@ -56,7 +56,7 @@
             "model"   : "chisel:lavastone/column_lava",
             "textures": {
                 "side": "chisel:blocks/fluid/twisted-side",
-                "end" : "chisel:blocks/fluid/twisted-top"
+                "top" : "chisel:blocks/fluid/twisted-top"
             }
         }],
         "slanted"       : [{ "textures": { "top": "chisel:blocks/fluid/slanted"        } }],

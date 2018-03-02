@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "chisel:cube_2_layer_topshaded",
+    "model": "chisel:waterstone/cube_water",
     "textures": { "bot": "blocks/water_still" }
   },
   "variants": {
@@ -18,9 +18,8 @@
     "chaotic-small" : [{ "textures": { "top": "chisel:blocks/fluid/chaotic-small"  } }],
     "circular"      : [{ "textures": { "top": "chisel:blocks/fluid/circular"       } }],
     "circularct"    : [{
-      "model"   : "chisel:cube_ctm_2_layer",
+      "model"   : "chisel:waterstone/cube_ctm_water",
       "textures": {
-        "particle"   : "#top",
         "top"        : "chisel:blocks/fluid/circular",
         "connect_top": "chisel:blocks/fluid/circular-ctm"
       }
@@ -39,10 +38,10 @@
     "mosaic"        : [{ "textures": { "top": "chisel:blocks/fluid/mosaic"         } }],
     "panel"         : [{ "textures": { "top": "chisel:blocks/fluid/panel"          } }],
     "pillar"        : [{
-      "model"   : "chisel:column_2_layer_topshaded",
+      "model"   : "chisel:waterstone/column_water",
       "textures": {
         "side": "chisel:blocks/fluid/pillar-side",
-        "end" : "chisel:blocks/fluid/pillar-top"
+        "top" : "chisel:blocks/fluid/pillar-top"
       }
     }],
     "prism"         : [{ "textures": { "top": "chisel:blocks/fluid/prism"          } }],
@@ -53,10 +52,10 @@
     "tiles-medium"  : [{ "textures": { "top": "chisel:blocks/fluid/tiles-medium"   } }],
     "tiles-small"   : [{ "textures": { "top": "chisel:blocks/fluid/tiles-small"    } }],
     "twisted"       : [{
-      "model"   : "chisel:column_2_layer_topshaded",
+      "model"   : "chisel:waterstone/column_water",
       "textures": {
         "side": "chisel:blocks/fluid/twisted-side",
-        "end" : "chisel:blocks/fluid/twisted-top"
+        "top" : "chisel:blocks/fluid/twisted-top"
       }
     }],
     "slanted"       : [{ "textures": { "top": "chisel:blocks/fluid/slanted"        } }],
