@@ -30,6 +30,7 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
+import team.chisel.Features;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
@@ -76,11 +77,12 @@ public class ClientProxy extends CommonProxy {
         
         ModelLoaderRegistry.registerLoader(ModelLoaderChisel.INSTANCE);
         
-        ModelLoader.setCustomModelResourceLocation(ChiselItems.chisel_iron, 0, new ModelResourceLocation(ChiselItems.chisel_iron.getRegistryName(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(ChiselItems.chisel_diamond, 0, new ModelResourceLocation(ChiselItems.chisel_diamond.getRegistryName(), "inventory"));
-        ModelLoader.setCustomModelResourceLocation(ChiselItems.chisel_hitech, 0, new ModelResourceLocation(ChiselItems.chisel_hitech.getRegistryName(), "inventory"));
-
-        ModelLoader.setCustomModelResourceLocation(ChiselItems.offsettool, 0, new ModelResourceLocation(ChiselItems.offsettool.getRegistryName(), "inventory"));
+        if (Features.CHISEL.enabled()) {
+            ModelLoader.setCustomModelResourceLocation(ChiselItems.chisel_iron, 0, new ModelResourceLocation(ChiselItems.chisel_iron.getRegistryName(), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(ChiselItems.chisel_diamond, 0, new ModelResourceLocation(ChiselItems.chisel_diamond.getRegistryName(), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(ChiselItems.chisel_hitech, 0, new ModelResourceLocation(ChiselItems.chisel_hitech.getRegistryName(), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(ChiselItems.offsettool, 0, new ModelResourceLocation(ChiselItems.offsettool.getRegistryName(), "inventory"));
+        }
         
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(ChiselBlocks.auto_chisel), 0, new ModelResourceLocation(ChiselBlocks.auto_chisel.getRegistryName(), "normal"));
         ClientRegistry.bindTileEntitySpecialRenderer(TileAutoChisel.class, new RenderAutoChisel());
