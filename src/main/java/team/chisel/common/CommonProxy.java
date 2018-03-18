@@ -31,8 +31,4 @@ public class CommonProxy implements Reference {
     public EntityPlayer getClientPlayer() {
         return null;
     }
-    
-    public boolean isCTMPresent() {
-        return true;
-    }
 }

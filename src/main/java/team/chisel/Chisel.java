@@ -13,7 +13,6 @@ import com.google.common.collect.ImmutableMap;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -56,7 +55,7 @@ import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkDataHandler;
 
-@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, dependencies = "required-after:forge@[14.21.0.2363,);", acceptedMinecraftVersions = "[1.12, 1.13)")
+@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, dependencies = "required-after:forge@[14.23.0.2501,);required-after-client:ctm@[MC1.12-0.2.3.8,)", acceptedMinecraftVersions = "[1.12.2, 1.13)")
 public class Chisel implements Reference {
 
     public static final Logger logger = LogManager.getLogger(MOD_NAME);
