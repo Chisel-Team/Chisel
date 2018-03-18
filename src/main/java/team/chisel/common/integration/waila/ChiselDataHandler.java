@@ -38,7 +38,7 @@ public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
     @SideOnly(Side.CLIENT)
     public List<String> getWailaBody(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
         ICarvable carvable = (ICarvable) accessor.getBlock();
-        int index = stack.getItemDamage() & carvable.getTotalVariations();
+        int index = stack.getItemDamage() % carvable.getTotalVariations();
         VariationData data = carvable.getVariationData(index);
         String key = stack.getUnlocalizedName() + "." + data.name + ".desc.";
         int line = Configurations.blockDescriptions ? 1 : 2;
