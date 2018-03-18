@@ -38,18 +38,24 @@ import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
+import team.chisel.common.block.MessageAutochiselFX;
+import team.chisel.common.block.MessageUpdateAutochiselSource;
 import team.chisel.common.carving.Carving;
+import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselFuelHandler;
+import team.chisel.common.init.ChiselSounds;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
+import team.chisel.common.item.ChiselMode;
+import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkDataHandler;
 
-@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, dependencies = "required-after:forge@[14.21.0.2363,);", acceptedMinecraftVersions = "[1.12, 1.12.1)")
+@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, dependencies = "required-after:forge@[14.23.0.2501,);required-after-client:ctm@[MC1.12-0.2.3.8,)", acceptedMinecraftVersions = "[1.12.2, 1.13)")
 public class Chisel implements Reference {
 
     public static final Logger logger = LogManager.getLogger(MOD_NAME);
@@ -68,18 +74,24 @@ public class Chisel implements Reference {
         network.registerMessage(PacketChiselButton.Handler.class, PacketChiselButton.class, 0, Side.SERVER);
         network.registerMessage(PacketHitechSettings.Handler.class, PacketHitechSettings.class, 1, Side.SERVER);
         network.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, 2, Side.CLIENT);
+        network.registerMessage(PacketChiselMode.Handler.class, PacketChiselMode.class, 3, Side.SERVER);
+        network.registerMessage(MessageUpdateAutochiselSource.Handler.class, MessageUpdateAutochiselSource.class, 4, Side.CLIENT);
+        network.registerMessage(MessageAutochiselFX.Handler.class, MessageAutochiselFX.class, 5, Side.CLIENT);
     }
     
     private static Map<String, Block> remaps = ImmutableMap.of();
     
     public Chisel() {
         CarvingUtils.chisel = Carving.chisel;
+        CarvingUtils.modes = ChiselModeRegistry.INSTANCE;
+        ChiselMode.values(); // static init our modes
         ChiselAPIProps.MOD_ID = MOD_ID;
     }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
+        ChiselSounds.init();
         
         proxy.construct(event);
 
@@ -120,11 +132,41 @@ public class Chisel implements Reference {
         addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestone2, 1, 7), new ItemStack(ChiselBlocks.marble2, 1, 7));
 
         /*
-        Example of IMC
-
-        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|0");
-        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|1");
-        FMLInterModComms.sendMessage("chisel", "variation:add", "treated_wood|immersiveengineering:treatedWood|2");
+//      Example of IMC
+                
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION.toString(), "marble|minecraft:dirt|0");
+        NBTTagCompound testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setTag("stack", new ItemStack(Items.DIAMOND_PICKAXE, 1, 100).serializeNBT());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", Blocks.WOOL.getRegistryName().toString());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", Blocks.WOOL.getRegistryName().toString());
+        testtag.setInteger("meta", Blocks.WOOL.getMetaFromState(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BROWN)));
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setTag("stack", new ItemStack(Items.REDSTONE).serializeNBT());
+        testtag.setString("block", Blocks.REDSTONE_WIRE.getRegistryName().toString());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
+        
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setTag("stack", new ItemStack(ChiselBlocks.marble, 1, 3).serializeNBT());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
+        FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
+        testtag = new NBTTagCompound();
+        testtag.setString("group", "marble");
+        testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
+        testtag.setInteger("meta", 5);
+        FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
         */
     }
 
@@ -174,6 +216,11 @@ public class Chisel implements Reference {
         for (FMLInterModComms.IMCMessage msg : event.getMessages()) {
             IMCHandler.INSTANCE.handleMessage(msg);
         }
+        IMCHandler.INSTANCE.imcCounts.forEachEntry((s, c) -> {
+            Chisel.logger.info("Received {} IMC messages from mod {}.", c, s);
+            return true;
+        });
+        IMCHandler.INSTANCE.imcCounts.clear();
     }
     
     @SubscribeEvent

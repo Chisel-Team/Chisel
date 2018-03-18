@@ -1,8 +1,10 @@
 package team.chisel.api.block;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,6 +19,7 @@ import team.chisel.common.block.ItemChiselBlock;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselBlockFactory {
 
+    @Getter
     private final IForgeRegistry<Block> registry;
     private final String domain;
 
@@ -48,11 +51,11 @@ public class ChiselBlockFactory {
         });
     }
 
-
-    /**
-     * Test
-     */
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockProvider<T> provider) {
-        return new ChiselBlockBuilder<T>(registry, material, domain, blockName, provider);
+        return newBlock(material, blockName, blockName, provider);
+    }
+    
+    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, @Nullable String group, BlockProvider<T> provider) {
+        return new ChiselBlockBuilder<T>(registry, material, domain, blockName, group, provider);
     }
 }

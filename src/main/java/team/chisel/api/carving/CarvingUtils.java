@@ -3,15 +3,24 @@ package team.chisel.api.carving;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvent;
+import net.minecraftforge.oredict.OreDictionary;
+import team.chisel.common.util.NonnullType;
 
 @ParametersAreNonnullByDefault
 public class CarvingUtils {
@@ -38,6 +47,7 @@ public class CarvingUtils {
 	}
 
 	public static @Nullable ICarvingRegistry chisel;
+	public static @Nullable IModeRegistry modes;
 
 	/**
 	 * @return The instance of the chisel carving registry from the chisel mod.
@@ -46,6 +56,10 @@ public class CarvingUtils {
 	 */
 	public static @Nullable ICarvingRegistry getChiselRegistry() {
 		return chisel;
+	}
+	
+	public static @Nullable IModeRegistry getModeRegistry() {
+	    return modes;
 	}
 
 	/**
@@ -59,9 +73,31 @@ public class CarvingUtils {
 	 *            The sorting order.
 	 * @return A standard {@link ICarvingVariation} instance.
 	 */
+	@Deprecated
 	public static ICarvingVariation getDefaultVariationFor(IBlockState state, int order) {
 		return new SimpleCarvingVariation(state, order);
 	}
+
+	/**
+     * Creates a new variation for the given blockstate, with automatic (flawed) conversion to ItemStack when necessary.
+     */
+    public static ICarvingVariation variationFor(IBlockState state, int order) {
+        return new VariationForState(state, order);
+    }
+
+    /**
+     * Creates a new variation for the given ItemStack, with automatic (flawed) conversion to blockstate when necessary.
+     */
+    public static ICarvingVariation variationFor(ItemStack stack, int order) {
+        return new VariationForStack(stack, order);
+    }
+
+    /**
+     * Creates a new variation for the given ItemStack and blockstate. Use this for full control over ItemStack/blockstate conversion.
+     */
+    public static ICarvingVariation variationFor(ItemStack stack, @Nullable IBlockState state, int order) {
+        return new SimpleVariation(stack, state, order);
+    }
 
 	/**
 	 * Creates a standard {@link ICarvingGroup} for the given name. Use this if you do not need any custom behavior in your own group.
@@ -70,21 +106,58 @@ public class CarvingUtils {
 	 *            The name of the group.
 	 * @return A standard {@link ICarvingGroup} instance.
 	 */
-	public static ICarvingGroup getDefaultGroupFor(String name) {
-		return new SimpleCarvingGroup(name);
+    public static ICarvingGroup getDefaultGroupFor(String name) {
+        return new SimpleCarvingGroup(name);
+    }
+
+    /**
+     * Creates a group which proxies to the Ore Dictionary entries for the given name.
+     * <p>
+     * To add/remove variations to/from this group, modify the Ore Dictionary directly, the add/remove methods on this group will throw {@link UnsupportedOperationException}.
+     * 
+     * @param ore
+     *            The name of the Ore Dictionary entry.
+     * @return An {@link ICarvingGroup} for this entry.
+     */
+    public static ICarvingGroup getOreGroup(String ore) {
+        return new OreDictionaryGroup(ore);
+    }
+
+    /**
+     * Shorthand method for
+     * 
+     * <pre>
+     * CarvingUtils.getChiselRegistry().addGroup(CarvingUtils.getOreGroup(ore));
+     * </pre>
+     * 
+     * @param ore
+     *            The name of the Ore Dictionary entry.
+     * @see #getOreGroup(String)
+     */
+    public static void addOreGroup(String ore) {
+        ICarvingGroup group = getOreGroup(ore);
+        getChiselRegistry().addGroup(group);
+        getChiselRegistry().setOreName(group, ore);
+    }
+	
+	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
+	@Getter
+	private static abstract class SimpleVariationBase implements ICarvingVariation {
+	    private final int order;
 	}
 
-	private static class SimpleCarvingVariation implements ICarvingVariation {
+	@Deprecated
+	private static class SimpleCarvingVariation extends SimpleVariationBase {
 
-		private int order;
 		private IBlockState state;
 
 		public SimpleCarvingVariation(IBlockState state, int order) {
-			this.order = order;
+		    super(order);
 			this.state = state;
 		}
 
 		@Override
+		@Deprecated
 		public Block getBlock() {
 			return state.getBlock();
 		}
@@ -96,20 +169,77 @@ public class CarvingUtils {
 
 		@Override
 		public ItemStack getStack() {
-			return new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
-		}
-
-		@Override
-		public int getOrder() {
-			return order;
+			return new ItemStack(state.getBlock(), 1, state.getBlock().damageDropped(state));
 		}
 	}
+	
+	private static class VariationForState extends SimpleCarvingVariation {
+
+        public VariationForState(IBlockState state, int order) {
+            super(state, order);
+        }	    
+	}
+	
+	private static class VariationForStack extends SimpleVariationBase {
+	    
+	    private final ItemStack stack;
+	    private final boolean hasBlock;
+	    
+	    public VariationForStack(ItemStack stack, int order) {
+	        super(order);
+	        this.stack = stack;
+	        this.hasBlock = stack.getItem() instanceof ItemBlock;
+	    }
+	    
+	    @Override
+	    public ItemStack getStack() {
+	        return stack.copy();
+	    }
+
+        @Override
+        @Nullable
+        @Deprecated
+        public Block getBlock() {
+            return hasBlock ? ((ItemBlock)stack.getItem()).getBlock() : null;
+        }
+
+        @SuppressWarnings("deprecation")
+        @Override
+        @Nullable
+        public IBlockState getBlockState() {
+            return hasBlock ? ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getItemDamage()) : null;
+        }	    
+	}
+	
+    private static class SimpleVariation extends SimpleVariationBase {
+
+        private final ItemStack stack;
+        @Nullable
+        @Getter
+        private final IBlockState blockState;
+
+        public SimpleVariation(ItemStack stack, @Nullable IBlockState state, int order) {
+            super(order);
+            this.stack = stack;
+            this.blockState = state;
+        }
+        
+        @Override
+        public ItemStack getStack() {
+            return stack.copy();
+        }
+
+        @Override
+        @Nullable
+        public Block getBlock() {
+            return blockState == null ? null : blockState.getBlock();
+        }
+    }
 
 	private static class SimpleCarvingGroup implements ICarvingGroup {
 
 		private String name;
-		private @Nullable String sound;
-		private @Nullable String oreName;
+		private @Nullable SoundEvent sound;
 
 		private List<ICarvingVariation> variations = Lists.newArrayList();
 
@@ -137,13 +267,11 @@ public class CarvingUtils {
 
 		@Override
 		public boolean removeVariation(ICarvingVariation variation) {
-			ICarvingVariation toRemove = null;
-			for (ICarvingVariation v : variations) {
-				if (v.getBlockState().equals(variation.getBlockState())) {
-					toRemove = v;
-				}
-			}
-			return toRemove == null ? false : variations.remove(toRemove);
+		    return variations.removeIf(v -> 
+				           (ItemStack.areItemsEqual(v.getStack(), variation.getStack()) 
+				        && (v.getStack().getTagCompound() == null || ItemStack.areItemStackTagsEqual(v.getStack(), variation.getStack()))) 
+				||  (v.getBlockState() != null && v.getBlockState().equals(variation.getBlockState()))
+		    );
 		}
 
 		@Override
@@ -152,23 +280,46 @@ public class CarvingUtils {
 		}
 
 		@Override
-		public @Nullable String getSound() {
+		public @Nullable SoundEvent getSound() {
 			return sound;
 		}
 
 		@Override
-		public void setSound(@Nullable String sound) {
+		public void setSound(@Nullable SoundEvent sound) {
 			this.sound = sound;
 		}
 
 		@Override
+		@Deprecated
 		public @Nullable String getOreName() {
-			return oreName;
+			return null;
 		}
 
 		@Override
-		public void setOreName(@Nullable String oreName) {
-			this.oreName = oreName;
-		}
+		@Deprecated
+		public void setOreName(@Nullable String oreName) {}
+	}
+	
+	private static class OreDictionaryGroup extends SimpleCarvingGroup {
+
+        public OreDictionaryGroup(String name) {
+            super(name);
+        }
+	    
+        @Override
+        public List<ICarvingVariation> getVariations() {
+            List<@NonnullType ItemStack> ores = OreDictionary.getOres(getName());
+            return IntStream.range(0, ores.size()).mapToObj(i -> new VariationForStack(ores.get(i), i)).collect(Collectors.toList());
+        }
+        
+        @Override
+        public void addVariation(ICarvingVariation variation) {
+            throw new UnsupportedOperationException("Cannot add to Ore Dictionary Group.");
+        }
+        
+        @Override
+        public boolean removeVariation(ICarvingVariation variation) {
+            throw new UnsupportedOperationException("Cannot remove from Ore Dictionary Group.");
+        }
 	}
 }

@@ -17,7 +17,7 @@ buildscript {
 }
 plugins {
     id 'net.franz-becker.gradle-lombok' version '1.5'
-	id 'com.matthewprenger.cursegradle' version '1.0.9'
+	id 'com.matthewprenger.cursegradle' version '1.0.10'
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -67,7 +67,7 @@ repositories {
 }
 
 dependencies {
-	deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
+	deobfCompile "team.chisel.ctm:CTM:MC1.12-${ctm_version}"
 	deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
 	deobfCompile "mezz.jei:jei_1.12:${jei_version}"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
@@ -85,7 +85,7 @@ task delombok(type: DelombokTask) {
 }
 
 // Add external annotations
-eclipse.classpath.file {
+/*eclipse.classpath.file {
 	withXml {
     	def node = it.asNode()
         node.get('classpathentry').each {
@@ -95,7 +95,7 @@ eclipse.classpath.file {
         	}
         }
     }
-}
+}*/
 
 tasks.eclipse.dependsOn installLombok
 
@@ -163,6 +163,8 @@ String getChangelogText() {
                 temp = "<h2>$temp</h2>"
             } else if (it.startsWith('-')) {
                 temp = "&nbsp;&nbsp;&nbsp;$temp"
+                temp = temp.replaceAll("(\\S+\\/\\S+)#([0-9]+)\\b", "<a href=\"https://github.com/\$1/issues/\$2\">\$0</a>");
+                temp = temp.replaceAll("#([0-9]+)\\b(?!<\\/a>)", "<a href=\"https://github.com/$github_project/issues/\$1\">\$0</a>");
             } else {
                 temp = "<h4>$temp</h4>"
             }
@@ -187,7 +189,9 @@ curseforge {
         id = project.projectId
         changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
         changelogType = 'html'
-        releaseType = 'alpha'
+        releaseType = project.curse_type
+       	addGameVersion '1.12.1'
+		addGameVersion '1.12.2'
         mainArtifact(jar) {
             displayName = "Chisel - ${version}"
         }

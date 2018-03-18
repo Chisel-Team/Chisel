@@ -19,21 +19,21 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.inventory.EntityEquipmentSlot.Type;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselGuiType;
-import team.chisel.api.IChiselItem;
 import team.chisel.api.IChiselGuiType.ChiselGuiType;
+import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselTabs;
+import team.chisel.common.util.NBTUtil;
 
 @ParametersAreNonnullByDefault
 public class ItemChisel extends Item implements IChiselItem {
@@ -95,18 +95,15 @@ public class ItemChisel extends Item implements IChiselItem {
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List list, ITooltipFlag flag) {
         String base = "item.chisel.chisel.desc.";
-        String gui = I18n.format(base + "gui");
-        String lc1 = I18n.format(base + "lc1");
-        String lc2 = I18n.format(base + "lc2");
-        String modes = I18n.format(base + "modes");
-        list.add(gui);
-        if (type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick) {
-            list.add(lc1);
-            list.add(lc2);
+        list.add(I18n.format(base + "gui", TextFormatting.AQUA, TextFormatting.GRAY));
+        if (type != ChiselType.IRON || Configurations.ironChiselCanLeftClick) {
+            list.add(I18n.format(base + "lc1", TextFormatting.AQUA, TextFormatting.GRAY));
+            list.add(I18n.format(base + "lc2", TextFormatting.AQUA, TextFormatting.GRAY));
         }
-        if (type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) {
+        if (type != ChiselType.IRON || Configurations.ironChiselHasModes) {
             list.add("");
-            list.add(modes);
+            list.add(I18n.format(base + "modes"));
+            list.add(I18n.format(base + "modes.selected", TextFormatting.GREEN + I18n.format(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
         }
     }
 
@@ -152,12 +149,12 @@ public class ItemChisel extends Item implements IChiselItem {
 
     @Override
     public boolean canChiselBlock(World world, EntityPlayer player, EnumHand hand, BlockPos pos, IBlockState state) {
-        return type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
+        return type == ChiselType.HITECH || type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
     }
 
     @Override
-    public boolean hasModes(EntityPlayer player, EnumHand hand) {
-        return type == ChiselType.DIAMOND || Configurations.ironChiselHasModes;
+    public boolean supportsMode(EntityPlayer player, ItemStack chisel, IChiselMode mode) {
+        return type == ChiselType.HITECH || ((type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) && mode != ChiselMode.CONTIGUOUS && mode != ChiselMode.CONTIGUOUS_2D);
     }
 
     // TODO implement ChiselController

@@ -3,5 +3,5 @@
         "./rainbowWave.ctx",
         "./rainbowWaveBase.ctx"
     ],
-    "particle":"rainbowWaveParticle"
+    "particle":"./rainbowWaveParticle"
 }

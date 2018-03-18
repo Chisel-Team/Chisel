@@ -68,7 +68,6 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
         }
     }
 
-    @SuppressWarnings("null")
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper, IIngredients ingredients) {
         IFocus<?> focus = (this.focus = recipeLayout.getFocus());
@@ -103,7 +102,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
         if (outputs > MAX_SLOTS) {
             int leftover = outputs % MAX_SLOTS;
             for (int i = leftover; i < MAX_SLOTS; i++) {
-                stacks.get(i).add(null);
+                stacks.get(i).add(ItemStack.EMPTY);
             }
         }
         
@@ -117,6 +116,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
         }
     }
 
+    @SuppressWarnings("null")
     @Override
     public List<String> getTooltipStrings(int mouseX, int mouseY) {
         return Collections.emptyList();

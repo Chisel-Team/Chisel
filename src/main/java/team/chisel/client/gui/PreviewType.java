@@ -5,13 +5,12 @@ import java.util.Set;
 
 import javax.annotation.Nonnull;
 
-import lombok.Getter;
-import net.minecraft.util.math.BlockPos;
-
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableSet;
+
+import lombok.Getter;
+import net.minecraft.util.math.BlockPos;
 
 @Getter 
 public enum PreviewType {
@@ -28,7 +27,7 @@ public enum PreviewType {
         new BlockPos(1, 3, 0)
     ),
 
-    SINGLE(39, new BlockPos(1, 2, 0)),
+    SINGLE(50, new BlockPos(1, 2, 0)),
     
     ;
     
@@ -55,6 +54,6 @@ public enum PreviewType {
     
     @Override
     public String toString() {
-        return StringUtils.capitalize(name().toLowerCase(Locale.US));
+        return "container.chisel.hitech.preview." + name().toLowerCase(Locale.US);
     }
 }

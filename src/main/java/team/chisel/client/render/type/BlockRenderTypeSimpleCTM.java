@@ -18,7 +18,7 @@ import team.chisel.ctm.client.util.CTMLogic;
 public class BlockRenderTypeSimpleCTM extends TextureTypeCTM {
 
     @Override
-    public ICTMTexture<BlockRenderTypeSimpleCTM> makeTexture(TextureInfo info) {
+    public ICTMTexture<? extends TextureTypeCTM> makeTexture(TextureInfo info) {
         return new ChiselTextureSimpleCTM(this, info);
     }
 

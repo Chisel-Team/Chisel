@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import team.chisel.Chisel;
+import team.chisel.common.block.BlockAutoChisel;
 import team.chisel.common.block.BlockCarvable;
 
 @GameRegistry.ObjectHolder(Chisel.MOD_ID)
@@ -24,6 +25,7 @@ public final class ChiselBlocks
     */
 
     public static final BlockCarvable antiblock = null;
+    public static final BlockAutoChisel auto_chisel = null;
     public static final BlockCarvable basalt = null;
     public static final BlockCarvable basalt1 = null;
     public static final BlockCarvable basalt2 = null;

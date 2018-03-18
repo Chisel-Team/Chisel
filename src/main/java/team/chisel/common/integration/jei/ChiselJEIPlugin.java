@@ -1,6 +1,7 @@
 package team.chisel.common.integration.jei;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -12,38 +13,48 @@ import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import team.chisel.Chisel;
+import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.common.carving.Carving;
-import team.chisel.common.init.ChiselBlocks;
 import team.chisel.common.init.ChiselItems;
-import team.chisel.common.integration.jei.ChiselRecipeHandler.CarvingGroupWrapper;
 
 @JEIPlugin
 @ParametersAreNonnullByDefault
 public class ChiselJEIPlugin implements IModPlugin {
     
+    @SuppressWarnings("null")
     private ChiselRecipeCategory category;
 
+    @SuppressWarnings("null")
     @Override
     public void register(IModRegistry registry){
 
-        registry.addRecipeHandlers(new ChiselRecipeHandler());
-        registry.addRecipes(Carving.chisel.getSortedGroupNames().stream().map(s -> Carving.chisel.getGroup(s)).map(g -> new CarvingGroupWrapper(g)).collect(Collectors.toList()), category.getUid());
+        registry.handleRecipes(ICarvingGroup.class, ChiselRecipeWrapper::new, "chisel.chiseling");
+        registry.addRecipes(Carving.chisel.getSortedGroupNames().stream()
+                            .map(s -> Carving.chisel.getGroup(s))
+                            .collect(Collectors.toList()), category.getUid());
         
-        registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_iron), category.getUid());
-        registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_diamond), category.getUid());
-        registry.addRecipeCatalyst(new ItemStack(ChiselItems.chisel_hitech), category.getUid());
+        Arrays.stream(new Item[] {ChiselItems.chisel_iron, ChiselItems.chisel_diamond, ChiselItems.chisel_hitech})
+              .map(ItemStack::new)
+              .forEach(stack -> {
+                  registry.addRecipeCatalyst(stack, category.getUid());
+                  registry.addIngredientInfo(stack, ItemStack.class,
+                          "jei.chisel.desc.chisel_generic", 
+                          "\n",
+                          "jei.chisel.desc." + stack.getItem().getRegistryName().getResourcePath());
+              });
 
         ArrayList<ItemStack> itemStacks = new ArrayList<ItemStack>();
 
         for(int i = 0; i < 16; i++)
         {
-            itemStacks.add(new ItemStack(ChiselBlocks.concrete_powder, 1, i));
-            itemStacks.add(new ItemStack(ChiselBlocks.concrete, 1, i));
+            itemStacks.add(new ItemStack(Blocks.CONCRETE_POWDER, 1, i));
+            itemStacks.add(new ItemStack(Blocks.CONCRETE, 1, i));
         }
 
-        registry.addDescription(itemStacks, "jei.chisel.desc.concrete_making");
+        registry.addIngredientInfo(itemStacks, ItemStack.class, "jei.chisel.desc.concrete_making");
     }
 
     @Override

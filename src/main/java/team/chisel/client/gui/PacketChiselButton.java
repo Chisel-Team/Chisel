@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.inventory.ContainerChiselHitech;
+import team.chisel.common.util.SoundUtil;
 
 @NoArgsConstructor
 public class PacketChiselButton implements IMessage {
@@ -67,22 +68,25 @@ public class PacketChiselButton implements IMessage {
             if (chisel.isEmpty() || target.isEmpty()) {
                 return;
             }
+            
+            boolean playSound = false;
 
             for (int i : slots) {
-                Optional.ofNullable(player.inventory.getStackInSlot(i)).ifPresent((@Nonnull ItemStack s) -> {
+                ItemStack s = player.inventory.getStackInSlot(i);
+                if (!s.isEmpty()) {
                     if (carving.getGroup(target) != carving.getGroup(s)) {
                         return;
                     }
                     ItemStack stack = target.copy();
-                    int toCraft = s.getCount();
+                    int toCraft = Math.min(s.getCount(), stack.getMaxStackSize());
                     if (chisel.isItemStackDamageable()) {
                         int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
                         toCraft = Math.min(toCraft, damageLeft);
                         stack.setCount(toCraft);
                         chisel.damageItem(toCraft, player);
                     }
-                    player.inventory.setInventorySlotContents(i, stack);
-                    if (chisel.getCount() <= 0) {
+                    if (chisel.isEmpty()) {
+                        player.inventory.setInventorySlotContents(i, stack);
                         container.getInventoryChisel().getStackInSpecialSlot().shrink(toCraft);
                         player.inventory.setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
                         if (s.getCount() > toCraft) {
@@ -92,11 +96,24 @@ public class PacketChiselButton implements IMessage {
                                 player.dropItem(remainder, false);
                             }
                         }
+                    } else if (toCraft < s.getCount()) {
+                        s.shrink(toCraft);
+                        if (!player.inventory.addItemStackToInventory(stack)) {
+                            player.dropItem(stack, false);
+                        }
+                    } else {
+                        player.inventory.setInventorySlotContents(i, stack);
                     }
-                });
+                    
+                    playSound = true;
+                }
                 if (chisel.getCount() < 1) {
                     return;
                 }
+            }
+            
+            if (playSound) {
+                SoundUtil.playSound(player, chisel, carving.getVariation(target).getBlockState());
             }
         }
     }
