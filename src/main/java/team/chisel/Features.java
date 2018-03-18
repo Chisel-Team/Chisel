@@ -1,12 +1,5 @@
 package team.chisel;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
@@ -47,8 +40,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 import team.chisel.api.block.BlockCreator;
 import team.chisel.api.block.BlockProvider;
@@ -66,13 +57,18 @@ import team.chisel.common.block.TileAutoChisel;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
-import team.chisel.common.init.ChiselItems;
 import team.chisel.common.init.ChiselSounds;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.item.ItemOffsetTool;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.GenerationHandler.WorldGenInfo;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.List;
+import java.util.Random;
 
 @EventBusSubscriber
 public enum Features {
@@ -196,11 +192,6 @@ public enum Features {
         @Override
         void addItems(IForgeRegistry<Item> registry) {
             registry.register(new ItemBlock(ChiselBlocks.auto_chisel).setRegistryName(ChiselBlocks.auto_chisel.getRegistryName()));
-        }
-
-        @Override
-        void addRecipes(IForgeRegistry<IRecipe> registry) {
-            addShapedRecipe(registry, ChiselBlocks.auto_chisel, "GGG", "GRG", "III", 'G', "blockGlass", 'R', "dustRedstone", 'I', "ingotIron");
         }
     },
 
@@ -507,15 +498,15 @@ public enum Features {
         @Override
         void addRecipes(IForgeRegistry<IRecipe> registry) {
             if (!Configurations.chiselRecipe) {
-                Features.addShapedRecipe(registry, "chisel_iron", ChiselItems.chisel_iron, " x", "s ", 'x', "ingotIron", 's', "stickWood");
-                Features.addShapedRecipe(registry, "chisel_diamond", ChiselItems.chisel_diamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood");
-            } else {
-                Features.addShapedRecipe(registry, "chisel_iron", ChiselItems.chisel_iron, " xx", " xx", "s  ", 'x', "ingotIron", 's', "stickWood");
-                Features.addShapedRecipe(registry, "chisel_diamond", ChiselItems.chisel_diamond, " xx", " xx", "s  ", 'x', "gemDiamond", 's', "stickWood");
+                //Features.addShapedRecipe(registry, "chisel_iron", ChiselItems.chisel_iron, " x", "s ", 'x', "ingotIron", 's', "stickWood");
+                //Features.addShapedRecipe(registry, "chisel_diamond", ChiselItems.chisel_diamond, " x", "s ", 'x', "gemDiamond", 's', "stickWood");
+            } else { // TODO Factory for chisel recipe layout
+                //Features.addShapedRecipe(registry, "chisel_iron", ChiselItems.chisel_iron, " xx", " xx", "s  ", 'x', "ingotIron", 's', "stickWood");
+                //Features.addShapedRecipe(registry, "chisel_diamond", ChiselItems.chisel_diamond, " xx", " xx", "s  ", 'x', "gemDiamond", 's', "stickWood");
             }
-            Features.addShapelessRecipe(registry, "chisel_hitech", ChiselItems.chisel_hitech, ChiselItems.chisel_diamond, "dustRedstone", "ingotGold");
+            //Features.addShapelessRecipe(registry, "chisel_hitech", ChiselItems.chisel_hitech, ChiselItems.chisel_diamond, "dustRedstone", "ingotGold");
 
-            Features.addShapedRecipe(registry, "offsettool", ChiselItems.offsettool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron");
+            //Features.addShapedRecipe(registry, "offsettool", ChiselItems.offsettool, "-o", "|-", 'o', Items.ENDER_PEARL, '|', "stickWood", '-', "ingotIron");
         }
     },
 
@@ -3092,50 +3083,9 @@ public enum Features {
             if(oreList.size() > 0)
             {
                 ItemStack result = oreList.get(0);
-                addShapedRecipe(registry, "uncraft_" + blockOre, new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', blockOre);
+                // TODO Uncrafting recipes
+                //addShapedRecipe(registry, "uncraft_" + blockOre, new ItemStack(result.getItem(), 9, result.getItemDamage(), result.getTagCompound()), "X", 'X', blockOre);
             }
         }
-    }
-    
-    private static final ResourceLocation RECIPE_GROUP = new ResourceLocation("", "");
-    
-    void addShapelessRecipe(IForgeRegistry<IRecipe> registry, ItemStack result, Object... ingredients) { 
-        addShapelessRecipe(registry, Configurations.featureName(this), result, ingredients); 
-    }
-    void addShapelessRecipe(IForgeRegistry<IRecipe> registry, Block result, Object... ingredients) {
-        addShapelessRecipe(registry, Configurations.featureName(this), result, ingredients); 
-    }
-    void addShapelessRecipe(IForgeRegistry<IRecipe> registry, Item result, Object... ingredients) {
-        addShapelessRecipe(registry, Configurations.featureName(this), result, ingredients); 
-    }
-    
-    private static void addShapelessRecipe(IForgeRegistry<IRecipe> registry, String name, ItemStack result, Object... ingredients) {
-        registry.register(new ShapelessOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
-    }  
-    private static void addShapelessRecipe(IForgeRegistry<IRecipe> registry, String name, Block result, Object... ingredients) {
-        registry.register(new ShapelessOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
-    }
-    private static void addShapelessRecipe(IForgeRegistry<IRecipe> registry, String name, Item result, Object... ingredients) {
-        registry.register(new ShapelessOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
-    }
-    
-    void addShapedRecipe(IForgeRegistry<IRecipe> registry, ItemStack result, Object... ingredients) { 
-        addShapedRecipe(registry, Configurations.featureName(this), result, ingredients); 
-    }
-    void addShapedRecipe(IForgeRegistry<IRecipe> registry, Block result, Object... ingredients) {
-        addShapedRecipe(registry, Configurations.featureName(this), result, ingredients); 
-    }
-    void addShapedRecipe(IForgeRegistry<IRecipe> registry, Item result, Object... ingredients) {
-        addShapedRecipe(registry, Configurations.featureName(this), result, ingredients); 
-    }
-    
-    private static void addShapedRecipe(IForgeRegistry<IRecipe> registry, String name, @Nonnull ItemStack result, Object... ingredients) {
-        registry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
-    }
-    private static void addShapedRecipe(IForgeRegistry<IRecipe> registry, String name, Block result, Object... ingredients) {
-        registry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
-    }
-    private static void addShapedRecipe(IForgeRegistry<IRecipe> registry, String name, Item result, Object... ingredients) {
-        registry.register(new ShapedOreRecipe(RECIPE_GROUP, result, ingredients).setRegistryName(Chisel.MOD_ID, name));
     }
 }
