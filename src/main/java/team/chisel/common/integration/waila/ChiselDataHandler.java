@@ -8,7 +8,7 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import mcp.mobius.waila.api.WailaPlugin;
-import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.ICarvable;
-import team.chisel.common.block.ItemChiselBlock;
+import team.chisel.api.block.VariationData;
 
 @WailaPlugin
 public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
@@ -36,8 +36,12 @@ public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
     @Override
     @SideOnly(Side.CLIENT)
     public List<String> getWailaBody(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
-        if (stack.getItem() instanceof ItemChiselBlock) {
-            stack.getItem().addInformation(stack, null, strings, ITooltipFlag.TooltipFlags.NORMAL);
+        ICarvable carvable = (ICarvable) accessor.getBlock();
+        int index = stack.getItemDamage() & carvable.getTotalVariations();
+        VariationData data = carvable.getVariationData(index);
+        String key = stack.getUnlocalizedName() + "." + data.name + ".desc.";
+        for (int i = 1; I18n.hasKey(key + i); ++i) {
+            strings.add(I18n.format(key + i));
         }
         return strings;
     }
