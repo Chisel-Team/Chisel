@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "feature",
+  "conditions": [{
+    "type": "chisel:feature",
+    "feature": "autochisel"
+  }],
+  "pattern": [ "GGG", "GRG", "III" ],
+  "key": {
+    "G": { "ore": "blockGlass", "type": "forge:ore_dict" },
+    "R": { "ore": "dustRedstone", "type": "forge:ore_dict" },
+    "I": { "ore": "ingotIron", "type": "forge:ore_dict" }
+  },
+  "result": { "item": "chisel:auto_chisel" }
+}
