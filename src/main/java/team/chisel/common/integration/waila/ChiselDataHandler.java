@@ -8,6 +8,7 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.IWailaRegistrar;
 import mcp.mobius.waila.api.WailaPlugin;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -15,7 +16,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.ICarvable;
@@ -34,15 +34,11 @@ public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
         return strings;
     }
 
-    @SuppressWarnings("null")
     @Override
     @SideOnly(Side.CLIENT)
     public List<String> getWailaBody(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
-        if (accessor.getBlock() instanceof ICarvable) {
-            ItemChiselBlock item = (ItemChiselBlock) ForgeRegistries.ITEMS.getValue(accessor.getBlock().getRegistryName());
-            ICarvable block = (ICarvable) accessor.getBlock();
-            int variation = block.getVariationIndex(accessor.getBlockState());
-            item.addInformation(new ItemStack(item, 1, variation), accessor.getWorld(), strings, ITooltipFlag.TooltipFlags.NORMAL);
+        if (stack.getItem() instanceof ItemChiselBlock) {
+            stack.getItem().addInformation(stack, null, strings, ITooltipFlag.TooltipFlags.NORMAL);
         }
         return strings;
     }
