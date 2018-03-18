@@ -19,6 +19,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
+import team.chisel.common.config.Configurations;
 
 @WailaPlugin
 public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
@@ -40,8 +41,9 @@ public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
         int index = stack.getItemDamage() & carvable.getTotalVariations();
         VariationData data = carvable.getVariationData(index);
         String key = stack.getUnlocalizedName() + "." + data.name + ".desc.";
-        for (int i = 1; I18n.hasKey(key + i); ++i) {
-            strings.add(I18n.format(key + i));
+        int line = Configurations.blockDescriptions ? 1 : 2;
+        while (I18n.hasKey(key + line)) {
+            strings.add(I18n.format(key + line++));
         }
         return strings;
     }
