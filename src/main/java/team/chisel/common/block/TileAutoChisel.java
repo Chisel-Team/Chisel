@@ -478,7 +478,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     private @Nullable ItemStack source;
 
     @SuppressWarnings("null")
-    public void spawnCompletionFX(EntityPlayer player, ItemStack chisel, IBlockState source) {
+    public void spawnCompletionFX(EntityPlayer player, @Nullable ItemStack chisel, IBlockState source) {
         SoundUtil.playSound(player, getPos(), SoundUtil.getSound(player, chisel, source));
         if (chisel.stackSize == 0) {
             getWorld().playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
