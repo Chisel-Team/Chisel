@@ -11,6 +11,7 @@ import lombok.Setter;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleDigging;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -497,12 +498,15 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
                 for (int l = 0; l < i; ++l) {
                     double vx = (mid - j) * 0.05;
                     double vz = (mid - l) * 0.05;
-                    ((ParticleDigging) Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(
+                    Particle fx = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(
                             EnumParticleTypes.BLOCK_CRACK.getParticleID(), 
                             pos.getX() + 0.5, pos.getY() + 10/16D, pos.getZ() + 0.5, 
                             vx, 0, vz,
-                            Block.getIdFromBlock(source.getBlock())))
-                    .setBlockPos(pos).setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(source).getParticleTexture());
+                            Block.getIdFromBlock(source.getBlock()));
+
+                    if (fx != null) {
+                        ((ParticleDigging)fx).setBlockPos(pos).setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(source).getParticleTexture());
+                    }
                 }
             }
         }
