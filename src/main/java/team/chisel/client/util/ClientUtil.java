@@ -12,6 +12,7 @@ import com.google.common.base.Throwables;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleDigging;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumBlockRenderType;
@@ -72,10 +73,13 @@ public class ClientUtil {
                 d0 = (double) i + bb.maxX + f;
             }
 
-            ((ParticleDigging) Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.BLOCK_CRACK.getParticleID(), d0, d1, d2, 0.0D, 0.0D, 0.0D,
-                    Block.getIdFromBlock(state.getBlock()))).setBlockPos(pos).multiplyVelocity(0.2F).multipleParticleScaleBy(0.6F)
-                    .setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state).getParticleTexture());
-            ;
+            Particle fx = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.BLOCK_CRACK.getParticleID(), d0, d1, d2, 0.0D, 0.0D, 0.0D,
+                    Block.getIdFromBlock(state.getBlock()));
+
+            if (fx != null) {
+                ((ParticleDigging)fx).setBlockPos(pos).multiplyVelocity(0.2F).multipleParticleScaleBy(0.6F)
+                        .setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(state).getParticleTexture());
+            }
         }
     }
 
@@ -92,8 +96,12 @@ public class ClientUtil {
                     double d0 = (double) pos.getX() + ((double) j + 0.5D) / (double) i;
                     double d1 = (double) pos.getY() + ((double) k + 0.5D) / (double) i;
                     double d2 = (double) pos.getZ() + ((double) l + 0.5D) / (double) i;
-                    ((ParticleDigging) Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.BLOCK_CRACK.getParticleID(), d0, d1, d2, d0 - pos.getX() - 0.5D,
-                            d1 - pos.getY() - 0.5D, d2 - pos.getZ() - 0.5D, Block.getIdFromBlock(state.getBlock()))).setBlockPos(pos).setParticleTexture(texture);
+                    Particle fx = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(EnumParticleTypes.BLOCK_CRACK.getParticleID(), d0, d1, d2, d0 - pos.getX() - 0.5D,
+                            d1 - pos.getY() - 0.5D, d2 - pos.getZ() - 0.5D, Block.getIdFromBlock(state.getBlock()));
+
+                    if (fx != null) {
+                        ((ParticleDigging) fx).setBlockPos(pos).setParticleTexture(texture);
+                    }
                 }
             }
         }
