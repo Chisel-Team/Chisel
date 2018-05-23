@@ -1,0 +1,7 @@
+{
+    "parent": "chisel:block/ctm_pane_noside",
+    "textures": {
+        "cap": "chisel:blocks/ironpane/ornatesteel-top",
+        "side": "chisel:blocks/ironpane/ornatesteel"
+    }
+}

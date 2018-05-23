@@ -11,7 +11,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -41,20 +40,15 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 
     private final BlockStateContainer states;
     
-    public BlockCarvablePane(Material material, boolean canDrop, int index, int max, VariationData... variations) {
-        super(material, canDrop);
+    public BlockCarvablePane(Material material, int index, int max, VariationData... variations) {
+        super(material, true);
         setCreativeTab(ChiselTabs.tab);
         this.index = index;
         this.variations = variations;
         this.maxVariation = max;
         this.metaProp = PropertyAnyInteger.create("variation", 0, max > index * 16 ? 15 : max % 16);
-        this.states = new BlockStateContainer(this, metaProp);
+        this.states = new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH, metaProp);
         setDefaultState(getBlockState().getBaseState());
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return Blocks.AIR.getBlockState();
     }
 
     @Override
@@ -69,6 +63,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
+        this.useNeighborBrightness = true;
         return getBlockState().getBaseState().withProperty(metaProp, meta);
     }
 

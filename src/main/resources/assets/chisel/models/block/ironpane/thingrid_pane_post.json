@@ -1,0 +1,7 @@
+{
+    "parent": "chisel:block/ctm_pane_post",
+    "textures": {
+        "cap": "chisel:blocks/ironpane/thingrid-top",
+        "side": "chisel:blocks/ironpane/thingrid"
+    }
+}

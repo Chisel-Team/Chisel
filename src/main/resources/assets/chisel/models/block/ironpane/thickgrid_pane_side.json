@@ -1,0 +1,8 @@
+{
+    "parent": "chisel:block/ctm_pane_side",
+    "textures": {
+        "cap": "chisel:blocks/ironpane/thickgrid",
+        "side": "chisel:blocks/ironpane/thickgrid",
+        "end": "chisel:blocks/ironpane/thickgrid"
+    }
+}
