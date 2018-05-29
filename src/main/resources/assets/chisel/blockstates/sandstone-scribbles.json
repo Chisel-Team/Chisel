@@ -1,22 +1,27 @@
 {
-    "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
-    "variants": {
-        "scribbles-1": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-1"}}],
-        "scribbles-0": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-0"}}],
-        "scribbles-9": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-9"}}],
-        "scribbles-8": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-8"}}],
-        "scribbles-7": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-7"}}],
-        "scribbles-6": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-6"}}],
-        "scribbles-5": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-5"}}],
-        "scribbles-4": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-4"}}],
-        "scribbles-3": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-3"}}],
-        "scribbles-2": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-2"}}],
-        "scribbles-10": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-10"}}],
-        "scribbles-12": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-12"}}],
-        "scribbles-11": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-11"}}],
-        "scribbles-14": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-14"}}],
-        "scribbles-13": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-13"}}],
-        "scribbles-15": [{"textures":{"all":"chisel:blocks/sandstone-scribbles/scribbles-15"}}]
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_column",
+    "textures": {
+      "end": "chisel:blocks/sandstone-scribbles/scribbles-0-top"
     }
+  },
+  "variants": {
+    "scribbles-0" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-0-side"  } }],
+    "scribbles-1" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-1-side"  } }],
+    "scribbles-2" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-2-side"  } }],
+    "scribbles-3" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-3-side"  } }],
+    "scribbles-4" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-4-side"  } }],
+    "scribbles-5" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-5-side"  } }],
+    "scribbles-6" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-6-side"  } }],
+    "scribbles-7" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-7-side"  } }],
+    "scribbles-8" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-8-side"  } }],
+    "scribbles-9" : [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-9-side"  } }],
+    "scribbles-10": [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-10-side" } }],
+    "scribbles-11": [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-11-side" } }],
+    "scribbles-12": [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-12-side" } }],
+    "scribbles-13": [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-13-side" } }],
+    "scribbles-14": [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-14-side" } }],
+    "scribbles-15": [{ "textures": { "side": "chisel:blocks/sandstone-scribbles/scribbles-15-side" } }]
+  }
 }
