@@ -1,9 +1,12 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type": "pattern",
-        "extra": {
-            "size": 3
-        }
+  "animation": {
+    "interpolate": true
+  },
+  "ctm": {
+    "ctm_version": 1,
+    "type": "pattern",
+    "extra": {
+      "size": 3
     }
+  }
 }
