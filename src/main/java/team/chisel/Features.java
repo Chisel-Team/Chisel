@@ -353,10 +353,10 @@ public enum Features {
         }
     },
 
-    BLOOD_RUNE ("bloodmagic") {
+    BLOOD_RUNE ("BloodMagic") {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("bloodMagic", CarvingUtils.variationFor(GameRegistry.findBlock("bloodmagic", "BlockBloodRune").getDefaultState(), -64));
+            //Carving.chisel.addVariation("bloodMagic", CarvingUtils.variationFor(GameRegistry.findBlock("bloodmagic", "BlockBloodRune").getDefaultState(), -64));
 
             factory.newBlock(Material.ROCK, "bloodMagic", new ChiselBlockProvider<>(BlockCarvableAltarComponent::new, BlockCarvableAltarComponent.class))
                     .newVariation("bloodRuneArranged")
@@ -3373,7 +3373,7 @@ public enum Features {
     }
 
     public boolean enabled() {
-        return /*(this == Features.BASALT || this == Features.END_PURPUR) &&*/ Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
+        return /*(this == Features.BASALT || this == Features.END_PURPUR) && Configurations.featureEnabled(this) &&/**/ hasRequiredMod() && hasParentFeature();
     }
 
     private boolean hasParentFeature() {
