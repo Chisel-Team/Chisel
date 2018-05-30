@@ -1,7 +1,0 @@
-{
-    "parent": "chisel:block/ctm_pane_post",
-    "textures": {
-        "cap": "chisel:blocks/ironpane/borderless-top",
-        "side": "chisel:blocks/ironpane/borderless"
-    }
-}

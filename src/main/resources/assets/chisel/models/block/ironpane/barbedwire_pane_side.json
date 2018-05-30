@@ -1,8 +1,0 @@
-{
-    "parent": "chisel:block/ctm_pane_side",
-    "textures": {
-        "cap": "chisel:blocks/ironpane/barbedwire-top",
-        "side": "chisel:blocks/ironpane/barbedwire",
-        "end": "chisel:blocks/ironpane/barbedwire-side"
-    }
-}

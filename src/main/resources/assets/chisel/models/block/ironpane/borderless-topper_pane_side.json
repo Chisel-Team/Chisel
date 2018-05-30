@@ -1,8 +1,0 @@
-{
-    "parent": "chisel:block/ctm_pane_side",
-    "textures": {
-        "cap": "chisel:blocks/ironpane/borderless-topper-top",
-        "side": "chisel:blocks/ironpane/borderless-topper",
-        "end": "chisel:blocks/ironpane/borderless-topper-side"
-    }
-}

@@ -1,7 +1,0 @@
-{
-    "parent": "chisel:block/ctm_pane_post",
-    "textures": {
-        "cap": "chisel:blocks/ironpane/thickgrid",
-        "side": "chisel:blocks/ironpane/thickgrid"
-    }
-}
