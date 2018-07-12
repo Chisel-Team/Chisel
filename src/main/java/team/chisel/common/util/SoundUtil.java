@@ -1,13 +1,12 @@
 package team.chisel.common.util;
 
-import java.util.Optional;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -21,11 +20,13 @@ public class SoundUtil {
     
     @SuppressWarnings("null")
     public static SoundEvent getSound(EntityPlayer player, ItemStack chisel, @Nullable IBlockState target) {
-        if (target != null) {
-            return Optional.ofNullable(((IChiselItem)chisel.getItem()).getOverrideSound(player.getEntityWorld(), player, chisel, target)).orElse(CarvingUtils.getChiselRegistry().getVariationSound(target));
-        } else {
-            return CarvingUtils.getChiselRegistry().getVariationSound(target);
+        if (target != null && !chisel.isEmpty()) {
+            SoundEvent evt = ((IChiselItem)chisel.getItem()).getOverrideSound(player.getEntityWorld(), player, chisel, target);
+            if (evt != null) {
+                return evt;
+            }
         }
+        return CarvingUtils.getChiselRegistry().getVariationSound(target != null ? target : Blocks.AIR.getDefaultState());
     }
 
     public static void playSound(EntityPlayer player, @Nullable ItemStack chisel, @Nullable IBlockState target) {
