@@ -45,7 +45,7 @@ public class GuiAutoChisel extends GuiContainer {
 
         if (container.te.getProgress() > 0) {
             int scaledProg = (int) (((float) container.te.getProgress() / container.te.getMaxProgress()) * PROG_BAR_LENGTH);
-            drawTexturedModalRect(guiLeft + 63, guiTop + 19 + 9, 176, 18, scaledProg + 1, 17);
+            drawTexturedModalRect(guiLeft + 63, guiTop + 19 + 9, 176, 18, scaledProg + 1, 16);
         }
 
         IEnergyStorage energy = container.te.getCapability(CapabilityEnergy.ENERGY, null);
@@ -60,6 +60,7 @@ public class GuiAutoChisel extends GuiContainer {
             drawGhostItem(fakeChisel, guiLeft + 80, guiTop + 28);
         }
         if (!container.getSlot(container.targetSlot).getHasStack()) {
+            GlStateManager.color(1, 1, 1);
             drawTexturedModalRect(guiLeft + 80, guiTop + 64, 176, 34, 16, 16);
         }
     }
@@ -70,8 +71,13 @@ public class GuiAutoChisel extends GuiContainer {
         float z = zLevel;
         zLevel = 101;
         GlStateManager.color(1, 1, 1, 0.5f);
+        GlStateManager.disableDepth();
+        GlStateManager.enableBlend();
+        GlStateManager.disableLighting();
         drawTexturedModalRect(x, y, x - guiLeft, y - guiTop, 16, 16);
         GlStateManager.color(1, 1, 1, 1);
+        GlStateManager.disableBlend();
+        GlStateManager.enableDepth();
         zLevel = z;
     }
 
