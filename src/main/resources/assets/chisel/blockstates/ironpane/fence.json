@@ -5,8 +5,8 @@
         "textures": {
             "particle": "chisel:blocks/ironpane/fence",
             "bars"    : "chisel:blocks/ironpane/fence",
-            "edge"    : "chisel:blocks/ironpane/fence-top",
-            "side"    : "chisel:blocks/ironpane/fence-top"
+            "edge"    : "chisel:blocks/ironpane/bars-top",
+            "side"    : "chisel:blocks/ironpane/bars-top"
         }
     },
     "variants": {

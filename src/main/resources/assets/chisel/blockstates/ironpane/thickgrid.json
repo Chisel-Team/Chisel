@@ -16,9 +16,9 @@
         "west" : { "true": { "submodel": { "side_w": { "model": "chisel:bars_side_alt", "y": 90 }}}, "false": { }},
         
         "east=false,north=false,south=false,west=false": { "model": "chisel:bars_post" },
-        "east=false,north=true,south=false,west=false" : { "model": "iron_bars_post_ends", "submodel": { "cap_n": { "model": "chisel:bars_cap"              } } },
-        "east=true,north=false,south=false,west=false" : { "model": "iron_bars_post_ends", "submodel": { "cap_e": { "model": "chisel:bars_cap"    , "y": 90 } } },
-        "east=false,north=false,south=true,west=false" : { "model": "iron_bars_post_ends", "submodel": { "cap_s": { "model": "chisel:bars_cap_alt"          } } },
-        "east=false,north=false,south=false,west=true" : { "model": "iron_bars_post_ends", "submodel": { "cap_w": { "model": "chisel:bars_cap_alt", "y": 90 } } }
+        "east=false,north=true,south=false,west=false" : { "model": "chisel:bars_post_ends", "submodel": { "cap_n": { "model": "chisel:bars_cap"              } } },
+        "east=true,north=false,south=false,west=false" : { "model": "chisel:bars_post_ends", "submodel": { "cap_e": { "model": "chisel:bars_cap"    , "y": 90 } } },
+        "east=false,north=false,south=true,west=false" : { "model": "chisel:bars_post_ends", "submodel": { "cap_s": { "model": "chisel:bars_cap_alt"          } } },
+        "east=false,north=false,south=false,west=true" : { "model": "chisel:bars_post_ends", "submodel": { "cap_w": { "model": "chisel:bars_cap_alt", "y": 90 } } }
     }
 }

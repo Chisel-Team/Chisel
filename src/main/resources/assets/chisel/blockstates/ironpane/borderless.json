@@ -4,8 +4,8 @@
         "ambientocclusion": false,
         "model": "chisel:bars_post_ends",
         "textures": {
-            "particle": "chisel:blocks/ironpane/borderless",
-            "bars"    : "chisel:blocks/ironpane/borderless",
+            "particle": "blocks/iron_bars",
+            "bars"    : "blocks/iron_bars",
             "edge"    : "chisel:blocks/ironpane/borderless-top",
             "side"    : "chisel:blocks/ironpane/borderless-side"
         }

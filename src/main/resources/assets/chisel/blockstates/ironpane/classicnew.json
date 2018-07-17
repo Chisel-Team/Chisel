@@ -5,8 +5,8 @@
         "textures": {
             "particle": "chisel:blocks/ironpane/classicnew",
             "bars"    : "chisel:blocks/ironpane/classicnew",
-            "edge"    : "chisel:blocks/ironpane/classic-top",
-            "side"    : "chisel:blocks/ironpane/classic-top"
+            "edge"    : "chisel:blocks/ironpane/classic",
+            "side"    : "chisel:blocks/ironpane/classic"
         }
     },
     "variants": {
