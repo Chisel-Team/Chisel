@@ -2306,10 +2306,7 @@ public enum Features {
 
             IBlockState prismarine = Blocks.PRISMARINE.getDefaultState();
             IProperty<BlockPrismarine.EnumType> prop = BlockPrismarine.VARIANT;
-            Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.ROUGH), -3));
-            Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -2));
-            Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.DARK), -1));
-
+            Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -1));
 
             factory.newBlock(Material.ROCK, "prismarine", provider)
                     .newVariation("cracked")
