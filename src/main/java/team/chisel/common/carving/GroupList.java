@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -124,6 +125,7 @@ public class GroupList implements Set<ICarvingGroup> {
 	@Override
 	public boolean add(ICarvingGroup group) {
 		String key = group.getName();
+		Preconditions.checkNotNull(key, "Group cannot have null name!");
 		if (groups.containsKey(key)) {
 			return false;
 		}
