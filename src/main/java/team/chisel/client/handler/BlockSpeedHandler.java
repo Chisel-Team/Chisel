@@ -2,6 +2,7 @@ package team.chisel.client.handler;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.lang.Math;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -9,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.MovementInput;
 import net.minecraft.util.MovementInputFromOptions;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -34,7 +36,11 @@ public class BlockSpeedHandler {
                 manualInputCheck = new MovementInputFromOptions(Minecraft.getMinecraft().gameSettings);
             }
             EntityPlayerSP player = (EntityPlayerSP) event.player;
-            IBlockState below = player.getEntityWorld().getBlockState(player.getPosition().down());
+            BlockPos pos = new BlockPos(
+                Math.floor(player.posX),
+                Math.floor(player.posY),
+                Math.floor(player.posZ));
+            IBlockState below = player.getEntityWorld().getBlockState(pos.down());
             if (speedupBlocks.contains(below.getBlock())) {
                 manualInputCheck.updatePlayerMoveState();
                 if ((manualInputCheck.moveForward != 0 || manualInputCheck.moveStrafe != 0) && !player.isInWater()) {
