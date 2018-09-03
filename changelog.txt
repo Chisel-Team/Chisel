@@ -2,6 +2,7 @@
 New
 - Iron bars are back! With an all new model you can once again imprison your friends WITH STYLE!
 Changes
+- #661, #699 CTM is now properly declared as a clientside dependency
 - #696 Auto Chisel will hide the FE bar when it is disabled in the config
 - #678 Chisel blocks should now work with JEI color search
 - Added the remaining missing description tooltips, and fixed a few broken ones
