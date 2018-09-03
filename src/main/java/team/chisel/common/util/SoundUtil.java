@@ -29,11 +29,9 @@ public class SoundUtil {
         return CarvingUtils.getChiselRegistry().getVariationSound(target != null ? target : Blocks.AIR.getDefaultState());
     }
 
-    public static void playSound(EntityPlayer player, @Nullable ItemStack chisel, @Nullable IBlockState target) {
-        if (chisel != null && chisel.getItem() instanceof IChiselItem) {
-            @Nonnull SoundEvent sound = getSound(player, chisel, target);
-            playSound(player, player.getPosition(), sound);
-        }
+    public static void playSound(EntityPlayer player, ItemStack chisel, @Nullable IBlockState target) {
+        @Nonnull SoundEvent sound = getSound(player, chisel, target);
+        playSound(player, player.getPosition(), sound);
     }
 
     public static void playSound(EntityPlayer player, BlockPos pos, SoundEvent sound) {

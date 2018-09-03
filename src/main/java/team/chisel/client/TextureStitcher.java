@@ -42,6 +42,16 @@ public class TextureStitcher {
         void postStitch() {
             this.copyFrom(parent);
         }
+        
+        @Override
+        public int getFrameCount() {
+            return parent.getFrameCount();
+        }
+        
+        @Override
+        public int[][] getFrameTextureData(int index) {
+            return parent.getFrameTextureData(index);
+        }
     }
 
     private static List<MagicStitchingSprite> textures = new ArrayList<MagicStitchingSprite>();

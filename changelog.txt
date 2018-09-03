@@ -1,3 +1,22 @@
+0.2.1:
+New
+- Iron bars are back! With an all new model you can once again imprison your friends WITH STYLE!
+Changes
+- #696 Auto Chisel will hide the FE bar when it is disabled in the config
+- #678 Chisel blocks should now work with JEI color search
+- Added the remaining missing description tooltips, and fixed a few broken ones
+Fixes
+- #653 Crashes when some features are disabled (chisel, autochisel)
+- #651 Occasional crash when Auto Chisel tries to play a sound
+- #681 Crash when Auto Chisel plays sound as the chisel inside breaks
+- #693 Fix calling getActualState too late, fixes crash with TCon blocks (and potentially others)
+- #668 Fix crash when last group for an oredict is removed
+- Fixed some small issues with the Auto Chisel GUI
+- #713 Removed rough and dark prismarine as prismarine variants, fixes potential dupes
+- #691 Fix iChisel deleting items when chisel damage is disabled in the config
+- #663 Fixed Rusty Scaffold texture not being properly transparent
+- #730 Fixed speed boost from concrete being offset in some situations
+
 0.2.0:
 New
 - The Auto Chisel has made its glorious return! It can now accept FE (Forge Energy) to increase its speed, but will run without any power. No more upgrades!

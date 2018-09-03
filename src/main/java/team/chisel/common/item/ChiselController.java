@@ -128,9 +128,7 @@ public class ChiselController {
         }
 
         if (held.getItem() instanceof IChiselItem) {
-            world.setBlockState(pos, targetState);
 //            player.addStat(Statistics.blocksChiseled, 1); // TODO statistics
-            boolean breakChisel = false;
             IChiselItem chisel = ((IChiselItem)held.getItem());
             ItemStack current = CarvingUtils.getChiselRegistry().getVariation(curState).getStack();
             current.setCount(1);
@@ -141,12 +139,12 @@ public class ChiselController {
             if (held.getCount() <= 0) {
                 ItemStack targetStack = NBTUtil.getChiselTarget(held);
                 player.inventory.mainInventory.set(player.inventory.currentItem, targetStack);
-                breakChisel = true;
             }
             if (world.isRemote) {
                 SoundUtil.playSound(player, held, targetState);
                 ClientUtil.addDestroyEffects(world, pos, curState);
             }
+            world.setBlockState(pos, targetState);
         }
     }
     
