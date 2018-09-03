@@ -41,7 +41,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     private final BlockStateContainer states;
     
     public BlockCarvablePane(Material material, int index, int max, VariationData... variations) {
-        super(material, true);
+        super(material, material != Material.GLASS);
         setCreativeTab(ChiselTabs.tab);
         this.index = index;
         this.variations = variations;
@@ -59,6 +59,11 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     @Override
     public int damageDropped(IBlockState state) {
         return getMetaFromState(state);
+    }
+    
+    @Override
+    protected boolean canSilkHarvest() {
+        return this.blockMaterial != Material.GLASS;
     }
 
     @Override

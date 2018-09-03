@@ -1,0 +1,15 @@
+{
+    "ambientocclusion": false,
+    "elements": [
+        {
+            "from": [ 7, 0, 0 ],
+            "to": [ 9, 16, 8 ],
+            "faces": {
+                "up": { "texture": "#side", "cullface": "up" },
+                "down": { "texture": "#side", "cullface": "down" },
+                "west": { "texture": "#pane" },
+                "east": { "texture": "#pane" }
+            }
+        }
+    ]
+}

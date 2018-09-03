@@ -1,0 +1,7 @@
+{
+    "parent": "chisel:block/ctm_pane_noside",
+    "textures": {
+        "cap": "chisel:blocks/glasspane/%name%-top",
+        "side": "chisel:blocks/glasspane/%name%"
+    }
+}

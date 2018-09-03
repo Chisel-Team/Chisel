@@ -1,0 +1,15 @@
+{
+    "ambientocclusion": false,
+    "elements": [
+        {
+            "from": [ 7,  0, 7 ],
+            "to"  : [ 9, 16, 9 ],
+            "faces": {
+                "north": { "texture": "#side" },
+                "south": { "texture": "#side" },
+                "east": { "texture": "#side" },
+                "west": { "texture": "#side" }
+            }
+        }
+    ]
+}

@@ -20,6 +20,7 @@ import net.minecraft.block.BlockRedSandstone;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.BlockSandStone;
 import net.minecraft.block.BlockStainedGlass;
+import net.minecraft.block.BlockStainedGlassPane;
 import net.minecraft.block.BlockStone;
 import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.SoundType;
@@ -457,13 +458,13 @@ public enum Features {
 
             for(int c = 0; c < dyeColors.length; c++)
             {
-                Carving.chisel.addVariation("carpet_" + (dyeColors[c].toLowerCase()), CarvingUtils.variationFor(carpet.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
+                Carving.chisel.addVariation("carpet_" + (dyeColors[c]), CarvingUtils.variationFor(carpet.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
 
 
-                factory.newBlock(Material.CARPET, "carpet_" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvableCarpet::new, BlockCarvableCarpet.class)).opaque(false)
+                factory.newBlock(Material.CARPET, "carpet_" + (dyeColors[c]), new ChiselBlockProvider<>(BlockCarvableCarpet::new, BlockCarvableCarpet.class)).opaque(false)
                         .setParentFolder("carpet")
-                        .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
-                        .next("llama_"+(dyeColors[c].toLowerCase()))
+                        .newVariation("legacy_"+(dyeColors[c]))
+                        .next("llama_"+(dyeColors[c]))
                         .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.1F).setLightOpacity(0));
             }
         }
@@ -822,10 +823,10 @@ public enum Features {
             Carving.chisel.removeGroup("concrete");
 
             for (int i = 0; i < dyeColors.length; i++) {
-                Carving.chisel.addVariation("concrete_" + (dyeColors[i].toLowerCase()), CarvingUtils.variationFor(Block.REGISTRY.getObject(new ResourceLocation(Chisel.MOD_ID, "concrete")).getStateFromMeta(15-i), -1));
+                Carving.chisel.addVariation("concrete_" + (dyeColors[i]), CarvingUtils.variationFor(Block.REGISTRY.getObject(new ResourceLocation(Chisel.MOD_ID, "concrete")).getStateFromMeta(15-i), -1));
 
-                factory.newBlock(Material.ROCK, "concrete_" + (dyeColors[i].toLowerCase()), new ChiselBlockProvider<>(creator, BlockCarvable.class))
-                        .setParentFolder("concrete_" + dyeColors[i].toLowerCase())
+                factory.newBlock(Material.ROCK, "concrete_" + (dyeColors[i]), new ChiselBlockProvider<>(creator, BlockCarvable.class))
+                        .setParentFolder("concrete_" + dyeColors[i])
                         .newVariation("cracked")
                         .next("bricks-soft")
                         .next("bricks-cracked")
@@ -1344,11 +1345,11 @@ public enum Features {
                     }
                 };
 
-                Carving.chisel.addVariation("glassdyed" + (dyeColors[c].toLowerCase()), CarvingUtils.variationFor(stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
+                Carving.chisel.addVariation("glassdyed" + (dyeColors[c]), CarvingUtils.variationFor(stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
 
 
-                factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
-                        .setParentFolder("glass_stained/"+dyeColors[c].toLowerCase())
+                factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c]), new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
+                        .setParentFolder("glass_stained/"+dyeColors[c])
                         .newVariation("panel")
                         .next("framed")
                         .next("framed_fancy")
@@ -1362,17 +1363,11 @@ public enum Features {
         }
     },
 
-    /*GLASSPANE { TODO Remodel
+    GLASSPANE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            //Carving.chisel.addVariation("glasspane", CarvingUtils.variationFor(Blocks.glass_pane.getDefaultState(), -1));
-            factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<BlockCarvablePane>(new BlockCreator<BlockCarvablePane>()
-            {
-                @Override
-                public BlockCarvablePane createBlock(Material mat, int index, int maxVariation, VariationData... data) {
-                    return new BlockCarvablePane(mat, false, index, maxVariation, data);
-                }
-            }, BlockCarvablePane.class))
+            Carving.chisel.addVariation("glasspane", CarvingUtils.variationFor(Blocks.GLASS_PANE.getDefaultState(), -1));
+            factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
                     .newVariation("chinese")
                     .next("chinese2")
                     .next("japanese")
@@ -1381,27 +1376,30 @@ public enum Features {
                     .next("terrain-glassbubble")
                     .next("terrain-glassnoborder")
                     .next("terrain-glassstreak")
-                    .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS));
+                    .build(b -> b.setSoundType(SoundType.GLASS));
         }
     },
-    GLASSPANEDYED { TODO Remodel
+    
+    GLASSPANEDYED {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
+            IBlockState stainedGlassPane = Blocks.STAINED_GLASS_PANE.getDefaultState();
+            IProperty<EnumDyeColor> prop = BlockStainedGlassPane.COLOR;
             for(int c = 0; c < dyeColors.length; c++)
             {
-                //Carving.chisel.addVariation("glasspanedyed"+dyeColors[c], stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1);
-                factory.newBlock(Material.GLASS, "glasspanedyed"+dyeColors[c], provider)
-                        .setParentFolder("glasspanedyed")
-                        .newVariation(dyeColors[c]+"-bubble")
-                        .next(dyeColors[c]+"-panel")
-                        .next(dyeColors[c]+"-panel-fancy")
-                        .next(dyeColors[c]+"-transparent")
-                        .next(dyeColors[c]+"-quad")
-                        .next(dyeColors[c]+"-quad-fancy")
-                        .build(b -> b.setQuantityDropped(0).setCanSilkHarvest(true).setSoundType(SoundType.GLASS));
+                Carving.chisel.addVariation("glasspanedyed"+dyeColors[c], CarvingUtils.variationFor(stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
+                factory.newBlock(Material.GLASS, "glasspanedyed"+dyeColors[c], new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
+                        .setParentFolder("glasspanedyed/" + dyeColors[c])
+                        .newVariation("bubble")
+                        .next("panel")
+                        .next("panel-fancy")
+                        .next("transparent")
+                        .next("quad")
+                        .next("quad-fancy")
+                        .build(b -> b.setSoundType(SoundType.GLASS));
             }
         }
-    },*/
+    },
 
     GLOWSTONE {
         @Override
@@ -1767,7 +1765,7 @@ public enum Features {
     IRONPANE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            //Carving.chisel.addVariation("ironpane", Blocks.IRON_BARS.getDefaultState(), -1); TODO fix model
+            Carving.chisel.addVariation("ironpane", CarvingUtils.variationFor(Blocks.IRON_BARS.getDefaultState(), -1));
             factory.newBlock(Material.IRON, "ironpane", new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
                     .newVariation("borderless")
                     .next("borderless-topper")
@@ -3056,13 +3054,13 @@ public enum Features {
 
             for(int c = 0; c < dyeColors.length; c++)
             {
-                Carving.chisel.addVariation("wool_" + (dyeColors[c].toLowerCase()), CarvingUtils.variationFor(wool.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
+                Carving.chisel.addVariation("wool_" + (dyeColors[c]), CarvingUtils.variationFor(wool.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
 
 
-                factory.newBlock(Material.CLOTH, "wool_" + (dyeColors[c].toLowerCase()), provider)
+                factory.newBlock(Material.CLOTH, "wool_" + (dyeColors[c]), provider)
                         .setParentFolder("wool")
-                        .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
-                        .next("llama_"+(dyeColors[c].toLowerCase()))
+                        .newVariation("legacy_"+(dyeColors[c]))
+                        .next("llama_"+(dyeColors[c]))
                         .addOreDict("blockWool")
                         .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
             }
@@ -3071,22 +3069,22 @@ public enum Features {
 
     private static final String[] dyeColors =
             {
-                    "Black",
-                    "Red",
-                    "Green",
-                    "Brown",
-                    "Blue",
-                    "Purple",
-                    "Cyan",
-                    "LightGray",
-                    "Gray",
-                    "Pink",
-                    "Lime",
-                    "Yellow",
-                    "LightBlue",
-                    "Magenta",
-                    "Orange",
-                    "White"
+                    "black",
+                    "red",
+                    "green",
+                    "brown",
+                    "blue",
+                    "purple",
+                    "cyan",
+                    "lightgray",
+                    "gray",
+                    "pink",
+                    "lime",
+                    "yellow",
+                    "lightblue",
+                    "magenta",
+                    "orange",
+                    "white"
             };
 
     //@formatter:on
