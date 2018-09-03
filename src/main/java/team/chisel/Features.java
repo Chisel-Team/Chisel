@@ -1767,7 +1767,7 @@ public enum Features {
     IRONPANE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            //Carving.chisel.addVariation("ironpane", Blocks.IRON_BARS.getDefaultState(), -1); TODO fix model
+            Carving.chisel.addVariation("ironpane", CarvingUtils.variationFor(Blocks.IRON_BARS.getDefaultState(), -1));
             factory.newBlock(Material.IRON, "ironpane", new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
                     .newVariation("borderless")
                     .next("borderless-topper")
