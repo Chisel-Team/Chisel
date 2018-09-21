@@ -5,6 +5,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemBlock;
@@ -93,7 +94,13 @@ public class SlotChiselSelection extends Slot {
 
     @Override
     public ItemStack onTake(EntityPlayer player, ItemStack itemstack) {
-        player.inventory.setItemStack(craft(player, itemstack, false));
-        return ItemStack.EMPTY; // TODO 1.11 ???
+        ItemStack res = craft(player, itemstack, false);
+        if (container.currentClickType != ClickType.PICKUP) {
+            res.shrink(1);
+        }
+        if (!res.isEmpty()) {
+            player.inventory.setItemStack(res);
+        }
+        return ItemStack.EMPTY; // Return value seems to be ignored?
     }
 }

@@ -35,7 +35,7 @@ public class BlockSpeedHandler {
                 manualInputCheck = new MovementInputFromOptions(Minecraft.getMinecraft().gameSettings);
             }
             EntityPlayerSP player = (EntityPlayerSP) event.player;
-            IBlockState below = player.getEntityWorld().getBlockState(new BlockPos(player.posX, player.posY + 0.5, player.posZ));
+            IBlockState below = player.getEntityWorld().getBlockState(new BlockPos(player.posX, player.posY - (1 / 16D), player.posZ));
             if (speedupBlocks.contains(below.getBlock())) {
                 manualInputCheck.updatePlayerMoveState();
                 if ((manualInputCheck.moveForward != 0 || manualInputCheck.moveStrafe != 0) && !player.isInWater()) {
