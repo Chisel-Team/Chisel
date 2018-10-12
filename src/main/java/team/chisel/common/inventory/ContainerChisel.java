@@ -91,7 +91,7 @@ public class ContainerChisel extends Container {
             }
 
             // if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
-            if (clickedSlot == chiselSlot || (clickTypeIn == ClickType.SWAP && dragType == chiselSlot)) {
+            if (clickedSlot == chiselSlot || clickTypeIn == ClickType.SWAP || clickTypeIn == ClickType.THROW) {
                 return null;
             }
         }
