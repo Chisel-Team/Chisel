@@ -46,7 +46,7 @@ public class BlockCarvable extends Block implements ICarvable {
     /**
      * The Property for the variation of this block
      */
-    @Getter
+    @Getter(onMethod = @__({@Override}))
     private final PropertyAnyInteger metaProp;
 
     private final int index;
