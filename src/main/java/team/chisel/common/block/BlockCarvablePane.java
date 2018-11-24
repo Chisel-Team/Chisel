@@ -31,6 +31,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 
     // TODO this class is completely temporary. Need to make a helper object which does all this ICarvable logic
     
+    @Getter(onMethod = @__({@Override}))
     public final PropertyAnyInteger metaProp;
     
     @Getter

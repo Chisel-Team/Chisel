@@ -2,8 +2,10 @@ package team.chisel.api.block;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
+import team.chisel.common.util.PropertyAnyInteger;
 
 @ParametersAreNonnullByDefault
 public interface ICarvable {
@@ -38,6 +40,8 @@ public interface ICarvable {
      * @return The variation index.
      */
     int getVariationIndex(IBlockState state);
+    
+    IProperty<Integer> getMetaProp();
 
 //    /**
 //     * Called to get the quad mutator, called multiple times so please cache this value
