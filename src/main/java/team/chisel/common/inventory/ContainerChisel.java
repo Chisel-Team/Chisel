@@ -73,6 +73,8 @@ public class ContainerChisel extends Container {
             addSlotToContainer(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
         }
     }
+    
+    ClickType currentClickType;
 
     @Override
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
@@ -94,6 +96,7 @@ public class ContainerChisel extends Container {
             }
         }
         
+        this.currentClickType = clickTypeIn;
         return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
 

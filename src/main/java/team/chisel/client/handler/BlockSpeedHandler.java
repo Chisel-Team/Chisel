@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.MovementInput;
 import net.minecraft.util.MovementInputFromOptions;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -34,7 +35,7 @@ public class BlockSpeedHandler {
                 manualInputCheck = new MovementInputFromOptions(Minecraft.getMinecraft().gameSettings);
             }
             EntityPlayerSP player = (EntityPlayerSP) event.player;
-            IBlockState below = player.getEntityWorld().getBlockState(player.getPosition().down());
+            IBlockState below = player.getEntityWorld().getBlockState(new BlockPos(player.posX, player.posY - (1 / 16D), player.posZ));
             if (speedupBlocks.contains(below.getBlock())) {
                 manualInputCheck.updatePlayerMoveState();
                 if ((manualInputCheck.moveForward != 0 || manualInputCheck.moveStrafe != 0) && !player.isInWater()) {

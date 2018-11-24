@@ -5,8 +5,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 /**
  * Reference class for different mod information
  */
-@ParametersAreNonnullByDefault
 @SuppressWarnings("UnnecessaryInterfaceModifier")
+@ParametersAreNonnullByDefault
 public interface Reference {
     public static final String MOD_ID = "chisel";
 

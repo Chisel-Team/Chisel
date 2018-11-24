@@ -20,8 +20,8 @@ import team.chisel.api.carving.CarvingUtils;
 public class SoundUtil {
     
     @SuppressWarnings("null")
-    public static SoundEvent getSound(EntityPlayer player, ItemStack chisel, @Nullable IBlockState target) {
-        if (target != null) {
+    public static SoundEvent getSound(EntityPlayer player, @Nullable ItemStack chisel, @Nullable IBlockState target) {
+        if (target != null && chisel != null && chisel.getItem() instanceof IChiselItem) {
             return Optional.ofNullable(((IChiselItem)chisel.getItem()).getOverrideSound(player.getEntityWorld(), player, chisel, target)).orElse(CarvingUtils.getChiselRegistry().getVariationSound(target));
         } else {
             return CarvingUtils.getChiselRegistry().getVariationSound(target);
@@ -29,10 +29,8 @@ public class SoundUtil {
     }
 
     public static void playSound(EntityPlayer player, @Nullable ItemStack chisel, @Nullable IBlockState target) {
-        if (chisel != null && chisel.getItem() instanceof IChiselItem) {
-            @Nonnull SoundEvent sound = getSound(player, chisel, target);
-            playSound(player, player.getPosition(), sound);
-        }
+        @Nonnull SoundEvent sound = getSound(player, chisel, target);
+        playSound(player, player.getPosition(), sound);
     }
 
     public static void playSound(EntityPlayer player, BlockPos pos, SoundEvent sound) {

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -39,13 +40,15 @@ public class MessageUpdateAutochiselSource implements IMessage {
         
         @Override
         public IMessage onMessage(MessageUpdateAutochiselSource message, MessageContext ctx) {
-            World world = Chisel.proxy.getClientWorld();
-            if (world.isBlockLoaded(message.pos)) {
-                TileEntity te = world.getTileEntity(message.pos);
-                if (te instanceof TileAutoChisel) {
-                    ((TileAutoChisel) te).setSource(message.stack);
+            FMLCommonHandler.instance().getWorldThread(ctx.getClientHandler()).addScheduledTask(() -> {
+                World world = Chisel.proxy.getClientWorld();
+                if (world.isBlockLoaded(message.pos)) {
+                    TileEntity te = world.getTileEntity(message.pos);
+                    if (te instanceof TileAutoChisel) {
+                        ((TileAutoChisel) te).setSource(message.stack);
+                    }
                 }
-            }
+            });
             return null;
         }
     }

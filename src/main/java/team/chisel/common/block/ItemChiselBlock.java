@@ -37,6 +37,7 @@ public class ItemChiselBlock extends ItemBlock {
         return stack.getUnlocalizedName() + "." + varData.name + ".desc.";
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
@@ -44,9 +45,8 @@ public class ItemChiselBlock extends ItemBlock {
             // Skip first line if this config is deactivated, as it will be part of display name
             int line = Configurations.blockDescriptions ? 1 : 2;
             String desc = getTooltipUnloc(stack);
-            String loc;
-            while (!(loc = net.minecraft.client.resources.I18n.format(desc + line)).equals(desc + line)) {
-                tooltip.add(loc);
+            while (I18n.canTranslate(desc + line) || line == 1) {
+                tooltip.add(net.minecraft.client.resources.I18n.format(desc + line));
                 desc.replaceAll(line++ + "$", "." + line);
             }
         } catch (Exception ignored) {

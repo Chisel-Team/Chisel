@@ -202,9 +202,7 @@ public class Carving implements ICarvingRegistry {
 	@Override
 	public @Nullable ICarvingGroup removeGroup(String groupName) {
 		ICarvingGroup group = groups.getGroupByName(groupName);
-		for (Collection<ICarvingGroup> oregroups : oreLookup.asMap().values()) {
-		    oregroups.removeIf(g -> g.getName().equals(groupName));
-		}
+		oreLookup.values().removeIf(g -> g.getName().equals(groupName));
 		return groups.remove(group) ? group : null;
 	}
 

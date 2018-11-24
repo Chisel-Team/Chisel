@@ -59,6 +59,7 @@ import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableAltarComponent;
 import team.chisel.common.block.BlockCarvableCarpet;
 import team.chisel.common.block.BlockCarvableFalling;
+import team.chisel.common.block.BlockCarvablePane;
 import team.chisel.common.block.BlockCarvableTranquility;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.block.TileAutoChisel;
@@ -1888,20 +1889,21 @@ public enum Features {
     IRONPANE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            //Carving.chisel.addVariation("ironpane", Blocks.IRON_BARS.getDefaultState(), -1); TODO fix model
-            factory.newBlock(Material.IRON, "ironpane", provider)
-                    .newVariation("fenceIron")
+            Carving.chisel.addVariation("ironpane", CarvingUtils.variationFor(Blocks.IRON_BARS.getDefaultState(), -1));
+            factory.newBlock(Material.IRON, "ironpane", new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
+                    .newVariation("borderless")
+                    .next("borderless-topper")
                     .next("barbedwire")
                     .next("cage")
-                    .next("fenceIronTop")
-                    .next("terrain-glass-thickgrid")
-                    .next("terrain-glass-thingrid")
-                    .next("terrain-glass-ornatesteel")
+                    .next("thickgrid")
+                    .next("thingrid")
+                    .next("ornatesteel")
                     .next("bars")
                     .next("spikes")
-                    .next("a1-ironbars-ironclassicnew")
-                    .next("a1-ironbars-ironfence")
-                    .next("a1-ironbars-ironfencemodern")
+                    .next("classic")
+                    .next("classicnew")
+                    .next("fence")
+                    .next("modern")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f).setHarvestLevel("pickaxe", 1));
         }
     },
@@ -2426,10 +2428,7 @@ public enum Features {
 
             IBlockState prismarine = Blocks.PRISMARINE.getDefaultState();
             IProperty<BlockPrismarine.EnumType> prop = BlockPrismarine.VARIANT;
-            Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.ROUGH), -3));
-            Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -2));
-            Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.DARK), -1));
-
+            Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -1));
 
             factory.newBlock(Material.ROCK, "prismarine", provider)
                     .newVariation("cracked")

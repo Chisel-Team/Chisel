@@ -82,9 +82,9 @@ public class PacketChiselButton implements IMessage {
                     if (chisel.isItemStackDamageable()) {
                         int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
                         toCraft = Math.min(toCraft, damageLeft);
-                        stack.stackSize = toCraft;
                         chisel.damageItem(toCraft, player);
                     }
+                    stack.stackSize = toCraft;
                     if (chisel.stackSize <= 0) {
                         player.inventory.setInventorySlotContents(i, stack);
                         container.getInventoryChisel().getStackInSpecialSlot().stackSize = s.stackSize - toCraft;

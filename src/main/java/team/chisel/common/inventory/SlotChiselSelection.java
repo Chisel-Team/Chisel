@@ -3,6 +3,7 @@ package team.chisel.common.inventory;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemBlock;
@@ -90,6 +91,12 @@ public class SlotChiselSelection extends Slot {
 
     @Override
     public void onPickupFromSlot(EntityPlayer player, ItemStack itemstack) {
-        player.inventory.setItemStack(craft(player, itemstack, false));
+        ItemStack res = craft(player, itemstack, false);
+        if (container.currentClickType != ClickType.PICKUP) {
+            res.stackSize--;
+        }
+        if (res.stackSize > 0) {
+            player.inventory.setItemStack(res);
+        }
     }
 }
