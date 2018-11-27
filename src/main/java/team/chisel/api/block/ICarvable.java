@@ -5,7 +5,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
-import team.chisel.common.util.PropertyAnyInteger;
 
 @ParametersAreNonnullByDefault
 public interface ICarvable {
