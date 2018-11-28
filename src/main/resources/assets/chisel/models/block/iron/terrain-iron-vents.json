@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:iron/terrain-iron-vents-side.cf",
-  "overrides":{
-    "UP":"chisel:iron/terrain-iron-vents-top.cf",
-    "DOWN":"chisel:iron/terrain-iron-vents-top.cf"
-  }
-}

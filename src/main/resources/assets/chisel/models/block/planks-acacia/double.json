@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:planks-acacia/double-side.cf",
-  "overrides":{
-    "UP":"chisel:planks-acacia/double-top.cf",
-    "DOWN":"chisel:planks-acacia/double-top.cf"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:laboratory/smallsteel-side.cf",
-  "overrides":{
-    "UP":"chisel:laboratory/smallsteel-top.cf",
-    "DOWN":"chisel:laboratory/smallsteel-top.cf"
-  }
-}

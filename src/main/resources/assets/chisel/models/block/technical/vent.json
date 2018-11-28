@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:technical/vent.cf",
-  "overrides":{
-    "UP":"chisel:technical/old.cf",
-    "DOWN":"chisel:technical/old.cf"
-  }
-}

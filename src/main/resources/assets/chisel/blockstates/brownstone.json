@@ -1,16 +1,42 @@
 {
     "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
+    "defaults": { "model":"cube_all" },
     "variants": {
-        "weathered-blocks": [{"textures":{"all":"chisel:blocks/concrete/weathered-blocks"}}],
-        "default": [{"textures":{"all":"chisel:blocks/concrete/default"}}],
-        "doubleslab": [{"textures":{"all":"chisel:blocks/concrete/doubleslab"}}],
-        "weathered-block": [{"textures":{"all":"chisel:blocks/concrete/weathered-block"}}],
-        "blocks": [{"textures":{"all":"chisel:blocks/concrete/blocks"}}],
-        "weathered-half": [{"textures":{"all":"chisel:blocks/concrete/weathered-half"}}],
-        "weathered-block-half": [{"textures":{"all":"chisel:blocks/concrete/weathered-block-half"}}],
-        "block": [{"textures":{"all":"chisel:blocks/concrete/block_ctm"}}],
-        "weathered": [{"textures":{"all":"chisel:blocks/concrete/weathered"}}],
-        "weathered-doubleslab": [{"textures":{"all":"chisel:blocks/concrete/weathered-doubleslab"}}]
+        "weathered-blocks"    : [{ "textures": { "all": "chisel:blocks/concrete/weathered-blocks"     }}],
+        "default"             : [{ "textures": { "all": "chisel:blocks/concrete/default"              }}],
+        "doubleslab"          : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/concrete/doubleslab-side",
+                "end" : "chisel:blocks/concrete/block"
+            }
+        }],
+        "weathered-block"     : [{ "textures": { "all": "chisel:blocks/concrete/weathered-block"      }}],
+        "blocks"              : [{ "textures": { "all": "chisel:blocks/concrete/blocks"               }}],
+        "block"               : [{ "textures": { "all": "chisel:blocks/concrete/block_ctm"            }}],
+        "weathered"           : [{ "textures": { "all": "chisel:blocks/concrete/weathered"            }}],
+        "weathered-doubleslab": [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/concrete/weathered-doubleslab-side",
+                "end" : "chisel:blocks/concrete/weathered-block"
+            }
+        }],
+        "weathered-half"      : [{
+            "model"   : "cube_bottom_top",
+            "textures": {
+                "side"   : "chisel:blocks/concrete/weathered-half-side",
+                "top"    : "chisel:blocks/concrete/default",
+                "bottom" : "chisel:blocks/concrete/weathered"
+            }
+        }],
+        "weathered-block-half": [{
+            "model"   : "cube_bottom_top",
+            "textures": {
+                "side"   : "chisel:blocks/concrete/weathered-block-half-side",
+                "top"    : "chisel:blocks/concrete/block",
+                "bottom" : "chisel:blocks/concrete/weathered-block"
+            }
+        }]
     }
 }

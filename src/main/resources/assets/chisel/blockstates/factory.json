@@ -3,7 +3,7 @@
   "defaults": { "model": "cube_all" },
   "variants": {
     "circuit"       : [{ "textures": { "all": "chisel:blocks/factory/circuit"        } }],
-    "column"        : [{ "textures": { "all": "chisel:blocks/factory/column"         } }],
+    "column"        : [{ "textures": { "all": "chisel:blocks/factory/column-top"     } }],
     "dots"          : [{ "textures": { "all": "chisel:blocks/factory/dots"           } }],
     "frameblue"     : [{ "textures": { "all": "chisel:blocks/factory/frameblue"      } }],
     "goldplate"     : [{ "textures": { "all": "chisel:blocks/factory/goldplate"      } }],
@@ -12,7 +12,13 @@
     "hazard"        : [{ "textures": { "all": "chisel:blocks/factory/hazard"         } }],
     "hazardorange"  : [{ "textures": { "all": "chisel:blocks/factory/hazardorange"   } }],
     "iceiceice"     : [{ "textures": { "all": "chisel:blocks/factory/iceiceice"      } }],
-    "metalbox"      : [{ "textures": { "all": "chisel:blocks/factory/metalbox"       } }],
+    "metalbox"      : [{
+      "model"   : "cube_column",
+      "textures": {
+        "side": "chisel:blocks/factory/metalbox-side",
+        "end" : "chisel:blocks/factory/metalbox-top"
+      }
+    }],
     "platex"        : [{ "textures": { "all": "chisel:blocks/factory/platex"         } }],
     "plating"       : [{ "textures": { "all": "chisel:blocks/factory/plating"        } }],
     "rust"          : [{ "textures": { "all": "chisel:blocks/factory/rust"           } }],

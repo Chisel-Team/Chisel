@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:diorite/twisted-side.cf",
-  "overrides":{
-    "UP":"chisel:diorite/twisted-top.cf",
-    "DOWN":"chisel:diorite/twisted-top.cf"
-  }
-}

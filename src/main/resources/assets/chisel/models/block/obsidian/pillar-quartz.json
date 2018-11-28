@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:obsidian/pillar-quartz-side.cf",
-  "overrides":{
-    "UP":"chisel:obsidian/pillar-quartz-top.cf",
-    "DOWN":"chisel:obsidian/pillar-quartz-top.cf"
-  }
-}

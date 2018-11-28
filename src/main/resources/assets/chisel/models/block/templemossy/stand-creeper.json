@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:templemossy/stand-creeper-side.cf",
-  "overrides":{
-    "UP":"chisel:templemossy/stand-creeper-top.cf",
-    "DOWN":"chisel:templemossy/stand-creeper-top.cf"
-  }
-}

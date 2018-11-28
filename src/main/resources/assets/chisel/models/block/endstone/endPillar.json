@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:endstone/endPillar-side.cf",
-  "overrides":{
-    "UP":"chisel:endstone/endPillar-top.cf",
-    "DOWN":"chisel:endstone/endPillar-top.cf"
-  }
-}

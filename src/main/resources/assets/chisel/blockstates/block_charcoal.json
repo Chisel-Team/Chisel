@@ -44,7 +44,7 @@
         "prism"         : [{ "textures": { "all": "chisel:blocks/coal/charcoal/prism"          } }],
         "ornate"        : [{ "textures": { "all": "chisel:blocks/coal/charcoal/ornate"         } }],
         "road"          : [{ "textures": { "all": "chisel:blocks/coal/charcoal/road"           } }],
-        "raw"           : [{ "textures": { "all": "chisel:blocks/coal/charcoal/extra/raw"      } }],
+        "raw"           : [{ "textures": { "all": "chisel:blocks/coal/charcoal/raw"            } }],
         "tiles-large"   : [{ "textures": { "all": "chisel:blocks/coal/charcoal/tiles-large"    } }],
         "tiles-medium"  : [{ "textures": { "all": "chisel:blocks/coal/charcoal/tiles-medium"   } }],
         "tiles-small"   : [{ "textures": { "all": "chisel:blocks/coal/charcoal/tiles-small"    } }],

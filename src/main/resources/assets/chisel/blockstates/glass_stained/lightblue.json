@@ -1,12 +1,24 @@
 {
     "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
+    "defaults": { "model":"cube_all" },
     "variants": {
-        "streaks": [{"textures":{"all":"chisel:blocks/glass_stained/lightblue/streaks"}}],
-        "framed_fancy": [{"textures":{"all":"chisel:blocks/glass_stained/lightblue/framed_fancy"}}],
-        "rough": [{"textures":{"all":"chisel:blocks/glass_stained/lightblue/rough"}}],
-        "framed": [{"textures":{"all":"chisel:blocks/glass_stained/lightblue/framed"}}],
-        "brick": [{"textures":{"all":"chisel:blocks/glass_stained/lightblue/brick"}}],
-        "panel": [{"textures":{"all":"chisel:blocks/glass_stained/lightblue/panel"}}]
+        "streaks"     : [{ "textures": { "all": "chisel:blocks/glass_stained/lightblue/streaks"      }}],
+        "rough"       : [{ "textures": { "all": "chisel:blocks/glass_stained/lightblue/rough"        }}],
+        "framed"      : [{
+            "model"   : "chisel:cube_ctm_translucent",
+            "textures": {
+                "all"          : "chisel:blocks/glass_stained/lightblue/framed",
+                "connected_tex": "chisel:blocks/glass_stained/lightblue/framed_ct"
+            }
+        }],
+        "framed_fancy": [{
+            "model"   : "chisel:cube_ctm_translucent",
+            "textures": {
+                "all"          : "chisel:blocks/glass_stained/lightblue/framed",
+                "connected_tex": "chisel:blocks/glass_stained/lightblue/framed_fancy_ct"
+            }
+        }],
+        "brick"       : [{ "textures": { "all": "chisel:blocks/glass_stained/lightblue/brick"        }}],
+        "panel"       : [{ "textures": { "all": "chisel:blocks/glass_stained/lightblue/panel"        }}]
     }
 }

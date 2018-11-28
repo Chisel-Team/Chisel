@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:temple/stand-mosaic-side.cf",
-  "overrides":{
-    "UP":"chisel:temple/stand-mosaic-top.cf",
-    "DOWN":"chisel:temple/stand-mosaic-top.cf"
-  }
-}
