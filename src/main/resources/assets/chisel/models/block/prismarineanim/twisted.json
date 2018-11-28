@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:prismarineanim/twisted-side.cf",
-  "overrides":{
-    "UP":"chisel:prismarineanim/twisted-top.cf",
-    "DOWN":"chisel:prismarineanim/twisted-top.cf"
-  }
-}

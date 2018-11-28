@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:iron/terrain-iron-plates-side.cf",
-  "overrides":{
-    "UP":"chisel:iron/terrain-iron-plates-top.cf",
-    "DOWN":"chisel:iron/terrain-iron-plates-bottom.cf"
-  }
-}

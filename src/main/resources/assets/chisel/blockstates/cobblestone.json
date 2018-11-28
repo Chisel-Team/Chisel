@@ -24,14 +24,11 @@
         "cracked"       : [{ "textures": { "all": "chisel:blocks/cobblestone/cracked"        } }],
         "cuts"          : [{ "textures": { "all": "chisel:blocks/cobblestone/cuts"           } }],
         "dent"          : [{ "textures": { "all": "chisel:blocks/cobblestone/dent"           } }],
-        "emboss"        : [{ "textures": { "all": "chisel:blocks/cobblestone/emboss"         } }],
         "french-1"      : [{ "textures": { "all": "chisel:blocks/cobblestone/french-1"       } }],
         "french-2"      : [{ "textures": { "all": "chisel:blocks/cobblestone/french-2"       } }],
-        "indent"        : [{ "textures": { "all": "chisel:blocks/cobblestone/indent"         } }],
         "jellybean"     : [{ "textures": { "all": "chisel:blocks/cobblestone/jellybean"      } }],
         "largeornate"   : [{ "textures": { "all": "chisel:blocks/cobblestone/largeornate"    } }],
         "layers"        : [{ "textures": { "all": "chisel:blocks/cobblestone/layers"         } }],
-        "marker"        : [{ "textures": { "all": "chisel:blocks/cobblestone/marker"         } }],
         "mosaic"        : [{ "textures": { "all": "chisel:blocks/cobblestone/mosaic"         } }],
         "panel"         : [{ "textures": { "all": "chisel:blocks/cobblestone/panel"          } }],
         "pillar"        : [{
@@ -57,6 +54,9 @@
         }],
         "slanted"       : [{ "textures": { "all": "chisel:blocks/cobblestone/slanted"        } }],
         "weaver"        : [{ "textures": { "all": "chisel:blocks/cobblestone/weaver"         } }],
-        "zag"           : [{ "textures": { "all": "chisel:blocks/cobblestone/zag"            } }]
+        "zag"           : [{ "textures": { "all": "chisel:blocks/cobblestone/zag"            } }],
+        "emboss"        : [{ "textures": { "all": "chisel:blocks/cobblestone/extra/emboss"   } }],
+        "indent"        : [{ "textures": { "all": "chisel:blocks/cobblestone/extra/indent"   } }],
+        "marker"        : [{ "textures": { "all": "chisel:blocks/cobblestone/extra/marker"   } }]
     }
 }

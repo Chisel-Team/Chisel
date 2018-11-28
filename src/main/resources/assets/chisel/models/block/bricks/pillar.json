@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:bricks/pillar-side.cf",
-  "overrides":{
-    "UP":"chisel:bricks/pillar-top.cf",
-    "DOWN":"chisel:bricks/pillar-top.cf"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:technical/new/MegaCell-side.cf",
-  "overrides":{
-    "UP":"chisel:technical/new/MegaCell-top.cf",
-    "DOWN":"chisel:technical/new/MegaCell-bottom.cf"
-  }
-}

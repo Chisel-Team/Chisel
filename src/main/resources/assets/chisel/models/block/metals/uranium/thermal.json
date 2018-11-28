@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:metals/uranium/thermal-side.cf",
-  "overrides":{
-    "UP":"chisel:metals/uranium/thermal-top.cf",
-    "DOWN":"chisel:metals/uranium/thermal-bottom.cf"
-  }
-}

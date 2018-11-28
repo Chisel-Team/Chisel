@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:iron/terrain-iron-largeingot-side.cf",
-  "overrides":{
-    "UP":"chisel:iron/terrain-iron-largeingot-top.cf",
-    "DOWN":"chisel:iron/terrain-iron-largeingot-bottom.cf"
-  }
-}

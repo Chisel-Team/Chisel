@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:obsidian/greek-side.cf",
-  "overrides":{
-    "UP":"chisel:obsidian/greek-top.cf",
-    "DOWN":"chisel:obsidian/greek-top.cf"
-  }
-}

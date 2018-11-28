@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:technical/fanFast-side.cf",
-  "overrides":{
-    "UP":"chisel:technical/fan-top.cf",
-    "DOWN":"chisel:technical/fan-top.cf"
-  }
-}

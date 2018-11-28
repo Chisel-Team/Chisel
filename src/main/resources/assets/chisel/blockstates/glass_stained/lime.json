@@ -1,12 +1,24 @@
 {
     "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
+    "defaults": { "model":"cube_all" },
     "variants": {
-        "streaks": [{"textures":{"all":"chisel:blocks/glass_stained/lime/streaks"}}],
-        "framed_fancy": [{"textures":{"all":"chisel:blocks/glass_stained/lime/framed_fancy"}}],
-        "rough": [{"textures":{"all":"chisel:blocks/glass_stained/lime/rough"}}],
-        "framed": [{"textures":{"all":"chisel:blocks/glass_stained/lime/framed"}}],
-        "brick": [{"textures":{"all":"chisel:blocks/glass_stained/lime/brick"}}],
-        "panel": [{"textures":{"all":"chisel:blocks/glass_stained/lime/panel"}}]
+        "streaks"     : [{ "textures": { "all": "chisel:blocks/glass_stained/lime/streaks"      }}],
+        "rough"       : [{ "textures": { "all": "chisel:blocks/glass_stained/lime/rough"        }}],
+        "framed"      : [{
+            "model"   : "chisel:cube_ctm_translucent",
+            "textures": {
+                "all"          : "chisel:blocks/glass_stained/lime/framed",
+                "connected_tex": "chisel:blocks/glass_stained/lime/framed_ct"
+            }
+        }],
+        "framed_fancy": [{
+            "model"   : "chisel:cube_ctm_translucent",
+            "textures": {
+                "all"          : "chisel:blocks/glass_stained/lime/framed",
+                "connected_tex": "chisel:blocks/glass_stained/lime/framed_fancy_ct"
+            }
+        }],
+        "brick"       : [{ "textures": { "all": "chisel:blocks/glass_stained/lime/brick"        }}],
+        "panel"       : [{ "textures": { "all": "chisel:blocks/glass_stained/lime/panel"        }}]
     }
 }

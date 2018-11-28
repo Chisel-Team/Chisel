@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:templemossy/column-side.cf",
-  "overrides":{
-    "UP":"chisel:templemossy/column-top.cf",
-    "DOWN":"chisel:templemossy/column-top.cf"
-  }
-}

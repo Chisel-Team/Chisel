@@ -1,8 +1,0 @@
-{
-  "model": { "model": "cube"},
-  "face":"chisel:metals/tin/thermal-side.cf",
-  "overrides":{
-    "UP":"chisel:metals/tin/thermal-top.cf",
-    "DOWN":"chisel:metals/tin/thermal-bottom.cf"
-  }
-}
