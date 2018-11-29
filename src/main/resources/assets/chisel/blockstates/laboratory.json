@@ -2,21 +2,57 @@
     "forge_marker": 1,
     "defaults": { "model": "cube_all" },
     "variants": {
-        "infocon"       : [{ "textures": { "all": "chisel:blocks/laboratory/infocon"        } }],
-        "roundel"       : [{ "textures": { "all": "chisel:blocks/laboratory/roundel"        } }],
-        "largewall"     : [{ "textures": { "all": "chisel:blocks/laboratory/largewall"      } }],
-        "largesteel"    : [{ "textures": { "all": "chisel:blocks/laboratory/largesteel"     } }],
-        "directionright": [{ "textures": { "all": "chisel:blocks/laboratory/directionright" } }],
-        "floortile"     : [{ "textures": { "all": "chisel:blocks/laboratory/floortile"      } }],
-        "wallvents"     : [{ "textures": { "all": "chisel:blocks/laboratory/wallvents"      } }],
-        "fuzzscreen"    : [{ "textures": { "all": "chisel:blocks/laboratory/fuzzscreen"     } }],
-        "smallsteel"    : [{ "textures": { "all": "chisel:blocks/laboratory/smallsteel"     } }],
-        "checkertile"   : [{ "textures": { "all": "chisel:blocks/laboratory/checkertile"    } }],
-        "dottedpanel"   : [{ "textures": { "all": "chisel:blocks/laboratory/dottedpanel"    } }],
-        "directionleft" : [{ "textures": { "all": "chisel:blocks/laboratory/directionleft"  } }],
-        "clearscreen"   : [{ "textures": { "all": "chisel:blocks/laboratory/clearscreen"    } }],
-        "largetile"     : [{ "textures": { "all": "chisel:blocks/laboratory/largetile"      } }],
-        "smalltile"     : [{ "textures": { "all": "chisel:blocks/laboratory/smalltile"      } }],
-        "wallpanel"     : [{ "textures": { "all": "chisel:blocks/laboratory/wallpanel"      } }]
+        "infocon"       : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/laboratory/infocon-ctmh",
+                "end" : "chisel:blocks/laboratory/infocon-top"
+            }
+        }],
+        "roundel"       : [{ "textures": { "all": "chisel:blocks/laboratory/roundel"         } }],
+        "largewall"     : [{ "textures": { "all": "chisel:blocks/laboratory/largewall"       } }],
+        "largesteel"    : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/laboratory/largesteel-side",
+                "end" : "chisel:blocks/laboratory/largesteel-top"
+            }
+        }],
+        "directionright": [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/laboratory/directionright-ctmh",
+                "end" : "chisel:blocks/laboratory/directionright-top"
+            }
+        }],
+        "floortile"     : [{ "textures": { "all": "chisel:blocks/laboratory/floortile"       } }],
+        "wallvents"     : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/laboratory/wallvents-ctmh",
+                "end" : "chisel:blocks/laboratory/wallvents-top"
+            }
+        }],
+        "fuzzscreen"    : [{ "textures": { "all": "chisel:blocks/laboratory/fuzzscreen"      } }],
+        "smallsteel"    : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/laboratory/smallsteel-side",
+                "end" : "chisel:blocks/laboratory/smallsteel-top"
+            }
+        }],
+        "checkertile"   : [{ "textures": { "all": "chisel:blocks/laboratory/checkertile"     } }],
+        "dottedpanel"   : [{ "textures": { "all": "chisel:blocks/laboratory/dottedpanel-top" } }],
+        "directionleft" : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/laboratory/directionleft-ctmh",
+                "end" : "chisel:blocks/laboratory/directionleft-top"
+            }
+        }],
+        "clearscreen"   : [{ "textures": { "all": "chisel:blocks/laboratory/clearscreen"     } }],
+        "largetile"     : [{ "textures": { "all": "chisel:blocks/laboratory/largetile"       } }],
+        "smalltile"     : [{ "textures": { "all": "chisel:blocks/laboratory/smalltile"       } }],
+        "wallpanel"     : [{ "textures": { "all": "chisel:blocks/laboratory/wallpanel-top"   } }]
     }
 }

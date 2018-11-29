@@ -1,7 +1,8 @@
 {
     "ctm": {
         "ctm_version": 1,
-        "type": "pattern",
+        "type": "R",
+        "layer": "TRANSLUCENT",
         "extra": {
             "size": 3
         }

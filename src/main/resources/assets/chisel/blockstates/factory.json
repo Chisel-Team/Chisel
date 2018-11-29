@@ -28,6 +28,6 @@
     "wireframe"     : [{ "textures": { "all": "chisel:blocks/factory/wireframe"      } }],
     "wireframeblue" : [{ "textures": { "all": "chisel:blocks/factory/wireframeblue"  } }],
     "wireframewhite": [{ "textures": { "all": "chisel:blocks/factory/wireframewhite" } }],
-    "vent"          : [{ "textures": { "all": "chisel:blocks/factory/vent"           } }]
+    "vent"          : [{ "textures": { "all": "chisel:blocks/factory/vent-top"       } }]
   }
 }

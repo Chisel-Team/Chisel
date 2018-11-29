@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "pillar",
         "textures": [
-            "chisel:blocks/marblepillar/widegreek-ctmv.ctx"
+            "chisel:blocks/laboratory/dottedpanel-ctmv"
         ]
     }
 }

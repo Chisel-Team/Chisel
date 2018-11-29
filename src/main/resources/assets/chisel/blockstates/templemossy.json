@@ -1,22 +1,59 @@
 {
     "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
+    "defaults": { "model": "chisel:cube_eldritch" },
     "variants": {
-        "bricks": [{"textures":{"all":"chisel:blocks/templemossy/bricks"}}],
-        "tiles-light": [{"textures":{"all":"chisel:blocks/templemossy/tiles-light"}}],
-        "bricks-large": [{"textures":{"all":"chisel:blocks/templemossy/bricks-large"}}],
-        "smalltiles-light": [{"textures":{"all":"chisel:blocks/templemossy/smalltiles-light"}}],
-        "ornate": [{"textures":{"all":"chisel:blocks/templemossy/ornate"}}],
-        "bricks-weared": [{"textures":{"all":"chisel:blocks/templemossy/bricks-weared"}}],
-        "stand-creeper": [{"textures":{"all":"chisel:blocks/templemossy/stand-creeper"}}],
-        "column": [{"textures":{"all":"chisel:blocks/templemossy/column"}}],
-        "stand-mosaic": [{"textures":{"all":"chisel:blocks/templemossy/stand-mosaic"}}],
-        "plate": [{"textures":{"all":"chisel:blocks/templemossy/plate"}}],
-        "smalltiles": [{"textures":{"all":"chisel:blocks/templemossy/smalltiles"}}],
-        "tiles": [{"textures":{"all":"chisel:blocks/templemossy/tiles"}}],
-        "bricks-disarray": [{"textures":{"all":"chisel:blocks/templemossy/bricks-disarray"}}],
-        "stand": [{"textures":{"all":"chisel:blocks/templemossy/stand"}}],
-        "plate-cracked": [{"textures":{"all":"chisel:blocks/templemossy/plate-cracked"}}],
-        "cobble": [{"textures":{"all":"chisel:blocks/templemossy/cobble"}}]
+        "bricks"          : [{ "textures": { "all": "chisel:blocks/templemossy/bricks"           }}],
+        "tiles-light"     : [{ "textures": { "all": "chisel:blocks/templemossy/tiles-light"      }}],
+        "bricks-large"    : [{ "textures": { "all": "chisel:blocks/templemossy/bricks-large"     }}],
+        "smalltiles-light": [{ "textures": { "all": "chisel:blocks/templemossy/smalltiles-light" }}],
+        "ornate"          : [{ "textures": { "all": "chisel:blocks/templemossy/ornate"           }}],
+        "bricks-weared"   : [{ "textures": { "all": "chisel:blocks/templemossy/bricks-weared"    }}],
+        "stand-creeper"   : [{
+            "model"   : "chisel:column_eldritch",
+            "textures": {
+                "side": "chisel:blocks/templemossy/stand-creeper-side",
+                "end" : "chisel:blocks/templemossy/stand-creeper-top"
+            }
+        }],
+        "column"          : [{
+            "model"   : "chisel:column_eldritch",
+            "textures": {
+                "side": "chisel:blocks/templemossy/column-side",
+                "end" : "chisel:blocks/templemossy/column-top"
+            }
+        }],
+        "stand-mosaic"    : [{
+            "model"   : "chisel:column_eldritch",
+            "textures": {
+                "side": "chisel:blocks/templemossy/stand-mosaic-side",
+                "end" : "chisel:blocks/templemossy/stand-mosaic-top"
+            }
+        }],
+        "plate"           : [{ "textures": { "all": "chisel:blocks/templemossy/plate"            }}],
+        "smalltiles"      : [{ "textures": { "all": "chisel:blocks/templemossy/smalltiles"       }}],
+        "tiles"           : [{ "textures": { "all": "chisel:blocks/templemossy/tiles"            }}],
+        "bricks-disarray" : [{ "textures": { "all": "chisel:blocks/templemossy/bricks-disarray"  }}],
+        "stand"           : [{
+            "model"   : "chisel:column_eldritch",
+            "textures": {
+                "side": "chisel:blocks/templemossy/stand-side",
+                "end" : "chisel:blocks/templemossy/stand-top"
+            }
+        }],
+        "plate-cracked"   : [
+            { "textures": { "all": "chisel:blocks/templemossy/plate-cracked-0" }},
+            { "textures": { "all": "chisel:blocks/templemossy/plate-cracked-1" }},
+            { "textures": { "all": "chisel:blocks/templemossy/plate-cracked-2" }},
+            { "textures": { "all": "chisel:blocks/templemossy/plate-cracked-3" }},
+            { "textures": { "all": "chisel:blocks/templemossy/plate-cracked-4" }},
+            { "textures": { "all": "chisel:blocks/templemossy/plate-cracked-5" }},
+            { "textures": { "all": "chisel:blocks/templemossy/plate-cracked-6" }}
+        ],
+        "cobble"          : [
+            { "textures": { "all": "chisel:blocks/templemossy/cobble_0" }},
+            { "textures": { "all": "chisel:blocks/templemossy/cobble_1" }},
+            { "textures": { "all": "chisel:blocks/templemossy/cobble_2" }},
+            { "textures": { "all": "chisel:blocks/templemossy/cobble_3" }}
+        ]
     }
 }

@@ -5,9 +5,19 @@
         "textures": { "bot": "blocks/lava_still" }
     },
     "variants": {
-        "array"         : [{ "textures": { "top": "chisel:blocks/fluid/array"          } }],
+        "array"         : [{
+            "model"   : "chisel:lavastone/cube_pass_lava",
+            "textures": {
+                "top": "chisel:blocks/fluid/array"
+            }
+        }],
         "braid"         : [{ "textures": { "top": "chisel:blocks/fluid/braid"          } }],
-        "bricks-chaotic": [{ "textures": { "top": "chisel:blocks/fluid/bricks-chaotic" } }],
+        "bricks-chaotic": [{
+            "model"   : "chisel:lavastone/cube_pass_lava",
+            "textures": {
+                "top": "chisel:blocks/fluid/bricks-chaotic"
+            }
+        }],
         "bricks-cracked": [{ "textures": { "top": "chisel:blocks/fluid/bricks-cracked" } }],
         "bricks-encased": [{ "textures": { "top": "chisel:blocks/fluid/bricks-encased" } }],
         "bricks-small"  : [{ "textures": { "top": "chisel:blocks/fluid/bricks-small"   } }],
@@ -26,7 +36,12 @@
             }
         }],
         "cracked"       : [{ "textures": { "top": "chisel:blocks/fluid/cracked"        } }],
-        "cuts"          : [{ "textures": { "top": "chisel:blocks/fluid/cuts"           } }],
+        "cuts"          : [{
+            "model"   : "chisel:lavastone/cube_pass_lava",
+            "textures": {
+                "top": "chisel:blocks/fluid/cuts"
+            }
+        }],
         "dent"          : [{ "textures": { "top": "chisel:blocks/fluid/dent"           } }],
         "emboss"        : [{ "textures": { "top": "chisel:blocks/fluid/emboss"         } }],
         "french-1"      : [{ "textures": { "top": "chisel:blocks/fluid/french-1"       } }],
@@ -59,8 +74,18 @@
                 "top" : "chisel:blocks/fluid/twisted-top"
             }
         }],
-        "slanted"       : [{ "textures": { "top": "chisel:blocks/fluid/slanted"        } }],
+        "slanted"       : [{
+            "model"   : "chisel:lavastone/cube_pass_lava",
+            "textures": {
+                "top": "chisel:blocks/fluid/slanted"
+            }
+        }],
         "weaver"        : [{ "textures": { "top": "chisel:blocks/fluid/weaver"         } }],
-        "zag"           : [{ "textures": { "top": "chisel:blocks/fluid/zag"            } }]
+        "zag"           : [{
+            "model"   : "chisel:lavastone/cube_pass_lava",
+            "textures": {
+                "top": "chisel:blocks/fluid/zag"
+            }
+        }]
     }
 }

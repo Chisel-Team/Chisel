@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "pillar",
         "textures": [
-            "chisel:blocks/marblepillar/rough-ctmv.ctx"
+            "chisel:blocks/marblepillar/pillar-ctmv"
         ]
     }
 }
