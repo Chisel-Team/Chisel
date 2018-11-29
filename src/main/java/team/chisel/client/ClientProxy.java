@@ -19,7 +19,6 @@ import team.chisel.Features;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.client.handler.DebugHandler;
 import team.chisel.client.render.ChiselModelRegistry;
-import team.chisel.client.render.ModelLoaderChisel;
 import team.chisel.client.render.RenderAutoChisel;
 import team.chisel.common.CommonProxy;
 import team.chisel.common.block.TileAutoChisel;
@@ -32,9 +31,7 @@ import team.chisel.ctm.client.texture.ctx.OffsetProviderRegistry;
 public class ClientProxy extends CommonProxy {
 
     @SubscribeEvent
-    public static void registerModels(ModelRegistryEvent event) {
-        ModelLoaderRegistry.registerLoader(ModelLoaderChisel.INSTANCE);
-        
+    public static void registerModels(ModelRegistryEvent event) {        
         if (Features.CHISEL.enabled()) {
             ModelLoader.setCustomModelResourceLocation(ChiselItems.chisel_iron, 0, new ModelResourceLocation(ChiselItems.chisel_iron.getRegistryName(), "inventory"));
             ModelLoader.setCustomModelResourceLocation(ChiselItems.chisel_diamond, 0, new ModelResourceLocation(ChiselItems.chisel_diamond.getRegistryName(), "inventory"));
@@ -47,16 +44,7 @@ public class ClientProxy extends CommonProxy {
             ClientRegistry.bindTileEntitySpecialRenderer(TileAutoChisel.class, new RenderAutoChisel());
         }
 
-        // ModelBakery.addVariantName(Chisel.itemChisel, MOD_ID+":itemChisel");
-        // MinecraftForge.EVENT_BUS.register(new CTMModelRegistry.BakedEventListener());
-        // MinecraftForge.EVENT_BUS.register(new NonCTMModelRegistry.BakedEventListener());
-        MinecraftForge.EVENT_BUS.register(new TextureStitcher());
-        MinecraftForge.EVENT_BUS.register(ChiselModelRegistry.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(new DebugHandler());
-        if (Minecraft.getMinecraft().getResourceManager() instanceof SimpleReloadableResourceManager) {
-            SimpleReloadableResourceManager manager = (SimpleReloadableResourceManager) Minecraft.getMinecraft().getResourceManager();
-            manager.registerReloadListener(ChiselPackReloadListener.INSTANCE);
-        }
+//        MinecraftForge.EVENT_BUS.register(new DebugHandler());
 
         OffsetProviderRegistry.INSTANCE.registerProvider((world, pos) -> ChunkData.getOffsetForChunk(world, pos).getOffset());        
     }
@@ -66,15 +54,6 @@ public class ClientProxy extends CommonProxy {
 
     }
 
-    @Override
-    public void preTextureStitch() {
-        try {
-//            ReflectionHelper.setPrivateValue(TextureMap.class, Minecraft.getMinecraft().getTextureMapBlocks(), false, "skipFirst");
-        } catch (Exception exception) {
-            // Older version of forge, this is fine because it means this is not needed so no crash
-        }
-    }
-    
     @Override
     public World getClientWorld() {
         return Minecraft.getMinecraft().world;
