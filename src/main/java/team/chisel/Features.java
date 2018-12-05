@@ -45,6 +45,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
@@ -240,8 +241,8 @@ public enum Features {
     ARCANE_STONE ("thaumcraft") {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_arcane").getDefaultState(), -64));
-            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_arcane_brick").getDefaultState(), -63));
+            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("thaumcraft", "stone_arcane")).getDefaultState(), -64));
+            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("thaumcraft", "stone_arcane_brick")).getDefaultState(), -63));
 
             factory.newBlock(Material.ROCK, "arcane_stone", provider)
                     .newVariation("cracked")
@@ -365,7 +366,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             //Carving.chisel.addVariation("bloodMagic", CarvingUtils.variationFor(GameRegistry.findBlock("bloodmagic", "BlockBloodRune").getDefaultState(), -64));
 
-            factory.newBlock(Material.ROCK, "bloodMagic", new ChiselBlockProvider<>(BlockCarvableAltarComponent::new, BlockCarvableAltarComponent.class))
+            factory.newBlock(Material.ROCK, "bloodMagic", provider)
                     .newVariation("bloodRuneArranged")
                     .next("bloodRuneBricks")
                     .next("bloodRuneCarved")
@@ -535,9 +536,9 @@ public enum Features {
     CERTUS ("appliedenergistics2") {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(GameRegistry.findBlock("appliedenergistics2", "quartz_block").getDefaultState(), -64));
-            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(GameRegistry.findBlock("appliedenergistics2", "quartz_pillar").getDefaultState(), -63));
-            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(GameRegistry.findBlock("appliedenergistics2", "chiseled_quartz_block").getDefaultState(), -62));
+            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("appliedenergistics2", "quartz_block")).getDefaultState(), -64));
+            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("appliedenergistics2", "quartz_pillar")).getDefaultState(), -63));
+            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("appliedenergistics2", "chiseled_quartz_block")).getDefaultState(), -62));
 
             factory.newBlock(Material.ROCK, "certus", provider)
                     .newVariation("cracked")
