@@ -2,11 +2,13 @@
     "forge_marker": 1,
     "defaults": { "model": "cube_bottom_top" },
     "variants": {
-        "terrain-iron-gears": [{ "textures": {
-            "side"  : "chisel:blocks/iron/terrain-iron-gears-side",
-            "top"   : "chisel:blocks/iron/terrain-iron-gears-top",
-            "bottom": "chisel:blocks/iron/terrain-iron-gears-bottom"
-        }}],
+        "terrain-iron-gears": [{
+            "model": "cube_column",
+            "textures": {
+                "side"  : "chisel:blocks/iron/terrain-iron-gears-side",
+                "end"   : "chisel:blocks/iron/terrain-iron-gears-top"
+            }
+        }],
         "terrain-iron-space": [{
             "model"   : "cube_all",
             "textures": {
