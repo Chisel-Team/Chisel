@@ -34,7 +34,7 @@ public enum ChiselModelRegistry implements Reference {
         @Getter
         private final T block;
         
-        private ModelResourceLocation getModelResourceLocation(VariationData data, String variant) {
+        ModelResourceLocation getModelResourceLocation(VariationData data, String variant) {
             String name = block.getRegistryName().getResourcePath();
             while (Character.isDigit(name.charAt(name.length() - 1))) {
                 name = name.substring(0, name.length() - 1);
@@ -55,11 +55,6 @@ public enum ChiselModelRegistry implements Reference {
             map.remove(block.getMetaProp());
             return getModelResourceLocation(data, getPropertyString(map));
         }
-        
-        public ModelResourceLocation getModelResourceLocation(@Nonnull ItemStack stack) {
-            VariationData data = block.getVariationData(stack.getItemDamage());
-            return getModelResourceLocation(data, "inventory");
-        }
     }
 
     public <T extends Block & ICarvable> void register(@Nonnull T block) {
@@ -70,8 +65,10 @@ public enum ChiselModelRegistry implements Reference {
         if (item == null) {
             return;
         }
-
-        ModelLoader.setCustomMeshDefinition(item, mapper::getModelResourceLocation);
+        
+        for (VariationData var : block.getVariations()) {
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), var.index, mapper.getModelResourceLocation(var, "inventory"));
+        }
         
         // Prevent vanilla searching for item JSONs
         ModelLoader.registerItemVariants(item);
