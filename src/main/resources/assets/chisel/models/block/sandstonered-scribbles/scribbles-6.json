@@ -1,0 +1,8 @@
+{
+  "model": { "model": "cube"},
+  "face":"chisel:sandstonered-scribbles/scribbles-6-side.cf",
+  "overrides":{
+    "UP":"chisel:sandstonered-scribbles/scribbles-6-top.cf",
+    "DOWN":"chisel:sandstonered-scribbles/scribbles-6-top.cf"
+  }
+}

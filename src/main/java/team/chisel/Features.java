@@ -2571,6 +2571,32 @@ public enum Features {
         }
     },
 
+    SANDSTONERED_SCRIBBLES {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+            factory.newBlock(Material.ROCK, "sandstonered-scribbles", provider)
+                    .setGroup("sandstonered")
+                    .newVariation("scribbles-0")
+                    .next("scribbles-1")
+                    .next("scribbles-2")
+                    .next("scribbles-3")
+                    .next("scribbles-4")
+                    .next("scribbles-5")
+                    .next("scribbles-6")
+                    .next("scribbles-7")
+                    .next("scribbles-8")
+                    .next("scribbles-9")
+                    .next("scribbles-10")
+                    .next("scribbles-11")
+                    .next("scribbles-12")
+                    .next("scribbles-13")
+                    .next("scribbles-14")
+                    .next("scribbles-15")
+                    .addOreDict("sandstone")
+                    .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
+        }
+    },
+
     SILVER {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
