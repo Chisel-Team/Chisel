@@ -1,4 +1,5 @@
 {
+    "animation": { "interpolate": true },
     "ctm": {
         "ctm_version": 1,
         "type": "pattern",
