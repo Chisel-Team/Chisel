@@ -2679,6 +2679,23 @@ tile.chisel.sandstone-scribbles.scribbles-13.desc.1=Pattern 2
 tile.chisel.sandstone-scribbles.scribbles-14.desc.1=Hieroglyphs 5
 tile.chisel.sandstone-scribbles.scribbles-15.desc.1=Hieroglyphs 6
 
+tile.chisel.sandstonered-scribbles.name=Red Sandstone Scribbles
+tile.chisel.sandstonered-scribbles.scribbles-0.desc.1=Hieroglyphs 1
+tile.chisel.sandstonered-scribbles.scribbles-1.desc.1=Hieroglyphs 2
+tile.chisel.sandstonered-scribbles.scribbles-2.desc.1=Hieroglyphs 3
+tile.chisel.sandstonered-scribbles.scribbles-3.desc.1=Skull 1
+tile.chisel.sandstonered-scribbles.scribbles-4.desc.1=Eye of Horus
+tile.chisel.sandstonered-scribbles.scribbles-5.desc.1=Bird
+tile.chisel.sandstonered-scribbles.scribbles-6.desc.1=Halo
+tile.chisel.sandstonered-scribbles.scribbles-7.desc.1=Hieroglyphs 4
+tile.chisel.sandstonered-scribbles.scribbles-8.desc.1=Man with Staff
+tile.chisel.sandstonered-scribbles.scribbles-9.desc.1=Waves
+tile.chisel.sandstonered-scribbles.scribbles-10.desc.1=Landscape 1
+tile.chisel.sandstonered-scribbles.scribbles-11.desc.1=Skull Landscape
+tile.chisel.sandstonered-scribbles.scribbles-12.desc.1=Pattern 1
+tile.chisel.sandstonered-scribbles.scribbles-13.desc.1=Pattern 2
+tile.chisel.sandstonered-scribbles.scribbles-14.desc.1=Hieroglyphs 5
+tile.chisel.sandstonered-scribbles.scribbles-15.desc.1=Hieroglyphs 6
 
 tile.chisel.blockSilver.name=Block of Silver
 tile.chisel.blockSilver.caution.desc.1=Caution
