@@ -50,10 +50,10 @@
             { "textures": { "all": "chisel:blocks/templemossy/plate-cracked-6" }}
         ],
         "cobble"          : [
-            { "textures": { "all": "chisel:blocks/templemossy/cobble_0" }},
-            { "textures": { "all": "chisel:blocks/templemossy/cobble_1" }},
-            { "textures": { "all": "chisel:blocks/templemossy/cobble_2" }},
-            { "textures": { "all": "chisel:blocks/templemossy/cobble_3" }}
+            { "textures": { "all": "chisel:blocks/templemossy/cobble-0" }},
+            { "textures": { "all": "chisel:blocks/templemossy/cobble-1" }},
+            { "textures": { "all": "chisel:blocks/templemossy/cobble-2" }},
+            { "textures": { "all": "chisel:blocks/templemossy/cobble-3" }}
         ]
     }
 }

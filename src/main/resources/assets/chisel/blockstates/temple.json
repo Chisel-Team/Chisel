@@ -50,10 +50,10 @@
             { "textures": { "all": "chisel:blocks/temple/plate-cracked-6" }}
         ],
         "cobble"          : [
-            { "textures": { "all": "chisel:blocks/temple/cobble_0" }},
-            { "textures": { "all": "chisel:blocks/temple/cobble_1" }},
-            { "textures": { "all": "chisel:blocks/temple/cobble_2" }},
-            { "textures": { "all": "chisel:blocks/temple/cobble_3" }}
+            { "textures": { "all": "chisel:blocks/temple/cobble-0" }},
+            { "textures": { "all": "chisel:blocks/temple/cobble-1" }},
+            { "textures": { "all": "chisel:blocks/temple/cobble-2" }},
+            { "textures": { "all": "chisel:blocks/temple/cobble-3" }}
         ]
     }
 }
