@@ -1,0 +1,25 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "ambientocclusion": false,
+        "model": "chisel:pane_post_ends",
+        "textures": {
+            "particle": "chisel:blocks/glasspane/terrain-glassbubble-side",
+            "pane"    : "chisel:blocks/glasspane/terrain-glassbubble-side",
+            "edge"    : "chisel:blocks/glasspane/terrain-glassbubble-top",
+            "side"    : "chisel:blocks/glasspane/terrain-glassbubble-top"
+        }
+    },
+    "variants": {
+        "east" : { "true": { "submodel": { "side_e": { "model": "chisel:pane_side"    , "y": 90 }}}, "false": { }},
+        "north": { "true": { "submodel": { "side_n": { "model": "chisel:pane_side"              }}}, "false": { }},
+        "south": { "true": { "submodel": { "side_s": { "model": "chisel:pane_side_alt"          }}}, "false": { }},
+        "west" : { "true": { "submodel": { "side_w": { "model": "chisel:pane_side_alt", "y": 90 }}}, "false": { }},
+        
+        "east=false,north=false,south=false,west=false": { "model": "chisel:pane_post" },
+        "east=false,north=true,south=false,west=false" : { "model": "chisel:pane_post_ends", "submodel": { "cap_n": { "model": "chisel:pane_cap"              } } },
+        "east=true,north=false,south=false,west=false" : { "model": "chisel:pane_post_ends", "submodel": { "cap_e": { "model": "chisel:pane_cap"    , "y": 90 } } },
+        "east=false,north=false,south=true,west=false" : { "model": "chisel:pane_post_ends", "submodel": { "cap_s": { "model": "chisel:pane_cap_alt"          } } },
+        "east=false,north=false,south=false,west=true" : { "model": "chisel:pane_post_ends", "submodel": { "cap_w": { "model": "chisel:pane_cap_alt", "y": 90 } } }
+    }
+}

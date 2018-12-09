@@ -1422,6 +1422,22 @@ public enum Features {
                     .addOreDict("blockGlass")
                     .addOreDict("blockGlassColorless")
                     .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
+            
+            
+            Carving.chisel.addVariation("glasspane", CarvingUtils.variationFor(Blocks.GLASS_PANE.getDefaultState(), -20));
+            
+            factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
+                    .newVariation("terrain-glassbubble")
+//                    .next("terrain-glassnoborder")
+//                    .next("terrain-glass-screen")
+//                    .next("terrain-glassstreak")
+//                    .next("chinese")
+//                    .next("chinese2")
+//                    .next("japanese")
+//                    .next("japanese2")
+                    .addOreDict("paneGlass")
+                    .addOreDict("paneGlassColorless")
+                    .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
         }
     },
 
@@ -1430,6 +1446,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             IBlockState stainedGlass = Blocks.STAINED_GLASS.getDefaultState();
+            IBlockState stainedGlassPane = Blocks.STAINED_GLASS_PANE.getDefaultState();
             IProperty<EnumDyeColor> prop = BlockStainedGlass.COLOR;
 
             for(int c = 0; c < dyeColors.length; c++)
@@ -1469,6 +1486,21 @@ public enum Features {
                         .addOreDict("blockGlass")
                         .addOreDict("blockGlass"+dyeColors[c])
                         .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
+                
+                
+                Carving.chisel.addVariation("glasspanedyed" + (dyeColors[c].toLowerCase()), CarvingUtils.variationFor(stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
+
+//                factory.newBlock(Material.GLASS, "glasspanedyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
+//                        .setParentFolder("glass_stained_pane/"+dyeColors[c].toLowerCase())
+//                        .newVariation("panel")
+//                        .next("framed")
+//                        .next("framed_fancy")
+//                        .next("streaks")
+//                        .next("rough")
+//                        .next("brick")
+//                        .addOreDict("blockGlass")
+//                        .addOreDict("blockGlass"+dyeColors[c])
+//                        .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
         }
     },
