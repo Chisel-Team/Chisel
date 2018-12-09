@@ -67,7 +67,9 @@ public enum ChiselModelRegistry implements Reference {
         }
         
         for (VariationData var : block.getVariations()) {
-            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), var.index, mapper.getModelResourceLocation(var, "inventory"));
+            if (!var.name.isEmpty()) {
+                ModelLoader.setCustomModelResourceLocation(item, var.index - block.getIndex() * 16, mapper.getModelResourceLocation(var, "inventory"));
+            }
         }
         
         // Prevent vanilla searching for item JSONs
