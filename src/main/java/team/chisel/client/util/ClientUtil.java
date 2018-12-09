@@ -4,8 +4,6 @@ import java.lang.reflect.Field;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-import javax.vecmath.Matrix4f;
-import javax.vecmath.Vector3f;
 
 import com.google.common.base.Throwables;
 
@@ -21,17 +19,11 @@ import net.minecraft.util.Timer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import team.chisel.Chisel;
 
 @ParametersAreNonnullByDefault
 public class ClientUtil {
-
-    public static final TRSRTransformation DEFAULT_BLOCK_THIRD_PERSON_TRANSOFRM = new TRSRTransformation(new Vector3f(0, 1.5f / 16f, -2.75f / 16f), TRSRTransformation.quatFromXYZDegrees(new Vector3f(
-            10, -45, 170)), new Vector3f(0.375f, 0.375f, 0.375f), null);
-    @SuppressWarnings("null")
-    public static final Matrix4f DEFAULT_BLOCK_THIRD_PERSON_MATRIX = DEFAULT_BLOCK_THIRD_PERSON_TRANSOFRM.getMatrix();
 
     public static void addHitEffects(World world, BlockPos pos, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);
