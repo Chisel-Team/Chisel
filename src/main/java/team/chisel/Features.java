@@ -241,9 +241,6 @@ public enum Features {
     ARCANE_STONE ("thaumcraft") {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("thaumcraft", "stone_arcane")).getDefaultState(), -64));
-            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("thaumcraft", "stone_arcane_brick")).getDefaultState(), -63));
-
             factory.newBlock(Material.ROCK, "arcane_stone", provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -279,6 +276,12 @@ public enum Features {
                     .next("prism")
                     .next("raw")
                     .build(b -> b.setHardness(2.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
+        }
+        
+        @Override
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
+            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("thaumcraft", "stone_arcane")).getDefaultState(), -64));
+            Carving.chisel.addVariation("arcane_stone", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("thaumcraft", "stone_arcane_brick")).getDefaultState(), -63));
         }
     },
     
@@ -364,8 +367,6 @@ public enum Features {
     BLOOD_MAGIC("bloodmagic") {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            //Carving.chisel.addVariation("bloodMagic", CarvingUtils.variationFor(GameRegistry.findBlock("bloodmagic", "BlockBloodRune").getDefaultState(), -64));
-
             factory.newBlock(Material.ROCK, "bloodMagic", provider)
                     .newVariation("bloodRuneArranged")
                     .next("bloodRuneBricks")
@@ -374,6 +375,11 @@ public enum Features {
                     .next("bloodRuneClassicPanel")
                     .next("bloodRuneTiles")
                     .build();
+        }
+        
+        @Override
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
+            Carving.chisel.addVariation("bloodMagic", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("bloodmagic", "blood_rune")).getDefaultState(), -64));
         }
     },
 
@@ -536,10 +542,6 @@ public enum Features {
     CERTUS ("appliedenergistics2") {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("appliedenergistics2", "quartz_block")).getDefaultState(), -64));
-            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("appliedenergistics2", "quartz_pillar")).getDefaultState(), -63));
-            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("appliedenergistics2", "chiseled_quartz_block")).getDefaultState(), -62));
-
             factory.newBlock(Material.ROCK, "certus", provider)
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -576,6 +578,13 @@ public enum Features {
                     .next("cuts")
                     .next("raw")
                     .build(b -> b.setHardness(0.8F).setResistance(4.0F).setSoundType(SoundType.STONE));
+        }
+        
+        @Override
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
+            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("appliedenergistics2", "quartz_block")).getDefaultState(), -64));
+            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("appliedenergistics2", "quartz_pillar")).getDefaultState(), -63));
+            Carving.chisel.addVariation("certus", CarvingUtils.variationFor(ForgeRegistries.BLOCKS.getValue(new ResourceLocation("appliedenergistics2", "chiseled_quartz_block")).getDefaultState(), -62));
         }
     },
 
