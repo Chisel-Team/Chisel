@@ -5,8 +5,8 @@
             "from": [ 8,  0, 8 ],
             "to"  : [ 8, 16, 9 ],
             "faces": {
-                "west": { "uv": [ 8, 0, 7, 16 ], "texture": "#bars" },
-                "east": { "uv": [ 7, 0, 8, 16 ], "texture": "#bars" }
+                "west": { "uv": [ 8, 0, 7, 16 ], "texture": "#pane" },
+                "east": { "uv": [ 7, 0, 8, 16 ], "texture": "#pane" }
             }
         }, {
             "from": [ 7,  0, 9 ],
