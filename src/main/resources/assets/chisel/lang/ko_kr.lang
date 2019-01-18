@@ -5,7 +5,7 @@ item.chisel.offsettool.name=엔더 오프셋 막대
 
 chisel.spawnwither=끌은 위험한 물건입니다...
 
-item.chisel.chisel.desc.gui=%s오른쪽 클릭%하여 GUI 열기
+item.chisel.chisel.desc.gui=%s오른쪽 클릭%s하여 GUI 열기
 item.chisel.chisel.desc.lc1=%s왼쪽 클릭%s하여 블록에 무늬 새기기
 item.chisel.chisel.desc.lc2=%s인벤토리에 블록을 보관%s하여 무늬 고정
 
