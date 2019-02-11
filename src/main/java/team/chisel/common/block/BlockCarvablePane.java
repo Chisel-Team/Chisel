@@ -5,18 +5,22 @@ import java.util.List;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Getter;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -41,6 +45,8 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     private final int maxVariation;
 
     private final BlockStateContainer states;
+
+    private boolean dragonProof = false;
     
     public BlockCarvablePane(Material material, int index, int max, VariationData... variations) {
         super(material, true);
@@ -133,5 +139,19 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     @Override
     public VariationData getVariationData(int meta) {
         return this.variations[MathHelper.clamp(meta, 0, this.variations.length - 1)];
+    }
+
+    public Block setDragonProof() {
+        dragonProof = true;
+        return this;
+    }
+
+    @Override
+    public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+        if (entity instanceof EntityDragon){
+            return !dragonProof;
+        }else{
+            return super.canEntityDestroy(state, world, pos, entity);
+        }
     }
 }
