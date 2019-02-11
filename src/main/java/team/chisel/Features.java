@@ -1286,7 +1286,6 @@ public enum Features {
             Carving.chisel.addVariation("endstone", CarvingUtils.variationFor(Blocks.END_STONE.getDefaultState(), -21));
             Carving.chisel.addVariation("endstone", CarvingUtils.variationFor(Blocks.END_BRICKS.getDefaultState(), -20));
 
-
             factory.newBlock(Material.ROCK, "endstone", provider) // REMAP!
                     .newVariation("cracked")
                     .next("bricks-soft")
@@ -1328,7 +1327,7 @@ public enum Features {
                     .next("twisted")
                     .next("prism")
                     .addOreDict("endstone")
-                    .build(b -> b.setHardness(3.0F).setResistance(15.0F).setSoundType(SoundType.STONE));
+                    .build(b -> b.setDragonProof().setHardness(3.0F).setResistance(15.0F).setSoundType(SoundType.STONE));
         }
     },
 
@@ -1891,7 +1890,7 @@ public enum Features {
                     .next("classicnew")
                     .next("fence")
                     .next("modern")
-                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f).setHarvestLevel("pickaxe", 0));
+                    .build(b-> b.setDragonProof().setSoundType(SoundType.METAL).setHardness(5.0f).setHarvestLevel("pickaxe", 0));
         }
     },
 
@@ -2315,7 +2314,7 @@ public enum Features {
                     .next("greek")
                     .next("crate")
                     .addOreDict("obsidian")
-                    .build(b -> b.setHardness(50.0F).setResistance(2000.0F).setSoundType(SoundType.STONE).setHarvestLevel("pickaxe", 3));
+                    .build(b -> b.setDragonProof().setHardness(50.0F).setResistance(2000.0F).setSoundType(SoundType.STONE).setHarvestLevel("pickaxe", 3));
         }
     },
 

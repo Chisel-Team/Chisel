@@ -11,6 +11,8 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -50,7 +52,9 @@ public class BlockCarvable extends Block implements ICarvable {
     private final int maxVariation;
 
     private final BlockStateContainer states;
-    
+
+    private boolean dragonProof = false;
+
     public BlockCarvable(Material material, int index, int max, VariationData... variations) {
         super(material);
         setCreativeTab(ChiselTabs.tab);
@@ -197,5 +201,19 @@ public class BlockCarvable extends Block implements ICarvable {
     @Override
     public boolean causesSuffocation(IBlockState state) {
         return true;
+    }
+
+    public Block setDragonProof() {
+        dragonProof = true;
+        return this;
+    }
+
+    @Override
+    public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+        if (entity instanceof EntityDragon){
+            return !dragonProof;
+        }else{
+            return super.canEntityDestroy(state, world, pos, entity);
+        }
     }
 }
