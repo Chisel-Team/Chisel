@@ -1600,7 +1600,6 @@ public enum Features {
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F).setHarvestLevel("pickaxe", 1));
 
             factory.newBlock(Material.IRON, "gold", null, beaconBaseProvider)
-                    .setGroup("blockGold")
                     .newVariation("terrain-gold-largeingot")
                     .next("terrain-gold-smallingot")
                     .next("terrain-gold-brick")
