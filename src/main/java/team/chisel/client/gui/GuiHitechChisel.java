@@ -56,8 +56,7 @@ import team.chisel.common.util.SoundUtil;
 @ParametersAreNonnullByDefault
 public class GuiHitechChisel extends GuiChisel {
 
-    @SuppressWarnings("null")
-    private static class PreviewModeButton extends GuiButton {
+    private class PreviewModeButton extends GuiButton {
 
         @Getter
         private PreviewType type;
@@ -79,6 +78,7 @@ public class GuiHitechChisel extends GuiChisel {
         private final void setType(PreviewType type) {
             this.type = type;
             this.displayString = "< " + I18n.format(type.toString()) + " >";
+            GuiHitechChisel.this.fakeworld = new FakeBlockAccess(GuiHitechChisel.this); // Invalidate region cache data
         }
     }
     
@@ -182,7 +182,7 @@ public class GuiHitechChisel extends GuiChisel {
     
     private final ContainerChiselHitech containerHitech;
     
-    private final FakeBlockAccess fakeworld = new FakeBlockAccess(this);
+    private FakeBlockAccess fakeworld = new FakeBlockAccess(this);
     
     private boolean panelClicked;
     private int clickButton;
