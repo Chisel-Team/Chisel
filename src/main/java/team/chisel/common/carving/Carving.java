@@ -48,7 +48,7 @@ public class Carving implements ICarvingRegistry {
 			}
 
             ItemStackWrapper other = (ItemStackWrapper) obj;
-            return ItemStack.areItemStacksEqual(wrapped, other.wrapped) && ItemStack.areItemStackTagsEqual(wrapped, other.wrapped);
+            return CarvingUtils.stacksEqual(wrapped, other.wrapped);
         }
 
 	}

@@ -61,6 +61,14 @@ public class CarvingUtils {
 	public static @Nullable IModeRegistry getModeRegistry() {
 	    return modes;
 	}
+	
+	public static boolean stacksEqual(ItemStack stack1, ItemStack stack2) {
+        return ItemStack.areItemStacksEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2);
+	}
+	
+	public static int hashStack(ItemStack stack) {
+	    return stack.getItem().hashCode() ^ (stack.getItemDamage() * 31);
+	}
 
 	/**
 	 * Creates a standard {@link ICarvingVariation} for the given data. Use this if you do not need any custom behavior in your own variation.
@@ -144,6 +152,27 @@ public class CarvingUtils {
 	@Getter
 	private static abstract class SimpleVariationBase implements ICarvingVariation {
 	    private final int order;
+
+	    @Override
+	    public boolean equals(Object obj) {
+	        if (!(obj instanceof ICarvingVariation)) return false;
+	        ICarvingVariation other = (ICarvingVariation) obj;
+	        IBlockState state = getBlockState();
+	        IBlockState otherState = other.getBlockState();
+	        if (state == null || otherState == null) {
+	            return stacksEqual(getStack(), other.getStack());
+	        }
+	        return state == otherState;
+	    }
+	    
+	    @Override
+	    public int hashCode() {
+	        IBlockState state = getBlockState();
+	        if (state != null) {
+	            return state.hashCode();
+	        }
+	        return hashStack(getStack());
+	    }
 	}
 
 	@Deprecated
