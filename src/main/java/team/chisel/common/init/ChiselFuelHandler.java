@@ -7,6 +7,9 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ChiselFuelHandler implements IFuelHandler {
     @Override
     public int getBurnTime(ItemStack itemStack) {
+        if (itemStack.isEmpty()) {
+            return 0;
+        }
         for(int id : OreDictionary.getOreIDs(itemStack))
         {
             if(OreDictionary.getOreName(id).matches("blockFuelCoke"))
