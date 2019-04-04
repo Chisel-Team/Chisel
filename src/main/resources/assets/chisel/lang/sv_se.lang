@@ -35,7 +35,7 @@ chisel.mode.row.name=Rad
 chisel.mode.row.desc=Mejsla en rad på 1x3 block.
 
 chisel.mode.contiguous.name=Angränsande
-chisel.mode.contiguous.desc=Mejsla ett område med likadana block, upp till 10 block i valfri riktning.
+chisel.mode.contiguous.desc=Mejsla ett område med likadana block, upp till 10 block i alla riktningar.
 
 chisel.mode.contiguous_2d.name=Angränsande 2D
 chisel.mode.contiguous_2d.desc=Mejsla ett område med likadana block, upp till 10 block längst den nuvarande sidan.
