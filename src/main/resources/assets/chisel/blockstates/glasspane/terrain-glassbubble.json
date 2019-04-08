@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "forge_marker": 1,
     "defaults": {
         "ambientocclusion": false,
@@ -22,4 +23,40 @@
         "east=false,north=false,south=true,west=false" : { "model": "chisel:pane_post_ends", "submodel": { "cap_s": { "model": "chisel:pane_cap_alt"          } } },
         "east=false,north=false,south=false,west=true" : { "model": "chisel:pane_post_ends", "submodel": { "cap_w": { "model": "chisel:pane_cap_alt", "y": 90 } } }
     }
+=======
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-item",
+    "ambientocclusion": false,
+    "model": "pane_post",
+    "textures": {
+      "edge": "chisel:blocks/glasspane/terrain-glassbubble-top",
+      "pane": "chisel:blocks/glasspane/terrain-glassbubble-side"
+    }
+  },
+  "variants": {
+    "inventory": [{ "submodel": {
+      "side_n": { "model": "pane_noside"              },
+      "side_e": { "model": "pane_side"      , "y": 90 },
+      "side_s": { "model": "pane_noside_alt", "y": 90 },
+      "side_w": { "model": "pane_side_alt"  , "y": 90 }
+    }}],
+    "north": {
+      "true":  { "submodel": { "side_n": { "model": "pane_side"                 }}},
+      "false": { "submodel": { "side_n": { "model": "pane_noside"               }}}
+    },
+    "east" : {
+      "true":  { "submodel": { "side_e": { "model": "pane_side"      , "y":  90 }}},
+      "false": { "submodel": { "side_e": { "model": "pane_noside_alt"           }}}
+    },
+    "south": {
+      "true":  { "submodel": { "side_s": { "model": "pane_side_alt"             }}},
+      "false": { "submodel": { "side_s": { "model": "pane_noside_alt", "y":  90 }}}
+    },
+    "west" : {
+      "true":  { "submodel": { "side_w": { "model": "pane_side_alt"  , "y":  90 }}},
+      "false": { "submodel": { "side_w": { "model": "pane_noside"    , "y": 270 }}}
+    }
+  }
+>>>>>>> 528a886d... Regular glass pane fixes
 }
