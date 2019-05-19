@@ -14,6 +14,7 @@ import team.chisel.Chisel;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.carving.Carving;
 import team.chisel.common.util.NBTUtil;
+import team.chisel.common.util.SoundUtil;
 
 @Getter
 @ParametersAreNonnullByDefault
@@ -125,14 +126,15 @@ public class ContainerChisel extends Container {
             } else {
                 if (slotIdx < getInventoryChisel().size && !itemstack1.isEmpty()) {
                     SlotChiselSelection selectslot = (SlotChiselSelection) slot;
-                    ItemStack check = selectslot.craft(entity, itemstack1, true);
+                    ItemStack check = SlotChiselSelection.craft(this, entity, itemstack1, true);
                     if (check.isEmpty()) {
                         return ItemStack.EMPTY;
                     }
                     if (!this.mergeItemStack(check, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
                         return ItemStack.EMPTY;
                     }
-                    itemstack1 = selectslot.craft(entity, itemstack1, false);
+                    SoundUtil.playSound(entity, getChisel(), itemstack1);
+                    itemstack1 = SlotChiselSelection.craft(this, entity, itemstack1, false);
 
                 } else if (!this.mergeItemStack(itemstack1, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
                     return ItemStack.EMPTY;

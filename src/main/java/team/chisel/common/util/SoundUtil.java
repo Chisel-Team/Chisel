@@ -7,6 +7,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -14,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingVariation;
 
 @ParametersAreNonnullByDefault
 public class SoundUtil {
@@ -27,6 +29,19 @@ public class SoundUtil {
             }
         }
         return CarvingUtils.getChiselRegistry().getVariationSound(target != null ? target : Blocks.AIR.getDefaultState());
+    }
+    
+    public static void playSound(EntityPlayer player, ItemStack chisel, ItemStack source) {
+        ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(source);
+        IBlockState state = v == null ? null : v.getBlockState();
+        if (state == null) {
+            if (source.getItem() instanceof ItemBlock) {
+                state = ((ItemBlock) source.getItem()).getBlock().getStateFromMeta(source.getItem().getMetadata(source.getItemDamage()));
+            } else {
+                state = Blocks.STONE.getDefaultState(); // fallback
+            }
+        }
+        playSound(player, chisel, state);
     }
 
     public static void playSound(EntityPlayer player, ItemStack chisel, @Nullable IBlockState target) {

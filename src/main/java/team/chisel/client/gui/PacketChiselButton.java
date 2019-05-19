@@ -12,9 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.inventory.ContainerChiselHitech;
+import team.chisel.common.inventory.SlotChiselSelection;
 import team.chisel.common.util.SoundUtil;
 
 @NoArgsConstructor
@@ -59,8 +61,13 @@ public class PacketChiselButton implements IMessage {
         if (player.openContainer instanceof ContainerChiselHitech) {
             ContainerChiselHitech container = (ContainerChiselHitech) player.openContainer;
             ItemStack chisel = container.getChisel();
+            ItemStack originalChisel = chisel.copy();
             ItemStack target = container.getTargetStack();
-
+            
+            if (!(chisel.getItem() instanceof IChiselItem)) {
+                return;
+            }
+            
             @SuppressWarnings("null")
             @Nonnull
             ICarvingRegistry carving = CarvingUtils.getChiselRegistry();
@@ -77,43 +84,21 @@ public class PacketChiselButton implements IMessage {
                     if (carving.getGroup(target) != carving.getGroup(s)) {
                         return;
                     }
-                    ItemStack stack = target.copy();
-                    int toCraft = Math.min(s.getCount(), stack.getMaxStackSize());
-                    if (chisel.isItemStackDamageable()) {
-                        int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage() + 1;
-                        toCraft = Math.min(toCraft, damageLeft);
-                        chisel.damageItem(toCraft, player);
-                    }
-                    stack.setCount(toCraft);
-                    if (chisel.isEmpty()) {
-                        player.inventory.setInventorySlotContents(i, stack);
-                        container.getInventoryChisel().getStackInSpecialSlot().shrink(toCraft);
-                        player.inventory.setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
-                        if (s.getCount() > toCraft) {
-                            ItemStack remainder = s.copy();
-                            remainder.shrink(toCraft);
-                            if (!player.inventory.addItemStackToInventory(remainder)) {
-                                player.dropItem(remainder, false);
-                            }
-                        }
-                    } else if (toCraft < s.getCount()) {
-                        s.shrink(toCraft);
-                        if (!player.inventory.addItemStackToInventory(stack)) {
-                            player.dropItem(stack, false);
-                        }
-                    } else {
-                        player.inventory.setInventorySlotContents(i, stack);
-                    }
-                    
+                    container.getInventoryChisel().setStackInSpecialSlot(s);
+                    ItemStack res = SlotChiselSelection.craft(container, player, target.copy(), false);
+                    player.inventory.setInventorySlotContents(i, res);
                     playSound = true;
                 }
-                if (chisel.getCount() < 1) {
+                if (chisel.isEmpty()) {
                     return;
                 }
             }
             
+            container.getInventoryChisel().setStackInSpecialSlot(container.getSelectionStack());
+            container.getInventoryChisel().updateItems();
+            
             if (playSound) {
-                SoundUtil.playSound(player, chisel, carving.getVariation(target).getBlockState());
+                SoundUtil.playSound(player, originalChisel, target);
             }
         }
     }

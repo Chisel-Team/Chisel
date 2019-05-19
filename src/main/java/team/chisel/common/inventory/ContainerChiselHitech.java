@@ -66,7 +66,7 @@ public class ContainerChiselHitech extends ContainerChisel {
         }
         
         ItemStack stack = slot == null ? ItemStack.EMPTY : slot.getStack();
-        getInventoryChisel().setInventorySlotContents(getInventoryChisel().size, stack);
+        getInventoryChisel().setStackInSpecialSlot(stack);
         getInventoryChisel().updateItems();
     }
     

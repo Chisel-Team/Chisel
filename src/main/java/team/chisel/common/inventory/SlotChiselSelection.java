@@ -1,5 +1,6 @@
 package team.chisel.common.inventory;
 
+import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.state.IBlockState;
@@ -10,7 +11,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
@@ -19,7 +19,7 @@ import team.chisel.common.util.SoundUtil;
 @ParametersAreNonnullByDefault
 public class SlotChiselSelection extends Slot {
 
-    private final ContainerChisel container;
+    private final @Nonnull ContainerChisel container;
 
     public SlotChiselSelection(ContainerChisel container, InventoryChiselSelection inv, IInventory iinventory, int i, int j, int k) {
         super(iinventory, i, j, k);
@@ -36,8 +36,7 @@ public class SlotChiselSelection extends Slot {
         return par1EntityPlayer.inventory.getItemStack().isEmpty();
     }
     
-    public ItemStack craft(EntityPlayer player, ItemStack itemstack, boolean simulate) {
-        ItemStack heldStack = player.inventory.getItemStack();
+    public static ItemStack craft(ContainerChisel container, EntityPlayer player, ItemStack itemstack, boolean simulate) {
         ItemStack crafted = container.getInventoryChisel().getStackInSpecialSlot();
         ItemStack chisel = container.getChisel();
         if (simulate) {
@@ -46,18 +45,7 @@ public class SlotChiselSelection extends Slot {
             chisel = chisel.copy();
         }
         ItemStack res = ItemStack.EMPTY;
-        if (!chisel.isEmpty() && !crafted.isEmpty()) {
-
-//        if (heldStack == null) {
-//            if (!simulate) {
-//                container.getInventoryChisel().decrStackSize(container.getInventoryChisel().size, 1);
-//                container.onChiselSlotChanged();
-//            }
-//        } else {
-//            player.inventory.setItemStack(null);
-
-            ItemStack source = crafted.copy();
-                
+        if (!chisel.isEmpty() && !crafted.isEmpty()) {                
             IChiselItem item = (IChiselItem) container.getChisel().getItem();
             res = item.craftItem(chisel, crafted, itemstack, player);
             if (!simulate) {
@@ -71,21 +59,6 @@ public class SlotChiselSelection extends Slot {
 
                 container.getInventoryChisel().updateItems();
                 container.detectAndSendChanges();
-
-//            if (player.world.isRemote) {
-                ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(source);
-                IBlockState state = v == null ? null : v.getBlockState();
-                if (state == null) {
-                    if (source.getItem() instanceof ItemBlock) {
-                        state = ((ItemBlock) source.getItem()).getBlock().getStateFromMeta(source.getItem().getMetadata(source.getItemDamage()));
-                    } else {
-                        state = Blocks.STONE.getDefaultState(); // fallback
-                    }
-                }
-                SoundUtil.playSound(player, chisel, state);
-//            } else {
-//                // container.getInventoryPlayer().player.addStat(Statistics.blocksChiseled, crafted.stackSize);
-//            }
             }
         }
         
@@ -94,11 +67,13 @@ public class SlotChiselSelection extends Slot {
 
     @Override
     public ItemStack onTake(EntityPlayer player, ItemStack itemstack) {
-        ItemStack res = craft(player, itemstack, false);
+        ItemStack chisel = container.getChisel().copy();
+        ItemStack res = craft(container, player, itemstack, false);
         if (container.currentClickType != ClickType.PICKUP) {
             res.shrink(1);
         }
         if (!res.isEmpty()) {
+            SoundUtil.playSound(player, chisel, itemstack);
             player.inventory.setItemStack(res);
         }
         return ItemStack.EMPTY; // Return value seems to be ignored?
