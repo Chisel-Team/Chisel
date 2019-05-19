@@ -86,8 +86,10 @@ public class PacketChiselButton implements IMessage {
                     }
                     container.getInventoryChisel().setStackInSpecialSlot(s);
                     ItemStack res = SlotChiselSelection.craft(container, player, target.copy(), false);
-                    player.inventory.setInventorySlotContents(i, res);
-                    playSound = true;
+                    if (!res.isEmpty()) {
+                        player.inventory.setInventorySlotContents(i, res);
+                        playSound = true;
+                    }
                 }
                 if (chisel.isEmpty()) {
                     return;
