@@ -139,7 +139,7 @@ public class ItemChisel extends Item implements IChiselItem {
 
     @Override
     public boolean canChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
-        return true;
+        return !chisel.isEmpty();
     }
 
     @Override

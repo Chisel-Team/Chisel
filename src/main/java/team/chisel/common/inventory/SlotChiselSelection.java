@@ -47,13 +47,19 @@ public class SlotChiselSelection extends Slot {
         ItemStack res = ItemStack.EMPTY;
         if (!chisel.isEmpty() && !crafted.isEmpty()) {                
             IChiselItem item = (IChiselItem) container.getChisel().getItem();
+            ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(itemstack);
+            if (!item.canChisel(player.world, player, chisel, variation)) {
+                return res;
+            }
             res = item.craftItem(chisel, crafted, itemstack, player);
             if (!simulate) {
                 container.getInventoryChisel().setStackInSpecialSlot(crafted.getCount() == 0 ? ItemStack.EMPTY : crafted);
                 container.onChiselSlotChanged();
-                item.onChisel(player.world, player, chisel, CarvingUtils.getChiselRegistry().getVariation(itemstack));
+                item.onChisel(player.world, player, chisel, variation);
                 if (chisel.getCount() == 0) {
                     container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
+                }
+                if (!crafted.isEmpty() && !item.canChisel(player.world, player, chisel, variation)) {
                     container.onChiselBroken();
                 }
 

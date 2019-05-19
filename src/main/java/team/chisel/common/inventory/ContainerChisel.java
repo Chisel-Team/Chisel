@@ -181,6 +181,7 @@ public class ContainerChisel extends Container {
     public void onChiselBroken() {
         if (!getInventoryPlayer().player.world.isRemote) {
             getInventoryPlayer().player.dropItem(inventoryChisel.getStackInSpecialSlot(), false);
+            inventoryChisel.setStackInSpecialSlot(ItemStack.EMPTY);
         }
     }
 }
