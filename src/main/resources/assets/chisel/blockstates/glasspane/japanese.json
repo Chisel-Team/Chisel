@@ -6,7 +6,7 @@
     "model": "pane_post",
     "textures": {
       "edge"    : "chisel:blocks/glasspane/japanese-top",
-      "pane"    : "chisel:blocks/glasspane/japanese-side"
+      "pane"    : "chisel:blocks/glass/japanese"
     }
   },
   "variants": {

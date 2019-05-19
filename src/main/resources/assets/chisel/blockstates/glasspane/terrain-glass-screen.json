@@ -6,8 +6,8 @@
     "uvlock": true,
     "model": "pane_post",
     "textures": {
-      "edge": "chisel:blocks/glasspane/terrain-glass-screen",
-      "pane": "chisel:blocks/glasspane/terrain-glass-screen"
+      "edge": "chisel:blocks/glass/terrain-glass-screen",
+      "pane": "chisel:blocks/glass/terrain-glass-screen"
     }
   },
   "variants": {

@@ -6,7 +6,7 @@
     "model": "pane_post",
     "textures": {
       "edge": "chisel:blocks/glasspane/terrain-glassstreak-top",
-      "pane": "chisel:blocks/glasspane/terrain-glassstreak-side"
+      "pane": "chisel:blocks/glass/terrain-glassstreak"
     }
   },
   "variants": {
