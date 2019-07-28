@@ -1,6 +1,6 @@
 {
     "forge_marker": 1,
-    "defaults": { "model": "chisel:cobblestonemossy/mossy" },
+    "defaults": { "model": "chisel:mossy/mossy" },
     "variants": {
         "array"         : [{ "textures": { "bot": "chisel:blocks/cobblestone/array"          } }],
         "braid"         : [{ "textures": { "bot": "chisel:blocks/cobblestone/braid"          } }],
@@ -15,7 +15,7 @@
         "chaotic-small" : [{ "textures": { "bot": "chisel:blocks/cobblestone/chaotic-small"  } }],
         "circular"      : [{ "textures": { "bot": "chisel:blocks/cobblestone/circular"       } }],
         "circularct"    : [{
-            "model"   : "chisel:cobblestonemossy/mossy_ctm",
+            "model"   : "chisel:mossy/mossy_ctm",
             "textures": {
                 "bot"          : "chisel:blocks/cobblestone/circular",
                 "connect_bot"  : "chisel:blocks/cobblestone/circular-ctm"
@@ -35,7 +35,7 @@
         "mosaic"        : [{ "textures": { "bot": "chisel:blocks/cobblestone/mosaic"         } }],
         "panel"         : [{ "textures": { "bot": "chisel:blocks/cobblestone/panel"          } }],
         "pillar"        : [{
-            "model"   : "chisel:cobblestonemossy/mossy_column",
+            "model"   : "chisel:mossy/mossy_column",
             "textures": {
                 "side": "chisel:blocks/cobblestone/pillar-side",
                 "end" : "chisel:blocks/cobblestone/pillar-top"
@@ -49,7 +49,7 @@
         "tiles-medium"  : [{ "textures": { "bot": "chisel:blocks/cobblestone/tiles-medium"   } }],
         "tiles-small"   : [{ "textures": { "bot": "chisel:blocks/cobblestone/tiles-small"    } }],
         "twisted"       : [{
-            "model"   : "chisel:cobblestonemossy/mossy_column",
+            "model"   : "chisel:mossy/mossy_column",
             "textures": {
                 "side": "chisel:blocks/cobblestone/twisted-side",
                 "end" : "chisel:blocks/cobblestone/twisted-top"
