@@ -63,6 +63,7 @@ import team.chisel.common.block.BlockAutoChisel;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableCarpet;
 import team.chisel.common.block.BlockCarvableFalling;
+import team.chisel.common.block.BlockCarvableIce;
 import team.chisel.common.block.BlockCarvablePane;
 import team.chisel.common.block.ItemChiselBlock;
 import team.chisel.common.block.TileAutoChisel;
@@ -1747,9 +1748,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("ice", CarvingUtils.variationFor(Blocks.ICE.getDefaultState(), -1));
 
-            BlockCreator<BlockCarvable> iceCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) { {
-                    this.slipperiness = 0.98F;
-            } };
+            BlockCreator<BlockCarvable> iceCreator = BlockCarvableIce::new;
 
             factory.newBlock(Material.ICE, "ice", new ChiselBlockProvider<>(iceCreator, BlockCarvable.class)).opaque(false)
                     .newVariation("cracked")
@@ -1787,7 +1786,7 @@ public enum Features {
                     .next("cuts")
                     .addOreDict("ice")
                     .addOreDict("blockIce")
-                    .build(b -> b.setHardness(0.5F).setLightOpacity(3).setSoundType(SoundType.GLASS));
+                    .build(b -> b.setHardness(0.5F).setLightOpacity(3).setSoundType(SoundType.GLASS).setHarvestLevel("pickaxe", 0));
 
             factory.newBlock(Material.ICE, "icepillar", new ChiselBlockProvider<>(iceCreator, BlockCarvable.class)).opaque(false)
                     .setGroup("ice")
