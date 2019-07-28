@@ -1940,7 +1940,7 @@ public enum Features {
                     .next("a1-blocklapis-ornatelayer")
                     .next("masonryLapis")
                     .addOreDict("blockLapis")
-                    .build(b-> b.setHardness(3.0F).setResistance(5.0F).setSoundType(SoundType.STONE));
+                    .build(b-> b.setHardness(3.0F).setResistance(5.0F).setSoundType(SoundType.STONE).setHarvestLevel("pickaxe", 1));
             
             CarvingUtils.addOreGroup("blockLapis");
         }
