@@ -1550,7 +1550,7 @@ tile.chisel.emerald.masonryEmerald.desc.1=Masonry
 tile.chisel.emerald.emeraldCircle.desc.1=Circular
 tile.chisel.emerald.emeraldPrismatic.desc.1=Prism
 
-tile.chisel.endstone.name=Endstone
+tile.chisel.endstone.name=End Stone
 tile.chisel.endstone.cracked.desc.1=Cracked
 tile.chisel.endstone.bricks-solid.desc.1=Bricks
 tile.chisel.endstone.bricks-soft.desc.1=Weathered Bricks
