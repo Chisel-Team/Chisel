@@ -690,7 +690,7 @@ tile.chisel.cobblestone.marker.desc.1=Marker
 tile.chisel.cobblestone.sunken.desc.1=Sunken
 tile.chisel.cobblestone.poison.desc.1=Poison
 
-tile.chisel.cobblestonemossy.name=Mossy Cobblestone
+tile.chisel.cobblestonemossy.name=Moss Stone
 tile.chisel.cobblestonemossy.cracked.desc.1=Cracked
 tile.chisel.cobblestonemossy.bricks-soft.desc.1=Weathered Bricks
 tile.chisel.cobblestonemossy.bricks-cracked.desc.1=Cracked Bricks
