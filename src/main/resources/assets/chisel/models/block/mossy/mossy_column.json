@@ -1,0 +1,33 @@
+{
+  "parent": "block/block",
+  "textures": {
+  	"top": "chisel:blocks/mossy/mossy",
+  	"particle": "#side"
+  },
+  "elements": [
+    {
+      "from": [  0,  0,  0 ],
+      "to":   [ 16, 16, 16 ],
+      "faces": {
+        "down" : { "texture": "#end", "cullface": "down"  },
+        "up"   : { "texture": "#end", "cullface": "up"    },
+        "north": { "texture": "#side", "cullface": "north" },
+        "south": { "texture": "#side", "cullface": "south" },
+        "west" : { "texture": "#side", "cullface": "west"  },
+        "east" : { "texture": "#side", "cullface": "east"  }
+      }
+    },
+    {
+      "from": [  0,  0,  0 ],
+      "to":   [ 16, 16, 16 ],
+      "faces": {
+        "down" : { "texture": "#top" , "cullface": "down" },
+        "up"   : { "texture": "#top" , "cullface": "up"   },
+        "north": { "texture": "#top", "cullface": "north" },
+        "south": { "texture": "#top", "cullface": "south" },
+        "west" : { "texture": "#top", "cullface": "west"  },
+        "east" : { "texture": "#top", "cullface": "east"  }
+      }
+    }
+  ]
+}
