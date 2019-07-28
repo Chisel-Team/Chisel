@@ -1891,7 +1891,7 @@ public enum Features {
                     .next("classicnew")
                     .next("fence")
                     .next("modern")
-                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f).setHarvestLevel("pickaxe", 1));
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(5.0f).setHarvestLevel("pickaxe", 0));
         }
     },
 
