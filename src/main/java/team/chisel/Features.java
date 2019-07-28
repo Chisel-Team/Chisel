@@ -1601,7 +1601,7 @@ public enum Features {
                     .next("bolted")
                     .next("scaffold")
                     .addOreDict("blockGold")
-                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F).setHarvestLevel("pickaxe", 1));
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F).setResistance(10.0F).setHarvestLevel("pickaxe", 2));
 
             factory.newBlock(Material.IRON, "gold", null, beaconBaseProvider)
                     .newVariation("terrain-gold-largeingot")
@@ -1620,7 +1620,7 @@ public enum Features {
                     .next("terrain-gold-simple")
                     .next("goldEye")
                     .addOreDict("blockGold")
-                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F).setHarvestLevel("pickaxe", 1));
+                    .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F).setResistance(10.0F).setHarvestLevel("pickaxe", 2));
             
             CarvingUtils.addOreGroup("blockGold");
         }
