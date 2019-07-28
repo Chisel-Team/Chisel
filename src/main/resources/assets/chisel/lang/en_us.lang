@@ -619,7 +619,7 @@ tile.chisel.certus.bricks-chaotic.desc.1=Trodden Bricks
 tile.chisel.certus.cuts.desc.1=Cuts
 
 tile.chisel.cloud.name=Cloud
-tile.chisel.cloud.cloud.desc.1=Cloud
+tile.chisel.cloud.cloud.desc.1=Raw
 tile.chisel.cloud.large.desc.1=Bricks
 tile.chisel.cloud.small.desc.1=Small Bricks
 tile.chisel.cloud.vertical.desc.1=Vertical Bricks
