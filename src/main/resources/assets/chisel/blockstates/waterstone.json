@@ -46,7 +46,7 @@
         "top": "chisel:blocks/fluid/cuts"
       }
     }],
-    "bdent": [{
+    "dent": [{
       "model"   : "chisel:waterstone/cube_pass_water",
       "textures": {
         "top": "chisel:blocks/fluid/dent"
