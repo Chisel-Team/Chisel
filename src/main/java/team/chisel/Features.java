@@ -646,12 +646,16 @@ public enum Features {
                     .next("prism")
                     .next("bricks-chaotic")
                     .next("cuts")
-                    .next("raw")
+                    .next("raw").setOrder(-20)
                     .addOreDict("blockCharcoal")
                     .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
             
             CarvingUtils.addOreGroup("blockCharcoal");
-
+        }
+        
+        @Override
+        void addItems(IForgeRegistry<Item> registry) {
+            OreDictionary.registerOre("charcoal", new ItemStack(Items.COAL, 1, 1));
         }
 
         @Override
