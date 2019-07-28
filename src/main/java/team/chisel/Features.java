@@ -1194,7 +1194,7 @@ public enum Features {
                     .next("emeraldCircle")
                     .next("emeraldPrismatic")
                     .addOreDict("blockEmerald")
-                    .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F).setHarvestLevel("pickaxe", 1));
+                    .build(b -> b.setSoundType(SoundType.METAL).setHardness(5.0F).setResistance(10.0F).setHarvestLevel("pickaxe", 2));
             
             CarvingUtils.addOreGroup("blockEmerald");
         }
