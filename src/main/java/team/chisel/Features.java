@@ -1748,9 +1748,9 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("ice", CarvingUtils.variationFor(Blocks.ICE.getDefaultState(), -1));
 
-            BlockCreator<BlockCarvable> iceCreator = BlockCarvableIce::new;
+            BlockCreator<BlockCarvableIce> iceCreator = BlockCarvableIce::new;
 
-            factory.newBlock(Material.ICE, "ice", new ChiselBlockProvider<>(iceCreator, BlockCarvable.class)).opaque(false)
+            factory.newBlock(Material.ICE, "ice", new ChiselBlockProvider<>(iceCreator, BlockCarvableIce.class)).opaque(false)
                     .newVariation("cracked")
                     .next("bricks-soft")
                     .next("bricks-cracked")
@@ -1788,7 +1788,7 @@ public enum Features {
                     .addOreDict("blockIce")
                     .build(b -> b.setHardness(0.5F).setLightOpacity(3).setSoundType(SoundType.GLASS).setHarvestLevel("pickaxe", 0));
 
-            factory.newBlock(Material.ICE, "icepillar", new ChiselBlockProvider<>(iceCreator, BlockCarvable.class)).opaque(false)
+            factory.newBlock(Material.ICE, "icepillar", new ChiselBlockProvider<>(iceCreator, BlockCarvableIce.class)).opaque(false)
                     .setGroup("ice")
                     .newVariation("plainplain")
                     .next("plaingreek")
@@ -1799,7 +1799,7 @@ public enum Features {
                     .next("ornamental")
                     .addOreDict("ice")
                     .addOreDict("blockIce")
-                    .build(b -> b.setHardness(0.5F).setLightOpacity(3).setSoundType(SoundType.GLASS));
+                    .build(b -> b.setHardness(0.5F).setLightOpacity(3).setSoundType(SoundType.GLASS).setHarvestLevel("pickaxe", 0));
         }
     },
 

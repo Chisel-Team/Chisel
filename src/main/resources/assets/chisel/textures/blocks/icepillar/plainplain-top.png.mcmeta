@@ -4,7 +4,7 @@
         "type": "pillar",
         "layer": "TRANSLUCENT",
         "textures": [
-            "chisel:blocks/icepillar/plainplain-ctmv.ctx"
+            "chisel:blocks/icepillar/plainplain-ctmv"
         ]
     }
 }

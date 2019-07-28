@@ -16,6 +16,7 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -32,6 +33,11 @@ public class BlockCarvableIce extends BlockCarvable {
         super(material, index, max, variations);
         this.slipperiness = 0.98F;
         this.setTickRandomly(true);
+    }
+    
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
     }
 
     // From BlockIce - Do Not Edit

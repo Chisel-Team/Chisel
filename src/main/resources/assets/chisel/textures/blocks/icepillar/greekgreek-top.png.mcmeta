@@ -4,7 +4,7 @@
         "type": "pillar",
         "layer": "TRANSLUCENT",
         "textures": [
-            "chisel:blocks/icepillar/convexplain-ctmv.ctx"
+            "chisel:blocks/icepillar/greekgreek-ctmv"
         ]
     }
 }
