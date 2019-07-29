@@ -23,7 +23,10 @@
       "type": "ctm",
       "textures": [
         "#all_ctm"
-      ]
+      ],
+      "extra": {
+      	"connect_inside": true
+      }
     }
   }
 }
