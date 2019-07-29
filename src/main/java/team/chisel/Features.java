@@ -1619,7 +1619,7 @@ public enum Features {
                     .next("terrain-gold-space")
                     .next("terrain-gold-spaceblack")
                     .next("terrain-gold-simple")
-                    .next("goldEye")
+//                    .next("goldEye")
                     .addOreDict("blockGold")
                     .build(b-> b.setSoundType(SoundType.METAL).setHardness(3.0F).setResistance(10.0F).setHarvestLevel("pickaxe", 2));
             
