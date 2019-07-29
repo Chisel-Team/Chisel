@@ -2288,7 +2288,7 @@ tile.chisel.paper.floral.desc.1=Flowers
 tile.chisel.paper.plain.desc.1=Plain
 tile.chisel.paper.door.desc.1=Door
 
-tile.chisel.planks-oak.name=Oak Planks
+tile.chisel.planks-oak.name=Oak Wood Planks
 tile.chisel.planks-oak.clean.desc.1=Smooth
 tile.chisel.planks-oak.short.desc.1=Planked
 tile.chisel.planks-oak.fancy.desc.1=Fancy
@@ -2305,7 +2305,7 @@ tile.chisel.planks-oak.crateex.desc.1=Scaffold
 tile.chisel.planks-oak.chaotic-hor.desc.1=Disarray Horizontal
 tile.chisel.planks-oak.chaotic.desc.1=Disarray Vertical
 
-tile.chisel.planks-spruce.name=Spruce Planks
+tile.chisel.planks-spruce.name=Spruce Wood Planks
 tile.chisel.planks-spruce.clean.desc.1=Smooth
 tile.chisel.planks-spruce.short.desc.1=Planked
 tile.chisel.planks-spruce.fancy.desc.1=Fancy
@@ -2322,7 +2322,7 @@ tile.chisel.planks-spruce.crateex.desc.1=Scaffold
 tile.chisel.planks-spruce.chaotic-hor.desc.1=Disarray Horizontal
 tile.chisel.planks-spruce.chaotic.desc.1=Disarray Vertical
 
-tile.chisel.planks-birch.name=Birch Planks
+tile.chisel.planks-birch.name=Birch Wood Planks
 tile.chisel.planks-birch.clean.desc.1=Smooth
 tile.chisel.planks-birch.short.desc.1=Planked
 tile.chisel.planks-birch.fancy.desc.1=Fancy
@@ -2339,7 +2339,7 @@ tile.chisel.planks-birch.crateex.desc.1=Scaffold
 tile.chisel.planks-birch.chaotic-hor.desc.1=Disarray Horizontal
 tile.chisel.planks-birch.chaotic.desc.1=Disarray Vertical
 
-tile.chisel.planks-jungle.name=Jungle Planks
+tile.chisel.planks-jungle.name=Jungle Wood Planks
 tile.chisel.planks-jungle.clean.desc.1=Smooth
 tile.chisel.planks-jungle.short.desc.1=Planked
 tile.chisel.planks-jungle.fancy.desc.1=Fancy
@@ -2356,7 +2356,7 @@ tile.chisel.planks-jungle.crateex.desc.1=Scaffold
 tile.chisel.planks-jungle.chaotic-hor.desc.1=Disarray Horizontal
 tile.chisel.planks-jungle.chaotic.desc.1=Disarray Vertical
 
-tile.chisel.planks-acacia.name=Acacia Planks
+tile.chisel.planks-acacia.name=Acacia Wood Planks
 tile.chisel.planks-acacia.clean.desc.1=Smooth
 tile.chisel.planks-acacia.short.desc.1=Planked
 tile.chisel.planks-acacia.fancy.desc.1=Fancy
@@ -2373,7 +2373,7 @@ tile.chisel.planks-acacia.crateex.desc.1=Scaffold
 tile.chisel.planks-acacia.chaotic-hor.desc.1=Disarray Horizontal
 tile.chisel.planks-acacia.chaotic.desc.1=Disarray Vertical
 
-tile.chisel.planks-dark-oak.name=Dark Oak Planks
+tile.chisel.planks-dark-oak.name=Dark Oak Wood Planks
 tile.chisel.planks-dark-oak.clean.desc.1=Smooth
 tile.chisel.planks-dark-oak.short.desc.1=Planked
 tile.chisel.planks-dark-oak.fancy.desc.1=Fancy
