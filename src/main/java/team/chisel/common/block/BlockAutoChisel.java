@@ -8,6 +8,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.google.common.collect.ImmutableList;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -41,6 +42,7 @@ public class BlockAutoChisel extends Block {
 
     public BlockAutoChisel() {
         super(Material.IRON);
+        setSoundType(SoundType.METAL);
         setHardness(2.5f);
         setHarvestLevel("pickaxe", 1);
         setUnlocalizedName("chisel.autochisel");
