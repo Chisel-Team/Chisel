@@ -2,20 +2,50 @@
     "forge_marker": 1,
     "defaults": { "model":"cube_all" },
     "variants": {
-        "fanstill"           : [{ "textures": { "all":"chisel:blocks/technical/fanStill"            } }],
+        "fanstill"        : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/technical/fanstill-side",
+                "end" : "chisel:blocks/technical/fanstill-top"
+            }
+        }],
         "vent"               : [{ "textures": { "all":"chisel:blocks/technical/vent"                } }],
         "insulationv2"       : [{ "textures": { "all":"chisel:blocks/technical/insulationv2"        } }],
         "massivefan"         : [{ "textures": { "all":"chisel:blocks/technical/massiveFan"          } }],
-        "fanfast"            : [{ "textures": { "all":"chisel:blocks/technical/fanFast"             } }],
+        "fanfast"        : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/technical/fanfast-side",
+                "end" : "chisel:blocks/technical/fanfast-top"
+            }
+        }],
         "scaffoldtransparent": [{ "textures": { "all":"chisel:blocks/technical/scaffoldTransparent" } }],
         "wallpads"           : [{ "textures": { "all":"chisel:blocks/technical/wallPads"            } }],
         "rustycover"         : [{ "textures": { "all":"chisel:blocks/technical/rustyCover"          } }],
-        "fanfasttransparent" : [{ "textures": { "all":"chisel:blocks/technical/fanFastTransparent"  } }],
+        "fanfasttransparent"        : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/technical/fanfasttransparent-side",
+                "end" : "chisel:blocks/technical/fanfasttransparent-top"
+            }
+        }],
         "industrialrelic"    : [{ "textures": { "all":"chisel:blocks/technical/industrialrelic"     } }],
-        "fanstilltransparent": [{ "textures": { "all":"chisel:blocks/technical/fanStillTransparent" } }],
+        "fanstilltransparent"        : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/technical/fanstilltransparent-side",
+                "end" : "chisel:blocks/technical/fanstilltransparent-top"
+            }
+        }],
         "rustyboltedplates"  : [{ "textures": { "all":"chisel:blocks/technical/rustyBoltedPlates"   } }],
         "cables"             : [{ "textures": { "all":"chisel:blocks/technical/cables"              } }],
-        "malfunctionfan"     : [{ "textures": { "all":"chisel:blocks/technical/malfunctionFan"      } }],
+        "malfunctionfan"        : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "chisel:blocks/technical/malfunctionfan-side",
+                "end" : "chisel:blocks/technical/malfunctionfan-top"
+            }
+        }],
         "massivehexplating"  : [{ "textures": { "all":"chisel:blocks/technical/massiveHexPlating"   } }],
         "old"                : [{ "textures": { "all":"chisel:blocks/technical/old"                 } }],
         "grate"              : [{ "textures": { "all":"chisel:blocks/technical/grate"               } }],
