@@ -233,10 +233,13 @@ public class ItemOffsetTool extends Item {
 
     private boolean canOffset(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);
-        IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(state);
-        if (!player.getHeldItem(hand).isEmpty() && player.getHeldItem(hand).getItem() == this && model instanceof AbstractCTMBakedModel) {
-            return true;
+        if (player.getHeldItem(hand).isEmpty() || player.getHeldItem(hand).getItem() != this) {
+            return false;
         }
-        return false;
+        IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(state);
+        if (!(model instanceof AbstractCTMBakedModel)) {
+            return false;
+        }
+        return true;
     }
 }
