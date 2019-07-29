@@ -8,7 +8,8 @@
         "type": "pattern",
         "layer": "CUTOUT",
         "extra": {
-            "size": 2
+            "size": 2,
+            "light": 8
         }
     }
 }
