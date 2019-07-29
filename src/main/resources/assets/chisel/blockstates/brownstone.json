@@ -13,7 +13,7 @@
         }],
         "weathered-block"     : [{ "textures": { "all": "chisel:blocks/concrete/weathered-block"      }}],
         "blocks"              : [{ "textures": { "all": "chisel:blocks/concrete/blocks"               }}],
-        "block"               : [{ "textures": { "all": "chisel:blocks/concrete/block_ctm"            }}],
+        "block"               : [{ "textures": { "all": "chisel:blocks/concrete/block"                }}],
         "weathered"           : [{ "textures": { "all": "chisel:blocks/concrete/weathered"            }}],
         "weathered-doubleslab": [{
             "model"   : "cube_column",
