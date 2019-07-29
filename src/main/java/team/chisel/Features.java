@@ -647,7 +647,7 @@ public enum Features {
                     .next("prism")
                     .next("bricks-chaotic")
                     .next("cuts")
-                    .next("raw").setOrder(-20)
+                    .next("raw")
                     .addOreDict("blockCharcoal")
                     .build(b -> b.setHardness(5.0F).setResistance(10.0F).setSoundType(SoundType.STONE));
             
@@ -2576,9 +2576,9 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             IBlockState ss = Blocks.SANDSTONE.getDefaultState();
             IProperty<BlockSandStone.EnumType> prop = BlockSandStone.TYPE;
-            Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.DEFAULT), -3));
-            Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.SMOOTH), -2));
-            Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.CHISELED), -1));
+            Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.DEFAULT), -13));
+            Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.SMOOTH), -11));
+            Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.CHISELED), -10));
 
             factory.newBlock(Material.ROCK, "sandstoneyellow", provider) // REMAP!
                     .newVariation("cracked")
@@ -2620,6 +2620,7 @@ public enum Features {
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
+                    .next("seamless").setOrder(-12)
                     .addOreDict("sandstone")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
         }
@@ -2631,9 +2632,9 @@ public enum Features {
             IBlockState ss = Blocks.RED_SANDSTONE.getDefaultState();
             IProperty<BlockRedSandstone.EnumType> prop = BlockRedSandstone.TYPE;
 
-            Carving.chisel.addVariation("sandstonered", CarvingUtils.variationFor(ss.withProperty(prop, BlockRedSandstone.EnumType.DEFAULT), -3));
-            Carving.chisel.addVariation("sandstonered", CarvingUtils.variationFor(ss.withProperty(prop, BlockRedSandstone.EnumType.SMOOTH), -2));
-            Carving.chisel.addVariation("sandstonered", CarvingUtils.variationFor(ss.withProperty(prop, BlockRedSandstone.EnumType.CHISELED), -1));
+            Carving.chisel.addVariation("sandstonered", CarvingUtils.variationFor(ss.withProperty(prop, BlockRedSandstone.EnumType.DEFAULT), -13));
+            Carving.chisel.addVariation("sandstonered", CarvingUtils.variationFor(ss.withProperty(prop, BlockRedSandstone.EnumType.SMOOTH), -11));
+            Carving.chisel.addVariation("sandstonered", CarvingUtils.variationFor(ss.withProperty(prop, BlockRedSandstone.EnumType.CHISELED), -10));
 
             factory.newBlock(Material.ROCK, "sandstonered", provider) // REMAP!
                     .newVariation("cracked")
@@ -2675,6 +2676,7 @@ public enum Features {
                     .next("pillar")
                     .next("twisted")
                     .next("prism")
+                    .next("seamless").setOrder(-12)
                     .addOreDict("sandstone")
                     .build(b -> b.setSoundType(SoundType.STONE).setHardness(0.8F));
         }
@@ -2845,6 +2847,8 @@ public enum Features {
                     .next("largeornate")
                     .next("poison")
                     .next("sunken")
+                    .next("doubleslab").setOrder(-28)
+                    .next("doubleslab-seamless").setOrder(-27)
                     .addOreDict("stone")
                     .addOreDict("brickStone")
                     .addOreDict("bricksStone")

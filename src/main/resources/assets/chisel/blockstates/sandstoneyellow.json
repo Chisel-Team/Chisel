@@ -57,6 +57,7 @@
         }],
         "slanted"       : [{ "textures": { "all": "chisel:blocks/sandstoneyellow/slanted"        } }],
         "weaver"        : [{ "textures": { "all": "chisel:blocks/sandstoneyellow/weaver"         } }],
-        "zag"           : [{ "textures": { "all": "chisel:blocks/sandstoneyellow/zag"            } }]
+        "zag"           : [{ "textures": { "all": "chisel:blocks/sandstoneyellow/zag"            } }],
+        "seamless"      : [{ "textures": { "all": "blocks/sandstone_top"                        } }]
     }
 }

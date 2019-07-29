@@ -59,6 +59,14 @@
         }],
         "slanted"       : [{ "textures": { "all": "chisel:blocks/stone/slanted"           } }],
         "weaver"        : [{ "textures": { "all": "chisel:blocks/stone/weaver"            } }],
-        "zag"           : [{ "textures": { "all": "chisel:blocks/stone/zag"               } }]
+        "zag"           : [{ "textures": { "all": "chisel:blocks/stone/zag"               } }],
+        "doubleslab"    : [{
+            "model"   : "cube_column",
+            "textures": {
+                "side": "blocks/stone_slab_side",
+                "end" : "blocks/stone_slab_top"
+            }
+        }],
+        "doubleslab-seamless" : [{ "textures": { "all": "blocks/stone_slab_top"         } }]
     }
 }

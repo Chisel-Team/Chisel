@@ -2617,6 +2617,7 @@ tile.chisel.sandstoneyellow.marker.desc.1=Marker
 tile.chisel.sandstoneyellow.sunken.desc.1=Sunken
 tile.chisel.sandstoneyellow.poison.desc.1=Poison
 tile.chisel.sandstoneyellow.cuts.desc.1=Cuts
+tile.chisel.sandstoneyellow.seamless.desc.1=Seamless Double Slab
 
 tile.chisel.sandstonered.name=Red Sandstone
 tile.chisel.sandstonered.cracked.desc.1=Cracked
@@ -2660,6 +2661,7 @@ tile.chisel.sandstonered.marker.desc.1=Marker
 tile.chisel.sandstonered.sunken.desc.1=Sunken
 tile.chisel.sandstonered.poison.desc.1=Poison
 tile.chisel.sandstonered.cuts.desc.1=Cuts
+tile.chisel.sandstonered.seamless.desc.1=Seamless Double Slab
 
 tile.chisel.sandstone-scribbles.name=Sandstone Scribbles
 tile.chisel.sandstone-scribbles.scribbles-0.desc.1=Hieroglyphs 1
@@ -2760,6 +2762,8 @@ tile.chisel.stonebrick.marker.desc.1=Marker
 tile.chisel.stonebrick.sunken.desc.1=Sunken
 tile.chisel.stonebrick.poison.desc.1=Poison
 tile.chisel.stonebrick.cuts.desc.1=Cuts
+tile.chisel.stonebrick.doubleslab.desc.1=Double Slab
+tile.chisel.stonebrick.doubleslab-seamless.desc.1=Seamless Double Slab
 
 tile.chisel.technical.name=Factory Block
 tile.chisel.technical.scaffold.desc.1=Rusty Scaffold
