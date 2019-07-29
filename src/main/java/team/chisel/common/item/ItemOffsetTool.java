@@ -22,11 +22,13 @@ import com.google.common.collect.Maps;
 
 import lombok.ToString;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -50,6 +52,7 @@ import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.NBTSaveable;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.ChunkDataBase;
+import team.chisel.ctm.client.model.AbstractCTMBakedModel;
 
 @ParametersAreNonnullByDefault
 public class ItemOffsetTool extends Item {
@@ -230,15 +233,8 @@ public class ItemOffsetTool extends Item {
 
     private boolean canOffset(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side) {
         IBlockState state = world.getBlockState(pos);
-        if (!player.getHeldItem(hand).isEmpty() && player.getHeldItem(hand).getItem() == this && state.getBlock() instanceof ICarvable) {
-            ICarvable carvable = (ICarvable) state.getBlock();
-//            IVariationInfo info = carvable.getManager(player.worldObj.getBlockMetadata(x, y, z));
-//            if (info.getManager() instanceof IOffsetRendered) {
-//                return ((IOffsetRendered) info.getManager()).canOffset(world, x, y, z, side);
-//            } else if (carvable instanceof IOffsetRendered) {
-//                return ((IOffsetRendered) carvable).canOffset(world, x, y, z, side);
-//            }
-//            return validTypes.contains(info.getType());
+        IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(state);
+        if (!player.getHeldItem(hand).isEmpty() && player.getHeldItem(hand).getItem() == this && model instanceof AbstractCTMBakedModel) {
             return true;
         }
         return false;
