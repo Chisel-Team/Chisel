@@ -135,6 +135,8 @@ public class ContainerChisel extends Container {
                     }
                     SoundUtil.playSound(entity, getChisel(), itemstack1);
                     itemstack1 = SlotChiselSelection.craft(this, entity, itemstack1, false);
+                    itemstack1.shrink(check.getCount());
+                    getInventoryChisel().setStackInSpecialSlot(check);
 
                 } else if (!this.mergeItemStack(itemstack1, getInventoryChisel().size + 1, getInventoryChisel().size + 1 + 36, true)) {
                     return ItemStack.EMPTY;
@@ -167,7 +169,9 @@ public class ContainerChisel extends Container {
                 }
                 return ItemStack.EMPTY;
             } else {
-                slot.putStack(itemstack1);
+                if (!clearSlot) {
+                    slot.putStack(itemstack1);
+                }
                 return itemstack1;
             }
         }
