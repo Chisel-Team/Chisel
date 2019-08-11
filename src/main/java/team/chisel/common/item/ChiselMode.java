@@ -200,7 +200,14 @@ public enum ChiselMode implements IChiselMode {
                     for (EnumFacing face : directionsToSearch) {
                         BlockPos bp = ret.getPos().offset(face);
                         if (!seen.contains(bp) && world.getBlockState(bp) == state) {
-                            search.offer(new Node(bp, ret.getDistance() + 1));
+                            for (EnumFacing obscureCheck : EnumFacing.VALUES) {
+                                BlockPos obscuringPos = bp.offset(obscureCheck);
+                                IBlockState obscuringState = world.getBlockState(obscuringPos);
+                                if (!obscuringState.isSideSolid(world, obscuringPos, obscureCheck.getOpposite())) {
+                                    search.offer(new Node(bp, ret.getDistance() + 1));
+                                    break;
+                                }
+                            }
                         }
                         seen.add(bp);
                     }
