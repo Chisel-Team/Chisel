@@ -202,6 +202,8 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         }
     }
     
+    private float anim = 0;
+    
     public void draw() {
         if (checkDirty()) {
             updateCache();
@@ -211,8 +213,9 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         float c = 1;
         float a = 0.2f;
         if (timer != null) {
-            c = Math.round(( ((float) Math.sin((Minecraft.getMinecraft().world.getTotalWorldTime() + timer.renderPartialTicks) / 5)) / 2) + 0.5f);
-            a = Math.abs(2 * (float) Math.sin(((Minecraft.getMinecraft().world.getTotalWorldTime() + timer.renderPartialTicks) / 5))) * 0.1f;
+            c = Math.round(( ((float) Math.sin(anim / 10)) / 2) + 0.5f);
+            a = Math.abs(2 * (float) Math.sin(anim / 10)) * 0.1f;
+            anim += timer.elapsedPartialTicks;
         }
         
         GlStateManager.pushMatrix();
