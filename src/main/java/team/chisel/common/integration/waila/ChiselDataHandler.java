@@ -39,10 +39,13 @@ public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
     @SideOnly(Side.CLIENT)
     public List<String> getWailaBody(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
         if (accessor.getBlock() instanceof ICarvable) {
-            ItemChiselBlock item = (ItemChiselBlock) ForgeRegistries.ITEMS.getValue(accessor.getBlock().getRegistryName());
-            ICarvable block = (ICarvable) accessor.getBlock();
-            int variation = block.getVariationIndex(accessor.getBlockState());
-            item.addInformation(new ItemStack(item, 1, variation), accessor.getWorld(), strings, ITooltipFlag.TooltipFlags.NORMAL);
+            if (stack.getItem() instanceof ItemChiselBlock) {
+                ((ItemChiselBlock)stack.getItem()).addTooltips(stack, strings);
+            } else {
+                ICarvable block = (ICarvable) accessor.getBlock();
+                int variation = block.getVariationIndex(accessor.getBlockState());
+                ItemChiselBlock.addTooltips(block, variation, strings);
+            }
         }
         return strings;
     }

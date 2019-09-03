@@ -1,10 +1,17 @@
 package team.chisel.common.block;
 
+import java.util.IllegalFormatException;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -12,12 +19,6 @@ import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 import team.chisel.common.config.Configurations;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.IllegalFormatException;
-import java.util.List;
 
 /**
  * Class for the items for the chisel block
@@ -33,21 +34,30 @@ public class ItemChiselBlock extends ItemBlock {
         this.setHasSubtypes(true);
     }
     
-    private String getTooltipUnloc(ItemStack stack) {
-        VariationData varData = block.getVariationData(stack.getItemDamage());
-        return stack.getUnlocalizedName() + "." + varData.name + ".desc.";
+    private static String getTooltipUnloc(ICarvable block, int index) {
+        VariationData varData = block.getVariationData(index);
+        return ((Block)block).getUnlocalizedName() + "." + varData.name + ".desc.";
     }
 
-    @SuppressWarnings("deprecation")
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
+        addTooltips(stack, tooltip);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public void addTooltips(ItemStack stack, List<String> tooltip) {
+        addTooltips(block, stack.getItemDamage(), tooltip);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public static void addTooltips(ICarvable block, int index, List<String> tooltip) {
         try {
             // Skip first line if this config is deactivated, as it will be part of display name
             int line = Configurations.blockDescriptions ? 1 : 2;
-            String desc = getTooltipUnloc(stack);
-            while (I18n.canTranslate(desc + line) || line == 1) {
-                tooltip.add(net.minecraft.client.resources.I18n.format(desc + line));
+            String desc = getTooltipUnloc(block, index);
+            while (I18n.hasKey(desc + line) || line == 1) {
+                tooltip.add(I18n.format(desc + line));
                 desc.replaceAll(line++ + "$", "." + line);
             }
         } catch (Exception ignored) {
@@ -67,13 +77,13 @@ public class ItemChiselBlock extends ItemBlock {
             String unlocpattern = "chisel.tooltip.blockname";
             String ret = null;
             try {
-                ret = I18n.translateToLocalFormatted(
+                ret = net.minecraft.util.text.translation.I18n.translateToLocalFormatted(
                         unlocpattern, 
                         super.getItemStackDisplayName(stack), 
-                        I18n.translateToLocalFormatted(getTooltipUnloc(stack) + "1")
+                        net.minecraft.util.text.translation.I18n.translateToLocalFormatted(getTooltipUnloc(block, stack.getItemDamage()) + "1")
                 );
             } catch (IllegalFormatException e) {
-                String raw = I18n.translateToLocal(unlocpattern);
+                String raw = net.minecraft.util.text.translation.I18n.translateToLocal(unlocpattern);
                 Chisel.logger.error("Invalid name pattern {}, check your resource pack lang key for {}", raw, unlocpattern);
             }
             if (ret != null) {
