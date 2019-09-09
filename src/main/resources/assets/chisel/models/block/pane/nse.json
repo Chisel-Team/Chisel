@@ -1,0 +1,41 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "#pane"
+    },
+    "elements": [
+        {   "from": [ 7, 0, 0 ],
+            "to": [ 9, 16, 16 ],
+            "shade": false,
+            "faces": {
+                "down":  { "texture": "#edge" },
+                "up":    { "texture": "#edge" },
+                "north": { "texture": "#edge", "cullface": "north" },
+                "south": { "texture": "#edge", "cullface": "south" },
+                "west":  { "texture": "#pane", "tintindex": 0 },
+                "east":  { "texture": "#pane", "tintindex": 0 }
+            }
+        },
+        {   "from": [ 9, 0, 7 ],
+            "to": [ 16, 16, 9 ],
+            "shade": false,
+            "faces": {
+                "down":  { "rotation": 90, "texture": "#edge" },
+                "up":    { "rotation": 90, "texture": "#edge" },
+                "north": { "texture": "#pane", "tintindex": 0 },
+                "south": { "texture": "#pane", "tintindex": 0 },
+                "west":  { "texture": "#edge" },
+                "east":  { "texture": "#edge", "cullface": "east" }
+            }
+        }
+    ],
+    "ctm_version": 1,
+    "ctm_overrides": {
+        "0": {
+            "type": "ctm",
+            "layer": "CUTOUT_MIPPED",
+            "textures": [ "#pane_ct" ],
+            "extra": { "connect_inside": true, "use_actual_state": false }
+        }
+    }
+}

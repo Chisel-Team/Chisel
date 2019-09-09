@@ -1404,6 +1404,31 @@ public enum Features {
 
             factory.newBlock(Material.GLASS, "glass", new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
                     .newVariation("terrain-glassbubble")
+                    .next("chinese")
+                    .next("japanese")
+                    .next("terrain-glassdungeon")
+                    .next("terrain-glasslight")
+                    .next("terrain-glassnoborder")
+                    .next("terrain-glass-ornatesteel")
+                    .next("terrain-glass-screen")
+                    .next("terrain-glassshale")
+                    .next("terrain-glass-steelframe")
+                    .next("terrain-glassstone")
+                    .next("terrain-glassstreak")
+                    .next("terrain-glass-thickgrid")
+                    .next("terrain-glass-thingrid")
+                    .next("a1-glasswindow-ironfencemodern")
+                    .next("chrono")
+                    .next("chinese2")
+                    .next("japanese2")
+                    .addOreDict("blockGlass")
+                    .addOreDict("blockGlassColorless")
+                    .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
+
+            Carving.chisel.addVariation("glasspane", CarvingUtils.variationFor(Blocks.GLASS_PANE.getDefaultState(), -20));
+            
+            factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
+                    .newVariation("terrain-glassbubble")
                     .next("terrain-glass-chinese")
                     .next("japanese")
                     .next("terrain-glassdungeon")
@@ -1419,21 +1444,7 @@ public enum Features {
                     .next("terrain-glass-thingrid")
                     .next("a1-glasswindow-ironfencemodern")
                     .next("chrono")
-                    .addOreDict("blockGlass")
-                    .addOreDict("blockGlassColorless")
-                    .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
-            
-            
-            Carving.chisel.addVariation("glasspane", CarvingUtils.variationFor(Blocks.GLASS_PANE.getDefaultState(), -20));
-            
-            factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
-                    .newVariation("terrain-glassbubble")
-                    .next("terrain-glassnoborder")
-                    .next("terrain-glass-screen")
-                    .next("terrain-glassstreak")
-                    .next("chinese")
                     .next("chinese2")
-                    .next("japanese")
                     .next("japanese2")
                     .addOreDict("paneGlass")
                     .addOreDict("paneGlassColorless")
@@ -1449,8 +1460,7 @@ public enum Features {
             IBlockState stainedGlassPane = Blocks.STAINED_GLASS_PANE.getDefaultState();
             IProperty<EnumDyeColor> prop = BlockStainedGlass.COLOR;
 
-            for(int c = 0; c < dyeColors.length; c++)
-            {
+            for(int c = 0; c < dyeColors.length; c++) {
                 final int i = c;
 
                 BlockCreator<BlockCarvable> glassCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
@@ -1472,11 +1482,11 @@ public enum Features {
                     }
                 };
 
-                Carving.chisel.addVariation("glassdyed" + (dyeColors[c].toLowerCase()), CarvingUtils.variationFor(stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
+                Carving.chisel.addVariation("glassdyed" + dyeColors[c].toLowerCase(), CarvingUtils.variationFor(stainedGlass.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
 
 
-                factory.newBlock(Material.GLASS, "glassdyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
-                        .setParentFolder("glass_stained/"+dyeColors[c].toLowerCase())
+                factory.newBlock(Material.GLASS, "glassdyed" + dyeColors[c].toLowerCase(), new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
+                        .setParentFolder("glass_stained/" + dyeColors[c].toLowerCase())
                         .newVariation("panel")
                         .next("framed")
                         .next("framed_fancy")
@@ -1486,8 +1496,8 @@ public enum Features {
                         .addOreDict("blockGlass")
                         .addOreDict("blockGlass"+dyeColors[c])
                         .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
-                
-                
+
+
                 Carving.chisel.addVariation("glasspanedyed" + (dyeColors[c].toLowerCase()), CarvingUtils.variationFor(stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
 
 //                factory.newBlock(Material.GLASS, "glasspanedyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))

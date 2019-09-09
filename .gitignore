@@ -1,5 +1,6 @@
 /download
 /eclipseBin
+/logs
 
 ## gradle
 /.gradle

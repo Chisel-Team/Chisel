@@ -5,8 +5,8 @@
     "ambientocclusion": false,
     "model": "pane_post",
     "textures": {
-      "edge"    : "chisel:blocks/glasspane/chinese2-top",
-      "pane"    : "chisel:blocks/glasspane/chinese2-side"
+      "edge"    : "chisel:blocks/glass/chinese2-top",
+      "pane"    : "chisel:blocks/glass/chinese2"
     }
   },
   "variants": {

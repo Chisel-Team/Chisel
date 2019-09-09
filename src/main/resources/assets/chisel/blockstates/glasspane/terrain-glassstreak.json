@@ -5,7 +5,7 @@
     "ambientocclusion": false,
     "model": "pane_post",
     "textures": {
-      "edge": "chisel:blocks/glasspane/terrain-glassstreak-top",
+      "edge": "chisel:blocks/glass/terrain-glassstreak-top",
       "pane": "chisel:blocks/glass/terrain-glassstreak"
     }
   },

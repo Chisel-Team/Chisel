@@ -1,0 +1,18 @@
+{
+    "ambientocclusion": false,
+    "textures": { "particle": "#pane" },
+    "elements": [{
+        "from": [ 7,  0, 7 ],
+        "to"  : [ 9, 16, 9 ],
+        "faces": { "east": { "texture": "#pane" }}
+    }],
+    "_ctm_version": 1,
+    "_ctm_overrides": {
+        "0": {
+            "type": "ctm",
+            "layer": "CUTOUT_MIPPED",
+            "textures": [ "#pane_ct" ],
+            "extra": { "connect_inside": true }
+        }
+    }
+}

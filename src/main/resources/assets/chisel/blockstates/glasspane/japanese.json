@@ -5,32 +5,32 @@
     "ambientocclusion": false,
     "model": "pane_post",
     "textures": {
-      "edge"    : "chisel:blocks/glasspane/japanese-top",
+      "edge"    : "chisel:blocks/glass/japanese-top",
       "pane"    : "chisel:blocks/glass/japanese"
     }
   },
   "variants": {
     "inventory": [{ "submodel": {
-      "side_n": { "model": "pane_noside"              },
-      "side_e": { "model": "pane_side"      , "y": 90 },
-      "side_s": { "model": "pane_noside_alt", "y": 90 },
-      "side_w": { "model": "pane_side_alt"  , "y": 90 }
+      "side_n": { "model": "chisel:pane/pane_noside"          },
+      "side_e": { "model": "chisel:pane/pane_side"  , "y": 90 },
+      "side_s": { "model": "chisel:pane/pane_noside", "y": 90 },
+      "side_w": { "model": "chisel:pane/pane_side"  , "y": 90 }
     }}],
     "north": {
-      "true":  { "submodel": { "side_n": { "model": "pane_side"                 }}},
-      "false": { "submodel": { "side_n": { "model": "pane_noside"               }}}
+      "true":  { "submodel": { "side_n": { "model": "chisel:pane/pane_side"             }}},
+      "false": { "submodel": { "side_n": { "model": "chisel:pane/pane_noside"           }}}
     },
     "east" : {
-      "true":  { "submodel": { "side_e": { "model": "pane_side"      , "y":  90 }}},
-      "false": { "submodel": { "side_e": { "model": "pane_noside_alt"           }}}
+      "true":  { "submodel": { "side_e": { "model": "chisel:pane/pane_side"  , "y":  90 }}},
+      "false": { "submodel": { "side_e": { "model": "chisel:pane/pane_noside"           }}}
     },
     "south": {
-      "true":  { "submodel": { "side_s": { "model": "pane_side_alt"             }}},
-      "false": { "submodel": { "side_s": { "model": "pane_noside_alt", "y":  90 }}}
+      "true":  { "submodel": { "side_s": { "model": "chisel:pane/pane_side"             }}},
+      "false": { "submodel": { "side_s": { "model": "chisel:pane/pane_noside", "y":  90 }}}
     },
     "west" : {
-      "true":  { "submodel": { "side_w": { "model": "pane_side_alt"  , "y":  90 }}},
-      "false": { "submodel": { "side_w": { "model": "pane_noside"    , "y": 270 }}}
+      "true":  { "submodel": { "side_w": { "model": "chisel:pane/pane_side"  , "y":  90 }}},
+      "false": { "submodel": { "side_w": { "model": "chisel:pane/pane_noside", "y": 270 }}}
     }
   }
 }

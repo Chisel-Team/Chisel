@@ -5,7 +5,7 @@
         "ambientocclusion": false,
         "model": "pane_post",
         "textures": {
-            "edge"    : "chisel:blocks/glasspane/chinese-top",
+            "edge"    : "chisel:blocks/glass/chinese-top",
             "pane"    : "chisel:blocks/glass/terrain-glass-chinese"
         }
     },
