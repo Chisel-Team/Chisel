@@ -22,8 +22,8 @@
             "textures": [ "#pane_ct" ],
             "extra": {
                 "connect_inside": true,
-                "use_actual_state": false,
-                "__connect_to": {
+                "use_actual_state": true,
+                "connect_to": {
                     "NORTH": { "block": "chisel:glasspane", "predicate": [{ "east" : true }, { "west" : true }] },
                     "SOUTH": { "block": "chisel:glasspane", "predicate": [{ "east" : true }, { "west" : true }] },
                     "EAST" : { "block": "chisel:glasspane", "predicate": [{ "north": true }, { "south": true }] },
