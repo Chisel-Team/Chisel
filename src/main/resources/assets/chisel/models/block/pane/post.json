@@ -7,10 +7,10 @@
         "faces": {
             "down" : { "texture": "#edge" },
             "up"   : { "texture": "#edge" },
-            "north": { "texture": "#pane" },
-            "south": { "texture": "#pane" },
-            "west" : { "texture": "#pane" },
-            "east" : { "texture": "#pane" }
+            "north": { "texture": "#edge" },
+            "south": { "texture": "#edge" },
+            "west" : { "texture": "#edge" },
+            "east" : { "texture": "#edge" }
         }
     }]
 }

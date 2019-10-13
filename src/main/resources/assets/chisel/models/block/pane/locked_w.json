@@ -6,8 +6,8 @@
         "to"  : [ 9, 16, 9 ],
         "shade": false,
         "faces": {
-            "down" : { "texture": "#edge", "uv": [ 9, 9, 7,  0 ], "rotation": 90 },
-            "up"   : { "texture": "#edge", "uv": [ 7, 7, 9, 16 ], "rotation": 90 },
+            "down" : { "texture": "#edge" },
+            "up"   : { "texture": "#edge" },
             "north": { "texture": "#pane" },
             "south": { "texture": "#pane" },
             "east" : { "texture": "#edge" },

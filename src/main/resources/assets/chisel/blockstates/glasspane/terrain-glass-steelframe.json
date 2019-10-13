@@ -3,35 +3,35 @@
   "defaults": {
     "transform": "forge:default-item",
     "ambientocclusion": false,
-    "uvlock": true,
-    "model": "pane_post",
+    "model": "chisel:pane/pane_post",
     "textures": {
-      "edge": "blocks/redstone_block",
-      "pane": "blocks/redstone_block"
+      "edge"   : "chisel:blocks/glass/edge_steel",
+      "pane"   : "chisel:blocks/glass/terrain-glass-steelframe",
+      "pane_ct": "chisel:blocks/glass/terrain-glass-steelframe-ctm"
     }
   },
   "variants": {
-    "inventory": [{ "submodel": {
-      "side_n": { "model": "pane_noside"              },
-      "side_e": { "model": "pane_side"      , "y": 90 },
-      "side_s": { "model": "pane_noside_alt", "y": 90 },
-      "side_w": { "model": "pane_side_alt"  , "y": 90 }
-    }}],
-    "north": {
-      "true":  { "submodel": { "side_n": { "model": "pane_side"      , "uvlock": true           }}},
-      "false": { "submodel": { "side_n": { "model": "pane_noside"    , "uvlock": true           }}}
-    },
-    "east" : {
-      "true":  { "submodel": { "side_e": { "model": "pane_side"      , "uvlock": true, "y":  90 }}},
-      "false": { "submodel": { "side_e": { "model": "pane_noside_alt", "uvlock": true           }}}
-    },
-    "south": {
-      "true":  { "submodel": { "side_s": { "model": "pane_side_alt"  , "uvlock": true           }}},
-      "false": { "submodel": { "side_s": { "model": "pane_noside_alt", "uvlock": true, "y":  90 }}}
-    },
-    "west" : {
-      "true":  { "submodel": { "side_w": { "model": "pane_side_alt"  , "uvlock": true, "y":  90 }}},
-      "false": { "submodel": { "side_w": { "model": "pane_noside"    , "uvlock": true, "y": 270 }}}
-    }
+    "inventory": [{ "model": "chisel:pane/ns" }],
+    "east=false,north=false,south=false,west=false": { "model": "chisel:pane/post" },
+
+    "east=false,north=true,south=false,west=false" : { "model": "chisel:pane/ctm_n" },
+    "east=true,north=false,south=false,west=false" : { "model": "chisel:pane/ctm_e" },
+    "east=false,north=false,south=true,west=false" : { "model": "chisel:pane/ctm_s" },
+    "east=false,north=false,south=false,west=true" : { "model": "chisel:pane/ctm_w" },
+
+    "east=true,north=true,south=false,west=false"  : { "model": "chisel:pane/ctm_ne" },
+    "east=true,north=false,south=true,west=false"  : { "model": "chisel:pane/ctm_se" },
+    "east=false,north=false,south=true,west=true"  : { "model": "chisel:pane/ctm_sw" },
+    "east=false,north=true,south=false,west=true"  : { "model": "chisel:pane/ctm_nw" },
+
+    "east=false,north=true,south=true,west=false"  : { "model": "chisel:pane/ctm_ns" },
+    "east=true,north=false,south=false,west=true"  : { "model": "chisel:pane/ctm_ew" },
+
+    "east=true,north=true,south=true,west=false"   : { "model": "chisel:pane/ctm_nse" },
+    "east=true,north=false,south=true,west=true"   : { "model": "chisel:pane/ctm_sew" },
+    "east=false,north=true,south=true,west=true"   : { "model": "chisel:pane/ctm_nsw" },
+    "east=true,north=true,south=false,west=true"   : { "model": "chisel:pane/ctm_new" },
+
+    "east=true,north=true,south=true,west=true"    : { "model": "chisel:pane/ctm_nsew" }
   }
 }
