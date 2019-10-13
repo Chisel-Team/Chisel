@@ -1,0 +1,71 @@
+{
+    "ambientocclusion": false,
+    "textures": { "particle": "#pane" },
+    "elements": [{
+        "from": [ 7,  0, 0 ],
+        "to"  : [ 9, 16, 16 ],
+        "shade": false,
+        "faces": {
+            "down" : { "texture": "#edge", "cullface": "down" },
+            "up"   : { "texture": "#edge", "cullface": "up" },
+            "north": { "texture": "#edge", "cullface": "north" },
+            "south": { "texture": "#edge", "cullface": "south" },
+            "west" : { "texture": "#pane", "tintindex": 0 }
+        }
+    }, {
+        "from": [ 7,  0, 0 ],
+        "to"  : [ 9, 16, 7 ],
+        "shade": false,
+        "faces": {
+            "east": { "texture": "#pane", "tintindex": 0 }
+        }
+    }, {
+        "from": [ 7,  0,  9 ],
+        "to"  : [ 9, 16, 16 ],
+        "shade": false,
+        "faces": {
+            "east": { "texture": "#pane", "tintindex": 0 }
+        }
+    }, {
+        "from": [  9,  0, 7 ],
+        "to"  : [ 16, 16, 9 ],
+        "shade": false,
+        "faces": {
+            "down" : { "texture": "#edge", "uv": [ 9, 16, 7,  9 ], "rotation": 90, "cullface": "down" },
+            "up"   : { "texture": "#edge", "uv": [ 9,  9, 7, 16 ], "rotation": 90, "cullface": "up" },
+            "north": { "texture": "#pane", "tintindex": 0 },
+            "south": { "texture": "#pane", "tintindex": 0 },
+            "east" : { "texture": "#edge", "cullface": "east" }
+        }
+    }],
+    "ctm_version": 1,
+    "ctm_overrides": {
+        "0": {
+            "type": "ctm",
+            "layer": "TRANSLUCENT",
+            "textures": [ "#pane_ct" ],
+            "extra": {
+                "connect_inside": true,
+                "use_actual_state": true,
+                "connect_to": {
+                    "NORTH": [
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "east" : true }] },
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "west" : true }] }
+                    ],
+                    "SOUTH": [
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "east" : true }] },
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "west" : true }] }
+                    ],
+                    "EAST" : [
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "north": true }] },
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "south": true }] }
+                    ],
+                    "WEST" : [
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "north": true }] },
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "south": true }] }
+                    ]
+                }
+            }
+        }
+    }
+}

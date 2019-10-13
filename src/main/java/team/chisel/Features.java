@@ -33,10 +33,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.*;
 import net.minecraft.util.EnumFacing.Axis;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -1500,17 +1498,19 @@ public enum Features {
 
                 Carving.chisel.addVariation("glasspanedyed" + (dyeColors[c].toLowerCase()), CarvingUtils.variationFor(stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
 
-//                factory.newBlock(Material.GLASS, "glasspanedyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvablePane::new, BlockCarvablePane.class))
-//                        .setParentFolder("glass_stained_pane/"+dyeColors[c].toLowerCase())
-//                        .newVariation("panel")
-//                        .next("framed")
-//                        .next("framed_fancy")
-//                        .next("streaks")
-//                        .next("rough")
-//                        .next("brick")
-//                        .addOreDict("blockGlass")
-//                        .addOreDict("blockGlass"+dyeColors[c])
-//                        .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
+                factory.newBlock(Material.GLASS, "glasspanedyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>((material, index, max, variations) -> new BlockCarvablePane(material, index, max, variations) {
+                    @Override public BlockRenderLayer getBlockLayer() { return BlockRenderLayer.TRANSLUCENT; }
+                }, BlockCarvablePane.class))
+                        .setParentFolder("glasspane_stained/" + dyeColors[c].toLowerCase())
+                        .newVariation("panel")
+                        .next("framed")
+                        .next("framed_fancy")
+                        .next("streaks")
+                        .next("rough")
+                        .next("brick")
+                        .addOreDict("paneGlass")
+                        .addOreDict("paneGlass"+dyeColors[c])
+                        .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
         }
     },
