@@ -2,8 +2,6 @@
   "forge_marker": 1,
   "defaults": {
     "transform": "forge:default-item",
-    "ambientocclusion": false,
-    "model": "pane_post",
     "textures": {
       "edge"    : "chisel:blocks/glass/terrain-glassstreak-top",
       "pane"    : "chisel:blocks/glass/terrain-glassstreak"

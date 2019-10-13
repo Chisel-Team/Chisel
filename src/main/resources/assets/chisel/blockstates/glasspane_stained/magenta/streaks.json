@@ -2,9 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "transform": "forge:default-item",
-    "ambientocclusion": false,
     "uvlock": true,
-    "model": "pane_post",
     "textures": {
       "edge": "chisel:blocks/glass_stained/magenta/streaks",
       "pane": "chisel:blocks/glass_stained/magenta/streaks"

@@ -4,7 +4,6 @@
     "elements": [{
         "from": [ 7,  0,  9 ],
         "to"  : [ 9, 16, 16 ],
-        "shade": false,
         "faces": {
             "down" : { "texture": "#edge" },
             "up"   : { "texture": "#edge" },
@@ -15,7 +14,6 @@
     }, {
         "from": [  0,  0, 7 ],
         "to"  : [ 16, 16, 9 ],
-        "shade": false,
         "faces": {
             "down" : { "texture": "#edge" },
             "up"   : { "texture": "#edge" },
@@ -26,14 +24,12 @@
     }, {
         "from": [ 0,  0, 7 ],
         "to"  : [ 7, 16, 9 ],
-        "shade": false,
         "faces": {
             "south": { "texture": "#pane" }
         }
     }, {
         "from": [  9,  0, 7 ],
         "to"  : [ 16, 16, 9 ],
-        "shade": false,
         "faces": {
             "south": { "texture": "#pane" }
         }

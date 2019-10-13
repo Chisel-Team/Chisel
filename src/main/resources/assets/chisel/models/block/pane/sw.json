@@ -4,7 +4,6 @@
     "elements": [{
         "from": [ 7,  0,  7 ],
         "to"  : [ 9, 16, 16 ],
-        "shade": false,
         "faces": {
             "down" : { "texture": "#edge" },
             "up"   : { "texture": "#edge" },
@@ -15,14 +14,12 @@
     }, {
         "from": [ 7,  0,  9 ],
         "to"  : [ 9, 16, 16 ],
-        "shade": false,
         "faces": {
             "west": { "texture": "#pane" }
         }
     }, {
         "from": [ 0,  0, 7 ],
         "to"  : [ 7, 16, 9 ],
-        "shade": false,
         "faces": {
             "down" : { "texture": "#edge", "uv": [ 9, 7, 7,  0 ], "rotation": 90 },
             "up"   : { "texture": "#edge", "uv": [ 7, 9, 9, 16 ], "rotation": 90 },

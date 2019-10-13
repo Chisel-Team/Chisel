@@ -4,7 +4,6 @@
     "elements": [{
         "from": [  7,  0, 7 ],
         "to"  : [ 16, 16, 9 ],
-        "shade": false,
         "faces": {
             "down" : { "texture": "#edge", "uv": [ 9, 16, 7,  7 ], "rotation": 90, "cullface": "down" },
             "up"   : { "texture": "#edge", "uv": [ 9,  7, 7, 16 ], "rotation": 90, "cullface": "up" },
@@ -25,20 +24,20 @@
                 "use_actual_state": true,
                 "connect_to": {
                     "NORTH": [
-                        { "block": "chisel:glasspanedyedblack", "predicate": [{ "east" : true }] },
-                        { "block": "chisel:glasspanedyedblack", "predicate": [{ "west" : true }] }
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "east" : true }] },
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "west" : true }] }
                     ],
                     "SOUTH": [
-                        { "block": "chisel:glasspanedyedblack", "predicate": [{ "east" : true }] },
-                        { "block": "chisel:glasspanedyedblack", "predicate": [{ "west" : true }] }
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "east" : true }] },
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "west" : true }] }
                     ],
                     "EAST" : [
-                        { "block": "chisel:glasspanedyedblack", "predicate": [{ "north": true }] },
-                        { "block": "chisel:glasspanedyedblack", "predicate": [{ "south": true }] }
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "north": true }] },
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "south": true }] }
                     ],
                     "WEST" : [
-                        { "block": "chisel:glasspanedyedblack", "predicate": [{ "north": true }] },
-                        { "block": "chisel:glasspanedyedblack", "predicate": [{ "south": true }] }
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "north": true }] },
+                        { "block": "chisel:glasspanedyedlightgray", "predicate": [{ "south": true }] }
                     ]
                 }
             }

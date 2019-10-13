@@ -4,7 +4,6 @@
     "elements": [{
         "from": [ 0,  0, 7 ],
         "to"  : [ 9, 16, 9 ],
-        "shade": false,
         "faces": {
             "down" : { "texture": "#edge", "uv": [ 9, 9, 7, 0 ], "rotation": 90, "cullface": "down" },
             "up"   : { "texture": "#edge", "uv": [ 9, 0, 7, 9 ], "rotation": 90, "cullface": "up" },

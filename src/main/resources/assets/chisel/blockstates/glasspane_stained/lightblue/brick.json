@@ -2,8 +2,6 @@
   "forge_marker": 1,
   "defaults": {
     "transform": "forge:default-item",
-    "ambientocclusion": false,
-    "model": "chisel:pane/post",
     "textures": {
       "edge"   : "blocks/glass_pane_top_light_blue",
       "pane"   : "chisel:blocks/glass_stained/lightblue/brick",
