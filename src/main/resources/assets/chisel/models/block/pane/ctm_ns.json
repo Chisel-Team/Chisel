@@ -8,8 +8,8 @@
             "to": [ 9, 16, 16 ],
             "shade": false,
             "faces": {
-                "down":  { "texture": "#edge" },
-                "up":    { "texture": "#edge" },
+                "down":  { "texture": "#edge", "cullface": "down" },
+                "up":    { "texture": "#edge", "cullface": "up" },
                 "north": { "texture": "#edge", "cullface": "north" },
                 "south": { "texture": "#edge", "cullface": "south" },
                 "west":  { "texture": "#pane", "tintindex": 0 },
