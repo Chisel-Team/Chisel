@@ -11,7 +11,7 @@
     }
   },
   "variants": {
-    "inventory": [{ "model": "chisel:pane/ns" }],
+    "inventory": [{ "model": "chisel:pane/ew" }],
     "east=false,north=false,south=false,west=false": { "model": "chisel:pane/post" },
 
     "east=false,north=true,south=false,west=false" : { "model": "chisel:pane/ctm_n" },
