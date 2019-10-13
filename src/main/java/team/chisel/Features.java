@@ -2860,7 +2860,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             factory.newBlock(Material.IRON, "technical", provider)
                     .setGroup("factory")
-                    .newVariation("scaffold").opaque(false)
+                    .newVariation("scaffold")
                     .next("cautiontape")
                     .next("industrialrelic")
                     .next("pipesLarge")
