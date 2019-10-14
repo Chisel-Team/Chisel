@@ -1383,6 +1383,10 @@ public enum Features {
     },
 
     GLASS {
+        
+        private BlockCarvable[] glassBlocks;
+        private BlockCarvablePane[] paneBlocks;
+        
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("glass", CarvingUtils.variationFor(Blocks.GLASS.getDefaultState(), -20));
@@ -1400,7 +1404,7 @@ public enum Features {
                 }
             };
 
-            factory.newBlock(Material.GLASS, "glass", new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
+            glassBlocks = factory.newBlock(Material.GLASS, "glass", new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
                     .newVariation("terrain-glassbubble")
                     .next("chinese")
                     .next("japanese")
@@ -1425,9 +1429,9 @@ public enum Features {
 
             Carving.chisel.addVariation("glasspane", CarvingUtils.variationFor(Blocks.GLASS_PANE.getDefaultState(), -20));
             
-            factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<>(BlockCarvablePane::noDrop, BlockCarvablePane.class))
+            paneBlocks = factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<>(BlockCarvablePane::noDrop, BlockCarvablePane.class))
                     .newVariation("terrain-glassbubble")
-                    .next("terrain-glass-chinese")
+                    .next("chinese")
                     .next("japanese")
                     .next("terrain-glassdungeon")
                     .next("terrain-glasslight")
@@ -1448,9 +1452,19 @@ public enum Features {
                     .addOreDict("paneGlassColorless")
                     .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
         }
+        
+        @Override
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
+            for (int i = 0; i < paneBlocks.length; i++) {
+                for (int meta = 0; meta < glassBlocks[i].getVariations().length; meta++) {
+                    addShapedRecipe(registry, Configurations.featureName(this) + "/" + paneBlocks[i].getVariations()[meta].name, new ItemStack(paneBlocks[i], 16, meta), "XXX", "XXX", 'X', new ItemStack(glassBlocks[i], 1, meta));
+                }
+            }
+        }
     },
 
     GLASSDYED {
+        
         @SuppressWarnings("null")
         @Override
         void addBlocks(ChiselBlockFactory factory) {
@@ -1512,6 +1526,11 @@ public enum Features {
                         .addOreDict("paneGlass"+dyeColors[c])
                         .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
             }
+        }
+        
+        @Override
+        void addRecipes(IForgeRegistry<IRecipe> registry) {
+            // Can't do stained pane recipes due to oredict replacements, it will always give the vanilla pane
         }
     },
 
