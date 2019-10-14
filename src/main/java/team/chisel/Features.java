@@ -1461,7 +1461,7 @@ public enum Features {
         void addRecipes(IForgeRegistry<IRecipe> registry) {
             for (int i = 0; i < paneBlocks.length; i++) {
                 for (int meta = 0; meta < glassBlocks[i].getVariations().length; meta++) {
-                    addShapedRecipe(registry, Configurations.featureName(this) + "/" + paneBlocks[i].getVariations()[meta].name, new ItemStack(paneBlocks[i], 16, meta), "XXX", "XXX", 'X', new ItemStack(glassBlocks[i], 1, meta));
+                    Features.addShapedRecipe(registry, Configurations.featureName(this) + "/" + paneBlocks[i].getVariations()[meta].name, new ItemStack(paneBlocks[i], 16, meta), "XXX", "XXX", 'X', new ItemStack(glassBlocks[i], 1, meta));
                 }
             }
         }
