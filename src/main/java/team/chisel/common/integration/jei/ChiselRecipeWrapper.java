@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import mezz.jei.api.ingredients.IIngredients;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
@@ -26,15 +27,14 @@ public class ChiselRecipeWrapper implements IRecipeWrapper {
     public void getIngredients(@Nonnull IIngredients ingredients) {
         List<ItemStack> variants = CarvingUtils.getChiselRegistry().getItemsForChiseling(group);
         
-        ingredients.setInputs(ItemStack.class, variants);
-        ingredients.setOutputs(ItemStack.class, variants);
+        ingredients.setInputs(VanillaTypes.ITEM, variants);
+        ingredients.setOutputs(VanillaTypes.ITEM, variants);
     }
     
     @Override
     public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
     }
 
-    @SuppressWarnings("null")
     @Override
     public List<String> getTooltipStrings(int mouseX, int mouseY){
         return Collections.emptyList();

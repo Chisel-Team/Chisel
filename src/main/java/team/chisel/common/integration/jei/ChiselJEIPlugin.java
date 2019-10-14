@@ -2,6 +2,7 @@ package team.chisel.common.integration.jei;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,12 +14,15 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
+import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeRegistryPlugin;
 import mezz.jei.recipes.RecipeRegistry;
+import mezz.jei.recipes.RecipeRegistryPluginSafeWrapper;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import team.chisel.Chisel;
 import team.chisel.api.carving.ICarvingGroup;
@@ -46,7 +50,7 @@ public class ChiselJEIPlugin implements IModPlugin {
               .map(ItemStack::new)
               .forEach(stack -> {
                   registry.addRecipeCatalyst(stack, category.getUid());
-                  registry.addIngredientInfo(stack, ItemStack.class,
+                  registry.addIngredientInfo(stack, VanillaTypes.ITEM,
                           "jei.chisel.desc.chisel_generic", 
                           "\n",
                           "jei.chisel.desc." + stack.getItem().getRegistryName().getResourcePath());
@@ -60,17 +64,28 @@ public class ChiselJEIPlugin implements IModPlugin {
             itemStacks.add(new ItemStack(Blocks.CONCRETE, 1, i));
         }
 
-        registry.addIngredientInfo(itemStacks, ItemStack.class, "jei.chisel.desc.concrete_making");
+        registry.addIngredientInfo(itemStacks, VanillaTypes.ITEM, "jei.chisel.desc.concrete_making");
         
         registry.addRecipeRegistryPlugin(plugin); // Add our plugin the normal way as a fallback in case JEI internals change
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
         try {
-            List<IRecipeRegistryPlugin> plugins = (List<IRecipeRegistryPlugin>)ObfuscationReflectionHelper.getPrivateValue(RecipeRegistry.class, (RecipeRegistry) jeiRuntime.getRecipeRegistry(), "plugins");
-            plugins.remove(plugin); // If reflection succeeds, put our plugin at the beginning of the list
+            List<IRecipeRegistryPlugin> plugins = ObfuscationReflectionHelper.getPrivateValue(RecipeRegistry.class, (RecipeRegistry) jeiRuntime.getRecipeRegistry(), "plugins");
+            // If reflection succeeds, put our plugin at the beginning of the list
+            plugins.remove(plugin);
+            Iterator<IRecipeRegistryPlugin> iter = plugins.iterator();
+            while (iter.hasNext()) {
+                // Unwrap wrappers and remove ours
+                IRecipeRegistryPlugin p = iter.next();
+                if (p instanceof RecipeRegistryPluginSafeWrapper) {
+                    IRecipeRegistryPlugin wrapped = ObfuscationReflectionHelper.getPrivateValue(RecipeRegistryPluginSafeWrapper.class, (RecipeRegistryPluginSafeWrapper) p, "plugin");
+                    if (wrapped == plugin) {
+                        iter.remove();
+                    }
+                }
+            }
             plugins.add(0, plugin);
         } catch (Exception e) {
             Chisel.logger.error("Failed to inject recipe registry plugin at beginning of list, cannot guarantee vanilla recipes will show first", e);

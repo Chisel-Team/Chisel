@@ -17,6 +17,7 @@ import mezz.jei.api.recipe.IRecipeRegistryPlugin;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.item.ItemStack;
+import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 
 @ParametersAreNonnullByDefault
@@ -42,33 +43,44 @@ public class ChiselRecipeRegistryPlugin implements IRecipeRegistryPlugin {
     @SuppressWarnings("unchecked")
     @Override
     public <V> List<String> getRecipeCategoryUids(IFocus<V> focus) {
-        if (focus.getMode() != Mode.OUTPUT) return Collections.emptyList();
-        List<ItemStack> alternates = getAlternateOutputs(focus);
-        if (alternates.isEmpty()) return Collections.emptyList();
         try {
-            preventRecursion = true;
-            return registry.getRecipeCategories(POSSIBLE_CATEGORIES).stream()
-                    .filter(c -> alternates.stream().flatMap(s -> registry.getRecipeWrappers(c, registry.createFocus(focus.getMode(), s)).stream()).count() != 0)
-                    .map(IRecipeCategory::getUid)
-                    .collect(Collectors.toList());
-        } finally {
-            preventRecursion = false;
+            if (focus.getMode() != Mode.OUTPUT) return Collections.emptyList();
+            List<ItemStack> alternates = getAlternateOutputs(focus);
+            if (alternates.isEmpty()) return Collections.emptyList();
+            try {
+                preventRecursion = true;
+                return registry.getRecipeCategories(POSSIBLE_CATEGORIES).stream()
+                        .filter(c -> alternates.stream().flatMap(s -> registry.getRecipeWrappers(c, registry.createFocus(focus.getMode(), s)).stream()).count() != 0)
+                        .map(IRecipeCategory::getUid)
+                        .collect(Collectors.toList());
+            } finally {
+                preventRecursion = false;
+            }
+        } catch (RuntimeException | LinkageError e) {
+            Chisel.logger.error(e);
+            return Collections.emptyList();
         }
     }
 
     @Override
     public <T extends IRecipeWrapper, V> List<T> getRecipeWrappers(IRecipeCategory<T> recipeCategory, IFocus<V> focus) {
-        if (preventRecursion) return Collections.emptyList();
-        if (focus.getMode() != Mode.OUTPUT) return Collections.emptyList();
         try {
-            preventRecursion = true;
-            if (!registry.getRecipeWrappers(recipeCategory, focus).isEmpty()) return Collections.emptyList();
-            return getAlternateOutputs(focus).stream()
-                    .map(alternate -> registry.createFocus(focus.getMode(), alternate))
-                    .flatMap(f -> registry.getRecipeWrappers(recipeCategory, f).stream())
-                    .collect(Collectors.toList());
-        } finally {
-            preventRecursion = false;
+            if (preventRecursion) return Collections.emptyList();
+            if (focus.getMode() != Mode.OUTPUT) return Collections.emptyList();
+            if (!POSSIBLE_CATEGORIES.contains(recipeCategory.getUid())) return Collections.emptyList();
+            try {
+                preventRecursion = true;
+                if (!registry.getRecipeWrappers(recipeCategory, focus).isEmpty()) return Collections.emptyList();
+                return getAlternateOutputs(focus).stream()
+                        .map(alternate -> registry.createFocus(focus.getMode(), alternate))
+                        .flatMap(f -> registry.getRecipeWrappers(recipeCategory, f).stream())
+                        .collect(Collectors.toList());
+            } finally {
+                preventRecursion = false;
+            }
+        } catch (RuntimeException | LinkageError e) {
+            Chisel.logger.error(e);
+            return Collections.emptyList();
         }
     }
 
