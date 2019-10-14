@@ -1,7 +1,5 @@
 package team.chisel.common.block;
 
-import java.util.List;
-
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Getter;
@@ -14,8 +12,9 @@ import net.minecraft.client.particle.ParticleManager;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -47,9 +46,17 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     private final BlockStateContainer states;
 
     private boolean dragonProof = false;
+
+    public static BlockCarvablePane create(Material material, int index, int max, VariationData... variations) {
+        return new BlockCarvablePane(material, true, index, max, variations);
+    }
     
-    public BlockCarvablePane(Material material, int index, int max, VariationData... variations) {
-        super(material, true);
+    public static BlockCarvablePane noDrop(Material material, int index, int max, VariationData... variations) {
+        return new BlockCarvablePane(material, false, index, max, variations);
+    }
+    
+    public BlockCarvablePane(Material material, boolean canDrop, int index, int max, VariationData... variations) {
+        super(material, canDrop);
         setCreativeTab(ChiselTabs.tab);
         this.index = index;
         this.variations = variations;
@@ -135,7 +142,6 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
         return this.index;
     }
 
-    @SuppressWarnings("null") // No type annotations
     @Override
     public VariationData getVariationData(int meta) {
         return this.variations[MathHelper.clamp(meta, 0, this.variations.length - 1)];
@@ -153,5 +159,15 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
         }else{
             return super.canEntityDestroy(state, world, pos, entity);
         }
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        if (!super.shouldSideBeRendered(blockState, blockAccess, pos, side)) {
+            if (side.getAxis() != Axis.Y) return false;
+            return blockAccess.getBlockState(pos.offset(side)).getActualState(blockAccess, pos.offset(side)) != blockState;
+        }
+        return true;
     }
 }
