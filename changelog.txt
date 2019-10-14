@@ -1,3 +1,56 @@
+1.0.0:
+New
+- Glass panes have returned! Enjoy pane versions of all the existing chisel glass and stained glass variants.
+- Add Red Standstone Scribbles
+- Add doubleslab variants for stone and sandstone, which look like the unattainable vanilla blocks
+- When looking up recipes for chisel variants, JEI will now show vanilla recipes for all other variants in that group. This should reduce modpack confusion when chisel variants are included via oredict.
+Changes
+- Blockstate files have been separated into one file for each block. Crazy!
+- Chisel now properly uses the CTM API via texture/model data, rather than its own internal format. Should improve resource pack and mod compatibility significantly.
+- Temple blocks now use the 'eldritch' render type, which approximates their look in 1.7
+- Disable gold block 'goldEye' variant
+- #784 Give primal voidstone some extra magic (animated texture will now 'glow' slightly)
+- #777 Completely hidden blocks will no longer be chiseled by contiguous mode
+- Korean language update (kwon0408)
+- Swedish language update (Regnander)
+- French language update (Xandoria)
+- Chinese language update (Snownee)
+- Added Spanish (Spain) language (Yataro-Ibuza)
+- Added Upside Down language (The-Fireplace)
+Fixes
+- Fixed compat blocks (Thaumcraft, AE2, Blood Magic)
+- #749 Black Antiblock is not actually black
+- #750 Fences and some other blocks connect to chisel carpets
+- #630 Some gold block variants have two groups, which breaks the iChisel
+- Fix in-world chiseling for oredict groups
+- #756 Send per-chunk data to joining players, fixes offset blocks not appearing correctly until updated
+- Fix models not updating properly when iChisel preview mode is changed
+- #760 Crash when mods ask for the burn time of an empty stack
+- Make sure all chisel crafting (Chisel, iChisel, AutoChisel) use the API methods for better compat
+- Fix potential deletion of stacks in iChisel GUI
+- Fix carpet block names/tooltips
+- Fix chiseled wool not breaking faster with shears
+- Fix chiseled charcoal blocks not being registered to ore dictionary
+- Fix cloud variant name (Cloud -> Raw)
+- Fix moss stone name (Mossy Cobblestone -> Moss Stone)
+- Fix emerald block tool level and resistance
+- Fix end stone name (Endstone -> End Stone)
+- Fix gold block tool level and resistance
+- Make chiseled ice consistent with vanilla ice (doesn't drop, creates water)
+- Fix chiseled iron bars tool level
+- Fix chiseled lapis block tool level
+- Fix Nether Brick name (Nether Bricks -> Nether Brick)
+- Fix wood planks names (X Planks -> X Wood Planks)
+- Fix AutoChisel sound type
+- Fix offset wand not working on non-chisel blocks that have CTM models
+- Fix carpet connected textures being obscured by carpets on top
+- Fix line in plaingreek Ice Pillar texture
+- #780 Dupe
+- Fix laggy animation for AOE chiseling selection
+- Fix end stone, obsidian, and iron bars not being dragon proof (gudenau)
+- Fix potential crash from particles (Sirse)
+- #791 Rusty Scaffold technical block is erroneously transparent
+
 0.2.1:
 New
 - Iron bars are back! With an all new model you can once again imprison your friends WITH STYLE!
