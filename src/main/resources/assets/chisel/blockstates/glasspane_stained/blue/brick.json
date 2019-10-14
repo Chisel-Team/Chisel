@@ -30,6 +30,6 @@
     "east=false,north=true,south=true,west=true"   : { "model": "chisel:pane/colors/blue/ctm_nsw" },
     "east=true,north=true,south=false,west=true"   : { "model": "chisel:pane/colors/blue/ctm_new" },
 
-    "east=true,north=true,south=true,west=true"    : { "model": "chisel:pane/colors/ctm_nsew" }
+    "east=true,north=true,south=true,west=true"    : { "model": "chisel:pane/colors/blue/ctm_nsew" }
   }
 }
