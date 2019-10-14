@@ -70,6 +70,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
 
     @Override
     public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper, IIngredients ingredients) {
+        this.layout = recipeLayout;
         IFocus<?> focus = (this.focus = recipeLayout.getFocus());
         
         recipeLayout.getItemStacks().init(0, focus == null || focus.getMode() == IFocus.Mode.INPUT, 73, 3);
