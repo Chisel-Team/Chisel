@@ -41,9 +41,17 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     private final int maxVariation;
 
     private final BlockStateContainer states;
+
+    public static BlockCarvablePane create(Material material, int index, int max, VariationData... variations) {
+        return new BlockCarvablePane(material, true, index, max, variations);
+    }
     
-    public BlockCarvablePane(Material material, int index, int max, VariationData... variations) {
-        super(material, true);
+    public static BlockCarvablePane noDrop(Material material, int index, int max, VariationData... variations) {
+        return new BlockCarvablePane(material, false, index, max, variations);
+    }
+    
+    public BlockCarvablePane(Material material, boolean canDrop, int index, int max, VariationData... variations) {
+        super(material, canDrop);
         setCreativeTab(ChiselTabs.tab);
         this.index = index;
         this.variations = variations;
