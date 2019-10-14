@@ -1410,8 +1410,8 @@ public enum Features {
 
             glassBlocks = factory.newBlock(Material.GLASS, "glass", new ChiselBlockProvider<>(glassCreator, BlockCarvable.class)).opaque(false)
                     .newVariation("terrain-glassbubble")
-                    .next("chinese")
-                    .next("japanese")
+                    .next("chinese").setOrder(20)
+                    .next("japanese").setOrder(22)
                     .next("terrain-glassdungeon")
                     .next("terrain-glasslight")
                     .next("terrain-glassnoborder")
@@ -1425,8 +1425,8 @@ public enum Features {
                     .next("terrain-glass-thingrid")
                     .next("a1-glasswindow-ironfencemodern")
                     .next("chrono")
-                    .next("chinese2")
-                    .next("japanese2")
+                    .next("chinese2").setOrder(21)
+                    .next("japanese2").setOrder(23)
                     .addOreDict("blockGlass")
                     .addOreDict("blockGlassColorless")
                     .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
@@ -1435,8 +1435,8 @@ public enum Features {
             
             paneBlocks = factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<>(BlockCarvablePane::noDrop, BlockCarvablePane.class))
                     .newVariation("terrain-glassbubble")
-                    .next("chinese")
-                    .next("japanese")
+                    .next("chinese").setOrder(20)
+                    .next("japanese").setOrder(22)
                     .next("terrain-glassdungeon")
                     .next("terrain-glasslight")
                     .next("terrain-glassnoborder")
@@ -1450,8 +1450,8 @@ public enum Features {
                     .next("terrain-glass-thingrid")
                     .next("a1-glasswindow-ironfencemodern")
                     .next("chrono")
-                    .next("chinese2")
-                    .next("japanese2")
+                    .next("chinese2").setOrder(21)
+                    .next("japanese2").setOrder(23)
                     .addOreDict("paneGlass")
                     .addOreDict("paneGlassColorless")
                     .build(b -> b.setSoundType(SoundType.GLASS).setHardness(0.3F));
