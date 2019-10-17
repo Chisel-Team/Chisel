@@ -32,7 +32,7 @@ public class BlockCarvableIce extends BlockCarvable {
     public BlockCarvableIce(Material material, int index, int max, VariationData[] variations) {
         super(material, index, max, variations);
         this.slipperiness = 0.98F;
-        this.setTickRandomly(true);
+        this.setTickRandomly(Blocks.ICE.getTickRandomly());
     }
     
     @Override
