@@ -60,7 +60,6 @@ import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockAutoChisel;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableCarpet;
-import team.chisel.common.block.BlockCarvableFalling;
 import team.chisel.common.block.BlockCarvableIce;
 import team.chisel.common.block.BlockCarvablePane;
 import team.chisel.common.block.ItemChiselBlock;
@@ -3421,7 +3420,7 @@ public enum Features {
     }
 
     public boolean enabled() {
-        return /*(this == Features.BASALT || this == Features.END_PURPUR) && Configurations.featureEnabled(this) &&/**/ hasRequiredMod() && hasParentFeature();
+        return Configurations.featureEnabled(this) && hasRequiredMod() && hasParentFeature();
     }
 
     private boolean hasParentFeature() {
