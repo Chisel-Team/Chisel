@@ -1,3 +1,8 @@
+1.0.1:
+Fixes
+- #794 Make chisel ice compatible with blocks that disable ice melting
+- #796 Re-add accidentally removed configs for features
+
 1.0.0:
 New
 - Glass panes have returned! Enjoy pane versions of all the existing chisel glass and stained glass variants.
