@@ -11,17 +11,18 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
 plugins {
-    id 'net.franz-becker.gradle-lombok' version '1.5'
-	id 'com.matthewprenger.cursegradle' version '1.4.0'
+    id "io.freefair.lombok" version "2.9.5"
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
+apply plugin: 'eclipse'
 
 import org.ajoberstar.grgit.Grgit
 
@@ -41,14 +42,62 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 minecraft {
-    version = "${minecraft_version}-${forge_version}"
-    mappings = 'snapshot_20170623'
-    runDir = "run"
-	
-	useDepAts = true
+	mappings channel: 'snapshot', version: '20191118-1.14.3'
+    
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
-    replaceIn "Reference.java"
-    replace "@VERSION@", project.version
+    runs {
+        client {
+        	taskName 'chisel_client'
+        	
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+        	taskName 'chisel_server'
+        
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+            }
+        }
+        
+        data {
+        	taskName 'chisel_data'
+        
+            workingDirectory project.file('run')
+            
+            environment 'target', 'fmluserdevdata'
+
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+            }
+            
+			args '--mod', 'chisel', '--all', '--output', '"' + rootProject.file('src/generated/resources/') + '"',
+				 '--existing', '"' + rootProject.file('src/main/resources') + '"' 
+			
+        }
+    }
 }
 
 repositories {
@@ -67,21 +116,15 @@ repositories {
 }
 
 dependencies {
-	deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
-	deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
-	deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+//	deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
+//	deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
+//	deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
+//  deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
 }
 
 lombok {
-    version = "1.16.6"
-    sha256 = "e0a471be03e1e6b02bf019480cec7a3ac9801702bf7bf62f15d077ad4df8dd5d"
-}
-
-import net.franz_becker.gradle.lombok.task.DelombokTask
-
-task delombok(type: DelombokTask) {
-    args("src/main/java", "-d", "build/sources/delomboked/java")
+    version = "1.18.10"
 }
 
 // Add external annotations
@@ -97,31 +140,6 @@ task delombok(type: DelombokTask) {
     }
 }*/
 
-tasks.eclipse.dependsOn installLombok
-
-processResources {
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-
-        // replace version and mcversion
-		expand 'version': project.version, 'mcversion': project.minecraft.version
-    }
-
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-		exclude 'mcmod.info'
-    }
-}
-
-jar.manifest {
-    attributes 'FMLAT': 'chisel_at.cfg'
-}
-
 // Create API jar with sources and compiled files
 task apiJar(type: Jar) {
     from sourceSets.main.allSource
@@ -135,7 +153,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
-            artifact sourceJar
+//          artifact sourceJar
             artifact apiJar
         }
     }
