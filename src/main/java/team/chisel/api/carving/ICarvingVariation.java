@@ -12,15 +12,6 @@ import net.minecraft.item.ItemStack;
  */
 public interface ICarvingVariation {
 
-	/**
-	 * The base block of this variation.
-	 * 
-	 * @return A {@link Block} that is the base of this variation
-	 */
-	@Nullable
-    @Deprecated
-    Block getBlock();
-
     /**
      * The base blockstate of this variation.
      * 

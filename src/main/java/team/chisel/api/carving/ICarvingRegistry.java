@@ -82,17 +82,6 @@ public interface ICarvingRegistry {
     List<ICarvingVariation> getGroupVariations(IBlockState state);
 
     /**
-     * Gets the oredict name for the group that contains this block/meta pair.
-     * 
-     * @param state
-     *            The state of the variation
-     * @return A string oredict name for the group
-     */
-    @Nullable
-    @Deprecated
-    String getOreName(IBlockState state);
-
-    /**
      * Gets the possible output items for this {@link ItemStack}. To be used for machines/GUIs that chisel items.
      * 
      * @param chiseled
@@ -142,21 +131,6 @@ public interface ICarvingRegistry {
     List<String> getSortedGroupNames();
 
     /* Setters */
-
-    /**
-     * Adds a variation to the registry.
-     * 
-     * @param groupName
-     *            The name of the group to add to.
-     * @param state
-     *            The state of the variation
-     * @param order
-     *            The order of the variation in the list of all variations in the group. Higher numbers are sorted at the end.
-     * 
-     * @deprecated Use {@link #addVariation(String, ICarvingVariation)} and {@link CarvingUtils#variationFor(IBlockState, int)}.
-     */
-    @Deprecated
-    void addVariation(String groupName, IBlockState state, int order);
 
     /**
      * Adds a variation to the registry.
@@ -232,19 +206,6 @@ public interface ICarvingRegistry {
      */
     @Nullable
     ICarvingVariation removeVariation(ItemStack stack, String group);
-
-    /**
-     * Registers a group to an oredict name.
-     * <p>
-     * Doing this means that all blocks that are registered to this oredict name will act as if they are a part of this group.
-     * 
-     * @param groupName
-     *            The name of the group
-     * @param oreName
-     *            The oredict name
-     */
-    @Deprecated
-    void registerOre(String groupName, String oreName);
 
     /**
      * Sets the sound resource for a group.

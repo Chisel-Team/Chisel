@@ -41,28 +41,6 @@ public interface ICarvingGroup extends Iterable<ICarvingVariation> {
 	 */
     void setSound(@Nullable SoundEvent sound);
 
-    /**
-     * The oredict name to match to this group. All items with this oredict name will be assumed to be part of this group.
-     * 
-     * @deprecated Unused.
-     * 
-     * @return An ore dictionary name
-     */
-    @Deprecated
-    @Nullable
-    String getOreName();
-
-    /**
-     * Sets the oredict name for this group.
-     * 
-     * @deprecated Unused.
-     * 
-     * @param oreName
-     *            The String oredict name to be associated with this group.
-     */
-	@Deprecated
-	void setOreName(@Nullable String oreName);
-
 	/**
 	 * Gets all carving variations associated with this group.
 	 * 
@@ -74,22 +52,4 @@ public interface ICarvingGroup extends Iterable<ICarvingVariation> {
     default Iterator<ICarvingVariation> iterator() {
 	    return getVariations().iterator();
 	}
-
-	/**
-	 * Adds a variation to this group. Do not call this from external code, as it will fail to remove the inverse lookup from the registry.
-	 * 
-	 * @param variation
-	 *            An {@link ICarvingVariation} to add to this group
-	 */
-	@Deprecated
-	void addVariation(ICarvingVariation variation);
-
-	/**
-	 * Removes a variation to this group. Do not call this from external code, as it will fail to remove the inverse lookup from the registry.
-	 * 
-	 * @param variation
-	 *            An {@link ICarvingVariation} to add to this group
-	 */
-	@Deprecated
-	boolean removeVariation(ICarvingVariation variation);
 }

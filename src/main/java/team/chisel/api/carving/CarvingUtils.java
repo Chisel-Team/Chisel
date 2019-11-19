@@ -38,14 +38,6 @@ public class CarvingUtils {
 		return v1.getOrder() - v2.getOrder();
 	}
 
-	/**
-	 * @deprecated Use {@link ICarvingVariation#getStack()}
-	 */
-	@Deprecated
-	public static ItemStack getStack(ICarvingVariation variation) {
-		return variation.getStack();
-	}
-
 	public static @Nullable ICarvingRegistry chisel;
 	public static @Nullable IModeRegistry modes;
 
@@ -68,22 +60,6 @@ public class CarvingUtils {
 	
 	public static int hashStack(ItemStack stack) {
 	    return stack.getItem().hashCode() ^ (stack.getItemDamage() * 31);
-	}
-
-	/**
-	 * Creates a standard {@link ICarvingVariation} for the given data. Use this if you do not need any custom behavior in your own variation.
-	 * 
-	 * @param block
-	 *            The block of the variation
-	 * @param metadata
-	 *            The metadata of both the block and item
-	 * @param order
-	 *            The sorting order.
-	 * @return A standard {@link ICarvingVariation} instance.
-	 */
-	@Deprecated
-	public static ICarvingVariation getDefaultVariationFor(IBlockState state, int order) {
-		return new SimpleCarvingVariation(state, order);
 	}
 
 	/**
@@ -175,7 +151,6 @@ public class CarvingUtils {
 	    }
 	}
 
-	@Deprecated
 	private static class SimpleCarvingVariation extends SimpleVariationBase {
 
 		private IBlockState state;
@@ -183,12 +158,6 @@ public class CarvingUtils {
 		public SimpleCarvingVariation(IBlockState state, int order) {
 		    super(order);
 			this.state = state;
-		}
-
-		@Override
-		@Deprecated
-		public Block getBlock() {
-			return state.getBlock();
 		}
 
 		@Override
@@ -225,13 +194,6 @@ public class CarvingUtils {
 	        return stack.copy();
 	    }
 
-        @Override
-        @Nullable
-        @Deprecated
-        public Block getBlock() {
-            return hasBlock ? ((ItemBlock)stack.getItem()).getBlock() : null;
-        }
-
         @SuppressWarnings("deprecation")
         @Override
         @Nullable
@@ -256,12 +218,6 @@ public class CarvingUtils {
         @Override
         public ItemStack getStack() {
             return stack.copy();
-        }
-
-        @Override
-        @Nullable
-        public Block getBlock() {
-            return blockState == null ? null : blockState.getBlock();
         }
     }
 
@@ -317,16 +273,6 @@ public class CarvingUtils {
 		public void setSound(@Nullable SoundEvent sound) {
 			this.sound = sound;
 		}
-
-		@Override
-		@Deprecated
-		public @Nullable String getOreName() {
-			return null;
-		}
-
-		@Override
-		@Deprecated
-		public void setOreName(@Nullable String oreName) {}
 	}
 	
 	private static class OreDictionaryGroup extends SimpleCarvingGroup {

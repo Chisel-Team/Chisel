@@ -112,12 +112,6 @@ public class Carving implements ICarvingRegistry {
 		return group.getVariations();
 	}
 
-    @Override
-    @Deprecated
-    public @Nullable String getOreName(IBlockState state) {
-        return null;
-    }
-
 	@SuppressWarnings("null")
     @Override
 	public List<ItemStack> getItemsForChiseling(ItemStack chiseledItem) {
@@ -233,13 +227,6 @@ public class Carving implements ICarvingRegistry {
     }
 
 	@Override
-	@Deprecated
-	public void addVariation(String groupName, IBlockState state, int order) {
-		ICarvingVariation variation = CarvingUtils.variationFor(state, order);
-		addVariation(groupName, variation);
-	}
-
-	@Override
 	public void addVariation(String groupName, ICarvingVariation variation) {
 		ICarvingGroup group = groups.getGroupByName(groupName);
 
@@ -255,10 +242,6 @@ public class Carving implements ICarvingRegistry {
 	public void addGroup(ICarvingGroup group) {
 		groups.add(group);
 	}
-
-	@Override
-	@Deprecated
-	public void registerOre(String name, String oreName) {}
 
 	@Override
 	public void setVariationSound(String name, SoundEvent sound) {

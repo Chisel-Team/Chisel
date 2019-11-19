@@ -137,9 +137,4 @@ public class Configurations {
         }
         return ret;
     }
-
-    @Deprecated
-    public static boolean featureEnabled(String feature) {
-        return false;
-    }
 }

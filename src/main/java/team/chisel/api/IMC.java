@@ -13,40 +13,6 @@ import net.minecraft.nbt.NBTTagCompound;
 public enum IMC {
 
     /**
-     * Adds a variation to a group.
-     *
-     * Use this to add a variation to a group. String syntax:
-     * <p>
-     * groupname|blockname|meta
-     * <p>
-     * An example would be {@code "mygroup|minecraft:dirt|1"} and this will add the vanilla dirt block with metadata 1 to the "mygroup" group, creating that group if need be.
-     */
-    @Deprecated
-    ADD_VARIATION("variation:add"),
-
-    /**
-     * Removes a variation from a group.
-     *
-     * Use this to remove a variation from a group. String syntax:
-     * <p>
-     * groupname|blockname|meta
-     * <p>
-     * An example would be {@code "mygroup|minecraft:dirt|1"} and this will add the vanilla dirt block with metadata 1 to the "mygroup" group, creating that group if need be.
-     */
-    @Deprecated
-    REMOVE_VARIATION("variation:remove"),
-
-    /**
-     * Registers an oredict name to a group. This can be used to automatically add all blocks with this oredict name to a group. String syntax:
-     * <p>
-     * groupname|oredictname
-     * <p>
-     * An example would be {@code "mygroup|plankWood"} which will add all blocks registered in the oredict as "plankWood" to your group called "mygroup".
-     */
-    @Deprecated
-    REGISTER_GROUP_ORE("group:ore"),
-
-    /**
      * Register a variation. Can provide an ItemStack, blockstate, or both.
      * <p>
      * This IMC message is expected to be an {@link NBTTagCompound}, with the following mappings:
@@ -76,7 +42,7 @@ public enum IMC {
      * 
      * @since 0.0.14
      */
-    ADD_VARIATION_V2("add_variation"),
+    ADD_VARIATION("add_variation"),
     
     /**
      * Remove a variation. Will attempt to match for a variation by ItemStack, then blockstate, if both are provided.
@@ -87,7 +53,7 @@ public enum IMC {
      * 
      * @since 0.0.14
      */
-    REMOVE_VARIATION_V2("remove_variation"),
+    REMOVE_VARIATION("remove_variation"),
     
     ;
 
@@ -109,12 +75,6 @@ public enum IMC {
     public String toString() {
         return key;
     }
-
-    /**
-     * The modid of Chisel so you can easily send IMC to this mod.
-     */
-    @Deprecated
-    public static final String CHISEL_MODID = "chisel";
 
     public static final String getModid() {
         return ChiselAPIProps.MOD_ID;
