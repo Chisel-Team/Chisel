@@ -2,66 +2,36 @@ package team.chisel.common.integration.waila;
 
 import java.util.List;
 
-import mcp.mobius.waila.api.IWailaConfigHandler;
-import mcp.mobius.waila.api.IWailaDataAccessor;
-import mcp.mobius.waila.api.IWailaDataProvider;
+import mcp.mobius.waila.api.IComponentProvider;
+import mcp.mobius.waila.api.IDataAccessor;
+import mcp.mobius.waila.api.IPluginConfig;
+import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
-import mcp.mobius.waila.api.IWailaRegistrar;
+import mcp.mobius.waila.api.TooltipPosition;
 import mcp.mobius.waila.api.WailaPlugin;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.PlayerEntityMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.util.text.ITextComponent;
 import team.chisel.api.block.ICarvable;
 import team.chisel.common.block.ItemChiselBlock;
 
 @WailaPlugin
-public class ChiselDataHandler implements IWailaPlugin, IWailaDataProvider {
-
+public class ChiselDataHandler implements IWailaPlugin, IComponentProvider {
+    
     @Override
-    public ItemStack getWailaStack(IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
-        return null;
+    public void register(IRegistrar registrar) {
+        registrar.registerComponentProvider(this, TooltipPosition.BODY, ICarvable.class);
     }
 
     @Override
-    public List<String> getWailaHead(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
-        return strings;
-    }
-
-    @SuppressWarnings("null")
-    @Override
-    @SideOnly(Side.CLIENT)
-    public List<String> getWailaBody(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
+    public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
         if (accessor.getBlock() instanceof ICarvable) {
+            ItemStack stack = accessor.getStack();
             if (stack.getItem() instanceof ItemChiselBlock) {
-                ((ItemChiselBlock)stack.getItem()).addTooltips(stack, strings);
+                ((ItemChiselBlock)stack.getItem()).addTooltips(stack, tooltip);
             } else {
                 ICarvable block = (ICarvable) accessor.getBlock();
-                int variation = block.getVariationIndex(accessor.getBlockState());
-                ItemChiselBlock.addTooltips(block, variation, strings);
+                ItemChiselBlock.addTooltips(block, tooltip);
             }
         }
-        return strings;
-    }
-
-    @Override
-    public List<String> getWailaTail(ItemStack stack, List<String> strings, IWailaDataAccessor accessor, IWailaConfigHandler configHandler) {
-        return strings;
-    }
-
-    @Override
-    public CompoundNBT getNBTData(PlayerEntityMP player, TileEntity te, CompoundNBT tag, World world, BlockPos pos) {
-        return tag;
-    }
-
-    @Override
-    public void register(IWailaRegistrar registrar) {
-        registrar.registerBodyProvider(this, ICarvable.class);
     }
 }

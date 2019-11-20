@@ -12,9 +12,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
@@ -34,40 +34,32 @@ public class ItemChiselBlock extends BlockItem {
         this.setHasSubtypes(true);
     }
     
-    private static String getTooltipUnloc(ICarvable block, int index) {
-        VariationData varData = block.getVariationData(index);
-        return ((Block)block).getUnlocalizedName() + "." + varData.name + ".desc.";
+    private static String getTooltipUnloc(ICarvable block) {
+        VariationData varData = block.getVariationData();
+        return ((Block)block).getTranslationKey() + "." + varData.name + ".desc.";
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
         addTooltips(stack, tooltip);
     }
     
-    @SideOnly(Side.CLIENT)
-    public void addTooltips(ItemStack stack, List<String> tooltip) {
-        addTooltips(block, stack.getItemDamage(), tooltip);
+    public void addTooltips(ItemStack stack, List<ITextComponent> tooltip) {
+        addTooltips(block, tooltip);
     }
     
-    @SideOnly(Side.CLIENT)
-    public static void addTooltips(ICarvable block, int index, List<String> tooltip) {
+    public static void addTooltips(ICarvable block, List<ITextComponent> tooltip) {
         try {
             // Skip first line if this config is deactivated, as it will be part of display name
             int line = Configurations.blockDescriptions ? 1 : 2;
-            String desc = getTooltipUnloc(block, index);
+            String desc = getTooltipUnloc(block);
             while (I18n.hasKey(desc + line) || line == 1) {
-                tooltip.add(I18n.format(desc + line));
+                tooltip.add(new TranslationTextComponent(desc + line));
                 desc.replaceAll(line++ + "$", "." + line);
             }
         } catch (Exception ignored) {
-            tooltip.add(Chisel.MOD_ID + ".tooltip.invalid");
+            tooltip.add(new TranslationTextComponent(Chisel.MOD_ID + ".tooltip.invalid"));
         }
-    }
-
-    @Override
-    public int getMetadata(int meta) {
-        return meta;
     }
 
     @SuppressWarnings("deprecation")

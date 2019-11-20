@@ -118,8 +118,11 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 //	deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
-//	deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
-//	deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
+	implementation "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
+
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+
 //  deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
 }
 

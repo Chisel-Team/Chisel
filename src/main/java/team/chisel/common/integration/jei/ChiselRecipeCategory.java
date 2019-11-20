@@ -1,6 +1,5 @@
 package team.chisel.common.integration.jei;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,24 +9,27 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
 
-import mezz.jei.api.IGuiHelper;
-import mezz.jei.api.gui.IDrawable;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IFocus;
-import mezz.jei.api.recipe.IRecipeCategory;
-import net.minecraft.client.Minecraft;
+import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.Chisel;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.common.init.ChiselItems;
 
 @ParametersAreNonnullByDefault
-public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper> {
+public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
 
     private static final ResourceLocation TEXTURE_LOC = new ResourceLocation("chisel", "textures/chiselJEI.png");
     
+    private final IDrawable icon;
     private final IDrawable background;
     private final IDrawable arrowUp, arrowDown;
 
@@ -35,6 +37,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
     private @Nullable IFocus<?> focus;
 
     public ChiselRecipeCategory(IGuiHelper guiHelper) {
+        this.icon = guiHelper.createDrawableIngredient(ChiselItems.chisel_iron);
         this.background = guiHelper.createDrawable(TEXTURE_LOC, 0, 0, 165, 126);
         this.arrowDown = guiHelper.createDrawable(TEXTURE_LOC, 166, 0, 18, 15);
         this.arrowUp = guiHelper.createDrawable(TEXTURE_LOC, 166, 15, 18, 15);
@@ -42,8 +45,8 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
 
     @Nonnull
     @Override
-    public String getUid() {
-        return "chisel.chiseling";
+    public ResourceLocation getUid() {
+        return new ResourceLocation(Chisel.MOD_ID, "chiseling");
     }
 
     @Nonnull
@@ -59,18 +62,18 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
     }
 
     @Override
-    public void drawExtras(Minecraft minecraft) {
+    public void draw(ICarvingGroup recipe, double mouseX, double mouseY) {
         if (layout != null) {
             if (focus == null || focus.getMode() == IFocus.Mode.INPUT) {
-                arrowDown.draw(minecraft, 73, 21);
+                arrowDown.draw(73, 21);
             } else {
-                arrowUp.draw(minecraft, 73, 21);
+                arrowUp.draw(73, 21);
             }
         }
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, ChiselRecipeWrapper recipeWrapper, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayout recipeLayout, ICarvingGroup recipeWrapper, IIngredients ingredients) {
         this.layout = recipeLayout;
         IFocus<?> focus = (this.focus = recipeLayout.getFocus());
         
@@ -119,18 +122,20 @@ public class ChiselRecipeCategory implements IRecipeCategory<ChiselRecipeWrapper
     }
 
     @Override
-    public List<String> getTooltipStrings(int mouseX, int mouseY) {
-        return Collections.emptyList();
+    public Class<? extends ICarvingGroup> getRecipeClass() {
+        return ICarvingGroup.class;
     }
 
     @Override
-    @Nullable
     public IDrawable getIcon() {
-        return null;
+        return icon;
     }
 
     @Override
-    public String getModName() {
-        return Chisel.MOD_NAME;
+    public void setIngredients(ICarvingGroup group, IIngredients ingredients) {
+        List<ItemStack> variants = CarvingUtils.getChiselRegistry().getItemsForChiseling(group);
+        
+        ingredients.setInputs(VanillaTypes.ITEM, variants);
+        ingredients.setOutputs(VanillaTypes.ITEM, variants);
     }
 }
