@@ -4,27 +4,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.GlStateManager;
 
-import gnu.trove.list.TDoubleList;
-import gnu.trove.list.array.TDoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleArrayList;
+import it.unimi.dsi.fastutil.doubles.DoubleList;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.Direction;
 import net.minecraft.util.Timer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -42,15 +37,15 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
     
     private IChiselMode mode;
     private BlockPos origin;
-    private EnumFacing side;
+    private Direction side;
     
     private long[] cacheState = {};
     
     private List<BlockPos> candidateCache = new ArrayList<>();
-    private AxisAlignedBB candidateBounds = new AxisAlignedBB(BlockPos.ORIGIN);
-    private TDoubleList geometryCache = new TDoubleArrayList();
+    private AxisAlignedBB candidateBounds = new AxisAlignedBB(BlockPos.ZERO);
+    private DoubleList geometryCache = new DoubleArrayList();
     
-    public ChiselModeGeometryCache(IChiselMode mode, BlockPos origin, EnumFacing side) {
+    public ChiselModeGeometryCache(IChiselMode mode, BlockPos origin, Direction side) {
         this.mode = mode;
         this.origin = origin;
         this.side = side;
@@ -73,7 +68,7 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         }
     }
     
-    public void setSide(EnumFacing side) {
+    public void setSide(Direction side) {
         if (this.side != side) {
             this.side = side;
             if (checkDirty()) {
@@ -91,10 +86,10 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
     }
     
     protected void updateCache() {
-        IBlockState state = Minecraft.getMinecraft().world.getBlockState(origin);
+        BlockState state = Minecraft.getInstance().world.getBlockState(origin);
         ICarvingGroup group = CarvingUtils.getChiselRegistry().getGroup(state);
         if (group != null) {
-            this.candidateCache = Lists.newArrayList(mode.getCandidates(Minecraft.getMinecraft().player, origin, side));
+            this.candidateCache = Lists.newArrayList(mode.getCandidates(Minecraft.getInstance().player, origin, side));
             this.candidateBounds = mode.getBounds(side).offset(origin);
             this.cacheState = mode.getCacheState(origin, side);
         } else {
@@ -105,16 +100,16 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         draw(state);
     }
     
-    private void draw(IBlockState state) {
+    private void draw(BlockState state) {
 //        Pair<ResourceLocation, ResourceLocation> overlay = mode.getOverlayTex();
-//        TextureMap map = Minecraft.getMinecraft().getTextureMapBlocks();
+//        TextureMap map = Minecraft.getInstance().getTextureMapBlocks();
 //        TextureInfo info = new TextureInfo(new TextureAtlasSprite[] {map.getAtlasSprite(overlay.getLeft().toString()), map.getAtlasSprite(overlay.getRight().toString())}, Optional.empty(), BlockRenderLayer.TRANSLUCENT);
 //        ICTMTexture<?> tex = CTM_TYPE.makeTexture(info);
 
         geometryCache.clear();
-        RegionCache world = new RegionCache(origin, 20, Minecraft.getMinecraft().world);
+        RegionCache world = new RegionCache(origin, 20, Minecraft.getInstance().world);
         for (BlockPos pos : getCandidates()) {
-            AxisAlignedBB bb = state.getSelectedBoundingBox(Minecraft.getMinecraft().world, pos);
+            AxisAlignedBB bb = state.getSelectedBoundingBox(Minecraft.getInstance().world, pos);
             drawCulledBox(bb, world, pos);
             // UnpackedBakedQuad.Builder builder = new UnpackedBakedQuad.Builder(DefaultVertexFormats.POSITION_COLOR);
             // float[] vpos = new float[]{ (float) bb.minX, (float) bb.minY, (float) bb.maxZ, (float) bb.maxX, (float) bb.minY, (float) bb.maxZ, (float) bb.maxX, (float) bb.maxY, (float) bb.maxZ,
@@ -137,38 +132,38 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
     }
 
     private void drawCulledBox(AxisAlignedBB bb, IBlockAccess world, BlockPos pos) {
-        IBlockState state = world.getBlockState(pos);
-        if (state.shouldSideBeRendered(world, pos, EnumFacing.DOWN)) {
+        BlockState state = world.getBlockState(pos);
+        if (state.shouldSideBeRendered(world, pos, Direction.DOWN)) {
             pos(bb.maxX, bb.minY, bb.minZ);
             pos(bb.maxX, bb.minY, bb.maxZ);
             pos(bb.minX, bb.minY, bb.maxZ);
             pos(bb.minX, bb.minY, bb.minZ);
         }
-        if (state.shouldSideBeRendered(world, pos, EnumFacing.UP)) {
+        if (state.shouldSideBeRendered(world, pos, Direction.UP)) {
             pos(bb.minX, bb.maxY, bb.maxZ);
             pos(bb.maxX, bb.maxY, bb.maxZ);
             pos(bb.maxX, bb.maxY, bb.minZ);
             pos(bb.minX, bb.maxY, bb.minZ);
         }
-        if (state.shouldSideBeRendered(world, pos, EnumFacing.NORTH)) {
+        if (state.shouldSideBeRendered(world, pos, Direction.NORTH)) {
             pos(bb.minX, bb.maxY, bb.minZ);
             pos(bb.maxX, bb.maxY, bb.minZ);
             pos(bb.maxX, bb.minY, bb.minZ);
             pos(bb.minX, bb.minY, bb.minZ);
         }
-        if (state.shouldSideBeRendered(world, pos, EnumFacing.SOUTH)) {
+        if (state.shouldSideBeRendered(world, pos, Direction.SOUTH)) {
             pos(bb.minX, bb.minY, bb.maxZ);
             pos(bb.maxX, bb.minY, bb.maxZ);
             pos(bb.maxX, bb.maxY, bb.maxZ);
             pos(bb.minX, bb.maxY, bb.maxZ);
         }
-        if (state.shouldSideBeRendered(world, pos, EnumFacing.WEST)) {
+        if (state.shouldSideBeRendered(world, pos, Direction.WEST)) {
             pos(bb.minX, bb.minY, bb.minZ);
             pos(bb.minX, bb.minY, bb.maxZ);
             pos(bb.minX, bb.maxY, bb.maxZ);
             pos(bb.minX, bb.maxY, bb.minZ);
         }
-        if (state.shouldSideBeRendered(world, pos, EnumFacing.EAST)) {
+        if (state.shouldSideBeRendered(world, pos, Direction.EAST)) {
             pos(bb.maxX, bb.maxY, bb.minZ);
             pos(bb.maxX, bb.maxY, bb.maxZ);
             pos(bb.maxX, bb.minY, bb.maxZ);
@@ -187,7 +182,7 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
     }
     
     @Override
-    public void notifyBlockUpdate(World worldIn, BlockPos pos, IBlockState oldState, IBlockState newState, int flags) {
+    public void notifyBlockUpdate(World worldIn, BlockPos pos, BlockState oldState, BlockState newState, int flags) {
         checkRedraw(new AxisAlignedBB(pos));
     }
 
@@ -198,7 +193,7 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
     
     private void checkRedraw(AxisAlignedBB updateRange) {
         if (updateRange.intersects(candidateBounds)) {
-            Minecraft.getMinecraft().addScheduledTask(this::updateCache);
+            Minecraft.getInstance().execute(this::updateCache);
         }
     }
     
@@ -227,37 +222,4 @@ public class ChiselModeGeometryCache implements IWorldEventListener {
         Tessellator.getInstance().draw();
         GlStateManager.popMatrix();
     }
-
-    /* == Dummy Impls == */
-
-    @Override
-    public void notifyLightSet(BlockPos pos) {}
-
-    @Override
-    public void playSoundToAllNearExcept(@Nullable EntityPlayer player, SoundEvent soundIn, SoundCategory category, double x, double y, double z, float volume, float pitch) {}
-
-    @Override
-    public void playRecord(SoundEvent soundIn, BlockPos pos) {}
-
-    @Override
-    public void spawnParticle(int particleID, boolean ignoreRange, double xCoord, double yCoord, double zCoord, double xSpeed, double ySpeed, double zSpeed, int... parameters) {}
-
-    @Override
-    public void onEntityAdded(Entity entityIn) {}
-
-    @Override
-    public void onEntityRemoved(Entity entityIn) {}
-
-    @Override
-    public void broadcastSound(int soundID, BlockPos pos, int data) {}
-
-    @Override
-    public void playEvent(EntityPlayer player, int type, BlockPos blockPosIn, int data) {}
-
-    @Override
-    public void sendBlockBreakProgress(int breakerId, BlockPos pos, int progress) {}
-
-    @Override
-    public void spawnParticle(int id, boolean ignoreRange, boolean p_190570_3_, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int... parameters) {}
-
 }

@@ -1,6 +1,6 @@
 package team.chisel.client.render.type;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.client.render.ctx.BlockRenderContextAlterR;
@@ -21,7 +21,7 @@ public class BlockRenderTypeAlterR implements ITextureType {
     }
 
     @Override
-    public ITextureContext getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos, ICTMTexture<?> tex) {
+    public ITextureContext getBlockRenderContext(BlockState state, IBlockAccess world, BlockPos pos, ICTMTexture<?> tex) {
         return new BlockRenderContextAlterR(pos, (ChiselTextureAlterR) tex);
     }
 

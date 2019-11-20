@@ -1,28 +1,27 @@
 package team.chisel.common.block;
 
-import java.util.List;
-
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.common.collect.ImmutableList;
-
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IEnviromentBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import team.chisel.Chisel;
@@ -31,14 +30,16 @@ import team.chisel.common.init.ChiselTabs;
 @ParametersAreNonnullByDefault
 public class BlockAutoChisel extends Block {
     
-    private static final ImmutableList<AxisAlignedBB> BOXES = ImmutableList.<AxisAlignedBB>builder()
-            .add(new AxisAlignedBB(0, 0, 0, 1, 10/16f, 1))
-            .add(new AxisAlignedBB(0, 10/16f, 0, 1/16f, 1, 1))
-            .add(new AxisAlignedBB(15/16f, 10/16f, 0, 1, 1, 1))
-            .add(new AxisAlignedBB(0, 10/16f, 0, 1, 1, 1/16f))
-            .add(new AxisAlignedBB(0, 10/16f, 15/16f, 1, 1, 1))
-            .add(new AxisAlignedBB(0, 15/16f, 0, 1, 1, 1))
-            .build();
+    @SuppressWarnings("null")
+    private static final VoxelShape COLLISION_SHAPE = VoxelShapes.or(
+            makeCuboidShape(0, 0, 0, 1, 10, 1),
+            makeCuboidShape(0, 10, 0, 1, 1, 1),
+            makeCuboidShape(15, 10, 0, 1, 1, 1),
+            makeCuboidShape(0, 10, 0, 1, 1, 1),
+            makeCuboidShape(0, 10, 15, 1, 1, 1),
+            makeCuboidShape(0, 15, 0, 1, 1, 1));
+    
+    private static final VoxelShape SELECTION_SHAPE = VoxelShapes.fullCube();
 
     public BlockAutoChisel() {
         super(Material.IRON);
@@ -51,25 +52,26 @@ public class BlockAutoChisel extends Block {
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(@Nullable BlockState state) {
         return true;
     }
 
     @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
+    @Nullable
+    public TileEntity createTileEntity(@Nullable BlockState state, @Nullable IBlockReader world) {
         return new TileAutoChisel();
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
-            playerIn.openGui(Chisel.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            player.openContainer(Chisel.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         if (stack.hasDisplayName()) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -79,9 +81,10 @@ public class BlockAutoChisel extends Block {
             }
         }
     }
-
+    
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    @Deprecated
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
 
         if (tileentity instanceof TileAutoChisel) {
@@ -92,7 +95,7 @@ public class BlockAutoChisel extends Block {
             worldIn.updateComparatorOutputLevel(pos, this);
         }
 
-        super.breakBlock(worldIn, pos, state);
+        super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
     private void dumpItems(World worldIn, BlockPos pos, IItemHandler inv) {
@@ -106,17 +109,22 @@ public class BlockAutoChisel extends Block {
     }
     
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-        BOXES.forEach(bb -> addCollisionBoxToList(pos, entityBox, collidingBoxes, bb));
+    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return COLLISION_SHAPE;
     }
     
     @Override
-    public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
-        return face == EnumFacing.DOWN;
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return SELECTION_SHAPE;
     }
     
     @Override
-    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+    public boolean doesSideBlockRendering(@Nullable BlockState state, @Nullable IEnviromentBlockReader world, @Nullable BlockPos pos, @Nullable Direction face) {
+        return face == Direction.DOWN;
+    }
+    
+    @Override
+    public boolean canRenderInLayer(@Nullable BlockState state, @Nullable BlockRenderLayer layer) {
         return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.CUTOUT;
     }
 }

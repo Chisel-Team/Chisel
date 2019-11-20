@@ -30,11 +30,6 @@ public class VariationData {
     public String group;
 
     /**
-     * The Recipe for this variation, if null it cant be crafted TODO Crafting stuff, maybe custom data class 3x3 of unique identifiers or ore dictionary names
-     */
-    public ChiselRecipe recipe;
-
-    /**
      * The Itemstack that is smelted into this variation, if null it cant be smelted
      */
     public ItemStack smeltedFrom;

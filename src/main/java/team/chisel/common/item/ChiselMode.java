@@ -15,11 +15,11 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.google.common.collect.Sets;
 
 import lombok.Value;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumFacing.AxisDirection;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Direction.AxisDirection;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -34,12 +34,12 @@ public enum ChiselMode implements IChiselMode {
     SINGLE {
 
         @Override
-        public Iterable<BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side) {
+        public Iterable<BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
             return Collections.singleton(pos);
         }
         
         @Override
-        public AxisAlignedBB getBounds(EnumFacing side) {
+        public AxisAlignedBB getBounds(Direction side) {
             return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
         }
     },
@@ -49,7 +49,7 @@ public enum ChiselMode implements IChiselMode {
         private final BlockPos NEG_ONE = new BlockPos(-1, -1, -1);
 
         @Override
-        public Iterable<BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side) {
+        public Iterable<BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
             if (side.getAxisDirection() == AxisDirection.NEGATIVE) {
                 side = side.getOpposite();
             }
@@ -58,7 +58,7 @@ public enum ChiselMode implements IChiselMode {
         }
         
         @Override
-        public AxisAlignedBB getBounds(EnumFacing side) {
+        public AxisAlignedBB getBounds(Direction side) {
             switch (side.getAxis()) {
             case X:
             default:
@@ -73,11 +73,11 @@ public enum ChiselMode implements IChiselMode {
     COLUMN {
 
         @Override
-        public Iterable<BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side) {
+        public Iterable<BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
             int facing = MathHelper.floor(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
             Set<BlockPos> ret = new LinkedHashSet<>();
             for (int i = -1; i <= 1; i++) {
-                if (side != EnumFacing.DOWN && side != EnumFacing.UP) {
+                if (side != Direction.DOWN && side != Direction.UP) {
                     ret.add(pos.up(i));
                 } else {
                     if (facing == 0 || facing == 2) {
@@ -91,24 +91,24 @@ public enum ChiselMode implements IChiselMode {
         }
         
         @Override
-        public AxisAlignedBB getBounds(EnumFacing side) {
+        public AxisAlignedBB getBounds(Direction side) {
             return PANEL.getBounds(side);
         }
         
         @Override
-        public long[] getCacheState(BlockPos origin, EnumFacing side) {
-            return ArrayUtils.add(super.getCacheState(origin, side), Minecraft.getMinecraft().player.getHorizontalFacing().ordinal());
+        public long[] getCacheState(BlockPos origin, Direction side) {
+            return ArrayUtils.add(super.getCacheState(origin, side), Minecraft.getInstance().player.getHorizontalFacing().ordinal());
         }
     },
     ROW {
 
         @Override
-        public Iterable<BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side) {
+        public Iterable<BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
             int facing = MathHelper.floor(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
             Set<BlockPos> ret = new LinkedHashSet<>();
             for (int i = -1; i <= 1; i++) {
-                if (side != EnumFacing.DOWN && side != EnumFacing.UP) {
-                    if (side == EnumFacing.EAST || side == EnumFacing.WEST) {
+                if (side != Direction.DOWN && side != Direction.UP) {
+                    if (side == Direction.EAST || side == Direction.WEST) {
                         ret.add(pos.south(i));
                     } else {
                         ret.add(pos.east(i));
@@ -125,12 +125,12 @@ public enum ChiselMode implements IChiselMode {
         }
         
         @Override
-        public AxisAlignedBB getBounds(EnumFacing side) {
+        public AxisAlignedBB getBounds(Direction side) {
             return PANEL.getBounds(side);
         }
         
         @Override
-        public long[] getCacheState(BlockPos origin, EnumFacing side) {
+        public long[] getCacheState(BlockPos origin, Direction side) {
             return COLUMN.getCacheState(origin, side);
         }
     }, 
@@ -138,12 +138,12 @@ public enum ChiselMode implements IChiselMode {
 
         
         @Override
-        public Iterable<? extends BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side) {
-            return () -> getContiguousIterator(pos, player.world, EnumFacing.VALUES);
+        public Iterable<? extends BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
+            return () -> getContiguousIterator(pos, player.world, Direction.VALUES);
         }
         
         @Override
-        public AxisAlignedBB getBounds(EnumFacing side) {
+        public AxisAlignedBB getBounds(Direction side) {
             int r = CONTIGUOUS_RANGE;
             return new AxisAlignedBB(-r - 1, -r - 1, -r - 1, r + 2, r + 2, r + 2);
         }
@@ -152,12 +152,12 @@ public enum ChiselMode implements IChiselMode {
         
         
         @Override
-        public Iterable<? extends BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side) {
-            return () -> getContiguousIterator(pos, player.world, ArrayUtils.removeElements(EnumFacing.VALUES, side, side.getOpposite()));
+        public Iterable<? extends BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
+            return () -> getContiguousIterator(pos, player.world, ArrayUtils.removeElements(Direction.VALUES, side, side.getOpposite()));
         }
         
         @Override
-        public AxisAlignedBB getBounds(EnumFacing side) {
+        public AxisAlignedBB getBounds(Direction side) {
             int r = CONTIGUOUS_RANGE;
             switch (side.getAxis()) {
             case X:
@@ -180,8 +180,8 @@ public enum ChiselMode implements IChiselMode {
     
     public static final int CONTIGUOUS_RANGE = 10;
     
-    private static Iterator<BlockPos> getContiguousIterator(BlockPos origin, World world, EnumFacing[] directionsToSearch) {
-        final IBlockState state = world.getBlockState(origin);
+    private static Iterator<BlockPos> getContiguousIterator(BlockPos origin, World world, Direction[] directionsToSearch) {
+        final BlockState state = world.getBlockState(origin);
         return new Iterator<BlockPos>() {
 
             private Set<BlockPos> seen = Sets.newHashSet(origin);
@@ -197,12 +197,12 @@ public enum ChiselMode implements IChiselMode {
             public BlockPos next() {
                 Node ret = search.poll();
                 if (ret.getDistance() < CONTIGUOUS_RANGE) {
-                    for (EnumFacing face : directionsToSearch) {
+                    for (Direction face : directionsToSearch) {
                         BlockPos bp = ret.getPos().offset(face);
                         if (!seen.contains(bp) && world.getBlockState(bp) == state) {
-                            for (EnumFacing obscureCheck : EnumFacing.VALUES) {
+                            for (Direction obscureCheck : Direction.VALUES) {
                                 BlockPos obscuringPos = bp.offset(obscureCheck);
-                                IBlockState obscuringState = world.getBlockState(obscuringPos);
+                                BlockState obscuringState = world.getBlockState(obscuringPos);
                                 if (!obscuringState.isSideSolid(world, obscuringPos, obscureCheck.getOpposite())) {
                                     search.offer(new Node(bp, ret.getDistance() + 1));
                                     break;
@@ -217,7 +217,7 @@ public enum ChiselMode implements IChiselMode {
         };
     }
     
-    private static Iterable<BlockPos> filteredIterable(Collection<BlockPos> source, World world, IBlockState state) {
+    private static Iterable<BlockPos> filteredIterable(Collection<BlockPos> source, World world, BlockState state) {
         return source.stream().filter(p -> world.getBlockState(p) == state)::iterator;
     }
     

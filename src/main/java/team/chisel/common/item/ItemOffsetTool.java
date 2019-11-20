@@ -1,11 +1,11 @@
 package team.chisel.common.item;
 
-import static net.minecraft.util.EnumFacing.DOWN;
-import static net.minecraft.util.EnumFacing.EAST;
-import static net.minecraft.util.EnumFacing.NORTH;
-import static net.minecraft.util.EnumFacing.SOUTH;
-import static net.minecraft.util.EnumFacing.UP;
-import static net.minecraft.util.EnumFacing.WEST;
+import static net.minecraft.util.Direction.DOWN;
+import static net.minecraft.util.Direction.EAST;
+import static net.minecraft.util.Direction.NORTH;
+import static net.minecraft.util.Direction.SOUTH;
+import static net.minecraft.util.Direction.UP;
+import static net.minecraft.util.Direction.WEST;
 
 import java.awt.geom.Line2D;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import lombok.ToString;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -30,12 +30,12 @@ import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -63,17 +63,17 @@ public class ItemOffsetTool extends Item {
         private BlockPos offset = BlockPos.ORIGIN;
 
         @Override
-        public void write(NBTTagCompound tag) {
+        public void write(CompoundNBT tag) {
             tag.setShort("offset", (short) (offset.getX() << 8 | offset.getY() << 4 | offset.getZ()));
         }
 
         @Override
-        public void read(NBTTagCompound tag) {
+        public void read(CompoundNBT tag) {
             short data = tag.getShort("offset");
             offset = new BlockPos((data >> 8) & 0xF, (data >> 4) & 0xF, data & 0xF);
         }
 
-        void move(EnumFacing dir) {
+        void move(Direction dir) {
             offset = wrap(offset.offset(dir.getOpposite()));
         }
 
@@ -106,8 +106,8 @@ public class ItemOffsetTool extends Item {
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        IBlockState state = world.getBlockState(pos);
+    public EnumActionResult onItemUse(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction facing, float hitX, float hitY, float hitZ) {
+        BlockState state = world.getBlockState(pos);
         if (state.getBlock() instanceof ICarvable) {
             if (world.isRemote) {
                 return canOffset(player, world, pos, hand, facing) ? EnumActionResult.SUCCESS : EnumActionResult.PASS;
@@ -121,8 +121,8 @@ public class ItemOffsetTool extends Item {
         return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
     }
 
-    public EnumFacing getMoveDir(EnumFacing face, double xCoord, double yCoord, double zCoord) {
-        Map<Double, EnumFacing> map = Maps.newHashMap();
+    public Direction getMoveDir(Direction face, double xCoord, double yCoord, double zCoord) {
+        Map<Double, Direction> map = Maps.newHashMap();
         if (face.getFrontOffsetX() != 0) {
             fillMap(map, zCoord, yCoord, DOWN, UP, NORTH, SOUTH);
         } else if (face.getFrontOffsetY() != 0) {
@@ -135,7 +135,7 @@ public class ItemOffsetTool extends Item {
         return map.get(keys.get(0));
     }
 
-    private void fillMap(Map<Double, EnumFacing> map, double x, double y, EnumFacing... dirs) {
+    private void fillMap(Map<Double, Direction> map, double x, double y, Direction... dirs) {
         map.put(Line2D.ptLineDistSq(0, 0, 1, 0, x, y), dirs[0]);
         map.put(Line2D.ptLineDistSq(0, 1, 1, 1, x, y), dirs[1]);
         map.put(Line2D.ptLineDistSq(0, 0, 0, 1, x, y), dirs[2]);
@@ -146,11 +146,11 @@ public class ItemOffsetTool extends Item {
     @SideOnly(Side.CLIENT)
     public void onBlockHighlight(DrawBlockHighlightEvent event) {
         RayTraceResult mop = event.getTarget();
-        EntityPlayer player = event.getPlayer();
+        PlayerEntity player = event.getPlayer();
 
-        if (mop.typeOfHit == Type.BLOCK && (canOffset(player, player.world, mop.getBlockPos(), EnumHand.MAIN_HAND, mop.sideHit) || canOffset(player, player.world, mop.getBlockPos(), EnumHand.OFF_HAND, mop.sideHit))) {
+        if (mop.typeOfHit == Type.BLOCK && (canOffset(player, player.world, mop.getBlockPos(), Hand.MAIN_HAND, mop.sideHit) || canOffset(player, player.world, mop.getBlockPos(), Hand.OFF_HAND, mop.sideHit))) {
 
-            EnumFacing face = mop.sideHit;
+            Direction face = mop.sideHit;
             BlockPos pos = mop.getBlockPos();
             BufferBuilder buf = Tessellator.getInstance().getBuffer();
             GlStateManager.pushMatrix();
@@ -202,7 +202,7 @@ public class ItemOffsetTool extends Item {
             
             GlStateManager.color(1, 1, 1, 0x55 / 255f);
 
-            EnumFacing moveDir = getMoveDir(face, hit.x - pos.getX(), hit.y - pos.getY(), hit.z - pos.getZ());
+            Direction moveDir = getMoveDir(face, hit.x - pos.getX(), hit.y - pos.getY(), hit.z - pos.getZ());
             int clampedX = Math.max(0, moveDir.getFrontOffsetX());
             int clampedY = Math.max(0, moveDir.getFrontOffsetY());
             int clampedZ = Math.max(0, moveDir.getFrontOffsetZ());
@@ -231,12 +231,12 @@ public class ItemOffsetTool extends Item {
         }
     }
 
-    private boolean canOffset(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing side) {
-        IBlockState state = world.getBlockState(pos);
+    private boolean canOffset(PlayerEntity player, World world, BlockPos pos, Hand hand, Direction side) {
+        BlockState state = world.getBlockState(pos);
         if (player.getHeldItem(hand).isEmpty() || player.getHeldItem(hand).getItem() != this) {
             return false;
         }
-        IBakedModel model = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(state);
+        IBakedModel model = Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelShapes().getModelForState(state);
         if (!(model instanceof AbstractCTMBakedModel)) {
             return false;
         }

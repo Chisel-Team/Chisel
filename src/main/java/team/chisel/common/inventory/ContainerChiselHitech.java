@@ -9,12 +9,12 @@ import com.google.common.collect.ImmutableList;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.common.util.NBTUtil;
 
@@ -27,7 +27,7 @@ public class ContainerChiselHitech extends ContainerChisel {
     private List<Slot> selectionDuplicates = ImmutableList.of();
     private @Nullable ICarvingGroup currentGroup;
     
-    public ContainerChiselHitech(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {
+    public ContainerChiselHitech(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, Hand hand) {
         super(inventoryplayer, inv, hand);
         
         int selectionSlot = NBTUtil.getHitechSelection(chisel);
@@ -105,13 +105,13 @@ public class ContainerChiselHitech extends ContainerChisel {
     }
     
     @Override
-    public void onContainerClosed(EntityPlayer entityplayer) {
+    public void onContainerClosed(PlayerEntity entityplayer) {
         NBTUtil.setChiselTarget(getChisel(), getTargetStack());
         super.onContainerClosed(entityplayer);
     }
     
     @Override
-    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
         if (slotId >= 0) {
             Slot slot = getSlot(slotId);
             if (slotId < getInventoryChisel().size) {

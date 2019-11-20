@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
@@ -29,7 +29,7 @@ public interface ICarvingRegistry {
      * @return The {@link ICarvingGroup} that the block/meta pair belongs to
      */
     @Nullable
-    ICarvingGroup getGroup(IBlockState state);
+    ICarvingGroup getGroup(BlockState state);
 
     /**
      * Finds the group the ItemStack belongs to in the registry.
@@ -59,7 +59,7 @@ public interface ICarvingRegistry {
      * @return The {@link ICarvingVariation} containing this block/meta pair
      */
     @Nullable
-    ICarvingVariation getVariation(IBlockState state);
+    ICarvingVariation getVariation(BlockState state);
 
     /**
      * Gets the {@link ICarvingVariation} instance represented by this stack.
@@ -79,7 +79,7 @@ public interface ICarvingRegistry {
      *            The state of the variation
      * @return All of the {@link ICarvingVariation}s in the group that contains this block/meta pair
      */
-    List<ICarvingVariation> getGroupVariations(IBlockState state);
+    List<ICarvingVariation> getGroupVariations(BlockState state);
 
     /**
      * Gets the possible output items for this {@link ItemStack}. To be used for machines/GUIs that chisel items.
@@ -104,7 +104,7 @@ public interface ICarvingRegistry {
      *            The state of the variation
      * @return The string resource for the sound that can be used in {@link World#playSound(double, double, double, String, float, float, boolean)} and other methods.
      */
-    public SoundEvent getVariationSound(IBlockState state);
+    public SoundEvent getVariationSound(BlockState state);
 
     /**
      * Gets the sound resource string for the group represented by this ItemStack.
@@ -167,23 +167,23 @@ public interface ICarvingRegistry {
      * Removes a variation with the passed {@link Block} and metadata from the registry. If this variation is registered with multiple groups, it will remove it from all of them.
      * 
      * @param state
-     *            The {@link IBlockState} of the {@link ICarvingVariation variation}
+     *            The {@link BlockState} of the {@link ICarvingVariation variation}
      * @return The ICarvingVariation that was removed. Null if nothing was removed.
      */
     @Nullable
-    ICarvingVariation removeVariation(IBlockState state);
+    ICarvingVariation removeVariation(BlockState state);
 
     /**
      * Removes a variation with the passed {@link Block} and metadata from the registry, but only from the specified {@link ICarvingGroup} name.
      * 
      * @param state
-     *            The {@link IBlockState} of the {@link ICarvingVariation variation}
+     *            The {@link BlockState} of the {@link ICarvingVariation variation}
      * @param group
      *            The name of the group that the variation should be removed from
      * @return The ICarvingVariation that was removed. Null if nothing was removed.
      */
     @Nullable
-    ICarvingVariation removeVariation(IBlockState state, String group);
+    ICarvingVariation removeVariation(BlockState state, String group);
     
     /**
      * Removes a variation with the passed ItemStack from the registry. If this variation is registered with multiple groups, it will remove it from all of them.

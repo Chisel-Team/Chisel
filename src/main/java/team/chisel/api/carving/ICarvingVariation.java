@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -15,10 +15,10 @@ public interface ICarvingVariation {
     /**
      * The base blockstate of this variation.
      * 
-     * @return A {@link IBlockState} that is the base of this variation, or null if none exists.
+     * @return A {@link BlockState} that is the base of this variation, or null if none exists.
      */
     @Nullable
-    IBlockState getBlockState();
+    BlockState getBlockState();
 
     /**
      * The {@link ItemStack} of this variation. This can be customized to allow for variations that differ on NBT alone.

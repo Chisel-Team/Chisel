@@ -5,8 +5,8 @@ import java.util.Locale;
 import javax.annotation.ParametersAreNonnullByDefault;
 import javax.vecmath.Point2i;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -27,9 +27,9 @@ public interface IChiselMode {
      *            The side of the block being targeted.
      * @return All valid positions to be chiseled.
      */
-    Iterable<@NonnullType ? extends BlockPos> getCandidates(EntityPlayer player, BlockPos pos, EnumFacing side);
+    Iterable<@NonnullType ? extends BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side);
 
-    AxisAlignedBB getBounds(EnumFacing side);
+    AxisAlignedBB getBounds(Direction side);
     
 	/**
 	 * Implemented implicitly by enums. If your IChiselMode is not an enum constant, this needs to be implemented explicitly.
@@ -42,7 +42,7 @@ public interface IChiselMode {
 	    return "chisel.mode." + name().toLowerCase(Locale.ROOT);
 	}
 
-    default long[] getCacheState(BlockPos origin, EnumFacing side) {
+    default long[] getCacheState(BlockPos origin, Direction side) {
         return new long[] {origin.toLong(), side.ordinal()};
     }
     

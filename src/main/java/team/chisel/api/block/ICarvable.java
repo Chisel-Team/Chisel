@@ -2,9 +2,8 @@ package team.chisel.api.block;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
-import net.minecraftforge.common.property.IExtendedBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.state.IProperty;
 
 @ParametersAreNonnullByDefault
 public interface ICarvable {
@@ -35,10 +34,10 @@ public interface ICarvable {
      * Gets the variation index from the world state.
      * 
      * @param state
-     *            The current {@link IExtendedBlockState}.
+     *            The current {@link BlockState}.
      * @return The variation index.
      */
-    int getVariationIndex(IBlockState state);
+    int getVariationIndex(BlockState state);
     
     IProperty<Integer> getMetaProp();
 

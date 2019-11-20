@@ -10,7 +10,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -24,7 +24,7 @@ import team.chisel.common.config.Configurations;
  * Class for the items for the chisel block
  */
 @ParametersAreNonnullByDefault
-public class ItemChiselBlock extends ItemBlock {
+public class ItemChiselBlock extends BlockItem {
 
     private ICarvable block;
 

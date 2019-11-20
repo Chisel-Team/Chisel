@@ -8,7 +8,7 @@ import io.netty.buffer.ByteBuf;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -28,7 +28,7 @@ public class MessageAutochiselFX implements IMessage {
     
     private @Nonnull BlockPos pos = BlockPos.ORIGIN;
     private @Nonnull ItemStack chisel = new ItemStack(ChiselItems.chisel_iron);
-    private @Nonnull IBlockState state = Blocks.AIR.getDefaultState();
+    private @Nonnull BlockState state = Blocks.AIR.getDefaultState();
     
     @Override
     public void toBytes(ByteBuf buf) {

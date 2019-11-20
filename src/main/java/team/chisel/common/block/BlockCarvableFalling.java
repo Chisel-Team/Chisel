@@ -2,7 +2,7 @@ package team.chisel.common.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +22,7 @@ public class BlockCarvableFalling extends BlockCarvable {
 
     private static boolean fallInstantly;
 
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+    public void onBlockAdded(World worldIn, BlockPos pos, BlockState state) {
         /*if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
                 worldIn.getBlockState(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
                 worldIn.getBlockState(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
@@ -38,7 +38,7 @@ public class BlockCarvableFalling extends BlockCarvable {
             worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
     }
 
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         /*if(worldIn.getBlockState(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
                 worldIn.getBlockState(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
                 worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY()+1, pos.getZ())).getMaterial() == Material.WATER ||
@@ -53,7 +53,7 @@ public class BlockCarvableFalling extends BlockCarvable {
             worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
     }
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand) {
         if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
                 worldIn.getBlockState(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
                 worldIn.getBlockState(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
@@ -68,7 +68,7 @@ public class BlockCarvableFalling extends BlockCarvable {
         }
     }
 
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn) {
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn) {
         if(worldIn.getBlockState(new BlockPos(pos.getX(), pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
                 worldIn.getBlockState(new BlockPos(pos.getX()+1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
                 worldIn.getBlockState(new BlockPos(pos.getX()-1, pos.getY(), pos.getZ())).getMaterial() == Material.WATER ||
@@ -91,7 +91,7 @@ public class BlockCarvableFalling extends BlockCarvable {
                     worldIn.spawnEntity(state1);
                 }
             } else {
-                IBlockState state = worldIn.getBlockState(pos);
+                BlockState state = worldIn.getBlockState(pos);
                 worldIn.setBlockToAir(pos);
 
                 BlockPos blockpos;
@@ -113,7 +113,7 @@ public class BlockCarvableFalling extends BlockCarvable {
         return 2;
     }
 
-    public static boolean canFallThrough(IBlockState state) {
+    public static boolean canFallThrough(BlockState state) {
         Block block = state.getBlock();
         Material material = state.getMaterial();
         return block == Blocks.FIRE || material == Material.AIR;
@@ -126,7 +126,7 @@ public class BlockCarvableFalling extends BlockCarvable {
     }
 
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+    public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         if(rand.nextInt(16) == 0) {
             BlockPos blockpos = pos.down();
             if(canFallThrough(worldIn.getBlockState(blockpos))) {
@@ -139,7 +139,7 @@ public class BlockCarvableFalling extends BlockCarvable {
     }
 
     @SideOnly(Side.CLIENT)
-    public int getDustColor(IBlockState p_189876_1_) {
+    public int getDustColor(BlockState p_189876_1_) {
         return -16777216;
     }
 }

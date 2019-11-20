@@ -3,8 +3,8 @@ package team.chisel.common.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -23,28 +23,28 @@ public class BlockCarvableCarpet extends BlockCarvable {
         super(material, index, max, variations);
     }
 
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(BlockState state, IBlockAccess source, BlockPos pos) {
         return CARPET_AABB;
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(BlockState state) {
         return false;
     }
 
     @Override
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(BlockState state) {
         return false;
     }
     
     @Override
-    public boolean causesSuffocation(IBlockState state) {
+    public boolean causesSuffocation(BlockState state) {
         return false;
     }
     
     @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing facing) {
-        return facing == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
+    public BlockFaceShape getBlockFaceShape(IBlockAccess world, BlockState state, BlockPos pos, Direction facing) {
+        return facing == Direction.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
     }
 
     @Override
@@ -53,11 +53,11 @@ public class BlockCarvableCarpet extends BlockCarvable {
     }
 
     @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos p_189540_5_) {
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos p_189540_5_) {
         this.checkForDrop(worldIn, pos, state);
     }
 
-    private boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state) {
+    private boolean checkForDrop(World worldIn, BlockPos pos, BlockState state) {
         if(!this.canBlockStay(worldIn, pos)) {
             this.dropBlockAsItem(worldIn, pos, state, 0);
             worldIn.setBlockToAir(pos);

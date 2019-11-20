@@ -6,8 +6,8 @@ import javax.annotation.Nonnull;
 
 import io.netty.buffer.ByteBuf;
 import lombok.NoArgsConstructor;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerEntityMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -49,7 +49,7 @@ public class PacketChiselButton implements IMessage {
 
         @Override
         public IMessage onMessage(PacketChiselButton message, MessageContext ctx) {
-            EntityPlayerMP player = ctx.getServerHandler().player;
+            PlayerEntityMP player = ctx.getServerHandler().player;
             ctx.getServerHandler().player.getServerWorld().addScheduledTask(
                     () -> chiselAll(player, message.slotIds)
             );
@@ -57,7 +57,7 @@ public class PacketChiselButton implements IMessage {
         }
     }
     
-    public static void chiselAll(EntityPlayer player, int[] slots) {
+    public static void chiselAll(PlayerEntity player, int[] slots) {
         if (player.openContainer instanceof ContainerChiselHitech) {
             ContainerChiselHitech container = (ContainerChiselHitech) player.openContainer;
             ItemStack chisel = container.getChisel();

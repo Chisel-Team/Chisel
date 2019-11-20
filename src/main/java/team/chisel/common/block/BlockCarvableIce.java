@@ -8,16 +8,16 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
@@ -43,7 +43,7 @@ public class BlockCarvableIce extends BlockCarvable {
     // From BlockIce - Do Not Edit
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+    public void harvestBlock(World worldIn, PlayerEntity player, BlockPos pos, BlockState state, @Nullable TileEntity te, ItemStack stack) {
         player.addStat(StatList.getBlockStats(this));
         player.addExhaustion(0.005F);
 
@@ -78,7 +78,7 @@ public class BlockCarvableIce extends BlockCarvable {
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+    public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand) {
         if (worldIn.getLightFor(EnumSkyBlock.BLOCK, pos) > 11 - this.getDefaultState().getLightOpacity()) {
             this.turnIntoWater(worldIn, pos);
         }
@@ -95,22 +95,22 @@ public class BlockCarvableIce extends BlockCarvable {
     }
 
     @Override
-    public EnumPushReaction getMobilityFlag(IBlockState state) {
+    public EnumPushReaction getMobilityFlag(BlockState state) {
         return EnumPushReaction.NORMAL;
     }
 
     // From BlockBreakable - Do Not Edit
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(BlockState state) {
         return false;
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     @Deprecated
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-        IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
+    public boolean shouldSideBeRendered(BlockState blockState, IBlockAccess blockAccess, BlockPos pos, Direction side) {
+        BlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
         Block block = iblockstate.getBlock();
         return block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }

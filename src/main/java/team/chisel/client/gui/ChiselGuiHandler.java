@@ -2,10 +2,10 @@ package team.chisel.client.gui;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
@@ -20,11 +20,11 @@ import team.chisel.common.inventory.InventoryChiselSelection;
 public class ChiselGuiHandler implements IGuiHandler {
 
     @Override
-    public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getServerGuiElement(int id, PlayerEntity player, World world, int x, int y, int z) {
         if (id == 0) {
             @SuppressWarnings("null")
             @Nonnull
-            EnumHand hand = EnumHand.values()[x];
+            Hand hand = Hand.values()[x];
             ItemStack held = player.getHeldItem(hand);
             if (held.getItem() instanceof IChiselItem) {
                 // FIXME unsafe cast
@@ -45,11 +45,11 @@ public class ChiselGuiHandler implements IGuiHandler {
     }
 
     @Override
-    public Object getClientGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getClientGuiElement(int id, PlayerEntity player, World world, int x, int y, int z) {
         if (id == 0) {
             @SuppressWarnings("null")
             @Nonnull
-            EnumHand hand = EnumHand.values()[x];
+            Hand hand = Hand.values()[x];
             ItemStack held = player.getHeldItem(hand);
             if (held.getItem() instanceof IChiselItem) {
                 // FIXME unsafe cast

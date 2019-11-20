@@ -3,13 +3,13 @@ package team.chisel.common.inventory;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -32,11 +32,11 @@ public class SlotChiselSelection extends Slot {
     }
 
     @Override
-    public boolean canTakeStack(EntityPlayer par1EntityPlayer) {
-        return par1EntityPlayer.inventory.getItemStack().isEmpty();
+    public boolean canTakeStack(PlayerEntity par1PlayerEntity) {
+        return par1PlayerEntity.inventory.getItemStack().isEmpty();
     }
     
-    public static ItemStack craft(ContainerChisel container, EntityPlayer player, ItemStack itemstack, boolean simulate) {
+    public static ItemStack craft(ContainerChisel container, PlayerEntity player, ItemStack itemstack, boolean simulate) {
         ItemStack crafted = container.getInventoryChisel().getStackInSpecialSlot();
         ItemStack chisel = container.getChisel();
         if (simulate) {
@@ -72,7 +72,7 @@ public class SlotChiselSelection extends Slot {
     }
 
     @Override
-    public ItemStack onTake(EntityPlayer player, ItemStack itemstack) {
+    public ItemStack onTake(PlayerEntity player, ItemStack itemstack) {
         ItemStack chisel = container.getChisel().copy();
         ItemStack res = craft(container, player, itemstack, false);
         if (container.currentClickType != ClickType.PICKUP) {

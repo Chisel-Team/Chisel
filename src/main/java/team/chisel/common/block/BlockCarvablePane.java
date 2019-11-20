@@ -6,15 +6,15 @@ import lombok.Getter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockStateContainer;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.creativetab.ItemGroup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -72,18 +72,18 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     }
 
     @Override
-    public int damageDropped(IBlockState state) {
+    public int damageDropped(BlockState state) {
         return getMetaFromState(state);
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta) {
+    public BlockState getStateFromMeta(int meta) {
         this.useNeighborBrightness = true;
         return getBlockState().getBaseState().withProperty(metaProp, meta);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state) {
+    public int getMetaFromState(BlockState state) {
         return state.getValue(metaProp);
     }
 
@@ -101,7 +101,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(ItemGroup tab, NonNullList<ItemStack> list) {
         int curIndex = 0;
         for (VariationData var : this.variations) {
             if (var == null) {
@@ -116,7 +116,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     }
 
     @Override
-    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager effectRenderer) {
+    public boolean addHitEffects(BlockState state, World worldObj, RayTraceResult target, ParticleManager effectRenderer) {
         ClientUtil.addHitEffects(worldObj, target.getBlockPos(), target.sideHit);
         return true;
     }
@@ -128,7 +128,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     }
 
     @Override
-    public int getVariationIndex(IBlockState state) {
+    public int getVariationIndex(BlockState state) {
         return getMetaFromState(state);
     }
 
@@ -153,7 +153,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     }
 
     @Override
-    public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+    public boolean canEntityDestroy(BlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
         if (entity instanceof EntityDragon){
             return !dragonProof;
         }else{
@@ -163,7 +163,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(BlockState blockState, IBlockAccess blockAccess, BlockPos pos, Direction side) {
         if (!super.shouldSideBeRendered(blockState, blockAccess, pos, side)) {
             if (side.getAxis() != Axis.Y) return false;
             return blockAccess.getBlockState(pos.offset(side)).getActualState(blockAccess, pos.offset(side)) != blockState;

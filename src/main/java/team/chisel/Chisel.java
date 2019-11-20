@@ -15,7 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
@@ -135,34 +135,34 @@ public class Chisel implements Reference {
 //      Example of IMC
                 
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION.toString(), "marble|minecraft:dirt|0");
-        NBTTagCompound testtag = new NBTTagCompound();
+        CompoundNBT testtag = new CompoundNBT();
         testtag.setString("group", "marble");
         testtag.setTag("stack", new ItemStack(Items.DIAMOND_PICKAXE, 1, 100).serializeNBT());
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
-        testtag = new NBTTagCompound();
+        testtag = new CompoundNBT();
         testtag.setString("group", "marble");
         testtag.setString("block", Blocks.WOOL.getRegistryName().toString());
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
-        testtag = new NBTTagCompound();
+        testtag = new CompoundNBT();
         testtag.setString("group", "marble");
         testtag.setString("block", Blocks.WOOL.getRegistryName().toString());
         testtag.setInteger("meta", Blocks.WOOL.getMetaFromState(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BROWN)));
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
-        testtag = new NBTTagCompound();
+        testtag = new CompoundNBT();
         testtag.setString("group", "marble");
         testtag.setTag("stack", new ItemStack(Items.REDSTONE).serializeNBT());
         testtag.setString("block", Blocks.REDSTONE_WIRE.getRegistryName().toString());
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
         
-        testtag = new NBTTagCompound();
+        testtag = new CompoundNBT();
         testtag.setString("group", "marble");
         testtag.setTag("stack", new ItemStack(ChiselBlocks.marble, 1, 3).serializeNBT());
         FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
-        testtag = new NBTTagCompound();
+        testtag = new CompoundNBT();
         testtag.setString("group", "marble");
         testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
         FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
-        testtag = new NBTTagCompound();
+        testtag = new CompoundNBT();
         testtag.setString("group", "marble");
         testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
         testtag.setInteger("meta", 5);
@@ -173,11 +173,11 @@ public class Chisel implements Reference {
     private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output)
     {
 
-        NBTTagCompound message = new NBTTagCompound();
+        CompoundNBT message = new CompoundNBT();
 
         message.setInteger("energy", energy);
-        message.setTag("input", new NBTTagCompound());
-        message.setTag("output", new NBTTagCompound());
+        message.setTag("input", new CompoundNBT());
+        message.setTag("output", new CompoundNBT());
 
         input.writeToNBT(message.getCompoundTag("input"));
         output.writeToNBT(message.getCompoundTag("output"));

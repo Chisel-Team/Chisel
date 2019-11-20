@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraftforge.registries.IForgeRegistry;
 import team.chisel.common.block.ItemChiselBlock;
 
@@ -28,10 +28,10 @@ public class ChiselBlockFactory {
     }
 
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass) {
-        return newBlock(material, blockName, creator, blockClass, ItemBlock.class);
+        return newBlock(material, blockName, creator, blockClass, BlockItem.class);
     }
 
-    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass, Class<? extends ItemBlock> itemBlockClass) {
+    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass, Class<? extends BlockItem> itemBlockClass) {
         return newBlock(material, blockName, new BlockProvider<T>() {
 
             @Override
@@ -45,8 +45,8 @@ public class ChiselBlockFactory {
             }
 
             @Override
-            public ItemBlock createItemBlock(T block) {
-                return (ItemBlock) new ItemChiselBlock(block).setRegistryName(block.getRegistryName());
+            public BlockItem createBlockItem(T block) {
+                return (BlockItem) new ItemChiselBlock(block).setRegistryName(block.getRegistryName());
             }
         });
     }

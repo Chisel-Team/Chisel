@@ -9,14 +9,15 @@ import java.util.stream.IntStream;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.block.BlockState;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.oredict.OreDictionary;
@@ -59,13 +60,13 @@ public class CarvingUtils {
 	}
 	
 	public static int hashStack(ItemStack stack) {
-	    return stack.getItem().hashCode() ^ (stack.getItemDamage() * 31);
+	    return Objects.hashCode(stack.getItem(), stack.getTag());
 	}
 
 	/**
      * Creates a new variation for the given blockstate, with automatic (flawed) conversion to ItemStack when necessary.
      */
-    public static ICarvingVariation variationFor(IBlockState state, int order) {
+    public static ICarvingVariation variationFor(BlockState state, int order) {
         return new VariationForState(state, order);
     }
 
@@ -79,7 +80,7 @@ public class CarvingUtils {
     /**
      * Creates a new variation for the given ItemStack and blockstate. Use this for full control over ItemStack/blockstate conversion.
      */
-    public static ICarvingVariation variationFor(ItemStack stack, @Nullable IBlockState state, int order) {
+    public static ICarvingVariation variationFor(ItemStack stack, @Nullable BlockState state, int order) {
         return new SimpleVariation(stack, state, order);
     }
 
@@ -133,8 +134,8 @@ public class CarvingUtils {
 	    public boolean equals(Object obj) {
 	        if (!(obj instanceof ICarvingVariation)) return false;
 	        ICarvingVariation other = (ICarvingVariation) obj;
-	        IBlockState state = getBlockState();
-	        IBlockState otherState = other.getBlockState();
+	        BlockState state = getBlockState();
+	        BlockState otherState = other.getBlockState();
 	        if (state == null || otherState == null) {
 	            return stacksEqual(getStack(), other.getStack());
 	        }
@@ -143,7 +144,7 @@ public class CarvingUtils {
 	    
 	    @Override
 	    public int hashCode() {
-	        IBlockState state = getBlockState();
+	        BlockState state = getBlockState();
 	        if (state != null) {
 	            return state.hashCode();
 	        }
@@ -153,15 +154,15 @@ public class CarvingUtils {
 
 	private static class SimpleCarvingVariation extends SimpleVariationBase {
 
-		private IBlockState state;
+		private BlockState state;
 
-		public SimpleCarvingVariation(IBlockState state, int order) {
+		public SimpleCarvingVariation(BlockState state, int order) {
 		    super(order);
 			this.state = state;
 		}
 
 		@Override
-		public IBlockState getBlockState() {
+		public BlockState getBlockState() {
 			return state;
 		}
 
@@ -173,7 +174,7 @@ public class CarvingUtils {
 	
 	private static class VariationForState extends SimpleCarvingVariation {
 
-        public VariationForState(IBlockState state, int order) {
+        public VariationForState(BlockState state, int order) {
             super(state, order);
         }	    
 	}
@@ -186,7 +187,7 @@ public class CarvingUtils {
 	    public VariationForStack(ItemStack stack, int order) {
 	        super(order);
 	        this.stack = stack;
-	        this.hasBlock = stack.getItem() instanceof ItemBlock;
+	        this.hasBlock = stack.getItem() instanceof BlockItem;
 	    }
 	    
 	    @Override
@@ -197,8 +198,8 @@ public class CarvingUtils {
         @SuppressWarnings("deprecation")
         @Override
         @Nullable
-        public IBlockState getBlockState() {
-            return hasBlock ? ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getItemDamage()) : null;
+        public BlockState getBlockState() {
+            return hasBlock ? ((BlockItem)stack.getItem()).getBlock().getStateFromMeta(stack.getItemDamage()) : null;
         }	    
 	}
 	
@@ -207,9 +208,9 @@ public class CarvingUtils {
         private final ItemStack stack;
         @Nullable
         @Getter
-        private final IBlockState blockState;
+        private final BlockState blockState;
 
-        public SimpleVariation(ItemStack stack, @Nullable IBlockState state, int order) {
+        public SimpleVariation(ItemStack stack, @Nullable BlockState state, int order) {
             super(order);
             this.stack = stack;
             this.blockState = state;

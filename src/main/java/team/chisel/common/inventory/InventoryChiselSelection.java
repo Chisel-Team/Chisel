@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.Block;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
@@ -111,7 +111,7 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public boolean isUsableByPlayer(EntityPlayer player) {
+    public boolean isUsableByPlayer(PlayerEntity player) {
         ItemStack held = player.inventory.getStackInSlot(container.getChiselSlot());
         return !held.isEmpty() && held.getItem() instanceof IChiselItem && ((IChiselItem)held.getItem()).canOpenGui(player.world, player, container.hand);
     }
@@ -182,12 +182,12 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public void openInventory(EntityPlayer var1) {
+    public void openInventory(PlayerEntity var1) {
 
     }
 
     @Override
-    public void closeInventory(EntityPlayer var1) {
+    public void closeInventory(PlayerEntity var1) {
 
     }
 

@@ -15,8 +15,8 @@ import com.google.common.collect.Maps;
 import io.netty.buffer.ByteBuf;
 import lombok.val;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntityMP;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.server.management.PlayerChunkMapEntry;
 import net.minecraft.util.math.ChunkPos;
@@ -43,13 +43,13 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         private ChunkPos chunk;
         private String key;
-        private @Nonnull NBTTagCompound tag;
+        private @Nonnull CompoundNBT tag;
 
         @SuppressWarnings("null")
         public MessageChunkData() {
         }
 
-        public MessageChunkData(Chunk chunk, String key, @Nonnull NBTTagCompound tag) {
+        public MessageChunkData(Chunk chunk, String key, @Nonnull CompoundNBT tag) {
             this.chunk = chunk.getPos();
             this.key = key;
             this.tag = tag;
@@ -58,7 +58,7 @@ public enum PerChunkData implements IChunkDataRegistry {
         public MessageChunkData(String key, IChunkData<?> iChunkData) {
             this.chunk = null;
             this.key = key;
-            this.tag = new NBTTagCompound();
+            this.tag = new CompoundNBT();
             this.tag.setTag("l", iChunkData.writeToNBT());
         }
 
@@ -89,7 +89,7 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         @Override
         public IMessage onMessage(MessageChunkData message, MessageContext ctx) {
-            Minecraft.getMinecraft().addScheduledTask(new Runnable() {
+            Minecraft.getInstance().addScheduledTask(new Runnable() {
                 
                 @Override
                 public void run() {
@@ -134,10 +134,10 @@ public enum PerChunkData implements IChunkDataRegistry {
         public NBTTagList writeToNBT() {
             NBTTagList tags = new NBTTagList();
             for (Entry<Pair<Integer, ChunkPos>, T> e : data.entrySet()) {
-                NBTTagCompound entry = new NBTTagCompound();
+                CompoundNBT entry = new CompoundNBT();
                 entry.setInteger("d", e.getKey().getLeft());
                 entry.setLong("p", (e.getKey().getRight().x << 32) | e.getKey().getRight().z);
-                NBTTagCompound data = new NBTTagCompound();
+                CompoundNBT data = new CompoundNBT();
                 e.getValue().write(data);
                 entry.setTag("v", data);
                 tags.appendTag(entry);
@@ -146,7 +146,7 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         @Override
-        public void writeToNBT(@Nonnull Chunk chunk, @Nonnull NBTTagCompound tag) {
+        public void writeToNBT(@Nonnull Chunk chunk, @Nonnull CompoundNBT tag) {
             T t = data.get(Pair.of(chunk.getWorld().provider.getDimension(), chunk.getPos()));
             if (t != null) {
                 t.write(tag);
@@ -157,7 +157,7 @@ public enum PerChunkData implements IChunkDataRegistry {
         public Iterable<ChunkPos> readFromNBT(@Nonnull NBTTagList tags) {
             List<ChunkPos> changed = new ArrayList<>();
             for (int i = 0; i < tags.tagCount(); i++) {
-                NBTTagCompound entry = tags.getCompoundTagAt(i);
+                CompoundNBT entry = tags.getCompoundTagAt(i);
                 int dimID = entry.getInteger("d");
                 long coordsRaw = entry.getLong("p");
                 ChunkPos coords = new ChunkPos((int) ((coordsRaw >>> 32) & 0xFFFFFFFF), (int) (coordsRaw & 0xFFFFFFFF));
@@ -169,13 +169,13 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         @Override
-        public void readFromNBT(@Nonnull Chunk chunk, @Nonnull NBTTagCompound tag) {
+        public void readFromNBT(@Nonnull Chunk chunk, @Nonnull CompoundNBT tag) {
             int dimID = chunk.getWorld().provider.getDimension();
             ChunkPos coords = chunk.getPos();
             readFromNBT(dimID, coords, tag);
         }
         
-        private boolean readFromNBT(int dimID, ChunkPos coords, NBTTagCompound tag) {
+        private boolean readFromNBT(int dimID, ChunkPos coords, CompoundNBT tag) {
             if (tag.hasNoTags()) {
                 data.remove(dimID, coords);
                 return false;
@@ -229,7 +229,7 @@ public enum PerChunkData implements IChunkDataRegistry {
     @SubscribeEvent
     public void onChunkSave(ChunkDataEvent.Save event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
-            NBTTagCompound tag = new NBTTagCompound();
+            CompoundNBT tag = new CompoundNBT();
             e.getValue().writeToNBT(event.getChunk(), tag);
             event.getData().setTag("chisel:" + e.getKey(), tag);
         }
@@ -238,7 +238,7 @@ public enum PerChunkData implements IChunkDataRegistry {
     @SubscribeEvent
     public void onChunkLoad(ChunkDataEvent.Load event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
-            NBTTagCompound tag = event.getData().getCompoundTag("chisel:" + e.getKey());
+            CompoundNBT tag = event.getData().getCompoundTag("chisel:" + e.getKey());
             e.getValue().readFromNBT(event.getChunk(), tag);
             updateClient(event.getChunk(), e.getKey(), e.getValue());
         }
@@ -248,7 +248,7 @@ public enum PerChunkData implements IChunkDataRegistry {
     public void onPlayerJoin(PlayerLoggedInEvent event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
             if (e.getValue().requiresClientSync()) {
-                Chisel.network.sendTo(new MessageChunkData(e.getKey(), e.getValue()), (EntityPlayerMP) event.player);
+                Chisel.network.sendTo(new MessageChunkData(e.getKey(), e.getValue()), (PlayerEntityMP) event.player);
             }
         }
     }
@@ -261,7 +261,7 @@ public enum PerChunkData implements IChunkDataRegistry {
     
     private void updateClient(@Nonnull Chunk chunk, String key, IChunkData<?> cd) {
         if (cd.requiresClientSync()) {
-            NBTTagCompound tag = new NBTTagCompound();
+            CompoundNBT tag = new CompoundNBT();
             cd.writeToNBT(chunk, tag);
             PlayerChunkMapEntry entry = ((WorldServer)chunk.getWorld()).getPlayerChunkMap().getEntry(chunk.x, chunk.z);
             if (entry != null) {

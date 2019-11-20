@@ -24,17 +24,17 @@ import net.minecraft.block.BlockStoneBrick;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.*;
-import net.minecraft.util.EnumFacing.Axis;
+import net.minecraft.util.Direction.Axis;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -153,7 +153,7 @@ public enum Features {
     ANDESITE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            IBlockState stone = Blocks.STONE.getDefaultState();
+            BlockState stone = Blocks.STONE.getDefaultState();
             IProperty<BlockStone.EnumType> prop = BlockStone.VARIANT;
             Carving.chisel.addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE), -21));
             Carving.chisel.addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE_SMOOTH), -20));
@@ -204,7 +204,7 @@ public enum Features {
         void addBlocks(ChiselBlockFactory factory) {
             /*BlockCreator<BlockCarvable> antiblockCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
-                public int getPackedLightmapCoords(IBlockState state, IBlockAccess access, BlockPos pos) {
+                public int getPackedLightmapCoords(BlockState state, IBlockAccess access, BlockPos pos) {
                     return 0xF000F0;
                 }
             };*/
@@ -293,7 +293,7 @@ public enum Features {
         
         @Override
         void addItems(IForgeRegistry<Item> registry) {
-            registry.register(new ItemBlock(ChiselBlocks.auto_chisel).setRegistryName(ChiselBlocks.auto_chisel.getRegistryName()));
+            registry.register(new BlockItem(ChiselBlocks.auto_chisel).setRegistryName(ChiselBlocks.auto_chisel.getRegistryName()));
         }
         
         @Override
@@ -390,7 +390,7 @@ public enum Features {
 
             BlockCreator<BlockCarvable> bookshelfCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
-                public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+                public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, BlockState state, int fortune) {
                     Blocks.BOOKSHELF.getDrops(drops, world, pos, state, fortune);
                 }
 
@@ -590,7 +590,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            IBlockState carpet = Blocks.CARPET.getDefaultState();
+            BlockState carpet = Blocks.CARPET.getDefaultState();
             IProperty<EnumDyeColor> prop = BlockCarpet.COLOR;
 
             for(int c = 0; c < dyeColors.length; c++)
@@ -1073,7 +1073,7 @@ public enum Features {
     DIORITE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            IBlockState stone = Blocks.STONE.getDefaultState();
+            BlockState stone = Blocks.STONE.getDefaultState();
             IProperty<BlockStone.EnumType> prop = BlockStone.VARIANT;
             Carving.chisel.addVariation("diorite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.DIORITE), -21));
             Carving.chisel.addVariation("diorite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.DIORITE_SMOOTH), -20));
@@ -1207,7 +1207,7 @@ public enum Features {
     END_PURPUR {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            IBlockState purpur_pillar = Blocks.PURPUR_PILLAR.getDefaultState();
+            BlockState purpur_pillar = Blocks.PURPUR_PILLAR.getDefaultState();
             IProperty<Axis> prop = BlockRotatedPillar.AXIS;
 
             Carving.chisel.addVariation("purpur", CarvingUtils.variationFor(Blocks.PURPUR_BLOCK.getDefaultState(), -5));
@@ -1471,8 +1471,8 @@ public enum Features {
         @SuppressWarnings("null")
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            IBlockState stainedGlass = Blocks.STAINED_GLASS.getDefaultState();
-            IBlockState stainedGlassPane = Blocks.STAINED_GLASS_PANE.getDefaultState();
+            BlockState stainedGlass = Blocks.STAINED_GLASS.getDefaultState();
+            BlockState stainedGlassPane = Blocks.STAINED_GLASS_PANE.getDefaultState();
             IProperty<EnumDyeColor> prop = BlockStainedGlass.COLOR;
 
             for(int c = 0; c < dyeColors.length; c++) {
@@ -1492,7 +1492,7 @@ public enum Features {
                     }
 
                     @Override
-                    public float[] getBeaconColorMultiplier(IBlockState state, World world, BlockPos pos, BlockPos beaconPos) {
+                    public float[] getBeaconColorMultiplier(BlockState state, World world, BlockPos pos, BlockPos beaconPos) {
                         return beaconFloats;
                     }
                 };
@@ -1597,12 +1597,12 @@ public enum Features {
 
                 @Override
                 @Nullable
-                public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+                public Item getItemDropped(BlockState state, Random rand, int fortune) {
                     return Items.GLOWSTONE_DUST;
                 }
 
                 @Override
-                public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+                public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, BlockState state, int fortune) {
                     Random rand = world instanceof World ? ((World)world).rand : RANDOM;
                     drops.add(new ItemStack(Items.GLOWSTONE_DUST, this.quantityDropped(state, fortune, rand)));
                 }
@@ -1695,7 +1695,7 @@ public enum Features {
     GRANITE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            IBlockState stone = Blocks.STONE.getDefaultState();
+            BlockState stone = Blocks.STONE.getDefaultState();
             IProperty<BlockStone.EnumType> prop = BlockStone.VARIANT;
             Carving.chisel.addVariation("granite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.GRANITE), -21));
             Carving.chisel.addVariation("granite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.GRANITE_SMOOTH), -20));
@@ -2300,8 +2300,8 @@ public enum Features {
 
             BlockCreator<BlockCarvable> netherrackCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
-                public boolean isFireSource(@Nonnull World world, BlockPos pos, EnumFacing side) {
-                    return side == EnumFacing.UP;
+                public boolean isFireSource(@Nonnull World world, BlockPos pos, Direction side) {
+                    return side == Direction.UP;
                 }
             };
 
@@ -2407,7 +2407,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory)
         {
-            IBlockState planks = Blocks.PLANKS.getDefaultState();
+            BlockState planks = Blocks.PLANKS.getDefaultState();
             IProperty<BlockPlanks.EnumType> prop = BlockPlanks.VARIANT;
 
             for (int c = 0; c < plank_names.length; c++)
@@ -2469,7 +2469,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            IBlockState prismarine = Blocks.PRISMARINE.getDefaultState();
+            BlockState prismarine = Blocks.PRISMARINE.getDefaultState();
             IProperty<BlockPrismarine.EnumType> prop = BlockPrismarine.VARIANT;
             Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -1));
 
@@ -2522,7 +2522,7 @@ public enum Features {
     QUARTZ {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            IBlockState quartzBlock = Blocks.QUARTZ_BLOCK.getDefaultState();
+            BlockState quartzBlock = Blocks.QUARTZ_BLOCK.getDefaultState();
             IProperty<BlockQuartz.EnumType> prop = BlockQuartz.VARIANT;
             Carving.chisel.addVariation("quartz", CarvingUtils.variationFor(quartzBlock.withProperty(prop, BlockQuartz.EnumType.DEFAULT), -25));
             Carving.chisel.addVariation("quartz", CarvingUtils.variationFor(quartzBlock.withProperty(prop, BlockQuartz.EnumType.CHISELED), -24));
@@ -2578,13 +2578,13 @@ public enum Features {
 
             BlockCreator<BlockCarvable> redstoneCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
                 @Override
-                public boolean canProvidePower(IBlockState state)
+                public boolean canProvidePower(BlockState state)
                 {
                     return true;
                 }
 
                 @Override
-                public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+                public int getWeakPower(BlockState blockState, IBlockAccess blockAccess, BlockPos pos, Direction side)
                 {
                     return 15;
                 }
@@ -2633,7 +2633,7 @@ public enum Features {
     SANDSTONE {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            IBlockState ss = Blocks.SANDSTONE.getDefaultState();
+            BlockState ss = Blocks.SANDSTONE.getDefaultState();
             IProperty<BlockSandStone.EnumType> prop = BlockSandStone.TYPE;
             Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.DEFAULT), -13));
             Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.SMOOTH), -11));
@@ -2688,7 +2688,7 @@ public enum Features {
     SANDSTONE_RED {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
-            IBlockState ss = Blocks.RED_SANDSTONE.getDefaultState();
+            BlockState ss = Blocks.RED_SANDSTONE.getDefaultState();
             IProperty<BlockRedSandstone.EnumType> prop = BlockRedSandstone.TYPE;
 
             Carving.chisel.addVariation("sandstonered", CarvingUtils.variationFor(ss.withProperty(prop, BlockRedSandstone.EnumType.DEFAULT), -13));
@@ -2853,7 +2853,7 @@ public enum Features {
                 Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(Blocks.STONE.getDefaultState(), -100));
             }
             
-            IBlockState stoneBricks = Blocks.STONEBRICK.getDefaultState();
+            BlockState stoneBricks = Blocks.STONEBRICK.getDefaultState();
             IProperty<BlockStoneBrick.EnumType> prop = BlockStoneBrick.VARIANT;
             Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(stoneBricks.withProperty(prop, BlockStoneBrick.EnumType.DEFAULT), -26));
             if (Configurations.allowMossy) {
@@ -3241,7 +3241,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            IBlockState wool = Blocks.WOOL.getDefaultState();
+            BlockState wool = Blocks.WOOL.getDefaultState();
             IProperty<EnumDyeColor> prop = BlockColored.COLOR;
 
             for(int c = 0; c < dyeColors.length; c++)
@@ -3311,8 +3311,8 @@ public enum Features {
         }
 
         @Override
-        public ItemBlock createItemBlock(T block) {
-            return (ItemBlock) new ItemChiselBlock(block).setRegistryName(block.getRegistryName());
+        public BlockItem createBlockItem(T block) {
+            return (BlockItem) new ItemChiselBlock(block).setRegistryName(block.getRegistryName());
         }
     }
 

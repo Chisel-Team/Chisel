@@ -1,31 +1,24 @@
 package team.chisel.api.chunkdata;
 
-import java.util.Collections;
-
 import javax.annotation.Nonnull;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.dimension.DimensionType;
 
 public interface IChunkData<T> {
     
-    default NBTTagList writeToNBT() {
-        // No impl, backwards compat. TODO make non-default
-        return new NBTTagList();
-    }
+    ListNBT writeToNBT();
 
-    void writeToNBT(@Nonnull Chunk chunk, @Nonnull NBTTagCompound tag);
+    void writeToNBT(@Nonnull Chunk chunk, @Nonnull CompoundNBT tag);
     
-    default Iterable<ChunkPos> readFromNBT(@Nonnull NBTTagList tag) {
-        // No impl, backwards compat. TODO make non-default
-        return Collections.emptyList();
-    }
+    Iterable<ChunkPos> readFromNBT(@Nonnull ListNBT tag);
 
-    void readFromNBT(@Nonnull Chunk chunk, @Nonnull NBTTagCompound tag);
+    void readFromNBT(@Nonnull Chunk chunk, @Nonnull CompoundNBT tag);
 
     boolean requiresClientSync();
 
-    T getDataForChunk(int dimID, @Nonnull ChunkPos chunk);
+    T getDataForChunk(DimensionType dimID, @Nonnull ChunkPos chunk);
 }

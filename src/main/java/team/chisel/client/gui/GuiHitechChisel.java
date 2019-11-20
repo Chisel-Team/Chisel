@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
@@ -36,8 +36,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
@@ -128,7 +128,7 @@ public class GuiHitechChisel extends GuiChisel {
         private final GuiHitechChisel gui;
         
         @Setter
-        private IBlockState state = Blocks.AIR.getDefaultState();
+        private BlockState state = Blocks.AIR.getDefaultState();
 
         @Override
         public @Nullable TileEntity getTileEntity(BlockPos pos) {
@@ -141,7 +141,7 @@ public class GuiHitechChisel extends GuiChisel {
         }
 
         @Override
-        public IBlockState getBlockState(BlockPos pos) {
+        public BlockState getBlockState(BlockPos pos) {
             return gui.buttonPreview.getType().getPositions().contains(pos) ? state : Blocks.AIR.getDefaultState();
         }
 
@@ -161,7 +161,7 @@ public class GuiHitechChisel extends GuiChisel {
         }
 
         @Override
-        public int getStrongPower(BlockPos pos, EnumFacing direction) {
+        public int getStrongPower(BlockPos pos, Direction direction) {
             return 0;
         }
 
@@ -171,7 +171,7 @@ public class GuiHitechChisel extends GuiChisel {
         }
 
         @Override
-        public boolean isSideSolid(BlockPos pos, EnumFacing side, boolean _default) {
+        public boolean isSideSolid(BlockPos pos, Direction side, boolean _default) {
             return getBlockState(pos).isSideSolid(this, pos, side);
         }
     }
@@ -200,9 +200,9 @@ public class GuiHitechChisel extends GuiChisel {
     private @Nullable GuiButton buttonChisel;
     private @Nullable RotateButton buttonRotate;
     
-    private @Nullable IBlockState erroredState;
+    private @Nullable BlockState erroredState;
     
-    public GuiHitechChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, EnumHand hand) {
+    public GuiHitechChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, Hand hand) {
         super(iinventory, menu, hand);
         inventorySlots = containerHitech = new ContainerChiselHitech(iinventory, menu, hand);
         xSize = 256;
@@ -372,7 +372,7 @@ public class GuiHitechChisel extends GuiChisel {
                 GlStateManager.translate(-1.5, -2.5, -0.5);
 
                 Block block = Block.getBlockFromItem(stack.getItem());
-                IBlockState state = block == null ? null : block.getStateFromMeta(stack.getMetadata());
+                BlockState state = block == null ? null : block.getStateFromMeta(stack.getMetadata());
                 if (state instanceof IExtendedBlockState) {
                     state = ((IExtendedBlockState) state).getClean();
                 }

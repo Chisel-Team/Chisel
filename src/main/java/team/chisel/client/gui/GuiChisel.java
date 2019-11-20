@@ -14,10 +14,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
@@ -35,10 +35,10 @@ import team.chisel.common.util.NBTUtil;
 @ParametersAreNonnullByDefault
 public class GuiChisel extends GuiContainer {
 
-    public EntityPlayer player;
+    public PlayerEntity player;
     public ContainerChisel container;
 
-    public GuiChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, EnumHand hand) {
+    public GuiChisel(InventoryPlayer iinventory, InventoryChiselSelection menu, Hand hand) {
         super(new ContainerChisel(iinventory, menu, hand));
         player = iinventory.player;
         xSize = 252;
@@ -145,7 +145,7 @@ public class GuiChisel extends GuiContainer {
 
         String texture = "chisel:textures/chisel2Gui.png";
 
-        Minecraft.getMinecraft().getTextureManager().bindTexture(new ResourceLocation(texture));
+        Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(texture));
         drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
 
         int x = (width - xSize) / 2;

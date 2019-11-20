@@ -2,12 +2,12 @@ package team.chisel.common.util;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 @ParametersAreNonnullByDefault
 public interface NBTSaveable {
 
-    void write(NBTTagCompound tag);
+    void write(CompoundNBT tag);
 
-    void read(NBTTagCompound tag);
+    void read(CompoundNBT tag);
 }

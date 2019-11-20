@@ -2,7 +2,7 @@ package team.chisel.client.render.type;
 
 import java.util.Optional;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import team.chisel.client.render.texture.ChiselTextureSimpleCTM;
@@ -23,11 +23,11 @@ public class BlockRenderTypeSimpleCTM extends TextureTypeCTM {
     }
 
     @Override
-    public TextureContextCTM getBlockRenderContext(IBlockState state, IBlockAccess world, BlockPos pos, ICTMTexture<?> tex) {
+    public TextureContextCTM getBlockRenderContext(BlockState state, IBlockAccess world, BlockPos pos, ICTMTexture<?> tex) {
         return new TextureContextCTM(state, world, pos, (TextureCTM<?>) tex) {
 
             @Override
-            protected CTMLogic createCTM(IBlockState state) {
+            protected CTMLogic createCTM(BlockState state) {
                 CTMLogic ctm = super.createCTM(state);
 
                 ctm.disableObscuredFaceCheck = Optional.of(true);

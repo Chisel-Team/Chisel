@@ -7,17 +7,17 @@ import com.google.common.base.Strings;
 import lombok.Getter;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockStateContainer;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.creativetab.ItemGroup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -83,7 +83,7 @@ public class BlockCarvable extends Block implements ICarvable {
 //    }
 
     @Override
-    public int getVariationIndex(IBlockState state) {
+    public int getVariationIndex(BlockState state) {
         return getMetaFromState(state);
     }
 
@@ -104,17 +104,17 @@ public class BlockCarvable extends Block implements ICarvable {
     }
     
     @Override
-    public int damageDropped(IBlockState state) {
+    public int damageDropped(BlockState state) {
         return getMetaFromState(state);
     }
 
     @Override
-    public IBlockState getStateFromMeta(int meta) {
+    public BlockState getStateFromMeta(int meta) {
         return getBlockState().getBaseState().withProperty(metaProp, meta);
     }
 
     @Override
-    public int getMetaFromState(IBlockState state) {
+    public int getMetaFromState(BlockState state) {
         return state.getValue(metaProp);
     }
 
@@ -131,7 +131,7 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     @Override
-    public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+    public void getSubBlocks(ItemGroup tab, NonNullList<ItemStack> list) {
         int curIndex = 0;
         for (VariationData var : this.variations) {
             if (var == null || Strings.emptyToNull(var.name) == null) {
@@ -147,7 +147,7 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager effectRenderer) {
+    public boolean addHitEffects(BlockState state, World worldObj, RayTraceResult target, ParticleManager effectRenderer) {
         ClientUtil.addHitEffects(worldObj, target.getBlockPos(), target.sideHit);
         return true;
     }
@@ -160,46 +160,46 @@ public class BlockCarvable extends Block implements ICarvable {
     }
     
     @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
+    public EnumBlockRenderType getRenderType(BlockState state) {
         return EnumBlockRenderType.MODEL;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
+    public boolean canRenderInLayer(BlockState state, BlockRenderLayer layer) {
         return super.canRenderInLayer(state, layer);
     }
 
     @Override
-    public boolean isFullBlock(IBlockState state) {
+    public boolean isFullBlock(BlockState state) {
         return true;
     }
 
     @Override
-    public boolean isFullCube(IBlockState state) {
+    public boolean isFullCube(BlockState state) {
         return state.isOpaqueCube();
     }
     
     @Override
     @Deprecated
-    public boolean isOpaqueCube(IBlockState state) {
+    public boolean isOpaqueCube(BlockState state) {
         return getVariationData(getMetaFromState(state)).opaque;
     }
     
     @Override
-    public int getLightOpacity(IBlockState state) {
+    public int getLightOpacity(BlockState state) {
         return isOpaqueCube(state) ? 255 : 0;
     }
     
     @Override
     @Deprecated
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+    public boolean shouldSideBeRendered(BlockState blockState, IBlockAccess blockAccess, BlockPos pos, Direction side) {
         return super.shouldSideBeRendered(blockState, blockAccess, pos, side) && blockState != blockAccess.getBlockState(pos.offset(side));
     }
 
     @Override
-    public boolean causesSuffocation(IBlockState state) {
+    public boolean causesSuffocation(BlockState state) {
         return true;
     }
 
@@ -209,7 +209,7 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     @Override
-    public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
+    public boolean canEntityDestroy(BlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
         if (entity instanceof EntityDragon){
             return !dragonProof;
         }else{

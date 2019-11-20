@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.google.common.base.Preconditions;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.GlStateManager.DestFactor;
@@ -18,11 +18,11 @@ import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.item.EntityPainting.EnumArt;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -53,7 +53,7 @@ public class ChiselController {
     @SubscribeEvent
     public static void onPlayerInteract(PlayerInteractEvent.LeftClickBlock event) {
 
-        EntityPlayer player = event.getEntityPlayer();
+        PlayerEntity player = event.getPlayerEntity();
         ItemStack held = event.getItemStack();
         
         if (held.getItem() instanceof IChiselItem) {
@@ -62,7 +62,7 @@ public class ChiselController {
             IChiselItem chisel = (IChiselItem) held.getItem();
             
             ICarvingRegistry registry = CarvingUtils.getChiselRegistry();
-            IBlockState state = event.getWorld().getBlockState(event.getPos());
+            BlockState state = event.getWorld().getBlockState(event.getPos());
             
             if (!chisel.canChiselBlock(event.getWorld(), player, event.getHand(), event.getPos(), state)) {
                 return;
@@ -105,7 +105,7 @@ public class ChiselController {
         }
     }
 
-    private static void setAll(Iterable<? extends BlockPos> candidates, EntityPlayer player, IBlockState origState, ICarvingVariation v) {
+    private static void setAll(Iterable<? extends BlockPos> candidates, PlayerEntity player, BlockState origState, ICarvingVariation v) {
         for (BlockPos pos : candidates) {
             setVariation(player, pos, origState, v);
         }
@@ -113,12 +113,12 @@ public class ChiselController {
     /**
      * Assumes that the player is holding a chisel
      */
-    private static void setVariation(EntityPlayer player, BlockPos pos, IBlockState origState, ICarvingVariation v) {
-        IBlockState targetState = v.getBlockState();
+    private static void setVariation(PlayerEntity player, BlockPos pos, BlockState origState, ICarvingVariation v) {
+        BlockState targetState = v.getBlockState();
         Preconditions.checkNotNull(targetState, "Variation state cannot be null!");
         
         World world = player.world;
-        IBlockState curState = world.getBlockState(pos);
+        BlockState curState = world.getBlockState(pos);
         ItemStack held = player.getHeldItemMainhand();
         if (curState == v.getBlockState()) {
             return; // don't chisel to the same thing
@@ -156,8 +156,8 @@ public class ChiselController {
     public static void onBlockHighlight(DrawBlockHighlightEvent event) {
         ItemStack held = event.getPlayer().getHeldItemMainhand();
         if (held.getItem() instanceof IChiselItem && event.getTarget().typeOfHit == Type.BLOCK) {
-            EntityPlayer player = event.getPlayer();
-            IBlockState state = player.world.getBlockState(event.getTarget().getBlockPos());
+            PlayerEntity player = event.getPlayer();
+            BlockState state = player.world.getBlockState(event.getTarget().getBlockPos());
             if (state.getBlock() == Blocks.AIR) {
                 return;
             }
@@ -166,7 +166,7 @@ public class ChiselController {
             
             if (cache == null) {
                 cache = new ChiselModeGeometryCache(mode, event.getTarget().getBlockPos(), event.getTarget().sideHit);
-                Minecraft.getMinecraft().world.addEventListener(cache);
+                Minecraft.getInstance().world.addEventListener(cache);
             } else {
                 cache.setMode(mode);
                 cache.setOrigin(event.getTarget().getBlockPos());
@@ -219,8 +219,8 @@ public class ChiselController {
             ItemStack stack = event.getItemStack();
             if (stack.getItem() instanceof IChiselItem) {
                 IChiselItem chisel = (IChiselItem) stack.getItem();
-                if (chisel.canOpenGui(event.getWorld(), event.getEntityPlayer(), event.getHand())) {
-                    event.getEntityPlayer().openGui(Chisel.instance, 0, event.getWorld(), event.getHand().ordinal(), 0, 0);
+                if (chisel.canOpenGui(event.getWorld(), event.getPlayerEntity(), event.getHand())) {
+                    event.getPlayerEntity().openGui(Chisel.instance, 0, event.getWorld(), event.getHand().ordinal(), 0, 0);
                 }
             }
         }
@@ -228,8 +228,8 @@ public class ChiselController {
     
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getHand() == EnumHand.OFF_HAND) {
-            ItemStack mainhandStack = event.getEntityPlayer().getHeldItemMainhand();
+        if (event.getHand() == Hand.OFF_HAND) {
+            ItemStack mainhandStack = event.getPlayerEntity().getHeldItemMainhand();
             if (mainhandStack.getItem() instanceof IChiselItem) {
                 event.setCanceled(true);
             }
@@ -239,31 +239,31 @@ public class ChiselController {
     @SubscribeEvent
     public static void onLeftClickEntity(AttackEntityEvent event) {
         if (event.getTarget() instanceof EntityPainting) {
-            ItemStack held = event.getEntityPlayer().getHeldItemMainhand();
+            ItemStack held = event.getPlayerEntity().getHeldItemMainhand();
             if (held.getItem() instanceof IChiselItem) {
                 EntityPainting painting = (EntityPainting) event.getTarget();
                 EnumArt[] values = EnumArt.values();
                 do {
-                    painting.art = values[((painting.art.ordinal() + (event.getEntityPlayer().isSneaking() ? -1 : 1)) + values.length) % values.length];
+                    painting.art = values[((painting.art.ordinal() + (event.getPlayerEntity().isSneaking() ? -1 : 1)) + values.length) % values.length];
                     painting.updateFacingWithBoundingBox(painting.facingDirection);
                 } while (!painting.onValidSurface());
-                damageItem(held, event.getEntityPlayer());
-                event.getEntityPlayer().world.playSound(event.getEntityPlayer(), event.getTarget().getPosition(), SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.NEUTRAL, 1, 1);
+                damageItem(held, event.getPlayerEntity());
+                event.getPlayerEntity().world.playSound(event.getPlayerEntity(), event.getTarget().getPosition(), SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.NEUTRAL, 1, 1);
                 event.setCanceled(true);
             }
         }
     }
 
-    private static void damageItem(ItemStack stack, EntityPlayer player) {
+    private static void damageItem(ItemStack stack, PlayerEntity player) {
         stack.damageItem(1, player);
         if (stack.getCount() <= 0) {
-            player.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
-            ForgeEventFactory.onPlayerDestroyItem(player, stack, EnumHand.MAIN_HAND);
+            player.setHeldItem(Hand.MAIN_HAND, ItemStack.EMPTY);
+            ForgeEventFactory.onPlayerDestroyItem(player, stack, Hand.MAIN_HAND);
         }
     }
     
-    private static void updateState(World world, BlockPos pos, ItemStack stack, EntityPlayer player, IBlockState next) {
-        IBlockState current = world.getBlockState(pos);
+    private static void updateState(World world, BlockPos pos, ItemStack stack, PlayerEntity player, BlockState next) {
+        BlockState current = world.getBlockState(pos);
         if (current != next) {
             world.setBlockState(pos, next);
             SoundUtil.playSound(player, stack, next);

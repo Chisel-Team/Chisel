@@ -14,7 +14,7 @@ public class BreakSpeedHandler {
     public static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
         Block block = event.getState().getBlock();
         if (block instanceof BlockCarvable && block.getRegistryName().getResourcePath().startsWith("wool_")) {
-            event.setNewSpeed(event.getNewSpeed() * event.getEntityPlayer().getHeldItemMainhand().getStrVsBlock(Blocks.WOOL.getDefaultState()));
+            event.setNewSpeed(event.getNewSpeed() * event.getPlayerEntity().getHeldItemMainhand().getStrVsBlock(Blocks.WOOL.getDefaultState()));
         }
     }
 }

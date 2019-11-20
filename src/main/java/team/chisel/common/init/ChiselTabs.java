@@ -2,13 +2,11 @@ package team.chisel.common.init;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import team.chisel.Chisel;
 
 /**
  * Class file for the Chisel creative tabs
@@ -16,7 +14,7 @@ import team.chisel.Chisel;
 @ParametersAreNonnullByDefault
 public class ChiselTabs {
 
-    public static class CustomCreativeTab extends CreativeTabs {
+    public static class CustomCreativeTab extends ItemGroup {
 
         private ItemStack stack;
 
@@ -40,7 +38,7 @@ public class ChiselTabs {
         }
     }
 
-    public static class ChiselCreativeTab extends CreativeTabs {
+    public static class ChiselCreativeTab extends ItemGroup {
 
         public ChiselCreativeTab() {
             super("chiselCreativeTab");
@@ -58,5 +56,5 @@ public class ChiselTabs {
         }
     }
 
-    public static final CreativeTabs tab = new ChiselCreativeTab().setBackgroundImageName("item_search.png");
+    public static final ItemGroup tab = new ChiselCreativeTab().setBackgroundImageName("item_search.png");
 }

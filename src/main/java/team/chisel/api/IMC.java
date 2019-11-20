@@ -3,7 +3,7 @@ package team.chisel.api;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
 /**
  * Use the enum constants (using {@link #key} or calling {@link #toString()}) in this class as keys for IMC messages sent to chisel
@@ -15,12 +15,12 @@ public enum IMC {
     /**
      * Register a variation. Can provide an ItemStack, blockstate, or both.
      * <p>
-     * This IMC message is expected to be an {@link NBTTagCompound}, with the following mappings:
+     * This IMC message is expected to be an {@link CompoundNBT}, with the following mappings:
      * <ul>
      * <li>"group" -> A String which represents the group being added to. <strong>REQUIRED</strong></li>
-     * <li>"stack" -> An NBTTagCompound which is the serialized ItemStack. <strong>OPTIONAL</strong></li>
+     * <li>"stack" -> An CompoundNBT which is the serialized ItemStack. <strong>OPTIONAL</strong></li>
      * <li>"block" -> A String (ResourceLocation) which reprsents the block. <strong>OPTIONAL</strong></li>
-     * <li>"meta" -> An int representing block metadata. Can be dynamic using {@link Block#getMetaFromState(net.minecraft.block.state.IBlockState)}. <strong>OPTIONAL, defaults to 0</strong></li>
+     * <li>"meta" -> An int representing block metadata. Can be dynamic using {@link Block#getMetaFromState(net.minecraft.block.BlockState)}. <strong>OPTIONAL, defaults to 0</strong></li>
      * </ul>
      * <p>
      * <strong> NOTE: If only stack, or only blockstate is provided, automatic conversion will be done, using the following code:</strong>
@@ -28,8 +28,8 @@ public enum IMC {
      * Converting ItemStack to blockstate:
      * 
      * <pre>
-     * if (stack.getItem() instanceof ItemBlock) {
-     *     return ((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
+     * if (stack.getItem() instanceof BlockItem) {
+     *     return ((BlockItem) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
      * }
      * return null;
      * </pre>
@@ -47,7 +47,7 @@ public enum IMC {
     /**
      * Remove a variation. Will attempt to match for a variation by ItemStack, then blockstate, if both are provided.
      * <p>
-     * This IMC message is expected to be an {@link NBTTagCompound}, with the same data used for adding a variation, except that "group" can be left out to remove a variation from multiple groups.
+     * This IMC message is expected to be an {@link CompoundNBT}, with the same data used for adding a variation, except that "group" can be left out to remove a variation from multiple groups.
      * 
      * @see {@link #ADD_VARIATION_V2}
      * 

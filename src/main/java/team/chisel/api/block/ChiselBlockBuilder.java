@@ -125,7 +125,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             }
             
             registry.register(ret[i]);
-            ForgeRegistries.ITEMS.register(provider.createItemBlock(ret[i])); // TODO this sucks
+            ForgeRegistries.ITEMS.register(provider.createBlockItem(ret[i])); // TODO this sucks
 
             after.accept(ret[i]);
 

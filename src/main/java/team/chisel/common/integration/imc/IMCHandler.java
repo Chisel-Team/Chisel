@@ -12,9 +12,9 @@ import com.google.common.collect.SetMultimap;
 import gnu.trove.map.TObjectIntMap;
 import gnu.trove.map.hash.TObjectIntHashMap;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -44,8 +44,8 @@ public class IMCHandler {
         }
     }
     
-    private Pair<ItemStack, IBlockState> parseNBT(NBTTagCompound tag) {
-        NBTTagCompound stacktag = tag.getCompoundTag("stack");
+    private Pair<ItemStack, BlockState> parseNBT(CompoundNBT tag) {
+        CompoundNBT stacktag = tag.getCompoundTag("stack");
         String blockname = tag.getString("block");
         int blockmeta = tag.getInteger("meta");
         Preconditions.checkArgument(!(stacktag.hasNoTags() && blockname.isEmpty()), "Must provide stack or blockstate.");
@@ -53,7 +53,7 @@ public class IMCHandler {
         if (!stacktag.hasNoTags()) {
             stack = new ItemStack(stacktag);
         }
-        IBlockState state = null;
+        BlockState state = null;
         if (!blockname.isEmpty()) {
             Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockname));
             Preconditions.checkNotNull(block, "Could not find block %s in registry!", blockname);
@@ -100,11 +100,11 @@ public class IMCHandler {
                 break;
             }
             case ADD_VARIATION_V2: {
-                NBTTagCompound tag = message.getNBTValue();
+                CompoundNBT tag = message.getNBTValue();
                 String group = tag.getString("group");
                 Preconditions.checkNotNull(Strings.emptyToNull(group), "No group specified");
                 
-                Pair<ItemStack, IBlockState> variationdata = parseNBT(tag);
+                Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
                 ICarvingVariation v;
                 if (variationdata.getLeft() == null) {
                     v = CarvingUtils.variationFor(variationdata.getRight(), order++);
@@ -117,9 +117,9 @@ public class IMCHandler {
                 break;
             }
             case REMOVE_VARIATION_V2:{
-                NBTTagCompound tag = message.getNBTValue();
+                CompoundNBT tag = message.getNBTValue();
                 String group = tag.getString("group");
-                Pair<ItemStack, IBlockState> variationdata = parseNBT(tag);
+                Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
                 if (Strings.isNullOrEmpty(group)) {
                     if (variationdata.getLeft() != null) {
                         reg.removeVariation(variationdata.getLeft());

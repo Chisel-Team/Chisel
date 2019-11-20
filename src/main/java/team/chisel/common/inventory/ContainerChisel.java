@@ -3,13 +3,13 @@ package team.chisel.common.inventory;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Getter;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import team.chisel.Chisel;
 import team.chisel.api.carving.ICarvingRegistry;
 import team.chisel.common.carving.Carving;
@@ -23,17 +23,17 @@ public class ContainerChisel extends Container {
     protected final InventoryChiselSelection inventoryChisel;
     protected final InventoryPlayer inventoryPlayer;
     
-    protected final EnumHand hand;
+    protected final Hand hand;
     protected final int chiselSlot;
     protected final ItemStack chisel;
     protected final ICarvingRegistry carving;
 
-    public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, EnumHand hand) {        
+    public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, Hand hand) {        
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
         
         this.hand = hand;
-        this.chiselSlot = hand == EnumHand.MAIN_HAND ? inventoryplayer.currentItem : inventoryplayer.getSizeInventory() - 1;
+        this.chiselSlot = hand == Hand.MAIN_HAND ? inventoryplayer.currentItem : inventoryplayer.getSizeInventory() - 1;
         this.chisel = inventoryplayer.getStackInSlot(chiselSlot);
         this.carving = Carving.chisel;
 
@@ -76,7 +76,7 @@ public class ContainerChisel extends Container {
     ClickType currentClickType;
 
     @Override
-    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
         if (clickTypeIn != ClickType.QUICK_CRAFT && slotId >= 0) {
             // we need to subtract away all the other slots
             int clickedSlot = slotId - inventoryChisel.getSizeInventory() - 27;
@@ -100,18 +100,18 @@ public class ContainerChisel extends Container {
     }
 
     @Override
-    public void onContainerClosed(EntityPlayer entityplayer) {
+    public void onContainerClosed(PlayerEntity entityplayer) {
         inventoryChisel.clearItems();
         super.onContainerClosed(entityplayer);
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer entityplayer) {
+    public boolean canInteractWith(PlayerEntity entityplayer) {
         return inventoryChisel.isUsableByPlayer(entityplayer);
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer entity, int slotIdx) {
+    public ItemStack transferStackInSlot(PlayerEntity entity, int slotIdx) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = (Slot) this.inventorySlots.get(slotIdx);
 
