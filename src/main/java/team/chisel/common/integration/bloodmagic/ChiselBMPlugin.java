@@ -1,4 +1,4 @@
-package team.chisel.common.integration.bloodmagic;
+/*package team.chisel.common.integration.bloodmagic;
 
 import WayofTime.bloodmagic.api.BloodMagicPlugin;
 import WayofTime.bloodmagic.api.IBloodMagicAPI;
@@ -44,3 +44,4 @@ public class ChiselBMPlugin implements IBloodMagicPlugin {
                 api.getValueManager().setTranquility(state, tranquilityType, value);
     }
 }
+*/

@@ -1,20 +1,19 @@
 package team.chisel.common.entity;
 
+import java.util.Iterator;
+
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.item.FallingBlockEntity;
-import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.INBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.chisel.common.block.BlockCarvableFalling;
 import team.chisel.common.init.ChiselBlocks;
-
-import java.util.Iterator;
 
 public class EntityFallingBlockCarvable extends FallingBlockEntity {
     public EntityFallingBlockCarvable(World worldIn, double x, double y, double z, BlockState fallingBlockState) {

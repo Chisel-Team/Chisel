@@ -4,7 +4,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
+import net.minecraftforge.registries.ObjectHolder;
 import team.chisel.Chisel;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemOffsetTool;
