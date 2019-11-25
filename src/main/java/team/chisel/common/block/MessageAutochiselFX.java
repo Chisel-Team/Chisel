@@ -1,65 +1,47 @@
 package team.chisel.common.block;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nonnull;
 
-import org.apache.commons.lang3.Validate;
-
-import io.netty.buffer.ByteBuf;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.Chisel;
-import team.chisel.common.init.ChiselItems;
 
-@NoArgsConstructor
-@AllArgsConstructor
-public class MessageAutochiselFX implements IMessage {
+@RequiredArgsConstructor
+public class MessageAutochiselFX {
     
-    private @Nonnull BlockPos pos = BlockPos.ORIGIN;
-    private @Nonnull ItemStack chisel = new ItemStack(ChiselItems.chisel_iron);
-    private @Nonnull BlockState state = Blocks.AIR.getDefaultState();
+    private final @Nonnull BlockPos pos;
+    private final @Nonnull ItemStack chisel;
+    private final @Nonnull BlockState state;
     
-    @Override
-    public void toBytes(ByteBuf buf) {
+    public void encode(PacketBuffer buf) {
         buf.writeLong(pos.toLong());
-        ByteBufUtils.writeItemStack(buf, chisel);
+        buf.writeItemStack(chisel);
         buf.writeInt(Block.getStateId(state));
     }
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        this.pos = BlockPos.fromLong(buf.readLong());
-        ItemStack chisel = ByteBufUtils.readItemStack(buf);
-        Validate.notNull(chisel);
-        this.chisel = chisel;
-        this.state = Block.getStateById(buf.readInt());
+    public static MessageAutochiselFX decode(PacketBuffer buf) {
+        return new MessageAutochiselFX(BlockPos.fromLong(buf.readLong()), buf.readItemStack(), Block.getStateById(buf.readInt()));
     }
-    
-    public static class Handler implements IMessageHandler<MessageAutochiselFX, IMessage> {
-        
-        @Override
-        public IMessage onMessage(MessageAutochiselFX message, MessageContext ctx) {
-            FMLCommonHandler.instance().getWorldThread(ctx.getClientHandler()).addScheduledTask(() -> {
-                World world = Chisel.proxy.getClientWorld();
-                if (world.isBlockLoaded(message.pos)) {
-                    TileEntity te = world.getTileEntity(message.pos);
-                    if (te instanceof TileAutoChisel) {
-                        ((TileAutoChisel) te).spawnCompletionFX(Chisel.proxy.getClientPlayer(), message.chisel, message.state);
-                    }
+
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> {
+            World world = Chisel.proxy.getClientWorld();
+            if (world.isBlockLoaded(pos)) {
+                TileEntity te = world.getTileEntity(pos);
+                if (te instanceof TileAutoChisel) {
+                    ((TileAutoChisel) te).spawnCompletionFX(Chisel.proxy.getClientPlayer(), chisel, state);
                 }
-            });
-            return null;
-        }
+            }
+        });
+        ctx.get().setPacketHandled(true);
     }
 }

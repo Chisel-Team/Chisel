@@ -1,24 +1,24 @@
 package team.chisel.client.gui;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nonnull;
 
 import io.netty.buffer.ByteBuf;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.api.IChiselItem;
 import team.chisel.common.util.NBTUtil;
 
-@NoArgsConstructor
-public class PacketHitechSettings implements IMessage {
+@RequiredArgsConstructor
+public class PacketHitechSettings {
     
-    private byte type;
-    private int selection, target;
-    private boolean rotate;
+    private final byte type;
+    private final int selection, target;
+    private final boolean rotate;
     
-    private int chiselSlot;
+    private final int chiselSlot;
 
     public PacketHitechSettings(@Nonnull ItemStack stack, int chiselSlot) {
         this.type = (byte) NBTUtil.getHitechType(stack).ordinal();
@@ -29,8 +29,7 @@ public class PacketHitechSettings implements IMessage {
         this.chiselSlot = chiselSlot;
     }
 
-    @Override
-    public void toBytes(ByteBuf buf) {
+    public void encode(ByteBuf buf) {
         buf.writeByte(type);
         buf.writeInt(selection);
         buf.writeInt(target);
@@ -38,27 +37,23 @@ public class PacketHitechSettings implements IMessage {
         buf.writeByte(chiselSlot);
     }
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        this.type = buf.readByte();
-        this.selection = buf.readInt();
-        this.target = buf.readInt();
-        this.rotate = buf.readBoolean();
-        this.chiselSlot = buf.readByte();
+    public static PacketHitechSettings decode(ByteBuf buf) {
+        return new PacketHitechSettings(
+                buf.readByte(),
+                buf.readInt(),
+                buf.readInt(),
+                buf.readBoolean(),
+                buf.readByte());
     }
 
-    public static class Handler implements IMessageHandler<PacketHitechSettings, IMessage> {
-
-        @Override
-        public IMessage onMessage(PacketHitechSettings message, MessageContext ctx) {
-            ItemStack stack = ctx.getServerHandler().player.inventory.getStackInSlot(message.chiselSlot);
-            if (stack.getItem() instanceof IChiselItem) { // instanceof check for broken chisel
-                NBTUtil.setHitechType(stack, message.type);
-                NBTUtil.setHitechSelection(stack, message.selection);
-                NBTUtil.setHitechTarget(stack, message.target);
-                NBTUtil.setHitechRotate(stack, message.rotate);
-            }
-            return null;
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ItemStack stack = ctx.get().getSender().inventory.getStackInSlot(chiselSlot);
+        if (stack.getItem() instanceof IChiselItem) { // instanceof check for broken chisel
+            NBTUtil.setHitechType(stack, type);
+            NBTUtil.setHitechSelection(stack, selection);
+            NBTUtil.setHitechTarget(stack, target);
+            NBTUtil.setHitechRotate(stack, rotate);
         }
+        ctx.get().setPacketHandled(true);
     }
 }

@@ -4,43 +4,38 @@ import java.io.File;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.annotation.Nonnull;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.ImmutableMap;
 
+import mezz.jei.config.forge.Configuration;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
 import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 import team.chisel.api.ChiselAPIProps;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketHitechSettings;
-import team.chisel.common.CommonProxy;
 import team.chisel.common.Reference;
 import team.chisel.common.block.MessageAutochiselFX;
 import team.chisel.common.block.MessageUpdateAutochiselSource;
-import team.chisel.common.carving.Carving;
 import team.chisel.common.carving.CarvingVariationRegistry;
 import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.config.Configurations;
@@ -54,30 +49,31 @@ import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.GenerationHandler;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
-import team.chisel.common.util.PerChunkData.MessageChunkDataHandler;
 
-@Mod(modid = Reference.MOD_ID, version = Reference.VERSION, name = Reference.MOD_NAME, dependencies = "required-after:forge@[14.23.5.2806,);required-after-client:ctm;after:jei@[4.12.0,5)", acceptedMinecraftVersions = "[1.12.2, 1.13)")
+@Mod(Reference.MOD_ID)
 public class Chisel implements Reference {
 
     public static final Logger logger = LogManager.getLogger(MOD_NAME);
 
-    @SuppressWarnings("null")
-    @Mod.Instance(MOD_ID)
-    public static @Nonnull Chisel instance;
-
-    @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY, modId = MOD_ID)
-    public static CommonProxy proxy;
+//    @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY, modId = MOD_ID)
+//    public static CommonProxy proxy;
 
     public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
 
-    public static final SimpleNetworkWrapper network = NetworkRegistry.INSTANCE.newSimpleChannel(MOD_ID);
+    public static final SimpleChannel network = NetworkRegistry.newSimpleChannel(
+            new ResourceLocation(MOD_ID, "main"),
+            () -> PROTOCOL_VERSION,
+            PROTOCOL_VERSION::equals,
+            PROTOCOL_VERSION::equals
+    );
+    
     static {
-        network.registerMessage(PacketChiselButton.Handler.class, PacketChiselButton.class, 0, Side.SERVER);
-        network.registerMessage(PacketHitechSettings.Handler.class, PacketHitechSettings.class, 1, Side.SERVER);
-        network.registerMessage(MessageChunkDataHandler.class, MessageChunkData.class, 2, Side.CLIENT);
-        network.registerMessage(PacketChiselMode.Handler.class, PacketChiselMode.class, 3, Side.SERVER);
-        network.registerMessage(MessageUpdateAutochiselSource.Handler.class, MessageUpdateAutochiselSource.class, 4, Side.CLIENT);
-        network.registerMessage(MessageAutochiselFX.Handler.class, MessageAutochiselFX.class, 5, Side.CLIENT);
+        network.registerMessage(0, PacketChiselButton.class, PacketChiselButton::encode, PacketChiselButton::decode, PacketChiselButton::handle);
+        network.registerMessage(1, PacketHitechSettings.class, PacketHitechSettings::encode, PacketHitechSettings::decode, PacketHitechSettings::handle);
+        network.registerMessage(2, MessageChunkData.class, MessageChunkData::encode, MessageChunkData::decode, MessageChunkData::handle);
+        network.registerMessage(3, PacketChiselMode.class, PacketChiselMode::encode, PacketChiselMode::decode, PacketChiselMode::handle);
+        network.registerMessage(4, MessageUpdateAutochiselSource.class, MessageUpdateAutochiselSource::encode, MessageUpdateAutochiselSource::decode, MessageUpdateAutochiselSource::handle);
+        network.registerMessage(5, MessageAutochiselFX.class, MessageAutochiselFX::encode, MessageAutochiselFX::decode, MessageAutochiselFX::handle);
     }
     
     private static Map<String, Block> remaps = ImmutableMap.of();

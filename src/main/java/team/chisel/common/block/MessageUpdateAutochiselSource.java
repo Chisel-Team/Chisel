@@ -1,54 +1,44 @@
 package team.chisel.common.block;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nonnull;
 
-import io.netty.buffer.ByteBuf;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.Chisel;
 
-@NoArgsConstructor
-@AllArgsConstructor
-public class MessageUpdateAutochiselSource implements IMessage {
+@RequiredArgsConstructor
+public class MessageUpdateAutochiselSource {
     
-    private @Nonnull BlockPos pos = BlockPos.ORIGIN;
-    private @Nonnull ItemStack stack;
+    private final @Nonnull BlockPos pos;
+    private final @Nonnull ItemStack stack;
     
-    @Override
-    public void toBytes(ByteBuf buf) {
+    public void encode(PacketBuffer buf) {
         buf.writeLong(pos.toLong());
-        ByteBufUtils.writeItemStack(buf, stack);
+        buf.writeItemStack(stack);
     }
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        this.pos = BlockPos.fromLong(buf.readLong());
-        this.stack = ByteBufUtils.readItemStack(buf);
+    public static MessageUpdateAutochiselSource decode(PacketBuffer buf) {
+        return new MessageUpdateAutochiselSource(BlockPos.fromLong(buf.readLong()), buf.readItemStack());
     }
-    
-    public static class Handler implements IMessageHandler<MessageUpdateAutochiselSource, IMessage> {
-        
-        @Override
-        public IMessage onMessage(MessageUpdateAutochiselSource message, MessageContext ctx) {
-            FMLCommonHandler.instance().getWorldThread(ctx.getClientHandler()).addScheduledTask(() -> {
-                World world = Chisel.proxy.getClientWorld();
-                if (world.isBlockLoaded(message.pos)) {
-                    TileEntity te = world.getTileEntity(message.pos);
-                    if (te instanceof TileAutoChisel) {
-                        ((TileAutoChisel) te).setSource(message.stack);
-                    }
+
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> {
+            World world = Chisel.proxy.getClientWorld();
+            if (world.isBlockLoaded(pos)) {
+                TileEntity te = world.getTileEntity(pos);
+                if (te instanceof TileAutoChisel) {
+                    ((TileAutoChisel) te).setSource(stack);
                 }
-            });
-            return null;
-        }
+            }
+        });
+        ctx.get().setPacketHandled(true);
     }
 }

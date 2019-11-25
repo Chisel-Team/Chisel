@@ -9,6 +9,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @ParametersAreNonnullByDefault
 public interface Reference {
     public static final String MOD_ID = "chisel";
+    public static final String PROTOCOL_VERSION = "1";
 
     public static final String MOD_NAME = "Chisel";
     public static final String VERSION = "@VERSION@";

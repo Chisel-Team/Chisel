@@ -1,57 +1,46 @@
 package team.chisel.common.item;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nonnull;
 
-import io.netty.buffer.ByteBuf;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.util.NBTUtil;
 
-@NoArgsConstructor
-public class PacketChiselMode implements IMessage {
+@RequiredArgsConstructor
+public class PacketChiselMode {
     
-    private int slot;
-    private @Nonnull IChiselMode mode;
-    
-    public PacketChiselMode(int slot, @Nonnull IChiselMode mode) {
-        this.slot = slot;
-        this.mode = mode;
-    }
+    private final int slot;
+    private final @Nonnull IChiselMode mode;
 
-    @Override
-    public void toBytes(ByteBuf buf) {
+    public void encode(PacketBuffer buf) {
         buf.writeInt(this.slot);
-        ByteBufUtils.writeUTF8String(buf, this.mode.name());
+        buf.writeString(this.mode.name(), 256);
     }
 
     @SuppressWarnings({ "null", "unused" })
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        this.slot = buf.readInt();
-        this.mode = CarvingUtils.getModeRegistry().getModeByName(ByteBufUtils.readUTF8String(buf));
-        if (this.mode == null) {
-            this.mode = ChiselMode.SINGLE;
+    public static PacketChiselMode decode(PacketBuffer buf) {
+        int slot = buf.readInt();
+        IChiselMode mode = CarvingUtils.getModeRegistry().getModeByName(buf.readString(256));
+        if (mode == null) {
+            mode = ChiselMode.SINGLE;
         }
+        return new PacketChiselMode(slot, mode);
     }
-
-    public static class Handler implements IMessageHandler<PacketChiselMode, IMessage> {
-        
-        @Override
-        public IMessage onMessage(PacketChiselMode message, MessageContext ctx) {
-            ctx.getServerHandler().player.getServer().addScheduledTask(() -> {
-                ItemStack stack = ctx.getServerHandler().player.inventory.getStackInSlot(message.slot);
-                if (stack.getItem() instanceof IChiselItem && ((IChiselItem) stack.getItem()).supportsMode(ctx.getServerHandler().player, stack, message.mode)) {
-                    NBTUtil.setChiselMode(stack, message.mode);
-                }
-            });
-            return null;
-        }
+    
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ctx.get().enqueueWork(() -> {
+            ItemStack stack = ctx.get().getSender().inventory.getStackInSlot(slot);
+            if (stack.getItem() instanceof IChiselItem && ((IChiselItem) stack.getItem()).supportsMode(ctx.get().getSender(), stack, mode)) {
+                NBTUtil.setChiselMode(stack, mode);
+            }
+        });
+        ctx.get().setPacketHandled(true);
     }
 }

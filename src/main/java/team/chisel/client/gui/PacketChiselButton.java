@@ -1,17 +1,16 @@
 package team.chisel.client.gui;
 
-import java.util.Optional;
+import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 
-import io.netty.buffer.ByteBuf;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerEntityMP;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IVariationRegistry;
@@ -19,42 +18,27 @@ import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.SlotChiselSelection;
 import team.chisel.common.util.SoundUtil;
 
-@NoArgsConstructor
-public class PacketChiselButton implements IMessage {
+public class PacketChiselButton {
 
-    private int[] slotIds;
+    @Nonnull
+    private final int[] slotIds;
 
     public PacketChiselButton(int... slots) {
         this.slotIds = slots;
     }
-
-    @Override
-    public void toBytes(ByteBuf buf) {
-        buf.writeByte(slotIds.length);
-        for (int i : slotIds) {
-            buf.writeByte(i);
-        }
+    
+    public void encode(final PacketBuffer buf) {
+        buf.writeVarIntArray(slotIds);
+    }
+    
+    public static PacketChiselButton decode(final PacketBuffer buf) {
+        return new PacketChiselButton(buf.readVarIntArray());
     }
 
-    @Override
-    public void fromBytes(ByteBuf buf) {
-        int len = buf.readByte();
-        slotIds = new int[len];
-        for (int i = 0; i < slotIds.length; i++) {
-            slotIds[i] = buf.readByte();
-        }
-    }
-
-    public static class Handler implements IMessageHandler<PacketChiselButton, IMessage> {
-
-        @Override
-        public IMessage onMessage(PacketChiselButton message, MessageContext ctx) {
-            PlayerEntityMP player = ctx.getServerHandler().player;
-            ctx.getServerHandler().player.getServerWorld().addScheduledTask(
-                    () -> chiselAll(player, message.slotIds)
-            );
-            return null;
-        }
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ServerPlayerEntity player = ctx.get().getSender();
+        ctx.get().enqueueWork(() -> chiselAll(player, slotIds));
+        ctx.get().setPacketHandled(true);
     }
     
     public static void chiselAll(PlayerEntity player, int[] slots) {
