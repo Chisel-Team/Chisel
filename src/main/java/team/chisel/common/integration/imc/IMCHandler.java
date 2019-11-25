@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import team.chisel.Chisel;
 import team.chisel.api.IMC;
 import team.chisel.api.carving.CarvingUtils;
-import team.chisel.api.carving.ICarvingRegistry;
+import team.chisel.api.carving.IVariationRegistry;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.carving.Carving;
 
@@ -74,7 +74,7 @@ public class IMCHandler {
             }
         }
 
-        ICarvingRegistry reg = Carving.chisel;
+        IVariationRegistry reg = Carving.chisel;
         String[] data = null;
         ResourceLocation resource = null;
         if (message.isStringMessage()) {

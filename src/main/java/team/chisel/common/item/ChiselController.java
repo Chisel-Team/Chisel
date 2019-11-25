@@ -39,7 +39,7 @@ import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
-import team.chisel.api.carving.ICarvingRegistry;
+import team.chisel.api.carving.IVariationRegistry;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.client.util.ChiselModeGeometryCache;
@@ -61,7 +61,7 @@ public class ChiselController {
             ItemStack target = NBTUtil.getChiselTarget(held);
             IChiselItem chisel = (IChiselItem) held.getItem();
             
-            ICarvingRegistry registry = CarvingUtils.getChiselRegistry();
+            IVariationRegistry registry = CarvingUtils.getChiselRegistry();
             BlockState state = event.getWorld().getBlockState(event.getPos());
             
             if (!chisel.canChiselBlock(event.getWorld(), player, event.getHand(), event.getPos(), state)) {

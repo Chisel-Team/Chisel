@@ -3,14 +3,16 @@ package team.chisel.api.carving;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Represents a variation of a chiselable block.
  */
 public interface ICarvingVariation {
+    
+    ResourceLocation getGroup();
 
     /**
      * The base blockstate of this variation.

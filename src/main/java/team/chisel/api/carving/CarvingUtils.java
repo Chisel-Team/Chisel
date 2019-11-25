@@ -1,15 +1,10 @@
 package team.chisel.api.carving;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.ResourceLocation;
 
 @ParametersAreNonnullByDefault
 public class CarvingUtils {
@@ -35,7 +30,7 @@ public class CarvingUtils {
 		return v1.getOrder() - v2.getOrder();
 	}
 
-	public static @Nullable ICarvingRegistry chisel;
+	public static @Nullable IVariationRegistry chisel;
 	public static @Nullable IModeRegistry modes;
 
 	/**
@@ -43,7 +38,7 @@ public class CarvingUtils {
 	 *         <p>
 	 *         If chisel is not installed this will return null.
 	 */
-	public static @Nullable ICarvingRegistry getChiselRegistry() {
+	public static @Nullable IVariationRegistry getChiselRegistry() {
 		return chisel;
 	}
 	
@@ -62,38 +57,28 @@ public class CarvingUtils {
 	/**
      * Creates a new variation for the given blockstate, with automatic (flawed) conversion to ItemStack when necessary.
      */
-    public static ICarvingVariation variationFor(BlockState state, int order) {
-        return new VariationForState(state, order);
+    public static ICarvingVariation variationFor(ResourceLocation group, BlockState state, int order) {
+        return new VariationForState(group, state, order);
     }
 
     /**
      * Creates a new variation for the given ItemStack, with automatic (flawed) conversion to blockstate when necessary.
      */
-    public static ICarvingVariation variationFor(ItemStack stack, int order) {
-        return new VariationForStack(stack, order);
+    public static ICarvingVariation variationFor(ResourceLocation group, ItemStack stack, int order) {
+        return new VariationForStack(group, stack, order);
     }
 
     /**
      * Creates a new variation for the given ItemStack and blockstate. Use this for full control over ItemStack/blockstate conversion.
      */
-    public static ICarvingVariation variationFor(ItemStack stack, @Nullable BlockState state, int order) {
-        return new SimpleVariation(stack, state, order);
-    }
-
-	/**
-	 * Creates a standard {@link ICarvingGroup} for the given name. Use this if you do not need any custom behavior in your own group.
-	 * 
-	 * @param name
-	 *            The name of the group.
-	 * @return A standard {@link ICarvingGroup} instance.
-	 */
-    public static ICarvingGroup getDefaultGroupFor(String name) {
-        return new SimpleCarvingGroup(name);
+    public static ICarvingVariation variationFor(ResourceLocation group, ItemStack stack, @Nullable BlockState state, int order) {
+        return new SimpleVariation(group, stack, state, order);
     }
 	
 	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-	@Getter
+	@Getter(onMethod = @__({@Override}))
 	private static abstract class SimpleVariationBase implements ICarvingVariation {
+	    private final ResourceLocation group;
 	    private final int order;
 
 	    @Override
@@ -122,8 +107,8 @@ public class CarvingUtils {
 
 		private BlockState state;
 
-		public SimpleCarvingVariation(BlockState state, int order) {
-		    super(order);
+		public SimpleCarvingVariation(ResourceLocation group, BlockState state, int order) {
+		    super(group, order);
 			this.state = state;
 		}
 
@@ -140,9 +125,9 @@ public class CarvingUtils {
 	
 	private static class VariationForState extends SimpleCarvingVariation {
 
-        public VariationForState(BlockState state, int order) {
-            super(state, order);
-        }	    
+        public VariationForState(ResourceLocation group, BlockState state, int order) {
+            super(group, state, order);
+        }
 	}
 	
 	private static class VariationForStack extends SimpleVariationBase {
@@ -150,8 +135,8 @@ public class CarvingUtils {
 	    private final ItemStack stack;
 	    private final boolean hasBlock;
 	    
-	    public VariationForStack(ItemStack stack, int order) {
-	        super(order);
+	    public VariationForStack(ResourceLocation group, ItemStack stack, int order) {
+	        super(group, order);
 	        this.stack = stack;
 	        this.hasBlock = stack.getItem() instanceof BlockItem;
 	    }
@@ -176,8 +161,8 @@ public class CarvingUtils {
         @Getter
         private final BlockState blockState;
 
-        public SimpleVariation(ItemStack stack, @Nullable BlockState state, int order) {
-            super(order);
+        public SimpleVariation(ResourceLocation group, ItemStack stack, @Nullable BlockState state, int order) {
+            super(group, order);
             this.stack = stack;
             this.blockState = state;
         }
@@ -187,58 +172,4 @@ public class CarvingUtils {
             return stack.copy();
         }
     }
-
-	private static class SimpleCarvingGroup implements ICarvingGroup {
-
-		private String name;
-		private @Nullable SoundEvent sound;
-
-		private List<ICarvingVariation> variations = Lists.newArrayList();
-
-		public SimpleCarvingGroup(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public List<ICarvingVariation> getVariations() {
-			return Lists.newArrayList(variations);
-		}
-
-//		@Override
-//		public void addVariation(ICarvingVariation variation) {
-//			variations.add(variation);
-//			Collections.sort(variations, new Comparator<ICarvingVariation>() {
-//
-//				@SuppressWarnings("null")
-//                @Override
-//				public int compare(ICarvingVariation o1, ICarvingVariation o2) {
-//					return CarvingUtils.compare(o1, o2);
-//				}
-//			});
-//		}
-//
-//		@Override
-//		public boolean removeVariation(ICarvingVariation variation) {
-//		    return variations.removeIf(v -> 
-//				           (ItemStack.areItemsEqual(v.getStack(), variation.getStack()) 
-//				        && (v.getStack().getTagCompound() == null || ItemStack.areItemStackTagsEqual(v.getStack(), variation.getStack()))) 
-//				||  (v.getBlockState() != null && v.getBlockState().equals(variation.getBlockState()))
-//		    );
-//		}
-
-		@Override
-		public String getName() {
-			return name;
-		}
-
-		@Override
-		public @Nullable SoundEvent getSound() {
-			return sound;
-		}
-
-		@Override
-		public void setSound(@Nullable SoundEvent sound) {
-			this.sound = sound;
-		}
-	}
 }

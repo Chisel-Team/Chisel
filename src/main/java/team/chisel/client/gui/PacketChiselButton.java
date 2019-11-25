@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
-import team.chisel.api.carving.ICarvingRegistry;
+import team.chisel.api.carving.IVariationRegistry;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.SlotChiselSelection;
 import team.chisel.common.util.SoundUtil;
@@ -70,7 +70,7 @@ public class PacketChiselButton implements IMessage {
             
             @SuppressWarnings("null")
             @Nonnull
-            ICarvingRegistry carving = CarvingUtils.getChiselRegistry();
+            IVariationRegistry carving = CarvingUtils.getChiselRegistry();
 
             if (chisel.isEmpty() || target.isEmpty()) {
                 return;

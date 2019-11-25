@@ -37,7 +37,7 @@ public class ChiselJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
-        registry.addRecipes(Carving.chisel.getSortedGroupNames().stream()
+        registry.addRecipes(Carving.chisel.getSortedGroups().stream()
                             .map(s -> Carving.chisel.getGroup(s))
                             .collect(Collectors.toList()), category.getUid());
 

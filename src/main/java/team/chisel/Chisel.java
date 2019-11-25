@@ -41,6 +41,7 @@ import team.chisel.common.Reference;
 import team.chisel.common.block.MessageAutochiselFX;
 import team.chisel.common.block.MessageUpdateAutochiselSource;
 import team.chisel.common.carving.Carving;
+import team.chisel.common.carving.CarvingVariationRegistry;
 import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselBlocks;
@@ -82,7 +83,7 @@ public class Chisel implements Reference {
     private static Map<String, Block> remaps = ImmutableMap.of();
     
     public Chisel() {
-        CarvingUtils.chisel = Carving.chisel;
+        CarvingUtils.chisel = new CarvingVariationRegistry();
         CarvingUtils.modes = ChiselModeRegistry.INSTANCE;
         ChiselMode.values(); // static init our modes
         ChiselAPIProps.MOD_ID = MOD_ID;

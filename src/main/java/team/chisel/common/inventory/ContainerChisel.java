@@ -3,16 +3,17 @@ package team.chisel.common.inventory;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Getter;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
+import net.minecraft.world.gen.GenerationStage.Carving;
 import team.chisel.Chisel;
-import team.chisel.api.carving.ICarvingRegistry;
-import team.chisel.common.carving.Carving;
+import team.chisel.api.carving.IVariationRegistry;
 import team.chisel.common.util.NBTUtil;
 import team.chisel.common.util.SoundUtil;
 
@@ -21,14 +22,15 @@ import team.chisel.common.util.SoundUtil;
 public class ContainerChisel extends Container {
 
     protected final InventoryChiselSelection inventoryChisel;
-    protected final InventoryPlayer inventoryPlayer;
+    protected final PlayerInventory inventoryPlayer;
     
     protected final Hand hand;
     protected final int chiselSlot;
     protected final ItemStack chisel;
-    protected final ICarvingRegistry carving;
+    protected final IVariationRegistry carving;
 
-    public ContainerChisel(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, Hand hand) {        
+    public ContainerChisel(PlayerInventory inventoryplayer, InventoryChiselSelection inv, Hand hand) {
+        super(null, 0); // TOOD 1.14
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
         

@@ -6,9 +6,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.GlStateManager;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -16,11 +16,12 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import team.chisel.Chisel;
-import team.chisel.common.init.ChiselItems;
 import team.chisel.common.config.Configurations;
+import team.chisel.common.init.ChiselItems;
 import team.chisel.common.inventory.ContainerAutoChisel;
+import team.chisel.common.inventory.ContainerChisel;
 
-public class GuiAutoChisel extends GuiContainer {
+public class GuiAutoChisel extends ContainerScreen<ContainerChisel> {
     
     @Nonnull
     private static final ResourceLocation TEXTURE = new ResourceLocation(Chisel.MOD_ID, "textures/autochisel.png");
