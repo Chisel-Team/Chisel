@@ -1,31 +1,33 @@
 package team.chisel.common.init;
 
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.IFuelHandler;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import team.chisel.common.Reference;
 
-public class ChiselFuelHandler implements IFuelHandler {
-    @Override
-    public int getBurnTime(ItemStack itemStack) {
+@EventBusSubscriber(modid = Reference.MOD_ID)
+public class ChiselFuelHandler {
+    
+    public static void onBurnTime(FurnaceFuelBurnTimeEvent event) {
+        ItemStack itemStack = event.getItemStack();
         if (itemStack.isEmpty()) {
-            return 0;
+            return;
         }
-        for(int id : OreDictionary.getOreIDs(itemStack))
-        {
-            if(OreDictionary.getOreName(id).matches("blockFuelCoke"))
-            {
-                return 32000;
-            }
-            else if(OreDictionary.getOreName(id).matches("blockCoal"))
-            {
-                return 16000;
-            }
-            else if(OreDictionary.getOreName(id).matches("blockCharcoal"))
-            {
-                return 16000;
-            }
-        }
-
-        return 0;
+        // TODO 1.14 tags
+//        for(int id : OreDictionary.getOreIDs(itemStack))
+//        {
+//            if(OreDictionary.getOreName(id).matches("blockFuelCoke"))
+//            {
+//                return 32000;
+//            }
+//            else if(OreDictionary.getOreName(id).matches("blockCoal"))
+//            {
+//                return 16000;
+//            }
+//            else if(OreDictionary.getOreName(id).matches("blockCharcoal"))
+//            {
+//                return 16000;
+//            }
+//        }
     }
 }

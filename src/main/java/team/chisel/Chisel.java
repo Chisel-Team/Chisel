@@ -1,6 +1,5 @@
 package team.chisel;
 
-import java.io.File;
 import java.util.Map;
 import java.util.Optional;
 
@@ -9,9 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.ImmutableMap;
 
-import mezz.jei.config.forge.Configuration;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -19,18 +16,17 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
 import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import team.chisel.api.ChiselAPIProps;
 import team.chisel.api.carving.CarvingUtils;
-import team.chisel.client.gui.ChiselGuiHandler;
 import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.common.Reference;
@@ -38,9 +34,6 @@ import team.chisel.common.block.MessageAutochiselFX;
 import team.chisel.common.block.MessageUpdateAutochiselSource;
 import team.chisel.common.carving.CarvingVariationRegistry;
 import team.chisel.common.carving.ChiselModeRegistry;
-import team.chisel.common.config.Configurations;
-import team.chisel.common.init.ChiselBlocks;
-import team.chisel.common.init.ChiselFuelHandler;
 import team.chisel.common.init.ChiselSounds;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
@@ -83,50 +76,43 @@ public class Chisel implements Reference {
         CarvingUtils.modes = ChiselModeRegistry.INSTANCE;
         ChiselMode.values(); // static init our modes
         ChiselAPIProps.MOD_ID = MOD_ID;
+        
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modBus.addListener(this::setup);
+        modBus.addListener(this::imcEnqueue);
+        modBus.addListener(this::imcProcess);
+        modBus.addGenericListener(Block.class, this::onMissingBlock);
+        modBus.addGenericListener(Item.class, this::onMissingItem);
     }
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(this);
+    private void setup(FMLCommonSetupEvent event) {
         ChiselSounds.init();
         
-        proxy.construct(event);
-
-        File configFile = event.getSuggestedConfigurationFile();
-        Configurations.configExists = configFile.exists();
-        Configurations.config = new Configuration(configFile);
-        Configurations.config.load();
-        Configurations.refreshConfig();
+//        File configFile = event.getSuggestedConfigurationFile();
+//        Configurations.configExists = configFile.exists();
+//        Configurations.config = new Configuration(configFile);
+//        Configurations.config.load();
+//        Configurations.refreshConfig();
 
         MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
         MinecraftForge.EVENT_BUS.register(ChiselController.class);
 
-        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
+//        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
         MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
-        MinecraftForge.TERRAIN_GEN_BUS.register(GenerationHandler.INSTANCE);
-
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new ChiselGuiHandler());
 
         //EntityRegistry.registerModEntity(EntityFallingBlockCarvable.class, "falling_block", 60, Chisel.instance, 64, 3, false);
-
-        proxy.preInit(event);
     }
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
-        proxy.init();
+    private void imcEnqueue(InterModEnqueueEvent event) {
         // BlockRegistry.init(event);
         
         // If we add a future vanilla block, it should be added here once the vanilla version exists
         remaps = ImmutableMap.<String, Block>builder()
-                .put("concrete_powder", Blocks.CONCRETE_POWDER)
-                .put("concrete", Blocks.CONCRETE)
                 .build();
 
-        GameRegistry.registerFuelHandler(new ChiselFuelHandler());
-
-        addCompactorPressRecipe(1000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestone2, 1, 7));
-        addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestone2, 1, 7), new ItemStack(ChiselBlocks.marble2, 1, 7));
+        // TODO 1.14 compat
+//        addCompactorPressRecipe(1000, new ItemStack(Blocks.BONE_BLOCK), new ItemStack(ChiselBlocks.limestone2, 1, 7));
+//        addCompactorPressRecipe(1000, new ItemStack(ChiselBlocks.limestone2, 1, 7), new ItemStack(ChiselBlocks.marble2, 1, 7));
 
         /*
 //      Example of IMC
@@ -167,24 +153,25 @@ public class Chisel implements Reference {
         */
     }
 
-    private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output)
-    {
-
+    private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output) {
         CompoundNBT message = new CompoundNBT();
 
-        message.setInteger("energy", energy);
-        message.setTag("input", new CompoundNBT());
-        message.setTag("output", new CompoundNBT());
+        message.putInt("energy", energy);
+        message.put("input", new CompoundNBT());
+        message.put("output", new CompoundNBT());
 
-        input.writeToNBT(message.getCompoundTag("input"));
-        output.writeToNBT(message.getCompoundTag("output"));
+        input.write(message.getCompound("input"));
+        output.write(message.getCompound("output"));
 
-        FMLInterModComms.sendMessage("thermalexpansion", "addcompactorpressrecipe", message);
+        InterModComms.sendTo("thermalexpansion", "addcompactorpressrecipe", () -> message);
     }
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        proxy.postInit();
+    private void imcProcess(InterModProcessEvent event) {
+        event.getIMCStream().forEach(IMCHandler.INSTANCE::handleMessage);
+        IMCHandler.INSTANCE.imcCounts.object2IntEntrySet().forEach(e ->
+            Chisel.logger.info("Received {} IMC messages from mod {}.", e.getKey(), e.getIntValue())
+        );
+        IMCHandler.INSTANCE.imcCounts.clear();
     }
 
     /**
@@ -208,29 +195,15 @@ public class Chisel implements Reference {
         }
     }
 
-    @Mod.EventHandler
-    public void onIMC(FMLInterModComms.IMCEvent event) {
-        for (FMLInterModComms.IMCMessage msg : event.getMessages()) {
-            IMCHandler.INSTANCE.handleMessage(msg);
-        }
-        IMCHandler.INSTANCE.imcCounts.forEachEntry((s, c) -> {
-            Chisel.logger.info("Received {} IMC messages from mod {}.", c, s);
-            return true;
-        });
-        IMCHandler.INSTANCE.imcCounts.clear();
-    }
-    
-    @SubscribeEvent
-    public void onMissingBlock(MissingMappings<Block> event) {
+    private void onMissingBlock(MissingMappings<Block> event) {
         for (Mapping<Block> mapping : event.getMappings()) {
-            Optional.ofNullable(remaps.get(mapping.key.getResourcePath())).ifPresent(mapping::remap);
+            Optional.ofNullable(remaps.get(mapping.key.getPath())).ifPresent(mapping::remap);
         }
     }
     
-    @SubscribeEvent
-    public void onMissingItem(MissingMappings<Item> event) {
+    private void onMissingItem(MissingMappings<Item> event) {
         for (Mapping<Item> mapping : event.getMappings()) {
-            Optional.ofNullable(remaps.get(mapping.key.getResourcePath())).map(Item::getItemFromBlock).ifPresent(mapping::remap);
+            Optional.ofNullable(remaps.get(mapping.key.getPath())).map(Block::asItem).ifPresent(mapping::remap);
         }
     }
 }
