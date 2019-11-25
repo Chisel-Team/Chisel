@@ -3,7 +3,6 @@ package team.chisel.common.block;
 import java.util.IllegalFormatException;
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -11,8 +10,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import team.chisel.Chisel;
@@ -28,23 +29,18 @@ public class ItemChiselBlock extends BlockItem {
 
     private ICarvable block;
 
-    public ItemChiselBlock(Block block) {
-        super(block);
+    public ItemChiselBlock(Block block, Item.Properties properties) {
+        super(block, properties);
         this.block = (ICarvable) block;
-        this.setHasSubtypes(true);
     }
     
     private static String getTooltipUnloc(ICarvable block) {
-        VariationData varData = block.getVariationData();
+        VariationData varData = block.getVariation();
         return ((Block)block).getTranslationKey() + "." + varData.name + ".desc.";
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag advanced) {
-        addTooltips(stack, tooltip);
-    }
-    
-    public void addTooltips(ItemStack stack, List<ITextComponent> tooltip) {
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         addTooltips(block, tooltip);
     }
     
@@ -62,26 +58,25 @@ public class ItemChiselBlock extends BlockItem {
         }
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
+    public ITextComponent getDisplayName(ItemStack stack) {
         if (!Configurations.blockDescriptions) {
             String unlocpattern = "chisel.tooltip.blockname";
             String ret = null;
             try {
-                ret = net.minecraft.util.text.translation.I18n.translateToLocalFormatted(
+                ret = I18n.format(
                         unlocpattern, 
-                        super.getItemStackDisplayName(stack), 
-                        net.minecraft.util.text.translation.I18n.translateToLocalFormatted(getTooltipUnloc(block, stack.getItemDamage()) + "1")
+                        super.getDisplayName(stack), 
+                        I18n.format(getTooltipUnloc(block) + "1")
                 );
             } catch (IllegalFormatException e) {
-                String raw = net.minecraft.util.text.translation.I18n.translateToLocal(unlocpattern);
+                String raw = I18n.format(unlocpattern);
                 Chisel.logger.error("Invalid name pattern {}, check your resource pack lang key for {}", raw, unlocpattern);
             }
             if (ret != null) {
-                return ret;
+                return new StringTextComponent(ret); // FIXME
             }
         }
-        return super.getItemStackDisplayName(stack);
+        return super.getDisplayName(stack);
     }
 }

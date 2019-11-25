@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
-import team.chisel.Chisel;
+import team.chisel.client.ClientProxy;
 
 @RequiredArgsConstructor
 public class MessageAutochiselFX {
@@ -34,11 +34,11 @@ public class MessageAutochiselFX {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            World world = Chisel.proxy.getClientWorld();
+            World world = ClientProxy.getClientWorld();
             if (world.isBlockLoaded(pos)) {
                 TileEntity te = world.getTileEntity(pos);
                 if (te instanceof TileAutoChisel) {
-                    ((TileAutoChisel) te).spawnCompletionFX(Chisel.proxy.getClientPlayer(), chisel, state);
+                    ((TileAutoChisel) te).spawnCompletionFX(ClientProxy.getClientPlayer(), chisel, state);
                 }
             }
         });

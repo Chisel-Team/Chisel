@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
@@ -12,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
-import team.chisel.Chisel;
+import team.chisel.client.ClientProxy;
 
 @RequiredArgsConstructor
 public class MessageUpdateAutochiselSource {
@@ -31,7 +30,7 @@ public class MessageUpdateAutochiselSource {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            World world = Chisel.proxy.getClientWorld();
+            World world = ClientProxy.getClientWorld();
             if (world.isBlockLoaded(pos)) {
                 TileEntity te = world.getTileEntity(pos);
                 if (te instanceof TileAutoChisel) {

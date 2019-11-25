@@ -1,23 +1,22 @@
 package team.chisel.common.block;
 
+import java.util.Random;
+
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.BlockState;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.material.Material;
+import net.minecraft.particles.BlockParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.VariationData;
 import team.chisel.common.entity.EntityFallingBlockCarvable;
 import team.chisel.common.init.ChiselBlocks;
 
-import java.util.Random;
-
 public class BlockCarvableFalling extends BlockCarvable {
-    public BlockCarvableFalling(Material material, int index, int max, VariationData... variations) {
-        super(material, index, max, variations);
+    public BlockCarvableFalling(Block.Properties properties, VariationData variation) {
+        super(properties, variation);
     }
 
     private static boolean fallInstantly;
@@ -35,7 +34,7 @@ public class BlockCarvableFalling extends BlockCarvable {
 
             worldIn.scheduleUpdate(pos, ChiselBlocks.concrete, this.tickRate(worldIn));
         } else*/
-            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+            worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(worldIn));
     }
 
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
@@ -50,7 +49,7 @@ public class BlockCarvableFalling extends BlockCarvable {
 
             worldIn.scheduleUpdate(pos, ChiselBlocks.concrete, this.tickRate(worldIn));
         } else*/
-            worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
+            worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(worldIn));
     }
 
     public void updateTick(World worldIn, BlockPos pos, BlockState state, Random rand) {
@@ -88,11 +87,11 @@ public class BlockCarvableFalling extends BlockCarvable {
                 if(!worldIn.isRemote) {
                     EntityFallingBlockCarvable state1 = new EntityFallingBlockCarvable(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, worldIn.getBlockState(pos));
                     this.onStartFalling(state1);
-                    worldIn.spawnEntity(state1);
+                    worldIn.addEntity(state1);
                 }
             } else {
                 BlockState state = worldIn.getBlockState(pos);
-                worldIn.setBlockToAir(pos);
+                worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
 
                 BlockPos blockpos;
                 for(blockpos = pos.down(); (worldIn.isAirBlock(blockpos) || canFallThrough(worldIn.getBlockState(blockpos))) && blockpos.getY() > 0; blockpos = blockpos.down()) {
@@ -125,7 +124,6 @@ public class BlockCarvableFalling extends BlockCarvable {
     public void onBroken(World worldIn, BlockPos p_190974_2_) {
     }
 
-    @SideOnly(Side.CLIENT)
     public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
         if(rand.nextInt(16) == 0) {
             BlockPos blockpos = pos.down();
@@ -133,12 +131,11 @@ public class BlockCarvableFalling extends BlockCarvable {
                 double d0 = (double)((float)pos.getX() + rand.nextFloat());
                 double d1 = (double)pos.getY() - 0.05D;
                 double d2 = (double)((float)pos.getZ() + rand.nextFloat());
-                worldIn.spawnParticle(EnumParticleTypes.FALLING_DUST, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[]{Block.getStateId(stateIn)});
+                worldIn.addParticle(new BlockParticleData(ParticleTypes.FALLING_DUST, stateIn), d0, d1, d2, 0.0D, 0.0D, 0.0D);
             }
         }
     }
 
-    @SideOnly(Side.CLIENT)
     public int getDustColor(BlockState p_189876_1_) {
         return -16777216;
     }

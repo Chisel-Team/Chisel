@@ -4,14 +4,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Getter;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPane;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.BlockStateContainer;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.PaneBlock;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.creativetab.ItemGroup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.Axis;
@@ -21,6 +20,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.BlockStateContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.api.block.ICarvable;
@@ -30,7 +30,7 @@ import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.PropertyAnyInteger;
 
 @ParametersAreNonnullByDefault
-public class BlockCarvablePane extends BlockPane implements ICarvable {
+public class BlockCarvablePane extends PaneBlock implements ICarvable {
 
     // TODO this class is completely temporary. Need to make a helper object which does all this ICarvable logic
     

@@ -2,35 +2,18 @@ package team.chisel.common.block;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.common.base.Strings;
-
 import lombok.Getter;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.BlockStateContainer;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.particle.ParticleManager;
-import net.minecraft.creativetab.ItemGroup;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.EntityDragon;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IEnviromentBlockReader;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
-import team.chisel.client.util.ClientUtil;
-import team.chisel.common.init.ChiselTabs;
-import team.chisel.common.util.PropertyAnyInteger;
 
 /**
  * Represents a Carvable (aka Chisilable) block
@@ -38,169 +21,24 @@ import team.chisel.common.util.PropertyAnyInteger;
 @ParametersAreNonnullByDefault
 public class BlockCarvable extends Block implements ICarvable {
 
-    /**
-     * The Property for the variation of this block
-     */
     @Getter(onMethod = @__({@Override}))
-    private final PropertyAnyInteger metaProp;
-
-    private final int index;
-
-    @Getter
-    private final VariationData[] variations;
-
-    private final int maxVariation;
-
-    private final BlockStateContainer states;
+    private final VariationData variation;
 
     private boolean dragonProof = false;
 
-    public BlockCarvable(Material material, int index, int max, VariationData... variations) {
-        super(material);
-        setCreativeTab(ChiselTabs.tab);
-        this.index = index;
-        this.variations = variations;
-        this.maxVariation = max;
-        this.metaProp = PropertyAnyInteger.create("variation", 0, max > index * 16 ? 15 : max % 16, i -> !getVariationData(i).name.isEmpty());
-        this.states = new BlockStateContainer(this, metaProp);
-        setDefaultState(getBlockState().getBaseState());
+    public BlockCarvable(Block.Properties properties, VariationData variation) {
+        super(properties);
+        this.variation = variation;
     }
 
     @Override
-    protected BlockStateContainer createBlockState() {
-        return Blocks.AIR.getBlockState();
-    }
-
-    @Override
-    public BlockStateContainer getBlockState() {
-        return states;
-    }
-
-//    @SideOnly(Side.CLIENT)
-//    @Override
-//    public IQuadMutator getQuadMutator(){
-//        //todo finish this
-//    }
-
-    @Override
-    public int getVariationIndex(BlockState state) {
-        return getMetaFromState(state);
-    }
-
-    @Override
-    public int getTotalVariations() {
-        return this.maxVariation + 1; // off-by-one
-    }
-
-    @Override
-    public int getIndex() {
-        return this.index;
-    }
-
-    @SuppressWarnings("null") // No type annotations
-    @Override   
-    public VariationData getVariationData(int meta) {
-        return this.variations[MathHelper.clamp(meta, 0, this.variations.length - 1)];
-    }
-    
-    @Override
-    public int damageDropped(BlockState state) {
-        return getMetaFromState(state);
-    }
-
-    @Override
-    public BlockState getStateFromMeta(int meta) {
-        return getBlockState().getBaseState().withProperty(metaProp, meta);
-    }
-
-    @Override
-    public int getMetaFromState(BlockState state) {
-        return state.getValue(metaProp);
-    }
-
-    public String getIndexName() {
-        if (index == 0) {
-            return getUnlocalizedName();
-        } else {
-            return getUnlocalizedName() + index;
-        }
-    }
-
-    public static BlockPos pos(int x, int y, int z) {
-        return new BlockPos(x, y, z);
-    }
-
-    @Override
-    public void getSubBlocks(ItemGroup tab, NonNullList<ItemStack> list) {
-        int curIndex = 0;
-        for (VariationData var : this.variations) {
-            if (var == null || Strings.emptyToNull(var.name) == null) {
-                continue;
-            }
-            ItemStack stack = new ItemStack(this, 1, curIndex);
-            curIndex++;
-            // CTMBlockResources r = SubBlockUtil.getResources(sub);
-            // setLore(stack, r.getLore());
-            list.add(stack);
-        }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean addHitEffects(BlockState state, World worldObj, RayTraceResult target, ParticleManager effectRenderer) {
-        ClientUtil.addHitEffects(worldObj, target.getBlockPos(), target.sideHit);
-        return true;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager effectRenderer) {
-        ClientUtil.addDestroyEffects(world, pos, world.getBlockState(pos));
-        return true;
-    }
-    
-    @Override
-    public EnumBlockRenderType getRenderType(BlockState state) {
-        return EnumBlockRenderType.MODEL;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
     public boolean canRenderInLayer(BlockState state, BlockRenderLayer layer) {
         return super.canRenderInLayer(state, layer);
     }
 
     @Override
-    public boolean isFullBlock(BlockState state) {
-        return true;
-    }
-
-    @Override
-    public boolean isFullCube(BlockState state) {
-        return state.isOpaqueCube();
-    }
-    
-    @Override
-    @Deprecated
-    public boolean isOpaqueCube(BlockState state) {
-        return getVariationData(getMetaFromState(state)).opaque;
-    }
-    
-    @Override
-    public int getLightOpacity(BlockState state) {
-        return isOpaqueCube(state) ? 255 : 0;
-    }
-    
-    @Override
-    @Deprecated
-    @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(BlockState blockState, IBlockAccess blockAccess, BlockPos pos, Direction side) {
-        return super.shouldSideBeRendered(blockState, blockAccess, pos, side) && blockState != blockAccess.getBlockState(pos.offset(side));
-    }
-
-    @Override
-    public boolean causesSuffocation(BlockState state) {
-        return true;
+    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
+        return super.isSideInvisible(state, adjacentBlockState, side) && state != adjacentBlockState;
     }
 
     public Block setDragonProof() {
@@ -209,8 +47,8 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     @Override
-    public boolean canEntityDestroy(BlockState state, IBlockAccess world, BlockPos pos, Entity entity) {
-        if (entity instanceof EntityDragon){
+    public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity) {
+        if (entity instanceof EnderDragonEntity) {
             return !dragonProof;
         }else{
             return super.canEntityDestroy(state, world, pos, entity);

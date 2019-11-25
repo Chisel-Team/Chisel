@@ -1,5 +1,7 @@
 package team.chisel.common.block;
 
+import java.util.EnumMap;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -8,33 +10,37 @@ import org.apache.commons.lang3.Validate;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.DiggingParticle;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleDigging;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.particles.BlockParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.INameable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayerFactory;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
+import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor.PacketTarget;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -202,7 +208,11 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     private int progress = 0;
     
     @Setter
-    private @Nullable String customName;
+    private @Nullable ITextComponent customName;
+    
+    public TileAutoChisel() {
+        super(ChiselTileEntities.AUTO_CHISEL);
+    }
     
     public IItemHandler getOtherInv() {
         return otherInv;
@@ -290,7 +300,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         chisel = chisel.isEmpty() ? ItemStack.EMPTY : chisel.copy();
         
         ICarvingVariation v = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getVariation(target);
-        ICarvingGroup g = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getGroup(target);
+        ResourceLocation g = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getGroup(target);
 
         if (chisel.isEmpty() || v == null) {
             setSourceSlot(-1);
@@ -300,7 +310,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         }
         
         // Force a source slot recalc if the stack has changed to something that cannot be converted to the target
-        if (!source.isEmpty() && CarvingUtils.getChiselRegistry().getGroup(source) != g) {
+        if (!source.isEmpty() && !CarvingUtils.getChiselRegistry().getGroup(source).equals(g)) {
             source = ItemStack.EMPTY;
         }
         
@@ -320,7 +330,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
             if (source.isEmpty() || canOutput(res)) {
                 for (int i = 0; sourceSlot < 0 && i < getInputInv().getSlots(); i++) {
                     ItemStack stack = getInputInv().getStackInSlot(i);
-                    if (!stack.isEmpty() && g == CarvingUtils.getChiselRegistry().getGroup(stack)) {
+                    if (!stack.isEmpty() && g.equals(CarvingUtils.getChiselRegistry().getGroup(stack))) {
                         res.setCount(stack.getCount());
                         if (canOutput(res) && chiselitem.canChisel(getWorld(), FakePlayerFactory.getMinecraft((ServerWorld) getWorld()), chisel, v)) {
                             setSourceSlot(i);
@@ -363,14 +373,14 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
 
                     ServerPlayerEntity player = FakePlayerFactory.getMinecraft((ServerWorld) getWorld());
                     player.inventory.mainInventory.set(player.inventory.currentItem, chisel);
-                    res = chiselitem.craftItem(chisel, source, res, player);
+                    res = chiselitem.craftItem(chisel, source, res, player, $ -> {}); // FIXME
                     player.inventory.mainInventory.set(player.inventory.currentItem, ItemStack.EMPTY);
 
                     chiselitem.onChisel(getWorld(), player, chisel, v);
 
                     inputInv.setStackInSlot(sourceSlot, source);
                     
-                    Chisel.network.sendToDimension(new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlockState()), getWorld().provider.getDimension());
+                    Chisel.network.send(PacketDistributor.DIMENSION.with(() -> getWorld().getDimension().getType()), new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlockState()));
 
                     otherInv.setStackInSlot(0, chisel);
 
@@ -391,41 +401,37 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         updateClientSlot();
     }
     
-    @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || 
-               (Configurations.autoChiselPowered && capability == CapabilityEnergy.ENERGY) || 
-               super.hasCapability(capability, facing);
-    }
+    private final EnumMap<Direction, LazyOptional<IItemHandler>> viewCache = new EnumMap<>(Direction.class);
+    private final LazyOptional<IEnergyStorage> energyCap = LazyOptional.of(EnergyView::new);
 
     @Override
-    @Nullable
-    public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
+    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(this.new ItemView(facing));
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(capability, 
+                    viewCache.computeIfAbsent(facing, f -> LazyOptional.of(() -> new ItemView(f))));
         } else if (Configurations.autoChiselPowered && capability == CapabilityEnergy.ENERGY) {
-            return CapabilityEnergy.ENERGY.cast(this.new EnergyView());
+            return CapabilityEnergy.ENERGY.orEmpty(capability, energyCap);
         }
         return super.getCapability(capability, facing);
     }
     
     @Override
     @Nullable
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        return new SPacketUpdateTileEntity(getPos(), getBlockMetadata(), getUpdateTag());
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
     }
     
     @Override
     public CompoundNBT getUpdateTag() {
         CompoundNBT ret = super.getUpdateTag();
         if (hasCustomName()) {
-            ret.setString("customName", getName());
+            ret.putString("customName", ITextComponent.Serializer.toJson(getName()));
         }
         return ret;
     }
     
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         handleUpdateTag(pkt.getNbtCompound());
         super.onDataPacket(net, pkt);
     }
@@ -433,7 +439,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     @Override
     public void handleUpdateTag(CompoundNBT tag) {
         if (tag.contains("customName")) {
-            this.customName = tag.getString("customName");
+            setCustomName(ITextComponent.Serializer.fromJson(tag.getString("customName")));
         }
         super.handleUpdateTag(tag);
     }
@@ -447,7 +453,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         compound.putInt("progress", getProgress());
         compound.putInt("source", sourceSlot);
         if (hasCustomName()) {
-            compound.putString("customName", getName());
+            compound.putString("customName", ITextComponent.Serializer.toJson(getName()));
         }
         return super.write(compound);
     }
@@ -462,7 +468,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         this.progress = compound.getInt("progress");
         this.sourceSlot = compound.getInt("source");
         if (compound.contains("customName")) {
-            this.customName = compound.getString("customName");
+            this.customName = ITextComponent.Serializer.fromJson(compound.getString("customName"));
         }
     }
     
@@ -470,16 +476,16 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     
     @Override
     public ITextComponent getDisplayName() {
-        return hasCustomName() ? new StringTextComponent(getName()) : new TranslationTextComponent(getName());
+        return hasCustomName() ? getCustomName() : getName();
     }
 
     @Override
     public ITextComponent getName() {
-        String name = customName;
+        ITextComponent name = getCustomName();
         if (name == null) {
-            name = "container.autochisel.title";
+            name = new TranslationTextComponent("container.autochisel.title");
         }
-        return new TranslationTextComponent(name);
+        return name;
     }
 
     @Override
@@ -506,14 +512,13 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
                 for (int l = 0; l < i; ++l) {
                     double vx = (mid - j) * 0.05;
                     double vz = (mid - l) * 0.05;
-                    Particle fx = Minecraft.getInstance().effectRenderer.spawnEffectParticle(
-                            EnumParticleTypes.BLOCK_CRACK.getParticleID(), 
+                    Particle fx = Minecraft.getInstance().particles.addParticle(
+                            new BlockParticleData(ParticleTypes.BLOCK, source), 
                             pos.getX() + 0.5, pos.getY() + 10/16D, pos.getZ() + 0.5, 
-                            vx, 0, vz,
-                            Block.getIdFromBlock(source.getBlock()));
+                            vx, 0, vz);
 
                     if (fx != null) {
-                        ((ParticleDigging)fx).setBlockPos(pos).setParticleTexture(Minecraft.getInstance().getBlockRendererDispatcher().getModelForState(source).getParticleTexture());
+                        ((DiggingParticle)fx).setBlockPos(pos);
                     }
                 }
             }

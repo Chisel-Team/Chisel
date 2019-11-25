@@ -41,14 +41,14 @@ public class BlockAutoChisel extends Block {
     
     private static final VoxelShape SELECTION_SHAPE = VoxelShapes.fullCube();
 
-    public BlockAutoChisel() {
-        super(Material.IRON);
-        setSoundType(SoundType.METAL);
-        setHardness(2.5f);
-        setHarvestLevel("pickaxe", 1);
-        setUnlocalizedName("chisel.autochisel");
-        setCreativeTab(ChiselTabs.tab);
-        useNeighborBrightness = true;
+    public BlockAutoChisel(Block.Properties properties) {
+        super(properties);
+//        setSoundType(SoundType.METAL);
+//        setHardness(2.5f);
+//        setHarvestLevel("pickaxe", 1);
+//        setUnlocalizedName("chisel.autochisel");
+//        setCreativeTab(ChiselTabs.tab);
+//        useNeighborBrightness = true;
     }
 
     @Override
