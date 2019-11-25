@@ -3,13 +3,14 @@ package team.chisel.api.block;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.tterrag.registrate.Registrate;
+
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraft.item.Item;
 import team.chisel.common.block.ItemChiselBlock;
 
 /**
@@ -19,24 +20,22 @@ import team.chisel.common.block.ItemChiselBlock;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselBlockFactory {
 
-    @Getter
-    private final IForgeRegistry<Block> registry;
-    private final String domain;
+    private final Registrate registrate;
 
-    public static ChiselBlockFactory newFactory(IForgeRegistry<Block> registry, String domain) {
-        return new ChiselBlockFactory(registry, domain);
+    public static ChiselBlockFactory newFactory(Registrate registrate) {
+        return new ChiselBlockFactory(registrate);
     }
 
-    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass) {
-        return newBlock(material, blockName, creator, blockClass, BlockItem.class);
+    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass) {
+        return newType(material, blockName, creator, blockClass, BlockItem.class);
     }
 
-    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass, Class<? extends BlockItem> itemBlockClass) {
-        return newBlock(material, blockName, new BlockProvider<T>() {
+    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass, Class<? extends BlockItem> itemBlockClass) {
+        return newType(material, blockName, new BlockProvider<T>() {
 
             @Override
-            public T createBlock(Material material, int index, int totalBlocks, VariationData... data) {
-                return creator.createBlock(material, index, totalBlocks, data);
+            public T createBlock(Block.Properties properties, VariationData data) {
+                return creator.createBlock(properties, data);
             }
 
             @Override
@@ -45,17 +44,17 @@ public class ChiselBlockFactory {
             }
 
             @Override
-            public BlockItem createBlockItem(T block) {
-                return (BlockItem) new ItemChiselBlock(block).setRegistryName(block.getRegistryName());
+            public BlockItem createBlockItem(T block, Item.Properties properties) {
+                return (BlockItem) new ItemChiselBlock(block);
             }
         });
     }
 
-    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, BlockProvider<T> provider) {
-        return newBlock(material, blockName, blockName, provider);
+    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, BlockProvider<T> provider) {
+        return newType(material, blockName, blockName, provider);
     }
     
-    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newBlock(Material material, String blockName, @Nullable String group, BlockProvider<T> provider) {
-        return new ChiselBlockBuilder<T>(registry, material, domain, blockName, group, provider);
+    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, @Nullable String group, BlockProvider<T> provider) {
+        return new ChiselBlockBuilder<T>(registrate, material, blockName, group, provider);
     }
 }

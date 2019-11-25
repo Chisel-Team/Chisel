@@ -16,7 +16,8 @@ buildscript {
     }
 }
 plugins {
-    id "io.freefair.lombok" version "2.9.5"
+    id "io.freefair.lombok" version "4.1.5"
+    id 'com.github.johnrengelman.shadow' version '5.2.0'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
@@ -115,6 +116,10 @@ repositories {
     }
 }
 
+configurations {
+    shade
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 //	deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
@@ -122,8 +127,17 @@ dependencies {
 
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+    
+    def registrate = "com.tterrag.registrate:Registrate:${registrate_version}"
+    implementation fg.deobf(registrate)
+    shade registrate
 
 //  deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
+}
+
+shadowJar {
+    configurations = [project.configurations.shade]
+    relocate 'com.tterrag.registrate', 'team.chisel.repack.registrate'
 }
 
 lombok {
