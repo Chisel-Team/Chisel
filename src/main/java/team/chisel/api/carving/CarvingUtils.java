@@ -3,9 +3,8 @@ package team.chisel.api.carving;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -15,13 +14,10 @@ import com.google.common.collect.Lists;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.oredict.OreDictionary;
-import team.chisel.common.util.NonnullType;
 
 @ParametersAreNonnullByDefault
 public class CarvingUtils {
@@ -94,36 +90,6 @@ public class CarvingUtils {
     public static ICarvingGroup getDefaultGroupFor(String name) {
         return new SimpleCarvingGroup(name);
     }
-
-    /**
-     * Creates a group which proxies to the Ore Dictionary entries for the given name.
-     * <p>
-     * To add/remove variations to/from this group, modify the Ore Dictionary directly, the add/remove methods on this group will throw {@link UnsupportedOperationException}.
-     * 
-     * @param ore
-     *            The name of the Ore Dictionary entry.
-     * @return An {@link ICarvingGroup} for this entry.
-     */
-    public static ICarvingGroup getOreGroup(String ore) {
-        return new OreDictionaryGroup(ore);
-    }
-
-    /**
-     * Shorthand method for
-     * 
-     * <pre>
-     * CarvingUtils.getChiselRegistry().addGroup(CarvingUtils.getOreGroup(ore));
-     * </pre>
-     * 
-     * @param ore
-     *            The name of the Ore Dictionary entry.
-     * @see #getOreGroup(String)
-     */
-    public static void addOreGroup(String ore) {
-        ICarvingGroup group = getOreGroup(ore);
-        getChiselRegistry().addGroup(group);
-        getChiselRegistry().setOreName(group, ore);
-    }
 	
 	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 	@Getter
@@ -167,8 +133,8 @@ public class CarvingUtils {
 		}
 
 		@Override
-		public ItemStack getStack() {
-			return new ItemStack(state.getBlock(), 1, state.getBlock().damageDropped(state));
+		public @Nonnull ItemStack getStack() {
+			return new ItemStack(getBlockState().getBlock());
 		}
 	}
 	
@@ -191,7 +157,7 @@ public class CarvingUtils {
 	    }
 	    
 	    @Override
-	    public ItemStack getStack() {
+	    public @Nonnull ItemStack getStack() {
 	        return stack.copy();
 	    }
 
@@ -199,9 +165,9 @@ public class CarvingUtils {
         @Override
         @Nullable
         public BlockState getBlockState() {
-            return hasBlock ? ((BlockItem)stack.getItem()).getBlock().getStateFromMeta(stack.getItemDamage()) : null;
-        }	    
-	}
+            return hasBlock ? ((BlockItem) stack.getItem()).getBlock().getDefaultState() : null;
+        }
+    }
 	
     private static class SimpleVariation extends SimpleVariationBase {
 
@@ -217,7 +183,7 @@ public class CarvingUtils {
         }
         
         @Override
-        public ItemStack getStack() {
+        public @Nonnull ItemStack getStack() {
             return stack.copy();
         }
     }
@@ -238,27 +204,27 @@ public class CarvingUtils {
 			return Lists.newArrayList(variations);
 		}
 
-		@Override
-		public void addVariation(ICarvingVariation variation) {
-			variations.add(variation);
-			Collections.sort(variations, new Comparator<ICarvingVariation>() {
-
-				@SuppressWarnings("null")
-                @Override
-				public int compare(ICarvingVariation o1, ICarvingVariation o2) {
-					return CarvingUtils.compare(o1, o2);
-				}
-			});
-		}
-
-		@Override
-		public boolean removeVariation(ICarvingVariation variation) {
-		    return variations.removeIf(v -> 
-				           (ItemStack.areItemsEqual(v.getStack(), variation.getStack()) 
-				        && (v.getStack().getTagCompound() == null || ItemStack.areItemStackTagsEqual(v.getStack(), variation.getStack()))) 
-				||  (v.getBlockState() != null && v.getBlockState().equals(variation.getBlockState()))
-		    );
-		}
+//		@Override
+//		public void addVariation(ICarvingVariation variation) {
+//			variations.add(variation);
+//			Collections.sort(variations, new Comparator<ICarvingVariation>() {
+//
+//				@SuppressWarnings("null")
+//                @Override
+//				public int compare(ICarvingVariation o1, ICarvingVariation o2) {
+//					return CarvingUtils.compare(o1, o2);
+//				}
+//			});
+//		}
+//
+//		@Override
+//		public boolean removeVariation(ICarvingVariation variation) {
+//		    return variations.removeIf(v -> 
+//				           (ItemStack.areItemsEqual(v.getStack(), variation.getStack()) 
+//				        && (v.getStack().getTagCompound() == null || ItemStack.areItemStackTagsEqual(v.getStack(), variation.getStack()))) 
+//				||  (v.getBlockState() != null && v.getBlockState().equals(variation.getBlockState()))
+//		    );
+//		}
 
 		@Override
 		public String getName() {
@@ -274,28 +240,5 @@ public class CarvingUtils {
 		public void setSound(@Nullable SoundEvent sound) {
 			this.sound = sound;
 		}
-	}
-	
-	private static class OreDictionaryGroup extends SimpleCarvingGroup {
-
-        public OreDictionaryGroup(String name) {
-            super(name);
-        }
-	    
-        @Override
-        public List<ICarvingVariation> getVariations() {
-            List<@NonnullType ItemStack> ores = OreDictionary.getOres(getName());
-            return IntStream.range(0, ores.size()).mapToObj(i -> new VariationForStack(ores.get(i), i)).collect(Collectors.toList());
-        }
-        
-        @Override
-        public void addVariation(ICarvingVariation variation) {
-            throw new UnsupportedOperationException("Cannot add to Ore Dictionary Group.");
-        }
-        
-        @Override
-        public boolean removeVariation(ICarvingVariation variation) {
-            throw new UnsupportedOperationException("Cannot remove from Ore Dictionary Group.");
-        }
 	}
 }
