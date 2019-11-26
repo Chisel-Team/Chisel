@@ -75,10 +75,7 @@ public interface IVariationRegistry {
      */
     List<ItemStack> getItemsForChiseling(ResourceLocation group);
 
-    /**
-     * @return A list of all registered group names, sorted alphabetically.
-     */
-    List<ResourceLocation> getSortedGroups();
+    List<ICarvingGroup> getGroups();
 
     /* Setters */
 
