@@ -13,6 +13,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 import net.minecraft.util.NonNullList;
@@ -34,6 +35,8 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 
     // TODO this class is completely temporary. Need to make a helper object which does all this ICarvable logic
     
+    private final BlockRenderLayer layer;
+    
     @Getter(onMethod = @__({@Override}))
     public final PropertyAnyInteger metaProp;
     
@@ -47,17 +50,22 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
 
     private boolean dragonProof = false;
 
-    public static BlockCarvablePane create(Material material, int index, int max, VariationData... variations) {
-        return new BlockCarvablePane(material, true, index, max, variations);
+    public static BlockCarvablePane cutout(Material material, int index, int max, VariationData... variations) {
+        return new BlockCarvablePane(material, BlockRenderLayer.CUTOUT_MIPPED, true, index, max, variations);
     }
     
-    public static BlockCarvablePane noDrop(Material material, int index, int max, VariationData... variations) {
-        return new BlockCarvablePane(material, false, index, max, variations);
+    public static BlockCarvablePane cutoutNoDrop(Material material, int index, int max, VariationData... variations) {
+        return new BlockCarvablePane(material, BlockRenderLayer.CUTOUT_MIPPED, false, index, max, variations);
     }
     
-    public BlockCarvablePane(Material material, boolean canDrop, int index, int max, VariationData... variations) {
+    public static BlockCarvablePane translucentNoDrop(Material material, int index, int max, VariationData... variations) {
+        return new BlockCarvablePane(material, BlockRenderLayer.TRANSLUCENT, false, index, max, variations);
+    }
+    
+    public BlockCarvablePane(Material material, BlockRenderLayer layer, boolean canDrop, int index, int max, VariationData... variations) {
         super(material, canDrop);
         setCreativeTab(ChiselTabs.tab);
+        this.layer = layer;
         this.index = index;
         this.variations = variations;
         this.maxVariation = max;
@@ -125,6 +133,11 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager effectRenderer) {
         ClientUtil.addDestroyEffects(world, pos, world.getBlockState(pos));
         return true;
+    }
+    
+    @Override
+    public BlockRenderLayer getBlockLayer() {
+        return layer;
     }
 
     @Override

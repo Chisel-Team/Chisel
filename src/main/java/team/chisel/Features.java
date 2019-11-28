@@ -1395,7 +1395,7 @@ public enum Features {
             Carving.chisel.addVariation("glass", CarvingUtils.variationFor(Blocks.GLASS.getDefaultState(), -20));
 
 
-            BlockCreator<BlockCarvable> glassCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+            BlockCreator<BlockCarvable> glassCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, BlockRenderLayer.CUTOUT, index, maxVariation, data) {
                 @Override
                 public int quantityDropped(Random random) {
                     return 0;
@@ -1432,7 +1432,7 @@ public enum Features {
 
             Carving.chisel.addVariation("glasspane", CarvingUtils.variationFor(Blocks.GLASS_PANE.getDefaultState(), -20));
             
-            paneBlocks = factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<>(BlockCarvablePane::noDrop, BlockCarvablePane.class))
+            paneBlocks = factory.newBlock(Material.GLASS, "glasspane", new ChiselBlockProvider<>(BlockCarvablePane::cutoutNoDrop, BlockCarvablePane.class))
                     .newVariation("terrain-glassbubble")
                     .next("chinese").setOrder(20)
                     .next("japanese").setOrder(22)
@@ -1478,7 +1478,7 @@ public enum Features {
             for(int c = 0; c < dyeColors.length; c++) {
                 final int i = c;
 
-                BlockCreator<BlockCarvable> glassCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
+                BlockCreator<BlockCarvable> glassCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, BlockRenderLayer.TRANSLUCENT, index, maxVariation, data) {
                     float[] beaconFloats = EnumDyeColor.byDyeDamage(i).getColorComponentValues();
 
                     @Override
@@ -1515,9 +1515,7 @@ public enum Features {
 
                 Carving.chisel.addVariation("glasspanedyed" + (dyeColors[c].toLowerCase()), CarvingUtils.variationFor(stainedGlassPane.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
 
-                factory.newBlock(Material.GLASS, "glasspanedyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>((material, index, max, variations) -> new BlockCarvablePane(material, false, index, max, variations) {
-                    @Override public BlockRenderLayer getBlockLayer() { return BlockRenderLayer.TRANSLUCENT; }
-                }, BlockCarvablePane.class))
+                factory.newBlock(Material.GLASS, "glasspanedyed" + (dyeColors[c].toLowerCase()), new ChiselBlockProvider<>(BlockCarvablePane::translucentNoDrop, BlockCarvablePane.class))
                         .setParentFolder("glasspane_stained/" + dyeColors[c].toLowerCase())
                         .newVariation("panel")
                         .next("framed")
@@ -1936,7 +1934,7 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
             Carving.chisel.addVariation("ironpane", CarvingUtils.variationFor(Blocks.IRON_BARS.getDefaultState(), -1));
-            factory.newBlock(Material.IRON, "ironpane", new ChiselBlockProvider<>(BlockCarvablePane::create, BlockCarvablePane.class))
+            factory.newBlock(Material.IRON, "ironpane", new ChiselBlockProvider<>(BlockCarvablePane::cutout, BlockCarvablePane.class))
                     .newVariation("borderless")
                     .next("borderless-topper")
                     .next("barbedwire")

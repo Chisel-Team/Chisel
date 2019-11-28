@@ -37,6 +37,8 @@ import team.chisel.common.util.PropertyAnyInteger;
  */
 @ParametersAreNonnullByDefault
 public class BlockCarvable extends Block implements ICarvable {
+    
+    private final BlockRenderLayer layer;
 
     /**
      * The Property for the variation of this block
@@ -56,8 +58,13 @@ public class BlockCarvable extends Block implements ICarvable {
     private boolean dragonProof = false;
 
     public BlockCarvable(Material material, int index, int max, VariationData... variations) {
+        this(material, BlockRenderLayer.SOLID, index, max, variations);
+    }
+    
+    public BlockCarvable(Material material, BlockRenderLayer layer, int index, int max, VariationData... variations) {
         super(material);
         setCreativeTab(ChiselTabs.tab);
+        this.layer = layer;
         this.index = index;
         this.variations = variations;
         this.maxVariation = max;
@@ -165,9 +172,8 @@ public class BlockCarvable extends Block implements ICarvable {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer) {
-        return super.canRenderInLayer(state, layer);
+    public BlockRenderLayer getBlockLayer() {
+        return layer;
     }
 
     @Override
