@@ -21,8 +21,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.GenerationStage.Carving;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import team.chisel.Chisel;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.common.init.ChiselItems;
 
 @JeiPlugin
@@ -33,24 +35,24 @@ public class ChiselJEIPlugin implements IModPlugin {
     
     private final ChiselRecipeRegistryPlugin plugin = new ChiselRecipeRegistryPlugin();
 
-    private final Item[] chisels = new Item[] { ChiselItems.chisel_iron, ChiselItems.chisel_diamond, ChiselItems.chisel_hitech };
+    @SuppressWarnings("unchecked")
+    private final RegistryObject<Item>[] chisels = new RegistryObject[] { ChiselItems.chisel_iron, ChiselItems.chisel_diamond, ChiselItems.chisel_hitech };
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
-        registry.addRecipes(Carving.chisel.getSortedGroups().stream()
-                            .map(s -> Carving.chisel.getGroup(s))
+        registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
                             .collect(Collectors.toList()), category.getUid());
 
-        for (Item chisel : chisels) {
-            ItemStack stack = new ItemStack(chisel);
+        for (RegistryObject<Item> chisel : chisels) {
+            ItemStack stack = new ItemStack(chisel.get());
             registry.addIngredientInfo(stack, VanillaTypes.ITEM, "jei.chisel.desc.chisel_generic", "\n", "jei.chisel.desc." + stack.getItem().getRegistryName().getPath());
         }
     }
     
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        for (Item chisel : chisels) {
-            registry.addRecipeCatalyst(new ItemStack(chisel), category.getUid());
+        for (RegistryObject<Item> chisel : chisels) {
+            registry.addRecipeCatalyst(new ItemStack(chisel.get()), category.getUid());
         }
     }
     

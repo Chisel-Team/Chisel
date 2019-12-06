@@ -27,7 +27,7 @@ import team.chisel.common.init.ChiselItems;
 @ParametersAreNonnullByDefault
 public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
 
-    private static final ResourceLocation TEXTURE_LOC = new ResourceLocation("chisel", "textures/chiselJEI.png");
+    private static final ResourceLocation TEXTURE_LOC = new ResourceLocation("chisel", "textures/chisel_jei.png");
     
     private final IDrawable icon;
     private final IDrawable background;

@@ -7,11 +7,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.ImmutableMap;
+import com.tterrag.registrate.Registrate;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.LazyLoadBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
@@ -34,13 +36,12 @@ import team.chisel.common.block.MessageAutochiselFX;
 import team.chisel.common.block.MessageUpdateAutochiselSource;
 import team.chisel.common.carving.CarvingVariationRegistry;
 import team.chisel.common.carving.ChiselModeRegistry;
+import team.chisel.common.init.ChiselItems;
 import team.chisel.common.init.ChiselSounds;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ChiselMode;
 import team.chisel.common.item.PacketChiselMode;
-import team.chisel.common.util.GenerationHandler;
-import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
 
 @Mod(Reference.MOD_ID)
@@ -71,6 +72,8 @@ public class Chisel implements Reference {
     
     private static Map<String, Block> remaps = ImmutableMap.of();
     
+    private static final LazyLoadBase<Registrate> REGISTRATE = new LazyLoadBase<>(() -> Registrate.create(Reference.MOD_ID));
+    
     public Chisel() {
         CarvingUtils.chisel = new CarvingVariationRegistry();
         CarvingUtils.modes = ChiselModeRegistry.INSTANCE;
@@ -85,6 +88,11 @@ public class Chisel implements Reference {
         modBus.addGenericListener(Item.class, this::onMissingItem);
         
         ChiselSounds.init();
+        ChiselItems.init();
+    }
+    
+    public static Registrate registrate() {
+        return REGISTRATE.getValue();
     }
 
     private void setup(FMLCommonSetupEvent event) {
@@ -97,7 +105,7 @@ public class Chisel implements Reference {
 
 // TODO
 //        MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
-//        MinecraftForge.EVENT_BUS.register(ChiselController.class);
+        MinecraftForge.EVENT_BUS.register(ChiselController.class);
 // TODO
 //        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
 //        MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);

@@ -1,7 +1,6 @@
 package team.chisel.common.item;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -13,26 +12,28 @@ import lombok.Getter;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import team.chisel.Chisel;
 import team.chisel.api.IChiselGuiType;
 import team.chisel.api.IChiselGuiType.ChiselGuiType;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.config.Configurations;
-import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.util.NBTUtil;
 
 @ParametersAreNonnullByDefault
@@ -56,18 +57,13 @@ public class ItemChisel extends Item implements IChiselItem {
     @Getter
     private final ChiselType type;
     
-    public ItemChisel(ChiselType type) {
-        super();
+    public ItemChisel(ChiselType type, Item.Properties properties) {
+        super(properties);
         this.type = type;
-        setMaxStackSize(1);
-        String name = "chisel_" + type.name().toLowerCase(Locale.US);
-        setRegistryName(name);
-        setUnlocalizedName(Chisel.MOD_ID + "." + name);
-        setCreativeTab(ChiselTabs.tab);
     }
     
     @Override
-    public int getMaxDamage() {
+    public int getMaxDamage(ItemStack stack) {
         if (Configurations.allowChiselDamage)
             return type.maxDamage;
         return 0;
@@ -91,39 +87,33 @@ public class ItemChisel extends Item implements IChiselItem {
         return false;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> list, ITooltipFlag flag) {
         String base = "item.chisel.chisel.desc.";
-        list.add(I18n.format(base + "gui", TextFormatting.AQUA, TextFormatting.GRAY));
+        list.add(new TranslationTextComponent(base + "gui", TextFormatting.AQUA, TextFormatting.GRAY));
         if (type != ChiselType.IRON || Configurations.ironChiselCanLeftClick) {
-            list.add(I18n.format(base + "lc1", TextFormatting.AQUA, TextFormatting.GRAY));
-            list.add(I18n.format(base + "lc2", TextFormatting.AQUA, TextFormatting.GRAY));
+            list.add(new TranslationTextComponent(base + "lc1", TextFormatting.AQUA, TextFormatting.GRAY));
+            list.add(new TranslationTextComponent(base + "lc2", TextFormatting.AQUA, TextFormatting.GRAY));
         }
         if (type != ChiselType.IRON || Configurations.ironChiselHasModes) {
-            list.add("");
-            list.add(I18n.format(base + "modes"));
-            list.add(I18n.format(base + "modes.selected", TextFormatting.GREEN + I18n.format(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
+            list.add(new StringTextComponent(""));
+            list.add(new TranslationTextComponent(base + "modes"));
+            list.add(new TranslationTextComponent(base + "modes.selected", TextFormatting.GREEN, new TranslationTextComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
         }
     }
 
     @Override
-    public boolean isFull3D() {
-        return true;
-    }
-
-    @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
         Multimap<String, AttributeModifier> multimap = HashMultimap.create();
-        if (slot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Chisel Damage", type.attackDamage, 0));
+        if (slot == EquipmentSlotType.MAINHAND) {
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Chisel Damage", type.attackDamage, Operation.ADDITION));
         }
         return multimap;
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-        stack.damageItem(1, attacker);
+    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.damageItem(1, attacker, $ -> {}); // TODO 1.14
         return super.hitEntity(stack, attacker, target);
     }
     
