@@ -87,11 +87,11 @@ public interface IVariationRegistry {
      * @param variation
      *            The {@link ICarvingVariation} to add
      */
-    default void addVariation(ResourceLocation groupName, ICarvingVariation variation) {
-        addVariations(groupName, () -> Collections.singletonList(variation));
-    }
-    
-    void addVariations(ResourceLocation groupName, ICarvingVariationProvider provider);
+//    default void addVariation(ResourceLocation groupName, ICarvingVariation variation) {
+//        addVariations(groupName, () -> Collections.singletonList(variation));
+//    }
+//    
+//    void addVariations(ResourceLocation groupName, ICarvingVariationProvider provider);
 
     /**
      * Removes a group from the registry.
@@ -103,7 +103,7 @@ public interface IVariationRegistry {
      *            The name of the group to remove.
      * @return The variations removed, if any.
      */
-    List<ICarvingVariation> removeGroup(ResourceLocation groupName);
+    ICarvingGroup removeGroup(ResourceLocation groupName);
 
     /**
      * Removes a variation with the passed {@link Block} and metadata from the registry. If this variation is registered with multiple groups, it will remove it from all of them.

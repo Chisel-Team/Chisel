@@ -4,10 +4,9 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import net.minecraft.item.Item;
 import net.minecraftforge.registries.ObjectHolder;
 import team.chisel.Chisel;
-import team.chisel.common.item.ItemChisel;
-import team.chisel.common.item.ItemOffsetTool;
 
 @ObjectHolder(Chisel.MOD_ID)
 @ParametersAreNonnullByDefault
@@ -15,9 +14,9 @@ import team.chisel.common.item.ItemOffsetTool;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselItems {
     
-    public static final ItemChisel chisel_iron = null;
-    public static final ItemChisel chisel_diamond = null;
-    public static final ItemChisel chisel_hitech = null;
+    public static final Item chisel_iron = null;
+    public static final Item chisel_diamond = null;
+    public static final Item chisel_hitech = null;
 
-    public static final ItemOffsetTool offsettool = null;
+    public static final Item offsettool = null;
 }

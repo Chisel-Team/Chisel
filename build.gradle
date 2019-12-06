@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.1.2', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.1.+', changing: true
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
@@ -54,7 +54,7 @@ minecraft {
         	
             workingDirectory project.file('run')
 
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.markers', 'CORE,REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
             mods {
@@ -69,7 +69,7 @@ minecraft {
         
             workingDirectory project.file('run')
 
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.markers', 'CORE,REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
             mods {
@@ -86,7 +86,7 @@ minecraft {
             
             environment 'target', 'fmluserdevdata'
 
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+            property 'forge.logging.markers', 'CORE,REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
             mods {

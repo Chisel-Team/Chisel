@@ -1,12 +1,12 @@
 package team.chisel.common.item;
 
 import java.util.ArrayDeque;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Queue;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javax.vecmath.Point2i;
 
@@ -15,6 +15,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.google.common.collect.Sets;
 
 import lombok.Value;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
@@ -54,7 +55,7 @@ public enum ChiselMode implements IChiselMode {
                 side = side.getOpposite();
             }
             Vec3i offset = side.getDirectionVec();
-            return filteredIterable(Sets.newHashSet(BlockPos.getAllInBox(NEG_ONE.add(offset).add(pos), ONE.subtract(offset).add(pos))), player.world, player.world.getBlockState(pos));
+            return filteredIterable(BlockPos.getAllInBox(NEG_ONE.add(offset).add(pos), ONE.subtract(offset).add(pos)), player.world, player.world.getBlockState(pos));
         }
         
         @Override
@@ -87,7 +88,7 @@ public enum ChiselMode implements IChiselMode {
                     }
                 }
             }
-            return filteredIterable(ret, player.world, player.world.getBlockState(pos));
+            return filteredIterable(ret.stream(), player.world, player.world.getBlockState(pos));
         }
         
         @Override
@@ -121,7 +122,7 @@ public enum ChiselMode implements IChiselMode {
                     }
                 }
             }
-            return filteredIterable(ret, player.world, player.world.getBlockState(pos));
+            return filteredIterable(ret.stream(), player.world, player.world.getBlockState(pos));
         }
         
         @Override
@@ -139,7 +140,7 @@ public enum ChiselMode implements IChiselMode {
         
         @Override
         public Iterable<? extends BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
-            return () -> getContiguousIterator(pos, player.world, Direction.VALUES);
+            return () -> getContiguousIterator(pos, player.world, Direction.values());
         }
         
         @Override
@@ -153,7 +154,7 @@ public enum ChiselMode implements IChiselMode {
         
         @Override
         public Iterable<? extends BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
-            return () -> getContiguousIterator(pos, player.world, ArrayUtils.removeElements(Direction.VALUES, side, side.getOpposite()));
+            return () -> getContiguousIterator(pos, player.world, ArrayUtils.removeElements(Direction.values(), side, side.getOpposite()));
         }
         
         @Override
@@ -200,10 +201,10 @@ public enum ChiselMode implements IChiselMode {
                     for (Direction face : directionsToSearch) {
                         BlockPos bp = ret.getPos().offset(face);
                         if (!seen.contains(bp) && world.getBlockState(bp) == state) {
-                            for (Direction obscureCheck : Direction.VALUES) {
+                            for (Direction obscureCheck : Direction.values()) {
                                 BlockPos obscuringPos = bp.offset(obscureCheck);
                                 BlockState obscuringState = world.getBlockState(obscuringPos);
-                                if (!obscuringState.isSideSolid(world, obscuringPos, obscureCheck.getOpposite())) {
+                                if (!Block.hasSolidSide(obscuringState, world, obscuringPos, obscureCheck.getOpposite())) {
                                     search.offer(new Node(bp, ret.getDistance() + 1));
                                     break;
                                 }
@@ -217,8 +218,8 @@ public enum ChiselMode implements IChiselMode {
         };
     }
     
-    private static Iterable<BlockPos> filteredIterable(Collection<BlockPos> source, World world, BlockState state) {
-        return source.stream().filter(p -> world.getBlockState(p) == state)::iterator;
+    private static Iterable<BlockPos> filteredIterable(Stream<BlockPos> source, World world, BlockState state) {
+        return source.filter(p -> world.getBlockState(p) == state)::iterator;
     }
     
     // Register all enum constants to the mode registry

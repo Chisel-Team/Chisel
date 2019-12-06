@@ -30,58 +30,58 @@ public class NBTUtil {
 
     @SuppressWarnings("null")
     public static CompoundNBT getTag(ItemStack stack) {
-        if (!stack.hasTagCompound()) {
-            stack.setTagCompound(new CompoundNBT());
+        if (!stack.hasTag()) {
+            stack.setTag(new CompoundNBT());
         }
         // Warning suppressed: tag is guaranteed to be set from above code
-        return stack.getTagCompound();
+        return stack.getTag();
     }
 
     public static CompoundNBT getChiselTag(ItemStack stack) {
         CompoundNBT tag = getTag(stack);
-        if (!tag.hasKey(KEY_TAG)) {
-            tag.setTag(KEY_TAG, new CompoundNBT());
+        if (!tag.contains(KEY_TAG)) {
+            tag.put(KEY_TAG, new CompoundNBT());
         }
-        return tag.getCompoundTag(KEY_TAG);
+        return tag.getCompound(KEY_TAG);
     }
     
     public static void setChiselTag(ItemStack stack, CompoundNBT tag) {
-        getTag(stack).setTag(KEY_TAG, tag);
+        getTag(stack).put(KEY_TAG, tag);
     }
 
     public static ItemStack getChiselTarget(ItemStack stack) {
-        return new ItemStack(getChiselTag(stack).getCompoundTag(KEY_TARGET));
+        return ItemStack.read(getChiselTag(stack).getCompound(KEY_TARGET));
     }
 
     public static void setChiselTarget(ItemStack chisel, ItemStack target) {
-        getChiselTag(chisel).setTag(KEY_TARGET, target.writeToNBT(new CompoundNBT()));
+        getChiselTag(chisel).put(KEY_TARGET, target.write(new CompoundNBT()));
     }
     
     @SuppressWarnings("null") // Can't use type annotations with JSR
     public static PreviewType getHitechType(ItemStack stack) {
-        return PreviewType.values()[getChiselTag(stack).getInteger(KEY_PREVIEW_TYPE)];
+        return PreviewType.values()[getChiselTag(stack).getInt(KEY_PREVIEW_TYPE)];
     }
 
     public static void setHitechType(ItemStack stack, int type) {
-        getChiselTag(stack).setInteger(KEY_PREVIEW_TYPE, type);
+        getChiselTag(stack).putInt(KEY_PREVIEW_TYPE, type);
     }
     
     public static int getHitechSelection(ItemStack stack) {
         CompoundNBT tag = getChiselTag(stack);
-        return tag.hasKey(KEY_SELECTION_SLOT) ? tag.getInteger(KEY_SELECTION_SLOT) : -1;
+        return tag.contains(KEY_SELECTION_SLOT) ? tag.getInt(KEY_SELECTION_SLOT) : -1;
     }
 
     public static void setHitechSelection(ItemStack chisel, int slot) {
-        getChiselTag(chisel).setInteger(KEY_SELECTION_SLOT, slot);
+        getChiselTag(chisel).putInt(KEY_SELECTION_SLOT, slot);
     }
     
     public static int getHitechTarget(ItemStack stack) {
         CompoundNBT tag = getChiselTag(stack);
-        return tag.hasKey(KEY_TARGET_SLOT) ? tag.getInteger(KEY_TARGET_SLOT) : -1;
+        return tag.contains(KEY_TARGET_SLOT) ? tag.getInt(KEY_TARGET_SLOT) : -1;
     }
 
     public static void setHitechTarget(ItemStack chisel, int slot) {
-        getChiselTag(chisel).setInteger(KEY_TARGET_SLOT, slot);
+        getChiselTag(chisel).putInt(KEY_TARGET_SLOT, slot);
     }
     
     public static boolean getHitechRotate(ItemStack stack) {
@@ -89,7 +89,7 @@ public class NBTUtil {
     }
 
     public static void setHitechRotate(ItemStack chisel, boolean rotate) {
-        getChiselTag(chisel).setBoolean(KEY_ROTATE, rotate);
+        getChiselTag(chisel).putBoolean(KEY_ROTATE, rotate);
     }
 
     public static IChiselMode getChiselMode(@Nonnull ItemStack chisel) {
@@ -99,6 +99,6 @@ public class NBTUtil {
     }
 
     public static void setChiselMode(@Nonnull ItemStack chisel, @Nonnull IChiselMode mode) {
-        getChiselTag(chisel).setString(KEY_MODE, mode.name());
+        getChiselTag(chisel).putString(KEY_MODE, mode.name());
     }
 }

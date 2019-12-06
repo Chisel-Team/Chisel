@@ -1,14 +1,15 @@
 package team.chisel.common.carving;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
+import com.google.common.collect.ImmutableList;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.resources.IResourceManager;
@@ -16,15 +17,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.resource.IResourceType;
 import net.minecraftforge.resource.ISelectiveResourceReloadListener;
-import team.chisel.api.carving.ICarvingVariation;
-import team.chisel.api.carving.ICarvingVariationProvider;
+import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.IVariationRegistry;
 
 @ParametersAreNonnullByDefault
 public class CarvingVariationRegistry implements IVariationRegistry {
     
-    private final ListMultimap<ResourceLocation, ICarvingVariationProvider> providers = ArrayListMultimap.create();
-    private final ListMultimap<ResourceLocation, ICarvingVariation> resolvedVariations = ArrayListMultimap.create();
+    private final Map<ResourceLocation, ICarvingGroup> groups = new HashMap<>();
      
     public CarvingVariationRegistry() {
         
@@ -35,17 +34,17 @@ public class CarvingVariationRegistry implements IVariationRegistry {
             
             @Override
             public void onResourceManagerReload(IResourceManager resourceManager, Predicate<IResourceType> resourcePredicate) {
-                resolve();
+//                resolve();
             }
         });
     }
     
-    private void resolve() {
-        resolvedVariations.clear();
-        providers.asMap().forEach((g, providers) -> providers.stream()
-                .map(ICarvingVariationProvider::provide)
-                .forEach(vars -> resolvedVariations.putAll(g, vars)));
-    }
+//    private void resolve() {
+//        resolvedVariations.clear();
+//        providers.asMap().forEach((g, providers) -> providers.stream()
+//                .map(ICarvingVariationProvider::provide)
+//                .forEach(vars -> resolvedVariations.putAll(g, vars)));
+//    }
 
 //    @Override
 //    public Optional<ResourceLocation> getGroup(BlockState state) {
@@ -79,27 +78,31 @@ public class CarvingVariationRegistry implements IVariationRegistry {
 
     @Override
     public List<ItemStack> getItemsForChiseling(ResourceLocation group) {
-        return resolvedVariations.get(group).stream()
-                .map(ICarvingVariation::getStack)
+        return groups.get(group).getItems().stream()
+                .map(ItemStack::new)
                 .collect(Collectors.toList());
     }
 
-    @Override
+//    @Override
     public List<ResourceLocation> getSortedGroups() {
-        return providers.keySet().stream()
+        return groups.keySet().stream()
                 .sorted(Comparator.comparing(ResourceLocation::getNamespace).thenComparing(ResourceLocation::getPath))
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public void addVariations(ResourceLocation groupName, ICarvingVariationProvider provider) {
+//        providers.put(groupName, provider);
+//    }
+
     @Override
-    public void addVariations(ResourceLocation groupName, ICarvingVariationProvider provider) {
-        providers.put(groupName, provider);
+    public ICarvingGroup removeGroup(ResourceLocation groupName) {
+        return groups.remove(groupName);
     }
 
     @Override
-    public List<ICarvingVariation> removeGroup(ResourceLocation groupName) {
-        providers.removeAll(groupName);
-        return resolvedVariations.removeAll(groupName);
+    public List<ICarvingGroup> getGroups() {
+        return ImmutableList.copyOf(groups.values());
     }
 
 //    @Override

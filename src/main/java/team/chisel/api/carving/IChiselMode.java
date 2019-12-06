@@ -46,7 +46,7 @@ public interface IChiselMode {
         return new long[] {origin.toLong(), side.ordinal()};
     }
     
-    ResourceLocation SPRITES = new ResourceLocation(Chisel.MOD_ID, "textures/modeIcons.png");
+    ResourceLocation SPRITES = new ResourceLocation(Chisel.MOD_ID, "textures/mode_icons.png");
     
     default ResourceLocation getSpriteSheet() {
         return SPRITES;

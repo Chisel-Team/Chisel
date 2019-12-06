@@ -39,8 +39,8 @@ public class CarvingUtils {
 //		return v1.getOrder() - v2.getOrder();
 //	}
 
-	private static @Nullable IVariationRegistry chisel;
-	private static @Nullable IModeRegistry modes;
+	public static @Nullable IVariationRegistry chisel;
+	public static @Nullable IModeRegistry modes;
 
 	/**
 	 * @return The instance of the chisel carving registry from the chisel mod.

@@ -13,8 +13,8 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.registries.ObjectHolderRegistry;
 import team.chisel.Chisel;
 
@@ -64,6 +64,6 @@ public class ChiselSounds {
             }
         }
         
-        ObjectHolderRegistry.INSTANCE.applyObjectHolders();
+        ObjectHolderRegistry.applyObjectHolders();
     }
 }

@@ -83,10 +83,11 @@ public class Chisel implements Reference {
         modBus.addListener(this::imcProcess);
         modBus.addGenericListener(Block.class, this::onMissingBlock);
         modBus.addGenericListener(Item.class, this::onMissingItem);
+        
+        ChiselSounds.init();
     }
 
     private void setup(FMLCommonSetupEvent event) {
-        ChiselSounds.init();
         
 //        File configFile = event.getSuggestedConfigurationFile();
 //        Configurations.configExists = configFile.exists();
@@ -94,11 +95,12 @@ public class Chisel implements Reference {
 //        Configurations.config.load();
 //        Configurations.refreshConfig();
 
-        MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(ChiselController.class);
-
+// TODO
+//        MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
+//        MinecraftForge.EVENT_BUS.register(ChiselController.class);
+// TODO
 //        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
-        MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
+//        MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
 
         //EntityRegistry.registerModEntity(EntityFallingBlockCarvable.class, "falling_block", 60, Chisel.instance, 64, 3, false);
     }
