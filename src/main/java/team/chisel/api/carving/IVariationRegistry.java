@@ -1,14 +1,12 @@
 package team.chisel.api.carving;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -22,51 +20,15 @@ public interface IVariationRegistry {
 
     /* Getters */
 
-    /**
-     * Finds the group the block/meta pair belongs to in the registry.
-     * 
-     * @param state
-     *            The state of the variation
-     * @return The group that the blockstate belongs to, or empty if none exists.
-     */
-//    Optional<ResourceLocation> getGroup(BlockState state);
+    Optional<ICarvingGroup> getGroup(Item item);
+    
+    Optional<ICarvingGroup> getGroup(Block block);
 
-    /**
-     * Finds the group the ItemStack belongs to in the registry.
-     * 
-     * @param stack
-     *            The ItemStack of the variation
-     * @return The group that the ItemStack belongs to, or empty if none exists.
-     */
-//    Optional<ResourceLocation> getGroup(ItemStack stack);
+    Optional<ICarvingVariation> getVariation(Block block);
 
-    /**
-     * Gets the {@link ICarvingVariation} instance represented by this block/meta pair.
-     * 
-     * @param state
-     *            The state of the variation
-     * @return The {@link ICarvingVariation} containing this blockstate, or empty if none exists.
-     */
-//    Optional<ICarvingVariation> getVariation(BlockState state);
+    Optional<ICarvingVariation> getVariation(Item item);
 
-    /**
-     * Gets the {@link ICarvingVariation} instance represented by this stack.
-     * 
-     * @param stack
-     *            The ItemStack of the variation
-     * 
-     * @return The {@link ICarvingVariation} containing this stack, or empty if none exists.
-     */
-//    Optional<ICarvingVariation> getVariation(ItemStack stack);
-
-    /**
-     * Gets the possible output items for this {@link ItemStack}. To be used for machines/GUIs that chisel items.
-     * 
-     * @param chiseled
-     *            The {@link ItemStack} being chiseled
-     * @return A list of stacks that can be chiseled from the passed {@link ItemStack stack}
-     */
-//    List<ItemStack> getItemsForChiseling(ItemStack chiseled);
+    List<ItemStack> getItemsForChiseling(ItemStack chiseled);
 
     /**
      * A convenience version of {@link IVariationRegistry#getItemsForChiseling(ItemStack)} which takes an already computed group.
@@ -79,6 +41,7 @@ public interface IVariationRegistry {
 
     /* Setters */
 
+    void addGroup(ICarvingGroup group);
     /**
      * Adds a variation to the registry.
      * 

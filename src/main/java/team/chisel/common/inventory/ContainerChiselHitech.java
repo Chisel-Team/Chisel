@@ -10,9 +10,9 @@ import com.google.common.collect.ImmutableList;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ClickType;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import team.chisel.api.carving.ICarvingGroup;
@@ -27,7 +27,7 @@ public class ContainerChiselHitech extends ContainerChisel {
     private List<Slot> selectionDuplicates = ImmutableList.of();
     private @Nullable ICarvingGroup currentGroup;
     
-    public ContainerChiselHitech(InventoryPlayer inventoryplayer, InventoryChiselSelection inv, Hand hand) {
+    public ContainerChiselHitech(PlayerInventory inventoryplayer, InventoryChiselSelection inv, Hand hand) {
         super(inventoryplayer, inv, hand);
         
         int selectionSlot = NBTUtil.getHitechSelection(chisel);
@@ -58,7 +58,7 @@ public class ContainerChiselHitech extends ContainerChisel {
             }
             selectionDuplicates = builder.build();
             
-            ICarvingGroup group = carving.getGroup(slot.getStack());
+            ICarvingGroup group = carving.getGroup(slot.getStack().getItem()).orElse(null);
             if (group != currentGroup) {
                 setTarget(null);
             }
@@ -86,21 +86,21 @@ public class ContainerChiselHitech extends ContainerChisel {
 
         // selection slots
         for (int i = 0; i < getInventoryChisel().size; i++) {
-            addSlotToContainer(new SlotChiselSelection(this, inventoryChisel, inventoryChisel, i, left + ((i % 9) * 18), top + ((i / 9) * 18)));
+            addSlot(new SlotChiselSelection(this, inventoryChisel, inventoryChisel, i, left + ((i % 9) * 18), top + ((i / 9) * 18)));
         }
 
         // main slot
-        addSlotToContainer(new SlotChiselInput(this, inventoryChisel, getInventoryChisel().size, -1000, 0));
+        addSlot(new SlotChiselInput(this, inventoryChisel, getInventoryChisel().size, -1000, 0));
 
         top += 130;
         // main inv
         for (int i = 0; i < 27; i++) {
-            addSlotToContainer(new Slot(inventoryPlayer, i + 9, left + ((i % 9) * 18), top + (i / 9) * 18));
+            addSlot(new Slot(inventoryPlayer, i + 9, left + ((i % 9) * 18), top + (i / 9) * 18));
         }
 
         top += 58;
         for (int i = 0; i < 9; i++) {
-            addSlotToContainer(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
+            addSlot(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
         }
     }
     

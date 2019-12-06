@@ -2,19 +2,14 @@ package team.chisel.common.inventory;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import team.chisel.api.IChiselItem;
 import team.chisel.common.item.ItemChisel;
 
@@ -60,7 +55,7 @@ public class InventoryChiselSelection implements IInventory {
                 updateInventoryState(slot);
                 return stack;
             } else {
-                ItemStack split = stack.splitStack(amount);
+                ItemStack split = stack.split(amount);
 
                 if (stack.getCount() == 0) {
                     setInventorySlotContents(slot, ItemStack.EMPTY);
@@ -86,16 +81,6 @@ public class InventoryChiselSelection implements IInventory {
     }
 
     @Override
-    public String getName() {
-        return "container.chisel";
-    }
-
-    @Override
-    public boolean hasCustomName() {
-        return false;
-    }
-
-    @Override
     public int getInventoryStackLimit() {
         return 64;
     }
@@ -103,11 +88,6 @@ public class InventoryChiselSelection implements IInventory {
     @Override
     public void markDirty() {
 
-    }
-
-    @Override
-    public @Nonnull ITextComponent getDisplayName() {
-        return new TextComponentTranslation(getName());
     }
 
     @Override
@@ -165,20 +145,6 @@ public class InventoryChiselSelection implements IInventory {
     @Override
     public void clear() {
         inventory.clear();
-    }
-
-    @Override
-    public int getField(int var1) {
-        return var1;
-    }
-
-    @Override
-    public void setField(int var1, int var2) {
-    }
-
-    @Override
-    public int getFieldCount() {
-        return 0;
     }
 
     @Override

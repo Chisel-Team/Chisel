@@ -3,7 +3,7 @@ package team.chisel.common.inventory;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.inventory.Slot;
+import net.minecraft.inventory.container.Slot;
 
 public class SlotChiselInput extends Slot {
 

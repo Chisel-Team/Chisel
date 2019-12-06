@@ -66,28 +66,31 @@ public class CarvingUtils {
 	/**
      * Creates a new variation for the given blockstate, with automatic (flawed) conversion to ItemStack when necessary.
      */
-    public static ICarvingGroup blockGroup(Tag<Block> blocks) {
-        return new BlockTagGroup(blocks);
+    public static ICarvingGroup blockGroup(ResourceLocation id, Tag<Block> blocks) {
+        return new BlockTagGroup(id, blocks);
     }
 
     /**
      * Creates a new variation for the given ItemStack, with automatic (flawed) conversion to blockstate when necessary.
      */
-    public static ICarvingGroup itemGroup(Tag<Item> items) {
-        return new ItemTagGroup(items);
+    public static ICarvingGroup itemGroup(ResourceLocation id, Tag<Item> items) {
+        return new ItemTagGroup(id, items);
     }
 
     /**
      * Creates a new variation for the given ItemStack and blockstate. Use this for full control over ItemStack/blockstate conversion.
      */
-    public static ICarvingGroup group(Tag<Block> blocks, Tag<Item> items) {
-        return new SimpleGroup(items, blocks);
+    public static ICarvingGroup group(ResourceLocation id, Tag<Block> blocks, Tag<Item> items) {
+        return new SimpleGroup(id, items, blocks);
     }
 	
 	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 	@Getter(onMethod = @__({@Override}))
 	private static abstract class AbstractGroup implements ICarvingGroup {
 	    
+	    @Getter(onMethod = @__({@Override}))
+	    private final ResourceLocation id;
+
 	    @Getter(onMethod = @__({@Override}))
 	    private final SoundEvent sound = null;
 
@@ -117,8 +120,8 @@ public class CarvingUtils {
 
 		private final Tag<Block> tag;
 
-		public BlockTagGroup(Tag<Block> tag) {
-		    super();
+		public BlockTagGroup(ResourceLocation id, Tag<Block> tag) {
+		    super(id);
 		    this.tag = tag;
 		}
 
@@ -137,8 +140,8 @@ public class CarvingUtils {
 	    
 	    private final Tag<Item> tag;
 	    
-	    public ItemTagGroup(Tag<Item> tag) {
-	        super();
+	    public ItemTagGroup(ResourceLocation id, Tag<Item> tag) {
+	        super(id);
 	        this.tag = tag;
 	    }
 	    
@@ -153,11 +156,16 @@ public class CarvingUtils {
 	    }
     }
 	
-	@RequiredArgsConstructor
     private static class SimpleGroup extends AbstractGroup {
 
         private final Tag<Item> itemTag;
         private final Tag<Block> blockTag;
+        
+        public SimpleGroup(ResourceLocation id, Tag<Item> itemTag, Tag<Block> blockTag) {
+            super(id);
+            this.itemTag = itemTag;
+            this.blockTag = blockTag;
+        }
         
         @Override
         public Collection<Block> getBlocks() {

@@ -3,13 +3,10 @@ package team.chisel.common.inventory;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.BlockItem;
+import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -47,11 +44,11 @@ public class SlotChiselSelection extends Slot {
         ItemStack res = ItemStack.EMPTY;
         if (!chisel.isEmpty() && !crafted.isEmpty()) {                
             IChiselItem item = (IChiselItem) container.getChisel().getItem();
-            ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(itemstack);
+            ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(itemstack.getItem()).orElseThrow(IllegalArgumentException::new);
             if (!item.canChisel(player.world, player, chisel, variation)) {
                 return res;
             }
-            res = item.craftItem(chisel, crafted, itemstack, player);
+            res = item.craftItem(chisel, crafted, itemstack, player, $ -> {}); // TODO 1.14
             if (!simulate) {
                 container.getInventoryChisel().setStackInSpecialSlot(crafted.getCount() == 0 ? ItemStack.EMPTY : crafted);
                 container.onChiselSlotChanged();
