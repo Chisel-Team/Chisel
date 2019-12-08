@@ -89,6 +89,8 @@ public class Chisel implements Reference {
         
         ChiselSounds.init();
         ChiselItems.init();
+        
+        Features.loadBlocks(registrate());
     }
     
     public static Registrate registrate() {

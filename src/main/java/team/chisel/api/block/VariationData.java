@@ -5,6 +5,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AllArgsConstructor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Represents data about a specific variation
@@ -19,15 +20,10 @@ public class VariationData {
     public String name;
     
     /**
-     * The path for the blockstate/model information
-     */
-    public String path;
-
-    /**
      * The carving group of this variation
      */
     @Nullable
-    public String group;
+    public ResourceLocation group;
 
     /**
      * The Itemstack that is smelted into this variation, if null it cant be smelted

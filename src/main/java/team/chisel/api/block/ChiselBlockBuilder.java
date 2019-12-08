@@ -2,20 +2,25 @@ package team.chisel.api.block;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
+import com.tterrag.registrate.builders.BlockBuilder;
+import com.tterrag.registrate.builders.ItemBuilder;
 
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraftforge.fml.RegistryObject;
 
 /**
@@ -38,21 +43,18 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     private BlockProvider<T> provider;
 
-    private String parentFolder;
-
     private List<String> oreStrings = new ArrayList<>();
 
-    private @Nullable String group;
+    private @Nullable Tag<Block> group;
     
     @Accessors(fluent = true)
     private boolean opaque = true;
 
-    protected ChiselBlockBuilder(Registrate registrate, Material material, String blockName, @Nullable String group, BlockProvider<T> provider) {
+    protected ChiselBlockBuilder(Registrate registrate, Material material, String blockName, @Nullable Tag<Block> group, BlockProvider<T> provider) {
         this.registrate = registrate;
         this.material = material;
         this.blockName = blockName;
         this.provider = provider;
-        this.parentFolder = blockName;
         this.group = group;
         this.variations = new ArrayList<VariationBuilder<T>>();
     }
@@ -67,14 +69,14 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         return newVariation(name, group);
     }
 
-    public VariationBuilder<T> newVariation(String name, String group) {
+    public VariationBuilder<T> newVariation(String name, Tag<Block> group) {
         VariationBuilder<T> builder = new VariationBuilder<>(this, name, group, curIndex);
         builder.opaque(opaque);
         curIndex++;
         return builder;
     }
 
-    private static final Consumer<?> NO_ACTION = o -> {};
+    private static final UnaryOperator<Block.Properties> NO_ACTION = UnaryOperator.identity();
 
     /**
      * Builds the block(s).
@@ -83,7 +85,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      */
     @SuppressWarnings({ "unchecked", "null" })
     public RegistryObject<T>[] build() {
-        return build((Consumer<T>) NO_ACTION);
+        return build(NO_ACTION);
     }
 
     /**
@@ -94,8 +96,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      *            registration.
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
-    @SuppressWarnings({ "unchecked", "deprecation", "null" })
-    public RegistryObject<T>[] build(Consumer<? super T> after) {
+    @SuppressWarnings({ "unchecked", "null" })
+    public RegistryObject<T>[] build(UnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
         }
@@ -108,18 +110,31 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             if (Strings.emptyToNull(data[i].name) != null) {
                 final VariationData var = data[i];
                 ret[i] = registrate.object(blockName + "/" + var.name)
-                        .block(p -> provider.createBlock(p.sound(sound).hardnessAndResistance(1), var))
+                        .block(p -> provider.createBlock(p.hardnessAndResistance(1), var))
+                        .blockstate(null)
+                        .transform(this::addTag)
+                        .properties(after)
                         .item(provider::createBlockItem)
+                            .transform(this::addTag)
                             .build()
                         .register();
-            // TODO after.accept(ret[i]);
-                if (var.group != null) {
-                    VariationBuilder<T> v = variations.get(var.index);
-//                    TODO CarvingUtils.getChiselRegistry().addVariation(data[i].group, ret[i], v.order);
-                }
             }
         }
         return ret;
+    }
+    
+    private <B extends Block, P> BlockBuilder<B, P> addTag(BlockBuilder<B, P> builder) {
+        if (this.group != null) {
+            return builder.tag(this.group);
+        }
+        return builder;
+    }
+    
+    private <I extends Item, P> ItemBuilder<I, P> addTag(ItemBuilder<I, P> builder) {
+        if (this.group != null) {
+            return builder.tag(ItemTags.getCollection().get(this.group.getId()));
+        }
+        return builder;
     }
 
     @Accessors(chain = true)
@@ -128,7 +143,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         private ChiselBlockBuilder<T> parent;
 
         private String name;
-        private @Nullable String group;
+        private @Nullable Tag<Block> group;
 
         private int index;
 
@@ -142,7 +157,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         @Accessors(fluent = true)
         private boolean opaque;
 
-        private VariationBuilder(ChiselBlockBuilder<T> parent, String name, @Nullable String group, int index) {
+        private VariationBuilder(ChiselBlockBuilder<T> parent, String name, @Nullable Tag<Block> group, int index) {
             this.parent = parent;
             this.name = name;
             this.group = group;
@@ -164,7 +179,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return buildVariation().newVariation(name);
         }
 
-        public VariationBuilder<T> next(String name, String group) {
+        public VariationBuilder<T> next(String name, Tag<Block> group) {
             return buildVariation().newVariation(name, group);
         }
 
@@ -172,12 +187,12 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return buildVariation().build();
         }
         
-        public RegistryObject<T>[] build(Consumer<? super T> after) {
+        public RegistryObject<T>[] build(UnaryOperator<Block.Properties> after) {
             return buildVariation().build(after);
         }
 
         private VariationData doBuild() {
-            return new VariationData(name, parent.parentFolder + "/" + name, group, smeltedFrom, amountSmelted, index, opaque);
+            return new VariationData(name, group == null ? null : group.getId(), smeltedFrom, amountSmelted, index, opaque);
         }
 
         public VariationBuilder<T> addOreDict(String oreDict)

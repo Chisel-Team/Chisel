@@ -11,6 +11,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.ResourceLocation;
+import team.chisel.common.Reference;
 import team.chisel.common.block.ItemChiselBlock;
 
 /**
@@ -45,7 +48,7 @@ public class ChiselBlockFactory {
 
             @Override
             public BlockItem createBlockItem(T block, Item.Properties properties) {
-                return (BlockItem) new ItemChiselBlock(block);
+                return (BlockItem) new ItemChiselBlock(block, properties);
             }
         });
     }
@@ -55,6 +58,6 @@ public class ChiselBlockFactory {
     }
     
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, @Nullable String group, BlockProvider<T> provider) {
-        return new ChiselBlockBuilder<T>(registrate, material, blockName, group, provider);
+        return new ChiselBlockBuilder<T>(registrate, material, blockName, group == null ? null : new BlockTags.Wrapper(new ResourceLocation(Reference.MOD_ID, "group/" + group)), provider);
     }
 }
