@@ -15,16 +15,15 @@ import com.google.common.collect.Maps;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntityMP;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.server.management.PlayerChunkMapEntry;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.WorldServer;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraft.world.chunk.IChunk;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
@@ -34,6 +33,7 @@ import team.chisel.Chisel;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.api.chunkdata.IChunkData;
 import team.chisel.api.chunkdata.IChunkDataRegistry;
+import team.chisel.client.ClientProxy;
 
 public enum PerChunkData implements IChunkDataRegistry {
     
@@ -80,17 +80,17 @@ public enum PerChunkData implements IChunkDataRegistry {
         
                 Chunk chunk = null;
                 if (this.chunk != null) {
-                    chunk = Chisel.proxy.getClientWorld().getChunkFromChunkCoords(this.chunk.x, this.chunk.z);
+                    chunk = ClientProxy.getClientWorld().getChunk(this.chunk.x, this.chunk.z);
                 }
                 IChunkData<?> data = INSTANCE.data.get(this.key);
                 if (chunk != null) {
                     data.readFromNBT(chunk, this.tag);
                     int x = chunk.getPos().x << 4;
                     int z = chunk.getPos().z << 4;
-                    Chisel.proxy.getClientWorld().markBlockRangeForRenderUpdate(x, 0, z, x, 255, z);
+                    // TODO 1.14 ClientProxy.getClientWorld().markBlockRangeForRenderUpdate(x, 0, z, x, 255, z);
                 } else {
                     for (ChunkPos pos : data.readFromNBT(this.tag.getList("l", Constants.NBT.TAG_COMPOUND))) {
-                        Chisel.proxy.getClientWorld().markBlockRangeForRenderUpdate(pos.x, 0, pos.z, pos.x, 255, pos.z);
+                        // TODO 1.14 ClientProxy.getClientWorld().markBlockRangeForRenderUpdate(pos.x, 0, pos.z, pos.x, 255, pos.z);
                     }
                 }
             });
@@ -105,7 +105,7 @@ public enum PerChunkData implements IChunkDataRegistry {
      */
     public static class ChunkDataBase<T extends NBTSaveable> implements IChunkData<T> {
 
-        protected final Map<Pair<Integer, ChunkPos>, T> data = new HashMap<>();
+        protected final Map<Pair<DimensionType, ChunkPos>, T> data = new HashMap<>();
         protected final Class<? extends T> clazz;
         private final boolean needsClientSync;
 
@@ -117,21 +117,21 @@ public enum PerChunkData implements IChunkDataRegistry {
         @Override
         public ListNBT writeToNBT() {
             ListNBT tags = new ListNBT();
-            for (Entry<Pair<Integer, ChunkPos>, T> e : data.entrySet()) {
+            for (Entry<Pair<DimensionType, ChunkPos>, T> e : data.entrySet()) {
                 CompoundNBT entry = new CompoundNBT();
-                entry.setInteger("d", e.getKey().getLeft());
-                entry.setLong("p", (e.getKey().getRight().x << 32) | e.getKey().getRight().z);
+                entry.putString("d", e.getKey().getLeft().getRegistryName().toString());
+                entry.putLong("p", (e.getKey().getRight().x << 32) | e.getKey().getRight().z);
                 CompoundNBT data = new CompoundNBT();
                 e.getValue().write(data);
-                entry.setTag("v", data);
-                tags.appendTag(entry);
+                entry.put("v", data);
+                tags.add(entry);
             }
             return tags;
         }
 
         @Override
-        public void writeToNBT(@Nonnull Chunk chunk, @Nonnull CompoundNBT tag) {
-            T t = data.get(Pair.of(chunk.getWorld().provider.getDimension(), chunk.getPos()));
+        public void writeToNBT(@Nonnull IChunk chunk, @Nonnull CompoundNBT tag) {
+            T t = data.get(Pair.of(chunk.getWorldForge().getDimension().getType(), chunk.getPos()));
             if (t != null) {
                 t.write(tag);
             }
@@ -140,12 +140,12 @@ public enum PerChunkData implements IChunkDataRegistry {
         @Override
         public Iterable<ChunkPos> readFromNBT(@Nonnull ListNBT tags) {
             List<ChunkPos> changed = new ArrayList<>();
-            for (int i = 0; i < tags.tagCount(); i++) {
-                CompoundNBT entry = tags.getCompoundTagAt(i);
-                int dimID = entry.getInteger("d");
+            for (int i = 0; i < tags.size(); i++) {
+                CompoundNBT entry = tags.getCompound(i);
+                DimensionType dim = DimensionType.byName(new ResourceLocation(entry.getString("d")));
                 long coordsRaw = entry.getLong("p");
                 ChunkPos coords = new ChunkPos((int) ((coordsRaw >>> 32) & 0xFFFFFFFF), (int) (coordsRaw & 0xFFFFFFFF));
-                if (readFromNBT(dimID, coords, entry.getCompoundTag("v"))) {
+                if (readFromNBT(dim, coords, entry.getCompound("v"))) {
                     changed.add(coords);
                 }
             }
@@ -153,24 +153,24 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         @Override
-        public void readFromNBT(@Nonnull Chunk chunk, @Nonnull CompoundNBT tag) {
-            int dimID = chunk.getWorld().provider.getDimension();
+        public void readFromNBT(@Nonnull IChunk chunk, @Nonnull CompoundNBT tag) {
+            DimensionType type = chunk.getWorldForge().getDimension().getType();
             ChunkPos coords = chunk.getPos();
-            readFromNBT(dimID, coords, tag);
+            readFromNBT(type, coords, tag);
         }
         
-        private boolean readFromNBT(int dimID, ChunkPos coords, CompoundNBT tag) {
-            if (tag.hasNoTags()) {
-                data.remove(dimID, coords);
+        private boolean readFromNBT(DimensionType dim, ChunkPos coords, CompoundNBT tag) {
+            if (tag.isEmpty()) {
+                data.remove(dim, coords);
                 return false;
             }
-            T t = getOrCreateNew(dimID, coords);
+            T t = getOrCreateNew(dim, coords);
             t.read(tag);
             return true;
         }
         
-        protected T getOrCreateNew(int dimID, @Nonnull ChunkPos coords) {
-            val pair = Pair.of(dimID, coords);
+        protected T getOrCreateNew(DimensionType dim, @Nonnull ChunkPos coords) {
+            val pair = Pair.of(dim, coords);
             T t = data.get(pair);
             if (t == null) {
                 try {
@@ -189,8 +189,8 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         @Override
-        public T getDataForChunk(int dimID, @Nonnull ChunkPos coords) {
-            return getOrCreateNew(dimID, coords);
+        public T getDataForChunk(DimensionType dim, @Nonnull ChunkPos coords) {
+            return getOrCreateNew(dim, coords);
         }
     }
 
@@ -215,14 +215,14 @@ public enum PerChunkData implements IChunkDataRegistry {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
             CompoundNBT tag = new CompoundNBT();
             e.getValue().writeToNBT(event.getChunk(), tag);
-            event.getData().setTag("chisel:" + e.getKey(), tag);
+            event.getData().put("chisel:" + e.getKey(), tag);
         }
     }
 
     @SubscribeEvent
     public void onChunkLoad(ChunkDataEvent.Load event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
-            CompoundNBT tag = event.getData().getCompoundTag("chisel:" + e.getKey());
+            CompoundNBT tag = event.getData().getCompound("chisel:" + e.getKey());
             e.getValue().readFromNBT(event.getChunk(), tag);
             updateClient(event.getChunk(), e.getKey(), e.getValue());
         }
@@ -232,25 +232,23 @@ public enum PerChunkData implements IChunkDataRegistry {
     public void onPlayerJoin(PlayerLoggedInEvent event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
             if (e.getValue().requiresClientSync()) {
-                Chisel.network.sendTo(new MessageChunkData(e.getKey(), e.getValue()), (PlayerEntityMP) event.player);
+//                TODO 1.14 Chisel.network.sendTo(new MessageChunkData(e.getKey(), e.getValue()), (PlayerEntityMP) event.player);
             }
         }
     }
 
-    public void chunkModified(Chunk chunk, String key) {
+    public void chunkModified(IChunk chunk, String key) {
         IChunkData<?> cd = data.get(key);
         chunk.setModified(true);
         updateClient(chunk, key, cd);
     }
     
-    private void updateClient(@Nonnull Chunk chunk, String key, IChunkData<?> cd) {
+    private void updateClient(@Nonnull IChunk chunk, String key, IChunkData<?> cd) {
         if (cd.requiresClientSync()) {
             CompoundNBT tag = new CompoundNBT();
             cd.writeToNBT(chunk, tag);
-            PlayerChunkMapEntry entry = ((WorldServer)chunk.getWorld()).getPlayerChunkMap().getEntry(chunk.x, chunk.z);
-            if (entry != null) {
-                entry.sendPacket(Chisel.network.getPacketFrom(new MessageChunkData(chunk, key, tag)));
-            }
+            // TODO 1.14 target players tracking chunk
+//            entry.sendPacket(Chisel.network.getPacketFrom(new MessageChunkData(chunk, key, tag)));
         }
     }
 }

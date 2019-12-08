@@ -133,7 +133,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
 
     @Override
     public void setIngredients(ICarvingGroup group, IIngredients ingredients) {
-        List<ItemStack> variants = CarvingUtils.getChiselRegistry().getItemsForChiseling(group);
+        List<ItemStack> variants = group.getItems().stream().map(ItemStack::new).collect(Collectors.toList());
         
         ingredients.setInputs(VanillaTypes.ITEM, variants);
         ingredients.setOutputs(VanillaTypes.ITEM, variants);

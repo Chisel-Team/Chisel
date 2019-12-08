@@ -44,6 +44,10 @@ public class ItemChiselBlock extends BlockItem {
         addTooltips(block, tooltip);
     }
     
+    public static void addTooltips(ItemStack stack, List<ITextComponent> tooltip) {
+        return addTooltips(((ItemChiselBlock)stack.getItem()).block, tooltip);
+    }
+    
     public static void addTooltips(ICarvable block, List<ITextComponent> tooltip) {
         try {
             // Skip first line if this config is deactivated, as it will be part of display name

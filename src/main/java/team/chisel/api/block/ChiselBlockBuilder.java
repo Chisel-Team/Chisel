@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraftforge.fml.RegistryObject;
+import team.chisel.common.init.ChiselTabs;
 
 /**
  * Building a ChiselBlockData
@@ -110,11 +111,12 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             if (Strings.emptyToNull(data[i].name) != null) {
                 final VariationData var = data[i];
                 ret[i] = registrate.object(blockName + "/" + var.name)
-                        .block(p -> provider.createBlock(p.hardnessAndResistance(1), var))
-                        .blockstate(null)
+                        .block(p -> provider.createBlock(p, var))
+                        .properties(p -> p.hardnessAndResistance(1))
                         .transform(this::addTag)
                         .properties(after)
                         .item(provider::createBlockItem)
+                            .properties(p -> p.group(ChiselTabs.tab))
                             .transform(this::addTag)
                             .build()
                         .register();

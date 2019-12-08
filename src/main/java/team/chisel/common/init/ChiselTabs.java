@@ -1,5 +1,6 @@
 package team.chisel.common.init;
 
+import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.item.ItemGroup;
@@ -24,9 +25,10 @@ public class ChiselTabs {
         
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ChiselItems.chisel_iron);
+            return new ItemStack(ChiselItems.chisel_iron.get());
         }
     }
 
+    @Nonnull
     public static final ItemGroup tab = new ChiselCreativeTab().setBackgroundImageName("item_search.png");
 }
