@@ -62,20 +62,7 @@ public class ItemChiselBlock extends BlockItem {
     public ITextComponent getDisplayName(ItemStack stack) {
         if (!Configurations.blockDescriptions) {
             String unlocpattern = "chisel.tooltip.blockname";
-            String ret = null;
-            try {
-                ret = I18n.format(
-                        unlocpattern, 
-                        super.getDisplayName(stack), 
-                        I18n.format(getTooltipUnloc(block) + "1")
-                );
-            } catch (IllegalFormatException e) {
-                String raw = I18n.format(unlocpattern);
-                Chisel.logger.error("Invalid name pattern {}, check your resource pack lang key for {}", raw, unlocpattern);
-            }
-            if (ret != null) {
-                return new StringTextComponent(ret); // FIXME
-            }
+            return new TranslationTextComponent(unlocpattern, super.getDisplayName(stack), new TranslationTextComponent(getTooltipUnloc(block) + "1"));
         }
         return super.getDisplayName(stack);
     }
