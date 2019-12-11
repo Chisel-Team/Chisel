@@ -16,6 +16,7 @@ import net.minecraft.client.particle.ParticleDigging;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -362,7 +363,7 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
 
                     inputInv.setStackInSlot(sourceSlot, source);
                     
-                    Chisel.network.sendToDimension(new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlockState()), getWorld().provider.getDimension());
+                    Chisel.network.sendToDimension(new MessageAutochiselFX(getPos(), chisel, (Item) chiselitem, sourceVar.getStack()), getWorld().provider.getDimension());
 
                     otherInv.setStackInSlot(0, chisel);
 
@@ -486,27 +487,35 @@ public class TileAutoChisel extends TileEntity implements ITickable, IWorldNamea
     private @Nullable ItemStack source;
 
     @SuppressWarnings("null")
-    public void spawnCompletionFX(EntityPlayer player, ItemStack chisel, IBlockState source) {
-        SoundUtil.playSound(player, getPos(), SoundUtil.getSound(player, chisel, source));
+    public void spawnCompletionFX(EntityPlayer player, ItemStack chisel, Item chiselitem, ICarvingVariation source) {
+        ItemStack fxStack = chisel;
+        if (fxStack.isEmpty()) {
+            fxStack = new ItemStack(chiselitem);
+            fxStack.setItemDamage(chiselitem.getMaxDamage(fxStack));
+        }
+        SoundUtil.playSound(player, getPos(), SoundUtil.getSound(player, fxStack, source.getBlockState()));
         if (chisel.isEmpty()) {
             getWorld().playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
+            spawnItemBreakFX(fxStack);
         }
+        spawnItemBreakFX(source.getStack());
+    }
+    
+    @SuppressWarnings("null")
+    private void spawnItemBreakFX(ItemStack stack) {
         int i = 3;
         float mid = i / 2f;
-        for (int j = 0; j < i; ++j) {
-            for (int k = 0; k < i; ++k) {
-                for (int l = 0; l < i; ++l) {
+        for (int j = 0; j <= i; ++j) {
+            for (int k = 0; k <= i; ++k) {
+                for (int l = 0; l <= i; ++l) {
                     double vx = (mid - j) * 0.05;
-                    double vz = (mid - l) * 0.05;
-                    Particle fx = Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(
-                            EnumParticleTypes.BLOCK_CRACK.getParticleID(), 
-                            pos.getX() + 0.5, pos.getY() + 10/16D, pos.getZ() + 0.5, 
-                            vx, 0, vz,
-                            Block.getIdFromBlock(source.getBlock()));
-
-                    if (fx != null) {
-                        ((ParticleDigging)fx).setBlockPos(pos).setParticleTexture(Minecraft.getMinecraft().getBlockRendererDispatcher().getModelForState(source).getParticleTexture());
-                    }
+                    double vz = (mid - k) * 0.05;
+                    double vy = (mid - l) * 0.25;
+                    Minecraft.getMinecraft().effectRenderer.spawnEffectParticle(
+                            EnumParticleTypes.ITEM_CRACK.getParticleID(), 
+                            pos.getX() + 0.5, pos.getY() + 10/16D + (world.rand.nextFloat() * 1.5/16D), pos.getZ() + 0.5, 
+                            vx, vy, vz,
+                            Item.getIdFromItem(stack.getItem()), stack.getMetadata());
                 }
             }
         }

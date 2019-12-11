@@ -7,9 +7,7 @@ import org.apache.commons.lang3.Validate;
 import io.netty.buffer.ByteBuf;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +18,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import team.chisel.Chisel;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.common.init.ChiselItems;
 
 @NoArgsConstructor
@@ -28,13 +27,15 @@ public class MessageAutochiselFX implements IMessage {
     
     private @Nonnull BlockPos pos = BlockPos.ORIGIN;
     private @Nonnull ItemStack chisel = new ItemStack(ChiselItems.chisel_iron);
-    private @Nonnull IBlockState state = Blocks.AIR.getDefaultState();
+    private @Nonnull Item chiselitem = ChiselItems.chisel_iron;
+    private @Nonnull ItemStack source;
     
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(pos.toLong());
         ByteBufUtils.writeItemStack(buf, chisel);
-        buf.writeInt(Block.getStateId(state));
+        buf.writeInt(Item.getIdFromItem(chiselitem));
+        ByteBufUtils.writeItemStack(buf, source);
     }
 
     @Override
@@ -43,7 +44,8 @@ public class MessageAutochiselFX implements IMessage {
         ItemStack chisel = ByteBufUtils.readItemStack(buf);
         Validate.notNull(chisel);
         this.chisel = chisel;
-        this.state = Block.getStateById(buf.readInt());
+        this.chiselitem = Item.getItemById(buf.readInt());
+        this.source = ByteBufUtils.readItemStack(buf);
     }
     
     public static class Handler implements IMessageHandler<MessageAutochiselFX, IMessage> {
@@ -55,7 +57,7 @@ public class MessageAutochiselFX implements IMessage {
                 if (world.isBlockLoaded(message.pos)) {
                     TileEntity te = world.getTileEntity(message.pos);
                     if (te instanceof TileAutoChisel) {
-                        ((TileAutoChisel) te).spawnCompletionFX(Chisel.proxy.getClientPlayer(), message.chisel, message.state);
+                        ((TileAutoChisel) te).spawnCompletionFX(Chisel.proxy.getClientPlayer(), message.chisel, message.chiselitem, CarvingUtils.getChiselRegistry().getVariation(message.source));
                     }
                 }
             });
