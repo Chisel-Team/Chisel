@@ -45,7 +45,7 @@ public class ItemChiselBlock extends BlockItem {
     }
     
     public static void addTooltips(ItemStack stack, List<ITextComponent> tooltip) {
-        return addTooltips(((ItemChiselBlock)stack.getItem()).block, tooltip);
+        addTooltips(((ItemChiselBlock)stack.getItem()).block, tooltip);
     }
     
     public static void addTooltips(ICarvable block, List<ITextComponent> tooltip) {

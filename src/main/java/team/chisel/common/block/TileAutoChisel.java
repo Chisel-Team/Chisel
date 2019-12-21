@@ -157,7 +157,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
             if (slot == 0 && stack.getItem() instanceof IChiselItem) {
                 return super.insertItem(slot, stack, simulate);
             }
-            if (slot == 1 && CarvingUtils.getChiselRegistry().getVariation(stack) != null) {
+            if (slot == 1 && CarvingUtils.getChiselRegistry().getVariation(stack.getItem()) != null) {
                 return super.insertItem(slot, stack, simulate);
             }
             return stack;
@@ -167,7 +167,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
 
         @Override
         public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-            if (!stack.isEmpty() && CarvingUtils.getChiselRegistry().getVariation(stack) != null) {
+            if (!stack.isEmpty() && CarvingUtils.getChiselRegistry().getVariation(stack.getItem()) != null) {
                 return super.insertItem(slot, stack, simulate);
             }
             return stack;
@@ -272,7 +272,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     
     protected void updateClientSlot() {
         if (sourceSlot != prevSource) {
-            Chisel.network.sendToDimension(new MessageUpdateAutochiselSource(getPos(), sourceSlot < 0 ? ItemStack.EMPTY : inputInv.getStackInSlot(sourceSlot)), getWorld().provider.getDimension());
+//            TODO 1.14 packets Chisel.network.sendToDimension(new MessageUpdateAutochiselSource(getPos(), sourceSlot < 0 ? ItemStack.EMPTY : inputInv.getStackInSlot(sourceSlot)), getWorld().provider.getDimension());
         }
         prevSource = sourceSlot;
     }
@@ -299,8 +299,8 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         @Nonnull ItemStack source = sourceSlot < 0 ? ItemStack.EMPTY : getInputInv().getStackInSlot(sourceSlot);
         chisel = chisel.isEmpty() ? ItemStack.EMPTY : chisel.copy();
         
-        ICarvingVariation v = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getVariation(target);
-        ResourceLocation g = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getGroup(target);
+        ICarvingVariation v = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getVariation(target.getItem()).orElse(null);
+        ICarvingGroup g = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getGroup(target.getItem()).orElse(null);
 
         if (chisel.isEmpty() || v == null) {
             setSourceSlot(-1);
@@ -310,7 +310,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         }
         
         // Force a source slot recalc if the stack has changed to something that cannot be converted to the target
-        if (!source.isEmpty() && !CarvingUtils.getChiselRegistry().getGroup(source).equals(g)) {
+        if (!source.isEmpty() && !CarvingUtils.getChiselRegistry().getGroup(source.getItem()).equals(g)) {
             source = ItemStack.EMPTY;
         }
         
@@ -323,14 +323,14 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
                 setSourceSlot(-1);
             }
             // Make sure we can output this stack
-            ItemStack res = v.getStack();
+            ItemStack res = new ItemStack(v.getItem());
             if (!source.isEmpty()) {
                 res.setCount(source.getCount());
             }
             if (source.isEmpty() || canOutput(res)) {
                 for (int i = 0; sourceSlot < 0 && i < getInputInv().getSlots(); i++) {
                     ItemStack stack = getInputInv().getStackInSlot(i);
-                    if (!stack.isEmpty() && g.equals(CarvingUtils.getChiselRegistry().getGroup(stack))) {
+                    if (!stack.isEmpty() && g.equals(CarvingUtils.getChiselRegistry().getGroup(stack.getItem()))) {
                         res.setCount(stack.getCount());
                         if (canOutput(res) && chiselitem.canChisel(getWorld(), FakePlayerFactory.getMinecraft((ServerWorld) getWorld()), chisel, v)) {
                             setSourceSlot(i);
@@ -346,7 +346,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         if (sourceSlot >= 0) {
             source = getInputInv().getStackInSlot(sourceSlot);
             Validate.notNull(source);
-            ICarvingVariation sourceVar = CarvingUtils.getChiselRegistry().getVariation(source);
+            ICarvingVariation sourceVar = CarvingUtils.getChiselRegistry().getVariation(source.getItem()).orElse(null);
             if (sourceVar != v) {
                 if (progress < MAX_PROGRESS) {
                     if (!Configurations.autoChiselNeedsPower) {
@@ -367,7 +367,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
                         }
                     }
                 } else {
-                    ItemStack res = v.getStack();
+                    ItemStack res = new ItemStack(v.getItem());
                     source = source.copy();
                     chisel = chisel.copy();
 
@@ -380,7 +380,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
 
                     inputInv.setStackInSlot(sourceSlot, source);
                     
-                    Chisel.network.send(PacketDistributor.DIMENSION.with(() -> getWorld().getDimension().getType()), new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlockState()));
+                    // TODO 1.14 packets Chisel.network.send(PacketDistributor.DIMENSION.with(() -> getWorld().getDimension().getType()), new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlockState()));
 
                     otherInv.setStackInSlot(0, chisel);
 
