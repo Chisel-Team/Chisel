@@ -2,7 +2,6 @@ package team.chisel.api.block;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.UnaryOperator;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -11,6 +10,7 @@ import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
+import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -22,6 +22,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraftforge.fml.RegistryObject;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.common.init.ChiselTabs;
 
 /**
@@ -32,6 +33,7 @@ import team.chisel.common.init.ChiselTabs;
 @ParametersAreNonnullByDefault
 public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
+    private final ChiselBlockFactory parent;
     private final Registrate registrate;
     private final Material material;
     private final String blockName;
@@ -51,7 +53,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     @Accessors(fluent = true)
     private boolean opaque = true;
 
-    protected ChiselBlockBuilder(Registrate registrate, Material material, String blockName, @Nullable Tag<Block> group, BlockProvider<T> provider) {
+    protected ChiselBlockBuilder(ChiselBlockFactory parent, Registrate registrate, Material material, String blockName, @Nullable Tag<Block> group, BlockProvider<T> provider) {
+        this.parent = parent;
         this.registrate = registrate;
         this.material = material;
         this.blockName = blockName;
@@ -77,7 +80,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         return builder;
     }
 
-    private static final UnaryOperator<Block.Properties> NO_ACTION = UnaryOperator.identity();
+    private static final NonNullUnaryOperator<Block.Properties> NO_ACTION = NonNullUnaryOperator.identity();
 
     /**
      * Builds the block(s).
@@ -98,7 +101,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings({ "unchecked", "null" })
-    public RegistryObject<T>[] build(UnaryOperator<Block.Properties> after) {
+    public RegistryObject<T>[] build(NonNullUnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
         }
@@ -122,6 +125,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .register();
             }
         }
+        if (this.group != null) {
+            CarvingUtils.getChiselRegistry().addGroup(CarvingUtils.itemGroup(this.group));
+        }
         return ret;
     }
     
@@ -134,7 +140,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     
     private <I extends Item, P> ItemBuilder<I, P> addTag(ItemBuilder<I, P> builder) {
         if (this.group != null) {
-            return builder.tag(ItemTags.getCollection().get(this.group.getId()));
+            return builder.tag(parent.getItemTag(this.group.getId()));
         }
         return builder;
     }
@@ -189,7 +195,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return buildVariation().build();
         }
         
-        public RegistryObject<T>[] build(UnaryOperator<Block.Properties> after) {
+        public RegistryObject<T>[] build(NonNullUnaryOperator<Block.Properties> after) {
             return buildVariation().build(after);
         }
 

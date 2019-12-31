@@ -1,5 +1,13 @@
 {
+  "block.chisel.metals.aluminum.badgreggy": "Metals/aluminum/badgreggy",
+  "block.chisel.metals.aluminum.bolted": "Metals/aluminum/bolted",
+  "block.chisel.metals.aluminum.caution": "Metals/aluminum/caution",
+  "block.chisel.metals.aluminum.crate": "Metals/aluminum/crate",
+  "block.chisel.metals.aluminum.machine": "Metals/aluminum/machine",
+  "block.chisel.metals.aluminum.scaffold": "Metals/aluminum/scaffold",
+  "block.chisel.metals.aluminum.thermal": "Metals/aluminum/thermal",
   "item.chisel.diamond_chisel": "Diamond Chisel",
   "item.chisel.hitech_chisel": "Hitech Chisel",
-  "item.chisel.iron_chisel": "Iron Chisel"
+  "item.chisel.iron_chisel": "Iron Chisel",
+  "item.chisel.offset_tool": "Offset Tool"
 }

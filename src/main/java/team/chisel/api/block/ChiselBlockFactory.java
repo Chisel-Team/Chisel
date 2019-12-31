@@ -1,5 +1,8 @@
 package team.chisel.api.block;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -12,6 +15,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.common.Reference;
 import team.chisel.common.block.ItemChiselBlock;
@@ -58,6 +63,17 @@ public class ChiselBlockFactory {
     }
     
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, @Nullable String group, BlockProvider<T> provider) {
-        return new ChiselBlockBuilder<T>(registrate, material, blockName, group == null ? null : new BlockTags.Wrapper(new ResourceLocation(Reference.MOD_ID, "group/" + group)), provider);
+        return new ChiselBlockBuilder<T>(this, registrate, material, blockName, group == null ? null : getBlockTag(new ResourceLocation(Reference.MOD_ID, "group/" + group)), provider);
+    }
+    
+    private final Map<ResourceLocation, Tag<Block>> blockTags = new HashMap<>();
+    private final Map<ResourceLocation, Tag<Item>> itemTags = new HashMap<>();
+
+    Tag<Block> getBlockTag(ResourceLocation id) {
+        return blockTags.computeIfAbsent(id, BlockTags.Wrapper::new);
+    }
+    
+    Tag<Item> getItemTag(ResourceLocation id) {
+        return itemTags.computeIfAbsent(id, ItemTags.Wrapper::new);
     }
 }

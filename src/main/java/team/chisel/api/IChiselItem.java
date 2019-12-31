@@ -5,6 +5,7 @@ import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -120,11 +121,11 @@ public interface IChiselItem {
      *            {@link PlayerEntity The player} holding the chisel
      * @param chisel
      *            The {@link ItemStack} representing the chisel
-     * @param next
-     *            The {@link BlockState} representing the target
+     * @param target
+     *            The {@link Block} representing the target
      * @return A sound to play, instead of the variation's sound, or null for default.
      */
-    default @Nullable SoundEvent getOverrideSound(World world, PlayerEntity player, ItemStack chisel, BlockState next) {
+    default @Nullable SoundEvent getOverrideSound(World world, PlayerEntity player, ItemStack chisel, Block target) {
         return null;
     }
     

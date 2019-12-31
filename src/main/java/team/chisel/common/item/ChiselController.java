@@ -3,6 +3,7 @@ package team.chisel.common.item;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +18,7 @@ import net.minecraft.entity.item.PaintingEntity;
 import net.minecraft.entity.item.PaintingType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -83,7 +85,7 @@ public class ChiselController {
                     }
                 }
             } else {
-                List<Block> variations = new ArrayList<>(blockGroup.getBlocks());
+                List<Block> variations = new ArrayList<>(blockGroup.getBlockTag().map(Tag::getAllElements).orElse(Collections.emptyList()));
                 
                 variations = variations.stream().filter(v -> v.getBlock() != null).collect(Collectors.toList());
                         
@@ -106,8 +108,8 @@ public class ChiselController {
      * Assumes that the player is holding a chisel
      */
     private static void setVariation(PlayerEntity player, BlockPos pos, BlockState origState, ICarvingVariation v) {
-        BlockState targetState = v.getBlock().getDefaultState();
-        Preconditions.checkNotNull(targetState, "Variation state cannot be null!");
+        Block targetBlock = v.getBlock();
+        Preconditions.checkNotNull(targetBlock, "Variation state cannot be null!");
         
         World world = player.world;
         BlockState curState = world.getBlockState(pos);
@@ -133,10 +135,10 @@ public class ChiselController {
                 player.inventory.mainInventory.set(player.inventory.currentItem, targetStack);
             }
             if (world.isRemote) {
-                SoundUtil.playSound(player, held, targetState);
+                SoundUtil.playSound(player, held, targetBlock);
 //                ClientUtil.addDestroyEffects(world, pos, curState); TODO 1.14
             }
-            world.setBlockState(pos, targetState);
+            world.setBlockState(pos, targetBlock.getDefaultState());
         }
     }
     /*
@@ -270,7 +272,7 @@ public class ChiselController {
         BlockState current = world.getBlockState(pos);
         if (current != next) {
             world.setBlockState(pos, next);
-            SoundUtil.playSound(player, stack, next);
+            SoundUtil.playSound(player, stack, next.getBlock());
             if (world.isRemote) {
 //                ClientUtil.addDestroyEffects(world, pos, next); TODO 1.14
             }

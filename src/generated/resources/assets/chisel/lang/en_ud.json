@@ -1,5 +1,13 @@
 {
+  "block.chisel.metals.aluminum.badgreggy": "\u028Ebb\u01DD\u0279bp\u0250q/\u026Fnu\u0131\u026Fn\u05DF\u0250/s\u05DF\u0250\u0287\u01DDW",
+  "block.chisel.metals.aluminum.bolted": "p\u01DD\u0287\u05DFoq/\u026Fnu\u0131\u026Fn\u05DF\u0250/s\u05DF\u0250\u0287\u01DDW",
+  "block.chisel.metals.aluminum.caution": "uo\u0131\u0287n\u0250\u0254/\u026Fnu\u0131\u026Fn\u05DF\u0250/s\u05DF\u0250\u0287\u01DDW",
+  "block.chisel.metals.aluminum.crate": "\u01DD\u0287\u0250\u0279\u0254/\u026Fnu\u0131\u026Fn\u05DF\u0250/s\u05DF\u0250\u0287\u01DDW",
+  "block.chisel.metals.aluminum.machine": "\u01DDu\u0131\u0265\u0254\u0250\u026F/\u026Fnu\u0131\u026Fn\u05DF\u0250/s\u05DF\u0250\u0287\u01DDW",
+  "block.chisel.metals.aluminum.scaffold": "p\u05DFo\u025F\u025F\u0250\u0254s/\u026Fnu\u0131\u026Fn\u05DF\u0250/s\u05DF\u0250\u0287\u01DDW",
+  "block.chisel.metals.aluminum.thermal": "\u05DF\u0250\u026F\u0279\u01DD\u0265\u0287/\u026Fnu\u0131\u026Fn\u05DF\u0250/s\u05DF\u0250\u0287\u01DDW",
   "item.chisel.diamond_chisel": "\u05DF\u01DDs\u0131\u0265\u0186 puo\u026F\u0250\u0131\u15E1",
   "item.chisel.hitech_chisel": "\u05DF\u01DDs\u0131\u0265\u0186 \u0265\u0254\u01DD\u0287\u0131H",
-  "item.chisel.iron_chisel": "\u05DF\u01DDs\u0131\u0265\u0186 uo\u0279I"
+  "item.chisel.iron_chisel": "\u05DF\u01DDs\u0131\u0265\u0186 uo\u0279I",
+  "item.chisel.offset_tool": "\u05DFoo\u27D8 \u0287\u01DDs\u025F\u025FO"
 }

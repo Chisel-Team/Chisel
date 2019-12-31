@@ -66,22 +66,15 @@ public class CarvingUtils {
 	/**
      * Creates a new variation for the given blockstate, with automatic (flawed) conversion to ItemStack when necessary.
      */
-    public static ICarvingGroup blockGroup(ResourceLocation id, Tag<Block> blocks) {
-        return new BlockTagGroup(id, blocks);
+    public static ICarvingGroup itemGroup(Tag<Block> blocks) {
+        return new BlockTagGroup(blocks);
     }
 
     /**
      * Creates a new variation for the given ItemStack, with automatic (flawed) conversion to blockstate when necessary.
      */
-    public static ICarvingGroup itemGroup(ResourceLocation id, Tag<Item> items) {
-        return new ItemTagGroup(id, items);
-    }
-
-    /**
-     * Creates a new variation for the given ItemStack and blockstate. Use this for full control over ItemStack/blockstate conversion.
-     */
-    public static ICarvingGroup group(ResourceLocation id, Tag<Block> blocks, Tag<Item> items) {
-        return new SimpleGroup(id, items, blocks);
+    public static ICarvingGroup blockGroup(Tag<Item> items) {
+        return new ItemTagGroup(items);
     }
 	
 	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
@@ -118,63 +111,15 @@ public class CarvingUtils {
 
 	private static class BlockTagGroup extends AbstractGroup {
 
-		private final Tag<Block> tag;
-
-		public BlockTagGroup(ResourceLocation id, Tag<Block> tag) {
-		    super(id);
-		    this.tag = tag;
-		}
-
-		@Override
-		public Collection<Block> getBlocks() {
-		    return tag.getAllElements();
-		}
-
-		@Override
-		public Collection<Item> getItems() {
-		    return getBlocks().stream().map(IItemProvider::asItem).collect(Collectors.toList());
+		public BlockTagGroup(Tag<Block> tag) {
+		    super(tag.getId());
 		}
 	}
 
 	private static class ItemTagGroup extends AbstractGroup {
 	    
-	    private final Tag<Item> tag;
-	    
-	    public ItemTagGroup(ResourceLocation id, Tag<Item> tag) {
-	        super(id);
-	        this.tag = tag;
+	    public ItemTagGroup(Tag<Item> tag) {
+	        super(tag.getId());
 	    }
-	    
-	    @Override
-	    public Collection<Block> getBlocks() {
-	        return Collections.emptyList();
-	    }
-	    
-	    @Override
-	    public Collection<Item> getItems() {
-	        return tag.getAllElements();
-	    }
-    }
-	
-    private static class SimpleGroup extends AbstractGroup {
-
-        private final Tag<Item> itemTag;
-        private final Tag<Block> blockTag;
-        
-        public SimpleGroup(ResourceLocation id, Tag<Item> itemTag, Tag<Block> blockTag) {
-            super(id);
-            this.itemTag = itemTag;
-            this.blockTag = blockTag;
-        }
-        
-        @Override
-        public Collection<Block> getBlocks() {
-            return blockTag.getAllElements();
-        }
-        
-        @Override
-        public Collection<Item> getItems() {
-            return itemTag.getAllElements();
-        }
-    }
+	}
 }

@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
@@ -15,36 +16,38 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.common.init.ChiselSounds;
 
 @ParametersAreNonnullByDefault
 public class SoundUtil {
     
     @SuppressWarnings("null")
-    public static SoundEvent getSound(PlayerEntity player, ItemStack chisel, @Nullable BlockState target) {
+    public static SoundEvent getSound(PlayerEntity player, ItemStack chisel, @Nullable Block target) {
         if (target != null && !chisel.isEmpty()) {
             SoundEvent evt = ((IChiselItem)chisel.getItem()).getOverrideSound(player.getEntityWorld(), player, chisel, target);
             if (evt != null) {
                 return evt;
             }
         }
-        return CarvingUtils.getChiselRegistry().getVariationSound(target != null ? target : Blocks.AIR.getDefaultState());
+        return CarvingUtils.getChiselRegistry().getGroup(target != null ? target.getBlock() : Blocks.AIR).map(ICarvingGroup::getSound).orElse(ChiselSounds.fallback);
     }
     
     public static void playSound(PlayerEntity player, ItemStack chisel, ItemStack source) {
-        ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(source);
-        BlockState state = v == null ? null : v.getBlockState();
-        if (state == null) {
+        ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(source.getItem()).orElse(null);
+        Block block = v == null ? null : v.getBlock();
+        if (block == null) {
             if (source.getItem() instanceof BlockItem) {
-                state = ((BlockItem) source.getItem()).getBlock().getStateFromMeta(source.getItem().getMetadata(source.getItemDamage()));
+                block = ((BlockItem) source.getItem()).getBlock();
             } else {
-                state = Blocks.STONE.getDefaultState(); // fallback
+                block = Blocks.STONE; // fallback
             }
         }
-        playSound(player, chisel, state);
+        playSound(player, chisel, block);
     }
 
-    public static void playSound(PlayerEntity player, ItemStack chisel, @Nullable BlockState target) {
+    public static void playSound(PlayerEntity player, ItemStack chisel, @Nullable Block target) {
         @Nonnull SoundEvent sound = getSound(player, chisel, target);
         playSound(player, player.getPosition(), sound);
     }
