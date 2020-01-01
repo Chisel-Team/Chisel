@@ -65,7 +65,8 @@ public class BlockAutoChisel extends Block {
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
-            player.openContainer(Chisel.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            // TODO Open Autochisel Container
+            // player.openContainer(Chisel.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
     }

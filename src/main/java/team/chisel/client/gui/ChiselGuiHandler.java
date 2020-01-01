@@ -38,7 +38,7 @@ public class ChiselGuiHandler implements IGuiHandler {
         } else if (id == 1) {
             TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
             if (te instanceof TileAutoChisel) {
-                return new ContainerAutoChisel(player.inventory, (TileAutoChisel) te);
+                return new ContainerAutoChisel(player.inventory, (TileAutoChisel) te, /* TODO what in tarnation is an IIntArray */null);
             }
         }
         return null;
@@ -63,7 +63,7 @@ public class ChiselGuiHandler implements IGuiHandler {
         } else if (id == 1) {
             TileEntity te = world.getTileEntity(new BlockPos(x, y, z));
             if (te instanceof TileAutoChisel) {
-                return new GuiAutoChisel(new ContainerAutoChisel(player.inventory, (TileAutoChisel) te));
+                return new GuiAutoChisel(new ContainerAutoChisel(player.inventory, (TileAutoChisel) te, /* TODO what in tarnation is an IIntArray */null));
             }
         }
         return null;

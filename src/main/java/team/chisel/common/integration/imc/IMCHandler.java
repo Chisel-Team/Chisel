@@ -83,35 +83,37 @@ public class IMCHandler {
                 
                 Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
                 ICarvingVariation v;
-                if (variationdata.getLeft() == null) {
-                    v = CarvingUtils.variationFor(group, variationdata.getRight(), order++);
-                } else if (variationdata.getRight() == null) {
-                    v = CarvingUtils.variationFor(group, variationdata.getLeft(), order++);
-                } else {
-                    v = CarvingUtils.variationFor(group, variationdata.getLeft(), variationdata.getRight(), order++);
-                }
-                reg.addVariation(group, v);
+                // TODO
+                //if (variationdata.getLeft() == null) {
+                //    v = CarvingUtils.variationFor(group, variationdata.getRight(), order++);
+                //} else if (variationdata.getRight() == null) {
+                //    v = CarvingUtils.variationFor(group, variationdata.getLeft(), order++);
+                //} else {
+                //    v = CarvingUtils.variationFor(group, variationdata.getLeft(), variationdata.getRight(), order++);
+                //}
+                //reg.addVariation(group, v);
                 break;
             }
             case REMOVE_VARIATION:{
                 CompoundNBT tag = (CompoundNBT) message.getMessageSupplier().get();
                 String group = tag.getString("group");
                 Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
-                if (Strings.isNullOrEmpty(group)) {
-                    if (variationdata.getLeft() != null) {
-                        reg.removeVariation(variationdata.getLeft());
-                    }
-                    if (variationdata.getRight() != null) {
-                        reg.removeVariation(variationdata.getRight());
-                    }
-                } else {
-                    if (variationdata.getLeft() != null) {
-                        reg.removeVariation(variationdata.getLeft(), group);
-                    }
-                    if (variationdata.getRight() != null) {
-                        reg.removeVariation(variationdata.getRight(), group);
-                    }
-                }
+                // TODO
+                //if (Strings.isNullOrEmpty(group)) {
+                //    if (variationdata.getLeft() != null) {
+                //        reg.removeVariation(variationdata.getLeft());
+                //    }
+                //    if (variationdata.getRight() != null) {
+                //        reg.removeVariation(variationdata.getRight());
+                //    }
+                //} else {
+                //    if (variationdata.getLeft() != null) {
+                //        reg.removeVariation(variationdata.getLeft(), group);
+                //    }
+                //    if (variationdata.getRight() != null) {
+                //        reg.removeVariation(variationdata.getRight(), group);
+                //    }
+                //}
                 break;
             }
             default: {

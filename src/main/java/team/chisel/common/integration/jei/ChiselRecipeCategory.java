@@ -20,7 +20,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.Chisel;
-import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.common.init.ChiselItems;
 
@@ -37,7 +36,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
     private @Nullable IFocus<?> focus;
 
     public ChiselRecipeCategory(IGuiHelper guiHelper) {
-        this.icon = guiHelper.createDrawableIngredient(ChiselItems.chisel_iron);
+        this.icon = guiHelper.createDrawableIngredient(ChiselItems.CHISEL_IRON);
         this.background = guiHelper.createDrawable(TEXTURE_LOC, 0, 0, 165, 126);
         this.arrowDown = guiHelper.createDrawable(TEXTURE_LOC, 166, 0, 18, 15);
         this.arrowUp = guiHelper.createDrawable(TEXTURE_LOC, 166, 15, 18, 15);
@@ -133,7 +132,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
 
     @Override
     public void setIngredients(ICarvingGroup group, IIngredients ingredients) {
-        List<ItemStack> variants = group.getItems().stream().map(ItemStack::new).collect(Collectors.toList());
+        List<ItemStack> variants = group.getItemTag().getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
         
         ingredients.setInputs(VanillaTypes.ITEM, variants);
         ingredients.setOutputs(VanillaTypes.ITEM, variants);

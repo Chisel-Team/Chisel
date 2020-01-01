@@ -65,7 +65,7 @@ public class PacketChiselButton {
             for (int i : slots) {
                 ItemStack s = player.inventory.getStackInSlot(i);
                 if (!s.isEmpty()) {
-                    if (carving.getGroup(target) != carving.getGroup(s)) {
+                    if (carving.getGroup(target.getItem()) != carving.getGroup(s.getItem())) {
                         return;
                     }
                     container.getInventoryChisel().setStackInSpecialSlot(s);

@@ -15,7 +15,6 @@ import com.google.common.collect.Maps;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import net.minecraft.entity.player.PlayerEntityMP;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.PacketBuffer;
@@ -29,7 +28,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.network.NetworkEvent;
-import team.chisel.Chisel;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.api.chunkdata.IChunkData;
 import team.chisel.api.chunkdata.IChunkDataRegistry;

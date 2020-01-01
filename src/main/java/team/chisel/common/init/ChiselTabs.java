@@ -25,7 +25,7 @@ public class ChiselTabs {
         
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ChiselItems.chisel_iron.get());
+            return new ItemStack(ChiselItems.CHISEL_IRON.get());
         }
     }
 

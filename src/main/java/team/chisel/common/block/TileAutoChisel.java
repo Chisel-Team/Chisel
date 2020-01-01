@@ -26,7 +26,6 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.INameable;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
@@ -39,18 +38,16 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.network.PacketDistributor.PacketTarget;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
-import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.config.Configurations;
+import team.chisel.common.init.ChiselTileEntities;
 import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
@@ -211,7 +208,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     private @Nullable ITextComponent customName;
     
     public TileAutoChisel() {
-        super(ChiselTileEntities.AUTO_CHISEL);
+        super(ChiselTileEntities.AUTO_CHISEL_TE.get());
     }
     
     public IItemHandler getOtherInv() {
@@ -501,7 +498,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
 
     @SuppressWarnings("null")
     public void spawnCompletionFX(PlayerEntity player, ItemStack chisel, BlockState source) {
-        SoundUtil.playSound(player, getPos(), SoundUtil.getSound(player, chisel, source));
+        SoundUtil.playSound(player, getPos(), SoundUtil.getSound(player, chisel, source.getBlock()));
         if (chisel.isEmpty()) {
             getWorld().playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
         }

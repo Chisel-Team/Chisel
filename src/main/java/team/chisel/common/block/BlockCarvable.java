@@ -11,12 +11,11 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IEnviromentBlockReader;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 
 /**
- * Represents a Carvable (aka Chisilable) block
+ * Represents a Carvable (aka Chiselable) block
  */
 @ParametersAreNonnullByDefault
 public class BlockCarvable extends Block implements ICarvable {
@@ -50,7 +49,7 @@ public class BlockCarvable extends Block implements ICarvable {
     public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity) {
         if (entity instanceof EnderDragonEntity) {
             return !dragonProof;
-        }else{
+        } else {
             return super.canEntityDestroy(state, world, pos, entity);
         }
     }

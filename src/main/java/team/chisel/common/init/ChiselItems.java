@@ -20,7 +20,7 @@ public class ChiselItems {
     
     private static final Registrate REGISTRATE = Chisel.registrate();
     
-    public static final RegistryObject<ItemChisel> chisel_iron = chisel(ChiselType.IRON);
+    public static final RegistryObject<ItemChisel> CHISEL_IRON = chisel(ChiselType.IRON);
     public static final RegistryObject<ItemChisel> chisel_diamond = chisel(ChiselType.DIAMOND);
     public static final RegistryObject<ItemChisel> chisel_hitech = chisel(ChiselType.HITECH);
 
