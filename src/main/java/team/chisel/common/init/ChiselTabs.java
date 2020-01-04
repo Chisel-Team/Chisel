@@ -5,6 +5,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import team.chisel.common.item.ItemChisel.ChiselType;
 
 /**
  * Class file for the Chisel creative tabs
@@ -25,7 +26,7 @@ public class ChiselTabs {
         
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ChiselItems.CHISEL_IRON.get());
+            return new ItemStack(ChiselItems.CHISELS.get(ChiselType.IRON).get());
         }
     }
 

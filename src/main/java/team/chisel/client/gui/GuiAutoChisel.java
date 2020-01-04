@@ -11,18 +11,17 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.common.util.NonNullConsumer;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.energy.IEnergyStorage;
 import team.chisel.Chisel;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.inventory.ContainerAutoChisel;
-import team.chisel.common.inventory.ContainerChisel;
+import team.chisel.common.item.ItemChisel.ChiselType;
 
 public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
     @Nonnull
@@ -34,37 +33,36 @@ public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
     private final ContainerAutoChisel container;
     
     @Nonnull
-    private final ItemStack fakeChisel = new ItemStack(ChiselItems.CHISEL_IRON.get());
+    private final ItemStack fakeChisel = new ItemStack(ChiselItems.CHISELS.get(ChiselType.IRON).get());
     
-    public GuiAutoChisel(ContainerAutoChisel container) {
-        // TODO
-        super(container, null, new StringTextComponent(""));
+    public GuiAutoChisel(ContainerAutoChisel container, PlayerInventory inv, ITextComponent displayName) {
+        super(container, inv, displayName);
         this.container = container;
         this.ySize = 200;
     }
     
-//    @Override
-//    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-//        this.drawDefaultBackground();
-//        super.drawScreen(mouseX, mouseY, partialTicks);
-//        this.renderHoveredToolTip(mouseX, mouseY);
-//    }
+    @Override
+    public void render(int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground();
+        super.render(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         Minecraft.getInstance().getTextureManager().bindTexture(TEXTURE);
-        //drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
+        blit(guiLeft, guiTop, 0, 0, xSize, ySize);
 
         if (container.te.getProgress() > 0) {
             int scaledProg = (int) (((float) container.te.getProgress() / container.te.getMaxProgress()) * PROG_BAR_LENGTH);
-            //drawTexturedModalRect(guiLeft + 63, guiTop + 19 + 9, 176, 18, scaledProg + 1, 16);
+            blit(guiLeft + 63, guiTop + 19 + 9, 176, 18, scaledProg + 1, 16);
         }
 
         if (Configurations.autoChiselPowered) {
             container.te.getCapability(CapabilityEnergy.ENERGY, null).ifPresent(energy1 -> {
-                //drawTexturedModalRect(guiLeft + 7, guiTop + 93, 7, 200, 162, 6);
+                blit(guiLeft + 7, guiTop + 93, 7, 200, 162, 6);
                 if (energy1.getEnergyStored() > 0) {
-                    //drawTexturedModalRect(guiLeft + 8, guiTop + 94, 8, 206, (int) (((float) energy.getEnergyStored() / energy.getMaxEnergyStored()) * POWER_BAR_LENGTH) + 1, 4);
+//                    blit(guiLeft + 8, guiTop + 94, 8, 206, (int) (((float) energy.getEnergyStored() / energy.getMaxEnergyStored()) * POWER_BAR_LENGTH) + 1, 4);
                 }
             });
         }
@@ -74,24 +72,21 @@ public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
         }
         if (!container.getSlot(container.targetSlot).getHasStack()) {
             GlStateManager.color3f(1, 1, 1);
-            //drawTexturedModalRect(guiLeft + 80, guiTop + 64, 176, 34, 16, 16);
+            blit(guiLeft + 80, guiTop + 64, 176, 34, 16, 16);
         }
     }
     
     private void drawGhostItem(@Nonnull ItemStack stack, int x, int y) {
         Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, x, y);
         Minecraft.getInstance().getTextureManager().bindTexture(TEXTURE);
-        //float z = zLevel;
-        //zLevel = 101;
-        //GlStateManager.color(1, 1, 1, 0.5f);
-        //GlStateManager.disableDepth();
-        //GlStateManager.enableBlend();
-        //GlStateManager.disableLighting();
-        //drawTexturedModalRect(x, y, x - guiLeft, y - guiTop, 16, 16);
-        //GlStateManager.color(1, 1, 1, 1);
-        //GlStateManager.disableBlend();
-        //GlStateManager.enableDepth();
-        //zLevel = z;
+        GlStateManager.color4f(1, 1, 1, 0.5f);
+        GlStateManager.disableDepthTest();
+        GlStateManager.enableBlend();
+        GlStateManager.disableLighting();
+        blit(x, y, x - guiLeft, y - guiTop, 16, 16);
+        GlStateManager.color4f(1, 1, 1, 1);
+        GlStateManager.disableBlend();
+        GlStateManager.enableDepthTest();
     }
 
     @Override
@@ -114,7 +109,7 @@ public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
                     List<String> tt = Lists.newArrayList(
                             I18n.format("chisel.tooltip.power.stored", stored, max),
                             TextFormatting.GRAY + I18n.format("chisel.tooltip.power.pertick", fmt.format(container.te.getUsagePerTick())));
-                    //TODO drawHoveringText(tt, finalMouseX, finalMouseY);
+                    renderTooltip(tt, finalMouseX, finalMouseY);
                 }
             });
         }

@@ -7,9 +7,9 @@ import net.minecraft.inventory.container.Slot;
 
 public class SlotChiselInput extends Slot {
 
-    private final ContainerChisel container;
+    private final ChiselContainer container;
 
-    public SlotChiselInput(ContainerChisel container, @Nonnull InventoryChiselSelection inv, int i, int j, int k) {
+    public SlotChiselInput(ChiselContainer container, @Nonnull InventoryChiselSelection inv, int i, int j, int k) {
         super(inv, i, j, k);
         this.container = container;
     }

@@ -1,6 +1,13 @@
 package team.chisel.client.gui;
 
+import java.util.List;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.lwjgl.opengl.GL11;
+
 import com.google.common.collect.Lists;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.Widget;
@@ -8,25 +15,19 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
-import org.lwjgl.opengl.GL11;
-import team.chisel.common.inventory.ContainerChisel;
-import team.chisel.common.inventory.InventoryChiselSelection;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.List;
+import team.chisel.common.inventory.ChiselContainer;
 
 @ParametersAreNonnullByDefault
-public class GuiChisel<T extends ContainerChisel> extends ContainerScreen {
+public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
 
     public PlayerEntity player;
 
-    public GuiChisel(PlayerInventory iinventory, InventoryChiselSelection menu, Hand hand) {
-        super(new ContainerChisel(iinventory, menu, hand), iinventory, /* TODO What are we supposed to put here */ new StringTextComponent("Chisel"));
+    public GuiChisel(T container, PlayerInventory iinventory, ITextComponent displayName) {
+        super(container, iinventory, displayName);
         player = iinventory.player;
         xSize = 252;
         ySize = 202;
@@ -87,12 +88,11 @@ public class GuiChisel<T extends ContainerChisel> extends ContainerScreen {
 //        button.displayString = I18n.format(container.getInventoryChisel().getName() + ".mode." + button.getMode().name().toLowerCase());
     }
 
-    //@Override
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        // TODO
-        // this.drawDefaultBackground();
-        // super.drawScreen(mouseX, mouseY, partialTicks);
-        // this.renderHoveredToolTip(mouseX, mouseY);
+    @Override
+    public void render(int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground();
+        super.render(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
     }
     
     @SuppressWarnings("null")
@@ -101,7 +101,7 @@ public class GuiChisel<T extends ContainerChisel> extends ContainerScreen {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         // TODO fix String
-        String line = I18n.format(this.getContainer() + ".title");
+        String line = title.getFormattedText();
         List<String> lines = font.listFormattedStringToWidth(line, 40);
         int y = 60;
         for (String s : lines) {
@@ -136,10 +136,10 @@ public class GuiChisel<T extends ContainerChisel> extends ContainerScreen {
         int i = width - xSize >> 1;
         int j = height - ySize >> 1;
 
-        String texture = "chisel:textures/chisel2Gui.png";
+        String texture = "chisel:textures/chisel2gui.png";
 
         Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(texture));
-        //drawTexturedModalRect(i, j, 0, 0, xSize, ySize);
+        blit(i, j, 0, 0, xSize, ySize);
 
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.base.Preconditions;
@@ -17,6 +18,9 @@ import net.minecraft.entity.item.HangingEntity;
 import net.minecraft.entity.item.PaintingEntity;
 import net.minecraft.entity.item.PaintingType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.Direction;
@@ -24,6 +28,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -39,6 +44,8 @@ import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.api.carving.IVariationRegistry;
+import team.chisel.common.init.ChiselItems;
+import team.chisel.common.inventory.ChiselContainer;
 import team.chisel.common.util.NBTUtil;
 import team.chisel.common.util.SoundUtil;
 
@@ -214,7 +221,7 @@ public class ChiselController {
             if (stack.getItem() instanceof IChiselItem) {
                 IChiselItem chisel = (IChiselItem) stack.getItem();
                 if (chisel.canOpenGui(event.getWorld(), event.getPlayer(), event.getHand())) {
-//                    event.getPlayer().openGui(Chisel.instance, 0, event.getWorld(), event.getHand().ordinal(), 0, 0); TODO 1.14
+                    event.getPlayer().openContainer(chisel.getGuiType(event.getWorld(), event.getPlayer(), event.getHand()).provide(stack, event.getHand()));
                 }
             }
         }

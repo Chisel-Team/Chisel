@@ -1,6 +1,10 @@
 package team.chisel.common.init;
 
+import java.util.Arrays;
 import java.util.Locale;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -10,6 +14,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraftforge.fml.RegistryObject;
 import team.chisel.Chisel;
+import team.chisel.api.IChiselGuiType.ChiselGuiType;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.item.ItemOffsetTool;
@@ -20,10 +25,11 @@ public class ChiselItems {
     
     private static final Registrate REGISTRATE = Chisel.registrate();
     
-    public static final RegistryObject<ItemChisel> CHISEL_IRON = chisel(ChiselType.IRON);
-    public static final RegistryObject<ItemChisel> chisel_diamond = chisel(ChiselType.DIAMOND);
-    public static final RegistryObject<ItemChisel> chisel_hitech = chisel(ChiselType.HITECH);
-
+    public static final Map<ChiselType, RegistryObject<ItemChisel>> CHISELS = Arrays.stream(ChiselType.values())
+            .collect(Collectors.toMap(Function.identity(), ChiselItems::chisel));
+    
+    static { ChiselGuiType.values(); } // Init container types
+    
     public static final RegistryObject<ItemOffsetTool> offsettool = REGISTRATE.item("offset_tool", ItemOffsetTool::new)
             .properties(p -> p.group(ChiselTabs.tab))
             .register();
@@ -31,7 +37,7 @@ public class ChiselItems {
     private static RegistryObject<ItemChisel> chisel(ChiselType type) {
         return REGISTRATE.item(type.name().toLowerCase(Locale.ROOT) + "_chisel", p -> new ItemChisel(type, p))
                 .properties(p -> p.group(ChiselTabs.tab))
-                .register(); 
+                .register();
     }
     
     public static void init() {}

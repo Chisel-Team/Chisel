@@ -19,6 +19,7 @@ import net.minecraftforge.fml.RegistryObject;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.common.init.ChiselItems;
+import team.chisel.common.item.ItemChisel;
 
 @JeiPlugin
 @ParametersAreNonnullByDefault
@@ -28,15 +29,12 @@ public class ChiselJEIPlugin implements IModPlugin {
     
     private final ChiselRecipeRegistryPlugin plugin = new ChiselRecipeRegistryPlugin();
 
-    @SuppressWarnings("unchecked")
-    private final RegistryObject<Item>[] chisels = new RegistryObject[] { ChiselItems.CHISEL_IRON, ChiselItems.chisel_diamond, ChiselItems.chisel_hitech };
-
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
         registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
                             .collect(Collectors.toList()), category.getUid());
 
-        for (RegistryObject<Item> chisel : chisels) {
+        for (RegistryObject<ItemChisel> chisel : ChiselItems.CHISELS.values()) {
             ItemStack stack = new ItemStack(chisel.get());
             registry.addIngredientInfo(stack, VanillaTypes.ITEM, "jei.chisel.desc.chisel_generic", "\n", "jei.chisel.desc." + stack.getItem().getRegistryName().getPath());
         }
@@ -44,7 +42,7 @@ public class ChiselJEIPlugin implements IModPlugin {
     
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        for (RegistryObject<Item> chisel : chisels) {
+        for (RegistryObject<ItemChisel> chisel : ChiselItems.CHISELS.values()) {
             registry.addRecipeCatalyst(new ItemStack(chisel.get()), category.getUid());
         }
     }

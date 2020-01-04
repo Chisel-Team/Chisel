@@ -19,7 +19,7 @@ public class InventoryChiselSelection implements IInventory {
     ItemStack chisel = ItemStack.EMPTY;
     public final int size;
     public int activeVariations = 0;
-    @Nullable ContainerChisel container;
+    @Nullable ChiselContainer container;
     NonNullList<ItemStack> inventory;
 
     public InventoryChiselSelection(ItemStack c, int size) {

@@ -16,9 +16,9 @@ import team.chisel.common.util.SoundUtil;
 @ParametersAreNonnullByDefault
 public class SlotChiselSelection extends Slot {
 
-    private final @Nonnull ContainerChisel container;
+    private final @Nonnull ChiselContainer container;
 
-    public SlotChiselSelection(ContainerChisel container, InventoryChiselSelection inv, IInventory iinventory, int i, int j, int k) {
+    public SlotChiselSelection(ChiselContainer container, InventoryChiselSelection inv, IInventory iinventory, int i, int j, int k) {
         super(iinventory, i, j, k);
         this.container = container;
     }
@@ -33,7 +33,7 @@ public class SlotChiselSelection extends Slot {
         return par1PlayerEntity.inventory.getItemStack().isEmpty();
     }
     
-    public static ItemStack craft(ContainerChisel container, PlayerEntity player, ItemStack itemstack, boolean simulate) {
+    public static ItemStack craft(ChiselContainer container, PlayerEntity player, ItemStack itemstack, boolean simulate) {
         ItemStack crafted = container.getInventoryChisel().getStackInSpecialSlot();
         ItemStack chisel = container.getChisel();
         if (simulate) {

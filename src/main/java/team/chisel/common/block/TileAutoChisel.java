@@ -25,6 +25,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.IIntArray;
 import net.minecraft.util.INameable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -196,6 +197,24 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
             return energyStorage.receiveEnergy(maxReceive, simulate);
         }
     }
+    
+    public final IIntArray energyData = new IIntArray() {
+        
+        @Override
+        public int size() {
+            return 1;
+        }
+        
+        @Override
+        public void set(int index, int value) {
+            energyStorage.setEnergyStored(value);
+        }
+        
+        @Override
+        public int get(int index) {
+            return energyStorage.getEnergyStored();
+        }
+    };
     
     private int sourceSlot = -1;
     private int prevSource = -1;

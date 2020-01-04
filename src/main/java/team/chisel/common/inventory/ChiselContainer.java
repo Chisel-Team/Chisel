@@ -7,18 +7,22 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import team.chisel.Chisel;
+import team.chisel.api.IChiselGuiType;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IVariationRegistry;
+import team.chisel.common.init.ChiselItems;
+import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.util.NBTUtil;
 import team.chisel.common.util.SoundUtil;
 
 @Getter
 @ParametersAreNonnullByDefault
-public class ContainerChisel extends Container {
+public class ChiselContainer extends Container {
 
     protected final InventoryChiselSelection inventoryChisel;
     protected final PlayerInventory inventoryPlayer;
@@ -28,8 +32,12 @@ public class ContainerChisel extends Container {
     protected final ItemStack chisel;
     protected final IVariationRegistry carving;
 
-    public ContainerChisel(PlayerInventory inventoryplayer, InventoryChiselSelection inv, Hand hand) {
-        super(null, 0); // TOOD 1.14
+    public ChiselContainer(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer) {
+        this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 60), Hand.MAIN_HAND);
+    }
+    
+    public ChiselContainer(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer, InventoryChiselSelection inv, Hand hand) {
+        super(type, windowId);
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
         

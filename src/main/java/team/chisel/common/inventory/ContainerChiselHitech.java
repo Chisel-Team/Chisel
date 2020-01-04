@@ -12,6 +12,7 @@ import lombok.Setter;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
@@ -21,14 +22,18 @@ import team.chisel.common.util.NBTUtil;
 @Getter
 @Setter
 @ParametersAreNonnullByDefault
-public class ContainerChiselHitech extends ContainerChisel {
+public class ContainerChiselHitech extends ChiselContainer {
 
     private @Nullable Slot selection, target;
     private List<Slot> selectionDuplicates = ImmutableList.of();
     private @Nullable ICarvingGroup currentGroup;
     
-    public ContainerChiselHitech(PlayerInventory inventoryplayer, InventoryChiselSelection inv, Hand hand) {
-        super(inventoryplayer, inv, hand);
+    public ContainerChiselHitech(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer) {
+        this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 63), Hand.MAIN_HAND);
+    }
+    
+    public ContainerChiselHitech(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer, InventoryChiselSelection inv, Hand hand) {
+        super(type, windowId, inventoryplayer, inv, hand);
         
         int selectionSlot = NBTUtil.getHitechSelection(chisel);
         if (selectionSlot >= inv.getSizeInventory()) {

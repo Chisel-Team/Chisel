@@ -24,6 +24,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
@@ -38,7 +39,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.IOException;
 
 @ParametersAreNonnullByDefault
-public class GuiHitechChisel extends GuiChisel {
+public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
     private class PreviewModeButton extends Button {
 
@@ -166,7 +167,7 @@ public class GuiHitechChisel extends GuiChisel {
     
     //private static final Rectangle panel = new Rectangle(8, 14, 74, 74);
     
-    private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselGuiHitech.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselguihitech.png");
     
     private final ContainerChiselHitech containerHitech;
     
@@ -190,9 +191,9 @@ public class GuiHitechChisel extends GuiChisel {
     
     private @Nullable BlockState erroredState;
     
-    public GuiHitechChisel(PlayerInventory iinventory, InventoryChiselSelection menu, Hand hand) {
-        super(iinventory, menu, hand);
-        containerHitech = new ContainerChiselHitech(iinventory, menu, hand);
+    public GuiHitechChisel(ContainerChiselHitech container, PlayerInventory iinventory, ITextComponent displayName) {
+        super(container, iinventory, displayName);
+        containerHitech = container;
         xSize = 256;
         ySize = 220;
     }
