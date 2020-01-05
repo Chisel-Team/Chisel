@@ -1,5 +1,7 @@
 package team.chisel;
 
+import java.util.Locale;
+
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -10,8 +12,12 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.ModList;
 import team.chisel.api.block.BlockCreator;
@@ -19,9 +25,14 @@ import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
+import team.chisel.client.gui.GuiAutoChisel;
+import team.chisel.common.block.BlockAutoChisel;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
+import team.chisel.common.block.TileAutoChisel;
 import team.chisel.common.config.Configurations;
+import team.chisel.common.inventory.ContainerAutoChisel;
+import team.chisel.common.util.ContainerBuilder;
 
 public enum Features {
 
@@ -48,7 +59,7 @@ public enum Features {
             registerIngotUncraftRecipe(registry, "Aluminum");
         } */
     },
-    ;
+    
 //    /*ANCIENT_STONE ("thaumcraft") {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
@@ -227,24 +238,6 @@ public enum Features {
 //        }
 //    },
 //    
-//    AUTOCHISEL {
-//        @Override
-//        void addBlocks(ChiselBlockFactory factory) {
-//            String name = "auto_chisel";
-//            factory.getRegistry().register(new BlockAutoChisel().setRegistryName(name));
-//            GameRegistry.registerTileEntity(TileAutoChisel.class, Chisel.MOD_ID + ":" + name);
-//        }
-//        
-//        @Override
-//        void addItems(IForgeRegistry<Item> registry) {
-//            registry.register(new BlockItem(ChiselBlocks.auto_chisel).setRegistryName(ChiselBlocks.auto_chisel.getRegistryName()));
-//        }
-//        
-//        @Override
-//        void addRecipes(IForgeRegistry<IRecipe> registry) {
-//            addShapedRecipe(registry, ChiselBlocks.auto_chisel, "GGG", "GRG", "III", 'G', "blockGlass", 'R', "dustRedstone", 'I', "ingotIron");
-//        }
-//    },
 //
 //    BASALT {
 //        @Override
@@ -3201,7 +3194,8 @@ public enum Features {
 //                        .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
 //            }
 //        }
-//    };
+//    }
+    ;
 
     private static final String[] dyeColors =
             {

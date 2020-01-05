@@ -9,10 +9,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import team.chisel.client.render.RenderAutoChisel;
 import team.chisel.common.block.TileAutoChisel;
 
-@EventBusSubscriber(Dist.CLIENT)
+@EventBusSubscriber(value = Dist.CLIENT, bus = Bus.MOD)
 public class ClientProxy {
 
     @SubscribeEvent

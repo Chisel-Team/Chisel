@@ -38,6 +38,8 @@ import team.chisel.common.carving.CarvingVariationRegistry;
 import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.init.ChiselSounds;
+import team.chisel.common.init.ChiselTabs;
+import team.chisel.common.init.ChiselTileEntities;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ChiselMode;
@@ -69,10 +71,11 @@ public class Chisel implements Reference {
         network.registerMessage(4, MessageUpdateAutochiselSource.class, MessageUpdateAutochiselSource::encode, MessageUpdateAutochiselSource::decode, MessageUpdateAutochiselSource::handle);
         network.registerMessage(5, MessageAutochiselFX.class, MessageAutochiselFX::encode, MessageAutochiselFX::decode, MessageAutochiselFX::handle);
     }
-    
+
     private static Map<String, Block> remaps = ImmutableMap.of();
-    
-    private static final LazyLoadBase<Registrate> REGISTRATE = new LazyLoadBase<>(() -> Registrate.create(Reference.MOD_ID));
+
+    private static final LazyLoadBase<Registrate> REGISTRATE = new LazyLoadBase<>(() -> Registrate.create(Reference.MOD_ID)
+            .itemGroup(() -> ChiselTabs.tab));
     
     public Chisel() {
         CarvingUtils.chisel = new CarvingVariationRegistry();
@@ -89,6 +92,7 @@ public class Chisel implements Reference {
         
         ChiselSounds.init();
         ChiselItems.init();
+        ChiselTileEntities.init();
         
         Features.loadBlocks(registrate());
     }

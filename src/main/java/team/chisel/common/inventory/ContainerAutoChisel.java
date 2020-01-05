@@ -4,20 +4,23 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.block.Blocks;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.IntArray;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
-import team.chisel.common.block.TileAutoChisel;
+import team.chisel.common.init.ChiselTileEntities;
 
 @ParametersAreNonnullByDefault
 public class ContainerAutoChisel extends Container {
@@ -35,7 +38,6 @@ public class ContainerAutoChisel extends Container {
     }
 
     public final PlayerInventory invPlayer;
-    public final TileAutoChisel te;
     
     private final int beginInputSlots, endInputSlots;
     public  final int chiselSlot, targetSlot;
@@ -43,15 +45,19 @@ public class ContainerAutoChisel extends Container {
     private final int beginPlayerSlots, endPlayerSlots;
     
     private final IIntArray progressAndPower;
+    private final IWorldPosCallable pos;
+    
+    public ContainerAutoChisel(ContainerType<ContainerAutoChisel> type, int windowId, PlayerInventory invPlayer) {
+        this(type, windowId, invPlayer, new ItemStackHandler(12), new ItemStackHandler(12), new ItemStackHandler(2), new IntArray(6), IWorldPosCallable.DUMMY);
+    }
 
-    public ContainerAutoChisel(PlayerInventory invPlayer, TileAutoChisel te, IIntArray progressAndPower) {
-        super(null, 0); // TODO 1.14
+    public ContainerAutoChisel(ContainerType<ContainerAutoChisel> type, int windowId, PlayerInventory invPlayer, IItemHandler input, IItemHandler output, IItemHandler other, IIntArray progressAndPower, IWorldPosCallable pos) {
+        super(type, windowId);
         this.invPlayer = invPlayer;
-        this.te = te;
 
         int yStart = 19;
         chiselSlot = 0;
-        addSlot(new SlotItemHandler(te.getOtherInv(), 0, 80, yStart + 9) {
+        addSlot(new SlotItemHandler(other, 0, 80, yStart + 9) {
 
             @Override
             public boolean isItemValid(@Nullable ItemStack stack) {
@@ -59,17 +65,15 @@ public class ContainerAutoChisel extends Container {
             }
         });
         targetSlot = 1;
-        addSlot(new ChiselableSlot(te.getOtherInv(), 1, 80, 54 + yStart - 9));
+        addSlot(new ChiselableSlot(other, 1, 80, 54 + yStart - 9));
 
         beginInputSlots = inventorySlots.size();
-        IItemHandler inv = te.getInputInv();
-        for (int i = 0; i < inv.getSlots(); i++) {
-            addSlot(new ChiselableSlot(inv, i, 8 + 18 * (i % 3), yStart + 18 * (i / 3)));
+        for (int i = 0; i < input.getSlots(); i++) {
+            addSlot(new ChiselableSlot(input, i, 8 + 18 * (i % 3), yStart + 18 * (i / 3)));
         }
         endInputSlots = beginOutputSlots = inventorySlots.size();
-        inv = te.getOutputInv();
-        for (int i = 0; i < inv.getSlots(); i++) {
-            addSlot(new SlotItemHandler(inv, i, 8 + 108 + 18 * (i % 3), yStart + 18 * (i / 3)) {
+        for (int i = 0; i < output.getSlots(); i++) {
+            addSlot(new SlotItemHandler(output, i, 8 + 108 + 18 * (i % 3), yStart + 18 * (i / 3)) {
 
                 @Override
                 public boolean isItemValid(@Nullable ItemStack stack) {
@@ -96,11 +100,12 @@ public class ContainerAutoChisel extends Container {
         trackIntArray(progressAndPower);
         
         this.progressAndPower = progressAndPower;
+        this.pos = pos;
     }
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
-        return isWithinUsableDistance(IWorldPosCallable.of(te.getWorld(), te.getPos()), playerIn, Blocks.AIR);//TODO 1.14 ChiselBlocks.auto_chisel);
+        return isWithinUsableDistance(pos, playerIn, ChiselTileEntities.AUTO_CHISEL.get()); // TODO temporary
     }
 
     @Override
@@ -155,5 +160,41 @@ public class ContainerAutoChisel extends Container {
         }
 
         return itemstack;
+    }
+    
+    public static final int 
+            ACTIVE = 0,
+            PROGRESS = 1,
+            MAX_PROGRESS = 2,
+            ENERGY = 3,
+            MAX_ENERGY = 4,
+            ENERGY_USE = 5;
+
+    public boolean isActive() {
+        return progressAndPower.get(ACTIVE) > 0;
+    }
+    
+    public int getProgressScaled(int progBarLength) {
+        return (int) (((float) progressAndPower.get(PROGRESS) / progressAndPower.get(MAX_PROGRESS)) * progBarLength);
+    }
+
+    public boolean hasEnergy() {
+        return getEnergy() > 0;
+    }
+    
+    public int getEnergy() {
+        return progressAndPower.get(ENERGY);
+    }
+    
+    public int getMaxEnergy() {
+        return progressAndPower.get(MAX_ENERGY);
+    }
+    
+    public int getEnergyScaled(int progBarLength) {
+        return (int) (((float) progressAndPower.get(ENERGY) / progressAndPower.get(MAX_ENERGY)) * progBarLength);
+    }
+
+    public int getUsagePerTick() {
+        return progressAndPower.get(ENERGY_USE);
     }
 }

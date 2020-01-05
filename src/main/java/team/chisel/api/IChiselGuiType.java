@@ -63,12 +63,12 @@ public interface IChiselGuiType<T extends ChiselContainer> {
             }
         };
         
-        private final RegistryObject<ContainerType<ChiselContainer>> type;
+        private final RegistryObject<? extends ContainerType<? extends ChiselContainer>> type;
         
         private <C extends ChiselContainer, T extends GuiChisel<C>> ChiselGuiType(String name, ContainerFactory<C> factory, ScreenFactory<C, T> screenFactory) {
             this.type = Chisel.registrate()
-                    .entry(name, callback -> new ContainerBuilder<ChiselContainer, Registrate>(Chisel.registrate(), Chisel.registrate(), name, callback,
-                            (ContainerFactory<ChiselContainer>) factory, (ScreenFactory<ChiselContainer, ?>) screenFactory))
+                    .entry(name, callback -> new ContainerBuilder<C, T, Registrate>(Chisel.registrate(), Chisel.registrate(), name, callback,
+                            factory, screenFactory))
                     .register();
         }
 

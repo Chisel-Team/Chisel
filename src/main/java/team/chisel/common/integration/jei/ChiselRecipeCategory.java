@@ -37,7 +37,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
     private @Nullable IFocus<?> focus;
 
     public ChiselRecipeCategory(IGuiHelper guiHelper) {
-        this.icon = guiHelper.createDrawableIngredient(ChiselItems.CHISELS.get(ChiselType.IRON).get());
+        this.icon = guiHelper.createDrawableIngredient(new ItemStack(ChiselItems.CHISELS.get(ChiselType.IRON).get()));
         this.background = guiHelper.createDrawable(TEXTURE_LOC, 0, 0, 165, 126);
         this.arrowDown = guiHelper.createDrawable(TEXTURE_LOC, 166, 0, 18, 15);
         this.arrowUp = guiHelper.createDrawable(TEXTURE_LOC, 166, 15, 18, 15);

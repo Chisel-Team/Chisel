@@ -1,6 +1,9 @@
 package team.chisel.common.block;
 
+import static team.chisel.common.inventory.ContainerAutoChisel.*;
+
 import java.util.EnumMap;
+import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -15,7 +18,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.DiggingParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -27,11 +33,14 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
 import net.minecraft.util.INameable;
+import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayerFactory;
@@ -39,20 +48,24 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselTileEntities;
+import team.chisel.common.inventory.ContainerAutoChisel;
 import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
-public class TileAutoChisel extends TileEntity implements ITickableTileEntity, INameable {
+public class TileAutoChisel extends TileEntity implements ITickableTileEntity, INameable, INamedContainerProvider {
     
     private class DirtyingStackHandler extends ItemStackHandler {
         
@@ -202,17 +215,32 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         
         @Override
         public int size() {
-            return 1;
+            return 6;
         }
         
         @Override
         public void set(int index, int value) {
-            energyStorage.setEnergyStored(value);
+            throw new IllegalStateException("Cannot set values through IIntArray");
         }
         
         @Override
         public int get(int index) {
-            return energyStorage.getEnergyStored();
+            switch (index) {
+            case ACTIVE:
+                return sourceSlot >= 0 ? 1 : 0;
+            case PROGRESS:
+                return progress;
+            case ContainerAutoChisel.MAX_PROGRESS:
+                return MAX_PROGRESS;
+            case ENERGY:
+                return energyStorage.getEnergyStored();
+            case MAX_ENERGY:
+                return energyStorage.getMaxEnergyStored();
+            case ENERGY_USE:
+                return getUsagePerTick();
+            default:
+                throw new IllegalArgumentException("Invalid index: " + index);
+            }
         }
     };
     
@@ -288,7 +316,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     
     protected void updateClientSlot() {
         if (sourceSlot != prevSource) {
-//            TODO 1.14 packets Chisel.network.sendToDimension(new MessageUpdateAutochiselSource(getPos(), sourceSlot < 0 ? ItemStack.EMPTY : inputInv.getStackInSlot(sourceSlot)), getWorld().provider.getDimension());
+            Chisel.network.send(PacketDistributor.TRACKING_CHUNK.with(() -> (Chunk) /* TODO Fix in forge */ getWorld().getChunk(getPos())), new MessageUpdateAutochiselSource(getPos(), sourceSlot < 0 ? ItemStack.EMPTY : inputInv.getStackInSlot(sourceSlot)));
         }
         prevSource = sourceSlot;
     }
@@ -346,7 +374,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
             if (source.isEmpty() || canOutput(res)) {
                 for (int i = 0; sourceSlot < 0 && i < getInputInv().getSlots(); i++) {
                     ItemStack stack = getInputInv().getStackInSlot(i);
-                    if (!stack.isEmpty() && g.equals(CarvingUtils.getChiselRegistry().getGroup(stack.getItem()))) {
+                    if (!stack.isEmpty() && g.equals(CarvingUtils.getChiselRegistry().getGroup(stack.getItem()).orElse(null))) {
                         res.setCount(stack.getCount());
                         if (canOutput(res) && chiselitem.canChisel(getWorld(), FakePlayerFactory.getMinecraft((ServerWorld) getWorld()), chisel, v)) {
                             setSourceSlot(i);
@@ -396,7 +424,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
 
                     inputInv.setStackInSlot(sourceSlot, source);
                     
-                    // TODO 1.14 packets Chisel.network.send(PacketDistributor.DIMENSION.with(() -> getWorld().getDimension().getType()), new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlockState()));
+                    Chisel.network.send(PacketDistributor.NEAR.with(targetNearby()), new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlock().getDefaultState()));
 
                     otherInv.setStackInSlot(0, chisel);
 
@@ -415,6 +443,11 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         }
         
         updateClientSlot();
+    }
+    
+    private Supplier<TargetPoint> targetNearby() {
+        Vec3d pos = new Vec3d(getPos()).add(0.5, 0.5, 0.5);
+        return TargetPoint.p(pos.x, pos.y, pos.z, 64 * 64, getWorld().getDimension().getType());
     }
     
     private final EnumMap<Direction, LazyOptional<IItemHandler>> viewCache = new EnumMap<>(Direction.class);
@@ -507,6 +540,14 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     @Override
     public boolean hasCustomName() {
         return customName != null;
+    }
+    
+    /* == INamedContainerProvider == */
+    
+    @Override
+    @Nullable
+    public Container createMenu(int windowId, PlayerInventory playerInv, PlayerEntity p_createMenu_3_) {
+        return new ContainerAutoChisel(ChiselTileEntities.AUTO_CHISEL_CONTAINER.get(), windowId, playerInv, getInputInv(), getOutputInv(), getOtherInv(), energyData, IWorldPosCallable.of(getWorld(), getPos()));
     }
     
     /* == Rendering Data == */

@@ -53,18 +53,16 @@ public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
         Minecraft.getInstance().getTextureManager().bindTexture(TEXTURE);
         blit(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-        if (container.te.getProgress() > 0) {
-            int scaledProg = (int) (((float) container.te.getProgress() / container.te.getMaxProgress()) * PROG_BAR_LENGTH);
+        if (container.isActive()) {
+            int scaledProg = container.getProgressScaled(PROG_BAR_LENGTH);
             blit(guiLeft + 63, guiTop + 19 + 9, 176, 18, scaledProg + 1, 16);
         }
 
         if (Configurations.autoChiselPowered) {
-            container.te.getCapability(CapabilityEnergy.ENERGY, null).ifPresent(energy1 -> {
-                blit(guiLeft + 7, guiTop + 93, 7, 200, 162, 6);
-                if (energy1.getEnergyStored() > 0) {
-//                    blit(guiLeft + 8, guiTop + 94, 8, 206, (int) (((float) energy.getEnergyStored() / energy.getMaxEnergyStored()) * POWER_BAR_LENGTH) + 1, 4);
-                }
-            });
+            blit(guiLeft + 7, guiTop + 93, 7, 200, 162, 6);
+            if (container.hasEnergy()) {
+                blit(guiLeft + 8, guiTop + 94, 8, 206, container.getEnergyScaled(POWER_BAR_LENGTH) + 1, 4);
+            }
         }
         
         if (!container.getSlot(container.chiselSlot).getHasStack()) {
@@ -91,9 +89,9 @@ public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String s = container.te.getDisplayName().getUnformattedComponentText();
+        String s = title.getFormattedText();
         this.font.drawString(s, this.xSize / 2 - this.font.getStringWidth(s) / 2, 6, 0x404040);
-        this.font.drawString(container.invPlayer.getDisplayName().getUnformattedComponentText(), 8, this.ySize - 96 + 2, 0x404040);
+        this.font.drawString(container.invPlayer.getDisplayName().getFormattedText(), 8, this.ySize - 96 + 2, 0x404040);
         
         if (Configurations.autoChiselPowered) {
             mouseX -= guiLeft;
@@ -101,17 +99,16 @@ public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
 
             int finalMouseX = mouseX;
             int finalMouseY = mouseY;
-            container.te.getCapability(CapabilityEnergy.ENERGY, null).ifPresent(energy -> {
-                if (finalMouseX >= 7 && finalMouseY >= 93 && finalMouseX <= 169 && finalMouseY <= 98) {
-                    NumberFormat fmt = NumberFormat.getNumberInstance();
-                    String stored = fmt.format(energy.getEnergyStored());
-                    String max = fmt.format(energy.getMaxEnergyStored());
-                    List<String> tt = Lists.newArrayList(
-                            I18n.format("chisel.tooltip.power.stored", stored, max),
-                            TextFormatting.GRAY + I18n.format("chisel.tooltip.power.pertick", fmt.format(container.te.getUsagePerTick())));
-                    renderTooltip(tt, finalMouseX, finalMouseY);
-                }
-            });
+            
+            if (finalMouseX >= 7 && finalMouseY >= 93 && finalMouseX <= 169 && finalMouseY <= 98) {
+                NumberFormat fmt = NumberFormat.getNumberInstance();
+                String stored = fmt.format(container.getEnergy());
+                String max = fmt.format(container.getMaxEnergy());
+                List<String> tt = Lists.newArrayList(
+                        I18n.format("chisel.tooltip.power.stored", stored, max),
+                        TextFormatting.GRAY + I18n.format("chisel.tooltip.power.pertick", fmt.format(container.getUsagePerTick())));
+                renderTooltip(tt, finalMouseX, finalMouseY);
+            }
         }
     }
 }

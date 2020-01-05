@@ -76,4 +76,8 @@ public class ChiselBlockFactory {
     Tag<Item> getItemTag(ResourceLocation id) {
         return itemTags.computeIfAbsent(id, ItemTags.Wrapper::new);
     }
+
+    public Registrate getRegistrate() {
+        return registrate;
+    }
 }

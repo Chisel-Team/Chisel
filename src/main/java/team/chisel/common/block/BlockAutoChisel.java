@@ -10,7 +10,10 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.Stats;
+import net.minecraft.tileentity.FurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
@@ -32,12 +35,12 @@ public class BlockAutoChisel extends Block {
     
     @SuppressWarnings("null")
     private static final VoxelShape COLLISION_SHAPE = VoxelShapes.or(
-            makeCuboidShape(0, 0, 0, 1, 10, 1),
-            makeCuboidShape(0, 10, 0, 1, 1, 1),
-            makeCuboidShape(15, 10, 0, 1, 1, 1),
-            makeCuboidShape(0, 10, 0, 1, 1, 1),
-            makeCuboidShape(0, 10, 15, 1, 1, 1),
-            makeCuboidShape(0, 15, 0, 1, 1, 1));
+            makeCuboidShape(0, 0, 0, 16, 10, 16),
+            makeCuboidShape(0, 10, 0, 1, 16, 16),
+            makeCuboidShape(15, 10, 0, 16, 16, 16),
+            makeCuboidShape(0, 10, 0, 16, 16, 1),
+            makeCuboidShape(0, 10, 15, 16, 16, 16),
+            makeCuboidShape(0, 15, 0, 16, 16, 16));
     
     private static final VoxelShape SELECTION_SHAPE = VoxelShapes.fullCube();
 
@@ -65,8 +68,11 @@ public class BlockAutoChisel extends Block {
     @Override
     public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isRemote) {
-            // TODO Open Autochisel Container
-            // player.openContainer(Chisel.instance, 1, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            TileEntity tileentity = worldIn.getTileEntity(pos);
+            if (tileentity instanceof TileAutoChisel) {
+                player.openContainer((INamedContainerProvider) tileentity);
+                // TODO maybe? player.addStat(Stats.INTERACT_WITH_AUTO_CHISEL);
+            }
         }
         return true;
     }
@@ -126,6 +132,6 @@ public class BlockAutoChisel extends Block {
     
     @Override
     public boolean canRenderInLayer(@Nullable BlockState state, @Nullable BlockRenderLayer layer) {
-        return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.CUTOUT;
+        return layer == BlockRenderLayer.CUTOUT;
     }
 }

@@ -15,7 +15,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 
-public class ContainerBuilder<T extends Container, P> extends AbstractBuilder<ContainerType<?>, ContainerType<T>, P, ContainerBuilder<T, P>> {
+public class ContainerBuilder<T extends Container, S extends Screen & IHasContainer<T>,  P> extends AbstractBuilder<ContainerType<?>, ContainerType<T>, P, ContainerBuilder<T, S, P>> {
     
     public interface ContainerFactory<T extends Container> {
         
@@ -28,9 +28,9 @@ public class ContainerBuilder<T extends Container, P> extends AbstractBuilder<Co
     }
     
     private final ContainerFactory<T> factory;
-    private final ScreenFactory<T, ?> screenFactory;
+    private final ScreenFactory<T, S> screenFactory;
 
-    public ContainerBuilder(Registrate owner, P parent, String name, BuilderCallback callback, ContainerFactory<T> factory, ScreenFactory<T, ?> screenFactory) {
+    public ContainerBuilder(Registrate owner, P parent, String name, BuilderCallback callback, ContainerFactory<T> factory, ScreenFactory<T, S> screenFactory) {
         super(owner, parent, name, callback, ContainerType.class);
         this.factory = factory;
         this.screenFactory = screenFactory;

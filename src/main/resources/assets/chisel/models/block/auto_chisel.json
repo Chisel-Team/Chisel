@@ -1,10 +1,11 @@
 {
   "parent": "block/block",
   "textures": {
-    "frame": "chisel:blocks/autochisel/autochisel_frame",
-    "side":  "chisel:blocks/autochisel/autochisel_side" ,
-    "end":   "chisel:blocks/autochisel/autochisel_top"  ,
-	"particle": "chisel:blocks/autochisel/autochisel_side"
+    "frame": "chisel:block/autochisel/autochisel_frame",
+    "side":  "chisel:block/autochisel/autochisel_side" ,
+    "end":   "chisel:block/autochisel/autochisel_top"  ,
+    "glass": "block/glass",
+	"particle": "chisel:block/autochisel/autochisel_side"
   },
   "elements": [
     {
@@ -101,6 +102,30 @@
         "south": { "texture": "#side", "cullface": "south" },
         "west":  { "texture": "#side", "cullface": "west"  },
         "east":  { "texture": "#side", "cullface": "east"  }
+      }
+    },
+        {
+      "from": [  0.4, 10  ,  0.4 ],
+      "to":   [ 15.6, 15.6, 15.6 ],
+      "shade": false,
+      "faces": {
+        "up":    { "texture": "#glass", "cullface": "up"    },
+        "north": { "texture": "#glass", "cullface": "north" },
+        "south": { "texture": "#glass", "cullface": "south" },
+        "west":  { "texture": "#glass", "cullface": "west"  },
+        "east":  { "texture": "#glass", "cullface": "east"  }
+      }
+    },
+    {
+      "from": [ 15.4, 15.4, 15.4 ],
+      "to":   [  0.6, 10  ,  0.6 ],
+      "shade": false,
+      "faces": {
+        "down":  { "texture": "#glass" },
+        "north": { "texture": "#glass" },
+        "south": { "texture": "#glass" },
+        "west":  { "texture": "#glass" },
+        "east":  { "texture": "#glass" }
       }
     }
   ]

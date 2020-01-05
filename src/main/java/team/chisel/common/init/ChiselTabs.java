@@ -16,7 +16,7 @@ public class ChiselTabs {
     public static class ChiselCreativeTab extends ItemGroup {
 
         public ChiselCreativeTab() {
-            super("chiselCreativeTab");
+            super("chisel");
         }
 
         @Override
