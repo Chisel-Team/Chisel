@@ -30,7 +30,7 @@ public class ChiselDataHandler implements IWailaPlugin, IComponentProvider {
                 ((ItemChiselBlock)stack.getItem()).addTooltips(stack, tooltip);
             } else {
                 ICarvable block = (ICarvable) accessor.getBlock();
-                ItemChiselBlock.addTooltips(block, tooltip);
+                ItemChiselBlock.addTooltips(stack, block, tooltip);
             }
         }
     }

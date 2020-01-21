@@ -1,10 +1,5 @@
 package team.chisel.api.carving;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -14,14 +9,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.Tag;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.Util;
+import net.minecraft.util.text.TranslationTextComponent;
+import team.chisel.Chisel;
 
 @ParametersAreNonnullByDefault
 public class CarvingUtils {
@@ -62,30 +57,28 @@ public class CarvingUtils {
 	public static int hashStack(ItemStack stack) {
 	    return Objects.hashCode(stack.getItem(), stack.getTag());
 	}
+	
+	private static TranslationTextComponent getDisplayName(Tag<?> tag, String name) {
+	    return Chisel.registrate().addLang(Util.makeTranslationKey("group", tag.getId()), name);
+	}
 
-	/**
-     * Creates a new variation for the given blockstate, with automatic (flawed) conversion to ItemStack when necessary.
-     */
-    public static ICarvingGroup itemGroup(Tag<Block> blocks) {
-        return new BlockTagGroup(blocks);
+    public static ICarvingGroup itemGroup(Tag<Block> blocks, String name) {
+        return new BlockTagGroup(blocks, getDisplayName(blocks, name));
     }
 
-    /**
-     * Creates a new variation for the given ItemStack, with automatic (flawed) conversion to blockstate when necessary.
-     */
-    public static ICarvingGroup blockGroup(Tag<Item> items) {
-        return new ItemTagGroup(items);
+    public static ICarvingGroup blockGroup(Tag<Item> items, String name) {
+        return new ItemTagGroup(items, getDisplayName(items, name));
     }
 	
 	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 	@Getter(onMethod = @__({@Override}))
 	private static abstract class AbstractGroup implements ICarvingGroup {
 	    
-	    @Getter(onMethod = @__({@Override}))
 	    private final ResourceLocation id;
 
-	    @Getter(onMethod = @__({@Override}))
 	    private final SoundEvent sound = null;
+	    
+	    private final TranslationTextComponent displayName;
 
 //	    @Override
 //	    public boolean equals(Object obj) {
@@ -111,15 +104,15 @@ public class CarvingUtils {
 
 	private static class BlockTagGroup extends AbstractGroup {
 
-		public BlockTagGroup(Tag<Block> tag) {
-		    super(tag.getId());
+		public BlockTagGroup(Tag<Block> tag, TranslationTextComponent displayName) {
+		    super(tag.getId(), displayName);
 		}
 	}
 
 	private static class ItemTagGroup extends AbstractGroup {
 	    
-	    public ItemTagGroup(Tag<Item> tag) {
-	        super(tag.getId());
+	    public ItemTagGroup(Tag<Item> tag, TranslationTextComponent displayName) {
+	        super(tag.getId(), displayName);
 	    }
 	}
 }

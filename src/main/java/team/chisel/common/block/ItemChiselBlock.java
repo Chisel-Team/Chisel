@@ -14,11 +14,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.config.Configurations;
 
@@ -34,28 +36,25 @@ public class ItemChiselBlock extends BlockItem {
         super(block, properties);
         this.block = (ICarvable) block;
     }
-    
-    private static String getTooltipUnloc(ICarvable block) {
-        VariationData varData = block.getVariation();
-        return ((Block)block).getTranslationKey() + "." + varData.name + ".desc.";
-    }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        addTooltips(block, tooltip);
+        if (Configurations.blockDescriptions) {
+            tooltip.add(super.getDisplayName(stack).applyTextStyle(TextFormatting.GRAY));
+        }
+        addTooltips(stack, block, tooltip);
     }
     
     public static void addTooltips(ItemStack stack, List<ITextComponent> tooltip) {
-        addTooltips(((ItemChiselBlock)stack.getItem()).block, tooltip);
+        addTooltips(stack, ((ItemChiselBlock)stack.getItem()).block, tooltip);
     }
     
-    public static void addTooltips(ICarvable block, List<ITextComponent> tooltip) {
+    public static void addTooltips(ItemStack stack, ICarvable block, List<ITextComponent> tooltip) {
         try {
-            // Skip first line if this config is deactivated, as it will be part of display name
-            int line = Configurations.blockDescriptions ? 1 : 2;
-            String desc = getTooltipUnloc(block);
-            while (I18n.hasKey(desc + line) || line == 1) {
-                tooltip.add(new TranslationTextComponent(desc + line));
+            int line = 1;
+            String desc = stack.getTranslationKey() + ".desc.";
+            while (I18n.hasKey(desc + line)) {
+                tooltip.add(new TranslationTextComponent(desc + line).applyTextStyle(TextFormatting.GRAY));
                 desc.replaceAll(line++ + "$", "." + line);
             }
         } catch (Exception ignored) {
@@ -65,9 +64,10 @@ public class ItemChiselBlock extends BlockItem {
 
     @Override
     public ITextComponent getDisplayName(ItemStack stack) {
+        ITextComponent ret = CarvingUtils.getChiselRegistry().getGroup(block.getVariation().getGroup()).orElseThrow(IllegalStateException::new).getDisplayName();
         if (!Configurations.blockDescriptions) {
-            return ChiselLangKeys.BLOCK_NAME.format(super.getDisplayName(stack), new TranslationTextComponent(getTooltipUnloc(block) + "1"));
+            ret = ChiselLangKeys.BLOCK_NAME.format(ret, super.getDisplayName(stack));
         }
-        return super.getDisplayName(stack);
+        return ret;
     }
 }

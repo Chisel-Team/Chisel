@@ -19,6 +19,8 @@ import net.minecraft.util.ResourceLocation;
 public interface IVariationRegistry {
 
     /* Getters */
+    
+    Optional<ICarvingGroup> getGroup(ResourceLocation id);
 
     Optional<ICarvingGroup> getGroup(Item item);
     

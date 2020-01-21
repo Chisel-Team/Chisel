@@ -1,7 +1,5 @@
 package team.chisel;
 
-import java.util.Locale;
-
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -10,14 +8,14 @@ import com.tterrag.registrate.Registrate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.common.Tags;
+import net.minecraft.state.IProperty;
+import net.minecraft.world.gen.GenerationStage.Carving;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.ModList;
 import team.chisel.api.block.BlockCreator;
@@ -25,15 +23,12 @@ import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.data.ModelTemplates;
-import team.chisel.client.gui.GuiAutoChisel;
-import team.chisel.common.block.BlockAutoChisel;
+import team.chisel.client.data.VariantTemplates;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
-import team.chisel.common.block.TileAutoChisel;
 import team.chisel.common.config.Configurations;
-import team.chisel.common.inventory.ContainerAutoChisel;
-import team.chisel.common.util.ContainerBuilder;
 
 public enum Features {
 
@@ -42,14 +37,9 @@ public enum Features {
         @Override
         void addBlocks(ChiselBlockFactory factory) {
 
-            factory.newType(Material.ROCK, "metals/aluminum", provider)
-                    .newVariation("caution")
-                    .next("crate")
-                    .next("thermal").template(ModelTemplates.cubeBottomTop())
-                    .next("machine")
-                    .next("badgreggy")
-                    .next("bolted")
-                    .next("scaffold")
+            factory.newType(Material.IRON, "metals/aluminum", provider)
+                    .setGroupName("Aluminum Block")
+                    .variations(VariantTemplates.METAL)
                     .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1));
         }
 
@@ -106,54 +96,54 @@ public enum Features {
 //        }
 //    },*/
 //
-//    ANDESITE {
-//        @Override
-//        void addBlocks(ChiselBlockFactory factory) {
-//            BlockState stone = Blocks.STONE.getDefaultState();
-//            IProperty<BlockStone.EnumType> prop = BlockStone.VARIANT;
-//            Carving.chisel.addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE), -21));
+    ANDESITE {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+//            CarvingUtils.getChiselRegistry().addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE), -21));
 //            Carving.chisel.addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE_SMOOTH), -20));
-//
-//
-//            factory.newType(Material.ROCK, "andesite", provider)
-//                    .newVariation("cracked")
-//                    .next("bricks-soft")
-//                    .next("bricks-cracked")
-//                    .next("bricks-triple")
-//                    .next("bricks-encased")
-//                    .next("braid")
-//                    .next("array")
-//                    .next("tiles-large")
-//                    .next("tiles-small")
-//                    .next("chaotic-medium")
-//                    .next("chaotic-small")
-//                    .next("dent")
-//                    .next("french-1")
-//                    .next("french-2")
-//                    .next("jellybean")
-//                    .next("layers")
-//                    .next("mosaic")
-//                    .next("ornate")
-//                    .next("panel")
-//                    .next("road")
-//                    .next("slanted")
-//                    .next("zag")
-//                    .next("circularct")
-//                    .next("weaver")
-//                    .next("bricks-solid")
-//                    .next("bricks-small")
-//                    .next("circular")
-//                    .next("tiles-medium")
-//                    .next("pillar")
-//                    .next("twisted")
-//                    .next("prism")
-//                    .next("bricks-chaotic")
-//                    .next("cuts")
-//                    .addOreDict("stoneAndesite")
-//                    .addOreDict("stoneAndesitePolished")
-//                    .build(b -> b.setHardness(1.5F).setResistance(30.0F).setSoundType(SoundType.STONE));
-//        }
-//    },
+
+            factory.newType(Material.ROCK, "andesite", provider)
+                    .variation("cracked")
+                    .next("bricks-soft")
+                    .next("bricks-cracked")
+                    .next("bricks-triple")
+                    .next("bricks-encased")
+                    .next("braid")
+                    .next("array")
+                    .next("tiles-large")
+                    .next("tiles-small")
+                    .next("chaotic-medium")
+                    .next("chaotic-small")
+                    .next("dent")
+                    .next("french-1")
+                    .next("french-2")
+                    .next("jellybean")
+                    .next("layers")
+                    .next("mosaic")
+                    .next("ornate")
+                    .next("panel")
+                    .next("road")
+                    .next("slanted")
+                    .next("zag")
+                    .next("circularct")
+                        .template(ModelTemplates.ctm("circular"))
+                    .next("weaver")
+                    .next("bricks-solid")
+                    .next("bricks-small")
+                    .next("circular")
+                    .next("tiles-medium")
+                    .next("pillar")
+                        .template(ModelTemplates.cubeColumn())
+                    .next("twisted")
+                        .template(ModelTemplates.cubeColumn())
+                    .next("prism")
+                    .next("bricks-chaotic")
+                    .next("cuts")
+                    .addOreDict("stoneAndesite")
+                    .addOreDict("stoneAndesitePolished")
+                    .build(b -> b.hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE));
+        }
+    },
 //
 //    ANTIBLOCK {
 //        @Override

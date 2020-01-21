@@ -32,6 +32,11 @@ public class CarvingVariationRegistry implements IVariationRegistry {
     public CarvingVariationRegistry() {
         
     }
+    
+    @Override
+    public Optional<ICarvingGroup> getGroup(ResourceLocation id) {
+        return Optional.ofNullable(groups.get(id));
+    }
 
     @Override
     public Optional<ICarvingGroup> getGroup(Item item) {

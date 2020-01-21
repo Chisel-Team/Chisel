@@ -12,12 +12,15 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TranslationTextComponent;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public interface ICarvingGroup {
     
     ResourceLocation getId();
+    
+    TranslationTextComponent getDisplayName();
     
     default Tag<Item> getItemTag() {
         Tag<Item> ret = ItemTags.getCollection().get(getId());

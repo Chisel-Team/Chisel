@@ -1,13 +1,15 @@
 package team.chisel.client.data;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import team.chisel.Chisel;
 import team.chisel.api.block.ModelTemplate;
 
+@MethodsReturnNonnullByDefault
+@ParametersAreNonnullByDefault
 public class ModelTemplates {
     
     private static String modid(Block block) {
@@ -31,6 +33,23 @@ public class ModelTemplates {
         return (prov, block) -> {
             String name = "block/" + name(block);
             prov.simpleBlock(block, prov.cubeBottomTop(name, prov.modLoc(name + "-side"), prov.modLoc(name + "-bottom"), prov.modLoc(name + "-top")));
+        };
+    }
+    
+    public static ModelTemplate cubeColumn() {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            prov.simpleBlock(block, prov.cubeColumn(name, prov.modLoc(name + "-side"), prov.modLoc(name + "-top")));
+        };
+    }
+    
+    public static ModelTemplate ctm(String variant) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            String texName = name.replaceAll("\\w+$", variant);
+            prov.simpleBlock(block, prov.withExistingParent(name, prov.modLoc("cube_ctm"))
+                    .texture("all", texName)
+                    .texture("connected_tex", texName + "-ctm"));
         };
     }
 }
