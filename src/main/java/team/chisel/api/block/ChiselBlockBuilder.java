@@ -6,10 +6,13 @@ import java.util.List;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
+import com.tterrag.registrate.util.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 
 import lombok.Setter;
@@ -19,10 +22,10 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.util.ResourceLocation;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.client.data.ModelTemplates;
 import team.chisel.common.init.ChiselTabs;
 
 /**
@@ -49,7 +52,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private List<String> oreStrings = new ArrayList<>();
 
     private @Nullable Tag<Block> group;
-    
+
     @Accessors(fluent = true)
     private boolean opaque = true;
 
@@ -88,7 +91,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings({ "unchecked", "null" })
-    public RegistryObject<T>[] build() {
+    public RegistryEntry<T>[] build() {
         return build(NO_ACTION);
     }
 
@@ -101,7 +104,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings({ "unchecked", "null" })
-    public RegistryObject<T>[] build(NonNullUnaryOperator<Block.Properties> after) {
+    public RegistryEntry<T>[] build(NonNullUnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
         }
@@ -109,7 +112,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         for (int i = 0; i < variations.size(); i++) {
             data[i] = variations.get(i).doBuild();
         }
-        RegistryObject<T>[] ret = (RegistryObject<T>[]) new RegistryObject[data.length];
+        RegistryEntry<T>[] ret = (RegistryEntry<T>[]) new RegistryEntry[data.length];
         for (int i = 0; i < ret.length; i++) {
             if (Strings.emptyToNull(data[i].name) != null) {
                 final VariationData var = data[i];
@@ -118,7 +121,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .properties(p -> p.hardnessAndResistance(1))
                         .transform(this::addTag)
                         .properties(after)
+                        .blockstate((ctx, prov) -> var.template.accept(prov, ctx.getEntry()))
+                        .lang(StringUtils.capitalize(var.name))
                         .item(provider::createBlockItem)
+                            // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
+                            .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
                             .properties(p -> p.group(ChiselTabs.tab))
                             .transform(this::addTag)
                             .build()
@@ -164,6 +171,10 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         @Setter
         @Accessors(fluent = true)
         private boolean opaque;
+        
+        @Setter
+        @Accessors(fluent = true)
+        private ModelTemplate template = ModelTemplates.simpleBlock();
 
         private VariationBuilder(ChiselBlockBuilder<T> parent, String name, @Nullable Tag<Block> group, int index) {
             this.parent = parent;
@@ -191,16 +202,16 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return buildVariation().newVariation(name, group);
         }
 
-        public RegistryObject<T>[] build() {
+        public RegistryEntry<T>[] build() {
             return buildVariation().build();
         }
         
-        public RegistryObject<T>[] build(NonNullUnaryOperator<Block.Properties> after) {
+        public RegistryEntry<T>[] build(NonNullUnaryOperator<Block.Properties> after) {
             return buildVariation().build(after);
         }
 
         private VariationData doBuild() {
-            return new VariationData(name, group == null ? null : group.getId(), smeltedFrom, amountSmelted, index, opaque);
+            return new VariationData(name, group == null ? null : group.getId(), smeltedFrom, amountSmelted, index, opaque, template);
         }
 
         public VariationBuilder<T> addOreDict(String oreDict)

@@ -31,6 +31,7 @@ import team.chisel.api.ChiselAPIProps;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketHitechSettings;
+import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.Reference;
 import team.chisel.common.block.MessageAutochiselFX;
 import team.chisel.common.block.MessageUpdateAutochiselSource;
@@ -95,6 +96,7 @@ public class Chisel implements Reference {
         ChiselTileEntities.init();
         
         Features.loadBlocks(registrate());
+        ChiselLangKeys.init(registrate());
     }
     
     public static Registrate registrate() {

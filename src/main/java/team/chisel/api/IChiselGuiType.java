@@ -3,6 +3,7 @@ package team.chisel.api;
 import javax.annotation.Nullable;
 
 import com.tterrag.registrate.Registrate;
+import com.tterrag.registrate.util.RegistryEntry;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -12,7 +13,6 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.fml.RegistryObject;
 import team.chisel.Chisel;
 import team.chisel.client.gui.GuiChisel;
 import team.chisel.client.gui.GuiHitechChisel;
@@ -63,7 +63,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
             }
         };
         
-        private final RegistryObject<? extends ContainerType<? extends ChiselContainer>> type;
+        private final RegistryEntry<? extends ContainerType<? extends ChiselContainer>> type;
         
         private <C extends ChiselContainer, T extends GuiChisel<C>> ChiselGuiType(String name, ContainerFactory<C> factory, ScreenFactory<C, T> screenFactory) {
             this.type = Chisel.registrate()

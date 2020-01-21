@@ -4,6 +4,8 @@ import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.tterrag.registrate.util.RegistryEntry;
+
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -12,10 +14,8 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.common.init.ChiselItems;
@@ -34,7 +34,7 @@ public class ChiselJEIPlugin implements IModPlugin {
         registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
                             .collect(Collectors.toList()), category.getUid());
 
-        for (RegistryObject<ItemChisel> chisel : ChiselItems.CHISELS.values()) {
+        for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS.values()) {
             ItemStack stack = new ItemStack(chisel.get());
             registry.addIngredientInfo(stack, VanillaTypes.ITEM, "jei.chisel.desc.chisel_generic", "\n", "jei.chisel.desc." + stack.getItem().getRegistryName().getPath());
         }
@@ -42,7 +42,7 @@ public class ChiselJEIPlugin implements IModPlugin {
     
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        for (RegistryObject<ItemChisel> chisel : ChiselItems.CHISELS.values()) {
+        for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS.values()) {
             registry.addRecipeCatalyst(new ItemStack(chisel.get()), category.getUid());
         }
     }

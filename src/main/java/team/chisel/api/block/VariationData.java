@@ -44,4 +44,6 @@ public class VariationData {
      * If this variation is opaque, it will block light. Set this to false on any variation which has a see-through texture.
      */
     public boolean opaque;
+    
+    public ModelTemplate template;
 }

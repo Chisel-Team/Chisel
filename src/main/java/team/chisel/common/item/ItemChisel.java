@@ -1,5 +1,7 @@
 package team.chisel.common.item;
 
+import static team.chisel.client.util.ChiselLangKeys.*;
+
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -10,7 +12,6 @@ import com.google.common.collect.Multimap;
 
 import lombok.Getter;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -89,16 +90,15 @@ public class ItemChisel extends Item implements IChiselItem {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> list, ITooltipFlag flag) {
-        String base = "item.chisel.chisel.desc.";
-        list.add(new TranslationTextComponent(base + "gui", TextFormatting.AQUA, TextFormatting.GRAY));
+        list.add(CHISEL_TOOLTIP_GUI.format(TextFormatting.AQUA, TextFormatting.GRAY));
         if (type != ChiselType.IRON || Configurations.ironChiselCanLeftClick) {
-            list.add(new TranslationTextComponent(base + "lc1", TextFormatting.AQUA, TextFormatting.GRAY));
-            list.add(new TranslationTextComponent(base + "lc2", TextFormatting.AQUA, TextFormatting.GRAY));
+            list.add(CHISEL_TOOLTIP_LC1.format(TextFormatting.AQUA, TextFormatting.GRAY));
+            list.add(CHISEL_TOOLTIP_LC2.format(TextFormatting.AQUA, TextFormatting.GRAY));
         }
         if (type != ChiselType.IRON || Configurations.ironChiselHasModes) {
             list.add(new StringTextComponent(""));
-            list.add(new TranslationTextComponent(base + "modes"));
-            list.add(new TranslationTextComponent(base + "modes.selected", TextFormatting.GREEN, new TranslationTextComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
+            list.add(CHISEL_TOOLTIP_MODES.getComponent());
+            list.add(CHISEL_TOOLTIP_SELECTED_MODE.format(TextFormatting.GREEN, new TranslationTextComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
         }
     }
 

@@ -19,6 +19,7 @@ import net.minecraft.world.World;
 import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
+import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.config.Configurations;
 
 /**
@@ -65,8 +66,7 @@ public class ItemChiselBlock extends BlockItem {
     @Override
     public ITextComponent getDisplayName(ItemStack stack) {
         if (!Configurations.blockDescriptions) {
-            String unlocpattern = "chisel.tooltip.blockname";
-            return new TranslationTextComponent(unlocpattern, super.getDisplayName(stack), new TranslationTextComponent(getTooltipUnloc(block) + "1"));
+            return ChiselLangKeys.BLOCK_NAME.format(super.getDisplayName(stack), new TranslationTextComponent(getTooltipUnloc(block) + "1"));
         }
         return super.getDisplayName(stack);
     }

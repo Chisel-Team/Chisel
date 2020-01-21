@@ -25,6 +25,7 @@ import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
+import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.gui.GuiAutoChisel;
 import team.chisel.common.block.BlockAutoChisel;
 import team.chisel.common.block.BlockCarvable;
@@ -44,7 +45,7 @@ public enum Features {
             factory.newType(Material.ROCK, "metals/aluminum", provider)
                     .newVariation("caution")
                     .next("crate")
-                    .next("thermal")
+                    .next("thermal").template(ModelTemplates.cubeBottomTop())
                     .next("machine")
                     .next("badgreggy")
                     .next("bolted")
