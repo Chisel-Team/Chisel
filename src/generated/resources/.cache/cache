@@ -23,6 +23,7 @@ a38d0489ddabc61d061ccc26c7983c29aa4c00f0 assets\chisel\blockstates\andesite\jell
 b6f94b8b817f39ecc67205b58d872f596bc682ba assets\chisel\blockstates\andesite\panel.json
 b9e80c338d81967b48ef15a0cfe19361f8a7b5cd assets\chisel\blockstates\andesite\pillar.json
 b1556c7032213bf9086b88d7ab927f14fad02b86 assets\chisel\blockstates\andesite\prism.json
+1180e8b6951e198e308053f11935977c25a76bb6 assets\chisel\blockstates\andesite\raw.json
 cc3183dcdbcc8bef27ea184f827c4290b9d54442 assets\chisel\blockstates\andesite\road.json
 e28441ea13da077e93869f7920cee4fa8c8c0d1a assets\chisel\blockstates\andesite\slanted.json
 ae1448016d04a3da65fc34bf65f64a49a2a78ee4 assets\chisel\blockstates\andesite\tiles-large.json
@@ -39,8 +40,8 @@ e57ea63dbe2182480210e59b1678fcbef1ad534a assets\chisel\blockstates\metals\alumin
 9494feaba101b87907c4b6ea0ab41c6231392bb9 assets\chisel\blockstates\metals\aluminum\machine.json
 8e303bab4d14a2f11bedb2c6f46d74bcb490a30b assets\chisel\blockstates\metals\aluminum\scaffold.json
 c2da391334ed8f90809642983e271f374cafda81 assets\chisel\blockstates\metals\aluminum\thermal.json
-808b87fd193112e592f9b8a4c9105c30b252460a assets\chisel\lang\en_ud.json
-7464eabe99b06372874ca615b4bcb48c763f732e assets\chisel\lang\en_us.json
+dc30766d6489ff2a45c55ada0da0ee7d67c586b9 assets\chisel\lang\en_ud.json
+0811a8ec43443608f1ca88b0f288b4413aa598ad assets\chisel\lang\en_us.json
 e38784e6e9fea3a8f1c6638df42ad59811d29624 assets\chisel\models\block\andesite\array.json
 4237d31f887a496d94b166ecc85f52ab7a74c4dc assets\chisel\models\block\andesite\braid.json
 473f1c493a1582bfe1bd5fa76369638d1583062b assets\chisel\models\block\andesite\bricks-chaotic.json
@@ -66,6 +67,7 @@ a8d4741c50136c66c6b955bf858feb5b1b3b4478 assets\chisel\models\block\andesite\fre
 806c73f1e576408bab75104c2bb7c16474e6c590 assets\chisel\models\block\andesite\panel.json
 fba4e9e66c3698cc5588bad4b0c16572dfed584f assets\chisel\models\block\andesite\pillar.json
 090ea473fe51e21d86c1dc9e00d2c7330de70d87 assets\chisel\models\block\andesite\prism.json
+89bd2704b6f3122df548eda0501bd3643d120f78 assets\chisel\models\block\andesite\raw.json
 5045240e34b1d5fa5e14f25007e2e9c9218d9dc0 assets\chisel\models\block\andesite\road.json
 37675d9cf6aaa7e7a138fd4bcb22f3c125f0ba7f assets\chisel\models\block\andesite\slanted.json
 d0fa5885dba1f334463bd61359f7dd014ed3c8d6 assets\chisel\models\block\andesite\tiles-large.json
@@ -106,6 +108,7 @@ e0b42973c4dc0fc1caaa5e401206d812ec3a3f8c assets\chisel\models\item\andesite\orna
 e7193cf524a7aa23d520f3f5587c9da19d64bdba assets\chisel\models\item\andesite\panel.json
 e5542e2e8eb4d9082c6459d70b02a07a6a5a8c7e assets\chisel\models\item\andesite\pillar.json
 7a41012b3292aa6e10c469832946e1dfa5bd3498 assets\chisel\models\item\andesite\prism.json
+9787c7568cdea24f66106d06ddda55218e459bf5 assets\chisel\models\item\andesite\raw.json
 8c46912a5f02051767165252c2be6166d4c6426f assets\chisel\models\item\andesite\road.json
 f4eebd4a878a981ca7b5211c3eb136671e19487a assets\chisel\models\item\andesite\slanted.json
 d9d70f8b70505d0aee29bf6f242264babb171d36 assets\chisel\models\item\andesite\tiles-large.json
@@ -152,6 +155,7 @@ aa55c0d7e56400a49c8d1362c4d3b3846c9350af data\chisel\loot_tables\blocks\andesite
 e6776d6ffa793d85db4cec0602a020e7a001f197 data\chisel\loot_tables\blocks\andesite\panel.json
 ee324ff9d42077bec556565a786382372d3628b2 data\chisel\loot_tables\blocks\andesite\pillar.json
 a6f4923a9feae212360d955e8068641b3f19615c data\chisel\loot_tables\blocks\andesite\prism.json
+10ef466e4fa40f43d0e49d0ac42cbf5ae07e1b0b data\chisel\loot_tables\blocks\andesite\raw.json
 9e7c44cd68090ba8dbd059a063cc5a3f1bbc17bb data\chisel\loot_tables\blocks\andesite\road.json
 f7009237b8578c10133232d4bd9421efa83fb043 data\chisel\loot_tables\blocks\andesite\slanted.json
 cc3ae8e25d136bd04bd9cbe67d250d2ac6a462fa data\chisel\loot_tables\blocks\andesite\tiles-large.json
@@ -169,7 +173,7 @@ a91cbd6fc94e84d6bc907c56c1855d755b43435d data\chisel\loot_tables\blocks\metals\a
 20322e4c965cd2b59885f31515c740a53eebe49a data\chisel\loot_tables\blocks\metals\aluminum\scaffold.json
 e9961875bf9962c57f9f0fa78b51181c7ffaeaea data\chisel\loot_tables\blocks\metals\aluminum\thermal.json
 e10a463709112bae5bc25d7c04d07fe58eb05671 data\chisel\recipes\auto_chisel.json
-728884682b3a6aaf7c897c140dd949d7ece0a1fe data\chisel\tags\blocks\andesite.json
+51050af65dca7e2548eafd0f0048ea5ec36d1a15 data\chisel\tags\blocks\andesite.json
 9ad9eda879cf2f110a8e532461fe3d8ec120d44b data\chisel\tags\blocks\metals\aluminum.json
-728884682b3a6aaf7c897c140dd949d7ece0a1fe data\chisel\tags\items\andesite.json
+51050af65dca7e2548eafd0f0048ea5ec36d1a15 data\chisel\tags\items\andesite.json
 9ad9eda879cf2f110a8e532461fe3d8ec120d44b data\chisel\tags\items\metals\aluminum.json

@@ -14,7 +14,6 @@ import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
-import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
@@ -27,7 +26,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Util;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.common.init.ChiselTabs;
@@ -53,8 +51,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     private BlockProvider<T> provider;
 
-    private List<String> oreStrings = new ArrayList<>();
-
     private @Nullable Tag<Block> group;
     
     private String groupName;
@@ -71,11 +67,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         this.group = group;
         this.groupName = RegistrateLangProvider.toEnglishName(group.getId().getPath());
         this.variations = new ArrayList<VariationBuilder<T>>();
-    }
-
-    public void addOreDict(String oreDict)
-    {
-        this.oreStrings.add(oreDict);
     }
 
     @SuppressWarnings("null")
@@ -242,13 +233,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
         private VariationData doBuild() {
             return new VariationData(name, group == null ? null : group.getId(), index, opaque, template);
-        }
-
-        public VariationBuilder<T> addOreDict(String oreDict)
-        {
-            this.parent.addOreDict(oreDict);
-
-            return this;
         }
     }
 }

@@ -1,6 +1,7 @@
 package team.chisel.client.data;
 
-import static team.chisel.client.data.VariantTemplates.Metal.*;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -69,9 +70,73 @@ public class VariantTemplates {
         public static final VariantTemplate BADGREGGY = withName("badgreggy", "Egregious");
         public static final VariantTemplate BOLTED = simple("bolted");
         public static final VariantTemplate SCAFFOLD = simple("scaffold");
-
     }
     
-    public static final ImmutableList<VariantTemplate> METAL =
-            ImmutableList.of(CAUTION, CRATE, THERMAL, MACHINE, BADGREGGY, BOLTED, SCAFFOLD);
+    public static class Rock {
+        
+        public static final VariantTemplate CRACKED = simple("cracked");
+        public static final VariantTemplate BRICKS_SOFT = withName("bricks-soft", "Weathered Bricks");
+        public static final VariantTemplate BRICKS_CRACKED = withName("bricks-cracked", "Cracked Bricks");
+        public static final VariantTemplate BRICKS_TRIPLE = withName("bricks-triple", "Wide Bricks");
+        public static final VariantTemplate BRICKS_ENCASED = withName("bricks-encased", "Encased Bricks");
+        public static final VariantTemplate BRAID = simple("braid");
+        public static final VariantTemplate ARRAY = withName("array", "Arrayed Bricks");
+        public static final VariantTemplate TILES_LARGE = withName("tiles-large", "Big Tile");
+        public static final VariantTemplate TILES_SMALL = withName("tiles-small", "Small Tiles");
+        public static final VariantTemplate CHAOTIC_MEDIUM = withName("chaotic-medium", "Disordered Tiles");
+        public static final VariantTemplate CHAOTIC_SMALL = withName("chaotic-small", "Small Disordered Tiles");
+        public static final VariantTemplate DENT = simple("dent");
+        public static final VariantTemplate FRENCH_1 = withName("french-1", "French 1");
+        public static final VariantTemplate FRENCH_2 = withName("french-2", "French 2");
+        public static final VariantTemplate JELLYBEAN = simple("jellybean");
+        public static final VariantTemplate LAYERS = simple("layers");
+        public static final VariantTemplate MOSAIC = simple("mosaic");
+        public static final VariantTemplate ORNATE = simple("ornate");
+        public static final VariantTemplate PANEL = simple("panel");
+        public static final VariantTemplate ROAD = simple("road");
+        public static final VariantTemplate SLANTED = simple("slanted");
+        public static final VariantTemplate ZAG = simple("zag");
+        public static final VariantTemplate CIRCULAR_CTM = withName("circularct", "Circular", ModelTemplates.ctm("circular"), "Has CTM");
+        public static final VariantTemplate WEAVER = withName("weaver", "Celtic");
+        public static final VariantTemplate BRICKS_SOLID = withName("bricks-solid", "Bricks");
+        public static final VariantTemplate BRICKS_SMALL = withName("bricks-small", "Small Bricks");
+        public static final VariantTemplate CIRCULAR = simple("circular");
+        public static final VariantTemplate TILES_MEDIUM = withName("tiles-medium", "Tiles");
+        public static final VariantTemplate PILLAR = simple("pillar", ModelTemplates.cubeColumn());
+        public static final VariantTemplate TWISTED = simple("twisted", ModelTemplates.cubeColumn());
+        public static final VariantTemplate PRISM = simple("prism");
+        public static final VariantTemplate RAW = simple("raw");
+        public static final VariantTemplate BRICKS_CHAOTIC = withName("bricks-chaotic", "Trodden Bricks");
+        public static final VariantTemplate CUTS = simple("cuts");
+    }
+    
+    public static class Stone {
+        
+        public static final VariantTemplate EMBOSSED = simple("embossed");
+        public static final VariantTemplate INDENTED = simple("indented");
+        public static final VariantTemplate MARKER = simple("marker");
+        public static final VariantTemplate SUNKEN = simple("sunken");
+        public static final VariantTemplate POISON = simple("poison");
+    }
+    
+    @SuppressWarnings("null")
+    private static ImmutableList<VariantTemplate> ofClass(Class<?> cls) {
+        return ImmutableList.copyOf(Arrays.stream(cls.getDeclaredFields())
+                .map(f -> {
+                    try {
+                        return (VariantTemplate) f.get(null);
+                    } catch (IllegalArgumentException | IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .collect(Collectors.toList()));
+    }
+    
+    public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
+    public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> STONE = ImmutableList.<VariantTemplate>builder()
+            .addAll(ROCK)
+            .addAll(ofClass(Stone.class))
+            .build();
 }
