@@ -4,21 +4,23 @@ import com.tterrag.registrate.Registrate;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
+import team.chisel.Chisel;
 
 @RequiredArgsConstructor
 public enum ChiselLangKeys {
     
-    BLOCK_NAME("tooltip.blockname", "%1$s (%2$s)"),
+    TT_BLOCK_NAME("tooltip", "blockname", "%1$s (%2$s)"),
 
-    CHISEL_TOOLTIP_GUI("tooltip.chisel.gui", "%sRight-click%s to open GUI"),
-    CHISEL_TOOLTIP_LC1("tooltip.chisel.lc1", "%sLeft-click%s to chisel blocks in the world"),
-    CHISEL_TOOLTIP_LC2("tooltip.chisel.lc2", "%sTarget a block%s by leaving it in the inventory"),
-    CHISEL_TOOLTIP_MODES("tooltip.chisel.modes", "Has multiple chiseling modes."),
-    CHISEL_TOOLTIP_SELECTED_MODE("tooltip.chisel.modes.selected", "Selected mode: %s"),
+    TT_CHISEL_GUI("tooltip", "gui", "%sRight-click%s to open GUI"),
+    TT_CHISEL_LC1("tooltip", "lc1", "%sLeft-click%s to chisel blocks in the world"),
+    TT_CHISEL_LC2("tooltip", "lc2", "%sTarget a block%s by leaving it in the inventory"),
+    TT_CHISEL_MODES("tooltip", "modes", "Has multiple chiseling modes."),
+    TT_CHISEL_SELECTED_MODE("tooltip", "modes.selected", "Selected mode: %s"),
     ;
     
-    private final String key, value;
+    private final String type, key, value;
     
     @Getter
     private TranslationTextComponent component;
@@ -29,7 +31,7 @@ public enum ChiselLangKeys {
     
     public static void init(Registrate registrate) {
         for (ChiselLangKeys lang : values()) {
-            lang.component = registrate.addLang(lang.key, lang.value);
+            lang.component = registrate.addLang(lang.type, new ResourceLocation(Chisel.MOD_ID, lang.key), lang.value);
         }
     }
 }

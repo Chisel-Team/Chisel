@@ -66,7 +66,7 @@ public class ItemChiselBlock extends BlockItem {
     public ITextComponent getDisplayName(ItemStack stack) {
         ITextComponent ret = CarvingUtils.getChiselRegistry().getGroup(block.getVariation().getGroup()).orElseThrow(IllegalStateException::new).getDisplayName();
         if (!Configurations.blockDescriptions) {
-            ret = ChiselLangKeys.BLOCK_NAME.format(ret, super.getDisplayName(stack));
+            ret = ChiselLangKeys.TT_BLOCK_NAME.format(ret, super.getDisplayName(stack));
         }
         return ret;
     }

@@ -59,7 +59,7 @@ public class CarvingUtils {
 	}
 	
 	private static TranslationTextComponent getDisplayName(Tag<?> tag, String name) {
-	    return Chisel.registrate().addLang(Util.makeTranslationKey("group", tag.getId()), name);
+	    return Chisel.registrate().addLang("group", tag.getId(), name);
 	}
 
     public static ICarvingGroup itemGroup(Tag<Block> blocks, String name) {

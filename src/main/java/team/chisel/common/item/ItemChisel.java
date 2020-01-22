@@ -90,15 +90,15 @@ public class ItemChisel extends Item implements IChiselItem {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> list, ITooltipFlag flag) {
-        list.add(CHISEL_TOOLTIP_GUI.format(TextFormatting.AQUA, TextFormatting.GRAY));
+        list.add(TT_CHISEL_GUI.format(TextFormatting.AQUA, TextFormatting.GRAY));
         if (type != ChiselType.IRON || Configurations.ironChiselCanLeftClick) {
-            list.add(CHISEL_TOOLTIP_LC1.format(TextFormatting.AQUA, TextFormatting.GRAY));
-            list.add(CHISEL_TOOLTIP_LC2.format(TextFormatting.AQUA, TextFormatting.GRAY));
+            list.add(TT_CHISEL_LC1.format(TextFormatting.AQUA, TextFormatting.GRAY));
+            list.add(TT_CHISEL_LC2.format(TextFormatting.AQUA, TextFormatting.GRAY));
         }
         if (type != ChiselType.IRON || Configurations.ironChiselHasModes) {
             list.add(new StringTextComponent(""));
-            list.add(CHISEL_TOOLTIP_MODES.getComponent());
-            list.add(CHISEL_TOOLTIP_SELECTED_MODE.format(TextFormatting.GREEN, new TranslationTextComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
+            list.add(TT_CHISEL_MODES.getComponent());
+            list.add(TT_CHISEL_SELECTED_MODE.format(TextFormatting.GREEN, new TranslationTextComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
         }
     }
 

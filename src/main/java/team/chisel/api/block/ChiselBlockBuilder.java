@@ -156,9 +156,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 String[] tooltip = variations.get(i).tooltip;
                 final ResourceLocation id = ret[i].getId();
                 for (int j = 0; j < tooltip.length; j++) {
-                    ResourceLocation tooltipId = new ResourceLocation(id.getNamespace(), id.getPath() + "/desc/" + (j + 1));
-                    String loc = tooltip[j];
-                    registrate.addDataGenerator(ProviderType.LANG, prov -> prov.add(Util.makeTranslationKey("block", tooltipId), loc));
+                    registrate.addLang("block", new ResourceLocation(id.getNamespace(), id.getPath() + "/desc/" + (j + 1)), tooltip[j]);
                 }
             }
         }
