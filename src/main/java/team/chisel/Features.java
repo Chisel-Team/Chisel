@@ -187,57 +187,16 @@ public enum Features {
 //    },
 //    
 //
-//    BASALT {
-//        @Override
-//        void addBlocks(ChiselBlockFactory factory) {
-//
-//            factory.newType(Material.ROCK, "basalt", provider) // REMAP!
-//                    .newVariation("cracked")
-//                    .next("bricks-soft")
-//                    .next("bricks-cracked")
-//                    .next("bricks-triple")
-//                    .next("bricks-encased")
-//                    .next("braid")
-//                    .next("array")
-//                    .next("tiles-large")
-//                    .next("tiles-small")
-//                    .next("chaotic-medium")
-//                    .next("chaotic-small")
-//                    .next("dent")
-//                    .next("french-1")
-//                    .next("french-2")
-//                    .next("jellybean")
-//                    .next("layers")
-//                    .next("mosaic")
-//                    .next("ornate")
-//                    .next("panel")
-//                    .next("road")
-//                    .next("slanted")
-//                    .next("zag")
-//                    .next("circularct")
-//                    .next("weaver")
-//                    .next("bricks-chaotic")
-//                    .next("cuts")
-//                    .next("")
-//                    .next("")
-//                    .next("")
-//                    .next("")
-//                    .next("")
-//                    .next("")
-//                    .next("bricks-solid")
-//                    .next("bricks-small")
-//                    .next("circular")
-//                    .next("tiles-medium")
-//                    .next("pillar")
-//                    .next("twisted")
-//                    .next("prism")
-//                    .next("raw").setOrder(-100)
-//                    .addOreDict("stoneBasalt")
-//                    .addOreDict("stoneBasaltPolished")
-//                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
-//
-//        }
-//
+    BASALT {
+        @Override
+        void addBlocks(ChiselBlockFactory factory) {
+
+            factory.newType(Material.ROCK, "basalt", provider)
+                    .variations(VariantTemplates.ROCK)
+                    .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
+
+        }
+
 //        @Override
 //        void addRecipes(IForgeRegistry<IRecipe> registry) {
 //            if (!Configurations.basaltSpecialGen) {
@@ -245,7 +204,7 @@ public enum Features {
 //                        new WorldGenInfo(Configurations.basaltVeinAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
 //            }
 //        }
-//    },
+    },
 //
 //    BLOOD_MAGIC("bloodmagic") {
 //        @Override
