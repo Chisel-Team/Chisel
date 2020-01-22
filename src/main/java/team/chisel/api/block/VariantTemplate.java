@@ -2,7 +2,7 @@ package team.chisel.api.block;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.apache.commons.lang3.StringUtils;
+import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 import mcp.MethodsReturnNonnullByDefault;
 
@@ -15,7 +15,7 @@ public interface VariantTemplate {
     String getName();
     
     default String getLocalizedName() {
-        return StringUtils.capitalize(getName());
+        return RegistrateLangProvider.toEnglishName(getName());
     }
     
     String[] getTooltip();

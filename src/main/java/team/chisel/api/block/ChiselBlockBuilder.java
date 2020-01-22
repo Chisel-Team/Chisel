@@ -205,7 +205,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         private VariationBuilder(ChiselBlockBuilder<T> parent, String name, @Nullable Tag<Block> group, int index) {
             this.parent = parent;
             this.name = name;
-            this.localizedName = StringUtils.capitalize(name);
+            this.localizedName = RegistrateLangProvider.toEnglishName(name);
             this.group = group;
             this.index = index;
         }

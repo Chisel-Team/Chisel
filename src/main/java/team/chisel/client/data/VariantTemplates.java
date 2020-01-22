@@ -75,19 +75,19 @@ public class VariantTemplates {
     public static class Rock {
         
         public static final VariantTemplate CRACKED = simple("cracked");
-        public static final VariantTemplate BRICKS_SOFT = withName("bricks-soft", "Weathered Bricks");
-        public static final VariantTemplate BRICKS_CRACKED = withName("bricks-cracked", "Cracked Bricks");
-        public static final VariantTemplate BRICKS_TRIPLE = withName("bricks-triple", "Wide Bricks");
-        public static final VariantTemplate BRICKS_ENCASED = withName("bricks-encased", "Encased Bricks");
+        public static final VariantTemplate SOFT_BRICKS = withName("soft_bricks", "Weathered Bricks");
+        public static final VariantTemplate CRACKED_BRICKS = simple("cracked_bricks");
+        public static final VariantTemplate TRIPLE_BRICKS = withName("triple_bricks", "Wide Bricks");
+        public static final VariantTemplate ENCASED_BRICKS = simple("encased_bricks");
         public static final VariantTemplate BRAID = simple("braid");
         public static final VariantTemplate ARRAY = withName("array", "Arrayed Bricks");
-        public static final VariantTemplate TILES_LARGE = withName("tiles-large", "Big Tile");
-        public static final VariantTemplate TILES_SMALL = withName("tiles-small", "Small Tiles");
-        public static final VariantTemplate CHAOTIC_MEDIUM = withName("chaotic-medium", "Disordered Tiles");
-        public static final VariantTemplate CHAOTIC_SMALL = withName("chaotic-small", "Small Disordered Tiles");
+        public static final VariantTemplate TILES_LARGE = withName("tiles_large", "Big Tile");
+        public static final VariantTemplate TILES_SMALL = withName("tiles_small", "Small Tiles");
+        public static final VariantTemplate CHAOTIC_MEDIUM = withName("chaotic_medium", "Disordered Tiles");
+        public static final VariantTemplate CHAOTIC_SMALL = withName("chaotic_small", "Small Disordered Tiles");
         public static final VariantTemplate DENT = simple("dent");
-        public static final VariantTemplate FRENCH_1 = withName("french-1", "French 1");
-        public static final VariantTemplate FRENCH_2 = withName("french-2", "French 2");
+        public static final VariantTemplate FRENCH_1 = simple("french_1");
+        public static final VariantTemplate FRENCH_2 = simple("french_2");
         public static final VariantTemplate JELLYBEAN = simple("jellybean");
         public static final VariantTemplate LAYERS = simple("layers");
         public static final VariantTemplate MOSAIC = simple("mosaic");
@@ -98,15 +98,15 @@ public class VariantTemplates {
         public static final VariantTemplate ZAG = simple("zag");
         public static final VariantTemplate CIRCULAR_CTM = withName("circularct", "Circular", ModelTemplates.ctm("circular"), "Has CTM");
         public static final VariantTemplate WEAVER = withName("weaver", "Celtic");
-        public static final VariantTemplate BRICKS_SOLID = withName("bricks-solid", "Bricks");
-        public static final VariantTemplate BRICKS_SMALL = withName("bricks-small", "Small Bricks");
+        public static final VariantTemplate SOLID_BRICKS = withName("solid_bricks", "Bricks");
+        public static final VariantTemplate SMALL_BRICKS = simple("small_bricks");
         public static final VariantTemplate CIRCULAR = simple("circular");
-        public static final VariantTemplate TILES_MEDIUM = withName("tiles-medium", "Tiles");
+        public static final VariantTemplate TILES_MEDIUM = withName("tiles_medium", "Tiles");
         public static final VariantTemplate PILLAR = simple("pillar", ModelTemplates.cubeColumn());
         public static final VariantTemplate TWISTED = simple("twisted", ModelTemplates.cubeColumn());
         public static final VariantTemplate PRISM = simple("prism");
         public static final VariantTemplate RAW = simple("raw");
-        public static final VariantTemplate BRICKS_CHAOTIC = withName("bricks-chaotic", "Trodden Bricks");
+        public static final VariantTemplate CHAOTIC_BRICKS = withName("chaotic_bricks", "Trodden Bricks");
         public static final VariantTemplate CUTS = simple("cuts");
     }
     
