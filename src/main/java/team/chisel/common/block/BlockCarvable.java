@@ -10,9 +10,11 @@ import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
+import team.chisel.api.carving.CarvingUtils;
 
 /**
  * Represents a Carvable (aka Chiselable) block
@@ -52,5 +54,10 @@ public class BlockCarvable extends Block implements ICarvable {
         } else {
             return super.canEntityDestroy(state, world, pos, entity);
         }
+    }
+    
+    @Override
+    public String getTranslationKey() {
+        return CarvingUtils.getChiselRegistry().getGroup(variation.getGroup()).orElseThrow(IllegalStateException::new).getTranslationKey();
     }
 }

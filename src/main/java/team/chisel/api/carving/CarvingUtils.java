@@ -79,6 +79,11 @@ public class CarvingUtils {
 	    private final SoundEvent sound = null;
 	    
 	    private final TranslationTextComponent displayName;
+	    
+	    @Override
+	    public String getTranslationKey() {
+	        return displayName.getKey();
+	    }
 
 //	    @Override
 //	    public boolean equals(Object obj) {

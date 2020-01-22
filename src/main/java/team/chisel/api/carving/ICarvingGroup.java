@@ -20,7 +20,11 @@ public interface ICarvingGroup {
     
     ResourceLocation getId();
     
-    TranslationTextComponent getDisplayName();
+    String getTranslationKey();
+    
+    default TranslationTextComponent getDisplayName() {
+        return new TranslationTextComponent(getTranslationKey());
+    }
     
     default Tag<Item> getItemTag() {
         Tag<Item> ret = ItemTags.getCollection().get(getId());

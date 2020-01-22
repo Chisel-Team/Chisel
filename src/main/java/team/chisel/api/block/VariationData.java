@@ -5,6 +5,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Value;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
 
 /**
  * Represents data about a specific variation
@@ -17,6 +18,8 @@ public class VariationData {
      * The Name of this variation
      */
     String name;
+    
+    TranslationTextComponent displayName;
     
     /**
      * The carving group of this variation

@@ -1,6 +1,5 @@
 package team.chisel.common.block;
 
-import java.util.IllegalFormatException;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -13,14 +12,11 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import team.chisel.Chisel;
 import team.chisel.api.block.ICarvable;
-import team.chisel.api.block.VariationData;
-import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.config.Configurations;
 
@@ -40,7 +36,7 @@ public class ItemChiselBlock extends BlockItem {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (Configurations.blockDescriptions) {
-            tooltip.add(super.getDisplayName(stack).applyTextStyle(TextFormatting.GRAY));
+            tooltip.add(block.getVariation().getDisplayName().applyTextStyle(TextFormatting.GRAY));
         }
         addTooltips(stack, block, tooltip);
     }
@@ -52,7 +48,7 @@ public class ItemChiselBlock extends BlockItem {
     public static void addTooltips(ItemStack stack, ICarvable block, List<ITextComponent> tooltip) {
         try {
             int line = 1;
-            String desc = stack.getTranslationKey() + ".desc.";
+            String desc = block.getVariation().getDisplayName().getKey() + ".desc.";
             while (I18n.hasKey(desc + line)) {
                 tooltip.add(new TranslationTextComponent(desc + line).applyTextStyle(TextFormatting.GRAY));
                 desc.replaceAll(line++ + "$", "." + line);
@@ -64,9 +60,9 @@ public class ItemChiselBlock extends BlockItem {
 
     @Override
     public ITextComponent getDisplayName(ItemStack stack) {
-        ITextComponent ret = CarvingUtils.getChiselRegistry().getGroup(block.getVariation().getGroup()).orElseThrow(IllegalStateException::new).getDisplayName();
+        ITextComponent ret = super.getDisplayName(stack);
         if (!Configurations.blockDescriptions) {
-            ret = ChiselLangKeys.TT_BLOCK_NAME.format(ret, super.getDisplayName(stack));
+            ret = ChiselLangKeys.TT_BLOCK_NAME.format(ret, block.getVariation().getDisplayName());
         }
         return ret;
     }

@@ -3,7 +3,10 @@ package team.chisel.api.block;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -14,8 +17,10 @@ import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
+import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.RegistryEntry;
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 
 import lombok.Setter;
@@ -26,6 +31,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TranslationTextComponent;
+import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.common.init.ChiselTabs;
@@ -136,7 +143,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .transform(this::addTag)
                         .properties(after)
                         .blockstate((ctx, prov) -> var.getTemplate().accept(prov, ctx.getEntry()))
-                        .lang(variations.get(i).localizedName)
+                        .setData(ProviderType.LANG, NonNullBiConsumer.noop())
                         .item(provider::createBlockItem)
                             // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
                             .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
@@ -144,11 +151,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                             .transform(this::addTag)
                             .build()
                         .register();
-                String[] tooltip = variations.get(i).tooltip;
-                final ResourceLocation id = ret[i].getId();
-                for (int j = 0; j < tooltip.length; j++) {
-                    registrate.addLang("block", new ResourceLocation(id.getNamespace(), id.getPath() + "/desc/" + (j + 1)), tooltip[j]);
-                }
             }
         }
         if (this.group != null) {
@@ -173,6 +175,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     @Accessors(chain = true)
     public static class VariationBuilder<T extends Block & ICarvable> {
+        
+        private static final Map<String, String> TRANSLATIONS = new HashMap<>();
+        private static final Map<String, TranslationTextComponent> COMPONENTS = new HashMap<>();
 
         private ChiselBlockBuilder<T> parent;
 
@@ -232,7 +237,19 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         }
 
         private VariationData doBuild() {
-            return new VariationData(name, group == null ? null : group.getId(), index, opaque, template);
+            String existingTranslation = TRANSLATIONS.get(name);
+            if (existingTranslation != null && !Objects.equals(localizedName, existingTranslation)) {
+                throw new IllegalStateException("Cannot redefine existing variation's localized name: " + name + " -> " + localizedName + " (should be " + existingTranslation + ")");
+            }
+            if (existingTranslation == null) {
+                TRANSLATIONS.put(name, localizedName);
+                TranslationTextComponent component = parent.registrate.addLang("variant", new ResourceLocation(parent.registrate.getModid(), name), localizedName);
+                COMPONENTS.put(name, component);
+                for (int j = 0; j < tooltip.length; j++) {
+                    parent.registrate.addRawLang(component.getKey() + ".desc." + (j + 1), tooltip[j]);
+                }
+            }
+            return new VariationData(name, COMPONENTS.get(name), group == null ? null : group.getId(), index, opaque, template);
         }
     }
 }
