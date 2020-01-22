@@ -7,6 +7,7 @@
   "item.chisel.hitech_chisel": "Hitech Chisel",
   "item.chisel.iron_chisel": "Iron Chisel",
   "item.chisel.offset_tool": "Offset Tool",
+  "itemGroup.chisel": "Chisel",
   "tooltip.chisel.blockname": "%1$s (%2$s)",
   "tooltip.chisel.gui": "%sRight-click%s to open GUI",
   "tooltip.chisel.lc1": "%sLeft-click%s to chisel blocks in the world",

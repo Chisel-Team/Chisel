@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.ImmutableMap;
 import com.tterrag.registrate.Registrate;
+import com.tterrag.registrate.providers.ProviderType;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -75,8 +76,11 @@ public class Chisel implements Reference {
 
     private static Map<String, Block> remaps = ImmutableMap.of();
 
-    private static final LazyLoadBase<Registrate> REGISTRATE = new LazyLoadBase<>(() -> Registrate.create(Reference.MOD_ID)
-            .itemGroup(() -> ChiselTabs.tab));
+    private static final LazyLoadBase<Registrate> REGISTRATE = new LazyLoadBase<Registrate>(() -> {
+        Registrate ret = Registrate.create(Reference.MOD_ID).itemGroup(() -> ChiselTabs.tab);
+        ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.tab, "Chisel"));
+        return ret;
+    });
     
     public Chisel() {
         CarvingUtils.chisel = new CarvingVariationRegistry();
