@@ -1,41 +1,27 @@
 package team.chisel;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
+import java.util.Arrays;
 
 import com.tterrag.registrate.Registrate;
+import com.tterrag.registrate.providers.RegistrateLangProvider;
+import com.tterrag.registrate.util.nullness.NonNullConsumer;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
+import net.minecraft.item.DyeColor;
 import net.minecraftforge.common.ToolType;
-import net.minecraftforge.fml.ModList;
-import team.chisel.api.block.BlockCreator;
-import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
-import team.chisel.api.block.ICarvable;
-import team.chisel.api.block.VariationData;
 import team.chisel.client.data.VariantTemplates;
-import team.chisel.common.block.BlockCarvable;
-import team.chisel.common.block.ItemChiselBlock;
-import team.chisel.common.config.Configurations;
 
+@RequiredArgsConstructor
 public enum Features {
 
     // @formatter:off
-    ALUMINUM {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-
-            factory.newType(Material.IRON, "metals/aluminum", provider)
-                    .setGroupName("Aluminum Block")
-                    .variations(VariantTemplates.METAL)
-                    .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1));
-        }
+    ALUMINUM(factory -> factory.newType(Material.IRON, "metals/aluminum")
+            .setGroupName("Aluminum Block")
+            .variations(VariantTemplates.METAL)
+            .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1))),
 
         /* TODO 1.15
         @Override
@@ -43,7 +29,6 @@ public enum Features {
         {
             registerIngotUncraftRecipe(registry, "Aluminum");
         } */
-    },
     
 //    /*ANCIENT_STONE ("thaumcraft") {
 //        @Override
@@ -90,17 +75,11 @@ public enum Features {
 //        }
 //    },*/
 //
-    ANDESITE {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-//            CarvingUtils.getChiselRegistry().addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE), -21));
-//            Carving.chisel.addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE_SMOOTH), -20));
-
-            factory.newType(Material.ROCK, "andesite", provider)
-                    .variations(VariantTemplates.ROCK)
-                    .build(b -> b.hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE));
-        }
-    },
+    ANDESITE(factory -> factory.newType(Material.ROCK, "andesite")
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE))),
+//CarvingUtils.getChiselRegistry().addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE), -21));
+//Carving.chisel.addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE_SMOOTH), -20));
 //
 //    ANTIBLOCK {
 //        @Override
@@ -187,15 +166,9 @@ public enum Features {
 //    },
 //    
 //
-    BASALT {
-        @Override
-        void addBlocks(ChiselBlockFactory factory) {
-
-            factory.newType(Material.ROCK, "basalt", provider)
-                    .variations(VariantTemplates.ROCK)
-                    .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
-
-        }
+    BASALT(factory -> factory.newType(Material.ROCK, "basalt")
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE))),
 
 //        @Override
 //        void addRecipes(IForgeRegistry<IRecipe> registry) {
@@ -204,7 +177,6 @@ public enum Features {
 //                        new WorldGenInfo(Configurations.basaltVeinAmount, 0, 32, 1, BlockMatcher.forBlock(Blocks.STONE)));
 //            }
 //        }
-    },
 //
 //    BLOOD_MAGIC("bloodmagic") {
 //        @Override
@@ -3081,172 +3053,30 @@ public enum Features {
 //        }
 //    },
 //
-//    WOOL {
-//        @Override
-//        void addBlocks(ChiselBlockFactory factory) {
-//
+    WOOL(factory -> Arrays.stream(DyeColor.values())
+            .forEach(color -> factory.newType(Material.WOOL, "wool/" + (color.getName()))
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Wool")
+                    .variation("legacy")
+                    .next("llama")
+                    .build(b -> b.sound(SoundType.CLOTH).hardnessAndResistance(0.8F)))),
 //            BlockState wool = Blocks.WOOL.getDefaultState();
 //            IProperty<EnumDyeColor> prop = BlockColored.COLOR;
-//
-//            for(int c = 0; c < dyeColors.length; c++)
-//            {
+
 //                Carving.chisel.addVariation("wool_" + (dyeColors[c].toLowerCase()), CarvingUtils.variationFor(wool.withProperty(prop, EnumDyeColor.byDyeDamage(c)), -1));
-//
-//
-//                factory.newType(Material.CLOTH, "wool_" + (dyeColors[c].toLowerCase()), provider)
-//                        .setParentFolder("wool")
-//                        .newVariation("legacy_"+(dyeColors[c].toLowerCase()))
-//                        .next("llama_"+(dyeColors[c].toLowerCase()))
-//                        .addOreDict("blockWool")
-//                        .build(b -> b.setSoundType(SoundType.CLOTH).setHardness(0.8F));
-//            }
-//        }
-//    }
+
     ;
-
-    private static final String[] dyeColors =
-            {
-                    "Black",
-                    "Red",
-                    "Green",
-                    "Brown",
-                    "Blue",
-                    "Purple",
-                    "Cyan",
-                    "LightGray",
-                    "Gray",
-                    "Pink",
-                    "Lime",
-                    "Yellow",
-                    "LightBlue",
-                    "Magenta",
-                    "Orange",
-                    "White"
-            };
-
-    //@formatter:on
-
-    private static final String[] dyeOres = { "dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",
-            "dyeLightBlue", "dyeMagenta", "dyeOrange", "dyeWhite" };
 
     public static final String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
 
-    private static final @Nonnull BlockCreator<BlockCarvable> creator = BlockCarvable::new;
-    private static final @Nonnull ChiselBlockProvider<BlockCarvable> provider = new ChiselBlockProvider<>(creator, BlockCarvable.class);
-
-    @RequiredArgsConstructor
-    @ParametersAreNonnullByDefault
-    private static class ChiselBlockProvider<T extends Block & ICarvable> implements BlockProvider<T> {
-
-        private final BlockCreator<T> creator;
-        @Getter(onMethod = @__(@Override))
-        private final Class<T> blockClass;
-
-        @Override public T createBlock(Block.Properties properties, VariationData data) {
-            return creator.createBlock(properties, data);
-        }
-        
-        @Override
-        public BlockItem createBlockItem(T block, Item.Properties properties) {
-            return new ItemChiselBlock(block, properties);
-        }
-    }
-
-    ;
-
-    public static void loadBlocks(Registrate registrate) {
+    public static void init(Registrate registrate) {
         Chisel.logger.info("Loading blocks...");
         int num = 0;
         ChiselBlockFactory factory = ChiselBlockFactory.newFactory(registrate);
         for (Features f : values()) {
-            if (f.enabled()) {
-                f.addBlocks(factory);
-                ++num;
-            } else {
-                logDisabled(f);
-            }
-        }
-        Chisel.logger.info(num + " Feature's blocks loaded.");
-        Chisel.logger.info("Loading Tile Entities...");
-//        Chisel.proxy.registerTileEntities(); TODO 1.14
-        Chisel.logger.info("Tile Entities loaded.");
-    }
-
-    public static void loadItems(Registrate registrate) {
-        Chisel.logger.info("Loading items...");
-        int num = 0;
-        for (Features f : values()) {
-            if (f.enabled()) {
-                f.addItems(registrate);
-                ++num;
-            } else {
-                logDisabled(f);
-            }
-        }
-        Chisel.logger.info(num + " Feature's items loaded.");
-    }
-
-    private static void logDisabled(Features f) {
-        if (!f.hasParentFeature() && f.parent != null) {
-            Chisel.logger.info("Skipping feature {} as its parent feature {} was disabled.", Configurations.featureName(f), Configurations.featureName(f.parent));
-        } else if (!f.hasRequiredMod() && f.getRequiredMod() != null) {
-            Chisel.logger.info("Skipping feature {} as its required mod {} was missing.", Configurations.featureName(f), f.getRequiredMod());
-        } else {
-            Chisel.logger.info("Skipping feature {} as it was disabled in the config.", Configurations.featureName(f));
+            Chisel.logger.info("Loading feature {}", f.name());
+            f.factory.accept(factory);
         }
     }
-
-    public static boolean oneModdedFeatureLoaded() {
-        for (Features f : values()) {
-            if (f.hasRequiredMod()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private Features parent;
-
-    private String requiredMod;
-
-    Features() {
-        this(null, null);
-    }
-
-    Features(Features parent) {
-        this(null, parent);
-    }
-
-    Features(String requiredMod) {
-        this(requiredMod, null);
-    }
-
-    Features(String requriedMod, Features parent) {
-        this.requiredMod = requriedMod;
-        this.parent = parent;
-    }
-
-    void addBlocks(ChiselBlockFactory factory) {
-        ;
-    }
-
-    void addItems(Registrate registrate) {
-        ;
-    }
-
-    public boolean enabled() {
-        return /*Configurations.featureEnabled(this) && */hasRequiredMod() && hasParentFeature();
-    }
-
-    private boolean hasParentFeature() {
-        return parent == null || parent.enabled();
-    }
-
-    private boolean hasRequiredMod() {
-        return getRequiredMod() == null || ModList.get().isLoaded(getRequiredMod());
-    }
-
-    private String getRequiredMod() {
-        return requiredMod;
-    }
+    
+    private final NonNullConsumer<ChiselBlockFactory> factory;
 }

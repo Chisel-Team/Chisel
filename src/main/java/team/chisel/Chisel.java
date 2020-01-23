@@ -99,7 +99,7 @@ public class Chisel implements Reference {
         ChiselItems.init();
         ChiselTileEntities.init();
         
-        Features.loadBlocks(registrate());
+        Features.init(registrate());
         ChiselLangKeys.init(registrate());
     }
     

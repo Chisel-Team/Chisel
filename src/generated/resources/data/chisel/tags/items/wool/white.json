@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:wool/white/legacy",
+    "chisel:wool/white/llama"
+  ]
+}

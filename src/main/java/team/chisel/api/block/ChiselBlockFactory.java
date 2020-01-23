@@ -19,6 +19,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.common.Reference;
+import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.ItemChiselBlock;
 
 /**
@@ -33,12 +34,12 @@ public class ChiselBlockFactory {
     public static ChiselBlockFactory newFactory(Registrate registrate) {
         return new ChiselBlockFactory(registrate);
     }
-
-    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass) {
-        return newType(material, blockName, creator, blockClass, BlockItem.class);
+    
+    public ChiselBlockBuilder<BlockCarvable> newType(Material material, String blockName) {
+        return newType(material, blockName, BlockCarvable::new, BlockCarvable.class);
     }
 
-    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass, Class<? extends BlockItem> itemBlockClass) {
+    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass) {
         return newType(material, blockName, new BlockProvider<T>() {
 
             @Override
