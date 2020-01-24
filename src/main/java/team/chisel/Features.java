@@ -15,6 +15,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import team.chisel.api.block.BlockProvider;
@@ -38,6 +39,10 @@ public class Features {
             .addBlock(Blocks.POLISHED_ANDESITE)
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE));
+    
+    public static final List<RegistryEntry<BlockCarvable>> ANTIBLOCK = FACTORY.newType(Material.ROCK, "antiblock", (p, v) -> new BlockCarvable(p, v, BlockRenderLayer.CUTOUT))
+            .variations(VariantTemplates.colors(ModelTemplates.twoLayerWithTop("antiblock")))
+            .build();
     
     public static final List<RegistryEntry<BlockCarvable>> BASALT = FACTORY.newType(Material.ROCK, "basalt")
             .variations(VariantTemplates.ROCK)

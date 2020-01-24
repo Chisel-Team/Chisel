@@ -24,17 +24,24 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Getter(onMethod = @__({@Override}))
     private final VariationData variation;
+    
+    private final BlockRenderLayer layer;
 
     private boolean dragonProof = false;
 
     public BlockCarvable(Block.Properties properties, VariationData variation) {
+        this(properties, variation, BlockRenderLayer.SOLID);
+    }
+    
+    public BlockCarvable(Block.Properties properties, VariationData variation, BlockRenderLayer layer) {
         super(properties);
+        this.layer = layer;
         this.variation = variation;
     }
 
     @Override
     public boolean canRenderInLayer(BlockState state, BlockRenderLayer layer) {
-        return super.canRenderInLayer(state, layer);
+        return layer == this.layer;
     }
 
     @Override

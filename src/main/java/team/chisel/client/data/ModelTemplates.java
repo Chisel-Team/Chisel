@@ -68,10 +68,19 @@ public class ModelTemplates {
     public static ModelTemplate ctm(String variant) {
         return (prov, block) -> {
             String name = "block/" + name(block);
-            String texName = name.replaceAll("\\w+$", variant);
+            String texName = replaceVariant(name, variant);
             prov.simpleBlock(block, prov.withExistingParent(name, prov.modLoc("cube_ctm"))
                     .texture("all", texName)
                     .texture("connected_tex", texName + "-ctm"));
+        };
+    }
+    
+    public static ModelTemplate twoLayerWithTop(String top) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            prov.simpleBlock(block, prov.withExistingParent(name, prov.modLoc("cube_2_layer"))
+                    .texture("bot", name)
+                    .texture("top", replaceVariant(name, top)));
         };
     }
 }

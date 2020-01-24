@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import team.chisel.Chisel;
 import team.chisel.api.block.ModelTemplate;
@@ -146,6 +147,20 @@ public class VariantTemplates {
                         throw new RuntimeException(e);
                     }
                 })
+                .collect(Collectors.toList()));
+    }
+    
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> COLORS = ImmutableList.copyOf(Arrays.stream(DyeColor.values())
+            .map(color -> simple(color.getName()))
+            .collect(Collectors.toList()));
+    
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> colors(ModelTemplate template) {
+        return ImmutableList.copyOf(COLORS.stream()
+                .map(SimpleTemplate::builderFrom)
+                .map(b -> b.modelTemplate(template))
+                .map(SimpleTemplate.SimpleTemplateBuilder::build)
                 .collect(Collectors.toList()));
     }
     

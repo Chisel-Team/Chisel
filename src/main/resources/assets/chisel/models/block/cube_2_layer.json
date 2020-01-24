@@ -1,6 +1,9 @@
 {
   "parent": "chisel:block/block_no_ao",
   "ambientocclusion": false,
+  "textures": {
+  	"particle": "#bot"
+  },
   "elements": [
     {
       "from": [  0,  0,  0 ],

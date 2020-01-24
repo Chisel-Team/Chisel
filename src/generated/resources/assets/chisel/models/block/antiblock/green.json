@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/cube_2_layer",
+  "textures": {
+    "bot": "chisel:block/antiblock/green",
+    "top": "chisel:block/antiblock/antiblock"
+  }
+}

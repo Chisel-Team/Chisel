@@ -36,20 +36,15 @@ public class ChiselBlockFactory {
     }
     
     public ChiselBlockBuilder<BlockCarvable> newType(Material material, String blockName) {
-        return newType(material, blockName, BlockCarvable::new, BlockCarvable.class);
+        return newType(material, blockName, BlockCarvable::new);
     }
 
-    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, BlockCreator<T> creator, Class<T> blockClass) {
+    public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, BlockCreator<T> creator) {
         return newType(material, blockName, new BlockProvider<T>() {
 
             @Override
             public T createBlock(Block.Properties properties, VariationData data) {
                 return creator.createBlock(properties, data);
-            }
-
-            @Override
-            public Class<T> getBlockClass() {
-                return blockClass;
             }
 
             @Override
