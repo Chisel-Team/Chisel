@@ -1,6 +1,7 @@
 package team.chisel.client.data;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -12,11 +13,14 @@ import com.tterrag.registrate.util.nullness.FieldsAreNonnullByDefault;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.item.Item;
+import team.chisel.Chisel;
 import team.chisel.api.block.ModelTemplate;
 import team.chisel.api.block.RecipeTemplate;
 import team.chisel.api.block.VariantTemplate;
+import team.chisel.common.block.BlockCarvable;
 
 @MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
@@ -45,6 +49,15 @@ public class VariantTemplates {
         @Override
         public Optional<RecipeTemplate> getRecipeTemplate() {
             return Optional.ofNullable(recipeTemplate);
+        }
+        
+        public static SimpleTemplateBuilder builderFrom(VariantTemplate from) {
+            return builder()
+                    .name(from.getName())
+                    .localizedName(from instanceof SimpleTemplate ? ((SimpleTemplate)from).localizedName : from.getLocalizedName())
+                    .modelTemplate(from.getModelTemplate())
+                    .recipeTemplate(from.getRecipeTemplate().orElse(null))
+                    .tooltip(from.getTooltip());
         }
     }
     
@@ -137,10 +150,23 @@ public class VariantTemplates {
     }
     
     public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
+    
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
     @SuppressWarnings("null")
     public static final ImmutableList<VariantTemplate> STONE = ImmutableList.<VariantTemplate>builder()
             .addAll(ROCK)
             .addAll(ofClass(Stone.class))
             .build();
+    
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> withUncraft(Collection<VariantTemplate> templates, Item item) {
+        return ImmutableList.copyOf(templates.stream()
+                .map(SimpleTemplate::builderFrom)
+                .map(b -> b.recipeTemplate((prov, block) -> new ShapelessRecipeBuilder(item, 9)
+                        .addIngredient(block, 9)
+                        .addCriterion("has_" + item.getRegistryName().getPath(), prov.hasItem(item))
+                        .build(prov, Chisel.MOD_ID + ":" + item.getRegistryName().getPath() + "_from_" + ((BlockCarvable)block).getVariation().getName())))
+                .map(SimpleTemplate.SimpleTemplateBuilder::build)
+                .collect(Collectors.toList()));
+    }
 }

@@ -68,6 +68,10 @@ public class Features {
 //      BlockSpeedHandler.speedupBlocks.add(b);
 //  });
     
+    public static final List<RegistryEntry<BlockCarvable>> COAL = FACTORY.newType(Material.ROCK, "coal")
+            .variations(/*VariantTemplates.withUncraft(*/VariantTemplates.ROCK/*, Items.COAL)*/) // TODO
+            .build(b -> b.hardnessAndResistance(5.0F, 10.0F).sound(SoundType.STONE));
+    
     public static final Map<DyeColor, List<RegistryEntry<BlockCarvable>>> WOOL = Arrays.stream(DyeColor.values())
             .collect(Collectors.toMap(Function.identity(), color -> FACTORY.newType(Material.WOOL, "wool/" + (color.getName()))
                     .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Wool")
