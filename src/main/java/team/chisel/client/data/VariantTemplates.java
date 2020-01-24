@@ -1,6 +1,7 @@
 package team.chisel.client.data;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -8,12 +9,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.google.common.collect.ImmutableList;
 import com.tterrag.registrate.util.nullness.FieldsAreNonnullByDefault;
 
-import lombok.EqualsAndHashCode;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
-import lombok.experimental.NonFinal;
 import mcp.MethodsReturnNonnullByDefault;
 import team.chisel.api.block.ModelTemplate;
+import team.chisel.api.block.RecipeTemplate;
 import team.chisel.api.block.VariantTemplate;
 
 @MethodsReturnNonnullByDefault
@@ -21,26 +23,28 @@ import team.chisel.api.block.VariantTemplate;
 @ParametersAreNonnullByDefault
 public class VariantTemplates {
     
-    @Value
-    @Getter(onMethod = @__({@Override}))
-    @NonFinal
+    @MethodsReturnNonnullByDefault
+    @RequiredArgsConstructor
+    @Builder
     private static class SimpleTemplate implements VariantTemplate {
         
-        String name;
-        ModelTemplate modelTemplate;
-        String[] tooltip;
-    }
-    
-    @Value
-    @EqualsAndHashCode(callSuper = true)
-    @Getter(onMethod = @__({@Override}))
-    private static class LocalizedTemplate extends SimpleTemplate {
+        @Getter(onMethod = @__({@Override}))
+        private final String name;
+        private final String localizedName;
+        @Getter(onMethod = @__({@Override}))
+        private final ModelTemplate modelTemplate;
+        private final RecipeTemplate recipeTemplate;
+        @Getter(onMethod = @__({@Override}))
+        private final String[] tooltip;
         
-        String localizedName;
-
-        public LocalizedTemplate(String name, String localizedName, ModelTemplate modelTemplate, String[] tooltip) {
-            super(name, modelTemplate, tooltip);
-            this.localizedName = localizedName;
+        @Override
+        public String getLocalizedName() {
+            return localizedName == null ? VariantTemplate.super.getLocalizedName() : localizedName;
+        }
+        
+        @Override
+        public Optional<RecipeTemplate> getRecipeTemplate() {
+            return Optional.ofNullable(recipeTemplate);
         }
     }
     
@@ -49,7 +53,7 @@ public class VariantTemplates {
     }
     
     public static VariantTemplate simple(String name, ModelTemplate template, String... tooltip) {
-        return new SimpleTemplate(name, template, tooltip);
+        return SimpleTemplate.builder().name(name).modelTemplate(template).tooltip(tooltip).build();
     }
     
     public static VariantTemplate withName(String name, String localizedName, String... tooltip) {
@@ -57,7 +61,7 @@ public class VariantTemplates {
     }
     
     public static VariantTemplate withName(String name, String localizedName, ModelTemplate template, String... tooltip) {
-        return new LocalizedTemplate(name, localizedName, template, tooltip);
+        return SimpleTemplate.builder().name(name).localizedName(localizedName).modelTemplate(template).tooltip(tooltip).build();
     }
     
     @FieldsAreNonnullByDefault

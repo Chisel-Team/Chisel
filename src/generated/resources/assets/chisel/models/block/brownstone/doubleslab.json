@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "chisel:block/brownstone/doubleslab-side",
+    "end": "chisel:block/brownstone/block"
+  }
+}

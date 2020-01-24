@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
@@ -23,6 +23,7 @@ import com.tterrag.registrate.util.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
 
+import lombok.AccessLevel;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import net.minecraft.block.Block;
@@ -32,7 +33,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
-import team.chisel.Chisel;
+import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.common.init.ChiselTabs;
@@ -59,6 +60,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private BlockProvider<T> provider;
 
     private @Nullable Tag<Block> group;
+    
+    @Setter(AccessLevel.NONE)
+    private Set<ResourceLocation> otherBlocks = new HashSet<>();
     
     private String groupName;
 
@@ -91,7 +95,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     public ChiselBlockBuilder<T> variation(VariantTemplate template) {
         return variation(template.getName())
                 .localizedName(template.getLocalizedName())
-                .template(template.getModelTemplate())
+                .model(template.getModelTemplate())
+                .recipe(template.getRecipeTemplate().orElse(RecipeTemplate.none()))
                 .tooltip(template.getTooltip())
                 .buildVariation();
     }
@@ -103,6 +108,15 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         }
         return ret;
     }
+    
+    public ChiselBlockBuilder<T> addBlock(Block block) {
+        return addBlock(block.getRegistryName());
+    }
+
+    public ChiselBlockBuilder<T> addBlock(ResourceLocation block) {
+        this.otherBlocks.add(block);
+        return this;
+    }
 
     private static final NonNullUnaryOperator<Block.Properties> NO_ACTION = NonNullUnaryOperator.identity();
 
@@ -112,7 +126,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings({ "unchecked", "null" })
-    public RegistryEntry<T>[] build() {
+    public List<RegistryEntry<T>> build() {
         return build(NO_ACTION);
     }
 
@@ -125,7 +139,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings({ "unchecked", "null" })
-    public RegistryEntry<T>[] build(NonNullUnaryOperator<Block.Properties> after) {
+    public List<RegistryEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
         }
@@ -137,6 +151,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         for (int i = 0; i < ret.length; i++) {
             if (Strings.emptyToNull(data[i].getName()) != null) {
                 final VariationData var = data[i];
+                final VariationBuilder<T> builder = variations.get(i);
                 ret[i] = registrate.object(blockName + "/" + var.getName())
                         .block(material, p -> provider.createBlock(p, var))
                         .properties(p -> p.hardnessAndResistance(1))
@@ -144,6 +159,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .properties(after)
                         .blockstate((ctx, prov) -> var.getTemplate().accept(prov, ctx.getEntry()))
                         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
+                        .recipe((ctx, prov) -> builder.recipe.accept(prov, ctx.getEntry()))
                         .item(provider::createBlockItem)
                             // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
                             .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
@@ -155,8 +171,18 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         }
         if (this.group != null) {
             CarvingUtils.getChiselRegistry().addGroup(CarvingUtils.itemGroup(this.group, this.groupName));
+            if (!otherBlocks.isEmpty()) {
+                registrate.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.getBuilder(this.group)
+                        .add(otherBlocks.stream()
+                                .map(ForgeRegistries.BLOCKS::getValue)
+                                .toArray(Block[]::new)));
+                registrate.addDataGenerator(ProviderType.ITEM_TAGS, prov -> prov.getBuilder(parent.getItemTag(this.group.getId()))
+                        .add(otherBlocks.stream()
+                                .map(ForgeRegistries.ITEMS::getValue)
+                                .toArray(Item[]::new)));
+            }
         }
-        return ret;
+        return Arrays.asList(ret);
     }
     
     private <B extends Block, P> BlockBuilder<B, P> addTag(BlockBuilder<B, P> builder) {
@@ -198,7 +224,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         
         @Setter
         @Accessors(fluent = true)
-        private ModelTemplate template = ModelTemplates.simpleBlock();
+        private ModelTemplate model = ModelTemplates.simpleBlock();
+        
+        @Setter
+        @Accessors(fluent = true)
+        private RecipeTemplate recipe = RecipeTemplate.none();
         
         private String[] tooltip = new String[0];
 
@@ -228,11 +258,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return buildVariation().variation(name, group);
         }
 
-        public RegistryEntry<T>[] build() {
+        public List<RegistryEntry<T>> build() {
             return buildVariation().build();
         }
         
-        public RegistryEntry<T>[] build(NonNullUnaryOperator<Block.Properties> after) {
+        public List<RegistryEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
             return buildVariation().build(after);
         }
 
@@ -249,7 +279,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                     parent.registrate.addRawLang(component.getKey() + ".desc." + (j + 1), tooltip[j]);
                 }
             }
-            return new VariationData(name, COMPONENTS.get(name), group == null ? null : group.getId(), index, opaque, template);
+            return new VariationData(name, COMPONENTS.get(name), group == null ? null : group.getId(), index, opaque, model);
         }
     }
 }

@@ -1,5 +1,7 @@
 package team.chisel.client.data;
 
+import java.util.function.Function;
+
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
@@ -29,17 +31,37 @@ public class ModelTemplates {
         prov.simpleBlock(block, prov.cubeAll("block/" + name(block), prov.modLoc("block/" + name(block))));
     }
     
+    private static String replaceVariant(String name, String newVariant) {
+        return name.replaceAll("\\w+$", newVariant);
+    }
+    
     public static ModelTemplate cubeBottomTop() {
+        return cubeBottomTop(name -> name + "-side", name -> name + "-bottom", name -> name + "-top");
+    }
+
+    public static ModelTemplate cubeBottomTop(String side, String bottom, String top) {
+        return cubeBottomTop(name -> replaceVariant(name, side), name -> replaceVariant(name, bottom), name -> replaceVariant(name, top));
+    }
+    
+    private static ModelTemplate cubeBottomTop(Function<String, String> side, Function<String, String> bottom, Function<String, String> top) {
         return (prov, block) -> {
             String name = "block/" + name(block);
-            prov.simpleBlock(block, prov.cubeBottomTop(name, prov.modLoc(name + "-side"), prov.modLoc(name + "-bottom"), prov.modLoc(name + "-top")));
+            prov.simpleBlock(block, prov.cubeBottomTop(name, prov.modLoc(side.apply(name)), prov.modLoc(bottom.apply(name)), prov.modLoc(top.apply(name))));
         };
     }
     
     public static ModelTemplate cubeColumn() {
+        return cubeColumn(name -> name + "-side", name -> name + "-top");
+    }
+    
+    public static ModelTemplate cubeColumn(String side, String top) {
+        return cubeColumn(name -> replaceVariant(name, side), name -> replaceVariant(name, top));
+    }
+    
+    private static ModelTemplate cubeColumn(Function<String, String> side, Function<String, String> top) {
         return (prov, block) -> {
             String name = "block/" + name(block);
-            prov.simpleBlock(block, prov.cubeColumn(name, prov.modLoc(name + "-side"), prov.modLoc(name + "-top")));
+            prov.simpleBlock(block, prov.cubeColumn(name, prov.modLoc(side.apply(name)), prov.modLoc(top.apply(name))));
         };
     }
     

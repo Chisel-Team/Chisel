@@ -34,6 +34,8 @@
     "chisel:andesite/prism",
     "chisel:andesite/raw",
     "chisel:andesite/chaotic_bricks",
-    "chisel:andesite/cuts"
+    "chisel:andesite/cuts",
+    "minecraft:andesite",
+    "minecraft:polished_andesite"
   ]
 }
