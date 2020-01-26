@@ -17,6 +17,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.TranslationTextComponent;
 import team.chisel.Chisel;
+import team.chisel.common.init.ChiselSounds;
 
 @ParametersAreNonnullByDefault
 public class CarvingUtils {
@@ -76,7 +77,7 @@ public class CarvingUtils {
 	    
 	    private final ResourceLocation id;
 
-	    private final SoundEvent sound = null;
+	    private final SoundEvent sound = ChiselSounds.fallback;
 	    
 	    private final TranslationTextComponent displayName;
 	    

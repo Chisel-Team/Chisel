@@ -65,6 +65,6 @@ public class BlockCarvable extends Block implements ICarvable {
     
     @Override
     public String getTranslationKey() {
-        return CarvingUtils.getChiselRegistry().getGroup(variation.getGroup()).orElseThrow(IllegalStateException::new).getTranslationKey();
+        return variation.getGroup().getTranslationKey();
     }
 }

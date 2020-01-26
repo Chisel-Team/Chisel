@@ -39,6 +39,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
+import team.chisel.api.block.ICarvable;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
@@ -70,7 +71,7 @@ public class ChiselController {
                 return;
             }
             
-            ICarvingGroup blockGroup = registry.getGroup(state.getBlock()).orElse(null);
+            ICarvingGroup blockGroup = state.getBlock() instanceof ICarvable ? ((ICarvable)state.getBlock()).getVariation().getGroup() : registry.getGroup(state.getBlock()).orElse(null);
             if (blockGroup == null) {
                 return;
             }
