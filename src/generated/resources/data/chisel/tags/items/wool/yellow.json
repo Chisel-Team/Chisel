@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "chisel:wool/yellow/legacy",
-    "chisel:wool/yellow/llama"
+    "chisel:wool/yellow/llama",
+    "minecraft:yellow_wool"
   ]
 }

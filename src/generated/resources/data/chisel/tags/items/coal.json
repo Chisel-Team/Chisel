@@ -34,6 +34,7 @@
     "chisel:coal/prism",
     "chisel:coal/raw",
     "chisel:coal/chaotic_bricks",
-    "chisel:coal/cuts"
+    "chisel:coal/cuts",
+    "minecraft:coal_block"
   ]
 }

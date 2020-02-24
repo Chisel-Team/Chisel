@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "chisel:wool/magenta/legacy",
-    "chisel:wool/magenta/llama"
+    "chisel:wool/magenta/llama",
+    "minecraft:magenta_wool"
   ]
 }

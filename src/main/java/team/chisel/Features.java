@@ -16,13 +16,12 @@ import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
-import team.chisel.api.block.BlockProvider;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
-import team.chisel.client.handler.BlockSpeedHandler;
 import team.chisel.common.block.BlockCarvable;
 
 public class Features {
@@ -74,11 +73,13 @@ public class Features {
 //  });
     
     public static final List<RegistryEntry<BlockCarvable>> COAL = FACTORY.newType(Material.ROCK, "coal")
+            .addBlock(Blocks.COAL_BLOCK)
             .variations(/*VariantTemplates.withUncraft(*/VariantTemplates.ROCK/*, Items.COAL)*/) // TODO
             .build(b -> b.hardnessAndResistance(5.0F, 10.0F).sound(SoundType.STONE));
     
     public static final Map<DyeColor, List<RegistryEntry<BlockCarvable>>> WOOL = Arrays.stream(DyeColor.values())
             .collect(Collectors.toMap(Function.identity(), color -> FACTORY.newType(Material.WOOL, "wool/" + (color.getName()))
+                    .addBlock(new ResourceLocation(color.getName() + "_wool"))
                     .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Wool")
                     .variation("legacy")
                     .next("llama")
