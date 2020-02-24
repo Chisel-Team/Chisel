@@ -146,7 +146,7 @@ shadowJar {
 }
 
 lombok {
-    version = "1.18.10"
+    version = "1.18.12"
 }
 
 // Add external annotations
