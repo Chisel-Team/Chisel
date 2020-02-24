@@ -1,6 +1,7 @@
 package team.chisel.common.carving;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import net.minecraftforge.resource.ISelectiveResourceReloadListener;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IVariationRegistry;
+import team.chisel.common.util.ItemSorter;
 
 @ParametersAreNonnullByDefault
 public class CarvingVariationRegistry implements IVariationRegistry {
@@ -110,6 +112,7 @@ public class CarvingVariationRegistry implements IVariationRegistry {
     private List<ItemStack> getItemsForChiseling(ICarvingGroup group) {
         return group.getItemTag().getAllElements().stream()
                 .map(ItemStack::new)
+                .sorted(Comparator.comparing(ItemStack::getItem, ItemSorter.variantOrder()))
                 .collect(Collectors.toList());
     }
 
