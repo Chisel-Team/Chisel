@@ -417,7 +417,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
 
                     ServerPlayerEntity player = FakePlayerFactory.getMinecraft((ServerWorld) getWorld());
                     player.inventory.mainInventory.set(player.inventory.currentItem, chisel);
-                    res = chiselitem.craftItem(chisel, source, res, player, $ -> {}); // FIXME
+                    res = chiselitem.craftItem(chisel, source, res, player, $ -> {}); // TODO should this send an explicit packet for item break? currently just checks for empty stack on the client
                     player.inventory.mainInventory.set(player.inventory.currentItem, ItemStack.EMPTY);
 
                     chiselitem.onChisel(getWorld(), player, chisel, v);
