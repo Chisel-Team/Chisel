@@ -1,19 +1,19 @@
 package team.chisel.client.gui;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import com.google.common.base.Optional;
 import com.mojang.blaze3d.platform.GlStateManager;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.client.renderer.BlockRendererDispatcher;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.Fluids;
@@ -21,22 +21,14 @@ import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
-import org.apache.commons.lang3.ArrayUtils;
-import org.lwjgl.opengl.GL11;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.common.inventory.ContainerChiselHitech;
-import team.chisel.common.inventory.InventoryChiselSelection;
 import team.chisel.common.util.NBTUtil;
-
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.io.IOException;
 
 @ParametersAreNonnullByDefault
 public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
@@ -77,24 +69,22 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             super(x, y, 16, 16, "", /* TODO IPressable */ null);
         }
 
-        
-        //TODO @Override
-        public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTick) {
+        @Override
+        public void renderButton(int mouseX, int mouseY, float partialTick) {
             this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
-            mc.getTextureManager().bindTexture(TEXTURE);
+            GuiHitechChisel.this.getMinecraft().getTextureManager().bindTexture(TEXTURE);
             float a = isMouseOver(mouseX, mouseY) ? 1 : 0.2f;
             int u = rotate ? 0 : 16;
             int v = 238;
 
-            // TODO
-            //GlStateManager.color(1, 1, 1, a);
-            //GlStateManager.enableBlend();
-            //GlStateManager.enableDepth();
-            //zLevel = 1000;
-            //drawTexturedModalRect(this.x, this.y, u, v, 16, 16);
-            //zLevel = 0;
-            //GlStateManager.color(1, 1, 1, 1);
+            GlStateManager.color4f(1, 1, 1, a);
+            GlStateManager.enableBlend();
+            GlStateManager.enableDepthTest();
+            this.blitOffset = 1000;
+            blit(this.x, this.y, u, v, 16, 16);
+            this.blitOffset = 0;
+            GlStateManager.color4f(1, 1, 1, 1);
         }
 
         @Override

@@ -33,12 +33,12 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
@@ -109,7 +109,7 @@ public class ItemOffsetTool extends Item {
                 OffsetData data = cd.getDataForChunk(world.getDimension().getType(), world.getChunk(context.getPos()).getPos());
                 Vec3d hitVec = context.getHitVec();
                 data.move(getMoveDir(context.getFace(), hitVec));
-                PerChunkData.INSTANCE.chunkModified(world.getChunk(context.getPos()), DATA_KEY);
+                PerChunkData.INSTANCE.chunkModified((Chunk) world.getChunk(context.getPos()), DATA_KEY);
             }
         }
         return super.onItemUse(context);

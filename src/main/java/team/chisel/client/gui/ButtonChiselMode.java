@@ -9,7 +9,7 @@ import net.minecraft.client.gui.widget.button.Button;
 import team.chisel.api.carving.IChiselMode;
 
 public class ButtonChiselMode extends Button {
-
+    
     @Getter
     @Nonnull
     private final IChiselMode mode;
@@ -24,6 +24,6 @@ public class ButtonChiselMode extends Button {
         super.renderBg(mc, mouseX, mouseY);
         mc.getTextureManager().bindTexture(mode.getSpriteSheet());
         Point2i uv = mode.getSpritePos();
-        blit(x + 4, y + 4, uv.x, uv.y, 24, 24, 12, 12, 256, 256);
+        blit(x + 4, y + 4, 12, 12, uv.x, uv.y, 24, 24, 256, 256);
     }
 }

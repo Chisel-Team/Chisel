@@ -15,6 +15,7 @@ import com.google.common.collect.Maps;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.PacketBuffer;
@@ -28,6 +29,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraftforge.fml.network.PacketDistributor;
+import team.chisel.Chisel;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.api.chunkdata.IChunkData;
 import team.chisel.api.chunkdata.IChunkDataRegistry;
@@ -221,8 +224,11 @@ public enum PerChunkData implements IChunkDataRegistry {
     public void onChunkLoad(ChunkDataEvent.Load event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
             CompoundNBT tag = event.getData().getCompound("chisel:" + e.getKey());
-            e.getValue().readFromNBT(event.getChunk(), tag);
-            updateClient(event.getChunk(), e.getKey(), e.getValue());
+            IChunk chunk = event.getChunk();
+            e.getValue().readFromNBT(chunk, tag);
+            if (chunk instanceof Chunk) {
+                updateClient((Chunk) chunk, e.getKey(), e.getValue());
+            }
         }
     }
     
@@ -230,23 +236,22 @@ public enum PerChunkData implements IChunkDataRegistry {
     public void onPlayerJoin(PlayerLoggedInEvent event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
             if (e.getValue().requiresClientSync()) {
-//                TODO 1.14 Chisel.network.sendTo(new MessageChunkData(e.getKey(), e.getValue()), (PlayerEntityMP) event.player);
+                Chisel.network.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()), new MessageChunkData(e.getKey(), e.getValue()));
             }
         }
     }
 
-    public void chunkModified(IChunk chunk, String key) {
+    public void chunkModified(Chunk chunk, String key) {
         IChunkData<?> cd = data.get(key);
         chunk.setModified(true);
         updateClient(chunk, key, cd);
     }
     
-    private void updateClient(@Nonnull IChunk chunk, String key, IChunkData<?> cd) {
+    private void updateClient(@Nonnull Chunk chunk, String key, IChunkData<?> cd) {
         if (cd.requiresClientSync()) {
             CompoundNBT tag = new CompoundNBT();
             cd.writeToNBT(chunk, tag);
-            // TODO 1.14 target players tracking chunk
-//            entry.sendPacket(Chisel.network.getPacketFrom(new MessageChunkData(chunk, key, tag)));
+            Chisel.network.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), new MessageChunkData(chunk, key, tag));
         }
     }
 }

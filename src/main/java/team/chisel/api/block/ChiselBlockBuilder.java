@@ -129,7 +129,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings({ "unchecked", "null" })
-    public List<RegistryEntry<T>> build() {
+    public Map<String, RegistryEntry<T>> build() {
         return build(NO_ACTION);
     }
 
@@ -142,7 +142,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings({ "unchecked", "null" })
-    public List<RegistryEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
+    public Map<String, RegistryEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
         }
@@ -150,15 +150,15 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         for (int i = 0; i < variations.size(); i++) {
             data[i] = variations.get(i).doBuild();
         }
-        RegistryEntry<T>[] ret = (RegistryEntry<T>[]) new RegistryEntry[data.length];
+        Map<String, RegistryEntry<T>> ret = new HashMap<>(data.length);
         ICarvingGroup group = CarvingUtils.itemGroup(this.group, this.groupName);
-        for (int i = 0; i < ret.length; i++) {
+        for (int i = 0; i < data.length; i++) {
             if (Strings.emptyToNull(data[i].getName()) != null) {
                 final int index = i;
                 final Variation var = data[index];
                 final VariationBuilder<T> builder = variations.get(index);
-                ret[i] = registrate.object(blockName + "/" + var.getName())
-                        .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret[index], var.getName(), var.getDisplayName(), group)))
+                ret.put(var.getName(), registrate.object(blockName + "/" + var.getName())
+                        .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret.get(var.getName()), var.getName(), var.getDisplayName(), group)))
                         .properties(p -> p.hardnessAndResistance(1))
                         .transform(this::addTag)
                         .properties(after)
@@ -171,7 +171,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                             .properties(p -> p.group(ChiselTabs.tab))
                             .transform(this::addTag)
                             .build()
-                        .register();
+                        .register());
             }
         }
         if (this.group != null) {
@@ -187,7 +187,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                                 .toArray(Item[]::new)));
             }
         }
-        return Arrays.asList(ret);
+        return ret;
     }
     
     private <B extends Block, P> BlockBuilder<B, P> addTag(BlockBuilder<B, P> builder) {
@@ -255,11 +255,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return buildVariation().variation(name, group);
         }
 
-        public List<RegistryEntry<T>> build() {
+        public Map<String, RegistryEntry<T>> build() {
             return buildVariation().build();
         }
         
-        public List<RegistryEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
+        public Map<String, RegistryEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
             return buildVariation().build(after);
         }
 

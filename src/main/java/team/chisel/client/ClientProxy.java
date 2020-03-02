@@ -18,14 +18,11 @@ public class ClientProxy {
 
     @SubscribeEvent
     public static void registerModels(ModelRegistryEvent event) {
-        // TODO but why should we have optional registration
-        // if (Features.AUTOCHISEL.enabled()) {
-            ClientRegistry.bindTileEntitySpecialRenderer(TileAutoChisel.class, new RenderAutoChisel());
-        //}
+        ClientRegistry.bindTileEntitySpecialRenderer(TileAutoChisel.class, new RenderAutoChisel());
 
-//        MinecraftForge.EVENT_BUS.register(new DebugHandler());
+// TODO       MinecraftForge.EVENT_BUS.register(new DebugHandler());
 
-//        OffsetProviderRegistry.INSTANCE.registerProvider((world, pos) -> ChunkData.getOffsetForChunk(world, pos).getOffset());        
+// TODO       OffsetProviderRegistry.INSTANCE.registerProvider((world, pos) -> ChunkData.getOffsetForChunk(world, pos).getOffset());        
     }
 
     public static World getClientWorld() {

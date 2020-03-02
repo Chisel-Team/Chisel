@@ -15,6 +15,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselGuiType.ChiselGuiType;
+import team.chisel.common.item.ChiselMode;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.item.ItemOffsetTool;
@@ -28,7 +29,10 @@ public class ChiselItems {
     public static final Map<ChiselType, RegistryEntry<ItemChisel>> CHISELS = Arrays.stream(ChiselType.values())
             .collect(Collectors.toMap(Function.identity(), ChiselItems::chisel));
     
-    static { ChiselGuiType.values(); } // Init container types
+    static {
+        ChiselGuiType.values(); // Init container types
+        ChiselMode.values(); // Init mode translations
+    }
     
     public static final RegistryEntry<ItemOffsetTool> offsettool = REGISTRATE.item("offset_tool", ItemOffsetTool::new)
             .properties(p -> p.group(ChiselTabs.tab))

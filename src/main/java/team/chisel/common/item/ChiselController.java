@@ -30,6 +30,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -106,6 +107,7 @@ public class ChiselController {
     }
 
     private static void setAll(Iterable<? extends BlockPos> candidates, PlayerEntity player, BlockState origState, ICarvingVariation v) {
+        if (!checkHackyCache(player)) return;
         for (BlockPos pos : candidates) {
             setVariation(player, pos, origState, v);
         }
@@ -121,6 +123,17 @@ public class ChiselController {
                 }
             });
     
+    private static boolean checkHackyCache(PlayerEntity player) {
+        long time = player.getEntityWorld().getGameTime();
+        // TODO this is a hack (duh) and it prevents rapid clicking, but it fixes the block changing twice for every click
+        // Until the left click event is improved in forge, not much else we can do
+        if (HACKY_CACHE.getUnchecked(player) > time - 2) {
+            return false; // Avoid double actions
+        }
+        HACKY_CACHE.put(player, time);
+        return true;
+    }
+    
     /**
      * Assumes that the player is holding a chisel
      */
@@ -130,13 +143,6 @@ public class ChiselController {
         
         World world = player.world;
         
-        long time = world.getGameTime();
-        // TODO this is a hack (duh) and it prevents rapid clicking, but it fixes the block changing twice for every click
-        // Until the left click event is improved in forge, not much else we can do
-        if (HACKY_CACHE.getUnchecked(player) > time - 5) {
-            return; // Avoid double actions
-        }
-        HACKY_CACHE.put(player, time);
         BlockState curState = world.getBlockState(pos);
         ItemStack held = player.getHeldItemMainhand();
         if (curState.getBlock() == v.getBlock()) {
@@ -161,7 +167,7 @@ public class ChiselController {
             }
             if (world.isRemote) {
                 SoundUtil.playSound(player, held, targetBlock);
-                world.playEvent(player, 2001, pos, Block.getStateId(origState));
+                world.playEvent(player, Constants.WorldEvents.BREAK_BLOCK_EFFECTS, pos, Block.getStateId(origState));
             }
             world.setBlockState(pos, targetBlock.getDefaultState());
         }
@@ -286,24 +292,13 @@ public class ChiselController {
     }
 
     private static void damageItem(ItemStack stack, PlayerEntity player) {
-        stack.damageItem(1, player, $ -> {}); // TODO 1.14
+        stack.damageItem(1, player, p -> p.sendBreakAnimation(Hand.MAIN_HAND));
         if (stack.getCount() <= 0) {
             player.setHeldItem(Hand.MAIN_HAND, ItemStack.EMPTY);
             ForgeEventFactory.onPlayerDestroyItem(player, stack, Hand.MAIN_HAND);
         }
     }
-    
-    private static void updateState(World world, BlockPos pos, ItemStack stack, PlayerEntity player, BlockState next) {
-        BlockState current = world.getBlockState(pos);
-        if (current != next) {
-            world.setBlockState(pos, next);
-            SoundUtil.playSound(player, stack, next.getBlock());
-            if (world.isRemote) {
-//                ClientUtil.addDestroyEffects(world, pos, next); TODO 1.14
-            }
-        }
-    }
-    
+
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         ItemStack stack = event.getPlayer().getHeldItemMainhand();

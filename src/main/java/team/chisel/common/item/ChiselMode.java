@@ -8,12 +8,15 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import javax.annotation.Nullable;
 import javax.vecmath.Point2i;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.Sets;
+import com.tterrag.registrate.providers.RegistrateLangProvider;
 
+import lombok.Getter;
 import lombok.Value;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -25,14 +28,16 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 
 @SuppressWarnings("null")
 public enum ChiselMode implements IChiselMode {
 
-    SINGLE {
+    SINGLE("Chisel a single block.") {
 
         @Override
         public Iterable<BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
@@ -44,7 +49,7 @@ public enum ChiselMode implements IChiselMode {
             return new AxisAlignedBB(0, 0, 0, 1, 1, 1);
         }
     },
-    PANEL {
+    PANEL("Chisel a 3x3 square of blocks.") {
 
         private final BlockPos ONE = new BlockPos(1, 1, 1);
         private final BlockPos NEG_ONE = new BlockPos(-1, -1, -1);
@@ -71,7 +76,7 @@ public enum ChiselMode implements IChiselMode {
             }
         }
     },
-    COLUMN {
+    COLUMN("Chisel a 3x1 column of blocks.") {
 
         @Override
         public Iterable<BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
@@ -101,7 +106,7 @@ public enum ChiselMode implements IChiselMode {
             return ArrayUtils.add(super.getCacheState(origin, side), Minecraft.getInstance().player.getHorizontalFacing().ordinal());
         }
     },
-    ROW {
+    ROW("Chisel a 1x3 row of blocks.") {
 
         @Override
         public Iterable<BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
@@ -135,8 +140,7 @@ public enum ChiselMode implements IChiselMode {
             return COLUMN.getCacheState(origin, side);
         }
     }, 
-    CONTIGUOUS {
-
+    CONTIGUOUS("Chisel an area of alike blocks, extending 10 blocks in any direction.") {
         
         @Override
         public Iterable<? extends BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
@@ -149,8 +153,7 @@ public enum ChiselMode implements IChiselMode {
             return new AxisAlignedBB(-r - 1, -r - 1, -r - 1, r + 2, r + 2, r + 2);
         }
     },
-    CONTIGUOUS_2D {
-        
+    CONTIGUOUS_2D("Contiguous (2D)", "Chisel an area of alike blocks, extending 10 blocks along the plane of the current side.") {
         
         @Override
         public Iterable<? extends BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side) {
@@ -216,6 +219,20 @@ public enum ChiselMode implements IChiselMode {
                 return ret.getPos();
             }
         };
+    }
+    
+    @Getter(onMethod = @__({@Override}))
+    private final TranslationTextComponent localizedName;
+    @Getter(onMethod = @__({@Override}))
+    private final TranslationTextComponent localizedDescription;
+    
+    private ChiselMode(String desc) {
+        this(null, desc);
+    }
+    
+    private ChiselMode(@Nullable String name, String desc) {
+        this.localizedName = Chisel.registrate().addRawLang(getUnlocName(), name == null ? RegistrateLangProvider.toEnglishName(name()) : name);
+        this.localizedDescription = Chisel.registrate().addRawLang(getUnlocDescription(), desc);
     }
     
     private static Iterable<BlockPos> filteredIterable(Stream<BlockPos> source, World world, BlockState state) {
