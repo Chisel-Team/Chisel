@@ -113,7 +113,7 @@ public class ItemChisel extends Item implements IChiselItem {
 
     @Override
     public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damageItem(1, attacker, $ -> {}); // TODO 1.14
+        stack.damageItem(1, attacker, p -> p.sendBreakAnimation(Hand.MAIN_HAND));
         return super.hitEntity(stack, attacker, target);
     }
     

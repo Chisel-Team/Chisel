@@ -4,10 +4,12 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
@@ -48,7 +50,7 @@ public class SlotChiselSelection extends Slot {
             if (!item.canChisel(player.world, player, chisel, variation)) {
                 return res;
             }
-            res = item.craftItem(chisel, crafted, itemstack, player, $ -> {}); // TODO 1.14
+            res = item.craftItem(chisel, crafted, itemstack, player, p -> p.sendBreakAnimation(container.getHand() == Hand.MAIN_HAND ? EquipmentSlotType.MAINHAND : EquipmentSlotType.OFFHAND));
             if (!simulate) {
                 container.getInventoryChisel().setStackInSpecialSlot(crafted.getCount() == 0 ? ItemStack.EMPTY : crafted);
                 container.onChiselSlotChanged();

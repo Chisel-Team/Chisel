@@ -5,12 +5,15 @@ import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.base.Preconditions;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -18,9 +21,7 @@ import net.minecraft.entity.item.HangingEntity;
 import net.minecraft.entity.item.PaintingEntity;
 import net.minecraft.entity.item.PaintingType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.Direction;
@@ -28,8 +29,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -45,8 +46,6 @@ import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.api.carving.IVariationRegistry;
-import team.chisel.common.init.ChiselItems;
-import team.chisel.common.inventory.ChiselContainer;
 import team.chisel.common.util.NBTUtil;
 import team.chisel.common.util.SoundUtil;
 
@@ -108,10 +107,33 @@ public class ChiselController {
     }
 
     private static void setAll(Iterable<? extends BlockPos> candidates, PlayerEntity player, BlockState origState, ICarvingVariation v) {
+        if (!checkHackyCache(player)) return;
         for (BlockPos pos : candidates) {
             setVariation(player, pos, origState, v);
         }
     }
+    
+    private static final LoadingCache<PlayerEntity, Long> HACKY_CACHE = CacheBuilder.newBuilder()
+            .expireAfterWrite(1, TimeUnit.SECONDS)
+            .weakKeys()
+            .build(new CacheLoader<PlayerEntity, Long>() {
+                
+                public Long load(PlayerEntity key) throws Exception {
+                    return 0L;
+                }
+            });
+    
+    private static boolean checkHackyCache(PlayerEntity player) {
+        long time = player.getEntityWorld().getGameTime();
+        // TODO this is a hack (duh) and it prevents rapid clicking, but it fixes the block changing twice for every click
+        // Until the left click event is improved in forge, not much else we can do
+        if (HACKY_CACHE.getUnchecked(player) > time - 2) {
+            return false; // Avoid double actions
+        }
+        HACKY_CACHE.put(player, time);
+        return true;
+    }
+    
     /**
      * Assumes that the player is holding a chisel
      */
@@ -120,6 +142,7 @@ public class ChiselController {
         Preconditions.checkNotNull(targetBlock, "Variation state cannot be null!");
         
         World world = player.world;
+        
         BlockState curState = world.getBlockState(pos);
         ItemStack held = player.getHeldItemMainhand();
         if (curState.getBlock() == v.getBlock()) {
@@ -136,7 +159,7 @@ public class ChiselController {
             current.setCount(1);
             ItemStack target = new ItemStack(v.getItem());
             target.setCount(1);
-            chisel.craftItem(held, current, target, player, $ -> {}); // TODO 1.14
+            chisel.craftItem(held, current, target, player, p -> p.sendBreakAnimation(EquipmentSlotType.MAINHAND));
             chisel.onChisel(player.world, player, held, v);
             if (held.getCount() <= 0) {
                 ItemStack targetStack = NBTUtil.getChiselTarget(held);
@@ -144,7 +167,7 @@ public class ChiselController {
             }
             if (world.isRemote) {
                 SoundUtil.playSound(player, held, targetBlock);
-//                ClientUtil.addDestroyEffects(world, pos, curState); TODO 1.14
+                world.playEvent(player, Constants.WorldEvents.BREAK_BLOCK_EFFECTS, pos, Block.getStateId(origState));
             }
             world.setBlockState(pos, targetBlock.getDefaultState());
         }
@@ -269,24 +292,13 @@ public class ChiselController {
     }
 
     private static void damageItem(ItemStack stack, PlayerEntity player) {
-        stack.damageItem(1, player, $ -> {}); // TODO 1.14
+        stack.damageItem(1, player, p -> p.sendBreakAnimation(Hand.MAIN_HAND));
         if (stack.getCount() <= 0) {
             player.setHeldItem(Hand.MAIN_HAND, ItemStack.EMPTY);
             ForgeEventFactory.onPlayerDestroyItem(player, stack, Hand.MAIN_HAND);
         }
     }
-    
-    private static void updateState(World world, BlockPos pos, ItemStack stack, PlayerEntity player, BlockState next) {
-        BlockState current = world.getBlockState(pos);
-        if (current != next) {
-            world.setBlockState(pos, next);
-            SoundUtil.playSound(player, stack, next.getBlock());
-            if (world.isRemote) {
-//                ClientUtil.addDestroyEffects(world, pos, next); TODO 1.14
-            }
-        }
-    }
-    
+
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         ItemStack stack = event.getPlayer().getHeldItemMainhand();

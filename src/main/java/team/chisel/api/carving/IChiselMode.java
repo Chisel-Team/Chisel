@@ -4,16 +4,20 @@ import java.util.Locale;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import team.chisel.Chisel;
 import team.chisel.common.util.NonnullType;
 import team.chisel.common.util.Point2i;
 
 @ParametersAreNonnullByDefault
+@MethodsReturnNonnullByDefault
 public interface IChiselMode {
 
     /**
@@ -40,6 +44,18 @@ public interface IChiselMode {
 	
 	default String getUnlocName() {
 	    return "chisel.mode." + name().toLowerCase(Locale.ROOT);
+	}
+	
+	default String getUnlocDescription() {
+	    return getUnlocName() + ".desc";
+	}
+	
+	default ITextComponent getLocalizedName() {
+	    return new TranslationTextComponent(getUnlocName());
+	}
+	
+	default ITextComponent getLocalizedDescription() {
+	    return new TranslationTextComponent(getUnlocDescription());
 	}
 
     default long[] getCacheState(BlockPos origin, Direction side) {

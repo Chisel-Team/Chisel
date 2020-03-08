@@ -12,10 +12,19 @@ import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.NonNullLazyValue;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.GenerationStage.Decoration;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.placement.CountRangeConfig;
+import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
 import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
@@ -28,8 +37,10 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.api.ChiselAPIProps;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.client.util.ChiselLangKeys;
@@ -117,8 +128,15 @@ public class Chisel implements Reference {
 
 // TODO
 //        MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(ChiselController.class);
-// TODO
+        MinecraftForge.EVENT_BUS.register(ChiselController.class);        
+        for (Biome b : ForgeRegistries.BIOMES.getValues()) {
+            if (BiomeDictionary.hasType(b, BiomeDictionary.Type.OVERWORLD)) {
+                // TODO add special basalt generation
+                b.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.BASALT.get(VariantTemplates.Rock.RAW.getName()).get().getDefaultState(), 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 0, 32))));
+                // TODO marble gen
+                // TODO limestone gen
+            }
+        }
 //        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
 //        MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
 

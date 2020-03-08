@@ -11,6 +11,7 @@ import com.google.common.collect.Lists;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.client.renderer.Rectangle2d;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -19,7 +20,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.gui.GuiUtils;
+import team.chisel.Chisel;
+import team.chisel.api.IChiselItem;
+import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.inventory.ChiselContainer;
+import team.chisel.common.inventory.SlotChiselInput;
+import team.chisel.common.item.PacketChiselMode;
+import team.chisel.common.util.NBTUtil;
 
 @ParametersAreNonnullByDefault
 public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
@@ -58,34 +66,40 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
         super.init();
 
         int id = 0;
-        // TODO org.lwjgl.util.Rectangle no longer exists
-        //Rectangle area = getModeButtonArea();
-        //int buttonsPerRow = area.getWidth() / 20;
-        //int padding = (area.getWidth() - (buttonsPerRow * 20)) / buttonsPerRow;
-        //IChiselMode currentMode = NBTUtil.getChiselMode(this.getContainer().getChisel());
-        //for (IChiselMode mode : CarvingUtils.getModeRegistry().getAllModes()) {
-        //    if (((IChiselItem) this.getContainer().getChisel().getItem()).supportsMode(player, this.getContainer().getChisel(), mode)) {
-        //        int x = area.getX() + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
-        //        int y = area.getY() + ((id / buttonsPerRow) * (20 + padding));
-        //        ButtonChiselMode button = new ButtonChiselMode(x, y, mode, /* TODO Action*/ null);
-        //        if (mode == currentMode) {
-        //            // TODO see if Button.enabled == Button.active
-        //            button.active = false;
-        //        }
-        //        setButtonText(addButton(button));
-        //    }
-        //}
+        Rectangle2d area = getModeButtonArea();
+        int buttonsPerRow = area.getWidth() / 20;
+        int padding = (area.getWidth() - (buttonsPerRow * 20)) / buttonsPerRow;
+        IChiselMode currentMode = NBTUtil.getChiselMode(this.getContainer().getChisel());
+        for (IChiselMode mode : CarvingUtils.getModeRegistry().getAllModes()) {
+            if (((IChiselItem) this.getContainer().getChisel().getItem()).supportsMode(player, this.getContainer().getChisel(), mode)) {
+                int x = area.getX() + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
+                int y = area.getY() + ((id / buttonsPerRow) * (20 + padding));
+                ButtonChiselMode button = new ButtonChiselMode(x, y, mode, b -> {
+                    b.active = false;
+                    IChiselMode m = ((ButtonChiselMode) b).getMode();
+                    NBTUtil.setChiselMode(this.getContainer().getChisel(), m);
+                    Chisel.network.sendToServer(new PacketChiselMode(this.getContainer().getChiselSlot(), m));
+                    for (Widget other : buttons) {
+                        if (other != b && other instanceof ButtonChiselMode) {
+                            // TODO see if Button.enabled == Button.active
+                            other.active = true;
+                        }
+                    }
+                });
+                if (mode == currentMode) {
+                    // TODO see if Button.enabled == Button.active
+                    button.active = false;
+                }
+                addButton(button);
+                id++;
+            }
+        }
     }
 
-    // TODO org.lwjgl.util.Rectangle no longer exists
-    // protected Rectangle getModeButtonArea() {
-    //     int down = 67;
-    //     int padding = 7;
-    //     return new Rectangle(guiLeft + padding, guiTop + down + padding, 50, ySize - down - (padding * 2));
-    // }
-
-    private void setButtonText(ButtonChiselMode button) {
-//        button.displayString = I18n.format(container.getInventoryChisel().getName() + ".mode." + button.getMode().name().toLowerCase());
+    protected Rectangle2d getModeButtonArea() {
+        int down = 73;
+        int padding = 7;
+        return new Rectangle2d(guiLeft + padding, guiTop + down + padding, 50, ySize - down - (padding * 2));
     }
 
     @Override
@@ -95,7 +109,6 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
         this.renderHoveredToolTip(mouseX, mouseY);
     }
     
-    @SuppressWarnings("null")
     @Override
     protected void drawGuiContainerForegroundLayer(int j, int i) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -121,7 +134,7 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
             if (button.isMouseOver(mx, my) && button instanceof ButtonChiselMode) {
                 String unloc = ((ButtonChiselMode)button).getMode().getUnlocName();
                 List<String> ttLines = Lists.newArrayList(
-                        I18n.format(unloc + ".name"),
+                        I18n.format(unloc),
                         TextFormatting.GRAY + I18n.format(unloc + ".desc")
                 );
                 GuiUtils.drawHoveringText(ttLines, mx - guiLeft, my - guiTop, width - guiLeft, height - guiTop, -1, font);
@@ -144,49 +157,30 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
 
-        //Slot main = (Slot) this.getContainer().inventorySlots.get(this.getContainer().getInventoryChisel().size);
-        //if (main.getStack() == null) {
-        //    drawSlotOverlay(this, x + 14, y + 14, main, 0, ySize, 60);
-        //}
+        Slot main = (Slot) this.getContainer().inventorySlots.get(this.getContainer().getInventoryChisel().size);
+        if (main.getStack().isEmpty()) {
+            drawSlotOverlay(this, x + 14, y + 14, main, 0, ySize, 60);
+        }
     }
 
-    // TODO Parent method no longer exists?
-    //@Override
-    //protected void actionPerformed(Button button) throws IOException {
-    //    if (button instanceof ButtonChiselMode) {
-    //        // TODO see if Button.enabled == Button.active
-    //        button.active = false;
-    //        IChiselMode mode = ((ButtonChiselMode) button).getMode();
-    //        NBTUtil.setChiselMode(this.getContainer().getChisel(), mode);
-    //        Chisel.network.sendToServer(new PacketChiselMode(this.getContainer().getChiselSlot(), mode));
-    //        for (Widget other : buttons) {
-    //            if (other != button && other instanceof ButtonChiselMode) {
-    //                other.active = true;
-    //            }
-    //        }
-    //    }
-    //    super.actionPerformed(button);
-    //}
-
-    // TODO Parent method no longer exists?
-    //@Override
-    //protected void drawSlot(Slot slot) {
-    //    if (slot instanceof SlotChiselInput) {
-    //        GL11.glPushMatrix();
-    //        GL11.glScalef(2, 2, 1);
-    //        slot.xPos -= 16;
-    //        slot.yPos -= 16;
-    //        super.drawSlot(slot);
-    //        slot.xPos += 16;
-    //        slot.yPos += 16;
-    //        GL11.glPopMatrix();
-    //    } else {
-    //        super.drawSlot(slot);
-    //    }
-    //}
+    @Override
+    protected void drawSlot(Slot slot) {
+        if (slot instanceof SlotChiselInput) {
+            GL11.glPushMatrix();
+            GL11.glScalef(2, 2, 1);
+            slot.xPos -= 16;
+            slot.yPos -= 16;
+            super.drawSlot(slot);
+            slot.xPos += 16;
+            slot.yPos += 16;
+            GL11.glPopMatrix();
+        } else {
+            super.drawSlot(slot);
+        }
+    }
 
     public static void drawSlotOverlay(ContainerScreen<?> gui, int x, int y, Slot slot, int u, int v, int padding) {
-        //padding /= 2;
-        //gui.drawTexturedModalRect(x + (slot.xPos - padding), y + (slot.yPos - padding), u, v, 18 + padding, 18 + padding);
+        padding /= 2;
+        gui.blit(x + (slot.xPos - padding), y + (slot.yPos - padding), u, v, 18 + padding, 18 + padding);
     }
 }

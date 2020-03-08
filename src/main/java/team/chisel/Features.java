@@ -28,27 +28,27 @@ public class Features {
 
     private static final ChiselBlockFactory FACTORY = ChiselBlockFactory.newFactory(Chisel.registrate());
     
-    public static final List<RegistryEntry<BlockCarvable>> ALUMINUM = FACTORY.newType(Material.IRON, "metals/aluminum")
+    public static final Map<String, RegistryEntry<BlockCarvable>> ALUMINUM = FACTORY.newType(Material.IRON, "metals/aluminum")
             .setGroupName("Aluminum Block")
             .variations(VariantTemplates.METAL)
             .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1));
     
-    public static final List<RegistryEntry<BlockCarvable>> ANDESITE = FACTORY.newType(Material.ROCK, "andesite")
+    public static final Map<String, RegistryEntry<BlockCarvable>> ANDESITE = FACTORY.newType(Material.ROCK, "andesite")
             .addBlock(Blocks.ANDESITE)
             .addBlock(Blocks.POLISHED_ANDESITE)
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE));
     
-    public static final List<RegistryEntry<BlockCarvable>> ANTIBLOCK = FACTORY.newType(Material.ROCK, "antiblock", (p, v) -> new BlockCarvable(p, v))
+    public static final Map<String, RegistryEntry<BlockCarvable>> ANTIBLOCK = FACTORY.newType(Material.ROCK, "antiblock", (p, v) -> new BlockCarvable(p, v))
             .layer(() -> RenderType::getCutout)
             .variations(VariantTemplates.colors(ModelTemplates.twoLayerWithTop("antiblock")))
             .build();
     
-    public static final List<RegistryEntry<BlockCarvable>> BASALT = FACTORY.newType(Material.ROCK, "basalt")
+    public static final Map<String, RegistryEntry<BlockCarvable>> BASALT = FACTORY.newType(Material.ROCK, "basalt")
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
-    public static final List<RegistryEntry<BlockCarvable>> BROWNSTONE = FACTORY.newType(Material.ROCK, "brownstone")
+    public static final Map<String, RegistryEntry<BlockCarvable>> BROWNSTONE = FACTORY.newType(Material.ROCK, "brownstone")
             .variation("default")
                 .recipe((prov, block) -> new ShapedRecipeBuilder(block, 4)
                         .patternLine(" S ").patternLine("SCS").patternLine(" S ")
@@ -73,12 +73,12 @@ public class Features {
 //      BlockSpeedHandler.speedupBlocks.add(b);
 //  });
     
-    public static final List<RegistryEntry<BlockCarvable>> COAL = FACTORY.newType(Material.ROCK, "coal")
+    public static final Map<String, RegistryEntry<BlockCarvable>> COAL = FACTORY.newType(Material.ROCK, "coal")
             .addBlock(Blocks.COAL_BLOCK)
             .variations(/*VariantTemplates.withUncraft(*/VariantTemplates.ROCK/*, Items.COAL)*/) // TODO
             .build(b -> b.hardnessAndResistance(5.0F, 10.0F).sound(SoundType.STONE));
     
-    public static final Map<DyeColor, List<RegistryEntry<BlockCarvable>>> WOOL = Arrays.stream(DyeColor.values())
+    public static final Map<DyeColor, Map<String, RegistryEntry<BlockCarvable>>> WOOL = Arrays.stream(DyeColor.values())
             .collect(Collectors.toMap(Function.identity(), color -> FACTORY.newType(Material.WOOL, "wool/" + (color.getName()))
                     .addBlock(new ResourceLocation(color.getName() + "_wool"))
                     .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Wool")
