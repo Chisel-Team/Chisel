@@ -44,7 +44,7 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 minecraft {
-	mappings channel: 'snapshot', version: '20191118-1.14.3'
+	mappings channel: 'snapshot', version: '20200301-mixed-1.15.2'
     
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 

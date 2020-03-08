@@ -8,7 +8,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.PaneBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -28,11 +27,6 @@ public class BlockCarvablePane extends PaneBlock implements ICarvable {
     public BlockCarvablePane(Block.Properties properties, VariationData variation) {
         super(properties);
         this.variation = variation;
-    }
-
-    @Override
-    public boolean canRenderInLayer(BlockState state, BlockRenderLayer layer) {
-        return super.canRenderInLayer(state, layer);
     }
 
     @Override

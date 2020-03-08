@@ -184,31 +184,31 @@ public class ChiselController {
             double py = player.lastTickPosY + (player.posY - player.lastTickPosY) * event.getPartialTicks();
             double pz = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * event.getPartialTicks();
 
-            GlStateManager.enableBlend();
-            GlStateManager.enableCull();
-            GlStateManager.disableTexture2D();
+            RenderSystem.enableBlend();
+            RenderSystem.enableCull();
+            RenderSystem.disableTexture2D();
 
-            GlStateManager.tryBlendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ZERO);
-            GlStateManager.enableAlpha();
-            GlStateManager.alphaFunc(GL11.GL_GREATER, 0);
+            RenderSystem.tryBlendFuncSeparate(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA, SourceFactor.ONE, DestFactor.ZERO);
+            RenderSystem.enableAlpha();
+            RenderSystem.alphaFunc(GL11.GL_GREATER, 0);
 
             Tessellator.getInstance().getBuffer().setTranslation(-px, -py, -pz);
 
-            GlStateManager.doPolygonOffset(-4, -4);
-            GlStateManager.enablePolygonOffset();
-            GlStateManager.disableBlend();
-            GlStateManager.colorMask(false, false, false, false);
+            RenderSystem.doPolygonOffset(-4, -4);
+            RenderSystem.enablePolygonOffset();
+            RenderSystem.disableBlend();
+            RenderSystem.colorMask(false, false, false, false);
             cache.draw();
-            GlStateManager.enableBlend();
-            GlStateManager.colorMask(true, true, true, true);
+            RenderSystem.enableBlend();
+            RenderSystem.colorMask(true, true, true, true);
             cache.draw();
-            GlStateManager.doPolygonOffset(0, 0);
-            GlStateManager.disablePolygonOffset();
+            RenderSystem.doPolygonOffset(0, 0);
+            RenderSystem.disablePolygonOffset();
             
             Tessellator.getInstance().getBuffer().setTranslation(0, 0, 0);
 
-            GlStateManager.enableTexture2D();
-            GlStateManager.enableDepth();
+            RenderSystem.enableTexture2D();
+            RenderSystem.enableDepth();
             event.setCanceled(true);
         }
     }

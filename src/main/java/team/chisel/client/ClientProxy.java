@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import team.chisel.client.render.RenderAutoChisel;
-import team.chisel.common.block.TileAutoChisel;
+import team.chisel.common.init.ChiselTileEntities;
 
 @EventBusSubscriber(value = Dist.CLIENT, bus = Bus.MOD)
 public class ClientProxy {
@@ -20,7 +20,7 @@ public class ClientProxy {
     public static void registerModels(ModelRegistryEvent event) {
         // TODO but why should we have optional registration
         // if (Features.AUTOCHISEL.enabled()) {
-            ClientRegistry.bindTileEntitySpecialRenderer(TileAutoChisel.class, new RenderAutoChisel());
+            ClientRegistry.bindTileEntityRenderer(ChiselTileEntities.AUTO_CHISEL_TE.get(), RenderAutoChisel::new);
         //}
 
 //        MinecraftForge.EVENT_BUS.register(new DebugHandler());

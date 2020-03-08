@@ -3,7 +3,6 @@ package team.chisel.api.carving;
 import java.util.Locale;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-import javax.vecmath.Point2i;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Direction;
@@ -12,6 +11,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import team.chisel.Chisel;
 import team.chisel.common.util.NonnullType;
+import team.chisel.common.util.Point2i;
 
 @ParametersAreNonnullByDefault
 public interface IChiselMode {

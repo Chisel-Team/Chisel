@@ -1,22 +1,18 @@
 package team.chisel.common.block;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Stats;
-import net.minecraft.tileentity.FurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.Direction;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -24,11 +20,8 @@ import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IEnviromentBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
-import team.chisel.Chisel;
-import team.chisel.common.init.ChiselTabs;
 
 @ParametersAreNonnullByDefault
 public class BlockAutoChisel extends Block {
@@ -64,9 +57,9 @@ public class BlockAutoChisel extends Block {
     public TileEntity createTileEntity(@Nullable BlockState state, @Nullable IBlockReader world) {
         return new TileAutoChisel();
     }
-
+    
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+    public @Nonnull ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand p_225533_5_, BlockRayTraceResult p_225533_6_) {
         if (!worldIn.isRemote) {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof TileAutoChisel) {
@@ -74,7 +67,7 @@ public class BlockAutoChisel extends Block {
                 // TODO maybe? player.addStat(Stats.INTERACT_WITH_AUTO_CHISEL);
             }
         }
-        return true;
+        return ActionResultType.SUCCESS;
     }
 
     @Override
@@ -123,15 +116,5 @@ public class BlockAutoChisel extends Block {
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return SELECTION_SHAPE;
-    }
-    
-    @Override
-    public boolean doesSideBlockRendering(@Nullable BlockState state, @Nullable IEnviromentBlockReader world, @Nullable BlockPos pos, @Nullable Direction face) {
-        return face == Direction.DOWN;
-    }
-    
-    @Override
-    public boolean canRenderInLayer(@Nullable BlockState state, @Nullable BlockRenderLayer layer) {
-        return layer == BlockRenderLayer.CUTOUT;
     }
 }

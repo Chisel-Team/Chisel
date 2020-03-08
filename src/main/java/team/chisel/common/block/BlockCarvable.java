@@ -7,14 +7,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
-import team.chisel.api.carving.CarvingUtils;
 
 /**
  * Represents a Carvable (aka Chiselable) block
@@ -25,23 +22,11 @@ public class BlockCarvable extends Block implements ICarvable {
     @Getter(onMethod = @__({@Override}))
     private final VariationData variation;
     
-    private final BlockRenderLayer layer;
-
     private boolean dragonProof = false;
 
     public BlockCarvable(Block.Properties properties, VariationData variation) {
-        this(properties, variation, BlockRenderLayer.SOLID);
-    }
-    
-    public BlockCarvable(Block.Properties properties, VariationData variation, BlockRenderLayer layer) {
         super(properties);
-        this.layer = layer;
         this.variation = variation;
-    }
-
-    @Override
-    public boolean canRenderInLayer(BlockState state, BlockRenderLayer layer) {
-        return layer == this.layer;
     }
 
     @Override

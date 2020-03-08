@@ -28,7 +28,7 @@ public class ModelTemplates {
     
     private static void simpleBlock(RegistrateBlockstateProvider prov, Block block) {
         // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
-        prov.simpleBlock(block, prov.cubeAll("block/" + name(block), prov.modLoc("block/" + name(block))));
+        prov.simpleBlock(block, prov.models().cubeAll("block/" + name(block), prov.modLoc("block/" + name(block))));
     }
     
     private static String replaceVariant(String name, String newVariant) {
@@ -46,7 +46,7 @@ public class ModelTemplates {
     private static ModelTemplate cubeBottomTop(Function<String, String> side, Function<String, String> bottom, Function<String, String> top) {
         return (prov, block) -> {
             String name = "block/" + name(block);
-            prov.simpleBlock(block, prov.cubeBottomTop(name, prov.modLoc(side.apply(name)), prov.modLoc(bottom.apply(name)), prov.modLoc(top.apply(name))));
+            prov.simpleBlock(block, prov.models().cubeBottomTop(name, prov.modLoc(side.apply(name)), prov.modLoc(bottom.apply(name)), prov.modLoc(top.apply(name))));
         };
     }
     
@@ -61,7 +61,7 @@ public class ModelTemplates {
     private static ModelTemplate cubeColumn(Function<String, String> side, Function<String, String> top) {
         return (prov, block) -> {
             String name = "block/" + name(block);
-            prov.simpleBlock(block, prov.cubeColumn(name, prov.modLoc(side.apply(name)), prov.modLoc(top.apply(name))));
+            prov.simpleBlock(block, prov.models().cubeColumn(name, prov.modLoc(side.apply(name)), prov.modLoc(top.apply(name))));
         };
     }
     
@@ -69,7 +69,7 @@ public class ModelTemplates {
         return (prov, block) -> {
             String name = "block/" + name(block);
             String texName = replaceVariant(name, variant);
-            prov.simpleBlock(block, prov.withExistingParent(name, prov.modLoc("cube_ctm"))
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("cube_ctm"))
                     .texture("all", texName)
                     .texture("connected_tex", texName + "-ctm"));
         };
@@ -78,7 +78,7 @@ public class ModelTemplates {
     public static ModelTemplate twoLayerWithTop(String top) {
         return (prov, block) -> {
             String name = "block/" + name(block);
-            prov.simpleBlock(block, prov.withExistingParent(name, prov.modLoc("cube_2_layer"))
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("cube_2_layer"))
                     .texture("bot", name)
                     .texture("top", replaceVariant(name, top)));
         };

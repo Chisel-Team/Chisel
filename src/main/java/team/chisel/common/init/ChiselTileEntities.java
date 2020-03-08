@@ -24,7 +24,7 @@ public class ChiselTileEntities {
             .object("auto_chisel")
             .block(BlockAutoChisel::new)
             .tileEntity(TileAutoChisel::new)
-            .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), prov.getExistingFile(ctx.getId())))
+            .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), prov.models().getExistingFile(ctx.getId())))
             .item(BlockItem::new)
                 .model((ctx, prov) -> prov.blockItem(ctx::getEntry))
                 .recipe((ctx, prov) -> new ShapedRecipeBuilder(ctx.getEntry(), 1)
@@ -37,7 +37,7 @@ public class ChiselTileEntities {
                 .build()
             .register();
 
-    public static final RegistryEntry<TileEntityType<? extends TileEntity>> AUTO_CHISEL_TE = REGISTRATE.get(TileEntityType.class);
+    public static final RegistryEntry<TileEntityType<TileAutoChisel>> AUTO_CHISEL_TE = REGISTRATE.get(TileEntityType.class);
     
     public static final RegistryEntry<ContainerType<ContainerAutoChisel>> AUTO_CHISEL_CONTAINER = REGISTRATE.entry((name, callback) -> 
             new ContainerBuilder<>(REGISTRATE, REGISTRATE, name, callback, ContainerAutoChisel::new, GuiAutoChisel::new))

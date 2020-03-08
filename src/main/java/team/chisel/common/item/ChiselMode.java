@@ -8,8 +8,6 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import javax.vecmath.Point2i;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.Sets;
@@ -28,6 +26,7 @@ import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
+import team.chisel.common.util.Point2i;
 
 @SuppressWarnings("null")
 public enum ChiselMode implements IChiselMode {

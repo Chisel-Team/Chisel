@@ -184,13 +184,13 @@ public class ChiselModeGeometryCache {// implements IWorldEventListener {
 //            anim += timer.elapsedPartialTicks;
 //        }
 //
-//        GlStateManager.pushMatrix();
+//        RenderSystem.pushMatrix();
 //        BufferBuilder buf = Tessellator.getInstance().getBuffer();
 //        buf.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_COLOR);
 //        for (int i = 0; i < geometryCache.size(); i += 3) {
 //            buf.pos(geometryCache.get(i), geometryCache.get(i + 1), geometryCache.get(i + 2)).color(c, c, c, a).endVertex();
 //        }
 //        Tessellator.getInstance().draw();
-//        GlStateManager.popMatrix();
+//        RenderSystem.popMatrix();
 //    }
 }

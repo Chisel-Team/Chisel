@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -33,6 +34,7 @@ import lombok.experimental.NonFinal;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.item.Item;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
@@ -71,6 +73,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     @Accessors(fluent = true)
     private boolean opaque = true;
+    
+    @Accessors(fluent = true)
+    private Supplier<Supplier<RenderType>> layer = () -> RenderType::getSolid;
 
     protected ChiselBlockBuilder(ChiselBlockFactory parent, Registrate registrate, Material material, String blockName, @Nullable Tag<Block> group, BlockProvider<T> provider) {
         this.parent = parent;
@@ -160,6 +165,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 ret[i] = registrate.object(blockName + "/" + var.getName())
                         .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret[index], var.getName(), var.getDisplayName(), group)))
                         .properties(p -> p.hardnessAndResistance(1))
+                        .addLayer(layer)
                         .transform(this::addTag)
                         .properties(after)
                         .blockstate((ctx, prov) -> builder.model.accept(prov, ctx.getEntry()))

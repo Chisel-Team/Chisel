@@ -1,6 +1,11 @@
 package team.chisel.common.item;
 
-import static net.minecraft.util.Direction.*;
+import static net.minecraft.util.Direction.DOWN;
+import static net.minecraft.util.Direction.EAST;
+import static net.minecraft.util.Direction.NORTH;
+import static net.minecraft.util.Direction.SOUTH;
+import static net.minecraft.util.Direction.UP;
+import static net.minecraft.util.Direction.WEST;
 
 import java.awt.geom.Line2D;
 import java.util.Collections;
@@ -14,9 +19,9 @@ import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 import lombok.ToString;
 import net.minecraft.block.BlockState;
@@ -24,7 +29,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -33,7 +37,6 @@ import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
@@ -41,7 +44,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.DrawBlockHighlightEvent;
+import net.minecraftforge.client.event.DrawHighlightEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import team.chisel.api.block.ICarvable;
@@ -138,7 +141,7 @@ public class ItemOffsetTool extends Item {
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
-    public void onBlockHighlight(DrawBlockHighlightEvent event) {
+    public void onBlockHighlight(DrawHighlightEvent event) {
         if (event.getTarget().getType() != Type.BLOCK) return;
         BlockRayTraceResult target = (BlockRayTraceResult) event.getTarget();
         PlayerEntity player = Minecraft.getInstance().player;
@@ -148,10 +151,10 @@ public class ItemOffsetTool extends Item {
             Direction face = target.getFace();
             BlockPos pos = target.getPos();
             BufferBuilder buf = Tessellator.getInstance().getBuffer();
-            GlStateManager.pushMatrix();
-            GlStateManager.disableLighting();
-            GlStateManager.disableTexture();
-            GlStateManager.depthMask(false);
+            RenderSystem.pushMatrix();
+            RenderSystem.disableLighting();
+            RenderSystem.disableTexture();
+            RenderSystem.depthMask(false);
 
             // Draw the X
             buf.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION);
@@ -159,26 +162,28 @@ public class ItemOffsetTool extends Item {
             double x = Math.max(0, face.getXOffset());
             double y = Math.max(0, face.getYOffset());
             double z = Math.max(0, face.getZOffset());
+            
+            Vec3d viewport = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
 
-            GlStateManager.translated(-TileEntityRendererDispatcher.staticPlayerX, -TileEntityRendererDispatcher.staticPlayerY, -TileEntityRendererDispatcher.staticPlayerZ);
-            GlStateManager.translated(pos.getX(), pos.getY(), pos.getZ());
-            GlStateManager.color3f(0, 0, 0);
+            RenderSystem.translated(-viewport.x, -viewport.y, -viewport.z);
+            RenderSystem.translated(pos.getX(), pos.getY(), pos.getZ());
+            RenderSystem.color4f(0, 0, 0, 1);
 
             if (face.getXOffset() != 0) {
-                buf.pos(x, 0, 0).endVertex();
-                buf.pos(x, 1, 1).endVertex();
-                buf.pos(x, 1, 0).endVertex();
-                buf.pos(x, 0, 1).endVertex();
+                buf.vertex(x, 0, 0).endVertex();
+                buf.vertex(x, 1, 1).endVertex();
+                buf.vertex(x, 1, 0).endVertex();
+                buf.vertex(x, 0, 1).endVertex();
             } else if (face.getYOffset() != 0) {
-                buf.pos(0, y, 0).endVertex();
-                buf.pos(1, y, 1).endVertex();
-                buf.pos(1, y, 0).endVertex();
-                buf.pos(0, y, 1).endVertex();
+                buf.vertex(0, y, 0).endVertex();
+                buf.vertex(1, y, 1).endVertex();
+                buf.vertex(1, y, 0).endVertex();
+                buf.vertex(0, y, 1).endVertex();
             } else {
-                buf.pos(0, 0, z).endVertex();
-                buf.pos(1, 1, z).endVertex();
-                buf.pos(1, 0, z).endVertex();
-                buf.pos(0, 1, z).endVertex();
+                buf.vertex(0, 0, z).endVertex();
+                buf.vertex(1, 1, z).endVertex();
+                buf.vertex(1, 0, z).endVertex();
+                buf.vertex(0, 1, z).endVertex();
             }
 
             Tessellator.getInstance().draw();
@@ -186,15 +191,15 @@ public class ItemOffsetTool extends Item {
             Vec3d hit = target.getHitVec();
 
             // Draw the triangle highlight
-            GlStateManager.enableBlend();
-            GlStateManager.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
-            GlStateManager.enablePolygonOffset();
-            GlStateManager.polygonOffset(-1.0F, -10.0F);
-            GlStateManager.disableCull();
+            RenderSystem.enableBlend();
+            RenderSystem.blendFunc(SourceFactor.SRC_ALPHA, DestFactor.ONE_MINUS_SRC_ALPHA);
+            RenderSystem.enablePolygonOffset();
+            RenderSystem.polygonOffset(-1.0F, -10.0F);
+            RenderSystem.disableCull();
 
             buf.begin(GL11.GL_TRIANGLES, DefaultVertexFormats.POSITION);
             
-            GlStateManager.color4f(1, 1, 1, 0x55 / 255f);
+            RenderSystem.color4f(1, 1, 1, 0x55 / 255f);
 
             Direction moveDir = getMoveDir(face, hit.subtract(pos.getX(), pos.getY(), pos.getZ()));
             int clampedX = Math.max(0, moveDir.getXOffset());
@@ -207,23 +212,23 @@ public class ItemOffsetTool extends Item {
             // Always draw the center point first, then draw the next two points.
             // Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
             if (face.getXOffset() != 0) {
-                buf.pos(x, 0.5, 0.5).endVertex();
-                buf.pos(x, isY ? clampedY : 0, isZ ? clampedZ : 0).endVertex();
-                buf.pos(x, isY ? clampedY : 1, isZ ? clampedZ : 1).endVertex();
+                buf.vertex(x, 0.5, 0.5).endVertex();
+                buf.vertex(x, isY ? clampedY : 0, isZ ? clampedZ : 0).endVertex();
+                buf.vertex(x, isY ? clampedY : 1, isZ ? clampedZ : 1).endVertex();
             } else if (face.getYOffset() != 0) {
-                buf.pos(0.5, y, 0.5).endVertex();
-                buf.pos(isX ? clampedX : 0, y, isZ ? clampedZ : 0).endVertex();
-                buf.pos(isX ? clampedX : 1, y, isZ ? clampedZ : 1).endVertex();
+                buf.vertex(0.5, y, 0.5).endVertex();
+                buf.vertex(isX ? clampedX : 0, y, isZ ? clampedZ : 0).endVertex();
+                buf.vertex(isX ? clampedX : 1, y, isZ ? clampedZ : 1).endVertex();
             } else {
-                buf.pos(0.5, 0.5, z).endVertex();
-                buf.pos(isX ? clampedX : 0, isY ? clampedY : 0, z).endVertex();
-                buf.pos(isX ? clampedX : 1, isY ? clampedY : 1, z).endVertex();
+                buf.vertex(0.5, 0.5, z).endVertex();
+                buf.vertex(isX ? clampedX : 0, isY ? clampedY : 0, z).endVertex();
+                buf.vertex(isX ? clampedX : 1, isY ? clampedY : 1, z).endVertex();
             }
             Tessellator.getInstance().draw();
             
-            GlStateManager.disablePolygonOffset();
-            GlStateManager.polygonOffset(0.0F, 0.0F);
-            GlStateManager.popMatrix();
+            RenderSystem.disablePolygonOffset();
+            RenderSystem.polygonOffset(0.0F, 0.0F);
+            RenderSystem.popMatrix();
         }
     }
 

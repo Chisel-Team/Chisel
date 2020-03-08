@@ -9,12 +9,12 @@ import org.apache.logging.log4j.Logger;
 import com.google.common.collect.ImmutableMap;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.util.NonNullLazyValue;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.LazyLoadBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
@@ -76,7 +76,7 @@ public class Chisel implements Reference {
 
     private static Map<String, Block> remaps = ImmutableMap.of();
 
-    private static final LazyLoadBase<Registrate> REGISTRATE = new LazyLoadBase<Registrate>(() -> {
+    private static final NonNullLazyValue<Registrate> REGISTRATE = new NonNullLazyValue<Registrate>(() -> {
         Registrate ret = Registrate.create(Reference.MOD_ID).itemGroup(() -> ChiselTabs.tab);
         ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.tab, "Chisel"));
         return ret;

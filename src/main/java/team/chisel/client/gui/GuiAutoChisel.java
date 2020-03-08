@@ -6,7 +6,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -69,7 +69,7 @@ public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
             drawGhostItem(fakeChisel, guiLeft + 80, guiTop + 28);
         }
         if (!container.getSlot(container.targetSlot).getHasStack()) {
-            GlStateManager.color3f(1, 1, 1);
+            RenderSystem.color4f(1, 1, 1, 1);
             blit(guiLeft + 80, guiTop + 64, 176, 34, 16, 16);
         }
     }
@@ -77,14 +77,14 @@ public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
     private void drawGhostItem(@Nonnull ItemStack stack, int x, int y) {
         Minecraft.getInstance().getItemRenderer().renderItemIntoGUI(stack, x, y);
         Minecraft.getInstance().getTextureManager().bindTexture(TEXTURE);
-        GlStateManager.color4f(1, 1, 1, 0.5f);
-        GlStateManager.disableDepthTest();
-        GlStateManager.enableBlend();
-        GlStateManager.disableLighting();
+        RenderSystem.color4f(1, 1, 1, 0.5f);
+        RenderSystem.disableDepthTest();
+        RenderSystem.enableBlend();
+        RenderSystem.disableLighting();
         blit(x, y, x - guiLeft, y - guiTop, 16, 16);
-        GlStateManager.color4f(1, 1, 1, 1);
-        GlStateManager.disableBlend();
-        GlStateManager.enableDepthTest();
+        RenderSystem.color4f(1, 1, 1, 1);
+        RenderSystem.disableBlend();
+        RenderSystem.enableDepthTest();
     }
 
     @Override

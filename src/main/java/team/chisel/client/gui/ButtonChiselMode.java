@@ -1,12 +1,12 @@
 package team.chisel.client.gui;
 
 import javax.annotation.Nonnull;
-import javax.vecmath.Point2i;
 
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.Button;
 import team.chisel.api.carving.IChiselMode;
+import team.chisel.common.util.Point2i;
 
 public class ButtonChiselMode extends Button {
 
@@ -24,6 +24,6 @@ public class ButtonChiselMode extends Button {
         super.renderBg(mc, mouseX, mouseY);
         mc.getTextureManager().bindTexture(mode.getSpriteSheet());
         Point2i uv = mode.getSpritePos();
-        blit(x + 4, y + 4, uv.x, uv.y, 24, 24, 12, 12, 256, 256);
+        blit(x + 4, y + 4, uv.getX(), uv.getY(), 24, 24, 12, 12, 256, 256);
     }
 }
