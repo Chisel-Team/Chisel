@@ -53,6 +53,7 @@ import team.chisel.common.init.ChiselItems;
 import team.chisel.common.init.ChiselSounds;
 import team.chisel.common.init.ChiselTabs;
 import team.chisel.common.init.ChiselTileEntities;
+import team.chisel.common.init.ChiselWorldGen;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ChiselMode;
@@ -112,6 +113,9 @@ public class Chisel implements Reference {
         
         Features.init();
         ChiselLangKeys.init(registrate());
+        
+        ChiselWorldGen.FEATURES.register(modBus);
+        ChiselWorldGen.PLACEMENTS.register(modBus);
     }
     
     public static Registrate registrate() {
@@ -129,17 +133,7 @@ public class Chisel implements Reference {
 // TODO
 //        MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
         MinecraftForge.EVENT_BUS.register(ChiselController.class);        
-        for (Biome b : ForgeRegistries.BIOMES.getValues()) {
-            if (BiomeDictionary.hasType(b, BiomeDictionary.Type.OVERWORLD)) {
-                // TODO add special basalt generation
-                b.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE
-                        .configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.LIMESTONE.get(VariantTemplates.Rock.RAW.getName()).get().getDefaultState(), 33))
-                        .createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 64, 0, 48))));
-                b.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE
-                        .configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.MARBLE.get(VariantTemplates.Rock.RAW.getName()).get().getDefaultState(), 33))
-                        .createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 24, 0, 48))));
-            }
-        }
+        ChiselWorldGen.registerWorldGen();
 //        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
 //        MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
 
