@@ -181,8 +181,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             }
         }
         if (this.group != null) {
+            CarvingUtils.getChiselRegistry().addGroup(group);
             if (!otherBlocks.isEmpty()) {
-                CarvingUtils.getChiselRegistry().addGroup(group);
                 registrate.addDataGenerator(ProviderType.BLOCK_TAGS, prov -> prov.getBuilder(this.group)
                         .add(otherBlocks.stream()
                                 .map(ForgeRegistries.BLOCKS::getValue)

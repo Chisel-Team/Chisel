@@ -1,7 +1,6 @@
 package team.chisel;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -77,6 +76,14 @@ public class Features {
             .addBlock(Blocks.COAL_BLOCK)
             .variations(/*VariantTemplates.withUncraft(*/VariantTemplates.ROCK/*, Items.COAL)*/) // TODO
             .build(b -> b.hardnessAndResistance(5.0F, 10.0F).sound(SoundType.STONE));
+
+    public static final Map<String, RegistryEntry<BlockCarvable>> LIMESTONE = FACTORY.newType(Material.ROCK, "limestone")
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
+
+    public static final Map<String, RegistryEntry<BlockCarvable>> MARBLE = FACTORY.newType(Material.ROCK, "marble")
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
     public static final Map<DyeColor, Map<String, RegistryEntry<BlockCarvable>>> WOOL = Arrays.stream(DyeColor.values())
             .collect(Collectors.toMap(Function.identity(), color -> FACTORY.newType(Material.WOOL, "wool/" + (color.getName()))

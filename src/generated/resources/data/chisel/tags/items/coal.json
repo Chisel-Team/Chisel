@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "chisel:coal/raw",
     "chisel:coal/cracked",
     "chisel:coal/soft_bricks",
     "chisel:coal/cracked_bricks",
@@ -32,7 +33,6 @@
     "chisel:coal/pillar",
     "chisel:coal/twisted",
     "chisel:coal/prism",
-    "chisel:coal/raw",
     "chisel:coal/chaotic_bricks",
     "chisel:coal/cuts",
     "minecraft:coal_block"

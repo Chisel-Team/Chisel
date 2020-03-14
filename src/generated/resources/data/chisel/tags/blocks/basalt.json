@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "chisel:basalt/raw",
     "chisel:basalt/cracked",
     "chisel:basalt/soft_bricks",
     "chisel:basalt/cracked_bricks",
@@ -32,7 +33,6 @@
     "chisel:basalt/pillar",
     "chisel:basalt/twisted",
     "chisel:basalt/prism",
-    "chisel:basalt/raw",
     "chisel:basalt/chaotic_bricks",
     "chisel:basalt/cuts"
   ]

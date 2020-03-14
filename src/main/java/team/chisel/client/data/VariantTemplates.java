@@ -91,7 +91,8 @@ public class VariantTemplates {
     }
     
     public static class Rock {
-        
+
+        public static final VariantTemplate RAW = simple("raw");
         public static final VariantTemplate CRACKED = simple("cracked");
         public static final VariantTemplate SOFT_BRICKS = withName("soft_bricks", "Weathered Bricks");
         public static final VariantTemplate CRACKED_BRICKS = simple("cracked_bricks");
@@ -123,7 +124,6 @@ public class VariantTemplates {
         public static final VariantTemplate PILLAR = simple("pillar", ModelTemplates.cubeColumn());
         public static final VariantTemplate TWISTED = simple("twisted", ModelTemplates.cubeColumn());
         public static final VariantTemplate PRISM = simple("prism");
-        public static final VariantTemplate RAW = simple("raw");
         public static final VariantTemplate CHAOTIC_BRICKS = withName("chaotic_bricks", "Trodden Bricks");
         public static final VariantTemplate CUTS = simple("cuts");
     }

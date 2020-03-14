@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "chisel:andesite/raw",
     "chisel:andesite/cracked",
     "chisel:andesite/soft_bricks",
     "chisel:andesite/cracked_bricks",
@@ -32,7 +33,6 @@
     "chisel:andesite/pillar",
     "chisel:andesite/twisted",
     "chisel:andesite/prism",
-    "chisel:andesite/raw",
     "chisel:andesite/chaotic_bricks",
     "chisel:andesite/cuts",
     "minecraft:andesite",

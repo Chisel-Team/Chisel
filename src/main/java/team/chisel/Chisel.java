@@ -132,9 +132,12 @@ public class Chisel implements Reference {
         for (Biome b : ForgeRegistries.BIOMES.getValues()) {
             if (BiomeDictionary.hasType(b, BiomeDictionary.Type.OVERWORLD)) {
                 // TODO add special basalt generation
-                b.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.BASALT.get(VariantTemplates.Rock.RAW.getName()).get().getDefaultState(), 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 0, 32))));
-                // TODO marble gen
-                // TODO limestone gen
+                b.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE
+                        .configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.LIMESTONE.get(VariantTemplates.Rock.RAW.getName()).get().getDefaultState(), 33))
+                        .createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 64, 0, 48))));
+                b.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE
+                        .configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.MARBLE.get(VariantTemplates.Rock.RAW.getName()).get().getDefaultState(), 33))
+                        .createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 24, 0, 48))));
             }
         }
 //        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
