@@ -91,6 +91,14 @@ public class Features {
             .next("extra/marker")
             .build(b -> b.hardnessAndResistance(2.0F, 10.0F).sound(SoundType.STONE));
     
+    public static final Map<DyeColor, Map<String, RegistryEntry<BlockCarvable>>> CONCRETE = Arrays.stream(DyeColor.values())
+            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.ROCK, "concrete/" + color.getName())
+                    .addBlock(new ResourceLocation(color.getName() + "_concrete"))
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Concrete")
+                    .variations(VariantTemplates.ROCK)
+                    .build(p -> p.sound(SoundType.STONE).hardnessAndResistance(1.8F))));
+//  BlockSpeedHandler.speedupBlocks.add(b);
+    
     public static final Map<String, RegistryEntry<BlockCarvable>> FACTORY = _FACTORY.newType(Material.IRON, "factory")
             .variation("dots")
             .next("rust2")
