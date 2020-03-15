@@ -9,13 +9,15 @@ import java.util.Locale;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import sun.misc.Unsafe;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.unsafe.UnsafeHacks;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
-import net.minecraftforge.registries.ObjectHolderRegistry;
 import team.chisel.Chisel;
 
 @ObjectHolder(Chisel.MOD_ID)
@@ -55,15 +57,13 @@ public class ChiselSounds {
     @SoundName("chisel.dirt")
     public static final SoundEvent dirt_chisel = null;
     
-    public static void init() {}
-
-    static {
+    public static void init() {
         for (Field f : ChiselSounds.class.getDeclaredFields()) {
             if (f.isAnnotationPresent(SoundName.class)) {
-                ForgeRegistries.SOUND_EVENTS.register(new SoundEvent(new ResourceLocation(Chisel.MOD_ID, f.getAnnotation(SoundName.class).value())).setRegistryName(f.getName().toLowerCase(Locale.ROOT)));
+                SoundEvent evt = new SoundEvent(new ResourceLocation(Chisel.MOD_ID, f.getAnnotation(SoundName.class).value())).setRegistryName(f.getName().toLowerCase(Locale.ROOT));
+                ForgeRegistries.SOUND_EVENTS.register(evt);
+                ObfuscationReflectionHelper.setPrivateValue(ChiselSounds.class, null, evt, f.getName());
             }
         }
-        
-        ObjectHolderRegistry.applyObjectHolders();
     }
 }
