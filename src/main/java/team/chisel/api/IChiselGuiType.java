@@ -1,5 +1,7 @@
 package team.chisel.api;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nullable;
 
 import com.tterrag.registrate.Registrate;
@@ -46,7 +48,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
     }
     
     public enum ChiselGuiType implements IChiselGuiType<ChiselContainer> {
-        NORMAL("chisel_container_normal", ChiselContainer::new, GuiChisel::new) {
+        NORMAL("chisel_container_normal", ChiselContainer::new, () -> (container, inv, displayName) -> new GuiChisel<>(container, inv, displayName)) {
           
             @Override
             @Nullable
@@ -54,7 +56,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
                 return new ChiselContainer(getContainerType(), windowId, inv, new InventoryChiselSelection(player.getHeldItem(hand), 60), hand);
             }
         },
-        HITECH("chisel_container_hitech", ContainerChiselHitech::new, GuiHitechChisel::new) {
+        HITECH("chisel_container_hitech", ContainerChiselHitech::new, () -> (container, inv, displayName) -> new GuiHitechChisel(container, inv, displayName)) {
             
             @Override
             @Nullable
@@ -65,7 +67,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
         
         private final RegistryEntry<? extends ContainerType<? extends ChiselContainer>> type;
         
-        private <C extends ChiselContainer, T extends GuiChisel<C>> ChiselGuiType(String name, ContainerFactory<C> factory, ScreenFactory<C, T> screenFactory) {
+        private <C extends ChiselContainer, T extends GuiChisel<C>> ChiselGuiType(String name, ContainerFactory<C> factory, Supplier<ScreenFactory<C, T>> screenFactory) {
             this.type = Chisel.registrate()
                     .entry(name, callback -> new ContainerBuilder<C, T, Registrate>(Chisel.registrate(), Chisel.registrate(), name, callback,
                             factory, screenFactory))

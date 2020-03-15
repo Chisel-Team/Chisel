@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "chisel:block/factory/column-ctmv",
+    "end": "chisel:block/factory/column-top"
+  }
+}

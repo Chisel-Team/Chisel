@@ -1,5 +1,7 @@
 package team.chisel.common.util;
 
+import java.util.function.Supplier;
+
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.AbstractBuilder;
 import com.tterrag.registrate.builders.BuilderCallback;
@@ -28,9 +30,9 @@ public class ContainerBuilder<T extends Container, S extends Screen & IHasContai
     }
     
     private final ContainerFactory<T> factory;
-    private final ScreenFactory<T, S> screenFactory;
+    private final Supplier<ScreenFactory<T, S>> screenFactory;
 
-    public ContainerBuilder(Registrate owner, P parent, String name, BuilderCallback callback, ContainerFactory<T> factory, ScreenFactory<T, S> screenFactory) {
+    public ContainerBuilder(Registrate owner, P parent, String name, BuilderCallback callback, ContainerFactory<T> factory, Supplier<ScreenFactory<T, S>> screenFactory) {
         super(owner, parent, name, callback, ContainerType.class);
         this.factory = factory;
         this.screenFactory = screenFactory;
@@ -39,7 +41,7 @@ public class ContainerBuilder<T extends Container, S extends Screen & IHasContai
     @Override
     protected @NonnullType ContainerType<T> createEntry() {
         ContainerType<T> ret = new ContainerType<>((windowId, inv) -> factory.create(get(), windowId, inv));
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ScreenManager.registerFactory(ret, (type, inv, displayName) -> screenFactory.create(type, inv, displayName)));
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ScreenManager.registerFactory(ret, screenFactory.get()::create));
         return ret;
     }
 }

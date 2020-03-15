@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.BlockItem;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.common.Tags;
 import team.chisel.Chisel;
@@ -40,7 +39,7 @@ public class ChiselTileEntities {
     public static final RegistryEntry<TileEntityType<TileAutoChisel>> AUTO_CHISEL_TE = REGISTRATE.get(TileEntityType.class);
     
     public static final RegistryEntry<ContainerType<ContainerAutoChisel>> AUTO_CHISEL_CONTAINER = REGISTRATE.entry((name, callback) -> 
-            new ContainerBuilder<>(REGISTRATE, REGISTRATE, name, callback, ContainerAutoChisel::new, GuiAutoChisel::new))
+            new ContainerBuilder<ContainerAutoChisel, GuiAutoChisel, Registrate>(REGISTRATE, REGISTRATE, name, callback, ContainerAutoChisel::new, () -> (container, inv, displayName) -> new GuiAutoChisel(container, inv, displayName)))
                 .register();
     
     public static final void init() {}

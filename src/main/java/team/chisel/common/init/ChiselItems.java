@@ -13,6 +13,8 @@ import com.tterrag.registrate.util.RegistryEntry;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselGuiType.ChiselGuiType;
 import team.chisel.common.item.ChiselMode;
@@ -30,7 +32,7 @@ public class ChiselItems {
             .collect(Collectors.toMap(Function.identity(), ChiselItems::chisel));
     
     static {
-        ChiselGuiType.values(); // Init container types
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> ChiselGuiType::values); // Init container types
         ChiselMode.values(); // Init mode translations
     }
     

@@ -48,6 +48,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.DrawHighlightEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.chunkdata.IOffsetData;
 import team.chisel.common.util.NBTSaveable;
@@ -98,7 +99,7 @@ public class ItemOffsetTool extends Item {
     public ItemOffsetTool(Item.Properties properties) {
         super(properties);
         PerChunkData.INSTANCE.registerChunkData(DATA_KEY, new ChunkDataBase<OffsetData>(OffsetData.class, true));
-        MinecraftForge.EVENT_BUS.register(this);
+        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> MinecraftForge.EVENT_BUS.addListener(this::onBlockHighlight));
     }
 
     @Override
