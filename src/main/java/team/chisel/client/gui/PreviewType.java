@@ -8,9 +8,13 @@ import javax.annotation.Nonnull;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.google.common.collect.ImmutableSet;
+import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 import lombok.Getter;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TranslationTextComponent;
+import team.chisel.Chisel;
 
 @Getter 
 public enum PreviewType {
@@ -44,16 +48,13 @@ public enum PreviewType {
         return ret;
     }
     
-    private float scale;
-    private Set<BlockPos> positions;
+    private final float scale;
+    private final Set<BlockPos> positions;
+    private final TranslationTextComponent localizedName;
     
     private PreviewType(float scale, @Nonnull BlockPos... positions) {
         this.scale = scale;
         this.positions = ImmutableSet.copyOf(positions);
-    }
-    
-    @Override
-    public String toString() {
-        return "container.chisel.hitech.preview." + name().toLowerCase(Locale.US);
+        this.localizedName = Chisel.registrate().addLang("hitech", new ResourceLocation(Chisel.MOD_ID, "preview." + name().toLowerCase(Locale.ROOT)), RegistrateLangProvider.toEnglishName(name()));
     }
 }

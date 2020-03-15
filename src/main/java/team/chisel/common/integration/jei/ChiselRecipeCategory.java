@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.Chisel;
 import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.item.ItemChisel.ChiselType;
 
@@ -52,7 +53,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
     @Nonnull
     @Override
     public String getTitle() {
-        return I18n.format("chisel.jei.title");
+        return ChiselLangKeys.JEI_TITLE.getLocalizedText();
     }
 
     @Nonnull

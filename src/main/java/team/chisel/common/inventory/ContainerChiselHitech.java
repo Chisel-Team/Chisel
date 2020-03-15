@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 
 import lombok.Getter;
@@ -46,6 +47,11 @@ public class ContainerChiselHitech extends ChiselContainer {
         }
     }
     
+    public void setTarget(@Nullable Slot slot) {
+        this.target = slot;
+        NBTUtil.setHitechTarget(chisel, Optional.fromNullable(getTarget()).transform(s -> s.slotNumber).or(-1));
+    }
+    
     public void setSelection(@Nullable Slot slot) {
         this.selection = slot;
 
@@ -64,7 +70,7 @@ public class ContainerChiselHitech extends ChiselContainer {
             selectionDuplicates = builder.build();
             
             ICarvingGroup group = carving.getGroup(slot.getStack().getItem()).orElse(null);
-            if (group != currentGroup) {
+            if (currentGroup != null && group != currentGroup) {
                 setTarget(null);
             }
             currentGroup = group;
@@ -73,6 +79,7 @@ public class ContainerChiselHitech extends ChiselContainer {
         ItemStack stack = slot == null ? ItemStack.EMPTY : slot.getStack();
         getInventoryChisel().setStackInSpecialSlot(stack);
         getInventoryChisel().updateItems();
+        NBTUtil.setHitechSelection(chisel, Optional.fromNullable(getSelection()).transform(s -> s.slotNumber).or(-1));
     }
     
     public @Nullable ItemStack getSelectionStack() {

@@ -13,6 +13,7 @@ import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.IVariationRegistry;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.SlotChiselSelection;
@@ -65,7 +66,10 @@ public class PacketChiselButton {
             for (int i : slots) {
                 ItemStack s = player.inventory.getStackInSlot(i);
                 if (!s.isEmpty()) {
-                    if (carving.getGroup(target.getItem()) != carving.getGroup(s.getItem())) {
+                    if (!carving.getGroup(target.getItem())
+                            .map(ICarvingGroup::getId)
+                            .flatMap(id -> carving.getGroup(s.getItem()).map(g -> g.getId().equals(id)))
+                            .orElse(false)) {
                         return;
                     }
                     container.getInventoryChisel().setStackInSpecialSlot(s);

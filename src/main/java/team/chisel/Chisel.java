@@ -43,6 +43,7 @@ import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketHitechSettings;
+import team.chisel.client.gui.PreviewType;
 import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.Reference;
 import team.chisel.common.block.MessageAutochiselFX;
@@ -97,7 +98,9 @@ public class Chisel implements Reference {
     public Chisel() {
         CarvingUtils.chisel = new CarvingVariationRegistry();
         CarvingUtils.modes = ChiselModeRegistry.INSTANCE;
-        ChiselMode.values(); // static init our modes
+        // static init for lang keys
+        ChiselMode.values();
+        PreviewType.values();
         ChiselAPIProps.MOD_ID = MOD_ID;
         
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();

@@ -1,9 +1,11 @@
 package team.chisel.common.integration.jei;
 
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.google.common.collect.ImmutableMap;
 import com.tterrag.registrate.util.RegistryEntry;
 
 import mezz.jei.api.IModPlugin;
@@ -14,12 +16,16 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.IRegistryDelegate;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.item.ItemChisel;
+import team.chisel.common.item.ItemChisel.ChiselType;
 
 @JeiPlugin
 @ParametersAreNonnullByDefault
@@ -28,6 +34,11 @@ public class ChiselJEIPlugin implements IModPlugin {
     private ChiselRecipeCategory category;
     
     private final ChiselRecipeRegistryPlugin plugin = new ChiselRecipeRegistryPlugin();
+    
+    private final Map<IRegistryDelegate<Item>, ChiselLangKeys> descriptions = ImmutableMap.of(
+            ChiselItems.CHISELS.get(ChiselType.IRON).get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_IRON,
+            ChiselItems.CHISELS.get(ChiselType.DIAMOND).get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_DIAMOND,
+            ChiselItems.CHISELS.get(ChiselType.HITECH).get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_HITECH);
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
@@ -36,7 +47,7 @@ public class ChiselJEIPlugin implements IModPlugin {
 
         for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS.values()) {
             ItemStack stack = new ItemStack(chisel.get());
-            registry.addIngredientInfo(stack, VanillaTypes.ITEM, "jei.chisel.desc.chisel_generic", "\n", "jei.chisel.desc." + stack.getItem().getRegistryName().getPath());
+            registry.addIngredientInfo(stack, VanillaTypes.ITEM, ChiselLangKeys.JEI_DESC_CHISEL_GENERIC.getComponent().getKey(), "\n", descriptions.get(chisel.get().delegate).getComponent().getKey());
         }
     }
     
