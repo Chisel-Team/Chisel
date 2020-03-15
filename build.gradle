@@ -142,6 +142,16 @@ dependencies {
 
 jar {
     classifier = 'slim'
+
+    manifest {
+        attributes(["Specification-Title": "chisel",
+                    "Specification-Vendor": "tterrag",
+                    "Specification-Version": "1.0",
+                    "Implementation-Title": project.name,
+                    "Implementation-Version": "${version}",
+                    "Implementation-Vendor" :"tterrag",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
+    }
 }
 
 shadowJar {
