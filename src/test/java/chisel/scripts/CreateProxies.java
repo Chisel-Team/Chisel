@@ -31,7 +31,7 @@ public class CreateProxies {
 
     private static void crop(Path folder, String name, int size) throws IOException {
         crop(folder, name, name + "-" + size + "x" + size);
-    }s
+    }
     
     private static void crop(Path folder, String name, String newName) throws IOException {
         Path texture = folder.resolve(name + ".png");
