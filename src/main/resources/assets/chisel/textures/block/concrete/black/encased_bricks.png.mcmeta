@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/concrete_black/encased_bricks-ctm"
+            "chisel:blocks/concrete/black/encased_bricks-ctm"
         ]
     }
 }

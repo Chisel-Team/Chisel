@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/concrete_red/mosaic-ctm"
+            "chisel:blocks/concrete/red/mosaic-ctm"
         ]
     }
 }
