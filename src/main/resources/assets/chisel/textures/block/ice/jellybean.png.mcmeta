@@ -1,10 +1,6 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type": "pattern",
-        "layer": "TRANSLUCENT",
-        "extra": {
-            "size": 2
-        }
-    }
+  "ctm": {
+    "ctm_version": 1,
+    "proxy": "chisel:block/ice/jellybean-2x2.png"
+  }
 }

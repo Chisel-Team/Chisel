@@ -1,6 +1,6 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type": "ar"
-    }
+  "ctm": {
+    "ctm_version": 1,
+    "proxy": "chisel:block/concrete_blue/zag-ctm.png"
+  }
 }

@@ -1,9 +1,6 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type": "random",
-        "extra": {
-            "size": 2
-        }
-    }
+  "ctm": {
+    "ctm_version": 1,
+    "proxy": "chisel:block/arcane_stone/chaotic_bricks-3x3.png"
+  }
 }

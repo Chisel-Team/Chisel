@@ -1,9 +1,6 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type": "random",
-        "extra": {
-            "size": 3
-        }
-    }
+  "ctm": {
+    "ctm_version": 1,
+    "proxy": "chisel:block/concrete_red/chaotic_bricks-3x3.png"
+  }
 }

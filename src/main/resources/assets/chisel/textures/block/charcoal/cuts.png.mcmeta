@@ -1,9 +1,6 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type": "random",
-        "extra": {
-            "size": 4
-        }
-    }
+  "ctm": {
+    "ctm_version": 1,
+    "proxy": "chisel:block/charcoal/cuts-4x4.png"
+  }
 }

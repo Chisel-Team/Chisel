@@ -1,9 +1,6 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type": "pattern",
-        "extra": {
-            "size": 2
-        }
-    }
+  "ctm": {
+    "ctm_version": 1,
+    "proxy": "chisel:block/concrete_purple/array-2x2.png"
+  }
 }

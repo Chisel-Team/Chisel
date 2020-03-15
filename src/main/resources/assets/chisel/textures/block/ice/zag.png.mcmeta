@@ -1,7 +1,6 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type": "ar",
-        "layer": "TRANSLUCENT"
-    }
+  "ctm": {
+    "ctm_version": 1,
+    "proxy": "chisel:block/ice/zag-ctm.png"
+  }
 }
