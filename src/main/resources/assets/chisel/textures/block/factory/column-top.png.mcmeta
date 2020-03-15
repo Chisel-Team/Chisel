@@ -1,0 +1,7 @@
+{
+  "ctm": {
+    "ctm_version": 1,
+    "type": "pillar",
+    "textures": ["chisel:block/factory/column-ctmv"]
+  }
+}

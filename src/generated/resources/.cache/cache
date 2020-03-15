@@ -476,7 +476,7 @@ ac0a7b288e1ce0fe2d0ec2aaedc5ff889a33d363 assets\chisel\models\block\cobblestone\
 7dacc245f213922318622aa52818a2be06864ae6 assets\chisel\models\block\cobblestone\weaver.json
 59290a2f430a11fc745842689edbc2d6eeffb84a assets\chisel\models\block\cobblestone\zag.json
 fb0923dd48484d9d3dee11bc116036ad2749ba88 assets\chisel\models\block\factory\circuit.json
-481f99186640cb7ecd539c40721e54950f57e63d assets\chisel\models\block\factory\column.json
+8c826d24eede339d1579d0f27c8f8fc672b4dcfb assets\chisel\models\block\factory\column.json
 65f6a209c73ea3acf8dacddf92843d3a3781c98a assets\chisel\models\block\factory\dots.json
 d6cb0f27de1b82fb586f2fa501772a65a125173c assets\chisel\models\block\factory\frameblue.json
 537c4af838bd5848af3cbaec1ce1baf9cf809956 assets\chisel\models\block\factory\goldplate.json
@@ -492,7 +492,7 @@ e4d989d413eed44946d3b286109ef38d1b3b946a assets\chisel\models\block\factory\rust
 62eb6779b4d5580b8ad826668ad898897a2af58e assets\chisel\models\block\factory\rust2.json
 f00d84e3d258897db6e158aab8c9ec3524f19067 assets\chisel\models\block\factory\rustplates.json
 c3586969950a0b69b37cffd81d53feaeefe02a0b assets\chisel\models\block\factory\tilemosaic.json
-79d29dbf513a7aa9ef4b74919e86a7d2a5440226 assets\chisel\models\block\factory\vent.json
+a4a5dda3ce7d10049cc511cce2eeff443a6c3d94 assets\chisel\models\block\factory\vent.json
 037f447ac4b30d2fe036b7e209d4834c6706519f assets\chisel\models\block\factory\wireframe.json
 2e7e3a45a5796b04ce6009885ae7067245bb5ba3 assets\chisel\models\block\factory\wireframeblue.json
 6fa03696c1c8fd21dc8b44ce83ae9b3a7e85b0dd assets\chisel\models\block\factory\wireframewhite.json

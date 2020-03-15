@@ -109,12 +109,12 @@ public class Features {
             .next("plating")
             .next("rustplates")
             .next("column")
-                .model(ModelTemplates.cubeColumn("column-ctmv", "column-top")) // TODO proxy
+                .model(ModelTemplates.cubeColumn())
             .next("frameblue")
             .next("iceiceice")
             .next("tilemosaic")
             .next("vent")
-                .model(ModelTemplates.cubeColumn("vent-ctmv", "vent-top")) // TODO proxy
+                .model(ModelTemplates.cubeColumn())
             .next("wireframeblue")
             .build(b -> b.sound(ChiselSoundTypes.METAL));
 
