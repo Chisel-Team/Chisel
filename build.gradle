@@ -140,10 +140,17 @@ dependencies {
 //  deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
 }
 
+jar {
+    classifier = 'slim'
+}
+
 shadowJar {
     configurations = [project.configurations.shade]
     relocate 'com.tterrag.registrate', 'team.chisel.repack.registrate'
+    classifier = ''
 }
+
+build.dependsOn shadowJar
 
 lombok {
     version = "1.18.12"
