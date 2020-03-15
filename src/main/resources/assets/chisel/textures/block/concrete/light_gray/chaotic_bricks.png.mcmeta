@@ -1,6 +1,6 @@
 {
   "ctm": {
     "ctm_version": 1,
-    "proxy": "chisel:block/concrete_lightgray/chaotic_bricks-3x3.png"
+    "proxy": "chisel:block/concrete/light_gray/chaotic_bricks-3x3"
   }
 }
