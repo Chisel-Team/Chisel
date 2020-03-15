@@ -31,7 +31,7 @@ public class VariantTemplates {
     @MethodsReturnNonnullByDefault
     @RequiredArgsConstructor
     @Builder
-    private static class SimpleTemplate implements VariantTemplate {
+    public static class SimpleTemplate implements VariantTemplate {
         
         @Getter(onMethod = @__({@Override}))
         private final String name;
@@ -157,9 +157,14 @@ public class VariantTemplates {
     
     @SuppressWarnings("null")
     public static final ImmutableList<VariantTemplate> colors(ModelTemplate template) {
+        return colors(template, null);
+    }
+
+    public static ImmutableList<VariantTemplate> colors(ModelTemplate model, RecipeTemplate whiteRecipe) {
         return ImmutableList.copyOf(COLORS.stream()
                 .map(SimpleTemplate::builderFrom)
-                .map(b -> b.modelTemplate(template))
+                .map(b -> b.modelTemplate(model))
+                .map(b -> b.recipeTemplate(b.name.equals(DyeColor.WHITE.getName()) ? whiteRecipe : null))
                 .map(SimpleTemplate.SimpleTemplateBuilder::build)
                 .collect(Collectors.toList()));
     }

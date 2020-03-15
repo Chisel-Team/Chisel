@@ -40,7 +40,13 @@ public class Features {
     
     public static final Map<String, RegistryEntry<BlockCarvable>> ANTIBLOCK = FACTORY.newType(Material.ROCK, "antiblock", (p, v) -> new BlockCarvable(p, v))
             .layer(() -> RenderType::getCutout)
-            .variations(VariantTemplates.colors(ModelTemplates.twoLayerWithTop("antiblock")))
+            .variations(VariantTemplates.colors(ModelTemplates.twoLayerWithTop("antiblock"), (prov, block) -> 
+                    new ShapedRecipeBuilder(block, 8)
+                        .patternLine("SSS").patternLine("SGS").patternLine("SSS")
+                        .key('S', Tags.Items.STONE)
+                        .key('G', Tags.Items.DUSTS_GLOWSTONE)
+                        .addCriterion("has_glowstone", prov.hasItem(Tags.Items.DUSTS_GLOWSTONE))
+                        .build(prov)))
             .build();
     
     public static final Map<String, RegistryEntry<BlockCarvable>> BASALT = FACTORY.newType(Material.ROCK, "basalt")
