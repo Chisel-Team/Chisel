@@ -36,16 +36,16 @@ public class ChiselJEIPlugin implements IModPlugin {
     private final ChiselRecipeRegistryPlugin plugin = new ChiselRecipeRegistryPlugin();
     
     private final Map<IRegistryDelegate<Item>, ChiselLangKeys> descriptions = ImmutableMap.of(
-            ChiselItems.CHISELS.get(ChiselType.IRON).get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_IRON,
-            ChiselItems.CHISELS.get(ChiselType.DIAMOND).get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_DIAMOND,
-            ChiselItems.CHISELS.get(ChiselType.HITECH).get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_HITECH);
+            ChiselItems.IRON_CHISEL.get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_IRON,
+            ChiselItems.DIAMOND_CHISEL.get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_DIAMOND,
+            ChiselItems.HITECH_CHISEL.get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_HITECH);
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
         registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
                             .collect(Collectors.toList()), category.getUid());
 
-        for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS.values()) {
+        for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
             ItemStack stack = new ItemStack(chisel.get());
             registry.addIngredientInfo(stack, VanillaTypes.ITEM, ChiselLangKeys.JEI_DESC_CHISEL_GENERIC.getComponent().getKey(), "\n", descriptions.get(chisel.get().delegate).getComponent().getKey());
         }
@@ -53,7 +53,7 @@ public class ChiselJEIPlugin implements IModPlugin {
     
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS.values()) {
+        for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
             registry.addRecipeCatalyst(new ItemStack(chisel.get()), category.getUid());
         }
     }

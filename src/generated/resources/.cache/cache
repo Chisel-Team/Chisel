@@ -2568,7 +2568,10 @@ ec1c5a6bcdfcec93f9f60d353f391eac6ef6a8cf assets\chisel\models\item\wool\yellow\l
 528f95646c6b2dd8dbed1e25406e3a11ffb4a85d data\chisel\advancements\recipes\chisel\antiblock\white.json
 da389d017d32d120348dd96a10c70ec94c9e5e3d data\chisel\advancements\recipes\chisel\auto_chisel.json
 2a3c9a133ae0df07b5d1aea3daba83e7ebb125d4 data\chisel\advancements\recipes\chisel\brownstone\default.json
+08dbf1f431bfe6f92d2d204bcf6d8c0386a82d9f data\chisel\advancements\recipes\chisel\diamond_chisel.json
 d27555f8d3d136bef49158e2322633e4c203295d data\chisel\advancements\recipes\chisel\factory\dots.json
+d4882a2039511d9851582269ce179d6e2e4c2f1e data\chisel\advancements\recipes\chisel\hitech_chisel.json
+73c02d3e92d1839fed00f150691bc23091b8c89d data\chisel\advancements\recipes\chisel\iron_chisel.json
 d733db8cd6b1b0a93e9ab6bd47bcb6fe06124327 data\chisel\advancements\recipes\chisel\tyrian\shining.json
 0a439b1af8606c8849f5dc9cd89851b8ee1ed2ad data\chisel\loot_tables\blocks\andesite\array.json
 a187ee640483fbc997800c424759a275372fb3a5 data\chisel\loot_tables\blocks\andesite\braid.json
@@ -3427,7 +3430,10 @@ bdc8ef8cce068115c210629ccfb077069dd59687 data\chisel\loot_tables\blocks\wool\yel
 818b22f7209f5afa316d9e751e9ab41075b05c43 data\chisel\recipes\antiblock\white.json
 e10a463709112bae5bc25d7c04d07fe58eb05671 data\chisel\recipes\auto_chisel.json
 5de14be47b6d2cd37db22fffa1c01ec61a0bf6ad data\chisel\recipes\brownstone\default.json
+cc873bc6aa7274b28d89c19c3450b1c9164a4d46 data\chisel\recipes\diamond_chisel.json
 fb50038456bb9bd49e441f4a1e1bfd187c569329 data\chisel\recipes\factory\dots.json
+bdc701084fb9a6a91f4c24804162f34f03170209 data\chisel\recipes\hitech_chisel.json
+7597906be89a26606070239026b59927a377f0b4 data\chisel\recipes\iron_chisel.json
 343ed3c74da55f9ceb675e50aac3022c7ad1aa69 data\chisel\recipes\tyrian\shining.json
 502bc92f262f7eafc8b5a4b7a75d1ad94c136ab1 data\chisel\tags\blocks\andesite.json
 5b395e681d7c4d660ac25ea705a898885aa3bd0a data\chisel\tags\blocks\antiblock.json

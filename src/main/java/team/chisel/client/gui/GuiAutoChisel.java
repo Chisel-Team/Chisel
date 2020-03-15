@@ -33,7 +33,7 @@ public class GuiAutoChisel extends ContainerScreen<ContainerAutoChisel> {
     private final ContainerAutoChisel container;
     
     @Nonnull
-    private final ItemStack fakeChisel = new ItemStack(ChiselItems.CHISELS.get(ChiselType.IRON).get());
+    private final ItemStack fakeChisel = new ItemStack(ChiselItems.IRON_CHISEL.get());
     
     public GuiAutoChisel(ContainerAutoChisel container, PlayerInventory inv, ITextComponent displayName) {
         super(container, inv, displayName);

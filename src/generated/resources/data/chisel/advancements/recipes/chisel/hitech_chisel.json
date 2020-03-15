@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chisel:hitech_chisel"
+    ]
+  },
+  "criteria": {
+    "has_diamond_chisel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chisel:diamond_chisel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chisel:hitech_chisel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_diamond_chisel",
+      "has_the_recipe"
+    ]
+  ]
+}
