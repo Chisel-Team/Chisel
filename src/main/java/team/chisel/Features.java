@@ -141,6 +141,7 @@ public class Features {
             .build(b -> b.hardnessAndResistance(5.0F, 10.0F).sound(SoundType.STONE));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> COBBLESTONE = _FACTORY.newType(Material.ROCK, "cobblestone")
+            .addBlock(Blocks.COBBLESTONE)
             .variations(VariantTemplates.ROCK)
             .variation("extra/emboss")
             .next("extra/indent")
