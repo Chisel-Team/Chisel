@@ -1,10 +1,6 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type":"CTMH",
-        "layer":"CUTOUT",
-        "extra": {
-            "ignore_states": true
-        }
-    }
+  "ctm": {
+    "ctm_version": 1,
+    "proxy": "chisel:block/bookshelf/papers-ctmh"
+  }
 }

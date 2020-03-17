@@ -18,7 +18,7 @@ public class ModelTemplates {
         return block.getRegistryName().getNamespace();
     }
     
-    private static String name(Block block) {
+    public static String name(Block block) {
         return block.getRegistryName().getPath();
     }
     
@@ -75,10 +75,10 @@ public class ModelTemplates {
         };
     }
     
-    public static ModelTemplate twoLayerWithTop(String top) {
+    public static ModelTemplate twoLayerWithTop(String top, boolean shade) {
         return (prov, block) -> {
             String name = "block/" + name(block);
-            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("cube_2_layer"))
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc(shade ? "cube_2_layer" : "cube_2_layer_no_shade"))
                     .texture("bot", name)
                     .texture("top", replaceVariant(name, top)));
         };

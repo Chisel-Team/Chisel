@@ -18,10 +18,10 @@ import team.chisel.client.data.VariantTemplates;
 public enum FeaturesOld {
 
     // @formatter:off
-    ALUMINUM(factory -> factory.newType(Material.IRON, "metals/aluminum")
-            .setGroupName("Aluminum Block")
-            .variations(VariantTemplates.METAL)
-            .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1))),
+//    ALUMINUM(factory -> factory.newType(Material.IRON, "metals/aluminum")
+//            .setGroupName("Aluminum Block")
+//            .variations(VariantTemplates.METAL)
+//            .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1))),
 
         /* TODO 1.15
         @Override
@@ -75,9 +75,9 @@ public enum FeaturesOld {
 //        }
 //    },*/
 //
-    ANDESITE(factory -> factory.newType(Material.ROCK, "andesite")
-            .variations(VariantTemplates.ROCK)
-            .build(b -> b.hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE))),
+//    ANDESITE(factory -> factory.newType(Material.ROCK, "andesite")
+//            .variations(VariantTemplates.ROCK)
+//            .build(b -> b.hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE))),
 //CarvingUtils.getChiselRegistry().addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE), -21));
 //Carving.chisel.addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE_SMOOTH), -20));
 //
@@ -166,10 +166,10 @@ public enum FeaturesOld {
 //    },
 //    
 //
-    BASALT(factory -> factory.newType(Material.ROCK, "basalt")
-            .variations(VariantTemplates.ROCK)
-            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE))),
-
+//    BASALT(factory -> factory.newType(Material.ROCK, "basalt")
+//            .variations(VariantTemplates.ROCK)
+//            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE))),
+//
 //        @Override
 //        void addRecipes(IForgeRegistry<IRecipe> registry) {
 //            if (!Configurations.basaltSpecialGen) {

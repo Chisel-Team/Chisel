@@ -26,7 +26,17 @@ public class CreateProxies {
             crop(block, "cuts", 4);
             crop(block, "jellybean", 2);
             crop(block, "slanted", 2);
-            crop(block, "zag", "zag-ctm");
+            crop(block, "zag", "ctm");
+            crop(block, "abandoned", "ctmh");
+            crop(block, "brim", "ctmh");
+            crop(block, "cans", "ctmh");
+            crop(block, "historician", "ctmh");
+            crop(block, "hoarder", "ctmh");
+            crop(block, "necromancer-novice", "ctmh");
+            crop(block, "necromancer", "ctmh");
+            crop(block, "papers", "ctmh");
+            crop(block, "rainbow", "ctmh");
+            crop(block, "redtomes", "ctmh");
         }
     }
 
@@ -34,18 +44,19 @@ public class CreateProxies {
         crop(folder, name, name + "-" + size + "x" + size);
     }
     
-    private static void crop(Path folder, String name, String newName) throws IOException {
+    private static void crop(Path folder, String name, String suffix) throws IOException {
         Path texture = folder.resolve(name + ".png");
+        String newName = name + "-" + suffix;
         Path newTexture = folder.resolve(newName + ".png");
         
         Path meta = folder.resolve(name + ".png.mcmeta");
         Path newMeta = folder.resolve(newName + ".png.mcmeta");
         
         if (!Files.exists(texture) || Files.exists(newTexture)) {
-            if (Files.exists(meta)) {
-                Files.delete(meta);
-                generateProxy(meta, newTexture);
-            }
+//            if (Files.exists(meta)) {
+//                Files.delete(meta);
+//                generateProxy(meta, newTexture);
+//            }
             return; // Not a texture or already processed
         }
         

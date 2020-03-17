@@ -4,18 +4,24 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.RegistryEntry;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.WoodType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.ConstantRange;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import team.chisel.api.block.ChiselBlockFactory;
@@ -23,6 +29,7 @@ import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
+import team.chisel.common.block.BlockCarvableBookshelf;
 
 public class Features {
 
@@ -41,7 +48,7 @@ public class Features {
     
     public static final Map<String, RegistryEntry<BlockCarvable>> ANTIBLOCK = _FACTORY.newType(Material.ROCK, "antiblock", (p, v) -> new BlockCarvable(p, v))
             .layer(() -> RenderType::getCutout)
-            .variations(VariantTemplates.colors(ModelTemplates.twoLayerWithTop("antiblock"), (prov, block) -> 
+            .variations(VariantTemplates.colors(ModelTemplates.twoLayerWithTop("antiblock", false), (prov, block) -> 
                     new ShapedRecipeBuilder(block, 8)
                         .patternLine("SSS").patternLine("SGS").patternLine("SSS")
                         .key('S', Tags.Items.STONE)
@@ -53,6 +60,55 @@ public class Features {
     public static final Map<String, RegistryEntry<BlockCarvable>> BASALT = _FACTORY.newType(Material.ROCK, "basalt")
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
+    
+    // Hardcode to vanilla wood types
+    public static final Map<WoodType, Map<String, RegistryEntry<BlockCarvableBookshelf>>> BOOKSHELVES = Stream.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK)
+            .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "bookshelf/" + wood.getName(), BlockCarvableBookshelf::new)
+                    .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouchOrRandomly(block, Items.BOOK, ConstantRange.of(3))))
+                    .applyIf(() -> wood == WoodType.OAK, f -> f.addBlock(Blocks.BOOKSHELF))
+                    .model((prov, block) -> {
+                        prov.simpleBlock(block, prov.models().withExistingParent("block/" + ModelTemplates.name(block), prov.modLoc("cube_2_layer_sides"))
+                                .texture("all", "minecraft:block/" + wood.getName() + "_planks")
+                                .texture("side", "block/" + ModelTemplates.name(block).replace(wood.getName() + "/", "")));
+                    })
+                    .layer(() -> RenderType::getCutout)
+                    .setGroupName(StringUtils.capitalize(wood.getName()) + " Bookshelf")
+                    .variation("rainbow")
+                    .next("novice_necromancer")
+                    .next("necromancer")
+                    .next("redtomes")
+                    .next("abandoned")
+                    .next("hoarder")
+                    .next("brim")
+                    .next("historian")
+                    .next("cans")
+                    .next("papers")
+                    .build(b -> b.sound(SoundType.WOOD).hardnessAndResistance(1.5f))));
+            
+    
+//  String[] woodTypes = new String[]{"Oak", "Spruce", "Birch", "Jungle", "Acacia", "DarkOak"};
+//
+//  Carving.chisel.addVariation("bookshelf_oak", CarvingUtils.variationFor(Blocks.BOOKSHELF.getDefaultState(), -1));
+//
+//  BlockCreator<BlockCarvable> bookshelfCreator = 
+//
+//  for (String woodType : woodTypes) {
+//      factory.newType(Material.WOOD, "bookshelf_" + woodType.toLowerCase(), new ChiselBlockProvider<>(bookshelfCreator, BlockCarvable.class))
+//              .newVariation("rainbow")
+//              .next("necromancer-novice")
+//              .next("necromancer")
+//              .next("redtomes")
+//              .next("abandoned")
+//              .next("hoarder")
+//              .next("brim")
+//              .next("historician")
+//              .next("cans")
+//              .next("papers")
+//              .addOreDict("bookshelf")
+//              .addOreDict("bookshelf" + woodType)
+//              .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
+//
+//  }
     
     public static final Map<String, RegistryEntry<BlockCarvable>> BROWNSTONE = _FACTORY.newType(Material.ROCK, "brownstone")
             .variation("default")

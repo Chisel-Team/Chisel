@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/cube_2_layer_sides",
+  "textures": {
+    "all": "block/birch_planks",
+    "side": "chisel:block/bookshelf/brim"
+  }
+}

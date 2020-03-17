@@ -12,7 +12,7 @@ import mcp.MethodsReturnNonnullByDefault;
 @ParametersAreNonnullByDefault
 public interface VariantTemplate {
     
-    ModelTemplate getModelTemplate();
+    Optional<ModelTemplate> getModelTemplate();
     
     default Optional<RecipeTemplate> getRecipeTemplate() {
         return Optional.empty();

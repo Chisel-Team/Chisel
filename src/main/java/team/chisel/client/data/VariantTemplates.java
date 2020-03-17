@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.ImmutableList;
@@ -36,7 +37,6 @@ public class VariantTemplates {
         @Getter(onMethod = @__({@Override}))
         private final String name;
         private final String localizedName;
-        @Getter(onMethod = @__({@Override}))
         private final ModelTemplate modelTemplate;
         private final RecipeTemplate recipeTemplate;
         @Getter(onMethod = @__({@Override}))
@@ -48,6 +48,11 @@ public class VariantTemplates {
         }
         
         @Override
+        public Optional<ModelTemplate> getModelTemplate() {
+            return Optional.ofNullable(modelTemplate);
+        }
+        
+        @Override
         public Optional<RecipeTemplate> getRecipeTemplate() {
             return Optional.ofNullable(recipeTemplate);
         }
@@ -56,17 +61,21 @@ public class VariantTemplates {
             return builder()
                     .name(from.getName())
                     .localizedName(from instanceof SimpleTemplate ? ((SimpleTemplate)from).localizedName : from.getLocalizedName())
-                    .modelTemplate(from.getModelTemplate())
+                    .modelTemplate(from.getModelTemplate().orElse(null))
                     .recipeTemplate(from.getRecipeTemplate().orElse(null))
                     .tooltip(from.getTooltip());
         }
+    }
+    
+    public static VariantTemplate empty(String name, String... tooltip) {
+        return simple(name, null, tooltip);
     }
     
     public static VariantTemplate simple(String name, String... tooltip) {
         return simple(name, ModelTemplates.simpleBlock(), tooltip);
     }
     
-    public static VariantTemplate simple(String name, ModelTemplate template, String... tooltip) {
+    public static VariantTemplate simple(String name, @Nullable ModelTemplate template, String... tooltip) {
         return SimpleTemplate.builder().name(name).modelTemplate(template).tooltip(tooltip).build();
     }
     
@@ -74,7 +83,7 @@ public class VariantTemplates {
         return withName(name, localizedName, ModelTemplates.simpleBlock(), tooltip);
     }
     
-    public static VariantTemplate withName(String name, String localizedName, ModelTemplate template, String... tooltip) {
+    public static VariantTemplate withName(String name, String localizedName, @Nullable ModelTemplate template, String... tooltip) {
         return SimpleTemplate.builder().name(name).localizedName(localizedName).modelTemplate(template).tooltip(tooltip).build();
     }
     

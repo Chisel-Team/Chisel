@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.RegistryEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
@@ -43,6 +45,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.client.data.ModelTemplates;
+import team.chisel.client.data.VariantTemplates;
 import team.chisel.common.init.ChiselTabs;
 
 /**
@@ -58,11 +61,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private final Material material;
     private final String blockName;
 
-    private int curIndex;
+    private final List<VariationBuilder<T>> variations;
 
-    private List<VariationBuilder<T>> variations;
-
-    private BlockProvider<T> provider;
+    private final BlockProvider<T> provider;
 
     private @Nullable Tag<Block> group;
     
@@ -76,6 +77,15 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     
     @Accessors(fluent = true)
     private Supplier<Supplier<RenderType>> layer = () -> RenderType::getSolid;
+    
+    @Accessors(fluent = true)
+    private ModelTemplate model = ModelTemplates.simpleBlock();
+    
+    @Accessors(fluent = true)
+    private RecipeTemplate recipe = RecipeTemplate.none();
+    
+    @Accessors(fluent = true)
+    private NonNullBiConsumer<RegistrateBlockLootTables, T> loot = RegistrateBlockLootTables::registerDropSelfLootTable;
 
     protected ChiselBlockBuilder(ChiselBlockFactory parent, Registrate registrate, Material material, String blockName, @Nullable Tag<Block> group, BlockProvider<T> provider) {
         this.parent = parent;
@@ -87,26 +97,29 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         this.groupName = RegistrateLangProvider.toEnglishName(group.getId().getPath());
         this.variations = new ArrayList<VariationBuilder<T>>();
     }
-
-    @SuppressWarnings("null")
-    public VariationBuilder<T> variation(String name) {
-        return variation(name, group);
+    
+    public ChiselBlockBuilder<T> applyIf(BooleanSupplier pred, NonNullUnaryOperator<ChiselBlockBuilder<T>> action) {
+        if (pred.getAsBoolean()) {
+            return action.apply(this);
+        }
+        return this;
     }
 
-    public VariationBuilder<T> variation(String name, Tag<Block> group) {
-        VariationBuilder<T> builder = new VariationBuilder<>(this, name);
-        builder.opaque(opaque);
-        curIndex++;
-        return builder;
+    public VariationBuilder<T> variation(String name) {
+        return _variation(VariantTemplates.empty(name));
     }
     
     public ChiselBlockBuilder<T> variation(VariantTemplate template) {
-        return variation(template.getName())
+        return _variation(template).buildVariation();
+    }
+    
+    private VariationBuilder<T> _variation(VariantTemplate template) {
+        return new VariationBuilder<>(this, template.getName())
+                .opaque(opaque)
                 .localizedName(template.getLocalizedName())
-                .model(template.getModelTemplate())
-                .recipe(template.getRecipeTemplate().orElse(RecipeTemplate.none()))
-                .tooltip(template.getTooltip())
-                .buildVariation();
+                .model(template.getModelTemplate().orElse(model))
+                .recipe(template.getRecipeTemplate().orElse(recipe))
+                .tooltip(template.getTooltip());
     }
     
     public ChiselBlockBuilder<T> variations(Collection<? extends VariantTemplate> templates) {
@@ -171,6 +184,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .blockstate((ctx, prov) -> builder.model.accept(prov, ctx.getEntry()))
                         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
                         .recipe((ctx, prov) -> builder.recipe.accept(prov, ctx.getEntry()))
+                        .loot(loot)
                         .item(provider::createBlockItem)
                             // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
                             .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
@@ -255,10 +269,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
         public VariationBuilder<T> next(String name) {
             return buildVariation().variation(name);
-        }
-
-        public VariationBuilder<T> next(String name, Tag<Block> group) {
-            return buildVariation().variation(name, group);
         }
 
         public Map<String, RegistryEntry<T>> build() {
