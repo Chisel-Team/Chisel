@@ -25,12 +25,14 @@ import net.minecraft.world.storage.loot.ConstantRange;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import team.chisel.api.block.ChiselBlockFactory;
+import team.chisel.api.block.ModelTemplate;
 import team.chisel.api.block.VariantTemplate;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
+import team.chisel.common.block.BlockCarvableCarpet;
 
 public class Features {
 
@@ -121,6 +123,18 @@ public class Features {
             .build(b -> b.sound(SoundType.STONE).hardnessAndResistance(1.0F));
 //      BlockSpeedHandler.speedupBlocks.add(b);
 //  });
+    
+    public static final Map<DyeColor, Map<String, RegistryEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
+            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getName()), BlockCarvableCarpet::new)
+                    .addBlock(new ResourceLocation(color.getName() + "_carpet"))
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Carpet")
+                    .model((prov, block) ->
+                        prov.simpleBlock(block, prov.models()
+                                .carpet("block/" + ModelTemplates.name(block), prov.modLoc("block/" + ModelTemplates.name(block).replace("carpet", "wool")))
+                                .texture("particle", "#wool")))
+                    .variation("legacy")
+                    .next("llama")
+                    .build(b -> b.sound(SoundType.CLOTH).hardnessAndResistance(0.8F))));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> COAL = _FACTORY.newType(Material.ROCK, "coal")
             .addBlock(Blocks.COAL_BLOCK)

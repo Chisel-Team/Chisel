@@ -1,0 +1,7 @@
+{
+  "parent": "block/carpet",
+  "textures": {
+    "wool": "chisel:block/wool/orange/legacy",
+    "particle": "#wool"
+  }
+}
