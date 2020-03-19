@@ -92,6 +92,11 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .build(p -> p.hardnessAndResistance(2.0F, 6.0F));
     
+    public static final Map<String, RegistryEntry<BlockCarvable>> BRONZE = _FACTORY.newType(Material.IRON, "metals/bronze")
+            .setGroupName("Bronze Block")
+            .variations(VariantTemplates.METAL)
+            .build(p -> p.sound(SoundType.METAL).hardnessAndResistance(5.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1));
+    
     public static final Map<String, RegistryEntry<BlockCarvable>> BROWNSTONE = _FACTORY.newType(Material.ROCK, "brownstone")
             .variation("default")
                 .recipe((prov, block) -> new ShapedRecipeBuilder(block, 4)
