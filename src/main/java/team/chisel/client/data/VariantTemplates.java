@@ -137,16 +137,7 @@ public class VariantTemplates {
         public static final VariantTemplate PRISM = simple("prism");
         public static final VariantTemplate CUTS = simple("cuts");
     }
-    
-    public static class Stone {
-        
-        public static final VariantTemplate EMBOSSED = simple("embossed");
-        public static final VariantTemplate INDENTED = simple("indented");
-        public static final VariantTemplate MARKER = simple("marker");
-        public static final VariantTemplate SUNKEN = simple("sunken");
-        public static final VariantTemplate POISON = simple("poison");
-    }
-    
+
     @SuppressWarnings("null")
     private static ImmutableList<VariantTemplate> ofClass(Class<?> cls) {
         return ImmutableList.copyOf(Arrays.stream(cls.getDeclaredFields())
@@ -182,11 +173,6 @@ public class VariantTemplates {
     public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
     
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
-    @SuppressWarnings("null")
-    public static final ImmutableList<VariantTemplate> STONE = ImmutableList.<VariantTemplate>builder()
-            .addAll(ROCK)
-            .addAll(ofClass(Stone.class))
-            .build();
     
     @SuppressWarnings("null")
     public static final ImmutableList<VariantTemplate> withUncraft(Collection<VariantTemplate> templates, Item item) {

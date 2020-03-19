@@ -200,6 +200,17 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
+    public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")
+            .addBlock(Blocks.STONE)
+            .addBlock(Blocks.STONE_BRICKS)
+            .addBlock(Blocks.CHISELED_STONE_BRICKS)
+            .addBlock(Blocks.CRACKED_STONE_BRICKS)
+            .variations(VariantTemplates.ROCK)
+            .variation("extra/largeornate")
+            .next("extra/poison")
+            .next("extra/sunken")
+            .build(p -> p.hardnessAndResistance(1.5F, 10.0F));
+    
     public static final Map<String, RegistryEntry<BlockCarvable>> TYRIAN = _FACTORY.newType(Material.IRON, "tyrian")
             .variation("shining")
                 .recipe((prov, block) -> new ShapedRecipeBuilder(block, 32)
