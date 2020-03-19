@@ -25,6 +25,7 @@ import net.minecraft.world.storage.loot.ConstantRange;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import team.chisel.api.block.ChiselBlockFactory;
+import team.chisel.api.block.VariantTemplate;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.sound.ChiselSoundTypes;
@@ -58,6 +59,7 @@ public class Features {
             .build();
     
     public static final Map<String, RegistryEntry<BlockCarvable>> BASALT = _FACTORY.newType(Material.ROCK, "basalt")
+            .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
@@ -85,30 +87,10 @@ public class Features {
                     .next("papers")
                     .build(b -> b.sound(SoundType.WOOD).hardnessAndResistance(1.5f))));
             
-    
-//  String[] woodTypes = new String[]{"Oak", "Spruce", "Birch", "Jungle", "Acacia", "DarkOak"};
-//
-//  Carving.chisel.addVariation("bookshelf_oak", CarvingUtils.variationFor(Blocks.BOOKSHELF.getDefaultState(), -1));
-//
-//  BlockCreator<BlockCarvable> bookshelfCreator = 
-//
-//  for (String woodType : woodTypes) {
-//      factory.newType(Material.WOOD, "bookshelf_" + woodType.toLowerCase(), new ChiselBlockProvider<>(bookshelfCreator, BlockCarvable.class))
-//              .newVariation("rainbow")
-//              .next("necromancer-novice")
-//              .next("necromancer")
-//              .next("redtomes")
-//              .next("abandoned")
-//              .next("hoarder")
-//              .next("brim")
-//              .next("historician")
-//              .next("cans")
-//              .next("papers")
-//              .addOreDict("bookshelf")
-//              .addOreDict("bookshelf" + woodType)
-//              .build(b -> b.setSoundType(SoundType.WOOD).setHardness(1.5f));
-//
-//  }
+    public static final Map<String, RegistryEntry<BlockCarvable>> BRICKS = _FACTORY.newType(Material.ROCK, "bricks")
+            .addBlock(Blocks.BRICKS)
+            .variations(VariantTemplates.ROCK)
+            .build(p -> p.hardnessAndResistance(2.0F, 6.0F));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> BROWNSTONE = _FACTORY.newType(Material.ROCK, "brownstone")
             .variation("default")
@@ -190,10 +172,12 @@ public class Features {
             .build(b -> b.sound(ChiselSoundTypes.METAL));
 
     public static final Map<String, RegistryEntry<BlockCarvable>> LIMESTONE = _FACTORY.newType(Material.ROCK, "limestone")
+            .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
 
     public static final Map<String, RegistryEntry<BlockCarvable>> MARBLE = _FACTORY.newType(Material.ROCK, "marble")
+            .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     

@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/cube_ctm",
+  "textures": {
+    "all": "chisel:block/bricks/circular",
+    "connected_tex": "chisel:block/bricks/circular-ctm"
+  }
+}

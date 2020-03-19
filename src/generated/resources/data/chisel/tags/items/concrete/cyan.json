@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "chisel:concrete/cyan/raw",
     "chisel:concrete/cyan/cracked",
     "chisel:concrete/cyan/solid_bricks",
     "chisel:concrete/cyan/small_bricks",

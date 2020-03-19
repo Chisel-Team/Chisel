@@ -99,9 +99,10 @@ public class VariantTemplates {
         public static final VariantTemplate SCAFFOLD = simple("scaffold");
     }
     
+    public static final VariantTemplate RAW = simple("raw");
+    
     public static class Rock {
 
-        public static final VariantTemplate RAW = simple("raw");
         public static final VariantTemplate CRACKED = simple("cracked");
         public static final VariantTemplate SOLID_BRICKS = withName("solid_bricks", "Bricks");
         public static final VariantTemplate SMALL_BRICKS = simple("small_bricks");

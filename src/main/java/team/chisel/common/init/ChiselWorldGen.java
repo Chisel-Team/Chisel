@@ -38,15 +38,15 @@ public class ChiselWorldGen {
             if (BiomeDictionary.hasType(b, BiomeDictionary.Type.OVERWORLD)) {
                 // Basalt (under and around lava lakes)
                 b.addFeature(Decoration.UNDERGROUND_ORES, REPLACE_BLOCK_DOWNWARDS.get()
-                        .configure(new ReplaceMultipleBlocksConfig(ImmutableSet.of(Blocks.STONE.getDefaultState(), Blocks.ANDESITE.getDefaultState(), Blocks.GRANITE.getDefaultState(), Blocks.DIORITE.getDefaultState()), Features.BASALT.get(VariantTemplates.Rock.RAW.getName()).get().getDefaultState()))
+                        .configure(new ReplaceMultipleBlocksConfig(ImmutableSet.of(Blocks.STONE.getDefaultState(), Blocks.ANDESITE.getDefaultState(), Blocks.GRANITE.getDefaultState(), Blocks.DIORITE.getDefaultState()), Features.BASALT.get(VariantTemplates.RAW.getName()).get().getDefaultState()))
                         .createDecoratedFeature(PLACE_UNDER_LAVA.get().configure(NoPlacementConfig.NO_PLACEMENT_CONFIG)));
                 // Limestone (33x *6 @ y64 +48)
                 b.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE
-                        .configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.LIMESTONE.get(VariantTemplates.Rock.RAW.getName()).get().getDefaultState(), 33))
+                        .configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.LIMESTONE.get(VariantTemplates.RAW.getName()).get().getDefaultState(), 33))
                         .createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 64, 0, 48))));
                 // Marble (33x *6 @ y24 +48)
                 b.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE
-                        .configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.MARBLE.get(VariantTemplates.Rock.RAW.getName()).get().getDefaultState(), 33))
+                        .configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, Features.MARBLE.get(VariantTemplates.RAW.getName()).get().getDefaultState(), 33))
                         .createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(6, 24, 0, 48))));
             }
         }
