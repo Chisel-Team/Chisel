@@ -7,6 +7,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -166,14 +167,14 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
     @Override
     protected void drawSlot(Slot slot) {
         if (slot instanceof SlotChiselInput) {
-            GL11.glPushMatrix();
-            GL11.glScalef(2, 2, 1);
+            RenderSystem.pushMatrix();
+            RenderSystem.scalef(2, 2, 2);
             slot.xPos -= 16;
             slot.yPos -= 16;
             super.drawSlot(slot);
             slot.xPos += 16;
             slot.yPos += 16;
-            GL11.glPopMatrix();
+            RenderSystem.popMatrix();
         } else {
             super.drawSlot(slot);
         }
