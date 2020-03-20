@@ -33,6 +33,7 @@ import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
 import team.chisel.common.block.BlockCarvableCarpet;
+import team.chisel.common.init.ChiselTags;
 
 public class Features {
 
@@ -40,6 +41,7 @@ public class Features {
     
     public static final Map<String, RegistryEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.IRON, "metals/aluminum")
             .setGroupName("Aluminum Block")
+            .addTag(ChiselTags.Blocks.STORAGE_BLOCKS_ALUMINUM)
             .variations(VariantTemplates.METAL)
             .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1));
     
@@ -96,6 +98,7 @@ public class Features {
     
     public static final Map<String, RegistryEntry<BlockCarvable>> BRONZE = _FACTORY.newType(Material.IRON, "metals/bronze")
             .setGroupName("Bronze Block")
+            .addTag(ChiselTags.Blocks.STORAGE_BLOCKS_BRONZE)
             .variations(VariantTemplates.METAL)
             .build(p -> p.sound(SoundType.METAL).hardnessAndResistance(5.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1));
     

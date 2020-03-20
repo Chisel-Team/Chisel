@@ -4079,8 +4079,8 @@ a1952854442e755643a4f45bc8a017612c10c20f data\chisel\tags\blocks\concrete\red.js
 fe08060c46b0df5e23940d264f458233f8e107ef data\chisel\tags\blocks\factory.json
 ad71cb9b59829db73dc5ef7bd437072ca55834a1 data\chisel\tags\blocks\limestone.json
 7c8efe3a9b902755a3aa9c09f9ba7901e19fdbd4 data\chisel\tags\blocks\marble.json
-9ad9eda879cf2f110a8e532461fe3d8ec120d44b data\chisel\tags\blocks\metals\aluminum.json
-96fab7481fec5588d1b1d39f01edf0f7bc9dcc57 data\chisel\tags\blocks\metals\bronze.json
+5a4f8f4269f31544eb95df4525fcf8cae6e00a60 data\chisel\tags\blocks\metals\aluminum.json
+978e55ed438612b86340cadc1d09495363c81382 data\chisel\tags\blocks\metals\bronze.json
 f831072aae9843781a2404bba731fe85fcffadb9 data\chisel\tags\blocks\stone_bricks.json
 349ae0309d9b4dfd3934cfb6d5dd817c2dfe98d2 data\chisel\tags\blocks\tyrian.json
 43c0f3d07276f67092f7577aa4249549f4a705b1 data\chisel\tags\blocks\wool\black.json
@@ -4147,8 +4147,8 @@ a1952854442e755643a4f45bc8a017612c10c20f data\chisel\tags\items\concrete\red.jso
 fe08060c46b0df5e23940d264f458233f8e107ef data\chisel\tags\items\factory.json
 ad71cb9b59829db73dc5ef7bd437072ca55834a1 data\chisel\tags\items\limestone.json
 7c8efe3a9b902755a3aa9c09f9ba7901e19fdbd4 data\chisel\tags\items\marble.json
-9ad9eda879cf2f110a8e532461fe3d8ec120d44b data\chisel\tags\items\metals\aluminum.json
-96fab7481fec5588d1b1d39f01edf0f7bc9dcc57 data\chisel\tags\items\metals\bronze.json
+5a4f8f4269f31544eb95df4525fcf8cae6e00a60 data\chisel\tags\items\metals\aluminum.json
+978e55ed438612b86340cadc1d09495363c81382 data\chisel\tags\items\metals\bronze.json
 f831072aae9843781a2404bba731fe85fcffadb9 data\chisel\tags\items\stone_bricks.json
 349ae0309d9b4dfd3934cfb6d5dd817c2dfe98d2 data\chisel\tags\items\tyrian.json
 43c0f3d07276f67092f7577aa4249549f4a705b1 data\chisel\tags\items\wool\black.json
