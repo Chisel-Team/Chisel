@@ -137,7 +137,7 @@ public class Features {
                     .build(b -> b.sound(SoundType.CLOTH).hardnessAndResistance(0.8F))));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> COAL = _FACTORY.newType(Material.ROCK, "coal")
-            .addBlock(Blocks.COAL_BLOCK)
+            .addTag(Tags.Blocks.STORAGE_BLOCKS_COAL)
             .variations(/*VariantTemplates.withUncraft(*/VariantTemplates.ROCK/*, Items.COAL)*/) // TODO
             .build(b -> b.hardnessAndResistance(5.0F, 10.0F).sound(SoundType.STONE));
     
