@@ -12,6 +12,10 @@ public class ChiselTags {
     
     public static class Blocks {
 
+        public static final Tag<Block> STONE_BASALT = compatTag("stone/basalt");
+        public static final Tag<Block> STONE_LIMESTONE = compatTag("stone/limestone");
+        public static final Tag<Block> STONE_MARBLE = compatTag("stone/marble");
+
         public static final Tag<Block> STORAGE_BLOCKS_ALUMINUM = compatTag("storage_blocks/aluminum");
         public static final Tag<Block> STORAGE_BLOCKS_BRONZE = compatTag("storage_blocks/bronze");
         public static final Tag<Block> STORAGE_BLOCKS_CHARCOAL = compatTag("storage_blocks/charcoal");
