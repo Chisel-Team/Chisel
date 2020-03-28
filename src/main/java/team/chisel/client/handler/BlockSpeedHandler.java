@@ -39,8 +39,8 @@ public class BlockSpeedHandler {
             if (speedupBlocks.contains(below.getBlock())) {
                 manualInputCheck.updatePlayerMoveState();
                 if ((manualInputCheck.moveForward != 0 || manualInputCheck.moveStrafe != 0) && !player.isInWater()) {
-                    player.motionX *= Configurations.concreteVelocityMult + 0.05;
-                    player.motionZ *= Configurations.concreteVelocityMult + 0.05;
+                    player.motionX *= Configurations.concreteVelocityMult;
+                    player.motionZ *= Configurations.concreteVelocityMult;
                 }
             }
         }
