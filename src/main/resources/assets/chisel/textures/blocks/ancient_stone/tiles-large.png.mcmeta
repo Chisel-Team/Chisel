@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/certus/weaver-ctm"
+            "chisel:blocks/ancient_stone/tiles-large-ctm"
         ]
     }
 }
