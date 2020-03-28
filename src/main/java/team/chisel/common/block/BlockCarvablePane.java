@@ -87,7 +87,7 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         this.useNeighborBrightness = true;
-        return getBlockState().getBaseState().withProperty(metaProp, meta);
+        return getBlockState().getBaseState().withProperty(metaProp, clampMeta(meta));
     }
 
     @Override
@@ -154,10 +154,14 @@ public class BlockCarvablePane extends BlockPane implements ICarvable {
     public int getIndex() {
         return this.index;
     }
+    
+    private int clampMeta(int meta) {
+        return MathHelper.clamp(meta, 0, this.variations.length - 1);
+    }
 
     @Override
     public VariationData getVariationData(int meta) {
-        return this.variations[MathHelper.clamp(meta, 0, this.variations.length - 1)];
+        return this.variations[clampMeta(meta)];
     }
 
     public Block setDragonProof() {

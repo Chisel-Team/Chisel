@@ -103,11 +103,15 @@ public class BlockCarvable extends Block implements ICarvable {
     public int getIndex() {
         return this.index;
     }
+    
+    private int clampMeta(int meta) {
+        return MathHelper.clamp(meta, 0, this.variations.length - 1);
+    }
 
     @SuppressWarnings("null") // No type annotations
     @Override   
     public VariationData getVariationData(int meta) {
-        return this.variations[MathHelper.clamp(meta, 0, this.variations.length - 1)];
+        return this.variations[clampMeta(meta)];
     }
     
     @Override
@@ -117,7 +121,7 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getBlockState().getBaseState().withProperty(metaProp, meta);
+        return getBlockState().getBaseState().withProperty(metaProp, clampMeta(meta));
     }
 
     @Override
