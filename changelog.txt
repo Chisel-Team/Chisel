@@ -1,3 +1,11 @@
+1.0.2:
+Fixes
+- #806 Fix crash displaying autochisel particles for some custom chisel groups, also improve the look of the particles a bit
+- #818 Fix some incorrect textures for certus, ancient stone, and arcane stone
+- #819 Fix crash when loading a world that has invalid metadata values for chisel blocks
+- #808 Fix concrete speed boost being slightly higher than config value
+- #814 Fix error logging in JEI recipe plugin just printing the exception name and not a stacktrace
+
 1.0.1:
 Fixes
 - #794 Make chisel ice compatible with blocks that disable ice melting
