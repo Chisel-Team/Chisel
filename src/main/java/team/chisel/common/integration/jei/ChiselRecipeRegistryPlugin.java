@@ -57,7 +57,7 @@ public class ChiselRecipeRegistryPlugin implements IRecipeRegistryPlugin {
                 preventRecursion = false;
             }
         } catch (RuntimeException | LinkageError e) {
-            Chisel.logger.error(e);
+            Chisel.logger.error("Exception getting recipe category UIDs:", e);
             return Collections.emptyList();
         }
     }
@@ -79,7 +79,7 @@ public class ChiselRecipeRegistryPlugin implements IRecipeRegistryPlugin {
                 preventRecursion = false;
             }
         } catch (RuntimeException | LinkageError e) {
-            Chisel.logger.error(e);
+            Chisel.logger.error("Exception getting recipe wrappers:", e);
             return Collections.emptyList();
         }
     }
