@@ -42,8 +42,8 @@ public class ChiselJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
-        registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
-                            .collect(Collectors.toList()), category.getUid());
+//        registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
+//                            .collect(Collectors.toList()), category.getUid());
 
         for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
             ItemStack stack = new ItemStack(chisel.get());

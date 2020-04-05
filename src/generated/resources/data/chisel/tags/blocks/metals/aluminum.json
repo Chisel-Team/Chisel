@@ -7,7 +7,9 @@
     "chisel:metals/aluminum/machine",
     "chisel:metals/aluminum/badgreggy",
     "chisel:metals/aluminum/bolted",
-    "chisel:metals/aluminum/scaffold",
+    "chisel:metals/aluminum/scaffold"
+  ],
+  "optional": [
     "#forge:storage_blocks/aluminum"
   ]
 }

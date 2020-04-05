@@ -214,22 +214,20 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         if (this.group != null) {
             CarvingUtils.getChiselRegistry().addGroup(group);
             if (!otherBlocks.isEmpty() || !otherTags.isEmpty()) {
-                addExtraTagEntries(ProviderType.BLOCK_TAGS, t -> t, ForgeRegistries.BLOCKS::getValue, BlockTags.getCollection());
-                addExtraTagEntries(ProviderType.ITEM_TAGS, t -> parent.getItemTag(t.getId()), ForgeRegistries.ITEMS::getValue, ItemTags.getCollection());
+                addExtraTagEntries(ProviderType.BLOCK_TAGS, t -> t, ForgeRegistries.BLOCKS::getValue);
+                addExtraTagEntries(ProviderType.ITEM_TAGS, t -> parent.getItemTag(t.getId()), ForgeRegistries.ITEMS::getValue);
             }
         }
         return ret;
     }
     
     @SuppressWarnings({ "unchecked", "null" })
-    private <TAG> void addExtraTagEntries(ProviderType<RegistrateTagsProvider<TAG>> type, NonNullFunction<Tag<Block>, Tag<TAG>> tagGetter, NonNullFunction<ResourceLocation, TAG> entryLookup, TagCollection<TAG> vanillaTags) {
+    private <TAG> void addExtraTagEntries(ProviderType<RegistrateTagsProvider<TAG>> type, NonNullFunction<Tag<Block>, Tag<TAG>> tagGetter, NonNullFunction<ResourceLocation, TAG> entryLookup) {
         registrate.addDataGenerator(type, prov -> prov.getBuilder(tagGetter.apply(this.group))
                 .add((TAG[]) otherBlocks.stream()
                         .map(entryLookup::apply)
                         .toArray())
-                .add((Tag<TAG>[]) otherTags.stream()
-                        .map(vanillaTags::getOrCreate)
-                        .toArray(Tag[]::new)));
+                .addOptionalTag(otherTags.toArray(new ResourceLocation[0])));
     }
     
     private <B extends Block, P> BlockBuilder<B, P> addTag(BlockBuilder<B, P> builder) {

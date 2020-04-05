@@ -160,7 +160,12 @@ shadowJar {
     classifier = ''
 }
 
+reobf {
+    shadowJar {}
+}
+
 build.dependsOn shadowJar
+build.dependsOn reobfShadowJar
 
 lombok {
     version = "1.18.12"

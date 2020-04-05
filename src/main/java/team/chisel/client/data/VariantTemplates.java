@@ -173,6 +173,12 @@ public class VariantTemplates {
     public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
     
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
+
+    public static final SimpleTemplate withRecipe(VariantTemplate template, RecipeTemplate recipe) {
+        return SimpleTemplate.builderFrom(template)
+                .recipeTemplate(recipe)
+                .build();
+    }
     
     @SuppressWarnings("null")
     public static final ImmutableList<VariantTemplate> withUncraft(Collection<VariantTemplate> templates, Item item) {

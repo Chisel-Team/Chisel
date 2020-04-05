@@ -7,7 +7,9 @@
     "chisel:metals/bronze/machine",
     "chisel:metals/bronze/badgreggy",
     "chisel:metals/bronze/bolted",
-    "chisel:metals/bronze/scaffold",
+    "chisel:metals/bronze/scaffold"
+  ],
+  "optional": [
     "#forge:storage_blocks/bronze"
   ]
 }

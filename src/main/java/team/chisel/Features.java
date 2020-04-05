@@ -18,6 +18,7 @@ import net.minecraft.block.WoodType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
@@ -25,8 +26,6 @@ import net.minecraft.world.storage.loot.ConstantRange;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import team.chisel.api.block.ChiselBlockFactory;
-import team.chisel.api.block.ModelTemplate;
-import team.chisel.api.block.VariantTemplate;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.sound.ChiselSoundTypes;
@@ -138,6 +137,15 @@ public class Features {
                     .variation("legacy")
                     .next("llama")
                     .build(b -> b.sound(SoundType.CLOTH).hardnessAndResistance(0.8F))));
+    
+    public static final Map<String, RegistryEntry<BlockCarvable>> CHARCOAL = _FACTORY.newType(Material.ROCK, "charcoal")
+            .addTag(ChiselTags.Blocks.STORAGE_BLOCKS_CHARCOAL)
+            .variation(VariantTemplates.withRecipe(VariantTemplates.RAW, (prov, block) -> new ShapelessRecipeBuilder(block, 1)
+                    .addIngredient(Items.CHARCOAL)
+                    .addCriterion("has_charcoal", prov.hasItem(Items.CHARCOAL))
+                    .build(prov)))
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(5.0F, 10.0F).sound(SoundType.STONE));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> COAL = _FACTORY.newType(Material.ROCK, "coal")
             .addTag(Tags.Blocks.STORAGE_BLOCKS_COAL)

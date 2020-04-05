@@ -1,0 +1,42 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:charcoal/raw",
+    "chisel:charcoal/cracked",
+    "chisel:charcoal/solid_bricks",
+    "chisel:charcoal/small_bricks",
+    "chisel:charcoal/soft_bricks",
+    "chisel:charcoal/cracked_bricks",
+    "chisel:charcoal/triple_bricks",
+    "chisel:charcoal/encased_bricks",
+    "chisel:charcoal/chaotic_bricks",
+    "chisel:charcoal/array",
+    "chisel:charcoal/tiles_medium",
+    "chisel:charcoal/tiles_large",
+    "chisel:charcoal/tiles_small",
+    "chisel:charcoal/chaotic_medium",
+    "chisel:charcoal/chaotic_small",
+    "chisel:charcoal/braid",
+    "chisel:charcoal/dent",
+    "chisel:charcoal/french_1",
+    "chisel:charcoal/french_2",
+    "chisel:charcoal/jellybean",
+    "chisel:charcoal/layers",
+    "chisel:charcoal/mosaic",
+    "chisel:charcoal/ornate",
+    "chisel:charcoal/panel",
+    "chisel:charcoal/road",
+    "chisel:charcoal/slanted",
+    "chisel:charcoal/zag",
+    "chisel:charcoal/circular",
+    "chisel:charcoal/circularct",
+    "chisel:charcoal/weaver",
+    "chisel:charcoal/pillar",
+    "chisel:charcoal/twisted",
+    "chisel:charcoal/prism",
+    "chisel:charcoal/cuts"
+  ],
+  "optional": [
+    "#forge:storage_blocks/charcoal"
+  ]
+}
