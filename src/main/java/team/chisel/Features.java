@@ -64,6 +64,7 @@ public class Features {
     public static final Map<String, RegistryEntry<BlockCarvable>> BASALT = _FACTORY.newType(Material.ROCK, "basalt")
             .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
+            .addTag(ChiselTags.Blocks.STONE_BASALT)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
     // Hardcode to vanilla wood types
@@ -204,11 +205,13 @@ public class Features {
     public static final Map<String, RegistryEntry<BlockCarvable>> LIMESTONE = _FACTORY.newType(Material.ROCK, "limestone")
             .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
+            .addTag(ChiselTags.Blocks.STONE_LIMESTONE)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
 
     public static final Map<String, RegistryEntry<BlockCarvable>> MARBLE = _FACTORY.newType(Material.ROCK, "marble")
             .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
+            .addTag(ChiselTags.Blocks.STONE_MARBLE)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")
