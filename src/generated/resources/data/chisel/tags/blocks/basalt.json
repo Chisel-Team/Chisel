@@ -35,5 +35,8 @@
     "chisel:basalt/twisted",
     "chisel:basalt/prism",
     "chisel:basalt/cuts"
+  ],
+  "optional": [
+    "#forge:stone/basalt"
   ]
 }

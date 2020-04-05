@@ -4171,7 +4171,7 @@ bdc701084fb9a6a91f4c24804162f34f03170209 data\chisel\recipes\hitech_chisel.json
 343ed3c74da55f9ceb675e50aac3022c7ad1aa69 data\chisel\recipes\tyrian\shining.json
 8af327addafbef2d0e323ab6bf54b4c6742d4638 data\chisel\tags\blocks\andesite.json
 5b395e681d7c4d660ac25ea705a898885aa3bd0a data\chisel\tags\blocks\antiblock.json
-588e9f9380494079aefb260567ef0de66962db66 data\chisel\tags\blocks\basalt.json
+39916c3fe6b4a7a03b5b695a03b8f6d941213b4c data\chisel\tags\blocks\basalt.json
 42d8276077279daddafa7d54e46fd22f794c4f6f data\chisel\tags\blocks\bookshelf\acacia.json
 42a63e1518f4fe2075fc1b05336f573c7ba95329 data\chisel\tags\blocks\bookshelf\birch.json
 d9cd3bb513556dfa974f0d42c470de91e3a00c1f data\chisel\tags\blocks\bookshelf\dark_oak.json
@@ -4216,8 +4216,8 @@ a1952854442e755643a4f45bc8a017612c10c20f data\chisel\tags\blocks\concrete\red.js
 27e7ab4af5f4d8f375df9ee665031ed89152b357 data\chisel\tags\blocks\concrete\white.json
 4d5bf15922a75d5e72ebe2e8de3b8ff09609154b data\chisel\tags\blocks\concrete\yellow.json
 fe08060c46b0df5e23940d264f458233f8e107ef data\chisel\tags\blocks\factory.json
-ad71cb9b59829db73dc5ef7bd437072ca55834a1 data\chisel\tags\blocks\limestone.json
-7c8efe3a9b902755a3aa9c09f9ba7901e19fdbd4 data\chisel\tags\blocks\marble.json
+b7307648c27635dad131b416f02ec9b17e7941ec data\chisel\tags\blocks\limestone.json
+c05512f2f55b3c53fea4e1857001fbd7f8e2088f data\chisel\tags\blocks\marble.json
 4faed9168e2d270f0a3d78a57b36b28bcd9dd692 data\chisel\tags\blocks\metals\aluminum.json
 a90e4f948b8f57236ece01afe6c244dae732f430 data\chisel\tags\blocks\metals\bronze.json
 f831072aae9843781a2404bba731fe85fcffadb9 data\chisel\tags\blocks\stone_bricks.json
@@ -4240,7 +4240,7 @@ fed7401c6b74c63dda23ce4b2bb42b4856616d41 data\chisel\tags\blocks\wool\orange.jso
 4ac050e947e0f321adaf7383132b130bf23d73e6 data\chisel\tags\blocks\wool\yellow.json
 8af327addafbef2d0e323ab6bf54b4c6742d4638 data\chisel\tags\items\andesite.json
 5b395e681d7c4d660ac25ea705a898885aa3bd0a data\chisel\tags\items\antiblock.json
-588e9f9380494079aefb260567ef0de66962db66 data\chisel\tags\items\basalt.json
+39916c3fe6b4a7a03b5b695a03b8f6d941213b4c data\chisel\tags\items\basalt.json
 42d8276077279daddafa7d54e46fd22f794c4f6f data\chisel\tags\items\bookshelf\acacia.json
 42a63e1518f4fe2075fc1b05336f573c7ba95329 data\chisel\tags\items\bookshelf\birch.json
 d9cd3bb513556dfa974f0d42c470de91e3a00c1f data\chisel\tags\items\bookshelf\dark_oak.json
@@ -4285,8 +4285,8 @@ a1952854442e755643a4f45bc8a017612c10c20f data\chisel\tags\items\concrete\red.jso
 27e7ab4af5f4d8f375df9ee665031ed89152b357 data\chisel\tags\items\concrete\white.json
 4d5bf15922a75d5e72ebe2e8de3b8ff09609154b data\chisel\tags\items\concrete\yellow.json
 fe08060c46b0df5e23940d264f458233f8e107ef data\chisel\tags\items\factory.json
-ad71cb9b59829db73dc5ef7bd437072ca55834a1 data\chisel\tags\items\limestone.json
-7c8efe3a9b902755a3aa9c09f9ba7901e19fdbd4 data\chisel\tags\items\marble.json
+b7307648c27635dad131b416f02ec9b17e7941ec data\chisel\tags\items\limestone.json
+c05512f2f55b3c53fea4e1857001fbd7f8e2088f data\chisel\tags\items\marble.json
 4faed9168e2d270f0a3d78a57b36b28bcd9dd692 data\chisel\tags\items\metals\aluminum.json
 a90e4f948b8f57236ece01afe6c244dae732f430 data\chisel\tags\items\metals\bronze.json
 f831072aae9843781a2404bba731fe85fcffadb9 data\chisel\tags\items\stone_bricks.json

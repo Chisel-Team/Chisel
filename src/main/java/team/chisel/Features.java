@@ -32,7 +32,7 @@ import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
 import team.chisel.common.block.BlockCarvableCarpet;
-import team.chisel.common.init.ChiselTags;
+import team.chisel.common.init.ChiselCompatTags;
 
 public class Features {
 
@@ -40,7 +40,7 @@ public class Features {
     
     public static final Map<String, RegistryEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.IRON, "metals/aluminum")
             .setGroupName("Aluminum Block")
-            .addTag(ChiselTags.Blocks.STORAGE_BLOCKS_ALUMINUM)
+            .addTag(ChiselCompatTags.STORAGE_BLOCKS_ALUMINUM)
             .variations(VariantTemplates.METAL)
             .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1));
     
@@ -64,7 +64,7 @@ public class Features {
     public static final Map<String, RegistryEntry<BlockCarvable>> BASALT = _FACTORY.newType(Material.ROCK, "basalt")
             .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
-            .addTag(ChiselTags.Blocks.STONE_BASALT)
+            .addTag(ChiselCompatTags.STONE_BASALT)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
     // Hardcode to vanilla wood types
@@ -98,7 +98,7 @@ public class Features {
     
     public static final Map<String, RegistryEntry<BlockCarvable>> BRONZE = _FACTORY.newType(Material.IRON, "metals/bronze")
             .setGroupName("Bronze Block")
-            .addTag(ChiselTags.Blocks.STORAGE_BLOCKS_BRONZE)
+            .addTag(ChiselCompatTags.STORAGE_BLOCKS_BRONZE)
             .variations(VariantTemplates.METAL)
             .build(p -> p.sound(SoundType.METAL).hardnessAndResistance(5.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1));
     
@@ -140,7 +140,7 @@ public class Features {
                     .build(b -> b.sound(SoundType.CLOTH).hardnessAndResistance(0.8F))));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> CHARCOAL = _FACTORY.newType(Material.ROCK, "charcoal")
-            .addTag(ChiselTags.Blocks.STORAGE_BLOCKS_CHARCOAL)
+            .addTag(ChiselCompatTags.STORAGE_BLOCKS_CHARCOAL)
             .variation(VariantTemplates.withRecipe(VariantTemplates.RAW, (prov, block) -> new ShapelessRecipeBuilder(block, 1)
                     .addIngredient(Items.CHARCOAL)
                     .addCriterion("has_charcoal", prov.hasItem(Items.CHARCOAL))
@@ -205,13 +205,13 @@ public class Features {
     public static final Map<String, RegistryEntry<BlockCarvable>> LIMESTONE = _FACTORY.newType(Material.ROCK, "limestone")
             .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
-            .addTag(ChiselTags.Blocks.STONE_LIMESTONE)
+            .addTag(ChiselCompatTags.STONE_LIMESTONE)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
 
     public static final Map<String, RegistryEntry<BlockCarvable>> MARBLE = _FACTORY.newType(Material.ROCK, "marble")
             .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
-            .addTag(ChiselTags.Blocks.STONE_MARBLE)
+            .addTag(ChiselCompatTags.STONE_MARBLE)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")

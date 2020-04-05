@@ -35,5 +35,8 @@
     "chisel:limestone/twisted",
     "chisel:limestone/prism",
     "chisel:limestone/cuts"
+  ],
+  "optional": [
+    "#forge:stone/limestone"
   ]
 }
