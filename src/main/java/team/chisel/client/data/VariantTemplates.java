@@ -140,9 +140,9 @@ public class VariantTemplates {
 
     public static class Planks {
         public static final VariantTemplate LARGE_PLANKS = simple("large_planks");
-        public static final VariantTemplate CRUDE_HORIZONTAL_PLANKS = withName("crude_horizontal_planks", "Crude Planks (Horizontal)");
+        public static final VariantTemplate CRUDE_HORIZONTAL_PLANKS = simple("crude_horizontal_planks");
         public static final VariantTemplate VERTICAL_PLANKS = simple("vertical_planks");
-        public static final VariantTemplate CRUDE_VERTICAL_PLANKS = withName("crude_vertical_planks", "Crude Planks (Vertical)");
+        public static final VariantTemplate CRUDE_VERTICAL_PLANKS = simple("crude_vertical_planks");
         public static final VariantTemplate ENCASED_PLANKS = simple("encased_planks");
         public static final VariantTemplate ENCASED_LARGE_PLANKS = simple("encased_large_planks");
         public static final VariantTemplate BRACED_PLANKS = simple("braced_planks", ModelTemplates.cubeColumn());

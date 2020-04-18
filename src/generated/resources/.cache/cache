@@ -1125,8 +1125,8 @@ e84766d19c53e0f3268624adc2fb060886955fb3 assets\chisel\blockstates\wool\white\le
 0d5cb2ac017c39c118365c593b3ec7e309aac9bc assets\chisel\blockstates\wool\white\llama.json
 00110dc063903d0ec50e58b9ef477af27078f730 assets\chisel\blockstates\wool\yellow\legacy.json
 eef185d8f7d116f55929a510b7588aa3c84510f8 assets\chisel\blockstates\wool\yellow\llama.json
-ea13b1a2c947c34b45ccd44e178fa508be0f2c77 assets\chisel\lang\en_ud.json
-5f83934da1e0d2233093d5fa6e959643acb2edf7 assets\chisel\lang\en_us.json
+8e9da3bd7138bbf3b298f74074b0649ad86c3935 assets\chisel\lang\en_ud.json
+316de00af4b4c9a2d164cc3b005d51eab742198c assets\chisel\lang\en_us.json
 e38784e6e9fea3a8f1c6638df42ad59811d29624 assets\chisel\models\block\andesite\array.json
 4237d31f887a496d94b166ecc85f52ab7a74c4dc assets\chisel\models\block\andesite\braid.json
 fb6e40b5dbf9e0e81e6d4975c89b7e39be07ac25 assets\chisel\models\block\andesite\chaotic_bricks.json
