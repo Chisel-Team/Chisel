@@ -16,32 +16,34 @@ import com.google.gson.JsonObject;
 
 public class CreateProxies {
     
-    private static final Path TEXTURES_FOLDER = Paths.get("src", "main", "resources", "assets", "chisel", "textures", "block");
+    private static final Path TEXTURES_FOLDER = Paths.get("src", "main", "resources", "assets", "chisel", "textures", "block", "planks");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     public static void main(String[] args) throws IOException {
         for (Path block : Files.walk(TEXTURES_FOLDER).filter(Files::isDirectory).toArray(Path[]::new)) {
-            crop(block, "array", 2);
-            crop(block, "chaotic_bricks", 3);
-            crop(block, "cuts", 4);
-            crop(block, "jellybean", 2);
-            crop(block, "slanted", 2);
-            crop(block, "zag", "ctm");
-            crop(block, "abandoned", "ctmh");
-            crop(block, "brim", "ctmh");
-            crop(block, "cans", "ctmh");
-            crop(block, "historician", "ctmh");
-            crop(block, "hoarder", "ctmh");
-            crop(block, "necromancer-novice", "ctmh");
-            crop(block, "necromancer", "ctmh");
-            crop(block, "papers", "ctmh");
-            crop(block, "rainbow", "ctmh");
-            crop(block, "redtomes", "ctmh");
+//            crop(block, "array", 2);
+//            crop(block, "chaotic_bricks", 3);
+//            crop(block, "cuts", 4);
+//            crop(block, "jellybean", 2);
+//            crop(block, "slanted", 2);
+//            crop(block, "zag", "ctm");
+//            crop(block, "abandoned", "ctmh");
+//            crop(block, "brim", "ctmh");
+//            crop(block, "cans", "ctmh");
+//            crop(block, "historician", "ctmh");
+//            crop(block, "hoarder", "ctmh");
+//            crop(block, "necromancer-novice", "ctmh");
+//            crop(block, "necromancer", "ctmh");
+//            crop(block, "papers", "ctmh");
+//            crop(block, "rainbow", "ctmh");
+//            crop(block, "redtomes", "ctmh");
+            crop(block, "crude_horizontal_planks", 3);
+            crop(block, "crude_vertical_planks", 3);
         }
     }
 
     private static void crop(Path folder, String name, int size) throws IOException {
-        crop(folder, name, name + "-" + size + "x" + size);
+        crop(folder, name, size + "x" + size);
     }
     
     private static void crop(Path folder, String name, String suffix) throws IOException {

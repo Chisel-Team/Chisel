@@ -1,9 +1,6 @@
 {
-    "ctm": {
-        "ctm_version": 1,
-        "type": "random",
-        "extra": {
-            "size": 3
-        }
-    }
+  "ctm": {
+    "ctm_version": 1,
+    "proxy": "chisel:planks/dark_oak/crude_horizontal_planks-3x3"
+  }
 }
