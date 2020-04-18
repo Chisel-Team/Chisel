@@ -83,4 +83,14 @@ public class ModelTemplates {
                     .texture("top", replaceVariant(name, top)));
         };
     }
+
+    public static ModelTemplate axisFaces() {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("cube_axis"))
+                    .texture("x", name + "-ew")
+                    .texture("y", name + "-tb")
+                    .texture("z", name + "-ns"));
+        };
+    }
 }

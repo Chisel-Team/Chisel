@@ -6,6 +6,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.mojang.datafixers.util.Pair;
+import net.minecraft.block.Block;
 import org.apache.commons.lang3.StringUtils;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
@@ -213,7 +215,19 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .addTag(ChiselCompatTags.STONE_MARBLE)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
-    
+
+    public static final Map<Pair<WoodType, Block>, Map<String, RegistryEntry<BlockCarvable>>> PLANKS = Stream.of(
+            Pair.of(WoodType.OAK, Blocks.OAK_PLANKS),
+            Pair.of(WoodType.SPRUCE, Blocks.SPRUCE_PLANKS),
+            Pair.of(WoodType.BIRCH, Blocks.BIRCH_PLANKS),
+            Pair.of(WoodType.JUNGLE, Blocks.JUNGLE_PLANKS),
+            Pair.of(WoodType.ACACIA, Blocks.ACACIA_PLANKS),
+            Pair.of(WoodType.DARK_OAK, Blocks.DARK_OAK_PLANKS))
+            .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "planks-" + wood.getFirst().getName().replace('_', '-'))
+                    .addBlock(wood.getSecond())
+                    .variations(VariantTemplates.WOOD)
+                    .build(b -> b.sound(SoundType.WOOD).hardnessAndResistance(1.5f))));
+
     public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")
             .addBlock(Blocks.STONE)
             .addBlock(Blocks.STONE_BRICKS)

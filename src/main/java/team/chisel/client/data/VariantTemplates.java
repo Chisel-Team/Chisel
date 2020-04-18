@@ -138,6 +138,24 @@ public class VariantTemplates {
         public static final VariantTemplate CUTS = simple("cuts");
     }
 
+    public static class Wood {
+        public static final VariantTemplate BLINDS = simple("blinds");
+        public static final VariantTemplate CHAOTIC = simple("chaotic");
+        public static final VariantTemplate CHAOTIC_HORIZONTAL = simple("chaotic-hor");
+        public static final VariantTemplate CLEAN = simple("clean");
+        public static final VariantTemplate CRATE = withName("crate", "Shipping Crate");
+        public static final VariantTemplate CRATE_FANCY = simple("crate-fancy");
+        public static final VariantTemplate CRATEEX = simple("crateex");
+        public static final VariantTemplate DOUBLE = simple("double", ModelTemplates.cubeColumn());
+        public static final VariantTemplate FANCY = simple("fancy");
+        public static final VariantTemplate LARGE = simple("large");
+        public static final VariantTemplate PANEL = simple("panel-nails");
+        public static final VariantTemplate PARQUET = simple("parquet");
+        public static final VariantTemplate SHORT = simple("short", ModelTemplates.axisFaces());
+        public static final VariantTemplate VERTICAL = simple("vertical");
+        public static final VariantTemplate VERTICAL_UNEVEN = simple("vertical-uneven");
+    }
+
     @SuppressWarnings("null")
     private static ImmutableList<VariantTemplate> ofClass(Class<?> cls) {
         return ImmutableList.copyOf(Arrays.stream(cls.getDeclaredFields())
@@ -171,8 +189,10 @@ public class VariantTemplates {
     }
     
     public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
-    
+
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
+
+    public static final ImmutableList<VariantTemplate> WOOD = ofClass(Wood.class);
 
     public static final SimpleTemplate withRecipe(VariantTemplate template, RecipeTemplate recipe) {
         return SimpleTemplate.builderFrom(template)
