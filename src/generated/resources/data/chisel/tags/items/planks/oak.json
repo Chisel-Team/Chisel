@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:planks/oak/blinds",
+    "chisel:planks/oak/chaotic",
+    "chisel:planks/oak/chaotic-hor",
+    "chisel:planks/oak/clean",
+    "chisel:planks/oak/crate",
+    "chisel:planks/oak/crate-fancy",
+    "chisel:planks/oak/crateex",
+    "chisel:planks/oak/double",
+    "chisel:planks/oak/fancy",
+    "chisel:planks/oak/large",
+    "chisel:planks/oak/panel-nails",
+    "chisel:planks/oak/parquet",
+    "chisel:planks/oak/short",
+    "chisel:planks/oak/vertical",
+    "chisel:planks/oak/vertical-uneven",
+    "minecraft:oak_planks"
+  ]
+}

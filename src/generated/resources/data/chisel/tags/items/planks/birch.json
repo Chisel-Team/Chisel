@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:planks/birch/blinds",
+    "chisel:planks/birch/chaotic",
+    "chisel:planks/birch/chaotic-hor",
+    "chisel:planks/birch/clean",
+    "chisel:planks/birch/crate",
+    "chisel:planks/birch/crate-fancy",
+    "chisel:planks/birch/crateex",
+    "chisel:planks/birch/double",
+    "chisel:planks/birch/fancy",
+    "chisel:planks/birch/large",
+    "chisel:planks/birch/panel-nails",
+    "chisel:planks/birch/parquet",
+    "chisel:planks/birch/short",
+    "chisel:planks/birch/vertical",
+    "chisel:planks/birch/vertical-uneven",
+    "minecraft:birch_planks"
+  ]
+}

@@ -6,14 +6,15 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.block.Block;
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.RegistryEntry;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.WoodType;
@@ -27,6 +28,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.ConstantRange;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
@@ -69,8 +71,11 @@ public class Features {
             .addTag(ChiselCompatTags.STONE_BASALT)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
+    
+    private static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
+    
     // Hardcode to vanilla wood types
-    public static final Map<WoodType, Map<String, RegistryEntry<BlockCarvableBookshelf>>> BOOKSHELVES = Stream.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK)
+    public static final Map<WoodType, Map<String, RegistryEntry<BlockCarvableBookshelf>>> BOOKSHELVES = VANILLA_WOODS.stream()
             .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "bookshelf/" + wood.getName(), BlockCarvableBookshelf::new)
                     .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouchOrRandomly(block, Items.BOOK, ConstantRange.of(3))))
                     .applyIf(() -> wood == WoodType.OAK, f -> f.addBlock(Blocks.BOOKSHELF))
@@ -216,17 +221,12 @@ public class Features {
             .addTag(ChiselCompatTags.STONE_MARBLE)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
 
-    public static final Map<Pair<WoodType, Block>, Map<String, RegistryEntry<BlockCarvable>>> PLANKS = Stream.of(
-            Pair.of(WoodType.OAK, Blocks.OAK_PLANKS),
-            Pair.of(WoodType.SPRUCE, Blocks.SPRUCE_PLANKS),
-            Pair.of(WoodType.BIRCH, Blocks.BIRCH_PLANKS),
-            Pair.of(WoodType.JUNGLE, Blocks.JUNGLE_PLANKS),
-            Pair.of(WoodType.ACACIA, Blocks.ACACIA_PLANKS),
-            Pair.of(WoodType.DARK_OAK, Blocks.DARK_OAK_PLANKS))
-            .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "planks-" + wood.getFirst().getName().replace('_', '-'))
-                    .addBlock(wood.getSecond())
+    public static final Map<WoodType, Map<String, RegistryEntry<BlockCarvable>>> PLANKS = VANILLA_WOODS.stream()
+            .map(t -> Pair.<WoodType, ResourceLocation>of(t, new ResourceLocation(t.getName() + "_planks")))
+            .collect(Collectors.toMap(Pair::getFirst, pair -> _FACTORY.newType(Material.WOOD, "planks/" + pair.getFirst().getName())
+                    .addBlock(pair.getSecond())
                     .variations(VariantTemplates.WOOD)
-                    .build(b -> b.sound(SoundType.WOOD).hardnessAndResistance(1.5f))));
+                    .build($ -> Block.Properties.from(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))));
 
     public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")
             .addBlock(Blocks.STONE)

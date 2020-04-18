@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:planks/acacia/blinds",
+    "chisel:planks/acacia/chaotic",
+    "chisel:planks/acacia/chaotic-hor",
+    "chisel:planks/acacia/clean",
+    "chisel:planks/acacia/crate",
+    "chisel:planks/acacia/crate-fancy",
+    "chisel:planks/acacia/crateex",
+    "chisel:planks/acacia/double",
+    "chisel:planks/acacia/fancy",
+    "chisel:planks/acacia/large",
+    "chisel:planks/acacia/panel-nails",
+    "chisel:planks/acacia/parquet",
+    "chisel:planks/acacia/short",
+    "chisel:planks/acacia/vertical",
+    "chisel:planks/acacia/vertical-uneven",
+    "minecraft:acacia_planks"
+  ]
+}

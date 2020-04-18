@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:planks/spruce/blinds",
+    "chisel:planks/spruce/chaotic",
+    "chisel:planks/spruce/chaotic-hor",
+    "chisel:planks/spruce/clean",
+    "chisel:planks/spruce/crate",
+    "chisel:planks/spruce/crate-fancy",
+    "chisel:planks/spruce/crateex",
+    "chisel:planks/spruce/double",
+    "chisel:planks/spruce/fancy",
+    "chisel:planks/spruce/large",
+    "chisel:planks/spruce/panel-nails",
+    "chisel:planks/spruce/parquet",
+    "chisel:planks/spruce/short",
+    "chisel:planks/spruce/vertical",
+    "chisel:planks/spruce/vertical-uneven",
+    "minecraft:spruce_planks"
+  ]
+}

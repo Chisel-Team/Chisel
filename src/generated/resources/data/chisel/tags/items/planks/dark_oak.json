@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:planks/dark_oak/blinds",
+    "chisel:planks/dark_oak/chaotic",
+    "chisel:planks/dark_oak/chaotic-hor",
+    "chisel:planks/dark_oak/clean",
+    "chisel:planks/dark_oak/crate",
+    "chisel:planks/dark_oak/crate-fancy",
+    "chisel:planks/dark_oak/crateex",
+    "chisel:planks/dark_oak/double",
+    "chisel:planks/dark_oak/fancy",
+    "chisel:planks/dark_oak/large",
+    "chisel:planks/dark_oak/panel-nails",
+    "chisel:planks/dark_oak/parquet",
+    "chisel:planks/dark_oak/short",
+    "chisel:planks/dark_oak/vertical",
+    "chisel:planks/dark_oak/vertical-uneven",
+    "minecraft:dark_oak_planks"
+  ]
+}
