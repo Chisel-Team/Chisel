@@ -1,6 +1,6 @@
 {
   "ctm": {
     "ctm_version": 1,
-    "proxy": "chisel:planks/jungle/crude_vertical_planks-3x3"
+    "proxy": "chisel:block/planks/jungle/crude_vertical_planks-3x3"
   }
 }

@@ -1,6 +1,6 @@
 {
   "ctm": {
     "ctm_version": 1,
-    "proxy": "chisel:planks/acacia/crude_horizontal_planks-3x3"
+    "proxy": "chisel:block/planks/acacia/crude_horizontal_planks-3x3"
   }
 }
