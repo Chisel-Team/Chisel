@@ -10,46 +10,50 @@ Join us on our Discord at [with the invite code 0vVjLvWg5kyQwnHG](https://discor
 Licensing
 ===========
 
-I cant think of anything else to say, here's the license stuff.
+This code for Chisel is licensed under GPLv2. See LICENSE.md for more.
 
-This mod is licensed under GPLv2. See LICENSE.md for more.
+All images contained in the directory `/src/main/resources/assets/chisel/textures/block/blood_magic/` are created by Yulife, and are used with permission.
 
-All images contained by this directory
-`/src/main/resources/assets/chisel/textures/blocks/bloodMagic/` are created by Yulife, and are used with permission.
 [It is licensed under CC BY-NC-SA 4.0](https://github.com/CyanideX/Unity/blob/master/LICENSE.md).
 
 All images contained by the following directories
 
-- `/src/main/resources/assets/chisel/textures/blocks/ancient_stone/`
-- `/src/main/resources/assets/chisel/textures/blocks/andesite/`
-- `/src/main/resources/assets/chisel/textures/blocks/arcane_stone/`
-- `/src/main/resources/assets/chisel/textures/blocks/basalt/`
-- `/src/main/resources/assets/chisel/textures/blocks/bookshelf/`
-- `/src/main/resources/assets/chisel/textures/blocks/bricks/`
-- `/src/main/resources/assets/chisel/textures/blocks/certus/`
-- `/src/main/resources/assets/chisel/textures/blocks/coal/`
-- `/src/main/resources/assets/chisel/textures/blocks/cobblestone/`
-- `/src/main/resources/assets/chisel/textures/blocks/diorite/`
-- `/src/main/resources/assets/chisel/textures/blocks/dirt/`
-- `/src/main/resources/assets/chisel/textures/blocks/endstone/`
-- `/src/main/resources/assets/chisel/textures/blocks/fluid/`
-- `/src/main/resources/assets/chisel/textures/blocks/glass_stained/`
-- `/src/main/resources/assets/chisel/textures/blocks/glowstone/`
-- `/src/main/resources/assets/chisel/textures/blocks/granite/`
-- `/src/main/resources/assets/chisel/textures/blocks/hardenedclay/`
-- `/src/main/resources/assets/chisel/textures/blocks/ice/`
-- `/src/main/resources/assets/chisel/textures/blocks/limestone/`
-- `/src/main/resources/assets/chisel/textures/blocks/marble/`
-- `/src/main/resources/assets/chisel/textures/blocks/prismarine/`
-- `/src/main/resources/assets/chisel/textures/blocks/prismarineanim/`
-- `/src/main/resources/assets/chisel/textures/blocks/purpur/`
-- `/src/main/resources/assets/chisel/textures/blocks/quartz/`
-- `/src/main/resources/assets/chisel/textures/blocks/redstone/`
-- `/src/main/resources/assets/chisel/textures/blocks/sandstonered/`
-- `/src/main/resources/assets/chisel/textures/blocks/sandstoneyellow/`
-- `/src/main/resources/assets/chisel/textures/blocks/stone/`
-- `/src/main/resources/assets/chisel/textures/blocks/wool/llama/`
+- `/src/main/resources/assets/chisel/textures/block/ancient_stone/`
+- `/src/main/resources/assets/chisel/textures/block/andesite/`
+- `/src/main/resources/assets/chisel/textures/block/arcane_stone/`
+- `/src/main/resources/assets/chisel/textures/block/basalt/`
+- `/src/main/resources/assets/chisel/textures/block/bookshelf/`
+- `/src/main/resources/assets/chisel/textures/block/bricks/`
+- `/src/main/resources/assets/chisel/textures/block/certus/`
+- `/src/main/resources/assets/chisel/textures/block/coal/`
+- `/src/main/resources/assets/chisel/textures/block/cobblestone/`
+- `/src/main/resources/assets/chisel/textures/block/diorite/`
+- `/src/main/resources/assets/chisel/textures/block/dirt/`
+- `/src/main/resources/assets/chisel/textures/block/endstone/`
+- `/src/main/resources/assets/chisel/textures/block/fluid/`
+- `/src/main/resources/assets/chisel/textures/block/glass_stained/`
+- `/src/main/resources/assets/chisel/textures/block/glowstone/`
+- `/src/main/resources/assets/chisel/textures/block/granite/`
+- `/src/main/resources/assets/chisel/textures/block/hardenedclay/`
+- `/src/main/resources/assets/chisel/textures/block/ice/`
+- `/src/main/resources/assets/chisel/textures/block/limestone/`
+- `/src/main/resources/assets/chisel/textures/block/marble/`
+- `/src/main/resources/assets/chisel/textures/block/prismarine/`
+- `/src/main/resources/assets/chisel/textures/block/prismarineanim/`
+- `/src/main/resources/assets/chisel/textures/block/purpur/`
+- `/src/main/resources/assets/chisel/textures/block/quartz/`
+- `/src/main/resources/assets/chisel/textures/block/redstone/`
+- `/src/main/resources/assets/chisel/textures/block/sandstonered/`
+- `/src/main/resources/assets/chisel/textures/block/sandstoneyellow/`
+- `/src/main/resources/assets/chisel/textures/block/stone_bricks/`
+- `/src/main/resources/assets/chisel/textures/block/wool/` (llama textures)
 
-are created by Drullkus, and are used with permission. It is licensed under CC BY-NC-SA 4.0.
+are created by [Drullkus](https://github.com/Drullkus), and are used with permission. They are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+All images contained by the following directories
+
+- `/src/main/resources/assets/chisel/textures/block/planks`
+
+are created by Tovlyn, and are used with permission. They are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 Sounds dirt1, dirt2, dirt3, and dirt4 in `/src/main/resources/assets/chisel/sounds/chisel/` are sampled from http://freesound.org/people/Piggimon/sounds/366387/ and licensed under CC BY-NC
