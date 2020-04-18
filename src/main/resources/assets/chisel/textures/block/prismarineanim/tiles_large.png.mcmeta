@@ -31,7 +31,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/prismarineanim/tiles_large-ctm"
+            "chisel:block/prismarineanim/tiles_large-ctm"
         ]
     }
 }

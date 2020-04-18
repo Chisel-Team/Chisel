@@ -4,7 +4,7 @@
         "type": "ctm",
         "layer": "TRANSLUCENT",
         "textures": [
-            "chisel:blocks/glass_stained/brown/brick_ct"
+            "chisel:block/glass_stained/brown/brick_ct"
         ]
     }
 }

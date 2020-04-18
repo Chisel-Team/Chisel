@@ -4,7 +4,7 @@
         "type": "ctm",
         "layer": "CUTOUT",
         "textures": [
-            "chisel:blocks/voidstone/animated/metalborder-ctm"
+            "chisel:block/voidstone/animated/metalborder-ctm"
         ]
     }
 }

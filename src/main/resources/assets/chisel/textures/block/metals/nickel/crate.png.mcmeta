@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/metals/nickel/crate-ctm"
+            "chisel:block/metals/nickel/crate-ctm"
         ]
     }
 }

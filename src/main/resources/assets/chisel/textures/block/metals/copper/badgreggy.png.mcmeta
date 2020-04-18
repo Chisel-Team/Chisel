@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/metals/copper/badGreggy-ctm"
+            "chisel:block/metals/copper/badgreggy-ctm"
         ]
     }
 }

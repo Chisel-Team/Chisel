@@ -1,0 +1,13 @@
+{
+    "parent": "block/util_cube_glow_5_all",
+    "textures": {
+        "glow_4": "block/redstone_block_glow_4",
+        "glow_3": "block/redstone_block_glow_3",
+        "glow_2": "block/redstone_block_glow_2",
+        "glow_1": "block/redstone_block_glow_1",
+        "glow_0": "block/redstone_block_glow_0",
+        "particle": "block/redstone_block"
+    },
+    "loader": "ctm:ctm",
+    "ctm_version": 1
+}

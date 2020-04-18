@@ -4,7 +4,7 @@
     "type": "ctm",
     "layer": "CUTOUT",
     "textures": [
-      "chisel:blocks/antiblock/antiblock_ctm"
+      "chisel:block/antiblock/antiblock_ctm"
     ],
     "extra": {
       "ignore_states": true

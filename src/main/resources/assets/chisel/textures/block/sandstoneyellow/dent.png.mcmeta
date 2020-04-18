@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/sandstoneyellow/dent-ctm"
+            "chisel:block/sandstoneyellow/dent-ctm"
         ]
     }
 }

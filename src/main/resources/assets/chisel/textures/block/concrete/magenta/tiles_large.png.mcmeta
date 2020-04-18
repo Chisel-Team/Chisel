@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/concrete/magenta/tiles_large-ctm"
+            "chisel:block/concrete/magenta/tiles_large-ctm"
         ]
     }
 }

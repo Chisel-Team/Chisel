@@ -4,7 +4,7 @@
         "type": "ctm",
         "layer": "CUTOUT",
         "textures": [
-            "chisel:blocks/glass/terrain_glassnoborder-ctm"
+            "chisel:block/glass/terrain_glassnoborder-ctm"
         ]
     }
 }

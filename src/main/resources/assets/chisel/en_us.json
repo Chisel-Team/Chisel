@@ -57,7 +57,7 @@
     "block.chisel.blockAluminum.thermal.desc.1": "Thermal",
     "block.chisel.blockAluminum.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockAluminum.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockAluminum.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockAluminum.badgreggy.desc.1": "Egregious",
     "block.chisel.blockAluminum.bolted.desc.1": "Bolted",
     "block.chisel.blockAluminum.scaffold.desc.1": "Scaffold",
 
@@ -515,7 +515,7 @@
     "block.chisel.blockBronze.thermal.desc.1": "Thermal",
     "block.chisel.blockBronze.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockBronze.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockBronze.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockBronze.badgreggy.desc.1": "Egregious",
     "block.chisel.blockBronze.bolted.desc.1": "Bolted",
     "block.chisel.blockBronze.scaffold.desc.1": "Scaffold",
 
@@ -623,7 +623,7 @@
     "block.chisel.blockCobalt.thermal.desc.1": "Thermal",
     "block.chisel.blockCobalt.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockCobalt.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockCobalt.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockCobalt.badgreggy.desc.1": "Egregious",
     "block.chisel.blockCobalt.bolted.desc.1": "Bolted",
     "block.chisel.blockCobalt.scaffold.desc.1": "Scaffold",
 
@@ -1438,7 +1438,7 @@
     "block.chisel.blockCopper.thermal.desc.1": "Thermal",
     "block.chisel.blockCopper.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockCopper.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockCopper.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockCopper.badgreggy.desc.1": "Egregious",
     "block.chisel.blockCopper.bolted.desc.1": "Bolted",
     "block.chisel.blockCopper.scaffold.desc.1": "Scaffold",
 
@@ -1522,7 +1522,7 @@
     "block.chisel.blockElectrum.thermal.desc.1": "Thermal",
     "block.chisel.blockElectrum.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockElectrum.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockElectrum.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockElectrum.badgreggy.desc.1": "Egregious",
     "block.chisel.blockElectrum.bolted.desc.1": "Bolted",
     "block.chisel.blockElectrum.scaffold.desc.1": "Scaffold",
 
@@ -1967,7 +1967,7 @@
     "block.chisel.blockGold.thermal.desc.1": "Thermal",
     "block.chisel.blockGold.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockGold.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockGold.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockGold.badgreggy.desc.1": "Egregious",
     "block.chisel.blockGold.bolted.desc.1": "Bolted",
     "block.chisel.blockGold.scaffold.desc.1": "Scaffold",
 
@@ -2129,7 +2129,7 @@
     "block.chisel.blockInvar.thermal.desc.1": "Thermal",
     "block.chisel.blockInvar.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockInvar.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockInvar.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockInvar.badgreggy.desc.1": "Egregious",
     "block.chisel.blockInvar.bolted.desc.1": "Bolted",
     "block.chisel.blockInvar.scaffold.desc.1": "Scaffold",
 
@@ -2139,7 +2139,7 @@
     "block.chisel.blockIron.thermal.desc.1": "Thermal",
     "block.chisel.blockIron.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockIron.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockIron.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockIron.badgreggy.desc.1": "Egregious",
     "block.chisel.blockIron.bolted.desc.1": "Bolted",
     "block.chisel.blockIron.scaffold.desc.1": "Scaffold",
 
@@ -2252,7 +2252,7 @@
     "block.chisel.blockLead.thermal.desc.1": "Thermal",
     "block.chisel.blockLead.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockLead.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockLead.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockLead.badgreggy.desc.1": "Egregious",
     "block.chisel.blockLead.bolted.desc.1": "Bolted",
     "block.chisel.blockLead.scaffold.desc.1": "Scaffold",
 
@@ -2399,7 +2399,7 @@
     "block.chisel.blockNickel.thermal.desc.1": "Thermal",
     "block.chisel.blockNickel.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockNickel.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockNickel.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockNickel.badgreggy.desc.1": "Egregious",
     "block.chisel.blockNickel.bolted.desc.1": "Bolted",
     "block.chisel.blockNickel.scaffold.desc.1": "Scaffold",
 
@@ -2539,7 +2539,7 @@
     "block.chisel.blockPlatinum.thermal.desc.1": "Thermal",
     "block.chisel.blockPlatinum.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockPlatinum.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockPlatinum.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockPlatinum.badgreggy.desc.1": "Egregious",
     "block.chisel.blockPlatinum.bolted.desc.1": "Bolted",
     "block.chisel.blockPlatinum.scaffold.desc.1": "Scaffold",
 
@@ -2848,7 +2848,7 @@
     "block.chisel.blockSilver.thermal.desc.1": "Thermal",
     "block.chisel.blockSilver.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockSilver.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockSilver.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockSilver.badgreggy.desc.1": "Egregious",
     "block.chisel.blockSilver.bolted.desc.1": "Bolted",
     "block.chisel.blockSilver.scaffold.desc.1": "Scaffold",
 
@@ -2858,7 +2858,7 @@
     "block.chisel.blockSteel.thermal.desc.1": "Thermal",
     "block.chisel.blockSteel.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockSteel.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockSteel.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockSteel.badgreggy.desc.1": "Egregious",
     "block.chisel.blockSteel.bolted.desc.1": "Bolted",
     "block.chisel.blockSteel.scaffold.desc.1": "Scaffold",
 
@@ -2987,7 +2987,7 @@
     "block.chisel.blockTin.thermal.desc.1": "Thermal",
     "block.chisel.blockTin.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockTin.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockTin.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockTin.badgreggy.desc.1": "Egregious",
     "block.chisel.blockTin.bolted.desc.1": "Bolted",
     "block.chisel.blockTin.scaffold.desc.1": "Scaffold",
 
@@ -3015,7 +3015,7 @@
     "block.chisel.blockUranium.thermal.desc.1": "Thermal",
     "block.chisel.blockUranium.machine.desc.1": "An Old Relic From The",
     "block.chisel.blockUranium.machine.desc.2": "Land Of OneTeuFyv",
-    "block.chisel.blockUranium.badGreggy.desc.1": "Egregious",
+    "block.chisel.blockUranium.badgreggy.desc.1": "Egregious",
     "block.chisel.blockUranium.bolted.desc.1": "Bolted",
     "block.chisel.blockUranium.scaffold.desc.1": "Scaffold",
 

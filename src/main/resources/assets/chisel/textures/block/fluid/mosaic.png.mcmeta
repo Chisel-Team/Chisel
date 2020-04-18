@@ -4,7 +4,7 @@
         "type": "ctm",
         "layer": "TRANSLUCENT",
         "textures": [
-            "chisel:blocks/fluid/mosaic-ctm"
+            "chisel:block/fluid/mosaic-ctm"
         ]
     }
 }

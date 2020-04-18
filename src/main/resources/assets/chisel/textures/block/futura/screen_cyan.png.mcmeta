@@ -4,7 +4,7 @@
     "type": "ctm",
     "layer": "CUTOUT",
     "textures": [
-        "chisel:blocks/futura/screen_cyan_ctm"
+        "chisel:block/futura/screen_cyan_ctm"
     ],
     "extra": {
       "connect_to": [

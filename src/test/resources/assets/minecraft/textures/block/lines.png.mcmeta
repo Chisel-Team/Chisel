@@ -1,0 +1,16 @@
+{
+    "animation": {
+        "frametime": 2,
+        "interpolate": true
+    },
+    "ctm":{
+        "ctm_version": 1,
+        "layer":"CUTOUT",
+        "extra": {
+            "light": {
+                "block": 15,
+                "sky": 15
+            }
+        }
+    }
+}

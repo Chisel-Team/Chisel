@@ -1,6 +1,6 @@
 {
   "ctm": {
     "ctm_version": 1,
-    "proxy": "chisel:block/quartz/array-array-2x2"
+    "proxy": "chisel:block/quartz/array-2x2"
   }
 }

@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/glowstone/mosaic-ctm"
+            "chisel:block/glowstone/mosaic-ctm"
         ]
     }
 }

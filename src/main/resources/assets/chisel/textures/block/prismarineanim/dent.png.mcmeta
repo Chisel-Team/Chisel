@@ -31,7 +31,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/prismarineanim/dent-ctm"
+            "chisel:block/prismarineanim/dent-ctm"
         ]
     }
 }

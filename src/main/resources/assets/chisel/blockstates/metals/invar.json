@@ -4,7 +4,7 @@
     "variants": {
         "scaffold":  [{ "textures": { "all": "chisel:blocks/metals/invar/scaffold"  } }],
         "machine":   [{ "textures": { "all": "chisel:blocks/metals/invar/machine"   } }],
-        "badgreggy": [{ "textures": { "all": "chisel:blocks/metals/invar/badGreggy" } }],
+        "badgreggy": [{ "textures": { "all": "chisel:blocks/metals/invar/badgreggy" } }],
         "thermal":   [{
             "model": "cube_bottom_top",
             "textures": {

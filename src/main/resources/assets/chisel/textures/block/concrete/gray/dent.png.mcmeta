@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/concrete/gray/dent-ctm"
+            "chisel:block/concrete/gray/dent-ctm"
         ]
     }
 }

@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/metals/uranium/scaffold-ctm"
+            "chisel:block/metals/uranium/scaffold-ctm"
         ]
     }
 }

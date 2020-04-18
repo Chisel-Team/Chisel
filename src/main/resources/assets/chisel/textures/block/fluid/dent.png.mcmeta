@@ -4,7 +4,7 @@
         "type": "ctm",
         "layer": "TRANSLUCENT",
         "textures": [
-            "chisel:blocks/fluid/dent-ctm"
+            "chisel:block/fluid/dent-ctm"
         ]
     }
 }

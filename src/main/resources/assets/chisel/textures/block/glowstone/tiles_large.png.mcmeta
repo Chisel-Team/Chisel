@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/glowstone/tiles_large-ctm"
+            "chisel:block/glowstone/tiles_large-ctm"
         ]
     }
 }

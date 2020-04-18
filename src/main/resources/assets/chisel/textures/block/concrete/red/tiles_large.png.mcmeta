@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/concrete/red/tiles_large-ctm"
+            "chisel:block/concrete/red/tiles_large-ctm"
         ]
     }
 }

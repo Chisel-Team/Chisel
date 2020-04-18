@@ -7,7 +7,7 @@
     "ctm_version": 1,
     "type": "ctm",
     "textures": [
-      "chisel:blocks/technical/spinningStuffAnim-ctm"
+      "chisel:block/technical/spinningStuffAnim-ctm"
     ]
   }
 }

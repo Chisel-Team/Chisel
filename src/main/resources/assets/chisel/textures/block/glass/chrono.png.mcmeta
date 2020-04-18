@@ -4,7 +4,7 @@
         "type": "ctm",
         "layer": "CUTOUT",
         "textures": [
-            "chisel:blocks/glass/chrono-ctm"
+            "chisel:block/glass/chrono-ctm"
         ]
     }
 }

@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/basalt/encased_bricks-ctm"
+            "chisel:block/basalt/encased_bricks-ctm"
         ]
     }
 }

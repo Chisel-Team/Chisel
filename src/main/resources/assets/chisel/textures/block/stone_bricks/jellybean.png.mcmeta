@@ -1,6 +1,6 @@
 {
   "ctm": {
     "ctm_version": 1,
-    "proxy": "chisel:block/stone/jellybean-jellybean-2x2"
+    "proxy": "chisel:block/stone_bricks/jellybean-2x2"
   }
 }

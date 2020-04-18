@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/factory/goldplate-ctm"
+            "chisel:block/factory/goldplate-ctm"
         ]
     }
 }

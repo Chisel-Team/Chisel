@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/concrete/cyan/weaver-ctm"
+            "chisel:block/concrete/cyan/weaver-ctm"
         ]
     }
 }

@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/arcane_stone/encased_bricks-ctm"
+            "chisel:block/arcane_stone/encased_bricks-ctm"
         ]
     }
 }

@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/bloodMagic/diagonal/RuneDiagonalBricks_1-ctm"
+            "chisel:block/bloodMagic/diagonal/RuneDiagonalBricks_1-ctm"
         ]
     }
 }

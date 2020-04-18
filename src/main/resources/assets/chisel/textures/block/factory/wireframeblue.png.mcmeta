@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/factory/wireframeblue-ctm"
+            "chisel:block/factory/wireframeblue-ctm"
         ]
     }
 }

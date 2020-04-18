@@ -4,7 +4,7 @@
         "type": "ctm",
         "layer": "TRANSLUCENT",
         "textures": [
-            "chisel:blocks/ice/tiles_large-ctm"
+            "chisel:block/ice/tiles_large-ctm"
         ]
     }
 }

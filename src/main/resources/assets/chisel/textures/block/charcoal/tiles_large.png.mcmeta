@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:blocks/coal/charcoal/tiles_large-ctm"
+            "chisel:block/charcoal/tiles_large-ctm"
         ]
     }
 }
