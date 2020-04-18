@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:block/planks/jungle/log_cabin-tb-ctm"
+            "chisel:block/planks/dark_oak/log_bordered-ctm"
         ]
     }
 }

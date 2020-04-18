@@ -2,6 +2,6 @@
   "parent": "block/cube_column",
   "textures": {
     "side": "chisel:block/planks/jungle/braced_planks-side",
-    "end": "chisel:block/planks/jungle/braced_planks-top"
+    "end": "chisel:block/planks/jungle/log_bordered"
   }
 }

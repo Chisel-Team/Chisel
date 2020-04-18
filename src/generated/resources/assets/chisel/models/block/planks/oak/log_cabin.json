@@ -2,7 +2,7 @@
   "parent": "chisel:block/cube_axis",
   "textures": {
     "x": "chisel:block/planks/oak/log_cabin-ew",
-    "y": "chisel:block/planks/oak/log_cabin-tb",
+    "y": "chisel:block/planks/oak/log_bordered",
     "z": "chisel:block/planks/oak/log_cabin-ns"
   }
 }

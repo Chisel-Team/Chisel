@@ -31,7 +31,7 @@ public class ModelTemplates {
         prov.simpleBlock(block, prov.models().cubeAll("block/" + name(block), prov.modLoc("block/" + name(block))));
     }
     
-    private static String replaceVariant(String name, String newVariant) {
+    public static String replaceVariant(String name, String newVariant) {
         return name.replaceAll("\\w+$", newVariant);
     }
     
@@ -52,6 +52,10 @@ public class ModelTemplates {
     
     public static ModelTemplate cubeColumn() {
         return cubeColumn(name -> name + "-side", name -> name + "-top");
+    }
+    
+    public static ModelTemplate cubeColumn(Function<String, String> top) {
+        return cubeColumn(name -> name + "-side", top);
     }
     
     public static ModelTemplate cubeColumn(String side, String top) {

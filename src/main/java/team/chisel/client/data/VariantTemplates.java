@@ -145,7 +145,7 @@ public class VariantTemplates {
         public static final VariantTemplate CRUDE_VERTICAL_PLANKS = simple("crude_vertical_planks");
         public static final VariantTemplate ENCASED_PLANKS = simple("encased_planks");
         public static final VariantTemplate ENCASED_LARGE_PLANKS = simple("encased_large_planks");
-        public static final VariantTemplate BRACED_PLANKS = simple("braced_planks", ModelTemplates.cubeColumn());
+        public static final VariantTemplate BRACED_PLANKS = simple("braced_planks", ModelTemplates.cubeColumn(name -> ModelTemplates.replaceVariant(name, "log_bordered")));
         public static final VariantTemplate CRATE = simple("shipping_crate");
         public static final VariantTemplate PANELING = simple("paneling");
         public static final VariantTemplate CRUDE_PANELING = simple("crude_paneling");
@@ -153,7 +153,13 @@ public class VariantTemplates {
         public static final VariantTemplate SMOOTH = simple("smooth");
         public static final VariantTemplate ENCASED_SMOOTH = simple("encased_smooth");
         public static final VariantTemplate BRAID = simple("braid");
-        public static final VariantTemplate LOG_CABIN = simple("log_cabin", ModelTemplates.axisFaces());
+        public static final VariantTemplate LOG_CABIN = simple("log_cabin", (prov, block) -> {
+            String name = "block/" + ModelTemplates.name(block);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("cube_axis"))
+                    .texture("x", name + "-ew")
+                    .texture("y", ModelTemplates.replaceVariant(name, "log_bordered"))
+                    .texture("z", name + "-ns"));
+        });
     }
 
     @SuppressWarnings("null")
