@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "chisel:block/planks/spruce/braced_planks-side",
+    "end": "chisel:block/planks/spruce/braced_planks-top"
+  }
+}

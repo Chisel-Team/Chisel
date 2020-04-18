@@ -85,7 +85,7 @@ public class Features {
                                 .texture("side", "block/" + ModelTemplates.name(block).replace(wood.getName() + "/", "")));
                     })
                     .layer(() -> RenderType::getCutout)
-                    .setGroupName(StringUtils.capitalize(wood.getName()) + " Bookshelf")
+                    .setGroupName(RegistrateLangProvider.toEnglishName(wood.getName()) + " Bookshelf")
                     .variation("rainbow")
                     .next("novice_necromancer")
                     .next("necromancer")
@@ -225,7 +225,8 @@ public class Features {
             .map(t -> Pair.<WoodType, ResourceLocation>of(t, new ResourceLocation(t.getName() + "_planks")))
             .collect(Collectors.toMap(Pair::getFirst, pair -> _FACTORY.newType(Material.WOOD, "planks/" + pair.getFirst().getName())
                     .addBlock(pair.getSecond())
-                    .variations(VariantTemplates.WOOD)
+                    .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst().getName()) + " Bookshelf")
+                    .variations(VariantTemplates.PLANKS)
                     .build($ -> Block.Properties.from(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))));
 
     public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")

@@ -138,22 +138,22 @@ public class VariantTemplates {
         public static final VariantTemplate CUTS = simple("cuts");
     }
 
-    public static class Wood {
-        public static final VariantTemplate BLINDS = simple("blinds");
-        public static final VariantTemplate CHAOTIC = simple("chaotic");
-        public static final VariantTemplate CHAOTIC_HORIZONTAL = simple("chaotic-hor");
-        public static final VariantTemplate CLEAN = simple("clean");
-        public static final VariantTemplate CRATE = withName("crate", "Shipping Crate");
-        public static final VariantTemplate CRATE_FANCY = simple("crate-fancy");
-        public static final VariantTemplate CRATEEX = simple("crateex");
-        public static final VariantTemplate DOUBLE = simple("double", ModelTemplates.cubeColumn());
-        public static final VariantTemplate FANCY = simple("fancy");
-        public static final VariantTemplate LARGE = simple("large");
-        public static final VariantTemplate PANEL = simple("panel-nails");
-        public static final VariantTemplate PARQUET = simple("parquet");
-        public static final VariantTemplate SHORT = simple("short", ModelTemplates.axisFaces());
-        public static final VariantTemplate VERTICAL = simple("vertical");
-        public static final VariantTemplate VERTICAL_UNEVEN = simple("vertical-uneven");
+    public static class Planks {
+        public static final VariantTemplate LARGE_PLANKS = simple("large_planks");
+        public static final VariantTemplate CRUDE_HORIZONTAL_PLANKS = withName("crude_horizontal_planks", "Crude Planks (Horizontal)");
+        public static final VariantTemplate VERTICAL_PLANKS = simple("vertical_planks");
+        public static final VariantTemplate CRUDE_VERTICAL_PLANKS = withName("crude_vertical_planks", "Crude Planks (Vertical)");
+        public static final VariantTemplate ENCASED_PLANKS = simple("encased_planks");
+        public static final VariantTemplate ENCASED_LARGE_PLANKS = simple("encased_large_planks");
+        public static final VariantTemplate BRACED_PLANKS = simple("braced_planks", ModelTemplates.cubeColumn());
+        public static final VariantTemplate CRATE = simple("shipping_crate");
+        public static final VariantTemplate PANELING = simple("paneling");
+        public static final VariantTemplate CRUDE_PANELING = simple("crude_paneling");
+        public static final VariantTemplate STACKED = simple("stacked");
+        public static final VariantTemplate SMOOTH = simple("smooth");
+        public static final VariantTemplate ENCASED_SMOOTH = simple("encased_smooth");
+        public static final VariantTemplate BRAID = simple("braid");
+        public static final VariantTemplate LOG_CABIN = simple("log_cabin", ModelTemplates.axisFaces());
     }
 
     @SuppressWarnings("null")
@@ -192,7 +192,7 @@ public class VariantTemplates {
 
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
 
-    public static final ImmutableList<VariantTemplate> WOOD = ofClass(Wood.class);
+    public static final ImmutableList<VariantTemplate> PLANKS = ofClass(Planks.class);
 
     public static final SimpleTemplate withRecipe(VariantTemplate template, RecipeTemplate recipe) {
         return SimpleTemplate.builderFrom(template)

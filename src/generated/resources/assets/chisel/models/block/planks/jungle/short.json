@@ -1,8 +1,0 @@
-{
-  "parent": "chisel:block/cube_axis",
-  "textures": {
-    "x": "chisel:block/planks/jungle/short-ew",
-    "y": "chisel:block/planks/jungle/short-tb",
-    "z": "chisel:block/planks/jungle/short-ns"
-  }
-}
