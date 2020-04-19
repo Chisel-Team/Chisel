@@ -127,7 +127,7 @@ configurations {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-//	deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
+	implementation fg.deobf("team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}")
 	implementation "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
 
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
