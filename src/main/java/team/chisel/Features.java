@@ -225,7 +225,7 @@ public class Features {
             .map(t -> Pair.<WoodType, ResourceLocation>of(t, new ResourceLocation(t.getName() + "_planks")))
             .collect(Collectors.toMap(Pair::getFirst, pair -> _FACTORY.newType(Material.WOOD, "planks/" + pair.getFirst().getName())
                     .addBlock(pair.getSecond())
-                    .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst().getName()) + " Bookshelf")
+                    .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst().getName()) + " Planks")
                     .variations(VariantTemplates.PLANKS)
                     .build($ -> Block.Properties.from(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))));
 
