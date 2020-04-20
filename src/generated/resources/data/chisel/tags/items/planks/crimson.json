@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:planks/crimson/large_planks",
+    "chisel:planks/crimson/crude_horizontal_planks",
+    "chisel:planks/crimson/vertical_planks",
+    "chisel:planks/crimson/crude_vertical_planks",
+    "chisel:planks/crimson/encased_planks",
+    "chisel:planks/crimson/encased_large_planks",
+    "chisel:planks/crimson/braced_planks",
+    "chisel:planks/crimson/shipping_crate",
+    "chisel:planks/crimson/paneling",
+    "chisel:planks/crimson/crude_paneling",
+    "chisel:planks/crimson/stacked",
+    "chisel:planks/crimson/smooth",
+    "chisel:planks/crimson/encased_smooth",
+    "chisel:planks/crimson/braid",
+    "chisel:planks/crimson/log_cabin"
+  ]
+}
