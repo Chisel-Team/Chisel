@@ -25,24 +25,26 @@ public class GroupList implements Set<ICarvingGroup> {
 	private class VariationWrapper {
 
 		private @Nonnull ICarvingVariation v;
+		
+		private ItemStack equalsCache;
 
 		private VariationWrapper(@Nonnull ICarvingVariation v) {
 			this.v = v;
+			this.equalsCache = v.getStack();
 		}
 
 		@Override
 		public boolean equals(Object obj) {
-			if (obj instanceof ICarvingVariation) {
-				ICarvingVariation v2 = (ICarvingVariation) obj;
-				ItemStack stack1 = v.getStack(), stack2 = v2.getStack();
-				
-				if (stack1.isItemEqual(stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2)) {
-                    return true;
-				}
+		    if (obj instanceof ICarvingVariation) {
+			    return matchesStack(((ICarvingVariation)obj).getStack());
 			} else if (obj instanceof VariationWrapper) {
-				return equals(((VariationWrapper) obj).v);
+				return matchesStack(((VariationWrapper) obj).equalsCache);
 			}
 			return false;
+		}
+		
+		private boolean matchesStack(ItemStack stack) {
+            return equalsCache.isItemEqual(stack) && ItemStack.areItemStackTagsEqual(equalsCache, stack);
 		}
 
 		@Override
