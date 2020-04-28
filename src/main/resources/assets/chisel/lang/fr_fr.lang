@@ -527,52 +527,52 @@ tile.chisel.blockBronze.badGreggy.desc.1=Imposant
 tile.chisel.blockBronze.bolted.desc.1=Boulonné
 tile.chisel.blockBronze.scaffold.desc.1=Renforcé
 
-tile.chisel.carpet_white.name=Laine blanche
+tile.chisel.carpet_white.name=Tapis blanc
 tile.chisel.carpet_white.legacy_white.desc.1=Tapis traditionnel
 tile.chisel.carpet_white.llama_white.desc.1=Tapis en poils de lama
-tile.chisel.carpet_orange.name=Laine orange
+tile.chisel.carpet_orange.name=Tapis orange
 tile.chisel.carpet_orange.legacy_orange.desc.1=Tapis traditionnel
 tile.chisel.carpet_orange.llama_orange.desc.1=Tapis en poils de lama
-tile.chisel.carpet_magenta.name=Laine magenta
+tile.chisel.carpet_magenta.name=Tapis magenta
 tile.chisel.carpet_magenta.legacy_magenta.desc.1=Tapis traditionnel
 tile.chisel.carpet_magenta.llama_magenta.desc.1=Tapis en poils de lama
-tile.chisel.carpet_lightblue.name=Laine bleu clair
+tile.chisel.carpet_lightblue.name=Tapis bleu clair
 tile.chisel.carpet_lightblue.legacy_lightblue.desc.1=Tapis traditionnel
 tile.chisel.carpet_lightblue.llama_lightblue.desc.1=Tapis en poils de lama
-tile.chisel.carpet_yellow.name=Laine jaune
+tile.chisel.carpet_yellow.name=Tapis jaune
 tile.chisel.carpet_yellow.legacy_yellow.desc.1=Tapis traditionnel
 tile.chisel.carpet_yellow.llama_yellow.desc.1=Tapis en poils de lama
-tile.chisel.carpet_lime.name=Laine vert clair
+tile.chisel.carpet_lime.name=Tapis vert clair
 tile.chisel.carpet_lime.legacy_lime.desc.1=Tapis traditionnel
 tile.chisel.carpet_lime.llama_lime.desc.1=Tapis en poils de lama
-tile.chisel.carpet_pink.name=Laine rose
+tile.chisel.carpet_pink.name=Tapis rose
 tile.chisel.carpet_pink.legacy_pink.desc.1=Tapis traditionnel
 tile.chisel.carpet_pink.llama_pink.desc.1=Tapis en poils de lama
-tile.chisel.carpet_gray.name=Laine grise
+tile.chisel.carpet_gray.name=Tapis gris
 tile.chisel.carpet_gray.legacy_gray.desc.1=Tapis traditionnel
 tile.chisel.carpet_gray.llama_gray.desc.1=Tapis en poils de lama
-tile.chisel.carpet_lightgray.name=Laine gris clair
+tile.chisel.carpet_lightgray.name=Tapis gris clair
 tile.chisel.carpet_lightgray.legacy_lightgray.desc.1=Tapis traditionnel
 tile.chisel.carpet_lightgray.llama_lightgray.desc.1=Tapis en poils de lama
-tile.chisel.carpet_cyan.name=Laine cyan
+tile.chisel.carpet_cyan.name=Tapis cyan
 tile.chisel.carpet_cyan.legacy_cyan.desc.1=Tapis traditionnel
 tile.chisel.carpet_cyan.llama_cyan.desc.1=Tapis en poils de lama
-tile.chisel.carpet_purple.name=Laine violette
+tile.chisel.carpet_purple.name=Tapis violet
 tile.chisel.carpet_purple.legacy_purple.desc.1=Tapis traditionnel
 tile.chisel.carpet_purple.llama_purple.desc.1=Tapis en poils de lama
-tile.chisel.carpet_blue.name=Laine bleue
+tile.chisel.carpet_blue.name=Tapis bleu
 tile.chisel.carpet_blue.legacy_blue.desc.1=Tapis traditionnel
 tile.chisel.carpet_blue.llama_blue.desc.1=Tapis en poils de lama
-tile.chisel.carpet_brown.name=Laine marron
+tile.chisel.carpet_brown.name=Tapis marron
 tile.chisel.carpet_brown.legacy_brown.desc.1=Tapis traditionnel
 tile.chisel.carpet_brown.llama_brown.desc.1=Tapis en poils de lama
-tile.chisel.carpet_green.name=Laine verte
+tile.chisel.carpet_green.name=Tapis vert
 tile.chisel.carpet_green.legacy_green.desc.1=Tapis traditionnel
 tile.chisel.carpet_green.llama_green.desc.1=Tapis en poils de lama
-tile.chisel.carpet_red.name=Laine rouge
+tile.chisel.carpet_red.name=Tapis rouge
 tile.chisel.carpet_red.legacy_red.desc.1=Tapis traditionnel
 tile.chisel.carpet_red.llama_red.desc.1=Tapis en poils de lama
-tile.chisel.carpet_black.name=Laine noire
+tile.chisel.carpet_black.name=Tapis noir
 tile.chisel.carpet_black.legacy_black.desc.1=Tapis traditionnel
 tile.chisel.carpet_black.llama_black.desc.1=Tapis en poils de lama
 
@@ -619,7 +619,7 @@ tile.chisel.certus.bricks-chaotic.desc.1=Briques piétinées
 tile.chisel.certus.cuts.desc.1=Entaillé
 
 tile.chisel.cloud.name=Nuage
-tile.chisel.cloud.cloud.desc.1=Nuage
+tile.chisel.cloud.cloud.desc.1=Brut
 tile.chisel.cloud.large.desc.1=Briques
 tile.chisel.cloud.small.desc.1=Petites briques
 tile.chisel.cloud.vertical.desc.1=Briques verticales
@@ -1627,7 +1627,7 @@ tile.chisel.futura.uberWavy.desc.1=Ondulation fabuleuse
 
 tile.chisel.glass.name=Verre
 tile.chisel.glass.terrain-glassbubble.desc.1=Bulle
-tile.chisel.glass.terrain-glass-chinese.desc.1=Chinois
+tile.chisel.glass.chinese.desc.1=Chinois
 tile.chisel.glass.japanese.desc.1=Japonais
 tile.chisel.glass.terrain-glassdungeon.desc.1=Donjon
 tile.chisel.glass.terrain-glasslight.desc.1=Léger
@@ -1642,6 +1642,8 @@ tile.chisel.glass.terrain-glass-thickgrid.desc.1=Grille épaisse
 tile.chisel.glass.terrain-glass-thingrid.desc.1=Grille mince
 tile.chisel.glass.a1-glasswindow-ironfencemodern.desc.1=Barreaux en fer
 tile.chisel.glass.chrono.desc.1=Verre au plomb asymétrique
+tile.chisel.glass.chinese2.desc.1=Chinois 2
+tile.chisel.glass.japanese2.desc.1=Japonais 2
 
 tile.chisel.glassdyedblack.name=Verre teinté noir
 tile.chisel.glassdyedred.name=Verre teinté rouge
@@ -1664,113 +1666,262 @@ tile.chisel.glassdyedblack.brick.desc.1=Briques
 tile.chisel.glassdyedblack.framed.desc.1=Encadrement
 tile.chisel.glassdyedblack.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedblack.panel.desc.1=Panneau
-tile.chisel.glassdyedblack.rough.desc.1=Brutes
-tile.chisel.glassdyedblack.streaks.desc.1=Simples
+tile.chisel.glassdyedblack.rough.desc.1=Brute
+tile.chisel.glassdyedblack.streaks.desc.1=Simple
 
 tile.chisel.glassdyedred.brick.desc.1=Briques
 tile.chisel.glassdyedred.framed.desc.1=Encadrement
 tile.chisel.glassdyedred.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedred.panel.desc.1=Panneau
-tile.chisel.glassdyedred.rough.desc.1=Brutes
-tile.chisel.glassdyedred.streaks.desc.1=Simples
+tile.chisel.glassdyedred.rough.desc.1=Brute
+tile.chisel.glassdyedred.streaks.desc.1=Simple
 
 tile.chisel.glassdyedgreen.brick.desc.1=Briques
 tile.chisel.glassdyedgreen.framed.desc.1=Encadrement
 tile.chisel.glassdyedgreen.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedgreen.panel.desc.1=Panneau
-tile.chisel.glassdyedgreen.rough.desc.1=Brutes
-tile.chisel.glassdyedgreen.streaks.desc.1=Simples
+tile.chisel.glassdyedgreen.rough.desc.1=Brute
+tile.chisel.glassdyedgreen.streaks.desc.1=Simple
 
 tile.chisel.glassdyedbrown.brick.desc.1=Briques
 tile.chisel.glassdyedbrown.framed.desc.1=Encadrement
 tile.chisel.glassdyedbrown.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedbrown.panel.desc.1=Panneau
-tile.chisel.glassdyedbrown.rough.desc.1=Brutes
-tile.chisel.glassdyedbrown.streaks.desc.1=Simples
+tile.chisel.glassdyedbrown.rough.desc.1=Brute
+tile.chisel.glassdyedbrown.streaks.desc.1=Simple
 
 tile.chisel.glassdyedblue.brick.desc.1=Briques
 tile.chisel.glassdyedblue.framed.desc.1=Encadrement
 tile.chisel.glassdyedblue.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedblue.panel.desc.1=Panneau
-tile.chisel.glassdyedblue.rough.desc.1=Brutes
-tile.chisel.glassdyedblue.streaks.desc.1=Simples
+tile.chisel.glassdyedblue.rough.desc.1=Brute
+tile.chisel.glassdyedblue.streaks.desc.1=Simple
 
 tile.chisel.glassdyedpurple.brick.desc.1=Briques
 tile.chisel.glassdyedpurple.framed.desc.1=Encadrement
 tile.chisel.glassdyedpurple.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedpurple.panel.desc.1=Panneau
-tile.chisel.glassdyedpurple.rough.desc.1=Brutes
-tile.chisel.glassdyedpurple.streaks.desc.1=Simples
+tile.chisel.glassdyedpurple.rough.desc.1=Brute
+tile.chisel.glassdyedpurple.streaks.desc.1=Simple
 
 tile.chisel.glassdyedcyan.brick.desc.1=Briques
 tile.chisel.glassdyedcyan.framed.desc.1=Encadrement
 tile.chisel.glassdyedcyan.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedcyan.panel.desc.1=Panneau
-tile.chisel.glassdyedcyan.rough.desc.1=Brutes
-tile.chisel.glassdyedcyan.streaks.desc.1=Simples
+tile.chisel.glassdyedcyan.rough.desc.1=Brute
+tile.chisel.glassdyedcyan.streaks.desc.1=Simple
 
 tile.chisel.glassdyedlightgray.brick.desc.1=Briques
 tile.chisel.glassdyedlightgray.framed.desc.1=Encadrement
 tile.chisel.glassdyedlightgray.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedlightgray.panel.desc.1=Panneau
-tile.chisel.glassdyedlightgray.rough.desc.1=Brutes
-tile.chisel.glassdyedlightgray.streaks.desc.1=Simples
+tile.chisel.glassdyedlightgray.rough.desc.1=Brute
+tile.chisel.glassdyedlightgray.streaks.desc.1=Simple
 
 tile.chisel.glassdyedgray.brick.desc.1=Briques
 tile.chisel.glassdyedgray.framed.desc.1=Encadrement
 tile.chisel.glassdyedgray.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedgray.panel.desc.1=Panneau
-tile.chisel.glassdyedgray.rough.desc.1=Brutes
-tile.chisel.glassdyedgray.streaks.desc.1=Simples
+tile.chisel.glassdyedgray.rough.desc.1=Brute
+tile.chisel.glassdyedgray.streaks.desc.1=Simple
 
 tile.chisel.glassdyedpink.brick.desc.1=Briques
 tile.chisel.glassdyedpink.framed.desc.1=Encadrement
 tile.chisel.glassdyedpink.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedpink.panel.desc.1=Panneau
-tile.chisel.glassdyedpink.rough.desc.1=Brutes
-tile.chisel.glassdyedpink.streaks.desc.1=Simples
+tile.chisel.glassdyedpink.rough.desc.1=Brute
+tile.chisel.glassdyedpink.streaks.desc.1=Simple
 
 tile.chisel.glassdyedlime.brick.desc.1=Briques
 tile.chisel.glassdyedlime.framed.desc.1=Encadrement
 tile.chisel.glassdyedlime.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedlime.panel.desc.1=Panneau
-tile.chisel.glassdyedlime.rough.desc.1=Brutes
-tile.chisel.glassdyedlime.streaks.desc.1=Simples
+tile.chisel.glassdyedlime.rough.desc.1=Brute
+tile.chisel.glassdyedlime.streaks.desc.1=Simple
 
 tile.chisel.glassdyedyellow.brick.desc.1=Briques
 tile.chisel.glassdyedyellow.framed.desc.1=Encadrement
 tile.chisel.glassdyedyellow.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedyellow.panel.desc.1=Panneau
-tile.chisel.glassdyedyellow.rough.desc.1=Brutes
-tile.chisel.glassdyedyellow.streaks.desc.1=Simples
+tile.chisel.glassdyedyellow.rough.desc.1=Brute
+tile.chisel.glassdyedyellow.streaks.desc.1=Simple
 
 tile.chisel.glassdyedlightblue.brick.desc.1=Briques
 tile.chisel.glassdyedlightblue.framed.desc.1=Encadrement
 tile.chisel.glassdyedlightblue.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedlightblue.panel.desc.1=Panneau
-tile.chisel.glassdyedlightblue.rough.desc.1=Brutes
-tile.chisel.glassdyedlightblue.streaks.desc.1=Simples
+tile.chisel.glassdyedlightblue.rough.desc.1=Brute
+tile.chisel.glassdyedlightblue.streaks.desc.1=Simple
 
 tile.chisel.glassdyedmagenta.brick.desc.1=Briques
 tile.chisel.glassdyedmagenta.framed.desc.1=Encadrement
 tile.chisel.glassdyedmagenta.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedmagenta.panel.desc.1=Panneau
-tile.chisel.glassdyedmagenta.rough.desc.1=Brutes
-tile.chisel.glassdyedmagenta.streaks.desc.1=Simples
+tile.chisel.glassdyedmagenta.rough.desc.1=Brute
+tile.chisel.glassdyedmagenta.streaks.desc.1=Simple
 
 tile.chisel.glassdyedorange.brick.desc.1=Briques
 tile.chisel.glassdyedorange.framed.desc.1=Encadrement
 tile.chisel.glassdyedorange.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedorange.panel.desc.1=Panneau
-tile.chisel.glassdyedorange.rough.desc.1=Brutes
-tile.chisel.glassdyedorange.streaks.desc.1=Simples
+tile.chisel.glassdyedorange.rough.desc.1=Brute
+tile.chisel.glassdyedorange.streaks.desc.1=Simple
 
 tile.chisel.glassdyedwhite.brick.desc.1=Briques
 tile.chisel.glassdyedwhite.framed.desc.1=Encadrement
 tile.chisel.glassdyedwhite.framed_fancy.desc.1=Encadrement fantaisie
 tile.chisel.glassdyedwhite.panel.desc.1=Panneau
-tile.chisel.glassdyedwhite.rough.desc.1=Brutes
-tile.chisel.glassdyedwhite.streaks.desc.1=Simples
+tile.chisel.glassdyedwhite.rough.desc.1=Brute
+tile.chisel.glassdyedwhite.streaks.desc.1=Simple
+
+tile.chisel.glasspane.name=Vitre
+tile.chisel.glasspane.terrain-glassbubble.desc.1=Bulle
+tile.chisel.glasspane.chinese.desc.1=Chinois
+tile.chisel.glasspane.japanese.desc.1=Japonais
+tile.chisel.glasspane.terrain-glassdungeon.desc.1=Dojon
+tile.chisel.glasspane.terrain-glasslight.desc.1=Léger
+tile.chisel.glasspane.terrain-glassnoborder.desc.1=Bordé de gris
+tile.chisel.glasspane.terrain-glass-ornatesteel.desc.1=Acier orné
+tile.chisel.glasspane.terrain-glass-screen.desc.1=Écran
+tile.chisel.glasspane.terrain-glassshale.desc.1=Schiste
+tile.chisel.glasspane.terrain-glass-steelframe.desc.1=Cadre en acier
+tile.chisel.glasspane.terrain-glassstone.desc.1=Cadre en pierre
+tile.chisel.glasspane.terrain-glassstreak.desc.1=Rayures
+tile.chisel.glasspane.terrain-glass-thickgrid.desc.1=Grille épaisse
+tile.chisel.glasspane.terrain-glass-thingrid.desc.1=Grille mince
+tile.chisel.glasspane.a1-glasswindow-ironfencemodern.desc.1=Barreaux en fer
+tile.chisel.glasspane.chrono.desc.1=Verre au plomb asymétrique
+tile.chisel.glasspane.chinese2.desc.1=Chinois 2
+tile.chisel.glasspane.japanese2.desc.1=Japonais 2
+
+tile.chisel.glasspanedyedblack.name=Vitre noire
+tile.chisel.glasspanedyedred.name=Vitre reouge
+tile.chisel.glasspanedyedgreen.name=Vitre verte
+tile.chisel.glasspanedyedbrown.name=Vitre marron
+tile.chisel.glasspanedyedblue.name=Vitre bleue
+tile.chisel.glasspanedyedpurple.name=Vitre violette
+tile.chisel.glasspanedyedcyan.name=Vitre cyan
+tile.chisel.glasspanedyedlightgray.name=Vitre gris clair
+tile.chisel.glasspanedyedgray.name=Vitre grise
+tile.chisel.glasspanedyedpink.name=Vitre rose
+tile.chisel.glasspanedyedlime.name=Vitre vert clair
+tile.chisel.glasspanedyedyellow.name=Vitre jaune
+tile.chisel.glasspanedyedlightblue.name=Vitre bleu clair
+tile.chisel.glasspanedyedmagenta.name=Vitre magenta
+tile.chisel.glasspanedyedorange.name=Vitre orange
+tile.chisel.glasspanedyedwhite.name=Vitre blanche
+
+tile.chisel.glasspanedyedblack.brick.desc.1=Briques
+tile.chisel.glasspanedyedblack.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedblack.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedblack.panel.desc.1=Panneau
+tile.chisel.glasspanedyedblack.rough.desc.1=Brute
+tile.chisel.glasspanedyedblack.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedred.brick.desc.1=Briques
+tile.chisel.glasspanedyedred.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedred.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedred.panel.desc.1=Panneau
+tile.chisel.glasspanedyedred.rough.desc.1=Brute
+tile.chisel.glasspanedyedred.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedgreen.brick.desc.1=Briques
+tile.chisel.glasspanedyedgreen.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedgreen.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedgreen.panel.desc.1=Panneau
+tile.chisel.glasspanedyedgreen.rough.desc.1=Brute
+tile.chisel.glasspanedyedgreen.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedbrown.brick.desc.1=Briques
+tile.chisel.glasspanedyedbrown.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedbrown.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedbrown.panel.desc.1=Panneau
+tile.chisel.glasspanedyedbrown.rough.desc.1=Brute
+tile.chisel.glasspanedyedbrown.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedblue.brick.desc.1=Briques
+tile.chisel.glasspanedyedblue.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedblue.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedblue.panel.desc.1=Panneau
+tile.chisel.glasspanedyedblue.rough.desc.1=Brute
+tile.chisel.glasspanedyedblue.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedpurple.brick.desc.1=Briques
+tile.chisel.glasspanedyedpurple.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedpurple.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedpurple.panel.desc.1=Panel
+tile.chisel.glasspanedyedpurple.rough.desc.1=Brute
+tile.chisel.glasspanedyedpurple.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedcyan.brick.desc.1=Briques
+tile.chisel.glasspanedyedcyan.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedcyan.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedcyan.panel.desc.1=Panneau
+tile.chisel.glasspanedyedcyan.rough.desc.1=Brute
+tile.chisel.glasspanedyedcyan.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedlightgray.brick.desc.1=Briques
+tile.chisel.glasspanedyedlightgray.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedlightgray.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedlightgray.panel.desc.1=Panneau
+tile.chisel.glasspanedyedlightgray.rough.desc.1=Brute
+tile.chisel.glasspanedyedlightgray.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedgray.brick.desc.1=Briques
+tile.chisel.glasspanedyedgray.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedgray.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedgray.panel.desc.1=Panneau
+tile.chisel.glasspanedyedgray.rough.desc.1=Brute
+tile.chisel.glasspanedyedgray.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedpink.brick.desc.1=Briques
+tile.chisel.glasspanedyedpink.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedpink.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedpink.panel.desc.1=Panneau
+tile.chisel.glasspanedyedpink.rough.desc.1=Brute
+tile.chisel.glasspanedyedpink.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedlime.brick.desc.1=Briques
+tile.chisel.glasspanedyedlime.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedlime.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedlime.panel.desc.1=Panneau
+tile.chisel.glasspanedyedlime.rough.desc.1=Brute
+tile.chisel.glasspanedyedlime.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedyellow.brick.desc.1=Briques
+tile.chisel.glasspanedyedyellow.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedyellow.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedyellow.panel.desc.1=Panneau
+tile.chisel.glasspanedyedyellow.rough.desc.1=Brute
+tile.chisel.glasspanedyedyellow.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedlightblue.brick.desc.1=Briques
+tile.chisel.glasspanedyedlightblue.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedlightblue.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedlightblue.panel.desc.1=Panneau
+tile.chisel.glasspanedyedlightblue.rough.desc.1=Brute
+tile.chisel.glasspanedyedlightblue.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedmagenta.brick.desc.1=Briques
+tile.chisel.glasspanedyedmagenta.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedmagenta.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedmagenta.panel.desc.1=Panneau
+tile.chisel.glasspanedyedmagenta.rough.desc.1=Brute
+tile.chisel.glasspanedyedmagenta.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedorange.brick.desc.1=Briques
+tile.chisel.glasspanedyedorange.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedorange.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedorange.panel.desc.1=Panneau
+tile.chisel.glasspanedyedorange.rough.desc.1=Brute
+tile.chisel.glasspanedyedorange.streaks.desc.1=Simple
+
+tile.chisel.glasspanedyedwhite.brick.desc.1=Briques
+tile.chisel.glasspanedyedwhite.framed.desc.1=Encadrement
+tile.chisel.glasspanedyedwhite.framed_fancy.desc.1=Encadrement fantaisie
+tile.chisel.glasspanedyedwhite.panel.desc.1=Panneau
+tile.chisel.glasspanedyedwhite.rough.desc.1=Brute
+tile.chisel.glasspanedyedwhite.streaks.desc.1=Simple
 
 tile.chisel.glowstone.name=Pierre lumineuse
 tile.chisel.glowstone.cracked.desc.1=Craquelée
@@ -2617,6 +2768,7 @@ tile.chisel.sandstoneyellow.marker.desc.1=Marqué
 tile.chisel.sandstoneyellow.sunken.desc.1=Enfoncé
 tile.chisel.sandstoneyellow.poison.desc.1=Poison
 tile.chisel.sandstoneyellow.cuts.desc.1=Entaillé
+tile.chisel.sandstoneyellow.seamless.desc.1=Double dalle unie
 
 tile.chisel.sandstonered.name=Grès rouge
 tile.chisel.sandstonered.cracked.desc.1=Craquelé
@@ -2660,6 +2812,7 @@ tile.chisel.sandstonered.marker.desc.1=Marqué
 tile.chisel.sandstonered.sunken.desc.1=Enfoncé
 tile.chisel.sandstonered.poison.desc.1=Poison
 tile.chisel.sandstonered.cuts.desc.1=Entaillé
+tile.chisel.sandstonered.seamless.desc.1=Double dalle unie
 
 tile.chisel.sandstone-scribbles.name=Grès griffonné
 tile.chisel.sandstone-scribbles.scribbles-0.desc.1=Hiéroglyphes 1
@@ -2760,6 +2913,8 @@ tile.chisel.stonebrick.marker.desc.1=Marquée
 tile.chisel.stonebrick.sunken.desc.1=Enfoncée
 tile.chisel.stonebrick.poison.desc.1=Poison
 tile.chisel.stonebrick.cuts.desc.1=Entaillée
+tile.chisel.stonebrick.doubleslab.desc.1=Double dalle
+tile.chisel.stonebrick.doubleslab-seamless.desc.1=Double dalle unie
 
 tile.chisel.technical.name=Bloc industriel
 tile.chisel.technical.scaffold.desc.1=Renfort rouillé
