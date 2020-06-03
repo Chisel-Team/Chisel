@@ -317,7 +317,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             initZoom = zoom;
         }
 
-        if (hasShiftDown() && !container.getSelectionDuplicates().isEmpty()) {
+        if (container.getTarget() != null && hasShiftDown() && !container.getSelectionDuplicates().isEmpty()) {
             buttonChisel.setMessage(ChiselLangKeys.BUTTON_CHISEL_ALL.getComponent().applyTextStyle(TextFormatting.YELLOW).getFormattedText());
         } else {
             buttonChisel.setMessage(ChiselLangKeys.BUTTON_CHISEL.getLocalizedText());
