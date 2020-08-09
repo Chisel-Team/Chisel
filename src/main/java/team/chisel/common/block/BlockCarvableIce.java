@@ -51,7 +51,7 @@ public class BlockCarvableIce extends BlockCarvable {
     }
 
     public void tick(BlockState state, World worldIn, BlockPos pos, Random random) {
-        if (worldIn.getLightLevel(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
+        if (worldIn.getLightFor(LightType.BLOCK, pos) > 11 - state.getOpacity(worldIn, pos)) {
             this.turnIntoWater(state, worldIn, pos);
         }
 

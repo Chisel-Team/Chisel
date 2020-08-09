@@ -26,6 +26,10 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
 apply plugin: 'eclipse'
 
+// We use these to mess with the eclipse .classpath file
+import org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry
+import org.gradle.plugins.ide.eclipse.model.ProjectDependency
+
 import org.ajoberstar.grgit.Grgit
 
 def repo = Grgit.open(project.file('.'))
@@ -44,7 +48,7 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 minecraft {
-	mappings channel: 'snapshot', version: '20200426-mixed-1.15.2'
+    mappings channel: 'snapshot', version: '20200808-1.15.1'
     
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -61,6 +65,9 @@ minecraft {
                 chisel {
                     source sourceSets.main
                 }
+                ctm {
+               		sources sourceSets.main // Has to be manually changed to work right...can't figure out a better way
+               	}
             }
         }
 
@@ -124,7 +131,7 @@ configurations {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-	implementation fg.deobf("team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}")
+	//implementation fg.deobf("team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}")
 	implementation "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
 
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
@@ -135,6 +142,17 @@ dependencies {
     shade registrate
 
 //  deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
+}
+
+eclipse {
+  classpath {
+    containers 'org.eclipse.buildship.core.gradleclasspathcontainer'
+    file {
+      whenMerged {
+		entries.add(new ProjectDependency("/ConnectedTexturesMod"))
+      }
+    }
+  }
 }
 
 jar {

@@ -161,15 +161,15 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         }
 
         @Override
-        public WorldLightManager getLightingProvider() {
+        public WorldLightManager getLightManager() {
             return light;
         }
 
         @Override
-        public int getColor(BlockPos p_225525_1_, ColorResolver p_225525_2_) {
+        public int getBlockColor(BlockPos blockPosIn, ColorResolver colorResolverIn) {
             return -1;
         }
-        
+
         @Override
         public int getLightValue(BlockPos p_217298_1_) {
             return 15;
@@ -412,11 +412,11 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
                 RenderSystem.matrixMode(GL11.GL_PROJECTION);
                 RenderSystem.pushMatrix();
                 RenderSystem.loadIdentity();
-                int scale = (int) getMinecraft().getWindow().getGuiScaleFactor();
+                int scale = (int) getMinecraft().getMainWindow().getGuiScaleFactor();
                 RenderSystem.multMatrix(Matrix4f.perspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000));
                 RenderSystem.matrixMode(GL11.GL_MODELVIEW);
                 RenderSystem.translated(-panel.getX() - panel.getWidth() / 2, -panel.getY() - panel.getHeight() / 2, 0);
-                RenderSystem.viewport((guiLeft + panel.getX()) * scale, getMinecraft().getWindow().getHeight() - (guiTop + panel.getY() + panel.getHeight()) * scale, panel.getWidth() * scale, panel.getHeight() * scale);
+                RenderSystem.viewport((guiLeft + panel.getX()) * scale, getMinecraft().getMainWindow().getHeight() - (guiTop + panel.getY() + panel.getHeight()) * scale, panel.getWidth() * scale, panel.getHeight() * scale);
                 RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, true);
 
                 // Makes zooming slower as zoom increases, but leaves 1 as the default zoom.
@@ -444,7 +444,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
                         for (BlockPos pos : buttonPreview.getType().getPositions()) {
                             ms.push();
                             ms.translate(pos.getX(), pos.getY(), pos.getZ());
-                            brd.renderBlock(state, pos, fakeworld, ms, Tessellator.getInstance().getBuffer(), true, new Random());
+                            brd.renderModel(state, pos, fakeworld, ms, Tessellator.getInstance().getBuffer(), true, new Random());
                             ms.pop();
                         }
                     } catch (Exception e) {
@@ -463,7 +463,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
                 RenderSystem.matrixMode(GL11.GL_PROJECTION);
                 RenderSystem.popMatrix();
                 RenderSystem.matrixMode(GL11.GL_MODELVIEW);
-                RenderSystem.viewport(0, 0, getMinecraft().getWindow().getWidth(), getMinecraft().getWindow().getHeight());
+                RenderSystem.viewport(0, 0, getMinecraft().getMainWindow().getWidth(), getMinecraft().getMainWindow().getHeight());
             }
         }
     }

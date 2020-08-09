@@ -172,20 +172,20 @@ public class ItemOffsetTool extends Item {
             RenderSystem.color4f(0, 0, 0, 1);
 
             if (face.getXOffset() != 0) {
-                buf.vertex(x, 0, 0).endVertex();
-                buf.vertex(x, 1, 1).endVertex();
-                buf.vertex(x, 1, 0).endVertex();
-                buf.vertex(x, 0, 1).endVertex();
+                buf.pos(x, 0, 0).endVertex();
+                buf.pos(x, 1, 1).endVertex();
+                buf.pos(x, 1, 0).endVertex();
+                buf.pos(x, 0, 1).endVertex();
             } else if (face.getYOffset() != 0) {
-                buf.vertex(0, y, 0).endVertex();
-                buf.vertex(1, y, 1).endVertex();
-                buf.vertex(1, y, 0).endVertex();
-                buf.vertex(0, y, 1).endVertex();
+                buf.pos(0, y, 0).endVertex();
+                buf.pos(1, y, 1).endVertex();
+                buf.pos(1, y, 0).endVertex();
+                buf.pos(0, y, 1).endVertex();
             } else {
-                buf.vertex(0, 0, z).endVertex();
-                buf.vertex(1, 1, z).endVertex();
-                buf.vertex(1, 0, z).endVertex();
-                buf.vertex(0, 1, z).endVertex();
+                buf.pos(0, 0, z).endVertex();
+                buf.pos(1, 1, z).endVertex();
+                buf.pos(1, 0, z).endVertex();
+                buf.pos(0, 1, z).endVertex();
             }
 
             Tessellator.getInstance().draw();
@@ -214,17 +214,17 @@ public class ItemOffsetTool extends Item {
             // Always draw the center point first, then draw the next two points.
             // Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
             if (face.getXOffset() != 0) {
-                buf.vertex(x, 0.5, 0.5).endVertex();
-                buf.vertex(x, isY ? clampedY : 0, isZ ? clampedZ : 0).endVertex();
-                buf.vertex(x, isY ? clampedY : 1, isZ ? clampedZ : 1).endVertex();
+                buf.pos(x, 0.5, 0.5).endVertex();
+                buf.pos(x, isY ? clampedY : 0, isZ ? clampedZ : 0).endVertex();
+                buf.pos(x, isY ? clampedY : 1, isZ ? clampedZ : 1).endVertex();
             } else if (face.getYOffset() != 0) {
-                buf.vertex(0.5, y, 0.5).endVertex();
-                buf.vertex(isX ? clampedX : 0, y, isZ ? clampedZ : 0).endVertex();
-                buf.vertex(isX ? clampedX : 1, y, isZ ? clampedZ : 1).endVertex();
+                buf.pos(0.5, y, 0.5).endVertex();
+                buf.pos(isX ? clampedX : 0, y, isZ ? clampedZ : 0).endVertex();
+                buf.pos(isX ? clampedX : 1, y, isZ ? clampedZ : 1).endVertex();
             } else {
-                buf.vertex(0.5, 0.5, z).endVertex();
-                buf.vertex(isX ? clampedX : 0, isY ? clampedY : 0, z).endVertex();
-                buf.vertex(isX ? clampedX : 1, isY ? clampedY : 1, z).endVertex();
+                buf.pos(0.5, 0.5, z).endVertex();
+                buf.pos(isX ? clampedX : 0, isY ? clampedY : 0, z).endVertex();
+                buf.pos(isX ? clampedX : 1, isY ? clampedY : 1, z).endVertex();
             }
             Tessellator.getInstance().draw();
             
