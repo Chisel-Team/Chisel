@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/mossy/mossy_column",
+  "textures": {
+    "side": "chisel:block/cobblestone/pillar-side",
+    "end": "chisel:block/cobblestone/pillar-top"
+  }
+}

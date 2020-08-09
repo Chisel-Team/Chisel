@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/cube_2_layer_sides",
-  "textures": {
-    "all": "block/oak_planks",
-    "side": "chisel:block/bookshelf/rainbow"
-  }
-}

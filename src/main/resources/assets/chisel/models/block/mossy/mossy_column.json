@@ -1,7 +1,7 @@
 {
   "parent": "block/block",
   "textures": {
-  	"top": "chisel:blocks/cobblestonemossy/mossy",
+  	"top": "chisel:block/mossy_cobblestone/mossy",
   	"particle": "#side"
   },
   "elements": [

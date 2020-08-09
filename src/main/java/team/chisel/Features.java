@@ -4,14 +4,10 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.RegistryEntry;
 
 import net.minecraft.block.Block;
@@ -25,7 +21,6 @@ import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.ConstantRange;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -34,7 +29,6 @@ import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
-import team.chisel.common.block.BlockCarvableBookshelf;
 import team.chisel.common.block.BlockCarvableCarpet;
 import team.chisel.common.init.ChiselCompatTags;
 
@@ -75,6 +69,7 @@ public class Features {
     private static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
     
     // Hardcode to vanilla wood types
+    /*
     public static final Map<WoodType, Map<String, RegistryEntry<BlockCarvableBookshelf>>> BOOKSHELVES = VANILLA_WOODS.stream()
             .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "bookshelf/" + wood.getName(), BlockCarvableBookshelf::new)
                     .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouchOrRandomly(block, Items.BOOK, ConstantRange.of(3))))
@@ -97,7 +92,7 @@ public class Features {
                     .next("cans")
                     .next("papers")
                     .build(b -> b.sound(SoundType.WOOD).hardnessAndResistance(1.5f))));
-            
+      */      
     public static final Map<String, RegistryEntry<BlockCarvable>> BRICKS = _FACTORY.newType(Material.ROCK, "bricks")
             .addBlock(Blocks.BRICKS)
             .variations(VariantTemplates.ROCK)
@@ -109,6 +104,7 @@ public class Features {
             .variations(VariantTemplates.METAL)
             .build(p -> p.sound(SoundType.METAL).hardnessAndResistance(5.0F).harvestTool(ToolType.PICKAXE).harvestLevel(1));
     
+    /*
     public static final Map<String, RegistryEntry<BlockCarvable>> BROWNSTONE = _FACTORY.newType(Material.ROCK, "brownstone")
             .variation("default")
                 .recipe((prov, block) -> new ShapedRecipeBuilder(block, 4)
@@ -133,7 +129,7 @@ public class Features {
             .build(b -> b.sound(SoundType.STONE).hardnessAndResistance(1.0F));
 //      BlockSpeedHandler.speedupBlocks.add(b);
 //  });
-    
+    */
     public static final Map<DyeColor, Map<String, RegistryEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
             .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getName()), BlockCarvableCarpet::new)
                     .addBlock(new ResourceLocation(color.getName() + "_carpet"))
@@ -162,10 +158,12 @@ public class Features {
     
     public static final Map<String, RegistryEntry<BlockCarvable>> COBBLESTONE = _FACTORY.newType(Material.ROCK, "cobblestone")
             .addBlock(Blocks.COBBLESTONE)
-            .variations(VariantTemplates.ROCK)
-            .variation("extra/emboss")
-            .next("extra/indent")
-            .next("extra/marker")
+            .variations(VariantTemplates.COBBLESTONE)
+            .build(b -> b.hardnessAndResistance(2.0F, 10.0F).sound(SoundType.STONE));
+    
+    public static final Map<String, RegistryEntry<BlockCarvable>> COBBLESTONE_MOSSY = _FACTORY.newType(Material.ROCK, "mossy_cobblestone")
+            .addBlock(Blocks.MOSSY_COBBLESTONE)
+            .variations(VariantTemplates.COBBLESTONE_MOSSY)
             .build(b -> b.hardnessAndResistance(2.0F, 10.0F).sound(SoundType.STONE));
     
     public static final Map<DyeColor, Map<String, RegistryEntry<BlockCarvable>>> CONCRETE = Arrays.stream(DyeColor.values())

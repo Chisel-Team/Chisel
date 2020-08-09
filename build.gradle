@@ -44,7 +44,7 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 minecraft {
-	mappings channel: 'snapshot', version: '20200301-mixed-1.15.2'
+	mappings channel: 'snapshot', version: '20200426-mixed-1.15.2'
     
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -110,14 +110,11 @@ repositories {
 	maven { // CTM
 		url "http://maven.tterrag.com/"
 	}
-	maven { // WAILA
-		url "http://mobiusstrip.eu/maven"
-	}
     maven { // JEI
         url "http://dvs1.progwml6.com/files/maven"
     }
-    maven { // Blood Magic
-        url "http://tehnut.info/maven"
+    maven { // Hwyla
+        url "http://maven.tehnut.info/"
     }
 }
 

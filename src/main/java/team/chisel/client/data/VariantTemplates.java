@@ -2,22 +2,27 @@ package team.chisel.client.data;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.ImmutableList;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.nullness.FieldsAreNonnullByDefault;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.block.Block;
 import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.util.Util;
 import team.chisel.Chisel;
 import team.chisel.api.block.ModelTemplate;
 import team.chisel.api.block.RecipeTemplate;
@@ -197,7 +202,31 @@ public class VariantTemplates {
     public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
 
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
-
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> COBBLESTONE = ImmutableList.<VariantTemplate>builder()
+            .addAll(ROCK)
+            .add(simple("extra/emboss"))
+            .add(simple("extra/indent"))
+            .add(simple("extra/marker"))
+            .build();
+    
+    private static ModelTemplate mossyModel(String base, VariantTemplate template) {
+        if (template.getName().equals("circularct")) {
+            return ModelTemplates.mossyCtm(base, "circular");
+        } else if (template.getName().equals("pillar") || template.getName().equals("twisted")) {
+            return ModelTemplates.mossyColumn(base);
+        } else {
+            return ModelTemplates.mossy(base);
+        }
+    }
+    
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> COBBLESTONE_MOSSY = ImmutableList.copyOf(COBBLESTONE.stream()
+            .map(v -> SimpleTemplate.builderFrom(v)
+                    .modelTemplate(mossyModel("cobblestone", v))
+                    .build())
+            .collect(Collectors.toList()));
+    
     public static final ImmutableList<VariantTemplate> PLANKS = ofClass(Planks.class);
 
     public static final SimpleTemplate withRecipe(VariantTemplate template, RecipeTemplate recipe) {

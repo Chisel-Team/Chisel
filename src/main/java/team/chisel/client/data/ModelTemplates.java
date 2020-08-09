@@ -35,6 +35,10 @@ public class ModelTemplates {
         return name.replaceAll("\\w+$", newVariant);
     }
     
+    public static String replaceBlock(String name, String newBlock) {
+        return name.replaceAll("^block/\\w+", "block/" + newBlock);
+    }
+    
     public static ModelTemplate cubeBottomTop() {
         return cubeBottomTop(name -> name + "-side", name -> name + "-bottom", name -> name + "-top");
     }
@@ -95,6 +99,36 @@ public class ModelTemplates {
                     .texture("x", name + "-ew")
                     .texture("y", name + "-tb")
                     .texture("z", name + "-ns"));
+        };
+    }
+    
+    public static ModelTemplate mossy(String base) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            String texName = replaceBlock(name, base);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/mossy/mossy"))
+                    .texture("bot", texName));
+        };
+    }
+    
+    public static ModelTemplate mossyColumn(String base) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            String texName = replaceBlock(name, base);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/mossy/mossy_column"))
+                    .texture("side", texName + "-side")
+                    .texture("end", texName + "-top"));
+        };
+    }
+    
+    public static ModelTemplate mossyCtm(String base, String variant) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            String texName = replaceBlock(name, base);
+            texName = replaceVariant(texName, variant);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/mossy/mossy_ctm"))
+                    .texture("bot", texName)
+                    .texture("connect_bot", texName + "-ctm"));
         };
     }
 }
