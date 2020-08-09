@@ -205,9 +205,9 @@ public class VariantTemplates {
     @SuppressWarnings("null")
     public static final ImmutableList<VariantTemplate> COBBLESTONE = ImmutableList.<VariantTemplate>builder()
             .addAll(ROCK)
-            .add(simple("extra/emboss"))
-            .add(simple("extra/indent"))
-            .add(simple("extra/marker"))
+            .add(withName("extra/emboss", "Embossed"))
+            .add(withName("extra/indent", "Indent"))
+            .add(withName("extra/marker", "Marker"))
             .build();
     
     private static ModelTemplate mossyModel(String base, VariantTemplate template) {

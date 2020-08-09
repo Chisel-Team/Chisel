@@ -233,9 +233,9 @@ public class Features {
             .addBlock(Blocks.CHISELED_STONE_BRICKS)
             .addBlock(Blocks.CRACKED_STONE_BRICKS)
             .variations(VariantTemplates.ROCK)
-            .variation("extra/largeornate")
-            .next("extra/poison")
-            .next("extra/sunken")
+            .variation("extra/largeornate").localizedName("Large Ornate")
+            .next("extra/poison").localizedName("Poison")
+            .next("extra/sunken").localizedName("Sunken")
             .build(p -> p.hardnessAndResistance(1.5F, 10.0F));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> TYRIAN = _FACTORY.newType(Material.IRON, "tyrian")
