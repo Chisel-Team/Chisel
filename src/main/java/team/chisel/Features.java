@@ -220,12 +220,21 @@ public class Features {
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
 
     public static final Map<WoodType, Map<String, RegistryEntry<BlockCarvable>>> PLANKS = VANILLA_WOODS.stream()
-            .map(t -> Pair.<WoodType, ResourceLocation>of(t, new ResourceLocation(t.getName() + "_planks")))
+            .map(t -> Pair.of(t, new ResourceLocation(t.getName() + "_planks")))
             .collect(Collectors.toMap(Pair::getFirst, pair -> _FACTORY.newType(Material.WOOD, "planks/" + pair.getFirst().getName())
                     .addBlock(pair.getSecond())
                     .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst().getName()) + " Planks")
                     .variations(VariantTemplates.PLANKS)
                     .build($ -> Block.Properties.from(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))));
+
+    // TODO Temp Merge with above once 1.16 hits
+    /*public static final Map<String, Map<String, RegistryEntry<BlockCarvable>>> PLANKS_116 = ImmutableList.of("crimson", "warped").stream()
+            .map(t -> Pair.of(t, new ResourceLocation(t + "_planks")))
+            .collect(Collectors.toMap(Pair::getFirst, pair -> _FACTORY.newType(Material.WOOD, "planks/" + pair.getFirst())
+                    .addBlock(pair.getSecond())
+                    .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst()) + " Planks")
+                    .variations(VariantTemplates.PLANKS)
+                    .build($ -> Block.Properties.from(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))));//*/
 
     public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")
             .addBlock(Blocks.STONE)

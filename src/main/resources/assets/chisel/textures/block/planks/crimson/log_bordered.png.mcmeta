@@ -1,0 +1,13 @@
+{
+    "animation": {
+        "interpolate": true,
+        "frametime": 10
+    },
+    "ctm": {
+        "ctm_version": 1,
+        "type": "ctm",
+        "textures": [
+            "chisel:block/planks/crimson/log_bordered-ctm"
+        ]
+    }
+}
