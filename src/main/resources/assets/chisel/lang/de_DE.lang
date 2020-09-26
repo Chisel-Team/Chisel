@@ -16,7 +16,7 @@ container.chisel.title=Meißel
 itemGroup.chiselCreativeTab=Meißel
 chisel.jei.title=Meißeln
 
-jei.chisel.desc.concrete_making=Füge nur etwas Wasser hinzu und schon kannst du deinen eigenen Beton herstellen!\n\nTauche Betonpulver in Wasser, indem du es daneben plazierst, oder lass' es ins Wasser fallen.
+jei.chisel.desc.concrete_making=Füge nur etwas Wasser hinzu und schon kannst du deinen eigenen Beton herstellen!\n\nTauche Betonpulver in Wasser, indem du es daneben platzierst, oder lass' es ins Wasser fallen.
 
 chisel.tooltip.blockname=%1$s (%2$s)
 
