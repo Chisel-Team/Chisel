@@ -205,7 +205,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .item(provider::createBlockItem)
                             // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
                             .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
-                            .properties(p -> p.group(ChiselTabs.tab))
                             .transform(this::addTag)
                             .build()
                         .register());

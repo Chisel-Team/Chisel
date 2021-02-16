@@ -64,12 +64,10 @@ public class ChiselItems {
     }
     
     public static final RegistryEntry<ItemOffsetTool> offsettool = REGISTRATE.item("offset_tool", ItemOffsetTool::new)
-            .properties(p -> p.group(ChiselTabs.tab))
             .register();
     
     private static ItemBuilder<ItemChisel, Registrate> chisel(ChiselType type) {
-        return REGISTRATE.item(type.name().toLowerCase(Locale.ROOT) + "_chisel", p -> new ItemChisel(type, p))
-                .properties(p -> p.group(ChiselTabs.tab));
+        return REGISTRATE.item(type.name().toLowerCase(Locale.ROOT) + "_chisel", p -> new ItemChisel(type, p));
     }
     
     public static void init() {}

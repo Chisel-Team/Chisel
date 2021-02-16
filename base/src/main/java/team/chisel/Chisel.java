@@ -90,8 +90,8 @@ public class Chisel implements Reference {
     private static Map<String, Block> remaps = ImmutableMap.of();
 
     private static final NonNullLazyValue<Registrate> REGISTRATE = new NonNullLazyValue<Registrate>(() -> {
-        Registrate ret = Registrate.create(Reference.MOD_ID).itemGroup(() -> ChiselTabs.tab);
-        ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.tab, "Chisel"));
+        Registrate ret = Registrate.create(Reference.MOD_ID).itemGroup(() -> ChiselTabs.base);
+        ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.base, "Chisel"));
         return ret;
     });
     

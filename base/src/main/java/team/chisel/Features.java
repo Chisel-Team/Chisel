@@ -66,33 +66,8 @@ public class Features {
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
     
     
-    private static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
-    
-    // Hardcode to vanilla wood types
-    /*
-    public static final Map<WoodType, Map<String, RegistryEntry<BlockCarvableBookshelf>>> BOOKSHELVES = VANILLA_WOODS.stream()
-            .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "bookshelf/" + wood.getName(), BlockCarvableBookshelf::new)
-                    .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouchOrRandomly(block, Items.BOOK, ConstantRange.of(3))))
-                    .applyIf(() -> wood == WoodType.OAK, f -> f.addBlock(Blocks.BOOKSHELF))
-                    .model((prov, block) -> {
-                        prov.simpleBlock(block, prov.models().withExistingParent("block/" + ModelTemplates.name(block), prov.modLoc("cube_2_layer_sides"))
-                                .texture("all", "minecraft:block/" + wood.getName() + "_planks")
-                                .texture("side", "block/" + ModelTemplates.name(block).replace(wood.getName() + "/", "")));
-                    })
-                    .layer(() -> RenderType::getCutout)
-                    .setGroupName(RegistrateLangProvider.toEnglishName(wood.getName()) + " Bookshelf")
-                    .variation("rainbow")
-                    .next("novice_necromancer")
-                    .next("necromancer")
-                    .next("redtomes")
-                    .next("abandoned")
-                    .next("hoarder")
-                    .next("brim")
-                    .next("historian")
-                    .next("cans")
-                    .next("papers")
-                    .build(b -> b.sound(SoundType.WOOD).hardnessAndResistance(1.5f))));
-      */      
+    public static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
+ 
     public static final Map<String, RegistryEntry<BlockCarvable>> BRICKS = _FACTORY.newType(Material.ROCK, "bricks")
             .addBlock(Blocks.BRICKS)
             .variations(VariantTemplates.ROCK)

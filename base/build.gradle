@@ -1,0 +1,81 @@
+minecraft {
+    mappings channel: 'snapshot', version: '20200808-1.15.1'
+    
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            taskName 'all_client'
+            
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'CORE,REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+                chisel_legacy {
+                	source project(':legacy').sourceSets.main
+               	}
+                ctm {
+                    sources sourceSets.main // Has to be manually changed to work right...can't figure out a better way
+                }
+            }
+        }
+
+        server {
+            taskName 'all_server'
+        
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'CORE,REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+                chisel_legacy {
+                	source project(':legacy').sourceSets.main
+               	}
+            }
+        }
+        
+        data {
+            taskName 'chisel_data'
+        
+            workingDirectory project.file('run')
+            
+            environment 'target', 'fmluserdevdata'
+
+            property 'forge.logging.markers', 'CORE,REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+            }
+            
+            args '--mod', 'chisel', '--all', '--output', '"' + rootProject.file('src/generated/resources/') + '"',
+                 '--existing', '"' + rootProject.file('src/main/resources') + '"' 
+            
+        }
+    }
+}
+
+// Create API jar with sources and compiled files
+task apiJar(type: Jar) {
+    from sourceSets.main.allSource
+    from sourceSets.main.output
+    include 'team/chisel/api/**/*'
+    classifier = 'api'
+}
+
+publishing.publications {
+    mavenJava(MavenPublication) {
+        artifact apiJar
+    }
+}

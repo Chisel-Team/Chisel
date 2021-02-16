@@ -1,0 +1,9 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+issueTrackerURL="https://github.com/Chisel-Team/Chisel/issues/"
+
+[[mods]]
+modId="chisel-legacy"
+version="${file.jarVersion}"
+displayName="Chisel - Legacy"
+authors="tterrag"
