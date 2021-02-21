@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "chisel:block/diorite/pillar-side",
+    "end": "chisel:block/diorite/pillar-top"
+  }
+}

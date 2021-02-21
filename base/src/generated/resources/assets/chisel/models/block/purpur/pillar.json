@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "chisel:block/purpur/pillar-side",
+    "end": "chisel:block/purpur/pillar-top"
+  }
+}
