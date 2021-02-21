@@ -148,6 +148,24 @@ public class Features {
                     .variations(VariantTemplates.ROCK)
                     .build(p -> p.sound(SoundType.STONE).hardnessAndResistance(1.8F))));
 //  BlockSpeedHandler.speedupBlocks.add(b);
+
+    public static final Map<String, RegistryEntry<BlockCarvable>> DIORITE = _FACTORY.newType(Material.ROCK, "diorite")
+            .addBlock(Blocks.DIORITE)
+            .addBlock(Blocks.POLISHED_DIORITE)
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE));
+
+    public static final Map<String, RegistryEntry<BlockCarvable>> END_PURPUR = _FACTORY.newType(Material.ROCK, "purpur")
+            .addBlock(Blocks.PURPUR_BLOCK)
+            .addBlock(Blocks.PURPUR_PILLAR)
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
+
+    public static final Map<String, RegistryEntry<BlockCarvable>> ENDSTONE = _FACTORY.newType(Material.ROCK, "endstone") //TODO: REMAP
+            .addTag(Tags.Blocks.END_STONES)
+            .addBlock(Blocks.END_STONE_BRICKS)
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(3.0F, 15.0F).sound(SoundType.STONE));
     
     public static final Map<String, RegistryEntry<BlockCarvable>> FACTORY = _FACTORY.newType(Material.IRON, "factory")
             .variation("dots")

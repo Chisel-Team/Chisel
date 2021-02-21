@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel:block/endstone/encased_bricks"
+    }
+  }
+}
