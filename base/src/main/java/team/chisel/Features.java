@@ -194,6 +194,12 @@ public class Features {
             .next("wireframeblue")
             .build(b -> b.sound(ChiselSoundTypes.METAL));
 
+    public static final Map<String, RegistryEntry<BlockCarvable>> GRANITE = _FACTORY.newType(Material.ROCK, "granite")
+            .variations(VariantTemplates.ROCK)
+            .addBlock(Blocks.GRANITE)
+            .addBlock(Blocks.POLISHED_GRANITE)
+            .build(b -> b.hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE));
+
     public static final Map<String, RegistryEntry<BlockCarvable>> LIMESTONE = _FACTORY.newType(Material.ROCK, "limestone")
             .variation(VariantTemplates.RAW)
             .variations(VariantTemplates.ROCK)
