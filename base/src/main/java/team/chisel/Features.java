@@ -161,7 +161,7 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
 
-    public static final Map<String, RegistryEntry<BlockCarvable>> ENDSTONE = _FACTORY.newType(Material.ROCK, "endstone") //TODO: REMAP
+    public static final Map<String, RegistryEntry<BlockCarvable>> ENDSTONE = _FACTORY.newType(Material.ROCK, "end_stone")
             .addTag(Tags.Blocks.END_STONES)
             .addBlock(Blocks.END_STONE_BRICKS)
             .variations(VariantTemplates.ROCK)
