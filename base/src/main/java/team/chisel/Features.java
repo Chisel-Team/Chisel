@@ -235,6 +235,14 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
 
+    public static final Map<String, RegistryEntry<BlockCarvable>> QUARTZ = _FACTORY.newType(Material.ROCK, "quartz")
+            .addTag(Tags.Blocks.STORAGE_BLOCKS_QUARTZ)
+            .addBlock(Blocks.QUARTZ_PILLAR)
+            .addBlock(Blocks.CHISELED_QUARTZ_BLOCK)
+            .addBlock(Blocks.SMOOTH_QUARTZ)
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(0.8F, 4.0F).sound(SoundType.STONE));
+
     public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")
             .addBlock(Blocks.STONE)
             .addBlock(Blocks.STONE_BRICKS)
