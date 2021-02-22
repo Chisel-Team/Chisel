@@ -155,12 +155,6 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE));
 
-    public static final Map<String, RegistryEntry<BlockCarvable>> END_PURPUR = _FACTORY.newType(Material.ROCK, "purpur")
-            .addBlock(Blocks.PURPUR_BLOCK)
-            .addBlock(Blocks.PURPUR_PILLAR)
-            .variations(VariantTemplates.ROCK)
-            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
-
     public static final Map<String, RegistryEntry<BlockCarvable>> ENDSTONE = _FACTORY.newType(Material.ROCK, "end_stone")
             .addTag(Tags.Blocks.END_STONES)
             .addBlock(Blocks.END_STONE_BRICKS)
@@ -228,6 +222,12 @@ public class Features {
                     .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst()) + " Planks")
                     .variations(VariantTemplates.PLANKS)
                     .build($ -> Block.Properties.from(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))));//*/
+
+    public static final Map<String, RegistryEntry<BlockCarvable>> PURPUR = _FACTORY.newType(Material.ROCK, "purpur")
+            .addBlock(Blocks.PURPUR_BLOCK)
+            .addBlock(Blocks.PURPUR_PILLAR)
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
 
     public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")
             .addBlock(Blocks.STONE)
