@@ -243,6 +243,15 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(0.8F, 4.0F).sound(SoundType.STONE));
 
+    public static final Map<String, RegistryEntry<BlockCarvable>> SANDSTONE = _FACTORY.newType(Material.ROCK, "sandstone")
+            .addTag(Tags.Blocks.SANDSTONE)
+            .variations(VariantTemplates.ROCK)
+            .variation("extra/bevel_creeper").localizedName("Bevel Creeper")
+            .next("extra/glyphs").localizedName("Glyphs")
+            .next("extra/small").localizedName("Small")
+            //TODO: column-ctm
+            .build(b -> b.hardnessAndResistance(0.8F).sound(SoundType.STONE));
+
     public static final Map<String, RegistryEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.ROCK, "stone_bricks")
             .addBlock(Blocks.STONE)
             .addBlock(Blocks.STONE_BRICKS)
