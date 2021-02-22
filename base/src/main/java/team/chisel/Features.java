@@ -243,6 +243,17 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(0.8F, 4.0F).sound(SoundType.STONE));
 
+    public static final Map<String, RegistryEntry<BlockCarvable>> RED_SANDSTONE = _FACTORY.newType(Material.ROCK, "red_sandstone")
+            .addBlock(Blocks.RED_SANDSTONE)
+            .addBlock(Blocks.CHISELED_RED_SANDSTONE)
+            .addBlock(Blocks.CUT_RED_SANDSTONE)
+            .addBlock(Blocks.SMOOTH_RED_SANDSTONE)
+            .variations(VariantTemplates.ROCK)
+            .variation("extra/bevel_skeleton").localizedName("Bevel Skeleton")
+            .next("extra/glyphs").localizedName("Glyphs")
+            .next("extra/small").localizedName("Small")
+            .build(b -> b.hardnessAndResistance(0.8F).sound(SoundType.STONE));
+
     public static final Map<String, RegistryEntry<BlockCarvable>> SANDSTONE = _FACTORY.newType(Material.ROCK, "sandstone")
             .addTag(Tags.Blocks.SANDSTONE)
             .variations(VariantTemplates.ROCK)
