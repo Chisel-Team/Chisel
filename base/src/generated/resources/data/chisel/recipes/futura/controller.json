@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SGS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:stone"
+    },
+    "G": {
+      "tag": "forge:dusts/redstone"
+    }
+  },
+  "result": {
+    "item": "chisel:futura/controller",
+    "count": 8
+  }
+}
