@@ -14,7 +14,9 @@ import net.minecraft.block.WoodType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.item.Items;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.storage.loot.ConstantRange;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import team.chisel.Features;
 import team.chisel.api.block.ChiselBlockFactory;
@@ -71,6 +73,31 @@ public class LegacyFeatures {
             .next("horizontal")
             .next("plate")
             .build(b -> b.hardnessAndResistance(0.5F, 0.0F).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL).harvestLevel(0));
+
+    public static final Map<String, RegistryEntry<BlockCarvable>> OBSIDIAN = _FACTORY.newType(Material.ROCK, "obsidian")
+            .addTag(Tags.Blocks.OBSIDIAN)
+            .addTag(BlockTags.DRAGON_IMMUNE) //TODO: Is this right?
+            .variation("pillar")
+                .model(ModelTemplates.cubeColumn())
+            .next("pillar-quartz")
+                .model(ModelTemplates.cubeColumn())
+            .next("chiseled")
+                .model(ModelTemplates.cubeColumn())
+            .next("panel_shiny")
+            .next("panel")
+            .next("chunks")
+            .next("growth")
+            .next("crystal")
+            .next("map-a")
+            .next("map-b")
+            .next("panel_light")
+            .next("blocks")
+            .next("tiles")
+            .next("greek")
+                .model(ModelTemplates.cubeColumn())
+            .next("crate")
+                .model(ModelTemplates.cubeBottomTop())
+            .build(b -> b.hardnessAndResistance(50.0F, 2000.0F).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3));
 
 	public static void init() {}
 }
