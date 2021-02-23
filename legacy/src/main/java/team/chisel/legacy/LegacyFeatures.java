@@ -15,9 +15,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.item.Items;
 import net.minecraft.world.storage.loot.ConstantRange;
+import net.minecraftforge.common.ToolType;
 import team.chisel.Features;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.data.ModelTemplates;
+import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
 
 public class LegacyFeatures {
@@ -48,6 +50,27 @@ public class LegacyFeatures {
                     .next("cans")
                     .next("papers")
                     .build(b -> b.sound(SoundType.WOOD).hardnessAndResistance(1.5f))));
+
+    public static final Map<String, RegistryEntry<BlockCarvable>> DIRT = _FACTORY.newType(Material.EARTH, "dirt")
+            .addBlock(Blocks.DIRT)
+            .variation("bricks")
+            .next("netherbricks")
+            .next("bricks3")
+            .next("cobble")
+            .next("reinforcedcobbledirt")
+            .next("reinforceddirt")
+            .next("happy")
+            .next("bricks2")
+            .next("bricks_dirt2")
+            .next("hor")
+                .model(ModelTemplates.cubeColumn("hor-ctmh", "hor-top"))
+            .next("vert")
+            .next("layers")
+            .next("vertical")
+            .next("chunky")
+            .next("horizontal")
+            .next("plate")
+            .build(b -> b.hardnessAndResistance(0.5F, 0.0F).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL).harvestLevel(0));
 
 	public static void init() {}
 }
