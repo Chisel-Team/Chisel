@@ -194,6 +194,27 @@ public class Features {
             .next("wireframeblue")
             .build(b -> b.sound(ChiselSoundTypes.METAL));
 
+    public static final Map<String, RegistryEntry<BlockCarvable>> FUTURA = _FACTORY.newType(Material.ROCK, "futura")
+            .recipe((prov, block) -> new ShapedRecipeBuilder(block, 8)
+                .patternLine("SSS").patternLine("SGS").patternLine("SSS")
+                .key('S', Tags.Items.STONE)
+                .key('G', Tags.Items.DUSTS_REDSTONE)
+                .addCriterion("has_redstone", prov.hasItem(Tags.Items.DUSTS_REDSTONE))
+                .build(prov))
+            .variation("screen_metallic")
+                .model(ModelTemplates.twoLayerTopShaded("screen_metallic", "screen_discoherent"))
+            .next("screen_cyan")
+                .model(ModelTemplates.twoLayerTopShaded("screen_cyan", "screen_discoherent"))
+            .next("controller")
+                .model(ModelTemplates.threeLayerTopShaded("controller_particle", "lines_plating", "rainbow_lines", "lines_invalid"))
+            .next("wavy")
+                .model(ModelTemplates.twoLayerTopShaded("rainbow_wave_particle", "rainbow_wave_base", "rainbow_wave"))
+            .next("controller_purple")
+                .model(ModelTemplates.threeLayerTopShaded("controller_unity_particle", "unity_lines_plating", "unity_lines", "lines_invalid"))
+            .next("uber_wavy")
+                .model(ModelTemplates.threeLayerTopShaded("orange_frame_particle", "orange_frame", "uber_rainbow", "screen_discoherent"))
+            .build();
+
     public static final Map<String, RegistryEntry<BlockCarvable>> GRANITE = _FACTORY.newType(Material.ROCK, "granite")
             .variations(VariantTemplates.ROCK)
             .addBlock(Blocks.GRANITE)

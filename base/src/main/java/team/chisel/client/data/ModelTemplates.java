@@ -131,4 +131,29 @@ public class ModelTemplates {
                     .texture("connect_bot", texName + "-ctm"));
         };
     }
+
+    public static ModelTemplate twoLayerTopShaded(String top, String bottom) {
+        return twoLayerTopShaded(top, top, bottom);
+    }
+
+    public static ModelTemplate twoLayerTopShaded(String particle, String top, String bottom) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/cube_2_layer_topshaded"))
+                    .texture("particle", replaceVariant(name, particle))
+                    .texture("top", replaceVariant(name, top))
+                    .texture("bot", replaceVariant(name, bottom)));
+        };
+    }
+
+    public static ModelTemplate threeLayerTopShaded(String particle, String top, String mid, String bottom) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/cube_3_layer_topshaded"))
+                    .texture("particle", replaceVariant(name, particle))
+                    .texture("top", replaceVariant(name, top))
+                    .texture("mid", replaceVariant(name, mid))
+                    .texture("bot", replaceVariant(name, bottom)));
+        };
+    }
 }

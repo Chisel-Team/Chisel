@@ -1,0 +1,8 @@
+{
+  "parent": "chisel:block/cube_2_layer_topshaded",
+  "textures": {
+    "particle": "chisel:block/futura/rainbow_wave_particle",
+    "top": "chisel:block/futura/rainbow_wave_base",
+    "bot": "chisel:block/futura/rainbow_wave"
+  }
+}
