@@ -13,6 +13,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.WoodType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.storage.loot.ConstantRange;
@@ -98,6 +99,24 @@ public class LegacyFeatures {
             .next("crate")
                 .model(ModelTemplates.cubeBottomTop())
             .build(b -> b.hardnessAndResistance(50.0F, 2000.0F).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3));
+
+    public static final Map<String, RegistryEntry<BlockCarvable>> PAPER = _FACTORY.newType(Material.PLANTS, "paper")
+            .recipe((prov, block) -> new ShapedRecipeBuilder(block, 32)
+                    .patternLine("ppp").patternLine("psp").patternLine("ppp")
+                    .key('p', Items.PAPER)
+                    .key('s', Tags.Items.RODS_WOODEN)
+                    .addCriterion("has_stick", prov.hasItem(Tags.Items.RODS_WOODEN))
+                    .build(prov))
+            .variation("box")
+            .next("throughmiddle")
+            .next("cross")
+            .next("sixsections")
+            .next("vertical")
+            .next("horizontal")
+            .next("floral")
+            .next("plain")
+            .next("door")
+            .build(b -> b.hardnessAndResistance(1.5F, 0.0F).sound(SoundType.PLANT));
 
 	public static void init() {}
 }
