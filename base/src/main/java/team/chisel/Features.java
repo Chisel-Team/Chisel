@@ -19,9 +19,16 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.IntClamper;
+import net.minecraft.world.storage.loot.ItemLootEntry;
+import net.minecraft.world.storage.loot.RandomValueRange;
+import net.minecraft.world.storage.loot.functions.ApplyBonus;
+import net.minecraft.world.storage.loot.functions.LimitCount;
+import net.minecraft.world.storage.loot.functions.SetCount;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -215,6 +222,46 @@ public class Features {
             .next("uber_wavy")
                 .model(ModelTemplates.threeLayerTopShaded("orange_frame_particle", "orange_frame", "uber_rainbow", "screen_discoherent"))
             .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> GLOWSTONE = _FACTORY.newType(Material.GLASS, "glowstone")
+            .addBlock(Blocks.GLOWSTONE)
+            .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouch(block, RegistrateBlockLootTables.withExplosionDecay(block, ItemLootEntry.builder(Items.GLOWSTONE_DUST).acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 4.0F))).acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE)).acceptFunction(LimitCount.func_215911_a(IntClamper.func_215843_a(1, 4)))))))
+            .variation("cracked")
+            .next("soft_bricks").localizedName("Weathered Bricks")
+            .next("cracked_bricks")
+            .next("triple_bricks").localizedName("Wide Bricks")
+            .next("encased_bricks")
+            .next("braid")
+            .next("array").localizedName("Arrayed Bricks")
+            .next("tiles_large").localizedName("Big Tile")
+            .next("tiles_small").localizedName("Small Tiles")
+            .next("chaotic_medium").localizedName("Disordered Tiles")
+            .next("chaotic_small").localizedName("Small Disordered Tiles")
+            .next("dent")
+            .next("french_1")
+            .next("french_2")
+            .next("jellybean")
+            .next("layers")
+            .next("mosaic")
+            .next("ornate")
+            .next("panel")
+            .next("road")
+            .next("slanted")
+            .next("solid_bricks").localizedName("Bricks")
+            .next("small_bricks")
+            .next("circular")
+            .next("tiles_medium").localizedName("Tiles")
+            .next("pillar")
+                .model(ModelTemplates.cubeColumn())
+            .next("twisted")
+                .model(ModelTemplates.cubeColumn())
+            .next("prism")
+            .next("extra/bismuth").localizedName("Bismuth")
+            .next("extra/tiles_large_bismuth").localizedName("Tiles Large Bismuth")
+            .next("extra/tiles_medium_bismuth").localizedName("Tiles Medium Bismuth")
+            .next("extra/neon").localizedName("Neon")
+            .next("extra/neon_panel").localizedName("Neon Panel")
+            .build(b -> b.hardnessAndResistance(0.3F, 1.5F).sound(SoundType.GLASS).lightValue(15));
 
     public static final Map<String, BlockEntry<BlockCarvable>> GRANITE = _FACTORY.newType(Material.ROCK, "granite")
             .variations(VariantTemplates.ROCK)
