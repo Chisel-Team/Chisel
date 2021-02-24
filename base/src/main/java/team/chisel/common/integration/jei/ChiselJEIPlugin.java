@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.ImmutableMap;
-import com.tterrag.registrate.util.RegistryEntry;
 
+import com.tterrag.registrate.util.entry.ItemEntry;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -45,7 +45,7 @@ public class ChiselJEIPlugin implements IModPlugin {
 //        registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
 //                            .collect(Collectors.toList()), category.getUid());
 
-        for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
+        for (ItemEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
             ItemStack stack = new ItemStack(chisel.get());
             registry.addIngredientInfo(stack, VanillaTypes.ITEM, ChiselLangKeys.JEI_DESC_CHISEL_GENERIC.getComponent().getKey(), "\n", descriptions.get(chisel.get().delegate).getComponent().getKey());
         }
@@ -53,7 +53,7 @@ public class ChiselJEIPlugin implements IModPlugin {
     
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
-        for (RegistryEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
+        for (ItemEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
             registry.addRecipeCatalyst(new ItemStack(chisel.get()), category.getUid());
         }
     }

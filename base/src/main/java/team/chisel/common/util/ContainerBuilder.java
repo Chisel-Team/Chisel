@@ -40,7 +40,7 @@ public class ContainerBuilder<T extends Container, S extends Screen & IHasContai
 
     @Override
     protected @NonnullType ContainerType<T> createEntry() {
-        ContainerType<T> ret = new ContainerType<>((windowId, inv) -> factory.create(get(), windowId, inv));
+        ContainerType<T> ret = new ContainerType<>((windowId, inv) -> factory.create(getEntry(), windowId, inv));
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> ScreenManager.registerFactory(ret, screenFactory.get()::create));
         return ret;
     }
