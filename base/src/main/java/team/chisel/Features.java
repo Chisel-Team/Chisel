@@ -343,6 +343,11 @@ public class Features {
             .next("extra/sunken").localizedName("Sunken")
             .build(p -> p.hardnessAndResistance(1.5F, 10.0F));
 
+    public static final Map<String, BlockEntry<BlockCarvable>> TERRACOTTA = _FACTORY.newType(Material.ROCK, "terracotta")
+            .addBlock(Blocks.TERRACOTTA)
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(1.25F, 7.0F).sound(SoundType.STONE));
+
     public static final Map<String, BlockEntry<BlockCarvable>> TYRIAN = _FACTORY.newType(Material.IRON, "tyrian")
             .variation("shining")
                 .recipe((prov, block) -> new ShapedRecipeBuilder(block, 32)
