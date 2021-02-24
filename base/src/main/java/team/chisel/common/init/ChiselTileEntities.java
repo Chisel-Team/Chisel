@@ -1,8 +1,8 @@
 package team.chisel.common.init;
 
 import com.tterrag.registrate.Registrate;
-import com.tterrag.registrate.util.RegistryEntry;
 
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.block.Block;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.inventory.container.ContainerType;
@@ -22,7 +22,7 @@ public class ChiselTileEntities {
     public static final RegistryEntry<? extends Block> AUTO_CHISEL = REGISTRATE
             .object("auto_chisel")
             .block(BlockAutoChisel::new)
-            .tileEntity(TileAutoChisel::new)
+            .simpleTileEntity(TileAutoChisel::new)
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), prov.models().getExistingFile(ctx.getId())))
             .item(BlockItem::new)
                 .model((ctx, prov) -> prov.blockItem(ctx::getEntry))

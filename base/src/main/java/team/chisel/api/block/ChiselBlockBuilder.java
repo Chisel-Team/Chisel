@@ -23,7 +23,7 @@ import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
-import com.tterrag.registrate.util.RegistryEntry;
+import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
@@ -164,7 +164,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings({ "unchecked", "null" })
-    public Map<String, RegistryEntry<T>> build() {
+    public Map<String, BlockEntry<T>> build() {
         return build(NO_ACTION);
     }
 
@@ -177,7 +177,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings({ "unchecked", "null" })
-    public Map<String, RegistryEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
+    public Map<String, BlockEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
         }
@@ -185,7 +185,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         for (int i = 0; i < variations.size(); i++) {
             data[i] = variations.get(i).doBuild();
         }
-        Map<String, RegistryEntry<T>> ret = new HashMap<>(data.length);
+        Map<String, BlockEntry<T>> ret = new HashMap<>(data.length);
         ICarvingGroup group = CarvingUtils.itemGroup(this.group, this.groupName);
         for (int i = 0; i < data.length; i++) {
             if (Strings.emptyToNull(data[i].getName()) != null) {
@@ -290,11 +290,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return buildVariation().variation(name);
         }
 
-        public Map<String, RegistryEntry<T>> build() {
+        public Map<String, BlockEntry<T>> build() {
             return buildVariation().build();
         }
         
-        public Map<String, RegistryEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
+        public Map<String, BlockEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
             return buildVariation().build(after);
         }
 

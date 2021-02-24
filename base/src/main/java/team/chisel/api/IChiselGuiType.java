@@ -5,8 +5,8 @@ import java.util.function.Supplier;
 import javax.annotation.Nullable;
 
 import com.tterrag.registrate.Registrate;
-import com.tterrag.registrate.util.RegistryEntry;
 
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
