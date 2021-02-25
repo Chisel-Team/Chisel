@@ -11,10 +11,7 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.WoodType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.ShapedRecipeBuilder;
@@ -23,6 +20,8 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.storage.loot.IntClamper;
 import net.minecraft.world.storage.loot.ItemLootEntry;
 import net.minecraft.world.storage.loot.RandomValueRange;
@@ -32,6 +31,7 @@ import net.minecraft.world.storage.loot.functions.SetCount;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.registries.ForgeRegistries;
+import team.chisel.api.block.BlockCreator;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
@@ -43,6 +43,13 @@ import team.chisel.common.init.ChiselCompatTags;
 public class Features {
 
     private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrate());
+
+    private static final BlockCreator<BlockCarvable> beaconBaseCreator = (props, data) -> new BlockCarvable(props, data) {
+        @Override
+        public boolean isBeaconBase(BlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {
+            return true;
+        }
+    };
     
     public static final Map<String, BlockEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.IRON, "metals/aluminum")
             .setGroupName("Aluminum Block")
@@ -162,6 +169,27 @@ public class Features {
             .addBlock(Blocks.POLISHED_DIORITE)
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE));
+
+    public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.IRON, "emerald", beaconBaseCreator)
+            /*.recipe((prov, block) -> new ShapelessRecipeBuilder(Items.EMERALD, 9)
+                    .addIngredient(block)
+                    .addCriterion("has_emerald_block", prov.hasItem(block))
+                    .build(prov)) TODO: Match recipe seen in FeaturesOld*/
+            .variation("panel")
+            .next("panelclassic")
+            .next("smooth")
+            .next("chunk")
+            .next("goldborder")
+            .next("zelda")
+            .next("cell")
+            .next("cellbismuth")
+            .next("four")
+            .next("fourornate")
+            .next("ornate")
+            .next("masonryemerald")
+            .next("emeraldcircle")
+            .next("emeraldprismatic")
+            .build(b -> b.hardnessAndResistance(5.0F, 10.0F).sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(2));
 
     public static final Map<String, BlockEntry<BlockCarvable>> ENDSTONE = _FACTORY.newType(Material.ROCK, "end_stone")
             .addTag(Tags.Blocks.END_STONES)
