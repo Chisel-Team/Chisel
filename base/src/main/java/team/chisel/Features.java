@@ -327,6 +327,13 @@ public class Features {
                     .variations(VariantTemplates.PLANKS)
                     .build($ -> Block.Properties.from(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))));//*/
 
+    public static final Map<String, BlockEntry<BlockCarvable>> PRISMARINE = _FACTORY.newType(Material.ROCK, "prismarine")
+            .addBlock(Blocks.PRISMARINE)
+            .addBlock(Blocks.PRISMARINE_BRICKS)
+            .addBlock(Blocks.DARK_PRISMARINE)
+            .variations(VariantTemplates.ROCK)
+            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
+
     public static final Map<String, BlockEntry<BlockCarvable>> PURPUR = _FACTORY.newType(Material.ROCK, "purpur")
             .addBlock(Blocks.PURPUR_BLOCK)
             .addBlock(Blocks.PURPUR_PILLAR)
