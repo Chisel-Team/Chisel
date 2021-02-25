@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
-import com.tterrag.registrate.util.RegistryEntry;
 
+import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.WoodType;
@@ -31,7 +31,7 @@ public class LegacyFeatures {
 
     // Hardcode to vanilla wood types
 
-    public static final Map<WoodType, Map<String, RegistryEntry<BlockCarvableBookshelf>>> BOOKSHELVES = Features.VANILLA_WOODS.stream()
+    public static final Map<WoodType, Map<String, BlockEntry<BlockCarvableBookshelf>>> BOOKSHELVES = Features.VANILLA_WOODS.stream()
             .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "bookshelf/" + wood.getName(), BlockCarvableBookshelf::new)
                     .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouchOrRandomly(block, Items.BOOK, ConstantRange.of(3))))
                     .applyIf(() -> wood == WoodType.OAK, f -> f.addBlock(Blocks.BOOKSHELF))
@@ -54,7 +54,7 @@ public class LegacyFeatures {
                     .next("papers")
                     .build(b -> b.sound(SoundType.WOOD).hardnessAndResistance(1.5f))));
 
-    public static final Map<String, RegistryEntry<BlockCarvable>> DIRT = _FACTORY.newType(Material.EARTH, "dirt")
+    public static final Map<String, BlockEntry<BlockCarvable>> DIRT = _FACTORY.newType(Material.EARTH, "dirt")
             .addBlock(Blocks.DIRT)
             .variation("bricks")
             .next("netherbricks")
@@ -75,7 +75,7 @@ public class LegacyFeatures {
             .next("plate")
             .build(b -> b.hardnessAndResistance(0.5F, 0.0F).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL).harvestLevel(0));
 
-    public static final Map<String, RegistryEntry<BlockCarvable>> OBSIDIAN = _FACTORY.newType(Material.ROCK, "obsidian")
+    public static final Map<String, BlockEntry<BlockCarvable>> OBSIDIAN = _FACTORY.newType(Material.ROCK, "obsidian")
             .addTag(Tags.Blocks.OBSIDIAN)
             .addTag(BlockTags.DRAGON_IMMUNE) //TODO: Is this right?
             .variation("pillar")
@@ -100,7 +100,7 @@ public class LegacyFeatures {
                 .model(ModelTemplates.cubeBottomTop())
             .build(b -> b.hardnessAndResistance(50.0F, 2000.0F).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3));
 
-    public static final Map<String, RegistryEntry<BlockCarvable>> PAPER = _FACTORY.newType(Material.PLANTS, "paper")
+    public static final Map<String, BlockEntry<BlockCarvable>> PAPER = _FACTORY.newType(Material.PLANTS, "paper")
             .recipe((prov, block) -> new ShapedRecipeBuilder(block, 32)
                     .patternLine("ppp").patternLine("psp").patternLine("ppp")
                     .key('p', Items.PAPER)
