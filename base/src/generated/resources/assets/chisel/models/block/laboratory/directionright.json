@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "chisel:block/laboratory/directionright-side",
+    "end": "chisel:block/laboratory/directionright-top"
+  }
+}
