@@ -43,13 +43,6 @@ import team.chisel.common.init.ChiselCompatTags;
 public class Features {
 
     private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrate());
-
-    private static final BlockCreator<BlockCarvable> beaconBaseCreator = (props, data) -> new BlockCarvable(props, data) {
-        @Override
-        public boolean isBeaconBase(BlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {
-            return true;
-        }
-    };
     
     public static final Map<String, BlockEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.IRON, "metals/aluminum")
             .setGroupName("Aluminum Block")
@@ -254,37 +247,8 @@ public class Features {
     public static final Map<String, BlockEntry<BlockCarvable>> GLOWSTONE = _FACTORY.newType(Material.GLASS, "glowstone")
             .addBlock(Blocks.GLOWSTONE)
             .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouch(block, RegistrateBlockLootTables.withExplosionDecay(block, ItemLootEntry.builder(Items.GLOWSTONE_DUST).acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 4.0F))).acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE)).acceptFunction(LimitCount.func_215911_a(IntClamper.func_215843_a(1, 4)))))))
-            .variation("cracked")
-            .next("soft_bricks").localizedName("Weathered Bricks")
-            .next("cracked_bricks")
-            .next("triple_bricks").localizedName("Wide Bricks")
-            .next("encased_bricks")
-            .next("braid")
-            .next("array").localizedName("Arrayed Bricks")
-            .next("tiles_large").localizedName("Big Tile")
-            .next("tiles_small").localizedName("Small Tiles")
-            .next("chaotic_medium").localizedName("Disordered Tiles")
-            .next("chaotic_small").localizedName("Small Disordered Tiles")
-            .next("dent")
-            .next("french_1")
-            .next("french_2")
-            .next("jellybean")
-            .next("layers")
-            .next("mosaic")
-            .next("ornate")
-            .next("panel")
-            .next("road")
-            .next("slanted")
-            .next("solid_bricks").localizedName("Bricks")
-            .next("small_bricks")
-            .next("circular")
-            .next("tiles_medium").localizedName("Tiles")
-            .next("pillar")
-                .model(ModelTemplates.cubeColumn())
-            .next("twisted")
-                .model(ModelTemplates.cubeColumn())
-            .next("prism")
-            .next("extra/bismuth").localizedName("Bismuth")
+            .variations(VariantTemplates.STONE)
+            .variation("extra/bismuth").localizedName("Bismuth")
             .next("extra/tiles_large_bismuth").localizedName("Tiles Large Bismuth")
             .next("extra/tiles_medium_bismuth").localizedName("Tiles Medium Bismuth")
             .next("extra/neon").localizedName("Neon")
