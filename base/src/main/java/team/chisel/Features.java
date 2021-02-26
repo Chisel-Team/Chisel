@@ -19,8 +19,10 @@ import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.storage.loot.IntClamper;
 import net.minecraft.world.storage.loot.ItemLootEntry;
@@ -351,6 +353,11 @@ public class Features {
             .next("extra/small").localizedName("Small")
             .build(b -> b.hardnessAndResistance(0.8F).sound(SoundType.STONE));
 
+    public static final Map<String, BlockEntry<BlockCarvable>> REDSTONE = _FACTORY.newType(Material.IRON, "redstone", BlockCreators.redstoneCreator)
+            .addTag(Tags.Blocks.STORAGE_BLOCKS_REDSTONE)
+            .variations(VariantTemplates.STONE)
+            .build(b -> b.hardnessAndResistance(5.0F, 10.0F).sound(SoundType.METAL)); //TODO: Recipe from FeaturesOld
+
     public static final Map<String, BlockEntry<BlockCarvable>> SANDSTONE = _FACTORY.newType(Material.ROCK, "sandstone")
             .addTag(Tags.Blocks.SANDSTONE)
             .variations(VariantTemplates.ROCK)
@@ -416,6 +423,20 @@ public class Features {
             @Override
             public boolean isBeaconBase(BlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {
                 return true;
+            }
+        };
+
+        private static final BlockCreator<BlockCarvable> redstoneCreator = (props, data) -> new BlockCarvable(props, data) {
+            @Override
+            @Deprecated
+            public boolean canProvidePower(BlockState state) {
+                return true;
+            }
+
+            @Override
+            @Deprecated
+            public int getWeakPower(BlockState state, IBlockReader reader, BlockPos pos, Direction direction) {
+                return 15;
             }
         };
     }
