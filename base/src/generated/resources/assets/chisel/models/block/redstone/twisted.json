@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "side": "chisel:block/redstone/twisted-side",
+    "end": "chisel:block/redstone/twisted-top"
+  }
+}
