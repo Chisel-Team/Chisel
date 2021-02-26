@@ -170,7 +170,7 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE));
 
-    public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.IRON, "emerald", beaconBaseCreator)
+    public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.IRON, "emerald", BlockCreators.beaconBaseCreator)
             /*.recipe((prov, block) -> new ShapelessRecipeBuilder(Items.EMERALD, 9)
                     .addIngredient(block)
                     .addCriterion("has_emerald_block", prov.hasItem(block))
@@ -446,4 +446,13 @@ public class Features {
                     .build(b -> b.sound(SoundType.CLOTH).hardnessAndResistance(0.8F))));
     
     public static void init() {}
+
+    private static class BlockCreators {
+        private static final BlockCreator<BlockCarvable> beaconBaseCreator = (props, data) -> new BlockCarvable(props, data) {
+            @Override
+            public boolean isBeaconBase(BlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {
+                return true;
+            }
+        };
+    }
 }
