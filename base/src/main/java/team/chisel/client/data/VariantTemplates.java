@@ -105,6 +105,37 @@ public class VariantTemplates {
     }
     
     public static final VariantTemplate RAW = simple("raw");
+
+    public static class Stone {
+        public static final VariantTemplate CRACKED = simple("cracked");
+        public static final VariantTemplate SOLID_BRICKS = withName("solid_bricks", "Bricks");
+        public static final VariantTemplate SMALL_BRICKS = simple("small_bricks");
+        public static final VariantTemplate SOFT_BRICKS = withName("soft_bricks", "Weathered Bricks");
+        public static final VariantTemplate CRACKED_BRICKS = simple("cracked_bricks");
+        public static final VariantTemplate TRIPLE_BRICKS = withName("triple_bricks", "Wide Bricks");
+        public static final VariantTemplate ENCASED_BRICKS = simple("encased_bricks");
+        public static final VariantTemplate ARRAY = withName("array", "Arrayed Bricks");
+        public static final VariantTemplate TILES_MEDIUM = withName("tiles_medium", "Tiles");
+        public static final VariantTemplate TILES_LARGE = withName("tiles_large", "Big Tile");
+        public static final VariantTemplate TILES_SMALL = withName("tiles_small", "Small Tiles");
+        public static final VariantTemplate CHAOTIC_MEDIUM = withName("chaotic_medium", "Disordered Tiles");
+        public static final VariantTemplate CHAOTIC_SMALL = withName("chaotic_small", "Small Disordered Tiles");
+        public static final VariantTemplate BRAID = simple("braid");
+        public static final VariantTemplate DENT = simple("dent");
+        public static final VariantTemplate FRENCH_1 = simple("french_1");
+        public static final VariantTemplate FRENCH_2 = simple("french_2");
+        public static final VariantTemplate JELLYBEAN = simple("jellybean");
+        public static final VariantTemplate LAYERS = simple("layers");
+        public static final VariantTemplate MOSAIC = simple("mosaic");
+        public static final VariantTemplate ORNATE = simple("ornate");
+        public static final VariantTemplate PANEL = simple("panel");
+        public static final VariantTemplate ROAD = simple("road");
+        public static final VariantTemplate SLANTED = simple("slanted");
+        public static final VariantTemplate CIRCULAR = simple("circular");
+        public static final VariantTemplate PILLAR = simple("pillar", ModelTemplates.cubeColumn());
+        public static final VariantTemplate TWISTED = simple("twisted", ModelTemplates.cubeColumn());
+        public static final VariantTemplate PRISM = simple("prism");
+    }
     
     public static class Rock {
 
@@ -200,6 +231,8 @@ public class VariantTemplates {
     }
     
     public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
+
+    public static final ImmutableList<VariantTemplate> STONE = ofClass(Stone.class);
 
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
     @SuppressWarnings("null")
