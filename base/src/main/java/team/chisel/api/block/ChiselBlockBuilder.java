@@ -163,7 +163,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * 
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
-    @SuppressWarnings({ "unchecked", "null" })
+    @SuppressWarnings("null")
     public Map<String, BlockEntry<T>> build() {
         return build(NO_ACTION);
     }
@@ -176,7 +176,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      *            registration.
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
-    @SuppressWarnings({ "unchecked", "null" })
+    @SuppressWarnings("null")
     public Map<String, BlockEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
@@ -246,8 +246,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     @Accessors(chain = true)
     public static class VariationBuilder<T extends Block & ICarvable> {
         
-        private static final Map<String, String> TRANSLATIONS = new HashMap<>();
-        private static final Map<String, TranslationTextComponent> COMPONENTS = new HashMap<>();
+        private static final Map<ResourceLocation, String> TRANSLATIONS = new HashMap<>();
+        private static final Map<ResourceLocation, TranslationTextComponent> COMPONENTS = new HashMap<>();
 
         private ChiselBlockBuilder<T> parent;
 
@@ -299,19 +299,20 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         }
 
         private Variation doBuild() {
-            String existingTranslation = TRANSLATIONS.get(name);
+        	ResourceLocation translationKey = new ResourceLocation(parent.registrate.getModid(), name);
+            String existingTranslation = TRANSLATIONS.get(translationKey);
             if (existingTranslation != null && !Objects.equals(localizedName, existingTranslation)) {
-                throw new IllegalStateException("Cannot redefine existing variation's localized name: " + name + " -> " + localizedName + " (should be " + existingTranslation + ")");
+                throw new IllegalStateException("Cannot redefine existing variation's localized name: " + translationKey + " -> " + localizedName + " (should be " + existingTranslation + ")");
             }
             if (existingTranslation == null) {
-                TRANSLATIONS.put(name, localizedName);
-                TranslationTextComponent component = parent.registrate.addLang("variant", new ResourceLocation(parent.registrate.getModid(), name), localizedName);
-                COMPONENTS.put(name, component);
+                TRANSLATIONS.put(translationKey, localizedName);
+                TranslationTextComponent component = parent.registrate.addLang("variant", translationKey, localizedName);
+                COMPONENTS.put(translationKey, component);
                 for (int j = 0; j < tooltip.length; j++) {
                     parent.registrate.addRawLang(component.getKey() + ".desc." + (j + 1), tooltip[j]);
                 }
             }
-            return new Variation(name, COMPONENTS.get(name));
+            return new Variation(name, COMPONENTS.get(translationKey));
         }
     }
 
