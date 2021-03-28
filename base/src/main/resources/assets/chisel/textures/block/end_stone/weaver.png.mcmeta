@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:block/endstone/weaver-ctm"
+            "chisel:block/end_stone/weaver-ctm"
         ]
     }
 }
