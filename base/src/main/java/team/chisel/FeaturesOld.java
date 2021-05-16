@@ -3054,8 +3054,8 @@ public enum FeaturesOld {
 //    },
 //
     WOOL(factory -> Arrays.stream(DyeColor.values())
-            .forEach(color -> factory.newType(Material.WOOL, "wool/" + (color.getName()))
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Wool")
+            .forEach(color -> factory.newType(Material.WOOL, "wool/" + (color.getString()))
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getString()) + " Wool")
                     .variation("legacy")
                     .next("llama")
                     .build(b -> b.sound(SoundType.CLOTH).hardnessAndResistance(0.8F)))),

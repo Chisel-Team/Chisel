@@ -36,7 +36,7 @@ public class ItemChiselBlock extends BlockItem {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         if (Configurations.blockDescriptions) {
-            tooltip.add(block.getVariation().getDisplayName().applyTextStyle(TextFormatting.GRAY));
+            tooltip.add(block.getVariation().getDisplayName().mergeStyle(TextFormatting.GRAY));
         }
         addTooltips(stack, block, tooltip);
     }
@@ -50,7 +50,7 @@ public class ItemChiselBlock extends BlockItem {
             int line = 1;
             String desc = block.getVariation().getDisplayName().getKey() + ".desc.";
             while (I18n.hasKey(desc + line)) {
-                tooltip.add(new TranslationTextComponent(desc + line).applyTextStyle(TextFormatting.GRAY));
+                tooltip.add(new TranslationTextComponent(desc + line).mergeStyle(TextFormatting.GRAY));
                 desc.replaceAll(line++ + "$", "." + line);
             }
         } catch (Exception ignored) {

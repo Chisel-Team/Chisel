@@ -1,8 +1,4 @@
-minecraft {
-    mappings channel: 'snapshot', version: '20200808-1.15.1'
-    
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
+minecraft {    
     runs {
         client {
             taskName 'all_client'

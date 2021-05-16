@@ -132,7 +132,7 @@ public class CarvingVariationRegistry implements IVariationRegistry {
     }
     
     private void onServerStarting(FMLServerAboutToStartEvent event) {
-        event.getServer().getResourceManager().addReloadListener(new ISelectiveResourceReloadListener() {
+        event.getServer().getDataPackRegistries().getResourceManager().addReloadListener(new ISelectiveResourceReloadListener() {
             
             @Override
             public void onResourceManagerReload(IResourceManager resourceManager, Predicate<IResourceType> resourcePredicate) {

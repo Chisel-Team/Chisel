@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.matrix.MatrixStack;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -63,12 +64,12 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
     }
 
     @Override
-    public void draw(ICarvingGroup recipe, double mouseX, double mouseY) {
+    public void draw(ICarvingGroup recipe, MatrixStack matrixStack, double mouseX, double mouseY) {
         if (layout != null) {
             if (focus == null || focus.getMode() == IFocus.Mode.INPUT) {
-                arrowDown.draw(73, 21);
+                arrowDown.draw(matrixStack, 73, 21);
             } else {
-                arrowUp.draw(73, 21);
+                arrowUp.draw(matrixStack, 73, 21);
             }
         }
     }

@@ -7,19 +7,24 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.Widget;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Rectangle2d;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
@@ -104,47 +109,48 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground();
-        super.render(mouseX, mouseY, partialTicks);
-        this.renderHoveredToolTip(mouseX, mouseY);
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(matrixStack);
+        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
     }
     
     @Override
-    protected void drawGuiContainerForegroundLayer(int j, int i) {
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int j, int i) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         // TODO fix String
-        String line = title.getFormattedText();
-        List<String> lines = font.listFormattedStringToWidth(line, 40);
+        List<IReorderingProcessor> lines = font.trimStringToWidth(title, 40);
         int y = 60;
-        for (String s : lines) {
-            font.drawString(s, 32 - font.getStringWidth(s) / 2, y, 0x404040);
+        IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
+        for (IReorderingProcessor s : lines) {
+            font.drawEntityText(s, 32 - font.func_243245_a(s) / 2, y, 0x404040, false, matrixStack.getLast().getMatrix(), irendertypebuffer$impl, false, 0, 0xF000F0);
             y += 10;
         }
+        irendertypebuffer$impl.finish();
 
-        drawButtonTooltips(j, i);
+        drawButtonTooltips(matrixStack, j, i);
 //        if (showMode()) {
 //            line = I18n.format(this.container.inventory.getInventoryName() + ".mode");
 //            fontRendererObj.drawString(line, fontRendererObj.getStringWidth(line) / 2 + 6, 85, 0x404040);
 //        }
     }
     
-    protected void drawButtonTooltips(int mx, int my) {
+    protected void drawButtonTooltips(MatrixStack matrixStack, int mx, int my) {
         for (Widget button : buttons) {
             if (button.isMouseOver(mx, my) && button instanceof ButtonChiselMode) {
                 String unloc = ((ButtonChiselMode)button).getMode().getUnlocName();
-                List<String> ttLines = Lists.newArrayList(
-                        I18n.format(unloc),
-                        TextFormatting.GRAY + I18n.format(unloc + ".desc")
+                List<ITextComponent> ttLines = Lists.newArrayList(
+                        new TranslationTextComponent(unloc),
+                        new TranslationTextComponent(unloc + ".desc").mergeStyle(TextFormatting.GRAY)
                 );
-                GuiUtils.drawHoveringText(ttLines, mx - guiLeft, my - guiTop, width - guiLeft, height - guiTop, -1, font);
+                GuiUtils.drawHoveringText(matrixStack, ttLines, mx - guiLeft, my - guiTop, width - guiLeft, height - guiTop, -1, font);
             }
         }
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int mx, int my) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float f, int mx, int my) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         int i = width - xSize >> 1;
@@ -153,35 +159,36 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
         String texture = "chisel:textures/chisel2gui.png";
 
         Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(texture));
-        blit(i, j, 0, 0, xSize, ySize);
+        blit(matrixStack, i, j, 0, 0, xSize, ySize);
 
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
 
         Slot main = (Slot) this.getContainer().inventorySlots.get(this.getContainer().getInventoryChisel().size);
         if (main.getStack().isEmpty()) {
-            drawSlotOverlay(this, x + 14, y + 14, main, 0, ySize, 60);
+            drawSlotOverlay(matrixStack, this, x + 14, y + 14, main, 0, ySize, 60);
         }
     }
 
-    @Override
-    protected void drawSlot(Slot slot) {
-        if (slot instanceof SlotChiselInput) {
-            RenderSystem.pushMatrix();
-            RenderSystem.scalef(2, 2, 2);
-            slot.xPos -= 16;
-            slot.yPos -= 16;
-            super.drawSlot(slot);
-            slot.xPos += 16;
-            slot.yPos += 16;
-            RenderSystem.popMatrix();
-        } else {
-            super.drawSlot(slot);
-        }
-    }
+    // TODO find a new way
+//    @Override
+//    protected void drawSlot(MatrixStack matrixStack, Slot slot) {
+//        if (slot instanceof SlotChiselInput) {
+//            RenderSystem.pushMatrix();
+//            RenderSystem.scalef(2, 2, 2);
+//            slot.xPos -= 16;
+//            slot.yPos -= 16;
+//            super.drawSlot(slot);
+//            slot.xPos += 16;
+//            slot.yPos += 16;
+//            RenderSystem.popMatrix();
+//        } else {
+//            super.drawSlot(slot);
+//        }
+//    }
 
-    public static void drawSlotOverlay(ContainerScreen<?> gui, int x, int y, Slot slot, int u, int v, int padding) {
+    public static void drawSlotOverlay(MatrixStack matrixStack, ContainerScreen<?> gui, int x, int y, Slot slot, int u, int v, int padding) {
         padding /= 2;
-        gui.blit(x + (slot.xPos - padding), y + (slot.yPos - padding), u, v, 18 + padding, 18 + padding);
+        gui.blit(matrixStack, x + (slot.xPos - padding), y + (slot.yPos - padding), u, v, 18 + padding, 18 + padding);
     }
 }

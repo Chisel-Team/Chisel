@@ -213,7 +213,7 @@ public class VariantTemplates {
     
     @SuppressWarnings("null")
     public static final ImmutableList<VariantTemplate> COLORS = ImmutableList.copyOf(Arrays.stream(DyeColor.values())
-            .map(color -> simple(color.getName()))
+            .map(color -> simple(color.getString()))
             .collect(Collectors.toList()));
     
     @SuppressWarnings("null")
@@ -225,7 +225,7 @@ public class VariantTemplates {
         return ImmutableList.copyOf(COLORS.stream()
                 .map(SimpleTemplate::builderFrom)
                 .map(b -> b.modelTemplate(model))
-                .map(b -> b.recipeTemplate(b.name.equals(DyeColor.WHITE.getName()) ? whiteRecipe : null))
+                .map(b -> b.recipeTemplate(b.name.equals(DyeColor.WHITE.getString()) ? whiteRecipe : null))
                 .map(SimpleTemplate.SimpleTemplateBuilder::build)
                 .collect(Collectors.toList()));
     }

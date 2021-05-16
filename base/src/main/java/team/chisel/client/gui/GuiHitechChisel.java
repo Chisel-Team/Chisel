@@ -22,24 +22,27 @@ import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
-import net.minecraft.client.renderer.Matrix4f;
 import net.minecraft.client.renderer.Rectangle2d;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.IBlockDisplayReader;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.ILightReader;
 import net.minecraft.world.chunk.IChunkLightProvider;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.lighting.WorldLightManager;
@@ -58,7 +61,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         private PreviewType type;
         
         public PreviewModeButton(int x, int y, int widthIn, int heightIn) {
-            super(x, y, widthIn, heightIn, "", b -> {});
+            super(x, y, widthIn, heightIn, new StringTextComponent(""), b -> {});
             setType(PreviewType.values()[0]);
         }
 
@@ -74,7 +77,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         
         private final void setType(PreviewType type) {
             this.type = type;
-            this.setMessage("< " + type.getLocalizedName().getFormattedText() + " >");
+            this.setMessage(new StringTextComponent("< ").appendSibling(type.getLocalizedName()).appendString(" >"));
             GuiHitechChisel.this.fakeworld = new FakeBlockAccess(GuiHitechChisel.this); // Invalidate region cache data
         }
     }
@@ -86,11 +89,11 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         private boolean rotate = true;
         
         public RotateButton(int x, int y) {
-            super(x, y, 16, 16, "", b -> {});
+            super(x, y, 16, 16, new StringTextComponent(""), b -> {});
         }
 
         @Override
-        public void renderButton(int mouseX, int mouseY, float partialTick) {
+        public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
             this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
             GuiHitechChisel.this.getMinecraft().getTextureManager().bindTexture(TEXTURE);
@@ -102,7 +105,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
             this.setBlitOffset(1000);
-            blit(this.x, this.y, u, v, 16, 16);
+            blit(matrixStack, this.x, this.y, u, v, 16, 16);
             this.setBlitOffset(0);
             RenderSystem.color4f(1, 1, 1, 1);
         }
@@ -119,7 +122,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     }
     
     @RequiredArgsConstructor
-    private static class FakeBlockAccess implements ILightReader {
+    private static class FakeBlockAccess implements IBlockDisplayReader {
         
         private final GuiHitechChisel gui;
         
@@ -156,7 +159,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         }
 
         @Override
-        public IFluidState getFluidState(BlockPos pos) {
+        public FluidState getFluidState(BlockPos pos) {
             return Fluids.EMPTY.getDefaultState();
         }
 
@@ -174,6 +177,11 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         public int getLightValue(BlockPos p_217298_1_) {
             return 15;
         }
+
+		@Override
+		public float func_230487_a_(Direction p_230487_1_, boolean p_230487_2_) {
+			return Minecraft.getInstance().world.func_230487_a_(p_230487_1_, p_230487_2_);
+		}
 
 //        @Override
 //        public boolean isAirBlock(BlockPos pos) {
@@ -250,7 +258,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
         addButton(buttonPreview = new PreviewModeButton(x, y, w, h));
 
-        addButton(buttonChisel = new Button(x, y += h + 2, w, h, ChiselLangKeys.BUTTON_CHISEL.getLocalizedText(), b -> {
+        addButton(buttonChisel = new Button(x, y += h + 2, w, h, ChiselLangKeys.BUTTON_CHISEL.getComponent(), b -> {
             Slot target = containerHitech.getTarget();
             Slot selected = containerHitech.getSelection();
             if (target != null && target.getHasStack() && selected != null && selected.getHasStack()) {
@@ -318,9 +326,9 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         }
 
         if (hasShiftDown()) {
-            buttonChisel.setMessage(ChiselLangKeys.BUTTON_CHISEL_ALL.getComponent().applyTextStyle(TextFormatting.YELLOW).getFormattedText());
+            buttonChisel.setMessage(ChiselLangKeys.BUTTON_CHISEL_ALL.getComponent().mergeStyle(TextFormatting.YELLOW));
         } else {
-            buttonChisel.setMessage(ChiselLangKeys.BUTTON_CHISEL.getLocalizedText());
+            buttonChisel.setMessage(ChiselLangKeys.BUTTON_CHISEL.getComponent());
         }
     }
 
@@ -337,23 +345,23 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     }
     
     @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int mx, int my) {
+    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float f, int mx, int my) {
         RenderSystem.color4f(1, 1, 1, 1);
 
         Minecraft.getInstance().getTextureManager().bindTexture(TEXTURE);
-        blit(guiLeft, guiTop, 0, 0, xSize, ySize);
+        blit(matrixStack, guiLeft, guiTop, 0, 0, xSize, ySize);
 
         if (containerHitech.getSelection() != null) {
             Slot sel = containerHitech.getSelection();
             if (sel.getHasStack()) {
-                drawSlotHighlight(sel, 0);
+                drawSlotHighlight(matrixStack, sel, 0);
                 for (Slot s : containerHitech.getSelectionDuplicates()) {
-                    drawSlotHighlight(s, hasShiftDown() ? 0 : 18);
+                    drawSlotHighlight(matrixStack, s, hasShiftDown() ? 0 : 18);
                 }
             }
         }
         if (containerHitech.getTarget() != null && !containerHitech.getTarget().getStack().isEmpty()) {
-            drawSlotHighlight(containerHitech.getTarget(), 36);
+            drawSlotHighlight(matrixStack, containerHitech.getTarget(), 36);
         }
 
         if (buttonRotate.rotate() && momentumX == 0 && momentumY == 0 && !panelClicked && System.currentTimeMillis() - lastDragTime > 2000) {
@@ -468,14 +476,14 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         }
     }
     
-    private void drawSlotHighlight(Slot slot, int u) {
-        blit(guiLeft + slot.xPos - 1, guiTop + slot.yPos - 1, u, 220, 18, 18);
+    private void drawSlotHighlight(MatrixStack matrixStack, Slot slot, int u) {
+        blit(matrixStack, guiLeft + slot.xPos - 1, guiTop + slot.yPos - 1, u, 220, 18, 18);
     }
     
     private boolean doMomentum = false;
     
     @Override
-    protected void drawGuiContainerForegroundLayer(int j, int i) {
+    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int j, int i) {
         if (doMomentum) {
             rotX += momentumX;
             rotX = MathHelper.clamp(rotX, 90, 270);
@@ -498,11 +506,11 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             }
         }
 
-        String s = ChiselLangKeys.PREVIEW.getLocalizedText();
-        font.drawString(s, panel.getX() + (panel.getWidth() / 2) - (font.getStringWidth(s) / 2), panel.getY() - 9, 0x404040);
+        TranslationTextComponent s = ChiselLangKeys.PREVIEW.getComponent();
+        font.drawText(matrixStack, s, panel.getX() + (panel.getWidth() / 2) - (font.getStringPropertyWidth(s) / 2), panel.getY() - 9, 0x404040);
         RenderSystem.disableAlphaTest();
         
-        drawButtonTooltips(j, i);
+        drawButtonTooltips(matrixStack, j, i);
     }
 
     @Override

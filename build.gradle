@@ -122,7 +122,7 @@ subprojects {
     }
     
     minecraft {
-        mappings channel: 'snapshot', version: '20200808-1.15.1'
+        mappings channel: 'snapshot', version: '20210309-1.16.5'
     
         accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     }
@@ -130,7 +130,7 @@ subprojects {
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-        implementation fg.deobf("team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}")
+        implementation fg.deobf("team.chisel.ctm:CTM:MC1.16.1-${ctm_version}")
         implementation "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
     
         compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")

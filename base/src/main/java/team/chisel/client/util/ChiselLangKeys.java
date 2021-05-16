@@ -44,10 +44,6 @@ public enum ChiselLangKeys {
         return new TranslationTextComponent(getComponent().getKey(), args);
     }
     
-    public String getLocalizedText() {
-        return getComponent().getFormattedText();
-    }
-    
     public static void init(Registrate registrate) {
         for (ChiselLangKeys lang : values()) {
             lang.component = registrate.addLang(lang.type, new ResourceLocation(Chisel.MOD_ID, lang.key), lang.value);

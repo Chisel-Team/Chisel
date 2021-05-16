@@ -11,7 +11,11 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.WoodType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.ShapedRecipeBuilder;
@@ -19,17 +23,17 @@ import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Items;
+import net.minecraft.loot.IntClamper;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.functions.ApplyBonus;
+import net.minecraft.loot.functions.LimitCount;
+import net.minecraft.loot.functions.SetCount;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
-import net.minecraft.world.storage.loot.IntClamper;
-import net.minecraft.world.storage.loot.ItemLootEntry;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.functions.ApplyBonus;
-import net.minecraft.world.storage.loot.functions.LimitCount;
-import net.minecraft.world.storage.loot.functions.SetCount;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -116,9 +120,9 @@ public class Features {
 //  });
     */
     public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
-            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getName()), BlockCarvableCarpet::new)
-                    .addBlock(new ResourceLocation(color.getName() + "_carpet"))
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Carpet")
+            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getString()), BlockCarvableCarpet::new)
+                    .addBlock(new ResourceLocation(color.getString() + "_carpet"))
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getString()) + " Carpet")
                     .model((prov, block) ->
                         prov.simpleBlock(block, prov.models()
                                 .carpet("block/" + ModelTemplates.name(block), prov.modLoc("block/" + ModelTemplates.name(block).replace("carpet", "wool")))
@@ -152,9 +156,9 @@ public class Features {
             .build(b -> b.hardnessAndResistance(2.0F, 10.0F).sound(SoundType.STONE));
     
     public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvable>>> CONCRETE = Arrays.stream(DyeColor.values())
-            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.ROCK, "concrete/" + color.getName())
-                    .addBlock(new ResourceLocation(color.getName() + "_concrete"))
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Concrete")
+            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.ROCK, "concrete/" + color.getString())
+                    .addBlock(new ResourceLocation(color.getString() + "_concrete"))
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getString()) + " Concrete")
                     .variations(VariantTemplates.ROCK)
                     .build(p -> p.sound(SoundType.STONE).hardnessAndResistance(1.8F))));
 //  BlockSpeedHandler.speedupBlocks.add(b);
@@ -165,7 +169,8 @@ public class Features {
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE));
 
-    public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.IRON, "emerald", BlockCreators.beaconBaseCreator)
+    public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.IRON, "emerald")
+    		.addTag(BlockTags.BEACON_BASE_BLOCKS)
             /*.recipe((prov, block) -> new ShapelessRecipeBuilder(Items.EMERALD, 9)
                     .addIngredient(block)
                     .addCriterion("has_emerald_block", prov.hasItem(block))
@@ -248,14 +253,19 @@ public class Features {
 
     public static final Map<String, BlockEntry<BlockCarvable>> GLOWSTONE = _FACTORY.newType(Material.GLASS, "glowstone")
             .addBlock(Blocks.GLOWSTONE)
-            .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouch(block, RegistrateBlockLootTables.withExplosionDecay(block, ItemLootEntry.builder(Items.GLOWSTONE_DUST).acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 4.0F))).acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE)).acceptFunction(LimitCount.func_215911_a(IntClamper.func_215843_a(1, 4)))))))
+            .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouch(block,
+        		RegistrateBlockLootTables.withExplosionDecay(block,
+    				ItemLootEntry.builder(Items.GLOWSTONE_DUST)
+    					.acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 4.0F)))
+    					.acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE))
+    					.acceptFunction(LimitCount.func_215911_a(IntClamper.func_215843_a(1, 4)))))))
             .variations(VariantTemplates.STONE)
             .variation("extra/bismuth").localizedName("Bismuth")
             .next("extra/tiles_large_bismuth").localizedName("Tiles Large Bismuth")
             .next("extra/tiles_medium_bismuth").localizedName("Tiles Medium Bismuth")
             .next("extra/neon").localizedName("Neon")
             .next("extra/neon_panel").localizedName("Neon Panel")
-            .build(b -> b.hardnessAndResistance(0.3F, 1.5F).sound(SoundType.GLASS).lightValue(15));
+            .build(b -> b.hardnessAndResistance(0.3F, 1.5F).sound(SoundType.GLASS).setLightLevel($ -> 15));
 
     public static final Map<String, BlockEntry<BlockCarvable>> GRANITE = _FACTORY.newType(Material.ROCK, "granite")
             .variations(VariantTemplates.ROCK)
@@ -409,9 +419,9 @@ public class Features {
             .build(b -> b.sound(SoundType.METAL));
     
     public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvable>>> WOOL = Arrays.stream(DyeColor.values())
-            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "wool/" + (color.getName()))
-                    .addBlock(new ResourceLocation(color.getName() + "_wool"))
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getName()) + " Wool")
+            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "wool/" + (color.getString()))
+                    .addBlock(new ResourceLocation(color.getString() + "_wool"))
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getString()) + " Wool")
                     .variation("legacy")
                     .next("llama")
                     .build(b -> b.sound(SoundType.CLOTH).hardnessAndResistance(0.8F))));
@@ -419,12 +429,6 @@ public class Features {
     public static void init() {}
 
     private static class BlockCreators {
-        private static final BlockCreator<BlockCarvable> beaconBaseCreator = (props, data) -> new BlockCarvable(props, data) {
-            @Override
-            public boolean isBeaconBase(BlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {
-                return true;
-            }
-        };
 
         private static final BlockCreator<BlockCarvable> redstoneCreator = (props, data) -> new BlockCarvable(props, data) {
             @Override

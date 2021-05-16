@@ -8,8 +8,8 @@ import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -26,15 +26,15 @@ public interface ICarvingGroup {
         return new TranslationTextComponent(getTranslationKey());
     }
     
-    default Tag<Item> getItemTag() {
-        Tag<Item> ret = ItemTags.getCollection().get(getId());
+    default ITag<Item> getItemTag() {
+    	ITag<Item> ret = ItemTags.getCollection().get(getId());
         if (ret == null) {
             throw new IllegalStateException("Group " + getId() + " does not have an associated item tag");
         }
         return ret;
     }
     
-    default Optional<Tag<Block>> getBlockTag() {
+    default Optional<ITag<Block>> getBlockTag() {
         return Optional.ofNullable(BlockTags.getCollection().get(getId()));
     }
 	

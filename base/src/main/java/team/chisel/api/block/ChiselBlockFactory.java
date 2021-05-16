@@ -15,8 +15,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag.INamedTag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import team.chisel.common.Reference;
 import team.chisel.common.block.BlockCarvable;
@@ -62,15 +62,15 @@ public class ChiselBlockFactory {
         return new ChiselBlockBuilder<T>(this, registrate, material, blockName, group == null ? null : getBlockTag(new ResourceLocation(Reference.MOD_ID, group)), provider);
     }
     
-    private final Map<ResourceLocation, Tag<Block>> blockTags = new HashMap<>();
-    private final Map<ResourceLocation, Tag<Item>> itemTags = new HashMap<>();
+    private final Map<ResourceLocation, INamedTag<Block>> blockTags = new HashMap<>();
+    private final Map<ResourceLocation, INamedTag<Item>> itemTags = new HashMap<>();
 
-    Tag<Block> getBlockTag(ResourceLocation id) {
-        return blockTags.computeIfAbsent(id, BlockTags.Wrapper::new);
+    INamedTag<Block> getBlockTag(ResourceLocation id) {
+        return blockTags.computeIfAbsent(id, rl -> BlockTags.makeWrapperTag(rl.toString()));
     }
     
-    Tag<Item> getItemTag(ResourceLocation id) {
-        return itemTags.computeIfAbsent(id, ItemTags.Wrapper::new);
+    INamedTag<Item> getItemTag(ResourceLocation id) {
+        return itemTags.computeIfAbsent(id, rl -> ItemTags.makeWrapperTag(rl.toString()));
     }
 
     public Registrate getRegistrate() {

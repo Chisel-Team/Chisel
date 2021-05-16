@@ -27,14 +27,14 @@ public class BlockSpeedHandler {
 
     @SubscribeEvent
     public static void speedupPlayer(PlayerTickEvent event) {
-        if (event.phase == Phase.START && event.side.isClient() && event.player.onGround && event.player instanceof ClientPlayerEntity) {
+        if (event.phase == Phase.START && event.side.isClient() && event.player.isOnGround() && event.player instanceof ClientPlayerEntity) {
             if (manualInputCheck == null) {
                 manualInputCheck = new MovementInputFromOptions(Minecraft.getInstance().gameSettings);
             }
             ClientPlayerEntity player = (ClientPlayerEntity) event.player;
             BlockState below = player.getEntityWorld().getBlockState(new BlockPos(player.getPositionVec().subtract(0, 1 / 16D, 0)));
             if (speedupBlocks.contains(below.getBlock())) {
-                manualInputCheck.func_225607_a_(false);
+                manualInputCheck.tickMovement(false);
                 if ((manualInputCheck.moveForward != 0 || manualInputCheck.moveStrafe != 0) && !player.isInWater()) {
                     player.setMotion(player.getMotion().mul(Configurations.concreteVelocityMult + 0.05, 1, Configurations.concreteVelocityMult + 0.05));
                 }

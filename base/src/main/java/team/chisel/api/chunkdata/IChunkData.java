@@ -4,9 +4,10 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.dimension.DimensionType;
 
 public interface IChunkData<T> {
     
@@ -20,5 +21,5 @@ public interface IChunkData<T> {
 
     boolean requiresClientSync();
 
-    T getDataForChunk(DimensionType dimID, @Nonnull ChunkPos chunk);
+    T getDataForChunk(RegistryKey<World> dimID, @Nonnull ChunkPos chunk);
 }
