@@ -19,6 +19,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -40,7 +41,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.RayTraceResult.Type;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.api.distmarker.Dist;
@@ -111,8 +112,8 @@ public class ItemOffsetTool extends Item {
                 return canOffset(context.getWorld(), context.getPos(), context.getItem()) ? ActionResultType.SUCCESS : ActionResultType.PASS;
             } else {
                 ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.getData(DATA_KEY);
-                OffsetData data = cd.getDataForChunk(world.getDimension().getType(), world.getChunk(context.getPos()).getPos());
-                Vec3d hitVec = context.getHitVec();
+                OffsetData data = cd.getDataForChunk(world.getDimensionKey(), world.getChunk(context.getPos()).getPos());
+                Vector3d hitVec = context.getHitVec();
                 data.move(getMoveDir(context.getFace(), hitVec));
                 PerChunkData.INSTANCE.chunkModified((Chunk) world.getChunk(context.getPos()), DATA_KEY);
             }
@@ -120,7 +121,7 @@ public class ItemOffsetTool extends Item {
         return super.onItemUse(context);
     }
 
-    public Direction getMoveDir(Direction face, Vec3d hitVec) {
+    public Direction getMoveDir(Direction face, Vector3d hitVec) {
         Map<Double, Direction> map = Maps.newHashMap();
         if (face.getXOffset() != 0) {
             fillMap(map, hitVec.z, hitVec.y, DOWN, UP, NORTH, SOUTH);
@@ -153,22 +154,25 @@ public class ItemOffsetTool extends Item {
             Direction face = target.getFace();
             BlockPos pos = target.getPos();
             BufferBuilder buf = Tessellator.getInstance().getBuffer();
-            RenderSystem.pushMatrix();
+            MatrixStack ms = event.getMatrix();
+            ms.push();
+
             RenderSystem.disableLighting();
             RenderSystem.disableTexture();
             RenderSystem.depthMask(false);
 
             // Draw the X
-            buf.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION);
+            buf.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
 
             double x = Math.max(0, face.getXOffset());
             double y = Math.max(0, face.getYOffset());
             double z = Math.max(0, face.getZOffset());
             
-            Vec3d viewport = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
+            Vector3d viewport = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
 
-            RenderSystem.translated(-viewport.x, -viewport.y, -viewport.z);
-            RenderSystem.translated(pos.getX(), pos.getY(), pos.getZ());
+            ms.translate(-viewport.x, -viewport.y, -viewport.z);
+            ms.translate(pos.getX(), pos.getY(), pos.getZ());
+
             RenderSystem.color4f(0, 0, 0, 1);
 
             if (face.getXOffset() != 0) {
@@ -190,7 +194,7 @@ public class ItemOffsetTool extends Item {
 
             Tessellator.getInstance().draw();
 
-            Vec3d hit = target.getHitVec();
+            Vector3d hit = target.getHitVec();
 
             // Draw the triangle highlight
             RenderSystem.enableBlend();
@@ -230,7 +234,7 @@ public class ItemOffsetTool extends Item {
             
             RenderSystem.disablePolygonOffset();
             RenderSystem.polygonOffset(0.0F, 0.0F);
-            RenderSystem.popMatrix();
+            ms.pop();
         }
     }
 

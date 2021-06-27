@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
-
 import com.tterrag.registrate.util.entry.BlockEntry;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.WoodType;
@@ -15,8 +15,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.item.Items;
+import net.minecraft.loot.ConstantRange;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.storage.loot.ConstantRange;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.ToolType;
 import team.chisel.Features;

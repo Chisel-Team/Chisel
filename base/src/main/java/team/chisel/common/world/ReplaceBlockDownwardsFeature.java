@@ -1,24 +1,22 @@
 package team.chisel.common.world;
 
 import java.util.Random;
-import java.util.function.Function;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
 import net.minecraft.world.gen.feature.Feature;
 
 public class ReplaceBlockDownwardsFeature extends Feature<ReplaceMultipleBlocksConfig> {
 
-    public ReplaceBlockDownwardsFeature(Function<Dynamic<?>, ? extends ReplaceMultipleBlocksConfig> p_i51444_1_) {
+    public ReplaceBlockDownwardsFeature(Codec<ReplaceMultipleBlocksConfig> p_i51444_1_) {
         super(p_i51444_1_);
     }
     
     @Override
-    public boolean place(IWorld world, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, ReplaceMultipleBlocksConfig config) {
+    public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, ReplaceMultipleBlocksConfig config) {
         boolean ret = false;
         int max = 2;
         if (rand.nextFloat() < 0.7f) {

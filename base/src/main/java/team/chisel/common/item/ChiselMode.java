@@ -17,16 +17,16 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 import lombok.Getter;
 import lombok.Value;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.BlockVoxelShape;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Direction.AxisDirection;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import team.chisel.Chisel;
@@ -59,7 +59,7 @@ public enum ChiselMode implements IChiselMode {
             if (side.getAxisDirection() == AxisDirection.NEGATIVE) {
                 side = side.getOpposite();
             }
-            Vec3i offset = side.getDirectionVec();
+            Vector3i offset = side.getDirectionVec();
             return filteredIterable(BlockPos.getAllInBox(NEG_ONE.add(offset).add(pos), ONE.subtract(offset).add(pos)), player.world, player.world.getBlockState(pos));
         }
         
@@ -203,11 +203,11 @@ public enum ChiselMode implements IChiselMode {
                 if (ret.getDistance() < CONTIGUOUS_RANGE) {
                     for (Direction face : directionsToSearch) {
                         BlockPos bp = ret.getPos().offset(face);
-                        if (!seen.contains(bp) && world.getBlockState(bp) == state) {
+                        BlockState newState = world.getBlockState(bp);
+                        if (!seen.contains(bp) && newState == state) {
                             for (Direction obscureCheck : Direction.values()) {
                                 BlockPos obscuringPos = bp.offset(obscureCheck);
-                                BlockState obscuringState = world.getBlockState(obscuringPos);
-                                if (!Block.hasSolidSide(obscuringState, world, obscuringPos, obscureCheck.getOpposite())) {
+                                if (!newState.func_242698_a(world, bp, obscureCheck.getOpposite(), BlockVoxelShape.FULL)) {
                                     search.offer(new Node(bp, ret.getDistance() + 1));
                                     break;
                                 }

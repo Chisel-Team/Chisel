@@ -124,8 +124,8 @@ public class Chisel implements Reference {
 
 // TODO
 //        MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(ChiselController.class);        
-        ChiselWorldGen.registerWorldGen();
+        MinecraftForge.EVENT_BUS.register(ChiselController.class); 
+        MinecraftForge.EVENT_BUS.addListener(ChiselWorldGen::registerWorldGen);
 //        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
 //        MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
 

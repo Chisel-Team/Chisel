@@ -19,11 +19,16 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.registry.DynamicRegistries;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.DimensionType;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
@@ -106,7 +111,7 @@ public enum PerChunkData implements IChunkDataRegistry {
      */
     public static class ChunkDataBase<T extends NBTSaveable> implements IChunkData<T> {
 
-        protected final Map<Pair<DimensionType, ChunkPos>, T> data = new HashMap<>();
+        protected final Map<Pair<RegistryKey<World>, ChunkPos>, T> data = new HashMap<>();
         protected final Class<? extends T> clazz;
         private final boolean needsClientSync;
 
@@ -118,9 +123,9 @@ public enum PerChunkData implements IChunkDataRegistry {
         @Override
         public ListNBT writeToNBT() {
             ListNBT tags = new ListNBT();
-            for (Entry<Pair<DimensionType, ChunkPos>, T> e : data.entrySet()) {
+            for (Entry<Pair<RegistryKey<World>, ChunkPos>, T> e : data.entrySet()) {
                 CompoundNBT entry = new CompoundNBT();
-                entry.putString("d", e.getKey().getLeft().getRegistryName().toString());
+                entry.putString("d", e.getKey().getLeft().getLocation().toString());
                 entry.putLong("p", (e.getKey().getRight().x << 32) | e.getKey().getRight().z);
                 CompoundNBT data = new CompoundNBT();
                 e.getValue().write(data);
@@ -132,7 +137,7 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         @Override
         public void writeToNBT(@Nonnull IChunk chunk, @Nonnull CompoundNBT tag) {
-            T t = data.get(Pair.of(chunk.getWorldForge().getDimension().getType(), chunk.getPos()));
+            T t = data.get(Pair.of(((World)chunk.getWorldForge()).getDimensionKey(), chunk.getPos()));
             if (t != null) {
                 t.write(tag);
             }
@@ -143,7 +148,7 @@ public enum PerChunkData implements IChunkDataRegistry {
             List<ChunkPos> changed = new ArrayList<>();
             for (int i = 0; i < tags.size(); i++) {
                 CompoundNBT entry = tags.getCompound(i);
-                DimensionType dim = DimensionType.byName(new ResourceLocation(entry.getString("d")));
+                RegistryKey<World> dim = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(entry.getString("d")));
                 long coordsRaw = entry.getLong("p");
                 ChunkPos coords = new ChunkPos((int) ((coordsRaw >>> 32) & 0xFFFFFFFF), (int) (coordsRaw & 0xFFFFFFFF));
                 if (readFromNBT(dim, coords, entry.getCompound("v"))) {
@@ -155,12 +160,12 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         @Override
         public void readFromNBT(@Nonnull IChunk chunk, @Nonnull CompoundNBT tag) {
-            DimensionType type = chunk.getWorldForge().getDimension().getType();
+            RegistryKey<World> type = ((World)chunk.getWorldForge()).getDimensionKey();
             ChunkPos coords = chunk.getPos();
             readFromNBT(type, coords, tag);
         }
         
-        private boolean readFromNBT(DimensionType dim, ChunkPos coords, CompoundNBT tag) {
+        private boolean readFromNBT(RegistryKey<World> dim, ChunkPos coords, CompoundNBT tag) {
             if (tag.isEmpty()) {
                 data.remove(dim, coords);
                 return false;
@@ -170,7 +175,7 @@ public enum PerChunkData implements IChunkDataRegistry {
             return true;
         }
         
-        protected T getOrCreateNew(DimensionType dim, @Nonnull ChunkPos coords) {
+        protected T getOrCreateNew(RegistryKey<World> dim, @Nonnull ChunkPos coords) {
             val pair = Pair.of(dim, coords);
             T t = data.get(pair);
             if (t == null) {
@@ -190,7 +195,7 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         @Override
-        public T getDataForChunk(DimensionType dim, @Nonnull ChunkPos coords) {
+        public T getDataForChunk(RegistryKey<World> dim, @Nonnull ChunkPos coords) {
             return getOrCreateNew(dim, coords);
         }
     }

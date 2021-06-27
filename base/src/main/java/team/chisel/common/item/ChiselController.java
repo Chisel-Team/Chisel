@@ -23,7 +23,7 @@ import net.minecraft.entity.item.PaintingType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -92,7 +92,7 @@ public class ChiselController {
                     }
                 }
             } else {
-                List<Block> variations = new ArrayList<>(blockGroup.getBlockTag().map(Tag::getAllElements).orElse(Collections.emptyList()));
+                List<Block> variations = new ArrayList<>(blockGroup.getBlockTag().map(ITag::getAllElements).orElse(Collections.emptyList()));
                 
                 variations = variations.stream().filter(v -> v.getBlock() != null).collect(Collectors.toList());
                         

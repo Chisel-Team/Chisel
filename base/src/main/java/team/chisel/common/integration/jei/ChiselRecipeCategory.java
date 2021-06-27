@@ -54,7 +54,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
     @Nonnull
     @Override
     public String getTitle() {
-        return ChiselLangKeys.JEI_TITLE.getLocalizedText();
+        return ChiselLangKeys.JEI_TITLE.getComponent().getString();
     }
 
     @Nonnull

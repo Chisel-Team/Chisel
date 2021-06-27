@@ -18,7 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.resource.IResourceType;
 import net.minecraftforge.resource.ISelectiveResourceReloadListener;
 import team.chisel.api.carving.ICarvingGroup;
@@ -130,16 +130,7 @@ public class CarvingVariationRegistry implements IVariationRegistry {
     public ICarvingGroup removeGroup(ResourceLocation groupName) {
         return groups.remove(groupName);
     }
-    
-    private void onServerStarting(FMLServerAboutToStartEvent event) {
-        event.getServer().getDataPackRegistries().getResourceManager().addReloadListener(new ISelectiveResourceReloadListener() {
-            
-            @Override
-            public void onResourceManagerReload(IResourceManager resourceManager, Predicate<IResourceType> resourcePredicate) {
-//                resolve();
-            }
-        });
-    }
+
 //    @Override
 //    public List<ResourceLocation> getSortedGroups() {
 //        return groups.keySet().stream()

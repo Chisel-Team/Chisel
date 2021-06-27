@@ -1,6 +1,7 @@
 modLoader="javafml"
 loaderVersion="[28,)"
 issueTrackerURL="https://github.com/Chisel-Team/Chisel/issues/"
+license="GPLv2"
 
 [[mods]]
 modId="chisel-legacy"
