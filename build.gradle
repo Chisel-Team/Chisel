@@ -207,7 +207,7 @@ subprojects {
         }
     }
     
-    tasks.curseforge.enabled = !dev && project.hasProperty('curseforge_key')
+    tasks.curseforge.enabled = !dev && project.hasProperty('curseforge_key') && project.hasProperty('projectId')
         
     curseforge {
         if (project.hasProperty('curseforge_key')) {
@@ -219,8 +219,8 @@ subprojects {
             changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
             changelogType = 'html'
             releaseType = project.curse_type
-            addGameVersion '1.12.2'
-            mainArtifact(jar) {
+            addGameVersion project.minecraft_version
+            mainArtifact(shadowJar) {
                 displayName = "Chisel - ${version}"
             }
             relations {
