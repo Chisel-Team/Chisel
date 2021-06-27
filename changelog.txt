@@ -1,3 +1,12 @@
+2.0.0:
+New
+- Updated to 1.16.5
+- Rewrote group system to use tags, chisel groups can now be modified with datapacks
+- Rewrote block registration, old textured variants will be moving to a separate mod in the future
+- Removed usage of forge blockstates, all resources are generated
+Fixes
+- Fixed chisel input slot not being as big as the rendered item
+
 1.0.1:
 Fixes
 - #794 Make chisel ice compatible with blocks that disable ice melting
