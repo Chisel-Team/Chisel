@@ -210,12 +210,10 @@ subprojects {
     tasks.curseforge.enabled = !dev && project.hasProperty('curseforge_key') && project.hasProperty('projectId')
         
     curseforge {
-        if (project.hasProperty('curseforge_key')) {
-            apiKey = project.curseforge_key
-        }
+        apiKey = project.findProperty('curseforge_key')
     
         project {
-            id = project.projectId
+            id = project.findProperty('projectId') ?: 'none'
             changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
             changelogType = 'html'
             releaseType = project.curse_type
