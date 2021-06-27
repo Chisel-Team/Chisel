@@ -16,7 +16,6 @@ import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Rectangle2d;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Slot;
@@ -170,22 +169,42 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
         }
     }
 
-    // TODO find a new way
-//    @Override
-//    protected void drawSlot(MatrixStack matrixStack, Slot slot) {
-//        if (slot instanceof SlotChiselInput) {
-//            RenderSystem.pushMatrix();
-//            RenderSystem.scalef(2, 2, 2);
-//            slot.xPos -= 16;
-//            slot.yPos -= 16;
-//            super.drawSlot(slot);
-//            slot.xPos += 16;
-//            slot.yPos += 16;
-//            RenderSystem.popMatrix();
-//        } else {
-//            super.drawSlot(slot);
-//        }
-//    }
+    @Override
+    protected boolean isSlotSelected(Slot slotIn, double mouseX, double mouseY) {
+    	if (slotIn == container.getInputSlot()) {
+    		return isPointInRegion(slotIn.xPos - 8, slotIn.yPos - 8, 32, 32, mouseX, mouseY);
+    	}
+    	return super.isSlotSelected(slotIn, mouseX, mouseY);
+    }
+
+    @Override
+    protected void fillGradient(MatrixStack matrixStack, int x1, int y1, int x2, int y2, int colorFrom, int colorTo) {
+    	if (x1 == container.getInputSlot().xPos && y1 == container.getInputSlot().yPos) {
+    		super.fillGradient(matrixStack, x1 - 8, y1 - 8, x2 + 8, y2 + 8, colorFrom, colorTo);
+    	} else {
+    		super.fillGradient(matrixStack, x1, y1, x2, y2, colorFrom, colorTo);
+    	}
+    }
+
+    @Override
+	public void moveItems(MatrixStack matrixStack, Slot slot) {
+        if (slot instanceof SlotChiselInput) {
+        	matrixStack.push();
+        	matrixStack.scale(2, 2, 1);
+        	// Item rendering doesn't use the matrix stack yet
+        	RenderSystem.pushMatrix();
+        	RenderSystem.scalef(2, 2, 1);
+        	slot.xPos -= 16;
+            slot.yPos -= 16;
+            super.moveItems(matrixStack, slot);
+            slot.xPos += 16;
+            slot.yPos += 16;
+            matrixStack.pop();
+            RenderSystem.popMatrix();
+        } else {
+            super.moveItems(matrixStack, slot);
+        }
+    }
 
     public static void drawSlotOverlay(MatrixStack matrixStack, ContainerScreen<?> gui, int x, int y, Slot slot, int u, int v, int padding) {
         padding /= 2;

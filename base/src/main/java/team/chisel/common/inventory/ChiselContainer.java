@@ -12,11 +12,8 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
 import team.chisel.Chisel;
-import team.chisel.api.IChiselGuiType;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IVariationRegistry;
-import team.chisel.common.init.ChiselItems;
-import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.util.NBTUtil;
 import team.chisel.common.util.SoundUtil;
 
@@ -31,6 +28,7 @@ public class ChiselContainer extends Container {
     protected final int chiselSlot;
     protected final ItemStack chisel;
     protected final IVariationRegistry carving;
+    private Slot inputSlot;
 
     public ChiselContainer(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer) {
         this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 60), Hand.MAIN_HAND);
@@ -67,7 +65,7 @@ public class ChiselContainer extends Container {
         }
 
         // main slot
-        addSlot(new SlotChiselInput(this, inventoryChisel, getInventoryChisel().size, 24, 24));
+        addSlot(inputSlot = new SlotChiselInput(this, inventoryChisel, getInventoryChisel().size, 24, 24));
 
         top += 112;
         left += 9;
