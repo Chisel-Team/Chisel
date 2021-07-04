@@ -1,3 +1,11 @@
+2.0.1:
+Fixes
+- #868 Fixed crash opening iChisel
+- #864 Fix offset tool crashing when looking at a block when it is equipped
+- Fix offset tool overlay rendering and re-enable its functionality
+- #865 Fix chisels being stackable
+- Update data (tags, models, blockstates, etc.) to 1.16 format(s)
+
 2.0.0:
 New
 - Updated to 1.16.5
