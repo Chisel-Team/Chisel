@@ -5,7 +5,12 @@ import java.lang.reflect.Field;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderState;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.Timer;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import team.chisel.Chisel;
@@ -41,4 +46,11 @@ public class ClientUtil {
             throw new RuntimeException(e);
         }
     }
+
+    public static final RenderType OFFSET_OVERLAY = RenderType.makeType("chisel_offset_overlay",
+    		DefaultVertexFormats.POSITION_COLOR, GL11.GL_TRIANGLES, 256,
+    		RenderType.State.getBuilder()
+    			.transparency(RenderState.TRANSLUCENT_TRANSPARENCY)
+    			.target(RenderState.TRANSLUCENT_TARGET)
+    			.build(true));
 }

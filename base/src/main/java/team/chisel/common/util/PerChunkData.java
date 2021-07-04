@@ -93,10 +93,10 @@ public enum PerChunkData implements IChunkDataRegistry {
                     data.readFromNBT(chunk, this.tag);
                     int x = chunk.getPos().x << 4;
                     int z = chunk.getPos().z << 4;
-                    // TODO 1.14 ClientProxy.getClientWorld().markBlockRangeForRenderUpdate(x, 0, z, x, 255, z);
+                    ClientProxy.getWorldRenderer().markBlockRangeForRenderUpdate(x, 0, z, x, 255, z);
                 } else {
                     for (ChunkPos pos : data.readFromNBT(this.tag.getList("l", Constants.NBT.TAG_COMPOUND))) {
-                        // TODO 1.14 ClientProxy.getClientWorld().markBlockRangeForRenderUpdate(pos.x, 0, pos.z, pos.x, 255, pos.z);
+                        ClientProxy.getWorldRenderer().markBlockRangeForRenderUpdate(pos.x, 0, pos.z, pos.x, 255, pos.z);
                     }
                 }
             });

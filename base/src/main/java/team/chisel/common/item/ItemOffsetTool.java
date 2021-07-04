@@ -15,22 +15,20 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.lwjgl.opengl.GL11;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import lombok.ToString;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -40,7 +38,7 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
@@ -50,8 +48,8 @@ import net.minecraftforge.client.event.DrawHighlightEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import team.chisel.api.block.ICarvable;
 import team.chisel.api.chunkdata.IOffsetData;
+import team.chisel.client.util.ClientUtil;
 import team.chisel.common.util.NBTSaveable;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.ChunkDataBase;
@@ -107,16 +105,14 @@ public class ItemOffsetTool extends Item {
     public ActionResultType onItemUse(ItemUseContext context) {
         World world = context.getWorld();
         BlockState state = world.getBlockState(context.getPos());
-        if (state.getBlock() instanceof ICarvable) {
-            if (world.isRemote) {
-                return canOffset(context.getWorld(), context.getPos(), context.getItem()) ? ActionResultType.SUCCESS : ActionResultType.PASS;
-            } else {
-                ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.getData(DATA_KEY);
-                OffsetData data = cd.getDataForChunk(world.getDimensionKey(), world.getChunk(context.getPos()).getPos());
-                Vector3d hitVec = context.getHitVec();
-                data.move(getMoveDir(context.getFace(), hitVec));
-                PerChunkData.INSTANCE.chunkModified((Chunk) world.getChunk(context.getPos()), DATA_KEY);
-            }
+        if (world.isRemote) {
+            return canOffset(context.getWorld(), context.getPos(), context.getItem()) ? ActionResultType.SUCCESS : ActionResultType.PASS;
+        } else {
+            ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.getData(DATA_KEY);
+            OffsetData data = cd.getDataForChunk(world.getDimensionKey(), world.getChunk(context.getPos()).getPos());
+            Vector3d hitVec = context.getHitVec();
+            data.move(getMoveDir(context.getFace(), hitVec));
+            PerChunkData.INSTANCE.chunkModified((Chunk) world.getChunk(context.getPos()), DATA_KEY);
         }
         return super.onItemUse(context);
     }
@@ -144,16 +140,14 @@ public class ItemOffsetTool extends Item {
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
-    public void onBlockHighlight(DrawHighlightEvent event) {
-        if (event.getTarget().getType() != Type.BLOCK) return;
-        BlockRayTraceResult target = (BlockRayTraceResult) event.getTarget();
+    public void onBlockHighlight(DrawHighlightEvent.HighlightBlock event) {
+        BlockRayTraceResult target = event.getTarget();
         PlayerEntity player = Minecraft.getInstance().player;
 
         if (canOffset(player.world, target.getPos(), player.getHeldItemMainhand()) || canOffset(player.world, target.getPos(), player.getHeldItemOffhand())) {
             
             Direction face = target.getFace();
             BlockPos pos = target.getPos();
-            BufferBuilder buf = Tessellator.getInstance().getBuffer();
             MatrixStack ms = event.getMatrix();
             ms.push();
 
@@ -162,37 +156,34 @@ public class ItemOffsetTool extends Item {
             RenderSystem.depthMask(false);
 
             // Draw the X
-            buf.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
+            IVertexBuilder linesBuf = event.getBuffers().getBuffer(RenderType.getLines());
 
-            double x = Math.max(0, face.getXOffset());
-            double y = Math.max(0, face.getYOffset());
-            double z = Math.max(0, face.getZOffset());
+            float x = Math.max(0, face.getXOffset());
+            float y = Math.max(0, face.getYOffset());
+            float z = Math.max(0, face.getZOffset());
             
             Vector3d viewport = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
 
             ms.translate(-viewport.x, -viewport.y, -viewport.z);
             ms.translate(pos.getX(), pos.getY(), pos.getZ());
-
-            RenderSystem.color4f(0, 0, 0, 1);
+            Matrix4f mat = ms.getLast().getMatrix();
 
             if (face.getXOffset() != 0) {
-                buf.pos(x, 0, 0).endVertex();
-                buf.pos(x, 1, 1).endVertex();
-                buf.pos(x, 1, 0).endVertex();
-                buf.pos(x, 0, 1).endVertex();
+            	linesBuf.pos(mat, x, 0, 0).color(0, 0, 0, 1f).endVertex();
+                linesBuf.pos(mat, x, 1, 1).color(0, 0, 0, 1f).endVertex();
+                linesBuf.pos(mat, x, 1, 0).color(0, 0, 0, 1f).endVertex();
+                linesBuf.pos(mat, x, 0, 1).color(0, 0, 0, 1f).endVertex();
             } else if (face.getYOffset() != 0) {
-                buf.pos(0, y, 0).endVertex();
-                buf.pos(1, y, 1).endVertex();
-                buf.pos(1, y, 0).endVertex();
-                buf.pos(0, y, 1).endVertex();
+            	linesBuf.pos(mat, 0, y, 0).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.pos(mat, 1, y, 1).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.pos(mat, 1, y, 0).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.pos(mat, 0, y, 1).color(0, 0, 0, 1f).endVertex();
             } else {
-                buf.pos(0, 0, z).endVertex();
-                buf.pos(1, 1, z).endVertex();
-                buf.pos(1, 0, z).endVertex();
-                buf.pos(0, 1, z).endVertex();
+            	linesBuf.pos(mat, 0, 0, z).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.pos(mat, 1, 1, z).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.pos(mat, 1, 0, z).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.pos(mat, 0, 1, z).color(0, 0, 0, 1f).endVertex();
             }
-
-            Tessellator.getInstance().draw();
 
             Vector3d hit = target.getHitVec();
 
@@ -203,9 +194,7 @@ public class ItemOffsetTool extends Item {
             RenderSystem.polygonOffset(-1.0F, -10.0F);
             RenderSystem.disableCull();
 
-            buf.begin(GL11.GL_TRIANGLES, DefaultVertexFormats.POSITION);
-            
-            RenderSystem.color4f(1, 1, 1, 0x55 / 255f);
+            IVertexBuilder buf = event.getBuffers().getBuffer(ClientUtil.OFFSET_OVERLAY);
 
             Direction moveDir = getMoveDir(face, hit.subtract(pos.getX(), pos.getY(), pos.getZ()));
             int clampedX = Math.max(0, moveDir.getXOffset());
@@ -214,24 +203,26 @@ public class ItemOffsetTool extends Item {
             boolean isX = moveDir.getXOffset() != 0;
             boolean isY = moveDir.getYOffset() != 0;
             boolean isZ = moveDir.getZOffset() != 0;
+            float alpha = 0x55 / 255f;
 
             // Always draw the center point first, then draw the next two points.
             // Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
             if (face.getXOffset() != 0) {
-                buf.pos(x, 0.5, 0.5).endVertex();
-                buf.pos(x, isY ? clampedY : 0, isZ ? clampedZ : 0).endVertex();
-                buf.pos(x, isY ? clampedY : 1, isZ ? clampedZ : 1).endVertex();
+                buf.pos(mat, x, 0.5f, 0.5f).color(1, 1, 1, alpha).endVertex();
+                buf.pos(mat, x, isY ? clampedY : 0, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
+                buf.pos(mat, x, isY ? clampedY : 1, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
             } else if (face.getYOffset() != 0) {
-                buf.pos(0.5, y, 0.5).endVertex();
-                buf.pos(isX ? clampedX : 0, y, isZ ? clampedZ : 0).endVertex();
-                buf.pos(isX ? clampedX : 1, y, isZ ? clampedZ : 1).endVertex();
+                buf.pos(mat, 0.5f, y, 0.5f).color(1, 1, 1, alpha).endVertex();
+                buf.pos(mat, isX ? clampedX : 0, y, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
+                buf.pos(mat, isX ? clampedX : 1, y, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
             } else {
-                buf.pos(0.5, 0.5, z).endVertex();
-                buf.pos(isX ? clampedX : 0, isY ? clampedY : 0, z).endVertex();
-                buf.pos(isX ? clampedX : 1, isY ? clampedY : 1, z).endVertex();
+                buf.pos(mat, 0.5f, 0.5f, z).color(1, 1, 1, alpha).endVertex();
+                buf.pos(mat, isX ? clampedX : 0, isY ? clampedY : 0, z).color(1, 1, 1, alpha).endVertex();
+                buf.pos(mat, isX ? clampedX : 1, isY ? clampedY : 1, z).color(1, 1, 1, alpha).endVertex();
             }
-            Tessellator.getInstance().draw();
-            
+
+            ((IRenderTypeBuffer.Impl)event.getBuffers()).finish(ClientUtil.OFFSET_OVERLAY);
+
             RenderSystem.disablePolygonOffset();
             RenderSystem.polygonOffset(0.0F, 0.0F);
             ms.pop();
