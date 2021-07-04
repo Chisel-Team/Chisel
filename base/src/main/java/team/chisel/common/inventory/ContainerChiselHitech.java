@@ -102,7 +102,7 @@ public class ContainerChiselHitech extends ChiselContainer {
         }
 
         // main slot
-        addSlot(new SlotChiselInput(this, inventoryChisel, getInventoryChisel().size, -1000, 0));
+        addSlot(inputSlot = new SlotChiselInput(this, inventoryChisel, getInventoryChisel().size, -1000, 0));
 
         top += 130;
         // main inv

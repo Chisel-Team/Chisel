@@ -28,7 +28,7 @@ public class ChiselContainer extends Container {
     protected final int chiselSlot;
     protected final ItemStack chisel;
     protected final IVariationRegistry carving;
-    private Slot inputSlot;
+    protected Slot inputSlot;
 
     public ChiselContainer(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer) {
         this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 60), Hand.MAIN_HAND);
