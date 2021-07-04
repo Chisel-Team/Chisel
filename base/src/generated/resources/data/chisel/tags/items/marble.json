@@ -34,9 +34,10 @@
     "chisel:marble/pillar",
     "chisel:marble/twisted",
     "chisel:marble/prism",
-    "chisel:marble/cuts"
-  ],
-  "optional": [
-    "#forge:stone/marble"
+    "chisel:marble/cuts",
+    {
+      "id": "forge:stone/marble",
+      "required": false
+    }
   ]
 }

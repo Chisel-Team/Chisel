@@ -36,9 +36,10 @@
     "chisel:sandstone/cuts",
     "chisel:sandstone/extra/bevel_creeper",
     "chisel:sandstone/extra/glyphs",
-    "chisel:sandstone/extra/small"
-  ],
-  "optional": [
-    "#forge:sandstone"
+    "chisel:sandstone/extra/small",
+    {
+      "id": "forge:sandstone",
+      "required": false
+    }
   ]
 }

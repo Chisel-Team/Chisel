@@ -34,9 +34,10 @@
     "chisel:charcoal/pillar",
     "chisel:charcoal/twisted",
     "chisel:charcoal/prism",
-    "chisel:charcoal/cuts"
-  ],
-  "optional": [
-    "#forge:storage_blocks/charcoal"
+    "chisel:charcoal/cuts",
+    {
+      "id": "forge:storage_blocks/charcoal",
+      "required": false
+    }
   ]
 }

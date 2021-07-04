@@ -36,9 +36,10 @@
     "chisel:quartz/cuts",
     "minecraft:chiseled_quartz_block",
     "minecraft:quartz_pillar",
-    "minecraft:smooth_quartz"
-  ],
-  "optional": [
-    "#forge:storage_blocks/quartz"
+    "minecraft:smooth_quartz",
+    {
+      "id": "forge:storage_blocks/quartz",
+      "required": false
+    }
   ]
 }

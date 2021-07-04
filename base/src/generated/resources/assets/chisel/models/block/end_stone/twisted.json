@@ -1,5 +1,5 @@
 {
-  "parent": "block/cube_column",
+  "parent": "minecraft:block/cube_column",
   "textures": {
     "side": "chisel:block/end_stone/twisted-side",
     "end": "chisel:block/end_stone/twisted-top"

@@ -34,9 +34,10 @@
     "chisel:end_stone/twisted",
     "chisel:end_stone/prism",
     "chisel:end_stone/cuts",
-    "minecraft:end_stone_bricks"
-  ],
-  "optional": [
-    "#forge:end_stones"
+    "minecraft:end_stone_bricks",
+    {
+      "id": "forge:end_stones",
+      "required": false
+    }
   ]
 }

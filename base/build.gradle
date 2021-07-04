@@ -55,8 +55,8 @@ minecraft {
                 }
             }
             
-            args '--mod', 'chisel', '--all', '--output', '"' + rootProject.file('src/generated/resources/') + '"',
-                 '--existing', '"' + rootProject.file('src/main/resources') + '"' 
+            args '--mod', 'chisel', '--all', '--output', '"' + project.file('src/generated/resources/') + '"',
+                 '--existing', '"' + project.file('src/main/resources') + '"' 
             
         }
     }
