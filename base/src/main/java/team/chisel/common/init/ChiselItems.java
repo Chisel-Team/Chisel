@@ -48,6 +48,7 @@ public class ChiselItems {
             .register();
     
     public static final ItemEntry<ItemChisel> HITECH_CHISEL = chisel(ChiselType.HITECH)
+    		.lang("iChisel")
             .recipe((ctx, prov) -> new ShapelessRecipeBuilder(ctx.getEntry(), 1)
                     .addIngredient(DIAMOND_CHISEL::get)
                     .addIngredient(Tags.Items.INGOTS_GOLD)
@@ -67,7 +68,8 @@ public class ChiselItems {
             .register();
     
     private static ItemBuilder<ItemChisel, Registrate> chisel(ChiselType type) {
-        return REGISTRATE.item(type.name().toLowerCase(Locale.ROOT) + "_chisel", p -> new ItemChisel(type, p));
+        return REGISTRATE.item(type.name().toLowerCase(Locale.ROOT) + "_chisel", p -> new ItemChisel(type, p))
+        		.properties(p -> p.maxStackSize(1));
     }
     
     public static void init() {}
