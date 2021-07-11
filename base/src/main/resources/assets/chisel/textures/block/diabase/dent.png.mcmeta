@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:block/basalt/dent-ctm"
+            "chisel:block/diabase/dent-ctm"
         ]
     }
 }
