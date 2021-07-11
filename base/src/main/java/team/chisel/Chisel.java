@@ -2,6 +2,7 @@ package team.chisel;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +31,7 @@ import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import team.chisel.api.ChiselAPIProps;
 import team.chisel.api.carving.CarvingUtils;
+import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.gui.PacketChiselButton;
 import team.chisel.client.gui.PacketHitechSettings;
 import team.chisel.client.gui.PreviewType;
@@ -96,8 +98,8 @@ public class Chisel implements Reference {
         modBus.addListener(this::setup);
         modBus.addListener(this::imcEnqueue);
         modBus.addListener(this::imcProcess);
-        modBus.addGenericListener(Block.class, this::onMissingBlock);
-        modBus.addGenericListener(Item.class, this::onMissingItem);
+        MinecraftForge.EVENT_BUS.addGenericListener(Block.class, this::onMissingBlock);
+        MinecraftForge.EVENT_BUS.addGenericListener(Item.class, this::onMissingItem);
         
         ChiselSounds.init();
         ChiselItems.init();
@@ -137,6 +139,9 @@ public class Chisel implements Reference {
         
         // If we add a future vanilla block, it should be added here once the vanilla version exists
         remaps = ImmutableMap.<String, Block>builder()
+        		.put("basalt/raw", Features.DIABASE.get(VariantTemplates.RAW.getName()).get())
+        		.putAll(VariantTemplates.ROCK.stream()
+        				.collect(Collectors.toMap(v -> "basalt/" + v.getName(), v -> Features.DIABASE.get(v.getName()).get())))
                 .build();
 
         // TODO 1.14 compat
@@ -225,13 +230,13 @@ public class Chisel implements Reference {
     }
 
     private void onMissingBlock(MissingMappings<Block> event) {
-        for (Mapping<Block> mapping : event.getMappings()) {
+        for (Mapping<Block> mapping : event.getMappings(Reference.MOD_ID)) {
             Optional.ofNullable(remaps.get(mapping.key.getPath())).ifPresent(mapping::remap);
         }
     }
     
     private void onMissingItem(MissingMappings<Item> event) {
-        for (Mapping<Item> mapping : event.getMappings()) {
+        for (Mapping<Item> mapping : event.getMappings(Reference.MOD_ID)) {
             Optional.ofNullable(remaps.get(mapping.key.getPath())).map(Block::asItem).ifPresent(mapping::remap);
         }
     }

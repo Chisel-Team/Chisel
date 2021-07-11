@@ -1,0 +1,43 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:diabase/raw",
+    "chisel:diabase/cracked",
+    "chisel:diabase/solid_bricks",
+    "chisel:diabase/small_bricks",
+    "chisel:diabase/soft_bricks",
+    "chisel:diabase/cracked_bricks",
+    "chisel:diabase/triple_bricks",
+    "chisel:diabase/encased_bricks",
+    "chisel:diabase/chaotic_bricks",
+    "chisel:diabase/array",
+    "chisel:diabase/tiles_medium",
+    "chisel:diabase/tiles_large",
+    "chisel:diabase/tiles_small",
+    "chisel:diabase/chaotic_medium",
+    "chisel:diabase/chaotic_small",
+    "chisel:diabase/braid",
+    "chisel:diabase/dent",
+    "chisel:diabase/french_1",
+    "chisel:diabase/french_2",
+    "chisel:diabase/jellybean",
+    "chisel:diabase/layers",
+    "chisel:diabase/mosaic",
+    "chisel:diabase/ornate",
+    "chisel:diabase/panel",
+    "chisel:diabase/road",
+    "chisel:diabase/slanted",
+    "chisel:diabase/zag",
+    "chisel:diabase/circular",
+    "chisel:diabase/circularct",
+    "chisel:diabase/weaver",
+    "chisel:diabase/pillar",
+    "chisel:diabase/twisted",
+    "chisel:diabase/prism",
+    "chisel:diabase/cuts",
+    {
+      "id": "forge:stone/diabase",
+      "required": false
+    }
+  ]
+}

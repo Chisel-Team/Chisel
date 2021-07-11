@@ -39,7 +39,7 @@ public class ChiselWorldGen {
         if (BiomeDictionary.hasType(RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName()), BiomeDictionary.Type.OVERWORLD)) {
             // Basalt (under and around lava lakes)
             event.getGeneration().getFeatures(Decoration.UNDERGROUND_ORES).add(() -> REPLACE_BLOCK_DOWNWARDS.get()
-                    .withConfiguration(new ReplaceMultipleBlocksConfig(ImmutableList.of(Blocks.STONE.getDefaultState(), Blocks.ANDESITE.getDefaultState(), Blocks.GRANITE.getDefaultState(), Blocks.DIORITE.getDefaultState()), Features.BASALT.get(VariantTemplates.RAW.getName()).get().getDefaultState()))
+                    .withConfiguration(new ReplaceMultipleBlocksConfig(ImmutableList.of(Blocks.STONE.getDefaultState(), Blocks.ANDESITE.getDefaultState(), Blocks.GRANITE.getDefaultState(), Blocks.DIORITE.getDefaultState()), Features.DIABASE.get(VariantTemplates.RAW.getName()).get().getDefaultState()))
                     .withPlacement(PLACE_UNDER_LAVA.get().configure(NoPlacementConfig.NO_PLACEMENT_CONFIG)));
             // Limestone (33x *6 @ y64 +48)
             event.getGeneration().getFeatures(Decoration.UNDERGROUND_ORES).add(() -> Feature.ORE

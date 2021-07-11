@@ -5,7 +5,7 @@ import team.chisel.Chisel;
 
 public class ChiselCompatTags {
 
-    public static final ResourceLocation STONE_BASALT = compatTag("stone/basalt");
+    public static final ResourceLocation STONE_DIABASE = compatTag("stone/diabase");
     public static final ResourceLocation STONE_LIMESTONE = compatTag("stone/limestone");
     public static final ResourceLocation STONE_MARBLE = compatTag("stone/marble");
 

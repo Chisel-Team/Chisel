@@ -71,14 +71,7 @@ public class Features {
                         .key('G', Tags.Items.DUSTS_GLOWSTONE)
                         .addCriterion("has_glowstone", prov.hasItem(Tags.Items.DUSTS_GLOWSTONE))
                         .build(prov)))
-            .build();
-    
-    public static final Map<String, BlockEntry<BlockCarvable>> BASALT = _FACTORY.newType(Material.ROCK, "basalt")
-            .variation(VariantTemplates.RAW)
-            .variations(VariantTemplates.ROCK)
-            .addTag(ChiselCompatTags.STONE_BASALT)
-            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
-    
+            .build();    
     
     public static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
  
@@ -163,13 +156,19 @@ public class Features {
                     .build(p -> p.sound(SoundType.STONE).hardnessAndResistance(1.8F))));
 //  BlockSpeedHandler.speedupBlocks.add(b);
 
+    public static final Map<String, BlockEntry<BlockCarvable>> DIABASE = _FACTORY.newType(Material.ROCK, "diabase")
+            .variation(VariantTemplates.RAW)
+            .variations(VariantTemplates.ROCK)
+            .addTag(ChiselCompatTags.STONE_DIABASE)
+            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE));
+
     public static final Map<String, BlockEntry<BlockCarvable>> DIORITE = _FACTORY.newType(Material.ROCK, "diorite")
             .addBlock(Blocks.DIORITE)
             .addBlock(Blocks.POLISHED_DIORITE)
             .variations(VariantTemplates.ROCK)
             .build(b -> b.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE));
 
-    public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.IRON, "emerald")
+    public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.IRON, "emerald") 
     		.addTag(BlockTags.BEACON_BASE_BLOCKS)
             /*.recipe((prov, block) -> new ShapelessRecipeBuilder(Items.EMERALD, 9)
                     .addIngredient(block)
