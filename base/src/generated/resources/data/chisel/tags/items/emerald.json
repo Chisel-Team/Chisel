@@ -14,10 +14,6 @@
     "chisel:emerald/ornate",
     "chisel:emerald/masonryemerald",
     "chisel:emerald/emeraldcircle",
-    "chisel:emerald/emeraldprismatic",
-    {
-      "id": "minecraft:beacon_base_blocks",
-      "required": false
-    }
+    "chisel:emerald/emeraldprismatic"
   ]
 }

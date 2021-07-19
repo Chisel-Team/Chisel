@@ -6063,7 +6063,7 @@ a1952854442e755643a4f45bc8a017612c10c20f data/chisel/tags/blocks/concrete/red.js
 4d5bf15922a75d5e72ebe2e8de3b8ff09609154b data/chisel/tags/blocks/concrete/yellow.json
 8900db395b1ff0980818323d96e01f5ca67620af data/chisel/tags/blocks/diabase.json
 9e8a5a31897e5fcfde69d5671cedb35769bb1100 data/chisel/tags/blocks/diorite.json
-fa0869d3bc9b57b0fcab639c9c06e7a872aa8dd4 data/chisel/tags/blocks/emerald.json
+a4e760ede376d52987821e7ff2380e7fa11bf119 data/chisel/tags/blocks/emerald.json
 8879e6d118c312ac644aae137090e1c1ad4c3dc9 data/chisel/tags/blocks/end_stone.json
 fe08060c46b0df5e23940d264f458233f8e107ef data/chisel/tags/blocks/factory.json
 4c2e92ca3bb757a504485f32a7a21ef584fab013 data/chisel/tags/blocks/futura.json
@@ -6146,7 +6146,7 @@ a1952854442e755643a4f45bc8a017612c10c20f data/chisel/tags/items/concrete/red.jso
 4d5bf15922a75d5e72ebe2e8de3b8ff09609154b data/chisel/tags/items/concrete/yellow.json
 8900db395b1ff0980818323d96e01f5ca67620af data/chisel/tags/items/diabase.json
 9e8a5a31897e5fcfde69d5671cedb35769bb1100 data/chisel/tags/items/diorite.json
-fa0869d3bc9b57b0fcab639c9c06e7a872aa8dd4 data/chisel/tags/items/emerald.json
+a4e760ede376d52987821e7ff2380e7fa11bf119 data/chisel/tags/items/emerald.json
 8879e6d118c312ac644aae137090e1c1ad4c3dc9 data/chisel/tags/items/end_stone.json
 fe08060c46b0df5e23940d264f458233f8e107ef data/chisel/tags/items/factory.json
 4c2e92ca3bb757a504485f32a7a21ef584fab013 data/chisel/tags/items/futura.json
@@ -6189,3 +6189,5 @@ fed7401c6b74c63dda23ce4b2bb42b4856616d41 data/chisel/tags/items/wool/orange.json
 2a920a4bc760b473152e5646c1282234735f1583 data/chisel/tags/items/wool/red.json
 1afb035c887ebf0114ac7fc2ff67e82a736f050c data/chisel/tags/items/wool/white.json
 4ac050e947e0f321adaf7383132b130bf23d73e6 data/chisel/tags/items/wool/yellow.json
+e1e17cbc67456ff795118fb84cc16c1bfc62712d data/minecraft/tags/blocks/beacon_base_blocks.json
+e1e17cbc67456ff795118fb84cc16c1bfc62712d data/minecraft/tags/items/beacon_base_blocks.json

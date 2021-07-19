@@ -61,14 +61,14 @@ public class ChiselBlockFactory {
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, @Nullable String group, BlockProvider<T> provider) {
         return new ChiselBlockBuilder<T>(this, registrate, material, blockName, group == null ? null : getBlockTag(new ResourceLocation(Reference.MOD_ID, group)), provider);
     }
-    
+
     private final Map<ResourceLocation, INamedTag<Block>> blockTags = new HashMap<>();
     private final Map<ResourceLocation, INamedTag<Item>> itemTags = new HashMap<>();
 
     INamedTag<Block> getBlockTag(ResourceLocation id) {
         return blockTags.computeIfAbsent(id, rl -> BlockTags.makeWrapperTag(rl.toString()));
     }
-    
+
     INamedTag<Item> getItemTag(ResourceLocation id) {
         return itemTags.computeIfAbsent(id, rl -> ItemTags.makeWrapperTag(rl.toString()));
     }

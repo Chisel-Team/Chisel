@@ -77,7 +77,7 @@ public class LegacyFeatures {
 
     public static final Map<String, BlockEntry<BlockCarvable>> OBSIDIAN = _FACTORY.newType(Material.ROCK, "obsidian")
             .addTag(Tags.Blocks.OBSIDIAN)
-            .addTag(BlockTags.DRAGON_IMMUNE) //TODO: Is this right?
+            .applyTag(BlockTags.DRAGON_IMMUNE)
             .variation("pillar")
                 .model(ModelTemplates.cubeColumn())
             .next("pillar-quartz")

@@ -51,6 +51,7 @@ public class Features {
     private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrate());
     
     public static final Map<String, BlockEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.IRON, "metals/aluminum")
+    		.applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .setGroupName("Aluminum Block")
             .addTag(ChiselCompatTags.STORAGE_BLOCKS_ALUMINUM)
             .variations(VariantTemplates.METAL)
@@ -81,6 +82,7 @@ public class Features {
             .build(p -> p.hardnessAndResistance(2.0F, 6.0F));
     
     public static final Map<String, BlockEntry<BlockCarvable>> BRONZE = _FACTORY.newType(Material.IRON, "metals/bronze")
+    		.applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .setGroupName("Bronze Block")
             .addTag(ChiselCompatTags.STORAGE_BLOCKS_BRONZE)
             .variations(VariantTemplates.METAL)
@@ -169,7 +171,7 @@ public class Features {
             .build(b -> b.hardnessAndResistance(1.5F, 6.0F).sound(SoundType.STONE));
 
     public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.IRON, "emerald") 
-    		.addTag(BlockTags.BEACON_BASE_BLOCKS)
+    		.applyTag(BlockTags.BEACON_BASE_BLOCKS)
             /*.recipe((prov, block) -> new ShapelessRecipeBuilder(Items.EMERALD, 9)
                     .addIngredient(block)
                     .addCriterion("has_emerald_block", prov.hasItem(block))

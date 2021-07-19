@@ -70,10 +70,13 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private final BlockProvider<T> provider;
 
     private @Nullable INamedTag<Block> group;
-    
+
+    @Setter(AccessLevel.NONE)
+    private Set<ResourceLocation> appliedTags = new HashSet<>();
+
     @Setter(AccessLevel.NONE)
     private Set<ResourceLocation> otherBlocks = new HashSet<>();
-    
+
     @Setter(AccessLevel.NONE)
     private Set<ResourceLocation> otherTags = new HashSet<>();
     
@@ -155,6 +158,15 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         return this;
     }
 
+    public ChiselBlockBuilder<T> applyTag(INamedTag<Block> tag) {
+    	return applyTag(tag.getName());
+    }
+
+    public ChiselBlockBuilder<T> applyTag(ResourceLocation tag) {
+    	this.appliedTags.add(tag);
+    	return this;
+    }
+
     private static final NonNullUnaryOperator<Block.Properties> NO_ACTION = NonNullUnaryOperator.identity();
 
     /**
@@ -195,7 +207,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret.get(var.getName()), var.getName(), var.getDisplayName(), group)))
                         .properties(p -> p.hardnessAndResistance(1))
                         .addLayer(layer)
-                        .transform(this::addTag)
+                        .transform(this::addTags)
                         .properties(after)
                         .blockstate((ctx, prov) -> builder.model.accept(prov, ctx.getEntry()))
                         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
@@ -204,7 +216,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .item(provider::createBlockItem)
                             // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
                             .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
-                            .transform(this::addTag)
+                            .transform(this::addTags)
                             .build()
                         .register());
             }
@@ -231,18 +243,19 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         });
     }
 
-    
-    private <B extends Block, P> BlockBuilder<B, P> addTag(BlockBuilder<B, P> builder) {
+    private <B extends Block, P> BlockBuilder<B, P> addTags(BlockBuilder<B, P> builder) {
         if (this.group != null) {
-            return builder.tag(this.group);
+            builder.tag(this.group);
         }
+        this.appliedTags.forEach(t -> builder.tag(parent.getBlockTag(t)));
         return builder;
     }
-    
-    private <I extends Item, P> ItemBuilder<I, P> addTag(ItemBuilder<I, P> builder) {
+
+    private <I extends Item, P> ItemBuilder<I, P> addTags(ItemBuilder<I, P> builder) {
         if (this.group != null) {
-            return builder.tag(parent.getItemTag(this.group.getName()));
+            builder.tag(parent.getItemTag(this.group.getName()));
         }
+        this.appliedTags.forEach(t -> builder.tag(parent.getItemTag(t)));
         return builder;
     }
 
