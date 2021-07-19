@@ -159,12 +159,12 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     }
 
     public ChiselBlockBuilder<T> applyTag(INamedTag<Block> tag) {
-    	return applyTag(tag.getName());
+        return applyTag(tag.getName());
     }
 
     public ChiselBlockBuilder<T> applyTag(ResourceLocation tag) {
-    	this.appliedTags.add(tag);
-    	return this;
+        this.appliedTags.add(tag);
+        return this;
     }
 
     private static final NonNullUnaryOperator<Block.Properties> NO_ACTION = NonNullUnaryOperator.identity();
