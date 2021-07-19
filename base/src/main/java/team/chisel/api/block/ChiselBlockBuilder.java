@@ -34,16 +34,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.Value;
 import lombok.experimental.Accessors;
-import lombok.experimental.ExtensionMethod;
 import lombok.experimental.NonFinal;
 import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.TagsProvider;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ITag.INamedTag;
-import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -96,6 +96,12 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     
     @Accessors(fluent = true)
     private NonNullBiConsumer<RegistrateBlockLootTables, T> loot = RegistrateBlockLootTables::registerDropSelfLootTable;
+
+    @Accessors(fluent = true)
+    private NonNullSupplier<? extends Block> initialProperties;
+
+    @Accessors(fluent = true)
+    private MaterialColor color;
 
     protected ChiselBlockBuilder(ChiselBlockFactory parent, Registrate registrate, Material material, String blockName, @Nullable INamedTag<Block> group, BlockProvider<T> provider) {
         this.parent = parent;
@@ -205,10 +211,10 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 final VariationBuilder<T> builder = variations.get(index);
                 ret.put(var.getName(), registrate.object(blockName + "/" + var.getName())
                         .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret.get(var.getName()), var.getName(), var.getDisplayName(), group)))
-                        .properties(p -> p.hardnessAndResistance(1))
+                        .initialProperties(initialProperties == null ? NonNullSupplier.of(Blocks.STONE.delegate) : initialProperties)
                         .addLayer(layer)
                         .transform(this::addTags)
-                        .properties(after)
+                        .properties(color == null ? after : after.andThen(p -> { p.blockColors = $ -> color; return p; }))
                         .blockstate((ctx, prov) -> builder.model.accept(prov, ctx.getEntry()))
                         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
                         .recipe((ctx, prov) -> builder.recipe.accept(prov, ctx.getEntry()))

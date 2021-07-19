@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.util.TriConsumer;
 
 import com.google.common.collect.ImmutableMap;
 import com.tterrag.registrate.Registrate;
@@ -17,12 +18,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
 import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -110,8 +114,26 @@ public class Chisel implements Reference {
         
         ChiselWorldGen.FEATURES.register(modBus);
         ChiselWorldGen.PLACEMENTS.register(modBus);
+
+        // Update the values within the properties so that Properties.from reflects them correctly
+        // TODO PR this to forge
+        try {
+            TriConsumer<Block, ToolType, Integer> setter = ObfuscationReflectionHelper.getPrivateValue(ForgeHooks.class, null, "blockToolSetter");
+            ForgeHooks.setBlockToolSetter((block, tool, level) -> {
+                setter.accept(block, tool, level);
+                block.properties.harvestTool(tool);
+                block.properties.harvestLevel(level);
+                if (level > 0) {
+                    block.properties.setRequiresTool();
+                }
+            });
+            ObfuscationReflectionHelper.setPrivateValue(ForgeHooks.class, null, false, "toolInit");
+            ObfuscationReflectionHelper.findMethod(ForgeHooks.class, "initTools").invoke(null);
+        } catch (Exception e) {
+            logger.error("Failed to fix tool types", e);
+        }
     }
-    
+
     public static Registrate registrate() {
         return REGISTRATE.getValue();
     }
