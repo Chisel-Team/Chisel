@@ -9,9 +9,13 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+        maven {
+            name = "jitpack"
+            url = "https://jitpack.io"
+        }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'com.github.GTNH2:ForgeGradle:FG_1.2-SNAPSHOT'
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
@@ -71,19 +75,24 @@ repositories {
         name 'Chisel Repo'
         url "http://maven.tterrag.com/"
     }
+
+    maven {
+        name = "jitpack"
+        url = "https://jitpack.io"
+    }
 }
 
 dependencies {
+    shade ("team.chisel.ctmlib:CTMLib:${ctmlib_version}") {
+        transitive = false
+    }
+
     //compile "mcp.mobius.waila:Waila:${waila_version}_${minecraft_version}:dev"
 	compile "codechicken:CodeChickenLib:${minecraft_version}-${ccl_version}:dev"
 	compile "codechicken:CodeChickenCore:${minecraft_version}-${ccc_version}:dev"
 	compile "codechicken:NotEnoughItems:${minecraft_version}-${nei_version}:dev"
     compile "codechicken:ForgeMultipart:${minecraft_version}-${fmp_version}:dev"
-    compile "com.pahimar.ee3:EquivalentExchange3:1.7.10-0.3.505:dev"
-    
-    shade ("team.chisel.ctmlib:CTMLib:${ctmlib_version}") {
-        transitive = false
-    }
+    compile "com.pahimar.ee3:EquivalentExchange3:${minecraft_version}-${ee3_version}:dev"
 }
 
 processResources
