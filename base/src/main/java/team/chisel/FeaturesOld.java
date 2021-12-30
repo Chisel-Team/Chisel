@@ -37,7 +37,7 @@ public enum FeaturesOld {
 //            Carving.chisel.addVariation("ancient_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_ancient_tile").getDefaultState(), -63));
 //            Carving.chisel.addVariation("ancient_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_ancient_glyphed").getDefaultState(), -62));
 //
-//            factory.newBlock(Material.ROCK, "ancient_stone", provider)
+//            factory.newBlock(Material.STONE, "ancient_stone", provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -75,7 +75,7 @@ public enum FeaturesOld {
 //        }
 //    },*/
 //
-//    ANDESITE(factory -> factory.newType(Material.ROCK, "andesite")
+//    ANDESITE(factory -> factory.newType(Material.STONE, "andesite")
 //            .variations(VariantTemplates.ROCK)
 //            .build(b -> b.hardnessAndResistance(1.5F, 30.0F).sound(SoundType.STONE))),
 //CarvingUtils.getChiselRegistry().addVariation("andesite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.ANDESITE), -21));
@@ -91,7 +91,7 @@ public enum FeaturesOld {
 //                }
 //            };*/
 //
-//            factory.newType(Material.ROCK, "antiblock", provider) /*new ChiselBlockProvider<>(antiblockCreator, BlockCarvable.class)*/
+//            factory.newType(Material.STONE, "antiblock", provider) /*new ChiselBlockProvider<>(antiblockCreator, BlockCarvable.class)*/
 //                    .newVariation("black")
 //                    .next("red")
 //                    .next("green")
@@ -121,7 +121,7 @@ public enum FeaturesOld {
 //    ARCANE_STONE ("thaumcraft") {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "arcane_stone", provider)
+//            factory.newType(Material.STONE, "arcane_stone", provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -166,7 +166,7 @@ public enum FeaturesOld {
 //    },
 //    
 //
-//    BASALT(factory -> factory.newType(Material.ROCK, "basalt")
+//    BASALT(factory -> factory.newType(Material.STONE, "basalt")
 //            .variations(VariantTemplates.ROCK)
 //            .build(b -> b.hardnessAndResistance(1.5F, 10.0F).sound(SoundType.STONE))),
 //
@@ -181,7 +181,7 @@ public enum FeaturesOld {
 //    BLOOD_MAGIC("bloodmagic") {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "bloodMagic", provider)
+//            factory.newType(Material.STONE, "bloodMagic", provider)
 //                    .newVariation("bloodRuneArranged")
 //                    .next("bloodRuneBricks")
 //                    .next("bloodRuneCarved")
@@ -253,7 +253,7 @@ public enum FeaturesOld {
 //        void addBlocks(ChiselBlockFactory factory) {
 //            Carving.chisel.addVariation("bricks", CarvingUtils.variationFor(Blocks.BRICK_BLOCK.getDefaultState(), -1));
 //
-//            factory.newType(Material.ROCK, "bricks", provider) // REMAP!
+//            factory.newType(Material.STONE, "bricks", provider) // REMAP!
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -327,7 +327,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "brownstone", new ChiselBlockProvider<>(creator, BlockCarvable.class))
+//            factory.newType(Material.STONE, "brownstone", new ChiselBlockProvider<>(creator, BlockCarvable.class))
 //                    .newVariation("default")
 //                    .next("block")
 //                    .next("doubleslab")
@@ -356,7 +356,7 @@ public enum FeaturesOld {
 //    CERTUS ("appliedenergistics2") {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "certus", provider)
+//            factory.newType(Material.STONE, "certus", provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -426,7 +426,7 @@ public enum FeaturesOld {
 //    CHARCOAL {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "block_charcoal", null, provider)
+//            factory.newType(Material.STONE, "block_charcoal", null, provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -556,7 +556,7 @@ public enum FeaturesOld {
 //        void addBlocks(ChiselBlockFactory factory) {
 //            Carving.chisel.addVariation("cobblestone", CarvingUtils.variationFor(Blocks.COBBLESTONE.getDefaultState(), -20));
 //
-//            factory.newType(Material.ROCK, "cobblestone", provider) // REMAP!
+//            factory.newType(Material.STONE, "cobblestone", provider) // REMAP!
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -608,7 +608,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "block_coal", null, provider)
+//            factory.newType(Material.STONE, "block_coal", null, provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -659,7 +659,7 @@ public enum FeaturesOld {
 //    COAL_COKE {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "block_coal_coke", provider)
+//            factory.newType(Material.STONE, "block_coal_coke", provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -713,7 +713,7 @@ public enum FeaturesOld {
 //        void addBlocks(ChiselBlockFactory factory) {
 //            Carving.chisel.addVariation("cobblestonemossy", CarvingUtils.variationFor(Blocks.MOSSY_COBBLESTONE.getDefaultState(), -1));
 //
-//            factory.newType(Material.ROCK, "cobblestonemossy", provider)
+//            factory.newType(Material.STONE, "cobblestonemossy", provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -760,7 +760,7 @@ public enum FeaturesOld {
 //                Carving.chisel.addVariation("concrete_" + (dyeColors[i].toLowerCase()), 
 //                        CarvingUtils.variationFor(Blocks.CONCRETE.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.byDyeDamage(i)), -1));
 //
-//                factory.newType(Material.ROCK, "concrete_" + (dyeColors[i].toLowerCase()), provider)
+//                factory.newType(Material.STONE, "concrete_" + (dyeColors[i].toLowerCase()), provider)
 //                        .setParentFolder("concrete_" + dyeColors[i].toLowerCase())
 //                        .newVariation("cracked")
 //                        .next("bricks-soft")
@@ -836,7 +836,7 @@ public enum FeaturesOld {
 //    /*CRAG_ROCK { TODO Retexture
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newBlock(Material.ROCK, "cragROCK", provider)
+//            factory.newBlock(Material.STONE, "cragROCK", provider)
 //                    .newVariation("terrain-cob-detailedbrick")
 //                    .next("terrain-cob-french")
 //                    .next("terrain-cob-french2")
@@ -895,7 +895,7 @@ public enum FeaturesOld {
 //            Carving.chisel.addVariation("diorite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.DIORITE_SMOOTH), -20));
 //
 //
-//            factory.newType(Material.ROCK, "diorite", provider)
+//            factory.newType(Material.STONE, "diorite", provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -1032,7 +1032,7 @@ public enum FeaturesOld {
 //            //Carving.chisel.addVariation("purpur", CarvingUtils.variationFor(purpur_pillar.withProperty(prop, Axis.Z), -2));
 //            //Carving.chisel.addVariation("purpur", CarvingUtils.variationFor(Blocks.purpur_double_slab.getDefaultState(), -1));
 //
-//            factory.newType(Material.ROCK, "purpur", provider) // REMAP!
+//            factory.newType(Material.STONE, "purpur", provider) // REMAP!
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -1079,7 +1079,7 @@ public enum FeaturesOld {
 //    /*ENDER_PEARL_BLOCK { TODO Retexture
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newBlock(Material.ROCK, "ender_pearl_block", provider)
+//            factory.newBlock(Material.STONE, "ender_pearl_block", provider)
 //                    .newVariation("resonantSolid")
 //                    .next("enderZelda")
 //                    .next("enderEye")
@@ -1099,7 +1099,7 @@ public enum FeaturesOld {
 //            Carving.chisel.addVariation("endstone", CarvingUtils.variationFor(Blocks.END_STONE.getDefaultState(), -21));
 //            Carving.chisel.addVariation("endstone", CarvingUtils.variationFor(Blocks.END_BRICKS.getDefaultState(), -20));
 //
-//            factory.newType(Material.ROCK, "endstone", provider) // REMAP!
+//            factory.newType(Material.STONE, "endstone", provider) // REMAP!
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -1184,7 +1184,7 @@ public enum FeaturesOld {
 //    FUTURA {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "futura", provider)
+//            factory.newType(Material.STONE, "futura", provider)
 //                    .newVariation("screenMetallic")
 //                    .next("screenCyan")
 //                    .next("controller")
@@ -1517,7 +1517,7 @@ public enum FeaturesOld {
 //            Carving.chisel.addVariation("granite", CarvingUtils.variationFor(stone.withProperty(prop, BlockStone.EnumType.GRANITE_SMOOTH), -20));
 //
 //
-//            factory.newType(Material.ROCK, "granite", provider)
+//            factory.newType(Material.STONE, "granite", provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -1563,7 +1563,7 @@ public enum FeaturesOld {
 //            Carving.chisel.addVariation("hardenedclay", CarvingUtils.variationFor(Blocks.HARDENED_CLAY.getDefaultState(), -1));
 //
 //
-//            factory.newType(Material.ROCK, "hardenedclay", provider) // REMAP
+//            factory.newType(Material.STONE, "hardenedclay", provider) // REMAP
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -1611,7 +1611,7 @@ public enum FeaturesOld {
 //    /*HEX_PLATING {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newBlock(Material.ROCK, "hexPlating", provider)
+//            factory.newBlock(Material.STONE, "hexPlating", provider)
 //                    .newVariation("hexBase") //TODO: Colored+Glowy stuff
 //                    .next("hexNew")
 //                    .build();
@@ -1773,7 +1773,7 @@ public enum FeaturesOld {
 //    LABORATORY {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "laboratory", provider)
+//            factory.newType(Material.STONE, "laboratory", provider)
 //                    .newVariation("wallpanel")
 //                    .next("dottedpanel")
 //                    .next("largewall")
@@ -1804,7 +1804,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "lapis", null, provider)
+//            factory.newType(Material.STONE, "lapis", null, provider)
 //                    .newVariation("terrain-lapisblock-chunky")
 //                    .next("terrain-lapisblock-panel")
 //                    .next("terrain-lapisblock-zelda")
@@ -1824,7 +1824,7 @@ public enum FeaturesOld {
 //    LAVASTONE {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "lavastone", new ChiselBlockProvider<>(BlockCarvable::new, BlockCarvable.class))
+//            factory.newType(Material.STONE, "lavastone", new ChiselBlockProvider<>(BlockCarvable::new, BlockCarvable.class))
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -1896,7 +1896,7 @@ public enum FeaturesOld {
 //    /*LEAVES { TODO Potential omission candidate
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newBlock(Material.ROCK, "leaves", provider)
+//            factory.newBlock(Material.STONE, "leaves", provider)
 //                    .newVariation("christmasBalls")
 //                    .next("christmasBalls_opaque")
 //                    .next("christmasLights")
@@ -1919,7 +1919,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "limestone", provider) // REMAP!
+//            factory.newType(Material.STONE, "limestone", provider) // REMAP!
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -1977,7 +1977,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "marble", provider) // REMAP
+//            factory.newType(Material.STONE, "marble", provider) // REMAP
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -2036,7 +2036,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //            if (Configurations.oldPillars) {
-//                factory.newType(Material.ROCK, "marblepillarold", provider)
+//                factory.newType(Material.STONE, "marblepillarold", provider)
 //                        .setGroup("marble")
 //                        .newVariation("column")
 //                        .next("capstone")
@@ -2058,7 +2058,7 @@ public enum FeaturesOld {
 //                        .addOreDict("stoneMarblePolished")
 //                        .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 //            } else {
-//                factory.newType(Material.ROCK, "marblepillar", provider)
+//                factory.newType(Material.STONE, "marblepillar", provider)
 //                        .setGroup("marble")
 //                        .newVariation("pillar")
 //                        .next("default")
@@ -2087,7 +2087,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //            Carving.chisel.addVariation("netherbrick", CarvingUtils.variationFor(Blocks.NETHER_BRICK.getDefaultState(), -1));
-//            factory.newType(Material.ROCK, "netherbrick", provider)
+//            factory.newType(Material.STONE, "netherbrick", provider)
 //                    .newVariation("a1-netherbrick-brinstar")
 //                    .next("a1-netherbrick-classicspatter")
 //                    .next("a1-netherbrick-guts")
@@ -2121,7 +2121,7 @@ public enum FeaturesOld {
 //                }
 //            };
 //
-//            factory.newType(Material.ROCK, "netherrack", new ChiselBlockProvider<>(netherrackCreator, BlockCarvable.class))
+//            factory.newType(Material.STONE, "netherrack", new ChiselBlockProvider<>(netherrackCreator, BlockCarvable.class))
 //                    .newVariation("a1-netherrack-bloodgravel")
 //                    .next("a1-netherrack-bloodrock")
 //                    .next("a1-netherrack-bloodrockgrey")
@@ -2145,7 +2145,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "blockNickel", null, beaconBaseProvider)
+//            factory.newType(Material.STONE, "blockNickel", null, beaconBaseProvider)
 //                    .setParentFolder("metals/nickel")
 //                    .newVariation("caution")
 //                    .next("crate")
@@ -2173,7 +2173,7 @@ public enum FeaturesOld {
 //            Carving.chisel.addVariation("obsidian", CarvingUtils.variationFor(Blocks.OBSIDIAN.getDefaultState(), -1));
 //
 //
-//            factory.newType(Material.ROCK, "obsidian", provider)
+//            factory.newType(Material.STONE, "obsidian", provider)
 //                    .newVariation("pillar")
 //                    .next("pillar-quartz")
 //                    .next("chiseled")
@@ -2289,7 +2289,7 @@ public enum FeaturesOld {
 //            IProperty<BlockPrismarine.EnumType> prop = BlockPrismarine.VARIANT;
 //            Carving.chisel.addVariation("prismarine", CarvingUtils.variationFor(prismarine.withProperty(prop, BlockPrismarine.EnumType.BRICKS), -1));
 //
-//            factory.newType(Material.ROCK, "prismarine", provider) //REMAP!
+//            factory.newType(Material.STONE, "prismarine", provider) //REMAP!
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -2347,7 +2347,7 @@ public enum FeaturesOld {
 //            //Carving.chisel.addVariation("quartz", CarvingUtils.variationFor(quartzBlock.withProperty(prop, BlockQuartz.EnumType.LINES_Z), -21));
 //
 //
-//            factory.newType(Material.ROCK, "quartz", provider)
+//            factory.newType(Material.STONE, "quartz", provider)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -2455,7 +2455,7 @@ public enum FeaturesOld {
 //            Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.SMOOTH), -11));
 //            Carving.chisel.addVariation("sandstoneyellow", CarvingUtils.variationFor(ss.withProperty(prop, BlockSandStone.EnumType.CHISELED), -10));
 //
-//            factory.newType(Material.ROCK, "sandstoneyellow", provider) // REMAP!
+//            factory.newType(Material.STONE, "sandstoneyellow", provider) // REMAP!
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -2511,7 +2511,7 @@ public enum FeaturesOld {
 //            Carving.chisel.addVariation("sandstonered", CarvingUtils.variationFor(ss.withProperty(prop, BlockRedSandstone.EnumType.SMOOTH), -11));
 //            Carving.chisel.addVariation("sandstonered", CarvingUtils.variationFor(ss.withProperty(prop, BlockRedSandstone.EnumType.CHISELED), -10));
 //
-//            factory.newType(Material.ROCK, "sandstonered", provider) // REMAP!
+//            factory.newType(Material.STONE, "sandstonered", provider) // REMAP!
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")
@@ -2560,7 +2560,7 @@ public enum FeaturesOld {
 //    SANDSTONE_SCRIBBLES {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "sandstone-scribbles", provider)
+//            factory.newType(Material.STONE, "sandstone-scribbles", provider)
 //                    .setGroup("sandstoneyellow")
 //                    .newVariation("scribbles-0")
 //                    .next("scribbles-1")
@@ -2586,7 +2586,7 @@ public enum FeaturesOld {
 //    SANDSTONERED_SCRIBBLES {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "sandstonered-scribbles", provider)
+//            factory.newType(Material.STONE, "sandstonered-scribbles", provider)
 //                    .setGroup("sandstonered")
 //                    .newVariation("scribbles-0")
 //                    .next("scribbles-1")
@@ -2613,7 +2613,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "blockSilver", null, beaconBaseProvider)
+//            factory.newType(Material.STONE, "blockSilver", null, beaconBaseProvider)
 //                    .setParentFolder("metals/silver")
 //                    .newVariation("caution")
 //                    .next("crate")
@@ -2639,7 +2639,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "blockSteel", null, beaconBaseProvider)
+//            factory.newType(Material.STONE, "blockSteel", null, beaconBaseProvider)
 //                    .setParentFolder("metals/steel")
 //                    .newVariation("caution")
 //                    .next("crate")
@@ -2680,7 +2680,7 @@ public enum FeaturesOld {
 //
 //            // Carving.chisel.addVariation("stonebrick", CarvingUtils.variationFor(Blocks.double_stone_slab.getDefaultState().withProperty(BlockDoubleStoneSlab.VARIANT, BlockDoubleStoneSlab.EnumType.STONE), -21));
 //
-//            factory.newType(Material.ROCK, "stonebrick", provider) // REMAP!
+//            factory.newType(Material.STONE, "stonebrick", provider) // REMAP!
 //                    .setParentFolder("stone")
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
@@ -2779,7 +2779,7 @@ public enum FeaturesOld {
 //    TEMPLE {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "temple", provider)
+//            factory.newType(Material.STONE, "temple", provider)
 //                    .newVariation("cobble")
 //                    .next("ornate")
 //                    .next("plate")
@@ -2798,7 +2798,7 @@ public enum FeaturesOld {
 //                    .next("stand-mosaic")
 //                    .build(b -> b.setHardness(1.5F).setResistance(10.0F).setSoundType(SoundType.STONE));
 //
-//            factory.newType(Material.ROCK, "templemossy", provider)
+//            factory.newType(Material.STONE, "templemossy", provider)
 //                    .setGroup("temple")
 //                    .newVariation("cobble")
 //                    .next("ornate")
@@ -2832,7 +2832,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "blockTin", null, beaconBaseProvider)
+//            factory.newType(Material.STONE, "blockTin", null, beaconBaseProvider)
 //                    .setParentFolder("metals/tin")
 //                    .newVariation("caution")
 //                    .next("crate")
@@ -2890,7 +2890,7 @@ public enum FeaturesOld {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //
-//            factory.newType(Material.ROCK, "blockUranium", null, beaconBaseProvider)
+//            factory.newType(Material.STONE, "blockUranium", null, beaconBaseProvider)
 //                    .setParentFolder("metals/uranium")
 //                    .newVariation("caution")
 //                    .next("crate")
@@ -2915,7 +2915,7 @@ public enum FeaturesOld {
 //    VALENTINES {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "valentines", provider)
+//            factory.newType(Material.STONE, "valentines", provider)
 //                    .newVariation("1")
 //                    .next("2")
 //                    .next("3")
@@ -2946,7 +2946,7 @@ public enum FeaturesOld {
 //    VOIDSTONE {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "voidstone", provider)
+//            factory.newType(Material.STONE, "voidstone", provider)
 //                    .newVariation("raw")
 //                    .next("quarters")
 //                    .next("smooth")
@@ -2957,7 +2957,7 @@ public enum FeaturesOld {
 //                    .next("bevel")
 //                    .build();
 //
-//            factory.newType(Material.ROCK, "energizedVoidstone", provider)
+//            factory.newType(Material.STONE, "energizedVoidstone", provider)
 //                    .setGroup("voidstone")
 //                    .setParentFolder("voidstone/animated")
 //                    .newVariation("raw")
@@ -2970,7 +2970,7 @@ public enum FeaturesOld {
 //                    .next("bevel")
 //                    .build();
 //
-//            factory.newType(Material.ROCK, "voidstoneRunic", provider)
+//            factory.newType(Material.STONE, "voidstoneRunic", provider)
 //                    .setParentFolder("voidstone/runes")
 //                    .setGroup("voidstone")
 //                    .newVariation("black")
@@ -3008,7 +3008,7 @@ public enum FeaturesOld {
 //    WATERSTONE {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
-//            factory.newType(Material.ROCK, "waterstone", new ChiselBlockProvider<>(BlockCarvable::new, BlockCarvable.class)).opaque(false)
+//            factory.newType(Material.STONE, "waterstone", new ChiselBlockProvider<>(BlockCarvable::new, BlockCarvable.class)).opaque(false)
 //                    .newVariation("cracked")
 //                    .next("bricks-soft")
 //                    .next("bricks-cracked")

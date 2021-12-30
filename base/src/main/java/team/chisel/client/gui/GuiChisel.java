@@ -23,7 +23,7 @@ import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.TranslatableComponent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
@@ -140,8 +140,8 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
             if (button.isMouseOver(mx, my) && button instanceof ButtonChiselMode) {
                 String unloc = ((ButtonChiselMode)button).getMode().getUnlocName();
                 List<ITextComponent> ttLines = Lists.newArrayList(
-                        new TranslationTextComponent(unloc),
-                        new TranslationTextComponent(unloc + ".desc").mergeStyle(TextFormatting.GRAY)
+                        new TranslatableComponent(unloc),
+                        new TranslatableComponent(unloc + ".desc").mergeStyle(TextFormatting.GRAY)
                 );
                 GuiUtils.drawHoveringText(matrixStack, ttLines, mx - guiLeft, my - guiTop, width - guiLeft, height - guiTop, -1, font);
             }

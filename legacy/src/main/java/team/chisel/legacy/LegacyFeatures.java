@@ -75,7 +75,7 @@ public class LegacyFeatures {
             .next("plate")
             .build(b -> b.hardnessAndResistance(0.5F, 0.0F).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL).harvestLevel(0));
 
-    public static final Map<String, BlockEntry<BlockCarvable>> OBSIDIAN = _FACTORY.newType(Material.ROCK, "obsidian")
+    public static final Map<String, BlockEntry<BlockCarvable>> OBSIDIAN = _FACTORY.newType(Material.STONE, "obsidian")
             .addTag(Tags.Blocks.OBSIDIAN)
             .applyTag(BlockTags.DRAGON_IMMUNE)
             .variation("pillar")
@@ -102,7 +102,7 @@ public class LegacyFeatures {
 
     public static final Map<String, BlockEntry<BlockCarvable>> PAPER = _FACTORY.newType(Material.PLANTS, "paper")
             .recipe((prov, block) -> new ShapedRecipeBuilder(block, 32)
-                    .patternLine("ppp").patternLine("psp").patternLine("ppp")
+                    .pattern("ppp").pattern("psp").pattern("ppp")
                     .key('p', Items.PAPER)
                     .key('s', Tags.Items.RODS_WOODEN)
                     .addCriterion("has_stick", prov.hasItem(Tags.Items.RODS_WOODEN))

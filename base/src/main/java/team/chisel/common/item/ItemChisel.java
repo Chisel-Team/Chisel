@@ -32,7 +32,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.ChatFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.TranslatableComponent;
 import net.minecraft.world.level.Level;
 import team.chisel.api.IChiselGuiType;
 import team.chisel.api.IChiselGuiType.ChiselGuiType;
@@ -103,7 +103,7 @@ public class ItemChisel extends Item implements IChiselItem {
         if (type != ChiselType.IRON || Configurations.ironChiselHasModes) {
             list.add(new TextComponent(""));
             list.add(TT_CHISEL_MODES.getComponent());
-            list.add(TT_CHISEL_SELECTED_MODE.format(TextFormatting.GREEN, new TranslationTextComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
+            list.add(TT_CHISEL_SELECTED_MODE.format(TextFormatting.GREEN, new TranslatableComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
         }
     }
 

@@ -2,8 +2,8 @@ package team.chisel.api;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import net.minecraft.block.Block;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.Block;
 
 /**
  * Use the enum constants (using {@link #key} or calling {@link #toString()}) in this class as keys for IMC messages sent to chisel
@@ -47,7 +47,7 @@ public enum IMC {
     /**
      * Remove a variation. Will attempt to match for a variation by ItemStack, then blockstate, if both are provided.
      * <p>
-     * This IMC message is expected to be an {@link CompoundNBT}, with the same data used for adding a variation, except that "group" can be left out to remove a variation from multiple groups.
+     * This IMC message is expected to be an {@link CompoundTag}, with the same data used for adding a variation, except that "group" can be left out to remove a variation from multiple groups.
      * 
      * @see {@link #ADD_VARIATION_V2}
      * 

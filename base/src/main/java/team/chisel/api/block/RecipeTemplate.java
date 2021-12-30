@@ -4,10 +4,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.world.level.block.Block;
 
-@MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public interface RecipeTemplate {
 

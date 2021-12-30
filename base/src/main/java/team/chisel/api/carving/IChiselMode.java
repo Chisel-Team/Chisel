@@ -4,20 +4,18 @@ import java.util.Locale;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
 import team.chisel.Chisel;
 import team.chisel.common.util.NonnullType;
 import team.chisel.common.util.Point2i;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public interface IChiselMode {
 
     /**

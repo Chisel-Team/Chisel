@@ -5,14 +5,14 @@ import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IChiselMode;
 
@@ -48,7 +48,7 @@ public interface IChiselItem {
      *            The {@link Hand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
      * @return
      */
-    IChiselGuiType getGuiType(Level world, Player player, InteractionHand hand);
+    IChiselGuiType<?> getGuiType(Level world, Player player, InteractionHand hand);
 
     /**
      * Called when an item is chiseled using this chisel

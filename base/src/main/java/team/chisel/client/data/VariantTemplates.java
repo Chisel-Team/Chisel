@@ -2,39 +2,29 @@ package team.chisel.client.data;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.ImmutableList;
-import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.nullness.FieldsAreNonnullByDefault;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
-import net.minecraft.data.ShapelessRecipeBuilder;
-import net.minecraft.item.DyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.util.Util;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import team.chisel.Chisel;
 import team.chisel.api.block.ModelTemplate;
 import team.chisel.api.block.RecipeTemplate;
 import team.chisel.api.block.VariantTemplate;
 import team.chisel.common.block.BlockCarvable;
 
-@MethodsReturnNonnullByDefault
 @FieldsAreNonnullByDefault
-@ParametersAreNonnullByDefault
 public class VariantTemplates {
     
-    @MethodsReturnNonnullByDefault
     @RequiredArgsConstructor
     @Builder
     public static class SimpleTemplate implements VariantTemplate {
@@ -213,7 +203,7 @@ public class VariantTemplates {
     
     @SuppressWarnings("null")
     public static final ImmutableList<VariantTemplate> COLORS = ImmutableList.copyOf(Arrays.stream(DyeColor.values())
-            .map(color -> simple(color.getString()))
+            .map(color -> simple(color.getSerializedName()))
             .collect(Collectors.toList()));
     
     @SuppressWarnings("null")
@@ -225,7 +215,7 @@ public class VariantTemplates {
         return ImmutableList.copyOf(COLORS.stream()
                 .map(SimpleTemplate::builderFrom)
                 .map(b -> b.modelTemplate(model))
-                .map(b -> b.recipeTemplate(b.name.equals(DyeColor.WHITE.getString()) ? whiteRecipe : null))
+                .map(b -> b.recipeTemplate(b.name.equals(DyeColor.WHITE.getSerializedName()) ? whiteRecipe : null))
                 .map(SimpleTemplate.SimpleTemplateBuilder::build)
                 .collect(Collectors.toList()));
     }
@@ -273,9 +263,9 @@ public class VariantTemplates {
         return ImmutableList.copyOf(templates.stream()
                 .map(SimpleTemplate::builderFrom)
                 .map(b -> b.recipeTemplate((prov, block) -> new ShapelessRecipeBuilder(item, 9)
-                        .addIngredient(block, 9)
-                        .addCriterion("has_" + item.getRegistryName().getPath(), prov.hasItem(item))
-                        .build(prov, Chisel.MOD_ID + ":" + item.getRegistryName().getPath() + "_from_" + ((BlockCarvable)block).getVariation().getName())))
+                        .requires(block, 9)
+                        .unlockedBy("has_" + item.getRegistryName().getPath(), prov.has(item))
+                        .save(prov, Chisel.MOD_ID + ":" + item.getRegistryName().getPath() + "_from_" + ((BlockCarvable)block).getVariation().getName())))
                 .map(SimpleTemplate.SimpleTemplateBuilder::build)
                 .collect(Collectors.toList()));
     }

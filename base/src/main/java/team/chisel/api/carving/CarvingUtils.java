@@ -8,14 +8,14 @@ import com.google.common.base.Objects;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.Tag;
+import net.minecraft.tags.Tag.Named;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.tags.Tag.Named;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.block.Block;
 import team.chisel.Chisel;
 import team.chisel.common.init.ChiselSounds;
 
@@ -79,7 +79,7 @@ public class CarvingUtils {
 
 	    private final SoundEvent sound = ChiselSounds.fallback;
 	    
-	    private final TranslationTextComponent displayName;
+	    private final TranslatableComponent displayName;
 	    
 	    @Override
 	    public String getTranslationKey() {
@@ -110,14 +110,14 @@ public class CarvingUtils {
 
 	private static class BlockTagGroup extends AbstractGroup {
 
-		public BlockTagGroup(INamedTag<Block> tag, TranslationTextComponent displayName) {
+		public BlockTagGroup(Tag.Named<Block> tag, TranslatableComponent displayName) {
 		    super(tag.getName(), displayName);
 		}
 	}
 
 	private static class ItemTagGroup extends AbstractGroup {
 	    
-	    public ItemTagGroup(INamedTag<Item> tag, TranslationTextComponent displayName) {
+	    public ItemTagGroup(Tag.Named<Item> tag, TranslatableComponent displayName) {
 	        super(tag.getName(), displayName);
 	    }
 	}

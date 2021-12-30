@@ -6,9 +6,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 
-import mcp.MethodsReturnNonnullByDefault;
-
-@MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
 public interface VariantTemplate {
     

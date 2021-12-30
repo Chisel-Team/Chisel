@@ -2,16 +2,11 @@ package team.chisel.client.data;
 
 import java.util.function.Function;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 
-import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.world.level.block.Block;
 import team.chisel.api.block.ModelTemplate;
 
-@MethodsReturnNonnullByDefault
-@ParametersAreNonnullByDefault
 public class ModelTemplates {
     
     private static String modid(Block block) {

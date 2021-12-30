@@ -6,6 +6,7 @@ buildscript {
             name = "forge"
             url = "https://maven.minecraftforge.net"
         }
+		maven { url = 'https://maven.parchmentmc.org' }
         maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
@@ -13,6 +14,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+		classpath 'org.parchmentmc:librarian:1.+'
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
@@ -50,9 +52,6 @@ allprojects {
         }
         maven { // JEI
             url "https://dvs1.progwml6.com/files/maven"
-        }
-        maven { // Hwyla
-            url "https://maven.tehnut.info/"
         }
     }
     
@@ -105,6 +104,7 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
     apply plugin: 'net.minecraftforge.gradle'
+	apply plugin: 'org.parchmentmc.librarian.forgegradle'
     apply plugin: 'eclipse'
     apply plugin: 'io.freefair.lombok'
     apply plugin: 'com.matthewprenger.cursegradle'
@@ -115,15 +115,14 @@ subprojects {
     archivesBaseName = (dev ? 'Chisel_DEV' : 'Chisel') + (project.name.equals('base') ? '' : '-' + project.name)
     version = rootProject.version
         
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
     sourceSets.main.resources {
         srcDir 'src/generated/resources'
     }
     
     minecraft {
-        mappings channel: 'official', version: '1.16.5'
+        mappings channel: 'parchment', version: '2021.12.19-1.18.1'
     
         accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     }
@@ -131,13 +130,13 @@ subprojects {
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-        implementation fg.deobf("team.chisel.ctm:CTM:MC1.16.1-${ctm_version}")
-        implementation "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
+        implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
+        //implementation "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
     
-        compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-        runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+        //compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+        //runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
         
-        def registrate = "com.tterrag.registrate:Registrate:MC${minecraft_version}-${registrate_version}"
+        def registrate = "com.tterrag.registrate:Registrate:MC1.18-${registrate_version}"
         implementation fg.deobf(registrate)
         shade registrate
     

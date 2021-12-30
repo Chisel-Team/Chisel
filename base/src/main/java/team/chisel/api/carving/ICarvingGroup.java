@@ -4,18 +4,16 @@ import java.util.Optional;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.item.Item;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.tags.ItemTags;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 @ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public interface ICarvingGroup {
     
     ResourceLocation getId();

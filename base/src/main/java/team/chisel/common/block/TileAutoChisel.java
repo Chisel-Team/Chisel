@@ -39,7 +39,7 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.TranslatableComponent;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.capabilities.Capability;
@@ -532,7 +532,7 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
     public ITextComponent getName() {
         ITextComponent name = getCustomName();
         if (name == null) {
-            name = new TranslationTextComponent("container.autochisel.title");
+            name = new TranslatableComponent("container.autochisel.title");
         }
         return name;
     }

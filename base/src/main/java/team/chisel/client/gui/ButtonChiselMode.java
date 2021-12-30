@@ -27,7 +27,7 @@ public class ButtonChiselMode extends Button {
     @Override
     protected void renderBg(PoseStack matrixStack, Minecraft mc, int mouseX, int mouseY) {
         super.renderBg(matrixStack, mc, mouseX, mouseY);
-        mc.getTextureManager().bind(mode.getSpriteSheet());
+        mc.getTextureManager().bindForSetup(mode.getSpriteSheet());
         Point2i uv = mode.getSpritePos();
         blit(matrixStack, x + 4, y + 4, 12, 12, uv.getX(), uv.getY(), 24, 24, 256, 256);
     }

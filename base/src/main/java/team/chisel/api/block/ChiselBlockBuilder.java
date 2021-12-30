@@ -35,17 +35,18 @@ import lombok.Setter;
 import lombok.Value;
 import lombok.experimental.Accessors;
 import lombok.experimental.NonFinal;
-import mcp.MethodsReturnNonnullByDefault;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.data.tags.TagsProvider;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.Tag;
+import net.minecraft.tags.Tag.Named;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.data.TagsProvider;
-import net.minecraft.item.Item;
-import net.minecraft.tags.Tag.Named;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
@@ -155,7 +156,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         return this;
     }
     
-    public ChiselBlockBuilder<T> addTag(INamedTag<Block> tag) {
+    public ChiselBlockBuilder<T> addTag(Tag.Named<Block> tag) {
         return addTag(tag.getName());
     }
 
@@ -164,7 +165,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         return this;
     }
 
-    public ChiselBlockBuilder<T> applyTag(INamedTag<Block> tag) {
+    public ChiselBlockBuilder<T> applyTag(Tag.Named<Block> tag) {
         return applyTag(tag.getName());
     }
 
@@ -214,7 +215,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .initialProperties(initialProperties == null ? NonNullSupplier.of(Blocks.STONE.delegate) : initialProperties)
                         .addLayer(layer)
                         .transform(this::addTags)
-                        .properties(color == null ? after : after.andThen(p -> { p.blockColors = $ -> color; return p; }))
+//                        .properties(color == null ? after : after.andThen(p -> { p.blockColors = $ -> color; return p; }))
                         .blockstate((ctx, prov) -> builder.model.accept(prov, ctx.getEntry()))
                         .setData(ProviderType.LANG, NonNullBiConsumer.noop())
                         .recipe((ctx, prov) -> builder.recipe.accept(prov, ctx.getEntry()))
@@ -238,9 +239,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     }
     
     @SuppressWarnings({ "unchecked" })
-    private <TAG> void addExtraTagEntries(ProviderType<? extends RegistrateTagsProvider<TAG>> type, NonNullFunction<INamedTag<Block>, INamedTag<TAG>> tagGetter, NonNullFunction<ResourceLocation, TAG> entryLookup) {    	
+    private <TAG> void addExtraTagEntries(ProviderType<? extends RegistrateTagsProvider<TAG>> type, NonNullFunction<Tag.Named<Block>, Tag.Named<TAG>> tagGetter, NonNullFunction<ResourceLocation, TAG> entryLookup) {    	
         registrate.addDataGenerator(type, prov -> {
-        	TagsProvider.Builder<TAG> builder = prov.getOrCreateBuilder(tagGetter.apply(this.group))
+        	TagsProvider.TagAppender<TAG> builder = prov.tag(tagGetter.apply(this.group))
                 .add((TAG[]) otherBlocks.stream()
                         .map(entryLookup::apply)
                         .toArray());
@@ -269,7 +270,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     public static class VariationBuilder<T extends Block & ICarvable> {
         
         private static final Map<ResourceLocation, String> TRANSLATIONS = new HashMap<>();
-        private static final Map<ResourceLocation, TranslationTextComponent> COMPONENTS = new HashMap<>();
+        private static final Map<ResourceLocation, TranslatableComponent> COMPONENTS = new HashMap<>();
 
         private ChiselBlockBuilder<T> parent;
 
@@ -328,7 +329,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             }
             if (existingTranslation == null) {
                 TRANSLATIONS.put(translationKey, localizedName);
-                TranslationTextComponent component = parent.registrate.addLang("variant", translationKey, localizedName);
+                TranslatableComponent component = parent.registrate.addLang("variant", translationKey, localizedName);
                 COMPONENTS.put(translationKey, component);
                 for (int j = 0; j < tooltip.length; j++) {
                     parent.registrate.addRawLang(component.getKey() + ".desc." + (j + 1), tooltip[j]);
@@ -348,7 +349,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
          */
         String name;
 
-        TranslationTextComponent displayName;
+        TranslatableComponent displayName;
     }
 
     @Value
@@ -358,11 +359,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private static class VariationDataImpl implements VariationData {
 
         String name;
-        TranslationTextComponent displayName;
+        TranslatableComponent displayName;
         NonNullSupplier<? extends Block> block;
         ICarvingGroup group;
 
-        VariationDataImpl(NonNullSupplier<? extends Block> block, String name, TranslationTextComponent displayName, ICarvingGroup group) {
+        VariationDataImpl(NonNullSupplier<? extends Block> block, String name, TranslatableComponent displayName, ICarvingGroup group) {
             this.block = block;
             this.name = name;
             this.displayName = displayName;

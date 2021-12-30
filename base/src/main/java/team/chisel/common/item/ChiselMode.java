@@ -27,7 +27,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.core.Vec3i;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.util.text.TranslatableComponent;
 import net.minecraft.world.level.Level;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
@@ -222,9 +222,9 @@ public enum ChiselMode implements IChiselMode {
     }
     
     @Getter(onMethod = @__({@Override}))
-    private final TranslationTextComponent localizedName;
+    private final TranslatableComponent localizedName;
     @Getter(onMethod = @__({@Override}))
-    private final TranslationTextComponent localizedDescription;
+    private final TranslatableComponent localizedDescription;
     
     private ChiselMode(String desc) {
         this(null, desc);
