@@ -11,9 +11,9 @@ import com.google.common.collect.ImmutableSet;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 import lombok.Getter;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.TranslatableComponent;
 import team.chisel.Chisel;
 
 @Getter 
@@ -50,7 +50,7 @@ public enum PreviewType {
     
     private final float scale;
     private final Set<BlockPos> positions;
-    private final TranslationTextComponent localizedName;
+    private final TranslatableComponent localizedName;
     
     private PreviewType(float scale, @Nonnull BlockPos... positions) {
         this.scale = scale;

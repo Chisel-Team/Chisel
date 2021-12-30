@@ -1,6 +1,6 @@
 package team.chisel.common.init;
 
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import team.chisel.Chisel;
 
 public class ChiselCompatTags {

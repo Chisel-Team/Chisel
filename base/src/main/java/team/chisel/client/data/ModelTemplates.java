@@ -7,7 +7,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import team.chisel.api.block.ModelTemplate;
 
 @MethodsReturnNonnullByDefault

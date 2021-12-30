@@ -11,11 +11,11 @@ import com.google.common.collect.SetMultimap;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.InterModComms.IMCMessage;
 import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.Chisel;
@@ -43,13 +43,13 @@ public class IMCHandler {
         }
     }
     
-    private Pair<ItemStack, BlockState> parseNBT(CompoundNBT tag) {
-        CompoundNBT stacktag = tag.getCompound("stack");
+    private Pair<ItemStack, BlockState> parseNBT(CompoundTag tag) {
+        CompoundTag stacktag = tag.getCompound("stack");
         String blockname = tag.getString("block");
         Preconditions.checkArgument(!(stacktag.isEmpty() && blockname.isEmpty()), "Must provide stack or blockstate.");
         ItemStack stack = null;
         if (!stacktag.isEmpty()) {
-            stack = ItemStack.read(stacktag);
+            stack = ItemStack.of(stacktag);
         }
         BlockState state = null;
         if (!blockname.isEmpty()) {

@@ -1,11 +1,11 @@
 package team.chisel.common.item;
 
 import static net.minecraft.util.Direction.DOWN;
-import static net.minecraft.util.Direction.EAST;
+import staticnet.minecraft.core.Directionn.EAST;
 import static net.minecraft.util.Direction.NORTH;
-import static net.minecraft.util.Direction.SOUTH;
+import staticnet.minecraft.core.Directionn.SOUTH;
 import static net.minecraft.util.Direction.UP;
-import static net.minecraft.util.Direction.WEST;
+import staticnet.minecraft.core.Directionn.WEST;
 
 import java.awt.geom.Line2D;
 import java.util.Collections;
@@ -17,31 +17,31 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 
 import lombok.ToString;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResultType;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.vector.Matrix4f;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import com.mojang.math.Matrix4f;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.DrawHighlightEvent;
@@ -63,18 +63,18 @@ public class ItemOffsetTool extends Item {
         private BlockPos offset = BlockPos.ZERO;
 
         @Override
-        public void write(CompoundNBT tag) {
+        public void write(CompoundTag tag) {
             tag.putShort("offset", (short) (offset.getX() << 8 | offset.getY() << 4 | offset.getZ()));
         }
 
         @Override
-        public void read(CompoundNBT tag) {
+        public void read(CompoundTag tag) {
             short data = tag.getShort("offset");
             offset = new BlockPos((data >> 8) & 0xF, (data >> 4) & 0xF, data & 0xF);
         }
 
         void move(Direction dir) {
-            offset = wrap(offset.offset(dir.getOpposite()));
+            offset = wrap(offset.relative(dir.getOpposite()));
         }
 
         @Override
@@ -102,28 +102,28 @@ public class ItemOffsetTool extends Item {
     }
 
     @Override
-    public ActionResultType onItemUse(ItemUseContext context) {
-        World world = context.getWorld();
-        BlockState state = world.getBlockState(context.getPos());
-        if (world.isRemote) {
-            return canOffset(context.getWorld(), context.getPos(), context.getItem()) ? ActionResultType.SUCCESS : ActionResultType.PASS;
+    public InteractionResult useOn(UseOnContext context) {
+        Level world = context.getLevel();
+        BlockState state = world.getBlockState(context.getClickedPos());
+        if (world.isClientSide) {
+            return canOffset(context.getLevel(), context.getClickedPos(), context.getItemInHand()) ? InteractionResult.SUCCESS : InteractionResult.PASS;
         } else {
             ChunkDataBase<OffsetData> cd = PerChunkData.INSTANCE.getData(DATA_KEY);
-            OffsetData data = cd.getDataForChunk(world.getDimensionKey(), world.getChunk(context.getPos()).getPos());
-            Vector3d hitVec = context.getHitVec();
-            data.move(getMoveDir(context.getFace(), hitVec));
-            PerChunkData.INSTANCE.chunkModified((Chunk) world.getChunk(context.getPos()), DATA_KEY);
+            OffsetData data = cd.getDataForChunk(world.dimension(), world.getChunk(context.getClickedPos()).getPos());
+            Vec3 hitVec = context.getClickLocation();
+            data.move(getMoveDir(context.getClickedFace(), hitVec));
+            PerChunkData.INSTANCE.chunkModified((LevelChunk) world.getChunk(context.getClickedPos()), DATA_KEY);
         }
-        return super.onItemUse(context);
+        return super.useOn(context);
     }
 
-    public Direction getMoveDir(Direction face, Vector3d hitVec) {
+    public Direction getMoveDir(Direction face, Vec3 hitVec) {
         Map<Double, Direction> map = Maps.newHashMap();
-        if (face.getXOffset() != 0) {
+        if (face.getStepX() != 0) {
             fillMap(map, hitVec.z, hitVec.y, DOWN, UP, NORTH, SOUTH);
-        } else if (face.getYOffset() != 0) {
+        } else if (face.getStepY() != 0) {
             fillMap(map, hitVec.x, hitVec.z, NORTH, SOUTH, WEST, EAST);
-        } else if (face.getZOffset() != 0) {
+        } else if (face.getStepZ() != 0) {
             fillMap(map, hitVec.x, hitVec.y, DOWN, UP, WEST, EAST);
         }
         List<Double> keys = Lists.newArrayList(map.keySet());
@@ -141,51 +141,51 @@ public class ItemOffsetTool extends Item {
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
     public void onBlockHighlight(DrawHighlightEvent.HighlightBlock event) {
-        BlockRayTraceResult target = event.getTarget();
-        PlayerEntity player = Minecraft.getInstance().player;
+        BlockHitResult target = event.getTarget();
+        Player player = Minecraft.getInstance().player;
 
-        if (canOffset(player.world, target.getPos(), player.getHeldItemMainhand()) || canOffset(player.world, target.getPos(), player.getHeldItemOffhand())) {
+        if (canOffset(player.level, target.getBlockPos(), player.getMainHandItem()) || canOffset(player.level, target.getBlockPos(), player.getOffhandItem())) {
             
-            Direction face = target.getFace();
-            BlockPos pos = target.getPos();
-            MatrixStack ms = event.getMatrix();
-            ms.push();
+            Direction face = target.getDirection();
+            BlockPos pos = target.getBlockPos();
+            PoseStack ms = event.getMatrix();
+            ms.pushPose();
 
             RenderSystem.disableLighting();
             RenderSystem.disableTexture();
             RenderSystem.depthMask(false);
 
             // Draw the X
-            IVertexBuilder linesBuf = event.getBuffers().getBuffer(RenderType.getLines());
+            VertexConsumer linesBuf = event.getBuffers().getBuffer(RenderType.lines());
 
-            float x = Math.max(0, face.getXOffset());
-            float y = Math.max(0, face.getYOffset());
-            float z = Math.max(0, face.getZOffset());
+            float x = Math.max(0, face.getStepX());
+            float y = Math.max(0, face.getStepY());
+            float z = Math.max(0, face.getStepZ());
             
-            Vector3d viewport = Minecraft.getInstance().gameRenderer.getActiveRenderInfo().getProjectedView();
+            Vec3 viewport = Minecraft.getInstance().gameRenderer.getMainCamera().getPosition();
 
             ms.translate(-viewport.x, -viewport.y, -viewport.z);
             ms.translate(pos.getX(), pos.getY(), pos.getZ());
-            Matrix4f mat = ms.getLast().getMatrix();
+            Matrix4f mat = ms.last().pose();
 
-            if (face.getXOffset() != 0) {
-            	linesBuf.pos(mat, x, 0, 0).color(0, 0, 0, 1f).endVertex();
-                linesBuf.pos(mat, x, 1, 1).color(0, 0, 0, 1f).endVertex();
-                linesBuf.pos(mat, x, 1, 0).color(0, 0, 0, 1f).endVertex();
-                linesBuf.pos(mat, x, 0, 1).color(0, 0, 0, 1f).endVertex();
-            } else if (face.getYOffset() != 0) {
-            	linesBuf.pos(mat, 0, y, 0).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.pos(mat, 1, y, 1).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.pos(mat, 1, y, 0).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.pos(mat, 0, y, 1).color(0, 0, 0, 1f).endVertex();
+            if (face.getStepX() != 0) {
+            	linesBuf.vertex(mat, x, 0, 0).color(0, 0, 0, 1f).endVertex();
+                linesBuf.vertex(mat, x, 1, 1).color(0, 0, 0, 1f).endVertex();
+                linesBuf.vertex(mat, x, 1, 0).color(0, 0, 0, 1f).endVertex();
+                linesBuf.vertex(mat, x, 0, 1).color(0, 0, 0, 1f).endVertex();
+            } else if (face.getStepY() != 0) {
+            	linesBuf.vertex(mat, 0, y, 0).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, 1, y, 1).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, 1, y, 0).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, 0, y, 1).color(0, 0, 0, 1f).endVertex();
             } else {
-            	linesBuf.pos(mat, 0, 0, z).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.pos(mat, 1, 1, z).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.pos(mat, 1, 0, z).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.pos(mat, 0, 1, z).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, 0, 0, z).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, 1, 1, z).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, 1, 0, z).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, 0, 1, z).color(0, 0, 0, 1f).endVertex();
             }
 
-            Vector3d hit = target.getHitVec();
+            Vec3 hit = target.getLocation();
 
             // Draw the triangle highlight
             RenderSystem.enableBlend();
@@ -194,47 +194,47 @@ public class ItemOffsetTool extends Item {
             RenderSystem.polygonOffset(-1.0F, -10.0F);
             RenderSystem.disableCull();
 
-            IVertexBuilder buf = event.getBuffers().getBuffer(ClientUtil.OFFSET_OVERLAY);
+            VertexConsumer buf = event.getBuffers().getBuffer(ClientUtil.OFFSET_OVERLAY);
 
             Direction moveDir = getMoveDir(face, hit.subtract(pos.getX(), pos.getY(), pos.getZ()));
-            int clampedX = Math.max(0, moveDir.getXOffset());
-            int clampedY = Math.max(0, moveDir.getYOffset());
-            int clampedZ = Math.max(0, moveDir.getZOffset());
-            boolean isX = moveDir.getXOffset() != 0;
-            boolean isY = moveDir.getYOffset() != 0;
-            boolean isZ = moveDir.getZOffset() != 0;
+            int clampedX = Math.max(0, moveDir.getStepX());
+            int clampedY = Math.max(0, moveDir.getStepY());
+            int clampedZ = Math.max(0, moveDir.getStepZ());
+            boolean isX = moveDir.getStepX() != 0;
+            boolean isY = moveDir.getStepY() != 0;
+            boolean isZ = moveDir.getStepZ() != 0;
             float alpha = 0x55 / 255f;
 
             // Always draw the center point first, then draw the next two points.
             // Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
-            if (face.getXOffset() != 0) {
-                buf.pos(mat, x, 0.5f, 0.5f).color(1, 1, 1, alpha).endVertex();
-                buf.pos(mat, x, isY ? clampedY : 0, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
-                buf.pos(mat, x, isY ? clampedY : 1, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
-            } else if (face.getYOffset() != 0) {
-                buf.pos(mat, 0.5f, y, 0.5f).color(1, 1, 1, alpha).endVertex();
-                buf.pos(mat, isX ? clampedX : 0, y, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
-                buf.pos(mat, isX ? clampedX : 1, y, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
+            if (face.getStepX() != 0) {
+                buf.vertex(mat, x, 0.5f, 0.5f).color(1, 1, 1, alpha).endVertex();
+                buf.vertex(mat, x, isY ? clampedY : 0, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
+                buf.vertex(mat, x, isY ? clampedY : 1, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
+            } else if (face.getStepY() != 0) {
+                buf.vertex(mat, 0.5f, y, 0.5f).color(1, 1, 1, alpha).endVertex();
+                buf.vertex(mat, isX ? clampedX : 0, y, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
+                buf.vertex(mat, isX ? clampedX : 1, y, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
             } else {
-                buf.pos(mat, 0.5f, 0.5f, z).color(1, 1, 1, alpha).endVertex();
-                buf.pos(mat, isX ? clampedX : 0, isY ? clampedY : 0, z).color(1, 1, 1, alpha).endVertex();
-                buf.pos(mat, isX ? clampedX : 1, isY ? clampedY : 1, z).color(1, 1, 1, alpha).endVertex();
+                buf.vertex(mat, 0.5f, 0.5f, z).color(1, 1, 1, alpha).endVertex();
+                buf.vertex(mat, isX ? clampedX : 0, isY ? clampedY : 0, z).color(1, 1, 1, alpha).endVertex();
+                buf.vertex(mat, isX ? clampedX : 1, isY ? clampedY : 1, z).color(1, 1, 1, alpha).endVertex();
             }
 
-            ((IRenderTypeBuffer.Impl)event.getBuffers()).finish(ClientUtil.OFFSET_OVERLAY);
+            ((MultiBufferSource.BufferSource)event.getBuffers()).endBatch(ClientUtil.OFFSET_OVERLAY);
 
             RenderSystem.disablePolygonOffset();
             RenderSystem.polygonOffset(0.0F, 0.0F);
-            ms.pop();
+            ms.popPose();
         }
     }
 
-    private boolean canOffset(World world, BlockPos pos, ItemStack stack) {
+    private boolean canOffset(Level world, BlockPos pos, ItemStack stack) {
         BlockState state = world.getBlockState(pos);
         if (stack.isEmpty() || stack.getItem() != this) {
             return false;
         }
-        IBakedModel model = Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelShapes().getModel(state);
+        BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getBlockModel(state);
 //        if (!(model instanceof AbstractCTMBakedModel)) {
 //            return false;
 //        }

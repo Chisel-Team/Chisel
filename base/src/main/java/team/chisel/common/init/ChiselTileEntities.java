@@ -3,11 +3,11 @@ package team.chisel.common.init;
 import com.tterrag.registrate.Registrate;
 
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import net.minecraft.block.Block;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.item.BlockItem;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.Tags;
 import team.chisel.Chisel;
 import team.chisel.client.gui.GuiAutoChisel;
@@ -27,18 +27,18 @@ public class ChiselTileEntities {
             .item(BlockItem::new)
                 .model((ctx, prov) -> prov.blockItem(ctx::getEntry))
                 .recipe((ctx, prov) -> new ShapedRecipeBuilder(ctx.getEntry(), 1)
-                        .key('G', Tags.Items.GLASS)
-                        .key('R', Tags.Items.DUSTS_REDSTONE)
-                        .key('I', Tags.Items.INGOTS_IRON)
-                        .patternLine("GGG").patternLine("GRG").patternLine("III")
-                        .addCriterion("has_iron", prov.hasItem(Tags.Items.INGOTS_IRON))
-                        .build(prov))
+                        .define('G', Tags.Items.GLASS)
+                        .define('R', Tags.Items.DUSTS_REDSTONE)
+                        .define('I', Tags.Items.INGOTS_IRON)
+                        .pattern("GGG").pattern("GRG").pattern("III")
+                        .unlockedBy("has_iron", prov.hasItem(Tags.Items.INGOTS_IRON))
+                        .save(prov))
                 .build()
             .register();
 
-    public static final RegistryEntry<TileEntityType<TileAutoChisel>> AUTO_CHISEL_TE = REGISTRATE.get(TileEntityType.class);
+    public static final RegistryEntry<BlockEntityType<TileAutoChisel>> AUTO_CHISEL_TE = REGISTRATE.get(BlockEntityType.class);
     
-    public static final RegistryEntry<ContainerType<ContainerAutoChisel>> AUTO_CHISEL_CONTAINER = REGISTRATE.entry((name, callback) -> 
+    public static final RegistryEntry<MenuType<ContainerAutoChisel>> AUTO_CHISEL_CONTAINER = REGISTRATE.entry((name, callback) -> 
             new ContainerBuilder<ContainerAutoChisel, GuiAutoChisel, Registrate>(REGISTRATE, REGISTRATE, name, callback, ContainerAutoChisel::new, () -> (container, inv, displayName) -> new GuiAutoChisel(container, inv, displayName)))
                 .register();
     

@@ -6,7 +6,7 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import team.chisel.Chisel;
 
 @RequiredArgsConstructor
@@ -38,10 +38,10 @@ public enum ChiselLangKeys {
     }
     
     @Getter
-    private TranslationTextComponent component;
+    private TranslatableComponent component;
     
-    public TranslationTextComponent format(Object... args) {
-        return new TranslationTextComponent(getComponent().getKey(), args);
+    public TranslatableComponent format(Object... args) {
+        return new TranslatableComponent(getComponent().getKey(), args);
     }
     
     public static void init(Registrate registrate) {

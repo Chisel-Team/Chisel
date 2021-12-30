@@ -3,8 +3,8 @@ package team.chisel.common.init;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Class file for the Chisel creative tabs
@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 @ParametersAreNonnullByDefault
 public class ChiselTabs {
 
-    public static class ChiselCreativeTab extends ItemGroup {
+    public static class ChiselCreativeTab extends CreativeModeTab {
 
         public ChiselCreativeTab(String name) {
             super(name);
@@ -24,14 +24,14 @@ public class ChiselTabs {
         }
         
         @Override
-        public ItemStack createIcon() {
+        public ItemStack makeIcon() {
             return new ItemStack(ChiselItems.IRON_CHISEL.get());
         }
     }
 
     @Nonnull
-    public static final ItemGroup base = new ChiselCreativeTab("chisel").setBackgroundImageName("item_search.png");
+    public static final CreativeModeTab base = new ChiselCreativeTab("chisel").setBackgroundSuffix("item_search.png");
     
     @Nonnull
-    public static final ItemGroup legacy = new ChiselCreativeTab("chisel.legacy").setBackgroundImageName("item_search.png");
+    public static final CreativeModeTab legacy = new ChiselCreativeTab("chisel.legacy").setBackgroundSuffix("item_search.png");
 }

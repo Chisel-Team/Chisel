@@ -4,10 +4,10 @@ import java.util.Random;
 
 import com.mojang.serialization.Codec;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ISeedReader;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.feature.Feature;
 
 public class ReplaceBlockDownwardsFeature extends Feature<ReplaceMultipleBlocksConfig> {
 
@@ -16,7 +16,7 @@ public class ReplaceBlockDownwardsFeature extends Feature<ReplaceMultipleBlocksC
     }
     
     @Override
-    public boolean generate(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, ReplaceMultipleBlocksConfig config) {
+    public boolean place(WorldGenLevel world, ChunkGenerator generator, Random rand, BlockPos pos, ReplaceMultipleBlocksConfig config) {
         boolean ret = false;
         int max = 2;
         if (rand.nextFloat() < 0.7f) {
@@ -27,10 +27,10 @@ public class ReplaceBlockDownwardsFeature extends Feature<ReplaceMultipleBlocksC
         }
         for (int i = 0; i < max; i++) {
             if (config.toReplace.contains(world.getBlockState(pos))) {
-                world.setBlockState(pos, config.result, 2);
+                world.setBlock(pos, config.result, 2);
                 ret = true;
             }
-            pos = pos.down();
+            pos = pos.below();
         }
         return ret;
     }

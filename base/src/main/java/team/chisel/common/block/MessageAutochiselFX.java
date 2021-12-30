@@ -5,13 +5,13 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 
 import lombok.RequiredArgsConstructor;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.client.ClientProxy;
 
@@ -22,21 +22,21 @@ public class MessageAutochiselFX {
     private final @Nonnull ItemStack chisel;
     private final @Nonnull BlockState state;
     
-    public void encode(PacketBuffer buf) {
-        buf.writeLong(pos.toLong());
-        buf.writeItemStack(chisel);
-        buf.writeInt(Block.getStateId(state));
+    public void encode(FriendlyByteBuf buf) {
+        buf.writeLong(pos.asLong());
+        buf.writeItem(chisel);
+        buf.writeInt(Block.getId(state));
     }
 
-    public static MessageAutochiselFX decode(PacketBuffer buf) {
-        return new MessageAutochiselFX(BlockPos.fromLong(buf.readLong()), buf.readItemStack(), Block.getStateById(buf.readInt()));
+    public static MessageAutochiselFX decode(FriendlyByteBuf buf) {
+        return new MessageAutochiselFX(BlockPos.of(buf.readLong()), buf.readItem(), Block.stateById(buf.readInt()));
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            World world = ClientProxy.getClientWorld();
-            if (world.isBlockLoaded(pos)) {
-                TileEntity te = world.getTileEntity(pos);
+            Level world = ClientProxy.getClientWorld();
+            if (world.hasChunkAt(pos)) {
+                BlockEntity te = world.getBlockEntity(pos);
                 if (te instanceof TileAutoChisel) {
                     ((TileAutoChisel) te).spawnCompletionFX(ClientProxy.getClientPlayer(), chisel, state);
                 }

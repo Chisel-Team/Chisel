@@ -6,10 +6,10 @@ import javax.annotation.Nonnull;
 
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -28,23 +28,23 @@ public class PacketChiselButton {
         this.slotIds = slots;
     }
     
-    public void encode(final PacketBuffer buf) {
+    public void encode(final FriendlyByteBuf buf) {
         buf.writeVarIntArray(slotIds);
     }
     
-    public static PacketChiselButton decode(final PacketBuffer buf) {
+    public static PacketChiselButton decode(final FriendlyByteBuf buf) {
         return new PacketChiselButton(buf.readVarIntArray());
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        ServerPlayerEntity player = ctx.get().getSender();
+        ServerPlayer player = ctx.get().getSender();
         ctx.get().enqueueWork(() -> chiselAll(player, slotIds));
         ctx.get().setPacketHandled(true);
     }
     
-    public static void chiselAll(PlayerEntity player, int[] slots) {
-        if (player.openContainer instanceof ContainerChiselHitech) {
-            ContainerChiselHitech container = (ContainerChiselHitech) player.openContainer;
+    public static void chiselAll(Player player, int[] slots) {
+        if (player.containerMenu instanceof ContainerChiselHitech) {
+            ContainerChiselHitech container = (ContainerChiselHitech) player.containerMenu;
             ItemStack chisel = container.getChisel();
             ItemStack originalChisel = chisel.copy();
             ItemStack target = container.getTargetStack();

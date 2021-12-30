@@ -3,7 +3,7 @@ package team.chisel.common.inventory;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.inventory.container.Slot;
+import net.minecraft.world.inventory.Slot;
 
 public class SlotChiselInput extends Slot {
 
@@ -15,8 +15,8 @@ public class SlotChiselInput extends Slot {
     }
 
     @Override
-    public void onSlotChanged() {
-        super.onSlotChanged();
+    public void setChanged() {
+        super.setChanged();
         container.onChiselSlotChanged();
         container.getInventoryChisel().updateItems();
     }

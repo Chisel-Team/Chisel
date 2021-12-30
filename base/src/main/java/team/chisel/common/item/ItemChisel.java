@@ -16,7 +16,7 @@ import com.google.common.collect.Multimap;
 
 import lombok.Getter;
 import net.minecraft.block.BlockState;
-import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -24,16 +24,16 @@ import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.ChatFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
+import net.minecraft.world.level.Level;
 import team.chisel.api.IChiselGuiType;
 import team.chisel.api.IChiselGuiType.ChiselGuiType;
 import team.chisel.api.IChiselItem;
@@ -76,12 +76,12 @@ public class ItemChisel extends Item implements IChiselItem {
     }
 
     @Override
-    public boolean isDamageable() {
+    public boolean canBeDepleted() {
         return Configurations.allowChiselDamage;
     }
 
     @Override
-    public boolean getIsRepairable(ItemStack damagedItem, ItemStack repairMaterial) {
+    public boolean isValidRepairItem(ItemStack damagedItem, ItemStack repairMaterial) {
         switch (type) {
         case DIAMOND:
         case HITECH:
@@ -94,14 +94,14 @@ public class ItemChisel extends Item implements IChiselItem {
     }
 
     @Override
-    public void addInformation(ItemStack stack, @Nullable World world, List<ITextComponent> list, ITooltipFlag flag) {
-        list.add(TT_CHISEL_GUI.format(TextFormatting.AQUA, TextFormatting.GRAY));
+    public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
+        list.add(TT_CHISEL_GUI.format(ChatFormatting.AQUA, ChatFormatting.GRAY));
         if (type != ChiselType.IRON || Configurations.ironChiselCanLeftClick) {
-            list.add(TT_CHISEL_LC1.format(TextFormatting.AQUA, TextFormatting.GRAY));
-            list.add(TT_CHISEL_LC2.format(TextFormatting.AQUA, TextFormatting.GRAY));
+            list.add(TT_CHISEL_LC1.format(ChatFormatting.AQUA, ChatFormatting.GRAY));
+            list.add(TT_CHISEL_LC2.format(ChatFormatting.AQUA, ChatFormatting.GRAY));
         }
         if (type != ChiselType.IRON || Configurations.ironChiselHasModes) {
-            list.add(new StringTextComponent(""));
+            list.add(new TextComponent(""));
             list.add(TT_CHISEL_MODES.getComponent());
             list.add(TT_CHISEL_SELECTED_MODE.format(TextFormatting.GREEN, new TranslationTextComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
         }

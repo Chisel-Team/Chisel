@@ -2,7 +2,7 @@ package team.chisel.api.chunkdata;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.core.BlockPos;
 
 /**
  * An object which contains info about the offset data for a chunk.

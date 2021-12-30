@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 
 import io.netty.buffer.ByteBuf;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.api.IChiselItem;
 import team.chisel.common.util.NBTUtil;
@@ -40,7 +40,7 @@ public class PacketHitechSettings {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        ItemStack stack = ctx.get().getSender().inventory.getStackInSlot(chiselSlot);
+        ItemStack stack = ctx.get().getSender().inventory.getItem(chiselSlot);
         if (stack.getItem() instanceof IChiselItem) { // instanceof check for broken chisel
             NBTUtil.setHitechType(stack, type);
             NBTUtil.setHitechRotate(stack, rotate);

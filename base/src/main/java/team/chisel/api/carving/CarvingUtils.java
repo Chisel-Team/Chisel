@@ -8,14 +8,14 @@ import com.google.common.base.Objects;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tags.ITag.INamedTag;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.Tag.Named;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import team.chisel.Chisel;
 import team.chisel.common.init.ChiselSounds;
 
@@ -52,22 +52,22 @@ public class CarvingUtils {
 	}
 	
 	public static boolean stacksEqual(ItemStack stack1, ItemStack stack2) {
-        return ItemStack.areItemStacksEqual(stack1, stack2) && ItemStack.areItemStackTagsEqual(stack1, stack2);
+        return ItemStack.matches(stack1, stack2) && ItemStack.tagMatches(stack1, stack2);
 	}
 	
 	public static int hashStack(ItemStack stack) {
 	    return Objects.hashCode(stack.getItem(), stack.getTag());
 	}
 	
-	private static TranslationTextComponent getDisplayName(INamedTag<?> tag, String name) {
+	private static TranslatableComponent getDisplayName(Named<?> tag, String name) {
 	    return Chisel.registrate().addLang("group", tag.getName(), name);
 	}
 
-    public static ICarvingGroup itemGroup(INamedTag<Block> blocks, String name) {
+    public static ICarvingGroup itemGroup(Named<Block> blocks, String name) {
         return new BlockTagGroup(blocks, getDisplayName(blocks, name));
     }
 
-    public static ICarvingGroup blockGroup(INamedTag<Item> items, String name) {
+    public static ICarvingGroup blockGroup(Named<Item> items, String name) {
         return new ItemTagGroup(items, getDisplayName(items, name));
     }
 	

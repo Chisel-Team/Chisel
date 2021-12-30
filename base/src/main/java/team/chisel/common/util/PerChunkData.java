@@ -15,17 +15,17 @@ import com.google.common.collect.Maps;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.chunk.IChunk;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
@@ -47,18 +47,18 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         private final ChunkPos chunk;
         private final String key;
-        private final @Nonnull CompoundNBT tag;
+        private final @Nonnull CompoundTag tag;
 
-        public MessageChunkData(Chunk chunk, String key, @Nonnull CompoundNBT tag) {
+        public MessageChunkData(LevelChunk chunk, String key, @Nonnull CompoundTag tag) {
             this(chunk.getPos(), key, tag);
         }
         
         public MessageChunkData(String key, IChunkData<?> iChunkData) {
-            this((ChunkPos) null, key, new CompoundNBT());
+            this((ChunkPos) null, key, new CompoundTag());
             this.tag.put("l", iChunkData.writeToNBT());
         }
 
-        public void encode(PacketBuffer buf) {
+        public void encode(FriendlyByteBuf buf) {
             if (chunk == null) {
                 buf.writeBoolean(false);
             } else {
@@ -66,22 +66,22 @@ public enum PerChunkData implements IChunkDataRegistry {
                 buf.writeInt(chunk.x);
                 buf.writeInt(chunk.z);
             }
-            buf.writeString(key, 64);
-            buf.writeCompoundTag(tag);
+            buf.writeUtf(key, 64);
+            buf.writeNbt(tag);
         }
 
-        public static MessageChunkData decode(PacketBuffer buf) {
+        public static MessageChunkData decode(FriendlyByteBuf buf) {
             ChunkPos chunk = null;
             if (buf.readBoolean()) {
                 chunk = new ChunkPos(buf.readInt(), buf.readInt());
             }
-            return new MessageChunkData(chunk, buf.readString(64), buf.readCompoundTag());
+            return new MessageChunkData(chunk, buf.readUtf(64), buf.readNbt());
         }
         
         public void handle(Supplier<NetworkEvent.Context> ctx) {
             ctx.get().enqueueWork(() -> {
         
-                Chunk chunk = null;
+                LevelChunk chunk = null;
                 if (this.chunk != null) {
                     chunk = ClientProxy.getClientWorld().getChunk(this.chunk.x, this.chunk.z);
                 }
@@ -90,10 +90,10 @@ public enum PerChunkData implements IChunkDataRegistry {
                     data.readFromNBT(chunk, this.tag);
                     int x = chunk.getPos().x << 4;
                     int z = chunk.getPos().z << 4;
-                    ClientProxy.getWorldRenderer().markBlockRangeForRenderUpdate(x, 0, z, x, 255, z);
+                    ClientProxy.getWorldRenderer().setBlocksDirty(x, 0, z, x, 255, z);
                 } else {
                     for (ChunkPos pos : data.readFromNBT(this.tag.getList("l", Constants.NBT.TAG_COMPOUND))) {
-                        ClientProxy.getWorldRenderer().markBlockRangeForRenderUpdate(pos.x, 0, pos.z, pos.x, 255, pos.z);
+                        ClientProxy.getWorldRenderer().setBlocksDirty(pos.x, 0, pos.z, pos.x, 255, pos.z);
                     }
                 }
             });
@@ -108,7 +108,7 @@ public enum PerChunkData implements IChunkDataRegistry {
      */
     public static class ChunkDataBase<T extends NBTSaveable> implements IChunkData<T> {
 
-        protected final Map<Pair<RegistryKey<World>, ChunkPos>, T> data = new HashMap<>();
+        protected final Map<Pair<ResourceKey<Level>, ChunkPos>, T> data = new HashMap<>();
         protected final Class<? extends T> clazz;
         private final boolean needsClientSync;
 
@@ -118,13 +118,13 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
         
         @Override
-        public ListNBT writeToNBT() {
-            ListNBT tags = new ListNBT();
-            for (Entry<Pair<RegistryKey<World>, ChunkPos>, T> e : data.entrySet()) {
-                CompoundNBT entry = new CompoundNBT();
-                entry.putString("d", e.getKey().getLeft().getLocation().toString());
+        public ListTag writeToNBT() {
+            ListTag tags = new ListTag();
+            for (Entry<Pair<ResourceKey<Level>, ChunkPos>, T> e : data.entrySet()) {
+                CompoundTag entry = new CompoundTag();
+                entry.putString("d", e.getKey().getLeft().location().toString());
                 entry.putLong("p", (e.getKey().getRight().x << 32) | e.getKey().getRight().z);
-                CompoundNBT data = new CompoundNBT();
+                CompoundTag data = new CompoundTag();
                 e.getValue().write(data);
                 entry.put("v", data);
                 tags.add(entry);
@@ -133,19 +133,19 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         @Override
-        public void writeToNBT(@Nonnull IChunk chunk, @Nonnull CompoundNBT tag) {
-            T t = data.get(Pair.of(((World)chunk.getWorldForge()).getDimensionKey(), chunk.getPos()));
+        public void writeToNBT(@Nonnull ChunkAccess chunk, @Nonnull CompoundTag tag) {
+            T t = data.get(Pair.of(((Level)chunk.getWorldForge()).dimension(), chunk.getPos()));
             if (t != null) {
                 t.write(tag);
             }
         }
 
         @Override
-        public Iterable<ChunkPos> readFromNBT(@Nonnull ListNBT tags) {
+        public Iterable<ChunkPos> readFromNBT(@Nonnull ListTag tags) {
             List<ChunkPos> changed = new ArrayList<>();
             for (int i = 0; i < tags.size(); i++) {
-                CompoundNBT entry = tags.getCompound(i);
-                RegistryKey<World> dim = RegistryKey.getOrCreateKey(Registry.WORLD_KEY, new ResourceLocation(entry.getString("d")));
+                CompoundTag entry = tags.getCompound(i);
+                ResourceKey<Level> dim = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(entry.getString("d")));
                 long coordsRaw = entry.getLong("p");
                 ChunkPos coords = new ChunkPos((int) ((coordsRaw >>> 32) & 0xFFFFFFFF), (int) (coordsRaw & 0xFFFFFFFF));
                 if (readFromNBT(dim, coords, entry.getCompound("v"))) {
@@ -156,13 +156,13 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         @Override
-        public void readFromNBT(@Nonnull IChunk chunk, @Nonnull CompoundNBT tag) {
-            RegistryKey<World> type = ((World)chunk.getWorldForge()).getDimensionKey();
+        public void readFromNBT(@Nonnull ChunkAccess chunk, @Nonnull CompoundTag tag) {
+            ResourceKey<Level> type = ((Level)chunk.getWorldForge()).dimension();
             ChunkPos coords = chunk.getPos();
             readFromNBT(type, coords, tag);
         }
         
-        private boolean readFromNBT(RegistryKey<World> dim, ChunkPos coords, CompoundNBT tag) {
+        private boolean readFromNBT(ResourceKey<Level> dim, ChunkPos coords, CompoundTag tag) {
             if (tag.isEmpty()) {
                 data.remove(dim, coords);
                 return false;
@@ -172,7 +172,7 @@ public enum PerChunkData implements IChunkDataRegistry {
             return true;
         }
         
-        protected T getOrCreateNew(RegistryKey<World> dim, @Nonnull ChunkPos coords) {
+        protected T getOrCreateNew(ResourceKey<Level> dim, @Nonnull ChunkPos coords) {
             val pair = Pair.of(dim, coords);
             T t = data.get(pair);
             if (t == null) {
@@ -192,7 +192,7 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         @Override
-        public T getDataForChunk(RegistryKey<World> dim, @Nonnull ChunkPos coords) {
+        public T getDataForChunk(ResourceKey<Level> dim, @Nonnull ChunkPos coords) {
             return getOrCreateNew(dim, coords);
         }
     }
@@ -216,7 +216,7 @@ public enum PerChunkData implements IChunkDataRegistry {
     @SubscribeEvent
     public void onChunkSave(ChunkDataEvent.Save event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
-            CompoundNBT tag = new CompoundNBT();
+            CompoundTag tag = new CompoundTag();
             e.getValue().writeToNBT(event.getChunk(), tag);
             event.getData().put("chisel:" + e.getKey(), tag);
         }
@@ -225,11 +225,11 @@ public enum PerChunkData implements IChunkDataRegistry {
     @SubscribeEvent
     public void onChunkLoad(ChunkDataEvent.Load event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
-            CompoundNBT tag = event.getData().getCompound("chisel:" + e.getKey());
-            IChunk chunk = event.getChunk();
+            CompoundTag tag = event.getData().getCompound("chisel:" + e.getKey());
+            ChunkAccess chunk = event.getChunk();
             e.getValue().readFromNBT(chunk, tag);
-            if (chunk instanceof Chunk) {
-                updateClient((Chunk) chunk, e.getKey(), e.getValue());
+            if (chunk instanceof LevelChunk) {
+                updateClient((LevelChunk) chunk, e.getKey(), e.getValue());
             }
         }
     }
@@ -238,20 +238,20 @@ public enum PerChunkData implements IChunkDataRegistry {
     public void onPlayerJoin(PlayerLoggedInEvent event) {
         for (Entry<String, IChunkData<?>> e : data.entrySet()) {
             if (e.getValue().requiresClientSync()) {
-                Chisel.network.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()), new MessageChunkData(e.getKey(), e.getValue()));
+                Chisel.network.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) event.getPlayer()), new MessageChunkData(e.getKey(), e.getValue()));
             }
         }
     }
 
-    public void chunkModified(Chunk chunk, String key) {
+    public void chunkModified(LevelChunk chunk, String key) {
         IChunkData<?> cd = data.get(key);
-        chunk.setModified(true);
+        chunk.setUnsaved(true);
         updateClient(chunk, key, cd);
     }
     
-    private void updateClient(@Nonnull Chunk chunk, String key, IChunkData<?> cd) {
+    private void updateClient(@Nonnull LevelChunk chunk, String key, IChunkData<?> cd) {
         if (cd.requiresClientSync()) {
-            CompoundNBT tag = new CompoundNBT();
+            CompoundTag tag = new CompoundTag();
             cd.writeToNBT(chunk, tag);
             Chisel.network.send(PacketDistributor.TRACKING_CHUNK.with(() -> chunk), new MessageChunkData(chunk, key, tag));
         }

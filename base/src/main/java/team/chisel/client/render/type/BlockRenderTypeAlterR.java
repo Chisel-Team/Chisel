@@ -1,8 +1,8 @@
 package team.chisel.client.render.type;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.BlockGetter;
 import team.chisel.client.render.ctx.BlockRenderContextAlterR;
 import team.chisel.client.render.texture.ChiselTextureAlterR;
 import team.chisel.ctm.api.texture.ICTMTexture;
@@ -20,13 +20,13 @@ public class BlockRenderTypeAlterR implements ITextureType {
     }
 
     @Override
-    public ITextureContext getBlockRenderContext(BlockState state, IBlockReader world, BlockPos pos, ICTMTexture<?> tex) {
+    public ITextureContext getBlockRenderContext(BlockState state, BlockGetter world, BlockPos pos, ICTMTexture<?> tex) {
         return new BlockRenderContextAlterR(pos, (ChiselTextureAlterR) tex);
     }
 
     @Override
     public ITextureContext getContextFromData(long data) {
-        return new TextureContextPosition(BlockPos.fromLong(data));
+        return new TextureContextPosition(BlockPos.of(data));
     }
 
     @Override

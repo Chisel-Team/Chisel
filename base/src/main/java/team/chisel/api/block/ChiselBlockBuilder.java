@@ -36,15 +36,15 @@ import lombok.Value;
 import lombok.experimental.Accessors;
 import lombok.experimental.NonFinal;
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.TagsProvider;
 import net.minecraft.item.Item;
-import net.minecraft.tags.ITag.INamedTag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tags.Tag.Named;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.api.carving.CarvingUtils;
@@ -69,7 +69,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     private final BlockProvider<T> provider;
 
-    private @Nullable INamedTag<Block> group;
+    private @Nullable Named<Block> group;
 
     @Setter(AccessLevel.NONE)
     private Set<ResourceLocation> appliedTags = new HashSet<>();
@@ -86,7 +86,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private boolean opaque = true;
     
     @Accessors(fluent = true)
-    private Supplier<Supplier<RenderType>> layer = () -> RenderType::getSolid;
+    private Supplier<Supplier<RenderType>> layer = () -> RenderType::solid;
     
     @Accessors(fluent = true)
     private ModelTemplate model = ModelTemplates.simpleBlock();
@@ -95,7 +95,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private RecipeTemplate recipe = RecipeTemplate.none();
     
     @Accessors(fluent = true)
-    private NonNullBiConsumer<RegistrateBlockLootTables, T> loot = RegistrateBlockLootTables::registerDropSelfLootTable;
+    private NonNullBiConsumer<RegistrateBlockLootTables, T> loot = RegistrateBlockLootTables::dropSelf;
 
     @Accessors(fluent = true)
     private NonNullSupplier<? extends Block> initialProperties;
@@ -103,7 +103,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     @Accessors(fluent = true)
     private MaterialColor color;
 
-    protected ChiselBlockBuilder(ChiselBlockFactory parent, Registrate registrate, Material material, String blockName, @Nullable INamedTag<Block> group, BlockProvider<T> provider) {
+    protected ChiselBlockBuilder(ChiselBlockFactory parent, Registrate registrate, Material material, String blockName, @Nullable Named<Block> group, BlockProvider<T> provider) {
         this.parent = parent;
         this.registrate = registrate;
         this.material = material;

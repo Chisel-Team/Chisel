@@ -5,11 +5,11 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 
 import lombok.RequiredArgsConstructor;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.network.NetworkEvent;
 import team.chisel.client.ClientProxy;
 
@@ -19,20 +19,20 @@ public class MessageUpdateAutochiselSource {
     private final @Nonnull BlockPos pos;
     private final @Nonnull ItemStack stack;
     
-    public void encode(PacketBuffer buf) {
-        buf.writeLong(pos.toLong());
-        buf.writeItemStack(stack);
+    public void encode(FriendlyByteBuf buf) {
+        buf.writeLong(pos.asLong());
+        buf.writeItem(stack);
     }
 
-    public static MessageUpdateAutochiselSource decode(PacketBuffer buf) {
-        return new MessageUpdateAutochiselSource(BlockPos.fromLong(buf.readLong()), buf.readItemStack());
+    public static MessageUpdateAutochiselSource decode(FriendlyByteBuf buf) {
+        return new MessageUpdateAutochiselSource(BlockPos.of(buf.readLong()), buf.readItem());
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            World world = ClientProxy.getClientWorld();
-            if (world.isBlockLoaded(pos)) {
-                TileEntity te = world.getTileEntity(pos);
+            Level world = ClientProxy.getClientWorld();
+            if (world.hasChunkAt(pos)) {
+                BlockEntity te = world.getBlockEntity(pos);
                 if (te instanceof TileAutoChisel) {
                     ((TileAutoChisel) te).setSource(stack);
                 }

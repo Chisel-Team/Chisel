@@ -8,8 +8,8 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Strings;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
@@ -29,32 +29,32 @@ public class NBTUtil {
     private static final String KEY_MODE = "mode";
 
     @SuppressWarnings("null")
-    public static CompoundNBT getTag(ItemStack stack) {
+    public static CompoundTag getTag(ItemStack stack) {
         if (!stack.hasTag()) {
-            stack.setTag(new CompoundNBT());
+            stack.setTag(new CompoundTag());
         }
         // Warning suppressed: tag is guaranteed to be set from above code
         return stack.getTag();
     }
 
-    public static CompoundNBT getChiselTag(ItemStack stack) {
-        CompoundNBT tag = getTag(stack);
+    public static CompoundTag getChiselTag(ItemStack stack) {
+        CompoundTag tag = getTag(stack);
         if (!tag.contains(KEY_TAG)) {
-            tag.put(KEY_TAG, new CompoundNBT());
+            tag.put(KEY_TAG, new CompoundTag());
         }
         return tag.getCompound(KEY_TAG);
     }
     
-    public static void setChiselTag(ItemStack stack, CompoundNBT tag) {
+    public static void setChiselTag(ItemStack stack, CompoundTag tag) {
         getTag(stack).put(KEY_TAG, tag);
     }
 
     public static ItemStack getChiselTarget(ItemStack stack) {
-        return ItemStack.read(getChiselTag(stack).getCompound(KEY_TARGET));
+        return ItemStack.of(getChiselTag(stack).getCompound(KEY_TARGET));
     }
 
     public static void setChiselTarget(ItemStack chisel, ItemStack target) {
-        getChiselTag(chisel).put(KEY_TARGET, target.write(new CompoundNBT()));
+        getChiselTag(chisel).put(KEY_TARGET, target.save(new CompoundTag()));
     }
     
     @SuppressWarnings("null") // Can't use type annotations with JSR
@@ -67,7 +67,7 @@ public class NBTUtil {
     }
     
     public static int getHitechSelection(ItemStack stack) {
-        CompoundNBT tag = getChiselTag(stack);
+        CompoundTag tag = getChiselTag(stack);
         return tag.contains(KEY_SELECTION_SLOT) ? tag.getInt(KEY_SELECTION_SLOT) : -1;
     }
 
@@ -76,7 +76,7 @@ public class NBTUtil {
     }
     
     public static int getHitechTarget(ItemStack stack) {
-        CompoundNBT tag = getChiselTag(stack);
+        CompoundTag tag = getChiselTag(stack);
         return tag.contains(KEY_TARGET_SLOT) ? tag.getInt(KEY_TARGET_SLOT) : -1;
     }
 

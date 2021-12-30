@@ -2,7 +2,7 @@ package team.chisel.client.sound;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.block.SoundType;
+import net.minecraft.world.level.block.SoundType;
 import team.chisel.common.init.ChiselSounds;
 
 @ParametersAreNonnullByDefault

@@ -13,35 +13,35 @@ import org.apache.commons.lang3.Validate;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.DiggingParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SUpdateTileEntityPacket;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.INameable;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.core.Direction;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.Nameable;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.common.util.LazyOptional;
@@ -65,7 +65,7 @@ import team.chisel.common.inventory.ContainerAutoChisel;
 import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
-public class TileAutoChisel extends TileEntity implements ITickableTileEntity, INameable, INamedContainerProvider {
+public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, Nameable, MenuProvider {
     
     private class DirtyingStackHandler extends ItemStackHandler {
         
@@ -75,7 +75,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         @Override
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
-            markDirty();
+            setChanged();
         }
     }
     
@@ -193,7 +193,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         }
 
         public void setEnergyStored(int energy) {
-            this.energy = MathHelper.clamp(energy, 0, getMaxEnergyStored());
+            this.energy = Mth.clamp(energy, 0, getMaxEnergyStored());
         }
     };
     private final EnergyStorageMutable energyStorage = new EnergyStorageMutable(10000, POWER_PER_TICK * 2, POWER_PER_TICK);
@@ -211,10 +211,10 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         }
     }
     
-    public final IIntArray energyData = new IIntArray() {
+    public final ContainerData energyData = new ContainerData() {
         
         @Override
-        public int size() {
+        public int getCount() {
             return 6;
         }
         
@@ -252,7 +252,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     private int progress = 0;
     
     @Setter
-    private @Nullable ITextComponent customName;
+    private @Nullable Component customName;
     
     public TileAutoChisel() {
         super(ChiselTileEntities.AUTO_CHISEL_TE.get());
@@ -316,7 +316,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     
     protected void updateClientSlot() {
         if (sourceSlot != prevSource) {
-            Chisel.network.send(PacketDistributor.TRACKING_CHUNK.with(() -> (Chunk) /* TODO Fix in forge */ getWorld().getChunk(getPos())), new MessageUpdateAutochiselSource(getPos(), sourceSlot < 0 ? ItemStack.EMPTY : inputInv.getStackInSlot(sourceSlot)));
+            Chisel.network.send(PacketDistributor.TRACKING_CHUNK.with(() -> (LevelChunk) /* TODO Fix in forge */ getLevel().getChunk(getBlockPos())), new MessageUpdateAutochiselSource(getBlockPos(), sourceSlot < 0 ? ItemStack.EMPTY : inputInv.getStackInSlot(sourceSlot)));
         }
         prevSource = sourceSlot;
     }
@@ -330,7 +330,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     
     @Override
     public void tick() {
-        if (getWorld() == null || getWorld().isRemote) {
+        if (getLevel() == null || getLevel().isClientSide) {
             return;
         }
                 
@@ -361,7 +361,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
         IChiselItem chiselitem = (IChiselItem) chisel.getItem();
         
         // Make sure to run this block if the source stack is removed, so a new one can be found
-        if ((sourceSlot < 0 && getWorld().getGameTime() % 20 == 0) || sourceSlot >= 0) {
+        if ((sourceSlot < 0 && getLevel().getGameTime() % 20 == 0) || sourceSlot >= 0) {
             // Reset source slot if it's been removed
             if (source.isEmpty()) {
                 setSourceSlot(-1);
@@ -376,7 +376,7 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
                     ItemStack stack = getInputInv().getStackInSlot(i);
                     if (!stack.isEmpty() && g.equals(CarvingUtils.getChiselRegistry().getGroup(stack.getItem()).orElse(null))) {
                         res.setCount(stack.getCount());
-                        if (canOutput(res) && chiselitem.canChisel(getWorld(), FakePlayerFactory.getMinecraft((ServerWorld) getWorld()), chisel, v)) {
+                        if (canOutput(res) && chiselitem.canChisel(getLevel(), FakePlayerFactory.getMinecraft((ServerLevel) getLevel()), chisel, v)) {
                             setSourceSlot(i);
                             source = res.copy();
                         }
@@ -415,16 +415,16 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
                     source = source.copy();
                     chisel = chisel.copy();
 
-                    ServerPlayerEntity player = FakePlayerFactory.getMinecraft((ServerWorld) getWorld());
-                    player.inventory.mainInventory.set(player.inventory.currentItem, chisel);
+                    ServerPlayer player = FakePlayerFactory.getMinecraft((ServerLevel) getLevel());
+                    player.inventory.items.set(player.inventory.selected, chisel);
                     res = chiselitem.craftItem(chisel, source, res, player, $ -> {}); // TODO should this send an explicit packet for item break? currently just checks for empty stack on the client
-                    player.inventory.mainInventory.set(player.inventory.currentItem, ItemStack.EMPTY);
+                    player.inventory.items.set(player.inventory.selected, ItemStack.EMPTY);
 
-                    chiselitem.onChisel(getWorld(), player, chisel, v);
+                    chiselitem.onChisel(getLevel(), player, chisel, v);
 
                     inputInv.setStackInSlot(sourceSlot, source);
                     
-                    Chisel.network.send(PacketDistributor.NEAR.with(targetNearby()), new MessageAutochiselFX(getPos(), chisel, sourceVar.getBlock().getDefaultState()));
+                    Chisel.network.send(PacketDistributor.NEAR.with(targetNearby()), new MessageAutochiselFX(getBlockPos(), chisel, sourceVar.getBlock().defaultBlockState()));
 
                     otherInv.setStackInSlot(0, chisel);
 
@@ -446,8 +446,8 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     }
     
     private Supplier<TargetPoint> targetNearby() {
-    	Vector3d pos = Vector3d.copy(getPos()).add(0.5, 0.5, 0.5);
-        return TargetPoint.p(pos.x, pos.y, pos.z, 64 * 64, getWorld().getDimensionKey());
+    	Vec3 pos = Vec3.atLowerCornerOf(getBlockPos()).add(0.5, 0.5, 0.5);
+        return TargetPoint.p(pos.x, pos.y, pos.z, 64 * 64, getLevel().dimension());
     }
     
     private final EnumMap<Direction, LazyOptional<IItemHandler>> viewCache = new EnumMap<>(Direction.class);
@@ -466,27 +466,27 @@ public class TileAutoChisel extends TileEntity implements ITickableTileEntity, I
     
     @Override
     @Nullable
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(getPos(), 0, getUpdateTag());
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return new ClientboundBlockEntityDataPacket(getBlockPos(), 0, getUpdateTag());
     }
     
     @Override
-    public CompoundNBT getUpdateTag() {
-        CompoundNBT ret = super.getUpdateTag();
+    public CompoundTag getUpdateTag() {
+        CompoundTag ret = super.getUpdateTag();
         if (hasCustomName()) {
-            ret.putString("customName", ITextComponent.Serializer.toJson(getName()));
+            ret.putString("customName", Component.Serializer.toJson(getName()));
         }
         return ret;
     }
     
     @Override
-    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-        handleUpdateTag(getWorld().getBlockState(pkt.getPos()), pkt.getNbtCompound());
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        handleUpdateTag(getLevel().getBlockState(pkt.getPos()), pkt.getTag());
         super.onDataPacket(net, pkt);
     }
 
     @Override
-    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+    public void handleUpdateTag(BlockState state, CompoundTag tag) {
         if (tag.contains("customName")) {
             setCustomName(ITextComponent.Serializer.getComponentFromJson(tag.getString("customName")));
         }

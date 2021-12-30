@@ -1,7 +1,7 @@
 package team.chisel.api.block;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import team.chisel.api.carving.ICarvingVariation;
 
 /**
@@ -12,5 +12,5 @@ public interface VariationData extends ICarvingVariation {
     
     String getName();
     
-    TranslationTextComponent getDisplayName();
+    TranslatableComponent getDisplayName();
 }

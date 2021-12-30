@@ -2,24 +2,24 @@ package team.chisel.api.chunkdata;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunk;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.ChunkAccess;
 
 public interface IChunkData<T> {
     
-    ListNBT writeToNBT();
+    ListTag writeToNBT();
 
-    void writeToNBT(@Nonnull IChunk chunk, @Nonnull CompoundNBT tag);
+    void writeToNBT(@Nonnull ChunkAccess chunk, @Nonnull CompoundTag tag);
     
-    Iterable<ChunkPos> readFromNBT(@Nonnull ListNBT tag);
+    Iterable<ChunkPos> readFromNBT(@Nonnull ListTag tag);
 
-    void readFromNBT(@Nonnull IChunk chunk, @Nonnull CompoundNBT tag);
+    void readFromNBT(@Nonnull ChunkAccess chunk, @Nonnull CompoundTag tag);
 
     boolean requiresClientSync();
 
-    T getDataForChunk(RegistryKey<World> dimID, @Nonnull ChunkPos chunk);
+    T getDataForChunk(ResourceKey<Level> dimID, @Nonnull ChunkPos chunk);
 }

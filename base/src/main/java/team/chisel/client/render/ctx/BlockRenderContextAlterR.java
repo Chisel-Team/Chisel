@@ -5,8 +5,8 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 
 import lombok.Getter;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import team.chisel.client.render.texture.ChiselTextureAlterR;
 import team.chisel.ctm.client.texture.ctx.TextureContextPosition;
 
@@ -21,7 +21,7 @@ public class BlockRenderContextAlterR extends TextureContextPosition {
 
         int num = 0;
 
-        rand.setSeed(MathHelper.getPositionRandom(pos));
+        rand.setSeed(Mth.getSeed(pos));
         rand.nextBoolean();
 
         int x = pos.getX();

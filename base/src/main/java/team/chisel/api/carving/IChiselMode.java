@@ -5,13 +5,13 @@ import java.util.Locale;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import team.chisel.Chisel;
 import team.chisel.common.util.NonnullType;
 import team.chisel.common.util.Point2i;
@@ -31,9 +31,9 @@ public interface IChiselMode {
      *            The side of the block being targeted.
      * @return All valid positions to be chiseled.
      */
-    Iterable<@NonnullType ? extends BlockPos> getCandidates(PlayerEntity player, BlockPos pos, Direction side);
+    Iterable<@NonnullType ? extends BlockPos> getCandidates(Player player, BlockPos pos, Direction side);
 
-    AxisAlignedBB getBounds(Direction side);
+    AABB getBounds(Direction side);
     
 	/**
 	 * Implemented implicitly by enums. If your IChiselMode is not an enum constant, this needs to be implemented explicitly.
@@ -50,16 +50,16 @@ public interface IChiselMode {
 	    return getUnlocName() + ".desc";
 	}
 	
-	default ITextComponent getLocalizedName() {
-	    return new TranslationTextComponent(getUnlocName());
+	default Component getLocalizedName() {
+	    return new TranslatableComponent(getUnlocName());
 	}
 	
-	default ITextComponent getLocalizedDescription() {
-	    return new TranslationTextComponent(getUnlocDescription());
+	default Component getLocalizedDescription() {
+	    return new TranslatableComponent(getUnlocDescription());
 	}
 
     default long[] getCacheState(BlockPos origin, Direction side) {
-        return new long[] {origin.toLong(), side.ordinal()};
+        return new long[] {origin.asLong(), side.ordinal()};
     }
     
     ResourceLocation SPRITES = new ResourceLocation(Chisel.MOD_ID, "textures/mode_icons.png");

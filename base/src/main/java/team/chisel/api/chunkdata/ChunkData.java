@@ -2,11 +2,11 @@ package team.chisel.api.chunkdata;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.LevelChunk;
 
 public class ChunkData {
 
@@ -32,15 +32,15 @@ public class ChunkData {
         }
     }
 
-    public static IOffsetData getOffsetForChunk(World world, @Nonnull BlockPos pos) {
+    public static IOffsetData getOffsetForChunk(Level world, @Nonnull BlockPos pos) {
         return getOffsetForChunk(world.getChunkAt(pos));
     }
 
-    public static IOffsetData getOffsetForChunk(Chunk chunk) {
-        return getOffsetForChunk(chunk.getWorld().getDimensionKey(), chunk.getPos());
+    public static IOffsetData getOffsetForChunk(LevelChunk chunk) {
+        return getOffsetForChunk(chunk.getLevel().dimension(), chunk.getPos());
     }
 
-    public static IOffsetData getOffsetForChunk(RegistryKey<World> dimID, ChunkPos chunk) {
+    public static IOffsetData getOffsetForChunk(ResourceKey<Level> dimID, ChunkPos chunk) {
         IChunkData<? extends IOffsetData> data = offsetRegistry.<IChunkData<? extends IOffsetData>> getData(OFFSET_DATA_KEY);
         return data == null ? DUMMY : data.getDataForChunk(dimID, chunk);
     }

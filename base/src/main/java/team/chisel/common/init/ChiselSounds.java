@@ -11,8 +11,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;

@@ -13,11 +13,11 @@ import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.NonNullLazyValue;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolType;
@@ -124,7 +124,7 @@ public class Chisel implements Reference {
                 block.properties.harvestTool(tool);
                 block.properties.harvestLevel(level);
                 if (level > 0) {
-                    block.properties.setRequiresTool();
+                    block.properties.requiresCorrectToolForDrops();
                 }
             });
             ObfuscationReflectionHelper.setPrivateValue(ForgeHooks.class, null, false, "toolInit");
@@ -135,7 +135,7 @@ public class Chisel implements Reference {
     }
 
     public static Registrate registrate() {
-        return REGISTRATE.getValue();
+        return REGISTRATE.get();
     }
 
     private void setup(FMLCommonSetupEvent event) {
@@ -210,14 +210,14 @@ public class Chisel implements Reference {
     }
 
     private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output) {
-        CompoundNBT message = new CompoundNBT();
+        CompoundTag message = new CompoundTag();
 
         message.putInt("energy", energy);
-        message.put("input", new CompoundNBT());
-        message.put("output", new CompoundNBT());
+        message.put("input", new CompoundTag());
+        message.put("output", new CompoundTag());
 
-        input.write(message.getCompound("input"));
-        output.write(message.getCompound("output"));
+        input.save(message.getCompound("input"));
+        output.save(message.getCompound("output"));
 
         InterModComms.sendTo("thermalexpansion", "addcompactorpressrecipe", () -> message);
     }

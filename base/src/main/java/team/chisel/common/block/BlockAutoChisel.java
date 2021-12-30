@@ -4,38 +4,38 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.items.IItemHandler;
 
 @ParametersAreNonnullByDefault
 public class BlockAutoChisel extends Block {
     
     @SuppressWarnings("null")
-    private static final VoxelShape COLLISION_SHAPE = VoxelShapes.or(
-            makeCuboidShape(0, 0, 0, 16, 10, 16),
-            makeCuboidShape(0, 10, 0, 1, 16, 16),
-            makeCuboidShape(15, 10, 0, 16, 16, 16),
-            makeCuboidShape(0, 10, 0, 16, 16, 1),
-            makeCuboidShape(0, 10, 15, 16, 16, 16),
-            makeCuboidShape(0, 15, 0, 16, 16, 16));
+    private static final VoxelShape COLLISION_SHAPE = Shapes.or(
+            box(0, 0, 0, 16, 10, 16),
+            box(0, 10, 0, 1, 16, 16),
+            box(15, 10, 0, 16, 16, 16),
+            box(0, 10, 0, 16, 16, 1),
+            box(0, 10, 15, 16, 16, 16),
+            box(0, 15, 0, 16, 16, 16));
     
-    private static final VoxelShape SELECTION_SHAPE = VoxelShapes.fullCube();
+    private static final VoxelShape SELECTION_SHAPE = Shapes.block();
 
     public BlockAutoChisel(Block.Properties properties) {
         super(properties);
@@ -54,27 +54,27 @@ public class BlockAutoChisel extends Block {
 
     @Override
     @Nullable
-    public TileEntity createTileEntity(@Nullable BlockState state, @Nullable IBlockReader world) {
+    public BlockEntity createTileEntity(@Nullable BlockState state, @Nullable BlockGetter world) {
         return new TileAutoChisel();
     }
     
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isRemote) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+    public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+        if (!worldIn.isClientSide) {
+            BlockEntity tileentity = worldIn.getBlockEntity(pos);
             if (tileentity instanceof TileAutoChisel) {
-                player.openContainer((INamedContainerProvider) tileentity);
+                player.openMenu((MenuProvider) tileentity);
                 // TODO maybe? player.addStat(Stats.INTERACT_WITH_AUTO_CHISEL);
             }
         }
-        return ActionResultType.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-        if (stack.hasDisplayName()) {
-            TileEntity tileentity = worldIn.getTileEntity(pos);
+    public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(worldIn, pos, state, placer, stack);
+        if (stack.hasCustomHoverName()) {
+            BlockEntity tileentity = worldIn.getBlockEntity(pos);
 
             if (tileentity instanceof TileAutoChisel) {
                 ((TileAutoChisel) tileentity).setCustomName(stack.getDisplayName());

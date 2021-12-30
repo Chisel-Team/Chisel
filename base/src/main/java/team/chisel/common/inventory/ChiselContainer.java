@@ -4,13 +4,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Getter;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.inventory.container.ClickType;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionHand;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IVariationRegistry;
@@ -19,29 +19,29 @@ import team.chisel.common.util.SoundUtil;
 
 @Getter
 @ParametersAreNonnullByDefault
-public class ChiselContainer extends Container {
+public class ChiselContainer extends AbstractContainerMenu {
 
     protected final InventoryChiselSelection inventoryChisel;
-    protected final PlayerInventory inventoryPlayer;
+    protected final Inventory inventoryPlayer;
     
-    protected final Hand hand;
+    protected final InteractionHand hand;
     protected final int chiselSlot;
     protected final ItemStack chisel;
     protected final IVariationRegistry carving;
     protected Slot inputSlot;
 
-    public ChiselContainer(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer) {
-        this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 60), Hand.MAIN_HAND);
+    public ChiselContainer(MenuType<? extends ChiselContainer> type, int windowId, Inventory inventoryplayer) {
+        this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 60), InteractionHand.MAIN_HAND);
     }
     
-    public ChiselContainer(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer, InventoryChiselSelection inv, Hand hand) {
+    public ChiselContainer(MenuType<? extends ChiselContainer> type, int windowId, Inventory inventoryplayer, InventoryChiselSelection inv, InteractionHand hand) {
         super(type, windowId);
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
         
         this.hand = hand;
-        this.chiselSlot = hand == Hand.MAIN_HAND ? inventoryplayer.currentItem : inventoryplayer.getSizeInventory() - 1;
-        this.chisel = inventoryplayer.getStackInSlot(chiselSlot);
+        this.chiselSlot = hand == InteractionHand.MAIN_HAND ? inventoryplayer.selected : inventoryplayer.getContainerSize() - 1;
+        this.chisel = inventoryplayer.getItem(chiselSlot);
         this.carving = CarvingUtils.getChiselRegistry();
 
         inv.container = this;
@@ -50,7 +50,7 @@ public class ChiselContainer extends Container {
 
         if (!chisel.isEmpty() && chisel.hasTag()) {
             ItemStack stack = NBTUtil.getChiselTarget(chisel);
-            inventoryChisel.setInventorySlotContents(getInventoryChisel().size, stack);
+            inventoryChisel.setItem(getInventoryChisel().size, stack);
         }
         
         inventoryChisel.updateItems();

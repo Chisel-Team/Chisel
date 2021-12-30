@@ -1,10 +1,12 @@
 package team.chisel.common.block;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.LevelReader;
 import team.chisel.api.block.VariationData;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 public class BlockCarvableBookshelf extends BlockCarvable {
 
@@ -13,7 +15,7 @@ public class BlockCarvableBookshelf extends BlockCarvable {
     }
     
     @Override
-    public float getEnchantPowerBonus(BlockState state, IWorldReader world, BlockPos pos) {
-        return Blocks.BOOKSHELF.getEnchantPowerBonus(Blocks.BOOKSHELF.getDefaultState(), world, pos);
+    public float getEnchantPowerBonus(BlockState state, LevelReader world, BlockPos pos) {
+        return Blocks.BOOKSHELF.getEnchantPowerBonus(Blocks.BOOKSHELF.defaultBlockState(), world, pos);
     }
 }

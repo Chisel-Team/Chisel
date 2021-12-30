@@ -3,12 +3,12 @@ package team.chisel.common.inventory;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.world.Container;
 import net.minecraft.inventory.container.ClickType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.util.Hand;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -20,22 +20,22 @@ public class SlotChiselSelection extends Slot {
 
     private final @Nonnull ChiselContainer container;
 
-    public SlotChiselSelection(ChiselContainer container, InventoryChiselSelection inv, IInventory iinventory, int i, int j, int k) {
+    public SlotChiselSelection(ChiselContainer container, InventoryChiselSelection inv, Container iinventory, int i, int j, int k) {
         super(iinventory, i, j, k);
         this.container = container;
     }
 
     @Override
-    public boolean isItemValid(ItemStack itemstack) {
+    public boolean mayPlace(ItemStack itemstack) {
         return false;
     }
 
     @Override
-    public boolean canTakeStack(PlayerEntity par1PlayerEntity) {
-        return par1PlayerEntity.inventory.getItemStack().isEmpty();
+    public boolean mayPickup(Player par1PlayerEntity) {
+        return par1PlayerEntity.inventory.getCarried().isEmpty();
     }
     
-    public static ItemStack craft(ChiselContainer container, PlayerEntity player, ItemStack itemstack, boolean simulate) {
+    public static ItemStack craft(ChiselContainer container, Player player, ItemStack itemstack, boolean simulate) {
         ItemStack crafted = container.getInventoryChisel().getStackInSpecialSlot();
         ItemStack chisel = container.getChisel();
         if (simulate) {

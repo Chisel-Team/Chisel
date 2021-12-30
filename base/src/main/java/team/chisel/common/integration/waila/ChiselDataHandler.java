@@ -9,8 +9,8 @@ import mcp.mobius.waila.api.IRegistrar;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.TooltipPosition;
 import mcp.mobius.waila.api.WailaPlugin;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.Component;
 import team.chisel.api.block.ICarvable;
 import team.chisel.common.block.ItemChiselBlock;
 
@@ -23,7 +23,7 @@ public class ChiselDataHandler implements IWailaPlugin, IComponentProvider {
     }
 
     @Override
-    public void appendBody(List<ITextComponent> tooltip, IDataAccessor accessor, IPluginConfig config) {
+    public void appendBody(List<Component> tooltip, IDataAccessor accessor, IPluginConfig config) {
         if (accessor.getBlock() instanceof ICarvable) {
             ItemStack stack = accessor.getStack();
             if (stack.getItem() instanceof ItemChiselBlock) {

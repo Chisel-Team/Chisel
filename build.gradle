@@ -4,7 +4,7 @@ buildscript {
         mavenLocal()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "https://maven.minecraftforge.net"
         }
         maven {
             name = "sonatype"
@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.0.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
@@ -46,13 +46,13 @@ allprojects {
 
     repositories {
         maven { // CTM
-            url "http://maven.tterrag.com/"
+            url "https://maven.tterrag.com/"
         }
         maven { // JEI
-            url "http://dvs1.progwml6.com/files/maven"
+            url "https://dvs1.progwml6.com/files/maven"
         }
         maven { // Hwyla
-            url "http://maven.tehnut.info/"
+            url "https://maven.tehnut.info/"
         }
     }
     
@@ -109,6 +109,7 @@ subprojects {
     apply plugin: 'io.freefair.lombok'
     apply plugin: 'com.matthewprenger.cursegradle'
     apply plugin: 'com.github.johnrengelman.shadow'
+	apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
     group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
     archivesBaseName = (dev ? 'Chisel_DEV' : 'Chisel') + (project.name.equals('base') ? '' : '-' + project.name)
@@ -122,7 +123,7 @@ subprojects {
     }
     
     minecraft {
-        mappings channel: 'snapshot', version: '20210309-1.16.5'
+        mappings channel: 'official', version: '1.16.5'
     
         accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     }
@@ -182,7 +183,7 @@ subprojects {
     build.dependsOn reobfShadowJar
     
     lombok {
-        version = "1.18.12"
+        version = "1.18.20"
     }
     
     // Add external annotations

@@ -11,17 +11,17 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.widget.Widget;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Rectangle2d;
+import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.IReorderingProcessor;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.fml.client.gui.GuiUtils;
@@ -35,21 +35,21 @@ import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.NBTUtil;
 
 @ParametersAreNonnullByDefault
-public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
+public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScreen<T> {
 
-    public PlayerEntity player;
+    public Player player;
 
-    public GuiChisel(T container, PlayerInventory iinventory, ITextComponent displayName) {
+    public GuiChisel(T container, Inventory iinventory, Component displayName) {
         super(container, iinventory, displayName);
         player = iinventory.player;
-        xSize = 252;
-        ySize = 202;
+        imageWidth = 252;
+        imageHeight = 202;
     }
 
     @Override
-    public void onClose() {
-        super.onClose();
-        this.getContainer().onContainerClosed(player);
+    public void removed() {
+        super.removed();
+        this.getMenu().removed(player);
     }
 
     @Override
@@ -71,10 +71,10 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
         super.init();
 
         int id = 0;
-        Rectangle2d area = getModeButtonArea();
+        Rect2i area = getModeButtonArea();
         int buttonsPerRow = area.getWidth() / 20;
         int padding = (area.getWidth() - (buttonsPerRow * 20)) / buttonsPerRow;
-        IChiselMode currentMode = NBTUtil.getChiselMode(this.getContainer().getChisel());
+        IChiselMode currentMode = NBTUtil.getChiselMode(this.getMenu().getChisel());
         for (IChiselMode mode : CarvingUtils.getModeRegistry().getAllModes()) {
             if (((IChiselItem) this.getContainer().getChisel().getItem()).supportsMode(player, this.getContainer().getChisel(), mode)) {
                 int x = area.getX() + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
@@ -123,7 +123,7 @@ public class GuiChisel<T extends ChiselContainer> extends ContainerScreen<T> {
         int y = 60;
         IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
         for (IReorderingProcessor s : lines) {
-            font.drawEntityText(s, 32 - font.func_243245_a(s) / 2, y, 0x404040, false, matrixStack.getLast().getMatrix(), irendertypebuffer$impl, false, 0, 0xF000F0);
+            font.drawEntityText(s, 32 - font.width(s) / 2, y, 0x404040, false, matrixStack.getLast().getMatrix(), irendertypebuffer$impl, false, 0, 0xF000F0);
             y += 10;
         }
         irendertypebuffer$impl.finish();

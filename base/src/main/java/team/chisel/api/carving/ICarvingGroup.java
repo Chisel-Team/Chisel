@@ -5,14 +5,14 @@ import java.util.Optional;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import mcp.MethodsReturnNonnullByDefault;
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
+import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.network.chat.TranslatableComponent;
 
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
@@ -22,20 +22,20 @@ public interface ICarvingGroup {
     
     String getTranslationKey();
     
-    default TranslationTextComponent getDisplayName() {
-        return new TranslationTextComponent(getTranslationKey());
+    default TranslatableComponent getDisplayName() {
+        return new TranslatableComponent(getTranslationKey());
     }
     
-    default ITag<Item> getItemTag() {
-    	ITag<Item> ret = ItemTags.getCollection().get(getId());
+    default Tag<Item> getItemTag() {
+    	Tag<Item> ret = ItemTags.getAllTags().getTag(getId());
         if (ret == null) {
             throw new IllegalStateException("Group " + getId() + " does not have an associated item tag");
         }
         return ret;
     }
     
-    default Optional<ITag<Block>> getBlockTag() {
-        return Optional.ofNullable(BlockTags.getCollection().get(getId()));
+    default Optional<Tag<Block>> getBlockTag() {
+        return Optional.ofNullable(BlockTags.getAllTags().getTag(getId()));
     }
 	
 	SoundEvent getSound();

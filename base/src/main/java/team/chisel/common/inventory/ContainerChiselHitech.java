@@ -11,12 +11,12 @@ import com.google.common.collect.ImmutableList;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.inventory.container.ClickType;
-import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.InteractionHand;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.common.util.NBTUtil;
 
@@ -29,20 +29,20 @@ public class ContainerChiselHitech extends ChiselContainer {
     private List<Slot> selectionDuplicates = ImmutableList.of();
     private @Nullable ICarvingGroup currentGroup;
     
-    public ContainerChiselHitech(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer) {
-        this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 63), Hand.MAIN_HAND);
+    public ContainerChiselHitech(MenuType<? extends ChiselContainer> type, int windowId, Inventory inventoryplayer) {
+        this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 63), InteractionHand.MAIN_HAND);
     }
     
-    public ContainerChiselHitech(ContainerType<? extends ChiselContainer> type, int windowId, PlayerInventory inventoryplayer, InventoryChiselSelection inv, Hand hand) {
+    public ContainerChiselHitech(MenuType<? extends ChiselContainer> type, int windowId, Inventory inventoryplayer, InventoryChiselSelection inv, InteractionHand hand) {
         super(type, windowId, inventoryplayer, inv, hand);
         
         int selectionSlot = NBTUtil.getHitechSelection(chisel);
-        if (selectionSlot >= inv.getSizeInventory()) {
+        if (selectionSlot >= inv.getContainerSize()) {
             setSelection(getSlot(selectionSlot));
         }
         
         int targetSlot = NBTUtil.getHitechTarget(chisel);
-        if (targetSlot >= 0 && targetSlot < inv.getSizeInventory() - 1) {
+        if (targetSlot >= 0 && targetSlot < inv.getContainerSize() - 1) {
             setTarget(getSlot(targetSlot));
         }
     }

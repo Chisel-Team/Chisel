@@ -14,7 +14,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WoodType;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.ShapedRecipeBuilder;
@@ -48,7 +48,7 @@ public class Features {
 
     private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrate());
     
-    public static final Map<String, BlockEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.IRON, "metals/aluminum")
+    public static final Map<String, BlockEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.METAL, "metals/aluminum")
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .setGroupName("Aluminum Block")
             .addTag(ChiselCompatTags.STORAGE_BLOCKS_ALUMINUM)
@@ -279,7 +279,7 @@ public class Features {
                     ItemLootEntry.builder(Items.GLOWSTONE_DUST)
                         .acceptFunction(SetCount.builder(RandomValueRange.of(2.0F, 4.0F)))
                         .acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE))
-                        .acceptFunction(LimitCount.func_215911_a(IntClamper.func_215843_a(1, 4)))))))
+                        .acceptFunction(LimitCount.limitCount(IntClamper.clamp(1, 4)))))))
             .initialProperties(() -> Blocks.GLOWSTONE)
             .variations(VariantTemplates.STONE)
             .variation("extra/bismuth").localizedName("Bismuth")

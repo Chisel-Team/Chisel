@@ -15,21 +15,21 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.item.HangingEntity;
-import net.minecraft.entity.item.PaintingEntity;
-import net.minecraft.entity.item.PaintingType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tags.ITag;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.decoration.HangingEntity;
+import net.minecraft.world.entity.decoration.Painting;
+import net.minecraft.world.entity.decoration.Motive;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.Tag;
+import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -55,7 +55,7 @@ public class ChiselController {
     @SubscribeEvent
     public static void onPlayerInteract(PlayerInteractEvent.LeftClickBlock event) {
 
-        PlayerEntity player = event.getPlayer();
+        Player player = event.getPlayer();
         ItemStack held = event.getItemStack();
         
         if (held.getItem() instanceof IChiselItem) {
@@ -92,12 +92,12 @@ public class ChiselController {
                     }
                 }
             } else {
-                List<Block> variations = new ArrayList<>(blockGroup.getBlockTag().map(ITag::getAllElements).orElse(Collections.emptyList()));
+                List<Block> variations = new ArrayList<>(blockGroup.getBlockTag().map(Tag::getValues).orElse(Collections.emptyList()));
                 
                 variations = variations.stream().filter(v -> v.getBlock() != null).collect(Collectors.toList());
                         
                 int index = variations.indexOf(state.getBlock());
-                index = player.isSneaking() ? index - 1 : index + 1;
+                index = player.isShiftKeyDown() ? index - 1 : index + 1;
                 index = (index + variations.size()) % variations.size();
                 
                 ICarvingVariation next = registry.getVariation(variations.get(index)).orElse(null);
@@ -106,25 +106,25 @@ public class ChiselController {
         }
     }
 
-    private static void setAll(Iterable<? extends BlockPos> candidates, PlayerEntity player, BlockState origState, ICarvingVariation v) {
+    private static void setAll(Iterable<? extends BlockPos> candidates, Player player, BlockState origState, ICarvingVariation v) {
         if (!checkHackyCache(player)) return;
         for (BlockPos pos : candidates) {
             setVariation(player, pos, origState, v);
         }
     }
     
-    private static final LoadingCache<PlayerEntity, Long> HACKY_CACHE = CacheBuilder.newBuilder()
+    private static final LoadingCache<Player, Long> HACKY_CACHE = CacheBuilder.newBuilder()
             .expireAfterWrite(1, TimeUnit.SECONDS)
             .weakKeys()
-            .build(new CacheLoader<PlayerEntity, Long>() {
+            .build(new CacheLoader<Player, Long>() {
                 
-                public Long load(PlayerEntity key) throws Exception {
+                public Long load(Player key) throws Exception {
                     return 0L;
                 }
             });
     
-    private static boolean checkHackyCache(PlayerEntity player) {
-        long time = player.getEntityWorld().getGameTime();
+    private static boolean checkHackyCache(Player player) {
+        long time = player.getCommandSenderWorld().getGameTime();
         // TODO this is a hack (duh) and it prevents rapid clicking, but it fixes the block changing twice for every click
         // Until the left click event is improved in forge, not much else we can do
         if (HACKY_CACHE.getUnchecked(player) > time - 2) {
@@ -137,14 +137,14 @@ public class ChiselController {
     /**
      * Assumes that the player is holding a chisel
      */
-    private static void setVariation(PlayerEntity player, BlockPos pos, BlockState origState, ICarvingVariation v) {
+    private static void setVariation(Player player, BlockPos pos, BlockState origState, ICarvingVariation v) {
         Block targetBlock = v.getBlock();
         Preconditions.checkNotNull(targetBlock, "Variation state cannot be null!");
         
-        World world = player.world;
+        Level world = player.level;
         
         BlockState curState = world.getBlockState(pos);
-        ItemStack held = player.getHeldItemMainhand();
+        ItemStack held = player.getMainHandItem();
         if (curState.getBlock() == v.getBlock()) {
             return; // don't chisel to the same thing
         }
@@ -159,17 +159,17 @@ public class ChiselController {
             current.setCount(1);
             ItemStack target = new ItemStack(v.getItem());
             target.setCount(1);
-            chisel.craftItem(held, current, target, player, p -> p.sendBreakAnimation(EquipmentSlotType.MAINHAND));
-            chisel.onChisel(player.world, player, held, v);
+            chisel.craftItem(held, current, target, player, p -> p.broadcastBreakEvent(EquipmentSlot.MAINHAND));
+            chisel.onChisel(player.level, player, held, v);
             if (held.getCount() <= 0) {
                 ItemStack targetStack = NBTUtil.getChiselTarget(held);
-                player.inventory.mainInventory.set(player.inventory.currentItem, targetStack);
+                player.inventory.items.set(player.inventory.selected, targetStack);
             }
-            if (world.isRemote) {
+            if (world.isClientSide) {
                 SoundUtil.playSound(player, held, targetBlock);
-                world.playEvent(player, Constants.WorldEvents.BREAK_BLOCK_EFFECTS, pos, Block.getStateId(origState));
+                world.levelEvent(player, Constants.WorldEvents.BREAK_BLOCK_EFFECTS, pos, Block.getId(origState));
             }
-            world.setBlockState(pos, targetBlock.getDefaultState());
+            world.setBlockAndUpdate(pos, targetBlock.defaultBlockState());
         }
     }
     /*
@@ -240,12 +240,12 @@ public class ChiselController {
 
     @SubscribeEvent
     public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        if (!event.getWorld().isRemote) {
+        if (!event.getWorld().isClientSide) {
             ItemStack stack = event.getItemStack();
             if (stack.getItem() instanceof IChiselItem) {
                 IChiselItem chisel = (IChiselItem) stack.getItem();
                 if (chisel.canOpenGui(event.getWorld(), event.getPlayer(), event.getHand())) {
-                    event.getPlayer().openContainer(chisel.getGuiType(event.getWorld(), event.getPlayer(), event.getHand()).provide(stack, event.getHand()));
+                    event.getPlayer().openMenu(chisel.getGuiType(event.getWorld(), event.getPlayer(), event.getHand()).provide(stack, event.getHand()));
                 }
             }
         }
@@ -253,8 +253,8 @@ public class ChiselController {
     
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (event.getHand() == Hand.OFF_HAND) {
-            ItemStack mainhandStack = event.getPlayer().getHeldItemMainhand();
+        if (event.getHand() == InteractionHand.OFF_HAND) {
+            ItemStack mainhandStack = event.getPlayer().getMainHandItem();
             if (mainhandStack.getItem() instanceof IChiselItem) {
                 event.setCanceled(true);
             }
@@ -263,7 +263,7 @@ public class ChiselController {
     
     private static final MethodHandle _updateFacingWithBoundingBox; static {
         try {
-            _updateFacingWithBoundingBox = MethodHandles.lookup().unreflect(ObfuscationReflectionHelper.findMethod(HangingEntity.class, "func_174859_a", Direction.class));
+            _updateFacingWithBoundingBox = MethodHandles.lookup().unreflect(ObfuscationReflectionHelper.findMethod(HangingEntity.class, "setDirection", Direction.class));
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -271,38 +271,38 @@ public class ChiselController {
     
     @SubscribeEvent
     public static void onLeftClickEntity(AttackEntityEvent event) {
-        if (event.getTarget() instanceof PaintingEntity) {
-            ItemStack held = event.getPlayer().getHeldItemMainhand();
+        if (event.getTarget() instanceof Painting) {
+            ItemStack held = event.getPlayer().getMainHandItem();
             if (held.getItem() instanceof IChiselItem) {
-                PaintingEntity painting = (PaintingEntity) event.getTarget();
-                List<PaintingType> values = new ArrayList<>(ForgeRegistries.PAINTING_TYPES.getValues());
+                Painting painting = (Painting) event.getTarget();
+                List<Motive> values = new ArrayList<>(ForgeRegistries.PAINTING_TYPES.getValues());
                 do {
-                    painting.art = values.get(((values.indexOf(painting.art) + (event.getPlayer().isSneaking() ? -1 : 1)) + values.size()) % values.size());
+                    painting.motive = values.get(((values.indexOf(painting.motive) + (event.getPlayer().isShiftKeyDown() ? -1 : 1)) + values.size()) % values.size());
                     try {
-                        _updateFacingWithBoundingBox.invokeExact((HangingEntity) painting, painting.getHorizontalFacing());
+                        _updateFacingWithBoundingBox.invokeExact((HangingEntity) painting, painting.getDirection());
                     } catch (Throwable e) {
                         throw new RuntimeException(e);
                     }
-                } while (!painting.onValidSurface());
+                } while (!painting.survives());
                 damageItem(held, event.getPlayer());
-                event.getPlayer().world.playSound(event.getPlayer(), event.getTarget().getPosition(), SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.NEUTRAL, 1, 1);
+                event.getPlayer().level.playSound(event.getPlayer(), event.getTarget().blockPosition(), SoundEvents.PAINTING_PLACE, SoundSource.NEUTRAL, 1, 1);
                 event.setCanceled(true);
             }
         }
     }
 
-    private static void damageItem(ItemStack stack, PlayerEntity player) {
-        stack.damageItem(1, player, p -> p.sendBreakAnimation(Hand.MAIN_HAND));
+    private static void damageItem(ItemStack stack, Player player) {
+        stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
         if (stack.getCount() <= 0) {
-            player.setHeldItem(Hand.MAIN_HAND, ItemStack.EMPTY);
-            ForgeEventFactory.onPlayerDestroyItem(player, stack, Hand.MAIN_HAND);
+            player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+            ForgeEventFactory.onPlayerDestroyItem(player, stack, InteractionHand.MAIN_HAND);
         }
     }
 
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
-        ItemStack stack = event.getPlayer().getHeldItemMainhand();
-        if (event.getPlayer().abilities.isCreativeMode && !stack.isEmpty() && stack.getItem() instanceof IChiselItem) {
+        ItemStack stack = event.getPlayer().getMainHandItem();
+        if (event.getPlayer().abilities.instabuild && !stack.isEmpty() && stack.getItem() instanceof IChiselItem) {
             event.setCanceled(true);
         }
     }

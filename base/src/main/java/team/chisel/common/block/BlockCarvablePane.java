@@ -5,7 +5,7 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import lombok.Getter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.PaneBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.util.Direction;
@@ -18,7 +18,7 @@ import team.chisel.api.block.VariationData;
  * Represents a Carvable (aka Chiselable) Pane
  */
 @ParametersAreNonnullByDefault
-public class BlockCarvablePane extends PaneBlock implements ICarvable {
+public class BlockCarvablePane extends IronBarsBlock implements ICarvable {
     @Getter(onMethod = @__({@Override}))
     private final VariationData variation;
 

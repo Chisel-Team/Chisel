@@ -8,10 +8,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderState;
+import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.Timer;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import net.minecraft.client.Timer;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import team.chisel.Chisel;
 
@@ -25,7 +25,7 @@ public class ClientUtil {
     private static Field initTimer() {
         Field f = null;
         try {
-            f = ObfuscationReflectionHelper.findField(Minecraft.class, "field_71428_T");
+            f = ObfuscationReflectionHelper.findField(Minecraft.class, "timer");
             f.setAccessible(true);
         } catch (Exception e) {
             Chisel.logger.error("Failed to initialize timer reflection.");
@@ -47,10 +47,10 @@ public class ClientUtil {
         }
     }
 
-    public static final RenderType OFFSET_OVERLAY = RenderType.makeType("chisel_offset_overlay",
-    		DefaultVertexFormats.POSITION_COLOR, GL11.GL_TRIANGLES, 256,
-    		RenderType.State.getBuilder()
-    			.transparency(RenderState.TRANSLUCENT_TRANSPARENCY)
-    			.target(RenderState.TRANSLUCENT_TARGET)
-    			.build(true));
+    public static final RenderType OFFSET_OVERLAY = RenderType.create("chisel_offset_overlay",
+    		DefaultVertexFormat.POSITION_COLOR, GL11.GL_TRIANGLES, 256,
+    		RenderType.CompositeState.builder()
+    			.setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+    			.setOutputState(RenderStateShard.TRANSLUCENT_TARGET)
+    			.createCompositeState(true));
 }

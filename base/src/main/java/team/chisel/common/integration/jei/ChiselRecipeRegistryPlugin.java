@@ -15,8 +15,8 @@ import mezz.jei.api.recipe.IFocus.Mode;
 import mezz.jei.api.recipe.IRecipeManager;
 import mezz.jei.api.recipe.advanced.IRecipeManagerPlugin;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.ResourceLocation;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 
@@ -34,7 +34,7 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
         ItemStack input = (ItemStack) val;
         List<ItemStack> chiselOptions = CarvingUtils.getChiselRegistry().getItemsForChiseling((ItemStack) focus.getValue());
         return chiselOptions.stream()
-                .filter(s -> !ItemStack.areItemsEqual(s, input))
+                .filter(s -> !ItemStack.isSame(s, input))
                 .collect(Collectors.toList());
     }
     

@@ -3,7 +3,7 @@ package team.chisel.client.render.texture;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import team.chisel.client.render.ctx.BlockRenderContextAlterR;
 import team.chisel.client.render.type.BlockRenderTypeAlterR;
 import team.chisel.ctm.api.texture.ISubmap;

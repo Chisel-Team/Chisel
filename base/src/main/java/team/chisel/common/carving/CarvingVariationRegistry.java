@@ -13,11 +13,11 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.ImmutableList;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.IResourceManager;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.resource.IResourceType;
 import net.minecraftforge.resource.ISelectiveResourceReloadListener;
@@ -91,7 +91,7 @@ public class CarvingVariationRegistry implements IVariationRegistry {
             
             @Override
             public Block getBlock() {
-                return Block.getBlockFromItem(item);
+                return Block.byItem(item);
             }
         });
     }
@@ -110,7 +110,7 @@ public class CarvingVariationRegistry implements IVariationRegistry {
     }
     
     private List<ItemStack> getItemsForChiseling(ICarvingGroup group) {
-        return group.getItemTag().getAllElements().stream()
+        return group.getItemTag().getValues().stream()
                 .map(ItemStack::new)
                 .sorted(Comparator.comparing(ItemStack::getItem, ItemSorter.variantOrder()))
                 .collect(Collectors.toList());

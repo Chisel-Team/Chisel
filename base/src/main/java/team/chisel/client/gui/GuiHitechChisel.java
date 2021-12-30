@@ -20,7 +20,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.Rectangle2d;
 import net.minecraft.client.renderer.Tessellator;
@@ -38,7 +38,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockDisplayReader;
@@ -61,7 +61,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         private PreviewType type;
         
         public PreviewModeButton(int x, int y, int widthIn, int heightIn) {
-            super(x, y, widthIn, heightIn, new StringTextComponent(""), b -> {});
+            super(x, y, widthIn, heightIn, new TextComponent(""), b -> {});
             setType(PreviewType.values()[0]);
         }
 
@@ -77,7 +77,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         
         private final void setType(PreviewType type) {
             this.type = type;
-            this.setMessage(new StringTextComponent("< ").appendSibling(type.getLocalizedName()).appendString(" >"));
+            this.setMessage(new TextComponent("< ").append(type.getLocalizedName()).appendString(" >"));
             GuiHitechChisel.this.fakeworld = new FakeBlockAccess(GuiHitechChisel.this); // Invalidate region cache data
         }
     }
@@ -179,8 +179,8 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         }
 
 		@Override
-		public float func_230487_a_(Direction p_230487_1_, boolean p_230487_2_) {
-			return Minecraft.getInstance().world.func_230487_a_(p_230487_1_, p_230487_2_);
+		public float getShade(Direction p_230487_1_, boolean p_230487_2_) {
+			return Minecraft.getInstance().world.getShade(p_230487_1_, p_230487_2_);
 		}
 
 //        @Override
