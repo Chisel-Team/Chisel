@@ -6,33 +6,29 @@ import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.util.TriConsumer;
 
 import com.google.common.collect.ImmutableMap;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.NonNullLazyValue;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.ForgeHooks;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
 import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 import team.chisel.api.ChiselAPIProps;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.data.VariantTemplates;
@@ -85,7 +81,7 @@ public class Chisel implements Reference {
     private static Map<String, Block> remaps = ImmutableMap.of();
 
     private static final NonNullLazyValue<Registrate> REGISTRATE = new NonNullLazyValue<Registrate>(() -> {
-        Registrate ret = Registrate.create(Reference.MOD_ID).itemGroup(() -> ChiselTabs.base);
+        Registrate ret = Registrate.create(Reference.MOD_ID).creativeModeTab(() -> ChiselTabs.base);
         ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.base, "Chisel"));
         return ret;
     });
@@ -117,21 +113,21 @@ public class Chisel implements Reference {
 
         // Update the values within the properties so that Properties.from reflects them correctly
         // TODO PR this to forge
-        try {
-            TriConsumer<Block, ToolType, Integer> setter = ObfuscationReflectionHelper.getPrivateValue(ForgeHooks.class, null, "blockToolSetter");
-            ForgeHooks.setBlockToolSetter((block, tool, level) -> {
-                setter.accept(block, tool, level);
-                block.properties.harvestTool(tool);
-                block.properties.harvestLevel(level);
-                if (level > 0) {
-                    block.properties.requiresCorrectToolForDrops();
-                }
-            });
-            ObfuscationReflectionHelper.setPrivateValue(ForgeHooks.class, null, false, "toolInit");
-            ObfuscationReflectionHelper.findMethod(ForgeHooks.class, "initTools").invoke(null);
-        } catch (Exception e) {
-            logger.error("Failed to fix tool types", e);
-        }
+//        try {
+//            TriConsumer<Block, ToolType, Integer> setter = ObfuscationReflectionHelper.getPrivateValue(ForgeHooks.class, null, "blockToolSetter");
+//            ForgeHooks.setBlockToolSetter((block, tool, level) -> {
+//                setter.accept(block, tool, level);
+//                block.properties.harvestTool(tool);
+//                block.properties.harvestLevel(level);
+//                if (level > 0) {
+//                    block.properties.requiresCorrectToolForDrops();
+//                }
+//            });
+//            ObfuscationReflectionHelper.setPrivateValue(ForgeHooks.class, null, false, "toolInit");
+//            ObfuscationReflectionHelper.findMethod(ForgeHooks.class, "initTools").invoke(null);
+//        } catch (Exception e) {
+//            logger.error("Failed to fix tool types", e);
+//        }
     }
 
     public static Registrate registrate() {
@@ -174,34 +170,34 @@ public class Chisel implements Reference {
 //      Example of IMC
                 
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION.toString(), "marble|minecraft:dirt|0");
-        CompoundNBT testtag = new CompoundNBT();
+        CompoundTag testtag = new CompoundTag();
         testtag.setString("group", "marble");
         testtag.setTag("stack", new ItemStack(Items.DIAMOND_PICKAXE, 1, 100).serializeNBT());
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
-        testtag = new CompoundNBT();
+        testtag = new CompoundTag();
         testtag.setString("group", "marble");
         testtag.setString("block", Blocks.WOOL.getRegistryName().toString());
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
-        testtag = new CompoundNBT();
+        testtag = new CompoundTag();
         testtag.setString("group", "marble");
         testtag.setString("block", Blocks.WOOL.getRegistryName().toString());
         testtag.setInteger("meta", Blocks.WOOL.getMetaFromState(Blocks.WOOL.getDefaultState().withProperty(BlockColored.COLOR, EnumDyeColor.BROWN)));
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
-        testtag = new CompoundNBT();
+        testtag = new CompoundTag();
         testtag.setString("group", "marble");
         testtag.setTag("stack", new ItemStack(Items.REDSTONE).serializeNBT());
         testtag.setString("block", Blocks.REDSTONE_WIRE.getRegistryName().toString());
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
         
-        testtag = new CompoundNBT();
+        testtag = new CompoundTag();
         testtag.setString("group", "marble");
         testtag.setTag("stack", new ItemStack(ChiselBlocks.marble, 1, 3).serializeNBT());
         FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
-        testtag = new CompoundNBT();
+        testtag = new CompoundTag();
         testtag.setString("group", "marble");
         testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
         FMLInterModComms.sendMessage(MOD_ID, IMC.REMOVE_VARIATION_V2.toString(), testtag);
-        testtag = new CompoundNBT();
+        testtag = new CompoundTag();
         testtag.setString("group", "marble");
         testtag.setString("block", ChiselBlocks.marbleextra.getRegistryName().toString());
         testtag.setInteger("meta", 5);

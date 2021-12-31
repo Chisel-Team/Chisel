@@ -148,12 +148,12 @@ public class InventoryChiselSelection implements Container {
     }
 
     @Override
-    public void openInventory(PlayerEntity var1) {
+    public void openInventory(Player var1) {
 
     }
 
     @Override
-    public void closeInventory(PlayerEntity var1) {
+    public void closeInventory(Player var1) {
 
     }
 

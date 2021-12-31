@@ -5,9 +5,9 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 
 import lombok.RequiredArgsConstructor;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.network.NetworkEvent;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
@@ -36,7 +36,7 @@ public class PacketChiselMode {
     
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            ItemStack stack = ctx.get().getSender().inventory.getItem(slot);
+            ItemStack stack = ctx.get().getSender().getInventory().getItem(slot);
             if (stack.getItem() instanceof IChiselItem && ((IChiselItem) stack.getItem()).supportsMode(ctx.get().getSender(), stack, mode)) {
                 NBTUtil.setChiselMode(stack, mode);
             }

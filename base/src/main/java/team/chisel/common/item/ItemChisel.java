@@ -22,7 +22,7 @@ import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.Player;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -123,38 +123,38 @@ public class ItemChisel extends Item implements IChiselItem {
     }
     
     @Override
-    public boolean canOpenGui(World world, PlayerEntity player, Hand hand) {
+    public boolean canOpenGui(World world, Player player, Hand hand) {
         return true;
     }
     
     @Override
-    public IChiselGuiType getGuiType(World world, PlayerEntity player, Hand hand) {
+    public IChiselGuiType getGuiType(World world, Player player, Hand hand) {
         return type == ChiselType.HITECH ? ChiselGuiType.HITECH : ChiselGuiType.NORMAL;
     }
 
     @Override
-    public boolean canChisel(World world, PlayerEntity player, ItemStack chisel, ICarvingVariation target) {
+    public boolean canChisel(World world, Player player, ItemStack chisel, ICarvingVariation target) {
         return !chisel.isEmpty();
     }
 
     @Override
-    public boolean onChisel(World world, PlayerEntity player, ItemStack chisel, ICarvingVariation target) {
+    public boolean onChisel(World world, Player player, ItemStack chisel, ICarvingVariation target) {
         return Configurations.allowChiselDamage;
     }
 
     @Override
-    public boolean canChiselBlock(World world, PlayerEntity player, Hand hand, BlockPos pos, BlockState state) {
+    public boolean canChiselBlock(World world, Player player, Hand hand, BlockPos pos, BlockState state) {
         return type == ChiselType.HITECH || type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
     }
 
     @Override
-    public boolean supportsMode(PlayerEntity player, ItemStack chisel, IChiselMode mode) {
+    public boolean supportsMode(Player player, ItemStack chisel, IChiselMode mode) {
         return type == ChiselType.HITECH || ((type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) && mode != ChiselMode.CONTIGUOUS && mode != ChiselMode.CONTIGUOUS_2D);
     }
 
     // TODO implement ChiselController
 //    @Override
-//    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, PlayerEntity playerIn, Hand hand) {
+//    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, Player playerIn, Hand hand) {
 //        if (!worldIn.isRemote) {
 //            playerIn.openGui(Chisel.instance, 0, worldIn, hand.ordinal(), 0, 0);
 //            return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);

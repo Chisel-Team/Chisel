@@ -77,7 +77,7 @@ public class IMCHandler {
         try {
             switch (type) {
             case ADD_VARIATION: {
-                CompoundNBT tag = (CompoundNBT) message.getMessageSupplier().get();
+                CompoundTag tag = (CompoundTag) message.getMessageSupplier().get();
                 ResourceLocation group = new ResourceLocation(tag.getString("group"));
                 Preconditions.checkNotNull(Strings.emptyToNull(group.getPath()), "No group specified");
                 
@@ -95,7 +95,7 @@ public class IMCHandler {
                 break;
             }
             case REMOVE_VARIATION:{
-                CompoundNBT tag = (CompoundNBT) message.getMessageSupplier().get();
+                CompoundTag tag = (CompoundTag) message.getMessageSupplier().get();
                 String group = tag.getString("group");
                 Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
                 // TODO

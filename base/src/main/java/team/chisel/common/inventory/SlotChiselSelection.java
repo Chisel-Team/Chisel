@@ -31,8 +31,8 @@ public class SlotChiselSelection extends Slot {
     }
 
     @Override
-    public boolean mayPickup(Player par1PlayerEntity) {
-        return par1PlayerEntity.inventory.getCarried().isEmpty();
+    public boolean mayPickup(Player par1Player) {
+        return par1Player.inventory.getCarried().isEmpty();
     }
     
     public static ItemStack craft(ChiselContainer container, Player player, ItemStack itemstack, boolean simulate) {
@@ -71,7 +71,7 @@ public class SlotChiselSelection extends Slot {
     }
 
     @Override
-    public ItemStack onTake(PlayerEntity player, ItemStack itemstack) {
+    public ItemStack onTake(Player player, ItemStack itemstack) {
         ItemStack chisel = container.getChisel().copy();
         ItemStack res = craft(container, player, itemstack, false);
         if (container.currentClickType != ClickType.PICKUP) {

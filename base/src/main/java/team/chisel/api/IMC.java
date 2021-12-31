@@ -15,10 +15,10 @@ public enum IMC {
     /**
      * Register a variation. Can provide an ItemStack, blockstate, or both.
      * <p>
-     * This IMC message is expected to be an {@link CompoundNBT}, with the following mappings:
+     * This IMC message is expected to be an {@link CompoundTag}, with the following mappings:
      * <ul>
      * <li>"group" -> A String which represents the group being added to. <strong>REQUIRED</strong></li>
-     * <li>"stack" -> An CompoundNBT which is the serialized ItemStack. <strong>OPTIONAL</strong></li>
+     * <li>"stack" -> An CompoundTag which is the serialized ItemStack. <strong>OPTIONAL</strong></li>
      * <li>"block" -> A String (ResourceLocation) which reprsents the block. <strong>OPTIONAL</strong></li>
      * <li>"meta" -> An int representing block metadata. Can be dynamic using {@link Block#getMetaFromState(net.minecraft.block.BlockState)}. <strong>OPTIONAL, defaults to 0</strong></li>
      * </ul>

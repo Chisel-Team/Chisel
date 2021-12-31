@@ -56,7 +56,7 @@ public interface IChiselItem {
      * @param world
      *            {@link World} object
      * @param player
-     *            The {@link PlayerEntity} performing the chiseling.
+     *            The {@link Player} performing the chiseling.
      * @param chisel
      *            The {@link ItemStack} representing the chisel
      * @param target
@@ -73,7 +73,7 @@ public interface IChiselItem {
      * @param world
      *            {@link World} object
      * @param player
-     *            The {@link PlayerEntity} performing the chiseling.
+     *            The {@link Player} performing the chiseling.
      * @param chisel
      *            The {@link ItemStack} representing the chisel
      * @param target
@@ -88,7 +88,7 @@ public interface IChiselItem {
      * @param world
      *            World object
      * @param player
-     *            {@link PlayerEntity The player} holding the chisel.
+     *            {@link Player The player} holding the chisel.
      * @param hand
      *            The {@link Hand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
      * @param pos
@@ -103,7 +103,7 @@ public interface IChiselItem {
      * Allows you to control if your item supports a given chisel mode.
      * 
      * @param player
-     *            {@link PlayerEntity The player} holding the chisel.
+     *            {@link Player The player} holding the chisel.
      * @param chisel
      *            The {@link ItemStack} of the current chisel.
      * @param mode
@@ -118,7 +118,7 @@ public interface IChiselItem {
      * @param world
      *            World object.
      * @param player
-     *            {@link PlayerEntity The player} holding the chisel
+     *            {@link Player The player} holding the chisel
      * @param chisel
      *            The {@link ItemStack} representing the chisel
      * @param target

@@ -4,13 +4,11 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.network.NetworkEvent;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
@@ -64,7 +62,7 @@ public class PacketChiselButton {
             boolean playSound = false;
 
             for (int i : slots) {
-                ItemStack s = player.inventory.getStackInSlot(i);
+                ItemStack s = player.getInventory().getItem(i);
                 if (!s.isEmpty()) {
                     if (!carving.getGroup(target.getItem())
                             .map(ICarvingGroup::getId)
@@ -75,7 +73,7 @@ public class PacketChiselButton {
                     container.getInventoryChisel().setStackInSpecialSlot(s);
                     ItemStack res = SlotChiselSelection.craft(container, player, target.copy(), false);
                     if (!res.isEmpty()) {
-                        player.inventory.setInventorySlotContents(i, res);
+                        player.getInventory().setItem(i, s);
                         playSound = true;
                     }
                 }

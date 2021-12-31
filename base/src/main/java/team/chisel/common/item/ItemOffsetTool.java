@@ -1,11 +1,11 @@
 package team.chisel.common.item;
 
-import static net.minecraft.util.Direction.DOWN;
-import staticnet.minecraft.core.Directionn.EAST;
-import static net.minecraft.util.Direction.NORTH;
-import staticnet.minecraft.core.Directionn.SOUTH;
-import static net.minecraft.util.Direction.UP;
-import staticnet.minecraft.core.Directionn.WEST;
+import static net.minecraft.core.Direction.DOWN;
+import static net.minecraft.core.Direction.EAST;
+import static net.minecraft.core.Direction.NORTH;
+import static net.minecraft.core.Direction.SOUTH;
+import static net.minecraft.core.Direction.UP;
+import static net.minecraft.core.Direction.WEST;
 
 import java.awt.geom.Line2D;
 import java.util.Collections;
@@ -17,34 +17,34 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.platform.GlStateManager.DestFactor;
 import com.mojang.blaze3d.platform.GlStateManager.SourceFactor;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Matrix4f;
 
 import lombok.ToString;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.util.Direction;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.phys.BlockHitResult;
-import com.mojang.math.Matrix4f;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.DrawHighlightEvent;
+import net.minecraftforge.client.event.DrawSelectionEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
@@ -140,7 +140,7 @@ public class ItemOffsetTool extends Item {
 
     @SubscribeEvent
     @OnlyIn(Dist.CLIENT)
-    public void onBlockHighlight(DrawHighlightEvent.HighlightBlock event) {
+    public void onBlockHighlight(DrawSelectionEvent.HighlightBlock event) {
         BlockHitResult target = event.getTarget();
         Player player = Minecraft.getInstance().player;
 
@@ -148,7 +148,7 @@ public class ItemOffsetTool extends Item {
             
             Direction face = target.getDirection();
             BlockPos pos = target.getBlockPos();
-            PoseStack ms = event.getMatrix();
+            PoseStack ms = event.getPoseStack();
             ms.pushPose();
 
             RenderSystem.disableLighting();
@@ -156,7 +156,7 @@ public class ItemOffsetTool extends Item {
             RenderSystem.depthMask(false);
 
             // Draw the X
-            VertexConsumer linesBuf = event.getBuffers().getBuffer(RenderType.lines());
+            VertexConsumer linesBuf = event.getMultiBufferSource().getBuffer(RenderType.lines());
 
             float x = Math.max(0, face.getStepX());
             float y = Math.max(0, face.getStepY());
@@ -194,7 +194,7 @@ public class ItemOffsetTool extends Item {
             RenderSystem.polygonOffset(-1.0F, -10.0F);
             RenderSystem.disableCull();
 
-            VertexConsumer buf = event.getBuffers().getBuffer(ClientUtil.OFFSET_OVERLAY);
+            VertexConsumer buf = event.getMultiBufferSource().getBuffer(ClientUtil.OFFSET_OVERLAY);
 
             Direction moveDir = getMoveDir(face, hit.subtract(pos.getX(), pos.getY(), pos.getZ()));
             int clampedX = Math.max(0, moveDir.getStepX());
@@ -221,7 +221,7 @@ public class ItemOffsetTool extends Item {
                 buf.vertex(mat, isX ? clampedX : 1, isY ? clampedY : 1, z).color(1, 1, 1, alpha).endVertex();
             }
 
-            ((MultiBufferSource.BufferSource)event.getBuffers()).endBatch(ClientUtil.OFFSET_OVERLAY);
+            ((MultiBufferSource.BufferSource)event.getMultiBufferSource()).endBatch(ClientUtil.OFFSET_OVERLAY);
 
             RenderSystem.disablePolygonOffset();
             RenderSystem.polygonOffset(0.0F, 0.0F);

@@ -181,7 +181,7 @@ public class ChiselController {
     public static void onBlockHighlight(DrawBlockHighlightEvent event) {
         ItemStack held = event.getPlayer().getHeldItemMainhand();
         if (held.getItem() instanceof IChiselItem && event.getTarget().typeOfHit == Type.BLOCK) {
-            PlayerEntity player = event.getPlayer();
+            Player player = event.getPlayer();
             BlockState state = player.world.getBlockState(event.getTarget().getBlockPos());
             if (state.getBlock() == Blocks.AIR) {
                 return;

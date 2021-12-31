@@ -7,24 +7,25 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.widget.Widget;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.gui.screens.inventory.ContainerScreen;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.inventory.container.Slot;
-import net.minecraft.util.IReorderingProcessor;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslatableComponent;
-import net.minecraftforge.fml.client.gui.GuiUtils;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
+import net.minecraftforge.client.gui.GuiUtils;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -58,7 +59,7 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
         
         // if this is a selection slot, no double clicking
         //Slot slot = getSlotAtPosition(mouseX, mouseY);
-        //if (slot != null && slot.slotNumber < this.getContainer().getInventoryChisel().size - 1) {
+        //if (slot != null && slot.slotNumber < this.menu.getInventoryChisel().size - 1) {
         //    this.doubleClick = false;
         //}
 
@@ -76,18 +77,18 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
         int padding = (area.getWidth() - (buttonsPerRow * 20)) / buttonsPerRow;
         IChiselMode currentMode = NBTUtil.getChiselMode(this.getMenu().getChisel());
         for (IChiselMode mode : CarvingUtils.getModeRegistry().getAllModes()) {
-            if (((IChiselItem) this.getContainer().getChisel().getItem()).supportsMode(player, this.getContainer().getChisel(), mode)) {
+            if (((IChiselItem) this.menu.getChisel().getItem()).supportsMode(player, this.menu.getChisel(), mode)) {
                 int x = area.getX() + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
                 int y = area.getY() + ((id / buttonsPerRow) * (20 + padding));
                 ButtonChiselMode button = new ButtonChiselMode(x, y, mode, b -> {
                     b.active = false;
                     IChiselMode m = ((ButtonChiselMode) b).getMode();
-                    NBTUtil.setChiselMode(this.getContainer().getChisel(), m);
-                    Chisel.network.sendToServer(new PacketChiselMode(this.getContainer().getChiselSlot(), m));
-                    for (Widget other : buttons) {
-                        if (other != b && other instanceof ButtonChiselMode) {
+                    NBTUtil.setChiselMode(this.menu.getChisel(), m);
+                    Chisel.network.sendToServer(new PacketChiselMode(this.menu.getChiselSlot(), m));
+                    for (Widget other : renderables) {
+                        if (other != b && other instanceof ButtonChiselMode b2) {
                             // TODO see if Button.enabled == Button.active
-                            other.active = true;
+                            b2.active = true;
                         }
                     }
                 });
@@ -95,119 +96,116 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
                     // TODO see if Button.enabled == Button.active
                     button.active = false;
                 }
-                addButton(button);
+                addRenderableWidget(button);
                 id++;
             }
         }
     }
 
-    protected Rectangle2d getModeButtonArea() {
+    protected Rect2i getModeButtonArea() {
         int down = 73;
         int padding = 7;
-        return new Rectangle2d(guiLeft + padding, guiTop + down + padding, 50, ySize - down - (padding * 2));
+        return new Rect2i(getGuiLeft() + padding, getGuiTop() + down + padding, 50, getYSize() - down - (padding * 2));
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        this.renderBackground(matrixStack);
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
+    public void render(PoseStack PoseStack, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(PoseStack);
+        super.render(PoseStack, mouseX, mouseY, partialTicks);
+        this.renderTooltip(PoseStack, mouseX, mouseY);
     }
     
     @Override
-    protected void drawGuiContainerForegroundLayer(MatrixStack matrixStack, int j, int i) {
+    protected void renderLabels(PoseStack PoseStack, int j, int i) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         // TODO fix String
-        List<IReorderingProcessor> lines = font.trimStringToWidth(title, 40);
+        List<FormattedCharSequence> lines = font.split(title, 40);
         int y = 60;
-        IRenderTypeBuffer.Impl irendertypebuffer$impl = IRenderTypeBuffer.getImpl(Tessellator.getInstance().getBuffer());
-        for (IReorderingProcessor s : lines) {
-            font.drawEntityText(s, 32 - font.width(s) / 2, y, 0x404040, false, matrixStack.getLast().getMatrix(), irendertypebuffer$impl, false, 0, 0xF000F0);
+        MultiBufferSource.BufferSource irendertypebuffer$impl = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
+        for (FormattedCharSequence s : lines) {
+            font.drawInBatch(s, 32 - font.width(s) / 2, y, 0x404040, false, PoseStack.last().pose(), irendertypebuffer$impl, false, 0, 0xF000F0);
             y += 10;
         }
-        irendertypebuffer$impl.finish();
+        irendertypebuffer$impl.endBatch();
 
-        drawButtonTooltips(matrixStack, j, i);
+        drawButtonTooltips(PoseStack, j, i);
 //        if (showMode()) {
-//            line = I18n.format(this.container.inventory.getInventoryName() + ".mode");
+//            line = I18n.format(this.menu.inventory.getInventoryName() + ".mode");
 //            fontRendererObj.drawString(line, fontRendererObj.getStringWidth(line) / 2 + 6, 85, 0x404040);
 //        }
     }
     
-    protected void drawButtonTooltips(MatrixStack matrixStack, int mx, int my) {
-        for (Widget button : buttons) {
-            if (button.isMouseOver(mx, my) && button instanceof ButtonChiselMode) {
+    protected void drawButtonTooltips(PoseStack PoseStack, int mx, int my) {
+        for (Widget button : renderables) {
+            if (button instanceof ButtonChiselMode b && b.isMouseOver(mx, my)) {
                 String unloc = ((ButtonChiselMode)button).getMode().getUnlocName();
-                List<ITextComponent> ttLines = Lists.newArrayList(
+                List<Component> ttLines = Lists.newArrayList(
                         new TranslatableComponent(unloc),
-                        new TranslatableComponent(unloc + ".desc").mergeStyle(TextFormatting.GRAY)
+                        new TranslatableComponent(unloc + ".desc").withStyle(ChatFormatting.GRAY)
                 );
-                GuiUtils.drawHoveringText(matrixStack, ttLines, mx - guiLeft, my - guiTop, width - guiLeft, height - guiTop, -1, font);
+                renderComponentTooltip(PoseStack, ttLines, mx - getGuiLeft(), my - getGuiTop());
             }
         }
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(MatrixStack matrixStack, float f, int mx, int my) {
+    protected void renderBg(PoseStack PoseStack, float f, int mx, int my) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        int i = width - xSize >> 1;
-        int j = height - ySize >> 1;
+        int i = width - getXSize() >> 1;
+        int j = height - getYSize() >> 1;
 
         String texture = "chisel:textures/chisel2gui.png";
 
-        Minecraft.getInstance().getTextureManager().bindTexture(new ResourceLocation(texture));
-        blit(matrixStack, i, j, 0, 0, xSize, ySize);
+        Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(texture));
+        blit(PoseStack, i, j, 0, 0, getXSize(), getYSize());
 
-        int x = (width - xSize) / 2;
-        int y = (height - ySize) / 2;
+        int x = (width - getXSize()) / 2;
+        int y = (height - getYSize()) / 2;
 
-        Slot main = (Slot) this.getContainer().inventorySlots.get(this.getContainer().getInventoryChisel().size);
-        if (main.getStack().isEmpty()) {
-            drawSlotOverlay(matrixStack, this, x + 14, y + 14, main, 0, ySize, 60);
+        Slot main = (Slot) this.menu.slots.get(this.menu.getInventoryChisel().size);
+        if (main.getItem().isEmpty()) {
+            renderSlotHighlight(PoseStack, x + 14, y + 14, 0, getYSize());
         }
     }
 
     @Override
-    protected boolean isSlotSelected(Slot slotIn, double mouseX, double mouseY) {
-    	if (slotIn == container.getInputSlot()) {
-    		return isPointInRegion(slotIn.xPos - 8, slotIn.yPos - 8, 32, 32, mouseX, mouseY);
+    protected boolean isHovering(Slot slotIn, double mouseX, double mouseY) {
+    	if (slotIn == menu.getInputSlot()) {
+    		return isHovering(slotIn.x - 8, slotIn.y - 8, 32, 32, mouseX, mouseY);
     	}
-    	return super.isSlotSelected(slotIn, mouseX, mouseY);
+    	return super.isHovering(slotIn, mouseX, mouseY);
     }
 
     @Override
-    protected void fillGradient(MatrixStack matrixStack, int x1, int y1, int x2, int y2, int colorFrom, int colorTo) {
-    	if (x1 == container.getInputSlot().xPos && y1 == container.getInputSlot().yPos) {
-    		super.fillGradient(matrixStack, x1 - 8, y1 - 8, x2 + 8, y2 + 8, colorFrom, colorTo);
+    protected void fillGradient(PoseStack PoseStack, int x1, int y1, int x2, int y2, int colorFrom, int colorTo) {
+    	if (x1 == menu.getInputSlot().x && y1 == menu.getInputSlot().y) {
+    		super.fillGradient(PoseStack, x1 - 8, y1 - 8, x2 + 8, y2 + 8, colorFrom, colorTo);
     	} else {
-    		super.fillGradient(matrixStack, x1, y1, x2, y2, colorFrom, colorTo);
+    		super.fillGradient(PoseStack, x1, y1, x2, y2, colorFrom, colorTo);
     	}
     }
 
     @Override
-	public void moveItems(MatrixStack matrixStack, Slot slot) {
+	public void renderSlot(PoseStack stack, Slot slot) {
         if (slot instanceof SlotChiselInput) {
-        	matrixStack.push();
-        	matrixStack.scale(2, 2, 1);
+        	stack.pushPose();
+        	stack.scale(2, 2, 1);
         	// Item rendering doesn't use the matrix stack yet
-        	RenderSystem.pushMatrix();
-        	RenderSystem.scalef(2, 2, 1);
-        	slot.xPos -= 16;
-            slot.yPos -= 16;
-            super.moveItems(matrixStack, slot);
-            slot.xPos += 16;
-            slot.yPos += 16;
-            matrixStack.pop();
-            RenderSystem.popMatrix();
+        	slot.x -= 16;
+            slot.y -= 16;
+            super.renderSlot(stack, slot);
+            slot.x += 16;
+            slot.y += 16;
+            stack.popPose();
         } else {
-            super.moveItems(matrixStack, slot);
+            super.renderSlot(stack, slot);
         }
     }
 
-    public static void drawSlotOverlay(MatrixStack matrixStack, ContainerScreen<?> gui, int x, int y, Slot slot, int u, int v, int padding) {
+    public static void drawSlotOverlay(PoseStack PoseStack, AbstractContainerScreen<?> gui, int x, int y, Slot slot, int u, int v, int padding) {
         padding /= 2;
-        gui.blit(matrixStack, x + (slot.xPos - padding), y + (slot.yPos - padding), u, v, 18 + padding, 18 + padding);
+        gui.blit(PoseStack, x + (slot.x - padding), y + (slot.y - padding), u, v, 18 + padding, 18 + padding);
     }
 }

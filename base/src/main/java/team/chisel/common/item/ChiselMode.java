@@ -17,18 +17,18 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 import lombok.Getter;
 import lombok.Value;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.util.BlockVoxelShape;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.AxisDirection;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.core.Vec3i;
-import net.minecraft.util.text.TranslatableComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SupportType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
@@ -80,7 +80,7 @@ public enum ChiselMode implements IChiselMode {
 
         @Override
         public Iterable<BlockPos> getCandidates(Player player, BlockPos pos, Direction side) {
-            int facing = Mth.floor(player.yRot * 4.0F / 360.0F + 0.5D) & 3;
+            int facing = Mth.floor(player.getYRot() * 4.0F / 360.0F + 0.5D) & 3;
             Set<BlockPos> ret = new LinkedHashSet<>();
             for (int i = -1; i <= 1; i++) {
                 if (side != Direction.DOWN && side != Direction.UP) {
@@ -110,7 +110,7 @@ public enum ChiselMode implements IChiselMode {
 
         @Override
         public Iterable<BlockPos> getCandidates(Player player, BlockPos pos, Direction side) {
-            int facing = Mth.floor(player.yRot * 4.0F / 360.0F + 0.5D) & 3;
+            int facing = Mth.floor(player.getYRot() * 4.0F / 360.0F + 0.5D) & 3;
             Set<BlockPos> ret = new LinkedHashSet<>();
             for (int i = -1; i <= 1; i++) {
                 if (side != Direction.DOWN && side != Direction.UP) {
@@ -202,12 +202,12 @@ public enum ChiselMode implements IChiselMode {
                 Node ret = search.poll();
                 if (ret.getDistance() < CONTIGUOUS_RANGE) {
                     for (Direction face : directionsToSearch) {
-                        BlockPos bp = ret.getPos().offset(face);
+                        BlockPos bp = ret.getPos().relative(face);
                         BlockState newState = world.getBlockState(bp);
                         if (!seen.contains(bp) && newState == state) {
                             for (Direction obscureCheck : Direction.values()) {
-                                BlockPos obscuringPos = bp.offset(obscureCheck);
-                                if (!newState.isFaceSturdy(world, bp, obscureCheck.getOpposite(), BlockVoxelShape.FULL)) {
+                                BlockPos obscuringPos = bp.relative(obscureCheck);
+                                if (!newState.isFaceSturdy(world, bp, obscureCheck.getOpposite(), SupportType.FULL)) {
                                     search.offer(new Node(bp, ret.getDistance() + 1));
                                     break;
                                 }
@@ -235,7 +235,7 @@ public enum ChiselMode implements IChiselMode {
         this.localizedDescription = Chisel.registrate().addRawLang(getUnlocDescription(), desc);
     }
     
-    private static Iterable<BlockPos> filteredIterable(Stream<BlockPos> source, World world, BlockState state) {
+    private static Iterable<BlockPos> filteredIterable(Stream<BlockPos> source, Level world, BlockState state) {
         return source.filter(p -> world.getBlockState(p) == state)::iterator;
     }
     

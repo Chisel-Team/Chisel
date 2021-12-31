@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableList;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.Player;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.inventory.container.ClickType;
 import net.minecraft.world.inventory.MenuType;
@@ -117,13 +117,13 @@ public class ContainerChiselHitech extends ChiselContainer {
     }
     
     @Override
-    public void onContainerClosed(PlayerEntity entityplayer) {
+    public void onContainerClosed(Player entityplayer) {
         NBTUtil.setChiselTarget(getChisel(), getTargetStack());
         super.onContainerClosed(entityplayer);
     }
     
     @Override
-    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, PlayerEntity player) {
+    public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, Player player) {
         if (slotId >= 0) {
             Slot slot = getSlot(slotId);
             if (slotId < getInventoryChisel().size) {

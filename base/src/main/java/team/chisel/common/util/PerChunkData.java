@@ -15,23 +15,23 @@ import com.google.common.collect.Maps;
 
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.core.Registry;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.world.ChunkDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.network.NetworkEvent;
-import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.PacketDistributor;
 import team.chisel.Chisel;
 import team.chisel.api.chunkdata.ChunkData;
 import team.chisel.api.chunkdata.IChunkData;
@@ -92,7 +92,7 @@ public enum PerChunkData implements IChunkDataRegistry {
                     int z = chunk.getPos().z << 4;
                     ClientProxy.getWorldRenderer().setBlocksDirty(x, 0, z, x, 255, z);
                 } else {
-                    for (ChunkPos pos : data.readFromNBT(this.tag.getList("l", Constants.NBT.TAG_COMPOUND))) {
+                    for (ChunkPos pos : data.readFromNBT(this.tag.getList("l", Tag.TAG_COMPOUND))) {
                         ClientProxy.getWorldRenderer().setBlocksDirty(pos.x, 0, pos.z, pos.x, 255, pos.z);
                     }
                 }

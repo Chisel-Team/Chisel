@@ -5,12 +5,12 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 
 import lombok.RequiredArgsConstructor;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fml.network.NetworkEvent;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.network.NetworkEvent;
 import team.chisel.client.ClientProxy;
 
 @RequiredArgsConstructor

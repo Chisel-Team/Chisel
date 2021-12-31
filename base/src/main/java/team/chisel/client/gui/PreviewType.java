@@ -11,9 +11,9 @@ import com.google.common.collect.ImmutableSet;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 import lombok.Getter;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import team.chisel.Chisel;
 
 @Getter 

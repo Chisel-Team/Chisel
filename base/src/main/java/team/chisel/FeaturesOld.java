@@ -7,12 +7,10 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 
 import lombok.RequiredArgsConstructor;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.DyeColor;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 import team.chisel.api.block.ChiselBlockFactory;
-import team.chisel.client.data.VariantTemplates;
 
 @RequiredArgsConstructor
 public enum FeaturesOld {
@@ -3054,11 +3052,11 @@ public enum FeaturesOld {
 //    },
 //
     WOOL(factory -> Arrays.stream(DyeColor.values())
-            .forEach(color -> factory.newType(Material.WOOL, "wool/" + (color.getString()))
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getString()) + " Wool")
+            .forEach(color -> factory.newType(Material.WOOL, "wool/" + (color.getSerializedName()))
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
                     .variation("legacy")
                     .next("llama")
-                    .build(b -> b.sound(SoundType.CLOTH).hardnessAndResistance(0.8F)))),
+                    .build(b -> b.sound(SoundType.WOOL).strength(0.8F)))),
 //            BlockState wool = Blocks.WOOL.getDefaultState();
 //            IProperty<EnumDyeColor> prop = BlockColored.COLOR;
 

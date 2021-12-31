@@ -1,6 +1,10 @@
 package team.chisel.common.block;
 
-import static team.chisel.common.inventory.ContainerAutoChisel.*;
+import static team.chisel.common.inventory.ContainerAutoChisel.ACTIVE;
+import static team.chisel.common.inventory.ContainerAutoChisel.ENERGY;
+import static team.chisel.common.inventory.ContainerAutoChisel.ENERGY_USE;
+import static team.chisel.common.inventory.ContainerAutoChisel.MAX_ENERGY;
+import static team.chisel.common.inventory.ContainerAutoChisel.PROGRESS;
 
 import java.util.EnumMap;
 import java.util.function.Supplier;
@@ -13,47 +17,51 @@ import org.apache.commons.lang3.Validate;
 
 import lombok.Getter;
 import lombok.Setter;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.DiggingParticle;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.client.particle.TerrainParticle;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.entity.player.Player;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.particles.BlockParticleData;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.core.Direction;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.Nameable;
-import net.minecraft.util.IWorldPosCallable;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.Mth;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.network.chat.Component;
-import net.minecraft.util.text.TranslatableComponent;
-import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.Mth;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.world.Container;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.Nameable;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.FakePlayerFactory;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.fml.network.PacketDistributor;
-import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor.TargetPoint;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -494,7 +502,7 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
     }
     
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundTag write(CompoundTag compound) {
         compound.put("other", otherInv.serializeNBT());
         compound.put("input", inputInv.serializeNBT());
         compound.put("output", outputInv.serializeNBT());
@@ -508,7 +516,7 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
     }
     
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void read(BlockState state, CompoundTag compound) {
         super.read(state, compound);
         this.otherInv.deserializeNBT(compound.getCompound("other"));
         this.inputInv.deserializeNBT(compound.getCompound("input"));
@@ -546,8 +554,8 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
     
     @Override
     @Nullable
-    public Container createMenu(int windowId, PlayerInventory playerInv, PlayerEntity p_createMenu_3_) {
-        return new ContainerAutoChisel(ChiselTileEntities.AUTO_CHISEL_CONTAINER.get(), windowId, playerInv, getInputInv(), getOutputInv(), getOtherInv(), energyData, IWorldPosCallable.of(getWorld(), getPos()));
+    public Container createMenu(int windowId, PlayerInventory playerInv, Player p_createMenu_3_) {
+        return new ContainerAutoChisel(ChiselTileEntities.AUTO_CHISEL_CONTAINER.get(), windowId, playerInv, getInputInv(), getOutputInv(), getOtherInv(), energyData, IWorldPosCallable.of(getWorld(), getBlockPos()));
     }
     
     /* == Rendering Data == */
@@ -557,10 +565,11 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
     private @Nullable ItemStack source;
 
     @SuppressWarnings("null")
-    public void spawnCompletionFX(PlayerEntity player, ItemStack chisel, BlockState source) {
-        SoundUtil.playSound(player, getPos(), SoundUtil.getSound(player, chisel, source.getBlock()));
+    public void spawnCompletionFX(Player player, ItemStack chisel, BlockState source) {
+        BlockPos pos = getBlockPos();
+        SoundUtil.playSound(player, pos, SoundUtil.getSound(player, chisel, source.getBlock()));
         if (chisel.isEmpty()) {
-            getWorld().playSound(player, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 0.8F, 0.8F + this.world.rand.nextFloat() * 0.4F);
+            this.getLevel().playSound(player, pos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 0.8F, 0.8F + this.level.random.nextFloat() * 0.4F);
         }
         int i = 3;
         float mid = i / 2f;
@@ -569,13 +578,13 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
                 for (int l = 0; l < i; ++l) {
                     double vx = (mid - j) * 0.05;
                     double vz = (mid - l) * 0.05;
-                    Particle fx = Minecraft.getInstance().particles.addParticle(
-                            new BlockParticleData(ParticleTypes.BLOCK, source), 
+                    Particle fx = Minecraft.getInstance().particleEngine.addParticle(
+                            new BlockParticleOption(ParticleTypes.BLOCK, source), 
                             pos.getX() + 0.5, pos.getY() + 10/16D, pos.getZ() + 0.5, 
                             vx, 0, vz);
 
                     if (fx != null) {
-                        ((DiggingParticle)fx).setBlockPos(pos);
+                        ((TerrainParticle)fx).setBlockPos(pos);
                     }
                 }
             }
