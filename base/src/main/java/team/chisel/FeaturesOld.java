@@ -209,7 +209,7 @@ public enum FeaturesOld {
 //                }
 //
 //                @Override
-//                public float getEnchantPowerBonus(World world, BlockPos pos){
+//                public float getEnchantPowerBonus(Level world, BlockPos pos){
 //                    return 1;
 //                }
 //            };
@@ -1306,7 +1306,7 @@ public enum FeaturesOld {
 //                    }
 //
 //                    @Override
-//                    public float[] getBeaconColorMultiplier(BlockState state, World world, BlockPos pos, BlockPos beaconPos) {
+//                    public float[] getBeaconColorMultiplier(BlockState state, Level world, BlockPos pos, BlockPos beaconPos) {
 //                        return beaconFloats;
 //                    }
 //                };
@@ -1417,7 +1417,7 @@ public enum FeaturesOld {
 //
 //                @Override
 //                public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, BlockState state, int fortune) {
-//                    Random rand = world instanceof World ? ((World)world).rand : RANDOM;
+//                    Random rand = world instanceof Level ? ((Level)world).rand : RANDOM;
 //                    drops.add(new ItemStack(Items.GLOWSTONE_DUST, this.quantityDropped(state, fortune, rand)));
 //                }
 //            };
@@ -2114,7 +2114,7 @@ public enum FeaturesOld {
 //
 //            BlockCreator<BlockCarvable> netherrackCreator = (mat, index, maxVariation, data) -> new BlockCarvable(mat, index, maxVariation, data) {
 //                @Override
-//                public boolean isFireSource(@Nonnull World world, BlockPos pos, Direction side) {
+//                public boolean isFireSource(@Nonnull Level world, BlockPos pos, Direction side) {
 //                    return side == Direction.UP;
 //                }
 //            };

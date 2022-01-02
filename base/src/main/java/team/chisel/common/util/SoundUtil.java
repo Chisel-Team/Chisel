@@ -4,16 +4,15 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
@@ -31,7 +30,7 @@ public class SoundUtil {
                 return evt;
             }
         }
-        return CarvingUtils.getChiselRegistry().getGroup(target != null ? target.getBlock() : Blocks.AIR).map(ICarvingGroup::getSound).orElse(ChiselSounds.fallback);
+        return CarvingUtils.getChiselRegistry().getGroup(target != null ? target : Blocks.AIR).map(ICarvingGroup::getSound).orElse(ChiselSounds.fallback);
     }
     
     public static void playSound(Player player, ItemStack chisel, ItemStack source) {

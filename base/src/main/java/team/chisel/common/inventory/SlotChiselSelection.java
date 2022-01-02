@@ -3,13 +3,13 @@ package team.chisel.common.inventory;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.world.Container;
-import net.minecraft.inventory.container.ClickType;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.util.Hand;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
@@ -32,7 +32,7 @@ public class SlotChiselSelection extends Slot {
 
     @Override
     public boolean mayPickup(Player par1Player) {
-        return par1Player.inventory.getCarried().isEmpty();
+        return par1Player.inventoryMenu.getCarried().isEmpty();
     }
     
     public static ItemStack craft(ChiselContainer container, Player player, ItemStack itemstack, boolean simulate) {
@@ -47,23 +47,23 @@ public class SlotChiselSelection extends Slot {
         if (!chisel.isEmpty() && !crafted.isEmpty()) {                
             IChiselItem item = (IChiselItem) container.getChisel().getItem();
             ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(itemstack.getItem()).orElseThrow(IllegalArgumentException::new);
-            if (!item.canChisel(player.world, player, chisel, variation)) {
+            if (!item.canChisel(player.level, player, chisel, variation)) {
                 return res;
             }
-            res = item.craftItem(chisel, crafted, itemstack, player, p -> p.sendBreakAnimation(container.getHand() == Hand.MAIN_HAND ? EquipmentSlotType.MAINHAND : EquipmentSlotType.OFFHAND));
+            res = item.craftItem(chisel, crafted, itemstack, player, p -> p.broadcastBreakEvent(container.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND));
             if (!simulate) {
                 container.getInventoryChisel().setStackInSpecialSlot(crafted.getCount() == 0 ? ItemStack.EMPTY : crafted);
                 container.onChiselSlotChanged();
-                item.onChisel(player.world, player, chisel, variation);
+                item.onChisel(player.level, player, chisel, variation);
                 if (chisel.getCount() == 0) {
-                    container.getInventoryPlayer().setInventorySlotContents(container.getChiselSlot(), ItemStack.EMPTY);
+                    container.getInventoryPlayer().setItem(container.getChiselSlot(), ItemStack.EMPTY);
                 }
-                if (!crafted.isEmpty() && !item.canChisel(player.world, player, chisel, variation)) {
+                if (!crafted.isEmpty() && !item.canChisel(player.level, player, chisel, variation)) {
                     container.onChiselBroken();
                 }
 
                 container.getInventoryChisel().updateItems();
-                container.detectAndSendChanges();
+                container.broadcastChanges();
             }
         }
         
@@ -71,7 +71,7 @@ public class SlotChiselSelection extends Slot {
     }
 
     @Override
-    public ItemStack onTake(Player player, ItemStack itemstack) {
+    public void onTake(Player player, ItemStack itemstack) {
         ItemStack chisel = container.getChisel().copy();
         ItemStack res = craft(container, player, itemstack, false);
         if (container.currentClickType != ClickType.PICKUP) {
@@ -79,8 +79,8 @@ public class SlotChiselSelection extends Slot {
         }
         if (!res.isEmpty()) {
             SoundUtil.playSound(player, chisel, itemstack);
-            player.inventory.setItemStack(res);
+            player.getInventory().setPickedItem(res);
         }
-        return ItemStack.EMPTY; // Return value seems to be ignored?
+        return;
     }
 }

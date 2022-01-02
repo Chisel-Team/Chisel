@@ -15,28 +15,28 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.entity.decoration.HangingEntity;
-import net.minecraft.world.entity.decoration.Painting;
-import net.minecraft.world.entity.decoration.Motive;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.tags.Tag;
-import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.Tag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.decoration.HangingEntity;
+import net.minecraft.world.entity.decoration.Motive;
+import net.minecraft.world.entity.decoration.Painting;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LevelEvent;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
@@ -94,8 +94,8 @@ public class ChiselController {
             } else {
                 List<Block> variations = new ArrayList<>(blockGroup.getBlockTag().map(Tag::getValues).orElse(Collections.emptyList()));
                 
-                variations = variations.stream().filter(v -> v.getBlock() != null).collect(Collectors.toList());
-                        
+                variations = variations.stream().filter(v -> v != null).collect(Collectors.toList());
+
                 int index = variations.indexOf(state.getBlock());
                 index = player.isShiftKeyDown() ? index - 1 : index + 1;
                 index = (index + variations.size()) % variations.size();
@@ -163,11 +163,11 @@ public class ChiselController {
             chisel.onChisel(player.level, player, held, v);
             if (held.getCount() <= 0) {
                 ItemStack targetStack = NBTUtil.getChiselTarget(held);
-                player.inventory.items.set(player.inventory.selected, targetStack);
+                player.getInventory().items.set(player.getInventory().selected, targetStack);
             }
             if (world.isClientSide) {
                 SoundUtil.playSound(player, held, targetBlock);
-                world.levelEvent(player, Constants.WorldEvents.BREAK_BLOCK_EFFECTS, pos, Block.getId(origState));
+                world.levelEvent(player, LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(origState));
             }
             world.setBlockAndUpdate(pos, targetBlock.defaultBlockState());
         }
@@ -302,7 +302,7 @@ public class ChiselController {
     @SubscribeEvent
     public static void onBlockBreak(BlockEvent.BreakEvent event) {
         ItemStack stack = event.getPlayer().getMainHandItem();
-        if (event.getPlayer().abilities.instabuild && !stack.isEmpty() && stack.getItem() instanceof IChiselItem) {
+        if (event.getPlayer().getAbilities().instabuild && !stack.isEmpty() && stack.getItem() instanceof IChiselItem) {
             event.setCanceled(true);
         }
     }

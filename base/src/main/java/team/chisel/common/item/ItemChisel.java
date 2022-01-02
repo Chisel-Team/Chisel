@@ -15,25 +15,25 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import lombok.Getter;
-import net.minecraft.block.BlockState;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.Attribute;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.AttributeModifier.Operation;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.player.Player;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.util.Hand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.ChatFormatting;
-import net.minecraft.util.text.TranslatableComponent;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import team.chisel.api.IChiselGuiType;
 import team.chisel.api.IChiselGuiType.ChiselGuiType;
 import team.chisel.api.IChiselItem;
@@ -103,47 +103,47 @@ public class ItemChisel extends Item implements IChiselItem {
         if (type != ChiselType.IRON || Configurations.ironChiselHasModes) {
             list.add(new TextComponent(""));
             list.add(TT_CHISEL_MODES.getComponent());
-            list.add(TT_CHISEL_SELECTED_MODE.format(TextFormatting.GREEN, new TranslatableComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
+            list.add(TT_CHISEL_SELECTED_MODE.format(ChatFormatting.GREEN, new TranslatableComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
         }
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack) {
+    public Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot slot, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> multimap = HashMultimap.create();
-        if (slot == EquipmentSlotType.MAINHAND) {
-            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Chisel Damage", type.attackDamage, Operation.ADDITION));
+        if (slot == EquipmentSlot.MAINHAND) {
+            multimap.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Chisel Damage", type.attackDamage, Operation.ADDITION));
         }
         return multimap;
     }
 
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damageItem(1, attacker, p -> p.sendBreakAnimation(Hand.MAIN_HAND));
-        return super.hitEntity(stack, attacker, target);
+    public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+        return super.hurtEnemy(stack, attacker, target);
     }
     
     @Override
-    public boolean canOpenGui(World world, Player player, Hand hand) {
+    public boolean canOpenGui(Level world, Player player, InteractionHand hand) {
         return true;
     }
     
     @Override
-    public IChiselGuiType getGuiType(World world, Player player, Hand hand) {
+    public IChiselGuiType getGuiType(Level world, Player player, InteractionHand hand) {
         return type == ChiselType.HITECH ? ChiselGuiType.HITECH : ChiselGuiType.NORMAL;
     }
 
     @Override
-    public boolean canChisel(World world, Player player, ItemStack chisel, ICarvingVariation target) {
+    public boolean canChisel(Level world, Player player, ItemStack chisel, ICarvingVariation target) {
         return !chisel.isEmpty();
     }
 
     @Override
-    public boolean onChisel(World world, Player player, ItemStack chisel, ICarvingVariation target) {
+    public boolean onChisel(Level world, Player player, ItemStack chisel, ICarvingVariation target) {
         return Configurations.allowChiselDamage;
     }
 
     @Override
-    public boolean canChiselBlock(World world, Player player, Hand hand, BlockPos pos, BlockState state) {
+    public boolean canChiselBlock(Level world, Player player, InteractionHand hand, BlockPos pos, BlockState state) {
         return type == ChiselType.HITECH || type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
     }
 
@@ -154,7 +154,7 @@ public class ItemChisel extends Item implements IChiselItem {
 
     // TODO implement ChiselController
 //    @Override
-//    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, Player playerIn, Hand hand) {
+//    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, Level worldIn, Player playerIn, InteractionHand hand) {
 //        if (!worldIn.isRemote) {
 //            playerIn.openGui(Chisel.instance, 0, worldIn, hand.ordinal(), 0, 0);
 //            return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
@@ -164,6 +164,6 @@ public class ItemChisel extends Item implements IChiselItem {
     
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        return slotChanged || !ItemStack.areItemsEqual(oldStack, newStack);
+        return slotChanged || !ItemStack.isSame(oldStack, newStack);
     }
 }

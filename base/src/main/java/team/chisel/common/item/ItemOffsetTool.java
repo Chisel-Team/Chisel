@@ -151,10 +151,6 @@ public class ItemOffsetTool extends Item {
             PoseStack ms = event.getPoseStack();
             ms.pushPose();
 
-            RenderSystem.disableLighting();
-            RenderSystem.disableTexture();
-            RenderSystem.depthMask(false);
-
             // Draw the X
             VertexConsumer linesBuf = event.getMultiBufferSource().getBuffer(RenderType.lines());
 

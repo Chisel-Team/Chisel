@@ -84,7 +84,7 @@ public class BlockAutoChisel extends Block {
     
     @Override
     @Deprecated
-    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         TileEntity tileentity = worldIn.getTileEntity(pos);
 
         if (tileentity instanceof TileAutoChisel) {
@@ -98,7 +98,7 @@ public class BlockAutoChisel extends Block {
         super.onReplaced(state, worldIn, pos, newState, isMoving);
     }
 
-    private void dumpItems(World worldIn, BlockPos pos, IItemHandler inv) {
+    private void dumpItems(Level worldIn, BlockPos pos, IItemHandler inv) {
         double x = pos.getX(), y = pos.getY(), z = pos.getZ();
         for (int i = 0; i < inv.getSlots(); i++) {
             ItemStack stack = inv.getStackInSlot(i);

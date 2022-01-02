@@ -26,11 +26,11 @@ public interface IChiselItem {
      * Checks whether the chisel can have its GUI opened, and will be called every tick to assure the GUI can <i>remain</i> open.
      * 
      * @param world
-     *            {@link World} object
+     *            {@link Level} object
      * @param player
      *            The player holding the chisel. It can always be assumed that the player's current item will be this.
      * @param hand
-     *            The {@link Hand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
+     *            The {@link InteractionHand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
      * @return True if the GUI should open. False otherwise.
      */
     boolean canOpenGui(Level world, Player player, InteractionHand hand);
@@ -41,11 +41,11 @@ public interface IChiselItem {
      * Use {@link IChiselGuiType.ChiselGuiType} as return value.
      * 
      * @param world
-     *            {@link World} object
+     *            {@link Level} object
      * @param player
      *            The player holding the chisel. It can always be assumed that the player's current item will be this.
      * @param hand
-     *            The {@link Hand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
+     *            The {@link InteractionHand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
      * @return
      */
     IChiselGuiType<?> getGuiType(Level world, Player player, InteractionHand hand);
@@ -54,7 +54,7 @@ public interface IChiselItem {
      * Called when an item is chiseled using this chisel
      * 
      * @param world
-     *            {@link World} object
+     *            {@link Level} object
      * @param player
      *            The {@link Player} performing the chiseling.
      * @param chisel
@@ -71,7 +71,7 @@ public interface IChiselItem {
      * It is not necessary to take into account whether this item <i>has</i> any variants, this method will only be called after that check.
      * 
      * @param world
-     *            {@link World} object
+     *            {@link Level} object
      * @param player
      *            The {@link Player} performing the chiseling.
      * @param chisel
@@ -86,11 +86,11 @@ public interface IChiselItem {
      * Allows you to control if your item can chisel this block in the world.
      * 
      * @param world
-     *            World object
+     *            Level object
      * @param player
      *            {@link Player The player} holding the chisel.
      * @param hand
-     *            The {@link Hand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
+     *            The {@link InteractionHand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
      * @param pos
      *            The {@link BlockPos position} of the block being chiseled.
      * @param state
@@ -116,7 +116,7 @@ public interface IChiselItem {
      * Allows this chisel to provide a different sound for the given {@link ICarvingVariation}.
      * 
      * @param world
-     *            World object.
+     *            Level object.
      * @param player
      *            {@link Player The player} holding the chisel
      * @param chisel

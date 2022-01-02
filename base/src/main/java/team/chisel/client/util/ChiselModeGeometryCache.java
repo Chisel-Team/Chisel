@@ -153,7 +153,7 @@ public class ChiselModeGeometryCache {// implements IWorldEventListener {
 //    }
 //
 ////    @Override
-////    public void notifyBlockUpdate(World worldIn, BlockPos pos, BlockState oldState, BlockState newState, int flags) {
+////    public void notifyBlockUpdate(Level worldIn, BlockPos pos, BlockState oldState, BlockState newState, int flags) {
 ////        checkRedraw(new AxisAlignedBB(pos));
 ////    }
 ////

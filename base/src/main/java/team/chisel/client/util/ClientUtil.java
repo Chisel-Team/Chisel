@@ -5,14 +5,14 @@ import java.lang.reflect.Field;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import org.lwjgl.opengl.GL11;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
+import com.mojang.blaze3d.vertex.VertexFormat;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.Timer;
 import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import net.minecraft.client.Timer;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import team.chisel.Chisel;
 
 @ParametersAreNonnullByDefault
@@ -48,7 +48,8 @@ public class ClientUtil {
     }
 
     public static final RenderType OFFSET_OVERLAY = RenderType.create("chisel_offset_overlay",
-    		DefaultVertexFormat.POSITION_COLOR, GL11.GL_TRIANGLES, 256,
+    		DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.TRIANGLES, 256,
+    		false, true,
     		RenderType.CompositeState.builder()
     			.setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
     			.setOutputState(RenderStateShard.TRANSLUCENT_TARGET)
