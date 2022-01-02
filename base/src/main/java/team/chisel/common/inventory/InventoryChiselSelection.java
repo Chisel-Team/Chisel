@@ -5,11 +5,11 @@ import java.util.List;
 import javax.annotation.Nullable;
 import javax.annotation.ParametersAreNonnullByDefault;
 
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.Container;
-import net.minecraft.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.NonNullList;
+import net.minecraft.world.Container;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import team.chisel.api.IChiselItem;
 import team.chisel.common.item.ItemChisel;
 
@@ -92,14 +92,14 @@ public class InventoryChiselSelection implements Container {
 
     @Override
     public boolean stillValid(Player player) {
-        ItemStack held = player.inventory.getItem(container.getChiselSlot());
-        return !held.isEmpty() && held.getItem() instanceof IChiselItem && ((IChiselItem)held.getItem()).canOpenGui(player.world, player, container.hand);
+        ItemStack held = player.getInventory().getItem(container.getChiselSlot());
+        return !held.isEmpty() && held.getItem() instanceof IChiselItem && ((IChiselItem)held.getItem()).canOpenGui(player.level, player, container.hand);
     }
 
     public void clearItems() {
         activeVariations = 0;
         for (int i = 0; i < size; i++) {
-            setInventorySlotContents(i, ItemStack.EMPTY);
+            setItem(i, ItemStack.EMPTY);
         }
     }
 
@@ -108,7 +108,7 @@ public class InventoryChiselSelection implements Container {
     }
     
     public void setStackInSpecialSlot(ItemStack stack) {
-        setInventorySlotContents(size, stack);
+        setItem(size, stack);
     }
 
     public void updateItems() {
@@ -125,35 +125,34 @@ public class InventoryChiselSelection implements Container {
 
         activeVariations = 0;
         while (activeVariations < size && activeVariations < list.size()) {
-            setInventorySlotContents(activeVariations, list.get(activeVariations));
+            setItem(activeVariations, list.get(activeVariations));
             activeVariations++;
         }
     }
 
     @Override
-    public void setInventorySlotContents(int slot, ItemStack stack) {
+    public void setItem(int slot, ItemStack stack) {
         inventory.set(slot, stack);
         updateInventoryState(slot);
     }
 
-
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack stack) {
+    public boolean canPlaceItem(int i, ItemStack stack) {
         return !(!stack.isEmpty() && (stack.getItem() instanceof ItemChisel)) && i == size;
     }
 
     @Override
-    public void clear() {
+    public void clearContent() {
         inventory.clear();
     }
 
     @Override
-    public void openInventory(Player var1) {
+    public void startOpen(Player var1) {
 
     }
 
     @Override
-    public void closeInventory(Player var1) {
+    public void stopOpen(Player var1) {
 
     }
 

@@ -6,14 +6,17 @@ import java.util.stream.Stream;
 
 import com.mojang.serialization.Codec;
 
-import net.minecraft.world.level.material.Material;
-import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.levelgen.placement.DecorationContext;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneDecoratorConfiguration;
-import net.minecraft.world.level.levelgen.placement.FeatureDecorator;
+import net.minecraft.world.level.levelgen.placement.DecorationContext;
+import net.minecraft.world.level.levelgen.placement.PlacementContext;
+import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
+import net.minecraft.world.level.material.Material;
+import team.chisel.common.init.ChiselWorldGen;
 
-public class UnderLavaPlacement extends FeatureDecorator<NoneDecoratorConfiguration> {
+public class UnderLavaPlacement extends PlacementModifier {
 
 	public static final Codec<UnderLavaPlacement> CODEC = Codec.unit(new UnderLavaPlacement());
 
@@ -22,7 +25,7 @@ public class UnderLavaPlacement extends FeatureDecorator<NoneDecoratorConfigurat
     }
 
     @Override
-    public Stream<BlockPos> getPositions(DecorationContext world, Random p_212848_3_, NoneDecoratorConfiguration p_212848_4_, BlockPos pos) {
+    public Stream<BlockPos> getPositions(PlacementContext world, Random p_212848_3_, BlockPos pos) {
         BlockPos origin = new BlockPos(pos.getX() + 8, 0, pos.getZ() + 8);
         return BlockPos.betweenClosedStream(origin, origin.offset(15, 11, 15))
                 .filter(p -> world.getBlockState(p).getMaterial() == Material.LAVA)
@@ -30,5 +33,10 @@ public class UnderLavaPlacement extends FeatureDecorator<NoneDecoratorConfigurat
                         .filter(d -> d != Direction.UP)
                         .map(d -> p.relative(d))
                         .filter(p2 -> world.getBlockState(p2).getMaterial() != Material.LAVA));
+    }
+
+    @Override
+    public PlacementModifierType<?> type() {
+        return ChiselWorldGen.PLACE_UNDER_LAVA;
     }
 }

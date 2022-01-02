@@ -6,7 +6,7 @@ buildscript {
             name = "forge"
             url = "https://maven.minecraftforge.net"
         }
-		maven { url = 'https://maven.parchmentmc.org' }
+        maven { url = 'https://maven.parchmentmc.org' }
         maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-		classpath 'org.parchmentmc:librarian:1.+'
+        classpath 'org.parchmentmc:librarian:1.+'
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
@@ -52,6 +52,9 @@ allprojects {
         }
         maven { // JEI
             url "https://dvs1.progwml6.com/files/maven"
+        }
+         maven { // WTHIT
+             url "https://maven.bai.lol"
         }
     }
     
@@ -104,12 +107,12 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
     apply plugin: 'net.minecraftforge.gradle'
-	apply plugin: 'org.parchmentmc.librarian.forgegradle'
+    apply plugin: 'org.parchmentmc.librarian.forgegradle'
     apply plugin: 'eclipse'
     apply plugin: 'io.freefair.lombok'
     apply plugin: 'com.matthewprenger.cursegradle'
     apply plugin: 'com.github.johnrengelman.shadow'
-	apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
+    apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
     group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
     archivesBaseName = (dev ? 'Chisel_DEV' : 'Chisel') + (project.name.equals('base') ? '' : '-' + project.name)
@@ -131,7 +134,9 @@ subprojects {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
         implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
-        //implementation "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
+        
+        compileOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}:api")
+        runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
     
         //compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
         //runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")

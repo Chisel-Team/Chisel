@@ -22,7 +22,7 @@ public class ChiselTileEntities {
     public static final RegistryEntry<? extends Block> AUTO_CHISEL = REGISTRATE
             .object("auto_chisel")
             .block(BlockAutoChisel::new)
-            .simpleTileEntity(TileAutoChisel::new)
+            .simpleBlockEntity(TileAutoChisel::new)
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), prov.models().getExistingFile(ctx.getId())))
             .item(BlockItem::new)
                 .model((ctx, prov) -> prov.blockItem(ctx::getEntry))

@@ -18,35 +18,31 @@ import org.apache.commons.lang3.Validate;
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.DiggingParticle;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.TerrainParticle;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.entity.player.Player;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.particles.BlockParticleData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.Mth;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.Nameable;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec3;
@@ -73,7 +69,7 @@ import team.chisel.common.inventory.ContainerAutoChisel;
 import team.chisel.common.util.SoundUtil;
 
 @ParametersAreNonnullByDefault
-public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, Nameable, MenuProvider {
+public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvider {
     
     private class DirtyingStackHandler extends ItemStackHandler {
         
@@ -262,8 +258,8 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
     @Setter
     private @Nullable Component customName;
     
-    public TileAutoChisel() {
-        super(ChiselTileEntities.AUTO_CHISEL_TE.get());
+    public TileAutoChisel(BlockEntityType<? extends TileAutoChisel> type, BlockPos position, BlockState state) {
+        super(type, position, state);
     }
     
     public IItemHandler getOtherInv() {
@@ -336,8 +332,7 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
         }
     }
     
-    @Override
-    public void tick() {
+    public void tickCrafting() {
         if (getLevel() == null || getLevel().isClientSide) {
             return;
         }
@@ -424,9 +419,9 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
                     chisel = chisel.copy();
 
                     ServerPlayer player = FakePlayerFactory.getMinecraft((ServerLevel) getLevel());
-                    player.inventory.items.set(player.inventory.selected, chisel);
+                    player.getInventory().items.set(player.getInventory().selected, chisel);
                     res = chiselitem.craftItem(chisel, source, res, player, $ -> {}); // TODO should this send an explicit packet for item break? currently just checks for empty stack on the client
-                    player.inventory.items.set(player.inventory.selected, ItemStack.EMPTY);
+                    player.getInventory().items.set(player.getInventory().selected, ItemStack.EMPTY);
 
                     chiselitem.onChisel(getLevel(), player, chisel, v);
 
@@ -475,7 +470,7 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
     @Override
     @Nullable
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return new ClientboundBlockEntityDataPacket(getBlockPos(), 0, getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this, BlockEntity::getUpdateTag);
     }
     
     @Override
@@ -489,20 +484,20 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
     
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        handleUpdateTag(getLevel().getBlockState(pkt.getPos()), pkt.getTag());
+        handleUpdateTag(pkt.getTag());
         super.onDataPacket(net, pkt);
     }
 
     @Override
-    public void handleUpdateTag(BlockState state, CompoundTag tag) {
+    public void handleUpdateTag(CompoundTag tag) {
         if (tag.contains("customName")) {
-            setCustomName(ITextComponent.Serializer.getComponentFromJson(tag.getString("customName")));
+            setCustomName(Component.Serializer.fromJson(tag.getString("customName")));
         }
-        super.handleUpdateTag(state, tag);
+        super.handleUpdateTag(tag);
     }
     
     @Override
-    public CompoundTag write(CompoundTag compound) {
+    public CompoundTag save(CompoundTag compound) {
         compound.put("other", otherInv.serializeNBT());
         compound.put("input", inputInv.serializeNBT());
         compound.put("output", outputInv.serializeNBT());
@@ -510,14 +505,14 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
         compound.putInt("progress", getProgress());
         compound.putInt("source", sourceSlot);
         if (hasCustomName()) {
-            compound.putString("customName", ITextComponent.Serializer.toJson(getName()));
+            compound.putString("customName", Component.Serializer.toJson(getName()));
         }
-        return super.write(compound);
+        return super.save(compound);
     }
     
     @Override
-    public void read(BlockState state, CompoundTag compound) {
-        super.read(state, compound);
+    public void load(CompoundTag compound) {
+        super.load(compound);
         this.otherInv.deserializeNBT(compound.getCompound("other"));
         this.inputInv.deserializeNBT(compound.getCompound("input"));
         this.outputInv.deserializeNBT(compound.getCompound("output"));
@@ -525,20 +520,20 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
         this.progress = compound.getInt("progress");
         this.sourceSlot = compound.getInt("source");
         if (compound.contains("customName")) {
-            this.customName = ITextComponent.Serializer.getComponentFromJson(compound.getString("customName"));
+            this.customName = Component.Serializer.fromJson(compound.getString("customName"));
         }
     }
     
     /* == IWorldNameable == */
     
     @Override
-    public ITextComponent getDisplayName() {
+    public Component getDisplayName() {
         return hasCustomName() ? getCustomName() : getName();
     }
 
     @Override
-    public ITextComponent getName() {
-        ITextComponent name = getCustomName();
+    public Component getName() {
+        Component name = getCustomName();
         if (name == null) {
             name = new TranslatableComponent("container.autochisel.title");
         }
@@ -554,8 +549,8 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
     
     @Override
     @Nullable
-    public Container createMenu(int windowId, PlayerInventory playerInv, Player p_createMenu_3_) {
-        return new ContainerAutoChisel(ChiselTileEntities.AUTO_CHISEL_CONTAINER.get(), windowId, playerInv, getInputInv(), getOutputInv(), getOtherInv(), energyData, IWorldPosCallable.of(getWorld(), getBlockPos()));
+    public AbstractContainerMenu createMenu(int windowId, Inventory playerInv, Player p_createMenu_3_) {
+        return new ContainerAutoChisel(ChiselTileEntities.AUTO_CHISEL_CONTAINER.get(), windowId, playerInv, getInputInv(), getOutputInv(), getOtherInv(), energyData, ContainerLevelAccess.create(getLevel(), getBlockPos()));
     }
     
     /* == Rendering Data == */
@@ -578,14 +573,10 @@ public class TileAutoChisel extends BlockEntity implements TickableBlockEntity, 
                 for (int l = 0; l < i; ++l) {
                     double vx = (mid - j) * 0.05;
                     double vz = (mid - l) * 0.05;
-                    Particle fx = Minecraft.getInstance().particleEngine.addParticle(
+                    Particle fx = Minecraft.getInstance().particleEngine.createParticle(
                             new BlockParticleOption(ParticleTypes.BLOCK, source), 
                             pos.getX() + 0.5, pos.getY() + 10/16D, pos.getZ() + 0.5, 
                             vx, 0, vz);
-
-                    if (fx != null) {
-                        ((TerrainParticle)fx).setBlockPos(pos);
-                    }
                 }
             }
         }
