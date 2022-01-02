@@ -8,17 +8,16 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.WoodType;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.item.Items;
-import net.minecraft.loot.ConstantRange;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.ToolType;
 import team.chisel.Features;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.data.ModelTemplates;
@@ -32,16 +31,17 @@ public class LegacyFeatures {
     // Hardcode to vanilla wood types
 
     public static final Map<WoodType, Map<String, BlockEntry<BlockCarvableBookshelf>>> BOOKSHELVES = Features.VANILLA_WOODS.stream()
-            .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "bookshelf/" + wood.getName(), BlockCarvableBookshelf::new)
-                    .loot((prov, block) -> prov.registerLootTable(block, RegistrateBlockLootTables.droppingWithSilkTouchOrRandomly(block, Items.BOOK, ConstantRange.of(3))))
+            .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "bookshelf/" + wood.name(), BlockCarvableBookshelf::new)
+                    .loot((prov, block) -> prov.add(block, RegistrateBlockLootTables.createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3))))
                     .applyIf(() -> wood == WoodType.OAK, f -> f.addBlock(Blocks.BOOKSHELF))
                     .model((prov, block) -> {
                         prov.simpleBlock(block, prov.models().withExistingParent("block/" + ModelTemplates.name(block), prov.modLoc("cube_2_layer_sides"))
-                                .texture("all", "minecraft:block/" + wood.getName() + "_planks")
-                                .texture("side", "block/" + ModelTemplates.name(block).replace(wood.getName() + "/", "")));
+                                .texture("all", "minecraft:block/" + wood.name() + "_planks")
+                                .texture("side", "block/" + ModelTemplates.name(block).replace(wood.name() + "/", "")));
                     })
-                    .layer(() -> RenderType::getCutout)
-                    .setGroupName(RegistrateLangProvider.toEnglishName(wood.getName()) + " Bookshelf")
+                    .layer(() -> RenderType::cutout)
+                    .setGroupName(RegistrateLangProvider.toEnglishName(wood.name()) + " Bookshelf")
+                    .applyTag(BlockTags.MINEABLE_WITH_AXE)
                     .variation("rainbow")
                     .next("novice_necromancer")
                     .next("necromancer")
@@ -52,10 +52,11 @@ public class LegacyFeatures {
                     .next("historian")
                     .next("cans")
                     .next("papers")
-                    .build(b -> b.sound(SoundType.WOOD).hardnessAndResistance(1.5f))));
+                    .build(b -> b.sound(SoundType.WOOD).strength(1.5f))));
 
-    public static final Map<String, BlockEntry<BlockCarvable>> DIRT = _FACTORY.newType(Material.EARTH, "dirt")
+    public static final Map<String, BlockEntry<BlockCarvable>> DIRT = _FACTORY.newType(Material.DIRT, "dirt")
             .addBlock(Blocks.DIRT)
+            .applyTag(BlockTags.MINEABLE_WITH_SHOVEL)
             .variation("bricks")
             .next("netherbricks")
             .next("bricks3")
@@ -73,11 +74,13 @@ public class LegacyFeatures {
             .next("chunky")
             .next("horizontal")
             .next("plate")
-            .build(b -> b.hardnessAndResistance(0.5F, 0.0F).sound(SoundType.GROUND).harvestTool(ToolType.SHOVEL).harvestLevel(0));
+            .build(b -> b.strength(0.5F, 0.0F).sound(SoundType.GRAVEL));
 
     public static final Map<String, BlockEntry<BlockCarvable>> OBSIDIAN = _FACTORY.newType(Material.STONE, "obsidian")
             .addTag(Tags.Blocks.OBSIDIAN)
             .applyTag(BlockTags.DRAGON_IMMUNE)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_DIAMOND_TOOL)
             .variation("pillar")
                 .model(ModelTemplates.cubeColumn())
             .next("pillar-quartz")
@@ -98,15 +101,15 @@ public class LegacyFeatures {
                 .model(ModelTemplates.cubeColumn())
             .next("crate")
                 .model(ModelTemplates.cubeBottomTop())
-            .build(b -> b.hardnessAndResistance(50.0F, 2000.0F).sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3));
+            .build(b -> b.strength(50.0F, 2000.0F).sound(SoundType.STONE));
 
-    public static final Map<String, BlockEntry<BlockCarvable>> PAPER = _FACTORY.newType(Material.PLANTS, "paper")
+    public static final Map<String, BlockEntry<BlockCarvable>> PAPER = _FACTORY.newType(Material.PLANT, "paper")
             .recipe((prov, block) -> new ShapedRecipeBuilder(block, 32)
                     .pattern("ppp").pattern("psp").pattern("ppp")
-                    .key('p', Items.PAPER)
-                    .key('s', Tags.Items.RODS_WOODEN)
-                    .addCriterion("has_stick", prov.hasItem(Tags.Items.RODS_WOODEN))
-                    .build(prov))
+                    .define('p', Items.PAPER)
+                    .define('s', Tags.Items.RODS_WOODEN)
+                    .unlockedBy("has_stick", prov.has(Tags.Items.RODS_WOODEN))
+                    .save(prov))
             .variation("box")
             .next("throughmiddle")
             .next("cross")
@@ -116,7 +119,7 @@ public class LegacyFeatures {
             .next("floral")
             .next("plain")
             .next("door")
-            .build(b -> b.hardnessAndResistance(1.5F, 0.0F).sound(SoundType.PLANT));
+            .build(b -> b.strength(1.5F, 0.0F).sound(SoundType.GRASS));
 
 	public static void init() {}
 }
