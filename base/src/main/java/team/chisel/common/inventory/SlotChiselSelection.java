@@ -15,7 +15,6 @@ import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.util.SoundUtil;
 
-@ParametersAreNonnullByDefault
 public class SlotChiselSelection extends Slot {
 
     private final @Nonnull ChiselContainer container;

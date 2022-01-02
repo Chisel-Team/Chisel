@@ -49,7 +49,6 @@ import team.chisel.api.carving.IVariationRegistry;
 import team.chisel.common.util.NBTUtil;
 import team.chisel.common.util.SoundUtil;
 
-@ParametersAreNonnullByDefault
 public class ChiselController {
     
     @SubscribeEvent

@@ -24,7 +24,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import team.chisel.api.block.VariationData;
 
-@ParametersAreNonnullByDefault
 public class BlockCarvableIce extends BlockCarvable {
 
 	public BlockCarvableIce(VariationData variation) {

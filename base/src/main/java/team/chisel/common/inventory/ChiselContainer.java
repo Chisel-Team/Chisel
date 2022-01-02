@@ -18,7 +18,6 @@ import team.chisel.common.util.NBTUtil;
 import team.chisel.common.util.SoundUtil;
 
 @Getter
-@ParametersAreNonnullByDefault
 public class ChiselContainer extends AbstractContainerMenu {
 
     protected final InventoryChiselSelection inventoryChisel;

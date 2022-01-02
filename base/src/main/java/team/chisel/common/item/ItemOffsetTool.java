@@ -54,7 +54,6 @@ import team.chisel.common.util.NBTSaveable;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.ChunkDataBase;
 
-@ParametersAreNonnullByDefault
 public class ItemOffsetTool extends Item {
     
     @ToString

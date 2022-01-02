@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import net.minecraftforge.client.model.generators.VariantBlockStateBuilder;
 
-@ParametersAreNonnullByDefault
 public interface ModelTemplate {
 
     void accept(RegistrateBlockstateProvider provider, Block block);

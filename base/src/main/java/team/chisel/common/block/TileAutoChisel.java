@@ -68,7 +68,6 @@ import team.chisel.common.init.ChiselTileEntities;
 import team.chisel.common.inventory.ContainerAutoChisel;
 import team.chisel.common.util.SoundUtil;
 
-@ParametersAreNonnullByDefault
 public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvider {
     
     private class DirtyingStackHandler extends ItemStackHandler {

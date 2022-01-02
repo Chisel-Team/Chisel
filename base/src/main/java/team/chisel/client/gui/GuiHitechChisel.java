@@ -54,7 +54,6 @@ import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.util.NBTUtil;
 
-@ParametersAreNonnullByDefault
 public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
     private class PreviewModeButton extends Button {

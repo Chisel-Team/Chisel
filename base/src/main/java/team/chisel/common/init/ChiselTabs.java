@@ -9,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 /**
  * Class file for the Chisel creative tabs
  */
-@ParametersAreNonnullByDefault
 public class ChiselTabs {
 
     public static class ChiselCreativeTab extends CreativeModeTab {

@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import team.chisel.api.IChiselItem;
 import team.chisel.common.item.ItemChisel;
 
-@ParametersAreNonnullByDefault
 public class InventoryChiselSelection implements Container {
 
     ItemStack chisel = ItemStack.EMPTY;

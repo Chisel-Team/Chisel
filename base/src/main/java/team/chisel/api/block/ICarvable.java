@@ -2,7 +2,6 @@ package team.chisel.api.block;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
-@ParametersAreNonnullByDefault
 public interface ICarvable {
 
     /**

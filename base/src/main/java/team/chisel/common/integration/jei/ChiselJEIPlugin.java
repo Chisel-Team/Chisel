@@ -28,7 +28,6 @@ import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 
 @JeiPlugin
-@ParametersAreNonnullByDefault
 public class ChiselJEIPlugin implements IModPlugin {
     
     private ChiselRecipeCategory category;

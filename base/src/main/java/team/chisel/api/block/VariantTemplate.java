@@ -6,7 +6,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 
-@ParametersAreNonnullByDefault
 public interface VariantTemplate {
     
     Optional<ModelTemplate> getModelTemplate();

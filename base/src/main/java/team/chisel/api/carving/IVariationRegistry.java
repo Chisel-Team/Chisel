@@ -15,7 +15,6 @@ import net.minecraft.resources.ResourceLocation;
  * <p>
  * To obtain chisel's instance of this class, use {@link CarvingUtils#getChiselRegistry()}
  */
-@ParametersAreNonnullByDefault
 public interface IVariationRegistry {
 
     /* Getters */

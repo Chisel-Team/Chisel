@@ -22,7 +22,6 @@ import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
 import team.chisel.common.item.ItemOffsetTool;
 
-@ParametersAreNonnullByDefault
 @FieldsAreNonnullByDefault
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselItems {
@@ -34,7 +33,7 @@ public class ChiselItems {
                     .pattern(" I").pattern("S ")
                     .define('I', Tags.Items.INGOTS_IRON)
                     .define('S', Tags.Items.RODS_WOODEN)
-                    .unlockedBy("has_iron", prov.hasItem(Tags.Items.INGOTS_IRON))
+                    .unlockedBy("has_iron", prov.has(Tags.Items.INGOTS_IRON))
                     .save(prov))
             .register();
     
@@ -43,7 +42,7 @@ public class ChiselItems {
                     .pattern(" D").pattern("S ")
                     .define('D', Tags.Items.GEMS_DIAMOND)
                     .define('S', Tags.Items.RODS_WOODEN)
-                    .unlockedBy("has_diamond", prov.hasItem(Tags.Items.INGOTS_IRON))
+                    .unlockedBy("has_diamond", prov.has(Tags.Items.INGOTS_IRON))
                     .save(prov))
             .register();
     
@@ -53,7 +52,7 @@ public class ChiselItems {
                     .requires(DIAMOND_CHISEL::get)
                     .requires(Tags.Items.INGOTS_GOLD)
                     .requires(Tags.Items.DUSTS_REDSTONE)
-                    .unlockedBy("has_diamond_chisel", prov.hasItem(DIAMOND_CHISEL::get))
+                    .unlockedBy("has_diamond_chisel", prov.has(DIAMOND_CHISEL::get))
                     .save(prov))
             .register();
     

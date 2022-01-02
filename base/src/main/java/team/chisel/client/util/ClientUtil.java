@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import team.chisel.Chisel;
 
-@ParametersAreNonnullByDefault
 public class ClientUtil {
 
     @Nullable

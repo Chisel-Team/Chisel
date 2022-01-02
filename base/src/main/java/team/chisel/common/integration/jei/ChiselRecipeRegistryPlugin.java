@@ -20,7 +20,6 @@ import net.minecraft.resources.ResourceLocation;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 
-@ParametersAreNonnullByDefault
 public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
     
     @Nonnull

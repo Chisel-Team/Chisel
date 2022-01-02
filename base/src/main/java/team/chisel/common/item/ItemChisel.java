@@ -42,7 +42,6 @@ import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.util.NBTUtil;
 
-@ParametersAreNonnullByDefault
 public class ItemChisel extends Item implements IChiselItem {
     
     public enum ChiselType {

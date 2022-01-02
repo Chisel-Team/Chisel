@@ -3,35 +3,36 @@ package team.chisel.common.block;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import lombok.Getter;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.IronBarsBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.boss.dragon.EnderDragonEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import team.chisel.api.block.ICarvable;
 import team.chisel.api.block.VariationData;
 
 /**
  * Represents a Carvable (aka Chiselable) Pane
  */
-@ParametersAreNonnullByDefault
 public class BlockCarvablePane extends IronBarsBlock implements ICarvable {
     @Getter(onMethod = @__({@Override}))
     private final VariationData variation;
 
     private boolean dragonProof = false;
 
-    public BlockCarvablePane(Block.Properties properties, VariationData variation) {
+    public BlockCarvablePane(BlockBehaviour.Properties properties, VariationData variation) {
         super(properties);
         this.variation = variation;
     }
 
+    
     @Override
-    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side) {
-        return super.isSideInvisible(state, adjacentBlockState, side) && state != adjacentBlockState;
+    public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
+        return super.skipRendering(state, adjacentBlockState, side) && state != adjacentBlockState;
     }
 
     public Block setDragonProof() {
@@ -40,8 +41,8 @@ public class BlockCarvablePane extends IronBarsBlock implements ICarvable {
     }
 
     @Override
-    public boolean canEntityDestroy(BlockState state, IBlockReader world, BlockPos pos, Entity entity) {
-        if (entity instanceof EnderDragonEntity) {
+    public boolean canEntityDestroy(BlockState state, BlockGetter world, BlockPos pos, Entity entity) {
+        if (entity instanceof EnderDragon) {
             return !dragonProof;
         } else {
             return super.canEntityDestroy(state, world, pos, entity);

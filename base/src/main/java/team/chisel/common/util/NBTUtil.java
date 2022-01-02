@@ -17,7 +17,6 @@ import team.chisel.client.gui.PreviewType;
 import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.item.ChiselMode;
 
-@ParametersAreNonnullByDefault
 public class NBTUtil {
 
     private static final String KEY_TAG = "chiseldata";

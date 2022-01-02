@@ -58,7 +58,6 @@ import team.chisel.client.data.VariantTemplates;
  */
 @Setter
 @Accessors(chain = true)
-@ParametersAreNonnullByDefault
 public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     private final ChiselBlockFactory parent;
@@ -341,7 +340,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     @Value
     @NonFinal
-    @MethodsReturnNonnullByDefault
     private static class Variation {
 
         /**
@@ -354,8 +352,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     @Value
     @Getter(onMethod = @__({@Override}))
-    @MethodsReturnNonnullByDefault
-    @ParametersAreNonnullByDefault
     private static class VariationDataImpl implements VariationData {
 
         String name;

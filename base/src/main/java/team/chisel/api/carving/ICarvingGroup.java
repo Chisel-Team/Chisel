@@ -13,7 +13,6 @@ import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-@ParametersAreNonnullByDefault
 public interface ICarvingGroup {
     
     ResourceLocation getId();

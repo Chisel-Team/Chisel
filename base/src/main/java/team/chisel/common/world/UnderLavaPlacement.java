@@ -8,8 +8,6 @@ import com.mojang.serialization.Codec;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneDecoratorConfiguration;
-import net.minecraft.world.level.levelgen.placement.DecorationContext;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
 import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
@@ -19,10 +17,6 @@ import team.chisel.common.init.ChiselWorldGen;
 public class UnderLavaPlacement extends PlacementModifier {
 
 	public static final Codec<UnderLavaPlacement> CODEC = Codec.unit(new UnderLavaPlacement());
-
-    public UnderLavaPlacement() {
-        super(NoneDecoratorConfiguration.CODEC);
-    }
 
     @Override
     public Stream<BlockPos> getPositions(PlacementContext world, Random p_212848_3_, BlockPos pos) {

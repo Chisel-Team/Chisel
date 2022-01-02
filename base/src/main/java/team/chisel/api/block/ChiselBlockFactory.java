@@ -25,7 +25,6 @@ import team.chisel.common.block.ItemChiselBlock;
 /**
  * Factory to create builders to create blocks
  */
-@ParametersAreNonnullByDefault
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselBlockFactory {
 

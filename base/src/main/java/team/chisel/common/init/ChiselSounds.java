@@ -7,19 +7,16 @@ import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.util.Locale;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ObjectHolder;
 import team.chisel.Chisel;
 
 @ObjectHolder(Chisel.MOD_ID)
-@ParametersAreNonnullByDefault
 @SuppressWarnings("null")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselSounds {

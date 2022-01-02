@@ -1,3 +1,3 @@
 @net.minecraft.MethodsReturnNonnullByDefault
 @javax.annotation.ParametersAreNonnullByDefault
-package team.chisel.api;
+package team.chisel.common.integration.waila;

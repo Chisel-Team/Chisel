@@ -5,8 +5,8 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.resources.ResourceLocation;
 import team.chisel.Chisel;
 
 @RequiredArgsConstructor

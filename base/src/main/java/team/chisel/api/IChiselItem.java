@@ -19,7 +19,6 @@ import team.chisel.api.carving.IChiselMode;
 /**
  * Implement this on items which can be used to chisel blocks.
  */
-@ParametersAreNonnullByDefault
 public interface IChiselItem {
 
     /**

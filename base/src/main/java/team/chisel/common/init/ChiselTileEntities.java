@@ -31,7 +31,7 @@ public class ChiselTileEntities {
                         .define('R', Tags.Items.DUSTS_REDSTONE)
                         .define('I', Tags.Items.INGOTS_IRON)
                         .pattern("GGG").pattern("GRG").pattern("III")
-                        .unlockedBy("has_iron", prov.hasItem(Tags.Items.INGOTS_IRON))
+                        .unlockedBy("has_iron", prov.has(Tags.Items.INGOTS_IRON))
                         .save(prov))
                 .build()
             .register();

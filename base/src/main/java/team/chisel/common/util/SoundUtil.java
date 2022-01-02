@@ -19,7 +19,6 @@ import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.init.ChiselSounds;
 
-@ParametersAreNonnullByDefault
 public class SoundUtil {
     
     @SuppressWarnings("null")

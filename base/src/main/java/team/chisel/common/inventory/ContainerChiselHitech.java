@@ -22,7 +22,6 @@ import team.chisel.common.util.NBTUtil;
 
 @Getter
 @Setter
-@ParametersAreNonnullByDefault
 public class ContainerChiselHitech extends ChiselContainer {
 
     private @Nullable Slot selection, target;

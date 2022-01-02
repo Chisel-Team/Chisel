@@ -35,7 +35,6 @@ import team.chisel.common.inventory.SlotChiselInput;
 import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.NBTUtil;
 
-@ParametersAreNonnullByDefault
 public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScreen<T> {
 
     public Player player;

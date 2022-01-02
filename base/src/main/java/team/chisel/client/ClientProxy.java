@@ -5,10 +5,11 @@ import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.ClientRegistry;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import team.chisel.api.chunkdata.ChunkData;
@@ -20,9 +21,12 @@ import team.chisel.ctm.client.texture.ctx.OffsetProviderRegistry;
 public class ClientProxy {
 
     @SubscribeEvent
-    public static void registerModels(ModelRegistryEvent event) {
-        ClientRegistry.bindTileEntityRenderer(ChiselTileEntities.AUTO_CHISEL_TE.get(), RenderAutoChisel::new);
+    public static void registerRenderers(RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ChiselTileEntities.AUTO_CHISEL_TE.get(), RenderAutoChisel::new);
+    }
 
+    @SubscribeEvent
+    public static void registerModels(ModelRegistryEvent event) {
 // TODO       MinecraftForge.EVENT_BUS.register(new DebugHandler());
 
         OffsetProviderRegistry.INSTANCE.registerProvider((world, pos) -> ChunkData.getOffsetForChunk(world, pos).getOffset());        

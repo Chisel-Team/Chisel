@@ -23,7 +23,6 @@ import team.chisel.common.config.Configurations;
 /**
  * Class for the items for the chisel block
  */
-@ParametersAreNonnullByDefault
 public class ItemChiselBlock extends BlockItem {
 
     private ICarvable block;

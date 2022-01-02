@@ -15,7 +15,6 @@ import team.chisel.Chisel;
 import team.chisel.common.util.NonnullType;
 import team.chisel.common.util.Point2i;
 
-@ParametersAreNonnullByDefault
 public interface IChiselMode {
 
     /**

@@ -20,7 +20,6 @@ import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.common.init.ChiselTileEntities;
 
-@ParametersAreNonnullByDefault
 public class ContainerAutoChisel extends AbstractContainerMenu {
 
     private static class ChiselableSlot extends SlotItemHandler {

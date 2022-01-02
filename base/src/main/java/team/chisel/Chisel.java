@@ -109,7 +109,6 @@ public class Chisel implements Reference {
         ChiselLangKeys.init(registrate());
         
         ChiselWorldGen.FEATURES.register(modBus);
-        ChiselWorldGen.PLACEMENTS.register(modBus);
 
         // Update the values within the properties so that Properties.from reflects them correctly
         // TODO PR this to forge

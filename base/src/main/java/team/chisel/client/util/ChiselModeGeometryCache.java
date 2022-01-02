@@ -4,7 +4,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 // ...TODO
 
-@ParametersAreNonnullByDefault
 public class ChiselModeGeometryCache {// implements IWorldEventListener {
 //    private IChiselMode mode;
 //    private BlockPos origin;

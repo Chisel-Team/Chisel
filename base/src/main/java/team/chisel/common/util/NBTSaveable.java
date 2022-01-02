@@ -4,7 +4,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.nbt.CompoundTag;
 
-@ParametersAreNonnullByDefault
 public interface NBTSaveable {
 
     void write(CompoundTag tag);

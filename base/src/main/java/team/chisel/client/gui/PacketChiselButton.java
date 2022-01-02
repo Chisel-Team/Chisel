@@ -45,7 +45,7 @@ public class PacketChiselButton {
             ContainerChiselHitech container = (ContainerChiselHitech) player.containerMenu;
             ItemStack chisel = container.getChisel();
             ItemStack originalChisel = chisel.copy();
-            ItemStack target = container.getTargetStack();
+            ItemStack target = container.getTargetItem();
             
             if (!(chisel.getItem() instanceof IChiselItem)) {
                 return;

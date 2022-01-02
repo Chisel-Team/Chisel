@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.Block;
 import team.chisel.Chisel;
 import team.chisel.common.init.ChiselSounds;
 
-@ParametersAreNonnullByDefault
 public class CarvingUtils {
 
 	/**
