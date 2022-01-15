@@ -3445,7 +3445,7 @@ public enum Features {
 
     private static void registerIngotUncraftRecipe(IForgeRegistry<IRecipe> registry, String ore)
     {
-        registerOreUncraftRecipe(registry, "block" + ore, "ingot" + ore);
+        // registerOreUncraftRecipe(registry, "block" + ore, "ingot" + ore);
     }
 
     private static void registerOreUncraftRecipe(IForgeRegistry<IRecipe> registry, String blockOre, String endOre)
