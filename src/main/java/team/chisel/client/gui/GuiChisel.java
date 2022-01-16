@@ -5,6 +5,13 @@ import java.util.List;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Rectangle;
 
@@ -22,6 +29,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.client.config.GuiUtils;
 import team.chisel.Chisel;
+import team.chisel.Reflection;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
@@ -56,11 +64,10 @@ public class GuiChisel extends GuiContainer {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        
-        // if this is a selection slot, no double clicking
-        Slot slot = getSlotAtPosition(mouseX, mouseY); 
-        if (slot != null && slot.slotNumber < container.getInventoryChisel().size - 1) {
-            this.doubleClick = false;
+
+        Slot slot = Reflection.getReflection().getSlotAtPosition(this, mouseX, mouseY);
+        if (slot.slotNumber < container.getInventoryChisel().size - 1) {
+            Reflection.getReflection().falseDoubleClick(this);
         }
     }
 
@@ -99,7 +106,80 @@ public class GuiChisel extends GuiContainer {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
-        super.drawScreen(mouseX, mouseY, partialTicks);
+        int i = this.guiLeft;
+        int j = this.guiTop;
+        this.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+        GlStateManager.disableRescaleNormal();
+        RenderHelper.disableStandardItemLighting();
+        GlStateManager.disableLighting();
+        GlStateManager.disableDepth();
+        Reflection.getReflection().superDrawScreen(this, mouseX, mouseY, partialTicks);
+        RenderHelper.enableGUIStandardItemLighting();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate((float)i, (float)j, 0.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        GlStateManager.enableRescaleNormal();
+        Reflection.getReflection().setHoveredSlot(this, null);
+        int k = 240;
+        int l = 240;
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0F, 240.0F);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+        for (int i1 = 0; i1 < this.inventorySlots.inventorySlots.size(); ++i1)
+        {
+            Slot slot = this.inventorySlots.inventorySlots.get(i1);
+
+            if (slot.isEnabled())
+            {
+                this.drawSlot(slot);
+            }
+
+            if (Reflection.getReflection().isMouseOverSlot(this, slot, mouseX, mouseY) && slot.isEnabled())
+            {
+                Reflection.getReflection().setHoveredSlot(this, slot);
+                GlStateManager.disableLighting();
+                GlStateManager.disableDepth();
+                int j1 = slot.xPos;
+                int k1 = slot.yPos;
+                GlStateManager.colorMask(true, true, true, false);
+                this.drawGradientRect(j1, k1, j1 + 16, k1 + 16, -2130706433, -2130706433);
+                GlStateManager.colorMask(true, true, true, true);
+                GlStateManager.enableLighting();
+                GlStateManager.enableDepth();
+            }
+        }
+
+        RenderHelper.disableStandardItemLighting();
+        this.drawGuiContainerForegroundLayer(mouseX, mouseY);
+        RenderHelper.enableGUIStandardItemLighting();
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.client.event.GuiContainerEvent.DrawForeground(this, mouseX, mouseY));
+        InventoryPlayer inventoryplayer = this.mc.player.inventory;
+        ItemStack itemstack = Reflection.getReflection().getDraggedStack(this).isEmpty() ? inventoryplayer.getItemStack() : Reflection.getReflection().getDraggedStack(this);
+
+        if (!itemstack.isEmpty())
+        {
+            int j2 = 8;
+            int k2 = Reflection.getReflection().getDraggedStack(this).isEmpty() ? 8 : 16;
+            String s = null;
+
+            if (!Reflection.getReflection().getDraggedStack(this).isEmpty() && Reflection.getReflection().isRightMouseClick(this))
+            {
+                itemstack = itemstack.copy();
+                itemstack.setCount(MathHelper.ceil((float)itemstack.getCount() / 2.0F));
+            }
+            else if (this.dragSplitting && this.dragSplittingSlots.size() > 1)
+            {
+                itemstack = itemstack.copy();
+                itemstack.setCount(Reflection.getReflection().dragSplittingRemnant(this));
+
+                if (itemstack.isEmpty())
+                {
+                    s = "" + TextFormatting.YELLOW + "0";
+                }
+            }
+
+            Reflection.getReflection().drawItemStack(this, itemstack, mouseX - i - 8, mouseY - j - k2, s);
+        }
         this.renderHoveredToolTip(mouseX, mouseY);
     }
     
@@ -173,20 +253,19 @@ public class GuiChisel extends GuiContainer {
 
         super.actionPerformed(button);
     }
-    
-    @Override
+
     protected void drawSlot(Slot slot) {
         if (slot instanceof SlotChiselInput) {
             GL11.glPushMatrix();
             GL11.glScalef(2, 2, 1);
             slot.xPos -= 16;
             slot.yPos -= 16;
-            super.drawSlot(slot);
+            Reflection.getReflection().drawSlot(this, slot);
             slot.xPos += 16;
             slot.yPos += 16;
             GL11.glPopMatrix();
         } else {
-            super.drawSlot(slot);
+            Reflection.getReflection().drawSlot(this, slot);
         }
     }
 

@@ -36,6 +36,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import team.chisel.Chisel;
+import team.chisel.Reflection;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
@@ -245,7 +246,7 @@ public class ChiselController {
                 EnumArt[] values = EnumArt.values();
                 do {
                     painting.art = values[((painting.art.ordinal() + (event.getEntityPlayer().isSneaking() ? -1 : 1)) + values.length) % values.length];
-                    painting.updateFacingWithBoundingBox(painting.facingDirection);
+                    Reflection.getReflection().updateFacingWithBoundingBox(painting);
                 } while (!painting.onValidSurface());
                 damageItem(held, event.getEntityPlayer());
                 event.getEntityPlayer().world.playSound(event.getEntityPlayer(), event.getTarget().getPosition(), SoundEvents.ENTITY_PAINTING_PLACE, SoundCategory.NEUTRAL, 1, 1);

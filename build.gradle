@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
+            url = "https://files.minecraftforge.net/maven"
         }
         maven {
             name = "sonatype"
@@ -11,17 +11,17 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
 plugins {
     id 'net.franz-becker.gradle-lombok' version '1.5'
-	id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
-apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
+apply plugin: 'eclipse'
 
 import org.ajoberstar.grgit.Grgit
 
@@ -41,36 +41,32 @@ sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
 minecraft {
-    version = "${minecraft_version}-${forge_version}"
-    mappings = 'snapshot_20170623'
-    runDir = "run"
-	
-	useDepAts = true
+    mappings channel: 'snapshot', version: '20171003-1.12'
+    runs {
+        client {
+            workingDirectory project.file('run')
 
-    replaceIn "Reference.java"
-    replace "@VERSION@", project.version
-}
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
-repositories {
-	maven { // CTM
-		url "http://maven.tterrag.com/"
-	}
-	maven { // WAILA
-		url "http://mobiusstrip.eu/maven"
-	}
-    maven { // JEI
-        url "http://dvs1.progwml6.com/files/maven"
-    }
-    maven { // Blood Magic
-        url "http://tehnut.info/maven"
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
+
+        server {
+
+            // Recommended logging data for a userdev environment
+            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+        }
     }
 }
 
 dependencies {
-	deobfCompile "team.chisel.ctm:CTM:MC${minecraft_version}-${ctm_version}"
-	deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}:api"
-	deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
+    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+    implementation fileTree(dir: 'libs', include: '*.jar')
 }
 
 lombok {
@@ -102,14 +98,14 @@ tasks.eclipse.dependsOn installLombok
 processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+    inputs.property "mcversion", "1.12.2"
 
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
 
         // replace version and mcversion
-		expand 'version': project.version, 'mcversion': project.minecraft.version
+		expand 'version': project.version, 'mcversion': "1.12.2"
     }
 
     // copy everything else, thats not the mcmod.info
@@ -122,21 +118,11 @@ jar.manifest {
     attributes 'FMLAT': 'chisel_at.cfg'
 }
 
-// Create API jar with sources and compiled files
-task apiJar(type: Jar) {
-    from sourceSets.main.allSource
-    from sourceSets.main.output
-	include 'team/chisel/api/**/*'
-    classifier = 'api'
-}
-
 publishing {
     tasks.publish.dependsOn 'build'
     publications {
         mavenJava(MavenPublication) {
             artifact jar
-            artifact sourceJar
-            artifact apiJar
         }
     }
 
@@ -176,27 +162,5 @@ String getChangelogText() {
         }
     }
     return str
-}
-
-tasks.curseforge.enabled = !dev && project.hasProperty('curseforge_key')
-    
-curseforge {
-    if (project.hasProperty('curseforge_key')) {
-        apiKey = project.curseforge_key
-    }
-
-    project {
-        id = project.projectId
-        changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
-        changelogType = 'html'
-        releaseType = project.curse_type
-		addGameVersion '1.12.2'
-        mainArtifact(jar) {
-            displayName = "Chisel - ${version}"
-        }
-        relations {
-        	requiredLibrary 'ctm'
-        }
-    }
 }
 
