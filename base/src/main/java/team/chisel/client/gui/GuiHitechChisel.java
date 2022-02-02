@@ -4,15 +4,16 @@ import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
-import com.mojang.blaze3d.matrix.PoseStack;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Matrix4f;
+import com.mojang.math.Vector3f;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,33 +22,33 @@ import lombok.experimental.Accessors;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
-import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.IBlockDisplayReader;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.chunk.IChunkLightProvider;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LightChunkGetter;
+import net.minecraft.world.level.lighting.LevelLightEngine;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.lighting.WorldLightManager;
+import net.minecraftforge.client.model.data.EmptyModelData;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.client.util.ChiselLangKeys;
@@ -102,13 +103,13 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             int u = rotate ? 0 : 16;
             int v = 238;
 
-            RenderSystem.color4f(1, 1, 1, a);
+            RenderSystem.setShaderColor(1, 1, 1, a);
             RenderSystem.enableBlend();
             RenderSystem.enableDepthTest();
             this.setBlitOffset(1000);
             blit(PoseStack, this.x, this.y, u, v, 16, 16);
             this.setBlitOffset(0);
-            RenderSystem.color4f(1, 1, 1, 1);
+            RenderSystem.setShaderColor(1, 1, 1, 1);
         }
 
         @Override
@@ -123,31 +124,26 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     }
     
     @RequiredArgsConstructor
-    private static class FakeBlockAccess implements IBlockDisplayReader {
+    private static class FakeBlockAccess implements BlockAndTintGetter {
         
         private final GuiHitechChisel gui;
         
         @Setter
-        private BlockState state = Blocks.AIR.getDefaultState();
+        private BlockState state = Blocks.AIR.defaultBlockState();
         
-        private final WorldLightManager light = new WorldLightManager(new IChunkLightProvider() {
+        private final LevelLightEngine light = new LevelLightEngine(new LightChunkGetter() {
             
             @Override
-            public IBlockReader getWorld() {
+            public BlockGetter getLevel() {
                 return FakeBlockAccess.this;
             }
             
             @Override
             @Nullable
-            public IBlockReader getChunkForLight(int p_217202_1_, int p_217202_2_) {
+            public BlockGetter getChunkForLighting(int p_217202_1_, int p_217202_2_) {
                 return FakeBlockAccess.this;
             }
         }, true, true);
-
-        @Override
-        public @Nullable TileEntity getTileEntity(BlockPos pos) {
-            return null;
-        }
 
         //@Override
         //public int getCombinedLight(BlockPos pos, int lightValue) {
@@ -156,63 +152,44 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
         @Override
         public BlockState getBlockState(BlockPos pos) {
-            return gui.buttonPreview.getType().getPositions().contains(pos) ? state : Blocks.AIR.getDefaultState();
+            return gui.buttonPreview.getType().getPositions().contains(pos) ? state : Blocks.AIR.defaultBlockState();
         }
 
         @Override
         public FluidState getFluidState(BlockPos pos) {
-            return Fluids.EMPTY.getDefaultState();
-        }
-
-        @Override
-        public WorldLightManager getLightManager() {
-            return light;
-        }
-
-        @Override
-        public int getBlockColor(BlockPos blockPosIn, ColorResolver colorResolverIn) {
-            return -1;
-        }
-
-        @Override
-        public int getLightValue(BlockPos p_217298_1_) {
-            return 15;
+            return Fluids.EMPTY.defaultFluidState();
         }
 
 		@Override
 		public float getShade(Direction p_230487_1_, boolean p_230487_2_) {
-			return Minecraft.getInstance().world.getShade(p_230487_1_, p_230487_2_);
+			return Minecraft.getInstance().level.getShade(p_230487_1_, p_230487_2_);
 		}
 
-//        @Override
-//        public boolean isAirBlock(BlockPos pos) {
-//            return getBlockState(pos).getBlock() == Blocks.AIR;
-//        }
+        @Override
+        @Nullable
+        public BlockEntity getBlockEntity(BlockPos pPos) {
+            return null;
+        }
 
-//        @Override
-//        public Biome getBiome(BlockPos pos) {
-//            return Biomes.PLAINS;
-//        }
+        @Override
+        public int getHeight() {
+            return 32;
+        }
 
-//        // @Override 1.9 only. Not actually ever called, just here for compilation.
-//        public boolean extendedLevelsInChunkCache() {
-//            return false;
-//        }
+        @Override
+        public int getMinBuildHeight() {
+            return 0;
+        }
 
-//        @Override
-//        public int getStrongPower(BlockPos pos, Direction direction) {
-//            return 0;
-//        }
+        @Override
+        public LevelLightEngine getLightEngine() {
+            return light;
+        }
 
-//        @Override
-//        public WorldType getWorldType() {
-//            return WorldType.DEFAULT;
-//        }
-
-//        @Override
-//        public boolean isSideSolid(BlockPos pos, Direction side, boolean _default) {
-//            return getBlockState(pos).isSideSolid(this, pos, side);
-//        }
+        @Override
+        public int getBlockTint(BlockPos pBlockPos, ColorResolver pColorResolver) {
+            return 0;
+        }
     }
     
     private static final Rect2i panel = new Rect2i(8, 14, 74, 74);
@@ -227,11 +204,11 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     private int clickButton;
     private long lastDragTime;
     private int clickX, clickY;
-    private double initRotX, initRotY, initZoom;
-    private double prevRotX, prevRotY;
+    private float initRotX, initRotY, initZoom;
+    private float prevRotX, prevRotY;
     private double momentumX, momentumY;
     private float momentumDampening = 0.98f;
-    private double rotX = 165, rotY, zoom = 1;
+    private float rotX = 165, rotY, zoom = 1;
     
     private int scrollAcc;
     
@@ -318,7 +295,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     protected void containerTick() {
         super.containerTick();
 
-        buttonChisel.active = containerHitech.getSelection() != null && containerHitech.getSelection().hasItem() && containerHitech.getTarget() != null && containerHitech.getTarget().getHasStack();
+        buttonChisel.active = containerHitech.getSelection() != null && containerHitech.getSelection().hasItem() && containerHitech.getTarget() != null && containerHitech.getTarget().hasItem();
 
         if (!panelClicked) {
             initRotX = rotX;
@@ -346,23 +323,23 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     }
     
     @Override
-    protected void drawGuiContainerBackgroundLayer(PoseStack PoseStack, float f, int mx, int my) {
-        RenderSystem.color4f(1, 1, 1, 1);
+    protected void renderBg(PoseStack pStack, float f, int mx, int my) {
+        RenderSystem.setShaderColor(1, 1, 1, 1);
 
-        Minecraft.getInstance().getTextureManager().bindTexture(TEXTURE);
-        blit(PoseStack, getGuiLeft(), getGuiTop(), 0, 0, getXSize(), getYSize());
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        blit(pStack, getGuiLeft(), getGuiTop(), 0, 0, getXSize(), getYSize());
 
         if (containerHitech.getSelection() != null) {
             Slot sel = containerHitech.getSelection();
             if (sel.hasItem()) {
-                drawSlotHighlight(PoseStack, sel, 0);
+                drawSlotHighlight(pStack, sel, 0);
                 for (Slot s : containerHitech.getSelectionDuplicates()) {
-                    drawSlotHighlight(PoseStack, s, hasShiftDown() ? 0 : 18);
+                    drawSlotHighlight(pStack, s, hasShiftDown() ? 0 : 18);
                 }
             }
         }
-        if (containerHitech.getTarget() != null && !containerHitech.getTarget().getStack().isEmpty()) {
-            drawSlotHighlight(PoseStack, containerHitech.getTarget(), 36);
+        if (containerHitech.getTarget() != null && !containerHitech.getTarget().getItem().isEmpty()) {
+            drawSlotHighlight(pStack, containerHitech.getTarget(), 36);
         }
 
         if (buttonRotate.rotate() && momentumX == 0 && momentumY == 0 && !panelClicked && System.currentTimeMillis() - lastDragTime > 2000) {
@@ -414,80 +391,81 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             ItemStack stack = containerHitech.getTarget().getItem();
 
             if (!stack.isEmpty()) {
-                RenderSystem.pushMatrix();
+                pStack.pushPose();
 
-                RenderSystem.translatef(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
+                pStack.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
 
-                RenderSystem.matrixMode(GL11.GL_PROJECTION);
-                RenderSystem.pushMatrix();
-                RenderSystem.loadIdentity();
-                int scale = (int) getMinecraft().getMainWindow().getGuiScaleFactor();
-                RenderSystem.multMatrix(Matrix4f.perspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000));
-                RenderSystem.matrixMode(GL11.GL_MODELVIEW);
-                RenderSystem.translated(-panel.getX() - panel.getWidth() / 2, -panel.getY() - panel.getHeight() / 2, 0);
-                RenderSystem.viewport((guiLeft + panel.getX()) * scale, getMinecraft().getMainWindow().getHeight() - (guiTop + panel.getY() + panel.getHeight()) * scale, panel.getWidth() * scale, panel.getHeight() * scale);
+                ShaderInstance shader = RenderSystem.getShader();
+                RenderSystem.setShader(GameRenderer::getBlockShader);
+                pStack.pushPose();
+                pStack.setIdentity();
+                int scale = (int) getMinecraft().getWindow().getGuiScale();
+                pStack.mulPoseMatrix(Matrix4f.perspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000));
+//                RenderSystem.matrixMode(GL11.GL_MODELVIEW);
+                pStack.translate(-panel.getX() - panel.getWidth() / 2, -panel.getY() - panel.getHeight() / 2, 0);
+                RenderSystem.viewport((getGuiLeft() + panel.getX()) * scale, getMinecraft().getWindow().getHeight() - (getGuiTop() + panel.getY() + panel.getHeight()) * scale, panel.getWidth() * scale, panel.getHeight() * scale);
                 RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, true);
 
                 // Makes zooming slower as zoom increases, but leaves 1 as the default zoom.
-                double sc = 300 + 8 * buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9);
-                RenderSystem.scaled(-sc, -sc, sc);
+                float sc = (float) (300 + 8 * buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9));
+                pStack.scale(-sc, -sc, sc);
 
-                RenderSystem.rotatef((float) -rotX, 1, 0, 0);
-                RenderSystem.rotatef((float) rotY, 0, 1, 0);
-                RenderSystem.translated(-1.5, -2.5, -0.5);
+                pStack.mulPose(Vector3f.XP.rotation(-rotX));
+                pStack.mulPose(Vector3f.YP.rotation(rotY));
+                pStack.translate(-1.5, -2.5, -0.5);
                 
                 RenderSystem.enableDepthTest();
 
-                Block block = Block.getBlockFromItem(stack.getItem());
-                BlockState state = block.getDefaultState();
+                Block block = Block.byItem(stack.getItem());
+                BlockState state = block.defaultBlockState();
 
                 if (state != null && state != erroredState) {
                     erroredState = null;
 
                     fakeworld.setState(state);
 
-                    getMinecraft().getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
-                    Tessellator.getInstance().getBuffer().begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
+                    RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
+                    BufferBuilder builder = Tesselator.getInstance().getBuilder();
                     try {
                         PoseStack ms = new PoseStack();
                         for (BlockPos pos : buttonPreview.getType().getPositions()) {
-                            ms.push();
+                            ms.pushPose();
                             ms.translate(pos.getX(), pos.getY(), pos.getZ());
-                            brd.renderModel(state, pos, fakeworld, ms, Tessellator.getInstance().getBuffer(), true, new Random());
-                            ms.pop();
+                            brd.renderBatched(state, pos, fakeworld, ms, builder, true, new Random(), EmptyModelData.INSTANCE);
+                            ms.popPose();
                         }
                     } catch (Exception e) {
                         erroredState = state;
                         Chisel.logger.error("Exception rendering block {}", state, e);
                     } finally {
                         if (erroredState == null) {
-                            Tessellator.getInstance().draw();
+                            builder.end();
                         } else {
-                            Tessellator.getInstance().getBuffer().finishDrawing();
+                            builder.discard();
                         }
                     }
                 }
 
-                RenderSystem.popMatrix();
-                RenderSystem.matrixMode(GL11.GL_PROJECTION);
-                RenderSystem.popMatrix();
-                RenderSystem.matrixMode(GL11.GL_MODELVIEW);
-                RenderSystem.viewport(0, 0, getMinecraft().getMainWindow().getWidth(), getMinecraft().getMainWindow().getHeight());
+                pStack.popPose();
+//                RenderSystem.matrixMode(GL11.GL_PROJECTION);
+//                RenderSystem.popMatrix();
+//                RenderSystem.matrixMode(GL11.GL_MODELVIEW);
+                RenderSystem.viewport(0, 0, getMinecraft().getWindow().getWidth(), getMinecraft().getWindow().getHeight());
             }
         }
     }
     
     private void drawSlotHighlight(PoseStack PoseStack, Slot slot, int u) {
-        blit(PoseStack, guiLeft + slot.xPos - 1, guiTop + slot.yPos - 1, u, 220, 18, 18);
+        blit(PoseStack, getGuiLeft() + slot.x - 1, getGuiTop() + slot.y - 1, u, 220, 18, 18);
     }
     
     private boolean doMomentum = false;
     
     @Override
-    protected void drawGuiContainerForegroundLayer(PoseStack PoseStack, int j, int i) {
+    protected void renderTooltip(PoseStack PoseStack, int j, int i) {
         if (doMomentum) {
             rotX += momentumX;
-            rotX = MathHelper.clamp(rotX, 90, 270);
+            rotX = Mth.clamp(rotX, 90, 270);
             rotY += momentumY;
             momentumX *= momentumDampening;
             momentumY *= momentumDampening;
@@ -508,8 +486,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         }
 
         TranslatableComponent s = ChiselLangKeys.PREVIEW.getComponent();
-        font.drawText(PoseStack, s, panel.getX() + (panel.getWidth() / 2) - (font.getStringPropertyWidth(s) / 2), panel.getY() - 9, 0x404040);
-        RenderSystem.disableAlphaTest();
+        font.draw(PoseStack, s, panel.getX() + (panel.getWidth() / 2) - (font.width(s) / 2), panel.getY() - 9, 0x404040);
         
         drawButtonTooltips(PoseStack, j, i);
     }
@@ -517,7 +494,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         boolean ret = super.mouseClicked(mouseX, mouseY, mouseButton);
-        if (!ret && !buttonRotate.isMouseOver(mouseX, mouseY) && panel.contains((int) (mouseX - guiLeft), (int) (mouseY - guiTop))) {
+        if (!ret && !buttonRotate.isMouseOver(mouseX, mouseY) && panel.contains((int) (mouseX - getGuiLeft()), (int) (mouseY - getGuiTop()))) {
             if (mouseButton == 0) {
                 doMomentum = false;
             }
@@ -534,11 +511,11 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     public boolean mouseDragged(double mouseX, double mouseY, int p_mouseDragged_5_, double p_mouseDragged_6_, double p_mouseDragged_8_) {
         if (panelClicked) {
             if (clickButton == 0) {
-                rotX = MathHelper.clamp(initRotX + mouseY - clickY, 90, 270);
-                rotY = initRotY + mouseX - clickX;
+                rotX = Mth.clamp(initRotX + (float) mouseY - clickY, 90, 270);
+                rotY = initRotY + (float) mouseX - clickX;
             }
             else if (clickButton == 1) {
-                zoom = Math.max(1, initZoom + (clickY - mouseY));
+                zoom = Math.max(1, initZoom + (clickY - (float) mouseY));
             }
         }
         

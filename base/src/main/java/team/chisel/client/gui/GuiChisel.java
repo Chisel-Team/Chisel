@@ -2,11 +2,11 @@ package team.chisel.client.gui;
 
 import java.util.List;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import org.lwjgl.opengl.GL11;
 
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
 
@@ -14,18 +14,15 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.gui.screens.inventory.ContainerScreen;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.Slot;
-import net.minecraftforge.client.gui.GuiUtils;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -116,7 +113,7 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
     
     @Override
     protected void renderLabels(PoseStack PoseStack, int j, int i) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         // TODO fix String
         List<FormattedCharSequence> lines = font.split(title, 40);
@@ -150,14 +147,14 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
 
     @Override
     protected void renderBg(PoseStack PoseStack, float f, int mx, int my) {
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         int i = width - getXSize() >> 1;
         int j = height - getYSize() >> 1;
 
         String texture = "chisel:textures/chisel2gui.png";
 
-        Minecraft.getInstance().getTextureManager().bindForSetup(new ResourceLocation(texture));
+        RenderSystem.setShaderTexture(0, new ResourceLocation(texture));
         blit(PoseStack, i, j, 0, 0, getXSize(), getYSize());
 
         int x = (width - getXSize()) / 2;
@@ -165,7 +162,7 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
 
         Slot main = (Slot) this.menu.slots.get(this.menu.getInventoryChisel().size);
         if (main.getItem().isEmpty()) {
-            renderSlotHighlight(PoseStack, x + 14, y + 14, 0, getYSize());
+            drawSlotOverlay(PoseStack, this, x + 14, y + 14, main, 0, getYSize(), 0);
         }
     }
 
@@ -189,15 +186,17 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
     @Override
 	public void renderSlot(PoseStack stack, Slot slot) {
         if (slot instanceof SlotChiselInput) {
-        	stack.pushPose();
-        	stack.scale(2, 2, 1);
+        	RenderSystem.getModelViewStack().pushPose();
+        	RenderSystem.getModelViewStack().scale(2, 2, 1);
         	// Item rendering doesn't use the matrix stack yet
         	slot.x -= 16;
             slot.y -= 16;
             super.renderSlot(stack, slot);
             slot.x += 16;
             slot.y += 16;
-            stack.popPose();
+            
+            RenderSystem.getModelViewStack().popPose();
+            RenderSystem.applyModelViewMatrix();
         } else {
             super.renderSlot(stack, slot);
         }

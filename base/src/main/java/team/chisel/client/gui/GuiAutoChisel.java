@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.Lists;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -49,7 +50,7 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
 
     @Override
     protected void renderBg(PoseStack PoseStack, float partialTicks, int mouseX, int mouseY) {
-        Minecraft.getInstance().getTextureManager().bind(TEXTURE);
+        RenderSystem.setShaderTexture(0, TEXTURE);
         blit(PoseStack, leftPos, topPos, 0, 0, imageWidth, imageHeight);
 
         if (container.isActive()) {
@@ -68,20 +69,20 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
             drawGhostItem(PoseStack, fakeChisel, leftPos + 80, topPos + 28);
         }
         if (!container.getSlot(container.targetSlot).hasItem()) {
-            RenderSystem.color4f(1, 1, 1, 1);
+            RenderSystem.setShaderColor(1, 1, 1, 1);
             blit(PoseStack, leftPos + 80, topPos + 64, 176, 34, 16, 16);
         }
     }
     
     private void drawGhostItem(PoseStack PoseStack, @Nonnull ItemStack stack, int x, int y) {
         Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, x, y);
-        Minecraft.getInstance().getTextureManager().bind(TEXTURE);
-        RenderSystem.color4f(1, 1, 1, 0.5f);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+        RenderSystem.setShaderColor(1, 1, 1, 0.5f);
         RenderSystem.disableDepthTest();
         RenderSystem.enableBlend();
-        RenderSystem.disableLighting();
+        Lighting.setupForFlatItems();
         blit(PoseStack, x, y, x - leftPos, y - topPos, 16, 16);
-        RenderSystem.color4f(1, 1, 1, 1);
+        RenderSystem.setShaderColor(1, 1, 1, 1);
         RenderSystem.disableBlend();
         RenderSystem.enableDepthTest();
     }
