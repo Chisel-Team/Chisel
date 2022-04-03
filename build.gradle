@@ -133,7 +133,7 @@ subprojects {
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-        //implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
+        implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
         
         //compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
         runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
