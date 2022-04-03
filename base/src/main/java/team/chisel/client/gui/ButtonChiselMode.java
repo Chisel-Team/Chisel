@@ -2,6 +2,7 @@ package team.chisel.client.gui;
 
 import javax.annotation.Nonnull;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import lombok.Getter;
@@ -25,7 +26,7 @@ public class ButtonChiselMode extends Button {
     @Override
     protected void renderBg(PoseStack PoseStack, Minecraft mc, int mouseX, int mouseY) {
         super.renderBg(PoseStack, mc, mouseX, mouseY);
-        mc.getTextureManager().bindForSetup(mode.getSpriteSheet());
+        RenderSystem.setShaderTexture(0, mode.getSpriteSheet());
         Point2i uv = mode.getSpritePos();
         blit(PoseStack, x + 4, y + 4, 12, 12, uv.getX(), uv.getY(), 24, 24, 256, 256);
     }
