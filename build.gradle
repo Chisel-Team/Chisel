@@ -40,7 +40,7 @@ boolean dev = System.getenv('RELEASE') == null || System.getenv('RELEASE').equal
 ext.buildnumber = 0
 project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
 
-version = "MC${minecraft_version}-${mod_version}.${buildnumber}"
+version = "${minecraft_version}-${mod_version}.${buildnumber}"
 
 allprojects {
 
