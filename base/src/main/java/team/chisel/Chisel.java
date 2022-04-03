@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import com.google.common.collect.ImmutableMap;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.util.NonNullLazyValue;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -80,7 +80,7 @@ public class Chisel implements Reference {
 
     private static Map<String, Block> remaps = ImmutableMap.of();
 
-    private static final NonNullLazyValue<Registrate> REGISTRATE = new NonNullLazyValue<Registrate>(() -> {
+    private static final NonNullSupplier<Registrate> REGISTRATE = NonNullSupplier.lazy(() -> {
         Registrate ret = Registrate.create(Reference.MOD_ID).creativeModeTab(() -> ChiselTabs.base);
         ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.base, "Chisel"));
         return ret;

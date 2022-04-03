@@ -3,29 +3,27 @@ package team.chisel.common.integration.jei;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.ImmutableMap;
-
 import com.tterrag.registrate.util.entry.ItemEntry;
+
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IRegistryDelegate;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.item.ItemChisel;
-import team.chisel.common.item.ItemChisel.ChiselType;
 
 @JeiPlugin
 public class ChiselJEIPlugin implements IModPlugin {
@@ -41,12 +39,12 @@ public class ChiselJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
-//        registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
-//                            .collect(Collectors.toList()), category.getUid());
+        registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
+                            .collect(Collectors.toList()), category.getUid());
 
         for (ItemEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
             ItemStack stack = new ItemStack(chisel.get());
-            registry.addIngredientInfo(stack, VanillaTypes.ITEM, ChiselLangKeys.JEI_DESC_CHISEL_GENERIC.getComponent().getKey(), "\n", descriptions.get(chisel.get().delegate).getComponent().getKey());
+            registry.addIngredientInfo(stack, VanillaTypes.ITEM, ChiselLangKeys.JEI_DESC_CHISEL_GENERIC.getComponent(), descriptions.get(chisel.get().delegate).getComponent());
         }
     }
     
@@ -84,7 +82,7 @@ public class ChiselJEIPlugin implements IModPlugin {
         //} catch (Exception e) {
         //    Chisel.logger.error("Failed to inject recipe registry plugin at beginning of list, cannot guarantee vanilla recipes will show first", e);
         //}
-        //plugin.setRecipeRegistry(jeiRuntime.getRecipeManager());
+        plugin.setRecipeRegistry(jeiRuntime.getRecipeManager());
     }
 
     @Override

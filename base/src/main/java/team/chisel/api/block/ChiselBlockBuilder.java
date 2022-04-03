@@ -13,7 +13,6 @@ import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
@@ -35,13 +34,13 @@ import lombok.Setter;
 import lombok.Value;
 import lombok.experimental.Accessors;
 import lombok.experimental.NonFinal;
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
-import net.minecraft.tags.Tag.Named;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -69,7 +68,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     private final BlockProvider<T> provider;
 
-    private @Nullable Named<Block> group;
+    private @Nullable TagKey<Block> group;
 
     @Setter(AccessLevel.NONE)
     private Set<ResourceLocation> appliedTags = new HashSet<>();
@@ -103,14 +102,14 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     @Accessors(fluent = true)
     private MaterialColor color;
 
-    protected ChiselBlockBuilder(ChiselBlockFactory parent, Registrate registrate, Material material, String blockName, @Nullable Named<Block> group, BlockProvider<T> provider) {
+    protected ChiselBlockBuilder(ChiselBlockFactory parent, Registrate registrate, Material material, String blockName, @Nullable TagKey<Block> group, BlockProvider<T> provider) {
         this.parent = parent;
         this.registrate = registrate;
         this.material = material;
         this.blockName = blockName;
         this.provider = provider;
         this.group = group;
-        this.groupName = group == null ? null : RegistrateLangProvider.toEnglishName(group.getName().getPath());
+        this.groupName = group == null ? null : RegistrateLangProvider.toEnglishName(group.location().getPath());
         this.variations = new ArrayList<VariationBuilder<T>>();
     }
     
@@ -155,8 +154,8 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         return this;
     }
     
-    public ChiselBlockBuilder<T> addTag(Tag.Named<Block> tag) {
-        return addTag(tag.getName());
+    public ChiselBlockBuilder<T> addTag(TagKey<?> tag) {
+        return addTag(tag.location());
     }
 
     public ChiselBlockBuilder<T> addTag(ResourceLocation tag) {
@@ -164,13 +163,21 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         return this;
     }
 
-    public ChiselBlockBuilder<T> applyTag(Tag.Named<Block> tag) {
-        return applyTag(tag.getName());
+    public ChiselBlockBuilder<T> applyTag(TagKey<?> tag) {
+        return applyTag(tag.location());
     }
 
     public ChiselBlockBuilder<T> applyTag(ResourceLocation tag) {
         this.appliedTags.add(tag);
         return this;
+    }
+
+    public ChiselBlockBuilder<T> equivalentTo(TagKey<?> tag) {
+        return addTag(tag).applyTag(tag);
+    }
+
+    public ChiselBlockBuilder<T> equivalentTo(ResourceLocation tag) {
+        return addTag(tag).applyTag(tag);
     }
 
     private static final NonNullUnaryOperator<Block.Properties> NO_ACTION = NonNullUnaryOperator.identity();
@@ -231,14 +238,14 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             CarvingUtils.getChiselRegistry().addGroup(group);
             if (!otherBlocks.isEmpty() || !otherTags.isEmpty()) {
                 addExtraTagEntries(ProviderType.BLOCK_TAGS, t -> t, ForgeRegistries.BLOCKS::getValue);
-                this.<Item>addExtraTagEntries(ProviderType.ITEM_TAGS, t -> parent.getItemTag(t.getName()), ForgeRegistries.ITEMS::getValue);
+                this.<Item>addExtraTagEntries(ProviderType.ITEM_TAGS, t -> ItemTags.create(t.location()), ForgeRegistries.ITEMS::getValue);
             }
         }
         return ret;
     }
     
     @SuppressWarnings({ "unchecked" })
-    private <TAG> void addExtraTagEntries(ProviderType<? extends RegistrateTagsProvider<TAG>> type, NonNullFunction<Tag.Named<Block>, Tag.Named<TAG>> tagGetter, NonNullFunction<ResourceLocation, TAG> entryLookup) {    	
+    private <TAG> void addExtraTagEntries(ProviderType<? extends RegistrateTagsProvider<TAG>> type, NonNullFunction<TagKey<Block>, TagKey<TAG>> tagGetter, NonNullFunction<ResourceLocation, TAG> entryLookup) {    	
         registrate.addDataGenerator(type, prov -> {
         	TagsProvider.TagAppender<TAG> builder = prov.tag(tagGetter.apply(this.group))
                 .add((TAG[]) otherBlocks.stream()
@@ -253,15 +260,15 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         if (this.group != null) {
             builder.tag(this.group);
         }
-        this.appliedTags.forEach(t -> builder.tag(parent.getBlockTag(t)));
+        this.appliedTags.forEach(t -> builder.tag(BlockTags.create(t)));
         return builder;
     }
 
     private <I extends Item, P> ItemBuilder<I, P> addTags(ItemBuilder<I, P> builder) {
         if (this.group != null) {
-            builder.tag(parent.getItemTag(this.group.getName()));
+            builder.tag(ItemTags.create(this.group.location()));
         }
-        this.appliedTags.forEach(t -> builder.tag(parent.getItemTag(t)));
+        this.appliedTags.forEach(t -> builder.tag(ItemTags.create(t)));
         return builder;
     }
 

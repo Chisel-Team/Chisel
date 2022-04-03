@@ -496,7 +496,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
     }
     
     @Override
-    public CompoundTag save(CompoundTag compound) {
+    public void saveAdditional(CompoundTag compound) {
         compound.put("other", otherInv.serializeNBT());
         compound.put("input", inputInv.serializeNBT());
         compound.put("output", outputInv.serializeNBT());
@@ -506,7 +506,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
         if (hasCustomName()) {
             compound.putString("customName", Component.Serializer.toJson(getName()));
         }
-        return super.save(compound);
+        super.saveAdditional(compound);
     }
     
     @Override

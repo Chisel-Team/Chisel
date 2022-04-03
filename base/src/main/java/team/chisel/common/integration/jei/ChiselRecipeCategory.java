@@ -1,30 +1,30 @@
 package team.chisel.common.integration.jei;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.matrix.PoseStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.IRecipeLayout;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.recipe.IFocus;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import team.chisel.Chisel;
+import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.init.ChiselItems;
-import team.chisel.common.item.ItemChisel.ChiselType;
 
 public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
 
@@ -34,11 +34,11 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
     private final IDrawable background;
     private final IDrawable arrowUp, arrowDown;
 
-    private @Nullable IRecipeLayout layout;
-    private @Nullable IFocus<?> focus;
+    private @Nullable IRecipeLayoutBuilder layout;
+    private @Nullable IFocusGroup focus;
 
     public ChiselRecipeCategory(IGuiHelper guiHelper) {
-        this.icon = guiHelper.createDrawableIngredient(new ItemStack(ChiselItems.IRON_CHISEL.get()));
+        this.icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM, new ItemStack(ChiselItems.IRON_CHISEL.get()));
         this.background = guiHelper.createDrawable(TEXTURE_LOC, 0, 0, 165, 126);
         this.arrowDown = guiHelper.createDrawable(TEXTURE_LOC, 166, 0, 18, 15);
         this.arrowUp = guiHelper.createDrawable(TEXTURE_LOC, 166, 15, 18, 15);
@@ -52,8 +52,8 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
 
     @Nonnull
     @Override
-    public String getTitle() {
-        return ChiselLangKeys.JEI_TITLE.getComponent().getString();
+    public Component getTitle() {
+        return ChiselLangKeys.JEI_TITLE.getComponent();
     }
 
     @Nonnull
@@ -65,7 +65,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
     @Override
     public void draw(ICarvingGroup recipe, PoseStack PoseStack, double mouseX, double mouseY) {
         if (layout != null) {
-            if (focus == null || focus.getMode() == IFocus.Mode.INPUT) {
+            if (focus == null || focus.getFocuses(VanillaTypes.ITEM, RecipeIngredientRole.OUTPUT).count() == 0) {
                 arrowDown.draw(PoseStack, 73, 21);
             } else {
                 arrowUp.draw(PoseStack, 73, 21);
@@ -74,51 +74,51 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, ICarvingGroup recipeWrapper, IIngredients ingredients) {
+    public void setRecipe(IRecipeLayoutBuilder recipeLayout, ICarvingGroup recipeWrapper, IFocusGroup focus) {
         this.layout = recipeLayout;
-        IFocus<?> focus = (this.focus = recipeLayout.getFocus());
+        this.focus = focus;
         
-        recipeLayout.getItemStacks().init(0, focus == null || focus.getMode() == IFocus.Mode.INPUT, 73, 3);
-        if (focus != null) {
-            recipeLayout.getItemStacks().set(0, (ItemStack) focus.getValue()); 
+        IRecipeSlotBuilder inputSlot = recipeLayout.addSlot(RecipeIngredientRole.INPUT, 74, 4);
+        if (focus.getFocuses(VanillaTypes.ITEM, RecipeIngredientRole.OUTPUT).count() > 0) {
+            inputSlot.addItemStacks(focus.getFocuses(VanillaTypes.ITEM, RecipeIngredientRole.OUTPUT).map(f -> f.getTypedValue().getIngredient()).toList()); 
         } else {
-            recipeLayout.getItemStacks().set(0, ingredients.getInputs(VanillaTypes.ITEM).stream().flatMap(l -> l.stream()).collect(Collectors.toList()));
+            inputSlot.addIngredients(Ingredient.of(recipeWrapper.getItemTag().getKey()));
         }
 
         int rowWidth = 9;
 
-        int xStart = 2;
-        int yStart = 36;
+        int xStart = 3;
+        int yStart = 37;
 
-        int outputs = ingredients.getOutputs(VanillaTypes.ITEM).size();
+        List<ItemStack> groupStacks = CarvingUtils.getChiselRegistry().getItemsForChiseling(recipeWrapper.getId());
         int MAX_SLOTS = 45;
-        
+
         List<List<ItemStack>> stacks = Lists.newArrayList();
         
-        for (int i = 0; i < outputs; i++) {
+        for (int i = 0; i < groupStacks.size(); i++) {
             int slot = i % MAX_SLOTS;
             if (stacks.size() <= slot) {
                 stacks.add(Lists.newArrayList());
             }
-         
-            ItemStack stack = (ItemStack) ingredients.getOutputs(VanillaTypes.ITEM).get(i).get(0);
+
+            ItemStack stack = groupStacks.get(i);
             stacks.get(slot).add(stack.copy());
         }
         
-        if (outputs > MAX_SLOTS) {
-            int leftover = outputs % MAX_SLOTS;
+        if (groupStacks.size() > MAX_SLOTS) {
+            int leftover = groupStacks.size() % MAX_SLOTS;
             for (int i = leftover; i < MAX_SLOTS; i++) {
                 stacks.get(i).add(ItemStack.EMPTY);
             }
         }
-        
+
         for (int i = 0; i < stacks.size(); i++) {
             
             int x = xStart + (i % rowWidth) * 18;
             int y = yStart + (i / rowWidth) * 18;
             
-            recipeLayout.getItemStacks().init(i + 1, focus != null && focus.getMode() == IFocus.Mode.OUTPUT, x, y);
-            recipeLayout.getItemStacks().set(i + 1, stacks.get(i));
+            IRecipeSlotBuilder outputSlot = recipeLayout.addSlot(RecipeIngredientRole.OUTPUT, x, y);
+            outputSlot.addItemStacks(stacks.get(i));
         }
     }
 
@@ -132,11 +132,11 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
         return icon;
     }
 
-    @Override
-    public void setIngredients(ICarvingGroup group, IIngredients ingredients) {
-        List<ItemStack> variants = group.getItemTag().getAllElements().stream().map(ItemStack::new).collect(Collectors.toList());
-        
-        ingredients.setInputs(VanillaTypes.ITEM, variants);
-        ingredients.setOutputs(VanillaTypes.ITEM, variants);
-    }
+//    @Override
+//    public void setIngredients(ICarvingGroup group, IIngredients ingredients) {
+//        List<ItemStack> variants = group.getItemTag().stream().map(ItemStack::new).collect(Collectors.toList());
+//        
+//        ingredients.setInputs(VanillaTypes.ITEM, variants);
+//        ingredients.setOutputs(VanillaTypes.ITEM, variants);
+//    }
 }

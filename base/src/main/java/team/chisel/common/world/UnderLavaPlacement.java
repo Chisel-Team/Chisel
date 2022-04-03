@@ -31,6 +31,6 @@ public class UnderLavaPlacement extends PlacementModifier {
 
     @Override
     public PlacementModifierType<?> type() {
-        return ChiselWorldGen.PLACE_UNDER_LAVA;
+        return ChiselWorldGen.PLACE_UNDER_LAVA.get();
     }
 }

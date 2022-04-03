@@ -125,7 +125,7 @@ subprojects {
     }
     
     minecraft {
-        mappings channel: 'parchment', version: '2021.12.19-1.18.1'
+        mappings channel: 'parchment', version: '2022.03.13-1.18.2'
     
         accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     }
@@ -133,15 +133,15 @@ subprojects {
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-        implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
+        //implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
         
-        compileOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}:api")
+        //compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
         runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
     
-        //compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-        //runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+        compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+        runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
         
-        def registrate = "com.tterrag.registrate:Registrate:MC1.18-${registrate_version}"
+        def registrate = "com.tterrag.registrate:Registrate:MC${minecraft_version}-${registrate_version}"
         implementation fg.deobf(registrate)
         shade registrate
     

@@ -1,7 +1,6 @@
 package team.chisel.api.carving;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.base.Objects;
 
@@ -11,8 +10,7 @@ import lombok.RequiredArgsConstructor;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.tags.Tag;
-import net.minecraft.tags.Tag.Named;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -58,15 +56,15 @@ public class CarvingUtils {
 	    return Objects.hashCode(stack.getItem(), stack.getTag());
 	}
 	
-	private static TranslatableComponent getDisplayName(Named<?> tag, String name) {
-	    return Chisel.registrate().addLang("group", tag.getName(), name);
+	private static TranslatableComponent getDisplayName(TagKey<?> tag, String name) {
+	    return Chisel.registrate().addLang("group", tag.location(), name);
 	}
 
-    public static ICarvingGroup itemGroup(Named<Block> blocks, String name) {
+    public static ICarvingGroup itemGroup(TagKey<Block> blocks, String name) {
         return new BlockTagGroup(blocks, getDisplayName(blocks, name));
     }
 
-    public static ICarvingGroup blockGroup(Named<Item> items, String name) {
+    public static ICarvingGroup blockGroup(TagKey<Item> items, String name) {
         return new ItemTagGroup(items, getDisplayName(items, name));
     }
 	
@@ -109,15 +107,15 @@ public class CarvingUtils {
 
 	private static class BlockTagGroup extends AbstractGroup {
 
-		public BlockTagGroup(Tag.Named<Block> tag, TranslatableComponent displayName) {
-		    super(tag.getName(), displayName);
+		public BlockTagGroup(TagKey<Block> tag, TranslatableComponent displayName) {
+		    super(tag.location(), displayName);
 		}
 	}
 
 	private static class ItemTagGroup extends AbstractGroup {
 	    
-	    public ItemTagGroup(Tag.Named<Item> tag, TranslatableComponent displayName) {
-	        super(tag.getName(), displayName);
+	    public ItemTagGroup(TagKey<Item> tag, TranslatableComponent displayName) {
+	        super(tag.location(), displayName);
 	    }
 	}
 }

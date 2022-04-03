@@ -9,10 +9,13 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.ImmutableList;
 
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IFocus.Mode;
 import mezz.jei.api.recipe.IRecipeManager;
+import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.advanced.IRecipeManagerPlugin;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +26,7 @@ import team.chisel.api.carving.CarvingUtils;
 public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
     
     @Nonnull
-    private static final List<ResourceLocation> POSSIBLE_CATEGORIES = ImmutableList.of(VanillaRecipeCategoryUid.CRAFTING, VanillaRecipeCategoryUid.FURNACE, VanillaRecipeCategoryUid.INFORMATION);
+    private static final List<RecipeType<? extends Object>> POSSIBLE_CATEGORIES = ImmutableList.of(RecipeTypes.CRAFTING, RecipeTypes.SMELTING, RecipeTypes.INFORMATION);
     
     private IRecipeManager registry;
     
@@ -39,18 +42,20 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
     
     private boolean preventRecursion;
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "unchecked", "null" })
     @Override
-    public <V> List<ResourceLocation> getRecipeCategoryUids(IFocus<V> focus) {
+    public <V> List<RecipeType<?>> getRecipeTypes(IFocus<V> focus) {
         try {
             if (focus.getMode() != Mode.OUTPUT) return Collections.emptyList();
             List<ItemStack> alternates = getAlternateOutputs(focus);
             if (alternates.isEmpty()) return Collections.emptyList();
             try {
                 preventRecursion = true;
-                return registry.getRecipeCategories(POSSIBLE_CATEGORIES).stream()
-                        .filter(c -> alternates.stream().flatMap(s -> registry.getRecipes(c, registry.createFocus(focus.getMode(), s)).stream()).count() != 0)
-                        .map(IRecipeCategory::getUid)
+                return registry.createRecipeCategoryLookup().limitTypes(POSSIBLE_CATEGORIES).get()
+                        .filter(c -> alternates.stream() 
+                                .flatMap(s -> registry.createRecipeLookup(c.getRecipeType())
+                                        .limitFocus(Collections.singletonList(registry.createFocus(focus.getMode(), s))).get()).count() != 0)
+                        .map(IRecipeCategory::getRecipeType)
                         .collect(Collectors.toList());
             } finally {
                 preventRecursion = false;
@@ -70,10 +75,10 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
             if (!POSSIBLE_CATEGORIES.contains(recipeCategory.getUid())) return Collections.emptyList();
             try {
                 preventRecursion = true;
-                if (!registry.getRecipes(recipeCategory, focus).isEmpty()) return Collections.emptyList();
+                if (!registry.getRecipes(recipeCategory, focus, false).isEmpty()) return Collections.emptyList();
                 return getAlternateOutputs(focus).stream()
                         .map(alternate -> registry.createFocus(focus.getMode(), alternate))
-                        .flatMap(f -> registry.getRecipes(recipeCategory, f).stream())
+                        .flatMap(f -> registry.getRecipes(recipeCategory, f, false).stream())
                         .collect(Collectors.toList());
             } finally {
                 preventRecursion = false;
@@ -91,5 +96,10 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
 
     void setRecipeRegistry(IRecipeManager recipeRegistry) {
         this.registry = recipeRegistry;
+    }
+
+    @Override
+    public <V> List<ResourceLocation> getRecipeCategoryUids(IFocus<V> focus) {
+        return POSSIBLE_CATEGORIES.stream().map(t -> t.getUid()).toList();
     }
 }

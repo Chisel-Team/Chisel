@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "chisel:diamond_chisel"
+            "items": [
+              "chisel:diamond_chisel"
+            ]
           }
         ]
       }

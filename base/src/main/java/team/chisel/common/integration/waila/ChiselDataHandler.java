@@ -6,8 +6,11 @@ import mcp.mobius.waila.api.IBlockAccessor;
 import mcp.mobius.waila.api.IBlockComponentProvider;
 import mcp.mobius.waila.api.IPluginConfig;
 import mcp.mobius.waila.api.IRegistrar;
+import mcp.mobius.waila.api.ITooltip;
+import mcp.mobius.waila.api.IWailaConfig;
 import mcp.mobius.waila.api.IWailaPlugin;
 import mcp.mobius.waila.api.TooltipPosition;
+import mcp.mobius.waila.api.WailaConstants;
 import mcp.mobius.waila.api.WailaPlugin;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -20,7 +23,18 @@ public class ChiselDataHandler implements IWailaPlugin, IBlockComponentProvider 
     
     @Override
     public void register(IRegistrar registrar) {
+        registrar.addComponent(this, TooltipPosition.HEAD, ICarvable.class);
         registrar.addComponent(this, TooltipPosition.BODY, ICarvable.class);
+    }
+
+    @Override
+    public void appendHead(ITooltip tooltip, IBlockAccessor accessor, IPluginConfig config) {
+        if (accessor.getBlock() instanceof ICarvable) {
+            ItemStack stack = accessor.getStack();
+
+            IWailaConfig.Formatter formatter = IWailaConfig.get().getFormatter();
+            tooltip.setLine(WailaConstants.OBJECT_NAME_TAG, formatter.blockName(stack.getHoverName().getString()));
+        }
     }
 
     @Override

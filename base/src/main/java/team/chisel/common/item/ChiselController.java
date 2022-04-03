@@ -91,7 +91,7 @@ public class ChiselController {
                     }
                 }
             } else {
-                List<Block> variations = new ArrayList<>(blockGroup.getBlockTag().map(Tag::getValues).orElse(Collections.emptyList()));
+                List<Block> variations = blockGroup.getBlockTag().stream().toList();
                 
                 variations = variations.stream().filter(v -> v != null).collect(Collectors.toList());
 

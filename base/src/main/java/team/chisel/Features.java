@@ -18,6 +18,7 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -51,7 +52,7 @@ public class Features {
     public static final Map<String, BlockEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.METAL, "metals/aluminum")
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .setGroupName("Aluminum Block")
-            .addTag(ChiselCompatTags.STORAGE_BLOCKS_ALUMINUM)
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_ALUMINUM)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .color(MaterialColor.COLOR_LIGHT_GRAY)
             .variations(VariantTemplates.METAL)
@@ -134,7 +135,7 @@ public class Features {
                     .build()));
 
     public static final Map<String, BlockEntry<BlockCarvable>> CHARCOAL = _FACTORY.newType(Material.STONE, "charcoal")
-            .addTag(ChiselCompatTags.STORAGE_BLOCKS_CHARCOAL)
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_CHARCOAL)
             .initialProperties(() -> Blocks.COAL_BLOCK)
             .variation(VariantTemplates.withRecipe(VariantTemplates.RAW, (prov, block) -> new ShapelessRecipeBuilder(block, 1)
                     .requires(Items.CHARCOAL)
@@ -144,19 +145,23 @@ public class Features {
             .build();
     
     public static final Map<String, BlockEntry<BlockCarvable>> COAL = _FACTORY.newType(Material.STONE, "coal")
-            .addTag(Tags.Blocks.STORAGE_BLOCKS_COAL)
+            .equivalentTo(Tags.Blocks.STORAGE_BLOCKS_COAL)
             .initialProperties(() -> Blocks.COAL_BLOCK)
             .variations(/*VariantTemplates.withUncraft(*/VariantTemplates.ROCK/*, Items.COAL)*/) // TODO
             .build();
     
     public static final Map<String, BlockEntry<BlockCarvable>> COBBLESTONE = _FACTORY.newType(Material.STONE, "cobblestone")
             .addBlock(Blocks.COBBLESTONE)
+            .applyTag(Tags.Blocks.COBBLESTONE)
+            .applyTag(ItemTags.STONE_TOOL_MATERIALS)
+            .applyTag(ItemTags.STONE_CRAFTING_MATERIALS)
             .initialProperties(() -> Blocks.COBBLESTONE)
             .variations(VariantTemplates.COBBLESTONE)
             .build();
     
     public static final Map<String, BlockEntry<BlockCarvable>> COBBLESTONE_MOSSY = _FACTORY.newType(Material.STONE, "mossy_cobblestone")
             .addBlock(Blocks.MOSSY_COBBLESTONE)
+            .applyTag(Tags.Blocks.COBBLESTONE_MOSSY)
             .initialProperties(() -> Blocks.MOSSY_COBBLESTONE)
             .variations(VariantTemplates.COBBLESTONE_MOSSY)
             .build();
@@ -186,6 +191,7 @@ public class Features {
 
     public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.METAL, "emerald") 
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .equivalentTo(Tags.Blocks.STORAGE_BLOCKS_EMERALD)
             .initialProperties(() -> Blocks.EMERALD_BLOCK)
             /*.recipe((prov, block) -> new ShapelessRecipeBuilder(Items.EMERALD, 9)
                     .addIngredient(block)
@@ -208,7 +214,7 @@ public class Features {
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> ENDSTONE = _FACTORY.newType(Material.STONE, "end_stone")
-            .addTag(Tags.Blocks.END_STONES)
+            .equivalentTo(Tags.Blocks.END_STONES)
             .addBlock(Blocks.END_STONE_BRICKS)
             .initialProperties(() -> Blocks.END_STONE)
             .variations(VariantTemplates.ROCK)
@@ -346,6 +352,7 @@ public class Features {
     public static final Map<WoodType, Map<String, BlockEntry<BlockCarvable>>> PLANKS = VANILLA_WOODS.stream()
             .map(t -> Pair.of(t, new ResourceLocation(t.name() + "_planks")))
             .collect(Collectors.toMap(Pair::getFirst, pair -> _FACTORY.newType(Material.WOOD, "planks/" + pair.getFirst().name())
+                    .applyTag(BlockTags.PLANKS)
                     .addBlock(pair.getSecond())
                     .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst().name()) + " Planks")
                     .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(pair.getSecond()))
@@ -377,7 +384,7 @@ public class Features {
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> QUARTZ = _FACTORY.newType(Material.STONE, "quartz")
-            .addTag(Tags.Blocks.STORAGE_BLOCKS_QUARTZ)
+            .equivalentTo(Tags.Blocks.STORAGE_BLOCKS_QUARTZ)
             .addBlock(Blocks.QUARTZ_PILLAR)
             .addBlock(Blocks.CHISELED_QUARTZ_BLOCK)
             .addBlock(Blocks.SMOOTH_QUARTZ)
@@ -390,6 +397,7 @@ public class Features {
             .addBlock(Blocks.CHISELED_RED_SANDSTONE)
             .addBlock(Blocks.CUT_RED_SANDSTONE)
             .addBlock(Blocks.SMOOTH_RED_SANDSTONE)
+            .applyTag(Tags.Blocks.SANDSTONE)
             .initialProperties(() -> Blocks.SANDSTONE)
             .color(MaterialColor.COLOR_ORANGE)
             .variations(VariantTemplates.ROCK)
@@ -399,13 +407,17 @@ public class Features {
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> REDSTONE = _FACTORY.newType(Material.METAL, "redstone", BlockCreators.redstoneCreator)
-            .addTag(Tags.Blocks.STORAGE_BLOCKS_REDSTONE)
+            .equivalentTo(Tags.Blocks.STORAGE_BLOCKS_REDSTONE)
             .initialProperties(() -> Blocks.REDSTONE_BLOCK)
             .variations(VariantTemplates.STONE)
             .build(); //TODO: Recipe from FeaturesOld
 
     public static final Map<String, BlockEntry<BlockCarvable>> SANDSTONE = _FACTORY.newType(Material.STONE, "sandstone")
-            .addTag(Tags.Blocks.SANDSTONE)
+            .addBlock(Blocks.SANDSTONE)
+            .addBlock(Blocks.CHISELED_SANDSTONE)
+            .addBlock(Blocks.CUT_SANDSTONE)
+            .addBlock(Blocks.SMOOTH_SANDSTONE)
+            .applyTag(Tags.Blocks.SANDSTONE)
             .initialProperties(() -> Blocks.SANDSTONE)
             .variations(VariantTemplates.ROCK)
             .variation("extra/bevel_creeper").localizedName("Bevel Creeper")
@@ -462,6 +474,7 @@ public class Features {
     public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvable>>> WOOL = Arrays.stream(DyeColor.values())
             .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "wool/" + (color.getSerializedName()))
                     .addBlock(new ResourceLocation(color.getSerializedName() + "_wool")) // TODO improve this copied RL construction
+                    .applyTag(BlockTags.WOOL)
                     .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
                     .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_wool")))
                     .variation("legacy")

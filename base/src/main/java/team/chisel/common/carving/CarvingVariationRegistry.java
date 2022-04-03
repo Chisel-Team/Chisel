@@ -42,7 +42,7 @@ public class CarvingVariationRegistry implements IVariationRegistry {
     @Override
     public Optional<ICarvingGroup> getGroup(Block block) {
         return groups.values().stream()
-                .filter(g -> g.getBlockTag().map(tag -> tag.contains(block)).orElse(false))
+                .filter(g -> g.getBlockTag().contains(block))
                 .findFirst();
     }
 
@@ -102,7 +102,7 @@ public class CarvingVariationRegistry implements IVariationRegistry {
     }
     
     private List<ItemStack> getItemsForChiseling(ICarvingGroup group) {
-        return group.getItemTag().getValues().stream()
+        return group.getItemTag().stream()
                 .map(ItemStack::new)
                 .sorted(Comparator.comparing(ItemStack::getItem, ItemSorter.variantOrder()))
                 .collect(Collectors.toList());

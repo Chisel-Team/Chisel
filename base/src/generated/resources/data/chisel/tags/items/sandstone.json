@@ -37,9 +37,9 @@
     "chisel:sandstone/extra/bevel_creeper",
     "chisel:sandstone/extra/glyphs",
     "chisel:sandstone/extra/small",
-    {
-      "id": "forge:sandstone",
-      "required": false
-    }
+    "minecraft:smooth_sandstone",
+    "minecraft:chiseled_sandstone",
+    "minecraft:sandstone",
+    "minecraft:cut_sandstone"
   ]
 }
