@@ -22,7 +22,7 @@ plugins {
     id 'maven-publish'
     id 'eclipse'
     id 'io.freefair.lombok' version '4.1.5'
-    id 'com.github.johnrengelman.shadow' version '5.2.0'
+    id 'com.github.johnrengelman.shadow' version '7.1.0'
     id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
@@ -135,7 +135,7 @@ subprojects {
 
         implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
         
-        //compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
+        compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
         runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
     
         compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
