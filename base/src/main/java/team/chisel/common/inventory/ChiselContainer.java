@@ -96,7 +96,7 @@ public class ChiselContainer extends AbstractContainerMenu {
             }
 
             // if the player has clicked on the chisel or is trying to use a number key to force an itemstack into the slot the chisel is in
-            if (clickedSlot == chiselSlot || clickTypeIn == ClickType.SWAP) {
+            if (clickedSlot == chiselSlot || (clickTypeIn == ClickType.SWAP && !inventoryPlayer.items.get(dragType).isEmpty())) {
                 return;
             }
         }

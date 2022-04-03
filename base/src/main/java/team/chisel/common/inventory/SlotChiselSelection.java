@@ -73,12 +73,15 @@ public class SlotChiselSelection extends Slot {
     public void onTake(Player player, ItemStack itemstack) {
         ItemStack chisel = container.getChisel().copy();
         ItemStack res = craft(container, player, itemstack, false);
-        if (container.currentClickType != ClickType.PICKUP) {
-            res.shrink(1);
-        }
         if (!res.isEmpty()) {
-            SoundUtil.playSound(player, chisel, itemstack);
-            player.getInventory().setPickedItem(res);
+            SoundUtil.playSound(player, chisel, res);
+            switch (container.getCurrentClickType()) {
+                case PICKUP, PICKUP_ALL, QUICK_CRAFT, QUICK_MOVE -> container.setCarried(res);
+                case SWAP, THROW -> itemstack.setCount(res.getCount());
+                default -> {}
+            }
+        } else {
+            itemstack.setCount(0);
         }
         return;
     }
