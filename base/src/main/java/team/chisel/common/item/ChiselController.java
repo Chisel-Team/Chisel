@@ -15,6 +15,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -31,11 +32,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.Chisel;
@@ -46,6 +49,7 @@ import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.api.carving.IVariationRegistry;
+import team.chisel.client.ClientProxy;
 import team.chisel.common.util.NBTUtil;
 import team.chisel.common.util.SoundUtil;
 
@@ -83,9 +87,9 @@ public class ChiselController {
                 if (blockGroup == sourceGroup) {
                     ICarvingVariation variation = registry.getVariation(target.getItem()).orElse(null);
                     if (variation != null) {
-                        if (variation.getBlock() != null) {
-                            setAll(candidates, player, state, variation);
-                        }
+                        setAll(candidates, player, state, variation);
+                        event.setCanceled(true);
+                        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientProxy::resetWaitTimer);
                     } else {
                         Chisel.logger.warn("Found itemstack {} in group {}, but it has no variation!", target, sourceGroup.getId());
                     }
@@ -101,6 +105,8 @@ public class ChiselController {
                 
                 ICarvingVariation next = registry.getVariation(variations.get(index)).orElse(null);
                 setAll(candidates, player, state, next);
+                event.setCanceled(true);
+                DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientProxy::resetWaitTimer);
             }
         }
     }
@@ -111,7 +117,7 @@ public class ChiselController {
             setVariation(player, pos, origState, v);
         }
     }
-    
+
     private static final LoadingCache<Player, Long> HACKY_CACHE = CacheBuilder.newBuilder()
             .expireAfterWrite(1, TimeUnit.SECONDS)
             .weakKeys()

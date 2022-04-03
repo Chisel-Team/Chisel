@@ -1,9 +1,7 @@
 package team.chisel.api.carving;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public interface ICarvingVariation {
 

@@ -43,4 +43,8 @@ public class ClientProxy {
     public static LevelRenderer getWorldRenderer() {
     	return DistExecutor.unsafeCallWhenOn(Dist.CLIENT, () -> () -> Minecraft.getInstance().levelRenderer);
     }
+
+    public static void resetWaitTimer() {
+        Minecraft.getInstance().gameMode.destroyDelay = 5;
+    }
 }
