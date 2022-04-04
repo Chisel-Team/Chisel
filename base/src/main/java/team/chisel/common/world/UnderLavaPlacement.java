@@ -18,10 +18,11 @@ public class UnderLavaPlacement extends PlacementModifier {
 
 	public static final Codec<UnderLavaPlacement> CODEC = Codec.unit(new UnderLavaPlacement());
 
+    @SuppressWarnings("null")
     @Override
     public Stream<BlockPos> getPositions(PlacementContext world, Random p_212848_3_, BlockPos pos) {
-        BlockPos origin = new BlockPos(pos.getX() + 8, 0, pos.getZ() + 8);
-        return BlockPos.betweenClosedStream(origin, origin.offset(15, 11, 15))
+        BlockPos origin = new BlockPos(pos.getX() + 8, world.getMinGenY(), pos.getZ() + 8);
+        return BlockPos.betweenClosedStream(origin, origin.offset(15, 0, 15).atY(11))
                 .filter(p -> world.getBlockState(p).getMaterial() == Material.LAVA)
                 .flatMap(p -> Arrays.stream(Direction.values())
                         .filter(d -> d != Direction.UP)
