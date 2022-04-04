@@ -266,9 +266,9 @@ public class ChiselController {
         }
     }
     
-    private static final MethodHandle _updateFacingWithBoundingBox; static {
+    private static final MethodHandle _setDirection; static {
         try {
-            _updateFacingWithBoundingBox = MethodHandles.lookup().unreflect(ObfuscationReflectionHelper.findMethod(HangingEntity.class, "setDirection", Direction.class));
+            _setDirection = MethodHandles.lookup().unreflect(ObfuscationReflectionHelper.findMethod(HangingEntity.class, "m_6022_", Direction.class));
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -284,7 +284,7 @@ public class ChiselController {
                 do {
                     painting.motive = values.get(((values.indexOf(painting.motive) + (event.getPlayer().isShiftKeyDown() ? -1 : 1)) + values.size()) % values.size());
                     try {
-                        _updateFacingWithBoundingBox.invokeExact((HangingEntity) painting, painting.getDirection());
+                        _setDirection.invokeExact((HangingEntity) painting, painting.getDirection());
                     } catch (Throwable e) {
                         throw new RuntimeException(e);
                     }
