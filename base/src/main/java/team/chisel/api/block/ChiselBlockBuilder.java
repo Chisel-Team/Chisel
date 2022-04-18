@@ -201,6 +201,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings("null")
+    @Deprecated
     public Map<String, BlockEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
             throw new IllegalArgumentException("Must have at least one variation!");
@@ -219,6 +220,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 ret.put(var.getName(), registrate.object(blockName + "/" + var.getName())
                         .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret.get(var.getName()), var.getName(), var.getDisplayName(), group)))
                         .initialProperties(initialProperties == null ? NonNullSupplier.of(Blocks.STONE.delegate) : initialProperties)
+                        .properties(after)
                         .addLayer(layer)
                         .transform(this::addTags)
 //                        .properties(color == null ? after : after.andThen(p -> { p.blockColors = $ -> color; return p; }))
@@ -323,6 +325,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             return buildVariation().build();
         }
         
+        @Deprecated
         public Map<String, BlockEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
             return buildVariation().build(after);
         }
