@@ -483,7 +483,9 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
     
     @Override
     public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        handleUpdateTag(pkt.getTag());
+        if (pkt.getTag() != null) {
+            handleUpdateTag(pkt.getTag());
+        }
         super.onDataPacket(net, pkt);
     }
 
@@ -534,7 +536,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
     public Component getName() {
         Component name = getCustomName();
         if (name == null) {
-            name = new TranslatableComponent("container.autochisel.title");
+            name = this.getBlockState().getBlock().getName();
         }
         return name;
     }

@@ -4,26 +4,25 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import com.tterrag.registrate.Registrate;
-
+import com.tterrag.registrate.builders.MenuBuilder.MenuFactory;
+import com.tterrag.registrate.builders.MenuBuilder.ScreenFactory;
 import com.tterrag.registrate.util.entry.RegistryEntry;
-import net.minecraft.world.entity.player.Player;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
+
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.network.chat.Component;
 import team.chisel.Chisel;
 import team.chisel.client.gui.GuiChisel;
 import team.chisel.client.gui.GuiHitechChisel;
 import team.chisel.common.inventory.ChiselContainer;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
-import team.chisel.common.util.ContainerBuilder;
-import team.chisel.common.util.ContainerBuilder.ContainerFactory;
-import team.chisel.common.util.ContainerBuilder.ScreenFactory;
 
 public interface IChiselGuiType<T extends ChiselContainer> {
     
@@ -48,7 +47,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
     }
     
     public enum ChiselGuiType implements IChiselGuiType<ChiselContainer> {
-        NORMAL("chisel_container_normal", ChiselContainer::new, (Supplier<ScreenFactory<ChiselContainer, GuiChisel<ChiselContainer>>>) () -> (container, inv, displayName) -> new GuiChisel<>(container, inv, displayName)) {
+        NORMAL("chisel_container_normal", ChiselContainer::new, () -> (container, inv, displayName) -> new GuiChisel<>(container, inv, displayName)) {
           
             @Override
             @Nullable
@@ -56,7 +55,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
                 return new ChiselContainer(getContainerType(), windowId, inv, new InventoryChiselSelection(player.getItemInHand(hand), 60), hand);
             }
         },
-        HITECH("chisel_container_hitech", ContainerChiselHitech::new, (Supplier<ScreenFactory<ContainerChiselHitech, GuiHitechChisel>>) () -> (container, inv, displayName) -> new GuiHitechChisel(container, inv, displayName)) {
+        HITECH("chisel_container_hitech", ContainerChiselHitech::new, () -> (container, inv, displayName) -> new GuiHitechChisel(container, inv, displayName)) {
             
             @Override
             @Nullable
@@ -67,10 +66,9 @@ public interface IChiselGuiType<T extends ChiselContainer> {
         
         private final RegistryEntry<? extends MenuType<? extends ChiselContainer>> type;
         
-        private <C extends ChiselContainer, T extends GuiChisel<C>> ChiselGuiType(String name, ContainerFactory<C> factory, Supplier<ScreenFactory<C, T>> screenFactory) {
+        private <C extends ChiselContainer, T extends GuiChisel<C>> ChiselGuiType(String name, MenuFactory<C> factory, NonNullSupplier<ScreenFactory<C, T>> screenFactory) {
             this.type = Chisel.registrate()
-                    .entry(name, callback -> new ContainerBuilder<C, T, Registrate>(Chisel.registrate(), Chisel.registrate(), name, callback,
-                            factory, screenFactory))
+                    .menu(name, factory, screenFactory)
                     .register();
         }
 

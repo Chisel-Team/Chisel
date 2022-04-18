@@ -6210,6 +6210,8 @@ a4e760ede376d52987821e7ff2380e7fa11bf119 data/forge/tags/items/storage_blocks/em
 9d968cef5391f73f0dd16c5afcd80f63a4b3ee86 data/forge/tags/items/storage_blocks/quartz.json
 77627fbcbf256298c5d5fdeb4eda96ee6f65fa74 data/forge/tags/items/storage_blocks/redstone.json
 e1e17cbc67456ff795118fb84cc16c1bfc62712d data/minecraft/tags/blocks/beacon_base_blocks.json
+daa8fb84531d7a2299ad8077c2cf6b59620de172 data/minecraft/tags/blocks/mineable/pickaxe.json
+daa8fb84531d7a2299ad8077c2cf6b59620de172 data/minecraft/tags/blocks/needs_stone_tool.json
 458a6fc4442344cdb99f8915967a7eb209f718f1 data/minecraft/tags/blocks/planks.json
 85303dbbae7ea17bfa4e801ec6566afa7090f75e data/minecraft/tags/blocks/stone_crafting_materials.json
 85303dbbae7ea17bfa4e801ec6566afa7090f75e data/minecraft/tags/blocks/stone_tool_materials.json

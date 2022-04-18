@@ -113,7 +113,7 @@ public class BlockAutoChisel extends Block implements EntityBlock {
     @Override
     @Nullable
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new TileAutoChisel(ChiselTileEntities.AUTO_CHISEL_TE.get(), pPos, pState);
+        return ChiselTileEntities.AUTO_CHISEL_TE.create(pPos, pState);
     }
 
     @Override

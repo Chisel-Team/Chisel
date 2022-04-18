@@ -82,6 +82,7 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
         RenderSystem.enableBlend();
         Lighting.setupForFlatItems();
         blit(PoseStack, x, y, x - leftPos, y - topPos, 16, 16);
+        Lighting.setupFor3DItems();
         RenderSystem.setShaderColor(1, 1, 1, 1);
         RenderSystem.disableBlend();
         RenderSystem.enableDepthTest();
