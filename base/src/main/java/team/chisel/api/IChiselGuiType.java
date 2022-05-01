@@ -47,7 +47,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
     }
     
     public enum ChiselGuiType implements IChiselGuiType<ChiselContainer> {
-        NORMAL("chisel_container_normal", ChiselContainer::new, () -> (container, inv, displayName) -> new GuiChisel<>(container, inv, displayName)) {
+        NORMAL("chisel_container_normal", ChiselContainer::new, (NonNullSupplier<ScreenFactory<ChiselContainer, GuiChisel<ChiselContainer>>>) () -> (container, inv, displayName) -> new GuiChisel<>(container, inv, displayName)) {
           
             @Override
             @Nullable
@@ -55,7 +55,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
                 return new ChiselContainer(getContainerType(), windowId, inv, new InventoryChiselSelection(player.getItemInHand(hand), 60), hand);
             }
         },
-        HITECH("chisel_container_hitech", ContainerChiselHitech::new, () -> (container, inv, displayName) -> new GuiHitechChisel(container, inv, displayName)) {
+        HITECH("chisel_container_hitech", ContainerChiselHitech::new, (NonNullSupplier<ScreenFactory<ContainerChiselHitech, GuiHitechChisel>>) () -> (container, inv, displayName) -> new GuiHitechChisel(container, inv, displayName)) {
             
             @Override
             @Nullable
