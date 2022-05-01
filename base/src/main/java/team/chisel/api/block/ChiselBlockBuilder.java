@@ -254,7 +254,13 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .map(entryLookup::apply)
                         .toArray());
         	
-        	otherTags.forEach(builder::addOptional);
+        	otherTags.stream()
+        	    .map(BlockTags::create)
+        	    .map(tagGetter)
+        	    .forEach(t -> {
+        	        builder.addTag(t);
+        	        prov.tag(t);
+        	    });
         });
     }
 

@@ -29,9 +29,6 @@
     "chisel:redstone/pillar",
     "chisel:redstone/twisted",
     "chisel:redstone/prism",
-    {
-      "id": "forge:storage_blocks/redstone",
-      "required": false
-    }
+    "#forge:storage_blocks/redstone"
   ]
 }

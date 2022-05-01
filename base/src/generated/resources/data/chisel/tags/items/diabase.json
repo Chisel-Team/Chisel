@@ -35,9 +35,6 @@
     "chisel:diabase/twisted",
     "chisel:diabase/prism",
     "chisel:diabase/cuts",
-    {
-      "id": "forge:stone/diabase",
-      "required": false
-    }
+    "#forge:stone/diabase"
   ]
 }

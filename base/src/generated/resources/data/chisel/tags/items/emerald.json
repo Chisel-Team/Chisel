@@ -15,9 +15,6 @@
     "chisel:emerald/masonryemerald",
     "chisel:emerald/emeraldcircle",
     "chisel:emerald/emeraldprismatic",
-    {
-      "id": "forge:storage_blocks/emerald",
-      "required": false
-    }
+    "#forge:storage_blocks/emerald"
   ]
 }

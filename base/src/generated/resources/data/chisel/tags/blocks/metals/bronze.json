@@ -8,9 +8,6 @@
     "chisel:metals/bronze/badgreggy",
     "chisel:metals/bronze/bolted",
     "chisel:metals/bronze/scaffold",
-    {
-      "id": "forge:storage_blocks/bronze",
-      "required": false
-    }
+    "#forge:storage_blocks/bronze"
   ]
 }

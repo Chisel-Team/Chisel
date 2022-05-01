@@ -34,9 +34,6 @@
     "chisel:coal/twisted",
     "chisel:coal/prism",
     "chisel:coal/cuts",
-    {
-      "id": "forge:storage_blocks/coal",
-      "required": false
-    }
+    "#forge:storage_blocks/coal"
   ]
 }

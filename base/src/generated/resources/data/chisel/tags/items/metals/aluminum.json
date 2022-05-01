@@ -8,9 +8,6 @@
     "chisel:metals/aluminum/badgreggy",
     "chisel:metals/aluminum/bolted",
     "chisel:metals/aluminum/scaffold",
-    {
-      "id": "forge:storage_blocks/aluminum",
-      "required": false
-    }
+    "#forge:storage_blocks/aluminum"
   ]
 }
