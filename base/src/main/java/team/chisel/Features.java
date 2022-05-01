@@ -138,7 +138,7 @@ public class Features {
             .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_CHARCOAL)
             .initialProperties(() -> Blocks.COAL_BLOCK)
             .variation(VariantTemplates.withRecipe(VariantTemplates.RAW, (prov, block) -> new ShapelessRecipeBuilder(block, 1)
-                    .requires(Items.CHARCOAL)
+                    .requires(Items.CHARCOAL, 9)
                     .unlockedBy("has_charcoal", prov.has(Items.CHARCOAL))
                     .save(prov)))
             .variations(VariantTemplates.ROCK)

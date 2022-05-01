@@ -5997,7 +5997,7 @@ d8140877620e088b32fb18fec24bb51be637f0e7 data/chisel/loot_tables/blocks/wool/whi
 3d6d5475460cb52a52003a48028ef4d3395c2ced data/chisel/loot_tables/blocks/wool/yellow/llama.json
 818b22f7209f5afa316d9e751e9ab41075b05c43 data/chisel/recipes/antiblock/white.json
 e10a463709112bae5bc25d7c04d07fe58eb05671 data/chisel/recipes/auto_chisel.json
-46891decb381e5c9ceaff75b71480810929b2b78 data/chisel/recipes/charcoal/raw.json
+f371cdc33cb50caf78471c2e3c5c1ba127914e8d data/chisel/recipes/charcoal/raw.json
 cc873bc6aa7274b28d89c19c3450b1c9164a4d46 data/chisel/recipes/diamond_chisel.json
 fb50038456bb9bd49e441f4a1e1bfd187c569329 data/chisel/recipes/factory/dots.json
 f73b1d3895ae5a1cda9bd6b80dee40096068ad33 data/chisel/recipes/futura/controller.json
