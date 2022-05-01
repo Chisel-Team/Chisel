@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "chisel:auto_chisel",
     "chisel:metals/aluminum/caution",
     "chisel:metals/aluminum/crate",
     "chisel:metals/aluminum/thermal",
