@@ -4,7 +4,7 @@ issueTrackerURL="https://github.com/Chisel-Team/Chisel/issues/"
 license="GPLv2"
 
 [[mods]]
-modId="chisel-legacy"
+modId="chisel_legacy"
 version="${file.jarVersion}"
 displayName="Chisel - Legacy"
 authors="tterrag"

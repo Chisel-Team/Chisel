@@ -11,13 +11,13 @@ import net.minecraftforge.fml.common.Mod;
 import team.chisel.common.Reference;
 import team.chisel.common.init.ChiselTabs;
 
-@Mod("chisel-legacy")
+@Mod("chisel_legacy")
 public class ChiselLegacy implements Reference {
 
     public static final Logger logger = LogManager.getLogger("Chisel Legacy");
 
     private static final Lazy<Registrate> REGISTRATE = Lazy.of(() -> {
-        Registrate ret = Registrate.create("chisel-legacy").creativeModeTab(() -> ChiselTabs.legacy);
+        Registrate ret = Registrate.create("chisel_legacy").creativeModeTab(() -> ChiselTabs.legacy);
         ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.legacy, "Chisel - Legacy"));
         return ret;
     });
