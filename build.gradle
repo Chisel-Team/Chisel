@@ -81,9 +81,12 @@ repositories {
     maven { // WTHIT
         url "https://maven.bai.lol"
     }
+    mavenCentral()
 }
 
 dependencies {
+    implementation 'org.projectlombok:lombok:1.18.24'
+
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
