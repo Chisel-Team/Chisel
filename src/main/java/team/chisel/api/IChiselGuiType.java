@@ -42,9 +42,9 @@ public interface IChiselGuiType<T extends ChiselContainer> {
         };
     }
 
-    @SuppressWarnings("unchecked")
+
     enum ChiselGuiType implements IChiselGuiType<ChiselContainer> {
-        NORMAL("chisel_container_normal", ChiselContainer::new, () -> (container, inv, displayName) -> new GuiChisel<>(container, inv, displayName)) {
+        NORMAL("chisel_container_normal", ChiselContainer::new, () -> (ChiselContainer container, Inventory inv, Component displayName) -> new GuiChisel<>(container, inv, displayName)) {
             @Override
             public @NotNull AbstractContainerMenu createMenu(int windowId, Inventory inv, Player player, InteractionHand hand) {
                 return new ChiselContainer(getContainerType(), windowId, inv, new InventoryChiselSelection(player.getItemInHand(hand), 60), hand);
@@ -60,11 +60,12 @@ public interface IChiselGuiType<T extends ChiselContainer> {
         private final RegistryEntry<? extends MenuType<? extends ChiselContainer>> type;
 
         <C extends ChiselContainer, T extends GuiChisel<C>> ChiselGuiType(String name, MenuFactory<C> factory, NonNullSupplier<ScreenFactory<C, T>> screenFactory) {
-            this.type = Chisel.registrate()
+            this.type = Chisel.registrateBase()
                     .menu(name, factory, screenFactory)
                     .register();
         }
 
+        @SuppressWarnings("unchecked")
         @Override
         public MenuType<? extends ChiselContainer> getContainerType() {
             return type.get();

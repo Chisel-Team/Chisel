@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.RegistryEvent.MissingMappings;
 import net.minecraftforge.event.RegistryEvent.MissingMappings.Mapping;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -41,6 +42,7 @@ import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ChiselMode;
 import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
+import team.chisel.legacy.LegacyFeatures;
 
 import java.util.Map;
 import java.util.Optional;
@@ -58,6 +60,12 @@ public class Chisel implements Reference {
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals
     );
+
+    private static final Lazy<Registrate> REGISTRATE_LEGACY = Lazy.of(() -> {
+        Registrate ret = Registrate.create("chisel_legacy").creativeModeTab(() -> ChiselTabs.legacy);
+        ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.legacy, "Chisel - Legacy"));
+        return ret;
+    });
     private static final NonNullSupplier<Registrate> REGISTRATE = NonNullSupplier.lazy(() -> {
         Registrate ret = Registrate.create(Reference.MOD_ID).creativeModeTab(() -> ChiselTabs.base);
         ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.base, "Chisel"));
@@ -94,7 +102,8 @@ public class Chisel implements Reference {
         ChiselTileEntities.init();
 
         Features.init();
-        ChiselLangKeys.init(registrate());
+        ChiselLangKeys.init(registrateBase());
+        ChiselLangKeys.init(registrateLegacy());
 
         ChiselWorldGen.FEATURES.register(modBus);
         ChiselWorldGen.PLACEMENTS.register(modBus);
@@ -116,10 +125,15 @@ public class Chisel implements Reference {
 //        } catch (Exception e) {
 //            logger.error("Failed to fix tool types", e);
 //        }
+        LegacyFeatures.init();
     }
 
-    public static Registrate registrate() {
+    public static Registrate registrateBase() {
         return REGISTRATE.get();
+    }
+
+    public static Registrate registrateLegacy() {
+        return REGISTRATE_LEGACY.get();
     }
 
     private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output) {

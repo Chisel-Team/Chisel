@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.Tags;
+import team.chisel.Chisel;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.common.block.BlockCarvable;
@@ -15,7 +16,7 @@ import java.util.Map;
 @SuppressWarnings({"CommentedOutCode", "unused", "deprecation"})
 public class LegacyFeatures {
 
-    private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(ChiselLegacy.registrate());
+    private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrateLegacy());
 
     // Hardcode to vanilla wood types
 
