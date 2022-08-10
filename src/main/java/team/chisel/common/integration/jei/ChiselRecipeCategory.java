@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
 
     private static final ResourceLocation TEXTURE_LOC = new ResourceLocation("chisel", "textures/chiseljei.png");
@@ -63,7 +64,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
     @Override
     public void draw(ICarvingGroup recipe, PoseStack PoseStack, double mouseX, double mouseY) {
         if (layout != null) {
-            if (focus == null || focus.getFocuses(VanillaTypes.ITEM, RecipeIngredientRole.OUTPUT).count() == 0) {
+            if (focus == null || focus.getFocuses(VanillaTypes.ITEM, RecipeIngredientRole.OUTPUT).findAny().isEmpty()) {
                 arrowDown.draw(PoseStack, 73, 21);
             } else {
                 arrowUp.draw(PoseStack, 73, 21);
@@ -77,7 +78,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
         this.focus = focus;
 
         IRecipeSlotBuilder inputSlot = recipeLayout.addSlot(RecipeIngredientRole.INPUT, 74, 4);
-        if (focus.getFocuses(VanillaTypes.ITEM, RecipeIngredientRole.OUTPUT).count() > 0) {
+        if (focus.getFocuses(VanillaTypes.ITEM, RecipeIngredientRole.OUTPUT).findAny().isPresent()) {
             inputSlot.addItemStacks(focus.getFocuses(VanillaTypes.ITEM, RecipeIngredientRole.OUTPUT).map(f -> f.getTypedValue().getIngredient()).toList());
         } else {
             inputSlot.addIngredients(Ingredient.of(recipeWrapper.getItemTag().getKey()));
@@ -88,6 +89,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
         int xStart = 3;
         int yStart = 37;
 
+        assert CarvingUtils.getChiselRegistry() != null;
         List<ItemStack> groupStacks = CarvingUtils.getChiselRegistry().getItemsForChiseling(recipeWrapper.getId());
         int MAX_SLOTS = 45;
 
@@ -133,7 +135,7 @@ public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
 //    @Override
 //    public void setIngredients(ICarvingGroup group, IIngredients ingredients) {
 //        List<ItemStack> variants = group.getItemTag().stream().map(ItemStack::new).collect(Collectors.toList());
-//        
+//
 //        ingredients.setInputs(VanillaTypes.ITEM, variants);
 //        ingredients.setOutputs(VanillaTypes.ITEM, variants);
 //    }

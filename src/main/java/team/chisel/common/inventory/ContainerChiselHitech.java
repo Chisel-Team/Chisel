@@ -1,6 +1,5 @@
 package team.chisel.common.inventory;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +15,7 @@ import team.chisel.common.util.NBTUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -45,7 +45,7 @@ public class ContainerChiselHitech extends ChiselContainer {
 
     public void setTarget(@Nullable Slot slot) {
         this.target = slot;
-        NBTUtil.setHitechTarget(chisel, Optional.fromNullable(getTarget()).transform(s -> s.index).or(-1));
+        NBTUtil.setHitechTarget(chisel, Optional.ofNullable(getTarget()).map(s -> s.index).orElse(-1));
     }
 
     public void setSelection(@Nullable Slot slot) {
@@ -75,7 +75,7 @@ public class ContainerChiselHitech extends ChiselContainer {
         ItemStack stack = slot == null ? ItemStack.EMPTY : slot.getItem();
         getInventoryChisel().setStackInSpecialSlot(stack);
         getInventoryChisel().updateItems();
-        NBTUtil.setHitechSelection(chisel, Optional.fromNullable(getSelection()).transform(s -> s.index).or(-1));
+        NBTUtil.setHitechSelection(chisel, Optional.ofNullable(getSelection()).map(s -> s.index).orElse(-1));
     }
 
     public @Nullable ItemStack getSelectionStack() {
@@ -94,7 +94,7 @@ public class ContainerChiselHitech extends ChiselContainer {
 
         // selection slots
         for (int i = 0; i < getInventoryChisel().size; i++) {
-            addSlot(new SlotChiselSelection(this, inventoryChisel, inventoryChisel, i, left + ((i % 9) * 18), top + ((i / 9) * 18)));
+            addSlot(new SlotChiselSelection(this, inventoryChisel, i, left + ((i % 9) * 18), top + ((i / 9) * 18)));
         }
 
         // main slot
@@ -108,7 +108,7 @@ public class ContainerChiselHitech extends ChiselContainer {
 
         top += 58;
         for (int i = 0; i < 9; i++) {
-            addSlot(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
+            addSlot(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top));
         }
     }
 

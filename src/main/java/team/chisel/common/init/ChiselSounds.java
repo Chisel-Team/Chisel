@@ -17,7 +17,7 @@ import java.lang.reflect.Field;
 import java.util.Locale;
 
 @ObjectHolder(Chisel.MOD_ID)
-@SuppressWarnings("null")
+@SuppressWarnings({"null", "unused", "ConstantConditions"})
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselSounds {
 

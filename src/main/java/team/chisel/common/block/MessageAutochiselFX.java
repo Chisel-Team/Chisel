@@ -31,6 +31,7 @@ public class MessageAutochiselFX {
         buf.writeInt(Block.getId(state));
     }
 
+    @SuppressWarnings("deprecation")
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             Level world = ClientProxy.getClientWorld();

@@ -56,15 +56,11 @@ public enum ChiselMode implements IChiselMode {
 
         @Override
         public AABB getBounds(Direction side) {
-            switch (side.getAxis()) {
-                case X:
-                default:
-                    return new AABB(0, -1, -1, 1, 2, 2);
-                case Y:
-                    return new AABB(-1, 0, -1, 2, 1, 2);
-                case Z:
-                    return new AABB(-1, -1, 0, 2, 2, 1);
-            }
+            return switch (side.getAxis()) {
+                case X -> new AABB(0, -1, -1, 1, 2, 2);
+                case Y -> new AABB(-1, 0, -1, 2, 1, 2);
+                case Z -> new AABB(-1, -1, 0, 2, 2, 1);
+            };
         }
     },
     COLUMN("Chisel a 3x1 column of blocks.") {
@@ -93,6 +89,7 @@ public enum ChiselMode implements IChiselMode {
 
         @Override
         public long[] getCacheState(BlockPos origin, Direction side) {
+            assert Minecraft.getInstance().player != null;
             return ArrayUtils.add(super.getCacheState(origin, side), Minecraft.getInstance().player.getDirection().ordinal());
         }
     },
@@ -150,15 +147,11 @@ public enum ChiselMode implements IChiselMode {
         @Override
         public AABB getBounds(Direction side) {
             int r = CONTIGUOUS_RANGE;
-            switch (side.getAxis()) {
-                case X:
-                default:
-                    return new AABB(0, -r - 1, -r - 1, 1, r + 2, r + 2);
-                case Y:
-                    return new AABB(-r - 1, 0, -r - 1, r + 2, 1, r + 2);
-                case Z:
-                    return new AABB(-r - 1, -r - 1, 0, r + 2, r + 2, 1);
-            }
+            return switch (side.getAxis()) {
+                case X -> new AABB(0, -r - 1, -r - 1, 1, r + 2, r + 2);
+                case Y -> new AABB(-r - 1, 0, -r - 1, r + 2, 1, r + 2);
+                case Z -> new AABB(-r - 1, -r - 1, 0, r + 2, r + 2, 1);
+            };
         }
     };
 
@@ -171,8 +164,10 @@ public enum ChiselMode implements IChiselMode {
 
     // Register all enum constants to the mode registry
     {
+        assert CarvingUtils.getModeRegistry() != null;
         CarvingUtils.getModeRegistry().registerMode(this);
     }
+
     ChiselMode(String desc) {
         this(null, desc);
     }
@@ -184,13 +179,13 @@ public enum ChiselMode implements IChiselMode {
 
     private static Iterator<BlockPos> getContiguousIterator(BlockPos origin, Level world, Direction[] directionsToSearch) {
         final BlockState state = world.getBlockState(origin);
-        return new Iterator<BlockPos>() {
+        return new Iterator<>() {
 
             private final Set<BlockPos> seen = Sets.newHashSet(origin);
             private final Queue<Node> search = new ArrayDeque<>();
 
             {
-                search.add(new Node(origin, 0));
+                search.add(new Node(0, origin));
             }
 
             @Override
@@ -201,15 +196,16 @@ public enum ChiselMode implements IChiselMode {
             @Override
             public BlockPos next() {
                 Node ret = search.poll();
+                assert ret != null;
                 if (ret.getDistance() < CONTIGUOUS_RANGE) {
                     for (Direction face : directionsToSearch) {
                         BlockPos bp = ret.getPos().relative(face);
                         BlockState newState = world.getBlockState(bp);
                         if (!seen.contains(bp) && newState == state) {
                             for (Direction obscureCheck : Direction.values()) {
-                                BlockPos obscuringPos = bp.relative(obscureCheck);
+                                bp.relative(obscureCheck);
                                 if (!newState.isFaceSturdy(world, bp, obscureCheck.getOpposite(), SupportType.FULL)) {
-                                    search.offer(new Node(bp, ret.getDistance() + 1));
+                                    search.offer(new Node(ret.getDistance() + 1, bp));
                                     break;
                                 }
                             }
@@ -234,6 +230,6 @@ public enum ChiselMode implements IChiselMode {
     @Value
     private static class Node {
         int distance;
-        private BlockPos pos;
+        BlockPos pos;
     }
 }

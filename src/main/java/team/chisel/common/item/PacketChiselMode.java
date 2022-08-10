@@ -10,6 +10,7 @@ import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.util.NBTUtil;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class PacketChiselMode {
     @SuppressWarnings({"null", "unused"})
     public static PacketChiselMode decode(FriendlyByteBuf buf) {
         int slot = buf.readInt();
+        assert CarvingUtils.getModeRegistry() != null;
         IChiselMode mode = CarvingUtils.getModeRegistry().getModeByName(buf.readUtf(256));
         if (mode == null) {
             mode = ChiselMode.SINGLE;
@@ -35,8 +37,8 @@ public class PacketChiselMode {
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            ItemStack stack = ctx.get().getSender().getInventory().getItem(slot);
-            if (stack.getItem() instanceof IChiselItem && ((IChiselItem) stack.getItem()).supportsMode(ctx.get().getSender(), stack, mode)) {
+            ItemStack stack = Objects.requireNonNull(ctx.get().getSender()).getInventory().getItem(slot);
+            if (stack.getItem() instanceof IChiselItem && ((IChiselItem) stack.getItem()).supportsMode(Objects.requireNonNull(ctx.get().getSender()), stack, mode)) {
                 NBTUtil.setChiselMode(stack, mode);
             }
         });

@@ -17,6 +17,7 @@ import team.chisel.common.init.ChiselSounds;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class SoundUtil {
 
@@ -28,10 +29,12 @@ public class SoundUtil {
                 return evt;
             }
         }
-        return CarvingUtils.getChiselRegistry().getGroup(target != null ? target : Blocks.AIR).map(ICarvingGroup::getSound).orElse(ChiselSounds.fallback);
+        assert CarvingUtils.getChiselRegistry() != null;
+        return Objects.requireNonNull(CarvingUtils.getChiselRegistry().getGroup(target != null ? target : Blocks.AIR).map(ICarvingGroup::getSound).orElse(ChiselSounds.fallback));
     }
 
     public static void playSound(Player player, ItemStack chisel, ItemStack source) {
+        assert CarvingUtils.getChiselRegistry() != null;
         ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(source.getItem()).orElse(null);
         Block block = v == null ? null : v.getBlock();
         if (block == null) {

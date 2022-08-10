@@ -9,6 +9,7 @@ import team.chisel.common.block.ItemChiselBlock;
 
 import java.util.List;
 
+@SuppressWarnings("ALL")
 @WailaPlugin(id = Chisel.MOD_ID)
 public class ChiselDataHandler implements IWailaPlugin, IBlockComponentProvider {
 
@@ -36,7 +37,7 @@ public class ChiselDataHandler implements IWailaPlugin, IBlockComponentProvider 
                 ((ItemChiselBlock) stack.getItem()).addTooltips(stack, tooltip);
             } else {
                 ICarvable block = (ICarvable) accessor.getBlock();
-                ItemChiselBlock.addTooltips(stack, block, tooltip);
+                ItemChiselBlock.addTooltips(block, tooltip);
             }
         }
     }

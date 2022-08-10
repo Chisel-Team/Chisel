@@ -22,6 +22,7 @@ import team.chisel.api.block.VariationData;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+@SuppressWarnings({"unused", "deprecation"})
 public class BlockCarvableIce extends BlockCarvable {
 
     public BlockCarvableIce(VariationData variation) {

@@ -25,7 +25,7 @@ public class UnderLavaPlacement extends PlacementModifier {
                 .filter(p -> world.getBlockState(p).getMaterial() == Material.LAVA)
                 .flatMap(p -> Arrays.stream(Direction.values())
                         .filter(d -> d != Direction.UP)
-                        .map(d -> p.relative(d))
+                        .map(p::relative)
                         .filter(p2 -> world.getBlockState(p2).getMaterial() != Material.LAVA));
     }
 

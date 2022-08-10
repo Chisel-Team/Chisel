@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 /**
  * Class file for the Chisel creative tabs
  */
+@SuppressWarnings("deprecation")
 public class ChiselTabs {
 
     @Nonnull

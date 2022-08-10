@@ -5,7 +5,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 
 import java.util.Comparator;
+import java.util.Objects;
 
+@SuppressWarnings("unused")
 public class ItemSorter {
 
     public static <T extends ItemLike> Comparator<T> byName(Comparator<ResourceLocation> child) {
@@ -17,7 +19,7 @@ public class ItemSorter {
     }
 
     private static Comparator<ResourceLocation> alphabeticByName() {
-        return Comparator.<ResourceLocation, String>comparing(r -> r.getNamespace()).thenComparing(r -> r.getPath());
+        return Comparator.comparing(ResourceLocation::getNamespace).thenComparing(ResourceLocation::getPath);
     }
 
     public static <T extends ItemLike> Comparator<T> alphabeticVanillaFirst() {
@@ -30,8 +32,8 @@ public class ItemSorter {
 
     private static <T extends ItemLike> Comparator<T> vanillaFirst() {
         return (i1, i2) -> {
-            String n1 = i1.asItem().getRegistryName().getNamespace();
-            String n2 = i2.asItem().getRegistryName().getNamespace();
+            String n1 = Objects.requireNonNull(i1.asItem().getRegistryName()).getNamespace();
+            String n2 = Objects.requireNonNull(i2.asItem().getRegistryName()).getNamespace();
             if (n1.equals("minecraft") && n2.equals("minecraft")) {
                 return Integer.compare(Item.getId(i1.asItem()), Item.getId(i2.asItem()));
             } else {
@@ -41,7 +43,7 @@ public class ItemSorter {
     }
 
     private static Comparator<ResourceLocation> rawFirst() {
-        return Comparator.comparing(r -> r.getPath(), (n1, n2) ->
+        return Comparator.comparing(ResourceLocation::getPath, (n1, n2) ->
                 n1.endsWith("/raw") && n2.endsWith("/raw") ? 0 :
                         n1.endsWith("/raw") ? -1 :
                                 n2.endsWith("/raw") ? 1 :

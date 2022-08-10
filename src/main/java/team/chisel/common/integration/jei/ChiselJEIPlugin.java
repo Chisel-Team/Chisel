@@ -20,9 +20,10 @@ import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.item.ItemChisel;
 
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+@SuppressWarnings({"unused", "removal", "CommentedOutCode"})
 @JeiPlugin
 public class ChiselJEIPlugin implements IModPlugin {
 
@@ -35,8 +36,8 @@ public class ChiselJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
-        registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
-                .collect(Collectors.toList()), category.getUid());
+        assert CarvingUtils.getChiselRegistry() != null;
+        registry.addRecipes(new ArrayList<>(CarvingUtils.getChiselRegistry().getGroups()), category.getUid());
 
         for (ItemEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
             ItemStack stack = new ItemStack(chisel.get());

@@ -40,17 +40,19 @@ import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("CommentedOutCode")
 public class ChiselController {
 
     private static final LoadingCache<Player, Long> HACKY_CACHE = CacheBuilder.newBuilder()
             .expireAfterWrite(1, TimeUnit.SECONDS)
             .weakKeys()
-            .build(new CacheLoader<Player, Long>() {
+            .build(new CacheLoader<>() {
 
-                public Long load(Player key) throws Exception {
+                public Long load(Player key) {
                     return 0L;
                 }
             });
@@ -81,15 +83,22 @@ public class ChiselController {
                 return;
             }
 
-            ICarvingGroup blockGroup = state.getBlock() instanceof ICarvable ? ((ICarvable) state.getBlock()).getVariation().getGroup() : registry.getGroup(state.getBlock()).orElse(null);
+            ICarvingGroup blockGroup;
+            if (state.getBlock() instanceof ICarvable) {
+                blockGroup = ((ICarvable) state.getBlock()).getVariation().getGroup();
+            } else {
+                assert registry != null;
+                blockGroup = registry.getGroup(state.getBlock()).orElse(null);
+            }
             if (blockGroup == null) {
                 return;
             }
 
             IChiselMode mode = NBTUtil.getChiselMode(held);
-            Iterable<? extends BlockPos> candidates = mode.getCandidates(player, event.getPos(), event.getFace());
+            Iterable<? extends BlockPos> candidates = mode.getCandidates(player, event.getPos(), Objects.requireNonNull(event.getFace()));
 
             if (!target.isEmpty()) {
+                assert registry != null;
                 ICarvingGroup sourceGroup = registry.getGroup(target.getItem()).orElse(null);
 
                 if (blockGroup == sourceGroup) {
@@ -105,13 +114,15 @@ public class ChiselController {
             } else {
                 List<Block> variations = blockGroup.getBlockTag().stream().toList();
 
-                variations = variations.stream().filter(v -> v != null).collect(Collectors.toList());
+                variations = variations.stream().filter(Objects::nonNull).collect(Collectors.toList());
 
                 int index = variations.indexOf(state.getBlock());
                 index = player.isShiftKeyDown() ? index - 1 : index + 1;
                 index = (index + variations.size()) % variations.size();
 
+                assert registry != null;
                 ICarvingVariation next = registry.getVariation(variations.get(index)).orElse(null);
+                assert next != null;
                 setAll(candidates, player, state, next);
                 event.setCanceled(true);
                 DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientProxy::resetWaitTimer);
@@ -222,7 +233,9 @@ public class ChiselController {
 
         if (held.getItem() instanceof IChiselItem chisel) {
 //            player.addStat(Statistics.blocksChiseled, 1); // TODO statistics
+            assert CarvingUtils.getChiselRegistry() != null;
             ItemStack current = CarvingUtils.getChiselRegistry().getVariation(curState.getBlock()).map(ICarvingVariation::getItem).map(ItemStack::new).orElse(null);
+            assert current != null;
             current.setCount(1);
             ItemStack target = new ItemStack(v.getItem());
             target.setCount(1);

@@ -27,6 +27,7 @@ public class MessageUpdateAutochiselSource {
         buf.writeItem(stack);
     }
 
+    @SuppressWarnings("deprecation")
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
             Level world = ClientProxy.getClientWorld();

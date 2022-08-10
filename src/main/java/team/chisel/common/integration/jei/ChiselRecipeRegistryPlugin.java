@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
 
     @Nonnull
-    private static final List<RecipeType<? extends Object>> POSSIBLE_CATEGORIES = ImmutableList.of(RecipeTypes.CRAFTING, RecipeTypes.SMELTING, RecipeTypes.INFORMATION);
+    private static final List<RecipeType<?>> POSSIBLE_CATEGORIES = ImmutableList.of(RecipeTypes.CRAFTING, RecipeTypes.SMELTING, RecipeTypes.INFORMATION);
 
     private IRecipeManager registry;
     private boolean preventRecursion;
@@ -29,13 +29,14 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
     private List<ItemStack> getAlternateOutputs(IFocus<?> focus) {
         Object val = focus.getValue();
         if (!(val instanceof ItemStack input)) return Collections.emptyList();
+        assert CarvingUtils.getChiselRegistry() != null;
         List<ItemStack> chiselOptions = CarvingUtils.getChiselRegistry().getItemsForChiseling((ItemStack) focus.getValue());
         return chiselOptions.stream()
                 .filter(s -> !ItemStack.isSame(s, input))
                 .collect(Collectors.toList());
     }
 
-    @SuppressWarnings({"unchecked", "null"})
+    @SuppressWarnings({"null"})
     @Override
     public <V> List<RecipeType<?>> getRecipeTypes(IFocus<V> focus) {
         try {
@@ -47,7 +48,7 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
                 return registry.createRecipeCategoryLookup().limitTypes(POSSIBLE_CATEGORIES).get()
                         .filter(c -> alternates.stream()
                                 .flatMap(s -> registry.createRecipeLookup(c.getRecipeType())
-                                        .limitFocus(Collections.singletonList(registry.createFocus(focus.getMode(), s))).get()).count() != 0)
+                                        .limitFocus(Collections.singletonList(registry.createFocus(focus.getMode(), s))).get()).findAny().isPresent())
                         .map(IRecipeCategory::getRecipeType)
                         .collect(Collectors.toList());
             } finally {
@@ -60,6 +61,7 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
     }
 
 
+    @SuppressWarnings("SuspiciousMethodCalls")
     @Override
     public <T, V> List<T> getRecipes(IRecipeCategory<T> recipeCategory, IFocus<V> focus) {
         try {
@@ -93,6 +95,6 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
 
     @Override
     public <V> List<ResourceLocation> getRecipeCategoryUids(IFocus<V> focus) {
-        return POSSIBLE_CATEGORIES.stream().map(t -> t.getUid()).toList();
+        return POSSIBLE_CATEGORIES.stream().map(RecipeType::getUid).toList();
     }
 }

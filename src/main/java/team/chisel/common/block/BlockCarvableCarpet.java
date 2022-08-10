@@ -14,6 +14,7 @@ import team.chisel.api.block.VariationData;
 
 import javax.annotation.Nonnull;
 
+@SuppressWarnings("deprecation")
 public class BlockCarvableCarpet extends BlockCarvable {
     private static final @Nonnull VoxelShape SHAPE = box(0, 0, 0, 16, 1, 16);
 

@@ -10,6 +10,7 @@ import team.chisel.common.item.ChiselMode;
 import javax.annotation.Nonnull;
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public class NBTUtil {
 
     private static final String KEY_TAG = "chiseldata";
@@ -26,6 +27,7 @@ public class NBTUtil {
             stack.setTag(new CompoundTag());
         }
         // Warning suppressed: tag is guaranteed to be set from above code
+        assert stack.getTag() != null;
         return stack.getTag();
     }
 
@@ -86,6 +88,7 @@ public class NBTUtil {
 
     public static IChiselMode getChiselMode(@Nonnull ItemStack chisel) {
         String mode = getChiselTag(chisel).getString(KEY_MODE);
+        assert CarvingUtils.getModeRegistry() != null;
         return Optional.ofNullable(CarvingUtils.getModeRegistry().getModeByName(mode))
                 .orElse(ChiselMode.SINGLE);
     }

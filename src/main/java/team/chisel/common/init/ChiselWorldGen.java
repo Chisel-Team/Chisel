@@ -59,6 +59,7 @@ public class ChiselWorldGen {
             () -> new OreConfiguration(OreFeatures.NATURAL_STONE, Features.MARBLE.get(VariantTemplates.RAW.getName()).get().defaultBlockState(), 33),
             CountPlacement.of(6), HeightRangePlacement.uniform(VerticalAnchor.absolute(24), VerticalAnchor.aboveBottom(48)));
 
+    @SuppressWarnings("deprecation")
     public static void registerWorldGen(BiomeLoadingEvent event) {
         if (event.getName() == null) return;
         if (BiomeDictionary.hasType(ResourceKey.create(Registry.BIOME_REGISTRY, event.getName()), BiomeDictionary.Type.OVERWORLD)) {

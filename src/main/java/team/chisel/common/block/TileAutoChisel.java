@@ -43,6 +43,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.PacketDistributor.TargetPoint;
 import org.apache.commons.lang3.Validate;
+import org.jetbrains.annotations.NotNull;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
@@ -56,10 +57,12 @@ import team.chisel.common.util.SoundUtil;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.EnumMap;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import static team.chisel.common.inventory.ContainerAutoChisel.*;
 
+@SuppressWarnings({"unused", "EqualsBetweenInconvertibleTypes"})
 public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvider {
 
     private static final int INPUT_COUNT = 12;
@@ -70,14 +73,16 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
     private static final int POWER_PER_TICK = 20;
     private final ItemStackHandler otherInv = new DirtyingStackHandler(2) {
         @Override
-        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+        public @NotNull ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
             if (stack.isEmpty()) {
                 return stack;
             }
             if (slot == 0 && stack.getItem() instanceof IChiselItem) {
                 return super.insertItem(slot, stack, simulate);
             }
-            if (slot == 1 && CarvingUtils.getChiselRegistry().getVariation(stack.getItem()) != null) {
+            if (slot == 1) {
+                assert CarvingUtils.getChiselRegistry() != null;
+                CarvingUtils.getChiselRegistry().getVariation(stack.getItem());
                 return super.insertItem(slot, stack, simulate);
             }
             return stack;
@@ -86,8 +91,10 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
     private final ItemStackHandler inputInv = new DirtyingStackHandler(INPUT_COUNT) {
 
         @Override
-        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-            if (!stack.isEmpty() && CarvingUtils.getChiselRegistry().getVariation(stack.getItem()) != null) {
+        public @NotNull ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+            if (!stack.isEmpty()) {
+                assert CarvingUtils.getChiselRegistry() != null;
+                CarvingUtils.getChiselRegistry().getVariation(stack.getItem());
                 return super.insertItem(slot, stack, simulate);
             }
             return stack;
@@ -117,22 +124,15 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
 
         @Override
         public int get(int index) {
-            switch (index) {
-                case ACTIVE:
-                    return sourceSlot >= 0 ? 1 : 0;
-                case PROGRESS:
-                    return progress;
-                case ContainerAutoChisel.MAX_PROGRESS:
-                    return MAX_PROGRESS;
-                case ENERGY:
-                    return energyStorage.getEnergyStored();
-                case MAX_ENERGY:
-                    return energyStorage.getMaxEnergyStored();
-                case ENERGY_USE:
-                    return getUsagePerTick();
-                default:
-                    throw new IllegalArgumentException("Invalid index: " + index);
-            }
+            return switch (index) {
+                case ACTIVE -> sourceSlot >= 0 ? 1 : 0;
+                case PROGRESS -> progress;
+                case ContainerAutoChisel.MAX_PROGRESS -> MAX_PROGRESS;
+                case ENERGY -> energyStorage.getEnergyStored();
+                case MAX_ENERGY -> energyStorage.getMaxEnergyStored();
+                case ENERGY_USE -> getUsagePerTick();
+                default -> throw new IllegalArgumentException("Invalid index: " + index);
+            };
         }
     };
     @Setter
@@ -203,14 +203,13 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
 
     protected void updateClientSlot() {
         if (sourceSlot != prevSource) {
-            Chisel.network.send(PacketDistributor.TRACKING_CHUNK.with(() -> (LevelChunk) /* TODO Fix in forge */ getLevel().getChunk(getBlockPos())), new MessageUpdateAutochiselSource(getBlockPos(), sourceSlot < 0 ? ItemStack.EMPTY : inputInv.getStackInSlot(sourceSlot)));
+            Chisel.network.send(PacketDistributor.TRACKING_CHUNK.with(() -> (LevelChunk) Objects.requireNonNull(getLevel()).getChunk(getBlockPos())), new MessageUpdateAutochiselSource(getBlockPos(), sourceSlot < 0 ? ItemStack.EMPTY : inputInv.getStackInSlot(sourceSlot)));
         }
         prevSource = sourceSlot;
     }
-
-    @SuppressWarnings("null")
+    
     protected void mergeOutput(ItemStack stack) {
-        for (int i = 0; stack != null && i < getOutputInv().getSlots(); i++) {
+        for (int i = 0; i < getOutputInv().getSlots(); i++) {
             stack = getOutputInv().insertItem(i, stack, false);
         }
     }
@@ -229,8 +228,20 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
         @Nonnull ItemStack source = sourceSlot < 0 ? ItemStack.EMPTY : getInputInv().getStackInSlot(sourceSlot);
         chisel = chisel.isEmpty() ? ItemStack.EMPTY : chisel.copy();
 
-        ICarvingVariation v = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getVariation(target.getItem()).orElse(null);
-        ICarvingGroup g = target.isEmpty() || chisel.isEmpty() ? null : CarvingUtils.getChiselRegistry().getGroup(target.getItem()).orElse(null);
+        ICarvingVariation v;
+        if (target.isEmpty() || chisel.isEmpty()) {
+            v = null;
+        } else {
+            assert CarvingUtils.getChiselRegistry() != null;
+            v = CarvingUtils.getChiselRegistry().getVariation(target.getItem()).orElse(null);
+        }
+        ICarvingGroup g;
+        if (target.isEmpty() || chisel.isEmpty()) {
+            g = null;
+        } else {
+            assert CarvingUtils.getChiselRegistry() != null;
+            g = CarvingUtils.getChiselRegistry().getGroup(target.getItem()).orElse(null);
+        }
 
         if (chisel.isEmpty() || v == null) {
             setSourceSlot(-1);
@@ -260,11 +271,14 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
             if (source.isEmpty() || canOutput(res)) {
                 for (int i = 0; sourceSlot < 0 && i < getInputInv().getSlots(); i++) {
                     ItemStack stack = getInputInv().getStackInSlot(i);
-                    if (!stack.isEmpty() && g.equals(CarvingUtils.getChiselRegistry().getGroup(stack.getItem()).orElse(null))) {
-                        res.setCount(stack.getCount());
-                        if (canOutput(res) && chiselitem.canChisel(getLevel(), FakePlayerFactory.getMinecraft((ServerLevel) getLevel()), chisel, v)) {
-                            setSourceSlot(i);
-                            source = res.copy();
+                    if (!stack.isEmpty()) {
+                        assert g != null;
+                        if (g.equals(CarvingUtils.getChiselRegistry().getGroup(stack.getItem()).orElse(null))) {
+                            res.setCount(stack.getCount());
+                            if (canOutput(res) && chiselitem.canChisel(getLevel(), FakePlayerFactory.getMinecraft((ServerLevel) getLevel()), chisel, v)) {
+                                setSourceSlot(i);
+                                res.copy();
+                            }
                         }
                     }
                 }
@@ -311,6 +325,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
 
                     inputInv.setStackInSlot(sourceSlot, source);
 
+                    assert sourceVar != null;
                     Chisel.network.send(PacketDistributor.NEAR.with(targetNearby()), new MessageAutochiselFX(getBlockPos(), chisel, sourceVar.getBlock().defaultBlockState()));
 
                     otherInv.setStackInSlot(0, chisel);
@@ -334,11 +349,11 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
 
     private Supplier<TargetPoint> targetNearby() {
         Vec3 pos = Vec3.atLowerCornerOf(getBlockPos()).add(0.5, 0.5, 0.5);
-        return TargetPoint.p(pos.x, pos.y, pos.z, 64 * 64, getLevel().dimension());
+        return TargetPoint.p(pos.x, pos.y, pos.z, 64 * 64, Objects.requireNonNull(getLevel()).dimension());
     }
 
     @Override
-    public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
+    public <T> @NotNull LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(capability,
                     viewCache.computeIfAbsent(facing, f -> LazyOptional.of(() -> new ItemView(f))));
@@ -409,7 +424,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
 
     @Override
     public Component getDisplayName() {
-        return hasCustomName() ? getCustomName() : getName();
+        return hasCustomName() ? Objects.requireNonNull(getCustomName()) : getName();
     }
 
     @Override
@@ -431,7 +446,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
     @Override
     @Nullable
     public AbstractContainerMenu createMenu(int windowId, Inventory playerInv, Player p_createMenu_3_) {
-        return new ContainerAutoChisel(ChiselTileEntities.AUTO_CHISEL_CONTAINER.get(), windowId, playerInv, getInputInv(), getOutputInv(), getOtherInv(), energyData, ContainerLevelAccess.create(getLevel(), getBlockPos()));
+        return new ContainerAutoChisel(ChiselTileEntities.AUTO_CHISEL_CONTAINER.get(), windowId, playerInv, getInputInv(), getOutputInv(), getOtherInv(), energyData, ContainerLevelAccess.create(Objects.requireNonNull(getLevel()), getBlockPos()));
     }
 
     @SuppressWarnings("null")
@@ -439,7 +454,8 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
         BlockPos pos = getBlockPos();
         SoundUtil.playSound(player, pos, SoundUtil.getSound(player, chisel, source.getBlock()));
         if (chisel.isEmpty()) {
-            this.getLevel().playSound(player, pos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 0.8F, 0.8F + this.level.random.nextFloat() * 0.4F);
+            assert this.level != null;
+            Objects.requireNonNull(this.getLevel()).playSound(player, pos, SoundEvents.ITEM_BREAK, SoundSource.BLOCKS, 0.8F, 0.8F + this.level.random.nextFloat() * 0.4F);
         }
         int i = 3;
         float mid = i / 2f;
@@ -508,7 +524,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
         }
 
         @Override
-        public ItemStack getStackInSlot(int slot) {
+        public @NotNull ItemStack getStackInSlot(int slot) {
             if (slot >= 0 && slot < getSlots()) {
                 if (slot < input.getSlots()) {
                     return input.getStackInSlot(slot);
@@ -520,7 +536,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
         }
 
         @Override
-        public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+        public @NotNull ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
             if (slot >= 0 && slot < input.getSlots()) {
                 return input.insertItem(slot, stack, simulate);
             }
@@ -528,7 +544,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
         }
 
         @Override
-        public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
             if (slot >= input.getSlots() && slot < getSlots()) {
                 slot -= input.getSlots();
                 return output.extractItem(slot, amount, simulate);

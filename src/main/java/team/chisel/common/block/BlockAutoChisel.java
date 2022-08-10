@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,6 +25,7 @@ import team.chisel.common.init.ChiselTileEntities;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings({"deprecation", "CommentedOutCode"})
 public class BlockAutoChisel extends Block implements EntityBlock {
 
     @SuppressWarnings("null")
@@ -114,9 +114,10 @@ public class BlockAutoChisel extends Block implements EntityBlock {
         return ChiselTileEntities.AUTO_CHISEL_TE.create(pPos, pState);
     }
 
+
     @Override
     @Nullable
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return BaseEntityBlock.createTickerHelper(pBlockEntityType, ChiselTileEntities.AUTO_CHISEL_TE.get(), ($, $$, $$$, be) -> be.tickCrafting());
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level p_153212_, BlockState p_153213_, BlockEntityType<T> p_153214_) {
+        return EntityBlock.super.getTicker(p_153212_, p_153213_, p_153214_);
     }
 }

@@ -35,7 +35,7 @@ import java.util.List;
 
 import static team.chisel.client.util.ChiselLangKeys.*;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({"rawtypes", "CommentedOutCode"})
 public class ItemChisel extends Item implements IChiselItem {
 
     @Getter

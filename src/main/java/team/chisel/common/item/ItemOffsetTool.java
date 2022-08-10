@@ -37,6 +37,7 @@ import team.chisel.client.util.ClientUtil;
 import team.chisel.common.util.NBTSaveable;
 import team.chisel.common.util.PerChunkData;
 import team.chisel.common.util.PerChunkData.ChunkDataBase;
+import team.chisel.ctm.client.model.AbstractCTMBakedModel;
 
 import javax.annotation.Nonnull;
 import java.awt.geom.Line2D;
@@ -52,15 +53,15 @@ public class ItemOffsetTool extends Item {
 
     public ItemOffsetTool(Item.Properties properties) {
         super(properties);
-        PerChunkData.INSTANCE.registerChunkData(DATA_KEY, new ChunkDataBase<OffsetData>(OffsetData.class, true));
-        DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> MinecraftForge.EVENT_BUS.addListener(this::onBlockHighlight));
+        PerChunkData.INSTANCE.registerChunkData(DATA_KEY, new ChunkDataBase<>(OffsetData.class, true));
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> () -> MinecraftForge.EVENT_BUS.addListener(this::onBlockHighlight));
     }
 //    private static final List<TextureType> validTypes = Lists.newArrayList(TextureType.V4, TextureType.V9 /* SOON, TextureType.V16 */);
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level world = context.getLevel();
-        BlockState state = world.getBlockState(context.getClickedPos());
+        world.getBlockState(context.getClickedPos());
         if (world.isClientSide) {
             return canOffset(context.getLevel(), context.getClickedPos(), context.getItemInHand()) ? InteractionResult.SUCCESS : InteractionResult.PASS;
         } else {
@@ -100,6 +101,7 @@ public class ItemOffsetTool extends Item {
         BlockHitResult target = event.getTarget();
         Player player = Minecraft.getInstance().player;
 
+        assert player != null;
         if (canOffset(player.level, target.getBlockPos(), player.getMainHandItem()) || canOffset(player.level, target.getBlockPos(), player.getOffhandItem())) {
 
             Direction face = target.getDirection();
@@ -187,10 +189,7 @@ public class ItemOffsetTool extends Item {
             return false;
         }
         BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModelShaper().getBlockModel(state);
-//        if (!(model instanceof AbstractCTMBakedModel)) {
-//            return false;
-//        }
-        return true;
+        return model instanceof AbstractCTMBakedModel;
     }
 
     @ToString
@@ -218,12 +217,12 @@ public class ItemOffsetTool extends Item {
             return offset;
         }
 
-        private int positiveModulo(int num, int denom) {
-            return (num + denom) % denom;
+        private int positiveModulo(int num) {
+            return (num + 16) % 16;
         }
 
         private BlockPos wrap(BlockPos pos) {
-            return new BlockPos(positiveModulo(pos.getX(), 16), positiveModulo(pos.getY(), 16), positiveModulo(pos.getZ(), 16));
+            return new BlockPos(positiveModulo(pos.getX()), positiveModulo(pos.getY()), positiveModulo(pos.getZ()));
         }
     }
 }

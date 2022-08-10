@@ -17,7 +17,7 @@ public class SlotChiselSelection extends Slot {
 
     private final @Nonnull ChiselContainer container;
 
-    public SlotChiselSelection(ChiselContainer container, InventoryChiselSelection inv, Container iinventory, int i, int j, int k) {
+    public SlotChiselSelection(ChiselContainer container, Container iinventory, int i, int j, int k) {
         super(iinventory, i, j, k);
         this.container = container;
     }
@@ -33,6 +33,7 @@ public class SlotChiselSelection extends Slot {
         ItemStack res = ItemStack.EMPTY;
         if (!chisel.isEmpty() && !crafted.isEmpty()) {
             IChiselItem item = (IChiselItem) container.getChisel().getItem();
+            assert CarvingUtils.getChiselRegistry() != null;
             ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(itemstack.getItem()).orElseThrow(IllegalArgumentException::new);
             if (!item.canChisel(player.level, player, chisel, variation)) {
                 return res;

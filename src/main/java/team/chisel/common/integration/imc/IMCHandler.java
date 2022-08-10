@@ -22,6 +22,7 @@ import team.chisel.api.carving.IVariationRegistry;
 
 import java.util.Set;
 
+@SuppressWarnings({"unused", "CommentedOutCode"})
 public class IMCHandler {
 
     public static final IMCHandler INSTANCE = new IMCHandler();
@@ -36,7 +37,7 @@ public class IMCHandler {
 
     public void handleMessage(IMCMessage message) {
         for (IMC imc : IMC.values()) {
-            if (imc.key.equals(message.getMethod())) {
+            if (imc.key.equals(message.method())) {
                 handle(message, imc);
             }
         }
@@ -55,12 +56,12 @@ public class IMCHandler {
             Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(blockname));
             Preconditions.checkNotNull(block, "Could not find block %s in registry!", blockname);
         }
-        return Pair.of(stack, state);
+        return Pair.of(stack, null);
     }
 
     @SuppressWarnings("deprecation")
     private void handle(IMCMessage message, IMC type) {
-        imcCounts.mergeInt(message.getSenderModId(), 1, (i1, i2) -> i1 + i2);
+        imcCounts.mergeInt(message.getSenderModId(), 1, Integer::sum);
         if (type.isDeprecated()) {
             Set<String> usedForMod = deprecatedUses.get(message.getSenderModId());
             if (usedForMod.add(type.toString())) {
@@ -73,7 +74,7 @@ public class IMCHandler {
         ResourceLocation resource = null;
         try {
             switch (type) {
-                case ADD_VARIATION: {
+                case ADD_VARIATION -> {
                     CompoundTag tag = (CompoundTag) message.getMessageSupplier().get();
                     ResourceLocation group = new ResourceLocation(tag.getString("group"));
                     Preconditions.checkNotNull(Strings.emptyToNull(group.getPath()), "No group specified");
@@ -89,9 +90,8 @@ public class IMCHandler {
                     //    v = CarvingUtils.variationFor(group, variationdata.getLeft(), variationdata.getRight(), order++);
                     //}
                     //reg.addVariation(group, v);
-                    break;
                 }
-                case REMOVE_VARIATION: {
+                case REMOVE_VARIATION -> {
                     CompoundTag tag = (CompoundTag) message.getMessageSupplier().get();
                     String group = tag.getString("group");
                     Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
@@ -111,15 +111,15 @@ public class IMCHandler {
                     //        reg.removeVariation(variationdata.getRight(), group);
                     //    }
                     //}
-                    break;
                 }
-                default: {
-                    throw new IllegalArgumentException("Invalid IMC constant! How...what...?");
-                }
+                default -> throw new IllegalArgumentException("Invalid IMC constant! How...what...?");
             }
         } catch (Exception e) {
             Object value = message.getMessageSupplier().get();
-            Chisel.logger.error("Could not handle data {} for IMC type {}. This was sent from mod {}.\n" + "!! This is a bug in that mod !!\nSwallowing error and continuing...", value, type.name(),
+            Chisel.logger.error("""
+                            Could not handle data {} for IMC type {}. This was sent from mod {}.
+                            !! This is a bug in that mod !!
+                            Swallowing error and continuing...""", value, type.name(),
                     message.getSenderModId());
             e.printStackTrace();
         }

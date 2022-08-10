@@ -33,6 +33,7 @@ public class BlockCarvablePane extends IronBarsBlock implements ICarvable {
         return super.skipRendering(state, adjacentBlockState, side) && state != adjacentBlockState;
     }
 
+    @SuppressWarnings("unused")
     public Block setDragonProof() {
         dragonProof = true;
         return this;

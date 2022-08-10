@@ -20,6 +20,7 @@ import team.chisel.common.item.ItemOffsetTool;
 
 import java.util.Locale;
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 @FieldsAreNonnullByDefault
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselItems {

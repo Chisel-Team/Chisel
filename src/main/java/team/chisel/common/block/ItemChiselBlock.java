@@ -31,10 +31,11 @@ public class ItemChiselBlock extends BlockItem {
     }
 
     public static void addTooltips(ItemStack stack, List<Component> tooltip) {
-        addTooltips(stack, ((ItemChiselBlock) stack.getItem()).block, tooltip);
+        addTooltips(((ItemChiselBlock) stack.getItem()).block, tooltip);
     }
 
-    public static void addTooltips(ItemStack stack, ICarvable block, List<Component> tooltip) {
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public static void addTooltips(ICarvable block, List<Component> tooltip) {
         try {
             int line = 1;
             String desc = block.getVariation().getDisplayName().getKey() + ".desc.";
@@ -52,7 +53,7 @@ public class ItemChiselBlock extends BlockItem {
         if (Configurations.blockDescriptions) {
             tooltip.add(block.getVariation().getDisplayName().withStyle(ChatFormatting.GRAY));
         }
-        addTooltips(stack, block, tooltip);
+        addTooltips(block, tooltip);
     }
 
     @Override

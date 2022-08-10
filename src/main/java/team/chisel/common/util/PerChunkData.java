@@ -28,10 +28,7 @@ import team.chisel.api.chunkdata.IChunkDataRegistry;
 import team.chisel.client.ClientProxy;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.Supplier;
 
@@ -111,7 +108,7 @@ public enum PerChunkData implements IChunkDataRegistry {
         }
 
         public MessageChunkData(String key, IChunkData<?> iChunkData) {
-            this(null, key, new CompoundTag());
+            this((ChunkPos) null, key, new CompoundTag());
             this.tag.put("l", iChunkData.writeToNBT());
         }
 
@@ -120,7 +117,7 @@ public enum PerChunkData implements IChunkDataRegistry {
             if (buf.readBoolean()) {
                 chunk = new ChunkPos(buf.readInt(), buf.readInt());
             }
-            return new MessageChunkData(chunk, buf.readUtf(64), buf.readNbt());
+            return new MessageChunkData(chunk, buf.readUtf(64), Objects.requireNonNull(buf.readNbt()));
         }
 
         public void encode(FriendlyByteBuf buf) {
@@ -190,7 +187,7 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         @Override
         public void writeToNBT(@Nonnull ChunkAccess chunk, @Nonnull CompoundTag tag) {
-            T t = data.get(Pair.of(((Level) chunk.getWorldForge()).dimension(), chunk.getPos()));
+            T t = data.get(Pair.of(((Level) Objects.requireNonNull(chunk.getWorldForge())).dimension(), chunk.getPos()));
             if (t != null) {
                 t.write(tag);
             }
@@ -203,7 +200,7 @@ public enum PerChunkData implements IChunkDataRegistry {
                 CompoundTag entry = tags.getCompound(i);
                 ResourceKey<Level> dim = ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(entry.getString("d")));
                 long coordsRaw = entry.getLong("p");
-                ChunkPos coords = new ChunkPos((int) ((coordsRaw >>> 32) & 0xFFFFFFFF), (int) (coordsRaw & 0xFFFFFFFF));
+                ChunkPos coords = new ChunkPos((int) ((coordsRaw >>> 32)), (int) (coordsRaw));
                 if (readFromNBT(dim, coords, entry.getCompound("v"))) {
                     changed.add(coords);
                 }
@@ -213,11 +210,12 @@ public enum PerChunkData implements IChunkDataRegistry {
 
         @Override
         public void readFromNBT(@Nonnull ChunkAccess chunk, @Nonnull CompoundTag tag) {
-            ResourceKey<Level> type = ((Level) chunk.getWorldForge()).dimension();
+            ResourceKey<Level> type = ((Level) Objects.requireNonNull(chunk.getWorldForge())).dimension();
             ChunkPos coords = chunk.getPos();
             readFromNBT(type, coords, tag);
         }
 
+        @SuppressWarnings("SuspiciousMethodCalls")
         private boolean readFromNBT(ResourceKey<Level> dim, ChunkPos coords, CompoundTag tag) {
             if (tag.isEmpty()) {
                 data.remove(dim, coords);
@@ -228,6 +226,7 @@ public enum PerChunkData implements IChunkDataRegistry {
             return true;
         }
 
+        @SuppressWarnings("deprecation")
         protected T getOrCreateNew(ResourceKey<Level> dim, @Nonnull ChunkPos coords) {
             val pair = Pair.of(dim, coords);
             T t = data.get(pair);

@@ -8,6 +8,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguratio
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class ReplaceMultipleBlocksConfig implements FeatureConfiguration {
 
     public static final Codec<ReplaceMultipleBlocksConfig> CODEC = RecordCodecBuilder.create(instance ->

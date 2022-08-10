@@ -6,6 +6,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import team.chisel.Chisel;
 
+@SuppressWarnings("unused")
 public class ChiselCompatTags {
 
     public static final TagKey<Item> STONE_DIABASE = compatTag("stone/diabase");

@@ -48,6 +48,6 @@ public class ChiselTileEntities {
             .menu(ContainerAutoChisel::new, () -> GuiAutoChisel::new)
             .register();
 
-    public static final void init() {
+    public static void init() {
     }
 }

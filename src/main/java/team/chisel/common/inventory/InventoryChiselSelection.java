@@ -3,7 +3,6 @@ package team.chisel.common.inventory;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import team.chisel.api.IChiselItem;
 import team.chisel.common.item.ItemChisel;
@@ -15,7 +14,7 @@ public class InventoryChiselSelection implements Container {
 
     public final int size;
     public int activeVariations = 0;
-    ItemStack chisel = ItemStack.EMPTY;
+    ItemStack chisel;
     @Nullable
     ChiselContainer container;
     NonNullList<ItemStack> inventory;
@@ -27,7 +26,7 @@ public class InventoryChiselSelection implements Container {
         chisel = c;
     }
 
-    public void onInventoryUpdate(int slot) {
+    public void onInventoryUpdate() {
     }
 
     @Override
@@ -40,8 +39,8 @@ public class InventoryChiselSelection implements Container {
         return inventory.get(var1);
     }
 
-    public void updateInventoryState(int slot) {
-        onInventoryUpdate(slot);
+    public void updateInventoryState() {
+        onInventoryUpdate();
     }
 
     @Override
@@ -50,7 +49,7 @@ public class InventoryChiselSelection implements Container {
         if (!stack.isEmpty()) {
             if (stack.getCount() <= amount) {
                 setItem(slot, ItemStack.EMPTY);
-                updateInventoryState(slot);
+                updateInventoryState();
                 return stack;
             } else {
                 ItemStack split = stack.split(amount);
@@ -59,7 +58,7 @@ public class InventoryChiselSelection implements Container {
                     setItem(slot, ItemStack.EMPTY);
                 }
 
-                updateInventoryState(slot);
+                updateInventoryState();
 
                 return split;
             }
@@ -74,7 +73,7 @@ public class InventoryChiselSelection implements Container {
         setItem(slot, ItemStack.EMPTY);
         inventory.set(slot, ItemStack.EMPTY);
 
-        updateInventoryState(slot);
+        updateInventoryState();
         return stack;
     }
 
@@ -90,6 +89,7 @@ public class InventoryChiselSelection implements Container {
 
     @Override
     public boolean stillValid(Player player) {
+        assert container != null;
         ItemStack held = player.getInventory().getItem(container.getChiselSlot());
         return !held.isEmpty() && held.getItem() instanceof IChiselItem && ((IChiselItem) held.getItem()).canOpenGui(player.level, player, container.hand);
     }
@@ -117,8 +117,9 @@ public class InventoryChiselSelection implements Container {
             return;
         }
 
-        Item item = chiseledItem.getItem();
+        chiseledItem.getItem();
 
+        assert container != null;
         List<ItemStack> list = container.getCarving().getItemsForChiseling(chiseledItem);
 
         activeVariations = 0;
@@ -131,7 +132,7 @@ public class InventoryChiselSelection implements Container {
     @Override
     public void setItem(int slot, ItemStack stack) {
         inventory.set(slot, stack);
-        updateInventoryState(slot);
+        updateInventoryState();
     }
 
     @Override

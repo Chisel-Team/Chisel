@@ -59,7 +59,7 @@ public class ChiselContainer extends AbstractContainerMenu {
 
         // selection slots
         for (int i = 0; i < getInventoryChisel().size; i++) {
-            addSlot(new SlotChiselSelection(this, inventoryChisel, inventoryChisel, i, left + ((i % 10) * 18), top + ((i / 10) * 18)));
+            addSlot(new SlotChiselSelection(this, inventoryChisel, i, left + ((i % 10) * 18), top + ((i / 10) * 18)));
         }
 
         // main slot
@@ -74,7 +74,7 @@ public class ChiselContainer extends AbstractContainerMenu {
 
         top += 58;
         for (int i = 0; i < 9; i++) {
-            addSlot(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
+            addSlot(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top));
         }
     }
 
@@ -119,7 +119,7 @@ public class ChiselContainer extends AbstractContainerMenu {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(slotIdx);
 
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
 
@@ -129,7 +129,6 @@ public class ChiselContainer extends AbstractContainerMenu {
                 }
             } else {
                 if (slotIdx < getInventoryChisel().size && !itemstack1.isEmpty()) {
-                    SlotChiselSelection selectslot = (SlotChiselSelection) slot;
                     ItemStack check = SlotChiselSelection.craft(this, entity, itemstack1, true);
                     if (check.isEmpty()) {
                         return ItemStack.EMPTY;

@@ -14,6 +14,7 @@ import team.chisel.common.init.ChiselTileEntities;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+@SuppressWarnings("unused")
 public class ContainerAutoChisel extends AbstractContainerMenu {
 
     public static final int
@@ -99,7 +100,7 @@ public class ContainerAutoChisel extends AbstractContainerMenu {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
 
-        if (slot != null && slot.hasItem()) {
+        if (slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
             itemstack = itemstack1.copy();
 
@@ -110,6 +111,7 @@ public class ContainerAutoChisel extends AbstractContainerMenu {
 
                 slot.onQuickCraft(itemstack1, itemstack);
             } else if (index >= beginPlayerSlots) {
+                assert CarvingUtils.getChiselRegistry() != null;
                 if (CarvingUtils.getChiselRegistry().getGroup(itemstack1.getItem()).isPresent()) {
                     if (!this.moveItemStackTo(itemstack1, targetSlot, targetSlot + 1, false)) {
                         if (!this.moveItemStackTo(itemstack1, beginInputSlots, endInputSlots, false)) {
@@ -120,7 +122,7 @@ public class ContainerAutoChisel extends AbstractContainerMenu {
                     if (!this.moveItemStackTo(itemstack1, chiselSlot, chiselSlot + 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index >= beginPlayerSlots && index < endPlayerSlots - 9) {
+                } else if (index < endPlayerSlots - 9) {
                     if (!this.moveItemStackTo(itemstack1, endPlayerSlots - 9, endPlayerSlots, false)) {
                         return ItemStack.EMPTY;
                     }
@@ -183,7 +185,9 @@ public class ContainerAutoChisel extends AbstractContainerMenu {
 
         @Override
         public boolean mayPlace(@Nullable ItemStack stack) {
-            return stack != null && CarvingUtils.getChiselRegistry().getGroup(stack.getItem()).isPresent();
+            if (stack == null) return false;
+            assert CarvingUtils.getChiselRegistry() != null;
+            return CarvingUtils.getChiselRegistry().getGroup(stack.getItem()).isPresent();
         }
     }
 }
