@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import team.chisel.common.Reference;
 import team.chisel.common.init.ChiselTabs;
 
+@SuppressWarnings("unused")
 @Mod("chisel_legacy")
 public class ChiselLegacy implements Reference {
 
