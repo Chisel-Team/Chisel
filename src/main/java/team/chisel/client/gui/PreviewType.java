@@ -15,10 +15,10 @@ import java.util.Set;
 
 @Getter
 public enum PreviewType {
-    PANEL(16, generateBetween(0, 1, 0, 2, 3, 0)),
+    PANEL(16, generateBetween()),
 
     @SuppressWarnings("null")
-    HOLLOW(16, ArrayUtils.removeElement(generateBetween(0, 1, 0, 2, 3, 0), new BlockPos(1, 2, 0))),
+    HOLLOW(16, ArrayUtils.removeElement(generateBetween(), new BlockPos(1, 2, 0))),
 
     PLUS(20,
             new BlockPos(1, 1, 0),
@@ -35,18 +35,19 @@ public enum PreviewType {
     private final float scale;
     private final Set<BlockPos> positions;
     private final TranslatableComponent localizedName;
+
     PreviewType(float scale, @Nonnull BlockPos... positions) {
         this.scale = scale;
         this.positions = ImmutableSet.copyOf(positions);
         this.localizedName = Chisel.registrate().addLang("hitech", new ResourceLocation(Chisel.MOD_ID, "preview." + name().toLowerCase(Locale.ROOT)), RegistrateLangProvider.toEnglishName(name()));
     }
 
-    private static @Nonnull BlockPos[] generateBetween(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
-        BlockPos[] ret = new BlockPos[(maxX - minX + 1) * (maxY - minY + 1) * (maxZ - minZ + 1)];
+    private static @Nonnull BlockPos[] generateBetween() {
+        BlockPos[] ret = new BlockPos[(2 + 1) * (3 - 1 + 1)];
         int i = 0;
-        for (int x = minX; x <= maxX; x++) {
-            for (int y = minY; y <= maxY; y++) {
-                for (int z = minZ; z <= maxZ; z++) {
+        for (int x = 0; x <= 2; x++) {
+            for (int y = 1; y <= 3; y++) {
+                for (int z = 0; z <= 0; z++) {
                     ret[i++] = new BlockPos(x, y, z);
                 }
             }

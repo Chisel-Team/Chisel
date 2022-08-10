@@ -4,16 +4,18 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import net.minecraft.world.level.block.Block;
 import team.chisel.api.block.ModelTemplate;
 
+import java.util.Objects;
 import java.util.function.Function;
 
 public class ModelTemplates {
 
+    @SuppressWarnings("unused")
     private static String modid(Block block) {
-        return block.getRegistryName().getNamespace();
+        return Objects.requireNonNull(block.getRegistryName()).getNamespace();
     }
 
     public static String name(Block block) {
-        return block.getRegistryName().getPath();
+        return Objects.requireNonNull(block.getRegistryName()).getPath();
     }
 
     public static ModelTemplate simpleBlock() {
@@ -37,6 +39,7 @@ public class ModelTemplates {
         return cubeBottomTop(name -> name + "-side", name -> name + "-bottom", name -> name + "-top");
     }
 
+    @SuppressWarnings("unused")
     public static ModelTemplate cubeBottomTop(String side, String bottom, String top) {
         return cubeBottomTop(name -> replaceVariant(name, side), name -> replaceVariant(name, bottom), name -> replaceVariant(name, top));
     }
@@ -86,6 +89,7 @@ public class ModelTemplates {
         };
     }
 
+    @SuppressWarnings("unused")
     public static ModelTemplate axisFaces() {
         return (prov, block) -> {
             String name = "block/" + name(block);

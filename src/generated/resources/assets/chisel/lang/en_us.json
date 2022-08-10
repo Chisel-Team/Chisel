@@ -273,5 +273,7 @@
   "variant.chisel.wireframewhite": "Wireframewhite",
   "variant.chisel.yellow": "Yellow",
   "variant.chisel.zag": "Zag",
-  "variant.chisel.zelda": "Zelda"
+  "variant.chisel.zelda": "Zelda",
+  "chisel.tooltip.power.stored": "",
+  "chisel.tooltip.power.pertick": "null"
 }

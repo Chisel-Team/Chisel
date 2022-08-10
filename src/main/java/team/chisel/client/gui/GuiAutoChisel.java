@@ -18,7 +18,6 @@ import team.chisel.common.init.ChiselItems;
 import team.chisel.common.inventory.ContainerAutoChisel;
 
 import javax.annotation.Nonnull;
-import java.text.NumberFormat;
 import java.util.List;
 
 public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> {
@@ -86,6 +85,7 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
         RenderSystem.enableDepthTest();
     }
 
+    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
     protected void renderLabels(PoseStack PoseStack, int mouseX, int mouseY) {
         this.font.draw(PoseStack, title, this.imageWidth / 2 - this.font.width(title) / 2, 6, 0x404040);
@@ -99,12 +99,9 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
             int finalMouseY = mouseY;
 
             if (finalMouseX >= 7 && finalMouseY >= 93 && finalMouseX <= 169 && finalMouseY <= 98) {
-                NumberFormat fmt = NumberFormat.getNumberInstance();
-                String stored = fmt.format(container.getEnergy());
-                String max = fmt.format(container.getMaxEnergy());
                 List<Component> tt = Lists.newArrayList(
-                        new TranslatableComponent("chisel.tooltip.power.stored", stored, max),
-                        new TranslatableComponent("chisel.tooltip.power.pertick", fmt.format(container.getUsagePerTick())).withStyle(ChatFormatting.GRAY));
+                        new TranslatableComponent("chisel.tooltip.power.stored"),
+                        new TranslatableComponent("chisel.tooltip.power.pertick").withStyle(ChatFormatting.GRAY));
                 renderComponentTooltip(PoseStack, tt, finalMouseX, finalMouseY);
             }
         }

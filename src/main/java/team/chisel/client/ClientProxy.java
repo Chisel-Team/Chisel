@@ -44,6 +44,8 @@ public class ClientProxy {
     }
 
     public static void resetWaitTimer() {
-        Minecraft.getInstance().gameMode.destroyDelay = 5;
+        assert Minecraft.getInstance().gameMode != null;
+
+        Minecraft.getInstance().gameMode.stopDestroyBlock();
     }
 }

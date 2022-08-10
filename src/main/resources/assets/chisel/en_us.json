@@ -36,8 +36,6 @@
 
     "block.chisel.autochisel": "Auto Chisel",
     "container.autochisel.title": "Auto Chisel",
-    "chisel.tooltip.power.stored": "%s/%s FE",
-    "chisel.tooltip.power.pertick": "%s FE/t",
 
     "itemGroup.chiselCreativeTab": "Chisel",
     "chisel.jei.title": "Chiseling",
@@ -232,7 +230,6 @@
     "block.chisel.basalt.circularct.desc.2": "Has CTM",
     "block.chisel.basalt.weaver.desc.1": "Celtic",
     "block.chisel.basalt.bricks-chaotic.desc.1": "Trodden Bricks",
-    "block.chisel.basalt": "Basalt",
     "block.chisel.basalt.bricks-solid.desc.1": "Bricks",
     "block.chisel.basalt.bricks-small.desc.1": "Small Bricks",
     "block.chisel.basalt.circular.desc.1": "Circular",
@@ -466,7 +463,6 @@
     "block.chisel.bookshelf_spruce.cans.desc.1": "Cans",
     "block.chisel.bookshelf_spruce.papers.desc.1": "Stacks Of Papers",
 
-    "block.chisel.bricks": "Bricks",
     "block.chisel.bricks.cracked.desc.1": "Cracked",
     "block.chisel.bricks.bricks-soft.desc.1": "Weathered Bricks",
     "block.chisel.bricks.bricks-cracked.desc.1": "Cracked Bricks",
@@ -1542,9 +1538,7 @@
     "block.chisel.emerald.emeraldCircle.desc.1": "Circular",
     "block.chisel.emerald.emeraldPrismatic.desc.1": "Prism",
 
-    "block.chisel.endstone": "End Stone",
     "block.chisel.endstone.cracked.desc.1": "Cracked",
-    "block.chisel.endstone.bricks-solid.desc.1": "Bricks",
     "block.chisel.endstone.bricks-soft.desc.1": "Weathered Bricks",
     "block.chisel.endstone.bricks-cracked.desc.1": "Cracked Bricks",
     "block.chisel.endstone.bricks-triple.desc.1": "Wide Bricks",
@@ -2325,7 +2319,6 @@
     "block.chisel.marble.circularct.desc.2": "Has CTM",
     "block.chisel.marble.weaver.desc.1": "Celtic",
     "block.chisel.marble.bricks-chaotic.desc.1": "Trodden Bricks",
-    "block.chisel.marble": "Marble",
     "block.chisel.marble.bricks-solid.desc.1": "Bricks",
     "block.chisel.marble.bricks-small.desc.1": "Small Bricks",
     "block.chisel.marble.circular.desc.1": "Circular",
@@ -2570,7 +2563,6 @@
     "block.chisel.prismarine.circularct.desc.2": "Has CTM",
     "block.chisel.prismarine.weaver.desc.1": "Celtic",
     "block.chisel.prismarine.bricks-chaotic.desc.1": "Trodden Bricks",
-    "block.chisel.prismarine": "Prismarine",
     "block.chisel.prismarine.bricks-solid.desc.1": "Bricks",
     "block.chisel.prismarine.bricks-small.desc.1": "Small Bricks",
     "block.chisel.prismarine.circular.desc.1": "Circular",
@@ -2586,7 +2578,6 @@
     "block.chisel.prismarine.poison.desc.1": "Poison",
     "block.chisel.prismarine.cuts.desc.1": "Cuts",
 
-    "block.chisel.purpur": "Purpur Block",
     "block.chisel.purpur.cracked.desc.1": "Cracked",
     "block.chisel.purpur.bricks-soft.desc.1": "Weathered Bricks",
     "block.chisel.purpur.bricks-cracked.desc.1": "Cracked Bricks",
@@ -2745,7 +2736,6 @@
     "block.chisel.sandstoneyellow.circularct.desc.2": "Has CTM",
     "block.chisel.sandstoneyellow.weaver.desc.1": "Celtic",
     "block.chisel.sandstoneyellow.bricks-chaotic.desc.1": "Trodden Bricks",
-    "block.chisel.sandstoneyellow": "Sandstone",
     "block.chisel.sandstoneyellow.bricks-solid.desc.1": "Bricks",
     "block.chisel.sandstoneyellow.bricks-small.desc.1": "Small Bricks",
     "block.chisel.sandstoneyellow.circular.desc.1": "Circular",
@@ -2762,7 +2752,6 @@
     "block.chisel.sandstoneyellow.cuts.desc.1": "Cuts",
     "block.chisel.sandstoneyellow.seamless.desc.1": "Seamless Double Slab",
 
-    "block.chisel.sandstonered": "Red Sandstone",
     "block.chisel.sandstonered.cracked.desc.1": "Cracked",
     "block.chisel.sandstonered.bricks-soft.desc.1": "Weathered Bricks",
     "block.chisel.sandstonered.bricks-cracked.desc.1": "Cracked Bricks",
@@ -2889,7 +2878,6 @@
     "block.chisel.stonebrick.circularct.desc.2": "Has CTM",
     "block.chisel.stonebrick.weaver.desc.1": "Celtic",
     "block.chisel.stonebrick.bricks-chaotic.desc.1": "Trodden Bricks",
-    "block.chisel.stonebrick": "Chiseled Stone",
     "block.chisel.stonebrick.bricks-solid.desc.1": "Bricks",
     "block.chisel.stonebrick.bricks-small.desc.1": "Small Bricks",
     "block.chisel.stonebrick.circular.desc.1": "Circular",
@@ -3160,5 +3148,7 @@
     "block.chisel.wool_red.llama_red.desc.1": "Llama Carpet",
     "block.chisel.wool_black": "Black Wool",
     "block.chisel.wool_black.legacy_black.desc.1": "Legacy Carpet",
-    "block.chisel.wool_black.llama_black.desc.1": "Llama Carpet"
+    "block.chisel.wool_black.llama_black.desc.1": "Llama Carpet",
+    "chisel.tooltip.power.stored": "",
+    "chisel.tooltip.power.pertick": "null"
 }

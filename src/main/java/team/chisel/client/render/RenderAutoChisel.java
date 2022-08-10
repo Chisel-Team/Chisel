@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.item.ItemStack;
 import team.chisel.common.block.TileAutoChisel;
 
+@SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class RenderAutoChisel implements BlockEntityRenderer<TileAutoChisel> {
 
     private final BlockEntityRendererProvider.Context context;
@@ -19,15 +20,13 @@ public class RenderAutoChisel implements BlockEntityRenderer<TileAutoChisel> {
 
     @Override
     public void render(TileAutoChisel te, float partialTicks, PoseStack stack, MultiBufferSource buf, int light, int overlay) {
-        if (te instanceof TileAutoChisel) {
-            ItemStack source = te.getSource();
+        ItemStack source = te.getSource();
 
-            if (source != null) {
-                stack.pushPose();
-                stack.translate(0.5, 10 / 16f, 0.5);
-                Minecraft.getInstance().getItemRenderer().renderStatic(source, TransformType.GROUND, light, overlay, stack, buf, 0);
-                stack.popPose();
-            }
+        if (source != null) {
+            stack.pushPose();
+            stack.translate(0.5, 10 / 16f, 0.5);
+            Minecraft.getInstance().getItemRenderer().renderStatic(source, TransformType.GROUND, light, overlay, stack, buf, 0);
+            stack.popPose();
         }
     }
 }

@@ -4,7 +4,6 @@ import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Timer;
-import net.minecraft.client.renderer.RenderStateShard;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import team.chisel.Chisel;
@@ -12,14 +11,15 @@ import team.chisel.Chisel;
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 
+@SuppressWarnings("unused")
 public class ClientUtil {
 
     public static final RenderType OFFSET_OVERLAY = RenderType.create("chisel_offset_overlay",
             DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.TRIANGLES, 256,
             false, true,
             RenderType.CompositeState.builder()
-                    .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
-                    .setOutputState(RenderStateShard.TRANSLUCENT_TARGET)
+                    //.setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                    //.setOutputState(RenderStateShard.TRANSLUCENT_TARGET)
                     .createCompositeState(true));
     @Nullable
     private static final Field timerField = initTimer();

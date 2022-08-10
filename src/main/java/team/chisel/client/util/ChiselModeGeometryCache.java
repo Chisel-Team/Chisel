@@ -1,7 +1,6 @@
 package team.chisel.client.util;
 
-// ...TODO
-
+@SuppressWarnings("unused")
 public class ChiselModeGeometryCache {// implements IWorldEventListener {
 //    private IChiselMode mode;
 //    private BlockPos origin;

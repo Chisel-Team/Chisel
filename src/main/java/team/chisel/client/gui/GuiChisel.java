@@ -47,13 +47,6 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-
-        // if this is a selection slot, no double clicking
-        //Slot slot = getSlotAtPosition(mouseX, mouseY);
-        //if (slot != null && slot.slotNumber < this.menu.getInventoryChisel().size - 1) {
-        //    this.doubleClick = false;
-        //}
-
         return false;
     }
 
@@ -66,6 +59,8 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
         int buttonsPerRow = area.getWidth() / 20;
         int padding = (area.getWidth() - (buttonsPerRow * 20)) / buttonsPerRow;
         IChiselMode currentMode = NBTUtil.getChiselMode(this.getMenu().getChisel());
+        assert CarvingUtils.getModeRegistry() != null;
+
         for (IChiselMode mode : CarvingUtils.getModeRegistry().getAllModes()) {
             if (((IChiselItem) this.menu.getChisel().getItem()).supportsMode(player, this.menu.getChisel(), mode)) {
                 int x = area.getX() + (padding / 2) + ((id % buttonsPerRow) * (20 + padding));
@@ -105,9 +100,10 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
         this.renderTooltip(PoseStack, mouseX, mouseY);
     }
 
+    @SuppressWarnings("IntegerDivisionInFloatingPointContext")
     @Override
     protected void renderLabels(PoseStack PoseStack, int j, int i) {
-        setSlotScale(PoseStack, false); // Clear slot scaling in case input slot is the last one rendered, this is the very next method called after rendering slots
+        setSlotScale(PoseStack); // Clear slot scaling in case input slot is the last one rendered, this is the very next method called after rendering slots
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 
         // TODO fix String
@@ -149,26 +145,10 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
         RenderSystem.setShaderTexture(0, new ResourceLocation(texture));
         blit(PoseStack, i, j, 0, 0, getXSize(), getYSize());
 
-        int x = (width - getXSize()) / 2;
-        int y = (height - getYSize()) / 2;
-
         Slot main = this.menu.getInputSlot();
         if (main.getItem().isEmpty()) {
-            drawSlotOverlay(PoseStack, this, i, j, main, 0, getYSize(), 0);
+            drawSlotOverlay(PoseStack, this, i, j, main, getYSize());
         }
-    }
-
-    @Override
-    protected boolean isHovering(Slot slotIn, double mouseX, double mouseY) {
-        if (slotIn == menu.getInputSlot()) {
-            // If scaling is not active, this is a check for a click action, which must be shifted the opposite way as the slot position is not shifted
-            if (scaleActive) {
-                return isHovering(slotIn.x + 8, slotIn.y + 8, 32, 32, mouseX, mouseY);
-            } else {
-                return isHovering(slotIn.x - 8, slotIn.y - 8, 32, 32, mouseX, mouseY);
-            }
-        }
-        return super.isHovering(slotIn, mouseX, mouseY);
     }
 
     @Override
@@ -176,31 +156,9 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
         super.fillGradient(PoseStack, x1, y1, x2, y2, colorFrom, colorTo);
     }
 
-    private void setSlotScale(PoseStack stack, boolean active) {
+    private void setSlotScale(PoseStack stack) {
         Slot slot = this.menu.getInputSlot();
-        if (!scaleActive && active) {
-            /*
-             * Item rendering does not use the PoseStack, but drawing the highlight does.
-             *
-             * This means that if the slot has an item, and we apply both methods, it will result in the highlight being double scaled.
-             * However, the model view stack will never be used if an item is not drawn, which breaks the highlight when there is no item in the slot.
-             *
-             * So to avoid this we apply either method based on if the slot has an item to render or not.
-             */
-            if (slot.hasItem()) {
-                RenderSystem.getModelViewStack().pushPose();
-                RenderSystem.getModelViewStack().scale(2, 2, 1);
-            } else {
-                stack.pushPose();
-                stack.scale(2, 2, 2);
-            }
-            // Item rendering doesn't use the matrix stack yet
-            slot.x -= 16;
-            slot.y -= 16;
-        }
-        if (scaleActive && !active) {
-            slot.x += 16;
-            slot.y += 16;
+        if (scaleActive) {
             if (slot.hasItem()) {
                 RenderSystem.getModelViewStack().popPose();
                 RenderSystem.applyModelViewMatrix();
@@ -208,18 +166,12 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
                 stack.popPose();
             }
         }
-        scaleActive = active;
+        scaleActive = false;
     }
 
-    @Override
-    public void renderSlot(PoseStack stack, Slot slot) {
-        setSlotScale(stack, slot == menu.getInputSlot());
-        super.renderSlot(stack, slot);
-    }
-
-    private void drawSlotOverlay(PoseStack PoseStack, AbstractContainerScreen<?> gui, int x, int y, Slot slot, int u, int v, int padding) {
+    private void drawSlotOverlay(PoseStack PoseStack, AbstractContainerScreen<?> gui, int x, int y, Slot slot, int v) {
         //if (scaleActive) {
-        gui.blit(PoseStack, x + (slot.x - 16 - padding), y + (slot.y - 16 - padding), u, v, 48 + padding, 48 + padding);
+        gui.blit(PoseStack, x + (slot.x - 16), y + (slot.y - 16), 0, v, 48, 48);
 //        } else {
 //            gui.blit(PoseStack, x + (slot.x - padding), y, u, v, 16, 16);
 //        }

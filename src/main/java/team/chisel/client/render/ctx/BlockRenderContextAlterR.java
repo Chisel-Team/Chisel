@@ -3,7 +3,6 @@ package team.chisel.client.render.ctx;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import team.chisel.client.render.texture.ChiselTextureAlterR;
 import team.chisel.ctm.client.texture.ctx.TextureContextPosition;
 
 import javax.annotation.Nonnull;
@@ -15,7 +14,7 @@ public class BlockRenderContextAlterR extends TextureContextPosition {
     @Getter
     private final int texture;
 
-    public BlockRenderContextAlterR(@Nonnull BlockPos pos, ChiselTextureAlterR tex) {
+    public BlockRenderContextAlterR(@Nonnull BlockPos pos) {
         super(pos);
 
         int num = 0;
@@ -28,15 +27,12 @@ public class BlockRenderContextAlterR extends TextureContextPosition {
         int z = pos.getZ();
 
         num += rand.nextInt(2) * 2;
-        boolean type = true;
+        boolean type = x % 2 != 0;
 
         // If even, switch boolean
         // If we have a set of multiple coords that are [x, y, z]
         // [5, 8, 9], [0, 0, 1], [9, 8, 8]...
 
-        if (x % 2 == 0) {
-            type = !type;
-        }
         // Odd Even Odd
         // True False True
 

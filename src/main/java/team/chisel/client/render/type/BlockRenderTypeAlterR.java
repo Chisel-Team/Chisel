@@ -12,6 +12,7 @@ import team.chisel.ctm.api.texture.TextureType;
 import team.chisel.ctm.api.util.TextureInfo;
 import team.chisel.ctm.client.texture.ctx.TextureContextPosition;
 
+@SuppressWarnings("unchecked")
 @TextureType("AR") /* Alernating Random */
 public class BlockRenderTypeAlterR implements ITextureType {
     @Override
@@ -21,7 +22,7 @@ public class BlockRenderTypeAlterR implements ITextureType {
 
     @Override
     public ITextureContext getBlockRenderContext(BlockState state, BlockGetter world, BlockPos pos, ICTMTexture<?> tex) {
-        return new BlockRenderContextAlterR(pos, (ChiselTextureAlterR) tex);
+        return new BlockRenderContextAlterR(pos);
     }
 
     @Override

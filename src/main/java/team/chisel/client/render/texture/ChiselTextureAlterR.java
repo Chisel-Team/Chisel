@@ -1,6 +1,7 @@
 package team.chisel.client.render.texture;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
+import org.jetbrains.annotations.Nullable;
 import team.chisel.client.render.ctx.BlockRenderContextAlterR;
 import team.chisel.client.render.type.BlockRenderTypeAlterR;
 import team.chisel.ctm.api.texture.ISubmap;
@@ -17,27 +18,20 @@ public class ChiselTextureAlterR extends AbstractTexture<BlockRenderTypeAlterR> 
         super(type, info);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public List<BakedQuad> transformQuad(BakedQuad quad, ITextureContext context, int quadGoal) {
+    public List<BakedQuad> transformQuad(BakedQuad quad, @Nullable ITextureContext context, int quadGoal) {
 
         ISubmap outputQuad;
         int num = context == null ? 0 : ((BlockRenderContextAlterR) context).getTexture();
 
-        switch (num) {
-            default:
-            case 0:
-                outputQuad = Quad.TOP_LEFT;
-                break;
-            case 1:
-                outputQuad = Quad.TOP_RIGHT;
-                break;
-            case 2:
-                outputQuad = Quad.BOTTOM_LEFT;
-                break;
-            case 3:
-                outputQuad = Quad.BOTTOM_RIGHT;
-                break;
-        }
+        outputQuad = switch (num) {
+            case 0 -> Quad.TOP_LEFT;
+            case 1 -> Quad.TOP_RIGHT;
+            case 2 -> Quad.BOTTOM_LEFT;
+            case 3 -> Quad.BOTTOM_RIGHT;
+            default -> throw new IllegalStateException("Unexpected value: " + num);
+        };
 
         return Collections.singletonList(makeQuad(quad, context).transformUVs(sprites[0], outputQuad).rebake());
     }

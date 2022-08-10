@@ -59,6 +59,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     private static final Rect2i panel = new Rect2i(8, 14, 74, 74);
     private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselguihitech.png");
     private final ContainerChiselHitech containerHitech;
+    private final float momentumDampening = 0.98f;
     private FakeBlockAccess fakeworld = new FakeBlockAccess(this);
     private boolean panelClicked;
     private int clickButton;
@@ -67,7 +68,6 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     private float initRotX, initRotY, initZoom;
     private float prevRotX, prevRotY;
     private double momentumX, momentumY;
-    private final float momentumDampening = 0.98f;
     private float rotX = 165, rotY, zoom = 1;
     private int scrollAcc;
     private @Nullable PreviewModeButton buttonPreview;
@@ -75,6 +75,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     private @Nullable RotateButton buttonRotate;
     private @Nullable BlockState erroredState;
     private boolean doMomentum = false;
+
     public GuiHitechChisel(ContainerChiselHitech container, Inventory playerInventory, Component displayName) {
         super(container, playerInventory, displayName);
         containerHitech = container;

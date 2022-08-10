@@ -1,6 +1,7 @@
 package team.chisel.client.data;
 
 import com.google.common.collect.ImmutableList;
+import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.nullness.FieldsAreNonnullByDefault;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,9 +18,11 @@ import team.chisel.common.block.BlockCarvable;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 @FieldsAreNonnullByDefault
 public class VariantTemplates {
 
@@ -41,7 +44,7 @@ public class VariantTemplates {
     @SuppressWarnings("null")
     public static final ImmutableList<VariantTemplate> COBBLESTONE_MOSSY = ImmutableList.copyOf(COBBLESTONE.stream()
             .map(v -> SimpleTemplate.builderFrom(v)
-                    .modelTemplate(mossyModel("cobblestone", v))
+                    .modelTemplate(mossyModel(v))
                     .build())
             .collect(Collectors.toList()));
     public static final ImmutableList<VariantTemplate> PLANKS = ofClass(Planks.class);
@@ -79,8 +82,8 @@ public class VariantTemplates {
                 .collect(Collectors.toList()));
     }
 
-    @SuppressWarnings("null")
-    public static final ImmutableList<VariantTemplate> colors(ModelTemplate template) {
+    @SuppressWarnings({"null", "ConstantConditions"})
+    public static ImmutableList<VariantTemplate> colors(ModelTemplate template) {
         return colors(template, null);
     }
 
@@ -93,29 +96,29 @@ public class VariantTemplates {
                 .collect(Collectors.toList()));
     }
 
-    private static ModelTemplate mossyModel(String base, VariantTemplate template) {
+    private static ModelTemplate mossyModel(VariantTemplate template) {
         if (template.getName().equals("circularct")) {
-            return ModelTemplates.mossyCtm(base, "circular");
+            return ModelTemplates.mossyCtm("cobblestone", "circular");
         } else if (template.getName().equals("pillar") || template.getName().equals("twisted")) {
-            return ModelTemplates.mossyColumn(base);
+            return ModelTemplates.mossyColumn("cobblestone");
         } else {
-            return ModelTemplates.mossy(base);
+            return ModelTemplates.mossy("cobblestone");
         }
     }
 
-    public static final SimpleTemplate withRecipe(VariantTemplate template, RecipeTemplate recipe) {
+    public static SimpleTemplate withRecipe(VariantTemplate template, RecipeTemplate recipe) {
         return SimpleTemplate.builderFrom(template)
                 .recipeTemplate(recipe)
                 .build();
     }
 
     @SuppressWarnings("null")
-    public static final ImmutableList<VariantTemplate> withUncraft(Collection<VariantTemplate> templates, Item item) {
+    public static ImmutableList<VariantTemplate> withUncraft(Collection<VariantTemplate> templates, Item item) {
         return ImmutableList.copyOf(templates.stream()
                 .map(SimpleTemplate::builderFrom)
                 .map(b -> b.recipeTemplate((prov, block) -> new ShapelessRecipeBuilder(item, 9)
                         .requires(block, 9)
-                        .unlockedBy("has_" + item.getRegistryName().getPath(), prov.has(item))
+                        .unlockedBy("has_" + Objects.requireNonNull(item.getRegistryName()).getPath(), RegistrateRecipeProvider.has(item))
                         .save(prov, Chisel.MOD_ID + ":" + item.getRegistryName().getPath() + "_from_" + ((BlockCarvable) block).getVariation().getName())))
                 .map(SimpleTemplate.SimpleTemplateBuilder::build)
                 .collect(Collectors.toList()));
@@ -144,17 +147,17 @@ public class VariantTemplates {
 
         @Override
         public String getLocalizedName() {
-            return localizedName == null ? VariantTemplate.super.getLocalizedName() : localizedName;
+            return localizedName;
         }
 
         @Override
         public Optional<ModelTemplate> getModelTemplate() {
-            return Optional.ofNullable(modelTemplate);
+            return Optional.of(modelTemplate);
         }
 
         @Override
         public Optional<RecipeTemplate> getRecipeTemplate() {
-            return Optional.ofNullable(recipeTemplate);
+            return Optional.of(recipeTemplate);
         }
     }
 

@@ -8,6 +8,7 @@ import team.chisel.api.IChiselItem;
 import team.chisel.common.util.NBTUtil;
 
 import javax.annotation.Nonnull;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 @RequiredArgsConstructor
@@ -39,7 +40,7 @@ public class PacketHitechSettings {
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
-        ItemStack stack = ctx.get().getSender().getInventory().getItem(chiselSlot);
+        ItemStack stack = Objects.requireNonNull(ctx.get().getSender()).getInventory().getItem(chiselSlot);
         if (stack.getItem() instanceof IChiselItem) { // instanceof check for broken chisel
             NBTUtil.setHitechType(stack, type);
             NBTUtil.setHitechRotate(stack, rotate);
