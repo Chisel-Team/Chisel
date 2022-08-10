@@ -14,6 +14,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -28,6 +29,7 @@ import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
+import team.chisel.common.block.BlockCarvableCarpet;
 import team.chisel.common.init.ChiselCompatTags;
 
 import java.util.Arrays;
@@ -38,19 +40,18 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings({"unused", "CommentedOutCode", "deprecation"})
 public class Features {
-
     public static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
     private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrate());
     public static final Map<String, BlockEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.METAL, "metals/aluminum")
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_STONE_TOOL)
-            //.setGroupName("Aluminum Block")
             .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_ALUMINUM)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .color(MaterialColor.COLOR_LIGHT_GRAY)
             .variations(VariantTemplates.METAL)
             .build();
+
     public static final Map<String, BlockEntry<BlockCarvable>> ANDESITE = _FACTORY.newType(Material.STONE, "andesite")
             .addBlock(Blocks.ANDESITE)
             .addBlock(Blocks.POLISHED_ANDESITE)
@@ -58,9 +59,9 @@ public class Features {
             .initialProperties(() -> Blocks.ANDESITE)
             .variations(VariantTemplates.ROCK)
             .build();
+
     public static final Map<String, BlockEntry<BlockCarvable>> ANTIBLOCK = _FACTORY.newType(Material.STONE, "antiblock", BlockCarvable::new)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            //.layer(() -> RenderType::cutout)
             .initialProperties(() -> Blocks.STONE)
             .color(MaterialColor.COLOR_RED) // TODO colors per variant?
             .variations(VariantTemplates.colors(ModelTemplates.twoLayerWithTop("antiblock", false), (prov, block) ->
@@ -71,6 +72,7 @@ public class Features {
                             .unlockedBy("has_glowstone", RegistrateRecipeProvider.has(Tags.Items.DUSTS_GLOWSTONE))
                             .save(prov)))
             .build();
+
     public static final Map<String, BlockEntry<BlockCarvable>> BRICKS = _FACTORY.newType(Material.STONE, "bricks")
             .addBlock(Blocks.BRICKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -82,7 +84,6 @@ public class Features {
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_IRON_TOOL)
-            //.setGroupName("Bronze Block")
             .addTag(ChiselCompatTags.STORAGE_BLOCKS_BRONZE)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .color(MaterialColor.TERRACOTTA_ORANGE)
@@ -115,18 +116,13 @@ public class Features {
 //      BlockSpeedHandler.speedupBlocks.add(b);
 //  });
     */
-    //public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
-    //        .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getSerializedName()), BlockCarvableCarpet::new)
-    //                .addBlock(new ResourceLocation(color.getSerializedName() + "_carpet"))
-    //                //.setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Carpet")
-    //                .model((prov, block) ->
-    //                        prov.simpleBlock(block, prov.models()
-    //                                .carpet("block/" + ModelTemplates.name(block), prov.modLoc("block/" + ModelTemplates.name(block).replace("carpet", "wool")))
-    //                                .texture("particle", "#wool")))
-    //                .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_carpet")))
-    //                .variation("legacy")
-    //                .next("llama")
-    //                .build()));
+    public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
+            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getSerializedName()), BlockCarvableCarpet::new)
+                    .addBlock(new ResourceLocation(color.getSerializedName() + "_carpet"))
+                    .initialProperties(() -> Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_carpet"))))
+                    .variation("legacy")
+                    .next("llama")
+                    .build()));
 
     public static final Map<String, BlockEntry<BlockCarvable>> CHARCOAL = _FACTORY.newType(Material.STONE, "charcoal")
             .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_CHARCOAL)
@@ -170,7 +166,6 @@ public class Features {
             .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.STONE, "concrete/" + color.getSerializedName())
                     .addBlock(new ResourceLocation(color.getSerializedName() + "_concrete")) // TODO improve this copied RL construction
                     .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-                    //.setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Concrete")
                     .initialProperties(() -> Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_concrete"))))
                     .variations(VariantTemplates.ROCK)
                     .build()));
@@ -370,19 +365,16 @@ public class Features {
                     .addBlock(pair.getSecond())
                     .applyTag(BlockTags.MINEABLE_WITH_AXE)
                     .applyTag(BlockTags.PLANKS)
-                    //.setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst().name()) + " Planks")
                     .initialProperties(() -> Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))
                     .variations(VariantTemplates.PLANKS)
                     .build()));
 
-    // TODO Temp Merge with above once 1.16 hits
-    /*public static final Map<String, Map<String, BlockEntry<BlockCarvable>>> PLANKS_116 = ImmutableList.of("crimson", "warped").stream()
+    public static final Map<String, Map<String, BlockEntry<BlockCarvable>>> PLANKS_116 = ImmutableList.of("crimson", "warped").stream()
             .map(t -> Pair.of(t, new ResourceLocation(t + "_planks")))
             .collect(Collectors.toMap(Pair::getFirst, pair -> _FACTORY.newType(Material.WOOD, "planks/" + pair.getFirst())
                     .addBlock(pair.getSecond())
-                    .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst()) + " Planks")
                     .variations(VariantTemplates.PLANKS)
-                    .build($ -> Block.Properties.from(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))));//*/
+                    .build($ -> Block.Properties.of(Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(pair.getSecond())).defaultBlockState().getMaterial()))));//*/
 
     public static final Map<String, BlockEntry<BlockCarvable>> PRISMARINE = _FACTORY.newType(Material.STONE, "prismarine")
             .addBlock(Blocks.PRISMARINE)
@@ -501,7 +493,6 @@ public class Features {
             .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "wool/" + (color.getSerializedName()))
                     .addBlock(new ResourceLocation(color.getSerializedName() + "_wool")) // TODO improve this copied RL construction
                     .applyTag(BlockTags.WOOL)
-                    //.setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
                     .initialProperties(() -> Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_wool"))))
                     .variation("legacy")
                     .next("llama")
