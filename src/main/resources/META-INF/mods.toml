@@ -32,6 +32,6 @@ side = "BOTH"
 [[dependencies.chisel]]
 modId = "ctm"
 mandatory = true
-versionRange = "[1.18.2-1.1.4+4s,)"
+versionRange = "[1.18.2-1.1.4+4,)"
 ordering = "NONE"
 side = "BOTH"

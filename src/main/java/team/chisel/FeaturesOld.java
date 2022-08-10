@@ -7,6 +7,7 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import team.chisel.api.block.ChiselBlockFactory;
+import team.chisel.client.data.VariantTemplates;
 
 import java.util.Arrays;
 
@@ -14,11 +15,11 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public enum FeaturesOld {
 
-    // @formatter:off
-//    ALUMINUM(factory -> factory.newType(Material.IRON, "metals/aluminum")
-//            .setGroupName("Aluminum Block")
-//            .variations(VariantTemplates.METAL)
-//            .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1))),
+    //ALUMINUM(factory -> factory.newType(Material.METAL, "metals/aluminum")
+    //        //.setGroupName("Aluminum Block")
+    //        .applyTag()
+    //        .variations(VariantTemplates.METAL)
+    //        .build(b -> b.sound(SoundType.METAL)));
 
         /* TODO 1.15
         @Override

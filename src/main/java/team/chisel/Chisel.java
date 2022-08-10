@@ -118,7 +118,7 @@ public class Chisel implements Reference {
 //        } catch (Exception e) {
 //            logger.error("Failed to fix tool types", e);
 //        }
-        LegacyFeatures.init();
+        //LegacyFeatures.init();
     }
 
     public static Registrate registrate() {
