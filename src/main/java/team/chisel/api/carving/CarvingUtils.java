@@ -48,7 +48,7 @@ public class CarvingUtils {
     }
 
     private static TranslatableComponent getDisplayName(TagKey<?> tag, String name) {
-        return Chisel.registrate().addLang("group", tag.location(), name);
+        return Chisel.registrateBase().addLang("group", tag.location(), name);
     }
 
     public static ICarvingGroup itemGroup(TagKey<Block> blocks, String name) {

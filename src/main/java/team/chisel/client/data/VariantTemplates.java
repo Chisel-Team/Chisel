@@ -124,6 +124,7 @@ public class VariantTemplates {
                 .collect(Collectors.toList()));
     }
 
+    @SuppressWarnings("ConstantConditions")
     @RequiredArgsConstructor
     @Builder
     public static class SimpleTemplate implements VariantTemplate {
@@ -152,12 +153,12 @@ public class VariantTemplates {
 
         @Override
         public Optional<ModelTemplate> getModelTemplate() {
-            return Optional.of(modelTemplate);
+            return Optional.ofNullable(modelTemplate);
         }
 
         @Override
         public Optional<RecipeTemplate> getRecipeTemplate() {
-            return Optional.of(recipeTemplate);
+            return Optional.ofNullable(recipeTemplate);
         }
     }
 

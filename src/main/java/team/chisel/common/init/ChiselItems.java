@@ -16,7 +16,6 @@ import team.chisel.api.IChiselGuiType.ChiselGuiType;
 import team.chisel.common.item.ChiselMode;
 import team.chisel.common.item.ItemChisel;
 import team.chisel.common.item.ItemChisel.ChiselType;
-import team.chisel.common.item.ItemOffsetTool;
 
 import java.util.Locale;
 
@@ -25,7 +24,7 @@ import java.util.Locale;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselItems {
 
-    private static final Registrate REGISTRATE = Chisel.registrate();
+    private static final Registrate REGISTRATE = Chisel.registrateBase();
 
     public static final ItemEntry<ItemChisel> IRON_CHISEL = chisel(ChiselType.IRON)
             .recipe((ctx, prov) -> new ShapedRecipeBuilder(ctx.getEntry(), 1)
@@ -56,8 +55,7 @@ public class ChiselItems {
             .register();
 
     public static final ImmutableList<ItemEntry<ItemChisel>> CHISELS = ImmutableList.of(IRON_CHISEL, DIAMOND_CHISEL, HITECH_CHISEL);
-    public static final ItemEntry<ItemOffsetTool> offsettool = REGISTRATE.item("offset_tool", ItemOffsetTool::new)
-            .register();
+    //public static final ItemEntry<ItemOffsetTool> offsettool = REGISTRATE.item("offsettool", ItemOffsetTool::new).register();
 
     static {
         ChiselGuiType.values(); // Init container types

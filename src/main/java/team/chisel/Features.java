@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 public class Features {
 
     public static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
-    private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrate());
+    private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrateBase());
     public static final Map<String, BlockEntry<BlockCarvable>> ALUMINUM = _FACTORY.newType(Material.METAL, "metals/aluminum")
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)

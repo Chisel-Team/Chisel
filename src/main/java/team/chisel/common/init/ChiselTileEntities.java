@@ -19,7 +19,7 @@ import team.chisel.common.block.TileAutoChisel;
 import team.chisel.common.inventory.ContainerAutoChisel;
 
 public class ChiselTileEntities {
-    private static final Registrate REGISTRATE = Chisel.registrate();
+    private static final Registrate REGISTRATE = Chisel.registrateBase();
 
     public static final BlockEntry<BlockAutoChisel> AUTO_CHISEL = REGISTRATE
             .object("auto_chisel")

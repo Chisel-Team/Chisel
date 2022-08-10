@@ -42,7 +42,6 @@ import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ChiselMode;
 import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
-import team.chisel.legacy.LegacyFeatures;
 
 import java.util.Map;
 import java.util.Optional;
@@ -125,7 +124,7 @@ public class Chisel implements Reference {
 //        } catch (Exception e) {
 //            logger.error("Failed to fix tool types", e);
 //        }
-        LegacyFeatures.init();
+        //LegacyFeatures.init();
     }
 
     public static Registrate registrateBase() {
