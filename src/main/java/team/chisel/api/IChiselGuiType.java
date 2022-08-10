@@ -60,7 +60,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
         private final RegistryEntry<? extends MenuType<? extends ChiselContainer>> type;
 
         <C extends ChiselContainer, T extends GuiChisel<C>> ChiselGuiType(String name, MenuFactory<C> factory, NonNullSupplier<ScreenFactory<C, T>> screenFactory) {
-            this.type = Chisel.registrateBase()
+            this.type = Chisel.registrate()
                     .menu(name, factory, screenFactory)
                     .register();
         }

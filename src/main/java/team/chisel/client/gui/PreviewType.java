@@ -39,7 +39,7 @@ public enum PreviewType {
     PreviewType(float scale, @Nonnull BlockPos... positions) {
         this.scale = scale;
         this.positions = ImmutableSet.copyOf(positions);
-        this.localizedName = Chisel.registrateBase().addLang("hitech", new ResourceLocation(Chisel.MOD_ID, "preview." + name().toLowerCase(Locale.ROOT)), RegistrateLangProvider.toEnglishName(name()));
+        this.localizedName = Chisel.registrate().addLang("hitech", new ResourceLocation(Chisel.MOD_ID, "preview." + name().toLowerCase(Locale.ROOT)), RegistrateLangProvider.toEnglishName(name()));
     }
 
     private static @Nonnull BlockPos[] generateBetween() {

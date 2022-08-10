@@ -173,8 +173,8 @@ public enum ChiselMode implements IChiselMode {
     }
 
     ChiselMode(@Nullable String name, String desc) {
-        this.localizedName = Chisel.registrateBase().addRawLang(getUnlocName(), name == null ? RegistrateLangProvider.toEnglishName(name()) : name);
-        this.localizedDescription = Chisel.registrateBase().addRawLang(getUnlocDescription(), desc);
+        this.localizedName = Chisel.registrate().addRawLang(getUnlocName(), name == null ? RegistrateLangProvider.toEnglishName(name()) : name);
+        this.localizedDescription = Chisel.registrate().addRawLang(getUnlocDescription(), desc);
     }
 
     private static Iterator<BlockPos> getContiguousIterator(BlockPos origin, Level world, Direction[] directionsToSearch) {

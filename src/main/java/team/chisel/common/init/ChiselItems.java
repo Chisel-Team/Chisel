@@ -24,7 +24,7 @@ import java.util.Locale;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ChiselItems {
 
-    private static final Registrate REGISTRATE = Chisel.registrateBase();
+    private static final Registrate REGISTRATE = Chisel.registrate();
 
     public static final ItemEntry<ItemChisel> IRON_CHISEL = chisel(ChiselType.IRON)
             .recipe((ctx, prov) -> new ShapedRecipeBuilder(ctx.getEntry(), 1)

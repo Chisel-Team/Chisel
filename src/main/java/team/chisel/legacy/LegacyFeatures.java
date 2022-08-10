@@ -16,7 +16,7 @@ import java.util.Map;
 @SuppressWarnings({"CommentedOutCode", "unused", "deprecation"})
 public class LegacyFeatures {
 
-    private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrateLegacy());
+    private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(Chisel.registrate());
 
     // Hardcode to vanilla wood types
 
