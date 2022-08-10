@@ -117,7 +117,7 @@ public class Features {
     */
     //public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
     //        .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getSerializedName()), BlockCarvableCarpet::new)
-    //                .addBlock(new ResourceLocation(color.getSerializedName() + "_carpet")) 
+    //                .addBlock(new ResourceLocation(color.getSerializedName() + "_carpet"))
     //                //.setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Carpet")
     //                .model((prov, block) ->
     //                        prov.simpleBlock(block, prov.models()
