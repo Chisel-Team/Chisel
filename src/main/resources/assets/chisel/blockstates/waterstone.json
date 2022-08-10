@@ -1,0 +1,294 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "chisel:waterstone/cube_water",
+    "textures": {
+      "bot": "blocks/water_still"
+    }
+  },
+  "variants": {
+    "array": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/array"
+        }
+      }
+    ],
+    "braid": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/braid"
+        }
+      }
+    ],
+    "bricks-chaotic": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-chaotic"
+        }
+      }
+    ],
+    "bricks-cracked": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-cracked"
+        }
+      }
+    ],
+    "bricks-encased": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-encased"
+        }
+      }
+    ],
+    "bricks-small": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-small"
+        }
+      }
+    ],
+    "bricks-soft": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-soft"
+        }
+      }
+    ],
+    "bricks-solid": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-solid"
+        }
+      }
+    ],
+    "bricks-triple": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-triple"
+        }
+      }
+    ],
+    "chaotic-medium": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/chaotic-medium"
+        }
+      }
+    ],
+    "chaotic-small": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/chaotic-small"
+        }
+      }
+    ],
+    "circular": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/circular"
+        }
+      }
+    ],
+    "circularct": [
+      {
+        "model": "chisel:waterstone/cube_ctm_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/circular",
+          "connect_top": "chisel:blocks/fluid/circular-ctm"
+        }
+      }
+    ],
+    "cracked": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/cracked"
+        }
+      }
+    ],
+    "cuts": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/cuts"
+        }
+      }
+    ],
+    "dent": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/dent"
+        }
+      }
+    ],
+    "emboss": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/emboss"
+        }
+      }
+    ],
+    "french-1": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/french-1"
+        }
+      }
+    ],
+    "french-2": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/french-2"
+        }
+      }
+    ],
+    "indent": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/indent"
+        }
+      }
+    ],
+    "jellybean": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/jellybean"
+        }
+      }
+    ],
+    "largeornate": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/largeornate"
+        }
+      }
+    ],
+    "layers": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/layers"
+        }
+      }
+    ],
+    "marker": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/marker"
+        }
+      }
+    ],
+    "mosaic": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/mosaic"
+        }
+      }
+    ],
+    "panel": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/panel"
+        }
+      }
+    ],
+    "pillar": [
+      {
+        "model": "chisel:waterstone/column_water",
+        "textures": {
+          "side": "chisel:blocks/fluid/pillar-side",
+          "top": "chisel:blocks/fluid/pillar-top"
+        }
+      }
+    ],
+    "prism": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/prism"
+        }
+      }
+    ],
+    "ornate": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/ornate"
+        }
+      }
+    ],
+    "road": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/road"
+        }
+      }
+    ],
+    "raw": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/extra/raw"
+        }
+      }
+    ],
+    "tiles-large": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/tiles-large"
+        }
+      }
+    ],
+    "tiles-medium": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/tiles-medium"
+        }
+      }
+    ],
+    "tiles-small": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/tiles-small"
+        }
+      }
+    ],
+    "twisted": [
+      {
+        "model": "chisel:waterstone/column_water",
+        "textures": {
+          "side": "chisel:blocks/fluid/twisted-side",
+          "top": "chisel:blocks/fluid/twisted-top"
+        }
+      }
+    ],
+    "slanted": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/slanted"
+        }
+      }
+    ],
+    "weaver": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/weaver"
+        }
+      }
+    ],
+    "zag": [
+      {
+        "model": "chisel:waterstone/cube_pass_water",
+        "textures": {
+          "top": "chisel:blocks/fluid/zag"
+        }
+      }
+    ]
+  }
+}

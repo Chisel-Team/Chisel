@@ -1,0 +1,56 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "#pane"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        7
+      ],
+      "to": [
+        16,
+        16,
+        9
+      ],
+      "faces": {
+        "down": {
+          "texture": "#edge",
+          "uv": [
+            9,
+            16,
+            7,
+            0
+          ],
+          "rotation": 90
+        },
+        "up": {
+          "texture": "#edge",
+          "uv": [
+            7,
+            0,
+            9,
+            16
+          ],
+          "rotation": 90
+        },
+        "north": {
+          "texture": "#pane"
+        },
+        "south": {
+          "texture": "#pane"
+        },
+        "east": {
+          "texture": "#edge",
+          "cullface": "east"
+        },
+        "west": {
+          "texture": "#edge",
+          "cullface": "west"
+        }
+      }
+    }
+  ]
+}

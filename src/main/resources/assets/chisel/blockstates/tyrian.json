@@ -1,0 +1,127 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "elaborate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/elaborate"
+        }
+      }
+    ],
+    "blueplating": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/blueplating"
+        }
+      }
+    ],
+    "softplate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/softplate"
+        }
+      }
+    ],
+    "black": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/black"
+        }
+      }
+    ],
+    "black2": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/black2"
+        }
+      }
+    ],
+    "dent": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/dent"
+        }
+      }
+    ],
+    "plate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/plate"
+        }
+      }
+    ],
+    "opening": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/opening"
+        }
+      }
+    ],
+    "platform": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/platform"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/routes"
+        }
+      }
+    ],
+    "rust": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/rust"
+        }
+      }
+    ],
+    "plate-raw": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/plate-raw"
+        }
+      }
+    ],
+    "chaotic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/chaotic"
+        }
+      }
+    ],
+    "shining": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/shining"
+        }
+      }
+    ],
+    "tyrian": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/tyrian"
+        }
+      }
+    ],
+    "diagonal": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/diagonal"
+        }
+      }
+    ],
+    "platetiles": [
+      {
+        "textures": {
+          "all": "chisel:blocks/tyrian/platetiles"
+        }
+      }
+    ]
+  }
+}

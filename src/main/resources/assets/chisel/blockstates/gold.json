@@ -1,0 +1,142 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_bottom_top"
+  },
+  "variants": {
+    "terrain-gold-space": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-space-side",
+          "top": "chisel:blocks/gold/terrain-gold-space-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-space-bottom"
+        }
+      }
+    ],
+    "terrain-gold-coin-tails": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-coin-tails-side",
+          "top": "chisel:blocks/gold/terrain-gold-coin-tails-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-coin-tails-bottom"
+        }
+      }
+    ],
+    "terrain-gold-star": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-star-side",
+          "top": "chisel:blocks/gold/terrain-gold-star-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-star-bottom"
+        }
+      }
+    ],
+    "terrain-gold-largeingot": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-largeingot-side",
+          "top": "chisel:blocks/gold/terrain-gold-largeingot-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-largeingot-bottom"
+        }
+      }
+    ],
+    "terrain-gold-smallingot": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-smallingot-side",
+          "top": "chisel:blocks/gold/terrain-gold-smallingot-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-smallingot-bottom"
+        }
+      }
+    ],
+    "terrain-gold-crate-light": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-crate-light-side",
+          "top": "chisel:blocks/gold/terrain-gold-crate-light-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-crate-light-bottom"
+        }
+      }
+    ],
+    "terrain-gold-brick": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-brick-side",
+          "top": "chisel:blocks/gold/terrain-gold-brick-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-brick-bottom"
+        }
+      }
+    ],
+    "terrain-gold-cart": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-cart-side",
+          "top": "chisel:blocks/gold/terrain-gold-cart-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-cart-bottom"
+        }
+      }
+    ],
+    "terrain-gold-spaceblack": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-spaceblack-side",
+          "top": "chisel:blocks/gold/terrain-gold-spaceblack-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-spaceblack-bottom"
+        }
+      }
+    ],
+    "terrain-gold-rivets": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-rivets-side",
+          "top": "chisel:blocks/gold/terrain-gold-rivets-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-rivets-bottom"
+        }
+      }
+    ],
+    "terrain-gold-plates": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-plates-side",
+          "top": "chisel:blocks/gold/terrain-gold-plates-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-plates-bottom"
+        }
+      }
+    ],
+    "terrain-gold-simple": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-simple-side",
+          "top": "chisel:blocks/gold/terrain-gold-simple-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-simple-bottom"
+        }
+      }
+    ],
+    "terrain-gold-coin-heads": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-coin-heads-side",
+          "top": "chisel:blocks/gold/terrain-gold-coin-heads-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-coin-heads-bottom"
+        }
+      }
+    ],
+    "terrain-gold-crate-dark": [
+      {
+        "textures": {
+          "side": "chisel:blocks/gold/terrain-gold-crate-dark-side",
+          "top": "chisel:blocks/gold/terrain-gold-crate-dark-top",
+          "bottom": "chisel:blocks/gold/terrain-gold-crate-dark-bottom"
+        }
+      }
+    ],
+    "goldeye": [
+      {
+        "model": "cube_all",
+        "textures": {
+          "all": "chisel:blocks/gold/goldEye"
+        }
+      }
+    ]
+  }
+}

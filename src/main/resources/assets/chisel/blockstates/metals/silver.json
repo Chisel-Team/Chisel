@@ -1,0 +1,60 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "scaffold": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/silver/scaffold"
+        }
+      }
+    ],
+    "machine": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/silver/machine"
+        }
+      }
+    ],
+    "badgreggy": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/silver/badgreggy"
+        }
+      }
+    ],
+    "thermal": [
+      {
+        "model": "cube_bottom_top",
+        "textures": {
+          "top": "chisel:blocks/metals/silver/thermal-top",
+          "side": "chisel:blocks/metals/silver/thermal-side",
+          "bottom": "chisel:blocks/metals/silver/thermal-bottom"
+        }
+      }
+    ],
+    "crate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/silver/crate"
+        }
+      }
+    ],
+    "bolted": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/silver/bolted"
+        }
+      }
+    ],
+    "caution": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/silver/caution"
+        }
+      }
+    ]
+  }
+}

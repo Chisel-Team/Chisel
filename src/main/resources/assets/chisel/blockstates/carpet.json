@@ -1,0 +1,264 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "chisel:carpet_ctm"
+  },
+  "variants": {
+    "legacy_black": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/black",
+          "all_ctm": "chisel:blocks/wool/legacy/black-ctm"
+        }
+      }
+    ],
+    "legacy_blue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/blue",
+          "all_ctm": "chisel:blocks/wool/legacy/blue-ctm"
+        }
+      }
+    ],
+    "legacy_brown": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/brown",
+          "all_ctm": "chisel:blocks/wool/legacy/brown-ctm"
+        }
+      }
+    ],
+    "legacy_cyan": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/cyan",
+          "all_ctm": "chisel:blocks/wool/legacy/cyan-ctm"
+        }
+      }
+    ],
+    "legacy_gray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/gray",
+          "all_ctm": "chisel:blocks/wool/legacy/gray-ctm"
+        }
+      }
+    ],
+    "legacy_green": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/green",
+          "all_ctm": "chisel:blocks/wool/legacy/green-ctm"
+        }
+      }
+    ],
+    "legacy_lightblue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/lightblue",
+          "all_ctm": "chisel:blocks/wool/legacy/lightblue-ctm"
+        }
+      }
+    ],
+    "legacy_lightgray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/lightgray",
+          "all_ctm": "chisel:blocks/wool/legacy/lightgray-ctm"
+        }
+      }
+    ],
+    "legacy_lime": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/lime",
+          "all_ctm": "chisel:blocks/wool/legacy/lime-ctm"
+        }
+      }
+    ],
+    "legacy_magenta": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/magenta",
+          "all_ctm": "chisel:blocks/wool/legacy/magenta-ctm"
+        }
+      }
+    ],
+    "legacy_orange": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/orange",
+          "all_ctm": "chisel:blocks/wool/legacy/orange-ctm"
+        }
+      }
+    ],
+    "legacy_pink": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/pink",
+          "all_ctm": "chisel:blocks/wool/legacy/pink-ctm"
+        }
+      }
+    ],
+    "legacy_purple": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/purple",
+          "all_ctm": "chisel:blocks/wool/legacy/purple-ctm"
+        }
+      }
+    ],
+    "legacy_red": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/red",
+          "all_ctm": "chisel:blocks/wool/legacy/red-ctm"
+        }
+      }
+    ],
+    "legacy_white": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/white",
+          "all_ctm": "chisel:blocks/wool/legacy/white-ctm"
+        }
+      }
+    ],
+    "legacy_yellow": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/yellow",
+          "all_ctm": "chisel:blocks/wool/legacy/yellow-ctm"
+        }
+      }
+    ],
+    "llama_black": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/black",
+          "all_ctm": "chisel:blocks/wool/llama/black-ctm"
+        }
+      }
+    ],
+    "llama_blue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/blue",
+          "all_ctm": "chisel:blocks/wool/llama/blue-ctm"
+        }
+      }
+    ],
+    "llama_brown": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/brown",
+          "all_ctm": "chisel:blocks/wool/llama/brown-ctm"
+        }
+      }
+    ],
+    "llama_cyan": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/cyan",
+          "all_ctm": "chisel:blocks/wool/llama/cyan-ctm"
+        }
+      }
+    ],
+    "llama_gray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/gray",
+          "all_ctm": "chisel:blocks/wool/llama/gray-ctm"
+        }
+      }
+    ],
+    "llama_green": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/green",
+          "all_ctm": "chisel:blocks/wool/llama/green-ctm"
+        }
+      }
+    ],
+    "llama_lightblue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/lightblue",
+          "all_ctm": "chisel:blocks/wool/llama/lightblue-ctm"
+        }
+      }
+    ],
+    "llama_lightgray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/lightgray",
+          "all_ctm": "chisel:blocks/wool/llama/lightgray-ctm"
+        }
+      }
+    ],
+    "llama_lime": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/lime",
+          "all_ctm": "chisel:blocks/wool/llama/lime-ctm"
+        }
+      }
+    ],
+    "llama_magenta": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/magenta",
+          "all_ctm": "chisel:blocks/wool/llama/magenta-ctm"
+        }
+      }
+    ],
+    "llama_orange": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/orange",
+          "all_ctm": "chisel:blocks/wool/llama/orange-ctm"
+        }
+      }
+    ],
+    "llama_pink": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/pink",
+          "all_ctm": "chisel:blocks/wool/llama/pink-ctm"
+        }
+      }
+    ],
+    "llama_purple": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/purple",
+          "all_ctm": "chisel:blocks/wool/llama/purple-ctm"
+        }
+      }
+    ],
+    "llama_red": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/red",
+          "all_ctm": "chisel:blocks/wool/llama/red-ctm"
+        }
+      }
+    ],
+    "llama_white": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/white",
+          "all_ctm": "chisel:blocks/wool/llama/white-ctm"
+        }
+      }
+    ],
+    "llama_yellow": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/yellow",
+          "all_ctm": "chisel:blocks/wool/llama/yellow-ctm"
+        }
+      }
+    ]
+  }
+}

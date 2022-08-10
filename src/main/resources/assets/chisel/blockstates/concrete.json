@@ -1,0 +1,274 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "concrete": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/concrete"
+        }
+      }
+    ],
+    "magenta": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_magenta/raw"
+        }
+      }
+    ],
+    "pink": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_pink/raw"
+        }
+      }
+    ],
+    "asphaltcracks": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/asphaltCracks"
+        }
+      }
+    ],
+    "yellow": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_yellow/raw"
+        }
+      }
+    ],
+    "concretemoldycracked": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/concreteMoldyCracked"
+        }
+      }
+    ],
+    "cyan": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_cyan/raw"
+        }
+      }
+    ],
+    "weathered-doubleslab": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/weathered-doubleslab"
+        }
+      }
+    ],
+    "red": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_red/raw"
+        }
+      }
+    ],
+    "default": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/default"
+        }
+      }
+    ],
+    "gray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_gray/raw"
+        }
+      }
+    ],
+    "lightblue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_lightblue/raw"
+        }
+      }
+    ],
+    "white": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_white/raw"
+        }
+      }
+    ],
+    "weathered-block-half": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/weathered-block-half"
+        }
+      }
+    ],
+    "weathered-half": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/weathered-half"
+        }
+      }
+    ],
+    "block": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/block"
+        }
+      }
+    ],
+    "asphaltweathered": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/asphaltWeathered"
+        }
+      }
+    ],
+    "lightgray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_lightgray/raw"
+        }
+      }
+    ],
+    "asphaltcracksweathered": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/asphaltCracksWeathered"
+        }
+      }
+    ],
+    "green": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_green/raw"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/blocks"
+        }
+      }
+    ],
+    "lime": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_lime/raw"
+        }
+      }
+    ],
+    "black": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_black/raw"
+        }
+      }
+    ],
+    "concreteweathered": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/concreteWeathered"
+        }
+      }
+    ],
+    "asphalt": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/asphalt"
+        }
+      }
+    ],
+    "asphaltv2": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/asphaltV2"
+        }
+      }
+    ],
+    "brown": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_brown/raw"
+        }
+      }
+    ],
+    "weathered": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/weathered"
+        }
+      }
+    ],
+    "concretedmg": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/concreteDmg"
+        }
+      }
+    ],
+    "concretevines": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/concreteVines"
+        }
+      }
+    ],
+    "orange": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/raw"
+        }
+      }
+    ],
+    "weathered-blocks": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/weathered-blocks"
+        }
+      }
+    ],
+    "concretecracked": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/concreteCracked"
+        }
+      }
+    ],
+    "doubleslab": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/doubleslab"
+        }
+      }
+    ],
+    "blue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_blue/raw"
+        }
+      }
+    ],
+    "concretemoldy": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/concreteMoldy"
+        }
+      }
+    ],
+    "weathered-block": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete/weathered-block"
+        }
+      }
+    ],
+    "purple": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_purple/raw"
+        }
+      }
+    ]
+  }
+}

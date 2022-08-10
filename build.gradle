@@ -1,240 +1,123 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        maven {
-            name = "forge"
-            url = "https://maven.minecraftforge.net"
-        }
-        maven { url = 'https://maven.parchmentmc.org' }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.parchmentmc:librarian:1.+'
-        classpath 'org.ajoberstar:gradle-git:0.10.1'
-    }
-}
 plugins {
-    id 'maven-publish'
-    id 'eclipse'
+    id 'net.minecraftforge.gradle' version "${forge_gradle}"
     id 'io.freefair.lombok' version '4.1.5'
-    id 'com.github.johnrengelman.shadow' version '7.1.0'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
-import org.ajoberstar.grgit.Grgit
 
-// We use these to mess with the eclipse .classpath file
-import org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry
-import org.gradle.plugins.ide.eclipse.model.ProjectDependency
+group = 'team.chisel'
+version = "${chisel_version}"
 
-def repo = Grgit.open(project.file('.'))
-project.ext.gitHash = repo.log().find().abbreviatedId
-
-boolean dev = System.getenv('RELEASE') == null || System.getenv('RELEASE').equals('false');
-
-ext.buildnumber = 0
-project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
-
-version = "${minecraft_version}-${mod_version}.${buildnumber}"
-
-allprojects {
-
-    apply plugin: 'maven-publish'
-
-    repositories {
-        maven { // CTM
-            url "https://maven.tterrag.com/"
-        }
-        maven { // JEI
-            url "https://dvs1.progwml6.com/files/maven"
-        }
-         maven { // WTHIT
-             url "https://maven.bai.lol"
-        }
-    }
-    
-    configurations {
-        shade
-    }
-
-    publishing {    
-        repositories {
-            if (project.hasProperty('mavendir')) {
-                maven { url mavendir }
-            }
-        }
-    }
-}
-    
-String getChangelogText() {
-    def changelogFile = file('changelog.txt')
-    String str = ''
-    int lineCount = 0
-    boolean done = false
-    changelogFile.eachLine {
-        if (done || it == null) {
-            return
-        }
-        if (it.size() > 1) {
-            def temp = it
-            if (lineCount == 0) {
-                temp = "Chisel ${version}"
-                temp = "<h2>$temp</h2>"
-            } else if (it.startsWith('-')) {
-                temp = "&nbsp;&nbsp;&nbsp;$temp"
-                temp = temp.replaceAll("(\\S+\\/\\S+)#([0-9]+)\\b", "<a href=\"https://github.com/\$1/issues/\$2\">\$0</a>");
-                temp = temp.replaceAll("#([0-9]+)\\b(?!<\\/a>)", "<a href=\"https://github.com/$github_project/issues/\$1\">\$0</a>");
-            } else {
-                temp = "<h4>$temp</h4>"
-            }
-            str += "$temp<br/>"
-            lineCount++
-            return
-        } else {
-            done = true
-        }
-    }
-    return str
+java {
+    archivesBaseName = 'Chisel'
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
 
-subprojects {
+minecraft {
+    mappings channel: 'official', version: "${minecraft_version}"
 
-    apply plugin: 'java'
-    apply plugin: 'maven-publish'
-    apply plugin: 'net.minecraftforge.gradle'
-    apply plugin: 'org.parchmentmc.librarian.forgegradle'
-    apply plugin: 'eclipse'
-    apply plugin: 'io.freefair.lombok'
-    apply plugin: 'com.matthewprenger.cursegradle'
-    apply plugin: 'com.github.johnrengelman.shadow'
-    apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
-    group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-    archivesBaseName = (dev ? 'Chisel_DEV' : 'Chisel') + (project.name.equals('base') ? '' : '-' + project.name)
-    version = rootProject.version
-        
-    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'chisel'
 
-    sourceSets.main.resources {
-        srcDir 'src/generated/resources'
-    }
-    
-    minecraft {
-        mappings channel: 'parchment', version: '2022.03.13-1.18.2'
-    
-        accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-    }
-
-    dependencies {
-        minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
-        implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
-        
-        compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
-        runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
-    
-        compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-        runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
-        
-        def registrate = "com.tterrag.registrate:Registrate:MC${minecraft_version}-${registrate_version}"
-        implementation fg.deobf(registrate)
-        shade registrate
-    
-    //  deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
-    }
-    
-    eclipse {
-      classpath {
-        containers 'org.eclipse.buildship.core.gradleclasspathcontainer'
-        file {
-          whenMerged {
-            entries.add(new ProjectDependency("/ConnectedTexturesMod"))
-          }
-        }
-      }
-    }
-    
-    jar {
-        classifier = 'slim'
-    
-        manifest {
-            attributes(["Specification-Title": "chisel",
-                        "Specification-Vendor": "tterrag",
-                        "Specification-Version": "1.0",
-                        "Implementation-Title": project.name,
-                        "Implementation-Version": "${version}",
-                        "Implementation-Vendor" :"tterrag",
-                        "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
-        }
-    }
-    
-    shadowJar {
-        configurations = [project.configurations.shade]
-        relocate 'com.tterrag.registrate', 'team.chisel.repack.registrate'
-        classifier = ''
-    }
-    
-    reobf {
-        shadowJar {}
-    }
-    
-    build.dependsOn shadowJar
-    build.dependsOn reobfShadowJar
-    
-    lombok {
-        version = "1.18.20"
-    }
-    
-    // Add external annotations
-    /*eclipse.classpath.file {
-        withXml {
-            def node = it.asNode()
-            node.get('classpathentry').each {
-                // Allow external annotations on Minecraft/Forge and JRE
-                if (it.attribute('path').contains('forgeSrc') || it.attribute('path').contains('JRE_CONTAINER')) {
-                    it.appendNode('attributes').appendNode('attribute', [name: 'annotationpath', value: '/Chisel/externalannotations/'])
+            mods {
+                chisel {
+                    source sourceSets.main
                 }
             }
         }
-    }*/
 
-    publishing {
-        tasks.publish.dependsOn 'build'
-        publications {
-            mavenJava(MavenPublication) {
-                artifact jar
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'chisel'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
             }
         }
-    }
-    
-    tasks.curseforge.enabled = !dev && project.hasProperty('curseforge_key') && project.hasProperty('projectId')
-        
-    curseforge {
-        apiKey = project.findProperty('curseforge_key')
-    
-        project {
-            id = project.findProperty('projectId') ?: 'none'
-            changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
-            changelogType = 'html'
-            releaseType = project.curse_type
-            addGameVersion project.minecraft_version
-            mainArtifact(shadowJar) {
-                displayName = "Chisel - ${version}"
+
+        gameTestServer {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'chisel'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
             }
-            relations {
-                requiredLibrary 'ctm'
+        }
+
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'chisel', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
             }
         }
     }
 }
 
-// Copy all the subproject jars to build/libs
-task build(type: Copy, dependsOn: subprojects.tasks['build']) {
-    from subprojects.collect { it.tasks.withType(Jar) }
-    into "$buildDir/libs"
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven { // CTM
+        url "https://maven.tterrag.com/"
+    }
+    maven { // JEI
+        url "https://dvs1.progwml6.com/files/maven"
+    }
+    maven { // WTHIT
+        url "https://maven.bai.lol"
+    }
+    mavenCentral()
 }
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    implementation fg.deobf("team.chisel.ctm:CTM:1.18.2-${ctm_version}")
+
+    compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
+    runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
+
+    compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
+
+    compileOnly fg.deobf("com.tterrag.registrate:Registrate:MC${minecraft_version}-${registrate_version}")
+    runtimeOnly fg.deobf("com.tterrag.registrate:Registrate:MC${minecraft_version}-${registrate_version}")
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "chisel",
+                "Specification-Vendor"    : "tterrag",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "tterrag",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+lombok {
+    version = "1.18.20"
+}
+
+jar.finalizedBy('reobfJar')

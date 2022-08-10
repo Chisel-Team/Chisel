@@ -1,0 +1,150 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_bottom_top"
+  },
+  "variants": {
+    "terrain-iron-gears": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-gears-side",
+          "end": "chisel:blocks/iron/terrain-iron-gears-top"
+        }
+      }
+    ],
+    "terrain-iron-space": [
+      {
+        "model": "cube_all",
+        "textures": {
+          "all": "chisel:blocks/iron/terrain-iron-space"
+        }
+      }
+    ],
+    "terrain-iron-coin-tails": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-coin-tails-side",
+          "top": "chisel:blocks/iron/terrain-iron-coin-tails-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-coin-tails-bottom"
+        }
+      }
+    ],
+    "terrain-iron-moon": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-moon-side",
+          "top": "chisel:blocks/iron/terrain-iron-moon-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-moon-bottom"
+        }
+      }
+    ],
+    "terrain-iron-largeingot": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-largeingot-side",
+          "top": "chisel:blocks/iron/terrain-iron-largeingot-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-largeingot-bottom"
+        }
+      }
+    ],
+    "terrain-iron-smallingot": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-smallingot-side",
+          "top": "chisel:blocks/iron/terrain-iron-smallingot-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-smallingot-bottom"
+        }
+      }
+    ],
+    "terrain-iron-crate-light": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-crate-light-side",
+          "top": "chisel:blocks/iron/terrain-iron-crate-light-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-crate-light-bottom"
+        }
+      }
+    ],
+    "terrain-iron-brick": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-brick-side",
+          "top": "chisel:blocks/iron/terrain-iron-brick-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-brick-bottom"
+        }
+      }
+    ],
+    "terrain-iron-cart": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-cart-side",
+          "top": "chisel:blocks/iron/terrain-iron-cart-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-cart-bottom"
+        }
+      }
+    ],
+    "terrain-iron-spaceblack": [
+      {
+        "model": "cube_all",
+        "textures": {
+          "all": "chisel:blocks/iron/terrain-iron-spaceblack"
+        }
+      }
+    ],
+    "terrain-iron-rivets": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-rivets-side",
+          "top": "chisel:blocks/iron/terrain-iron-rivets-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-rivets-bottom"
+        }
+      }
+    ],
+    "terrain-iron-plates": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-plates-side",
+          "top": "chisel:blocks/iron/terrain-iron-plates-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-plates-bottom"
+        }
+      }
+    ],
+    "terrain-iron-simple": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-simple-side",
+          "top": "chisel:blocks/iron/terrain-iron-simple-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-simple-bottom"
+        }
+      }
+    ],
+    "terrain-iron-coin-heads": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-coin-heads-side",
+          "top": "chisel:blocks/iron/terrain-iron-coin-heads-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-coin-heads-bottom"
+        }
+      }
+    ],
+    "terrain-iron-crate-dark": [
+      {
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-crate-dark-side",
+          "top": "chisel:blocks/iron/terrain-iron-crate-dark-top",
+          "bottom": "chisel:blocks/iron/terrain-iron-crate-dark-bottom"
+        }
+      }
+    ],
+    "terrain-iron-vents": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/iron/terrain-iron-vents-side",
+          "end": "chisel:blocks/iron/terrain-iron-vents-top"
+        }
+      }
+    ]
+  }
+}

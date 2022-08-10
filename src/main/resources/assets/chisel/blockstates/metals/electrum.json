@@ -1,0 +1,60 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "scaffold": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/electrum/scaffold"
+        }
+      }
+    ],
+    "machine": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/electrum/machine"
+        }
+      }
+    ],
+    "badgreggy": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/electrum/badgreggy"
+        }
+      }
+    ],
+    "thermal": [
+      {
+        "model": "cube_bottom_top",
+        "textures": {
+          "top": "chisel:blocks/metals/electrum/thermal-top",
+          "side": "chisel:blocks/metals/electrum/thermal-side",
+          "bottom": "chisel:blocks/metals/electrum/thermal-bottom"
+        }
+      }
+    ],
+    "crate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/electrum/crate"
+        }
+      }
+    ],
+    "bolted": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/electrum/bolted"
+        }
+      }
+    ],
+    "caution": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/electrum/caution"
+        }
+      }
+    ]
+  }
+}

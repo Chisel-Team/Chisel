@@ -1,0 +1,133 @@
+{
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "#pane"
+  },
+  "elements": [
+    {
+      "from": [
+        7,
+        0,
+        0
+      ],
+      "to": [
+        9,
+        16,
+        9
+      ],
+      "faces": {
+        "down": {
+          "texture": "#edge",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#edge",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#edge",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#edge"
+        },
+        "west": {
+          "texture": "#pane",
+          "tintindex": 0
+        },
+        "east": {
+          "texture": "#pane",
+          "tintindex": 0
+        }
+      }
+    }
+  ],
+  "ctm_version": 1,
+  "ctm_overrides": {
+    "0": {
+      "type": "ctm",
+      "layer": "TRANSLUCENT",
+      "textures": [
+        "#pane_ct"
+      ],
+      "extra": {
+        "connect_inside": true,
+        "use_actual_state": true,
+        "connect_to": {
+          "NORTH": [
+            {
+              "block": "chisel:glasspanedyedblack",
+              "predicate": [
+                {
+                  "east": true
+                }
+              ]
+            },
+            {
+              "block": "chisel:glasspanedyedblack",
+              "predicate": [
+                {
+                  "west": true
+                }
+              ]
+            }
+          ],
+          "SOUTH": [
+            {
+              "block": "chisel:glasspanedyedblack",
+              "predicate": [
+                {
+                  "east": true
+                }
+              ]
+            },
+            {
+              "block": "chisel:glasspanedyedblack",
+              "predicate": [
+                {
+                  "west": true
+                }
+              ]
+            }
+          ],
+          "EAST": [
+            {
+              "block": "chisel:glasspanedyedblack",
+              "predicate": [
+                {
+                  "north": true
+                }
+              ]
+            },
+            {
+              "block": "chisel:glasspanedyedblack",
+              "predicate": [
+                {
+                  "south": true
+                }
+              ]
+            }
+          ],
+          "WEST": [
+            {
+              "block": "chisel:glasspanedyedblack",
+              "predicate": [
+                {
+                  "north": true
+                }
+              ]
+            },
+            {
+              "block": "chisel:glasspanedyedblack",
+              "predicate": [
+                {
+                  "south": true
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

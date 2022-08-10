@@ -1,0 +1,101 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "terrain-diamond-bismuth": [
+      {
+        "textures": {
+          "all": "chisel:blocks/diamond/terrain-diamond-bismuth"
+        }
+      }
+    ],
+    "terrain-diamond-spaceblack": [
+      {
+        "textures": {
+          "all": "chisel:blocks/diamond/terrain-diamond-spaceblack"
+        }
+      }
+    ],
+    "terrain-diamond-zelda": [
+      {
+        "textures": {
+          "all": "chisel:blocks/diamond/terrain-diamond-zelda"
+        }
+      }
+    ],
+    "terrain-diamond-cells": [
+      {
+        "textures": {
+          "all": "chisel:blocks/diamond/terrain-diamond-cells"
+        }
+      }
+    ],
+    "terrain-diamond-space": [
+      {
+        "textures": {
+          "all": "chisel:blocks/diamond/terrain-diamond-space"
+        }
+      }
+    ],
+    "terrain-diamond-simple": [
+      {
+        "model": "cube_bottom_top",
+        "textures": {
+          "side": "chisel:blocks/diamond/terrain-diamond-simple-side",
+          "top": "chisel:blocks/diamond/terrain-diamond-simple-top",
+          "bottom": "chisel:blocks/diamond/terrain-diamond-simple-bottom"
+        }
+      }
+    ],
+    "terrain-diamond-crushed": [
+      {
+        "textures": {
+          "all": "chisel:blocks/diamond/terrain-diamond-crushed"
+        }
+      }
+    ],
+    "terrain-diamond-four": [
+      {
+        "textures": {
+          "all": "chisel:blocks/diamond/terrain-diamond-four"
+        }
+      }
+    ],
+    "terrain-diamond-fourornate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/diamond/terrain-diamond-fourornate"
+        }
+      }
+    ],
+    "terrain-diamond-ornatelayer": [
+      {
+        "textures": {
+          "all": "chisel:blocks/diamond/terrain-diamond-ornatelayer"
+        }
+      }
+    ],
+    "terrain-diamond-embossed": [
+      {
+        "model": "cube_bottom_top",
+        "textures": {
+          "side": "chisel:blocks/diamond/terrain-diamond-embossed-side",
+          "top": "chisel:blocks/diamond/terrain-diamond-embossed-top",
+          "bottom": "chisel:blocks/diamond/terrain-diamond-embossed-bottom"
+        }
+      }
+    ],
+    "terrain-diamond-gem": [
+      {
+        "model": "cube_bottom_top",
+        "textures": {
+          "side": "chisel:blocks/diamond/terrain-diamond-gem-side",
+          "top": "chisel:blocks/diamond/terrain-diamond-gem-top",
+          "bottom": "chisel:blocks/diamond/terrain-diamond-gem-bottom"
+        }
+      }
+    ]
+  }
+}

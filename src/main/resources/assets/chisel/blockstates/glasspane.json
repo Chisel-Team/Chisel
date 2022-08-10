@@ -1,0 +1,64 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "chinese": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glasspane/chinese"
+        }
+      }
+    ],
+    "chinese2": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glasspane/chinese2"
+        }
+      }
+    ],
+    "japanese": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glasspane/japanese"
+        }
+      }
+    ],
+    "terrain-glassnoborder": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glasspane/terrain-glassnoborder"
+        }
+      }
+    ],
+    "japanese2": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glasspane/japanese2"
+        }
+      }
+    ],
+    "terrain-glassstreak": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glasspane/terrain-glassstreak"
+        }
+      }
+    ],
+    "terrain-glass-screen": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glasspane/terrain-glass-screen"
+        }
+      }
+    ],
+    "terrain-glassbubble": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glasspane/terrain-glassbubble"
+        }
+      }
+    ]
+  }
+}

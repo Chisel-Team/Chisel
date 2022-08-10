@@ -1,0 +1,264 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "chisel:cube_ctm"
+  },
+  "variants": {
+    "legacy_black": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/black",
+          "connected_tex": "chisel:blocks/wool/legacy/black-ctm"
+        }
+      }
+    ],
+    "legacy_blue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/blue",
+          "connected_tex": "chisel:blocks/wool/legacy/blue-ctm"
+        }
+      }
+    ],
+    "legacy_brown": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/brown",
+          "connected_tex": "chisel:blocks/wool/legacy/brown-ctm"
+        }
+      }
+    ],
+    "legacy_cyan": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/cyan",
+          "connected_tex": "chisel:blocks/wool/legacy/cyan-ctm"
+        }
+      }
+    ],
+    "legacy_gray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/gray",
+          "connected_tex": "chisel:blocks/wool/legacy/gray-ctm"
+        }
+      }
+    ],
+    "legacy_green": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/green",
+          "connected_tex": "chisel:blocks/wool/legacy/green-ctm"
+        }
+      }
+    ],
+    "legacy_lightblue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/lightblue",
+          "connected_tex": "chisel:blocks/wool/legacy/lightblue-ctm"
+        }
+      }
+    ],
+    "legacy_lightgray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/lightgray",
+          "connected_tex": "chisel:blocks/wool/legacy/lightgray-ctm"
+        }
+      }
+    ],
+    "legacy_lime": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/lime",
+          "connected_tex": "chisel:blocks/wool/legacy/lime-ctm"
+        }
+      }
+    ],
+    "legacy_magenta": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/magenta",
+          "connected_tex": "chisel:blocks/wool/legacy/magenta-ctm"
+        }
+      }
+    ],
+    "legacy_orange": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/orange",
+          "connected_tex": "chisel:blocks/wool/legacy/orange-ctm"
+        }
+      }
+    ],
+    "legacy_pink": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/pink",
+          "connected_tex": "chisel:blocks/wool/legacy/pink-ctm"
+        }
+      }
+    ],
+    "legacy_purple": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/purple",
+          "connected_tex": "chisel:blocks/wool/legacy/purple-ctm"
+        }
+      }
+    ],
+    "legacy_red": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/red",
+          "connected_tex": "chisel:blocks/wool/legacy/red-ctm"
+        }
+      }
+    ],
+    "legacy_white": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/white",
+          "connected_tex": "chisel:blocks/wool/legacy/white-ctm"
+        }
+      }
+    ],
+    "legacy_yellow": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/legacy/yellow",
+          "connected_tex": "chisel:blocks/wool/legacy/yellow-ctm"
+        }
+      }
+    ],
+    "llama_black": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/black",
+          "connected_tex": "chisel:blocks/wool/llama/black-ctm"
+        }
+      }
+    ],
+    "llama_blue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/blue",
+          "connected_tex": "chisel:blocks/wool/llama/blue-ctm"
+        }
+      }
+    ],
+    "llama_brown": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/brown",
+          "connected_tex": "chisel:blocks/wool/llama/brown-ctm"
+        }
+      }
+    ],
+    "llama_cyan": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/cyan",
+          "connected_tex": "chisel:blocks/wool/llama/cyan-ctm"
+        }
+      }
+    ],
+    "llama_gray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/gray",
+          "connected_tex": "chisel:blocks/wool/llama/gray-ctm"
+        }
+      }
+    ],
+    "llama_green": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/green",
+          "connected_tex": "chisel:blocks/wool/llama/green-ctm"
+        }
+      }
+    ],
+    "llama_lightblue": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/lightblue",
+          "connected_tex": "chisel:blocks/wool/llama/lightblue-ctm"
+        }
+      }
+    ],
+    "llama_lightgray": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/lightgray",
+          "connected_tex": "chisel:blocks/wool/llama/lightgray-ctm"
+        }
+      }
+    ],
+    "llama_lime": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/lime",
+          "connected_tex": "chisel:blocks/wool/llama/lime-ctm"
+        }
+      }
+    ],
+    "llama_magenta": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/magenta",
+          "connected_tex": "chisel:blocks/wool/llama/magenta-ctm"
+        }
+      }
+    ],
+    "llama_orange": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/orange",
+          "connected_tex": "chisel:blocks/wool/llama/orange-ctm"
+        }
+      }
+    ],
+    "llama_pink": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/pink",
+          "connected_tex": "chisel:blocks/wool/llama/pink-ctm"
+        }
+      }
+    ],
+    "llama_purple": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/purple",
+          "connected_tex": "chisel:blocks/wool/llama/purple-ctm"
+        }
+      }
+    ],
+    "llama_red": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/red",
+          "connected_tex": "chisel:blocks/wool/llama/red-ctm"
+        }
+      }
+    ],
+    "llama_white": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/white",
+          "connected_tex": "chisel:blocks/wool/llama/white-ctm"
+        }
+      }
+    ],
+    "llama_yellow": [
+      {
+        "textures": {
+          "all": "chisel:blocks/wool/llama/yellow",
+          "connected_tex": "chisel:blocks/wool/llama/yellow-ctm"
+        }
+      }
+    ]
+  }
+}
