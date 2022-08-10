@@ -21,6 +21,26 @@ minecraft {
             }
         }
 
+        client {
+            taskName 'onlyChiselClient'
+
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'CORE,REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+
+                ctm {
+                    sources sourceSets.main // Has to be manually changed to work right...can't figure out a better way
+                }
+            }
+        }
+
+
         server {
             taskName 'all_server'
         
