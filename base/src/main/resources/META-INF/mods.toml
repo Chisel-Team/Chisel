@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[28,)"
+loaderVersion="[40,)"
 issueTrackerURL="https://github.com/Chisel-Team/Chisel/issues/"
 license="GPLv2"
 
@@ -14,3 +14,26 @@ authors="tterrag, Drullkus, minecreatr, Tovlyn"
 description='''
 Adds in tons of fancy blocks for decoration, crafted using the Chisel.
 '''
+
+[[dependencies.chisel]]
+modId = "forge"
+mandatory = true
+versionRange = "[40,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.chisel]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18.2]"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.chisel]]
+modId = "ctm"
+mandatory = true
+versionRange = "[1.18.2-1.1.4+4,)"
+ordering = "NONE"
+side = "BOTH"
+
+
