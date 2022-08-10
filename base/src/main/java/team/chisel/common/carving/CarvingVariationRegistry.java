@@ -1,32 +1,29 @@
 package team.chisel.common.carving;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import com.google.common.collect.ImmutableList;
-
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IVariationRegistry;
 import team.chisel.common.util.ItemSorter;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
+@SuppressWarnings("unused")
 public class CarvingVariationRegistry implements IVariationRegistry {
-    
+
     private final Map<ResourceLocation, ICarvingGroup> groups = new HashMap<>();
-     
+
     public CarvingVariationRegistry() {
-        
+
     }
-    
+
     @Override
     public Optional<ICarvingGroup> getGroup(ResourceLocation id) {
         return Optional.ofNullable(groups.get(id));
@@ -49,17 +46,17 @@ public class CarvingVariationRegistry implements IVariationRegistry {
     @Override
     public Optional<ICarvingVariation> getVariation(Block block) {
         return getGroup(block).map(g -> new ICarvingVariation() {
-            
+
             @Override
             public Item getItem() {
                 return block.asItem();
             }
-            
+
             @Override
             public ICarvingGroup getGroup() {
                 return g;
             }
-            
+
             @Override
             public Block getBlock() {
                 return block;
@@ -70,17 +67,17 @@ public class CarvingVariationRegistry implements IVariationRegistry {
     @Override
     public Optional<ICarvingVariation> getVariation(Item item) {
         return getGroup(item).map(g -> new ICarvingVariation() {
-            
+
             @Override
             public Item getItem() {
                 return item;
             }
-            
+
             @Override
             public ICarvingGroup getGroup() {
                 return g;
             }
-            
+
             @Override
             public Block getBlock() {
                 return Block.byItem(item);
@@ -100,7 +97,7 @@ public class CarvingVariationRegistry implements IVariationRegistry {
         ICarvingGroup group = groups.get(groupId);
         return group == null ? Collections.emptyList() : getItemsForChiseling(group);
     }
-    
+
     private List<ItemStack> getItemsForChiseling(ICarvingGroup group) {
         return group.getItemTag().stream()
                 .map(ItemStack::new)
@@ -123,10 +120,29 @@ public class CarvingVariationRegistry implements IVariationRegistry {
         return groups.remove(groupName);
     }
 
-//    @Override
-//    public List<ResourceLocation> getSortedGroups() {
-//        return groups.keySet().stream()
-//                .sorted(Comparator.comparing(ResourceLocation::getNamespace).thenComparing(ResourceLocation::getPath))
-//                .collect(Collectors.toList());
-//    }
+    @Override
+    public @Nullable ICarvingVariation removeVariation(BlockState state) {
+        return null;
+    }
+
+    @Override
+    public @Nullable ICarvingVariation removeVariation(BlockState state, ResourceLocation group) {
+        return null;
+    }
+
+    @Override
+    public @Nullable ICarvingVariation removeVariation(ItemStack stack) {
+        return null;
+    }
+
+    @Override
+    public @Nullable ICarvingVariation removeVariation(ItemStack stack, ResourceLocation group) {
+        return null;
+    }
+
+    public List<ResourceLocation> getSortedGroups() {
+        return groups.keySet().stream()
+                .sorted(Comparator.comparing(ResourceLocation::getNamespace).thenComparing(ResourceLocation::getPath))
+                .collect(Collectors.toList());
+    }
 }

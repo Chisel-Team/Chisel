@@ -1,9 +1,9 @@
 package team.chisel.common.inventory;
 
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.world.inventory.Slot;
+
+import javax.annotation.Nonnull;
 
 public class SlotChiselInput extends Slot {
 

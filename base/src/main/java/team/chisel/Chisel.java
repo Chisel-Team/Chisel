@@ -1,17 +1,9 @@
 package team.chisel;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.google.common.collect.ImmutableMap;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -29,6 +21,8 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import team.chisel.api.ChiselAPIProps;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.data.VariantTemplates;
@@ -41,25 +35,21 @@ import team.chisel.common.block.MessageAutochiselFX;
 import team.chisel.common.block.MessageUpdateAutochiselSource;
 import team.chisel.common.carving.CarvingVariationRegistry;
 import team.chisel.common.carving.ChiselModeRegistry;
-import team.chisel.common.init.ChiselItems;
-import team.chisel.common.init.ChiselSounds;
-import team.chisel.common.init.ChiselTabs;
-import team.chisel.common.init.ChiselTileEntities;
-import team.chisel.common.init.ChiselWorldGen;
+import team.chisel.common.init.*;
 import team.chisel.common.integration.imc.IMCHandler;
 import team.chisel.common.item.ChiselController;
 import team.chisel.common.item.ChiselMode;
 import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.PerChunkData.MessageChunkData;
 
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@SuppressWarnings({"ResultOfMethodCallIgnored", "unused", "CommentedOutCode"})
 @Mod(Reference.MOD_ID)
 public class Chisel implements Reference {
-
     public static final Logger logger = LogManager.getLogger(MOD_NAME);
-
-//    @SidedProxy(clientSide = CLIENT_PROXY, serverSide = COMMON_PROXY, modId = MOD_ID)
-//    public static CommonProxy proxy;
-
     public static final boolean debug = false;// StringUtils.isEmpty(System.getProperty("chisel.debug"));
 
     public static final SimpleChannel network = NetworkRegistry.newSimpleChannel(
@@ -68,7 +58,14 @@ public class Chisel implements Reference {
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals
     );
-    
+
+    private static final NonNullSupplier<Registrate> REGISTRATE = NonNullSupplier.lazy(() -> {
+        Registrate ret = Registrate.create(Reference.MOD_ID).creativeModeTab(() -> ChiselTabs.base);
+        ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.base, "Chisel"));
+        return ret;
+    });
+    private static Map<String, Block> remaps = ImmutableMap.of();
+
     static {
         network.registerMessage(0, PacketChiselButton.class, PacketChiselButton::encode, PacketChiselButton::decode, PacketChiselButton::handle);
         network.registerMessage(1, PacketHitechSettings.class, PacketHitechSettings::encode, PacketHitechSettings::decode, PacketHitechSettings::handle);
@@ -78,14 +75,6 @@ public class Chisel implements Reference {
         network.registerMessage(5, MessageAutochiselFX.class, MessageAutochiselFX::encode, MessageAutochiselFX::decode, MessageAutochiselFX::handle);
     }
 
-    private static Map<String, Block> remaps = ImmutableMap.of();
-
-    private static final NonNullSupplier<Registrate> REGISTRATE = NonNullSupplier.lazy(() -> {
-        Registrate ret = Registrate.create(Reference.MOD_ID).creativeModeTab(() -> ChiselTabs.base);
-        ret.addDataGenerator(ProviderType.LANG, prov -> prov.add(ChiselTabs.base, "Chisel"));
-        return ret;
-    });
-    
     public Chisel() {
         CarvingUtils.chisel = new CarvingVariationRegistry();
         CarvingUtils.modes = ChiselModeRegistry.INSTANCE;
@@ -93,21 +82,21 @@ public class Chisel implements Reference {
         ChiselMode.values();
         PreviewType.values();
         ChiselAPIProps.MOD_ID = MOD_ID;
-        
+
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.addListener(this::setup);
         modBus.addListener(this::imcEnqueue);
         modBus.addListener(this::imcProcess);
         MinecraftForge.EVENT_BUS.addGenericListener(Block.class, this::onMissingBlock);
         MinecraftForge.EVENT_BUS.addGenericListener(Item.class, this::onMissingItem);
-        
+
         ChiselSounds.init();
         ChiselItems.init();
         ChiselTileEntities.init();
-        
+
         Features.init();
         ChiselLangKeys.init(registrate());
-        
+
         ChiselWorldGen.FEATURES.register(modBus);
         ChiselWorldGen.PLACEMENTS.register(modBus);
 
@@ -134,17 +123,49 @@ public class Chisel implements Reference {
         return REGISTRATE.get();
     }
 
+    private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output) {
+        CompoundTag message = new CompoundTag();
+
+        message.putInt("energy", energy);
+        message.put("input", new CompoundTag());
+        message.put("output", new CompoundTag());
+
+        input.save(message.getCompound("input"));
+        output.save(message.getCompound("output"));
+
+        InterModComms.sendTo("thermalexpansion", "addcompactorpressrecipe", () -> message);
+    }
+
+    /**
+     * Sends a debug message, basically a wrapper for the logger that only prints when debugging is enabled
+     */
+    public static void debug(String message) {
+        if (debug) {
+            logger.info(message);
+        }
+    }
+
+    public static void debug(float[] array) {
+        if (debug) {
+            StringBuilder message = new StringBuilder("[");
+            for (float obj : array) {
+                message.append(obj).append(" ");
+            }
+            debug(message + "]");
+        }
+    }
+
     private void setup(FMLCommonSetupEvent event) {
-        
-//        File configFile = event.getSuggestedConfigurationFile();
-//        Configurations.configExists = configFile.exists();
-//        Configurations.config = new Configuration(configFile);
-//        Configurations.config.load();
-//        Configurations.refreshConfig();
+
+        //File configFile = event.getSuggestedConfigurationFile();
+        //Configurations.configExists = configFile.exists();
+        //Configurations.config = new Configuration(configFile);
+        //Configurations.config.load();
+        //Configurations.refreshConfig();
 
 // TODO
 //        MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(ChiselController.class); 
+        MinecraftForge.EVENT_BUS.register(ChiselController.class);
         MinecraftForge.EVENT_BUS.addListener(ChiselWorldGen::registerWorldGen);
 //        GameRegistry.registerWorldGenerator(GenerationHandler.INSTANCE, 2);
 //        MinecraftForge.EVENT_BUS.register(GenerationHandler.INSTANCE);
@@ -154,12 +175,12 @@ public class Chisel implements Reference {
 
     private void imcEnqueue(InterModEnqueueEvent event) {
         // BlockRegistry.init(event);
-        
+
         // If we add a future vanilla block, it should be added here once the vanilla version exists
         remaps = ImmutableMap.<String, Block>builder()
-        		.put("basalt/raw", Features.DIABASE.get(VariantTemplates.RAW.getName()).get())
-        		.putAll(VariantTemplates.ROCK.stream()
-        				.collect(Collectors.toMap(v -> "basalt/" + v.getName(), v -> Features.DIABASE.get(v.getName()).get())))
+                .put("basalt/raw", Features.DIABASE.get(VariantTemplates.RAW.getName()).get())
+                .putAll(VariantTemplates.ROCK.stream()
+                        .collect(Collectors.toMap(v -> "basalt/" + v.getName(), v -> Features.DIABASE.get(v.getName()).get())))
                 .build();
 
         // TODO 1.14 compat
@@ -168,7 +189,7 @@ public class Chisel implements Reference {
 
         /*
 //      Example of IMC
-                
+
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION.toString(), "marble|minecraft:dirt|0");
         CompoundTag testtag = new CompoundTag();
         testtag.setString("group", "marble");
@@ -188,7 +209,7 @@ public class Chisel implements Reference {
         testtag.setTag("stack", new ItemStack(Items.REDSTONE).serializeNBT());
         testtag.setString("block", Blocks.REDSTONE_WIRE.getRegistryName().toString());
         FMLInterModComms.sendMessage(MOD_ID, IMC.ADD_VARIATION_V2.toString(), testtag);
-        
+
         testtag = new CompoundTag();
         testtag.setString("group", "marble");
         testtag.setTag("stack", new ItemStack(ChiselBlocks.marble, 1, 3).serializeNBT());
@@ -205,46 +226,12 @@ public class Chisel implements Reference {
         */
     }
 
-    private static void addCompactorPressRecipe(int energy, ItemStack input, ItemStack output) {
-        CompoundTag message = new CompoundTag();
-
-        message.putInt("energy", energy);
-        message.put("input", new CompoundTag());
-        message.put("output", new CompoundTag());
-
-        input.save(message.getCompound("input"));
-        output.save(message.getCompound("output"));
-
-        InterModComms.sendTo("thermalexpansion", "addcompactorpressrecipe", () -> message);
-    }
-
     private void imcProcess(InterModProcessEvent event) {
         event.getIMCStream().forEach(IMCHandler.INSTANCE::handleMessage);
         IMCHandler.INSTANCE.imcCounts.object2IntEntrySet().forEach(e ->
-            Chisel.logger.info("Received {} IMC messages from mod {}.", e.getKey(), e.getIntValue())
+                Chisel.logger.info("Received {} IMC messages from mod {}.", e.getKey(), e.getIntValue())
         );
         IMCHandler.INSTANCE.imcCounts.clear();
-    }
-
-    /**
-     * Sends a debug message, basically a wrapper for the logger that only prints when debugging is enabled
-     *
-     * @param message
-     */
-    public static void debug(String message) {
-        if (debug) {
-            logger.info(message);
-        }
-    }
-
-    public static void debug(float[] array) {
-        if (debug) {
-            String message = "[";
-            for (float obj : array) {
-                message = message + obj + " ";
-            }
-            debug(message + "]");
-        }
     }
 
     private void onMissingBlock(MissingMappings<Block> event) {
@@ -252,7 +239,7 @@ public class Chisel implements Reference {
             Optional.ofNullable(remaps.get(mapping.key.getPath())).ifPresent(mapping::remap);
         }
     }
-    
+
     private void onMissingItem(MissingMappings<Item> event) {
         for (Mapping<Item> mapping : event.getMappings(Reference.MOD_ID)) {
             Optional.ofNullable(remaps.get(mapping.key.getPath())).map(Block::asItem).ifPresent(mapping::remap);

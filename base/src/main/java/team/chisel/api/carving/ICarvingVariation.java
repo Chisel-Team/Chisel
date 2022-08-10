@@ -6,8 +6,8 @@ import net.minecraft.world.level.block.Block;
 public interface ICarvingVariation {
 
     ICarvingGroup getGroup();
-    
+
     Item getItem();
-    
+
     Block getBlock();
 }

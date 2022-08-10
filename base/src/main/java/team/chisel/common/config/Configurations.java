@@ -1,11 +1,6 @@
 package team.chisel.common.config;
 
-import java.util.Locale;
-
-import org.apache.commons.lang3.StringUtils;
-
-import team.chisel.Features;
-
+@SuppressWarnings("unused")
 public class Configurations {
 
 //    public static Configuration config;
@@ -45,7 +40,7 @@ public class Configurations {
     public static boolean useRoadLineTool;
     public static String getRoadLineTool;
     public static int roadLineToolLevel;
-    
+
     public static boolean autoChiselPowered = true;
     public static boolean autoChiselNeedsPower = false;
 
@@ -86,11 +81,11 @@ public class Configurations {
         /* chisel 
         category = "chisel";
         allowChiselDamage = config.get(category, "allowChiselDamage", true, "Should the chisel be damageable and take damage when it chisels something.").getBoolean();
-        ironChiselMaxDamage = config.getInt("ironChiselMaxDamage", category, 512, 1, Short.MAX_VALUE, "The max damage of the standard iron chisel.");
-        diamondChiselMaxDamage = config.getInt("diamondChiselMaxDamage", category, 5056, 1, Short.MAX_VALUE, "The max damage of the diamond chisel.");
+        ironChiselMaxDamage = config.getInt("ironChiselMaxDamage", category, 512, 1, Short.MAX_VALUE, "The max damage to the standard iron chisel.");
+        diamondChiselMaxDamage = config.getInt("diamondChiselMaxDamage", category, 5056, 1, Short.MAX_VALUE, "The max damage to the diamond chisel.");
         hitechChiselMaxDamage = config.getInt("hitechChiselMaxDamage", category, 10048, 1, Short.MAX_VALUE, "The max damage of the iChisel.");
 
-        ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left click chisel blocks. If false, it cannot.").getBoolean();
+        ironChiselCanLeftClick = config.get(category, "ironChiselCanLeftClick", true, "If this is true, the iron chisel can left-click chisel blocks. If false, it cannot.").getBoolean();
         ironChiselHasModes = config.get(category, "ironChiselHasModes", false, "If this is true, the iron chisel can change its chisel mode just as the diamond chisel can.").getBoolean();
 //        allowChiselCrossColors = config.get(category, "allowChiselCrossColors", true, "Should someone be able to chisel something into a different color.").getBoolean();
 

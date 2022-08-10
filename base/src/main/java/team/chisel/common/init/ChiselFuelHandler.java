@@ -5,14 +5,13 @@ import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import team.chisel.common.Reference;
 
+@SuppressWarnings("unused")
 @EventBusSubscriber(modid = Reference.MOD_ID)
 public class ChiselFuelHandler {
-    
+
     public static void onBurnTime(FurnaceFuelBurnTimeEvent event) {
         ItemStack itemStack = event.getItemStack();
-        if (itemStack.isEmpty()) {
-            return;
-        }
+        itemStack.isEmpty();
         // TODO 1.14 tags
 //        for(int id : OreDictionary.getOreIDs(itemStack))
 //        {

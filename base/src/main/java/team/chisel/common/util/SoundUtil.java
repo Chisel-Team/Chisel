@@ -1,9 +1,5 @@
 package team.chisel.common.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
@@ -19,20 +15,26 @@ import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.init.ChiselSounds;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Objects;
+
 public class SoundUtil {
-    
+
     @SuppressWarnings("null")
     public static SoundEvent getSound(Player player, ItemStack chisel, @Nullable Block target) {
         if (target != null && !chisel.isEmpty()) {
-            SoundEvent evt = ((IChiselItem)chisel.getItem()).getOverrideSound(player.getCommandSenderWorld(), player, chisel, target);
+            SoundEvent evt = ((IChiselItem) chisel.getItem()).getOverrideSound(player.getCommandSenderWorld(), player, chisel, target);
             if (evt != null) {
                 return evt;
             }
         }
-        return CarvingUtils.getChiselRegistry().getGroup(target != null ? target : Blocks.AIR).map(ICarvingGroup::getSound).orElse(ChiselSounds.fallback);
+        assert CarvingUtils.getChiselRegistry() != null;
+        return Objects.requireNonNull(CarvingUtils.getChiselRegistry().getGroup(target != null ? target : Blocks.AIR).map(ICarvingGroup::getSound).orElse(ChiselSounds.fallback));
     }
-    
+
     public static void playSound(Player player, ItemStack chisel, ItemStack source) {
+        assert CarvingUtils.getChiselRegistry() != null;
         ICarvingVariation v = CarvingUtils.getChiselRegistry().getVariation(source.getItem()).orElse(null);
         Block block = v == null ? null : v.getBlock();
         if (block == null) {
@@ -53,7 +55,7 @@ public class SoundUtil {
     public static void playSound(Player player, BlockPos pos, SoundEvent sound) {
         playSound(player, pos, sound, SoundSource.BLOCKS);
     }
-    
+
     public static void playSound(Player player, BlockPos pos, SoundEvent sound, SoundSource category) {
         Level world = player.getCommandSenderWorld();
         world.playSound(player, pos, sound, category, 0.3f + 0.7f * world.random.nextFloat(), 0.6f + 0.4f * world.random.nextFloat());

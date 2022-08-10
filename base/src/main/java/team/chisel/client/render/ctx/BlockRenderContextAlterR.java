@@ -1,14 +1,12 @@
 package team.chisel.client.render.ctx;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import team.chisel.client.render.texture.ChiselTextureAlterR;
 import team.chisel.ctm.client.texture.ctx.TextureContextPosition;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class BlockRenderContextAlterR extends TextureContextPosition {
     private static final Random rand = new Random();
@@ -16,7 +14,7 @@ public class BlockRenderContextAlterR extends TextureContextPosition {
     @Getter
     private final int texture;
 
-    public BlockRenderContextAlterR(@Nonnull BlockPos pos, ChiselTextureAlterR tex) {
+    public BlockRenderContextAlterR(@Nonnull BlockPos pos) {
         super(pos);
 
         int num = 0;
@@ -28,29 +26,23 @@ public class BlockRenderContextAlterR extends TextureContextPosition {
         int y = pos.getY();
         int z = pos.getZ();
 
-        num += rand.nextInt(2)*2;
-        boolean type = true;
+        num += rand.nextInt(2) * 2;
+        boolean type = x % 2 != 0;
 
         // If even, switch boolean
         // If we have a set of multiple coords that are [x, y, z]
         // [5, 8, 9], [0, 0, 1], [9, 8, 8]...
 
-        if(x % 2 == 0)
-        {
-            type = !type;
-        }
         // Odd Even Odd
         // True False True
 
-        if(y % 2 == 0)
-        {
+        if (y % 2 == 0) {
             type = !type;
         }
         // Even Even Even
         // False True False
 
-        if(z % 2 == 0)
-        {
+        if (z % 2 == 0) {
             type = !type;
         }
         // Odd Odd Even

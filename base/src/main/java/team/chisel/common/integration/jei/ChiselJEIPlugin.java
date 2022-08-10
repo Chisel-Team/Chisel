@@ -1,14 +1,9 @@
 package team.chisel.common.integration.jei;
 
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import com.google.common.collect.ImmutableMap;
 import com.tterrag.registrate.util.entry.ItemEntry;
-
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
@@ -25,38 +20,40 @@ import team.chisel.client.util.ChiselLangKeys;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.item.ItemChisel;
 
+import java.util.ArrayList;
+import java.util.Map;
+
+@SuppressWarnings({"unused", "removal", "CommentedOutCode"})
 @JeiPlugin
 public class ChiselJEIPlugin implements IModPlugin {
-    
-    private ChiselRecipeCategory category;
-    
+
     private final ChiselRecipeRegistryPlugin plugin = new ChiselRecipeRegistryPlugin();
-    
     private final Map<IRegistryDelegate<Item>, ChiselLangKeys> descriptions = ImmutableMap.of(
             ChiselItems.IRON_CHISEL.get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_IRON,
             ChiselItems.DIAMOND_CHISEL.get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_DIAMOND,
             ChiselItems.HITECH_CHISEL.get().delegate, ChiselLangKeys.JEI_DESC_CHISEL_HITECH);
+    private ChiselRecipeCategory category;
 
     @Override
     public void registerRecipes(IRecipeRegistration registry) {
-        registry.addRecipes(CarvingUtils.getChiselRegistry().getGroups().stream()
-                            .collect(Collectors.toList()), category.getUid());
+        assert CarvingUtils.getChiselRegistry() != null;
+        registry.addRecipes(new ArrayList<>(CarvingUtils.getChiselRegistry().getGroups()), category.getUid());
 
         for (ItemEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
             ItemStack stack = new ItemStack(chisel.get());
             registry.addIngredientInfo(stack, VanillaTypes.ITEM, ChiselLangKeys.JEI_DESC_CHISEL_GENERIC.getComponent(), descriptions.get(chisel.get().delegate).getComponent());
         }
     }
-    
+
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registry) {
         for (ItemEntry<ItemChisel> chisel : ChiselItems.CHISELS) {
             registry.addRecipeCatalyst(new ItemStack(chisel.get()), category.getUid());
         }
     }
-    
+
     @Override
-    public void registerAdvanced(IAdvancedRegistration registry) {   
+    public void registerAdvanced(IAdvancedRegistration registry) {
         registry.addRecipeManagerPlugin(plugin); // Add our plugin the normal way as a fallback in case JEI internals change
     }
 
@@ -87,7 +84,7 @@ public class ChiselJEIPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registry) {
-        category = new ChiselRecipeCategory(registry.getJeiHelpers().getGuiHelper()); 
+        category = new ChiselRecipeCategory(registry.getJeiHelpers().getGuiHelper());
         registry.addRecipeCategories(category);
     }
 

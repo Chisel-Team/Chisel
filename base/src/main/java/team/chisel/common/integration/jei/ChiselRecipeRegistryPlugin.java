@@ -1,48 +1,43 @@
 package team.chisel.common.integration.jei;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.ImmutableList;
-
 import mezz.jei.api.constants.RecipeTypes;
-import mezz.jei.api.constants.VanillaRecipeCategoryUid;
-import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IFocus.Mode;
 import mezz.jei.api.recipe.IRecipeManager;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.advanced.IRecipeManagerPlugin;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import team.chisel.Chisel;
 import team.chisel.api.carving.CarvingUtils;
 
+import javax.annotation.Nonnull;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@SuppressWarnings("removal")
 public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
-    
+
     @Nonnull
-    private static final List<RecipeType<? extends Object>> POSSIBLE_CATEGORIES = ImmutableList.of(RecipeTypes.CRAFTING, RecipeTypes.SMELTING, RecipeTypes.INFORMATION);
-    
+    private static final List<RecipeType<?>> POSSIBLE_CATEGORIES = ImmutableList.of(RecipeTypes.CRAFTING, RecipeTypes.SMELTING, RecipeTypes.INFORMATION);
+
     private IRecipeManager registry;
-    
+    private boolean preventRecursion;
+
     private List<ItemStack> getAlternateOutputs(IFocus<?> focus) {
         Object val = focus.getValue();
-        if (!(val instanceof ItemStack)) return Collections.emptyList();
-        ItemStack input = (ItemStack) val;
+        if (!(val instanceof ItemStack input)) return Collections.emptyList();
+        assert CarvingUtils.getChiselRegistry() != null;
         List<ItemStack> chiselOptions = CarvingUtils.getChiselRegistry().getItemsForChiseling((ItemStack) focus.getValue());
         return chiselOptions.stream()
                 .filter(s -> !ItemStack.isSame(s, input))
                 .collect(Collectors.toList());
     }
-    
-    private boolean preventRecursion;
 
-    @SuppressWarnings({ "unchecked", "null" })
+    @SuppressWarnings({"null"})
     @Override
     public <V> List<RecipeType<?>> getRecipeTypes(IFocus<V> focus) {
         try {
@@ -52,9 +47,9 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
             try {
                 preventRecursion = true;
                 return registry.createRecipeCategoryLookup().limitTypes(POSSIBLE_CATEGORIES).get()
-                        .filter(c -> alternates.stream() 
+                        .filter(c -> alternates.stream()
                                 .flatMap(s -> registry.createRecipeLookup(c.getRecipeType())
-                                        .limitFocus(Collections.singletonList(registry.createFocus(focus.getMode(), s))).get()).count() != 0)
+                                        .limitFocus(Collections.singletonList(registry.createFocus(focus.getMode(), s))).get()).findAny().isPresent())
                         .map(IRecipeCategory::getRecipeType)
                         .collect(Collectors.toList());
             } finally {
@@ -65,8 +60,9 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
             return Collections.emptyList();
         }
     }
-    
-    
+
+
+    @SuppressWarnings("SuspiciousMethodCalls")
     @Override
     public <T, V> List<T> getRecipes(IRecipeCategory<T> recipeCategory, IFocus<V> focus) {
         try {
@@ -100,6 +96,6 @@ public class ChiselRecipeRegistryPlugin implements IRecipeManagerPlugin {
 
     @Override
     public <V> List<ResourceLocation> getRecipeCategoryUids(IFocus<V> focus) {
-        return POSSIBLE_CATEGORIES.stream().map(t -> t.getUid()).toList();
+        return POSSIBLE_CATEGORIES.stream().map(RecipeType::getUid).toList();
     }
 }

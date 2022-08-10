@@ -1,13 +1,6 @@
 package team.chisel.common.inventory;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
-import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
-
 import lombok.Getter;
 import lombok.Setter;
 import net.minecraft.world.InteractionHand;
@@ -20,6 +13,10 @@ import net.minecraft.world.item.ItemStack;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.common.util.NBTUtil;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Optional;
+
 @Getter
 @Setter
 public class ContainerChiselHitech extends ChiselContainer {
@@ -27,30 +24,30 @@ public class ContainerChiselHitech extends ChiselContainer {
     private @Nullable Slot selection, target;
     private List<Slot> selectionDuplicates = ImmutableList.of();
     private @Nullable ICarvingGroup currentGroup;
-    
+
     public ContainerChiselHitech(MenuType<? extends ChiselContainer> type, int windowId, Inventory inventoryplayer) {
         this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 63), InteractionHand.MAIN_HAND);
     }
-    
+
     public ContainerChiselHitech(MenuType<? extends ChiselContainer> type, int windowId, Inventory inventoryplayer, InventoryChiselSelection inv, InteractionHand hand) {
         super(type, windowId, inventoryplayer, inv, hand);
-        
+
         int selectionSlot = NBTUtil.getHitechSelection(chisel);
         if (selectionSlot >= inv.getContainerSize()) {
             setSelection(getSlot(selectionSlot));
         }
-        
+
         int targetSlot = NBTUtil.getHitechTarget(chisel);
         if (targetSlot >= 0 && targetSlot < inv.getContainerSize() - 1) {
             setTarget(getSlot(targetSlot));
         }
     }
-    
+
     public void setTarget(@Nullable Slot slot) {
         this.target = slot;
-        NBTUtil.setHitechTarget(chisel, Optional.fromNullable(getTarget()).transform(s -> s.index).or(-1));
+        NBTUtil.setHitechTarget(chisel, Optional.ofNullable(getTarget()).map(s -> s.index).orElse(-1));
     }
-    
+
     public void setSelection(@Nullable Slot slot) {
         this.selection = slot;
 
@@ -67,28 +64,28 @@ public class ContainerChiselHitech extends ChiselContainer {
                 }
             }
             selectionDuplicates = builder.build();
-            
+
             ICarvingGroup group = carving.getGroup(slot.getItem().getItem()).orElse(null);
             if (currentGroup != null && group != currentGroup) {
                 setTarget(null);
             }
             currentGroup = group;
         }
-        
+
         ItemStack stack = slot == null ? ItemStack.EMPTY : slot.getItem();
         getInventoryChisel().setStackInSpecialSlot(stack);
         getInventoryChisel().updateItems();
-        NBTUtil.setHitechSelection(chisel, Optional.fromNullable(getSelection()).transform(s -> s.index).or(-1));
+        NBTUtil.setHitechSelection(chisel, Optional.ofNullable(getSelection()).map(s -> s.index).orElse(-1));
     }
-    
+
     public @Nullable ItemStack getSelectionStack() {
         Slot slot = getSelection();
         return slot == null ? ItemStack.EMPTY : slot.getItem();
     }
-    
+
     public ItemStack getTargetItem() {
         Slot slot = getTarget();
-        return slot == null ? ItemStack.EMPTY : slot.getItem();    
+        return slot == null ? ItemStack.EMPTY : slot.getItem();
     }
 
     @Override
@@ -97,7 +94,7 @@ public class ContainerChiselHitech extends ChiselContainer {
 
         // selection slots
         for (int i = 0; i < getInventoryChisel().size; i++) {
-            addSlot(new SlotChiselSelection(this, inventoryChisel, inventoryChisel, i, left + ((i % 9) * 18), top + ((i / 9) * 18)));
+            addSlot(new SlotChiselSelection(this, inventoryChisel, i, left + ((i % 9) * 18), top + ((i / 9) * 18)));
         }
 
         // main slot
@@ -111,16 +108,16 @@ public class ContainerChiselHitech extends ChiselContainer {
 
         top += 58;
         for (int i = 0; i < 9; i++) {
-            addSlot(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
+            addSlot(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top));
         }
     }
-    
+
     @Override
     public void removed(Player entityplayer) {
         NBTUtil.setChiselTarget(getChisel(), getTargetItem());
         super.removed(entityplayer);
     }
-    
+
     @Override
     public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
         if (slotId >= 0) {
@@ -140,6 +137,5 @@ public class ContainerChiselHitech extends ChiselContainer {
                 setSelection(slot);
             }
         }
-        return;
     }
 }

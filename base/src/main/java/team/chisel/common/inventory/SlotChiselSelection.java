@@ -1,13 +1,9 @@
 package team.chisel.common.inventory;
 
-import javax.annotation.Nonnull;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.world.Container;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import team.chisel.api.IChiselItem;
@@ -15,25 +11,17 @@ import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.common.util.SoundUtil;
 
+import javax.annotation.Nonnull;
+
 public class SlotChiselSelection extends Slot {
 
     private final @Nonnull ChiselContainer container;
 
-    public SlotChiselSelection(ChiselContainer container, InventoryChiselSelection inv, Container iinventory, int i, int j, int k) {
+    public SlotChiselSelection(ChiselContainer container, Container iinventory, int i, int j, int k) {
         super(iinventory, i, j, k);
         this.container = container;
     }
 
-    @Override
-    public boolean mayPlace(ItemStack itemstack) {
-        return false;
-    }
-
-    @Override
-    public boolean mayPickup(Player par1Player) {
-        return par1Player.inventoryMenu.getCarried().isEmpty();
-    }
-    
     public static ItemStack craft(ChiselContainer container, Player player, ItemStack itemstack, boolean simulate) {
         ItemStack crafted = container.getInventoryChisel().getStackInSpecialSlot();
         ItemStack chisel = container.getChisel();
@@ -43,8 +31,9 @@ public class SlotChiselSelection extends Slot {
             chisel = chisel.copy();
         }
         ItemStack res = ItemStack.EMPTY;
-        if (!chisel.isEmpty() && !crafted.isEmpty()) {                
+        if (!chisel.isEmpty() && !crafted.isEmpty()) {
             IChiselItem item = (IChiselItem) container.getChisel().getItem();
+            assert CarvingUtils.getChiselRegistry() != null;
             ICarvingVariation variation = CarvingUtils.getChiselRegistry().getVariation(itemstack.getItem()).orElseThrow(IllegalArgumentException::new);
             if (!item.canChisel(player.level, player, chisel, variation)) {
                 return res;
@@ -65,8 +54,18 @@ public class SlotChiselSelection extends Slot {
                 container.broadcastChanges();
             }
         }
-        
+
         return res;
+    }
+
+    @Override
+    public boolean mayPlace(ItemStack itemstack) {
+        return false;
+    }
+
+    @Override
+    public boolean mayPickup(Player par1Player) {
+        return par1Player.inventoryMenu.getCarried().isEmpty();
     }
 
     @Override
@@ -78,11 +77,11 @@ public class SlotChiselSelection extends Slot {
             switch (container.getCurrentClickType()) {
                 case PICKUP, PICKUP_ALL, QUICK_CRAFT, QUICK_MOVE -> container.setCarried(res);
                 case SWAP, THROW -> itemstack.setCount(res.getCount());
-                default -> {}
+                default -> {
+                }
             }
         } else {
             itemstack.setCount(0);
         }
-        return;
     }
 }

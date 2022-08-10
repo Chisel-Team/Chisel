@@ -1,25 +1,24 @@
 package team.chisel;
 
-import java.util.Arrays;
-
 import com.tterrag.registrate.Registrate;
-import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
-
 import lombok.RequiredArgsConstructor;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.material.Material;
 import team.chisel.api.block.ChiselBlockFactory;
 
+import java.util.Arrays;
+
+@SuppressWarnings({"unused", "deprecation"})
 @RequiredArgsConstructor
 public enum FeaturesOld {
 
-    // @formatter:off
-//    ALUMINUM(factory -> factory.newType(Material.IRON, "metals/aluminum")
-//            .setGroupName("Aluminum Block")
-//            .variations(VariantTemplates.METAL)
-//            .build(b -> b.sound(SoundType.METAL).harvestTool(ToolType.PICKAXE).harvestLevel(1))),
+    //ALUMINUM(factory -> factory.newType(Material.METAL, "metals/aluminum")
+    //        //.setGroupName("Aluminum Block")
+    //        .applyTag()
+    //        .variations(VariantTemplates.METAL)
+    //        .build(b -> b.sound(SoundType.METAL)));
 
         /* TODO 1.15
         @Override
@@ -27,8 +26,8 @@ public enum FeaturesOld {
         {
             registerIngotUncraftRecipe(registry, "Aluminum");
         } */
-    
-//    /*ANCIENT_STONE ("thaumcraft") {
+
+    //    /*ANCIENT_STONE ("thaumcraft") {
 //        @Override
 //        void addBlocks(ChiselBlockFactory factory) {
 //            Carving.chisel.addVariation("ancient_stone", CarvingUtils.variationFor(GameRegistry.findBlock("thaumcraft", "stone_ancient").getDefaultState(), -64));
@@ -3053,7 +3052,7 @@ public enum FeaturesOld {
 //
     WOOL(factory -> Arrays.stream(DyeColor.values())
             .forEach(color -> factory.newType(Material.WOOL, "wool/" + (color.getSerializedName()))
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
+                    //.setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
                     .variation("legacy")
                     .next("llama")
                     .build(b -> b.sound(SoundType.WOOL).strength(0.8F)))),
@@ -3064,17 +3063,15 @@ public enum FeaturesOld {
 
     ;
 
-    public static final String[] plank_names = { "oak", "spruce", "birch", "jungle", "acacia", "dark-oak" };
+    public static final String[] plank_names = {"oak", "spruce", "birch", "jungle", "acacia", "dark-oak"};
+    private final NonNullConsumer<ChiselBlockFactory> factory;
 
     public static void init(Registrate registrate) {
         Chisel.logger.info("Loading blocks...");
-        int num = 0;
         ChiselBlockFactory factory = ChiselBlockFactory.newFactory(registrate);
         for (FeaturesOld f : values()) {
             Chisel.logger.info("Loading feature {}", f.name());
             f.factory.accept(factory);
         }
     }
-    
-    private final NonNullConsumer<ChiselBlockFactory> factory;
 }

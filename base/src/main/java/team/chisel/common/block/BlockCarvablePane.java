@@ -1,7 +1,5 @@
 package team.chisel.common.block;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,12 +27,13 @@ public class BlockCarvablePane extends IronBarsBlock implements ICarvable {
         this.variation = variation;
     }
 
-    
+
     @Override
     public boolean skipRendering(BlockState state, BlockState adjacentBlockState, Direction side) {
         return super.skipRendering(state, adjacentBlockState, side) && state != adjacentBlockState;
     }
 
+    @SuppressWarnings("unused")
     public Block setDragonProof() {
         dragonProof = true;
         return this;

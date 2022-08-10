@@ -14,11 +14,12 @@ import team.chisel.api.block.VariationData;
 /**
  * Represents a Carvable (aka Chiselable) block
  */
+@SuppressWarnings({"deprecation", "unused"})
 public class BlockCarvable extends Block implements ICarvable {
 
     @Getter(onMethod = @__({@Override}))
     private final VariationData variation;
-    
+
     private boolean dragonProof = false;
 
     public BlockCarvable(Block.Properties properties, VariationData variation) {

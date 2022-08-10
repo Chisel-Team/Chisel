@@ -1,5 +1,6 @@
 //file:noinspection GrDeprecatedAPIUsage
 //file:noinspection GroovyMissingReturnStatement
+//file:noinspection ChangeToOperator
 buildscript {
     repositories {
         mavenCentral()

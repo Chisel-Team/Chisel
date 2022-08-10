@@ -1,19 +1,5 @@
 package team.chisel.api.block;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.BooleanSupplier;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.BlockBuilder;
@@ -27,7 +13,6 @@ import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import com.tterrag.registrate.util.nullness.NonNullUnaryOperator;
-
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,53 +37,46 @@ import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 
+import javax.annotation.Nullable;
+import java.util.*;
+import java.util.function.BooleanSupplier;
+import java.util.function.Supplier;
+
 /**
  * Building a ChiselBlockData
  */
+@SuppressWarnings("unused")
 @Setter
 @Accessors(chain = true)
 public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
+    private static final NonNullUnaryOperator<Block.Properties> NO_ACTION = NonNullUnaryOperator.identity();
     private final ChiselBlockFactory parent;
     private final Registrate registrate;
     private final Material material;
     private final String blockName;
-
     private final List<VariationBuilder<T>> variations;
-
     private final BlockProvider<T> provider;
-
-    private @Nullable TagKey<Block> group;
-
+    private final @Nullable TagKey<Block> group;
     @Setter(AccessLevel.NONE)
-    private Set<ResourceLocation> appliedTags = new HashSet<>();
-
+    private final Set<ResourceLocation> appliedTags = new HashSet<>();
     @Setter(AccessLevel.NONE)
-    private Set<ResourceLocation> otherBlocks = new HashSet<>();
-
+    private final Set<ResourceLocation> otherBlocks = new HashSet<>();
     @Setter(AccessLevel.NONE)
-    private Set<ResourceLocation> otherTags = new HashSet<>();
-    
-    private String groupName;
-
+    private final Set<ResourceLocation> otherTags = new HashSet<>();
+    private final String groupName;
     @Accessors(fluent = true)
-    private boolean opaque = true;
-    
+    private final boolean opaque = true;
     @Accessors(fluent = true)
-    private Supplier<Supplier<RenderType>> layer = () -> RenderType::solid;
-    
+    private final Supplier<Supplier<RenderType>> layer = () -> RenderType::solid;
     @Accessors(fluent = true)
-    private ModelTemplate model = ModelTemplates.simpleBlock();
-    
+    private final ModelTemplate model = ModelTemplates.simpleBlock();
     @Accessors(fluent = true)
-    private RecipeTemplate recipe = RecipeTemplate.none();
-    
+    private final RecipeTemplate recipe = RecipeTemplate.none();
     @Accessors(fluent = true)
-    private NonNullBiConsumer<RegistrateBlockLootTables, T> loot = RegistrateBlockLootTables::dropSelf;
-
+    private final NonNullBiConsumer<RegistrateBlockLootTables, T> loot = RegistrateBlockLootTables::dropSelf;
     @Accessors(fluent = true)
     private NonNullSupplier<? extends Block> initialProperties;
-
     @Accessors(fluent = true)
     private MaterialColor color;
 
@@ -110,9 +88,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         this.provider = provider;
         this.group = group;
         this.groupName = group == null ? null : RegistrateLangProvider.toEnglishName(group.location().getPath());
-        this.variations = new ArrayList<VariationBuilder<T>>();
+        this.variations = new ArrayList<>();
     }
-    
+
     public ChiselBlockBuilder<T> applyIf(BooleanSupplier pred, NonNullUnaryOperator<ChiselBlockBuilder<T>> action) {
         if (pred.getAsBoolean()) {
             return action.apply(this);
@@ -123,11 +101,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     public VariationBuilder<T> variation(String name) {
         return _variation(VariantTemplates.empty(name));
     }
-    
+
     public ChiselBlockBuilder<T> variation(VariantTemplate template) {
         return _variation(template).buildVariation();
     }
-    
+
     private VariationBuilder<T> _variation(VariantTemplate template) {
         return new VariationBuilder<>(this, template.getName())
                 .opaque(opaque)
@@ -136,7 +114,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 .recipe(template.getRecipeTemplate().orElse(recipe))
                 .tooltip(template.getTooltip());
     }
-    
+
     public ChiselBlockBuilder<T> variations(Collection<? extends VariantTemplate> templates) {
         ChiselBlockBuilder<T> ret = this;
         for (VariantTemplate template : templates) {
@@ -144,16 +122,16 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         }
         return ret;
     }
-    
+
     public ChiselBlockBuilder<T> addBlock(Block block) {
-        return addBlock(block.getRegistryName());
+        return addBlock(Objects.requireNonNull(block.getRegistryName()));
     }
 
     public ChiselBlockBuilder<T> addBlock(ResourceLocation block) {
         this.otherBlocks.add(block);
         return this;
     }
-    
+
     public ChiselBlockBuilder<T> addTag(TagKey<?> tag) {
         return addTag(tag.location());
     }
@@ -176,15 +154,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         return addTag(tag).applyTag(tag);
     }
 
-    public ChiselBlockBuilder<T> equivalentTo(ResourceLocation tag) {
-        return addTag(tag).applyTag(tag);
-    }
-
-    private static final NonNullUnaryOperator<Block.Properties> NO_ACTION = NonNullUnaryOperator.identity();
-
     /**
      * Builds the block(s).
-     * 
+     *
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
     @SuppressWarnings("null")
@@ -194,13 +166,12 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     /**
      * Builds the block(s), performing the passed action on each.
-     * 
-     * @param after
-     *            The consumer to call after creating each block. Use this to easily set things like hardness/light/etc. This is called after block registration, but prior to model/variation
-     *            registration.
+     *
+     * @param after The consumer to call after creating each block. Use this to easily set things like hardness/light/etc. This is called after block registration, but prior to model/variation
+     *              registration.
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
-    @SuppressWarnings("null")
+    @SuppressWarnings({"null", "NullableProblems"})
     @Deprecated
     public Map<String, BlockEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
@@ -211,12 +182,13 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             data[i] = variations.get(i).doBuild();
         }
         Map<String, BlockEntry<T>> ret = new HashMap<>(data.length);
+        assert this.group != null;
+
         ICarvingGroup group = CarvingUtils.itemGroup(this.group, this.groupName);
         for (int i = 0; i < data.length; i++) {
             if (Strings.emptyToNull(data[i].getName()) != null) {
-                final int index = i;
-                final Variation var = data[index];
-                final VariationBuilder<T> builder = variations.get(index);
+                final Variation var = data[i];
+                final VariationBuilder<T> builder = variations.get(i);
                 ret.put(var.getName(), registrate.object(blockName + "/" + var.getName())
                         .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret.get(var.getName()), var.getName(), var.getDisplayName(), group)))
                         .initialProperties(initialProperties == null ? NonNullSupplier.of(Blocks.STONE.delegate) : initialProperties)
@@ -229,38 +201,40 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .recipe((ctx, prov) -> builder.recipe.accept(prov, ctx.getEntry()))
                         .loot(loot)
                         .item(provider::createBlockItem)
-                            // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
-                            .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
-                            .transform(this::addTags)
-                            .build()
+                        // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
+                        .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
+                        .transform(this::addTags)
+                        .build()
                         .register());
             }
         }
-        if (this.group != null) {
-            CarvingUtils.getChiselRegistry().addGroup(group);
-            if (!otherBlocks.isEmpty() || !otherTags.isEmpty()) {
-                addExtraTagEntries(ProviderType.BLOCK_TAGS, t -> t, ForgeRegistries.BLOCKS::getValue);
-                this.<Item>addExtraTagEntries(ProviderType.ITEM_TAGS, t -> ItemTags.create(t.location()), ForgeRegistries.ITEMS::getValue);
-            }
+        assert CarvingUtils.getChiselRegistry() != null;
+
+        CarvingUtils.getChiselRegistry().addGroup(group);
+        if (!otherBlocks.isEmpty() || !otherTags.isEmpty()) {
+            addExtraTagEntries(ProviderType.BLOCK_TAGS, t -> t, ForgeRegistries.BLOCKS::getValue);
+            this.addExtraTagEntries(ProviderType.ITEM_TAGS, t -> ItemTags.create(t.location()), ForgeRegistries.ITEMS::getValue);
         }
         return ret;
     }
-    
-    @SuppressWarnings({ "unchecked" })
-    private <TAG> void addExtraTagEntries(ProviderType<? extends RegistrateTagsProvider<TAG>> type, NonNullFunction<TagKey<Block>, TagKey<TAG>> tagGetter, NonNullFunction<ResourceLocation, TAG> entryLookup) {    	
+
+    @SuppressWarnings({"unchecked"})
+    private <TAG> void addExtraTagEntries(ProviderType<? extends RegistrateTagsProvider<TAG>> type, NonNullFunction<TagKey<Block>, TagKey<TAG>> tagGetter, NonNullFunction<ResourceLocation, TAG> entryLookup) {
         registrate.addDataGenerator(type, prov -> {
-        	TagsProvider.TagAppender<TAG> builder = prov.tag(tagGetter.apply(this.group))
-                .add((TAG[]) otherBlocks.stream()
-                        .map(entryLookup::apply)
-                        .toArray());
-        	
-        	otherTags.stream()
-        	    .map(BlockTags::create)
-        	    .map(tagGetter)
-        	    .forEach(t -> {
-        	        builder.addTag(t);
-        	        prov.tag(t);
-        	    });
+            assert this.group != null;
+
+            TagsProvider.TagAppender<TAG> builder = prov.tag(tagGetter.apply(this.group))
+                    .add((TAG[]) otherBlocks.stream()
+                            .map(entryLookup)
+                            .toArray());
+
+            otherTags.stream()
+                    .map(BlockTags::create)
+                    .map(tagGetter)
+                    .forEach(t -> {
+                        builder.addTag(t);
+                        prov.tag(t);
+                    });
         });
     }
 
@@ -282,29 +256,25 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
     @Accessors(chain = true)
     public static class VariationBuilder<T extends Block & ICarvable> {
-        
+
         private static final Map<ResourceLocation, String> TRANSLATIONS = new HashMap<>();
         private static final Map<ResourceLocation, TranslatableComponent> COMPONENTS = new HashMap<>();
 
-        private ChiselBlockBuilder<T> parent;
+        private final ChiselBlockBuilder<T> parent;
 
-        private String name;
+        private final String name;
         @Setter
         @Accessors(fluent = true)
         private String localizedName;
-        
-        @Setter
-        @Accessors(fluent = true)
-        private boolean opaque;
-        
         @Setter
         @Accessors(fluent = true)
         private ModelTemplate model = ModelTemplates.simpleBlock();
-        
         @Setter
         @Accessors(fluent = true)
         private RecipeTemplate recipe = RecipeTemplate.none();
-        
+        @Setter
+        @Accessors(fluent = true)
+        private boolean opaque;
         private String[] tooltip = new String[0];
 
         private VariationBuilder(ChiselBlockBuilder<T> parent, String name) {
@@ -312,7 +282,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             this.name = name;
             this.localizedName = RegistrateLangProvider.toEnglishName(name);
         }
-        
+
         public VariationBuilder<T> tooltip(String... lines) {
             this.tooltip = Arrays.copyOf(lines, lines.length);
             return this;
@@ -330,14 +300,14 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         public Map<String, BlockEntry<T>> build() {
             return buildVariation().build();
         }
-        
+
         @Deprecated
         public Map<String, BlockEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
             return buildVariation().build(after);
         }
 
         private Variation doBuild() {
-        	ResourceLocation translationKey = new ResourceLocation(parent.registrate.getModid(), name);
+            ResourceLocation translationKey = new ResourceLocation(parent.registrate.getModid(), name);
             String existingTranslation = TRANSLATIONS.get(translationKey);
             if (existingTranslation != null && !Objects.equals(localizedName, existingTranslation)) {
                 throw new IllegalStateException("Cannot redefine existing variation's localized name: " + translationKey + " -> " + localizedName + " (should be " + existingTranslation + ")");
