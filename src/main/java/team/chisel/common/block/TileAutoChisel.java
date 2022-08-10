@@ -207,7 +207,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
         }
         prevSource = sourceSlot;
     }
-    
+
     protected void mergeOutput(ItemStack stack) {
         for (int i = 0; i < getOutputInv().getSlots(); i++) {
             stack = getOutputInv().insertItem(i, stack, false);
