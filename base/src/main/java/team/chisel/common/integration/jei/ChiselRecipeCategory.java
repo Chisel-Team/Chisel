@@ -27,7 +27,7 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class ChiselRecipeCategory implements IRecipeCategory<ICarvingGroup> {
 
-    private static final ResourceLocation TEXTURE_LOC = new ResourceLocation("team/chisel", "textures/chiseljei.png");
+    private static final ResourceLocation TEXTURE_LOC = new ResourceLocation("chisel", "textures/chiseljei.png");
 
     private final IDrawable icon;
     private final IDrawable background;
