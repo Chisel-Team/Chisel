@@ -46,6 +46,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@SuppressWarnings({"ResultOfMethodCallIgnored", "unused", "CommentedOutCode"})
 @Mod(Reference.MOD_ID)
 public class Chisel implements Reference {
     public static final Logger logger = LogManager.getLogger(MOD_NAME);
@@ -136,8 +137,6 @@ public class Chisel implements Reference {
 
     /**
      * Sends a debug message, basically a wrapper for the logger that only prints when debugging is enabled
-     *
-     * @param message
      */
     public static void debug(String message) {
         if (debug) {
@@ -147,9 +146,9 @@ public class Chisel implements Reference {
 
     public static void debug(float[] array) {
         if (debug) {
-            String message = "[";
+            StringBuilder message = new StringBuilder("[");
             for (float obj : array) {
-                message = message + obj + " ";
+                message.append(obj).append(" ");
             }
             debug(message + "]");
         }
@@ -157,11 +156,11 @@ public class Chisel implements Reference {
 
     private void setup(FMLCommonSetupEvent event) {
 
-//        File configFile = event.getSuggestedConfigurationFile();
-//        Configurations.configExists = configFile.exists();
-//        Configurations.config = new Configuration(configFile);
-//        Configurations.config.load();
-//        Configurations.refreshConfig();
+        //File configFile = event.getSuggestedConfigurationFile();
+        //Configurations.configExists = configFile.exists();
+        //Configurations.config = new Configuration(configFile);
+        //Configurations.config.load();
+        //Configurations.refreshConfig();
 
 // TODO
 //        MinecraftForge.EVENT_BUS.register(PerChunkData.INSTANCE);
