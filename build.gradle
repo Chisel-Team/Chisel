@@ -1,109 +1,96 @@
-buildscript {
-    repositories {
-        mavenCentral()
-        mavenLocal()
-        maven {
-            name = "forge"
-            url = "https://maven.minecraftforge.net"
-        }
-        maven { url = 'https://maven.parchmentmc.org' }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-    }
-}
-
 plugins {
-    id 'maven-publish'
-    id 'eclipse'
+    id 'net.minecraftforge.gradle' version "${forge_gradle}"
 }
 
-version = "${minecraft_version}-${mod_version}.${buildnumber}"
 
-allprojects {
+group = 'team.chisel'
+version = "${chisel_version}"
 
-    apply plugin: 'maven-publish'
+java {
+    archivesBaseName = 'Chisel'
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
 
-    repositories {
-        maven { // CTM
-            url "https://maven.tterrag.com/"
+minecraft {
+    mappings channel: 'official', version: "${minecraft_version}"
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'chisel'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+            }
         }
-        maven { // JEI
-            url "https://dvs1.progwml6.com/files/maven"
-        }
-         maven { // WTHIT
-             url "https://maven.bai.lol"
-        }
-    }
-    
-    configurations {
-        shade
-    }
 
-    publishing {    
-        repositories {
-            if (project.hasProperty('mavendir')) {
-                maven { url mavendir }
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'chisel'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        gameTestServer {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            property 'forge.enabledGameTestNamespaces', 'chisel'
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            args '--mod', 'chisel', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                chisel {
+                    source sourceSets.main
+                }
             }
         }
     }
 }
 
-subprojects {
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-    apply plugin: 'java'
-    apply plugin: 'maven-publish'
-    apply plugin: 'net.minecraftforge.gradle'
+repositories {
 
-    java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
 
-    sourceSets.main.resources {
-        srcDir 'src/generated/resources'
-    }
-    
-    minecraft {
-        mappings channel: 'official', version: "${minecraft_version}"
-    
-        accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-    }
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+}
 
-    dependencies {
-        minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-
-        compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
-        runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
-    }
-    
-    jar {
-        classifier = 'slim'
-    
-        manifest {
-            attributes(["Specification-Title": "chisel",
-                        "Specification-Vendor": "tterrag",
-                        "Specification-Version": "1.0",
-                        "Implementation-Title": project.name,
-                        "Implementation-Version": "${version}",
-                        "Implementation-Vendor" :"tterrag",
-                        "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
-        }
-    }
-    
-    reobf {
-        shadowJar {}
-    }
-
-    publishing {
-        tasks.publish.dependsOn 'build'
-        publications {
-            mavenJava(MavenPublication) {
-                artifact jar
-            }
-        }
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "chisel",
+                "Specification-Vendor"    : "tterrag",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "tterrag",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
     }
 }
 
-}
+jar.finalizedBy('reobfJar')
