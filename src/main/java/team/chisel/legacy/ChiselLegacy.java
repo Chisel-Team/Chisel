@@ -1,13 +1,11 @@
 package team.chisel.legacy;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.providers.ProviderType;
-
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.fml.common.Mod;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import team.chisel.common.Reference;
 import team.chisel.common.init.ChiselTabs;
 
@@ -22,10 +20,10 @@ public class ChiselLegacy implements Reference {
         return ret;
     });
 
-	public ChiselLegacy() {
-		LegacyFeatures.init();
-	}
-    
+    public ChiselLegacy() {
+        LegacyFeatures.init();
+    }
+
     public static Registrate registrate() {
         return REGISTRATE.get();
     }

@@ -1,11 +1,5 @@
 package team.chisel.common.config;
 
-import java.util.Locale;
-
-import org.apache.commons.lang3.StringUtils;
-
-import team.chisel.Features;
-
 public class Configurations {
 
 //    public static Configuration config;
@@ -45,7 +39,7 @@ public class Configurations {
     public static boolean useRoadLineTool;
     public static String getRoadLineTool;
     public static int roadLineToolLevel;
-    
+
     public static boolean autoChiselPowered = true;
     public static boolean autoChiselNeedsPower = false;
 

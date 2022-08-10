@@ -1,36 +1,35 @@
 package team.chisel.common.integration.imc;
 
-import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
-
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fml.InterModComms.IMCMessage;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.tuple.Pair;
 import team.chisel.Chisel;
 import team.chisel.api.IMC;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IVariationRegistry;
 
+import java.util.Set;
+
 public class IMCHandler {
 
     public static final IMCHandler INSTANCE = new IMCHandler();
-    
+
     public final Object2IntMap<String> imcCounts = new Object2IntOpenHashMap<>();
 
-    private int order = 1000;
+    private final int order = 1000;
+    private final SetMultimap<String, String> deprecatedUses = HashMultimap.create();
 
     private IMCHandler() {
     }
@@ -42,7 +41,7 @@ public class IMCHandler {
             }
         }
     }
-    
+
     private Pair<ItemStack, BlockState> parseNBT(CompoundTag tag) {
         CompoundTag stacktag = tag.getCompound("stack");
         String blockname = tag.getString("block");
@@ -58,8 +57,6 @@ public class IMCHandler {
         }
         return Pair.of(stack, state);
     }
-    
-    private SetMultimap<String, String> deprecatedUses = HashMultimap.create();
 
     @SuppressWarnings("deprecation")
     private void handle(IMCMessage message, IMC type) {
@@ -76,49 +73,49 @@ public class IMCHandler {
         ResourceLocation resource = null;
         try {
             switch (type) {
-            case ADD_VARIATION: {
-                CompoundTag tag = (CompoundTag) message.getMessageSupplier().get();
-                ResourceLocation group = new ResourceLocation(tag.getString("group"));
-                Preconditions.checkNotNull(Strings.emptyToNull(group.getPath()), "No group specified");
-                
-                Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
-                ICarvingVariation v;
-                // TODO
-                //if (variationdata.getLeft() == null) {
-                //    v = CarvingUtils.variationFor(group, variationdata.getRight(), order++);
-                //} else if (variationdata.getRight() == null) {
-                //    v = CarvingUtils.variationFor(group, variationdata.getLeft(), order++);
-                //} else {
-                //    v = CarvingUtils.variationFor(group, variationdata.getLeft(), variationdata.getRight(), order++);
-                //}
-                //reg.addVariation(group, v);
-                break;
-            }
-            case REMOVE_VARIATION:{
-                CompoundTag tag = (CompoundTag) message.getMessageSupplier().get();
-                String group = tag.getString("group");
-                Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
-                // TODO
-                //if (Strings.isNullOrEmpty(group)) {
-                //    if (variationdata.getLeft() != null) {
-                //        reg.removeVariation(variationdata.getLeft());
-                //    }
-                //    if (variationdata.getRight() != null) {
-                //        reg.removeVariation(variationdata.getRight());
-                //    }
-                //} else {
-                //    if (variationdata.getLeft() != null) {
-                //        reg.removeVariation(variationdata.getLeft(), group);
-                //    }
-                //    if (variationdata.getRight() != null) {
-                //        reg.removeVariation(variationdata.getRight(), group);
-                //    }
-                //}
-                break;
-            }
-            default: {
-                throw new IllegalArgumentException("Invalid IMC constant! How...what...?");
-            }
+                case ADD_VARIATION: {
+                    CompoundTag tag = (CompoundTag) message.getMessageSupplier().get();
+                    ResourceLocation group = new ResourceLocation(tag.getString("group"));
+                    Preconditions.checkNotNull(Strings.emptyToNull(group.getPath()), "No group specified");
+
+                    Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
+                    ICarvingVariation v;
+                    // TODO
+                    //if (variationdata.getLeft() == null) {
+                    //    v = CarvingUtils.variationFor(group, variationdata.getRight(), order++);
+                    //} else if (variationdata.getRight() == null) {
+                    //    v = CarvingUtils.variationFor(group, variationdata.getLeft(), order++);
+                    //} else {
+                    //    v = CarvingUtils.variationFor(group, variationdata.getLeft(), variationdata.getRight(), order++);
+                    //}
+                    //reg.addVariation(group, v);
+                    break;
+                }
+                case REMOVE_VARIATION: {
+                    CompoundTag tag = (CompoundTag) message.getMessageSupplier().get();
+                    String group = tag.getString("group");
+                    Pair<ItemStack, BlockState> variationdata = parseNBT(tag);
+                    // TODO
+                    //if (Strings.isNullOrEmpty(group)) {
+                    //    if (variationdata.getLeft() != null) {
+                    //        reg.removeVariation(variationdata.getLeft());
+                    //    }
+                    //    if (variationdata.getRight() != null) {
+                    //        reg.removeVariation(variationdata.getRight());
+                    //    }
+                    //} else {
+                    //    if (variationdata.getLeft() != null) {
+                    //        reg.removeVariation(variationdata.getLeft(), group);
+                    //    }
+                    //    if (variationdata.getRight() != null) {
+                    //        reg.removeVariation(variationdata.getRight(), group);
+                    //    }
+                    //}
+                    break;
+                }
+                default: {
+                    throw new IllegalArgumentException("Invalid IMC constant! How...what...?");
+                }
             }
         } catch (Exception e) {
             Object value = message.getMessageSupplier().get();

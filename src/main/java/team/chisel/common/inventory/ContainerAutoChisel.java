@@ -1,17 +1,8 @@
 package team.chisel.common.inventory;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.SimpleContainerData;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -20,30 +11,27 @@ import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.common.init.ChiselTileEntities;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class ContainerAutoChisel extends AbstractContainerMenu {
 
-    private static class ChiselableSlot extends SlotItemHandler {
-
-        public ChiselableSlot(IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
-            super(inventoryIn, index, xPosition, yPosition);
-        }
-
-        @Override
-        public boolean mayPlace(@Nullable ItemStack stack) {
-            return stack != null && CarvingUtils.getChiselRegistry().getGroup(stack.getItem()).isPresent();
-        }
-    }
-
+    public static final int
+            ACTIVE = 0,
+            PROGRESS = 1,
+            MAX_PROGRESS = 2,
+            ENERGY = 3,
+            MAX_ENERGY = 4,
+            ENERGY_USE = 5;
     public final Inventory invPlayer;
-    
+    public final int chiselSlot, targetSlot;
     private final int beginInputSlots, endInputSlots;
-    public  final int chiselSlot, targetSlot;
     private final int beginOutputSlots, endOutputSlots;
     private final int beginPlayerSlots, endPlayerSlots;
-    
+
     private final ContainerData progressAndPower;
     private final ContainerLevelAccess pos;
-    
+
     public ContainerAutoChisel(MenuType<ContainerAutoChisel> type, int windowId, Inventory invPlayer) {
         this(type, windowId, invPlayer, new ItemStackHandler(12), new ItemStackHandler(12), new ItemStackHandler(2), new SimpleContainerData(6), ContainerLevelAccess.NULL);
     }
@@ -78,7 +66,7 @@ public class ContainerAutoChisel extends AbstractContainerMenu {
                 }
             });
         }
-        
+
         beginPlayerSlots = endOutputSlots = slots.size();
 
         for (int r = 0; r < 3; ++r) {
@@ -90,12 +78,12 @@ public class ContainerAutoChisel extends AbstractContainerMenu {
         for (int i = 0; i < 9; ++i) {
             addSlot(new Slot(invPlayer, i, 8 + i * 18, 176));
         }
-        
+
         endPlayerSlots = slots.size();
-        
+
         checkContainerDataCount(progressAndPower, 2);
         addDataSlots(progressAndPower);
-        
+
         this.progressAndPower = progressAndPower;
         this.pos = pos;
     }
@@ -109,7 +97,7 @@ public class ContainerAutoChisel extends AbstractContainerMenu {
     @Nonnull
     public ItemStack quickMoveStack(Player playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = (Slot) this.slots.get(index);
+        Slot slot = this.slots.get(index);
 
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
@@ -158,19 +146,11 @@ public class ContainerAutoChisel extends AbstractContainerMenu {
 
         return itemstack;
     }
-    
-    public static final int 
-            ACTIVE = 0,
-            PROGRESS = 1,
-            MAX_PROGRESS = 2,
-            ENERGY = 3,
-            MAX_ENERGY = 4,
-            ENERGY_USE = 5;
 
     public boolean isActive() {
         return progressAndPower.get(ACTIVE) > 0;
     }
-    
+
     public int getProgressScaled(int progBarLength) {
         return (int) (((float) progressAndPower.get(PROGRESS) / progressAndPower.get(MAX_PROGRESS)) * progBarLength);
     }
@@ -178,20 +158,32 @@ public class ContainerAutoChisel extends AbstractContainerMenu {
     public boolean hasEnergy() {
         return getEnergy() > 0;
     }
-    
+
     public int getEnergy() {
         return progressAndPower.get(ENERGY);
     }
-    
+
     public int getMaxEnergy() {
         return progressAndPower.get(MAX_ENERGY);
     }
-    
+
     public int getEnergyScaled(int progBarLength) {
         return (int) (((float) progressAndPower.get(ENERGY) / progressAndPower.get(MAX_ENERGY)) * progBarLength);
     }
 
     public int getUsagePerTick() {
         return progressAndPower.get(ENERGY_USE);
+    }
+
+    private static class ChiselableSlot extends SlotItemHandler {
+
+        public ChiselableSlot(IItemHandler inventoryIn, int index, int xPosition, int yPosition) {
+            super(inventoryIn, index, xPosition, yPosition);
+        }
+
+        @Override
+        public boolean mayPlace(@Nullable ItemStack stack) {
+            return stack != null && CarvingUtils.getChiselRegistry().getGroup(stack.getItem()).isPresent();
+        }
     }
 }

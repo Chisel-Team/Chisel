@@ -1,10 +1,5 @@
 package team.chisel.common.inventory;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -13,12 +8,16 @@ import net.minecraft.world.item.ItemStack;
 import team.chisel.api.IChiselItem;
 import team.chisel.common.item.ItemChisel;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
 public class InventoryChiselSelection implements Container {
 
-    ItemStack chisel = ItemStack.EMPTY;
     public final int size;
     public int activeVariations = 0;
-    @Nullable ChiselContainer container;
+    ItemStack chisel = ItemStack.EMPTY;
+    @Nullable
+    ChiselContainer container;
     NonNullList<ItemStack> inventory;
 
     public InventoryChiselSelection(ItemStack c, int size) {
@@ -59,7 +58,7 @@ public class InventoryChiselSelection implements Container {
                 if (stack.getCount() == 0) {
                     setItem(slot, ItemStack.EMPTY);
                 }
-                
+
                 updateInventoryState(slot);
 
                 return split;
@@ -69,7 +68,7 @@ public class InventoryChiselSelection implements Container {
     }
 
     @Override
-    public ItemStack removeItemNoUpdate(int slot){
+    public ItemStack removeItemNoUpdate(int slot) {
         ItemStack stack = getItem(slot);
 
         setItem(slot, ItemStack.EMPTY);
@@ -92,7 +91,7 @@ public class InventoryChiselSelection implements Container {
     @Override
     public boolean stillValid(Player player) {
         ItemStack held = player.getInventory().getItem(container.getChiselSlot());
-        return !held.isEmpty() && held.getItem() instanceof IChiselItem && ((IChiselItem)held.getItem()).canOpenGui(player.level, player, container.hand);
+        return !held.isEmpty() && held.getItem() instanceof IChiselItem && ((IChiselItem) held.getItem()).canOpenGui(player.level, player, container.hand);
     }
 
     public void clearItems() {
@@ -105,7 +104,7 @@ public class InventoryChiselSelection implements Container {
     public ItemStack getStackInSpecialSlot() {
         return inventory.get(size);
     }
-    
+
     public void setStackInSpecialSlot(ItemStack stack) {
         setItem(size, stack);
     }

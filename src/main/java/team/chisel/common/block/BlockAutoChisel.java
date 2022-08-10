@@ -1,8 +1,5 @@
 package team.chisel.common.block;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -27,8 +24,10 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.items.IItemHandler;
 import team.chisel.common.init.ChiselTileEntities;
 
+import javax.annotation.Nullable;
+
 public class BlockAutoChisel extends Block implements EntityBlock {
-    
+
     @SuppressWarnings("null")
     private static final VoxelShape COLLISION_SHAPE = Shapes.or(
             box(0, 0, 0, 16, 10, 16),
@@ -37,7 +36,7 @@ public class BlockAutoChisel extends Block implements EntityBlock {
             box(0, 10, 0, 16, 16, 1),
             box(0, 10, 15, 16, 16, 16),
             box(0, 15, 0, 16, 16, 16));
-    
+
     private static final VoxelShape SELECTION_SHAPE = Shapes.block();
 
     public BlockAutoChisel(Block.Properties properties) {
@@ -49,7 +48,7 @@ public class BlockAutoChisel extends Block implements EntityBlock {
 //        setCreativeTab(ChiselTabs.tab);
 //        useNeighborBrightness = true;
     }
-    
+
     @Override
     public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if (!worldIn.isClientSide) {
@@ -73,14 +72,13 @@ public class BlockAutoChisel extends Block implements EntityBlock {
             }
         }
     }
-    
+
     @Override
     @Deprecated
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         BlockEntity tileentity = worldIn.getBlockEntity(pos);
 
-        if (tileentity instanceof TileAutoChisel) {
-            TileAutoChisel autochisel = (TileAutoChisel) tileentity;
+        if (tileentity instanceof TileAutoChisel autochisel) {
             dumpItems(worldIn, pos, autochisel.getInputInv());
             dumpItems(worldIn, pos, autochisel.getOtherInv());
             dumpItems(worldIn, pos, autochisel.getOutputInv());
@@ -99,12 +97,12 @@ public class BlockAutoChisel extends Block implements EntityBlock {
             }
         }
     }
-    
+
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return COLLISION_SHAPE;
     }
-    
+
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         return SELECTION_SHAPE;

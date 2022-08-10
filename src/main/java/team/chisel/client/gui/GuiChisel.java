@@ -1,17 +1,10 @@
 package team.chisel.client.gui;
 
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import com.google.common.collect.Lists;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.Tesselator;
-
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -28,13 +21,15 @@ import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.inventory.ChiselContainer;
-import team.chisel.common.inventory.SlotChiselInput;
 import team.chisel.common.item.PacketChiselMode;
 import team.chisel.common.util.NBTUtil;
+
+import java.util.List;
 
 public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScreen<T> {
 
     public Player player;
+    private boolean scaleActive = false;
 
     public GuiChisel(T container, Inventory iinventory, Component displayName) {
         super(container, iinventory, displayName);
@@ -52,7 +47,7 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton) {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        
+
         // if this is a selection slot, no double clicking
         //Slot slot = getSlotAtPosition(mouseX, mouseY);
         //if (slot != null && slot.slotNumber < this.menu.getInventoryChisel().size - 1) {
@@ -61,7 +56,6 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
 
         return false;
     }
-
 
     @Override
     public void init() {
@@ -110,7 +104,7 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
         super.render(PoseStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(PoseStack, mouseX, mouseY);
     }
-    
+
     @Override
     protected void renderLabels(PoseStack PoseStack, int j, int i) {
         setSlotScale(PoseStack, false); // Clear slot scaling in case input slot is the last one rendered, this is the very next method called after rendering slots
@@ -133,7 +127,7 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
     protected void drawButtonTooltips(PoseStack PoseStack, int mx, int my) {
         for (Widget button : renderables) {
             if (button instanceof ButtonChiselMode b && b.isMouseOver(mx, my)) {
-                String unloc = ((ButtonChiselMode)button).getMode().getUnlocName();
+                String unloc = ((ButtonChiselMode) button).getMode().getUnlocName();
                 List<Component> ttLines = Lists.newArrayList(
                         new TranslatableComponent(unloc),
                         new TranslatableComponent(unloc + ".desc").withStyle(ChatFormatting.GRAY)
@@ -166,32 +160,31 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
 
     @Override
     protected boolean isHovering(Slot slotIn, double mouseX, double mouseY) {
-    	if (slotIn == menu.getInputSlot()) {
-    	    // If scaling is not active, this is a check for a click action, which must be shifted the opposite way as the slot position is not shifted
-    	    if (scaleActive) {
-    	        return isHovering(slotIn.x + 8, slotIn.y + 8, 32, 32, mouseX, mouseY);
-    	    } else {
-    	        return isHovering(slotIn.x - 8, slotIn.y - 8, 32, 32, mouseX, mouseY);
-    	    }
-    	}
-    	return super.isHovering(slotIn, mouseX, mouseY);
+        if (slotIn == menu.getInputSlot()) {
+            // If scaling is not active, this is a check for a click action, which must be shifted the opposite way as the slot position is not shifted
+            if (scaleActive) {
+                return isHovering(slotIn.x + 8, slotIn.y + 8, 32, 32, mouseX, mouseY);
+            } else {
+                return isHovering(slotIn.x - 8, slotIn.y - 8, 32, 32, mouseX, mouseY);
+            }
+        }
+        return super.isHovering(slotIn, mouseX, mouseY);
     }
 
     @Override
     protected void fillGradient(PoseStack PoseStack, int x1, int y1, int x2, int y2, int colorFrom, int colorTo) {
-		super.fillGradient(PoseStack, x1, y1, x2, y2, colorFrom, colorTo);
+        super.fillGradient(PoseStack, x1, y1, x2, y2, colorFrom, colorTo);
     }
 
-    private boolean scaleActive = false;
     private void setSlotScale(PoseStack stack, boolean active) {
         Slot slot = this.menu.getInputSlot();
         if (!scaleActive && active) {
             /*
              * Item rendering does not use the PoseStack, but drawing the highlight does.
-             * 
+             *
              * This means that if the slot has an item, and we apply both methods, it will result in the highlight being double scaled.
              * However, the model view stack will never be used if an item is not drawn, which breaks the highlight when there is no item in the slot.
-             * 
+             *
              * So to avoid this we apply either method based on if the slot has an item to render or not.
              */
             if (slot.hasItem()) {
@@ -219,18 +212,14 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
     }
 
     @Override
-	public void renderSlot(PoseStack stack, Slot slot) {
-        if (slot == menu.getInputSlot()) {
-            setSlotScale(stack, true);
-        } else {
-            setSlotScale(stack, false);
-        }
+    public void renderSlot(PoseStack stack, Slot slot) {
+        setSlotScale(stack, slot == menu.getInputSlot());
         super.renderSlot(stack, slot);
     }
 
     private void drawSlotOverlay(PoseStack PoseStack, AbstractContainerScreen<?> gui, int x, int y, Slot slot, int u, int v, int padding) {
         //if (scaleActive) {
-            gui.blit(PoseStack, x + (slot.x - 16 - padding), y + (slot.y - 16 - padding), u, v, 48 + padding, 48 + padding);
+        gui.blit(PoseStack, x + (slot.x - 16 - padding), y + (slot.y - 16 - padding), u, v, 48 + padding, 48 + padding);
 //        } else {
 //            gui.blit(PoseStack, x + (slot.x - padding), y, u, v, 16, 16);
 //        }

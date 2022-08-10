@@ -1,11 +1,6 @@
 package team.chisel.common.world;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.Stream;
-
 import com.mojang.serialization.Codec;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
@@ -14,9 +9,13 @@ import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
 import net.minecraft.world.level.material.Material;
 import team.chisel.common.init.ChiselWorldGen;
 
+import java.util.Arrays;
+import java.util.Random;
+import java.util.stream.Stream;
+
 public class UnderLavaPlacement extends PlacementModifier {
 
-	public static final Codec<UnderLavaPlacement> CODEC = Codec.unit(new UnderLavaPlacement());
+    public static final Codec<UnderLavaPlacement> CODEC = Codec.unit(new UnderLavaPlacement());
 
     @SuppressWarnings("null")
     @Override

@@ -1,13 +1,8 @@
 package team.chisel.legacy;
 
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
-
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
@@ -24,9 +19,13 @@ import team.chisel.client.data.ModelTemplates;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
 
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 public class LegacyFeatures {
 
-	private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(ChiselLegacy.registrate());
+    private static final ChiselBlockFactory _FACTORY = ChiselBlockFactory.newFactory(ChiselLegacy.registrate());
 
     // Hardcode to vanilla wood types
 
@@ -67,7 +66,7 @@ public class LegacyFeatures {
             .next("bricks2")
             .next("bricks_dirt2")
             .next("hor")
-                .model(ModelTemplates.cubeColumn("hor-ctmh", "hor-top"))
+            .model(ModelTemplates.cubeColumn("hor-ctmh", "hor-top"))
             .next("vert")
             .next("layers")
             .next("vertical")
@@ -82,11 +81,11 @@ public class LegacyFeatures {
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_DIAMOND_TOOL)
             .variation("pillar")
-                .model(ModelTemplates.cubeColumn())
+            .model(ModelTemplates.cubeColumn())
             .next("pillar-quartz")
-                .model(ModelTemplates.cubeColumn())
+            .model(ModelTemplates.cubeColumn())
             .next("chiseled")
-                .model(ModelTemplates.cubeColumn())
+            .model(ModelTemplates.cubeColumn())
             .next("panel_shiny")
             .next("panel")
             .next("chunks")
@@ -98,9 +97,9 @@ public class LegacyFeatures {
             .next("blocks")
             .next("tiles")
             .next("greek")
-                .model(ModelTemplates.cubeColumn())
+            .model(ModelTemplates.cubeColumn())
             .next("crate")
-                .model(ModelTemplates.cubeBottomTop())
+            .model(ModelTemplates.cubeBottomTop())
             .build(b -> b.strength(50.0F, 2000.0F).sound(SoundType.STONE));
 
     public static final Map<String, BlockEntry<BlockCarvable>> PAPER = _FACTORY.newType(Material.PLANT, "paper")
@@ -121,5 +120,6 @@ public class LegacyFeatures {
             .next("door")
             .build(b -> b.strength(1.5F, 0.0F).sound(SoundType.GRASS));
 
-	public static void init() {}
+    public static void init() {
+    }
 }

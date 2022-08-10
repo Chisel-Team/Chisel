@@ -1,29 +1,29 @@
 package team.chisel.common.util;
 
-import java.util.Comparator;
-
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.resources.ResourceLocation;
+
+import java.util.Comparator;
 
 public class ItemSorter {
-    
+
     public static <T extends ItemLike> Comparator<T> byName(Comparator<ResourceLocation> child) {
         return Comparator.comparing(i -> i.asItem().getRegistryName(), child);
     }
-    
+
     public static <T extends ItemLike> Comparator<T> alphabetic() {
-        return byName(alphabeticByName()); 
+        return byName(alphabeticByName());
     }
-    
+
     private static Comparator<ResourceLocation> alphabeticByName() {
         return Comparator.<ResourceLocation, String>comparing(r -> r.getNamespace()).thenComparing(r -> r.getPath());
     }
-    
+
     public static <T extends ItemLike> Comparator<T> alphabeticVanillaFirst() {
-        return ItemSorter.<T>vanillaFirst().thenComparing(ItemSorter.<T>byName(alphabeticByName()));
+        return ItemSorter.<T>vanillaFirst().thenComparing(ItemSorter.byName(alphabeticByName()));
     }
-    
+
     public static <T extends ItemLike> Comparator<T> variantOrder() {
         return ItemSorter.<T>vanillaFirst().thenComparing(byName(rawFirst().thenComparing(alphabeticByName())));
     }
@@ -39,12 +39,12 @@ public class ItemSorter {
             }
         };
     }
-    
+
     private static Comparator<ResourceLocation> rawFirst() {
         return Comparator.comparing(r -> r.getPath(), (n1, n2) ->
                 n1.endsWith("/raw") && n2.endsWith("/raw") ? 0 :
-                n1.endsWith("/raw") ? -1 :
-                n2.endsWith("/raw") ? 1 :
-                0);
+                        n1.endsWith("/raw") ? -1 :
+                                n2.endsWith("/raw") ? 1 :
+                                        0);
     }
 }

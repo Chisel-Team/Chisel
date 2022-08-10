@@ -1,15 +1,7 @@
 package team.chisel.client.data;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableList;
 import com.tterrag.registrate.util.nullness.FieldsAreNonnullByDefault;
-
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +14,117 @@ import team.chisel.api.block.RecipeTemplate;
 import team.chisel.api.block.VariantTemplate;
 import team.chisel.common.block.BlockCarvable;
 
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @FieldsAreNonnullByDefault
 public class VariantTemplates {
-    
+
+    public static final VariantTemplate RAW = simple("raw");
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> COLORS = ImmutableList.copyOf(Arrays.stream(DyeColor.values())
+            .map(color -> simple(color.getSerializedName()))
+            .collect(Collectors.toList()));
+    public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
+    public static final ImmutableList<VariantTemplate> STONE = ofClass(Stone.class);
+    public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> COBBLESTONE = ImmutableList.<VariantTemplate>builder()
+            .addAll(ROCK)
+            .add(withName("extra/emboss", "Embossed"))
+            .add(withName("extra/indent", "Indent"))
+            .add(withName("extra/marker", "Marker"))
+            .build();
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> COBBLESTONE_MOSSY = ImmutableList.copyOf(COBBLESTONE.stream()
+            .map(v -> SimpleTemplate.builderFrom(v)
+                    .modelTemplate(mossyModel("cobblestone", v))
+                    .build())
+            .collect(Collectors.toList()));
+    public static final ImmutableList<VariantTemplate> PLANKS = ofClass(Planks.class);
+
+    public static VariantTemplate empty(String name, String... tooltip) {
+        return simple(name, null, tooltip);
+    }
+
+    public static VariantTemplate simple(String name, String... tooltip) {
+        return simple(name, ModelTemplates.simpleBlock(), tooltip);
+    }
+
+    public static VariantTemplate simple(String name, @Nullable ModelTemplate template, String... tooltip) {
+        return SimpleTemplate.builder().name(name).modelTemplate(template).tooltip(tooltip).build();
+    }
+
+    public static VariantTemplate withName(String name, String localizedName, String... tooltip) {
+        return withName(name, localizedName, ModelTemplates.simpleBlock(), tooltip);
+    }
+
+    public static VariantTemplate withName(String name, String localizedName, @Nullable ModelTemplate template, String... tooltip) {
+        return SimpleTemplate.builder().name(name).localizedName(localizedName).modelTemplate(template).tooltip(tooltip).build();
+    }
+
+    @SuppressWarnings("null")
+    private static ImmutableList<VariantTemplate> ofClass(Class<?> cls) {
+        return ImmutableList.copyOf(Arrays.stream(cls.getDeclaredFields())
+                .map(f -> {
+                    try {
+                        return (VariantTemplate) f.get(null);
+                    } catch (IllegalArgumentException | IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .collect(Collectors.toList()));
+    }
+
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> colors(ModelTemplate template) {
+        return colors(template, null);
+    }
+
+    public static ImmutableList<VariantTemplate> colors(ModelTemplate model, RecipeTemplate whiteRecipe) {
+        return ImmutableList.copyOf(COLORS.stream()
+                .map(SimpleTemplate::builderFrom)
+                .map(b -> b.modelTemplate(model))
+                .map(b -> b.recipeTemplate(b.name.equals(DyeColor.WHITE.getSerializedName()) ? whiteRecipe : null))
+                .map(SimpleTemplate.SimpleTemplateBuilder::build)
+                .collect(Collectors.toList()));
+    }
+
+    private static ModelTemplate mossyModel(String base, VariantTemplate template) {
+        if (template.getName().equals("circularct")) {
+            return ModelTemplates.mossyCtm(base, "circular");
+        } else if (template.getName().equals("pillar") || template.getName().equals("twisted")) {
+            return ModelTemplates.mossyColumn(base);
+        } else {
+            return ModelTemplates.mossy(base);
+        }
+    }
+
+    public static final SimpleTemplate withRecipe(VariantTemplate template, RecipeTemplate recipe) {
+        return SimpleTemplate.builderFrom(template)
+                .recipeTemplate(recipe)
+                .build();
+    }
+
+    @SuppressWarnings("null")
+    public static final ImmutableList<VariantTemplate> withUncraft(Collection<VariantTemplate> templates, Item item) {
+        return ImmutableList.copyOf(templates.stream()
+                .map(SimpleTemplate::builderFrom)
+                .map(b -> b.recipeTemplate((prov, block) -> new ShapelessRecipeBuilder(item, 9)
+                        .requires(block, 9)
+                        .unlockedBy("has_" + item.getRegistryName().getPath(), prov.has(item))
+                        .save(prov, Chisel.MOD_ID + ":" + item.getRegistryName().getPath() + "_from_" + ((BlockCarvable) block).getVariation().getName())))
+                .map(SimpleTemplate.SimpleTemplateBuilder::build)
+                .collect(Collectors.toList()));
+    }
+
     @RequiredArgsConstructor
     @Builder
     public static class SimpleTemplate implements VariantTemplate {
-        
+
         @Getter(onMethod = @__({@Override}))
         private final String name;
         private final String localizedName;
@@ -36,55 +132,35 @@ public class VariantTemplates {
         private final RecipeTemplate recipeTemplate;
         @Getter(onMethod = @__({@Override}))
         private final String[] tooltip;
-        
-        @Override
-        public String getLocalizedName() {
-            return localizedName == null ? VariantTemplate.super.getLocalizedName() : localizedName;
-        }
-        
-        @Override
-        public Optional<ModelTemplate> getModelTemplate() {
-            return Optional.ofNullable(modelTemplate);
-        }
-        
-        @Override
-        public Optional<RecipeTemplate> getRecipeTemplate() {
-            return Optional.ofNullable(recipeTemplate);
-        }
-        
+
         public static SimpleTemplateBuilder builderFrom(VariantTemplate from) {
             return builder()
                     .name(from.getName())
-                    .localizedName(from instanceof SimpleTemplate ? ((SimpleTemplate)from).localizedName : from.getLocalizedName())
+                    .localizedName(from instanceof SimpleTemplate ? ((SimpleTemplate) from).localizedName : from.getLocalizedName())
                     .modelTemplate(from.getModelTemplate().orElse(null))
                     .recipeTemplate(from.getRecipeTemplate().orElse(null))
                     .tooltip(from.getTooltip());
         }
+
+        @Override
+        public String getLocalizedName() {
+            return localizedName == null ? VariantTemplate.super.getLocalizedName() : localizedName;
+        }
+
+        @Override
+        public Optional<ModelTemplate> getModelTemplate() {
+            return Optional.ofNullable(modelTemplate);
+        }
+
+        @Override
+        public Optional<RecipeTemplate> getRecipeTemplate() {
+            return Optional.ofNullable(recipeTemplate);
+        }
     }
-    
-    public static VariantTemplate empty(String name, String... tooltip) {
-        return simple(name, null, tooltip);
-    }
-    
-    public static VariantTemplate simple(String name, String... tooltip) {
-        return simple(name, ModelTemplates.simpleBlock(), tooltip);
-    }
-    
-    public static VariantTemplate simple(String name, @Nullable ModelTemplate template, String... tooltip) {
-        return SimpleTemplate.builder().name(name).modelTemplate(template).tooltip(tooltip).build();
-    }
-    
-    public static VariantTemplate withName(String name, String localizedName, String... tooltip) {
-        return withName(name, localizedName, ModelTemplates.simpleBlock(), tooltip);
-    }
-    
-    public static VariantTemplate withName(String name, String localizedName, @Nullable ModelTemplate template, String... tooltip) {
-        return SimpleTemplate.builder().name(name).localizedName(localizedName).modelTemplate(template).tooltip(tooltip).build();
-    }
-    
+
     @FieldsAreNonnullByDefault
     public static class Metal {
-        
+
         public static final VariantTemplate CAUTION = simple("caution");
         public static final VariantTemplate CRATE = withName("crate", "Shipping Crate");
         public static final VariantTemplate THERMAL = simple("thermal", ModelTemplates.cubeBottomTop());
@@ -93,8 +169,6 @@ public class VariantTemplates {
         public static final VariantTemplate BOLTED = simple("bolted");
         public static final VariantTemplate SCAFFOLD = simple("scaffold");
     }
-    
-    public static final VariantTemplate RAW = simple("raw");
 
     public static class Stone {
         public static final VariantTemplate CRACKED = simple("cracked");
@@ -126,7 +200,7 @@ public class VariantTemplates {
         public static final VariantTemplate TWISTED = simple("twisted", ModelTemplates.cubeColumn());
         public static final VariantTemplate PRISM = simple("prism");
     }
-    
+
     public static class Rock {
 
         public static final VariantTemplate CRACKED = simple("cracked");
@@ -186,87 +260,5 @@ public class VariantTemplates {
                     .texture("y", ModelTemplates.replaceVariant(name, "log_bordered"))
                     .texture("z", name + "-ns"));
         });
-    }
-
-    @SuppressWarnings("null")
-    private static ImmutableList<VariantTemplate> ofClass(Class<?> cls) {
-        return ImmutableList.copyOf(Arrays.stream(cls.getDeclaredFields())
-                .map(f -> {
-                    try {
-                        return (VariantTemplate) f.get(null);
-                    } catch (IllegalArgumentException | IllegalAccessException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .collect(Collectors.toList()));
-    }
-    
-    @SuppressWarnings("null")
-    public static final ImmutableList<VariantTemplate> COLORS = ImmutableList.copyOf(Arrays.stream(DyeColor.values())
-            .map(color -> simple(color.getSerializedName()))
-            .collect(Collectors.toList()));
-    
-    @SuppressWarnings("null")
-    public static final ImmutableList<VariantTemplate> colors(ModelTemplate template) {
-        return colors(template, null);
-    }
-
-    public static ImmutableList<VariantTemplate> colors(ModelTemplate model, RecipeTemplate whiteRecipe) {
-        return ImmutableList.copyOf(COLORS.stream()
-                .map(SimpleTemplate::builderFrom)
-                .map(b -> b.modelTemplate(model))
-                .map(b -> b.recipeTemplate(b.name.equals(DyeColor.WHITE.getSerializedName()) ? whiteRecipe : null))
-                .map(SimpleTemplate.SimpleTemplateBuilder::build)
-                .collect(Collectors.toList()));
-    }
-    
-    public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
-
-    public static final ImmutableList<VariantTemplate> STONE = ofClass(Stone.class);
-
-    public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
-    @SuppressWarnings("null")
-    public static final ImmutableList<VariantTemplate> COBBLESTONE = ImmutableList.<VariantTemplate>builder()
-            .addAll(ROCK)
-            .add(withName("extra/emboss", "Embossed"))
-            .add(withName("extra/indent", "Indent"))
-            .add(withName("extra/marker", "Marker"))
-            .build();
-    
-    private static ModelTemplate mossyModel(String base, VariantTemplate template) {
-        if (template.getName().equals("circularct")) {
-            return ModelTemplates.mossyCtm(base, "circular");
-        } else if (template.getName().equals("pillar") || template.getName().equals("twisted")) {
-            return ModelTemplates.mossyColumn(base);
-        } else {
-            return ModelTemplates.mossy(base);
-        }
-    }
-    
-    @SuppressWarnings("null")
-    public static final ImmutableList<VariantTemplate> COBBLESTONE_MOSSY = ImmutableList.copyOf(COBBLESTONE.stream()
-            .map(v -> SimpleTemplate.builderFrom(v)
-                    .modelTemplate(mossyModel("cobblestone", v))
-                    .build())
-            .collect(Collectors.toList()));
-    
-    public static final ImmutableList<VariantTemplate> PLANKS = ofClass(Planks.class);
-
-    public static final SimpleTemplate withRecipe(VariantTemplate template, RecipeTemplate recipe) {
-        return SimpleTemplate.builderFrom(template)
-                .recipeTemplate(recipe)
-                .build();
-    }
-    
-    @SuppressWarnings("null")
-    public static final ImmutableList<VariantTemplate> withUncraft(Collection<VariantTemplate> templates, Item item) {
-        return ImmutableList.copyOf(templates.stream()
-                .map(SimpleTemplate::builderFrom)
-                .map(b -> b.recipeTemplate((prov, block) -> new ShapelessRecipeBuilder(item, 9)
-                        .requires(block, 9)
-                        .unlockedBy("has_" + item.getRegistryName().getPath(), prov.has(item))
-                        .save(prov, Chisel.MOD_ID + ":" + item.getRegistryName().getPath() + "_from_" + ((BlockCarvable)block).getVariation().getName())))
-                .map(SimpleTemplate.SimpleTemplateBuilder::build)
-                .collect(Collectors.toList()));
     }
 }

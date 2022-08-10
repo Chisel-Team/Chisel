@@ -18,7 +18,7 @@ public class BlockCarvable extends Block implements ICarvable {
 
     @Getter(onMethod = @__({@Override}))
     private final VariationData variation;
-    
+
     private boolean dragonProof = false;
 
     public BlockCarvable(Block.Properties properties, VariationData variation) {

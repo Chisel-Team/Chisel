@@ -1,7 +1,5 @@
 package team.chisel.common.block;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -13,6 +11,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import team.chisel.api.block.VariationData;
+
+import javax.annotation.Nonnull;
 
 public class BlockCarvableCarpet extends BlockCarvable {
     private static final @Nonnull VoxelShape SHAPE = box(0, 0, 0, 16, 1, 16);

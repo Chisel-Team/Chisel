@@ -1,10 +1,6 @@
 package team.chisel.common.world;
 
-import java.util.List;
-import java.util.Random;
-
 import com.mojang.serialization.Codec;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
@@ -14,13 +10,17 @@ import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 
+import java.util.List;
+import java.util.Random;
+
 public class ReplaceBlockDownwardsFeature extends Feature<ReplaceMultipleBlocksConfig> {
+
+    private final OreConfiguration _dummy = new OreConfiguration(List.of(), 0, 0);
 
     public ReplaceBlockDownwardsFeature(Codec<ReplaceMultipleBlocksConfig> p_i51444_1_) {
         super(p_i51444_1_);
     }
-    
-    private final OreConfiguration _dummy = new OreConfiguration(List.of(), 0, 0);
+
     @Override
     public boolean place(FeaturePlaceContext<ReplaceMultipleBlocksConfig> ctx) {
         boolean ret = false;

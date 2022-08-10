@@ -1,21 +1,14 @@
 package team.chisel.common.util;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.google.common.base.Strings;
-
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import team.chisel.Chisel;
+import net.minecraft.world.item.ItemStack;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.IChiselMode;
 import team.chisel.client.gui.PreviewType;
-import team.chisel.common.carving.ChiselModeRegistry;
 import team.chisel.common.item.ChiselMode;
+
+import javax.annotation.Nonnull;
+import java.util.Optional;
 
 public class NBTUtil {
 
@@ -43,7 +36,7 @@ public class NBTUtil {
         }
         return tag.getCompound(KEY_TAG);
     }
-    
+
     public static void setChiselTag(ItemStack stack, CompoundTag tag) {
         getTag(stack).put(KEY_TAG, tag);
     }
@@ -55,7 +48,7 @@ public class NBTUtil {
     public static void setChiselTarget(ItemStack chisel, ItemStack target) {
         getChiselTag(chisel).put(KEY_TARGET, target.save(new CompoundTag()));
     }
-    
+
     @SuppressWarnings("null") // Can't use type annotations with JSR
     public static PreviewType getHitechType(ItemStack stack) {
         return PreviewType.values()[getChiselTag(stack).getInt(KEY_PREVIEW_TYPE)];
@@ -64,7 +57,7 @@ public class NBTUtil {
     public static void setHitechType(ItemStack stack, int type) {
         getChiselTag(stack).putInt(KEY_PREVIEW_TYPE, type);
     }
-    
+
     public static int getHitechSelection(ItemStack stack) {
         CompoundTag tag = getChiselTag(stack);
         return tag.contains(KEY_SELECTION_SLOT) ? tag.getInt(KEY_SELECTION_SLOT) : -1;
@@ -73,7 +66,7 @@ public class NBTUtil {
     public static void setHitechSelection(ItemStack chisel, int slot) {
         getChiselTag(chisel).putInt(KEY_SELECTION_SLOT, slot);
     }
-    
+
     public static int getHitechTarget(ItemStack stack) {
         CompoundTag tag = getChiselTag(stack);
         return tag.contains(KEY_TARGET_SLOT) ? tag.getInt(KEY_TARGET_SLOT) : -1;
@@ -82,7 +75,7 @@ public class NBTUtil {
     public static void setHitechTarget(ItemStack chisel, int slot) {
         getChiselTag(chisel).putInt(KEY_TARGET_SLOT, slot);
     }
-    
+
     public static boolean getHitechRotate(ItemStack stack) {
         return getChiselTag(stack).getBoolean(KEY_ROTATE);
     }

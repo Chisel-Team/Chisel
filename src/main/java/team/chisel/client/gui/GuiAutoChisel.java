@@ -1,15 +1,9 @@
 package team.chisel.client.gui;
 
-import java.text.NumberFormat;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -23,24 +17,28 @@ import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.inventory.ContainerAutoChisel;
 
+import javax.annotation.Nonnull;
+import java.text.NumberFormat;
+import java.util.List;
+
 public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> {
     @Nonnull
     private static final ResourceLocation TEXTURE = new ResourceLocation(Chisel.MOD_ID, "textures/autochisel.png");
-    
+
     private static final int PROG_BAR_LENGTH = 50;
     private static final int POWER_BAR_LENGTH = 160;
 
     private final ContainerAutoChisel container;
-    
+
     @Nonnull
     private final ItemStack fakeChisel = new ItemStack(ChiselItems.IRON_CHISEL.get());
-    
+
     public GuiAutoChisel(ContainerAutoChisel container, Inventory inv, Component displayName) {
         super(container, inv, displayName);
         this.container = container;
         this.imageHeight = 200;
     }
-    
+
     @Override
     public void render(PoseStack PoseStack, int mouseX, int mouseY, float partialTicks) {
         this.renderBackground(PoseStack);
@@ -64,7 +62,7 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
                 blit(PoseStack, leftPos + 8, topPos + 94, 8, 206, container.getEnergyScaled(POWER_BAR_LENGTH) + 1, 4);
             }
         }
-        
+
         if (!container.getSlot(container.chiselSlot).hasItem()) {
             drawGhostItem(PoseStack, fakeChisel, leftPos + 80, topPos + 28);
         }
@@ -73,7 +71,7 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
             blit(PoseStack, leftPos + 80, topPos + 64, 176, 34, 16, 16);
         }
     }
-    
+
     private void drawGhostItem(PoseStack PoseStack, @Nonnull ItemStack stack, int x, int y) {
         Minecraft.getInstance().getItemRenderer().renderGuiItem(stack, x, y);
         RenderSystem.setShaderTexture(0, TEXTURE);
@@ -92,14 +90,14 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
     protected void renderLabels(PoseStack PoseStack, int mouseX, int mouseY) {
         this.font.draw(PoseStack, title, this.imageWidth / 2 - this.font.width(title) / 2, 6, 0x404040);
         this.font.draw(PoseStack, container.invPlayer.getDisplayName(), 8, this.imageHeight - 96 + 2, 0x404040);
-        
+
         if (Configurations.autoChiselPowered) {
             mouseX -= leftPos;
             mouseY -= topPos;
 
             int finalMouseX = mouseX;
             int finalMouseY = mouseY;
-            
+
             if (finalMouseX >= 7 && finalMouseY >= 93 && finalMouseX <= 169 && finalMouseY <= 98) {
                 NumberFormat fmt = NumberFormat.getNumberInstance();
                 String stored = fmt.format(container.getEnergy());

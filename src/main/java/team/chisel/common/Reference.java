@@ -1,7 +1,5 @@
 package team.chisel.common;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 /**
  * Reference class for different mod information
  */

@@ -1,7 +1,5 @@
 package team.chisel.common.inventory;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import lombok.Getter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Inventory;
@@ -22,22 +20,23 @@ public class ChiselContainer extends AbstractContainerMenu {
 
     protected final InventoryChiselSelection inventoryChisel;
     protected final Inventory inventoryPlayer;
-    
+
     protected final InteractionHand hand;
     protected final int chiselSlot;
     protected final ItemStack chisel;
     protected final IVariationRegistry carving;
     protected Slot inputSlot;
+    ClickType currentClickType;
 
     public ChiselContainer(MenuType<? extends ChiselContainer> type, int windowId, Inventory inventoryplayer) {
         this(type, windowId, inventoryplayer, new InventoryChiselSelection(ItemStack.EMPTY, 60), InteractionHand.MAIN_HAND);
     }
-    
+
     public ChiselContainer(MenuType<? extends ChiselContainer> type, int windowId, Inventory inventoryplayer, InventoryChiselSelection inv, InteractionHand hand) {
         super(type, windowId);
         this.inventoryChisel = inv;
         this.inventoryPlayer = inventoryplayer;
-        
+
         this.hand = hand;
         this.chiselSlot = hand == InteractionHand.MAIN_HAND ? inventoryplayer.selected : inventoryplayer.getContainerSize() - 1;
         this.chisel = inventoryplayer.getItem(chiselSlot);
@@ -51,10 +50,10 @@ public class ChiselContainer extends AbstractContainerMenu {
             ItemStack stack = NBTUtil.getChiselTarget(chisel);
             inventoryChisel.setItem(getInventoryChisel().size, stack);
         }
-        
+
         inventoryChisel.updateItems();
     }
-    
+
     protected void addSlots() {
         int top = 8, left = 62;
 
@@ -78,8 +77,6 @@ public class ChiselContainer extends AbstractContainerMenu {
             addSlot(new Slot(inventoryPlayer, i, left + ((i % 9) * 18), top + (i / 9) * 18));
         }
     }
-    
-    ClickType currentClickType;
 
     @Override
     public void clicked(int slotId, int dragType, ClickType clickTypeIn, Player player) {
@@ -88,7 +85,7 @@ public class ChiselContainer extends AbstractContainerMenu {
             int clickedSlot = slotId - inventoryChisel.getContainerSize() - 27;
             Chisel.debug("Slot clicked is " + slotId + " and slot length is " + slots.size());
             try {
-                Slot slot = (Slot) slots.get(slotId);
+                Slot slot = slots.get(slotId);
                 Chisel.debug("Slot is " + slot);
             } catch (Exception exception) {
                 Chisel.debug("Exception getting slot");
@@ -100,12 +97,12 @@ public class ChiselContainer extends AbstractContainerMenu {
                 return;
             }
         }
-        
+
         this.currentClickType = clickTypeIn;
         super.clicked(slotId, dragType, clickTypeIn, player);
     }
 
-    
+
     @Override
     public void removed(Player entityplayer) {
         inventoryChisel.clearItems();
@@ -120,7 +117,7 @@ public class ChiselContainer extends AbstractContainerMenu {
     @Override
     public ItemStack quickMoveStack(Player entity, int slotIdx) {
         ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = (Slot) this.slots.get(slotIdx);
+        Slot slot = this.slots.get(slotIdx);
 
         if (slot != null && slot.hasItem()) {
             ItemStack itemstack1 = slot.getItem();
@@ -149,7 +146,7 @@ public class ChiselContainer extends AbstractContainerMenu {
                     return ItemStack.EMPTY;
                 }
             }
-            
+
             boolean clearSlot = slotIdx >= getInventoryChisel().size || getInventoryChisel().getStackInSpecialSlot().isEmpty();
 
             slot.onQuickCraft(itemstack1, itemstack);

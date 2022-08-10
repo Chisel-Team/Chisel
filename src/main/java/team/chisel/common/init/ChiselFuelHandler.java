@@ -7,11 +7,10 @@ import team.chisel.common.Reference;
 
 @EventBusSubscriber(modid = Reference.MOD_ID)
 public class ChiselFuelHandler {
-    
+
     public static void onBurnTime(FurnaceFuelBurnTimeEvent event) {
         ItemStack itemStack = event.getItemStack();
         if (itemStack.isEmpty()) {
-            return;
         }
         // TODO 1.14 tags
 //        for(int id : OreDictionary.getOreIDs(itemStack))

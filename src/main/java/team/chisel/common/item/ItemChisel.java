@@ -1,19 +1,7 @@
 package team.chisel.common.item;
 
-import static team.chisel.client.util.ChiselLangKeys.TT_CHISEL_GUI;
-import static team.chisel.client.util.ChiselLangKeys.TT_CHISEL_LC1;
-import static team.chisel.client.util.ChiselLangKeys.TT_CHISEL_LC2;
-import static team.chisel.client.util.ChiselLangKeys.TT_CHISEL_MODES;
-import static team.chisel.client.util.ChiselLangKeys.TT_CHISEL_SELECTED_MODE;
-
-import java.util.List;
-
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-
 import lombok.Getter;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -42,31 +30,21 @@ import team.chisel.api.carving.IChiselMode;
 import team.chisel.common.config.Configurations;
 import team.chisel.common.util.NBTUtil;
 
+import javax.annotation.Nullable;
+import java.util.List;
+
+import static team.chisel.client.util.ChiselLangKeys.*;
+
 public class ItemChisel extends Item implements IChiselItem {
-    
-    public enum ChiselType {
-        IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage),
-        DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage),
-        HITECH(Configurations.hitechChiselMaxDamage, Configurations.hitechChiselAttackDamage)
-        ;
 
-        final int maxDamage;
-        final int attackDamage;
-
-        private ChiselType(int maxDamage, int attackDamage) {
-            this.maxDamage = maxDamage;
-            this.attackDamage = attackDamage;
-        }
-    }
-    
     @Getter
     private final ChiselType type;
-    
+
     public ItemChisel(ChiselType type, Item.Properties properties) {
         super(properties);
         this.type = type;
     }
-    
+
     @Override
     public int getMaxDamage(ItemStack stack) {
         if (Configurations.allowChiselDamage)
@@ -82,11 +60,11 @@ public class ItemChisel extends Item implements IChiselItem {
     @Override
     public boolean isValidRepairItem(ItemStack damagedItem, ItemStack repairMaterial) {
         switch (type) {
-        case DIAMOND:
-        case HITECH:
-            return repairMaterial.getItem().equals(Items.DIAMOND);
-        case IRON:
-            return repairMaterial.getItem().equals(Items.IRON_INGOT);
+            case DIAMOND:
+            case HITECH:
+                return repairMaterial.getItem().equals(Items.DIAMOND);
+            case IRON:
+                return repairMaterial.getItem().equals(Items.IRON_INGOT);
         }
 
         return false;
@@ -120,12 +98,12 @@ public class ItemChisel extends Item implements IChiselItem {
         stack.hurtAndBreak(1, attacker, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
         return super.hurtEnemy(stack, attacker, target);
     }
-    
+
     @Override
     public boolean canOpenGui(Level world, Player player, InteractionHand hand) {
         return true;
     }
-    
+
     @Override
     public IChiselGuiType getGuiType(Level world, Player player, InteractionHand hand) {
         return type == ChiselType.HITECH ? ChiselGuiType.HITECH : ChiselGuiType.NORMAL;
@@ -151,6 +129,11 @@ public class ItemChisel extends Item implements IChiselItem {
         return type == ChiselType.HITECH || ((type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) && mode != ChiselMode.CONTIGUOUS && mode != ChiselMode.CONTIGUOUS_2D);
     }
 
+    @Override
+    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        return slotChanged || !ItemStack.isSame(oldStack, newStack);
+    }
+
     // TODO implement ChiselController
 //    @Override
 //    public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, Level worldIn, Player playerIn, InteractionHand hand) {
@@ -160,9 +143,18 @@ public class ItemChisel extends Item implements IChiselItem {
 //        }
 //        return ActionResult.newResult(EnumActionResult.SUCCESS, itemStackIn);
 //    }
-    
-    @Override
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-        return slotChanged || !ItemStack.isSame(oldStack, newStack);
+
+    public enum ChiselType {
+        IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage),
+        DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage),
+        HITECH(Configurations.hitechChiselMaxDamage, Configurations.hitechChiselAttackDamage);
+
+        final int maxDamage;
+        final int attackDamage;
+
+        ChiselType(int maxDamage, int attackDamage) {
+            this.maxDamage = maxDamage;
+            this.attackDamage = attackDamage;
+        }
     }
 }

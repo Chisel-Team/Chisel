@@ -1,7 +1,5 @@
 package team.chisel.client.util;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-
 // ...TODO
 
 public class ChiselModeGeometryCache {// implements IWorldEventListener {

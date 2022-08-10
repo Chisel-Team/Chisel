@@ -1,9 +1,5 @@
 package team.chisel.common.block;
 
-import java.util.function.Supplier;
-
-import javax.annotation.Nonnull;
-
 import lombok.RequiredArgsConstructor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -15,21 +11,24 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkEvent;
 import team.chisel.client.ClientProxy;
 
+import javax.annotation.Nonnull;
+import java.util.function.Supplier;
+
 @RequiredArgsConstructor
 public class MessageAutochiselFX {
-    
+
     private final @Nonnull BlockPos pos;
     private final @Nonnull ItemStack chisel;
     private final @Nonnull BlockState state;
-    
+
+    public static MessageAutochiselFX decode(FriendlyByteBuf buf) {
+        return new MessageAutochiselFX(BlockPos.of(buf.readLong()), buf.readItem(), Block.stateById(buf.readInt()));
+    }
+
     public void encode(FriendlyByteBuf buf) {
         buf.writeLong(pos.asLong());
         buf.writeItem(chisel);
         buf.writeInt(Block.getId(state));
-    }
-
-    public static MessageAutochiselFX decode(FriendlyByteBuf buf) {
-        return new MessageAutochiselFX(BlockPos.of(buf.readLong()), buf.readItem(), Block.stateById(buf.readInt()));
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {

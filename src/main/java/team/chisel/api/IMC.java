@@ -26,7 +26,7 @@ public enum IMC {
      * <strong> NOTE: If only stack, or only blockstate is provided, automatic conversion will be done, using the following code:</strong>
      * <p>
      * Converting ItemStack to blockstate:
-     * 
+     *
      * <pre>
      * if (stack.getItem() instanceof BlockItem) {
      *     return ((BlockItem) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
@@ -35,26 +35,25 @@ public enum IMC {
      * </pre>
      * <p>
      * Converting blockstate to ItemStack:
-     * 
+     *
      * <pre>
      * return new ItemStack(state.getBlock(), 1, state.getBlock().damageDropped(state))
      * </pre>
-     * 
+     *
      * @since 0.0.14
      */
     ADD_VARIATION("add_variation"),
-    
+
     /**
      * Remove a variation. Will attempt to match for a variation by ItemStack, then blockstate, if both are provided.
      * <p>
      * This IMC message is expected to be an {@link CompoundTag}, with the same data used for adding a variation, except that "group" can be left out to remove a variation from multiple groups.
-     * 
+     *
      * @see {@link #ADD_VARIATION_V2}
-     * 
      * @since 0.0.14
      */
     REMOVE_VARIATION("remove_variation"),
-    
+
     ;
 
     /**
@@ -71,12 +70,12 @@ public enum IMC {
         this.deprecated = IMC.class.getDeclaredField(name()).isAnnotationPresent(Deprecated.class);
     }
 
+    public static final String getModid() {
+        return ChiselAPIProps.MOD_ID;
+    }
+
     @Override
     public String toString() {
         return key;
-    }
-
-    public static final String getModid() {
-        return ChiselAPIProps.MOD_ID;
     }
 }

@@ -1,9 +1,5 @@
 package team.chisel.client.gui;
 
-import java.util.function.Supplier;
-
-import javax.annotation.Nonnull;
-
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -17,6 +13,9 @@ import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.SlotChiselSelection;
 import team.chisel.common.util.SoundUtil;
 
+import javax.annotation.Nonnull;
+import java.util.function.Supplier;
+
 public class PacketChiselButton {
 
     @Nonnull
@@ -25,32 +24,21 @@ public class PacketChiselButton {
     public PacketChiselButton(int... slots) {
         this.slotIds = slots;
     }
-    
-    public void encode(final FriendlyByteBuf buf) {
-        buf.writeVarIntArray(slotIds);
-    }
-    
+
     public static PacketChiselButton decode(final FriendlyByteBuf buf) {
         return new PacketChiselButton(buf.readVarIntArray());
     }
 
-    public void handle(Supplier<NetworkEvent.Context> ctx) {
-        ServerPlayer player = ctx.get().getSender();
-        ctx.get().enqueueWork(() -> chiselAll(player, slotIds));
-        ctx.get().setPacketHandled(true);
-    }
-    
     public static void chiselAll(Player player, int[] slots) {
-        if (player.containerMenu instanceof ContainerChiselHitech) {
-            ContainerChiselHitech container = (ContainerChiselHitech) player.containerMenu;
+        if (player.containerMenu instanceof ContainerChiselHitech container) {
             ItemStack chisel = container.getChisel();
             ItemStack originalChisel = chisel.copy();
             ItemStack target = container.getTargetItem();
-            
+
             if (!(chisel.getItem() instanceof IChiselItem)) {
                 return;
             }
-            
+
             @SuppressWarnings("null")
             @Nonnull
             IVariationRegistry carving = CarvingUtils.getChiselRegistry();
@@ -58,7 +46,7 @@ public class PacketChiselButton {
             if (chisel.isEmpty() || target.isEmpty()) {
                 return;
             }
-            
+
             boolean playSound = false;
 
             for (int i : slots) {
@@ -81,13 +69,23 @@ public class PacketChiselButton {
                     return;
                 }
             }
-            
+
             container.getInventoryChisel().setStackInSpecialSlot(container.getSelectionStack());
             container.getInventoryChisel().updateItems();
-            
+
             if (playSound) {
                 SoundUtil.playSound(player, originalChisel, target);
             }
         }
+    }
+
+    public void encode(final FriendlyByteBuf buf) {
+        buf.writeVarIntArray(slotIds);
+    }
+
+    public void handle(Supplier<NetworkEvent.Context> ctx) {
+        ServerPlayer player = ctx.get().getSender();
+        ctx.get().enqueueWork(() -> chiselAll(player, slotIds));
+        ctx.get().setPacketHandled(true);
     }
 }

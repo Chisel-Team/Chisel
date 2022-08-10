@@ -1,10 +1,10 @@
 package team.chisel.api.block;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+
+import javax.annotation.Nonnull;
 
 public interface BlockProvider<T extends Block & ICarvable> extends BlockCreator<T> {
 

@@ -7,8 +7,8 @@ import team.chisel.api.carving.ICarvingVariation;
  * Represents data about a specific variation
  */
 public interface VariationData extends ICarvingVariation {
-    
+
     String getName();
-    
+
     TranslatableComponent getDisplayName();
 }

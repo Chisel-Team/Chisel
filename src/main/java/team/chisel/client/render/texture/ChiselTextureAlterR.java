@@ -1,8 +1,5 @@
 package team.chisel.client.render.texture;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import team.chisel.client.render.ctx.BlockRenderContextAlterR;
 import team.chisel.client.render.type.BlockRenderTypeAlterR;
@@ -11,6 +8,9 @@ import team.chisel.ctm.api.texture.ITextureContext;
 import team.chisel.ctm.api.util.TextureInfo;
 import team.chisel.ctm.client.texture.render.AbstractTexture;
 import team.chisel.ctm.client.util.Quad;
+
+import java.util.Collections;
+import java.util.List;
 
 public class ChiselTextureAlterR extends AbstractTexture<BlockRenderTypeAlterR> {
     public ChiselTextureAlterR(BlockRenderTypeAlterR type, TextureInfo info) {
@@ -21,9 +21,9 @@ public class ChiselTextureAlterR extends AbstractTexture<BlockRenderTypeAlterR> 
     public List<BakedQuad> transformQuad(BakedQuad quad, ITextureContext context, int quadGoal) {
 
         ISubmap outputQuad;
-        int num = context == null ? 0 : ((BlockRenderContextAlterR)context).getTexture();
+        int num = context == null ? 0 : ((BlockRenderContextAlterR) context).getTexture();
 
-        switch(num){
+        switch (num) {
             default:
             case 0:
                 outputQuad = Quad.TOP_LEFT;

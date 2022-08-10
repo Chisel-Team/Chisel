@@ -1,10 +1,10 @@
 package team.chisel.common.init;
 
 import com.tterrag.registrate.Registrate;
+import com.tterrag.registrate.providers.RegistrateRecipeProvider;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.MenuEntry;
-
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
@@ -31,22 +31,23 @@ public class ChiselTileEntities {
             .blockstate((ctx, prov) -> prov.simpleBlock(ctx.getEntry(), prov.models().getExistingFile(ctx.getId())))
             .addLayer(() -> RenderType::cutout)
             .item(BlockItem::new)
-                .model((ctx, prov) -> prov.blockItem(ctx::getEntry))
-                .recipe((ctx, prov) -> new ShapedRecipeBuilder(ctx.getEntry(), 1)
-                        .define('G', Tags.Items.GLASS)
-                        .define('R', Tags.Items.DUSTS_REDSTONE)
-                        .define('I', Tags.Items.INGOTS_IRON)
-                        .pattern("GGG").pattern("GRG").pattern("III")
-                        .unlockedBy("has_iron", prov.has(Tags.Items.INGOTS_IRON))
-                        .save(prov))
-                .build()
+            .model((ctx, prov) -> prov.blockItem(ctx::getEntry))
+            .recipe((ctx, prov) -> new ShapedRecipeBuilder(ctx.getEntry(), 1)
+                    .define('G', Tags.Items.GLASS)
+                    .define('R', Tags.Items.DUSTS_REDSTONE)
+                    .define('I', Tags.Items.INGOTS_IRON)
+                    .pattern("GGG").pattern("GRG").pattern("III")
+                    .unlockedBy("has_iron", RegistrateRecipeProvider.has(Tags.Items.INGOTS_IRON))
+                    .save(prov))
+            .build()
             .register();
 
     public static final BlockEntityEntry<TileAutoChisel> AUTO_CHISEL_TE = BlockEntityEntry.cast(AUTO_CHISEL.getSibling(BlockEntityType.class));
-    
+
     public static final MenuEntry<ContainerAutoChisel> AUTO_CHISEL_CONTAINER = REGISTRATE
             .menu(ContainerAutoChisel::new, () -> GuiAutoChisel::new)
             .register();
-    
-    public static final void init() {}
+
+    public static final void init() {
+    }
 }
