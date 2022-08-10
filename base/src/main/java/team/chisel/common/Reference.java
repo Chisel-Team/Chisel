@@ -5,7 +5,7 @@ package team.chisel.common;
  */
 @SuppressWarnings({"UnnecessaryInterfaceModifier", "unused"})
 public interface Reference {
-    public static final String MOD_ID = "team/chisel";
+    public static final String MOD_ID = "chisel";
     public static final String PROTOCOL_VERSION = "1";
 
     public static final String MOD_NAME = "Chisel";
