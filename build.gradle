@@ -14,31 +14,13 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.parchmentmc:librarian:1.+'
-        classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
 }
+
 plugins {
     id 'maven-publish'
     id 'eclipse'
-    id 'io.freefair.lombok' version '4.1.5'
-    id 'com.github.johnrengelman.shadow' version '7.1.0'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
-
-import org.ajoberstar.grgit.Grgit
-
-// We use these to mess with the eclipse .classpath file
-import org.gradle.plugins.ide.eclipse.model.AbstractClasspathEntry
-import org.gradle.plugins.ide.eclipse.model.ProjectDependency
-
-def repo = Grgit.open(project.file('.'))
-project.ext.gitHash = repo.log().find().abbreviatedId
-
-boolean dev = System.getenv('RELEASE') == null || System.getenv('RELEASE').equals('false');
-
-ext.buildnumber = 0
-project.buildnumber = System.getenv('BUILD_NUMBER') != null ? System.getenv('BUILD_NUMBER') : project.ext.gitHash
 
 version = "${minecraft_version}-${mod_version}.${buildnumber}"
 
@@ -70,54 +52,13 @@ allprojects {
         }
     }
 }
-    
-String getChangelogText() {
-    def changelogFile = file('changelog.txt')
-    String str = ''
-    int lineCount = 0
-    boolean done = false
-    changelogFile.eachLine {
-        if (done || it == null) {
-            return
-        }
-        if (it.size() > 1) {
-            def temp = it
-            if (lineCount == 0) {
-                temp = "Chisel ${version}"
-                temp = "<h2>$temp</h2>"
-            } else if (it.startsWith('-')) {
-                temp = "&nbsp;&nbsp;&nbsp;$temp"
-                temp = temp.replaceAll("(\\S+\\/\\S+)#([0-9]+)\\b", "<a href=\"https://github.com/\$1/issues/\$2\">\$0</a>");
-                temp = temp.replaceAll("#([0-9]+)\\b(?!<\\/a>)", "<a href=\"https://github.com/$github_project/issues/\$1\">\$0</a>");
-            } else {
-                temp = "<h4>$temp</h4>"
-            }
-            str += "$temp<br/>"
-            lineCount++
-            return
-        } else {
-            done = true
-        }
-    }
-    return str
-}
 
 subprojects {
 
     apply plugin: 'java'
     apply plugin: 'maven-publish'
     apply plugin: 'net.minecraftforge.gradle'
-    apply plugin: 'org.parchmentmc.librarian.forgegradle'
-    apply plugin: 'eclipse'
-    apply plugin: 'io.freefair.lombok'
-    apply plugin: 'com.matthewprenger.cursegradle'
-    apply plugin: 'com.github.johnrengelman.shadow'
-    apply from: 'https://raw.githubusercontent.com/SizableShrimp/Forge-Class-Remapper/main/classremapper.gradle'
 
-    group = "team.chisel" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-    archivesBaseName = (dev ? 'Chisel_DEV' : 'Chisel') + (project.name.equals('base') ? '' : '-' + project.name)
-    version = rootProject.version
-        
     java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
     sourceSets.main.resources {
@@ -125,7 +66,7 @@ subprojects {
     }
     
     minecraft {
-        mappings channel: 'parchment', version: '2022.03.13-1.18.2'
+        mappings channel: 'official', version: "${minecraft_version}"
     
         accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     }
@@ -133,30 +74,8 @@ subprojects {
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-        implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
-        
-        compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
-        runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
-    
         compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
         runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
-        
-        def registrate = "com.tterrag.registrate:Registrate:MC${minecraft_version}-${registrate_version}"
-        implementation fg.deobf(registrate)
-        shade registrate
-    
-    //  deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
-    }
-    
-    eclipse {
-      classpath {
-        containers 'org.eclipse.buildship.core.gradleclasspathcontainer'
-        file {
-          whenMerged {
-            entries.add(new ProjectDependency("/ConnectedTexturesMod"))
-          }
-        }
-      }
     }
     
     jar {
@@ -173,35 +92,9 @@ subprojects {
         }
     }
     
-    shadowJar {
-        configurations = [project.configurations.shade]
-        relocate 'com.tterrag.registrate', 'team.chisel.repack.registrate'
-        classifier = ''
-    }
-    
     reobf {
         shadowJar {}
     }
-    
-    build.dependsOn shadowJar
-    build.dependsOn reobfShadowJar
-    
-    lombok {
-        version = "1.18.20"
-    }
-    
-    // Add external annotations
-    /*eclipse.classpath.file {
-        withXml {
-            def node = it.asNode()
-            node.get('classpathentry').each {
-                // Allow external annotations on Minecraft/Forge and JRE
-                if (it.attribute('path').contains('forgeSrc') || it.attribute('path').contains('JRE_CONTAINER')) {
-                    it.appendNode('attributes').appendNode('attribute', [name: 'annotationpath', value: '/Chisel/externalannotations/'])
-                }
-            }
-        }
-    }*/
 
     publishing {
         tasks.publish.dependsOn 'build'
@@ -211,30 +104,6 @@ subprojects {
             }
         }
     }
-    
-    tasks.curseforge.enabled = !dev && project.hasProperty('curseforge_key') && project.hasProperty('projectId')
-        
-    curseforge {
-        apiKey = project.findProperty('curseforge_key')
-    
-        project {
-            id = project.findProperty('projectId') ?: 'none'
-            changelog = System.getenv('CHANGELOG') == null || System.getenv('CHANGELOG').equals('none') ? getChangelogText() : System.getenv('CHANGELOG')
-            changelogType = 'html'
-            releaseType = project.curse_type
-            addGameVersion project.minecraft_version
-            mainArtifact(shadowJar) {
-                displayName = "Chisel - ${version}"
-            }
-            relations {
-                requiredLibrary 'ctm'
-            }
-        }
-    }
 }
 
-// Copy all the subproject jars to build/libs
-task build(type: Copy, dependsOn: subprojects.tasks['build']) {
-    from subprojects.collect { it.tasks.withType(Jar) }
-    into "$buildDir/libs"
 }

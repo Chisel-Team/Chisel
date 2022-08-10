@@ -1,4 +1,0 @@
-class net/minecraft/block/Block
-getBlockFromItem
- (Lnet/minecraft/item/Item;)Lnet/minecraft/block/Block;
- (Lnet/minecraft/item/Item;)L0net/minecraft/block/Block;

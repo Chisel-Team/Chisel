@@ -1,4 +1,0 @@
-class java/util/Objects
-toString
- (Ljava/lang/Object;)Ljava/lang/String;
- (Ljava/lang/Object;)L1java/lang/String;
