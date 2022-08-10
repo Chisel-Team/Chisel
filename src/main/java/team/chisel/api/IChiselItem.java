@@ -37,7 +37,6 @@ public interface IChiselItem {
      * @param world  {@link Level} object
      * @param player The player holding the chisel. It can always be assumed that the player's current item will be this.
      * @param hand   The {@link InteractionHand} which the chisel is in. Use this and the {@code player} parameter to get stack context.
-     * @return
      */
     IChiselGuiType<?> getGuiType(Level world, Player player, InteractionHand hand);
 
@@ -48,9 +47,8 @@ public interface IChiselItem {
      * @param player The {@link Player} performing the chiseling.
      * @param chisel The {@link ItemStack} representing the chisel
      * @param target The {@link ICarvingVariation} representing the target item
-     * @return Unused.
      */
-    boolean onChisel(Level world, Player player, ItemStack chisel, ICarvingVariation target);
+    void onChisel(Level world, Player player, ItemStack chisel, ICarvingVariation target);
 
     /**
      * Called to check if this {@link ItemStack} can be chiseled in this chisel. If not, there will be no possible variants displayed in the GUI.
@@ -96,6 +94,7 @@ public interface IChiselItem {
      * @param target The {@link Block} representing the target
      * @return A sound to play, instead of the variation's sound, or null for default.
      */
+    @SuppressWarnings("unused")
     default @Nullable SoundEvent getOverrideSound(Level world, Player player, ItemStack chisel, Block target) {
         return null;
     }

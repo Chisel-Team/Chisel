@@ -51,7 +51,7 @@ public class ChiselBlockFactory {
     }
 
     public <T extends Block & ICarvable> ChiselBlockBuilder<T> newType(Material material, String blockName, @Nullable String group, BlockProvider<T> provider) {
-        return new ChiselBlockBuilder<T>(this, registrate, material, blockName, group == null ? null : BlockTags.create(new ResourceLocation(Reference.MOD_ID, group)), provider);
+        return new ChiselBlockBuilder<>(this, registrate, material, blockName, group == null ? null : BlockTags.create(new ResourceLocation(Reference.MOD_ID, group)), provider);
     }
 
     public Registrate getRegistrate() {

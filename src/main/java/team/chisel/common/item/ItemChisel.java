@@ -35,6 +35,7 @@ import java.util.List;
 
 import static team.chisel.client.util.ChiselLangKeys.*;
 
+@SuppressWarnings("rawtypes")
 public class ItemChisel extends Item implements IChiselItem {
 
     @Getter
@@ -59,15 +60,11 @@ public class ItemChisel extends Item implements IChiselItem {
 
     @Override
     public boolean isValidRepairItem(ItemStack damagedItem, ItemStack repairMaterial) {
-        switch (type) {
-            case DIAMOND:
-            case HITECH:
-                return repairMaterial.getItem().equals(Items.DIAMOND);
-            case IRON:
-                return repairMaterial.getItem().equals(Items.IRON_INGOT);
-        }
+        return switch (type) {
+            case DIAMOND, HITECH -> repairMaterial.getItem().equals(Items.DIAMOND);
+            case IRON -> repairMaterial.getItem().equals(Items.IRON_INGOT);
+        };
 
-        return false;
     }
 
     @Override
@@ -115,8 +112,7 @@ public class ItemChisel extends Item implements IChiselItem {
     }
 
     @Override
-    public boolean onChisel(Level world, Player player, ItemStack chisel, ICarvingVariation target) {
-        return Configurations.allowChiselDamage;
+    public void onChisel(Level world, Player player, ItemStack chisel, ICarvingVariation target) {
     }
 
     @Override

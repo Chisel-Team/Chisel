@@ -5,6 +5,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 import team.chisel.api.carving.ICarvingGroup;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IVariationRegistry;
@@ -13,6 +15,7 @@ import team.chisel.common.util.ItemSorter;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 public class CarvingVariationRegistry implements IVariationRegistry {
 
     private final Map<ResourceLocation, ICarvingGroup> groups = new HashMap<>();
@@ -117,10 +120,29 @@ public class CarvingVariationRegistry implements IVariationRegistry {
         return groups.remove(groupName);
     }
 
-//    @Override
-//    public List<ResourceLocation> getSortedGroups() {
-//        return groups.keySet().stream()
-//                .sorted(Comparator.comparing(ResourceLocation::getNamespace).thenComparing(ResourceLocation::getPath))
-//                .collect(Collectors.toList());
-//    }
+    @Override
+    public @Nullable ICarvingVariation removeVariation(BlockState state) {
+        return null;
+    }
+
+    @Override
+    public @Nullable ICarvingVariation removeVariation(BlockState state, ResourceLocation group) {
+        return null;
+    }
+
+    @Override
+    public @Nullable ICarvingVariation removeVariation(ItemStack stack) {
+        return null;
+    }
+
+    @Override
+    public @Nullable ICarvingVariation removeVariation(ItemStack stack, ResourceLocation group) {
+        return null;
+    }
+
+    public List<ResourceLocation> getSortedGroups() {
+        return groups.keySet().stream()
+                .sorted(Comparator.comparing(ResourceLocation::getNamespace).thenComparing(ResourceLocation::getPath))
+                .collect(Collectors.toList());
+    }
 }

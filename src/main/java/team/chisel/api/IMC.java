@@ -3,13 +3,13 @@ package team.chisel.api;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.Block;
 
 /**
  * Use the enum constants (using {@link #key} or calling {@link #toString()}) in this class as keys for IMC messages sent to chisel
  * <p>
  * It is also acceptable to copy the Strings in this class to avoid referencing this API.
  */
+@SuppressWarnings("JavadocDeclaration")
 public enum IMC {
 
     /**
@@ -20,7 +20,7 @@ public enum IMC {
      * <li>"group" -> A String which represents the group being added to. <strong>REQUIRED</strong></li>
      * <li>"stack" -> An CompoundTag which is the serialized ItemStack. <strong>OPTIONAL</strong></li>
      * <li>"block" -> A String (ResourceLocation) which reprsents the block. <strong>OPTIONAL</strong></li>
-     * <li>"meta" -> An int representing block metadata. Can be dynamic using {@link Block#getMetaFromState(net.minecraft.block.BlockState)}. <strong>OPTIONAL, defaults to 0</strong></li>
+     * <li>"meta" -> An int representing block metadata. Can be dynamic using . <strong>OPTIONAL, defaults to 0</strong></li>
      * </ul>
      * <p>
      * <strong> NOTE: If only stack, or only blockstate is provided, automatic conversion will be done, using the following code:</strong>
@@ -49,7 +49,7 @@ public enum IMC {
      * <p>
      * This IMC message is expected to be an {@link CompoundTag}, with the same data used for adding a variation, except that "group" can be left out to remove a variation from multiple groups.
      *
-     * @see {@link #ADD_VARIATION_V2}
+     * @see
      * @since 0.0.14
      */
     REMOVE_VARIATION("remove_variation"),
@@ -70,7 +70,8 @@ public enum IMC {
         this.deprecated = IMC.class.getDeclaredField(name()).isAnnotationPresent(Deprecated.class);
     }
 
-    public static final String getModid() {
+    @SuppressWarnings("unused")
+    public static String getModid() {
         return ChiselAPIProps.MOD_ID;
     }
 

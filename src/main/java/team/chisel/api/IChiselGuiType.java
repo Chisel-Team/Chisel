@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import team.chisel.Chisel;
 import team.chisel.client.gui.GuiChisel;
 import team.chisel.client.gui.GuiHitechChisel;
@@ -19,8 +20,7 @@ import team.chisel.common.inventory.ChiselContainer;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.inventory.InventoryChiselSelection;
 
-import javax.annotation.Nullable;
-
+@SuppressWarnings("unused")
 public interface IChiselGuiType<T extends ChiselContainer> {
 
     MenuType<? extends ChiselContainer> getContainerType();
@@ -31,8 +31,7 @@ public interface IChiselGuiType<T extends ChiselContainer> {
         return new MenuProvider() {
 
             @Override
-            @Nullable
-            public AbstractContainerMenu createMenu(int windowId, Inventory inv, Player player) {
+            public @NotNull AbstractContainerMenu createMenu(int windowId, Inventory inv, Player player) {
                 return IChiselGuiType.this.createMenu(windowId, inv, player, hand);
             }
 
@@ -43,18 +42,17 @@ public interface IChiselGuiType<T extends ChiselContainer> {
         };
     }
 
+    @SuppressWarnings("unchecked")
     enum ChiselGuiType implements IChiselGuiType<ChiselContainer> {
         NORMAL("chisel_container_normal", ChiselContainer::new, () -> (container, inv, displayName) -> new GuiChisel<>(container, inv, displayName)) {
             @Override
-            @Nullable
-            public AbstractContainerMenu createMenu(int windowId, Inventory inv, Player player, InteractionHand hand) {
+            public @NotNull AbstractContainerMenu createMenu(int windowId, Inventory inv, Player player, InteractionHand hand) {
                 return new ChiselContainer(getContainerType(), windowId, inv, new InventoryChiselSelection(player.getItemInHand(hand), 60), hand);
             }
         },
-        HITECH("chisel_container_hitech", ContainerChiselHitech::new, () -> (container, inv, displayName) -> new GuiHitechChisel(container, inv, displayName)) {
+        HITECH("chisel_container_hitech", ContainerChiselHitech::new, () -> (ContainerChiselHitech container, Inventory inv, Component displayName) -> new GuiHitechChisel(container, inv, displayName)) {
             @Override
-            @Nullable
-            public AbstractContainerMenu createMenu(int windowId, Inventory inv, Player player, InteractionHand hand) {
+            public @NotNull AbstractContainerMenu createMenu(int windowId, Inventory inv, Player player, InteractionHand hand) {
                 return new ContainerChiselHitech(getContainerType(), windowId, inv, new InventoryChiselSelection(player.getItemInHand(hand), 63), hand);
             }
         };

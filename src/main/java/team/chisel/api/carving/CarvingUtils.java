@@ -16,20 +16,12 @@ import team.chisel.common.init.ChiselSounds;
 
 import javax.annotation.Nullable;
 
+@SuppressWarnings("unused")
 public class CarvingUtils {
 
     /**
-     * A simple way to compare two {@link ICarvingVariation} objects based on the {@link ICarvingVariation#getOrder() getOrder()} method.
-     *
-     * @param v1
-     * The first {@link ICarvingVariation variation}.
-     * @param v2
-     * The second {@link ICarvingVariation variation}.
-     * @return A positive integer if the first's order is greater, a negative integer if the second's is greater, and 0 if they are equal.
+     * A simple way to compare two {@link ICarvingVariation} objects based on the method.
      */
-//	public static int compare(ICarvingVariation v1, ICarvingVariation v2) {
-//		return v1.getOrder() - v2.getOrder();
-//	}
 
     public static @Nullable IVariationRegistry chisel;
     public static @Nullable IModeRegistry modes;
@@ -67,6 +59,7 @@ public class CarvingUtils {
         return new ItemTagGroup(items, getDisplayName(items, name));
     }
 
+    @SuppressWarnings("CommentedOutCode")
     @RequiredArgsConstructor(access = AccessLevel.PROTECTED)
     @Getter(onMethod = @__({@Override}))
     private static abstract class AbstractGroup implements ICarvingGroup {
@@ -82,26 +75,26 @@ public class CarvingUtils {
             return displayName.getKey();
         }
 
-//	    @Override
-//	    public boolean equals(Object obj) {
-//	        if (!(obj instanceof ICarvingVariation)) return false;
-//	        ICarvingVariation other = (ICarvingVariation) obj;
-//	        BlockState state = getBlockState();
-//	        BlockState otherState = other.getBlockState();
-//	        if (state == null || otherState == null) {
-//	            return stacksEqual(getStack(), other.getStack());
-//	        }
-//	        return state == otherState;
-//	    }
-//	    
-//	    @Override
-//	    public int hashCode() {
-//	        BlockState state = getBlockState();
-//	        if (state != null) {
-//	            return state.hashCode();
-//	        }
-//	        return hashStack(getStack());
-//	    }
+        // @Override
+        // public boolean equals(Object obj) {
+        //     if (!(obj instanceof ICarvingVariation)) return false;
+        //     ICarvingVariation other = (ICarvingVariation) obj;
+        //     BlockState state = getBlockState();
+        //     BlockState otherState = other.getBlock().defaultBlockState();
+        //     if (state == null || otherState == null) {
+        //         return stacksEqual(getStack(), other.getStack());
+        //     }
+        //     return state == otherState;
+        // }
+        //
+        // @Override
+        // public int hashCode() {
+        //     BlockState state = getBlockState();
+        //     if (state != null) {
+        //         return state.hashCode();
+        //     }
+        //     return hashStack(getStack());
+        // }
     }
 
     private static class BlockTagGroup extends AbstractGroup {

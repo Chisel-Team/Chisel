@@ -4,6 +4,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +15,7 @@ import java.util.Optional;
  * <p>
  * To obtain chisel's instance of this class, use {@link CarvingUtils#getChiselRegistry()}
  */
+@SuppressWarnings("ALL")
 public interface IVariationRegistry {
 
     /* Getters */
@@ -41,19 +44,20 @@ public interface IVariationRegistry {
     /* Setters */
 
     void addGroup(ICarvingGroup group);
-    /**
-     * Adds a variation to the registry.
-     *
-     * @param groupName
-     *            The name of the group to add to
-     * @param variation
-     *            The {@link ICarvingVariation} to add
-     */
-//    default void addVariation(ResourceLocation groupName, ICarvingVariation variation) {
-//        addVariations(groupName, () -> Collections.singletonList(variation));
-//    }
-//    
-//    void addVariations(ResourceLocation groupName, ICarvingVariationProvider provider);
+
+    ///**
+    // * Adds a variation to the registry.
+    // *
+    // * @param groupName
+    // *            The name of the group to add to
+    // * @param variation
+    // *            The {@link ICarvingVariation} to add
+    // */
+    //default void addVariation(ResourceLocation groupName, ICarvingVariation variation) {
+    //    addVariations(groupName, () -> Collections.singletonList(variation));
+    //}
+    //
+    //void addVariations(ResourceLocation groupName, ICarvingVariationProvider provider);
 
     /**
      * Removes a group from the registry.
@@ -69,44 +73,38 @@ public interface IVariationRegistry {
     /**
      * Removes a variation with the passed {@link Block} and metadata from the registry. If this variation is registered with multiple groups, it will remove it from all of them.
      *
-     * @param state
-     *            The {@link BlockState} of the {@link ICarvingVariation variation}
+     * @param state The {@link BlockState} of the {@link ICarvingVariation variation}
      * @return The ICarvingVariation that was removed. Null if nothing was removed.
      */
-//    @Nullable
-//    ICarvingVariation removeVariation(BlockState state);
+    @Nullable
+    ICarvingVariation removeVariation(BlockState state);
 
     /**
      * Removes a variation with the passed {@link Block} and metadata from the registry, but only from the specified {@link ICarvingGroup} name.
      *
-     * @param state
-     *            The {@link BlockState} of the {@link ICarvingVariation variation}
-     * @param group
-     *            The name of the group that the variation should be removed from
+     * @param state The {@link BlockState} of the {@link ICarvingVariation variation}
+     * @param group The name of the group that the variation should be removed from
      * @return The ICarvingVariation that was removed. Null if nothing was removed.
      */
-//    @Nullable
-//    ICarvingVariation removeVariation(BlockState state, ResourceLocation group);
+    @Nullable
+    ICarvingVariation removeVariation(BlockState state, ResourceLocation group);
 
     /**
      * Removes a variation with the passed ItemStack from the registry. If this variation is registered with multiple groups, it will remove it from all of them.
      *
-     * @param stack
-     *            The {@link ItemStack} of the {@link ICarvingVariation variation}
+     * @param stack The {@link ItemStack} of the {@link ICarvingVariation variation}
      * @return The ICarvingVariation that was removed. Null if nothing was removed.
      */
-//    @Nullable
-//    ICarvingVariation removeVariation(ItemStack stack);
+    @Nullable
+    ICarvingVariation removeVariation(ItemStack stack);
 
     /**
      * Removes a variation with the passed ItemStack from the registry, but only from the specified {@link ICarvingGroup} name.
      *
-     * @param stack
-     *            The {@link ItemStack} of the {@link ICarvingVariation variation}
-     * @param group
-     *            The name of the group that the variation should be removed from
+     * @param stack The {@link ItemStack} of the {@link ICarvingVariation variation}
+     * @param group The name of the group that the variation should be removed from
      * @return The ICarvingVariation that was removed. Null if nothing was removed.
      */
-//    @Nullable
-//    ICarvingVariation removeVariation(ItemStack stack, ResourceLocation group);
+    @Nullable
+    ICarvingVariation removeVariation(ItemStack stack, ResourceLocation group);
 }

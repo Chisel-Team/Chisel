@@ -13,6 +13,7 @@ import team.chisel.common.util.Point2i;
 
 import java.util.Locale;
 
+@SuppressWarnings("unused")
 public interface IChiselMode {
 
     ResourceLocation SPRITES = new ResourceLocation(Chisel.MOD_ID, "textures/mode_icons.png");

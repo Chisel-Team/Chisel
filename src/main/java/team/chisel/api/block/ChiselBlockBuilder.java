@@ -45,6 +45,7 @@ import java.util.function.Supplier;
 /**
  * Building a ChiselBlockData
  */
+@SuppressWarnings("unused")
 @Setter
 @Accessors(chain = true)
 public class ChiselBlockBuilder<T extends Block & ICarvable> {
@@ -87,7 +88,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         this.provider = provider;
         this.group = group;
         this.groupName = group == null ? null : RegistrateLangProvider.toEnglishName(group.location().getPath());
-        this.variations = new ArrayList<VariationBuilder<T>>();
+        this.variations = new ArrayList<>();
     }
 
     public ChiselBlockBuilder<T> applyIf(BooleanSupplier pred, NonNullUnaryOperator<ChiselBlockBuilder<T>> action) {
@@ -123,7 +124,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     }
 
     public ChiselBlockBuilder<T> addBlock(Block block) {
-        return addBlock(block.getRegistryName());
+        return addBlock(Objects.requireNonNull(block.getRegistryName()));
     }
 
     public ChiselBlockBuilder<T> addBlock(ResourceLocation block) {
@@ -153,10 +154,6 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         return addTag(tag).applyTag(tag);
     }
 
-    public ChiselBlockBuilder<T> equivalentTo(ResourceLocation tag) {
-        return addTag(tag).applyTag(tag);
-    }
-
     /**
      * Builds the block(s).
      *
@@ -174,7 +171,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
      *              registration.
      * @return An array of blocks created. More blocks are automatically created if the unbaked variations will not fit into one block.
      */
-    @SuppressWarnings("null")
+    @SuppressWarnings({"null", "NullableProblems"})
     @Deprecated
     public Map<String, BlockEntry<T>> build(NonNullUnaryOperator<Block.Properties> after) {
         if (variations.size() == 0) {
@@ -185,12 +182,13 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             data[i] = variations.get(i).doBuild();
         }
         Map<String, BlockEntry<T>> ret = new HashMap<>(data.length);
+        assert this.group != null;
+
         ICarvingGroup group = CarvingUtils.itemGroup(this.group, this.groupName);
         for (int i = 0; i < data.length; i++) {
             if (Strings.emptyToNull(data[i].getName()) != null) {
-                final int index = i;
-                final Variation var = data[index];
-                final VariationBuilder<T> builder = variations.get(index);
+                final Variation var = data[i];
+                final VariationBuilder<T> builder = variations.get(i);
                 ret.put(var.getName(), registrate.object(blockName + "/" + var.getName())
                         .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret.get(var.getName()), var.getName(), var.getDisplayName(), group)))
                         .initialProperties(initialProperties == null ? NonNullSupplier.of(Blocks.STONE.delegate) : initialProperties)
@@ -210,12 +208,12 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .register());
             }
         }
-        if (this.group != null) {
-            CarvingUtils.getChiselRegistry().addGroup(group);
-            if (!otherBlocks.isEmpty() || !otherTags.isEmpty()) {
-                addExtraTagEntries(ProviderType.BLOCK_TAGS, t -> t, ForgeRegistries.BLOCKS::getValue);
-                this.addExtraTagEntries(ProviderType.ITEM_TAGS, t -> ItemTags.create(t.location()), ForgeRegistries.ITEMS::getValue);
-            }
+        assert CarvingUtils.getChiselRegistry() != null;
+
+        CarvingUtils.getChiselRegistry().addGroup(group);
+        if (!otherBlocks.isEmpty() || !otherTags.isEmpty()) {
+            addExtraTagEntries(ProviderType.BLOCK_TAGS, t -> t, ForgeRegistries.BLOCKS::getValue);
+            this.addExtraTagEntries(ProviderType.ITEM_TAGS, t -> ItemTags.create(t.location()), ForgeRegistries.ITEMS::getValue);
         }
         return ret;
     }
@@ -223,9 +221,11 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     @SuppressWarnings({"unchecked"})
     private <TAG> void addExtraTagEntries(ProviderType<? extends RegistrateTagsProvider<TAG>> type, NonNullFunction<TagKey<Block>, TagKey<TAG>> tagGetter, NonNullFunction<ResourceLocation, TAG> entryLookup) {
         registrate.addDataGenerator(type, prov -> {
+            assert this.group != null;
+
             TagsProvider.TagAppender<TAG> builder = prov.tag(tagGetter.apply(this.group))
                     .add((TAG[]) otherBlocks.stream()
-                            .map(entryLookup::apply)
+                            .map(entryLookup)
                             .toArray());
 
             otherTags.stream()
@@ -265,13 +265,13 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         private final String name;
         @Setter
         @Accessors(fluent = true)
-        private final String localizedName;
+        private String localizedName;
         @Setter
         @Accessors(fluent = true)
-        private final ModelTemplate model = ModelTemplates.simpleBlock();
+        private ModelTemplate model = ModelTemplates.simpleBlock();
         @Setter
         @Accessors(fluent = true)
-        private final RecipeTemplate recipe = RecipeTemplate.none();
+        private RecipeTemplate recipe = RecipeTemplate.none();
         @Setter
         @Accessors(fluent = true)
         private boolean opaque;
