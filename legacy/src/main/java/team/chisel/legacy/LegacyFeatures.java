@@ -1,28 +1,21 @@
 package team.chisel.legacy;
 
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
-import com.tterrag.registrate.providers.RegistrateLangProvider;
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
-
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.common.Tags;
 import team.chisel.Features;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
+
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class LegacyFeatures {
 
@@ -32,15 +25,15 @@ public class LegacyFeatures {
 
     public static final Map<WoodType, Map<String, BlockEntry<BlockCarvableBookshelf>>> BOOKSHELVES = Features.VANILLA_WOODS.stream()
             .collect(Collectors.toMap(Function.identity(), wood -> _FACTORY.newType(Material.WOOD, "bookshelf/" + wood.name(), BlockCarvableBookshelf::new)
-                    .loot((prov, block) -> prov.add(block, RegistrateBlockLootTables.createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3))))
+                    //.loot((prov, block) -> prov.add(block, RegistrateBlockLootTables.createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3))))
                     .applyIf(() -> wood == WoodType.OAK, f -> f.addBlock(Blocks.BOOKSHELF))
-                    .model((prov, block) -> {
-                        prov.simpleBlock(block, prov.models().withExistingParent("block/" + ModelTemplates.name(block), prov.modLoc("cube_2_layer_sides"))
-                                .texture("all", "minecraft:block/" + wood.name() + "_planks")
-                                .texture("side", "block/" + ModelTemplates.name(block).replace(wood.name() + "/", "")));
-                    })
-                    .layer(() -> RenderType::cutout)
-                    .setGroupName(RegistrateLangProvider.toEnglishName(wood.name()) + " Bookshelf")
+                    //.model((prov, block) -> {
+                    //    prov.simpleBlock(block, prov.models().withExistingParent("block/" + ModelTemplates.name(block), prov.modLoc("cube_2_layer_sides"))
+                    //            .texture("all", "minecraft:block/" + wood.name() + "_planks")
+                    //            .texture("side", "block/" + ModelTemplates.name(block).replace(wood.name() + "/", "")));
+                    //})
+                    //.layer(() -> RenderType::cutout)
+                    //.setGroupName(RegistrateLangProvider.toEnglishName(wood.name()) + " Bookshelf")
                     .applyTag(BlockTags.MINEABLE_WITH_AXE)
                     .variation("rainbow")
                     .next("novice_necromancer")
@@ -104,12 +97,12 @@ public class LegacyFeatures {
             .build(b -> b.strength(50.0F, 2000.0F).sound(SoundType.STONE));
 
     public static final Map<String, BlockEntry<BlockCarvable>> PAPER = _FACTORY.newType(Material.PLANT, "paper")
-            .recipe((prov, block) -> new ShapedRecipeBuilder(block, 32)
-                    .pattern("ppp").pattern("psp").pattern("ppp")
-                    .define('p', Items.PAPER)
-                    .define('s', Tags.Items.RODS_WOODEN)
-                    .unlockedBy("has_stick", prov.has(Tags.Items.RODS_WOODEN))
-                    .save(prov))
+            //.recipe((prov, block) -> new ShapedRecipeBuilder(block, 32)
+            //        .pattern("ppp").pattern("psp").pattern("ppp")
+            //        .define('p', Items.PAPER)
+            //        .define('s', Tags.Items.RODS_WOODEN)
+            //        .unlockedBy("has_stick", prov.has(Tags.Items.RODS_WOODEN))
+            //        .save(prov))
             .variation("box")
             .next("throughmiddle")
             .next("cross")
