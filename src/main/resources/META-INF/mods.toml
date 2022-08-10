@@ -5,7 +5,7 @@ license="GPLv2"
 
 [[mods]]
 modId="chisel"
-version="${file.jarVersion}"
+version="1.0.0.0"
 displayName="Chisel"
 displayURL="https://chisel.team"
 #logoFile="examplemod.png"
