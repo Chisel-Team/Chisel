@@ -1,62 +1,200 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model":"cube_all" },
-    "variants": {
-        "fanstill"        : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/technical/fanstill-side",
-                "end" : "chisel:blocks/technical/fanstill-top"
-            }
-        }],
-        "vent"               : [{ "textures": { "all":"chisel:blocks/technical/vent"                } }],
-        "insulationv2"       : [{ "textures": { "all":"chisel:blocks/technical/insulationv2"        } }],
-        "massivefan"         : [{ "textures": { "all":"chisel:blocks/technical/massiveFan"          } }],
-        "fanfast"        : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/technical/fanfast-side",
-                "end" : "chisel:blocks/technical/fanfast-top"
-            }
-        }],
-        "scaffoldtransparent": [{ "textures": { "all":"chisel:blocks/technical/scaffoldTransparent" } }],
-        "wallpads"           : [{ "textures": { "all":"chisel:blocks/technical/wallPads"            } }],
-        "rustycover"         : [{ "textures": { "all":"chisel:blocks/technical/rustyCover"          } }],
-        "fanfasttransparent"        : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/technical/fanfasttransparent-side",
-                "end" : "chisel:blocks/technical/fanfasttransparent-top"
-            }
-        }],
-        "industrialrelic"    : [{ "textures": { "all":"chisel:blocks/technical/industrialrelic"     } }],
-        "fanstilltransparent"        : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/technical/fanstilltransparent-side",
-                "end" : "chisel:blocks/technical/fanstilltransparent-top"
-            }
-        }],
-        "rustyboltedplates"  : [{ "textures": { "all":"chisel:blocks/technical/rustyBoltedPlates"   } }],
-        "cables"             : [{ "textures": { "all":"chisel:blocks/technical/cables"              } }],
-        "malfunctionfan"        : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/technical/malfunctionfan-side",
-                "end" : "chisel:blocks/technical/malfunctionfan-top"
-            }
-        }],
-        "massivehexplating"  : [{ "textures": { "all":"chisel:blocks/technical/massiveHexPlating"   } }],
-        "old"                : [{ "textures": { "all":"chisel:blocks/technical/old"                 } }],
-        "grate"              : [{ "textures": { "all":"chisel:blocks/technical/grate"               } }],
-        "graterusty"         : [{ "textures": { "all":"chisel:blocks/technical/grateRusty"          } }],
-        "hexarmorplating"    : [{ "textures": { "all":"chisel:blocks/technical/hexArmorPlating"     } }],
-        "wires"              : [{ "textures": { "all":"chisel:blocks/technical/wires"               } }],
-        "spinningstuffanim"  : [{ "textures": { "all":"chisel:blocks/technical/spinningStuffAnim"   } }],
-        "pipessmall"         : [{ "textures": { "all":"chisel:blocks/technical/pipesSmall"          } }],
-        "scaffold"           : [{ "textures": { "all":"chisel:blocks/technical/scaffold"            } }],
-        "ventglowing"        : [{ "textures": { "all":"chisel:blocks/technical/ventGlowing"         } }],
-        "cautiontape"        : [{ "textures": { "all":"chisel:blocks/technical/cautiontape"         } }],
-        "pipeslarge"         : [{ "textures": { "all":"chisel:blocks/technical/pipesLarge"          } }]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "fanstill": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/technical/fanstill-side",
+          "end": "chisel:blocks/technical/fanstill-top"
+        }
+      }
+    ],
+    "vent": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/vent"
+        }
+      }
+    ],
+    "insulationv2": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/insulationv2"
+        }
+      }
+    ],
+    "massivefan": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/massiveFan"
+        }
+      }
+    ],
+    "fanfast": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/technical/fanfast-side",
+          "end": "chisel:blocks/technical/fanfast-top"
+        }
+      }
+    ],
+    "scaffoldtransparent": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/scaffoldTransparent"
+        }
+      }
+    ],
+    "wallpads": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/wallPads"
+        }
+      }
+    ],
+    "rustycover": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/rustyCover"
+        }
+      }
+    ],
+    "fanfasttransparent": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/technical/fanfasttransparent-side",
+          "end": "chisel:blocks/technical/fanfasttransparent-top"
+        }
+      }
+    ],
+    "industrialrelic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/industrialrelic"
+        }
+      }
+    ],
+    "fanstilltransparent": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/technical/fanstilltransparent-side",
+          "end": "chisel:blocks/technical/fanstilltransparent-top"
+        }
+      }
+    ],
+    "rustyboltedplates": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/rustyBoltedPlates"
+        }
+      }
+    ],
+    "cables": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/cables"
+        }
+      }
+    ],
+    "malfunctionfan": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/technical/malfunctionfan-side",
+          "end": "chisel:blocks/technical/malfunctionfan-top"
+        }
+      }
+    ],
+    "massivehexplating": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/massiveHexPlating"
+        }
+      }
+    ],
+    "old": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/old"
+        }
+      }
+    ],
+    "grate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/grate"
+        }
+      }
+    ],
+    "graterusty": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/grateRusty"
+        }
+      }
+    ],
+    "hexarmorplating": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/hexArmorPlating"
+        }
+      }
+    ],
+    "wires": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/wires"
+        }
+      }
+    ],
+    "spinningstuffanim": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/spinningStuffAnim"
+        }
+      }
+    ],
+    "pipessmall": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/pipesSmall"
+        }
+      }
+    ],
+    "scaffold": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/scaffold"
+        }
+      }
+    ],
+    "ventglowing": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/ventGlowing"
+        }
+      }
+    ],
+    "cautiontape": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/cautiontape"
+        }
+      }
+    ],
+    "pipeslarge": [
+      {
+        "textures": {
+          "all": "chisel:blocks/technical/pipesLarge"
+        }
+      }
+    ]
+  }
 }

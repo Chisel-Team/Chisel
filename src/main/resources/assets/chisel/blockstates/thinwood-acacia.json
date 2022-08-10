@@ -1,12 +1,50 @@
 {
-    "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
-    "variants": {
-        "normal": [{"textures":{"all":"chisel:blocks/thinWood-acacia/normal"}}],
-        "chaotic-spaced": [{"textures":{"all":"chisel:blocks/thinWood-acacia/chaotic-spaced"}}],
-        "large": [{"textures":{"all":"chisel:blocks/thinWood-acacia/large"}}],
-        "chaotic": [{"textures":{"all":"chisel:blocks/thinWood-acacia/chaotic"}}],
-        "large-spaced": [{"textures":{"all":"chisel:blocks/thinWood-acacia/large-spaced"}}],
-        "normal-spaced": [{"textures":{"all":"chisel:blocks/thinWood-acacia/normal-spaced"}}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "normal": [
+      {
+        "textures": {
+          "all": "chisel:blocks/thinWood-acacia/normal"
+        }
+      }
+    ],
+    "chaotic-spaced": [
+      {
+        "textures": {
+          "all": "chisel:blocks/thinWood-acacia/chaotic-spaced"
+        }
+      }
+    ],
+    "large": [
+      {
+        "textures": {
+          "all": "chisel:blocks/thinWood-acacia/large"
+        }
+      }
+    ],
+    "chaotic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/thinWood-acacia/chaotic"
+        }
+      }
+    ],
+    "large-spaced": [
+      {
+        "textures": {
+          "all": "chisel:blocks/thinWood-acacia/large-spaced"
+        }
+      }
+    ],
+    "normal-spaced": [
+      {
+        "textures": {
+          "all": "chisel:blocks/thinWood-acacia/normal-spaced"
+        }
+      }
+    ]
+  }
 }

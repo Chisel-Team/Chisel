@@ -1,62 +1,280 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model": "cube_all" },
-    "variants": {
-        "array"         : [{ "textures": { "all": "chisel:blocks/concrete_orange/array"          } }],
-        "braid"         : [{ "textures": { "all": "chisel:blocks/concrete_orange/braid"          } }],
-        "bricks-chaotic": [{ "textures": { "all": "chisel:blocks/concrete_orange/bricks-chaotic" } }],
-        "bricks-cracked": [{ "textures": { "all": "chisel:blocks/concrete_orange/bricks-cracked" } }],
-        "bricks-encased": [{ "textures": { "all": "chisel:blocks/concrete_orange/bricks-encased" } }],
-        "bricks-small"  : [{ "textures": { "all": "chisel:blocks/concrete_orange/bricks-small"   } }],
-        "bricks-soft"   : [{ "textures": { "all": "chisel:blocks/concrete_orange/bricks-soft"    } }],
-        "bricks-solid"  : [{ "textures": { "all": "chisel:blocks/concrete_orange/bricks-solid"   } }],
-        "bricks-triple" : [{ "textures": { "all": "chisel:blocks/concrete_orange/bricks-triple"  } }],
-        "chaotic-medium": [{ "textures": { "all": "chisel:blocks/concrete_orange/chaotic-medium" } }],
-        "chaotic-small" : [{ "textures": { "all": "chisel:blocks/concrete_orange/chaotic-small"  } }],
-        "circular"      : [{ "textures": { "all": "chisel:blocks/concrete_orange/circular"       } }],
-        "circularct"    : [{
-            "model"   : "chisel:cube_ctm",
-            "textures": {
-                "all"          : "chisel:blocks/concrete_orange/circular",
-                "connected_tex": "chisel:blocks/concrete_orange/circular-ctm"
-            }
-        }],
-        "cracked"       : [{ "textures": { "all": "chisel:blocks/concrete_orange/cracked"        } }],
-        "cuts"          : [{ "textures": { "all": "chisel:blocks/concrete_orange/cuts"           } }],
-        "dent"          : [{ "textures": { "all": "chisel:blocks/concrete_orange/dent"           } }],
-        "emboss"        : [{ "textures": { "all": "chisel:blocks/concrete_orange/emboss"         } }],
-        "french-1"      : [{ "textures": { "all": "chisel:blocks/concrete_orange/french-1"       } }],
-        "french-2"      : [{ "textures": { "all": "chisel:blocks/concrete_orange/french-2"       } }],
-        "indent"        : [{ "textures": { "all": "chisel:blocks/concrete_orange/indent"         } }],
-        "jellybean"     : [{ "textures": { "all": "chisel:blocks/concrete_orange/jellybean"      } }],
-        "largeornate"   : [{ "textures": { "all": "chisel:blocks/concrete_orange/largeornate"    } }],
-        "layers"        : [{ "textures": { "all": "chisel:blocks/concrete_orange/layers"         } }],
-        "marker"        : [{ "textures": { "all": "chisel:blocks/concrete_orange/marker"         } }],
-        "mosaic"        : [{ "textures": { "all": "chisel:blocks/concrete_orange/mosaic"         } }],
-        "panel"         : [{ "textures": { "all": "chisel:blocks/concrete_orange/panel"          } }],
-        "pillar"        : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/concrete_orange/pillar-side",
-                "end" : "chisel:blocks/concrete_orange/pillar-top"
-            }
-        }],
-        "prism"         : [{ "textures": { "all": "chisel:blocks/concrete_orange/prism"          } }],
-        "ornate"        : [{ "textures": { "all": "chisel:blocks/concrete_orange/ornate"         } }],
-        "road"          : [{ "textures": { "all": "chisel:blocks/concrete_orange/road"           } }],
-        "raw"           : [{ "textures": { "all": "chisel:blocks/concrete_orange/extra/raw"      } }],
-        "tiles-large"   : [{ "textures": { "all": "chisel:blocks/concrete_orange/tiles-large"    } }],
-        "tiles-medium"  : [{ "textures": { "all": "chisel:blocks/concrete_orange/tiles-medium"   } }],
-        "tiles-small"   : [{ "textures": { "all": "chisel:blocks/concrete_orange/tiles-small"    } }],
-        "twisted"       : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/concrete_orange/twisted-side",
-                "end" : "chisel:blocks/concrete_orange/twisted-top"
-            }
-        }],
-        "slanted"       : [{ "textures": { "all": "chisel:blocks/concrete_orange/slanted"        } }],
-        "weaver"        : [{ "textures": { "all": "chisel:blocks/concrete_orange/weaver"         } }],
-        "zag"           : [{ "textures": { "all": "chisel:blocks/concrete_orange/zag"            } }]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "array": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/array"
+        }
+      }
+    ],
+    "braid": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/braid"
+        }
+      }
+    ],
+    "bricks-chaotic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/bricks-chaotic"
+        }
+      }
+    ],
+    "bricks-cracked": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/bricks-cracked"
+        }
+      }
+    ],
+    "bricks-encased": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/bricks-encased"
+        }
+      }
+    ],
+    "bricks-small": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/bricks-small"
+        }
+      }
+    ],
+    "bricks-soft": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/bricks-soft"
+        }
+      }
+    ],
+    "bricks-solid": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/bricks-solid"
+        }
+      }
+    ],
+    "bricks-triple": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/bricks-triple"
+        }
+      }
+    ],
+    "chaotic-medium": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/chaotic-medium"
+        }
+      }
+    ],
+    "chaotic-small": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/chaotic-small"
+        }
+      }
+    ],
+    "circular": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/circular"
+        }
+      }
+    ],
+    "circularct": [
+      {
+        "model": "chisel:cube_ctm",
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/circular",
+          "connected_tex": "chisel:blocks/concrete_orange/circular-ctm"
+        }
+      }
+    ],
+    "cracked": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/cracked"
+        }
+      }
+    ],
+    "cuts": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/cuts"
+        }
+      }
+    ],
+    "dent": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/dent"
+        }
+      }
+    ],
+    "emboss": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/emboss"
+        }
+      }
+    ],
+    "french-1": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/french-1"
+        }
+      }
+    ],
+    "french-2": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/french-2"
+        }
+      }
+    ],
+    "indent": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/indent"
+        }
+      }
+    ],
+    "jellybean": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/jellybean"
+        }
+      }
+    ],
+    "largeornate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/largeornate"
+        }
+      }
+    ],
+    "layers": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/layers"
+        }
+      }
+    ],
+    "marker": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/marker"
+        }
+      }
+    ],
+    "mosaic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/mosaic"
+        }
+      }
+    ],
+    "panel": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/panel"
+        }
+      }
+    ],
+    "pillar": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/concrete_orange/pillar-side",
+          "end": "chisel:blocks/concrete_orange/pillar-top"
+        }
+      }
+    ],
+    "prism": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/prism"
+        }
+      }
+    ],
+    "ornate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/ornate"
+        }
+      }
+    ],
+    "road": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/road"
+        }
+      }
+    ],
+    "raw": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/extra/raw"
+        }
+      }
+    ],
+    "tiles-large": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/tiles-large"
+        }
+      }
+    ],
+    "tiles-medium": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/tiles-medium"
+        }
+      }
+    ],
+    "tiles-small": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/tiles-small"
+        }
+      }
+    ],
+    "twisted": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/concrete_orange/twisted-side",
+          "end": "chisel:blocks/concrete_orange/twisted-top"
+        }
+      }
+    ],
+    "slanted": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/slanted"
+        }
+      }
+    ],
+    "weaver": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/weaver"
+        }
+      }
+    ],
+    "zag": [
+      {
+        "textures": {
+          "all": "chisel:blocks/concrete_orange/zag"
+        }
+      }
+    ]
+  }
 }

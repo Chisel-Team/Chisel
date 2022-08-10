@@ -1,121 +1,295 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "model": "chisel:lavastone/cube_lava",
-        "textures": { "bot": "blocks/lava_still" }
-    },
-    "variants": {
-        "array"         : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/array"
-            }
-        }],
-        "braid"         : [{ "textures": { "top": "chisel:blocks/fluid/braid"          } }],
-        "bricks-chaotic": [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/bricks-chaotic"
-            }
-        }],
-        "bricks-cracked": [{ "textures": { "top": "chisel:blocks/fluid/bricks-cracked" } }],
-        "bricks-encased"        : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/bricks-encased"
-            }
-        }],
-        "bricks-small"  : [{ "textures": { "top": "chisel:blocks/fluid/bricks-small"   } }],
-        "bricks-soft"   : [{ "textures": { "top": "chisel:blocks/fluid/bricks-soft"    } }],
-        "bricks-solid"  : [{ "textures": { "top": "chisel:blocks/fluid/bricks-solid"   } }],
-        "bricks-triple" : [{ "textures": { "top": "chisel:blocks/fluid/bricks-triple"  } }],
-        "chaotic-medium": [{ "textures": { "top": "chisel:blocks/fluid/chaotic-medium" } }],
-        "chaotic-small" : [{ "textures": { "top": "chisel:blocks/fluid/chaotic-small"  } }],
-        "circular"      : [{ "textures": { "top": "chisel:blocks/fluid/circular"       } }],
-        "circularct"    : [{
-            "model"   : "chisel:lavastone/cube_ctm_lava",
-            "textures": {
-                "particle"   : "#top",
-                "top"        : "chisel:blocks/fluid/circular",
-                "connect_top": "chisel:blocks/fluid/circular-ctm"
-            }
-        }],
-        "cracked"       : [{ "textures": { "top": "chisel:blocks/fluid/cracked"        } }],
-        "cuts"          : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/cuts"
-            }
-        }],
-        "dent"        : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/dent"
-            }
-        }],
-        "emboss"        : [{ "textures": { "top": "chisel:blocks/fluid/emboss"         } }],
-        "french-1"      : [{ "textures": { "top": "chisel:blocks/fluid/french-1"       } }],
-        "french-2"      : [{ "textures": { "top": "chisel:blocks/fluid/french-2"       } }],
-        "indent"        : [{ "textures": { "top": "chisel:blocks/fluid/indent"         } }],
-        "jellybean"        : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/jellybean"
-            }
-        }],
-        "largeornate"   : [{ "textures": { "top": "chisel:blocks/fluid/largeornate"    } }],
-        "layers"        : [{ "textures": { "top": "chisel:blocks/fluid/layers"         } }],
-        "marker"        : [{ "textures": { "top": "chisel:blocks/fluid/marker"         } }],
-        "mosaic"        : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/mosaic"
-            }
-        }],
-        "panel"         : [{ "textures": { "top": "chisel:blocks/fluid/panel"          } }],
-        "pillar"        : [{
-            "model"   : "chisel:lavastone/column_lava",
-            "textures": {
-                "side": "chisel:blocks/fluid/pillar-side",
-                "top" : "chisel:blocks/fluid/pillar-top"
-            }
-        }],
-        "prism"         : [{ "textures": { "top": "chisel:blocks/fluid/prism"          } }],
-        "ornate"        : [{ "textures": { "top": "chisel:blocks/fluid/ornate"         } }],
-        "road"          : [{ "textures": { "top": "chisel:blocks/fluid/road"           } }],
-        "raw"           : [{ "textures": { "top": "chisel:blocks/fluid/extra/raw"      } }],
-        "tiles-large"        : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/tiles-large"
-            }
-        }],
-        "tiles-medium"  : [{ "textures": { "top": "chisel:blocks/fluid/tiles-medium"   } }],
-        "tiles-small"   : [{ "textures": { "top": "chisel:blocks/fluid/tiles-small"    } }],
-        "twisted"       : [{
-            "model"   : "chisel:lavastone/column_lava",
-            "textures": {
-                "side": "chisel:blocks/fluid/twisted-side",
-                "top" : "chisel:blocks/fluid/twisted-top"
-            }
-        }],
-        "slanted"       : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/slanted"
-            }
-        }],
-        "weaver"        : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/weaver"
-            }
-        }],
-        "zag"           : [{
-            "model"   : "chisel:lavastone/cube_pass_lava",
-            "textures": {
-                "top": "chisel:blocks/fluid/zag"
-            }
-        }]
+  "forge_marker": 1,
+  "defaults": {
+    "model": "chisel:lavastone/cube_lava",
+    "textures": {
+      "bot": "blocks/lava_still"
     }
+  },
+  "variants": {
+    "array": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/array"
+        }
+      }
+    ],
+    "braid": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/braid"
+        }
+      }
+    ],
+    "bricks-chaotic": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-chaotic"
+        }
+      }
+    ],
+    "bricks-cracked": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-cracked"
+        }
+      }
+    ],
+    "bricks-encased": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-encased"
+        }
+      }
+    ],
+    "bricks-small": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-small"
+        }
+      }
+    ],
+    "bricks-soft": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-soft"
+        }
+      }
+    ],
+    "bricks-solid": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-solid"
+        }
+      }
+    ],
+    "bricks-triple": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/bricks-triple"
+        }
+      }
+    ],
+    "chaotic-medium": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/chaotic-medium"
+        }
+      }
+    ],
+    "chaotic-small": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/chaotic-small"
+        }
+      }
+    ],
+    "circular": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/circular"
+        }
+      }
+    ],
+    "circularct": [
+      {
+        "model": "chisel:lavastone/cube_ctm_lava",
+        "textures": {
+          "particle": "#top",
+          "top": "chisel:blocks/fluid/circular",
+          "connect_top": "chisel:blocks/fluid/circular-ctm"
+        }
+      }
+    ],
+    "cracked": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/cracked"
+        }
+      }
+    ],
+    "cuts": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/cuts"
+        }
+      }
+    ],
+    "dent": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/dent"
+        }
+      }
+    ],
+    "emboss": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/emboss"
+        }
+      }
+    ],
+    "french-1": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/french-1"
+        }
+      }
+    ],
+    "french-2": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/french-2"
+        }
+      }
+    ],
+    "indent": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/indent"
+        }
+      }
+    ],
+    "jellybean": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/jellybean"
+        }
+      }
+    ],
+    "largeornate": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/largeornate"
+        }
+      }
+    ],
+    "layers": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/layers"
+        }
+      }
+    ],
+    "marker": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/marker"
+        }
+      }
+    ],
+    "mosaic": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/mosaic"
+        }
+      }
+    ],
+    "panel": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/panel"
+        }
+      }
+    ],
+    "pillar": [
+      {
+        "model": "chisel:lavastone/column_lava",
+        "textures": {
+          "side": "chisel:blocks/fluid/pillar-side",
+          "top": "chisel:blocks/fluid/pillar-top"
+        }
+      }
+    ],
+    "prism": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/prism"
+        }
+      }
+    ],
+    "ornate": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/ornate"
+        }
+      }
+    ],
+    "road": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/road"
+        }
+      }
+    ],
+    "raw": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/extra/raw"
+        }
+      }
+    ],
+    "tiles-large": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/tiles-large"
+        }
+      }
+    ],
+    "tiles-medium": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/tiles-medium"
+        }
+      }
+    ],
+    "tiles-small": [
+      {
+        "textures": {
+          "top": "chisel:blocks/fluid/tiles-small"
+        }
+      }
+    ],
+    "twisted": [
+      {
+        "model": "chisel:lavastone/column_lava",
+        "textures": {
+          "side": "chisel:blocks/fluid/twisted-side",
+          "top": "chisel:blocks/fluid/twisted-top"
+        }
+      }
+    ],
+    "slanted": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/slanted"
+        }
+      }
+    ],
+    "weaver": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/weaver"
+        }
+      }
+    ],
+    "zag": [
+      {
+        "model": "chisel:lavastone/cube_pass_lava",
+        "textures": {
+          "top": "chisel:blocks/fluid/zag"
+        }
+      }
+    ]
+  }
 }

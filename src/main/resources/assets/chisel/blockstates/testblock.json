@@ -1,7 +1,15 @@
 {
-    "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
-    "variants": {
-        "test_block": [{"textures":{"all":"chisel:testblock/test_block"}}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "test_block": [
+      {
+        "textures": {
+          "all": "chisel:testblock/test_block"
+        }
+      }
+    ]
+  }
 }

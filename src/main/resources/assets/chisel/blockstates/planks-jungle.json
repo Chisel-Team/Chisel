@@ -1,27 +1,115 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model": "cube_all" },
-    "variants": {
-        "blinds"         : [{ "textures": { "all": "chisel:blocks/planks-jungle/blinds"          }}],
-        "fancy"          : [{ "textures": { "all": "chisel:blocks/planks-jungle/fancy"           }}],
-        "large"          : [{ "textures": { "all": "chisel:blocks/planks-jungle/large"           }}],
-        "double"         : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/planks-jungle/double-side",
-                "end" : "chisel:blocks/planks-jungle/double-top"
-            }
-        }],
-        "crateex"        : [{ "textures": { "all": "chisel:blocks/planks-jungle/crateex"         }}],
-        "vertical"       : [{ "textures": { "all": "chisel:blocks/planks-jungle/vertical"        }}],
-        "crate"          : [{ "textures": { "all": "chisel:blocks/planks-jungle/crate"           }}],
-        "clean"          : [{ "textures": { "all": "chisel:blocks/planks-jungle/clean"           }}],
-        "parquet"        : [{ "textures": { "all": "chisel:blocks/planks-jungle/parquet"         }}],
-        "panel-nails"    : [{ "textures": { "all": "chisel:blocks/planks-jungle/panel-nails"     }}],
-        "vertical-uneven": [{ "textures": { "all": "chisel:blocks/planks-jungle/vertical-uneven" }}],
-        "chaotic"        : [{ "textures": { "all": "chisel:blocks/planks-jungle/chaotic"         }}],
-        "chaotic-hor"    : [{ "textures": { "all": "chisel:blocks/planks-jungle/chaotic-hor"     }}],
-        "crate-fancy"    : [{ "textures": { "all": "chisel:blocks/planks-jungle/crate-fancy"     }}],
-        "short"          : [{ "textures": { "all": "chisel:blocks/planks-jungle/short"           }}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "blinds": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/blinds"
+        }
+      }
+    ],
+    "fancy": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/fancy"
+        }
+      }
+    ],
+    "large": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/large"
+        }
+      }
+    ],
+    "double": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/planks-jungle/double-side",
+          "end": "chisel:blocks/planks-jungle/double-top"
+        }
+      }
+    ],
+    "crateex": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/crateex"
+        }
+      }
+    ],
+    "vertical": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/vertical"
+        }
+      }
+    ],
+    "crate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/crate"
+        }
+      }
+    ],
+    "clean": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/clean"
+        }
+      }
+    ],
+    "parquet": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/parquet"
+        }
+      }
+    ],
+    "panel-nails": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/panel-nails"
+        }
+      }
+    ],
+    "vertical-uneven": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/vertical-uneven"
+        }
+      }
+    ],
+    "chaotic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/chaotic"
+        }
+      }
+    ],
+    "chaotic-hor": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/chaotic-hor"
+        }
+      }
+    ],
+    "crate-fancy": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/crate-fancy"
+        }
+      }
+    ],
+    "short": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-jungle/short"
+        }
+      }
+    ]
+  }
 }

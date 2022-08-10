@@ -1,24 +1,54 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model":"cube_all" },
-    "variants": {
-        "streaks"     : [{ "textures": { "all": "chisel:blocks/glass_stained/cyan/streaks"      }}],
-        "rough"       : [{ "textures": { "all": "chisel:blocks/glass_stained/cyan/rough"        }}],
-        "framed"      : [{
-            "model"   : "chisel:cube_ctm_translucent",
-            "textures": {
-                "all"          : "chisel:blocks/glass_stained/cyan/framed",
-                "connected_tex": "chisel:blocks/glass_stained/cyan/framed_ct"
-            }
-        }],
-        "framed_fancy": [{
-            "model"   : "chisel:cube_ctm_translucent",
-            "textures": {
-                "all"          : "chisel:blocks/glass_stained/cyan/framed",
-                "connected_tex": "chisel:blocks/glass_stained/cyan/framed_fancy_ct"
-            }
-        }],
-        "brick"       : [{ "textures": { "all": "chisel:blocks/glass_stained/cyan/brick"        }}],
-        "panel"       : [{ "textures": { "all": "chisel:blocks/glass_stained/cyan/panel"        }}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "streaks": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glass_stained/cyan/streaks"
+        }
+      }
+    ],
+    "rough": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glass_stained/cyan/rough"
+        }
+      }
+    ],
+    "framed": [
+      {
+        "model": "chisel:cube_ctm_translucent",
+        "textures": {
+          "all": "chisel:blocks/glass_stained/cyan/framed",
+          "connected_tex": "chisel:blocks/glass_stained/cyan/framed_ct"
+        }
+      }
+    ],
+    "framed_fancy": [
+      {
+        "model": "chisel:cube_ctm_translucent",
+        "textures": {
+          "all": "chisel:blocks/glass_stained/cyan/framed",
+          "connected_tex": "chisel:blocks/glass_stained/cyan/framed_fancy_ct"
+        }
+      }
+    ],
+    "brick": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glass_stained/cyan/brick"
+        }
+      }
+    ],
+    "panel": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glass_stained/cyan/panel"
+        }
+      }
+    ]
+  }
 }

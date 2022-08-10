@@ -1,62 +1,280 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model": "cube_all" },
-    "variants": {
-        "array"         : [{ "textures": { "all": "chisel:blocks/endstone/array"          } }],
-        "braid"         : [{ "textures": { "all": "chisel:blocks/endstone/braid"          } }],
-        "bricks-chaotic": [{ "textures": { "all": "chisel:blocks/endstone/bricks-chaotic" } }],
-        "bricks-cracked": [{ "textures": { "all": "chisel:blocks/endstone/bricks-cracked" } }],
-        "bricks-encased": [{ "textures": { "all": "chisel:blocks/endstone/bricks-encased" } }],
-        "bricks-small"  : [{ "textures": { "all": "chisel:blocks/endstone/bricks-small"   } }],
-        "bricks-soft"   : [{ "textures": { "all": "chisel:blocks/endstone/bricks-soft"    } }],
-        "bricks-solid"  : [{ "textures": { "all": "chisel:blocks/endstone/bricks-solid"   } }],
-        "bricks-triple" : [{ "textures": { "all": "chisel:blocks/endstone/bricks-triple"  } }],
-        "chaotic-medium": [{ "textures": { "all": "chisel:blocks/endstone/chaotic-medium" } }],
-        "chaotic-small" : [{ "textures": { "all": "chisel:blocks/endstone/chaotic-small"  } }],
-        "circular"      : [{ "textures": { "all": "chisel:blocks/endstone/circular"       } }],
-        "circularct"    : [{
-            "model"   : "chisel:cube_ctm",
-            "textures": {
-                "all"          : "chisel:blocks/endstone/circular",
-                "connected_tex": "chisel:blocks/endstone/circular-ctm"
-            }
-        }],
-        "cracked"       : [{ "textures": { "all": "chisel:blocks/endstone/cracked"        } }],
-        "cuts"          : [{ "textures": { "all": "chisel:blocks/endstone/cuts"           } }],
-        "dent"          : [{ "textures": { "all": "chisel:blocks/endstone/dent"           } }],
-        "emboss"        : [{ "textures": { "all": "chisel:blocks/endstone/emboss"         } }],
-        "french-1"      : [{ "textures": { "all": "chisel:blocks/endstone/french-1"       } }],
-        "french-2"      : [{ "textures": { "all": "chisel:blocks/endstone/french-2"       } }],
-        "indent"        : [{ "textures": { "all": "chisel:blocks/endstone/indent"         } }],
-        "jellybean"     : [{ "textures": { "all": "chisel:blocks/endstone/jellybean"      } }],
-        "largeornate"   : [{ "textures": { "all": "chisel:blocks/endstone/largeornate"    } }],
-        "layers"        : [{ "textures": { "all": "chisel:blocks/endstone/layers"         } }],
-        "marker"        : [{ "textures": { "all": "chisel:blocks/endstone/marker"         } }],
-        "mosaic"        : [{ "textures": { "all": "chisel:blocks/endstone/mosaic"         } }],
-        "panel"         : [{ "textures": { "all": "chisel:blocks/endstone/panel"          } }],
-        "pillar"        : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/endstone/pillar-side",
-                "end" : "chisel:blocks/endstone/pillar-top"
-            }
-        }],
-        "prism"         : [{ "textures": { "all": "chisel:blocks/endstone/prism"          } }],
-        "ornate"        : [{ "textures": { "all": "chisel:blocks/endstone/ornate"         } }],
-        "road"          : [{ "textures": { "all": "chisel:blocks/endstone/road"           } }],
-        "raw"           : [{ "textures": { "all": "chisel:blocks/endstone/extra/raw"      } }],
-        "tiles-large"   : [{ "textures": { "all": "chisel:blocks/endstone/tiles-large"    } }],
-        "tiles-medium"  : [{ "textures": { "all": "chisel:blocks/endstone/tiles-medium"   } }],
-        "tiles-small"   : [{ "textures": { "all": "chisel:blocks/endstone/tiles-small"    } }],
-        "twisted"       : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/endstone/twisted-side",
-                "end" : "chisel:blocks/endstone/twisted-top"
-            }
-        }],
-        "slanted"       : [{ "textures": { "all": "chisel:blocks/endstone/slanted"        } }],
-        "weaver"        : [{ "textures": { "all": "chisel:blocks/endstone/weaver"         } }],
-        "zag"           : [{ "textures": { "all": "chisel:blocks/endstone/zag"            } }]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "array": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/array"
+        }
+      }
+    ],
+    "braid": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/braid"
+        }
+      }
+    ],
+    "bricks-chaotic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/bricks-chaotic"
+        }
+      }
+    ],
+    "bricks-cracked": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/bricks-cracked"
+        }
+      }
+    ],
+    "bricks-encased": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/bricks-encased"
+        }
+      }
+    ],
+    "bricks-small": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/bricks-small"
+        }
+      }
+    ],
+    "bricks-soft": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/bricks-soft"
+        }
+      }
+    ],
+    "bricks-solid": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/bricks-solid"
+        }
+      }
+    ],
+    "bricks-triple": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/bricks-triple"
+        }
+      }
+    ],
+    "chaotic-medium": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/chaotic-medium"
+        }
+      }
+    ],
+    "chaotic-small": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/chaotic-small"
+        }
+      }
+    ],
+    "circular": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/circular"
+        }
+      }
+    ],
+    "circularct": [
+      {
+        "model": "chisel:cube_ctm",
+        "textures": {
+          "all": "chisel:blocks/endstone/circular",
+          "connected_tex": "chisel:blocks/endstone/circular-ctm"
+        }
+      }
+    ],
+    "cracked": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/cracked"
+        }
+      }
+    ],
+    "cuts": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/cuts"
+        }
+      }
+    ],
+    "dent": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/dent"
+        }
+      }
+    ],
+    "emboss": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/emboss"
+        }
+      }
+    ],
+    "french-1": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/french-1"
+        }
+      }
+    ],
+    "french-2": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/french-2"
+        }
+      }
+    ],
+    "indent": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/indent"
+        }
+      }
+    ],
+    "jellybean": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/jellybean"
+        }
+      }
+    ],
+    "largeornate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/largeornate"
+        }
+      }
+    ],
+    "layers": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/layers"
+        }
+      }
+    ],
+    "marker": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/marker"
+        }
+      }
+    ],
+    "mosaic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/mosaic"
+        }
+      }
+    ],
+    "panel": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/panel"
+        }
+      }
+    ],
+    "pillar": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/endstone/pillar-side",
+          "end": "chisel:blocks/endstone/pillar-top"
+        }
+      }
+    ],
+    "prism": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/prism"
+        }
+      }
+    ],
+    "ornate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/ornate"
+        }
+      }
+    ],
+    "road": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/road"
+        }
+      }
+    ],
+    "raw": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/extra/raw"
+        }
+      }
+    ],
+    "tiles-large": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/tiles-large"
+        }
+      }
+    ],
+    "tiles-medium": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/tiles-medium"
+        }
+      }
+    ],
+    "tiles-small": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/tiles-small"
+        }
+      }
+    ],
+    "twisted": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/endstone/twisted-side",
+          "end": "chisel:blocks/endstone/twisted-top"
+        }
+      }
+    ],
+    "slanted": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/slanted"
+        }
+      }
+    ],
+    "weaver": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/weaver"
+        }
+      }
+    ],
+    "zag": [
+      {
+        "textures": {
+          "all": "chisel:blocks/endstone/zag"
+        }
+      }
+    ]
+  }
 }

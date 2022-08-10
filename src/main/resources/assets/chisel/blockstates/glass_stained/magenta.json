@@ -1,24 +1,54 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model":"cube_all" },
-    "variants": {
-        "streaks"     : [{ "textures": { "all": "chisel:blocks/glass_stained/magenta/streaks"      }}],
-        "rough"       : [{ "textures": { "all": "chisel:blocks/glass_stained/magenta/rough"        }}],
-        "framed"      : [{
-            "model"   : "chisel:cube_ctm_translucent",
-            "textures": {
-                "all"          : "chisel:blocks/glass_stained/magenta/framed",
-                "connected_tex": "chisel:blocks/glass_stained/magenta/framed_ct"
-            }
-        }],
-        "framed_fancy": [{
-            "model"   : "chisel:cube_ctm_translucent",
-            "textures": {
-                "all"          : "chisel:blocks/glass_stained/magenta/framed",
-                "connected_tex": "chisel:blocks/glass_stained/magenta/framed_fancy_ct"
-            }
-        }],
-        "brick"       : [{ "textures": { "all": "chisel:blocks/glass_stained/magenta/brick"        }}],
-        "panel"       : [{ "textures": { "all": "chisel:blocks/glass_stained/magenta/panel"        }}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "streaks": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glass_stained/magenta/streaks"
+        }
+      }
+    ],
+    "rough": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glass_stained/magenta/rough"
+        }
+      }
+    ],
+    "framed": [
+      {
+        "model": "chisel:cube_ctm_translucent",
+        "textures": {
+          "all": "chisel:blocks/glass_stained/magenta/framed",
+          "connected_tex": "chisel:blocks/glass_stained/magenta/framed_ct"
+        }
+      }
+    ],
+    "framed_fancy": [
+      {
+        "model": "chisel:cube_ctm_translucent",
+        "textures": {
+          "all": "chisel:blocks/glass_stained/magenta/framed",
+          "connected_tex": "chisel:blocks/glass_stained/magenta/framed_fancy_ct"
+        }
+      }
+    ],
+    "brick": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glass_stained/magenta/brick"
+        }
+      }
+    ],
+    "panel": [
+      {
+        "textures": {
+          "all": "chisel:blocks/glass_stained/magenta/panel"
+        }
+      }
+    ]
+  }
 }

@@ -1,52 +1,124 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model":"cube_all" },
-    "variants": {
-        "greek"        : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/obsidian/greek-side",
-                "end" : "chisel:blocks/obsidian/greek-top"
-            }
-        }],
-        "panel-light"  : [{ "textures": { "all": "chisel:blocks/obsidian/panel-light"   }}],
-        "blocks"       : [{ "textures": { "all": "chisel:blocks/obsidian/blocks"        }}],
-        "chunks"       : [{ "textures": { "all": "chisel:blocks/obsidian/chunks"        }}],
-        "crystal"      : [{ "textures": { "all": "chisel:blocks/obsidian/crystal"       }}],
-        "panel-shiny"  : [{ "textures": { "all": "chisel:blocks/obsidian/panel-shiny"   }}],
-        "crate"        : [{
-            "model"   : "cube_bottom_top",
-            "textures": {
-                "side"   : "chisel:blocks/obsidian/crate-side",
-                "top"    : "chisel:blocks/obsidian/crate-top",
-                "bottom" : "chisel:blocks/obsidian/crate-bottom"
-            }
-        }],
-        "tiles"        : [{ "textures": { "all": "chisel:blocks/obsidian/tiles"         }}],
-        "pillar"       : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/obsidian/pillar-side",
-                "end" : "chisel:blocks/obsidian/pillar-top"
-            }
-        }],
-        "chiseled"     : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/obsidian/chiseled-side",
-                "end" : "chisel:blocks/obsidian/chiseled-top"
-            }
-        }],
-        "growth"       : [{ "textures": { "all": "chisel:blocks/obsidian/growth"        }}],
-        "pillar-quartz": [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/obsidian/pillar-quartz-side",
-                "end" : "chisel:blocks/obsidian/pillar-quartz-top"
-            }
-        }],
-        "map-b"        : [{ "textures": { "all": "chisel:blocks/obsidian/map-b"         }}],
-        "panel"        : [{ "textures": { "all": "chisel:blocks/obsidian/panel"         }}],
-        "map-a"        : [{ "textures": { "all": "chisel:blocks/obsidian/map-a"         }}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "greek": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/obsidian/greek-side",
+          "end": "chisel:blocks/obsidian/greek-top"
+        }
+      }
+    ],
+    "panel-light": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/panel-light"
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/blocks"
+        }
+      }
+    ],
+    "chunks": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/chunks"
+        }
+      }
+    ],
+    "crystal": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/crystal"
+        }
+      }
+    ],
+    "panel-shiny": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/panel-shiny"
+        }
+      }
+    ],
+    "crate": [
+      {
+        "model": "cube_bottom_top",
+        "textures": {
+          "side": "chisel:blocks/obsidian/crate-side",
+          "top": "chisel:blocks/obsidian/crate-top",
+          "bottom": "chisel:blocks/obsidian/crate-bottom"
+        }
+      }
+    ],
+    "tiles": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/tiles"
+        }
+      }
+    ],
+    "pillar": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/obsidian/pillar-side",
+          "end": "chisel:blocks/obsidian/pillar-top"
+        }
+      }
+    ],
+    "chiseled": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/obsidian/chiseled-side",
+          "end": "chisel:blocks/obsidian/chiseled-top"
+        }
+      }
+    ],
+    "growth": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/growth"
+        }
+      }
+    ],
+    "pillar-quartz": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/obsidian/pillar-quartz-side",
+          "end": "chisel:blocks/obsidian/pillar-quartz-top"
+        }
+      }
+    ],
+    "map-b": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/map-b"
+        }
+      }
+    ],
+    "panel": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/panel"
+        }
+      }
+    ],
+    "map-a": [
+      {
+        "textures": {
+          "all": "chisel:blocks/obsidian/map-a"
+        }
+      }
+    ]
+  }
 }

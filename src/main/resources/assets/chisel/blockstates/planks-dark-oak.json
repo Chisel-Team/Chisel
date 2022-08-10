@@ -1,27 +1,115 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model": "cube_all" },
-    "variants": {
-        "blinds"         : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/blinds"          }}],
-        "fancy"          : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/fancy"           }}],
-        "large"          : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/large"           }}],
-        "double"         : [{
-            "model"   : "cube_column",
-            "textures": {
-                "side": "chisel:blocks/planks-dark-oak/double-side",
-                "end" : "chisel:blocks/planks-dark-oak/double-top"
-            }
-        }],
-        "crateex"        : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/crateex"         }}],
-        "vertical"       : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/vertical"        }}],
-        "crate"          : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/crate"           }}],
-        "clean"          : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/clean"           }}],
-        "parquet"        : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/parquet"         }}],
-        "panel-nails"    : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/panel-nails"     }}],
-        "vertical-uneven": [{ "textures": { "all": "chisel:blocks/planks-dark-oak/vertical-uneven" }}],
-        "chaotic"        : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/chaotic"         }}],
-        "chaotic-hor"    : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/chaotic-hor"     }}],
-        "crate-fancy"    : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/crate-fancy"     }}],
-        "short"          : [{ "textures": { "all": "chisel:blocks/planks-dark-oak/short"           }}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "blinds": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/blinds"
+        }
+      }
+    ],
+    "fancy": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/fancy"
+        }
+      }
+    ],
+    "large": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/large"
+        }
+      }
+    ],
+    "double": [
+      {
+        "model": "cube_column",
+        "textures": {
+          "side": "chisel:blocks/planks-dark-oak/double-side",
+          "end": "chisel:blocks/planks-dark-oak/double-top"
+        }
+      }
+    ],
+    "crateex": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/crateex"
+        }
+      }
+    ],
+    "vertical": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/vertical"
+        }
+      }
+    ],
+    "crate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/crate"
+        }
+      }
+    ],
+    "clean": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/clean"
+        }
+      }
+    ],
+    "parquet": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/parquet"
+        }
+      }
+    ],
+    "panel-nails": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/panel-nails"
+        }
+      }
+    ],
+    "vertical-uneven": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/vertical-uneven"
+        }
+      }
+    ],
+    "chaotic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/chaotic"
+        }
+      }
+    ],
+    "chaotic-hor": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/chaotic-hor"
+        }
+      }
+    ],
+    "crate-fancy": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/crate-fancy"
+        }
+      }
+    ],
+    "short": [
+      {
+        "textures": {
+          "all": "chisel:blocks/planks-dark-oak/short"
+        }
+      }
+    ]
+  }
 }

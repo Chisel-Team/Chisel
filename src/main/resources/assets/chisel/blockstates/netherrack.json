@@ -1,20 +1,106 @@
 {
-    "forge_marker": 1,
-    "defaults": {"model":"cube_all"},
-    "variants": {
-        "a1-netherrack-brinstarshale": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-brinstarshale"}}],
-        "a1-netherrack-guts": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-guts"}}],
-        "a1-netherrack-meat": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-meat"}}],
-        "a1-netherrack-red": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-red"}}],
-        "a1-netherrack-gutsdark": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-gutsdark"}}],
-        "a1-netherrack-meatrock": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-meatrock"}}],
-        "a1-netherrack-wells": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-wells"}}],
-        "a1-netherrack-classic": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-classic"}}],
-        "a1-netherrack-classicspatter": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-classicspatter"}}],
-        "a1-netherrack-bloodrock": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-bloodrock"}}],
-        "a1-netherrack-meatred": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-meatred"}}],
-        "a1-netherrack-bloodgravel": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-bloodgravel"}}],
-        "a1-netherrack-bloodrockgrey": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-bloodrockgrey"}}],
-        "a1-netherrack-brinstar": [{"textures":{"all":"chisel:blocks/netherrack/a1-netherrack-brinstar"}}]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "a1-netherrack-brinstarshale": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-brinstarshale"
+        }
+      }
+    ],
+    "a1-netherrack-guts": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-guts"
+        }
+      }
+    ],
+    "a1-netherrack-meat": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-meat"
+        }
+      }
+    ],
+    "a1-netherrack-red": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-red"
+        }
+      }
+    ],
+    "a1-netherrack-gutsdark": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-gutsdark"
+        }
+      }
+    ],
+    "a1-netherrack-meatrock": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-meatrock"
+        }
+      }
+    ],
+    "a1-netherrack-wells": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-wells"
+        }
+      }
+    ],
+    "a1-netherrack-classic": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-classic"
+        }
+      }
+    ],
+    "a1-netherrack-classicspatter": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-classicspatter"
+        }
+      }
+    ],
+    "a1-netherrack-bloodrock": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-bloodrock"
+        }
+      }
+    ],
+    "a1-netherrack-meatred": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-meatred"
+        }
+      }
+    ],
+    "a1-netherrack-bloodgravel": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-bloodgravel"
+        }
+      }
+    ],
+    "a1-netherrack-bloodrockgrey": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-bloodrockgrey"
+        }
+      }
+    ],
+    "a1-netherrack-brinstar": [
+      {
+        "textures": {
+          "all": "chisel:blocks/netherrack/a1-netherrack-brinstar"
+        }
+      }
+    ]
+  }
 }

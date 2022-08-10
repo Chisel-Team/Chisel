@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "chisel:blocks/ironpane/classic"
-    }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "chisel:blocks/ironpane/classic"
+  }
 }

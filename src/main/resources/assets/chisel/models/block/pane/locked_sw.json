@@ -1,31 +1,85 @@
 {
-    "ambientocclusion": false,
-    "textures": { "particle": "#pane" },
-    "elements": [{
-        "from": [ 7,  0,  7 ],
-        "to"  : [ 9, 16, 16 ],
-        "faces": {
-            "down" : { "texture": "#edge" },
-            "up"   : { "texture": "#edge" },
-            "north": { "texture": "#pane" },
-            "south": { "texture": "#edge", "cullface": "south" },
-            "east" : { "texture": "#pane" }
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "#pane"
+  },
+  "elements": [
+    {
+      "from": [
+        7,
+        0,
+        7
+      ],
+      "to": [
+        9,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#edge"
+        },
+        "up": {
+          "texture": "#edge"
+        },
+        "north": {
+          "texture": "#pane"
+        },
+        "south": {
+          "texture": "#edge",
+          "cullface": "south"
+        },
+        "east": {
+          "texture": "#pane"
         }
-    }, {
-        "from": [ 7,  0,  9 ],
-        "to"  : [ 9, 16, 16 ],
-        "faces": {
-            "west": { "texture": "#pane" }
+      }
+    },
+    {
+      "from": [
+        7,
+        0,
+        9
+      ],
+      "to": [
+        9,
+        16,
+        16
+      ],
+      "faces": {
+        "west": {
+          "texture": "#pane"
         }
-    }, {
-        "from": [ 0,  0, 7 ],
-        "to"  : [ 7, 16, 9 ],
-        "faces": {
-            "down" : { "texture": "#edge" },
-            "up"   : { "texture": "#edge" },
-            "north": { "texture": "#pane" },
-            "south": { "texture": "#pane" },
-            "west" : { "texture": "#edge", "cullface": "west" }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        7
+      ],
+      "to": [
+        7,
+        16,
+        9
+      ],
+      "faces": {
+        "down": {
+          "texture": "#edge"
+        },
+        "up": {
+          "texture": "#edge"
+        },
+        "north": {
+          "texture": "#pane"
+        },
+        "south": {
+          "texture": "#pane"
+        },
+        "west": {
+          "texture": "#edge",
+          "cullface": "west"
         }
-    }]
+      }
+    }
+  ]
 }

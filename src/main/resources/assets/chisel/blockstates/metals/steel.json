@@ -1,20 +1,60 @@
 {
-    "forge_marker": 1,
-    "defaults": { "model": "cube_all" },
-    "variants": {
-        "scaffold":  [{ "textures": { "all": "chisel:blocks/metals/steel/scaffold"  } }],
-        "machine":   [{ "textures": { "all": "chisel:blocks/metals/steel/machine"   } }],
-        "badgreggy": [{ "textures": { "all": "chisel:blocks/metals/steel/badgreggy" } }],
-        "thermal":   [{
-            "model": "cube_bottom_top",
-            "textures": {
-                "top":    "chisel:blocks/metals/steel/thermal-top",
-                "side":   "chisel:blocks/metals/steel/thermal-side",
-                "bottom": "chisel:blocks/metals/steel/thermal-bottom"
-            }
-        }],
-        "crate":     [{ "textures": { "all": "chisel:blocks/metals/steel/crate"     } }],
-        "bolted":    [{ "textures": { "all": "chisel:blocks/metals/steel/bolted"    } }],
-        "caution":   [{ "textures": { "all": "chisel:blocks/metals/steel/caution"   } }]
-    }
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all"
+  },
+  "variants": {
+    "scaffold": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/steel/scaffold"
+        }
+      }
+    ],
+    "machine": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/steel/machine"
+        }
+      }
+    ],
+    "badgreggy": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/steel/badgreggy"
+        }
+      }
+    ],
+    "thermal": [
+      {
+        "model": "cube_bottom_top",
+        "textures": {
+          "top": "chisel:blocks/metals/steel/thermal-top",
+          "side": "chisel:blocks/metals/steel/thermal-side",
+          "bottom": "chisel:blocks/metals/steel/thermal-bottom"
+        }
+      }
+    ],
+    "crate": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/steel/crate"
+        }
+      }
+    ],
+    "bolted": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/steel/bolted"
+        }
+      }
+    ],
+    "caution": [
+      {
+        "textures": {
+          "all": "chisel:blocks/metals/steel/caution"
+        }
+      }
+    ]
+  }
 }
