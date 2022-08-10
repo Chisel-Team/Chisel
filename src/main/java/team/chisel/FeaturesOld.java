@@ -1,7 +1,6 @@
 package team.chisel;
 
 import com.tterrag.registrate.Registrate;
-import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.nullness.NonNullConsumer;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.world.item.DyeColor;
@@ -11,6 +10,7 @@ import team.chisel.api.block.ChiselBlockFactory;
 
 import java.util.Arrays;
 
+@SuppressWarnings({"unused", "deprecation"})
 @RequiredArgsConstructor
 public enum FeaturesOld {
 
@@ -3052,7 +3052,7 @@ public enum FeaturesOld {
 //
     WOOL(factory -> Arrays.stream(DyeColor.values())
             .forEach(color -> factory.newType(Material.WOOL, "wool/" + (color.getSerializedName()))
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
+                    //.setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
                     .variation("legacy")
                     .next("llama")
                     .build(b -> b.sound(SoundType.WOOL).strength(0.8F)))),
@@ -3068,7 +3068,6 @@ public enum FeaturesOld {
 
     public static void init(Registrate registrate) {
         Chisel.logger.info("Loading blocks...");
-        int num = 0;
         ChiselBlockFactory factory = ChiselBlockFactory.newFactory(registrate);
         for (FeaturesOld f : values()) {
             Chisel.logger.info("Loading feature {}", f.name());

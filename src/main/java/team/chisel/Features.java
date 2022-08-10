@@ -2,11 +2,8 @@ package team.chisel;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.RegistrateRecipeProvider;
-import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -16,35 +13,30 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
-import net.minecraft.world.level.storage.loot.IntRange;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
-import net.minecraft.world.level.storage.loot.functions.LimitCount;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import team.chisel.api.block.BlockCreator;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.block.BlockCarvable;
-import team.chisel.common.block.BlockCarvableCarpet;
 import team.chisel.common.init.ChiselCompatTags;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@SuppressWarnings({"unused", "CommentedOutCode", "deprecation"})
 public class Features {
 
     public static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
@@ -53,7 +45,7 @@ public class Features {
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_STONE_TOOL)
-            .setGroupName("Aluminum Block")
+            //.setGroupName("Aluminum Block")
             .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_ALUMINUM)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .color(MaterialColor.COLOR_LIGHT_GRAY)
@@ -66,9 +58,9 @@ public class Features {
             .initialProperties(() -> Blocks.ANDESITE)
             .variations(VariantTemplates.ROCK)
             .build();
-    public static final Map<String, BlockEntry<BlockCarvable>> ANTIBLOCK = _FACTORY.newType(Material.STONE, "antiblock", (p, v) -> new BlockCarvable(p, v))
+    public static final Map<String, BlockEntry<BlockCarvable>> ANTIBLOCK = _FACTORY.newType(Material.STONE, "antiblock", BlockCarvable::new)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .layer(() -> RenderType::cutout)
+            //.layer(() -> RenderType::cutout)
             .initialProperties(() -> Blocks.STONE)
             .color(MaterialColor.COLOR_RED) // TODO colors per variant?
             .variations(VariantTemplates.colors(ModelTemplates.twoLayerWithTop("antiblock", false), (prov, block) ->
@@ -90,7 +82,7 @@ public class Features {
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_IRON_TOOL)
-            .setGroupName("Bronze Block")
+            //.setGroupName("Bronze Block")
             .addTag(ChiselCompatTags.STORAGE_BLOCKS_BRONZE)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .color(MaterialColor.TERRACOTTA_ORANGE)
@@ -123,18 +115,18 @@ public class Features {
 //      BlockSpeedHandler.speedupBlocks.add(b);
 //  });
     */
-    public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
-            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getSerializedName()), BlockCarvableCarpet::new)
-                    .addBlock(new ResourceLocation(color.getSerializedName() + "_carpet")) // TODO improve this copied RL construction
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Carpet")
-                    .model((prov, block) ->
-                            prov.simpleBlock(block, prov.models()
-                                    .carpet("block/" + ModelTemplates.name(block), prov.modLoc("block/" + ModelTemplates.name(block).replace("carpet", "wool")))
-                                    .texture("particle", "#wool")))
-                    .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_carpet")))
-                    .variation("legacy")
-                    .next("llama")
-                    .build()));
+    //public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
+    //        .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getSerializedName()), BlockCarvableCarpet::new)
+    //                .addBlock(new ResourceLocation(color.getSerializedName() + "_carpet")) 
+    //                //.setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Carpet")
+    //                .model((prov, block) ->
+    //                        prov.simpleBlock(block, prov.models()
+    //                                .carpet("block/" + ModelTemplates.name(block), prov.modLoc("block/" + ModelTemplates.name(block).replace("carpet", "wool")))
+    //                                .texture("particle", "#wool")))
+    //                .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_carpet")))
+    //                .variation("legacy")
+    //                .next("llama")
+    //                .build()));
 
     public static final Map<String, BlockEntry<BlockCarvable>> CHARCOAL = _FACTORY.newType(Material.STONE, "charcoal")
             .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_CHARCOAL)
@@ -178,8 +170,8 @@ public class Features {
             .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.STONE, "concrete/" + color.getSerializedName())
                     .addBlock(new ResourceLocation(color.getSerializedName() + "_concrete")) // TODO improve this copied RL construction
                     .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Concrete")
-                    .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_concrete")))
+                    //.setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Concrete")
+                    .initialProperties(() -> Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_concrete"))))
                     .variations(VariantTemplates.ROCK)
                     .build()));
 //  BlockSpeedHandler.speedupBlocks.add(b);
@@ -246,7 +238,7 @@ public class Features {
                     .pattern("SXS").pattern("X X").pattern("SXS")
                     .define('S', Tags.Items.STONE)
                     .define('X', Tags.Items.INGOTS_IRON)
-                    .unlockedBy("has_iron", prov.has(Tags.Items.INGOTS_IRON))
+                    .unlockedBy("has_iron", RegistrateRecipeProvider.has(Tags.Items.INGOTS_IRON))
                     .save(prov))
             .next("rust2")
             .next("rust")
@@ -275,12 +267,12 @@ public class Features {
 
     public static final Map<String, BlockEntry<BlockCarvable>> FUTURA = _FACTORY.newType(Material.STONE, "futura")
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .recipe((prov, block) -> new ShapedRecipeBuilder(block, 8)
-                    .pattern("SSS").pattern("SGS").pattern("SSS")
-                    .define('S', Tags.Items.STONE)
-                    .define('G', Tags.Items.DUSTS_REDSTONE)
-                    .unlockedBy("has_redstone", prov.has(Tags.Items.DUSTS_REDSTONE))
-                    .save(prov))
+            //.recipe((prov, block) -> new ShapedRecipeBuilder(block, 8)
+            //        .pattern("SSS").pattern("SGS").pattern("SSS")
+            //        .define('S', Tags.Items.STONE)
+            //        .define('G', Tags.Items.DUSTS_REDSTONE)
+            //        .unlockedBy("has_redstone", prov.has(Tags.Items.DUSTS_REDSTONE))
+            //        .save(prov))
             .initialProperties(() -> Blocks.STONE)
             .color(MaterialColor.COLOR_YELLOW)
             .variation("screen_metallic")
@@ -299,12 +291,12 @@ public class Features {
 
     public static final Map<String, BlockEntry<BlockCarvable>> GLOWSTONE = _FACTORY.newType(Material.GLASS, "glowstone")
             .addBlock(Blocks.GLOWSTONE)
-            .loot((prov, block) -> prov.add(block, RegistrateBlockLootTables.createSilkTouchDispatchTable(block,
-                    RegistrateBlockLootTables.applyExplosionDecay(block,
-                            LootItem.lootTableItem(Items.GLOWSTONE_DUST)
-                                    .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
-                                    .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
-                                    .apply(LimitCount.limitCount(IntRange.range(1, 4)))))))
+            //.loot((prov, block) -> prov.add(block, RegistrateBlockLootTables.createSilkTouchDispatchTable(block,
+            //        RegistrateBlockLootTables.applyExplosionDecay(block,
+            //                LootItem.lootTableItem(Items.GLOWSTONE_DUST)
+            //                        .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+            //                        .apply(ApplyBonusCount.addUniformBonusCount(Enchantments.BLOCK_FORTUNE))
+            //                        .apply(LimitCount.limitCount(IntRange.range(1, 4)))))))
             .initialProperties(() -> Blocks.GLOWSTONE)
             .variations(VariantTemplates.STONE)
             .variation("extra/bismuth").localizedName("Bismuth")
@@ -324,12 +316,12 @@ public class Features {
 
     public static final Map<String, BlockEntry<BlockCarvable>> LABORATORY = _FACTORY.newType(Material.STONE, "laboratory")
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .recipe((prov, block) -> new ShapedRecipeBuilder(block, 8)
-                    .pattern("***").pattern("*X*").pattern("***")
-                    .define('*', Blocks.STONE)
-                    .define('X', Items.QUARTZ)
-                    .unlockedBy("has_quartz", prov.has(Items.QUARTZ))
-                    .save(prov))
+            //.recipe((prov, block) -> new ShapedRecipeBuilder(block, 8)
+            //        .pattern("***").pattern("*X*").pattern("***")
+            //        .define('*', Blocks.STONE)
+            //        .define('X', Items.QUARTZ)
+            //        .unlockedBy("has_quartz", prov.has(Items.QUARTZ))
+            //        .save(prov))
             .initialProperties(() -> Blocks.STONE)
             .color(MaterialColor.SNOW)
             .variation("wallpanel")
@@ -378,8 +370,8 @@ public class Features {
                     .addBlock(pair.getSecond())
                     .applyTag(BlockTags.MINEABLE_WITH_AXE)
                     .applyTag(BlockTags.PLANKS)
-                    .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst().name()) + " Planks")
-                    .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(pair.getSecond()))
+                    //.setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst().name()) + " Planks")
+                    .initialProperties(() -> Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))
                     .variations(VariantTemplates.PLANKS)
                     .build()));
 
@@ -486,7 +478,7 @@ public class Features {
                     .pattern("SSS").pattern("SXS").pattern("SSS")
                     .define('S', Tags.Items.STONE)
                     .define('X', Tags.Items.INGOTS_IRON)
-                    .unlockedBy("has_iron", prov.has(Tags.Items.INGOTS_IRON))
+                    .unlockedBy("has_iron", RegistrateRecipeProvider.has(Tags.Items.INGOTS_IRON))
                     .save(prov))
             .next("tyrian")
             .next("chaotic")
@@ -509,8 +501,8 @@ public class Features {
             .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "wool/" + (color.getSerializedName()))
                     .addBlock(new ResourceLocation(color.getSerializedName() + "_wool")) // TODO improve this copied RL construction
                     .applyTag(BlockTags.WOOL)
-                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
-                    .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_wool")))
+                    //.setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
+                    .initialProperties(() -> Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_wool"))))
                     .variation("legacy")
                     .next("llama")
                     .build()));
@@ -518,18 +510,19 @@ public class Features {
     public static void init() {
     }
 
+    @SuppressWarnings("deprecation")
     private static class BlockCreators {
 
         private static final BlockCreator<BlockCarvable> redstoneCreator = (props, data) -> new BlockCarvable(props, data) {
             @Override
             @Deprecated
-            public boolean isSignalSource(BlockState state) {
+            public boolean isSignalSource(@NotNull BlockState state) {
                 return true;
             }
 
             @Override
             @Deprecated
-            public int getSignal(BlockState state, BlockGetter reader, BlockPos pos, Direction direction) {
+            public int getSignal(@NotNull BlockState state, @NotNull BlockGetter reader, @NotNull BlockPos pos, @NotNull Direction direction) {
                 return 15;
             }
         };
