@@ -11,9 +11,14 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+        maven {
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
         classpath 'org.parchmentmc:librarian:1.+'
         classpath 'org.ajoberstar:gradle-git:0.10.1'
     }
@@ -47,14 +52,33 @@ allprojects {
     apply plugin: 'maven-publish'
 
     repositories {
-        maven { // CTM
+        maven { // CTM, Registrate
             url "https://maven.tterrag.com/"
         }
         maven { // JEI
             url "https://dvs1.progwml6.com/files/maven"
+            content {
+                includeGroup "mezz.jei"
+            }
         }
          maven { // WTHIT
              url "https://maven.bai.lol"
+             content {
+                 includeGroup "mcp.mobius.waila"
+             }
+        }
+        maven {
+            url "https://cursemaven.com"
+            content {
+                includeGroup "curse.maven"
+            }
+        }
+        maven {
+            name = 'sponge'
+        	url = 'https://repo.spongepowered.org/repository/maven-public/'
+        	content {
+        	    includeGroup "org.spongepowered"
+        	}
         }
     }
     
@@ -107,6 +131,7 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
     apply plugin: 'net.minecraftforge.gradle'
+    apply plugin: 'org.spongepowered.mixin'
     apply plugin: 'org.parchmentmc.librarian.forgegradle'
     apply plugin: 'eclipse'
     apply plugin: 'io.freefair.lombok'
@@ -125,7 +150,7 @@ subprojects {
     }
     
     minecraft {
-        mappings channel: 'parchment', version: '2022.03.13-1.18.2'
+        mappings channel: 'parchment', version: '2022.08.21-1.18.2'
     
         accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     }
@@ -133,9 +158,10 @@ subprojects {
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-        implementation fg.deobf("team.chisel.ctm:CTM:1.18-${ctm_version}")
+        implementation fg.deobf("team.chisel.ctm:CTM:${minecraft_version}-${ctm_version}")
+        implementation fg.deobf("curse.maven:lazydfu-460819:3544496")
         
-        compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
+        //compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
         runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
     
         compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
@@ -144,6 +170,8 @@ subprojects {
         def registrate = "com.tterrag.registrate:Registrate:MC${minecraft_version}-${registrate_version}"
         implementation fg.deobf(registrate)
         shade registrate
+        
+        annotationProcessor 'org.spongepowered:mixin:0.8.5-SNAPSHOT:processor'
     
     //  deobfCompile "com.wayoftime.bloodmagic:BloodMagic:${bm_version}:api"
     }

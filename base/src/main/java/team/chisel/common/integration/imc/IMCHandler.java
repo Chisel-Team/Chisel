@@ -37,7 +37,7 @@ public class IMCHandler {
 
     public void handleMessage(IMCMessage message) {
         for (IMC imc : IMC.values()) {
-            if (imc.key.equals(message.getMethod())) {
+            if (imc.key.equals(message.method())) {
                 handle(message, imc);
             }
         }
@@ -65,7 +65,7 @@ public class IMCHandler {
     private void handle(IMCMessage message, IMC type) {
         imcCounts.mergeInt(message.getSenderModId(), 1, (i1, i2) -> i1 + i2);
         if (type.isDeprecated()) {
-            Set<String> usedForMod = deprecatedUses.get(message.getSenderModId());
+            Set<String> usedForMod = deprecatedUses.get(message.senderModId());
             if (usedForMod.add(type.toString())) {
                 Chisel.logger.warn("Mod {} is using deprecated IMC {}! This IMC type may be removed soon, please notify the author of this mod.", message.getSenderModId(), type);
             }

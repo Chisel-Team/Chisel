@@ -58,7 +58,7 @@ public class CtxToMcmeta {
                 FileReader fr = null;
                 try {
                     fr = new FileReader(path.toFile());
-                    JsonObject data = new JsonParser().parse(fr).getAsJsonObject();
+                    JsonObject data = JsonParser.parseReader(fr).getAsJsonObject();
                     
                     String type = data.get("type").getAsString();
                     String[] textures = Optional.ofNullable(data.get("textures"))

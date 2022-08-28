@@ -23,8 +23,8 @@ public class BlockstateSplitter {
 
     public static void main(String[] args) throws JsonIOException, JsonSyntaxException, IOException {
         File blockstatef = Paths.get("src", "main", "resources", "assets", "chisel", "blockstates", "default.json").toFile();
-        JsonObject json = new JsonParser().parse(new FileReader(blockstatef)).getAsJsonObject();
-        
+        JsonObject json = JsonParser.parseReader(new FileReader(blockstatef)).getAsJsonObject();
+       
         JsonObject variants = json.getAsJsonObject("variants");
         
         Map<String, Map<String, String>> models = new HashMap<>();

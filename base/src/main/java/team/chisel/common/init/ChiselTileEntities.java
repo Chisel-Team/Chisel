@@ -6,6 +6,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.MenuEntry;
 
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.BlockItem;
@@ -42,7 +43,7 @@ public class ChiselTileEntities {
                 .build()
             .register();
 
-    public static final BlockEntityEntry<TileAutoChisel> AUTO_CHISEL_TE = BlockEntityEntry.cast(AUTO_CHISEL.getSibling(BlockEntityType.class));
+    public static final BlockEntityEntry<TileAutoChisel> AUTO_CHISEL_TE = BlockEntityEntry.cast(AUTO_CHISEL.getSibling(Registry.BLOCK_ENTITY_TYPE_REGISTRY));
     
     public static final MenuEntry<ContainerAutoChisel> AUTO_CHISEL_CONTAINER = REGISTRATE
             .menu(ContainerAutoChisel::new, () -> GuiAutoChisel::new)
