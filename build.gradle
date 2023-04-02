@@ -161,8 +161,8 @@ subprojects {
         implementation fg.deobf("team.chisel.ctm:CTM:${minecraft_version}-${ctm_version}")
         implementation fg.deobf("curse.maven:lazydfu-460819:3544496")
         
-        //compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
-        runtimeOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
+        compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")
+        compileOnly fg.deobf("mcp.mobius.waila:wthit:forge-${wthit_version}")
     
         compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
         runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}:${jei_version}")
@@ -235,6 +235,7 @@ subprojects {
         tasks.publish.dependsOn 'build'
         publications {
             mavenJava(MavenPublication) {
+            	artifactId = archivesBaseName
                 artifact jar
             }
         }
