@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:dirt/bricks",
+    "chisel_legacy:dirt/netherbricks",
+    "chisel_legacy:dirt/bricks3",
+    "chisel_legacy:dirt/cobble",
+    "chisel_legacy:dirt/reinforcedcobbledirt",
+    "chisel_legacy:dirt/reinforceddirt",
+    "chisel_legacy:dirt/happy",
+    "chisel_legacy:dirt/bricks2",
+    "chisel_legacy:dirt/bricks_dirt2",
+    "chisel_legacy:dirt/hor",
+    "chisel_legacy:dirt/vert",
+    "chisel_legacy:dirt/layers",
+    "chisel_legacy:dirt/vertical",
+    "chisel_legacy:dirt/chunky",
+    "chisel_legacy:dirt/horizontal",
+    "chisel_legacy:dirt/plate"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chisel_legacy:block/dirt/hor-ctmh",
+    "end": "chisel_legacy:block/dirt/hor-top"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:obsidian/pillar",
+    "chisel_legacy:obsidian/pillar-quartz",
+    "chisel_legacy:obsidian/chiseled",
+    "chisel_legacy:obsidian/panel_shiny",
+    "chisel_legacy:obsidian/panel",
+    "chisel_legacy:obsidian/chunks",
+    "chisel_legacy:obsidian/growth",
+    "chisel_legacy:obsidian/crystal",
+    "chisel_legacy:obsidian/map-a",
+    "chisel_legacy:obsidian/map-b",
+    "chisel_legacy:obsidian/panel_light",
+    "chisel_legacy:obsidian/blocks",
+    "chisel_legacy:obsidian/tiles",
+    "chisel_legacy:obsidian/greek",
+    "chisel_legacy:obsidian/crate"
+  ]
+}

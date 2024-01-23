@@ -36,7 +36,7 @@ public class LegacyFeatures {
                     .loot((prov, block) -> prov.add(block, RegistrateBlockLootTables.createSingleItemTableWithSilkTouch(block, Items.BOOK, ConstantValue.exactly(3))))
                     .applyIf(() -> wood == WoodType.OAK, f -> f.addBlock(Blocks.BOOKSHELF))
                     .model((prov, block) -> {
-                        prov.simpleBlock(block, prov.models().withExistingParent("block/" + ModelTemplates.name(block), new ResourceLocation("chisel:cube_2_layer_sides"))
+                        prov.simpleBlock(block, prov.models().withExistingParent("block/" + ModelTemplates.name(block), prov.modLoc("cube_2_layer_sides"))
                                 .texture("all", "minecraft:block/" + wood.name() + "_planks")
                                 .texture("side", "block/" + ModelTemplates.name(block).replace(wood.name() + "/", "")));
                     })
