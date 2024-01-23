@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:carpet/blue/legacy",
+    "chisel:carpet/blue/llama",
+    "minecraft:blue_carpet"
+  ]
+}

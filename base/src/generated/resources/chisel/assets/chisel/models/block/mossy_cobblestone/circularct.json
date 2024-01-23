@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/mossy/mossy_ctm",
+  "textures": {
+    "bot": "chisel:block/cobblestone/circular",
+    "connect_bot": "chisel:block/cobblestone/circular-ctm"
+  }
+}

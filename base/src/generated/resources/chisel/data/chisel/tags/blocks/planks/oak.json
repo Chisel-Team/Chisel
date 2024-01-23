@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:planks/oak/large_planks",
+    "chisel:planks/oak/crude_horizontal_planks",
+    "chisel:planks/oak/vertical_planks",
+    "chisel:planks/oak/crude_vertical_planks",
+    "chisel:planks/oak/encased_planks",
+    "chisel:planks/oak/encased_large_planks",
+    "chisel:planks/oak/braced_planks",
+    "chisel:planks/oak/shipping_crate",
+    "chisel:planks/oak/paneling",
+    "chisel:planks/oak/crude_paneling",
+    "chisel:planks/oak/stacked",
+    "chisel:planks/oak/smooth",
+    "chisel:planks/oak/encased_smooth",
+    "chisel:planks/oak/braid",
+    "chisel:planks/oak/log_cabin",
+    "minecraft:oak_planks"
+  ]
+}

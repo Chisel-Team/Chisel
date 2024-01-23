@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chisel:block/concrete/lime/pillar-side",
+    "end": "chisel:block/concrete/lime/pillar-top"
+  }
+}

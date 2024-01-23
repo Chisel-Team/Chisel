@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel:block/mossy_cobblestone/cuts"
+    }
+  }
+}

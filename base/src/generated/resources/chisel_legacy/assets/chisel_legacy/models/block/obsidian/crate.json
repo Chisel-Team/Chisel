@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "chisel_legacy:block/obsidian/crate-side",
+    "bottom": "chisel_legacy:block/obsidian/crate-bottom",
+    "top": "chisel_legacy:block/obsidian/crate-top"
+  }
+}

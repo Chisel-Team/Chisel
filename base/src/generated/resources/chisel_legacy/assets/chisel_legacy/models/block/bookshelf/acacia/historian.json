@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/cube_2_layer_sides",
+  "textures": {
+    "all": "minecraft:block/acacia_planks",
+    "side": "chisel_legacy:block/bookshelf/historian"
+  }
+}

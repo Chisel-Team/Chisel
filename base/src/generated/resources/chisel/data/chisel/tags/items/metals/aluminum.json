@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:metals/aluminum/caution",
+    "chisel:metals/aluminum/crate",
+    "chisel:metals/aluminum/thermal",
+    "chisel:metals/aluminum/machine",
+    "chisel:metals/aluminum/badgreggy",
+    "chisel:metals/aluminum/bolted",
+    "chisel:metals/aluminum/scaffold",
+    "#forge:storage_blocks/aluminum"
+  ]
+}
