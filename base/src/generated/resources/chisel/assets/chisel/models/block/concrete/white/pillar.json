@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "side": "chisel:block/concrete/white/pillar-side",
-    "end": "chisel:block/concrete/white/pillar-top"
-  }
-}

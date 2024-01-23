@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/cube_2_layer_sides",
-  "textures": {
-    "all": "minecraft:block/spruce_planks",
-    "side": "chisel_legacy:block/bookshelf/brim"
-  }
-}

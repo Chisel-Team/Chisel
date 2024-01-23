@@ -4,7 +4,12 @@ import java.util.function.Function;
 
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.PipeBlock;
+import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
 import team.chisel.api.block.ModelTemplate;
 
 public class ModelTemplates {
@@ -149,6 +154,33 @@ public class ModelTemplates {
                     .texture("top", replaceVariant(name, top))
                     .texture("mid", replaceVariant(name, mid))
                     .texture("bot", replaceVariant(name, bottom)));
+        };
+    }
+
+    public static ModelTemplate paneblock() {
+        return (prov, block) -> {
+            MultiPartBlockStateBuilder builder =  prov.getMultipartBuilder(block);
+
+            builder.part().modelFile(new ModelFile.ExistingModelFile(new ResourceLocation("chisel", "pane"), prov.models().existingFileHelper)).addModel().end();
+
+
+            builder.part().modelFile(new ModelFile.ExistingModelFile(new ResourceLocation("chisel", "ctm_n"), prov.models().existingFileHelper))
+                    .addModel().condition(PipeBlock.NORTH, true).end()
+                    .part().modelFile(new ModelFile.ExistingModelFile(new ResourceLocation("chisel", "ctm_e"), prov.models().existingFileHelper))
+                    .addModel().condition(PipeBlock.EAST, true).end()
+                    .part().modelFile(new ModelFile.ExistingModelFile(new ResourceLocation("chisel", "ctm_s"), prov.models().existingFileHelper))
+                    .addModel().condition(PipeBlock.SOUTH, true).end()
+                    .part().modelFile(new ModelFile.ExistingModelFile(new ResourceLocation("chisel", "ctm_w"), prov.models().existingFileHelper))
+                    .addModel().condition(PipeBlock.WEST, true).end()
+
+                    .part().modelFile(new ModelFile.ExistingModelFile(new ResourceLocation("chisel", "ctm_ne"), prov.models().existingFileHelper))
+                    .addModel().condition(PipeBlock.NORTH, true).condition(PipeBlock.EAST, true).end()
+                    .part().modelFile(new ModelFile.ExistingModelFile(new ResourceLocation("chisel", "ctm_se"), prov.models().existingFileHelper))
+                    .addModel().condition(PipeBlock.SOUTH, true).condition(PipeBlock.EAST, true).end()
+                    .part().modelFile(new ModelFile.ExistingModelFile(new ResourceLocation("chisel", "ctm_sw"), prov.models().existingFileHelper))
+                    .addModel().condition(PipeBlock.SOUTH, true).condition(PipeBlock.WEST, true).end()
+                    .part().modelFile(new ModelFile.ExistingModelFile(new ResourceLocation("chisel", "ctm_nw"), prov.models().existingFileHelper))
+                    .addModel().condition(PipeBlock.NORTH, true).condition(PipeBlock.WEST, true).end();
         };
     }
 }

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel:block/glass/terrain_glass_ornatesteel"
+    }
+  }
+}

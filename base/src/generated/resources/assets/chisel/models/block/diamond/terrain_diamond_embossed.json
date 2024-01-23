@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chisel:block/diamond/terrain_diamond_embossed-side",
+    "end": "chisel:block/diamond/terrain_diamond_embossed-top"
+  }
+}

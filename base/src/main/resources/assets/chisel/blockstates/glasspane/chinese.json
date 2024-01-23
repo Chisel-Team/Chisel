@@ -4,7 +4,7 @@
         "transform": "forge:default-item",
         "textures": {
             "edge"    : "chisel:blocks/glass/chinese-top",
-            "pane"    : "chisel:blocks/glass/terrain-glass-chinese"
+            "pane"    : "chisel:blocks/glass/terrain_glass_chinese"
         }
     },
     "variants": {

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:cloud/cloud",
+    "chisel:cloud/large",
+    "chisel:cloud/vertical",
+    "chisel:cloud/grid"
+  ]
+}
