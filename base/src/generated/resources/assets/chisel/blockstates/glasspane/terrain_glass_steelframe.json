@@ -1,0 +1,180 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/post"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/n"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/e"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/s"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/w"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/ne"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/se"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/sw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/nw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/ns"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/ew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/nse"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/sew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/nsw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/new"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glass_steelframe/nsew"
+      }
+    }
+  ]
+}

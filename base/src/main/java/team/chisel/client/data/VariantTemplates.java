@@ -8,12 +8,17 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.util.nullness.FieldsAreNonnullByDefault;
 
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import team.chisel.Chisel;
@@ -33,6 +38,7 @@ public class VariantTemplates {
         private final String name;
         private final String localizedName;
         private final ModelTemplate modelTemplate;
+        private final NonNullBiConsumer<DataGenContext<Item, BlockItem>, RegistrateItemModelProvider> itemModelTemplate;
         private final RecipeTemplate recipeTemplate;
         @Getter(onMethod = @__({@Override}))
         private final String[] tooltip;
@@ -46,7 +52,12 @@ public class VariantTemplates {
         public Optional<ModelTemplate> getModelTemplate() {
             return Optional.ofNullable(modelTemplate);
         }
-        
+
+        @Override
+        public Optional<NonNullBiConsumer<DataGenContext<Item, BlockItem>, RegistrateItemModelProvider>> getItemModelTemplate() {
+            return Optional.ofNullable(itemModelTemplate);
+        }
+
         @Override
         public Optional<RecipeTemplate> getRecipeTemplate() {
             return Optional.ofNullable(recipeTemplate);

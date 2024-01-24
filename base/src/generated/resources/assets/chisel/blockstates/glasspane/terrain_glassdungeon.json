@@ -1,0 +1,180 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/post"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/n"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/e"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/s"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/w"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/ne"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/se"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/sw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/nw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/ns"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/ew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/nse"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/sew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/nsw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/new"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassdungeon/nsew"
+      }
+    }
+  ]
+}

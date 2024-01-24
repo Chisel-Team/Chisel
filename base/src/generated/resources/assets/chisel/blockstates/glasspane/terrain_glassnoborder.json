@@ -1,0 +1,180 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/post"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/n"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/e"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/s"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/w"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/ne"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/se"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/sw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/nw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/ns"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/ew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "false"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/nse"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/sew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/nsw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/new"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane/terrain_glassnoborder/nsew"
+      }
+    }
+  ]
+}

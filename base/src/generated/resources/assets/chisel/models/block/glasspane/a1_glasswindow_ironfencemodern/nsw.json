@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/pane/nsw",
+  "textures": {
+    "pane": "chisel:block/glass/a1_glasswindow_ironfencemodern",
+    "edge": "chisel:block/glass/edge_steel"
+  }
+}

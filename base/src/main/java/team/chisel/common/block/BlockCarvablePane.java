@@ -48,4 +48,9 @@ public class BlockCarvablePane extends IronBarsBlock implements ICarvable {
             return super.canEntityDestroy(state, world, pos, entity);
         }
     }
+
+    @Override
+    public String getDescriptionId() {
+        return variation.getGroup().getTranslationKey();
+    }
 }

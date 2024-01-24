@@ -18,7 +18,9 @@ import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
+import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
@@ -41,6 +43,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -89,7 +92,10 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     
     @Accessors(fluent = true)
     private ModelTemplate model = ModelTemplates.simpleBlock();
-    
+
+    @Accessors(fluent = true)
+    private NonNullBiConsumer<DataGenContext<Item, BlockItem>, RegistrateItemModelProvider> itemModel = (ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry)));
+
     @Accessors(fluent = true)
     private RecipeTemplate recipe = RecipeTemplate.none();
     
@@ -133,6 +139,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 .opaque(opaque)
                 .localizedName(template.getLocalizedName())
                 .model(template.getModelTemplate().orElse(model))
+                .itemModel(template.getItemModelTemplate().orElse(itemModel))
                 .recipe(template.getRecipeTemplate().orElse(recipe))
                 .tooltip(template.getTooltip());
     }
@@ -230,7 +237,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .loot(loot)
                         .item(provider::createBlockItem)
                             // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
-                            .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
+                            .model(builder.itemModel)
                             .transform(this::addTags)
                             .build()
                         .register());
@@ -300,6 +307,10 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         @Setter
         @Accessors(fluent = true)
         private ModelTemplate model = ModelTemplates.simpleBlock();
+
+        @Setter
+        @Accessors(fluent = true)
+        private NonNullBiConsumer<DataGenContext<Item, BlockItem>, RegistrateItemModelProvider> itemModel = (ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry)));
         
         @Setter
         @Accessors(fluent = true)

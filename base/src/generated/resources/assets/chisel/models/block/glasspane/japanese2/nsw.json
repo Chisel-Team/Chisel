@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/pane/nsw",
+  "textures": {
+    "pane": "chisel:block/glass/japanese2",
+    "edge": "chisel:block/glass/japanese2-top"
+  }
+}

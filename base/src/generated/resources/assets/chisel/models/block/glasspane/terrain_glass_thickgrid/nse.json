@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/pane/nse",
+  "textures": {
+    "pane": "chisel:block/glass/terrain_glass_thickgrid",
+    "edge": "chisel:block/glass/terrain_glass_thickgrid"
+  }
+}

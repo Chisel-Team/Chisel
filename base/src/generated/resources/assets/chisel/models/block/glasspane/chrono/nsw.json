@@ -1,0 +1,8 @@
+{
+  "parent": "chisel:block/pane/ctm_nsw",
+  "textures": {
+    "pane": "chisel:block/glass/chrono",
+    "pane_ct": "chisel:block/glass/chrono",
+    "edge": "chisel:block/glass/edge_steel"
+  }
+}

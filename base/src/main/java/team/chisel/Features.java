@@ -23,7 +23,6 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,7 +39,6 @@ import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.api.block.BlockCreator;
 import team.chisel.api.block.ChiselBlockFactory;
-import team.chisel.api.carving.CarvingUtils;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 import team.chisel.client.sound.ChiselSoundTypes;
@@ -359,11 +357,11 @@ public class Features {
             .addTag(Tags.Blocks.GLASS_COLORLESS)
             .initialProperties(() -> Blocks.GLASS)
             .variation("terrain_glassbubble")
-            //.next("chinese")
+//            .next("chinese")
             .next("japanese")
             .next("terrain_glassdungeon")
             .next("terrain_glasslight")
-            //.next("terrain_glassnoborder")
+            .next("terrain_glassnoborder")
             .next("terrain_glass_ornatesteel")
             .next("terrain_glass_screen")
             .next("terrain_glassshale")
@@ -384,27 +382,59 @@ public class Features {
             .addTag(Tags.Blocks.GLASS_COLORLESS)
             .initialProperties(() -> Blocks.GLASS)
             .variation("terrain_glassbubble")
-                .model(ModelTemplates.paneblock())
-            //.next("chinese")
+                .model(ModelTemplates.paneBlockCTM("block/glass/edge"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
+//            .next("chinese")
+//                .model(ModelTemplates.paneblock("block/glass/chinese-top"))
+//                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("japanese")
-                .model(ModelTemplates.paneblock())
+                .model(ModelTemplates.paneBlock("block/glass/japanese-top"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glassdungeon")
-                .model(ModelTemplates.paneblock())
+                .model(ModelTemplates.paneBlock("block/glass/edge_steel"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glasslight")
-                .model(ModelTemplates.paneblock())
+                .model(ModelTemplates.paneBlockCTM("block/glass/edge"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glassnoborder")
+                .model(ModelTemplates.paneBlockCTM("block/glass/edge"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glass_ornatesteel")
+                .model(ModelTemplates.paneBlockCTM("block/glass/edge_steel"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glass_screen")
+                .model(ModelTemplates.paneBlock("block/glass/terrain_glass_screen"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glassshale")
+                .model(ModelTemplates.paneBlockCTM("block/glass/edge_steel"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glass_steelframe")
+                .model(ModelTemplates.paneBlockCTM("block/glass/edge_steel"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glassstone")
+                .model(ModelTemplates.paneBlockCTM("block/glass/edge_steel"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glassstreak")
+                .model(ModelTemplates.paneBlock("block/glass/terrain_glassstreak-top"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glass_thickgrid")
+                .model(ModelTemplates.paneBlock("block/glass/terrain_glass_thickgrid"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("terrain_glass_thingrid")
+                .model(ModelTemplates.paneBlock("block/glass/terrain_glass_thingrid"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("a1_glasswindow_ironfencemodern")
+                .model(ModelTemplates.paneBlock("block/glass/edge_steel"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("chrono")
+                .model(ModelTemplates.paneBlockCTM("block/glass/edge_steel"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("chinese2")
+                .model(ModelTemplates.paneBlock("block/glass/chinese2-top"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .next("japanese2")
+                .model(ModelTemplates.paneBlock("block/glass/japanese2-top"))
+                .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
             .build(b -> b.sound(SoundType.GLASS).explosionResistance(0.3F));
 
     public static final Map<String, BlockEntry<BlockCarvable>> GLOWSTONE = _FACTORY.newType(Material.GLASS, "glowstone")
