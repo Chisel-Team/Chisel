@@ -33,6 +33,21 @@
     "chisel:emerald/ornate",
     "chisel:emerald/masonryemerald",
     "chisel:emerald/emeraldcircle",
-    "chisel:emerald/emeraldprismatic"
+    "chisel:emerald/emeraldprismatic",
+    "chisel:gold/terrain_gold_largeingot",
+    "chisel:gold/terrain_gold_smallingot",
+    "chisel:gold/terrain_gold_brick",
+    "chisel:gold/terrain_gold_cart",
+    "chisel:gold/terrain_gold_coin_heads",
+    "chisel:gold/terrain_gold_coin_tails",
+    "chisel:gold/terrain_gold_crate_dark",
+    "chisel:gold/terrain_gold_crate_light",
+    "chisel:gold/terrain_gold_plates",
+    "chisel:gold/terrain_gold_rivets",
+    "chisel:gold/terrain_gold_star",
+    "chisel:gold/terrain_gold_space",
+    "chisel:gold/terrain_gold_spaceblack",
+    "chisel:gold/terrain_gold_simple",
+    "chisel:gold/goldeye"
   ]
 }

@@ -452,4 +452,59 @@ public class ModelTemplates {
                     .end();
         };
     }
+
+    public static ModelTemplate cubeCTMTranslusent(String all, String ctm) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/cube_ctm_translucent"))
+                    .texture("all", all)
+                    .texture("connected_tex", ctm));
+        };
+    }
+
+    public static ModelTemplate lavaCube() {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            String variant = name(block).split("/")[name(block).split("/").length - 1];
+
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/cube_lava"))
+                    .texture("bot", "minecraft:block/lava_still")
+                    .texture("top", "block/fluid/" + variant));
+        };
+    }
+
+    public static ModelTemplate lavaCubeCTM(String variant) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/cube_ctm_lava"))
+                    .texture("bot", "minecraft:block/lava_still")
+                    .texture("top", "block/fluid/" + variant)
+                    .texture("connect_top", "block/fluid/" + variant + "-ctm"));
+        };
+    }
+
+    public static ModelTemplate lavaPassCube() {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            String variant = name(block).split("/")[name(block).split("/").length - 1];
+
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/cube_pass_lava"))
+                    .texture("bot", "minecraft:block/lava_still")
+                    .texture("top", "block/fluid/" + variant));
+        };
+    }
+
+    public static ModelTemplate lavaPassColume() {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            String variant = name(block).split("/")[name(block).split("/").length - 1];
+
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/column_lava"))
+                    .texture("bot", "minecraft:block/lava_still")
+                    .texture("side", "block/fluid/" + variant + "-side")
+                    .texture("top", "block/fluid/" + variant + "-top"));
+        };
+    }
 }

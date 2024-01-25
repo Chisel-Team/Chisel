@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel:block/lavastone/tiles_medium"
+    }
+  }
+}

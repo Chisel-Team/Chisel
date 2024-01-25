@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/cube_ctm_translucent",
+  "textures": {
+    "all": "chisel:block/glass_stained/lime/framed",
+    "connected_tex": "chisel:block/glass_stained/lime/framed_ct"
+  }
+}
