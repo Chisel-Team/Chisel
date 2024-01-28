@@ -1,0 +1,8 @@
+{
+  "parent": "chisel:block/lavastone/column_lava",
+  "textures": {
+    "bot": "minecraft:block/water_still",
+    "side": "chisel:block/fluid/pillar-side",
+    "top": "chisel:block/fluid/pillar-top"
+  }
+}

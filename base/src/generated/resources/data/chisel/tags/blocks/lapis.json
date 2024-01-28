@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:lapis/terrain_lapisblock_chunky",
+    "chisel:lapis/terrain_lapisblock_panel",
+    "chisel:lapis/terrain_lapisblock_zelda",
+    "chisel:lapis/terrain_lapisornate",
+    "chisel:lapis/terrain_lapistile",
+    "chisel:lapis/a1_blocklapis_panel",
+    "chisel:lapis/a1_blocklapis_smooth",
+    "chisel:lapis/a1_blocklapis_ornatelayer",
+    "chisel:lapis/masonrylapis",
+    "minecraft:lapis_block",
+    "#forge:storage_blocks/lapis"
+  ]
+}

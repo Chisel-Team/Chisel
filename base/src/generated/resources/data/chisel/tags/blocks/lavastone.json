@@ -33,6 +33,6 @@
     "chisel:lavastone/prism",
     "chisel:lavastone/chaotic_bricks",
     "chisel:lavastone/cuts",
-    "#forge:stone/marble"
+    "#forge:stone/lavastone"
   ]
 }

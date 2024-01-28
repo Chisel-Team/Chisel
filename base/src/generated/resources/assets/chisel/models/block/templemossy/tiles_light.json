@@ -1,0 +1,6 @@
+{
+  "parent": "chisel:block/cube_eldritch",
+  "textures": {
+    "all": "chisel:block/templemossy/tiles_light"
+  }
+}

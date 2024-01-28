@@ -463,48 +463,65 @@ public class ModelTemplates {
         };
     }
 
-    public static ModelTemplate lavaCube() {
+    public static ModelTemplate fluidCube(String fluid) {
         return (prov, block) -> {
             String name = "block/" + name(block);
             String variant = name(block).split("/")[name(block).split("/").length - 1];
 
             prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/cube_lava"))
-                    .texture("bot", "minecraft:block/lava_still")
+                    .texture("bot", "minecraft:block/" + fluid + "_still")
                     .texture("top", "block/fluid/" + variant));
         };
     }
 
-    public static ModelTemplate lavaCubeCTM(String variant) {
+    public static ModelTemplate fluidCubeCTM(String fluid, String variant) {
         return (prov, block) -> {
             String name = "block/" + name(block);
 
             prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/cube_ctm_lava"))
-                    .texture("bot", "minecraft:block/lava_still")
+                    .texture("bot", "minecraft:block/" + fluid + "_still")
                     .texture("top", "block/fluid/" + variant)
                     .texture("connect_top", "block/fluid/" + variant + "-ctm"));
         };
     }
 
-    public static ModelTemplate lavaPassCube() {
+    public static ModelTemplate fluidPassCube(String fluid) {
         return (prov, block) -> {
             String name = "block/" + name(block);
             String variant = name(block).split("/")[name(block).split("/").length - 1];
 
             prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/cube_pass_lava"))
-                    .texture("bot", "minecraft:block/lava_still")
+                    .texture("bot", "minecraft:block/" + fluid + "_still")
                     .texture("top", "block/fluid/" + variant));
         };
     }
 
-    public static ModelTemplate lavaPassColume() {
+    public static ModelTemplate fluidPassColume(String fluid) {
         return (prov, block) -> {
             String name = "block/" + name(block);
             String variant = name(block).split("/")[name(block).split("/").length - 1];
 
             prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/column_lava"))
-                    .texture("bot", "minecraft:block/lava_still")
+                    .texture("bot", "minecraft:block/" + fluid + "_still")
                     .texture("side", "block/fluid/" + variant + "-side")
                     .texture("top", "block/fluid/" + variant + "-top"));
+        };
+    }
+
+    public static ModelTemplate cubeEldritch() {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/cube_eldritch"))
+                    .texture("all", name));
+        };
+    }
+
+    public static ModelTemplate columnEldritch(String top) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/column_eldritch"))
+                    .texture("end", replaceVariant(name, top) + "-top")
+                    .texture("side", name + "-side"));
         };
     }
 }

@@ -2923,7 +2923,7 @@ public enum FeaturesOld {
 //                    .next("7")
 //                    .next("8")
 //                    .next("9")
-//                    .next("companion")
+//                    .next("")
 //                    .build(b -> b.setHardness(1.5F).setResistance(20.0F).setSoundType(SoundType.STONE));
 //        }
 //

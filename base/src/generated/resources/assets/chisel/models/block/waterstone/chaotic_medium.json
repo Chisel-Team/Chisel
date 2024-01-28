@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/lavastone/cube_lava",
+  "textures": {
+    "bot": "minecraft:block/water_still",
+    "top": "chisel:block/fluid/chaotic_medium"
+  }
+}

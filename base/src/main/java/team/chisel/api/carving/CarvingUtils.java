@@ -7,6 +7,8 @@ import com.google.common.base.Objects;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.Util;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -55,9 +57,10 @@ public class CarvingUtils {
 	public static int hashStack(ItemStack stack) {
 	    return Objects.hashCode(stack.getItem(), stack.getTag());
 	}
-	
+
+	//TODO Maybe make registrate ignore or log duplicate keys...
 	private static TranslatableComponent getDisplayName(TagKey<?> tag, String name) {
-	    return Chisel.registrate().addLang("group", tag.location(), name);
+	    return name.isEmpty() ? new TranslatableComponent(Util.makeDescriptionId("group", tag.location())) : Chisel.registrate().addLang("group", tag.location(), name);
 	}
 
     public static ICarvingGroup itemGroup(TagKey<Block> blocks, String name) {

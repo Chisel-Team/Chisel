@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/column_eldritch",
+  "textures": {
+    "end": "chisel:block/templemossy/temple-top",
+    "side": "chisel:block/templemossy/stand_creeper-side"
+  }
+}

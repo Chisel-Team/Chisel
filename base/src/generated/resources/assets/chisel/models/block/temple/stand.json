@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/column_eldritch",
+  "textures": {
+    "end": "chisel:block/temple/temple-top",
+    "side": "chisel:block/temple/stand-side"
+  }
+}

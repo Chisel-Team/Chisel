@@ -12,7 +12,8 @@ public class ChiselCompatTags {
     public static final TagKey<Item> STONE_LIMESTONE = compatTag("stone/limestone");
     public static final TagKey<Item> STONE_MARBLE = compatTag("stone/marble");
 
-    public static final TagKey<Item> LAVASTONE = compatTag("stone/marble");
+    public static final TagKey<Item> LAVASTONE = compatTag("stone/lavastone");
+    public static final TagKey<Item> WATERSTONE = compatTag("stone/waterstone");
 
 
     public static final TagKey<Item> STORAGE_BLOCKS_ALUMINUM = compatTag("storage_blocks/aluminum");
