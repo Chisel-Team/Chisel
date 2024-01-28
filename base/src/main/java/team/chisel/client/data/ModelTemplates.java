@@ -468,7 +468,7 @@ public class ModelTemplates {
             String name = "block/" + name(block);
             String variant = name(block).split("/")[name(block).split("/").length - 1];
 
-            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/cube_lava"))
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/" + fluid + "stone/cube_" + fluid))
                     .texture("bot", "minecraft:block/" + fluid + "_still")
                     .texture("top", "block/fluid/" + variant));
         };
@@ -478,7 +478,7 @@ public class ModelTemplates {
         return (prov, block) -> {
             String name = "block/" + name(block);
 
-            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/cube_ctm_lava"))
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/" + fluid + "stone/cube_ctm_" + fluid))
                     .texture("bot", "minecraft:block/" + fluid + "_still")
                     .texture("top", "block/fluid/" + variant)
                     .texture("connect_top", "block/fluid/" + variant + "-ctm"));
@@ -490,7 +490,7 @@ public class ModelTemplates {
             String name = "block/" + name(block);
             String variant = name(block).split("/")[name(block).split("/").length - 1];
 
-            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/cube_pass_lava"))
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/" + fluid + "stone/cube_pass_" + fluid))
                     .texture("bot", "minecraft:block/" + fluid + "_still")
                     .texture("top", "block/fluid/" + variant));
         };
@@ -501,7 +501,7 @@ public class ModelTemplates {
             String name = "block/" + name(block);
             String variant = name(block).split("/")[name(block).split("/").length - 1];
 
-            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/lavastone/column_lava"))
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/" + fluid + "stone/column_" + fluid))
                     .texture("bot", "minecraft:block/" + fluid + "_still")
                     .texture("side", "block/fluid/" + variant + "-side")
                     .texture("top", "block/fluid/" + variant + "-top"));
@@ -522,6 +522,16 @@ public class ModelTemplates {
             prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/column_eldritch"))
                     .texture("end", replaceVariant(name, top) + "-top")
                     .texture("side", name + "-side"));
+        };
+    }
+
+    public static ModelTemplate cubeLayerTopshaded(String bot) {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/cube_2_layer_topshaded"))
+                    .texture("top", name)
+                    .texture("particle", name)
+                    .texture("bot", bot));
         };
     }
 }

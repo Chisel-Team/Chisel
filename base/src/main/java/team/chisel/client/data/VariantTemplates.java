@@ -175,6 +175,22 @@ public class VariantTemplates {
         public static final VariantTemplate CUTS = simple("cuts");
     }
 
+    public static class MetalTerrain {
+        public static final VariantTemplate LARGE_INGOT = simple("large_ingot", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate SMALL_INGOT = simple("small_ingot", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate BRICK = simple("brick", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate COIN_HEADS = simple("coin_heads", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate COIN_TAILS = simple("coin_tails", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate CRATE_DARK = simple("crate_dark", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate CRATE_LIGHT = simple("crate_light", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate PLATES = simple("plates", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate RIVETS = simple("rivets", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate SPACE = simple("space");
+        public static final VariantTemplate SPACE_BLACK = simple("space_black");
+        public static final VariantTemplate SIMPLE = simple("simple", ModelTemplates.cubeBottomTop());
+
+    }
+
     public static class Planks {
         public static final VariantTemplate LARGE_PLANKS = simple("large_planks");
         public static final VariantTemplate CRUDE_HORIZONTAL_PLANKS = simple("crude_horizontal_planks");
@@ -232,6 +248,7 @@ public class VariantTemplates {
     }
     
     public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
+    public static final ImmutableList<VariantTemplate> METAL_TERRAIN = ofClass(MetalTerrain.class);
 
     public static final ImmutableList<VariantTemplate> STONE = ofClass(Stone.class);
 

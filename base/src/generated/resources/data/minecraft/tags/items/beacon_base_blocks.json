@@ -47,6 +47,20 @@
     "chisel:metals/gold/machine",
     "chisel:metals/gold/badgreggy",
     "chisel:metals/gold/bolted",
-    "chisel:metals/gold/scaffold"
+    "chisel:metals/gold/scaffold",
+    "chisel:iron/large_ingot",
+    "chisel:iron/small_ingot",
+    "chisel:iron/brick",
+    "chisel:iron/coin_heads",
+    "chisel:iron/coin_tails",
+    "chisel:iron/crate_dark",
+    "chisel:iron/crate_light",
+    "chisel:iron/plates",
+    "chisel:iron/rivets",
+    "chisel:iron/space",
+    "chisel:iron/space_black",
+    "chisel:iron/simple",
+    "chisel:iron/moon",
+    "chisel:iron/vents"
   ]
 }

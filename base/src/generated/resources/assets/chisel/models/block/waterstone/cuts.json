@@ -1,5 +1,5 @@
 {
-  "parent": "chisel:block/lavastone/cube_pass_lava",
+  "parent": "chisel:block/waterstone/cube_pass_water",
   "textures": {
     "bot": "minecraft:block/water_still",
     "top": "chisel:block/fluid/cuts"

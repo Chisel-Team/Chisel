@@ -10,30 +10,30 @@
       "to":   [ 16, 16, 16 ],
       "shade": false,
       "faces": {
-        "down" : { "texture": "#bot", "cullface": "down" , "tintindex": 0 },
-        "up"   : { "texture": "#bot", "cullface": "up"   , "tintindex": 0 },
-        "north": { "texture": "#bot", "cullface": "north", "tintindex": 0 },
-        "south": { "texture": "#bot", "cullface": "south", "tintindex": 0 },
-        "west" : { "texture": "#bot", "cullface": "west" , "tintindex": 0 },
-        "east" : { "texture": "#bot", "cullface": "east" , "tintindex": 0 }
+        "down" : { "texture": "#bot", "cullface": "down" , "tintindex": 1 },
+        "up"   : { "texture": "#bot", "cullface": "up"   , "tintindex": 1 },
+        "north": { "texture": "#bot", "cullface": "north", "tintindex": 1 },
+        "south": { "texture": "#bot", "cullface": "south", "tintindex": 1 },
+        "west" : { "texture": "#bot", "cullface": "west" , "tintindex": 1 },
+        "east" : { "texture": "#bot", "cullface": "east" , "tintindex": 1 }
       }
     },
     {
       "from": [  0,  0,  0 ],
       "to":   [ 16, 16, 16 ],
       "faces": {
-        "down" : { "texture": "#top", "cullface": "down"  },
-        "up"   : { "texture": "#top", "cullface": "up"    },
-        "north": { "texture": "#top", "cullface": "north" },
-        "south": { "texture": "#top", "cullface": "south" },
-        "west" : { "texture": "#top", "cullface": "west"  },
-        "east" : { "texture": "#top", "cullface": "east"  }
+        "down" : { "texture": "#top", "cullface": "down" , "tintindex": 0 },
+        "up"   : { "texture": "#top", "cullface": "up"   , "tintindex": 0 },
+        "north": { "texture": "#top", "cullface": "north", "tintindex": 0 },
+        "south": { "texture": "#top", "cullface": "south", "tintindex": 0 },
+        "west" : { "texture": "#top", "cullface": "west" , "tintindex": 0 },
+        "east" : { "texture": "#top", "cullface": "east" , "tintindex": 0 }
       }
     }
   ],
   "ctm_version": 1,
   "ctm_overrides": {
-    "0": {
+    "1": {
       "extra": {
         "light": 15
       }
