@@ -524,14 +524,4 @@ public class ModelTemplates {
                     .texture("side", name + "-side"));
         };
     }
-
-    public static ModelTemplate cubeLayerTopshaded(String bot) {
-        return (prov, block) -> {
-            String name = "block/" + name(block);
-            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/cube_2_layer_topshaded"))
-                    .texture("top", name)
-                    .texture("particle", name)
-                    .texture("bot", bot));
-        };
-    }
 }

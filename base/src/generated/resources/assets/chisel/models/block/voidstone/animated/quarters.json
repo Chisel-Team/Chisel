@@ -1,8 +1,8 @@
 {
   "parent": "chisel:block/cube_2_layer_topshaded",
   "textures": {
-    "top": "chisel:block/voidstone/animated/quarters",
     "particle": "chisel:block/voidstone/animated/quarters",
+    "top": "chisel:block/voidstone/animated/quarters",
     "bot": "chisel:block/voidstone/animated/background"
   }
 }

@@ -47,6 +47,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -228,6 +229,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret.get(var.getName()), var.getName(), var.getDisplayName(), group)))
                         .initialProperties(initialProperties == null ? NonNullSupplier.of(Blocks.STONE.delegate) : initialProperties)
                         .properties(after)
+                        .properties(p -> builder.opaque ? p.noOcclusion() : p)
                         .addLayer(layer)
                         .transform(this::addTags)
 //                        .properties(color == null ? after : after.andThen(p -> { p.blockColors = $ -> color; return p; }))
