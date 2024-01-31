@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:hexplating/lime/hexbase",
+    "chisel:hexplating/lime/hexnew"
+  ]
+}

@@ -1,7 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "chisel:hexplating/hexbase",
-    "chisel:hexplating/hexnew"
-  ]
-}

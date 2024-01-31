@@ -4,7 +4,7 @@
         "type": "ctm",
         "layer": "TRANSLUCENT",
         "textures": [
-            "chisel:block/glass_stained/cyan/rough_ct"
+            "chisel:block/glass_stained/cyan/rough-ctm"
         ]
     }
 }

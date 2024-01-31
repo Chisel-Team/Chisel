@@ -34,6 +34,7 @@
     "chisel:basalt/twisted",
     "chisel:basalt/prism",
     "chisel:basalt/cuts",
-    "minecraft:basalt"
+    "minecraft:basalt",
+    "minecraft:polished_basalt"
   ]
 }

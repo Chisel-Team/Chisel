@@ -8,6 +8,7 @@
     "chisel:metals/gold/badgreggy",
     "chisel:metals/gold/bolted",
     "chisel:metals/gold/scaffold",
+    "minecraft:gold_block",
     "#forge:storage_blocks/gold"
   ]
 }

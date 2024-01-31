@@ -1,8 +1,0 @@
-{
-  "parent": "chisel:block/pane/ctm_w",
-  "textures": {
-    "pane": "chisel:block/glass/terrain_glassstone",
-    "pane_ct": "chisel:block/glass/terrain_glassstone",
-    "edge": "chisel:block/glass/edge_steel"
-  }
-}

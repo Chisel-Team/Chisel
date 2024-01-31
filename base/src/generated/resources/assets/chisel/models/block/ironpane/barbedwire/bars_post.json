@@ -1,0 +1,9 @@
+{
+  "parent": "chisel:block/bars_post",
+  "textures": {
+    "bars": "chisel:block/ironpane/barbedwire",
+    "particle": "chisel:block/ironpane/barbedwire",
+    "edge": "chisel:block/ironpane/barbedwire-top",
+    "side": "chisel:block/ironpane/barbedwire-side"
+  }
+}

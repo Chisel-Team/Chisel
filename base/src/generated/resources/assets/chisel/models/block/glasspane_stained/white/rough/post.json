@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/pane/post",
+  "textures": {
+    "pane": "chisel:block/glass_stained/white/rough",
+    "edge": "minecraft:block/white_stained_glass_pane_top"
+  }
+}

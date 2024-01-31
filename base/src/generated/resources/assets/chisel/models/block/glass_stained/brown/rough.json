@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "chisel:block/cube_ctm_translucent",
   "textures": {
-    "all": "chisel:block/glass_stained/brown/rough"
+    "all": "chisel:block/glass_stained/brown/rough",
+    "connected_tex": "chisel:block/glass_stained/brown/rough-ctm"
   }
 }

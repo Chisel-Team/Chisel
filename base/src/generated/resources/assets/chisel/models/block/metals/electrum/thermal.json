@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "chisel:block/metals/electrum/thermal-side",
+    "bottom": "chisel:block/metals/electrum/thermal-bottom",
+    "top": "chisel:block/metals/electrum/thermal-top"
+  }
+}

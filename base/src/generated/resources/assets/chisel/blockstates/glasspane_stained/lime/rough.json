@@ -1,0 +1,196 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/post"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/n"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/e"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/s"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/w"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/ne"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/se"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/sw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/nw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/ns"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/ew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/nse"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/sew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/nsw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/new"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/rough/nsew"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "chisel:block/bars_cap_alt",
+  "textures": {
+    "bars": "chisel:block/ironpane/classicnew",
+    "particle": "chisel:block/ironpane/classicnew",
+    "edge": "chisel:block/ironpane/classic",
+    "side": "chisel:block/ironpane/classic"
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/post"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/n"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/e"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/s"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/w"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/ne"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/se"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/sw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/nw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/ns"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/ew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/nse"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/sew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/nsw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/new"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/lime/streaks/nsew"
+      }
+    }
+  ]
+}

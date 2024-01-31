@@ -1,0 +1,196 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/post"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/n"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/e"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/s"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/w"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/ne"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/se"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "false",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/sw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/nw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/ns"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/ew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "false",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/nse"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "east": "true",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/sew"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "false",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/nsw"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "false",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/new"
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "east": "true",
+        "south": "true",
+        "west": "true",
+        "waterlogged": "false|true"
+      },
+      "apply": {
+        "model": "chisel:block/glasspane_stained/red/panel/nsew"
+      }
+    }
+  ]
+}

@@ -1,8 +1,0 @@
-{
-  "parent": "chisel:block/pane/ctm_nsew",
-  "textures": {
-    "pane": "chisel:block/glass/chrono",
-    "pane_ct": "chisel:block/glass/chrono",
-    "edge": "chisel:block/glass/edge_steel"
-  }
-}

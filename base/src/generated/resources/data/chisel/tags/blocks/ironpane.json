@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:ironpane/borderless",
+    "chisel:ironpane/borderless-topper",
+    "chisel:ironpane/barbedwire",
+    "chisel:ironpane/cage",
+    "chisel:ironpane/thickgrid",
+    "chisel:ironpane/thingrid",
+    "chisel:ironpane/ornatesteel",
+    "chisel:ironpane/bars",
+    "chisel:ironpane/spikes",
+    "chisel:ironpane/classic",
+    "chisel:ironpane/classicnew",
+    "chisel:ironpane/fence",
+    "chisel:ironpane/modern",
+    "minecraft:iron_bars"
+  ]
+}

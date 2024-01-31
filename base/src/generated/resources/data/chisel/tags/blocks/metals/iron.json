@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:metals/iron/caution",
+    "chisel:metals/iron/crate",
+    "chisel:metals/iron/thermal",
+    "chisel:metals/iron/machine",
+    "chisel:metals/iron/badgreggy",
+    "chisel:metals/iron/bolted",
+    "chisel:metals/iron/scaffold",
+    "minecraft:iron_block",
+    "#forge:storage_blocks/iron",
+    "chisel:iron/large_ingot",
+    "chisel:iron/small_ingot",
+    "chisel:iron/brick",
+    "chisel:iron/coin_heads",
+    "chisel:iron/coin_tails",
+    "chisel:iron/crate_dark",
+    "chisel:iron/crate_light",
+    "chisel:iron/plates",
+    "chisel:iron/rivets",
+    "chisel:iron/space",
+    "chisel:iron/space_black",
+    "chisel:iron/simple",
+    "chisel:iron/moon",
+    "chisel:iron/vents",
+    "minecraft:iron_block",
+    "#forge:storage_blocks/iron"
+  ]
+}

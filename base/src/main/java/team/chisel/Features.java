@@ -14,6 +14,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.data.loot.BlockLoot;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -47,6 +48,7 @@ import team.chisel.client.sound.ChiselSoundTypes;
 import team.chisel.common.Reference;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableCarpet;
+import team.chisel.common.block.BlockCarvableIce;
 import team.chisel.common.block.BlockCarvablePane;
 import team.chisel.common.init.ChiselCompatTags;
 
@@ -89,42 +91,43 @@ public class Features {
 
     public static final Map<String, BlockEntry<BlockCarvable>> BASALT = _FACTORY.newType(Material.STONE, "basalt")
             .addBlock(Blocks.BASALT)
+            .addBlock(Blocks.POLISHED_BASALT)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .initialProperties(() -> Blocks.BASALT)
             .variations(VariantTemplates.ROCK)
             .build();
-    public static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
- 
+
     public static final Map<String, BlockEntry<BlockCarvable>> BRICKS = _FACTORY.newType(Material.STONE, "bricks")
             .addBlock(Blocks.BRICKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .initialProperties(() -> Blocks.BRICKS)
             .variations(VariantTemplates.ROCK)
             .build();
-    
+
     public static final Map<String, BlockEntry<BlockCarvable>> BRONZE = _FACTORY.newType(Material.METAL, "metals/bronze")
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_IRON_TOOL)
             .setGroupName("Bronze Block")
-            .addTag(ChiselCompatTags.STORAGE_BLOCKS_BRONZE)
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_BRONZE)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .color(MaterialColor.TERRACOTTA_ORANGE)
             .variations(VariantTemplates.METAL)
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> BROWNSTONE = _FACTORY.newType(Material.STONE, "brownstone")
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .recipe((prov, block) -> new ShapedRecipeBuilder(block, 4)
+                    .pattern(" S ").pattern("SCS").pattern(" S ")
+                    .define('S', Tags.Items.SANDSTONE)
+                    .define('C', Items.CLAY_BALL)
+                    .unlockedBy("has_clay", prov.has(Items.CLAY_BALL))
+                    .save(prov))
             .variation("default")
-                .recipe((prov, block) -> new ShapedRecipeBuilder(block, 4)
-                        .pattern(" S ").pattern("SCS").pattern(" S ")
-                        .define('S', Tags.Items.SANDSTONE)
-                        .define('C', Items.CLAY_BALL)
-                        .unlockedBy("has_clay", prov.has(Items.CLAY_BALL))
-                        .save(prov))
             .next("block")
             .next("doubleslab")
                 .model(ModelTemplates.cubeColumn("doubleslab-side", "block"))
-            .next("blocks")
+            .next("block")
             .next("weathered")
             .next("weathered_block")
             .next("weathered_doubleslab")
@@ -138,7 +141,7 @@ public class Features {
     //BlockSpeedHandler.speedupBlocks.add(b);
 
     public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
-            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "carpet/" + (color.getSerializedName()), BlockCarvableCarpet::new)
+            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.CLOTH_DECORATION, "carpet/" + (color.getSerializedName()), BlockCarvableCarpet::new)
                     .addBlock(new ResourceLocation(color.getSerializedName() + "_carpet")) // TODO improve this copied RL construction
                     .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Carpet")
                     .model((prov, block) ->
@@ -173,9 +176,21 @@ public class Features {
     public static final Map<String, BlockEntry<BlockCarvable>> CLOUD = _FACTORY.newType(Material.CLOTH_DECORATION, "cloud")
             .variation("cloud")
             .next("large")
+            .next("small")
             .next("vertical")
             .next("grid")
             .build(b -> b.sound(SoundType.WOOL).explosionResistance(0.3F));
+
+    public static final Map<String, BlockEntry<BlockCarvable>> COBALT = _FACTORY.newType(Material.METAL, "metals/cobalt")
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_IRON_TOOL)
+            .setGroupName("Cobalt Block")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_COBALT)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .color(MaterialColor.TERRACOTTA_CYAN)
+            .variations(VariantTemplates.METAL)
+            .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> COBBLESTONE = _FACTORY.newType(Material.STONE, "cobblestone")
             .addBlock(Blocks.COBBLESTONE)
@@ -183,6 +198,7 @@ public class Features {
             .applyTag(ItemTags.STONE_TOOL_MATERIALS)
             .applyTag(ItemTags.STONE_CRAFTING_MATERIALS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
             .initialProperties(() -> Blocks.COBBLESTONE)
             .variations(VariantTemplates.COBBLESTONE)
             .build();
@@ -190,6 +206,7 @@ public class Features {
     public static final Map<String, BlockEntry<BlockCarvable>> COBBLESTONE_MOSSY = _FACTORY.newType(Material.STONE, "mossy_cobblestone")
             .addBlock(Blocks.MOSSY_COBBLESTONE)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
             .applyTag(Tags.Blocks.COBBLESTONE_MOSSY)
             .initialProperties(() -> Blocks.MOSSY_COBBLESTONE)
             .variations(VariantTemplates.COBBLESTONE_MOSSY)
@@ -205,17 +222,16 @@ public class Features {
                     .build()));
 //  BlockSpeedHandler.speedupBlocks.add(b);
 
-//    public static final Map<String, BlockEntry<BlockCarvable>> COPPER = _FACTORY.newType(Material.METAL, "copper")
-//            .addBlock(Blocks.COPPER_BLOCK)
-//            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
-//            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-//            .applyTag(BlockTags.NEEDS_IRON_TOOL)
-//            .setGroupName("Copper Block")
-//            .addTag(Tags.Blocks.STORAGE_BLOCKS_COPPER)
-//            .initialProperties(() -> Blocks.COPPER_BLOCK)
-//            .color(MaterialColor.COLOR_ORANGE)
-//            .variations(VariantTemplates.METAL)
-//            .build();
+    public static final Map<String, BlockEntry<BlockCarvable>> COPPER = _FACTORY.newType(Material.METAL, "metals/copper")
+            .addBlock(Blocks.COPPER_BLOCK)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Copper Block")
+            .addTag(Tags.Blocks.STORAGE_BLOCKS_COPPER)
+            .initialProperties(() -> Blocks.COPPER_BLOCK)
+            .variations(VariantTemplates.METAL)
+            .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> DIABASE = _FACTORY.newType(Material.STONE, "diabase")
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -256,6 +272,17 @@ public class Features {
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .initialProperties(() -> Blocks.DIORITE)
             .variations(VariantTemplates.ROCK)
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> ELECTRUM = _FACTORY.newType(Material.METAL, "metals/electrum")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_ELECTRUM)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Electrum Block")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .variations(VariantTemplates.METAL)
+            .color(MaterialColor.TERRACOTTA_YELLOW)
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> EMERALD = _FACTORY.newType(Material.METAL, "emerald")
@@ -452,16 +479,44 @@ public class Features {
                  .addTag(BlockTags.create(new ResourceLocation("forge", "glass_" + color.getSerializedName())))
                  .variation("panel")
                  .next("framed")
-                    .model(ModelTemplates.cubeCTMTranslusent("block/glass_stained/" + color.getSerializedName() + "/framed", "block/glass_stained/" + color.getSerializedName() + "/framed_ct"))
+                    .model(ModelTemplates.cubeCTMTranslusent("block/glass_stained/" + color.getSerializedName() + "/framed", "block/glass_stained/" + color.getSerializedName() + "/framed-ctm"))
                  .next("framed_fancy")
-                    .model(ModelTemplates.cubeCTMTranslusent("block/glass_stained/" + color.getSerializedName() + "/framed", "block/glass_stained/" + color.getSerializedName() + "/framed_fancy_ct"))
+                    .model(ModelTemplates.cubeCTMTranslusent("block/glass_stained/" + color.getSerializedName() + "/framed", "block/glass_stained/" + color.getSerializedName() + "/framed_fancy-ctm"))
                  .next("streaks")
                  .next("rough")
+                    .model(ModelTemplates.cubeCTMTranslusent("block/glass_stained/" + color.getSerializedName() + "/rough", "block/glass_stained/" + color.getSerializedName() + "/rough-ctm"))
                  .next("brick")
+                    .model(ModelTemplates.cubeCTMTranslusent("block/glass_stained/" + color.getSerializedName() + "/brick", "block/glass_stained/" + color.getSerializedName() + "/brick-ctm"))
                  .build(b -> b.sound(SoundType.GLASS).explosionResistance(0.3F))
             ));
 
-    //stained glass pane
+    public static Map<DyeColor, Map<String, BlockEntry<BlockCarvablePane>>> GLASSPANE_STAINED = Arrays.stream(DyeColor.values())
+            .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.GLASS, "glasspane_stained/" + color.getSerializedName(), BlockCarvablePane::new)
+                    .addBlock(new ResourceLocation(color.getSerializedName() + "_stained_glasspane"))
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Stained Glasspane")
+                    .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_stained_glass_pane")))
+                    .addTag(Tags.Blocks.GLASS_PANES)
+                    .addTag(BlockTags.create(new ResourceLocation("forge", "glass_pane/" + color.getSerializedName())))
+                    .variation("panel")
+                        .model(ModelTemplates.paneBlock("minecraft:block/" + color.getSerializedName() + "_stained_glass_pane_top"))
+                        .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
+                    .next("framed")
+                        .model(ModelTemplates.paneBlockCTM("minecraft:block/" + color.getSerializedName() + "_stained_glass_pane_top", "block/glass_stained/" + color.getSerializedName() + "/framed", "block/glass_stained/" + color.getSerializedName() + "/framed"))
+                        .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
+                    .next("framed_fancy")
+                        .model(ModelTemplates.paneBlockCTM("minecraft:block/" + color.getSerializedName() + "_stained_glass_pane_top", "block/glass_stained/" + color.getSerializedName() + "/framed", "block/glass_stained/" + color.getSerializedName() + "/framed_fancy"))
+                        .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/glass_stained/" + color.getSerializedName() + "/framed"))
+                    .next("streaks")
+                        .model(ModelTemplates.paneBlock("minecraft:block/" + color.getSerializedName() + "_stained_glass_pane_top"))
+                        .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
+                    .next("rough")
+                        .model(ModelTemplates.paneBlockCTM("minecraft:block/" + color.getSerializedName() + "_stained_glass_pane_top", "block/glass_stained/" + color.getSerializedName() + "/rough", "block/glass_stained/" + color.getSerializedName() + "/rough"))
+                        .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
+                    .next("brick")
+                        .model(ModelTemplates.paneBlockCTM("minecraft:block/" + color.getSerializedName() + "_stained_glass_pane_top", "block/glass_stained/" + color.getSerializedName() + "/brick", "block/glass_stained/" + color.getSerializedName() + "/brick"))
+                        .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry).replaceFirst("pane", "")))
+                    .build(b -> b.sound(SoundType.GLASS).explosionResistance(0.3F))
+            ));
 
     public static final Map<String, BlockEntry<BlockCarvable>> GLOWSTONE = _FACTORY.newType(Material.GLASS, "glowstone")
             .addBlock(Blocks.GLOWSTONE)
@@ -481,6 +536,7 @@ public class Features {
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> GOLD = _FACTORY.newType(Material.METAL, "metals/gold")
+            .addBlock(Blocks.GOLD_BLOCK)
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_IRON_TOOL)
@@ -526,7 +582,7 @@ public class Features {
             .next("terrain_gold_simple")
                 .model(ModelTemplates.cubeBottomTop())
             .next("goldeye")
-            .build(b-> b.sound(ChiselSoundTypes.METAL).strength(3.0F).explosionResistance(10.0F).requiresCorrectToolForDrops());
+            .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> GRANITE = _FACTORY.newType(Material.STONE, "granite")
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -536,23 +592,76 @@ public class Features {
             .addBlock(Blocks.POLISHED_GRANITE)
             .build();
 
-    public static final Map<String, BlockEntry<BlockCarvable>> HEX_PLATING = _FACTORY.newType(Material.STONE, "hexplating")
-            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .applyTag(BlockTags.NEEDS_STONE_TOOL)
-            .initialProperties(() -> Blocks.STONE)
-            .variation("hexbase")
-            .next("hexnew")
-            .build();
+    public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvable>>> HEX_PLATING = Arrays.stream(DyeColor.values())
+            .collect(Collectors.toMap(Function.identity(), color ->  _FACTORY.newType(Material.STONE, "hexplating/" + color.getSerializedName())
+                    .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Hex Plating")
+                    .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+                    .applyTag(BlockTags.NEEDS_STONE_TOOL)
+                    .initialProperties(() -> Blocks.STONE)
+                    .recipe((prov, block) -> new ShapedRecipeBuilder(block, 8)
+                            .pattern("SSS").pattern("SCS").pattern("SSS")
+                            .define('S', Tags.Items.STONE)
+                            .define('C', ItemTags.COALS)
+                            .unlockedBy("has_coal", prov.has(ItemTags.COALS))
+                            .save(prov))
+                    .variation("hexbase")
+                        .model(ModelTemplates.hexPlate("hexbase"))
+                    .next("hexnew")
+                        .model(ModelTemplates.hexPlate("hexnew"))
+                    .build()
+            ));
 
-    public static final Map<String, BlockEntry<BlockCarvable>> ICE = _FACTORY.newType(Material.ICE, "ice")
+
+    public static final TagKey<Block> ICE1 = BlockTags.create(new ResourceLocation(Reference.MOD_ID, "ice"));
+
+    public static final Map<String, BlockEntry<BlockCarvableIce>> ICE = _FACTORY.newType(Material.ICE, "ice", BlockCarvableIce::new)
             .addBlock(Blocks.ICE)
+            .setGroup(ICE1)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .addTag(BlockTags.ICE)
-            .variations(VariantTemplates.ROCK).opaque(false)
+            .variations(VariantTemplates.ROCK)
             .initialProperties(() -> Blocks.ICE)
-            .build(b -> b.strength(0.5F).lightLevel(value -> 3).sound(SoundType.GLASS).requiresCorrectToolForDrops());
+            .loot(BlockLoot::dropWhenSilkTouch)
+            .build();
 
-    public static final Map<String, BlockEntry<BlockCarvable>> IRON = _FACTORY.newType(Material.METAL, "iron")
+    public static final Map<String, BlockEntry<BlockCarvableIce>> ICE_PILLAR = _FACTORY.newType(Material.ICE, "icepillar", BlockCarvableIce::new)
+            .addBlock(Blocks.ICE)
+            .setGroup(ICE1)
+            .setGroupName("")
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .addTag(BlockTags.ICE)
+            .variations(VariantTemplates.PILLAR)
+            .initialProperties(() -> Blocks.ICE)
+            .loot(BlockLoot::dropWhenSilkTouch)
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> INVAR = _FACTORY.newType(Material.METAL, "metals/invar")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_INVAR)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Invar Block")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .variations(VariantTemplates.METAL)
+            .build();
+
+    public static final TagKey<Block> IRON1 = BlockTags.create(new ResourceLocation(Reference.MOD_ID, "metals/iron"));
+
+    public static final Map<String, BlockEntry<BlockCarvable>> IRON = _FACTORY.newType(Material.METAL, "metals/iron")
+            .setGroup(IRON1)
+            .setGroupName("Iron Block")
+            .addBlock(Blocks.IRON_BLOCK)
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_IRON_TOOL)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .addTag(Tags.Blocks.STORAGE_BLOCKS_IRON)
+            .variations(VariantTemplates.METAL)
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> IRON_TERRAIN = _FACTORY.newType(Material.METAL, "iron")
+            .setGroup(IRON1)
+            .setGroupName("")
             .addBlock(Blocks.IRON_BLOCK)
             .initialProperties(() -> Blocks.IRON_BLOCK)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -565,7 +674,54 @@ public class Features {
                 .model(ModelTemplates.cubeBottomTop())
             .next("vents")
                 .model(ModelTemplates.cubeColumn())
-            .build(b-> b.sound(SoundType.METAL).strength(5.0f).requiresCorrectToolForDrops());
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvablePane>> IRONPANE = _FACTORY.newType(Material.GLASS, "ironpane", BlockCarvablePane::new)
+            .setGroupName("Iron Bars")
+            .addBlock(Blocks.IRON_BARS)
+            .initialProperties(() -> Blocks.IRON_BARS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_IRON_TOOL)
+            .variation("borderless")
+            .model(ModelTemplates.bars("minecraft:block/iron_bars", "block/ironpane/borderless-top", "block/ironpane/borderless-side"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("borderless-topper")
+            .model(ModelTemplates.bars("block/ironpane/borderless-topper", "block/ironpane/borderless-topper-top", "block/ironpane/borderless-topper-side"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("barbedwire")
+            .model(ModelTemplates.bars("block/ironpane/barbedwire", "block/ironpane/barbedwire-top", "block/ironpane/barbedwire-side"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("cage")
+            .model(ModelTemplates.bars("block/ironpane/cage", "block/ironpane/cage-top", "block/ironpane/cage-top"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("thickgrid")
+            .model(ModelTemplates.bars())
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("thingrid")
+            .model(ModelTemplates.bars("block/ironpane/thingrid", "block/ironpane/thingrid-top", "block/ironpane/thingrid-top"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("ornatesteel")
+            .model(ModelTemplates.bars("block/ironpane/ornatesteel", "block/ironpane/ornatesteel-top", "block/ironpane/ornatesteel-top"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("bars")
+            .model(ModelTemplates.bars("block/ironpane/bars", "block/ironpane/bars-top", "block/ironpane/bars-side"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("spikes")
+            .model(ModelTemplates.bars("block/ironpane/spikes", "block/ironpane/spikes-top", "block/ironpane/spikes-side"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("classic")
+            .model(ModelTemplates.bars())
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("classicnew")
+            .model(ModelTemplates.bars("block/ironpane/classicnew", "block/ironpane/classic", "block/ironpane/classic"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("fence")
+            .model(ModelTemplates.bars("block/ironpane/fence", "block/ironpane/bars-top", "block/ironpane/bars-top"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .next("modern")
+            .model(ModelTemplates.bars("block/ironpane/modern", "block/ironpane/modern-top", "block/ironpane/modern-top"))
+            .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
+            .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> LABORATORY = _FACTORY.newType(Material.STONE, "laboratory")
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -601,7 +757,7 @@ public class Features {
 
     public static final Map<String, BlockEntry<BlockCarvable>> LAPIS = _FACTORY.newType(Material.STONE, "lapis")
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .applyTag(BlockTags.NEEDS_IRON_TOOL)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
             .addTag(Tags.Blocks.STORAGE_BLOCKS_LAPIS)
             .addBlock(Blocks.LAPIS_BLOCK)
             .initialProperties(() -> Blocks.LAPIS_BLOCK)
@@ -614,11 +770,10 @@ public class Features {
             .next("a1_blocklapis_smooth")
             .next("a1_blocklapis_ornatelayer")
             .next("masonrylapis")
-            .build(b-> b.strength(3.0F).explosionResistance(5.0F).sound(SoundType.STONE).requiresCorrectToolForDrops());
+            .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> LAVASTONE = _FACTORY.newType(Material.STONE, "lavastone")
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
-            .applyTag(BlockTags.NEEDS_STONE_TOOL)
             .addTag(ChiselCompatTags.LAVASTONE)
             .initialProperties(() -> Blocks.STONE)
             .recipe((prov, block) -> new ShapedRecipeBuilder(block, 8)
@@ -695,6 +850,17 @@ public class Features {
                 .model(ModelTemplates.fluidPassCube("lava"))
             .build(b -> b.strength(4.0F).explosionResistance(50.0F).sound(SoundType.STONE));
 
+    public static final Map<String, BlockEntry<BlockCarvable>> LEAD = _FACTORY.newType(Material.METAL, "metals/lead")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_LEAD)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Lead Block")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .variations(VariantTemplates.METAL)
+            .color(MaterialColor.TERRACOTTA_LIGHT_BLUE)
+            .build();
+
     public static final Map<String, BlockEntry<BlockCarvable>> LIMESTONE = _FACTORY.newType(Material.STONE, "limestone")
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .initialProperties(() -> Blocks.STONE)
@@ -713,6 +879,60 @@ public class Features {
             .addTag(ChiselCompatTags.STONE_MARBLE)
             .build(b -> b.strength(1.75F, 10.0F));
 
+    public static final Map<String, BlockEntry<BlockCarvable>> NETHERBRICK = _FACTORY.newType(Material.STONE, "netherbrick")
+            .addBlock(Blocks.NETHER_BRICKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .initialProperties(() -> Blocks.NETHER_BRICKS)
+            .variation("a1_netherbrick_brinstar")
+            .next("a1_netherbrick_classicspatter")
+            .next("a1_netherbrick_guts")
+            .next("a1_netherbrick_gutsdark")
+            .next("a1_netherbrick_gutssmall")
+            .next("a1_netherbrick_lavabrinstar")
+            .next("a1_netherbrick_lavabrown")
+            .next("a1_netherbrick_lavaobsidian")
+            .next("a1_netherbrick_lavastonedark")
+            .next("a1_netherbrick_meat")
+            .next("a1_netherbrick_meatred")
+            .next("a1_netherbrick_meatredsmall")
+            .next("a1_netherbrick_meatsmall")
+            .next("a1_netherbrick_red")
+            .next("a1_netherbrick_redsmall")
+            .next("netherfancybricks")
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> NETHERRACK = _FACTORY.newType(Material.STONE, "netherrack")
+            .addBlock(Blocks.NETHERRACK)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .initialProperties(() -> Blocks.NETHERRACK)
+            .variation("a1_netherrack_bloodgravel")
+            .next("a1_netherrack_bloodrock")
+            .next("a1_netherrack_bloodrockgrey")
+            .next("a1_netherrack_brinstar")
+            .next("a1_netherrack_brinstarshale")
+            .next("a1_netherrack_classic")
+            .next("a1_netherrack_classicspatter")
+            .next("a1_netherrack_guts")
+            .next("a1_netherrack_gutsdark")
+            .next("a1_netherrack_meat")
+            .next("a1_netherrack_meatred")
+            .next("a1_netherrack_meatrock")
+            .next("a1_netherrack_red")
+            .next("a1_netherrack_wells")
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> NICKEL = _FACTORY.newType(Material.METAL, "metals/nickel")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_NICKEL)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Nickel Block")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .variations(VariantTemplates.METAL)
+            .color(MaterialColor.TERRACOTTA_LIGHT_BLUE)
+            .build();
+
+    public static final ImmutableList<WoodType> VANILLA_WOODS = ImmutableList.of(WoodType.OAK, WoodType.SPRUCE, WoodType.BIRCH, WoodType.ACACIA, WoodType.JUNGLE, WoodType.DARK_OAK);
     public static final Map<WoodType, Map<String, BlockEntry<BlockCarvable>>> PLANKS = VANILLA_WOODS.stream()
             .map(t -> Pair.of(t, new ResourceLocation(t.name() + "_planks")))
             .collect(Collectors.toMap(Pair::getFirst, pair -> _FACTORY.newType(Material.WOOD, "planks/" + pair.getFirst().name())
@@ -724,14 +944,16 @@ public class Features {
                     .variations(VariantTemplates.PLANKS)
                     .build()));
 
-    // TODO Temp Merge with above once 1.16 hits
-    /*public static final Map<String, Map<String, BlockEntry<BlockCarvable>>> PLANKS_116 = ImmutableList.of("crimson", "warped").stream()
-            .map(t -> Pair.of(t, new ResourceLocation(t + "_planks")))
-            .collect(Collectors.toMap(Pair::getFirst, pair -> _FACTORY.newType(Material.WOOD, "planks/" + pair.getFirst())
-                    .addBlock(pair.getSecond())
-                    .setGroupName(RegistrateLangProvider.toEnglishName(pair.getFirst()) + " Planks")
-                    .variations(VariantTemplates.PLANKS)
-                    .build($ -> Block.Properties.from(ForgeRegistries.BLOCKS.getValue(pair.getSecond())))));//*/
+    public static final Map<String, BlockEntry<BlockCarvable>> PLATINUM = _FACTORY.newType(Material.METAL, "metals/platinum")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_PLATINUM)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Platinum Block")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .variations(VariantTemplates.METAL)
+            .color(MaterialColor.TERRACOTTA_LIGHT_BLUE)
+            .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> PRISMARINE = _FACTORY.newType(Material.STONE, "prismarine")
             .addBlock(Blocks.PRISMARINE)
@@ -795,6 +1017,28 @@ public class Features {
             .next("extra/glyphs").localizedName("Glyphs")
             .next("extra/small").localizedName("Small")
             //TODO: column-ctm
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> SILVER = _FACTORY.newType(Material.METAL, "metals/silver")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_SILVER)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Silver Block")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .variations(VariantTemplates.METAL)
+            .color(MaterialColor.COLOR_LIGHT_GRAY)
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> STEEL = _FACTORY.newType(Material.METAL, "metals/steel")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_STEEL)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Steel Block")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .variations(VariantTemplates.METAL)
+            .color(MaterialColor.COLOR_GRAY)
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> STONE_BRICKS = _FACTORY.newType(Material.STONE, "stone_bricks")
@@ -961,6 +1205,17 @@ public class Features {
                 .model(ModelTemplates.columnEldritch("temple"))
             .build(b -> b.strength(1.5F).explosionResistance(10.0F).sound(SoundType.STONE));
 
+    public static final Map<String, BlockEntry<BlockCarvable>> TIN = _FACTORY.newType(Material.METAL, "metals/tin")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_TIN)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Tin Block")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .variations(VariantTemplates.METAL)
+            .color(MaterialColor.COLOR_LIGHT_BLUE)
+            .build();
+
     public static final Map<String, BlockEntry<BlockCarvable>> TYRIAN = _FACTORY.newType(Material.METAL, "tyrian")
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_STONE_TOOL)
@@ -988,6 +1243,17 @@ public class Features {
             .next("black2")
             .next("opening")
             .next("plate") // FIXME temporary texture
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> URANIUM = _FACTORY.newType(Material.METAL, "metals/uranium")
+            .equivalentTo(ChiselCompatTags.STORAGE_BLOCKS_URANIUM)
+            .applyTag(BlockTags.BEACON_BASE_BLOCKS)
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(BlockTags.NEEDS_STONE_TOOL)
+            .setGroupName("Uranium Block")
+            .initialProperties(() -> Blocks.IRON_BLOCK)
+            .color(MaterialColor.TERRACOTTA_GREEN)
+            .variations(VariantTemplates.METAL)
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> VALENTINES = _FACTORY.newType(Material.STONE, "valentines")
@@ -1168,6 +1434,7 @@ public class Features {
             .collect(Collectors.toMap(Function.identity(), color -> _FACTORY.newType(Material.WOOL, "wool/" + (color.getSerializedName()))
                     .addBlock(new ResourceLocation(color.getSerializedName() + "_wool")) // TODO improve this copied RL construction
                     .applyTag(BlockTags.WOOL)
+                    .applyTag(BlockTags.OCCLUDES_VIBRATION_SIGNALS)
                     .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Wool")
                     .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_wool")))
                     .variation("legacy")

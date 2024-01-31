@@ -21,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.fml.common.Mod;
 import team.chisel.Chisel;
 import team.chisel.api.block.ModelTemplate;
 import team.chisel.api.block.RecipeTemplate;
@@ -191,6 +192,18 @@ public class VariantTemplates {
 
     }
 
+    //TODO fix pillar CTM models
+    public static class Pillar {
+        public static final VariantTemplate PLAINPLAIN = simple("plainplain", ModelTemplates.cubeAll("-top"));
+        public static final VariantTemplate PLAINGREEK = simple("plaingreek", ModelTemplates.cubeAll("-top"));
+        public static final VariantTemplate GREEKPLAIN = simple("greekplain", ModelTemplates.cubeAll("-top"));
+        public static final VariantTemplate GREEKGREEK = simple("greekgreek", ModelTemplates.cubeAll("-top"));
+        public static final VariantTemplate CONVEXPLAIN = simple("convexplain", ModelTemplates.cubeAll("-top"));
+        public static final VariantTemplate CARVED = simple("carved", ModelTemplates.cubeColumn());
+        public static final VariantTemplate ORNAMENTAL = simple("ornamental", ModelTemplates.cubeColumn());
+
+    }
+
     public static class Planks {
         public static final VariantTemplate LARGE_PLANKS = simple("large_planks");
         public static final VariantTemplate CRUDE_HORIZONTAL_PLANKS = simple("crude_horizontal_planks");
@@ -251,6 +264,7 @@ public class VariantTemplates {
     public static final ImmutableList<VariantTemplate> METAL_TERRAIN = ofClass(MetalTerrain.class);
 
     public static final ImmutableList<VariantTemplate> STONE = ofClass(Stone.class);
+    public static final ImmutableList<VariantTemplate> PILLAR = ofClass(Pillar.class);
 
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
     @SuppressWarnings("null")

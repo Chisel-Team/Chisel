@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:metals/silver/caution",
+    "chisel:metals/silver/crate",
+    "chisel:metals/silver/thermal",
+    "chisel:metals/silver/machine",
+    "chisel:metals/silver/badgreggy",
+    "chisel:metals/silver/bolted",
+    "chisel:metals/silver/scaffold",
+    "#forge:storage_blocks/silver"
+  ]
+}

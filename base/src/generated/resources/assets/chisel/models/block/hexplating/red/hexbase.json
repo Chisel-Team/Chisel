@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/cube_2_layer",
+  "textures": {
+    "top": "chisel:block/hexplating/hexbase",
+    "bot": "chisel:block/animations/archetype2"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "parent": "chisel:block/bars_cap_alt",
+  "textures": {
+    "bars": "chisel:block/ironpane/spikes",
+    "particle": "chisel:block/ironpane/spikes",
+    "edge": "chisel:block/ironpane/spikes-top",
+    "side": "chisel:block/ironpane/spikes-side"
+  }
+}

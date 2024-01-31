@@ -1,0 +1,9 @@
+{
+  "parent": "chisel:block/bars_side",
+  "textures": {
+    "bars": "chisel:block/ironpane/fence",
+    "particle": "chisel:block/ironpane/fence",
+    "edge": "chisel:block/ironpane/bars-top",
+    "side": "chisel:block/ironpane/bars-top"
+  }
+}

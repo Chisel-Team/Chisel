@@ -5,7 +5,8 @@
         "north": "false",
         "east": "false",
         "south": "false",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/post"
@@ -16,7 +17,8 @@
         "north": "true",
         "east": "false",
         "south": "false",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/n"
@@ -27,7 +29,8 @@
         "north": "false",
         "east": "true",
         "south": "false",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/e"
@@ -38,7 +41,8 @@
         "north": "false",
         "east": "false",
         "south": "true",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/s"
@@ -49,7 +53,8 @@
         "north": "false",
         "east": "false",
         "south": "false",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/w"
@@ -60,7 +65,8 @@
         "north": "true",
         "east": "true",
         "south": "false",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/ne"
@@ -71,7 +77,8 @@
         "north": "false",
         "east": "true",
         "south": "true",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/se"
@@ -82,7 +89,8 @@
         "north": "false",
         "east": "false",
         "south": "true",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/sw"
@@ -93,7 +101,8 @@
         "north": "true",
         "east": "false",
         "south": "false",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/nw"
@@ -104,7 +113,8 @@
         "north": "true",
         "east": "false",
         "south": "true",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/ns"
@@ -115,7 +125,8 @@
         "north": "false",
         "east": "true",
         "south": "false",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/ew"
@@ -126,7 +137,8 @@
         "north": "true",
         "east": "true",
         "south": "true",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/nse"
@@ -137,7 +149,8 @@
         "north": "false",
         "east": "true",
         "south": "true",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/sew"
@@ -148,7 +161,8 @@
         "north": "true",
         "east": "false",
         "south": "true",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/nsw"
@@ -159,7 +173,8 @@
         "north": "true",
         "east": "true",
         "south": "false",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/new"
@@ -170,7 +185,8 @@
         "north": "true",
         "east": "true",
         "south": "true",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/chinese2/nsew"

@@ -1,0 +1,9 @@
+{
+  "parent": "chisel:block/bars_side_alt",
+  "textures": {
+    "bars": "chisel:block/ironpane/cage",
+    "particle": "chisel:block/ironpane/cage",
+    "edge": "chisel:block/ironpane/cage-top",
+    "side": "chisel:block/ironpane/cage-top"
+  }
+}

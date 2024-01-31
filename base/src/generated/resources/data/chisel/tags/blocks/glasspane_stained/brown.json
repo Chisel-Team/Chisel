@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:glasspane_stained/brown/panel",
+    "chisel:glasspane_stained/brown/framed",
+    "chisel:glasspane_stained/brown/framed_fancy",
+    "chisel:glasspane_stained/brown/streaks",
+    "chisel:glasspane_stained/brown/rough",
+    "chisel:glasspane_stained/brown/brick",
+    "minecraft:air",
+    "#forge:glass_panes",
+    "#forge:glass_pane/brown"
+  ]
+}

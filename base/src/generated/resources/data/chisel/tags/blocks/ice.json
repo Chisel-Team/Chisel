@@ -35,6 +35,15 @@
     "chisel:ice/prism",
     "chisel:ice/cuts",
     "minecraft:ice",
+    "#minecraft:ice",
+    "chisel:icepillar/plainplain",
+    "chisel:icepillar/plaingreek",
+    "chisel:icepillar/greekplain",
+    "chisel:icepillar/greekgreek",
+    "chisel:icepillar/convexplain",
+    "chisel:icepillar/carved",
+    "chisel:icepillar/ornamental",
+    "minecraft:ice",
     "#minecraft:ice"
   ]
 }

@@ -5,7 +5,8 @@
         "north": "false",
         "east": "false",
         "south": "false",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/post"
@@ -16,7 +17,8 @@
         "north": "true",
         "east": "false",
         "south": "false",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/n"
@@ -27,7 +29,8 @@
         "north": "false",
         "east": "true",
         "south": "false",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/e"
@@ -38,7 +41,8 @@
         "north": "false",
         "east": "false",
         "south": "true",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/s"
@@ -49,7 +53,8 @@
         "north": "false",
         "east": "false",
         "south": "false",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/w"
@@ -60,7 +65,8 @@
         "north": "true",
         "east": "true",
         "south": "false",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/ne"
@@ -71,7 +77,8 @@
         "north": "false",
         "east": "true",
         "south": "true",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/se"
@@ -82,7 +89,8 @@
         "north": "false",
         "east": "false",
         "south": "true",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/sw"
@@ -93,7 +101,8 @@
         "north": "true",
         "east": "false",
         "south": "false",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/nw"
@@ -104,7 +113,8 @@
         "north": "true",
         "east": "false",
         "south": "true",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/ns"
@@ -115,7 +125,8 @@
         "north": "false",
         "east": "true",
         "south": "false",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/ew"
@@ -126,7 +137,8 @@
         "north": "true",
         "east": "true",
         "south": "true",
-        "west": "false"
+        "west": "false",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/nse"
@@ -137,7 +149,8 @@
         "north": "false",
         "east": "true",
         "south": "true",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/sew"
@@ -148,7 +161,8 @@
         "north": "true",
         "east": "false",
         "south": "true",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/nsw"
@@ -159,7 +173,8 @@
         "north": "true",
         "east": "true",
         "south": "false",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/new"
@@ -170,7 +185,8 @@
         "north": "true",
         "east": "true",
         "south": "true",
-        "west": "true"
+        "west": "true",
+        "waterlogged": "false|true"
       },
       "apply": {
         "model": "chisel:block/glasspane/a1_glasswindow_ironfencemodern/nsew"

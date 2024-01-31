@@ -1,0 +1,7 @@
+{
+  "parent": "chisel:block/pane/ne",
+  "textures": {
+    "pane": "chisel:block/glass_stained/light_blue/panel",
+    "edge": "minecraft:block/light_blue_stained_glass_pane_top"
+  }
+}
