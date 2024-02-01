@@ -75,7 +75,7 @@ public class ModelTemplates {
         return cubeColumn(name -> replaceVariant(name, side), name -> replaceVariant(name, top));
     }
     
-    private static ModelTemplate cubeColumn(Function<String, String> side, Function<String, String> top) {
+    public static ModelTemplate cubeColumn(Function<String, String> side, Function<String, String> top) {
         return (prov, block) -> {
             String name = "block/" + name(block);
             prov.simpleBlock(block, prov.models().cubeColumn(name, prov.modLoc(side.apply(name)), prov.modLoc(top.apply(name))));

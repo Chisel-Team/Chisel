@@ -28,10 +28,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.Features;
 import team.chisel.api.block.ChiselBlockFactory;
 import team.chisel.client.data.ModelTemplates;
+import team.chisel.client.data.VariantTemplates;
 import team.chisel.common.Reference;
 import team.chisel.common.block.BlockCarvable;
 import team.chisel.common.block.BlockCarvableBookshelf;
 import team.chisel.common.block.BlockCarvablePane;
+import team.chisel.common.init.ChiselCompatTags;
 
 public class LegacyFeatures {
 
@@ -193,6 +195,31 @@ public class LegacyFeatures {
                     .build(b -> b.sound(SoundType.GLASS).explosionResistance(0.3F))
             ));
 
+    public static final Map<String, BlockEntry<BlockCarvable>> MARBLEPILLAR = _FACTORY.newType(Material.STONE, "marblepillar")
+            .setGroup(BlockTags.create(new ResourceLocation("chisel", "marble")))
+            .setGroupName("")
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .addTag(ChiselCompatTags.STONE_MARBLE)
+            .initialProperties(() -> Blocks.STONE)
+            .color(MaterialColor.QUARTZ)
+            .variations(VariantTemplates.PILLAR)
+            .variation("simple")
+                .model(ModelTemplates.cubeAll("-top"))
+            .next("rough")
+                .model(ModelTemplates.cubeAll("-top"))
+            .next("widedecor")
+                .model(ModelTemplates.cubeAll("-top"))
+            .next("widegreek")
+                .model(ModelTemplates.cubeAll("-top"))
+            .next("wideplain")
+                .model(ModelTemplates.cubeAll("-top"))
+            .next("pillar")
+                .model(ModelTemplates.cubeAll("-top"))
+            .next("default")
+                .model(ModelTemplates.cubeAll("-top"))
+            .build(b -> b.strength(1.75F, 10.0F));
+
+
     public static final Map<String, BlockEntry<BlockCarvable>> NETHERBRICK = _FACTORY.newType(Material.STONE, "netherbrick")
             .addBlock(Blocks.NETHER_BRICKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -270,7 +297,7 @@ public class LegacyFeatures {
             .model(ModelTemplates.bars("block/ironpane/spikes", "block/ironpane/spikes-top", "block/ironpane/spikes-side"))
             .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
             .next("classic")
-            .model(ModelTemplates.bars())
+            .model(ModelTemplates.bars("block/ironpane/classic", "block/ironpane/classic", "block/ironpane/classic"))
             .itemModel((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation("item/generated")).texture("layer0", "block/" + prov.name(ctx::getEntry)))
             .next("classicnew")
             .model(ModelTemplates.bars("block/ironpane/classicnew", "block/ironpane/classic", "block/ironpane/classic"))
@@ -327,6 +354,26 @@ public class LegacyFeatures {
             .next("plain")
             .next("door")
             .build(b -> b.strength(1.5F, 0.0F).sound(SoundType.GRASS));
+
+    public static final Map<String, BlockEntry<BlockCarvable>> RED_SANDSTONE_SCRIBBLES = _FACTORY.newType(Material.STONE, "sandstonered-scribbles")
+            .setGroup(BlockTags.create(new ResourceLocation("chisel", "red_sandstone")))
+            .setGroupName("")
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(Tags.Blocks.SANDSTONE)
+            .initialProperties(() -> Blocks.SANDSTONE)
+            .color(MaterialColor.COLOR_ORANGE)
+            .variations(VariantTemplates.SCRIBBLES)
+            .build();
+
+    public static final Map<String, BlockEntry<BlockCarvable>> SANDSTONE_SCRIBBLES = _FACTORY.newType(Material.STONE, "sandstone-scribbles")
+            .setGroup(BlockTags.create(new ResourceLocation("chisel", "sandstone")))
+            .setGroupName("")
+            .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .applyTag(Tags.Blocks.SANDSTONE)
+            .initialProperties(() -> Blocks.SANDSTONE)
+            .color(MaterialColor.COLOR_YELLOW)
+            .variations(VariantTemplates.SCRIBBLES)
+            .build();
 
     public static final TagKey<Block> TEMPLE1 = BlockTags.create(new ResourceLocation(Reference.MOD_ID, "temple"));
 

@@ -30,7 +30,7 @@ import team.chisel.common.block.BlockCarvable;
 
 @FieldsAreNonnullByDefault
 public class VariantTemplates {
-    
+
     @RequiredArgsConstructor
     @Builder
     public static class SimpleTemplate implements VariantTemplate {
@@ -204,6 +204,26 @@ public class VariantTemplates {
 
     }
 
+    public static class Scribbles {
+        public static final VariantTemplate ZERO = simple("scribbles_0", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_0-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate ONE = simple("scribbles_1", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_1-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate TWO = simple("scribbles_2", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_2-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate THREE = simple("scribbles_3", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_3-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate FOUR = simple("scribbles_4", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_4-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate FIVE = simple("scribbles_5", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_5-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate SIX = simple("scribbles_6", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_6-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate SEVEN = simple("scribbles_7", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_7-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate EIGHT = simple("scribbles_8", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_8-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate NINE = simple("scribbles_9", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_9-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate TEN = simple("scribbles_10", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_10-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate ELEVEN = simple("scribbles_11", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_11-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate TWELVE = simple("scribbles_12", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_12-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate THIRTEEN = simple("scribbles_13", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_13-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate FOURTEEN = simple("scribbles_14", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_14-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate FIFTEEN = simple("scribbles_15", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_15-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+
+    }
+
     public static class Planks {
         public static final VariantTemplate LARGE_PLANKS = simple("large_planks");
         public static final VariantTemplate CRUDE_HORIZONTAL_PLANKS = simple("crude_horizontal_planks");
@@ -265,6 +285,7 @@ public class VariantTemplates {
 
     public static final ImmutableList<VariantTemplate> STONE = ofClass(Stone.class);
     public static final ImmutableList<VariantTemplate> PILLAR = ofClass(Pillar.class);
+    public static final ImmutableList<VariantTemplate> SCRIBBLES = ofClass(Scribbles.class);
 
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
     @SuppressWarnings("null")
