@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/pane/ew",
-  "textures": {
-    "pane": "chisel:block/glass/a1_glasswindow_ironfencemodern",
-    "edge": "chisel:block/glass/edge_steel"
-  }
-}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel_legacy:block/glass_stained/green/panel"
+    }
+  }
+}

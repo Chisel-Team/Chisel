@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:glass_stained/magenta/panel",
+    "chisel_legacy:glass_stained/magenta/framed",
+    "chisel_legacy:glass_stained/magenta/framed_fancy",
+    "chisel_legacy:glass_stained/magenta/streaks",
+    "chisel_legacy:glass_stained/magenta/rough",
+    "chisel_legacy:glass_stained/magenta/brick",
+    "minecraft:magenta_stained_glass",
+    "#forge:glass",
+    "#forge:glass_magenta"
+  ]
+}

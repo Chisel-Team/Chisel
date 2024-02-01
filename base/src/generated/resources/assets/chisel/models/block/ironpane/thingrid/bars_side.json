@@ -1,9 +1,0 @@
-{
-  "parent": "chisel:block/bars_side",
-  "textures": {
-    "bars": "chisel:block/ironpane/thingrid",
-    "particle": "chisel:block/ironpane/thingrid",
-    "edge": "chisel:block/ironpane/thingrid-top",
-    "side": "chisel:block/ironpane/thingrid-top"
-  }
-}

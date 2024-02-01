@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/pane/nsew",
-  "textures": {
-    "pane": "chisel:block/glass/japanese2",
-    "edge": "chisel:block/glass/japanese2-top"
-  }
-}

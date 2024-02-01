@@ -219,7 +219,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             data[i] = variations.get(i).doBuild();
         }
         Map<String, BlockEntry<T>> ret = new HashMap<>(data.length);
-        ICarvingGroup group = CarvingUtils.itemGroup(this.group, this.groupName);
+        ICarvingGroup group = CarvingUtils.itemGroup(this.group, this.groupName, this.registrate);
         for (int i = 0; i < data.length; i++) {
             if (Strings.emptyToNull(data[i].getName()) != null) {
                 final int index = i;

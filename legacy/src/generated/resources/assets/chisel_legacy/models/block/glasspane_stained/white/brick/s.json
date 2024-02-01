@@ -1,0 +1,8 @@
+{
+  "parent": "chisel_legacy:block/pane/ctm_s",
+  "textures": {
+    "pane": "chisel_legacy:block/glass_stained/white/brick",
+    "pane_ct": "chisel_legacy:block/glass_stained/white/brick-ctm",
+    "edge": "minecraft:block/white_stained_glass_pane_top"
+  }
+}

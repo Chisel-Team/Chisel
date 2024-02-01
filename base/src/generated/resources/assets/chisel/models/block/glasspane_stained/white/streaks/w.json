@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/pane/w",
-  "textures": {
-    "pane": "chisel:block/glass_stained/white/streaks",
-    "edge": "minecraft:block/white_stained_glass_pane_top"
-  }
-}

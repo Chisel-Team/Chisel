@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:bookshelf/dark_oak/rainbow",
+    "chisel:bookshelf/dark_oak/novice_necromancer",
+    "chisel:bookshelf/dark_oak/necromancer",
+    "chisel:bookshelf/dark_oak/redtomes",
+    "chisel:bookshelf/dark_oak/abandoned",
+    "chisel:bookshelf/dark_oak/hoarder",
+    "chisel:bookshelf/dark_oak/brim",
+    "chisel:bookshelf/dark_oak/historian",
+    "chisel:bookshelf/dark_oak/cans",
+    "chisel:bookshelf/dark_oak/papers"
+  ]
+}

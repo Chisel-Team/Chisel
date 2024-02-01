@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/pane/se",
-  "textures": {
-    "pane": "chisel:block/glass/terrain_glassdungeon",
-    "edge": "chisel:block/glass/edge_steel"
-  }
-}

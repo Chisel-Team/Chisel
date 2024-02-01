@@ -1,5 +1,6 @@
 package team.chisel.api.carving;
 
+import com.tterrag.registrate.Registrate;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;

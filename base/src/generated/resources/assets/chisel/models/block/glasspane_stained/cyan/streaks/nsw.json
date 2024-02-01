@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/pane/nsw",
-  "textures": {
-    "pane": "chisel:block/glass_stained/cyan/streaks",
-    "edge": "minecraft:block/cyan_stained_glass_pane_top"
-  }
-}

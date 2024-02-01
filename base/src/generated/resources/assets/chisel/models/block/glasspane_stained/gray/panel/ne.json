@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/pane/ne",
-  "textures": {
-    "pane": "chisel:block/glass_stained/gray/panel",
-    "edge": "minecraft:block/gray_stained_glass_pane_top"
-  }
-}

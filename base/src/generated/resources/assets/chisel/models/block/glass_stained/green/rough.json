@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/cube_ctm_translucent",
-  "textures": {
-    "all": "chisel:block/glass_stained/green/rough",
-    "connected_tex": "chisel:block/glass_stained/green/rough-ctm"
-  }
-}

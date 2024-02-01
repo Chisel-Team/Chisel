@@ -1,0 +1,7 @@
+{
+  "parent": "chisel_legacy:block/pane/ns",
+  "textures": {
+    "pane": "chisel_legacy:block/glass/terrain_glass_screen",
+    "edge": "chisel_legacy:block/glass/terrain_glass_screen"
+  }
+}

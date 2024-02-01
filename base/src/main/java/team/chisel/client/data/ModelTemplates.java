@@ -5,11 +5,13 @@ import java.util.function.Function;
 import com.ibm.icu.text.Normalizer2;
 import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.MultiPartBlockStateBuilder;
+import team.chisel.Chisel;
 import team.chisel.api.block.ModelTemplate;
 
 public class ModelTemplates {

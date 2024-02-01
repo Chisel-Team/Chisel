@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "chisel:block/glass_stained/red/panel"
-  }
-}

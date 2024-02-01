@@ -1,8 +1,0 @@
-{
-  "parent": "chisel:block/pane/ctm_w",
-  "textures": {
-    "pane": "chisel:block/glass_stained/orange/framed",
-    "pane_ct": "chisel:block/glass_stained/orange/framed-ctm",
-    "edge": "minecraft:block/orange_stained_glass_pane_top"
-  }
-}

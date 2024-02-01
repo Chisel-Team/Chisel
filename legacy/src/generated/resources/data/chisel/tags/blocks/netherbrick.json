@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:netherbrick/a1_netherbrick_brinstar",
+    "chisel_legacy:netherbrick/a1_netherbrick_classicspatter",
+    "chisel_legacy:netherbrick/a1_netherbrick_guts",
+    "chisel_legacy:netherbrick/a1_netherbrick_gutsdark",
+    "chisel_legacy:netherbrick/a1_netherbrick_gutssmall",
+    "chisel_legacy:netherbrick/a1_netherbrick_lavabrinstar",
+    "chisel_legacy:netherbrick/a1_netherbrick_lavabrown",
+    "chisel_legacy:netherbrick/a1_netherbrick_lavaobsidian",
+    "chisel_legacy:netherbrick/a1_netherbrick_lavastonedark",
+    "chisel_legacy:netherbrick/a1_netherbrick_meat",
+    "chisel_legacy:netherbrick/a1_netherbrick_meatred",
+    "chisel_legacy:netherbrick/a1_netherbrick_meatredsmall",
+    "chisel_legacy:netherbrick/a1_netherbrick_meatsmall",
+    "chisel_legacy:netherbrick/a1_netherbrick_red",
+    "chisel_legacy:netherbrick/a1_netherbrick_redsmall",
+    "chisel_legacy:netherbrick/netherfancybricks",
+    "minecraft:nether_bricks"
+  ]
+}

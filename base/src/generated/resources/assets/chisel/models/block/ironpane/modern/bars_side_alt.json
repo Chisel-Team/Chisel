@@ -1,9 +1,0 @@
-{
-  "parent": "chisel:block/bars_side_alt",
-  "textures": {
-    "bars": "chisel:block/ironpane/modern",
-    "particle": "chisel:block/ironpane/modern",
-    "edge": "chisel:block/ironpane/modern-top",
-    "side": "chisel:block/ironpane/modern-top"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "chisel:block/cube_eldritch",
-  "textures": {
-    "all": "chisel:block/temple/weared_bricks"
-  }
-}

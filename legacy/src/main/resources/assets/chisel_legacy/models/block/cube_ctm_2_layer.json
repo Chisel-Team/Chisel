@@ -1,0 +1,40 @@
+{
+  "parent": "chisel:block/block_no_ao",
+  "ambientocclusion": true,
+  "elements": [
+    {
+      "from": [  0,  0,  0 ],
+      "to":   [ 16, 16, 16 ],
+      "shade": false,
+      "faces": {
+        "down" : { "texture": "#bot", "cullface": "down"  },
+        "up"   : { "texture": "#bot", "cullface": "up"    },
+        "north": { "texture": "#bot", "cullface": "north" },
+        "south": { "texture": "#bot", "cullface": "south" },
+        "west" : { "texture": "#bot", "cullface": "west"  },
+        "east" : { "texture": "#bot", "cullface": "east"  }
+      }
+    },
+    {
+      "from": [  0,  0,  0 ],
+      "to":   [ 16, 16, 16 ],
+      "faces": {
+        "down" : { "texture": "#top", "cullface": "down" , "tintindex": 0 },
+        "up"   : { "texture": "#top", "cullface": "up"   , "tintindex": 0 },
+        "north": { "texture": "#top", "cullface": "north", "tintindex": 0 },
+        "south": { "texture": "#top", "cullface": "south", "tintindex": 0 },
+        "west" : { "texture": "#top", "cullface": "west" , "tintindex": 0 },
+        "east" : { "texture": "#top", "cullface": "east" , "tintindex": 0 }
+      }
+    }
+  ],
+  "ctm_version": 1,
+  "ctm_overrides": {
+    "0": {
+      "type": "ctm",
+      "textures": [
+        "#connect_top"
+      ]
+    }
+  }
+}

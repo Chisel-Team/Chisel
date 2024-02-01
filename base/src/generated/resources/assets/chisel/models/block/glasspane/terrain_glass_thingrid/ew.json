@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/pane/ew",
-  "textures": {
-    "pane": "chisel:block/glass/terrain_glass_thingrid",
-    "edge": "chisel:block/glass/terrain_glass_thingrid"
-  }
-}

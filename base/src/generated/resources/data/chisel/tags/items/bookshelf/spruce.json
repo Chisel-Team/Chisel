@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:bookshelf/spruce/rainbow",
+    "chisel:bookshelf/spruce/novice_necromancer",
+    "chisel:bookshelf/spruce/necromancer",
+    "chisel:bookshelf/spruce/redtomes",
+    "chisel:bookshelf/spruce/abandoned",
+    "chisel:bookshelf/spruce/hoarder",
+    "chisel:bookshelf/spruce/brim",
+    "chisel:bookshelf/spruce/historian",
+    "chisel:bookshelf/spruce/cans",
+    "chisel:bookshelf/spruce/papers"
+  ]
+}
