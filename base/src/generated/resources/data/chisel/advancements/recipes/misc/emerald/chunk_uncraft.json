@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chisel:emerald/chunk_uncraft"
+    ]
+  },
+  "criteria": {
+    "has_emerald_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chisel:emerald/chunk"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chisel:emerald/chunk_uncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_emerald_block",
+      "has_the_recipe"
+    ]
+  ]
+}

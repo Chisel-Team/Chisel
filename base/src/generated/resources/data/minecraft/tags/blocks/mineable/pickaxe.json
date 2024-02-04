@@ -175,6 +175,7 @@
     "chisel:charcoal/twisted",
     "chisel:charcoal/prism",
     "chisel:charcoal/cuts",
+    "chisel:coal/raw",
     "chisel:coal/cracked",
     "chisel:coal/solid_bricks",
     "chisel:coal/small_bricks",

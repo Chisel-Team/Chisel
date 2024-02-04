@@ -188,6 +188,10 @@ public class Features {
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_STONE_TOOL)
             .initialProperties(() -> Blocks.COAL_BLOCK)
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.CHARCOAL, 9)
+                    .requires(block)
+                    .unlockedBy("has_charcoal_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .variation(VariantTemplates.withRecipe(VariantTemplates.RAW, (prov, block) -> new ShapelessRecipeBuilder(block, 1)
                     .requires(Items.CHARCOAL, 9)
                     .unlockedBy("has_charcoal", prov.has(Items.CHARCOAL))
@@ -200,7 +204,15 @@ public class Features {
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .applyTag(BlockTags.NEEDS_STONE_TOOL)
             .initialProperties(() -> Blocks.COAL_BLOCK)
-            .variations(/*VariantTemplates.withUncraft(*/VariantTemplates.ROCK/*, Items.COAL)*/) // TODO
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.COAL, 9)
+                    .requires(block)
+                    .unlockedBy("has_coal_block", prov.has(block))
+                    .save(prov,block.getRegistryName() + "_uncraft"))
+            .variation(VariantTemplates.withRecipe(VariantTemplates.RAW, (prov, block) -> new ShapelessRecipeBuilder(block, 1)
+                    .requires(Items.COAL, 9)
+                    .unlockedBy("has_charcoal", prov.has(Items.COAL))
+                    .save(prov)))
+            .variations(VariantTemplates.ROCK)
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> CLOUD = _FACTORY.newType(Material.CLOTH_DECORATION, "cloud")
@@ -261,6 +273,10 @@ public class Features {
             .addTag(Tags.Blocks.STORAGE_BLOCKS_COPPER)
             .initialProperties(() -> Blocks.COPPER_BLOCK)
             .variations(VariantTemplates.METAL)
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.COPPER_INGOT, 9)
+                    .requires(block)
+                    .unlockedBy("has_copper_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> DIABASE = _FACTORY.newType(Material.STONE, "diabase")
@@ -279,6 +295,10 @@ public class Features {
             .applyTag(BlockTags.NEEDS_IRON_TOOL)
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .initialProperties(() -> Blocks.DIAMOND_BLOCK)
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.DIAMOND, 9)
+                    .requires(block)
+                    .unlockedBy("has_diamond_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .variation("terrain_diamond_embossed").localizedName("Embossed")
                 .model(ModelTemplates.cubeColumn())
             .next("terrain_diamond_gem").localizedName("Gem")
@@ -321,10 +341,10 @@ public class Features {
             .applyTag(BlockTags.NEEDS_IRON_TOOL)
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .initialProperties(() -> Blocks.EMERALD_BLOCK)
-            /*.recipe((prov, block) -> new ShapelessRecipeBuilder(Items.EMERALD, 9)
-                    .addIngredient(block)
-                    .addCriterion("has_emerald_block", prov.hasItem(block))
-                    .build(prov)) TODO: Match recipe seen in FeaturesOld*/
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.EMERALD, 9)
+                    .requires(block)
+                    .unlockedBy("has_emerald_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .variation("panel") //.localizedName("Tile") TODO name conflict
             .next("panelclassic").localizedName("Panel")
             .next("smooth") //.localizedName("Raw") TODO name conflict
@@ -441,6 +461,10 @@ public class Features {
             .initialProperties(() -> Blocks.GOLD_BLOCK)
             .color(MaterialColor.GOLD)
             .variations(VariantTemplates.METAL)
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.GOLD_INGOT, 9)
+                    .requires(block)
+                    .unlockedBy("has_gold_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .build();
 
     public static final Map<String, BlockEntry<BlockCarvable>> GOLD_TERRAIN = _FACTORY.newType(Material.METAL, "gold")
@@ -449,6 +473,10 @@ public class Features {
             .initialProperties(() -> Blocks.GOLD_BLOCK)
             .applyTag(BlockTags.NEEDS_IRON_TOOL)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.GOLD_INGOT, 9)
+                    .requires(block)
+                    .unlockedBy("has_gold_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .variations(VariantTemplates.METAL_TERRAIN)
             .variation("cart")
                 .model(ModelTemplates.cubeBottomTop())
@@ -529,6 +557,10 @@ public class Features {
             .applyTag(BlockTags.NEEDS_IRON_TOOL)
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .addTag(Tags.Blocks.STORAGE_BLOCKS_IRON)
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.IRON_INGOT, 9)
+                    .requires(block)
+                    .unlockedBy("has_iron_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .variations(VariantTemplates.METAL)
             .build();
 
@@ -541,6 +573,10 @@ public class Features {
             .applyTag(BlockTags.NEEDS_IRON_TOOL)
             .applyTag(BlockTags.BEACON_BASE_BLOCKS)
             .addTag(Tags.Blocks.STORAGE_BLOCKS_IRON)
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.IRON_INGOT, 9)
+                    .requires(block)
+                    .unlockedBy("has_iron_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .variations(VariantTemplates.METAL_TERRAIN)
             .variation("moon")
                 .model(ModelTemplates.cubeBottomTop())
@@ -586,6 +622,10 @@ public class Features {
             .addTag(Tags.Blocks.STORAGE_BLOCKS_LAPIS)
             .addBlock(Blocks.LAPIS_BLOCK)
             .initialProperties(() -> Blocks.LAPIS_BLOCK)
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.LAPIS_LAZULI, 9)
+                    .requires(block)
+                    .unlockedBy("has_lapis_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .variation("terrain_lapisblock_chunky").localizedName("Cobble")
             .next("terrain_lapisblock_panel").localizedName("Tile")
             .next("terrain_lapisblock_zelda").localizedName("Zelda")
@@ -783,6 +823,10 @@ public class Features {
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .equivalentTo(Tags.Blocks.STORAGE_BLOCKS_REDSTONE)
             .initialProperties(() -> Blocks.REDSTONE_BLOCK)
+            .recipe((prov, block) -> new ShapelessRecipeBuilder(Items.REDSTONE, 9)
+                    .requires(block)
+                    .unlockedBy("has_redstone_block", prov.has(block))
+                    .save(prov, block.getRegistryName() + "_uncraft"))
             .variations(VariantTemplates.STONE)
             .build(); //TODO: Recipe from FeaturesOld
 
@@ -956,13 +1000,12 @@ public class Features {
                         .define('O', Tags.Items.OBSIDIAN)
                         .unlockedBy("has_eye", prov.has(Items.ENDER_EYE))
                         .save(prov);
-                //TODO fix multi recipe
-//                new ShapedRecipeBuilder(block, 48)
-//                        .pattern(" P ").pattern("PEP").pattern(" P ")
-//                        .define('E', Items.ENDER_EYE)
-//                        .define('P', Blocks.PURPUR_BLOCK)
-//                        .unlockedBy("has_eye", prov.has(Items.ENDER_EYE))
-//                        .save(prov, new ResourceLocation(Chisel.MOD_ID, "voidstone2"));
+                new ShapedRecipeBuilder(block, 48)
+                        .pattern(" P ").pattern("PEP").pattern(" P ")
+                        .define('E', Items.ENDER_EYE)
+                        .define('P', Blocks.PURPUR_BLOCK)
+                        .unlockedBy("has_eye", prov.has(Items.ENDER_EYE))
+                        .save(prov, new ResourceLocation(Chisel.MOD_ID, block.getRegistryName().getPath() + "_voidstone2"));
             })
             .variation(VariantTemplates.RAW)
             .variation("quarters").localizedName("Medium Tiles")

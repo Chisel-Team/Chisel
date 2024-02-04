@@ -222,6 +222,7 @@ public class LegacyFeatures {
 
     public static final Map<String, BlockEntry<BlockCarvable>> NETHERBRICK = _FACTORY.newType(Material.STONE, "netherbrick")
             .addBlock(Blocks.NETHER_BRICKS)
+            .addBlock(Blocks.CHISELED_NETHER_BRICKS)
             .applyTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .initialProperties(() -> Blocks.NETHER_BRICKS)
             .variation("a1_netherbrick_brinstar").localizedName("Blue")
@@ -255,7 +256,7 @@ public class LegacyFeatures {
             .next("a1_netherrack_classicspatter").localizedName("Blood-Splatted Rocky")
             .next("a1_netherrack_guts").localizedName("Raw Guts")
             .next("a1_netherrack_gutsdark").localizedName("Guts")
-            .next("a1_netherrack_meat")
+            .next("a1_netherrack_meat").localizedName("Meat")
             .next("a1_netherrack_meatred").localizedName("Raw Meat")
             .next("a1_netherrack_meatrock").localizedName("Bloody Rock")
             .next("a1_netherrack_red").localizedName("Dark Red")
@@ -479,14 +480,14 @@ public class LegacyFeatures {
             .next("elaborate").localizedName("Shiny Plates")
             .next("routes")
             .next("platform")
-            .next("platetiles").localizedName("Small Uneven Tiles\n")
+            .next("platetiles").localizedName("Small Uneven Tiles")
             .next("diagonal").localizedName("Diagonal Plates")
             .next("dent")
             .next("blueplating").localizedName("Blue Plates")
             .next("black").localizedName("Black Scaled Plates")
             .next("black2").localizedName("Black Strips")
             .next("opening")
-            .next("plate").localizedName("Shiny Plate") // FIXME temporary texture
+            .next("plate") //.localizedName("Shiny Plate") TODO name conflict && FIXME temporary texture
             .build();
 
 	public static void init() {}

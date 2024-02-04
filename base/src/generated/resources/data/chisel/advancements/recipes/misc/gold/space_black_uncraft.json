@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chisel:gold/space_black_uncraft"
+    ]
+  },
+  "criteria": {
+    "has_gold_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chisel:gold/space_black"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chisel:gold/space_black_uncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gold_block",
+      "has_the_recipe"
+    ]
+  ]
+}
