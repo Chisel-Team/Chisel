@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "chisel:block/gold/large_ingot-side",
+    "bottom": "chisel:block/gold/large_ingot-bottom",
+    "top": "chisel:block/gold/large_ingot-top"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "chisel:block/gold/coin_tails-side",
+    "bottom": "chisel:block/gold/coin_tails-bottom",
+    "top": "chisel:block/gold/coin_tails-top"
+  }
+}

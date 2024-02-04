@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "chisel:block/gold/terrain_gold_rivets-side",
-    "bottom": "chisel:block/gold/terrain_gold_rivets-bottom",
-    "top": "chisel:block/gold/terrain_gold_rivets-top"
-  }
-}

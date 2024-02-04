@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "chisel:brownstone/default",
+    "chisel:brownstone/blocks",
     "chisel:brownstone/doubleslab",
     "chisel:brownstone/block",
     "chisel:brownstone/weathered",
