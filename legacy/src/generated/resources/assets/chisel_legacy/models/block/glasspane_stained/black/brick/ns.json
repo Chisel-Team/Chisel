@@ -1,8 +1,7 @@
 {
-  "parent": "chisel_legacy:block/pane/ctm_ns",
+  "parent": "chisel_legacy:block/pane/ns",
   "textures": {
     "pane": "chisel_legacy:block/glass_stained/black/brick",
-    "pane_ct": "chisel_legacy:block/glass_stained/black/brick-ctm",
     "edge": "minecraft:block/black_stained_glass_pane_top"
   }
 }

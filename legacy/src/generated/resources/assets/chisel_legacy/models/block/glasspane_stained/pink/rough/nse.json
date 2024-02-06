@@ -1,8 +1,7 @@
 {
-  "parent": "chisel_legacy:block/pane/ctm_nse",
+  "parent": "chisel_legacy:block/pane/nse",
   "textures": {
     "pane": "chisel_legacy:block/glass_stained/pink/rough",
-    "pane_ct": "chisel_legacy:block/glass_stained/pink/rough-ctm",
     "edge": "minecraft:block/pink_stained_glass_pane_top"
   }
 }

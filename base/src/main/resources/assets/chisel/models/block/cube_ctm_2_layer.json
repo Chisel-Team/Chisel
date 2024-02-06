@@ -3,7 +3,7 @@
   "ambientocclusion": true,
   "elements": [
     {
-      "from": [  0,  0,  0 ],
+      "from": [  0.001,  0.001,  0.001 ],
       "to":   [ 15.999, 15.999, 15.999 ],
       "shade": false,
       "faces": {

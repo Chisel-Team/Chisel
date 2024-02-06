@@ -1,5 +1,5 @@
 {
-  "parent": "chisel_legacy:block/pane/ctm_sew",
+  "parent": "chisel_legacy:block/pane/colors/light_blue/ctm_sew",
   "textures": {
     "pane": "chisel_legacy:block/glass_stained/light_blue/framed",
     "pane_ct": "chisel_legacy:block/glass_stained/light_blue/framed_fancy-ctm",
