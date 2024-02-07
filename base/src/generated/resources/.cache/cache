@@ -3088,11 +3088,11 @@ b946a2284d318d9e63c2c0a06f272f8b110c80d0 assets/chisel/models/block/ice/twisted.
 13d14a35989d3a1e6dbb5e626b0b9ef5eb8a31e5 assets/chisel/models/block/ice/zag.json
 79edab5a46a9dec326d041018fff9ab4f830b5d3 assets/chisel/models/block/icepillar/carved.json
 39144178f8a671641c44cbc9b8f735917d95ee3c assets/chisel/models/block/icepillar/convexplain.json
-500057253ce5c451ad1cf22f8b08fc964048fc39 assets/chisel/models/block/icepillar/greekgreek.json
-cd4203b5b8c9b431ee43300f6568545baef1d9a2 assets/chisel/models/block/icepillar/greekplain.json
+b1fd757bc3aaa36697d103efbdb405a7a373c5c4 assets/chisel/models/block/icepillar/greekgreek.json
+420700d822e95ecff27424d5301ddb9c905bbd63 assets/chisel/models/block/icepillar/greekplain.json
 238dd0cca6116ad0b13487b6d8a36e96c3764b98 assets/chisel/models/block/icepillar/ornamental.json
-d053932bd0dc82fe1e81a823ef782eadac795472 assets/chisel/models/block/icepillar/plaingreek.json
-d255567fe86ff8912947135f9c4aa46ba1ca5c9e assets/chisel/models/block/icepillar/plainplain.json
+cda00b731b9d23a92e4c8152af6faea2b368a517 assets/chisel/models/block/icepillar/plaingreek.json
+34365e7bb4653ddcc5b68323041ce0db3bfc0df4 assets/chisel/models/block/icepillar/plainplain.json
 0070c8803d743d59d2677158bd3740461536404b assets/chisel/models/block/iron/brick.json
 f6739ec35c5bd4ec42afcc67a16807e1158c7e2d assets/chisel/models/block/iron/coin_heads.json
 440820f13edfabf72abbbf5db3fcb9f8a0689d93 assets/chisel/models/block/iron/coin_tails.json

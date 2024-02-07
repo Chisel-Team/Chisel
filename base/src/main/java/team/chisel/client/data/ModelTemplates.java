@@ -864,6 +864,15 @@ public class ModelTemplates {
         };
     }
 
+    public static ModelTemplate columnPillar() {
+        return (prov, block) -> {
+            String name = "block/" + name(block);
+            prov.simpleBlock(block, prov.models().withExistingParent(name, prov.modLoc("block/column_pillar"))
+                    .texture("top", name + "-top")
+                    .texture("pillar", name + "-ctmv"));
+        };
+    }
+
     public static ModelTemplate hexPlate(String variant) {
         return (prov, block) -> {
             String name = "block/" + name(block);

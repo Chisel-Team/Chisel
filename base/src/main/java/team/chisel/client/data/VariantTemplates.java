@@ -194,10 +194,10 @@ public class VariantTemplates {
 
     //TODO fix pillar CTM models
     public static class Pillar {
-        public static final VariantTemplate PLAINPLAIN = withName("plainplain", "Plain-Capped Plain Pillar", ModelTemplates.cubeAll("-top"));
-        public static final VariantTemplate PLAINGREEK = withName("plaingreek", "Greek-Capped Plain Pillar", ModelTemplates.cubeAll("-top"));
-        public static final VariantTemplate GREEKPLAIN = withName("greekplain", "Plain-Capped Greek Pillar", ModelTemplates.cubeAll("-top"));
-        public static final VariantTemplate GREEKGREEK = withName("greekgreek", "Greek-Capped Greek Pillar", ModelTemplates.cubeAll("-top"));
+        public static final VariantTemplate PLAINPLAIN = withName("plainplain", "Plain-Capped Plain Pillar", ModelTemplates.columnPillar());
+        public static final VariantTemplate PLAINGREEK = withName("plaingreek", "Greek-Capped Plain Pillar", ModelTemplates.columnPillar());
+        public static final VariantTemplate GREEKPLAIN = withName("greekplain", "Plain-Capped Greek Pillar", ModelTemplates.columnPillar());
+        public static final VariantTemplate GREEKGREEK = withName("greekgreek", "Greek-Capped Greek Pillar", ModelTemplates.columnPillar());
         public static final VariantTemplate CONVEXPLAIN = withName("convexplain", "Convexed Pillar", ModelTemplates.cubeAll("-top"));
         public static final VariantTemplate CARVED = withName("carved", "Scribed Pillar", ModelTemplates.cubeColumn());
         public static final VariantTemplate ORNAMENTAL = withName("ornamental", "Ornamental Pillar", ModelTemplates.cubeColumn());

@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "chisel_legacy:block/column_pillar",
   "textures": {
-    "all": "chisel_legacy:block/marblepillar/pillar-top"
+    "top": "chisel_legacy:block/marblepillar/pillar-top",
+    "pillar": "chisel_legacy:block/marblepillar/pillar-ctmv"
   }
 }

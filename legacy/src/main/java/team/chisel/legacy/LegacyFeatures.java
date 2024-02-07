@@ -204,19 +204,19 @@ public class LegacyFeatures {
             .color(MaterialColor.QUARTZ)
             .variations(VariantTemplates.PILLAR)
             .variation("simple").localizedName("Simple Pillar")
-                .model(ModelTemplates.cubeAll("-top"))
+                .model(ModelTemplates.columnPillar())
             .next("rough") //TODO different key?
-                .model(ModelTemplates.cubeAll("-top"))
+                .model(ModelTemplates.columnPillar())
             .next("widedecor").localizedName("Decor-Capped Wide Pillar")
-                .model(ModelTemplates.cubeAll("-top"))
+                .model(ModelTemplates.columnPillar())
             .next("widegreek").localizedName("Greek-Capped Wide Pillar")
-                .model(ModelTemplates.cubeAll("-top"))
+                .model(ModelTemplates.columnPillar())
             .next("wideplain").localizedName("Plain-Capped Wide Pillar")
-                .model(ModelTemplates.cubeAll("-top"))
+                .model(ModelTemplates.columnPillar())
             .next("pillar").localizedName("Large Pillar") //.localizedName("Concaved Pillar") TODO different name with obsidian
-                .model(ModelTemplates.cubeAll("-top"))
+                .model(ModelTemplates.columnPillar())
             .next("default").localizedName("Small-Concaved Pillar")
-                .model(ModelTemplates.cubeAll("-top"))
+                .model(ModelTemplates.columnPillar())
             .build(b -> b.strength(1.75F, 10.0F));
 
 

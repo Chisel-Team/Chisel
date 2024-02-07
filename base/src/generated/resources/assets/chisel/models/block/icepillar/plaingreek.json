@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "chisel:block/column_pillar",
   "textures": {
-    "all": "chisel:block/icepillar/plaingreek-top"
+    "top": "chisel:block/icepillar/plaingreek-top",
+    "pillar": "chisel:block/icepillar/plaingreek-ctmv"
   }
 }

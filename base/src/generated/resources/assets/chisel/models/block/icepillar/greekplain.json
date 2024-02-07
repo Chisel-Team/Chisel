@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "chisel:block/column_pillar",
   "textures": {
-    "all": "chisel:block/icepillar/greekplain-top"
+    "top": "chisel:block/icepillar/greekplain-top",
+    "pillar": "chisel:block/icepillar/greekplain-ctmv"
   }
 }
