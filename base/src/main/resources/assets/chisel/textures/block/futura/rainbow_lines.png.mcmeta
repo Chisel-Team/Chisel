@@ -10,7 +10,8 @@
     "extra": {
       "light": 15,
       "connect_to": [
-        { "block": "chisel:futura", "predicate": { "variation": [ "2", "4" ] } },
+        { "block": "chisel:futura/controller"},
+        { "block": "chisel:futura/controller_purple"},
         { "block": "appliedenergistics2:controller" }
       ]
     }
