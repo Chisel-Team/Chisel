@@ -10,12 +10,14 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import team.chisel.api.item.ItemModelTemplate;
+import team.chisel.client.data.ItemModelTemplates;
 
 public interface VariantTemplate {
     
     Optional<ModelTemplate> getModelTemplate();
 
-    Optional<NonNullBiConsumer<DataGenContext<Item, BlockItem>, RegistrateItemModelProvider>> getItemModelTemplate();
+    Optional<ItemModelTemplate> getItemModelTemplate();
 
     default Optional<RecipeTemplate> getRecipeTemplate() {
         return Optional.empty();

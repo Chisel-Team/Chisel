@@ -53,6 +53,8 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.api.item.ItemModelTemplate;
+import team.chisel.client.data.ItemModelTemplates;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 
@@ -95,8 +97,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     private ModelTemplate model = ModelTemplates.simpleBlock();
 
     @Accessors(fluent = true)
-    private NonNullBiConsumer<DataGenContext<Item, BlockItem>, RegistrateItemModelProvider> itemModel = (ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry)));
-
+    private ItemModelTemplate itemModel = ItemModelTemplates.generated();
     @Accessors(fluent = true)
     private RecipeTemplate recipe = RecipeTemplate.none();
     
@@ -239,7 +240,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .loot(loot)
                         .item(provider::createBlockItem)
                             // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
-                            .model(builder.itemModel)
+                            .model((ctx, prov) -> builder.itemModel.accept(prov, ctx.getEntry()))
                             .transform(this::addTags)
                             .build()
                         .register());
@@ -312,7 +313,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
 
         @Setter
         @Accessors(fluent = true)
-        private NonNullBiConsumer<DataGenContext<Item, BlockItem>, RegistrateItemModelProvider> itemModel = (ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry)));
+        private ItemModelTemplate itemModel = ItemModelTemplates.generated();
         
         @Setter
         @Accessors(fluent = true)

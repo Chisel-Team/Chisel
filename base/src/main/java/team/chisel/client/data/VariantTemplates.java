@@ -26,6 +26,7 @@ import team.chisel.Chisel;
 import team.chisel.api.block.ModelTemplate;
 import team.chisel.api.block.RecipeTemplate;
 import team.chisel.api.block.VariantTemplate;
+import team.chisel.api.item.ItemModelTemplate;
 import team.chisel.common.block.BlockCarvable;
 
 @FieldsAreNonnullByDefault
@@ -39,7 +40,7 @@ public class VariantTemplates {
         private final String name;
         private final String localizedName;
         private final ModelTemplate modelTemplate;
-        private final NonNullBiConsumer<DataGenContext<Item, BlockItem>, RegistrateItemModelProvider> itemModelTemplate;
+        private final ItemModelTemplate itemModelTemplate;
         private final RecipeTemplate recipeTemplate;
         @Getter(onMethod = @__({@Override}))
         private final String[] tooltip;
@@ -55,7 +56,7 @@ public class VariantTemplates {
         }
 
         @Override
-        public Optional<NonNullBiConsumer<DataGenContext<Item, BlockItem>, RegistrateItemModelProvider>> getItemModelTemplate() {
+        public Optional<ItemModelTemplate> getItemModelTemplate() {
             return Optional.ofNullable(itemModelTemplate);
         }
 
