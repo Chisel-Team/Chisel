@@ -3,8 +3,8 @@
   "ambientocclusion": true,
   "elements": [
     {
-      "from": [  0.001,  0.001,  0.001 ],
-      "to":   [ 15.999, 15.999, 15.999 ],
+      "from": [  0.005,  0.005,  0.005 ],
+      "to":   [ 15.995, 15.995, 15.995 ],
       "shade": false,
       "faces": {
         "down" : { "texture": "#bot", "cullface": "down" , "tintindex": 1 },

@@ -58,7 +58,7 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
             blit(PoseStack, leftPos + 63, topPos + 19 + 9, 176, 18, scaledProg + 1, 16);
         }
 
-        if (Configurations.autoChiselPowered) {
+        if (Configurations.autoChiselPowered.get()) {
             blit(PoseStack, leftPos + 7, topPos + 93, 7, 200, 162, 6);
             if (container.hasEnergy()) {
                 blit(PoseStack, leftPos + 8, topPos + 94, 8, 206, container.getEnergyScaled(POWER_BAR_LENGTH) + 1, 4);
@@ -93,7 +93,7 @@ public class GuiAutoChisel extends AbstractContainerScreen<ContainerAutoChisel> 
         this.font.draw(PoseStack, title, this.imageWidth / 2 - this.font.width(title) / 2, 6, 0x404040);
         this.font.draw(PoseStack, container.invPlayer.getDisplayName(), 8, this.imageHeight - 96 + 2, 0x404040);
         
-        if (Configurations.autoChiselPowered) {
+        if (Configurations.autoChiselPowered.get()) {
             mouseX -= leftPos;
             mouseY -= topPos;
 

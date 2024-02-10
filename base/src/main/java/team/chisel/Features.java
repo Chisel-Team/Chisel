@@ -52,6 +52,7 @@ import team.chisel.common.block.BlockCarvableBookshelf;
 import team.chisel.common.block.BlockCarvableCarpet;
 import team.chisel.common.block.BlockCarvableIce;
 import team.chisel.common.block.BlockCarvablePane;
+import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselCompatTags;
 
 public class Features {
@@ -167,7 +168,7 @@ public class Features {
                 .model(ModelTemplates.cubeBottomTop("weathered_half-side", "default", "weathered"))
             .next("weathered_block_half").localizedName("Half-Weathered Big Tile")
                 .model(ModelTemplates.cubeBottomTop("weathered_block_half-side", "block", "weathered_block"))
-            .build(b -> b.sound(SoundType.STONE).strength(1.0f));
+            .build(b -> b.sound(SoundType.STONE).strength(1.0f).speedFactor(Configurations.concreteVelocityMult.get().floatValue()));
     //BlockSpeedHandler.speedupBlocks.add(b);
 
     public static final Map<DyeColor, Map<String, BlockEntry<BlockCarvableCarpet>>> CARPET = Arrays.stream(DyeColor.values())
@@ -261,7 +262,7 @@ public class Features {
                     .setGroupName(RegistrateLangProvider.toEnglishName(color.getSerializedName()) + " Concrete")
                     .initialProperties(() -> ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getSerializedName() + "_concrete")))
                     .variations(VariantTemplates.ROCK)
-                    .build()));
+                    .build(b -> b.speedFactor(Configurations.concreteVelocityMult.get().floatValue()))));
 //  BlockSpeedHandler.speedupBlocks.add(b);
 
     public static final Map<String, BlockEntry<BlockCarvable>> COPPER = _FACTORY.newType(Material.METAL, "metals/copper")

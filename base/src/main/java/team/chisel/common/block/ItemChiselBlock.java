@@ -34,7 +34,7 @@ public class ItemChiselBlock extends BlockItem {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
-        if (Configurations.blockDescriptions) {
+        if (Configurations.blockDescriptions.get()) {
             tooltip.add(block.getVariation().getDisplayName().withStyle(ChatFormatting.GRAY));
         }
         addTooltips(stack, block, tooltip);
@@ -60,7 +60,7 @@ public class ItemChiselBlock extends BlockItem {
     @Override
     public Component getName(ItemStack stack) {
         Component ret = super.getName(stack);
-        if (!Configurations.blockDescriptions) {
+        if (!Configurations.blockDescriptions.get()) {
             ret = ChiselLangKeys.TT_BLOCK_NAME.format(ret, block.getVariation().getDisplayName());
         }
         return ret;

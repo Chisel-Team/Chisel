@@ -4,6 +4,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.config.ModConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,6 +43,7 @@ import team.chisel.common.block.MessageAutochiselFX;
 import team.chisel.common.block.MessageUpdateAutochiselSource;
 import team.chisel.common.carving.CarvingVariationRegistry;
 import team.chisel.common.carving.ChiselModeRegistry;
+import team.chisel.common.config.Configurations;
 import team.chisel.common.init.ChiselItems;
 import team.chisel.common.init.ChiselSounds;
 import team.chisel.common.init.ChiselTabs;
@@ -110,6 +113,9 @@ public class Chisel implements Reference {
         
         ChiselWorldGen.FEATURES.register(modBus);
         ChiselWorldGen.PLACEMENTS.register(modBus);
+
+        ModLoadingContext ctx = ModLoadingContext.get();
+        ctx.registerConfig(ModConfig.Type.COMMON, Configurations.CONFIG);
 
         // Update the values within the properties so that Properties.from reflects them correctly
         // TODO PR this to forge
