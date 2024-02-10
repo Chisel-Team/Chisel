@@ -5,13 +5,12 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.mojang.blaze3d.vertex.*;
+import net.minecraft.client.renderer.*;
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 
@@ -22,9 +21,6 @@ import lombok.experimental.Accessors;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -98,7 +94,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         public void render(PoseStack PoseStack, int mouseX, int mouseY, float partialTicks) {
             this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
-            GuiHitechChisel.this.getMinecraft().getTextureManager().bindForSetup(TEXTURE);
+            RenderSystem.setShaderTexture(0, TEXTURE);
             float a = isMouseOver(mouseX, mouseY) ? 1 : 0.2f;
             int u = rotate ? 0 : 16;
             int v = 238;
@@ -395,12 +391,16 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
                 pStack.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
 
-                ShaderInstance shader = RenderSystem.getShader();
                 RenderSystem.setShader(GameRenderer::getBlockShader);
-                pStack.pushPose();
+                //pStack.pushPose();
+                //pStack.setIdentity();
+                Matrix4f projM = new Matrix4f();
+                projM.setIdentity();
                 pStack.setIdentity();
                 int scale = (int) getMinecraft().getWindow().getGuiScale();
-                pStack.mulPoseMatrix(Matrix4f.perspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000));
+                projM.multiply(Matrix4f.perspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000));
+                RenderSystem.backupProjectionMatrix();
+                RenderSystem.setProjectionMatrix(projM);
 //                RenderSystem.matrixMode(GL11.GL_MODELVIEW);
                 pStack.translate(-panel.getX() - panel.getWidth() / 2, -panel.getY() - panel.getHeight() / 2, 0);
                 RenderSystem.viewport((getGuiLeft() + panel.getX()) * scale, getMinecraft().getWindow().getHeight() - (getGuiTop() + panel.getY() + panel.getHeight()) * scale, panel.getWidth() * scale, panel.getHeight() * scale);
@@ -426,6 +426,8 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
                     RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
                     BufferBuilder builder = Tesselator.getInstance().getBuilder();
+                    builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.BLOCK);
+                    Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.solid());
                     try {
                         PoseStack ms = new PoseStack();
                         for (BlockPos pos : buttonPreview.getType().getPositions()) {
@@ -448,7 +450,8 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
                 pStack.popPose();
 //                RenderSystem.matrixMode(GL11.GL_PROJECTION);
-//                RenderSystem.popMatrix();
+                RenderSystem.restoreProjectionMatrix();
+                //pStack.popPose();
 //                RenderSystem.matrixMode(GL11.GL_MODELVIEW);
                 RenderSystem.viewport(0, 0, getMinecraft().getWindow().getWidth(), getMinecraft().getWindow().getHeight());
             }
