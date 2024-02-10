@@ -1,7 +1,0 @@
-{
-  "parent": "chisel_legacy:block/cube_ctm_translucent",
-  "textures": {
-    "all": "chisel_legacy:block/glass_stained/green/framed",
-    "connected_tex": "chisel_legacy:block/glass_stained/green/framed_fancy-ctm"
-  }
-}

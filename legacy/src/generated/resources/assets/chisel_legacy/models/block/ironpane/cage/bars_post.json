@@ -1,9 +1,0 @@
-{
-  "parent": "chisel_legacy:block/bars_post",
-  "textures": {
-    "bars": "chisel_legacy:block/ironpane/cage",
-    "particle": "chisel_legacy:block/ironpane/cage",
-    "edge": "chisel_legacy:block/ironpane/cage-top",
-    "side": "chisel_legacy:block/ironpane/cage-top"
-  }
-}

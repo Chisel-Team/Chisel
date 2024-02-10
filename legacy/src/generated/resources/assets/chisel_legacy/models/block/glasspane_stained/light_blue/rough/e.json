@@ -1,7 +1,0 @@
-{
-  "parent": "chisel_legacy:block/pane/e",
-  "textures": {
-    "pane": "chisel_legacy:block/glass_stained/light_blue/rough",
-    "edge": "minecraft:block/light_blue_stained_glass_pane_top"
-  }
-}

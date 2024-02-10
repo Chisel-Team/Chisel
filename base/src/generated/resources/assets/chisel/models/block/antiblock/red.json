@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/cube_2_layer_no_shade",
-  "textures": {
-    "bot": "chisel:block/antiblock/red",
-    "top": "chisel:block/antiblock/antiblock"
-  }
-}

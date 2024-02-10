@@ -1,8 +1,0 @@
-{
-  "parent": "chisel:block/cube_axis",
-  "textures": {
-    "x": "chisel:block/planks/acacia/log_cabin-ew",
-    "y": "chisel:block/planks/acacia/log_bordered",
-    "z": "chisel:block/planks/acacia/log_cabin-ns"
-  }
-}

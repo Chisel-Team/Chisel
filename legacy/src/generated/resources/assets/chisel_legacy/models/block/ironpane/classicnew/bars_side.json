@@ -1,9 +1,0 @@
-{
-  "parent": "chisel_legacy:block/bars_side",
-  "textures": {
-    "bars": "chisel_legacy:block/ironpane/classicnew",
-    "particle": "chisel_legacy:block/ironpane/classicnew",
-    "edge": "chisel_legacy:block/ironpane/classic",
-    "side": "chisel_legacy:block/ironpane/classic"
-  }
-}

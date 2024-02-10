@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/column_pillar",
-  "textures": {
-    "top": "chisel:block/icepillar/greekgreek-top",
-    "pillar": "chisel:block/icepillar/greekgreek-ctmv"
-  }
-}

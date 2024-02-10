@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "chisel:block/technical/new/megacell-side",
-    "bottom": "chisel:block/technical/new/megacell-bottom",
-    "top": "chisel:block/technical/new/megacell-top"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "parent": "chisel:block/cube_3_layer_topshaded",
-  "textures": {
-    "particle": "chisel:block/futura/orange_frame_particle",
-    "top": "chisel:block/futura/orange_frame",
-    "mid": "chisel:block/futura/uber_rainbow",
-    "bot": "chisel:block/futura/screen_discoherent"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "chisel:block/cube_2_layer_topshaded",
-  "textures": {
-    "particle": "chisel:block/voidstone/animated/metalborder",
-    "top": "chisel:block/voidstone/animated/metalborder",
-    "bot": "chisel:block/voidstone/animated/background"
-  }
-}

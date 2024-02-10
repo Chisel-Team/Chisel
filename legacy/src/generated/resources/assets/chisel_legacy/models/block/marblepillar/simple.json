@@ -1,7 +1,0 @@
-{
-  "parent": "chisel_legacy:block/column_pillar",
-  "textures": {
-    "top": "chisel_legacy:block/marblepillar/simple-top",
-    "pillar": "chisel_legacy:block/marblepillar/simple-ctmv"
-  }
-}

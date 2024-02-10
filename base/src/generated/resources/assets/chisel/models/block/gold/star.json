@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "chisel:block/gold/star-side",
-    "bottom": "chisel:block/gold/star-bottom",
-    "top": "chisel:block/gold/star-top"
-  }
-}

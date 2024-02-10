@@ -1,7 +1,0 @@
-{
-  "parent": "chisel_legacy:block/pane/nse",
-  "textures": {
-    "pane": "chisel_legacy:block/glass/terrain_glassstreak",
-    "edge": "chisel_legacy:block/glass/terrain_glassstreak-top"
-  }
-}

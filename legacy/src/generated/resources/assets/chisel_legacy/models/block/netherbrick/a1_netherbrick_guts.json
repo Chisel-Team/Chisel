@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "chisel_legacy:block/netherbrick/a1_netherbrick_guts"
-  }
-}

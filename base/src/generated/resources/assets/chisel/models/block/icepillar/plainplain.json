@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/column_pillar",
-  "textures": {
-    "top": "chisel:block/icepillar/plainplain-top",
-    "pillar": "chisel:block/icepillar/plainplain-ctmv"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "chisel:block/cube_ctm",
-  "textures": {
-    "all": "chisel:block/end_stone/circular",
-    "connected_tex": "chisel:block/end_stone/circular-ctm"
-  }
-}

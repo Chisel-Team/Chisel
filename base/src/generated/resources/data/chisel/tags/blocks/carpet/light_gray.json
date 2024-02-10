@@ -1,8 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "chisel:carpet/light_gray/legacy",
-    "chisel:carpet/light_gray/llama",
-    "minecraft:light_gray_carpet"
-  ]
-}

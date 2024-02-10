@@ -1,9 +1,0 @@
-{
-  "parent": "chisel:block/cube_3_layer_topshaded",
-  "textures": {
-    "particle": "chisel:block/futura/controller_unity_particle",
-    "top": "chisel:block/futura/unity_lines_plating",
-    "mid": "chisel:block/futura/unity_lines",
-    "bot": "chisel:block/futura/lines_invalid"
-  }
-}

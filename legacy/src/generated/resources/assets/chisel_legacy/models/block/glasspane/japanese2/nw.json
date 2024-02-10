@@ -1,7 +1,0 @@
-{
-  "parent": "chisel_legacy:block/pane/nw",
-  "textures": {
-    "pane": "chisel_legacy:block/glass/japanese2",
-    "edge": "chisel_legacy:block/glass/japanese2-top"
-  }
-}

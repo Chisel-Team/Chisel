@@ -1,8 +1,0 @@
-{
-  "parent": "chisel:block/cube_2_layer_topshaded",
-  "textures": {
-    "particle": "chisel:block/futura/screen_cyan",
-    "top": "chisel:block/futura/screen_cyan",
-    "bot": "chisel:block/futura/screen_discoherent"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "chisel:block/mossy/mossy",
-  "textures": {
-    "bot": "chisel:block/cobblestone/french_2"
-  }
-}

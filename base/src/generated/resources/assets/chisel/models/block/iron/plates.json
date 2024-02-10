@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "chisel:block/iron/plates-side",
-    "bottom": "chisel:block/iron/plates-bottom",
-    "top": "chisel:block/iron/plates-top"
-  }
-}

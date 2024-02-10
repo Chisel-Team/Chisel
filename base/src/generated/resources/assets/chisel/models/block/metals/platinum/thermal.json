@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "side": "chisel:block/metals/platinum/thermal-side",
-    "bottom": "chisel:block/metals/platinum/thermal-bottom",
-    "top": "chisel:block/metals/platinum/thermal-top"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "chisel_legacy:block/pane/colors/blue/ctm_w",
-  "textures": {
-    "pane": "chisel_legacy:block/glass_stained/blue/framed",
-    "pane_ct": "chisel_legacy:block/glass_stained/blue/framed_fancy-ctm",
-    "edge": "minecraft:block/blue_stained_glass_pane_top"
-  }
-}

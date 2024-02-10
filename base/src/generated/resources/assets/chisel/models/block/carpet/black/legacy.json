@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/carpet",
-  "textures": {
-    "wool": "chisel:block/wool/black/legacy",
-    "particle": "#wool"
-  }
-}

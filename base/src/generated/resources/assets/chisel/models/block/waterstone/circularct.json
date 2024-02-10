@@ -1,8 +1,0 @@
-{
-  "parent": "chisel:block/waterstone/cube_ctm_water",
-  "textures": {
-    "bot": "minecraft:block/water_still",
-    "top": "chisel:block/fluid/circular",
-    "connect_top": "chisel:block/fluid/circular-ctm"
-  }
-}
