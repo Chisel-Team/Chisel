@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.level.LightLayer;
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -142,10 +143,15 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             }
         }, true, true);
 
-        //@Override
-        //public int getCombinedLight(BlockPos pos, int lightValue) {
-        //    return 0xF000F0;
-        //}
+        @Override
+        public int getRawBrightness(BlockPos pBlockPos, int pAmount) {
+            return 0xF000F0;
+        }
+
+        @Override
+        public int getBrightness(LightLayer pLightType, BlockPos pBlockPos) {
+            return 15;
+        }
 
         @Override
         public BlockState getBlockState(BlockPos pos) {
@@ -159,7 +165,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
 		@Override
 		public float getShade(Direction p_230487_1_, boolean p_230487_2_) {
-			return Minecraft.getInstance().level.getShade(p_230487_1_, false);
+			return Minecraft.getInstance().level.getShade(p_230487_1_, p_230487_2_);
 		}
 
         @Override
@@ -431,6 +437,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
                         for (BlockPos pos : buttonPreview.getType().getPositions()) {
                             pStack.pushPose();
                             pStack.translate(pos.getX(), pos.getY(), pos.getZ());
+                            //TODO maybe make our own renderer so we also control the brightness.
                             brd.renderBatched(state, pos, fakeworld, pStack, consumer, true, new Random(), EmptyModelData.INSTANCE);
                             pStack.popPose();
                         }
