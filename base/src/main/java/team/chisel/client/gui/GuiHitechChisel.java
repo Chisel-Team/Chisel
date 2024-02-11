@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -118,22 +119,22 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             return false;
         }
     }
-    
+
     @RequiredArgsConstructor
     private static class FakeBlockAccess implements BlockAndTintGetter {
-        
+
         private final GuiHitechChisel gui;
-        
+
         @Setter
         private BlockState state = Blocks.AIR.defaultBlockState();
-        
+
         private final LevelLightEngine light = new LevelLightEngine(new LightChunkGetter() {
-            
+
             @Override
             public BlockGetter getLevel() {
                 return FakeBlockAccess.this;
             }
-            
+
             @Override
             @Nullable
             public BlockGetter getChunkForLighting(int p_217202_1_, int p_217202_2_) {
@@ -158,7 +159,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
 		@Override
 		public float getShade(Direction p_230487_1_, boolean p_230487_2_) {
-			return Minecraft.getInstance().level.getShade(p_230487_1_, p_230487_2_);
+			return Minecraft.getInstance().level.getShade(p_230487_1_, false);
 		}
 
         @Override
@@ -193,9 +194,9 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
     private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselguihitech.png");
     
     private final ContainerChiselHitech containerHitech;
-    
+
     private FakeBlockAccess fakeworld = new FakeBlockAccess(this);
-    
+
     private boolean panelClicked;
     private int clickButton;
     private long lastDragTime;
@@ -425,25 +426,22 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
                     fakeworld.setState(state);
 
                     RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
-                    BufferBuilder builder = Tesselator.getInstance().getBuilder();
-                    builder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.BLOCK);
-                    Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(RenderType.solid());
+                    VertexConsumer consumer = Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(ItemBlockRenderTypes.getRenderType(state, false));
                     try {
-                        PoseStack ms = new PoseStack();
                         for (BlockPos pos : buttonPreview.getType().getPositions()) {
-                            ms.pushPose();
-                            ms.translate(pos.getX(), pos.getY(), pos.getZ());
-                            brd.renderBatched(state, pos, fakeworld, ms, builder, true, new Random(), EmptyModelData.INSTANCE);
-                            ms.popPose();
+                            pStack.pushPose();
+                            pStack.translate(pos.getX(), pos.getY(), pos.getZ());
+                            brd.renderBatched(state, pos, fakeworld, pStack, consumer, true, new Random(), EmptyModelData.INSTANCE);
+                            pStack.popPose();
                         }
                     } catch (Exception e) {
                         erroredState = state;
                         Chisel.logger.error("Exception rendering block {}", state, e);
                     } finally {
                         if (erroredState == null) {
-                            builder.end();
+                            Minecraft.getInstance().renderBuffers().bufferSource().endBatch(ItemBlockRenderTypes.getRenderType(state, true));
                         } else {
-                            builder.discard();
+
                         }
                     }
                 }
@@ -491,7 +489,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         TranslatableComponent s = ChiselLangKeys.PREVIEW.getComponent();
         font.draw(PoseStack, s, panel.getX() + (panel.getWidth() / 2) - (font.width(s) / 2), panel.getY() - 9, 0x404040);
         
-        drawButtonTooltips(PoseStack, j, i);
+        //drawButtonTooltips(PoseStack, j, i);
     }
 
     @Override

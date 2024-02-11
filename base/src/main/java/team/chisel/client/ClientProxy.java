@@ -47,12 +47,12 @@ public class ClientProxy {
     @SubscribeEvent
     public static void registerColor(ColorHandlerEvent.Item event) {
         for (Map.Entry<String, BlockEntry<BlockCarvable>> entry : Features.WATERSTONE.entrySet()) {
-            event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null && pPos != null && pTintIndex == 1 ? BiomeColors.getAverageWaterColor(pLevel, pPos) : -1, entry.getValue().get());
+            event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> (pLevel != null && pPos != null) ? pTintIndex == 1 ? BiomeColors.getAverageWaterColor(pLevel, pPos) : -1 : pTintIndex == 1 ? 0x3F76E4 : -1, entry.getValue().get());
             event.getItemColors().register((pStack, pTintIndex) -> pTintIndex == 1 ? 0x3F76E4 : -1, entry.getValue().get().asItem());
         }
         for (Map.Entry<DyeColor, Map<String, BlockEntry<BlockCarvable>>> map : Features.HEX_PLATING.entrySet()) {
             for (Map.Entry<String, BlockEntry<BlockCarvable>> entry : map.getValue().entrySet()) {
-                event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pLevel != null && pPos != null && pTintIndex == 1 ? map.getKey().getTextColor() : -1, entry.getValue().get());
+                event.getBlockColors().register((pState, pLevel, pPos, pTintIndex) -> pTintIndex == 1 ? map.getKey().getTextColor() : -1, entry.getValue().get());
                 event.getItemColors().register((pStack, pTintIndex) -> pTintIndex == 1 ? map.getKey().getTextColor()  : -1, entry.getValue().get().asItem());
             }
         }

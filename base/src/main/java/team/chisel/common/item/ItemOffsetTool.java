@@ -189,6 +189,7 @@ public class ItemOffsetTool extends Item {
             RenderSystem.polygonOffset(-1.0F, -10.0F);
             RenderSystem.disableCull();
 
+            //TODO fix
 //            VertexConsumer buf = event.getMultiBufferSource().getBuffer(ClientUtil.OFFSET_OVERLAY);
 //
 //            Direction moveDir = getMoveDir(face, hit.subtract(pos.getX(), pos.getY(), pos.getZ()));
