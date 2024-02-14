@@ -5,16 +5,22 @@
             "from": [ 8,  0, 7 ],
             "to"  : [ 8, 16, 8 ],
             "faces": {
-                "west": { "uv": [ 8, 0, 9, 16 ], "texture": "#bars" },
-                "east": { "uv": [ 9, 0, 8, 16 ], "texture": "#bars" }
+                "west": { "uv": [ 8, 0, 9, 16 ], "texture": "#bars" , "tintindex" :  0},
+                "east": { "uv": [ 9, 0, 8, 16 ], "texture": "#bars" , "tintindex" :  0}
             }
         }, {
             "from": [ 7,  0, 7 ],
             "to"  : [ 9, 16, 7 ],
             "faces": {
-                "north": { "uv": [ 7, 0, 9, 16 ], "texture": "#side" },
-                "south": { "uv": [ 9, 0, 7, 16 ], "texture": "#side" }
+                "north": { "uv": [ 7, 0, 9, 16 ], "texture": "#side" , "tintindex" :  0},
+                "south": { "uv": [ 9, 0, 7, 16 ], "texture": "#side" , "tintindex" :  0}
             }
         }
-    ]
+    ],
+    "ctm_version": 1,
+    "ctm_overrides": {
+        "0": {
+            "layer": "CUTOUT_MIPPED"
+        }
+    }
 }

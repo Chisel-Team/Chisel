@@ -5,29 +5,35 @@
             "from": [ 8, 0, 0 ],
             "to": [ 8, 16, 8 ],
             "faces": {
-                "west": { "uv": [ 16, 0,  8, 16 ], "texture": "#bars" },
-                "east": { "uv": [  8, 0, 16, 16 ], "texture": "#bars" }
+                "west": { "uv": [ 16, 0,  8, 16 ], "texture": "#bars" , "tintindex" :  0},
+                "east": { "uv": [  8, 0, 16, 16 ], "texture": "#bars" , "tintindex" :  0}
             }
         },
         {   "from": [ 7, 0, 0 ],
             "to": [ 9, 16, 7 ],
             "faces": {
-                "north": { "uv": [ 7, 0, 9, 16 ], "texture": "#side", "cullface": "north" }
+                "north": { "uv": [ 7, 0, 9, 16 ], "texture": "#side", "cullface": "north" , "tintindex" :  0}
             }
         },
         {   "from": [ 7, 0.001, 0 ],
             "to": [ 9, 0.001, 7 ],
             "faces": {
-                "down":  { "uv": [ 9, 7, 7, 0 ], "texture": "#edge" },
-                "up":    { "uv": [ 7, 0, 9, 7 ], "texture": "#edge" }
+                "down":  { "uv": [ 9, 7, 7, 0 ], "texture": "#edge" , "tintindex" :  0},
+                "up":    { "uv": [ 7, 0, 9, 7 ], "texture": "#edge" , "tintindex" :  0}
             }
         },
         {   "from": [ 7, 15.999, 0 ],
             "to": [ 9, 15.999, 7 ],
             "faces": {
-                "down":  { "uv": [ 9, 7, 7, 0 ], "texture": "#edge" },
-                "up":    { "uv": [ 7, 0, 9, 7 ], "texture": "#edge" }
+                "down":  { "uv": [ 9, 7, 7, 0 ], "texture": "#edge" , "tintindex" :  0},
+                "up":    { "uv": [ 7, 0, 9, 7 ], "texture": "#edge" , "tintindex" :  0}
             }
         }
-    ]
+    ],
+    "ctm_version": 1,
+    "ctm_overrides": {
+        "0": {
+            "layer": "CUTOUT_MIPPED"
+        }
+    }
 }

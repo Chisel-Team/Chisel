@@ -5,30 +5,36 @@
             "from": [ 7, 0.001, 7 ],
             "to"  : [ 9, 0.001, 9 ],
             "faces": {
-                "down":  { "uv": [ 7, 9, 9, 7 ], "texture": "#edge" },
-                "up"  :  { "uv": [ 7, 7, 9, 9 ], "texture": "#edge" }
+                "down":  { "uv": [ 7, 9, 9, 7 ], "texture": "#edge" , "tintindex" :  0},
+                "up"  :  { "uv": [ 7, 7, 9, 9 ], "texture": "#edge" , "tintindex" :  0}
             }
         }, {
             "from": [ 7, 15.999, 7 ],
             "to"  : [ 9, 15.999, 9 ],
             "faces": {
-                "down":  { "uv": [ 7, 9, 9, 7 ], "texture": "#edge" },
-                "up":    { "uv": [ 7, 7, 9, 9 ], "texture": "#edge" }
+                "down":  { "uv": [ 7, 9, 9, 7 ], "texture": "#edge" , "tintindex" :  0},
+                "up":    { "uv": [ 7, 7, 9, 9 ], "texture": "#edge" , "tintindex" :  0}
             }
         }, {
             "from": [ 8,  0, 7 ],
             "to"  : [ 8, 16, 9 ],
             "faces": {
-                "west": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" },
-                "east": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" }
+                "west": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" , "tintindex" :  0},
+                "east": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" , "tintindex" :  0}
             }
         }, {
             "from": [ 7,  0, 8 ],
             "to"  : [ 9, 16, 8 ],
             "faces": {
-                "north": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" },
-                "south": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" }
+                "north": { "uv": [ 7, 0, 9, 16 ], "texture": "#bars" , "tintindex" :  0},
+                "south": { "uv": [ 9, 0, 7, 16 ], "texture": "#bars" , "tintindex" :  0}
             }
         }
-    ]
+    ],
+    "ctm_version": 1,
+    "ctm_overrides": {
+        "0": {
+            "layer": "CUTOUT_MIPPED"
+        }
+    }
 }
