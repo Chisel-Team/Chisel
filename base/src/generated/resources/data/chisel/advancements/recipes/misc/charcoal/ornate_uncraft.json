@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chisel:charcoal/ornate_uncraft"
+    ]
+  },
+  "criteria": {
+    "has_charcoal_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chisel:charcoal/ornate"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chisel:charcoal/ornate_uncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_charcoal_block",
+      "has_the_recipe"
+    ]
+  ]
+}

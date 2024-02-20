@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel:block/planks/birch/crude_vertical_planks"
+    }
+  }
+}

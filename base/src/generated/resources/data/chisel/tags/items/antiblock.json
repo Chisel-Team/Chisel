@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:antiblock/white",
+    "chisel:antiblock/orange",
+    "chisel:antiblock/magenta",
+    "chisel:antiblock/light_blue",
+    "chisel:antiblock/yellow",
+    "chisel:antiblock/lime",
+    "chisel:antiblock/pink",
+    "chisel:antiblock/gray",
+    "chisel:antiblock/light_gray",
+    "chisel:antiblock/cyan",
+    "chisel:antiblock/purple",
+    "chisel:antiblock/blue",
+    "chisel:antiblock/brown",
+    "chisel:antiblock/green",
+    "chisel:antiblock/red",
+    "chisel:antiblock/black"
+  ]
+}

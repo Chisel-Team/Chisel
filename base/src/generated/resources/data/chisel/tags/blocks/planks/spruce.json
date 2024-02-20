@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:planks/spruce/large_planks",
+    "chisel:planks/spruce/crude_horizontal_planks",
+    "chisel:planks/spruce/vertical_planks",
+    "chisel:planks/spruce/crude_vertical_planks",
+    "chisel:planks/spruce/encased_planks",
+    "chisel:planks/spruce/encased_large_planks",
+    "chisel:planks/spruce/braced_planks",
+    "chisel:planks/spruce/shipping_crate",
+    "chisel:planks/spruce/paneling",
+    "chisel:planks/spruce/crude_paneling",
+    "chisel:planks/spruce/stacked",
+    "chisel:planks/spruce/smooth",
+    "chisel:planks/spruce/encased_smooth",
+    "chisel:planks/spruce/braid",
+    "chisel:planks/spruce/log_cabin",
+    "minecraft:spruce_planks"
+  ]
+}

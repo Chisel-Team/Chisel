@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:brownstone/default",
+    "chisel:brownstone/blocks",
+    "chisel:brownstone/doubleslab",
+    "chisel:brownstone/block",
+    "chisel:brownstone/weathered",
+    "chisel:brownstone/weathered_block",
+    "chisel:brownstone/weathered_doubleslab",
+    "chisel:brownstone/weathered_blocks",
+    "chisel:brownstone/weathered_half",
+    "chisel:brownstone/weathered_block_half"
+  ]
+}

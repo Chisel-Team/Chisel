@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:glasspane_stained/green/panel",
+    "chisel_legacy:glasspane_stained/green/framed",
+    "chisel_legacy:glasspane_stained/green/framed_fancy",
+    "chisel_legacy:glasspane_stained/green/streaks",
+    "chisel_legacy:glasspane_stained/green/rough",
+    "chisel_legacy:glasspane_stained/green/brick",
+    "minecraft:green_stained_glass_pane",
+    "#forge:glass_pane/green"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:bookshelf/jungle/rainbow",
+    "chisel:bookshelf/jungle/novice_necromancer",
+    "chisel:bookshelf/jungle/necromancer",
+    "chisel:bookshelf/jungle/redtomes",
+    "chisel:bookshelf/jungle/abandoned",
+    "chisel:bookshelf/jungle/hoarder",
+    "chisel:bookshelf/jungle/brim",
+    "chisel:bookshelf/jungle/historian",
+    "chisel:bookshelf/jungle/cans",
+    "chisel:bookshelf/jungle/papers"
+  ]
+}

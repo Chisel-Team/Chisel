@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:marblepillar/plainplain",
+    "chisel_legacy:marblepillar/plaingreek",
+    "chisel_legacy:marblepillar/greekplain",
+    "chisel_legacy:marblepillar/greekgreek",
+    "chisel_legacy:marblepillar/convexplain",
+    "chisel_legacy:marblepillar/carved",
+    "chisel_legacy:marblepillar/ornamental",
+    "chisel_legacy:marblepillar/simple",
+    "chisel_legacy:marblepillar/rough",
+    "chisel_legacy:marblepillar/widedecor",
+    "chisel_legacy:marblepillar/widegreek",
+    "chisel_legacy:marblepillar/wideplain",
+    "chisel_legacy:marblepillar/pillar",
+    "chisel_legacy:marblepillar/default",
+    "#forge:stone/marble"
+  ]
+}

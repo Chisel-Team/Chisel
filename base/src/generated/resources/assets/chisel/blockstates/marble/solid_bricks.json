@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel:block/marble/solid_bricks"
+    }
+  }
+}

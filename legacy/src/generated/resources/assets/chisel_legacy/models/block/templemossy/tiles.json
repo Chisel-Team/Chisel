@@ -1,0 +1,6 @@
+{
+  "parent": "chisel_legacy:block/cube_eldritch",
+  "textures": {
+    "all": "chisel_legacy:block/templemossy/tiles"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chisel:coal/pillar_uncraft"
+    ]
+  },
+  "criteria": {
+    "has_coal_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chisel:coal/pillar"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chisel:coal/pillar_uncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_coal_block",
+      "has_the_recipe"
+    ]
+  ]
+}

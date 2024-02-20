@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:wool/orange/legacy",
+    "chisel:wool/orange/llama",
+    "minecraft:orange_wool"
+  ]
+}

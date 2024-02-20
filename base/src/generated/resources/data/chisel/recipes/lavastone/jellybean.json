@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "***",
+    "*X*",
+    "***"
+  ],
+  "key": {
+    "*": {
+      "item": "minecraft:stone"
+    },
+    "X": {
+      "item": "minecraft:lava_bucket"
+    }
+  },
+  "result": {
+    "item": "chisel:lavastone/jellybean",
+    "count": 8
+  }
+}

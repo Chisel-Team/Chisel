@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel_legacy:block/glass/a1_glasswindow_ironfencemodern"
+    }
+  }
+}

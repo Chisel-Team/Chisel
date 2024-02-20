@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:glass_stained/light_blue/panel",
+    "chisel_legacy:glass_stained/light_blue/framed",
+    "chisel_legacy:glass_stained/light_blue/framed_fancy",
+    "chisel_legacy:glass_stained/light_blue/streaks",
+    "chisel_legacy:glass_stained/light_blue/rough",
+    "chisel_legacy:glass_stained/light_blue/brick",
+    "minecraft:light_blue_stained_glass",
+    "#forge:glass/light_blue"
+  ]
+}

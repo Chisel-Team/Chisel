@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel:block/terracotta/soft_bricks"
+    }
+  }
+}

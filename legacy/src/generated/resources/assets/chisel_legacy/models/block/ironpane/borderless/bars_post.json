@@ -1,0 +1,9 @@
+{
+  "parent": "chisel_legacy:block/bars_post",
+  "textures": {
+    "bars": "minecraft:block/iron_bars",
+    "particle": "minecraft:block/iron_bars",
+    "edge": "chisel_legacy:block/ironpane/borderless-top",
+    "side": "chisel_legacy:block/ironpane/borderless-side"
+  }
+}

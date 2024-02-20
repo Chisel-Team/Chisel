@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:glass_stained/purple/panel",
+    "chisel_legacy:glass_stained/purple/framed",
+    "chisel_legacy:glass_stained/purple/framed_fancy",
+    "chisel_legacy:glass_stained/purple/streaks",
+    "chisel_legacy:glass_stained/purple/rough",
+    "chisel_legacy:glass_stained/purple/brick",
+    "minecraft:purple_stained_glass",
+    "#forge:glass/purple"
+  ]
+}

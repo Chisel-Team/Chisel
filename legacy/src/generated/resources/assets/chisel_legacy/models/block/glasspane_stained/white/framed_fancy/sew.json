@@ -1,0 +1,8 @@
+{
+  "parent": "chisel_legacy:block/pane/colors/white/ctm_sew",
+  "textures": {
+    "pane": "chisel_legacy:block/glass_stained/white/framed",
+    "pane_ct": "chisel_legacy:block/glass_stained/white/framed_fancy-ctm",
+    "edge": "minecraft:block/white_stained_glass_pane_top"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "chisel:block/concrete/blue/solid_bricks"
+    }
+  }
+}

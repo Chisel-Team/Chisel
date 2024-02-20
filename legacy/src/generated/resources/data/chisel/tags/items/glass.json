@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:glass/terrain_glassbubble",
+    "chisel_legacy:glass/japanese",
+    "chisel_legacy:glass/terrain_glassdungeon",
+    "chisel_legacy:glass/terrain_glasslight",
+    "chisel_legacy:glass/terrain_glassnoborder",
+    "chisel_legacy:glass/terrain_glass_ornatesteel",
+    "chisel_legacy:glass/terrain_glass_screen",
+    "chisel_legacy:glass/terrain_glassshale",
+    "chisel_legacy:glass/terrain_glass_steelframe",
+    "chisel_legacy:glass/terrain_glassstone",
+    "chisel_legacy:glass/terrain_glassstreak",
+    "chisel_legacy:glass/terrain_glass_thickgrid",
+    "chisel_legacy:glass/terrain_glass_thingrid",
+    "chisel_legacy:glass/a1_glasswindow_ironfencemodern",
+    "chisel_legacy:glass/chrono",
+    "chisel_legacy:glass/chinese2",
+    "chisel_legacy:glass/japanese2",
+    "minecraft:glass",
+    "#forge:glass/colorless"
+  ]
+}

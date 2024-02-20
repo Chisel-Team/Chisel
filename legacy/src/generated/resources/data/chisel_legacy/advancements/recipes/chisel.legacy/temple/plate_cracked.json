@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chisel_legacy:temple/plate_cracked"
+    ]
+  },
+  "criteria": {
+    "has_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dyes/cyan"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chisel_legacy:temple/plate_cracked"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dye",
+      "has_the_recipe"
+    ]
+  ]
+}

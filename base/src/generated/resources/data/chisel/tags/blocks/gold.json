@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:gold/large_ingot",
+    "chisel:gold/small_ingot",
+    "chisel:gold/brick",
+    "chisel:gold/coin_heads",
+    "chisel:gold/coin_tails",
+    "chisel:gold/crate_dark",
+    "chisel:gold/crate_light",
+    "chisel:gold/plates",
+    "chisel:gold/rivets",
+    "chisel:gold/space",
+    "chisel:gold/space_black",
+    "chisel:gold/simple",
+    "chisel:gold/cart",
+    "chisel:gold/star",
+    "chisel:gold/goldeye",
+    "minecraft:gold_block",
+    "#forge:storage_blocks/gold"
+  ]
+}
