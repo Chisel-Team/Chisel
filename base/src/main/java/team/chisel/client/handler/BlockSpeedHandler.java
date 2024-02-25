@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -25,6 +26,10 @@ public class BlockSpeedHandler {
 
     private static Input manualInputCheck;
 
+    static {
+        speedupBlocks.add(Blocks.WHITE_CONCRETE);
+    }
+
     @SubscribeEvent
     public static void speedupPlayer(PlayerTickEvent event) {
         if (event.phase == Phase.START && event.side.isClient() && event.player.isOnGround() && event.player instanceof LocalPlayer) {
@@ -36,7 +41,7 @@ public class BlockSpeedHandler {
             if (speedupBlocks.contains(below.getBlock())) {
                 manualInputCheck.tick(false);
                 if ((manualInputCheck.forwardImpulse != 0 || manualInputCheck.leftImpulse != 0) && !player.isInWater()) {
-                    player.setDeltaMovement(player.getDeltaMovement().multiply(Configurations.concreteVelocityMult + 0.05, 1, Configurations.concreteVelocityMult + 0.05));
+                    player.setDeltaMovement(player.getDeltaMovement().multiply(Configurations.concreteVelocityMult.get() + 0.05, 1, Configurations.concreteVelocityMult.get() + 0.05));
                 }
             }
         }

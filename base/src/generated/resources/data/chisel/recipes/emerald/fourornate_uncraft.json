@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chisel:emerald/fourornate"
+    }
+  ],
+  "result": {
+    "item": "minecraft:emerald",
+    "count": 9
+  }
+}

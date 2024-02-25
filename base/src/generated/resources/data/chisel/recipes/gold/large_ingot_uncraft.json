@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chisel:gold/large_ingot"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gold_ingot",
+    "count": 9
+  }
+}

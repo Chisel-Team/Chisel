@@ -18,7 +18,9 @@ import com.google.common.base.Strings;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.BlockBuilder;
 import com.tterrag.registrate.builders.ItemBuilder;
+import com.tterrag.registrate.providers.DataGenContext;
 import com.tterrag.registrate.providers.ProviderType;
+import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
@@ -41,14 +43,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.ForgeRegistries;
 import team.chisel.api.carving.CarvingUtils;
 import team.chisel.api.carving.ICarvingGroup;
+import team.chisel.api.item.ItemModelTemplate;
+import team.chisel.client.data.ItemModelTemplates;
 import team.chisel.client.data.ModelTemplates;
 import team.chisel.client.data.VariantTemplates;
 
@@ -89,7 +95,9 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
     
     @Accessors(fluent = true)
     private ModelTemplate model = ModelTemplates.simpleBlock();
-    
+
+    @Accessors(fluent = true)
+    private ItemModelTemplate itemModel = ItemModelTemplates.generated();
     @Accessors(fluent = true)
     private RecipeTemplate recipe = RecipeTemplate.none();
     
@@ -133,6 +141,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                 .opaque(opaque)
                 .localizedName(template.getLocalizedName())
                 .model(template.getModelTemplate().orElse(model))
+                .itemModel(template.getItemModelTemplate().orElse(itemModel))
                 .recipe(template.getRecipeTemplate().orElse(recipe))
                 .tooltip(template.getTooltip());
     }
@@ -211,7 +220,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
             data[i] = variations.get(i).doBuild();
         }
         Map<String, BlockEntry<T>> ret = new HashMap<>(data.length);
-        ICarvingGroup group = CarvingUtils.itemGroup(this.group, this.groupName);
+        ICarvingGroup group = CarvingUtils.itemGroup(this.group, this.groupName, this.registrate);
         for (int i = 0; i < data.length; i++) {
             if (Strings.emptyToNull(data[i].getName()) != null) {
                 final int index = i;
@@ -221,6 +230,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .block(material, p -> provider.createBlock(p, new VariationDataImpl(ret.get(var.getName()), var.getName(), var.getDisplayName(), group)))
                         .initialProperties(initialProperties == null ? NonNullSupplier.of(Blocks.STONE.delegate) : initialProperties)
                         .properties(after)
+                        .properties(p -> builder.opaque ? p.noOcclusion() : p)
                         .addLayer(layer)
                         .transform(this::addTags)
 //                        .properties(color == null ? after : after.andThen(p -> { p.blockColors = $ -> color; return p; }))
@@ -230,7 +240,7 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
                         .loot(loot)
                         .item(provider::createBlockItem)
                             // TODO fix this mess in forge, it should check for explicitly "block/" or "item/" not any folder prefix
-                            .model((ctx, prov) -> prov.withExistingParent("item/" + prov.name(ctx::getEntry), new ResourceLocation(prov.modid(ctx::getEntry), "block/" + prov.name(ctx::getEntry))))
+                            .model((ctx, prov) -> builder.itemModel.accept(prov, ctx.getEntry()))
                             .transform(this::addTags)
                             .build()
                         .register());
@@ -300,6 +310,10 @@ public class ChiselBlockBuilder<T extends Block & ICarvable> {
         @Setter
         @Accessors(fluent = true)
         private ModelTemplate model = ModelTemplates.simpleBlock();
+
+        @Setter
+        @Accessors(fluent = true)
+        private ItemModelTemplate itemModel = ItemModelTemplates.generated();
         
         @Setter
         @Accessors(fluent = true)

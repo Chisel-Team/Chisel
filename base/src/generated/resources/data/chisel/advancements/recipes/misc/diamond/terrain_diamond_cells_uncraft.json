@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chisel:diamond/terrain_diamond_cells_uncraft"
+    ]
+  },
+  "criteria": {
+    "has_diamond_block": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chisel:diamond/terrain_diamond_cells"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chisel:diamond/terrain_diamond_cells_uncraft"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_diamond_block",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -56,7 +56,7 @@ minecraft {
             }
             
             args '--mod', 'chisel', '--all', '--output', '"' + project.file('src/generated/resources/') + '"',
-                 '--existing', '"' + project.file('src/main/resources') + '"' 
+                 '--existing', '"' + project.file('src/main/resources') + '"'
             
         }
     }

@@ -2,5 +2,11 @@
 	"animation": {
 		"interpolate": true,
 		"frametime": 2
+	},
+	"ctm": {
+		"ctm_version": 1,
+		"extra": {
+			"light": 7
+		}
 	}
 }

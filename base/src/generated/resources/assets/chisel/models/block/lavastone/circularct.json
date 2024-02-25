@@ -1,0 +1,8 @@
+{
+  "parent": "chisel:block/lavastone/cube_ctm_lava",
+  "textures": {
+    "bot": "minecraft:block/lava_still",
+    "top": "chisel:block/fluid/circular",
+    "connect_top": "chisel:block/fluid/circular-ctm"
+  }
+}

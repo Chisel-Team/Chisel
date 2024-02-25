@@ -1,0 +1,7 @@
+{
+  "parent": "chisel_legacy:block/pane/post",
+  "textures": {
+    "pane": "chisel_legacy:block/glass_stained/light_gray/framed",
+    "edge": "minecraft:block/light_gray_stained_glass_pane_top"
+  }
+}

@@ -286,11 +286,11 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
     }
     
     public float getSpeedFactor() {
-        return Configurations.autoChiselPowered ? (float) energyStorage.getEnergyStored() / energyStorage.getMaxEnergyStored() : 1;
+        return Configurations.autoChiselPowered.get() ? (float) energyStorage.getEnergyStored() / energyStorage.getMaxEnergyStored() : 1;
     }
     
     public int getPowerProgressPerTick() {
-        int maxPerTick = Configurations.autoChiselNeedsPower ? (BASE_PROGRESS + SPEEDUP_PROGRESS) : SPEEDUP_PROGRESS;
+        int maxPerTick = Configurations.autoChiselNeedsPower.get() ? (BASE_PROGRESS + SPEEDUP_PROGRESS) : SPEEDUP_PROGRESS;
         return (int) Math.ceil(getSpeedFactor() * maxPerTick);
     }
     
@@ -336,7 +336,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
             return;
         }
                 
-        if (energyStorage.getEnergyStored() == 0 && Configurations.autoChiselNeedsPower) {
+        if (energyStorage.getEnergyStored() == 0 && Configurations.autoChiselNeedsPower.get()) {
             return;
         }
         
@@ -395,7 +395,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
             ICarvingVariation sourceVar = CarvingUtils.getChiselRegistry().getVariation(source.getItem()).orElse(null);
             if (sourceVar != v) {
                 if (progress < MAX_PROGRESS) {
-                    if (!Configurations.autoChiselNeedsPower) {
+                    if (!Configurations.autoChiselNeedsPower.get()) {
                         // Add constant progress
                         progress = Math.min(MAX_PROGRESS, progress + BASE_PROGRESS);
                     }
@@ -405,7 +405,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
                     int powerToUse = getUsagePerTick();
                     // Avoid NaN
                     if (toUse > 0 && powerToUse > 0) {
-                        if (Configurations.autoChiselPowered) {
+                        if (Configurations.autoChiselPowered.get()) {
                             int used = energyStorage.extractEnergy(powerToUse, false);
                             progress += toUse * ((float) used / powerToUse);
                         } else {
@@ -460,7 +460,7 @@ public class TileAutoChisel extends BlockEntity implements Nameable, MenuProvide
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.orEmpty(capability, 
                     viewCache.computeIfAbsent(facing, f -> LazyOptional.of(() -> new ItemView(f))));
-        } else if (Configurations.autoChiselPowered && capability == CapabilityEnergy.ENERGY) {
+        } else if (Configurations.autoChiselPowered.get() && capability == CapabilityEnergy.ENERGY) {
             return CapabilityEnergy.ENERGY.orEmpty(capability, energyCap);
         }
         return super.getCapability(capability, facing);

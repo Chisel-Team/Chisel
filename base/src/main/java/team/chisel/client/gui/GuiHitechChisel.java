@@ -5,13 +5,16 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.mojang.blaze3d.platform.Lighting;
+import com.mojang.blaze3d.vertex.*;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.block.CrossCollisionBlock;
 import org.apache.commons.lang3.ArrayUtils;
 import org.lwjgl.opengl.GL11;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 
@@ -22,9 +25,6 @@ import lombok.experimental.Accessors;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.client.renderer.Rect2i;
-import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -52,6 +52,7 @@ import net.minecraftforge.client.model.data.EmptyModelData;
 import team.chisel.Chisel;
 import team.chisel.api.IChiselItem;
 import team.chisel.client.util.ChiselLangKeys;
+import team.chisel.common.block.BlockCarvablePane;
 import team.chisel.common.inventory.ContainerChiselHitech;
 import team.chisel.common.util.NBTUtil;
 
@@ -98,7 +99,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         public void render(PoseStack PoseStack, int mouseX, int mouseY, float partialTicks) {
             this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
-            GuiHitechChisel.this.getMinecraft().getTextureManager().bindForSetup(TEXTURE);
+            RenderSystem.setShaderTexture(0, TEXTURE);
             float a = isMouseOver(mouseX, mouseY) ? 1 : 0.2f;
             int u = rotate ? 0 : 16;
             int v = 238;
@@ -122,22 +123,22 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             return false;
         }
     }
-    
+
     @RequiredArgsConstructor
     private static class FakeBlockAccess implements BlockAndTintGetter {
-        
+
         private final GuiHitechChisel gui;
-        
+
         @Setter
         private BlockState state = Blocks.AIR.defaultBlockState();
-        
+
         private final LevelLightEngine light = new LevelLightEngine(new LightChunkGetter() {
-            
+
             @Override
             public BlockGetter getLevel() {
                 return FakeBlockAccess.this;
             }
-            
+
             @Override
             @Nullable
             public BlockGetter getChunkForLighting(int p_217202_1_, int p_217202_2_) {
@@ -145,10 +146,15 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             }
         }, true, true);
 
-        //@Override
-        //public int getCombinedLight(BlockPos pos, int lightValue) {
-        //    return 0xF000F0;
-        //}
+        @Override
+        public int getRawBrightness(BlockPos pBlockPos, int pAmount) {
+            return 0xF000F0;
+        }
+
+        @Override
+        public int getBrightness(LightLayer pLightType, BlockPos pBlockPos) {
+            return 15;
+        }
 
         @Override
         public BlockState getBlockState(BlockPos pos) {
@@ -191,15 +197,19 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
             return 0;
         }
     }
-    
+
+    //Thanks alex for the light fix
+    public static final Vector3f SCENE_LIGHT_1 = new Vector3f(1, 0, 1);
+    public static final Vector3f SCENE_LIGHT_2 = new Vector3f(-1, 1, -1);
+
     private static final Rect2i panel = new Rect2i(8, 14, 74, 74);
     
     private static final ResourceLocation TEXTURE = new ResourceLocation("chisel", "textures/chiselguihitech.png");
     
     private final ContainerChiselHitech containerHitech;
-    
+
     private FakeBlockAccess fakeworld = new FakeBlockAccess(this);
-    
+
     private boolean panelClicked;
     private int clickButton;
     private long lastDragTime;
@@ -343,7 +353,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         }
 
         if (buttonRotate.rotate() && momentumX == 0 && momentumY == 0 && !panelClicked && System.currentTimeMillis() - lastDragTime > 2000) {
-            rotY = initRotY + (f * 2);
+            rotY = initRotY + (2 * f);
         }
         
         if (panelClicked && clickButton == 0) {
@@ -395,13 +405,14 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
 
                 pStack.translate(panel.getX() + (panel.getWidth() / 2), panel.getY() + (panel.getHeight() / 2), 100);
 
-                ShaderInstance shader = RenderSystem.getShader();
                 RenderSystem.setShader(GameRenderer::getBlockShader);
-                pStack.pushPose();
+                Matrix4f projM = new Matrix4f();
+                projM.setIdentity();
                 pStack.setIdentity();
                 int scale = (int) getMinecraft().getWindow().getGuiScale();
-                pStack.mulPoseMatrix(Matrix4f.perspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000));
-//                RenderSystem.matrixMode(GL11.GL_MODELVIEW);
+                projM.multiply(Matrix4f.perspective(60, (float) panel.getWidth() / panel.getHeight(), 0.01F, 4000));
+                RenderSystem.backupProjectionMatrix();
+                RenderSystem.setProjectionMatrix(projM);
                 pStack.translate(-panel.getX() - panel.getWidth() / 2, -panel.getY() - panel.getHeight() / 2, 0);
                 RenderSystem.viewport((getGuiLeft() + panel.getX()) * scale, getMinecraft().getWindow().getHeight() - (getGuiTop() + panel.getY() + panel.getHeight()) * scale, panel.getWidth() * scale, panel.getHeight() * scale);
                 RenderSystem.clear(GL11.GL_DEPTH_BUFFER_BIT, true);
@@ -410,14 +421,17 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
                 float sc = (float) (300 + 8 * buttonPreview.getType().getScale() * (Math.sqrt(zoom + 99) - 9));
                 pStack.scale(-sc, -sc, sc);
 
-                pStack.mulPose(Vector3f.XP.rotation(-rotX));
-                pStack.mulPose(Vector3f.YP.rotation(rotY));
+                pStack.mulPose(Vector3f.XP.rotationDegrees(-rotX));
+                pStack.mulPose(Vector3f.YP.rotationDegrees(rotY));
                 pStack.translate(-1.5, -2.5, -0.5);
                 
                 RenderSystem.enableDepthTest();
 
                 Block block = Block.byItem(stack.getItem());
                 BlockState state = block.defaultBlockState();
+                if (block instanceof CrossCollisionBlock) {
+                    state = state.setValue(CrossCollisionBlock.EAST, true).setValue(CrossCollisionBlock.WEST, true);
+                }
 
                 if (state != null && state != erroredState) {
                     erroredState = null;
@@ -425,32 +439,33 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
                     fakeworld.setState(state);
 
                     RenderSystem.setShaderTexture(0, InventoryMenu.BLOCK_ATLAS);
-                    BufferBuilder builder = Tesselator.getInstance().getBuilder();
+                    MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+                    VertexConsumer consumer = bufferSource.getBuffer(ItemBlockRenderTypes.getRenderType(state, false));
+                    RenderSystem.setupGuiFlatDiffuseLighting(SCENE_LIGHT_1, SCENE_LIGHT_2);
+                    Random pRandom = new Random();
                     try {
-                        PoseStack ms = new PoseStack();
                         for (BlockPos pos : buttonPreview.getType().getPositions()) {
-                            ms.pushPose();
-                            ms.translate(pos.getX(), pos.getY(), pos.getZ());
-                            brd.renderBatched(state, pos, fakeworld, ms, builder, true, new Random(), EmptyModelData.INSTANCE);
-                            ms.popPose();
+                            pStack.pushPose();
+                            pStack.translate(pos.getX(), pos.getY(), pos.getZ());
+                            brd.renderBatched(state, pos, fakeworld, pStack, consumer, true, pRandom, EmptyModelData.INSTANCE);
+                            pStack.popPose();
                         }
                     } catch (Exception e) {
                         erroredState = state;
                         Chisel.logger.error("Exception rendering block {}", state, e);
                     } finally {
                         if (erroredState == null) {
-                            builder.end();
+                            bufferSource.endBatch(ItemBlockRenderTypes.getRenderType(state, false));
                         } else {
-                            builder.discard();
+
                         }
                     }
                 }
 
                 pStack.popPose();
-//                RenderSystem.matrixMode(GL11.GL_PROJECTION);
-//                RenderSystem.popMatrix();
-//                RenderSystem.matrixMode(GL11.GL_MODELVIEW);
+                RenderSystem.restoreProjectionMatrix();
                 RenderSystem.viewport(0, 0, getMinecraft().getWindow().getWidth(), getMinecraft().getWindow().getHeight());
+                Lighting.setupFor3DItems();
             }
         }
     }
@@ -488,7 +503,7 @@ public class GuiHitechChisel extends GuiChisel<ContainerChiselHitech> {
         TranslatableComponent s = ChiselLangKeys.PREVIEW.getComponent();
         font.draw(PoseStack, s, panel.getX() + (panel.getWidth() / 2) - (font.width(s) / 2), panel.getY() - 9, 0x404040);
         
-        drawButtonTooltips(PoseStack, j, i);
+        //drawButtonTooltips(PoseStack, j, i);
     }
 
     @Override

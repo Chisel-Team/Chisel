@@ -26,8 +26,8 @@ import team.chisel.api.block.VariationData;
 
 public class BlockCarvableIce extends BlockCarvable {
 
-	public BlockCarvableIce(VariationData variation) {
-		super(Block.Properties.copy(Blocks.ICE), variation);
+	public BlockCarvableIce(Properties prop, VariationData variation) {
+		super(prop, variation);
 	}
 
 	// From IceBlock - Do Not Edit

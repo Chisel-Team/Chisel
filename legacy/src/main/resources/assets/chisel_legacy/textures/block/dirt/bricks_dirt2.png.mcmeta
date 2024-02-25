@@ -1,0 +1,9 @@
+{
+  "ctm": {
+    "ctm_version": 1,
+    "type": "pillar",
+    "textures": [
+      "chisel_legacy:block/dirt/bricks_dirt2-ctmv"
+    ]
+  }
+}

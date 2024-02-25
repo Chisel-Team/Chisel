@@ -45,9 +45,9 @@ import team.chisel.common.util.NBTUtil;
 public class ItemChisel extends Item implements IChiselItem {
     
     public enum ChiselType {
-        IRON(Configurations.ironChiselMaxDamage, Configurations.ironChiselAttackDamage),
-        DIAMOND(Configurations.diamondChiselMaxDamage, Configurations.diamondChiselAttackDamage),
-        HITECH(Configurations.hitechChiselMaxDamage, Configurations.hitechChiselAttackDamage)
+        IRON(Configurations.ironChiselMaxDamage.get(), Configurations.ironChiselAttackDamage.get()),
+        DIAMOND(Configurations.diamondChiselMaxDamage.get(), Configurations.diamondChiselAttackDamage.get()),
+        HITECH(Configurations.hitechChiselMaxDamage.get(), Configurations.hitechChiselAttackDamage.get())
         ;
 
         final int maxDamage;
@@ -69,14 +69,14 @@ public class ItemChisel extends Item implements IChiselItem {
     
     @Override
     public int getMaxDamage(ItemStack stack) {
-        if (Configurations.allowChiselDamage)
+        if (Configurations.allowChiselDamage.get())
             return type.maxDamage;
         return 0;
     }
 
     @Override
     public boolean canBeDepleted() {
-        return Configurations.allowChiselDamage;
+        return Configurations.allowChiselDamage.get();
     }
 
     @Override
@@ -95,11 +95,11 @@ public class ItemChisel extends Item implements IChiselItem {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level world, List<Component> list, TooltipFlag flag) {
         list.add(TT_CHISEL_GUI.format(ChatFormatting.AQUA, ChatFormatting.GRAY));
-        if (type != ChiselType.IRON || Configurations.ironChiselCanLeftClick) {
+        if (type != ChiselType.IRON || Configurations.ironChiselCanLeftClick.get()) {
             list.add(TT_CHISEL_LC1.format(ChatFormatting.AQUA, ChatFormatting.GRAY));
             list.add(TT_CHISEL_LC2.format(ChatFormatting.AQUA, ChatFormatting.GRAY));
         }
-        if (type != ChiselType.IRON || Configurations.ironChiselHasModes) {
+        if (type != ChiselType.IRON || Configurations.ironChiselHasModes.get()) {
             list.add(new TextComponent(""));
             list.add(TT_CHISEL_MODES.getComponent());
             list.add(TT_CHISEL_SELECTED_MODE.format(ChatFormatting.GREEN, new TranslatableComponent(NBTUtil.getChiselMode(stack).getUnlocName() + ".name")));
@@ -138,17 +138,17 @@ public class ItemChisel extends Item implements IChiselItem {
 
     @Override
     public boolean onChisel(Level world, Player player, ItemStack chisel, ICarvingVariation target) {
-        return Configurations.allowChiselDamage;
+        return Configurations.allowChiselDamage.get();
     }
 
     @Override
     public boolean canChiselBlock(Level world, Player player, InteractionHand hand, BlockPos pos, BlockState state) {
-        return type == ChiselType.HITECH || type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick;
+        return type == ChiselType.HITECH || type == ChiselType.DIAMOND || Configurations.ironChiselCanLeftClick.get();
     }
 
     @Override
     public boolean supportsMode(Player player, ItemStack chisel, IChiselMode mode) {
-        return type == ChiselType.HITECH || ((type == ChiselType.DIAMOND || Configurations.ironChiselHasModes) && mode != ChiselMode.CONTIGUOUS && mode != ChiselMode.CONTIGUOUS_2D);
+        return type == ChiselType.HITECH || ((type == ChiselType.DIAMOND || Configurations.ironChiselHasModes.get()) && mode != ChiselMode.CONTIGUOUS && mode != ChiselMode.CONTIGUOUS_2D);
     }
 
     // TODO implement ChiselController

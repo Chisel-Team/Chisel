@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:metals/electrum/caution",
+    "chisel:metals/electrum/crate",
+    "chisel:metals/electrum/thermal",
+    "chisel:metals/electrum/machine",
+    "chisel:metals/electrum/badgreggy",
+    "chisel:metals/electrum/bolted",
+    "chisel:metals/electrum/scaffold",
+    "#forge:storage_blocks/electrum"
+  ]
+}

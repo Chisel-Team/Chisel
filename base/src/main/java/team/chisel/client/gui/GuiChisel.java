@@ -194,6 +194,7 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
              * 
              * So to avoid this we apply either method based on if the slot has an item to render or not.
              */
+
             if (slot.hasItem()) {
                 RenderSystem.getModelViewStack().pushPose();
                 RenderSystem.getModelViewStack().scale(2, 2, 1);
@@ -229,10 +230,10 @@ public class GuiChisel<T extends ChiselContainer> extends AbstractContainerScree
     }
 
     private void drawSlotOverlay(PoseStack PoseStack, AbstractContainerScreen<?> gui, int x, int y, Slot slot, int u, int v, int padding) {
-        //if (scaleActive) {
+        if (scaleActive) {
             gui.blit(PoseStack, x + (slot.x - 16 - padding), y + (slot.y - 16 - padding), u, v, 48 + padding, 48 + padding);
 //        } else {
 //            gui.blit(PoseStack, x + (slot.x - padding), y, u, v, 16, 16);
-//        }
+        }
     }
 }

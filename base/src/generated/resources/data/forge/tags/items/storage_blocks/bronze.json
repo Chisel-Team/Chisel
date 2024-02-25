@@ -1,4 +1,12 @@
 {
   "replace": false,
-  "values": []
+  "values": [
+    "chisel:metals/bronze/caution",
+    "chisel:metals/bronze/crate",
+    "chisel:metals/bronze/thermal",
+    "chisel:metals/bronze/machine",
+    "chisel:metals/bronze/badgreggy",
+    "chisel:metals/bronze/bolted",
+    "chisel:metals/bronze/scaffold"
+  ]
 }

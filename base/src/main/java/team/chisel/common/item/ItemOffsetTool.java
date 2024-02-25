@@ -119,11 +119,11 @@ public class ItemOffsetTool extends Item {
     public Direction getMoveDir(Direction face, Vec3 hitVec) {
         Map<Double, Direction> map = Maps.newHashMap();
         if (face.getStepX() != 0) {
-            fillMap(map, hitVec.z, hitVec.y, DOWN, UP, NORTH, SOUTH);
+            fillMap(map, hitVec.z - (int) hitVec.z, hitVec.y - (int) hitVec.y, DOWN, UP, NORTH, SOUTH);
         } else if (face.getStepY() != 0) {
-            fillMap(map, hitVec.x, hitVec.z, NORTH, SOUTH, WEST, EAST);
+            fillMap(map, hitVec.x - (int) hitVec.x, hitVec.z - (int) hitVec.z, NORTH, SOUTH, WEST, EAST);
         } else if (face.getStepZ() != 0) {
-            fillMap(map, hitVec.x, hitVec.y, DOWN, UP, WEST, EAST);
+            fillMap(map, hitVec.x - (int) hitVec.x, hitVec.y - (int) hitVec.y, DOWN, UP, WEST, EAST);
         }
         List<Double> keys = Lists.newArrayList(map.keySet());
         Collections.sort(keys);
@@ -164,20 +164,20 @@ public class ItemOffsetTool extends Item {
             Matrix4f mat = ms.last().pose();
 
             if (face.getStepX() != 0) {
-            	linesBuf.vertex(mat, x, 0, 0).color(0, 0, 0, 1f).endVertex();
-                linesBuf.vertex(mat, x, 1, 1).color(0, 0, 0, 1f).endVertex();
-                linesBuf.vertex(mat, x, 1, 0).color(0, 0, 0, 1f).endVertex();
-                linesBuf.vertex(mat, x, 0, 1).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, x, 0, 0).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
+                linesBuf.vertex(mat, x, 1, 1).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
+                linesBuf.vertex(mat, x, 1, 0).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
+                linesBuf.vertex(mat, x, 0, 1).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
             } else if (face.getStepY() != 0) {
-            	linesBuf.vertex(mat, 0, y, 0).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.vertex(mat, 1, y, 1).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.vertex(mat, 1, y, 0).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.vertex(mat, 0, y, 1).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, 0, y, 0).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
+            	linesBuf.vertex(mat, 1, y, 1).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
+            	linesBuf.vertex(mat, 1, y, 0).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
+            	linesBuf.vertex(mat, 0, y, 1).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
             } else {
-            	linesBuf.vertex(mat, 0, 0, z).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.vertex(mat, 1, 1, z).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.vertex(mat, 1, 0, z).color(0, 0, 0, 1f).endVertex();
-            	linesBuf.vertex(mat, 0, 1, z).color(0, 0, 0, 1f).endVertex();
+            	linesBuf.vertex(mat, 0, 0, z).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
+            	linesBuf.vertex(mat, 1, 1, z).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
+            	linesBuf.vertex(mat, 1, 0, z).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
+            	linesBuf.vertex(mat, 0, 1, z).color(0, 0, 0, 1f).normal(0,1,0).endVertex();
             }
 
             Vec3 hit = target.getLocation();
@@ -189,6 +189,7 @@ public class ItemOffsetTool extends Item {
             RenderSystem.polygonOffset(-1.0F, -10.0F);
             RenderSystem.disableCull();
 
+            //TODO fix
             VertexConsumer buf = event.getMultiBufferSource().getBuffer(ClientUtil.OFFSET_OVERLAY);
 
             Direction moveDir = getMoveDir(face, hit.subtract(pos.getX(), pos.getY(), pos.getZ()));
@@ -199,27 +200,30 @@ public class ItemOffsetTool extends Item {
             boolean isY = moveDir.getStepY() != 0;
             boolean isZ = moveDir.getStepZ() != 0;
             float alpha = 0x55 / 255f;
-
-            // Always draw the center point first, then draw the next two points.
-            // Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
-            if (face.getStepX() != 0) {
-                buf.vertex(mat, x, 0.5f, 0.5f).color(1, 1, 1, alpha).endVertex();
-                buf.vertex(mat, x, isY ? clampedY : 0, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
-                buf.vertex(mat, x, isY ? clampedY : 1, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
-            } else if (face.getStepY() != 0) {
-                buf.vertex(mat, 0.5f, y, 0.5f).color(1, 1, 1, alpha).endVertex();
-                buf.vertex(mat, isX ? clampedX : 0, y, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
-                buf.vertex(mat, isX ? clampedX : 1, y, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
-            } else {
-                buf.vertex(mat, 0.5f, 0.5f, z).color(1, 1, 1, alpha).endVertex();
-                buf.vertex(mat, isX ? clampedX : 0, isY ? clampedY : 0, z).color(1, 1, 1, alpha).endVertex();
-                buf.vertex(mat, isX ? clampedX : 1, isY ? clampedY : 1, z).color(1, 1, 1, alpha).endVertex();
-            }
-
+//
+//            // Always draw the center point first, then draw the next two points.
+//            // Use either the move dir offset, or 0/1 if the move dir is not offset in this direction
+//            if (face.getStepX() != 0) {
+//                buf.vertex(mat, x, 0.5f, 0.5f).color(1, 1, 1, alpha).endVertex();
+//                buf.vertex(mat, x, isY ? clampedY : 0, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
+//                buf.vertex(mat, x, isY ? clampedY : 1, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
+//            } else if (face.getStepY() != 0) {
+//                buf.vertex(mat, 0.5f, y, 0.5f).color(1, 1, 1, alpha).endVertex();
+//                buf.vertex(mat, isX ? clampedX : 0, y, isZ ? clampedZ : 0).color(1, 1, 1, alpha).endVertex();
+//                buf.vertex(mat, isX ? clampedX : 1, y, isZ ? clampedZ : 1).color(1, 1, 1, alpha).endVertex();
+//            } else {
+//                buf.vertex(mat, 0.5f, 0.5f, z).color(1, 1, 1, alpha).endVertex();
+//                buf.vertex(mat, isX ? clampedX : 0, isY ? clampedY : 0, z).color(1, 1, 1, alpha).endVertex();
+//                buf.vertex(mat, isX ? clampedX : 1, isY ? clampedY : 1, z).color(1, 1, 1, alpha).endVertex();
+//            }
+//
             ((MultiBufferSource.BufferSource)event.getMultiBufferSource()).endBatch(ClientUtil.OFFSET_OVERLAY);
 
             RenderSystem.disablePolygonOffset();
             RenderSystem.polygonOffset(0.0F, 0.0F);
+            RenderSystem.defaultBlendFunc();
+            RenderSystem.enableCull();
+            RenderSystem.disableBlend();
             ms.popPose();
         }
     }

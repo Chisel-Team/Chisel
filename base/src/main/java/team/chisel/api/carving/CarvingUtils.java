@@ -4,9 +4,12 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Objects;
 
+import com.tterrag.registrate.Registrate;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import net.minecraft.Util;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -55,17 +58,18 @@ public class CarvingUtils {
 	public static int hashStack(ItemStack stack) {
 	    return Objects.hashCode(stack.getItem(), stack.getTag());
 	}
-	
-	private static TranslatableComponent getDisplayName(TagKey<?> tag, String name) {
-	    return Chisel.registrate().addLang("group", tag.location(), name);
+
+	//TODO Maybe make registrate ignore or log duplicate keys...
+	private static TranslatableComponent getDisplayName(TagKey<?> tag, String name, Registrate registrate) {
+	    return name.isEmpty() ? new TranslatableComponent(Util.makeDescriptionId("group", tag.location())) : registrate.addLang("group", tag.location(), name);
 	}
 
-    public static ICarvingGroup itemGroup(TagKey<Block> blocks, String name) {
-        return new BlockTagGroup(blocks, getDisplayName(blocks, name));
+    public static ICarvingGroup itemGroup(TagKey<Block> blocks, String name, Registrate registrate) {
+        return new BlockTagGroup(blocks, getDisplayName(blocks, name, registrate));
     }
 
-    public static ICarvingGroup blockGroup(TagKey<Item> items, String name) {
-        return new ItemTagGroup(items, getDisplayName(items, name));
+    public static ICarvingGroup blockGroup(TagKey<Item> items, String name, Registrate registrate) {
+        return new ItemTagGroup(items, getDisplayName(items, name, registrate));
     }
 	
 	@RequiredArgsConstructor(access = AccessLevel.PROTECTED)

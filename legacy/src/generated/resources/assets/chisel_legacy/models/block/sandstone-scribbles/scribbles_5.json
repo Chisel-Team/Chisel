@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "chisel_legacy:block/sandstone-scribbles/scribbles_5-side",
+    "end": "chisel_legacy:block/sandstone-scribbles/scribbles_0-top"
+  }
+}

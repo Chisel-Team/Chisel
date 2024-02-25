@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "#y",
+    "down": "#y",
+    "up": "#y",
+    "north": "#z",
+    "east": "#x",
+    "south": "#z",
+    "west": "#x"
+  }
+}

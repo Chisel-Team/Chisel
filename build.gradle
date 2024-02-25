@@ -80,6 +80,9 @@ allprojects {
         	    includeGroup "org.spongepowered"
         	}
         }
+        flatDir {
+            dirs 'lib'
+        }
     }
     
     configurations {
@@ -158,7 +161,8 @@ subprojects {
     dependencies {
         minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-        implementation fg.deobf("team.chisel.ctm:CTM:${minecraft_version}-${ctm_version}")
+        runtimeOnly fg.deobf("team.chisel.ctm:CTM_DEV:1.18.2-1.1.6+487b597")
+        compileOnly fg.deobf("team.chisel.ctm:CTM:${minecraft_version}-${ctm_version}")
         implementation fg.deobf("curse.maven:lazydfu-460819:3544496")
         
         compileOnly fg.deobf("mcp.mobius.waila:wthit-api:forge-${wthit_version}")

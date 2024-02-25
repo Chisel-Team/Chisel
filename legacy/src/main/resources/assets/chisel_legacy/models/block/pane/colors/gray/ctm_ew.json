@@ -1,0 +1,48 @@
+{
+    "ambientocclusion": false,
+    "textures": {
+        "particle": "#pane"
+    },
+    "elements": [{
+        "from": [  0,  0, 7 ],
+        "to"  : [ 16, 16, 9 ],
+        "faces": {
+            "down" : { "texture": "#edge", "uv": [ 9, 16, 7,  0 ], "rotation": 90, "cullface": "down" },
+            "up"   : { "texture": "#edge", "uv": [ 9,  0, 7, 16 ], "rotation": 90, "cullface": "up" },
+            "north": { "texture": "#pane", "tintindex": 0 },
+            "south": { "texture": "#pane", "tintindex": 0 },
+            "east" : { "texture": "#edge", "cullface": "east" },
+            "west" : { "texture": "#edge", "cullface": "west" }
+        }
+    }],
+    "ctm_version": 1,
+    "ctm_overrides": {
+        "0": {
+            "type": "ctm",
+            "layer": "TRANSLUCENT",
+            "textures": [ "#pane_ct" ],
+            "extra": {
+                "connect_inside": true,
+                "use_actual_state": true,
+                "connect_to": {
+                    "NORTH": [
+                        { "block": "chisel:glasspanedyedgray", "predicate": [{ "east" : true }] },
+                        { "block": "chisel:glasspanedyedgray", "predicate": [{ "west" : true }] }
+                    ],
+                    "SOUTH": [
+                        { "block": "chisel:glasspanedyedgray", "predicate": [{ "east" : true }] },
+                        { "block": "chisel:glasspanedyedgray", "predicate": [{ "west" : true }] }
+                    ],
+                    "EAST" : [
+                        { "block": "chisel:glasspanedyedgray", "predicate": [{ "north": true }] },
+                        { "block": "chisel:glasspanedyedgray", "predicate": [{ "south": true }] }
+                    ],
+                    "WEST" : [
+                        { "block": "chisel:glasspanedyedgray", "predicate": [{ "north": true }] },
+                        { "block": "chisel:glasspanedyedgray", "predicate": [{ "south": true }] }
+                    ]
+                }
+            }
+        }
+    }
+}

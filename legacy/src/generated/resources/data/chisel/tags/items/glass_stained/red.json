@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:glass_stained/red/panel",
+    "chisel_legacy:glass_stained/red/framed",
+    "chisel_legacy:glass_stained/red/framed_fancy",
+    "chisel_legacy:glass_stained/red/streaks",
+    "chisel_legacy:glass_stained/red/rough",
+    "chisel_legacy:glass_stained/red/brick",
+    "minecraft:red_stained_glass",
+    "#forge:glass/red"
+  ]
+}

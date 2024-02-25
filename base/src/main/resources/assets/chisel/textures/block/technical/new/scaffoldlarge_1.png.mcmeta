@@ -3,7 +3,7 @@
         "ctm_version": 1,
         "type": "ctm",
         "textures": [
-            "chisel:block/technical/new/scaffoldLarge_1-ctm"
+            "chisel:block/technical/new/scaffoldlarge_1-ctm"
         ]
     }
 }

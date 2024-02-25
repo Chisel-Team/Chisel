@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "chisel_legacy:temple/weared_bricks"
+    ]
+  },
+  "criteria": {
+    "has_dye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dyes/cyan"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "chisel_legacy:temple/weared_bricks"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_dye",
+      "has_the_recipe"
+    ]
+  ]
+}

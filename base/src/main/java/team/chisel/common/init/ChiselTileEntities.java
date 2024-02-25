@@ -26,6 +26,7 @@ public class ChiselTileEntities {
             .object("auto_chisel")
             .block(BlockAutoChisel::new)
             .initialProperties(() -> Blocks.IRON_BLOCK)
+            .properties(p -> p.noOcclusion())
             .tag(BlockTags.MINEABLE_WITH_PICKAXE)
             .tag(BlockTags.NEEDS_STONE_TOOL)
             .simpleBlockEntity(TileAutoChisel::new)

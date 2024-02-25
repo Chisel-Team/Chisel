@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chisel:redstone/mosaic"
+    }
+  ],
+  "result": {
+    "item": "minecraft:redstone",
+    "count": 9
+  }
+}

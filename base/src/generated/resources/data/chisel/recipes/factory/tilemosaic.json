@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SXS",
+    "X X",
+    "SXS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:stone"
+    },
+    "X": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "chisel:factory/tilemosaic",
+    "count": 32
+  }
+}

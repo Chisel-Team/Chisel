@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "chisel_legacy:block/glass/terrain_glass_ornatesteel"
+  }
+}

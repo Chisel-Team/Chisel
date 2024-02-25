@@ -8,7 +8,8 @@
     ],
     "extra": {
       "connect_to": [
-        { "block": "chisel:futura", "predicate": { "variation": 1, "compare_func": "<=" }}
+        { "block": "chisel:futura/screen_metallic"},
+        { "block": "chisel:futura/screen_cyan"}
       ]
     }
   }

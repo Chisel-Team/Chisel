@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:metals/uranium/caution",
+    "chisel:metals/uranium/crate",
+    "chisel:metals/uranium/thermal",
+    "chisel:metals/uranium/machine",
+    "chisel:metals/uranium/badgreggy",
+    "chisel:metals/uranium/bolted",
+    "chisel:metals/uranium/scaffold",
+    "#forge:storage_blocks/uranium"
+  ]
+}

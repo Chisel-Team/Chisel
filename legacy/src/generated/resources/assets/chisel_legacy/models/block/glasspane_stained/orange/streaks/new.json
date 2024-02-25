@@ -1,0 +1,7 @@
+{
+  "parent": "chisel_legacy:block/pane/new",
+  "textures": {
+    "pane": "chisel_legacy:block/glass_stained/orange/streaks",
+    "edge": "minecraft:block/orange_stained_glass_pane_top"
+  }
+}

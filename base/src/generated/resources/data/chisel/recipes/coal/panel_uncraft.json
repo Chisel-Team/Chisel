@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "chisel:coal/panel"
+    }
+  ],
+  "result": {
+    "item": "minecraft:coal",
+    "count": 9
+  }
+}

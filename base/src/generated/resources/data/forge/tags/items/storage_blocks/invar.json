@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "chisel:metals/invar/caution",
+    "chisel:metals/invar/crate",
+    "chisel:metals/invar/thermal",
+    "chisel:metals/invar/machine",
+    "chisel:metals/invar/badgreggy",
+    "chisel:metals/invar/bolted",
+    "chisel:metals/invar/scaffold"
+  ]
+}

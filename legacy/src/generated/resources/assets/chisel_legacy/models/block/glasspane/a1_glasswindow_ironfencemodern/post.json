@@ -1,0 +1,7 @@
+{
+  "parent": "chisel_legacy:block/pane/post",
+  "textures": {
+    "pane": "chisel_legacy:block/glass/a1_glasswindow_ironfencemodern",
+    "edge": "chisel_legacy:block/glass/edge_steel"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "chisel_legacy:block/pane/nsw",
+  "textures": {
+    "pane": "chisel_legacy:block/glass_stained/green/brick",
+    "edge": "minecraft:block/green_stained_glass_pane_top"
+  }
+}

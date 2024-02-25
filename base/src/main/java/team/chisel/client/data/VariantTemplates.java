@@ -8,23 +8,30 @@ import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateItemModelProvider;
 import com.tterrag.registrate.util.nullness.FieldsAreNonnullByDefault;
 
+import com.tterrag.registrate.util.nullness.NonNullBiConsumer;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.fml.common.Mod;
 import team.chisel.Chisel;
 import team.chisel.api.block.ModelTemplate;
 import team.chisel.api.block.RecipeTemplate;
 import team.chisel.api.block.VariantTemplate;
+import team.chisel.api.item.ItemModelTemplate;
 import team.chisel.common.block.BlockCarvable;
 
 @FieldsAreNonnullByDefault
 public class VariantTemplates {
-    
+
     @RequiredArgsConstructor
     @Builder
     public static class SimpleTemplate implements VariantTemplate {
@@ -33,6 +40,7 @@ public class VariantTemplates {
         private final String name;
         private final String localizedName;
         private final ModelTemplate modelTemplate;
+        private final ItemModelTemplate itemModelTemplate;
         private final RecipeTemplate recipeTemplate;
         @Getter(onMethod = @__({@Override}))
         private final String[] tooltip;
@@ -46,7 +54,12 @@ public class VariantTemplates {
         public Optional<ModelTemplate> getModelTemplate() {
             return Optional.ofNullable(modelTemplate);
         }
-        
+
+        @Override
+        public Optional<ItemModelTemplate> getItemModelTemplate() {
+            return Optional.ofNullable(itemModelTemplate);
+        }
+
         @Override
         public Optional<RecipeTemplate> getRecipeTemplate() {
             return Optional.ofNullable(recipeTemplate);
@@ -77,7 +90,7 @@ public class VariantTemplates {
     public static VariantTemplate withName(String name, String localizedName, String... tooltip) {
         return withName(name, localizedName, ModelTemplates.simpleBlock(), tooltip);
     }
-    
+
     public static VariantTemplate withName(String name, String localizedName, @Nullable ModelTemplate template, String... tooltip) {
         return SimpleTemplate.builder().name(name).localizedName(localizedName).modelTemplate(template).tooltip(tooltip).build();
     }
@@ -164,6 +177,54 @@ public class VariantTemplates {
         public static final VariantTemplate CUTS = simple("cuts");
     }
 
+    public static class MetalTerrain {
+        public static final VariantTemplate LARGE_INGOT = simple("large_ingot", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate SMALL_INGOT = simple("small_ingot", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate BRICK = simple("brick", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate COIN_HEADS = withName("coin_heads", "Coin (Heads)", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate COIN_TAILS = withName("coin_tails", "Coin (Heads)", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate CRATE_DARK = withName("crate_dark", "Dark Crate", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate CRATE_LIGHT = withName("crate_light", "Light Crate", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate PLATES = simple("plates", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate RIVETS = withName("rivets", "Riveted Plates", ModelTemplates.cubeBottomTop());
+        public static final VariantTemplate SPACE = withName("space", "Purple Space");
+        public static final VariantTemplate SPACE_BLACK = withName("space_black", "Black Space");
+        public static final VariantTemplate SIMPLE = simple("simple", ModelTemplates.cubeBottomTop());
+
+    }
+
+    //TODO fix pillar CTM models
+    public static class Pillar {
+        public static final VariantTemplate PLAINPLAIN = withName("plainplain", "Plain-Capped Plain Pillar", ModelTemplates.columnPillar());
+        public static final VariantTemplate PLAINGREEK = withName("plaingreek", "Greek-Capped Plain Pillar", ModelTemplates.columnPillar());
+        public static final VariantTemplate GREEKPLAIN = withName("greekplain", "Plain-Capped Greek Pillar", ModelTemplates.columnPillar());
+        public static final VariantTemplate GREEKGREEK = withName("greekgreek", "Greek-Capped Greek Pillar", ModelTemplates.columnPillar());
+        public static final VariantTemplate CONVEXPLAIN = withName("convexplain", "Convexed Pillar", ModelTemplates.cubeAll("-top"));
+        public static final VariantTemplate CARVED = withName("carved", "Scribed Pillar", ModelTemplates.cubeColumn());
+        public static final VariantTemplate ORNAMENTAL = withName("ornamental", "Ornamental Pillar", ModelTemplates.cubeColumn());
+
+    }
+
+    public static class Scribbles {
+        public static final VariantTemplate ZERO = withName("scribbles_0", "Hieroglyphs 1", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_0-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate ONE = withName("scribbles_1", "Hieroglyphs 2", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_1-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate TWO = withName("scribbles_2", "Hieroglyphs 3", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_2-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate THREE = withName("scribbles_3", "Skull 1", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_3-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate FOUR = withName("scribbles_4", "Eye of Horus", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_4-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate FIVE = withName("scribbles_5", "Bird", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_5-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate SIX = withName("scribbles_6", "Halo", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_6-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate SEVEN = withName("scribbles_7", "Hieroglyphs 4", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_7-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate EIGHT = withName("scribbles_8", "Man with Staff", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_8-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate NINE = withName("scribbles_9", "Waves", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_9-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate TEN = withName("scribbles_10", "Landscape 1", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_10-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate ELEVEN = withName("scribbles_11", "Skull Landscape", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_11-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate TWELVE = withName("scribbles_12", "Pattern 1", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_12-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate THIRTEEN = withName("scribbles_13", "Pattern 2", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_13-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate FOURTEEN = withName("scribbles_14", "Hieroglyphs 5", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_14-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+        public static final VariantTemplate FIFTEEN = withName("scribbles_15", "Hieroglyphs 6", ModelTemplates.cubeColumn( s -> ModelTemplates.replaceVariant(s, "scribbles_15-side"),  s -> ModelTemplates.replaceVariant(s, "scribbles_0-top")));
+
+    }
+
     public static class Planks {
         public static final VariantTemplate LARGE_PLANKS = simple("large_planks");
         public static final VariantTemplate CRUDE_HORIZONTAL_PLANKS = simple("crude_horizontal_planks");
@@ -221,8 +282,11 @@ public class VariantTemplates {
     }
     
     public static final ImmutableList<VariantTemplate> METAL = ofClass(Metal.class);
+    public static final ImmutableList<VariantTemplate> METAL_TERRAIN = ofClass(MetalTerrain.class);
 
     public static final ImmutableList<VariantTemplate> STONE = ofClass(Stone.class);
+    public static final ImmutableList<VariantTemplate> PILLAR = ofClass(Pillar.class);
+    public static final ImmutableList<VariantTemplate> SCRIBBLES = ofClass(Scribbles.class);
 
     public static final ImmutableList<VariantTemplate> ROCK = ofClass(Rock.class);
     @SuppressWarnings("null")

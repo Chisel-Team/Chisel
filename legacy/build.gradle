@@ -1,3 +1,28 @@
 dependencies {
 	implementation project(":base")
 }
+
+minecraft {
+	runs {
+		data {
+			taskName 'chisel_legacy_data'
+
+			workingDirectory project.file('run')
+
+			environment 'target', 'fmluserdevdata'
+
+			property 'forge.logging.markers', 'CORE,REGISTRIES'
+			property 'forge.logging.console.level', 'debug'
+
+			mods {
+				chisel_legacy {
+					source sourceSets.main
+				}
+			}
+
+			args '--mod', 'chisel_legacy', '--all', '--output', '"' + project.file('src/generated/resources/') + '"',
+					'--existing', '"' + project.file('src/main/resources') + '"'
+
+		}
+	}
+}

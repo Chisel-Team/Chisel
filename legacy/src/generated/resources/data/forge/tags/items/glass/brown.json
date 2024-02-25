@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "chisel_legacy:glass_stained/brown/panel",
+    "chisel_legacy:glass_stained/brown/framed",
+    "chisel_legacy:glass_stained/brown/framed_fancy",
+    "chisel_legacy:glass_stained/brown/streaks",
+    "chisel_legacy:glass_stained/brown/rough",
+    "chisel_legacy:glass_stained/brown/brick"
+  ]
+}
