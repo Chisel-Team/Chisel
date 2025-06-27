@@ -5,7 +5,8 @@
     "layer": "CUTOUT",
     "extra": {
       "connect_to": [
-        { "block": "chisel:futura", "predicate": { "variation": [ "2", "4" ] } },
+        { "block": "chisel:futura/controller_purple"},
+        { "block": "chisel:futura/controller"},
         { "block": "appliedenergistics2:controller" }
       ]
     }
